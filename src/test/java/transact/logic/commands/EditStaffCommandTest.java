@@ -96,24 +96,24 @@ public class EditStaffCommandTest {
          * Not needed for now, since we do not identify a person based on their position
          * in the list
          * showPersonAtId(model, ID_FIRST_PERSON);
-         * 
+         *
          * Person personInFilteredList =
          * model.getFilteredPersonList().get(ID_FIRST_PERSON);
          * Person editedPerson = new
          * PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
          * EditStaffCommand editStaffCommand = new EditStaffCommand(ID_FIRST_PERSON,
          * new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
-         * 
+         *
          * String expectedMessage =
          * String.format(EditStaffCommand.MESSAGE_EDIT_PERSON_SUCCESS,
          * Messages.format(editedPerson));
-         * 
+         *
          * Model expectedModel = new ModelManager(new
          * AddressBook(model.getAddressBook()),
          * new TransactionBook(model.getTransactionBook()), new UserPrefs());
          * expectedModel.setPerson(model.getFilteredPersonList().get(0).getPersonId(),
          * editedPerson);
-         * 
+         *
          * assertCommandSuccess(editStaffCommand, model, expectedMessage,
          * expectedModel);
          */
@@ -129,7 +129,7 @@ public class EditStaffCommandTest {
          * EditPersonDescriptorBuilder(firstPerson).build();
          * EditStaffCommand editStaffCommand = new EditStaffCommand(ID_SECOND_PERSON,
          * descriptor);
-         * 
+         *
          * assertCommandFailure(editStaffCommand, model,
          * EditStaffCommand.MESSAGE_DUPLICATE_PERSON);
          */
@@ -141,13 +141,13 @@ public class EditStaffCommandTest {
          * Not needed, since we are not able to edit person ID which is the only way to
          * create a duplicate person
          * showPersonAtId(model, ID_FIRST_PERSON);
-         * 
+         *
          * // edit person in filtered list into a duplicate in address book
          * Person personInList =
          * model.getAddressBook().getPersonList().get(ID_SECOND_PERSON);
          * EditStaffCommand editStaffCommand = new EditStaffCommand(ID_FIRST_PERSON,
          * new EditPersonDescriptorBuilder(personInList).build());
-         * 
+         *
          * assertCommandFailure(editStaffCommand, model,
          * EditStaffCommand.MESSAGE_DUPLICATE_PERSON);
          */
@@ -175,10 +175,10 @@ public class EditStaffCommandTest {
          * Integer outOfBoundId = ID_SECOND_PERSON;
          * // ensures that outOfBoundIndex is still in bounds of address book list
          * assertTrue(outOfBoundId < model.getAddressBook().getPersonList().size());
-         * 
+         *
          * EditStaffCommand editStaffCommand = new EditStaffCommand(outOfBoundId,
          * new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
-         * 
+         *
          * assertCommandFailure(editStaffCommand, model,
          * Messages.getInvalidPersonIndexMessageForId(outOfBoundId));
          */
