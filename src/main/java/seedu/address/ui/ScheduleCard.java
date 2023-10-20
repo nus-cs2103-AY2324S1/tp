@@ -67,7 +67,7 @@ public class ScheduleCard extends UiPart<Region> {
             break;
         case PENDING:
         default:
-            status.setBackground(PENDING_STATUS_BACKGROUND);
+            status.setVisible(false);
         }
         status.setPadding(new Insets(2));
     }
