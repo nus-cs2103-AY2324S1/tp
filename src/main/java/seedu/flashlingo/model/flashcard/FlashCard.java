@@ -5,7 +5,6 @@ import java.util.Date;
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
-
 /**
  * Represents each flashcard
  *
@@ -17,10 +16,10 @@ public class FlashCard {
     private final OriginalWord originalWord;
     private final TranslatedWord translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
-    private ProficiencyLevel level; // How many times successfully remembered
+    private ProficiencyLevel currentLevel; // How many times successfully remembered
 
     private boolean isUpdated;
-    private int originalLevel; // For undo function
+    private final ProficiencyLevel originalLevel; // For undo function
 
     private boolean toDelete = false;
     /**
@@ -31,8 +30,9 @@ public class FlashCard {
      * @param whenToReview   The date of when you need to review this word
      * @param level          The level of familiarity with the word
      */
-    public FlashCard(OriginalWord originalWord, TranslatedWord translatedWord, Date whenToReview, int level) {
-        this.level = new ProficiencyLevel(level);
+    public FlashCard(OriginalWord originalWord, TranslatedWord translatedWord, Date whenToReview,
+                     ProficiencyLevel level) {
+        this.currentLevel = level;
         this.whenToReview = whenToReview;
         this.translatedWord = translatedWord;
         this.originalWord = originalWord;
@@ -52,7 +52,7 @@ public class FlashCard {
     }
 
     public ProficiencyLevel getProficiencyLevel() {
-        return level;
+        return currentLevel;
     }
 
     public boolean isToBeDeleted() {
@@ -107,7 +107,7 @@ public class FlashCard {
     @Override
     public String toString() {
         String sb = originalWord + " | " + originalWord.getLanguage() + " | " + translatedWord + " | "
-                + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + level + "\n";
+                + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
         return sb;
     }
 
@@ -140,9 +140,27 @@ public class FlashCard {
      */
     public void undo() {
         if (isUpdated) {
-            this.getProficiencyLevel().setLevel(originalLevel);
+            this.currentLevel = originalLevel;
             this.whenToReview = new Date(new Date().getTime() + getProficiencyLevel().calculateNextReviewInterval());
             isUpdated = false;
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FlashCard)) {
+            return false;
+        }
+
+        FlashCard otherFlashCard = (FlashCard) other;
+        return originalWord.equals(otherFlashCard.originalWord)
+                && translatedWord.equals(otherFlashCard.translatedWord)
+                && whenToReview.equals(otherFlashCard.whenToReview)
+                && originalLevel.equals(otherFlashCard.originalLevel);
     }
 }

@@ -17,7 +17,7 @@ class FlashCardTest {
         FlashCard fc = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(),
-                1);
+                new ProficiencyLevel(1));
 
         assertEquals(fc.getOriginalWord(), originalWord);
     }
@@ -27,7 +27,7 @@ class FlashCardTest {
         FlashCard fc = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(),
-                1);
+                new ProficiencyLevel(1));
 
         assertEquals(fc.getTranslatedWord(), translatedWord);
     }
@@ -38,7 +38,7 @@ class FlashCardTest {
         FlashCard fc = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 now,
-                1);
+                new ProficiencyLevel(1));
         assertEquals(fc.getWhenToReview(), now);
     }
 
@@ -47,7 +47,7 @@ class FlashCardTest {
         FlashCard fc = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(),
-                1);
+                new ProficiencyLevel(1));
         assertEquals(fc.getProficiencyLevel().getLevel(), 1);
     }
 
@@ -56,7 +56,7 @@ class FlashCardTest {
         FlashCard fc = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(),
-                1);
+                new ProficiencyLevel(1));
         assert(fc.isSameFlashCard(fc));
     }
 
@@ -65,11 +65,11 @@ class FlashCardTest {
         FlashCard fc1 = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(),
-                1);
+                new ProficiencyLevel(1));
         FlashCard fc2 = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(),
-                1);
+                new ProficiencyLevel(1));
         assert(fc1.isSameFlashCard(fc2));
     }
 
@@ -82,7 +82,7 @@ class FlashCardTest {
         FlashCard fc = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(),
-                1);
+                new ProficiencyLevel(1));
         assert(fc.isOverdue());
     }
 
@@ -91,7 +91,7 @@ class FlashCardTest {
         FlashCard fc = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(new Date().getTime() + 100000),
-                1);
+                new ProficiencyLevel(1));
         assert(!fc.isOverdue());
     }
 
@@ -100,7 +100,7 @@ class FlashCardTest {
         FlashCard fc1 = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(),
-                1);
+                new ProficiencyLevel(1));
         assert(fc1.isSameLanguage("eng"));
     }
 
@@ -109,7 +109,7 @@ class FlashCardTest {
         FlashCard fc1 = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(),
-                1);
+                new ProficiencyLevel(1));
         assert(fc1.isSameLanguage("chi"));
     }
 
@@ -118,13 +118,13 @@ class FlashCardTest {
         FlashCard fc1 = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 new Date(),
-                1);
+                new ProficiencyLevel(1));
         assert(!fc1.isSameLanguage("jap"));
     }
 
     @Test
     void testToString() {
-        int level = 1;
+        ProficiencyLevel level = new ProficiencyLevel(1);
         Date date = new Date(new Date().getTime() + 100000);
         FlashCard fc1 = new FlashCard(originalWord,
                 translatedWord,
@@ -141,7 +141,7 @@ class FlashCardTest {
         FlashCard fc1 = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 date,
-                1);
+                new ProficiencyLevel(1));
         fc1.handleUserInput(true);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 2);
         assert(!fc1.isToBeDeleted());
@@ -154,7 +154,7 @@ class FlashCardTest {
         FlashCard fc1 = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 date,
-                2);
+                new ProficiencyLevel(2));
         fc1.handleUserInput(false);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 1);
         assert(!fc1.isToBeDeleted());
@@ -167,7 +167,7 @@ class FlashCardTest {
         FlashCard fc1 = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 date,
-                1);
+                new ProficiencyLevel(1));
         fc1.handleUserInput(false);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 1);
         assert(!fc1.isToBeDeleted());
@@ -180,7 +180,7 @@ class FlashCardTest {
         FlashCard fc1 = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
                 date,
-                5);
+                new ProficiencyLevel(5));
         fc1.handleUserInput(true);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 6);
         assert(fc1.isToBeDeleted());

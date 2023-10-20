@@ -1,9 +1,19 @@
 package seedu.flashlingo.model.flashcard.words;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.flashlingo.commons.util.AppUtil.checkArgument;
+
 /**
  * Encapsulates an input word
  */
 abstract class Word {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Languages should only contain alphanumeric characters and spaces, and it should not be blank";
+    /*
+     * The first character of the language must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[\\p{Alpha} ]*";
     /** The input word **/
     private final String word;
     /** The input word's language **/
@@ -15,8 +25,17 @@ abstract class Word {
      * @param language The input Word's language
      */
     public Word(String word, String language) {
+        requireNonNull(language);
+        checkArgument(isValidLanguage(language), MESSAGE_CONSTRAINTS);
         this.word = word.trim();
         this.language = language.trim();
+    }
+
+    /**
+     * Returns true if a given string is a valid language.
+     */
+    public static boolean isValidLanguage(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
