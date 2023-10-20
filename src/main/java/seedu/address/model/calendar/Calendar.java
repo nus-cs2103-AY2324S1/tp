@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
-
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
 

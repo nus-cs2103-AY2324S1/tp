@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
@@ -141,7 +140,8 @@ public class AllDaysEventListManager {
                 .collect(Collectors.toList());
 
         return FXCollections.observableList(list);
-     
+    }
+
     /**
      * Checks if there are any events at all in the manager.
      *

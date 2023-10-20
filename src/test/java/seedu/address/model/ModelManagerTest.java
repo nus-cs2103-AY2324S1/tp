@@ -9,7 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
 import static seedu.address.testutil.TypicalEvents.TEST_EVENT_A;
 import static seedu.address.testutil.TypicalEvents.TEST_EVENT_B;
-
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
