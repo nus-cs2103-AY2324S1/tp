@@ -71,7 +71,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 errorMessage += "- License Plate(l/) ";
             }
             if (argMultimap.getValue(PREFIX_ADDRESS).isEmpty()) {
-                errorMessage += "- Address(a/) ";
+                errorMessage += "- Address(" + PREFIX_ADDRESS + ") ";
             }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
         }
