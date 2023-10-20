@@ -70,7 +70,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Event> getEventList() {
-        return model.getCalendar().getEventList();
+        return model.getEventList();
     }
 
     @Override

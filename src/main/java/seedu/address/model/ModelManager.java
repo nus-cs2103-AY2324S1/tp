@@ -151,6 +151,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Event> getEventList() {
+        return calendar.getEventList();
+    }
+
+    @Override
     public boolean canAddEvent(Event event) {
         return calendar.canAddEvent(event);
     }
