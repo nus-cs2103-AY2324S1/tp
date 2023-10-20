@@ -9,7 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Adds a musician to a band.
+ * Adds a musician to a band.j
  */
 public class AddMusiciantoBandCommand extends Command {
     public static final String COMMAND_WORD = "addm";
@@ -25,17 +25,17 @@ public class AddMusiciantoBandCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New musician added to band: %1$s";
     public static final String MESSAGE_DUPLICATE_MUSICIAN = "This musician already exists in the band";
 
-    private final int toAdd;
-    private final int addInto;
+    private final Integer toAdd;
+    private final Integer addInto;
 
     /**
      * Creates an AddCommand to add the specified {@code Musician}
      */
-    public AddMusiciantoBandCommand(int band, int musician) {
-        requireNonNull(musician);
-        requireNonNull(band);
-        addInto = band;
-        toAdd = musician;
+    public AddMusiciantoBandCommand(Integer bandIndex, Integer musicianIndex) {
+        requireNonNull(musicianIndex);
+        requireNonNull(bandIndex);
+        addInto = bandIndex;
+        toAdd = musicianIndex;
     }
 
     @Override
