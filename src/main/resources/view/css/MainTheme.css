@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #ffffff;
     background-color: #ffffff; /* Used in the default.html file */
 }
 
@@ -40,7 +40,7 @@
 }
 
 .table-view {
-    -fx-base: #1d1d1d;
+    -fx-base: #00ff00;
     -fx-control-inner-background: #1d1d1d;
     -fx-background-color: #1d1d1d;
     -fx-table-cell-border-color: transparent;
@@ -87,64 +87,16 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
-.list-view {
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background-color: derive(#ffffff, 20%);
-}
-
-.list-cell:filled {
-    -fx-background-color: #ffffff;
-    -fx-background-radius: 5px;
-    -fx-padding: 10 10 10 10;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 2, 2);
-}
-
-.list-cell:filled:selected {
-    -fx-background-color: #faf0ff;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #faf0ff;
-    -fx-border-width: 1;
-}
-
-.cell_big_label {
-    -fx-font-family: "Inter bold";
-    -fx-font-size: 24px;
-    -fx-font-weight: bolder;
-    -fx-text-fill: #343434;
-}
-
-.cell_small_label {
-    -fx-font-family: "Inter Light";
-    -fx-font-size: 16px;
-    -fx-text-fill: #878787;
-}
-
-.cell_index_label {
-    -fx-font-family: "Inter Light";
-    -fx-font-size: 16px;
-    -fx-text-fill: #343434;
-}
-
 .stack-pane {
-     -fx-background-color: derive(#f4f4f4, 20%);
+     -fx-background-color: derive(#ffffff, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#f4f4f4, 20%);
+     -fx-background-color: #ffffff;
 }
 
 .status-bar {
     -fx-background-color: derive(#f4f4f4, 30%);
-}
-
-.result-display {
-    -fx-background-color: #ffffff;
-    -fx-font-family: "Inter Light";
-    -fx-font-size: 12pt;
-    -fx-text-fill: #878787;
 }
 
 .status-bar .label {
@@ -311,13 +263,13 @@
     -fx-background-color: transparent #343434 transparent #343434;
     -fx-background-insets: 0;
     -fx-background-radius: 10px;
-    -fx-border-color: #878787 #878787 #878787 #878787;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-border-radius: 10px;
-    -fx-font-family: "Inter Light";
+    -fx-font-family: "Inter";
     -fx-font-size: 13pt;
     -fx-text-fill: #343434;
+    -fx-effect: dropshadow(three-pass-box, rgba(22, 22, 22, 0.3), 4, 0, 2, 2);
 }
 
 #filterField, #personListPanel, #personWebpage {
