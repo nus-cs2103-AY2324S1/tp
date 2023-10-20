@@ -8,8 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
-import javafx.collections.ObservableList;
-
 /**
  * Represents the time slot for an appointment in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAppointmentTime(LocalDateTime, LocalDateTime)}

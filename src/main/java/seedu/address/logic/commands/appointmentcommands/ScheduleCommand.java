@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
