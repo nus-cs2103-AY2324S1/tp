@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventInformation;
+import seedu.address.model.event.EventLocation;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -68,11 +70,13 @@ public class JsonAdaptedEvent {
         }
 
         if (location == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "location"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EventLocation.class.getSimpleName()));
         }
 
         if (information == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "information"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EventInformation.class.getSimpleName()));
         }
 
         return new Event(name, start, end, location, information);

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.NoteContent;
+import seedu.address.model.note.NoteTitle;
 
 /**
  * Jackson-friendly version of {@link Note}.
@@ -43,11 +45,13 @@ public class JsonAdaptedNote {
     public Note toModelType() throws IllegalValueException {
 
         if (title == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "title"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, NoteTitle.class.getSimpleName()));
         }
 
         if (content == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "body"));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, NoteContent.class.getSimpleName()));
         }
 
         return new Note(title, content);
