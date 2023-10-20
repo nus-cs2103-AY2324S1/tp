@@ -120,7 +120,7 @@ public class TimeParser {
         default: // case where the current format is not missing anything(index 1 to 7)
             break; // keep the final date as is
         }
-        // gc: the given date is before today's date even after parsing
+        // guard clause: the given date is before today's date even after parsing
         if (temp.isBefore(LocalDateTime.now())) {
             throw new seedu.address.logic.parser.exceptions.ParseException("Please specify a valid date!");
         }
