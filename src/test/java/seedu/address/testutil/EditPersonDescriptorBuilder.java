@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditRoomDescriptor;
-import seedu.address.model.booking.Address;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.BookingPeriod;
 import seedu.address.model.booking.Email;
 import seedu.address.model.booking.Name;
 import seedu.address.model.booking.Phone;
@@ -38,7 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(booking.getName());
         descriptor.setPhone(booking.getPhone());
         descriptor.setEmail(booking.getEmail());
-        descriptor.setAddress(booking.getAddress());
+        descriptor.setBookingPeriod(booking.getBookingPeriod());
         descriptor.setTags(booking.getTags());
     }
 
@@ -51,6 +51,13 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code BookingPeriod} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withBookingPeriod(String address) {
+        descriptor.setBookingPeriod(new BookingPeriod(address));
+        return this;
+    }
     /**
      * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
      */
@@ -72,14 +79,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
         return this;
     }
 

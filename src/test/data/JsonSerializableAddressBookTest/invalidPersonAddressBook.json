@@ -1,9 +1,9 @@
 {
   "persons": [ {
     "room": "1",
+    "bookingPeriod" : "2023-01-01 to 2023-01-01",
     "name": "Hans Muster",
     "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street"
+    "email": "invalid@email!3e"
   } ]
 }

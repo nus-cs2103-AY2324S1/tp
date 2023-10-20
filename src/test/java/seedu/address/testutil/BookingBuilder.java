@@ -3,8 +3,8 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.booking.Address;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.BookingPeriod;
 import seedu.address.model.booking.Email;
 import seedu.address.model.booking.Name;
 import seedu.address.model.booking.Phone;
@@ -20,13 +20,13 @@ public class BookingBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_BOOKING_PERIOD = "2023-01-01 to 2023-01-02";
 
     private Room room;
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
+    private BookingPeriod bookingPeriod;
     private Set<Tag> tags;
 
     /**
@@ -34,10 +34,10 @@ public class BookingBuilder {
      */
     public BookingBuilder() {
         room = new Room(DEFAULT_ROOM);
+        bookingPeriod = new BookingPeriod(DEFAULT_BOOKING_PERIOD);
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
 
@@ -46,10 +46,10 @@ public class BookingBuilder {
      */
     public BookingBuilder(Booking bookingToCopy) {
         room = bookingToCopy.getRoom();
+        bookingPeriod = bookingToCopy.getBookingPeriod();
         name = bookingToCopy.getName();
         phone = bookingToCopy.getPhone();
         email = bookingToCopy.getEmail();
-        address = bookingToCopy.getAddress();
         tags = new HashSet<>(bookingToCopy.getTags());
     }
 
@@ -72,16 +72,16 @@ public class BookingBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public BookingBuilder withTags(String ... tags) {
+    public BookingBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Booking Period} of the {@code Person} that we are building.
      */
-    public BookingBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public BookingBuilder withBookingPeriod(String bookingPeriod) {
+        this.bookingPeriod = new BookingPeriod(bookingPeriod);
         return this;
     }
 
@@ -102,7 +102,7 @@ public class BookingBuilder {
     }
 
     public Booking build() {
-        return new Booking(room, name, phone, email, address, tags);
+        return new Booking(room, bookingPeriod, name, phone, email, tags);
     }
 
 }
