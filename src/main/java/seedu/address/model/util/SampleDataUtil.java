@@ -46,12 +46,18 @@ public class SampleDataUtil {
 
     public static Event[] getSampleEvents() {
         return new Event[] {
-                new Event(new Name("Aurora Borealis"), new EventDate("2023-11-30"), new Location("Greenland")),
-                new Event(new Name("Boxing Day"), new EventDate("2023-12-26"), new Location("Ridge View Residential College")),
-                new Event(new Name("Chinese New Year"), new EventDate("2024-02-10"), new Location("Communal Hall")),
-                new Event(new Name("Dog Day"), new EventDate("2024-08-26"), new Location("UTown Pitstop")),
-                new Event(new Name("Echo Day"), new EventDate("2023-05-05"), new Location("Batu Cave")),
-                new Event(new Name("Festival"), new EventDate("2023-10-05"), new Location("Clementi 321")),
+                new Event(new Name("Aurora Borealis"),
+                        new EventDate("2023-11-30"), new Location("Greenland")),
+                new Event(new Name("Boxing Day"),
+                        new EventDate("2023-12-26"), new Location("Ridge View Residential College")),
+                new Event(new Name("Chinese New Year"),
+                        new EventDate("2024-02-10"), new Location("Communal Hall")),
+                new Event(new Name("Dog Day"),
+                        new EventDate("2024-08-26"), new Location("UTown Pitstop")),
+                new Event(new Name("Echo Day"),
+                        new EventDate("2023-05-05"), new Location("Batu Cave")),
+                new Event(new Name("Festival"),
+                        new EventDate("2023-10-05"), new Location("Clementi 321")),
         };
     }
 
