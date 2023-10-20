@@ -11,6 +11,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.application.commons.core.GuiSettings;
 import seedu.application.commons.core.LogsCenter;
 import seedu.application.commons.util.CollectionUtil;
+import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
 
 /**
@@ -111,13 +112,12 @@ public class ModelManager implements Model {
         applicationBook.setJob(target, editedJob);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Job List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Job} backed by the internal list of
      * {@code versionedApplicationBook}
      */
-
     @Override
     public ObservableList<Job> getFilteredJobList() {
         return filteredJobs;
@@ -127,6 +127,18 @@ public class ModelManager implements Model {
     public void updateFilteredJobList(Predicate<Job> predicate) {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
+    }
+
+    //=========== Sorted Job List Accessors =============================================================
+
+    @Override
+    public void unsortJobs() {
+        applicationBook.unsortJobs();
+    }
+
+    @Override
+    public void sortJobs(FieldComparator comparator) {
+        applicationBook.sortJobs(comparator);
     }
 
     @Override

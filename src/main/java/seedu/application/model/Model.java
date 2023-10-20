@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.application.commons.core.GuiSettings;
+import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
 
 /**
@@ -84,4 +85,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredJobList(Predicate<Job> predicate);
+
+    /**
+     * Restores the jobs in application book to the original unsorted order.
+     */
+    public void unsortJobs();
+
+    /**
+     * Sorts the jobs in the application book based on the comparator provided.
+     * @param comparator The comparator used to compare 2 jobs.
+     */
+    public void sortJobs(FieldComparator comparator);
 }

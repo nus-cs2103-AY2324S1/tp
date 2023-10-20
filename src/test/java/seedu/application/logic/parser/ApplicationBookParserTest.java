@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
+import static seedu.application.model.job.Role.ROLE_SPECIFIER;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST_JOB;
 
@@ -73,9 +73,9 @@ public class ApplicationBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-            FindCommand.COMMAND_WORD + " " + ROLE_FIND_SPECIFIER
+            FindCommand.COMMAND_WORD + " " + ROLE_SPECIFIER
                 + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, keywords)), command);
+        assertEquals(new FindCommand(new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, keywords)), command);
     }
 
     @Test
