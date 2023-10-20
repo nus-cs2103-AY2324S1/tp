@@ -3,12 +3,12 @@ package seedu.address.model.student;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.risklevel.RiskLevel;
+import seedu.address.model.util.LimitedHashSet;
 
 /**
  * Represents a Student in the address book.
@@ -22,7 +22,7 @@ public class Student {
 
     // Data fields
     private final Address address;
-    private final Set<RiskLevel> riskLevel = new HashSet<>();
+    private final Set<RiskLevel> riskLevel = new LimitedHashSet<>(3);
 
     /**
      * Every field must be present and not null.
