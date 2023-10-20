@@ -149,38 +149,51 @@ Examples:
 *  `edit 1 n/Tan Liyan` Edits the name of the first person to be Tan Liyan.
 *  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tags.
 
-### Adding a filter: `filter add` [Coming Soon]
+### Adding a filter: `filter add`
 
 Shows a list of students from a specified tutorial group
 
-Format: `filter add /tg TUTORIALGROUPID | /course COURSECODE`
+Format: `filter add coursetg/COURSECODE [tn/TUTORIALGROUPID]`
 
 * Filters students that are in the tutorial group specified by `TUTORIALGROUPID` or course specified by `COURSECODE`
+* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
 * `TUTORIALGROUPID` should be a string made up of alphabetical characters and numbers, with no special characters.
 * `TUTORIALGROUPID` must correspond to an existing tutorial group.
-* `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
 * `COURSECODE` must correspond to an existing course.
+* `COURSECODE` must be specified.
+* `TUTORIALGROUPID` is optional.
 
 Examples:
-* `filter add /tg G08` returns a list of students from tutorial group G08.
-* `filter add /course CS2103T` returns a list of students in the course CS2103T.
+* `filter add coursetg/CS2103T tn/G08` returns a list of students from tutorial group G08 for course CS2103T.
+* `filter add coursetg/CS2103T` returns a list of students in the course CS2103T.
 
-### Removing filters: `filter remove` [Coming Soon]
+### Removing filters: `filter remove`
 
-Removes any applied filter
+Removes specified applied filter
 
-Format: `filter remove [/tg TUTORIALGROUPID] [/course COURSECODE]`
+Format: `filter remove coursetg/COURSECODE [tn/TUTORIALGROUPID]`
 
 * Remove the tutorial group filter specified by `TUTORIALGROUPID` or course filter specified by `COURSECODE`
-* `TUTORIALGROUPID` should be a string made up of alphabetical characters and numbers, with no special characters.
-* `TUTORIALGROUPID` must correspond to an existing tutorial group.
 * `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
 * `COURSECODE` must correspond to an existing course.
+* `TUTORIALGROUPID` should be a string made up of alphabetical characters and numbers, with no special characters.
+* `TUTORIALGROUPID` must correspond to an existing tutorial group.
+* `COURSECODE` must be specified.
+* `TUTORIALGROUPID` is optional.
 
 Examples:
 * `filter remove` returns the list of all students
-* `filter remove /tg G08` returns a list of students containing those from tutorial group G08.
-* `filter remove /course CS2103T` returns a list of students containing those in the course CS2103T.
+* `filter remove coursetg/CS2103T tn/G08` returns a list of students containing those from tutorial group G08 for course CS2103T.
+* `filter remove coursetg/CS2103T` returns a list of students containing those in the course CS2103T.
+
+### Removing all filters: `filter clear`
+
+Removes all applied filters
+
+Format: `filter clear`
+
+Examples:
+* `filter clear` returns the list of all students
 
 ### Deleting a person : `delete`
 
@@ -249,3 +262,4 @@ _Details coming soon ..._
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                      |
 | **List**   | `list attendance tn/TUTORIALNO [coursetg/TAG]` `list students`                                  |                                                           |
 | **Help**   | `help`                                                                                          |
+| **Filter**   | `filter [add/delete/clear] [coursetg/COURSECODE] [tn/TUTORIALGROUPID]`                                                                                          |

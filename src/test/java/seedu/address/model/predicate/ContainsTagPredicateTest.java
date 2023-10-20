@@ -7,8 +7,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 public class ContainsTagPredicateTest {
+
+    @Test
+    public void test_idContainsKeywords_returnsTrue() {
+        Tag tag = new Tag("first");
+
+        ContainsTagPredicate predicate = new ContainsTagPredicate(tag);
+        assertTrue(predicate.test(new PersonBuilder().withTags("first", "second").build()));
+    }
+
+    @Test
+    public void test_idDoesNotContainKeywords_returnsFalse() {
+        Tag tag = new Tag("first");
+
+        // Non-matching tag
+        ContainsTagPredicate predicate = new ContainsTagPredicate(tag);
+        assertFalse(predicate.test(new PersonBuilder().withTags("second", "third").build()));
+    }
+
     @Test
     public void equals() {
         Tag firstTag = new Tag("first");
