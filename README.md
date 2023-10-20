@@ -7,6 +7,7 @@
 # TAvigator
 
 > Your personal navigator as a Teaching Assistant (TA)
+
 ![Ui](docs/images/Ui.png)
 
 **TAvigator** streamlines the teaching process for TAs around the world. Our software understands the various roles a TA has to play, from meticulous record-keeping to fostering connections with students.
