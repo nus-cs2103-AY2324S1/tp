@@ -81,7 +81,7 @@ class FlashCardTest {
     void isOverdue() {
         FlashCard fc = new FlashCard(new OriginalWord("Hello", "eng"),
                 new TranslatedWord("Ni Hao", "chi"),
-                new Date(),
+                new Date(new Date().getTime() - 1000),
                 new ProficiencyLevel(1));
         assert(fc.isOverdue());
     }

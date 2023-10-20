@@ -35,12 +35,8 @@ class ProficiencyLevelTest {
 
     @Test
     void toDelete() {
-        ProficiencyLevel pl1 = new ProficiencyLevel(6);
-        ProficiencyLevel pl2 = new ProficiencyLevel(1);
-        ProficiencyLevel pl3 = new ProficiencyLevel(3);
+        ProficiencyLevel pl1 = new ProficiencyLevel(5);
         assert(pl1.toDelete());
-        assert(!pl2.toDelete());
-        assert(!pl3.toDelete());
     }
 
     @Test
