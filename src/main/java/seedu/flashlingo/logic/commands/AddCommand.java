@@ -33,6 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_ORIGINAL_WORD + "hello "
             + PREFIX_TRANSLATED_WORD + "你好 ";
 
+
     public static final String MESSAGE_SUCCESS = "New flashcard added: %s - %s";
     public static final String MESSAGE_DUPLICATE_CARD = "This flashcard already exists";
 
