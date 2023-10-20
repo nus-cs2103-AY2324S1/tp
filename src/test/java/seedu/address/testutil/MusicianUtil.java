@@ -9,8 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.musician.AddCommand;
+import seedu.address.logic.commands.musician.EditCommand;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.tag.Tag;
 

@@ -8,20 +8,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddBandCommand;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddMusiciantoBandCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteBandCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListBandCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.band.AddBandCommand;
+import seedu.address.logic.commands.band.AddMusiciantoBandCommand;
+import seedu.address.logic.commands.band.DeleteBandCommand;
+import seedu.address.logic.commands.band.ListBandCommand;
+import seedu.address.logic.commands.general.ClearCommand;
+import seedu.address.logic.commands.general.ExitCommand;
+import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.musician.AddCommand;
+import seedu.address.logic.commands.musician.DeleteCommand;
+import seedu.address.logic.commands.musician.EditCommand;
+import seedu.address.logic.commands.musician.FindCommand;
+import seedu.address.logic.commands.musician.ListCommand;
+import seedu.address.logic.parser.band.AddBandCommandParser;
+import seedu.address.logic.parser.band.AddMusiciantoBandCommandParser;
+import seedu.address.logic.parser.band.DeleteBandCommandParser;
+import seedu.address.logic.parser.band.ListBandCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.musician.AddCommandParser;
+import seedu.address.logic.parser.musician.DeleteCommandParser;
+import seedu.address.logic.parser.musician.EditCommandParser;
+import seedu.address.logic.parser.musician.FindCommandParser;
 
 /**
  * Parses user input.

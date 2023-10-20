@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.general.ClearCommand;
+import seedu.address.logic.commands.general.ExitCommand;
+import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.musician.AddCommand;
+import seedu.address.logic.commands.musician.DeleteCommand;
+import seedu.address.logic.commands.musician.EditCommand;
+import seedu.address.logic.commands.musician.FindCommand;
+import seedu.address.logic.commands.musician.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.NameContainsKeywordsPredicate;
