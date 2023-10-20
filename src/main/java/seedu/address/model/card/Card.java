@@ -24,7 +24,7 @@ public class Card {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
-        this.priority = Integer.MAX_VALUE;
+        this.priority = 0;
     }
 
     public void setDifficulty(String difficulty) {

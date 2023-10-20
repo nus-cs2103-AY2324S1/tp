@@ -110,6 +110,15 @@ public class Deck implements ReadOnlyDeck {
     }
 
     @Override
+    public void sort() {
+        cards.sort();
+    }
+
+    public int getNumberOfCards() {
+        return cards.count();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
