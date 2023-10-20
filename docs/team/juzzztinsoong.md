@@ -11,7 +11,9 @@ My contributions to the project are listed below.
 
 - **New Feature**: Added the ability to undo/redo previous commands.
 
-  - to be added soon
+  - New Commands + Test cases
+    - "deletem"
+      - Command to delete meeting
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=juzzztinsoong&breakdown=true)
 
@@ -35,4 +37,4 @@ My contributions to the project are listed below.
 
 - **Tools**:
 
-  - to be added soon
+  - Added util method TitleContainsKeywordsPredicate to enable finding a Meeting by its title.
