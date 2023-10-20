@@ -74,79 +74,79 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        String validExpectedStudentString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + STUDENT_NUMBER_DESC_BOB + CLASS_NUMBER_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, NAME_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple phones
-        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple emails
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // multiple student number
-        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENT_NUMBER));
 
         // multiple class number
-        assertParseFailure(parser, CLASS_NUMBER_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, CLASS_NUMBER_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CLASS_NUMBER));
 
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + STUDENT_NUMBER_DESC_AMY
-                        + CLASS_NUMBER_DESC_AMY + validExpectedPersonString,
+                validExpectedStudentString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + STUDENT_NUMBER_DESC_AMY
+                        + CLASS_NUMBER_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_STUDENT_NUMBER, PREFIX_CLASS_NUMBER,
                         PREFIX_EMAIL, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid student number
-        assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENT_NUMBER));
 
         // invalid class number
-        assertParseFailure(parser, INVALID_CLASS_NUMBER_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_CLASS_NUMBER_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CLASS_NUMBER));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_EMAIL_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid student number
-        assertParseFailure(parser, validExpectedPersonString + INVALID_STUDENT_NUMBER_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_STUDENT_NUMBER_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENT_NUMBER));
 
         // invalid class number
-        assertParseFailure(parser, validExpectedPersonString + INVALID_CLASS_NUMBER_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_CLASS_NUMBER_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CLASS_NUMBER));
     }
 
