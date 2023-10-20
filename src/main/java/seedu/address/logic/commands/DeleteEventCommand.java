@@ -15,7 +15,7 @@ public class DeleteEventCommand extends DeleteCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + SECONDARY_COMMAND_WORD + ": Deletes an event from a contact.\n"
             + "Usage:  delete event -n CONTACT_NAME -en EVENT_NAME";
-    public static final String MESSAGE_PERSON_NOT_FOUNT = "Can not find the target contact with ID: ";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Can not find the target contact with ID: ";
     public static final String MESSAGE_SUCCESS = "Successfully deleted event: ";
     public static final String MESSAGE_EVENT_NOT_FOUND = "Event not found: ID = ";
 
@@ -34,7 +34,7 @@ public class DeleteEventCommand extends DeleteCommand {
         requireNonNull(model);
         Person person = model.findPersonByUserFriendlyId(this.contactId);
         if (person == null) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUNT + this.contactId);
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND + this.contactId);
         }
         boolean success = person.removeEventByUserFriendlyId(this.eventIdToDelete);
         if (!success) {
