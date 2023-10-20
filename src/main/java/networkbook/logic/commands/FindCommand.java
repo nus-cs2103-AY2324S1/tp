@@ -3,7 +3,6 @@ package networkbook.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import networkbook.commons.util.ToStringBuilder;
-import networkbook.logic.Messages;
 import networkbook.model.Model;
 import networkbook.model.person.NameContainsKeyTermsPredicate;
 
@@ -38,7 +37,6 @@ public class FindCommand extends Command {
                         predicate.getKeyTerms()
                                 .stream()
                                 .reduce("", (acc, term) -> acc + " \"" + term + "\"")
-                                .toString()
                                 .trim()
                                 .replace(" ", ", ")));
     }
