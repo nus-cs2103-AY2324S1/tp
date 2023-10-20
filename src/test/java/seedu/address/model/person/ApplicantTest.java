@@ -66,8 +66,9 @@ public class ApplicantTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Applicant.class.getCanonicalName() + "{name=" + ALICE_APPLICANT.getName() +
-                ", phone=" + ALICE_APPLICANT.getPhone() + "}";
+        String expected = Applicant.class.getCanonicalName()
+                + "{name=" + ALICE_APPLICANT.getName()
+                + ", phone=" + ALICE_APPLICANT.getPhone() + "}";
         assertEquals(expected, ALICE_APPLICANT.toString());
     }
 }

@@ -94,11 +94,12 @@ public class MemberTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Member.class.getCanonicalName() + "{name=" + ALAN_MEMBER.getName() +
-                ", phone=" + ALAN_MEMBER.getPhone() +
-                ", email=" + ALAN_MEMBER.getEmail() +
-                ", telegram=" + ALAN_MEMBER.getTelegram() +
-                ", tags=" + ALAN_MEMBER.getTags() + "}";
+        String expected = Member.class.getCanonicalName()
+                + "{name=" + ALAN_MEMBER.getName()
+                + ", phone=" + ALAN_MEMBER.getPhone()
+                + ", email=" + ALAN_MEMBER.getEmail()
+                + ", telegram=" + ALAN_MEMBER.getTelegram()
+                + ", tags=" + ALAN_MEMBER.getTags() + "}";
         assertEquals(expected, ALAN_MEMBER.toString());
     }
 }
