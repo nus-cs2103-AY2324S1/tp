@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Represents a Student's attendance in the address book.
@@ -64,7 +65,7 @@ public class Attendance {
 
     @Override
     public int hashCode() {
-        return date.hashCode() + (isPresent ? 1 : 0);
+        return Objects.hash(date, isPresent);
     }
 
     @Override
