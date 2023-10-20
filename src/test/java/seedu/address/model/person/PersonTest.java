@@ -101,7 +101,8 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different animalType -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAnimalType(VALID_ANIMAL_TYPE_BOB, VALID_AVAILABILITY_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withAnimalType(VALID_ANIMAL_TYPE_BOB,
+                new Availability(VALID_AVAILABILITY_BOB)).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different housing -> returns false

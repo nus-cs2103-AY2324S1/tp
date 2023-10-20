@@ -53,13 +53,13 @@ public class CommandTestUtil {
     public static final String VALID_AVAILABILITY_AMY = "nil";
     public static final String VALID_ANIMAL_TYPE_AMY = "nil";
     public static final String VALID_HOUSING_AMY = "nil";
-    public static final String VALID_AVAILABILITY_AVALABLE = "Available";
+    public static final String VALID_AVAILABILITY_AVAILABLE = "Available";
 
     public static final String ANIMAL_NAME_NIL_DESC_BOB = " " + PREFIX_ANIMAL_NAME + ANIMAL_NAME_DESC_NIL;
     public static final String AVAILABILITY_NIL_DESC_BOB = " " + PREFIX_AVAILABILITY + AVAILABILITY_DESC_NIL;
     public static final String ANIMAL_TYPE_NIL_DESC_BOB = " " + PREFIX_ANIMAL_TYPE + ANIMAL_TYPE_DESC_NIL;
     public static final String HOUSING_NIL_DESC_BOB = " " + PREFIX_HOUSING + HOUSING_DESC_NIL;
-    public static final String AVAILABILITY_DESC_AVAILABLE = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AVALABLE;
+    public static final String AVAILABILITY_DESC_AVAILABLE = " " + PREFIX_AVAILABILITY + VALID_AVAILABILITY_AVAILABLE;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -85,6 +85,10 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_ANIMAL_NAME_DESC = " " + PREFIX_ANIMAL_NAME + "WOOF&"; // '&' not allowed in names
+    public static final String INVALID_ANIMAL_TYPE_DESC = " " + PREFIX_ANIMAL_TYPE + "cat"; // not allowed in animal type
+    public static final String INVALID_AVAILABILITY_DESC = " " + PREFIX_AVAILABILITY + "available"; // not allowed in availability
+    public static final String INVALID_HOUSING_DESC = " " + PREFIX_HOUSING + "hdb"; // not allowed in housing
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -106,6 +107,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Sorts the list of persons using the provided comparator.
+     *
+     * @param comparator The comparator to use for sorting.
+     */
+    public void sortNames(Comparator<Person> comparator) {
+        persons.sort(comparator);
     }
 
     @Override

@@ -19,7 +19,11 @@ import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HOUSING_NIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ANIMAL_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ANIMAL_TYPE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AVAILABILITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOUSING_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -41,10 +45,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -54,11 +55,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -70,7 +67,7 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND)
                 .withAnimalName(VALID_ANIMAL_NAME_BOB)
                 .withAvailability(VALID_AVAILABILITY_BOB)
-                .withAnimalType(VALID_ANIMAL_TYPE_BOB, VALID_AVAILABILITY_BOB)
+                .withAnimalType(VALID_ANIMAL_TYPE_BOB, new Availability(VALID_AVAILABILITY_BOB))
                 .withHousing(VALID_HOUSING_BOB)
                 .build();
 
@@ -81,12 +78,11 @@ public class AddCommandParserTest {
                 + ANIMAL_TYPE_DESC_BOB
                 + HOUSING_DESC_BOB, new AddCommand(expectedPerson));
 
-
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .withAnimalName(VALID_ANIMAL_NAME_BOB)
                 .withAvailability(VALID_AVAILABILITY_BOB)
-                .withAnimalType(VALID_ANIMAL_TYPE_BOB, VALID_AVAILABILITY_BOB)
+                .withAnimalType(VALID_ANIMAL_TYPE_BOB, new Availability(VALID_AVAILABILITY_BOB))
                 .withHousing(VALID_HOUSING_BOB).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
@@ -106,7 +102,7 @@ public class AddCommandParserTest {
                 .withAddress(VALID_ADDRESS_BOB)
                 .withAnimalName("nil")
                 .withAvailability("nil")
-                .withAnimalType("nil", "nil")
+                .withAnimalType("nil", new Availability("nil"))
                 .withHousing("nil")
                 .withTags()
                 .build();
@@ -117,81 +113,30 @@ public class AddCommandParserTest {
                 new AddCommand(expectedPerson));
     }
 
+
     @Test
     public void parse_animalNameWithNilAvailability_throwsParseException() {
-        String expectedMessage = "Animal name should be 'nil' when availability is 'nil'.";
+        String expectedMessage = "When an animal name is provided, availability should not be 'Available' or 'nil'.";
 
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + AVAILABILITY_NIL_DESC_BOB + HOUSING_DESC_BOB
-                        + ANIMAL_TYPE_DESC_BOB,
-                expectedMessage);
-    }
-
-    @Test
-    public void parse_animalTypeWithNilAvailability_throwsParseException() {
-        String expectedMessage = "Animal type should be 'nil' when availability is 'nil'.";
-
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_FRIEND + ANIMAL_NAME_NIL_DESC_BOB + ANIMAL_TYPE_DESC_BOB + AVAILABILITY_NIL_DESC_BOB
-                + HOUSING_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND
+                        + ANIMAL_NAME_DESC_BOB + AVAILABILITY_NIL_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidAnimalNameWithAvailableAvailability_throwsParseException() {
-        String expectedMessage = "Availability cannot be 'Available' when an animal name is provided; "
-                + "animal name should be 'nil'.";
+        String expectedMessage = "When an animal name is provided, availability should not be 'Available' or 'nil'.";
 
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_AVAILABLE + ANIMAL_TYPE_DESC_BOB
-                + HOUSING_DESC_BOB,
-                expectedMessage);
-    }
-
-    @Test
-    public void parse_missingAnimalName_throwsParseException() {
-        String expectedMessage = "Animal name is required. Please indicate as 'nil' if information is not available.";
-
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + AVAILABILITY_DESC_BOB + ANIMAL_TYPE_DESC_BOB
-                        + HOUSING_DESC_BOB,
-                expectedMessage);
-    }
-
-    @Test
-    public void parse_missingAvailability_throwsParseException() {
-        String expectedMessage = "Availability is required. Please indicate as 'nil' if information is not available.";
-
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB
-                        + HOUSING_DESC_BOB,
-                expectedMessage);
-    }
-
-    @Test
-    public void parse_missingAnimalType_throwsParseException() {
-        String expectedMessage = "Animal type is required. Please indicate as 'nil' if information is not available.";
-
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_BOB
-                        + HOUSING_DESC_BOB,
-                expectedMessage);
-    }
-
-    @Test
-    public void parse_missingHousing_throwsParseException() {
-        String expectedMessage = "Housing is required. Please indicate as 'nil' if information is not available.";
-
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_FRIEND + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB
-                        + AVAILABILITY_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND
+                        + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_AVAILABLE + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
                 expectedMessage);
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_BOB + HOUSING_DESC_BOB + AVAILABILITY_DESC_BOB + ANIMAL_NAME_DESC_BOB
+                + ANIMAL_TYPE_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -293,31 +238,58 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + AVAILABILITY_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB + ANIMAL_NAME_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + AVAILABILITY_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB + ANIMAL_NAME_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
+                + AVAILABILITY_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB + ANIMAL_NAME_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
+                + AVAILABILITY_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB + ANIMAL_NAME_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+
+        // invalid housing
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + AVAILABILITY_DESC_BOB + INVALID_HOUSING_DESC + ANIMAL_TYPE_DESC_BOB + ANIMAL_NAME_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Housing.MESSAGE_CONSTRAINTS);
+
+        // invalid availability
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + INVALID_AVAILABILITY_DESC + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB + ANIMAL_NAME_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Availability.MESSAGE_CONSTRAINTS);
+
+        // invalid animal name
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + AVAILABILITY_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB + INVALID_ANIMAL_NAME_DESC
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+
+        // invalid animal type
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + AVAILABILITY_DESC_BOB + HOUSING_DESC_BOB + INVALID_ANIMAL_TYPE_DESC + ANIMAL_NAME_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, AnimalType.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + AVAILABILITY_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB + ANIMAL_NAME_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
+                + AVAILABILITY_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB + ANIMAL_NAME_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + AVAILABILITY_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB + ANIMAL_NAME_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
