@@ -64,7 +64,8 @@ dependencies {
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
     implementation group: 'com.opencsv', name: 'opencsv', version: '5.4'
-
+    // Year Month Picker
+    implementation group: 'se.alipsa', name: 'fx-yearmonth-picker', version: '1.1.0'
 }
 
 shadowJar {
