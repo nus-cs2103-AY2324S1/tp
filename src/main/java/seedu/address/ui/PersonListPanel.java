@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -20,13 +21,29 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
 
+    private ProfileDetails profileDetails;
+
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, ProfileDetails profileDetails) {
         super(FXML);
+        this.profileDetails = profileDetails;
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+
+        MultipleSelectionModel<Person> selectionPersonList = personListView.getSelectionModel();
+
+        selectionPersonList.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            this.profileDetails.updateDetails(newValue);
+        });
+
+        personListView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                selectionPersonList.clearSelection();
+                this.profileDetails.updateDetails(null);
+            }
+        });
     }
 
     /**
