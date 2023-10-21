@@ -63,9 +63,9 @@ public class TableWindow extends UiPart<Stage> {
     private static TableView<GenderTableCommandResult> createGenderTable(GenderTableCommandResult commandResult) {
         TableView<GenderTableCommandResult> tableToCreate = new TableView<>();
 
-        TableColumn<GenderTableCommandResult, Long> maleColumn = new TableColumn<>("Male");
+        TableColumn<GenderTableCommandResult, Integer> maleColumn = new TableColumn<>("Male");
         maleColumn.setCellValueFactory(new PropertyValueFactory<>("maleCount"));
-        TableColumn<GenderTableCommandResult, Long> femaleColumn = new TableColumn<>("Female");
+        TableColumn<GenderTableCommandResult, Integer> femaleColumn = new TableColumn<>("Female");
         femaleColumn.setCellValueFactory(new PropertyValueFactory<>("femaleCount"));
 
         tableToCreate.getColumns().add(maleColumn);
@@ -86,13 +86,13 @@ public class TableWindow extends UiPart<Stage> {
     private static TableView<SecLevelTableCommandResult> createSecLevelTable(SecLevelTableCommandResult commandResult) {
         TableView<SecLevelTableCommandResult> tableToCreate = new TableView<>();
 
-        TableColumn<SecLevelTableCommandResult, Long> sec1Column = new TableColumn<>("Sec 1");
+        TableColumn<SecLevelTableCommandResult, Integer> sec1Column = new TableColumn<>("Sec 1");
         sec1Column.setCellValueFactory(new PropertyValueFactory<>("sec1Count"));
-        TableColumn<SecLevelTableCommandResult, Long> sec2Column = new TableColumn<>("Sec 2");
+        TableColumn<SecLevelTableCommandResult, Integer> sec2Column = new TableColumn<>("Sec 2");
         sec2Column.setCellValueFactory(new PropertyValueFactory<>("sec2Count"));
-        TableColumn<SecLevelTableCommandResult, Long> sec3Column = new TableColumn<>("Sec 3");
+        TableColumn<SecLevelTableCommandResult, Integer> sec3Column = new TableColumn<>("Sec 3");
         sec3Column.setCellValueFactory(new PropertyValueFactory<>("sec3Count"));
-        TableColumn<SecLevelTableCommandResult, Long> sec4Column = new TableColumn<>("Sec 4");
+        TableColumn<SecLevelTableCommandResult, Integer> sec4Column = new TableColumn<>("Sec 4");
         sec4Column.setCellValueFactory(new PropertyValueFactory<>("sec4Count"));
 
         tableToCreate.getColumns().add(sec1Column);
@@ -115,17 +115,17 @@ public class TableWindow extends UiPart<Stage> {
     private static TableView<SubjectTableCommandResult> createSubjectTable(SubjectTableCommandResult commandResult) {
         TableView<SubjectTableCommandResult> tableToCreate = new TableView<>();
 
-        TableColumn<SubjectTableCommandResult, Long> csColumn = new TableColumn<>(Subject.CS);
+        TableColumn<SubjectTableCommandResult, Integer> csColumn = new TableColumn<>(Subject.CS);
         csColumn.setCellValueFactory(new PropertyValueFactory<>("csCount"));
-        TableColumn<SubjectTableCommandResult, Long> mathsColumn = new TableColumn<>(Subject.MATHS);
+        TableColumn<SubjectTableCommandResult, Integer> mathsColumn = new TableColumn<>(Subject.MATHS);
         mathsColumn.setCellValueFactory(new PropertyValueFactory<>("mathsCount"));
-        TableColumn<SubjectTableCommandResult, Long> phyColumn = new TableColumn<>(Subject.PHY);
+        TableColumn<SubjectTableCommandResult, Integer> phyColumn = new TableColumn<>(Subject.PHY);
         phyColumn.setCellValueFactory(new PropertyValueFactory<>("phyCount"));
-        TableColumn<SubjectTableCommandResult, Long> chemiColumn = new TableColumn<>(Subject.CHEMI);
+        TableColumn<SubjectTableCommandResult, Integer> chemiColumn = new TableColumn<>(Subject.CHEMI);
         chemiColumn.setCellValueFactory(new PropertyValueFactory<>("chemiCount"));
-        TableColumn<SubjectTableCommandResult, Long> bioColumn = new TableColumn<>(Subject.BIO);
+        TableColumn<SubjectTableCommandResult, Integer> bioColumn = new TableColumn<>(Subject.BIO);
         bioColumn.setCellValueFactory(new PropertyValueFactory<>("bioCount"));
-        TableColumn<SubjectTableCommandResult, Long> engColumn = new TableColumn<>(Subject.ENG);
+        TableColumn<SubjectTableCommandResult, Integer> engColumn = new TableColumn<>(Subject.ENG);
         engColumn.setCellValueFactory(new PropertyValueFactory<>("engCount"));
 
         tableToCreate.getColumns().add(csColumn);

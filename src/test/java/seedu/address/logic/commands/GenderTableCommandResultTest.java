@@ -13,15 +13,15 @@ import org.junit.jupiter.api.Test;
 public class GenderTableCommandResultTest {
     @Test
     public void equals() {
-        Map<String, Long> titlesValuesMapping1 = new HashMap<>();
-        titlesValuesMapping1.put("Male", 20L);
-        titlesValuesMapping1.put("Female", 30L);
-        Map<String, Long> titlesValuesMapping2 = new HashMap<>();
-        titlesValuesMapping2.put("Male", 20L);
-        titlesValuesMapping2.put("Female", 30L);
-        Map<String, Long> titlesValuesMapping3 = new HashMap<>();
-        titlesValuesMapping3.put("Male", 10L);
-        titlesValuesMapping3.put("Female", 10L);
+        Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
+        titlesValuesMapping1.put("Male", 20);
+        titlesValuesMapping1.put("Female", 30);
+        Map<String, Integer> titlesValuesMapping2 = new HashMap<>();
+        titlesValuesMapping2.put("Male", 20);
+        titlesValuesMapping2.put("Female", 30);
+        Map<String, Integer> titlesValuesMapping3 = new HashMap<>();
+        titlesValuesMapping3.put("Male", 10);
+        titlesValuesMapping3.put("Female", 10);
         CommandResult commandResult1 = new GenderTableCommandResult(titlesValuesMapping1);
         CommandResult commandResult2 = new GenderTableCommandResult(titlesValuesMapping2);
         CommandResult commandResult3 = new GenderTableCommandResult(titlesValuesMapping3);
@@ -45,15 +45,15 @@ public class GenderTableCommandResultTest {
 
     @Test
     public void hashcode() {
-        Map<String, Long> titlesValuesMapping1 = new HashMap<>();
-        titlesValuesMapping1.put("Male", 20L);
-        titlesValuesMapping1.put("Female", 30L);
-        Map<String, Long> titlesValuesMapping2 = new HashMap<>();
-        titlesValuesMapping2.put("Male", 20L);
-        titlesValuesMapping2.put("Female", 30L);
-        Map<String, Long> titlesValuesMapping3 = new HashMap<>();
-        titlesValuesMapping3.put("Male", 10L);
-        titlesValuesMapping3.put("Female", 10L);
+        Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
+        titlesValuesMapping1.put("Male", 20);
+        titlesValuesMapping1.put("Female", 30);
+        Map<String, Integer> titlesValuesMapping2 = new HashMap<>();
+        titlesValuesMapping2.put("Male", 20);
+        titlesValuesMapping2.put("Female", 30);
+        Map<String, Integer> titlesValuesMapping3 = new HashMap<>();
+        titlesValuesMapping3.put("Male", 10);
+        titlesValuesMapping3.put("Female", 10);
         CommandResult commandResult1 = new GenderTableCommandResult(titlesValuesMapping1);
         CommandResult commandResult2 = new GenderTableCommandResult(titlesValuesMapping2);
         CommandResult commandResult3 = new GenderTableCommandResult(titlesValuesMapping3);
@@ -68,9 +68,9 @@ public class GenderTableCommandResultTest {
 
     @Test
     public void toStringMethod() {
-        Map<String, Long> titlesValuesMapping1 = new HashMap<>();
-        titlesValuesMapping1.put("Male", 20L);
-        titlesValuesMapping1.put("Female", 30L);
+        Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
+        titlesValuesMapping1.put("Male", 20);
+        titlesValuesMapping1.put("Female", 30);
         GenderTableCommandResult commandResult = new GenderTableCommandResult(titlesValuesMapping1);
         String expected = GenderTableCommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
@@ -81,11 +81,11 @@ public class GenderTableCommandResultTest {
 
     @Test
     public void parseMappingCorrectly() {
-        Map<String, Long> titlesValuesMapping1 = new HashMap<>();
-        titlesValuesMapping1.put("Male", 20L);
-        titlesValuesMapping1.put("Female", 30L);
+        Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
+        titlesValuesMapping1.put("Male", 20);
+        titlesValuesMapping1.put("Female", 30);
         GenderTableCommandResult commandResult = new GenderTableCommandResult(titlesValuesMapping1);
-        assertEquals(commandResult.getMaleCount(), 20L);
-        assertEquals(commandResult.getFemaleCount(), 30L);
+        assertEquals(commandResult.getMaleCount(), 20);
+        assertEquals(commandResult.getFemaleCount(), 30);
     }
 }

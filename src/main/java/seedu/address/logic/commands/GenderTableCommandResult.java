@@ -11,15 +11,15 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class GenderTableCommandResult extends CommandResult {
     private static final String FEEDBACKTOUSERMESSAGE = "A table categorized by gender is shown";
-    private Long maleCount;
-    private Long femaleCount;
+    private int maleCount;
+    private int femaleCount;
 
 
     /**
      * Constructor for GenderTableCommandResult.
      * @param columnValueMapping A hashmap containing column titles(String) as key and counts(Long) as values.
      */
-    public GenderTableCommandResult(Map<String, Long> columnValueMapping) {
+    public GenderTableCommandResult(Map<String, Integer> columnValueMapping) {
         super(FEEDBACKTOUSERMESSAGE);
         this.maleCount = columnValueMapping.get("Male");
         this.femaleCount = columnValueMapping.get("Female");
@@ -39,7 +39,7 @@ public class GenderTableCommandResult extends CommandResult {
      * Getter method for maleCount which will auto invoked by javafx PropertyValueFactory instance.
      * @return Counts for male category.
      */
-    public Long getMaleCount() {
+    public int getMaleCount() {
         return this.maleCount;
     }
 
@@ -47,7 +47,7 @@ public class GenderTableCommandResult extends CommandResult {
      * Getter method for femaleCount which will auto invoked by javafx PropertyValueFactory instance.
      * @return Counts for female category.
      */
-    public Long getFemaleCount() {
+    public int getFemaleCount() {
         return this.femaleCount;
     }
 
@@ -64,8 +64,8 @@ public class GenderTableCommandResult extends CommandResult {
 
         GenderTableCommandResult otherCommandResult = (GenderTableCommandResult) other;
         return super.equals(otherCommandResult)
-                && otherCommandResult.maleCount.equals(maleCount)
-                && otherCommandResult.femaleCount.equals(femaleCount);
+                && otherCommandResult.maleCount == maleCount
+                && otherCommandResult.femaleCount == femaleCount;
     }
 
     @Override

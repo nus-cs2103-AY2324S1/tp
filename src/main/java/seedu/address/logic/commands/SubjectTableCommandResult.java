@@ -12,19 +12,19 @@ import seedu.address.model.tag.Subject;
 public class SubjectTableCommandResult extends CommandResult {
 
     private static final String FEEDBACKTOUSERMESSAGE = "A table categorized by Subject is shown";
-    private Long csCount;
-    private Long mathsCount;
-    private Long phyCount;
-    private Long chemiCount;
-    private Long bioCount;
-    private Long engCount;
+    private int csCount;
+    private int mathsCount;
+    private int phyCount;
+    private int chemiCount;
+    private int bioCount;
+    private int engCount;
 
 
     /**
      * Constructor for SubjectTableCommandResult.
      * @param columnValueMapping hash map instance containing column titles(String) as keys and counts(Long) as values.
      */
-    public SubjectTableCommandResult(Map<String, Long> columnValueMapping) {
+    public SubjectTableCommandResult(Map<String, Integer> columnValueMapping) {
         super(FEEDBACKTOUSERMESSAGE);
         this.csCount = columnValueMapping.get(Subject.CS);
         this.mathsCount = columnValueMapping.get(Subject.MATHS);
@@ -47,7 +47,7 @@ public class SubjectTableCommandResult extends CommandResult {
      * Getter method for csCount which will auto invoked by javafx PropertyValueFactory instance.
      * @return count for computer science category.
      */
-    public Long getCsCount() {
+    public int getCsCount() {
         return csCount;
     }
 
@@ -55,7 +55,7 @@ public class SubjectTableCommandResult extends CommandResult {
      * Getter method for mathsCount which will auto invoked by javafx PropertyValueFactory instance.
      * @return count for mathematics category.
      */
-    public Long getMathsCount() {
+    public int getMathsCount() {
         return mathsCount;
     }
 
@@ -63,7 +63,7 @@ public class SubjectTableCommandResult extends CommandResult {
      * Getter method for phyCount which will auto invoked by javafx PropertyValueFactory instance.
      * @return count for physics category.
      */
-    public Long getPhyCount() {
+    public int getPhyCount() {
         return phyCount;
     }
 
@@ -71,7 +71,7 @@ public class SubjectTableCommandResult extends CommandResult {
      * Getter method for chemiCount which will auto invoked by javafx PropertyValueFactory instance.
      * @return count for chemistry category.
      */
-    public Long getChemiCount() {
+    public int getChemiCount() {
         return chemiCount;
     }
 
@@ -79,7 +79,7 @@ public class SubjectTableCommandResult extends CommandResult {
      * Getter method for bioCount which will auto invoked by javafx PropertyValueFactory instance.
      * @return count for biology category.
      */
-    public Long getBioCount() {
+    public int getBioCount() {
         return bioCount;
     }
 
@@ -87,7 +87,7 @@ public class SubjectTableCommandResult extends CommandResult {
      * Getter method for engCount which will auto invoked by javafx PropertyValueFactory instance.
      * @return count for english category.
      */
-    public Long getEngCount() {
+    public int getEngCount() {
         return engCount;
     }
 
@@ -104,12 +104,12 @@ public class SubjectTableCommandResult extends CommandResult {
 
         SubjectTableCommandResult otherCommandResult = (SubjectTableCommandResult) other;
         return super.equals(otherCommandResult)
-                && otherCommandResult.csCount.equals(csCount)
-                && otherCommandResult.mathsCount.equals(mathsCount)
-                && otherCommandResult.phyCount.equals(phyCount)
-                && otherCommandResult.chemiCount.equals(chemiCount)
-                && otherCommandResult.bioCount.equals(bioCount)
-                && otherCommandResult.engCount.equals(engCount);
+                && otherCommandResult.csCount == csCount
+                && otherCommandResult.mathsCount == mathsCount
+                && otherCommandResult.phyCount == phyCount
+                && otherCommandResult.chemiCount == chemiCount
+                && otherCommandResult.bioCount == bioCount
+                && otherCommandResult.engCount == engCount;
     }
 
     @Override

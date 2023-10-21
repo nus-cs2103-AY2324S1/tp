@@ -13,27 +13,27 @@ import org.junit.jupiter.api.Test;
 public class SubjectTableCommandResultTest {
     @Test
     public void equals() {
-        Map<String, Long> titlesValuesMapping1 = new HashMap<>();
-        titlesValuesMapping1.put("Computer Science", 20L);
-        titlesValuesMapping1.put("Mathematics", 30L);
-        titlesValuesMapping1.put("Chemistry", 40L);
-        titlesValuesMapping1.put("Physics", 50L);
-        titlesValuesMapping1.put("Biology", 50L);
-        titlesValuesMapping1.put("English", 50L);
-        Map<String, Long> titlesValuesMapping2 = new HashMap<>();
-        titlesValuesMapping2.put("Computer Science", 20L);
-        titlesValuesMapping2.put("Mathematics", 30L);
-        titlesValuesMapping2.put("Chemistry", 40L);
-        titlesValuesMapping2.put("Physics", 50L);
-        titlesValuesMapping2.put("Biology", 50L);
-        titlesValuesMapping2.put("English", 50L);
-        Map<String, Long> titlesValuesMapping3 = new HashMap<>();
-        titlesValuesMapping3.put("Computer Science", 10L);
-        titlesValuesMapping3.put("Mathematics", 10L);
-        titlesValuesMapping3.put("Chemistry", 20L);
-        titlesValuesMapping3.put("Physics", 20L);
-        titlesValuesMapping3.put("Biology", 30L);
-        titlesValuesMapping3.put("English", 30L);
+        Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
+        titlesValuesMapping1.put("Computer Science", 20);
+        titlesValuesMapping1.put("Mathematics", 30);
+        titlesValuesMapping1.put("Chemistry", 40);
+        titlesValuesMapping1.put("Physics", 50);
+        titlesValuesMapping1.put("Biology", 50);
+        titlesValuesMapping1.put("English", 50);
+        Map<String, Integer> titlesValuesMapping2 = new HashMap<>();
+        titlesValuesMapping2.put("Computer Science", 20);
+        titlesValuesMapping2.put("Mathematics", 30);
+        titlesValuesMapping2.put("Chemistry", 40);
+        titlesValuesMapping2.put("Physics", 50);
+        titlesValuesMapping2.put("Biology", 50);
+        titlesValuesMapping2.put("English", 50);
+        Map<String, Integer> titlesValuesMapping3 = new HashMap<>();
+        titlesValuesMapping3.put("Computer Science", 10);
+        titlesValuesMapping3.put("Mathematics", 10);
+        titlesValuesMapping3.put("Chemistry", 20);
+        titlesValuesMapping3.put("Physics", 20);
+        titlesValuesMapping3.put("Biology", 30);
+        titlesValuesMapping3.put("English", 30);
         CommandResult commandResult1 = new SubjectTableCommandResult(titlesValuesMapping1);
         CommandResult commandResult2 = new SubjectTableCommandResult(titlesValuesMapping2);
         CommandResult commandResult3 = new SubjectTableCommandResult(titlesValuesMapping3);
@@ -59,27 +59,27 @@ public class SubjectTableCommandResultTest {
 
     @Test
     public void hashcode() {
-        Map<String, Long> titlesValuesMapping1 = new HashMap<>();
-        titlesValuesMapping1.put("Computer Science", 20L);
-        titlesValuesMapping1.put("Mathematics", 30L);
-        titlesValuesMapping1.put("Chemistry", 40L);
-        titlesValuesMapping1.put("Physics", 50L);
-        titlesValuesMapping1.put("Biology", 50L);
-        titlesValuesMapping1.put("English", 50L);
-        Map<String, Long> titlesValuesMapping2 = new HashMap<>();
-        titlesValuesMapping2.put("Computer Science", 20L);
-        titlesValuesMapping2.put("Mathematics", 30L);
-        titlesValuesMapping2.put("Chemistry", 40L);
-        titlesValuesMapping2.put("Physics", 50L);
-        titlesValuesMapping2.put("Biology", 50L);
-        titlesValuesMapping2.put("English", 50L);
-        Map<String, Long> titlesValuesMapping3 = new HashMap<>();
-        titlesValuesMapping3.put("Computer Science", 10L);
-        titlesValuesMapping3.put("Mathematics", 10L);
-        titlesValuesMapping3.put("Chemistry", 20L);
-        titlesValuesMapping3.put("Physics", 20L);
-        titlesValuesMapping3.put("Biology", 30L);
-        titlesValuesMapping3.put("English", 30L);
+        Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
+        titlesValuesMapping1.put("Computer Science", 20);
+        titlesValuesMapping1.put("Mathematics", 30);
+        titlesValuesMapping1.put("Chemistry", 40);
+        titlesValuesMapping1.put("Physics", 50);
+        titlesValuesMapping1.put("Biology", 50);
+        titlesValuesMapping1.put("English", 50);
+        Map<String, Integer> titlesValuesMapping2 = new HashMap<>();
+        titlesValuesMapping2.put("Computer Science", 20);
+        titlesValuesMapping2.put("Mathematics", 30);
+        titlesValuesMapping2.put("Chemistry", 40);
+        titlesValuesMapping2.put("Physics", 50);
+        titlesValuesMapping2.put("Biology", 50);
+        titlesValuesMapping2.put("English", 50);
+        Map<String, Integer> titlesValuesMapping3 = new HashMap<>();
+        titlesValuesMapping3.put("Computer Science", 10);
+        titlesValuesMapping3.put("Mathematics", 10);
+        titlesValuesMapping3.put("Chemistry", 20);
+        titlesValuesMapping3.put("Physics", 20);
+        titlesValuesMapping3.put("Biology", 30);
+        titlesValuesMapping3.put("English", 30);
         CommandResult commandResult1 = new SubjectTableCommandResult(titlesValuesMapping1);
         CommandResult commandResult2 = new SubjectTableCommandResult(titlesValuesMapping2);
         CommandResult commandResult3 = new SubjectTableCommandResult(titlesValuesMapping3);
@@ -94,13 +94,13 @@ public class SubjectTableCommandResultTest {
 
     @Test
     public void toStringMethod() {
-        Map<String, Long> titlesValuesMapping = new HashMap<>();
-        titlesValuesMapping.put("Computer Science", 20L);
-        titlesValuesMapping.put("Mathematics", 30L);
-        titlesValuesMapping.put("Chemistry", 40L);
-        titlesValuesMapping.put("Physics", 50L);
-        titlesValuesMapping.put("Biology", 50L);
-        titlesValuesMapping.put("English", 50L);
+        Map<String, Integer> titlesValuesMapping = new HashMap<>();
+        titlesValuesMapping.put("Computer Science", 20);
+        titlesValuesMapping.put("Mathematics", 30);
+        titlesValuesMapping.put("Chemistry", 40);
+        titlesValuesMapping.put("Physics", 50);
+        titlesValuesMapping.put("Biology", 50);
+        titlesValuesMapping.put("English", 50);
         CommandResult commandResult = new SubjectTableCommandResult(titlesValuesMapping);
         String expected = SubjectTableCommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
@@ -111,20 +111,20 @@ public class SubjectTableCommandResultTest {
 
     @Test
     public void parseMappingCorrectly() {
-        Map<String, Long> titlesValuesMapping = new HashMap<>();
-        titlesValuesMapping.put("Computer Science", 20L);
-        titlesValuesMapping.put("Mathematics", 30L);
-        titlesValuesMapping.put("Chemistry", 40L);
-        titlesValuesMapping.put("Physics", 50L);
-        titlesValuesMapping.put("Biology", 60L);
-        titlesValuesMapping.put("English", 70L);
+        Map<String, Integer> titlesValuesMapping = new HashMap<>();
+        titlesValuesMapping.put("Computer Science", 20);
+        titlesValuesMapping.put("Mathematics", 30);
+        titlesValuesMapping.put("Chemistry", 40);
+        titlesValuesMapping.put("Physics", 50);
+        titlesValuesMapping.put("Biology", 60);
+        titlesValuesMapping.put("English", 70);
         SubjectTableCommandResult commandResult = new SubjectTableCommandResult(titlesValuesMapping);
 
-        assertEquals(commandResult.getCsCount(), 20L);
-        assertEquals(commandResult.getMathsCount(), 30L);
-        assertEquals(commandResult.getChemiCount(), 40L);
-        assertEquals(commandResult.getPhyCount(), 50L);
-        assertEquals(commandResult.getBioCount(), 60L);
-        assertEquals(commandResult.getEngCount(), 70L);
+        assertEquals(commandResult.getCsCount(), 20);
+        assertEquals(commandResult.getMathsCount(), 30);
+        assertEquals(commandResult.getChemiCount(), 40);
+        assertEquals(commandResult.getPhyCount(), 50);
+        assertEquals(commandResult.getBioCount(), 60);
+        assertEquals(commandResult.getEngCount(), 70);
     }
 }

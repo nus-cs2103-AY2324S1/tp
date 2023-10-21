@@ -70,7 +70,7 @@ public class TableCommand extends Command {
      * @return GenderTableCommandResult instance containing the column titles and values.
      */
     private GenderTableCommandResult executeGender(Model model) {
-        Map<String, Long> columnValueMapping = new HashMap<>();
+        Map<String, Integer> columnValueMapping = new HashMap<>();
 
         String[] titles = new String[]{"Male", "Female"};
 
@@ -80,9 +80,10 @@ public class TableCommand extends Command {
         StudentIsGenderPredicate isFemalePredicate = new StudentIsGenderPredicate(new Gender("F"));
         Stream<StudentIsGenderPredicate> predicateStream = Stream.of(isMalePredicate, isFemalePredicate);
 
-        Long[] values = predicateStream
+        int[] values = predicateStream
                 .map(p -> studentList.stream().filter(p).count())
-                .toArray(Long[]::new);
+                .mapToInt(Long::intValue)
+                .toArray();
 
         for (int i = 0; i < titles.length; i++) {
             columnValueMapping.put(titles[i], values[i]);
@@ -97,7 +98,7 @@ public class TableCommand extends Command {
      * @return SecLevelTableCommandResult instance containing column titles and values.
      */
     private SecLevelTableCommandResult executeSecLevel(Model model) {
-        Map<String, Long> columnValueMapping = new HashMap<>();
+        Map<String, Integer> columnValueMapping = new HashMap<>();
         String[] titles = new String[] {SecLevel.SEC1, SecLevel.SEC2, SecLevel.SEC3, SecLevel.SEC4};
 
         ObservableList<Student> studentList = model.getFilteredPersonList();
@@ -114,9 +115,10 @@ public class TableCommand extends Command {
                 isSec4Predicate
         );
 
-        Long[] values = predicateStream
+        int[] values = predicateStream
                 .map(p -> studentList.stream().filter(p).count())
-                .toArray(Long[]::new);
+                .mapToInt(Long::intValue)
+                .toArray();
 
         for (int i = 0; i < titles.length; i++) {
             columnValueMapping.put(titles[i], values[i]);
@@ -131,7 +133,7 @@ public class TableCommand extends Command {
      * @return SubjectTableCommandResult instance containing column titles and values.
      */
     private SubjectTableCommandResult executeSubject(Model model) {
-        Map<String, Long> columnValueMapping = new HashMap<>();
+        Map<String, Integer> columnValueMapping = new HashMap<>();
 
         String[] titles = new String[] {Subject.MATHS, Subject.CS, Subject.CHEMI, Subject.BIO,
                                         Subject.ENG, Subject.PHY};
@@ -154,9 +156,10 @@ public class TableCommand extends Command {
                 takeEngPredicate
         );
 
-        Long[] values = predicateStream
+        int[] values = predicateStream
                 .map(p -> studentList.stream().filter(p).count())
-                .toArray(Long[]::new);
+                .mapToInt(Long::intValue)
+                .toArray();
 
         for (int i = 0; i < titles.length; i++) {
             columnValueMapping.put(titles[i], values[i]);
