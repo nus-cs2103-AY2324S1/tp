@@ -1,10 +1,10 @@
 package seedu.address.model.card;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Card's answer in lesSON.

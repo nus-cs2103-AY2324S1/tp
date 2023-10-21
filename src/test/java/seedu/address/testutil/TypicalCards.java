@@ -14,9 +14,15 @@ import seedu.address.model.card.NextPracticeDate;
  */
 public class TypicalCards {
 
+    public static final Card HIGH = new CardBuilder().withQuestion("High Priority?")
+            .withAnswer("True")
+            .withNextPracticeDate(new NextPracticeDate(LocalDateTime.MIN)).build();
+    public static final Card LOW = new CardBuilder().withQuestion("Low Priority?")
+            .withAnswer("True")
+            .withNextPracticeDate(new NextPracticeDate(LocalDateTime.MAX)).build();
     private static final NextPracticeDate typicalDate =
             new NextPracticeDate(
-                LocalDateTime.of(2018, 11, 3,12, 45, 30)
+                LocalDateTime.of(2018, 11, 3, 12, 45, 30)
             );
     public static final Card CS2100 = new CardBuilder().withQuestion("R-Format instruction opcode")
             .withAnswer("0").withNextPracticeDate(typicalDate).build();
@@ -24,12 +30,6 @@ public class TypicalCards {
             .withAnswer("Reflexive, Symmetric, Transitive").withNextPracticeDate(typicalDate).build();
     public static final Card CS1101S = new CardBuilder().withQuestion("What is the language used for this mod?")
             .withAnswer("Source").withNextPracticeDate(typicalDate).build();
-    public static final Card HIGH = new CardBuilder().withQuestion("High Priority?")
-            .withAnswer("True")
-            .withNextPracticeDate(new NextPracticeDate(LocalDateTime.MIN)).build();
-    public static final Card LOW = new CardBuilder().withQuestion("Low Priority?")
-            .withAnswer("True")
-            .withNextPracticeDate(new NextPracticeDate(LocalDateTime.MAX)).build();
 
     private TypicalCards() {} // prevents instantiation
 

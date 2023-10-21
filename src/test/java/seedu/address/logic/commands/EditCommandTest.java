@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalCards.CS2100;
 import static seedu.address.testutil.TypicalCards.getTypicalDeck;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
@@ -26,8 +25,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.EditCardDescriptorBuilder;
-
-import java.time.LocalDateTime;
 
 
 /**

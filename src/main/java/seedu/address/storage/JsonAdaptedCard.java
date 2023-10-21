@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,10 +10,6 @@ import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.NextPracticeDate;
 import seedu.address.model.card.Question;
-
-import javax.print.attribute.standard.DateTimeAtProcessing;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * Jackson-friendly version of {@link Card}.
@@ -30,8 +28,10 @@ class JsonAdaptedCard {
      * Constructs a {@code JsonAdaptedCard} with the given card details.
      */
     @JsonCreator
-    public JsonAdaptedCard(@JsonProperty("question") String question, @JsonProperty("answer") String answer,
-                           @JsonProperty("difficulty") String difficulty, @JsonProperty("next-practice-date") String nextPracticeDate) {
+    public JsonAdaptedCard(@JsonProperty("question") String question,
+                           @JsonProperty("answer") String answer,
+                           @JsonProperty("difficulty") String difficulty,
+                           @JsonProperty("next-practice-date") String nextPracticeDate) {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;

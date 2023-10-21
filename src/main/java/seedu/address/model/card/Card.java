@@ -2,7 +2,6 @@ package seedu.address.model.card;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -11,7 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents a Card in lesSON.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Card implements Comparable<Card>{
+public class Card implements Comparable<Card> {
     private final Question question;
     private final Answer answer;
     private String difficulty;

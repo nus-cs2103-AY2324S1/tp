@@ -1,11 +1,12 @@
 package seedu.address.model.card;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.CardBuilder;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.CardBuilder;
 
 public class CardPracticeDateComparatorTest {
     @Test
