@@ -108,6 +108,7 @@ with all attributes containing any of the corresponding keywords in the command.
 
 Format: `find -PERSON_TYPE [PREFIX/KEYWORDS]`
 
+* All prefixes are optional. Hence, calling `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
