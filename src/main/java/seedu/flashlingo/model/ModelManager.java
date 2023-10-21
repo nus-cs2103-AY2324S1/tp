@@ -139,7 +139,7 @@ public class ModelManager implements Model {
         FlashCard toBeReviewed = getFilteredFlashCardList().get(0);
         Predicate<FlashCard> t = new NextReviewWordPredicate(toBeReviewed);
         updateFilteredFlashCardList(t);
-        return "";
+        return "\nThe next word is: ";
 
     }
 
