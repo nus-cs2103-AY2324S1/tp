@@ -20,8 +20,11 @@ public class HelpCommand extends Command {
             + EditCommand.COMMAND_WORD + ", "
             + ExitCommand.COMMAND_WORD + ", "
             + FindCommand.COMMAND_WORD + ", "
+            + GatherCommand.COMMAND_WORD + ", "
             + COMMAND_WORD + ", "
-            + ListCommand.COMMAND_WORD;
+            + ListCommand.COMMAND_WORD + ", "
+            + ScheduleCommand.COMMAND_WORD + ", "
+            + SortCommand.COMMAND_WORD;
 
     @Override
     public CommandResult execute(Model model) {

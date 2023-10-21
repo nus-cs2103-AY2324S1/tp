@@ -144,8 +144,7 @@ public class Person {
                 && nextOfKinPhone.equals(otherPerson.nextOfKinPhone)
                 && tags.equals(otherPerson.tags)
                 && appointment.equals(otherPerson.appointment)
-                && financialPlans.equals(otherPerson.financialPlans)
-                && tags.equals(otherPerson.tags);
+                && financialPlans.equals(otherPerson.financialPlans);
     }
 
     @Override

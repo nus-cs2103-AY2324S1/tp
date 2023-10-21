@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -158,29 +159,34 @@ public class ParserUtil {
     /**
      * Parses a {@code String aptName} and {@code String aptDateString} into an {@code Appointment}.
      *
-     * @param aptName The name of the appointment.
-     * @param aptDateString The appointment date and time.
+     * @param appointmentName The name of the appointment.
+     * @param appointmentDateString The appointment date and time.
      * @return The Appointment.
      * @throws ParseException If the given {@code aptName} or {@code aptDateString}.
      */
-    public static Appointment parseAppointment(String aptName, String aptDateString) throws ParseException {
-        requireNonNull(aptName);
-        requireNonNull(aptDateString);
+    public static Appointment parseAppointment(String appointmentName, String appointmentDateString)
+            throws ParseException {
+        requireNonNull(appointmentName);
+        requireNonNull(appointmentDateString);
 
-        String trimmedAptName = aptName.trim();
+        String trimmedAppointmentName = appointmentName.trim();
 
-        if (!Appointment.isValidDate(aptDateString)) {
-            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        if (!Appointment.isValidDesc(appointmentName)) {
+            throw new ParseException(Appointment.MESSAGE_DESC_CONSTRAINTS);
         }
 
-        LocalDateTime aptDate;
-        try {
-            aptDate = Appointment.parseAppointmentDate(aptDateString);
-        } catch (IllegalArgumentException e) {
+        if (!Appointment.isValidDateFormat(appointmentDateString)) {
             throw new ParseException(Appointment.MESSAGE_DATE_CONSTRAINTS);
         }
 
-        return new Appointment(trimmedAptName, aptDate);
+        LocalDateTime appointmentDate;
+        try {
+            appointmentDate = Appointment.parseAppointmentDate(appointmentDateString);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
+        }
+
+        return new Appointment(trimmedAppointmentName, appointmentDate);
     }
 
     /**

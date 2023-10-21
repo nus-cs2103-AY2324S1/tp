@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -26,16 +28,18 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-
+    private static final String VALID_APPOINTMENT_DESC = "Review Insurance";
+    private static final String VALID_APPOINTMENT_DATE = "01-01-2023 20:00";
     private static final String WHITESPACE = " \t\r\n";
-
+    private static final String INVALID_APPOINTMENT_DESC = "#Review Insurance*";
+    private static final String INVALID_APPOINTMENT_DATE_FORMAT = "1 May 2023 20:00";
+    private static final String INVALID_APPOINTMENT_DATE = "01-13-2023 20:00";
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
@@ -192,5 +196,30 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseAppointment_validValueAndDate_returnsAppointment() throws Exception {
+        Appointment expectedAppointment = new Appointment("Review Insurance",
+                LocalDateTime.of(2023, 1, 1, 20, 0));
+        assertEquals(expectedAppointment, ParserUtil.parseAppointment(VALID_APPOINTMENT_DESC, VALID_APPOINTMENT_DATE));
+    }
+
+    @Test
+    public void parseAppointment_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAppointment(null,
+                null));
+    }
+
+    @Test
+    public void parseAppointment_invalidInputs_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointment(INVALID_APPOINTMENT_DESC,
+                VALID_APPOINTMENT_DATE));
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointment(VALID_APPOINTMENT_DESC,
+                INVALID_APPOINTMENT_DATE_FORMAT));
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointment(VALID_APPOINTMENT_DESC,
+                INVALID_APPOINTMENT_DATE));
     }
 }

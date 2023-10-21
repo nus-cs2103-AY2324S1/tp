@@ -2,7 +2,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-### About UnoFAS
+### About UNOFAS
 
 This project was created under the CS2103T Software Engineering module in NUS.
 

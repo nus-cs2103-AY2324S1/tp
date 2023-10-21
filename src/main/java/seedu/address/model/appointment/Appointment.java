@@ -1,7 +1,10 @@
 package seedu.address.model.appointment;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -11,12 +14,17 @@ import java.util.regex.Pattern;
  * Represents an Appointment in the address book.
  */
 public class Appointment implements Comparable<Appointment> {
-    public static final String MESSAGE_CONSTRAINTS = "Input Date should be in format of dd-MM-yyyy HH:mm";
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Invalid date or time given";
+
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Input Date should be in format of dd-MM-yyyy HH:mm";
+    public static final String MESSAGE_INVALID_DATE = "Please ensure you input a valid date and time";
+    public static final String MESSAGE_DESC_CONSTRAINTS = "Appointment description should only contain alphanumeric "
+            + "characters and spaces, and it should not be blank";
     public static final String MESSAGE_APT_CONSTRAINTS = "Invalid appointment string. "
             + "Should be (description), (date) (time)";
     public static final String VALIDATION_DATE_REGEX = "\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}";
-    public static final String VALIDATION_APT_REGEX = "^(.*), (\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2})$";
+    public static final String VALIDATION_DESC_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_APT_REGEX = "^([\\p{Alnum}][\\p{Alnum} ]*), "
+            + "(\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2})$";
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
     public final String value;
@@ -29,6 +37,7 @@ public class Appointment implements Comparable<Appointment> {
      * @param date A valid LocalDateTime object representing Appointment date.
      */
     public Appointment(String value, LocalDateTime date) {
+        requireNonNull(value);
         this.value = value;
         this.date = date;
     }
@@ -58,11 +67,27 @@ public class Appointment implements Comparable<Appointment> {
         return Objects.hash(value, date);
     }
 
-    public static boolean isValidDate(String date) {
+    /**
+     * Returns true if given string is valid appointment description.
+     */
+    public static boolean isValidDesc(String desc) {
+        requireNonNull(desc);
+        return desc.matches(VALIDATION_DESC_REGEX);
+    }
+
+    /**
+     * Returns true if given string is valid date time.
+     */
+    public static boolean isValidDateFormat(String date) {
+        requireNonNull(date);
         return date.matches(VALIDATION_DATE_REGEX);
     }
 
+    /**
+     * Returns true if given string is valid appointment.
+     */
     public static boolean isValidAppointment(String appointment) {
+        requireNonNull(appointment);
         return appointment.matches(VALIDATION_APT_REGEX);
     }
 
@@ -73,7 +98,7 @@ public class Appointment implements Comparable<Appointment> {
      * @return The LocaleDateTime object representing Appointment date.
      * @throws IllegalArgumentException If input date does not match specified format.
      */
-    public static LocalDateTime parseAppointmentDate(String input) throws IllegalArgumentException {
+    public static LocalDateTime parseAppointmentDate(String input) throws DateTimeParseException {
         return LocalDateTime.parse(input, DATE_FORMATTER);
     }
 
