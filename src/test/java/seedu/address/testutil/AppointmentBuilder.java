@@ -2,11 +2,9 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.VALID_DESCRIPTION;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.appointment.AppointmentDescription;
-import seedu.address.model.person.Name;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Person;
 
 
@@ -24,7 +22,7 @@ public class AppointmentBuilder {
     // Identity fields
     private AppointmentTime appointmentTime;
     private Person patient;
-//    private Set<Tag> tags = new HashSet<>();
+    //  private Set<Tag> tags = new HashSet<>();
 
     private AppointmentDescription appointmentDescription;
     /**
@@ -52,7 +50,7 @@ public class AppointmentBuilder {
     /**
      * Sets the {@code AppointmentTime} for the Appointment being built.
      */
-    public AppointmentBuilder withAppointmentTime(String start, String end){
+    public AppointmentBuilder withAppointmentTime(String start, String end) {
         this.appointmentTime = new AppointmentTimeBuilder().withStart(start).withEnd(end).build();
         return this;
     }

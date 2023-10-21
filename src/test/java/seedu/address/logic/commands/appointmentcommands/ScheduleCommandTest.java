@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.appointmentcommands;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,10 +9,8 @@ import static seedu.address.logic.commands.appointmentcommands.AppointmentComman
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.VALID_END_TWO;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.VALID_START_ONE;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.VALID_START_TWO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PATIENT;
 
 import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -19,14 +18,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AppointmentBuilder;
@@ -37,19 +32,19 @@ public class ScheduleCommandTest {
         assertThrows(NullPointerException.class, () -> new ScheduleCommand(null, null));
     }
 
-//    @Test
-//        public void execute_duplicateAppointment_throwsCommandException() {
-//        Appointment testAppointment = new AppointmentBuilder().build();
-//        Name testName = new Name("Test Name");
-//
-//        ScheduleCommand scheduleCommand = new ScheduleCommand(testAppointment, testName);
-//
-//        ScheduleCommandTest.ModelStub modelStub =
-//                new ScheduleCommandTest.ModelStubContainingAppointments(testAppointment);
-//
-//        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_APPOINTMENT, () ->
-//                scheduleCommand.execute(modelStub));
-//        }
+    //        @Test
+    //        public void execute_appointmentAcceptedByModel_addSuccessful() throws Exception {
+    //            ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
+    //            Appointment validAppointment = new AppointmentBuilder().build();
+    //            Name testName = new Name("test");
+    //
+    //
+    //            CommandResult commandResult = new ScheduleCommand(validAppointment, testName).execute(modelStub);
+    //
+    //            assertEquals(String.format(ScheduleCommand.MESSAGE_SUCCESS, validAppointment),
+    //                    commandResult.getFeedbackToUser());
+    //            assertEquals(Arrays.asList(validAppointment), modelStub.appointments);
+    //        }
 
     @Test
     public void equals() {
@@ -62,8 +57,8 @@ public class ScheduleCommandTest {
         ScheduleCommand scheduleCommand1 = new ScheduleCommand(appointment1, testName1);
         ScheduleCommand scheduleCommand2 = new ScheduleCommand(appointment2, testName2);
 
-        ScheduleCommand scheduleCommand_SameTime_DifferentName1 = new ScheduleCommand(appointment1, testName1);
-        ScheduleCommand scheduleCommand_SameTime_DifferentName2 = new ScheduleCommand(appointment1, testName2);
+        ScheduleCommand scheduleCommandSameTimeDifferentName1 = new ScheduleCommand(appointment1, testName1);
+        ScheduleCommand scheduleCommandSameTimeDifferentName2 = new ScheduleCommand(appointment1, testName2);
 
         // compare with different type - false
         assertFalse(scheduleCommand1.equals("Test"));
@@ -72,10 +67,12 @@ public class ScheduleCommandTest {
         assertFalse(scheduleCommand1.equals(null));
 
         // compares same appointment timing but different names (Patients) - false
-        assertFalse(scheduleCommand_SameTime_DifferentName1.equals(scheduleCommand_SameTime_DifferentName2));
+        assertFalse(scheduleCommandSameTimeDifferentName1.equals(scheduleCommandSameTimeDifferentName2));
 
         // compares AddCommand1 with itself - true
         assertTrue(scheduleCommand1.equals(scheduleCommand1));
+
+        assertEquals(scheduleCommand2, scheduleCommand2);
 
         // compares 2 different Schedule Commands - false
         assertFalse(scheduleCommand1.equals(scheduleCommand2));
