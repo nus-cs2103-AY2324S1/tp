@@ -7,11 +7,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.GenderTableCommandResult;
 import seedu.address.logic.commands.SecLevelTableCommandResult;
 import seedu.address.logic.commands.SubjectTableCommandResult;
 import seedu.address.model.tag.Subject;
+
+import java.util.logging.Logger;
 
 
 /**
@@ -19,6 +22,7 @@ import seedu.address.model.tag.Subject;
  */
 public class TableWindow extends UiPart<Stage> {
     public static final String FXML = "TableWindow.fxml";
+    private static final Logger logger = LogsCenter.getLogger(TableWindow.class);
 
     @FXML
     private TableView<? extends CommandResult> table;
@@ -153,6 +157,7 @@ public class TableWindow extends UiPart<Stage> {
      * Shows the table window.
      */
     public void show() {
+        logger.fine("Showing statistical table in another window.");
         super.getRoot().show();
         super.getRoot().centerOnScreen();
     }

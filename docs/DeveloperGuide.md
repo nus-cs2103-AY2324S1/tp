@@ -272,6 +272,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * works as a tuition administrative staff
 * can type fast
 * prefers typing to mouse interactions
+* prefers using software to manage students' contacts
 * wants to know his students well as part of his work
 * wants to make use of statistics and technology to make marketing decisions
 
@@ -459,7 +460,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 2a1-2a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 3.
 
-**User case: UC07 - Visualize data in charts**
+**User case: UC07 - Generate statistical table**
+
+**MSS**
+
+1. Staff chooses to generate a table by either gender, sec level, or subject categoy
+2. Tutorium calculates the counts for each category and display it in a new table window. <br>
+
+**Extensions**
+
+* 1a. Tutorium detects a format error in the entered command.
+    * 1a1. Tutorium requests for the correctly formatted command.
+    * 1a2. User enters a new command. <br>
+      Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
+      Use case resumes from step 2.
+
+* 1b. Tutorium could not find any category that matches with the entered category.
+    * 1b1. Tutorium requests for a valid category.
+    * 1b2. User enters a new category. <br>
+      Steps 1b1-1b2 are repeated until the data entered are correct. <br>
+      Use case resumes from step 2.
+
+**User case: UC08 - Visualize data in charts**
 
 **MSS**
 
@@ -489,7 +511,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 3a1-3a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 4.
 
-**User case: UC08 - Export charts**
+**User case: UC09 - Export charts**
 
 **MSS**
 

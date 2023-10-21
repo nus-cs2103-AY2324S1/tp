@@ -28,6 +28,7 @@ Given below are my contributions to the project.
 * **Team-based tasks**:
     * update "edit" feature
     * merge Lauren's pull request and resolve merge conflict
+    * develop "table" feature that can generate statistical table regarding student.
 
 * **Review/mentoring contributions**:
     * review Lauren's pull request
