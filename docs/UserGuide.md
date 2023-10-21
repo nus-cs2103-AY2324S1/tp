@@ -198,6 +198,20 @@ Exits the program.
 
 Format: `exit`
 
+### Showing statistical table
+Showing a table either categorized by gender, sec level or subject.
+
+Format: `table {prefix}`
+
+* FIELD_VALUE is not needed.
+* prefix is case-sensitive.
+* Exactly one of `g/`, `l/` or `s/` must be provided.
+
+Examples: 
+* `table g/` will show a table categorized by student gender.
+* `table l/` will show a table categorized by student sec level.
+* `table s/` will show a table categorized by student subject.
+
 ### Saving the data
 
 Tutorium data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
