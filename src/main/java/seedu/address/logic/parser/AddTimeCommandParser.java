@@ -37,6 +37,11 @@ public class AddTimeCommandParser implements Parser<AddTimeCommand> {
         TimeInterval firstInterval = ParserUtil.parseEachInterval(argMultimap.getValue(PREFIX_FREETIME).get());
         ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_ENDINTERVAL));
         timeInterval.add(0, firstInterval);
+
+        if (!TimeInterval.isTimeIntervalOverlap(timeInterval)) {
+            throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS_OVERLAP);
+        }
+
         return new AddTimeCommand(name, timeInterval);
     }
 

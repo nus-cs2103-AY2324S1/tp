@@ -164,13 +164,13 @@ public class ParserUtil {
     public static Time parseTime(String timeString) throws ParseException {
         requireNonNull(timeString);
         String trimmedTimeString = timeString.trim();
-        if (!Time.isValidTime(timeString)) {
+        if (!Time.isValidTime(trimmedTimeString)) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
-        String dayString = timeString.substring(0, timeString.indexOf(" "));
-        String time = timeString.substring(timeString.indexOf(" ") + 1);
+        String dayString = trimmedTimeString.substring(0, timeString.indexOf(" "));
+        String time = trimmedTimeString.substring(timeString.indexOf(" ") + 1);
         DayOfWeek day = Time.decodeDay(dayString);
-        LocalTime hour = LocalTime.parse(time.substring(0, 2) + ":" + time.substring(2, 4)); //throw parse exception
+        LocalTime hour = LocalTime.parse(time.substring(0, 2) + ":" + time.substring(2, 4));
         return new Time(day, hour);
     }
 
@@ -184,14 +184,18 @@ public class ParserUtil {
     }
 
     public static TimeInterval parseEachInterval(String interval) throws ParseException {
-        //Pattern pattern = Pattern.compile("(\\d.)((?:hours|minutes|hour|minute)\\b$)");
-        //        if (!pattern.matcher(duration).find()) {
-        //            throw new DukeException("Invalid format for duration");
-        //        }
+        requireNonNull(interval);
+        String trimmedInterval = interval.trim();
+        if (!TimeInterval.isValidTimeIntervalSyntax(trimmedInterval)) {
+            throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS_SYNTAX);
+        }
         String start = interval.substring(0, interval.indexOf("-")).trim();
+        Time startTime = parseTime(start);
         String end = interval.substring(interval.indexOf('-') + 1).trim();
-
-
-        return new TimeInterval(parseTime(start), parseTime(end));
+        Time endTime = parseTime(end);
+        if (!TimeInterval.isValidTimeIntervalLogic(startTime, endTime)) {
+            throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS_LOGIC);
+        }
+        return new TimeInterval(startTime, endTime);
     }
 }
