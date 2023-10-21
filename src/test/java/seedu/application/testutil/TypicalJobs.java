@@ -47,10 +47,10 @@ public class TypicalJobs {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Job CHEF = new JobBuilder().withRole(VALID_ROLE_CHEF)
         .withCompany(VALID_COMPANY_CHEF).withStatus(VALID_STATUS_CHEF)
-        .withDeadline(VALID_DEADLINE_CHEF).withIndustry(Industry.TO_ADD_INDUSTRY).build();
+        .withDeadline(VALID_DEADLINE_CHEF).withIndustry(VALID_INDUSTRY_CHEF).build();
     public static final Job CLEANER = new JobBuilder().withRole(VALID_ROLE_CLEANER)
         .withCompany(VALID_COMPANY_CLEANER).withStatus(VALID_STATUS_CLEANER)
-        .withDeadline(VALID_DEADLINE_CLEANER).withIndustry(Industry.TO_ADD_INDUSTRY).build();
+        .withDeadline(VALID_DEADLINE_CLEANER).withIndustry(VALID_INDUSTRY_CLEANER).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

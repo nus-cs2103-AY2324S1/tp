@@ -22,14 +22,16 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_INDUSTRY);
+            ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE,
+                    PREFIX_STATUS, PREFIX_INDUSTRY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ROLE, PREFIX_COMPANY)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_INDUSTRY);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE,
+                PREFIX_STATUS, PREFIX_INDUSTRY);
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Deadline deadline = Deadline.EMPTY_DEADLINE; // Deadline is an optional field for add command

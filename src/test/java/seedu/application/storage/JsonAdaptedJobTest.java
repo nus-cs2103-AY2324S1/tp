@@ -8,17 +8,14 @@ import static seedu.application.testutil.TypicalJobs.CLEANER;
 import org.junit.jupiter.api.Test;
 
 import seedu.application.commons.exceptions.IllegalValueException;
-import seedu.application.model.job.Company;
-import seedu.application.model.job.Deadline;
-import seedu.application.model.job.Role;
-import seedu.application.model.job.Status;
+import seedu.application.model.job.*;
 
 public class JsonAdaptedJobTest {
     private static final String INVALID_ROLE = "Softw@re";
     private static final String INVALID_COMPANY = "      ";
     private static final String INVALID_STATUS = "submitted";
     private static final String INVALID_DEADLINE = "Nov 12 2023";
-    private static final String INVALID_INDUSTRY = "He@lthCare";
+    private static final String INVALID_INDUSTRY = "   ";
 
     private static final String VALID_ROLE = CLEANER.getRole().toString();
     private static final String VALID_COMPANY = CLEANER.getCompany().toString();
@@ -96,14 +93,14 @@ public class JsonAdaptedJobTest {
     public void toModelType_invalidIndustry_throwsIllegalValueException() {
         JsonAdaptedJob job =
                 new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, VALID_STATUS, VALID_DEADLINE, INVALID_INDUSTRY);
-        String expectedMessage = Deadline.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Industry.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
 
     @Test
     public void toModelType_nullIndustry_throwsIllegalValueException() {
-        JsonAdaptedJob job = new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, VALID_STATUS, VALID_INDUSTRY, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName());
+        JsonAdaptedJob job = new JsonAdaptedJob(VALID_ROLE, VALID_COMPANY, VALID_STATUS, VALID_DEADLINE, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Industry.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, job::toModelType);
     }
 

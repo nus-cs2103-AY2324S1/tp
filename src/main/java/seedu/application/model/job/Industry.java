@@ -1,8 +1,8 @@
 package seedu.application.model.job;
 
-import seedu.application.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
+
+import seedu.application.commons.util.AppUtil;
 
 /**
  * Represents the industry of the Job in the application book.

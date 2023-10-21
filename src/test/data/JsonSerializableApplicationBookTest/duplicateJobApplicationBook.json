@@ -4,13 +4,15 @@
       "role": "Software Engineer",
       "company": "Google",
       "status": "TO_BE_SUBMITTED",
-      "deadline": "TO_ADD_DEADLINE"
+      "deadline": "TO_ADD_DEADLINE",
+      "industry": "TO_ADD_INDUSTRY"
     },
     {
       "role": "Software Engineer",
       "company": "Google",
       "status": "TO_BE_SUBMITTED",
-      "deadline": "TO_ADD_DEADLINE"
+      "deadline": "TO_ADD_DEADLINE",
+      "industry": "TO_ADD_INDUSTRY"
     }
   ]
 }

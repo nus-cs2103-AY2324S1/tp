@@ -25,14 +25,14 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + ROLE_DESC_CLEANER
-                + COMPANY_DESC_CLEANER + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER,
+                + COMPANY_DESC_CLEANER + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + INDUSTRY_DESC_CLEANER,
             new AddCommand(expectedJob));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedJobString = ROLE_DESC_CLEANER + COMPANY_DESC_CLEANER
-            + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER;
+            + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + INDUSTRY_DESC_CLEANER;
 
         // multiple roles
         assertParseFailure(parser, ROLE_DESC_CHEF + validExpectedJobString,
@@ -50,12 +50,16 @@ public class AddCommandParserTest {
         assertParseFailure(parser, STATUS_DESC_CHEF + validExpectedJobString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
 
+        // multiple industries
+        assertParseFailure(parser, INDUSTRY_DESC_CHEF + validExpectedJobString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INDUSTRY));
+
         // multiple fields repeated
         assertParseFailure(parser,
             validExpectedJobString + COMPANY_DESC_CHEF + ROLE_DESC_CHEF
-                + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER
+                + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + INDUSTRY_DESC_CLEANER
                 + validExpectedJobString,
-            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_INDUSTRY));
 
         // invalid value followed by valid value
 
@@ -75,6 +79,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_STATUS_DESC + validExpectedJobString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
 
+        // invalid industry
+        assertParseFailure(parser, INVALID_INDUSTRY_DESC + validExpectedJobString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INDUSTRY));
+
         // valid value followed by invalid value
 
         // invalid role
@@ -92,6 +100,10 @@ public class AddCommandParserTest {
         // invalid status
         assertParseFailure(parser, validExpectedJobString + INVALID_STATUS_DESC,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
+
+        // invalid industry
+        assertParseFailure(parser, validExpectedJobString + INVALID_INDUSTRY_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INDUSTRY));
     }
 
     @Test
