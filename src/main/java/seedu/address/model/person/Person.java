@@ -62,30 +62,35 @@ public class Person {
 
     /**
      * Adds group to persons existing groupList
+     *
      * @param group to be added to person groupList
      */
     public void addGroup(Group group) throws CommandException {
         requireNonNull(group);
         if (this.personGroups.contains(group)) {
-            throw new CommandException(String.format("%s is already in this group: %s", this.name.fullName, group.getGroupName()));
+            throw new CommandException(
+                String.format("%s is already in this group: %s", this.name.fullName, group.getGroupName()));
         }
         this.personGroups.add(group);
     }
 
     /**
      * Removes group from persons existing groupList
+     *
      * @param group to be removed from person groupList
      */
     public void removeGroup(Group group) throws CommandException {
         requireNonNull(group);
         if (!this.personGroups.contains(group)) {
-            throw new CommandException(String.format("%s is not in this group: %s", this.name.fullName, group.getGroupName()));
+            throw new CommandException(
+                String.format("%s is not in this group: %s", this.name.fullName, group.getGroupName()));
         }
         this.personGroups.remove(group);
     }
 
     /**
      * Check whether person is part of group
+     *
      * @param group group to check
      * @return boolean depending on whether person is in group
      */
@@ -99,7 +104,7 @@ public class Person {
      */
     public boolean isSamePerson(Person otherPerson) {
         return isSameName(otherPerson) && isSamePhone(otherPerson)
-                && isSameEmail(otherPerson);
+            && isSameEmail(otherPerson);
     }
 
     /**
@@ -112,7 +117,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -125,7 +130,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getPhone().equals(getPhone());
+            && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -137,7 +142,7 @@ public class Person {
             return true;
         }
         return otherPerson != null
-                && otherPerson.getEmail().equals(getEmail());
+            && otherPerson.getEmail().equals(getEmail());
     }
 
     public boolean nameEquals(String personName) {
@@ -161,9 +166,9 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && personGroups.equals(otherPerson.personGroups);
+            && phone.equals(otherPerson.phone)
+            && email.equals(otherPerson.email)
+            && personGroups.equals(otherPerson.personGroups);
     }
 
     @Override
@@ -175,11 +180,11 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("groups", personGroups)
-                .toString();
+            .add("name", name)
+            .add("phone", phone)
+            .add("email", email)
+            .add("groups", personGroups)
+            .toString();
     }
 
     public FreeTime getFreeTime() {

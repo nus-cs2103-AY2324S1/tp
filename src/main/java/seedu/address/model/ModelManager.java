@@ -113,7 +113,7 @@ public class ModelManager implements Model {
 
     @Override
     public Person deletePerson(String personName) throws CommandException {
-        Person person =addressBook.getPerson(personName);
+        Person person = addressBook.getPerson(personName);
         addressBook.removePerson(person);
         return person;
     }
@@ -152,7 +152,7 @@ public class ModelManager implements Model {
      * {@code key} must exist in the address book.
      */
     public Group deleteGroup(String groupName) throws CommandException {
-        Group group =addressBook.getGroup(groupName);
+        Group group = addressBook.getGroup(groupName);
         addressBook.removeGroup(group);
         return group;
     }
@@ -175,8 +175,9 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return filteredGroups;
-    };
+    }
 
+    ;
 
 
     @Override
@@ -218,13 +219,14 @@ public class ModelManager implements Model {
 
     /**
      * Assign person to group
+     *
      * @param person person to be grouped
-     * @param group group in consideration
+     * @param group  group in consideration
      * @throws CommandException if person has already been assigned to group
      */
     private void assignGroup(Person person, Group group) throws CommandException {
-       group.addPerson(person);
-       person.addGroup(group);
+        group.addPerson(person);
+        person.addGroup(group);
     }
 
     @Override
@@ -239,7 +241,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException{
+    public void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
         requireNonNull(toAddPerson);
         Person person = addressBook.getPerson(toAddPerson.fullName);
         person.addFreeTime(toAddFreeTime);
@@ -248,8 +250,9 @@ public class ModelManager implements Model {
 
     /**
      * Assign person to group
+     *
      * @param person person to be grouped
-     * @param group group in consideration
+     * @param group  group in consideration
      * @throws CommandException if person has already been assigned to group
      */
     private void unassignGroup(Person person, Group group) throws CommandException {
@@ -275,8 +278,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
 }

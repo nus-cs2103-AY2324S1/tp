@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 public class DeletePersonCommand extends DeleteCommand {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     private final String personName;
+
     public DeletePersonCommand(String personName) {
         this.personName = personName;
     }
@@ -33,6 +34,7 @@ public class DeletePersonCommand extends DeleteCommand {
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName().fullName));
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -51,7 +53,7 @@ public class DeletePersonCommand extends DeleteCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", personName)
-                .toString();
+            .add("name", personName)
+            .toString();
     }
 }

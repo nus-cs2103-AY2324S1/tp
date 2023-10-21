@@ -9,9 +9,10 @@ import seedu.address.model.person.Person;
 
 import static java.util.Objects.requireNonNull;
 
-public class DeleteGroupCommand extends DeleteCommand{
+public class DeleteGroupCommand extends DeleteCommand {
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
     private final String groupName;
+
     public DeleteGroupCommand(String groupName) {
         this.groupName = groupName;
     }
@@ -33,6 +34,7 @@ public class DeleteGroupCommand extends DeleteCommand{
 
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete.getName()));
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -51,7 +53,7 @@ public class DeleteGroupCommand extends DeleteCommand{
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("group name", groupName)
-                .toString();
+            .add("group name", groupName)
+            .toString();
     }
 }

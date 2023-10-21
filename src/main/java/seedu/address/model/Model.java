@@ -16,7 +16,9 @@ import seedu.address.model.person.Person;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
@@ -54,7 +56,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -88,14 +92,19 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered group list */
+    /**
+     * Returns an unmodifiable view of the filtered group list
+     */
     ObservableList<Group> getFilteredGroupList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
@@ -120,16 +129,18 @@ public interface Model {
 
     /**
      * Assign person to group and return corresponding person and group object in a pair
+     *
      * @param personName String representing person name
-     * @param groupName String representing group name
+     * @param groupName  String representing group name
      * @return Pair representing Person and Group object of interest
      */
     public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException;
 
     /**
      * Unassign group and return corresponding person and group object in a pair
+     *
      * @param personName String representing person name
-     * @param groupName String representing group name
+     * @param groupName  String representing group name
      * @return Pair representing Person and Group object of interest
      */
     Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException;

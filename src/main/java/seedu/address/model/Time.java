@@ -8,35 +8,50 @@ import java.time.format.DateTimeFormatter;
 
 public class Time {
 
-    public static final String MESSAGE_CONSTRAINTS = "The format of a time should be: mon 1200, the word is 1st 3 " +
-            "letters of a day and the time is in 24 hour format";
+    public static final String MESSAGE_CONSTRAINTS = "The format of a time should be: mon 1200, the word is 1st 3 "
+        + "letters of a day and the time is in 24 hour format";
 
     private static final String DAY_REGEX = "^(?i)(mon|tue|wed|thu|fri|sat|sun)";
     private static final String TIME_REGEX = "(0[0-9]|1[0-9]|2[0-3])[0-5][0-9]";
     public static final String VALIDATION_REGEX = DAY_REGEX + " " + TIME_REGEX;
 
-    DayOfWeek day;
-    LocalTime hour;
+    private DayOfWeek day;
+    private LocalTime hour;
 
+    /**
+     * Time constructor.
+     * @param day The day of the week.
+     * @param hour The time of the day.
+     */
     public Time(DayOfWeek day, LocalTime hour) {
         this.day = day;
         this.hour = hour;
     }
 
+    /**
+     * Checks if the time is valid.
+     * @param timeString Time in string format.
+     * @return true if the sting is valid.
+     */
     public static boolean isValidTime(String timeString) {
         return timeString.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Compares this with another time object.
+     * @param otherTime The other time object.
+     * @return Returns an int to indicate if it less than/more than/equal.
+     */
     public int compareTo(Time otherTime) {
         requireNonNull(otherTime);
         System.out.println(this.day.compareTo(otherTime.day));
         return this.day.compareTo(otherTime.day) == 0 ? this.hour.compareTo(otherTime.hour)
-                : this.day.compareTo(otherTime.day);
+            : this.day.compareTo(otherTime.day);
     }
 
     @Override
     public String toString() {
-        return day.toString().substring(0 ,3) + " " + hour.format(DateTimeFormatter.ofPattern("HHmm"));
+        return day.toString().substring(0, 3) + " " + hour.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
     public static DayOfWeek decodeDay(String day) {
@@ -52,7 +67,8 @@ public class Time {
             return DayOfWeek.FRIDAY;
         } else if (DayOfWeek.SATURDAY.toString().toLowerCase().contains(day)) {
             return DayOfWeek.SATURDAY;
-        } else
+        } else {
             return DayOfWeek.SUNDAY;
+        }
     }
 }

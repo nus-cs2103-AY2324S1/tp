@@ -13,16 +13,17 @@ public abstract class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person with the name provided.\n"
-            + "Parameters: " + PREFIX_NAME
-            + "NAME (must be the full name of a person in the existing contactlist)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Nicholas Lee";
+        + ": Deletes the person with the name provided.\n"
+        + "Parameters: " + PREFIX_NAME
+        + "NAME (must be the full name of a person in the existing contactlist)\n"
+        + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Nicholas Lee";
 
     public static final String MESSAGE_NO_PERSON_WITH_NAME_FOUND = "No one with such name found.\n"
-            + "Please provide the person's full name as in the existing contactlist.";
+        + "Please provide the person's full name as in the existing contactlist.";
 
 
-    public DeleteCommand() {}
+    public DeleteCommand() {
+    }
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;

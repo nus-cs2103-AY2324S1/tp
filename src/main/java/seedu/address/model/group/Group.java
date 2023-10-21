@@ -1,16 +1,12 @@
 package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
-
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
-
-import java.util.List;
 
 /**
  * Class representing a group
@@ -56,11 +52,12 @@ public class Group {
         }
 
         return otherGroup != null
-                && this.equals(otherGroup);
+            && this.equals(otherGroup);
     }
 
     /**
      * Check if same group according to name since groupName is unique
+     *
      * @param groupName of interest
      * @return whether group is the same group
      */
@@ -70,6 +67,7 @@ public class Group {
 
     /**
      * Returns if the name of the group is valid.
+     *
      * @param name The name of the group
      * @return The validity of the group name.
      */
@@ -86,7 +84,8 @@ public class Group {
     public void removePerson(Person toRemove) throws CommandException {
         requireNonNull(toRemove);
         if (!contains(toRemove)) {
-            throw new CommandException(String.format("%s is not in this group: %s", toRemove.getName().fullName, this.groupName));
+            throw new CommandException(
+                String.format("%s is not in this group: %s", toRemove.getName().fullName, this.groupName));
         }
         listOfGroupMates.remove(toRemove);
     }
@@ -106,7 +105,8 @@ public class Group {
     public void addPerson(Person personToAdd) throws CommandException {
         requireNonNull(personToAdd);
         if (this.contains(personToAdd)) {
-            throw new CommandException(String.format("%s is already in this group: %s", personToAdd.getName().fullName, this.groupName));
+            throw new CommandException(
+                String.format("%s is already in this group: %s", personToAdd.getName().fullName, this.groupName));
         }
         listOfGroupMates.add(personToAdd);
     }
@@ -114,8 +114,8 @@ public class Group {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Group name", groupName)
-                .toString();
+            .add("Group name", groupName)
+            .toString();
     }
 
     public void printGrpMates() {

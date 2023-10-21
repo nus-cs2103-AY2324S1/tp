@@ -1,13 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDINTERVAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
@@ -25,7 +21,8 @@ public class AddTimeCommandParser implements Parser<AddTimeCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_FREETIME, PREFIX_ENDINTERVAL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FREETIME) //find a way to separate error msg when ";" is missing
+        //find a way to separate error msg when ";" is missing
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FREETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTimeCommand.MESSAGE_USAGE));
         }
