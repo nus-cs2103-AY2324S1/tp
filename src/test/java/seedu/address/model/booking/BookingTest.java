@@ -33,27 +33,28 @@ public class BookingTest {
         // null -> returns false
         assertFalse(ALICE.isSameBooking(null));
 
-        // same room, all other attributes different -> returns true
+        // same room, all other attributes different -> returns false
         Booking editedAlice = new BookingBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withBookingPeriod(VALID_BOOKING_PERIOD_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.isSameBooking(editedAlice));
+
+        // same booking period, all other attributes different -> returns false
+        editedAlice = new BookingBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.isSameBooking(editedAlice));
+
+        // same room and booking period, all other attributes different -> returns true
+        editedAlice = new BookingBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameBooking(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new BookingBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // different booking period, all other attributes same -> returns false
+        editedAlice = new BookingBuilder(ALICE).withBookingPeriod(VALID_BOOKING_PERIOD_BOB).build();
         assertFalse(ALICE.isSameBooking(editedAlice));
 
         // different room, all other attributes same -> returns false
         editedAlice = new BookingBuilder(ALICE).withRoom(VALID_ROOM_BOB).build();
         assertFalse(ALICE.isSameBooking(editedAlice));
-
-        // name differs in case, all other attributes same -> returns false
-        Booking editedBob = new BookingBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameBooking(editedBob));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new BookingBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameBooking(editedBob));
     }
 
     @Test

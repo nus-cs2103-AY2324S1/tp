@@ -79,6 +79,23 @@ public class BookingPeriod {
         }
     }
 
+    /**
+     * Checks if the current BookingPeriod overlaps with another BookingPeriod.
+     * Two BookingPeriods are considered to overlap if there is any common date between them.
+     *
+     * @param other The BookingPeriod to compare against.
+     * @return True if the BookingPeriods overlap; false otherwise.
+     */
+    public boolean overlaps(BookingPeriod other) {
+        if (other == null) {
+            return false;
+        }
+
+        //A period A overlaps with another period B if:
+        // A starts before B AND A ends after B starts.
+
+        return !(checkInDate.isAfter(other.checkOutDate)) || checkOutDate.isBefore(other.checkInDate);
+    }
 
     @Override
     public String toString() {

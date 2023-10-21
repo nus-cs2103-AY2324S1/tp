@@ -77,7 +77,7 @@ public class Booking {
 
         return otherBooking != null
                 && otherBooking.getRoom().equals(getRoom())
-                && otherBooking.getName().equals(getName());
+                && otherBooking.getBookingPeriod().overlaps(getBookingPeriod());
     }
 
     /**
