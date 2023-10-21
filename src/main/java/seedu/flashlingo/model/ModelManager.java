@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final Flashlingo flashlingo;
     private final UserPrefs userPrefs;
     private final FilteredList<FlashCard> filteredFlashCards;
+    //private final FilteredList<FlashCard> tempFlashCards;
     private int numberOfFlashCards;
     private int numberOfRememberedWords;
 

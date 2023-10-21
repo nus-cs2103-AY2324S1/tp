@@ -3,6 +3,7 @@ package seedu.flashlingo.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
+import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
 
@@ -18,6 +19,8 @@ public class YesCommand extends Command {
         + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
+
+    public static final String MESSAGE_NOT_START_REVIEW = "Haven't start review!";
     private final String isMemorized;
 
     /**
@@ -30,8 +33,14 @@ public class YesCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+//        if (!model.isInReview()) {
+//            throw new CommandException(MESSAGE_NOT_START_REVIEW);
+//        }
         model.incrementRememberedWords();
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        return new CommandResult(MESSAGE_SUCCESS + "\n"
+                + String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW + "\n"
+                        + model.getFilteredFlashCardList(),
+                model.getFilteredFlashCardList().size()));
     }
 
     @Override
