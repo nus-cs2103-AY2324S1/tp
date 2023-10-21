@@ -230,7 +230,7 @@ This section describes some noteworthy details on how certain features are imple
  * TUTOR_INDEX parameter is compulsory.
   </div>
 
- ### Implementation
+ #### Implementation
 
  The bulk of the implementation details is identical to that of other commands.
  As such only details specific to `delete-t` will be discussed.
