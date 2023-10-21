@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Gender;
@@ -32,8 +33,6 @@ public class TableCommand extends Command {
             + "[" + PREFIX_SEC_LEVEL + "] "
             + "[" + PREFIX_SUBJECT + "]...\n"
             + "Example: " + COMMAND_WORD + PREFIX_GENDER;
-
-    public static final String MESSAGE_SHOW_SUCCESS = "Table is shown in another window";
 
     public static final String MESSAGE_INCORRECT_COMMAND = "To view a table, please do one of the following:\n"
                                                         + "table " + PREFIX_GENDER + " or\n"
@@ -164,6 +163,28 @@ public class TableCommand extends Command {
         }
 
         return new SubjectTableCommandResult(columnValueMapping);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TableCommand)) {
+            return false;
+        }
+
+        TableCommand otherCommand = (TableCommand) other;
+        return otherCommand.args.equals(this.args);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("category: ", args)
+                .toString();
     }
 
 }

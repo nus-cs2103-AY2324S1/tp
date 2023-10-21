@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
-
 import java.util.Map;
 import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
+
 
 /**
  * Represents the command result for sec level table generation.
@@ -75,7 +77,7 @@ public class SecLevelTableCommandResult extends CommandResult {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GenderTableCommandResult)) {
+        if (!(other instanceof SecLevelTableCommandResult)) {
             return false;
         }
 
@@ -95,10 +97,11 @@ public class SecLevelTableCommandResult extends CommandResult {
 
     @Override
     public String toString() {
-        return super.toString() + "\n"
-                + "Sec 1: " + sec1Count
-                + "Sec 2: " + sec2Count
-                + "Sec 3: " + sec3Count
-                + "Sec 4: " + sec4Count;
+        return new ToStringBuilder(this)
+                .add("feedbackToUser", feedbackToUserMessage)
+                .add("showHelp", isShowHelp())
+                .add("showTable", isShowTable())
+                .add("exit", isExit())
+                .toString();
     }
 }

@@ -19,6 +19,7 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.TableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordPredicate;
 import seedu.address.model.person.Student;
@@ -68,6 +69,17 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_table() throws Exception {
+        TableCommand command1 = (TableCommand) parser.parseCommand(TableCommand.COMMAND_WORD + " g/");
+        TableCommand command2 = (TableCommand) parser.parseCommand(TableCommand.COMMAND_WORD + " l/");
+        TableCommand command3 = (TableCommand) parser.parseCommand(TableCommand.COMMAND_WORD + " s/");
+
+        assertEquals(new TableCommand("g/"), command1);
+        assertEquals(new TableCommand("l/"), command2);
+        assertEquals(new TableCommand("s/"), command3);
     }
 
     @Test
