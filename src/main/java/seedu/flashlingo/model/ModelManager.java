@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final Flashlingo flashlingo;
     private final UserPrefs userPrefs;
     private final FilteredList<FlashCard> filteredFlashCards;
+    //private final FilteredList<FlashCard> tempFlashCards;
     private int numberOfFlashCards;
     private int numberOfRememberedWords;
     private boolean isReviewSession = false;
@@ -140,6 +141,12 @@ public class ModelManager implements Model {
         Predicate<FlashCard> t = new NextReviewWordPredicate(toBeReviewed);
         updateFilteredFlashCardList(t);
         updateReviewSessionState();
+    }
+
+    @Override
+    public void rememberWord() {
+        FlashCard flashCard = getFilteredFlashCardList().get(0);
+        flashCard.updateLevel();
     }
     //=========== Filtered Person List Accessors =============================================================
 

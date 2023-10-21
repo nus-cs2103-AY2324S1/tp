@@ -94,4 +94,5 @@ public interface Model {
     int getNumberOfRememberedWords();
     void incrementRememberedWords();
     void nextReviewWord() throws CommandException;
+    void rememberWord();
 }

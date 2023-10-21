@@ -18,20 +18,23 @@ public class YesCommand extends Command {
         + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
-    private final String isMemorized;
+
+    public static final String MESSAGE_NOT_START_REVIEW = "Haven't start review!";
 
     /**
      * Creates an YesCommand.
      */
-    public YesCommand() {
-        this.isMemorized = input;
-    }
+    public YesCommand() {}
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.incrementRememberedWords();
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        if (!model.isReviewSession()) {
+            throw new CommandException(MESSAGE_NOT_START_REVIEW);
+        }
+        model.rememberWord();
+        model.nextReviewWord();
+        return new CommandResult(MESSAGE_SUCCESS + "\n");
     }
 
     @Override
@@ -51,7 +54,6 @@ public class YesCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .add("Yes", isMemorized)
           .toString();
     }
 }
