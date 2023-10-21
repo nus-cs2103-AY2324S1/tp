@@ -34,23 +34,10 @@ public class TableWindow extends UiPart<Stage> {
     }
 
     /**
-     * Set up the root control, scene and css for the table window.
-     */
-    public void initialize() {
-        BorderPane root = new BorderPane();
-        root.setCenter(table);
-
-        Scene scene = new Scene(root, 500, 300);
-        scene.getStylesheets().add("resources/view/TableWindow.css");
-        super.getRoot().setScene(scene);
-    }
-
-
-    /**
      * Creates a table with table command result instance containing
      * given column titles and values.
      */
-    private TableView<? extends CommandResult> createTable(CommandResult commandResult) {
+    public static TableView<? extends CommandResult> createTable(CommandResult commandResult) {
         if (commandResult instanceof GenderTableCommandResult) {
             GenderTableCommandResult genderTableCommandResult = (GenderTableCommandResult) commandResult;
             return createGenderTable(genderTableCommandResult);
@@ -68,7 +55,7 @@ public class TableWindow extends UiPart<Stage> {
      * @param commandResult GenderTableCommandResult containing column titles and counts mapping.
      * @return a TableView instance generated with given column titles and counts from argument passed in.
      */
-    private TableView<GenderTableCommandResult> createGenderTable(GenderTableCommandResult commandResult) {
+    private static TableView<GenderTableCommandResult> createGenderTable(GenderTableCommandResult commandResult) {
         TableView<GenderTableCommandResult> tableToCreate = new TableView<>();
 
         TableColumn<GenderTableCommandResult, Long> maleColumn = new TableColumn<>("Male");
@@ -91,7 +78,7 @@ public class TableWindow extends UiPart<Stage> {
      * @param commandResult SecLevelTableCommand instance containing column titles and counts mapping.
      * @return a TableView instance generated with given column titles and counts from argument passed in.
      */
-    private TableView<SecLevelTableCommandResult> createSecLevelTable(SecLevelTableCommandResult commandResult) {
+    private static TableView<SecLevelTableCommandResult> createSecLevelTable(SecLevelTableCommandResult commandResult) {
         TableView<SecLevelTableCommandResult> tableToCreate = new TableView<>();
 
         TableColumn<SecLevelTableCommandResult, Long> sec1Column = new TableColumn<>("Sec 1");
@@ -120,7 +107,7 @@ public class TableWindow extends UiPart<Stage> {
      * @param commandResult SubjectTableCommandResult instance containing column titles and counts mapping.
      * @return a TableView instance generated with given column titles and counts from argument passed in.
      */
-    private TableView<SubjectTableCommandResult> createSubjectTable(SubjectTableCommandResult commandResult) {
+    private static TableView<SubjectTableCommandResult> createSubjectTable(SubjectTableCommandResult commandResult) {
         TableView<SubjectTableCommandResult> tableToCreate = new TableView<>();
 
         TableColumn<SubjectTableCommandResult, Long> csColumn = new TableColumn<>(Subject.CS);
@@ -148,6 +135,18 @@ public class TableWindow extends UiPart<Stage> {
         tableToCreate.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         return tableToCreate;
+    }
+
+    /**
+     * Set up the root control, scene and css for the table window.
+     */
+    public void initialize() {
+        BorderPane root = new BorderPane();
+        root.setCenter(table);
+
+        Scene scene = new Scene(root, 500, 300);
+        scene.getStylesheets().add("resources/view/TableWindow.css");
+        super.getRoot().setScene(scene);
     }
 
     /**
