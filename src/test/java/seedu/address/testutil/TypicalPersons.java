@@ -43,21 +43,21 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withSubject("Chemistry")
-            .withDay("Tues")
+            .withDay("Tue")
             .withBegin("0900")
             .withEnd("1100")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withSubject("Biology")
-            .withDay("Thurs")
+            .withDay("Thu")
             .withBegin("1000")
             .withEnd("1200")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withSubject("Physics")
-            .withDay("Thurs")
+            .withDay("Thu")
             .withBegin("1100")
             .withEnd("1300")
             .withTags("friends").build();
@@ -94,7 +94,7 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withSubject("English")
-            .withDay("Tues")
+            .withDay("Tue")
             .withBegin("0900")
             .withEnd("1100")
             .build();

@@ -11,8 +11,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Day {
 
     public static final String MESSAGE_CONSTRAINTS = "Day can take any of the following choices: \n"
-            + "(Mon/Tues/Wed/Thurs/Fri/Sat/Sun)";
-    public static final String VALIDATION_REGEX = "(?i)^(Mon|Tues|Wed|Thurs|Fri|Sat|Sun|Thu)$";
+            + "(Mon/Tue/Wed/Thu/Fri/Sat/Sun)";
+    public static final String VALIDATION_REGEX = "(?i)^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)$";
     public final String value;
 
     /**
@@ -23,7 +23,36 @@ public class Day {
     public Day(String day) {
         requireNonNull(day);
         checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
-        value = day;
+        value = parseDay(day);
+    }
+
+    public String parseDay(String input) {
+        String day = input.toLowerCase();
+        String result = "";
+        switch (day) {
+            case "mon":
+                result = "Mon";
+                break;
+            case "tue":
+                result = "Tue";
+                break;
+            case "wed":
+                result = "Wed";
+                break;
+            case "thu":
+                result = "Thu";
+                break;
+            case "fri":
+                result = "Fri";
+                break;
+            case "sat":
+                result = "Sat";
+                break;
+            case "sun":
+                result = "Sun";
+                break;
+        }
+        return result;
     }
 
     public static boolean isValidDay(String test) {

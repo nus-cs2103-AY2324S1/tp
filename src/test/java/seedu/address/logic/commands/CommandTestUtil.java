@@ -40,7 +40,7 @@ public class CommandTestUtil {
     public static final String VALID_SUBJECT_AMY = "Maths";
     public static final String VALID_SUBJECT_BOB = "Physics";
     public static final String VALID_DAY_AMY = "Mon";
-    public static final String VALID_DAY_BOB = "Tues";
+    public static final String VALID_DAY_BOB = "Tue";
     public static final String VALID_BEGIN_AMY = "1200";
     public static final String VALID_BEGIN_BOB = "1300";
     public static final String VALID_END_AMY = "1400";
