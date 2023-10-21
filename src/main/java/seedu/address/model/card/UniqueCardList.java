@@ -29,6 +29,8 @@ public class UniqueCardList implements Iterable<Card> {
     private final ObservableList<Card> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    private final Comparator<Card> cardComparator = new CardPracticeDateComparator();
+
     /**
      * Returns true if the list contains an equivalent card as the given argument.
      */
@@ -55,10 +57,11 @@ public class UniqueCardList implements Iterable<Card> {
     }
 
     /**
-     * Sort the list based on card priorities.
+     * Sort the list based on the card's next practice date.
      */
     private void sort() {
-        internalList.sort(Comparator.comparingInt(Card::getPriority));
+        // internalList.sort(Comparator.comparingInt(Card::getPriority));
+        internalList.sort(cardComparator);
     }
 
     /**

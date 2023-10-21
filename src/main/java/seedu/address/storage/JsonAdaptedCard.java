@@ -8,29 +8,31 @@ import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 
+import java.time.LocalDateTime;
+
 /**
  * Jackson-friendly version of {@link Card}.
  */
 class JsonAdaptedCard {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "card's %s field is missing!";
+    public static final String NEXT_PRACTICE_DATE_FIELD_NAME = "next practice date";
 
     private final String question;
     private final String answer;
     private final String difficulty;
-
+    private final String nextPracticeDate;
 
     /**
      * Constructs a {@code JsonAdaptedCard} with the given card details.
      */
     @JsonCreator
     public JsonAdaptedCard(@JsonProperty("question") String question, @JsonProperty("answer") String answer,
-                           @JsonProperty("difficulty") String difficulty) {
+                           @JsonProperty("difficulty") String difficulty, @JsonProperty("next-practice-date") String nextPracticeDate) {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
-
-
+        this.nextPracticeDate = nextPracticeDate;
     }
 
     /**
@@ -40,6 +42,7 @@ class JsonAdaptedCard {
         question = source.getQuestion().question;
         answer = source.getAnswer().answer;
         difficulty = source.getDifficulty();
+        nextPracticeDate = source.getNextPracticeDate().toString();
     }
 
     /**
@@ -70,6 +73,12 @@ class JsonAdaptedCard {
 
         final Answer modelAnswer = new Answer(answer);
 
-        return new Card(modelQuestion, modelAnswer, difficulty);
+        if (nextPracticeDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NEXT_PRACTICE_DATE_FIELD_NAME));
+        }
+
+        final LocalDateTime modelNextPracticeDate = LocalDateTime.parse(nextPracticeDate);
+
+        return new Card(modelQuestion, modelAnswer, difficulty, modelNextPracticeDate);
     }
 }

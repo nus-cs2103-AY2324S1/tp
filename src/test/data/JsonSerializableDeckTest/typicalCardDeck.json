@@ -3,18 +3,23 @@
 
   "cards" : [ {
     "question" : "Low Priority?",
-    "answer" : "True"
+    "answer" : "True",
+    "next-practice-date": "+999999999-12-31T23:59:59.999999999"
   }, {
     "question" : "R-Format instruction opcode",
-    "answer" : "0"
+    "answer" : "0",
+    "next-practice-date": "2018-11-03T12:45:30"
   }, {
-      "question" : "What is the language used for this mod?",
-      "answer" : "Source"
+    "question" : "What is the language used for this mod?",
+    "answer" : "Source",
+    "next-practice-date": "2018-11-03T12:45:30"
   }, {
     "question" : "Name the 3 relations",
-    "answer" : "Reflexive, Symmetric, Transitive"
+    "answer" : "Reflexive, Symmetric, Transitive",
+    "next-practice-date": "2018-11-03T12:45:30"
   }, {
     "question" : "High Priority?",
-    "answer" : "True"
+    "answer" : "True",
+    "next-practice-date": "-999999999-01-01T00:00:00"
   } ]
 }

@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -35,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
         Answer answer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
 
-        Card card = new Card(question, answer, "new");
+        Card card = new Card(question, answer, "new", LocalDateTime.now());
 
         return new AddCommand(card);
     }

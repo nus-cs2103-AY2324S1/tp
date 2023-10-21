@@ -2,6 +2,7 @@ package seedu.address.model.card;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -10,21 +11,21 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents a Card in lesSON.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Card {
+public class Card implements Comparable<Card>{
     private final Question question;
     private final Answer answer;
     private String difficulty;
-    private Integer priority;
+    private LocalDateTime nextPracticeDate;
 
     /**
      * Every field must be present and not null.
      */
-    public Card(Question question, Answer answer, String difficulty) {
-        requireAllNonNull(question, answer);
+    public Card(Question question, Answer answer, String difficulty, LocalDateTime nextPracticeDate) {
+        requireAllNonNull(question, answer, nextPracticeDate);
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
-        this.priority = Integer.MAX_VALUE;
+        this.nextPracticeDate = nextPracticeDate;
     }
 
     public void setDifficulty(String difficulty) {
@@ -42,11 +43,17 @@ public class Card {
     public Answer getAnswer() {
         return answer;
     }
-    public Integer getPriority() {
-        return priority;
+
+    public LocalDateTime getNextPracticeDate() {
+        return this.nextPracticeDate;
     }
-    public void setPriority(Integer priority) {
-        this.priority = priority;
+
+    /**
+     * Sets a new practice date.
+     * @param nextPracticeDate the new practice date.
+     */
+    public void setNextPracticeDate(LocalDateTime nextPracticeDate) {
+        this.nextPracticeDate = nextPracticeDate;
     }
 
     /**
@@ -94,6 +101,11 @@ public class Card {
                 .add("question", question)
                 .add("answer", answer)
                 .toString();
+    }
+
+    @Override
+    public int compareTo(Card other) {
+        return this.nextPracticeDate.compareTo(other.nextPracticeDate);
     }
 
     public String questiontoString() {
