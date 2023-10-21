@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ROOM + "1 "
-            + PREFIX_BOOKING_PERIOD + "2023-01-01 to 2023-01-02 "
+            + PREFIX_BOOKING_PERIOD + "2023-01-01 08:00 to 2023-01-02 12:00 "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
