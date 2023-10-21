@@ -23,11 +23,8 @@ public class StartCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.isReviewSession()) {
-            throw new CommandException(MESSAGE_STATE_REPEATED);
-        }
-        model.nextReviewWord();
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        String response = model.nextReviewWord();
+        return new CommandResult(MESSAGE_SUCCESS + "\n" + response);
     }
 
     @Override

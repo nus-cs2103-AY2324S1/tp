@@ -93,6 +93,6 @@ public interface Model {
     int getNumberOfFlashCards();
     int getNumberOfRememberedWords();
     void incrementRememberedWords();
-    void nextReviewWord() throws CommandException;
-    void rememberWord();
+    String nextReviewWord() throws CommandException;
+    void rememberWord(boolean isUpdated);
 }

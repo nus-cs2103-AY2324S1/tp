@@ -65,7 +65,7 @@ public class FlashlingoParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
         case NoCommand.COMMAND_WORD:
-            return new NoCommandParser().parse(arguments);
+            return new NoCommand();
         case LanguageCommand.COMMAND_WORD:
             return new LanguageCommandParser().parse(arguments);
         case YesCommand.COMMAND_WORD:
