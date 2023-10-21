@@ -219,7 +219,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void showLesson(Lesson lesson) { //TODO
+    public void showLesson(Lesson lesson) {
         requireNonNull(lesson);
         if (ui != null) {
             ui.showLessonDetails(lesson);
