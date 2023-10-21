@@ -47,7 +47,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
 
 
-        switch (keywords[0]) {
+        switch (keywords[0].toUpperCase()) {
         case "":
         case "SCHEDULE":
             return new ListCommand(State.SCHEDULE);

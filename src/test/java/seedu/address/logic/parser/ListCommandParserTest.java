@@ -16,7 +16,7 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_validArgs_schedule() {
-        assertParseSuccess(parser, "SCHEDULE", new ListCommand(State.SCHEDULE));
+        assertParseSuccess(parser, "schedule", new ListCommand(State.SCHEDULE));
     }
 
     @Test
@@ -26,51 +26,45 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_validArgs_students() {
-        assertParseSuccess(parser, "STUDENTS", new ListCommand(State.STUDENT));
+        assertParseSuccess(parser, "students", new ListCommand(State.STUDENT));
     }
 
     @Test
     public void parse_validArgs_studentsPhone() {
-        assertParseSuccess(parser, "STUDENTS phone", new ListCommand(State.STUDENT, new String[]{"phone"}));
+        assertParseSuccess(parser, "students phone", new ListCommand(State.STUDENT, new String[]{"phone"}));
     }
 
     @Test
     public void parse_validArgs_studentsPhoneEmail() {
-        assertParseSuccess(parser, "STUDENTS phone email",
+        assertParseSuccess(parser, "students phone email",
                 new ListCommand(State.STUDENT, new String[]{"phone", "email"}));
     }
 
     @Test
     public void parse_validArgs_none() {
-        assertParseSuccess(parser, "STUDENTS none", new ListCommand(State.STUDENT, new String[]{"none"}));
+        assertParseSuccess(parser, "students none", new ListCommand(State.STUDENT, new String[]{"none"}));
     }
 
     @Test
     public void parse_validArgs_noneWithOthers() {
-        assertParseSuccess(parser, "STUDENTS phone none email", new ListCommand(State.STUDENT, new String[]{"none"}));
+        assertParseSuccess(parser, "students phone none email", new ListCommand(State.STUDENT, new String[]{"none"}));
     }
 
     @Test
     public void parse_validArgs_all() {
-        assertParseSuccess(parser, "STUDENTS all", new ListCommand(State.STUDENT,
+        assertParseSuccess(parser, "students all", new ListCommand(State.STUDENT,
                 parser.DISPLAYABLE_FIELDS.toArray(new String[0])));
     }
 
     @Test
     public void parse_validArgs_allWithOthers() {
-        assertParseSuccess(parser, "STUDENTS email all subjects",
+        assertParseSuccess(parser, "students email all subjects",
                 new ListCommand(State.STUDENT, parser.DISPLAYABLE_FIELDS.toArray(new String[0])));
     }
 
     @Test
     public void parse_invalidArgsKeyword_studentsGender() {
-        assertParseFailure(parser, "STUDENTS gender",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_invalidArgs_smallCaseThrowsParseException() {
-        assertParseFailure(parser, "student",
+        assertParseFailure(parser, "students gender",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 
