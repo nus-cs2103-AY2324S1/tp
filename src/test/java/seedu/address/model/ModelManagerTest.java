@@ -112,7 +112,7 @@ public class ModelManagerTest {
         modelManager.addInterview(STANDARD_INTERVIEW);
         assertTrue(modelManager.hasInterview(STANDARD_INTERVIEW));
     }
-    
+
     @Test
     public void deleteInterview_successfulInterviewDeletion_returnTrue() {
         modelManager.addInterview(STANDARD_INTERVIEW);
