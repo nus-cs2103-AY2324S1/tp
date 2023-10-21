@@ -36,6 +36,10 @@ public class PersonCardFieldBuilder {
         case "subjects":
             buildSubjects(person, fields, tags);
             break;
+        case "remark":
+            buildRemark(person, fields, tags);
+            break;
+
         default:
             break;
         }
@@ -65,6 +69,7 @@ public class PersonCardFieldBuilder {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+
     static void buildSubjects(Person person, VBox fields, FlowPane tags) {
         FlowPane subjects = new FlowPane();
         person.getSubjects().stream()
@@ -73,5 +78,14 @@ public class PersonCardFieldBuilder {
                         .add(new ColoredTextEntry(subject.subjectName.toString(), subject.getColour())));
         subjects.setHgap(10);
         fields.getChildren().add(subjects);
+    }
+
+    static void buildRemark(Person person, VBox fields, FlowPane tags) {
+        String remarkValue = person.getRemark().value;
+        if (!remarkValue.equals("")) {
+            Label remark = new Label(remarkValue);
+            remark.getStyleClass().add("cell_small_label");
+            fields.getChildren().add(remark);
+        }
     }
 }
