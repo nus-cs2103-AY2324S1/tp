@@ -96,8 +96,10 @@ public class FlashCard {
     /**
      * Update the flash card to next level
      */
-    public void updateLevel() {
-        originalLevel.upgradeLevel();
+    public void updateLevel(boolean isUpdated) {
+        if (isUpdated) {
+            originalLevel.upgradeLevel();
+        }
         updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
     }
 
