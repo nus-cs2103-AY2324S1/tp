@@ -25,7 +25,7 @@ public class SolveCommand extends Command {
             + "Parameters: DIFFICULTY (must not be empty)\n"
             + "Example: " + COMMAND_WORD + " 1" + " d/ easy";
 
-    public static final String MESSAGE_SOLVE_CARD_SUCCESS = "Solved Card: %1$s";
+    public static final String MESSAGE_SOLVE_CARD_SUCCESS = "%1$s";
 
     private final Index targetIndex;
 

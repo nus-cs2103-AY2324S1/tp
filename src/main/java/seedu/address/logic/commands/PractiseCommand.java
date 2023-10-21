@@ -24,7 +24,7 @@ public class PractiseCommand extends Command {
             + "Parameters: DIFFICULTY (must not be empty)\n"
             + "Example: " + COMMAND_WORD + " 1" + " d/ easy";
 
-    public static final String MESSAGE_PRACTISE_CARD_SUCCESS = "Practise Card: %1$s";
+    public static final String MESSAGE_PRACTISE_CARD_SUCCESS = "%1$s";
 
     private final Index targetIndex;
 
@@ -65,7 +65,7 @@ public class PractiseCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PractiseCommand)) {
+        if (!(other instanceof PractiseCommand) || other == null) {
             return false;
         }
 
