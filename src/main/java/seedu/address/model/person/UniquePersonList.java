@@ -8,104 +8,105 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.exceptions.DuplicateEmployeeException;
+import seedu.address.model.person.exceptions.EmployeeNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of employees that enforces uniqueness between its elements and does not allow nulls.
+ * An employee is considered unique by comparing using {@code Employee#isSameEmployee(Employee)}.
+ * As such, adding and updating of employees uses Employee#isSameEmployee(Employee) for equality to ensure
+ * that the employee being added or updated is unique in terms of identity in the UniquePersonList.
+ * However, the removal of an employee uses Employee#equals(Object) to ensure that the employee with
+ * exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Employee#isSameEmployee(Employee)
  */
-public class UniquePersonList implements Iterable<Person> {
+public class UniquePersonList implements Iterable<Employee> {
 
-    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Person> internalUnmodifiableList =
+    private final ObservableList<Employee> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Employee> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent employee as the given argument.
      */
-    public boolean contains(Person toCheck) {
+    public boolean contains(Employee toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameEmployee);
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an employee to the list.
+     * The employee must not already exist in the list.
      */
-    public void add(Person toAdd) {
+    public void add(Employee toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateEmployeeException();
         }
         internalList.add(toAdd);
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the employee {@code target} in the list with {@code editedEmployee}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The employee identity of {@code editedEmployee} must not be the same as another existing employee in the list.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setEmployee(Employee target, Employee editedEmployee) {
+        requireAllNonNull(target, editedEmployee);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new EmployeeNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-            throw new DuplicatePersonException();
+        if (!target.isSameEmployee(editedEmployee) && contains(editedEmployee)) {
+            throw new DuplicateEmployeeException();
         }
 
-        internalList.set(index, editedPerson);
+        internalList.set(index, editedEmployee);
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent employee from the list.
+     * The employee must exist in the list.
      */
-    public void remove(Person toRemove) {
+    public void remove(Employee toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new EmployeeNotFoundException();
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setEmployees(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code people}.
+     * {@code people} must not contain duplicate people.
      */
-    public void setPersons(List<Person> persons) {
-        requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
-            throw new DuplicatePersonException();
+    public void setEmployees(List<Employee> people) {
+        requireAllNonNull(people);
+        if (!employeesAreUnique(people)) {
+            throw new DuplicateEmployeeException();
         }
 
-        internalList.setAll(persons);
+        internalList.setAll(people);
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Person> asUnmodifiableObservableList() {
+    public ObservableList<Employee> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
     @Override
-    public Iterator<Person> iterator() {
+    public Iterator<Employee> iterator() {
         return internalList.iterator();
     }
 
@@ -135,12 +136,12 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code people} contains only unique people.
      */
-    private boolean personsAreUnique(List<Person> persons) {
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
+    private boolean employeesAreUnique(List<Employee> people) {
+        for (int i = 0; i < people.size() - 1; i++) {
+            for (int j = i + 1; j < people.size(); j++) {
+                if (people.get(i).isSameEmployee(people.get(j))) {
                     return false;
                 }
             }
