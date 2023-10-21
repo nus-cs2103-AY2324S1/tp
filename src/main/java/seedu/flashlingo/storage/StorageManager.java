@@ -45,7 +45,6 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
     // ================ Flashlingo methods ==============================
 
     @Override
