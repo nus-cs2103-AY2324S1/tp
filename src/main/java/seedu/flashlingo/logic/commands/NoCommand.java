@@ -17,9 +17,8 @@ public class NoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Indicates user hasn't memorized the word.\n"
         + "Example: " + COMMAND_WORD + " ";
 
-    public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
+    public static final String MESSAGE_SUCCESS = "It seems like that you did not memorize this word well.";
 
-    public static final String MESSAGE_NOT_START_REVIEW = "Haven't start review!";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
