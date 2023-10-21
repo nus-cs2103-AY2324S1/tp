@@ -19,7 +19,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditScheduleDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -69,11 +71,21 @@ public class CommandTestUtil {
     public static final EditTutorCommand.EditPersonDescriptor DESC_AMY;
     public static final EditTutorCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditScheduleCommand.EditScheduleDescriptor DESC_SCHEDULE_AMY;
+    public static final EditScheduleCommand.EditScheduleDescriptor DESC_SCHEDULE_BOB;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+    }
+
+    static {
+        DESC_SCHEDULE_AMY = new EditScheduleDescriptorBuilder().withStartTime(VALID_START_TIME_ONE)
+            .withEndTime(VALID_END_TIME_ONE).build();
+        DESC_SCHEDULE_BOB = new EditScheduleDescriptorBuilder().withStartTime(VALID_START_TIME_TWO)
+            .withEndTime(VALID_END_TIME_TWO).build();
     }
 
     /**
@@ -131,6 +143,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the schedule at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showScheduleAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredScheduleList().size());
+
+        Schedule schedule = model.getFilteredScheduleList().get(targetIndex.getZeroBased());
+        model.updateFilteredScheduleList(currSchedule -> currSchedule.equals(schedule));
+
+        assertEquals(1, model.getFilteredScheduleList().size());
     }
 
 }
