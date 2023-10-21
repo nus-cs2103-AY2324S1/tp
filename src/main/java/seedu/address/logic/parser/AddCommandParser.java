@@ -16,8 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.department.Department;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Employee;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 
@@ -50,9 +50,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
         Set<Department> departmentList = ParserUtil.parseDepartments(argMultimap.getAllValues(PREFIX_DEPARTMENT));
 
-        Person person = new Person(name, phone, email, address, salary, departmentList);
+        Employee employee = new Employee(name, phone, email, address, salary, departmentList);
 
-        return new AddCommand(person);
+        return new AddCommand(employee);
     }
 
     /**

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's salary in the ManageHR.
+ * Represents an Employee's salary in the ManageHR.
  * Guarantees: immutable; is valid as declared in {@link #isValidSalary(String)}
  */
 public class Salary {

@@ -6,16 +6,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Employee;
 
 /**
- * A UI component for displaying detailed information about a person's profile. This component
- * displays the person's name, phone number, address, email, salary, and the departments they belong to.
+ * A UI component for displaying detailed information about an employee's profile. This component
+ * displays the employee's name, phone number, address, email, salary, and the departments they belong to.
  */
 public class ProfileDetails extends UiPart<Region> {
     private static final String FXML = "ProfileDetails.fxml";
 
-    private Person person;
+    private Employee employee;
 
     @FXML
     private Label name;
@@ -31,7 +31,7 @@ public class ProfileDetails extends UiPart<Region> {
     private FlowPane departments;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code EmployeeCode} with the given {@code Employee} and index to display.
      */
     public ProfileDetails() {
         super(FXML);
@@ -39,23 +39,23 @@ public class ProfileDetails extends UiPart<Region> {
     }
 
     /**
-     * Updates the details displayed in the profile component based on the provided {@code Person} object.
-     * If the person is null, the component is hidden. Otherwise, it displays the person's information,
+     * Updates the details displayed in the profile component based on the provided {@code Employee} object.
+     * If the employee is null, the component is hidden. Otherwise, it displays the employee's information,
      * including name, phone, address, email, salary, and departments.
      *
-     * @param person The {@code Person} object for which to display the details.
+     * @param employee The {@code Employee} object for which to display the details.
      */
-    public void updateDetails(Person person) {
-        if (person == null) {
+    public void updateDetails(Employee employee) {
+        if (employee == null) {
             this.getRoot().setVisible(false);
         } else {
-            name.setText(person.getName().fullName);
-            phone.setText(person.getPhone().value);
-            address.setText(person.getAddress().value);
-            email.setText(person.getEmail().value);
-            salary.setText(person.getSalary().value);
+            name.setText(employee.getName().fullName);
+            phone.setText(employee.getPhone().value);
+            address.setText(employee.getAddress().value);
+            email.setText(employee.getEmail().value);
+            salary.setText(employee.getSalary().value);
             departments.getChildren().clear();
-            person.getDepartments().stream()
+            employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.departmentName))
                 .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
             this.getRoot().setVisible(true);

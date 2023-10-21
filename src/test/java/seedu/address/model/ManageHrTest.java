@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.person.Employee;
+import seedu.address.model.person.exceptions.DuplicateEmployeeException;
+import seedu.address.testutil.EmployeeBuilder;
 
 public class ManageHrTest {
 
@@ -28,7 +28,7 @@ public class ManageHrTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), manageHr.getPersonList());
+        assertEquals(Collections.emptyList(), manageHr.getEmployeeList());
     }
 
     @Test
@@ -44,66 +44,66 @@ public class ManageHrTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+    public void resetData_withDuplicateEmployees_throwsDuplicateEmployeeException() {
+        // Two people with the same identity fields
+        Employee editedAlice = new EmployeeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .withDepartments(VALID_DEPARTMENT_LOGISTIC)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        ManageHrStub newData = new ManageHrStub(newPersons);
+        List<Employee> newPeople = Arrays.asList(ALICE, editedAlice);
+        ManageHrStub newData = new ManageHrStub(newPeople);
 
-        assertThrows(DuplicatePersonException.class, () -> manageHr.resetData(newData));
+        assertThrows(DuplicateEmployeeException.class, () -> manageHr.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> manageHr.hasPerson(null));
+    public void hasEmployee_nullEmployee_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> manageHr.hasEmployee(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(manageHr.hasPerson(ALICE));
+    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
+        assertFalse(manageHr.hasEmployee(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        manageHr.addPerson(ALICE);
-        assertTrue(manageHr.hasPerson(ALICE));
+    public void hasEmployee_employeeInAddressBook_returnsTrue() {
+        manageHr.addEmployee(ALICE);
+        assertTrue(manageHr.hasEmployee(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        manageHr.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+    public void hasEmployee_employeeWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        manageHr.addEmployee(ALICE);
+        Employee editedAlice = new EmployeeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .withDepartments(VALID_DEPARTMENT_LOGISTIC)
                 .build();
-        assertTrue(manageHr.hasPerson(editedAlice));
+        assertTrue(manageHr.hasEmployee(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> manageHr.getPersonList().remove(0));
+    public void getEmployeeList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> manageHr.getEmployeeList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = ManageHr.class.getCanonicalName() + "{persons=" + manageHr.getPersonList() + "}";
+        String expected = ManageHr.class.getCanonicalName() + "{employees=" + manageHr.getEmployeeList() + "}";
         assertEquals(expected, manageHr.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose people list can violate interface constraints.
      */
     private static class ManageHrStub implements ReadOnlyManageHr {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Employee> people = FXCollections.observableArrayList();
 
-        ManageHrStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        ManageHrStub(Collection<Employee> people) {
+            this.people.setAll(people);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Employee> getEmployeeList() {
+            return people;
         }
     }
 

@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private EmployeeListPanel employeeListPanel;
     private ProfileDetails profileDetails;
     private Sidebar sidebar;
     private ResultDisplay resultDisplay;
@@ -50,7 +50,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane sidebarPlaceholder;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane employeeListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -124,8 +124,8 @@ public class MainWindow extends UiPart<Stage> {
         profileDetails = new ProfileDetails();
         profileDetailsPlaceholder.getChildren().add(profileDetails.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), profileDetails);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList(), profileDetails);
+        employeeListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -177,8 +177,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public EmployeeListPanel getEmployeeListPanel() {
+        return employeeListPanel;
     }
 
     /**

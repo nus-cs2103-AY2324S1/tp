@@ -22,10 +22,10 @@ Average 4.7 :star: 17M+ Reviews :astonished:
 - your new best friend
 
 ### Features:
-- [x] add/edit/delete employees and their details
-- [x] list employees
-- [ ] sort employees by their roles/departments for quick reference (coming soon)
-- [ ] attach tasks to employees (coming soon)
+- [x] add/edit/delete people and their details
+- [x] list people
+- [ ] sort people by their roles/departments for quick reference (coming soon)
+- [ ] attach tasks to people (coming soon)
 
 ## Ratings and Reviews
 Jenny, Head of a HR Department
