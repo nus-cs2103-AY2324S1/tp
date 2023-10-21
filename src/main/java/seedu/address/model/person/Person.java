@@ -7,9 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.lessons.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -142,17 +140,6 @@ public class Person {
             setTags(tags);
         }
     }
-    /**
-     * Returns true if the person has the lesson.
-     */
-    public void addLessons(Lesson... lessons) throws IllegalValueException {
-        for (Lesson lesson : lessons) {
-            requireAllNonNull(lesson);
-            lesson.addStudent(this.name);
-        }
-        return;
-    }
-
 
     /**
      * Returns true if both persons have the same name.

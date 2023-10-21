@@ -70,7 +70,7 @@ public class Lesson {
      * @return true if the lesson has the specified student
      */
     public boolean hasStudent(Person person) {
-        return students.contains(person.getName());
+        return hasStudent(person.getName());
     }
 
     /**
