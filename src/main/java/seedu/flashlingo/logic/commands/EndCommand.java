@@ -1,6 +1,7 @@
 package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
@@ -23,6 +24,7 @@ public class EndCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
