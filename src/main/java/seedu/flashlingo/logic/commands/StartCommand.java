@@ -23,9 +23,6 @@ public class StartCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.nextReviewWord();
-        if (model.getFilteredFlashCardList().size() == 0) {
-            FlashlingoParser.setReviewSession(false);
-        }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
