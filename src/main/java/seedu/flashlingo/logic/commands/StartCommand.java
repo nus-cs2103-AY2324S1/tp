@@ -2,14 +2,9 @@ package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.function.Predicate;
-
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
-import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.NextReviewWordPredicate;
-import seedu.flashlingo.model.flashcard.WordOverduePredicate;
 
 /**
  * Starts a new session of reviewing.
