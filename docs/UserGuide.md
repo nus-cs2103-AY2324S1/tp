@@ -164,9 +164,9 @@ Displays learning statistics, i.e, the total number of flashcards and the number
 
 Format: `stats`
 
-### Stopping the current flashcard session : `stop`
+### Endding the current flashcard session : `end`
 
-Stops the current flashcard session and returns to the main menu.
+Ends the current flashcard session and returns to the main menu.
 
 Format: `end`
 
@@ -237,5 +237,5 @@ _Details coming soon ..._
  **Yes**                | `yes`                                                          
  **No**                 | `no`                                                           
  **Learning Statistics** | `stats`                                                        
- **Stop**               | `stop`                                                         
+ **End**               | `end`                                                         
 **Exit**                | `exit`
