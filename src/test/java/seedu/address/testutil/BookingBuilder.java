@@ -20,7 +20,7 @@ public class BookingBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_BOOKING_PERIOD = "2023-01-01 to 2023-01-02";
+    public static final String DEFAULT_BOOKING_PERIOD = "2023-01-01 08:00 to 2023-01-02 12:00";
 
     private Room room;
     private Name name;

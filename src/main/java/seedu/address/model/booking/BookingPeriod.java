@@ -34,14 +34,13 @@ public class BookingPeriod {
      */
     public BookingPeriod(String period) {
         requireNonNull(period);
-        checkArgument(isValidBookingPeriod(period), MESSAGE_CONSTRAINTS);
         value = period;
         setPeriod(period);
     }
 
     /**
      * Returns true if a given string is a valid booking period.
-     * A valid booking period must be in the format "YYYY-MM-DD to YYYY-MM-DD".
+     * A valid booking period must be in the format "YYYY-MM-DD HH:MM to YYYY-MM-DD HH:MM".
      * The end date must be after or equal to the start date.
      *
      * @param test The string to test for validity.
