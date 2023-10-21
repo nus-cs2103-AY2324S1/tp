@@ -31,20 +31,17 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 
    * `add w/WORD wl/WORD LANGUAGE t/TRANSLATION tl/TRANSLATION LANGUAGE` :Adds a word to the flashcard with its translation.
 
-   * `del index` : Deletes a words and its related information at the given index.
+   * `delete index` : Deletes a words and its related information at the given index.
    * `edit index w/WORD t/TRANSALTION` : Edits the word and its translation at the given index.
    * `find KEYWORD` : Finds words whose original word or translation contains the given keyword.
-   * `start` : Shows flashcard, starts today’s flashcard session.
-   * `flip` : Shows the other side of the flash card.
-
+   * `start` : Starts today’s flashcard session.
+   * `end` :  Ends the current flashcard review session.
+   * `reveal` : Shows the other side of the flash card.
    * `yes` :  Indicates user has memorized the word.
-
    * `no` :  Indicates user has forgotten the word.
-
    * `stats` : Displays learning statistics for current user.
-
-   * `stop` :  Stops the current flashcard session.
-
+   * `language` : Filters the list with specified language.
+   * `review` : Returns a list of words that the user should revise today.
    * `exit` : Terminates the program.
 
 2. Refer to the [Features](#features) below for details of each command.
@@ -79,14 +76,12 @@ Shows the list of cards with both the original word and the corresponding transl
 Format: `list`
 
 Output:
-* `There are no words in the list! Add your flashcards now!`
-* `Here are the words:`
+* `Listed all flashcards`
 `1. ORIGINAL_WORD - TRANSLATION`
   `2. ORIGINAL_WORD - TRANSLATION`
   `3. ORIGINAL_WORD - TRANSLATION`
   `...`
 
-![img.png](images/ListUi.png)
 
 ### Adding a word card: `add`
 
@@ -136,22 +131,19 @@ Examples:
 
 ###  Showing flashcard, starts today’s flashcard session : `start`
 
-Shows the words the user is going to study.
+Starts a review session and shows the words the user is going to study sequentially.
 
 Format: `start`
 
-Output:
-![img.png](images/StartUi.png)
 
-
-### Showsing the other side of the flash card : `flip`
+### Revealing the other side (translation) of the flash card : `reveal`
 
 Shows the meaning of the word.
 
-Format: `flip`/`f`
+Format: `reveal`
 
 Output :
-![img.png](images/StartUi.png)
+![img.png](images/Reveal.png)
 
 ### Indicating user has memorized the word : `yes`
 
@@ -172,13 +164,23 @@ Displays learning statistics, i.e, the total number of flashcards and the number
 
 Format: `stats`
 
-### Stopping the current flashcard session : `stop`
+### Endding the current flashcard session : `end`
 
-Stops the current flashcard session and returns to the main menu.
+Ends the current flashcard session and returns to the main menu.
 
-Format: `stop`
+Format: `end`
 
-Output: `Congratulations! You have completed FINISHED_WORDS out of TOTAL_WORDS words!`
+### Filtering list with specified language : `language`
+
+Displays a list where each word is from specified language.
+
+Format: `language SPECIFIED_LANGUAGE`
+
+### Getting list for revision : `review`
+
+* `review` : Returns a list of words that the user should revise today.
+
+Format: `review`
 
 ### Exiting the program : `exit`
 
@@ -235,5 +237,5 @@ _Details coming soon ..._
  **Yes**                | `yes`                                                          
  **No**                 | `no`                                                           
  **Learning Statistics** | `stats`                                                        
- **Stop**               | `stop`                                                         
+ **End**               | `end`                                                         
 **Exit**                | `exit`
