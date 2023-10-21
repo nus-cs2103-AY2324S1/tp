@@ -84,6 +84,23 @@ public class Schedule {
     }
 
     /**
+     * Checks if this schedule is a duplicate of another schedule.
+     * Two schedules are considered duplicate if they have the same tutor and their time intervals are equal.
+     *
+     * @param other The other schedule to compare against.
+     * @return {@code true} if the schedules are duplicates, {@code false} otherwise.
+     */
+    public boolean isDuplicate(Schedule other) {
+        if (other == this) {
+            return true;
+        }
+
+        return tutor.equals(other.tutor)
+            && startTime.equals(other.startTime)
+            && endTime.equals(other.endTime);
+    }
+
+    /**
      * Returns true if both schedules have the same tutor index and time fields.
      * This defines a stronger notion of equality between two schedules.
      */

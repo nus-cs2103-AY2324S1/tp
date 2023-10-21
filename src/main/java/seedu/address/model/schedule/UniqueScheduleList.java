@@ -32,7 +32,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
      */
     public boolean contains(Schedule toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isDuplicate);
     }
 
     /**
@@ -60,7 +60,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
             throw new ScheduleNotFoundException();
         }
 
-        if (!target.equals(editedSchedule) && contains(editedSchedule)) {
+        if (!target.isDuplicate(editedSchedule) && contains(editedSchedule)) {
             throw new DuplicateScheduleException();
         }
 
@@ -144,7 +144,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     private boolean schedulesAreUnique(List<Schedule> schedules) {
         for (int i = 0; i < schedules.size() - 1; i++) {
             for (int j = i + 1; j < schedules.size(); j++) {
-                if (schedules.get(i).equals(schedules.get(j))) {
+                if (schedules.get(i).isDuplicate(schedules.get(j))) {
                     return false;
                 }
             }
