@@ -170,7 +170,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 The following activity diagram summarizes what happens when a user executes an edit tutor command:
 
-<img src="images/EditTutorActivityDiagram.png" width="250" />
+
+![Activity Diagram for edit-t Command](images/EditTutorActivityDiagram.png)
 
 #### Design rationale:
 The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
