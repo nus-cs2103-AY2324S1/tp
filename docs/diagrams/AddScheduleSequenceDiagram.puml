@@ -5,27 +5,44 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "u:AddScheduleCommand" as AddScheduleCommand LOGIC_COLOR
+participant ":AddScheduleCommandParser" as AddScheduleCommandParser LOGIC_COLOR
+participant "add-s:AddScheduleCommand" as AddScheduleCommand LOGIC_COLOR
+
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":Schedule" as Schedule MODEL_COLOR
 end box
-[-> LogicManager : execute(add-s)
+[-> LogicManager : execute(String)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(add-s)
+LogicManager -> AddressBookParser : parseCommand(String)
 activate AddressBookParser
 
+create AddScheduleCommandParser
+AddressBookParser -> AddScheduleCommandParser
+activate AddScheduleCommandParser
+
+AddScheduleCommandParser --> AddressBookParser
+deactivate AddScheduleCommandParser
+
+
+AddressBookParser -> AddScheduleCommandParser : parse(String)
+activate AddScheduleCommandParser
+
 create AddScheduleCommand
-AddressBookParser -> AddScheduleCommand
+AddScheduleCommandParser -> AddScheduleCommand
 activate AddScheduleCommand
 
-AddScheduleCommand --> AddressBookParser
+AddScheduleCommand -> AddScheduleCommandParser
 deactivate AddScheduleCommand
 
-AddressBookParser --> LogicManager : u
+
+AddScheduleCommandParser --> AddressBookParser : add-s
+destroy AddScheduleCommandParser
+
+AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
 LogicManager -> AddScheduleCommand : execute()
@@ -45,7 +62,7 @@ activate Schedule
 Schedule --> AddScheduleCommand
 deactivate Schedule
 
-AddScheduleCommand -> Model : hasSchedule()
+AddScheduleCommand -> Model : hasSchedule(Schedule)
 activate Model
 
 Model --> AddScheduleCommand
@@ -58,13 +75,13 @@ Model --> AddScheduleCommand
 deactivate Model
 
 loop number of schedules in model
-    AddScheduleCommand -> Schedule : isClashing()
+    AddScheduleCommand -> Schedule : isClashing(Schedule)
     activate Schedule
     Schedule --> AddScheduleCommand
     deactivate Schedule
 end
 
-AddScheduleCommand -> Model : addSchedule()
+AddScheduleCommand -> Model : addSchedule(Schedule)
 activate Model
 
 Model --> AddScheduleCommand

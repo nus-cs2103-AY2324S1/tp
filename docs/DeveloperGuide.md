@@ -185,11 +185,15 @@ The `AddScheduleCommand#exceute(Model)` will perform the following checks in thi
 
 If any of these checks fail a `CommandException` with an appropriate error message will be thrown. Otherwise, it will create a `Schedule` and use `Model#addSchedule` to add the schedule to the `Model`.
 
+The following shows the activity diagram from when a user executes the `add-s` command:
+
+![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
+
 The following sequence diagram shows how the operation works:
 
 ![AddScheduleSequenceDiagram](images/AddScheduleSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddScheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddScheduleCommandParser` and `AddScheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -212,11 +216,11 @@ The following sequence diagram shows how the operation works:
 * **Alternative 1 (current choice):** Perform the check in `Schedule`.
     * Pros: Easy to implement.
     * Pros: Consistent throughout the system as it does not make any sense to have a schedule with a `StartTime` after its `EndTime`.
-    * Cons: Have to throw and handle the exception if an invalid schedule is being created.
+    * Cons: Have to handle the exception if an invalid schedule is being created.
 
 * **Alternative 2:** Perform the check in `AddScheduleCommand`.
     * Pros: Allows for flexibility in the constraints.
-    * Cons: Have to repeatedly perform this check everytime a new `Schedule` is being created.
+    * Cons: Have to repeatedly write logic perform this check everywhere a new `Schedule` is being created.
 
 ### \[Proposed\] Data archiving
 
