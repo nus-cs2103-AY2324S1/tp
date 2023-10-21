@@ -1,7 +1,6 @@
 package seedu.address.model.booking;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,8 +15,8 @@ public class BookingPeriod {
     public static final String MESSAGE_CONSTRAINTS = "Booking periods must be in the format 'YYYY-MM-DD HH:MM to "
             + "YYYY-MM-DD HH:MM', and the end datetime must be after or equal to the start datetime.";
 
-    public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} to" +
-            " \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$";
+    public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} to"
+            + " \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$";
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
