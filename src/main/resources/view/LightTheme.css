@@ -220,7 +220,7 @@
 }
 
 .button {
-    -fx-padding: 5 22 5 22;
+    -fx-padding: 4 20 4 20;
     -fx-border-width: 2;
     -fx-background-radius: 10;
     -fx-background-color: white;
