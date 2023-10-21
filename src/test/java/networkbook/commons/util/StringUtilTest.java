@@ -56,7 +56,8 @@ public class StringUtilTest {
 
     @Test
     public void containsWordIgnoreCase_nullWord_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase("typical sentence", null));
+        assertThrows(NullPointerException.class, ()
+                -> StringUtil.containsWordIgnoreCase("typical sentence", null));
     }
 
     @Test
@@ -123,6 +124,87 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+    //---------------- Tests for containsTermIgnoreCase --------------------------------------
+
+    /*
+     * Invalid equivalence partitions for term: null, empty, multiple terms
+     * Invalid equivalence partitions for sentence: null
+     * The four test cases below test one invalid input at a time.
+     */
+
+    @Test
+    public void containsTermIgnoreCase_nullTerm_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, ()
+                -> StringUtil.containsTermIgnoreCase("typical sentence", null));
+    }
+
+    @Test
+    public void containsTermIgnoreCase_emptyWord_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Term parameter cannot be empty", ()
+                -> StringUtil.containsTermIgnoreCase("typical sentence", "  "));
+    }
+
+    @Test
+    public void containsTermIgnoreCase_multipleTerms_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Term parameter should be a single term", ()
+                -> StringUtil.containsTermIgnoreCase("typical sentence", "aaa BBB"));
+    }
+
+    @Test
+    public void containsTermIgnoreCase_nullSentence_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsTermIgnoreCase(null, "abc"));
+    }
+
+    /*
+     * Valid equivalence partitions for term:
+     *   - any term
+     *   - term containing symbols/numbers
+     *   - term with leading/trailing spaces
+     *
+     * Valid equivalence partitions for sentence:
+     *   - empty string
+     *   - one word
+     *   - multiple words
+     *   - sentence with extra spaces
+     *
+     * Possible scenarios returning true:
+     *   - matches any word in sentence
+     *   - matches multiple words
+     *   - query term matches part of a sentence word
+     *
+     * Possible scenarios returning false:
+     *   - sentence word matches part of the query term
+     *
+     * The test method below tries to verify all above with a reasonably low number of test cases.
+     */
+
+    @Test
+    public void containsTermIgnoreCase_validInputs_correctResult() {
+
+        // Empty sentence
+        assertFalse(StringUtil.containsTermIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StringUtil.containsTermIgnoreCase("    ", "123"));
+
+        // Query word bigger than sentence word
+        assertFalse(StringUtil.containsTermIgnoreCase("aaa bbb ccc", "bbbb"));
+
+        // Matches word in the sentence, different upper/lower case letters
+        assertTrue(StringUtil.containsTermIgnoreCase("aaa bBb ccc", "Aaa")); // First word (boundary case)
+        assertTrue(StringUtil.containsTermIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
+        assertTrue(StringUtil.containsTermIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
+        assertTrue(StringUtil.containsTermIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
+        assertTrue(StringUtil.containsTermIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+
+        // Matches multiple words in sentence
+        assertTrue(StringUtil.containsTermIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+
+        // Matches word in the sentence, different upper/lower case letters
+        assertTrue(StringUtil.containsTermIgnoreCase("aaa bBb ccc", "Aa")); // First word (boundary case)
+        assertTrue(StringUtil.containsTermIgnoreCase("aaa bBb ccc@1", "cc@1")); // Last word (boundary case)
+        assertTrue(StringUtil.containsTermIgnoreCase("  AAA   bBb   ccc  ", "aa")); // Sentence has extra spaces
+        assertTrue(StringUtil.containsTermIgnoreCase("Aab", "aa")); // Only one word in sentence (boundary case)
+        assertTrue(StringUtil.containsTermIgnoreCase("aaa bbb ccc", "  cc  ")); // Leading/trailing spaces
+    }
     //---------------- Tests for getDetails --------------------------------------
 
     /*

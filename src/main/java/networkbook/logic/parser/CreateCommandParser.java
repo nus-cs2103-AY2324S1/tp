@@ -1,6 +1,5 @@
 package networkbook.logic.parser;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import networkbook.logic.Messages;
@@ -8,7 +7,7 @@ import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
@@ -36,7 +35,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                         CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_LINK,
-                        CliSyntax.PREFIX_GRADUATING_YEAR,
+                        CliSyntax.PREFIX_GRADUATION,
                         CliSyntax.PREFIX_COURSE,
                         CliSyntax.PREFIX_SPECIALISATION,
                         CliSyntax.PREFIX_TAG,
@@ -56,7 +55,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
                 CliSyntax.PREFIX_LINK,
-                CliSyntax.PREFIX_GRADUATING_YEAR,
+                CliSyntax.PREFIX_GRADUATION,
                 CliSyntax.PREFIX_COURSE,
                 CliSyntax.PREFIX_SPECIALISATION,
                 CliSyntax.PREFIX_PRIORITY
@@ -67,15 +66,15 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         UniqueList<Phone> phones = ParserUtil.parsePhones(argMultimap.getAllValues(CliSyntax.PREFIX_PHONE));
         UniqueList<Email> emails = ParserUtil.parseEmails(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL));
         UniqueList<Link> links = ParserUtil.parseLinks(argMultimap.getAllValues(CliSyntax.PREFIX_LINK));
-        GraduatingYear graduatingYear = ParserUtil.parseGraduatingYear(
-                    argMultimap.getValue(CliSyntax.PREFIX_GRADUATING_YEAR).orElse(null));
-        Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).orElse(null));
-        Specialisation specialisation = ParserUtil.parseSpecialisation(
-                    argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).orElse(null));
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
+        Graduation graduation = ParserUtil.parseGraduation(
+                    argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).orElse(null));
+        UniqueList<Course> courses = ParserUtil.parseCourses(argMultimap.getAllValues(CliSyntax.PREFIX_COURSE));
+        UniqueList<Specialisation> specialisations = ParserUtil
+                .parseSpecialisations(argMultimap.getAllValues(CliSyntax.PREFIX_SPECIALISATION));
+        UniqueList<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).orElse(null));
 
-        Person person = new Person(name, phones, emails, links, graduatingYear, course, specialisation,
+        Person person = new Person(name, phones, emails, links, graduation, courses, specialisations,
                     tagList, priority);
 
         return new CreateCommand(person);

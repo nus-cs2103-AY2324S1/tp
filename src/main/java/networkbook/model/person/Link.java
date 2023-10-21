@@ -23,7 +23,10 @@ public class Link implements Identifiable<Link> {
     // regex adapted from https://regexr.com/3au3g
     private static final String DOMAIN_NAME_REGEX =
             "^(http://|https://)?(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]";
-    private static final String PATH_REGEX = "(/[\\w_-]*)*"; // Valid URI path
+
+    // reference: https://stackoverflow.com/questions/4669692
+    //          /valid-characters-for-directory-part-of-a-url-for-short-links
+    private static final String PATH_REGEX = "(/[a-zA-Z0-9_\\-.~!$&'()*+,;=:@]*)*"; // Valid URI path
 
     // regex reused from https://stackoverflow.com/questions/23959352/validate-url-query-string-with-regex
     private static final String QUERY_REGEX = "\\?([\\w-]+(=[\\w-]*)?(&[\\w-]+(=[\\w-]*)?)*)?";

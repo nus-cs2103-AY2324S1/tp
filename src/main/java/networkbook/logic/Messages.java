@@ -5,11 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import networkbook.logic.parser.Prefix;
-import networkbook.model.person.Course;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
 import networkbook.model.person.Priority;
-import networkbook.model.person.Specialisation;
 
 /**
  * Container for user visible messages.
@@ -20,7 +18,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_NAME = "Invalid name provided for contact to create!";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_PERSONS_SORTED_OVERVIEW = "Here is your sorted list of contacts:"
+            + "\n(%1$d persons listed)";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
     private static final String MESSAGE_FIELDS_MUST_BE_PRESENT =
@@ -54,18 +53,12 @@ public class Messages {
                 .append("; Phones: ").append(person.getPhones())
                 .append("; Emails: ").append(person.getEmails())
                 .append("; Links: ").append(person.getLinks());
-        person.getGraduatingYear().ifPresent((GraduatingYear g) -> {
-            builder.append("; Graduating Year: ");
-            builder.append(g);
+        person.getGraduation().ifPresent((Graduation g) -> {
+            builder.append("; Graduation: ");
+            builder.append(g.getFullString());
         });
-        person.getCourse().ifPresent((Course c) -> {
-            builder.append("; Course: ");
-            builder.append(c);
-        });
-        person.getSpecialisation().ifPresent((Specialisation s) -> {
-            builder.append("; Specialisation: ");
-            builder.append(s);
-        });
+        builder.append("; Courses: ").append(person.getCourses());
+        builder.append("; Specialisations ").append(person.getSpecialisations());
         builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         person.getPriority().ifPresent((Priority p) -> {

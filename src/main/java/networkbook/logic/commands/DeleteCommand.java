@@ -3,6 +3,7 @@ package networkbook.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
@@ -20,10 +21,11 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: [LIST INDEX OF CONTACT]\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Noted, deleted contact:\n%1$s";
+    public static final String MESSAGE_DELETE_PERSON_INDEX = "\nAt index %1$s";
 
     private final Index targetIndex;
 
@@ -42,7 +44,9 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete))
+                + String.format(MESSAGE_DELETE_PERSON_INDEX, targetIndex.getOneBased()));
     }
 
     @Override
@@ -57,7 +61,7 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return Objects.equals(this.targetIndex, otherDeleteCommand.targetIndex);
     }
 
     @Override

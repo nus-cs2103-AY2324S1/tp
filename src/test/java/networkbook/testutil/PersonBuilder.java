@@ -1,13 +1,11 @@
 package networkbook.testutil;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.GraduatingYear;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
 import networkbook.model.person.Name;
 import networkbook.model.person.Person;
@@ -27,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_LINK = "github.com/amybeez";
-    public static final String DEFAULT_GRADUATING_YEAR = "2000";
+    public static final String DEFAULT_GRADUATION = "AY0001-S1";
     public static final String DEFAULT_COURSE = "Computer Science";
     public static final String DEFAULT_SPECIALISATION = "Game Development";
     public static final String DEFAULT_PRIORITY = null;
@@ -36,10 +34,10 @@ public class PersonBuilder {
     private UniqueList<Phone> phones;
     private UniqueList<Email> emails;
     private UniqueList<Link> links;
-    private GraduatingYear graduatingYear;
-    private Course course;
-    private Specialisation specialisation;
-    private Set<Tag> tags;
+    private Graduation graduation;
+    private UniqueList<Course> courses;
+    private UniqueList<Specialisation> specialisations;
+    private UniqueList<Tag> tags;
     private Priority priority;
 
     /**
@@ -50,10 +48,11 @@ public class PersonBuilder {
         phones = new UniqueList<Phone>().setItems(List.of(new Phone(DEFAULT_PHONE)));
         emails = new UniqueList<Email>().setItems(List.of(new Email(DEFAULT_EMAIL)));
         links = new UniqueList<Link>().setItems(List.of(new Link(DEFAULT_LINK)));
-        graduatingYear = new GraduatingYear(DEFAULT_GRADUATING_YEAR);
-        course = new Course(DEFAULT_COURSE);
-        specialisation = new Specialisation(DEFAULT_SPECIALISATION);
-        tags = new HashSet<>();
+        graduation = new Graduation(DEFAULT_GRADUATION);
+        courses = new UniqueList<Course>().setItems(List.of(new Course(DEFAULT_COURSE)));
+        specialisations = new UniqueList<Specialisation>()
+                .setItems(List.of(new Specialisation(DEFAULT_SPECIALISATION)));
+        tags = new UniqueList<>();
         priority = null;
     }
 
@@ -65,10 +64,10 @@ public class PersonBuilder {
         phones = personToCopy.getPhones();
         emails = personToCopy.getEmails();
         links = personToCopy.getLinks();
-        graduatingYear = personToCopy.getGraduatingYear().orElse(null);
-        course = personToCopy.getCourse().orElse(null);
-        specialisation = personToCopy.getSpecialisation().orElse(null);
-        tags = new HashSet<>(personToCopy.getTags());
+        graduation = personToCopy.getGraduation().orElse(null);
+        courses = personToCopy.getCourses();
+        specialisations = personToCopy.getSpecialisations();
+        tags = personToCopy.getTags();
         priority = personToCopy.getPriority().orElse(null);
     }
 
@@ -81,10 +80,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code UniqueList<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+        this.tags = SampleDataUtil.getTagList(tags);
         return this;
     }
 
@@ -105,26 +104,44 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code GraduatingYear} of the {@code Person} that we are building.
+     * Sets the {@code Graduation} of the {@code Person} that we are building.
      */
-    public PersonBuilder withGraduatingYear(String graduatingYear) {
-        this.graduatingYear = new GraduatingYear(graduatingYear);
+    public PersonBuilder withGraduation(String graduation) {
+        this.graduation = new Graduation(graduation);
+        return this;
+    }
+
+    /**
+     * Adds a course to the person we are building.
+     */
+    public PersonBuilder addCourse(String course) {
+        this.courses.add(new Course(course));
         return this;
     }
 
     /**
      * Sets the {@code Course} of the {@code Person} that we are building.
      */
-    public PersonBuilder withCourse(String course) {
-        this.course = new Course(course);
+    public PersonBuilder withCourses(List<String> courses) {
+        this.courses = new UniqueList<Course>()
+                .setItems(courses.stream().map(Course::new).collect(Collectors.toList()));
+        return this;
+    }
+
+    /**
+     * Adds a specialisation to the person we are building.
+     */
+    public PersonBuilder addSpecialisation(String specialisation) {
+        this.specialisations.add(new Specialisation(specialisation));
         return this;
     }
 
     /**
      * Sets the {@code Specialisation} of the {@code Person} that we are building.
      */
-    public PersonBuilder withSpecialisation(String specialisation) {
-        this.specialisation = new Specialisation(specialisation);
+    public PersonBuilder withSpecialisations(List<String> specialisations) {
+        this.specialisations = new UniqueList<Specialisation>()
+                .setItems(specialisations.stream().map(Specialisation::new).collect(Collectors.toList()));
         return this;
     }
 
@@ -173,16 +190,16 @@ public class PersonBuilder {
         this.phones = new UniqueList<>();
         this.emails = new UniqueList<>();
         this.links = new UniqueList<>();
-        this.graduatingYear = null;
-        this.course = null;
-        this.specialisation = null;
-        this.tags = new HashSet<>();
+        this.graduation = null;
+        this.courses = new UniqueList<>();
+        this.specialisations = new UniqueList<>();
+        this.tags = new UniqueList<>();
         this.priority = null;
         return this;
     }
 
     public Person build() {
-        return new Person(name, phones, emails, links, graduatingYear, course, specialisation, tags, priority);
+        return new Person(name, phones, emails, links, graduation, courses, specialisations, tags, priority);
     }
 
 }

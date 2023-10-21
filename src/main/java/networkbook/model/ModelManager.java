@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.LogsCenter;
 import networkbook.model.person.Person;
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final NetworkBook networkBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> filteredSortedPersons;
 
     /**
      * Initializes a ModelManager with the given networkBook and userPrefs.
@@ -34,6 +37,7 @@ public class ModelManager implements Model {
         this.networkBook = new NetworkBook(networkBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.networkBook.getPersonList());
+        filteredSortedPersons = new SortedList<>(filteredPersons, null);
     }
 
     public ModelManager() {
@@ -119,13 +123,19 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return filteredSortedPersons;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        filteredSortedPersons.setComparator(comparator);
     }
 
     @Override
@@ -142,7 +152,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return networkBook.equals(otherModelManager.networkBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredSortedPersons.equals(otherModelManager.filteredSortedPersons);
     }
 
 }

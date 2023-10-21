@@ -5,7 +5,7 @@ import java.util.Arrays;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.parser.exceptions.ParseException;
-import networkbook.model.person.NameContainsKeywordsPredicate;
+import networkbook.model.person.NameContainsKeyTermsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -24,9 +24,9 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] nameKeyTerms = trimmedArgs.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindCommand(new NameContainsKeyTermsPredicate(Arrays.asList(nameKeyTerms)));
     }
 
 }

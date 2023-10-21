@@ -45,6 +45,8 @@ public class LinkTest {
         assertTrue(Link.isValidLink("www.stackoverflow.xn--com"));
         assertTrue(Link.isValidLink("example.com/test01"));
         assertTrue(Link.isValidLink("www.example.com/test01/test02"));
+        assertTrue(Link.isValidLink("google.com/quack-quack"));
+        assertTrue(Link.isValidLink("google.com/index.html"));
         assertTrue(Link.isValidLink("https://www.pythonanywhere.com/user/test_underscore/"));
         assertTrue(Link.isValidLink("https://www.google.com/?q=haha"));
         assertTrue(Link.isValidLink("https://www.google.com?q=haha"));

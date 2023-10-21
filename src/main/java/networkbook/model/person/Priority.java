@@ -7,7 +7,7 @@ import static networkbook.commons.util.AppUtil.checkArgument;
  * Represents a Person's priority level in the network book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPriority(PriorityLevel)}
  */
-public class Priority {
+public class Priority implements Comparable<Priority> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Priority is among {high, medium, low}, either the word or the first letter, and is not case-sensitive";
@@ -94,10 +94,26 @@ public class Priority {
      * Enumerates the possible priority levels of a contact.
      */
     public enum PriorityLevel {
-        HIGH,
-        MEDIUM,
-        LOW,
-        INVALID
+        HIGH(3),
+        MEDIUM(2),
+        LOW(1),
+        INVALID(0);
+
+        public final int value;
+        private PriorityLevel(int value) {
+            this.value = value;
+        }
+    }
+
+    @Override
+    public int compareTo(Priority o) {
+        if (value.value > o.value.value) {
+            return 1;
+        } else if (value.value < o.value.value) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 
 }

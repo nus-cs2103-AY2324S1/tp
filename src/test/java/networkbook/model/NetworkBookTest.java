@@ -46,7 +46,7 @@ public class NetworkBookTest {
     public void resetData_withDuplicatePersons_throwsDuplicateException() {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE)
-                .withCourse(VALID_COURSE_BOB)
+                .withCourses(List.of(VALID_COURSE_BOB))
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(TypicalPersons.ALICE, editedAlice);
@@ -75,7 +75,7 @@ public class NetworkBookTest {
     public void hasPerson_personWithSameIdentityFieldsInNetworkBook_returnsTrue() {
         networkBook.addPerson(TypicalPersons.ALICE);
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE)
-                .withCourse(VALID_COURSE_BOB)
+                .withCourses(List.of(VALID_COURSE_BOB))
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(networkBook.hasPerson(editedAlice));
