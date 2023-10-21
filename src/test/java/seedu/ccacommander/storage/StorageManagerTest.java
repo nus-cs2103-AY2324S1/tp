@@ -2,7 +2,7 @@ package seedu.ccacommander.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.ccacommander.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
 
 import java.nio.file.Path;
 

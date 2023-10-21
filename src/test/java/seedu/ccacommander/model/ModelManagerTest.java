@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
-import seedu.ccacommander.testutil.AddressBookBuilder;
+import seedu.ccacommander.testutil.CcaCommanderBuilder;
 
 public class ModelManagerTest {
 
@@ -140,7 +140,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        CcaCommander ccaCommander = new AddressBookBuilder().withMember(ALICE).withMember(BENSON)
+        CcaCommander ccaCommander = new CcaCommanderBuilder().withMember(ALICE).withMember(BENSON)
                 .withEvent(AURORA_BOREALIS).withEvent(BOXING_DAY).build();
         CcaCommander differentCcaCommander = new CcaCommander();
         UserPrefs userPrefs = new UserPrefs();

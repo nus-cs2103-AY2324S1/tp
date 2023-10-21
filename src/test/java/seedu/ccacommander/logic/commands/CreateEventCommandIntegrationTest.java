@@ -2,7 +2,7 @@ package seedu.ccacommander.logic.commands;
 
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ccacommander.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

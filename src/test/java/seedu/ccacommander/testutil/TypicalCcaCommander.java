@@ -10,7 +10,7 @@ import seedu.ccacommander.model.member.Member;
 /**
  * A utility class which returns an CcaCommander with all typical members and events.
  */
-public class TypicalAddressBook {
+public class TypicalCcaCommander {
     /**
      * Returns an {@code CcaCommander} with only typical members.
      */

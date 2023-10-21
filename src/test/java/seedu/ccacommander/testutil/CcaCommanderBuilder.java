@@ -7,24 +7,24 @@ import seedu.ccacommander.model.member.Member;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code CcaCommander ab = new AddressBookBuilder().withMember("John", "Doe").build();}
+ *     {@code CcaCommander ab = new CcaCommanderBuilder().withMember("John", "Doe").build();}
  */
-public class AddressBookBuilder {
+public class CcaCommanderBuilder {
 
     private CcaCommander ccaCommander;
 
-    public AddressBookBuilder() {
+    public CcaCommanderBuilder() {
         ccaCommander = new CcaCommander();
     }
 
-    public AddressBookBuilder(CcaCommander ccaCommander) {
+    public CcaCommanderBuilder(CcaCommander ccaCommander) {
         this.ccaCommander = ccaCommander;
     }
 
     /**
      * Adds a new {@code Member} to the {@code CcaCommander} that we are building.
      */
-    public AddressBookBuilder withMember(Member member) {
+    public CcaCommanderBuilder withMember(Member member) {
         ccaCommander.createMember(member);
         return this;
     }
@@ -32,7 +32,7 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code Event} to the {@code CcaCommander} that we are building.
      */
-    public AddressBookBuilder withEvent(Event event) {
+    public CcaCommanderBuilder withEvent(Event event) {
         ccaCommander.createEvent(event);
         return this;
     }

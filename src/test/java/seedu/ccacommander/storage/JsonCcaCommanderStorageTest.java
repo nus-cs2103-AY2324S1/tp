@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
 import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
 import static seedu.ccacommander.testutil.TypicalMembers.HOON;
 import static seedu.ccacommander.testutil.TypicalMembers.IDA;

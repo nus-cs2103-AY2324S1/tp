@@ -10,7 +10,7 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_A
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
 import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
 import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
 

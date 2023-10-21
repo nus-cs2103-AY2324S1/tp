@@ -2,7 +2,7 @@ package seedu.ccacommander.logic.commands;
 
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static seedu.ccacommander.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 
 import org.junit.jupiter.api.BeforeEach;

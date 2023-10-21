@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.logic.Messages.MESSAGE_MEMBERS_LISTED_OVERVIEW;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ccacommander.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
 import static seedu.ccacommander.testutil.TypicalMembers.CARL;
 import static seedu.ccacommander.testutil.TypicalMembers.ELLE;
 import static seedu.ccacommander.testutil.TypicalMembers.FIONA;

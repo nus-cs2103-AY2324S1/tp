@@ -2,8 +2,8 @@ package seedu.ccacommander.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalAddressBook.getTypicalEventAddressBook;
-import static seedu.ccacommander.testutil.TypicalAddressBook.getTypicalMemberAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalEventAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalMemberAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

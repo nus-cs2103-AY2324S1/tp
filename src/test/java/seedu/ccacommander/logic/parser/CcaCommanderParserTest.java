@@ -36,7 +36,7 @@ import seedu.ccacommander.testutil.MemberBuilder;
 import seedu.ccacommander.testutil.MemberUtil;
 
 
-public class AddressBookParserTest {
+public class CcaCommanderParserTest {
 
     private final CcaCommanderParser parser = new CcaCommanderParser();
 
