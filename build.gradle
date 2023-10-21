@@ -5,7 +5,9 @@ plugins {
     id 'application'
     id 'jacoco'
 }
-
+run {
+    enableAssertions = true
+}
 mainClassName = 'seedu.address.Main'
 
 sourceCompatibility = JavaVersion.VERSION_11
