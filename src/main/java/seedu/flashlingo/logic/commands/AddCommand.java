@@ -2,7 +2,9 @@ package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD_LANGUAGE;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
+import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD_LANGUAGE;
 
 import java.util.Date;
 
@@ -24,7 +26,9 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a flashcard to Flashlingo.\n"
             + "Parameters: "
             + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD "
+            + PREFIX_ORIGINAL_WORD_LANGUAGE + "ORIGINAL WORD LANGUAGE "
             + PREFIX_TRANSLATED_WORD + "TRANSLATION "
+            + PREFIX_TRANSLATED_WORD_LANGUAGE + "TRANSLATED WORD LANGUAGE "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ORIGINAL_WORD + "hello "
             + PREFIX_TRANSLATED_WORD + "你好 ";

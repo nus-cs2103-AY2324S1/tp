@@ -16,7 +16,7 @@ public class StatsCommand extends Command {
             + "Example: " + COMMAND_WORD + " ";
 
 
-    public static final String MESSAGE_SUCCESS = "Great work fellow learner! \nTotal number of flashcards: %d\n"
+    public static final String MESSAGE_SUCCESS = "Great work fellow learner! \nTotal number of flashcards: %d\n";
 
 
     /**
