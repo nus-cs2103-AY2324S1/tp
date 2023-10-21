@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "u:AddScheduleCommand" as AddScheduleCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Schedule" as Schedule MODEL_COLOR
+end box
+[-> LogicManager : execute(add-s)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(add-s)
+activate AddressBookParser
+
+create AddScheduleCommand
+AddressBookParser -> AddScheduleCommand
+activate AddScheduleCommand
+
+AddScheduleCommand --> AddressBookParser
+deactivate AddScheduleCommand
+
+AddressBookParser --> LogicManager : u
+deactivate AddressBookParser
+
+LogicManager -> AddScheduleCommand : execute()
+activate AddScheduleCommand
+
+AddScheduleCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> AddScheduleCommand
+deactivate Model
+
+create Schedule
+
+AddScheduleCommand -> Schedule
+activate Schedule
+
+Schedule --> AddScheduleCommand
+deactivate Schedule
+
+AddScheduleCommand -> Model : hasSchedule()
+activate Model
+
+Model --> AddScheduleCommand
+deactivate Model
+
+AddScheduleCommand -> Model : getAddressBook()
+activate Model
+
+Model --> AddScheduleCommand
+deactivate Model
+
+loop number of schedules in model
+    AddScheduleCommand -> Schedule : isClashing()
+    activate Schedule
+    Schedule --> AddScheduleCommand
+    deactivate Schedule
+end
+
+AddScheduleCommand -> Model : addSchedule()
+activate Model
+
+Model --> AddScheduleCommand
+deactivate Model
+
+AddScheduleCommand --> LogicManager : result
+deactivate AddScheduleCommand
+AddScheduleCommand -[hidden]-> LogicManager : result
+destroy AddScheduleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
