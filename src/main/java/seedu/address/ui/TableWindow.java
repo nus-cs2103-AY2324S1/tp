@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -14,7 +16,6 @@ import seedu.address.logic.commands.SecLevelTableCommandResult;
 import seedu.address.logic.commands.SubjectTableCommandResult;
 import seedu.address.model.tag.Subject;
 
-import java.util.logging.Logger;
 
 
 /**
