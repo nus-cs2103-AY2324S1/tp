@@ -43,11 +43,11 @@ public class EditJobDescriptorTest {
         assertFalse(DESC_CHEF.equals(editedChef));
 
         // different status -> returns false
-        editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withStatus(VALID_STATUS_CLEANER).build();
+        editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withStatus("APPROVED").build();
         assertFalse(DESC_CHEF.equals(editedChef));
 
         // different industry -> returns false
-        editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withIndustry(VALID_INDUSTRY_CLEANER).build();
+        editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withIndustry("Baking").build();
         assertFalse(DESC_CHEF.equals(editedChef));
     }
 

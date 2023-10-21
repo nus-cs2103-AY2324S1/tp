@@ -24,8 +24,8 @@ public class AddCommandParserTest {
         Job expectedJob = new JobBuilder(CLEANER).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + ROLE_DESC_CLEANER
-                + COMPANY_DESC_CLEANER + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + INDUSTRY_DESC_CLEANER,
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + ROLE_DESC_CLEANER + COMPANY_DESC_CLEANER
+                        + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + INDUSTRY_DESC_CLEANER,
             new AddCommand(expectedJob));
     }
 
@@ -59,7 +59,8 @@ public class AddCommandParserTest {
             validExpectedJobString + COMPANY_DESC_CHEF + ROLE_DESC_CHEF
                 + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + INDUSTRY_DESC_CLEANER
                 + validExpectedJobString,
-            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_INDUSTRY));
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE, PREFIX_COMPANY,
+                    PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_INDUSTRY));
 
         // invalid value followed by valid value
 
