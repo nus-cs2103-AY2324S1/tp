@@ -9,7 +9,7 @@
       "departments": [
         "Management"
       ],
-      "salary": "$14,000"
+      "salary": "14000"
     },
     {
       "name": "Alice Pauline",
@@ -17,7 +17,7 @@
       "id": "EID1234-5678",
       "phone": "94351253",
       "email": "pauline@example.com",
-      "salary": "$14,000"
+      "salary": "14000"
     }
   ]
 }

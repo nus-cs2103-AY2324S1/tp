@@ -26,7 +26,7 @@ public class JsonAdaptedEmployeeTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_DEPARTMENT = "#friend";
-    private static final String INVALID_SALARY = "5000";
+    private static final String INVALID_SALARY = "$5000";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_POSITION = BENSON.getPosition().toString();

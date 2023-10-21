@@ -7,10 +7,10 @@
       "id": "EID1234-5678",
       "phone": "94351253",
       "email": "alice@example.com",
+      "salary": "12000",
       "departments": [
         "Finance"
-      ],
-      "salary": "$12,000"
+      ]
     },
     {
       "name": "Benson Meier",
@@ -18,11 +18,11 @@
       "id": "EID5678-1234",
       "phone": "98765432",
       "email": "johnd@example.com",
+      "salary": "6000",
       "departments": [
         "IT",
         "Operations"
-      ],
-      "salary": "$6,000"
+      ]
     },
     {
       "name": "Carl Kurz",
@@ -30,8 +30,8 @@
       "id": "EID1234-8765",
       "phone": "95352563",
       "email": "heinz@example.com",
-      "departments": [],
-      "salary": "$5,800"
+      "salary": "5800",
+      "departments": []
     },
     {
       "name": "Daniel Meier",
@@ -39,10 +39,10 @@
       "id": "EID4321-5678",
       "phone": "87652533",
       "email": "cornelia@example.com",
+      "salary": "5000",
       "departments": [
         "IT"
-      ],
-      "salary": "$5,000"
+      ]
     },
     {
       "name": "Elle Meyer",
@@ -50,8 +50,8 @@
       "id": "EID2023-1234",
       "phone": "94842224",
       "email": "werner@example.com",
-      "departments": [],
-      "salary": "$4,000"
+      "salary": "4000",
+      "departments": []
     },
     {
       "name": "Fiona Kunz",
@@ -59,8 +59,8 @@
       "id": "EID2023-5678",
       "phone": "94825427",
       "email": "lydia@example.com",
-      "departments": [],
-      "salary": "$8,000"
+      "salary": "8000",
+      "departments": []
     },
     {
       "name": "George Best",
@@ -68,8 +68,8 @@
       "id": "EID2023-9876",
       "phone": "94824242",
       "email": "anna@example.com",
-      "departments": [],
-      "salary": "$1,000"
+      "salary": "1000",
+      "departments": []
     }
   ]
 }

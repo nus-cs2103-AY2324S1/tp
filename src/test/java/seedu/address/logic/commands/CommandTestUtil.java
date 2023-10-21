@@ -40,8 +40,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_DEPARTMENT_FINANCE = "Finance";
     public static final String VALID_DEPARTMENT_IT = "IT";
-    public static final String VALID_SALARY_AMY = "$7,000";
-    public static final String VALID_SALARY_BOB = "$5,000";
+    public static final String VALID_SALARY_AMY = "7000";
+    public static final String VALID_SALARY_BOB = "5000";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

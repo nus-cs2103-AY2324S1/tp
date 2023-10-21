@@ -33,15 +33,6 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
-    /**
-     * Returns true if a given string is a valid phone number with +65 prefix.
-     */
-    public static boolean isValidPhoneString(String test) {
-        String[] parts = test.split(" ", 2);
-        String number = parts[1];
-        return number.matches(VALIDATION_REGEX);
-    }
-
     @Override
     public String toString() {
         return "+65 " + value;
