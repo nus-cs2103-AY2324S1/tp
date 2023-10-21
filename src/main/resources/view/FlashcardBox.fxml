@@ -44,7 +44,7 @@
                <Button fx:id="failure" mnemonicParsing="false" onAction="#failure" text="No" />
                <Button mnemonicParsing="false" onAction="#undo" text="Undo" />
                <Region prefHeight="10.0" prefWidth="300.0" />
-               <Button fx:id="reveal" mnemonicParsing="false" onAction="#toggleReveal" text="Reveal" HBox.hgrow="NEVER" />
+               <Button fx:id="reveal" mnemonicParsing="false" onAction="#toggleReveal" text="Reveal" HBox.hgrow="NEVER" minWidth="100"/>
             </children>
          </HBox>
     </VBox>
