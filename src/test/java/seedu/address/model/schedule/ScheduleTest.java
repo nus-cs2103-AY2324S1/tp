@@ -47,6 +47,50 @@ class ScheduleTest {
     }
 
     @Test
+    public void testIsDuplicate() {
+        final LocalDateTime aliceStartDateTime = SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime();
+        final LocalDateTime aliceEndDateTime = SCHEDULE_ALICE_FIRST_JAN.getEndTime().getTime();
+        // null -> throws NullPointerException
+        assertThrows(NullPointerException.class, () -> SCHEDULE_ALICE_FIRST_JAN.isClashing((Schedule) null));
+
+        // same values -> returns true
+        Schedule scheduleCopy = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN).build();
+        assertTrue(SCHEDULE_ALICE_FIRST_JAN.isDuplicate(scheduleCopy));
+        assertTrue(scheduleCopy.isDuplicate(SCHEDULE_ALICE_FIRST_JAN));
+
+        // same schedule, different status -> returns true
+        assertTrue(SCHEDULE_ALICE_FIRST_JAN.isDuplicate(SCHEDULE_ALICE_FIRST_JAN));
+
+        // same schedule, different status -> returns true
+        scheduleCopy = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN).withStatus(Status.COMPLETED).build();
+        assertTrue(SCHEDULE_ALICE_FIRST_JAN.isDuplicate(scheduleCopy));
+
+        // different tutor, same times -> returns false
+        Schedule bobSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN).withTutor(TypicalPersons.BOB).build();
+        assertFalse(SCHEDULE_ALICE_FIRST_JAN.isDuplicate(bobSchedule));
+        assertFalse(bobSchedule.isDuplicate(SCHEDULE_ALICE_FIRST_JAN));
+
+        // different tutor, different times -> returns false
+        assertFalse(SCHEDULE_ALICE_FIRST_JAN.isDuplicate(SCHEDULE_BOB_SECOND_JAN));
+
+        // same tutor, non-clashing schedules -> returns false
+        Schedule beforeSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
+            .withStartTime(aliceStartDateTime.minusHours(2))
+            .withEndTime(aliceStartDateTime.minusHours(1))
+            .build();
+        assertFalse(SCHEDULE_ALICE_FIRST_JAN.isDuplicate(beforeSchedule));
+        assertFalse(beforeSchedule.isDuplicate(SCHEDULE_ALICE_FIRST_JAN));
+
+        // same tutor, both times overlapping -> return false
+        Schedule otherSchedule = new ScheduleBuilder(SCHEDULE_ALICE_FIRST_JAN)
+            .withStartTime(aliceStartDateTime.plusSeconds(1))
+            .withEndTime(aliceEndDateTime.minusSeconds(1))
+            .build();
+        assertFalse(SCHEDULE_ALICE_FIRST_JAN.isDuplicate(otherSchedule));
+        assertFalse(otherSchedule.isDuplicate(SCHEDULE_ALICE_FIRST_JAN));
+    }
+
+    @Test
     public void testIsClashing() {
         final LocalDateTime aliceStartDateTime = SCHEDULE_ALICE_FIRST_JAN.getStartTime().getTime();
         final LocalDateTime aliceEndDateTime = SCHEDULE_ALICE_FIRST_JAN.getEndTime().getTime();
