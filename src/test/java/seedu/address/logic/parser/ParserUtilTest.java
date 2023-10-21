@@ -40,6 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_AVAILABILITY1 = "Available";
     private static final String VALID_AVAILABILITY2 = "NotAvailable";
+    private static final String VALID_AVAILABILITY3 = "nil";
     private static final String VALID_ANIMAL_TYPE = "able.Dog";
     private static final String VALID_HOUSING = "HDB";
 
@@ -242,6 +243,12 @@ public class ParserUtilTest {
     public void parseAnimalType_invalidInputWhenNotAvailable_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE,
                 new Availability(VALID_AVAILABILITY2)));
+    }
+
+    @Test
+    public void parseAnimalType_invalidInputWhenNilAvailable_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE,
+                new Availability(VALID_AVAILABILITY3)));
     }
 
     @Test
