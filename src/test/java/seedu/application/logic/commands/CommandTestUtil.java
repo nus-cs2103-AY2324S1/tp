@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
 import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
 import static seedu.application.testutil.Assert.assertThrows;
 

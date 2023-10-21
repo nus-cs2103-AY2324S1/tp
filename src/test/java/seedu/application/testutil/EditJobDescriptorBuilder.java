@@ -54,11 +54,17 @@ public class EditJobDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Status} of the {@code EditJobDescriptor} that we are building.
+     */
     public EditJobDescriptorBuilder withStatus(String status) {
         descriptor.setStatus(new Status(status));
         return this;
     }
 
+    /**
+     * Sets the {@code Industry} of the {@code EditJobDescriptor} that we are building.
+     */
     public EditJobDescriptorBuilder withIndustry(String industry) {
         descriptor.setIndustry(new Industry(industry));
         return this;
