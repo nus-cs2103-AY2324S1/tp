@@ -171,7 +171,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateReviewSessionState() {
-        this.isReviewSession = true;
+        this.isReviewSession = !this.isReviewSession;
     }
 
     @Override
