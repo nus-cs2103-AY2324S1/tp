@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.NameContainsKeywordsPredicate;
+import seedu.address.model.interview.exceptions.InterviewNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -104,6 +105,25 @@ public class ModelManagerTest {
     @Test
     public void hasInterview_interviewNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasInterview(STANDARD_INTERVIEW));
+    }
+
+    @Test
+    public void addInterview_successfulInterviewAddition_returnTrue() {
+        modelManager.addInterview(STANDARD_INTERVIEW);
+        assertTrue(modelManager.hasInterview(STANDARD_INTERVIEW));
+    }
+    
+    @Test
+    public void deleteInterview_successfulInterviewDeletion_returnTrue() {
+        modelManager.addInterview(STANDARD_INTERVIEW);
+        assertTrue(modelManager.hasInterview(STANDARD_INTERVIEW));
+        modelManager.deleteInterview(STANDARD_INTERVIEW);
+        assertFalse(modelManager.hasInterview(STANDARD_INTERVIEW));
+    }
+
+    @Test
+    public void deleteInterview_interviewNotInAddressBook_throwInterviewNotFoundException() {
+        assertThrows(InterviewNotFoundException.class, () -> modelManager.deleteInterview(STANDARD_INTERVIEW));
     }
 
     @Test

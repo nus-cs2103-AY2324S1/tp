@@ -17,7 +17,7 @@ import seedu.address.model.interview.Interview;
  */
 public class DeleteInterviewCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete-interview";
+    public static final String COMMAND_WORD = "delete-i";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the interview identified by the index number used in the displayed interview list.\n"
