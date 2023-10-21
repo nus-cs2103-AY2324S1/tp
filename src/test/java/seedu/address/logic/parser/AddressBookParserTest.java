@@ -13,8 +13,11 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -31,6 +34,27 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
+
+    @Test
+    public void parseCommand_add() throws Exception {
+        assertTrue(parser.parseCommand(AddCommand.COMMAND_WORD + " -name Yiwen") instanceof AddCommand);
+        assertTrue(parser.parseCommand(AddCommand.COMMAND_WORD + " -name Yiwen -phone 12345678") instanceof AddCommand);
+    }
+
+    @Test
+    public void parseCommand_addLesson() throws Exception {
+        assertTrue(parser
+                .parseCommand(AddLessonCommand.COMMAND_WORD
+                        + " -name Yiwen -start 14:30 -end 17:30") instanceof AddLessonCommand);
+    }
+    @Test
+    public void parseCommand_edit() throws Exception {
+        assertTrue(parser
+                .parseCommand(EditCommand.COMMAND_WORD + " 1 -name Yiwen") instanceof EditCommand);
+        assertTrue(parser
+                .parseCommand(EditCommand.COMMAND_WORD + " 1 -name Yiwen -phone 12345678") instanceof EditCommand);
+    }
+
 
     @Test
     public void parseCommand_delete() throws Exception {
