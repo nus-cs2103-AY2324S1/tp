@@ -28,7 +28,6 @@ import seedu.flashlingo.logic.commands.StatsCommand;
 import seedu.flashlingo.logic.commands.YesCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
-
 /**
  * Parses user input.
  */

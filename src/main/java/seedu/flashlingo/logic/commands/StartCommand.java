@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
-import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.model.Model;
 
 /**
@@ -23,9 +22,6 @@ public class StartCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.nextReviewWord();
-        if (model.getFilteredFlashCardList().size() == 0) {
-            FlashlingoParser.setReviewSession(false);
-        }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
