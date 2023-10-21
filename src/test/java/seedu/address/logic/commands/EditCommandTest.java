@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,10 +40,16 @@ public class EditCommandTest {
     }
 
     @Test
-    void noNameCollisionTest() {
+    void noNameCollisionAndNoDetectableModificationTest() {
         try {
-            p.parse("edit 1 -name Yiwen").execute(model);
-            assertThrows(CommandException.class, () -> p.parse("edit 1 -name Yiwen").execute(model));
+            int length = model.getFilteredPersonList().size();
+            Person person = new Person(new Name("Yiwen"));
+            model.addPerson(person);
+            assertEquals(person, model.getFilteredPersonList().get(length));
+            String index = Integer.toString(length + 1);
+            p.parse("edit " + index + " -name Yiwen2").execute(model);
+            assertThrows(CommandException.class, () -> p
+                    .parse("edit " + index + " -name Yiwen2").execute(model));
         } catch (Exception e) {
             fail();
         }

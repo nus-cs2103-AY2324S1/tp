@@ -57,7 +57,7 @@ public class Person {
     }
     public void setNameIfNotNull(Name name) {
         if (name != null) {
-            this.name = name;
+            setName(name);
         }
     }
 
@@ -73,7 +73,7 @@ public class Person {
      */
     public void setPhoneIfNotNull(Phone phone) {
         if (phone != null) {
-            this.phone = phone;
+            setPhone(phone);
         }
     }
 
@@ -88,7 +88,7 @@ public class Person {
      */
     public void setEmailIfNotNull(Email email) {
         if (email != null) {
-            this.email = email;
+            setEmail(email);
         }
     }
 
@@ -103,7 +103,7 @@ public class Person {
      */
     public void setAddressIfNotNull(Address address) {
         if (address != null) {
-            this.address = address;
+            setAddress(address);
         }
     }
     /**
@@ -121,8 +121,7 @@ public class Person {
 
     public void setSubjectsIfNotNull(Set<Subject> subjects) {
         if (subjects != null) {
-            this.subjects.clear();
-            this.subjects.addAll(subjects);
+            setSubjects(subjects);
         }
     }
 
@@ -140,8 +139,7 @@ public class Person {
     }
     public void setTagsIfNotNull(Set<Tag> tags) {
         if (tags != null) {
-            this.tags.clear();
-            this.tags.addAll(tags);
+            setTags(tags);
         }
     }
     /**
@@ -152,6 +150,7 @@ public class Person {
             requireAllNonNull(lesson);
             lesson.addStudent(this.name);
         }
+        return;
     }
 
 
