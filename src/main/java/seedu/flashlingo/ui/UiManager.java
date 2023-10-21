@@ -21,7 +21,6 @@ public class UiManager implements Ui {
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     //TODO: Add logo
-//    private static final String ICON_APPLICATION;
 
     private Logic logic;
     private MainWindow mainWindow;
@@ -36,9 +35,6 @@ public class UiManager implements Ui {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
-
-        //Set the application icon.
-//        primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
@@ -66,7 +62,6 @@ public class UiManager implements Ui {
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
                                                String contentText) {
         final Alert alert = new Alert(type);
-//        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
         alert.getDialogPane().getStylesheets().add("view/LightTheme.css");
         alert.initOwner(owner);
         alert.setTitle(title);
