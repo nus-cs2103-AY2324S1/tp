@@ -41,7 +41,6 @@ public class RoomPieChart extends UiPart<Region> {
                         new PieChart.Data("Occupied Rooms", occupiedRooms),
                         new PieChart.Data("Available Rooms", availableRooms));
         final PieChart roomPieChart = new PieChart(pieChartData);
-        roomPieChart.setTitle("All Rooms");
         roomPieChartPane.getChildren().add(roomPieChart);
     }
 }
