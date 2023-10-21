@@ -72,6 +72,8 @@ public class FlashlingoParser {
                 return new YesCommand();
             case NoCommand.COMMAND_WORD:
                 return new NoCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
             case RevealCommand.COMMAND_WORD:
                 return new RevealCommand();
             default:

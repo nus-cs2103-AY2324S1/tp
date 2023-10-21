@@ -1,5 +1,6 @@
 package seedu.flashlingo.logic.parser;
 
+import static seedu.flashlingo.logic.Messages.MESSAGE_EMPTY_VALUE;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD_LANGUAGE;
@@ -36,9 +37,15 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORIGINAL_WORD, PREFIX_ORIGINAL_WORD_LANGUAGE,
                 PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
-        OriginalWord word = ParserUtil.parseWord(argMultimap.getValue(PREFIX_ORIGINAL_WORD).get(),
+        String originalWord = argMultimap.getValue(PREFIX_ORIGINAL_WORD).get().trim();
+        String translationWord = argMultimap.getValue(PREFIX_TRANSLATED_WORD).get().trim();
+        if (originalWord.isEmpty() | translationWord.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_EMPTY_VALUE, AddCommand.MESSAGE_USAGE));
+        }
+
+        OriginalWord word = ParserUtil.parseWord(originalWord,
                 argMultimap.getValue(PREFIX_ORIGINAL_WORD_LANGUAGE).get());
-        TranslatedWord translation = ParserUtil.parseTranslation(argMultimap.getValue(PREFIX_TRANSLATED_WORD).get(),
+        TranslatedWord translation = ParserUtil.parseTranslation(translationWord,
                 argMultimap.getValue(PREFIX_TRANSLATED_WORD_LANGUAGE).get());
 
         return new AddCommand(word, translation);
