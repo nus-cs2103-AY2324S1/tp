@@ -3,7 +3,6 @@ package seedu.flashlingo.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
-import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
 
@@ -21,26 +20,20 @@ public class YesCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
 
     public static final String MESSAGE_NOT_START_REVIEW = "Haven't start review!";
-    private final String isMemorized;
 
     /**
      * Creates an YesCommand.
      */
-    public YesCommand(String input) {
-        this.isMemorized = input;
-    }
-
+    public YesCommand() {}
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-//        if (!model.isInReview()) {
-//            throw new CommandException(MESSAGE_NOT_START_REVIEW);
-//        }
-        model.incrementRememberedWords();
-        return new CommandResult(MESSAGE_SUCCESS + "\n"
-                + String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW + "\n"
-                        + model.getFilteredFlashCardList(),
-                model.getFilteredFlashCardList().size()));
+        if (!model.isReviewSession()) {
+            throw new CommandException(MESSAGE_NOT_START_REVIEW);
+        }
+        model.rememberWord();
+        model.nextReviewWord();
+        return new CommandResult(MESSAGE_SUCCESS + "\n");
     }
 
     @Override
@@ -60,7 +53,6 @@ public class YesCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .add("Yes", isMemorized)
           .toString();
     }
 }

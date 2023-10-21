@@ -142,6 +142,12 @@ public class ModelManager implements Model {
         updateFilteredFlashCardList(t);
         updateReviewSessionState();
     }
+
+    @Override
+    public void rememberWord() {
+        FlashCard flashCard = getFilteredFlashCardList().get(0);
+        flashCard.updateLevel();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
