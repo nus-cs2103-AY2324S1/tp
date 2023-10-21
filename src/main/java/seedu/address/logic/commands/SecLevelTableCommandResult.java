@@ -4,6 +4,9 @@ package seedu.address.logic.commands;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Represents the command result for sec level table generation.
+ */
 public class SecLevelTableCommandResult extends CommandResult {
     private Long sec1Count;
     private Long sec2Count;
@@ -12,6 +15,10 @@ public class SecLevelTableCommandResult extends CommandResult {
 
     private static final String feedbackToUserMessage = "A table categorized by SecLevel is shown";
 
+    /**
+     * Constructor for SecLevelTableCommandResult.
+     * @param columnValueMapping A hashmap instance containing column titles(String) as keys and counts(Long) as values.
+     */
     public SecLevelTableCommandResult(Map<String, Long> columnValueMapping) {
         super(feedbackToUserMessage);
         this.sec1Count = columnValueMapping.get("Sec 1");
@@ -20,9 +27,45 @@ public class SecLevelTableCommandResult extends CommandResult {
         this.sec4Count = columnValueMapping.get("Sec 4");
     }
 
+    /**
+     * Check if this CommandResult instance is meant for table window generation.
+     * @return always return true for SecLevelTableCommandResult instance.
+     */
     @Override
     public boolean isShowTable() {
         return true;
+    }
+
+    /**
+     * Getter method for sec1Count which will auto invoked by javafx PropertyValueFactory instance.
+     * @return counts for sec1 category.
+     */
+    public Long getSec1Count() {
+        return sec1Count;
+    }
+
+    /**
+     * Getter method for sec2Count which will auto invoked by javafx PropertyValueFactory instance.
+     * @return counts for sec2 category.
+     */
+    public Long getSec2Count() {
+        return sec2Count;
+    }
+
+    /**
+     * Getter method for sec3Count which will auto invoked by javafx PropertyValueFactory instance.
+     * @return counts for sec3 category.
+     */
+    public Long getSec3Count() {
+        return sec3Count;
+    }
+
+    /**
+     * Getter method for sec4Count which will auto invoked by javafx PropertyValueFactory instance.
+     * @return counts for sec4 category.
+     */
+    public Long getSec4Count() {
+        return sec4Count;
     }
 
     @Override
@@ -38,10 +81,10 @@ public class SecLevelTableCommandResult extends CommandResult {
 
         SecLevelTableCommandResult otherCommandResult = (SecLevelTableCommandResult) other;
         return super.equals(otherCommandResult)
-                && otherCommandResult.sec1Count == sec1Count
-                && otherCommandResult.sec2Count == sec2Count
-                && otherCommandResult.sec3Count == sec3Count
-                && otherCommandResult.sec4Count == sec4Count;
+                && otherCommandResult.sec1Count.equals(sec1Count)
+                && otherCommandResult.sec2Count.equals(sec2Count)
+                && otherCommandResult.sec3Count.equals(sec3Count)
+                && otherCommandResult.sec4Count.equals(sec4Count);
     }
 
     @Override

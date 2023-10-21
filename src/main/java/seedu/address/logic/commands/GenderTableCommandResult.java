@@ -3,23 +3,50 @@ package seedu.address.logic.commands;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Represents the command result for gender table generation.
+ */
 public class GenderTableCommandResult extends CommandResult {
     private Long maleCount;
     private Long femaleCount;
 
     private static final String feedbackToUserMessage = "A table categorized by gender is shown";
 
+    /**
+     * Constructor for GenderTableCommandResult.
+     * @param columnValueMapping A hashmap containing column titles(String) as key and counts(Long) as values.
+     */
     public GenderTableCommandResult(Map<String, Long> columnValueMapping) {
         super(feedbackToUserMessage);
         this.maleCount = columnValueMapping.get("Male");
         this.femaleCount = columnValueMapping.get("Female");
     }
 
+    /**
+     * Check for if this CommandResult instance is meant for showing table window.
+     * @return always return true for GenderTableCommandResult instance.
+     */
     @Override
     public boolean isShowTable() {
         return true;
     }
 
+
+    /**
+     * Getter method for maleCount which will auto invoked by javafx PropertyValueFactory instance.
+     * @return Counts for male category.
+     */
+    public Long getMaleCount() {
+        return this.maleCount;
+    }
+
+    /**
+     * Getter method for femaleCount which will auto invoked by javafx PropertyValueFactory instance.
+     * @return Counts for female category.
+     */
+    public Long getFemaleCount() {
+        return this.femaleCount;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -34,8 +61,8 @@ public class GenderTableCommandResult extends CommandResult {
 
         GenderTableCommandResult otherCommandResult = (GenderTableCommandResult) other;
         return super.equals(otherCommandResult)
-                && otherCommandResult.maleCount == maleCount
-                && otherCommandResult.femaleCount == femaleCount;
+                && otherCommandResult.maleCount.equals(maleCount)
+                && otherCommandResult.femaleCount.equals(femaleCount);
     }
 
     @Override

@@ -21,6 +21,10 @@ import seedu.address.model.person.StudentIsSecLevelPredicate;
 import seedu.address.model.person.StudentTakesSubjectPredicate;
 import seedu.address.model.tag.Subject;
 
+/**
+ * Calculate counts for each category(to be specified, eg: by gender, Sec-Level, Subject)
+ * for table generation.
+ */
 public class TableCommand extends Command {
     public static final String COMMAND_WORD = "table";
 
@@ -39,6 +43,10 @@ public class TableCommand extends Command {
                                                         + "table " + PREFIX_SUBJECT;
     private final String args;
 
+    /**
+     * Constructor for TableCommand.
+     * @param args represents the category for table, eg: s/, l/, g/
+     */
     public TableCommand(String args) {
         this.args = args.trim();
     }
@@ -59,7 +67,11 @@ public class TableCommand extends Command {
         }
     }
 
-
+    /**
+     * Generate GenderTableCommandResult instance.
+     * @param model instance of Model subclass, e.g. ModelManager instance
+     * @return GenderTableCommandResult instance containing the column titles and values.
+     */
     private GenderTableCommandResult executeGender(Model model) {
         Map<String, Long> columnValueMapping = new HashMap<>();
 
@@ -82,6 +94,11 @@ public class TableCommand extends Command {
         return new GenderTableCommandResult(columnValueMapping);
     }
 
+    /**
+     * Generate SecLevelTableCommandResult instance
+     * @param model instance of Model subclass, e.g. ModelManager instance
+     * @return SecLevelTableCommandResult instance containing column titles and values.
+     */
     private SecLevelTableCommandResult executeSecLevel(Model model) {
         Map<String, Long> columnValueMapping = new HashMap<>();
         String[] titles = new String[] {"Sec 1", "Sec 2", "Sec 3", "Sec 4"};
@@ -111,6 +128,11 @@ public class TableCommand extends Command {
         return new SecLevelTableCommandResult(columnValueMapping);
     }
 
+    /**
+     * Generate SubjectTableCommandResult instance.
+     * @param model instance of Model subclass, e.g. ModelManager instance.
+     * @return SubjectTableCommandResult instance containing column titles and values.
+     */
     private SubjectTableCommandResult executeSubject(Model model) {
         Map<String, Long> columnValueMapping = new HashMap<>();
 

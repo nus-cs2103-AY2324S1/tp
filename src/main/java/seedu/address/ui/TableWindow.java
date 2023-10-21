@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 
 import javafx.fxml.FXML;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -13,24 +12,31 @@ import javafx.scene.control.TableView;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.GenderTableCommandResult;
 import seedu.address.logic.commands.SecLevelTableCommandResult;
-import seedu.address.logic.commands.SubjectTableCommandResult;
-import seedu.address.model.person.Gender;
 import seedu.address.model.tag.Subject;
+import seedu.address.logic.commands.SubjectTableCommandResult;
 
+/**
+ * Controller of a table page.
+ */
 public class TableWindow extends UiPart<Stage> {
     public static final String FXML = "TableWindow.fxml";
-    private CommandResult commandResult;
 
     @FXML
     private TableView<? extends CommandResult> table;
 
+    /**
+     * Constructor for creating TableWindow instance.
+     * @param commandResult Table command result instance containing column titles and values.
+     */
     public TableWindow(CommandResult commandResult) {
         super(FXML, new Stage());
-        this.commandResult = commandResult;
         table = createTable(commandResult);
         initialize();
     }
 
+    /**
+     * Set up the root control, scene and css for the table window.
+     */
     public void initialize() {
         BorderPane root = new BorderPane();
         root.setCenter(table);
@@ -42,7 +48,8 @@ public class TableWindow extends UiPart<Stage> {
 
 
     /**
-     * Creates a table with the given column titles and values.
+     * Creates a table with table command result instance containing
+     * given column titles and values.
      */
     private TableView<? extends CommandResult> createTable(CommandResult commandResult) {
         if (commandResult instanceof GenderTableCommandResult) {
@@ -57,22 +64,34 @@ public class TableWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Create a table with GenderTableCommandResult instance containing counts for each gender.
+     * @param commandResult GenderTableCommandResult containing column titles and counts mapping.
+     * @return a TableView instance generated with given column titles and counts from GenderTableCommandResult instance passed in.
+     */
     private TableView<GenderTableCommandResult> createGenderTable(GenderTableCommandResult commandResult) {
         TableView<GenderTableCommandResult> tableToCreate = new TableView<>();
 
         TableColumn<GenderTableCommandResult, Long> maleColumn = new TableColumn<>("Male");
         maleColumn.setCellValueFactory(new PropertyValueFactory<>("maleCount"));
         TableColumn<GenderTableCommandResult, Long> femaleColumn = new TableColumn<>("Female");
-        maleColumn.setCellValueFactory(new PropertyValueFactory<>("femaleCount"));
+        femaleColumn.setCellValueFactory(new PropertyValueFactory<>("femaleCount"));
 
         tableToCreate.getColumns().add(maleColumn);
         tableToCreate.getColumns().add(femaleColumn);
 
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableToCreate.getItems().add(commandResult);
+
+        tableToCreate.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         return tableToCreate;
     }
 
+    /**
+     * Create a table with SecLevelTableCommandResult instance containing counts for each sec level.
+     * @param commandResult SecLevelTableCommand instance containing column titles and counts mapping.
+     * @return a TableView instance generated with given column titles and counts from SecLevelTableCommandResult instance passed in.
+     */
     private TableView<SecLevelTableCommandResult> createSecLevelTable(SecLevelTableCommandResult commandResult) {
         TableView<SecLevelTableCommandResult> tableToCreate = new TableView<>();
 
@@ -90,11 +109,18 @@ public class TableWindow extends UiPart<Stage> {
         tableToCreate.getColumns().add(sec3Column);
         tableToCreate.getColumns().add(sec4Column);
 
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableToCreate.getItems().add(commandResult);
+
+        tableToCreate.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         return tableToCreate;
     }
 
+    /**
+     * Create a table with SubjectTableCommandResult instance containing counts for each subject
+     * @param commandResult SubjectTableCommandResult instance containing column titles and counts mapping.
+     * @return a TableView instance generated with given column titles and counts from SubjectTableCommand instance passed in.
+     */
     private TableView<SubjectTableCommandResult> createSubjectTable(SubjectTableCommandResult commandResult) {
         TableView<SubjectTableCommandResult> tableToCreate = new TableView<>();
 
@@ -118,7 +144,9 @@ public class TableWindow extends UiPart<Stage> {
         tableToCreate.getColumns().add(bioColumn);
         tableToCreate.getColumns().add(engColumn);
 
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableToCreate.getItems().add(commandResult);
+
+        tableToCreate.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         return tableToCreate;
     }
