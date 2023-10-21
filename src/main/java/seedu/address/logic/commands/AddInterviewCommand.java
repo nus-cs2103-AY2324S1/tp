@@ -30,7 +30,7 @@ public class AddInterviewCommand extends Command {
             + PREFIX_TIMING + "2023-10-24 18:00";
 
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "Error: This is a duplicate interview";
+    public static final String MESSAGE_DUPLICATE_INTERVIEW = "Error: This is a duplicate interview";
 
     private final Interview toAdd;
 
@@ -47,7 +47,7 @@ public class AddInterviewCommand extends Command {
         requireNonNull(model);
 
         if (model.hasInterview(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
 
         model.addInterview(toAdd);
