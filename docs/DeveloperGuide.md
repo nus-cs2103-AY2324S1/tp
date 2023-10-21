@@ -182,7 +182,7 @@ As such only details specific to `edit-t` will be discussed.
 
 Step 1. The user has the application launched with at least 1 tutor added.
 
-Step 2. The user executes `list-s` to view all added tutors.
+Step 2. The user executes `list-t` to view all added tutors.
 
 Step 3. The user executes `edit-t 1 n/John Doe` to edit the first tutor's name in the list of tutors displayed. 
 The command is parsed in AddressBookParser.
