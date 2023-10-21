@@ -1,5 +1,10 @@
 package seedu.flashlingo.logic.parser;
 
+import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.flashlingo.logic.Messages.MESSAGE_IN_REVIEW_SESSION;
+import static seedu.flashlingo.logic.Messages.MESSAGE_NOT_IN_REVIEW_SESSION;
+import static seedu.flashlingo.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,9 +27,6 @@ import seedu.flashlingo.logic.commands.StatsCommand;
 import seedu.flashlingo.logic.commands.YesCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
-import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.flashlingo.logic.Messages.MESSAGE_IN_REVIEW_SESSION;
-
 
 /**
  * Parses user input.
@@ -35,8 +37,10 @@ public class FlashlingoParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(FlashlingoParser.class);
-    private boolean isReviewSession = false;
-
+    private static boolean isReviewSession = false;
+    public static void setReviewSession(boolean edited) {
+        isReviewSession = edited;
+    }
     /**
      * Parses user input into command for execution.
      *
@@ -60,7 +64,7 @@ public class FlashlingoParser {
         if (isReviewSession) {
             switch (commandWord) {
             case StartCommand.COMMAND_WORD:
-                return new StartCommand();
+                throw new ParseException(MESSAGE_IN_REVIEW_SESSION);
             case EndCommand.COMMAND_WORD:
                 isReviewSession = false;
                 return new EndCommand();
@@ -72,7 +76,6 @@ public class FlashlingoParser {
                 logger.finer("This user input caused a ParseException: " + userInput);
                 throw new ParseException(MESSAGE_IN_REVIEW_SESSION);
             }
-
         }
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:
@@ -84,11 +87,11 @@ public class FlashlingoParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
         case NoCommand.COMMAND_WORD:
-            return new NoCommandParser().parse(arguments);
+            throw new ParseException(MESSAGE_NOT_IN_REVIEW_SESSION);
         case LanguageCommand.COMMAND_WORD:
             return new LanguageCommandParser().parse(arguments);
         case YesCommand.COMMAND_WORD:
-            return new YesCommand();
+            throw new ParseException(MESSAGE_NOT_IN_REVIEW_SESSION);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case HelpCommand.COMMAND_WORD:
@@ -103,7 +106,7 @@ public class FlashlingoParser {
             isReviewSession = true;
             return new StartCommand();
         case EndCommand.COMMAND_WORD:
-            return new EndCommand();
+            throw new ParseException(MESSAGE_NOT_IN_REVIEW_SESSION);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

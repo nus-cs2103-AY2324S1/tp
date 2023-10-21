@@ -20,22 +20,14 @@ public class NoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
 
     public static final String MESSAGE_NOT_START_REVIEW = "Haven't start review!";
-
-    private final String isMemorized;
-
     /**
      * Creates an NoCommand.
      */
-    public NoCommand(String input) {
-        this.isMemorized = input;
-    }
+    public NoCommand() {};
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.isReviewSession()) {
-            throw new CommandException(MESSAGE_NOT_START_REVIEW);
-        }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
@@ -56,7 +48,6 @@ public class NoCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .add("no", isMemorized)
           .toString();
     }
 }

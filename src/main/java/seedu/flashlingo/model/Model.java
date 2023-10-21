@@ -88,8 +88,6 @@ public interface Model {
      */
     void updateFilteredFlashCardList(Predicate<FlashCard> predicate);
     void setReviewWord(Predicate<FlashCard> predicate, FlashCard flashCard);
-    boolean isReviewSession();
-    void updateReviewSessionState();
     int getNumberOfFlashCards();
     int getNumberOfRememberedWords();
     void incrementRememberedWords();
