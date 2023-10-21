@@ -27,6 +27,7 @@ Given below are my contributions to the project.
 
 * **Team-based tasks**:
     * delete function
+    * import function
 
 * **Review/mentoring contributions**:
     * Review Lin Chenyu's code

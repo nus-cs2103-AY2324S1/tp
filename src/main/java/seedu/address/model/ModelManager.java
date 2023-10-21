@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
 
 /**
@@ -24,7 +25,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Student> filteredStudents;
+    private FilteredList<Student> filteredStudents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,7 +44,8 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -78,7 +80,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -114,10 +117,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedStudent);
     }
 
-    //=========== Filtered Student List Accessors =============================================================
+    // =========== Filtered Student List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Student} backed by the
+     * internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -129,6 +134,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedPersonList(SortIn sequence) {
+        requireNonNull(sequence);
+        addressBook.sort(sequence);
     }
 
     @Override
