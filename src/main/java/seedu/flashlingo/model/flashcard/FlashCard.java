@@ -94,6 +94,14 @@ public class FlashCard {
     }
 
     /**
+     * Update the flash card to next level
+     */
+    public void updateLevel() {
+        originalLevel.upgradeLevel();
+        updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
+    }
+
+    /**
      * Formats Flashcard for writing to textFile
      *
      * @return Tab separated String formatted for writing

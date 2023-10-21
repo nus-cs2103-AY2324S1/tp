@@ -19,6 +19,8 @@ public class NoCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
 
+    public static final String MESSAGE_NOT_START_REVIEW = "Haven't start review!";
+
     private final String isMemorized;
 
     /**
@@ -31,6 +33,9 @@ public class NoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (!model.isReviewSession()) {
+            throw new CommandException(MESSAGE_NOT_START_REVIEW);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
     @Override

@@ -44,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane flashCardListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,7 +113,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashCardList());
-        personListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
+        flashCardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -176,10 +176,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-    }
-
-    public FlashcardListPanel getPersonListPanel() {
-        return flashcardListPanel;
     }
 
     /**
