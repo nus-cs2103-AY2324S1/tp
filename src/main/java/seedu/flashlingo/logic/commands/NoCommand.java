@@ -33,7 +33,6 @@ public class NoCommand extends Command {
         requireNonNull(model);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
