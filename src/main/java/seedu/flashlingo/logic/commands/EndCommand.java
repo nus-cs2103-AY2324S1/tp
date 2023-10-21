@@ -23,10 +23,6 @@ public class EndCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.isReviewSession()) {
-            throw new CommandException(MESSAGE_STATE_REPEATED);
-        }
-        model.updateReviewSessionState();
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 

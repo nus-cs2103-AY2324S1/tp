@@ -28,7 +28,6 @@ public class ModelManager implements Model {
     //private final FilteredList<FlashCard> tempFlashCards;
     private int numberOfFlashCards;
     private int numberOfRememberedWords;
-    private boolean isReviewSession = false;
     /**
      * Initializes a ModelManager with the given flashlingo and userPrefs.
      */
@@ -135,12 +134,11 @@ public class ModelManager implements Model {
     public void nextReviewWord() throws CommandException {
         updateFilteredFlashCardList(new WordOverduePredicate());
         if (filteredFlashCards.size() == 0) {
-            throw new CommandException("Good job! You have finished today's tasks!");
+            throw new CommandException("There's no FlashCards to review. Well done!");
         }
         FlashCard toBeReviewed = getFilteredFlashCardList().get(0);
         Predicate<FlashCard> t = new NextReviewWordPredicate(toBeReviewed);
         updateFilteredFlashCardList(t);
-        updateReviewSessionState();
     }
 
     @Override
@@ -170,17 +168,6 @@ public class ModelManager implements Model {
         filteredFlashCards.setPredicate(predicate);
         addFlashCard(flashCard);
     }
-
-    @Override
-    public boolean isReviewSession() {
-        return this.isReviewSession;
-    }
-
-    @Override
-    public void updateReviewSessionState() {
-        this.isReviewSession = !this.isReviewSession;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

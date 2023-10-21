@@ -22,7 +22,7 @@ public class NoCommandParser implements Parser<NoCommand> {
             throw new ParseException(
               String.format(MESSAGE_INVALID_COMMAND_FORMAT));
         }
-        return new NoCommand(trimmedArgs);
+        return new NoCommand();
     }
 
 }
