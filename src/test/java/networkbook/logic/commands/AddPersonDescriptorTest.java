@@ -4,13 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import networkbook.logic.commands.edit.EditCommand;
 import org.junit.jupiter.api.Test;
 
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 import networkbook.testutil.EditPersonDescriptorBuilder;
 
-public class EditPersonDescriptorTest {
+public class AddPersonDescriptorTest {
 
     @Test
     public void equals() {

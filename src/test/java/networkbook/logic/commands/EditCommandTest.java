@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
+import networkbook.logic.commands.edit.EditCommand;
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;

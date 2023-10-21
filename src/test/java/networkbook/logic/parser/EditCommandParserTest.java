@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.CommandTestUtil;
-import networkbook.logic.commands.EditCommand;
+import networkbook.logic.commands.edit.EditCommand;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;

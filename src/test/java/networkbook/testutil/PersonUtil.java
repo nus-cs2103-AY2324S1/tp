@@ -2,7 +2,7 @@ package networkbook.testutil;
 
 
 import networkbook.logic.commands.CreateCommand;
-import networkbook.logic.commands.EditCommand;
+import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
@@ -54,7 +54,7 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code AddPersonDescriptor}'s details.
      */
     public static String getEditPersonDescriptorDetails(EditCommand.EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();

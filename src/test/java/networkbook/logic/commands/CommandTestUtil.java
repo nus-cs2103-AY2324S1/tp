@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;

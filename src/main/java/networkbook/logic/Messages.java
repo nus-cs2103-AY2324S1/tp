@@ -13,7 +13,8 @@ import networkbook.model.person.Priority;
  * Container for user visible messages.
  */
 public class Messages {
-
+    public static final String MESSAGE_EXACTLY_ONE_FIELD = "One and only one field can be specified.";
+    public static final String MESSAGE_MUST_BE_PRESENT = "Since some field is present, /index must also be present.";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_NAME = "Invalid name provided for contact to create!";

@@ -77,30 +77,38 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Verify that the total number of corresponding values to {@code prefixesIfPresent} prefixes,
-     * must be equal to the number of values corresponding to {@code prefixThenPresent}.
-     * If that is not true, throw a {@code ParseException}.
+     * Verifies that one and only one of the {@code prefixes} is present.
      */
-    public void verifyNecessaryPrefixesArePresent(Prefix[] prefixesIfPresent, Prefix prefixThenPresent)
-            throws ParseException {
-        int totalCount = Stream.of(prefixesIfPresent)
-                .map(prefix -> {
-                    if (argMultimap.containsKey(prefix)) {
-                        return argMultimap.get(prefix).size();
-                    } else {
-                        return 0;
-                    }
-                })
-                .reduce(0, Integer::sum);
-        int necessaryCount;
-        if (argMultimap.containsKey(prefixThenPresent)) {
-            necessaryCount = argMultimap.get(prefixThenPresent).size();
-        } else {
-            necessaryCount = 0;
+    public Prefix verifyExactlyOneIsPresent(Prefix ... prefixes) throws ParseException {
+        assert prefixes.length > 0;
+
+        Prefix result = null;
+        for (Prefix prefix: prefixes) {
+            if (argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() == 1) {
+                if (result != null) {
+                    throw new ParseException(Messages.MESSAGE_EXACTLY_ONE_FIELD);
+                }
+                result = prefix;
+            }
         }
-        if (totalCount != necessaryCount) {
-            throw new ParseException(
-                    Messages.getErrorMessageForPrefixMustBePresent(prefixesIfPresent, prefixThenPresent, totalCount));
+
+        if (result == null) {
+            throw new ParseException(Messages.MESSAGE_EXACTLY_ONE_FIELD);
+        }
+
+        return result;
+    }
+
+    /**
+     * Verifies that if one of the {@code prefixesIfPresent} is present,
+     * then the {@code prefixThenPresent} must also be present.
+     */
+    public void verifyIfPresentThen(Prefix[] prefixesIfPresent, Prefix prefixThenPresent) throws ParseException {
+        boolean isPresent = Stream.of(prefixesIfPresent)
+                .map(argMultimap::containsKey)
+                .reduce(false, (u, v) -> u || v);
+        if (isPresent && !argMultimap.containsKey(prefixThenPresent)) {
+            throw new ParseException(Messages.MESSAGE_MUST_BE_PRESENT);
         }
     }
 }

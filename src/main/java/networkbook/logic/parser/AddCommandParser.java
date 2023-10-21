@@ -3,8 +3,22 @@ package networkbook.logic.parser;
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.AddCommand;
-import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
+import networkbook.logic.commands.AddCommand.AddPersonDescriptor;
 import networkbook.logic.parser.exceptions.ParseException;
+import networkbook.model.person.Course;
+import networkbook.model.person.Email;
+import networkbook.model.person.Link;
+import networkbook.model.person.Phone;
+import networkbook.model.person.Specialisation;
+import networkbook.model.tag.Tag;
+import networkbook.model.util.UniqueList;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -51,13 +65,135 @@ public class AddCommandParser implements Parser<AddCommand> {
                 CliSyntax.PREFIX_PRIORITY
         );
 
-        EditPersonDescriptor editPersonDescriptor = EditCommandParser.generateEditPersonDescriptor(argMultimap);
+        AddPersonDescriptor addPersonDescriptor =
+                AddCommandParser.generateEditPersonDescriptor(argMultimap);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!addPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(AddCommand.MESSAGE_NO_INFO);
         }
 
-        return new AddCommand(index, editPersonDescriptor);
+        return new AddCommand(index, addPersonDescriptor);
     }
 
+    /**
+     * Creates an {@code AddPersonDescriptor} based on the arguments provided in an edit or add command.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public static AddPersonDescriptor generateEditPersonDescriptor(ArgumentMultimap argMultimap)
+            throws ParseException {
+        AddPersonDescriptor addPersonDescriptor = new AddCommand.AddPersonDescriptor();
+
+        if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
+            addPersonDescriptor.setName(
+                    ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get()));
+        }
+        parsePhonesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_PHONE))
+                .ifPresent(addPersonDescriptor::setPhones);
+        parseEmailsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL))
+                .ifPresent(addPersonDescriptor::setEmails);
+        parseLinksForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_LINK))
+                .ifPresent(addPersonDescriptor::setLinks);
+        if (argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).isPresent()) {
+            addPersonDescriptor.setGraduation(
+                    ParserUtil.parseGraduation(argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).get()));
+        }
+        parseCoursesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_COURSE))
+                .ifPresent(addPersonDescriptor::setCourses);
+        parseSpecialisationsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_SPECIALISATION))
+                .ifPresent(addPersonDescriptor::setSpecialisations);
+        parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG))
+                .ifPresent(addPersonDescriptor::setTags);
+        if (argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).isPresent()) {
+            addPersonDescriptor.setPriority(
+                    ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).get()));
+        }
+
+        return addPersonDescriptor;
+    }
+
+    /**
+     * Parses {@code Collection<String> phones} into a {@code UniqueList<Phone>} wrapped in an {@code Optional}.
+     */
+    private static Optional<UniqueList<Phone>> parsePhonesForEdit(Collection<String> phones) throws ParseException {
+        requireNonNull(phones);
+
+        if (phones.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parsePhones(phones));
+    }
+
+    /**
+     * Parses {@code Collection<String> emails} into a {@code UniqueList<Email>} wrapped in an {@code Optional}.
+     */
+    private static Optional<UniqueList<Email>> parseEmailsForEdit(Collection<String> emails) throws ParseException {
+        requireNonNull(emails);
+
+        if (emails.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseEmails(emails));
+    }
+
+    /**
+     * Parses {@code Collection<String> links} into a {@code UniqueList<Link>} wrapped in an {@code Optional}.
+     */
+    private static Optional<UniqueList<Link>> parseLinksForEdit(Collection<String> links) throws ParseException {
+        requireNonNull(links);
+
+        if (links.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseLinks(links));
+    }
+
+    /**
+     * Parses {@code Collection<String> courses} into a {@code UniqueList<Course>} wrapped in an {@code Optional}.
+     */
+    private static Optional<UniqueList<Course>> parseCoursesForEdit(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+
+        if (courses.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseCourses(courses));
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code UniqueList<Tag>} if {@code tags} is non-empty.
+     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * {@code UniqueList<Tag>} containing zero tags.
+     */
+    private static Optional<UniqueList<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+
+        if (tags.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    private static Optional<List<Index>> parseIndicesForEdit(Collection<String> indices) throws ParseException {
+        requireNonNull(indices);
+
+        if (indices.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseIndices(indices));
+    }
+
+    /**
+     * Parses {@code Coolection<String> specialisations} into a {@code UniqueList<Specialisation>} wrapped in an
+     * {@code Optional}.
+     */
+    private static Optional<UniqueList<Specialisation>> parseSpecialisationsForEdit(Collection<String> specisalisations)
+            throws ParseException {
+        requireNonNull(specisalisations);
+
+        if (specisalisations.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(ParserUtil.parseSpecialisations(specisalisations));
+    }
 }

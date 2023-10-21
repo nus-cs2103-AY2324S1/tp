@@ -79,6 +79,14 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
     }
 
     /**
+     * Replaces the element of zero-based {@code index} with the new element.
+     */
+    public void setItem(int index, T edited) {
+        requireNonNull(edited);
+        this.internalList.set(index, edited);
+    }
+
+    /**
      * Removes the equivalent element from the list.
      * The element must exist in the list.
      * @param toRemove The element to remove.

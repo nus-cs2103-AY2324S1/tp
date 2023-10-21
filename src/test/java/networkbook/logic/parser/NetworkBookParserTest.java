@@ -14,7 +14,7 @@ import networkbook.logic.Messages;
 import networkbook.logic.commands.ClearCommand;
 import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.DeleteCommand;
-import networkbook.logic.commands.EditCommand;
+import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;

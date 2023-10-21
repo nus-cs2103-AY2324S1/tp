@@ -1,7 +1,7 @@
 package networkbook.testutil;
 
 
-import networkbook.logic.commands.EditCommand;
+import networkbook.logic.commands.edit.EditCommand;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
@@ -15,7 +15,7 @@ import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building AddPersonDescriptor objects.
  */
 public class EditPersonDescriptorBuilder {
 
@@ -30,7 +30,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code AddPersonDescriptor} with fields containing {@code person}'s details
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditCommand.EditPersonDescriptor();
@@ -46,7 +46,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code AddPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -54,7 +54,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code AddPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
         descriptor.addPhone(new Phone(phone));
@@ -62,7 +62,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code AddPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.addEmail(new Email(email));
@@ -70,7 +70,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Link} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Link} of the {@code AddPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withLink(String link) {
         descriptor.addLink(new Link(link));
@@ -78,7 +78,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Graduation} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Graduation} of the {@code AddPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withGraduation(String graduation) {
         descriptor.setGraduation(new Graduation(graduation));
@@ -86,7 +86,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Course} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Course} of the {@code AddPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withCourse(String course) {
         descriptor.addCourse(new Course(course));
@@ -94,7 +94,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Specialisation} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Specialisation} of the {@code AddPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withSpecialisation(String specialisation) {
         descriptor.addSpecialisation(new Specialisation(specialisation));
@@ -102,7 +102,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code AddPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
@@ -114,7 +114,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Priority} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Priority} of the {@code AddPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPriority(String priority) {
         descriptor.setPriority(new Priority(priority));
