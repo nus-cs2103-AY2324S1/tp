@@ -33,6 +33,9 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true, true)));
+
+        // different showRoomStatistics value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, true)));
     }
 
     @Test
@@ -50,6 +53,9 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, true).hashCode());
+
+        // different showRoomStatistics value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, true).hashCode());
     }
 
     @Test
