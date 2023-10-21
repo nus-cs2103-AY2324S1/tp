@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.Deck;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.NextPracticeDate;
 import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
 
@@ -18,8 +19,9 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Card[] getSampleCard() {
         return new Card[] {new Card(new Question("What is 1 + 1"),
-                new Answer("2"), "new", LocalDateTime.now()), new Card(new Question("What is 1 + 3"), new Answer("4"),
-                "easy", LocalDateTime.now())
+                new Answer("2"), "new", new NextPracticeDate(LocalDateTime.now())),
+                new Card(new Question("What is 1 + 3"), new Answer("4"),
+                "easy", new NextPracticeDate(LocalDateTime.now()))
         };
     }
 

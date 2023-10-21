@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.NextPracticeDate;
 import seedu.address.model.card.Question;
 
 import java.time.LocalDate;
@@ -14,11 +15,11 @@ public class CardBuilder {
 
     public static final String DEFAULT_QUESTION = "What is the opcode for R-format instructions?";
     public static final String DEFAULT_ANSWER = "0";
-    public static final LocalDateTime DEFAULT_NEXT_PRACTICE_DATE = LocalDateTime.MIN; // highest priority
+    public static final NextPracticeDate DEFAULT_NEXT_PRACTICE_DATE = new NextPracticeDate(LocalDateTime.MIN); // highest priority
 
     private Question question;
     private Answer answer;
-    private LocalDateTime nextPracticeDate;
+    private NextPracticeDate nextPracticeDate;
 
     /**
      * Creates a {@code CardBuilder} with the default details.
@@ -57,7 +58,7 @@ public class CardBuilder {
     /**
      * Sets the next practice date of the {@code Card} that we are building
      */
-    public CardBuilder withNextPracticeDate(LocalDateTime nextPracticeDate) {
+    public CardBuilder withNextPracticeDate(NextPracticeDate nextPracticeDate) {
         this.nextPracticeDate = nextPracticeDate;
         return this;
     }

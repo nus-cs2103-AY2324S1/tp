@@ -6,9 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.NextPracticeDate;
 import seedu.address.model.card.Question;
 
+import javax.print.attribute.standard.DateTimeAtProcessing;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Jackson-friendly version of {@link Card}.
@@ -42,7 +45,7 @@ class JsonAdaptedCard {
         question = source.getQuestion().question;
         answer = source.getAnswer().answer;
         difficulty = source.getDifficulty();
-        nextPracticeDate = source.getNextPracticeDate().toString();
+        nextPracticeDate = source.getNextPracticeDate().nextPracticeDate.toString();
     }
 
     /**
@@ -77,7 +80,11 @@ class JsonAdaptedCard {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NEXT_PRACTICE_DATE_FIELD_NAME));
         }
 
-        final LocalDateTime modelNextPracticeDate = LocalDateTime.parse(nextPracticeDate);
+        if (!NextPracticeDate.isValidNextPracticeDate(nextPracticeDate)) {
+            throw new IllegalValueException(NextPracticeDate.MESSAGE_CONSTRAINTS);
+        }
+
+        final NextPracticeDate modelNextPracticeDate = new NextPracticeDate(LocalDateTime.parse(nextPracticeDate));
 
         return new Card(modelQuestion, modelAnswer, difficulty, modelNextPracticeDate);
     }

@@ -11,10 +11,12 @@ public class CardPracticeDateComparatorTest {
     @Test
     public void compareTo() {
         Card cardWithLowPriority = new CardBuilder()
-                .withNextPracticeDate(LocalDateTime.of(2023, 4, 10, 23, 59))
+                .withNextPracticeDate(
+                        new NextPracticeDate(LocalDateTime.of(2023, 4, 10, 23, 59)))
                 .build();
         Card cardWithHighPriority = new CardBuilder()
-                .withNextPracticeDate(LocalDateTime.of(2018, 4, 10, 23, 59))
+                .withNextPracticeDate(
+                        new NextPracticeDate(LocalDateTime.of(2018, 4, 10, 23, 59)))
                 .build();
         // card has higher priority
         assertTrue(cardWithHighPriority.compareTo(cardWithLowPriority) < 0);

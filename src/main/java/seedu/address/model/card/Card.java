@@ -15,12 +15,12 @@ public class Card implements Comparable<Card>{
     private final Question question;
     private final Answer answer;
     private String difficulty;
-    private LocalDateTime nextPracticeDate;
+    private NextPracticeDate nextPracticeDate;
 
     /**
      * Every field must be present and not null.
      */
-    public Card(Question question, Answer answer, String difficulty, LocalDateTime nextPracticeDate) {
+    public Card(Question question, Answer answer, String difficulty, NextPracticeDate nextPracticeDate) {
         requireAllNonNull(question, answer, nextPracticeDate);
         this.question = question;
         this.answer = answer;
@@ -44,7 +44,7 @@ public class Card implements Comparable<Card>{
         return answer;
     }
 
-    public LocalDateTime getNextPracticeDate() {
+    public NextPracticeDate getNextPracticeDate() {
         return this.nextPracticeDate;
     }
 
@@ -52,7 +52,7 @@ public class Card implements Comparable<Card>{
      * Sets a new practice date.
      * @param nextPracticeDate the new practice date.
      */
-    public void setNextPracticeDate(LocalDateTime nextPracticeDate) {
+    public void setNextPracticeDate(NextPracticeDate nextPracticeDate) {
         this.nextPracticeDate = nextPracticeDate;
     }
 
