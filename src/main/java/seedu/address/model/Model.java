@@ -111,8 +111,8 @@ public interface Model {
     void setInterview(Interview target, Interview editedInterview);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given interview.
+     * The interview must exist in the address book.
      */
     void deleteInterview(Interview target);
 
