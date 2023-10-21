@@ -158,7 +158,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The "Add Tutor" feature allows users to add a new tutor to the address book. Below, we provide an example usage scenario and a detailed description of how the add tutor mechanism behaves at each step.
 
-Given below is an example usage scenario and how the add tutor mechanism behaves at each step.
+The following shows the activity diagram from when a user executes the `add-t` command:
 
 ![AddTutorActivityDiagram](images/AddTutorActivityDiagram.png)
 
