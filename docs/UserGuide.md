@@ -29,13 +29,13 @@ Table of Contents
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all employees.
 
-   * `add n/John doe p/91234567 e/example@example.com a/1 Lower Kent Ridge Road d/SoC HR` : Quickly add a employee:
+   * `add n/John doe p/91234567 e/example@example.com a/1 Lower Kent Ridge Road d/SoC HR` : Quickly add an employee:
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd employee shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all employees.
 
    * `exit` : Exits the app.
 
@@ -91,9 +91,9 @@ Expected outputs:
 
 ![help message](images/helpMessage.png)
 
-### Adding a employee: `add`
+### Adding an employee: `add`
 
-Adds a employee to ManageHR’s entries.
+Adds an employee to ManageHR’s entries.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY d/DEPARTMENT`
 - Adds an employee with the above fields
@@ -121,9 +121,9 @@ Expected outputs:
 | **Success** | Employee added! Johnny \| 12345678 \| johnnysins@gmail.com \| Johnny Street, block 69, #05-05 \| 5300 \| R&D |
 | **Fail** | Please check the parameter inputs                                                                            |
 
-### Listing all people : `list`
+### Listing all employees : `list`
 
-Description: Lists all people currently stored
+Description: Lists all employees currently stored
 
 Format: `list`
 
@@ -135,15 +135,15 @@ Acceptable values for each parameter:
 
 Succeed:
 
-* Outcome: If the command is successful, it lists all people and 
-  displays a message "Listed all people" along with a table of employee data as shown below.
+* Outcome: If the command is successful, it lists all employees and 
+  displays a message "Listed all employees" along with a table of employee data as shown below.
 
 ![Display from list Command](images/listDisplay.png)
 
 Fail:
 * Outcome: If the command format is incorrect, it displays a warning message "Unknown command."
 
-### Editing a employee : `edit`
+### Editing an employee : `edit`
 
 Edits an existing employee in the address book.
 
@@ -156,7 +156,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [d/DEPAR
 Examples:
 *  `edit 1 p/91234567 e/johnsimmons@gmail.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johnsimmons@gmail.com` respectively.
 
-### Locating people by name: `find` `[Coming Soon]`
+### Locating employee by name: `find` `[Coming Soon]`
 
 Finds people whose names contain any of the given keywords.
 
@@ -174,7 +174,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a employee : `delete`
+### Deleting an employee : `delete`
 
 Deletes the specified employee from the address book.
 

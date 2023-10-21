@@ -421,7 +421,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample employees. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -432,14 +432,14 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a employee
+### Deleting an employee
 
-1. Deleting a employee while all people are being shown
+1. Deleting an employee while all people are being shown
 
-   1. Prerequisites: List all people using the `list` command. Multiple people in the list.
+   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First employee is deleted from the list. Details of the deleted employee shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.
