@@ -79,8 +79,7 @@ Shows the list of cards with both the original word and the corresponding transl
 Format: `list`
 
 Output:
-* `There are no words in the list! Add your flashcards now!`
-* `Here are the words:`
+* `Listed all flashcards`
 `1. ORIGINAL_WORD - TRANSLATION`
   `2. ORIGINAL_WORD - TRANSLATION`
   `3. ORIGINAL_WORD - TRANSLATION`
@@ -151,7 +150,7 @@ Shows the meaning of the word.
 Format: `flip`/`f`
 
 Output :
-![img.png](images/StartUi.png)
+![img.png](images/Reveal.png)
 
 ### Indicating user has memorized the word : `yes`
 
