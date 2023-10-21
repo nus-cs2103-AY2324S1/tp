@@ -21,6 +21,10 @@ public class SecLevel {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Please Enter a Valid Level, 1 for Secondary One, 2 for Secondary Two, so on and so forth.";
+    public static final String SEC1 = "Sec 1";
+    public static final String SEC2 = "Sec 2";
+    public static final String SEC3 = "Sec 3";
+    public static final String SEC4 = "Sec 4";
     public final String value;
 
     /**

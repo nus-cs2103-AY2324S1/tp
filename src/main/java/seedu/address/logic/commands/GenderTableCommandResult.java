@@ -10,7 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents the command result for gender table generation.
  */
 public class GenderTableCommandResult extends CommandResult {
-    private static final String feedbackToUserMessage = "A table categorized by gender is shown";
+    private static final String FEEDBACKTOUSERMESSAGE = "A table categorized by gender is shown";
     private Long maleCount;
     private Long femaleCount;
 
@@ -20,7 +20,7 @@ public class GenderTableCommandResult extends CommandResult {
      * @param columnValueMapping A hashmap containing column titles(String) as key and counts(Long) as values.
      */
     public GenderTableCommandResult(Map<String, Long> columnValueMapping) {
-        super(feedbackToUserMessage);
+        super(FEEDBACKTOUSERMESSAGE);
         this.maleCount = columnValueMapping.get("Male");
         this.femaleCount = columnValueMapping.get("Female");
     }
@@ -76,7 +76,7 @@ public class GenderTableCommandResult extends CommandResult {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("feedbackToUser", feedbackToUserMessage)
+                .add("feedbackToUser", FEEDBACKTOUSERMESSAGE)
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
                 .add("exit", isExit())

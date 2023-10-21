@@ -10,7 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents the command result for sec level table generation.
  */
 public class SecLevelTableCommandResult extends CommandResult {
-    private static final String feedbackToUserMessage = "A table categorized by SecLevel is shown";
+    private static final String FEEDBACKTOUSERMESSAGE = "A table categorized by SecLevel is shown";
     private Long sec1Count;
     private Long sec2Count;
     private Long sec3Count;
@@ -22,7 +22,7 @@ public class SecLevelTableCommandResult extends CommandResult {
      * @param columnValueMapping A hashmap instance containing column titles(String) as keys and counts(Long) as values.
      */
     public SecLevelTableCommandResult(Map<String, Long> columnValueMapping) {
-        super(feedbackToUserMessage);
+        super(FEEDBACKTOUSERMESSAGE);
         this.sec1Count = columnValueMapping.get("Sec 1");
         this.sec2Count = columnValueMapping.get("Sec 2");
         this.sec3Count = columnValueMapping.get("Sec 3");
@@ -98,7 +98,7 @@ public class SecLevelTableCommandResult extends CommandResult {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("feedbackToUser", feedbackToUserMessage)
+                .add("feedbackToUser", FEEDBACKTOUSERMESSAGE)
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
                 .add("exit", isExit())

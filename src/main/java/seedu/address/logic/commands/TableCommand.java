@@ -98,7 +98,7 @@ public class TableCommand extends Command {
      */
     private SecLevelTableCommandResult executeSecLevel(Model model) {
         Map<String, Long> columnValueMapping = new HashMap<>();
-        String[] titles = new String[] {"Sec 1", "Sec 2", "Sec 3", "Sec 4"};
+        String[] titles = new String[] {SecLevel.SEC1, SecLevel.SEC2, SecLevel.SEC3, SecLevel.SEC4};
 
         ObservableList<Student> studentList = model.getFilteredPersonList();
 
