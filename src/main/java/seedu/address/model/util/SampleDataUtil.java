@@ -60,7 +60,7 @@ public class SampleDataUtil {
         return new Interview[] {
             new Interview(sampleApplicant, "Frontend Engineer", "Sample Time"),
             new Interview(sampleApplicant2, "Backend Engineer", "Sample Time 2"),
-            new Interview(sampleApplicant, "SWE", "Sample Time 3")
+            new Interview(sampleApplicant3, "SWE", "Sample Time 3")
         };
     }
 
