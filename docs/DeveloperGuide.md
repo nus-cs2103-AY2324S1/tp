@@ -154,6 +154,27 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Edit tutor feature 
+
+#### Implementation
+
+The bulk of the implementation details is identical to that of other commands.
+As such only details specific to `edit-t` will be discussed.
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("edit-t 1 n/New Name")` API call as an example.
+
+![Interactions Inside the Logic Component for the `edit-t 1 n/New Name` Command](images/EditTutorSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditTutorCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+The following activity diagram summarizes what happens when a user executes an edit tutor command:
+
+<img src="images/EditTutorActivityDiagram.png" width="250" />
+
+#### Design rationale:
+The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

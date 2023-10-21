@@ -1,0 +1,29 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid index])
+    if () then ([no repeated fields])
+         if () then ([no invalid field values])
+            if () then ([non-duplicate tutor])
+                :Add tutor to AddressBook;
+            else ([else])
+             :ErrorDuplicateTutor;
+            endif
+        else ([else])
+         :ErrorInvalidFieldValue;
+        endif
+    else ([else])
+     :ErrorDuplicatePrefixes;
+    endif
+else ([else])
+ :ErrorInvalidCommandFormat;
+endif
+stop
+@enduml
