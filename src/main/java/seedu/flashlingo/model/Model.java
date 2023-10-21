@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.flashlingo.commons.core.GuiSettings;
+import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
@@ -13,6 +14,7 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<FlashCard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
+    Predicate<FlashCard> PREDICATE_SHOW_NONE_FLASHCARDS = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -85,7 +87,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFlashCardList(Predicate<FlashCard> predicate);
+    void setReviewWord(Predicate<FlashCard> predicate, FlashCard flashCard);
+    boolean isReviewSession();
+    void updateReviewSessionState();
     int getNumberOfFlashCards();
     int getNumberOfRememberedWords();
     void incrementRememberedWords();
+    void nextReviewWord() throws CommandException;
 }
