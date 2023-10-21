@@ -1,0 +1,94 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditTutorCommandParser" as EditTutorCommandParser LOGIC_COLOR
+participant "e:EditPersonDescriptor" as EditPersonDescriptor LOGIC_COLOR
+participant "d:EditTutorCommand" as EditTutorCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit-t 1 n/New Name")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit-t 1 n/New Name")
+activate AddressBookParser
+
+create EditTutorCommandParser
+AddressBookParser -> EditTutorCommandParser
+activate EditTutorCommandParser
+
+EditTutorCommandParser --> AddressBookParser
+deactivate EditTutorCommandParser
+
+AddressBookParser -> EditTutorCommandParser : parse("1 n/New Name")
+activate EditTutorCommandParser
+
+create EditPersonDescriptor
+EditTutorCommandParser -> EditPersonDescriptor
+activate EditPersonDescriptor
+
+EditPersonDescriptor --> EditTutorCommandParser : e
+deactivate EditPersonDescriptor
+
+create EditTutorCommand
+EditTutorCommandParser -> EditTutorCommand : EditTutorCommand(1, e)
+activate EditTutorCommand
+
+EditTutorCommand --> EditTutorCommandParser : d
+deactivate EditTutorCommand
+
+EditTutorCommandParser --> AddressBookParser : d
+deactivate EditTutorCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditTutorCommandParser -[hidden]-> AddressBookParser
+destroy EditTutorCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> EditTutorCommand : execute()
+activate EditTutorCommand
+
+EditTutorCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> EditTutorCommand
+deactivate Model
+
+EditTutorCommand -> EditTutorCommand : createEditedPerson(p, e)
+
+EditTutorCommand -> Person : Person()
+
+EditTutorCommand -> Model : setPerson(p, editedPerson)
+activate Model
+
+Model --> EditTutorCommand
+deactivate Model
+
+EditTutorCommand -> Model : updateFilteredPersonList()
+activate Model
+
+Model --> EditTutorCommand
+deactivate Model
+
+create CommandResult
+EditTutorCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditTutorCommand
+deactivate CommandResult
+
+EditTutorCommand --> LogicManager : result
+deactivate EditTutorCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
