@@ -16,7 +16,7 @@ import java.util.List;
  * Class representing a group
  */
 public class Group {
-    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric and must not be black";
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
 
@@ -75,7 +75,8 @@ public class Group {
      */
     //For now no constraints
     public static boolean isValidGroup(String name) {
-        return true;
+        requireNonNull(name);
+        return !name.isBlank();
     }
 
     /**

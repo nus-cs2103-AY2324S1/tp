@@ -194,4 +194,5 @@ public class Person {
         this.freeTime.addTime(toAddFreeTime);
         System.out.println(111);
     }
+
 }

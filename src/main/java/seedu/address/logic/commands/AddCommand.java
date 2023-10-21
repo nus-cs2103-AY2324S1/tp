@@ -52,21 +52,16 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        boolean[] fields = model.usedFields(toAdd);
+
         if (model.hasPerson(toAdd)) {
-            try {
-                boolean[] fields = model.usedFields(toAdd);
-                if (fields[0]) {
-                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-                } else if (fields[1]) {
-                    throw new CommandException(MESSAGE_DUPLICATE_NAME);
-                } else if (fields[2]) {
-                    throw new CommandException(MESSAGE_DUPLICATE_PHONE);
-                } else {
-                    throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
-                }
-            } catch (CommandException e) {
-                return new CommandResult(e.getMessage());
-            }
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        } else if (fields[1]) {
+            throw new CommandException(MESSAGE_DUPLICATE_NAME);
+        } else if (fields[2]) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
+        } else if (fields[3]){
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
         model.addPerson(toAdd);
@@ -75,8 +70,6 @@ public class AddCommand extends Command {
             try {
                 group.addPerson(toAdd);
             } catch (CommandException e) {
-
-                System.out.println(e.toString());
                 throw new RuntimeException(e);
             }
         });
