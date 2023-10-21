@@ -29,9 +29,9 @@ public class YesCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.rememberWord();
-        model.nextReviewWord();
-        return new CommandResult(MESSAGE_SUCCESS + "\n");
+        model.rememberWord(true);
+        String response = model.nextReviewWord();
+        return new CommandResult(MESSAGE_SUCCESS + "\n" + response);
     }
 
     @Override

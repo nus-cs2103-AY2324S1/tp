@@ -131,7 +131,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void nextReviewWord() throws CommandException {
+    public String nextReviewWord() throws CommandException {
         updateFilteredFlashCardList(new WordOverduePredicate());
         if (filteredFlashCards.size() == 0) {
             throw new CommandException("There's no FlashCards to review. Well done!");
@@ -139,12 +139,14 @@ public class ModelManager implements Model {
         FlashCard toBeReviewed = getFilteredFlashCardList().get(0);
         Predicate<FlashCard> t = new NextReviewWordPredicate(toBeReviewed);
         updateFilteredFlashCardList(t);
+        return "";
+
     }
 
     @Override
-    public void rememberWord() {
+    public void rememberWord(boolean isUpdated) {
         FlashCard flashCard = getFilteredFlashCardList().get(0);
-        flashCard.updateLevel();
+        flashCard.updateLevel(isUpdated);
     }
     //=========== Filtered Person List Accessors =============================================================
 

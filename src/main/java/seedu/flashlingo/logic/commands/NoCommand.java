@@ -20,6 +20,7 @@ public class NoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
 
     public static final String MESSAGE_NOT_START_REVIEW = "Haven't start review!";
+
     /**
      * Creates an NoCommand.
      */
@@ -28,9 +29,10 @@ public class NoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        model.rememberWord(false);
+        String response = model.nextReviewWord();
+        return new CommandResult(MESSAGE_SUCCESS + "\n" + response);
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
