@@ -108,4 +108,23 @@ public class SubjectTableCommandResultTest {
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
+
+    @Test
+    public void parseMappingCorrectly() {
+        Map<String, Long> titlesValuesMapping = new HashMap<>();
+        titlesValuesMapping.put("Computer Science", 20L);
+        titlesValuesMapping.put("Mathematics", 30L);
+        titlesValuesMapping.put("Chemistry", 40L);
+        titlesValuesMapping.put("Physics", 50L);
+        titlesValuesMapping.put("Biology", 60L);
+        titlesValuesMapping.put("English", 70L);
+        SubjectTableCommandResult commandResult = new SubjectTableCommandResult(titlesValuesMapping);
+
+        assertEquals(commandResult.getCsCount(), 20L);
+        assertEquals(commandResult.getMathsCount(), 30L);
+        assertEquals(commandResult.getChemiCount(), 40L);
+        assertEquals(commandResult.getPhyCount(), 50L);
+        assertEquals(commandResult.getBioCount(), 60L);
+        assertEquals(commandResult.getEngCount(), 70L);
+    }
 }

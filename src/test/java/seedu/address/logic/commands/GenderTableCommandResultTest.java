@@ -78,4 +78,14 @@ public class GenderTableCommandResultTest {
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
+
+    @Test
+    public void parseMappingCorrectly() {
+        Map<String, Long> titlesValuesMapping1 = new HashMap<>();
+        titlesValuesMapping1.put("Male", 20L);
+        titlesValuesMapping1.put("Female", 30L);
+        GenderTableCommandResult commandResult = new GenderTableCommandResult(titlesValuesMapping1);
+        assertEquals(commandResult.getMaleCount(), 20L);
+        assertEquals(commandResult.getFemaleCount(), 30L);
+    }
 }

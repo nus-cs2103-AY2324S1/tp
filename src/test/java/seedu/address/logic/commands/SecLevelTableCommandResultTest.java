@@ -94,4 +94,19 @@ public class SecLevelTableCommandResultTest {
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
+
+    @Test
+    public void parseMappingCorrectly() {
+        Map<String, Long> titlesValuesMapping = new HashMap<>();
+        titlesValuesMapping.put("Sec 1", 20L);
+        titlesValuesMapping.put("Sec 2", 30L);
+        titlesValuesMapping.put("Sec 3", 40L);
+        titlesValuesMapping.put("Sec 4", 50L);
+        SecLevelTableCommandResult commandResult = new SecLevelTableCommandResult(titlesValuesMapping);
+
+        assertEquals(commandResult.getSec1Count(), 20L);
+        assertEquals(commandResult.getSec2Count(), 30L);
+        assertEquals(commandResult.getSec3Count(), 40L);
+        assertEquals(commandResult.getSec4Count(), 50L);
+    }
 }
