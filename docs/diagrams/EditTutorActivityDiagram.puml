@@ -12,7 +12,7 @@ if () then ([valid index])
     if () then ([no repeated fields])
          if () then ([no invalid field values])
             if () then ([non-duplicate tutor])
-                :Add tutor to AddressBook;
+                :Edit tutor in AddressBook;
             else ([else])
              :ErrorDuplicateTutor;
             endif
