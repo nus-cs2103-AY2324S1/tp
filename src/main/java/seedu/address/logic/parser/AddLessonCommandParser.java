@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Subject;
 
 
@@ -16,16 +17,25 @@ import seedu.address.model.person.Subject;
  */
 public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
-    // let be consistent with this, a model's optional field could be null, but during the rendering we check for that
     @Override
     public AddLessonCommand parse(String args) throws ParseException {
+        return new AddLessonCommand(parseLesson(args));
+    }
+
+    /**
+     * Parses the given {@code String} of arguments in to a lesson object
+     * @param args the user input string
+     * @return a lesson object
+     * @throws ParseException if the user input is of wrong format or the lesson clashes with existing lessons
+     */
+    public Lesson parseLesson(String args) throws ParseException {
         LocalTime startTime = TypeParsingUtil.parseTime("start", args);
         LocalTime endTime = TypeParsingUtil.parseTime("end", args);
         if (startTime.isAfter(endTime)) {
             throw new ParseException("Start time must be before end time");
         }
         Subject subject = TypeParsingUtil.parseSubject("subject", args, true);
-        String studentName = TypeParsingUtil.parseStr("name", args);
+        Name studentName = TypeParsingUtil.parseName("name", args);
         LocalDate date = TypeParsingUtil.parseDate("day", args, true);
         if (date == null) {
             date = LocalDate.now();
@@ -33,8 +43,8 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         LocalDateTime start = LocalDateTime.of(date, startTime);
         LocalDateTime end = LocalDateTime.of(date, endTime);
         if (subject == null) {
-            return new AddLessonCommand(new Lesson(start, end, studentName));
+            return new Lesson(start, end, studentName);
         }
-        return new AddLessonCommand(new Lesson(start, end, subject, studentName));
+        return new Lesson(start, end, subject, studentName);
     }
 }

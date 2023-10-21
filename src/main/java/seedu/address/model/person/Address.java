@@ -67,5 +67,14 @@ public class Address {
     public int hashCode() {
         return value.hashCode();
     }
+    /**
+     * Returns a clone of this address that is equal to this address.
+     */
+    public Address clone() {
+        if (this == DEFAULT_ADDRESS) {
+            return DEFAULT_ADDRESS;
+        }
+        return new Address(value);
+    }
 
 }

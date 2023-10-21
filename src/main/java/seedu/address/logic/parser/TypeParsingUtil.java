@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -12,7 +13,11 @@ import seedu.address.logic.parser.exceptions.FlagNotFoundException;
 import seedu.address.logic.parser.exceptions.InvalidInputException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.RepeatedFlagException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 // I am considering probably make sense to write specific parser inside each class.
@@ -215,16 +220,21 @@ public class TypeParsingUtil {
         }
         return parseStr(parseFlag(flagName, input));
     }
-
+    /**
+     * Parses the strings from the input string
+     * @param input the input string of substr seperated by ,
+     */
     public static String[] parseStrs(String flagName, String input) throws ParseException {
         String strs = parseFlag(flagName, input);
-        String[] strList = strs.split(",");
+        String[] strList = Arrays.stream(strs.split(",")).map(String::trim).toArray(String[]::new);
         if (strList.length < 1) {
             throw new InvalidInputException(strs + " is not a valid list of inputs");
         }
         return strList;
     }
-
+    /**
+     * overloading to not throw exception if the flag is not found when isOptional is true
+     */
     public static String[] parseStrs(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
@@ -265,7 +275,9 @@ public class TypeParsingUtil {
 
         return parseSubject(parseFlag(flagName, input));
     }
-
+    /**
+     * Parses the subjects from the input string
+     */
     public static Set<Subject> parseSubjects(String flagName, String input) throws ParseException {
         String[] subjectList = parseStrs(flagName, input);
         Set<Subject> subjectSet = new HashSet<>();
@@ -275,7 +287,9 @@ public class TypeParsingUtil {
         assert !subjectSet.isEmpty();
         return subjectSet;
     }
-
+    /**
+     * overloading to not throw exception if the flag is not found when isOptional is true
+     */
     public static Set<Subject> parseSubjects(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
@@ -320,8 +334,9 @@ public class TypeParsingUtil {
         }
         return parseDayOfWeek(parseFlag(flagName, input));
     }
-
-
+    /**
+     * Parses the email from the input string
+     */
     public static Email parseEmail(String input) throws ParseException {
         if (Email.isValidEmail(input)) {
             return new Email(input);
@@ -333,6 +348,9 @@ public class TypeParsingUtil {
     public static Email parseEmail(String flag, String input) throws ParseException {
         return parseEmail(parseFlag(flag, input));
     }
+    /**
+     * overloading to not throw exception if the flag is not found when isOptional is true
+     */
     public static Email parseEmail(String flag, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
@@ -343,7 +361,9 @@ public class TypeParsingUtil {
         }
         return parseEmail(parseFlag(flag, input));
     }
-
+    /**
+     * Parses the phone from the input string
+     */
     public static Phone parsePhone(String input) throws ParseException {
         if (Phone.isValidPhone(input)) {
             return new Phone(input);
@@ -351,11 +371,16 @@ public class TypeParsingUtil {
             throw new InvalidInputException(input + " is not a valid phone number");
         }
     }
-
+    /**
+     * overloading parsePhone to take in flagName and parse the flag from the input string
+     */
     public static Phone parsePhone(String flag, String input) throws ParseException {
         return parsePhone(parseFlag(flag, input));
     }
 
+    /**
+     * overloading to not throw exception if the flag is not found when isOptional is true
+     */
     public static Phone parsePhone(String flag, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
@@ -367,6 +392,9 @@ public class TypeParsingUtil {
         return parsePhone(parseFlag(flag, input));
     }
 
+    /**
+     * Parses the address from the input string
+     */
     public static Address parseAddress(String input) throws ParseException {
         if (Address.isValidAddress(input)) {
             return new Address(input);
@@ -379,6 +407,9 @@ public class TypeParsingUtil {
         return parseAddress(parseFlag(flag, input));
     }
 
+    /**
+     * overloading to not throw exception if the flag is not found when isOptional is true
+     */
     public static Address parseAddress(String flag, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
@@ -390,6 +421,9 @@ public class TypeParsingUtil {
         return parseAddress(parseFlag(flag, input));
     }
 
+    /**
+     * Parses the name from the input string
+     */
     public static Name parseName(String input) throws ParseException {
         if (Name.isValidName(input)) {
             return new Name(input);
@@ -402,6 +436,9 @@ public class TypeParsingUtil {
         return parseName(parseFlag(flag, input));
     }
 
+    /**
+     * overloading to not throw exception if the flag is not found when isOptional is true
+     */
     public static Name parseName(String flag, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
@@ -413,8 +450,11 @@ public class TypeParsingUtil {
         return parseName(parseFlag(flag, input));
     }
 
-    public static HashSet<Tag> parseTags(String input) throws ParseException {
-        String[] tagList = parseStrs("tag", input);
+    /**
+     * Parses the tags from the input string
+     */
+    public static HashSet<Tag> parseTags(String flag, String input) throws ParseException {
+        String[] tagList = parseStrs(flag, input);
         HashSet<Tag> tagSet = new HashSet<>();
         for (String tag : tagList) {
             if (!Tag.isValidTagName(tag)) {
@@ -429,10 +469,9 @@ public class TypeParsingUtil {
         return tagSet;
     }
 
-    public static HashSet<Tag> parseTags(String flag, String input) throws ParseException {
-        return parseTags(parseFlag(flag, input));
-    }
-
+    /**
+     * overloading to not throw exception if the flag is not found when isOptional is true
+     */
     public static HashSet<Tag> parseTags(String flag, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
@@ -441,7 +480,7 @@ public class TypeParsingUtil {
                 return null;
             }
         }
-        return parseTags(parseFlag(flag, input));
+        return parseTags(flag, input);
     }
     /**
      * Parses the flag from the input string
@@ -452,16 +491,27 @@ public class TypeParsingUtil {
      * @throws RepeatedFlagException if more than one flag is found
      */
     public static String parseFlag(String flag, String input) throws ParseException {
-        Pattern p = Pattern.compile("-" + flag + "\\s*([\\w:,/@#$%&! ]+)");
+        Pattern p = Pattern.compile("-" + flag + "\\s*([\\w:,._/@#$%&! ]+)");
         Matcher m = p.matcher(input);
         if (m.find()) {
-            String flagValue = m.group(1);
+            String flagValue = m.group(1).trim();
             if (m.find()) {
                 throw new RepeatedFlagException("Flag " + flag + " is repeated");
             }
             return flagValue;
         } else {
             throw new FlagNotFoundException("Flag " + flag + " not found");
+        }
+    }
+    public static String getValueImmediatelyAfterCommandName(String commandWord,
+                                                             String errorFieldName,
+                                                             String input) throws ParseException {
+        Pattern p = Pattern.compile(commandWord + "\\s+([\\w ]+)");
+        Matcher m = p.matcher(input);
+        if (m.find()) {
+            return m.group(1).trim();
+        } else {
+            throw new FlagNotFoundException(errorFieldName + " not found");
         }
     }
 }

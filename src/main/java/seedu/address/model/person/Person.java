@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,9 +27,6 @@ public class Person {
     private Address address = Address.DEFAULT_ADDRESS;
     private final Set<Subject> subjects = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
-    // ensure double navigation
-    private final Set<Lesson> lessons = new HashSet<>();
-
 
     /**
      * Make sense to only force the name to be non-null
@@ -38,7 +35,9 @@ public class Person {
         requireAllNonNull(name);
         this.name = name;
     }
-
+    /**
+     * Every field must be present and not null in this constructor.
+     */
     public Person(Name name, Phone phone, Email email, Address address, Set<Subject> subjects, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, subjects, tags);
         this.name = name;
@@ -55,6 +54,11 @@ public class Person {
 
     public void setName(Name name) {
         this.name = name;
+    }
+    public void setNameIfNotNull(Name name) {
+        if (name != null) {
+            this.name = name;
+        }
     }
 
     public Phone getPhone() {
@@ -140,26 +144,13 @@ public class Person {
             this.tags.addAll(tags);
         }
     }
-
     /**
-     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns true if the person has the lesson.
      */
-    public Set<Lesson> getLessons() {
-        lessons.removeIf(Lesson::isDeleted);
-        return Collections.unmodifiableSet(lessons);
-    }
-
-    public void setLessons(Set<Lesson> lessons) {
-        requireAllNonNull(lessons);
-        this.lessons.clear();
-        this.lessons.addAll(lessons);
-    }
-
-    public void setLessonsIfNotNull(Set<Lesson> lessons) {
-        if (lessons != null) {
-            this.lessons.clear();
-            this.lessons.addAll(lessons);
+    public void addLessons(Lesson... lessons) throws IllegalValueException {
+        for (Lesson lesson : lessons) {
+            requireAllNonNull(lesson);
+            lesson.addStudent(this.name);
         }
     }
 
@@ -218,6 +209,20 @@ public class Person {
                 .add("subjects", subjects)
                 .add("tags", tags)
                 .toString();
+    }
+    /**
+     * Returns a clone of this person that is equal to this person.
+     */
+    public Person clone() {
+        Set<Subject> clonedSubjects = new HashSet<>();
+        for (Subject subject : subjects) {
+            clonedSubjects.add(subject.clone());
+        }
+        Set<Tag> clonedTags = new HashSet<>();
+        for (Tag tag : tags) {
+            clonedTags.add(tag.clone());
+        }
+        return new Person(name.clone(), phone.clone(), email.clone(), address.clone(), clonedSubjects, clonedTags);
     }
 
 }

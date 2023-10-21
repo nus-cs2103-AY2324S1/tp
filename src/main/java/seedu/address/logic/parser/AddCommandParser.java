@@ -1,30 +1,9 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.parser.exceptions.InvalidInputException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.Schedule;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -37,14 +16,38 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        Person person = parsePerson(args);
+
+        // I see no reason why execute needs to take in a Model. Since model is not singleton, global variable.
+        // so I could not call addLesson command to add lesson to schedule after adding it to a person.
+        // the code below is a temporary ugly solution that rely on the model passed to the Addcommand to add lesson
+        // I will make model, logic singleton in future and refractor this
+        if (args.contains("-lesson")) {
+            // obtain the substring after -lesson flag
+            String subStrAfterLessonFlag = args.substring(args.indexOf("-lesson") + 7);
+            // set -name flag if it is not set
+            if (!subStrAfterLessonFlag.contains("-name")) {
+                subStrAfterLessonFlag = "-name " + person.getName() + subStrAfterLessonFlag;
+            }
+            Lesson lesson = new AddLessonCommandParser().parseLesson(subStrAfterLessonFlag);
+            return new AddCommand(person, lesson);
+        }
+        return new AddCommand(person);
+    }
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddCommand
+     * @param args string input from user
+     * @return the person parsed
+     * @throws ParseException if the user input does not conform the expected format or of wrong value
+     */
+    public static Person parsePerson(String args) throws ParseException {
         Person person = new Person(TypeParsingUtil.parseName("name", args));
         person.setPhoneIfNotNull(TypeParsingUtil.parsePhone("phone", args, true));
         person.setEmailIfNotNull(TypeParsingUtil.parseEmail("email", args, true));
         person.setAddressIfNotNull(TypeParsingUtil.parseAddress("address", args, true));
         person.setSubjectsIfNotNull(TypeParsingUtil.parseSubjects("subject", args, true));
         person.setTagsIfNotNull(TypeParsingUtil.parseTags("tag", args, true));
-        //person.setLessons(TypeParsingUtil.parseLessons("lesson", args, true));
-
-        return new AddCommand(person);
+        return person;
     }
 }

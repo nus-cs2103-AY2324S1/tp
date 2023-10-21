@@ -81,4 +81,14 @@ public class Email {
         return value.hashCode();
     }
 
+    /**
+     * Returns a clone of this email that is equal to this email.
+     */
+    public Email clone() {
+        if (this == DEFAULT_EMAIL) {
+            return DEFAULT_EMAIL;
+        }
+        return new Email(value);
+    }
+
 }

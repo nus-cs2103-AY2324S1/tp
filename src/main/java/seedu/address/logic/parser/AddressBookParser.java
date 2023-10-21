@@ -56,10 +56,10 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddCommandParser().parse(userInput);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditCommandParser().parse(userInput);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
@@ -82,7 +82,7 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case AddLessonCommand.COMMAND_WORD:
-            return new AddLessonCommandParser().parse(arguments);
+            return new AddLessonCommandParser().parse(userInput);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
