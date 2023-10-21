@@ -7,10 +7,10 @@ import java.util.Objects;
  * Represents the command result for gender table generation.
  */
 public class GenderTableCommandResult extends CommandResult {
+    private static final String feedbackToUserMessage = "A table categorized by gender is shown";
     private Long maleCount;
     private Long femaleCount;
 
-    private static final String feedbackToUserMessage = "A table categorized by gender is shown";
 
     /**
      * Constructor for GenderTableCommandResult.

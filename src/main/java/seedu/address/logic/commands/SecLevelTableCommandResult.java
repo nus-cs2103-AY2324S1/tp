@@ -8,12 +8,12 @@ import java.util.Objects;
  * Represents the command result for sec level table generation.
  */
 public class SecLevelTableCommandResult extends CommandResult {
+    private static final String feedbackToUserMessage = "A table categorized by SecLevel is shown";
     private Long sec1Count;
     private Long sec2Count;
     private Long sec3Count;
     private Long sec4Count;
 
-    private static final String feedbackToUserMessage = "A table categorized by SecLevel is shown";
 
     /**
      * Constructor for SecLevelTableCommandResult.

@@ -5,8 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEC_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
-import javafx.collections.ObservableList;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -21,6 +19,7 @@ import seedu.address.model.person.StudentIsSecLevelPredicate;
 import seedu.address.model.person.StudentTakesSubjectPredicate;
 import seedu.address.model.tag.Subject;
 
+import javafx.collections.ObservableList;
 /**
  * Calculate counts for each category(to be specified, eg: by gender, Sec-Level, Subject)
  * for table generation.
@@ -137,12 +136,12 @@ public class TableCommand extends Command {
         Map<String, Long> columnValueMapping = new HashMap<>();
 
         String[] titles = new String[] {Subject.MATHS, Subject.CS, Subject.CHEMI, Subject.BIO,
-                Subject.ENG, Subject.PHY};
+                                        Subject.ENG, Subject.PHY};
 
         ObservableList<Student> studentList = model.getFilteredPersonList();
 
         StudentTakesSubjectPredicate takeMathsPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.MATHS));
-        StudentTakesSubjectPredicate takeCSPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.CS));
+        StudentTakesSubjectPredicate takeCsPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.CS));
         StudentTakesSubjectPredicate takePhyPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.PHY));
         StudentTakesSubjectPredicate takeChemiPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.CHEMI));
         StudentTakesSubjectPredicate takeBioPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.BIO));
@@ -150,7 +149,7 @@ public class TableCommand extends Command {
 
         Stream<StudentTakesSubjectPredicate> predicateStream = Stream.of(
                 takeMathsPredicate,
-                takeCSPredicate,
+                takeCsPredicate,
                 takePhyPredicate,
                 takeChemiPredicate,
                 takeBioPredicate,

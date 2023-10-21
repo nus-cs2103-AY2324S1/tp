@@ -10,6 +10,7 @@ import seedu.address.model.tag.Subject;
  */
 public class SubjectTableCommandResult extends CommandResult {
 
+    private static final String feedbackToUserMessage = "A table categorized by Subject is shown";
     private Long csCount;
     private Long mathsCount;
     private Long phyCount;
@@ -17,7 +18,6 @@ public class SubjectTableCommandResult extends CommandResult {
     private Long bioCount;
     private Long engCount;
 
-    public static final String feedbackToUserMessage = "A table categorized by Subject is shown";
 
     /**
      * Constructor for SubjectTableCommandResult.

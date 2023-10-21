@@ -148,6 +148,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the table window or focuses on it if it's already opened.
+     * @param tableWindow a TableWindow instance.
+     */
     public void handleTable(TableWindow tableWindow) {
         if (!tableWindow.isShowing()) {
             tableWindow.show();

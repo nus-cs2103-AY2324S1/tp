@@ -13,17 +13,18 @@ import java.util.Locale;
  */
 public class Subject {
 
-    public static final String MESSAGE_CONSTRAINTS = "Subjects names should be alphanumeric, and should not be blank";
-    private static final String MESSAGE_INVALID_DATE_FORMAT = "Date format should be MMM YYYY (e.g. Jul 2023)";
-    private static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM", Locale.ENGLISH);
-
     public static final String MATHS = "Mathematics";
     public static final String CS = "Computer Science";
     public static final String PHY = "Physics";
     public static final String CHEMI = "Chemistry";
     public static final String BIO = "Biology";
     public static final String ENG = "English";
+
+    public static final String MESSAGE_CONSTRAINTS = "Subjects names should be alphanumeric, and should not be blank";
+    private static final String MESSAGE_INVALID_DATE_FORMAT = "Date format should be MMM YYYY (e.g. Jul 2023)";
+    private static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM", Locale.ENGLISH);
+
 
 
     public final String subjectName;
