@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Gender;
@@ -18,8 +19,6 @@ import seedu.address.model.person.StudentIsGenderPredicate;
 import seedu.address.model.person.StudentIsSecLevelPredicate;
 import seedu.address.model.person.StudentTakesSubjectPredicate;
 import seedu.address.model.tag.Subject;
-
-import javafx.collections.ObservableList;
 /**
  * Calculate counts for each category(to be specified, eg: by gender, Sec-Level, Subject)
  * for table generation.
