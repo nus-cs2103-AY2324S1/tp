@@ -18,9 +18,6 @@ public class YesCommand extends Command {
         + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Great Job! You have indicated that you have memorized the word!";
-
-    public static final String MESSAGE_NOT_START_REVIEW = "Haven't start review!";
-
     /**
      * Creates an YesCommand.
      */
