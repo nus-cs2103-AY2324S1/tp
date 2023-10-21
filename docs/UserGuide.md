@@ -271,6 +271,39 @@ Adds a schedule to a specified tutor.
 * `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
 * `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
 
+### Editing a schedule: `edit-s`
+
+Edits an existing schedule in the addressbook.
+
+![edit schedule](images/editSchedule.png)
+
+**Format**: `edit-s SCHEDULE_INDEX s/START_TIME e/END_TIME`
+
+**Examples**:
+* `edit-s 1 s/2023-09-15T13:00:00`
+* `edit-s 2 e/2023-09-16T19:00:00`
+
+**Acceptable values for each parameter**:
+* `SCHEDULE_INDEX`: Only number input accepted, starting from 1 to the last schedule index shown in the list of 
+  schedules.
+* `START_TIME`: Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted
+* `END_TIME`: Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted
+
+**Expected output**:
+* `Edited Schedule: Alex Yeoh; Start Time: Sep 15 2023 09:00; End Time: Sep 15 2023 13:00`
+
+**Error messages**:
+* `Invalid command format!`: Invalid or missing SCHEDULE_INDEX.
+* `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be blank`:
+  The end time entered is not in the correct datetime format.
+* `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be 
+  blank`: The start time entered is not in the correct datetime format.
+* `Multiple values specified for the following single-valued field(s): s/`: More than 1 `s/` was given in the command
+* `Multiple values specified for the following single-valued field(s): e/`: More than 1 `e/` was given in the command
+* `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
+* `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
+* `At least one field to edit must be provided.`: There is no `s/` or `e/` tag provided to edit a field.
+
 ### List all schedules: `list-s`
 
 Displays a list of all schedules in the address book in a table format.
