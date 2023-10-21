@@ -1,7 +1,7 @@
 
 
 package seedu.address.logic.commands;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
 import java.util.List;
@@ -33,12 +33,13 @@ public class UnmarkScheduleCommand extends Command {
      * @param index of the schedule in the filtered schedule list to edit the status
      */
     public UnmarkScheduleCommand(Index index) {
-        requireAllNonNull(index);
+        requireNonNull(index);
 
         this.index = index;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         List<Schedule> lastShownList = model.getFilteredScheduleList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
