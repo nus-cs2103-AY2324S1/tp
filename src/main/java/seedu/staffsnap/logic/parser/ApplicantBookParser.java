@@ -14,6 +14,7 @@ import seedu.staffsnap.logic.commands.ClearCommand;
 import seedu.staffsnap.logic.commands.Command;
 import seedu.staffsnap.logic.commands.ConfirmationCommand;
 import seedu.staffsnap.logic.commands.DeleteCommand;
+import seedu.staffsnap.logic.commands.DeleteInterviewCommand;
 import seedu.staffsnap.logic.commands.EditCommand;
 import seedu.staffsnap.logic.commands.EditInterviewCommand;
 import seedu.staffsnap.logic.commands.ExitCommand;
@@ -106,6 +107,9 @@ public class ApplicantBookParser {
 
         case EditInterviewCommand.COMMAND_WORD:
             return new EditInterviewCommandParser().parse(arguments);
+
+        case DeleteInterviewCommand.COMMAND_WORD:
+            return new DeleteInterviewCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

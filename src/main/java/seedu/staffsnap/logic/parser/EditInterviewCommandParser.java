@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.EditInterviewCommand;
@@ -30,12 +31,16 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
 
         try {
             applicantIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
-            interviewIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INTERVIEW).get());
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE), pe);
         }
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_INTERVIEW, PREFIX_TYPE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE));
+        }
+
+        interviewIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INTERVIEW).get());
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INTERVIEW, PREFIX_TYPE);
 
         EditInterviewDescriptor editInterviewDescriptor = new EditInterviewDescriptor();
