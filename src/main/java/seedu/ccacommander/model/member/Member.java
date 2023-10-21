@@ -12,7 +12,7 @@ import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.model.tag.Tag;
 
 /**
- * Represents a Member in the ccacommander book.
+ * Represents a Member in CcaCommander.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Member {
@@ -118,7 +118,7 @@ public class Member {
                 .add("gender", gender)
                 .add("phone", phone)
                 .add("email", email)
-                .add("ccacommander", address)
+                .add("address", address)
                 .add("tags", tags)
                 .toString();
     }

@@ -12,42 +12,42 @@ import seedu.ccacommander.model.member.Member;
  */
 public class TypicalCcaCommander {
     /**
-     * Returns an {@code CcaCommander} with only typical members.
+     * Returns a {@code CcaCommander} with only typical members.
      */
-    public static CcaCommander getTypicalMemberAddressBook() {
-        CcaCommander ab = new CcaCommander();
+    public static CcaCommander getTypicalMemberCcaCommander() {
+        CcaCommander cc = new CcaCommander();
         for (Member member : getTypicalMembers()) {
-            ab.createMember(member);
+            cc.createMember(member);
         }
 
-        return ab;
+        return cc;
     }
 
     /**
-     * Returns an {@code CcaCommander} with only typical events.
+     * Returns a {@code CcaCommander} with only typical events.
      */
-    public static CcaCommander getTypicalEventAddressBook() {
-        CcaCommander ab = new CcaCommander();
+    public static CcaCommander getTypicalEventCcaCommander() {
+        CcaCommander cc = new CcaCommander();
         for (Event event: getTypicalEvents()) {
-            ab.createEvent(event);
+            cc.createEvent(event);
         }
 
-        return ab;
+        return cc;
     }
 
     /**
      * Returns an {@code CcaCommander} with all the typical members and events.
      */
-    public static CcaCommander getTypicalAddressBook() {
-        CcaCommander ab = new CcaCommander();
+    public static CcaCommander getTypicalCcaCommander() {
+        CcaCommander cc = new CcaCommander();
         for (Member member : getTypicalMembers()) {
-            ab.createMember(member);
+            cc.createMember(member);
         }
 
         for (Event event: getTypicalEvents()) {
-            ab.createEvent(event);
+            cc.createEvent(event);
         }
 
-        return ab;
+        return cc;
     }
 }

@@ -61,7 +61,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyCcaCommander getSampleAddressBook() {
+    public static ReadOnlyCcaCommander getSampleCcaCommander() {
         CcaCommander sampleAb = new CcaCommander();
         for (Member sampleMember : getSampleMembers()) {
             sampleAb.createMember(sampleMember);

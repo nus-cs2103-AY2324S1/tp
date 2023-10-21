@@ -27,9 +27,9 @@ public interface Logic {
     /**
      * Returns the CcaCommander.
      *
-     * @see seedu.ccacommander.model.Model#getAddressBook()
+     * @see seedu.ccacommander.model.Model#getCcaCommander()
      */
-    ReadOnlyCcaCommander getAddressBook();
+    ReadOnlyCcaCommander getCcaCommander();
 
     /** Returns an unmodifiable view of the filtered list of members*/
     ObservableList<Member> getFilteredMemberList();
@@ -38,9 +38,9 @@ public interface Logic {
     ObservableList<Event> getFilteredEventList();
 
     /**
-     * Returns the user prefs' ccacommander book file path.
+     * Returns the user prefs' CcaCommander file path.
      */
-    Path getAddressBookFilePath();
+    Path getCcaCommanderFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

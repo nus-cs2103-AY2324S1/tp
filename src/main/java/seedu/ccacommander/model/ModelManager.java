@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyCcaCommander ccaCommander, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(ccaCommander, userPrefs);
 
-        logger.fine("Initializing with ccacommander book: " + ccaCommander + " and user prefs " + userPrefs);
+        logger.fine("Initializing with CcaCommander: " + ccaCommander + " and user prefs " + userPrefs);
 
         this.ccaCommander = new CcaCommander(ccaCommander);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -67,25 +67,25 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getCcaCommanderFilePath() {
+        return userPrefs.getCcaCommanderFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setCcaCommanderFilePath(Path ccaCommanderFilePath) {
+        requireNonNull(ccaCommanderFilePath);
+        userPrefs.setCcaCommanderFilePath(ccaCommanderFilePath);
     }
 
     //=========== CcaCommander ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyCcaCommander addressBook) {
-        this.ccaCommander.resetData(addressBook);
+    public void setCcaCommander(ReadOnlyCcaCommander ccaCommander) {
+        this.ccaCommander.resetData(ccaCommander);
     }
 
     @Override
-    public ReadOnlyCcaCommander getAddressBook() {
+    public ReadOnlyCcaCommander getCcaCommander() {
         return ccaCommander;
     }
 
@@ -139,7 +139,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Member} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedCcaCommander}
      */
     @Override
     public ObservableList<Member> getFilteredMemberList() {

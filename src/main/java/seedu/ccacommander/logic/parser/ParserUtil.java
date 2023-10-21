@@ -117,7 +117,7 @@ public class ParserUtil {
      * Parses a {@code String location} into an {@code Location}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code locaiton} is invalid.
+     * @throws ParseException if the given {@code location} is invalid.
      */
     public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
@@ -132,7 +132,7 @@ public class ParserUtil {
      * Parses a {@code String eventDate} into an {@code EventDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code locaiton} is invalid.
+     * @throws ParseException if the given {@code date} is invalid.
      */
     public static EventDate parseEventDate(String eventDate) throws ParseException {
         requireNonNull(eventDate);

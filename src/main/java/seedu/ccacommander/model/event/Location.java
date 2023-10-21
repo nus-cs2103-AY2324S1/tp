@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Event's location in the ccacommander book.
+ * Represents an Event's location in CcaCommander.
  * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}
  */
 public class Location {
@@ -12,7 +12,7 @@ public class Location {
     public static final String MESSAGE_CONSTRAINTS = "Location can take any values, and it should not be blank";
 
     /*
-     * The first character of the ccacommander must not be a whitespace,
+     * The first character of the location must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";

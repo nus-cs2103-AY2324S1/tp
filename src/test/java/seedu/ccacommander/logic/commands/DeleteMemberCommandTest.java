@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
 
@@ -25,7 +25,7 @@ import seedu.ccacommander.model.member.Member;
  */
 public class DeleteMemberCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCcaCommander(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -35,7 +35,7 @@ public class DeleteMemberCommandTest {
         String expectedMessage = String.format(DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
                 Messages.format(memberToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
 
         assertCommandSuccess(deleteMemberCommand, model, expectedMessage, expectedModel);
@@ -59,7 +59,7 @@ public class DeleteMemberCommandTest {
         String expectedMessage = String.format(DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
                 Messages.format(memberToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
         showNoMember(expectedModel);
 
@@ -71,8 +71,8 @@ public class DeleteMemberCommandTest {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
 
         Index outOfBoundIndex = INDEX_SECOND_MEMBER;
-        // ensures that outOfBoundIndex is still in bounds of ccacommander book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getMemberList().size());
+        // ensures that outOfBoundIndex is still in bounds of CcaCommander list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getCcaCommander().getMemberList().size());
 
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(outOfBoundIndex);
 

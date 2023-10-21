@@ -2,7 +2,7 @@ package seedu.ccacommander.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 
 import java.nio.file.Path;
 
@@ -48,21 +48,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void ccaCommanderReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonCcaCommanderStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonCcaCommanderStorageTest} class.
          */
-        CcaCommander original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyCcaCommander retrieved = storageManager.readAddressBook().get();
+        CcaCommander original = getTypicalCcaCommander();
+        storageManager.saveCcaCommander(original);
+        ReadOnlyCcaCommander retrieved = storageManager.readCcaCommander().get();
         assertEquals(original, new CcaCommander(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getCcaCommanderFilePath() {
+        assertNotNull(storageManager.getCcaCommanderFilePath());
     }
 
 }

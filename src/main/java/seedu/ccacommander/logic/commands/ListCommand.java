@@ -6,7 +6,7 @@ import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import seedu.ccacommander.model.Model;
 
 /**
- * Lists all persons in the ccacommander book to the user.
+ * Lists all persons in CcaCommander to the user.
  */
 public class ListCommand extends Command {
 

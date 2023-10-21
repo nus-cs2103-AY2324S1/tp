@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents an Event's date in the ccacommander book.
+ * Represents an Event's date in CcaCommander.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class EventDate {

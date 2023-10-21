@@ -1,7 +1,7 @@
 package seedu.ccacommander.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ccacommander.model.util.SampleDataUtil.getSampleAddressBook;
+import static seedu.ccacommander.model.util.SampleDataUtil.getSampleCcaCommander;
 import static seedu.ccacommander.model.util.SampleDataUtil.getSampleEvents;
 import static seedu.ccacommander.model.util.SampleDataUtil.getSampleMembers;
 import static seedu.ccacommander.model.util.SampleDataUtil.getTagSet;
@@ -77,7 +77,7 @@ class SampleDataUtilTest {
     }
 
     @Test
-    void getSampleAddressBook_returnsValidMembersAndEvents() {
+    void getSampleCcaCommander_returnsValidMembersAndEvents() {
         Member alex = new Member(new Name("Alex Yeoh"), new Gender("Male"), new Phone("87438807"),
                 new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends"));
@@ -108,7 +108,7 @@ class SampleDataUtilTest {
                 new EventDate("2023-05-05"), new Location("Batu Cave"));
         Event festival = new Event(new Name("Festival"),
                 new EventDate("2023-10-05"), new Location("Clementi 321"));
-        CcaCommander ccaCommander = (CcaCommander) getSampleAddressBook();
+        CcaCommander ccaCommander = (CcaCommander) getSampleCcaCommander();
         assertTrue(ccaCommander.hasMember(alex));
         assertTrue(ccaCommander.hasMember(bernice));
         assertTrue(ccaCommander.hasMember(charlotte));

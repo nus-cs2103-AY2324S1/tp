@@ -17,8 +17,8 @@ import seedu.ccacommander.model.member.Member;
 /**
  * An Immutable CcaCommander that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "ccacommander")
+class JsonSerializableCcaCommander {
 
     public static final String MESSAGE_DUPLICATE_MEMBER = "Members list contains duplicate member(s).";
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
@@ -27,11 +27,11 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given members and events.
+     * Constructs a {@code JsonSerializableCcaCommander} with the given members and events.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("members") List<JsonAdaptedMember> members,
-                                       @JsonProperty("events") List<JsonAdaptedEvent> events) {
+    public JsonSerializableCcaCommander(@JsonProperty("members") List<JsonAdaptedMember> members,
+                                        @JsonProperty("events") List<JsonAdaptedEvent> events) {
         this.members.addAll(members);
         this.events.addAll(events);
     }
@@ -39,15 +39,15 @@ class JsonSerializableAddressBook {
     /**
      * Converts a given {@code ReadOnlyCcaCommander} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableCcaCommander}.
      */
-    public JsonSerializableAddressBook(ReadOnlyCcaCommander source) {
+    public JsonSerializableCcaCommander(ReadOnlyCcaCommander source) {
         members.addAll(source.getMemberList().stream().map(JsonAdaptedMember::new).collect(Collectors.toList()));
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this ccacommander book into the model's {@code CcaCommander} object.
+     * Converts this CcaCommander into the model's {@code CcaCommander} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

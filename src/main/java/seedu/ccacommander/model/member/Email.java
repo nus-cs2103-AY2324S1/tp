@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Member's email in the ccacommander book.
+ * Represents a Member's email in CcaCommander.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
@@ -36,7 +36,7 @@ public class Email {
     /**
      * Constructs an {@code Email}.
      *
-     * @param email A valid email ccacommander.
+     * @param email A valid email address.
      */
     public Email(String email) {
         requireNonNull(email);

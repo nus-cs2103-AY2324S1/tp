@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Member's phone number in the ccacommander book.
+ * Represents a Member's phone number in CcaCommander.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {

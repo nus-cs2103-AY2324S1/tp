@@ -5,9 +5,9 @@ import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building CcaCommander objects.
  * Example usage: <br>
- *     {@code CcaCommander ab = new CcaCommanderBuilder().withMember("John", "Doe").build();}
+ *     {@code CcaCommander cc = new CcaCommanderBuilder().withMember("John", "Doe").build();}
  */
 public class CcaCommanderBuilder {
 

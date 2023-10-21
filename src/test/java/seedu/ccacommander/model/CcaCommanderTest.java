@@ -10,7 +10,7 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_A
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
 import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
 
@@ -45,8 +45,8 @@ public class CcaCommanderTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        CcaCommander newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyCcaCommander_replacesData() {
+        CcaCommander newData = getTypicalCcaCommander();
         ccaCommander.resetData(newData);
         assertEquals(newData, ccaCommander);
     }
@@ -68,18 +68,18 @@ public class CcaCommanderTest {
     }
 
     @Test
-    public void hasMember_memberNotInAddressBook_returnsFalse() {
+    public void hasMember_memberNotInCcaCommander_returnsFalse() {
         assertFalse(ccaCommander.hasMember(ALICE));
     }
 
     @Test
-    public void hasMember_memberInAddressBook_returnsTrue() {
+    public void hasMember_memberInCcaCommander_returnsTrue() {
         ccaCommander.createMember(ALICE);
         assertTrue(ccaCommander.hasMember(ALICE));
     }
 
     @Test
-    public void hasMember_memberWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasMember_memberWithSameIdentityFieldsInCcaCommander_returnsTrue() {
         ccaCommander.createMember(ALICE);
         Member editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -108,18 +108,18 @@ public class CcaCommanderTest {
     }
 
     @Test
-    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+    public void hasEvent_eventNotInCcaCommander_returnsFalse() {
         assertFalse(ccaCommander.hasEvent(AURORA_BOREALIS));
     }
 
     @Test
-    public void hasEvent_eventInAddressBook_returnsTrue() {
+    public void hasEvent_eventInCcaCommander_returnsTrue() {
         ccaCommander.createEvent(AURORA_BOREALIS);
         assertTrue(ccaCommander.hasEvent(AURORA_BOREALIS));
     }
 
     @Test
-    public void hasEvent_eventWithSameNameInAddressBook_returnsFalse() {
+    public void hasEvent_eventWithSameNameInCcaCommander_returnsFalse() {
         ccaCommander.createEvent(AURORA_BOREALIS);
         Event editedAurora = new EventBuilder(AURORA_BOREALIS).withDate(VALID_DATE_BOXING)
                 .withLocation(VALID_LOCATION_BOXING)

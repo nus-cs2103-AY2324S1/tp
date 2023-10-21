@@ -30,7 +30,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new CcaCommander(), new CcaCommander(modelManager.getAddressBook()));
+        assertEquals(new CcaCommander(), new CcaCommander(modelManager.getCcaCommander()));
     }
 
     @Test
@@ -41,14 +41,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("ccacommander/book/file/path"));
+        userPrefs.setCcaCommanderFilePath(Paths.get("ccacommander/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/ccacommander/book/file/path"));
+        userPrefs.setCcaCommanderFilePath(Paths.get("new/ccacommander/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -65,15 +65,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setCcaCommanderFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setCcaCommanderFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setCcaCommanderFilePath_validPath_setsCcaCommanderFilePath() {
         Path path = Paths.get("ccacommander/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setCcaCommanderFilePath(path);
+        assertEquals(path, modelManager.getCcaCommanderFilePath());
     }
 
     @Test
@@ -82,12 +82,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasMember_memberNotInAddressBook_returnsFalse() {
+    public void hasMember_memberNotInCcaCommander_returnsFalse() {
         assertFalse(modelManager.hasMember(ALICE));
     }
 
     @Test
-    public void hasMember_memberInAddressBook_returnsTrue() {
+    public void hasMember_memberInCcaCommander_returnsTrue() {
         modelManager.createMember(ALICE);
         assertTrue(modelManager.hasMember(ALICE));
     }
@@ -98,12 +98,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+    public void hasEvent_eventNotInCcaCommander_returnsFalse() {
         assertFalse(modelManager.hasEvent(AURORA_BOREALIS));
     }
 
     @Test
-    public void hasEvent_eventInAddressBook_returnsTrue() {
+    public void hasEvent_eventInCcaCommander_returnsTrue() {
         modelManager.createEvent(AURORA_BOREALIS);
         assertTrue(modelManager.hasEvent(AURORA_BOREALIS));
     }
@@ -175,7 +175,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setCcaCommanderFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(ccaCommander, differentUserPrefs)));
     }
 }

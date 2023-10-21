@@ -2,7 +2,7 @@ package seedu.ccacommander.logic.commands;
 
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,14 +23,14 @@ public class CreateEventCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalCcaCommander(), new UserPrefs());
     }
 
     @Test
     public void execute_newEvent_success() {
         Event validEvent = new EventBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.createEvent(validEvent);
 
         assertCommandSuccess(new CreateEventCommand(validEvent), model,
@@ -40,7 +40,7 @@ public class CreateEventCommandIntegrationTest {
 
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
-        Event memberInList = model.getAddressBook().getEventList().get(0);
+        Event memberInList = model.getCcaCommander().getEventList().get(0);
         assertCommandFailure(new CreateEventCommand(memberInList), model,
                 CreateEventCommand.MESSAGE_DUPLICATE_EVENT);
     }

@@ -30,7 +30,7 @@ import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.model.tag.Tag;
 
 /**
- * Edits the details of an existing member in the ccacommander book.
+ * Edits the details of an existing member in CcaCommander.
  */
 public class EditCommand extends Command {
 
@@ -51,7 +51,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_MEMBER_SUCCESS = "Edited Member: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the ccacommander book.";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in CcaCommander.";
 
     private final Index index;
     private final EditMemberDescriptor editMemberDescriptor;
@@ -247,7 +247,7 @@ public class EditCommand extends Command {
                     .add("gender", gender)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("ccacommander", address)
+                    .add("address", address)
                     .add("tags", tags)
                     .toString();
         }

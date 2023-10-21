@@ -125,24 +125,24 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the ccacommander book, filtered member list, filtered event list, selected member and selected event
+     * - the CcaCommander, filtered member list, filtered event list, selected member and selected event
      *   in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        CcaCommander expectedCcaCommander = new CcaCommander(actualModel.getAddressBook());
+        CcaCommander expectedCcaCommander = new CcaCommander(actualModel.getCcaCommander());
         List<Member> expectedFilteredMemberList = new ArrayList<>(actualModel.getFilteredMemberList());
         List<Event> expectedFilteredEventList = new ArrayList<>(actualModel.getFilteredEventList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedCcaCommander, actualModel.getAddressBook());
+        assertEquals(expectedCcaCommander, actualModel.getCcaCommander());
         assertEquals(expectedFilteredMemberList, actualModel.getFilteredMemberList());
         assertEquals(expectedFilteredEventList, actualModel.getFilteredEventList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the member at the given {@code targetIndex} in the
-     * {@code model}'s ccacommander book.
+     * {@code model}'s CcaCommander.
      */
     public static void showMemberAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredMemberList().size());
@@ -156,7 +156,7 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the event at the given {@code targetIndex} in the
-     * {@code model}'s ccacommander book.
+     * {@code model}'s CcaCommander.
      */
     public static void showEventAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());

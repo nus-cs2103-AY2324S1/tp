@@ -101,7 +101,7 @@ public class CcaCommander implements ReadOnlyCcaCommander {
 
     /**
      * Removes {@code key} from this {@code CcaCommander}.
-     * {@code key} must exist in the ccacommander book.
+     * {@code key} must exist in CcaCommander.
      */
     public void removeMember(Member key) {
         members.remove(key);
@@ -110,7 +110,7 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     // event-level operations
 
     /**
-     * Returns true if an event with the same identity as {@code event} exists in the ccacommander book.
+     * Returns true if an event with the same identity as {@code event} exists in CcaCommander.
      */
     public boolean hasEvent(Event event) {
         requireNonNull(event);
@@ -118,8 +118,8 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     }
 
     /**
-     * Adds an event to the ccacommander book.
-     * The event must not already exist in the ccacommander book.
+     * Adds an event to CcaCommander.
+     * The event must not already exist in CcaCommander.
      */
     public void createEvent(Event e) {
         events.createEvent(e);

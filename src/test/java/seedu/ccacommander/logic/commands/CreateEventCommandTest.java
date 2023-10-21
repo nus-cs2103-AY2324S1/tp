@@ -111,12 +111,12 @@ public class CreateEventCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getCcaCommanderFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setCcaCommanderFilePath(Path ccaCommanderFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -126,12 +126,12 @@ public class CreateEventCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyCcaCommander newData) {
+        public void setCcaCommander(ReadOnlyCcaCommander newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyCcaCommander getAddressBook() {
+        public ReadOnlyCcaCommander getCcaCommander() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -227,7 +227,7 @@ public class CreateEventCommandTest {
         }
 
         @Override
-        public ReadOnlyCcaCommander getAddressBook() {
+        public ReadOnlyCcaCommander getCcaCommander() {
             return new CcaCommander();
         }
     }

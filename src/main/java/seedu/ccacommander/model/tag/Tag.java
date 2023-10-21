@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the ccacommander book.
+ * Represents a Tag in CcaCommander.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {

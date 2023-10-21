@@ -49,30 +49,30 @@ public class StorageManager implements Storage {
     // ================ CcaCommander methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return ccaCommanderStorage.getAddressBookFilePath();
+    public Path getCcaCommanderFilePath() {
+        return ccaCommanderStorage.getCcaCommanderFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyCcaCommander> readAddressBook() throws DataLoadingException {
-        return readAddressBook(ccaCommanderStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyCcaCommander> readCcaCommander() throws DataLoadingException {
+        return readCcaCommander(ccaCommanderStorage.getCcaCommanderFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyCcaCommander> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyCcaCommander> readCcaCommander(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return ccaCommanderStorage.readAddressBook(filePath);
+        return ccaCommanderStorage.readCcaCommander(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyCcaCommander addressBook) throws IOException {
-        saveAddressBook(addressBook, ccaCommanderStorage.getAddressBookFilePath());
+    public void saveCcaCommander(ReadOnlyCcaCommander ccaCommander) throws IOException {
+        saveCcaCommander(ccaCommander, ccaCommanderStorage.getCcaCommanderFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyCcaCommander addressBook, Path filePath) throws IOException {
+    public void saveCcaCommander(ReadOnlyCcaCommander ccaCommander, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        ccaCommanderStorage.saveAddressBook(addressBook, filePath);
+        ccaCommanderStorage.saveCcaCommander(ccaCommander, filePath);
     }
 
 }

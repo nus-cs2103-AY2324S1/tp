@@ -27,32 +27,32 @@ public class JsonCcaCommanderStorage implements CcaCommanderStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getCcaCommanderFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyCcaCommander> readAddressBook() throws DataLoadingException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyCcaCommander> readCcaCommander() throws DataLoadingException {
+        return readCcaCommander(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readCcaCommander()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyCcaCommander> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyCcaCommander> readCcaCommander(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        Optional<JsonSerializableCcaCommander> jsonCcaCommander = JsonUtil.readJsonFile(
+                filePath, JsonSerializableCcaCommander.class);
+        if (!jsonCcaCommander.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonCcaCommander.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
@@ -60,21 +60,21 @@ public class JsonCcaCommanderStorage implements CcaCommanderStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyCcaCommander addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveCcaCommander(ReadOnlyCcaCommander addressBook) throws IOException {
+        saveCcaCommander(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyCcaCommander)}.
+     * Similar to {@link #saveCcaCommander(ReadOnlyCcaCommander)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyCcaCommander addressBook, Path filePath) throws IOException {
+    public void saveCcaCommander(ReadOnlyCcaCommander addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableCcaCommander(addressBook), filePath);
     }
 
 }

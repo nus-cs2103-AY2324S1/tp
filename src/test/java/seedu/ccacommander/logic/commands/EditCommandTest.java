@@ -11,7 +11,7 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_HUSBAN
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
 
@@ -33,7 +33,7 @@ import seedu.ccacommander.testutil.MemberBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalCcaCommander(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,7 +43,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
-        Model expectedModel = new ModelManager(new CcaCommander(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,7 +64,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
-        Model expectedModel = new ModelManager(new CcaCommander(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
         expectedModel.setMember(lastMember, editedMember);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -77,7 +77,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
-        Model expectedModel = new ModelManager(new CcaCommander(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +93,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
-        Model expectedModel = new ModelManager(new CcaCommander(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -112,8 +112,8 @@ public class EditCommandTest {
     public void execute_duplicateMemberFilteredList_failure() {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
 
-        // edit member in filtered list into a duplicate in ccacommander book
-        Member memberInList = model.getAddressBook().getMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
+        // edit member in filtered list into a duplicate in CcaCommander
+        Member memberInList = model.getCcaCommander().getMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MEMBER,
                 new EditMemberDescriptorBuilder(memberInList).build());
 
@@ -131,14 +131,14 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of ccacommander book
+     * but smaller than size of CcaCommander
      */
     @Test
     public void execute_invalidMemberIndexFilteredList_failure() {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
         Index outOfBoundIndex = INDEX_SECOND_MEMBER;
-        // ensures that outOfBoundIndex is still in bounds of ccacommander book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getMemberList().size());
+        // ensures that outOfBoundIndex is still in bounds of CcaCommander list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getCcaCommander().getMemberList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());

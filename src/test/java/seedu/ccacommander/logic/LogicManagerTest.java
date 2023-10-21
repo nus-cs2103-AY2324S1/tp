@@ -46,10 +46,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonCcaCommanderStorage addressBookStorage =
-                new JsonCcaCommanderStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonCcaCommanderStorage ccaCommanderStorage =
+                new JsonCcaCommanderStorage(temporaryFolder.resolve("ccacommander.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(ccaCommanderStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -129,7 +129,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -158,7 +158,7 @@ public class LogicManagerTest {
         // Inject LogicManager with an CcaCommanderStorage that throws the IOException e when saving
         JsonCcaCommanderStorage addressBookStorage = new JsonCcaCommanderStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyCcaCommander addressBook, Path filePath)
+            public void saveCcaCommander(ReadOnlyCcaCommander addressBook, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -170,7 +170,7 @@ public class LogicManagerTest {
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing a create command
+        // Triggers the saveCcaCommander method by executing a create command
         String createMemberCommand = CreateMemberCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Member expectedMember = new MemberBuilder(AMY).withTags().build();

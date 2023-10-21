@@ -96,7 +96,7 @@ public class MemberTest {
                 + ", gender=" + ALICE.getGender()
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
-                + ", ccacommander=" + ALICE.getAddress()
+                + ", address=" + ALICE.getAddress()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

@@ -73,7 +73,7 @@ public class MemberNameContainsKeywordsPredicateTest {
         predicate = new MemberNameContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
 
-        // Keywords match phone, email and ccacommander, but does not match name
+        // Keywords match phone, email and address, but does not match name
         predicate = new MemberNameContainsKeywordsPredicate(
                 Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new MemberBuilder().withName("Alice").withPhone("12345")

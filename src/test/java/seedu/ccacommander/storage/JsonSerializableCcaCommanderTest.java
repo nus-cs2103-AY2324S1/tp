@@ -2,8 +2,8 @@ package seedu.ccacommander.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalEventAddressBook;
-import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalMemberAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalEventCcaCommander;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalMemberCcaCommander;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,49 +26,49 @@ public class JsonSerializableCcaCommanderTest {
 
     @Test
     public void toModelType_typicalMembersFile_success() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_MEMBERS_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableCcaCommander dataFromFile = JsonUtil.readJsonFile(TYPICAL_MEMBERS_FILE,
+                JsonSerializableCcaCommander.class).get();
         CcaCommander ccaCommanderFromFile = dataFromFile.toModelType();
-        CcaCommander typicalMembersCcaCommander = getTypicalMemberAddressBook();
+        CcaCommander typicalMembersCcaCommander = getTypicalMemberCcaCommander();
         assertEquals(ccaCommanderFromFile, typicalMembersCcaCommander);
     }
 
     @Test
     public void toModelType_invalidMemberFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_MEMBER_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableCcaCommander dataFromFile = JsonUtil.readJsonFile(INVALID_MEMBER_FILE,
+                JsonSerializableCcaCommander.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
     public void toModelType_duplicateMembers_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_MEMBER_FILE,
-                JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_MEMBER,
+        JsonSerializableCcaCommander dataFromFile = JsonUtil.readJsonFile(DUPLICATE_MEMBER_FILE,
+                JsonSerializableCcaCommander.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableCcaCommander.MESSAGE_DUPLICATE_MEMBER,
                 dataFromFile::toModelType);
     }
 
     @Test
     public void toModelType_typicalEventFile_success() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_EVENT_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableCcaCommander dataFromFile = JsonUtil.readJsonFile(TYPICAL_EVENT_FILE,
+                JsonSerializableCcaCommander.class).get();
         CcaCommander ccaCommanderFromFile = dataFromFile.toModelType();
-        CcaCommander typicalEventsCcaCommander = getTypicalEventAddressBook();
+        CcaCommander typicalEventsCcaCommander = getTypicalEventCcaCommander();
         assertEquals(ccaCommanderFromFile, typicalEventsCcaCommander);
     }
 
     @Test
     public void toModelType_invalidEventFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_EVENT_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableCcaCommander dataFromFile = JsonUtil.readJsonFile(INVALID_EVENT_FILE,
+                JsonSerializableCcaCommander.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
     public void toModelType_duplicateEvents_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_EVENT_FILE,
-                JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_EVENT,
+        JsonSerializableCcaCommander dataFromFile = JsonUtil.readJsonFile(DUPLICATE_EVENT_FILE,
+                JsonSerializableCcaCommander.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableCcaCommander.MESSAGE_DUPLICATE_EVENT,
                 dataFromFile::toModelType);
     }
 }

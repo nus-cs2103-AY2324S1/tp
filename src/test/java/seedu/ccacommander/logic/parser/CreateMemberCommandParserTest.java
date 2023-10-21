@@ -173,7 +173,7 @@ public class CreateMemberCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
                 expectedMessage);
 
-        // missing ccacommander prefix
+        // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
                 expectedMessage);
 
@@ -200,7 +200,7 @@ public class CreateMemberCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
-        // invalid ccacommander
+        // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + INVALID_ADDRESS_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
 

@@ -12,7 +12,7 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.event.Event;
 
 /**
- * Adds a member to the ccacommander book.
+ * Adds a member to CcaCommander.
  */
 public class CreateEventCommand extends Command {
 

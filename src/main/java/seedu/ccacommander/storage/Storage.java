@@ -21,12 +21,12 @@ public interface Storage extends CcaCommanderStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getCcaCommanderFilePath();
 
     @Override
-    Optional<ReadOnlyCcaCommander> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyCcaCommander> readCcaCommander() throws DataLoadingException;
 
     @Override
-    void saveAddressBook(ReadOnlyCcaCommander addressBook) throws IOException;
+    void saveCcaCommander(ReadOnlyCcaCommander ccaCommander) throws IOException;
 
 }

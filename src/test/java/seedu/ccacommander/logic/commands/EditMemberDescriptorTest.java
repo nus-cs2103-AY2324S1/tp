@@ -64,7 +64,7 @@ public class EditMemberDescriptorTest {
                 + editMemberDescriptor.getGender().orElse(null) + ", gender="
                 + editMemberDescriptor.getName().orElse(null) + ", phone="
                 + editMemberDescriptor.getPhone().orElse(null) + ", email="
-                + editMemberDescriptor.getEmail().orElse(null) + ", ccacommander="
+                + editMemberDescriptor.getEmail().orElse(null) + ", address="
                 + editMemberDescriptor.getAddress().orElse(null) + ", tags="
                 + editMemberDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editMemberDescriptor.toString());

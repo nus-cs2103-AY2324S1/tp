@@ -15,7 +15,7 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.member.Member;
 
 /**
- * Adds a member to the ccacommander book.
+ * Adds a member to CcaCommander.
  */
 public class CreateMemberCommand extends Command {
 
@@ -39,7 +39,7 @@ public class CreateMemberCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New member added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the ccacommander book";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in CcaCommander";
 
     private final Member toAdd;
 

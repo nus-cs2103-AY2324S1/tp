@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Member values as in TypicalMembers#getTypicalAddressBook()",
+  "_comment": "CcaCommander save file which contains the same Member values as in TypicalMembers#getTypicalCcaCommander()",
   "members" : [ {
     "name" : "Alice Pauline",
     "gender": "Female",

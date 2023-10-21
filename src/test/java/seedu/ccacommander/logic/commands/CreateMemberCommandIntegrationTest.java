@@ -2,7 +2,7 @@ package seedu.ccacommander.logic.commands;
 
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,14 +23,14 @@ public class CreateMemberCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalCcaCommander(), new UserPrefs());
     }
 
     @Test
     public void execute_newMember_success() {
         Member validMember = new MemberBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.createMember(validMember);
 
         assertCommandSuccess(new CreateMemberCommand(validMember), model,
@@ -40,7 +40,7 @@ public class CreateMemberCommandIntegrationTest {
 
     @Test
     public void execute_duplicateMember_throwsCommandException() {
-        Member memberInList = model.getAddressBook().getMemberList().get(0);
+        Member memberInList = model.getCcaCommander().getMemberList().get(0);
         assertCommandFailure(new CreateMemberCommand(memberInList), model,
                 CreateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
     }

@@ -52,7 +52,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveCcaCommander(model.getCcaCommander());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -63,8 +63,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyCcaCommander getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyCcaCommander getCcaCommander() {
+        return model.getCcaCommander();
     }
 
     @Override
@@ -77,8 +77,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getCcaCommanderFilePath() {
+        return model.getCcaCommanderFilePath();
     }
 
     @Override

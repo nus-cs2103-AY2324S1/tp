@@ -57,7 +57,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        CcaCommanderStorage ccaCommanderStorage = new JsonCcaCommanderStorage(userPrefs.getAddressBookFilePath());
+        CcaCommanderStorage ccaCommanderStorage = new JsonCcaCommanderStorage(userPrefs.getCcaCommanderFilePath());
         storage = new StorageManager(ccaCommanderStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -68,25 +68,25 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s CcaCommander book and {@code userPrefs}. <br>
-     * The data from the sample CcaCommander book will be used instead if {@code storage}'s CcaCommander book is not
-     * found, or an empty CcaCommander book will be used instead if errors occur when reading {@code storage}'s
-     * CcaCommander book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s CcaCommander and {@code userPrefs}. <br>
+     * The data from the sample CcaCommander will be used instead if {@code storage}'s CcaCommander is not
+     * found, or an empty CcaCommander will be used instead if errors occur when reading {@code storage}'s
+     * CcaCommander.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getCcaCommanderFilePath());
 
-        Optional<ReadOnlyCcaCommander> addressBookOptional;
+        Optional<ReadOnlyCcaCommander> ccaCommanderOptional;
         ReadOnlyCcaCommander initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+            ccaCommanderOptional = storage.readCcaCommander();
+            if (!ccaCommanderOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getCcaCommanderFilePath()
                         + " populated with a sample CcaCommander.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = ccaCommanderOptional.orElseGet(SampleDataUtil::getSampleCcaCommander);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+            logger.warning("Data file at " + storage.getCcaCommanderFilePath() + " could not be loaded."
                     + " Will be starting with an empty CcaCommander.");
             initialData = new CcaCommander();
         }
@@ -177,7 +177,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping CCACommander ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

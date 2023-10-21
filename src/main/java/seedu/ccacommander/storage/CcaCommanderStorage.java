@@ -16,7 +16,7 @@ public interface CcaCommanderStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getCcaCommanderFilePath();
 
     /**
      * Returns CcaCommander data as a {@link ReadOnlyCcaCommander}.
@@ -24,23 +24,23 @@ public interface CcaCommanderStorage {
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyCcaCommander> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyCcaCommander> readCcaCommander() throws DataLoadingException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getCcaCommanderFilePath()
      */
-    Optional<ReadOnlyCcaCommander> readAddressBook(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyCcaCommander> readCcaCommander(Path filePath) throws DataLoadingException;
 
     /**
      * Saves the given {@link ReadOnlyCcaCommander} to the storage.
-     * @param addressBook cannot be null.
+     * @param ccaCommander cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyCcaCommander addressBook) throws IOException;
+    void saveCcaCommander(ReadOnlyCcaCommander ccaCommander) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyCcaCommander)
+     * @see #saveCcaCommander(ReadOnlyCcaCommander)
      */
-    void saveAddressBook(ReadOnlyCcaCommander addressBook, Path filePath) throws IOException;
+    void saveCcaCommander(ReadOnlyCcaCommander addressBook, Path filePath) throws IOException;
 
 }

@@ -37,37 +37,37 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' ccacommander book file path.
+     * Returns the user prefs' CcaCommander file path.
      */
-    Path getAddressBookFilePath();
+    Path getCcaCommanderFilePath();
 
     /**
-     * Sets the user prefs' ccacommander book file path.
+     * Sets the user prefs' CcaCommander file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setCcaCommanderFilePath(Path ccaCommanderFilePath);
 
     /**
-     * Replaces ccacommander book data with the data in {@code addressBook}.
+     * Replaces CcaCommander data with the data in {@code ccaCommander}.
      */
-    void setAddressBook(ReadOnlyCcaCommander addressBook);
+    void setCcaCommander(ReadOnlyCcaCommander ccaCommander);
 
     /** Returns the CcaCommander */
-    ReadOnlyCcaCommander getAddressBook();
+    ReadOnlyCcaCommander getCcaCommander();
 
     /**
-     * Returns true if a member with the same identity as {@code member} exists in the ccacommander book.
+     * Returns true if a member with the same identity as {@code member} exists in CcaCommander.
      */
     boolean hasMember(Member member);
 
     /**
      * Deletes the given member.
-     * The member must exist in the ccacommander book.
+     * The member must exist in CcaCommander.
      */
     void deleteMember(Member target);
 
     /**
      * Creates the given member.
-     * {@code member} must not already exist in the ccacommander book.
+     * {@code member} must not already exist in CcaCommander.
      */
     void createMember(Member member);
 

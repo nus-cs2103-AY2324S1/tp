@@ -8,7 +8,7 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.model.shared.Name;
 
 /**
- * Represents an Event in the ccacommander book.
+ * Represents an Event in CcaCommander.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {

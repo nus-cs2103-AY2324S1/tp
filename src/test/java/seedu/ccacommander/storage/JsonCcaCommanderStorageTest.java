@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAddressBook;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaCommander;
 import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
 import static seedu.ccacommander.testutil.TypicalMembers.HOON;
 import static seedu.ccacommander.testutil.TypicalMembers.IDA;
@@ -27,12 +27,12 @@ public class JsonCcaCommanderStorageTest {
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readCcaCommander_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readCcaCommander(null));
     }
 
-    private java.util.Optional<ReadOnlyCcaCommander> readAddressBook(String filePath) throws Exception {
-        return new JsonCcaCommanderStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyCcaCommander> readCcaCommander(String filePath) throws Exception {
+        return new JsonCcaCommanderStorage(Paths.get(filePath)).readCcaCommander(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -43,72 +43,72 @@ public class JsonCcaCommanderStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readCcaCommander("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("notJsonFormatCcaCommander.json"));
+        assertThrows(DataLoadingException.class, () -> readCcaCommander("notJsonFormatCcaCommander.json"));
     }
 
     @Test
-    public void readAddressBook_invalidMemberAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidMemberCcaCommander.json"));
+    public void readCcaCommander_invalidMemberCcaCommander_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readCcaCommander("invalidMemberCcaCommander.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidMemberAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidMemberCcaCommander.json"));
+    public void readCcaCommander_invalidAndValidMemberCcaCommander_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readCcaCommander("invalidAndValidMemberCcaCommander.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
-        CcaCommander original = getTypicalAddressBook();
+    public void readAndSaveCcaCommander_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempCcaCommander.json");
+        CcaCommander original = getTypicalCcaCommander();
         JsonCcaCommanderStorage jsonCcaCommanderStorage = new JsonCcaCommanderStorage(filePath);
 
         // Ensure there is a file path
-        assertNotNull(jsonCcaCommanderStorage.getAddressBookFilePath());
+        assertNotNull(jsonCcaCommanderStorage.getCcaCommanderFilePath());
 
         // Save in new file and read back
-        jsonCcaCommanderStorage.saveAddressBook(original, filePath);
-        ReadOnlyCcaCommander readBack = jsonCcaCommanderStorage.readAddressBook(filePath).get();
+        jsonCcaCommanderStorage.saveCcaCommander(original, filePath);
+        ReadOnlyCcaCommander readBack = jsonCcaCommanderStorage.readCcaCommander(filePath).get();
         assertEquals(original, new CcaCommander(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.createMember(HOON);
         original.removeMember(ALICE);
-        jsonCcaCommanderStorage.saveAddressBook(original, filePath);
-        readBack = jsonCcaCommanderStorage.readAddressBook(filePath).get();
+        jsonCcaCommanderStorage.saveCcaCommander(original, filePath);
+        readBack = jsonCcaCommanderStorage.readCcaCommander(filePath).get();
         assertEquals(original, new CcaCommander(readBack));
 
         // Save and read without specifying file path
         original.createMember(IDA);
-        jsonCcaCommanderStorage.saveAddressBook(original); // file path not specified
-        readBack = jsonCcaCommanderStorage.readAddressBook().get(); // file path not specified
+        jsonCcaCommanderStorage.saveCcaCommander(original); // file path not specified
+        readBack = jsonCcaCommanderStorage.readCcaCommander().get(); // file path not specified
         assertEquals(original, new CcaCommander(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveCcaCommander_nullCcaCommander_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveCcaCommander(null, "SomeFile.json"));
     }
 
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyCcaCommander addressBook, String filePath) {
+    private void saveCcaCommander(ReadOnlyCcaCommander addressBook, String filePath) {
         try {
             new JsonCcaCommanderStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveCcaCommander(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new CcaCommander(), null));
+    public void saveCcaCommander_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveCcaCommander(new CcaCommander(), null));
     }
 }

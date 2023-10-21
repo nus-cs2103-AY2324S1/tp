@@ -5,7 +5,7 @@ import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 
 /**
- * Unmodifiable view of an ccacommander book
+ * Unmodifiable view of CcaCommander
  */
 public interface ReadOnlyCcaCommander {
 
