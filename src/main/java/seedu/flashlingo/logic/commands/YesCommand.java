@@ -22,6 +22,7 @@ public class YesCommand extends Command {
      * Creates an YesCommand.
      */
     public YesCommand() {}
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

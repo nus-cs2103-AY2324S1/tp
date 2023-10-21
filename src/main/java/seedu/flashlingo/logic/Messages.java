@@ -20,6 +20,9 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "Duplicated Flashcards found!";
 
+    public static final String MESSAGE_IN_REVIEW_SESSION = "Sorry, currently you are in a review session. Your command "
+        + "is not supported.\nPlease end the review session first.";
+    public static final String MESSAGE_NOT_IN_REVIEW_SESSION = "You are not in a review session.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

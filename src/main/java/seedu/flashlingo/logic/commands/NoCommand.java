@@ -20,6 +20,11 @@ public class NoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "It seems like that you did not memorize this word well.";
 
 
+    /**
+     * Creates an NoCommand.
+     */
+    public NoCommand() {};
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
