@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Remark {
 
-    public static final String MESSAGE_CONSTRAINTS = "Remark can take any alphanumeric values.";
+    public static final String MESSAGE_CONSTRAINTS = "Remark can take any values, and it should not be blank.";
 
     /*
      * The first character of the remark must not be a whitespace,
