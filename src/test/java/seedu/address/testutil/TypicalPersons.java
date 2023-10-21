@@ -42,7 +42,8 @@ public class TypicalPersons {
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withNextOfKinName("Carl Dad")
-            .withNextOfKinPhone("95351111").withAddress("wall street").build();
+            .withNextOfKinPhone("95351111").withAddress("wall street")
+            .withAppointment("Review insurance, 01-05-2023 07:00").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withNextOfKinName("Daniel Dad")
             .withNextOfKinPhone("87651111").withTags("friends").build();
