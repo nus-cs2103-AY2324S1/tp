@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,10 +12,10 @@ import seedu.address.logic.parser.exceptions.FlagNotFoundException;
 import seedu.address.logic.parser.exceptions.InvalidInputException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.RepeatedFlagException;
-import seedu.address.model.person.Subject;
+import seedu.address.model.person.*;
+import seedu.address.model.tag.Tag;
 
-
-
+// I am considering probably make sense to write specific parser inside each class.
 /**
  * Contains utility methods used for parsing strings into various desirable values, and validating them.
  */
@@ -214,6 +216,26 @@ public class TypeParsingUtil {
         return parseStr(parseFlag(flagName, input));
     }
 
+    public static String[] parseStrs(String flagName, String input) throws ParseException {
+        String strs = parseFlag(flagName, input);
+        String[] strList = strs.split(",");
+        if (strList.length < 1) {
+            throw new InvalidInputException(strs + " is not a valid list of inputs");
+        }
+        return strList;
+    }
+
+    public static String[] parseStrs(String flagName, String input, boolean isOptional) throws ParseException {
+        if (isOptional) {
+            try {
+                parseFlag(flagName, input);
+            } catch (FlagNotFoundException e) {
+                return null;
+            }
+        }
+        return parseStrs(flagName, input);
+    }
+
     /**
      * Parses the subject from the input string
      * @param input the input string where the flag is to be parsed from
@@ -237,6 +259,24 @@ public class TypeParsingUtil {
      * overloading to not throw exception if the flag is not found when isOptional is true
      */
     public static Subject parseSubject(String flagName, String input, boolean isOptional) throws ParseException {
+        if (isOptional && parseStrs(flagName, input, true) == null) {
+            return null;
+        }
+
+        return parseSubject(parseFlag(flagName, input));
+    }
+
+    public static Set<Subject> parseSubjects(String flagName, String input) throws ParseException {
+        String[] subjectList = parseStrs(flagName, input);
+        Set<Subject> subjectSet = new HashSet<>();
+        for (String subject : subjectList) {
+            subjectSet.add(parseSubject(subject));
+        }
+        assert !subjectSet.isEmpty();
+        return subjectSet;
+    }
+
+    public static Set<Subject> parseSubjects(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional) {
             try {
                 parseFlag(flagName, input);
@@ -244,9 +284,8 @@ public class TypeParsingUtil {
                 return null;
             }
         }
-        return parseSubject(parseFlag(flagName, input));
+        return parseSubjects(flagName, input);
     }
-
     /**
      * Parses the day of week from the input string
      * @param input the input string where the flag is to be parsed from
@@ -281,6 +320,129 @@ public class TypeParsingUtil {
         }
         return parseDayOfWeek(parseFlag(flagName, input));
     }
+
+
+    public static Email parseEmail(String input) throws ParseException {
+        if (Email.isValidEmail(input)) {
+            return new Email(input);
+        } else {
+            throw new InvalidInputException(input + " is not a valid email");
+        }
+    }
+
+    public static Email parseEmail(String flag, String input) throws ParseException {
+        return parseEmail(parseFlag(flag, input));
+    }
+    public static Email parseEmail(String flag, String input, boolean isOptional) throws ParseException {
+        if (isOptional) {
+            try {
+                parseFlag(flag, input);
+            } catch (FlagNotFoundException e) {
+                return null;
+            }
+        }
+        return parseEmail(parseFlag(flag, input));
+    }
+
+    public static Phone parsePhone(String input) throws ParseException {
+        if (Phone.isValidPhone(input)) {
+            return new Phone(input);
+        } else {
+            throw new InvalidInputException(input + " is not a valid phone number");
+        }
+    }
+
+    public static Phone parsePhone(String flag, String input) throws ParseException {
+        return parsePhone(parseFlag(flag, input));
+    }
+
+    public static Phone parsePhone(String flag, String input, boolean isOptional) throws ParseException {
+        if (isOptional) {
+            try {
+                parseFlag(flag, input);
+            } catch (FlagNotFoundException e) {
+                return null;
+            }
+        }
+        return parsePhone(parseFlag(flag, input));
+    }
+
+    public static Address parseAddress(String input) throws ParseException {
+        if (Address.isValidAddress(input)) {
+            return new Address(input);
+        } else {
+            throw new InvalidInputException(input + " is not a valid address");
+        }
+    }
+
+    public static Address parseAddress(String flag, String input) throws ParseException {
+        return parseAddress(parseFlag(flag, input));
+    }
+
+    public static Address parseAddress(String flag, String input, boolean isOptional) throws ParseException {
+        if (isOptional) {
+            try {
+                parseFlag(flag, input);
+            } catch (FlagNotFoundException e) {
+                return null;
+            }
+        }
+        return parseAddress(parseFlag(flag, input));
+    }
+
+    public static Name parseName(String input) throws ParseException {
+        if (Name.isValidName(input)) {
+            return new Name(input);
+        } else {
+            throw new InvalidInputException(input + " is not a valid name");
+        }
+    }
+
+    public static Name parseName(String flag, String input) throws ParseException {
+        return parseName(parseFlag(flag, input));
+    }
+
+    public static Name parseName(String flag, String input, boolean isOptional) throws ParseException {
+        if (isOptional) {
+            try {
+                parseFlag(flag, input);
+            } catch (FlagNotFoundException e) {
+                return null;
+            }
+        }
+        return parseName(parseFlag(flag, input));
+    }
+
+    public static HashSet<Tag> parseTags(String input) throws ParseException {
+        String[] tagList = parseStrs("tag", input);
+        HashSet<Tag> tagSet = new HashSet<>();
+        for (String tag : tagList) {
+            if (!Tag.isValidTagName(tag)) {
+                throw new InvalidInputException(tag + " is not a valid tag");
+            }
+            if (tagSet.contains(new Tag(tag))) {
+                throw new InvalidInputException(tag + " is repeated");
+            }
+            tagSet.add(new Tag(tag));
+        }
+        assert !tagSet.isEmpty();
+        return tagSet;
+    }
+
+    public static HashSet<Tag> parseTags(String flag, String input) throws ParseException {
+        return parseTags(parseFlag(flag, input));
+    }
+
+    public static HashSet<Tag> parseTags(String flag, String input, boolean isOptional) throws ParseException {
+        if (isOptional) {
+            try {
+                parseFlag(flag, input);
+            } catch (FlagNotFoundException e) {
+                return null;
+            }
+        }
+        return parseTags(parseFlag(flag, input));
+    }
     /**
      * Parses the flag from the input string
      * @param flag the flag to parse
@@ -290,7 +452,7 @@ public class TypeParsingUtil {
      * @throws RepeatedFlagException if more than one flag is found
      */
     public static String parseFlag(String flag, String input) throws ParseException {
-        Pattern p = Pattern.compile("-" + flag + "\\s*([\\w:,/]+)");
+        Pattern p = Pattern.compile("-" + flag + "\\s*([\\w:,/@#$%&! ]+)");
         Matcher m = p.matcher(input);
         if (m.find()) {
             String flagValue = m.group(1);

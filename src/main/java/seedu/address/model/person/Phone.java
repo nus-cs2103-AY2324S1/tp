@@ -8,6 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {
+    public static final Phone DEFAULT_PHONE = new Phone();
+    public static final String DEFAULT_PHONE_MESSAGE= "To be added.";
 
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -24,6 +26,10 @@ public class Phone {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         value = phone;
+    }
+
+    Phone() {
+        value = DEFAULT_PHONE_MESSAGE;
     }
 
     /**

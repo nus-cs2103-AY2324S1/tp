@@ -24,6 +24,8 @@ public class Lesson {
     private Subject subject;
     private ArrayList<String> students; // TOOD: change to student object
 
+    private boolean deleted = false;
+
     /**
      * Constructor for a Lesson Object with at least one student.
      * Note: parse the string before giving it to the constructor.
@@ -298,5 +300,19 @@ public class Lesson {
      */
     private boolean isSameDay() {
         return start.toLocalDate().isEqual(end.toLocalDate());
+    }
+
+    /**
+     * So that person know that a lesson has been deleted
+     */
+    public void delete() {
+        this.deleted = true;
+    }
+
+    /**
+     * Returns true if this lesson has been deleted.
+     */
+    public boolean isDeleted() {
+        return this.deleted;
     }
 }

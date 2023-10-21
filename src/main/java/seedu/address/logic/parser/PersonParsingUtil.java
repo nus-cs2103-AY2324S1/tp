@@ -1,2 +1,4 @@
-package seedu.address.logic.parser;public class PersonParsingUtil {
+package seedu.address.logic.parser;
+
+public class PersonParsingUtil {
 }
