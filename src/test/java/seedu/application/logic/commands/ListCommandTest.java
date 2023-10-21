@@ -12,6 +12,7 @@ import seedu.application.model.Model;
 import seedu.application.model.ModelManager;
 import seedu.application.model.UserPrefs;
 import seedu.application.model.job.FieldComparator;
+import seedu.application.model.job.Role;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -38,5 +39,12 @@ public class ListCommandTest {
         showJobAtIndex(model, INDEX_FIRST_JOB);
         assertCommandSuccess(new ListCommand(new FieldComparator(FieldComparator.EMPTY_COMPARATOR_SPECIFIER)),
             model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsSorted_showsSortedList() {
+        FieldComparator fieldComparator = new FieldComparator(Role.ROLE_SPECIFIER);
+        expectedModel.sortJobs(fieldComparator);
+        assertCommandSuccess(new ListCommand(fieldComparator), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
