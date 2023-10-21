@@ -26,7 +26,7 @@ public class ShowCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_SHOW_PERSON_SUCCESS = "Showing Person: %1$s";
-     public static final String MESSAGE_SHOW_LESSON_SUCCESS = "Showing Lesson: %1$s";
+    public static final String MESSAGE_SHOW_LESSON_SUCCESS = "Showing Lesson: %1$s";
 
     private final Index targetIndex;
 
