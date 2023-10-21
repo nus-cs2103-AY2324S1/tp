@@ -268,15 +268,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …         | I want to …                                                              | So that I can…                                                                                                           |
-| -------- |----------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | foster manager | delete a fosterer from the list when they want to stop fostering with us | update the list to see the fosterers who are currently in our program                                                    |
-| `* * *`  | foster manager | add each fosterer's details efficiently                                  | allow my colleagues who are conducting home visits to view these information without any inconvenience                   |
-| `* * *`  | foster manager | provide details of the fostered animal of concern to the fosterer        | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for         |
-| `* * *`  | foster manager | update each foster family’s and animal’s details                         | keep track of fosterer's most up-to-date information, including updated information of the animal fostered                |
-| `* * *`  | foster manager | allocate volunteers to each foster family                                | keep track of who is in charge of checking the pet’s condition for each fosterer and send help if needed                 |
-| `* * *`  | foster manager | search for a specific animal / fosterer’s detail                         | find specific fosterers or animals more easily, given only partial information                                           |
-| `* * *`  | foster manager | filter and sort the animals in the database by any criteria              | easily view the animals that suit specific fosterer’s accommodation capabilities and prioritise the animals more in need |
+| Priority | As a …         | I want to …                                                                                   | So that I can…                                                                                                             |
+|---------|----------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| `* * *` | foster manager | delete a fosterer from the list when they want to stop fostering with us                      | update the list to see the fosterers who are currently in our program                                                      |
+| `* * *` | foster manager | add each fosterer's details efficiently                                                       | allow my colleagues who are conducting home visits to view these information without any inconvenience                     |
+| `* * *` | foster manager | provide details of the fostered animal of concern to the fosterer                             | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for           |
+| `* * *` | foster manager | update each foster family’s and animal’s details                                              | keep track of fosterer's most up-to-date information, including updated information of the animal fostered                 |
+| `* * *` | foster manager | allocate volunteers to each foster family                                                     | keep track of who is in charge of checking the pet’s condition for each fosterer and send help if needed                   |
+| `* * *` | foster manager | search for a specific animal / fosterer’s detail  instead of browsing through the entire list | be more productive when conducting the allocation of animals, keeping in contact with the fosterers, etc.                  |
+| `* * *` | foster manager | filter the animals in the database                                                            | properly view the animals that suit specific fosterer’s accommodation capabilities and prioritise the animals more in need |
+| `* * *` | foster manager | to be aware of the address of the fosterer                                                    | conduct checks on the fosterer to ensure the animal is well taken care of                                                  |
+| `* * *` |  foster manager | retrieve the information about the foster family                                                                                              | conduct interviews and statements from the suspected animal abusers (Nparks audit)                                         |
+| `* * *` | foster manager  |   sort the list of fosterers alphabetically                                                                                                                                            | have a neater, and more organised view of all the fosterers                                                                |
+| `* * `  |  foster manager  | have the fosterer’s important information collated neatly                                     | check them in an efficient manner when there are changes (a quick glance is sufficient to obtain information)              |
+| `* * `  | foster manager               |  have an easily accessible (and visible) help button on the top left that leads to a very informative user guide                                                                                             | get help when I am unsure of what command to use                                                                           |
 
 *{More to be added}*
 
@@ -425,7 +430,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC7 - Exit**
+**Use case: UC7 - Sort list of Fosterers**
+
+**Preconditions**: At least two fosterers have been added.
+
+**MSS**
+
+1. Foster Manager requests to sort the list of fosterer to the System.
+2. System displays the updated list of fosterers, sort alphabetically by name.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. System detects an error in the entered command.
+    * 1a1. System indicates the error.
+    * 1a2. Foster Manager <u>requests for command 'help' (UC5)</u>.
+    * 1a3. Foster Manager enters new command.
+
+      Steps 1a1 - 1a3 are repeated until the command entered is correct.
+
+      Use case resumes from step 2.
+
+
+**Use case: UC8 - Exit**
 
 **MSS**
 

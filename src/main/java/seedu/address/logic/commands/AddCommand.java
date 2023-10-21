@@ -35,6 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_ANIMAL_NAME + "ANIMAL_NAME "
             + PREFIX_ANIMAL_TYPE + "ANIMAL_TYPE "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Note: " + "If information for that field is not available, put 'nil'.\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
