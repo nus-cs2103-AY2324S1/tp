@@ -29,6 +29,7 @@ public class Time {
 
     public int compareTo(Time otherTime) {
         requireNonNull(otherTime);
+        System.out.println(this.day.compareTo(otherTime.day));
         return this.day.compareTo(otherTime.day) == 0 ? this.hour.compareTo(otherTime.hour)
                 : this.day.compareTo(otherTime.day);
     }

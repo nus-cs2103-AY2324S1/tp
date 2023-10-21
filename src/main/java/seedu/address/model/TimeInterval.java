@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 
 import seedu.address.logic.parser.ParserUtil;
@@ -8,8 +10,7 @@ public class TimeInterval {
 
     public static final String MESSAGE_CONSTRAINTS_SYNTAX = "The format of an interval should be: mon 1200 - tue 1400";
 
-    public static final String MESSAGE_CONSTRAINTS_LOGIC = "Your end time cannot be before your start time " +
-            "\n No overlap is allowed in your interval";
+    public static final String MESSAGE_CONSTRAINTS_LOGIC = "Your end time cannot be before your start time ";
 
     public static final String MESSAGE_CONSTRAINTS_OVERLAP = "No overlap is allowed in your interval. Eg. " +
             "mon 1200 - mon 1600 ;mon 1400 - mon 1800 is not allowed. Write it as mon 1200 - mon 1800";
@@ -24,7 +25,18 @@ public class TimeInterval {
         this.end = end;
     }
 
+    public int compareToStartTime(TimeInterval other) {
+        requireNonNull(other);
+        return this.start.compareTo(other.start);
+    }
+
     public static boolean isTimeIntervalOverlap(ArrayList<TimeInterval> intervals) {
+        intervals.sort(TimeInterval::compareToStartTime);
+        for (int i = 0; i < intervals.size() - 1; i++) {
+            if (intervals.get(i).end.compareTo(intervals.get(i + 1).start) > -1) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -33,7 +45,7 @@ public class TimeInterval {
     }
 
     public static boolean isValidTimeIntervalLogic(Time start, Time end) {
-        return start.compareTo(end) == -1;
+        return start.compareTo(end) <= -1;
     }
 
 

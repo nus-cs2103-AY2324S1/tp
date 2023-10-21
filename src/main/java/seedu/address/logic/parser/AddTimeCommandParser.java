@@ -13,21 +13,19 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTimeCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+
 
 public class AddTimeCommandParser implements Parser<AddTimeCommand> {
 
     @Override
     public AddTimeCommand parse(String userInput) throws ParseException {
-        Person person;
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_FREETIME, PREFIX_ENDINTERVAL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FREETIME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FREETIME) //find a way to separate error msg when ";" is missing
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTimeCommand.MESSAGE_USAGE));
         }
