@@ -44,7 +44,7 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
-        overview.setText(lesson.getLessonDate());
+        overview.setText(lesson.getLessonDateStr());
         duration.setText(lesson.getLessonDuration());
         for (String field : displayFields) {
             // TODO: Implement the schedule detail
