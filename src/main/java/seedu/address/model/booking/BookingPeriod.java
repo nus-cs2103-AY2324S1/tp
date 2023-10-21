@@ -1,9 +1,8 @@
 package seedu.address.model.booking;
 
 import static java.util.Objects.requireNonNull;
-//import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -13,16 +12,19 @@ import java.time.format.DateTimeParseException;
  */
 public class BookingPeriod {
 
-    public static final String MESSAGE_CONSTRAINTS = "Booking periods must be in the format 'YYYY-MM-DD to "
-            + "YYYY-MM-DD', and the end date must be after or equal to the start date.";
+    public static final String MESSAGE_CONSTRAINTS = "Booking periods must be in the format 'YYYY-MM-DD HH:MM to "
+            + "YYYY-MM-DD HH:MM', and the end datetime must be after or equal to the start datetime.";
 
-    public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} to \\d{4}-\\d{2}-\\d{2}$";
+    public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} to"
+            + " \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$";
+
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public final String value; // String representation of the booking period
 
-    private LocalDate checkInDate;
+    private LocalDateTime checkInDateTime;
 
-    private LocalDate checkOutDate;
+    private LocalDateTime checkOutDateTime;
 
     /**
      * Constructs an {@code Address}.
@@ -31,14 +33,13 @@ public class BookingPeriod {
      */
     public BookingPeriod(String period) {
         requireNonNull(period);
-        //checkArgument(isValidBookingPeriod(period), MESSAGE_CONSTRAINTS);
         value = period;
         setPeriod(period);
     }
 
     /**
      * Returns true if a given string is a valid booking period.
-     * A valid booking period must be in the format "YYYY-MM-DD to YYYY-MM-DD".
+     * A valid booking period must be in the format "YYYY-MM-DD HH:MM to YYYY-MM-DD HH:MM".
      * The end date must be after or equal to the start date.
      *
      * @param test The string to test for validity.
@@ -50,15 +51,14 @@ public class BookingPeriod {
         }
 
         try {
-            String[] dateParts = test.split(" to ");
-            LocalDate startDate = LocalDate.parse(dateParts[0]);
-            LocalDate endDate = LocalDate.parse(dateParts[1]);
-            return !endDate.isBefore(startDate);
+            String[] dateTimeParts = test.split(" to ");
+            LocalDateTime startDateTime = LocalDateTime.parse(dateTimeParts[0], dateTimeFormatter);
+            LocalDateTime endDateTime = LocalDateTime.parse(dateTimeParts[1], dateTimeFormatter);
+            return !endDateTime.isBefore(startDateTime);
         } catch (DateTimeParseException e) {
             return false;
         }
     }
-
 
     /**
      * Sets the start and end date and time for the booking period.
@@ -69,21 +69,19 @@ public class BookingPeriod {
         try {
             // Split the string into start and end date parts
             String[] dateParts = period.split(" to ");
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-            this.checkInDate = LocalDate.parse(dateParts[0], dateFormatter);
-            this.checkOutDate = LocalDate.parse(dateParts[1], dateFormatter);
+            this.checkInDateTime = LocalDateTime.parse(dateParts[0], dateTimeFormatter);
+            this.checkOutDateTime = LocalDateTime.parse(dateParts[1], dateTimeFormatter);
 
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS, e);
         }
     }
 
-
     @Override
     public String toString() {
         return value;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

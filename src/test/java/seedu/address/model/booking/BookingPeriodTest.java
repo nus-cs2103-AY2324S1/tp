@@ -29,15 +29,15 @@ public class BookingPeriodTest {
         assertFalse(BookingPeriod.isValidBookingPeriod(" ")); // spaces only
 
         // valid
-        assertTrue(BookingPeriod.isValidBookingPeriod("2023-01-01 to 2023-01-02"));
+        assertTrue(BookingPeriod.isValidBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00"));
     }
 
     @Test
     public void equals() {
-        BookingPeriod bookingPeriod = new BookingPeriod("2023-01-01 to 2023-01-02");
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00");
 
         // same values -> returns true
-        assertTrue(bookingPeriod.equals(new BookingPeriod("2023-01-01 to 2023-01-02")));
+        assertTrue(bookingPeriod.equals(new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")));
 
         // same object -> returns true
         assertTrue(bookingPeriod.equals(bookingPeriod));
@@ -49,6 +49,6 @@ public class BookingPeriodTest {
         assertFalse(bookingPeriod.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(bookingPeriod.equals(new BookingPeriod("2023-01-03 to 2023-01-04")));
+        assertFalse(bookingPeriod.equals(new BookingPeriod("2023-01-03 08:00 to 2023-01-04 12:00")));
     }
 }
