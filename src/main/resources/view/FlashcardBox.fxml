@@ -21,14 +21,14 @@
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
       <HBox alignment="CENTER_LEFT" spacing="5">
-        <Label fx:id="id" styleClass="cell_big_label">
+        <Label fx:id="id" styleClass="cell_small_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
         <Label fx:id="original" styleClass="cell_big_label" text="\$original" />
-         <Label fx:id="translation" styleClass="cell_small_label" text="\$translation" />
+         <Label fx:id="translation" styleClass="cell_big_label" text="\$translation" />
             <padding>
                <Insets bottom="3.0" />
             </padding>
@@ -37,14 +37,14 @@
       <Label fx:id="level" styleClass="cell_small_label" text="\$level" />
          <HBox alignment="CENTER_LEFT" spacing="5">
             <padding>
-               <Insets bottom="3.0" />
+               <Insets top="5" />
             </padding>
             <children>
-               <Button fx:id="success" mnemonicParsing="false" onAction="#success" text="Yes" minWidth="80"/>
-               <Button fx:id="failure" mnemonicParsing="false" onAction="#failure" text="No" minWidth="80"/>
-               <Button mnemonicParsing="false" onAction="#undo" text="Undo" minWidth="90"/>
+               <Button fx:id="success" mnemonicParsing="false" onAction="#success" text="Yes" minWidth="80" styleClass="button"/>
+               <Button fx:id="failure" mnemonicParsing="false" onAction="#failure" text="No" minWidth="80" styleClass="button"/>
+               <Button mnemonicParsing="false" onAction="#undo" text="Undo" minWidth="90" styleClass="button"/>
                 <Region HBox.hgrow="ALWAYS"/>
-               <Button fx:id="reveal" mnemonicParsing="false" onAction="#toggleReveal" text="Reveal" HBox.hgrow="NEVER" minWidth="100"/>
+               <Button fx:id="reveal" mnemonicParsing="false" onAction="#toggleReveal" text="Reveal" HBox.hgrow="NEVER" minWidth="100" styleClass="button"/>
             </children>
          </HBox>
     </VBox>
