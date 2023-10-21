@@ -83,7 +83,6 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
-                .add("showRoomStatistics", showRoomStatistics)
                 .toString();
     }
 
