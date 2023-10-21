@@ -29,7 +29,7 @@ public class EditScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the schedule identified "
         + "by the index number used in the displayed schedule list. "
         + "Parameters: "
-        + "TUTOR_INDEX (must be a positive integer)"
+        + "SCHEDULE_INDEX (must be a positive integer)"
         + PREFIX_START_TIME + "START_TIME "
         + PREFIX_END_TIME + "END_TIME\n"
         + "Example: " + COMMAND_WORD + " "
@@ -69,8 +69,6 @@ public class EditScheduleCommand extends Command {
         Schedule scheduleToEdit = lastShownList.get(index.getZeroBased());
         Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor);
 
-        System.out.println(scheduleToEdit);
-        System.out.println(editedSchedule);
         boolean hasScheduleClash =
             model.getAddressBook().getScheduleList().stream().filter(schedule -> !schedule.equals(scheduleToEdit))
                 .anyMatch(schedule -> schedule.isClashing(editedSchedule));
