@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -19,9 +21,14 @@ public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules an appointment for"
-            + "by the index number used in the displayed person list";
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules an appointment of the person identified "
+            + "by the index number used in the displayed person list. "
+            + "Parameters: INDEX(must be a positive integer) "
+            + "[" + PREFIX_APPOINTMENT + "Appointment Name] "
+            + "[" + PREFIX_APPOINTMENT_DATE + "Appointment Date] "
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_APPOINTMENT + "Review Insurance "
+            + PREFIX_APPOINTMENT_DATE + "01-01-2023 20:00";
     public static final String MESSAGE_SCHEDULE_SUCCESS = "New appointment added: %1$s";
     private final Index index;
     private final Appointment toAdd;
