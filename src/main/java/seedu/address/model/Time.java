@@ -16,17 +16,6 @@ public class Time {
         this.hour = hour;
     }
 
-    public Time(String timeString) {
-        if (isValidTime(timeString)) {
-            String dayString = timeString.substring(0, timeString.indexOf(" "));
-            String time = timeString.substring(timeString.indexOf(" ") + 1);
-            this.day = decodeDay(dayString);
-            this.hour = LocalTime.parse(time.substring(0, 2) + ":" + time.substring(2, 4)); //throw parse exception
-        } else {
-            //throw new CommandException("Invalid day or time");
-        }
-    }
-
     public static final String MESSAGE_CONSTRAINTS = "Message_ONE";
 
     public static boolean isValidTime(String timeString) {
@@ -38,7 +27,7 @@ public class Time {
         return day.toString().substring(0 ,3) + " " + hour.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
-    private DayOfWeek decodeDay(String day) {
+    public static DayOfWeek decodeDay(String day) {
         if (DayOfWeek.MONDAY.toString().toLowerCase().contains(day)) {
             return DayOfWeek.MONDAY;
         } else if (DayOfWeek.TUESDAY.toString().toLowerCase().contains(day)) {

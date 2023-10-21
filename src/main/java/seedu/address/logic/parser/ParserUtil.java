@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,6 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.TimeInterval;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
 import seedu.address.model.person.Address;
@@ -158,22 +161,29 @@ public class ParserUtil {
         return new Group(trimmedGroup);
     }
 
-    public static String parseTime(String timeString) throws ParseException {
+    public static Time parseTime(String timeString) throws ParseException {
         requireNonNull(timeString);
         String trimmedTimeString = timeString.trim();
         if (!Time.isValidTime(timeString)) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
-        return trimmedTimeString;
+        String dayString = timeString.substring(0, timeString.indexOf(" "));
+        String time = timeString.substring(timeString.indexOf(" ") + 1);
+        DayOfWeek day = Time.decodeDay(dayString);
+        LocalTime hour = LocalTime.parse(time.substring(0, 2) + ":" + time.substring(2, 4)); //throw parse exception
+        return new Time(day, hour);
     }
 
-    public static ArrayList<String> parseInterval(Collection<String> timeIntervals) {
-        ArrayList<String> rr = new ArrayList<>(timeIntervals);
-        return rr;
-
+    public static ArrayList<TimeInterval> parseInterval(Collection<String> timeIntervals) throws ParseException {
+        requireNonNull(timeIntervals);
+        ArrayList<TimeInterval> timeIntervalsAl = new ArrayList<>();
+        for (String intString: timeIntervals) {
+            timeIntervalsAl.add(parseEachInterval(intString));
+        }
+        return timeIntervalsAl;
     }
 
-    public static String[] parseEachInterval(String interval) {
+    public static TimeInterval parseEachInterval(String interval) throws ParseException {
         //Pattern pattern = Pattern.compile("(\\d.)((?:hours|minutes|hour|minute)\\b$)");
         //        if (!pattern.matcher(duration).find()) {
         //            throw new DukeException("Invalid format for duration");
@@ -181,6 +191,7 @@ public class ParserUtil {
         String start = interval.substring(0, interval.indexOf("-")).trim();
         String end = interval.substring(interval.indexOf('-') + 1).trim();
 
-        return new String[]{start, end};
+
+        return new TimeInterval(parseTime(start), parseTime(end));
     }
 }

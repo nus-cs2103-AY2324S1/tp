@@ -34,17 +34,9 @@ public class AddTimeCommandParser implements Parser<AddTimeCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        String timeString = ParserUtil.parseTime(argMultimap.getValue(PREFIX_FREETIME).get());
-        ArrayList<String> timeIntervalString = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_ENDINTERVAL));
-        timeIntervalString.add(0, timeString);
-
-        ArrayList<TimeInterval> timeInterval = new ArrayList<>();
-
-        timeIntervalString.forEach(interval -> timeInterval.add(new TimeInterval(interval)));
-        //timeIntervalString.iterator().forEachRemaining(x -> timeInterval.add(new TimeInterval(x)));
-
-
-
+        TimeInterval firstInterval = ParserUtil.parseEachInterval(argMultimap.getValue(PREFIX_FREETIME).get());
+        ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_ENDINTERVAL));
+        timeInterval.add(0, firstInterval);
         return new AddTimeCommand(name, timeInterval);
     }
 
