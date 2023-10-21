@@ -11,7 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.commons.core.LogsCenter;
+import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.flashcard.NextReviewWordPredicate;
+import seedu.flashlingo.model.flashcard.WordOverduePredicate;
 
 /**
  * Represents the in-memory model of the flashlingo data.
@@ -24,7 +27,7 @@ public class ModelManager implements Model {
     private final FilteredList<FlashCard> filteredFlashCards;
     private int numberOfFlashCards;
     private int numberOfRememberedWords;
-
+    private boolean isReviewSession = false;
     /**
      * Initializes a ModelManager with the given flashlingo and userPrefs.
      */
@@ -126,6 +129,18 @@ public class ModelManager implements Model {
     public void incrementRememberedWords() {
         this.numberOfRememberedWords++;
     }
+
+    @Override
+    public void nextReviewWord() throws CommandException {
+        updateFilteredFlashCardList(new WordOverduePredicate());
+        if (filteredFlashCards.size() == 0) {
+            throw new CommandException("Good job! You have finished today's tasks!");
+        }
+        FlashCard toBeReviewed = getFilteredFlashCardList().get(0);
+        Predicate<FlashCard> t = new NextReviewWordPredicate(toBeReviewed);
+        updateFilteredFlashCardList(t);
+        updateReviewSessionState();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -141,6 +156,22 @@ public class ModelManager implements Model {
     public void updateFilteredFlashCardList(Predicate<FlashCard> predicate) {
         requireNonNull(predicate);
         filteredFlashCards.setPredicate(predicate);
+    }
+
+    @Override
+    public void setReviewWord(Predicate<FlashCard> predicate, FlashCard flashCard) {
+        filteredFlashCards.setPredicate(predicate);
+        addFlashCard(flashCard);
+    }
+
+    @Override
+    public boolean isReviewSession() {
+        return this.isReviewSession;
+    }
+
+    @Override
+    public void updateReviewSessionState() {
+        this.isReviewSession = true;
     }
 
     @Override

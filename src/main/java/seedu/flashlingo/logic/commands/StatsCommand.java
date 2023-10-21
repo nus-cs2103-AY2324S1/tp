@@ -15,8 +15,9 @@ public class StatsCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Show user statistics\n"
             + "Example: " + COMMAND_WORD + " ";
 
-    public static final String MESSAGE_SUCCESS = "Great work fellow learner! \nTotal number of flashcards: %d\n"
-            + "Number of words remembered: %d";
+
+    public static final String MESSAGE_SUCCESS = "Great work fellow learner! \nTotal number of flashcards: %d\n";
+
 
     /**
      * Executes the functioning for this command
