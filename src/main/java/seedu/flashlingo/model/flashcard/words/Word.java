@@ -1,13 +1,42 @@
 package seedu.flashlingo.model.flashcard.words;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.flashlingo.commons.util.AppUtil.checkArgument;
+
 /**
  * Encapsulates an input word
  */
-abstract public class Word {
+abstract class Word {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Languages should only contain alphanumeric characters and spaces, and it should not be blank";
+    /*
+     * The first character of the language must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[\\p{Alpha} ]*";
     /** The input word **/
     private final String word;
     /** The input word's language **/
     private final String language;
+
+    /**
+     * Constructs a new Word
+     * @param word The input word
+     * @param language The input Word's language
+     */
+    public Word(String word, String language) {
+        requireNonNull(language);
+        checkArgument(isValidLanguage(language), MESSAGE_CONSTRAINTS);
+        this.word = word;
+        this.language = language;
+    }
+
+    /**
+     * Returns true if a given string is a valid language.
+     */
+    public static boolean isValidLanguage(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
 
     /**
      * Evaluates whether this word is an original word
@@ -22,16 +51,6 @@ abstract public class Word {
     abstract boolean isTranslatedWord();
 
     /**
-     * Constructs a new Word
-     * @param word The input word
-     * @param language The input Word's language
-     */
-    public Word(String word, String language) {
-        this.word = word;
-        this.language = language;
-    }
-
-    /**
      * Evaluates and returns this word
      * @return The word encapsulated by this
      */
@@ -43,7 +62,7 @@ abstract public class Word {
      * Evaluates and returns this word's language
      * @return Language of this word
      */
-    public String getLanguage(){
+    public String getLanguage() {
         return language;
     }
 
@@ -76,7 +95,7 @@ abstract public class Word {
             return false;
         }
         Word otherWord = (Word) other;
-        return otherWord.word.equals(this.word);
+        return otherWord.word.equals(this.word) && otherWord.language.equals(this.language);
     }
 
     /**

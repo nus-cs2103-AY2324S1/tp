@@ -21,13 +21,19 @@ Given below are my contributions to the project.
   *
 
 * **Enhancements to existing features**:
-  *
+  * Changed the UI to accept FlashCards instead of People (Adapted to our project)
+  * Added critical functionality to the UI to make things work
 
 * **Documentation**:
   * User Guide:
     * Created the UGDraft.md file, and added the documentation for the help, exit, save, load functions.
   * Developer Guide:
     *
+
+* **Contributions to team-based tasks**:
+  * Ensuring coding standard is followed
+  * Managing the GitHub repository
+  * Issue creation
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments):

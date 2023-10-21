@@ -1,9 +1,9 @@
 package seedu.flashlingo.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.flashlingo.commons.util.AppUtil;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.flashlingo.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's address in the address book.

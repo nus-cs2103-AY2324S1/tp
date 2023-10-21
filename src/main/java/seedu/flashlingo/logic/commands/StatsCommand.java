@@ -2,7 +2,6 @@ package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.model.Model;
 
 /**
@@ -16,8 +15,8 @@ public class StatsCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Show user statistics\n"
             + "Example: " + COMMAND_WORD + " ";
 
-    public static final String MESSAGE_SUCCESS = "Great work fellow learner! \nTotal number of flashcards: %d\n" +
-            "Number of words remembered: %d";
+    public static final String MESSAGE_SUCCESS = "Great work fellow learner! \nTotal number of flashcards: %d\n"
+            + "Number of words remembered: %d";
 
     /**
      * Executes the functioning for this command
@@ -25,7 +24,7 @@ public class StatsCommand extends Command {
      * @return CommandResult after executing this command
      */
     @Override
-    public CommandResult execute(Model model){
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         return new CommandResult(String.format(MESSAGE_SUCCESS, model.getNumberOfFlashCards(),
                 model.getNumberOfRememberedWords()));

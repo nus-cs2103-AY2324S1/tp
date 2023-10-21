@@ -3,12 +3,9 @@ package seedu.flashlingo.model.flashcard.words;
 /**
  * Represents the original word
  *
- * @author Nathanael M. Tan
+ * @author Nathanael M. Tan, Taanish Bhardwaj
  * @version 1.2
  * @since 1.2
- * @author Taanish Bhardwaj
- * @version 1.3
- * @since 1.3
  */
 public class OriginalWord extends Word {
     /**
