@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -7,8 +9,9 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Removes group from the addressbook and person.
+ */
 public class DeleteGroupCommand extends DeleteCommand {
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
     private final String groupName;

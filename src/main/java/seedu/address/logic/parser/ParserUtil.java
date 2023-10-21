@@ -19,8 +19,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.Time;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -161,6 +161,12 @@ public class ParserUtil {
         return new Group(trimmedGroup);
     }
 
+    /**
+     * Parses a {@code String timeString} into a {@code Time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code timeString} is invalid.
+     */
     public static Time parseTime(String timeString) throws ParseException {
         requireNonNull(timeString);
         String trimmedTimeString = timeString.trim();
@@ -174,6 +180,9 @@ public class ParserUtil {
         return new Time(day, hour);
     }
 
+    /**
+     * Parses {@code Collection<String> tags} into a {@code ArrayList<TimeInterval>}.
+     */
     public static ArrayList<TimeInterval> parseInterval(Collection<String> timeIntervals) throws ParseException {
         requireNonNull(timeIntervals);
         ArrayList<TimeInterval> timeIntervalsAl = new ArrayList<>();
@@ -183,6 +192,12 @@ public class ParserUtil {
         return timeIntervalsAl;
     }
 
+    /**
+     * Parses a {@code String interval} into a {@code TimeInterval}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interval} is invalid.
+     */
     public static TimeInterval parseEachInterval(String interval) throws ParseException {
         requireNonNull(interval);
         String trimmedInterval = interval.trim();

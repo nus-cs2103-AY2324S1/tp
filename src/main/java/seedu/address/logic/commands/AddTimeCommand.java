@@ -12,7 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.person.Name;
 
-
+/**
+ * Adds free time to person.
+ */
 public class AddTimeCommand extends Command {
 
     public static final String COMMAND_WORD = "addtime";
