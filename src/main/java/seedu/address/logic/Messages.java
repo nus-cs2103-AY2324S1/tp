@@ -61,12 +61,12 @@ public class Messages {
     /**
      * Formats the {@code band} for display to the user.
      */
-    public static String format(int band, int musician) {
+    public static String format(Band band, Musician musician) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Band Index: ")
-                .append(band)
-                .append("; Musician Index:")
-                .append(musician);
+        builder.append("Band Name: ")
+                .append(band.getName())
+                .append("; Musician Name: ")
+                .append(musician.getName());
         return builder.toString();
     }
 

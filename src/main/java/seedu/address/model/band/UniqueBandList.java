@@ -85,6 +85,29 @@ public class UniqueBandList implements Iterable<Band> {
 
         internalList.setAll(band);
     }
+
+    /**
+     * Replaces the contents of this list with all bands in {@code replacement}.
+     * {@code replacement} must not contain duplicate bands.
+     */
+    public void setBands(UniqueBandList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code bands}.
+     * {@code bands} must not contain duplicate musicians.
+     */
+    public void setBands(List<Band> bands) {
+        requireAllNonNull(bands);
+        if (!bandsAreUnique(bands)) {
+            throw new DuplicateBandException();
+        }
+
+        internalList.setAll(bands);
+    }
+
     /**
      * Removes the equivalent band from the list.
      * The band must exist in the list.
