@@ -85,10 +85,10 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_ANIMAL_NAME_DESC = " " + PREFIX_ANIMAL_NAME + "WOOF&"; // '&' not allowed in names
-    public static final String INVALID_ANIMAL_TYPE_DESC = " " + PREFIX_ANIMAL_TYPE + "cat"; // not allowed in animal type
-    public static final String INVALID_AVAILABILITY_DESC = " " + PREFIX_AVAILABILITY + "available"; // not allowed in availability
-    public static final String INVALID_HOUSING_DESC = " " + PREFIX_HOUSING + "hdb"; // not allowed in housing
+    public static final String INVALID_ANIMAL_NAME_DESC = " " + PREFIX_ANIMAL_NAME + "WOOF&";
+    public static final String INVALID_ANIMAL_TYPE_DESC = " " + PREFIX_ANIMAL_TYPE + "cat";
+    public static final String INVALID_AVAILABILITY_DESC = " " + PREFIX_AVAILABILITY + "available";
+    public static final String INVALID_HOUSING_DESC = " " + PREFIX_HOUSING + "hdb";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

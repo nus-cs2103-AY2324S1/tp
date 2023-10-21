@@ -45,8 +45,8 @@ public class AddCommandParser implements CommandParser<AddCommand> {
                         PREFIX_AVAILABILITY, PREFIX_ANIMAL_TYPE, PREFIX_HOUSING);
 
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ANIMAL_NAME,
-                PREFIX_AVAILABILITY, PREFIX_ANIMAL_TYPE, PREFIX_HOUSING)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ANIMAL_NAME, PREFIX_AVAILABILITY, PREFIX_ANIMAL_TYPE, PREFIX_HOUSING)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -54,7 +54,8 @@ public class AddCommandParser implements CommandParser<AddCommand> {
         if (!argMultimap.getValue(PREFIX_ANIMAL_NAME).get().equals("nil")) {
             if (argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("Available")
                     || argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("nil")) {
-                throw new ParseException("When an animal name is provided, availability should not be 'Available' or 'nil'.");
+                throw new ParseException("When an animal name is provided, availability should not be "
+                        + "'Available' or 'nil'.");
             }
         }
 
