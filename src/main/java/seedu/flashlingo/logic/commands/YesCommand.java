@@ -23,7 +23,7 @@ public class YesCommand extends Command {
     /**
      * Creates an YesCommand.
      */
-    public YesCommand(String input) {
+    public YesCommand() {
         this.isMemorized = input;
     }
 
