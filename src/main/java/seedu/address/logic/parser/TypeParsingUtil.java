@@ -6,7 +6,10 @@ import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.parser.exceptions.FlagNotFoundException;
+import seedu.address.logic.parser.exceptions.InvalidInputException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.RepeatedFlagException;
 import seedu.address.model.person.Subject;
 
 
@@ -29,11 +32,11 @@ public class TypeParsingUtil {
             int hour = TypeParsingUtil.parseNum(m.group(1));
             int min = TypeParsingUtil.parseNum(m.group(2));
             if (hour > 23 || min > 59) {
-                throw new ParseException(input + " is not a valid time");
+                throw new InvalidInputException(input + " is not a valid time");
             }
             return LocalTime.of(hour, min);
         } else {
-            throw new ParseException(input + " is not a valid time");
+            throw new InvalidInputException(input + " is not a valid time");
         }
     }
     /**
@@ -49,7 +52,7 @@ public class TypeParsingUtil {
         if (isOptional) {
             try {
                 parseFlag(flagName, input);
-            } catch (ParseException e) {
+            } catch (FlagNotFoundException e) {
                 return null;
             }
         }
@@ -106,7 +109,7 @@ public class TypeParsingUtil {
             int day = TypeParsingUtil.parseNum(dayM.group(1), 1, findMaxDay(now.getYear(), now.getMonthValue()));
             return LocalDate.of(now.getYear(), now.getMonth(), day);
         } else {
-            throw new ParseException(input + " is not a valid date");
+            throw new InvalidInputException(input + " is not a valid date");
         }
     }
 
@@ -124,7 +127,7 @@ public class TypeParsingUtil {
         if (isOptional) {
             try {
                 parseFlag(flagName, input);
-            } catch (ParseException e) {
+            } catch (FlagNotFoundException e) {
                 return null;
             }
         }
@@ -143,11 +146,11 @@ public class TypeParsingUtil {
         try {
             int num = Integer.parseInt(input);
             if (num < min || num > max) {
-                throw new ParseException("Number " + input + " is not of range: " + min + "-" + max);
+                throw new InvalidInputException("Number " + input + " is not of range: " + min + "-" + max);
             }
             return num;
         } catch (NumberFormatException e) {
-            throw new ParseException(input + " is not a number");
+            throw new InvalidInputException(input + " is not a number");
         }
     }
 
@@ -179,7 +182,7 @@ public class TypeParsingUtil {
         if (isOptional) {
             try {
                 parseFlag(flagName, input);
-            } catch (ParseException e) {
+            } catch (FlagNotFoundException e) {
                 return null;
             }
         }
@@ -204,7 +207,7 @@ public class TypeParsingUtil {
         if (isOptional) {
             try {
                 parseFlag(flagName, input);
-            } catch (ParseException e) {
+            } catch (FlagNotFoundException e) {
                 return null;
             }
         }
@@ -221,7 +224,7 @@ public class TypeParsingUtil {
         if (Subject.isValidSubject(input.toUpperCase())) {
             return Subject.parseSubject(input);
         } else {
-            throw new ParseException(input + " is not a valid subject");
+            throw new InvalidInputException(input + " is not a valid subject");
         }
     }
     /**
@@ -237,7 +240,7 @@ public class TypeParsingUtil {
         if (isOptional) {
             try {
                 parseFlag(flagName, input);
-            } catch (ParseException e) {
+            } catch (FlagNotFoundException e) {
                 return null;
             }
         }
@@ -248,13 +251,13 @@ public class TypeParsingUtil {
      * Parses the day of week from the input string
      * @param input the input string where the flag is to be parsed from
      * @return the day of week parsed
-     * @throws ParseException if the flag is not found
+     * @throws InvalidInputException if the input is not a valid day of week
      */
     public static DayOfWeek parseDayOfWeek(String input) throws ParseException {
         try {
             return DayOfWeek.valueOf(input.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new ParseException(input + " is not a valid day of week");
+            throw new InvalidInputException(input + " is not a valid day of week");
         }
     }
 
@@ -272,7 +275,7 @@ public class TypeParsingUtil {
         if (isOptional) {
             try {
                 parseFlag(flagName, input);
-            } catch (ParseException e) {
+            } catch (FlagNotFoundException e) {
                 return null;
             }
         }
@@ -283,15 +286,20 @@ public class TypeParsingUtil {
      * @param flag the flag to parse
      * @param input the input string where the flag is to be parsed from
      * @return the string after the flag
-     * @throws ParseException if the flag is not found
+     * @throws FlagNotFoundException if the flag is not found
+     * @throws RepeatedFlagException if more than one flag is found
      */
     public static String parseFlag(String flag, String input) throws ParseException {
         Pattern p = Pattern.compile("-" + flag + "\\s*([\\w:,/]+)");
         Matcher m = p.matcher(input);
         if (m.find()) {
-            return m.group(1);
+            String flagValue = m.group(1);
+            if (m.find()) {
+                throw new RepeatedFlagException("Flag " + flag + " is repeated");
+            }
+            return flagValue;
         } else {
-            throw new ParseException("Flag " + flag + " not found");
+            throw new FlagNotFoundException("Flag " + flag + " not found");
         }
     }
 }
