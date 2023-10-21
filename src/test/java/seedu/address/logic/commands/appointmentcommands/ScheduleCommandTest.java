@@ -1,9 +1,17 @@
 package seedu.address.logic.commands.appointmentcommands;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.VALID_END_ONE;
+import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.VALID_END_TWO;
+import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.VALID_START_ONE;
+import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.VALID_START_TWO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_PATIENT;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -11,17 +19,71 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.AppointmentBuilder;
 
 public class ScheduleCommandTest {
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ScheduleCommand(null, null));
+    }
+
+//    @Test
+//        public void execute_duplicateAppointment_throwsCommandException() {
+//        Appointment testAppointment = new AppointmentBuilder().build();
+//        Name testName = new Name("Test Name");
+//
+//        ScheduleCommand scheduleCommand = new ScheduleCommand(testAppointment, testName);
+//
+//        ScheduleCommandTest.ModelStub modelStub =
+//                new ScheduleCommandTest.ModelStubContainingAppointments(testAppointment);
+//
+//        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_APPOINTMENT, () ->
+//                scheduleCommand.execute(modelStub));
+//        }
+
+    @Test
+    public void equals() {
+
+        Name testName1 = new Name("Test Name1");
+        Name testName2 = new Name("Test Name2");
+
+        Appointment appointment1 = new AppointmentBuilder().withAppointmentTime(VALID_START_ONE, VALID_END_ONE).build();
+        Appointment appointment2 = new AppointmentBuilder().withAppointmentTime(VALID_START_TWO, VALID_END_TWO).build();
+        ScheduleCommand scheduleCommand1 = new ScheduleCommand(appointment1, testName1);
+        ScheduleCommand scheduleCommand2 = new ScheduleCommand(appointment2, testName2);
+
+        ScheduleCommand scheduleCommand_SameTime_DifferentName1 = new ScheduleCommand(appointment1, testName1);
+        ScheduleCommand scheduleCommand_SameTime_DifferentName2 = new ScheduleCommand(appointment1, testName2);
+
+        // compare with different type - false
+        assertFalse(scheduleCommand1.equals("Test"));
+
+        // null test - false
+        assertFalse(scheduleCommand1.equals(null));
+
+        // compares same appointment timing but different names (Patients) - false
+        assertFalse(scheduleCommand_SameTime_DifferentName1.equals(scheduleCommand_SameTime_DifferentName2));
+
+        // compares AddCommand1 with itself - true
+        assertTrue(scheduleCommand1.equals(scheduleCommand1));
+
+        // compares 2 different Schedule Commands - false
+        assertFalse(scheduleCommand1.equals(scheduleCommand2));
+
+        // compares 2 different objects with same details - true
+        ScheduleCommand copyOfScheduleCommand1 = new ScheduleCommand(appointment1, testName1);
+        assertTrue(scheduleCommand1.equals(copyOfScheduleCommand1));
+
     }
 
     /**
@@ -152,4 +214,23 @@ public class ScheduleCommandTest {
             appointments.add(appointment);
         }
     }
+
+    /**
+     * A Model stub containing appointments
+     */
+    private class ModelStubContainingAppointments extends ModelStub {
+        private final Appointment appointment;
+
+        ModelStubContainingAppointments(Appointment appointment) {
+            requireNonNull(appointment);
+            this.appointment = appointment;
+        }
+
+        @Override
+        public boolean hasAppointment(Appointment appointment) {
+            requireNonNull(appointment);
+            return this.appointment.isSameAppointment(appointment);
+        }
+    }
+
 }
