@@ -1,0 +1,37 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([all fields present])
+    if () then ([no repeated fields])
+         if () then ([valid name])
+              if () then ([valid phone])
+                   if () then ([valid email])
+                        if () then ([non-duplicate tutor])
+                            :Add tutor to AddressBook;
+                       else ([else])
+                            :ErrorDuplicateTutor;
+                       endif
+                   else ([else])
+                        :Error: Emails should be of the format local-part@domain...;
+                   endif
+              else ([else])
+                  :Error: Phone numbers should only contain numbers, ...;
+              endif
+         else ([else])
+             :Error:  Names should only contain alphanumeric characters, ...;
+         endif
+    else ([else])
+     :ErrorDuplicatePrefixes;
+    endif
+else ([else])
+ :ErrorInvalidCommandFormat;
+endif
+stop
+@enduml

@@ -154,6 +154,40 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Tutor Feature
+
+The "Add Tutor" feature allows users to add a new tutor to the address book. Below, we provide an example usage scenario and a detailed description of how the add tutor mechanism behaves at each step.
+
+Given below is an example usage scenario and how the add tutor mechanism behaves at each step.
+
+![AddTutorActivityDiagram](images/AddTutorActivityDiagram.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Limitations**<br>
+* Input format must adhere to the follow limitations:
+  * `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
+  * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
+  * `EMAIL`: Of the format local-part@domain
+* Tutor to be added must be unique and not already exist in the addressbook.
+</div>
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `add-t n/John Doe p/98765432 e/johnd@example.com` to add a tutor to the address book. The 
+command is parsed in `AddressBookParser`.
+
+Step 3. `AddTutorCommandParser` is created, which constructs the `Person` to be added.  The `AddTutorCommand` is 
+called with the `Person` created.
+
+Step 4. The `AddTutorCommand` object executes the `addPerson` method through the `LogicManager`. The method then 
+adds the `Person` in `model` and returns the `CommandResult`.
+
+The following sequence diagram shows how the above steps for add tutor operation works:
+
+![AddTutorSequenceDiagram](images/AddTutorSequenceDiagram.png)
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
