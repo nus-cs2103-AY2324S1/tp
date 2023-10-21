@@ -3,10 +3,13 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.FreeTime;
+import seedu.address.model.TimeInterval;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
@@ -26,6 +29,8 @@ public class Person {
     // Data fields
     private GroupList personGroups;
 
+    private final FreeTime freeTime;
+
 
     /**
      * Every field must be present and not null.
@@ -36,6 +41,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.personGroups = personGroups;
+        this.freeTime = new FreeTime();
     }
 
     public Name getName() {
@@ -176,4 +182,16 @@ public class Person {
                 .toString();
     }
 
+    public FreeTime getFreeTime() {
+        return freeTime;
+    }
+
+    public void addFreeTime(TimeInterval toAddFreeTime) {
+        this.freeTime.addTime(toAddFreeTime);
+    }
+
+    public void addFreeTime(ArrayList<TimeInterval> toAddFreeTime) {
+        this.freeTime.addTime(toAddFreeTime);
+        System.out.println(111);
+    }
 }

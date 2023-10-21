@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -95,6 +97,12 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPerson(Name personName) {
+        requireNonNull(personName);
+        return addressBook.hasPerson(personName);
     }
 
     @Override
@@ -200,7 +208,7 @@ public class ModelManager implements Model {
     @Override
     public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException {
         // both throw exception if not exists exact match
-        Person person =addressBook.getPerson(personName);
+        Person person = addressBook.getPerson(personName);
         Group group = addressBook.getGroup(groupName);
         this.assignGroup(person, group);
         forceUpdateList();
@@ -228,6 +236,14 @@ public class ModelManager implements Model {
         forceUpdateList();
         Pair<Person, Group> output = new Pair<>(person, group);
         return output;
+    }
+
+    @Override
+    public void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException{
+        requireNonNull(toAddPerson);
+        Person person = addressBook.getPerson(toAddPerson.fullName);
+        person.addFreeTime(toAddFreeTime);
+        forceUpdateList();
     }
 
     /**

@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.Time;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -154,5 +156,31 @@ public class ParserUtil {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
         return new Group(trimmedGroup);
+    }
+
+    public static String parseTime(String timeString) throws ParseException {
+        requireNonNull(timeString);
+        String trimmedTimeString = timeString.trim();
+        if (!Time.isValidTime(timeString)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedTimeString;
+    }
+
+    public static ArrayList<String> parseInterval(Collection<String> timeIntervals) {
+        ArrayList<String> rr = new ArrayList<>(timeIntervals);
+        return rr;
+
+    }
+
+    public static String[] parseEachInterval(String interval) {
+        //Pattern pattern = Pattern.compile("(\\d.)((?:hours|minutes|hour|minute)\\b$)");
+        //        if (!pattern.matcher(duration).find()) {
+        //            throw new DukeException("Invalid format for duration");
+        //        }
+        String start = interval.substring(0, interval.indexOf("-")).trim();
+        String end = interval.substring(interval.indexOf('-') + 1).trim();
+
+        return new String[]{start, end};
     }
 }
