@@ -3,6 +3,8 @@ package seedu.address.model.attendance;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.shared.Name;
 
+import java.util.Objects;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
@@ -16,20 +18,18 @@ public class Attendance {
     private final Name eventName;
 
     // Data fields
-    private final Present present;
     private final Hours hours;
-    private final Note note;
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
-    public Attendance(Name memberName, Name eventName, Present present, Hours hours, Note note) {
-        requireAllNonNull(memberName, eventName, present, hours, note);
+    public Attendance(Name memberName, Name eventName, Hours hours, Remark remark) {
+        requireAllNonNull(memberName, eventName, hours, remark);
         this.memberName = memberName;
         this.eventName = eventName;
-        this.present = present;
         this.hours = hours;
-        this.note = note;
+        this.remark = remark;
     }
 
     public Name getMemberName() {
@@ -44,12 +44,8 @@ public class Attendance {
         return hours;
     }
 
-    public Present getPresent() {
-        return present;
-    }
-
-    public Note getNote() {
-        return note;
+    public Remark getNote() {
+        return remark;
     }
 
     /**
@@ -69,9 +65,14 @@ public class Attendance {
         Attendance otherAttendance = (Attendance) other;
         return memberName.equals(otherAttendance.memberName)
                 && eventName.equals(otherAttendance.eventName)
-                && present == otherAttendance.present
                 && hours == otherAttendance.hours
-                && note.equals(otherAttendance.note);
+                && remark.equals(otherAttendance.remark);
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(memberName, eventName, hours, remark);
     }
 
     @Override
@@ -79,9 +80,8 @@ public class Attendance {
         return new ToStringBuilder(this)
                 .add("member name", memberName)
                 .add("event name", eventName)
-                .add("present", present)
                 .add("hours", hours)
-                .add("note", note)
+                .add("remark", remark)
                 .toString();
     }
 }
