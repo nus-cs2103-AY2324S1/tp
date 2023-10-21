@@ -1,0 +1,73 @@
+package seedu.ccacommander.storage;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+import seedu.ccacommander.commons.exceptions.IllegalValueException;
+import seedu.ccacommander.model.CcaCommander;
+import seedu.ccacommander.model.ReadOnlyCcaCommander;
+import seedu.ccacommander.model.event.Event;
+import seedu.ccacommander.model.member.Member;
+
+/**
+ * An Immutable CcaCommander that is serializable to JSON format.
+ */
+@JsonRootName(value = "addressbook")
+class JsonSerializableAddressBook {
+
+    public static final String MESSAGE_DUPLICATE_MEMBER = "Members list contains duplicate member(s).";
+    public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
+
+    private final List<JsonAdaptedMember> members = new ArrayList<>();
+    private final List<JsonAdaptedEvent> events = new ArrayList<>();
+
+    /**
+     * Constructs a {@code JsonSerializableAddressBook} with the given members and events.
+     */
+    @JsonCreator
+    public JsonSerializableAddressBook(@JsonProperty("members") List<JsonAdaptedMember> members,
+                                       @JsonProperty("events") List<JsonAdaptedEvent> events) {
+        this.members.addAll(members);
+        this.events.addAll(events);
+    }
+
+    /**
+     * Converts a given {@code ReadOnlyCcaCommander} into this class for Jackson use.
+     *
+     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     */
+    public JsonSerializableAddressBook(ReadOnlyCcaCommander source) {
+        members.addAll(source.getMemberList().stream().map(JsonAdaptedMember::new).collect(Collectors.toList()));
+        events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
+    }
+
+    /**
+     * Converts this ccacommander book into the model's {@code CcaCommander} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    public CcaCommander toModelType() throws IllegalValueException {
+        CcaCommander ccaCommander = new CcaCommander();
+        for (JsonAdaptedMember jsonAdaptedMember : members) {
+            Member member = jsonAdaptedMember.toModelType();
+            if (ccaCommander.hasMember(member)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MEMBER);
+            }
+            ccaCommander.createMember(member);
+        }
+        for (JsonAdaptedEvent jsonAdaptedEvent : events) {
+            Event event = jsonAdaptedEvent.toModelType();
+            if (ccaCommander.hasEvent(event)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
+            }
+            ccaCommander.createEvent(event);
+        }
+        return ccaCommander;
+    }
+
+}
