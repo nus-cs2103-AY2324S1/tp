@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.employee;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,14 +8,14 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicateEmployeeException;
-import seedu.address.model.person.exceptions.EmployeeNotFoundException;
+import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
+import seedu.address.model.employee.exceptions.EmployeeNotFoundException;
 
 /**
  * A list of employees that enforces uniqueness between its elements and does not allow nulls.
  * An employee is considered unique by comparing using {@code Employee#isSameEmployee(Employee)}.
  * As such, adding and updating of employees uses Employee#isSameEmployee(Employee) for equality to ensure
- * that the employee being added or updated is unique in terms of identity in the UniquePersonList.
+ * that the employee being added or updated is unique in terms of identity in the UniqueEmployeeList.
  * However, the removal of an employee uses Employee#equals(Object) to ensure that the employee with
  * exactly the same fields will be removed.
  *
@@ -23,7 +23,7 @@ import seedu.address.model.person.exceptions.EmployeeNotFoundException;
  *
  * @see Employee#isSameEmployee(Employee)
  */
-public class UniquePersonList implements Iterable<Employee> {
+public class UniqueEmployeeList implements Iterable<Employee> {
 
     private final ObservableList<Employee> internalList = FXCollections.observableArrayList();
     private final ObservableList<Employee> internalUnmodifiableList =
@@ -80,7 +80,7 @@ public class UniquePersonList implements Iterable<Employee> {
         }
     }
 
-    public void setEmployees(UniquePersonList replacement) {
+    public void setEmployees(UniqueEmployeeList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -117,12 +117,12 @@ public class UniquePersonList implements Iterable<Employee> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniquePersonList)) {
+        if (!(other instanceof UniqueEmployeeList)) {
             return false;
         }
 
-        UniquePersonList otherUniquePersonList = (UniquePersonList) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        UniqueEmployeeList otherUniqueEmployeeList = (UniqueEmployeeList) other;
+        return internalList.equals(otherUniqueEmployeeList.internalList);
     }
 
     @Override

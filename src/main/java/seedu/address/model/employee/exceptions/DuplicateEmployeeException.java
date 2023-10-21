@@ -1,4 +1,4 @@
-package seedu.address.model.person.exceptions;
+package seedu.address.model.employee.exceptions;
 
 /**
  * Signals that the operation will result in duplicate Employees (Employees are considered

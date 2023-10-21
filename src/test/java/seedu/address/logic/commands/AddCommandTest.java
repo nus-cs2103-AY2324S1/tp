@@ -22,7 +22,7 @@ import seedu.address.model.ManageHr;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.Employee;
 import seedu.address.testutil.EmployeeBuilder;
 
 public class AddCommandTest {

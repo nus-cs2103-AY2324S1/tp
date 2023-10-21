@@ -7,12 +7,12 @@ import java.util.stream.Collectors;
 import seedu.address.model.ManageHr;
 import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.department.Department;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Employee;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Salary;
+import seedu.address.model.employee.Address;
+import seedu.address.model.employee.Email;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Name;
+import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Salary;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.

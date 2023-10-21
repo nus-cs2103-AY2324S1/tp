@@ -11,12 +11,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.department.Department;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Employee;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Salary;
+import seedu.address.model.employee.Address;
+import seedu.address.model.employee.Email;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Name;
+import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Salary;
 
 /**
  * Jackson-friendly version of {@link Employee}.
@@ -70,9 +70,9 @@ class JsonAdaptedEmployee {
      * @throws IllegalValueException if there were any data constraints violated in the adapted employee.
      */
     public Employee toModelType() throws IllegalValueException {
-        final List<Department> personDepartments = new ArrayList<>();
+        final List<Department> employeeDepartments = new ArrayList<>();
         for (JsonAdaptedDepartment department : departments) {
-            personDepartments.add(department.toModelType());
+            employeeDepartments.add(department.toModelType());
         }
 
         if (name == null) {
@@ -115,7 +115,7 @@ class JsonAdaptedEmployee {
         }
         final Salary modelSalary = new Salary(salary);
 
-        final Set<Department> modelDepartments = new HashSet<>(personDepartments);
+        final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
         return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelSalary, modelDepartments);
     }
 

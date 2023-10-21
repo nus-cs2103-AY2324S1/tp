@@ -6,8 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Employee;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.UniqueEmployeeList;
 
 /**
  * Wraps all data at the ManageHR level
@@ -15,7 +15,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class ManageHr implements ReadOnlyManageHr {
 
-    private final UniquePersonList employees;
+    private final UniqueEmployeeList employees;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +25,7 @@ public class ManageHr implements ReadOnlyManageHr {
      *   among constructors.
      */
     {
-        employees = new UniquePersonList();
+        employees = new UniqueEmployeeList();
     }
 
     public ManageHr() {}

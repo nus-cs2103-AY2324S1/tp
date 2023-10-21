@@ -9,10 +9,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.Employee;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of employees.
  */
 public class EmployeeListPanel extends UiPart<Region> {
     private static final String FXML = "EmployeeListPanel.fxml";
@@ -26,21 +26,21 @@ public class EmployeeListPanel extends UiPart<Region> {
     /**
      * Creates a {@code EmployeeListPanel} with the given {@code ObservableList}.
      */
-    public EmployeeListPanel(ObservableList<Employee> personList, ProfileDetails profileDetails) {
+    public EmployeeListPanel(ObservableList<Employee> employeeList, ProfileDetails profileDetails) {
         super(FXML);
         this.profileDetails = profileDetails;
-        employeeListView.setItems(personList);
+        employeeListView.setItems(employeeList);
         employeeListView.setCellFactory(listView -> new EmployeeListViewCell());
 
-        MultipleSelectionModel<Employee> selectionPersonList = employeeListView.getSelectionModel();
+        MultipleSelectionModel<Employee> selectionEmployeeList = employeeListView.getSelectionModel();
 
-        selectionPersonList.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        selectionEmployeeList.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             this.profileDetails.updateDetails(newValue);
         });
 
         employeeListView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
-                selectionPersonList.clearSelection();
+                selectionEmployeeList.clearSelection();
                 this.profileDetails.updateDetails(null);
             }
         });

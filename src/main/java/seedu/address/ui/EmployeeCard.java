@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.Employee;
 
 /**
  * An UI component that displays information of a {@code Employee}.
@@ -34,7 +34,7 @@ public class EmployeeCard extends UiPart<Region> {
     private FlowPane departments;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code EmployeeCode} with the given {@code Employee} and index to display.
      */
     public EmployeeCard(Employee employee, int displayedIndex) {
         super(FXML);

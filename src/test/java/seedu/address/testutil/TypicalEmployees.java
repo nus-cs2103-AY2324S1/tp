@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.ManageHr;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.Employee;
 
 /**
  * A utility class containing a list of {@code Employee} objects to be used in tests.

@@ -15,7 +15,7 @@ import seedu.address.logic.parser.ManageHrParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyManageHr;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.Employee;
 import seedu.address.storage.Storage;
 
 /**

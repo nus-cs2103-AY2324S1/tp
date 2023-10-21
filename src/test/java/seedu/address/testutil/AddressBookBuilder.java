@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.ManageHr;
-import seedu.address.model.person.Employee;
+import seedu.address.model.employee.Employee;
 
 /**
  * A utility class to help with building Addressbook objects.
