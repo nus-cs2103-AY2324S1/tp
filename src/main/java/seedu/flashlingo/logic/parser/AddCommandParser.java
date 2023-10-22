@@ -29,8 +29,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             ArgumentTokenizer.tokenize(args, PREFIX_ORIGINAL_WORD, PREFIX_ORIGINAL_WORD_LANGUAGE,
                     PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ORIGINAL_WORD, PREFIX_ORIGINAL_WORD_LANGUAGE,
-                PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ORIGINAL_WORD,
+                PREFIX_TRANSLATED_WORD)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -39,16 +39,23 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
         String originalWord = argMultimap.getValue(PREFIX_ORIGINAL_WORD).get().trim();
         String translationWord = argMultimap.getValue(PREFIX_TRANSLATED_WORD).get().trim();
+
         if (originalWord.isEmpty() | translationWord.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_EMPTY_VALUE, AddCommand.MESSAGE_USAGE));
         }
 
-        OriginalWord word = ParserUtil.parseWord(originalWord,
-                argMultimap.getValue(PREFIX_ORIGINAL_WORD_LANGUAGE).get());
-        TranslatedWord translation = ParserUtil.parseTranslation(translationWord,
-                argMultimap.getValue(PREFIX_TRANSLATED_WORD_LANGUAGE).get());
-
-        return new AddCommand(word, translation);
+        if (arePrefixesPresent(argMultimap, PREFIX_ORIGINAL_WORD_LANGUAGE,
+                PREFIX_TRANSLATED_WORD_LANGUAGE)) {
+            OriginalWord word = ParserUtil.parseWord(originalWord,
+                    argMultimap.getValue(PREFIX_ORIGINAL_WORD_LANGUAGE).get());
+            TranslatedWord translation = ParserUtil.parseTranslation(translationWord,
+                    argMultimap.getValue(PREFIX_TRANSLATED_WORD_LANGUAGE).get());
+            return new AddCommand(word, translation);
+        } else {
+            OriginalWord word = ParserUtil.parseWord(originalWord, "");
+            TranslatedWord translation = ParserUtil.parseTranslation(translationWord, "");
+            return new AddCommand(word, translation);
+        }
     }
 
     /**
