@@ -4,13 +4,15 @@ import javafx.collections.ObservableList;
 import seedu.address.model.card.Card;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an card
  */
 public interface ReadOnlyDeck {
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the cards list.
+     * This list will not contain any duplicate cards.
      */
     ObservableList<Card> getCardList();
+    void sort();
+
 
 }
