@@ -43,7 +43,7 @@ class JsonSerializableDeck {
     /**
      * Converts this address book into the model's {@code Deck} object.
      *
-     * @throws IllegalValueException if there were any data co nstraints violated.
+     * @throws IllegalValueException if there were any data constraints violated.
      */
     public Deck toModelType() throws IllegalValueException {
         Deck deck = new Deck();

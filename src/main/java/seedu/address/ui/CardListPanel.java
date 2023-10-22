@@ -10,7 +10,6 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.card.Card;
 
-
 /**
  * Panel containing the list of cards.
  */

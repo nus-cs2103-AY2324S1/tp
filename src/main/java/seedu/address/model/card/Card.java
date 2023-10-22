@@ -2,9 +2,13 @@ package seedu.address.model.card;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Card in lesSON.
@@ -12,21 +16,27 @@ import seedu.address.commons.util.ToStringBuilder;
  * immutable.
  */
 public class Card implements Comparable<Card> {
+    // Identity fields
     private final Question question;
     private final Answer answer;
+
+    // Data fields
     private String difficulty;
     private PracticeDate lastPracticeDate; // last date card was practiced, can be null.
     private PracticeDate nextPracticeDate; // next date card should be practiced.
+    private Integer priority;
+    private List<Tag> tags = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Card(Question question, Answer answer, String difficulty,
-                PracticeDate nextPracticeDate, PracticeDate lastPracticeDate) {
-        requireAllNonNull(question, answer, nextPracticeDate);
+    public Card(Question question, Answer answer, String difficulty, List<Tag> tags,
+            PracticeDate nextPracticeDate, PracticeDate lastPracticeDate) {
+        requireAllNonNull(question, answer, difficulty, tags, nextPracticeDate);
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
+        this.tags.addAll(tags);
         if (lastPracticeDate == null) {
             this.lastPracticeDate = nextPracticeDate;
         } else {
@@ -60,7 +70,9 @@ public class Card implements Comparable<Card> {
     }
 
     /**
-     * Sets a next practice date, replacing the previous practice dates with new values.
+     * Sets a next practice date, replacing the previous practice dates with new
+     * values.
+     * 
      * @param practiceDate the next practice date.
      */
     public void setNextPracticeDate(PracticeDate practiceDate) {
@@ -70,12 +82,17 @@ public class Card implements Comparable<Card> {
 
     /**
      * Sets a new practice date based on difficulty.
+     * 
      * @param difficulty
      */
     public void setNewPracticeDateWith(String difficulty) {
         PracticeDate newPracticeDate = PracticeDate.calculateNewPracticeDate(
                 this.lastPracticeDate, this.nextPracticeDate, difficulty);
         this.setNextPracticeDate(newPracticeDate);
+    }
+
+    public List<Tag> getTags() {
+        return Collections.unmodifiableList(tags);
     }
 
     /**
@@ -108,7 +125,8 @@ public class Card implements Comparable<Card> {
 
         Card otherCard = (Card) other;
         return question.equals(otherCard.question)
-                && answer.equals(otherCard.answer);
+                && answer.equals(otherCard.answer)
+                && tags.equals(otherCard.tags);
     }
 
     @Override
@@ -122,6 +140,7 @@ public class Card implements Comparable<Card> {
         return new ToStringBuilder(this)
                 .add("question", question)
                 .add("answer", answer)
+                .add("tags", tags)
                 .toString();
     }
 
@@ -137,4 +156,5 @@ public class Card implements Comparable<Card> {
     public String answertoString() {
         return "Answer: " + this.getAnswer().toString();
     }
+
 }
