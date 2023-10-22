@@ -8,7 +8,7 @@ import seedu.address.model.attendance.Attendance;
 /**
  * A utility class containing a list of {@code Attendance} objects to be used in tests.
  */
-public class TypicalAttendance {
+public class TypicalAttendances {
 
     public static final Attendance ALICE_AURORA = new AttendanceBuilder().withMemberName("Alice Pauline")
             .withEventName("Aurora Borealis").withHours("3").withRemark("Role: Photographer").build();
@@ -30,7 +30,7 @@ public class TypicalAttendance {
     public static final Attendance GEORGE_GRAVITY_DISCOVERY_DAY = new AttendanceBuilder().withMemberName("George Best")
             .withEventName("Gravity Discovery Day").withHours("1").withRemark("Discovered gravity").build();
 
-    private TypicalAttendance() {} // prevents instantiation
+    private TypicalAttendances() {} // prevents instantiation
 
     public static List<Attendance> getTypicalAttendance() {
         return new ArrayList<>(Arrays.asList(ALICE_AURORA, BENSON_BOXING, CARL_CNY, DANIEL_DOG_DAY, ELLE_EHCO_DAY,

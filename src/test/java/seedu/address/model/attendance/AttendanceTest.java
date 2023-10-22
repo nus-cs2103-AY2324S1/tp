@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_HOURS_CLIMBING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOXING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_CLIMBING;
-import static seedu.address.testutil.TypicalAttendance.ALICE_AURORA;
-import static seedu.address.testutil.TypicalAttendance.BENSON_BOXING;
+import static seedu.address.testutil.TypicalAttendances.ALICE_AURORA;
+import static seedu.address.testutil.TypicalAttendances.BENSON_BOXING;
 
 import org.junit.jupiter.api.Test;
 
