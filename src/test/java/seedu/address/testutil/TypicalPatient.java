@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.person.Patient;
 
 /**
@@ -87,5 +88,13 @@ public class TypicalPatient {
 
     public static List<Patient> getTypicalPatients() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static AddressBook getTypicalPatientAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Patient patient : TypicalPatient.getTypicalPatients()) {
+            ab.addPatient(patient);
+        }
+        return ab;
     }
 }

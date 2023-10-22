@@ -42,8 +42,6 @@ public class TypicalDoctor {
             .withEmail("cornelia@example.com").withAddress("10th street").withGender("M").withIc("S7531260K").build();
     public static final Doctor EDITH = new DoctorBuilder().withName("Edith Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").withGender("F").withIc("S7231261K").build();
-    public static final Doctor FELICIA = new DoctorBuilder().withName("Felicia Kunz").withPhone("9482427")
-            .withEmail("felbel@example.com").withAddress("little tokyo").withGender("F").withIc("S9431262K").build();
     public static final Doctor GREG = new DoctorBuilder().withName("Greg Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withGender("M").withIc("S9531263K").build();
 
@@ -72,7 +70,7 @@ public class TypicalDoctor {
     /**
      * Returns an {@code AddressBook} with all the typical patients.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalDoctorAddressBook() {
         AddressBook ab = new AddressBook();
         for (Doctor doctor : getTypicalDoctors()) {
             ab.addDoctor(doctor);
@@ -81,6 +79,6 @@ public class TypicalDoctor {
     }
 
     public static List<Doctor> getTypicalDoctors() {
-        return new ArrayList<>(Arrays.asList(ALICE, BOYD, CARLOS, DAVID, EDITH, FELICIA, GREG, ALLEN, WAYNE));
+        return new ArrayList<>(Arrays.asList(ALICE, BOYD, CARLOS, DAVID, EDITH, GREG, ALLEN, WAYNE));
     }
 }

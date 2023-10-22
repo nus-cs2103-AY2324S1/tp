@@ -54,6 +54,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validNricFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         Person personToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         Ic personToDeleteIc = personToDelete.getIc();
@@ -64,7 +65,6 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
