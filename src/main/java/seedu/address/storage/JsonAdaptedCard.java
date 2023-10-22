@@ -80,12 +80,16 @@ class JsonAdaptedCard {
 
         final Answer modelAnswer = new Answer(answer);
 
+        if (difficulty == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "difficulty"));
+        }
+
         final List<Tag> cardTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             cardTags.add(tag.toModelType());
         }
 
-        return new  Card(modelQuestion, modelAnswer, difficulty, cardTags);
+        return new Card(modelQuestion, modelAnswer, difficulty, cardTags);
     }
 
 }
