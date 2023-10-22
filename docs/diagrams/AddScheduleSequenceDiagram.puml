@@ -7,12 +7,13 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":AddScheduleCommandParser" as AddScheduleCommandParser LOGIC_COLOR
 participant "add-s:AddScheduleCommand" as AddScheduleCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":Schedule" as Schedule MODEL_COLOR
+participant "s:Schedule" as Schedule MODEL_COLOR
 end box
 [-> LogicManager : execute(String)
 activate LogicManager
@@ -40,6 +41,9 @@ deactivate AddScheduleCommand
 
 
 AddScheduleCommandParser --> AddressBookParser : add-s
+deactivate AddScheduleCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddScheduleCommandParser -[hidden]-> AddressBookParser
 destroy AddScheduleCommandParser
 
 AddressBookParser --> LogicManager
@@ -59,10 +63,10 @@ create Schedule
 AddScheduleCommand -> Schedule
 activate Schedule
 
-Schedule --> AddScheduleCommand
+Schedule --> AddScheduleCommand : s
 deactivate Schedule
 
-AddScheduleCommand -> Model : hasSchedule(Schedule)
+AddScheduleCommand -> Model : hasSchedule(s)
 activate Model
 
 Model --> AddScheduleCommand
@@ -81,11 +85,18 @@ loop number of schedules in model
     deactivate Schedule
 end
 
-AddScheduleCommand -> Model : addSchedule(Schedule)
+AddScheduleCommand -> Model : addSchedule(s)
 activate Model
 
 Model --> AddScheduleCommand
 deactivate Model
+
+create CommandResult
+AddScheduleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddScheduleCommand : result
+deactivate CommandResult
 
 AddScheduleCommand --> LogicManager : result
 deactivate AddScheduleCommand
