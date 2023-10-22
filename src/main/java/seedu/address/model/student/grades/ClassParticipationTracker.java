@@ -1,20 +1,24 @@
 package seedu.address.model.student.grades;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
 
 /**
- * Represents a Student's class participation grades in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidClassPart(int)}
+ * Represents a Student's class participation grades in the class manager.
+ * Guarantees: is valid as declared in {@link #isValidClassPart(int)}
  */
 public class ClassParticipationTracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Class Participation needs to be a positive integer";
 
-    private final ClassParticipation[] classPartList;
+    private ClassParticipation[] classPartList;
 
     /**
      * Constructs an {@code ClassParticipationTracker}.
@@ -25,7 +29,19 @@ public class ClassParticipationTracker {
     public ClassParticipationTracker(int numOfTut) {
         checkArgument(isValidClassPart(numOfTut), MESSAGE_CONSTRAINTS);
         classPartList = new ClassParticipation[numOfTut];
-        Arrays.fill(classPartList, new ClassParticipation());
+        IntStream.range(0, numOfTut).forEach(i -> classPartList[i] = new ClassParticipation());
+    }
+
+    /**
+     * Constructs an {@code ClassParticipationTracker}. With a given class participation tracker list.
+     *
+     * @param classParticipationTracker A list of booleans representing the class participation.
+     */
+    public ClassParticipationTracker(List<Boolean> classParticipationTracker) {
+        requireNonNull(classParticipationTracker);
+        classPartList = new ClassParticipation[classParticipationTracker.size()];
+        IntStream.range(0, classParticipationTracker.size())
+                .forEach(i -> classPartList[i] = new ClassParticipation(classParticipationTracker.get(i)));
     }
 
     /**
@@ -36,7 +52,7 @@ public class ClassParticipationTracker {
     }
 
     /**
-     * Marks class participation of student.
+     * Marks the class participation of a student.
      *
      * @param tutNum The tutorial number.
      */
@@ -45,12 +61,37 @@ public class ClassParticipationTracker {
     }
 
     /**
-     * Unmarks class participation of student.
+     * Unmarks the class participation of a student.
      *
      * @param tutNum The tutorial number.
      */
     public void markDidNotParticipate(Index tutNum) {
         classPartList[tutNum.getZeroBased()].unmark();
+    }
+
+    /**
+     * Marks the class participation of a student.
+     *
+     * @param tutNum The tutorial number.
+     * @param participated Whether the student participated.
+     */
+    public void markParticipation(Index tutNum, boolean participated) {
+        if (participated) {
+            markParticipated(tutNum);
+        } else {
+            markDidNotParticipate(tutNum);
+        }
+    }
+
+    /**
+     * Returns a Json friendly version of the classParticipationTracker.
+     */
+    public List<Boolean> getJsonClassParticipationTracker() {
+        List<Boolean> classParticipationTracker = new ArrayList<>();
+        for (ClassParticipation classParticipation : classPartList) {
+            classParticipationTracker.add(classParticipation.getParticipated());
+        }
+        return classParticipationTracker;
     }
 
     @Override
@@ -80,5 +121,23 @@ public class ClassParticipationTracker {
     @Override
     public int hashCode() {
         return Arrays.hashCode(classPartList);
+    }
+
+    /**
+     * Updates the length of the class participation tracker. Whenever the tutorial count changes.
+     */
+    public void updateTutorialCountChange(int tutorialCount) {
+        if (tutorialCount == classPartList.length) {
+            return;
+        }
+        ClassParticipation[] newClassPartList = new ClassParticipation[tutorialCount];
+        for (int i = 0; i < tutorialCount; i++) {
+            if (i < classPartList.length) {
+                newClassPartList[i] = classPartList[i];
+            } else {
+                newClassPartList[i] = new ClassParticipation();
+            }
+        }
+        classPartList = newClassPartList;
     }
 }

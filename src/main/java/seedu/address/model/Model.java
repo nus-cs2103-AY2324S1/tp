@@ -13,12 +13,22 @@ import seedu.address.model.student.StudentNumber;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Student> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+
+    /**
+     * Sets the assignment count in the user prefs.
+     */
+    void setAssignmentCount(int assignmentCount);
+
+    /**
+     * Sets the tutorial count in the user prefs.
+     */
+    void setTutorialCount(int tutorialCount);
 
     /**
      * Returns the user prefs.

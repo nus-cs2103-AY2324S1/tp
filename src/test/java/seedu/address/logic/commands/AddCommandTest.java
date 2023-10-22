@@ -29,12 +29,12 @@ import seedu.address.testutil.StudentBuilder;
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
         Student validStudent = new StudentBuilder().build();
 
@@ -42,16 +42,16 @@ public class AddCommandTest {
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validStudent), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateStudent_throwsCommandException() {
         Student validStudent = new StudentBuilder().build();
         AddCommand addCommand = new AddCommand(validStudent);
         ModelStub modelStub = new ModelStubWithStudent(validStudent);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -91,6 +91,16 @@ public class AddCommandTest {
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAssignmentCount(int assignmentCount) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTutorialCount(int tutorialCount) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -189,7 +199,7 @@ public class AddCommandTest {
         @Override
         public boolean hasStudent(Student student) {
             requireNonNull(student);
-            return this.student.isSamePerson(student);
+            return this.student.isSameStudent(student);
         }
     }
 
@@ -197,18 +207,18 @@ public class AddCommandTest {
      * A Model stub that always accept the student being added.
      */
     private class ModelStubAcceptingStudentAdded extends ModelStub {
-        final ArrayList<Student> personsAdded = new ArrayList<>();
+        final ArrayList<Student> studentsAdded = new ArrayList<>();
 
         @Override
         public boolean hasStudent(Student student) {
             requireNonNull(student);
-            return personsAdded.stream().anyMatch(student::isSamePerson);
+            return studentsAdded.stream().anyMatch(student::isSameStudent);
         }
 
         @Override
         public void addStudent(Student student) {
             requireNonNull(student);
-            personsAdded.add(student);
+            studentsAdded.add(student);
         }
 
         @Override

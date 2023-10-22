@@ -10,10 +10,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.storage.JsonAdaptedClassDetails;
 
 /**
  * Represents a Student in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated.
  */
 public class Student {
 
@@ -76,6 +77,10 @@ public class Student {
         return classDetails;
     }
 
+    public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
+        return classDetails.getJsonAdaptedClassDetails();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -88,7 +93,7 @@ public class Student {
      * Returns true if both persons have the same student number.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Student otherStudent) {
+    public boolean isSameStudent(Student otherStudent) {
         if (otherStudent == this) {
             return true;
         }

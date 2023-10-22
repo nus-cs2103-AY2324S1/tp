@@ -29,7 +29,7 @@ class JsonAdaptedStudent {
     private final String phone;
     private final String email;
     private final String studentNumber;
-    private final String classDetails;
+    private final JsonAdaptedClassDetails classDetails;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,7 +38,7 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("studentNumber") String studentNumber,
-                              @JsonProperty("classDetails") String classDetails,
+                              @JsonProperty("classDetails") JsonAdaptedClassDetails classDetails,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -58,7 +58,7 @@ class JsonAdaptedStudent {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         studentNumber = source.getStudentNumber().value;
-        classDetails = source.getClassDetails().classDetails;
+        classDetails = source.getJsonAdaptedClassDetails();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -70,9 +70,9 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> studentTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            studentTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -112,12 +112,9 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ClassDetails.class.getSimpleName()));
         }
-        if (!ClassDetails.isValidClassDetails(classDetails)) {
-            throw new IllegalValueException(ClassDetails.MESSAGE_CONSTRAINTS);
-        }
-        final ClassDetails modelClassDetails = new ClassDetails(classDetails);
+        final ClassDetails modelClassDetails = classDetails.toModelType();
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(studentTags);
         return new Student(modelName, modelPhone, modelEmail, modelStudentNumber, modelClassDetails, modelTags);
     }
 

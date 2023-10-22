@@ -12,7 +12,7 @@ import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -32,7 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Students in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -46,7 +46,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code students} must not contain duplicate students.
      */
     public void setStudents(List<Student> students) {
-        this.students.setPersons(students);
+        this.students.setStudents(students);
     }
 
     /**
@@ -54,7 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setStudents(newData.getPersonList());
+        setStudents(newData.getStudentList());
     }
 
     //// student-level operations
@@ -62,7 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
-    public boolean hasPerson(Student student) {
+    public boolean hasStudent(Student student) {
         requireNonNull(student);
         return students.contains(student);
     }
@@ -74,7 +74,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public Student getStudent(StudentNumber studentNumber) {
         requireNonNull(studentNumber);
-        return students.getPerson(studentNumber);
+        return students.getStudent(studentNumber);
     }
 
     /**
@@ -94,7 +94,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
 
-        students.setPerson(target, editedStudent);
+        students.setStudent(target, editedStudent);
     }
 
     /**
@@ -115,7 +115,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Student> getPersonList() {
+    public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
     }
 

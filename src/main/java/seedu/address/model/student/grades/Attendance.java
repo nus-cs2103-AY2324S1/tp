@@ -11,6 +11,13 @@ public class Attendance {
         isPresent = false;
     }
 
+    /**
+     * Creates an {@code Attendance} object with the given isPresent value.
+     */
+    public Attendance(boolean isPresent) {
+        this.isPresent = isPresent;
+    }
+
     public void mark() {
         isPresent = true;
     }

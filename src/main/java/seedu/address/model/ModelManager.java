@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
@@ -35,7 +36,12 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.addressBook.getPersonList());
+        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+
+        logger.info("Set the tutorial count to " + this.userPrefs.getTutorialCount());
+        logger.info("Set the assignment count to " + this.userPrefs.getAssignmentCount());
+        ClassDetails.setTutorialCount(this.userPrefs.getTutorialCount());
+        ClassDetails.setAssignmentCount(this.userPrefs.getAssignmentCount());
     }
 
     public ModelManager() {
@@ -93,6 +99,22 @@ public class ModelManager implements Model {
         userPrefs.setConfigured(isConfigured);
     }
 
+    /**
+     * Assignment count that the user configured.
+     */
+    @Override
+    public void setAssignmentCount(int assignmentCount) {
+        userPrefs.setAssignmentCount(assignmentCount);
+    }
+
+    /**
+     * Tutorial count that the user configured.
+     */
+    @Override
+    public void setTutorialCount(int tutorialCount) {
+        userPrefs.setTutorialCount(tutorialCount);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -108,7 +130,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return addressBook.hasPerson(student);
+        return addressBook.hasStudent(student);
     }
 
     @Override
@@ -119,7 +141,7 @@ public class ModelManager implements Model {
     @Override
     public void addStudent(Student student) {
         addressBook.addStudent(student);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
