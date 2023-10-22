@@ -44,6 +44,14 @@ public class CommandResult {
         return showHelp;
     }
 
+    /**
+     * Check if this CommandResult instance is meant for showing table window.
+     * @return true if this is a XXXTableCommandResult instance, false otherwise.
+     */
+    public boolean isShowTable() {
+        return false;
+    }
+
     public boolean isExit() {
         return exit;
     }
@@ -75,6 +83,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
+                .add("showTable", this.isShowTable())
                 .add("exit", exit)
                 .toString();
     }
