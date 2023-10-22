@@ -9,8 +9,6 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Remark;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object
@@ -36,7 +34,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         String remarkText = argMultimap.getValue(PREFIX_REMARK).orElse("");
         Remark remark = new Remark(remarkText);
 
-        if (RemarkSyntaxHandler.IsKeepRemark(args)) {
+        if (RemarkSyntaxHandler.isKeepRemark(args)) {
             return new RemarkCommand(index, remark, true);
         }
 
