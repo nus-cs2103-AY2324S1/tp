@@ -53,7 +53,7 @@ public class CommandTestUtil {
     public static final String VALID_LOCATION_AURORA = "Greenland";
     public static final String VALID_LOCATION_BOXING = "Ridge View Residential College";
 
-    public static final String VALID_HOURS_CLIMBING = "5";
+    public static final String VALID_HOURS_CLIMBING = "7";
     public static final String VALID_HOURS_TREKKING = "10";
     public static final String VALID_REMARK_CLIMBING = "Role: Coordinator";
     public static final String VALID_REMARK_TREKKING = "Absent: Covid";
