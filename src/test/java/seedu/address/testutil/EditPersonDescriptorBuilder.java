@@ -11,6 +11,7 @@ import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.End;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
@@ -46,6 +47,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEnd(person.getEnd());
         descriptor.setTags(person.getTags());
         descriptor.setPaid(null);
+        descriptor.setPayRate(person.getPayRate());
     }
 
     /**
@@ -119,6 +121,15 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withPayRate(String payRate) {
+        descriptor.setPayRate(new PayRate(payRate));
         return this;
     }
 
