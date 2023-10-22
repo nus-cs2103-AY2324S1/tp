@@ -10,11 +10,11 @@ import javafx.scene.layout.Region;
 import seedu.address.model.applicant.Applicant;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Applicant}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ApplicantCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ApplicantListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -42,9 +42,9 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCard} with the given {@code Applicant} and index to display.
+     * Creates a {@code ApplicantCard} with the given {@code Applicant} and index to display.
      */
-    public PersonCard(Applicant applicant, int displayedIndex) {
+    public ApplicantCard(Applicant applicant, int displayedIndex) {
         super(FXML);
         this.applicant = applicant;
         id.setText(displayedIndex + ". ");
@@ -55,5 +55,10 @@ public class PersonCard extends UiPart<Region> {
         applicant.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (applicant.hasInterview()) {
+            cardPane.setStyle("-fx-border-color: #2c7a2c; -fx-border-width: 3;");
+        } else {
+            cardPane.setStyle("-fx-border-color: #7a2c2c; -fx-border-width: 3;");
+        }
     }
 }

@@ -17,7 +17,7 @@ import seedu.address.model.interview.Interview;
 
 /**
  * Command to handle adding interviews to the address book.
- * Adapted from AB3's "AddCommand" class
+ * Adapted from AB3's AddCommand class
  */
 public class AddInterviewCommand extends Command {
 

@@ -10,8 +10,9 @@ import seedu.address.model.interview.Interview;
  */
 public class TypicalAddressBook {
     private TypicalAddressBook() {} // prevents instantiation
+
     /**
-     * Returns an {@code AddressBook} with all the typical persons and interviews.
+     * Returns an {@code AddressBook} with all the typical applicants and interviews.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
