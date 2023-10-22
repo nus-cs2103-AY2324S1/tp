@@ -9,7 +9,7 @@ import seedu.address.model.interview.Interview;
 
 /**
  * Jackson-friendly version of {@link seedu.address.model.interview.Interview}.
- * Adapted from AB3's JsonAdaptedApplicant
+ * Adapted from AB3's JsonAdaptedPerson
  */
 class JsonAdaptedInterview {
 

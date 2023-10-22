@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the Interview object methods
- * Adapted from AB3 ApplicantTest class
+ * Adapted from AB3's PersonTest class
  */
 public class InterviewTest {
 
