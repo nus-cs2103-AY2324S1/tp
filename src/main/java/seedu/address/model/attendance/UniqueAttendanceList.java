@@ -8,7 +8,7 @@ import seedu.address.model.member.Member;
 /**
  * Represents a list of Attendance.
  */
-public class AttendanceList extends ArrayList<Attendance> {
+public class UniqueAttendanceList extends ArrayList<Attendance> {
     public void addAttendance(Attendance attendance) {
         this.add(attendance);
     }
