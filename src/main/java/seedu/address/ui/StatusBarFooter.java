@@ -16,6 +16,8 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @FXML
     private Label saveLocationStatus;
+    @FXML
+    private Label shownPersonStatus;
 
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
@@ -23,6 +25,7 @@ public class StatusBarFooter extends UiPart<Region> {
     public StatusBarFooter(Path saveLocation) {
         super(FXML);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+        shownPersonStatus.setText(String.format("%d out of %d students", 0, 0));
     }
 
 }
