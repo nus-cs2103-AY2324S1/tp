@@ -31,7 +31,7 @@ public class Hours {
     public static boolean isValidHours(String test) {
         try {
             Integer i = Integer.valueOf(test);
-            return true;
+            return i >= 0;
         } catch (NumberFormatException e) {
             return false;
         }

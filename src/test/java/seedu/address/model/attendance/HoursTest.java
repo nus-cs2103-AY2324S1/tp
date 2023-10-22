@@ -29,8 +29,10 @@ class HoursTest {
         assertFalse(Hours.isValidHours("twenty")); // wrong format
         assertFalse(Hours.isValidHours("2hrs")); // wrong format
         assertFalse(Hours.isValidHours("3.5")); // wrong format
+        assertFalse(Hours.isValidHours("-4")); // negative hours
 
         // valid hours
+        assertTrue(Hours.isValidHours("0")); // zero
         assertTrue(Hours.isValidHours("1")); // single digit
         assertTrue(Hours.isValidHours("10")); // multiple digits
         assertTrue(Hours.isValidHours("03")); // leading 0
