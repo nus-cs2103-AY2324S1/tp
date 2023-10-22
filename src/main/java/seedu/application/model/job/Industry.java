@@ -55,7 +55,7 @@ public class Industry {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Status)) {
+        if (!(other instanceof Industry)) {
             return false;
         }
 
