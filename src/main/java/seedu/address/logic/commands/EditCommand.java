@@ -62,14 +62,14 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
 
-        Card personToEdit = lastShownList.get(index.getZeroBased());
-        Card editedCard = createEditedCard(personToEdit, editCardDescriptor);
+        Card cardToEdit = lastShownList.get(index.getZeroBased());
+        Card editedCard = createEditedCard(cardToEdit, editCardDescriptor);
 
-        if (!personToEdit.isSameCard(editedCard) && model.hasCard(editedCard)) {
+        if (!cardToEdit.isSameCard(editedCard) && model.hasCard(editedCard)) {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
 
-        model.setCard(personToEdit, editedCard);
+        model.setCard(cardToEdit, editedCard);
         model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, Messages.format(editedCard)));
     }
