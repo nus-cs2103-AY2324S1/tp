@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.card.Card;
 
@@ -16,13 +17,15 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_CARD_DISPLAYED_INDEX = "The card index provided is invalid";
     public static final String MESSAGE_CARDS_LISTED_OVERVIEW = "%1$d cards listed!";
-    public static final String MESSAGE_CARDS_PRACTISE_VIEW_EASY = "%1$s";
-    public static final String MESSAGE_CARDS_PRACTISE_VIEW_MEDIUM = "%1$s";
-    public static final String MESSAGE_CARDS_PRACTISE_VIEW_HARD = "%1$s";
-    public static final String MESSAGE_CARDS_PRACTISE_VIEW_INVALID = " is not an invalid difficult "
+    public static final String MESSAGE_CARDS_SOLVE_VIEW_EASY = "%1$s";
+    public static final String MESSAGE_CARDS_SOLVE_VIEW_MEDIUM = "%1$s";
+    public static final String MESSAGE_CARDS_SOLVE_VIEW_HARD = "%1$s";
+    public static final String MESSAGE_CARDS_SOLVE_VIEW_INVALID = " is not an invalid difficult "
             + "level! Please enter easy, medium or hard!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+
+    public static final String MESSAGE_CARDS_PRACTISE_VIEW = "%1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -51,13 +54,25 @@ public class Messages {
     /**
      * Formats the {@code card} for display to the user as an Answer.
      */
-    public static String formatAnswer(Card card) {
+    public static String formatSolve(Card card, Index index) {
         final StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Answer: ")
-                .append(card.getAnswer())
+        stringBuilder.append("Solved Question ")
+                .append(index.getOneBased())
                 .append(" (Difficulty level: ")
                 .append(card.getDifficulty())
                 .append(")");
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Formats the {@code card} for display to the user as an Answer.
+     */
+    public static String formatPractise(Card card, Index index) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Practising question ")
+                .append(index.getOneBased())
+                .append(" : ")
+                .append(card.getQuestion());
         return stringBuilder.toString();
     }
 

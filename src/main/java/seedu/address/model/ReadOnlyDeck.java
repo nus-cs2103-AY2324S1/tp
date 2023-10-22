@@ -12,5 +12,7 @@ public interface ReadOnlyDeck {
      * This list will not contain any duplicate cards.
      */
     ObservableList<Card> getCardList();
+    void sort();
+
 
 }
