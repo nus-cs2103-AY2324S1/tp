@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -20,7 +19,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Card to the Deck. "
             + "Parameters: "
             + PREFIX_QUESTION + "QUESTION "
-            + PREFIX_ANSWER + "ANSWER ";
+            + PREFIX_ANSWER + "ANSWER "
+            + PREFIX_TAG + "TAG ";
 
     public static final String MESSAGE_SUCCESS = "New Card added: %1$s";
     public static final String MESSAGE_DUPLICATE_CARD = "This Card already exists in the Deck";
