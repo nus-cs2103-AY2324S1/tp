@@ -6,12 +6,13 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.application.commons.util.ToStringBuilder;
+import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.UniqueJobList;
 
 /**
  * Wraps all data at the application-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameJob comparison)
  */
 public class ApplicationBook implements ReadOnlyApplicationBook {
 
@@ -57,7 +58,7 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
         setJobs(newData.getJobList());
     }
 
-    //// person-level operations
+    //// job-level operations
 
     /**
      * Returns true if a job with the same identity as {@code job} exists in the application book.
@@ -92,6 +93,21 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
      */
     public void removeJob(Job key) {
         jobs.remove(key);
+    }
+
+    /**
+     * Restores {@code jobs} to the original unsorted order.
+     */
+    public void unsortJobs() {
+        jobs.unsortJobs();
+    }
+
+    /**
+     * Sorts the jobs in the application book based on the comparator provided.
+     * @param comparator The comparator used to compare 2 jobs.
+     */
+    public void sortJobs(FieldComparator comparator) {
+        jobs.sortJobs(comparator);
     }
 
     //// util methods

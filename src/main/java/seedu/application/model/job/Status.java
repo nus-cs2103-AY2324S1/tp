@@ -9,6 +9,7 @@ import seedu.application.commons.util.AppUtil;
  */
 public class Status {
 
+    public static final String STATUS_SPECIFIER = "-s";
     public static final String MESSAGE_CONSTRAINTS =
             "Status is not case sensitive and should only be in the form: TO_BE_SUBMITTED, PENDING, APPROVED, REJECTED";
 

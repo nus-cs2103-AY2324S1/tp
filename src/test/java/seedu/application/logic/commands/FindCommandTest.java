@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.Messages.MESSAGE_JOBS_LISTED_OVERVIEW;
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
+import static seedu.application.model.job.Role.ROLE_SPECIFIER;
 import static seedu.application.testutil.TypicalJobs.FRUIT_SELLER;
 import static seedu.application.testutil.TypicalJobs.GRASS_CUTTER;
 import static seedu.application.testutil.TypicalJobs.POLICE_OFFICER;
@@ -32,9 +32,9 @@ public class FindCommandTest {
     @Test
     public void equals() {
         FieldContainsKeywordsPredicate firstPredicate =
-                new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Collections.singletonList("first"));
+                new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Collections.singletonList("first"));
         FieldContainsKeywordsPredicate secondPredicate =
-                new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Collections.singletonList("second"));
+                new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -59,7 +59,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noJobFound() {
         String expectedMessage = String.format(MESSAGE_JOBS_LISTED_OVERVIEW, 0);
-        FieldContainsKeywordsPredicate predicate = preparePredicate(ROLE_FIND_SPECIFIER + " ");
+        FieldContainsKeywordsPredicate predicate = preparePredicate(ROLE_SPECIFIER + " ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredJobList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -69,7 +69,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleJobsFound() {
         String expectedMessage = String.format(MESSAGE_JOBS_LISTED_OVERVIEW, 3);
-        FieldContainsKeywordsPredicate predicate = preparePredicate(ROLE_FIND_SPECIFIER + " Grass Seller Police");
+        FieldContainsKeywordsPredicate predicate = preparePredicate(ROLE_SPECIFIER + " Grass Seller Police");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredJobList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -79,7 +79,7 @@ public class FindCommandTest {
     @Test
     public void toStringMethod() {
         FieldContainsKeywordsPredicate predicate =
-                new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList("keyword"));
+                new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());

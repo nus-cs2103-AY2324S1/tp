@@ -90,7 +90,7 @@ Adds an application to a company to the list.
 **Examples:**
 
 * `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 s/pending`
-  Adds a company called microsoft, with the role Software Engineer, 
+  Adds a company called microsoft, with the role Software Engineer,
   deadline Nov 12 2022 1200 and status as pending.
 * `add c/Google r/Cleaner`
   Adds a company called Google, with the role Cleaner,

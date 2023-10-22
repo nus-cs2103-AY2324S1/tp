@@ -32,7 +32,7 @@ public class AddCommand extends Command {
         + PREFIX_INDUSTRY + "INDUSTRY\n\n"
         + "Example: \n"
         + COMMAND_WORD + " "
-        + PREFIX_COMPANY + "Google"
+        + PREFIX_COMPANY + "Google "
         + PREFIX_ROLE + "Software Engineer\n"
         + "OR\n" + COMMAND_WORD + " "
         + PREFIX_COMPANY + "Google "
