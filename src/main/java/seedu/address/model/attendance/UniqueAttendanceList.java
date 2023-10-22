@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
 import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
+import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
 
 /**
  * A list of attendance that enforces uniqueness between its elements and does not allow nulls.
@@ -46,7 +46,7 @@ public class UniqueAttendanceList implements Iterable<Attendance> {
 
     /**
      * Replaces the attendance {@code target} in the list with {@code editedAttendance}.
-     * {@code target} must exist in the list.
+     * {@code targetAttendance} must exist in the list.
      * The {@code editedAttendance} must not be the same as another attendance existing  in the list.
      */
     public void setAttendance(Attendance targetAttendance, Attendance editedAttendance) {
