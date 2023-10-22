@@ -1,6 +1,9 @@
 package seedu.application.model.job;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.model.job.Company.COMPANY_SPECIFIER;
 import static seedu.application.model.job.Deadline.DEADLINE_SPECIFIER;
 import static seedu.application.model.job.Deadline.TO_ADD_DEADLINE;
@@ -77,18 +80,18 @@ public class FieldComparatorTest {
         FieldComparator fieldComparator = new FieldComparator(ROLE_SPECIFIER);
 
         // same values -> returns true
-        assertTrue(fieldComparator.equals(new FieldComparator(ROLE_SPECIFIER)));
+        assertEquals(fieldComparator, new FieldComparator(ROLE_SPECIFIER));
 
         // same object -> returns true
-        assertTrue(fieldComparator.equals(fieldComparator));
+        assertEquals(fieldComparator, fieldComparator);
 
         // null -> returns false
-        assertFalse(fieldComparator.equals(null));
+        assertNotEquals(null, fieldComparator);
 
         // different types -> returns false
-        assertFalse(fieldComparator.equals(5.0f));
+        assertNotEquals(5.0f, fieldComparator);
 
         // different values -> returns false
-        assertFalse(fieldComparator.equals(new FieldComparator(COMPANY_SPECIFIER)));
+        assertNotEquals(fieldComparator, new FieldComparator(COMPANY_SPECIFIER));
     }
 }

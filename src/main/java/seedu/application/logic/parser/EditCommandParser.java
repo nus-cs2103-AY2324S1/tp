@@ -5,7 +5,7 @@ import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -28,7 +28,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS,
-                    PREFIX_JOBTYPE, PREFIX_INDUSTRY);
+                    PREFIX_JOB_TYPE, PREFIX_INDUSTRY);
 
         Index index;
 
@@ -39,7 +39,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS,
-                PREFIX_JOBTYPE, PREFIX_INDUSTRY);
+                PREFIX_JOB_TYPE, PREFIX_INDUSTRY);
 
         EditCommand.EditJobDescriptor editJobDescriptor = new EditCommand.EditJobDescriptor();
 
@@ -55,8 +55,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editJobDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
-        if (argMultimap.getValue(PREFIX_JOBTYPE).isPresent()) {
-            editJobDescriptor.setJobType(ParserUtil.parseJobType(argMultimap.getValue(PREFIX_JOBTYPE).get()));
+        if (argMultimap.getValue(PREFIX_JOB_TYPE).isPresent()) {
+            editJobDescriptor.setJobType(ParserUtil.parseJobType(argMultimap.getValue(PREFIX_JOB_TYPE).get()));
         }
         if (argMultimap.getValue(PREFIX_INDUSTRY).isPresent()) {
             editJobDescriptor.setIndustry(ParserUtil.parseIndustry(argMultimap.getValue(PREFIX_INDUSTRY).get()));

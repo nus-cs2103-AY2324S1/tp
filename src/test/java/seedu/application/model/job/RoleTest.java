@@ -1,6 +1,8 @@
 package seedu.application.model.job;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.testutil.Assert.assertThrows;
 
@@ -43,18 +45,18 @@ public class RoleTest {
         Role role = new Role("Valid Role");
 
         // same values -> returns true
-        assertTrue(role.equals(new Role("Valid Role")));
+        assertEquals(role, new Role("Valid Role"));
 
         // same object -> returns true
-        assertTrue(role.equals(role));
+        assertEquals(role, role);
 
         // null -> returns false
-        assertFalse(role.equals(null));
+        assertNotEquals(null, role);
 
         // different types -> returns false
-        assertFalse(role.equals(5.0f));
+        assertNotEquals(5.0f, role);
 
         // different values -> returns false
-        assertFalse(role.equals(new Role("Other Valid Role")));
+        assertNotEquals(role, new Role("Other Valid Role"));
     }
 }

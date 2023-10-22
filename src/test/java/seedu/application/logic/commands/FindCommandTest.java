@@ -1,8 +1,7 @@
 package seedu.application.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.application.logic.Messages.MESSAGE_JOBS_LISTED_OVERVIEW;
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.application.model.job.Role.ROLE_SPECIFIER;
@@ -26,8 +25,8 @@ import seedu.application.model.job.FieldContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -40,20 +39,20 @@ public class FindCommandTest {
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertEquals(findFirstCommand, findFirstCommand);
 
         // same values -> returns true
         FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        assertEquals(findFirstCommand, findFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertNotEquals(1, findFirstCommand);
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertNotEquals(null, findFirstCommand);
 
         // different job -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertNotEquals(findFirstCommand, findSecondCommand);
     }
 
     @Test
@@ -91,10 +90,8 @@ public class FindCommandTest {
     private FieldContainsKeywordsPredicate preparePredicate(String userInput) {
         String[] specifierAndKeywords = userInput.split("\\s+");
         String specifier = specifierAndKeywords[0];
-        ArrayList<String> keywords = new ArrayList<>();
-        for (int i = 1; i < specifierAndKeywords.length; i++) {
-            keywords.add(specifierAndKeywords[i]);
-        }
+        ArrayList<String> keywords = new ArrayList<>(Arrays.asList(specifierAndKeywords)
+                .subList(1, specifierAndKeywords.length));
         return new FieldContainsKeywordsPredicate(specifier, keywords);
     }
 }

@@ -1,6 +1,9 @@
 package seedu.application.model.job;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.model.job.Company.COMPANY_SPECIFIER;
 import static seedu.application.model.job.Role.ROLE_SPECIFIER;
 
@@ -27,21 +30,21 @@ public class FieldContainsKeywordsPredicateTest {
                 ROLE_SPECIFIER, secondPredicateKeywordList);
 
         // same object -> returns true
-        assertTrue(firstPredicate.equals(firstPredicate));
+        assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
         FieldContainsKeywordsPredicate firstPredicateCopy =
                 new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, firstPredicateKeywordList);
-        assertTrue(firstPredicate.equals(firstPredicateCopy));
+        assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
+        assertNotEquals(1, firstPredicate);
 
         // null -> returns false
-        assertFalse(firstPredicate.equals(null));
+        assertNotEquals(null, firstPredicate);
 
         // different predicate -> returns false
-        assertFalse(firstPredicate.equals(secondPredicate));
+        assertNotEquals(firstPredicate, secondPredicate);
     }
 
     @Test

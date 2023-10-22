@@ -1,7 +1,7 @@
 package seedu.application.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.application.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.application.logic.commands.CommandTestUtil.showJobAtIndex;
 import static seedu.application.model.job.Company.COMPANY_SPECIFIER;
@@ -77,20 +77,20 @@ public class ListCommandTest {
         ListCommand listByRoleCommand = new ListCommand(new FieldComparator(ROLE_SPECIFIER));
 
         // same object -> returns true
-        assertTrue(listByRoleCommand.equals(listByRoleCommand));
+        assertEquals(listByRoleCommand, listByRoleCommand);
 
         // same values -> returns true
         ListCommand listByRoleCommandCopy = new ListCommand(new FieldComparator(ROLE_SPECIFIER));
-        assertTrue(listByRoleCommand.equals(listByRoleCommandCopy));
+        assertEquals(listByRoleCommand, listByRoleCommandCopy);
 
         // different types -> returns false
-        assertFalse(listByRoleCommand.equals(1));
+        assertNotEquals(1, listByRoleCommand);
 
         // null -> returns false
-        assertFalse(listByRoleCommand.equals(null));
+        assertNotEquals(null, listByRoleCommand);
 
         // different person -> returns false
         ListCommand listByCompanyCommand = new ListCommand(new FieldComparator(COMPANY_SPECIFIER));
-        assertFalse(listByRoleCommand.equals(listByCompanyCommand));
+        assertNotEquals(listByRoleCommand, listByCompanyCommand);
     }
 }
