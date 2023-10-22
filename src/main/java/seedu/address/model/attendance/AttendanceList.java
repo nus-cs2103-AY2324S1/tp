@@ -1,10 +1,13 @@
 package seedu.address.model.attendance;
 
+import java.util.ArrayList;
+
 import seedu.address.model.event.Event;
 import seedu.address.model.member.Member;
 
-import java.util.ArrayList;
-
+/**
+ * Represents a list of Attendance.
+ */
 public class AttendanceList extends ArrayList<Attendance> {
     public void addAttendance(Attendance attendance) {
         this.add(attendance);
