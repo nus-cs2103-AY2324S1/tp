@@ -71,7 +71,7 @@ public class PersonCard extends UiPart<Region> {
         day.setText(person.getDay().value);
         begin.setText(person.getBegin().value);
         end.setText(person.getEnd().value);
-        payRate.setText(person.getPayRate().toString());
+        payRate.setText("rate: " + person.getPayRate().toString() + "/h");
         //ispaid.setText("1");
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

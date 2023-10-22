@@ -24,7 +24,7 @@ public class PayRate {
     /**
      * Constructs an {@code PayRate}.
      *
-     * @param payRate A valid pay rate.
+     * @param payRate A valid pay rate per hour.
      */
     public PayRate(String payRate) {
         requireNonNull(payRate);
