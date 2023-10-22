@@ -1,20 +1,54 @@
 {
-  "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "remark" : "",
-    "gender" : "F",
-    "ic": "S1234567Z",
-    "tags": [ "friends" ]
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street",
-    "remark" : "",
-    "gender" : "F",
-    "ic": "S1234567Z"
-  } ]
+  "patients": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "remark": "",
+      "gender": "F",
+      "ic": "S1234567Z",
+      "tags": [
+        "friends"
+      ],
+      "condition": "Unknown",
+      "bloodType": "O+",
+      "emergencyContact": "99272758"
+    },
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "pauline@example.com",
+      "address": "4th street",
+      "remark": "",
+      "gender": "F",
+      "ic": "S1234567Z",
+      "condition": "Unknown",
+      "bloodType": "O-",
+      "emergencyContact": "99272759"
+    }
+  ],
+  "doctors": [
+    {
+      "name": "Barry Allen",
+      "phone": "8482424",
+      "email": "flash@example.com",
+      "address": "Central City",
+      "remark": "",
+      "gender": "F",
+      "ic": "S9831263J",
+      "tags": [
+        "friends"
+      ]
+    },
+    {
+      "name": "Barry Allen",
+      "phone": "8482424",
+      "email": "flash@example.com",
+      "address": "Central City",
+      "remark": "",
+      "gender": "F",
+      "ic": "S9831263J"
+    }
+  ]
 }

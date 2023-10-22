@@ -47,7 +47,7 @@
                     </padding>
                 </StackPane>
 
-                <HBox styleClass="pane-with-border" minHeight="700" prefWidth="340" HBox.hgrow="ALWAYS">
+                <HBox styleClass="pane-with-border" prefWidth="340" HBox.hgrow="ALWAYS">
                     <VBox fx:id="patientList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS">
                         <padding>
                             <Insets top="10" right="10" bottom="10" left="10"/>

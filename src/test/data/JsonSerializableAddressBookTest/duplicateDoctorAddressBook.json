@@ -1,0 +1,26 @@
+{
+  "patients": [],
+  "doctors": [
+    {
+      "name": "Barry Allen",
+      "phone": "8482424",
+      "email": "flash@example.com",
+      "address": "Central City",
+      "remark": "",
+      "gender": "F",
+      "ic": "S9831263J",
+      "tags": [
+        "friends"
+      ]
+    },
+    {
+      "name": "Barry Allen",
+      "phone": "8482424",
+      "email": "flash@example.com",
+      "address": "Central City",
+      "remark": "",
+      "gender": "F",
+      "ic": "S9831263J"
+    }
+  ]
+}

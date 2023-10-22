@@ -60,7 +60,7 @@ public class PatientCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText("Name: " + person.getName().fullName);
+        name.setText(person.getName().fullName);
         phone.setText("Phone Number: " + person.getPhone().value);
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
@@ -73,6 +73,6 @@ public class PatientCard extends UiPart<Region> {
 
         condition.setText("Condition: " + person.getCondition().value);
         bloodType.setText("Blood Type: " + person.getBloodType().value);
-        emergencyContact.setText("Emergency Contact" + person.getEmergencyContact().value);
+        emergencyContact.setText("Emergency Contact: " + person.getEmergencyContact().value);
     }
 }
