@@ -23,6 +23,7 @@
                 <URL value="@css/Button.css"/>
                 <URL value="@css/CommandBox.css"/>
                 <URL value="@css/JobList.css"/>
+                <URL value="@css/MenuBar.css"/>
                 <URL value="@css/ResultDisplay.css"/>
                 <URL value="@css/ScrollBar.css"/>
             </stylesheets>
@@ -37,11 +38,11 @@
                     </Menu>
                 </MenuBar>
 
-                <VBox fx:id="jobList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+                <VBox fx:id="jobList" styleClass="pane-with-border" minWidth="350" prefWidth="350" VBox.vgrow="ALWAYS">
                     <padding>
                         <Insets top="20" right="20" bottom="10" left="20"/>
                     </padding>
-                    <StackPane fx:id="jobListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                    <StackPane fx:id="jobListPanelPlaceholder" VBox.vgrow="ALWAYS" styleClass="pane-with-border"/>
                 </VBox>
 
                 <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"

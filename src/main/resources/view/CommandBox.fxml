@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
-<StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane style="-fx-paddingL 0 0 0 20px" styleClass="stack-pane" xmlns="http://javafx.com/javafx/20.0.1"
+           xmlns:fx="http://javafx.com/fxml/1">
     <TextField fx:id="commandTextField" onAction="#handleCommandEntered" prefHeight="70.0" prefWidth="160.0"
-               promptText="Enter command here..."/>
+               promptText="Enter command here...">
+        <padding>
+            <Insets left="20"/>
+        </padding>
+    </TextField>
 </StackPane>

@@ -1,0 +1,44 @@
+.menu-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-style: none none solid none;
+    -fx-border-color: #E8E8E8;
+    -fx-border-size: 2px;
+}
+
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Inter Light";
+    -fx-text-fill: #343434;
+    -fx-opacity: 0.9;
+}
+
+.menu-bar .menu:hover, .menu-bar .menu:focused {
+    -fx-background-color: #ffffff;
+}
+
+.menu-bar .menu {
+    -fx-background-color: #ffffff;
+}
+
+.menu-bar .menu:hover {
+    -fx-background-color: #E4E1FF;
+    -fx-background-radius: 10px;
+}
+
+.menu-item:hover, .menu-item:focused {
+    -fx-background-color: transparent;
+}
+
+.context-menu {
+    -fx-background-color: #DCDCDC;
+    -fx-background-radius: 10px;
+}
+
+.context-menu:hover{
+    -fx-background-color: #E4E1FF;
+    -fx-background-radius: 10px;
+}
+
+.context-menu .label {
+    -fx-text-fill: #343434;
+}
