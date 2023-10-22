@@ -63,9 +63,8 @@ public class GroupPersonCommand extends Command {
         // person already in the group
         System.out.println(person.toString());
 
-
-        return new CommandResult(java.lang.String.format(MESSAGE_SUCCESS, person.getName().fullName, group.getName()));
-    }
+        return new CommandResult(java.lang.String.format(MESSAGE_SUCCESS, person.getName().fullName, group.getGroupName()));
+	}
 
     @Override
     public boolean equals(Object other) {
