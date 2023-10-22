@@ -69,4 +69,8 @@ shadowJar {
     archiveFileName = 'unofas.jar'
 }
 
+run {
+    enableAssertions = true;
+}
+
 defaultTasks 'clean', 'test'

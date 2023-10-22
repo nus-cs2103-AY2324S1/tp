@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.NullAppointment;
+import seedu.address.model.appointment.ScheduleItem;
 
 /**
  * Jackson-friendly version of {@link Appointment}.
@@ -41,10 +42,10 @@ class JsonAdaptedAppointment {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public Appointment toModelType() throws IllegalValueException {
+    public ScheduleItem toModelType() throws IllegalValueException {
 
         if (appointment.equals(MESSAGE_NULL_APT)) {
-            return new NullAppointment();
+            return NullAppointment.getNullappointment();
         }
 
         if (!Appointment.isValidAppointment(appointment)) {
