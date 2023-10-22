@@ -67,7 +67,6 @@ public class JsonDeckStorageTest {
         jsonDeckStorage.saveDeck(original, filePath);
         ReadOnlyDeck readBack = jsonDeckStorage.readDeck(filePath).get();
         assertEquals(original, new Deck(readBack));
-
     }
 
     @Test

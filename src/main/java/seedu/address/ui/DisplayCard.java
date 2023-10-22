@@ -1,7 +1,10 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.card.Card;
@@ -30,8 +33,11 @@ public class DisplayCard extends UiPart<Region> {
     @FXML
     private Label question;
 
+    @FXML
+    private FlowPane tags;
+
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code DisplayCard} with the given {@code card} and index to display.
      */
 
     public DisplayCard(Card card, int displayedIndex) {
@@ -39,6 +45,8 @@ public class DisplayCard extends UiPart<Region> {
         this.card = card;
         id.setText(displayedIndex + ". ");
         question.setText(card.getQuestion().question);
-
+        card.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

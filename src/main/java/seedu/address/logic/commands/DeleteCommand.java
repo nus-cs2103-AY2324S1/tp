@@ -12,14 +12,14 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 
 /**
- * Deletes a deck identified using it's displayed index from the deck.
+ * Deletes a Card identified using it's displayed index from the Deck.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the deck identified by the index number used in the displayed card list.\n"
+            + ": Deletes the Card identified by the index number used in the displayed card list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalCards.CS2100;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyDeck;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.card.Card;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CardBuilder;
 
 public class AddCommandTest {
@@ -74,6 +76,13 @@ public class AddCommandTest {
 
         // different Card -> returns false
         assertFalse(addcs2100Command.equals(addcs1101sCommand));
+
+        // different Tags -> return false
+        Card cs2100WithTag = new CardBuilder().withQuestion("What colour is the sky")
+                .withTags(new ArrayList<>(Collections.singleton(new Tag("Tag1"))))
+                .build();
+        AddCommand addcs2100CommandWithTag = new AddCommand(cs2100WithTag);
+        assertFalse(addcs2100Command.equals(addcs2100CommandWithTag));
     }
 
     @Test
@@ -84,7 +93,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
