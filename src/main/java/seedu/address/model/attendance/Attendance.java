@@ -49,7 +49,22 @@ public class Attendance {
     }
 
     /**
+     * Returns true if both attendance have the same identity fields.
+     * This defines a weaker notion of equality between two attendance.
+     */
+    public boolean isSameAttendance(Attendance otherAttendance) {
+        if (otherAttendance == this) {
+            return true;
+        }
+
+        return otherAttendance != null
+                && otherAttendance.getMemberName().equals(getMemberName())
+                && otherAttendance.getEventName().equals(getEventName());
+    }
+
+    /**
      * Returns true if both attendance have the same identity and data fields.
+     * This defines a stronger notion of equality between two attendances.
      */
     @Override
     public boolean equals(Object other) {

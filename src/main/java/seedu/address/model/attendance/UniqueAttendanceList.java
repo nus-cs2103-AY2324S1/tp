@@ -13,10 +13,15 @@ import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
 
 /**
  * A list of attendance that enforces uniqueness between its elements and does not allow nulls.
- * An attendance is considered unique by comparing using {@code Attendance#equals(Object)}.
+ * An attendance is considered unique by comparing using {@code Attendance#isSameAttendance(Object)}. As such, adding
+ * and updating of attendances uses Attendance#isSameAttendance(Attendance) for equality so as to ensure that the
+ * attendance being added or updated is unique in terms of identity in the UniqueAttendanceList. However, the removal of
+ * an attendance uses Attendance#equals(Object) so as to ensure that the attendance with exactly the same fields will be
+ * removed.
  *
  * Supports a minimal set of list operations.
  *
+ * @see Attendance#isSameAttendance(Attendance)
  */
 public class UniqueAttendanceList implements Iterable<Attendance> {
 
@@ -29,7 +34,7 @@ public class UniqueAttendanceList implements Iterable<Attendance> {
      */
     public boolean contains(Attendance attendanceToCheck) {
         requireNonNull(attendanceToCheck);
-        return internalList.stream().anyMatch(attendanceToCheck::equals);
+        return internalList.stream().anyMatch(attendanceToCheck::isSameAttendance);
     }
 
     /**
@@ -57,7 +62,7 @@ public class UniqueAttendanceList implements Iterable<Attendance> {
             throw new AttendanceNotFoundException();
         }
 
-        if (!targetAttendance.equals(editedAttendance) && contains(editedAttendance)) {
+        if (!targetAttendance.isSameAttendance(editedAttendance) && contains(editedAttendance)) {
             throw new DuplicateAttendanceException();
         }
 
@@ -139,7 +144,7 @@ public class UniqueAttendanceList implements Iterable<Attendance> {
     private boolean attendancesAreUnique(List<Attendance> attendances) {
         for (int i = 0; i < attendances.size() - 1; i++) {
             for (int j = i + 1; j < attendances.size(); j++) {
-                if (attendances.get(i).equals(attendances.get(j))) {
+                if (attendances.get(i).isSameAttendance(attendances.get(j))) {
                     return false;
                 }
             }

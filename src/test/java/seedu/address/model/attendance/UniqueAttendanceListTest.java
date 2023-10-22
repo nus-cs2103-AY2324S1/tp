@@ -3,6 +3,7 @@ package seedu.address.model.attendance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOURS_CLIMBING;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAttendances.ALICE_AURORA;
 import static seedu.address.testutil.TypicalAttendances.BENSON_BOXING;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
 import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
+import seedu.address.testutil.AttendanceBuilder;
 
 public class UniqueAttendanceListTest {
 
@@ -34,6 +36,14 @@ public class UniqueAttendanceListTest {
     public void contains_attendanceInList_returnsTrue() {
         uniqueAttendanceList.createAttendance(ALICE_AURORA);
         assertTrue(uniqueAttendanceList.contains(ALICE_AURORA));
+    }
+
+    @Test
+    public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
+        uniqueAttendanceList.createAttendance(ALICE_AURORA);
+        Attendance editedHours = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_CLIMBING)
+                .build();
+        assertTrue(uniqueAttendanceList.contains(editedHours));
     }
 
     @Test
@@ -73,7 +83,18 @@ public class UniqueAttendanceListTest {
     }
 
     @Test
-    public void setAttendance_editedAttendanceIsDifferent_success() {
+    public void setEvent_editedAttendanceHasSameIdentity_success() {
+        uniqueAttendanceList.createAttendance(ALICE_AURORA);
+        Attendance editedHours = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_CLIMBING)
+                .build();
+        uniqueAttendanceList.setAttendance(ALICE_AURORA, editedHours);
+        UniqueAttendanceList expectedUniqueEventList = new UniqueAttendanceList();
+        expectedUniqueEventList.createAttendance(editedHours);
+        assertEquals(expectedUniqueEventList, uniqueAttendanceList);
+    }
+
+    @Test
+    public void setAttendance_editedAttendanceHasDifferentIdentity_success() {
         uniqueAttendanceList.createAttendance(ALICE_AURORA);
         uniqueAttendanceList.setAttendance(ALICE_AURORA, BENSON_BOXING);
         UniqueAttendanceList expectedUniqueAttendanceList = new UniqueAttendanceList();
