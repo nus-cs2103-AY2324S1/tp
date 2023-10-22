@@ -42,6 +42,7 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
    * `stats` : Displays learning statistics for current user.
    * `language` : Filters the list with specified language.
    * `review` : Returns a list of words that the user should revise today.
+   * `switch` : Switches between light/dark color theme.
    * `exit` : Terminates the program.
 
 2. Refer to the [Features](#features) below for details of each command.
@@ -182,6 +183,13 @@ Format: `language SPECIFIED_LANGUAGE`
 
 Format: `review`
 
+### Switching color theme : `switch`  
+* `switch` : Switches between light and dark appearance for UI.  
+
+Format: `switch`  
+
+Output:![img.png](images/DarkTheme.png)
+
 ### Exiting the program : `exit`
 
 Closes the GUI and terminates the Java program
@@ -235,9 +243,10 @@ _Details coming soon ..._
  **Start**              | `start`                                                        
  **Reveal**             | `reveal`                                                     
  **Yes**                | `yes`                                                          
- **No**                 | `no`                                                           
- **End**                | `end`                                                         
- **Learning Statistics** | `stats`    
+ **No**                 | `no`                                                                                                                   
+ **End**               | `end`     
  **Language**           | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`
  **Review**             | `review`
+ **Learning Statistics** | `stats`
+ **Switch**              | `switch`
  **Exit**                | `exit`
