@@ -12,6 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_CHERYL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DEREK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHERYL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEREK;
+import static seedu.address.testutil.TypicalPatient.AMY;
+import static seedu.address.testutil.TypicalPatient.BENSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,11 +30,11 @@ public class TypicalDoctor {
     public static final Doctor ALICE = new DoctorBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withRemark("She wants to become a Surgeon.").withGender("F").withIc("S9631267K")
-            .withTags("friends").build();
+            .withTags("friends").withPatients(new ArrayList<>(Arrays.asList(AMY, BENSON))).build();
     public static final Doctor BOYD = new DoctorBuilder().withName("Boyd Anders")
             .withAddress("311, Clementi Ave 2, #02-25").withRemark("His weakness is being a Perfectionist")
             .withEmail("boyda@example.com").withPhone("98765432").withGender("M").withIc("S9331268K")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withPatients(new ArrayList<>(Arrays.asList(AMY))).build();
     public static final Doctor CARLOS = new DoctorBuilder().withName("Carlos Sainz").withPhone("95352563")
             .withEmail("smoothoperator@example.com").withAddress("wall street").withGender("M")
             .withIc("S9831269K").build();
@@ -59,7 +61,8 @@ public class TypicalDoctor {
             .withAddress(VALID_ADDRESS_CHERYL).withIc(VALID_NRIC_CHERYL).withGender(VALID_GENDER_FEMALE).build();
     public static final Doctor DEREK = new DoctorBuilder().withName(VALID_NAME_DEREK).withPhone(VALID_PHONE_DEREK)
             .withEmail(VALID_EMAIL_DEREK)
-            .withAddress(VALID_ADDRESS_DEREK).withIc(VALID_NRIC_DEREK).withGender(VALID_GENDER_MALE).build();
+            .withAddress(VALID_ADDRESS_DEREK).withIc(VALID_NRIC_DEREK).withGender(VALID_GENDER_MALE)
+            .build();
 
     public static final String KEYWORD_MATCHING_DAVID = "Beckham"; // A keyword that matches MEIER
 

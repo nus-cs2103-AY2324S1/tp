@@ -1,4 +1,6 @@
 package seedu.address.testutil;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,10 +10,13 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
+
+
 
 /**
  * A utility class to help with building Person objects.
@@ -33,6 +38,7 @@ public class DoctorBuilder {
     private Gender gender;
     private Ic ic;
     private Set<Tag> tags;
+    private ArrayList<Patient> patients;
 
     /**
      * Constructor for the PersonBuilder class that initialises
@@ -47,6 +53,7 @@ public class DoctorBuilder {
         gender = new Gender(DEFAULT_GENDER);
         ic = new Ic(DEFAULT_NRIC);
         tags = new HashSet<>();
+        patients = new ArrayList<Patient>();
     }
 
     /**
@@ -120,6 +127,14 @@ public class DoctorBuilder {
      */
     public DoctorBuilder withIc(String ic) {
         this.ic = new Ic(ic);
+        return this;
+    }
+
+    /**
+     * Adds a {@code Patient} of the {@code Doctor} that we are building.
+     */
+    public DoctorBuilder withPatients(ArrayList<Patient> patients) {
+        this.patients = patients;
         return this;
     }
 
