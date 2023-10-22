@@ -53,6 +53,17 @@
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
+          <Label styleClass="label-bright" text="Current Bookings" >
+            <VBox.margin>
+              <Insets/>
+            </VBox.margin>
+            <opaqueInsets>
+              <Insets/>
+            </opaqueInsets>
+            <padding>
+              <Insets bottom="5.0"/>
+            </padding>
+          </Label>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
 
