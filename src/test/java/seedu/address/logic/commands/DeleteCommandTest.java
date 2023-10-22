@@ -28,7 +28,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validStudentNumber_success() {
-        Student studentToDelete = TypicalStudents.getTypicalPersons().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student studentToDelete = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(studentToDelete.getStudentNumber());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
@@ -50,8 +50,8 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        Student first = TypicalStudents.getTypicalPersons().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Student second = TypicalStudents.getTypicalPersons().get(INDEX_SECOND_STUDENT.getZeroBased());
+        Student first = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student second = TypicalStudents.getTypicalStudents().get(INDEX_SECOND_STUDENT.getZeroBased());
         DeleteCommand deleteFirstCommand = new DeleteCommand(first.getStudentNumber());
         DeleteCommand deleteSecondCommand = new DeleteCommand(second.getStudentNumber());
 
@@ -74,7 +74,7 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        Student target = TypicalStudents.getTypicalPersons().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student target = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(target.getStudentNumber());
         String expected = DeleteCommand.class.getCanonicalName() + "{targetStudentNumber="
                 + target.getStudentNumber() + "}";
