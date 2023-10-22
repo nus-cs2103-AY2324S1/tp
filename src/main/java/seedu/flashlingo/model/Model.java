@@ -37,6 +37,16 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
+     * Returns the user prefs' theme.
+     */
+    String getTheme();
+
+    /**
+     * Sets the user prefs' theme.
+     */
+    void setTheme(String theme);
+
+    /**
      * Returns the user prefs' Flashlingo file path.
      */
     Path getFlashlingoFilePath();
@@ -93,4 +103,5 @@ public interface Model {
     void incrementRememberedWords();
     String nextReviewWord() throws CommandException;
     void rememberWord(boolean isUpdated);
+
 }

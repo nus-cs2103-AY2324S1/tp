@@ -81,6 +81,17 @@ public class ModelManager implements Model {
         userPrefs.setFlashlingoFilePath(flashlingoFilePath);
     }
 
+    @Override
+    public String getTheme() {
+        return userPrefs.getTheme();
+    }
+
+    @Override
+    public void setTheme(String theme) {
+        requireNonNull(theme);
+        userPrefs.setTheme(theme);
+    }
+
     //=========== Flashlingo ================================================================================
 
     @Override
@@ -151,6 +162,7 @@ public class ModelManager implements Model {
         FlashCard flashCard = getFilteredFlashCardList().get(0);
         flashCard.updateLevel(isUpdated);
     }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

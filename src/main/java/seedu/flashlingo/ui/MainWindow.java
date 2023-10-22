@@ -1,11 +1,14 @@
 package seedu.flashlingo.ui;
 
 import java.awt.Desktop;
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -24,7 +27,7 @@ import seedu.flashlingo.logic.parser.exceptions.ParseException;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
+    private static final String THEME_FILE_PATH_PREFIX = "src/main/resources/view/";
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -36,7 +39,8 @@ public class MainWindow extends UiPart<Stage> {
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
+    @FXML
+    private Scene scene;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -68,6 +72,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        primaryStage.setScene(scene);
     }
 
     public Stage getPrimaryStage() {
@@ -123,6 +128,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        setColorTheme();
     }
 
     /**
@@ -187,7 +194,6 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -196,11 +202,49 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            if (commandResult.isSwitchTheme()) {
+                handleSwitchTheme();
+                commandResult = new CommandResult(commandResult.getFeedbackToUser() + logic.getTheme()
+                        + " mode!", false, false, false);
+            }
+
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    private void setColorTheme() {
+        if (logic.getTheme().equals("Default")) {
+            switchTheme("Light");
+        } else {
+            switchTheme("Dark");
+        }
+    }
+
+    private void handleSwitchTheme() {
+        if (logic.getTheme().equals("Default")) {
+            logic.setTheme("Dark");
+            switchTheme("Dark");
+        } else {
+            logic.setTheme("Default");
+            switchTheme("Light");
+        }
+    }
+
+    private void switchTheme(String theme) {
+        scene.getStylesheets().clear();
+        String themeFilePath = THEME_FILE_PATH_PREFIX + theme + "Theme.css";
+        String extensionsFilePath = THEME_FILE_PATH_PREFIX + "Extensions.css";
+        try {
+            scene.getStylesheets().add((new File(themeFilePath)).toURI().toURL().toExternalForm());
+            scene.getStylesheets().add((new File(extensionsFilePath)).toURI().toURL().toExternalForm());
+        } catch (MalformedURLException e) {
+            logger.info("An error occurred while switching theme:" + e.getMessage());
         }
     }
 }
