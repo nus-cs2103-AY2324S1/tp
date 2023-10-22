@@ -65,7 +65,9 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         toAdd.getGroups().toStream().findFirst().ifPresent(group -> {
-            model.addGroup(group);
+            if (!model.hasGroup(group)) {
+                model.addGroup(group);
+            }
             try {
                 group.addPerson(toAdd);
             } catch (CommandException e) {
