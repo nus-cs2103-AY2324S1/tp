@@ -57,10 +57,8 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
 
         switch (commandWord) {
-
         case ListStudentsCommand.COMMAND_WORD:
             return new ListStudentsCommand();
-
         case ListAttendanceCommand.COMMAND_WORD:
             if (!argMultimap.getValue(PREFIX_TUTORIALNUMBER).isPresent()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -69,8 +67,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListAttendanceCommand(tag, tn, new ContainsTagPredicate(tag),
                     new AbsentFromTutorialPredicate(tn, tag));
         default:
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
     }
 }

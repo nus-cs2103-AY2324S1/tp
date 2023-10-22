@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,9 +33,11 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
             }
 
             // Implicit else
-            return person.getTags().stream()
-                    .anyMatch(personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.getTagName()))
-                    && !person.getAttendanceRecords().get(index.getZeroBased()).isPresent();
+            return person.getTags().stream().anyMatch(personTag -> (
+                    tag.getTutorialGroup() == null
+                            ? personTag.getCourseCode().equals(tag.getCourseCode())
+                            : personTag.getTagName().equals(tag.getTagName()))
+                    && !person.getAttendanceRecords().get(index.getZeroBased()).isPresent());
         });
         this.index = index;
         this.tag = tag;
