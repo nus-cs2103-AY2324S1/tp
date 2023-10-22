@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 
 import java.util.Optional;
 
@@ -21,11 +21,11 @@ public class FilterCommand extends Command {
             + ": Add, delete or clear any filters\n"
             + "Parameters: OPERATION (either add, delete or clear) \n"
             + PREFIX_COURSETUTORIAL + "COURSE_CODE "
-            + PREFIX_TUTORIALNUMBER + "TUTORIAL_NUMBER (must be a positive integer) "
+            + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID \n"
             + "Example: " + COMMAND_WORD + " "
-            + "add"
-            + PREFIX_COURSETUTORIAL + "CS2103T"
-            + PREFIX_TUTORIALNUMBER + "1";
+            + "add "
+            + PREFIX_COURSETUTORIAL + "CS2103T "
+            + PREFIX_TUTORIALGROUP + "G01";
 
     public static final String MESSAGE_ADD_SUCCESS = "Added %1$s";
     public static final String MESSAGE_DELETE_SUCCESS = "Removed %1$s";
