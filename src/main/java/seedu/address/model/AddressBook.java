@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
 
@@ -127,5 +128,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    public void sort(SortIn sequence) {
+        persons.sort(sequence);
     }
 }

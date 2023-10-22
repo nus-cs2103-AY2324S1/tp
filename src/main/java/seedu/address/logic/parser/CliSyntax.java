@@ -15,7 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_NEAREST_MRT_STATION = new Prefix("m/");
     public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
 
-    // variable name to be changed -- kx
-    public static final Prefix PREFIX_NEW_ATTR = new Prefix("np/");
+    public static final Prefix PREFIX_SORT_IN = new Prefix("in/");
 
 }

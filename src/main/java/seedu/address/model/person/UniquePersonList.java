@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -147,5 +148,13 @@ public class UniquePersonList implements Iterable<Student> {
             }
         }
         return true;
+    }
+
+    /**
+     * Sorts the list of unique students.
+     */
+    public void sort(SortIn sequence) {
+        requireNonNull(sequence);
+        internalList.sort(Comparator.comparing(student -> student.getName().fullName.toLowerCase()));
     }
 }

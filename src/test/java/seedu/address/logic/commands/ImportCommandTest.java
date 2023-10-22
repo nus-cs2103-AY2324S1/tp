@@ -28,6 +28,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.SortIn;
 import seedu.address.model.person.Student;
 
 class ImportCommandTest {
@@ -60,7 +61,7 @@ class ImportCommandTest {
 
         CommandResult commandResult = new ImportCommand(expectedList1, fileName1).execute(modelStub);
 
-        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS),
+        assertEquals(String.format(expectedList1.size() + ImportCommand.MESSAGE_SUCCESS),
                 commandResult.getFeedbackToUser());
     }
 
@@ -190,6 +191,11 @@ class ImportCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedPersonList(SortIn sortIn) {
             throw new AssertionError("This method should not be called.");
         }
 
