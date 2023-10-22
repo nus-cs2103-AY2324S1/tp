@@ -15,7 +15,6 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.Deck;
 import seedu.address.model.ReadOnlyDeck;
-import seedu.address.model.card.Card;
 
 public class JsonDeckStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonDeckStorageTest");
@@ -68,7 +67,6 @@ public class JsonDeckStorageTest {
         jsonDeckStorage.saveDeck(original, filePath);
         ReadOnlyDeck readBack = jsonDeckStorage.readDeck(filePath).get();
         assertEquals(original, new Deck(readBack));
-
     }
 
     @Test
