@@ -1,7 +1,12 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +18,14 @@ import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.logic.Messages;
 import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
-import seedu.application.model.job.*;
+import seedu.application.model.job.Company;
+import seedu.application.model.job.Deadline;
+import seedu.application.model.job.Industry;
+import seedu.application.model.job.Job;
+import seedu.application.model.job.JobType;
+import seedu.application.model.job.Role;
+import seedu.application.model.job.Status;
+
 
 /**
  * Edits the details of an existing job in the application book.
@@ -38,7 +50,7 @@ public class EditCommand extends Command {
         + PREFIX_DEADLINE + "Dec 31 2023 1200"
         + PREFIX_STATUS + "Pending "
         + PREFIX_JOBTYPE + "INTERNSHIP"
-        + PREFIX_INDUSTRY + "Tehcnology";
+        + PREFIX_INDUSTRY + "Technology";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n"
@@ -47,7 +59,7 @@ public class EditCommand extends Command {
         + PREFIX_STATUS + " for Status\n"
         + PREFIX_DEADLINE + " for Deadline\n"
         + PREFIX_JOBTYPE + " for Job Type\n"
-        + "i/ for Industry\n";
+        + PREFIX_INDUSTRY + " for Industry\n";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book.";
 
     private final Index index;
@@ -95,12 +107,12 @@ public class EditCommand extends Command {
 
         Role updatedRole = editJobDescriptor.getRole().orElse(jobToEdit.getRole());
         Company updatedCompany = editJobDescriptor.getCompany().orElse(jobToEdit.getCompany());
-        Status updatedStatus = editJobDescriptor.getStatus().orElse(jobToEdit.getStatus());
         Deadline updatedDeadline = editJobDescriptor.getDeadline().orElse(jobToEdit.getDeadline());
+        Status updatedStatus = editJobDescriptor.getStatus().orElse(jobToEdit.getStatus());
         JobType updatedJobType = editJobDescriptor.getJobType().orElse(jobToEdit.getJobType());
         Industry updatedIndustry = editJobDescriptor.getIndustry().orElse(jobToEdit.getIndustry());
 
-        return new Job(updatedRole, updatedCompany, updatedStatus, updatedDeadline, updatedJobType, updatedIndustry);
+        return new Job(updatedRole, updatedCompany, updatedDeadline, updatedStatus, updatedJobType, updatedIndustry);
     }
 
     @Override

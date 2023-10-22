@@ -50,6 +50,10 @@ public class EditJobDescriptorTest {
         editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withStatus("APPROVED").build();
         assertFalse(DESC_CHEF.equals(editedChef));
 
+        // different jobType -> returns false
+        editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withJobType("PART_TIME").build();
+        assertFalse(DESC_CHEF.equals(editedChef));
+
         // different industry -> returns false
         editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withIndustry("Baking").build();
         assertFalse(DESC_CHEF.equals(editedChef));

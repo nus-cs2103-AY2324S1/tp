@@ -14,6 +14,7 @@ import seedu.application.logic.commands.AddCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
 import seedu.application.model.job.Company;
 import seedu.application.model.job.Deadline;
+import seedu.application.model.job.Industry;
 import seedu.application.model.job.Job;
 import seedu.application.model.job.JobType;
 import seedu.application.model.job.Role;
@@ -65,7 +66,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             industry = ParserUtil.parseIndustry(argMultimap.getValue(PREFIX_INDUSTRY).get());
         }
 
-        Job job = new Job(role, company, status, deadline, jobType, industry);
+        Job job = new Job(role, company, deadline, status, jobType, industry);
 
         return new AddCommand(job);
     }

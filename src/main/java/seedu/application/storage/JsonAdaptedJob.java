@@ -93,7 +93,6 @@ class JsonAdaptedJob {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     JobType.class.getSimpleName()));
         }
-
         if (!JobType.isValidJobType(jobType)) {
             throw new IllegalValueException(JobType.MESSAGE_CONSTRAINTS);
         }

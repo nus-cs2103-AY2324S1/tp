@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
@@ -54,9 +54,9 @@ public class CommandTestUtil {
     public static final String INDUSTRY_DESC_CLEANER = " " + PREFIX_INDUSTRY + VALID_INDUSTRY_CLEANER;
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "&"; // '&' not allowed in roles
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "    "; // company cannot be blank
-    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "SUBMITTED";
     public static final String INVALID_DEADLINE_DESC =
-        " " + PREFIX_DEADLINE + "Nov 12 2023"; // deadline must be in the future
+            " " + PREFIX_DEADLINE + "Nov 12 2023"; // deadline must be in the future
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "SUBMITTED";
     public static final String INVALID_JOBTYPE_DESC =
             " " + PREFIX_JOBTYPE + "OTHER"; // job type must be selected from the list of options
     public static final String INVALID_INDUSTRY_DESC =

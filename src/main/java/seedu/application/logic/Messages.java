@@ -36,19 +36,17 @@ public class Messages {
      * Formats the {@code job} for display to the user.
      */
     public static String format(Job job) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(job.getCompany())
-            .append("; Role: ")
-            .append(job.getRole())
-            .append("; Status: ")
-            .append(job.getStatus())
-            .append("; Deadline: ")
-            .append(job.getDeadline())
-            .append("; Job Type: ")
-            .append(job.getJobType())
-            .append("; Industry: ")
-            .append(job.getIndustry());
-        return builder.toString();
+        return job.getCompany()
+                + "; Role: "
+                + job.getRole()
+                + "; Deadline: "
+                + job.getDeadline()
+                + "; Status: "
+                + job.getStatus()
+                + "; Job Type: "
+                + job.getJobType()
+                + "; Industry: "
+                + job.getIndustry();
     }
 
 }
