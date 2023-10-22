@@ -16,6 +16,9 @@ import seedu.address.model.department.Department;
  */
 public class Employee {
 
+    // Global employee details
+    public static final int MAX_OVERTIME_HOURS = 72;
+
     // Identity fields
     private final Name name;
     private final Position position;
@@ -32,7 +35,7 @@ public class Employee {
      * Every field must be present and not null.
      */
     public Employee(Name name, Position position, Id id, Phone phone, Email email, Salary salary,
-                    Set<Department> departments) {
+                    Set<Department> departments, OvertimeHours overtimeHours) {
         requireAllNonNull(name, position, id, phone, email, salary, departments);
         this.name = name;
         this.position = position;
@@ -41,7 +44,7 @@ public class Employee {
         this.email = email;
         this.salary = salary;
         this.departments.addAll(departments);
-        this.overtimeHours = new OvertimeHours(72);
+        this.overtimeHours = overtimeHours;
     }
 
     public Name getName() {
@@ -69,7 +72,7 @@ public class Employee {
     }
 
     public OvertimeHours getOvertimeHours() {
-        return this.overtimeHours;
+        return overtimeHours;
     }
 
     /**
@@ -138,5 +141,4 @@ public class Employee {
                 .add("overtime hours", overtimeHours)
                 .toString();
     }
-
 }
