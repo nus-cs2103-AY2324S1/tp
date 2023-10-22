@@ -30,6 +30,8 @@ class HoursTest {
         assertFalse(Hours.isValidHours("2hrs")); // wrong format
         assertFalse(Hours.isValidHours("3.5")); // wrong format
         assertFalse(Hours.isValidHours("-4")); // negative hours
+        assertFalse(Hours.isValidHours("-2147483649")); // overflow smallest negative integer
+        assertFalse(Hours.isValidHours("2147483648")); // overflow largest positive integer
 
         // valid hours
         assertTrue(Hours.isValidHours("0")); // zero
@@ -37,6 +39,7 @@ class HoursTest {
         assertTrue(Hours.isValidHours("10")); // multiple digits
         assertTrue(Hours.isValidHours("03")); // leading 0
         assertTrue(Hours.isValidHours("1000")); // long hours
+        assertTrue(Hours.isValidHours("2147483647")); // largest positive integer
     }
 
     @Test

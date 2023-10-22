@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Hours {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Hours should be an integer and it should not be blank";
+            "Hours should be a non-negative integer up to 2147483647 and it should not be blank";
 
     public final Integer value;
 
