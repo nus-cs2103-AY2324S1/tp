@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYRATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -32,6 +33,7 @@ import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.End;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
@@ -58,6 +60,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_END + "END] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "[" + PREFIX_PAID + "PAID]...\n"
+            + "[" + PREFIX_PAYRATE + "PAYRATE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -119,9 +122,10 @@ public class EditCommand extends Command {
         End updatedEnd = editPersonDescriptor.getEnd().orElse(personToEdit.getEnd());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Boolean updatedPaid = editPersonDescriptor.getPaid().orElse(personToEdit.getPaid());
+        PayRate updatedPayRate = editPersonDescriptor.getPayRate().orElse(personToEdit.getPayRate());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSubject, updatedDay,
-                updatedBegin, updatedEnd, updatedTags, updatedPaid);
+                updatedBegin, updatedEnd, updatedTags, updatedPaid, updatedPayRate);
     }
 
     @Override
@@ -165,6 +169,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
 
         private Boolean paid;
+        private PayRate payRate;
 
         public EditPersonDescriptor() {}
 
@@ -184,13 +189,15 @@ public class EditCommand extends Command {
 
             setTags(toCopy.tags);
             setPaid(toCopy.paid);
+            setPayRate(toCopy.payRate);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, subject, day, begin, end, tags, paid);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, subject, day, begin, end, tags,
+                    paid, payRate);
         }
 
         public void setName(Name name) {
@@ -284,6 +291,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(paid);
         }
 
+        public void setPayRate(PayRate payRate) {
+            this.payRate = payRate;
+        }
+
+        public Optional<PayRate> getPayRate() {
+            return Optional.ofNullable(payRate);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -305,7 +320,8 @@ public class EditCommand extends Command {
                     && Objects.equals(begin, otherEditPersonDescriptor.begin)
                     && Objects.equals(end, otherEditPersonDescriptor.end)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(paid, otherEditPersonDescriptor.paid);
+                    && Objects.equals(paid, otherEditPersonDescriptor.paid)
+                    && Objects.equals(payRate, otherEditPersonDescriptor.payRate);
 
         }
 
@@ -319,6 +335,7 @@ public class EditCommand extends Command {
                     .add("day", day)
                     .add("tags", tags)
                     .add("paid", paid)
+                    .add("payrate", payRate)
                     .toString();
         }
     }

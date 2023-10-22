@@ -9,6 +9,7 @@ import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.End;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
@@ -29,6 +30,8 @@ public class PersonBuilder {
     public static final String DEFAULT_BEGIN = "1000";
     public static final String DEFAULT_END = "1200";
 
+    public static final String DEFAULT_PAYRATE = "15";
+
     private Name name;
     private Phone phone;
     private Email email;
@@ -40,6 +43,8 @@ public class PersonBuilder {
     private Set<Tag> tags;
 
     private boolean paid;
+
+    private PayRate payRate;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -55,6 +60,7 @@ public class PersonBuilder {
         end = new End(DEFAULT_END);
         tags = new HashSet<>();
         paid = false;
+        payRate = new PayRate(DEFAULT_PAYRATE);
     }
 
     /**
@@ -71,6 +77,7 @@ public class PersonBuilder {
         end = personToCopy.getEnd();
         tags = new HashSet<>(personToCopy.getTags());
         paid = false;
+        payRate = personToCopy.getPayRate();
     }
 
     /**
@@ -145,8 +152,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code PayRate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPayRate(String payRate) {
+        this.payRate = new PayRate(payRate);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, subject, day, begin, end, tags, paid);
+        return new Person(name, phone, email, address, subject, day, begin, end, tags, paid, payRate);
     }
 
 }

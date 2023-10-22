@@ -15,6 +15,7 @@ import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.End;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
@@ -190,5 +191,20 @@ public class ParserUtil {
             throw new ParseException(End.MESSAGE_CONSTRAINTS);
         }
         return new End(trimmedEnd);
+    }
+
+    /**
+     * Parses a {@code String payRate} into an {@code PayRate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code end} is invalid.
+     */
+    public static PayRate parsePayRate(String payRate) throws ParseException {
+        requireNonNull(payRate);
+        String trimmedPayRate = payRate.trim();
+        if (!PayRate.isValidPayRate(payRate)) {
+            throw new ParseException(PayRate.MESSAGE_CONSTRAINTS);
+        }
+        return new PayRate(trimmedPayRate);
     }
 }

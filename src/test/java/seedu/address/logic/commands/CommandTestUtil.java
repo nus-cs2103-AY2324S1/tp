@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYRATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -45,6 +46,8 @@ public class CommandTestUtil {
     public static final String VALID_BEGIN_BOB = "1300";
     public static final String VALID_END_AMY = "1400";
     public static final String VALID_END_BOB = "1500";
+    public static final String VALID_PAYRATE_AMY = "75";
+    public static final String VALID_PAYRATE_BOB = "25";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -64,6 +67,9 @@ public class CommandTestUtil {
     public static final String BEGIN_DESC_BOB = " " + PREFIX_BEGIN + VALID_BEGIN_BOB;
     public static final String END_DESC_AMY = " " + PREFIX_END + VALID_END_AMY;
     public static final String END_DESC_BOB = " " + PREFIX_END + VALID_END_BOB;
+    public static final String PAYRATE_DESC_AMY = " " + PREFIX_PAYRATE + VALID_PAYRATE_AMY;
+    public static final String PAYRATE_DESC_BOB = " " + PREFIX_PAYRATE + VALID_PAYRATE_BOB;
+
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -77,6 +83,8 @@ public class CommandTestUtil {
     public static final String INVALID_END_DESC = " " + PREFIX_END + "8888"; // not a valid time
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String INVALID_PAYRATE_DESC = " " + PREFIX_PAYRATE + "hundred"; // String not allowed in tags
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -88,12 +96,12 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withSubject(VALID_SUBJECT_AMY).withDay(VALID_DAY_AMY)
                 .withBegin(VALID_BEGIN_AMY).withEnd(VALID_END_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withPayRate(VALID_PAYRATE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withSubject(VALID_SUBJECT_BOB).withDay(VALID_DAY_BOB)
                 .withBegin(VALID_BEGIN_BOB).withEnd(VALID_END_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPayRate(VALID_PAYRATE_BOB).build();
     }
 
     /**

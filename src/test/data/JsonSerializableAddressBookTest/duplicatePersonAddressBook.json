@@ -9,7 +9,8 @@
     "begin": "0800",
     "end": "1000",
     "tags": [ "friends" ],
-    "paid": "false"
+    "paid": "false",
+    "payrate": "20"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -19,6 +20,7 @@
     "begin": "0800",
     "end": "1000",
     "address": "4th street",
-    "paid": "false"
+    "paid": "false",
+    "payrate": "20"
   } ]
 }

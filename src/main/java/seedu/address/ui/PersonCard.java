@@ -52,6 +52,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label ispaid;
 
+    @FXML
+    private Label payRate;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -68,6 +71,7 @@ public class PersonCard extends UiPart<Region> {
         day.setText(person.getDay().value);
         begin.setText(person.getBegin().value);
         end.setText(person.getEnd().value);
+        payRate.setText(person.getPayRate().toString());
         //ispaid.setText("1");
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
