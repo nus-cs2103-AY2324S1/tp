@@ -71,4 +71,24 @@ public class FieldComparatorTest {
         FieldComparator invalidComparator = new FieldComparator("x");
         assertEquals(-1, invalidComparator.compare(job1, job2));
     }
+
+    @Test
+    public void equals() {
+        FieldComparator fieldComparator = new FieldComparator(ROLE_SPECIFIER);
+
+        // same values -> returns true
+        assertTrue(fieldComparator.equals(new FieldComparator(ROLE_SPECIFIER)));
+
+        // same object -> returns true
+        assertTrue(fieldComparator.equals(fieldComparator));
+
+        // null -> returns false
+        assertFalse(fieldComparator.equals(null));
+
+        // different types -> returns false
+        assertFalse(fieldComparator.equals(5.0f));
+
+        // different values -> returns false
+        assertFalse(fieldComparator.equals(new FieldComparator(COMPANY_SPECIFIER)));
+    }
 }
