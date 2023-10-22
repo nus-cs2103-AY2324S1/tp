@@ -50,6 +50,8 @@ abstract class Word {
      */
     abstract boolean isTranslatedWord();
 
+    public abstract Word editWord(String newWord);
+
     /**
      * Evaluates and returns this word
      * @return The word encapsulated by this
@@ -75,6 +77,11 @@ abstract class Word {
         return this.word.toLowerCase().contains(subpart.toLowerCase());
     }
 
+    /**
+     * Checks whether this word is in the same language as the passed language
+     * @param language The language to check against
+     * @return True or False depending on whether this word is in the same language as language
+     */
     public boolean isSameLanguage(String language) {
         return this.language.equals(language);
     }

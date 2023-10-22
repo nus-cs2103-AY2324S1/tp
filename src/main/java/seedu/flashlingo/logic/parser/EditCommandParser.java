@@ -1,21 +1,16 @@
 package seedu.flashlingo.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.flashlingo.logic.Messages.MESSAGE_EMPTY_VALUE;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD_LANGUAGE;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD_LANGUAGE;
 
-import java.util.Date;
-
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.commands.EditCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.model.flashcard.ProficiencyLevel;
-import seedu.flashlingo.model.flashcard.words.OriginalWord;
-import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -44,10 +39,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORIGINAL_WORD, PREFIX_ORIGINAL_WORD_LANGUAGE,
                 PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
 
-        OriginalWord word = new OriginalWord(argMultimap.getValue(PREFIX_ORIGINAL_WORD).get(),
-                argMultimap.getValue(PREFIX_ORIGINAL_WORD_LANGUAGE).get());
-        TranslatedWord translation = new TranslatedWord(argMultimap.getValue(PREFIX_TRANSLATED_WORD).get(),
-                argMultimap.getValue(PREFIX_TRANSLATED_WORD_LANGUAGE).get());
-        return new EditCommand(index, new FlashCard(word, translation, new Date(), new ProficiencyLevel(1)));
+        String originalWord = argMultimap.getValue(PREFIX_ORIGINAL_WORD).get().trim();
+        String translationWord = argMultimap.getValue(PREFIX_TRANSLATED_WORD).get().trim();
+        if (originalWord.isEmpty() | translationWord.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_EMPTY_VALUE, EditCommand.MESSAGE_USAGE));
+        }
+
+        return new EditCommand(index, originalWord, translationWord);
     }
 }

@@ -53,6 +53,16 @@ public class FlashCard {
         return currentLevel;
     }
 
+    public FlashCard editFlashCard(String newWord, String newTranslation) {
+        OriginalWord originalWord = this.originalWord.editWord(newWord);
+        TranslatedWord translatedWord = this.translatedWord.editWord(newTranslation);
+        if (this.originalWord.equals(originalWord) && this.translatedWord.equals(translatedWord)) {
+            return null;
+        } else {
+            return new FlashCard(originalWord, translatedWord, whenToReview, currentLevel);
+        }
+    }
+
     /**
      * Returns true if both flashcards have the same originalWord and translatedWord.
      * This defines a weaker notion of equality between two flashcards.
