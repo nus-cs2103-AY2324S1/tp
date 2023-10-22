@@ -15,7 +15,7 @@ public class CardBuilder {
 
     public static final String DEFAULT_QUESTION = "What is the opcode for R-format instructions?";
     public static final String DEFAULT_ANSWER = "0";
-    public static final List<Tag> TAGS = new ArrayList<>();
+    public static final List<Tag> DEFAULT_TAGS = new ArrayList<>();
 
     private Question question;
     private Answer answer;
@@ -27,7 +27,7 @@ public class CardBuilder {
     public CardBuilder() {
         question = new Question(DEFAULT_QUESTION);
         answer = new Answer(DEFAULT_ANSWER);
-        tags = TAGS;
+        tags = DEFAULT_TAGS;
     }
 
     /**
@@ -58,7 +58,7 @@ public class CardBuilder {
     /**
      * Sets the {@code Tags} of the {@code Card} that we are building.
      */
-    public CardBuilder withTags(ArrayList<Tag> tags) {
+    public CardBuilder withTags(List<Tag> tags) {
         this.tags = tags;
         return this;
     }

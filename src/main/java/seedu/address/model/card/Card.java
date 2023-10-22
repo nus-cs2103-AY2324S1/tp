@@ -80,7 +80,7 @@ public class Card {
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two cards.
      */
     @Override
     public boolean equals(Object other) {
@@ -95,7 +95,8 @@ public class Card {
 
         Card otherCard = (Card) other;
         return question.equals(otherCard.question)
-                && answer.equals(otherCard.answer);
+                && answer.equals(otherCard.answer)
+                && tags.equals(otherCard.tags);
     }
 
     @Override

@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_CS1101S;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2100;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_CS1101S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CS1101S;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,10 +38,14 @@ public class EditCardDescriptorTest {
         EditCardDescriptor editedCS2100 = new EditCardDescriptorBuilder(DESC_CS2100)
                 .withQuestion(VALID_QUESTION_CS1101S).build();
         assertFalse(DESC_CS2100.equals(editedCS2100));
-        // different phone -> returns false
+
+        // different answer -> returns false
         editedCS2100 = new EditCardDescriptorBuilder(DESC_CS2100).withAnswer(VALID_ANSWER_CS1101S).build();
         assertFalse(DESC_CS2100.equals(editedCS2100));
 
+        // different tag -> returns false
+        editedCS2100 = new EditCardDescriptorBuilder(DESC_CS2100).withTags(VALID_TAG_CS1101S).build();
+        assertFalse(DESC_CS2100.equals(editedCS2100));
     }
 
     @Test
