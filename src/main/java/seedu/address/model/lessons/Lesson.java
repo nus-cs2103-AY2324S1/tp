@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -23,7 +24,12 @@ public class Lesson {
     private LocalDateTime end;
     // Data fields
     private Subject subject;
-    private ArrayList<String> students; // TOOD: change to student object
+    private ArrayList<String> students; // TODO: change to student object
+
+    /**
+     * The Task List to store the Lesson Tasks.
+     */
+    private TaskList taskList;
 
     /**
      * Constructor for a Lesson Object with one student.
@@ -94,7 +100,7 @@ public class Lesson {
     /**
      * Gets a one-line overview of the lesson.
      *
-     * If a lesson is on Thursday, 10 Oct 10 am - 12 pm, it will be formatted as:
+     * If a lesson is on Tuesday, 10 Oct 10 am - 12 pm, it will be formatted as:
      *
      * 10 am - 12 pm
      * @return A formatted overview of the time of the lesson
@@ -136,8 +142,13 @@ public class Lesson {
         return serializeSubject(); // TODO - change to something more concrete
     }
 
-    // TODO: Tasks
-    // private TaskContainer tasks;
+    /**
+     * Returns the Task List.
+     * @return
+     */
+    public ObservableList<Task> getTaskList() {
+        return taskList.asUnmodifiableObservableList();
+    }
 
     public LocalDateTime getStart() {
         return start;
