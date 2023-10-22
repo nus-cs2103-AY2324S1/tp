@@ -5,6 +5,7 @@
       "company": "Google",
       "status": "TO_BE_SUBMITTED",
       "deadline": "TO_ADD_DEADLINE",
+      "jobType": "FULL_TIME",
       "industry": "TO_ADD_INDUSTRY"
     },
     {
@@ -12,6 +13,7 @@
       "company": "Google",
       "status": "TO_BE_SUBMITTED",
       "deadline": "TO_ADD_DEADLINE",
+      "jobType": "FULL_TIME",
       "industry": "TO_ADD_INDUSTRY"
     }
   ]

@@ -1,9 +1,7 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalJobs.CHEF;
 
@@ -60,20 +58,20 @@ public class AddCommandTest {
         AddCommand addCleanerCommand = new AddCommand(cleaner);
 
         // same object -> returns true
-        assertTrue(addChefCommand.equals(addChefCommand));
+        assertEquals(addChefCommand, addChefCommand);
 
         // same values -> returns true
         AddCommand addChefCommandCopy = new AddCommand(chef);
-        assertTrue(addChefCommand.equals(addChefCommandCopy));
+        assertEquals(addChefCommand, addChefCommandCopy);
 
         // different types -> returns false
-        assertFalse(addChefCommand.equals(1));
+        assertNotEquals(1, addChefCommand);
 
         // null -> returns false
-        assertFalse(addChefCommand.equals(null));
+        assertNotEquals(null, addChefCommand);
 
         // different job -> returns false
-        assertFalse(addChefCommand.equals(addCleanerCommand));
+        assertNotEquals(addChefCommand, addCleanerCommand);
     }
 
     @Test
@@ -84,7 +82,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override

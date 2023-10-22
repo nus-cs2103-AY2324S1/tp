@@ -3,7 +3,11 @@ package seedu.application.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.application.logic.commands.CommandTestUtil.*;
+import static seedu.application.logic.commands.CommandTestUtil.DESC_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.DESC_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANER;
 
 import org.junit.jupiter.api.Test;
 
@@ -58,7 +62,8 @@ public class EditJobDescriptorTest {
             + editJobDescriptor.getCompany().orElse(null) + ", role="
             + editJobDescriptor.getRole().orElse(null) + ", deadline="
             + editJobDescriptor.getDeadline().orElse(null) + ", status="
-            + editJobDescriptor.getStatus().orElse(null) + ", industry="
+            + editJobDescriptor.getStatus().orElse(null) + ", jobType="
+            + editJobDescriptor.getJobType().orElse(null) + ", industry="
             + editJobDescriptor.getIndustry().orElse(null) + "}";
         assertEquals(expected, editJobDescriptor.toString());
     }

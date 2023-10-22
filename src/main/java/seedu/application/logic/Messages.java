@@ -44,6 +44,8 @@ public class Messages {
             .append(job.getStatus())
             .append("; Deadline: ")
             .append(job.getDeadline())
+            .append("; Job Type: ")
+            .append(job.getJobType())
             .append("; Industry: ")
             .append(job.getIndustry());
         return builder.toString();

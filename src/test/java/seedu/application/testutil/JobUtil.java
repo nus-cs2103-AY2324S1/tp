@@ -3,6 +3,7 @@ package seedu.application.testutil;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -43,7 +44,9 @@ public class JobUtil {
         descriptor.getDeadline()
             .ifPresent(deadline -> sb.append(PREFIX_DEADLINE).append(deadline.deadline).append(" "));
         descriptor.getStatus()
-                .ifPresent(status -> sb.append(PREFIX_STATUS).append(status.status).append(" "));
+            .ifPresent(status -> sb.append(PREFIX_STATUS).append(status.status).append(" "));
+        descriptor.getJobType()
+            .ifPresent(jobType -> sb.append(PREFIX_JOBTYPE).append(jobType.jobType).append(" "));
         descriptor.getIndustry()
                 .ifPresent(industry -> sb.append(PREFIX_INDUSTRY).append(industry.industry).append(" "));
         return sb.toString();

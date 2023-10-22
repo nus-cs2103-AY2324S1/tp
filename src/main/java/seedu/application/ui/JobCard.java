@@ -36,6 +36,8 @@ public class JobCard extends UiPart<Region> {
     @FXML
     private Label deadline;
     @FXML
+    private Label jobType;
+    @FXML
     private Label industry;
 
     /**
@@ -49,6 +51,7 @@ public class JobCard extends UiPart<Region> {
         company.setText(job.getCompany().name);
         status.setText(job.getStatus().status);
         deadline.setText(job.getDeadline().deadline);
+        jobType.setText(job.getJobType().jobType);
         industry.setText(job.getIndustry().industry);
     }
 }
