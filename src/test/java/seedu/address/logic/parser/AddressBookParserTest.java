@@ -24,6 +24,7 @@ import seedu.address.logic.commands.GatherCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.GatherEmailsByFinancialPlan;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -80,10 +81,11 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_gather() throws Exception {
-        String prompt = "Sample Prompt";
+    public void parseCommand_gatherByFinancialPlan() throws Exception {
+        String promptMsg = "Sample Prompt";
+        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan(promptMsg);
         GatherCommand command = (GatherCommand) parser.parseCommand(
-                GatherCommand.COMMAND_WORD + " " + prompt);
+                GatherCommand.COMMAND_WORD + " fp/" + promptMsg);
         assertEquals(new GatherCommand(prompt), command);
     }
 

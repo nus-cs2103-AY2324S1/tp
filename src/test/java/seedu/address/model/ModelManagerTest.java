@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.financialplan.FinancialPlan;
+import seedu.address.model.person.GatherEmailsByFinancialPlan;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -68,17 +69,18 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void gatherEmails_noPersonFound() {
+    public void gatherEmailsByFinancialPlan_noPersonFound() {
         modelManager.addPerson(ALICE);
-        String prompt = "Sample Financial Plan 3";
+        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan("Sample Financial Plan 3");
         assertEquals(new String(), modelManager.gatherEmails(prompt));
     }
 
     @Test
-    public void gatherEmails_personFound() {
+    public void gatherEmailsByFinancialPlan_personFound() {
         modelManager.addPerson(ELLE);
         FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
-        String prompt = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        String fpDescription = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan(fpDescription);
         assertEquals(ELLE.getEmail().toString(), modelManager.gatherEmails(prompt));
     }
 

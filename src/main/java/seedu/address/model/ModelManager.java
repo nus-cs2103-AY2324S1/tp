@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.GatherEmails;
 import seedu.address.model.person.Person;
 
 /**
@@ -117,7 +118,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String gatherEmails(String prompt) {
+    public String gatherEmails(GatherEmails prompt) {
         return addressBook.gatherEmails(prompt);
     }
 

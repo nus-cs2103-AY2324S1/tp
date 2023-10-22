@@ -32,6 +32,10 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean containsSubstring(String substring) {
+        return tagName.toLowerCase().contains(substring.toLowerCase());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

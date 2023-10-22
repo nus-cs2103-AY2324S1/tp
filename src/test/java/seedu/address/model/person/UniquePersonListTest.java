@@ -165,17 +165,18 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void gatherEmails_noPersonFound() {
+    public void gatherEmailsByFinancialPlan_noPersonFound() {
         uniquePersonList.add(ALICE);
-        String prompt = "Sample Financial Plan 3";
+        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan("Sample Financial Plan 3");
         assertEquals(new String(), uniquePersonList.gatherEmails(prompt));
     }
 
     @Test
-    public void gatherEmails_personFound() {
+    public void gatherEmailsByFinancialPlan_personFound() {
         uniquePersonList.add(ELLE);
         FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
-        String prompt = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        String fpDescription = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan(fpDescription);
         assertEquals(ELLE.getEmail().toString(), uniquePersonList.gatherEmails(prompt));
     }
 

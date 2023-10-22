@@ -98,13 +98,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Gathers the persons emails with {@code prompt} from this {@code persons}.
+     * Gathers emails of persons with {@code prompt} from this {@code persons}.
      */
-    public String gatherEmails(String prompt) {
+    public String gatherEmails(GatherEmails prompt) {
         StringBuilder emails = new StringBuilder();
 
         for (Person person : internalList) {
-            String email = person.gatherEmailsContainsFinancialPlan(prompt);
+            String email = prompt.gatherEmails(person);
             if (!email.isEmpty()) {
                 emails.append(email).append(" ");
             }

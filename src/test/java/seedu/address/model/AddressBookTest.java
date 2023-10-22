@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.financialplan.FinancialPlan;
+import seedu.address.model.person.GatherEmailsByFinancialPlan;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -57,17 +58,18 @@ public class AddressBookTest {
     }
 
     @Test
-    public void gather_noPersonFound() {
+    public void gatherByFinancialPlan_noPersonFound() {
         addressBook.addPerson(ALICE);
-        String prompt = "Sample Financial Plan 3";
+        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan("Sample Financial Plan 3");
         assertEquals(new String(), addressBook.gatherEmails(prompt));
     }
 
     @Test
-    public void gather_personFound() {
+    public void gatherByFinancialPlan_personFound() {
         addressBook.addPerson(ELLE);
         FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
-        String prompt = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        String fpDescription = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan(fpDescription);
         assertEquals(ELLE.getEmail().toString(), addressBook.gatherEmails(prompt));
     }
 

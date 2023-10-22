@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.GatherEmails;
+import seedu.address.model.person.GatherEmailsByFinancialPlan;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code GatherCommand}.
@@ -26,7 +28,7 @@ public class GatherCommandTest {
     @Test
     void execute_gatherEmails_success() {
         String message = ALICE.getEmail() + " " + BENSON.getEmail() + " " + GEORGE.getEmail();
-        String prompt = "Sample Financial Plan 1";
+        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan("Sample Financial Plan 1");
         String expectedMessage = expectedModel.gatherEmails(prompt);
         GatherCommand command = new GatherCommand(prompt);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -35,7 +37,7 @@ public class GatherCommandTest {
 
     @Test
     public void execute_noPersonFound() {
-        String prompt = "Sample Plan 3";
+        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan("Sample Plan 3");
         String expectedMessage = String.format(MESSAGE_NO_PERSON_FOUND + prompt);
         GatherCommand command = new GatherCommand(prompt);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -43,14 +45,16 @@ public class GatherCommandTest {
 
     @Test
     void testEquals() {
-        GatherCommand gatherFirstCommand = new GatherCommand("first");
-        GatherCommand gatherSecondCommand = new GatherCommand("second");
+        GatherEmails first = new GatherEmailsByFinancialPlan("first");
+        GatherEmails second = new GatherEmailsByFinancialPlan("second");
+        GatherCommand gatherFirstCommand = new GatherCommand(first);
+        GatherCommand gatherSecondCommand = new GatherCommand(second);
 
         // same object -> returns true
         assertTrue(gatherFirstCommand.equals(gatherFirstCommand));
 
         // same values -> returns true
-        GatherCommand gatherFirstCommandCopy = new GatherCommand("first");
+        GatherCommand gatherFirstCommandCopy = new GatherCommand(first);
         assertTrue(gatherFirstCommand.equals(gatherFirstCommandCopy));
 
         // different types -> returns false
@@ -65,7 +69,7 @@ public class GatherCommandTest {
 
     @Test
     void testToString() {
-        String prompt = "prompt";
+        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan("prompt");
         GatherCommand gatherCommand = new GatherCommand(prompt);
         String expected = GatherCommand.class.getCanonicalName() + "{prompt=" + prompt + "}";
         assertEquals(expected, gatherCommand.toString());

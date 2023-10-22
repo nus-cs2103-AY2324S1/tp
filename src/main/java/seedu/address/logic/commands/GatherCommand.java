@@ -1,30 +1,37 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
+import seedu.address.model.person.GatherEmails;
 
 /**
  * Gathers and lists all persons in address book emails whose details contain a given Financial Plan.
- * Keyword matching is case sensitive.
+ * Keyword matching is case insensitive.
  */
 public class GatherCommand extends Command {
 
     public static final String COMMAND_WORD = "gather";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gathers all emails of person whose financial "
-            + "plan matches the desired financial plan and display it on the output.\n"
-            + "Parameters: FINANCIAL_PLAN\n"
-            + "Example: " + COMMAND_WORD + " Sample Financial Plan 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gathers all emails of person whose details matches "
+            + "the desire prompt\n"
+            + "Gather by ether Financial Plans or Tags. Not both.\n"
+            + "Parameters: "
+            + "[" + PREFIX_FINANCIAL_PLAN + "FINANCIAL_PLAN] or "
+            + "[" + PREFIX_TAG + "TAG]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_FINANCIAL_PLAN + "Financial Plan A";
 
     public static final String MESSAGE_NO_PERSON_FOUND = "0 persons were found with ";
 
-    private final String prompt;
+    private final GatherEmails prompt;
 
     /**
      * Constructs a new GatherCommand object.
      * @param prompt The user's prompt
      */
-    public GatherCommand(String prompt) {
+    public GatherCommand(GatherEmails prompt) {
         this.prompt = prompt;
     }
 
@@ -37,7 +44,7 @@ public class GatherCommand extends Command {
     public CommandResult execute(Model model) {
         String emails = model.gatherEmails(prompt);
         if (emails.isEmpty()) {
-            return new CommandResult(MESSAGE_NO_PERSON_FOUND + prompt);
+            return new CommandResult(MESSAGE_NO_PERSON_FOUND + prompt.toString());
         }
         return new CommandResult(emails);
     }
@@ -63,5 +70,4 @@ public class GatherCommand extends Command {
                 .add("prompt", prompt)
                 .toString();
     }
-
 }
