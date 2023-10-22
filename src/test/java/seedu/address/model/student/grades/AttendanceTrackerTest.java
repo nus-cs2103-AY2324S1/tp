@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
 
 public class AttendanceTrackerTest {
 
@@ -45,6 +46,13 @@ public class AttendanceTrackerTest {
         int tutNum = 1;
         attendanceTracker.markPresent(Index.fromOneBased(tutNum));
         assertEquals(true, attendanceTracker.isPresent(Index.fromOneBased(tutNum)));
+    }
+
+    @Test
+    public void markPresent_invalidTutorialIndex_throwsInvalidTutorialIndexException() {
+        AttendanceTracker attendanceTracker = new AttendanceTracker(10);
+        int num = 100;
+        assertThrows(InvalidTutorialIndexException.class, () -> attendanceTracker.markPresent(Index.fromOneBased(num)));
     }
 
     @Test
