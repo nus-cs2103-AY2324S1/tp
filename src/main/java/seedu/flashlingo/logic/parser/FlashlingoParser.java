@@ -77,6 +77,8 @@ public class FlashlingoParser {
                 return new ExitCommand();
             case RevealCommand.COMMAND_WORD:
                 return new RevealCommand();
+            case SwitchCommand.COMMAND_WORD:
+                return new SwitchCommand();
             default:
                 logger.finer("This user input caused a ParseException: " + userInput);
                 throw new ParseException(MESSAGE_IN_REVIEW_SESSION);
