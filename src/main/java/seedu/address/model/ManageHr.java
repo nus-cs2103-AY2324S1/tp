@@ -60,7 +60,7 @@ public class ManageHr implements ReadOnlyManageHr {
     //// employee-level operations
 
     /**
-     * Returns true if a employee with the same identity as {@code employee} exists in the storage.
+     * Returns true if an employee with the same identity as {@code employee} exists in the storage.
      */
     public boolean hasEmployee(Employee employee) {
         requireNonNull(employee);

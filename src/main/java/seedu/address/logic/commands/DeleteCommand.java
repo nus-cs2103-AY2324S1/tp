@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.employee.Employee;
 
 /**
- * Deletes a employee identified using it's displayed index from the ManageHR app.
+ * Deletes an employee identified using it's displayed index from the ManageHR app.
  */
 public class DeleteCommand extends Command {
 

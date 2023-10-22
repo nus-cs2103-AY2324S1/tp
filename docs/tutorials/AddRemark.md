@@ -223,7 +223,7 @@ If you are stuck, check out the sample
 
 ## Add `Remark` to the model
 
-Now that we have all the information that we need, let’s lay the groundwork for propagating the remarks added into the in-memory storage of employee data. We achieve that by working with the `Employee` model. Each field in an Employee is implemented as a separate class (e.g. a `Name` object represents the employee’s name). That means we should add a `Remark` class so that we can use a `Remark` object to represent a remark given to a employee.
+Now that we have all the information that we need, let’s lay the groundwork for propagating the remarks added into the in-memory storage of employee data. We achieve that by working with the `Employee` model. Each field in an Employee is implemented as a separate class (e.g. a `Name` object represents the employee’s name). That means we should add a `Remark` class so that we can use a `Remark` object to represent a remark given to an employee.
 
 ### Add a new `Remark` class
 
