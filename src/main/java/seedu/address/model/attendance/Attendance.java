@@ -44,7 +44,7 @@ public class Attendance {
         return hours;
     }
 
-    public Remark getNote() {
+    public Remark getRemark() {
         return remark;
     }
 
