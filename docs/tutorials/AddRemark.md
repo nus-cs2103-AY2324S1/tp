@@ -5,7 +5,7 @@ title: "Tutorial: Adding a command"
 
 Let's walk you through the implementation of a new command — `remark`.
 
-This command allows users of the CcaCommander application to add optional remarks to people in their records and edit it if required. The command should have the following format:
+This command allows users of the CCACommander application to add optional remarks to people in their records and edit it if required. The command should have the following format:
 
 `remark INDEX r/REMARK` (e.g., `remark 2 r/Likes baseball`)
 
@@ -287,13 +287,13 @@ Refer to [this commit](https://github.com/se-edu/addressbook-level3/commit/ce998
 
 ## Updating Storage
 
-CcaCommander stores data by serializing `JsonAdaptedPerson` into `json` with the help of an external library — Jackson. Let’s update `JsonAdaptedPerson` to work with our new `Person`!
+CCACommander stores data by serializing `JsonAdaptedPerson` into `json` with the help of an external library — Jackson. Let’s update `JsonAdaptedPerson` to work with our new `Person`!
 
 While the changes to code may be minimal, the test data will have to be updated as well.
 
 <div markdown="span" class="alert alert-warning">
 
-:exclamation: You must delete CcaCommander’s storage file located at `/data/ccacommander.json` before running it! Not doing so will cause CcaCommander to default to an empty record!
+:exclamation: You must delete CCACommander’s storage file located at `/data/ccacommander.json` before running it! Not doing so will cause CcaCommander to default to an empty record!
 
 </div>
 

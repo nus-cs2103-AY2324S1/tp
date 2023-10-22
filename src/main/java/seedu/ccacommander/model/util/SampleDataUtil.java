@@ -62,15 +62,16 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyCcaCommander getSampleCcaCommander() {
-        CcaCommander sampleAb = new CcaCommander();
+        CcaCommander sampleCcaCommander = new CcaCommander();
         for (Member sampleMember : getSampleMembers()) {
-            sampleAb.createMember(sampleMember);
+            sampleCcaCommander.createMember(sampleMember);
         }
         for (Event sampleEvent : getSampleEvents()) {
-            sampleAb.createEvent(sampleEvent);
+            sampleCcaCommander.createEvent(sampleEvent);
         }
-        return sampleAb;
+        return sampleCcaCommander;
     }
+
 
     /**
      * Returns a tag set containing the list of strings given.

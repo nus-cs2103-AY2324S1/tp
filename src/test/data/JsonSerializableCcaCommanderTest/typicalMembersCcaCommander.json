@@ -1,5 +1,5 @@
 {
-  "_comment": "CcaCommander save file which contains the same Member values as in TypicalMembers#getTypicalCcaCommander()",
+  "_comment": "CCACommander save file which contains the same Member values as in TypicalMembers#getTypicalCcaCommander()",
   "members" : [ {
     "name" : "Alice Pauline",
     "gender": "Female",

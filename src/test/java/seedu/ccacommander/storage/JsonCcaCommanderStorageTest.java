@@ -96,12 +96,12 @@ public class JsonCcaCommanderStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code ccaCommander} at the specified {@code filePath}.
      */
-    private void saveCcaCommander(ReadOnlyCcaCommander addressBook, String filePath) {
+    private void saveCcaCommander(ReadOnlyCcaCommander ccaCommander, String filePath) {
         try {
             new JsonCcaCommanderStorage(Paths.get(filePath))
-                    .saveCcaCommander(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveCcaCommander(ccaCommander, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

@@ -156,9 +156,9 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an CcaCommanderStorage that throws the IOException e when saving
-        JsonCcaCommanderStorage addressBookStorage = new JsonCcaCommanderStorage(prefPath) {
+        JsonCcaCommanderStorage ccaCommanderStorage = new JsonCcaCommanderStorage(prefPath) {
             @Override
-            public void saveCcaCommander(ReadOnlyCcaCommander addressBook, Path filePath)
+            public void saveCcaCommander(ReadOnlyCcaCommander ccaCommander, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -166,7 +166,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(ccaCommanderStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

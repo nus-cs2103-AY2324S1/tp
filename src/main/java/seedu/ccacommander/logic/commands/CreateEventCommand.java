@@ -18,7 +18,7 @@ public class CreateEventCommand extends Command {
 
     public static final String COMMAND_WORD = "createEvent";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event in CcaCommander. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event in CCACommander. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_LOCATION + "LOCATION "
@@ -29,7 +29,7 @@ public class CreateEventCommand extends Command {
             + PREFIX_DATE + "2023-10-16 ";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in CcaCommander. ";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in CCACommander. ";
 
     private final Event toCreate;
 

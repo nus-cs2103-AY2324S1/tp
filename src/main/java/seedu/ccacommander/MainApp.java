@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing CcaCommander ]===========================");
+        logger.info("=============================[ Initializing CCACommander ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -82,12 +82,12 @@ public class MainApp extends Application {
             ccaCommanderOptional = storage.readCcaCommander();
             if (!ccaCommanderOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getCcaCommanderFilePath()
-                        + " populated with a sample CcaCommander.");
+                        + " populated with a sample CCACommander.");
             }
             initialData = ccaCommanderOptional.orElseGet(SampleDataUtil::getSampleCcaCommander);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getCcaCommanderFilePath() + " could not be loaded."
-                    + " Will be starting with an empty CcaCommander.");
+                    + " Will be starting with an empty CCACommander.");
             initialData = new CcaCommander();
         }
 
@@ -171,7 +171,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting CcaCommander " + MainApp.VERSION);
+        logger.info("Starting CCACommander " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

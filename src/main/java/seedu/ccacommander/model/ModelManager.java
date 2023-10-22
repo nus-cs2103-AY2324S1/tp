@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyCcaCommander ccaCommander, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(ccaCommander, userPrefs);
 
-        logger.fine("Initializing with CcaCommander: " + ccaCommander + " and user prefs " + userPrefs);
+        logger.fine("Initializing with CCACommander: " + ccaCommander + " and user prefs " + userPrefs);
 
         this.ccaCommander = new CcaCommander(ccaCommander);
         this.userPrefs = new UserPrefs(userPrefs);

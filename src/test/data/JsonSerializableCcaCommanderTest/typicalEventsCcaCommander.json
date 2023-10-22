@@ -1,5 +1,5 @@
 {
-  "_comment": "CcaCommander save file which contains the same Event values as in TypicalEvents#getTypicalCcaCommander()",
+  "_comment": "CCACommander save file which contains the same Event values as in TypicalEvents#getTypicalCcaCommander()",
   "members" : [],
   "events" : [ {
     "name" : "Aurora Borealis",

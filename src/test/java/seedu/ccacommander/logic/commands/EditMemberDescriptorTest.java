@@ -48,7 +48,7 @@ public class EditMemberDescriptorTest {
         editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different ccacommander -> returns false
+        // different address -> returns false
         editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 

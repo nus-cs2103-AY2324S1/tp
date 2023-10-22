@@ -81,7 +81,7 @@ public class MemberTest {
         editedAlice = new MemberBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different ccacommander -> returns false
+        // different address -> returns false
         editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 

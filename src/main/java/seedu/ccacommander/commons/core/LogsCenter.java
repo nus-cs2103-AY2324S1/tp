@@ -75,7 +75,7 @@ public class LogsCenter {
     }
 
     /**
-     * Creates a logger named 'ccacommander9000', containing a {@code ConsoleHandler} and a {@code FileHandler}.
+     * Creates a logger named 'ccacommander', containing a {@code ConsoleHandler} and a {@code FileHandler}.
      * Sets it as the {@code baseLogger}, to be used as the parent logger of all other loggers.
      */
     private static void setBaseLogger() {

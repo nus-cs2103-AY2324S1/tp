@@ -60,8 +60,8 @@ public class JsonCcaCommanderStorage implements CcaCommanderStorage {
     }
 
     @Override
-    public void saveCcaCommander(ReadOnlyCcaCommander addressBook) throws IOException {
-        saveCcaCommander(addressBook, filePath);
+    public void saveCcaCommander(ReadOnlyCcaCommander ccaCommander) throws IOException {
+        saveCcaCommander(ccaCommander, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonCcaCommanderStorage implements CcaCommanderStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveCcaCommander(ReadOnlyCcaCommander addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveCcaCommander(ReadOnlyCcaCommander ccaCommander, Path filePath) throws IOException {
+        requireNonNull(ccaCommander);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableCcaCommander(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableCcaCommander(ccaCommander), filePath);
     }
 
 }

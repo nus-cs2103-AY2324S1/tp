@@ -21,7 +21,7 @@ public class CreateMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "createMember";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to CcaCommander. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to CCACommander. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_GENDER + "GENDER "
@@ -39,7 +39,7 @@ public class CreateMemberCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New member added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in CcaCommander";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in CCACommander";
 
     private final Member toAdd;
 
