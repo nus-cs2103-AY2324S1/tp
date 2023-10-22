@@ -10,7 +10,6 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.card.Card;
 
-
 /**
  * Panel containing the list of persons.
  */
@@ -22,7 +21,7 @@ public class CardListPanel extends UiPart<Region> {
     private ListView<Card> cardListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code CardListPanel} with the given {@code ObservableList}.
      */
     public CardListPanel(ObservableList<Card> cardList) {
         super(FXML);
@@ -31,7 +30,7 @@ public class CardListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Card} using a {@code DisplayCard}.
      */
     class CardListViewCell extends ListCell<Card> {
         @Override

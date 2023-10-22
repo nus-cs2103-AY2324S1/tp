@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A utility class to help with building Card objects.
@@ -15,11 +15,11 @@ public class CardBuilder {
 
     public static final String DEFAULT_QUESTION = "What is the opcode for R-format instructions?";
     public static final String DEFAULT_ANSWER = "0";
-    public static final Set<Tag> TAGS = new HashSet<>();
+    public static final List<Tag> TAGS = new ArrayList<>();
 
     private Question question;
     private Answer answer;
-    private Set<Tag> tags;
+    private List<Tag> tags;
 
     /**
      * Creates a {@code CardBuilder} with the default details.
@@ -36,7 +36,7 @@ public class CardBuilder {
     public CardBuilder(Card cardToCopy) {
         question = cardToCopy.getQuestion();
         answer = cardToCopy.getAnswer();
-        tags =cardToCopy.getTags();
+        tags = cardToCopy.getTags();
     }
 
     /**
@@ -58,7 +58,7 @@ public class CardBuilder {
     /**
      * Sets the {@code Tags} of the {@code Card} that we are building.
      */
-    public CardBuilder withTags(Set<Tag> tags) {
+    public CardBuilder withTags(ArrayList<Tag> tags) {
         this.tags = tags;
         return this;
     }

@@ -1,5 +1,9 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,18 +13,12 @@ import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 /**
  * Jackson-friendly version of {@link Card}.
  */
 class JsonAdaptedCard {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Card's %s field is missing!";
 
     private final String question;
     private final String answer;
@@ -28,11 +26,12 @@ class JsonAdaptedCard {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedCard} with the given card details.
      */
     @JsonCreator
     public JsonAdaptedCard(@JsonProperty("question") String question, @JsonProperty("answer") String answer,
-                           @JsonProperty("difficulty") String difficulty, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                           @JsonProperty("difficulty") String difficulty,
+                           @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
@@ -42,7 +41,7 @@ class JsonAdaptedCard {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Card} into this class for Jackson use.
      */
     public JsonAdaptedCard(Card source) {
         question = source.getQuestion().question;
@@ -54,9 +53,9 @@ class JsonAdaptedCard {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted Card object into the model's {@code Card} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted card.
      */
     public Card toModelType() throws IllegalValueException {
 
@@ -88,4 +87,5 @@ class JsonAdaptedCard {
 
         return new Card(modelQuestion, modelAnswer, difficulty, cardTags);
     }
+
 }

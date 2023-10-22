@@ -50,38 +50,38 @@ public interface Model {
     ReadOnlyDeck getDeck();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a Card with the same identity as {@code person} exists in the Deck.
      */
     boolean hasCard(Card card);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given Card {@code target} with {@code editedCard}.
+     * {@code target} must exist in the Deck.
+     * The card identity of {@code editedCard} must not be the same as another existing card in the Deck.
      */
     void setCard(Card target, Card editedCard);
 
-    /** Returns an unmodifiable view of the filtered card list */
+    /** Returns an unmodifiable view of the filtered Card list */
     ObservableList<Card> getFilteredCardList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered Card list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCardList(Predicate<Card> predicate);
     /**
-     * Adds the given card.
-     * {@code card} must not already exist in the deck.
+     * Adds the given Card.
+     * {@code card} must not already exist in the Deck.
      */
     void addCard(Card card);
     /**
-     * Deletes the given card.
-     * {@code card} must exist in the deck.
+     * Deletes the given Card.
+     * {@code card} must exist in the Deck.
      */
     void deleteCard(Card card);
 
     /**
-     * Replaces deck data with the data in {@code deck}.
+     * Replaces Deck data with the data in {@code deck}.
      */
     public void setDeck(ReadOnlyDeck deck);
 
