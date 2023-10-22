@@ -134,9 +134,8 @@ class JsonAdaptedEmployee {
         }
         final Salary modelSalary = new Salary(salary);
 
-        if ((Integer) overtimeHours == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    OvertimeHours.class.getSimpleName()));
+        if (!OvertimeHours.isValidOvertimeHours(overtimeHours)) {
+            throw new IllegalValueException(OvertimeHours.MESSAGE_CONSTRAINTS);
         }
         final OvertimeHours modelOvertimeHours = new OvertimeHours(overtimeHours);
 

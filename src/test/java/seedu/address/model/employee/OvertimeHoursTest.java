@@ -26,4 +26,17 @@ class OvertimeHoursTest {
         // different types -> returns false
         assertFalse(overtimeHours.equals(5.0f));
     }
+
+    @Test
+    public void isValidOvertimeHours() {
+
+        // within range 0 to 72 inclusive -> returns true
+        assertTrue(OvertimeHours.isValidOvertimeHours(67));
+        assertTrue(OvertimeHours.isValidOvertimeHours(0));
+        assertTrue(OvertimeHours.isValidOvertimeHours(72));
+
+        //outside range 0 to 72 inclusive -> return false;
+        assertFalse(OvertimeHours.isValidOvertimeHours(-6));
+        assertFalse(OvertimeHours.isValidOvertimeHours(80));
+    }
 }
