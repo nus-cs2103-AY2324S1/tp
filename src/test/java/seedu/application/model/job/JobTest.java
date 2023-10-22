@@ -69,12 +69,17 @@ public class JobTest {
         // different status -> returns false
         editedChef = new JobBuilder(CHEF).withStatus(VALID_STATUS_CLEANER).build();
         assertFalse(CHEF.equals(editedChef));
+
+        // different industry -> returns false
+        editedChef = new JobBuilder(CHEF).withIndustry(VALID_INDUSTRY_CLEANER).build();
+        assertFalse(CHEF.equals(editedChef));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Job.class.getCanonicalName() + "{role=" + CHEF.getRole() + ", company="
-                + CHEF.getCompany() + ", deadline=" + CHEF.getDeadline() + ", status=" + CHEF.getStatus() + "}";
+                + CHEF.getCompany() + ", deadline=" + CHEF.getDeadline() + ", status=" + CHEF.getStatus()
+                + ", industry=" + CHEF.getIndustry() + "}";
         assertEquals(expected, CHEF.toString());
     }
 }
