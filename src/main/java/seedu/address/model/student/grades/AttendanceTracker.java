@@ -19,7 +19,7 @@ public class AttendanceTracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance Tracker needs to have positive number of tutorials.";
 
-    private Attendance[] attendanceList;
+    protected Attendance[] attendanceList;
 
     /**
      * Constructs an {@code AttendanceTracker}.
