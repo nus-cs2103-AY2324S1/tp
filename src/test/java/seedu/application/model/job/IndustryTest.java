@@ -53,4 +53,5 @@ class IndustryTest {
         // different values -> returns false
         assertFalse(industry.equals(new Industry("Engineering")));
     }
+
 }
