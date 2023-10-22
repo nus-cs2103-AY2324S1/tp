@@ -10,5 +10,5 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
   </columnConstraints>
   <Label fx:id="saveLocationStatus" />
-  <Label fx:id="shownPersonStatus" alignment="CENTER_RIGHT" contentDisplay="RIGHT" textAlignment="RIGHT" GridPane.columnIndex="1" />
+  <Label fx:id="studentCountStatus" textAlignment="RIGHT" GridPane.columnIndex="1" />
 </GridPane>
