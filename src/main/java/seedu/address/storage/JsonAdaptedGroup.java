@@ -9,7 +9,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Group}.
  */
 class JsonAdaptedGroup {
 
@@ -19,7 +19,7 @@ class JsonAdaptedGroup {
      * Constructs a {@code JsonAdaptedGroup} with the given {@code groupName}.
      */
     @JsonCreator
-    public JsonAdaptedGroup( String groupName) {
+    public JsonAdaptedGroup(@JsonProperty("name") String groupName) {
         this.groupName = groupName;
     }
 
@@ -28,11 +28,6 @@ class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(Group source) {
         groupName = source.getGroupName();
-    }
-
-    @JsonValue
-    public String getTagName() {
-        return groupName;
     }
 
     /**
