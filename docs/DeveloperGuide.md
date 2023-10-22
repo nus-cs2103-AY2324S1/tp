@@ -154,6 +154,163 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Tutor Feature
+
+The "Add Tutor" feature allows users to add a new tutor to the address book. Below, we provide an example usage scenario and a detailed description of how the add tutor mechanism behaves at each step.
+
+The following shows the activity diagram from when a user executes the `add-t` command:
+
+![AddTutorActivityDiagram](images/AddTutorActivityDiagram.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Input Limitations**<br>
+* Input format must adhere to the follow limitations:
+  * `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
+  * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
+  * `EMAIL`: Of the format local-part@domain
+* Tutor to be added must be unique and not already exist in the addressbook.
+
+</div>
+
+#### Implementation
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `add-t n/John Doe p/98765432 e/johnd@example.com` to add a tutor to the address book. The 
+command is parsed in `AddressBookParser`.
+
+Step 3. `AddTutorCommandParser` is created, which constructs the `Person` to be added.  The `AddTutorCommand` is 
+called with the `Person` created.
+
+Step 4. The `AddTutorCommand` object executes the `addPerson` method through the `LogicManager`. The method then 
+adds the `Person` in `model` and returns the `CommandResult`.
+
+The following sequence diagram shows how the above steps for add tutor operation works:
+
+![AddTutorSequenceDiagram](images/AddTutorSequenceDiagram.png)
+
+#### Design Rationale
+
+The `add-t` command was designed this way to ensure consistency with the previous `add` person.
+
+=======
+### Edit tutor feature 
+
+ The “Edit Tutor” feature allows users to edit an existing tutor in the address book given a tutor index. 
+
+ Below, we provide an example usage scenario and a detailed description of how the edit tutor mechanism behaves at 
+ each step.
+
+ ![Activity Diagram for edit-t Command](images/EditTutorActivityDiagram.png)
+
+ <div markdown="block" class="alert alert-info">
+
+**:information_source: Limitations**<br>
+* Input format must adhere to the follow limitations:
+    * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
+    * `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
+    * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
+    * `EMAIL`: Of the format local-part@domain
+* Tutor to be edited must not already exist in the addressbook (excluding the current specified one).
+* TUTOR_INDEX parameter is compulsory and at least one edited field must be provided.
+
+</div>
+
+#### Implementation
+
+The bulk of the implementation details is identical to that of other commands.
+As such only details specific to `edit-t` will be discussed.
+
+Step 1. The user has the application launched with at least 1 tutor added.
+
+Step 2. The user executes `list-t` to view all added tutors.
+
+Step 3. The user executes `edit-t 1 n/John Doe` to edit the first tutor's name in the list of tutors displayed. 
+The command is parsed in AddressBookParser.
+
+Step 4. EditTutorCommandParser is created, and constructs an `EditPersonDescriptor` which describes the edited 
+`Person`. An EditTutorCommand object is then constructed with this `EditPersonDescriptor` and the specified tutor index.
+
+Step 5. The EditTutorCommand object gets the specified person from the current filtered person list using the 
+tutor index.
+
+Step 6. EditTutorCommand object then creates an edited person from the specified person and the editPersonDescriptor.
+
+Step 7. EditTutorCommand object then calls the setPerson method in the ModelManager with the new edited person. This 
+method sets the specified `Person` in the model to be that edited person.
+
+Step 8. Finally, the EditTutorCommand object updates the person list to display the edited person.
+
+The following sequence diagram shows how the above steps for edit tutor operation works, taking 
+`execute("edit-t 1 n/New Name")` API call as an example.
+
+![Interactions Inside the Logic Component for the `edit-t 1 n/New Name` Command](images/EditTutorSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `EditTutorCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
+
+
+#### Design rationale:
+The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
+ 
+### Delete tutor feature
+
+The "Delete Tutor" feature allows users to delete an existing tutor in the address book given a tutor index.
+
+Below, we provide an example usage scenario and a detailed description of how the delete tutor mechanism behaves at
+each step. The following shows the activity diagram when a user executes the `delete-t` command:
+
+![Activity diagram for delete-t command](images/DeleteTutorActivityDiagram.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Limitations**<br>
+* Input format must adhere to the follow limitations:
+    * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
+* TUTOR_INDEX parameter is compulsory.
+</div>
+
+#### Implementation
+
+The bulk of the implementation details is identical to that of other commands.
+As such only details specific to `delete-t` will be discussed.
+
+Step 1. The user has the application launched with at least 1 tutor added.
+
+Step 2. The user executes `list-t` to view all added tutors.
+
+Step 3. The user executes `delete-t 1` to delete the tutor with Tutor index 1 in the list of tutors displayed.
+The command is parsed in the AddressBookParser.
+
+Step 4. DeleteTutorCommandParser is created and gets the index of the tutor to be deleted.
+A DeleteTutorCommand object is then constructed with the specified tutor index.
+
+Step 5. The DeleteTutorCommand object gets the specified person from the current filtered person list using the tutor
+index.
+
+Step 6. The DeleteTutorCommand object then calls the deletePerson method in the ModelManager with the specified person 
+to delete. This method deletes the specified `Person` in the model.
+
+Step 7. Finally, the DeleteTutorCommand object returns the `CommandResult`.
+
+The following sequence diagram shows how the above steps for edit tutor operation works, taking
+`execute("delete-t 1")` API call as an example.
+
+![Interactions inside the Logic Component for the `delete-t 1` Command](images/DeleteTutorSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+**:information_source: Note:** 
+The lifeline for `DeleteTutorCommandParser` should end at the destroy marker (X) 
+but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+#### Design rationale:
+The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
+
 ### Add Schedule Feature
 
 #### Implementation Details
@@ -202,14 +359,14 @@ The following sequence diagram shows how the operation works:
 **Aspect: Checking for clashing schedule:**
 
 * **Alternative 1 (current choice):** Perform the check in `AddScheduleCommand`.
-  * Pros: Easy to implement.
-  * Cons: Have to directly access schedules in the `UniqueScheduleList` creating dependencies.
-  * Cons: Can be inefficient, as we have to iterate over all schedules in the schedule list.
+    * Pros: Easy to implement.
+    * Cons: Have to directly access schedules in the `UniqueScheduleList` creating dependencies.
+    * Cons: Can be inefficient, as we have to iterate over all schedules in the schedule list.
 
 * **Alternative 2:** Perform the check in `UniqueScheduleList`.
-  * Pros: Consistent throughout the system as this check is enforced on all schedules being added to the `UniqueScheduleList` regardless of where it is being added from.
-  * Pros: Can be optimised to use more efficient searching algorithms like binary search if the implementation of the underlying list is sorted.
-  * Cons: Every schedule in the system have to adhere to that. For eg., if we want to allow the user to override such constraints it would not be possible without modifying the functionality of the list.
+    * Pros: Consistent throughout the system as this check is enforced on all schedules being added to the `UniqueScheduleList` regardless of where it is being added from.
+    * Pros: Can be optimised to use more efficient searching algorithms like binary search if the implementation of the underlying list is sorted.
+    * Cons: Every schedule in the system have to adhere to that. For eg., if we want to allow the user to override such constraints it would not be possible without modifying the functionality of the list.
 
 **Aspect: Checking for valid schedule:**
 
@@ -221,6 +378,87 @@ The following sequence diagram shows how the operation works:
 * **Alternative 2:** Perform the check in `AddScheduleCommand`.
     * Pros: Allows for flexibility in the constraints.
     * Cons: Have to repeatedly write logic perform this check everywhere a new `Schedule` is being created.
+
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+![UndoRedoState0](images/UndoRedoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+
+![UndoRedoState1](images/UndoRedoState1.png)
+
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+![UndoRedoState2](images/UndoRedoState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</div>
+
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</div>
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</div>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+
+![UndoRedoState4](images/UndoRedoState4.png)
+
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
+
+_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 

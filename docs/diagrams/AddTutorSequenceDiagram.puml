@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddTutorCommandParser" as AddTutorCommandParser LOGIC_COLOR
+participant "person:Person" as Person MODEL_COLOR
+participant "d:AddTutorCommand" as AddTutorCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add-t \n n/John Doe p/98765432 \n e/johnd@example.com")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add-t \n n/John Doe p/98765432 \n e/johnd@example.com")
+activate AddressBookParser
+
+create AddTutorCommandParser
+AddressBookParser -> AddTutorCommandParser
+activate AddTutorCommandParser
+
+AddTutorCommandParser --> AddressBookParser
+deactivate AddTutorCommandParser
+
+AddressBookParser -> AddTutorCommandParser : parse("John Doe" \n "98765432" \n "johnd@example.com")
+activate AddTutorCommandParser
+
+create Person
+AddTutorCommandParser -> Person
+activate Person
+
+Person --> AddTutorCommandParser : person
+deactivate Person
+
+create AddTutorCommand
+AddTutorCommandParser -> AddTutorCommand : AddTutorCommand(person)
+activate AddTutorCommand
+
+AddTutorCommand --> AddTutorCommandParser : d
+deactivate AddTutorCommand
+
+AddTutorCommandParser --> AddressBookParser : d
+deactivate AddTutorCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddTutorCommandParser -[hidden]-> AddressBookParser
+destroy AddTutorCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> AddTutorCommand : execute()
+activate AddTutorCommand
+
+AddTutorCommand -> Model : addPerson(person)
+activate Model
+
+Model --> AddTutorCommand
+deactivate Model
+
+create CommandResult
+AddTutorCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTutorCommand
+deactivate CommandResult
+
+AddTutorCommand --> LogicManager : result
+deactivate AddTutorCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
