@@ -30,8 +30,8 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_CLEANER = "Cleaner";
     public static final String VALID_COMPANY_CHEF = "FineFoods";
     public static final String VALID_COMPANY_CLEANER = "Bleach Inc";
-    public static final String VALID_STATUS_CHEF = "approved";
-    public static final String VALID_STATUS_CLEANER = "rejected";
+    public static final String VALID_STATUS_CHEF = "rejected";
+    public static final String VALID_STATUS_CLEANER = "approved";
     public static final String VALID_DEADLINE_CHEF = "Dec 31 2030 1200";
     public static final String VALID_DEADLINE_CLEANER = "Dec 31 2040 1200";
     public static final String ROLE_DESC_CHEF = " " + PREFIX_ROLE + VALID_ROLE_CHEF;
