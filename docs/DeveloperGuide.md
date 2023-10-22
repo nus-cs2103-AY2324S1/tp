@@ -217,97 +217,99 @@ The `add-t` command was designed this way to ensure consistency with the previou
 
 </div>
 
- #### Implementation
+#### Implementation
 
- The bulk of the implementation details is identical to that of other commands.
- As such only details specific to `edit-t` will be discussed.
+The bulk of the implementation details is identical to that of other commands.
+As such only details specific to `edit-t` will be discussed.
 
- Step 1. The user has the application launched with at least 1 tutor added.
+Step 1. The user has the application launched with at least 1 tutor added.
 
- Step 2. The user executes `list-t` to view all added tutors.
+Step 2. The user executes `list-t` to view all added tutors.
 
- Step 3. The user executes `edit-t 1 n/John Doe` to edit the first tutor's name in the list of tutors displayed. 
- The command is parsed in AddressBookParser.
+Step 3. The user executes `edit-t 1 n/John Doe` to edit the first tutor's name in the list of tutors displayed. 
+The command is parsed in AddressBookParser.
 
- Step 4. EditTutorCommandParser is created, and constructs an `EditPersonDescriptor` which describes the edited 
- `Person`. An EditTutorCommand object is then constructed with this `EditPersonDescriptor` and the specified tutor index.
+Step 4. EditTutorCommandParser is created, and constructs an `EditPersonDescriptor` which describes the edited 
+`Person`. An EditTutorCommand object is then constructed with this `EditPersonDescriptor` and the specified tutor index.
 
- Step 5. The EditTutorCommand object gets the specified person from the current filtered person list using the 
- tutor index.
+Step 5. The EditTutorCommand object gets the specified person from the current filtered person list using the 
+tutor index.
 
- Step 6. EditTutorCommand object then creates an edited person from the specified person and the editPersonDescriptor.
+Step 6. EditTutorCommand object then creates an edited person from the specified person and the editPersonDescriptor.
 
- Step 7. EditTutorCommand object then calls the setPerson method in the ModelManager with the new edited person. This 
- method sets the specified `Person` in the model to be that edited person.
+Step 7. EditTutorCommand object then calls the setPerson method in the ModelManager with the new edited person. This 
+method sets the specified `Person` in the model to be that edited person.
 
- Step 8. Finally, the EditTutorCommand object updates the person list to display the edited person.
+Step 8. Finally, the EditTutorCommand object updates the person list to display the edited person.
 
- The following sequence diagram shows how the above steps for edit tutor operation works, taking 
- `execute("edit-t 1 n/New Name")` API call as an example.
+The following sequence diagram shows how the above steps for edit tutor operation works, taking 
+`execute("edit-t 1 n/New Name")` API call as an example.
 
- ![Interactions Inside the Logic Component for the `edit-t 1 n/New Name` Command](images/EditTutorSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `edit-t 1 n/New Name` Command](images/EditTutorSequenceDiagram.png)
 
- <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditTutorCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
- </div>
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** 
+The lifeline for `EditTutorCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
+the lifeline reaches the end of diagram.
+</div>
 
 
- #### Design rationale:
- The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
+#### Design rationale:
+The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
  
- ### Delete tutor feature
+### Delete tutor feature
 
- The "Delete Tutor" feature allows users to delete an existing tutor in the address book given a tutor index.
+The "Delete Tutor" feature allows users to delete an existing tutor in the address book given a tutor index.
 
- Below, we provide an example usage scenario and a detailed description of how the delete tutor mechanism behaves at
- each step. The following shows the activity diagram when a user executes the `delete-t` command:
+Below, we provide an example usage scenario and a detailed description of how the delete tutor mechanism behaves at
+each step. The following shows the activity diagram when a user executes the `delete-t` command:
 
- ![Activity diagram for delete-t command](images/DeleteTutorActivityDiagram.png)
+![Activity diagram for delete-t command](images/DeleteTutorActivityDiagram.png)
 
- <div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
- **:information_source: Limitations**<br>
- * Input format must adhere to the follow limitations:
-     * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
- * TUTOR_INDEX parameter is compulsory.
-  </div>
+**:information_source: Limitations**<br>
+* Input format must adhere to the follow limitations:
+    * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
+* TUTOR_INDEX parameter is compulsory.
+</div>
 
- #### Implementation
+#### Implementation
 
- The bulk of the implementation details is identical to that of other commands.
- As such only details specific to `delete-t` will be discussed.
+The bulk of the implementation details is identical to that of other commands.
+As such only details specific to `delete-t` will be discussed.
 
+Step 1. The user has the application launched with at least 1 tutor added.
 
- Step 1. The user has the application launched with at least 1 tutor added.
+Step 2. The user executes `list-t` to view all added tutors.
 
- Step 2. The user executes `list-t` to view all added tutors.
+Step 3. The user executes `delete-t 1` to delete the tutor with Tutor index 1 in the list of tutors displayed.
+The command is parsed in the AddressBookParser.
 
- Step 3. The user executes `delete-t 1` to delete the tutor with Tutor index 1 in the list of tutors displayed.
- The command is parsed in the AddressBookParser.
+Step 4. DeleteTutorCommandParser is created and gets the index of the tutor to be deleted.
+A DeleteTutorCommand object is then constructed with the specified tutor index.
 
- Step 4. DeleteTutorCommandParser is created and gets the index of the tutor to be deleted.
- A DeleteTutorCommand object is then constructed with the specified tutor index.
+Step 5. The DeleteTutorCommand object gets the specified person from the current filtered person list using the tutor
+index.
 
- Step 5. The DeleteTutorCommand object gets the specified person from the current filtered person list using the tutor
- index.
+Step 6. The DeleteTutorCommand object then calls the deletePerson method in the ModelManager with the specified person 
+to delete. This method deletes the specified `Person` in the model.
 
- Step 6. The DeleteTutorCommand object then calls the deletePerson method in the ModelManager with the specified person 
- to delete. This method deletes the specified `Person` in the model.
+Step 7. Finally, the DeleteTutorCommand object returns the `CommandResult`.
 
- Step 7. Finally, the DeleteTutorCommand object returns the `CommandResult`.
+The following sequence diagram shows how the above steps for edit tutor operation works, taking
+`execute("delete-t 1")` API call as an example.
 
- The following sequence diagram shows how the above steps for edit tutor operation works, taking
- `execute("delete-t 1")` API call as an example.
+![Interactions inside the Logic Component for the `delete-t 1` Command](images/DeleteTutorSequenceDiagram.png)
 
- ![Interactions inside the Logic Component for the `delete-t 1` Command](images/DeleteTutorSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">
+**:information_source: Note:** 
+The lifeline for `DeleteTutorCommandParser` should end at the destroy marker (X) 
+but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
- <div markdown="span" class="alert alert-info">
- **:information_source: Note:** 
- The lifeline for `DeleteTutorCommandParser` should end at the destroy marker (X) 
- but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
- </div>
-
- #### Design rationale:
- The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
+#### Design rationale:
+The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
 
 
 ### \[Proposed\] Undo/redo feature
