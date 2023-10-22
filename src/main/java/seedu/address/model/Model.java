@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -9,13 +10,16 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
@@ -53,7 +57,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -66,11 +72,13 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    boolean hasPerson(Name personName);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
-    void deletePerson(Person target);
+    Person deletePerson(String personName) throws CommandException;
 
     /**
      * Adds the given person.
@@ -85,14 +93,19 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered group list */
+    /**
+     * Returns an unmodifiable view of the filtered group list
+     */
     ObservableList<Group> getFilteredGroupList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
@@ -113,25 +126,28 @@ public interface Model {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeGroup(Group key);
+    public Group deleteGroup(String groupName) throws CommandException;
 
     /**
      * Assign person to group and return corresponding person and group object in a pair
+     *
      * @param personName String representing person name
-     * @param groupName String representing group name
+     * @param groupName  String representing group name
      * @return Pair representing Person and Group object of interest
      */
     public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException;
 
     /**
      * Unassign group and return corresponding person and group object in a pair
+     *
      * @param personName String representing person name
-     * @param groupName String representing group name
+     * @param groupName  String representing group name
      * @return Pair representing Person and Group object of interest
      */
     Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException;
 
     Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException;
+    void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException;
 
     /**
      * Assign person to group

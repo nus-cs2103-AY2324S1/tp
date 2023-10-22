@@ -15,10 +15,10 @@ public class CreateGroupCommand extends Command {
     public static final String COMMAND_WORD = "new";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to the address book. \n"
-            + "Parameters: "
-            + PREFIX_GROUPTAG + "GROUPNAME \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUPTAG + "CS2103T";
+        + "Parameters: "
+        + PREFIX_GROUPTAG + "GROUPNAME \n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GROUPTAG + "CS2103T";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
