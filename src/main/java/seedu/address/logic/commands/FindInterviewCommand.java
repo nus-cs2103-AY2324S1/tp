@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.applicant.ApplicantContainsInterviewPredicate;
 import seedu.address.model.interview.JobContainsKeywordsPredicate;
 
 /**
@@ -21,16 +22,17 @@ public class FindInterviewCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " software-engineer data-analyst";
 
-    private final JobContainsKeywordsPredicate predicate;
+    private final JobContainsKeywordsPredicate predicateJob;
 
     public FindInterviewCommand(JobContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+        this.predicateJob = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredInterviewList(predicate);
+        model.updateFilteredInterviewList(predicateJob);
+        model.updateFilteredApplicantList(new ApplicantContainsInterviewPredicate(model.getFilteredInterviewList()));
         return new CommandResult(
                 String.format(Messages.MESSAGE_INTERVIEWS_LISTED_OVERVIEW, model.getFilteredInterviewList().size()));
     }
@@ -47,13 +49,13 @@ public class FindInterviewCommand extends Command {
         }
 
         FindInterviewCommand otherFindCommand = (FindInterviewCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return predicateJob.equals(otherFindCommand.predicateJob);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicate", predicateJob)
                 .toString();
     }
 }

@@ -8,8 +8,6 @@ import seedu.address.model.applicant.Applicant;
  * Represents an Interview in the address book.
  */
 public class Interview {
-
-    /** TODO Change from 'String' to 'Applicant' once Applicant is on master*/
     private final Applicant applicant;
     private final String jobRole;
     /** TODO Change from 'String' to proper 'Date/Time' once natural DT is implemented*/
@@ -52,7 +50,6 @@ public class Interview {
                 && otherInterview.getInterviewApplicant().equals(getInterviewApplicant());
     }
 
-    /* TODO Update return type from String to Applicant */
     public Applicant getInterviewApplicant() {
         return applicant;
     }
@@ -60,7 +57,6 @@ public class Interview {
     public String getJobRole() {
         return jobRole;
     }
-
 
     public String getInterviewTiming() {
         return interviewTiming;
