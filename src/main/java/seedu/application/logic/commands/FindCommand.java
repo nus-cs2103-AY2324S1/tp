@@ -21,8 +21,6 @@ public class FindCommand extends Command {
             + "Parameters: FIELD_SPECIFIER KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " -r software database network";
 
-    public static final String MESSAGE_INVALID_SPECIFIER = "Field specifier is invalid.";
-
     private final FieldContainsKeywordsPredicate predicate;
 
     public FindCommand(FieldContainsKeywordsPredicate predicate) {

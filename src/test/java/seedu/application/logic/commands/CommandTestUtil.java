@@ -7,7 +7,7 @@ import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.application.model.job.Role.ROLE_FIND_SPECIFIER;
+import static seedu.application.model.job.Role.ROLE_SPECIFIER;
 import static seedu.application.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -31,8 +31,8 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_CLEANER = "Cleaner";
     public static final String VALID_COMPANY_CHEF = "FineFoods";
     public static final String VALID_COMPANY_CLEANER = "Bleach Inc";
-    public static final String VALID_STATUS_CHEF = "approved";
-    public static final String VALID_STATUS_CLEANER = "rejected";
+    public static final String VALID_STATUS_CHEF = "rejected";
+    public static final String VALID_STATUS_CLEANER = "approved";
     public static final String VALID_DEADLINE_CHEF = "Dec 31 2030 1200";
     public static final String VALID_DEADLINE_CLEANER = "Dec 31 2040 1200";
     public static final String VALID_INDUSTRY_CHEF = "Culinary";
@@ -120,7 +120,7 @@ public class CommandTestUtil {
         Job job = model.getFilteredJobList().get(targetIndex.getZeroBased());
         final String[] splitRole = job.getRole().description.split("\\s+");
         model.updateFilteredJobList(
-            new FieldContainsKeywordsPredicate(ROLE_FIND_SPECIFIER, Arrays.asList(splitRole[0])));
+            new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Arrays.asList(splitRole[0])));
 
         assertEquals(1, model.getFilteredJobList().size());
     }

@@ -97,6 +97,18 @@ public class UniqueJobList implements Iterable<Job> {
         internalList.setAll(jobs);
     }
 
+    public void unsortJobs() {
+
+    }
+
+    /**
+     * Sorts the jobs in the application book based on the comparator provided.
+     * @param comparator The comparator used to compare 2 jobs.
+     */
+    public void sortJobs(FieldComparator comparator) {
+        internalList.sort(comparator);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
