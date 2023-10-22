@@ -126,6 +126,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return addressBook.getPersonList();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
