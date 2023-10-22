@@ -43,8 +43,8 @@ public class AttendanceTrackerTest {
     public void markPresent_validTutorialIndex_success() {
         AttendanceTracker attendanceTracker = new AttendanceTracker(10);
         int tutNum = 1;
-        attendanceTracker.markPresent(Index.fromZeroBased(tutNum));
-        assertEquals(true, attendanceTracker.attendanceList[tutNum].getIsPresent());
+        attendanceTracker.markPresent(Index.fromOneBased(tutNum));
+        assertEquals(true, attendanceTracker.isPresent(Index.fromOneBased(tutNum)));
     }
 
     @Test

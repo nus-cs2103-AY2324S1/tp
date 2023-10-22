@@ -19,7 +19,7 @@ public class AttendanceTracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance Tracker needs to have positive number of tutorials.";
 
-    protected Attendance[] attendanceList;
+    private Attendance[] attendanceList;
 
     /**
      * Constructs an {@code AttendanceTracker}.
@@ -62,6 +62,18 @@ public class AttendanceTracker {
             throw new InvalidTutorialIndexException();
         }
         attendanceList[tutNum.getZeroBased()].mark();
+    }
+
+    /**
+     * Returns true if the attendance is present for the given tutorial number
+     *
+     * @param tutNum The tutorial number.
+     */
+    public boolean isPresent(Index tutNum) throws InvalidTutorialIndexException {
+        if (tutNum.getZeroBased() >= attendanceList.length) {
+            throw new InvalidTutorialIndexException();
+        }
+        return attendanceList[tutNum.getZeroBased()].getIsPresent();
     }
 
     /**
