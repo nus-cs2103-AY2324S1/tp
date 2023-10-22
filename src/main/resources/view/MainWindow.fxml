@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -23,39 +24,50 @@
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" >
-          <Menu mnemonicParsing="false" fx:id="button" text="File" styleClass="custom-menu-item">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" styleClass="custom-menu-item"/>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help" styleClass="custom-menu-item">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp"
-                      text="Help" styleClass="custom-menu-item" />
-          </Menu>
-        </MenuBar>
+        <VBox>
+          <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" >
+            <Menu mnemonicParsing="false" fx:id="button" text="File" styleClass="custom-menu-item">
+              <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" styleClass="custom-menu-item"/>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help" styleClass="custom-menu-item">
+              <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp"
+                        text="Help" styleClass="custom-menu-item" />
+            </Menu>
+          </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+          <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+            <padding>
+              <Insets top="5" right="10" bottom="5" left="10" />
+            </padding>
+          </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+          <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+                     minHeight="100" prefHeight="100" maxHeight="100">
+            <padding>
+              <Insets top="5" right="10" bottom="5" left="10" />
+            </padding>
+          </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="30" bottom="10" left="30" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <HBox >
+            <VBox fx:id="personList" styleClass="pane-with-border" minWidth="500" prefWidth="500"
+                  VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="15" bottom="10" left="30" />
+              </padding>
+              <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+            <VBox fx:id="dayList" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="30" bottom="10" left="0" />
+              </padding>
+              <StackPane fx:id="dayListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+          </HBox>
+
+          <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
         </VBox>
 
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
-      </VBox>
     </Scene>
   </scene>
 </fx:root>

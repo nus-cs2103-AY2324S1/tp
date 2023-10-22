@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" >
+    <StackPane minHeight="40" style="-fx-background-color: #D2B48C;-fx-alignment: center-left; -fx-padding: 15 0 15 30">
+        <Label fx:id="ra" text="Schedule" />
+    </StackPane>
+    <ListView fx:id="dayListView" VBox.vgrow="ALWAYS" />
+</VBox>
