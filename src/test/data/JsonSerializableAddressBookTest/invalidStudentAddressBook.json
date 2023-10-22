@@ -4,6 +4,11 @@
     "phone": "9482424",
     "email": "invalid@email!3e",
     "studentNumber": "A0224917A",
-    "classDetails": "T11"
+    "classDetails" : {
+      "classNumber" : "11",
+      "attendanceTracker" : [ false, false, false ],
+      "assignmentTracker" : [ 0 ],
+      "classParticipationTracker" : [ false ]
+    }
   } ]
 }

@@ -27,6 +27,17 @@ public class AssignmentTrackerTest {
     }
 
     @Test
+    public void updateAssignmentCountChange() {
+        AssignmentTracker assignmentTracker = new AssignmentTracker(3);
+        AssignmentTracker expectedAssignmentTracker = new AssignmentTracker(1);
+        assignmentTracker.updateAssignmentCountChange(1);
+        assertEquals(expectedAssignmentTracker, assignmentTracker);
+        expectedAssignmentTracker = new AssignmentTracker(5);
+        assignmentTracker.updateAssignmentCountChange(5);
+        assertEquals(expectedAssignmentTracker, assignmentTracker);
+    }
+
+    @Test
     public void equals() {
         AssignmentTracker assignmentTracker = new AssignmentTracker(13);
 

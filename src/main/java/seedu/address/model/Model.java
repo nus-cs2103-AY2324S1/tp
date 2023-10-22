@@ -21,6 +21,16 @@ public interface Model {
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
+     * Sets the assignment count in the user prefs.
+     */
+    void setAssignmentCount(int assignmentCount);
+
+    /**
+     * Sets the tutorial count in the user prefs.
+     */
+    void setTutorialCount(int tutorialCount);
+
+    /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();

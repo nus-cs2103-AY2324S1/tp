@@ -14,6 +14,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_STUDENT_NUMBER = new Prefix("s/");
     public static final Prefix PREFIX_CLASS_NUMBER = new Prefix("c/");
     public static final Prefix PREFIX_FILE = new Prefix("f/");
+    public static final Prefix PREFIX_GRADE = new Prefix("g/");
+    public static final Prefix PREFIX_ASSIGNMENT = new Prefix("a/");
+    public static final Prefix PREFIX_TUTORIAL_SESSION = new Prefix("tut/");
+    public static final Prefix PREFIX_PARTICIPATION = new Prefix("part/");
     public static final Prefix PREFIX_TUTORIAL_COUNT = new Prefix("#t/");
     public static final Prefix PREFIX_ASSIGNMENT_COUNT = new Prefix("#a/");
 }

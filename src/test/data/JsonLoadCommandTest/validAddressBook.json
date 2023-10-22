@@ -4,35 +4,72 @@
     "phone" : "87438807",
     "email" : "alexyeoh@example.com",
     "studentNumber" : "A0247243A",
-    "classDetails" : "T11",
+    "classDetails" : {
+      "classNumber" : "T11",
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
+    },
     "tags" : [ "friends" ]
+  }, {
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "studentNumber" : "A0231018A",
+    "classDetails" : {
+      "classNumber" : "T12",
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
+    },
+    "tags" : [ "colleagues", "friends" ]
   }, {
     "name" : "Charlotte Oliveiro",
     "phone" : "93210283",
     "email" : "charlotte@example.com",
     "studentNumber" : "A0241243A",
-    "classDetails" : "T12",
+    "classDetails" : {
+      "classNumber" : "T12",
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
+    },
     "tags" : [ "neighbours" ]
   }, {
     "name" : "David Li",
     "phone" : "91031282",
     "email" : "lidavid@example.com",
     "studentNumber" : "A0123243A",
-    "classDetails" : "T11",
+    "classDetails" : {
+      "classNumber" : "T11",
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
+    },
     "tags" : [ "family" ]
   }, {
     "name" : "Irfan Ibrahim",
     "phone" : "92492021",
     "email" : "irfan@example.com",
     "studentNumber" : "A0234543A",
-    "classDetails" : "T10",
+    "classDetails" : {
+      "classNumber" : "T10",
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
+    },
     "tags" : [ "classmates" ]
   }, {
     "name" : "Roy Balakrishnan",
     "phone" : "92624417",
     "email" : "royb@example.com",
     "studentNumber" : "A0224543A",
-    "classDetails" : "T11",
+    "classDetails" : {
+      "classNumber" : "T11",
+      "attendanceTracker" : [ false, false, false, false, false, false, false, false, false, false ],
+      "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+      "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
+    },
     "tags" : [ "colleagues" ]
   } ]
 }
