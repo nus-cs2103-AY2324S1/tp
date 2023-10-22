@@ -146,9 +146,8 @@ public class ModelManager implements Model {
     @Override
     public void sortPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
-        return;
+        addressBook.sortAddressBook(comparator);
     }
-
 
     @Override
     public void setLastViewedPersonIndex(Index index) {
