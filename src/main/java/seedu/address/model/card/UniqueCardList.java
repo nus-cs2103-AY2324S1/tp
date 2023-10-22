@@ -13,10 +13,14 @@ import seedu.address.model.card.exceptions.CardNotFoundException;
 import seedu.address.model.card.exceptions.DuplicateCardException;
 
 /**
- * A list of cards that enforces uniqueness between its elements and does not allow nulls.
- * A card is considered unique by comparing using {@code Card#isSameCard(Card)}. As such, adding and updating of
- * cards uses Card#isSameCard(Card) for equality so as to ensure that the card being added or updated is
- * unique in terms of identity in the UniqueCardList. However, the removal of a card uses Card#equals(Object) so
+ * A list of cards that enforces uniqueness between its elements and does not
+ * allow nulls.
+ * A card is considered unique by comparing using {@code Card#isSameCard(Card)}.
+ * As such, adding and updating of
+ * cards uses Card#isSameCard(Card) for equality so as to ensure that the card
+ * being added or updated is
+ * unique in terms of identity in the UniqueCardList. However, the removal of a
+ * card uses Card#equals(Object) so
  * as to ensure that the card with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -26,8 +30,8 @@ import seedu.address.model.card.exceptions.DuplicateCardException;
 public class UniqueCardList implements Iterable<Card> {
 
     private final ObservableList<Card> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Card> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Card> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     private final Comparator<Card> cardComparator = new CardPracticeDateComparator();
 
@@ -37,6 +41,10 @@ public class UniqueCardList implements Iterable<Card> {
     public boolean contains(Card toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameCard);
+    }
+
+    public int count() {
+        return this.internalList.size();
     }
 
     /**
@@ -67,7 +75,8 @@ public class UniqueCardList implements Iterable<Card> {
     /**
      * Replaces the card {@code target} in the list with {@code editedCard}.
      * {@code target} must exist in the list.
-     * The card identity of {@code editedCard} must not be the same as another existing card in the list.
+     * The card identity of {@code editedCard} must not be the same as another
+     * existing card in the list.
      */
     public void setCard(Card target, Card editedCard) {
         requireAllNonNull(target, editedCard);

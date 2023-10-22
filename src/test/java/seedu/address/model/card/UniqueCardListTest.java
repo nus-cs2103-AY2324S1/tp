@@ -155,8 +155,8 @@ public class UniqueCardListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-            -> uniqueCardList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class,
+                () -> uniqueCardList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test

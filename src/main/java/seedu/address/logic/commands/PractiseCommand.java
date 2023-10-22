@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Objects;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -25,28 +24,28 @@ public class PractiseCommand extends Command {
             + "Parameters: DIFFICULTY (must not be empty)\n"
             + "Example: " + COMMAND_WORD + " 1" + " d/ easy";
 
-    public static final String MESSAGE_PRACTISE_CARD_SUCCESS = "Practise Card: %1$s";
+    public static final String MESSAGE_PRACTISE_CARD_SUCCESS = "%1$s";
 
     private final Index targetIndex;
-    private final String difficulty;
 
     /**
      * Constructs a {@code PractiseCommand} with the specified {@code targetIndex} and {@code difficulty}.
      *
      * @param targetIndex The index of the target to card.
-     * @param difficulty The difficulty level for the card.
      */
-    public PractiseCommand(Index targetIndex, String difficulty) {
+    public PractiseCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
-        this.difficulty = difficulty;
     }
+
+
+
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         List<Card> lastShownList = model.getFilteredCardList();
-        String newDifficulty = this.difficulty.toLowerCase();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
@@ -54,24 +53,9 @@ public class PractiseCommand extends Command {
 
         Card cardToPractise = lastShownList.get(targetIndex.getZeroBased());
 
-        if (Objects.equals(newDifficulty, "easy")) {
-            cardToPractise.setDifficulty(newDifficulty);
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_CARDS_PRACTISE_VIEW_EASY, Messages.formatAnswer(cardToPractise)));
-        }
-
-        if (Objects.equals(newDifficulty, "medium")) {
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_CARDS_PRACTISE_VIEW_MEDIUM,
-                            Messages.formatAnswer(cardToPractise)));
-        }
-
-        if (Objects.equals(newDifficulty, "hard")) {
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_CARDS_PRACTISE_VIEW_HARD, Messages.formatAnswer(cardToPractise)));
-        } else {
-            throw new CommandException(newDifficulty + Messages.MESSAGE_CARDS_PRACTISE_VIEW_INVALID);
-        }
+        return new CommandResult(
+                String.format(Messages.MESSAGE_CARDS_PRACTISE_VIEW,
+                        Messages.formatPractise(cardToPractise, targetIndex)));
     }
 
     @Override
@@ -81,7 +65,7 @@ public class PractiseCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PractiseCommand)) {
+        if (!(other instanceof PractiseCommand) || other == null) {
             return false;
         }
 

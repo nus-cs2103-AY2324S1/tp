@@ -8,7 +8,8 @@ import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Card in lesSON.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Card implements Comparable<Card> {
     private final Question question;
@@ -49,6 +50,7 @@ public class Card implements Comparable<Card> {
 
     /**
      * Sets a new practice date.
+     * 
      * @param nextPracticeDate the new practice date.
      */
     public void setNextPracticeDate(NextPracticeDate nextPracticeDate) {
@@ -110,7 +112,6 @@ public class Card implements Comparable<Card> {
     public String questiontoString() {
         return "Question: " + this.getQuestion().toString();
     }
-
 
     public String answertoString() {
         return "Answer: " + this.getAnswer().toString();
