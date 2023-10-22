@@ -15,7 +15,7 @@ import seedu.staffsnap.model.UserPrefs;
 //import seedu.staffsnap.model.UserPrefs;
 
 public class ClearCommandTest {
-    Command confirmStub = new ConfirmationCommand();
+    private Command confirmStub = new ConfirmationCommand();
 
 
     @Test

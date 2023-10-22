@@ -1,10 +1,12 @@
 package seedu.staffsnap.logic.commands;
 
+import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ModelManager;
 
-import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 public class ConfirmationCommandTest {
     @Test
