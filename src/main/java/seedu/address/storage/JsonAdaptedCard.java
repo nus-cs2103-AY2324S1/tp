@@ -121,7 +121,7 @@ class JsonAdaptedCard {
                 ? new PracticeDate(LocalDateTime.parse(lastPracticeDate))
                 : null;
 
-        return new Card(modelQuestion, modelAnswer, difficulty, modelNextPracticeDate, modelLastPracticeDate);
+        return new Card(modelQuestion, modelAnswer, difficulty, cardTags, modelNextPracticeDate, modelLastPracticeDate);
     }
 
 }

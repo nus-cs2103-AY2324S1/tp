@@ -72,7 +72,6 @@ public class Card implements Comparable<Card> {
     /**
      * Sets a next practice date, replacing the previous practice dates with new
      * values.
-     * 
      * @param practiceDate the next practice date.
      */
     public void setNextPracticeDate(PracticeDate practiceDate) {
@@ -82,7 +81,6 @@ public class Card implements Comparable<Card> {
 
     /**
      * Sets a new practice date based on difficulty.
-     * 
      * @param difficulty
      */
     public void setNewPracticeDateWith(String difficulty) {

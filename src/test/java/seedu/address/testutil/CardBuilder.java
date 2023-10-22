@@ -17,8 +17,8 @@ public class CardBuilder {
 
     public static final String DEFAULT_QUESTION = "What is the opcode for R-format instructions?";
     public static final String DEFAULT_ANSWER = "0";
-    public static final PracticeDate DEFAULT_NEXT_PRACTICE_DATE = new PracticeDate(LocalDateTime.MIN); // highest
-                                                                                                       // priority
+    public static final PracticeDate DEFAULT_NEXT_PRACTICE_DATE =
+            new PracticeDate(LocalDateTime.MIN); // highest priority
     public static final List<Tag> DEFAULT_TAGS = new ArrayList<>();
 
     private Question question;

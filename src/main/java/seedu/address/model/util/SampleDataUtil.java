@@ -20,13 +20,13 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Card[] getSampleCard() {
         return new Card[] {
-                new Card(new Question("What is 1 + 1"),
-                        new Answer("2"), "new",
-                        new ArrayList<>(Collections.singleton(new Tag("Math"))),
-                        new PracticeDate(LocalDateTime.now()), null),
-                new Card(new Question("What is 1 + 3"), new Answer("4"),
-                        "easy", new ArrayList<>(Collections.singleton(new Tag("Math"))),
-                        new PracticeDate(LocalDateTime.now()), null)
+            new Card(new Question("What is 1 + 1"),
+                    new Answer("2"), "new",
+                    new ArrayList<>(Collections.singleton(new Tag("Math"))),
+                    new PracticeDate(LocalDateTime.now()), null),
+            new Card(new Question("What is 1 + 3"), new Answer("4"),
+                    "easy", new ArrayList<>(Collections.singleton(new Tag("Math"))),
+                    new PracticeDate(LocalDateTime.now()), null)
         };
     }
 
