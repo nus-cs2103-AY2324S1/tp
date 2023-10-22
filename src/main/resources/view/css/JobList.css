@@ -1,26 +1,31 @@
-/* Job List */
+/* Job List Panel*/
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: #ffffff;
+    -fx-background-color: #DCDCDC;
 }
 
 .list-cell:filled {
     -fx-background-color: #ffffff;
-    -fx-background-radius: 5px;
-    -fx-padding: 10 10 10 10;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 2, 2);
+    -fx-background-radius: 15px;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #D5D0FF;
+    -fx-background-color: #00ff00;
 }
 
 /* Job Card */
+#cardPane {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 2, 2);
+}
+
 .cell_big_label {
-    -fx-font-family: "Inter bold";
+    -fx-font-family: "Inter Black";
+    -fx-font-weight: 900;
     -fx-font-size: 24px;
-    -fx-font-weight: bolder;
     -fx-text-fill: #343434;
 }
 
