@@ -37,7 +37,7 @@ public class EditTutorCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTutorCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private EditTutorCommandParser parser = new EditTutorCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

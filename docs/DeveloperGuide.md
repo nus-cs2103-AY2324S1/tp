@@ -170,6 +170,7 @@ The following shows the activity diagram from when a user executes the `add-t` c
   * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
   * `EMAIL`: Of the format local-part@domain
 * Tutor to be added must be unique and not already exist in the addressbook.
+
 </div>
 
 #### Implementation
@@ -192,6 +193,67 @@ The following sequence diagram shows how the above steps for add tutor operation
 #### Design Rationale
 
 The `add-t` command was designed this way to ensure consistency with the previous `add` person.
+
+=======
+### Edit tutor feature 
+
+The “Edit Tutor” feature allows users to edit an existing tutor in the address book given a tutor index. 
+
+Below, we provide an example usage scenario and a detailed description of how the edit tutor mechanism behaves at 
+each step.
+
+![Activity Diagram for edit-t Command](images/EditTutorActivityDiagram.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Limitations**<br>
+* Input format must adhere to the follow limitations:
+    * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
+    * `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
+    * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
+    * `EMAIL`: Of the format local-part@domain
+* Tutor to be edited must not already exist in the addressbook (excluding the current specified one).
+* TUTOR_INDEX parameter is compulsory and at least one edited field must be provided.
+
+</div>
+
+#### Implementation
+
+The bulk of the implementation details is identical to that of other commands.
+As such only details specific to `edit-t` will be discussed.
+
+Step 1. The user has the application launched with at least 1 tutor added.
+
+Step 2. The user executes `list-t` to view all added tutors.
+
+Step 3. The user executes `edit-t 1 n/John Doe` to edit the first tutor's name in the list of tutors displayed. 
+The command is parsed in AddressBookParser.
+
+Step 4. EditTutorCommandParser is created, and constructs an `EditPersonDescriptor` which describes the edited 
+`Person`. An EditTutorCommand object is then constructed with this `EditPersonDescriptor` and the specified tutor index.
+
+Step 5. The EditTutorCommand object gets the specified person from the current filtered person list using the 
+tutor index.
+
+Step 6. EditTutorCommand object then creates an edited person from the specified person and the editPersonDescriptor.
+
+Step 7. EditTutorCommand object then calls the setPerson method in the ModelManager with the new edited person. This 
+method sets the specified `Person` in the model to be that edited person.
+
+Step 8. Finally, the EditTutorCommand object updates the person list to display the edited person.
+
+The following sequence diagram shows how the above steps for edit tutor operation works, taking 
+`execute("edit-t 1 n/New Name")` API call as an example.
+
+![Interactions Inside the Logic Component for the `edit-t 1 n/New Name` Command](images/EditTutorSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditTutorCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+
+#### Design rationale:
+The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
+
 
 ### \[Proposed\] Undo/redo feature
 
