@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.NONEXISTENT_STUDENT_NUMBER;
@@ -18,7 +17,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.TypicalStudents;
 
 /**
@@ -45,7 +43,17 @@ public class MarkCommandTest {
     }
 
     @Test
-    public void execute_nonexistentStudentNumber_success() {
+    public void execute_invalidTutorialIndex_throwsCommandException() {
+        Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT + 1);
+
+        MarkCommand markCommand = new MarkCommand(i, studentToMark.getStudentNumber());
+
+        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX);
+    }
+
+    @Test
+    public void execute_nonexistentStudentNumber_throwsCommandException() {
         MarkCommand markCommand = new MarkCommand(Index.fromOneBased(1), NONEXISTENT_STUDENT_NUMBER);
 
         assertCommandFailure(markCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
