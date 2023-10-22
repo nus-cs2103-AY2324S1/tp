@@ -60,6 +60,6 @@ public class Salary implements Comparable<Salary> {
 
     @Override
     public int compareTo(Salary other) {
-        return value.compareTo(other.value);
+        return Integer.parseInt(value) - Integer.parseInt(other.value);
     }
 }
