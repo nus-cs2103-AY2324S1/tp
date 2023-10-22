@@ -36,7 +36,7 @@ public class EditCommand extends Command {
         + PREFIX_COMPANY + "Google "
         + PREFIX_DEADLINE + "Dec 31 2023 1200 "
         + PREFIX_STATUS + "Pending "
-        + PREFIX_INDUSTRY + "Healthcare ";
+        + PREFIX_INDUSTRY + "Tehcnology";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n"
