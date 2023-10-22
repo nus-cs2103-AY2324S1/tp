@@ -14,7 +14,7 @@ import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
 
 /**
- * Adds a musician to a band.j
+ * Adds a musician to a band.
  */
 public class AddMusiciantoBandCommand extends Command {
     public static final String COMMAND_WORD = "addm";
