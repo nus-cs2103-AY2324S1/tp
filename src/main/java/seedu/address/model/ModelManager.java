@@ -149,6 +149,11 @@ public class ModelManager implements Model {
         addressBook.setInterview(target, editedInterview);
     }
 
+    @Override
+    public void deleteInterview(Interview target) {
+        addressBook.removeInterview(target);
+    }
+
     //=========== Filtered Applicant List Accessors =============================================================
 
     /**

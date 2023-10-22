@@ -111,6 +111,12 @@ public interface Model {
     void setInterview(Interview target, Interview editedInterview);
 
     /**
+     * Deletes the given interview.
+     * The interview must exist in the address book.
+     */
+    void deleteInterview(Interview target);
+
+    /**
      * Updates the filter of the filtered interview list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
