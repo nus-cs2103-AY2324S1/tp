@@ -43,6 +43,7 @@ public class ApplicantListPanel extends UiPart<Region> {
             } else {
                 setGraphic(new ApplicantCard(applicant, getIndex() + 1).getRoot());
             }
+            setStyle("-fx-padding: 0 0 2 0;");
         }
     }
 

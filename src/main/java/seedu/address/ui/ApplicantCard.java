@@ -56,9 +56,9 @@ public class ApplicantCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (applicant.hasInterview()) {
-            cardPane.setStyle("-fx-border-color: #2c7a2c; -fx-border-width: 4;");
+            cardPane.setStyle("-fx-border-color: #2c7a2c; -fx-border-width: 3;");
         } else {
-            cardPane.setStyle("-fx-border-color: #7a2c2c; -fx-border-width: 4;");
+            cardPane.setStyle("-fx-border-color: #7a2c2c; -fx-border-width: 3;");
         }
     }
 }
