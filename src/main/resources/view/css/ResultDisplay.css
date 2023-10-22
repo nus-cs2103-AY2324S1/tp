@@ -1,9 +1,9 @@
 .result-display {
-    -fx-background-color: #faf0ff;
+    -fx-background-color: #ffffff;
     -fx-font-family: "Inter Light";
     -fx-font-size: 13pt;
-    -fx-background-border: 10px;
-    -fx-border-width: 10px;
     -fx-text-fill: #878787;
-    -fx-effect: dropshadow(gaussian, rgba(22, 22, 22, 0.3), 4, 0, 2, 2);
+    -fx-effect: dropshadow(gaussian, rgba(22, 22, 22, 0.3), 5, 0, 0, 0);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
 }

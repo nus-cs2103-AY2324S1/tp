@@ -1,0 +1,17 @@
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: #F70D1A;
+}
+
+#commandTextField {
+    -fx-background-color: transparent #343434 transparent #343434;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-border-radius: 10px;
+    -fx-font-family: "Inter";
+    -fx-font-size: 13pt;
+    -fx-text-fill: #343434;
+    -fx-effect: dropshadow(three-pass-box, rgba(22, 22, 22, 0.3), 4, 0, 2, 2);
+}

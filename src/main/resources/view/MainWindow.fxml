@@ -20,8 +20,11 @@
             <stylesheets>
                 <URL value="@css/MainTheme.css"/>
                 <URL value="@css/Extensions.css"/>
-                <URL value="@css/ResultDisplay.css"/>
+                <URL value="@css/Button.css"/>
+                <URL value="@css/CommandBox.css"/>
                 <URL value="@css/JobList.css"/>
+                <URL value="@css/ResultDisplay.css"/>
+                <URL value="@css/ScrollBar.css"/>
             </stylesheets>
 
             <VBox>
