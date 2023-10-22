@@ -43,7 +43,9 @@ public class Messages {
             .append("; Status: ")
             .append(job.getStatus())
             .append("; Deadline: ")
-            .append(job.getDeadline());
+            .append(job.getDeadline())
+            .append("; Industry: ")
+            .append(job.getIndustry());
         return builder.toString();
     }
 

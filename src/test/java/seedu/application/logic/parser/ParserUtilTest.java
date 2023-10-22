@@ -17,6 +17,7 @@ public class ParserUtilTest {
     private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_COMPANY = "Google";
     private static final String WHITESPACE = " \t\r\n";
+    private static final String INVALID_INDUSTRY = "$Finance";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -82,5 +83,10 @@ public class ParserUtilTest {
         String companyWithWhitespace = WHITESPACE + VALID_COMPANY + WHITESPACE;
         Company expectedCompany = new Company(VALID_COMPANY);
         assertEquals(expectedCompany, ParserUtil.parseCompany(companyWithWhitespace));
+    }
+
+    @Test
+    public void parseIndustry_invalidValue_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndustry(INVALID_INDUSTRY));
     }
 }
