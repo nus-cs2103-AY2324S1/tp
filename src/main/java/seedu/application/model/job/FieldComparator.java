@@ -56,4 +56,19 @@ public class FieldComparator implements Comparator<Job> {
             return -1;
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FieldComparator)) {
+            return false;
+        }
+
+        FieldComparator otherSpecifier = (FieldComparator) other;
+        return specifier.equals(otherSpecifier.specifier);
+    }
 }

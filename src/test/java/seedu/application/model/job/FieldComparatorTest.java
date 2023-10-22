@@ -11,6 +11,7 @@ import static seedu.application.testutil.TypicalJobs.CHEF;
 import static seedu.application.testutil.TypicalJobs.CLEANER;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.application.testutil.JobBuilder;
 
 public class FieldComparatorTest {

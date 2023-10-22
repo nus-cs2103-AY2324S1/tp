@@ -1,7 +1,6 @@
 package seedu.application.logic.parser;
 
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.application.logic.Messages.MESSAGE_INVALID_SPECIFIER;
 
 import seedu.application.logic.commands.ListCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
@@ -32,7 +31,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         String specifier = splitArgs[0];
         if (!(FieldComparator.isValidSpecifier(specifier))) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_SPECIFIER));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_INVALID_SPECIFIER));
         }
 
         return new ListCommand(new FieldComparator(specifier));

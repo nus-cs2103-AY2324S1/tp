@@ -27,7 +27,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the job identified "
-        + "by the index number used in the displayed job list. "
+        + "by the index number used in the displayed job list.\n"
         + "Existing values will be overwritten by the input values.\n"
         + "Parameters: INDEX (must be a positive integer) "
         + "[" + PREFIX_ROLE + "ROLE] "
@@ -36,8 +36,8 @@ public class EditCommand extends Command {
         + "[" + PREFIX_STATUS + "STATUS]\n\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_ROLE + "Software Engineer "
-        + PREFIX_COMPANY + "Google"
-        + PREFIX_DEADLINE + "Dec 31 2023 1200"
+        + PREFIX_COMPANY + "Google "
+        + PREFIX_DEADLINE + "Dec 31 2023 1200 "
         + PREFIX_STATUS + "Pending";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";

@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.application.model.Model;
 import seedu.application.model.ModelManager;
 import seedu.application.model.UserPrefs;
-import seedu.application.model.job.FieldComparator;
-import seedu.application.model.job.Role;
+import seedu.application.model.job.*;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -42,8 +41,29 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listIsSorted_showsSortedList() {
+    public void execute_listIsSortedByRoles_showsSortedListByRoles() {
         FieldComparator fieldComparator = new FieldComparator(Role.ROLE_SPECIFIER);
+        expectedModel.sortJobs(fieldComparator);
+        assertCommandSuccess(new ListCommand(fieldComparator), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsSortedByCompany_showsSortedListByCompany() {
+        FieldComparator fieldComparator = new FieldComparator(Company.COMPANY_SPECIFIER);
+        expectedModel.sortJobs(fieldComparator);
+        assertCommandSuccess(new ListCommand(fieldComparator), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsSortedByDeadline_showsSortedListByDeadline() {
+        FieldComparator fieldComparator = new FieldComparator(Deadline.DEADLINE_SPECIFIER);
+        expectedModel.sortJobs(fieldComparator);
+        assertCommandSuccess(new ListCommand(fieldComparator), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsSortedByStatus_showsSortedListStatus() {
+        FieldComparator fieldComparator = new FieldComparator(Status.STATUS_SPECIFIER);
         expectedModel.sortJobs(fieldComparator);
         assertCommandSuccess(new ListCommand(fieldComparator), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
