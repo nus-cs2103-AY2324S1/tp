@@ -29,7 +29,10 @@ public class Person {
     private Github github = new Github("");
 
     private Remark remark;
+
+    private Score score = new Score(0);
     private final Status currentStatus = new Status();
+
 
 
 
