@@ -7,7 +7,7 @@ import java.util.List;
 
 import seedu.address.model.Deck;
 import seedu.address.model.card.Card;
-import seedu.address.model.card.NextPracticeDate;
+import seedu.address.model.card.PracticeDate;
 
 /**
  * A utility class containing a list of {@code Card} objects to be used in tests.
@@ -16,12 +16,12 @@ public class TypicalCards {
 
     public static final Card HIGH = new CardBuilder().withQuestion("High Priority?")
             .withAnswer("True")
-            .withNextPracticeDate(new NextPracticeDate(LocalDateTime.MIN)).build();
+            .withNextPracticeDate(new PracticeDate(LocalDateTime.MIN)).build();
     public static final Card LOW = new CardBuilder().withQuestion("Low Priority?")
             .withAnswer("True")
-            .withNextPracticeDate(new NextPracticeDate(LocalDateTime.MAX)).build();
-    private static final NextPracticeDate typicalDate =
-            new NextPracticeDate(
+            .withNextPracticeDate(new PracticeDate(LocalDateTime.MAX)).build();
+    private static final PracticeDate typicalDate =
+            new PracticeDate(
                 LocalDateTime.of(2018, 11, 3, 12, 45, 30)
             );
     public static final Card CS2100 = new CardBuilder().withQuestion("R-Format instruction opcode")

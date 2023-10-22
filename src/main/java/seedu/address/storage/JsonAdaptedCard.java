@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
-import seedu.address.model.card.NextPracticeDate;
+import seedu.address.model.card.PracticeDate;
 import seedu.address.model.card.Question;
 
 /**
@@ -17,12 +17,14 @@ import seedu.address.model.card.Question;
 class JsonAdaptedCard {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "card's %s field is missing!";
+    public static final String LAST_PRACTICE_DATE_FIELD_NAME = "last practice date";
     public static final String NEXT_PRACTICE_DATE_FIELD_NAME = "next practice date";
 
     private final String question;
     private final String answer;
     private final String difficulty;
     private final String nextPracticeDate;
+    private final String lastPracticeDate;
 
     /**
      * Constructs a {@code JsonAdaptedCard} with the given card details.
@@ -31,11 +33,13 @@ class JsonAdaptedCard {
     public JsonAdaptedCard(@JsonProperty("question") String question,
                            @JsonProperty("answer") String answer,
                            @JsonProperty("difficulty") String difficulty,
-                           @JsonProperty("next-practice-date") String nextPracticeDate) {
+                           @JsonProperty("next-practice-date") String nextPracticeDate,
+                           @JsonProperty("last-practice-date") String lastPracticeDate) {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
         this.nextPracticeDate = nextPracticeDate;
+        this.lastPracticeDate = lastPracticeDate;
     }
 
     /**
@@ -45,7 +49,8 @@ class JsonAdaptedCard {
         question = source.getQuestion().question;
         answer = source.getAnswer().answer;
         difficulty = source.getDifficulty();
-        nextPracticeDate = source.getNextPracticeDate().nextPracticeDate.toString();
+        nextPracticeDate = source.getNextPracticeDate().practiceDate.toString();
+        lastPracticeDate = source.getLastPracticeDate().practiceDate.toString();
     }
 
     /**
@@ -80,12 +85,21 @@ class JsonAdaptedCard {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NEXT_PRACTICE_DATE_FIELD_NAME));
         }
 
-        if (!NextPracticeDate.isValidNextPracticeDate(nextPracticeDate)) {
-            throw new IllegalValueException(NextPracticeDate.MESSAGE_CONSTRAINTS);
+        if (!PracticeDate.isValidNextPracticeDate(nextPracticeDate)) {
+            throw new IllegalValueException(PracticeDate.MESSAGE_CONSTRAINTS);
         }
 
-        final NextPracticeDate modelNextPracticeDate = new NextPracticeDate(LocalDateTime.parse(nextPracticeDate));
+        final PracticeDate modelNextPracticeDate = new PracticeDate(LocalDateTime.parse(nextPracticeDate));
 
-        return new Card(modelQuestion, modelAnswer, difficulty, modelNextPracticeDate);
+        // if there is a last practice date, and it is invalid, throw an error.
+        // it's okay for last practice date to be null, but not okay for it to be invalid.
+        if (lastPracticeDate != null && !PracticeDate.isValidNextPracticeDate(lastPracticeDate)) {
+            throw new IllegalValueException(PracticeDate.MESSAGE_CONSTRAINTS);
+        }
+
+        final PracticeDate modelLastPracticeDate =
+                lastPracticeDate != null ? new PracticeDate(LocalDateTime.parse(lastPracticeDate)) : null;
+
+        return new Card(modelQuestion, modelAnswer, difficulty, modelNextPracticeDate, modelLastPracticeDate);
     }
 }

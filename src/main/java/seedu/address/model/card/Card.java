@@ -15,16 +15,23 @@ public class Card implements Comparable<Card> {
     private final Question question;
     private final Answer answer;
     private String difficulty;
-    private NextPracticeDate nextPracticeDate;
+    private PracticeDate lastPracticeDate; // last date card was practiced, can be null.
+    private PracticeDate nextPracticeDate; // next date card should be practiced.
 
     /**
      * Every field must be present and not null.
      */
-    public Card(Question question, Answer answer, String difficulty, NextPracticeDate nextPracticeDate) {
+    public Card(Question question, Answer answer, String difficulty,
+                PracticeDate nextPracticeDate, PracticeDate lastPracticeDate) {
         requireAllNonNull(question, answer, nextPracticeDate);
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
+        if (lastPracticeDate == null) {
+            this.lastPracticeDate = nextPracticeDate;
+        } else {
+            this.lastPracticeDate = lastPracticeDate;
+        }
         this.nextPracticeDate = nextPracticeDate;
     }
 
@@ -44,17 +51,31 @@ public class Card implements Comparable<Card> {
         return answer;
     }
 
-    public NextPracticeDate getNextPracticeDate() {
+    public PracticeDate getNextPracticeDate() {
         return this.nextPracticeDate;
     }
 
+    public PracticeDate getLastPracticeDate() {
+        return this.lastPracticeDate;
+    }
+
     /**
-     * Sets a new practice date.
-     * 
-     * @param nextPracticeDate the new practice date.
+     * Sets a next practice date, replacing the previous practice dates with new values.
+     * @param practiceDate the next practice date.
      */
-    public void setNextPracticeDate(NextPracticeDate nextPracticeDate) {
-        this.nextPracticeDate = nextPracticeDate;
+    public void setNextPracticeDate(PracticeDate practiceDate) {
+        this.lastPracticeDate = this.nextPracticeDate;
+        this.nextPracticeDate = practiceDate;
+    }
+
+    /**
+     * Sets a new practice date based on difficulty.
+     * @param difficulty
+     */
+    public void setNewPracticeDateWith(String difficulty) {
+        PracticeDate newPracticeDate = PracticeDate.calculateNewPracticeDate(
+                this.lastPracticeDate, this.nextPracticeDate, difficulty);
+        this.setNextPracticeDate(newPracticeDate);
     }
 
     /**

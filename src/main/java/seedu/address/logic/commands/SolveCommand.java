@@ -61,7 +61,7 @@ public class SolveCommand extends Command {
 
         if (Objects.equals(newDifficulty, "easy")) {
             cardToSolve.setDifficulty(newDifficulty);
-            cardToSolve.setPriority(deckSize - 1);
+            cardToSolve.setNewPracticeDateWith(newDifficulty);
             model.getDeck().sort();
             return new CommandResult(
                     String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW_EASY,
@@ -70,7 +70,7 @@ public class SolveCommand extends Command {
 
         if (Objects.equals(newDifficulty, "medium")) {
             cardToSolve.setDifficulty(newDifficulty);
-            cardToSolve.setPriority(Math.floorDiv(deckSize, 2));
+            cardToSolve.setNewPracticeDateWith(newDifficulty);
             model.getDeck().sort();
             return new CommandResult(
                     String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW_MEDIUM,
@@ -79,7 +79,7 @@ public class SolveCommand extends Command {
 
         if (Objects.equals(newDifficulty, "hard")) {
             cardToSolve.setDifficulty(newDifficulty);
-            cardToSolve.setPriority(deckSize - Math.floorDiv(deckSize, 10));
+            cardToSolve.setNewPracticeDateWith(newDifficulty);
             model.getDeck().sort();
             return new CommandResult(
                     String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW_HARD,

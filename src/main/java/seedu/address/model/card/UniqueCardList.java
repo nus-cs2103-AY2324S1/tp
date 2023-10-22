@@ -67,7 +67,7 @@ public class UniqueCardList implements Iterable<Card> {
     /**
      * Sort the list based on the card's next practice date.
      */
-    private void sort() {
+    public void sort() {
         // internalList.sort(Comparator.comparingInt(Card::getPriority));
         internalList.sort(cardComparator);
     }

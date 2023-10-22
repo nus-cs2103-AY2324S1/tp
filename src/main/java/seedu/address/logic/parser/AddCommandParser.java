@@ -11,7 +11,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
-import seedu.address.model.card.NextPracticeDate;
+import seedu.address.model.card.PracticeDate;
 import seedu.address.model.card.Question;
 
 /**
@@ -36,9 +36,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_QUESTION, PREFIX_ANSWER);
         Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
         Answer answer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
-        NextPracticeDate nextPracticeDate = new NextPracticeDate(LocalDateTime.now());
+        PracticeDate practiceDate = new PracticeDate(LocalDateTime.now());
 
-        Card card = new Card(question, answer, "new", nextPracticeDate);
+        Card card = new Card(question, answer, "new", practiceDate, null);
 
         return new AddCommand(card);
     }
