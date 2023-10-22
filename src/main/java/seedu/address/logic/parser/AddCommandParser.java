@@ -105,9 +105,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         // temporary variables for when no policy paramers were inputed
-        PolicyNumber policyNumber = new PolicyNumber(PolicyNumber.DEFAULT_VALUE);
-        PolicyDate policyIssueDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
-        PolicyDate policyExpiryDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
+        PolicyNumber policyNumber = ParserUtil.POLICY_NUMBER;
+        PolicyDate policyIssueDate = ParserUtil.POLICY_ISSUE_DATE;
+        PolicyDate policyExpiryDate = ParserUtil.POLICY_EXPIRITY_DATE;
+        Policy policy = ParserUtil.POLICY;
 
         // if all details about policy exists
         if (arePrefixesPresent(argMultimap, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
@@ -116,9 +117,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             policyNumber = ParserUtil.parsePolicyNumber(argMultimap.getValue(PREFIX_POLICY_NUMBER).get());
             policyIssueDate = ParserUtil.parsePolicyIssueDate(argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).get());
             policyExpiryDate = ParserUtil.parsePolicyExpiryDate(argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).get());
+            policy = new Policy(policyNumber, policyIssueDate, policyExpiryDate);
         }
-
-        Policy policy = new Policy(policyNumber, policyIssueDate, policyExpiryDate);
 
         Person person = new Person(name, phone, email, address, tagList, nric, licencePlate, policy);
 

@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.tag.Tag;
 
@@ -83,7 +84,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same attributes.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -92,7 +93,23 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getNric().equals(getNric())
+                && otherPerson.getLicencePlate().equals(getLicencePlate())
+                && otherPerson.getEmail().equals(getEmail());
+    }
+
+    /**
+     * Returns true if both persons have the same policy number
+     */
+    public boolean comparePolicyNumber(Person otherPerson) {
+        if (this.getPolicy() != ParserUtil.POLICY
+                && this.getPolicy().getPolicyNumber().equals(otherPerson.getPolicy().getPolicyNumber())) {
+            return true;
+        }
+        return false;
     }
 
     /**

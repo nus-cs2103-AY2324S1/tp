@@ -58,6 +58,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same policy number as {@code person} in the address book.
+     */
+    boolean hasPolicyNumber(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
