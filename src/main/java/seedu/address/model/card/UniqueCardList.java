@@ -37,6 +37,10 @@ public class UniqueCardList implements Iterable<Card> {
         return internalList.stream().anyMatch(toCheck::isSameCard);
     }
 
+    public int count() {
+        return this.internalList.size();
+    }
+
     /**
      * Adds a card to the list.
      * The card must not already exist in the list.
@@ -57,9 +61,10 @@ public class UniqueCardList implements Iterable<Card> {
     /**
      * Sort the list based on card priorities.
      */
-    private void sort() {
+    public void sort() {
         internalList.sort(Comparator.comparingInt(Card::getPriority));
     }
+
 
     /**
      * Replaces the card {@code target} in the list with {@code editedCard}.

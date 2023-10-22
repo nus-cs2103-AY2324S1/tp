@@ -33,8 +33,8 @@ public class Card {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
-        this.priority = Integer.MAX_VALUE;
         this.tags.addAll(tags);
+        this.priority = 0;
     }
 
     public void setDifficulty(String difficulty) {
@@ -79,7 +79,7 @@ public class Card {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both cards have the same identity and data fields.
      * This defines a stronger notion of equality between two cards.
      */
     @Override
