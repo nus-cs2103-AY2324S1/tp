@@ -21,10 +21,9 @@ class HoursTest {
 
     @Test
     void isValidHours() {
-        // null hours
-        //assertThrows(NullPointerException.class, () -> Hours.isValidHours(null));
 
         // invalid hours
+        assertFalse(Hours.isValidHours(null)); // null
         assertFalse(Hours.isValidHours("")); // empty string
         assertFalse(Hours.isValidHours(" ")); // spaces only
         assertFalse(Hours.isValidHours("twenty")); // wrong format
