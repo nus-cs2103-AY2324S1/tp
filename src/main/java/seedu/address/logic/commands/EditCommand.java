@@ -96,9 +96,7 @@ public class EditCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        if (model.hasDate(editedPerson)) {
+        } else if (editPersonDescriptor.getEditSchedule() && model.hasDate(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_DATE);
         }
 
@@ -170,6 +168,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
 
         private Boolean paid;
+        private Boolean editSchedule = false;
 
         public EditPersonDescriptor() {}
 
@@ -189,6 +188,7 @@ public class EditCommand extends Command {
 
             setTags(toCopy.tags);
             setPaid(toCopy.paid);
+            setEditSchedule(toCopy.editSchedule);
         }
 
         /**
@@ -289,6 +289,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(paid);
         }
 
+        public void setEditSchedule(Boolean setTrue) {
+            this.editSchedule = setTrue;
+        }
+
+        public Boolean getEditSchedule() {
+            return this.editSchedule;
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -324,6 +332,7 @@ public class EditCommand extends Command {
                     .add("day", day)
                     .add("tags", tags)
                     .add("paid", paid)
+                    .add("editSchedule", editSchedule)
                     .toString();
         }
     }

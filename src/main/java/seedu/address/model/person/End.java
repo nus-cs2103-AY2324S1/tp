@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class End {
 
-    public static final String MESSAGE_CONSTRAINTS = "End has a format of HHMM";
+    public static final String MESSAGE_CONSTRAINTS = "That is not a valid time format. End has a format of HHMM";
     public static final String VALIDATION_REGEX = "^(0[0-9]|1[0-9]|2[0-3])[0-5][0-9]$";
     public final String value;
 
