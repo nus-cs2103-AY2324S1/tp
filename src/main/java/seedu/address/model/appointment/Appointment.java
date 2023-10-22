@@ -127,14 +127,5 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
             Appointment appointment = (Appointment) scheduleItem;
             return this.date.compareTo(appointment.date);
         }
-
-//        if (scheduleItem instanceof NullAppointment) {
-//            return -1;
-//        } else if (scheduleItem instanceof Appointment) { //can only be an instance of appointment
-//            Appointment appointment = (Appointment) scheduleItem;
-//            return this.date.compareTo(appointment.date);
-//        } else {
-//            return 0;
-//        }
     }
 }

@@ -31,10 +31,5 @@ public class NullAppointment extends ScheduleItem implements Comparable<Schedule
     @Override
     public int compareTo(ScheduleItem appointment) {
         return 1;
-//        if (appointment instanceof Appointment) {
-//            return 1;
-//        }
-//
-//        return 0;
     }
 }
