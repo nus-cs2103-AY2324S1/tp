@@ -31,7 +31,7 @@ management tasks done faster than traditional GUI apps.
    Some example commands you can try:
 
    * `list` : Lists all student details.
-     
+
    * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11` : Adds a student named `John Doe` to the Class Manager.
 
    * `delete 3` : Deletes the 3rd student detail shown in the current list.
