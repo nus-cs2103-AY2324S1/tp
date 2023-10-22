@@ -233,9 +233,11 @@ _Details coming soon ..._
  **Edit**               | `edit index w/WORD t/TRANSLATION`<br> e.g., `edit 1 w/bye t/再见` 
  **Find**               | `find KEYWORD`<br> e.g., `find bye`                            
  **Start**              | `start`                                                        
- **Flip**               | `flip`/`f`                                                     
+ **Reveal**             | `reveal`                                                     
  **Yes**                | `yes`                                                          
  **No**                 | `no`                                                           
- **Learning Statistics** | `stats`                                                        
- **End**               | `end`                                                         
-**Exit**                | `exit`
+ **End**                | `end`                                                         
+ **Learning Statistics** | `stats`    
+ **Language**           | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`
+ **Review**             | `review`
+ **Exit**                | `exit`
