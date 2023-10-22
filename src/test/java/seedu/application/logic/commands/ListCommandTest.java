@@ -66,7 +66,7 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listIsSortedByStatus_showsSortedListStatus() {
+    public void execute_listIsSortedByStatus_showsSortedListByStatus() {
         FieldComparator fieldComparator = new FieldComparator(Status.STATUS_SPECIFIER);
         expectedModel.sortJobs(fieldComparator);
         assertCommandSuccess(new ListCommand(fieldComparator), model, ListCommand.MESSAGE_SUCCESS, expectedModel);

@@ -16,7 +16,7 @@ public class ListCommandParserTest {
     private ListCommandParser parser = new ListCommandParser();
 
     @Test
-    public void parse_invalidInputs_failure() {
+    public void parse_invalidArgs_throwParseException() {
         // extra characters after "list" that are no specifiers
         assertParseFailure(parser, "by role",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
@@ -31,7 +31,7 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void parse_validInputs_success() {
+    public void parse_validArgs_returnsListCommand() {
         FieldComparator fieldComparator = new FieldComparator(COMPANY_SPECIFIER);
         ListCommand expectedCommand = new ListCommand(fieldComparator);
         assertParseSuccess(parser, COMPANY_SPECIFIER, expectedCommand);
