@@ -24,7 +24,7 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the ManageHR.
      *
      * @see seedu.address.model.Model#getManageHr()
      */
@@ -34,7 +34,7 @@ public interface Logic {
     ObservableList<Employee> getFilteredEmployeeList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' ManageHR app file path.
      */
     Path getManageHrFilePath();
 

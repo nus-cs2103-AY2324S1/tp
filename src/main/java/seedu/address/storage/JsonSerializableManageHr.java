@@ -14,7 +14,7 @@ import seedu.address.model.ReadOnlyManageHr;
 import seedu.address.model.employee.Employee;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable ManageHR that is serializable to JSON format.
  */
 @JsonRootName(value = "managehr")
 class JsonSerializableManageHr {
@@ -32,16 +32,16 @@ class JsonSerializableManageHr {
     }
 
     /**
-     * Converts a given {@code ReadOnlyManageHR} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyManageHr} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableManageHR}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableManageHr}.
      */
     public JsonSerializableManageHr(ReadOnlyManageHr source) {
         employees.addAll(source.getEmployeeList().stream().map(JsonAdaptedEmployee::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code ManageHR} object.
+     * Converts this ManageHR app into the model's {@code ManageHR} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

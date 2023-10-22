@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.employee.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ManageHrBuilder;
 
 public class ModelManagerTest {
 
@@ -61,12 +61,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setManageHrFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setManageHrFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setManageHrFilePath_validPath_setsManageHrFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setManageHrFilePath(path);
         assertEquals(path, modelManager.getManageHrFilePath());
@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
+    public void hasEmployee_employeeNotInManageHr_returnsFalse() {
         assertFalse(modelManager.hasEmployee(ALICE));
     }
 
     @Test
-    public void hasEmployee_employeeInAddressBook_returnsTrue() {
+    public void hasEmployee_employeeInManageHr_returnsTrue() {
         modelManager.addEmployee(ALICE);
         assertTrue(modelManager.hasEmployee(ALICE));
     }
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ManageHr manageHR = new AddressBookBuilder().withEmployee(ALICE).withEmployee(BENSON).build();
+        ManageHr manageHR = new ManageHrBuilder().withEmployee(ALICE).withEmployee(BENSON).build();
         ManageHr differentManageHr = new ManageHr();
         UserPrefs userPrefs = new UserPrefs();
 

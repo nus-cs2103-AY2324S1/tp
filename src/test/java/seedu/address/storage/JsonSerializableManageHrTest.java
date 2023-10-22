@@ -15,7 +15,7 @@ import seedu.address.testutil.TypicalEmployees;
 
 public class JsonSerializableManageHrTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableManageHrTest");
     private static final Path TYPICAL_EMPLOYEES_FILE = TEST_DATA_FOLDER.resolve("typicalEmployeesManageHr.json");
     private static final Path INVALID_EMPLOYEE_FILE = TEST_DATA_FOLDER.resolve("invalidEmployeeManageHr.json");
     private static final Path DUPLICATE_EMPLOYEE_FILE = TEST_DATA_FOLDER.resolve("duplicateEmployeeManageHr.json");
@@ -25,7 +25,7 @@ public class JsonSerializableManageHrTest {
         JsonSerializableManageHr dataFromFile = JsonUtil.readJsonFile(TYPICAL_EMPLOYEES_FILE,
                 JsonSerializableManageHr.class).get();
         ManageHr manageHrFromFile = dataFromFile.toModelType();
-        ManageHr typicalEmployeesManageHr = TypicalEmployees.getTypicalAddressBook();
+        ManageHr typicalEmployeesManageHr = TypicalEmployees.getTypicalManageHr();
         assertEquals(manageHrFromFile, typicalEmployeesManageHr);
     }
 

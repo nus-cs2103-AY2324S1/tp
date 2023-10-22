@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.department.Department;
 
 /**
- * Represents an Employee in the address book.
+ * Represents an Employee in the ManageHR app.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Employee {

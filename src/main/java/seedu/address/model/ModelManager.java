@@ -14,7 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.employee.Employee;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the ManageHR data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -24,12 +24,12 @@ public class ModelManager implements Model {
     private final FilteredList<Employee> filteredPeople;
 
     /**
-     * Initializes a ModelManager with the given manageHr and userPrefs.
+     * Initializes a ModelManager with the given manageHR and userPrefs.
      */
     public ModelManager(ReadOnlyManageHr manageHr, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(manageHr, userPrefs);
 
-        logger.fine("Initializing with address book: " + manageHr + " and user prefs " + userPrefs);
+        logger.fine("Initializing with ManageHR: " + manageHr + " and user prefs " + userPrefs);
 
         this.manageHr = new ManageHr(manageHr);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -75,7 +75,7 @@ public class ModelManager implements Model {
         userPrefs.setManageHrFilePath(manageHrFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ManageHR ================================================================================
 
     @Override
     public void setManageHr(ReadOnlyManageHr manageHr) {
@@ -115,7 +115,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Employee} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedManageHr}
      */
     @Override
     public ObservableList<Employee> getFilteredEmployeeList() {

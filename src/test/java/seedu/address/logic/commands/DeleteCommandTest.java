@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEmployeeAtIndex;
-import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEmployees.getTypicalManageHr;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EMPLOYEE;
 
@@ -25,7 +25,7 @@ import seedu.address.model.employee.Employee;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalManageHr(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -71,7 +71,7 @@ public class DeleteCommandTest {
         showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
 
         Index outOfBoundIndex = INDEX_SECOND_EMPLOYEE;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of ManageHR list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getManageHr().getEmployeeList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);

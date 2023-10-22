@@ -35,17 +35,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' ManageHR file path.
      */
     Path getManageHrFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' ManageHR file path.
      */
     void setManageHrFilePath(Path manageHrFilePath);
 
     /**
-     * Replaces address book data with the data in {@code manageHR}.
+     * Replaces ManageHr data with the data in {@code manageHR}.
      */
     void setManageHr(ReadOnlyManageHr manageHr);
 

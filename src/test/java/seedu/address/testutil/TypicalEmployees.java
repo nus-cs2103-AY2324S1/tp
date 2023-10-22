@@ -67,14 +67,14 @@ public class TypicalEmployees {
     private TypicalEmployees() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical employees.
+     * Returns an {@code ManageHr} with all the typical employees.
      */
-    public static ManageHr getTypicalAddressBook() {
-        ManageHr ab = new ManageHr();
+    public static ManageHr getTypicalManageHr() {
+        ManageHr hr = new ManageHr();
         for (Employee employee : getTypicalEmployees()) {
-            ab.addEmployee(employee);
+            hr.addEmployee(employee);
         }
-        return ab;
+        return hr;
     }
 
     public static List<Employee> getTypicalEmployees() {

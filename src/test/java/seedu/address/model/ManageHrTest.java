@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
-import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEmployees.getTypicalManageHr;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,8 +37,8 @@ public class ManageHrTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        ManageHr newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyManageHr_replacesData() {
+        ManageHr newData = getTypicalManageHr();
         manageHr.resetData(newData);
         assertEquals(newData, manageHr);
     }
@@ -61,18 +61,18 @@ public class ManageHrTest {
     }
 
     @Test
-    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
+    public void hasEmployee_employeeNotInManageHr_returnsFalse() {
         assertFalse(manageHr.hasEmployee(ALICE));
     }
 
     @Test
-    public void hasEmployee_employeeInAddressBook_returnsTrue() {
+    public void hasEmployee_employeeInManageHr_returnsTrue() {
         manageHr.addEmployee(ALICE);
         assertTrue(manageHr.hasEmployee(ALICE));
     }
 
     @Test
-    public void hasEmployee_employeeWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasEmployee_employeeWithSameIdentityFieldsInManageHr_returnsTrue() {
         manageHr.addEmployee(ALICE);
         Employee editedAlice = new EmployeeBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .withDepartments(VALID_DEPARTMENT_LOGISTIC)
@@ -92,7 +92,7 @@ public class ManageHrTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose people list can violate interface constraints.
+     * A stub ReadOnlyManageHr whose people list can violate interface constraints.
      */
     private static class ManageHrStub implements ReadOnlyManageHr {
         private final ObservableList<Employee> people = FXCollections.observableArrayList();

@@ -15,7 +15,7 @@ import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Salary;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code ManageHr} with sample data.
  */
 public class SampleDataUtil {
     public static Employee[] getSampleEmployees() {

@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEmployeeAtIndex;
-import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEmployees.getTypicalManageHr;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EMPLOYEE;
 
@@ -33,7 +33,7 @@ import seedu.address.testutil.EmployeeBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalManageHr(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -116,7 +116,7 @@ public class EditCommandTest {
     public void execute_duplicateEmployeeFilteredList_failure() {
         showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
 
-        // edit employee in filtered list into a duplicate in address book
+        // edit employee in filtered list into a duplicate in ManageHR app
         Employee employeeInList = model.getManageHr().getEmployeeList().get(INDEX_SECOND_EMPLOYEE.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_EMPLOYEE,
                 new EditEmployeeDescriptorBuilder(employeeInList).build());
@@ -135,13 +135,13 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of ManageHR app
      */
     @Test
     public void execute_invalidEmployeeIndexFilteredList_failure() {
         showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
         Index outOfBoundIndex = INDEX_SECOND_EMPLOYEE;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of ManageHR list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getManageHr().getEmployeeList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,

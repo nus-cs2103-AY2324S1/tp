@@ -77,7 +77,7 @@ public class ManageHr implements ReadOnlyManageHr {
 
     /**
      * Replaces the given employee {@code target} in the list with {@code editedEmployee}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the ManageHR.
      * The employee identity of {@code editedEmployee} must not be the same as another existing employee in ManageHR.
      */
     public void setEmployee(Employee target, Employee editedEmployee) {
@@ -88,7 +88,7 @@ public class ManageHr implements ReadOnlyManageHr {
 
     /**
      * Removes {@code key} from this {@code ManageHR}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the ManageHr.
      */
     public void removeEmployee(Employee key) {
         employees.remove(key);
