@@ -12,7 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,8 +38,8 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentContainsKeywordsPredicate;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
-import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.StudentUtil;
 import seedu.address.testutil.TypicalStudents;
 
 public class AddressBookParserTest {
@@ -49,7 +49,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Student student = new StudentBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(student), true);
+        AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student), true);
         assertEquals(new AddCommand(student), command);
     }
 
@@ -62,7 +62,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         Student student = new StudentBuilder().build();
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(PersonUtil.getDeleteCommand(student), true);
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(StudentUtil.getDeleteCommand(student), true);
         assertEquals(new DeleteCommand(student.getStudentNumber()), command);
     }
 
@@ -71,8 +71,9 @@ public class AddressBookParserTest {
         Student student = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor), true);
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_STUDENT.getOneBased() + " "
+                + StudentUtil.getEditStudentDescriptorDetails(descriptor), true);
+        assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
     }
 
     @Test
@@ -81,7 +82,7 @@ public class AddressBookParserTest {
             + " "
             + TypicalStudents.ALICE.getStudentNumber()
             + " "
-            + PersonUtil.getTagDetails(TypicalStudents.ALICE), true);
+            + StudentUtil.getTagDetails(TypicalStudents.ALICE), true);
         assertEquals(new TagCommand(TypicalStudents.ALICE.getStudentNumber(), TypicalStudents.ALICE.getTags()),
             command);
     }
