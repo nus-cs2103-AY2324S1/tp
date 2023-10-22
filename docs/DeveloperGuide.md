@@ -154,6 +154,47 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Tutor Feature
+
+The "Add Tutor" feature allows users to add a new tutor to the address book. Below, we provide an example usage scenario and a detailed description of how the add tutor mechanism behaves at each step.
+
+The following shows the activity diagram from when a user executes the `add-t` command:
+
+![AddTutorActivityDiagram](images/AddTutorActivityDiagram.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Input Limitations**<br>
+* Input format must adhere to the follow limitations:
+  * `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
+  * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
+  * `EMAIL`: Of the format local-part@domain
+* Tutor to be added must be unique and not already exist in the addressbook.
+
+</div>
+
+#### Implementation
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `add-t n/John Doe p/98765432 e/johnd@example.com` to add a tutor to the address book. The 
+command is parsed in `AddressBookParser`.
+
+Step 3. `AddTutorCommandParser` is created, which constructs the `Person` to be added.  The `AddTutorCommand` is 
+called with the `Person` created.
+
+Step 4. The `AddTutorCommand` object executes the `addPerson` method through the `LogicManager`. The method then 
+adds the `Person` in `model` and returns the `CommandResult`.
+
+The following sequence diagram shows how the above steps for add tutor operation works:
+
+![AddTutorSequenceDiagram](images/AddTutorSequenceDiagram.png)
+
+#### Design Rationale
+
+The `add-t` command was designed this way to ensure consistency with the previous `add` person.
+
+=======
 ### Edit tutor feature 
 
 The “Edit Tutor” feature allows users to edit an existing tutor in the address book given a tutor index. 
@@ -173,6 +214,7 @@ each step.
     * `EMAIL`: Of the format local-part@domain
 * Tutor to be edited must not already exist in the addressbook (excluding the current specified one).
 * TUTOR_INDEX parameter is compulsory and at least one edited field must be provided.
+
 </div>
 
 #### Implementation
@@ -211,6 +253,7 @@ The following sequence diagram shows how the above steps for edit tutor operatio
 
 #### Design rationale:
 The `edit-t` command was designed this way to ensure consistency with the previous `edit` person command.
+
 
 ### \[Proposed\] Undo/redo feature
 
