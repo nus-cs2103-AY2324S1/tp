@@ -164,13 +164,15 @@ The following shows the activity diagram from when a user executes the `add-t` c
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Limitations**<br>
+**:information_source: Input Limitations**<br>
 * Input format must adhere to the follow limitations:
   * `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
   * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
   * `EMAIL`: Of the format local-part@domain
 * Tutor to be added must be unique and not already exist in the addressbook.
 </div>
+
+#### Implementation
 
 Step 1. The user launches the application for the first time.
 
@@ -187,6 +189,9 @@ The following sequence diagram shows how the above steps for add tutor operation
 
 ![AddTutorSequenceDiagram](images/AddTutorSequenceDiagram.png)
 
+#### Design Rationale
+
+The `add-t` command was designed this way to ensure consistency with the previous `add` person.
 
 ### \[Proposed\] Undo/redo feature
 
