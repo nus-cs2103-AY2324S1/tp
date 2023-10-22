@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.application.model.job.Company.COMPANY_SPECIFIER;
+import static seedu.application.model.job.Deadline.DEADLINE_SPECIFIER;
 import static seedu.application.model.job.Role.ROLE_SPECIFIER;
+import static seedu.application.model.job.Status.STATUS_SPECIFIER;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST_JOB;
 
@@ -87,7 +90,10 @@ public class ApplicationBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " " + COMPANY_SPECIFIER) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " " + ROLE_SPECIFIER) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " " + DEADLINE_SPECIFIER) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " " + STATUS_SPECIFIER) instanceof ListCommand);
     }
 
     @Test

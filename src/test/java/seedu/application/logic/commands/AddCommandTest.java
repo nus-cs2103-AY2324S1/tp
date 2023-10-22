@@ -1,9 +1,7 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalJobs.CHEF;
 
@@ -21,6 +19,7 @@ import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
 import seedu.application.model.ReadOnlyApplicationBook;
 import seedu.application.model.ReadOnlyUserPrefs;
+import seedu.application.model.job.FieldComparator;
 import seedu.application.model.job.Job;
 import seedu.application.testutil.JobBuilder;
 
@@ -60,20 +59,20 @@ public class AddCommandTest {
         AddCommand addCleanerCommand = new AddCommand(cleaner);
 
         // same object -> returns true
-        assertTrue(addChefCommand.equals(addChefCommand));
+        assertEquals(addChefCommand, addChefCommand);
 
         // same values -> returns true
         AddCommand addChefCommandCopy = new AddCommand(chef);
-        assertTrue(addChefCommand.equals(addChefCommandCopy));
+        assertEquals(addChefCommand, addChefCommandCopy);
 
         // different types -> returns false
-        assertFalse(addChefCommand.equals(1));
+        assertNotEquals(1, addChefCommand);
 
         // null -> returns false
-        assertFalse(addChefCommand.equals(null));
+        assertNotEquals(null, addChefCommand);
 
         // different job -> returns false
-        assertFalse(addChefCommand.equals(addCleanerCommand));
+        assertNotEquals(addChefCommand, addCleanerCommand);
     }
 
     @Test
@@ -84,7 +83,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -154,6 +153,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredJobList(Predicate<Job> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unsortJobs() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortJobs(FieldComparator comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }

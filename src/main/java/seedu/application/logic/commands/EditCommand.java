@@ -1,7 +1,12 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,9 +20,12 @@ import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
 import seedu.application.model.job.Company;
 import seedu.application.model.job.Deadline;
+import seedu.application.model.job.Industry;
 import seedu.application.model.job.Job;
+import seedu.application.model.job.JobType;
 import seedu.application.model.job.Role;
 import seedu.application.model.job.Status;
+
 
 /**
  * Edits the details of an existing job in the application book.
@@ -27,25 +35,31 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the job identified "
-        + "by the index number used in the displayed job list. "
+        + "by the index number used in the displayed job list.\n"
         + "Existing values will be overwritten by the input values.\n"
         + "Parameters: INDEX (must be a positive integer) "
         + "[" + PREFIX_ROLE + "ROLE] "
         + "[" + PREFIX_COMPANY + "COMPANY] "
         + "[" + PREFIX_DEADLINE + "DEADLINE] "
-        + "[" + PREFIX_STATUS + "STATUS]\n\n"
+        + "[" + PREFIX_STATUS + "STATUS] "
+        + "[" + PREFIX_JOBTYPE + "JOB_TYPE] "
+        + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_ROLE + "Software Engineer "
         + PREFIX_COMPANY + "Google"
         + PREFIX_DEADLINE + "Dec 31 2023 1200"
-        + PREFIX_STATUS + "Pending";
+        + PREFIX_STATUS + "Pending "
+        + PREFIX_JOBTYPE + "INTERNSHIP"
+        + PREFIX_INDUSTRY + "Technology";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n"
-        + "c/ for Company\n"
-        + "r/ for Role\n"
-        + "d/ for Deadline\n"
-        + "s/ for Status";
+        + PREFIX_COMPANY + " for Company\n"
+        + PREFIX_ROLE + " for Role\n"
+        + PREFIX_STATUS + " for Status\n"
+        + PREFIX_DEADLINE + " for Deadline\n"
+        + PREFIX_JOBTYPE + " for Job Type\n"
+        + PREFIX_INDUSTRY + " for Industry\n";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book.";
 
     private final Index index;
@@ -95,8 +109,10 @@ public class EditCommand extends Command {
         Company updatedCompany = editJobDescriptor.getCompany().orElse(jobToEdit.getCompany());
         Deadline updatedDeadline = editJobDescriptor.getDeadline().orElse(jobToEdit.getDeadline());
         Status updatedStatus = editJobDescriptor.getStatus().orElse(jobToEdit.getStatus());
+        JobType updatedJobType = editJobDescriptor.getJobType().orElse(jobToEdit.getJobType());
+        Industry updatedIndustry = editJobDescriptor.getIndustry().orElse(jobToEdit.getIndustry());
 
-        return new Job(updatedRole, updatedCompany, updatedDeadline, updatedStatus);
+        return new Job(updatedRole, updatedCompany, updatedDeadline, updatedStatus, updatedJobType, updatedIndustry);
     }
 
     @Override
@@ -132,6 +148,8 @@ public class EditCommand extends Command {
         private Role role;
         private Deadline deadline;
         private Status status;
+        private JobType jobType;
+        private Industry industry;
 
         public EditJobDescriptor() {
         }
@@ -144,13 +162,15 @@ public class EditCommand extends Command {
             setRole(toCopy.role);
             setDeadline(toCopy.deadline);
             setStatus(toCopy.status);
+            setJobType(toCopy.jobType);
+            setIndustry(toCopy.industry);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(company, role, deadline, status);
+            return CollectionUtil.isAnyNonNull(company, role, deadline, status, jobType, industry);
         }
 
         public void setCompany(Company company) {
@@ -185,6 +205,22 @@ public class EditCommand extends Command {
             return Optional.ofNullable(status);
         }
 
+        public void setJobType(JobType jobType) {
+            this.jobType = jobType;
+        }
+
+        public Optional<JobType> getJobType() {
+            return Optional.ofNullable(jobType);
+        }
+
+        public void setIndustry(Industry industry) {
+            this.industry = industry;
+        }
+
+        public Optional<Industry> getIndustry() {
+            return Optional.ofNullable(industry);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -200,7 +236,9 @@ public class EditCommand extends Command {
             return Objects.equals(company, otherEditJobDescriptor.company)
                 && Objects.equals(role, otherEditJobDescriptor.role)
                 && Objects.equals(deadline, otherEditJobDescriptor.deadline)
-                && Objects.equals(status, otherEditJobDescriptor.status);
+                && Objects.equals(status, otherEditJobDescriptor.status)
+                && Objects.equals(jobType, otherEditJobDescriptor.jobType)
+                && Objects.equals(industry, otherEditJobDescriptor.industry);
         }
 
         @Override
@@ -210,6 +248,8 @@ public class EditCommand extends Command {
                 .add("role", role)
                 .add("deadline", deadline)
                 .add("status", status)
+                .add("jobType", jobType)
+                .add("industry", industry)
                 .toString();
         }
     }

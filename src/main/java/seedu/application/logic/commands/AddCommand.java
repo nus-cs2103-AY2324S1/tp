@@ -3,6 +3,8 @@ package seedu.application.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -23,18 +25,22 @@ public class AddCommand extends Command {
         + "Parameters: "
         + PREFIX_COMPANY + "COMPANY "
         + PREFIX_ROLE + "ROLE\n"
-        + "[" + PREFIX_DEADLINE + "DEADLINE] "
-        + "[" + PREFIX_STATUS + "STATUS]\n\n"
+        + "[Optional] "
+        + PREFIX_STATUS + "STATUS "
+        + PREFIX_DEADLINE + "DEADLINE "
+        + PREFIX_JOBTYPE + "JOBTYPE "
+        + PREFIX_INDUSTRY + "INDUSTRY\n\n"
         + "Example: \n"
         + COMMAND_WORD + " "
         + PREFIX_COMPANY + "Google "
         + PREFIX_ROLE + "Software Engineer\n"
-        + "OR\n"
-        + COMMAND_WORD + " "
+        + "OR\n" + COMMAND_WORD + " "
         + PREFIX_COMPANY + "Google "
         + PREFIX_ROLE + "Software Engineer "
+        + PREFIX_STATUS + "PENDING "
         + PREFIX_DEADLINE + "Dec 31 2030 1200 "
-        + PREFIX_STATUS + "Pending\n";
+        + PREFIX_JOBTYPE + "INTERNSHIP"
+        + PREFIX_INDUSTRY + "Technology\n";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book";

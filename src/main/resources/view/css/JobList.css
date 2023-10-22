@@ -1,0 +1,53 @@
+/* Job List Panel*/
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px;
+    -fx-control-inner-background: white;
+    -fx-control-inner-background-alt: white;
+    -fx-border-radius: 20px;
+}
+
+.list-view .list-cell {
+    -fx-padding: 0px 10px 15px 5px;
+}
+
+.list-cell:selected {
+    -fx-background-color: #ffffff;
+}
+
+.list-cell:selected #cardPane {
+    -fx-background-color: #FAF0FF;
+}
+
+/* Job Card */
+#cardPane {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30px;
+    -fx-border-color: #E1E1E1;
+    -fx-border-size: 2;
+    -fx-border-radius: 30px;
+    -fx-padding: 0px, 0px, 50px, 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 2, 2);
+}
+
+.cell_big_label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-text-fill: #343434;
+}
+
+.cell_small_label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #787878;
+}
+
+.cell_index_label {
+    -fx-font-family: "Tahoma", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #343434;
+}

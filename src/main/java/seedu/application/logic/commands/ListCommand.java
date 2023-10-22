@@ -20,6 +20,9 @@ public class ListCommand extends Command {
             + "Parameters: FIELD_SPECIFIER\n\n"
             + "Example: " + COMMAND_WORD + " -c";
 
+    public static final String MESSAGE_INVALID_SPECIFIER = "Specifiers should only be one of the following:\n"
+            + "-c (Company), -r (Role), -d (Deadline), -s (Status)";
+
     private final FieldComparator comparator;
 
     public ListCommand(FieldComparator comparator) {
@@ -36,5 +39,20 @@ public class ListCommand extends Command {
             model.unsortJobs();
         }
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListCommand)) {
+            return false;
+        }
+
+        ListCommand otherListCommand = (ListCommand) other;
+        return comparator.equals(otherListCommand.comparator);
     }
 }

@@ -45,6 +45,18 @@ public class EditJobDescriptorTest {
         // different deadline -> returns false
         editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withDeadline(VALID_DEADLINE_CLEANER).build();
         assertFalse(DESC_CHEF.equals(editedChef));
+
+        // different status -> returns false
+        editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withStatus("APPROVED").build();
+        assertFalse(DESC_CHEF.equals(editedChef));
+
+        // different jobType -> returns false
+        editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withJobType("PART_TIME").build();
+        assertFalse(DESC_CHEF.equals(editedChef));
+
+        // different industry -> returns false
+        editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withIndustry("Baking").build();
+        assertFalse(DESC_CHEF.equals(editedChef));
     }
 
     @Test
@@ -54,7 +66,9 @@ public class EditJobDescriptorTest {
             + editJobDescriptor.getCompany().orElse(null) + ", role="
             + editJobDescriptor.getRole().orElse(null) + ", deadline="
             + editJobDescriptor.getDeadline().orElse(null) + ", status="
-            + editJobDescriptor.getStatus().orElse(null) + "}";
+            + editJobDescriptor.getStatus().orElse(null) + ", jobType="
+            + editJobDescriptor.getJobType().orElse(null) + ", industry="
+            + editJobDescriptor.getIndustry().orElse(null) + "}";
         assertEquals(expected, editJobDescriptor.toString());
     }
 }

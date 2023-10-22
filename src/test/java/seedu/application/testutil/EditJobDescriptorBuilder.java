@@ -1,10 +1,7 @@
 package seedu.application.testutil;
 
 import seedu.application.logic.commands.EditCommand.EditJobDescriptor;
-import seedu.application.model.job.Company;
-import seedu.application.model.job.Deadline;
-import seedu.application.model.job.Job;
-import seedu.application.model.job.Role;
+import seedu.application.model.job.*;
 
 /**
  * A utility class to help with building EditJobDescriptor objects.
@@ -29,6 +26,9 @@ public class EditJobDescriptorBuilder {
         descriptor.setRole(job.getRole());
         descriptor.setCompany(job.getCompany());
         descriptor.setDeadline(job.getDeadline());
+        descriptor.setStatus(job.getStatus());
+        descriptor.setJobType(job.getJobType());
+        descriptor.setIndustry(job.getIndustry());
     }
 
     /**
@@ -52,6 +52,30 @@ public class EditJobDescriptorBuilder {
      */
     public EditJobDescriptorBuilder withDeadline(String deadline) {
         descriptor.setDeadline(new Deadline(deadline));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Status} of the {@code EditJobDescriptor} that we are building.
+     */
+    public EditJobDescriptorBuilder withStatus(String status) {
+        descriptor.setStatus(new Status(status));
+        return this;
+    }
+
+    /**
+     * Sets the {@code JobType} of the {@code EditJobDescriptor} that we are building.
+     */
+    public EditJobDescriptorBuilder withJobType(String jobType) {
+        descriptor.setJobType(new JobType(jobType));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Industry} of the {@code EditJobDescriptor} that we are building.
+     */
+    public EditJobDescriptorBuilder withIndustry(String industry) {
+        descriptor.setIndustry(new Industry(industry));
         return this;
     }
 
