@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import networkbook.logic.commands.edit.EditCommand;
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
@@ -14,7 +13,7 @@ import networkbook.model.ModelManager;
 import networkbook.model.NetworkBook;
 import networkbook.model.UserPrefs;
 import networkbook.model.person.Person;
-import networkbook.testutil.EditPersonDescriptorBuilder;
+import networkbook.testutil.AddPersonDescriptorBuilder;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
@@ -30,8 +29,8 @@ public class AddCommandTest {
     @Test
     public void execute_addAnotherNameToPerson_commandFailure() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        EditCommand.EditPersonDescriptor descriptor =
-                new EditPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_AMY).build();
+        AddCommand.AddPersonDescriptor descriptor =
+                new AddPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_AMY).build();
         AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
         String expectedMessage = AddCommand.MESSAGE_MULTIPLE_NAMES;
         CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage);
@@ -45,7 +44,7 @@ public class AddCommandTest {
         Person editedPerson = new PersonBuilder(personInFilteredList)
                 .addPhone(CommandTestUtil.VALID_PHONE_BOB).build();
         AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB).build());
+                new AddPersonDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_BOB).build());
 
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
 
@@ -63,7 +62,7 @@ public class AddCommandTest {
         Person editedPerson = new PersonBuilder(personInFilteredList)
                 .addEmail(CommandTestUtil.VALID_EMAIL_BOB).build();
         AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withEmail(CommandTestUtil.VALID_EMAIL_BOB).build());
+                new AddPersonDescriptorBuilder().withEmail(CommandTestUtil.VALID_EMAIL_BOB).build());
 
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
 
@@ -81,7 +80,7 @@ public class AddCommandTest {
         Person editedPerson = new PersonBuilder(personInFilteredList)
                 .addLink(CommandTestUtil.VALID_LINK_BOB).build();
         AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withLink(CommandTestUtil.VALID_LINK_BOB).build());
+                new AddPersonDescriptorBuilder().withLink(CommandTestUtil.VALID_LINK_BOB).build());
 
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
 
@@ -94,8 +93,8 @@ public class AddCommandTest {
     @Test
     public void execute_multipleGradsBeingAdded_assertionError() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        EditCommand.EditPersonDescriptor descriptor =
-                new EditPersonDescriptorBuilder().withGraduation(CommandTestUtil.VALID_GRADUATION_AMY).build();
+        AddCommand.AddPersonDescriptor descriptor =
+                new AddPersonDescriptorBuilder().withGraduation(CommandTestUtil.VALID_GRADUATION_AMY).build();
         AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
         String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
         CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage);
@@ -112,7 +111,7 @@ public class AddCommandTest {
         Person editedPerson = new PersonBuilder(personInFilteredList)
                 .addCourse(CommandTestUtil.VALID_COURSE_BOB).build();
         AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withCourse(CommandTestUtil.VALID_COURSE_BOB).build());
+                new AddPersonDescriptorBuilder().withCourse(CommandTestUtil.VALID_COURSE_BOB).build());
 
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
 
@@ -131,7 +130,7 @@ public class AddCommandTest {
         Person editedPerson = new PersonBuilder(personInFilteredList)
                 .addSpecialisation(CommandTestUtil.VALID_SPECIALISATION_BOB).build();
         AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_BOB).build());
+                new AddPersonDescriptorBuilder().withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_BOB).build());
 
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
 
@@ -144,7 +143,7 @@ public class AddCommandTest {
     @Test
     public void execute_noFieldSpecifiedFilteredList_success() {
         AddCommand addCommand =
-                new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, new EditCommand.EditPersonDescriptor());
+                new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, new AddCommand.AddPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
@@ -159,7 +158,7 @@ public class AddCommandTest {
         CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
 
         AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withPriority(CommandTestUtil.VALID_PRIORITY_AMY).build());
+                new AddPersonDescriptorBuilder().withPriority(CommandTestUtil.VALID_PRIORITY_AMY).build());
 
         String expectedMessage = AddCommand.MESSAGE_MULTIPLE_UNIQUE_FIELD;
 
@@ -170,8 +169,8 @@ public class AddCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_commandFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        EditCommand.EditPersonDescriptor descriptor =
-                new EditPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build();
+        AddCommand.AddPersonDescriptor descriptor =
+                new AddPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build();
         AddCommand addCommand = new AddCommand(outOfBoundIndex, descriptor);
 
         CommandTestUtil.assertCommandFailure(addCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -189,7 +188,7 @@ public class AddCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getNetworkBook().getPersonList().size());
 
         AddCommand addCommand = new AddCommand(outOfBoundIndex,
-                new EditPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build());
+                new AddPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build());
 
         CommandTestUtil.assertCommandFailure(addCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -200,8 +199,8 @@ public class AddCommandTest {
                 new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.DESC_AMY);
 
         // same values -> returns true
-        EditCommand.EditPersonDescriptor copyDescriptor =
-                new EditCommand.EditPersonDescriptor(CommandTestUtil.DESC_AMY);
+        AddCommand.AddPersonDescriptor copyDescriptor =
+                new AddCommand.AddPersonDescriptor(CommandTestUtil.DESC_AMY);
         AddCommand commandWithSameValues = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -226,7 +225,7 @@ public class AddCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        AddCommand.AddPersonDescriptor editPersonDescriptor = new AddCommand.AddPersonDescriptor();
         AddCommand addCommand = new AddCommand(index, editPersonDescriptor);
         String expected = AddCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
                 + editPersonDescriptor + "}";

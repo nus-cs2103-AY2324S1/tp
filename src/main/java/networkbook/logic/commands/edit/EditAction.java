@@ -1,6 +1,7 @@
 package networkbook.logic.commands.edit;
 
-@FunctionalInterface
+import networkbook.logic.commands.exceptions.CommandException;
+
 public interface EditAction {
-    void edit(EditPersonDescriptor editPersonDescriptor);
+    void edit(EditPersonDescriptor editPersonDescriptor) throws CommandException;
 }

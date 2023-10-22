@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
 import networkbook.commons.core.index.Index;
+import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
@@ -17,6 +18,12 @@ import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
 public class EditPersonDescriptor {
+    private static String MESSAGE_INVALID_PHONE_INDEX = "The phone index provided is invalid.";
+    private static String MESSAGE_INVALID_EMAIL_INDEX = "The email index provided is invalid.";
+    private static String MESSAGE_INVALID_LINK_INDEX = "The link index provided is invalid.";
+    private static String MESSAGE_INVALID_COURSE_INDEX = "The course index provided is invalid.";
+    private static String MESSAGE_INVALID_SPECIALISATION_INDEX = "The specialisation index provided is invalid.";
+    private static String MESSAGE_INVALID_TAG_INDEX = "The tag index provided is invalid.";
     private Name name;
     private UniqueList<Phone> phones;
     private UniqueList<Email> emails;
@@ -44,18 +51,27 @@ public class EditPersonDescriptor {
         this.name = name;
     }
 
-    public void setPhone(Index index, Phone phone) {
+    public void setPhone(Index index, Phone phone) throws CommandException {
         requireAllNonNull(index, phone);
+        if (index.getZeroBased() >= this.phones.size()) {
+            throw new CommandException(MESSAGE_INVALID_PHONE_INDEX);
+        }
         this.phones.setItem(index.getZeroBased(), phone);
     }
 
-    public void setEmail(Index index, Email email) {
+    public void setEmail(Index index, Email email) throws CommandException {
         requireAllNonNull(index, email);
+        if (index.getZeroBased() >= this.emails.size()) {
+            throw new CommandException(MESSAGE_INVALID_EMAIL_INDEX);
+        }
         this.emails.setItem(index.getZeroBased(), email);
     }
 
-    public void setLink(Index index, Link link) {
+    public void setLink(Index index, Link link) throws CommandException {
         requireAllNonNull(index, link);
+        if (index.getZeroBased() >= this.links.size()) {
+            throw new CommandException(MESSAGE_INVALID_LINK_INDEX);
+        }
         this.links.setItem(index.getZeroBased(), link);
     }
 
@@ -64,18 +80,27 @@ public class EditPersonDescriptor {
         this.graduation = graduation;
     }
 
-    public void setCourse(Index index, Course course) {
+    public void setCourse(Index index, Course course) throws CommandException {
         requireAllNonNull(index, course);
+        if (index.getZeroBased() >= this.courses.size()) {
+            throw new CommandException(MESSAGE_INVALID_COURSE_INDEX);
+        }
         this.courses.setItem(index.getZeroBased(), course);
     }
 
-    public void setSpecialisation(Index index, Specialisation specialisation) {
+    public void setSpecialisation(Index index, Specialisation specialisation) throws CommandException {
         requireAllNonNull(index, specialisation);
+        if (index.getZeroBased() >= this.specialisations.size()) {
+            throw new CommandException(MESSAGE_INVALID_SPECIALISATION_INDEX);
+        }
         this.specialisations.setItem(index.getZeroBased(), specialisation);
     }
 
-    public void setTag(Index index, Tag tag) {
+    public void setTag(Index index, Tag tag) throws CommandException {
         requireAllNonNull(index, tag);
+        if (index.getZeroBased() >= this.tags.size()) {
+            throw new CommandException(MESSAGE_INVALID_TAG_INDEX);
+        }
         this.tags.setItem(index.getZeroBased(), tag);
     }
 
@@ -86,5 +111,27 @@ public class EditPersonDescriptor {
 
     public Person toPerson() {
         return new Person(name, phones, emails, links, graduation, courses, specialisations, tags, priority);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (!(object instanceof EditPersonDescriptor)) {
+            return false;
+        }
+
+        EditPersonDescriptor otherDescriptor = (EditPersonDescriptor) object;
+        return this.name.equals(otherDescriptor.name)
+                && this.phones.equals(otherDescriptor.phones)
+                && this.emails.equals(otherDescriptor.emails)
+                && this.links.equals(otherDescriptor.links)
+                && this.graduation.equals(otherDescriptor.graduation)
+                && this.courses.equals(otherDescriptor.courses)
+                && this.specialisations.equals(otherDescriptor.specialisations)
+                && this.tags.equals(otherDescriptor.tags)
+                && this.priority.equals(otherDescriptor.priority);
     }
 }

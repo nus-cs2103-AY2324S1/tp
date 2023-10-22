@@ -106,6 +106,13 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
     }
 
     /**
+     * Returns the size of this list.
+     */
+    public int size() {
+        return this.internalList.size();
+    }
+
+    /**
      * Replaces the contents of this list with {@code items}.
      * {@code items} must not contain duplicate items.
      * @param items Items to replace.

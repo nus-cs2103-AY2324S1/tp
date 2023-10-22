@@ -1,8 +1,7 @@
 package networkbook.testutil;
 
-
+import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.CreateCommand;
-import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
@@ -56,7 +55,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code AddPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditCommand.EditPersonDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(AddCommand.AddPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(" ")
                                                     .append(name.fullName).append(" "));

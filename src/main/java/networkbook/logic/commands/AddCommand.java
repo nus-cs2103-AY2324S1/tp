@@ -321,7 +321,7 @@ public class AddCommand extends Command {
          * Adds {@code specialisations} to the list of {@code specialisations}.
          */
         public void addCourse(Course course) {
-            this.courses = Optional.of(this.courses).map(courses -> {
+            this.courses = Optional.ofNullable(this.courses).map(courses -> {
                 courses.add(course);
                 return courses;
             }).or(() -> {
@@ -343,7 +343,7 @@ public class AddCommand extends Command {
          * Adds {@code specialisations} to the list of {@code specialisations}.
          */
         public void addSpecialisation(Specialisation specialisation) {
-            this.specialisations = Optional.of(this.specialisations).map(specialisations -> {
+            this.specialisations = Optional.ofNullable(this.specialisations).map(specialisations -> {
                 specialisations.add(specialisation);
                 return specialisations;
             }).or(() -> {

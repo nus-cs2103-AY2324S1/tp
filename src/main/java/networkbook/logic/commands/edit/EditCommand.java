@@ -51,7 +51,7 @@ public class EditCommand extends Command {
      * @param editAction the action to edit the person.
      */
     public EditCommand(Index index, EditAction editAction) {
-        requireAllNonNull(index);
+        requireAllNonNull(index, editAction);
 
         this.index = index;
         this.editAction = editAction;

@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import networkbook.logic.Messages;
+import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.ClearCommand;
 import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.DeleteCommand;
@@ -26,7 +27,7 @@ import networkbook.model.person.Person;
 import networkbook.model.person.PersonSortComparator;
 import networkbook.model.person.PersonSortComparator.SortField;
 import networkbook.model.person.PersonSortComparator.SortOrder;
-import networkbook.testutil.EditPersonDescriptorBuilder;
+import networkbook.testutil.AddPersonDescriptorBuilder;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.PersonUtil;
 import networkbook.testutil.TypicalIndexes;
@@ -58,11 +59,11 @@ public class NetworkBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased() + " "
                 + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, editPersonDescriptor -> {}), command);
     }
 
     @Test

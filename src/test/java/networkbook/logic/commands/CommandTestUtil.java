@@ -10,14 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import networkbook.commons.core.index.Index;
-import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
 import networkbook.model.NetworkBook;
 import networkbook.model.person.NameContainsKeywordsPredicate;
 import networkbook.model.person.Person;
-import networkbook.testutil.EditPersonDescriptorBuilder;
+import networkbook.testutil.AddPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -89,15 +88,15 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final AddCommand.AddPersonDescriptor DESC_AMY;
+    public static final AddCommand.AddPersonDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new AddPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withLink(VALID_LINK_AMY)
                 .withGraduation(VALID_GRADUATION_AMY).withCourse(VALID_COURSE_AMY)
                 .withSpecialisation(VALID_SPECIALISATION_AMY).withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new AddPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withLink(VALID_LINK_BOB)
                 .withGraduation(VALID_GRADUATION_BOB).withCourse(VALID_COURSE_BOB)
                 .withSpecialisation(VALID_SPECIALISATION_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
