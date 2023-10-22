@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.musician.exceptions.DuplicateMusicianException;
 import seedu.address.model.musician.exceptions.MusicianNotFoundException;
 
@@ -48,7 +49,13 @@ public class UniqueMusicianList implements Iterable<Musician> {
         }
         internalList.add(toAdd);
     }
-
+    /**
+     * Returns the musician at the index
+     */
+    public Musician get(Index index) {
+        requireNonNull(index);
+        return internalList.get(index.getZeroBased());
+    }
     /**
      * Replaces the musician {@code target} in the list with {@code editedMusician}.
      * {@code target} must exist in the list.

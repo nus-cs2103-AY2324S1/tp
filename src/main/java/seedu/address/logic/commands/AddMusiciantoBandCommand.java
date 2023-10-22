@@ -30,6 +30,7 @@ public class AddMusiciantoBandCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New musician added to band: %1$s";
     public static final String MESSAGE_DUPLICATE_MUSICIAN = "This musician already exists in the band";
 
+
     private final Index bandToAddInto;
     private final Index musicianToAdd;
 

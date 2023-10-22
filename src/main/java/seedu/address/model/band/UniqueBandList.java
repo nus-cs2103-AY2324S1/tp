@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.band.exceptions.BandNotFoundException;
 import seedu.address.model.band.exceptions.DuplicateBandException;
 import seedu.address.model.musician.Musician;
@@ -48,6 +49,13 @@ public class UniqueBandList implements Iterable<Band> {
             throw new DuplicateBandException();
         }
         internalList.add(toAdd);
+    }
+    /**
+     * Returns the band at the index
+     */
+    public Band get(Index index) {
+        requireNonNull(index);
+        return internalList.get(index.getZeroBased());
     }
 
     /**
