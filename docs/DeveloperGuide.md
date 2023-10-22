@@ -251,6 +251,26 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+### Help feature
+#### Implementation
+1. When the user enters the term help. it triggers the help feature in the parser under the switch case.
+2. After it is triggered, it will display a short list of possible commands that the user can use.
+#### Notes
+1. Help can be called anytime and has no format to follow. The popup screen is disabled to avoid confusion but can be enabled in the future if need be.
+
+### Confirmation + Clear command
+#### Implementation
+1. This features requires the state of the parser to be known.
+2. The parser is modified to store the previous taken in command, in this case whether the previous command was a successful clear command.
+3. If the previous command is not a clear command, it looks for the keyword clear. Otherwise, it looks for the keyword yes.
+4. Hence, the user will first need to call clear, before calling yes to invoke the clear mechanism, ensuring safety of data.
+#### Notes
+1. If you would like to extend the code for more features that require state, please do change the case condition for this feature.
+2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future update.
+3. The state of the parser, rather than the app is used to reduce the chances of accidental clears.
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
