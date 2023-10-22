@@ -52,16 +52,16 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredApplicantList().size());
-        Applicant lastApplicant = model.getFilteredApplicantList().get(indexLastPerson.getZeroBased());
+        Index indexLastApplicant = Index.fromOneBased(model.getFilteredApplicantList().size());
+        Applicant lastApplicant = model.getFilteredApplicantList().get(indexLastApplicant.getZeroBased());
 
-        ApplicantBuilder personInList = new ApplicantBuilder(lastApplicant);
-        Applicant editedApplicant = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        ApplicantBuilder applicantInList = new ApplicantBuilder(lastApplicant);
+        Applicant editedApplicant = applicantInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditCommand.EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        EditCommand editCommand = new EditCommand(indexLastApplicant, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS,
                 Messages.formatApplicant(editedApplicant));
@@ -116,7 +116,7 @@ public class EditCommandTest {
     public void execute_duplicateApplicantFilteredList_failure() {
         showApplicantAtIndex(model, INDEX_FIRST);
 
-        // edit person in filtered list into a duplicate in address book
+        // edit applicant in filtered list into a duplicate in address book
         Applicant applicantInList = model.getAddressBook().getApplicantList().get(INDEX_SECOND.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST,
                 new EditApplicantDescriptorBuilder(applicantInList).build());

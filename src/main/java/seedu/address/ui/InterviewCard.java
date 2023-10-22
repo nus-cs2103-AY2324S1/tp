@@ -44,5 +44,6 @@ public class InterviewCard extends UiPart<Region> {
         applicant.setText(interview.getInterviewApplicant().getName().fullName); // Todo: Change needed
         jobRole.setText(interview.getJobRole()); // Todo: Change needed
         interviewTiming.setText(interview.getInterviewTiming()); // Todo: Change needed
+        cardPane.setStyle("-fx-border-color: #7a7a2c; -fx-border-width: 3;");
     }
 }

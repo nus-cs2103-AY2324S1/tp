@@ -48,10 +48,10 @@ class JsonAdaptedInterview {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Interview} object.
+     * Converts this Jackson-friendly adapted applicant object into the model's {@code Interview} object.
      *
      * @throws seedu.address.commons.exceptions.IllegalValueException if there were any data constraints
-     *     violated in the adapted person.
+     *     violated in the adapted applicant.
      */
     public Interview toModelType() throws IllegalValueException {
 
