@@ -177,7 +177,8 @@ Format: `sort by/ATTRIBUTE`
 * The attribute has to be non-empty and exist (Position/ID/Phone/Email/Salary)
 
 Examples:
-* `sort by/Salary` deletes the employee with employee id EID1234-5678 in the employee list.
+* `sort by/Salary` sorts the employee list such that their salaries are arranged 
+  in ascending order from top to bottom
 
 ![sort success](images/sortSuccess.png)
 

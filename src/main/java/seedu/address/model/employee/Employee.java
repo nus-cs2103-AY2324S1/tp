@@ -26,6 +26,7 @@ public class Employee {
     // Data fields
     private final Salary salary;
     private final Set<Department> departments = new HashSet<>();
+    private final OvertimeHours overtimeHours;
 
     /**
      * Every field must be present and not null.
@@ -40,6 +41,7 @@ public class Employee {
         this.email = email;
         this.salary = salary;
         this.departments.addAll(departments);
+        this.overtimeHours = new OvertimeHours(72);
     }
 
     public Name getName() {
@@ -66,6 +68,9 @@ public class Employee {
         return salary;
     }
 
+    public OvertimeHours getOvertimeHours() {
+        return this.overtimeHours;
+    }
 
     /**
      * Returns an immutable department set, which throws {@code UnsupportedOperationException}
@@ -110,13 +115,14 @@ public class Employee {
                 && phone.equals(otherEmployee.phone)
                 && email.equals(otherEmployee.email)
                 && salary.equals(otherEmployee.salary)
-                && departments.equals(otherEmployee.departments);
+                && departments.equals(otherEmployee.departments)
+                && overtimeHours.equals(otherEmployee.overtimeHours);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, position, id, phone, email, salary, departments);
+        return Objects.hash(name, position, id, phone, email, salary, departments, overtimeHours);
     }
 
     @Override
@@ -129,6 +135,7 @@ public class Employee {
                 .add("email", email)
                 .add("salary", salary)
                 .add("departments", departments)
+                .add("overtime hours", overtimeHours)
                 .toString();
     }
 
