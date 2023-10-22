@@ -47,7 +47,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateApplicants_throwsDuplicateApplicantException() {
-        // Two persons with the same identity fields
+        // Two applicants with the same identity fields
         Applicant editedAlice = new ApplicantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Applicant> newApplicants = Arrays.asList(ALICE, editedAlice);
@@ -57,17 +57,17 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasApplicant_nullPerson_throwsNullPointerException() {
+    public void hasApplicant_nullApplicant_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasApplicant(null));
     }
 
     @Test
-    public void hasApplicant_personNotInAddressBook_returnsFalse() {
+    public void hasApplicant_applicantNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasApplicant_personInAddressBook_returnsTrue() {
+    public void hasApplicant_applicantInAddressBook_returnsTrue() {
         addressBook.addApplicant(ALICE);
         assertTrue(addressBook.hasApplicant(ALICE));
     }
@@ -89,7 +89,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasApplicant_applicantWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addApplicant(ALICE);
         Applicant editedAlice = new ApplicantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -97,7 +97,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getApplicantList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getApplicantList().remove(0));
     }
 
@@ -108,7 +108,7 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose applicants list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Interview> interviews = FXCollections.observableArrayList();

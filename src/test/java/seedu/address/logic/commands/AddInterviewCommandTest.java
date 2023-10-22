@@ -13,7 +13,7 @@ import seedu.address.testutil.TypicalIndexes;
 
 /**
  * Tests the AddInterviewCommand class
- * Adapted from AB3 AddCommandTest
+ * Adapted from AB3's AddCommandTest
  */
 public class AddInterviewCommandTest {
 

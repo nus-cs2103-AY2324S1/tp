@@ -66,7 +66,7 @@ public class ApplicantTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different person -> returns false
+        // different applicant -> returns false
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
