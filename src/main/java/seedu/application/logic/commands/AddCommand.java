@@ -33,7 +33,7 @@ public class AddCommand extends Command {
         + PREFIX_ROLE + "Software Engineer "
         + PREFIX_DEADLINE + "Dec 31 2030 1200"
         + PREFIX_STATUS + "pending\n"
-        + PREFIX_INDUSTRY + "Healthcare";
+        + PREFIX_INDUSTRY + "Technology";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book";
