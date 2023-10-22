@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane groups;
+    @FXML
+    private FlowPane free_time;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -56,5 +58,6 @@ public class PersonCard extends UiPart<Region> {
                 .toStream()
                 .sorted(Comparator.comparing(Group::getGroupName))
                 .forEach(group -> groups.getChildren().add(new Label(group.getGroupName())));
+        person.getFreeTime().iterator().forEachRemaining(interval -> free_time.getChildren().add(new Label(interval.toString())));
     }
 }

@@ -86,7 +86,9 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withGroupList(String ...args) {
-        Arrays.stream(args).forEach(group -> grpList.add(new Group(group)));
+        GroupList gL = new GroupList();
+        Arrays.stream(args).forEach(group -> gL.add(new Group(group)));
+        this.grpList = gL;
         return this;
     }
 

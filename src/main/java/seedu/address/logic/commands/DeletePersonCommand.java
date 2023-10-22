@@ -1,16 +1,20 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.GroupList;
 import seedu.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Deletes person from the addressbook and group.
+ */
 public class DeletePersonCommand extends DeleteCommand {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     private final String personName;
+
     public DeletePersonCommand(String personName) {
         this.personName = personName;
     }
@@ -33,6 +37,7 @@ public class DeletePersonCommand extends DeleteCommand {
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName().fullName));
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -51,7 +56,7 @@ public class DeletePersonCommand extends DeleteCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", personName)
-                .toString();
+            .add("name", personName)
+            .toString();
     }
 }
