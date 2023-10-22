@@ -20,7 +20,6 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Doctor;
 
-
 /**
  * A utility class containing a list of {@code Patient} objects to be used in tests.
  */
