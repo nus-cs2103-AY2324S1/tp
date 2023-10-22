@@ -5,17 +5,17 @@ title: User Guide
 
 # Table of Contents
 
-- [Introduction](#Introduction)
-- [Quick Start](#QuickStart)
-- [GUI Summary](#GUISummary)
-- [Features](#Features)
-- [Frequently Asked Questions](#FrequentlyAskedQuetions)
-- [Known Issues](#KnownIssues)
-- [Command Summary](#CommandSummary)
-  - [General Command](##GeneralCommand)
-  - [Application Management Command](##ApplicationManagementCommand)
-  - [Interview Management Command](##InterviewManagementCommand)
-- [Glossary](#Glossary)
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+- [GUI Summary](#gui-summary)
+- [Features](#features)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Known Issues](#known-issues)
+- [Command Summary](#command-summary)
+  - [General Command](#general-command)
+  - [Application Management Command](#applicant-management-command)
+  - [Interview Management Command](#interview-management-command)
+- [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ It is optimized for use via a **Command Line Interface** (CLI) while still havin
 
 If you can type fast, IH can get your Interview management tasks done faster than traditional GUI apps.
 
-Let's get started by following the [Quick Start](#Quick Start) section!
+Let's get started by following the [Quick Start](#quick-start) section!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ Let's get started by following the [Quick Start](#Quick Start) section!
 
 4. Double-click the file to start the app. The Graphical User Interface(GUI) should appear in a few seconds.
 
-5. To get a better understanding of what you see. Please refer to the [GUI Summary](#GUI Summary) for more details.
+5. To get a better understanding of what you see. Please refer to the [GUI Summary](#gui-summary) for more details.
 --------------------------------------------------------------------------------------------------------------------
 
 # GUI Summary
@@ -50,8 +50,6 @@ Let's get started by following the [Quick Start](#Quick Start) section!
 
 --------------------------------------------------------------------------------------------------------------------
 # Features
-
-<div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
@@ -69,7 +67,6 @@ Let's get started by following the [Quick Start](#Quick Start) section!
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `nuke` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-</div>
 
 ## Viewing help : `help`
 
@@ -325,3 +322,9 @@ _Details coming soon ..._
 | **Edit interview**        | `edit-i INTERVIEW_INDEX [app/APPLICANT_INDEX] [jr/JOB_TITLE] [time/INTERVIEW_DATETIME]`<br> e.g.,`edit-i 2 jr/software-engineer`      |
 | **Find interview by job** | `find-i KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-i software-engineer`                                                                 |
 | **List interview**        | `list-i`                                                                                                                              |
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Glossary
+
+TBD
