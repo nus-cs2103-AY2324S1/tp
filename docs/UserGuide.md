@@ -164,6 +164,18 @@ Examples:
 * `lookup c/T11` returns all students in class number T11<br>
   ![result for 'lookup c/T11'](images/lookupClassResult.png)
 
+### Marking tutorial attendance for a student : `mark`
+
+Marking tutorial attendance for an existing student in the address book.
+
+Format: `mark TUTORIAL_INDEX s/STUDENT_NUMBER`
+
+* The STUDENT NUMBER must be valid and exist.
+* The TUTORIAL_INDEX must be a valid positive integer.
+
+Examples:
+* `mark 1 s/A0249112A` 
+
 ### Deleting a student : `delete`
 
 Deletes the specific student.
@@ -252,6 +264,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **Tag**    | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`
 **Lookup** | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`
+**Mark**   | `mark TUTORIAL_INDEX s/STUDENT_NUMBER`
 **List**   | `list`
 **Help**   | `help`
 **Load**   | `load f/FILE_NAME`
