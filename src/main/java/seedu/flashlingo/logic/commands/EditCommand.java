@@ -33,17 +33,18 @@ public class EditCommand extends Command {
           + PREFIX_TRANSLATED_WORD + "再见";
 
     private final Index index;
-    private final FlashCard replacedFlashCard;
+    private final String replacedWord;
+    private final String replacedTranslation;
     /**
      * @param index of the flashcard in the list to edit
-     * @param replacedFlashCard details to edit the flashcard with
+     * @param word details to edit the flashcard with
+     * @param translation details to edit the flashcard with
      */
-    public EditCommand(Index index, FlashCard replacedFlashCard) {
+    public EditCommand(Index index, String word, String translation) {
         requireNonNull(index);
-        requireNonNull(replacedFlashCard);
-
         this.index = index;
-        this.replacedFlashCard = replacedFlashCard;
+        this.replacedWord = word;
+        this.replacedTranslation = translation;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -55,9 +56,9 @@ public class EditCommand extends Command {
         }
 
         FlashCard flashCardToEdit = lastShownList.get(index.getZeroBased());
-        FlashCard editedFlashCard = this.replacedFlashCard;
+        FlashCard editedFlashCard = flashCardToEdit.editFlashCard(replacedWord, replacedTranslation);
 
-        if (!flashCardToEdit.isSameFlashCard(editedFlashCard) && model.hasFlashCard(editedFlashCard)) {
+        if (editedFlashCard == null || model.hasFlashCard(editedFlashCard)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_FLASHCARD);
         }
         System.out.println("here");
@@ -79,14 +80,16 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-            && replacedFlashCard.equals(otherEditCommand.replacedFlashCard);
+                && replacedWord.equals(otherEditCommand.replacedWord)
+                && replacedTranslation.equals(otherEditCommand.replacedTranslation);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
           .add("index", index)
-          .add("replacedFlashCard", replacedFlashCard)
+          .add("replacedWord", replacedWord)
+                .add("replacedTranslation", replacedTranslation)
           .toString();
     }
 }

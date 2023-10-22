@@ -32,6 +32,17 @@ public class OriginalWord extends Word {
     public boolean isTranslatedWord() {
         return false;
     }
+
+    /**
+     * Edits this word
+     * @param newWord The new word to replace this word
+     * @return The new word
+     */
+    @Override
+    public OriginalWord editWord(String newWord) {
+        return new OriginalWord(newWord, getLanguage());
+    }
+
     /**
      * Checks whether this Original Word is equal to the passed object
      * @param other Passed object to check equality against
