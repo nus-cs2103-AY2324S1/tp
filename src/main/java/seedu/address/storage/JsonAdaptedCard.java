@@ -85,7 +85,7 @@ class JsonAdaptedCard {
             cardTags.add(tag.toModelType());
         }
 
-        return new Card(modelQuestion, modelAnswer, difficulty, cardTags);
+        return new  Card(modelQuestion, modelAnswer, difficulty, cardTags);
     }
 
 }

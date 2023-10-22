@@ -2,10 +2,12 @@
   "cards" : [
     {
       "question" : "How many types of numerical representation is covered in CS2100",
-      "answer" : "3"
+      "answer" : "3",
+      "tags" : [ ]
     },
     {
-      "question" : "When is the 2100 midterm test"
+      "question" : "When is the 2100 midterm test",
+      "tags" : [ ]
     }
   ]
 }

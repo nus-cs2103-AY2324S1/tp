@@ -76,7 +76,7 @@ public class CardTest {
     @Test
     public void toStringMethod() {
         String expected = Card.class.getCanonicalName() + "{question=" + CS1101S.getQuestion()
-                + ", answer=" + CS1101S.getAnswer() + "}";
+                + ", answer=" + CS1101S.getAnswer() + ", tags=[]" +"}";
         assertEquals(expected, CS1101S.toString());
     }
 }

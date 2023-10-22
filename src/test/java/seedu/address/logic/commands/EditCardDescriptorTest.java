@@ -51,9 +51,12 @@ public class EditCardDescriptorTest {
     @Test
     public void toStringMethod() {
         EditCardDescriptor editCardDescriptor = new EditCardDescriptor();
-        String expected = EditCardDescriptor.class.getCanonicalName() + "{question="
-                + editCardDescriptor.getQuestion().orElse(null) + ", answer="
-                + editCardDescriptor.getAnswer().orElse(null) + "}";
+        String expected = EditCardDescriptor.class.getCanonicalName()
+                + "{"
+                + "question=" + editCardDescriptor.getQuestion().orElse(null)
+                + ", answer=" + editCardDescriptor.getAnswer().orElse(null)
+                + ", tags=" + editCardDescriptor.getTags().orElse(null)
+                + "}";
         assertEquals(expected, editCardDescriptor.toString());
     }
 }
