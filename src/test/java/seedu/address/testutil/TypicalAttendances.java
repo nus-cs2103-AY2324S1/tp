@@ -21,7 +21,7 @@ public class TypicalAttendances {
     public static final Attendance DANIEL_DOG_DAY = new AttendanceBuilder().withMemberName("Daniel Meier")
             .withEventName("Dog Celebration Day").withHours("5").withRemark("Bringing dogs").build();
 
-    public static final Attendance ELLE_EHCO_DAY = new AttendanceBuilder().withMemberName("Elle Meyer")
+    public static final Attendance ELLE_ECHO_DAY = new AttendanceBuilder().withMemberName("Elle Meyer")
             .withEventName("Echo Day").withHours("0").withRemark("Absent without reason").build();
 
     public static final Attendance FIONA_FESTIVAL = new AttendanceBuilder().withMemberName("Fiona Kunz")
@@ -33,7 +33,7 @@ public class TypicalAttendances {
     private TypicalAttendances() {} // prevents instantiation
 
     public static List<Attendance> getTypicalAttendance() {
-        return new ArrayList<>(Arrays.asList(ALICE_AURORA, BENSON_BOXING, CARL_CNY, DANIEL_DOG_DAY, ELLE_EHCO_DAY,
+        return new ArrayList<>(Arrays.asList(ALICE_AURORA, BENSON_BOXING, CARL_CNY, DANIEL_DOG_DAY, ELLE_ECHO_DAY,
                 FIONA_FESTIVAL, GEORGE_GRAVITY_DISCOVERY_DAY));
     }
 }

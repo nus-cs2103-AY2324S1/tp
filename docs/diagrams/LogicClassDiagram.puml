@@ -38,7 +38,7 @@ LogicManager --> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
-remark right of XYZCommand: XYZCommand = CreateMemberCommand, \nFindCommand, etc
+note right of XYZCommand: XYZCommand = CreateMemberCommand, \nFindCommand, etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult

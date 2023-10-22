@@ -30,7 +30,7 @@ public class Hours {
      */
     public static boolean isValidHours(String test) {
         try {
-            Integer.valueOf(test);
+            Integer i = Integer.valueOf(test);
             return true;
         } catch (NumberFormatException e) {
             return false;
