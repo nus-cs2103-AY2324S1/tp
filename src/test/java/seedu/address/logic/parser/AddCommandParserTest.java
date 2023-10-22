@@ -17,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_END_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PAYRATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -62,6 +63,7 @@ import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.End;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
@@ -255,6 +257,11 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + DAY_DESC_BOB + BEGIN_DESC_BOB + END_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND + PAYRATE_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
 
+        // invalid payrate
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + DAY_DESC_BOB + BEGIN_DESC_BOB + END_DESC_BOB
+                + TAG_DESC_HUSBAND + VALID_TAG_FRIEND + INVALID_PAYRATE_DESC, PayRate.MESSAGE_CONSTRAINTS);
+
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + INVALID_ADDRESS_DESC + SUBJECT_DESC_BOB + DAY_DESC_BOB + BEGIN_DESC_BOB + END_DESC_BOB
@@ -265,5 +272,6 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + DAY_DESC_BOB + BEGIN_DESC_BOB + END_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + PAYRATE_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
     }
 }

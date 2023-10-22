@@ -15,6 +15,7 @@ public class PayRate {
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * Only accepts positive integers.
      */
     public static final String VALIDATION_REGEX = "^\\d+$";
 
@@ -29,6 +30,7 @@ public class PayRate {
         requireNonNull(payRate);
         checkArgument(isValidPayRate(payRate), MESSAGE_CONSTRAINTS);
         value = Integer.parseInt(payRate);
+        assert value >= 0; // payrate cannot be negative
     }
 
     public static boolean isValidPayRate(String test) {

@@ -186,7 +186,6 @@ public class EditCommand extends Command {
             setDay(toCopy.day);
             setBegin(toCopy.begin);
             setEnd(toCopy.end);
-
             setTags(toCopy.tags);
             setPaid(toCopy.paid);
             setPayRate(toCopy.payRate);
