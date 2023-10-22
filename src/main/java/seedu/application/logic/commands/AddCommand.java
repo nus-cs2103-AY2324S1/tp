@@ -1,7 +1,11 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.logic.Messages;
@@ -22,7 +26,7 @@ public class AddCommand extends Command {
         + PREFIX_ROLE + "ROLE\n"
         + "[Optional] "
         + PREFIX_DEADLINE + "DEADLINE "
-        + PREFIX_STATUS + "STATUS\n\n"
+        + PREFIX_STATUS + "STATUS "
         + PREFIX_INDUSTRY + "INDUSTRY\n\n"
         + "Example: \n"
         + COMMAND_WORD + " "
@@ -32,8 +36,8 @@ public class AddCommand extends Command {
         + COMMAND_WORD + " "
         + PREFIX_COMPANY + "Google "
         + PREFIX_ROLE + "Software Engineer "
-        + PREFIX_DEADLINE + "Dec 31 2030 1200"
-        + PREFIX_STATUS + "pending\n"
+        + PREFIX_DEADLINE + "Dec 31 2030 1200 "
+        + PREFIX_STATUS + "pending "
         + PREFIX_INDUSTRY + "Technology";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
