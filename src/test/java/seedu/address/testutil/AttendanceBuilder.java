@@ -67,7 +67,7 @@ public class AttendanceBuilder {
     /**
      * Sets the {@code Remark} of the {@code Attendance} that we are building.
      */
-    public AttendanceBuilder withLocation(String remark) {
+    public AttendanceBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;
     }
