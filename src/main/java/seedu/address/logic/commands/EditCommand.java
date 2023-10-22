@@ -8,6 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -18,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
+import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -82,8 +84,9 @@ public class EditCommand extends Command {
 
         Question updatedQuestion = editCardDescriptor.getQuestion().orElse(cardToEdit.getQuestion());
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
+        List<Tag> updatedTags = editCardDescriptor.getTags().orElse((cardToEdit.getTags()));
 
-        return new Card(updatedQuestion, updatedAnswer, "new");
+        return new Card(updatedQuestion, updatedAnswer, "new", updatedTags);
     }
 
     @Override
@@ -117,6 +120,7 @@ public class EditCommand extends Command {
     public static class EditCardDescriptor {
         private Question question;
         private Answer answer;
+        private List<Tag> tags;
 
         public EditCardDescriptor() {}
 
@@ -127,13 +131,14 @@ public class EditCommand extends Command {
         public EditCardDescriptor(EditCardDescriptor toCopy) {
             setQuestion(toCopy.question);
             setAnswer(toCopy.answer);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(question, answer);
+            return CollectionUtil.isAnyNonNull(question, answer, tags);
         }
 
         public void setQuestion(Question question) {
@@ -152,6 +157,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(answer);
         }
 
+        public void setTags(List<Tag> tags) {
+            this.tags = tags;
+        }
+
+        public Optional<List<Tag>> getTags() {
+            return Optional.ofNullable(tags);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -166,7 +179,6 @@ public class EditCommand extends Command {
             EditCardDescriptor otherEditCardDescriptor = (EditCardDescriptor) other;
             return Objects.equals(question, otherEditCardDescriptor.question)
                     && Objects.equals(answer, otherEditCardDescriptor.answer);
-
         }
 
         @Override
@@ -174,6 +186,7 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("question", question)
                     .add("answer", answer)
+                    .add("tags", tags)
                     .toString();
         }
     }

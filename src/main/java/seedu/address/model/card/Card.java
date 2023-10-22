@@ -2,29 +2,37 @@ package seedu.address.model.card;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Objects;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
+import seedu.address.storage.JsonAdaptedTag;
 
 /**
  * Represents a Card in lesSON.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Card {
+
+    // Identity fields
     private final Question question;
     private final Answer answer;
+
+    //Data fields
     private String difficulty;
     private Integer priority;
+    private List<Tag> tags = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Card(Question question, Answer answer, String difficulty) {
-        requireAllNonNull(question, answer);
+    public Card(Question question, Answer answer, String difficulty, List<Tag> tags) {
+        requireAllNonNull(question, answer, difficulty, tags);
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
         this.priority = Integer.MAX_VALUE;
+        this.tags.addAll(tags);
     }
 
     public void setDifficulty(String difficulty) {
@@ -42,11 +50,17 @@ public class Card {
     public Answer getAnswer() {
         return answer;
     }
+
     public Integer getPriority() {
         return priority;
     }
+
     public void setPriority(Integer priority) {
         this.priority = priority;
+    }
+
+    public List<Tag> getTags() {
+        return Collections.unmodifiableList(tags);
     }
 
     /**
@@ -93,6 +107,7 @@ public class Card {
         return new ToStringBuilder(this)
                 .add("question", question)
                 .add("answer", answer)
+                .add("tags", tags)
                 .toString();
     }
 
@@ -104,4 +119,5 @@ public class Card {
     public String answertoString() {
         return "Answer: " + this.getAnswer().toString();
     }
+
 }

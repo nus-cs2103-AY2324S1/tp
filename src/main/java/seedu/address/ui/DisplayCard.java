@@ -2,9 +2,16 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.card.Card;
+import seedu.address.model.tag.Tag;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * DisplayCard class to showcase the question and the answr
@@ -30,6 +37,9 @@ public class DisplayCard extends UiPart<Region> {
     @FXML
     private Label question;
 
+    @FXML
+    private FlowPane tags;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -39,6 +49,14 @@ public class DisplayCard extends UiPart<Region> {
         this.card = card;
         id.setText(displayedIndex + ". ");
         question.setText(card.getQuestion().question);
-
+        System.out.println("card get tags list" + card.getTags());
+//        List<Tag> testList = new ArrayList<>();
+//        testList.add(new Tag("Hello2"));
+//        testList.stream()
+//                .sorted(Comparator.comparing(tag -> tag.tagName))
+//                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        card.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

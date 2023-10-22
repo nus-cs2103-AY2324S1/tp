@@ -7,6 +7,13 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
+import seedu.address.model.tag.Tag;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Jackson-friendly version of {@link Card}.
@@ -18,19 +25,20 @@ class JsonAdaptedCard {
     private final String question;
     private final String answer;
     private final String difficulty;
-
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedCard(@JsonProperty("question") String question, @JsonProperty("answer") String answer,
-                           @JsonProperty("difficulty") String difficulty) {
+                           @JsonProperty("difficulty") String difficulty, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.question = question;
         this.answer = answer;
         this.difficulty = difficulty;
-
-
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
     }
 
     /**
@@ -40,6 +48,9 @@ class JsonAdaptedCard {
         question = source.getQuestion().question;
         answer = source.getAnswer().answer;
         difficulty = source.getDifficulty();
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -70,6 +81,11 @@ class JsonAdaptedCard {
 
         final Answer modelAnswer = new Answer(answer);
 
-        return new Card(modelQuestion, modelAnswer, difficulty);
+        final List<Tag> cardTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            cardTags.add(tag.toModelType());
+        }
+
+        return new Card(modelQuestion, modelAnswer, difficulty, cardTags);
     }
 }

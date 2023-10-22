@@ -58,7 +58,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         DeckStorage deckStorage = new JsonDeckStorage((userPrefs.getDeckFilePath()));
-        storage = new StorageManager((DeckStorage) deckStorage, userPrefsStorage);
+        storage = new StorageManager( deckStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
