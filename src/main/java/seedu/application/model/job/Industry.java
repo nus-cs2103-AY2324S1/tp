@@ -67,5 +67,4 @@ public class Industry {
     public int hashCode() {
         return industry.hashCode();
     }
-
 }
