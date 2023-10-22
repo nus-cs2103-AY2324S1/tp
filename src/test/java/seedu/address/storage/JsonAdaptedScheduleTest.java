@@ -85,10 +85,10 @@ public class JsonAdaptedScheduleTest {
     }
 
     @Test
-    public void toModelType_invalidStatus_throwsIllegalArgumentException() {
+    public void toModelType_invalidStatus_throwsIllegalValueException() {
         JsonAdaptedSchedule schedule =
             new JsonAdaptedSchedule(VALID_NAME, VALID_STARTTIME, VALID_ENDTIME, INVALID_STATUS);
-        assertThrows(IllegalArgumentException.class, () -> schedule.toModelType(original));
+        assertThrows(IllegalValueException.class, () -> schedule.toModelType(original));
     }
 
     @Test

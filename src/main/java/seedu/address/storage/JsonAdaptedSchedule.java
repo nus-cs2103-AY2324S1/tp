@@ -91,6 +91,9 @@ class JsonAdaptedSchedule {
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
         }
+        if (!Status.isValidStatus(status)) {
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
         return new Schedule(getTutorFromName(modelName, addressBook), modelStartTime, modelEndTime,
             Status.valueOf(status));
     }

@@ -10,5 +10,22 @@ package seedu.address.model.schedule;
 public enum Status {
     MISSED,
     COMPLETED,
-    PENDING,
+    PENDING;
+
+    public static final String MESSAGE_CONSTRAINTS = "Status has to be either MISSED, COMPLETED or PENDING";
+
+    /**
+     * Checks if the provided status string is a valid schedule status.
+     *
+     * @param status The status string to be validated.
+     * @return {@code true} if the status is valid, {@code false} otherwise.
+     */
+    public static boolean isValidStatus(String status) {
+        try {
+            Status.valueOf(status.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
 }
