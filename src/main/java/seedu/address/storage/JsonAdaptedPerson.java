@@ -49,7 +49,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        groupList.addAll(source.getGroups().toStream().map(Group::getGroupName)
+        groupList.addAll(source.getGroups().toStream()
                 .map(JsonAdaptedGroup::new)
                 .collect(Collectors.toList()));
     }

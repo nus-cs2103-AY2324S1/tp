@@ -15,13 +15,15 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedGroup {
 
     private final String groupName;
+    private final String groupRemark;
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given {@code groupName}.
      */
     @JsonCreator
-    public JsonAdaptedGroup(@JsonProperty("name") String groupName) {
+    public JsonAdaptedGroup(@JsonProperty("name") String groupName, @JsonProperty("groupRemark") String groupRemark) {
         this.groupName = groupName;
+        this.groupRemark = groupRemark;
     }
 
     /**
@@ -29,6 +31,7 @@ class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(Group source) {
         groupName = source.getGroupName();
+        groupRemark = source.getGroupRemark().value;
     }
 
     /**
@@ -39,6 +42,9 @@ class JsonAdaptedGroup {
     public Group toModelType() throws IllegalValueException {
         if (!Group.isValidGroup(groupName)) {
             throw new IllegalValueException("illegal value");
+        }
+        if (groupRemark != null) {
+            return new Group(groupName, new GroupRemark(groupRemark));
         }
         return new Group(groupName);
     }

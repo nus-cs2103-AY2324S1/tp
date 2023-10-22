@@ -35,7 +35,7 @@ public class DeleteGroupCommand extends DeleteCommand {
             }
         });
 
-        return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete.getName()));
+        return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete.getGroupName()));
     }
 
     @Override
