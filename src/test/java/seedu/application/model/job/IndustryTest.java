@@ -1,9 +1,9 @@
 package seedu.application.model.job;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.application.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 class IndustryTest {
 

@@ -19,7 +19,6 @@ import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.ApplicationBook;
 import seedu.application.model.Model;
 import seedu.application.model.job.FieldContainsKeywordsPredicate;
-import seedu.application.model.job.Industry;
 import seedu.application.model.job.Job;
 import seedu.application.testutil.EditJobDescriptorBuilder;
 
