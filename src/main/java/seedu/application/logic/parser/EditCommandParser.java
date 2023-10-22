@@ -2,7 +2,12 @@ package seedu.application.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.application.commons.core.index.Index;
 import seedu.application.logic.commands.EditCommand;
@@ -22,8 +27,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE,
-                    PREFIX_STATUS, PREFIX_INDUSTRY);
+            ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS,
+                    PREFIX_JOBTYPE, PREFIX_INDUSTRY);
 
         Index index;
 
@@ -33,8 +38,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE,
-                PREFIX_STATUS, PREFIX_INDUSTRY);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS,
+                PREFIX_JOBTYPE, PREFIX_INDUSTRY);
 
         EditCommand.EditJobDescriptor editJobDescriptor = new EditCommand.EditJobDescriptor();
 
@@ -47,11 +52,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
             editJobDescriptor.setDeadline(ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get()));
         }
-
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editJobDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
-
+        if (argMultimap.getValue(PREFIX_JOBTYPE).isPresent()) {
+            editJobDescriptor.setJobType(ParserUtil.parseJobType(argMultimap.getValue(PREFIX_JOBTYPE).get()));
+        }
         if (argMultimap.getValue(PREFIX_INDUSTRY).isPresent()) {
             editJobDescriptor.setIndustry(ParserUtil.parseIndustry(argMultimap.getValue(PREFIX_INDUSTRY).get()));
         }

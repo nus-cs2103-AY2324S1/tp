@@ -79,7 +79,7 @@ public class JobTest {
     public void toStringMethod() {
         String expected = Job.class.getCanonicalName() + "{role=" + CHEF.getRole() + ", company="
                 + CHEF.getCompany() + ", deadline=" + CHEF.getDeadline() + ", status=" + CHEF.getStatus()
-                + ", industry=" + CHEF.getIndustry() + "}";
+                + ", jobType=" + CHEF.getJobType() + ", industry=" + CHEF.getIndustry() + "}";
         assertEquals(expected, CHEF.toString());
     }
 }

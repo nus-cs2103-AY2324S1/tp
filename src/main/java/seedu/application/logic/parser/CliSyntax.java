@@ -10,6 +10,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ROLE = new Prefix("r/");
     public static final Prefix PREFIX_DEADLINE = new Prefix("d/");
     public static final Prefix PREFIX_STATUS = new Prefix("s/");
+    public static final Prefix PREFIX_JOBTYPE = new Prefix("t/");
     public static final Prefix PREFIX_INDUSTRY = new Prefix("i/");
 
 }

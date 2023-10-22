@@ -27,6 +27,7 @@ public class EditJobDescriptorBuilder {
         descriptor.setCompany(job.getCompany());
         descriptor.setDeadline(job.getDeadline());
         descriptor.setStatus(job.getStatus());
+        descriptor.setJobType(job.getJobType());
         descriptor.setIndustry(job.getIndustry());
     }
 
@@ -59,6 +60,14 @@ public class EditJobDescriptorBuilder {
      */
     public EditJobDescriptorBuilder withStatus(String status) {
         descriptor.setStatus(new Status(status));
+        return this;
+    }
+
+    /**
+     * Sets the {@code JobType} of the {@code EditJobDescriptor} that we are building.
+     */
+    public EditJobDescriptorBuilder withJobType(String jobType) {
+        descriptor.setJobType(new JobType(jobType));
         return this;
     }
 

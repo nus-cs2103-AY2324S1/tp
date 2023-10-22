@@ -16,17 +16,20 @@ public class Job {
     private final Company company;
     private final Deadline deadline;
     private final Status status;
+    private final JobType jobType;
     private final Industry industry;
 
     /**
      * Not all fields are compulsory
      */
-    public Job(Role role, Company company, Deadline deadline, Status status, Industry industry) {
+    public Job(Role role, Company company, Deadline deadline, Status status, JobType jobType,
+               Industry industry) {
         CollectionUtil.requireAllNonNull(role, company);
         this.role = role;
         this.company = company;
         this.deadline = deadline;
         this.status = status;
+        this.jobType = jobType;
         this.industry = industry;
     }
 
@@ -44,6 +47,10 @@ public class Job {
 
     public Status getStatus() {
         return status;
+    }
+
+    public JobType getJobType() {
+        return jobType;
     }
 
     public Industry getIndustry() {
@@ -84,6 +91,7 @@ public class Job {
             && company.equals(otherJob.company)
             && deadline.equals(otherJob.deadline)
             && status.equals(otherJob.status)
+            && jobType.equals(otherJob.jobType)
             && industry.equals(otherJob.industry);
     }
 
@@ -100,6 +108,7 @@ public class Job {
             .add("company", company)
             .add("deadline", deadline)
             .add("status", status)
+            .add("jobType", jobType)
             .add("industry", industry)
             .toString();
     }

@@ -21,7 +21,7 @@ public class JsonApplicationBookStorage implements ApplicationBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonApplicationBookStorage.class);
 
-    private Path filePath;
+    private final Path filePath;
 
     public JsonApplicationBookStorage(Path filePath) {
         this.filePath = filePath;
@@ -47,7 +47,7 @@ public class JsonApplicationBookStorage implements ApplicationBookStorage {
 
         Optional<JsonSerializableApplicationBook> jsonApplicationBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableApplicationBook.class);
-        if (!jsonApplicationBook.isPresent()) {
+        if (jsonApplicationBook.isEmpty()) {
             return Optional.empty();
         }
 

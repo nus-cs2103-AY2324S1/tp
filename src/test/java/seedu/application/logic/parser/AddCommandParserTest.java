@@ -1,8 +1,34 @@
 package seedu.application.logic.parser;
 
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.application.logic.commands.CommandTestUtil.*;
-import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.commands.CommandTestUtil.COMPANY_DESC_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.COMPANY_DESC_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.DEADLINE_DESC_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.DEADLINE_DESC_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.INDUSTRY_DESC_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.INDUSTRY_DESC_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.INVALID_COMPANY_DESC;
+import static seedu.application.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
+import static seedu.application.logic.commands.CommandTestUtil.INVALID_INDUSTRY_DESC;
+import static seedu.application.logic.commands.CommandTestUtil.INVALID_JOBTYPE_DESC;
+import static seedu.application.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
+import static seedu.application.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
+import static seedu.application.logic.commands.CommandTestUtil.JOBTYPE_DESC_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.JOBTYPE_DESC_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.application.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.application.logic.commands.CommandTestUtil.ROLE_DESC_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.ROLE_DESC_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.STATUS_DESC_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.STATUS_DESC_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANER;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.application.testutil.TypicalJobs.CLEANER;
@@ -25,14 +51,14 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + ROLE_DESC_CLEANER + COMPANY_DESC_CLEANER
-                        + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + INDUSTRY_DESC_CLEANER,
+                        + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + JOBTYPE_DESC_CLEANER + INDUSTRY_DESC_CLEANER,
             new AddCommand(expectedJob));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedJobString = ROLE_DESC_CLEANER + COMPANY_DESC_CLEANER
-            + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + INDUSTRY_DESC_CLEANER;
+            + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + JOBTYPE_DESC_CLEANER + INDUSTRY_DESC_CLEANER;
 
         // multiple roles
         assertParseFailure(parser, ROLE_DESC_CHEF + validExpectedJobString,
@@ -50,6 +76,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, STATUS_DESC_CHEF + validExpectedJobString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
 
+        // multiple jobTypes
+        assertParseFailure(parser, JOBTYPE_DESC_CHEF + validExpectedJobString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOBTYPE));
+
         // multiple industries
         assertParseFailure(parser, INDUSTRY_DESC_CHEF + validExpectedJobString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INDUSTRY));
@@ -57,10 +87,10 @@ public class AddCommandParserTest {
         // multiple fields repeated
         assertParseFailure(parser,
             validExpectedJobString + COMPANY_DESC_CHEF + ROLE_DESC_CHEF
-                + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + INDUSTRY_DESC_CLEANER
+                + DEADLINE_DESC_CLEANER + STATUS_DESC_CLEANER + JOBTYPE_DESC_CLEANER + INDUSTRY_DESC_CLEANER
                 + validExpectedJobString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE, PREFIX_COMPANY,
-                    PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_INDUSTRY));
+                    PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_JOBTYPE, PREFIX_INDUSTRY));
 
         // invalid value followed by valid value
 
@@ -72,13 +102,17 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_COMPANY_DESC + validExpectedJobString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COMPANY));
 
-        // invalid company
+        // invalid deadline
         assertParseFailure(parser, INVALID_DEADLINE_DESC + validExpectedJobString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DEADLINE));
 
         // invalid status
         assertParseFailure(parser, INVALID_STATUS_DESC + validExpectedJobString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
+
+        // invalid jobType
+        assertParseFailure(parser, INVALID_JOBTYPE_DESC + validExpectedJobString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOBTYPE));
 
         // invalid industry
         assertParseFailure(parser, INVALID_INDUSTRY_DESC + validExpectedJobString,
@@ -101,6 +135,10 @@ public class AddCommandParserTest {
         // invalid status
         assertParseFailure(parser, validExpectedJobString + INVALID_STATUS_DESC,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STATUS));
+
+        // invalid jobType
+        assertParseFailure(parser, validExpectedJobString + INVALID_JOBTYPE_DESC,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOBTYPE));
 
         // invalid industry
         assertParseFailure(parser, validExpectedJobString + INVALID_INDUSTRY_DESC,

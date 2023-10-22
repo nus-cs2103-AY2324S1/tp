@@ -17,6 +17,7 @@ class JsonAdaptedJob {
     private final String company;
     private final String status;
     private final String deadline;
+    private final String jobType;
     private final String industry;
 
     /**
@@ -25,11 +26,12 @@ class JsonAdaptedJob {
     @JsonCreator
     public JsonAdaptedJob(@JsonProperty("role") String role, @JsonProperty("company") String company,
                           @JsonProperty("status") String status, @JsonProperty("deadline") String deadline,
-                          @JsonProperty("industry") String industry) {
+                          @JsonProperty("jobType") String jobType, @JsonProperty("industry") String industry) {
         this.role = role;
         this.company = company;
         this.status = status;
         this.deadline = deadline;
+        this.jobType = jobType;
         this.industry = industry;
     }
 
@@ -41,6 +43,7 @@ class JsonAdaptedJob {
         company = source.getCompany().name;
         status = source.getStatus().status;
         deadline = source.getDeadline().deadline;
+        jobType = source.getJobType().jobType;
         industry = source.getIndustry().industry;
     }
 
@@ -86,6 +89,15 @@ class JsonAdaptedJob {
         }
         final Deadline modelDeadline = new Deadline(deadline);
 
+        if (jobType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    JobType.class.getSimpleName()));
+        }
+        if (!JobType.isValidJobType(jobType)) {
+            throw new IllegalValueException(JobType.MESSAGE_CONSTRAINTS);
+        }
+        final JobType modelJobType = new JobType(jobType);
+
         if (industry == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Industry.class.getSimpleName()));
@@ -95,7 +107,7 @@ class JsonAdaptedJob {
         }
         final Industry modelIndustry = new Industry(industry);
 
-        return new Job(modelRole, modelCompany, modelDeadline, modelStatus, modelIndustry);
+        return new Job(modelRole, modelCompany, modelDeadline, modelStatus, modelJobType, modelIndustry);
     }
 
 }
