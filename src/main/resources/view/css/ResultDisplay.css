@@ -1,7 +1,7 @@
 .result-display {
     -fx-background-color: #DCDCDC;
     -fx-background-radius: 15;
-    -fx-font-family: "Inter Light";
+    -fx-font-family: "Inter Bold";
     -fx-font-size: 13pt;
     -fx-text-fill: #5C5C5C;
     -fx-effect: dropshadow(gaussian, rgba(00, 00, 00, 0.25), 4, 0, 2, 2);

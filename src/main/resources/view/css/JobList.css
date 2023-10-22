@@ -33,20 +33,21 @@
 }
 
 .cell_big_label {
-    -fx-font-family: "Inter Black";
-    -fx-font-weight: 900;
-    -fx-font-size: 24px;
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
     -fx-text-fill: #343434;
 }
 
 .cell_small_label {
-    -fx-font-family: "Inter Light";
-    -fx-font-size: 16px;
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-size: 14px;
     -fx-text-fill: #787878;
 }
 
 .cell_index_label {
-    -fx-font-family: "Inter Light";
+    -fx-font-family: "Tahoma", sans-serif;
+    -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-text-fill: #343434;
 }

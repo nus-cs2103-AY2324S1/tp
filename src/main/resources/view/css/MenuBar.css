@@ -7,7 +7,7 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Inter Light";
+    -fx-font-family: "Verdana", sans-serif;;
     -fx-text-fill: #343434;
     -fx-opacity: 0.9;
 }

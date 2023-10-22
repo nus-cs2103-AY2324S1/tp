@@ -38,7 +38,8 @@
                     </Menu>
                 </MenuBar>
 
-                <VBox fx:id="jobList" styleClass="pane-with-border" minWidth="350" prefWidth="350" VBox.vgrow="ALWAYS">
+                <VBox fx:id="jobList" styleClass="pane-with-border" minWidth="350" prefWidth="350"
+                      VBox.vgrow="ALWAYS">
                     <padding>
                         <Insets top="20" right="20" bottom="10" left="20"/>
                     </padding>
