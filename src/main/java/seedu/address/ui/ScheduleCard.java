@@ -30,9 +30,6 @@ public class ScheduleCard extends UiPart<Region> {
     @FXML
     private Label day;
 
-    @FXML
-    private FlowPane tags;
-
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -42,8 +39,5 @@ public class ScheduleCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         address.setText(person.getAddress().value);
         day.setText(person.getDay().value.toString());
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

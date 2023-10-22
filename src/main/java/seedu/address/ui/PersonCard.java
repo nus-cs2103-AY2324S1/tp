@@ -47,9 +47,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label end;
     @FXML
-    private FlowPane tags;
-
-    @FXML
     private Label ispaid;
 
     @FXML
@@ -73,8 +70,5 @@ public class PersonCard extends UiPart<Region> {
         end.setText(person.getEnd().value);
         payRate.setText("rate: " + person.getPayRate().toString() + "/h");
         //ispaid.setText("1");
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

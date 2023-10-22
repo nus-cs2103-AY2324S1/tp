@@ -27,8 +27,6 @@ import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
-
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -60,12 +58,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         Begin begin = ParserUtil.parseBegin(argMultimap.getValue(PREFIX_BEGIN).get());
         End end = ParserUtil.parseEnd(argMultimap.getValue(PREFIX_END).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         PayRate payRate = ParserUtil.parsePayRate(argMultimap.getValue(PREFIX_PAYRATE).get());
         boolean paid = false;
 
 
-        Person person = new Person(name, phone, email, address, subject, day, begin, end, tagList, paid, payRate);
+        Person person = new Person(name, phone, email, address, subject, day, begin, end, paid, payRate);
 
         return new AddCommand(person);
     }
