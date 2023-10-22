@@ -27,6 +27,7 @@
             </HBox>
             <Label fx:id="role" styleClass="cell_small_label" text="\$role"/>
             <Label fx:id="status" styleClass="cell_small_label" text="\$status"/>
+            <Label fx:id="industry" styleClass="cell_small_label" text="\$industry"/>
             <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline"/>
         </VBox>
     </GridPane>

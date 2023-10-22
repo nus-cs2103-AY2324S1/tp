@@ -5,10 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.StringUtil;
 import seedu.application.logic.parser.exceptions.ParseException;
-import seedu.application.model.job.Company;
-import seedu.application.model.job.Deadline;
-import seedu.application.model.job.Role;
-import seedu.application.model.job.Status;
+import seedu.application.model.job.*;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -89,6 +86,21 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return new Status(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String Industry} into a {@code Industry}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code industry} is invalid.
+     */
+    public static Industry parseIndustry(String industry) throws ParseException {
+        requireNonNull(industry);
+        String trimmedIndustry = industry.trim();
+        if (!Industry.isValidIndustry(trimmedIndustry)) {
+            throw new ParseException(Industry.MESSAGE_CONSTRAINTS);
+        }
+        return new Industry(trimmedIndustry);
     }
 
 }
