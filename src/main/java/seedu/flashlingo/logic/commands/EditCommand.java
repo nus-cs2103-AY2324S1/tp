@@ -80,7 +80,8 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-            && replacedWord.equals(otherEditCommand.replacedWord) && replacedTranslation.equals(otherEditCommand.replacedTranslation);
+                && replacedWord.equals(otherEditCommand.replacedWord)
+                && replacedTranslation.equals(otherEditCommand.replacedTranslation);
     }
 
     @Override

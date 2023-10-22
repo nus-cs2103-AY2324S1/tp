@@ -53,6 +53,12 @@ public class FlashCard {
         return currentLevel;
     }
 
+    /**
+     * Edits the flashCard
+     * @param newWord The new word to replace the old word
+     * @param newTranslation The new translation to replace old translation
+     * @return The new flashcard
+     */
     public FlashCard editFlashCard(String newWord, String newTranslation) {
         OriginalWord originalWord = this.originalWord.editWord(newWord);
         TranslatedWord translatedWord = this.translatedWord.editWord(newTranslation);

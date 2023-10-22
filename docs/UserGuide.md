@@ -91,11 +91,12 @@ Adds a word to the flashcard with its translation.
 * Works to add a word with its translation in their respective languages.
 * The already saved translation can be overridden with a new translation in a different language.
 
-Format: `add w/WORD wl/WORD LANGUAGE t/TRANSLATION tl/TRANSLATION LANGUAGE`
+Format: `add w/WORD t/TRANSLATION`
+or`add w/WORD wl/WORD LANGUAGE t/TRANSLATION tl/TRANSLATION LANGUAGE`
 
 Examples:
-* `add w/regarder wl/French t/look tl/English` saves the translation of regarder as look
-* `add w/entschuldigung wl/Deutsch t/sorry tl/English` saves the translation of entschuldigung as sorry
+* `add w/regarder t/look` saves the translation of regarder as look
+* `add w/entschuldigung wl/Deutsch t/sorry tl/English` saves the translation of the Deutsch word entschuldigung as an English word sorry
 
 
 ### Deleting a word card : `delete`
