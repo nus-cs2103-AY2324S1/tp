@@ -3,15 +3,23 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplicants.ALICE_APPLICANT;
+import static seedu.address.testutil.TypicalApplicants.BENSON_APPLICANT;
+import static seedu.address.testutil.TypicalMembers.ALAN_MEMBER;
+import static seedu.address.testutil.TypicalMembers.BETTY_MEMBER;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.ApplicantContainsKeywordsPredicate;
+import seedu.address.model.person.MemberContainsKeywordsPredicate;
+import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
@@ -77,14 +85,9 @@ public class ModelManagerTest {
         assertThrows(NullPointerException.class, () -> modelManager.hasApplicant(null));
     }
 
-    //    @Test
-    //    public void hasPerson_personNotInAddressBook_returnsFalse() {
-    //        assertFalse(modelManager.hasPerson(ALICE));
-    //    }
-
     @Test
     public void hasMember_memberNotInAddressBook_returnsFalse() {
-        // TODO: implement this
+        assertFalse(modelManager.hasMember(ALAN_MEMBER));
     }
 
     @Test
@@ -92,15 +95,10 @@ public class ModelManagerTest {
         assertFalse(modelManager.hasApplicant(ALICE_APPLICANT));
     }
 
-    //    @Test
-    //    public void hasPerson_personInAddressBook_returnsTrue() {
-    //        modelManager.addPerson(ALICE);
-    //        assertTrue(modelManager.hasPerson(ALICE));
-    //    }
-
     @Test
     public void hasMember_memberInAddressBook_returnsTrue() {
-        // TODO: implement this
+        modelManager.addMember(ALAN_MEMBER);
+        assertTrue(modelManager.hasMember(ALAN_MEMBER));
     }
 
     @Test
@@ -108,11 +106,6 @@ public class ModelManagerTest {
         modelManager.addApplicant(ALICE_APPLICANT);
         assertTrue(modelManager.hasApplicant(ALICE_APPLICANT));
     }
-
-    //    @Test
-    //    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-    //        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
-    //    }
 
     @Test
     public void getFilteredMemberList_modifyList_throwsUnsupportedOperationException() {
@@ -126,47 +119,51 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        // TODO: implement this after implementing member
-        //        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        //        AddressBook differentAddressBook = new AddressBook();
-        //        UserPrefs userPrefs = new UserPrefs();
-        //
-        //        // same values -> returns true
-        //        modelManager = new ModelManager(addressBook, userPrefs);
-        //        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
-        //        assertTrue(modelManager.equals(modelManagerCopy));
-        //
-        //        // same object -> returns true
-        //        assertTrue(modelManager.equals(modelManager));
-        //
-        //        // null -> returns false
-        //        assertFalse(modelManager.equals(null));
-        //
-        //        // different types -> returns false
-        //        assertFalse(modelManager.equals(5));
-        //
-        //        // different addressBook -> returns false
-        //        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
-        //
-        //        // different filteredList -> returns false
-        ////        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        ////        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        ////        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
-        //
-        //        // TODO: do this for member follow above
-        //
-        //        String[] keywords = ALICE_APPLICANT.getName().fullName.split("\\s+");
-        //        modelManager.updateFilteredApplicantList(new ApplicantContainsKeywordsPredicate(
-        //        Arrays.asList(keywords)));
-        //        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
-        //
-        //        // resets modelManager to initial state for upcoming tests
-        //        modelManager.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
-        //        modelManager.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
-        //
-        //        // different userPrefs -> returns false
-        //        UserPrefs differentUserPrefs = new UserPrefs();
-        //        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        //        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        AddressBook addressBook = new AddressBookBuilder().withApplicant(ALICE_APPLICANT)
+                .withApplicant(BENSON_APPLICANT).withMember(ALAN_MEMBER).withMember(BETTY_MEMBER).build();
+        AddressBook differentAddressBook = new AddressBook();
+        UserPrefs userPrefs = new UserPrefs();
+
+        // same values -> returns true
+        modelManager = new ModelManager(addressBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        assertTrue(modelManager.equals(modelManagerCopy));
+
+        // same object -> returns true
+        assertTrue(modelManager.equals(modelManager));
+
+        // null -> returns false
+        assertFalse(modelManager.equals(null));
+
+        // different types -> returns false
+        assertFalse(modelManager.equals(5));
+
+        // different addressBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+
+        // different filteredApplicantList -> returns false
+        String[] keywords = ALICE_APPLICANT.getName().fullName.split("\\s+");
+        modelManager.updateFilteredApplicantList(new ApplicantContainsKeywordsPredicate(
+                Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // resets modelManager to initial state for next test
+        modelManager.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different filteredMemberList -> returns false
+        keywords = ALAN_MEMBER.getName().fullName.split("\\s+");
+        modelManager.updateFilteredMemberList(new MemberContainsKeywordsPredicate(
+                Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different userPrefs -> returns false
+        UserPrefs differentUserPrefs = new UserPrefs();
+        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }
