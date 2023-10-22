@@ -38,8 +38,8 @@ public class RoomPieChart extends UiPart<Region> {
         int availableRooms = 500 - occupiedRooms;
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("Occupied Rooms", occupiedRooms),
-                        new PieChart.Data("Available Rooms", availableRooms));
+                        new PieChart.Data("Occupied Rooms: " + occupiedRooms, occupiedRooms),
+                        new PieChart.Data("Available Rooms: " + availableRooms, availableRooms));
         final PieChart roomPieChart = new PieChart(pieChartData);
         roomPieChartPane.getChildren().add(roomPieChart);
     }
