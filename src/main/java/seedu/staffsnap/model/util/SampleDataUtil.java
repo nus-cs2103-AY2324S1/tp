@@ -57,7 +57,6 @@ public class SampleDataUtil {
      */
     public static List<Interview> getInterviewList(Interview... interviews) {
         return Arrays.stream(interviews)
-                .map(interview -> new Interview(interview.type, interview.getRating()))
                 .collect(Collectors.toList());
     }
 

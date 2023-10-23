@@ -190,6 +190,9 @@ public class ParserUtil {
     public static Rating parseRating(String rating) throws ParseException {
         requireNonNull(rating);
         String trimmedRating = rating.trim();
+        if (trimmedRating.isEmpty()) {
+            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+        }
         Double ratingValue = Double.parseDouble(trimmedRating);
         String ratingString = String.format("%.1f", ratingValue);
         if (!Rating.isValidRating(ratingString)) {

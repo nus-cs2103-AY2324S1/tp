@@ -6,6 +6,8 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.NoSuchElementException;
+
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.EditInterviewCommand;
 import seedu.staffsnap.logic.commands.EditInterviewCommand.EditInterviewDescriptor;
@@ -35,6 +37,9 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE), pe);
+        } catch (NoSuchElementException ex) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE), ex);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INTERVIEW, PREFIX_TYPE, PREFIX_RATING);

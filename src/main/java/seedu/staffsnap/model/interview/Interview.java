@@ -3,10 +3,10 @@ package seedu.staffsnap.model.interview;
 import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
 import static seedu.staffsnap.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
-import seedu.staffsnap.model.applicant.Applicant;
 
 /**
  * Represents an Interview in the applicant book.
@@ -64,8 +64,11 @@ public class Interview implements Comparable<Interview> {
                 && rating.equals(otherInterview.rating);
     }
 
-    public boolean isSameInterview(Applicant otherApplicant) {
-        return otherApplicant.getInterviews().stream().anyMatch(interview -> interview.getType().equals(getType()));
+    /**
+     * Returns true if the applicant has an interview with the same interview type.
+     */
+    public boolean isSameInterview(List<Interview> otherInterviews) {
+        return otherInterviews.stream().anyMatch(interview -> interview.getType().equals(getType()));
     }
 
     @Override

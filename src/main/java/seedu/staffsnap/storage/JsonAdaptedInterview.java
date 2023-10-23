@@ -2,7 +2,6 @@ package seedu.staffsnap.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.staffsnap.commons.exceptions.IllegalValueException;
 import seedu.staffsnap.model.interview.Interview;
@@ -31,11 +30,6 @@ class JsonAdaptedInterview {
     public JsonAdaptedInterview(Interview source) {
         type = source.type;
         rating = source.getRating().value;
-    }
-
-    @JsonValue
-    public String getType() {
-        return type;
     }
 
     /**
