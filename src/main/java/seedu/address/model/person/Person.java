@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -105,7 +105,7 @@ public class Person {
      * Returns true if both persons have the same policy number
      */
     public boolean comparePolicyNumber(Person otherPerson) {
-        if (this.getPolicy() != ParserUtil.POLICY
+        if (!this.getPolicy().getPolicyNumber().toString().equals(PolicyNumber.DEFAULT_VALUE)
                 && this.getPolicy().getPolicyNumber().equals(otherPerson.getPolicy().getPolicyNumber())) {
             return true;
         }
