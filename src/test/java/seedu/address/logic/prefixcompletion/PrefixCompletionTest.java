@@ -52,7 +52,7 @@ public class PrefixCompletionTest {
     @Test
     public void getNextCompletion_allPrefixesPresent_throwsException() {
         String input = "add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@example.com "
-                + "t/friends t/owesMoney";
+                + "t/friends t/owesMoney ";
 
         assertThrows(PrefixCompletionException.class, () -> prefixCompletion.getNextCompletion(input));
     }

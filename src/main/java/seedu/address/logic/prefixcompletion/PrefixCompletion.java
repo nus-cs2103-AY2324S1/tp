@@ -55,7 +55,7 @@ public class PrefixCompletion {
                 return prefixes.get(i) + examples.get(i);
             }
         }
-        logger.log(Level.WARNING, "Prefix not found");
+        logger.log(Level.WARNING, "Prefix not found for " + commandWord);
         throw new PrefixCompletionException("No prefix completion recommendation found for the current input.");
     }
 
