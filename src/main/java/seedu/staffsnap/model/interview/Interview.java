@@ -6,6 +6,7 @@ import static seedu.staffsnap.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
+import seedu.staffsnap.model.applicant.Applicant;
 
 /**
  * Represents an Interview in the applicant book.
@@ -61,6 +62,10 @@ public class Interview implements Comparable<Interview> {
         Interview otherInterview = (Interview) other;
         return type.equals(otherInterview.type)
                 && rating.equals(otherInterview.rating);
+    }
+
+    public boolean isSameInterview(Applicant otherApplicant) {
+        return otherApplicant.getInterviews().stream().anyMatch(interview -> interview.getType().equals(getType()));
     }
 
     @Override

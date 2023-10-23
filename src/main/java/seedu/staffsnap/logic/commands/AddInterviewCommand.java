@@ -60,7 +60,8 @@ public class AddInterviewCommand extends Command {
 
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
 
-        if (applicantToEdit.getInterviews().contains(interviewToAdd)) {
+        if (applicantToEdit.getInterviews().contains(interviewToAdd)
+                || interviewToAdd.isSameInterview(applicantToEdit)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
 
