@@ -98,4 +98,9 @@ public interface Model {
      * Updates the Descriptor for sorting Applicants.
      */
     void updateSortedApplicantList(Descriptor descriptor);
+
+    /**
+     * Refreshes the applicant list and keeps the same predicate
+     */
+    void refreshApplicantList();
 }

@@ -39,6 +39,8 @@ public class ApplicantCard extends UiPart<Region> {
     private HBox position;
     @FXML
     private FlowPane interviews;
+    @FXML
+    private Label status;
 
     /**
      * Creates a {@code ApplicantCode} with the given {@code Applicant} and index to display.
@@ -76,5 +78,6 @@ public class ApplicantCard extends UiPart<Region> {
                     interviews.getChildren().add(new Label(applicant.getInterviewIndexForApplicantCard(interview)
                             + ". " + interview.type + ": " + interview.getRating().value));
                 });
+        status.setText(applicant.getStatus().toString());
     }
 }
