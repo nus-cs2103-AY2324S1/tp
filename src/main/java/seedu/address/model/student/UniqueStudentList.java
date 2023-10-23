@@ -3,6 +3,7 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,7 +19,6 @@ import seedu.address.model.student.exceptions.StudentNotFoundException;
  * persons uses Student#isSamePerson(Student) for equality so as to ensure that the student being added or updated is
  * unique in terms of identity in the UniqueStudentList. However, the removal of a student uses
  * Student#equals(Object) so as to ensure that the student with exactly the same fields will be removed.
- *
  * Supports a minimal set of list operations.
  *
  * @see Student#isSamePerson(Student)
@@ -28,6 +28,8 @@ public class UniqueStudentList implements Iterable<Student> {
     private final ObservableList<Student> internalList = FXCollections.observableArrayList();
     private final ObservableList<Student> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Student> selectedStudent =
+        FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent student as the given argument.
@@ -97,6 +99,19 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Replace the selected student with the input student.
+     * @param student to be selected
+     */
+    public void setSelectedStudent(Student student) {
+        requireNonNull(student);
+        if (selectedStudent.isEmpty()) {
+            selectedStudent.add(student);
+        } else {
+            selectedStudent.set(0, student);
+        }
+    }
+
+    /**
      * Replaces the contents of this list with {@code students}.
      * {@code students} must not contain duplicate students.
      */
@@ -114,6 +129,13 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public ObservableList<Student> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns the {@code ObservableList} containing the selected student.
+     */
+    public ObservableList<Student> getSelectedStudent() {
+        return selectedStudent;
     }
 
     @Override

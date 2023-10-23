@@ -17,6 +17,7 @@ import seedu.address.model.student.StudentNumber;
  * Records the class participation for a student in a specific tutorial session.
  */
 public class RecordClassPartCommand extends Command {
+
     public static final String COMMAND_WORD = "record-part";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -31,7 +32,6 @@ public class RecordClassPartCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Recorded participation for student: %1$s, "
             + "here are the details:\n";
-
 
     private final StudentNumber studentNumber;
     private final int sessionNumber;
@@ -54,14 +54,16 @@ public class RecordClassPartCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
         }
 
-        Student studentToGrade = model.getStudent(studentNumber);
-        ClassDetails classDetails = studentToGrade.getClassDetails();
+        Student studentToMark = model.getStudent(studentNumber);
+        ClassDetails classDetails = studentToMark.getClassDetails();
         classDetails.recordClassPart(sessionNumber, isParticipated);
+        Student markedStudent = new Student(studentToMark.getName(), studentToMark.getPhone(),
+            studentToMark.getEmail(), studentToMark.getStudentNumber(), classDetails, studentToMark.getTags());
 
+        model.setStudent(studentToMark, markedStudent);
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
                 + classDetails.displayParticipations());
     }
-
 
     @Override
     public boolean equals(Object other) {
