@@ -34,7 +34,8 @@ public class EditApplicantDescriptorTest {
         assertFalse(DESC_CADENCE.equals(DESC_DILL));
 
         // different name -> returns false
-        EditApplicantDescriptor editedCadence = new EditApplicantDescriptorBuilder(DESC_CADENCE).withName(VALID_NAME_DILL).build();
+        EditApplicantDescriptor editedCadence = new EditApplicantDescriptorBuilder(DESC_CADENCE)
+                .withName(VALID_NAME_DILL).build();
         assertFalse(DESC_CADENCE.equals(editedCadence));
 
         // different phone -> returns false
