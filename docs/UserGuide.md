@@ -106,7 +106,7 @@ Examples:
 Shows a summary of attendance records including list of absentees.
 
 Format: `list attendance tn/TUTORIALNUMBER [tg/TUTORIALGROUPID]`
-*  Shows a list of absentees and summary of the attendance records of students corresponding to the tutorial group for the specified tutorial number.
+*  Shows a list of absentees and summary of the attendance records of all students or students corresponding to the specified tutorial group for the specified tutorial number.
 * `TUTORIALGROUPID` is optional.
 
 Examples:
@@ -212,13 +212,15 @@ Examples:
 
 ### Deleting a person : `delete all`
 
-Deletes all students from the specified course or tutorial group of course.
+Deletes all students from current address book or the specified tutorial group in the current address book.
 
-Format: `delete all tg/TUTORIALGROUPID`
+Format: `delete all [tg/TUTORIALGROUPID]`
 
-* Deletes the students from the specified tutorial group.
+* Deletes all students or the students from the specified tutorial group.
+* `TUTORIALGROUPID` is optional.
 
 Examples:
+* `delete all` deletes all students from the current address book.
 * `delete all coursetg/G02` deletes all students from tutorial group G02.
 
 ### Clearing all entries : `clear`
@@ -265,13 +267,13 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-| Action     | Format, Examples                                                                                                     |
-|------------|----------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSECODE TUTORIALGROUPID]...` <br>                             |
-| **Clear**  | `clear`                                                                                                              |
-| **Delete** | `delete all coursetg/COURSECODE [TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all coursetg/CS2103T` `delete 3` |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSECODE TUTORIALGROUPID]...`<br>                      |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                           |
-| **List**   | `list attendance tn/TUTORIALNO [coursetg/TAG]` `list students`                                                       |                                                           |
-| **Help**   | `help`                                                                                                               |
-| **Filter**   | `filter [add/delete/clear] [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`                                               |
+| Action     | Format, Examples                                                                                |
+|------------|-------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSECODE TUTORIALGROUPID]...` <br>        |
+| **Clear**  | `clear`                                                                                         |
+| **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`      |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSECODE TUTORIALGROUPID]...`<br> |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                      |
+| **List**   | `list attendance tn/TUTORIALNO [tg/TUTORIALGROUPID]` `list students`                            |                                                           |
+| **Help**   | `help`                                                                                          |
+| **Filter**   | `filter [add/delete/clear] [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`                          |
