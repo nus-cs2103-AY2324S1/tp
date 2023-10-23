@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.flashlingo.commons.core.LogsCenter;
+import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
@@ -41,7 +42,11 @@ public class FlashcardListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new FlashcardBox(fc, getIndex() + 1).getRoot());
+                if (FlashlingoParser.getReviewSession()) {
+                    setGraphic(new FlashcardBox(fc, getIndex() + 1).getRoot());
+                } else {
+                    setGraphic(new FlashcardBoxNoButton(fc, getIndex() + 1).getRoot());
+                }
             }
         }
     }
