@@ -79,7 +79,7 @@ public class SampleDataUtil {
                 new Nric("362D"),
                 new LicencePlate("SDN5345A"),
                 new Policy(
-                    new Company("NTUC"),
+                    new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
                     new PolicyDate(PolicyDate.DEFAULT_VALUE),
                     new PolicyDate(PolicyDate.DEFAULT_VALUE)
@@ -94,7 +94,7 @@ public class SampleDataUtil {
                 new Nric("752X"),
                 new LicencePlate("SBP8888T"),
                 new Policy(
-                    new Company("InsureMe"),
+                    new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
                     new PolicyDate(PolicyDate.DEFAULT_VALUE),
                     new PolicyDate(PolicyDate.DEFAULT_VALUE)
@@ -109,7 +109,7 @@ public class SampleDataUtil {
                 new Nric("764J"),
                 new LicencePlate("SJD6453Y"),
                 new Policy(
-                    new Company("InsureMe"),
+                    new Company(Company.DEFAULT_VALUE),
                     new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
                     new PolicyDate(PolicyDate.DEFAULT_VALUE),
                     new PolicyDate(PolicyDate.DEFAULT_VALUE)
