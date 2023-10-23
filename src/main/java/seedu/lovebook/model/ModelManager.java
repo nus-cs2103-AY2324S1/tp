@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Random;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import seedu.lovebook.commons.core.GuiSettings;
 import seedu.lovebook.commons.core.LogsCenter;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.person.RandomPredicate;
 
 /**
  * Represents the in-memory model of the lovebook book data.
@@ -124,6 +126,17 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Date> getFilteredPersonList() {
         return filteredDates;
+    }
+
+    /**
+     * Returns a random date from the date list.
+     */
+    public void getRandomPerson() {
+        Random randomGenerator = new Random();
+        int randomIndex = randomGenerator.nextInt(loveBook.getPersonList().size());
+        Date person = loveBook.getPersonList().get(randomIndex);
+        updateFilteredPersonList(new RandomPredicate(person));
+
     }
 
     @Override

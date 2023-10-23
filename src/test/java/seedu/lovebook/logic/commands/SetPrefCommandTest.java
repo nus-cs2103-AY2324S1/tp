@@ -1,15 +1,9 @@
 package seedu.lovebook.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.lovebook.testutil.Assert.assertThrows;
-import static seedu.lovebook.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -17,73 +11,42 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.lovebook.commons.core.GuiSettings;
 import seedu.lovebook.logic.Messages;
-import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.DatePrefs;
-import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ReadOnlyDatePrefs;
 import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.ReadOnlyUserPrefs;
+import seedu.lovebook.model.person.Age;
 import seedu.lovebook.model.person.Date;
-import seedu.lovebook.testutil.PersonBuilder;
+import seedu.lovebook.model.person.Gender;
+import seedu.lovebook.model.person.Height;
+import seedu.lovebook.model.person.Income;
+import seedu.lovebook.model.person.horoscope.Horoscope;
+import seedu.lovebook.testutil.PreferenceBuilder;
 
-public class AddCommandTest {
+
+public class SetPrefCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullPreference_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new SetPrefCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Date validDate = new PersonBuilder().build();
+    public void execute_preferenceAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingPreferenceAdded modelStub = new ModelStubAcceptingPreferenceAdded();
+        SetPrefCommand.SetPreferenceDescriptor validPreference = new PreferenceBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validDate).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validDate)),
+        CommandResult commandResult = new SetPrefCommand(validPreference).execute(modelStub);
+        assertEquals(String.format(SetPrefCommand.MESSAGE_EDIT_PREF_SUCCESS, Messages.format(validPreference)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validDate), modelStub.datesAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Date validDate = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validDate);
-        ModelStub modelStub = new ModelStubWithPerson(validDate);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
-    }
-
-    @Test
-    public void equals() {
-        Date alice = new PersonBuilder().withName("Alice").build();
-        Date bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different date -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+    public void execute_emptyPreference_throwException() throws Exception {
+        ModelStubAcceptingPreferenceAdded modelStub = new ModelStubAcceptingPreferenceAdded();
+        SetPrefCommand.SetPreferenceDescriptor emptyPreference = new SetPrefCommand.SetPreferenceDescriptor();
+        assertThrows(RuntimeException.class, () -> new SetPrefCommand(emptyPreference).execute(modelStub));
     }
 
     /**
@@ -192,45 +155,22 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single date.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Date date;
-
-        ModelStubWithPerson(Date date) {
-            requireNonNull(date);
-            this.date = date;
-        }
-
-        @Override
-        public boolean hasPerson(Date date) {
-            requireNonNull(date);
-            return this.date.isSamePerson(date);
-        }
-    }
-
-    /**
      * A Model stub that always accept the date being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Date> datesAdded = new ArrayList<>();
+    private class ModelStubAcceptingPreferenceAdded extends SetPrefCommandTest.ModelStub {
 
+        private Age defaultAge = new Age("23");
+        private Gender defaultGender = new Gender("F");
+        private Height defaultHeight = new Height("168");
+        private Income defaultIncome = new Income("3000");
+        private final Horoscope defaultHoroscope = new Horoscope("Aquarius");
         @Override
-        public boolean hasPerson(Date date) {
-            requireNonNull(date);
-            return datesAdded.stream().anyMatch(date::isSamePerson);
+        public DatePrefs getDatePrefs() {
+            return new DatePrefs(defaultAge, defaultGender, defaultHeight, defaultIncome, defaultHoroscope);
         }
 
         @Override
-        public void addPerson(Date date) {
-            requireNonNull(date);
-            datesAdded.add(date);
-        }
+        public void setDatePrefs(ReadOnlyDatePrefs datePrefs) {}
 
-        @Override
-        public ReadOnlyLoveBook getLoveBook() {
-            return new LoveBook();
-        }
     }
-
 }

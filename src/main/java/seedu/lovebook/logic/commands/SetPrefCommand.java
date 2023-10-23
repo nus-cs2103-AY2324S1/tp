@@ -58,7 +58,9 @@ public class SetPrefCommand extends Command {
      */
     public SetPrefCommand(SetPreferenceDescriptor setPreferenceDescriptor) {
         requireNonNull(setPreferenceDescriptor);
-
+        if (!setPreferenceDescriptor.isAnyFieldEdited()) {
+            throw new RuntimeException("SetPreferenceDescriptor cannot have empty fields");
+        }
         this.setPreferenceDescriptor = new SetPreferenceDescriptor(setPreferenceDescriptor);
     }
 
@@ -109,6 +111,17 @@ public class SetPrefCommand extends Command {
         private Horoscope horoscope;
 
         public SetPreferenceDescriptor() {}
+
+        /**
+         * Constructor that accepts default values for each metric
+         */
+        public SetPreferenceDescriptor(Age age, Gender gender, Height height, Income income, Horoscope horoscope) {
+            setAge(age);
+            setGender(gender);
+            setHeight(height);
+            setIncome(income);
+            setHoroscope(horoscope);
+        }
 
         /**
          * Copy Constructor
@@ -168,6 +181,7 @@ public class SetPrefCommand extends Command {
         public Optional<Horoscope> getHoroscope() {
             return Optional.ofNullable(horoscope);
         }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
