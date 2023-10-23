@@ -60,6 +60,7 @@ public class FilterCommand extends Command {
         }
 
         FilterCommand otherFilterCommand = (FilterCommand) other;
+        System.out.println("predicate = " + predicate);
         return predicate.equals(otherFilterCommand.predicate);
     }
 

@@ -1,11 +1,11 @@
 package seedu.staffsnap.model.applicant;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.model.interview.Interview;
-
 
 
 /**
@@ -23,10 +23,11 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
 
     /**
      * Constructor for CustomFilterPredicate
-     * @param name Name of applicant
-     * @param phone Phone number of applicant
-     * @param email Email address of applicant
-     * @param position Position applied for by applicant
+     *
+     * @param name       Name of applicant
+     * @param phone      Phone number of applicant
+     * @param email      Email address of applicant
+     * @param position   Position applied for by applicant
      * @param interviews Interviews applicant has to go through
      */
     public CustomFilterPredicate(Name name, Phone phone, Email email, Position position, List<Interview> interviews) {
@@ -71,7 +72,6 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
     }
 
 
-
     @Override
     public String toString() {
         return "CustomFilterPredicate{"
@@ -81,5 +81,19 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
                 + ", position=" + position
                 + ", interviews=" + interviews
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomFilterPredicate that = (CustomFilterPredicate) o;
+        return Objects.equals(name, that.name) && Objects.equals(phone, that.phone) && Objects.equals(email,
+                that.email) && Objects.equals(position, that.position) && Objects.equals(interviews, that.interviews);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, phone, email, position, interviews);
     }
 }

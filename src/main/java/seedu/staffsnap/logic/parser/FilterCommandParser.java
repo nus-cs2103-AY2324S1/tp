@@ -23,10 +23,6 @@ import seedu.staffsnap.model.interview.Interview;
  * Parses input arguments and creates a new FilterCommand object
  */
 
-
-
-
-
 public class FilterCommandParser implements Parser<FilterCommand> {
 
     /**
@@ -66,7 +62,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
             interviewList = ParserUtil.parseInterviews(argMultimap.getAllValues(PREFIX_INTERVIEW));
         }
-
         return new FilterCommand(new CustomFilterPredicate(name, phone, email, position, interviewList));
     }
 

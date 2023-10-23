@@ -15,10 +15,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.logic.commands.AddCommand;
 //import seedu.staffsnap.logic.commands.ClearCommand;
+import seedu.staffsnap.logic.commands.AddInterviewCommand;
 import seedu.staffsnap.logic.commands.DeleteCommand;
 import seedu.staffsnap.logic.commands.EditCommand;
 import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.staffsnap.logic.commands.ExitCommand;
+import seedu.staffsnap.logic.commands.FilterCommand;
 import seedu.staffsnap.logic.commands.FindCommand;
 import seedu.staffsnap.logic.commands.HelpCommand;
 import seedu.staffsnap.logic.commands.ListCommand;
@@ -51,8 +53,8 @@ public class ApplicantBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_APPLICANT.getOneBased());
+        DeleteCommand command =
+                (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_APPLICANT.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_APPLICANT), command);
     }
 
@@ -60,11 +62,8 @@ public class ApplicantBookParserTest {
     public void parseCommand_edit() throws Exception {
         Applicant applicant = new ApplicantBuilder().build();
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(applicant).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
-                + " "
-                + INDEX_FIRST_APPLICANT.getOneBased()
-                + " "
-                + ApplicantUtil.getEditApplicantDescriptorDetails(descriptor));
+        EditCommand command =
+                (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_APPLICANT.getOneBased() + " " + ApplicantUtil.getEditApplicantDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_APPLICANT, descriptor), command);
     }
 
@@ -77,8 +76,8 @@ public class ApplicantBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        FindCommand command =
+                (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -100,9 +99,19 @@ public class ApplicantBookParserTest {
     }
 
     @Test
+    public void parseCommand_filter() throws Exception {
+        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " " + "d/ name") instanceof FilterCommand);
+    }
+
+    @Test
+    public void parseCommand_addi() throws Exception {
+        assertTrue(parser.parseCommand(AddInterviewCommand.COMMAND_WORD + " 1 " + "t/ technical") instanceof AddInterviewCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE),
+                () -> parser.parseCommand(""));
     }
 
     @Test
