@@ -21,7 +21,7 @@ import seedu.ccacommander.model.UserPrefs;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindMemberCommand}.
  */
 public class FindMemberCommandTest {
     private Model model = new ModelManager(getTypicalCcaCommander(), new UserPrefs());
@@ -67,7 +67,7 @@ public class FindMemberCommandTest {
     @Test
     public void execute_multipleKeywords_multipleMembersFound() {
         String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 3);
-        MemberNameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        MemberNameContainsKeywordsPredicate predicate = preparePredicate("Carl Elle Fiona");
         FindMemberCommand command = new FindMemberCommand(predicate);
         expectedModel.updateFilteredMemberList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

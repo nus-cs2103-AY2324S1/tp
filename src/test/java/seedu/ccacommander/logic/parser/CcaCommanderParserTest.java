@@ -22,11 +22,13 @@ import seedu.ccacommander.logic.commands.DeleteMemberCommand;
 import seedu.ccacommander.logic.commands.EditCommand;
 import seedu.ccacommander.logic.commands.EditCommand.EditMemberDescriptor;
 import seedu.ccacommander.logic.commands.ExitCommand;
+import seedu.ccacommander.logic.commands.FindEventCommand;
 import seedu.ccacommander.logic.commands.FindMemberCommand;
 import seedu.ccacommander.logic.commands.HelpCommand;
 import seedu.ccacommander.logic.commands.ListCommand;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
 import seedu.ccacommander.model.event.Event;
+import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
 import seedu.ccacommander.testutil.EditMemberDescriptorBuilder;
@@ -98,6 +100,13 @@ public class CcaCommanderParserTest {
         assertEquals(new FindMemberCommand(new MemberNameContainsKeywordsPredicate(keywords)), command);
     }
 
+    @Test
+    public void parseCommand_findEvent() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindEventCommand command = (FindEventCommand) parser.parseCommand(
+                FindEventCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindEventCommand(new EventNameContainsKeywordsPredicate(keywords)), command);
+    }
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
