@@ -15,6 +15,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
+    private String courseCode;
     private final UniquePersonList persons;
 
     /*
@@ -28,14 +29,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public AddressBook(String courseCode) {
+        requireNonNull(courseCode);
+
+        this.courseCode = courseCode.toUpperCase();
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
-        this();
+    public AddressBook(String courseCode, ReadOnlyAddressBook toBeCopied) {
+        requireNonNull(courseCode);
+
+        this.courseCode = courseCode.toUpperCase();
         resetData(toBeCopied);
+    }
+
+    //// course-level operations
+    public void setCourseCode(String courseCode) {
+        requireNonNull(courseCode);
+        // TODO: Check this line
+        setCourseCode(courseCode.toUpperCase());
+    }
+
+    @Override
+    public String getCourseCode() {
+        return courseCode;
     }
 
     //// list overwrite operations
@@ -54,6 +73,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
+        setCourseCode(newData.getCourseCode());
         setPersons(newData.getPersonList());
     }
 
