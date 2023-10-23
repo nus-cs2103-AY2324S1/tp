@@ -141,26 +141,27 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
-    //---------------- Tests for capitaliseString --------------------------------------
+    //---------------- Tests for capitaliseWordsInString --------------------------------------
 
     @Test
-    public void capitaliseString_validInput_correctResult() {
-        assertEquals("Caps", StringUtil.capitaliseString("caps"));
-        assertEquals("Ca", StringUtil.capitaliseString("ca"));
-        assertEquals("C", StringUtil.capitaliseString("c"));
+    public void capitaliseWordInString_validInput_correctResult() {
+        assertEquals("Caps", StringUtil.capitaliseWordsInString("caps"));
+        assertEquals("Ca", StringUtil.capitaliseWordsInString("ca"));
+        assertEquals("C", StringUtil.capitaliseWordsInString("c"));
 
-        assertEquals("Caps", StringUtil.capitaliseString("CAPS"));
-        assertEquals("Caps", StringUtil.capitaliseString("cAPS"));
-        assertEquals("Caps", StringUtil.capitaliseString("capS"));
+        assertEquals("Caps", StringUtil.capitaliseWordsInString("CAPS"));
+        assertEquals("Caps", StringUtil.capitaliseWordsInString("cAPS"));
+        assertEquals("Caps", StringUtil.capitaliseWordsInString("capS"));
 
-        assertEquals("John Doe", StringUtil.capitaliseString("john doe"));
-        assertEquals("John Doe", StringUtil.capitaliseString("jOHN dOE"));
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("john doe"));
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("jOHN dOE"));
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("JOHN DOE"));
     }
 
     @Test
-    public void capitaliseString_blankInput_correctResult() {
-        assertEquals("", StringUtil.capitaliseString(""));
-        assertEquals("", StringUtil.capitaliseString(" "));
-        assertEquals("", StringUtil.capitaliseString("     "));
+    public void capitaliseWordInString_blankInput_correctResult() {
+        assertEquals("", StringUtil.capitaliseWordsInString(""));
+        assertEquals("", StringUtil.capitaliseWordsInString(" "));
+        assertEquals("", StringUtil.capitaliseWordsInString("     "));
     }
 }

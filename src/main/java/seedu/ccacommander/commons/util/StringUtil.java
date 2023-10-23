@@ -70,7 +70,7 @@ public class StringUtil {
     /**
      * Returns the string {@code s} with the first character of each word capitalised.
      */
-    public static String capitaliseString(String s) {
+    public static String capitaliseWordsInString(String s) {
         requireNonNull(s);
         if (s.length() == 0) {
             return s;
