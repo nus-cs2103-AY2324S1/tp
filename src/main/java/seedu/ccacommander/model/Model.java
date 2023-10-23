@@ -114,4 +114,21 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    void commit(String commitMessage);
+
+    /**
+     * Returns true if there is a {@code Command} that can be undone.
+     */
+    boolean canUndo();
+
+    /**
+     * Undoes the most recent undoable {@code Command}
+     */
+    String undo();
+
+    /**
+     * Returns a summary of all commands currently captured by this {@code Model}.
+     */
+    StateCaptures viewStateCaptures();
 }

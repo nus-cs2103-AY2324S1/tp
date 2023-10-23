@@ -19,7 +19,7 @@ import seedu.ccacommander.model.member.Member;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private final CcaCommander ccaCommander;
+    private final VersionedCcaCommander versionedCcaCommander;
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Event> filteredEvents;
@@ -32,10 +32,10 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with CCACommander: " + ccaCommander + " and user prefs " + userPrefs);
 
-        this.ccaCommander = new CcaCommander(ccaCommander);
+        this.versionedCcaCommander = new VersionedCcaCommander(ccaCommander);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredMembers = new FilteredList<>(this.ccaCommander.getMemberList());
-        filteredEvents = new FilteredList<>(this.ccaCommander.getEventList());
+        filteredMembers = new FilteredList<>(this.versionedCcaCommander.getMemberList());
+        filteredEvents = new FilteredList<>(this.versionedCcaCommander.getEventList());
     }
 
     public ModelManager() {
@@ -81,28 +81,28 @@ public class ModelManager implements Model {
 
     @Override
     public void setCcaCommander(ReadOnlyCcaCommander ccaCommander) {
-        this.ccaCommander.resetData(ccaCommander);
+        versionedCcaCommander.resetData(ccaCommander);
     }
 
     @Override
     public ReadOnlyCcaCommander getCcaCommander() {
-        return ccaCommander;
+        return versionedCcaCommander;
     }
 
     @Override
     public boolean hasMember(Member member) {
         requireNonNull(member);
-        return ccaCommander.hasMember(member);
+        return versionedCcaCommander.hasMember(member);
     }
 
     @Override
     public void deleteMember(Member target) {
-        ccaCommander.removeMember(target);
+        versionedCcaCommander.removeMember(target);
     }
 
     @Override
     public void createMember(Member member) {
-        ccaCommander.createMember(member);
+        versionedCcaCommander.createMember(member);
         updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
     }
 
@@ -110,29 +110,29 @@ public class ModelManager implements Model {
     public void setMember(Member target, Member editedMember) {
         requireAllNonNull(target, editedMember);
 
-        ccaCommander.setMember(target, editedMember);
+        versionedCcaCommander.setMember(target, editedMember);
     }
 
     @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);
-        return ccaCommander.hasEvent(event);
+        return versionedCcaCommander.hasEvent(event);
     }
     @Override
     public void deleteEvent(Event target) {
-        ccaCommander.removeEvent(target);
+        versionedCcaCommander.removeEvent(target);
     }
 
     @Override
     public void createEvent(Event event) {
-        ccaCommander.createEvent(event);
+        versionedCcaCommander.createEvent(event);
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     @Override
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
-        ccaCommander.setEvent(target, editedEvent);
+        versionedCcaCommander.setEvent(target, editedEvent);
     }
 
     //=========== Filtered Member List Accessors =============================================================
@@ -164,6 +164,26 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void commit(String commitMessage) {
+        versionedCcaCommander.commit(commitMessage);
+    }
+
+    @Override
+    public boolean canUndo() {
+        return versionedCcaCommander.canUndo();
+    }
+
+    @Override
+    public String undo() {
+        return versionedCcaCommander.undo();
+    }
+
+    @Override
+    public StateCaptures viewStateCaptures() {
+        return versionedCcaCommander.viewStateCaptures();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -175,9 +195,10 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return ccaCommander.equals(otherModelManager.ccaCommander)
+        return versionedCcaCommander.equals(otherModelManager.versionedCcaCommander)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredMembers.equals(otherModelManager.filteredMembers);
+                && filteredMembers.equals(otherModelManager.filteredMembers)
+                && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
 }

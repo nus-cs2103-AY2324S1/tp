@@ -22,6 +22,7 @@ import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ReadOnlyCcaCommander;
 import seedu.ccacommander.model.ReadOnlyUserPrefs;
+import seedu.ccacommander.model.StateCaptures;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.testutil.MemberBuilder;
@@ -188,6 +189,26 @@ public class CreateMemberCommandTest {
         public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void commit(String commitMessage) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String undo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public StateCaptures viewStateCaptures() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -213,6 +234,12 @@ public class CreateMemberCommandTest {
      */
     private class ModelStubAcceptingMemberAdded extends ModelStub {
         final ArrayList<Member> membersAdded = new ArrayList<>();
+        final ArrayList<String> commitMessages = new ArrayList<>();
+
+        @Override
+        public void commit(String commitMessage) {
+            commitMessages.add(commitMessage);
+        }
 
         @Override
         public boolean hasMember(Member member) {
