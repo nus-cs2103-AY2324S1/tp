@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.NullAppointment;
+import seedu.address.model.appointment.ScheduleItem;
 import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -35,7 +36,7 @@ public class PersonBuilder {
     private NextOfKinPhone nextOfKinPhone;
     private Set<FinancialPlan> financialPlans;
     private Set<Tag> tags;
-    private Appointment appointment;
+    private ScheduleItem appointment;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -49,7 +50,7 @@ public class PersonBuilder {
         nextOfKinPhone = new NextOfKinPhone(DEFAULT_NEXT_OF_KIN_PHONE);
         financialPlans = new HashSet<>();
         tags = new HashSet<>();
-        appointment = new NullAppointment();
+        appointment = NullAppointment.getNullAppointment();
     }
 
     /**
@@ -141,7 +142,7 @@ public class PersonBuilder {
      * Sets the {@code NullAppointment} of the {@code Person} that we are building.
      */
     public PersonBuilder withNullAppointment() {
-        this.appointment = new NullAppointment();
+        this.appointment = NullAppointment.getNullAppointment();
         return this;
     }
 

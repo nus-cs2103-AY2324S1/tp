@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.NullAppointment;
+import seedu.address.model.appointment.ScheduleItem;
 import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Appointment EMPTY_APPOINTMENT = new NullAppointment();
+    public static final ScheduleItem EMPTY_APPOINTMENT = NullAppointment.getNullAppointment();
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),

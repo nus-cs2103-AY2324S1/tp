@@ -59,7 +59,9 @@ public class ScheduleCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person personWithApt = createPersonWithAppointment(personToEdit);
 
-        System.out.println("Schedule command executing now");
+        assert personWithApt.getAppointment() instanceof Appointment
+                : "Schedule Command: person should have appointment";
+
         model.setPerson(personToEdit, personWithApt);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SCHEDULE_SUCCESS, Messages.format(personWithApt)));

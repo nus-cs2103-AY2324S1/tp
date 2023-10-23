@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * Represents an Appointment in the address book.
  */
-public class Appointment implements Comparable<Appointment> {
+public class Appointment extends ScheduleItem implements Comparable<ScheduleItem> {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Input Date should be in format of dd-MM-yyyy HH:mm";
     public static final String MESSAGE_INVALID_DATE = "Please ensure you input a valid date and time";
@@ -128,10 +128,11 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     @Override
-    public int compareTo(Appointment appointment) {
-        if (appointment instanceof NullAppointment) {
+    public int compareTo(ScheduleItem scheduleItem) {
+        if (scheduleItem instanceof NullAppointment) {
             return 0;
         } else {
+            Appointment appointment = (Appointment) scheduleItem;
             return this.date.compareTo(appointment.date);
         }
     }

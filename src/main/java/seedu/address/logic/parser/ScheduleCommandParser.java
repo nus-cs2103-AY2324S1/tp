@@ -41,11 +41,12 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE), pe);
         }
 
-
-
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT, PREFIX_APPOINTMENT_DATE);
         Appointment appointment = parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT).get(),
                 argMultimap.getValue(PREFIX_APPOINTMENT_DATE).get());
+
+        assert appointment.value != null;
+        assert appointment.date != null;
 
         return new ScheduleCommand(index, appointment);
     }
