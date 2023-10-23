@@ -8,6 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
+    public static final Address DEFAULT_ADDRESS = new Address();
+    public static final String DEFAULT_ADDRESS_MESSAGE = "To be added.";
 
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
@@ -28,6 +30,10 @@ public class Address {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
+    }
+
+    Address() {
+        value = DEFAULT_ADDRESS_MESSAGE;
     }
 
     /**
@@ -60,6 +66,15 @@ public class Address {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+    /**
+     * Returns a clone of this address that is equal to this address.
+     */
+    public Address clone() {
+        if (this == DEFAULT_ADDRESS) {
+            return DEFAULT_ADDRESS;
+        }
+        return new Address(value);
     }
 
 }

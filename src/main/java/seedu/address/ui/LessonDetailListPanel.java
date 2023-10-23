@@ -56,11 +56,11 @@ public class LessonDetailListPanel extends UiPart<Region> {
      * @param lesson The lesson whose details are to be shown.
      */
     public void setLessonDetails(Lesson lesson) {
-        date.setText(lesson.getLessonDate());
-        startTime.setText(lesson.getStartTime());
-        endTime.setText(lesson.getEndTime());
-        students.setText(lesson.getStudents());
-        subject.setText(lesson.getSubject());
+        date.setText(lesson.getLessonDateStr());
+        startTime.setText(lesson.getStartTimeStr());
+        endTime.setText(lesson.getEndTimeStr());
+        students.setText(lesson.getStudentsStr());
+        subject.setText(lesson.getSubjectStr());
         taskListView.setItems(lesson.getTaskList());
         taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
     }

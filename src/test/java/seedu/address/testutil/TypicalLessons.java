@@ -7,6 +7,7 @@ import java.util.List;
 
 import seedu.address.model.ScheduleList;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.person.Name;
 import seedu.address.model.lessons.Task;
 import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Subject;
@@ -27,10 +28,11 @@ public class TypicalLessons {
 
     private static List<Task> fillerTasks = Arrays.asList(new Task("first"), new Task("second"), new Task("third"));
 
-    public static final Lesson LESSON1 = new Lesson(startLesson1, endLesson1, math, "Alex Yeoh", taskList);
+    public static final Lesson LESSON1 = new Lesson(startLesson1, endLesson1, math, new Name("Alex Yeoh"), taskList);
 
-    public static final Lesson LESSON2 = new Lesson(startLesson2, endLesson2, math, "David Li", taskList);
-    public static final Lesson LESSON3 = new Lesson(startLesson3, endLesson3, bio, "Bernice Yu", taskList);
+    public static final Lesson LESSON2 = new Lesson(startLesson2, endLesson2, math, new Name("David Li"), taskList);
+    public static final Lesson LESSON3 = new Lesson(startLesson3, endLesson3, bio, new Name("Bernice Yu"), taskList);
+  
 
     private TypicalLessons() {} // prevents instantiation
 

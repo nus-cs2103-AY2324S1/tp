@@ -155,33 +155,67 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
+### Locating students by name: `find`
 
-### Showing a student's details : `show`
+The find command has different behaviours depending on the current list:
 
-Shows the details of the specified student from the contact list in the application.
+1. In `STUDENTS` list:
+    - Finds students whose names contain any of the given keywords.
+2. In `SCHEDULE` list:
+    - TBC
 
-Format: `show INDEX`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* Shows the details of the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
+1. In `STUDENTS` list:
+   * The search is case-insensitive. e.g `hans` will match `Hans`
+   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+   * Only the name is searched.
+   * Only full words will be matched e.g. `Han` will not match `Hans`
+   * Persons matching at least one keyword will be returned (i.e. `OR` search).
+     e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+2. In `SCHEDULE` list:
+    * TBC
 
-Examples:
-* `list` followed by `show 2` shows the details of the 2nd student in the contact list.
-* `find Betsy` followed by `show 1` shows the details of the 1st student in the results of the `find` command.
-
-Success Output:
+Example Success Output:
 ```
-Leah
-Subjects: Chemistry, Math
-Phone Number: 98765432
-Email: leah@example.com
-Address: Evergreen street, block 123, #01-01
+1 persons listed!
 ```
 
 Failure Output:
 ```
-Invalid Index entered, please try showing the contact again with the correct Index!
+0 persons listed!
+```
+
+### Showing a student's details : `show`
+
+The show command has different behaviours depending on the current list:
+
+1. In `STUDENTS` list:
+   - Shows the details of the specified student from the contact list in the application.
+2. In `SCHEDULE` list:
+   - Shows the details of the specified lesson from the lesson list in the application
+
+Format: `show INDEX`
+
+* Shows the details of the student/lesson at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student/lesson list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+1. In `STUDENTS` list:
+   * `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the student list.
+   * `find Betsy` followed by `show 1` shows the details of the 1st student in the results of the `find` command.
+2. In `SCHEDULE` list:
+   *  `list SCHEDULE` followed by `show 2` shows the details of the 2nd lesson in the schedule list.
+
+Example Success Output:
+```
+Showing Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Subjects: [BIOLOGY]; Tags: [friends]
+```
+
+Failure Output:
+```
+The person index provided is invalid
 ```
 
 

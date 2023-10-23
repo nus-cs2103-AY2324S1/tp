@@ -8,7 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
-
+    public static final Email DEFAULT_EMAIL = new Email();
+    public static final String DEFAULT_EMAIL_MESSAGE = "To be added.";
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
@@ -44,6 +45,10 @@ public class Email {
         value = email;
     }
 
+    Email() {
+        value = DEFAULT_EMAIL_MESSAGE;
+    }
+
     /**
      * Returns if a given string is a valid email.
      */
@@ -74,6 +79,16 @@ public class Email {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Returns a clone of this email that is equal to this email.
+     */
+    public Email clone() {
+        if (this == DEFAULT_EMAIL) {
+            return DEFAULT_EMAIL;
+        }
+        return new Email(value);
     }
 
 }
