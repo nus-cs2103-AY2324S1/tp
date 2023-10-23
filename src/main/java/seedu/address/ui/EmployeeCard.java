@@ -67,7 +67,10 @@ public class EmployeeCard extends UiPart<Region> {
                 .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
         if (employee.getIsOnLeave()) {
             isOnLeave.setText("On Leave");
-            isOnLeave.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #ffffff;");
+            isOnLeave.setStyle("-fx-background-color: #df0000; -fx-text-fill: #ffffff;");
+        } else {
+            isOnLeave.setText("Present");
+            isOnLeave.setStyle("-fx-background-color: #00df00; -fx-text-fill: #ffffff;");
         }
         overtimeHours.setText(employee.getOvertimeHours().toString());
     }
