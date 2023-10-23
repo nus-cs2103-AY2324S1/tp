@@ -17,18 +17,20 @@ import seedu.address.model.Contacts;
 import seedu.address.model.Settings;
 import seedu.address.model.contact.Contact;
 
+
+
 /**
  * Holds test data used by test cases, such as strings and {@link Contact}s.
  */
 public final class TestData {
-    // These are used for default values during {@code ContactBuilder} initialisation.
+    // These are used for default values during ContactBuilder initialisation
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NOTE = "I forgot where this contact came from...";
 
     /**
-     * Holds (@code Index} objects that are used in the test cases.
+     * Holds (@link Index} objects that are used in the test cases.
      */
     public static final class IndexContact {
         public static final Index FIRST_CONTACT = Index.fromOneBased(1);
@@ -37,29 +39,9 @@ public final class TestData {
     }
 
     /**
-     * Holds JsonUtilTest test data.
-     */
-    public static final class Json {
-        public static final String JSON_STRING_REPRESENTATION = String.format("{%n"
-                + "  \"name\" : \"This is a test class\",%n"
-                + "  \"listOfLocalDateTimes\" : "
-                + "[ \"-999999999-01-01T00:00:00\", \"+999999999-12-31T23:59:59.999999999\", "
-                + "\"0001-01-01T01:01:00\" ],%n"
-                + "  \"mapOfIntegerToString\" : {%n"
-                + "    \"1\" : \"One\",%n"
-                + "    \"2\" : \"Two\",%n"
-                + "    \"3\" : \"Three\"%n"
-                + "  }%n"
-                + "}");
-
-        public static final String NAME_TEST_VALUE = "This is a test class";
-    }
-
-    /**
      * Holds valid test data.
      */
     public static final class Valid {
-
         public static final String NAME_AMY = "Amy Bee";
         public static final String NAME_BOB = "Bob Choo";
         public static final String PHONE_AMY = "11111111";
@@ -214,7 +196,6 @@ public final class TestData {
         public static final String PHONE = "+651234";
         public static final String EMAIL = "example.com";
 
-
         /**
          * Holds tag-related data.
          */
@@ -250,8 +231,6 @@ public final class TestData {
         );
         return settings;
     }
-
-
 
     private TestData() {
         // No instantiation
