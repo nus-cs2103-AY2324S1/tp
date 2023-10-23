@@ -108,18 +108,18 @@ with all attributes containing any of the corresponding keywords in the command.
 
 Format: `find -PERSON_TYPE [PREFIX/KEYWORDS]`
 
-* All prefixes are optional. Hence, calling `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed
+* All prefixes are optional. Hence, calling `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed.
 * The search is case-insensitive.
   * e.g `hans` will match `Hans`
 * The order of the keywords does not matter. 
   * e.g. `Hans Bo` will match `Bo Hans`
 * There are different behaviours regarding the searching of different parameters:
-  * For `NAME`, `EMAIL`, `LOCATION` and `PHONE`, even substrings will be matched 
+  * For `NAME`, `MEDICAL_HISTORY`, `SPECIALISATION`, `EMAIL`, `LOCATION` and `PHONE`, even substrings will be matched. 
     * e.g. `ha` will match `Hans`
-  * For `AGE`, `MEDICAL_HISTORY`, `SPECIALISATION` and `TAGS` only full words will be matched 
-    * e.g. `Ane` will not match `Anemia`
-* Persons matching at least one keyword will be returned (i.e. `OR` search)
-  * The keywords will be separated out by whitespaces e.g. `hans bo` is akin to searching for `hans` and `bo` simultaneously
+  * For `AGE` and `TAGS` only full words will be matched. 
+    * e.g. `1` will not match `18`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  * The keywords will be separated out by whitespaces e.g. `hans bo` is akin to searching for `hans` and `bo` simultaneously.
     * e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
