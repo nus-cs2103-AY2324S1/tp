@@ -7,6 +7,7 @@ import java.util.List;
 
 import seedu.address.model.ScheduleList;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Subject;
 
 /**
@@ -22,10 +23,10 @@ public class TypicalLessons {
     private static Subject math = new Subject("MATHEMATICS");
     private static Subject bio = new Subject("BIOLOGY");
 
-    public static final Lesson LESSON1 = new Lesson(startLesson1, endLesson1, math, "Alex Yeoh");
+    public static final Lesson LESSON1 = new Lesson(startLesson1, endLesson1, math, new Name("Alex Yeoh"));
 
-    public static final Lesson LESSON2 = new Lesson(startLesson2, endLesson2, math, "David Li");
-    public static final Lesson LESSON3 = new Lesson(startLesson3, endLesson3, bio, "Bernice Yu");
+    public static final Lesson LESSON2 = new Lesson(startLesson2, endLesson2, math, new Name("David Li"));
+    public static final Lesson LESSON3 = new Lesson(startLesson3, endLesson3, bio, new Name("Bernice Yu"));
 
     private TypicalLessons() {} // prevents instantiation
 

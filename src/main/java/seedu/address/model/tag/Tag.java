@@ -59,4 +59,8 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    public Tag clone() {
+        return new Tag(tagName);
+    }
+
 }

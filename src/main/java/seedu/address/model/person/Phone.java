@@ -8,6 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {
+    public static final Phone DEFAULT_PHONE = new Phone();
+    public static final String DEFAULT_PHONE_MESSAGE = "To be added.";
 
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -24,6 +26,10 @@ public class Phone {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         value = phone;
+    }
+
+    Phone() {
+        value = DEFAULT_PHONE_MESSAGE;
     }
 
     /**
@@ -56,6 +62,16 @@ public class Phone {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Returns a clone of this phone that is equal to this phone.
+     */
+    public Phone clone() {
+        if (this == DEFAULT_PHONE) {
+            return DEFAULT_PHONE;
+        }
+        return new Phone(value);
     }
 
 }

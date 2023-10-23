@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+<<<<<<< HEAD
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -37,42 +38,56 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
+=======
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.time.LocalDateTime;
+import java.util.Set;
+>>>>>>> master
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+
+
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private AddCommandParser p = new AddCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND)
-                .withSubjects(VALID_SUBJECT_BOB).build();
-
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
-
-
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .withSubjects(VALID_SUBJECT_AMY, VALID_SUBJECT_BOB).build();
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + SUBJECT_DESC_AMY + SUBJECT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedPersonMultipleTags));
+    void happyCases() {
+        try {
+            Name name = new Name("Yiwen");
+            Phone phone = new Phone("12345678");
+            Email email = new Email("owenfree126@hotmail.com");
+            Address address = new Address("Blk 123, Clementi Ave 3, #12-34");
+            Tag tag = new Tag("friends");
+            Subject subject = new Subject("English");
+            p.parse("add -name Yiwen");
+            p.parse("add -name Yiwen -phone 12345678");
+            p.parse("add -name Yiwen -email owenfree126@hotmail.com");
+            p.parse("add -name Yiwen -address Blk 123, Clementi Ave 3, #12-34");
+            p.parse("add -name Yiwen -tag friends");
+            p.parse("add -name Yiwen -subject English");
+            p.parse("add -name Yiwen -phone 12345678 -email owenfree126@hotmail.com"
+                    + " -address Blk 123, Clementi Ave 3, #12-34 -tag friends -subject English");
+        } catch (ParseException e) {
+            fail();
+        }
     }
 
     @Test
+<<<<<<< HEAD
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + REMARK_DESC_BOB;
@@ -134,70 +149,46 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+=======
+    void invalidCases() {
+        assertThrows(ParseException.class, () -> p.parse("add -name"));
+        assertThrows(ParseException.class, () -> p.parse("add -name 1 -phone abc"));
+        assertThrows(ParseException.class, () -> p.parse("add -name 2 -email 123"));
+        assertThrows(ParseException.class, () -> p.parse("add -name 4 -subject singapore"));
+        assertThrows(ParseException.class, () -> p.parse("add -tag missing name"));
+>>>>>>> master
     }
 
     @Test
-    public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().withSubjects().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+    void correctPerson() {
+        try {
+            Person actualPerson = AddCommandParser.parsePerson("add -name Yiwen"
+                    + " -phone 12345678 -email email@u.com -address Blk 123, Clementi Ave 3, #12,34 "
+                    + "-tag friends -subject English");
+            Person expectedPerson = new Person(new Name("Yiwen"));
+            expectedPerson.setPhone(new Phone("12345678"));
+            expectedPerson.setEmail(new Email("email@u.com"));
+            expectedPerson.setAddress(new Address("Blk 123, Clementi Ave 3, #12,34"));
+            expectedPerson.setTagsIfNotNull(Set.of(new Tag("friends")));
+            expectedPerson.setSubjectsIfNotNull(Set.of(new Subject("English")));
+            assertEquals(expectedPerson, actualPerson);
+        } catch (ParseException e) {
+            fail();
+        }
     }
 
     @Test
-    public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-
-        // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
-
-        // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
-    }
-
-    @Test
-    public void parse_invalidValue_failure() {
-        // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
-
-        // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
-
-        // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
-
-        // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
-
-        // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
-
-        // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
-
-        // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+    void correctLesson() {
+        try {
+            Lesson actualLesson = p.parse("add -name Yiwen "
+                    + "-lesson -subject English -start 12:00 -end 13:00 -day 20/12/23").getLesson();
+            Lesson expectedLesson = new Lesson(LocalDateTime.of(2020, 12, 23, 12, 0),
+                    LocalDateTime.of(2020, 12, 23, 13, 0),
+                    new Subject("English"),
+                    new Name("Yiwen"));
+            assertEquals(expectedLesson, actualLesson);
+        } catch (ParseException e) {
+            fail();
+        }
     }
 }

@@ -17,18 +17,26 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+    private Name name;
+    private Phone phone = Phone.DEFAULT_PHONE;
+    private Email email = Email.DEFAULT_EMAIL;
 
     // Data fields
-    private final Address address;
+    private Address address = Address.DEFAULT_ADDRESS;
     private final Set<Subject> subjects = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
-    private final Remark remark;
+    private Remark remark;
+
 
     /**
-     * Every field must be present and not null.
+     * Make sense to only force the name to be non-null
+     */
+    public Person(Name name) {
+        requireAllNonNull(name);
+        this.name = name;
+    }
+    /**
+     * Every field must be present and not null in this constructor.
      */
     public Person(Name name, Phone phone, Email email, Address address,
                   Set<Subject> subjects, Set<Tag> tags, Remark remark) {
@@ -46,16 +54,59 @@ public class Person {
         return name;
     }
 
+    public void setName(Name name) {
+        this.name = name;
+    }
+    public void setNameIfNotNull(Name name) {
+        if (name != null) {
+            setName(name);
+        }
+    }
+
     public Phone getPhone() {
         return phone;
+    }
+    public void setPhone(Phone phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * Only update if arguement passes is not null. To ease the update and edit command
+     */
+    public void setPhoneIfNotNull(Phone phone) {
+        if (phone != null) {
+            setPhone(phone);
+        }
     }
 
     public Email getEmail() {
         return email;
     }
+    public void setEmail(Email email) {
+        this.email = email;
+    }
+    /**
+     * Only update if arguement passes is not null. To ease the update and edit command
+     */
+    public void setEmailIfNotNull(Email email) {
+        if (email != null) {
+            setEmail(email);
+        }
+    }
 
     public Address getAddress() {
         return address;
+    }
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    /**
+     * Only update if arguement passes is not null. To ease the update and edit command
+     */
+    public void setAddressIfNotNull(Address address) {
+        if (address != null) {
+            setAddress(address);
+        }
     }
     /**
      * Returns an immutable subject set, which throws {@code UnsupportedOperationException}
@@ -63,6 +114,17 @@ public class Person {
      */
     public Set<Subject> getSubjects() {
         return Collections.unmodifiableSet(subjects);
+    }
+    public void setSubjects(Set<Subject> subjects) {
+        requireAllNonNull(subjects);
+        this.subjects.clear();
+        this.subjects.addAll(subjects);
+    }
+
+    public void setSubjectsIfNotNull(Set<Subject> subjects) {
+        if (subjects != null) {
+            setSubjects(subjects);
+        }
     }
 
     /**
@@ -73,8 +135,30 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public void setTags(Set<Tag> tags) {
+        requireAllNonNull(tags);
+        this.tags.clear();
+        this.tags.addAll(tags);
+    }
+    public void setTagsIfNotNull(Set<Tag> tags) {
+        if (tags != null) {
+            setTags(tags);
+        }
+    }
+
     public Remark getRemark() {
         return remark;
+    }
+
+    public void setRemark(Remark remark) {
+        requireAllNonNull(remark);
+        this.remark = remark;
+    }
+
+    public void setRemarkIfNotNull(Remark remark) {
+        if (remark != null) {
+            setRemark(remark);
+        }
     }
 
     /**
@@ -132,6 +216,20 @@ public class Person {
                 .add("tags", tags)
                 .add("remark", remark)
                 .toString();
+    }
+    /**
+     * Returns a clone of this person that is equal to this person.
+     */
+    public Person clone() {
+        Set<Subject> clonedSubjects = new HashSet<>();
+        for (Subject subject : subjects) {
+            clonedSubjects.add(subject.clone());
+        }
+        Set<Tag> clonedTags = new HashSet<>();
+        for (Tag tag : tags) {
+            clonedTags.add(tag.clone());
+        }
+        return new Person(name.clone(), phone.clone(), email.clone(), address.clone(), clonedSubjects, clonedTags, remark.clone());
     }
 
 }

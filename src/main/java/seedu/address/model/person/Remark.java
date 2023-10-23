@@ -36,4 +36,8 @@ public class Remark {
         return value.hashCode();
     }
 
+    public Remark clone() {
+        return new Remark(value);
+    }
+
 }

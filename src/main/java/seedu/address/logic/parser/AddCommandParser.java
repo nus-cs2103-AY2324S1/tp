@@ -1,28 +1,9 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Set;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lessons.Schedule;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
+import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -35,36 +16,39 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_SUBJECT, PREFIX_TAG, PREFIX_SCHEDULE);
+        Person person = parsePerson(args);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        // I see no reason why execute needs to take in a Model. Since model is not singleton, global variable.
+        // so I could not call addLesson command to add lesson to schedule after adding it to a person.
+        // the code below is a temporary ugly solution that rely on the model passed to the Addcommand to add lesson
+        // I will make model, logic singleton in future and refractor this
+        if (args.contains("-lesson")) {
+            // obtain the substring after -lesson flag
+            String subStrAfterLessonFlag = args.substring(args.indexOf("-lesson") + 7);
+            // set -name flag if it is not set
+            if (!subStrAfterLessonFlag.contains("-name")) {
+                subStrAfterLessonFlag = "-name " + person.getName() + subStrAfterLessonFlag;
+            }
+            Lesson lesson = new AddLessonCommandParser().parseLesson(subStrAfterLessonFlag);
+            return new AddCommand(person, lesson);
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Schedule schedule = null; // Todo @yiwen
-        Remark remark = new Remark(""); // add command does not allow adding remarks straight away
-
-        Person person = new Person(name, phone, email, address, subjectList, tagList, remark);
 
         return new AddCommand(person);
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Parses the given {@code String} of arguments in the context of the AddCommand
+     * @param args string input from user
+     * @return the person parsed
+     * @throws ParseException if the user input does not conform the expected format or of wrong value
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    public static Person parsePerson(String args) throws ParseException {
+        Person person = new Person(TypeParsingUtil.parseName("name", args));
+        person.setPhoneIfNotNull(TypeParsingUtil.parsePhone("phone", args, true));
+        person.setEmailIfNotNull(TypeParsingUtil.parseEmail("email", args, true));
+        person.setAddressIfNotNull(TypeParsingUtil.parseAddress("address", args, true));
+        person.setSubjectsIfNotNull(TypeParsingUtil.parseSubjects("subject", args, true));
+        person.setTagsIfNotNull(TypeParsingUtil.parseTags("tag", args, true));
+        return person;
     }
-
 }
