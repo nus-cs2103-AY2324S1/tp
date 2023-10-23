@@ -28,7 +28,7 @@ public class LocationContainsKeywordsPredicate implements Predicate<Person> {
         // It is safe to type cast Person to Specialist due to the guard clause above.
         Specialist specialist = (Specialist) person;
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(specialist.getLocation().value, keyword));
+                .anyMatch(keyword -> StringUtil.wordsContainSubstringIgnoreCase(specialist.getLocation().value, keyword));
     }
 
     @Override
