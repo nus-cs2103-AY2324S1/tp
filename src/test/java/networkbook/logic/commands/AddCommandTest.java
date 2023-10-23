@@ -227,7 +227,7 @@ public class AddCommandTest {
         Index index = Index.fromOneBased(1);
         AddCommand.AddPersonDescriptor editPersonDescriptor = new AddCommand.AddPersonDescriptor();
         AddCommand addCommand = new AddCommand(index, editPersonDescriptor);
-        String expected = AddCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
+        String expected = AddCommand.class.getCanonicalName() + "{index=" + index + ", addPersonDescriptor="
                 + editPersonDescriptor + "}";
         assertEquals(expected, addCommand.toString());
     }

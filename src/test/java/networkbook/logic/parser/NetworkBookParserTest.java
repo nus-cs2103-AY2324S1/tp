@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import networkbook.logic.Messages;
-import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.ClearCommand;
+import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.DeleteCommand;
 import networkbook.logic.commands.edit.EditCommand;
@@ -21,13 +21,14 @@ import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
 import networkbook.logic.commands.SortCommand;
+import networkbook.logic.commands.edit.EditNameAction;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.NameContainsKeyTermsPredicate;
+import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.PersonSortComparator;
 import networkbook.model.person.PersonSortComparator.SortField;
 import networkbook.model.person.PersonSortComparator.SortOrder;
-import networkbook.testutil.AddPersonDescriptorBuilder;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.PersonUtil;
 import networkbook.testutil.TypicalIndexes;
@@ -58,12 +59,11 @@ public class NetworkBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased() + " "
-                + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, editPersonDescriptor -> {}), command);
+                + CliSyntax.PREFIX_NAME + " " + CommandTestUtil.VALID_NAME_AMY);
+        EditNameAction expectedAction = new EditNameAction(new Name(CommandTestUtil.VALID_NAME_AMY));
+        assertEquals(new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, expectedAction), command);
     }
 
     @Test

@@ -209,12 +209,12 @@ public class AddCommand extends Command {
          */
         public AddPersonDescriptor(AddPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhones(toCopy.phones);
-            setEmails(toCopy.emails);
-            setLinks(toCopy.links);
+            setPhones(toCopy.getPhones().map(UniqueList::copy).orElse(null));
+            setEmails(toCopy.getEmails().map(UniqueList::copy).orElse(null));
+            setLinks(toCopy.getLinks().map(UniqueList::copy).orElse(null));
             setGraduation(toCopy.graduation);
-            setCourses(toCopy.courses);
-            setSpecialisations(toCopy.specialisations);
+            setCourses(toCopy.getCourses().map(UniqueList::copy).orElse(null));
+            setSpecialisations(toCopy.getSpecialisations().map(UniqueList::copy).orElse(null));
             setTags(toCopy.getTags().map(UniqueList::copy).orElse(null));
             setPriority(toCopy.priority);
         }

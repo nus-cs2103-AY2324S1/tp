@@ -341,4 +341,33 @@ public class EditCommandTest {
         String expectedMessage = EditPersonDescriptor.MESSAGE_INVALID_TAG_INDEX;
         assertCommandFailure(editCommand, model, expectedMessage);
     }
+
+    @Test
+    public void execute_validPriority_success() {
+        showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+
+        Person originalPerson = model.getFilteredPersonList()
+                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new Person(
+                originalPerson.getName(),
+                originalPerson.getPhones(),
+                originalPerson.getEmails(),
+                originalPerson.getLinks(),
+                originalPerson.getGraduation().orElse(null),
+                originalPerson.getCourses(),
+                originalPerson.getSpecialisations(),
+                originalPerson.getTags(),
+                EditCommandUtil.VALID_PRIORITY
+        );
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                editPersonDescriptor -> editPersonDescriptor.setPriority(EditCommandUtil.VALID_PRIORITY));
+
+        String expectedMessage =
+                String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
+        expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
 }
