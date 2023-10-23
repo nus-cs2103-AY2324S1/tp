@@ -2,6 +2,9 @@ package seedu.address.model.student.grades;
 
 import java.util.List;
 
+/**
+ * Represents a tracker for a particular class grade.
+ */
 public interface Tracker {
 
     /**
