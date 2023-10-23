@@ -74,6 +74,21 @@ public class TimeInterval {
         return start.compareTo(end) <= -1;
     }
 
+    /**
+     * Gets the start time of the interval
+     * @return Start time
+     */
+    public Time getStart() {
+        return this.start;
+    }
+
+    /**
+     * Gets the end time of the interval
+     * @return end time
+     */
+    public Time getEnd() {
+        return this.end;
+    }
 
     @Override
     public String toString() {

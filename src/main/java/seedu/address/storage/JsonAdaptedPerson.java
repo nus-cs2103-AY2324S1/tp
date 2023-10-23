@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.group.Group;
+import seedu.address.model.FreeTime;
 import seedu.address.model.group.GroupList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -26,6 +26,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final List<JsonAdaptedGroup> groupList = new ArrayList<>();
+    private final List<JsonAdaptedTime> freeTimeList = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -33,12 +34,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
-            @JsonProperty("groupList") List<JsonAdaptedGroup> groupList) {
+            @JsonProperty("groupList") List<JsonAdaptedGroup> groupList,
+            @JsonProperty("freeTimeList") List<JsonAdaptedTime> freeTimeList
+    ) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         if (groupList != null) {
             this.groupList.addAll(groupList);
+        }
+        if (freeTimeList != null) {
+            this.freeTimeList.addAll(freeTimeList);
         }
     }
 
@@ -51,6 +57,9 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         groupList.addAll(source.getGroups().toStream()
                 .map(JsonAdaptedGroup::new)
+                .collect(Collectors.toList()));
+        freeTimeList.addAll(source.getFreeTime().toStream()
+                .map(JsonAdaptedTime::new)
                 .collect(Collectors.toList()));
     }
 
@@ -84,14 +93,17 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        final List<Group> personGroups = new ArrayList<>();
+        GroupList modelGroupList = new GroupList();
         for (JsonAdaptedGroup group : groupList) {
-            personGroups.add(group.toModelType());
+            modelGroupList.add(group.toModelType());
         }
-        GroupList gL = new GroupList();
-        personGroups.forEach(gL::add);
 
-        return new Person(modelName, modelPhone, modelEmail, gL);
+        FreeTime modelFreeTimeList = new FreeTime();
+        for (JsonAdaptedTime freeTime : freeTimeList) {
+            modelFreeTimeList.addTime(freeTime.toModelType());
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelGroupList, modelFreeTimeList);
     }
 
 }
