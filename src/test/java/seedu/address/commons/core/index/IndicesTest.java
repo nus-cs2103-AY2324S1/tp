@@ -102,6 +102,9 @@ public class IndicesTest {
         // different types -> returns false
         assertFalse(ONEBASED_ONE_TO_THREE.equals(5.0f));
 
+        // different size -> returns false
+        assertNotEquals(ONEBASED_ONE, ONEBASED_FOUR_TO_SIX);
+
         // different index -> returns false
         assertNotEquals(ONEBASED_ONE_TO_THREE, ONEBASED_FOUR_TO_SIX);
     }
