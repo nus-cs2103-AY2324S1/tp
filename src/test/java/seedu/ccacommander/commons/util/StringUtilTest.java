@@ -149,15 +149,18 @@ public class StringUtilTest {
         assertEquals("Ca", StringUtil.capitaliseString("ca"));
         assertEquals("C", StringUtil.capitaliseString("c"));
 
-        assertEquals("CAPS", StringUtil.capitaliseString("CAPS"));
-        assertEquals("CAPS", StringUtil.capitaliseString("cAPS"));
-        assertEquals("CapS", StringUtil.capitaliseString("capS"));
+        assertEquals("Caps", StringUtil.capitaliseString("CAPS"));
+        assertEquals("Caps", StringUtil.capitaliseString("cAPS"));
+        assertEquals("Caps", StringUtil.capitaliseString("capS"));
+
+        assertEquals("John Doe", StringUtil.capitaliseString("john doe"));
+        assertEquals("John Doe", StringUtil.capitaliseString("jOHN dOE"));
     }
 
     @Test
     public void capitaliseString_blankInput_correctResult() {
         assertEquals("", StringUtil.capitaliseString(""));
-        assertEquals(" ", StringUtil.capitaliseString(" "));
-        assertEquals("     ", StringUtil.capitaliseString("     "));
+        assertEquals("", StringUtil.capitaliseString(" "));
+        assertEquals("", StringUtil.capitaliseString("     "));
     }
 }
