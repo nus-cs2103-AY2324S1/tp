@@ -50,7 +50,7 @@ public class PersonBuilder {
         nextOfKinPhone = new NextOfKinPhone(DEFAULT_NEXT_OF_KIN_PHONE);
         financialPlans = new HashSet<>();
         tags = new HashSet<>();
-        appointment = NullAppointment.getNullappointment();
+        appointment = NullAppointment.getNullAppointment();
     }
 
     /**
@@ -142,7 +142,7 @@ public class PersonBuilder {
      * Sets the {@code NullAppointment} of the {@code Person} that we are building.
      */
     public PersonBuilder withNullAppointment() {
-        this.appointment = NullAppointment.getNullappointment();
+        this.appointment = NullAppointment.getNullAppointment();
         return this;
     }
 

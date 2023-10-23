@@ -10,7 +10,7 @@ public class NullAppointment extends ScheduleItem implements Comparable<Schedule
     private NullAppointment() {
         this.value = MESSAGE_NULL_APT;
     }
-    public static NullAppointment getNullappointment() {
+    public static NullAppointment getNullAppointment() {
         return nullappointment;
     }
     @Override

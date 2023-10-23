@@ -45,7 +45,7 @@ class JsonAdaptedAppointment {
     public ScheduleItem toModelType() throws IllegalValueException {
 
         if (appointment.equals(MESSAGE_NULL_APT)) {
-            return NullAppointment.getNullappointment();
+            return NullAppointment.getNullAppointment();
         }
 
         if (!Appointment.isValidAppointment(appointment)) {
