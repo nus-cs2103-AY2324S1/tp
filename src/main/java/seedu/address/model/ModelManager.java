@@ -94,6 +94,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortData() {
+        addressBook.sortData();
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }

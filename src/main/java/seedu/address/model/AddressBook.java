@@ -57,6 +57,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
+    /**
+     * Sorts the existing data of this {@code AddressBook}
+     */
+    public void sortData() {
+        persons.sort();
+    }
+
     //// person-level operations
 
     /**

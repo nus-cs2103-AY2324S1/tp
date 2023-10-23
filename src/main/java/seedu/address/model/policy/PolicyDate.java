@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a car insurance policy issue / expiry date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPolicyDate(String)}
  */
-public class PolicyDate {
+public class PolicyDate implements Comparable<PolicyDate> {
 
     public static final String MESSAGE_CONSTRAINTS = "Policy issue / expiry date should be in the format dd-mm-yyyy";
 
@@ -21,6 +21,8 @@ public class PolicyDate {
      */
     public static final String VALIDATION_DATE_FORMAT = "dd-MM-yyyy";
     public static final String DEFAULT_VALUE = "01-01-1000";
+
+    public static final String DEFAULT_COMPARISON_VALUE = "1000-01-01";
 
     public final LocalDate date;
 
@@ -71,6 +73,11 @@ public class PolicyDate {
     @Override
     public int hashCode() {
         return date.hashCode();
+    }
+
+    @Override
+    public int compareTo(PolicyDate other) {
+        return date.compareTo(other.date);
     }
 
 }
