@@ -311,6 +311,74 @@ but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 #### Design rationale:
 The `delete-t` command was designed this way to ensure consistency with the previous `delete` person command.
 
+### Add Schedule Feature
+
+#### Implementation Details
+
+The add schedule feature is facilitated by `AddScheduleCommand`. It extends `Command` with the necessary implementation to add a schedule to a `Model`. Additionally, it implements the following operation:
+
+* `AddScheduleCommand#execute(Model)` — Adds the schedule to the `Model`.
+
+This operation is exposed in the abstract `Command` class as an abstract method.
+
+Given below is an example usage scenario and how the add schedule command behaves.
+
+The user executes `add-s 1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` command. The `AddScheduleCommandParser` will be initialized to parse the user input to create a `AddScheduleCommand` with a `Index`, `StartTime` and `EndTime` representing the user's input.
+
+The `AddScheduleCommand#exceute(Model)` will perform the following checks in this order to ensure that the `Schedule` can be added to the `Model`:
+1. The `Index` is valid.
+2. A valid schedule can be created with the given `Index`, `StartTime` and `EndTime`.
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered valid if its start time is before its end time. This is enforced by the constructor of the `Schedule` class, it throws an `IllegalArgumentException` if it is not valid.
+
+    </div>
+3. Executing this command would not result in a duplicate schedule in the `Model`.
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered a duplicate if it belongs to the same `Person` and have the same `StartTime` and `EndTime` as an existing schedule in the `Model`.
+
+    </div>
+4. Executing this command would not result in a clashing schedule for the tutor specified by `Index` in the `Model`.
+    <div markdown="span" class="alert alert-info">:information_source: **Note:** A `Schedule` is considered a clashing if it belongs to the same `Person` and have overlapping times. This is checked by `Schedule#isClashing(Schedule)`.
+
+    </div>
+
+If any of these checks fail a `CommandException` with an appropriate error message will be thrown. Otherwise, it will create a `Schedule` and use `Model#addSchedule` to add the schedule to the `Model`.
+
+The following shows the activity diagram from when a user executes the `add-s` command:
+
+![AddScheduleActivityDiagram](images/AddScheduleActivityDiagram.png)
+
+The following sequence diagram shows how the operation works:
+
+![AddScheduleSequenceDiagram](images/AddScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddScheduleCommandParser` and `AddScheduleCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: Checking for clashing schedule:**
+
+* **Alternative 1 (current choice):** Perform the check in `AddScheduleCommand`.
+    * Pros: Easy to implement.
+    * Cons: Have to directly access schedules in the `UniqueScheduleList` creating dependencies.
+    * Cons: Can be inefficient, as we have to iterate over all schedules in the schedule list.
+
+* **Alternative 2:** Perform the check in `UniqueScheduleList`.
+    * Pros: Consistent throughout the system as this check is enforced on all schedules being added to the `UniqueScheduleList` regardless of where it is being added from.
+    * Pros: Can be optimised to use more efficient searching algorithms like binary search if the implementation of the underlying list is sorted.
+    * Cons: Every schedule in the system have to adhere to that. For eg., if we want to allow the user to override such constraints it would not be possible without modifying the functionality of the list.
+
+**Aspect: Checking for valid schedule:**
+
+* **Alternative 1 (current choice):** Perform the check in `Schedule`.
+    * Pros: Easy to implement.
+    * Pros: Consistent throughout the system as it does not make any sense to have a schedule with a `StartTime` after its `EndTime`.
+    * Cons: Have to handle the exception if an invalid schedule is being created.
+
+* **Alternative 2:** Perform the check in `AddScheduleCommand`.
+    * Pros: Allows for flexibility in the constraints.
+    * Cons: Have to repeatedly write logic perform this check everywhere a new `Schedule` is being created.
+
 
 ### \[Proposed\] Undo/redo feature
 
