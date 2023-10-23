@@ -19,10 +19,11 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Deletes the person identified by the index number(s) used in the displayed person list.\n"
+            + "Parameters: INDEX... (must be a positive integer and within range of displayed person list)\n"
+            + "INDEX... must be white space separated and must not contain duplicates\n"
             + "Example: " + COMMAND_WORD + " "
-            + "1";
+            + "1 3 4";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS_HEADER = "Deleted %d Person(s):";
     private final List<Index> targetIndexes;
 
@@ -44,9 +45,10 @@ public class DeleteCommand extends Command {
         }
         StringBuilder resultMessage =
                 new StringBuilder(String.format(MESSAGE_DELETE_PERSON_SUCCESS_HEADER, targetIndexes.size()));
-        for (Index targetIndex: targetIndexes) {
+        for (int i = 0; i < targetIndexes.size(); i++) {
+            Index targetIndex = targetIndexes.get(i);
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            resultMessage.append(String.format("\n%1$d: %2$s", targetIndex.getOneBased(),
+            resultMessage.append(String.format("\n%1$d. %2$s", i + 1,
                             Messages.formatShortForm(personToDelete)));
         }
         for (int i = targetIndexes.size() - 1; i >= 0; i--) {

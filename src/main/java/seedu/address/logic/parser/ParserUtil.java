@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
@@ -51,11 +53,25 @@ public class ParserUtil {
         String trimmedIndexes = oneBasedIndexes.trim();
         List<Index> indexList = new ArrayList<>();
         String[] args = trimmedIndexes.split("\\s+");
+        verifyNoDuplicateIndexes(args);
         for (String arg : args) {
             indexList.add(parseIndex(arg));
         }
         Collections.sort(indexList);
         return indexList;
+    }
+
+    /**
+     * Verifies that no duplicated indexes are present in user input argument.
+     */
+    private static void verifyNoDuplicateIndexes(String[] args) throws ParseException {
+        String[] duplicatedIndexes = Arrays.stream(args)
+                .filter(i -> Collections.frequency(Arrays.asList(args), i) > 1)
+                .distinct()
+                .toArray(String[]::new);
+        if (duplicatedIndexes.length > 0) {
+            throw new ParseException(Messages.getErrorMessageForDuplicateIndexes(duplicatedIndexes));
+        }
     }
 
     /**

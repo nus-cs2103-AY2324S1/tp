@@ -25,6 +25,9 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_DUPLICATE_INDEXES =
+            "The following index(es) has been duplicated: ";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -35,6 +38,14 @@ public class Messages {
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+    }
+
+    /**
+     * Returns an error message indicating the duplicate indexes.
+     */
+    public static String getErrorMessageForDuplicateIndexes(String[] duplicatedIndexes) {
+        assert duplicatedIndexes.length > 0;
+        return MESSAGE_DUPLICATE_INDEXES + String.join(", ", duplicatedIndexes);
     }
 
     /**
@@ -52,7 +63,7 @@ public class Messages {
 
         if (person instanceof Patient) {
             Patient patient = (Patient) person;
-            builder.insert(0, "Patient ")
+            builder.insert(0, "Patient: ")
                     .append("; Age: ")
                     .append(patient.getAge())
                     .append("; Medical History: ")
@@ -61,7 +72,7 @@ public class Messages {
 
         if (person instanceof Specialist) {
             Specialist specialist = (Specialist) person;
-            builder.insert(0, "Specialist ")
+            builder.insert(0, "Specialist: ")
                     .append("; Specialty: ")
                     .append(specialist.getSpecialty());
         }
@@ -74,12 +85,12 @@ public class Messages {
      */
     public static String formatShortForm(Person person) {
         final StringBuilder result = new StringBuilder();
-        result.append(person.getName()).append("; Email: ").append(person.getEmail());
+        result.append(person.getName()).append("; Phone: ").append(person.getPhone());
         if (person instanceof Patient) {
-            result.insert(0, "Patient ");
+            result.insert(0, "Patient: ");
         }
         if (person instanceof Specialist) {
-            result.insert(0, "Specialist ");
+            result.insert(0, "Specialist: ");
         }
         return result.toString();
     }

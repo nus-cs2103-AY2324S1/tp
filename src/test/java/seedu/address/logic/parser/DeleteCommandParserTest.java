@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 
 
@@ -41,12 +42,25 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseBasicFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteCommand.MESSAGE_USAGE));
+                ParserUtil.MESSAGE_INVALID_INDEX
+                + "\n"
+                + DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_multiArgSingleInvalid_throwsParseException() {
         assertParseBasicFailure(parser, "1 2 a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteCommand.MESSAGE_USAGE));
+                ParserUtil.MESSAGE_INVALID_INDEX
+                + "\n"
+                + DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_duplicatedIndexes_throwsParseException() {
+        String[] duplicatedIndexes = {"1", "3"};
+        assertParseBasicFailure(parser, "1 1 2 3 3 4 5",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        Messages.getErrorMessageForDuplicateIndexes(duplicatedIndexes)
+                                + "\n" + DeleteCommand.MESSAGE_USAGE));
     }
 }

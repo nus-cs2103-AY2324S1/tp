@@ -37,7 +37,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_FIRST_PERSON));
         StringBuilder expectedMessageBuilder =
                 new StringBuilder(String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS_HEADER, 1));
-        expectedMessageBuilder.append(String.format("\n%1$d: %2$s", 1,
+        expectedMessageBuilder.append(String.format("\n%1$d. %2$s", 1,
                 Messages.formatShortForm(personToDelete)));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -54,10 +54,11 @@ public class DeleteCommandTest {
         StringBuilder expectedMessageBuilder =
                 new StringBuilder(String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS_HEADER, indexList.size()));
         List<Person> personsToDelete = new ArrayList<>();
-        for (Index index: indexList) {
+        for (int i = 0; i < indexList.size(); i++) {
+            Index index = indexList.get(i);
             Person currPerson = model.getFilteredPersonList().get(index.getZeroBased());
             personsToDelete.add(currPerson);
-            expectedMessageBuilder.append(String.format("\n%1$d: %2$s", index.getOneBased(),
+            expectedMessageBuilder.append(String.format("\n%1$d. %2$s", i + 1,
                             Messages.formatShortForm(currPerson)));
         }
         DeleteCommand deleteCommand = new DeleteCommand(indexList);
@@ -86,7 +87,7 @@ public class DeleteCommandTest {
 
         StringBuilder expectedMessageBuilder =
                 new StringBuilder(String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS_HEADER, 1));
-        expectedMessageBuilder.append(String.format("\n%1$d: %2$s", 1,
+        expectedMessageBuilder.append(String.format("\n%1$d. %2$s", 1,
                 Messages.formatShortForm(personToDelete)));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
