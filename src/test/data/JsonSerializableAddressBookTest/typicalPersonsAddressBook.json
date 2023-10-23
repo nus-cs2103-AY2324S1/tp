@@ -8,6 +8,7 @@
     "tags" : [ "friends" ],
     "nric" : "000A",
     "licencePlate" : "SBA1234A",
+    "company" : "NTUC",
     "policyNumber" : "AIA1",
     "policyIssueDate" : "01-01-2020",
     "policyExpiryDate" : "01-02-2020"
@@ -19,6 +20,7 @@
     "tags" : [ "owesMoney", "friends" ],
     "nric" : "001B",
     "licencePlate" : "SBA5555B",
+    "company" : "InsureMe",
     "policyNumber" : "AIA2",
     "policyIssueDate" : "12-12-2010",
     "policyExpiryDate" : "12-12-2020"
@@ -30,6 +32,7 @@
     "tags" : [ ],
     "nric" : "123C",
     "licencePlate" : "SLR8E",
+    "company" : "InsureMe",
     "policyNumber" : "5734534X",
     "policyIssueDate" : "31-12-2019",
     "policyExpiryDate" : "01-01-2020"
@@ -41,7 +44,8 @@
     "tags" : [ "friends" ],
     "nric" : "464J",
     "licencePlate" : "STG46P",
-    "policyNumber" : "NTUC4532",
+    "company" : "NTUC",
+    "policyNumber" : "4532",
     "policyIssueDate" : "29-02-2004",
     "policyExpiryDate" : "29-02-2008"
   }, {
@@ -52,6 +56,7 @@
     "tags" : [ ],
     "nric" : "573H",
     "licencePlate" : "SHL463C",
+    "company" : "NTUC",
     "policyNumber" : "NOPOLICY",
     "policyIssueDate" : "01-01-1000",
     "policyExpiryDate" : "01-01-1000"
@@ -63,6 +68,7 @@
     "tags" : [ ],
     "nric" : "743G",
     "licencePlate" : "SBA1Z",
+    "company" : "InsureMe",
     "policyNumber" : "NOPOLICY",
     "policyIssueDate" : "01-01-1000",
     "policyExpiryDate" : "01-01-1000"
@@ -74,6 +80,7 @@
     "tags" : [ ],
     "nric" : "674G",
     "licencePlate" : "SNM9735R",
+    "company" : "InsureMe",
     "policyNumber" : "NOPOLICY",
     "policyIssueDate" : "01-01-1000",
     "policyExpiryDate" : "01-01-1000"

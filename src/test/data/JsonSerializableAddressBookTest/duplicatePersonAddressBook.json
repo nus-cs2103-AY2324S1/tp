@@ -7,6 +7,7 @@
     "tags": [ "friends" ],
     "nric" : "362D",
     "licencePlate" : "SLR5E",
+    "company" : "NTUC",
     "policyNumber" : "B3425",
     "policyIssueDate" : "01-01-2020",
     "policyExpiryDate" : "01-01-2030"
@@ -17,6 +18,7 @@
     "address": "4th street",
     "nric" : "362D",
     "licencePlate" : "SLR5E",
+    "company" : "NTUC",
     "policyNumber" : "B3425",
     "policyIssueDate" : "01-01-2020",
     "policyExpiryDate" : "01-01-2030"

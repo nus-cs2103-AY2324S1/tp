@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -32,6 +33,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
@@ -46,7 +48,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_TAG,
                         PREFIX_NRIC,
                         PREFIX_LICENCE_PLATE,
-                        // PREFIX_COMPANY,
+                        PREFIX_COMPANY,
                         PREFIX_POLICY_NUMBER,
                         PREFIX_POLICY_ISSUE_DATE,
                         PREFIX_POLICY_EXPIRY_DATE
@@ -84,10 +86,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                     ParserUtil.parseLicencePlate(argMultimap.getValue(PREFIX_LICENCE_PLATE).get()));
         }
 
-        //        if (argMultimap.getValue(PREFIX_COMPANY).isPresent()) {
-        //            editPersonDescriptor.setCompany(
-        //            ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get()));
-        //        }
+        if (argMultimap.getValue(PREFIX_COMPANY).isPresent()) {
+            editPersonDescriptor.setCompany(
+                    ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get()));
+        }
 
         if (argMultimap.getValue(PREFIX_POLICY_NUMBER).isPresent()) {
             editPersonDescriptor.setPolicyNumber(

@@ -18,6 +18,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CompanyContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.LicenceContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -78,12 +79,20 @@ public class AddressBookParserTest {
         String keywords = "foo bar fun";
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " n/" + keywords);
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords),
+        assertEquals(
+                new FindCommand(
+                new NameContainsKeywordsPredicate(keywords),
                 new LicenceContainsKeywordsPredicate(""),
                 new NricContainsKeywordsPredicate(""),
-                new PhoneContainsKeywordsPredicate(""), new PolicyNumberContainsKeywordsPredicate(""),
-                new TagContainsKeywordsPredicate(""), new PolicyExpiryContainsKeywordsPredicate(""),
-                new EmailContainsKeywordsPredicate(""), new PolicyIssueContainsKeywordsPredicate("")), command);
+                new PhoneContainsKeywordsPredicate(""),
+                new PolicyNumberContainsKeywordsPredicate(""),
+                new TagContainsKeywordsPredicate(""),
+                new PolicyExpiryContainsKeywordsPredicate(""),
+                new EmailContainsKeywordsPredicate(""),
+                new PolicyIssueContainsKeywordsPredicate(""),
+                new CompanyContainsKeywordsPredicate("")),
+                command
+        );
     }
 
     @Test
