@@ -21,6 +21,8 @@ import seedu.address.model.person.Applicant;
 import seedu.address.model.person.ApplicantContainsKeywordsPredicate;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.MemberContainsKeywordsPredicate;
+import seedu.address.testutil.EditApplicantDescriptorBuilder;
+import seedu.address.testutil.EditMemberDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -29,8 +31,12 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_CADENCE = "Cadence Lim";
+    public static final String VALID_NAME_DILL = "Dill Ho";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_CADENCE = "33333333";
+    public static final String VALID_PHONE_DILL = "44444444";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_TELEGRAM_AMY = "@amybee123";
@@ -56,16 +62,25 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    //    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    //    public static final EditCommand.EditPersonDescriptor DESC_BOB;
-    //    static {
-    //        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-    //                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-    //                .withTags(VALID_TAG_FRIEND).build();
-    //        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-    //                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-    //                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-    //    }
+    public static final EditMemberCommand.EditMemberDescriptor DESC_AMY;
+    public static final EditMemberCommand.EditMemberDescriptor DESC_BOB;
+    static {
+        DESC_AMY = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withTelegram(VALID_TELEGRAM_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
+        DESC_BOB = new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withTelegram(VALID_TELEGRAM_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    }
+
+    public static final EditApplicantCommand.EditApplicantDescriptor DESC_CADENCE;
+    public static final EditApplicantCommand.EditApplicantDescriptor DESC_DILL;
+    static {
+        DESC_CADENCE = new EditApplicantDescriptorBuilder().withName(VALID_NAME_CADENCE)
+                .withPhone(VALID_PHONE_CADENCE).build();
+        DESC_DILL = new EditApplicantDescriptorBuilder().withName(VALID_NAME_DILL)
+                .withPhone(VALID_PHONE_DILL).build();
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>

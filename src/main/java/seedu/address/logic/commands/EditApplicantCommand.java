@@ -38,7 +38,7 @@ public class EditApplicantCommand extends Command {
 
     public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    //public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the address book.";
 
     private final Index index;
     private final EditApplicantDescriptor editApplicantDescriptor;
@@ -67,9 +67,9 @@ public class EditApplicantCommand extends Command {
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
         Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
 
-        /*if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+        if (!applicantToEdit.isSamePerson(editedApplicant) && model.hasApplicant(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
-        }*/
+        }
 
         model.setApplicant(applicantToEdit, editedApplicant);
         model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
