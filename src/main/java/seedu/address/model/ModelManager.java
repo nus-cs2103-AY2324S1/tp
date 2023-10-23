@@ -15,6 +15,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.ScheduleItem;
 import seedu.address.model.person.Person;
 
 /**
@@ -154,11 +155,9 @@ public class ModelManager implements Model {
         observableAppointments.clear();
         // appointmentList.add(new Appointment("appointment123", LocalDateTime.now()));
         for (int i = 0; i < filteredPersons.size(); i++) {
-            Appointment appt = filteredPersons.get(i).getAppointment();
-            // There is a need to check whether date is non-null as this
-            // is not being checked during the instantiation of an appointment object
-            if (appt != null && appt.date != null) {
-                observableAppointments.add(appt);
+            ScheduleItem appt = filteredPersons.get(i).getAppointment();
+            if (appt instanceof Appointment) {
+                observableAppointments.add((Appointment) appt);
             }
         }
     }

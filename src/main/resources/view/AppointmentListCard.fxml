@@ -34,5 +34,5 @@
          <RowConstraints />
       </rowConstraints>
   </GridPane>
-   <FlowPane prefHeight="200.0" prefWidth="200.0" />
+   <FlowPane prefHeight="100.0" prefWidth="200.0" />
 </HBox>

@@ -48,13 +48,13 @@
         </StackPane>
 
         <HBox prefHeight="500.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-        <VBox fx:id="personList" minWidth="300.0" prefWidth="300.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+        <VBox fx:id="personList" minWidth="300.0" prefWidth="500.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
-        <VBox fx:id="personList" minWidth="300.0" prefWidth="300.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+        <VBox fx:id="appointmentList" minWidth="150.0" prefWidth="200.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
