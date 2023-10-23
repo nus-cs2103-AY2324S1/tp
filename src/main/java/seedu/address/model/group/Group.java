@@ -157,10 +157,6 @@ public class Group {
         return this.groupName.equals(otherGroup.getGroupName());
     }
 
-//    public String getName() {
-//        return this.groupName;
-//    }
-
     public Stream<Person> grpMatesStream() {
         return listOfGroupMates.stream();
     }

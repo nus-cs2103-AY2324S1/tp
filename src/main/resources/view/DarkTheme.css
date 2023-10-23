@@ -293,6 +293,12 @@
     -fx-background-color: #D2B48C
 }
 
+#dayListView {
+    -fx-padding: 0 10 10 10;
+    -fx-background-color: #D2B48C
+}
+
+
 #resultDisplay .content{
     -fx-background-color: #9B6572;
     border-color: #B88491
@@ -304,6 +310,12 @@
 #groups {
     -fx-hgap: 7;
     -fx-vgap: 3;
+}
+
+#day {
+    -fx-text-fill: black;
+    -fx-font-size: 18;
+
 }
 
 #groups .label {
