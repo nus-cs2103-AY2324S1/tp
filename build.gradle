@@ -63,6 +63,10 @@ application {
     mainClass = 'seedu.address.Main'
 }
 
+run {
+    enableAssertions true
+}
+
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
