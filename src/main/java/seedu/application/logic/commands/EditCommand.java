@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -42,14 +42,14 @@ public class EditCommand extends Command {
         + "[" + PREFIX_COMPANY + "COMPANY] "
         + "[" + PREFIX_DEADLINE + "DEADLINE] "
         + "[" + PREFIX_STATUS + "STATUS] "
-        + "[" + PREFIX_JOBTYPE + "JOB_TYPE] "
+        + "[" + PREFIX_JOB_TYPE + "JOB TYPE] "
         + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_ROLE + "Software Engineer "
         + PREFIX_COMPANY + "Google"
         + PREFIX_DEADLINE + "Dec 31 2023 1200"
         + PREFIX_STATUS + "Pending "
-        + PREFIX_JOBTYPE + "INTERNSHIP"
+        + PREFIX_JOB_TYPE + "INTERNSHIP"
         + PREFIX_INDUSTRY + "Technology";
 
     public static final String MESSAGE_EDIT_JOB_SUCCESS = "Edited Job: %1$s";
@@ -58,7 +58,7 @@ public class EditCommand extends Command {
         + PREFIX_ROLE + " for Role\n"
         + PREFIX_STATUS + " for Status\n"
         + PREFIX_DEADLINE + " for Deadline\n"
-        + PREFIX_JOBTYPE + " for Job Type\n"
+        + PREFIX_JOB_TYPE + " for Job Type\n"
         + PREFIX_INDUSTRY + " for Industry\n";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book.";
 

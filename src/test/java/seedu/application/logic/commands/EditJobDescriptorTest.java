@@ -1,8 +1,7 @@
 package seedu.application.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.application.logic.commands.CommandTestUtil.DESC_CHEF;
 import static seedu.application.logic.commands.CommandTestUtil.DESC_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
@@ -20,43 +19,43 @@ public class EditJobDescriptorTest {
     public void equals() {
         // same values -> returns true
         EditJobDescriptor descriptorWithSameValues = new EditJobDescriptor(DESC_CHEF);
-        assertTrue(DESC_CHEF.equals(descriptorWithSameValues));
+        assertEquals(DESC_CHEF, descriptorWithSameValues);
 
         // same object -> returns true
-        assertTrue(DESC_CHEF.equals(DESC_CHEF));
+        assertEquals(DESC_CHEF, DESC_CHEF);
 
         // null -> returns false
-        assertFalse(DESC_CHEF.equals(null));
+        assertNotEquals(DESC_CHEF, null);
 
         // different types -> returns false
-        assertFalse(DESC_CHEF.equals(5));
+        assertNotEquals(DESC_CHEF, 5.0f);
 
         // different values -> returns false
-        assertFalse(DESC_CHEF.equals(DESC_CLEANER));
+        assertNotEquals(DESC_CHEF, DESC_CLEANER);
 
         // different role -> returns false
         EditJobDescriptor editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withRole(VALID_ROLE_CLEANER).build();
-        assertFalse(DESC_CHEF.equals(editedChef));
+        assertNotEquals(DESC_CHEF, editedChef);
 
         // different company -> returns false
         editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withCompany(VALID_COMPANY_CLEANER).build();
-        assertFalse(DESC_CHEF.equals(editedChef));
+        assertNotEquals(DESC_CHEF, editedChef);
 
         // different deadline -> returns false
         editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withDeadline(VALID_DEADLINE_CLEANER).build();
-        assertFalse(DESC_CHEF.equals(editedChef));
+        assertNotEquals(DESC_CHEF, editedChef);
 
         // different status -> returns false
         editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withStatus("APPROVED").build();
-        assertFalse(DESC_CHEF.equals(editedChef));
+        assertNotEquals(DESC_CHEF, editedChef);
 
         // different jobType -> returns false
         editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withJobType("PART_TIME").build();
-        assertFalse(DESC_CHEF.equals(editedChef));
+        assertNotEquals(DESC_CHEF, editedChef);
 
         // different industry -> returns false
         editedChef = new EditJobDescriptorBuilder(DESC_CHEF).withIndustry("Baking").build();
-        assertFalse(DESC_CHEF.equals(editedChef));
+        assertNotEquals(DESC_CHEF, editedChef);
     }
 
     @Test

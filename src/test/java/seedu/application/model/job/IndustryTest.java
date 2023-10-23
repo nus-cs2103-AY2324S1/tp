@@ -1,6 +1,9 @@
 package seedu.application.model.job;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -39,19 +42,19 @@ class IndustryTest {
         Industry industry = new Industry("Finance");
 
         // same values -> returns true
-        assertTrue(industry.equals(new Industry("Finance")));
+        assertEquals(industry, new Industry("Finance"));
 
         // same object -> returns true
-        assertTrue(industry.equals(industry));
+        assertEquals(industry, industry);
 
         // null -> returns false
-        assertFalse(industry.equals(null));
+        assertNotEquals(industry, null);
 
         // different types -> returns false
-        assertFalse(industry.equals(new Company("Google")));
+        assertNotEquals(industry, new Company("Google"));
 
         // different values -> returns false
-        assertFalse(industry.equals(new Industry("Engineering")));
+        assertNotEquals(industry, new Industry("Engineering"));
     }
 
 }

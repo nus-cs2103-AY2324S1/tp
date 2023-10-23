@@ -4,7 +4,7 @@ import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_JOBTYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -34,7 +34,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_ROLE, PREFIX_COMPANY,
-                    PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_JOBTYPE, PREFIX_INDUSTRY);
+                    PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_JOB_TYPE, PREFIX_INDUSTRY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ROLE, PREFIX_COMPANY)
             || !argMultimap.getPreamble().isEmpty()) {
@@ -42,12 +42,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROLE, PREFIX_COMPANY, PREFIX_DEADLINE, PREFIX_STATUS,
-                PREFIX_JOBTYPE, PREFIX_INDUSTRY);
+                PREFIX_JOB_TYPE, PREFIX_INDUSTRY);
         Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Status status = Status.DEFAULT_STATUS; // Status is an optional field for add command
         Deadline deadline = Deadline.EMPTY_DEADLINE; // Deadline is an optional field for add command
-        JobType jobType = JobType.EMPTY_JOB_TYPE; // JobType is an optional field for add command
+        JobType jobType = JobType.EMPTY_JOB_TYPE; // Job Type is an optional field for add command
         Industry industry = Industry.DEFAULT_INDUSTRY; // Industry is an optional field for add command
 
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
@@ -58,8 +58,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
         }
 
-        if (argMultimap.getValue(PREFIX_JOBTYPE).isPresent()) {
-            jobType = ParserUtil.parseJobType(argMultimap.getValue(PREFIX_JOBTYPE).get());
+        if (argMultimap.getValue(PREFIX_JOB_TYPE).isPresent()) {
+            jobType = ParserUtil.parseJobType(argMultimap.getValue(PREFIX_JOB_TYPE).get());
         }
 
         if (argMultimap.getValue(PREFIX_INDUSTRY).isPresent()) {
