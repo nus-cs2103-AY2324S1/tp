@@ -118,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        overviewPanel = new OverviewPanel();
+        overviewPanel = new OverviewPanel(logic.getFilteredTransactionList());
         overviewTab.setContent(overviewPanel.getRoot());
 
         transactionTablePanel = new TransactionTablePanel(logic.getFilteredTransactionList());
