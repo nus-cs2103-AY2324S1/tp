@@ -51,10 +51,10 @@ public class StatusTest {
         assertEquals(status, status);
 
         // null -> returns false
-        assertNotEquals(null, status);
+        assertNotEquals(status, null);
 
         // different types -> returns false
-        assertNotEquals(5.0f, status);
+        assertNotEquals(status, 5.0f);
 
         // different values -> returns false
         assertNotEquals(status, new Status(Status.JobStatus.PENDING.toString()));

@@ -25,10 +25,10 @@ public class EditJobDescriptorTest {
         assertEquals(DESC_CHEF, DESC_CHEF);
 
         // null -> returns false
-        assertNotEquals(null, DESC_CHEF);
+        assertNotEquals(DESC_CHEF, null);
 
         // different types -> returns false
-        assertNotEquals(5, DESC_CHEF);
+        assertNotEquals(DESC_CHEF, 5.0f);
 
         // different values -> returns false
         assertNotEquals(DESC_CHEF, DESC_CLEANER);

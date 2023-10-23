@@ -50,10 +50,10 @@ public class JobTypeTest {
         assertEquals(jobType, jobType);
 
         // null -> returns false
-        assertNotEquals(null, jobType);
+        assertNotEquals(jobType, null);
 
         // different types -> returns false
-        assertNotEquals(5.0f, jobType);
+        assertNotEquals(jobType, 5.0f);
 
         // different values -> returns false
         assertNotEquals(jobType, new JobType("PART_TIME"));

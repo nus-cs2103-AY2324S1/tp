@@ -48,10 +48,10 @@ public class CompanyTest {
         assertEquals(company, company);
 
         // null -> returns false
-        assertNotEquals(null, company);
+        assertNotEquals(company, null);
 
         // different types -> returns false
-        assertNotEquals(5.0f, company);
+        assertNotEquals(company, 5.0f);
 
         // different values -> returns false
         assertNotEquals(company, new Company("995"));

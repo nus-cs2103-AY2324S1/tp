@@ -51,10 +51,10 @@ public class RoleTest {
         assertEquals(role, role);
 
         // null -> returns false
-        assertNotEquals(null, role);
+        assertNotEquals(role, null);
 
         // different types -> returns false
-        assertNotEquals(5.0f, role);
+        assertNotEquals(role, 5.0f);
 
         // different values -> returns false
         assertNotEquals(role, new Role("Other Valid Role"));

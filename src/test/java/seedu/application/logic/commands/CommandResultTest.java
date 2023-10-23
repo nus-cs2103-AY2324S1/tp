@@ -18,10 +18,10 @@ public class CommandResultTest {
         assertEquals(commandResult, commandResult);
 
         // null -> returns false
-        assertNotEquals(null, commandResult);
+        assertNotEquals(commandResult, null);
 
         // different types -> returns false
-        assertNotEquals(0.5f, commandResult);
+        assertNotEquals(commandResult, 5.0f);
 
         // different feedbackToUser value -> returns false
         assertNotEquals(commandResult, new CommandResult("different"));

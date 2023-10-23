@@ -46,10 +46,10 @@ public class FindCommandTest {
         assertEquals(findFirstCommand, findFirstCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(1, findFirstCommand);
+        assertNotEquals(findFirstCommand, 5.0f);
 
         // null -> returns false
-        assertNotEquals(null, findFirstCommand);
+        assertNotEquals(findFirstCommand, null);
 
         // different job -> returns false
         assertNotEquals(findFirstCommand, findSecondCommand);

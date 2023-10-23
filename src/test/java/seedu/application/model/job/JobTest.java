@@ -57,10 +57,10 @@ public class JobTest {
         assertEquals(CHEF, CHEF);
 
         // null -> returns false
-        assertNotEquals(null, CHEF);
+        assertNotEquals(CHEF, null);
 
         // different type -> returns false
-        assertNotEquals(5, CHEF);
+        assertNotEquals(CHEF, 5.0f);
 
         // different job -> returns false
         assertNotEquals(CHEF, CLEANER);

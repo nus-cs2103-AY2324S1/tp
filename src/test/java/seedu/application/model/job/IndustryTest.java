@@ -48,7 +48,7 @@ class IndustryTest {
         assertEquals(industry, industry);
 
         // null -> returns false
-        assertNotEquals(null, industry);
+        assertNotEquals(industry, null);
 
         // different types -> returns false
         assertNotEquals(industry, new Company("Google"));

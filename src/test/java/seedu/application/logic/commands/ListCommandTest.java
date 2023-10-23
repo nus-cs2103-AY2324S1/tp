@@ -84,10 +84,10 @@ public class ListCommandTest {
         assertEquals(listByRoleCommand, listByRoleCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(1, listByRoleCommand);
+        assertNotEquals(listByRoleCommand, 5.0f);
 
         // null -> returns false
-        assertNotEquals(null, listByRoleCommand);
+        assertNotEquals(listByRoleCommand, null);
 
         // different person -> returns false
         ListCommand listByCompanyCommand = new ListCommand(new FieldComparator(COMPANY_SPECIFIER));

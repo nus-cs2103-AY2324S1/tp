@@ -92,10 +92,10 @@ public class DeleteCommandTest {
         assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(1, deleteFirstCommand);
+        assertNotEquals(deleteFirstCommand, 5.0f);
 
         // null -> returns false
-        assertNotEquals(null, deleteFirstCommand);
+        assertNotEquals(deleteFirstCommand, null);
 
         // different person -> returns false
         assertNotEquals(deleteFirstCommand, deleteSecondCommand);

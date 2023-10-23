@@ -86,10 +86,10 @@ public class FieldComparatorTest {
         assertEquals(fieldComparator, fieldComparator);
 
         // null -> returns false
-        assertNotEquals(null, fieldComparator);
+        assertNotEquals(fieldComparator, null);
 
         // different types -> returns false
-        assertNotEquals(5.0f, fieldComparator);
+        assertNotEquals(fieldComparator, 5.0f);
 
         // different values -> returns false
         assertNotEquals(fieldComparator, new FieldComparator(COMPANY_SPECIFIER));

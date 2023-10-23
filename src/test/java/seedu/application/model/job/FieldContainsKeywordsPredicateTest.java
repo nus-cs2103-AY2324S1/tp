@@ -38,10 +38,10 @@ public class FieldContainsKeywordsPredicateTest {
         assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
-        assertNotEquals(1, firstPredicate);
+        assertNotEquals(firstPredicate, 5.0f);
 
         // null -> returns false
-        assertNotEquals(null, firstPredicate);
+        assertNotEquals(firstPredicate, null);
 
         // different predicate -> returns false
         assertNotEquals(firstPredicate, secondPredicate);
