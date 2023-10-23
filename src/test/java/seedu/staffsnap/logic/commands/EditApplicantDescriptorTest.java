@@ -66,6 +66,7 @@ public class EditApplicantDescriptorTest {
                 + editApplicantDescriptor.getPhone().orElse(null) + ", email="
                 + editApplicantDescriptor.getEmail().orElse(null) + ", position="
                 + editApplicantDescriptor.getPosition().orElse(null) + ", interviews="
+                + editApplicantDescriptor.getInterviews().orElse(null) + ", status="
                 + editApplicantDescriptor.getInterviews().orElse(null) + "}";
         assertEquals(expected, editApplicantDescriptor.toString());
     }

@@ -22,7 +22,6 @@ public enum Status {
                 break;
             }
         }
-        System.out.println(result);
         return result;
     }
 }

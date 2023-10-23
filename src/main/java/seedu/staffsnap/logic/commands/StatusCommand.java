@@ -5,12 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.staffsnap.commons.core.index.Index;
+import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.logic.Messages;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.Status;
-
 
 
 /**
@@ -28,6 +28,7 @@ public class StatusCommand extends Command {
     public static final String MESSAGE_NO_STATUS = "Missing Status, please follow the following parameters."
             + "Parameters: INDEX (must be a positive integer) "
             + "STATUS [u(ndecided)/o(ffered)/r(ejected)].";
+
 
     private final Index index;
     private final Status status;
@@ -61,6 +62,14 @@ public class StatusCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_STATUS_SUCCESS, Messages.format(applicantToEdit)));
     }
 
+    public Index getIndex() {
+        return index;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
 
     @Override
     public boolean equals(Object other) {
@@ -79,6 +88,6 @@ public class StatusCommand extends Command {
 
     @Override
     public String toString() {
-        return "StatusCommand{" + "index=" + index + ", status=" + status + '}';
+        return new ToStringBuilder(this).add("index", index).add("status", status).toString();
     }
 }

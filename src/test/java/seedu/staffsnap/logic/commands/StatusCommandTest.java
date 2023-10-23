@@ -1,5 +1,6 @@
 package seedu.staffsnap.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.testutil.TypicalApplicants.getUnsortedApplicantBook;
@@ -56,8 +57,10 @@ class StatusCommandTest {
     @Test
     void testToString() {
         StatusCommand command = new StatusCommand(Index.fromOneBased(1), Status.OFFERED);
-        System.out.println(command);
-        assertTrue(command.toString().equals(
-                "StatusCommand{index=seedu.staffsnap.commons.core.index.Index{zeroBasedIndex=0}, status=OFFERED}"));
+        String expected = StatusCommand.class.getCanonicalName() + "{index="
+                + command.getIndex() + ", status="
+                + command.getStatus() + "}";
+        assertEquals(expected,
+                command.toString());
     }
 }

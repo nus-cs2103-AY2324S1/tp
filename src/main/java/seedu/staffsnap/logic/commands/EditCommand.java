@@ -25,6 +25,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 
 /**
@@ -42,10 +43,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_POSITION + "POSITION] "
-            + "[" + PREFIX_INTERVIEW + "INTERVIEW]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "[" + PREFIX_INTERVIEW + "INTERVIEW]...\n" + "Example: "
+            + COMMAND_WORD + " 1 " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -55,7 +54,7 @@ public class EditCommand extends Command {
     private final EditApplicantDescriptor editApplicantDescriptor;
 
     /**
-     * @param index of the applicant in the filtered applicant list to edit
+     * @param index                   of the applicant in the filtered applicant list to edit
      * @param editApplicantDescriptor details to edit the applicant with
      */
     public EditCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
@@ -98,18 +97,20 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
      */
-    private static Applicant createEditedApplicant(
-            Applicant applicantToEdit, EditApplicantDescriptor editApplicantDescriptor) {
+    private static Applicant createEditedApplicant(Applicant applicantToEdit,
+                                                   EditApplicantDescriptor editApplicantDescriptor) {
         assert applicantToEdit != null;
 
         Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());
         Phone updatedPhone = editApplicantDescriptor.getPhone().orElse(applicantToEdit.getPhone());
         Email updatedEmail = editApplicantDescriptor.getEmail().orElse(applicantToEdit.getEmail());
         Position updatedPosition = editApplicantDescriptor.getPosition().orElse(applicantToEdit.getPosition());
-        List<Interview> updatedInterviews = editApplicantDescriptor
-                .getInterviews().orElse(applicantToEdit.getInterviews());
+        List<Interview> updatedInterviews = editApplicantDescriptor.getInterviews()
+                .orElse(applicantToEdit.getInterviews());
+        Status updatedStatus = editApplicantDescriptor.getStatus().orElse(applicantToEdit.getStatus());
 
-        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedPosition, updatedInterviews, null);
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedPosition,
+                updatedInterviews, updatedStatus);
     }
 
     @Override
@@ -132,8 +133,7 @@ public class EditCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editApplicantDescriptor", editApplicantDescriptor)
-                .toString();
+                .add("editApplicantDescriptor", editApplicantDescriptor).toString();
     }
 
     /**
@@ -147,7 +147,11 @@ public class EditCommand extends Command {
         private Position position;
         private List<Interview> interviews;
 
-        public EditApplicantDescriptor() {}
+
+        private Status status;
+
+        public EditApplicantDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -159,6 +163,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setPosition(toCopy.position);
             setInterviews(toCopy.interviews);
+            setStatus(toCopy.status);
         }
 
         /**
@@ -217,6 +222,15 @@ public class EditCommand extends Command {
             return (interviews != null) ? Optional.of(Collections.unmodifiableList(interviews)) : Optional.empty();
         }
 
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
+
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -233,7 +247,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditApplicantDescriptor.phone)
                     && Objects.equals(email, otherEditApplicantDescriptor.email)
                     && Objects.equals(position, otherEditApplicantDescriptor.position)
-                    && Objects.equals(interviews, otherEditApplicantDescriptor.interviews);
+                    && Objects.equals(interviews, otherEditApplicantDescriptor.interviews)
+                    && Objects.equals(status, otherEditApplicantDescriptor.status);
         }
 
         @Override
@@ -244,7 +259,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("position", position)
                     .add("interviews", interviews)
-                    .toString();
+                    .add("status", status).toString();
         }
     }
 }
