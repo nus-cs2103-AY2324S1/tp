@@ -186,4 +186,20 @@ public class ParserUtil {
         String trimmedTime = time.trim();
         return EventTime.of(trimmedTime);
     }
+
+    /**
+     * Parses a {@code String days} into an {@code int}.
+     */
+    public static int parseDays(String days) throws ParseException {
+        String trimmedDays = days.trim();
+
+        if (trimmedDays.isEmpty() || days == null) {
+            return 7;
+        }
+
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedDays)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Integer.parseInt(trimmedDays);
+    }
 }
