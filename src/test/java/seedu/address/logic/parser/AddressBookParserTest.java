@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.FINANCIAL_PLAN_DESC_1;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FINANCIAL_PLAN_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -26,6 +30,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.gatheremail.GatherEmailByFinancialPlan;
+import seedu.address.model.person.gatheremail.GatherEmailByTag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -81,10 +87,17 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_gather() throws Exception {
-        String prompt = "Sample Prompt";
-        GatherCommand command = (GatherCommand) parser.parseCommand(
-                GatherCommand.COMMAND_WORD + " " + prompt);
-        assertEquals(new GatherCommand(prompt), command);
+        // financial plan
+        GatherEmailByFinancialPlan fpPrompt = new GatherEmailByFinancialPlan(VALID_FINANCIAL_PLAN_1);
+        GatherCommand fpCommand = (GatherCommand) parser.parseCommand(
+                GatherCommand.COMMAND_WORD + FINANCIAL_PLAN_DESC_1);
+        assertEquals(new GatherCommand(fpPrompt), fpCommand);
+
+        // tag
+        GatherEmailByTag tagPrompt = new GatherEmailByTag(VALID_TAG_HUSBAND);
+        GatherCommand tagCommand = (GatherCommand) parser.parseCommand(
+                GatherCommand.COMMAND_WORD + TAG_DESC_HUSBAND);
+        assertEquals(new GatherCommand(tagPrompt), tagCommand);
     }
 
     @Test

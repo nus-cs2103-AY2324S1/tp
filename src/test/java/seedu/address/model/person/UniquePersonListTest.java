@@ -19,6 +19,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.gatheremail.GatherEmailByFinancialPlan;
+import seedu.address.model.person.gatheremail.GatherEmailByTag;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -165,18 +167,33 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void gatherEmails_noPersonFound() {
+    public void gatherEmailsByFinancialPlan_noPersonFound() {
         uniquePersonList.add(ALICE);
-        String prompt = "Sample Financial Plan 3";
+        GatherEmailByFinancialPlan prompt = new GatherEmailByFinancialPlan("Sample Financial Plan 3");
         assertEquals(new String(), uniquePersonList.gatherEmails(prompt));
     }
 
     @Test
-    public void gatherEmails_personFound() {
+    public void gatherEmailsByFinancialPlan_personFound() {
         uniquePersonList.add(ELLE);
         FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
-        String prompt = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        String fpDescription = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
+        GatherEmailByFinancialPlan prompt = new GatherEmailByFinancialPlan(fpDescription);
         assertEquals(ELLE.getEmail().toString(), uniquePersonList.gatherEmails(prompt));
+    }
+
+    @Test
+    public void gatherByTag_noPersonFound() {
+        uniquePersonList.add(ALICE);
+        GatherEmailByTag prompt = new GatherEmailByTag(VALID_TAG_HUSBAND);
+        assertEquals(new String(), uniquePersonList.gatherEmails(prompt));
+    }
+
+    @Test
+    public void gatherByTag_personFound() {
+        uniquePersonList.add(BOB);
+        GatherEmailByTag prompt = new GatherEmailByTag(VALID_TAG_HUSBAND);
+        assertEquals(BOB.getEmail().toString(), uniquePersonList.gatherEmails(prompt));
     }
 
     @Test

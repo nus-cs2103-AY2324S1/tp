@@ -1,17 +1,20 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.GatherCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.financialplan.FinancialPlan;
+import seedu.address.model.person.gatheremail.GatherEmailByFinancialPlan;
+import seedu.address.model.person.gatheremail.GatherEmailByTag;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new GatherCommand object
  */
 public class GatherCommandParser implements Parser<GatherCommand> {
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s]+";
-    public static final String MESSAGE_CONSTRAINTS = "PROMPT should be alphanumeric or space characters";
-
     /**
      * Parses the given {@code String} of arguments in the context of the GatherCommand
      * and returns a GatherCommand object for execution.
@@ -19,16 +22,42 @@ public class GatherCommandParser implements Parser<GatherCommand> {
      */
     public GatherCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FINANCIAL_PLAN, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FINANCIAL_PLAN, PREFIX_TAG);
+
+        if (argMultimap.getValue(PREFIX_FINANCIAL_PLAN).isPresent() && argMultimap.getValue(PREFIX_TAG).isPresent()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GatherCommand.MESSAGE_USAGE));
         }
 
-        if (!trimmedArgs.matches(VALIDATION_REGEX)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_CONSTRAINTS));
+        if (argMultimap.getValue(PREFIX_FINANCIAL_PLAN).isPresent()) {
+            // Parse Financial Plan
+            String financialPlanArgs = trimmedArgs.replace(PREFIX_FINANCIAL_PLAN.getPrefix(), "").trim();
+            validateFinancialPlan(financialPlanArgs);
+            return new GatherCommand(new GatherEmailByFinancialPlan(financialPlanArgs));
+        } else if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            // Parse Tag
+            String tagArgs = trimmedArgs.replace(PREFIX_TAG.getPrefix(), "").trim();
+            validateTag(tagArgs);
+            return new GatherCommand(new GatherEmailByTag(tagArgs));
         }
 
-        return new GatherCommand(trimmedArgs);
+        throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, GatherCommand.MESSAGE_USAGE));
     }
+
+    private void validateFinancialPlan(String input) throws ParseException {
+        if (input.isEmpty() || !FinancialPlan.isValidFinancialPlanName(input)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FinancialPlan.MESSAGE_CONSTRAINTS));
+        }
+    }
+
+    private void validateTag(String input) throws ParseException {
+        if (input.isEmpty() || !Tag.isValidTagName(input)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, Tag.MESSAGE_CONSTRAINTS));
+        }
+    }
+
 }

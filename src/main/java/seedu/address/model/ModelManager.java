@@ -18,6 +18,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.ScheduleItem;
 import seedu.address.model.appointment.SortByAppointmentDateComparator;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.gatheremail.GatherEmailPrompt;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -128,7 +129,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String gatherEmails(String prompt) {
+    public String gatherEmails(GatherEmailPrompt prompt) {
         return addressBook.gatherEmails(prompt);
     }
 
