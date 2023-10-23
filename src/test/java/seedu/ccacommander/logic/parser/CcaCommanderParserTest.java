@@ -22,7 +22,7 @@ import seedu.ccacommander.logic.commands.DeleteMemberCommand;
 import seedu.ccacommander.logic.commands.EditCommand;
 import seedu.ccacommander.logic.commands.EditCommand.EditMemberDescriptor;
 import seedu.ccacommander.logic.commands.ExitCommand;
-import seedu.ccacommander.logic.commands.FindCommand;
+import seedu.ccacommander.logic.commands.FindMemberCommand;
 import seedu.ccacommander.logic.commands.HelpCommand;
 import seedu.ccacommander.logic.commands.ListCommand;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
@@ -91,11 +91,11 @@ public class CcaCommanderParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findMember() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new MemberNameContainsKeywordsPredicate(keywords)), command);
+        FindMemberCommand command = (FindMemberCommand) parser.parseCommand(
+                FindMemberCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindMemberCommand(new MemberNameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

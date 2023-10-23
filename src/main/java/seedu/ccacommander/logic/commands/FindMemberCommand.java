@@ -11,9 +11,9 @@ import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
  * Finds and lists all members in CcaCommander whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public class FindMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "findMember";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -22,7 +22,7 @@ public class FindCommand extends Command {
 
     private final MemberNameContainsKeywordsPredicate predicate;
 
-    public FindCommand(MemberNameContainsKeywordsPredicate predicate) {
+    public FindMemberCommand(MemberNameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -41,12 +41,12 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindMemberCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        FindMemberCommand otherFindMemberCommand = (FindMemberCommand) other;
+        return predicate.equals(otherFindMemberCommand.predicate);
     }
 
     @Override
