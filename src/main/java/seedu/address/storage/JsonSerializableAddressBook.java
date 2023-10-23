@@ -20,14 +20,14 @@ import seedu.address.model.interview.Interview;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_APPLICANT = "Applicants list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "Applicants list contains duplicate applicant(s).";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Interviews list contains duplicate interview(s).";
 
     private final List<JsonAdaptedInterview> interviews = new ArrayList<>();
     private final List<JsonAdaptedApplicant> applicants = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons and interviews
+     * Constructs a {@code JsonSerializableAddressBook} with the given applicants and interviews
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicants,

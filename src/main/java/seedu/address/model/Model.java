@@ -72,9 +72,9 @@ public interface Model {
     void addApplicant(Applicant applicant);
 
     /**
-     * Replaces the given applicant {@code target} with {@code editedPerson}.
+     * Replaces the given applicant {@code target} with {@code editedApplicant}.
      * {@code target} must exist in the address book.
-     * The applicant identity of {@code editedPerson} must not be the same
+     * The applicant identity of {@code editedApplicant} must not be the same
      * as another existing applicant in the address book.
      */
     void setApplicant(Applicant target, Applicant editedApplicant);
@@ -109,6 +109,12 @@ public interface Model {
      * same as another existing interview in the address book.
      */
     void setInterview(Interview target, Interview editedInterview);
+
+    /**
+     * Deletes the given interview.
+     * The interview must exist in the address book.
+     */
+    void deleteInterview(Interview target);
 
     /**
      * Updates the filter of the filtered interview list to filter by the given {@code predicate}.

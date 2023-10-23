@@ -43,6 +43,7 @@ public class InterviewListPanel extends UiPart<Region> {
             } else {
                 setGraphic(new InterviewCard(interview, getIndex() + 1).getRoot());
             }
+            setStyle("-fx-padding: 0 0 2 0;");
         }
     }
 
