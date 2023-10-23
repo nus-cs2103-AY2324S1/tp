@@ -24,7 +24,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.ScheduleItem;
 import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -114,7 +114,7 @@ public class EditCommand extends Command {
         Set<FinancialPlan> updatedFinancialPlans = editPersonDescriptor.getFinancialPlans()
                 .orElse(personToEdit.getFinancialPlans());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Appointment appointment = editPersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
+        ScheduleItem appointment = editPersonDescriptor.getAppointment().orElse(personToEdit.getAppointment());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedNokName,
                 updatedNokPhone, updatedFinancialPlans, updatedTags, appointment);
     }
@@ -156,7 +156,7 @@ public class EditCommand extends Command {
         private NextOfKinPhone nextOfKinPhone;
         private Set<FinancialPlan> financialPlans;
         private Set<Tag> tags;
-        private Appointment appointment;
+        private ScheduleItem appointment;
 
         public EditPersonDescriptor() {}
 
@@ -230,11 +230,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(nextOfKinPhone);
         }
 
-        public void setAppointment(Appointment appointment) {
+        public void setAppointment(ScheduleItem appointment) {
             this.appointment = appointment;
         }
 
-        public Optional<Appointment> getAppointment() {
+        public Optional<ScheduleItem> getAppointment() {
             return Optional.ofNullable(appointment);
         }
 
