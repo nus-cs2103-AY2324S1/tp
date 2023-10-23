@@ -112,6 +112,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window.
      */
+    @FXML
     void fillInnerParts() {
         bookingListPanel = new BookingListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
@@ -171,6 +172,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Show pie chart
      */
+    @FXML
     private void handleViewRoomStatistics() {
         roomPieChart = new RoomPieChart(logic.getFilteredPersonList());
         roomPieChartPanelPlaceholder.getChildren().clear();
