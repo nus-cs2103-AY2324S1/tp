@@ -50,6 +50,8 @@ public class Messages {
                 .append("(")
                 .append(interview.getRating())
                 .append("); "));
+        builder.append("; Status: ")
+                .append(applicant.getStatus());
         return builder.toString();
     }
 
