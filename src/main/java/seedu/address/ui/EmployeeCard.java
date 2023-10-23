@@ -44,6 +44,8 @@ public class EmployeeCard extends UiPart<Region> {
     private Label salary;
     @FXML
     private FlowPane departments;
+    @FXML
+    private Label overtimeHours;
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code EmployeeCode} and index to display.
@@ -61,5 +63,6 @@ public class EmployeeCard extends UiPart<Region> {
         employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.departmentName))
                 .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
+        overtimeHours.setText(employee.getOvertimeHours().toString());
     }
 }

@@ -8,6 +8,7 @@ import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
+import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
 import seedu.address.model.employee.Salary;
@@ -24,6 +25,7 @@ public class EmployeeBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_SALARY = "12000";
+    public static final int DEFAULT_OVERTIME_HOURS = 72;
 
     private Name name;
     private Position position;
@@ -32,6 +34,7 @@ public class EmployeeBuilder {
     private Email email;
     private Salary salary;
     private Set<Department> departments;
+    private OvertimeHours overtimeHours;
 
     /**
      * Creates a {@code EmployeeBuilder} with the default details.
@@ -44,6 +47,7 @@ public class EmployeeBuilder {
         email = new Email(DEFAULT_EMAIL);
         salary = new Salary(DEFAULT_SALARY);
         departments = new HashSet<>();
+        overtimeHours = new OvertimeHours(DEFAULT_OVERTIME_HOURS);
     }
 
     /**
@@ -57,6 +61,7 @@ public class EmployeeBuilder {
         email = employeeToCopy.getEmail();
         salary = employeeToCopy.getSalary();
         departments = new HashSet<>(employeeToCopy.getDepartments());
+        overtimeHours = employeeToCopy.getOvertimeHours();
     }
 
     /**
@@ -116,8 +121,16 @@ public class EmployeeBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code OvertimeHours} of the {@code employee} that we are building.
+     */
+    public EmployeeBuilder withOvertimeHours(int hours) {
+        this.overtimeHours = new OvertimeHours(hours);
+        return this;
+    }
+
     public Employee build() {
-        return new Employee(name, position, id, phone, email, salary, departments);
+        return new Employee(name, position, id, phone, email, salary, departments, overtimeHours);
     }
 
 }

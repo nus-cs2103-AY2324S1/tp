@@ -28,6 +28,7 @@ import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
+import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
 import seedu.address.model.employee.Salary;
@@ -110,9 +111,10 @@ public class EditCommand extends Command {
         Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
         Set<Department> updatedDepartments = editEmployeeDescriptor.getDepartments()
                 .orElse(employeeToEdit.getDepartments());
+        OvertimeHours updatedOvertimeHours = employeeToEdit.getOvertimeHours();
 
         return new Employee(updatedName, updatedPosition, updatedId, updatedPhone, updatedEmail,
-                updatedSalary, updatedDepartments);
+                updatedSalary, updatedDepartments, updatedOvertimeHours);
     }
 
     @Override

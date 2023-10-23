@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OVERTIME_HOURS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
@@ -90,6 +91,10 @@ public class EmployeeTest {
         // different salary -> returns false
         editedAlice = new EmployeeBuilder(ALICE).withSalary(VALID_SALARY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different overtime hours left -> returns false
+        editedAlice = new EmployeeBuilder(ALICE).withOvertimeHours(VALID_OVERTIME_HOURS_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -97,7 +102,7 @@ public class EmployeeTest {
         String expected = Employee.class.getCanonicalName() + "{name=" + ALICE.getName()
                 + ", position=" + ALICE.getPosition() + ", id=" + ALICE.getId() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", salary=" + ALICE.getSalary()
-                + ", departments=" + ALICE.getDepartments() + "}";
+                + ", departments=" + ALICE.getDepartments() + ", overtime hours=" + ALICE.getOvertimeHours() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
