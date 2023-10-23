@@ -161,7 +161,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The `filter` command allows the user to display a list of students who fulfil all predicates specified within the command. 
+The `filter` command allows the user to display a list of students who fulfil all predicates specified within the command.
 
 When the user enters a filter command, the `AddressBookParser` parses the user's input and returns a `FilterCommand`.
 
