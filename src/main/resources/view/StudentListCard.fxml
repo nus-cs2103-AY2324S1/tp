@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="105" prefWidth="130.0" GridPane.columnIndex="0">
       <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
+        <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-      <HBox spacing="5" alignment="CENTER_LEFT">
+      <HBox alignment="CENTER_LEFT" spacing="5">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="studentNumber" styleClass="cell_small_label" text="\$studentNumber" />
@@ -33,5 +37,21 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="classDetails" styleClass="cell_small_label" text="\$classDetails" />
     </VBox>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
   </GridPane>
+   <BarChart fx:id="barChart" prefHeight="150.0" prefWidth="300.0">
+     <xAxis>
+       <CategoryAxis side="BOTTOM">
+            <opaqueInsets>
+               <Insets top="3.0" />
+            </opaqueInsets>
+         </CategoryAxis>
+     </xAxis>
+     <yAxis>
+       <NumberAxis autoRanging="false" minorTickCount="0" prefHeight="152.0" prefWidth="29.0" side="LEFT"
+                   tickLength="10.0" tickUnit="10.0" upperBound="100.0" />
+     </yAxis>
+   </BarChart>
 </HBox>

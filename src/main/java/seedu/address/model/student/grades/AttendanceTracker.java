@@ -103,6 +103,29 @@ public class AttendanceTracker {
         return this.attendanceList.length;
     }
 
+    /**
+     * Returns the percentage of tutorials attended.
+     *
+     * @return Percentage of tutorials attended.
+     */
+    public double getPercentage() {
+        // Case when there are no tutorials
+        if (attendanceList.length == 0) {
+            return 100;
+        }
+        int score = 0;
+        int totalScore = 0;
+        for (int i = 0; i < attendanceList.length; i++) {
+            if (attendanceList[i] != null) {
+                totalScore += 1;
+                if (attendanceList[i].getIsPresent()) {
+                    score += 1;
+                }
+            }
+        }
+        return (double) score / totalScore * 100;
+    }
+
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder("Attendance:\n");
