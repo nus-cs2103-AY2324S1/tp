@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.commons.core.LogsCenter;
+import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Event> filteredEvents;
+    private final FilteredList<Attendance> filteredAttendances;
 
     /**
      * Initializes a ModelManager with the given CcaCommander and userPrefs.
@@ -36,6 +38,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMembers = new FilteredList<>(this.ccaCommander.getMemberList());
         filteredEvents = new FilteredList<>(this.ccaCommander.getEventList());
+        filteredAttendances = new FilteredList<>(this.ccaCommander.getAttendanceList());
     }
 
     public ModelManager() {
@@ -135,6 +138,17 @@ public class ModelManager implements Model {
         ccaCommander.setEvent(target, editedEvent);
     }
 
+    @Override
+    public boolean hasAttendance(Attendance attendance) {
+        requireNonNull(attendance);
+        return ccaCommander.hasAttendance(attendance);
+    }
+
+    @Override
+    public void createAttendance(Attendance attendance) {
+        ccaCommander.createAttendance(attendance);
+        updateFilteredAttendanceList(PREDICATE_SHOW_ALL_ATTENDANCES);
+    }
     //=========== Filtered Member List Accessors =============================================================
 
     /**
@@ -152,6 +166,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Attendance> getFilteredAttendanceList() {
+        return filteredAttendances;
+    }
+
+    @Override
     public void updateFilteredMemberList(Predicate<Member> predicate) {
         requireNonNull(predicate);
         filteredMembers.setPredicate(predicate);
@@ -161,6 +180,12 @@ public class ModelManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredAttendanceList(Predicate<Attendance> predicate) {
+        requireNonNull(predicate);
+        filteredAttendances.setPredicate(predicate);
     }
 
     @Override
