@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Objects;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.student.grades.AssignmentTracker;
 import seedu.address.model.student.grades.AttendanceTracker;
@@ -92,6 +93,45 @@ public class ClassDetails {
 
     public static void setAssignmentCount(int assignmentCount) {
         ClassDetails.assignmentCount = assignmentCount;
+    }
+
+    /**
+     * Gets the attendance percentage.
+     *
+     * @return Percentage of attendance.
+     * @throws IllegalValueException When there is no attendance tracker.
+     */
+    public double getAttendancePercentage() throws IllegalValueException {
+        if (attendanceTracker == null) {
+            throw new IllegalValueException("Class Details is not initialized properly.");
+        }
+        return attendanceTracker.getPercentage();
+    }
+
+    /**
+     * Gets the class participation percentage.
+     *
+     * @return Percentage of class participation.
+     * @throws IllegalValueException When there is no class participation tracker.
+     */
+    public double getClassParticipationPercentage() throws IllegalValueException {
+        if (classParticipationTracker == null) {
+            throw new IllegalValueException("Class Details is not initialized properly.");
+        }
+        return classParticipationTracker.getPercentage();
+    }
+
+    /**
+     * Gets the assignment percentage.
+     *
+     * @return Percentage of overall assignment grades.
+     * @throws IllegalValueException When there is no assignment tracker.
+     */
+    public double getAssignmentPercentage() throws IllegalValueException {
+        if (assignmentTracker == null) {
+            throw new IllegalValueException("Class Details is not initialized properly.");
+        }
+        return assignmentTracker.getPercentage();
     }
 
     @Override

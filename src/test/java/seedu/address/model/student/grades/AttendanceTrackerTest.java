@@ -7,6 +7,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+
 public class AttendanceTrackerTest {
 
     @Test
@@ -35,6 +37,20 @@ public class AttendanceTrackerTest {
         expectedAttendanceTracker = new AttendanceTracker(5);
         attendanceTracker.updateTutorialCountChange(5);
         assertEquals(expectedAttendanceTracker, attendanceTracker);
+    }
+
+    @Test
+    public void attendancePercentage_validValues_returnsCorrectPercentage() {
+        AttendanceTracker attendanceTracker = new AttendanceTracker(10);
+        attendanceTracker.markPresent(Index.fromZeroBased(0));
+        attendanceTracker.markPresent(Index.fromZeroBased(2));
+        assertEquals(20, attendanceTracker.getPercentage());
+    }
+
+    @Test
+    public void attendancePercentage_noValues_returnsHundred() {
+        AttendanceTracker attendanceTracker = new AttendanceTracker(0);
+        assertEquals(100, attendanceTracker.getPercentage());
     }
 
     @Test
