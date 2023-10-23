@@ -19,4 +19,8 @@ public class CliSyntax {
     // Event prefixes
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
+
+    // Attendance prefixes
+    public static final Prefix PREFIX_REMARK = new Prefix("r/");
+    public static final Prefix PREFIX_HOURS = new Prefix("h/");
 }

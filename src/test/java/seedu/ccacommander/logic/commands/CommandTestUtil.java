@@ -6,9 +6,11 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
 
@@ -51,6 +53,11 @@ public class CommandTestUtil {
     public static final String VALID_LOCATION_AURORA = "Greenland";
     public static final String VALID_LOCATION_BOXING = "Ridge View Residential College";
 
+    public static final String VALID_HOURS_CLIMBING = "7";
+    public static final String VALID_HOURS_TREKKING = "10";
+    public static final String VALID_REMARK_CLIMBING = "Role: Coordinator";
+    public static final String VALID_REMARK_TREKKING = "Absent: Covid";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
@@ -71,14 +78,23 @@ public class CommandTestUtil {
     public static final String LOCATION_DESC_AURORA = " " + PREFIX_LOCATION + VALID_LOCATION_AURORA;
     public static final String LOCATION_DESC_BOXING = " " + PREFIX_LOCATION + VALID_LOCATION_BOXING;
 
+    public static final String HOURS_DESC_CLIMBING = " " + PREFIX_HOURS + VALID_HOURS_CLIMBING;
+    public static final String HOURS_DESC_TREKKING = " " + PREFIX_HOURS + VALID_HOURS_TREKKING;
+    public static final String REMARK_DESC_CLIMBING = " " + PREFIX_HOURS + VALID_REMARK_CLIMBING;
+    public static final String REMARK_DESC_TREKKING = " " + PREFIX_HOURS + VALID_REMARK_TREKKING;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "F"; // "F" not allowed in gender
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
     public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION + "  "; // cannot be spaces only
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2005 12 12"; // wrong date format
+
+    public static final String INVALID_HOURS_DESC = " " + PREFIX_HOURS + "twenty"; // cannot be alphabets
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + " coming late"; // cannot start with space
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
