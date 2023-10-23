@@ -234,28 +234,53 @@ Oops! There seems to be an error, please check your fields again.
 
 Deletes the data entry at the index-th position of the currently displayed list.
 
-Format: `delete INDEX...`
+Format: `delete INDEX [INDEX...]`
 
-Parameter: `INDEX...`
-* Index of a fosterer is shown in the list obtained by the `find/list` command.
-* Must be a positive integer 1, 2, 3, …
-* Multiple indexes are allowed for mass deletion,  each index separated by a white space.
-* `delete` without an index is valid if and only if there exists only one data entry in the current list.
+Parameter: `INDEX [INDEX...]`
+* Index of a fosterer is displayed in the list that is  obtained by the `find/list` command.
+* At least one index must be provided.
+* Index must be a positive integer: 1, 2, 3, …
+
+<div markdown="span" class="alert alert-primary">
+  :bulb: <b>Tip:</b>
+Multiple indices are allowed for mass deletion, each index separated by a white space.
+</div>
+
+* Duplicate indices are ignored.
+* Extraneous white spaces are also ignored.
+
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd fosterer in the address book
-* `find Jerry` followed by `delete 1` deletes the 1st fosterer in the results of the find command
+* `find Jerry` followed by `delete 1` deletes the 1st fosterer in the result list of the find command
 * `list` followed by `delete 1 3 7` deletes the 1st, 3rd and 7th fosterers in the address book
+* `list` followed by `delete 3 3 3 3` deletes the 3rd fosterer in the address book
+
 
 Expected output (success):
+`list` followed by `delete 1 3 7`
 ```agsl
-Fosterers Jerry Chee, John Doe, and Mary Ann are successfully deleted!
+3 fosterers deleted:
+Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Housing: HDB; Availability: Available; Animal name: nil; Animal type: able.Cat; Tags: [new], 
+Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com; Address: Blk 11 Ang Mo Kio Street 74, #11-04; Housing: HDB; Availability: Available; Animal name: nil; Animal type: able.Dog; Tags: [new], 
+Roy Balakrishnan; Phone: 92624417; Email: royb@example.com; Address: Blk 45 Aljunied Street 85, #11-31; Housing: Landed; Availability: Available; Animal name: nil; Animal type: able.Cat; Tags: [new]
 ```
 
 Expected output (fail):
+
+1. A non-positive index provided: `delete -1`
 ```agsl
-Oops! Invalid fosterer index provided, please check again.
+Invalid command format! 
+delete: Deletes fosterers identified by the index number used in the displayed person list.
+Parameters: INDEX [INDEX...] (must be a positive integer)
+Example: delete 1 2 3
 ```
+
+2. An index exceeds the number of fosterers in the list: `delete 0 1 99` but the list only has 6 fosterers
+```agsl
+The fosterer index provided is invalid
+```
+
 ### Clearing all entries : `reset`
 
 Clears all entries from the address book.
