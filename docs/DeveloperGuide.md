@@ -156,8 +156,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Implemented\] Schedule Feature
+### Schedule Feature
 
+The schedule mechanism is facilitated by 
 
 ### \[Proposed\] Undo/redo feature
 
