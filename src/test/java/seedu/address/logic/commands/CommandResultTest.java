@@ -35,7 +35,7 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true, true)));
 
         // different showRoomStatistics value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
     }
 
     @Test
