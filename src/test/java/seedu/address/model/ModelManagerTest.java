@@ -3,10 +3,12 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 
 import java.nio.file.Path;
@@ -17,8 +19,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.financialplan.FinancialPlan;
-import seedu.address.model.person.GatherEmailsByFinancialPlan;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.gatheremail.GatherEmailByFinancialPlan;
+import seedu.address.model.person.gatheremail.GatherEmailByTag;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -71,7 +74,7 @@ public class ModelManagerTest {
     @Test
     public void gatherEmailsByFinancialPlan_noPersonFound() {
         modelManager.addPerson(ALICE);
-        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan("Sample Financial Plan 3");
+        GatherEmailByFinancialPlan prompt = new GatherEmailByFinancialPlan("Sample Financial Plan 3");
         assertEquals(new String(), modelManager.gatherEmails(prompt));
     }
 
@@ -80,8 +83,22 @@ public class ModelManagerTest {
         modelManager.addPerson(ELLE);
         FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
         String fpDescription = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
-        GatherEmailsByFinancialPlan prompt = new GatherEmailsByFinancialPlan(fpDescription);
+        GatherEmailByFinancialPlan prompt = new GatherEmailByFinancialPlan(fpDescription);
         assertEquals(ELLE.getEmail().toString(), modelManager.gatherEmails(prompt));
+    }
+
+    @Test
+    public void gatherByTag_noPersonFound() {
+        modelManager.addPerson(ALICE);
+        GatherEmailByTag prompt = new GatherEmailByTag(VALID_TAG_HUSBAND);
+        assertEquals(new String(), modelManager.gatherEmails(prompt));
+    }
+
+    @Test
+    public void gatherByTag_personFound() {
+        modelManager.addPerson(BOB);
+        GatherEmailByTag prompt = new GatherEmailByTag(VALID_TAG_HUSBAND);
+        assertEquals(BOB.getEmail().toString(), modelManager.gatherEmails(prompt));
     }
 
     @Test

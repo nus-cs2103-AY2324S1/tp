@@ -31,6 +31,9 @@ public class FinancialPlan {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if the given string is a substring of {@code financialPlanName}
+     */
     public boolean containsSubstring(String substring) {
         return financialPlanName.toLowerCase().contains(substring.toLowerCase());
     }

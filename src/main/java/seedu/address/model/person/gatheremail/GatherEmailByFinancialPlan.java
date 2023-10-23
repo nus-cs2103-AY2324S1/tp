@@ -1,13 +1,18 @@
-package seedu.address.model.person;
+package seedu.address.model.person.gatheremail;
+
+import seedu.address.model.person.Person;
 
 /**
  * Gather the email of {@code Person} if {@code Person}'s Financial Plans Names contains {@code promptFp}
  * as a substring.
  */
-public class GatherEmailsByFinancialPlan implements GatherEmails {
+public class GatherEmailByFinancialPlan implements GatherEmailPrompt {
     private final String promptFp;
 
-    public GatherEmailsByFinancialPlan(String promptFp) {
+    /**
+     * Constructs a new GatherEmailByFinancial Object
+     */
+    public GatherEmailByFinancialPlan(String promptFp) {
         this.promptFp = promptFp;
     }
     @Override
@@ -21,11 +26,12 @@ public class GatherEmailsByFinancialPlan implements GatherEmails {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GatherEmailsByFinancialPlan)) {
+        if (!(other instanceof GatherEmailByFinancialPlan)) {
             return false;
         }
-        GatherEmailsByFinancialPlan otherGatherCommand = (GatherEmailsByFinancialPlan) other;
-        return promptFp.equals(otherGatherCommand.promptFp);
+
+        GatherEmailByFinancialPlan otherGatherByFinancialPlan = (GatherEmailByFinancialPlan) other;
+        return promptFp.equals(otherGatherByFinancialPlan.promptFp);
     }
 
     @Override

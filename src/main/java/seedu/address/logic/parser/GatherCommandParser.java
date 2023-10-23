@@ -6,19 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.GatherCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.GatherEmailsByFinancialPlan;
-import seedu.address.model.person.GatherEmailsByTag;
+import seedu.address.model.financialplan.FinancialPlan;
+import seedu.address.model.person.gatheremail.GatherEmailByFinancialPlan;
+import seedu.address.model.person.gatheremail.GatherEmailByTag;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new GatherCommand object
  */
 public class GatherCommandParser implements Parser<GatherCommand> {
-    public static final String FINANCIAL_PLAN_REGEX = "^[a-zA-Z0-9\\s]+";
-    public static final String TAG_REGEX = "\\p{Alnum}+";
-
-    public static final String FINANCIAL_PLAN_CONSTRAINTS = "PROMPT should be alphanumeric or space characters";
-    public static final String TAG_CONSTRAINTS = "Tags names should be alphanumeric";
-
     /**
      * Parses the given {@code String} of arguments in the context of the GatherCommand
      * and returns a GatherCommand object for execution.
@@ -26,28 +22,41 @@ public class GatherCommandParser implements Parser<GatherCommand> {
      */
     public GatherCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        String argDescription = trimmedArgs;
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FINANCIAL_PLAN, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FINANCIAL_PLAN, PREFIX_TAG);
 
-        if (trimmedArgs.contains(PREFIX_FINANCIAL_PLAN.getPrefix())) {
+        if (argMultimap.getValue(PREFIX_FINANCIAL_PLAN).isPresent() && argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, GatherCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_FINANCIAL_PLAN).isPresent()) {
             // Parse Financial Plan
-            argDescription = trimmedArgs.replace(PREFIX_FINANCIAL_PLAN.getPrefix(), "").trim();
-            validateInput(argDescription, FINANCIAL_PLAN_REGEX, FINANCIAL_PLAN_CONSTRAINTS);
-            return new GatherCommand(new GatherEmailsByFinancialPlan(argDescription));
-        } else if (trimmedArgs.contains(PREFIX_TAG.getPrefix())) {
+            String financialPlanArgs = trimmedArgs.replace(PREFIX_FINANCIAL_PLAN.getPrefix(), "").trim();
+            validateFinancialPlan(financialPlanArgs);
+            return new GatherCommand(new GatherEmailByFinancialPlan(financialPlanArgs));
+        } else if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             // Parse Tag
-            argDescription = trimmedArgs.replace(PREFIX_TAG.getPrefix(), "").trim();
-            validateInput(argDescription, TAG_REGEX, TAG_CONSTRAINTS);
-            return new GatherCommand(new GatherEmailsByTag(argDescription));
+            String tagArgs = trimmedArgs.replace(PREFIX_TAG.getPrefix(), "").trim();
+            validateTag(tagArgs);
+            return new GatherCommand(new GatherEmailByTag(tagArgs));
         }
 
         throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, GatherCommand.MESSAGE_USAGE));
     }
 
-    private void validateInput(String input, String regexPattern, String errorMessage) throws ParseException {
-        if (input.isEmpty() || !input.matches(regexPattern)) {
+    private void validateFinancialPlan(String input) throws ParseException {
+        if (input.isEmpty() || !FinancialPlan.isValidFinancialPlanName(input)) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FinancialPlan.MESSAGE_CONSTRAINTS));
+        }
+    }
+
+    private void validateTag(String input) throws ParseException {
+        if (input.isEmpty() || !Tag.isValidTagName(input)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, Tag.MESSAGE_CONSTRAINTS));
         }
     }
 

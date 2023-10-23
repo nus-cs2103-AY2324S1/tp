@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.gatheremail.GatherEmailPrompt;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -100,7 +101,7 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Gathers emails of persons with {@code prompt} from this {@code persons}.
      */
-    public String gatherEmails(GatherEmails prompt) {
+    public String gatherEmails(GatherEmailPrompt prompt) {
         StringBuilder emails = new StringBuilder();
 
         for (Person person : internalList) {

@@ -6,16 +6,16 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.GatherEmails;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.gatheremail.GatherEmailPrompt;
+
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-
     private final UniquePersonList persons;
 
     /*
@@ -98,7 +98,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Gathers the persons emails with {@code prompt} from this {@code AddressBook}.
      */
-    public String gatherEmails(GatherEmails prompt) {
+    public String gatherEmails(GatherEmailPrompt prompt) {
         return persons.gatherEmails(prompt);
     };
 

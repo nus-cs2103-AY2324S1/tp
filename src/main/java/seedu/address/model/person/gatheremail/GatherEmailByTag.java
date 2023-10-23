@@ -1,12 +1,18 @@
-package seedu.address.model.person;
+package seedu.address.model.person.gatheremail;
+
+import seedu.address.model.person.Person;
 
 /**
  * Gather the email of {@code Person} if {@code Person}'s Tags Names contains {@code promptTag}
  * as a substring.
  */
-public class GatherEmailsByTag implements GatherEmails {
+public class GatherEmailByTag implements GatherEmailPrompt {
     private final String promptTag;
-    public GatherEmailsByTag(String promptTag) {
+
+    /**
+     * Constructs a new GatherEmailByTag Object
+     */
+    public GatherEmailByTag(String promptTag) {
         this.promptTag = promptTag;
     }
     @Override
@@ -20,10 +26,10 @@ public class GatherEmailsByTag implements GatherEmails {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GatherEmailsByTag)) {
+        if (!(other instanceof GatherEmailByTag)) {
             return false;
         }
-        GatherEmailsByTag otherGatherCommand = (GatherEmailsByTag) other;
+        GatherEmailByTag otherGatherCommand = (GatherEmailByTag) other;
         return promptTag.equals(otherGatherCommand.promptTag);
     }
 

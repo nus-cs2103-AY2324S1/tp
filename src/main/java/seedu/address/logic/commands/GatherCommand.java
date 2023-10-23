@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FINANCIAL_PLAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
-import seedu.address.model.person.GatherEmails;
+import seedu.address.model.person.gatheremail.GatherEmailPrompt;
 
 /**
  * Gathers and lists all persons in address book emails whose details contain a given Financial Plan.
@@ -25,13 +26,13 @@ public class GatherCommand extends Command {
 
     public static final String MESSAGE_NO_PERSON_FOUND = "0 persons were found with ";
 
-    private final GatherEmails prompt;
+    private final GatherEmailPrompt prompt;
 
     /**
      * Constructs a new GatherCommand object.
      * @param prompt The user's prompt
      */
-    public GatherCommand(GatherEmails prompt) {
+    public GatherCommand(GatherEmailPrompt prompt) {
         this.prompt = prompt;
     }
 
@@ -42,6 +43,7 @@ public class GatherCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) {
+        requireNonNull(model);
         String emails = model.gatherEmails(prompt);
         if (emails.isEmpty()) {
             return new CommandResult(MESSAGE_NO_PERSON_FOUND + prompt.toString());
