@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.HOON;
+import static seedu.address.testutil.TypicalEmployees.IDA;
+import static seedu.address.testutil.TypicalEmployees.getTypicalManageHr;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -20,17 +20,17 @@ import seedu.address.model.ManageHr;
 import seedu.address.model.ReadOnlyManageHr;
 
 public class JsonManageHrStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonManageHrStorageTest");
 
     @TempDir
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readManageHr_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readManageHr(null));
     }
 
-    private java.util.Optional<ReadOnlyManageHr> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyManageHr> readManageHr(String filePath) throws Exception {
         return new JsonManageHrStorage(Paths.get(filePath)).readManageHr(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -42,69 +42,69 @@ public class JsonManageHrStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readManageHr("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
+        assertThrows(DataLoadingException.class, () -> readManageHr("notJsonFormatManageHr.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readManageHr_invalidEmployeeManageHr_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readManageHr("invalidEmployeeManageHr.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readManageHr_invalidAndValidEmployeeManageHr_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readManageHr("invalidAndValidEmployeeManageHr.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveManageHr_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        ManageHr original = getTypicalAddressBook();
-        JsonManageHrStorage jsonAddressBookStorage = new JsonManageHrStorage(filePath);
+        ManageHr original = getTypicalManageHr();
+        JsonManageHrStorage jsonManageHrStorage = new JsonManageHrStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveManageHr(original, filePath);
-        ReadOnlyManageHr readBack = jsonAddressBookStorage.readManageHr(filePath).get();
+        jsonManageHrStorage.saveManageHr(original, filePath);
+        ReadOnlyManageHr readBack = jsonManageHrStorage.readManageHr(filePath).get();
         assertEquals(original, new ManageHr(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
-        jsonAddressBookStorage.saveManageHr(original, filePath);
-        readBack = jsonAddressBookStorage.readManageHr(filePath).get();
+        original.addEmployee(HOON);
+        original.removeEmployee(ALICE);
+        jsonManageHrStorage.saveManageHr(original, filePath);
+        readBack = jsonManageHrStorage.readManageHr(filePath).get();
         assertEquals(original, new ManageHr(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
-        jsonAddressBookStorage.saveManageHr(original); // file path not specified
-        readBack = jsonAddressBookStorage.readManageHr().get(); // file path not specified
+        original.addEmployee(IDA);
+        jsonManageHrStorage.saveManageHr(original); // file path not specified
+        readBack = jsonManageHrStorage.readManageHr().get(); // file path not specified
         assertEquals(original, new ManageHr(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveManageHr_nullManageHr_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveManageHr(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code manageHr} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyManageHr addressBook, String filePath) {
+    private void saveManageHr(ReadOnlyManageHr manageHr, String filePath) {
         try {
             new JsonManageHrStorage(Paths.get(filePath))
-                    .saveManageHr(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveManageHr(manageHr, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new ManageHr(), null));
+    public void saveManageHr_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveManageHr(new ManageHr(), null));
     }
 }

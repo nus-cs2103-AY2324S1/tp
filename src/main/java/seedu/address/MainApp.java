@@ -69,8 +69,8 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s ManageHR and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s ManageHR is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s ManageHR.
+     * The data from the sample ManageHR app will be used instead if {@code storage}'s ManageHR is not found,
+     * or an empty ManageHR app will be used instead if errors occur when reading {@code storage}'s ManageHR.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getManageHrFilePath());

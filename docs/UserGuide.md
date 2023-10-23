@@ -29,13 +29,13 @@ Table of Contents
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all employees.
 
-   * `add n/John doe p/91234567 e/example@example.com a/1 Lower Kent Ridge Road d/SoC HR` : Quickly add a person:
+   * `add n/John doe p/91234567 e/example@example.com a/1 Lower Kent Ridge Road d/SoC HR` : Quickly add an employee:
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd employee shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all employees.
 
    * `exit` : Exits the app.
 
@@ -91,9 +91,9 @@ Expected outputs:
 
 ![help message](images/helpMessage.png)
 
-### Adding a person: `add`
+### Adding an employee: `add`
 
-Adds a person to ManageHR’s entries.
+Adds an employee to ManageHR’s entries.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY d/DEPARTMENT`
 - Adds an employee with the above fields
@@ -143,22 +143,22 @@ Succeed:
 Fail:
 * Outcome: If the command format is incorrect, it displays a warning message "Unknown command."
 
-### Editing a person : `edit`
+### Editing an employee : `edit`
 
-Edits an existing person in the address book.
+Edits an existing employee in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [d/DEPARTMENT]​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johnsimmons@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `johnsimmons@gmail.com` respectively.
+*  `edit 1 p/91234567 e/johnsimmons@gmail.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johnsimmons@gmail.com` respectively.
 
-### Locating persons by name: `find` `[Coming Soon]`
+### Locating employee by name: `find` `[Coming Soon]`
 
-Finds persons whose names contain any of the given keywords.
+Finds people whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -166,7 +166,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Employees matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -174,26 +174,26 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting an employee : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified employee from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the employee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed employee list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd employee in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 Succeed:
 * You’ll see a reply "<Employee name> successfully deleted."
 
 Fail:
-* If the person to be deleted does not exist, a warning will be displayed.
-“The person you’re trying to delete does not exist.”
+* If the employee to be deleted does not exist, a warning will be displayed.
+“The employee you’re trying to delete does not exist.”
 
   
 ### Exiting the program : `exit`
