@@ -52,7 +52,7 @@ public class AddCommandParser implements CommandParser<AddCommand> {
         }
 
         if (!argMultimap.getValue(PREFIX_ANIMAL_NAME).get().equals("nil")) {
-            String avail= argMultimap.getValue(PREFIX_AVAILABILITY).get();
+            String avail = argMultimap.getValue(PREFIX_AVAILABILITY).get();
             if (avail.equals("Available") || avail.equals("nil")) {
                 throw new ParseException("When an animal name is provided, availability should not be "
                         + "'Available' or 'nil'.");
