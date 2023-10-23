@@ -215,8 +215,8 @@ public class ClassDetails {
 
     public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
         return new JsonAdaptedClassDetails(classDetails,
-                attendanceTracker.getJsonAttendanceTracker(),
-                assignmentTracker.getJsonAssignmentTracker(),
-                classParticipationTracker.getJsonClassParticipationTracker());
+                attendanceTracker.getJson(),
+                assignmentTracker.getJson(),
+                classParticipationTracker.getJson());
     }
 }

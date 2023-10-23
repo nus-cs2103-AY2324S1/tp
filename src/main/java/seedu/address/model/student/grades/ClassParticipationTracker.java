@@ -14,7 +14,7 @@ import seedu.address.commons.core.index.Index;
  * Represents a Student's class participation grades in the class manager.
  * Guarantees: is valid as declared in {@link #isValidClassPart(int)}
  */
-public class ClassParticipationTracker {
+public class ClassParticipationTracker implements Tracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Class Participation needs to be a positive integer";
 
@@ -86,7 +86,7 @@ public class ClassParticipationTracker {
     /**
      * Returns a Json friendly version of the classParticipationTracker.
      */
-    public List<Boolean> getJsonClassParticipationTracker() {
+    public List<Boolean> getJson() {
         List<Boolean> classParticipationTracker = new ArrayList<>();
         for (ClassParticipation classParticipation : classPartList) {
             classParticipationTracker.add(classParticipation.getParticipated());
