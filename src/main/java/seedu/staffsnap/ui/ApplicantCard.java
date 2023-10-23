@@ -53,7 +53,7 @@ public class ApplicantCard extends UiPart<Region> {
         applicant.getInterviews().stream()
                 .forEach(interview -> {
                     interviews.getChildren().add(new Label(applicant.getInterviewIndexForApplicantCard(interview)
-                            + ". " + interview.type));
+                            + ". " + interview.type + ": " + interview.getRating().value));
                 });
     }
 }

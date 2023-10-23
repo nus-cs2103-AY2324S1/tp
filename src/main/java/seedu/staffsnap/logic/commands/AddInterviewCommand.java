@@ -1,6 +1,7 @@
 package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.staffsnap.model.Model.PREDICATE_HIDE_ALL_APPLICANTS;
 import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
@@ -25,9 +26,12 @@ public class AddInterviewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an interview to an applicant identified "
             + "by the index number used in the displayed applicant list. "
             + "Parameters: INDEX (must be a positive integer)\n"
-            + PREFIX_TYPE + "TYPE\n"
+            + PREFIX_TYPE + "TYPE" + " "
+            + "[" + PREFIX_RATING + "RATING]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TYPE + "technical";
+            + "1 "
+            + PREFIX_TYPE + "technical" + " "
+            + PREFIX_RATING + "8.0";
 
     public static final String MESSAGE_SUCCESS = "New interview added to applicant: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists for this applicant";

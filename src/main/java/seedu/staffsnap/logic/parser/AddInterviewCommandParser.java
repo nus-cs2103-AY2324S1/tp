@@ -1,6 +1,7 @@
 package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
@@ -9,6 +10,7 @@ import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.AddInterviewCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.interview.Interview;
+import seedu.staffsnap.model.interview.Rating;
 
 /**
  * Parses input arguments and creates a new AddInterviewCommand object
@@ -22,7 +24,7 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
      */
     public AddInterviewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TYPE);
+                ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_RATING);
 
         Index index;
 
@@ -37,9 +39,15 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE, PREFIX_RATING);
         String type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
-        Interview interview = new Interview(type);
+        Rating rating = new Rating("-");
+
+        if (argMultimap.getValue(PREFIX_RATING).isPresent()) {
+            rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get());
+        }
+
+        Interview interview = new Interview(type, rating);
 
         return new AddInterviewCommand(index, interview);
     }

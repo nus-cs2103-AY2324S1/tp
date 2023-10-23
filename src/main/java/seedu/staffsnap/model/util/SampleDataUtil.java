@@ -12,6 +12,7 @@ import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
 import seedu.staffsnap.model.interview.Interview;
+import seedu.staffsnap.model.interview.Rating;
 
 /**
  * Contains utility methods for populating {@code ApplicantBook} with sample data.
@@ -20,23 +21,26 @@ public class SampleDataUtil {
     public static Applicant[] getSampleApplicants() {
         return new Applicant[] {
             new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Position("Blk 30 Geylang Street 29, #06-40"),
-                getInterviewList("friends")),
+                new Position("Software Engineer"),
+                getInterviewList(new Interview("behavioral", new Rating("7.5")),
+                        new Interview("technical", new Rating("7.0")))),
             new Applicant(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Position("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getInterviewList("colleagues", "friends")),
+                new Position("Software Engineer"),
+                getInterviewList(new Interview("behavioral", new Rating("7.9")),
+                        new Interview("technical", new Rating("8.0")))),
             new Applicant(new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                new Email("charlotte@example.com"), new Position("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getInterviewList("neighbours")),
+                new Email("charlotte@example.com"), new Position("Software Engineer"),
+                getInterviewList(new Interview("behavioral", new Rating("8.8")),
+                        new Interview("technical", new Rating("8.7")))),
             new Applicant(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Position("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getInterviewList("family")),
+                new Position("Frontend Engineer"),
+                getInterviewList(new Interview("behavioral", new Rating("7.7")))),
             new Applicant(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Position("Blk 47 Tampines Street 20, #17-35"),
-                getInterviewList("classmates")),
+                new Position("Backend Engineer"),
+                getInterviewList(new Interview("behavioral", new Rating("7.9")))),
             new Applicant(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Position("Blk 45 Aljunied Street 85, #11-31"),
-                getInterviewList("colleagues"))
+                new Position("Testing Engineer"),
+                getInterviewList(new Interview("behavioral", new Rating("6.0"))))
         };
     }
 
@@ -51,9 +55,9 @@ public class SampleDataUtil {
     /**
      * Returns a interview set containing the list of strings given.
      */
-    public static List<Interview> getInterviewList(String... strings) {
-        return Arrays.stream(strings)
-                .map(Interview::new)
+    public static List<Interview> getInterviewList(Interview... interviews) {
+        return Arrays.stream(interviews)
+                .map(interview -> new Interview(interview.type, interview.getRating()))
                 .collect(Collectors.toList());
     }
 

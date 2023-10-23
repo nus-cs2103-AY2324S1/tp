@@ -15,6 +15,7 @@ import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
 import seedu.staffsnap.model.interview.Interview;
+import seedu.staffsnap.model.interview.Rating;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -117,18 +118,23 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String interview} into a {@code Interview}.
+     * Parses a {@code String type} and {@code String rating} into a {@code Interview}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code interview} is invalid.
      */
-    public static Interview parseInterview(String interview) throws ParseException {
-        requireNonNull(interview);
-        String trimmedInterview = interview.trim();
-        if (!Interview.isValidType(trimmedInterview)) {
+    public static Interview parseInterview(String type, String rating) throws ParseException {
+        requireNonNull(type, rating);
+        String trimmedType = type.trim();
+        String trimmedRating = rating.trim();
+        Rating ratingValue = new Rating(trimmedRating);
+        if (!Interview.isValidType(trimmedType)) {
             throw new ParseException(Interview.MESSAGE_CONSTRAINTS);
         }
-        return new Interview(trimmedInterview);
+        if (!Rating.isValidRating(trimmedRating)) {
+            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+        }
+        return new Interview(trimmedType, ratingValue);
     }
 
     /**
@@ -138,7 +144,7 @@ public class ParserUtil {
         requireNonNull(interviews);
         final List<Interview> interviewList = new ArrayList<>();
         for (String interviewType : interviews) {
-            interviewList.add(parseInterview(interviewType));
+            interviewList.add(parseInterview(interviewType, "-"));
         }
         return interviewList;
     }
@@ -173,5 +179,22 @@ public class ParserUtil {
             throw new ParseException(Interview.MESSAGE_CONSTRAINTS);
         }
         return trimmedType.toLowerCase();
+    }
+
+    /**
+     * Parses a {@code String rating} into a {@code Rating}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rating} is invalid.
+     */
+    public static Rating parseRating(String rating) throws ParseException {
+        requireNonNull(rating);
+        String trimmedRating = rating.trim();
+        Double ratingValue = Double.parseDouble(trimmedRating);
+        String ratingString = String.format("%.1f", ratingValue);
+        if (!Rating.isValidRating(ratingString)) {
+            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+        }
+        return new Rating(ratingString);
     }
 }

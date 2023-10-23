@@ -3,6 +3,10 @@ package seedu.staffsnap.model.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Interview's rating in the applicant book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidRating(String)}
+ */
 public class Rating {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -26,7 +30,7 @@ public class Rating {
      * Returns true if a given string is a valid rating.
      */
     public static boolean isValidRating(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.equals("-") || test.matches(VALIDATION_REGEX);
     }
 
     @Override
