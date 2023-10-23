@@ -83,7 +83,9 @@ public class EventTest {
     @Test
     public void toStringMethod() {
         String expected = Event.class.getCanonicalName() + "{name=" + AURORA_BOREALIS.getName()
-                + ", date=" + AURORA_BOREALIS.getDate() + ", location=" + AURORA_BOREALIS.getLocation() + "}";
+                + ", date=" + AURORA_BOREALIS.getDate()
+                + ", location=" + AURORA_BOREALIS.getLocation()
+                + ", tags=" + AURORA_BOREALIS.getTags() + "}";
         assertEquals(expected, AURORA_BOREALIS.toString());
     }
 }

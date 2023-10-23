@@ -56,17 +56,23 @@ class SampleDataUtilTest {
     void getSampleEvents_returnsValidEvents() {
         Event[] sampleEvents = getSampleEvents();
         Event aurora = new Event(new Name("Aurora Borealis"),
-                new EventDate("2023-11-30"), new Location("Greenland"));
+                new EventDate("2023-11-30"), new Location("Greenland"),
+                getTagSet("nature"));
         Event boxing = new Event(new Name("Boxing Day"),
-                new EventDate("2023-12-26"), new Location("Ridge View Residential College"));
+                new EventDate("2023-12-26"), new Location("Ridge View Residential College"),
+                getTagSet("rvrc"));
         Event cny = new Event(new Name("Chinese New Year"),
-                new EventDate("2024-02-10"), new Location("Communal Hall"));
+                new EventDate("2024-02-10"), new Location("Communal Hall"),
+                getTagSet("holiday"));
         Event dog = new Event(new Name("Dog Day"),
-                new EventDate("2024-08-26"), new Location("UTown Pitstop"));
+                new EventDate("2024-08-26"), new Location("UTown Pitstop"),
+                getTagSet("animals"));
         Event echo = new Event(new Name("Echo Day"),
-                new EventDate("2023-05-05"), new Location("Batu Cave"));
+                new EventDate("2023-05-05"), new Location("Batu Cave"),
+                getTagSet("nature", "overseas"));
         Event festival = new Event(new Name("Festival"),
-                new EventDate("2023-10-05"), new Location("Clementi 321"));
+                new EventDate("2023-10-05"), new Location("Clementi 321"),
+                getTagSet("holiday"));
         assertTrue(Arrays.stream(sampleEvents).anyMatch(aurora::equals));
         assertTrue(Arrays.stream(sampleEvents).anyMatch(boxing::equals));
         assertTrue(Arrays.stream(sampleEvents).anyMatch(cny::equals));
@@ -97,17 +103,23 @@ class SampleDataUtilTest {
                 new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"));
         Event aurora = new Event(new Name("Aurora Borealis"),
-                new EventDate("2023-11-30"), new Location("Greenland"));
+                new EventDate("2023-11-30"), new Location("Greenland"),
+                getTagSet("nature"));
         Event boxing = new Event(new Name("Boxing Day"),
-                new EventDate("2023-12-26"), new Location("Ridge View Residential College"));
+                new EventDate("2023-12-26"), new Location("Ridge View Residential College"),
+                getTagSet("rvrc"));
         Event cny = new Event(new Name("Chinese New Year"),
-                new EventDate("2024-02-10"), new Location("Communal Hall"));
+                new EventDate("2024-02-10"), new Location("Communal Hall"),
+                getTagSet("holiday"));
         Event dog = new Event(new Name("Dog Day"),
-                new EventDate("2024-08-26"), new Location("UTown Pitstop"));
+                new EventDate("2024-08-26"), new Location("UTown Pitstop"),
+                getTagSet("animals"));
         Event echo = new Event(new Name("Echo Day"),
-                new EventDate("2023-05-05"), new Location("Batu Cave"));
+                new EventDate("2023-05-05"), new Location("Batu Cave"),
+                getTagSet("nature", "overseas"));
         Event festival = new Event(new Name("Festival"),
-                new EventDate("2023-10-05"), new Location("Clementi 321"));
+                new EventDate("2023-10-05"), new Location("Clementi 321"),
+                getTagSet("holiday"));
         CcaCommander ccaCommander = (CcaCommander) getSampleCcaCommander();
         assertTrue(ccaCommander.hasMember(alex));
         assertTrue(ccaCommander.hasMember(bernice));
