@@ -68,6 +68,9 @@ public class RescheduleCommand extends Command {
         Appointment appointmentToReschedule = lastShownList.get(index.getZeroBased());
         Appointment rescheduledAppointment = createRescheduledAppointment(appointmentToReschedule, appointmentTime);
 
+        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        lastShownList = model.getFilteredAppointmentList();
+
         // Clash in appointment slot
         if (!AppointmentTime.isValidTimeSlot(lastShownList, rescheduledAppointment)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_TIMESLOT);
@@ -79,7 +82,6 @@ public class RescheduleCommand extends Command {
         }
 
         model.setAppointment(appointmentToReschedule, rescheduledAppointment);
-        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, Messages.format(rescheduledAppointment)), false, false);
     }

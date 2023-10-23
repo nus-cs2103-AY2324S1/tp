@@ -5,6 +5,11 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.address.model.AddressBook;
 import seedu.address.model.appointment.Appointment;
 
 /**
@@ -29,4 +34,19 @@ public class TypicalAppointments {
             .withPatient(IDA).withAppointmentTime("2022/06/13 15:00", "2022/06/13 16:30")
             .withDescription("Follow-up").build();
 
+    public static final Appointment NOCLASHAPPOINTMENT = new AppointmentBuilder()
+            .withPatient(ALICE).withAppointmentTime("3000/01/01 10:00", "3000/01/01 11:00")
+            .withDescription("Checkup").build();
+
+    public static List<Appointment> getTypicalAppointments() {
+        return new ArrayList<>(Arrays.asList(APPOINTMENT1, APPOINTMENT2, APPOINTMENT3, APPOINTMENT4));
+    }
+
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Appointment appointment : getTypicalAppointments()) {
+            ab.addAppointment(appointment);
+        }
+        return ab;
+    }
 }
