@@ -3,6 +3,8 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,18 +19,22 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
-
+    private final KeyPressExecutor keyUpExecutor;
+    private final KeyPressExecutor keyDownExecutor;
     @FXML
     private TextField commandTextField;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, KeyPressExecutor keyUpExecutor, KeyPressExecutor keyDownExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.keyUpExecutor = keyUpExecutor;
+        this.keyDownExecutor = keyDownExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.setOnKeyPressed(this::handleOnKeyPressed);
     }
 
     /**
@@ -70,6 +76,18 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Handles the key pressed event.
+     */
+    private void handleOnKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.UP) {
+            commandTextField.setText(keyUpExecutor.executeKey(commandTextField.getText()));
+            commandTextField.positionCaret(commandTextField.getText().length());
+        } else if (event.getCode() == KeyCode.DOWN) {
+            commandTextField.setText(keyDownExecutor.executeKey(commandTextField.getText()));
+            commandTextField.positionCaret(commandTextField.getText().length());
+        }
+    }
+    /**
      * Represents a function that can execute commands.
      */
     @FunctionalInterface
@@ -82,4 +100,14 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 
+    /**
+     * Represents a function that executes a key press.
+     */
+    @FunctionalInterface
+    public interface KeyPressExecutor {
+        /**
+         * Executes the key press and returns the result String.
+         */
+        String executeKey(String commandText);
+    }
 }
