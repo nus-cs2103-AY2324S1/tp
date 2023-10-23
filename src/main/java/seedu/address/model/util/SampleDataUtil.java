@@ -26,7 +26,7 @@ public class SampleDataUtil {
                 new Phone("87438807"),
                 new Email("alexyeoh@example.com"),
                 new Salary("8500"),
-            getDepartmentSet("IT")),
+            getDepartmentSet("IT"), true),
 
             new Employee(new Name("Bernice Yu"), new Position("Systems analyst"),
                 new Id("EID5678-1234"),
@@ -40,7 +40,7 @@ public class SampleDataUtil {
                 new Phone("93210283"),
                 new Email("charlotte@example.com"),
                 new Salary("8000"),
-            getDepartmentSet("Marketing")),
+            getDepartmentSet("Marketing"), true),
 
             new Employee(new Name("David Li"), new Position("Operations manager"),
                 new Id("EID2023-5678"),
@@ -54,7 +54,7 @@ public class SampleDataUtil {
                 new Phone("92492021"),
                 new Email("irfan@example.com"),
                 new Salary("8500"),
-            getDepartmentSet("IT")),
+            getDepartmentSet("IT"), true),
 
             new Employee(new Name("Roy Balakrishnan"), new Position("Graphic design intern"),
                 new Id("EID2024-5678"),

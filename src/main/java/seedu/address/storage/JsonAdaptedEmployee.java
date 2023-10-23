@@ -33,6 +33,7 @@ class JsonAdaptedEmployee {
     private final String email;
     private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
     private final String salary;
+    private final boolean isOnLeave;
 
     /**
      * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
@@ -41,7 +42,7 @@ class JsonAdaptedEmployee {
     public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("position") String position,
             @JsonProperty("id") String id, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments,
-            @JsonProperty("salary") String salary) {
+            @JsonProperty("salary") String salary, @JsonProperty("isOnLeave") boolean isOnLeave) {
         this.name = name;
         this.position = position;
         this.id = id;
@@ -51,6 +52,7 @@ class JsonAdaptedEmployee {
         if (departments != null) {
             this.departments.addAll(departments);
         }
+        this.isOnLeave = isOnLeave;
     }
 
     /**
@@ -66,6 +68,7 @@ class JsonAdaptedEmployee {
         departments.addAll(source.getDepartments().stream()
                 .map(JsonAdaptedDepartment::new)
                 .collect(Collectors.toList()));
+        isOnLeave = source.getIsOnLeave();
     }
 
     /**
@@ -131,7 +134,8 @@ class JsonAdaptedEmployee {
         final Salary modelSalary = new Salary(salary);
 
         final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
-        return new Employee(modelName, modelPosition, modelId, modelPhone, modelEmail, modelSalary, modelDepartments);
+
+        return new Employee(modelName, modelPosition, modelId, modelPhone, modelEmail, modelSalary, modelDepartments, isOnLeave);
     }
 
 }
