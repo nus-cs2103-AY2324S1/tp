@@ -5,7 +5,7 @@ package seedu.address.model.group.exceptions;
  * identity).
  */
 public class DuplicateGroupException extends RuntimeException {
-	public DuplicateGroupException() {
-		super("Operation would result in person being assigned to duplicate groups");
-	}
+    public DuplicateGroupException() {
+        super("Operation would result in person being assigned to duplicate groups");
+    }
 }

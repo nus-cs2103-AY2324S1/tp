@@ -12,6 +12,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_GROUPTAG = new Prefix("g/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-
+    public static final Prefix PREFIX_FREETIME = new Prefix("t/");
+    public static final Prefix PREFIX_ENDINTERVAL = new Prefix(";");
+    public static final Prefix PREFIX_TOFRO = new Prefix("-");
+    public static final Prefix PREFIX_GROUPREMARK = new Prefix("r/");
 
 }

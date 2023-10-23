@@ -28,8 +28,8 @@ public abstract class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Nicholas Lee \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GROUPTAG + "CS2103T";
 
-
-    public DeleteCommand() {}
+    public DeleteCommand() {
+    }
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;

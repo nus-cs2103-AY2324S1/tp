@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -26,7 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+     * among constructors.
      */
     {
         persons = new UniquePersonList();
@@ -91,6 +92,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same name exists in the addressbook.
+     * @param personName Name of the person.
+     * @return Returns true if a person with the same name exists in the addressbook.
+     */
+    public boolean hasPerson(Name personName) {
+        requireNonNull(personName);
+        for (Person person : persons) {
+            if (person.getName().equals(personName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -141,9 +157,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.add(g);
     }
 
-//    public void addGroup(Group g, Person toAdd) throws CommandException {
-//        groups.add(g, toAdd);
-//    }
+    //public void addGroup(Group g, Person toAdd) throws CommandException {
+    //groups.add(g, toAdd);
+    //}
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
@@ -158,13 +174,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
-                .toString();
+            .add("persons", persons)
+            .toString();
     }
 
     public Person getPerson(String personName) throws CommandException {
         // person list get that person object with same name
-       return persons.getPerson(personName);
+        return persons.getPerson(personName);
     }
 
     public Group getGroup(String groupName) throws CommandException {
@@ -182,6 +198,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Group> getGroupList() {
         return groups.asUnmodifiableObservableList();
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

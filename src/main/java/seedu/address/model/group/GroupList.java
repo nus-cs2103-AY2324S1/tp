@@ -23,7 +23,7 @@ public class GroupList implements Iterable<Group> {
 
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
     private final ObservableList<Group> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+        FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent group as the given argument.
@@ -83,6 +83,7 @@ public class GroupList implements Iterable<Group> {
 
     /**
      * Converts the internal list to streams.
+     *
      * @return Internal list into streams.
      */
     public Stream<Group> toStream() {
@@ -93,6 +94,7 @@ public class GroupList implements Iterable<Group> {
     public Iterator<Group> iterator() {
         return internalList.iterator();
     }
+
     public ObservableList<Group> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
@@ -113,14 +115,13 @@ public class GroupList implements Iterable<Group> {
     }
 
     public Group getGroup(String groupName) throws CommandException {
-        for (Group group: this.internalList) {
+        for (Group group : this.internalList) {
             if (group.nameEquals(groupName)) {
                 return group;
             }
         }
         throw new CommandException("Group does not exist");
     }
-
 
 
     @Override

@@ -1,24 +1,24 @@
 package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
-
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Class representing a group
  */
 public class Group {
-    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Group names should be alphanumeric and must not be black";
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
+    private GroupRemark groupRemark;
 
     /**
      * Name field must be present and not null.
@@ -26,15 +26,27 @@ public class Group {
     public Group(String groupName) {
         requireNonNull(groupName);
         this.groupName = groupName;
+        this.groupRemark = new GroupRemark(" ");
     }
 
     /**
      * Name field must be present and not null.
      */
-    public Group(String groupName, List<Person> listOfGroupMates) {
+    public Group(String groupName, GroupRemark groupRemark) {
+        requireNonNull(groupName);
+        this.groupName = groupName;
+        this.groupRemark = groupRemark;
+    }
+
+
+    /**
+     * Name field must be present and not null.
+     */
+    public Group(String groupName, GroupRemark groupRemark, List<Person> listOfGroupMates) {
         requireNonNull(groupName);
         requireNonNull(listOfGroupMates);
         this.groupName = groupName;
+        this.groupRemark = groupRemark;
         this.listOfGroupMates.addAll(listOfGroupMates);
     }
 
@@ -56,11 +68,12 @@ public class Group {
         }
 
         return otherGroup != null
-                && this.equals(otherGroup);
+            && this.equals(otherGroup);
     }
 
     /**
      * Check if same group according to name since groupName is unique
+     *
      * @param groupName of interest
      * @return whether group is the same group
      */
@@ -70,12 +83,14 @@ public class Group {
 
     /**
      * Returns if the name of the group is valid.
+     *
      * @param name The name of the group
      * @return The validity of the group name.
      */
     //For now no constraints
     public static boolean isValidGroup(String name) {
-        return true;
+        requireNonNull(name);
+        return !name.isBlank();
     }
 
     /**
@@ -85,7 +100,8 @@ public class Group {
     public void removePerson(Person toRemove) throws CommandException {
         requireNonNull(toRemove);
         if (!contains(toRemove)) {
-            throw new CommandException(String.format("%s is not in this group: %s", toRemove.getName().fullName, this.groupName));
+            throw new CommandException(
+                String.format("%s is not in this group: %s", toRemove.getName().fullName, this.groupName));
         }
         listOfGroupMates.remove(toRemove);
     }
@@ -105,7 +121,8 @@ public class Group {
     public void addPerson(Person personToAdd) throws CommandException {
         requireNonNull(personToAdd);
         if (this.contains(personToAdd)) {
-            throw new CommandException(String.format("%s is already in this group: %s", personToAdd.getName().fullName, this.groupName));
+            throw new CommandException(
+                String.format("%s is already in this group: %s", personToAdd.getName().fullName, this.groupName));
         }
         listOfGroupMates.add(personToAdd);
     }
@@ -113,8 +130,8 @@ public class Group {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Group name", groupName)
-                .toString();
+            .add("Group name", groupName)
+            .toString();
     }
 
     public void printGrpMates() {
@@ -140,7 +157,15 @@ public class Group {
         return this.groupName.equals(otherGroup.getGroupName());
     }
 
-    public String getName() {
-        return this.groupName;
+    public Stream<Person> grpMatesStream() {
+        return listOfGroupMates.stream();
+    }
+
+    public GroupRemark getGroupRemark() {
+        return this.groupRemark;
+    }
+
+    public void setGroupRemark(GroupRemark groupRemark) {
+        this.groupRemark = groupRemark;
     }
 }
