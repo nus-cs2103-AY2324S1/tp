@@ -9,6 +9,35 @@ Foster Family is a **desktop app for managing contacts, optimized for use via a 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Quick Start
+1. Ensure you have Java `11` or above installed in your Computer.
+
+2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases/tag/v1.2.1).
+
+3. Copy the file to the folder you want to use as the _home folder_ for your Foster Family Address Book.
+
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar FosterFamily.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try:
+
+  * `list` : Lists all fosterers.
+
+  * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/nil availability/nil animal/nil animalType/nil` : Adds a fosterer named `Jerry Tan` to the Foster Family Address Book.
+
+  * `delete 3` : Deletes the 3rd fosterer shown in the current list.
+
+  * `reset` : Deletes all fosterers.
+
+  * `exit` : Exits the app.
+6. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -335,7 +364,7 @@ _Details coming soon ..._
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Clear**  | `clear`                                                                                                                                                              |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
+| **Delete** | `delete INDEX [INDEX...]`<br> e.g., `delete 1 2 3`                                                                                                                   |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
 | **List**   | `list`                                                                                                                                                               |
