@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -59,11 +58,10 @@ public class EditCommandTest {
         Applicant lastApplicant = model.getFilteredApplicantList().get(indexLastApplicant.getZeroBased());
 
         ApplicantBuilder applicantInList = new ApplicantBuilder(lastApplicant);
-        Applicant editedApplicant = applicantInList.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                .withInterviews(VALID_INTERVIEW_HUSBAND).build();
+        Applicant editedApplicant = applicantInList.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).build();
 
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withInterviews(VALID_INTERVIEW_HUSBAND).build();
+                .withPhone(VALID_PHONE_AMY).build();
         EditCommand editCommand = new EditCommand(indexLastApplicant, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS,

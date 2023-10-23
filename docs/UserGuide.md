@@ -140,6 +140,17 @@ Examples:
 * `addi 3 t/screening`
 
 ---
+### `editi` : Editing an interview of an applicant
+
+Edits an interview of an applicant.
+
+Format: `editi INDEX i/INTERVIEW_INDEX t/TYPE`
+
+Examples:
+* `editi 1 i/1 t/technical` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview.
+* `editi 3 i/2 t/screening`
+
+---
 ### `clear` : Clearing all applicant entries
 
 Clears all the current data stored in the system.
@@ -155,11 +166,6 @@ UI mockup:
 Exits the program.
 
 Format: `exit`
-
----
-### `filter`: Filtering applicants by descriptor criteria [coming soon]
-
-Details coming soon...
 
 ---
 ### Saving the data

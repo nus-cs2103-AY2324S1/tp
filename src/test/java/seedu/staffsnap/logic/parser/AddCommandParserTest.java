@@ -3,7 +3,6 @@ package seedu.staffsnap.logic.parser;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.INTERVIEW_DESC_FRIEND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -16,6 +15,7 @@ import static seedu.staffsnap.logic.commands.CommandTestUtil.POSITION_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.POSITION_DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.TYPE_DESC_TECHNICAL;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -53,15 +53,14 @@ public class AddCommandParserTest {
 
         // without whitespace preamble
         Applicant expectedApplicantWithoutWhitespace = new ApplicantBuilder(BOB).build();
-        assertParseSuccess(parser, NAME_DESC_BOB
-                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + POSITION_DESC_BOB,
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + POSITION_DESC_BOB,
                 new AddCommand(expectedApplicantWithoutWhitespace));
     }
 
     @Test
     public void parse_repeatedNonInterviewValue_failure() {
         String validExpectedApplicantString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + POSITION_DESC_BOB + INTERVIEW_DESC_FRIEND;
+                + POSITION_DESC_BOB + TYPE_DESC_TECHNICAL;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedApplicantString,
