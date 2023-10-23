@@ -8,6 +8,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.model.util.SampleDataUtil;
 
@@ -20,12 +21,14 @@ public class ApplicantBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_POSITION = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_STATUS = "UNDECIDED";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Position position;
     private List<Interview> interviews;
+    private Status status;
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -36,6 +39,7 @@ public class ApplicantBuilder {
         email = new Email(DEFAULT_EMAIL);
         position = new Position(DEFAULT_POSITION);
         interviews = new ArrayList<>();
+        status = Status.findByName(DEFAULT_STATUS);
     }
 
     /**
@@ -47,6 +51,7 @@ public class ApplicantBuilder {
         email = applicantToCopy.getEmail();
         position = applicantToCopy.getPosition();
         interviews = new ArrayList<>(applicantToCopy.getInterviews());
+        status = applicantToCopy.getStatus();
     }
 
     /**
@@ -90,8 +95,16 @@ public class ApplicantBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Status} of the {@code Applicant} that we are building.
+     */
+    public ApplicantBuilder withStatus(String status) {
+        this.status = Status.findByName(status);
+        return this;
+    }
+
     public Applicant build() {
-        return new Applicant(name, phone, email, position, interviews);
+        return new Applicant(name, phone, email, position, interviews, status);
     }
 
 }

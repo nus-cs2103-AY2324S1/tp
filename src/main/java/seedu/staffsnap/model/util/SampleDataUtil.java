@@ -11,6 +11,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 
 /**
@@ -21,22 +22,22 @@ public class SampleDataUtil {
         return new Applicant[] {
             new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Position("Software Engineer"),
-                getInterviewList("screening")),
+                getInterviewList("screening"), Status.OFFERED),
             new Applicant(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Position("Testing Engineer"),
-                getInterviewList("technical", "screening")),
+                getInterviewList("technical", "screening"), Status.UNDECIDED),
             new Applicant(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                 new Email("charlotte@example.com"), new Position("Software Engineer"),
-                getInterviewList("behavioral")),
+                getInterviewList("behavioral"), Status.REJECTED),
             new Applicant(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Position("Staff Engineer"),
-                getInterviewList("technical")),
+                getInterviewList("technical"), Status.OFFERED),
             new Applicant(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Position("DevOps Engineer"),
-                getInterviewList("technical", "behavioral")),
+                getInterviewList("technical", "behavioral"), Status.UNDECIDED),
             new Applicant(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Position("Software Engineer"),
-                getInterviewList("screening", "technical", "behavioral")),
+                getInterviewList("screening", "technical", "behavioral"), Status.REJECTED)
         };
     }
 

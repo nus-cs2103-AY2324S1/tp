@@ -28,6 +28,7 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
       </HBox>
       <HBox fx:id="phone" alignment="CENTER_LEFT" spacing="10" />
       <HBox fx:id="email" alignment="CENTER_LEFT" spacing="10" />
