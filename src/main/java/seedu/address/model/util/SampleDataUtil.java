@@ -90,10 +90,10 @@ public class SampleDataUtil {
         List<Task> tasks = Arrays.asList(new Task("first"), new Task("second"), new Task("third"));
         taskList.setTasks(tasks);
         return new Lesson[] {
-            new Lesson(startLesson1, endLesson1, math, new Name("Alex Yeoh"), taskList),
-            new Lesson(startLesson2, endLesson2, math, new Name("David Li"), taskList),
-            new Lesson(startLesson3, endLesson3, bio, new Name("Bernice Yu"), taskList),
-            new Lesson(startLesson4, endLesson4, bio, new Name("Bernice Yu"), taskList),
+            new Lesson(startLesson1, endLesson1, math, taskList, new Name("Alex Yeoh")),
+            new Lesson(startLesson2, endLesson2, math, taskList, new Name("David Li")),
+            new Lesson(startLesson3, endLesson3, bio, taskList, new Name("Bernice Yu")),
+            new Lesson(startLesson4, endLesson4, bio, taskList, new Name("Bernice Yu")),
         };
     }
     public static ReadOnlySchedule getSampleSchedule() {

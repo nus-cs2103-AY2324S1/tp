@@ -27,7 +27,7 @@ public class Lesson {
     private Subject subject;
 
     private ArrayList<Name> students; // TODO: change to student object
-  
+
     /**
      * The Task List to store the Lesson Tasks.
      */
@@ -43,7 +43,7 @@ public class Lesson {
      * @param studentNames The student attending this lesson. Note: Converted to ArrayList when stored
      * @see seedu.address.logic.parser.ParserUtil
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, Name... studentNames, TaskList taskList) {
+    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, TaskList taskList, Name... studentNames) {
         requireAllNonNull(start, end, subject);
         this.start = start;
         this.end = end;
@@ -55,21 +55,24 @@ public class Lesson {
     /**
      * Alternative constructor for a Lesson Object without subject
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Name... studentNames) {
+    public Lesson(LocalDateTime start, LocalDateTime end, TaskList taskList, Name... studentNames) {
         requireAllNonNull(start, end);
         this.start = start;
         this.end = end;
         this.students = new ArrayList<>(Arrays.asList(studentNames));
+        this.taskList = taskList;
     }
     /**
      * Alternative constructor for a Lesson Object with an ArrayList of students
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, ArrayList<Name> studentNames) {
+    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject,
+                  TaskList taskList, ArrayList<Name> studentNames) {
         requireAllNonNull(start, end, subject);
         this.start = start;
         this.end = end;
         this.subject = subject;
         this.students = studentNames;
+        this.taskList = taskList;
     }
 
     /**
@@ -243,6 +246,22 @@ public class Lesson {
      */
     public String serializeStudents() {
         return getStudentsStr();
+    }
+
+    /**
+     * Serializes the Task List to a String
+     * @return stringified version of the task list
+     */
+    public String serializeTaskList() { //TODO
+        return "";
+    }
+
+    /**
+     * Deserialize the String to a Task List
+     * @return Task List
+     */
+    public static TaskList deserializeTaskList(String taskList) throws IllegalValueException { //TODO
+        return new TaskList();
     }
 
     /**
