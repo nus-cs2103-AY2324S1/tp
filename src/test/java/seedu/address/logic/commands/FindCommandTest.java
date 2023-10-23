@@ -164,7 +164,7 @@ public class FindCommandTest {
                 + ", phone predicate=" + phonePredicate + ", policy number predicate=" + policyNumPredicate
                 + ", tag predicate=" + tagPredicate + ", policy expiry predicate=" + policyExpiryPredicate
                 + ", email predicate=" + emailPredicate + ", policy issue predicate=" + policyIssuePredicate
-                + ", company predicate=" + companyPredicate +"}";
+                + ", company predicate=" + companyPredicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 

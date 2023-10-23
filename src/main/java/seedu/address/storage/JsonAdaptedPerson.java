@@ -188,7 +188,13 @@ class JsonAdaptedPerson {
         }
         final PolicyDate modelPolicyExpiryDate = new PolicyDate(policyExpiryDate);
 
-        final Policy modelPolicy = new Policy(modelCompany,modelPolicyNumber, modelPolicyIssueDate, modelPolicyExpiryDate);
+        final Policy modelPolicy = new Policy(
+                modelCompany,
+                modelPolicyNumber,
+                modelPolicyIssueDate,
+                modelPolicyExpiryDate
+        );
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                 modelNric, modelLicencePlate, modelPolicy);
     }

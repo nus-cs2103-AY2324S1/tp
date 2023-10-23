@@ -33,5 +33,3 @@ public class CompanyContainsKeywordsPredicate extends FieldPredicates {
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 }
-
-}

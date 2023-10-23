@@ -21,7 +21,6 @@ import seedu.address.model.person.PolicyExpiryContainsKeywordsPredicate;
 import seedu.address.model.person.PolicyIssueContainsKeywordsPredicate;
 import seedu.address.model.person.PolicyNumberContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
-import seedu.address.model.policy.Company;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.

@@ -3,6 +3,10 @@ package seedu.address.model.policy;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a car insurance company in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidCompany(String)}
+ */
 public class Company {
 
     public static final String MESSAGE_CONSTRAINTS = "Should not contain unrecognizable characters";

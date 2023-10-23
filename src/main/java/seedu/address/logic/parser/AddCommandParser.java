@@ -116,9 +116,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         PolicyDate policyExpiryDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
 
         // if all details about policy exists
-        if (arePrefixesPresent(argMultimap, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
+        if (arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
                 PREFIX_POLICY_EXPIRY_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
+            company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
             policyNumber = ParserUtil.parsePolicyNumber(argMultimap.getValue(PREFIX_POLICY_NUMBER).get());
             policyIssueDate = ParserUtil.parsePolicyIssueDate(argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).get());
             policyExpiryDate = ParserUtil.parsePolicyExpiryDate(argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).get());
