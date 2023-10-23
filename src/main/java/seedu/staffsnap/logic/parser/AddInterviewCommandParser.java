@@ -3,8 +3,7 @@ package seedu.staffsnap.logic.parser;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
-
-import java.util.stream.Stream;
+import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.AddInterviewCommand;
@@ -40,6 +39,7 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE, PREFIX_RATING);
+
         String type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
         Rating rating = new Rating("-");
 
@@ -51,13 +51,4 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
 
         return new AddInterviewCommand(index, interview);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }
