@@ -112,6 +112,6 @@ public class RemarkCommand extends Command {
 
         RemarkCommand e = (RemarkCommand) other;
         return index.equals(e.index)
-                && remark.equals(e.remark);
+                && remark.equals(e.remark) && isKeepRemark == e.isKeepRemark;
     }
 }

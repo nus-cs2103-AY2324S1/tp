@@ -12,7 +12,7 @@ import seedu.address.model.person.Remark;
  * Parses special input arguments and creates a new {@code RemarkCommand} object
  */
 public class RemarkSyntaxHandler {
-    public static final String REGEX_KEEP_REMARK = " \\*\\*REMARK\\*\\* ";
+    public static final String REGEX_KEEP_REMARK = "\\*\\*REMARK\\*\\*";
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
