@@ -12,12 +12,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/SetDifficultyCommandTest.java
 
 public class SetDifficultyCommandTest {
-=======
-public class SolveCommandTest {
->>>>>>> 5c76934b9f0e873ad8373ff60e5dc23f13c1c6e6:src/test/java/seedu/address/logic/commands/SolveCommandTest.java
+
+
 
     private Model model = new ModelManager(getTypicalDeck(), new UserPrefs());
 
