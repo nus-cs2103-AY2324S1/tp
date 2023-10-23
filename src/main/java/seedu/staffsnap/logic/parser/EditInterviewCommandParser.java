@@ -3,6 +3,7 @@ package seedu.staffsnap.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.staffsnap.commons.core.index.Index;
@@ -23,7 +24,7 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
     public EditInterviewCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INTERVIEW, PREFIX_TYPE);
+                ArgumentTokenizer.tokenize(args, PREFIX_INTERVIEW, PREFIX_TYPE, PREFIX_RATING);
 
         Index applicantIndex;
         Index interviewIndex;
@@ -36,12 +37,16 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INTERVIEW, PREFIX_TYPE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INTERVIEW, PREFIX_TYPE, PREFIX_RATING);
 
         EditInterviewDescriptor editInterviewDescriptor = new EditInterviewDescriptor();
         if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
             editInterviewDescriptor.setType(ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get()));
         }
+        if (argMultimap.getValue(PREFIX_RATING).isPresent()) {
+            editInterviewDescriptor.setRating(ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get()));
+        }
+
         if (!editInterviewDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditInterviewCommand.MESSAGE_NOT_EDITED);
         }

@@ -11,7 +11,7 @@ public class Rating {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Rating should be a number between 0.0 and 10.0 to 1 decimal place";
-    public static final String VALIDATION_REGEX = "^(0|10|\\d{1}(\\.\\d{1})?)$";
+    public static final String VALIDATION_REGEX = "^(10|10.0|\\d{1}(\\.\\d{1})?)$";
 
     public final String value;
 
