@@ -12,6 +12,7 @@ import seedu.staffsnap.model.applicant.Position;
 import seedu.staffsnap.model.interview.Interview;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,13 +37,13 @@ class FilterCommandTest {
         Phone phone1 = BENSON.getPhone();
         Email email1 = BENSON.getEmail();
         Position position1 = BENSON.getPosition();
-        Set<Interview> interviewList1 = BENSON.getInterviews();
+        List<Interview> interviewList1 = BENSON.getInterviews();
 
         Name name2 = CARL.getName();
         Phone phone2 = CARL.getPhone();
         Email email2 = CARL.getEmail();
         Position position2 = CARL.getPosition();
-        Set<Interview> interviewList2 = CARL.getInterviews();
+        List<Interview> interviewList2 = CARL.getInterviews();
 
         CustomFilterPredicate firstPredicate = new CustomFilterPredicate(name1, phone1, email1, position1, interviewList1);
         CustomFilterPredicate secondPredicate = new CustomFilterPredicate(name2, phone2, email2, position2, interviewList2);
@@ -69,7 +70,7 @@ class FilterCommandTest {
 
     @Test
     public void execute_zeroKeywords_allApplicantsFound() {
-        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 7);
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 8);
         CustomFilterPredicate predicate = new CustomFilterPredicate(null, null, null, null, null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredApplicantList(predicate);

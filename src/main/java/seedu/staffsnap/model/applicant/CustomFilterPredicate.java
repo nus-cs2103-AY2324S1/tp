@@ -3,6 +3,7 @@ package seedu.staffsnap.model.applicant;
 import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.model.interview.Interview;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -14,7 +15,7 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
     // Data fields
     private final Email email;
     private final Position position;
-    private final Set<Interview> interviews;
+    private final List<Interview> interviews;
 
     /**
      * @param applicant the input argument
@@ -49,7 +50,7 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
         return true;
     }
 
-    public CustomFilterPredicate(Name name, Phone phone, Email email, Position position, Set<Interview> interviews) {
+    public CustomFilterPredicate(Name name, Phone phone, Email email, Position position, List<Interview> interviews) {
         this.name = name;
         this.phone = phone;
         this.email = email;

@@ -9,6 +9,7 @@ import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
 import seedu.staffsnap.model.interview.Interview;
 
+import java.util.List;
 import java.util.Set;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -42,7 +43,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Phone phone = null;
         Email email = null;
         Position position = null;
-        Set<Interview> interviewList = null;
+        List<Interview> interviewList = null;
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_POSITION);
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
