@@ -67,7 +67,7 @@ public class Interview implements Comparable<Interview> {
     /**
      * Returns true if the applicant has an interview with the same interview type.
      */
-    public boolean isSameInterview(List<Interview> otherInterviews) {
+    public boolean isContainedIn(List<Interview> otherInterviews) {
         return otherInterviews.stream().anyMatch(interview -> interview.getType().equals(getType()));
     }
 

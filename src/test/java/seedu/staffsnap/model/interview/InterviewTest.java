@@ -71,9 +71,9 @@ public class InterviewTest {
     @Test
     public void isSameInterview() {
         // same interview type -> returns true
-        assertTrue(VALID_INTERVIEW_TECHNICAL.isSameInterview(BENSON.getInterviews()));
+        assertTrue(VALID_INTERVIEW_TECHNICAL.isContainedIn(BENSON.getInterviews()));
 
         // different interview type -> returns false
-        assertFalse(VALID_INTERVIEW_BEHAVIORAL.isSameInterview(BENSON.getInterviews()));
+        assertFalse(VALID_INTERVIEW_BEHAVIORAL.isContainedIn(BENSON.getInterviews()));
     }
 }
