@@ -1,7 +1,7 @@
 package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_FRIEND;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TYPE_TECHNICAL;
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class AddInterviewCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_INTERVIEW_FRIEND, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_TYPE_TECHNICAL, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);

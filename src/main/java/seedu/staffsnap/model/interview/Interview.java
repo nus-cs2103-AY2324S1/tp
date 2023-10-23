@@ -32,6 +32,10 @@ public class Interview implements Comparable<Interview> {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getType() {
+        return type;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

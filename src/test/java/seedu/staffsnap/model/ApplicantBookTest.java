@@ -3,8 +3,8 @@ package seedu.staffsnap.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TYPE_BEHAVIORAL;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
 import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalApplicantBook;
@@ -47,7 +47,7 @@ public class ApplicantBookTest {
     public void resetData_withDuplicateApplicants_throwsDuplicateApplicantException() {
         // Two applicants with the same identity fields
         Applicant editedAlice = new ApplicantBuilder(ALICE)
-                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
+                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_TYPE_BEHAVIORAL).build();
         List<Applicant> newApplicants = Arrays.asList(ALICE, editedAlice);
         ApplicantBookStub newData = new ApplicantBookStub(newApplicants);
 
@@ -74,7 +74,7 @@ public class ApplicantBookTest {
     public void hasApplicant_applicantWithSameIdentityFieldsInApplicantBook_returnsTrue() {
         applicantBook.addApplicant(ALICE);
         Applicant editedAlice = new ApplicantBuilder(ALICE)
-                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_INTERVIEW_HUSBAND).build();
+                .withPosition(VALID_POSITION_BOB).withInterviews(VALID_TYPE_BEHAVIORAL).build();
         assertTrue(applicantBook.hasApplicant(editedAlice));
     }
 
