@@ -24,7 +24,7 @@ public class OvertimeHours {
 
     @Override
     public String toString() {
-        return value + "overtime hours";
+        return value + " overtime hours";
     }
 
     @Override
