@@ -41,14 +41,16 @@ public class MemberTest {
         editedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameMember(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
+        // as name will be converted to PascalCase with space in between
         Member editedBob = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameMember(editedBob));
+        assertTrue(BOB.isSameMember(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
+        // as name will trim trailing space
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new MemberBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameMember(editedBob));
+        assertTrue(BOB.isSameMember(editedBob));
     }
 
     @Test
