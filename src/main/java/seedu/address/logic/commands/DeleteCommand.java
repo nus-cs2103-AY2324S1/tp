@@ -18,7 +18,6 @@ import seedu.address.model.person.Person;
  * Deletes one or more fosterers identified using their displayed index from the address book.
  */
 public class DeleteCommand extends Command {
-    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     public static final String COMMAND_WORD = "delete";
 
@@ -27,9 +26,11 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Fosterer:\n%1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "1 fosterer deleted:\n%1$s";
 
-    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted Fosterers:\n%1$s";
+    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "%1$d fosterers deleted:\n%2$s";
+
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     private final Indices targetIndices;
 
@@ -69,6 +70,14 @@ public class DeleteCommand extends Command {
         return peopleToDelete;
     }
 
+    public String getDeleteResultMessage(Person[] peopleToDelete) {
+        int numberDeleted = peopleToDelete.length;
+        if (numberDeleted == 1) {
+            return String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(peopleToDelete));
+        }
+        return String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, numberDeleted, Messages.format(peopleToDelete));
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -78,11 +87,8 @@ public class DeleteCommand extends Command {
         for (Person personToDelete : peopleToDelete) {
             model.deletePerson(personToDelete);
         }
-
-        if (peopleToDelete.length == 1) {
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(peopleToDelete)));
-        }
-        return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, Messages.format(peopleToDelete)));
+        String message = getDeleteResultMessage(peopleToDelete);
+        return new CommandResult(message);
     }
 
     @Override

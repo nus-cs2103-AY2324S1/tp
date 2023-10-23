@@ -1,6 +1,9 @@
 package seedu.address.commons.core.index;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndices.ONEBASED_FOUR_TO_SIX;
 import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE;
