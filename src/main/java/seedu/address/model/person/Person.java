@@ -29,6 +29,8 @@ public class Person {
     private Github github = new Github("");
 
     private Remark remark;
+    private Score score = new Score(0);
+
     private final Status currentStatus = new Status();
 
 
@@ -91,12 +93,20 @@ public class Person {
         return github;
     }
 
+    public Score getScore() {
+        return score;
+    }
+
     public void setLinkedIn(LinkedIn linkedIn) {
         this.linkedIn = linkedIn;
     }
 
     public void setGithub(Github github) {
         this.github = github;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
     }
 
     /**
@@ -152,7 +162,8 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("remark", remark)
-                .add("status", currentStatus);
+                .add("status", currentStatus)
+                .add("score", score);
 
         if (!linkedIn.value.isEmpty()) {
             builder.add("linkedin", linkedIn);
