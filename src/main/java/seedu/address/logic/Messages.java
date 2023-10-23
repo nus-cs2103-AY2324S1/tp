@@ -9,6 +9,8 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
+import static seedu.address.commons.util.DateUtil.dateTimeToString;
+
 /**
  * Container for user visible messages.
  */
@@ -75,14 +77,13 @@ public class Messages {
      * Formats the {@code appointment} for display to the user.
      */
     public static String format(Appointment appointment) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         final StringBuilder builder = new StringBuilder();
         builder.append("Patient: ")
                 .append(appointment.getPatientName())
                 .append("; Start: ")
-                .append(appointment.getStartTime().format(formatter))
+                .append(dateTimeToString(appointment.getStartTime()))
                 .append("; End: ")
-                .append(appointment.getEndTime().format(formatter))
+                .append(dateTimeToString(appointment.getEndTime()))
                 .append("; Description: ")
                 .append(appointment.getAppointmentDescription());
         return builder.toString();

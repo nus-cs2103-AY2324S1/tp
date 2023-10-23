@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.DateUtil.parseDateTime;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.CURRENT_DATE;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.CURRENT_DATE_PLUS_FOUR_HOURS;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.VALID_END_ONE;
@@ -15,11 +16,6 @@ import seedu.address.model.appointment.AppointmentTime;
  * A utility class to help with building AppointmentTime objects.
  */
 public class AppointmentTimeBuilder {
-
-    /**
-     * Formats date and time inputs as: yyyy-MM-dd hh:mm (eg. 2020-02-20 08:00).
-     */
-    private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 
     private static final String DEFAULT_START = VALID_START_ONE;
     private static final String DEFAULT_END = VALID_END_ONE;
@@ -63,17 +59,6 @@ public class AppointmentTimeBuilder {
 
     public AppointmentTime build() {
         return new AppointmentTime(start, end);
-    }
-    /**
-     * Parses a {@code String dateTime} into a {@code LocalDateTime}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static LocalDateTime parseDateTime(String dateAndTime) {
-        requireNonNull(dateAndTime);
-        String trimmedDateTime = dateAndTime.trim();
-        LocalDateTime localDateTime;
-        localDateTime = LocalDateTime.parse(trimmedDateTime, dateTimeFormat);
-        return localDateTime;
     }
 
 }

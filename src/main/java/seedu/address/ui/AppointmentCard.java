@@ -41,7 +41,6 @@ public class AppointmentCard extends UiPart<Region> {
      */
     public AppointmentCard(Appointment appointment, int displayedIndex) {
         super(FXML);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
         patientName.setText("PATIENT: " + appointment.getPatientName());

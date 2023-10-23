@@ -2,6 +2,7 @@ package seedu.address.model.appointment;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.DateUtil.dateTimeToString;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,8 +16,7 @@ import java.util.Objects;
 public class AppointmentTime {
     public static final String MESSAGE_CONSTRAINTS =
             "1. AppointmentTime start must be before AppointmentTime end.\n"
-            + "2. AppointmentTime start and end should be at most 24 hours apart.\n"
-            + "3. AppointmentTime must also not overlap with an existing Appointment's time.\n"
+            + "2. AppointmentTime must also not overlap with an existing Appointment's time.\n"
             + "* Note: Date indicated must be YYYY/MM/DD"
             + "(i.e. 2th Jan 2020 must be input as 02/01/2021 instead of 2020-01-01).\n"
             + "* Note: Time indicated must be XX:XX (i.e. 9AM must be input as 09:00 instead of 9:00).\n"
@@ -38,6 +38,14 @@ public class AppointmentTime {
         checkArgument(isValidAppointmentTime(start, end), MESSAGE_CONSTRAINTS);
         this.start = start;
         this.end = end;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public LocalDateTime getEnd() {
+        return end;
     }
 
     /**
@@ -73,14 +81,6 @@ public class AppointmentTime {
         return true;
     }
 
-    public LocalDateTime getStart() {
-        return start;
-    }
-
-    public LocalDateTime getEnd() {
-        return end;
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this
@@ -96,7 +96,7 @@ public class AppointmentTime {
 
     @Override
     public String toString() {
-        return "START: " + start.format(formatter) + "\nEND: " + end.format(formatter);
+        return "START: " + dateTimeToString(start) + "\nEND: " + dateTimeToString(end);
     }
 
 }

@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,6 +16,8 @@ import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+import static seedu.address.commons.util.DateUtil.dateTimeToString;
+
 /**
  * Jackson-friendly version of {@link Appointment}.
  */
@@ -23,9 +26,8 @@ class JsonAdaptedAppointment {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
 
     private final String patientName;
-    private final String appointmentTime;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private final String start;
+    private final String end;
     private final String description;
 
     /**
@@ -33,10 +35,12 @@ class JsonAdaptedAppointment {
      */
     @JsonCreator
     public JsonAdaptedAppointment(@JsonProperty("patientName") String patientName,
-                                  @JsonProperty("appointmentTime") String appointmentTime,
+                                  @JsonProperty("start") String start,
+                                  @JsonProperty("end") String end,
                                   @JsonProperty("description") String description) {
         this.patientName = patientName;
-        this.appointmentTime = appointmentTime;
+        this.start = start;
+        this.end = end;
         this.description = description;
     }
 
@@ -44,11 +48,9 @@ class JsonAdaptedAppointment {
      * Converts a given {@code Appointment} into this class for Jackson use.
      */
     public JsonAdaptedAppointment(Appointment source) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         patientName = String.valueOf(source.getPatientName());
-        appointmentTime = source.getAppointmentTime().toString();
-        start = source.getStartTime();
-        end = source.getEndTime();
+        start = dateTimeToString(source.getStartTime());
+        end = dateTimeToString(source.getEndTime());
         description = source.getAppointmentDescription().value;
     }
 
@@ -59,26 +61,33 @@ class JsonAdaptedAppointment {
      */
     public Appointment toModelType(AddressBook addressBook) throws IllegalValueException {
         if (patientName == null) {
-            throw new IllegalValueException("Patient name");
-        }
-        if (!addressBook.hasPerson(new Name(patientName))) {
-            throw new IllegalValueException("Patient does not exist");
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(patientName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        if (!addressBook.hasPerson(new Name(patientName))) {
+            throw new IllegalValueException("Patient does not exist");
         }
         final Person patient = addressBook
                 .getPersonList().stream().filter(person -> person.getName().fullName.equals(patientName))
                 .collect(Collectors.toList()).get(0);
 
-        if (appointmentTime == null) {
+        if (start == null || end == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, AppointmentTime.class.getSimpleName()));
         }
-        if (!AppointmentTime.isValidAppointmentTime(start, end)) {
+        LocalDateTime startDateTime, endDateTime;
+        try {
+            startDateTime = LocalDateTime.parse(start, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+            endDateTime = LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+        } catch (DateTimeParseException e) {
             throw new IllegalValueException(AppointmentTime.MESSAGE_CONSTRAINTS);
         }
-        final AppointmentTime modelAppointmentTime = new AppointmentTime(start, end);
+        if (!AppointmentTime.isValidAppointmentTime(startDateTime, endDateTime)) {
+            throw new IllegalValueException(AppointmentTime.MESSAGE_CONSTRAINTS);
+        }
+        final AppointmentTime modelAppointmentTime = new AppointmentTime(startDateTime, endDateTime);
 
         if (description == null) {
             throw new IllegalValueException(
