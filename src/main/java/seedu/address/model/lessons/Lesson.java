@@ -41,7 +41,7 @@ public class Lesson {
      * @param studentName The student attending this lesson. Note: Converted to ArrayList when stored
      * @see seedu.address.logic.parser.ParserUtil
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, String studentName) {
+    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, String studentName, TaskList taskList) {
         requireAllNonNull(start, end, subject, studentName);
         this.start = start;
         this.end = end;
@@ -49,6 +49,7 @@ public class Lesson {
         ArrayList<String> p = new ArrayList<>();
         p.add(studentName);
         this.students = p;
+        this.taskList = taskList;
     }
 
     /**
