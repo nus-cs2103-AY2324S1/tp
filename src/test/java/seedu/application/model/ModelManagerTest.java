@@ -110,10 +110,10 @@ public class ModelManagerTest {
         assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertNotEquals(null, modelManager);
+        assertNotEquals(modelManager, null);
 
         // different types -> returns false
-        assertNotEquals(5, modelManager);
+        assertNotEquals(modelManager, 5);
 
         // different applicationBook -> returns false
         assertNotEquals(modelManager, new ModelManager(differentApplicationBook, userPrefs));
