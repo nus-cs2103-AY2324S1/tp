@@ -128,9 +128,7 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasMusicianInBand(int bandIndex, int musicianIndex) {
-        requireNonNull(bandIndex);
-        requireNonNull(musicianIndex);
-        return addressBook.hasMusicianInBand(bandIndex, musicianIndex);
+        return addressBook.hasMusicianInBand(bandIndex, filteredMusicians.get(musicianIndex));
     }
 
     @Override
