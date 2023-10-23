@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Subject;
 
 
@@ -53,7 +54,6 @@ public class JsonAdaptedLesson {
         Subject subject = Lesson.deserializeSubject(this.subject);
         ArrayList<String> students = Lesson.deserializeStudents(this.students);
 
-        return new Lesson(start, end, subject, students);
-
+        return new Lesson(start, end, subject, students.stream().map(Name::new).toArray(Name[]::new));
     }
 }

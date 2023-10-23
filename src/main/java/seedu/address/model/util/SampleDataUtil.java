@@ -87,10 +87,10 @@ public class SampleDataUtil {
         Subject math = new Subject("MATHEMATICS");
         Subject bio = new Subject("BIOLOGY");
         return new Lesson[] {
-            new Lesson(startLesson1, endLesson1, math, "Alex Yeoh"),
-            new Lesson(startLesson2, endLesson2, math, "David Li"),
-            new Lesson(startLesson3, endLesson3, bio, "Bernice Yu"),
-            new Lesson(startLesson4, endLesson4, bio, "Bernice Yu"),
+            new Lesson(startLesson1, endLesson1, math, new Name("Alex Yeoh")),
+            new Lesson(startLesson2, endLesson2, math, new Name("David Li")),
+            new Lesson(startLesson3, endLesson3, bio, new Name("Bernice Yu")),
+            new Lesson(startLesson4, endLesson4, bio, new Name("Bernice Yu")),
         };
     }
     public static ReadOnlySchedule getSampleSchedule() {

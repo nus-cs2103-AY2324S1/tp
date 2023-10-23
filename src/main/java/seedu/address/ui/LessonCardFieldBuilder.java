@@ -33,18 +33,18 @@ public class LessonCardFieldBuilder {
     }
 
     static void buildDate(Lesson lesson, VBox fields) {
-        Label date = new Label(lesson.getLessonDate());
+        Label date = new Label(lesson.getLessonDateStr());
         date.getStyleClass().add("cell_small_label");
         fields.getChildren().add(date);
     }
 
     static void buildStudents(Lesson lesson, VBox fields) {
-        Label students = new Label(lesson.getStudents());
+        Label students = new Label(lesson.getStudentsStr());
         students.getStyleClass().add("cell_small_label");
         fields.getChildren().add(students);
     }
     static void buildSubjects(Lesson lesson, VBox fields) {
-        Label subject = new Label(lesson.getSubject());
+        Label subject = new Label(lesson.getSubjectStr());
         subject.getStyleClass().add("cell_small_label");
         fields.getChildren().add(subject);
     }

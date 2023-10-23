@@ -13,6 +13,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -44,13 +45,22 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
+    private Lesson lesson = null;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Person} and set lesson to be null
      */
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
+    }
+    /**
+     * Creates an AddCommand to add the specified {@code Person} and {@code Lesson}
+     */
+    public AddCommand(Person person, Lesson lesson) {
+        requireNonNull(person);
+        toAdd = person;
+        this.lesson = lesson;
     }
 
     @Override
@@ -60,7 +70,16 @@ public class AddCommand extends Command {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
+        if (lesson != null) {
+            // ugly; copy and paste from the body of AddLessonCommand, refactor later when I have time by making command
+            // could execute without model by making model singleton
+            if (model.hasLessonClashWith(lesson)) {
+                Lesson clashingLesson = model.getLessonClashWith(lesson);
+                throw new CommandException("Lesson already exists in the specified time slot: "
+                        + clashingLesson.toString());
+            }
+            model.addLesson(lesson);
+        }
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
@@ -85,5 +104,13 @@ public class AddCommand extends Command {
         return new ToStringBuilder(this)
                 .add("toAdd", toAdd)
                 .toString();
+    }
+
+    public Lesson getLesson() {
+        return lesson;
+    }
+
+    public Person getPerson() {
+        return toAdd;
     }
 }

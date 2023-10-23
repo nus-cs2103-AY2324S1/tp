@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -39,32 +40,50 @@ public class ShowCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Lesson> lastShownSchedule = model.getFilteredScheduleList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-
         // Handle different cases of show command based on app state
         switch (model.getState()) {
         case STUDENT:
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
             // Show student details
             Person personToShow = lastShownList.get(targetIndex.getZeroBased());
             model.showPerson(personToShow);
             return new CommandResult(String.format(MESSAGE_SHOW_PERSON_SUCCESS, Messages.format(personToShow)));
         case SCHEDULE:
+            if (targetIndex.getZeroBased() >= lastShownSchedule.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            }
             // Show lesson details
-            // Just a placeholder for now
             Lesson lessonToShow = lastShownSchedule.get(targetIndex.getZeroBased());
             model.showLesson(lessonToShow);
-            // return new CommandResult(String.format(MESSAGE_SHOW_LESSON_SUCCESS, Messages.format(lessonToShow)));
-            return new CommandResult("Show Lesson");
+            return new CommandResult(String.format(MESSAGE_SHOW_LESSON_SUCCESS, Messages.formatLesson(lessonToShow)));
 
         default:
-            // System.out.println("Unknown state");
-            // Message can be changed, just a placeholder for now
             throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
+    }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ShowCommand)) {
+            return false;
+        }
+
+        ShowCommand otherShowCommand = (ShowCommand) other;
+        return targetIndex.equals(otherShowCommand.targetIndex);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
+                .toString();
     }
 }
 
