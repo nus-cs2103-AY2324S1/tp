@@ -39,6 +39,7 @@ public class Applicant implements Comparable<Applicant> {
         this.email = email;
         this.position = position;
         this.interviews.addAll(interviews);
+        Collections.sort(this.interviews);
         if (status == null) {
             this.status = Status.UNDECIDED;
         } else {
@@ -183,6 +184,20 @@ public class Applicant implements Comparable<Applicant> {
     public void addInterview(Interview interviewToAdd) {
         interviews.add(interviewToAdd);
         Collections.sort(interviews);
+    }
+
+    /**
+     * Deletes an interview of an Applicant.
+     *
+     * @param interviewToDelete the interview to delete to the Applicant
+     */
+    public void deleteInterview(Interview interviewToDelete) {
+        interviews.remove(interviewToDelete);
+        Collections.sort(interviews);
+    }
+
+    public int getInterviewIndexForApplicantCard(Interview interview) {
+        return interviews.indexOf(interview) + 1;
     }
 
     /**

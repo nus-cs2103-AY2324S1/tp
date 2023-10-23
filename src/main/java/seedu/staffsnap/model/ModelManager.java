@@ -164,7 +164,7 @@ public class ModelManager implements Model {
     public void refreshApplicantList() {
         Predicate predicate = filteredApplicants.getPredicate();
         if (predicate == null) {
-            return;
+            predicate = PREDICATE_SHOW_ALL_APPLICANTS;
         }
         updateFilteredApplicantList(PREDICATE_HIDE_ALL_APPLICANTS);
         updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);

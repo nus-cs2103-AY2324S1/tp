@@ -2,7 +2,6 @@ package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -42,9 +41,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_POSITION + "POSITION] "
-            + "[" + PREFIX_INTERVIEW + "INTERVIEW]...\n" + "Example: "
-            + COMMAND_WORD + " 1 " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
+            + "[" + PREFIX_POSITION + "POSITION]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -105,8 +105,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editApplicantDescriptor.getPhone().orElse(applicantToEdit.getPhone());
         Email updatedEmail = editApplicantDescriptor.getEmail().orElse(applicantToEdit.getEmail());
         Position updatedPosition = editApplicantDescriptor.getPosition().orElse(applicantToEdit.getPosition());
-        List<Interview> updatedInterviews = editApplicantDescriptor.getInterviews()
-                .orElse(applicantToEdit.getInterviews());
+        List<Interview> updatedInterviews = applicantToEdit.getInterviews();
         Status updatedStatus = editApplicantDescriptor.getStatus().orElse(applicantToEdit.getStatus());
 
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedPosition,
@@ -155,7 +154,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code interviews} is used internally.
+         * A defensive copy of {@code applicant} is used internally.
          */
         public EditApplicantDescriptor(EditApplicantDescriptor toCopy) {
             setName(toCopy.name);
@@ -170,7 +169,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, position, interviews);
+            return CollectionUtil.isAnyNonNull(name, phone, email, position);
         }
 
         public void setName(Name name) {
@@ -247,7 +246,6 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditApplicantDescriptor.phone)
                     && Objects.equals(email, otherEditApplicantDescriptor.email)
                     && Objects.equals(position, otherEditApplicantDescriptor.position)
-                    && Objects.equals(interviews, otherEditApplicantDescriptor.interviews)
                     && Objects.equals(status, otherEditApplicantDescriptor.status);
         }
 
@@ -258,8 +256,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("position", position)
-                    .add("interviews", interviews)
-                    .add("status", status).toString();
+                    .add("status", status).toString()
+                    .toString();
         }
     }
 }

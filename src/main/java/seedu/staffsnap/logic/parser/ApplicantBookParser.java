@@ -14,7 +14,9 @@ import seedu.staffsnap.logic.commands.ClearCommand;
 import seedu.staffsnap.logic.commands.Command;
 import seedu.staffsnap.logic.commands.ConfirmationCommand;
 import seedu.staffsnap.logic.commands.DeleteCommand;
+import seedu.staffsnap.logic.commands.DeleteInterviewCommand;
 import seedu.staffsnap.logic.commands.EditCommand;
+import seedu.staffsnap.logic.commands.EditInterviewCommand;
 import seedu.staffsnap.logic.commands.ExitCommand;
 import seedu.staffsnap.logic.commands.FindCommand;
 import seedu.staffsnap.logic.commands.HelpCommand;
@@ -103,6 +105,12 @@ public class ApplicantBookParser {
 
         case AddInterviewCommand.COMMAND_WORD:
             return new AddInterviewCommandParser().parse(arguments);
+
+        case EditInterviewCommand.COMMAND_WORD:
+            return new EditInterviewCommandParser().parse(arguments);
+
+        case DeleteInterviewCommand.COMMAND_WORD:
+            return new DeleteInterviewCommandParser().parse(arguments);
 
         case StatusCommand.COMMAND_WORD:
             return new StatusCommandParser().parse(arguments);

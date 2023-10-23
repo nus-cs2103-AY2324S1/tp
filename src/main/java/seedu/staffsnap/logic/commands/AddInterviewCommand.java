@@ -27,7 +27,7 @@ public class AddInterviewCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + PREFIX_TYPE + "TYPE\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TYPE + "Technical";
+            + PREFIX_TYPE + "technical";
 
     public static final String MESSAGE_SUCCESS = "New interview added to applicant: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists for this applicant";

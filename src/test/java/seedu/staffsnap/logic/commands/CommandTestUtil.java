@@ -3,10 +3,10 @@ package seedu.staffsnap.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -34,8 +34,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_POSITION_AMY = "Block 312, Amy Street 1";
     public static final String VALID_POSITION_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_INTERVIEW_HUSBAND = "husband";
-    public static final String VALID_INTERVIEW_FRIEND = "friend";
+    public static final String VALID_TYPE_TECHNICAL = "technical";
+    public static final String VALID_TYPE_BEHAVIORAL = "behavioral";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -45,16 +45,15 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String POSITION_DESC_AMY = " " + PREFIX_POSITION + VALID_POSITION_AMY;
     public static final String POSITION_DESC_BOB = " " + PREFIX_POSITION + VALID_POSITION_BOB;
-    public static final String INTERVIEW_DESC_FRIEND = " " + PREFIX_INTERVIEW + VALID_INTERVIEW_FRIEND;
-    public static final String INTERVIEW_DESC_HUSBAND = " " + PREFIX_INTERVIEW + VALID_INTERVIEW_HUSBAND;
+    public static final String TYPE_DESC_TECHNICAL = " " + PREFIX_TYPE + VALID_TYPE_TECHNICAL;
+    public static final String TYPE_DESC_BEHAVIORAL = " " + PREFIX_TYPE + VALID_TYPE_BEHAVIORAL;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_POSITION_DESC = " "
-            + PREFIX_POSITION; // empty string not allowed for positions
-    public static final String INVALID_INTERVIEW_DESC = " "
-            + PREFIX_INTERVIEW + "hubby*"; // '*' not allowed in interviews
+    public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION; // empty string not allowed for positions
+    public static final String INVALID_TYPE_DESC = " "
+            + PREFIX_TYPE + "hubby*"; // '*' not allowed in interviews
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -65,10 +64,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withPosition(VALID_POSITION_AMY)
-                .withInterviews(VALID_INTERVIEW_FRIEND).build();
+                .withInterviews(VALID_TYPE_TECHNICAL).build();
         DESC_BOB = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withPosition(VALID_POSITION_BOB)
-                .withInterviews(VALID_INTERVIEW_HUSBAND, VALID_INTERVIEW_FRIEND).build();
+                .withInterviews(VALID_TYPE_BEHAVIORAL, VALID_TYPE_TECHNICAL).build();
     }
 
     /**
