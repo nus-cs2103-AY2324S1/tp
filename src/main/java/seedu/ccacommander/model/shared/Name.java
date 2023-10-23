@@ -2,6 +2,7 @@ package seedu.ccacommander.model.shared;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
+import static seedu.ccacommander.commons.util.StringUtil.capitaliseWordsInString;
 
 /**
  * Represents a Member's name in CcaCommander.
@@ -27,6 +28,7 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
+        name = capitaliseWordsInString(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         this.name = name;
     }

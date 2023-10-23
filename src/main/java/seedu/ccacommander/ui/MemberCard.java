@@ -1,5 +1,7 @@
 package seedu.ccacommander.ui;
 
+import static seedu.ccacommander.commons.util.StringUtil.capitaliseWordsInString;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -51,7 +53,7 @@ public class MemberCard extends UiPart<Region> {
         this.member = member;
         id.setText(displayedIndex + ". ");
         name.setText(member.getName().name);
-        gender.setText(member.getGender().value);
+        gender.setText(member.getGender().toString());
         phone.setText(member.getPhone().value);
         address.setText(member.getAddress().value);
         email.setText(member.getEmail().value);
