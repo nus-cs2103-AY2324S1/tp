@@ -44,17 +44,15 @@ public class PrefixCompletion {
             examples = AddCommand.EXAMPLES;
             break;
         default:
-            prefixes = null;
-            examples = null;
+            logger.log(Level.WARNING, "Command not found");
+            throw new PrefixCompletionException("No prefix completion recommendation found for the current input.");
         }
 
         // Determine the next prefix and example.
-        if (prefixes != null && examples != null) {
-            for (int i = 0; i < prefixes.size(); i++) {
-                if (!currentInput.contains(prefixes.get(i).toString())) {
-                    logger.log(Level.INFO, "Prefix found: " + prefixes.get(i));
-                    return prefixes.get(i) + examples.get(i);
-                }
+        for (int i = 0; i < prefixes.size(); i++) {
+            if (!currentInput.contains(prefixes.get(i).toString())) {
+                logger.log(Level.INFO, "Prefix found: " + prefixes.get(i));
+                return prefixes.get(i) + examples.get(i);
             }
         }
         logger.log(Level.WARNING, "Prefix not found");
