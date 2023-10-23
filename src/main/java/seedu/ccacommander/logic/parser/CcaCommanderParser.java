@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.ccacommander.commons.core.LogsCenter;
+import seedu.ccacommander.logic.commands.AddMemberCommand;
 import seedu.ccacommander.logic.commands.ClearCommand;
 import seedu.ccacommander.logic.commands.Command;
 import seedu.ccacommander.logic.commands.CreateEventCommand;
@@ -69,6 +70,9 @@ public class CcaCommanderParser {
 
         case DeleteEventCommand.COMMAND_WORD:
             return new DeleteEventCommandParser().parse(arguments);
+
+        case AddMemberCommand.COMMAND_WORD:
+            return new AddMemberCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
