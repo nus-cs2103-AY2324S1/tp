@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.booking.exceptions.DuplicateBookingException;
 import seedu.address.model.booking.exceptions.BookingNotFoundException;
+import seedu.address.model.booking.exceptions.DuplicateBookingException;
 import seedu.address.testutil.BookingBuilder;
 
 public class UniqueBookingListTest {
@@ -167,7 +167,7 @@ public class UniqueBookingListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniqueBookingList.asUnmodifiableObservableList().remove(0));
+                -> uniqueBookingList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
