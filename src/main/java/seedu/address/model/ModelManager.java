@@ -15,6 +15,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.SortByAppointmentDateComparator;
 import seedu.address.model.appointment.ScheduleItem;
 import seedu.address.model.person.Person;
 
@@ -45,7 +46,8 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(sortedPersons);
         // to add comparator for sorting logic here
         observableAppointments = FXCollections.observableArrayList();
-        sortedAppointments = new SortedList<>(observableAppointments);
+        sortedAppointments = new SortedList<>(observableAppointments, 
+                                              new SortByAppointmentDateComparator());
     }
 
     public ModelManager() {
