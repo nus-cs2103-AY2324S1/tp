@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.*;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonScheduleListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -181,7 +182,11 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = "add -name Amy Bee -phone 11111111 -email amy@example.com "
                 + "-address Block 312, Amy Street 1 -subject Mathematics";
-        Person expectedPerson = new PersonBuilder(AMY).withTags().withSubjects(VALID_SUBJECT_AMY).build();
+        Person expectedPerson = new Person(new Name("Amy Bee"));
+        expectedPerson.setPhone(new Phone("11111111"));
+        expectedPerson.setEmail(new Email("amy@example.com"));
+        expectedPerson.setAddress(new Address("Block 312, Amy Street 1"));
+        expectedPerson.setSubjectsIfNotNull(Set.of(new Subject("Mathematics")));
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
