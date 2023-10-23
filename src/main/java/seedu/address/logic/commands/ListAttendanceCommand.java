@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
 
 import seedu.address.commons.core.index.Index;
@@ -21,7 +21,7 @@ public class ListAttendanceCommand extends ListCommand {
             + ": Lists summary of attendance and absent students.\n"
             + "Parameters: \n"
             + PREFIX_TUTORIALNUMBER + "TUTORIALNUMBER (must be a positive integer) \n"
-            + "(optional:) " + PREFIX_COURSETUTORIAL + "COURSE_CODE (optional:) TUTORIAL_GROUP_ID \n"
+            + "[" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
             + "Example: list " + COMMAND_WORD + " tn/1 " + " coursetg/CS2103";
     public static final String MESSAGE_SUCCESS = "Listed all absent students:";
 

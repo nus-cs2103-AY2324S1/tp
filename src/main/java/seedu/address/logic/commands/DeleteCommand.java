@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +24,15 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed person list\n"
-            + "or all students identified by the tag entered.\n"
+            + "or all students identified by the tutorial group ID entered.\n"
             + "Parameters: INDEX (must be a positive integer) || "
-            + "all " + PREFIX_COURSETUTORIAL + "TAG\n"
+            + "all " + PREFIX_TUTORIALGROUP + "TUTORIALGROUPID\n"
             + "Example:\n"
             + COMMAND_WORD + " 1\n"
-            + COMMAND_WORD + " all " + PREFIX_COURSETUTORIAL + " CS2103T G01";
+            + COMMAND_WORD + " all " + PREFIX_TUTORIALGROUP + "G01";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_TAGGED_NO_GROUP_SUCCESS = "Deleted all contacts from Course %1$s";
-    public static final String MESSAGE_DELETE_TAGGED_WITH_GROUP_SUCCESS = MESSAGE_DELETE_TAGGED_NO_GROUP_SUCCESS
-            + ", Tutorial Group %2$s";
-
-
+    public static final String MESSAGE_DELETE_TAGGED_SUCCESS = "Deleted all contacts from Tutorial Group %1$s";
     private final Index targetIndex;
     private final Tag tag;
     private final ContainsTagPredicate tagPredicate;
@@ -80,18 +76,12 @@ public class DeleteCommand extends Command {
         List<Person> copyList = new ArrayList<>(studentsTaggedList);
 
         for (Person p : copyList) {
-            // TODO: add ability to delete the specific tag only when there are multiple tags
             model.deletePerson(p);
         }
 
         model.clearFilters();
 
-        boolean isCourseOnly = tag.getTutorialGroup() == null;
-
-        return isCourseOnly
-                ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_NO_GROUP_SUCCESS, tag.getCourseCode()))
-                : new CommandResult(String.format(
-                        MESSAGE_DELETE_TAGGED_WITH_GROUP_SUCCESS, tag.getCourseCode(), tag.getTutorialGroup()));
+        return new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS, tag.getTagName()));
     }
 
     @Override

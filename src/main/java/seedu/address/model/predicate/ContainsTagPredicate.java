@@ -3,6 +3,7 @@ package seedu.address.model.predicate;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,9 +20,7 @@ public class ContainsTagPredicate extends SerializablePredicate {
      */
     public ContainsTagPredicate(Tag tag) {
         super(person -> person.getTags().stream().anyMatch(
-                personTag -> tag.getTutorialGroup() == null
-                        ? personTag.getCourseCode().equals(tag.getCourseCode())
-                        : personTag.getTagName().equals(tag.getTagName())));
+                personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.getTagName())));
         this.tag = tag;
     }
 

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,25 +24,19 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
      */
     public AbsentFromTutorialPredicate(Index index, Tag tag) {
         super(person -> {
-            // TODO: CHANGE TO FIT MAP<LIST>
             if (index.getOneBased() > person.getAttendanceRecords().size()) {
                 return false;
             }
 
-            boolean isCourseOnly = tag.getTutorialGroup() == null;
-
             Tag placeholder = new Tag("PLACEHOLDER");
             if (tag.equals(placeholder)) {
-                // TODO: CHANGE TO FIT MAP<LIST>
                 return !person.getAttendanceRecords().get(index.getZeroBased()).isPresent();
             }
 
             // Implicit else
-            return person.getTags().stream().anyMatch(personTag -> (
-                    isCourseOnly ? personTag.getCourseCode().equals(tag.getCourseCode())
-                            : personTag.getTagName().equals(tag.getTagName()))
-                    // TODO: CHANGE TO FIT MAP<LIST>
-                    && !person.getAttendanceRecords().get(index.getZeroBased()).isPresent());
+            return person.getTags().stream().anyMatch(
+                    personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.getTagName()))
+                    && !person.getAttendanceRecords().get(index.getZeroBased()).isPresent();
         });
         this.index = index;
         this.tag = tag;

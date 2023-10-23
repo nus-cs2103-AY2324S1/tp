@@ -44,20 +44,20 @@ public class ListCommandParserTest {
     @Test
     public void parse_invalidArg_throwsParseException() {
         // no leading and trailing whitespaces
-        Tag tag = new Tag("CS2103T");
+        Tag tag = new Tag("G02");
         Index index = Index.fromOneBased(1);
         ListAttendanceCommand expectedListAttendanceCommand = new ListAttendanceCommand(tag, index,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(index, tag));
-        assertParseSuccess(parser, " attendance coursetg/CS2103T tn/1", expectedListAttendanceCommand);
+        assertParseSuccess(parser, " attendance tg/G02 tn/1", expectedListAttendanceCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "    attendance      coursetg/     CS2103T     tn/    1      ",
+        assertParseSuccess(parser, "    attendance      tg/     G02     tn/    1      ",
                 expectedListAttendanceCommand);
     }
 
     @Test
     public void parse_listAttendanceInvalidArgs_throwsParseException() {
-        assertParseFailure(parser, "  attendance  coursetg/CS2103T ",
+        assertParseFailure(parser, "  attendance  tg/G02 ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "  attendance  ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
