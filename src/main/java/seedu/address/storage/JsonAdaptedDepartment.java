@@ -14,7 +14,7 @@ class JsonAdaptedDepartment {
     private final String departmentName;
 
     /**
-     * Constructs a {@code JsonAdaptedDepartment} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedDepartment} with the given {@code departmentName}.
      */
     @JsonCreator
     public JsonAdaptedDepartment(String departmentName) {

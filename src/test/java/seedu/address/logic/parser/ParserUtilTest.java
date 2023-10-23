@@ -149,46 +149,46 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
+    public void parseDepartment_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDepartment(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
+    public void parseDepartment_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDepartment(INVALID_DEPARTMENT));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
+    public void parseDepartment_validValueWithoutWhitespace_returnsDepartment() throws Exception {
         Department expectedDepartment = new Department(VALID_DEPARTMENT_1);
         assertEquals(expectedDepartment, ParserUtil.parseDepartment(VALID_DEPARTMENT_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_DEPARTMENT_1 + WHITESPACE;
+    public void parseDepartment_validValueWithWhitespace_returnsTrimmedDepartment() throws Exception {
+        String departmentWithWhitespace = WHITESPACE + VALID_DEPARTMENT_1 + WHITESPACE;
         Department expectedDepartment = new Department(VALID_DEPARTMENT_1);
-        assertEquals(expectedDepartment, ParserUtil.parseDepartment(tagWithWhitespace));
+        assertEquals(expectedDepartment, ParserUtil.parseDepartment(departmentWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
+    public void parseDepartments_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDepartments(null));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
+    public void parseDepartments_collectionWithInvalidDepartments_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDepartments(
                 Arrays.asList(VALID_DEPARTMENT_1, INVALID_DEPARTMENT)));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
+    public void parseDepartments_emptyCollection_returnsEmptySet() throws Exception {
         assertTrue(ParserUtil.parseDepartments(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
+    public void parseDepartments_collectionWithValidDepartments_returnsDepartmentSet() throws Exception {
         Set<Department> actualDepartmentSet = ParserUtil.parseDepartments(
                 Arrays.asList(VALID_DEPARTMENT_1, VALID_DEPARTMENT_2));
         Set<Department> expectedDepartmentSet = new HashSet<Department>(Arrays.asList(

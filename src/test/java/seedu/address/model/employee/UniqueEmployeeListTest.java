@@ -7,10 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
+import static seedu.address.testutil.TypicalEmployees.AMY;
 import static seedu.address.testutil.TypicalEmployees.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -169,6 +171,37 @@ public class UniqueEmployeeListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueEmployeeList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void iterator_iteratorReturnsExpectedElementsInOrder_returnsTrue() {
+        uniqueEmployeeList.add(ALICE);
+        uniqueEmployeeList.add(AMY);
+        Iterator<Employee> iterator = uniqueEmployeeList.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(ALICE, iterator.next());
+        assertEquals(AMY, iterator.next());
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void equals() {
+        // different type -> returns false
+        assertFalse(uniqueEmployeeList.equals(new Object()));
+
+        // same values -> returns true
+        UniqueEmployeeList other = new UniqueEmployeeList();
+        assertTrue(uniqueEmployeeList.equals(other));
+
+        // different values -> returns false
+        other.add(ALICE);
+        assertFalse(uniqueEmployeeList.equals(other));
+
+        // same object -> returns true
+        assertTrue(uniqueEmployeeList.equals(uniqueEmployeeList));
+
+        // null -> returns false
+        assertFalse(uniqueEmployeeList.equals(null));
     }
 
     @Test
