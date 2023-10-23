@@ -42,6 +42,7 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
 
     private boolean isRevealed = false;
 
+
     /**
      * Creates a {@code FlashCard code} with the given {@code FlashCard} and index to display.
      */
