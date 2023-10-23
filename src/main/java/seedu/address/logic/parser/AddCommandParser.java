@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAN
 import static seedu.address.logic.Messages.MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
 import static seedu.address.logic.Messages.MESSAGE_PREAMBLE_DETECTED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -27,6 +28,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
@@ -45,8 +47,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NRIC,
-                        PREFIX_LICENCE_PLATE, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_POLICY_NUMBER,
-                        PREFIX_POLICY_ISSUE_DATE, PREFIX_POLICY_EXPIRY_DATE);
+                        PREFIX_LICENCE_PLATE, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_COMPANY,
+                        PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE, PREFIX_POLICY_EXPIRY_DATE);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_PREAMBLE_DETECTED));
@@ -86,11 +88,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        if (!arePrefixesAbsent(argMultimap, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
+        if (!arePrefixesAbsent(argMultimap, PREFIX_COMPANY, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
                 PREFIX_POLICY_EXPIRY_DATE)) {
-            if (!arePrefixesPresent(argMultimap, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
+            if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
                     PREFIX_POLICY_EXPIRY_DATE)) {
                 String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
+                if (argMultimap.getValue(PREFIX_COMPANY).isEmpty()) {
+                    errorMessage += "- Company(" + PREFIX_COMPANY + ") ";
+                }
                 if (argMultimap.getValue(PREFIX_POLICY_NUMBER).isEmpty()) {
                     errorMessage += "- Policy Number(" + PREFIX_POLICY_NUMBER + ") ";
                 }
@@ -105,6 +110,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         // temporary variables for when no policy paramers were inputed
+        Company company = new Company(Company.DEFAULT_VALUE);
         PolicyNumber policyNumber = new PolicyNumber(PolicyNumber.DEFAULT_VALUE);
         PolicyDate policyIssueDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
         PolicyDate policyExpiryDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
@@ -118,7 +124,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             policyExpiryDate = ParserUtil.parsePolicyExpiryDate(argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).get());
         }
 
-        Policy policy = new Policy(policyNumber, policyIssueDate, policyExpiryDate);
+        Policy policy = new Policy(company, policyNumber, policyIssueDate, policyExpiryDate);
 
         Person person = new Person(name, phone, email, address, tagList, nric, licencePlate, policy);
 
