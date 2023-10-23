@@ -23,16 +23,16 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the student identified by the index number used in the displayed person list\n"
-            + "or all students identified by the tutorial group ID entered.\n"
+            + ": Deletes the student identified by the index number used in the displayed person list,\n"
+            + " all students identified by the tutorial group ID entered or all students.\n"
             + "Parameters: INDEX (must be a positive integer) || "
-            + "all " + PREFIX_TUTORIALGROUP + "TUTORIALGROUPID\n"
-            + "Example:\n"
-            + COMMAND_WORD + " 1\n"
-            + COMMAND_WORD + " all " + PREFIX_TUTORIALGROUP + "G01";
+            + "all [" + PREFIX_TUTORIALGROUP + "TUTORIALGROUPID]\n"
+            + "Examples: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " all " + PREFIX_TUTORIALGROUP + "G01";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_TAGGED_SUCCESS = "Deleted all contacts from Tutorial Group %1$s";
+    public static final String MESSAGE_DELETE_NO_TAG_SUCCESS = "Deleted all contacts";
+
     private final Index targetIndex;
     private final Tag tag;
     private final ContainsTagPredicate tagPredicate;
@@ -71,17 +71,23 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         }
 
-        model.addFilter(tagPredicate);
-        List<Person> studentsTaggedList = model.getFilteredPersonList();
-        List<Person> copyList = new ArrayList<>(studentsTaggedList);
+        Tag placeholder = new Tag("PLACEHOLDER");
+        if (!tag.equals(placeholder)) {
+            model.addFilter(tagPredicate);
+        }
 
-        for (Person p : copyList) {
+        List<Person> toDeleteList = model.getFilteredPersonList();
+        List<Person> copyDeleteList = new ArrayList<>(toDeleteList);
+
+        for (Person p : copyDeleteList) {
             model.deletePerson(p);
         }
 
         model.clearFilters();
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS, tag.getTagName()));
+        return !tag.equals(placeholder)
+                ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS, tag.getTagName()))
+                : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS));
     }
 
     @Override

@@ -35,8 +35,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALGROUP);
 
         if (!argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            Tag tag = new Tag("PLACEHOLDER");
+            return new DeleteCommand(tag, new ContainsTagPredicate(tag));
         }
 
         String tagName = argMultimap.getValue(PREFIX_TUTORIALGROUP).get();

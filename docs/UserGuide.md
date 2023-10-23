@@ -105,14 +105,13 @@ Examples:
 
 Shows a summary of attendance records including list of absentees.
 
-Format: `list attendance tn/TUTORIALNUMBER [coursetg/COURSECODE TUTORIALGROUPID]`
-*  Shows a list of absentees and summary of the attendance records of students corresponding to the course or tutorial group for the specified tutorial number.
-* `COURSECODE` is optional.
-* `TUTORIALGROUPID` is optional, but must be used with `COURSECODE` if present.
+Format: `list attendance tn/TUTORIALNUMBER [tg/TUTORIALGROUPID]`
+*  Shows a list of absentees and summary of the attendance records of students corresponding to the tutorial group for the specified tutorial number.
+* `TUTORIALGROUPID` is optional.
 
 Examples:
 *  `list attendance tn/1` Shows a summary of attendance records of all students for Tutorial #1.
-*  `list attendance tn/3 coursetg/CS2103T G01` Shows a summary of attendance records of the students in the course CS2103T and tutorial group G01 for Tutorial #3.
+*  `list attendance tn/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Tutorial #3.
 
 ### Searching for student's contact via keyword : `find`
 
@@ -215,14 +214,12 @@ Examples:
 
 Deletes all students from the specified course or tutorial group of course.
 
-Format: `delete all coursetg/COURSECODE [TUTORIALGROUPID]`
+Format: `delete all tg/TUTORIALGROUPID`
 
-* Deletes the students from the specified course or specified tutorial group from course.
-* `TUTORIALGROUPID` is optional
+* Deletes the students from the specified tutorial group.
 
 Examples:
-* `delete all coursetg/CS2030S` deletes all students from the course CS2030S.
-* `delete all coursetg/CS2103T G02` deletes all students from course CS2103T, tutorial group G02.
+* `delete all coursetg/G02` deletes all students from tutorial group G02.
 
 ### Clearing all entries : `clear`
 
