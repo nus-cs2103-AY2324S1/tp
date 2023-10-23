@@ -6,20 +6,22 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIFFICULTY;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.SolveCommand;
+import seedu.address.logic.commands.SetDifficultyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+
 
 /**
  * Parses input arguments and creates a new ParserCommand object
  */
-public class SolveCommandParser implements Parser<SolveCommand> {
+public class SetDifficultyCommandParser implements Parser<SetDifficultyCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public SolveCommand parse(String args) throws ParseException {
+    public SetDifficultyCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DIFFICULTY);
         Index index;
@@ -29,14 +31,19 @@ public class SolveCommandParser implements Parser<SolveCommand> {
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SolveCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        SetDifficultyCommand.MESSAGE_USAGE), pe);
             }
         } else {
             index = Index.fromZeroBased(0); // Default to index 0 if not provided
         }
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_DIFFICULTY)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetDifficultyCommand.MESSAGE_USAGE));
+        }
+        String difficulty = argMultimap.getValue(PREFIX_DIFFICULTY).get();
 
-        return new SolveCommand(index);
+        return new SetDifficultyCommand(index, difficulty);
 
     }
 

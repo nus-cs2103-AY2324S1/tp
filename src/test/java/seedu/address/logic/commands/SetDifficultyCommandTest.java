@@ -12,15 +12,18 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 
-public class SolveCommandTest {
+
+public class SetDifficultyCommandTest {
+
+
 
     private Model model = new ModelManager(getTypicalDeck(), new UserPrefs());
 
     @Test
-    public void execute_solveAndSetLowestPriority_success() {
-        SolveCommand solveCommand = new SolveCommand(Index.fromZeroBased(0), "easy");
+    public void execute_setLowestPriority_success() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "easy");
 
-        String expectedMessage = "Solved Question 1 (Difficulty level: easy)";
+        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: easy)";
 
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
@@ -28,14 +31,14 @@ public class SolveCommandTest {
         expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("easy");
         expectedModel.getDeck().sort();
 
-        assertCommandSuccess(solveCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_solveAndSetMiddlePriority_success() {
-        SolveCommand solveCommand = new SolveCommand(Index.fromZeroBased(0), "medium");
+    public void execute_setDifficultyMiddle_success() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "medium");
 
-        String expectedMessage = "Solved Question 1 (Difficulty level: medium)";
+        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: medium)";
 
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
@@ -43,14 +46,14 @@ public class SolveCommandTest {
         expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("medium");
         expectedModel.getDeck().sort();
 
-        assertCommandSuccess(solveCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_solveAndSetHighPriority_success() {
-        SolveCommand solveCommand = new SolveCommand(Index.fromZeroBased(0), "hard");
+    public void execute_setDifficultyHigh_success() {
+        SetDifficultyCommand setDifficultyCommand = new SetDifficultyCommand(Index.fromZeroBased(0), "hard");
 
-        String expectedMessage = "Solved Question 1 (Difficulty level: hard)";
+        String expectedMessage = "Set Difficulty for Question 1 (Difficulty level: hard)";
 
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
@@ -58,6 +61,6 @@ public class SolveCommandTest {
         expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("hard");
         expectedModel.getDeck().sort();
 
-        assertCommandSuccess(solveCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
     }
 }
