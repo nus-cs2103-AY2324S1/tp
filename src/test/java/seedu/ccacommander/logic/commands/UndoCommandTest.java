@@ -12,10 +12,9 @@ import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
 
 public class UndoCommandTest {
+    public static final String COMMIT_MESSAGE = "Commit Message";
     private Model model;
     private Model expectedModel;
-
-    public static final String COMMIT_MESSAGE = "Commit Message";
 
     @BeforeEach
     public void setUp() {
