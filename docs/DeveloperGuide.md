@@ -362,32 +362,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC4 - Delete Fosterers**
 
-**Preconditions:** A list of fosterers is currently displayed.
-
 **MSS**
 
-1. Foster Manager requests to delete fosterers referenced by their index shown in the list.
-2. System deletes selected fosterers.
-3. System displays the updated list of fosterers.
+1. Foster Manager requests to view a list of fosterers.
+2. Foster Manager requests to delete fosterers referenced by their index shown in the list.
+3. System deletes selected fosterers.
+4. System displays the updated list of fosterers.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The displayed list is empty. 
+* 2a. The displayed list is empty. 
+  * 2a1. System indicates error.
 
-    Use case ends.
+      Use case ends.
 
 
-* 1b. System detects invalid indices.
-    * 1b1. System indicates the error and requests for valid indices.
-    * 1b2. Foster Manager enters new command.
+* 2b. System detects invalid indices.
+    * 2b1. System indicates the error and requests for valid indices.
+    * 2b2. Foster Manager enters new command.
 
-      Steps 1b1 - 1b2 are repeated until all entered indices are valid.
+      Steps 2b1 - 2b2 are repeated until all entered indices are valid.
 
-      Use case resumes from step 2.
+      Use case resumes from step 3.
 
-**Use case: UC5 - Request For Command Help**
+**Use case: UC5 - View Statistics**
+
+**MSS**
+
+1. Foster Manager requests to view a list of fosterers. 
+2. Foster Manager requests to view a certain statistic of the displayed fosterers.
+3. System displays the relevant statistic.
+
+    Use case ends. 
+
+**Extensions**
+
+* 2a. The displayed list is empty.
+  * 2a1. System indicates error.
+
+      Use case ends.
+  
+  
+* 2b. Requested statistic is not available.
+  * 2b1. System indicates error, and prompts Foster Manager to request for a valid statistic. 
+  * 2b2. Foster Manager enters new command.
+
+    Steps 2b1 - 2b2 are repeated until a valid statistic is requested.
+  
+    Use case resumes from step 3.
+
+**Use case: UC6 - Request For Command Help**
 
 **MSS**
 
@@ -407,7 +433,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case resumes at step 2.
 
-**Use case: UC6 - Reset System**
+**Use case: UC7 - Reset System**
 
 **MSS**
 
@@ -425,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC7 - Exit**
+**Use case: UC8 - Exit**
 
 **MSS**
 
