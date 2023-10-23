@@ -4,7 +4,9 @@ import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.ccacommander.logic.commands.CreateEventCommand;
@@ -13,6 +15,7 @@ import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventDate;
 import seedu.ccacommander.model.event.Location;
 import seedu.ccacommander.model.shared.Name;
+import seedu.ccacommander.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new CreateEventCommand object
@@ -26,7 +29,7 @@ public class CreateEventCommandParser implements Parser<CreateEventCommand> {
      */
     public CreateEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LOCATION, PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LOCATION, PREFIX_DATE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LOCATION, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -37,8 +40,9 @@ public class CreateEventCommandParser implements Parser<CreateEventCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         EventDate eventDate = ParserUtil.parseEventDate(argMultimap.getValue(PREFIX_DATE).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Event event = new Event(name, eventDate, location);
+        Event event = new Event(name, eventDate, location, tagList);
 
         return new CreateEventCommand(event);
     }

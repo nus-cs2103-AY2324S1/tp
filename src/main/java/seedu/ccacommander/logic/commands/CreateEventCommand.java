@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
@@ -26,7 +27,9 @@ public class CreateEventCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Party "
             + PREFIX_LOCATION + "Raffles Hall "
-            + PREFIX_DATE + "2023-10-16 ";
+            + PREFIX_DATE + "2023-10-16 "
+            + PREFIX_TAG + "hall"
+            + PREFIX_TAG + "sem 1";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in CCACommander. ";
