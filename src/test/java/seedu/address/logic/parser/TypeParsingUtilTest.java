@@ -5,10 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Name;
+import seedu.address.model.tag.Tag;
 
 class TypeParsingUtilTest {
     @Test
@@ -98,6 +103,50 @@ class TypeParsingUtilTest {
             assertEquals(TypeParsingUtil.parseNum("num", "-num 123"), 123);
             assertThrows(ParseException.class, () -> TypeParsingUtil.parseNum("num", "-num 123", 0, 100));
             TypeParsingUtil.parseNum("num", "num text", true);
+        } catch (ParseException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void getValueImmediatelyAfterCommandNameTest() {
+        try {
+            String result = TypeParsingUtil.getValueImmediatelyAfterCommandName("edit", "index", "edit 1 yiwen");
+            assertEquals(result, "1 yiwen");
+        } catch (ParseException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void parseAddressTest() {
+        try {
+            Address a = TypeParsingUtil.parseAddress("address", "-address 123, Clementi Ave 3, #12,34");
+            assertEquals(a, new Address("123, Clementi Ave 3, #12,34"));
+            assertThrows(ParseException.class, () -> TypeParsingUtil.parseAddress("address", " address"));
+        } catch (ParseException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void parseNameTest() {
+        try {
+            assertEquals(TypeParsingUtil.parseName("name", "-name yiwen"),
+                    new Name("yiwen"));
+            assertThrows(ParseException.class, () -> TypeParsingUtil.parseEmail(" name"));
+        } catch (ParseException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    void parseTagTest() {
+        try {
+            Set<Tag> tags = new HashSet<>();
+            tags.add(new Tag("friends"));
+            assertEquals(TypeParsingUtil.parseTags("tag", "-tag friends"), tags);
+            assertThrows(ParseException.class, () -> TypeParsingUtil.parseTags("tag", "-tag friends, friends"));
         } catch (ParseException e) {
             fail(e.getMessage());
         }

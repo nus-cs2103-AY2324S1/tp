@@ -105,5 +105,9 @@ public class Subject {
         return colour;
     }
 
+    public Subject clone() {
+        return new Subject(subjectName.toString());
+    }
+
 
 }

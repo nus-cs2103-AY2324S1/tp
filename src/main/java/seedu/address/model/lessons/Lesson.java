@@ -10,6 +10,8 @@ import java.util.Objects;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Subject;
 
 /**
@@ -22,7 +24,7 @@ public class Lesson {
     private LocalDateTime end;
     // Data fields
     private Subject subject;
-    private ArrayList<String> students; // TOOD: change to student object
+    private ArrayList<Name> students; // TOOD: change to student object
 
     /**
      * Constructor for a Lesson Object with at least one student.
@@ -34,7 +36,7 @@ public class Lesson {
      * @param studentNames The student attending this lesson. Note: Converted to ArrayList when stored
      * @see seedu.address.logic.parser.ParserUtil
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, String... studentNames) {
+    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, Name... studentNames) {
         requireAllNonNull(start, end, subject);
         this.start = start;
         this.end = end;
@@ -45,7 +47,7 @@ public class Lesson {
     /**
      * Alternative constructor for a Lesson Object without subject
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, String... studentNames) {
+    public Lesson(LocalDateTime start, LocalDateTime end, Name... studentNames) {
         requireAllNonNull(start, end);
         this.start = start;
         this.end = end;
@@ -54,12 +56,30 @@ public class Lesson {
     /**
      * Alternative constructor for a Lesson Object with an ArrayList of students
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, ArrayList<String> studentNames) {
+    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, ArrayList<Name> studentNames) {
         requireAllNonNull(start, end, subject);
         this.start = start;
         this.end = end;
         this.subject = subject;
         this.students = studentNames;
+    }
+
+    /**
+     * Returns true if the lesson has the specified student.
+     * @param person The person to check
+     * @return true if the lesson has the specified student
+     */
+    public boolean hasStudent(Person person) {
+        return hasStudent(person.getName());
+    }
+
+    /**
+     * Returns true if the lesson has the specified student.
+     * @param name The name of the student to check
+     * @return true if the lesson has the specified student
+     */
+    public boolean hasStudent(Name name) {
+        return students.contains(name);
     }
 
     /**
@@ -123,7 +143,11 @@ public class Lesson {
      * @return
      */
     public String getStudentsStr() {
-        return StringUtil.joinArray(this.students, ", ");
+        ArrayList<String> studentNames = new ArrayList<>();
+        for (Name student : students) {
+            studentNames.add(student.toString());
+        }
+        return StringUtil.joinArray(studentNames, ", ");
     }
 
     /**
@@ -161,12 +185,23 @@ public class Lesson {
         this.subject = subject;
     }
 
-    public ArrayList<String> getStudents() {
+    public ArrayList<Name> getStudents() {
         return students;
     }
 
-    public void setStudents(ArrayList<String> students) {
+    public void setStudents(ArrayList<Name> students) {
         this.students = students;
+    }
+    /**
+     * Adds a student to the lesson.
+     * @param student The student to add
+     * @throws IllegalValueException if the student already exists in the lesson
+     */
+    public void addStudent(Name student) throws IllegalValueException {
+        if (this.students.contains(student)) {
+            throw new IllegalValueException("Student already exists in lesson");
+        }
+        this.students.add(student);
     }
     /**
      * Serializes the start date to a String
@@ -194,7 +229,7 @@ public class Lesson {
      * @return stringified version of students
      */
     public String serializeStudents() {
-        return String.join(",", this.students);
+        return getStudentsStr();
     }
 
     /**
