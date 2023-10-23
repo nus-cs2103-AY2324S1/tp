@@ -72,7 +72,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append("Member: ")
                 .append(attendance.getMemberName())
-                .append("to Event: ")
+                .append(" to Event: ")
                 .append(attendance.getEventName())
                 .append("; Hours: ")
                 .append(attendance.getHours())
