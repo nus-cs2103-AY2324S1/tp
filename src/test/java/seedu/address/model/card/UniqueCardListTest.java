@@ -167,7 +167,7 @@ public class UniqueCardListTest {
     @Test
     public void add_cardWithHigherPriority() {
         Card low = new CardBuilder(LOW).build();
-        low.setPriority(0);
+        low.setPriority(uniqueCardList.count() - 1);
         uniqueCardList.add(low);
         uniqueCardList.add(HIGH);
         UniqueCardList otherList = new UniqueCardList();
@@ -191,7 +191,7 @@ public class UniqueCardListTest {
         Card low = new CardBuilder(LOW).build();
         uniqueCardList.add(HIGH);
         uniqueCardList.add(low);
-        low.setPriority(0);
+        low.setPriority(uniqueCardList.count() - 1);
         uniqueCardList.setCard(low, low);
         UniqueCardList otherList = new UniqueCardList();
         otherList.add(low);

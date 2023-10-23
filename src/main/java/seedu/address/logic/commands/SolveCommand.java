@@ -14,27 +14,28 @@ import seedu.address.model.card.Card;
 /**
  * Practises a question using it's displayed index from the address book.
  */
-public class PractiseCommand extends Command {
+public class SolveCommand extends Command {
 
-    public static final String COMMAND_WORD = "practise";
+    public static final String COMMAND_WORD = "solve";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": practise the card identified by the index number used in the displayed card list.\n"
+            + ": solve the card identified by the index number used in the displayed card list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Parameters: DIFFICULTY (must not be empty)\n"
-            + "Example: " + COMMAND_WORD + " 1" + " d/ easy";
+            + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_PRACTISE_CARD_SUCCESS = "%1$s";
+    public static final String MESSAGE_SOLVE_CARD_SUCCESS = "%1$s";
 
     private final Index targetIndex;
+
 
     /**
      * Constructs a {@code PractiseCommand} with the specified {@code targetIndex} and {@code difficulty}.
      *
      * @param targetIndex The index of the target to card.
      */
-    public PractiseCommand(Index targetIndex) {
+    public SolveCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+
     }
 
 
@@ -46,16 +47,17 @@ public class PractiseCommand extends Command {
         requireNonNull(model);
 
         List<Card> lastShownList = model.getFilteredCardList();
+        int deckSize = lastShownList.size();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= deckSize) {
             throw new CommandException(Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
         }
-
-        Card cardToPractise = lastShownList.get(targetIndex.getZeroBased());
+        Card cardToSolve = lastShownList.get(targetIndex.getZeroBased());
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_CARDS_PRACTISE_VIEW,
-                        Messages.formatPractise(cardToPractise, targetIndex)));
+                String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW,
+                        Messages.formatSolve(cardToSolve, targetIndex)));
+
     }
 
     @Override
@@ -65,12 +67,12 @@ public class PractiseCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PractiseCommand) || other == null) {
+        if (!(other instanceof SolveCommand)) {
             return false;
         }
 
-        PractiseCommand otherPractiseCommand = (PractiseCommand) other;
-        return targetIndex.equals(otherPractiseCommand.targetIndex);
+        SolveCommand otherSolveCommand = (SolveCommand) other;
+        return targetIndex.equals(otherSolveCommand.targetIndex);
     }
 
     @Override
@@ -81,4 +83,3 @@ public class PractiseCommand extends Command {
     }
 
 }
-

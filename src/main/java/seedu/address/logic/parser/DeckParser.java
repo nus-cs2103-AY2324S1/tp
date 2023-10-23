@@ -16,7 +16,11 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PractiseCommand;
+import seedu.address.logic.commands.SetDifficultyCommand;
+import seedu.address.logic.commands.SolveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+
 
 /**
  * Parses user input.
@@ -69,6 +73,12 @@ public class DeckParser {
 
         case PractiseCommand.COMMAND_WORD:
             return new PractiseCommandParser().parse(arguments);
+
+        case SolveCommand.COMMAND_WORD:
+            return new SolveCommandParser().parse(arguments);
+
+        case SetDifficultyCommand.COMMAND_WORD:
+            return new SetDifficultyCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
