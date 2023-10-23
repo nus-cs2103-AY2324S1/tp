@@ -23,20 +23,24 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
      */
     public AbsentFromTutorialPredicate(Index index, Tag tag) {
         super(person -> {
+            // TODO: CHANGE TO FIT MAP<LIST>
             if (index.getOneBased() > person.getAttendanceRecords().size()) {
                 return false;
             }
 
+            boolean isCourseOnly = tag.getTutorialGroup() == null;
+
             Tag placeholder = new Tag("PLACEHOLDER");
             if (tag.equals(placeholder)) {
+                // TODO: CHANGE TO FIT MAP<LIST>
                 return !person.getAttendanceRecords().get(index.getZeroBased()).isPresent();
             }
 
             // Implicit else
             return person.getTags().stream().anyMatch(personTag -> (
-                    tag.getTutorialGroup() == null
-                            ? personTag.getCourseCode().equals(tag.getCourseCode())
+                    isCourseOnly ? personTag.getCourseCode().equals(tag.getCourseCode())
                             : personTag.getTagName().equals(tag.getTagName()))
+                    // TODO: CHANGE TO FIT MAP<LIST>
                     && !person.getAttendanceRecords().get(index.getZeroBased()).isPresent());
         });
         this.index = index;
