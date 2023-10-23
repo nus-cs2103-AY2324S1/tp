@@ -32,16 +32,14 @@ public class EventTest {
         editedAurora = new EventBuilder(AURORA_BOREALIS).withName(VALID_NAME_BOXING).build();
         assertFalse(AURORA_BOREALIS.isSameEvent(editedAurora));
 
-        // name differs in case, all other attributes same -> returns true
-        // as name will be converted to PascalCase with space in between
+        // name differs in case, all other attributes same -> returns false
         Event editedBoxing = new EventBuilder(BOXING_DAY).withName(VALID_NAME_BOXING.toLowerCase()).build();
-        assertTrue(BOXING_DAY.isSameEvent(editedBoxing));
+        assertFalse(BOXING_DAY.isSameEvent(editedBoxing));
 
-        // name has trailing spaces, all other attributes same -> returns true
-        // as name will trim trailing space
+        // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOXING + " ";
         editedBoxing = new EventBuilder(BOXING_DAY).withName(nameWithTrailingSpaces).build();
-        assertTrue(BOXING_DAY.isSameEvent(editedBoxing));
+        assertFalse(BOXING_DAY.isSameEvent(editedBoxing));
     }
 
     @Test

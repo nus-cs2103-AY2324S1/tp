@@ -36,18 +36,16 @@ public class AttendanceTest {
                 .withMemberName(VALID_NAME_BOB).build();
         assertFalse(ALICE_AURORA.isSameAttendance(editedAttendance));
 
-        // name differs in case, all other attributes same -> returns true
-        // as name will be converted to PascalCase with space in between
+        // name differs in case, all other attributes same -> returns false
         editedAttendance = new AttendanceBuilder(ALICE_AURORA).withEventName(VALID_NAME_AURORA.toLowerCase())
                 .build();
-        assertTrue(ALICE_AURORA.isSameAttendance(editedAttendance));
+        assertFalse(ALICE_AURORA.isSameAttendance(editedAttendance));
 
         // name has trailing spaces, all other attributes same -> returns false
-        // as name will trim trailing space
         String nameWithTrailingSpaces = VALID_NAME_AURORA + " ";
         editedAttendance = new AttendanceBuilder(ALICE_AURORA).withEventName(nameWithTrailingSpaces)
                 .build();
-        assertTrue(ALICE_AURORA.isSameAttendance(editedAttendance));
+        assertFalse(ALICE_AURORA.isSameAttendance(editedAttendance));
     }
 
     @Test
