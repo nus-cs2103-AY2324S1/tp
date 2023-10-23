@@ -5,7 +5,6 @@ import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.NoSuchElementException;
 
