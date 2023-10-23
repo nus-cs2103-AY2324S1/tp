@@ -22,13 +22,12 @@ public class Interaction {
         * Returns true if a given string is a valid outcome.
         */
         public static boolean isValidOutcome(String test) {
-            System.out.println(test);
             return test.matches("INTERESTED|NOT_INTERESTED|FOLLOWUP_REQUIRED|UNKNOWN");
         }
     }
 
-    public final String interactionNote;
-    public final Outcome outcome;
+    private final String interactionNote;
+    private final Outcome outcome;
 
     /**
     * Constructs a {@code Interaction} with a default LeadStatus of UNKNOWN.
