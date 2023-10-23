@@ -46,6 +46,8 @@ public class EmployeeCard extends UiPart<Region> {
     private FlowPane departments;
     @FXML
     private Label isOnLeave;
+    @FXML
+    private Label overtimeHours;
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code EmployeeCode} and index to display.
@@ -67,5 +69,6 @@ public class EmployeeCard extends UiPart<Region> {
             isOnLeave.setText("On Leave");
             isOnLeave.setStyle("-fx-background-color: #ff0000; -fx-text-fill: #ffffff;");
         }
+        overtimeHours.setText(employee.getOvertimeHours().toString());
     }
 }

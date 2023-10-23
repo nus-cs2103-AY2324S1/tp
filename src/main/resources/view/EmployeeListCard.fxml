@@ -34,6 +34,7 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
       <Label fx:id="isOnLeave" styleClass="cell_small_label" />
+      <Label fx:id="overtimeHours" styleClass="cell_small_label" text="\$overtimeHours" />
     </VBox>
   </GridPane>
 </HBox>

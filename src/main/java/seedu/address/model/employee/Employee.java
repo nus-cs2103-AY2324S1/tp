@@ -16,6 +16,11 @@ import seedu.address.model.department.Department;
  */
 public class Employee {
 
+    // Global employee details
+    public static final int MAX_OVERTIME_HOURS = 72;
+    public static final int DEFAULT_OVERTIME_HOURS = 0;
+    public static final boolean DEFAULT_IS_ON_LEAVE = false;
+
     // Identity fields
     private final Name name;
     private final Position position;
@@ -27,6 +32,7 @@ public class Employee {
     private final Salary salary;
     private final Set<Department> departments = new HashSet<>();
     private final boolean isOnLeave;
+    private final OvertimeHours overtimeHours;
 
     /**
      * Every field must be present and not null.
@@ -41,15 +47,16 @@ public class Employee {
         this.email = email;
         this.salary = salary;
         this.departments.addAll(departments);
-        this.isOnLeave = false; // default value
+        this.isOnLeave = DEFAULT_IS_ON_LEAVE;
+        this.overtimeHours = new OvertimeHours(DEFAULT_OVERTIME_HOURS);
     }
 
     /**
-     * Overloaded constructor for Employee class to set isOnLeave field.
+     * Overloaded constructor for Employee class to set fields with default values.
      */
     public Employee(Name name, Position position, Id id, Phone phone, Email email, Salary salary,
-                    Set<Department> departments, boolean isOnLeave) {
-        requireAllNonNull(name, position, id, phone, email, salary, departments, isOnLeave);
+                    Set<Department> departments, boolean isOnLeave, OvertimeHours overtimeHours) {
+        requireAllNonNull(name, position, id, phone, email, salary, departments, isOnLeave, overtimeHours);
         this.name = name;
         this.position = position;
         this.id = id;
@@ -58,6 +65,7 @@ public class Employee {
         this.salary = salary;
         this.departments.addAll(departments);
         this.isOnLeave = isOnLeave;
+        this.overtimeHours = overtimeHours;
     }
 
     public Name getName() {
@@ -86,6 +94,10 @@ public class Employee {
 
     public boolean getIsOnLeave() {
         return isOnLeave;
+    }
+
+    public OvertimeHours getOvertimeHours() {
+        return overtimeHours;
     }
 
     /**
@@ -132,13 +144,14 @@ public class Employee {
                 && email.equals(otherEmployee.email)
                 && salary.equals(otherEmployee.salary)
                 && departments.equals(otherEmployee.departments)
-                && isOnLeave == otherEmployee.isOnLeave;
+                && isOnLeave == otherEmployee.isOnLeave
+                && overtimeHours.equals(otherEmployee.overtimeHours);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, position, id, phone, email, salary, departments, isOnLeave);
+        return Objects.hash(name, position, id, phone, email, salary, departments, isOnLeave, overtimeHours);
     }
 
     @Override
@@ -152,7 +165,7 @@ public class Employee {
                 .add("salary", salary)
                 .add("departments", departments)
                 .add("isOnLeave", isOnLeave)
+                .add("overtimeHours", overtimeHours)
                 .toString();
     }
-
 }

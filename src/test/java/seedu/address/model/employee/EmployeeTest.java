@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_IS_ON_LEAVE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OVERTIME_HOURS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
@@ -92,7 +94,11 @@ public class EmployeeTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different isOnLeave -> returns false
-        editedAlice = new EmployeeBuilder(ALICE).withIsOnLeave(true).build();
+        editedAlice = new EmployeeBuilder(ALICE).withIsOnLeave(VALID_IS_ON_LEAVE_BOB).build();
+
+        // different overtime hours left -> returns false
+        editedAlice = new EmployeeBuilder(ALICE).withOvertimeHours(VALID_OVERTIME_HOURS_BOB).build();
+
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -101,7 +107,7 @@ public class EmployeeTest {
         String expected = Employee.class.getCanonicalName() + "{name=" + ALICE.getName()
                 + ", position=" + ALICE.getPosition() + ", id=" + ALICE.getId() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", salary=" + ALICE.getSalary()
-                + ", departments=" + ALICE.getDepartments() + ", isOnLeave=" + ALICE.getIsOnLeave() + "}";
+                + ", departments=" + ALICE.getDepartments() + ", isOnLeave=" + ALICE.getIsOnLeave() + ", overtime hours=" + ALICE.getOvertimeHours() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

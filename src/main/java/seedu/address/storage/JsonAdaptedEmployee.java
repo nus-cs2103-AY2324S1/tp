@@ -15,6 +15,7 @@ import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Id;
 import seedu.address.model.employee.Name;
+import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Position;
 import seedu.address.model.employee.Salary;
@@ -34,6 +35,7 @@ class JsonAdaptedEmployee {
     private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
     private final String salary;
     private final boolean isOnLeave;
+    private final int overtimeHours;
 
     /**
      * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
@@ -42,7 +44,8 @@ class JsonAdaptedEmployee {
     public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("position") String position,
             @JsonProperty("id") String id, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments,
-            @JsonProperty("salary") String salary, @JsonProperty("isOnLeave") boolean isOnLeave) {
+            @JsonProperty("salary") String salary, @JsonProperty("isOnLeave") boolean isOnLeave,
+            @JsonProperty("overtime") int overtimeHours) {
         this.name = name;
         this.position = position;
         this.id = id;
@@ -53,6 +56,7 @@ class JsonAdaptedEmployee {
             this.departments.addAll(departments);
         }
         this.isOnLeave = isOnLeave;
+        this.overtimeHours = overtimeHours;
     }
 
     /**
@@ -69,6 +73,7 @@ class JsonAdaptedEmployee {
                 .map(JsonAdaptedDepartment::new)
                 .collect(Collectors.toList()));
         isOnLeave = source.getIsOnLeave();
+        overtimeHours = source.getOvertimeHours().value;
     }
 
     /**
@@ -133,9 +138,14 @@ class JsonAdaptedEmployee {
         }
         final Salary modelSalary = new Salary(salary);
 
+        if (!OvertimeHours.isValidOvertimeHours(overtimeHours)) {
+            throw new IllegalValueException(OvertimeHours.MESSAGE_CONSTRAINTS);
+        }
+        final OvertimeHours modelOvertimeHours = new OvertimeHours(overtimeHours);
+
         final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
 
         return new Employee(modelName, modelPosition, modelId, modelPhone,
-                modelEmail, modelSalary, modelDepartments, isOnLeave);
+                modelEmail, modelSalary, modelDepartments, isOnLeave, modelOvertimeHours);
     }
 }
