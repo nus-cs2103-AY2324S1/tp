@@ -20,15 +20,14 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        // change args.trim to start from after n/ or after /id
         String trimmedArgs = args.trim();
         String[] nameKeywords = null;
         String[] idKeywords = null;
         if (trimmedArgs.startsWith("n/")) {
-            nameKeywords = trimmedArgs.substring(2).split("\\s+");
+            nameKeywords = trimmedArgs.substring(2).trim().split("\\s+");
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else if (trimmedArgs.startsWith("id/")) {
-            idKeywords = trimmedArgs.substring(3).split("\\s+");
+            idKeywords = trimmedArgs.substring(3).trim().split("\\s+");
             return new FindCommand(new IdContainsKeywordsPredicate(Arrays.asList(idKeywords)));
         } else {
             throw new ParseException(
@@ -36,4 +35,3 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 }
-

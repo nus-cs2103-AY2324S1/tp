@@ -163,8 +163,7 @@ Expected outputs when command fails:
 ### Locating persons by name: `find`
 
 Enables front desk workers to quickly retrieve patient information based on command executed.
-If no fields are provided, the function returns all the patient’s related information.
-Else, only the details relating to the field are provided.
+The function returns all the patient’s related information.
 
  * The search is case-insensitive. e.g `hans` will match `Hans`.
  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -175,11 +174,9 @@ Else, only the details relating to the field are provided.
 
 Formats:
  1. `find n/NAME` *or* `id/IC_NUMBER`
- 2. `find n/NAME [field]` *or* `id/IC_NUMBER [field]`
 
 Example commands:
 * `find n/John` returns `john` and `John Doe`
-* `find id/s894219J p/ a/` returns phone and address of patient with IC number s894219J
 * `find id/S872D` returns `Alex Yeoh`, with IC number `S872D` <br>
 
 
