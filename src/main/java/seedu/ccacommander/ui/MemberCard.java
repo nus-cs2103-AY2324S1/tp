@@ -1,7 +1,5 @@
 package seedu.ccacommander.ui;
 
-import static seedu.ccacommander.commons.util.StringUtil.capitaliseWordsInString;
-
 import java.util.Comparator;
 
 import javafx.fxml.FXML;

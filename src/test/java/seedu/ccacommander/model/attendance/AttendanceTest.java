@@ -3,9 +3,7 @@ package seedu.ccacommander.model.attendance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_DATE_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_CLIMBING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AURORA;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -13,14 +11,10 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOXIN
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_CLIMBING;
 import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
 import static seedu.ccacommander.testutil.TypicalAttendances.BENSON_BOXING;
-import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
-import static seedu.ccacommander.testutil.TypicalEvents.BOXING_DAY;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.testutil.AttendanceBuilder;
-import seedu.ccacommander.testutil.EventBuilder;
 
 public class AttendanceTest {
 
