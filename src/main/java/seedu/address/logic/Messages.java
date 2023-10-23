@@ -1,9 +1,6 @@
 package seedu.address.logic;
 
 
-
-//TODO we could avoid static imports, and instead refer to strings as
-// Messages.FOO. Then we can remove the MESSAGE_ prefix for everything
 //TODO prefix messages containing format specifiers with UNFORMATTED_
 /**
  * Holds message strings used by the logic for display to the user.
