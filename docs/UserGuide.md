@@ -1,9 +1,3 @@
----
-  layout: default.md
-    title: "User Guide"
-    pageNav: 3
----
-
 # Tutorium User Guide
 
 Tutorium is a **desktop application for tuition centre staff** to obtain data analysis to plan marketing strategies. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
