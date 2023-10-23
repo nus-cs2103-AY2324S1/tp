@@ -154,7 +154,7 @@ public class ParserUtil {
     public static Hours parseHours(String hours) throws ParseException {
         requireNonNull(hours);
         String trimmedHours = hours.trim();
-        if (!EventDate.isValidDate(trimmedHours)) {
+        if (!Hours.isValidHours(trimmedHours)) {
             throw new ParseException(Hours.MESSAGE_CONSTRAINTS);
         }
         return new Hours(trimmedHours);
@@ -169,7 +169,7 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
-        if (!EventDate.isValidDate(trimmedRemark)) {
+        if (!Remark.isValidRemark(trimmedRemark)) {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedRemark);
