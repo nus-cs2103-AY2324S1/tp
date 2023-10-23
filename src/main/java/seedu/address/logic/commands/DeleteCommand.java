@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +26,10 @@ public class DeleteCommand extends Command {
             + ": Deletes the student identified by the index number used in the displayed person list\n"
             + "or all students identified by the tag entered.\n"
             + "Parameters: INDEX (must be a positive integer) || "
-            + "all " + PREFIX_TAG + "TAG\n"
+            + "all " + PREFIX_COURSETUTORIAL + "TAG\n"
             + "Example:\n"
             + COMMAND_WORD + " 1\n"
-            + COMMAND_WORD + " all " + PREFIX_TAG + " CS2103T G01";
+            + COMMAND_WORD + " all " + PREFIX_COURSETUTORIAL + " CS2103T G01";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_TAGGED_NO_GROUP_SUCCESS = "Deleted all contacts from Course %1$s";
@@ -80,6 +80,7 @@ public class DeleteCommand extends Command {
         List<Person> copyList = new ArrayList<>(studentsTaggedList);
 
         for (Person p : copyList) {
+            // TODO: add ability to delete the specific tag only when there are multiple tags
             model.deletePerson(p);
         }
 
