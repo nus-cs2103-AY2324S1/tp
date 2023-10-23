@@ -3,7 +3,6 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -99,6 +98,19 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Replaces the contents of this list with {@code students}.
+     * {@code students} must not contain duplicate students.
+     */
+    public void setPersons(List<Student> students) {
+        requireAllNonNull(students);
+        if (!studentsAreUnique(students)) {
+            throw new DuplicateStudentException();
+        }
+
+        internalList.setAll(students);
+    }
+
+    /**
      * Replace the selected student with the input student.
      * @param student to be selected
      */
@@ -111,18 +123,6 @@ public class UniqueStudentList implements Iterable<Student> {
         }
     }
 
-    /**
-     * Replaces the contents of this list with {@code students}.
-     * {@code students} must not contain duplicate students.
-     */
-    public void setPersons(List<Student> students) {
-        requireAllNonNull(students);
-        if (!studentsAreUnique(students)) {
-            throw new DuplicateStudentException();
-        }
-
-        internalList.setAll(students);
-    }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.

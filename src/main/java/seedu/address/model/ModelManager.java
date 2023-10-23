@@ -176,12 +176,13 @@ public class ModelManager implements Model {
         return addressBook.getSelectedStudent();
     }
 
-
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
-        addressBook.setSelectedStudent(filteredStudents.get(0));
+        if (!filteredStudents.isEmpty()) {
+            addressBook.setSelectedStudent(filteredStudents.get(0));
+        }
     }
 
     @Override

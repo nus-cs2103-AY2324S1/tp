@@ -47,7 +47,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setStudents(List<Student> students) {
         this.students.setPersons(students);
-        this.students.setSelectedStudent(students.get(0));
+        if (!students.isEmpty()) {
+            this.students.setSelectedStudent(students.get(0));
+        }
     }
 
     /**
@@ -108,6 +110,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Sets the student to be the selected student.
+     *
+     * @param student to be selected
      */
     public void setSelectedStudent(Student student) {
         students.setSelectedStudent(student);

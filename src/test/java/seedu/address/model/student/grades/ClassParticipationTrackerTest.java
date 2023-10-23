@@ -58,7 +58,7 @@ public class ClassParticipationTrackerTest {
     public void toStringMethod() {
         ClassParticipationTracker classParticipationTracker = new ClassParticipationTracker(3);
 
-        assertEquals("Class Part Tracker:\n"
+        assertEquals("Class Part:\n"
                 + "Tutorial 1: Did not Participate\n"
                 + "Tutorial 2: Did not Participate\n"
                 + "Tutorial 3: Did not Participate\n", classParticipationTracker.toString());

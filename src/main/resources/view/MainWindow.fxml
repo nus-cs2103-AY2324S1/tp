@@ -47,7 +47,7 @@
                <SplitPane dividerPositions="0.9">
                   <items>
                     <StackPane fx:id="personListPanelPlaceholder" />
-                    <StackPane fx:id="studentClassDetail" prefHeight="100.0" prefWidth="316.0" />
+                    <StackPane fx:id="studentClassDetail" />
                   </items>
                </SplitPane>
           </VBox>
