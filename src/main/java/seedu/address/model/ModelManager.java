@@ -13,6 +13,7 @@ import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.predicate.SerializablePredicate;
 
 /**
@@ -21,7 +22,7 @@ import seedu.address.model.predicate.SerializablePredicate;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final AddressBookManager addressBookManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
@@ -33,14 +34,19 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBookManager = new AddressBookManager();
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredPersons.setPredicate(this.userPrefs.getFilterSettings().getComposedFilter());
+
+        if (addressBookManager.getActiveAddressBook() == null) {
+            filteredPersons = new FilteredList<>(new UniquePersonList().asUnmodifiableObservableList());
+        } else {
+             filteredPersons = new FilteredList<>(this.addressBookManager.getActiveAddressBook().getPersonList());
+            filteredPersons.setPredicate(this.userPrefs.getFilterSettings().getComposedFilter());
+        }
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook("TEST"), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -93,37 +99,36 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        addressBookManager.setAddressBook(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return addressBookManager.getActiveAddressBook();
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return addressBookManager.getActiveAddressBook().hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        addressBookManager.getActiveAddressBook().removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        // TODO: Revise if this is intended behaviour
+        requireNonNull(person);
+        addressBookManager.getActiveAddressBook().addPerson(person);
         clearFilters();
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+        addressBookManager.getActiveAddressBook().setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -173,7 +178,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return addressBookManager.equals(otherModelManager.addressBookManager)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
