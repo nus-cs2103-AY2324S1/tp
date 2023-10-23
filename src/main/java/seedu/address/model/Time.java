@@ -8,7 +8,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Time {
 
-    public static final String MESSAGE_CONSTRAINTS = "The format of a time should be: mon 1200, the word is 1st 3 "
+    public static final String MESSAGE_CONSTRAINTS = "The format of a time should be: mon 1200,\n"
+        + " the day is the first three "
         + "letters of a day and the time is in 24 hour format";
 
     private static final String DAY_REGEX = "^(?i)(mon|tue|wed|thu|fri|sat|sun)";

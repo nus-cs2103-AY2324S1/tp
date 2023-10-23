@@ -44,6 +44,18 @@ public class Person {
         this.freeTime = new FreeTime();
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, GroupList personGroups, FreeTime freeTime) {
+        requireAllNonNull(name, phone, email, personGroups);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.personGroups = personGroups;
+        this.freeTime = freeTime;
+    }
+
     public Name getName() {
         return name;
     }
