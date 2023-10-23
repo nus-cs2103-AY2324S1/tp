@@ -59,12 +59,13 @@ public class EditCommand extends Command {
     private final Address address;
     private final Set<Subject> subjects;
     private final Set<Tag> tags;
+    private final Remark remark;
 
     /**
      * still some redundancy, but significant improvement over the original
      */
     public EditCommand(int index, Name name, Phone phone, Email email, Address address, Set<Subject> subjects,
-                       Set<Tag> tags) {
+                       Set<Tag> tags, Remark remark) {
         this.index = index;
         this.name = name;
         this.phone = phone;
@@ -72,6 +73,7 @@ public class EditCommand extends Command {
         this.address = address;
         this.subjects = subjects;
         this.tags = tags;
+        this.remark = remark;
     }
 
     @Override
@@ -89,6 +91,7 @@ public class EditCommand extends Command {
         edited.setAddressIfNotNull(address);
         edited.setSubjectsIfNotNull(subjects);
         edited.setTagsIfNotNull(tags);
+        edited.setRemarkIfNotNull(remark);
         if (edited.equals(original)) {
             throw new CommandException("No change detected.");
         }

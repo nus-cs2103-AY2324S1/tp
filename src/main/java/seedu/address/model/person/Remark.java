@@ -7,6 +7,8 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class Remark {
+    public static final Remark DEFAULT_REMARK = new Remark("To be added");
+
     public final String value;
 
     /**

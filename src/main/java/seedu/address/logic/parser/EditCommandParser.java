@@ -8,6 +8,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
@@ -31,7 +32,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         Address address = TypeParsingUtil.parseAddress("address", args, true);
         Set<Subject> subjects = TypeParsingUtil.parseSubjects("subject", args, true);
         Set<Tag> tags = TypeParsingUtil.parseTags("tag", args, true);
-        return new EditCommand(index, name, phone, email, address, subjects, tags);
+        Remark remark;
+        try {
+            remark = new Remark(TypeParsingUtil.parseFlag("remark", args));
+        } catch (ParseException e) {
+            remark = null;
+        }
+        return new EditCommand(index, name, phone, email, address, subjects, tags, remark);
 
     }
 }

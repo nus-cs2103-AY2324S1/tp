@@ -25,7 +25,7 @@ public class Person {
     private Address address = Address.DEFAULT_ADDRESS;
     private final Set<Subject> subjects = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
-    private Remark remark;
+    private Remark remark = Remark.DEFAULT_REMARK;
 
 
     /**
@@ -229,7 +229,8 @@ public class Person {
         for (Tag tag : tags) {
             clonedTags.add(tag.clone());
         }
-        return new Person(name.clone(), phone.clone(), email.clone(), address.clone(), clonedSubjects, clonedTags, remark.clone());
+        return new Person(name.clone(), phone.clone(), email.clone(), address.clone(),
+                clonedSubjects, clonedTags, remark.clone());
     }
 
 }
