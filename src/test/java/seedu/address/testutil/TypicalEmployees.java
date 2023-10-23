@@ -15,7 +15,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
 import static seedu.address.model.employee.Employee.DEFAULT_OVERTIME_HOURS;
-import static seedu.address.model.employee.Employee.MAX_OVERTIME_HOURS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
