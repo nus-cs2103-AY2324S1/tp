@@ -19,7 +19,7 @@ import transact.ui.MainWindow.TabWindow;
  */
 public class AddTransactionCommand extends Command {
 
-    public static final String COMMAND_WORD = "addtransaction";
+    public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction to the address book. "
             + "Parameters: "
