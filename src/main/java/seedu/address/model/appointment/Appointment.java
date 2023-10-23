@@ -42,6 +42,14 @@ public class Appointment implements Comparable<Appointment> {
         this.date = date;
     }
 
+    public String getName() {
+        return this.value;
+    }
+
+    public LocalDateTime getDateTime() {
+        return this.date;
+    }
+
     @Override
     public String toString() {
         return value + ", " + date.format(DATE_FORMATTER);
