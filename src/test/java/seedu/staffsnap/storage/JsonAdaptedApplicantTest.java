@@ -23,6 +23,8 @@ public class JsonAdaptedApplicantTest {
     private static final String INVALID_POSITION = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_INTERVIEW = "#friend";
+    private static final String INVALID_TYPE = " ";
+    private static final String INVALID_RATING = "15.0";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -105,7 +107,7 @@ public class JsonAdaptedApplicantTest {
     @Test
     public void toModelType_invalidInterviews_throwsIllegalValueException() {
         List<JsonAdaptedInterview> invalidInterviews = new ArrayList<>(VALID_INTERVIEWS);
-        invalidInterviews.add(new JsonAdaptedInterview(INVALID_INTERVIEW));
+        invalidInterviews.add(new JsonAdaptedInterview(INVALID_TYPE, INVALID_RATING));
         JsonAdaptedApplicant applicant =
                 new JsonAdaptedApplicant(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_POSITION, invalidInterviews);
         assertThrows(IllegalValueException.class, applicant::toModelType);

@@ -61,7 +61,7 @@ public class ApplicantBuilder {
      * Parses the {@code interviews} into a {@code List<Interview>} and set it to the {@code Applicant} that we are
      * building.
      */
-    public ApplicantBuilder withInterviews(String ... interviews) {
+    public ApplicantBuilder withInterviews(Interview ... interviews) {
         this.interviews = SampleDataUtil.getInterviewList(interviews);
         return this;
     }
