@@ -1,9 +1,6 @@
 package seedu.address.commons.core.index;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndices.ONEBASED_FOUR_TO_SIX;
 import static seedu.address.testutil.TypicalIndices.ONEBASED_ONE;
@@ -90,20 +87,20 @@ public class IndicesTest {
     @Test
     public void equals() {
         // same values -> returns true
-        assertTrue(ONEBASED_ONE_TO_THREE.equals(ZEROBASED_ZERO_TO_TWO));
-        assertTrue(ONEBASED_ONE_TO_THREE.equals(Indices.fromOneBased(new int[]{1, 2, 3})));
+        assertEquals(ONEBASED_ONE_TO_THREE, ZEROBASED_ZERO_TO_TWO);
+        assertEquals(ONEBASED_ONE_TO_THREE, Indices.fromOneBased(new int[]{1, 2, 3}));
 
         // same object -> returns true
-        assertTrue(ONEBASED_ONE_TO_THREE.equals(ONEBASED_ONE_TO_THREE));
+        assertEquals(ONEBASED_ONE_TO_THREE, ONEBASED_ONE_TO_THREE);
 
         // null -> returns false
-        assertFalse(ONEBASED_ONE_TO_THREE.equals(null));
+        assertNotEquals(null, ONEBASED_ONE_TO_THREE);
 
         // different types -> returns false
         assertFalse(ONEBASED_ONE_TO_THREE.equals(5.0f));
 
         // different index -> returns false
-        assertFalse(ONEBASED_ONE_TO_THREE.equals(ONEBASED_FOUR_TO_SIX));
+        assertNotEquals(ONEBASED_ONE_TO_THREE, ONEBASED_FOUR_TO_SIX);
     }
 
     @Test

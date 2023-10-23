@@ -3,7 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.MainApp;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Indices;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -15,6 +18,7 @@ import seedu.address.model.person.Person;
  * Deletes one or more fosterers identified using their displayed index from the address book.
  */
 public class DeleteCommand extends Command {
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     public static final String COMMAND_WORD = "delete";
 
@@ -49,6 +53,7 @@ public class DeleteCommand extends Command {
      * @throws CommandException when target index is out of bounds.
      */
     public Person[] getPeopleToDelete(List<Person> lastShownList) throws CommandException {
+        logger.info("Retrieving people to delete from last shown list.");
         int[] zeroBasedIndices = this.targetIndices.getZeroBased();
         int numberOfDeletions = this.targetIndices.getSize();
         Person[] peopleToDelete = new Person[numberOfDeletions];

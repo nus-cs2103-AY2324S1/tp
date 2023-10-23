@@ -22,6 +22,7 @@ public class Indices {
      * {@link Indices#fromOneBased(int[])}.
      */
     private Indices(SortedSet<Index> zeroBasedIndices) {
+        assert(!zeroBasedIndices.isEmpty());
         this.zeroBasedIndices = zeroBasedIndices;
         this.size = zeroBasedIndices.size();
     }
@@ -30,6 +31,7 @@ public class Indices {
      * Creates a new {@code Indices} using zero-based indices.
      */
     public static Indices fromZeroBased(int[] zeroBasedIndices) {
+        assert(zeroBasedIndices != null);
         SortedSet<Index> result = new TreeSet<>();
 
         for (int index : zeroBasedIndices) {
@@ -43,6 +45,7 @@ public class Indices {
      * Creates a new {@code Indices} using one-based indices.
      */
     public static Indices fromOneBased(int[] oneBasedIndices) {
+        assert(oneBasedIndices != null);
         SortedSet<Index> result = new TreeSet<>();
 
         for (int index : oneBasedIndices) {
