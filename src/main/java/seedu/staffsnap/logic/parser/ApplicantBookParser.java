@@ -16,8 +16,8 @@ import seedu.staffsnap.logic.commands.ConfirmationCommand;
 import seedu.staffsnap.logic.commands.DeleteCommand;
 import seedu.staffsnap.logic.commands.EditCommand;
 import seedu.staffsnap.logic.commands.ExitCommand;
-import seedu.staffsnap.logic.commands.FindCommand;
 import seedu.staffsnap.logic.commands.FilterCommand;
+import seedu.staffsnap.logic.commands.FindCommand;
 import seedu.staffsnap.logic.commands.HelpCommand;
 import seedu.staffsnap.logic.commands.ListCommand;
 import seedu.staffsnap.logic.commands.SortCommand;
@@ -113,4 +113,5 @@ public class ApplicantBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
+
 }

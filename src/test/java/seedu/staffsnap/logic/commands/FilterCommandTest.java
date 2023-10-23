@@ -1,6 +1,23 @@
 package seedu.staffsnap.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.staffsnap.logic.Messages.MESSAGE_APPLICANTS_LISTED_OVERVIEW;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
+import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
+import static seedu.staffsnap.testutil.TypicalApplicants.CARL;
+import static seedu.staffsnap.testutil.TypicalApplicants.DANIEL;
+import static seedu.staffsnap.testutil.TypicalApplicants.ELLE;
+import static seedu.staffsnap.testutil.TypicalApplicants.FIONA;
+import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalApplicantBook;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ModelManager;
 import seedu.staffsnap.model.UserPrefs;
@@ -11,20 +28,6 @@ import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
 import seedu.staffsnap.model.interview.Interview;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.staffsnap.logic.Messages.MESSAGE_APPLICANTS_LISTED_OVERVIEW;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
-import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
-import static seedu.staffsnap.testutil.TypicalApplicants.CARL;
-import static seedu.staffsnap.testutil.TypicalApplicants.DANIEL;
-import static seedu.staffsnap.testutil.TypicalApplicants.ELLE;
-import static seedu.staffsnap.testutil.TypicalApplicants.FIONA;
-import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalApplicantBook;
 
 class FilterCommandTest {
 
@@ -45,8 +48,10 @@ class FilterCommandTest {
         Position position2 = CARL.getPosition();
         List<Interview> interviewList2 = CARL.getInterviews();
 
-        CustomFilterPredicate firstPredicate = new CustomFilterPredicate(name1, phone1, email1, position1, interviewList1);
-        CustomFilterPredicate secondPredicate = new CustomFilterPredicate(name2, phone2, email2, position2, interviewList2);
+        CustomFilterPredicate firstPredicate = new CustomFilterPredicate(name1, phone1, email1, position1,
+                interviewList1);
+        CustomFilterPredicate secondPredicate = new CustomFilterPredicate(name2, phone2, email2, position2,
+                interviewList2);
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
@@ -91,7 +96,8 @@ class FilterCommandTest {
     @Test
     public void execute_multipleKeywords_singleApplicantFound() {
         String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 1);
-        CustomFilterPredicate predicate = new CustomFilterPredicate(FIONA.getName(), FIONA.getPhone(), null, null, null);
+        CustomFilterPredicate predicate = new CustomFilterPredicate(FIONA.getName(), FIONA.getPhone(), null, null,
+                null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredApplicantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -101,8 +107,8 @@ class FilterCommandTest {
     @Test
     public void execute_multipleKeywords_zeroApplicantsFound() {
         String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 0);
-        CustomFilterPredicate predicate = new CustomFilterPredicate(
-                ALICE.getName(), BENSON.getPhone(), CARL.getEmail(), DANIEL.getPosition(), ELLE.getInterviews());
+        CustomFilterPredicate predicate = new CustomFilterPredicate(ALICE.getName(), BENSON.getPhone(),
+                CARL.getEmail(), DANIEL.getPosition(), ELLE.getInterviews());
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredApplicantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

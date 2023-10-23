@@ -1,12 +1,16 @@
 package seedu.staffsnap.model.applicant;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.model.interview.Interview;
 
-import java.util.List;
-import java.util.Set;
-import java.util.function.Predicate;
 
+
+/**
+ * Custom predicate to be used to filter applicants
+ */
 public class CustomFilterPredicate implements Predicate<Applicant> {
 
     // Identity fields
@@ -16,6 +20,22 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
     private final Email email;
     private final Position position;
     private final List<Interview> interviews;
+
+    /**
+     * Constructor for CustomFilterPredicate
+     * @param name Name of applicant
+     * @param phone Phone number of applicant
+     * @param email Email address of applicant
+     * @param position Position applied for by applicant
+     * @param interviews Interviews applicant has to go through
+     */
+    public CustomFilterPredicate(Name name, Phone phone, Email email, Position position, List<Interview> interviews) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.position = position;
+        this.interviews = interviews;
+    }
 
     /**
      * @param applicant the input argument
@@ -50,23 +70,16 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
         return true;
     }
 
-    public CustomFilterPredicate(Name name, Phone phone, Email email, Position position, List<Interview> interviews) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.position = position;
-        this.interviews = interviews;
-        System.out.println(this);
-    }
+
 
     @Override
     public String toString() {
-        return "CustomFilterPredicate{" +
-                "name=" + name +
-                ", phone=" + phone +
-                ", email=" + email +
-                ", position=" + position +
-                ", interviews=" + interviews +
-                '}';
+        return "CustomFilterPredicate{"
+                + "name=" + name
+                + ", phone=" + phone
+                + ", email=" + email
+                + ", position=" + position
+                + ", interviews=" + interviews
+                + '}';
     }
 }

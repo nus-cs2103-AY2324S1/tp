@@ -1,5 +1,14 @@
 package seedu.staffsnap.logic.parser;
 
+import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
+
+import java.util.List;
+
 import seedu.staffsnap.logic.commands.FilterCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.applicant.CustomFilterPredicate;
@@ -9,24 +18,21 @@ import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
 import seedu.staffsnap.model.interview.Interview;
 
-import java.util.List;
-import java.util.Set;
-
-import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
 
 /**
  * Parses input arguments and creates a new FilterCommand object
  */
+
+
+
+
+
 public class FilterCommandParser implements Parser<FilterCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
      * and returns a FilterCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterCommand parse(String args) throws ParseException {
