@@ -68,4 +68,19 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats a shorten form of {@code person} for display to the user.
+     * Displays the {@code Name}, {@code Email} and {@code PersonType} of the person.
+     */
+    public static String formatShortForm(Person person) {
+        final StringBuilder result = new StringBuilder();
+        result.append(person.getName()).append("; Email: ").append(person.getEmail());
+        if (person instanceof Patient) {
+            result.insert(0, "Patient ");
+        }
+        if (person instanceof Specialist) {
+            result.insert(0, "Specialist ");
+        }
+        return result.toString();
+    }
 }
