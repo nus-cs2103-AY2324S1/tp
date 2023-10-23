@@ -54,10 +54,41 @@ public class SolveCommand extends Command {
         }
         Card cardToSolve = lastShownList.get(targetIndex.getZeroBased());
 
+<<<<<<< HEAD
         return new CommandResult(
                 String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW,
                         Messages.formatSolve(cardToSolve, targetIndex)));
 
+=======
+        if (Objects.equals(newDifficulty, "easy")) {
+            cardToSolve.setDifficulty(newDifficulty);
+            cardToSolve.setNewPracticeDateWith(newDifficulty);
+            model.getDeck().sort();
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW_EASY,
+                            Messages.formatSolve(cardToSolve, targetIndex)));
+        }
+
+        if (Objects.equals(newDifficulty, "medium")) {
+            cardToSolve.setDifficulty(newDifficulty);
+            cardToSolve.setNewPracticeDateWith(newDifficulty);
+            model.getDeck().sort();
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW_MEDIUM,
+                            Messages.formatSolve(cardToSolve, targetIndex)));
+        }
+
+        if (Objects.equals(newDifficulty, "hard")) {
+            cardToSolve.setDifficulty(newDifficulty);
+            cardToSolve.setNewPracticeDateWith(newDifficulty);
+            model.getDeck().sort();
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_CARDS_SOLVE_VIEW_HARD,
+                            Messages.formatSolve(cardToSolve, targetIndex)));
+        } else {
+            throw new CommandException(newDifficulty + Messages.MESSAGE_CARDS_SOLVE_VIEW_INVALID);
+        }
+>>>>>>> 5c76934b9f0e873ad8373ff60e5dc23f13c1c6e6
     }
 
     @Override

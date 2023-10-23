@@ -12,8 +12,12 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 
+<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/SetDifficultyCommandTest.java
 
 public class SetDifficultyCommandTest {
+=======
+public class SolveCommandTest {
+>>>>>>> 5c76934b9f0e873ad8373ff60e5dc23f13c1c6e6:src/test/java/seedu/address/logic/commands/SolveCommandTest.java
 
     private Model model = new ModelManager(getTypicalDeck(), new UserPrefs());
 
@@ -26,7 +30,7 @@ public class SetDifficultyCommandTest {
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
         expectedModel.getDeck().getCardList().get(0).setDifficulty("easy");
-        expectedModel.getDeck().getCardList().get(0).setPriority(model.getFilteredCardList().size() - 1);
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("easy");
         expectedModel.getDeck().sort();
 
         assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
@@ -41,7 +45,7 @@ public class SetDifficultyCommandTest {
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
         expectedModel.getDeck().getCardList().get(0).setDifficulty("medium");
-        expectedModel.getDeck().getCardList().get(0).setPriority(Math.floorDiv(model.getFilteredCardList().size(), 2));
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("medium");
         expectedModel.getDeck().sort();
 
         assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
@@ -56,7 +60,7 @@ public class SetDifficultyCommandTest {
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
         expectedModel.getDeck().getCardList().get(0).setDifficulty("hard");
-        expectedModel.getDeck().getCardList().get(0).setPriority(model.getFilteredCardList().size() - 1);
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("hard");
         expectedModel.getDeck().sort();
 
         assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
