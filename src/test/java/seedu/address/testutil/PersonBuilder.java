@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
@@ -27,6 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     private static final String DEFAULT_NRIC = "567A";
     private static final String DEFAULT_LICENCE_PLATE = "SBC123D";
+    private static final String DEFAULT_COMPANY = "NTUC";
     private static final String DEFAULT_POLICY_NUMBER = "AIA1234";
     private static final String DEFAULT_POLICY_ISSUE_DATE = "01-01-2023";
     private static final String DEFAULT_POLICY_EXPIRY_DATE = "01-01-2030";
@@ -51,10 +53,11 @@ public class PersonBuilder {
         tags = new HashSet<>();
         nric = new Nric(DEFAULT_NRIC);
         licencePlate = new LicencePlate(DEFAULT_LICENCE_PLATE);
+        Company company = new Company(DEFAULT_COMPANY);
         PolicyNumber policyNumber = new PolicyNumber(DEFAULT_POLICY_NUMBER);
         PolicyDate policyIssueDate = new PolicyDate(DEFAULT_POLICY_ISSUE_DATE);
         PolicyDate policyExpiryDate = new PolicyDate(DEFAULT_POLICY_EXPIRY_DATE);
-        policy = new Policy(policyNumber, policyIssueDate, policyExpiryDate);
+        policy = new Policy(company, policyNumber, policyIssueDate, policyExpiryDate);
     }
 
     /**
@@ -130,8 +133,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Policy} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPolicy(String policyNumber, String policyIssueDate, String policyExpiryDate) {
-        this.policy = new Policy(new PolicyNumber(policyNumber),
+    public PersonBuilder withPolicy(String company, String policyNumber, String policyIssueDate, String policyExpiryDate) {
+        this.policy = new Policy(new Company(company), new PolicyNumber(policyNumber),
                 new PolicyDate(policyIssueDate), new PolicyDate(policyExpiryDate));
         return this;
     }

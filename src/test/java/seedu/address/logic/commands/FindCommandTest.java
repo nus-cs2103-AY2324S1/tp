@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.CompanyContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.LicenceContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -69,14 +70,20 @@ public class FindCommandTest {
                 new PolicyIssueContainsKeywordsPredicate("12-12-2022");
         PolicyIssueContainsKeywordsPredicate secondPolicyIssuePredicate =
                 new PolicyIssueContainsKeywordsPredicate("11-11-2022");
+        CompanyContainsKeywordsPredicate firstCompanyPredicate =
+                new CompanyContainsKeywordsPredicate("NTUC");
+        CompanyContainsKeywordsPredicate secondCompanyPredicate =
+                new CompanyContainsKeywordsPredicate("InsureMe");
 
 
         FindCommand findFirstCommand = new FindCommand(firstNamePredicate, firstLicencePredicate,
                 firstNricPredicate, firstPhonePredicate, firstPolicyNumPredicate, firstTagPredicate,
-                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate);
+                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate,
+                firstCompanyPredicate);
         FindCommand findSecondCommand = new FindCommand(secondNamePredicate, secondLicencePredicate,
                 secondNricPredicate, secondPhonePredicate, secondPolicyNumPredicate, secondTagPredicate,
-                secondPolicyExpiryPredicate, secondEmailPredicate, secondPolicyIssuePredicate);
+                secondPolicyExpiryPredicate, secondEmailPredicate, secondPolicyIssuePredicate,
+                secondCompanyPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
@@ -84,7 +91,8 @@ public class FindCommandTest {
         // same values -> returns true
         FindCommand findFirstCommandCopy = new FindCommand(firstNamePredicate, firstLicencePredicate,
                 firstNricPredicate, firstPhonePredicate, firstPolicyNumPredicate, firstTagPredicate,
-                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate);
+                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate,
+                firstCompanyPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -117,8 +125,11 @@ public class FindCommandTest {
                 new EmailContainsKeywordsPredicate("weewooowaa@example.com");
         PolicyIssueContainsKeywordsPredicate policyIssuePredicate =
                 new PolicyIssueContainsKeywordsPredicate("12-12-2022");
+        CompanyContainsKeywordsPredicate companyPredicate =
+                new CompanyContainsKeywordsPredicate("NTUC");
         FindCommand command = new FindCommand(predicate, licencePredicate, nricPredicate, phonePredicate,
-                policyNumPredicate, tagPredicate, policyExpiryPredicate, emailPredicate, policyIssuePredicate);
+                policyNumPredicate, tagPredicate, policyExpiryPredicate, emailPredicate, policyIssuePredicate,
+                companyPredicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -143,13 +154,17 @@ public class FindCommandTest {
                 new EmailContainsKeywordsPredicate("weewooowaa@example.com");
         PolicyIssueContainsKeywordsPredicate policyIssuePredicate =
                 new PolicyIssueContainsKeywordsPredicate("12-12-2022");
+        CompanyContainsKeywordsPredicate companyPredicate =
+                new CompanyContainsKeywordsPredicate("NTUC");
         FindCommand findCommand = new FindCommand(predicate, licencePredicate, nricPredicate, phonePredicate,
-                policyNumPredicate, tagPredicate, policyExpiryPredicate, emailPredicate, policyIssuePredicate);
+                policyNumPredicate, tagPredicate, policyExpiryPredicate, emailPredicate, policyIssuePredicate,
+                companyPredicate);
         String expected = FindCommand.class.getCanonicalName() + "{name predicate=" + predicate
                 + ", licence predicate=" + licencePredicate + ", nric predicate=" + nricPredicate
                 + ", phone predicate=" + phonePredicate + ", policy number predicate=" + policyNumPredicate
                 + ", tag predicate=" + tagPredicate + ", policy expiry predicate=" + policyExpiryPredicate
-                + ", email predicate=" + emailPredicate + ", policy issue predicate=" + policyIssuePredicate + "}";
+                + ", email predicate=" + emailPredicate + ", policy issue predicate=" + policyIssuePredicate
+                + ", company predicate=" + companyPredicate +"}";
         assertEquals(expected, findCommand.toString());
     }
 
