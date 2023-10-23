@@ -5,9 +5,16 @@ import static java.util.Objects.requireNonNull;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Name;
 
+/**
+ * Represents an action to edit the name of a person.
+ */
 public class EditNameAction implements EditAction {
     private final Name name;
 
+    /**
+     * Constructs a new action to edit name.
+     * @param name The new value of name.
+     */
     public EditNameAction(Name name) {
         this.name = name;
     }

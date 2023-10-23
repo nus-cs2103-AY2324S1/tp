@@ -1,5 +1,12 @@
 package networkbook.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.AddCommand;
@@ -12,13 +19,6 @@ import networkbook.model.person.Phone;
 import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Parses input arguments and creates a new AddCommand object

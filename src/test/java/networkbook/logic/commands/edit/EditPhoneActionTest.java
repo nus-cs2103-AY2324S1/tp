@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
@@ -27,7 +26,8 @@ public class EditPhoneActionTest {
         assertFalse(new EditPhoneAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_PHONE).equals(new Object()));
 
         assertTrue(SAMPLE_VALID_EDIT_PHONE_ACTION.equals(SAMPLE_VALID_EDIT_PHONE_ACTION));
-        assertTrue(new EditPhoneAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_PHONE).equals(SAMPLE_VALID_EDIT_PHONE_ACTION));
+        assertTrue(new EditPhoneAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_PHONE)
+                .equals(SAMPLE_VALID_EDIT_PHONE_ACTION));
     }
 
     @Test

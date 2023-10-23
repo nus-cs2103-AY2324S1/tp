@@ -11,6 +11,9 @@ import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
 
+/**
+ * Contains the values to be used in edit command testing.
+ */
 public class EditCommandUtil {
     public static final Index VALID_INDEX = Index.fromOneBased(1);
     public static final Index INVALID_INDEX = Index.fromOneBased(10);

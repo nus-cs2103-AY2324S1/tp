@@ -7,10 +7,18 @@ import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Email;
 
+/**
+ * Represents an action to edit an email of a person.
+ */
 public class EditEmailAction implements EditAction {
     private final Email email;
     private final Index index;
 
+    /**
+     * Constructs a new action to edit email.
+     * @param index The index of the email in the email list of the person.
+     * @param email The new value of the email.
+     */
     public EditEmailAction(Index index, Email email) {
         this.index = index;
         this.email = email;

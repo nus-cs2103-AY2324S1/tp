@@ -7,10 +7,18 @@ import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Link;
 
+/**
+ * Represents an action to edit a link of a person.
+ */
 public class EditLinkAction implements EditAction {
     private final Link link;
     private final Index index;
 
+    /**
+     * Constructs a new action to edit link.
+     * @param index The index of the link in the link list of the person.
+     * @param link The new value of the link.
+     */
     public EditLinkAction(Index index, Link link) {
         this.index = index;
         this.link = link;

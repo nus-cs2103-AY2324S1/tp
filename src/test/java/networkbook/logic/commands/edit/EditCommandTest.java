@@ -1,9 +1,9 @@
 package networkbook.logic.commands.edit;
 
-import static networkbook.testutil.Assert.assertThrows;
-import static networkbook.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static networkbook.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static networkbook.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +28,8 @@ import networkbook.testutil.TypicalPersons;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-    private final Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
     private static final EditAction VALID_EDIT_ACTION = editPersonDescriptor -> {};
+    private final Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
 
     @Test
     public void constructor_null_throwsNullPointerException() {

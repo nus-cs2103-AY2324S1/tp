@@ -17,6 +17,9 @@ import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
+/**
+ * Constructs a new person from an original person based on the edit actions.
+ */
 public class EditPersonDescriptor {
     public static final String MESSAGE_INVALID_PHONE_INDEX = "The phone index provided is invalid.";
     public static final String MESSAGE_INVALID_EMAIL_INDEX = "The email index provided is invalid.";
@@ -34,6 +37,9 @@ public class EditPersonDescriptor {
     private UniqueList<Tag> tags;
     private Priority priority;
 
+    /**
+     * Constructs a new person editor from the original {@code person}.
+     */
     public EditPersonDescriptor(Person person) {
         this.name = person.getName();
         this.phones = person.getPhones();

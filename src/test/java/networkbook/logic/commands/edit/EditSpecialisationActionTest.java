@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 import networkbook.model.person.Specialisation;
@@ -22,12 +21,16 @@ public class EditSpecialisationActionTest {
 
     @Test
     public void equalsTest() {
-        assertFalse(new EditSpecialisationAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION).equals(1));
-        assertFalse(new EditSpecialisationAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION).equals(null));
-        assertFalse(new EditSpecialisationAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION).equals(new Object()));
+        assertFalse(new EditSpecialisationAction(
+                EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION).equals(1));
+        assertFalse(new EditSpecialisationAction(
+                EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION).equals(null));
+        assertFalse(new EditSpecialisationAction(
+                EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION).equals(new Object()));
 
         assertTrue(SAMPLE_VALID_EDIT_SPECIALISATION_ACTION.equals(SAMPLE_VALID_EDIT_SPECIALISATION_ACTION));
-        assertTrue(new EditSpecialisationAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION).equals(SAMPLE_VALID_EDIT_SPECIALISATION_ACTION));
+        assertTrue(new EditSpecialisationAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION)
+                .equals(SAMPLE_VALID_EDIT_SPECIALISATION_ACTION));
     }
 
     @Test

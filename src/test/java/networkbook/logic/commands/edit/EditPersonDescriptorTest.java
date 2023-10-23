@@ -6,16 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
-import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
-import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
-import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
@@ -50,8 +46,10 @@ public class EditPersonDescriptorTest {
     @Test
     public void setPhone_null_throwsNullPointerException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setPhone(null, EditCommandUtil.VALID_PHONE));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setPhone(EditCommandUtil.VALID_INDEX, null));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setPhone(null, EditCommandUtil.VALID_PHONE));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setPhone(EditCommandUtil.VALID_INDEX, null));
         assertThrows(NullPointerException.class, () -> actualDescriptor.setPhone(null, null));
     }
 
@@ -81,14 +79,17 @@ public class EditPersonDescriptorTest {
     @Test
     public void setPhone_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> actualDescriptor.setPhone(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_PHONE));
+        assertThrows(CommandException.class, ()
+                -> actualDescriptor.setPhone(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_PHONE));
     }
 
     @Test
     public void setEmail_null_throwsNullPointerException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setEmail(null, EditCommandUtil.VALID_EMAIL));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setEmail(EditCommandUtil.VALID_INDEX, null));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setEmail(null, EditCommandUtil.VALID_EMAIL));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setEmail(EditCommandUtil.VALID_INDEX, null));
         assertThrows(NullPointerException.class, () -> actualDescriptor.setEmail(null, null));
     }
 
@@ -118,14 +119,17 @@ public class EditPersonDescriptorTest {
     @Test
     public void setEmail_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> actualDescriptor.setEmail(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_EMAIL));
+        assertThrows(CommandException.class, ()
+                -> actualDescriptor.setEmail(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_EMAIL));
     }
 
     @Test
     public void setLink_null_throwsNullPointerException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setLink(null, EditCommandUtil.VALID_LINK));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setLink(EditCommandUtil.VALID_INDEX, null));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setLink(null, EditCommandUtil.VALID_LINK));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setLink(EditCommandUtil.VALID_INDEX, null));
         assertThrows(NullPointerException.class, () -> actualDescriptor.setLink(null, null));
     }
 
@@ -155,7 +159,8 @@ public class EditPersonDescriptorTest {
     @Test
     public void setLink_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> actualDescriptor.setLink(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_LINK));
+        assertThrows(CommandException.class, ()
+                -> actualDescriptor.setLink(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_LINK));
     }
 
     @Test
@@ -187,8 +192,10 @@ public class EditPersonDescriptorTest {
     @Test
     public void setCourse_null_throwsNullPointerException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setCourse(null, EditCommandUtil.VALID_COURSE));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setCourse(EditCommandUtil.VALID_INDEX, null));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setCourse(null, EditCommandUtil.VALID_COURSE));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setCourse(EditCommandUtil.VALID_INDEX, null));
         assertThrows(NullPointerException.class, () -> actualDescriptor.setCourse(null, null));
     }
 
@@ -218,15 +225,19 @@ public class EditPersonDescriptorTest {
     @Test
     public void setCourse_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> actualDescriptor.setCourse(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_COURSE));
+        assertThrows(CommandException.class, ()
+                -> actualDescriptor.setCourse(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_COURSE));
     }
 
     @Test
     public void setSpecialisation_null_throwsNullPointerException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setSpecialisation(null, EditCommandUtil.VALID_SPECIALISATION));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setSpecialisation(EditCommandUtil.VALID_INDEX, null));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setSpecialisation(null, null));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setSpecialisation(null, EditCommandUtil.VALID_SPECIALISATION));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setSpecialisation(EditCommandUtil.VALID_INDEX, null));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setSpecialisation(null, null));
     }
 
     @Test
@@ -235,7 +246,8 @@ public class EditPersonDescriptorTest {
         actualDescriptor.setSpecialisation(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_SPECIALISATION);
 
         UniqueList<Specialisation> newSpecialisationList = JACK.getSpecialisations();
-        newSpecialisationList.setItem(EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_SPECIALISATION);
+        newSpecialisationList.setItem(
+                EditCommandUtil.VALID_INDEX.getZeroBased(), EditCommandUtil.VALID_SPECIALISATION);
 
         Person expectedPerson = new Person(
                 JACK.getName(),
@@ -255,14 +267,18 @@ public class EditPersonDescriptorTest {
     @Test
     public void setSpecialisation_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> actualDescriptor.setSpecialisation(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_SPECIALISATION));
+        assertThrows(CommandException.class, ()
+                -> actualDescriptor.setSpecialisation(
+                        EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_SPECIALISATION));
     }
 
     @Test
     public void setTag_null_throwsNullPointerException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setTag(null, EditCommandUtil.VALID_TAG));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setTag(EditCommandUtil.VALID_INDEX, null));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setTag(null, EditCommandUtil.VALID_TAG));
+        assertThrows(NullPointerException.class, ()
+                -> actualDescriptor.setTag(EditCommandUtil.VALID_INDEX, null));
         assertThrows(NullPointerException.class, () -> actualDescriptor.setTag(null, null));
     }
 
@@ -292,7 +308,8 @@ public class EditPersonDescriptorTest {
     @Test
     public void setTag_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(CommandException.class, () -> actualDescriptor.setTag(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_TAG));
+        assertThrows(CommandException.class, ()
+                -> actualDescriptor.setTag(EditCommandUtil.INVALID_INDEX, EditCommandUtil.VALID_TAG));
     }
 
     @Test

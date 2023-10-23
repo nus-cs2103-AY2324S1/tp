@@ -7,10 +7,18 @@ import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.tag.Tag;
 
+/**
+ * Represents an action to edit tag of a person.
+ */
 public class EditTagAction implements EditAction {
     private final Tag tag;
     private final Index index;
 
+    /**
+     * Constructs a new action to edit tag.
+     * @param index The index of the tag in the tag list of the person.
+     * @param tag The new value of the tag.
+     */
     public EditTagAction(Index index, Tag tag) {
         this.index = index;
         this.tag = tag;

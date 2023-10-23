@@ -5,9 +5,16 @@ import static java.util.Objects.requireNonNull;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Priority;
 
+/**
+ * Represents an action to edit priority of a person.
+ */
 public class EditPriorityAction implements EditAction {
     private final Priority priority;
 
+    /**
+     * Constructs a new action to edit priority.
+     * @param priority The new value of priority.
+     */
     public EditPriorityAction(Priority priority) {
         this.priority = priority;
     }

@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import networkbook.logic.commands.exceptions.CommandException;
-import networkbook.model.person.Graduation;
 import networkbook.model.person.Person;
 
 public class EditGraduationActionTest {
@@ -23,12 +22,14 @@ public class EditGraduationActionTest {
         assertFalse(new EditGraduationAction(EditCommandUtil.VALID_GRADUATION).equals(new Object()));
 
         assertTrue(SAMPLE_VALID_EDIT_GRADUATION_ACTION.equals(SAMPLE_VALID_EDIT_GRADUATION_ACTION));
-        assertTrue(new EditGraduationAction(EditCommandUtil.VALID_GRADUATION).equals(SAMPLE_VALID_EDIT_GRADUATION_ACTION));
+        assertTrue(new EditGraduationAction(EditCommandUtil.VALID_GRADUATION)
+                .equals(SAMPLE_VALID_EDIT_GRADUATION_ACTION));
     }
 
     @Test
     public void toStringTest() {
-        String expected = EditGraduationAction.class.getCanonicalName() + "{graduation=" + EditCommandUtil.VALID_GRADUATION + "}";
+        String expected = EditGraduationAction.class.getCanonicalName() + "{graduation="
+                + EditCommandUtil.VALID_GRADUATION + "}";
         assertEquals(SAMPLE_VALID_EDIT_GRADUATION_ACTION.toString(), expected);
     }
 

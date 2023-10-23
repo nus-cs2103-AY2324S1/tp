@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
-import networkbook.model.person.Priority;
 
 public class EditPriorityActionTest {
     private static final EditPriorityAction SAMPLE_VALID_EDIT_PRIORITY_ACTION =
@@ -28,7 +27,8 @@ public class EditPriorityActionTest {
 
     @Test
     public void toStringTest() {
-        String expected = EditPriorityAction.class.getCanonicalName() + "{priority=" + EditCommandUtil.VALID_PRIORITY + "}";
+        String expected = EditPriorityAction.class.getCanonicalName() + "{priority="
+                + EditCommandUtil.VALID_PRIORITY + "}";
         assertEquals(SAMPLE_VALID_EDIT_PRIORITY_ACTION.toString(), expected);
     }
 

@@ -5,9 +5,16 @@ import static java.util.Objects.requireNonNull;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Graduation;
 
+/**
+ * Represents an action to edit graduation of a person.
+ */
 public class EditGraduationAction implements EditAction {
     private final Graduation graduation;
 
+    /**
+     * Constructs a new action to edit graduation.
+     * @param graduation The new value of graduation.
+     */
     public EditGraduationAction(Graduation graduation) {
         this.graduation = graduation;
     }

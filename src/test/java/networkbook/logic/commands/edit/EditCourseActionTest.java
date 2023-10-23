@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Person;
@@ -24,10 +23,12 @@ public class EditCourseActionTest {
     public void equalsTest() {
         assertFalse(new EditCourseAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_COURSE).equals(1));
         assertFalse(new EditCourseAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_COURSE).equals(null));
-        assertFalse(new EditCourseAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_COURSE).equals(new Object()));
+        assertFalse(new EditCourseAction(
+                EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_COURSE).equals(new Object()));
 
         assertTrue(SAMPLE_VALID_EDIT_COURSE_ACTION.equals(SAMPLE_VALID_EDIT_COURSE_ACTION));
-        assertTrue(new EditCourseAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_COURSE).equals(SAMPLE_VALID_EDIT_COURSE_ACTION));
+        assertTrue(new EditCourseAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_COURSE)
+                .equals(SAMPLE_VALID_EDIT_COURSE_ACTION));
     }
 
     @Test

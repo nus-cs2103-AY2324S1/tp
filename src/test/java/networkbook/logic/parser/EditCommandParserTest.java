@@ -3,6 +3,9 @@ package networkbook.logic.parser;
 import static networkbook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static networkbook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import org.junit.jupiter.api.Test;
+
+import networkbook.logic.Messages;
 import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.edit.EditCommandUtil;
@@ -25,9 +28,6 @@ import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
 import networkbook.testutil.TypicalIndexes;
-import org.junit.jupiter.api.Test;
-
-import networkbook.logic.Messages;
 
 public class EditCommandParserTest {
     private static final EditCommandParser PARSER = new EditCommandParser();
@@ -168,7 +168,8 @@ public class EditCommandParserTest {
     public void parse_validGraduation_success() {
         String userInput = TypicalIndexes.INDEX_FIRST_PERSON.getOneBased() + " "
                 + CliSyntax.PREFIX_GRADUATION + " " + CommandTestUtil.VALID_GRADUATION_AMY;
-        EditGraduationAction expectedAction = new EditGraduationAction(new Graduation(CommandTestUtil.VALID_GRADUATION_AMY));
+        EditGraduationAction expectedAction = new EditGraduationAction(
+                new Graduation(CommandTestUtil.VALID_GRADUATION_AMY));
         EditCommand expectedCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, expectedAction);
         assertParseSuccess(PARSER, userInput, expectedCommand);
     }

@@ -7,10 +7,18 @@ import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Specialisation;
 
+/**
+ * Represents an action to edit a specialisation of a person.
+ */
 public class EditSpecialisationAction implements EditAction {
     private final Specialisation specialisation;
     private final Index index;
 
+    /**
+     * Constructs a new action to edit specialisation.
+     * @param index The index of specialisation in the specialisation of the person.
+     * @param specialisation The new value of specialisation.
+     */
     public EditSpecialisationAction(Index index , Specialisation specialisation) {
         this.index = index;
         this.specialisation = specialisation;

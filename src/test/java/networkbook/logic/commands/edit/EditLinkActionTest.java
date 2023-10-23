@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
@@ -27,7 +26,8 @@ public class EditLinkActionTest {
         assertFalse(new EditLinkAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_LINK).equals(new Object()));
 
         assertTrue(SAMPLE_VALID_EDIT_LINK_ACTION.equals(SAMPLE_VALID_EDIT_LINK_ACTION));
-        assertTrue(new EditLinkAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_LINK).equals(SAMPLE_VALID_EDIT_LINK_ACTION));
+        assertTrue(new EditLinkAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_LINK)
+                .equals(SAMPLE_VALID_EDIT_LINK_ACTION));
     }
 
     @Test

@@ -80,12 +80,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         );
 
         argMultimap.verifyIfPresentThen(new Prefix[] {
-                CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_LINK,
-                CliSyntax.PREFIX_COURSE,
-                CliSyntax.PREFIX_SPECIALISATION,
-                CliSyntax.PREFIX_TAG
+            CliSyntax.PREFIX_PHONE,
+            CliSyntax.PREFIX_EMAIL,
+            CliSyntax.PREFIX_LINK,
+            CliSyntax.PREFIX_COURSE,
+            CliSyntax.PREFIX_SPECIALISATION,
+            CliSyntax.PREFIX_TAG
         }, CliSyntax.PREFIX_INDEX);
 
         EditAction action = generateAction(argMultimap, prefix);

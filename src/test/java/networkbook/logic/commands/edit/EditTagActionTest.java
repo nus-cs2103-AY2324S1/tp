@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 import networkbook.model.tag.Tag;
@@ -27,7 +26,8 @@ public class EditTagActionTest {
         assertFalse(new EditTagAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_TAG).equals(new Object()));
 
         assertTrue(SAMPLE_VALID_EDIT_TAG_ACTION.equals(SAMPLE_VALID_EDIT_TAG_ACTION));
-        assertTrue(new EditTagAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_TAG).equals(SAMPLE_VALID_EDIT_TAG_ACTION));
+        assertTrue(new EditTagAction(EditCommandUtil.VALID_INDEX, EditCommandUtil.VALID_TAG)
+                .equals(SAMPLE_VALID_EDIT_TAG_ACTION));
     }
 
     @Test
