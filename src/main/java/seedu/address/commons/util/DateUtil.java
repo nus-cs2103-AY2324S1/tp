@@ -1,10 +1,13 @@
 package seedu.address.commons.util;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Helper functions for handling datetimes.
+ */
 public class DateUtil {
     /**
      * Formats date and time inputs as: yyyy-MM-dd hh:mm (eg. 2020-02-20 08:00).

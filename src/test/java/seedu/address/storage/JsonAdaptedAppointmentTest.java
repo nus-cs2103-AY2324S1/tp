@@ -5,6 +5,7 @@ import static seedu.address.commons.util.DateUtil.dateTimeToString;
 import static seedu.address.logic.Messages.MESSAGE_PATIENT_DOES_NOT_EXIST;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT1;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -16,8 +17,6 @@ import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Name;
 import seedu.address.testutil.AddressBookBuilder;
-
-import static seedu.address.testutil.TypicalAppointments.APPOINTMENT1;
 
 public class JsonAdaptedAppointmentTest {
     private static final AddressBook ADDRESS_BOOK = new AddressBookBuilder()

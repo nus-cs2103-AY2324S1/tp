@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.util.DateUtil.dateTimeToString;
+import static seedu.address.logic.Messages.MESSAGE_PATIENT_DOES_NOT_EXIST;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,9 +18,6 @@ import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-
-import static seedu.address.commons.util.DateUtil.dateTimeToString;
-import static seedu.address.logic.Messages.MESSAGE_PATIENT_DOES_NOT_EXIST;
 
 /**
  * Jackson-friendly version of {@link Appointment}.
@@ -78,7 +78,8 @@ class JsonAdaptedAppointment {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, AppointmentTime.class.getSimpleName()));
         }
-        LocalDateTime startDateTime, endDateTime;
+        LocalDateTime startDateTime;
+        LocalDateTime endDateTime;
         try {
             startDateTime = LocalDateTime.parse(start, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
             endDateTime = LocalDateTime.parse(end, DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));

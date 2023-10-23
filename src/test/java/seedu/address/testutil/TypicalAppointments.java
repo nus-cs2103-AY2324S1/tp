@@ -1,12 +1,15 @@
 package seedu.address.testutil;
 
-import seedu.address.model.appointment.Appointment;
-
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 
+import seedu.address.model.appointment.Appointment;
+
+/**
+ * A utility class containing a list of {@code Appointment} objects to be used in tests.
+ */
 public class TypicalAppointments {
 
     public static final Appointment APPOINTMENT1 = new AppointmentBuilder()

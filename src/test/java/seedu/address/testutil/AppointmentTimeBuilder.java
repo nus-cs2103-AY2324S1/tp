@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.DateUtil.parseDateTime;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.CURRENT_DATE;
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.CURRENT_DATE_PLUS_FOUR_HOURS;
@@ -8,7 +7,6 @@ import static seedu.address.logic.commands.appointmentcommands.AppointmentComman
 import static seedu.address.logic.commands.appointmentcommands.AppointmentCommandTestUtil.VALID_START_ONE;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.appointment.AppointmentTime;
 
