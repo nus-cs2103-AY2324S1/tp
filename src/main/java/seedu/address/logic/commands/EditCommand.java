@@ -44,7 +44,7 @@ public class EditCommand extends Command {
     private final EditCardDescriptor editCardDescriptor;
 
     /**
-     * @param index of the Card in the filtered Card list to edit
+     * @param index              of the Card in the filtered Card list to edit
      * @param editCardDescriptor details to edit the Card with
      */
     public EditCommand(Index index, EditCardDescriptor editCardDescriptor) {
@@ -87,7 +87,8 @@ public class EditCommand extends Command {
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
         List<Tag> updatedTags = editCardDescriptor.getTags().orElse((cardToEdit.getTags()));
 
-        return new Card(updatedQuestion, updatedAnswer, "new", updatedTags);
+        return new Card(updatedQuestion, updatedAnswer, "new", updatedTags,
+                cardToEdit.getNextPracticeDate(), cardToEdit.getLastPracticeDate());
     }
 
     @Override
@@ -115,7 +116,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the Card with. Each non-empty field value will replace the
+     * Stores the details to edit the Card with. Each non-empty field value will
+     * replace the
      * corresponding field value of the Card.
      */
     public static class EditCardDescriptor {
@@ -123,7 +125,8 @@ public class EditCommand extends Command {
         private Answer answer;
         private List<Tag> tags;
 
-        public EditCardDescriptor() {}
+        public EditCardDescriptor() {
+        }
 
         /**
          * Copy constructor.

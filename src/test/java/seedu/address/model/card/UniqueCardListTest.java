@@ -155,8 +155,8 @@ public class UniqueCardListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-            -> uniqueCardList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                uniqueCardList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
@@ -166,13 +166,11 @@ public class UniqueCardListTest {
 
     @Test
     public void add_cardWithHigherPriority() {
-        Card low = new CardBuilder(LOW).build();
-        low.setPriority(uniqueCardList.count() - 1);
-        uniqueCardList.add(low);
+        uniqueCardList.add(LOW);
         uniqueCardList.add(HIGH);
         UniqueCardList otherList = new UniqueCardList();
         otherList.add(HIGH);
-        otherList.add(low);
+        otherList.add(LOW);
         assertTrue(uniqueCardList.equals(otherList));
     }
 
@@ -180,21 +178,19 @@ public class UniqueCardListTest {
     public void add_cardWithSamePriority() {
         UniqueCardList otherList = new UniqueCardList();
         uniqueCardList.add(CS2100);
-        uniqueCardList.add(HIGH);
-        otherList.add(HIGH);
+        uniqueCardList.add(CS1101S);
+        otherList.add(CS1101S);
         otherList.add(CS2100);
         assertFalse(uniqueCardList.equals(otherList));
     }
 
     @Test
     public void add_cardThenChangePriority() {
-        Card low = new CardBuilder(LOW).build();
         uniqueCardList.add(HIGH);
-        uniqueCardList.add(low);
-        low.setPriority(uniqueCardList.count() - 1);
-        uniqueCardList.setCard(low, low);
+        uniqueCardList.add(LOW);
+        uniqueCardList.setCard(LOW, LOW);
         UniqueCardList otherList = new UniqueCardList();
-        otherList.add(low);
+        otherList.add(LOW);
         otherList.add(HIGH);
         assertTrue(uniqueCardList.equals(otherList));
     }

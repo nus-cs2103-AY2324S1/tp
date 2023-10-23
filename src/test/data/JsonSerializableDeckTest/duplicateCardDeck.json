@@ -1,16 +1,18 @@
 {
-  "cards" : [
-    {
-      "question" : "How many types of numerical representation is covered in CS2100",
-      "answer" : "3",
-      "difficulty" : "easy",
-      "tags" : [ ]
-    },
-    {
-      "question" : "How many types of numerical representation is covered in CS2100",
-      "answer" : "3",
-      "difficulty" : "easy",
-      "tags" : [ ]
-    }
-  ]
+      "cards": [
+            {
+                  "question": "How many types of numerical representation is covered in CS2100",
+                  "answer": "3",
+                  "difficulty": "easy",
+                  "tags": [],
+                  "next-practice-date": "2018-11-03T12:45:30"
+            },
+            {
+                  "question": "How many types of numerical representation is covered in CS2100",
+                  "answer": "3",
+                  "difficulty": "easy",
+                  "tags": [],
+                  "next-practice-date": "2018-11-03T12:45:30"
+            }
+      ]
 }
