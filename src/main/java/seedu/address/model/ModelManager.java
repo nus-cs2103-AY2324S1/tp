@@ -8,11 +8,15 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.ScheduleItem;
+import seedu.address.model.appointment.SortByAppointmentDateComparator;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,8 +28,9 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-
     private SortedList<Person> sortedPersons;
+    private ObservableList<Appointment> observableAppointments;
+    private SortedList<Appointment> sortedAppointments;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +44,10 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
+        // to add comparator for sorting logic here
+        observableAppointments = FXCollections.observableArrayList();
+        sortedAppointments = new SortedList<>(observableAppointments,
+                                              new SortByAppointmentDateComparator());
     }
 
     public ModelManager() {
@@ -101,19 +110,21 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        setAppointmentList();
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        setAppointmentList();
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        setAppointmentList();
     }
 
     @Override
@@ -130,6 +141,27 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public SortedList<Appointment> getAppointmentList() {
+        setAppointmentList();
+        return sortedAppointments;
+    }
+
+    public void setAppointmentList() {
+        observableAppointments.clear();
+        // appointmentList.add(new Appointment("appointment123", LocalDateTime.now()));
+        for (int i = 0; i < filteredPersons.size(); i++) {
+            ScheduleItem appt = filteredPersons.get(i).getAppointment();
+            if (appt instanceof Appointment) {
+                observableAppointments.add((Appointment) appt);
+            }
+        }
     }
 
     @Override
