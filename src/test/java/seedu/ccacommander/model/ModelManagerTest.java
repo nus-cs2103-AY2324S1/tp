@@ -19,11 +19,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
+import seedu.ccacommander.model.exceptions.UndoStateException;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
 import seedu.ccacommander.testutil.CcaCommanderBuilder;
 
 public class ModelManagerTest {
 
+    private static String COMMIT_MESSAGE = "Example Commit.";
     private ModelManager modelManager = new ModelManager();
 
     @Test
@@ -74,6 +76,28 @@ public class ModelManagerTest {
         Path path = Paths.get("ccacommander/book/file/path");
         modelManager.setCcaCommanderFilePath(path);
         assertEquals(path, modelManager.getCcaCommanderFilePath());
+    }
+
+    @Test
+    public void canUndo_hasPreviousState_returnsTrue() {
+        modelManager.commit(COMMIT_MESSAGE);
+        assertTrue(modelManager.canUndo());
+    }
+
+    @Test
+    public void canUndo_noPreviousState_returnsFalse() {
+        assertFalse(modelManager.canUndo());
+    }
+
+    @Test
+    public void undo_hasPreviousState_returnsCommitMessage() {
+        modelManager.commit(COMMIT_MESSAGE);
+        assertEquals(COMMIT_MESSAGE, modelManager.undo());
+    }
+
+    @Test
+    public void undo_noPreviousState_throwsUndoStateException() {
+        assertThrows(UndoStateException.class, () -> modelManager.undo());
     }
 
     @Test

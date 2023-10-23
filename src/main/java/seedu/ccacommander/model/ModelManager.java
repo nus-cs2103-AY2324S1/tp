@@ -135,6 +135,28 @@ public class ModelManager implements Model {
         versionedCcaCommander.setEvent(target, editedEvent);
     }
 
+    @Override
+    public void commit(String commitMessage) {
+        versionedCcaCommander.commit(commitMessage);
+    }
+
+    @Override
+    public boolean canUndo() {
+        return versionedCcaCommander.canUndo();
+    }
+
+    @Override
+    public String undo() {
+        return versionedCcaCommander.undo();
+    }
+
+    @Override
+    public StateCaptures viewStateCaptures() {
+        return versionedCcaCommander.viewStateCaptures();
+    }
+
+
+
     //=========== Filtered Member List Accessors =============================================================
 
     /**
@@ -164,26 +186,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void commit(String commitMessage) {
-        versionedCcaCommander.commit(commitMessage);
-    }
-
-    @Override
-    public boolean canUndo() {
-        return versionedCcaCommander.canUndo();
-    }
-
-    @Override
-    public String undo() {
-        return versionedCcaCommander.undo();
-    }
-
-    @Override
-    public StateCaptures viewStateCaptures() {
-        return versionedCcaCommander.viewStateCaptures();
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -200,5 +202,4 @@ public class ModelManager implements Model {
                 && filteredMembers.equals(otherModelManager.filteredMembers)
                 && filteredEvents.equals(otherModelManager.filteredEvents);
     }
-
 }
