@@ -53,15 +53,15 @@ title: User Guide
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**
+**Notes about the command format:**
 
-</div>
 * \<?...>: Optional field
 * \<description>: Any string
 * \<type>: [R (for Revenue), E (for Expense)]
 * \<amount>: Any number
 * \<date>: In dd/mm/yy format
 * \<staff>: ID of staff, an integer
+</div>
 
 
 ### Adding transaction : `add`
