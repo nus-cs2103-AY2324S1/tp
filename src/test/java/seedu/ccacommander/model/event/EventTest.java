@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_DATE_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAGS_BOXING;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_BOXING;
 import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
 import static seedu.ccacommander.testutil.TypicalEvents.BOXING_DAY;
 
@@ -74,7 +74,7 @@ public class EventTest {
         assertFalse(AURORA_BOREALIS.equals(editedAurora));
 
         // different tags -> returns false
-        editedAurora = new EventBuilder(AURORA_BOREALIS).withTags(VALID_TAGS_BOXING).build();
+        editedAurora = new EventBuilder(AURORA_BOREALIS).withTags(VALID_TAG_BOXING).build();
         assertFalse(AURORA_BOREALIS.equals(editedAurora));
 
     }
