@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Policy {
+    private final Company company;
 
     private final PolicyNumber policyNumber;
     private final PolicyDate policyIssueDate;
@@ -18,12 +19,16 @@ public class Policy {
      * Every field must be present and not null.
      * In the case of leads with null policy fields, default values will be put in place by the respective classes.
      */
-    public Policy(PolicyNumber policyNumber, PolicyDate policyIssueDate, PolicyDate policyExpiryDate) {
+    public Policy(Company company, PolicyNumber policyNumber, PolicyDate policyIssueDate, PolicyDate policyExpiryDate) {
+        this.company = company;
         this.policyNumber = policyNumber;
         this.policyIssueDate = policyIssueDate;
         this.policyExpiryDate = policyExpiryDate;
     }
 
+    public Company getCompany() {
+        return company;
+    }
     public PolicyNumber getPolicyNumber() {
         return policyNumber;
     }
@@ -48,19 +53,21 @@ public class Policy {
         }
 
         Policy otherPolicy = (Policy) other;
-        return policyNumber.equals(otherPolicy.policyNumber)
+        return company.equals(otherPolicy.company)
+                && policyNumber.equals(otherPolicy.policyNumber)
                 && policyIssueDate.equals(otherPolicy.policyIssueDate)
                 && policyExpiryDate.equals(otherPolicy.policyExpiryDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(policyNumber, policyIssueDate, policyExpiryDate);
+        return Objects.hash(company, policyNumber, policyIssueDate, policyExpiryDate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("company", company)
                 .add("policy number", policyNumber)
                 .add("policy issue date", policyIssueDate)
                 .add("policy expiry date", policyExpiryDate)
@@ -75,14 +82,14 @@ public class Policy {
      * @return the string representation of the Policy.
      */
     public String toDisplay(boolean isPersonCard) {
-        if (policyNumber.value.equals(PolicyNumber.DEFAULT_VALUE)) {
+        if (policyNumber.toString().equals(PolicyNumber.DEFAULT_VALUE)) {
             // Policy does not actually exist
             return "No Policy Found";
         }
 
         if (isPersonCard) {
-            return policyNumber.value + "\n" + policyIssueDate.toString() + "\n" + policyExpiryDate.toString();
+            return company + "\n" + policyNumber + "\n" + policyIssueDate + "\n" + policyExpiryDate;
         }
-        return policyNumber.value + ", " + policyIssueDate.toString() + ", " + policyExpiryDate.toString();
+        return company + ", " + policyNumber + ", " + policyIssueDate + ", " + policyExpiryDate;
     }
 }

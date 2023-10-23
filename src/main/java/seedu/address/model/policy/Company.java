@@ -18,7 +18,7 @@ public class Company {
     /**
      * Constructs a {@code Company}.
      *
-     * @param company A valid policy number.
+     * @param company A valid company.
      */
     public Company(String company) {
         requireNonNull(company);
@@ -57,5 +57,4 @@ public class Company {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
