@@ -87,7 +87,7 @@ public class ArgumentMultimap {
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
-        return Messages.MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+        return Messages.DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 
 }

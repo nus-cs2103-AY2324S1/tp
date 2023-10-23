@@ -1,8 +1,6 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.COMMAND_UNKNOWN;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.Valid.EMAIL_DESC_AMY;
 import static seedu.address.testutil.TestData.Valid.NAME_DESC_AMY;
@@ -55,19 +53,19 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, COMMAND_UNKNOWN);
+        assertParseException(invalidCommand, Messages.COMMAND_UNKNOWN);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, Messages.INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, Messages.MESSAGE_LIST_COMMAND_SUCCESS, model);
+        assertCommandSuccess(listCommand, Messages.LIST_COMMAND_SUCCESS, model);
     }
 
     @Test

@@ -30,8 +30,8 @@ public class StringUtil {
         requireNonNull(word);
 
         String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), Messages.MESSAGE_EMPTY_WORD_PARAMETER);
-        checkArgument(preppedWord.split("\\s+").length == 1, Messages.MESSAGE_SINGLE_WORD_EXPECTED);
+        checkArgument(!preppedWord.isEmpty(), Messages.EMPTY_WORD_PARAMETER);
+        checkArgument(preppedWord.split("\\s+").length == 1, Messages.SINGLE_WORD_EXPECTED);
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");

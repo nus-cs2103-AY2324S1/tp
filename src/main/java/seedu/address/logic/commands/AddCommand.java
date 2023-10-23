@@ -50,11 +50,11 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (model.containsContact(toAdd)) {
-            throw new CommandException(Messages.MESSAGE_COMMAND_DUPLICATE_CONTACT);
+            throw new CommandException(Messages.COMMAND_DUPLICATE_CONTACT);
         }
 
         model.addContact(toAdd);
-        return new CommandResult(String.format(Messages.MESSAGE_ADD_COMMAND_SUCCESS, Contact.format(toAdd)));
+        return new CommandResult(String.format(Messages.ADD_COMMAND_SUCCESS, Contact.format(toAdd)));
     }
 
     @Override
