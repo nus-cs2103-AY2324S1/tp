@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Student;
 
 /**
@@ -76,16 +75,12 @@ public class StudentCard extends UiPart<Region> {
     public XYChart.Series initBarChart(Student student) {
         XYChart.Series<String, Double> series = new XYChart.Series();
         series.setName("Grades");
-        try {
-            series.getData().add(new XYChart.Data("Assignment",
-                    student.getClassDetails().getAssignmentPercentage()));
-            series.getData().add(new XYChart.Data("Attendance",
-                    student.getClassDetails().getAttendancePercentage()));
-            series.getData().add(new XYChart.Data("Class Participation",
-                    student.getClassDetails().getClassParticipationPercentage()));
-        } catch (IllegalValueException e) {
-            return series;
-        }
+        series.getData().add(new XYChart.Data("Assignment",
+                student.getClassDetails().getAssignmentPercentage()));
+        series.getData().add(new XYChart.Data("Attendance",
+                student.getClassDetails().getAttendancePercentage()));
+        series.getData().add(new XYChart.Data("Class Participation",
+                student.getClassDetails().getClassParticipationPercentage()));
         return series;
     }
 }

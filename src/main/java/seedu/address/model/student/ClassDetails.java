@@ -101,10 +101,8 @@ public class ClassDetails {
      * @return Percentage of attendance.
      * @throws IllegalValueException When there is no attendance tracker.
      */
-    public double getAttendancePercentage() throws IllegalValueException {
-        if (attendanceTracker == null) {
-            throw new IllegalValueException("Class Details is not initialized properly.");
-        }
+    public double getAttendancePercentage() {
+        assert (attendanceTracker != null);
         return attendanceTracker.getPercentage();
     }
 
@@ -114,10 +112,8 @@ public class ClassDetails {
      * @return Percentage of class participation.
      * @throws IllegalValueException When there is no class participation tracker.
      */
-    public double getClassParticipationPercentage() throws IllegalValueException {
-        if (classParticipationTracker == null) {
-            throw new IllegalValueException("Class Details is not initialized properly.");
-        }
+    public double getClassParticipationPercentage() {
+        assert (classParticipationTracker != null);
         return classParticipationTracker.getPercentage();
     }
 
@@ -127,10 +123,8 @@ public class ClassDetails {
      * @return Percentage of overall assignment grades.
      * @throws IllegalValueException When there is no assignment tracker.
      */
-    public double getAssignmentPercentage() throws IllegalValueException {
-        if (assignmentTracker == null) {
-            throw new IllegalValueException("Class Details is not initialized properly.");
-        }
+    public double getAssignmentPercentage() {
+        assert (assignmentTracker != null);
         return assignmentTracker.getPercentage();
     }
 
