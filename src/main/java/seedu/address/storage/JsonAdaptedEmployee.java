@@ -135,7 +135,7 @@ class JsonAdaptedEmployee {
 
         final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
 
-        return new Employee(modelName, modelPosition, modelId, modelPhone, modelEmail, modelSalary, modelDepartments, isOnLeave);
+        return new Employee(modelName, modelPosition, modelId, modelPhone,
+                modelEmail, modelSalary, modelDepartments, isOnLeave);
     }
-
 }
