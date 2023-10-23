@@ -20,6 +20,8 @@ public class FlashCard {
 
     private boolean isUpdated;
     private final ProficiencyLevel originalLevel; // For undo function
+
+    private boolean toDelete = false;
     /**
      * Constructor for Flashcard
      *
@@ -51,6 +53,10 @@ public class FlashCard {
 
     public ProficiencyLevel getProficiencyLevel() {
         return currentLevel;
+    }
+
+    public boolean isToBeDeleted() {
+        return this.toDelete;
     }
 
     /**
@@ -142,6 +148,7 @@ public class FlashCard {
         if (isSuccess) {
             getProficiencyLevel().upgradeLevel();
             updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
+            this.toDelete = getProficiencyLevel().toDelete();
         } else {
             getProficiencyLevel().downgradeLevel();
             updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());

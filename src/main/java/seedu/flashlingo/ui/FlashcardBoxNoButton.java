@@ -13,9 +13,9 @@ import seedu.flashlingo.model.flashcard.FlashCard;
  * @version 1.2
  * @since 1.2
  */
-public class FlashcardBox extends UiPart<Region> {
+public class FlashcardBoxNoButton extends UiPart<Region> {
 
-    private static final String FXML = "FlashcardBox.fxml";
+    private static final String FXML = "FlashcardBoxNoButton.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -37,7 +37,6 @@ public class FlashcardBox extends UiPart<Region> {
     private Label translation;
     @FXML
     private Label level;
-
     @FXML
     private Button reveal;
 
@@ -46,31 +45,13 @@ public class FlashcardBox extends UiPart<Region> {
     /**
      * Creates a {@code FlashCard code} with the given {@code FlashCard} and index to display.
      */
-    public FlashcardBox(FlashCard fc, int displayedIndex) {
+    public FlashcardBoxNoButton(FlashCard fc, int displayedIndex) {
         super(FXML);
         this.flashCard = fc;
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
         translation.setText("");
         level.setText("Current Level: " + fc.getProficiencyLevel().getLevel());
-    }
-
-    /**
-     * Handles success when user presses "Yes" button
-     */
-    @FXML
-    public void success() {
-        flashCard.handleUserInput(true);
-        level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
-    }
-
-    /**
-     * Handles failure when user presses "No" button
-     */
-    @FXML
-    public void failure() {
-        flashCard.handleUserInput(false);
-        level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
     }
 
     /**

@@ -42,6 +42,10 @@ public class FlashlingoParser {
     public static void setReviewSession(boolean edited) {
         isReviewSession = edited;
     }
+
+    public static boolean getReviewSession() {
+        return isReviewSession;
+    }
     /**
      * Parses user input into command for execution.
      *

@@ -27,8 +27,8 @@ abstract class Word {
     public Word(String word, String language) {
         requireNonNull(language);
         checkArgument(isValidLanguage(language), MESSAGE_CONSTRAINTS);
-        this.word = word;
-        this.language = language;
+        this.word = word.trim();
+        this.language = language.trim();
     }
 
     /**
