@@ -13,4 +13,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_BOOKING_PERIOD = new Prefix("d/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
+    public static final Prefix INDEX_PLACEHOLDER = new Prefix("");
 }
