@@ -10,7 +10,6 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Policy {
     private final Company company;
-
     private final PolicyNumber policyNumber;
     private final PolicyDate policyIssueDate;
     private final PolicyDate policyExpiryDate;
