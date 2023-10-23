@@ -6,7 +6,7 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
 
-import java.util.Set;
+import java.util.List;
 
 import seedu.staffsnap.logic.commands.AddCommand;
 import seedu.staffsnap.logic.commands.EditCommand.EditApplicantDescriptor;
@@ -51,7 +51,7 @@ public class ApplicantUtil {
                 .append(" "));
         descriptor.getPosition().ifPresent(position -> sb.append(PREFIX_POSITION).append(position.value).append(" "));
         if (descriptor.getInterviews().isPresent()) {
-            Set<Interview> interviews = descriptor.getInterviews().get();
+            List<Interview> interviews = descriptor.getInterviews().get();
             if (interviews.isEmpty()) {
                 sb.append(PREFIX_INTERVIEW);
             } else {

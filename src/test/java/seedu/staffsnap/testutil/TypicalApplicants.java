@@ -3,7 +3,6 @@ package seedu.staffsnap.testutil;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_FRIEND;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -57,8 +56,7 @@ public class TypicalApplicants {
             .withEmail(VALID_EMAIL_AMY).withPosition(VALID_POSITION_AMY)
             .withInterviews(VALID_INTERVIEW_FRIEND).build();
     public static final Applicant BOB = new ApplicantBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withPosition(VALID_POSITION_BOB)
-            .withInterviews(VALID_INTERVIEW_HUSBAND, VALID_INTERVIEW_FRIEND).build();
+            .withEmail(VALID_EMAIL_BOB).withPosition(VALID_POSITION_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -111,14 +109,14 @@ public class TypicalApplicants {
     }
 
     public static List<Applicant> getTypicalApplicants() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
     public static List<Applicant> getApplicantsSortedByName() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
     public static List<Applicant> getApplicantsSortedByPhone() {
-        return new ArrayList<>(Arrays.asList(DANIEL, ALICE, ELLE, FIONA, GEORGE, CARL, BENSON));
+        return new ArrayList<>(Arrays.asList(BOB, DANIEL, ALICE, ELLE, FIONA, GEORGE, CARL, BENSON));
     }
 }

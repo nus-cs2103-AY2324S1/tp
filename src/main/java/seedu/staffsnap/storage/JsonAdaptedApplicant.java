@@ -1,9 +1,7 @@
 package seedu.staffsnap.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -104,7 +102,7 @@ class JsonAdaptedApplicant {
         }
         final Position modelPosition = new Position(position);
 
-        final Set<Interview> modelInterviews = new HashSet<>(applicantInterviews);
+        final List<Interview> modelInterviews = new ArrayList<>(applicantInterviews);
         return new Applicant(modelName, modelPhone, modelEmail, modelPosition, modelInterviews);
     }
 

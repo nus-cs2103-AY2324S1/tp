@@ -68,6 +68,14 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     }
 
     /**
+     * Returns true if there are more than one applicant with the same identity as {@code applicant}
+     */
+    public boolean isDuplicateApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return applicants.numberOfDuplicates(applicant) > 1;
+    }
+
+    /**
      * Adds an applicant to the applicant book.
      * The applicant must not already exist in the applicant book.
      */

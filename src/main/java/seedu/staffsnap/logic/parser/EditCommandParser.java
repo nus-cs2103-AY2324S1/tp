@@ -10,8 +10,8 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.EditCommand;
@@ -71,19 +71,19 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> interviews} into a {@code Set<Interview>} if {@code interviews} is non-empty.
+     * Parses {@code Collection<String> interviews} into a {@code List<Interview>} if {@code interviews} is non-empty.
      * If {@code interviews} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Interview>} containing zero interviews.
+     * {@code List<Interview>} containing zero interviews.
      */
-    private Optional<Set<Interview>> parseInterviewsForEdit(Collection<String> interviews) throws ParseException {
+    private Optional<List<Interview>> parseInterviewsForEdit(Collection<String> interviews) throws ParseException {
         assert interviews != null;
 
         if (interviews.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> interviewSet = interviews.size() == 1 && interviews.contains("")
-                ? Collections.emptySet() : interviews;
-        return Optional.of(ParserUtil.parseInterviews(interviewSet));
+        Collection<String> interviewList = interviews.size() == 1 && interviews.contains("")
+                ? Collections.emptyList() : interviews;
+        return Optional.of(ParserUtil.parseInterviews(interviewList));
     }
 
 }

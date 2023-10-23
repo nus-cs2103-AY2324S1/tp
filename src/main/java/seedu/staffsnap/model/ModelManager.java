@@ -96,6 +96,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isDuplicateApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return applicantBook.isDuplicateApplicant(applicant);
+    }
+
+    @Override
     public void deleteApplicant(Applicant target) {
         applicantBook.removeApplicant(target);
     }

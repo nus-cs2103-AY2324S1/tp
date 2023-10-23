@@ -2,9 +2,9 @@ package seedu.staffsnap.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.commons.util.StringUtil;
@@ -132,15 +132,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> interviews} into a {@code Set<Interview>}.
+     * Parses {@code Collection<String> interviews} into a {@code List<Interview>}.
      */
-    public static Set<Interview> parseInterviews(Collection<String> interviews) throws ParseException {
+    public static List<Interview> parseInterviews(Collection<String> interviews) throws ParseException {
         requireNonNull(interviews);
-        final Set<Interview> interviewSet = new HashSet<>();
-        for (String interviewName : interviews) {
-            interviewSet.add(parseInterview(interviewName));
+        final List<Interview> interviewList = new ArrayList<>();
+        for (String interviewType : interviews) {
+            interviewList.add(parseInterview(interviewType));
         }
-        return interviewSet;
+        return interviewList;
     }
 
     /**
@@ -158,5 +158,20 @@ public class ParserUtil {
             throw new ParseException(Descriptor.MESSAGE_CONSTRAINTS);
         }
         return result;
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static String parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!Interview.isValidType(trimmedType)) {
+            throw new ParseException(Interview.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedType.toLowerCase();
     }
 }

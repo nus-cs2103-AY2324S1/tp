@@ -269,41 +269,46 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of employees
+* has a need to manage a significant number of applicants
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage employees faster than a typical mouse/GUI driven app
+**Value proposition**: introduces organisation to applicant management, recruitment processes and 
+streamlines hiring decisions
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                    | So that I can…​                             |
-|----------|---------|---------------------------------|---------------------------------------------|
-| `* * *`  | user    | view all the available commands | I know how to use the app                   |
-| `* * *`  | user    | add a new employee              | track the details of new hires              |
-| `* * *`  | user    | edit an employee entry detail   | maintain an updated database of employees   |
-| `* * *`  | user    | view the full list of employees | access important employee information       |
-| `* * *`  | user    | delete an employee entry        | track only the employees currently employed |
-| `*`      | user    | purge all existing data         | remove sample data and populate real data   |
-| `*`      | user    | find an employee by name        | access the employee's information quickly   |
+| Priority | As a …​ | I want to …​                      | So that I can…​                                |
+|----------|---------|-----------------------------------|------------------------------------------------|
+| `* * *`  | user    | view all the available commands   | I know how to use the app                      |
+| `* * *`  | user    | add a new applicant               | track the the progress of all applicants       |
+| `* * *`  | user    | edit an applicant descriptor      | maintain an updated database of all applicants |
+| `* * *`  | user    | view the full list of applicants  | access important applicant information         |
+| `* * *`  | user    | delete an applicant entry         | only track valid applicants                    |
+| `* * *`  | user    | add an interview for an applicant | plan screenings                                |
+| `* * *`  | user    | store data locally                | use it on a daily basis consistently           |
+| `* *`    | user    | find a specific applicant         | access the applicant's information quickly     |
+| `* *`    | user    | sort applicants by a descriptor   | find relevant applicants quickly               |
+| `* *`    | user    | filter applicants by a descriptor | find relevant applicants quickly               |
+| `* *`    | user    | purge all existing data           | remove sample data and populate real data      |
 
 
 ### Use cases
 
 (For all use cases below, the **System** is `Staff-Snap` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add an employee**
+**Use case: UC01 - Add an applicant**
 
-Guarantees: The new employee will be added to the list of employees.
+Guarantees: The new applicant will be added to the list of applicants.
 
 **MSS**
 
-1.  User inputs the command to add an employee.
-2.  Staff-Snap adds the new employee to the employee list and displays the updated list.
+1.  User inputs the command to add an applicant.
+2.  Staff-Snap adds the new applicant to the list and displays the updated list.
    
     Use case ends.
 
@@ -313,16 +318,16 @@ Guarantees: The new employee will be added to the list of employees.
 
     * 1a1. Staff-Snap shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends
 
-**Use case: UC02 - Edit employee's information**
+**Use case: UC02 - Edit applicant's information**
 
-Guarantees: The employee's information will be updated.
+Guarantees: The applicant's information will be updated.
 
 **MSS**
 
-1.  User inputs the command to edit an employee's information.
-2.  Staff-Snap updates the employee list with the updated employee information.
+1.  User inputs the command to edit an applicant's information.
+2.  Staff-Snap updates the applicant list with the updated applicant information.
 
     Use case ends.
 
@@ -331,41 +336,17 @@ Guarantees: The employee's information will be updated.
 * 1a. User enters an invalid command.
 
     * 1a1. Staff-Snap shows an error message.
-
-      Use case resumes at step 1.
-
-**Use case: UC03 - List all employees**
-
-Guarantees: All employees will be listed.
-
-**MSS**
-
-1.  User inputs the command to view the list of all employees.
-2.  Staff-Snap displays the list of all employees.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case resumes at step 1.
-* 1b. Employee list is empty.
-
-    * 1b1. Staff-Snap shows an empty employee list.
 
       Use case ends.
 
-**Use case: UC04 - Delete an employee**
+**Use case: UC03 - List all applicants**
 
-Guarantees: The employee will be removed from the list of employees.
+Guarantees: All applicants will be listed.
 
 **MSS**
 
-1.  User inputs the command to delete an employee.
-2.  Staff-Snap removes the employee from the list of employees.
+1.  User inputs the command to view the list of all applicants.
+2.  Staff-Snap displays the list of all applicants.
 
     Use case ends.
 
@@ -375,40 +356,21 @@ Guarantees: The employee will be removed from the list of employees.
 
     * 1a1. Staff-Snap shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
+* 1b. Applicant list is empty.
 
-**Use case: UC05 - Find an employee by name**
-
-Guarantees: The employees with name matching the search will be listed.
-
-**MSS**
-
-1.  User inputs the command to to find an employee by name.
-2.  Staff-Snap displays the list of all employees that match the search.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User enters an invalid command.
-
-    * 1a1. Staff-Snap shows an error message.
-
-      Use case resumes at step 1.
-* 1b. No employee found.
-
-    * 1b1. Staff-Snap shows an empty employee list.
+    * 1b1. Staff-Snap shows an empty applicant list.
 
       Use case ends.
 
-**Use case: UC06 - Sort employees**
+**Use case: UC04 - Delete an applicant**
 
-Guarantees: The list of employees will be sorted by the descriptor.
+Guarantees: The applicant will be removed from the list of applicants.
 
 **MSS**
 
-1.  User inputs the command to sort the employees by a particular descriptor.
-2.  Staff-Snap displays the list of employees sorted by the descriptor.
+1.  User inputs the command to delete an applicant.
+2.  Staff-Snap removes the applicant from the list of applicants.
 
     Use case ends.
 
@@ -418,16 +380,16 @@ Guarantees: The list of employees will be sorted by the descriptor.
 
     * 1a1. Staff-Snap shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-**Use case: UC07 - Filter employees**
+**Use case: UC05 - Find an applicant by name**
 
-Guarantees: Only employees that satisfies the specified criterion will be listed.
+Guarantees: The applicants with name matching the search will be listed.
 
 **MSS**
 
-1.  User inputs the command to filter the list of employees by a specified criterion.
-2.  Staff-Snap displays the list of all employees that satisfies the specified criterion.
+1.  User inputs the command to to find an applicant by name.
+2.  Staff-Snap displays the list of all applicants that match the search.
 
     Use case ends.
 
@@ -437,7 +399,50 @@ Guarantees: Only employees that satisfies the specified criterion will be listed
 
     * 1a1. Staff-Snap shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
+* 1b. No applicant found.
+
+    * 1b1. Staff-Snap shows an empty applicant list.
+
+      Use case ends.
+
+**Use case: UC06 - Sort applicants**
+
+Guarantees: The list of applicants will be sorted by the descriptor.
+
+**MSS**
+
+1.  User inputs the command to sort the applicants by a particular descriptor.
+2.  Staff-Snap displays the list of applicants sorted by the descriptor.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC07 - Filter applicants**
+
+Guarantees: Only applicants that satisfies the specified criterion will be listed.
+
+**MSS**
+
+1.  User inputs the command to filter the list of applicants by a specified criterion.
+2.  Staff-Snap displays the list of all applicants that satisfies the specified criterion.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
 
 **Use case: UC08 - List all commands**
 
@@ -446,9 +451,7 @@ Guarantees: The list of all available commands will be made accessible.
 **MSS**
 
 1.  User inputs the command to view the list of all available commands.
-2.  Staff-Snap displays a popup window containing the URL to the user guide.
-3.  User clicks on the URL.
-4.  Staff-Snap opens the user guide in the default browser.
+2.  Staff-Snap opens the user guide in the default browser.
 
     Use case ends.
 
@@ -457,11 +460,6 @@ Guarantees: The list of all available commands will be made accessible.
 * 1a. User enters an invalid command.
 
     * 1a1. Staff-Snap shows an error message.
-
-      Use case resumes at step 1.
-* 2a. User closes the popup window.
-
-    * 2a1. Staff-Snap closes the popup window.
 
       Use case ends.
 
@@ -482,10 +480,57 @@ Guarantees: Staff-Snap exits.
 
     * 1a1. Staff-Snap shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
+
 * 1b. User closes the application window.
 
     Use case resumes at step 2.
+
+**Use case: UC10 - Clear list of applicants**
+
+Guarantees: The list of applicants will be cleared.
+
+**MSS**
+
+1.  User inputs the command to clear the list of applicants.
+2.  Staff-Snap prompts for confirmation
+3.  User confirms the action.
+4.  Staff-Snap clears the list of applicants and displays an empty list.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 2a. User rejects the confirmation.
+
+    * 2a1. Staff-Snap clears confirmation message.
+
+      Use case ends.
+
+**Use case: UC11 - Add an interview to an applicant**
+
+Guarantees: A new interview will be added to the applicant.
+
+**MSS**
+
+1.  User inputs the command to add an interview to an applicant.
+2.  Staff-Snap updates the applicant information with the new interview.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends
 
 *{More to be added}*
 

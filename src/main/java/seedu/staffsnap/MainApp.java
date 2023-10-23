@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 import seedu.staffsnap.commons.core.Config;
 import seedu.staffsnap.commons.core.LogsCenter;
@@ -45,6 +46,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    protected HostServices hostServices = getHostServices();
 
     @Override
     public void init() throws Exception {
@@ -64,7 +66,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model, storage);
 
-        ui = new UiManager(logic);
+        ui = new UiManager(logic, hostServices);
     }
 
     /**
@@ -80,7 +82,8 @@ public class MainApp extends Application {
         try {
             applicantBookOptional = storage.readApplicantBook();
             if (!applicantBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getApplicantBookFilePath()
+                logger.info("No applicant book found at file path. A new data file will be created at"
+                        + storage.getApplicantBookFilePath()
                         + " populated with a sample ApplicantBook.");
             }
             initialData = applicantBookOptional.orElseGet(SampleDataUtil::getSampleApplicantBook);
@@ -118,12 +121,12 @@ public class MainApp extends Application {
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             if (!configOptional.isPresent()) {
-                logger.info("Creating new config file " + configFilePathUsed);
+                logger.info("Creating new config file at" + configFilePathUsed);
             }
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataLoadingException e) {
             logger.warning("Config file at " + configFilePathUsed + " could not be loaded."
-                    + " Using default config properties.");
+                    + " Using default config properties at " + Config.DEFAULT_CONFIG_FILE);
             initializedConfig = new Config();
         }
 

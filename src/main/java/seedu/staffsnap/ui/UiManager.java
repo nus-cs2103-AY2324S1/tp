@@ -2,6 +2,7 @@ package seedu.staffsnap.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -25,13 +26,15 @@ public class UiManager implements Ui {
     private static final String ICON_APPLICATION = "/images/ss_logo.png";
 
     private Logic logic;
+    private HostServices hostServices;
     private MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManager(Logic logic) {
+    public UiManager(Logic logic, HostServices hostServices) {
         this.logic = logic;
+        this.hostServices = hostServices;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
+            mainWindow = new MainWindow(primaryStage, logic, hostServices);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 

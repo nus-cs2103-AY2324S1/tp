@@ -1,7 +1,7 @@
 package seedu.staffsnap.logic.commands;
 
 import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.staffsnap.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
+import static seedu.staffsnap.logic.commands.HelpCommand.MESSAGE_SHOW_HELP;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class HelpCommandTest {
 
     @Test
     public void execute_help_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, false, false);
+        CommandResult expectedCommandResult = new CommandResult(MESSAGE_SHOW_HELP, true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

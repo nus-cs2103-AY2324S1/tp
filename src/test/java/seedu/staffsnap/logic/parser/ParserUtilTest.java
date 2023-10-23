@@ -6,10 +6,10 @@ import static seedu.staffsnap.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -193,13 +193,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseInterviews_collectionWithValidInterviews_returnsInterviewSet() throws Exception {
-        Set<Interview> actualInterviewSet = ParserUtil
+    public void parseInterviews_collectionWithValidInterviews_returnsInterviewList() throws Exception {
+        List<Interview> actualInterviewList = ParserUtil
                 .parseInterviews(Arrays.asList(VALID_INTERVIEW_1, VALID_INTERVIEW_2));
-        Set<Interview> expectedInterviewSet = new HashSet<Interview>(
+        List<Interview> expectedInterviewList = new ArrayList<>(
                 Arrays.asList(new Interview(VALID_INTERVIEW_1), new Interview(VALID_INTERVIEW_2)));
 
-        assertEquals(expectedInterviewSet, actualInterviewSet);
+        assertEquals(expectedInterviewList, actualInterviewList);
     }
 
     @Test

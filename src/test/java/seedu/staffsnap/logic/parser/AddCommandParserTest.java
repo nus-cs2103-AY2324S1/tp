@@ -4,9 +4,7 @@ import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INTERVIEW_DESC_FRIEND;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.INTERVIEW_DESC_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_INTERVIEW_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.INVALID_POSITION_DESC;
@@ -19,8 +17,6 @@ import static seedu.staffsnap.logic.commands.CommandTestUtil.POSITION_DESC_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_FRIEND;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_HUSBAND;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
@@ -42,7 +38,6 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
-import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.testutil.ApplicantBuilder;
 
 public class AddCommandParserTest {
@@ -50,20 +45,17 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Applicant expectedApplicant = new ApplicantBuilder(BOB).withInterviews(VALID_INTERVIEW_FRIEND).build();
+        Applicant expectedApplicantWithWhitespace = new ApplicantBuilder(BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + POSITION_DESC_BOB + INTERVIEW_DESC_FRIEND, new AddCommand(expectedApplicant));
+                + POSITION_DESC_BOB, new AddCommand(expectedApplicantWithWhitespace));
 
-        // multiple interviews - all accepted
-        Applicant expectedApplicantMultipleInterviews = new ApplicantBuilder(BOB)
-                .withInterviews(VALID_INTERVIEW_FRIEND, VALID_INTERVIEW_HUSBAND)
-                .build();
+        // without whitespace preamble
+        Applicant expectedApplicantWithoutWhitespace = new ApplicantBuilder(BOB).build();
         assertParseSuccess(parser, NAME_DESC_BOB
-                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + POSITION_DESC_BOB
-                        + INTERVIEW_DESC_HUSBAND + INTERVIEW_DESC_FRIEND,
-                new AddCommand(expectedApplicantMultipleInterviews));
+                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + POSITION_DESC_BOB,
+                new AddCommand(expectedApplicantWithoutWhitespace));
     }
 
     @Test
@@ -89,8 +81,8 @@ public class AddCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedApplicantString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + POSITION_DESC_AMY
-                        + validExpectedApplicantString,
+                validExpectedApplicantString + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                        + NAME_DESC_AMY + POSITION_DESC_AMY + validExpectedApplicantString,
                 Messages.getErrorMessageForDuplicatePrefixes(
                         PREFIX_NAME, PREFIX_POSITION, PREFIX_EMAIL, PREFIX_PHONE));
 
@@ -167,32 +159,27 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + POSITION_DESC_BOB
-                + INTERVIEW_DESC_HUSBAND + INTERVIEW_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + POSITION_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + POSITION_DESC_BOB
-                + INTERVIEW_DESC_HUSBAND + INTERVIEW_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB
+                + INVALID_PHONE_DESC + EMAIL_DESC_BOB + POSITION_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + POSITION_DESC_BOB
-                + INTERVIEW_DESC_HUSBAND + INTERVIEW_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB
+                + PHONE_DESC_BOB + INVALID_EMAIL_DESC + POSITION_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
 
         // invalid position
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_POSITION_DESC
-                + INTERVIEW_DESC_HUSBAND + INTERVIEW_DESC_FRIEND, Position.MESSAGE_CONSTRAINTS);
-
-        // invalid interview
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + POSITION_DESC_BOB
-                + INVALID_INTERVIEW_DESC + VALID_INTERVIEW_FRIEND, Interview.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_POSITION_DESC, Position.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_POSITION_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC
+                        + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_POSITION_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + POSITION_DESC_BOB + INTERVIEW_DESC_HUSBAND + INTERVIEW_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                + POSITION_DESC_BOB, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
