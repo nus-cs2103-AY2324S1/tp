@@ -18,12 +18,12 @@ import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
 public class EditPersonDescriptor {
-    private static String MESSAGE_INVALID_PHONE_INDEX = "The phone index provided is invalid.";
-    private static String MESSAGE_INVALID_EMAIL_INDEX = "The email index provided is invalid.";
-    private static String MESSAGE_INVALID_LINK_INDEX = "The link index provided is invalid.";
-    private static String MESSAGE_INVALID_COURSE_INDEX = "The course index provided is invalid.";
-    private static String MESSAGE_INVALID_SPECIALISATION_INDEX = "The specialisation index provided is invalid.";
-    private static String MESSAGE_INVALID_TAG_INDEX = "The tag index provided is invalid.";
+    public static final String MESSAGE_INVALID_PHONE_INDEX = "The phone index provided is invalid.";
+    public static final String MESSAGE_INVALID_EMAIL_INDEX = "The email index provided is invalid.";
+    public static final String MESSAGE_INVALID_LINK_INDEX = "The link index provided is invalid.";
+    public static final String MESSAGE_INVALID_COURSE_INDEX = "The course index provided is invalid.";
+    public static final String MESSAGE_INVALID_SPECIALISATION_INDEX = "The specialisation index provided is invalid.";
+    public static final String MESSAGE_INVALID_TAG_INDEX = "The tag index provided is invalid.";
     private Name name;
     private UniqueList<Phone> phones;
     private UniqueList<Email> emails;
