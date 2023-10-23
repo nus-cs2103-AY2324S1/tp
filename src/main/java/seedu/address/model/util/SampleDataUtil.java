@@ -1,7 +1,7 @@
 package seedu.address.model.util;
 
-import static seedu.address.model.employee.Employee.MAX_OVERTIME_HOURS;
 import static seedu.address.model.employee.Employee.DEFAULT_OVERTIME_HOURS;
+import static seedu.address.model.employee.Employee.MAX_OVERTIME_HOURS;
 
 import java.util.Arrays;
 import java.util.Set;

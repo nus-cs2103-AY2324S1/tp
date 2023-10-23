@@ -114,7 +114,7 @@ public class EditCommand extends Command {
         OvertimeHours updatedOvertimeHours = employeeToEdit.getOvertimeHours();
 
         return new Employee(updatedName, updatedPosition, updatedId, updatedPhone, updatedEmail,
-                updatedSalary, updatedDepartments, updatedOvertimeHours);
+                updatedSalary, updatedDepartments);
     }
 
     @Override
