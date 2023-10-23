@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_A
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -19,6 +20,7 @@ import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ConfigCommand;
@@ -30,10 +32,12 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
+import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RecordClassPartCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentContainsKeywordsPredicate;
 import seedu.address.model.student.StudentNumber;
@@ -85,6 +89,16 @@ public class AddressBookParserTest {
             + StudentUtil.getTagDetails(TypicalStudents.ALICE), true);
         assertEquals(new TagCommand(TypicalStudents.ALICE.getStudentNumber(), TypicalStudents.ALICE.getTags()),
             command);
+    }
+
+    @Test
+    public void parseCommand_mark() throws Exception {
+        int tut = ClassDetails.DEFAULT_COUNT;
+        Student student = new StudentBuilder().build();
+        MarkCommand command = (MarkCommand) parser.parseCommand(MarkCommand.COMMAND_WORD + " "
+                + tut + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber(),
+                true);
+        assertEquals(new MarkCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
     }
 
     @Test
