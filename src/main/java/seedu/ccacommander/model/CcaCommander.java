@@ -65,6 +65,14 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     }
 
     /**
+     * Replaces the contents of the attendance list with {@code attendances}.
+     * {@code attendances} must not contain duplicate attendances.
+     */
+    public void setAttendances(List<Attendance> attendances) {
+        this.attendances.setAttendances(attendances);
+    }
+
+    /**
      * Resets the existing data of this {@code CcaCommander} with {@code newData}.
      */
     public void resetData(ReadOnlyCcaCommander newData) {
@@ -72,6 +80,8 @@ public class CcaCommander implements ReadOnlyCcaCommander {
 
         setMembers(newData.getMemberList());
         setEvents(newData.getEventList());
+        setAttendances(newData.getAttendanceList());
+
     }
 
     // member-level operations
