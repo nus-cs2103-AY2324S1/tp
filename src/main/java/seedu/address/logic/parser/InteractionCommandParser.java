@@ -46,8 +46,7 @@ public class InteractionCommandParser implements Parser<Command> {
             String outcomeString = argMultimap.getValue(PREFIX_OUTCOME).get().split("\\s+")[0];
             outcome = ParserUtil.parseOutcome(outcomeString);
             String[] trimmedArgsParts = trimmedArgs.split("\\s+", 3);
-            //This is to check if there is a note, having a split of 3 means
-            //interaction <index> o/OUTCOME note
+            //This is to check if there is a note
             if (trimmedArgsParts.length > 2) {
                 note = trimmedArgsParts[3];
             }
