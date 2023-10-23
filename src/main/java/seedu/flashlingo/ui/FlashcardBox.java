@@ -88,15 +88,4 @@ public class FlashcardBox extends UiPart<Region> {
         }
         isRevealed = !isRevealed;
     }
-
-    /**
-     * Handles Undo when "Undo" button is pressed
-     * Should reverse the previous "Yes" or "No" click and allow reselection
-     */
-    @FXML
-    public void undo() {
-        flashCard.undo();
-        level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
-    }
-
 }

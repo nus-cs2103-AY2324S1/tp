@@ -37,14 +37,13 @@
       <Label fx:id="level" styleClass="cell_small_label" text="\$level" />
          <HBox alignment="CENTER_LEFT" spacing="5">
             <padding>
-               <Insets top="5" right="5"/>
+               <Insets right="5" top="5" />
             </padding>
             <children>
-               <Button fx:id="success" mnemonicParsing="false" onAction="#success" text="Yes" minWidth="60" styleClass="button"/>
-               <Button fx:id="failure" mnemonicParsing="false" onAction="#failure" text="No" minWidth="60" styleClass="button"/>
-               <Button mnemonicParsing="false" onAction="#undo" text="Undo" minWidth="60" styleClass="button"/>
-                <Region HBox.hgrow="ALWAYS"/>
-               <Button fx:id="reveal" mnemonicParsing="false" onAction="#toggleReveal" text="Reveal" HBox.hgrow="NEVER" minWidth="80" styleClass="button"/>
+               <Button fx:id="success" minWidth="60" mnemonicParsing="false" onAction="#success" styleClass="button" text="Yes" />
+               <Button fx:id="failure" minWidth="60" mnemonicParsing="false" onAction="#failure" styleClass="button" text="No" />
+                <Region HBox.hgrow="ALWAYS" />
+               <Button fx:id="reveal" minWidth="80" mnemonicParsing="false" onAction="#toggleReveal" styleClass="button" text="Reveal" HBox.hgrow="NEVER" />
             </children>
          </HBox>
     </VBox>
