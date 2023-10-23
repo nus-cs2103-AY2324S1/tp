@@ -65,6 +65,18 @@ public class AttendanceTracker {
     }
 
     /**
+     * Returns true if the attendance is present for the given tutorial number
+     *
+     * @param tutNum The tutorial number.
+     */
+    public boolean isPresent(Index tutNum) throws InvalidTutorialIndexException {
+        if (tutNum.getZeroBased() >= attendanceList.length) {
+            throw new InvalidTutorialIndexException();
+        }
+        return attendanceList[tutNum.getZeroBased()].getIsPresent();
+    }
+
+    /**
      * Marks attendanceTracker of a student as absent.
      *
      * @param tutNum The tutorial number.
