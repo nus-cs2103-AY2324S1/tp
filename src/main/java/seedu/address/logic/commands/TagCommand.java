@@ -1,82 +1,86 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_STUDENT_DOES_NOT_EXIST;
 
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
-
 /**
- * Changes the tags of an existing person in the address book.
+ * Changes the tags of an existing student in the address book.
  */
 public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
-
+    public static final String ADD_TAGS = "add";
+    public static final String DELETE_TAGS = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the tags of the person identified "
-            + "by the student number. "
+            + ": Edits the tags of the student identified by the student number. "
             + "Existing tags will be overwritten by the input.\n"
-            + "Parameters: Student number (must be exist in address book) "
-            + "/t [LABEL]\n"
-            + "Example: " + COMMAND_WORD + " A1234567N "
-            + "/t smart.";
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed tag from Person: %1$s";
-    public static final String MESSAGE_TAG_FAILED = COMMAND_WORD
-            + ": There was an issue tagging the student.\n Please check "
-            + "that the index of the student exists or each label has "
-            + "the “/t ” prefix.";
-    private final Index index;
-    private final Set<Tag> tags;
+            + "Use /add to add or /delete to delete tags without overwriting all tags.\n"
+            + "Parameters: STUDENT_NUMBER (exists in address book) [/add] [/delete] t/[TAG]\n"
+            + "Example: " + COMMAND_WORD + " A1234567N /add t/smart.";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added following tags to Student %1$s:\n";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed following tags from Student %1$s:\n";
+    public static final String MESSAGE_REPLACE_ALL_TAG_SUCCESS = "Replace all tags of Student %1$s with:\n";
+    public static final String MESSAGE_DELETE_ALL_TAG_SUCCESS = "Removed all tags from Student %1$s:\n";
+    public static final String MESSAGE_TAG_FAILED = "There was an issue tagging the student.\n"
+        + "Please check that the student with the student number exists or each tag has the “t/” prefix.\n";
+    protected final StudentNumber studentNumber;
+    protected final Set<Tag> tags;
 
     /**
-     * @param index of the person in the filtered person list to edit the remark
-     * @param tags of the person to be updated to
+     * @param studentNumber of the student in the filtered student list to edit their tags
+     * @param tags of the student to be updated to
      */
-    public TagCommand(Index index, Set<Tag> tags) {
-        requireAllNonNull(index, tags);
-
-        this.index = index;
+    public TagCommand(StudentNumber studentNumber, Set<Tag> tags) {
+        requireAllNonNull(studentNumber, tags);
+        this.studentNumber = studentNumber;
         this.tags = tags;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Student studentToTag;
+        try {
+            studentToTag = getStudentByStudentNumber(lastShownList, studentNumber);
+        } catch (NullPointerException ive) {
+            throw new CommandException(MESSAGE_STUDENT_DOES_NOT_EXIST);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), this.tags);
+        Student editedStudent = new Student(
+                studentToTag.getName(), studentToTag.getPhone(), studentToTag.getEmail(),
+                studentToTag.getStudentNumber(), studentToTag.getClassDetails(), this.tags);
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.setStudent(studentToTag, editedStudent);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(editedStudent));
     }
 
     /**
      * Generates a command execution success message based on whether
      * the tag is added to or removed from
-     * {@code personToEdit}.
+     * {@code studentToTag}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
-        String message = !tags.isEmpty() ? MESSAGE_ADD_TAG_SUCCESS : MESSAGE_DELETE_TAG_SUCCESS;
-        return String.format(message, Messages.format(personToEdit));
+    private String generateSuccessMessage(Student studentToTag) {
+        String message = !tags.isEmpty() ? MESSAGE_REPLACE_ALL_TAG_SUCCESS : MESSAGE_DELETE_ALL_TAG_SUCCESS;
+        return String.format(message, studentToTag.getName()) + studentToTag.getTags();
+    }
+
+    protected Student getStudentByStudentNumber(List<Student> list, StudentNumber studentNumber) {
+        return list.stream()
+            .filter(student -> student.getStudentNumber().equals(studentNumber))
+            .findAny().orElseThrow(NullPointerException::new);
     }
 
     @Override
@@ -91,7 +95,7 @@ public class TagCommand extends Command {
         }
 
         TagCommand e = (TagCommand) other;
-        return index.equals(e.index)
+        return studentNumber.equals(e.studentNumber)
                 && tags.equals(e.tags);
     }
 

@@ -1,0 +1,26 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "studentNumber": "A0224917A",
+    "classDetails" : {
+      "classNumber" : "T11",
+      "attendanceTracker" : [ false, false, false ],
+      "assignmentTracker" : [ 0, 0 ],
+      "classParticipationTracker" : [ false, false, false ]
+    },
+    "tags": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "studentNumber": "A0224917A",
+    "classDetails" : {
+      "classNumber" : "T11",
+      "attendanceTracker" : [ false, false, false ],
+      "assignmentTracker" : [ 0, 0 ],
+      "classParticipationTracker" : [ false, false, false ]
+    }
+  } ]
+}
