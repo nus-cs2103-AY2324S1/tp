@@ -7,8 +7,6 @@ import seedu.address.model.appointment.AppointmentDescription;
 import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Person;
 
-
-
 /**
  * Apartment builder helps to build test appointment objects.
  */

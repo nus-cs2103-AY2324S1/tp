@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
-import java.time.format.DateTimeFormatter;
+import static seedu.address.commons.util.DateUtil.dateTimeToString;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -23,18 +24,19 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d patients listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX = "The appointment index provided is"
-            + "invalid";
 
     /**
      * Messages for appointment class.
      */
+    public static final String MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX = "The appointment index provided is"
+            + "invalid";
+    public static final String MESSAGE_PATIENT_DOES_NOT_EXIST = "Patient provided does not exist";
     public static final String MESSAGE_INVALID_START_AND_END_TIMES =
             "Your start time is either before or on the same time as the end "
-            + "time. Start time should be before end time.";
+            + "time. Start time should be before end time";
     public static final String MESSAGE_DUPLICATE_TIMESLOT =
-            "Please choose another timing for the appointment. There "
-            + "already exists another appointment in this timing that clashes with the requested appointment.";
+            "Please choose another timing for the appointment, there "
+            + "already exists another appointment in this timing that clashes with the requested appointment";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT =
             "This appointment has already been created and we have taken note!";
 
@@ -75,14 +77,13 @@ public class Messages {
      * Formats the {@code appointment} for display to the user.
      */
     public static String format(Appointment appointment) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         final StringBuilder builder = new StringBuilder();
         builder.append("Patient: ")
                 .append(appointment.getPatientName())
                 .append("; Start: ")
-                .append(appointment.getStartTime().format(formatter))
+                .append(dateTimeToString(appointment.getStartTime()))
                 .append("; End: ")
-                .append(appointment.getEndTime().format(formatter))
+                .append(dateTimeToString(appointment.getEndTime()))
                 .append("; Description: ")
                 .append(appointment.getAppointmentDescription());
         return builder.toString();
