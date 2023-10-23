@@ -50,9 +50,15 @@ public class AttendanceTrackerTest {
 
     @Test
     public void markPresent_invalidTutorialIndex_throwsInvalidTutorialIndexException() {
-        AttendanceTracker attendanceTracker = new AttendanceTracker(10);
+        int total = 10;
+        AttendanceTracker attendanceTracker = new AttendanceTracker(total);
+
         int num = 100;
         assertThrows(InvalidTutorialIndexException.class, () -> attendanceTracker.markPresent(Index.fromOneBased(num)));
+
+        // edge case
+        int edg = total + 1;
+        assertThrows(InvalidTutorialIndexException.class, () -> attendanceTracker.markPresent(Index.fromOneBased(edg)));
     }
 
     @Test
