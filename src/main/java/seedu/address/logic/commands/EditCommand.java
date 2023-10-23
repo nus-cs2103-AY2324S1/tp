@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
@@ -26,6 +27,7 @@ import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Salary;
@@ -46,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SALARY + "SALARY] "
+            + "[" + PREFIX_LEAVE + "LEAVE] "
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -104,10 +107,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
         Address updatedAddress = editEmployeeDescriptor.getAddress().orElse(employeeToEdit.getAddress());
         Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
+        Leave updatedLeave = editEmployeeDescriptor.getLeave().orElse(employeeToEdit.getLeave());
         Set<Department> updatedDepartments = editEmployeeDescriptor
                 .getDepartments().orElse(employeeToEdit.getDepartments());
 
-        return new Employee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSalary, updatedDepartments);
+        return new Employee(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedSalary, updatedLeave, updatedDepartments);
     }
 
     @Override
@@ -144,6 +149,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Salary salary;
+        private Leave leave;
         private Set<Department> departments;
 
         public EditEmployeeDescriptor() {}
@@ -158,6 +164,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setSalary(toCopy.salary);
+            setLeave(toCopy.leave);
             setDepartments(toCopy.departments);
         }
 
@@ -165,7 +172,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, salary, departments);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, salary, leave, departments);
         }
 
         public void setName(Name name) {
@@ -208,6 +215,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(salary);
         }
 
+        public void setLeave(Leave leave) {
+            this.leave = leave;
+        }
+
+        public Optional<Leave> getLeave() {
+            return Optional.ofNullable(leave);
+        }
+
         /**
          * Sets {@code departments} to this object's {@code departments}.
          * A defensive copy of {@code departments} is used internally.
@@ -242,6 +257,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditEmployeeDescriptor.email)
                     && Objects.equals(address, otherEditEmployeeDescriptor.address)
                     && Objects.equals(salary, otherEditEmployeeDescriptor.salary)
+                    && Objects.equals(leave, otherEditEmployeeDescriptor.leave)
                     && Objects.equals(departments, otherEditEmployeeDescriptor.departments);
         }
 
@@ -253,6 +269,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("salary", salary)
+                    .add("leave", leave)
                     .add("departments", departments)
                     .toString();
         }
