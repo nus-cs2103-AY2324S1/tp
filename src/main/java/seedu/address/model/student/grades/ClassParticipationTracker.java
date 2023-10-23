@@ -94,6 +94,29 @@ public class ClassParticipationTracker {
         return classParticipationTracker;
     }
 
+    /**
+     * Returns the percentage of class participation.
+     *
+     * @return Percentage of class participation.
+     */
+    public double getPercentage() {
+        // Case when there are no tutorials
+        if (classPartList.length == 0) {
+            return 100;
+        }
+        int score = 0;
+        int totalScore = 0;
+        for (int i = 0; i < classPartList.length; i++) {
+            if (classPartList[i] != null) {
+                totalScore += 1;
+                if (classPartList[i].getParticipated()) {
+                    score += 1;
+                }
+            }
+        }
+        return (double) score / totalScore * 100;
+    }
+
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder("Class Part Tracker:\n");

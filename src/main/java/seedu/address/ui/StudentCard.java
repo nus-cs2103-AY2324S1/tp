@@ -3,6 +3,8 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -42,6 +44,8 @@ public class StudentCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private BarChart<String, Double> barChart;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -58,5 +62,25 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        barChart.getData().add(initBarChart(student));
+    }
+
+    /**
+     * Initializes the class grades data in a barchart.
+     *
+     * @param student Student object to be converted in a barchart.
+     *
+     * @return XYChart.Series representing the data.
+     */
+    public XYChart.Series initBarChart(Student student) {
+        XYChart.Series<String, Double> series = new XYChart.Series();
+        series.setName("Grades");
+        series.getData().add(new XYChart.Data("Assignment",
+                student.getClassDetails().getAssignmentPercentage()));
+        series.getData().add(new XYChart.Data("Attendance",
+                student.getClassDetails().getAttendancePercentage()));
+        series.getData().add(new XYChart.Data("Class Participation",
+                student.getClassDetails().getClassParticipationPercentage()));
+        return series;
     }
 }

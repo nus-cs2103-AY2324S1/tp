@@ -72,6 +72,26 @@ public class AssignmentTracker {
         return assignmentTracker;
     }
 
+    /**
+     * Returns of overall assignment grades.
+     *
+     * @return Percentage of overall assignment grades.
+     */
+    public double getPercentage() {
+        if (assignments.length == 0) {
+            return 100;
+        }
+        int score = 0;
+        int totalScore = 0;
+        for (int i = 0; i < assignments.length; i++) {
+            if (assignments[i] != null) {
+                totalScore += 100;
+                score += assignments[i].getMarks();
+            }
+        }
+        return (double) score / totalScore * 100;
+    }
+
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder("Assignments and marks:\n");
