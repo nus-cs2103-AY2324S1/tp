@@ -108,7 +108,7 @@ public class EmployeeTest {
                 + ", position=" + ALICE.getPosition() + ", id=" + ALICE.getId() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", salary=" + ALICE.getSalary()
                 + ", departments=" + ALICE.getDepartments() + ", isOnLeave=" + ALICE.getIsOnLeave()
-                + ", overtime hours=" + ALICE.getOvertimeHours() + "}";
+                + ", overtimeHours=" + ALICE.getOvertimeHours() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
