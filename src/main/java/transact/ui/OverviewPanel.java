@@ -22,6 +22,9 @@ import javafx.scene.layout.StackPane;
 import se.alipsa.ymp.YearMonthPickerCombo;
 import transact.model.transaction.Transaction;
 
+/**
+ * Overview Panel
+ */
 public class OverviewPanel extends UiPart<Region> {
 
     private static final String FXML = "Overview.fxml";
@@ -45,6 +48,12 @@ public class OverviewPanel extends UiPart<Region> {
 
     private Map<YearMonth, MonthData> monthDataMap = new TreeMap<>();
 
+    /**
+     * Creates a {@code OverviewPanel} with the given
+     * {@code transactionList}.
+     *
+     * @param transactionList
+     */
     public OverviewPanel(ObservableList<Transaction> transactionList) {
         super(FXML);
 

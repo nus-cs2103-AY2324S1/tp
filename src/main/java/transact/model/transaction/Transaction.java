@@ -60,7 +60,7 @@ public class Transaction implements Entry {
      */
     public Transaction(TransactionId transactionId, TransactionType transactionType, Description description,
             Amount amount, Date date) {
-        this(transactionId, transactionType, description, amount, date, Person.NullPerson);
+        this(transactionId, transactionType, description, amount, date, Person.NULL_PERSON);
     }
 
     /**
@@ -111,7 +111,7 @@ public class Transaction implements Entry {
     }
 
     public Boolean hasPersonInfo() {
-        return person != Person.NullPerson;
+        return person != Person.NULL_PERSON;
     }
 
     public Person getPerson() {
