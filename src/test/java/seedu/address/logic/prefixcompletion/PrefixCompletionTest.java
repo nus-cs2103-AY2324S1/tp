@@ -32,4 +32,21 @@ public class PrefixCompletionTest {
         String input = "unknownCommand ";
         assertThrows(PrefixCompletionException.class, () -> prefixCompletion.getNextCompletion(input));
     }
+
+    @Test
+    public void getNextCompletion_emptyInput_throwsException() {
+        String input = "";
+        assertThrows(PrefixCompletionException.class, () -> prefixCompletion.getNextCompletion(input));
+    }
+
+    @Test
+    public void getNextCompletion_somePrefixesPresent_returnsNextCompletion() throws PrefixCompletionException {
+        String input = "add r/1 ";
+        String expectedCompletion = "d/2023-01-01 08:00 to 2023-01-02 12:00";
+
+        String completion = prefixCompletion.getNextCompletion(input);
+
+        assertEquals(expectedCompletion, completion);
+    }
+
 }
