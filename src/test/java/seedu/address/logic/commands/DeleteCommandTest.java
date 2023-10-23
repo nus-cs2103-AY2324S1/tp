@@ -10,6 +10,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -18,7 +21,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.predicate.SerializablePredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -38,6 +43,23 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_allWithNoTag_success() {
+        Tag placeholder = new Tag("PLACEHOLDER");
+        ContainsTagPredicate pred = new ContainsTagPredicate(placeholder);
+        DeleteCommand deleteCommand = new DeleteCommand(placeholder, pred);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_NO_TAG_SUCCESS);
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        List<Person> personsToDelete = new ArrayList<>(expectedModel.getFilteredPersonList());
+
+        for (Person p : personsToDelete) {
+            expectedModel.deletePerson(p);
+        }
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
