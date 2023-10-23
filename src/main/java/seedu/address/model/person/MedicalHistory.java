@@ -39,7 +39,7 @@ public class MedicalHistory {
 
     @Override
     public String toString() {
-        return value;
+        return '[' + value + ']';
     }
 
     @Override

@@ -50,7 +50,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
+                PREFIX_ADDRESS, PREFIX_APPOINTMENT);
 
         Name name = null;
         Nric nric = null;
@@ -74,7 +74,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG))
+                .ifPresent(editPersonDescriptor::setTags);
+
         parseMedicalHistoriesForEdit(argMultimap.getAllValues(PREFIX_MEDICAL))
                 .ifPresent(editPersonDescriptor::setMedicalHistories);
 
@@ -123,5 +125,4 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ? Collections.emptySet() : medicalHistories;
         return Optional.of(ParserUtil.parseMedicals(medicalHistorySet));
     }
-
 }
