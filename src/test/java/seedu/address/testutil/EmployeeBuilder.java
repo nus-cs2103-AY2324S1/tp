@@ -24,6 +24,7 @@ public class EmployeeBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_SALARY = "12000";
+    public static final boolean DEFAULT_IS_ON_LEAVE = false;
 
     private Name name;
     private Position position;
@@ -32,6 +33,7 @@ public class EmployeeBuilder {
     private Email email;
     private Salary salary;
     private Set<Department> departments;
+    private boolean isOnLeave;
 
     /**
      * Creates a {@code EmployeeBuilder} with the default details.
@@ -44,6 +46,7 @@ public class EmployeeBuilder {
         email = new Email(DEFAULT_EMAIL);
         salary = new Salary(DEFAULT_SALARY);
         departments = new HashSet<>();
+        isOnLeave = DEFAULT_IS_ON_LEAVE;
     }
 
     /**
@@ -109,15 +112,21 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Sets the {@code Salary} of the {@code employee} that we are building.
+     * Sets the {@code Salary} of the {@code Employee} that we are building.
      */
     public EmployeeBuilder withSalary(String salary) {
         this.salary = new Salary(salary);
         return this;
     }
-
-    public Employee build() {
-        return new Employee(name, position, id, phone, email, salary, departments);
+    /**
+     * Sets the {@code isOnLeave} of the {@code Employee} that we are building.
+     */
+    public EmployeeBuilder withIsOnLeave(boolean isOnLeave) {
+        this.isOnLeave = isOnLeave;
+        return this;
     }
 
+    public Employee build() {
+        return new Employee(name, position, id, phone, email, salary, departments, isOnLeave);
+    }
 }

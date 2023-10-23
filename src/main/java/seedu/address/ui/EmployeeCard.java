@@ -44,6 +44,8 @@ public class EmployeeCard extends UiPart<Region> {
     private Label salary;
     @FXML
     private FlowPane departments;
+    @FXML
+    private Label isOnLeave;
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code EmployeeCode} and index to display.

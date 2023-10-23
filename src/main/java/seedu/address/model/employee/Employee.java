@@ -26,6 +26,7 @@ public class Employee {
     // Data fields
     private final Salary salary;
     private final Set<Department> departments = new HashSet<>();
+    private final boolean isOnLeave;
 
     /**
      * Every field must be present and not null.
@@ -40,6 +41,23 @@ public class Employee {
         this.email = email;
         this.salary = salary;
         this.departments.addAll(departments);
+        this.isOnLeave = false; // default value
+    }
+
+    /**
+     * Overloaded constructor for Employee class to set isOnLeave field.
+     */
+    public Employee(Name name, Position position, Id id, Phone phone, Email email, Salary salary,
+                    Set<Department> departments, boolean isOnLeave) {
+        requireAllNonNull(name, position, id, phone, email, salary, departments, isOnLeave);
+        this.name = name;
+        this.position = position;
+        this.id = id;
+        this.phone = phone;
+        this.email = email;
+        this.salary = salary;
+        this.departments.addAll(departments);
+        this.isOnLeave = isOnLeave;
     }
 
     public Name getName() {
@@ -66,6 +84,9 @@ public class Employee {
         return salary;
     }
 
+    public boolean getIsOnLeave() {
+        return isOnLeave;
+    }
 
     /**
      * Returns an immutable department set, which throws {@code UnsupportedOperationException}
@@ -110,13 +131,14 @@ public class Employee {
                 && phone.equals(otherEmployee.phone)
                 && email.equals(otherEmployee.email)
                 && salary.equals(otherEmployee.salary)
-                && departments.equals(otherEmployee.departments);
+                && departments.equals(otherEmployee.departments)
+                && isOnLeave == otherEmployee.isOnLeave;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, position, id, phone, email, salary, departments);
+        return Objects.hash(name, position, id, phone, email, salary, departments, isOnLeave);
     }
 
     @Override
@@ -129,6 +151,7 @@ public class Employee {
                 .add("email", email)
                 .add("salary", salary)
                 .add("departments", departments)
+                .add("isOnLeave", isOnLeave)
                 .toString();
     }
 

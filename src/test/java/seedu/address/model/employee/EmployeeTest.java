@@ -90,6 +90,10 @@ public class EmployeeTest {
         // different salary -> returns false
         editedAlice = new EmployeeBuilder(ALICE).withSalary(VALID_SALARY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different isOnLeave -> returns false
+        editedAlice = new EmployeeBuilder(ALICE).withIsOnLeave(true).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -97,7 +101,7 @@ public class EmployeeTest {
         String expected = Employee.class.getCanonicalName() + "{name=" + ALICE.getName()
                 + ", position=" + ALICE.getPosition() + ", id=" + ALICE.getId() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", salary=" + ALICE.getSalary()
-                + ", departments=" + ALICE.getDepartments() + "}";
+                + ", departments=" + ALICE.getDepartments() + ", isOnLeave=" + ALICE.getIsOnLeave() + "}" ;
         assertEquals(expected, ALICE.toString());
     }
 }
