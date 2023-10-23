@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.util.DateUtil.dateTimeToString;
+import static seedu.address.logic.Messages.MESSAGE_PATIENT_DOES_NOT_EXIST;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -23,6 +24,7 @@ public class JsonAdaptedAppointmentTest {
             .withPerson(ALICE).withPerson(BENSON).build();
 
     private static final String INVALID_PATIENT = "R@chel";
+    private static final String NON_EXISTENT_PATIENT = "Gabriel";
     private static final String INVALID_START = "2023-10-10 10:00";
     private static final String INVALID_END = "2023-10-10 11:00";
     private static final String INVALID_DESCRIPTION = "!@#!";
@@ -40,10 +42,15 @@ public class JsonAdaptedAppointmentTest {
 
     @Test
     public void toModelType_invalidPatient_throwsIllegalValueException() {
-        JsonAdaptedAppointment appointment =
+        JsonAdaptedAppointment appointment1 =
                 new JsonAdaptedAppointment(INVALID_PATIENT, VALID_START, VALID_END, VALID_DESCRIPTION);
-        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, () -> appointment.toModelType(ADDRESS_BOOK));
+        String expectedMessage1 = Name.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage1, () -> appointment1.toModelType(ADDRESS_BOOK));
+
+        JsonAdaptedAppointment appointment2 =
+                new JsonAdaptedAppointment(NON_EXISTENT_PATIENT, VALID_START, VALID_END, VALID_DESCRIPTION);
+        assertThrows(IllegalValueException.class,
+                MESSAGE_PATIENT_DOES_NOT_EXIST, () -> appointment2.toModelType(ADDRESS_BOOK));
     }
 
     @Test

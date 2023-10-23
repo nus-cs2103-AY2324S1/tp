@@ -62,7 +62,7 @@ public class ScheduleCommand extends Command {
         List<Appointment> lastShownList = model.getFilteredAppointmentList();
 
         if (!model.hasPerson(patientName)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_PATIENT_DOES_NOT_EXIST);
         }
 
         Person personToAdd = latestPersonList

@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 import static seedu.address.commons.util.DateUtil.dateTimeToString;
+import static seedu.address.logic.Messages.MESSAGE_PATIENT_DOES_NOT_EXIST;
 
 /**
  * Jackson-friendly version of {@link Appointment}.
@@ -67,7 +68,7 @@ class JsonAdaptedAppointment {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         if (!addressBook.hasPerson(new Name(patientName))) {
-            throw new IllegalValueException("Patient does not exist");
+            throw new IllegalValueException(MESSAGE_PATIENT_DOES_NOT_EXIST);
         }
         final Person patient = addressBook
                 .getPersonList().stream().filter(person -> person.getName().fullName.equals(patientName))
