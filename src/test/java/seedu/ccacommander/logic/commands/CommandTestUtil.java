@@ -52,6 +52,8 @@ public class CommandTestUtil {
     public static final String VALID_DATE_BOXING = "2023-12-26";
     public static final String VALID_LOCATION_AURORA = "Greenland";
     public static final String VALID_LOCATION_BOXING = "Ridge View Residential College";
+    public static final String VALID_TAGS_AURORA = "nature";
+    public static final String VALID_TAGS_BOXING = "rvrc";
 
     public static final String VALID_HOURS_CLIMBING = "7";
     public static final String VALID_HOURS_TREKKING = "10";
