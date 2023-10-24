@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.schedule.Date;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.StartTime;
 
@@ -34,11 +36,15 @@ public class ParserUtilTest {
     private static final String INVALID_TIME_STRING_1 = "2023-12-12T44:44";
     private static final String INVALID_TIME_STRING_2 = "2023-12-12 10:00";
     private static final String INVALID_TIME_STRING_3 = "2023-15-12T10:00";
+    private static final String INVALID_DATE_STRING_1 = "20231512";
+    private static final String INVALID_DATE_STRING_2 = "2023/12/12";
 
     private static final String VALID_TUTOR_INDEX_STRING = "1";
     private static final Integer VALID_TUTOR_INDEX_VALUE = 1;
     private static final String VALID_TIME_STRING = "2023-09-15T11:00:00";
     private static final LocalDateTime VALID_TIME_VALUE = LocalDateTime.of(2023, 9, 15, 11, 0, 0);
+    private static final String VALID_DATE_STRING = "2023-09-15";
+    private static final LocalDate VALID_DATE_VALUE = LocalDate.of(2023, 9, 15);
 
     /* Others */
     private static final String WHITESPACE = " \t\r\n";
@@ -186,5 +192,29 @@ public class ParserUtilTest {
         String endTimeWithWhitespace = WHITESPACE + VALID_TIME_STRING + WHITESPACE;
         EndTime expectedEndTime = new EndTime(VALID_TIME_VALUE);
         assertEquals(expectedEndTime, ParserUtil.parseEndTime(endTimeWithWhitespace));
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_STRING_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_STRING_2));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsEndTime() throws Exception {
+        Date expectedDate = new Date(VALID_DATE_VALUE);
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE_STRING));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE_STRING + WHITESPACE;
+        Date expectedDate = new Date(VALID_DATE_VALUE);
+        assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
     }
 }
