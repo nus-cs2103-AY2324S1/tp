@@ -56,16 +56,22 @@ public class ListCommandParser implements Parser<ListCommand> {
             tn = ParserUtil.parseIndex(tnValue);
         }
 
+        System.out.println(commandWord);
+
         switch (commandWord) {
-        case ListStudentsCommand.COMMAND_WORD:
-            return new ListStudentsCommand();
         case ListAttendanceCommand.COMMAND_WORD:
+            System.out.println(commandWord);
             if (!argMultimap.getValue(PREFIX_TUTORIALNUMBER).isPresent()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListAttendanceCommand.MESSAGE_USAGE));
             }
             return new ListAttendanceCommand(tag, tn, new ContainsTagPredicate(tag),
                     new AbsentFromTutorialPredicate(tn, tag));
+        case ListStudentsCommand.COMMAND_WORD:
+            if (arguments.isEmpty()) {
+                return new ListStudentsCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListStudentsCommand.MESSAGE_USAGE));
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }

@@ -11,7 +11,7 @@ public class ListStudentsCommand extends ListCommand {
 
     public static final String COMMAND_WORD = "students";
     public static final String MESSAGE_USAGE = "list " + COMMAND_WORD
-            + ": Lists students.\n"
+            + ": Lists all students.\n"
             + "Example: list " + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Listed all students!";
 

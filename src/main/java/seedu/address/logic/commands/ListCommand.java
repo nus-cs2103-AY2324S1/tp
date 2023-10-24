@@ -12,10 +12,10 @@ public abstract class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists either students or attendance.\n"
             + "Parameters: "
-            + "LIST_TYPE (must be either 'students' or 'attendance') "
+            + "LIST_TYPE (must be either 'students' or 'attendance')\n"
+            + "(applicable for list attendance only): "
             + PREFIX_TUTORIALNUMBER + "TUTORIAL_NUMBER (must be a positive integer) "
-            + "[" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID] "
-            + "(applicable for list attendance only)\n"
+            + "[" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
             + "Example: "
             + COMMAND_WORD + " students, "
             + COMMAND_WORD + " attendance tn/1 tg/G01";

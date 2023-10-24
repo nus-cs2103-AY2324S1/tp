@@ -27,7 +27,8 @@ public class DeleteCommand extends Command {
             + " all students identified by the tutorial group ID entered or all students.\n"
             + "Parameters: INDEX (must be a positive integer) || "
             + "all [" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
-            + "Examples: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " all " + PREFIX_TUTORIALGROUP + "G01";
+            + "Examples: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " all, "
+            + COMMAND_WORD + " all " + PREFIX_TUTORIALGROUP + "G01";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_TAGGED_SUCCESS = "Deleted all contacts from Tutorial Group %1$s";
