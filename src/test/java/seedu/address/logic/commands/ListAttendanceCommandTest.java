@@ -7,8 +7,6 @@ import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_SUCCESS
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

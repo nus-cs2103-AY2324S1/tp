@@ -6,8 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MarkAttendanceCommand;
@@ -28,7 +26,7 @@ public class MarkAttendanceCommandParserTest {
      */
     @Test
     public void parse_validArgsWithName_returnsMarkAttendanceCommand() {
-        String userInput = " /name " + VALID_NAME_AMY + " /attendance 1";
+        String userInput = " /name " + VALID_NAME_AMY + " /attendance 1 /week 1";
         MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_NAME_AMY, true, new Week(1));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -63,14 +61,18 @@ public class MarkAttendanceCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // Invalid attendance value
-        assertParseFailure(parser, " /name " + VALID_NAME_AMY + " /attendance 2",
+        assertParseFailure(parser, " /name " + VALID_NAME_AMY + " /attendance 2 /week 1",
                 String.format(Attendance.MESSAGE_CONSTRAINTS));
 
         // Missing name prefix
-        assertParseFailure(parser, VALID_NAME_AMY + " /attendance 1",
+        assertParseFailure(parser, VALID_NAME_AMY + " /attendance 1 /week 1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
 
         // Missing attendance prefix
+        assertParseFailure(parser, " /name " + VALID_NAME_AMY + " 1 /week 1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
+
+        // Missing week prefix
         assertParseFailure(parser, " /name " + VALID_NAME_AMY + " 1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
     }

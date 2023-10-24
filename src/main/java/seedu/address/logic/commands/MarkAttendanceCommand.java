@@ -33,7 +33,7 @@ public class MarkAttendanceCommand extends Command {
     private final String reason;
 
     /**
-     * Constructs a MarkAttendanceCommand to mark the specified student's attendance.
+     * Constructs a MarkAttendanceCommand to mark the specified student's attendance as present.
      *
      * @param identifier The student's name or ID.
      * @param isPresent The attendance status.
@@ -46,6 +46,14 @@ public class MarkAttendanceCommand extends Command {
         this.reason = null;
     }
 
+    /**
+     * Constructs a MarkAttendanceCommand to mark the specified student's attendance as absent.
+     *
+     * @param identifier The student's name or ID.
+     * @param isPresent The attendance status.
+     * @param week The week of the attendance.
+     * @param reason The reason why the student is absent.
+     */
     public MarkAttendanceCommand(String identifier, boolean isPresent, Week week, String reason) {
         this.identifier = identifier;
         this.isPresent = isPresent;

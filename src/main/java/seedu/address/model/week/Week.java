@@ -1,7 +1,5 @@
 package seedu.address.model.week;
 
-import seedu.address.model.tag.Tag;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**

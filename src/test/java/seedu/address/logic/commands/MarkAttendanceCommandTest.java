@@ -5,10 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PERSON_NOT_FOUND;
+import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PRESENT;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +40,8 @@ public class MarkAttendanceCommandTest {
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("Amy Bee", true,
                 new Week(1));
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s", amy.getName());
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1",
+                amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(new Week(1), true)).build();
         expectedModel.addPerson(expectedAmy);
@@ -58,7 +58,8 @@ public class MarkAttendanceCommandTest {
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("A1234567E", true,
                 new Week(1));
-        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s", amy.getName());
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1",
+                amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(new Week(1), true)).build();
         expectedModel.addPerson(expectedAmy);
