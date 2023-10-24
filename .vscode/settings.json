@@ -9,5 +9,18 @@
   "java.format.settings.url": "eclipse-formatter.xml",
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
+  },
+  "emeraldwalk.runonsave": {
+    "autoClearConsole": true,
+    "commands": [
+      {
+        "match": ".css$",
+        "cmd": " gradlew --stop"
+      },
+      {
+        "match": ".css$",
+        "cmd": "gradlew run"
+      }
+    ]
   }
 }

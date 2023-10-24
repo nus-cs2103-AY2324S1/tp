@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
@@ -20,10 +19,10 @@
     <Image url="@/images/address_book_32.png" />
   </icons>
   <scene>
-    <Scene>
+    <Scene stylesheets="@Main.css">
          <BorderPane prefHeight="700.0" prefWidth="800.0">
             <top>
-           <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+           <MenuBar fx:id="menuBar" stylesheets="@DarkTheme.css" BorderPane.alignment="CENTER">
              <Menu mnemonicParsing="false" text="File">
                <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
              </Menu>
@@ -33,45 +32,39 @@
            </MenuBar>
             </top>
             <center>
-               <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" stylesheets="@TabPane.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-                 <tabs>
-                   <Tab text="Overview">
-                     <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;" />
-                     </content>
-                   </Tab>
-                   <Tab fx:id="transactionTab" text="Transactions">
-                     <content>
-                       <AnchorPane fx:id="transactionTablePanelPlaceholder" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;">
-                              <padding>
-                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                              </padding></AnchorPane>
-                     </content>
-                   </Tab>
-                     <Tab fx:id="cardListTab" text="Addressbook">
-                       <content>
-                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;" />
-                       </content>
-                     </Tab>
-                 </tabs>
+               <SplitPane dividerPositions="0.8" orientation="VERTICAL" BorderPane.alignment="CENTER">
                   <BorderPane.margin>
                      <Insets bottom="5.0" left="4.0" right="5.0" top="5.0" />
                   </BorderPane.margin>
-               </TabPane>
+                  <items>
+                     <TabPane fx:id="tabPane" minHeight="500.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@TabPane.css" tabClosingPolicy="UNAVAILABLE">
+                       <tabs>
+                         <Tab fx:id="overviewTab" text="Overview">
+                           <content>
+                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;" />
+                           </content>
+                         </Tab>
+                         <Tab fx:id="transactionTab" text="Transactions">
+                           <content>
+                             <AnchorPane fx:id="transactionTablePanelPlaceholder" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;">
+                                    <padding>
+                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                 </AnchorPane>
+                           </content>
+                         </Tab>
+                           <Tab fx:id="cardListTab" text="Staff List">
+                             <content>
+                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #3c3c3c;" stylesheets="@DarkTheme.css" />
+                             </content>
+                           </Tab>
+                       </tabs>
+                     </TabPane>
+                     <VBox fx:id="bottomBar" prefHeight="219.0" prefWidth="789.0" stylesheets="@DarkTheme.css" />
+                  </items>
+               </SplitPane>
             </center>
-            <bottom>
-               <VBox prefHeight="181.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-                  <children>
-                     <StackPane fx:id="commandBoxPlaceholder" prefHeight="150.0" prefWidth="200.0" />
-                     <StackPane fx:id="resultDisplayPlaceholder" prefHeight="201.0" prefWidth="800.0" />
-                  </children>
-               </VBox>
-            </bottom>
          </BorderPane>
-         <stylesheets>
-            <URL value="@Extensions.css" />
-            <URL value="@DarkTheme.css" />
-         </stylesheets>
     </Scene>
   </scene>
 </fx:root>
