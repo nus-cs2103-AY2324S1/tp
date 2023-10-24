@@ -8,6 +8,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.model.predicate.ContainsTagPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -23,10 +25,18 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+
+        Tag placeholder = new Tag("PLACEHOLDER");
+        assertParseSuccess(parser, "all", new DeleteCommand(placeholder, new ContainsTagPredicate(placeholder)));
+
+        Tag tag = new Tag("G10");
+        assertParseSuccess(parser, "all tg/G10", new DeleteCommand(tag, new ContainsTagPredicate(tag)));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "all 123", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
     }
 }

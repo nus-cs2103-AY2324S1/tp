@@ -19,8 +19,8 @@ public class ContainsTagPredicate extends SerializablePredicate {
      * @param tag Tag to check for in a person.
      */
     public ContainsTagPredicate(Tag tag) {
-        super(person -> person.getTags().stream().anyMatch(personTag ->
-                StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.getTagName())));
+        super(person -> person.getTags().stream().anyMatch(
+                personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.getTagName())));
         this.tag = tag;
     }
 

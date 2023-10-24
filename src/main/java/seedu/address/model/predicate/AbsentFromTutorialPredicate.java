@@ -34,8 +34,8 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
             }
 
             // Implicit else
-            return person.getTags().stream()
-                    .anyMatch(personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.getTagName()))
+            return person.getTags().stream().anyMatch(
+                    personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.getTagName()))
                     && !person.getAttendanceRecords().get(index.getZeroBased()).isPresent();
         });
         this.index = index;
