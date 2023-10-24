@@ -98,7 +98,7 @@ public class UserHistoryManager {
      * @return true if there is a state to undo, false otherwise.
      */
     public boolean canUndo() {
-        return !undoHistory.isEmpty();
+        return undoHistory.size() > 1;
     }
 
     /**
