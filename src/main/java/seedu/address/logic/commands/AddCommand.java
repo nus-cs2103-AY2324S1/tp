@@ -63,7 +63,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (model.hasPolicyNumber(toAdd)) {
+        if (model.hasSamePolicyNumber(toAdd)) {
             throw new CommandException(MESSAGE_USED_POLICY_NUMBER);
         }
 

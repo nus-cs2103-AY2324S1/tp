@@ -139,7 +139,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPolicyNumber(Person person) {
+        public boolean hasSamePolicyNumber(Person person) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -200,7 +200,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPolicyNumber(Person person) {
+        public boolean hasSamePolicyNumber(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::comparePolicyNumber);
         }

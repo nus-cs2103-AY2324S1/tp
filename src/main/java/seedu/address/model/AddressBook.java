@@ -70,7 +70,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with the same policy number as {@code person} in the address book.
      */
-    public boolean hasPolicyNumber(Person person) {
+    public boolean hasSamePolicyNumber(Person person) {
         requireNonNull(person);
         return persons.hasSamePolicyNumber(person);
     }

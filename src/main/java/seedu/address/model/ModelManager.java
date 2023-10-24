@@ -107,9 +107,9 @@ public class ModelManager implements Model {
     /**
      * Returns true if a person with the same policy number as {@code person} in the address book.
      */
-    public boolean hasPolicyNumber(Person person) {
+    public boolean hasSamePolicyNumber(Person person) {
         requireNonNull(person);
-        return addressBook.hasPolicyNumber(person);
+        return addressBook.hasSamePolicyNumber(person);
     }
 
     @Override

@@ -60,7 +60,7 @@ public interface Model {
     /**
      * Returns true if a person with the same policy number as {@code person} in the address book.
      */
-    boolean hasPolicyNumber(Person person);
+    boolean hasSamePolicyNumber(Person person);
 
     /**
      * Deletes the given person.

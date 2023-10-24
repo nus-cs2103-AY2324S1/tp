@@ -98,27 +98,11 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        System.out.println("personToEdit");
-        System.out.println(personToEdit);
-        System.out.println("editedPerson");
-        System.out.println(editedPerson);
-
-        System.out.println("isSamePerson");
-        System.out.println(personToEdit.isSamePerson(editedPerson));
-        System.out.println("hasPerson");
-        System.out.println(model.hasPerson(editedPerson));
-        System.out.println("Compare Policy Number");
-        System.out.println(editedPerson.comparePolicyNumber(personToEdit));
-        System.out.println("Has Policy Number");
-        System.out.println(model.hasPolicyNumber(editedPerson));
-
-
-
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (!editedPerson.comparePolicyNumber(personToEdit) && model.hasPolicyNumber(editedPerson)) {
+        if (!editedPerson.comparePolicyNumber(personToEdit) && model.hasSamePolicyNumber(editedPerson)) {
             throw new CommandException(MESSAGE_USED_POLICY_NUMBER);
         }
 
