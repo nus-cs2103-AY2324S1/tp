@@ -238,6 +238,56 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] Multiple time formats
+
+#### Proposed Implementation
+This feature is implemented though the `TimeParser` class. This class contains several public static methods related to manipulating time:
+- `TimeParser#parseDate(String date)`  —  Takes in a time String as input, and returns a LocalDateTime which contains the information of the String
+  - Accepted time formats examples:
+    - Day and time:
+      - Format: `<day\> <time\>`
+      - Examples:
+        - `Tuesday 1630`
+        - `Tuesday 4.30PM`
+        - `Tuesday 4pm`
+        - `Tue`
+        - `Tues`
+        - `Tuesd 4pm`
+    - Year, month, day, time of day:
+      - Format: `<year, month, day\> <time\>`
+      - Examples:
+        - `21/12/2024 5pm`
+        - `21-12-2024 5pm`
+        - `21-12-2024 1730`
+        - `21-12-2024 1730pm` 
+        - `nov 12 1.30pm 2023`(WIP: AM/PM not parsing properly)
+        - `2023-12-12 1647`
+- `TimeParser#listInterviewClashes(String potentialInterview, UniqueInterviewList interviews)`  — Takes in an interview time in the String format, and checks the given list of interviews that the user has, and lists all clashing interviews.
+- `TimeParser#findFreeTime(String day)`  —  Takes in a given day, and if valid, lists out all the free time in that day (i.e. not filled with any interview)
+- `TimeParser#findFreeTimeWithinRange(String day, String from, String to)`  —  Takes in a given day, and if valid, lists out all the free time in that day (i.e. not filled with any interview), within the specified window, only if all time Strings are properly formatted
+- `TimeParser#sortInterviewsByTimeAscending(UniqueInterviewList interviews)`  —  Takes in a list of interviews, and sorts them in ascending chronological order
+- `TimeParser#listTodayInterviews(String day, UniqueInterviewList interviews)`  —  Takes in a given day, and if valid, lists out all the interviews that fall within that day
+
+#### Design considerations:
+
+**Aspect: How `TimeParser#parseDate(String date)` works:**
+
+* **Alternative 1 (current choice):** Have a hardcoded list of time formats that our team deems to be acceptable.
+    * Pros: 
+      * Easy to implement.
+    * Cons: 
+      * May have performance issues in terms of time (i.e. might have to loop through the whole list to find a suitable format)
+      * Huge number of time formats available, hence there is a need to update the list of acceptable time formats in future iterations
+      * Many errors possible due to the many time fields that the user could format wrongly, which makes implementation difficult
+
+
+_{more aspects and alternatives to be added}_
+
+todo:
+- sequence diagram
+- how it works
+- what time formats it accepts
+
 
 --------------------------------------------------------------------------------------------------------------------
 
