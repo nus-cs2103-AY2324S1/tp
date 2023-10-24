@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.booking.exceptions.BookingNotFoundException;
 import seedu.address.model.booking.exceptions.DuplicateBookingException;
-import seedu.address.model.booking.exceptions.PersonNotFoundException;
 import seedu.address.testutil.BookingBuilder;
 
 public class UniqueBookingListTest {
@@ -71,7 +71,7 @@ public class UniqueBookingListTest {
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueBookingList.setBooking(ALICE, ALICE));
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.setBooking(ALICE, ALICE));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class UniqueBookingListTest {
 
     @Test
     public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueBookingList.remove(ALICE));
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.remove(ALICE));
     }
 
     @Test
@@ -167,7 +167,7 @@ public class UniqueBookingListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniqueBookingList.asUnmodifiableObservableList().remove(0));
+                -> uniqueBookingList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
