@@ -107,7 +107,7 @@ public class AddMemberCommand extends Command {
         AddMemberCommand otherAddMemberCommand = (AddMemberCommand) other;
         return memberIndex.equals(otherAddMemberCommand.memberIndex)
                 && eventIndex.equals(otherAddMemberCommand.eventIndex)
-                && hours == otherAddMemberCommand.hours
+                && hours.equals(otherAddMemberCommand.hours)
                 && remark.equals(otherAddMemberCommand.remark);
     }
 
