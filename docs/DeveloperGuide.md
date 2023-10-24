@@ -169,7 +169,7 @@ This could be a birthday, an upcoming meeting or a deadline.
 On startup, `EventFactory#createEvents(model)` is used to generate the `Event` instances from the initial state of the model.
 Any future events can be added to the data model as well during runtime.
 
-Three public methods for `Event` are important for it's usage
+Three public methods for `Event` are important for its usage
 * `Event#addMember(Person)` — Adds a `Person` as associated with this event.
 * `Event#addReminder(Duration)` — Sets a reminder for the event one `Duration` before the time of the actual event. If `Duration` is set to a day, the reminder will be a day in advance.
 * `Event#getNotificationAtTime(LocalDateTime)` — Check if any notifications should be generated based on a specific time, usually the current time should be passed as the parameter.
