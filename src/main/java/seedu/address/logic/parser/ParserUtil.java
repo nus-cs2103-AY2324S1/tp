@@ -13,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
@@ -170,4 +171,47 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String balance} into a {@code Balance}.
+     * Handles the conversion of a dollar amount into cents.
+     */
+    public static Balance parseBalance(String balance) throws ParseException {
+        requireNonNull(balance);
+        String trimmedBalance = balance.trim();
+
+
+        if (!Balance.isValidDollarString(trimmedBalance)) {
+            throw new ParseException(Balance.MESSAGE_CONSTRAINTS);
+        }
+
+        // Remove the dollar sign if it exists
+        String dollarAmount = trimmedBalance.replace("$", "");
+
+        // Split the string at the decimal point
+        String[] parts = dollarAmount.split("\\.");
+
+        // Check that the dollar amount does not clearly exceed 5 digits.
+        // This prevents integer overflow when converting to cents and when
+        // performing validation in subsequent pay / owe operations.
+        if (parts[0].length() > 5) {
+            throw new ParseException(Balance.MESSAGE_BALANCE_LIMIT_EXCEEDED);
+        }
+
+        // Convert the dollar part to cents
+        int cents = Integer.parseInt(parts[0]) * 100;
+
+        // Add the cents part if it exists
+        if (parts.length > 1) {
+            if (parts[1].length() == 1) {
+                // If there's only one decimal place, multiply by 10 to get correct cents
+                cents += Integer.parseInt(parts[1]) * 10;
+            } else {
+                cents += Integer.parseInt(parts[1]);
+            }
+        }
+
+        return new Balance(cents);
+    }
+
 }

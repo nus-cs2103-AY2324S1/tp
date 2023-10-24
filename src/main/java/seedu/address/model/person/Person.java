@@ -181,6 +181,15 @@ public class Person {
     }
 
     /**
+     * Sets new balance for the person by adding
+     * given amount.
+     * @param amount
+     */
+    public void pay(Balance amount) {
+        balance = balance.add(amount);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
