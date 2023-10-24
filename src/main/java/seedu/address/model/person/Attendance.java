@@ -73,6 +73,14 @@ public class Attendance {
         this.isPresent = isPresent;
     }
 
+    /**
+     * Sets the reason for person's absence.
+     * @param reason String of reason why student is late.
+     */
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {

@@ -89,7 +89,8 @@ Examples:
 
 ### Marking attendance of student: `mark`
 
-Format: `mark /name STUDENTNAME[, STUDENTNAME] | /id STUDENTID[, STUDENTID] /attendance ATTENDANCE`
+Format: `mark /name STUDENTNAME[, STUDENTNAME] | /id STUDENTID[, STUDENTID] /attendance ATTENDANCE /week WEEKNUMBER 
+[/reason REASON_OF_ABSENCE] `
 * Marks the attendance of one or more student corresponding to the student name or student ID.
 * To mark attendance for multiple students, provide a comma-separated list of student names or student IDs.
 * `STUDENTNAME` should be a string made up of alphabetical characters, with no numbers or special characters.

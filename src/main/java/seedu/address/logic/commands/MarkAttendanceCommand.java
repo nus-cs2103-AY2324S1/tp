@@ -89,8 +89,15 @@ public class MarkAttendanceCommand extends Command {
                 // Modify the existing attendance record
                 attendance = existingAttendance.get();
                 attendance.setAttendance(isPresent);
-                successMessage.append(String.format(MESSAGE_UPDATED_SUCCESS + "%s\n", targetPerson.getName()));
-
+                if (isPresent) {
+                    successMessage.append(String.format(MESSAGE_UPDATED_SUCCESS + "%s\n%s" + MESSAGE_PRESENT + "%d\n",
+                            targetPerson.getName(), targetPerson.getName(), week.getWeekNumber()));
+                } else {
+                    attendance.setReason(this.reason);
+                    successMessage.append(String.format(MESSAGE_UPDATED_SUCCESS + "%s\n%s" + MESSAGE_ABSENT + "%d\n"
+                            + "Reason: %s\n", targetPerson.getName(), targetPerson.getName(), week.getWeekNumber(),
+                            reason));
+                }
             } else {
                 // Add a new attendance record for the current week
                 if (isPresent) {
@@ -102,11 +109,11 @@ public class MarkAttendanceCommand extends Command {
                 targetPerson.addAttendance(attendance);
 
                 if (attendance.isPresent()) {
-                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "%d",
+                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n%s" + MESSAGE_PRESENT + "%d\n",
                             targetPerson.getName(), targetPerson.getName(), attendance.getWeek().getWeekNumber()));
                 } else {
-                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT
-                                    + "%d\nReason: %s",
+                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n%s" + MESSAGE_ABSENT
+                                    + "%d\nReason: %s\n",
                             targetPerson.getName(), targetPerson.getName(), attendance.getWeek().getWeekNumber(),
                             attendance.getReason()));
                 }
