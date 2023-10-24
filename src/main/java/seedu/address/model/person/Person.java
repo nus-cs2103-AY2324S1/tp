@@ -95,7 +95,9 @@ public class Person {
         int totalTutorials = attendanceRecords.size();
 
         for (int i = 0; i < totalTutorials; i++) {
-            if (attendanceRecords.get(i).isPresent()) tutorialsAttended++;
+            if (attendanceRecords.get(i).isPresent()) {
+                tutorialsAttended++;
+            }
         }
 
         if (totalTutorials == 0) {
