@@ -387,7 +387,7 @@ Once step 2 is complete, the GUI will update and refresh the applicant list with
 specified fields.
 The following diagram summarises what happens when a user executes a Filter command:
 
-<puml src="docs/diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommandActivityDiagram" />
+<puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommandActivityDiagram" />
 
 ### Design considerations
 
