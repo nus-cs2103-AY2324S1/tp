@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.staffsnap.commons.util.StringUtil;
+import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.model.interview.Interview;
 
 
@@ -74,13 +75,12 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
 
     @Override
     public String toString() {
-        return "CustomFilterPredicate{"
-                + "name=" + name
-                + ", phone=" + phone
-                + ", email=" + email
-                + ", position=" + position
-                + ", interviews=" + interviews
-                + '}';
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("position", position)
+                .add("interviews", interviews).toString();
     }
 
     @Override

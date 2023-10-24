@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters filter command syntax;
+:ApplicantBookParser parses command_word;
+:FilterCommandParser parses arguments;
+if (At least 1 argument is provided) then (true)
+  :Parse provided fields;
+  if (Provided fields are valid) then (true)
+      :Create new CustomFilterPredicate
+      from specified fields;
+      :Create new FilterCommand
+      from CustomFilterPredicate;
+      :Execute FilterCommand;
+      :Update predicate used in
+      ModelManager with
+      CustomFilterPredicate;
+      :Display success message;
+      :Show updated list in GUI;
+      stop
+  else (false)
+
+  endif
+else (false)
+
+endif
+:Throw ParseException with
+    invalid command format
+    message and proper Filter
+    syntax;
+    :Display error message;
+    stop
+
+@enduml
