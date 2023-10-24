@@ -70,7 +70,8 @@ public class LogicManagerTest {
     public void execute_addTeamCommand_teamAdded() throws Exception {
         Model expectedModel = new ModelManager();
         expectedModel.addTeam(SAMPLE_TEAM);
-        assertCommandSuccess(ADD_TEAM_COMMAND, String.format(AddTeamCommand.MESSAGE_SUCCESS, SAMPLE_TEAM), expectedModel);
+        assertCommandSuccess(ADD_TEAM_COMMAND, String.format(
+                AddTeamCommand.MESSAGE_SUCCESS, SAMPLE_TEAM), expectedModel);
     }
     @Test
     public void execute_storageThrowsIoExceptionWhileSavingTeamBook_throwsCommandException() {
@@ -87,7 +88,8 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromTeamBookStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionTeamBook.json");
 
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(
+                temporaryFolder.resolve("addressBook.json"));
         JsonTeamBookStorage teamBookStorage = new JsonTeamBookStorage(prefPath) {
             @Override
             public void saveTeamBook(ReadOnlyTeamBook teamBook, Path filePath) throws IOException {
