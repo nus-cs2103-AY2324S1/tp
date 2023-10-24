@@ -49,7 +49,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             // check if g/ is present
             if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) { // g/ present
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_TWO_PARAMETERS));
             } else {
                 String personName = argMultimap.getValue(PREFIX_NAME).get();
                 return new DeletePersonCommand(personName);

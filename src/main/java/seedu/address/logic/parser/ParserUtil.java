@@ -103,20 +103,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String groupName} into an {@code GroupList}.
+     * Parses a {@code String groupName} into an {@code Group}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code groupName} is invalid.
      */
-    public static GroupList parseGroup(String groupName) throws ParseException {
+    public static Group parseGroup(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedGroupName = groupName.trim();
         if (!Group.isValidGroup(trimmedGroupName)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
-        GroupList groupList = new GroupList();
-        groupList.add(new Group(trimmedGroupName));
-        return groupList;
+        Group group = new Group(trimmedGroupName);
+        return group;
     }
 
     /**

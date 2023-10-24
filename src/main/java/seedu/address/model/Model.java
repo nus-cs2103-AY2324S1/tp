@@ -116,6 +116,8 @@ public interface Model {
      */
     public boolean hasGroup(Group group);
 
+    public Group findGroup(String groupName) throws CommandException;
+
     /**
      * Adds a group to the address book.
      * The group must not already exist in the address book.
@@ -145,12 +147,11 @@ public interface Model {
      * @return Pair representing Person and Group object of interest
      */
     Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException;
-
     Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException;
     void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException;
     FreeTime getFreeTimeFromPerson(Name personName) throws CommandException;
     void addFreeTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddFreeTime) throws CommandException;
-
+    void deleteFreeTimeFromPerson(Name personName, ArrayList<TimeInterval> toDeleteFreeTime) throws CommandException;
     FreeTime getFreeTimeFromGroup(Group group) throws CommandException;
 
 }
