@@ -87,6 +87,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Boolean isListingTeam;
 
+    private double originalResultDisplayHeight;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -145,6 +146,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Resize the ResultDisplay to a larger size.
+     */
+    private void expandResultDisplay() {
+        resultDisplayPlaceholder.setPrefHeight(400);
+    }
+
+    /**
+     * Resize the ResultDisplay back to default size.
+     */
+    private void revertResultDisplay() {
+        resultDisplayPlaceholder.setPrefHeight(originalResultDisplayHeight);
+    }
+
+
+    /**
      * Fills up all the placeholders of this window.
      *
      * @param whatToFill String that indicates what to fill in the inner parts
@@ -173,6 +189,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        originalResultDisplayHeight = resultDisplayPlaceholder.getPrefHeight();
     }
 
     /**
@@ -282,6 +300,8 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+
+        expandResultDisplay();
     }
 
     /**
@@ -362,6 +382,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            } else {
+                revertResultDisplay();
             }
 
             if (commandResult.isExit()) {
