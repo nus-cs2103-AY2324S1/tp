@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 public class IdentityCodeManagerTest {

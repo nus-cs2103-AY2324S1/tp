@@ -38,48 +38,33 @@ public class MainWindow extends UiPart<Stage> {
     private TeamListPanel teamListPanel;
     @FXML
     private ResultDisplay resultDisplay;
-
     private HelpWindow helpWindow;
-
     @FXML
     private StackPane commandBoxPlaceholder;
-
     @FXML
     private MenuItem helpMenuItem;
-
     @FXML
     private StackPane personListPanelPlaceholder;
-
     @FXML
     private StackPane teamListPanelPlaceholder;
-
     @FXML
     private StackPane D_personListPanelPlaceholder;
-
     @FXML
     private StackPane D_teamListPanelPlaceholder;
-
     @FXML
     private StackPane resultDisplayPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
-
     @FXML
     private VBox singleListContainer;
-
     @FXML
     private VBox personList;
-
     @FXML
     private VBox teamList;
-
     @FXML
     private HBox dualListContainer;
-
     @FXML
-    private  VBox D_personList;
-
+    private VBox D_personList;
     @FXML
     private VBox D_teamList;
 
@@ -354,8 +339,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     *
-
      * @return the current personList Panel
      */
     public PersonListPanel getPersonListPanel() {
