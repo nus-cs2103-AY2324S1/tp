@@ -1,14 +1,20 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.appointment.DateTime;
+import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.Description;
+import seedu.address.model.appointment.Time;
 import seedu.address.model.student.Name;
 
 /**
@@ -24,24 +30,27 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
      */
     public ScheduleCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DATETIME, CliSyntax.PREFIX_DESCRIPTION);
+                PREFIX_NAME, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_DESCRIPTION);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATETIME,
-                CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DESCRIPTION) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_NAME,
+                PREFIX_DESCRIPTION) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DATETIME,
-                CliSyntax.PREFIX_DESCRIPTION);
-        Name studentName = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
-        DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get());
-        Description description = ParserUtil.parseDescription(argMultimap
-                .getValue(CliSyntax.PREFIX_DESCRIPTION).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME,
+                PREFIX_DESCRIPTION);
 
-        Appointment appointment = new Appointment(dateTime, studentName, description);
+        Name studentName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
+        Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+
+        Appointment appointment = new Appointment(date, startTime, endTime, studentName, description);
 
         return new ScheduleCommand(appointment);
     }
+
 
     /**
      * Returns true if none of the prefixes contain empty {@code Optional} values in the given

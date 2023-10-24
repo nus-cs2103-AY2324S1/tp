@@ -74,7 +74,7 @@ public class ScheduleCommandTest {
 
     @Test
     public void toStringMethod() {
-        Appointment alice = new AppointmentBuilder().withName("John Doe").withDateTime("2023-12-31 16:30:00")
+        Appointment alice = new AppointmentBuilder().withName("John Doe").withStartTime("16:30").withEndTime("17:30")
                 .withDescription("First Session").build();
         ScheduleCommand scheduleCommand = new ScheduleCommand(alice);
         String expected = ScheduleCommand.class.getCanonicalName() + "{toAdd=" + alice + "}";

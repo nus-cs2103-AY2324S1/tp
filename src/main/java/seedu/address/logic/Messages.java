@@ -56,11 +56,14 @@ public class Messages {
     public static String format(Appointment appointment) {
         final StringBuilder builder = new StringBuilder();
         builder.append(appointment.getName())
-                .append("; Date and Time: ")
-                .append(appointment.getDateTime())
+                .append("; Date: ")
+                .append(appointment.getDate())
+                .append("; Start Time: ")
+                .append(appointment.getStartTime())
+                .append("; End Time: ")
+                .append(appointment.getEndTime())
                 .append("; Description: ")
                 .append(appointment.getDescription());
         return builder.toString();
     }
-
 }
