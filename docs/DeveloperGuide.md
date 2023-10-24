@@ -154,6 +154,59 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+
+#### Implementation
+
+The add mechanism allows users to add new fosterers to the address book. This feature is facilitated by the `AddCommand` and `AddCommandParser` classes, to handle user input and create the appropriate `Person` object. Specifically, the feature is implemented through the following components and operations:
+
+* `AddCommand` — The core component responsible for executing the addition of a new fosterer to the address book. It handles the validation of input fields and ensures there are no duplicate persons in the address book.
+* `Person` — Represents the structure of a person, including attributes such as name, phone, email, address, housing, availability, animal name, animal type, and associated tags.
+* `ParserUtil` and `AddCommandParser` — Contains parsing methods for various input fields (e.g., name, phone, email, etc.) to ensure they are valid by meeting specific requirements and conditions.
+* `ArgumentMultimap` — Tokenizes and manages command arguments.
+
+Given below is an example usage scenario and how the add mechanism behaves at each step.
+
+Step 1. The user enters the `add` command with relevant details for the new fosterer. The `AddCommandParser` is invoked to parse the user's input.
+
+Step 2. The `AddCommandParser` processes the user's input, verifies the presence of mandatory fields, and ensures that there is no conflicting data. If any of these checks fail, the system will generate a specific error message indicating which field is invalid. For example, if the email format is incorrect, the system will report that the email input is invalid. The error message will be displayed to the user, providing clear feedback about the issue and the specific constraints that are not met.
+
+Step 3. If all input is valid, the new person is created using the `Person` class. The person's details, including their name, phone, email, address, housing, availability, animal name, animal type, and tags, are recorded.
+
+Step 4. The `Person` is then passed to the new `AddCommand` created, which adds the person to the address book, ensuring that it is not a duplicate of an existing entry. This check is performed in the `execute` method of the `AddCommand`.
+
+Step 5. A success message is displayed to the user to confirm that the new fosterer has been added to the address book.
+
+The add feature ensures that user input is correctly parsed and validated, and it prevents duplicate entries in the address book.
+
+#### Design considerations:
+
+* **Data Validation** — The add feature performs thorough validation on input data, ensuring that it adheres to constraints for each field.
+* **Duplicates** — The system checks for duplicate persons to prevent the addition of redundant data.
+
+**Aspect: Handling duplicate persons:**
+
+* **Alternative 1 (current choice):** Checks for duplicates based on the person's name.
+    * Pros: Easy to implement, and is simple and effective.
+    * Cons: May not catch duplicates with different names but similar attributes.
+
+* **Alternative 2:** Implement a more comprehensive duplicate check considering multiple attributes.
+    * Pros: Provides better duplicate detection by comparing multiple attributes.
+    * Cons: May be more complex to implement.
+
+**Aspect: How add executes:**
+
+* **Alternative 1 (current choice):** The Add feature saves the entire address book, including the newly added fosterer.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+    * Pros: Will use less memory (e.g. for `add`, just save the person being added).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+_{more aspects and alternatives to be added}_
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
