@@ -6,7 +6,7 @@ import java.time.DayOfWeek;
 
 /**
  * Represents the day when the Tutee has tuition every week.
- * Guarantees: immutable; is valid as declared in
+ * Guarantees: immutable; is valid as declared in {@link #isValidDay(String)}
  */
 public class Day {
     public static final String MESSAGE_CONSTRAINTS =

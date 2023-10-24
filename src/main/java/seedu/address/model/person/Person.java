@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -24,6 +25,8 @@ public class Person {
     // Data fields
     private final Address address;
     private final Subject subject;
+
+    // Date fields
     private final Day day;
     private final Begin begin;
     private final End end;

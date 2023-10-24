@@ -127,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        scheduleListPanel = new ScheduleListPanel(logic.getFilteredPersonList());
+        scheduleListPanel = new ScheduleListPanel(logic.getScheduleList());
         scheduleListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
 
     }
