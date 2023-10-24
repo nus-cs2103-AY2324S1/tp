@@ -26,5 +26,4 @@ public class ClearCommandTest {
         expectedModel.setTeamBook(new TeamBook());
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
-
 }
