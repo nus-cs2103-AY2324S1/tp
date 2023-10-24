@@ -35,6 +35,8 @@ public class Card implements Comparable<Card> {
         requireAllNonNull(question, answer, difficulty, tags, nextPracticeDate);
         this.question = question;
         this.answer = answer;
+        assert(this.question != null);
+        assert(this.answer != null);
         this.difficulty = difficulty;
         this.tags.addAll(tags);
         if (lastPracticeDate == null) {
