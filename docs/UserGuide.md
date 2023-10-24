@@ -69,6 +69,7 @@ Tran$act takes data security seriously. It includes features to secure financial
 Import staff lists into the address book for quick access to contact information. You can also add, edit, and remove people from the address book as needed.
 
 ---
+## Usage
 
 <div markdown="block" class="alert alert-info">
 
