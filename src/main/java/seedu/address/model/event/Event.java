@@ -127,6 +127,13 @@ public abstract class Event {
             }
         }
         return newNames;
+    }
 
+    public void removeEmptyGroups(Set<Group> groups) {
+        this.groups.removeAll(groups);
+    }
+
+    public void updateGroups() {
+        this.groups = this.groups;
     }
 }

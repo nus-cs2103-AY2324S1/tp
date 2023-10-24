@@ -3,8 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -114,6 +116,23 @@ public class UniquePersonList implements Iterable<Person> {
         FXCollections.copy(personsList, internalList);
         personsList.filtered(person -> person.hasGroup(groupName));
         return personsList;
+    }
+
+    public Set<Group> isLastPersonGroup(Person person) {
+        Set<Group> emptyGroups = new HashSet<>();
+        for (Group group: person.getGroups()) {
+            boolean isEmptyGroup = true;
+            for (Person p: internalList) {
+                if (p.hasGroup(group) && !p.equals(person)) {
+                    isEmptyGroup = false;
+                    break;
+                }
+            }
+            if (isEmptyGroup) {
+                emptyGroups.add(group);
+            }
+        }
+        return emptyGroups;
     }
 
     @Override

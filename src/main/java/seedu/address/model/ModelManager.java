@@ -121,6 +121,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Set<Group> getEmptyGroups(Person target) {
+        requireAllNonNull(target);
+        return addressBook.getEmptyGroups(target);
+    }
+
     // ========== Event ======================================================================================
 
     @Override
@@ -135,6 +141,21 @@ public class ModelManager implements Model {
         this.addressBook.deleteEvent(target);
     }
 
+    @Override
+    public void removeEmptyGroups(Set<Group> groups) {
+        for (Event event: events) {
+            event.removeEmptyGroups(groups);
+            setEvent(event, event);
+        }
+    }
+
+    @Override
+    public void updateGroups() {
+        for (Event event: events) {
+            event.updateGroups();
+            setEvent(event, event);
+        }
+    }
 
 
     //=========== Filtered Person List Accessors =============================================================

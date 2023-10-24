@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -82,7 +83,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
-
+    public Set<Group> getEmptyGroups(Person person) {
+        requireNonNull(person);
+        return persons.isLastPersonGroup(person);
+    }
 
     /**
      * Adds a person to the address book.

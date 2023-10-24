@@ -125,6 +125,12 @@ public interface Model {
      */
     Set<Group> findInvalidGroups(Set<Group> groups);
 
+    Set<Group> getEmptyGroups(Person person);
+
+    void removeEmptyGroups(Set<Group> emptyGroups);
+
+    void updateGroups();
+
     /**
      * Updates any events where the person to edit is assigned to.
      * @param personToEdit person to edit
