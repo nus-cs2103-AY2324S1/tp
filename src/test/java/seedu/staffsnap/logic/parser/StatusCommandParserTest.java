@@ -14,7 +14,7 @@ import seedu.staffsnap.model.applicant.Status;
 
 class StatusCommandParserTest {
 
-    private Parser parser = new StatusCommandParser();
+    private StatusCommandParser parser = new StatusCommandParser();
 
     @Test
     void parse_validArgs_returnsStatusCommand() {
