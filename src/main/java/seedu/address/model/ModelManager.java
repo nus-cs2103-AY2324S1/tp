@@ -278,6 +278,25 @@ public class ModelManager implements Model {
         return group;
     }
 
+    public FreeTime getFreeTimeFromPerson(Name personName) throws CommandException {
+        requireNonNull(personName);
+        Person person = addressBook.getPerson(personName.toString());
+        return person.getFreeTime();
+    }
+
+    public void addFreeTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+        requireNonNull(toAdd);
+        Group groupToAdd = addressBook.getGroup(toAdd.getGroupName());
+        groupToAdd.addFreeTime(toAddFreeTime);
+    }
+
+    public FreeTime getFreeTimeFromGroup(Group group) throws CommandException {
+        requireNonNull(group);
+        Group toAdd = addressBook.getGroup(group.getGroupName());
+        return toAdd.getFreeTime();
+    }
+
+
 
     private void forceUpdateList() {
         updateFilteredPersonList(user -> false);

@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.group.Group;
 
 public class FreeTime implements Iterable<TimeInterval> {
 
@@ -62,5 +62,14 @@ public class FreeTime implements Iterable<TimeInterval> {
     @Override
     public Iterator<TimeInterval> iterator() {
         return this.internalList.iterator();
+    }
+
+    @Override
+    public String toString() {
+        String toString = "";
+        for (TimeInterval timeInterval : internalList) {
+            toString += "\n" + timeInterval;
+        }
+        return toString;
     }
 }
