@@ -80,17 +80,6 @@ public class TeamBook implements ReadOnlyTeamBook {
     }
 
     /**
-     * Retrieves a team from the TeamBook by its name.
-     *
-     * @param teamName The name of the team to retrieve.
-     * @return The Team object if found, or null if the team does not exist.
-     */
-    public Team getTeam(String teamName) {
-        requireNonNull(teamName);
-        return teams.getTeamByName(teamName);
-    }
-
-    /**
      * Retrieves the Team Leader Identity code of the team from the TeamBook by his team name.
      *
      * @param teamName The name of the team to retrieve its team leader Identity code.
@@ -140,16 +129,6 @@ public class TeamBook implements ReadOnlyTeamBook {
         }
     }
 
-    /**
-     * Replaces the team with the given name with the edited team in the TeamBook.
-     *
-     * @param teamName The name of the team to be replaced.
-     * @param editedTeam The new team to replace the one with the specified name.
-     */
-    public void setTeam(String teamName, Team editedTeam) {
-        requireNonNull(editedTeam);
-        teams.setTeamByName(teamName, editedTeam);
-    }
 
     /**
      * Checks if given person by identity code is in given team

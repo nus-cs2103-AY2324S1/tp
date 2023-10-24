@@ -17,12 +17,10 @@ import seedu.address.model.team.exceptions.TeamNotFoundException;
 /**
  * A list of teams that enforces uniqueness between its elements and does not allow nulls.
  * A team is considered unique by comparing using {@code Team#equals(Object)}.
- *
  * Supports a minimal set of list operations.
  */
 public class UniqueTeamList implements Iterable<Team> {
-
-        private final ObservableList<Team> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Team> internalList = FXCollections.observableArrayList();
     private final ObservableList<Team> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -34,6 +32,13 @@ public class UniqueTeamList implements Iterable<Team> {
         return internalList.stream().anyMatch(team -> team.getTeamName().equals(teamName));
     }
 
+    /**
+     * Checks if given person by identity code is in given team
+     *
+     * @param teamToAddTo          the team to add to
+     * @param devToAddIdentityCode the dev to add identity code
+     * @return the boolean
+     */
     public boolean teamContainsPerson(String teamToAddTo, IdentityCode devToAddIdentityCode) {
         requireNonNull(teamToAddTo);
         requireNonNull(devToAddIdentityCode);
@@ -74,6 +79,12 @@ public class UniqueTeamList implements Iterable<Team> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Add dev to team by identity code.
+     *
+     * @param teamToAddTo          the team to add to
+     * @param devToAddIdentityCode the dev to add identity code
+     */
     public void addDevToTeam(String teamToAddTo, IdentityCode devToAddIdentityCode) {
         Team team = getTeamByName(teamToAddTo);
         team.addDeveloper(devToAddIdentityCode);
@@ -85,26 +96,6 @@ public class UniqueTeamList implements Iterable<Team> {
 
     public void setTeamLeaderOfTeam(String teamName, IdentityCode newTeamLeaderID) {
         getTeamByName(teamName).setTeamLeader(newTeamLeaderID);
-    }
-
-
-    /**
-     * Replaces the team with the given name in the list with {@code editedTeam}.
-     * The team with the given name must exist in the list.
-     */
-    public void setTeamByName(String teamName, Team editedTeam) {
-        requireAllNonNull(teamName, editedTeam);
-
-        int index = internalList.indexOf(new Team(null, teamName));
-        if (index == -1) {
-            throw new TeamNotFoundException();
-        }
-
-        if (containsTeamByName(editedTeam.getTeamName())) {
-            throw new DuplicateTeamException();
-        }
-
-        internalList.set(index, editedTeam);
     }
 
     /**
@@ -119,6 +110,12 @@ public class UniqueTeamList implements Iterable<Team> {
         }
     }
 
+    /**
+     * Remove developer from team by identity code.
+     *
+     * @param teamName              the team name
+     * @param developerIdentityCode the developer identity code
+     */
     public void removeDeveloperFromTeam(String teamName, IdentityCode developerIdentityCode) {
         requireNonNull(teamName);
         requireNonNull(developerIdentityCode);

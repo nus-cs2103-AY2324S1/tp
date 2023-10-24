@@ -180,7 +180,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     *
      * Set visibility of Vbox: personList -> visible, teamList -> not visible
      */
     public void showPersonList() {
@@ -191,7 +190,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     *
      * Set visibility of Vbox: personList -> not visible, teamList -> visible
      */
     public void showTeamList() {
@@ -256,7 +254,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     *
      * @return the current personList Panel
      */
     public PersonListPanel getPersonListPanel() {
@@ -264,7 +261,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     *
      * @return the current teamList Panel
      */
     public TeamListPanel getTeamListPanel() {
