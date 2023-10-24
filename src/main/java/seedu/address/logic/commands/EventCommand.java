@@ -27,7 +27,7 @@ public class EventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         model.addEvent(event);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, event.toString()), false, false, false, true);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, event.toString()), false, false, false, false);
     }
 
 
