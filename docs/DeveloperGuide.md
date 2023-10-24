@@ -154,6 +154,33 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find Availability Feature
+
+**API** : [`FreeTime.java`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/model/person/FreeTime.java)
+
+#### Implementation
+
+To find a suitable replacement TA, the user needs to know the availability of the TAs.
+As such we need to have classes that represent the time and availability.
+
+`TimeInterval` is used to represent a period of time. 
+A `TimeInterval` is only considered valid if the end time is after the start time.
+
+
+`FreeTime` is used to represent a TA's availability in the week.
+We assume that TAs are only available during weekdays, so each `FreeTime` consist of 5 
+`TimeInterval`s where each `TimeInterval` represents a day in the week.
+
+The following class diagram illustrates the structure of `FreeTime`.
+
+![FreeTimeClassDiagram](images/FreeTimeClassDiagram.png)
+
+`EMPTY_FREE_TIME` will be assigned to TAs that do not have availability information.
+
+Valid input to `FreeTime#getDay(day)` are integers from [1,5] where 1 represents Monday, 2 represents Tuesday and so on.
+
+`TimeInterval#GetFrom()` and `TimeInterval#GetTo()` represents the string representation of time in `HH:mm` format.
+
 ### Teaching Module Feature
 
 #### Implementation
