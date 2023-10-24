@@ -200,7 +200,7 @@ Pressing `tab` during inputting a command will autocomplete relevant command pre
 
 Example:
 
-* `add` followed by `tab` results in `add r/1`.
+* `add` followed by `space` and `tab` results in `add r/1`.
 
 --------------------------------------------------------------------------------------------------------------------
 
