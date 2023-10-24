@@ -160,7 +160,9 @@ public class ModelManager implements Model {
         for (int i = 0; i < filteredPersons.size(); i++) {
             ScheduleItem appt = filteredPersons.get(i).getAppointment();
             if (appt instanceof Appointment) {
-                observableAppointments.add((Appointment) appt);
+                Appointment tmp = (Appointment) appt;
+                tmp.setPerson(filteredPersons.get(i));
+                observableAppointments.add(tmp);
             }
         }
         sortedAppointments.setComparator(new SortByAppointmentDateComparator());
