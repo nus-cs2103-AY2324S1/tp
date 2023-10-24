@@ -23,6 +23,15 @@ public class ConfirmOverrideCommand extends Command {
         this.appointment = appointment;
         this.personToEdit = personToEdit;
     }
+
+    public static Appointment getAppointment() {
+        return appointment;
+    }
+
+    public static Person getPersonToEdit() {
+        return personToEdit;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -37,6 +46,21 @@ public class ConfirmOverrideCommand extends Command {
         model.setPerson(personToEdit, personWithApt);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personWithApt)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ConfirmOverrideCommand)) {
+            return false;
+        }
+
+        ConfirmOverrideCommand otherOverrideCommand = (ConfirmOverrideCommand) other;
+        return appointment.equals(otherOverrideCommand.appointment);
     }
 
     /**
