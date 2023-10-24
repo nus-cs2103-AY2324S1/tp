@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.appointment.Appointment;
@@ -22,7 +23,9 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label dateTime;
+    private Label date;
+    @FXML
+    private Label time;
     @FXML
     private Label description;
 
@@ -34,7 +37,8 @@ public class AppointmentCard extends UiPart<Region> {
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
         name.setText(appointment.getName().fullName);
-        dateTime.setText("Date and Time: " + appointment.getDateTime().value);
+        date.setText("Date: " + appointment.getDate());
+        time.setText("Time: " + appointment.getTime());
         description.setText("Description: " + appointment.getDescription().value);
     }
 }

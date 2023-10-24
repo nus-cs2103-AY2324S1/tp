@@ -34,6 +34,14 @@ public class Appointment {
         return this.dateTime;
     }
 
+    public String getDate() {
+        return this.dateTime.getDate();
+    }
+
+    public String getTime() {
+        return this.dateTime.getTime();
+    }
+
     public Name getName() {
         return this.name;
     }
