@@ -153,7 +153,7 @@ public class ParserUtil {
         }
 
         if (!Week.isValidWeek(weekNumber)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Week.MESSAGE_CONSTRAINTS);
         }
         return new Week(weekNumber);
     }

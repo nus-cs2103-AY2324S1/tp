@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_ABSENT;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PRESENT;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_SUCCESS;
@@ -34,10 +35,10 @@ public class MarkAttendanceCommandTest {
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     /**
-     * Test for marking attendance using a valid person's name.
+     * Test for marking attendance as present using a valid person's name.
      */
     @Test
-    public void execute_marksAttendanceWithValidPersonName_success() {
+    public void execute_marksAttendanceAsPresentWithValidPersonName_success() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee"), true,
@@ -55,10 +56,51 @@ public class MarkAttendanceCommandTest {
     }
 
     /**
-     * Test for marking attendance using a valid person's ID.
+     * Test for marking attendance as absent using a valid person's name.
      */
     @Test
-    public void execute_marksAttendanceWithValidPersonID_success() {
+    public void execute_marksAttendanceAsAbsentWithValidPersonName_success() {
+        Person amy = new PersonBuilder().build();
+        model.addPerson(amy);
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee"), false,
+                new Week(1), "Late");
+
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "1\nReason: %s\n",
+                amy.getName(), amy.getName(), "Late");
+
+        Person expectedAmy = new PersonBuilder(amy)
+                .withAttendance(new Attendance(new Week(1), true))
+                .build();
+        expectedModel.addPerson(expectedAmy);
+
+        assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Test for marking attendance as present using a valid person's ID.
+     */
+    @Test
+    public void execute_marksAttendanceAsPresentWithValidPersonID_success() {
+        Person amy = new PersonBuilder().build();
+        model.addPerson(amy);
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
+                new Week(1));
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
+                amy.getName(), amy.getName());
+
+        Person expectedAmy = new PersonBuilder(amy)
+                .withAttendance(new Attendance(new Week(1), true))
+                .build();
+        expectedModel.addPerson(expectedAmy);
+
+        assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Test for marking attendance as absent using a valid person's ID.
+     */
+    @Test
+    public void execute_marksAttendanceAsAbsentWithValidPersonID_success() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
