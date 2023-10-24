@@ -150,12 +150,12 @@ public class ApplicantCard extends UiPart<Region> {
     private void displayApplicantOverallRating() {
         Circle outerCircle = new Circle(50);
         outerCircle.setFill(Color.web("#454545"));
-        Circle baseCircle = new Circle(0,0,43);
-        baseCircle.setFill(Color.web("#454545"));
+        Circle midCircle = new Circle(43);
+        midCircle.setFill(Color.web("#454545"));
         Circle innerCircle = new Circle(36);
         innerCircle.setFill(Color.web("#454545"));
         Group stackedArcs = new Group();
-        stackedArcs.getChildren().addAll(outerCircle, baseCircle);
+        stackedArcs.getChildren().addAll(outerCircle, midCircle);
         Label ratingLabel = new Label();
         ratingLabel.setText("8.2"); // TODO: update with overall rating
         ratingLabel.getStyleClass().add("overall_rating_label");
