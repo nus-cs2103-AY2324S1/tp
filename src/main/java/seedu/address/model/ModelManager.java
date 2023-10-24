@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Person selectedPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +40,8 @@ public class ModelManager implements Model {
 
         // DoConnek Pro shows all patients on startup by default.
         updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
+
+        this.selectedPerson = filteredPersons.get(0);
     }
 
     public ModelManager() {
@@ -130,6 +134,18 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Selected Person Accessors ==================================================================
+    @Override
+    public Person getSelectedPerson() {
+        return selectedPerson;
+    }
+
+    @Override
+    public void updateSelectedPerson(Person person) {
+        requireNonNull(person);
+        selectedPerson = person;
     }
 
     @Override

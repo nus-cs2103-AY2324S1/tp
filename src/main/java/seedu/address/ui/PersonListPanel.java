@@ -4,9 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -21,6 +24,8 @@ public class PersonListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Person> personListView;
+    @FXML
+    private Label personType;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -44,8 +49,12 @@ public class PersonListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 if (person instanceof Patient) {
+                    personType.setText("Patient");
+                    personType.setTextFill(Color.AQUA);
                     setGraphic(new PatientCard((Patient) person, getIndex() + 1).getRoot());
                 } else {
+                    personType.setText("Specialist");
+                    personType.setTextFill(Color.GREENYELLOW);
                     setGraphic(new SpecialistCard((Specialist) person, getIndex() + 1).getRoot());
                 }
             }

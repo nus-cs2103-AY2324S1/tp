@@ -14,19 +14,11 @@ import seedu.address.model.person.Patient;
 public class PatientCard extends PersonCard {
 
     private static final String card = "PatientListCard.fxml";
-    @FXML
-    private Label age;
-    @FXML
-    private FlowPane medicalHistory;
 
     /**
      * Creates a {@code PatientCard} with the given {@code patient} and index to display.
      */
     public PatientCard(Patient patient, int displayedIndex) {
         super(patient, displayedIndex, card);
-        age.setText(patient.getAge().value);
-        patient.getMedicalHistory().stream()
-                .sorted(Comparator.comparing(medicalHistory -> medicalHistory.value))
-                .forEach(medicalHistory -> this.medicalHistory.getChildren().add(new Label(medicalHistory.value)));
     }
 }

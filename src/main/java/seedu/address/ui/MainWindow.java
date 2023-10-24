@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.HashSet;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.*;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -27,6 +29,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
+
     private Stage primaryStage;
     private Logic logic;
 
@@ -34,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewPersonPanel viewPersonPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -45,10 +49,16 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane viewPersonPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane statusbarPlaceholder2;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -112,6 +122,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        viewPersonPanel = ViewPatientPanel.updatePerson(logic.getSelectedPerson());
+        viewPersonPanelPlaceholder.getChildren().add(viewPersonPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -177,6 +190,9 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            viewPersonPanel = ViewPatientPanel.updatePerson(logic.getSelectedPerson());
+            viewPersonPanelPlaceholder.getChildren().clear();
+            viewPersonPanelPlaceholder.getChildren().add(viewPersonPanel.getRoot());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
