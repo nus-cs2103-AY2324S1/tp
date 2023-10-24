@@ -39,6 +39,9 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private FlowPane names;
 
+    @FXML
+    private FlowPane groups;
+
     /**
      * Creates an {@code EventCode} with the given {@code Event} and index to display.
      */
@@ -54,5 +57,8 @@ public class EventCard extends UiPart<Region> {
         event.getNames().stream()
                 .sorted(Comparator.comparing(name -> name.fullName))
                 .forEach(name -> names.getChildren().add(new Label(name.fullName)));
+        event.getGroups().stream()
+                .sorted(Comparator.comparing(group -> group.groupName))
+                .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
     }
 }

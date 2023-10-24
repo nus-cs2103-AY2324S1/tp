@@ -16,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Meeting;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -176,13 +177,23 @@ public class ModelManager implements Model {
 
         for (Name name : names) {
             boolean hasName = checkNameExists(name);
-
             if (!hasName) {
                 invalidNames.add(name);
             }
         }
-
         return invalidNames;
+    }
+
+    @Override
+    public Set<Group> findInvalidGroups(Set<Group> groups) {
+        Set<Group> invalidGroups = new HashSet<>();
+
+        for (Group group : groups) {
+            if (!checkGroupExists(group)) {
+                invalidGroups.add(group);
+            }
+        }
+        return invalidGroups;
     }
 
     @Override
@@ -212,13 +223,23 @@ public class ModelManager implements Model {
         default:
             return new Meeting(event.getName(), event.getStartDate(),
                     Optional.of(event.getStartTime()), Optional.of(event.getEndTime()),
-                    event.getUpdatedNames(personToEdit.getName(), editedPerson.getName()));
+                    event.getUpdatedNames(personToEdit.getName(), editedPerson.getName()),
+                    event.getGroups());
         }
     }
 
     private boolean checkNameExists(Name name) {
         for (Person person : this.filteredPersons) {
             if (person.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkGroupExists(Group group) {
+        for (Person person : this.filteredPersons) {
+            if (person.getGroups().contains(group)) {
                 return true;
             }
         }

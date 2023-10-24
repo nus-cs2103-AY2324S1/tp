@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.event.Event;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -33,6 +34,11 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON = "The person(s) provided(%s) do not exist!";
     public static final String MESSAGE_INVALID_UNASSIGN_PERSON =
             "The person(s) provided(%s) have not been assigned to the event!";
+
+    public static final String MESSAGE_INVALID_GROUP = "The group(s) provided(%s) do not exist!";
+
+    public static final String MESSAGE_INVALID_UNASSIGN_GROUP =
+            "The group(s) provided(%s) have not been assigned to the event!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -109,7 +115,15 @@ public class Messages {
             }
             builder.delete(builder.length() - 2, builder.length()); //removes the last comma
         }
+        if (!event.getGroups().isEmpty()) {
+            builder.append("; Groups involved: ");
 
+            for (Group group : event.getGroups()) {
+                builder.append(group.toString());
+                builder.append(", ");
+            }
+            builder.delete(builder.length() - 2, builder.length()); //removes the last comma
+        }
         return builder.toString();
     }
 

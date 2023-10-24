@@ -51,7 +51,6 @@ public class AddMeetingCommand extends Command {
         this.toAdd = meeting;
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -64,8 +63,7 @@ public class AddMeetingCommand extends Command {
         }
 
         //else, all the names exist
-
-        model.addEvent(toAdd);
+        model.addEvent(this.toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(toAdd)));
 

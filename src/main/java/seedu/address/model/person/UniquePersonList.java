@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -102,6 +103,18 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Get a list of persons based on group name
+     * @param groupName groupName to search by
+     * @return A copy of the persons list with the same group name
+     */
+    public ObservableList<Person> getPersonsByGroup(Group groupName) {
+        ObservableList<Person> personsList = FXCollections.observableArrayList();
+        FXCollections.copy(personsList, internalList);
+        personsList.filtered(person -> person.hasGroup(groupName));
+        return personsList;
     }
 
     @Override

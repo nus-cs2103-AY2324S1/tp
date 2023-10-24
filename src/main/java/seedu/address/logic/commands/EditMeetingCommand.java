@@ -24,9 +24,8 @@ import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
 import seedu.address.model.event.Meeting;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
-
-
 
 /**
  * Command to edit a meeting in the address book.
@@ -55,8 +54,6 @@ public class EditMeetingCommand extends Command {
             + PREFIX_UNASSIGN_PERSONS + "Charlie ";
 
     public static final String MESSAGE_EDIT_SUCCESS = "Edited meeting: %1$s";
-
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
     public final Index index;
     public final EditMeetingDescriptor editMeetingDescriptor;
@@ -106,6 +103,7 @@ public class EditMeetingCommand extends Command {
 
 
         Set<Name> updatedPersonNames;
+        Set<Group> updatedGroups;
 
         if (editMeetingDescriptor.getAssignedPersons().isPresent()) {
 
@@ -118,10 +116,8 @@ public class EditMeetingCommand extends Command {
 
             //add the new persons to the existing list of persons
             meetingToEdit.getNames().addAll(editMeetingDescriptor.getAssignedPersons().get());
-            updatedPersonNames = meetingToEdit.getNames();
-        } else {
-            updatedPersonNames = meetingToEdit.getNames();
         }
+        updatedPersonNames = meetingToEdit.getNames();
 
         if (editMeetingDescriptor.getUnassignedPersons().isPresent()) {
             Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getUnassignedPersons().get());
@@ -138,14 +134,39 @@ public class EditMeetingCommand extends Command {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_UNASSIGN_PERSON,
                         listInvalidNames(invalidUnassignNames)));
             }
-
             //remove the persons from the new list of persons
             updatedPersonNames.removeAll(editMeetingDescriptor.getUnassignedPersons().get());
-        } else {
-            // no persons to be unassigned, do nothing
+        }
+        // no persons to be unassigned, do nothing
+
+        // Editing groups
+        if (editMeetingDescriptor.getGroups().isPresent()) {
+
+            Set<Group> invalidGroups = model.findInvalidGroups(editMeetingDescriptor.getGroups().get());
+
+            if (!invalidGroups.isEmpty()) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_GROUP,
+                        listInvalidGroups(invalidGroups)));
+            }
+
+            meetingToEdit.getGroups().addAll(editMeetingDescriptor.getGroups().get());
+        }
+        updatedGroups = meetingToEdit.getGroups();
+
+        if (editMeetingDescriptor.getUnassignGroups().isPresent()) {
+            if (!meetingToEdit.getGroups().containsAll(editMeetingDescriptor.getUnassignGroups().get())) {
+
+                Set<Group> invalidUnassignGroups = findInvalidUnassignGroups(meetingToEdit,
+                        editMeetingDescriptor.getUnassignGroups().get());
+
+                //case where the groups to be unassigned have not even been previously assigned
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_UNASSIGN_GROUP,
+                        listInvalidGroups(invalidUnassignGroups)));
+            }
+            meetingToEdit.getGroups().removeAll(editMeetingDescriptor.getUnassignGroups().get());
         }
         return new Meeting(updatedName, updatedDate,
-                Optional.of(updatedStartTime), Optional.of(updatedEndTime), updatedPersonNames);
+                Optional.of(updatedStartTime), Optional.of(updatedEndTime), updatedPersonNames, updatedGroups);
     }
 
     private static Set<Name> findInvalidUnassignNames(Event meetingToEdit, Set<Name> unassignNames) {
@@ -159,6 +180,17 @@ public class EditMeetingCommand extends Command {
         return invalidUnassignNames;
     }
 
+    private static Set<Group> findInvalidUnassignGroups(Event meetingToEdit, Set<Group> unassignGroups) {
+        Set<Group> invalidUnassignGroups = new HashSet<>();
+
+        for (Group group : unassignGroups) {
+            if (!meetingToEdit.getGroups().contains(group)) {
+                invalidUnassignGroups.add(group);
+            }
+        }
+        return invalidUnassignGroups;
+    }
+
 
     /**
      * generates a string of invalid names for display.
@@ -167,6 +199,17 @@ public class EditMeetingCommand extends Command {
         StringBuilder builder = new StringBuilder();
         for (Name name : invalidNames) {
             builder.append(name.toString());
+            builder.append(", ");
+        }
+
+        builder.delete(builder.length() - 2, builder.length()); //removes the last comma
+        return builder.toString();
+    }
+
+    private static String listInvalidGroups(Set<Group> invalidGroups) {
+        StringBuilder builder = new StringBuilder();
+        for (Group group : invalidGroups) {
+            builder.append(group.toString());
             builder.append(", ");
         }
 
@@ -213,6 +256,9 @@ public class EditMeetingCommand extends Command {
         private Set<Name> assignPersons;
         private Set<Name> unassignPersons;
 
+        private Set<Group> assignGroups;
+        private Set<Group> unassignGroups;
+
         public EditMeetingDescriptor() {
         }
 
@@ -254,7 +300,7 @@ public class EditMeetingCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(this.name, this.date, this.startTime,
-                    this.endTime, this.assignPersons, this.unassignPersons);
+                    this.endTime, this.assignPersons, this.unassignPersons, this.assignGroups, this.unassignGroups);
         }
 
         @Override
@@ -302,6 +348,26 @@ public class EditMeetingCommand extends Command {
         public Optional<Set<Name>> getUnassignedPersons() {
             return (this.unassignPersons != null)
                     ? Optional.of(Collections.unmodifiableSet(this.unassignPersons))
+                    : Optional.empty();
+        }
+
+        public void setGroups(Set<Group> groups) {
+            this.assignGroups = (groups != null) ? new HashSet<>(groups) : null;
+        }
+
+        public Optional<Set<Group>> getGroups() {
+            return (this.assignGroups != null)
+                    ? Optional.of(Collections.unmodifiableSet(this.assignGroups))
+                    : Optional.empty();
+        }
+
+        public void setUnassignGroups(Set<Group> groups) {
+            this.unassignGroups = (groups != null) ? new HashSet<>(groups) : null;
+        }
+
+        public Optional<Set<Group>> getUnassignGroups() {
+            return (this.unassignGroups != null)
+                    ? Optional.of(Collections.unmodifiableSet(this.unassignGroups))
                     : Optional.empty();
         }
     }

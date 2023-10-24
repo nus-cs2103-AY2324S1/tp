@@ -10,6 +10,7 @@ import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
 import seedu.address.model.event.Meeting;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -27,6 +28,8 @@ public class MeetingBuilder {
     private EventTime endTime;
     private Set<Name> names;
 
+    private Set<Group> groups = new HashSet<>();
+
     /**
      * Creates a {@code MeetingBuilder} with the default details.
      */
@@ -36,6 +39,7 @@ public class MeetingBuilder {
         startTime = EventTime.NULL_EVENT_TIME;
         endTime = EventTime.NULL_EVENT_TIME;
         names = new HashSet<>();
+        groups = new HashSet<>();
     }
 
     /**
@@ -106,6 +110,6 @@ public class MeetingBuilder {
      * @return a meeting object.
      */
     public Meeting build() {
-        return new Meeting(eventName, date, Optional.of(startTime), Optional.of(endTime), names);
+        return new Meeting(eventName, date, Optional.of(startTime), Optional.of(endTime), names, groups);
     }
 }

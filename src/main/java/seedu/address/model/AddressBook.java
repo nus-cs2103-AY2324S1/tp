@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -131,6 +132,17 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void deleteEvent(Event event) {
         this.events.remove(event);
+    }
+
+    // ========== Group operations ===========================================================
+
+    /**
+     * Retrieve a list of Persons in the group
+     * @param groupName Group to search by
+     * @return List of Persons in the group
+     */
+    public ObservableList<Person> getPersonsByGroup(Group groupName) {
+        return this.persons.getPersonsByGroup(groupName);
     }
 
     //=========== util methods ===========================================================

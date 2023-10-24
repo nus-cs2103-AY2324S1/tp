@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
 
@@ -11,8 +12,7 @@ import seedu.address.model.person.Name;
  */
 public class Meeting extends Event {
 
-    private static final String EVENT_TYPE = "meeting";
-
+    private static final String MEETING_EVENT_TYPE = "meeting";
 
     /**
      * Constructor for the meeting with optional start and end time
@@ -22,12 +22,10 @@ public class Meeting extends Event {
      * @param endTime end time of the meeting
      * @param names names of the people attending the meeting
      */
-    public Meeting(EventName name, EventDate date,
-                   Optional<EventTime> startTime, Optional<EventTime> endTime, Set<Name> names) {
-        super(new EventType("meeting"), name, date, startTime, date, endTime, names);
+    public Meeting(EventName name, EventDate date, Optional<EventTime> startTime,
+                   Optional<EventTime> endTime, Set<Name> names, Set<Group> groups) {
+        super(new EventType(MEETING_EVENT_TYPE), name, date, startTime, date, endTime, names, groups);
     }
-
-
 
     /**
      * ToString for the meeting
