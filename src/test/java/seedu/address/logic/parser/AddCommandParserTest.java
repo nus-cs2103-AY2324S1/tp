@@ -4,10 +4,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalEmployees.AMY;
@@ -36,7 +36,8 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SALARY_DESC_BOB + LEAVE_DESC_BOB + DEPARTMENT_DESC_INVESTMENT, new AddCommand(expectedEmployee));
+                + ADDRESS_DESC_BOB + SALARY_DESC_BOB + LEAVE_DESC_BOB + DEPARTMENT_DESC_INVESTMENT,
+                new AddCommand(expectedEmployee));
 
 
         // multiple departments - all accepted

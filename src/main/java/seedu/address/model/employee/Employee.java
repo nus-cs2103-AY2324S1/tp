@@ -30,7 +30,8 @@ public class Employee {
     /**
      * Every field must be present and not null.
      */
-    public Employee(Name name, Phone phone, Email email, Address address, Salary salary, Leave leave, Set<Department> departments) {
+    public Employee(Name name, Phone phone, Email email, Address address, Salary salary, Leave leave,
+                    Set<Department> departments) {
         requireAllNonNull(name, phone, email, address, salary, leave, departments);
         this.name = name;
         this.phone = phone;
