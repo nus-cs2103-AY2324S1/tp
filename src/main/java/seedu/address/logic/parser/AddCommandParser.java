@@ -4,6 +4,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -32,6 +33,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Lesson lesson = new AddLessonCommandParser().parseLesson(subStrAfterLessonFlag);
             return new AddCommand(person, lesson);
         }
+
         return new AddCommand(person);
     }
 
@@ -48,6 +50,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         person.setAddressIfNotNull(TypeParsingUtil.parseAddress("address", args, true));
         person.setSubjectsIfNotNull(TypeParsingUtil.parseSubjects("subject", args, true));
         person.setTagsIfNotNull(TypeParsingUtil.parseTags("tag", args, true));
+        String remarkString = null;
+        // should not use exception to control flow, will change in future
+        try {
+            remarkString = TypeParsingUtil.parseFlag("remark", args);
+        } catch (ParseException e) {
+            return person;
+        }
+        person.setRemarkIfNotNull(new Remark(remarkString));
         return person;
     }
 }

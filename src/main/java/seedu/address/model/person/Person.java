@@ -25,6 +25,8 @@ public class Person {
     private Address address = Address.DEFAULT_ADDRESS;
     private final Set<Subject> subjects = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
+    private Remark remark = Remark.DEFAULT_REMARK;
+
 
     /**
      * Make sense to only force the name to be non-null
@@ -36,14 +38,16 @@ public class Person {
     /**
      * Every field must be present and not null in this constructor.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Subject> subjects, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, subjects, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Subject> subjects, Set<Tag> tags, Remark remark) {
+        requireAllNonNull(name, phone, email, address, subjects, tags, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.subjects.addAll(subjects);
         this.tags.addAll(tags);
+        this.remark = remark;
     }
 
     public Name getName() {
@@ -130,6 +134,7 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
     public void setTags(Set<Tag> tags) {
         requireAllNonNull(tags);
         this.tags.clear();
@@ -138,6 +143,21 @@ public class Person {
     public void setTagsIfNotNull(Set<Tag> tags) {
         if (tags != null) {
             setTags(tags);
+        }
+    }
+
+    public Remark getRemark() {
+        return remark;
+    }
+
+    public void setRemark(Remark remark) {
+        requireAllNonNull(remark);
+        this.remark = remark;
+    }
+
+    public void setRemarkIfNotNull(Remark remark) {
+        if (remark != null) {
+            setRemark(remark);
         }
     }
 
@@ -175,14 +195,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && subjects.equals(otherPerson.subjects)
-                && tags.equals(otherPerson.tags);
-
+                && tags.equals(otherPerson.tags)
+                && remark.equals(otherPerson.remark);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, subjects, tags);
+        return Objects.hash(name, phone, email, address, subjects, tags, remark);
     }
 
     @Override
@@ -194,6 +214,7 @@ public class Person {
                 .add("address", address)
                 .add("subjects", subjects)
                 .add("tags", tags)
+                .add("remark", remark)
                 .toString();
     }
     /**
@@ -208,7 +229,8 @@ public class Person {
         for (Tag tag : tags) {
             clonedTags.add(tag.clone());
         }
-        return new Person(name.clone(), phone.clone(), email.clone(), address.clone(), clonedSubjects, clonedTags);
+        return new Person(name.clone(), phone.clone(), email.clone(), address.clone(),
+                clonedSubjects, clonedTags, remark.clone());
     }
 
 }

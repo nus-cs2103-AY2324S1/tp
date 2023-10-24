@@ -39,6 +39,9 @@ public class StudentDetailListPanel extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    @FXML
+    private TextField remark;
+
     /**
      * Creates a {@code StudentDetailListPanel} with the given {@code ObservableList}.
      */
@@ -58,6 +61,7 @@ public class StudentDetailListPanel extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        remark.setText(person.getRemark().value);
 
         // Clears the previous items in the FlowPane for Tags and Subjects
         tags.getChildren().clear();
@@ -70,6 +74,7 @@ public class StudentDetailListPanel extends UiPart<Region> {
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren()
                         .add(new ColoredTextEntry(subject.subjectName.toString(), subject.getColour())));
+        subjects.setHgap(10);
     }
 
 }

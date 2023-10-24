@@ -54,8 +54,18 @@
                   <TextField fx:id="address" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$address" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <FlowPane fx:id="tags" prefHeight="55.0" prefWidth="320.0" />
-            <FlowPane fx:id="subjects" prefHeight="61.0" prefWidth="320.0" />
+            <FlowPane fx:id="tags" prefHeight="25.0" prefWidth="320.0" />
+            <FlowPane fx:id="subjects" prefHeight="25.0" prefWidth="320.0" />
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
+               <children>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/remark.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="remark" alignment="BOTTOM_LEFT" editable="false" prefHeight="54.0" prefWidth="299.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$remark" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
          </children>
       </VBox>
       </children>

@@ -15,7 +15,7 @@ import seedu.address.model.state.State;
 public class ListCommandParser implements Parser<ListCommand> {
 
     public static final ArrayList<String> DISPLAYABLE_FIELDS = new ArrayList<>(
-            Arrays.asList("phone", "email", "address", "tags", "subjects")
+            Arrays.asList("phone", "email", "address", "tags", "subjects", "remark")
     );
 
     /**
@@ -36,7 +36,6 @@ public class ListCommandParser implements Parser<ListCommand> {
             }
             // Check if displayParams contains "all" keyword, and set it to all displayable fields
             if (p.equals("all")) {
-                System.out.println("all now");
                 displayParams = DISPLAYABLE_FIELDS.toArray(new String[0]);
                 break;
             }
@@ -47,7 +46,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
 
 
-        switch (keywords[0]) {
+        switch (keywords[0].toUpperCase()) {
         case "":
         case "SCHEDULE":
             return new ListCommand(State.SCHEDULE);
