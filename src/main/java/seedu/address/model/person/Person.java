@@ -102,6 +102,27 @@ public class Person {
     }
 
     /**
+     * Returns a string representation of the number of tutorials that the person attended and missed.
+     * @return number of tutorials attanded, total tutorials, number of tutorials missed
+     */
+    public String getTalliedAttendance() {
+        int tutorialsAttended = 0;
+        int totalTutorials = attendanceRecords.size();
+
+        for (int i = 0; i < totalTutorials; i++) {
+            if (attendanceRecords.get(i).isPresent()) {
+                tutorialsAttended++;
+            }
+        }
+
+        if (totalTutorials == 0) {
+            return "Attendance : No attendance records.";
+        }
+        return "Attendance : " + tutorialsAttended + " / " + totalTutorials + " ("
+                + (totalTutorials - tutorialsAttended) + " tutorials missed)";
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
