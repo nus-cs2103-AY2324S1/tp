@@ -26,6 +26,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
@@ -126,9 +127,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Optional<Integer> id = personToEdit.getId();
         List<Note> notes = personToEdit.getNotes();
+        Balance balance = personToEdit.getBalance();
 
         Person updatedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id, notes);
+                updatedLinkedin, updatedSecondaryEmail, updatedTelegram, updatedTags, id, notes, balance);
 
         if ((!personToEdit.hasValidBirthday() && !updatedBirthday.equals(Optional.empty()))
                 || (!personToEdit.hasValidLinkedin() && !updatedLinkedin.equals(Optional.empty()))
