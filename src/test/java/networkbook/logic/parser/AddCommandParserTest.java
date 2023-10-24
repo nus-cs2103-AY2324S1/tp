@@ -13,7 +13,6 @@ import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
-import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
@@ -58,9 +57,6 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_NAME_DESC,
-                Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser,
                 "1" + CommandTestUtil.INVALID_PHONE_DESC,
                 Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser,
@@ -92,9 +88,9 @@ public class AddCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.INVALID_EMAIL_DESC
+                "1" + CommandTestUtil.INVALID_EMAIL_DESC
                         + CommandTestUtil.VALID_LINK_AMY + CommandTestUtil.VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+                Email.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -104,10 +100,9 @@ public class AddCommandParserTest {
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
                 + CommandTestUtil.GRADUATION_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
                 + CommandTestUtil.SPECIALISATION_DESC_AMY
-                + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND;
+                + CommandTestUtil.TAG_DESC_FRIEND;
 
         AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
-                .withName(CommandTestUtil.VALID_NAME_AMY)
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .withEmail(CommandTestUtil.VALID_EMAIL_AMY)
                 .withLink(CommandTestUtil.VALID_LINK_AMY)
@@ -136,19 +131,13 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
-        // name
         Index targetIndex = TypicalIndexes.INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_AMY;
-        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
-                .withName(CommandTestUtil.VALID_NAME_AMY)
-                .build();
-        AddCommand expectedCommand = new AddCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY;
-        descriptor = new AddPersonDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_AMY).build();
-        expectedCommand = new AddCommand(targetIndex, descriptor);
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY;
+        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
+                .withPhone(CommandTestUtil.VALID_PHONE_AMY).build();
+        AddCommand expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email

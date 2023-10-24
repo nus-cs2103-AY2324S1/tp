@@ -103,11 +103,11 @@ public class CommandTestUtil {
     public static final String VALID_INDEX_DESC = " " + CliSyntax.PREFIX_INDEX + " " + "1";
 
     static {
-        DESC_AMY = new AddPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new AddPersonDescriptorBuilder()
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withLink(VALID_LINK_AMY)
                 .withGraduation(VALID_GRADUATION_AMY).withCourse(VALID_COURSE_AMY)
                 .withSpecialisation(VALID_SPECIALISATION_AMY).withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new AddPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new AddPersonDescriptorBuilder()
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withLink(VALID_LINK_BOB)
                 .withGraduation(VALID_GRADUATION_BOB).withCourse(VALID_COURSE_BOB)
                 .withSpecialisation(VALID_SPECIALISATION_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();

@@ -31,15 +31,8 @@ public class AddPersonDescriptorTest {
         // different values -> returns false
         assertFalse(CommandTestUtil.DESC_AMY.equals(CommandTestUtil.DESC_BOB));
 
-        // different name -> returns false
-        AddCommand.AddPersonDescriptor editedAmy =
-                new AddPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
-                        .withName(CommandTestUtil.VALID_NAME_BOB)
-                        .build();
-        assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
-
         // different phone -> returns false
-        editedAmy = new AddPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+        AddCommand.AddPersonDescriptor editedAmy = new AddPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
@@ -93,8 +86,7 @@ public class AddPersonDescriptorTest {
     @Test
     public void toStringMethod() {
         AddCommand.AddPersonDescriptor editPersonDescriptor = new AddCommand.AddPersonDescriptor();
-        String expected = AddCommand.AddPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phones="
+        String expected = AddCommand.AddPersonDescriptor.class.getCanonicalName() + "{phones="
                 + editPersonDescriptor.getPhones().orElse(null) + ", emails="
                 + editPersonDescriptor.getEmails().orElse(null) + ", links="
                 + editPersonDescriptor.getLinks().orElse(null) + ", graduation="

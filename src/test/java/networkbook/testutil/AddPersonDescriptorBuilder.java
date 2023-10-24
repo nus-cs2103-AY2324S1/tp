@@ -6,7 +6,6 @@ import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
-import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
@@ -34,7 +33,6 @@ public class AddPersonDescriptorBuilder {
      */
     public AddPersonDescriptorBuilder(Person person) {
         descriptor = new AddCommand.AddPersonDescriptor();
-        descriptor.setName(person.getName());
         descriptor.setPhones(person.getPhones());
         descriptor.setEmails(person.getEmails());
         descriptor.setLinks(person.getLinks());
@@ -43,14 +41,6 @@ public class AddPersonDescriptorBuilder {
         descriptor.setSpecialisations(person.getSpecialisations());
         descriptor.setTags(person.getTags());
         person.getPriority().ifPresent((Priority p) -> descriptor.setPriority(p));
-    }
-
-    /**
-     * Sets the {@code Name} of the {@code AddPersonDescriptor} that we are building.
-     */
-    public AddPersonDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
-        return this;
     }
 
     /**

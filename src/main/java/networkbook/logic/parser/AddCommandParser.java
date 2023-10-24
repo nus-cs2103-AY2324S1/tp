@@ -23,6 +23,8 @@ import networkbook.model.util.UniqueList;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    public static final String MESSAGE_MULTIPLE_NAMES = "Contact cannot have multiple names.\n"
+            + "Please use the 'edit' command instead.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -65,7 +67,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         );
 
         AddPersonDescriptor addPersonDescriptor =
-                AddCommandParser.generateEditPersonDescriptor(argMultimap);
+                AddCommandParser.generateAddPersonDescriptor(argMultimap);
 
         if (!addPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(AddCommand.MESSAGE_NO_INFO);
@@ -78,13 +80,12 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Creates an {@code AddPersonDescriptor} based on the arguments provided in an edit or add command.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public static AddPersonDescriptor generateEditPersonDescriptor(ArgumentMultimap argMultimap)
+    private static AddPersonDescriptor generateAddPersonDescriptor(ArgumentMultimap argMultimap)
             throws ParseException {
         AddPersonDescriptor addPersonDescriptor = new AddCommand.AddPersonDescriptor();
 
         if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
-            addPersonDescriptor.setName(
-                    ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get()));
+            throw new ParseException(MESSAGE_MULTIPLE_NAMES);
         }
         parsePhonesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_PHONE))
                 .ifPresent(addPersonDescriptor::setPhones);

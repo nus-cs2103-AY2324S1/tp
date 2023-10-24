@@ -25,16 +25,6 @@ import networkbook.testutil.TypicalPersons;
 public class AddCommandTest {
 
     private Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
-
-    @Test
-    public void execute_addAnotherNameToPerson_commandFailure() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        AddCommand.AddPersonDescriptor descriptor =
-                new AddPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_AMY).build();
-        AddCommand addCommand = new AddCommand(indexLastPerson, descriptor);
-        String expectedMessage = AddCommand.MESSAGE_MULTIPLE_NAMES;
-        CommandTestUtil.assertCommandFailure(addCommand, model, expectedMessage);
-    }
     @Test
     public void execute_callAddPhoneOnFilteredList_success() {
         CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
@@ -170,7 +160,7 @@ public class AddCommandTest {
     public void execute_invalidPersonIndexUnfilteredList_commandFailure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         AddCommand.AddPersonDescriptor descriptor =
-                new AddPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build();
+                new AddPersonDescriptorBuilder().build();
         AddCommand addCommand = new AddCommand(outOfBoundIndex, descriptor);
 
         CommandTestUtil.assertCommandFailure(addCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -188,7 +178,7 @@ public class AddCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getNetworkBook().getPersonList().size());
 
         AddCommand addCommand = new AddCommand(outOfBoundIndex,
-                new AddPersonDescriptorBuilder().withName(CommandTestUtil.VALID_NAME_BOB).build());
+                new AddPersonDescriptorBuilder().build());
 
         CommandTestUtil.assertCommandFailure(addCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }

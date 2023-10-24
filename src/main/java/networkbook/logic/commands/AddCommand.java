@@ -50,8 +50,6 @@ public class AddCommand extends Command {
             + CliSyntax.PREFIX_TAG + " owesMoney";
 
     public static final String MESSAGE_NO_INFO = "At least one field to add must be provided.";
-    public static final String MESSAGE_MULTIPLE_NAMES = "Contact cannot have multiple names.\n"
-            + "Please use the 'update' command instead.";
     public static final String MESSAGE_MULTIPLE_UNIQUE_FIELD = "Some fields provided cannot have multiple values.\n"
             + "Please use the 'update' command instead.";
     public static final String MESSAGE_ADD_INFO_SUCCESS = "Added information to this contact: %1$s";
@@ -81,9 +79,6 @@ public class AddCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToAddInfo = lastShownList.get(index.getZeroBased());
-        if (!Objects.isNull(addPersonDescriptor.getName().orElse(null))) {
-            throw new CommandException(MESSAGE_MULTIPLE_NAMES);
-        }
         Person personAfterAddingInfo = addInfoToPerson(personToAddInfo, addPersonDescriptor);
         model.setItem(personToAddInfo, personAfterAddingInfo);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -110,8 +105,6 @@ public class AddCommand extends Command {
                 updatedCourses, updatedSpecialisations, updatedTags, updatedPriority);
     }
 
-    // TODO: for non-unique fields, change respective model to use list and append to the list
-    // TODO: now it just replaces the old value
     private UniqueList<Phone> addPhones(Person personToAddInfo, AddPersonDescriptor addPersonDescriptor) {
         UniqueList<Phone> phones = personToAddInfo.getPhones();
         addPersonDescriptor.getPhones().ifPresent(phones::addAllFromList);
@@ -192,7 +185,6 @@ public class AddCommand extends Command {
      * corresponding field value of the person.
      */
     public static class AddPersonDescriptor {
-        private Name name = null;
         private UniqueList<Phone> phones;
         private UniqueList<Email> emails;
         private UniqueList<Link> links;
@@ -208,7 +200,6 @@ public class AddCommand extends Command {
          * Copy constructor.
          */
         public AddPersonDescriptor(AddPersonDescriptor toCopy) {
-            setName(toCopy.name);
             setPhones(toCopy.getPhones().map(UniqueList::copy).orElse(null));
             setEmails(toCopy.getEmails().map(UniqueList::copy).orElse(null));
             setLinks(toCopy.getLinks().map(UniqueList::copy).orElse(null));
@@ -223,20 +214,12 @@ public class AddCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, graduation, tags, priority)
+            return CollectionUtil.isAnyNonNull(graduation, tags, priority)
                     || (phones != null && !phones.isEmpty())
                     || (emails != null && !emails.isEmpty())
                     || (links != null && !links.isEmpty())
                     || (courses != null && !courses.isEmpty())
                     || (specialisations != null && !specialisations.isEmpty());
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
         }
 
         public void setPhones(UniqueList<Phone> phones) {
@@ -402,8 +385,7 @@ public class AddCommand extends Command {
             }
 
             AddPersonDescriptor otherAddPersonDescriptor = (AddPersonDescriptor) other;
-            return Objects.equals(name, otherAddPersonDescriptor.name)
-                    && Objects.equals(phones, otherAddPersonDescriptor.phones)
+            return Objects.equals(phones, otherAddPersonDescriptor.phones)
                     && Objects.equals(emails, otherAddPersonDescriptor.emails)
                     && Objects.equals(links, otherAddPersonDescriptor.links)
                     && Objects.equals(graduation, otherAddPersonDescriptor.graduation)
@@ -416,7 +398,6 @@ public class AddCommand extends Command {
         @Override
         public String toString() {
             ToStringBuilder tsb = new ToStringBuilder(this)
-                    .add("name", name)
                     .add("phones", phones)
                     .add("emails", emails)
                     .add("links", links)
