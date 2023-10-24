@@ -39,6 +39,52 @@ MediFlowR is a **desktop app for managing patient records and appointments, opti
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Tutorial for new users
+
+If this is your first time using MediFlowR, do not worry as this is a tutorial for you to get familiar with the features
+of MediFlowR. Please follow the instructions [here](#quick-start) first to setup the application before proceeding with the tutorial. 
+
+- Launch the MediFlowR application.
+
+  - Note: When the application is first launched, it will contain some default patient records. 
+
+- Let us try **adding a patient** into our patient records. Enter the command `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=Fever` in the command box.
+
+![Command result for adding a patient](images/userguide/add-patient.png)
+
+- You should get this result screen. Try adding a few more patients into the patient records with the same format to familiarise yourself with the command.
+
+- Let us try **editing the patient** that we have just added. Enter the command `edit 1 phone=91234567 birthdate=2000/09/19` in the command box.
+
+![Command result for editing a patient](images/userguide/edit-patient.png)
+- You should get this result screen. This will change the phone of the patient to 91234567 and the birthdate of the patient to 2000/09/19.
+
+- Let us try **scheduling an appointment** now that we have a patient in our records. Enter the command `schedule patient=John Doe start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray` in the command box.
+
+![Command result for scheduling an appointment](images/userguide/schedule-appointment.png)
+
+- You should get this result screen. This will schedule a new appointment for the patient with the name John Doe.
+
+- Let us try **rescheduling the appointment** that we have just scheduled. Enter the command `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00` in the command box.
+
+![Command result for rescheduling the appointment](images/userguide/reschedule-appointment.png)
+
+- You should get this result screen. This will reschedule the appointment to start on 2023/05/02 09:00 and end on 2023/05/02 11:00.
+
+- Let us try **deleting a patient** from our patient records. Enter the command `delete 1`.
+
+![Command result for deleting a patient](images/userguide/delete-patient.png)
+
+- You should get this result screen. This will delete the first patient in the patient records.
+
+- Let us try **cancelling an appointment** from our appointment list. Enter the command `cancel 1`.
+
+![Command result for cancelling an appointment](images/userguide/cancel-appointment.png)
+
+- You should get this result screen. This will cancel the first appointment in the appointment list.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
