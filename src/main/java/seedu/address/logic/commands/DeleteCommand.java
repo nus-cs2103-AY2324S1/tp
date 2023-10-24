@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the patient identified by the full name or nric of the patient.\n"
+            + ": Delete the patient identified by the full name or nric of the patient.\n"
             + "Parameters: n/Name or id/Nric (must be valid)\n"
             + "Example: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A";
 
