@@ -9,8 +9,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -174,4 +176,114 @@ public class UniqueBookingListTest {
     public void toStringMethod() {
         assertEquals(uniqueBookingList.asUnmodifiableObservableList().toString(), uniqueBookingList.toString());
     }
+
+    @Test
+    public void setPerson_editedPersonWithDifferentIdentity_success() {
+        uniqueBookingList.add(ALICE);
+        Booking editedAlice = new BookingBuilder(ALICE)
+                .withName(BOB.getName().toString())
+                .withEmail(BOB.getEmail().toString())
+                .withPhone(BOB.getPhone().toString())
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
+        uniqueBookingList.setBooking(ALICE, editedAlice);
+        UniqueBookingList expectedUniqueBookingList = new UniqueBookingList();
+        expectedUniqueBookingList.add(editedAlice);
+        assertEquals(expectedUniqueBookingList, uniqueBookingList);
+    }
+
+    @Test
+    public void setPersons_listWithDuplicatePersonInList_throwsDuplicatePersonException() {
+        uniqueBookingList.add(ALICE);
+        List<Booking> listWithDuplicateBookings = Arrays.asList(ALICE, BOB, ALICE);
+        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.setBookings(listWithDuplicateBookings));
+    }
+
+    @Test
+    public void setPersons_listWithDuplicatePersonToAdd_throwsDuplicatePersonException() {
+        uniqueBookingList.add(ALICE);
+        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.setBookings(Arrays.asList(ALICE,
+                BOB, BOB)));
+    }
+
+    @Test
+    public void setPersons_listWithInvalidBooking_throwsDuplicatePersonException() {
+        assertThrows(DuplicateBookingException.class, () -> uniqueBookingList.setBookings(Arrays.asList(ALICE, BOB,
+                new BookingBuilder(BOB).withBookingPeriod("2023-02-20 12:00 to 2023-02-20 14:00").build())));
+    }
+
+    @Test
+    public void setPersonWithNullTargetPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueBookingList.setBooking(null, ALICE));
+    }
+
+    @Test
+    public void setPersonWithNullEditedPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueBookingList.setBooking(ALICE, null));
+    }
+
+    @Test
+    public void setPersonTargetPersonNotInListThrowsPersonNotFoundException() {
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.setBooking(ALICE, ALICE));
+    }
+
+    @Test
+    public void removeNullPersonThrowsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueBookingList.remove(null));
+    }
+
+    @Test
+    public void removePersonDoesNotExistThrowsPersonNotFoundException() {
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.remove(ALICE));
+    }
+
+    @Test
+    public void asUnmodifiableObservableListModifyListThrowsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, ()
+                -> uniqueBookingList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void equals() {
+        // Test for equality with itself
+        assertTrue(uniqueBookingList.equals(uniqueBookingList));
+
+        assertFalse(uniqueBookingList.equals(null));
+
+        // Test for equality with a copy of the list
+        UniqueBookingList copyUniqueBookingList = new UniqueBookingList();
+        copyUniqueBookingList.setBookings(new ArrayList<>(uniqueBookingList.asUnmodifiableObservableList()));
+        assertTrue(uniqueBookingList.equals(copyUniqueBookingList));
+
+        // Test for equality with a list containing different bookings
+        UniqueBookingList differentUniqueBookingList = new UniqueBookingList();
+        differentUniqueBookingList.add(BOB);
+        assertFalse(uniqueBookingList.equals(differentUniqueBookingList));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        // Test for hashCode consistency with the equals method
+        UniqueBookingList copyUniqueBookingList = new UniqueBookingList();
+        copyUniqueBookingList.setBookings(new ArrayList<>(uniqueBookingList.asUnmodifiableObservableList()));
+        assertEquals(uniqueBookingList.hashCode(), copyUniqueBookingList.hashCode());
+    }
+
+    @Test
+    public void iteratorTest() {
+        // Add some bookings to the list
+        uniqueBookingList.add(ALICE);
+        uniqueBookingList.add(BOB);
+
+        // Create an iterator for the list
+        Iterator<Booking> iterator = uniqueBookingList.iterator();
+
+        // Iterate through the list and check if the elements match
+        assertTrue(iterator.hasNext());
+        assertEquals(ALICE, iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals(BOB, iterator.next());
+        assertFalse(iterator.hasNext());
+    }
+
 }

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 /**
  * Represents a Person's address in the address book.
@@ -18,7 +19,8 @@ public class BookingPeriod {
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} to"
             + " \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$";
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm",
+                    Locale.US);
 
     public final String value; // String representation of the booking period
 
@@ -49,16 +51,64 @@ public class BookingPeriod {
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
+        String[] dateTimeParts = test.split(" to ");
+        LocalDateTime startDateTime = LocalDateTime.parse(dateTimeParts[0], dateTimeFormatter);
+        LocalDateTime endDateTime = LocalDateTime.parse(dateTimeParts[1], dateTimeFormatter);
+
+        return isValidDate(dateTimeParts[0]) && isValidDate(dateTimeParts[1])
+                    && !endDateTime.isBefore(startDateTime);
+    }
+
+    /**
+     * Validates a date and time string in the "YYYY-MM-DD HH:MM" format.
+     *
+     * @param dateTimeString The string to be validated as a date and time.
+     * @return True if the input string is a valid date and time, false otherwise.
+     */
+    static boolean isValidDate(String dateTimeString) {
+        String[] parts = dateTimeString.split(" ");
+
+        if (parts.length != 2) {
+            return false; // Invalid format, should have a date and time part
+        }
+
+        String datePart = parts[0];
+        String timePart = parts[1];
+
+        String[] dateParts = datePart.split("-");
+        String[] timeParts = timePart.split(":");
+
+        if (dateParts.length != 3 || timeParts.length != 2) {
+            return false; // Invalid format, should have year, month, day, hour, and minute parts
+        }
 
         try {
-            String[] dateTimeParts = test.split(" to ");
-            LocalDateTime startDateTime = LocalDateTime.parse(dateTimeParts[0], dateTimeFormatter);
-            LocalDateTime endDateTime = LocalDateTime.parse(dateTimeParts[1], dateTimeFormatter);
-            return !endDateTime.isBefore(startDateTime);
-        } catch (DateTimeParseException e) {
+            int year = Integer.parseInt(dateParts[0]);
+            int month = Integer.parseInt(dateParts[1]);
+            int day = Integer.parseInt(dateParts[2]);
+            int hour = Integer.parseInt(timeParts[0]);
+            int minute = Integer.parseInt(timeParts[1]);
+
+            if (hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59 && month >= 1 && month <= 12 && day >= 1) {
+                if (month == 2) {
+                    // Check for leap year
+                    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                        return day <= 29;
+                    } else {
+                        return day <= 28;
+                    }
+                } else if ((month == 4 || month == 6 || month == 9 || month == 11)) {
+                    return day <= 30;
+                } else {
+                    return day <= 31;
+                }
+            }
+        } catch (NumberFormatException e) {
             return false;
         }
+        return false;
     }
+
 
     /**
      * Sets the start and end date and time for the booking period.
@@ -68,14 +118,22 @@ public class BookingPeriod {
     private void setPeriod(String period) {
         try {
             // Split the string into start and end date parts
-            String[] dateParts = period.split(" to ");
-            this.checkInDateTime = LocalDateTime.parse(dateParts[0], dateTimeFormatter);
-            this.checkOutDateTime = LocalDateTime.parse(dateParts[1], dateTimeFormatter);
+            String[] dateParts = period.split(" to");
+            LocalDateTime startDateTime = LocalDateTime.parse(dateParts[0].trim(), dateTimeFormatter);
+            LocalDateTime endDateTime = LocalDateTime.parse(dateParts[1].trim(), dateTimeFormatter);
 
+            // Check if endDateTime is after or equal to startDateTime
+            if (endDateTime.isBefore(startDateTime) || !isValidDate(dateParts[0]) || !isValidDate(dateParts[0])) {
+                throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+            }
+
+            this.checkInDateTime = startDateTime;
+            this.checkOutDateTime = endDateTime;
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS, e);
         }
     }
+
 
     @Override
     public String toString() {

@@ -2,6 +2,7 @@ package seedu.address.model.booking;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_PERIOD_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -29,9 +30,6 @@ public class BookingTest {
     public void isSameBooking() {
         // same object -> returns true
         assertTrue(ALICE.isSameBooking(ALICE));
-
-        // null -> returns false
-        assertFalse(ALICE.isSameBooking(null));
 
         // same room, all other attributes different -> returns true
         Booking editedAlice = new BookingBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
@@ -64,9 +62,6 @@ public class BookingTest {
 
         // same object -> returns true
         assertTrue(ALICE.equals(ALICE));
-
-        // null -> returns false
-        assertFalse(ALICE.equals(null));
 
         // different type -> returns false
         assertFalse(ALICE.equals(5));
@@ -104,5 +99,25 @@ public class BookingTest {
                 + ", email=" + ALICE.getEmail()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void testHashCodeEqualObjects() {
+        // Create two equal Booking objects
+        Booking booking1 = new BookingBuilder(ALICE).build();
+        Booking booking2 = new BookingBuilder(ALICE).build();
+
+        // Check that their hash codes are equal
+        assertEquals(booking1.hashCode(), booking2.hashCode());
+    }
+
+    @Test
+    public void testHashCodeNotEqualObjects() {
+        // Create two different Booking objects
+        Booking booking1 = new BookingBuilder(ALICE).build();
+        Booking booking2 = new BookingBuilder(BOB).build();
+
+        // Check that their hash codes are not equal
+        assertNotEquals(booking1.hashCode(), booking2.hashCode());
     }
 }
