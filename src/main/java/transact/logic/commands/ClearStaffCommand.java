@@ -18,6 +18,6 @@ public class ClearStaffCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS, TabWindow.ADDRESSBOOK, false, false, true, false);
+        return new CommandResult(MESSAGE_SUCCESS, TabWindow.ADDRESSBOOK, false, false, true);
     }
 }

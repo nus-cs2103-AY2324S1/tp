@@ -28,10 +28,10 @@ public class ResultDisplay extends UiPart<Region> {
             currentText += "\n"; // Add a newline to separate messages
         }
         resultDisplay.setText(currentText + feedbackToUser);
-        //resultDisplay.appendText(currentText + feedbackToUser);
-
-        // 将滚动条滚动到最底部
         resultDisplay.positionCaret(resultDisplay.getLength());
+    }
+    public void clear() {
+        resultDisplay.clear();
     }
 
 }

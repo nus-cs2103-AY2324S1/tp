@@ -18,7 +18,7 @@ public class ClearTransactionCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setTransactionBook(new TransactionBook());
-        return new CommandResult(MESSAGE_SUCCESS, TabWindow.TRANSACTIONS, false, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, TabWindow.TRANSACTIONS, false, false);
     }
 }
 

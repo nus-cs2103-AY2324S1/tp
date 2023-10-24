@@ -233,6 +233,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isClearResultDisplay()) {
+                resultDisplay.clear();
+            }
+
             switchTab(commandResult.getTabWindow());
 
             return commandResult;

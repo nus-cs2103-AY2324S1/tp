@@ -22,9 +22,8 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    private final boolean clearStaffs;
+    private final boolean clearResultDisplay;
 
-    private final boolean clearTransactions;
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -33,19 +32,17 @@ public class CommandResult {
         this.tabWindow = tabWindow;
         this.showHelp = showHelp;
         this.exit = exit;
-        this.clearStaffs = false;
-        this.clearTransactions = false;
+        this.clearResultDisplay = false;
     }
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, TabWindow tabWindow, boolean showHelp, boolean exit, boolean clearStaffs, boolean clearTransactions) {
+    public CommandResult(String feedbackToUser, TabWindow tabWindow, boolean showHelp, boolean exit, boolean clearResultDisplay) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.tabWindow = tabWindow;
         this.showHelp = showHelp;
         this.exit = exit;
-        this.clearStaffs = clearStaffs;
-        this.clearTransactions = clearTransactions;
+        this.clearResultDisplay = clearResultDisplay;
     }
 
     /**
@@ -54,7 +51,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, TabWindow tabWindow) {
-        this(feedbackToUser, tabWindow, false, false, false, false);
+        this(feedbackToUser, tabWindow, false, false);
     }
 
     /**
@@ -62,7 +59,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, TabWindow.CURRENT, false, false, false, false);
+        this(feedbackToUser, TabWindow.CURRENT, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -81,13 +78,10 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isClearStaffs() {
-        return clearStaffs;
+    public boolean isClearResultDisplay() {
+        return clearResultDisplay;
     }
 
-    public boolean isClearTransactions() {
-        return clearTransactions;
-    }
 
     @Override
     public boolean equals(Object other) {
