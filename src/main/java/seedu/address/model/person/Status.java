@@ -31,11 +31,11 @@ public class Status {
         this.value = value;
         switch (value.toLowerCase()) {
         case "offered":
-                this.statusType = StatusTypes.OFFERED;
-                break;
+            this.statusType = StatusTypes.OFFERED;
+            break;
         case "rejected":
-                this.statusType = StatusTypes.REJECTED;
-                break;
+            this.statusType = StatusTypes.REJECTED;
+            break;
         case "interviewed":
             this.statusType = StatusTypes.INTERVIEWED;
             break;
