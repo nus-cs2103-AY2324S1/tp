@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.CLASS_NUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -80,6 +82,32 @@ public class LogicManagerTest {
     @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredStudentList().remove(0));
+    }
+
+    @Test
+    public void getAddressBook_success() {
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        assertNotNull(addressBook);
+    }
+
+    @Test
+    public void getSelectedStudent_success() {
+        model.setSelectedStudent(AMY);
+        assertEquals(AMY, model.getSelectedStudent().get(0));
+    }
+
+    @Test
+    public void getAddressBookFilePath_success() {
+        Path path = model.getAddressBookFilePath();
+        assertNotNull(path);
+    }
+
+    @Test
+    public void setGuiSettings_success() {
+        GuiSettings newGuiSettings = new GuiSettings(400.0, 400.0, 0, 0);
+        model.setGuiSettings(newGuiSettings);
+
+        assertEquals(newGuiSettings, model.getGuiSettings());
     }
 
     /**
