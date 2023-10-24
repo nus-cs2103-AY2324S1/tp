@@ -2,8 +2,6 @@ package networkbook.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
