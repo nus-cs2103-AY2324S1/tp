@@ -174,6 +174,42 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Clear the Address Book.
+     */
+    @FXML
+    private void handleClearStaffs() throws CommandException, ParseException {
+        String commandText = "clearstaff";
+        try {
+            CommandResult commandResult = logic.execute(commandText);
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            switchTab(commandResult.getTabWindow());
+        } catch (CommandException | ParseException e) {
+            logger.info("An error occurred while executing command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Clear the Transaction Book.
+     */
+    @FXML
+    private void handleClearTransactions() throws CommandException, ParseException {
+        String commandText = "cleartransaction";
+        try {
+            CommandResult commandResult = logic.execute(commandText);
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            switchTab(commandResult.getTabWindow());
+        } catch (CommandException | ParseException e) {
+            logger.info("An error occurred while executing command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
     public CardListPanel getCardListPanel() {
         return cardListPanel;
     }

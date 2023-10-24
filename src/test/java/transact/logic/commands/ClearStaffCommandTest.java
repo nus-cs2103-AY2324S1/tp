@@ -11,14 +11,14 @@ import transact.model.Model;
 import transact.model.ModelManager;
 import transact.model.UserPrefs;
 
-public class ClearCommandTest {
+public class ClearStaffCommandTest {
 
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearStaffCommand(), model, ClearStaffCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTransactionBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearStaffCommand(), model, ClearStaffCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }
