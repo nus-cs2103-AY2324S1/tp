@@ -8,10 +8,8 @@ import static seedu.address.logic.parser.ParserUtil.validateTag;
 
 import seedu.address.logic.commands.GatherCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.person.gatheremail.GatherEmailByFinancialPlan;
 import seedu.address.model.person.gatheremail.GatherEmailByTag;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new GatherCommand object

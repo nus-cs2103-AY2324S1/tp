@@ -9,11 +9,10 @@ import static seedu.address.logic.parser.ParserUtil.validateNames;
 import static seedu.address.logic.parser.ParserUtil.validateTags;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.CombinedPredicate;
 import seedu.address.model.person.predicates.FinancialPlanContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.TagContainsKeywordsPredicate;
@@ -38,17 +37,22 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_FINANCIAL_PLAN, PREFIX_TAG);
 
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
+        nameKeywords.replaceAll(name -> name.trim());
         validateNames(nameKeywords);
 
         List<String> tagKeywords = argMultimap.getAllValues(PREFIX_TAG);
+        tagKeywords.replaceAll(tag -> tag.trim());
         validateTags(tagKeywords);
 
         List<String> financialPlanKeywords = argMultimap.getAllValues(PREFIX_FINANCIAL_PLAN);
+        financialPlanKeywords.replaceAll(financialPlan -> financialPlan.trim());
         validateFinancialPlans(financialPlanKeywords);
 
-        Predicate<Person> combinedPredicate = new NameContainsKeywordsPredicate(nameKeywords)
-                .or(new TagContainsKeywordsPredicate(tagKeywords))
-                .or(new FinancialPlanContainsKeywordsPredicate(financialPlanKeywords));
+        CombinedPredicate combinedPredicate = new CombinedPredicate(
+                new FinancialPlanContainsKeywordsPredicate(financialPlanKeywords),
+                new NameContainsKeywordsPredicate(nameKeywords),
+                new TagContainsKeywordsPredicate(tagKeywords)
+        );
 
         return new FindCommand(combinedPredicate);
     }
