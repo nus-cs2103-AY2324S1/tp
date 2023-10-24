@@ -22,7 +22,7 @@ import seedu.address.model.student.StudentNumber;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final VersionedAddressBook versionedAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
 
@@ -34,9 +34,9 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.versionedAddressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        filteredStudents = new FilteredList<>(this.versionedAddressBook.getStudentList());
 
         logger.info("Set the tutorial count to " + this.userPrefs.getTutorialCount());
         logger.info("Set the assignment count to " + this.userPrefs.getAssignmentCount());
@@ -119,46 +119,46 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        this.versionedAddressBook.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return versionedAddressBook;
     }
 
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return addressBook.hasStudent(student);
+        return versionedAddressBook.hasStudent(student);
     }
 
     @Override
     public void deleteStudent(Student target) {
-        addressBook.removeStudent(target);
+        versionedAddressBook.removeStudent(target);
     }
 
     @Override
     public void addStudent(Student student) {
-        addressBook.addStudent(student);
+        versionedAddressBook.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-        addressBook.setStudent(target, editedStudent);
+        versionedAddressBook.setStudent(target, editedStudent);
     }
 
     @Override
     public Student getStudent(StudentNumber studentNumber) {
         requireAllNonNull(studentNumber);
-        return addressBook.getStudent(studentNumber);
+        return versionedAddressBook.getStudent(studentNumber);
     }
 
     @Override
     public void setSelectedStudent(Student student) {
-        addressBook.setSelectedStudent(student);
+        versionedAddressBook.setSelectedStudent(student);
     }
     //=========== Filtered Student List Accessors =============================================================
 
@@ -173,7 +173,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Student> getSelectedStudent() {
-        return addressBook.getSelectedStudent();
+        return versionedAddressBook.getSelectedStudent();
     }
 
     @Override
@@ -181,8 +181,48 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
         if (!filteredStudents.isEmpty()) {
-            addressBook.setSelectedStudent(filteredStudents.get(0));
+            versionedAddressBook.setSelectedStudent(filteredStudents.get(0));
         }
+    }
+
+    /**
+     * Returns true if the model has previous address book states to restore.
+     */
+    @Override
+    public boolean canUndoAddressBook() {
+        return versionedAddressBook.canUndo();
+    }
+
+    /**
+     * Returns true if the model has undone address book states to restore.
+     */
+    @Override
+    public boolean canRedoAddressBook() {
+        return versionedAddressBook.canRedo();
+    }
+
+    /**
+     * Restores the model's address book to its previous state.
+     */
+    @Override
+    public void undoAddressBook() {
+        versionedAddressBook.undo();
+    }
+
+    /**
+     * Restores the model's address book to its previously undone state.
+     */
+    @Override
+    public void redoAddressBook() {
+        versionedAddressBook.redo();
+    }
+
+    /**
+     * Saves the current address book state for undo/redo.
+     */
+    @Override
+    public void commitAddressBook() {
+        versionedAddressBook.commit();
     }
 
     @Override
@@ -197,13 +237,13 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return versionedAddressBook.equals(otherModelManager.versionedAddressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredStudents.equals(otherModelManager.filteredStudents);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(addressBook, userPrefs, filteredStudents);
+        return Objects.hash(versionedAddressBook, userPrefs, filteredStudents);
     }
 }

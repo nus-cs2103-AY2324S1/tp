@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -56,7 +57,7 @@ public class LoadCommand extends Command {
      * @throws CommandException If the file cannot be loaded or does not exist.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         File f = filePath.toFile();
         if (!f.isFile()) {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));

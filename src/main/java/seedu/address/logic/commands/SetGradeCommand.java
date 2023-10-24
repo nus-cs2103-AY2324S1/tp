@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -47,7 +48,7 @@ public class SetGradeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(studentNumber))) {
@@ -61,6 +62,8 @@ public class SetGradeCommand extends Command {
             studentToGrade.getEmail(), studentToGrade.getStudentNumber(), classDetails, studentToGrade.getTags());
 
         model.setStudent(studentToGrade, gradedStudent);
+        model.commitAddressBook();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
                 + classDetails.displayAssignments());
     }

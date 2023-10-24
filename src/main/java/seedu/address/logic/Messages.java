@@ -46,15 +46,15 @@ public class Messages {
     public static String format(Student student) {
         final StringBuilder builder = new StringBuilder();
         builder.append(student.getName())
-                .append(";\n Phone: ")
+                .append(";\nPhone: ")
                 .append(student.getPhone())
-                .append(";\n Email: ")
+                .append(";\nEmail: ")
                 .append(student.getEmail())
-                .append(";\n Student Number: ")
+                .append(";\nStudent Number: ")
                 .append(student.getStudentNumber())
-                .append(";\n Class Number: ")
+                .append(";\nClass Number: ")
                 .append(student.getClassDetails())
-                .append(";\n Tags: ");
+                .append(";\nTags: ");
         student.getTags().forEach(builder::append);
         return builder.toString();
     }

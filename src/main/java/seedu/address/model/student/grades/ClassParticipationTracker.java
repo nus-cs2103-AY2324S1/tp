@@ -119,7 +119,7 @@ public class ClassParticipationTracker {
 
     @Override
     public String toString() {
-        StringBuilder ret = new StringBuilder("Class Part:\n");
+        StringBuilder ret = new StringBuilder("Class Participation:\n");
         for (int i = 0; i < classPartList.length; i++) {
             ret.append("Tutorial ").append(i + 1).append(": ").append(classPartList[i].toString()).append("\n");
         }

@@ -23,8 +23,10 @@ import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RecordClassPartCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -118,6 +120,12 @@ public class AddressBookParser {
 
         case ConfigCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -40,7 +41,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(targetStudentNumber))) {
@@ -51,6 +52,7 @@ public class MarkCommand extends Command {
 
         try {
             model.setStudent(student, student.markPresent(this.index));
+            model.commitAddressBook();
         } catch (InvalidTutorialIndexException e) {
             throw new CommandException(e.getMessage());
         }

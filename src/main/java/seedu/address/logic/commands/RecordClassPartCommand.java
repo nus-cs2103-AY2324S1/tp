@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_SESSION;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -47,7 +48,7 @@ public class RecordClassPartCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
 
         if (!model.hasStudent(new Student(studentNumber))) {
@@ -61,6 +62,8 @@ public class RecordClassPartCommand extends Command {
             studentToMark.getEmail(), studentToMark.getStudentNumber(), classDetails, studentToMark.getTags());
 
         model.setStudent(studentToMark, markedStudent);
+        model.commitAddressBook();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
                 + classDetails.displayParticipations());
     }
