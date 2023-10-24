@@ -127,6 +127,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedEvent);
 
         this.addressBook.setEvent(target, editedEvent);
+        sort();
     }
 
     @Override
@@ -167,7 +168,11 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event toAdd) {
         addressBook.addEvent(toAdd);
+        sort();
+    }
 
+    private void sort() {
+        this.addressBook.sort();
     }
 
     @Override
@@ -225,6 +230,8 @@ public class ModelManager implements Model {
         return false;
     }
 
+
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -241,4 +248,5 @@ public class ModelManager implements Model {
                 && this.userPrefs.equals(otherModelManager.userPrefs)
                 && this.filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
 }

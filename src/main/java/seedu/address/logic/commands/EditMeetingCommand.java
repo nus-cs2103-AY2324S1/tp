@@ -83,6 +83,8 @@ public class EditMeetingCommand extends Command {
         Event meetingToEdit = lastShownList.get(index.getZeroBased());
         Event editedMeeting = createEditedMeeting(meetingToEdit, this.editMeetingDescriptor, model);
 
+        CommandUtil.verifyEventTimes(editedMeeting);
+
         model.setEvent(meetingToEdit, editedMeeting);
 
         return new CommandResult(generateSuccessMessage(editedMeeting));

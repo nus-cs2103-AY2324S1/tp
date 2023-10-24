@@ -186,4 +186,6 @@ public class ParserUtil {
         String trimmedTime = time.trim();
         return EventTime.of(trimmedTime);
     }
+
+
 }
