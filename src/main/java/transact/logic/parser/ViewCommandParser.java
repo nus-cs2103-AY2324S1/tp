@@ -4,6 +4,7 @@ import static transact.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import transact.logic.commands.ViewCommand;
 import transact.logic.parser.exceptions.ParseException;
+import transact.ui.MainWindow.TabWindow;
 
 /**
  * Parses input arguments and creates a new ViewCommand object
@@ -18,19 +19,21 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        ViewCommand.ViewType type;
-        try {
-            switch (argList[0].toLowerCase()) {
-            case "s":
-                type = ViewCommand.ViewType.STAFF;
-                break;
-            case "t":
-                type = ViewCommand.ViewType.TRANSACTION;
-                break;
-            default:
-                type = ViewCommand.ViewType.valueOf(argList[0].toUpperCase());
-            }
-        } catch (IllegalArgumentException e) {
+        TabWindow type;
+        switch (argList[0].toLowerCase()) {
+        case "staff":
+        case "s":
+            type = TabWindow.ADDRESSBOOK;
+            break;
+        case "transaction":
+        case "t":
+            type = TabWindow.TRANSACTIONS;
+            break;
+        case "overview":
+        case "o":
+            type = TabWindow.OVERVIEW;
+            break;
+        default:
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
