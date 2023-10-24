@@ -33,7 +33,7 @@ public class Person {
     private final AnimalType animalType;
 
     /**
-     * Every field must be present and not null.
+     * Constructor for Person object. Ensures that required fields are not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Housing housing,
                   Availability availability, Name animalName, AnimalType animalType,

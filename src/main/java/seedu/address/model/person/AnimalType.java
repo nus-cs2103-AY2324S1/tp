@@ -42,6 +42,15 @@ public class AnimalType {
         return test.matches(validationRegex);
     }
 
+    /**
+     * Checks if the given string can be a valid Animal Type under any situation.
+     *
+     * @return true if the animal type matches any possible validation.
+     */
+    public static boolean isValidAnimalType(String test) {
+        return test.matches(VALIDATION_REGEX_AVAILABLE) || test.matches(VALIDATION_REGEX_NOT_AVAILABLE);
+    }
+
     @Override
     public String toString() {
         return value;

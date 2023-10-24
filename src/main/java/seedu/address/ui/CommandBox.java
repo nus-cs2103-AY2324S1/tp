@@ -70,6 +70,13 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Sets the focus of the user's cursor back to the TextField in the CommandBox.
+     */
+    public void setFocus() {
+        commandTextField.requestFocus();
+    }
+
+    /**
      * Represents a function that can execute commands.
      */
     @FunctionalInterface

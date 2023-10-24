@@ -56,6 +56,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private CommandBox commandBox;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -127,6 +130,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
+        this.commandBox = commandBox;
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -177,7 +181,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleView(Person personToView) {
         if (personListPanelPlaceholder.isVisible()) {
-            personProfile = new PersonProfile(personToView);
+            personProfile = new PersonProfile(personToView, this);
             personProfilePlaceholder.getChildren().add(personProfile.getRoot());
             personProfilePlaceholder.setVisible(true);
             personListPanelPlaceholder.setVisible(false);
@@ -231,5 +235,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     public boolean getIsInViewMode() {
         return this.isInViewMode;
+    }
+
+    /**
+     * Sets the cursor back to the command box
+     */
+    private void setFocusToCommandBox() {
+        commandBox.setFocus();
     }
 }
