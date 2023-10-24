@@ -27,7 +27,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Optional fields
-    private Lead lead;
+    private final Lead lead;
     private final TelegramHandle telegram;
     private final Profession profession;
     private final Income income;
@@ -55,8 +55,8 @@ public class Person {
     /**
      * Same constructor but with optional fields.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        TelegramHandle telegram, Profession profession, Income income, Details details, Lead lead) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, TelegramHandle telegram,
+                  Profession profession, Income income, Details details, Lead lead, Set<Interaction> interactions) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -69,6 +69,7 @@ public class Person {
         this.income = income;
         this.details = details;
         this.lead = lead;
+        this.interactions.addAll(interactions);
     }
 
     public Name getName() {
@@ -112,28 +113,11 @@ public class Person {
     }
 
     /**
-     * Adds an interaction to the person.
-     * @param interactions the set of interaction to be added
-     * @return the updated set of interactions
-     */
-    public Set<Interaction> addInteractions(Set<Interaction> interactions) {
-        this.interactions.addAll(interactions);
-        return this.interactions;
-    }
-
-    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Changes the lead potential of the client.
-     */
-    public void setLead(Lead newLead) {
-        this.lead = newLead;
     }
 
     /**

@@ -15,6 +15,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonCreator;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -114,7 +115,8 @@ class JsonAdaptedPerson {
 
         Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
         if (lead != null && !lead.isEmpty()) {
-            person.setLead(new Lead(lead));
+            final Lead modelLead = new Lead(lead);
+            person = new PersonCreator(person).withLead(modelLead).build();
         }
         return person;
     }
