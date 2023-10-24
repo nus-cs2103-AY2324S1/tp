@@ -59,7 +59,7 @@ public class Transaction implements Entry {
      */
     public Transaction(TransactionId transactionId, TransactionType transactionType, Description description,
             Amount amount, Date date) {
-        this(transactionId, transactionType, description, amount, date, 0);
+        this(transactionId, transactionType, description, amount, date, -1);
     }
 
     /**
