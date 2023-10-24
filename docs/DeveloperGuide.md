@@ -180,6 +180,21 @@ Step 5: Deck will now display only the cards with the `CS2103T` tag.
 Step 6: Should user want to see the full deck, they will execute `list` to view their full deck of cards.
 
 
+### [Proposed] Search Filter feature
+
+Introducing a search feature that allows users to search for specific flashcards based on their questions. This feature empowers users with greater navigability over their study materials.
+
+Below is an example of the usage of the Search filter
+
+Step 1: Assuming the user has existing cards in lesson, with their own set of questions and answers
+
+Step 2: When you want to search for cards with a particular staring phrase, execute the `search q/What` command.
+
+Step 3: The system will then display the cards that match the starting phrase.
+
+Step 4: To return to viewing your full deck of cards, simply execute the `list` command to view all cards stored in lesSON
+
+Step 5: If the user wishes to practise from this view, simply `practise index` for the index of the card
 
 
 --------------------------------------------------------------------------------------------------------------------
