@@ -12,20 +12,20 @@ import seedu.ccacommander.model.Model;
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Previous command successfully undone: \n%s";
-    public static final String MESSAGE_NO_PREVIOUS_COMMAND = "No available commands to undo.";
+    public static final String MESSAGE_SUCCESS_UNDO = "Previous command successfully undone: \n%s";
+    public static final String MESSAGE_NO_AVAILABLE_COMMAND = "No available commands to undo.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (!model.canUndo()) {
-            throw new CommandException(MESSAGE_NO_PREVIOUS_COMMAND);
+            throw new CommandException(MESSAGE_NO_AVAILABLE_COMMAND);
         }
 
         String undoCommandMessage = model.undo();
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, undoCommandMessage));
+        return new CommandResult(String.format(MESSAGE_SUCCESS_UNDO, undoCommandMessage));
     }
 }

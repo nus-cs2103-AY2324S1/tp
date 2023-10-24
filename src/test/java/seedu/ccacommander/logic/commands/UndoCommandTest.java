@@ -26,7 +26,7 @@ public class UndoCommandTest {
     public void execute_hasPreviousState_success() {
         model.commit(COMMIT_MESSAGE);
 
-        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS, COMMIT_MESSAGE);
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS_UNDO, COMMIT_MESSAGE);
         expectedModel.commit(COMMIT_MESSAGE);
         expectedModel.undo();
 
@@ -35,6 +35,6 @@ public class UndoCommandTest {
 
     @Test
     public void execute_noPreviousState_throwsCommandException() {
-        assertCommandFailure(new UndoCommand(), model, UndoCommand.MESSAGE_NO_PREVIOUS_COMMAND);
+        assertCommandFailure(new UndoCommand(), model, UndoCommand.MESSAGE_NO_AVAILABLE_COMMAND);
     }
 }
