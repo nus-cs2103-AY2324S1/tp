@@ -58,6 +58,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setStudents(newData.getStudentList());
+        if (!newData.getSelectedStudent().isEmpty()) {
+            setSelectedStudent(newData.getSelectedStudent().get(0));
+        }
     }
 
     //// student-level operations
@@ -131,6 +134,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return students.asUnmodifiableObservableList();
     }
 
+    @Override
     public ObservableList<Student> getSelectedStudent() {
         return students.getSelectedStudent();
     }

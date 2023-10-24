@@ -123,6 +123,13 @@ public class UniqueStudentList implements Iterable<Student> {
         }
     }
 
+    /**
+     * Clears the selection of a student so that no student is currently selected.
+     */
+    public void clearSelectedStudent() {
+        selectedStudent.clear();
+    }
+
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
@@ -155,8 +162,7 @@ public class UniqueStudentList implements Iterable<Student> {
         }
 
         UniqueStudentList otherUniqueStudentList = (UniqueStudentList) other;
-        return internalList.equals(otherUniqueStudentList.internalList) &&
-            selectedStudent.equals(otherUniqueStudentList.selectedStudent);
+        return internalList.equals(otherUniqueStudentList.internalList);
     }
 
     @Override
