@@ -111,20 +111,19 @@ public class EditTransactionCommand extends Command {
         Date updatedDate = editTransactionDescriptor.getDate()
                 .orElse(transactionToEdit.getDate());
 
-        var wrapper = new Object() {
-            Integer updatedStaffId = transactionToEdit.getPersonId();
-        };
+        Integer updatedStaffId = transactionToEdit.getPersonId();
 
-        editTransactionDescriptor.getStaffId().ifPresent(staffId -> {
-            if (staffId < 0) {
-                wrapper.updatedStaffId = -1;
+        if (editTransactionDescriptor.getStaffId().isPresent()) {
+            int tem = editTransactionDescriptor.getStaffId().get();
+            if (tem < 0) {
+                updatedStaffId = -1;
             } else {
-                wrapper.updatedStaffId = staffId;
+                updatedStaffId = tem;
             }
-        });
+        }
 
         return new Transaction(transactionToEdit.getTransactionId(), updatedTransactionType, updatedDescription,
-                updatedAmount, updatedDate, wrapper.updatedStaffId);
+                updatedAmount, updatedDate, updatedStaffId);
     }
 
     @Override
