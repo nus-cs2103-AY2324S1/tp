@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import seedu.address.logic.parser.ParserUtil;
 
+import javax.xml.stream.FactoryConfigurationError;
+
 public class TimeInterval {
 
     public static final String MESSAGE_CONSTRAINTS_SYNTAX = "The format of an interval should be: mon 1200 - tue 1400";
@@ -93,5 +95,17 @@ public class TimeInterval {
     @Override
     public String toString() {
         return start.toString() + " - " + end.toString() + " ";
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof TimeInterval)) {
+            return false;
+        } else if (object == this) {
+            return true;
+        } else {
+            TimeInterval otherTime = (TimeInterval) object;
+            return this.start.equals(otherTime.start) && this.end.equals(otherTime.end);
+        }
     }
 }
