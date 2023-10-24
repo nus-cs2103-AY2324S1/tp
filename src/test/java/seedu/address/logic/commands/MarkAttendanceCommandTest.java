@@ -17,6 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
+import seedu.address.model.week.Week;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -37,11 +38,11 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceWithValidPersonName_success() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("Amy Bee", true, LocalDate.now());
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("Amy Bee", true, new Week(1));
 
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s", amy.getName());
 
-        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(LocalDate.now(), true)).build();
+        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(new Week(1), true)).build();
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -54,11 +55,11 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceWithValidPersonID_success() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("A1234567E", true, LocalDate.now());
-
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("A1234567E", true,
+                new Week(1));
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s", amy.getName());
 
-        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(LocalDate.now(), true)).build();
+        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(new Week(1), true)).build();
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -71,8 +72,8 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceWithInvalidPersonName_failure() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("Bobby", true, LocalDate.now());
-
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("Bobby", true,
+                new Week(1));
         assertCommandFailure(markAttendanceCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
 
@@ -83,8 +84,8 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceWithInvalidPersonID_failure() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("A1234555E", true, LocalDate.now());
-
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("A1234555E", true,
+                new Week(1));
         assertCommandFailure(markAttendanceCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
 
