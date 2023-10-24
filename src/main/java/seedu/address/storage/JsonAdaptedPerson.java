@@ -76,7 +76,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         subject = source.getSubject().value;
-        day = source.getDay().value;
+        day = source.getDay().value.toString();
         begin = source.getBegin().value;
         end = source.getEnd().value;
         tags.addAll(source.getTags().stream()
