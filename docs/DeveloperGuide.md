@@ -404,7 +404,7 @@ Given below is an example scenario on how the delete schedule command behaves:
 7. Once the checks are successful, the method then calls `Model::deleteSchedule` in `ModelManager` to delete the specified `Schedule` in the model.
 8. Finally, the `DeleteScheduleCommand` returns the `CommandResult`.
 
-The following sequence diagram shows how the above steps for delete tutor operation works, taking `execute("delete-s 1")` API call as an example.
+The following sequence diagram shows how the above steps for delete schedule operation works, taking `execute("delete-s 1")` API call as an example.
 
 ![Sequence diagram for delete-s command](images/DeleteScheduleSequenceDiagram.png)
 #### Design rationale:
