@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -27,6 +30,19 @@ public class Begin {
 
     public static boolean isValidBegin(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    private LocalTime parse(String test) {
+        assert isValidBegin(test);
+
+        String pattern  = "HHmm";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+
+        return LocalTime.parse(test, formatter);
+    }
+
+    public LocalTime getTime() {
+        return parse(value);
     }
 
     @Override

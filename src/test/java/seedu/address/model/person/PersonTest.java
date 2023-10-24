@@ -99,7 +99,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", subject=" + ALICE.getSubject()
-                + ", day=" + ALICE.getDay() + ", begin=" + ALICE.getBegin() + ", end=" + ALICE.getEnd()
+                + ", lesson=" + ALICE.getLesson()
                 + ", tags=" + ALICE.getTags() + ", paid=" + ALICE.getPaid() + ", payrate=" + ALICE.getPayRate() + "}";
         assertEquals(expected, ALICE.toString());
     }

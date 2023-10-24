@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,11 +25,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Subject subject;
-
-    // Date fields
-    private final Day day;
-    private final Begin begin;
-    private final End end;
+    private final Lesson lesson;
     private final Set<Tag> tags = new HashSet<>();
 
     private boolean paid;
@@ -48,12 +44,11 @@ public class Person {
         this.email = email;
         this.address = address;
         this.subject = subject;
-        this.day = day;
-        this.begin = begin;
-        this.end = end;
         this.tags.addAll(tags);
         this.paid = paid;
         this.payRate = payRate;
+
+        this.lesson = new Lesson(day, begin, end);
     }
 
     public Name getName() {
@@ -76,17 +71,37 @@ public class Person {
         return subject;
     }
 
+    /**
+     * Return defensive copy of day
+     * @return day
+     */
     public Day getDay() {
-        return day;
+        String day = lesson.day.toString();
+        return new Day(day);
     }
 
-
+    /**
+     * Return defensive copy of Begin
+     * @return begin
+     */
     public Begin getBegin() {
-        return begin;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        String begin = lesson.begin.format(formatter);
+        return new Begin(begin);
     }
 
+    /**
+     * Return defensive copy of end
+     * @return end
+     */
     public End getEnd() {
-        return end;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        String end = lesson.end.format(formatter);
+        return new End(end);
+    }
+
+    public Lesson getLesson() {
+        return lesson;
     }
 
     /**
@@ -143,9 +158,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && subject.equals(otherPerson.subject)
-                && day.equals(otherPerson.day)
-                && begin.equals(otherPerson.begin)
-                && end.equals(otherPerson.end)
+                && lesson.equals(otherPerson.lesson)
                 && tags.equals(otherPerson.tags)
                 && payRate.equals(otherPerson.payRate);
     }
@@ -153,7 +166,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, subject, day, begin, end, tags, paid, payRate);
+        return Objects.hash(name, phone, email, address, subject, lesson, tags, paid, payRate);
     }
 
     @Override
@@ -164,9 +177,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("subject", subject)
-                .add("day", day)
-                .add("begin", begin)
-                .add("end", end)
+                .add("lesson", lesson)
                 .add("tags", tags)
                 .add("paid", paid)
                 .add("payrate", payRate)
