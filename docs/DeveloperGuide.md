@@ -358,9 +358,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System indicates the error and requests for data to be inputted in the correct format.
     * 1a2. Foster Manager enters new command.
 
-        Steps 1a1 - 1a2 are repeated until the command entered is in the correct format.
+      Steps 1a1 - 1a2 are repeated until the command entered is in the correct format.
   
-        Use case resumes from step 2.
+      Use case resumes from step 2.
   
     
 **Use case: UC2 - List Fosterers**
@@ -378,9 +378,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System indicates the error and requests for data to be inputted in the correct format.
     * 1a2. Foster Manager enters new command.
 
-        Steps 1a1 - 1a2 are repeated until the command entered is in the correct format. 
+      Steps 1a1 - 1a2 are repeated until the command entered is in the correct format. 
 
-        Use case resumes from step 2.
+      Use case resumes from step 2.
 
 
 **Use case: UC3 - Edit Fosterer**
