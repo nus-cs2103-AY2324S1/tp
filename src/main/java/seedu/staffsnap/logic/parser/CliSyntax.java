@@ -13,5 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DESCRIPTOR = new Prefix("d/");
     public static final Prefix PREFIX_INTERVIEW = new Prefix("i/");
     public static final Prefix PREFIX_TYPE = new Prefix("t/");
+    public static final Prefix PREFIX_RATING = new Prefix("r/");
 
 }
