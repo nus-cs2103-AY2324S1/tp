@@ -8,12 +8,10 @@ import static transact.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static transact.logic.parser.CliSyntax.PREFIX_STAFF;
 import static transact.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import transact.commons.core.index.Index;
 import transact.logic.commands.EditStaffCommand;
 import transact.logic.commands.EditTransactionCommand;
 import transact.logic.commands.EditTransactionCommand.EditTransactionDescriptor;
 import transact.logic.parser.exceptions.ParseException;
-
 
 /**
  * Parses input arguments and creates a new EditStaffCommand object
@@ -33,12 +31,13 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_DESCRIPTION, PREFIX_AMOUNT,
                 PREFIX_DATE, PREFIX_STAFF);
 
-        Index index;
+        Integer transactionId;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE), pe);
+            transactionId = Integer.parseInt(argMultimap.getPreamble());
+        } catch (NumberFormatException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTransactionCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE, PREFIX_DESCRIPTION, PREFIX_AMOUNT,
@@ -68,6 +67,6 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
             throw new ParseException(EditStaffCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditTransactionCommand(index, editTransactionDescriptor);
+        return new EditTransactionCommand(transactionId, editTransactionDescriptor);
     }
 }

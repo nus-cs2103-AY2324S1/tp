@@ -42,13 +42,14 @@ public class JsonSerializableTransactionBook {
      *            {@code JsonSerializableTransactionBook}.
      */
     public JsonSerializableTransactionBook(ReadOnlyTransactionBook source) {
-        transactions.addAll(source.getTransactionList().stream()
+        transactions.addAll(source.getTransactionMap().values().stream()
                 .map(JsonAdaptedTransaction::new)
                 .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this transaction log into the model's {@code TransactionBook} object.
+     * Converts this transaction log into the model's {@code TransactionBook}
+     * object.
      *
      * @throws IllegalValueException
      *             if there were any data constraints violated.
@@ -57,7 +58,7 @@ public class JsonSerializableTransactionBook {
         TransactionBook transactionBook = new TransactionBook();
         for (JsonAdaptedTransaction jsonAdaptedTransaction : transactions) {
             Transaction transaction = jsonAdaptedTransaction.toModelType();
-            if (transactionBook.hasTransaction(transaction)) {
+            if (transactionBook.hasTransaction(transaction.getTransactionId())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TRANSACTION);
             }
             transactionBook.addTransaction(transaction);

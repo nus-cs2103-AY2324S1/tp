@@ -15,7 +15,6 @@ import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
-import transact.model.transaction.info.TransactionId;
 import transact.model.transaction.info.TransactionType;
 
 /**
@@ -46,15 +45,12 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         TransactionType transactionType = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
-
-        // TODO Parse data when date class ready
-        // Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
         // TODO Parse Optional Staff
         // Person staff = ParserUtil.parsePerson(args);
 
-        Transaction transaction = new Transaction(new TransactionId(), transactionType, description, amount,
-                new Date());
+        Transaction transaction = new Transaction(transactionType, description, amount, date);
 
         return new AddTransactionCommand(transaction);
     }

@@ -1,0 +1,32 @@
+.label {
+  -fx-font-size: 11pt;
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-text-fill: #555555;
+}
+
+.year-month-picker-combo {
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-font-size: 18px;
+  -fx-background: white;
+  -fx-background-color: transparent;
+}
+
+.year-month-picker-combo:hover {
+  -fx-background-color: #dae7f3;
+}
+
+.year-month-picker-combo .list-cell {
+  -fx-background: white;
+  -fx-background-color: transparent;
+  -fx-text-fill: -fx-text-base-color;
+  -fx-padding: 3 0 2 7;
+  -fx-cell-size: 1.66667em;
+}
+
+.year-month-picker-combo .list-cell:hover {
+  -fx-background-color: #dae7f3;
+}
+
+.scroll-bar {
+  -fx-background-color: derive(#fff, 20%);
+}
