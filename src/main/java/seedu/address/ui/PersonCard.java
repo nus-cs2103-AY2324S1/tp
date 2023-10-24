@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
 
 /**
@@ -64,10 +65,10 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.name)));
         freeTime.setText("Free Time: " + person.getFreeTime().toString());
         hour.setText("Work Hour: " + person.getHour().toString());
-        person.getMods().stream()
-                .sorted(Comparator.comparing(mod -> mod.name))
-                .forEach(mod -> {
-                    Label label = new Label(mod.name);
+        person.getCourses().stream()
+                .sorted(Comparator.comparing(Course::getCourseCode))
+                .forEach(course -> {
+                    Label label = new Label(course.getCourseCode());
                     label.setStyle("-fx-background-color: #FF8C00");
                     tags.getChildren().add(label);
                 });

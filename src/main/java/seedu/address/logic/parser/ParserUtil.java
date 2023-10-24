@@ -17,7 +17,9 @@ import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Mod;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseList;
+import seedu.address.model.tag.CourseTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -149,29 +151,29 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String mod} into a {@code Mod}.
+     * Parses a {@code String course} into a {@code Course}.
      */
-    public static Mod parseMod(String mod) throws ParseException {
-        requireNonNull(mod);
-        String trimmedMod = mod.trim();
-        if (!Mod.isValidModName(trimmedMod)) {
-            throw new ParseException(Mod.MESSAGE_CONSTRAINTS);
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
+        String trimmedCourse = course.trim();
+        if (!CourseTag.isValidCourseCode(trimmedCourse)) {
+            throw new ParseException(CourseTag.MESSAGE_CONSTRAINTS);
         }
-        return Mod.of(trimmedMod);
+        return CourseList.findByCourseCode(trimmedCourse);
     }
 
     /**
-     * Parses a {@code String mod} into a {@code Mod}.
+     * Parses a {@code String course} into a {@code Course}.
      *
-     * @throws ParseException if the given {@code mod} is invalid.
+     * @throws ParseException if the given {@code course} is invalid.
      */
-    public static Set<Mod> parseMods(Collection<String> mods) throws ParseException {
-        requireNonNull(mods);
-        final Set<Mod> modSet = new HashSet<>();
-        for (String modName : mods) {
-            modSet.add(parseMod(modName));
+    public static Set<Course> parseCourses(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+        final Set<Course> courseSet = new HashSet<>();
+        for (String courseName : courses) {
+            courseSet.add(parseCourse(courseName));
         }
-        return modSet;
+        return courseSet;
     }
 
     /**

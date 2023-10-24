@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
@@ -11,7 +12,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -31,7 +31,7 @@ public class PersonBuilder {
     private Telegram telegram;
     private Set<Tag> tags;
     private FreeTime freeTime;
-    private Set<Mod> mods;
+    private Set<Course> courses;
     private Hour hour;
 
     /**
@@ -44,7 +44,7 @@ public class PersonBuilder {
         telegram = new Telegram(DEFAULT_TELEGRAM);
         tags = new HashSet<>();
         freeTime = FreeTime.EMPTY_FREE_TIME;
-        mods = new HashSet<>();
+        courses = new HashSet<>();
         hour = new Hour(DEFAULT_HOUR);
     }
 
@@ -58,7 +58,7 @@ public class PersonBuilder {
         telegram = personToCopy.getTelegram();
         tags = new HashSet<>(personToCopy.getTags());
         freeTime = personToCopy.getFreeTime();
-        mods = new HashSet<>(personToCopy.getMods());
+        courses = new HashSet<>(personToCopy.getCourses());
         hour = personToCopy.getHour();
     }
 
@@ -79,10 +79,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code mods} into a {@code Set<Mod>} and set it to the {@code Person} that we are building.
+     * Parses the {@code courses} into a {@code Set<Course>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withMods(String ... mods) {
-        this.mods = SampleDataUtil.getModSet(mods);
+    public PersonBuilder withCourses(String ... courses) {
+        this.courses = SampleDataUtil.getCourseSet(courses);
         return this;
     }
 
@@ -130,7 +130,7 @@ public class PersonBuilder {
         return this;
     }
     public Person build() {
-        return new Person(name, phone, email, telegram, tags, freeTime, mods, hour);
+        return new Person(name, phone, email, telegram, tags, freeTime, courses, hour);
     }
 
 }

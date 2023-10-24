@@ -1,10 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
@@ -23,7 +24,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,7 +40,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
-                        PREFIX_FROM, PREFIX_TO, PREFIX_TAG, PREFIX_MOD, PREFIX_HOUR);
+                        PREFIX_FROM, PREFIX_TO, PREFIX_TAG, PREFIX_COURSE, PREFIX_HOUR);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUR)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -56,10 +56,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         FreeTime freeTime = ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).orElseGet(() -> null),
                 argMultimap.getValue((PREFIX_TO)).orElseGet(() -> null));
-        Set<Mod> modList = ParserUtil.parseMods(argMultimap.getAllValues(PREFIX_MOD));
+        Set<Course> courseList = ParserUtil.parseCourses(argMultimap.getAllValues(PREFIX_COURSE));
         Hour hour = ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).get());
 
-        Person person = new Person(name, phone, email, telegram, tagList, freeTime, modList, hour);
+        Person person = new Person(name, phone, email, telegram, tagList, freeTime, courseList, hour);
 
         return new AddCommand(person);
     }

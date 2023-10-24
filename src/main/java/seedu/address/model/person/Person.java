@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Mod;
+import seedu.address.model.course.Course;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,14 +26,14 @@ public class Person {
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
     private final FreeTime freeTime;
-    private final Set<Mod> mods = new HashSet<>();
+    private final Set<Course> courses = new HashSet<>();
     private final Hour hour;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags,
-                  FreeTime freeTime, Set<Mod> mods, Hour hour) {
+                  FreeTime freeTime, Set<Course> courses, Hour hour) {
         requireAllNonNull(name, phone, email, telegram, tags, hour);
         this.name = name;
         this.phone = phone;
@@ -41,7 +41,7 @@ public class Person {
         this.telegram = telegram;
         this.tags.addAll(tags);
         this.freeTime = freeTime == null ? FreeTime.EMPTY_FREE_TIME : freeTime;
-        this.mods.addAll(mods);
+        this.courses.addAll(courses);
         this.hour = hour;
     }
 
@@ -77,8 +77,8 @@ public class Person {
      * Returns an immutable mod set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Mod> getMods() {
-        return Collections.unmodifiableSet(mods);
+    public Set<Course> getCourses() {
+        return Collections.unmodifiableSet(courses);
     }
 
     public Hour getHour() {
@@ -120,14 +120,14 @@ public class Person {
                 && telegram.equals(otherPerson.telegram)
                 && tags.equals(otherPerson.tags)
                 && freeTime.equals(otherPerson.freeTime)
-                && mods.equals(otherPerson.mods)
+                && courses.equals(otherPerson.courses)
                 && hour.equals(otherPerson.hour);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, telegram, tags, mods, hour);
+        return Objects.hash(name, phone, email, telegram, tags, courses, hour);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class Person {
                 .add("telegram", telegram)
                 .add("tags", tags)
                 .add("free time", freeTime)
-                .add("mods", mods)
+                .add("courses", courses)
                 .add("hours", hour)
                 .toString();
     }

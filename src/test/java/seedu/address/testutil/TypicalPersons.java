@@ -5,8 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_FIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_SIXTY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MOD_CS1231;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MOD_CS2103T;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -36,7 +36,7 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withTelegram("@bensonnn123")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withFreeTime("21:15", "22:30").withMods("CS1231", "CS2103T")
+            .withTags("owesMoney", "friends").withFreeTime("21:15", "22:30").withCourses("CS1231", "CS2103T")
             .withHour("14").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withTelegram("@carlkurz").withHour("24").build();
@@ -61,7 +61,7 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withTelegram(VALID_TELEGRAM_AMY).withTags(VALID_TAG_FRIEND)
-            .withMods(VALID_MOD_CS1231, VALID_MOD_CS2103T).withHour(VALID_HOUR_FIVE).build();
+            .withCourses(VALID_COURSE_CS1231, VALID_COURSE_CS2103T).withHour(VALID_HOUR_FIVE).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withFreeTime(VALID_FROM_BOB, VALID_TO_BOB).withHour(VALID_HOUR_SIXTY).build();

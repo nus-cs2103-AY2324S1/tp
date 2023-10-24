@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -43,9 +43,9 @@ public class CommandTestUtil {
     public static final String VALID_FROM_BOB = "12:00";
     public static final String VALID_TO_BOB = "13:00";
 
-    public static final String VALID_MOD_CS2103T = "CS2103T";
+    public static final String VALID_COURSE_CS2103T = "CS2103T";
 
-    public static final String VALID_MOD_CS1231 = "CS1231";
+    public static final String VALID_COURSE_CS1231 = "CS1231";
 
     public static final String VALID_EMPTY_HOUR = "0";
     public static final String VALID_HOUR_FIVE = "5";
@@ -64,8 +64,8 @@ public class CommandTestUtil {
     public static final String FROM_DESC_BOB = " " + PREFIX_FROM + VALID_FROM_BOB;
     public static final String TO_DESC_BOB = " " + PREFIX_TO + VALID_TO_BOB;
 
-    public static final String MOD_DESC_CS2103T = " " + PREFIX_MOD + VALID_MOD_CS2103T;
-    public static final String MOD_DESC_CS1231 = " " + PREFIX_MOD + VALID_MOD_CS1231;
+    public static final String COURSE_DESC_CS2103T = " " + PREFIX_COURSE + VALID_COURSE_CS2103T;
+    public static final String COURSE_DESC_CS1231 = " " + PREFIX_COURSE + VALID_COURSE_CS1231;
     public static final String HOUR_DESC_FIVE = " " + PREFIX_HOUR + VALID_HOUR_FIVE;
     public static final String HOUR_DESC_SIXTY = " " + PREFIX_HOUR + VALID_HOUR_SIXTY;
     public static final String HOUR_DESC_EMPTY = " " + PREFIX_HOUR + VALID_EMPTY_HOUR;
@@ -75,7 +75,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TELEGRAM_DESC = " " + PREFIX_TELEGRAM; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_MOD_DESC = " " + PREFIX_MOD + "ABCD2100"; // Four character prefixes not allowed
+    public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE + "ABCD2100"; // Four character prefixes not allowed
     public static final String INVALID_HOUR_DESC = " " + PREFIX_HOUR + "20000"; // Hour is out of range
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
