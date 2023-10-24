@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label subject;
     @FXML
+    private Label day;
+    @FXML
     private Label lesson;
     @FXML
     private Label begin;
@@ -67,7 +69,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         subject.setText(person.getSubject().value);
-        day.setText(person.getDay().value);
+        day.setText(person.getDay().value.toString());
         begin.setText(person.getBegin().value);
         end.setText(person.getEnd().value);
         lesson.setText(person.getLesson().toString());
