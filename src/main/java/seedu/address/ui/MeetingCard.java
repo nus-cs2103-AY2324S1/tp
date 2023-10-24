@@ -39,9 +39,13 @@ public class MeetingCard extends UiPart<Region> {
     @FXML
     private Label dateStart;
     @FXML
+    private Label dateEnd;
+    @FXML
     private Label start;
     @FXML
     private Label spacer;
+    @FXML
+    private Label secondSpacer;
     @FXML
     private Label end;
     @FXML
@@ -56,10 +60,13 @@ public class MeetingCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         title.setText(meeting.getTitle().meetingTitle);
         l.setText(meeting.getLocation().location);
-        LocalDateTime temp = meeting.getStart();
-        dateStart.setText(temp.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-        start.setText(temp.format(DateTimeFormatter.ofPattern("HHmm")));
+        LocalDateTime startTime = meeting.getStart();
+        LocalDateTime endTime = meeting.getEnd();
+        dateStart.setText(startTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         spacer.setText("-");
+        dateEnd.setText(endTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        start.setText(startTime.format(DateTimeFormatter.ofPattern("HHmm")));
+        secondSpacer.setText("-");
         end.setText(meeting.getEnd().format(DateTimeFormatter.ofPattern("HHmm")));
         meeting.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
