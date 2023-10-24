@@ -65,6 +65,18 @@ public class AttendanceTracker {
     }
 
     /**
+     * Returns true if the attendance is present for the given tutorial number
+     *
+     * @param tutNum The tutorial number.
+     */
+    public boolean isPresent(Index tutNum) throws InvalidTutorialIndexException {
+        if (tutNum.getZeroBased() >= attendanceList.length) {
+            throw new InvalidTutorialIndexException();
+        }
+        return attendanceList[tutNum.getZeroBased()].getIsPresent();
+    }
+
+    /**
      * Marks attendanceTracker of a student as absent.
      *
      * @param tutNum The tutorial number.
@@ -89,6 +101,29 @@ public class AttendanceTracker {
      */
     public int getNumOfTut() {
         return this.attendanceList.length;
+    }
+
+    /**
+     * Returns the percentage of tutorials attended.
+     *
+     * @return Percentage of tutorials attended.
+     */
+    public double getPercentage() {
+        // Case when there are no tutorials
+        if (attendanceList.length == 0) {
+            return 100;
+        }
+        int score = 0;
+        int totalScore = 0;
+        for (int i = 0; i < attendanceList.length; i++) {
+            if (attendanceList[i] != null) {
+                totalScore += 1;
+                if (attendanceList[i].getIsPresent()) {
+                    score += 1;
+                }
+            }
+        }
+        return (double) score / totalScore * 100;
     }
 
     @Override

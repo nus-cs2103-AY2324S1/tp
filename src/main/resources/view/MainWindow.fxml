@@ -40,17 +40,18 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-          <VBox fx:id="studentList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+        <VBox fx:id="studentList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
               <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
                <SplitPane dividerPositions="0.9">
                   <items>
-                    <StackPane fx:id="personListPanelPlaceholder" />
+                    <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                     <StackPane fx:id="studentClassDetail" />
                   </items>
                </SplitPane>
           </VBox>
+      
           <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
