@@ -34,8 +34,8 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given addressBook, teamBook, and userPrefs.
      *
      * @param addressBook the initial address book data.
-     * @param teamBook the initial team book data.
-     * @param userPrefs the initial user preferences data.
+     * @param teamBook    the initial team book data.
+     * @param userPrefs   the initial user preferences data.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTeamBook teamBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, teamBook, userPrefs);
@@ -151,13 +151,6 @@ public class ModelManager implements Model {
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
     }
-
-    @Override
-    public AddressBook getWritableAddressBook() {
-        return addressBook;
-    }
-
-
     /**
      * Returns the current address book.
      *
@@ -306,6 +299,11 @@ public class ModelManager implements Model {
         teamBook.addTeam(team);
         updateFilteredTeamList(PREDICATE_SHOW_ALL_TEAMS);
     }
+    @Override
+    public boolean isLeaderOfTeam(String teamName, Name devToBeAdded) {
+        IdentityCode teamLeaderIdentityCode = getIdentityCodeByName(devToBeAdded);
+        return getTeamLeaderIDOfTeam(teamName).equals(teamLeaderIdentityCode);
+    }
     /**
      * Deletes the given developer from the specified team.
      * The developer and team must exist in the model.
@@ -337,7 +335,7 @@ public class ModelManager implements Model {
         return teamBook.invalidAddToTeam(teamToAddTo);
     }
 
-    //only run when you know that team exists
+
     @Override
     public void addToTeam(String teamToAddTo, Name devToAdd) {
         IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
@@ -351,8 +349,12 @@ public class ModelManager implements Model {
 
     @Override
     public Name getTeamLeaderOfTeam(String teamName) {
-        IdentityCode teamLeaderID = teamBook.getTeamLeaderIDOfTeam(teamName);
+        IdentityCode teamLeaderID = getTeamLeaderIDOfTeam(teamName);
         return getNameByIdentityCode(teamLeaderID);
+    }
+    @Override
+    public IdentityCode getTeamLeaderIDOfTeam(String teamName) {
+        return teamBook.getTeamLeaderIDOfTeam(teamName);
     }
 
     @Override

@@ -57,7 +57,7 @@ public class DeleteDeveloperFromTeamCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TEAM_NAME_DISPLAYED);
         } else if (!model.hasPerson(developerToDelete)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
-        } else if (model.personAlreadyInTeam(teamName, developerToDelete)) {
+        } else if (!model.personAlreadyInTeam(teamName, developerToDelete)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_IN_TEAM);
         } else {
             model.deleteDeveloperFromTeam(teamName, developerIndentityCode);

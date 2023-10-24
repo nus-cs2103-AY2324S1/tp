@@ -33,6 +33,7 @@ public class AddDevToTeamCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New developer added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This developer already exists in this team!";
     public static final String MESSAGE_INVALID_TEAM = "This team already exists!";
+    private static final String MESSAGE_TEAMLEADER_ADD_DEV = "The leader of team cannot be added as a developer!";
 
     private final Name devToAdd;
     private final String teamToAddTo;
@@ -55,7 +56,8 @@ public class AddDevToTeamCommand extends Command {
      *
      * @param model The current state of the application model.
      * @return A CommandResult indicating the result of executing this command on the given model.
-     * @throws CommandException if the team doesn't exist, the developer is already in the team, or the developer doesn't exist.
+     * @throws CommandException if the team doesn't exist, the developer is already in the team,
+     *          or the developer doesn't exist.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -67,6 +69,8 @@ public class AddDevToTeamCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         } else if (model.personAlreadyInTeam(teamToAddTo, devToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        } else if (model.isLeaderOfTeam(teamToAddTo, devToAdd)) {
+            throw new CommandException(MESSAGE_TEAMLEADER_ADD_DEV);
         } else {
             model.addToTeam(teamToAddTo, devToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(teamToAddTo, devToAdd)));
