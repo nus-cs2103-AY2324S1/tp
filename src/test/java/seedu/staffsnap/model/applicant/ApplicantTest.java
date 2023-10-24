@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_BEHAVIORAL;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
-import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_TYPE_BEHAVIORAL;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 import static seedu.staffsnap.testutil.TypicalApplicants.ALICE;
 import static seedu.staffsnap.testutil.TypicalApplicants.AMY;
@@ -94,7 +94,7 @@ public class ApplicantTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different interviews -> returns false
-        editedAlice = new ApplicantBuilder(ALICE).withInterviews(VALID_TYPE_BEHAVIORAL).build();
+        editedAlice = new ApplicantBuilder(ALICE).withInterviews(VALID_INTERVIEW_BEHAVIORAL).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -102,7 +102,8 @@ public class ApplicantTest {
     public void toStringMethod() {
         String expected = Applicant.class.getCanonicalName() + "{name=" + ALICE.getName()
                 + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail()
-                + ", position=" + ALICE.getPosition() + ", interviews=" + ALICE.getInterviews() + "}";
+                + ", position=" + ALICE.getPosition() + ", interviews=" + ALICE.getInterviews()
+                + ", status=" + ALICE.getStatus() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

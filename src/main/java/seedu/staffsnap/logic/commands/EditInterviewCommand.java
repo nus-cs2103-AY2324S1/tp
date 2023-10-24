@@ -2,6 +2,7 @@ package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.staffsnap.model.Model.PREDICATE_HIDE_ALL_APPLICANTS;
 import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
@@ -18,6 +19,7 @@ import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.interview.Interview;
+import seedu.staffsnap.model.interview.Rating;
 
 /**
  * Edits the details of an existing interview of an applicant.
@@ -32,10 +34,12 @@ public class EditInterviewCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_INTERVIEW + "INTERVIEW_INDEX "
-            + PREFIX_TYPE + "TYPE\n"
+            + "[" + PREFIX_TYPE + "TYPE] \n"
+            + "[" + PREFIX_RATING + "RATING] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_INTERVIEW + "2 "
-            + PREFIX_TYPE + "Behavioral";
+            + PREFIX_TYPE + "Behavioral "
+            + PREFIX_RATING + "8.0";
 
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS = "Edited interview of Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -79,7 +83,8 @@ public class EditInterviewCommand extends Command {
         Interview interviewToEdit = applicantToEdit.getInterviews().get(interviewIndex.getZeroBased());
         Interview editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor);
 
-        if (!interviewToEdit.equals(editedInterview) && applicantToEdit.getInterviews().contains(editedInterview)) {
+        if (!interviewToEdit.getType().equals(editedInterview.getType())
+                && editedInterview.isContainedIn(applicantToEdit.getInterviews())) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
 
@@ -100,8 +105,9 @@ public class EditInterviewCommand extends Command {
         assert interviewToEdit != null;
 
         String updatedType = editInterviewDescriptor.getType().orElse(interviewToEdit.getType());
+        Rating updatedRating = editInterviewDescriptor.getRating().orElse(interviewToEdit.getRating());
 
-        return new Interview(updatedType);
+        return new Interview(updatedType, updatedRating);
     }
 
     @Override
@@ -136,6 +142,7 @@ public class EditInterviewCommand extends Command {
      */
     public static class EditInterviewDescriptor {
         private String type;
+        private Rating rating;
 
         public EditInterviewDescriptor() {}
 
@@ -145,13 +152,14 @@ public class EditInterviewCommand extends Command {
          */
         public EditInterviewDescriptor(EditInterviewDescriptor toCopy) {
             setType(toCopy.type);
+            setRating(toCopy.rating);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(type);
+            return CollectionUtil.isAnyNonNull(type, rating);
         }
 
         public void setType(String type) {
@@ -160,6 +168,14 @@ public class EditInterviewCommand extends Command {
 
         public Optional<String> getType() {
             return Optional.ofNullable(type);
+        }
+
+        public void setRating(Rating rating) {
+            this.rating = rating;
+        }
+
+        public Optional<Rating> getRating() {
+            return Optional.ofNullable(rating);
         }
 
         @Override
@@ -174,13 +190,15 @@ public class EditInterviewCommand extends Command {
             }
 
             EditInterviewDescriptor otherEditInterviewDescriptor = (EditInterviewDescriptor) other;
-            return Objects.equals(type, otherEditInterviewDescriptor.type);
+            return Objects.equals(type, otherEditInterviewDescriptor.type)
+                    && Objects.equals(rating, otherEditInterviewDescriptor.rating);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
                     .add("type", type)
+                    .add("rating", rating)
                     .toString();
         }
     }
