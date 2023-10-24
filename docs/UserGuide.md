@@ -40,8 +40,9 @@ Therefore, MediFlowR is optimised for use via a Command Line Interface (CLI) whi
 the benefits of a Graphical User Interface (GUI). By simply typing, MediFlowR can get your
 hospital management tasks done faster than current GUI apps in the industry.
 
+--------------------------------------------------------------------------------------------------------------------
 
-
+## Table of Contents
 
 * Table of Contents
 {:toc}
@@ -52,32 +53,23 @@ hospital management tasks done faster than current GUI apps in the industry.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `mediflowr.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+    - To check your Java version, open Command Prompt if you are on Windows, or Terminal if you are on MacOS, and run `java --version`. If you do not have Java installed, you can install it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your patient records.
+2. Download the latest `mediflowr.jar` from [here](https://github.com/AY2324S1-CS2103T-T08-4/tp/releases).
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar mediflowr.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+3. Copy the file to the folder you want to use as the home folder for your patient records.
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+4. Double click to launch the application. If it does not work, follow the instructions listed [here]().
 
-   * `list` : Lists all patients.
+5. You should now be able to use the application.
 
-   * `add name=John birthdate=30/09/2001 gender=Male illness=Fever` : Adds a patient named `John` to the records.
+    - If you are a **new user**, you can follow a tutorial on getting started with MediFlowR [here](#getting-started-on-mediflowr).
 
-   * `delete id=3` : Deletes the patient with id 3 in the current list.
-
-   * `clear` : Deletes all patients.
-
-   * `exit` : Exits the app.
-
-6. Refer to the [Features](#features) below for details of each command.
+    - If you are an **advanced user**, you can learn more in depth about the different commands supported by the application [here](#features).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Tutorial for new users
+## Getting started on MediFlowR
 
 If this is your first time using MediFlowR, do not worry as this is a tutorial for you to get familiar with the features
 of MediFlowR. Please follow the instructions [here](#quick-start) first to set up the application before proceeding with the tutorial. 
@@ -94,19 +86,26 @@ of MediFlowR. Please follow the instructions [here](#quick-start) first to set u
 - Let us try **editing the patient** that we have just added. Enter the command `edit 1 phone=91234567 birthdate=2000/09/19` in the command box.
 
 ![Command result for editing a patient](images/userguide/edit-patient.png)
-- You should get this result screen. This will change the phone of the patient to 91234567 and the birthdate of the patient to 2000/09/19.
+
+- You should get this result screen. This will change the phone of the patient to `91234567` and the birthdate of the patient to `2000/09/19`.
+
+- Let us try **finding a patient**. Enter the command `find alex bernice` in the command box.
+
+![Command result for finding a patient](images/userguide/find-patient.png)
+
+- You should get this result screen. This will find all patients with either the name `alex` or `bernice`.
 
 - Let us try **scheduling an appointment** now that we have a patient in our records. Enter the command `schedule patient=John Doe start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray` in the command box.
 
 ![Command result for scheduling an appointment](images/userguide/schedule-appointment.png)
 
-- You should get this result screen. This will schedule a new appointment for the patient with the name John Doe.
+- You should get this result screen. This will schedule a new appointment for the patient with the name `John Doe`.
 
 - Let us try **rescheduling the appointment** that we have just scheduled. Enter the command `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00` in the command box.
 
 ![Command result for rescheduling the appointment](images/userguide/reschedule-appointment.png)
 
-- You should get this result screen. This will reschedule the appointment to start on 2023/05/02 09:00 and end on 2023/05/02 11:00.
+- You should get this result screen. This will reschedule the appointment to start on `2023/05/02 09:00` and end on `2023/05/02 11:00`.
 
 - Let us try **deleting a patient** from our patient records. Enter the command `delete 1`.
 
@@ -121,6 +120,7 @@ of MediFlowR. Please follow the instructions [here](#quick-start) first to set u
 - You should get this result screen. This will cancel the first appointment in the appointment list.
 
 - **Congratulations!** You have completed the tutorial. You are now ready to use MediFlowR.
+You can learn more about the different commands [here](#features).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -160,6 +160,8 @@ e.g. in `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL
 | [**Rescheduling an appointment**](#rescheduling-an-appointment-reschedule)   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                          |
 | [**Cancelling an appointment**](#cancelling-an-appointment-cancel)           | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                                                                                                                  |
 | [**Displaying all appointments**](#displaying-all-appointments-appointments) | `appointments`                                                                                                                                                                                                                                                       |
+| [**Undoing a previous command**](#undoing-a-previous-command-undo)           | `undo`                                                                                                                                                                                                                                                               |
+| [**Redoing a previous command**](#redoing-a-previous-command-redo)           | `redo`                                                                                                                                                                                                                                                               |
 | [**Clearing all patient records**](#clearing-all-patient-records-clear)      | `clear`                                                                                                                                                                                                                                                              |
 | [**Exiting the program**](#exiting-the-program-exit)                         | `exit`                                                                                                                                                                                                                                                               |
 | [**Viewing help**](#viewing-help-help)                                       | `help`                                                                                                                                                                                                                                                               |
@@ -276,6 +278,18 @@ Format: `appointments`
 
 ## Miscellaneous commands
 
+### Undoing a previous command: `undo`
+
+This command undoes a previous command. 
+
+Format: `undo`
+
+### Redoing a previous command: `redo`
+
+This command redoes a previous command that you undid.
+
+Format: `redo`
+
 ### Clearing all patient records: `clear`
 
 This command clears all patient records from the application.
@@ -299,6 +313,15 @@ Format: `help`
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+
+**Q**: How do I launch the MediFlowR application?<br>
+**A**: The easiest way is to double-click the `mediflowr.jar` file and the application should launch. If that does not work,
+follow the steps here:
+1. Open Command Prompt if you are on Windows, or open Terminal if you are on MacOS.
+2. Navigate to the directory that contains the `mediflowr.jar` file using the `cd` command. For example, if the file is
+located at `C:\Users\YourUserName\Downloads` on Windows or `~/Downloads` on MacOS, you can enter the command `cd C:\Users\YourUserName\Downloads`
+or `cd ~/Downloads` to navigate to that directory.
+3. Open the `mediflowr.jar` file using the command `java -jar mediflowr.jar`. The application should launch afterwards.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: You can install MediFlowR on that other computer, then simply transfer over the `mediflowr.json` file located in the
