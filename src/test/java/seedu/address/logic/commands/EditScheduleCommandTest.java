@@ -137,7 +137,6 @@ public class EditScheduleCommandTest {
         EditScheduleDescriptor descriptor =
             new EditScheduleDescriptorBuilder(firstSchedule).withEndTime(secondSchedule.getEndTime())
                 .build();
-        System.out.println(descriptor);
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_SCHEDULE, descriptor);
 
         assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_CLASHING_SCHEDULE);
