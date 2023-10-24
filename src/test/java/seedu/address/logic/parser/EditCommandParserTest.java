@@ -179,7 +179,7 @@ public class EditCommandParserTest {
 
         // mods
         userInput = targetIndex.getOneBased() + COURSE_DESC_CS1231;
-        descriptor = new EditPersonDescriptorBuilder().withMods(VALID_COURSE_CS1231).build();
+        descriptor = new EditPersonDescriptorBuilder().withCourses(VALID_COURSE_CS1231).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -236,11 +236,11 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetMods_success() {
+    public void parse_resetCourses_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + COURSE_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withMods().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withCourses().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

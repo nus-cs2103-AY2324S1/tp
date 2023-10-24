@@ -1,16 +1,16 @@
 package seedu.address.model.course;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.CourseTag;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.tag.CourseTag.MESSAGE_CONSTRAINTS;
+import static seedu.address.model.tag.CourseTag.isValidCourseCode;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.tag.CourseTag.MESSAGE_CONSTRAINTS;
-import static seedu.address.model.tag.CourseTag.isValidCourseCode;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.CourseTag;
 
 /**
  * Represents a course that the user is managing
@@ -22,6 +22,13 @@ public class Course {
 
     private CourseTag courseTag;
 
+    /**
+     * Constructs a {@code Course}.
+     *
+     * @param name       A course name.
+     * @param courseCode A course code.
+     * @param lessons    A set of lessons.
+     */
     public Course(String name, String courseCode, Set<Lesson> lessons) {
         requireAllNonNull(name, courseCode, lessons);
         checkArgument(isValidCourseCode(courseCode), MESSAGE_CONSTRAINTS); //Check if course code is valid

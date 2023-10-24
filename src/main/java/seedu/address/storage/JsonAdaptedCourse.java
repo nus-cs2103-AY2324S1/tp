@@ -1,17 +1,21 @@
 package seedu.address.storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.course.Course;
-import seedu.address.model.course.Lesson;
-import seedu.address.model.tag.CourseTag;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.Lesson;
+import seedu.address.model.tag.CourseTag;
+
+/**
+ * Jackson-friendly version of {@link Course}.
+ */
 public class JsonAdaptedCourse {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Course's %s field is missing!";
     private final String name;

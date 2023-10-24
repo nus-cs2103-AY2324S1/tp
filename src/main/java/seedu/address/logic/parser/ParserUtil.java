@@ -11,14 +11,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.course.Course;
-import seedu.address.model.course.CourseList;
 import seedu.address.model.tag.CourseTag;
 import seedu.address.model.tag.Tag;
 
@@ -159,7 +159,7 @@ public class ParserUtil {
         if (!CourseTag.isValidCourseCode(trimmedCourse)) {
             throw new ParseException(CourseTag.MESSAGE_CONSTRAINTS);
         }
-        return CourseList.findByCourseCode(trimmedCourse);
+        return UniqueCourseList.findByCourseCode(trimmedCourse);
     }
 
     /**

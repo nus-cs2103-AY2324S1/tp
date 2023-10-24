@@ -80,8 +80,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getEmail().orElse(null) + ", telegram="
                 + editPersonDescriptor.getTelegram().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", free time="
-                + editPersonDescriptor.getFreeTime().orElse(null) + ", mods="
-                + editPersonDescriptor.getMods().orElse(null) + ", work hour="
+                + editPersonDescriptor.getFreeTime().orElse(null) + ", courses="
+                + editPersonDescriptor.getCourses().orElse(null) + ", work hour="
                 + editPersonDescriptor.getHour().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

@@ -1,10 +1,10 @@
 package seedu.address.model.course;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Objects;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a lesson in a course.
@@ -15,6 +15,14 @@ public class Lesson {
     private LocalTime startTime;
     private LocalTime endTime;
 
+    /**
+     * Constructs a {@code Lesson}.
+     *
+     * @param name      A lesson name.
+     * @param dayOfWeek A day of the week.
+     * @param startTime A start time.
+     * @param endTime   An end time.
+     */
     public Lesson(String name, DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime) {
         requireAllNonNull(name, dayOfWeek, startTime, endTime);
         this.name = name;

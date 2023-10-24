@@ -122,7 +122,7 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
                 + ", telegram=" + ALICE.getTelegram() + ", tags=" + ALICE.getTags()
-                + ", free time=" + ALICE.getFreeTime() + ", mods=" + ALICE.getCourses()
+                + ", free time=" + ALICE.getFreeTime() + ", courses=" + ALICE.getCourses()
                 + ", hours=" + ALICE.getHour() + "}";
         assertEquals(expected, ALICE.toString());
     }

@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
@@ -13,7 +15,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,7 +43,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTelegram(person.getTelegram());
         descriptor.setFreeTime(person.getFreeTime());
         descriptor.setTags(person.getTags().size() == 0 ? null : person.getTags());
-        descriptor.setMods(person.getMods().size() == 0 ? null : person.getMods());
+        descriptor.setCourses(person.getCourses().size() == 0 ? null : person.getCourses());
     }
 
     /**
@@ -100,12 +101,12 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code mods} into a {@code Set<Mod>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code courses} into a {@code Set<Course>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withMods(String... mods) {
-        Set<Mod> modSet = Stream.of(mods).map(Mod::new).collect(Collectors.toSet());
-        descriptor.setMods(modSet);
+    public EditPersonDescriptorBuilder withCourses(String... courses) {
+        Set<Course> courseSet = Stream.of(courses).map(UniqueCourseList::findByCourseCode).collect(Collectors.toSet());
+        descriptor.setCourses(courseSet);
         return this;
     }
 

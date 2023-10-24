@@ -8,10 +8,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.course.Course;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.course.CourseList;
+import seedu.address.model.course.Course;
 import seedu.address.model.course.Lesson;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
@@ -25,20 +25,23 @@ import seedu.address.model.tag.Tag;
  * @formatter:off
  */
 public class SampleDataUtil {
+    /**
+     * Populates the UniqueCourseList sample courses.
+     */
     public static void populateSampleCourses() {
-        Set<Lesson> CS2103TLessons = new HashSet<>();
-        CS2103TLessons.add(new Lesson("G17-L1", DayOfWeek.of(2),
+        Set<Lesson> cs2103TLessons = new HashSet<>();
+        cs2103TLessons.add(new Lesson("G17-L1", DayOfWeek.of(2),
                 LocalTime.parse("8:00"), LocalTime.parse("10:00")));
-        CS2103TLessons.add(new Lesson("G17-L2", DayOfWeek.of(5),
+        cs2103TLessons.add(new Lesson("G17-L2", DayOfWeek.of(5),
                 LocalTime.parse("8:00"), LocalTime.parse("10:00")));
 
-        Set<Lesson> CS1231SLessons = new HashSet<>();
-        CS1231SLessons.add(new Lesson("T17-L1", DayOfWeek.of(2),
+        Set<Lesson> cs1231SLessons = new HashSet<>();
+        cs1231SLessons.add(new Lesson("T17-L1", DayOfWeek.of(2),
                 LocalTime.parse("8:00"), LocalTime.parse("10:00")));
-        CS1231SLessons.add(new Lesson("T17-L2", DayOfWeek.of(5),
+        cs1231SLessons.add(new Lesson("T17-L2", DayOfWeek.of(5),
                 LocalTime.parse("8:00"), LocalTime.parse("10:00")));
-        CourseList.add(new Course("CS2103T", "Software Engineering", CS2103TLessons));
-        CourseList.add(new Course("CS1231S", "Discrete Structures", CS1231SLessons));
+        UniqueCourseList.add(new Course("CS2103T", "Software Engineering", cs2103TLessons));
+        UniqueCourseList.add(new Course("CS1231S", "Discrete Structures", cs1231SLessons));
     }
     public static Person[] getSamplePersons() {
         return new Person[]{
@@ -97,7 +100,7 @@ public class SampleDataUtil {
      */
     public static Set<Course> getCourseSet(String... strings) {
         return Arrays.stream(strings)
-                .map(CourseList::findByCourseCode)
+                .map(UniqueCourseList::findByCourseCode)
                 .collect(Collectors.toSet());
     }
 }

@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Represents a list of courses that the user is managing
  */
-public class CourseList {
+public class UniqueCourseList {
     private static final Set<Course> courses = new HashSet<>();
 
     /**
