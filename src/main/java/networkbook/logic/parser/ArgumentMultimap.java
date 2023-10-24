@@ -101,14 +101,28 @@ public class ArgumentMultimap {
 
     /**
      * Verifies that if one of the {@code prefixesIfPresent} is present,
-     * then the {@code prefixThenPresent} must also be present.
+     * then the {@code prefixThenPresent} must also be present with only one corresponding value.
+     * Otherwise, {@code prefixThenPresent} must be absent.
      */
-    public void verifyIfPresentThen(Prefix[] prefixesIfPresent, Prefix prefixThenPresent) throws ParseException {
-        boolean isPresent = Stream.of(prefixesIfPresent)
-                .map(argMultimap::containsKey)
-                .reduce(false, (u, v) -> u || v);
-        if (isPresent && !argMultimap.containsKey(prefixThenPresent)) {
-            throw new ParseException(Messages.MESSAGE_MUST_BE_PRESENT);
+    public void verifyIfPresentThenOnlyOne(Prefix[] prefixesIfPresent, Prefix prefixThenPresent) throws ParseException {
+        Prefix firstPresentPrefix = this.firstPresentPrefix(prefixesIfPresent);
+        if (firstPresentPrefix != null) {
+            if (!argMultimap.containsKey(prefixThenPresent) || argMultimap.get(prefixThenPresent).size() > 1) {
+                throw new ParseException(String.format(Messages.MESSAGE_MUST_BE_PRESENT, firstPresentPrefix));
+            }
+        } else {
+            if (argMultimap.containsKey(prefixThenPresent)) {
+                throw new ParseException(Messages.MESSAGE_INDEX_CANNOT_BE_PRESENT);
+            }
         }
+    }
+
+    private Prefix firstPresentPrefix(Prefix[] prefixes) {
+        for (Prefix prefix: prefixes) {
+            if (argMultimap.containsKey(prefix)) {
+                return prefix;
+            }
+        }
+        return null;
     }
 }

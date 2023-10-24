@@ -73,22 +73,35 @@ public class EditCommandParserTest {
     public void parse_listItemFieldWithoutIndexSpecified_failure() {
         assertParseFailure(PARSER,
                 "1" + CommandTestUtil.VALID_PHONE_DESC,
-                Messages.MESSAGE_MUST_BE_PRESENT);
+                String.format(Messages.MESSAGE_MUST_BE_PRESENT, CliSyntax.PREFIX_PHONE));
         assertParseFailure(PARSER,
                 "1" + CommandTestUtil.VALID_EMAIL_DESC,
-                Messages.MESSAGE_MUST_BE_PRESENT);
+                String.format(Messages.MESSAGE_MUST_BE_PRESENT, CliSyntax.PREFIX_EMAIL));
         assertParseFailure(PARSER,
                 "1" + CommandTestUtil.VALID_LINK_DESC,
-                Messages.MESSAGE_MUST_BE_PRESENT);
+                String.format(Messages.MESSAGE_MUST_BE_PRESENT, CliSyntax.PREFIX_LINK));
         assertParseFailure(PARSER,
                 "1" + CommandTestUtil.VALID_COURSE_DESC,
-                Messages.MESSAGE_MUST_BE_PRESENT);
+                String.format(Messages.MESSAGE_MUST_BE_PRESENT, CliSyntax.PREFIX_COURSE));
         assertParseFailure(PARSER,
                 "1" + CommandTestUtil.VALID_SPECIALISATION_DESC,
-                Messages.MESSAGE_MUST_BE_PRESENT);
+                String.format(Messages.MESSAGE_MUST_BE_PRESENT, CliSyntax.PREFIX_SPECIALISATION));
         assertParseFailure(PARSER,
                 "1" + CommandTestUtil.VALID_TAG_DESC,
-                Messages.MESSAGE_MUST_BE_PRESENT);
+                String.format(Messages.MESSAGE_MUST_BE_PRESENT, CliSyntax.PREFIX_TAG));
+    }
+
+    @Test
+    public void parse_singleValueFieldWithIndexSpecified_failure() {
+        assertParseFailure(PARSER,
+                "1" + CommandTestUtil.VALID_NAME_DESC + CommandTestUtil.VALID_INDEX_DESC,
+                Messages.MESSAGE_INDEX_CANNOT_BE_PRESENT);
+        assertParseFailure(PARSER,
+                "1" + CommandTestUtil.VALID_GRADUATION_DESC + CommandTestUtil.VALID_INDEX_DESC,
+                Messages.MESSAGE_INDEX_CANNOT_BE_PRESENT);
+        assertParseFailure(PARSER,
+                "1" + CommandTestUtil.VALID_PRIORITY_DESC + CommandTestUtil.VALID_INDEX_DESC,
+                Messages.MESSAGE_INDEX_CANNOT_BE_PRESENT);
     }
 
     @Test

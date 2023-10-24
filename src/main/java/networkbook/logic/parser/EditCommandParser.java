@@ -79,7 +79,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 CliSyntax.PREFIX_PRIORITY
         );
 
-        argMultimap.verifyIfPresentThen(new Prefix[] {
+        argMultimap.verifyIfPresentThenOnlyOne(new Prefix[] {
             CliSyntax.PREFIX_PHONE,
             CliSyntax.PREFIX_EMAIL,
             CliSyntax.PREFIX_LINK,
