@@ -277,7 +277,7 @@ public class ClassDetailsTest {
         assertFalse(classDetailsWithTrackers.equals(null));
 
         // different values -> returns false
-        assertFalse(classDetails.equals(new ClassDetails("T12",
+        assertFalse(classDetailsWithTrackers.equals(new ClassDetails("T12",
             new AttendanceTracker(2),
             new AssignmentTracker(2),
             new ClassParticipationTracker(2))));

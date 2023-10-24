@@ -130,6 +130,13 @@ public class UniqueStudentListTest {
     }
 
     @Test
+    public void clearSelectedStudent_success() {
+        uniqueStudentList.setSelectedStudent(ALICE);
+        uniqueStudentList.clearSelectedStudent();
+        assertTrue(uniqueStudentList.getSelectedStudent().isEmpty());
+    }
+
+    @Test
     public void remove_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.remove(null));
     }

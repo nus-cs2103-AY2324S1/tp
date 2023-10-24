@@ -22,7 +22,9 @@
             </HBox>
             <Label fx:id="classDetails" styleClass="cell_small_label" text="\$classDetails" />
             <Label fx:id="attendance" styleClass="cell_small_label" text="\$attendance" />
+            <Label fx:id="divider1" styleClass="cell_small_label" text="\$divider1" />
             <Label fx:id="classParticipation" styleClass="cell_small_label" text="\$classParticipation" />
+            <Label fx:id="divider2" styleClass="cell_small_label" text="\$divider2" />
             <Label fx:id="assignments" styleClass="cell_small_label" text="\$assignments" />
         </VBox>
       <rowConstraints>
