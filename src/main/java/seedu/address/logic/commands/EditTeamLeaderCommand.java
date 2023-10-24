@@ -59,7 +59,7 @@ public class EditTeamLeaderCommand extends Command {
             throw new CommandException(MESSAGE_TEAM_NOT_FOUND);
         }
 
-        if (!model.hasPerson(newTeamLeaderName)) {
+        if (!model.containsPerson(newTeamLeaderName)) {
             throw new CommandException(MESSAGE_TEAM_LEADER_NOT_FOUND);
         }
 

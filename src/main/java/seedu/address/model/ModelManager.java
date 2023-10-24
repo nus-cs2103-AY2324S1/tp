@@ -182,9 +182,9 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
     @Override
-    public boolean hasPerson(Name name) {
+    public boolean containsPerson(Name name) {
         requireNonNull(name);
-        return addressBook.hasPerson(name);
+        return addressBook.containsPerson(name);
     }
 
     @Override
