@@ -3,16 +3,16 @@ layout: page
 title: User Guide
 ---
 
-## Welcome to Tutor Connect
+## Welcome to TutorConnect
 
-Tutor Connect is an address book made for **tuition centre managers** to easily track and schedule.
+TutorConnect is an address book made for **tuition centre coordinators** to easily track and schedule tuition classes.
 
-Here’s an overview of what you can do with Tutor Connect:
+Here’s an overview of what you can do with TutorConnect:
 * Store and edit information about your tutors
 * Create and plan your tutor availability and schedule
 * View upcoming schedules
 
-On top of these functionalities, we believe that tuition centre management must be efficient. Therefore, Tutor Connect is **optimised for users who can type fast** and utilise the Command Line Interface (CLI) to complete tasks using the keyboard faster than using the mouse.
+On top of these functionalities, we believe that tuition centre management must be efficient. Therefore, TutorConnect is **optimised for users who can type fast** and utilise the Command Line Interface (CLI) to complete tasks using the keyboard faster than using the mouse.
 
 * Table of Contents
 {:toc}
@@ -58,7 +58,7 @@ On top of these functionalities, we believe that tuition centre management must 
 
 2. Download the latest jar file (tutorconnect.jar) from our [Github Releases](https://github.com/AY2324S1-CS2103T-T17-3/tp/releases).
 
-3. Move the jar file into a new folder called “Tutor Connect”.
+3. Move the jar file into a new folder called “TutorConnect”.
 
 4. Double-click the jar file to launch the application.
 
@@ -75,6 +75,18 @@ On top of these functionalities, we believe that tuition centre management must 
    </div>
 
 5. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Navigating the Interface
+
+### Quick Orientation
+More details coming soon...
+
+--------------------------------------------------------------------------------------------------------------------
+
+## TutorConnect Tutorial (for new users)
+More details coming soon...
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -117,19 +129,18 @@ Adds a tutor to the address book.
 * `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
 * `EMAIL`: Of the format local-part@domain
 
-<div markdown="block" class="alert alert-info">
+    <div markdown="block" class="alert alert-info">
 
-**:information_source: Email Format**<br>
+    **:information_source: Email Format**<br>
 
-1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 
-The domain name must:
-* end with a domain label at least 2 characters long
-* have each domain label start and end with alphanumeric characters
-* have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-
-</div>
+    The domain name must:
+    * end with a domain label at least 2 characters long
+    * have each domain label start and end with alphanumeric characters
+    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    </div>
 
 **Expected output**:
 * `New tutor John Doe; Phone: 98765432; Email: johnd@example.com has been added.`
@@ -357,7 +368,6 @@ Deletes a schedule in the address book based on their index number in the table 
 * `Invalid value in parameter SCHEDULE_INDEX`: Parameter given is not a numerical value.
 * `Missing parameter SCHEDULE_INDEX`: A numerical value is not provided when calling the command `delete-s`.
 
-_More details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -374,6 +384,59 @@ _More details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+### Definitions
+Here are some descriptions of the words you might come across in the User Guide:
+
+| Term                | Definition                                                                                                                                                                                                                                                 |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Parameter           | Parameters are like fields in a form you are required to fill up. They include details you provide to execute a command. <br> For example, in the command `add-t n/NAME p/PHONE NUMBER e/EMAIL`, `n/NAME`, `p/PHONE NUMBER`, and `e/EMAIL` are parameters. |
+| Command             | A command is an instruction given to the application to perform a specific action. For example, `list-t` is a command to list all tutors in the address book.                                                                                              |
+| GUI                 | GUI is a user interface that allows users to interact with the application using graphical elements like text fields, buttons, and menus.                                                                                                                  |
+| CLI                 | CLI is a text-based user interface that allows users to interact with the application by typing commands.                                                                                                                                                  |
+
+
+### Parameter Information
+Here are some parameters you might come across in the User Guide:
+
+| Parameter        | Description                                     | Limitations                                                                                  |
+|------------------|-------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `n/NAME`         | Refers to the name of the tutor.                | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
+| `p/PHONE NUMBER` | Refers to the phone number of the tutor.        | Only contain numbers, and should be at least 3 <br/>digits long.                             |
+| `e/EMAIL`        | Refers to the email address of the tutor.       | Of the format local-part@domain<sup>1</sup>.                                                 |
+| `s/START_TIME`   | Refers to the start time of the schedule.       | Only datetime in `yyyy-MM-ddTHH:mm:ss`<sup>2</sup> format is accepted.                       |
+| `e/END_TIME`     | Refers to the end time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted.                                   |
+| `TUTOR_INDEX`    | Refers to the position of tutor in the list.    | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
+| `SCHEDULE_INDEX` | Refers to the position of schedule in the list. | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
+
+
+### Parameter Format
+This section consists of more details of format limitations mentioned above.
+
+**<sup>1</sup> Email Format**
+
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+
+    The domain name must:
+    * end with a domain label at least 2 characters long
+    * have each domain label start and end with alphanumeric characters
+    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+**<sup>2</sup> `yyyy-MM-ddTHH:mm:ss`**
+
+    * `yyyy` represents the **year** (e.g., 2023).
+    * `MM` represents the **month** with a leading zero (e.g., 09 for September, 10 for October).
+    * `dd` represents the **day** of the month with a leading zero (e.g., 03, 15).
+    * `T` is a **separator** indicating the start of the time portion.
+    * `HH` represents the **hour** in **24-hour format** with a leading zero (e.g., 09 for 9 AM, 21 for 9 PM).
+    * `mm` represents the **minutes** with a leading zero (e.g., 05).
+    * `ss` represents the **seconds** with a leading zero (e.g., 05).
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Command summary
 
 | Action              | Format, Examples                                                                                                            |
@@ -382,6 +445,7 @@ _More details coming soon ..._
 | **List Tutor**      | `list-t`                                                                                                                    |
 | **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                               |
 | **Add Schedule**    | `add-s ti/TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00`          |
+| **Edit Schedule**   | `edit-s SCHEDULE_INDEX s/START_TIME e/END_TIME` <br> e.g., `edit-s 1 s/2023-09-15T13:00:00`                                 |
 | **List Schedule**   | `list-s`                                                                                                                    |
 | **Delete Schedule** | `delete-s INDEX_NO`<br> e.g., `delete-s 3`                                                                                  |
 | **Clear**           | `clear`                                                                                                                     |
