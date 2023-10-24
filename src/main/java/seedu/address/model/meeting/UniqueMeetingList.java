@@ -3,6 +3,7 @@ package seedu.address.model.meeting;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,9 +26,17 @@ import seedu.address.model.meeting.exceptions.MeetingNotFoundException;
  */
 public class UniqueMeetingList implements Iterable<Meeting> {
 
+    private final Comparator<Meeting> sortByTimeComparator = Comparator.comparing(Meeting::getStart);
     private final ObservableList<Meeting> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Meeting> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Meeting> internalUnmodifiableList;
+
+    /**
+     * Creates a UniqueMeetingList object that is sorted by start date.
+     */
+    public UniqueMeetingList() {
+        FXCollections.sort(internalList, sortByTimeComparator);
+        internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
+    }
 
     /**
      * Returns true if the list contains an equivalent Meeting as the given argument.
@@ -47,6 +56,7 @@ public class UniqueMeetingList implements Iterable<Meeting> {
             throw new DuplicateMeetingException();
         }
         internalList.add(toAdd);
+        FXCollections.sort(internalList, sortByTimeComparator);
     }
 
     /**
@@ -67,6 +77,7 @@ public class UniqueMeetingList implements Iterable<Meeting> {
         }
 
         internalList.set(index, editedMeeting);
+        FXCollections.sort(internalList, sortByTimeComparator);
     }
 
     /**
@@ -78,11 +89,13 @@ public class UniqueMeetingList implements Iterable<Meeting> {
         if (!internalList.remove(toRemove)) {
             throw new MeetingNotFoundException();
         }
+        FXCollections.sort(internalList, sortByTimeComparator);
     }
 
     public void setMeetings(UniqueMeetingList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        FXCollections.sort(internalList, sortByTimeComparator);
     }
 
     /**
@@ -96,6 +109,7 @@ public class UniqueMeetingList implements Iterable<Meeting> {
         }
 
         internalList.setAll(meetings);
+        FXCollections.sort(internalList, sortByTimeComparator);
     }
 
     /**
