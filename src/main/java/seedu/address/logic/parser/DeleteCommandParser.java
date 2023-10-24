@@ -20,9 +20,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             String[] splitArgs = args.trim().split("\\s+");
             List<Index> indices = new ArrayList<>();
 
-            // Parse all the index arguments and add to the list
+            // Parse all the index arguments and add to the list if it doesn't already contain it
             for (String arg : splitArgs) {
-                indices.add(ParserUtil.parseIndex(arg));
+                Index currentIndex = ParserUtil.parseIndex(arg);
+                if (!indices.contains(currentIndex)) {
+                    indices.add(currentIndex);
+                }
             }
 
             return new DeleteCommand(indices);
