@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Objects;
 
 /**
  * Represents a stash that contains the command String of the 20 most recent
@@ -77,4 +78,19 @@ public class CommandStringStash {
         this.prevCmdStringsStack.addFirst(commandInputString);
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || !(object instanceof CommandStringStash)) {
+            return false;
+        }
+        CommandStringStash commandStringStash = (CommandStringStash) object;
+        return isNext == commandStringStash.isNext
+                && Objects.equals(prevCmdStringsStack, commandStringStash.prevCmdStringsStack)
+                && Objects.equals(passedCmdStringsStack, commandStringStash.passedCmdStringsStack);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prevCmdStringsStack, passedCmdStringsStack, isNext);
+    }
 }
