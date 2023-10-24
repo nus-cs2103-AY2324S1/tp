@@ -36,7 +36,7 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
     private static final String VALID_LINKEDIN = BENSON.getLinkedIn().toString();
     private static final String VALID_GITHUB = BENSON.getGithub().toString();
-    public static final String VALID_STATUS = BENSON.getStatus().toString();
+    private static final String VALID_STATUS = BENSON.getStatus().toString();
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
