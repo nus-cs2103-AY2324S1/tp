@@ -86,4 +86,18 @@ public class Status {
         return this.value;
     }
 
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        else {
+            if (other instanceof Status) {
+                return this.statusType == ((Status) other).statusType;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
 }

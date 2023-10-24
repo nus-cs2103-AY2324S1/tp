@@ -19,33 +19,32 @@ public class StatusTest {
 
     @Test
     public void constructorTestingPrelim() {
-        assertEquals(new Status("preliminary"), new Status(StatusTypes.PRELIMINARY));
+        assert(new Status("preliminary").equals(new Status(StatusTypes.PRELIMINARY)));
     }
     @Test
     public void constructorTestingInt() {
-        assertEquals(new Status("interviewed"),
-            new Status(StatusTypes.INTERVIEWED));
+        assert(new Status("interviewed").equals(
+            new Status(StatusTypes.INTERVIEWED)));
     }
     @Test
     public void constructorTestingRej() {
-        assertEquals(new Status("rejected"),
-            new Status(StatusTypes.REJECTED));
+        assert(new Status("rejected").equals(
+            new Status(StatusTypes.REJECTED)));
     }
 
     @Test
     public void getStatusTypeTestR() {
-        assertEquals(new Status("rejected").getStatusType(),
-            StatusTypes.REJECTED);
+        assert(new Status("rejected").getStatusType().equals(
+            StatusTypes.REJECTED));
     }
     @Test
     public void getStatusTypeTestI() {
-        assertEquals(new Status("interviewed").getStatusType(),
-            StatusTypes.INTERVIEWED);
+        assert(new Status("interviewed").getStatusType().equals(
+            StatusTypes.INTERVIEWED));
     }
     @Test
     public void getStatusTypeTestP() {
-        assertEquals(new Status("preliminary").getStatusType(),
-            StatusTypes.REJECTED);
+        assertEquals(new Status("preliminary").getStatusType(), (StatusTypes.PRELIMINARY));
     }
     @Test
     public void getStatusTypeTestO() {
