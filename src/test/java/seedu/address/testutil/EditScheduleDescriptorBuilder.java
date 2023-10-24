@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.time.LocalDateTime;
 
 import seedu.address.logic.commands.EditScheduleCommand;
+import seedu.address.model.person.Person;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
@@ -60,6 +61,14 @@ public class EditScheduleDescriptorBuilder {
      */
     public EditScheduleDescriptorBuilder withEndTime(EndTime endTime) {
         descriptor.setEndTime(endTime);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Tutor} of the {@code EditScheduleDescriptor} that we are building.
+     */
+    public EditScheduleDescriptorBuilder withTutor(Person tutor) {
+        descriptor.setTutor(tutor);
         return this;
     }
 
