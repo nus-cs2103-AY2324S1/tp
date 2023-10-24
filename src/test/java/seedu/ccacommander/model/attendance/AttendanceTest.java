@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_DATE_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_CLIMBING;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_CLIMBING;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_BOXING;
 import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
 import static seedu.ccacommander.testutil.TypicalAttendances.BENSON_BOXING;
 import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
@@ -76,11 +76,11 @@ public class AttendanceTest {
         assertFalse(ALICE_AURORA.equals(editedEventName));
 
         // different hours -> returns false
-        Attendance editedHours = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_CLIMBING).build();
+        Attendance editedHours = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_BOXING).build();
         assertFalse(ALICE_AURORA.equals(editedHours));
 
         // different remark -> returns false
-        Attendance editedRemark = new AttendanceBuilder(ALICE_AURORA).withRemark(VALID_REMARK_CLIMBING).build();
+        Attendance editedRemark = new AttendanceBuilder(ALICE_AURORA).withRemark(VALID_REMARK_BOXING).build();
         assertFalse(ALICE_AURORA.equals(editedRemark));
 
     }

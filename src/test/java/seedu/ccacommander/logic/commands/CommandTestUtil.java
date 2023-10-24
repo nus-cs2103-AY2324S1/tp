@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -53,10 +55,12 @@ public class CommandTestUtil {
     public static final String VALID_LOCATION_AURORA = "Greenland";
     public static final String VALID_LOCATION_BOXING = "Ridge View Residential College";
 
-    public static final String VALID_HOURS_CLIMBING = "7";
-    public static final String VALID_HOURS_TREKKING = "10";
-    public static final String VALID_REMARK_CLIMBING = "Role: Coordinator";
-    public static final String VALID_REMARK_TREKKING = "Absent: Covid";
+    public static final String VALID_MEMBER_INDEX_ONE = "1";
+    public static final String VALID_EVENT_INDEX_TWO = "2";
+    public static final String VALID_HOURS_AURORA = "3";
+    public static final String VALID_HOURS_BOXING= "7";
+    public static final String VALID_REMARK_AURORA = "Role: Photographer";
+    public static final String VALID_REMARK_BOXING = "Bring boxing gloves";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -78,10 +82,12 @@ public class CommandTestUtil {
     public static final String LOCATION_DESC_AURORA = " " + PREFIX_LOCATION + VALID_LOCATION_AURORA;
     public static final String LOCATION_DESC_BOXING = " " + PREFIX_LOCATION + VALID_LOCATION_BOXING;
 
-    public static final String HOURS_DESC_CLIMBING = " " + PREFIX_HOURS + VALID_HOURS_CLIMBING;
-    public static final String HOURS_DESC_TREKKING = " " + PREFIX_HOURS + VALID_HOURS_TREKKING;
-    public static final String REMARK_DESC_CLIMBING = " " + PREFIX_HOURS + VALID_REMARK_CLIMBING;
-    public static final String REMARK_DESC_TREKKING = " " + PREFIX_HOURS + VALID_REMARK_TREKKING;
+    public static final String MEMBER_INDEX_DESC_ONE = " " + PREFIX_MEMBER + VALID_MEMBER_INDEX_ONE;
+    public static final String EVENT_INDEX_DESC_TWO = " " + PREFIX_EVENT + VALID_EVENT_INDEX_TWO;
+    public static final String HOURS_DESC_AURORA = " " + PREFIX_HOURS + VALID_HOURS_AURORA;
+    public static final String HOURS_DESC_BOXING = " " + PREFIX_HOURS + VALID_HOURS_BOXING;
+    public static final String REMARK_DESC_AURORA = " " + PREFIX_REMARK + VALID_REMARK_AURORA;
+    public static final String REMARK_DESC_BOXING = " " + PREFIX_REMARK + VALID_REMARK_BOXING;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "F"; // "F" not allowed in gender
@@ -93,8 +99,11 @@ public class CommandTestUtil {
     public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION + "  "; // cannot be spaces only
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2005 12 12"; // wrong date format
 
+    public static final String INVALID_MEMBER_INDEX_DESC = " " + PREFIX_MEMBER + "-2"; // cannot be negative
+    public static final String INVALID_EVENT_INDEX_DESC = " " + PREFIX_EVENT + "-2"; // cannot be negative
+
     public static final String INVALID_HOURS_DESC = " " + PREFIX_HOURS + "twenty"; // cannot be alphabets
-    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + " coming late"; // cannot start with space
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + " "; // cannot be blank
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
