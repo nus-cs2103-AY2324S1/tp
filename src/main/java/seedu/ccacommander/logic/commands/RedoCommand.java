@@ -23,9 +23,9 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_NO_AVAILABLE_COMMAND);
         }
 
-        String undoCommandMessage = model.redo();
+        String redoCommandMessage = model.redo();
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS_REDO, undoCommandMessage));
+        return new CommandResult(String.format(MESSAGE_SUCCESS_REDO, redoCommandMessage));
     }
 }
