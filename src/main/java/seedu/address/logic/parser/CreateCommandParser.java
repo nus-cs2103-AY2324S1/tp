@@ -24,7 +24,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonCreator;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Profession;
 import seedu.address.model.person.TelegramHandle;

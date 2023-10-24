@@ -153,6 +153,10 @@ public class Person {
                 .toString();
     }
 
+    /**
+     * A builder factory class for Person.
+     * This is used to prevent long argument lists for Person and handles optional fields well.
+     */
     public static class PersonBuilder {
         // Mandatory fields
         private Name name;

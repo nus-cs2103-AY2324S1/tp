@@ -20,7 +20,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Interaction.Outcome;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonCreator;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for InteractionCommand.

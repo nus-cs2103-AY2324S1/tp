@@ -30,7 +30,7 @@ public class SampleDataUtil {
                     new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     getTagSet("neighbours")).build(),
             new Person.PersonBuilder(new Name("David Li"), new Phone("91031282"),
-                    new Email("lidavid@example.com"),new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                    new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     getTagSet("family")).build(),
             new Person.PersonBuilder(new Name("Irfan Ibrahim"), new Phone("92492021"),
                     new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
