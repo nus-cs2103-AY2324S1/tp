@@ -110,7 +110,7 @@ public class PersonBuilder {
      */
     public Person build() {
         Person person = new Person(name, phone, email, address, tags);
-        person = new PersonCreator(person).withLead(lead.toString()).build();
+        person = new PersonCreator(person).withLead(lead).build();
         return person;
     }
 

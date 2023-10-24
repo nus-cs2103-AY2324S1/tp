@@ -60,7 +60,6 @@ public class InteractionCommand extends Command {
         Set<Interaction> editInteractions = personToEdit.getInteractions();
         editInteractions.add(interaction);
         Person editedPerson = new PersonCreator(personToEdit).withInteractions(editInteractions).build();
-        editedPerson.addInteractions(editInteractions);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

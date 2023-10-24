@@ -77,7 +77,7 @@ public class PersonCreator {
      * and set it to the {@code Person} that we are building.
      */
     public PersonCreator withInteractions(Set<Interaction> interactions) {
-        this.interactions = interactions;
+        this.interactions.addAll(interactions);
         return this;
     }
 
