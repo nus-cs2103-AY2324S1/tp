@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.history.UserHistoryManager;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -31,20 +32,6 @@ public class ScheduleCommandTest {
     public void constructor_nullAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ScheduleCommand(null, null));
     }
-
-    //        @Test
-    //        public void execute_appointmentAcceptedByModel_addSuccessful() throws Exception {
-    //            ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
-    //            Appointment validAppointment = new AppointmentBuilder().build();
-    //            Name testName = new Name("test");
-    //
-    //
-    //            CommandResult commandResult = new ScheduleCommand(validAppointment, testName).execute(modelStub);
-    //
-    //            assertEquals(String.format(ScheduleCommand.MESSAGE_SUCCESS, validAppointment),
-    //                    commandResult.getFeedbackToUser());
-    //            assertEquals(Arrays.asList(validAppointment), modelStub.appointments);
-    //        }
 
     @Test
     public void equals() {
@@ -183,6 +170,21 @@ public class ScheduleCommandTest {
         }
 
         @Override
+        public UserHistoryManager getUserHistoryManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Appointment> getFilteredAppointmentList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -229,5 +231,4 @@ public class ScheduleCommandTest {
             return this.appointment.isSameAppointment(appointment);
         }
     }
-
 }

@@ -9,8 +9,10 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.history.UserHistoryManager;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final UserHistoryManager userHistory;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Appointment> filteredAppointments;
@@ -36,6 +39,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.userHistory = new UserHistoryManager();
+        userHistory.initialiseHistory(new Pair(addressBook.getPersonList(), addressBook.getAppointmentList()));
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
     }
@@ -201,4 +206,22 @@ public class ModelManager implements Model {
                 && filteredAppointments.equals(otherModelManager.filteredAppointments);
     }
 
+    @Override
+    public UserHistoryManager getUserHistoryManager() {
+        return this.userHistory;
+    }
+
+    @Override
+    public void undoHistory() {
+        this.userHistory.undo();
+        addressBook.setPersons((this.userHistory.getUndoHistory().peek().getKey()));
+        addressBook.setAppointments((this.userHistory.getUndoHistory().peek().getValue()));
+    }
+
+    @Override
+    public void redoHistory() {
+        addressBook.setPersons((this.userHistory.getRedoHistory().peek().getKey()));
+        addressBook.setAppointments((this.userHistory.getRedoHistory().peek().getValue()));
+        this.userHistory.redo();
+    }
 }
