@@ -302,7 +302,7 @@ public class ModelManager implements Model {
     @Override
     public boolean isLeaderOfTeam(String teamName, Name devToBeAdded) {
         IdentityCode teamLeaderIdentityCode = getIdentityCodeByName(devToBeAdded);
-        return getTeamLeaderIDOfTeam(teamName).equals(teamLeaderIdentityCode);
+        return getTeamLeaderIdOfTeam(teamName).equals(teamLeaderIdentityCode);
     }
     /**
      * Deletes the given developer from the specified team.
@@ -349,12 +349,12 @@ public class ModelManager implements Model {
 
     @Override
     public Name getTeamLeaderOfTeam(String teamName) {
-        IdentityCode teamLeaderID = getTeamLeaderIDOfTeam(teamName);
+        IdentityCode teamLeaderID = getTeamLeaderIdOfTeam(teamName);
         return getNameByIdentityCode(teamLeaderID);
     }
     @Override
-    public IdentityCode getTeamLeaderIDOfTeam(String teamName) {
-        return teamBook.getTeamLeaderIDOfTeam(teamName);
+    public IdentityCode getTeamLeaderIdOfTeam(String teamName) {
+        return teamBook.getTeamLeaderIdOfTeam(teamName);
     }
 
     @Override

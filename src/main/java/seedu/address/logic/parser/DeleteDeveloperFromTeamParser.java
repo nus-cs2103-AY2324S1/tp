@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAMNAME;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.DeleteDeveloperFromTeamCommand;
-import seedu.address.logic.commands.DeleteTeamCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
