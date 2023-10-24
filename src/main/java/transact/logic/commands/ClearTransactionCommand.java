@@ -2,8 +2,8 @@ package transact.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import transact.model.TransactionBook;
 import transact.model.Model;
+import transact.model.TransactionBook;
 import transact.ui.MainWindow.TabWindow;
 
 /**
