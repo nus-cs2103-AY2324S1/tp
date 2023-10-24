@@ -162,7 +162,7 @@ public class ModelManager implements Model {
      * Refreshes the applicant list with the same predicate
      */
     public void refreshApplicantList() {
-        Predicate predicate = filteredApplicants.getPredicate();
+        Predicate<Applicant> predicate = (Predicate<Applicant>) filteredApplicants.getPredicate();
         if (predicate == null) {
             predicate = PREDICATE_SHOW_ALL_APPLICANTS;
         }
