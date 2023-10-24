@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
 import java.util.Objects;
+
+import seedu.address.model.week.Week;
 
 /**
  * Represents a Student's attendance in the address book.
@@ -11,27 +11,49 @@ public class Attendance {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance should only be 0 or 1, where 0 indicates student is "
             + "absent and 1 indicates student is present";
-    private final LocalDate date;
+    private final Week week;
     private boolean isPresent;
+    private String reason;
 
     /**
      * Constructs an {@code Attendance}.
      *
-     * @param date A valid date.
+     * @param week A week from 0 to 13.
      * @param isPresent A valid attendance status.
      */
-    public Attendance(LocalDate date, boolean isPresent) {
-        this.date = date;
+    public Attendance(Week week, boolean isPresent) {
+        this.week = week;
         this.isPresent = isPresent;
     }
 
     /**
-     * Returns the date of the attendance.
+     * Constructs an {@code Attendance}.
      *
-     * @return A LocalDate representing the date of the attendance.
+     * @param week A week from 0 to 13.
+     * @param isPresent A valid attendance status.
      */
-    public LocalDate getDate() {
-        return date;
+    public Attendance(Week week, boolean isPresent, String reason) {
+        this.week = week;
+        this.isPresent = isPresent;
+        this.reason = reason;
+    }
+
+    /**
+     * Returns the reason for student's absence.
+     *
+     * @return A string representing the reason for the student's absence.
+     */
+    public String getReason() {
+        return this.reason;
+    }
+
+    /**
+     * Returns the week of the attendance.
+     *
+     * @return An int representing the date of the attendance.
+     */
+    public Week getWeek() {
+        return week;
     }
 
     /**
@@ -71,17 +93,17 @@ public class Attendance {
             return false;
         }
         Attendance otherAttendance = (Attendance) other;
-        return date.equals(otherAttendance.date)
+        return this.week.equals(otherAttendance.week)
                 && isPresent == otherAttendance.isPresent;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, isPresent);
+        return Objects.hash(week, isPresent);
     }
 
     @Override
     public String toString() {
-        return "Date: " + date + ", Present: " + isPresent;
+        return "Week: " + week + ", Present: " + isPresent;
     }
 }

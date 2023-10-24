@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,35 +9,59 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
+import seedu.address.model.week.Week;
 
 /**
  * Represents a command to mark the attendance of a student.
  */
 public class MarkAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "mark";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of a student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of a student.\n"
             + "Parameters: "
             + "/name STUDENTNAME | /id STUDENTID "
             + "/attendance ATTENDANCE "
-            + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 1";
+            + "/week WEEK_NUMBER"
+            + "[/reason REASON_OF_ABSENCE]\n"
+            + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 1 /week 1\n"
+            + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 0 /week 2 /reason Took a MC\n";
     public static final String MESSAGE_SUCCESS = "Attendance marked for person: ";
+    public static final String MESSAGE_ABSENT = " is absent for week ";
+    public static final String MESSAGE_PRESENT = " is present for week ";
     public static final String MESSAGE_UPDATED_SUCCESS = "Attendance updated for person: ";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found.";
     private final List<String> identifiers; // This can be either studentName or studentID
     private final boolean isPresent;
-    private final LocalDate date;
+    private final Week week;
+    private final String reason;
 
     /**
-     * Constructs a MarkAttendanceCommand to mark the specified student's attendance.
+     * Constructs a MarkAttendanceCommand to mark the specified student's attendance as present.
      *
      * @param identifiers The list of student's name or ID.
      * @param isPresent The attendance status.
-     * @param date The date of the attendance.
+     * @param week The week of the attendance.
      */
-    public MarkAttendanceCommand(List<String> identifiers, boolean isPresent, LocalDate date) {
+
+    public MarkAttendanceCommand(List<String> identifiers, boolean isPresent, Week week) {
         this.identifiers = identifiers;
         this.isPresent = isPresent;
-        this.date = date;
+        this.week = week;
+        this.reason = null;
+    }
+
+    /**
+     * Constructs a MarkAttendanceCommand to mark the specified student's attendance as absent.
+     *
+     * @param identifier The student's name or ID.
+     * @param isPresent The attendance status.
+     * @param week The week of the attendance.
+     * @param reason The reason why the student is absent.
+     */
+    public MarkAttendanceCommand(String identifier, boolean isPresent, Week week, String reason) {
+        this.identifier = identifier;
+        this.isPresent = isPresent;
+        this.week = week;
+        this.reason = reason;
     }
 
     @Override
@@ -47,6 +70,7 @@ public class MarkAttendanceCommand extends Command {
 
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        Attendance attendance;
 
         for (String identifier : identifiers) {
             Person targetPerson = lastShownList.stream()
@@ -59,7 +83,6 @@ public class MarkAttendanceCommand extends Command {
                 throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
             }
 
-
             Optional<Attendance> existingAttendance = targetPerson.getAttendanceForCurrentWeek();
 
             if (existingAttendance.isPresent()) {
@@ -70,9 +93,21 @@ public class MarkAttendanceCommand extends Command {
 
             } else {
                 // Add a new attendance record for the current week
-                Attendance newAttendance = new Attendance(date, isPresent);
+                if (isPresent) {
+                    attendance = new Attendance(week, true);
+                } else {
+                    attendance = new Attendance(week, false, reason);
+                }
                 targetPerson.addAttendance(newAttendance);
-                successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n", targetPerson.getName()));
+              
+                if (attendance.isPresent()) {
+                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "%d",
+                            targetPerson.getName(), targetPerson.getName(), attendance.getWeek().getWeekNumber()));
+                } else {
+                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "%d\nReason: %s",
+                            targetPerson.getName(), targetPerson.getName(), attendance.getWeek().getWeekNumber(),
+                            attendance.getReason()));
+                }
             }
         }
 
@@ -93,6 +128,6 @@ public class MarkAttendanceCommand extends Command {
         MarkAttendanceCommand otherMarkAttendanceCommand = (MarkAttendanceCommand) other;
         return identifiers.equals(otherMarkAttendanceCommand.identifiers)
                 && isPresent == otherMarkAttendanceCommand.isPresent
-                && date.equals(otherMarkAttendanceCommand.date);
+                && week.equals(otherMarkAttendanceCommand.week);
     }
 }

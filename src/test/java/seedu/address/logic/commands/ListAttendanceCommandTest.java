@@ -7,8 +7,6 @@ import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_SUCCESS
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +19,7 @@ import seedu.address.model.person.Attendance;
 import seedu.address.model.predicate.AbsentFromTutorialPredicate;
 import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.week.Week;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListAttendanceCommand.
@@ -70,7 +69,7 @@ public class ListAttendanceCommandTest {
     }
     @Test
     public void execute_listAttendanceWithTag_success() {
-        ALICE.addAttendance(new Attendance(LocalDate.now(), false));
+        ALICE.addAttendance(new Attendance(new Week(1), false));
 
         Tag tag = new Tag("CS2040S");
         Index index = Index.fromOneBased(1);
@@ -88,7 +87,7 @@ public class ListAttendanceCommandTest {
 
     @Test
     public void execute_listAttendanceNoTag_success() {
-        ALICE.addAttendance(new Attendance(LocalDate.now(), false));
+        ALICE.addAttendance(new Attendance(new Week(1), false));
 
         Tag tag = new Tag("PLACEHOLDER");
         Index index = Index.fromOneBased(1);
