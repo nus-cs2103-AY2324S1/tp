@@ -1,3 +1,8 @@
+---
+layout: page
+title: User Guide
+---
+
 # <span style="color:green">MediFlowR</span>
 
 ## Welcome to MediFlowR
@@ -144,20 +149,20 @@ e.g. in `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL
 
 ## Commands summary
 
-| Action                                                                        | Format, Examples                                                                                                                                                                                                                                                     |
-|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Adding a new patient**](#adding-a-new-patient--add)                        | `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL address=ADDRESS [illness=ILLNESS]` <br> e.g., `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=fever` |
-| [**Updating a patient's details**](#updating-a-patients-details--edit)        | `edit INDEX [name=NAME] [gender=GENDER] [birthdate=BIRTHDATE] [phone=PHONE] [email=EMAIL] [address=ADDRESS]` <br> e.g., `edit 1 birthdate=2001/12/14 phone=93842738`                                                                                                 |
-| [**Removing a patient**](#removing-a-patient--delete)                         | `delete INDEX` <br> e.g., `delete 1`                                                                                                                                                                                                                                 |
-| [**Displaying all patients**](#displaying-all-patients--list)                 | `list`                                                                                                                                                                                                                                                               |
-| [**Finding patients by name**](#finding-patients-by-name--find)               | `find NAME`<br> e.g., `search name=James Jake`                                                                                                                                                                                                                       |
-| [**Scheduling a new appointment**](#scheduling-a-new-appointment--schedule)   | `schedule patient=PATIENT start=START end=END description=DESCRIPTION` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray`                                                                      |
-| [**Rescheduling an appointment**](#rescheduling-an-appointment--reschedule)   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                          |
-| [**Cancelling an appointment**](#cancelling-an-appointment--cancel)           | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                                                                                                                  |
-| [**Displaying all appointments**](#displaying-all-appointments--appointments) | `appointments`                                                                                                                                                                                                                                                       |
-| [**Clearing all patient records**](#clearing-all-patient-records--clear)      | `clear`                                                                                                                                                                                                                                                              |
-| [**Exiting the program**](#exiting-the-program--exit)                         | `exit`                                                                                                                                                                                                                                                               |
-| [**Viewing help**](#viewing-help--help)                                       | `help`                                                                                                                                                                                                                                                               |
+| Action                                                                       | Format, Examples                                                                                                                                                                                                                                                     |
+|------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Adding a new patient**](#adding-a-new-patient-add)                        | `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL address=ADDRESS [illness=ILLNESS]` <br> e.g., `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=fever` |
+| [**Updating a patient's details**](#updating-a-patients-details-edit)        | `edit INDEX [name=NAME] [gender=GENDER] [birthdate=BIRTHDATE] [phone=PHONE] [email=EMAIL] [address=ADDRESS]` <br> e.g., `edit 1 birthdate=2001/12/14 phone=93842738`                                                                                                 |
+| [**Removing a patient**](#removing-a-patient-delete)                         | `delete INDEX` <br> e.g., `delete 1`                                                                                                                                                                                                                                 |
+| [**Displaying all patients**](#displaying-all-patients-list)                 | `list`                                                                                                                                                                                                                                                               |
+| [**Finding patients by name**](#finding-patients-by-name-find)               | `find NAME`<br> e.g., `search name=James Jake`                                                                                                                                                                                                                       |
+| [**Scheduling a new appointment**](#scheduling-a-new-appointment-schedule)   | `schedule patient=PATIENT start=START end=END description=DESCRIPTION` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray`                                                                      |
+| [**Rescheduling an appointment**](#rescheduling-an-appointment-reschedule)   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                          |
+| [**Cancelling an appointment**](#cancelling-an-appointment-cancel)           | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                                                                                                                  |
+| [**Displaying all appointments**](#displaying-all-appointments-appointments) | `appointments`                                                                                                                                                                                                                                                       |
+| [**Clearing all patient records**](#clearing-all-patient-records-clear)      | `clear`                                                                                                                                                                                                                                                              |
+| [**Exiting the program**](#exiting-the-program-exit)                         | `exit`                                                                                                                                                                                                                                                               |
+| [**Viewing help**](#viewing-help-help)                                       | `help`                                                                                                                                                                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -283,7 +288,7 @@ This command exits the program.
 
 Format: `exit`
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -296,8 +301,7 @@ Format: `help`
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: 
-You can install MediFlowR on that other computer, then simply transfer over the `mediflowr.json` file located in the
+**A**: You can install MediFlowR on that other computer, then simply transfer over the `mediflowr.json` file located in the
 data folder to the data folder on that other computer. The data folder is located at the same place as your MediFlowR application.
 
 **Q**: How do I save my data after any changes I have made?<br>
