@@ -75,7 +75,7 @@ class TimeParserTest {
     void testDayIncompleteInvalid2() {
         boolean hasError = false;
         try {
-            System.out.println(TimeParser.parseDate("Tu"));
+            TimeParser.parseDate("Tu");
         } catch (ParseException ignored) {
             hasError = true;
         }
@@ -110,23 +110,23 @@ class TimeParserTest {
 
     @Test
     void testYearMonthDayTime3() throws ParseException {
-        System.out.println(TimeParser.parseDate("21-12-2024 1730"));
+        TimeParser.parseDate("21-12-2024 1730");
     }
 
     @Test
     void testYearMonthDayTime4() throws ParseException {
-        System.out.println(TimeParser.parseDate("21-12-2024 1730pm"));
+        TimeParser.parseDate("21-12-2024 1730pm");
     }
 
     // TODO: FIX THIS FROM BECOMING 1.30AM
     @Test
     void testYearMonthDayTime5() throws ParseException {
-        System.out.println(TimeParser.parseDate("nov 12 1.30pm 2023"));
+        TimeParser.parseDate("nov 12 1.30pm 2023");
     }
 
     @Test
     void testYearMonthDayTime6() throws ParseException {
-        System.out.println(TimeParser.parseDate("2023-12-12 1647"));
+        TimeParser.parseDate("2023-12-12 1647");
     }
 
     @Test
