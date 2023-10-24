@@ -14,6 +14,10 @@ public class AnimalType {
 
     public static final String VALIDATION_REGEX_AVAILABLE = "^(able\\.Dog|able\\.Cat|nil)$";
     public static final String VALIDATION_REGEX_NOT_AVAILABLE = "^(current\\.Dog|current\\.Cat|nil)$";
+    public static final AnimalType ABLE_CAT = new AnimalType("able.Cat", "Available");
+    public static final AnimalType ABLE_DOG = new AnimalType("able.Dog", "Available");
+    public static final AnimalType CURRENT_CAT = new AnimalType("current.Cat", "NotAvailable");
+    public static final AnimalType CURRENT_DOG = new AnimalType("current.Dog", "NotAvailable");
 
     public final String availability;
     public final String value;

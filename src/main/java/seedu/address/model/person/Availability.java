@@ -11,6 +11,9 @@ public class Availability {
             + "'NotAvailable' or 'nil'";
 
     public static final String VALIDATION_REGEX = "^(Available|NotAvailable|nil)$";
+    public static final Availability AVAILABLE = new Availability("Available");
+    public static final Availability NOT_AVAILABLE = new Availability("NotAvailable");
+    public static final Availability NIL_AVAILABILITY = new Availability("nil");
 
     public final String value;
 

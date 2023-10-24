@@ -11,6 +11,10 @@ public class Housing {
 
     public static final String VALIDATION_REGEX = "^(HDB|Condo|Landed|nil)$";
 
+    public static final Housing HDB = new Housing("HDB");
+    public static final Housing CONDO = new Housing("Condo");
+    public static final Housing LANDED = new Housing("Landed");
+
     public final String value;
 
     /**
