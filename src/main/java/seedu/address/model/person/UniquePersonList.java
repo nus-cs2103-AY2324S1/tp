@@ -38,7 +38,9 @@ public class UniquePersonList implements Iterable<Person> {
 
     public boolean checkSameDate(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameDate);
+        return internalList.stream()
+                .filter(person -> !person.isSamePerson(toCheck))
+                .anyMatch(toCheck::isSameDate);
     }
 
     /**
