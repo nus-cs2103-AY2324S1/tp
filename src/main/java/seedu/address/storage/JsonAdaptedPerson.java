@@ -113,7 +113,7 @@ class JsonAdaptedPerson {
         }
         final JoinDate modelJoinDate = new JoinDate(joinDate);
 
-        if (!Salary.isValidSalary(salary)) {
+        if (!Salary.isValid(salary)) {
             throw new IllegalValueException(Salary.MESSAGE_CONSTRAINTS);
         }
         final Salary modelSalary = new Salary(salary);
