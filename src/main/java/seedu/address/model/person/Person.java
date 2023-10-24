@@ -27,7 +27,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Optional fields
-    private Lead lead;
+    private final Lead lead;
     private final TelegramHandle telegram;
     private final Profession profession;
     private final Income income;
@@ -55,8 +55,8 @@ public class Person {
     /**
      * Same constructor but with optional fields.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        TelegramHandle telegram, Profession profession, Income income, Details details, Lead lead) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, TelegramHandle telegram,
+                  Profession profession, Income income, Details details, Lead lead) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -127,13 +127,6 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Changes the lead potential of the client.
-     */
-    public void setLead(Lead newLead) {
-        this.lead = newLead;
     }
 
     /**

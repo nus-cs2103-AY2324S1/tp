@@ -8,6 +8,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -54,6 +55,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns an interaction set containing the list of strings given.
+     */
+    public static Set<Interaction> getInteractionSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Interaction::new)
                 .collect(Collectors.toSet());
     }
 
