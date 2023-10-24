@@ -14,15 +14,15 @@ MediFlowR is a **desktop app for managing patient records and appointments, opti
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `mediflowr.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `mediflowr.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your patient records.
+3. Copy the file to the folder you want to use as the _home folder_ for your patient records.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar mediflowr.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar mediflowr.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all patients.
@@ -35,14 +35,14 @@ MediFlowR is a **desktop app for managing patient records and appointments, opti
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Tutorial for new users
 
 If this is your first time using MediFlowR, do not worry as this is a tutorial for you to get familiar with the features
-of MediFlowR. Please follow the instructions [here](#quick-start) first to setup the application before proceeding with the tutorial. 
+of MediFlowR. Please follow the instructions [here](#quick-start) first to set up the application before proceeding with the tutorial. 
 
 - Launch the MediFlowR application.
 
@@ -92,7 +92,7 @@ of MediFlowR. Please follow the instructions [here](#quick-start) first to setup
 **:information_source: Notes about the command format:**<br>
 
 * Words in between square brackets `[]` are the parameters to be supplied by the user.<br>
-  e.g. in `search name=[name]`, `[name]` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `search name=[name]`, `[name]` is a parameter which can be used as `add name=John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `name=[name] birthdate=[birthdate]`, `birthdate=[birthdate] name=[name]` is also acceptable.
@@ -148,7 +148,7 @@ Finds patients whose names contain any of the given keywords.
 
 Format: `search name=[name]`
 
-* The search is case-insensitive. e.g `tianrun` will match `Tianrun`
+* The search is case-insensitive. e.g. `tianrun` will match `Tianrun`
 * The order of the keywords does not matter. e.g. `Lebron James` will match `James Lebron`
 * Only the name is searched.
 * Only full words will be matched e.g. `Curr` will not match `Curry`
@@ -185,6 +185,40 @@ Exits the program.
 
 Format: `exit`
 
+### Scheduling a new appointment: `schedule`
+
+Creates an appointment to be added to the appointment records.
+
+Format: `schedule patient=PATIENT start=START end=END description=DESCRIPTION`
+
+Examples:
+*  `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray `
+
+### Rescheduling an existing appointment: `reschedule`
+
+Reschedules an appointment in the appointment records to another timeslot.
+
+Format: `reschedule INDEX start=START end=END`
+
+Examples:
+*  `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`
+
+### Cancelling an existing appointment: `cancel`
+
+Cancels an appointment in the appointment records.
+
+Format: `cancel INDEX`
+
+Examples:
+*  `cancel 3`
+
+### Listing all appointments : `appointments`
+
+Shows a list of all appointments in the address book.
+
+Format: `appointments`
+
+
 ### Saving the data
 
 MediFlowR data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -218,12 +252,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add name=[name] birthdate=[birthdate] gender=[gender] illness=[illness]` <br> e.g., `add name=John birthdate=30/09/2001 gender=Male illness=Fever`
-**Clear** | `clear`
-**Delete** | `delete id=[patient-id]`<br> e.g., `delete id=3`
-**Update** | `update id=[patient-id] illness=[illness]`<br> e.g.,`update id=12345 illness=Fever`
-**Search** | `search name=[name]`<br> e.g., `search name=James Jake`
-**List** | `list`
-**Help** | `help`
+| Action           | Format, Examples                                                                                                                                                             |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add name=[name] birthdate=[birthdate] gender=[gender] illness=[illness]` <br> e.g., `add name=John birthdate=30/09/2001 gender=Male illness=Fever`                          |
+| **Clear**        | `clear`                                                                                                                                                                      |
+| **Delete**       | `delete id=[patient-id]`<br> e.g., `delete id=3`                                                                                                                             |
+| **Update**       | `update id=[patient-id] illness=[illness]`<br> e.g.,`update id=12345 illness=Fever`                                                                                          |
+| **Search**       | `search name=[name]`<br> e.g., `search name=James Jake`                                                                                                                      |
+| **List**         | `list`                                                                                                                                                                       |
+| **Help**         | `help`                                                                                                                                                                       |
+| **Schedule**     | `schedule patient=PATIENT start=START end=END description=DESCRIPTION` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray` |
+| **Reschedule**   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                  |
+| **Cancel**       | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                          |
+| **Appointments** | `appointments`                                                                                                                                                               |
