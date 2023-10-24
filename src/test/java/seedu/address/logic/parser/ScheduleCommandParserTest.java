@@ -48,7 +48,7 @@ public class ScheduleCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Appointment expectedAppointment = new AppointmentBuilder().withName(VALID_NAME_BOB)
-                .withDate(VALID_DATE_BOB).withStartTime("12:00:00").withEndTime(VALID_END_TIME_BOB)
+                .withDate(VALID_DATE_BOB).withStartTime("12:00").withEndTime(VALID_END_TIME_BOB)
                 .withDescription(VALID_DESCRIPTION_BOB).build();
 
         // Whitespace only preamble
