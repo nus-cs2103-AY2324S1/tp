@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 
@@ -25,8 +26,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Meeting> filteredMeetings;
-    private Person viewedPerson;
-    private Meeting viewedMeeting;
+    private Index viewedPersonIndex;
+    private Index viewedMeetingIndex;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -150,18 +151,24 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setViewedPerson(Person person) {
-        viewedPerson = person;
+    public void setViewedPersonIndex(Index personIndex) {
+        viewedPersonIndex = personIndex;
     }
 
     @Override
-    public void setViewedMeeting(Meeting meeting) {
-        viewedMeeting = meeting;
+    public void setViewedMeetingIndex(Index meetingIndex) {
+        viewedMeetingIndex = meetingIndex;
     }
 
     @Override
     public Pair<Person, Meeting> getViewedItems() {
-        return new Pair<>(viewedPerson, viewedMeeting);
+        Person personToView = viewedPersonIndex == null
+                ? null
+                : getFilteredPersonList().get(viewedPersonIndex.getZeroBased());
+        Meeting meetingToView = viewedMeetingIndex == null
+                ? null
+                : getFilteredMeetingList().get(viewedMeetingIndex.getZeroBased());
+        return new Pair<>(personToView, meetingToView);
     }
 
     //=========== Filtered Person List Accessors =============================================================

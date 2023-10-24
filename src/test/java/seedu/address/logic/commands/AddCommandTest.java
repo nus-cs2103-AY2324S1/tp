@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -196,12 +197,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setViewedPerson(Person person) {
+        public void setViewedPersonIndex(Index person) {
 
         }
 
         @Override
-        public void setViewedMeeting(Meeting meeting) {}
+        public void setViewedMeetingIndex(Index meeting) {}
 
         @Override
         public Pair<Person, Meeting> getViewedItems() {

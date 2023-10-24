@@ -193,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            // Insert Person object into infoDisplay for view commands
+            // Insert Person/Meeting object into infoDisplay for view commands
             infoDisplayPanel.setViewedModel(logic.getViewedItems());
 
             if (commandResult.isShowHelp()) {
