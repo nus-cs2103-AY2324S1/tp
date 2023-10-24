@@ -2,11 +2,13 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -60,6 +62,19 @@ public class Person {
     public List<Attendance> getAttendanceRecords() {
         return attendanceRecords;
     }
+
+    /**
+     * Retrieves the Attendance object for the current week, if it exists.
+     *
+     * @return An Optional containing the Attendance object for the current week, or an empty Optional if not found.
+     */
+    public Optional<Attendance> getAttendanceForCurrentWeek() {
+        LocalDate currentDate = LocalDate.now();
+        return attendanceRecords.stream()
+                .filter(attendance -> attendance.isSameWeek(currentDate))
+                .findFirst();
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

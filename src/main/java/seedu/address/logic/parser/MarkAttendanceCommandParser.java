@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.MarkAttendanceCommand;
@@ -28,7 +30,6 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public MarkAttendanceCommand parse(String args) throws ParseException {
-        String identifier;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ATTENDANCE,
                 PREFIX_WEEK, PREFIX_REASON);
 
@@ -41,22 +42,29 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
         }
 
+        List<String> identifiers = new ArrayList<>();
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            identifier = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
+            String[] names = argMultimap.getValue(PREFIX_NAME).get().split(",");
+            for (String name : names) {
+                identifiers.add(ParserUtil.parseName(name.trim()).fullName);
+            }
         } else {
-            identifier = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()).value;
+            String[] ids = argMultimap.getValue(PREFIX_ID).get().split(",");
+            for (String id : ids) {
+                identifiers.add(ParserUtil.parseId(id.trim()).value);
+            }
         }
 
         boolean isPresent = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());
         Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
 
         if (isPresent) {
-            return new MarkAttendanceCommand(identifier, true, week);
+            return new MarkAttendanceCommand(identifiers, true, week);
         } else {
             String reason = argMultimap.getValue(PREFIX_REASON).get();
-            return new MarkAttendanceCommand(identifier, false, week, reason);
+            return new MarkAttendanceCommand(identifiers, false, week, reason);
         }
-
     }
 
     /**

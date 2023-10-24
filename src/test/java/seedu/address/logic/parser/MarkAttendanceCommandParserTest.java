@@ -2,9 +2,13 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,6 +42,28 @@ public class MarkAttendanceCommandParserTest {
     public void parse_validArgsWithId_returnsMarkAttendanceCommand() {
         String userInput = " /id " + VALID_ID_AMY + " /attendance 1" + " /week 1";
         MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_ID_AMY, true, new Week(1));
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    /**
+     * Tests the parsing of valid arguments using multiple names to return a {@code MarkAttendanceCommand}.
+     */
+    @Test
+    public void parse_validArgsWithMultipleNames_returnsMarkAttendanceCommand() {
+        String userInput = " /name " + VALID_NAME_AMY + "," + VALID_NAME_BOB + " /attendance 1 /week 1";
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_NAME_AMY, VALID_NAME_BOB), true,
+                new Week(1));
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    /**
+     * Tests the parsing of valid arguments using multiple IDs to return a {@code MarkAttendanceCommand}.
+     */
+    @Test
+    public void parse_validArgsWithMultipleIds_returnsMarkAttendanceCommand() {
+        String userInput = " /id " + VALID_ID_AMY + "," + VALID_ID_BOB + " /attendance 0 /week 1";
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_ID_AMY, VALID_ID_BOB), false,
+                new Week(1));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
