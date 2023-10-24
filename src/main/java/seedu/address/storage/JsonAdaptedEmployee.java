@@ -120,7 +120,7 @@ class JsonAdaptedEmployee {
         final Salary modelSalary = new Salary(salary);
 
         if (leave == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Leave.class.getSimpleName()));
         }
         if (!Leave.isValidLeave(leave)) {
             throw new IllegalValueException(Leave.MESSAGE_CONSTRAINTS);

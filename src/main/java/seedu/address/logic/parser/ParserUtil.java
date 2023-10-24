@@ -121,8 +121,8 @@ public class ParserUtil {
     public static Leave parseLeave(String leave) throws ParseException {
         requireNonNull(leave);
         String trimmedLeave = leave.trim();
-        if (!Salary.isValidSalary(trimmedLeave)) {
-            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
+        if (!Leave.isValidLeave(trimmedLeave)) {
+            throw new ParseException(Leave.MESSAGE_CONSTRAINTS);
         }
         return new Leave(trimmedLeave);
     }
