@@ -56,10 +56,10 @@ public class Interaction {
         this.outcome = outcome;
         this.date = new Date();
     }
-    
+
     /**
      * Constructs a {@code Interaction}.
-     * 
+     *
      * @param interactionNote A valid Interaction note.
      * @param outcome A valid LeadStatus.
      * @param date A valid date.
