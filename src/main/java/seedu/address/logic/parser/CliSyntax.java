@@ -14,6 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_SEC_LEVEL = new Prefix("l/");
     public static final Prefix PREFIX_NEAREST_MRT_STATION = new Prefix("m/");
     public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
+    public static final Prefix PREFIX_ENROL_DATE = new Prefix("d/");
 
     public static final Prefix PREFIX_SORT_IN = new Prefix("in/");
 

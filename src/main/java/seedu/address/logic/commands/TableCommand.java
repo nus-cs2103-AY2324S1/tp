@@ -135,25 +135,34 @@ public class TableCommand extends Command {
     private SubjectTableCommandResult executeSubject(Model model) {
         Map<String, Integer> columnValueMapping = new HashMap<>();
 
-        String[] titles = new String[] {Subject.MATHS, Subject.CS, Subject.CHEMI, Subject.BIO,
-                                        Subject.ENG, Subject.PHY};
+        String[] titles = new String[] {Subject.ENG, Subject.CHI, Subject.EMATH, Subject.AMATH,
+                                        Subject.PHY, Subject.CHEMI, Subject.BIO, Subject.GEOG,
+                                        Subject.HIST, Subject.SOC};
 
         ObservableList<Student> studentList = model.getFilteredPersonList();
 
-        StudentTakesSubjectPredicate takeMathsPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.MATHS));
-        StudentTakesSubjectPredicate takeCsPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.CS));
+        StudentTakesSubjectPredicate takeEngPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.ENG));
+        StudentTakesSubjectPredicate takeChiPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.CHI));
+        StudentTakesSubjectPredicate takeEMathPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.EMATH));
+        StudentTakesSubjectPredicate takeAMathPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.AMATH));
         StudentTakesSubjectPredicate takePhyPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.PHY));
         StudentTakesSubjectPredicate takeChemiPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.CHEMI));
         StudentTakesSubjectPredicate takeBioPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.BIO));
-        StudentTakesSubjectPredicate takeEngPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.ENG));
+        StudentTakesSubjectPredicate takeGeogPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.GEOG));
+        StudentTakesSubjectPredicate takeHistPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.HIST));
+        StudentTakesSubjectPredicate takeSocPredicate = new StudentTakesSubjectPredicate(new Subject(Subject.SOC));
 
         Stream<StudentTakesSubjectPredicate> predicateStream = Stream.of(
-                takeMathsPredicate,
-                takeCsPredicate,
+                takeEngPredicate,
+                takeChiPredicate,
+                takeEMathPredicate,
+                takeAMathPredicate,
                 takePhyPredicate,
                 takeChemiPredicate,
                 takeBioPredicate,
-                takeEngPredicate
+                takeGeogPredicate,
+                takeHistPredicate,
+                takeSocPredicate
         );
 
         int[] values = predicateStream

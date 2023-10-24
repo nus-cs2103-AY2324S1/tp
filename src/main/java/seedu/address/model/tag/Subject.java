@@ -13,12 +13,16 @@ import java.util.Locale;
  */
 public class Subject {
 
-    public static final String MATHS = "Mathematics";
-    public static final String CS = "Computer Science";
+    public static final String ENG = "English";
+    public static final String CHI = "Chinese";
+    public static final String EMATH = "Elementary Mathematics";
+    public static final String AMATH = "Additional Mathematics";
     public static final String PHY = "Physics";
     public static final String CHEMI = "Chemistry";
     public static final String BIO = "Biology";
-    public static final String ENG = "English";
+    public static final String GEOG = "Geography";
+    public static final String HIST = "History";
+    public static final String SOC = "Social Studies";
 
     public static final String MESSAGE_CONSTRAINTS = "Subjects names should be alphanumeric, and should not be blank";
     private static final String MESSAGE_INVALID_DATE_FORMAT = "Date format should be MMM YYYY (e.g. Jul 2023)";

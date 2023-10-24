@@ -115,25 +115,37 @@ public class TableWindow extends UiPart<Stage> {
     private static TableView<SubjectTableCommandResult> createSubjectTable(SubjectTableCommandResult commandResult) {
         TableView<SubjectTableCommandResult> tableToCreate = new TableView<>();
 
-        TableColumn<SubjectTableCommandResult, Integer> csColumn = new TableColumn<>(Subject.CS);
-        csColumn.setCellValueFactory(new PropertyValueFactory<>("csCount"));
-        TableColumn<SubjectTableCommandResult, Integer> mathsColumn = new TableColumn<>(Subject.MATHS);
-        mathsColumn.setCellValueFactory(new PropertyValueFactory<>("mathsCount"));
+        TableColumn<SubjectTableCommandResult, Integer> engColumn = new TableColumn<>(Subject.ENG);
+        engColumn.setCellValueFactory(new PropertyValueFactory<>("engCount"));
+        TableColumn<SubjectTableCommandResult, Integer> chiColumn = new TableColumn<>(Subject.CHI);
+        chiColumn.setCellValueFactory(new PropertyValueFactory<>("chiCount"));
+        TableColumn<SubjectTableCommandResult, Integer> emathColumn = new TableColumn<>(Subject.EMATH);
+        emathColumn.setCellValueFactory(new PropertyValueFactory<>("emathCount"));
+        TableColumn<SubjectTableCommandResult, Integer> amathColumn = new TableColumn<>(Subject.AMATH);
+        amathColumn.setCellValueFactory(new PropertyValueFactory<>("amathCount"));
         TableColumn<SubjectTableCommandResult, Integer> phyColumn = new TableColumn<>(Subject.PHY);
         phyColumn.setCellValueFactory(new PropertyValueFactory<>("phyCount"));
         TableColumn<SubjectTableCommandResult, Integer> chemiColumn = new TableColumn<>(Subject.CHEMI);
         chemiColumn.setCellValueFactory(new PropertyValueFactory<>("chemiCount"));
         TableColumn<SubjectTableCommandResult, Integer> bioColumn = new TableColumn<>(Subject.BIO);
         bioColumn.setCellValueFactory(new PropertyValueFactory<>("bioCount"));
-        TableColumn<SubjectTableCommandResult, Integer> engColumn = new TableColumn<>(Subject.ENG);
-        engColumn.setCellValueFactory(new PropertyValueFactory<>("engCount"));
+        TableColumn<SubjectTableCommandResult, Integer> geogColumn = new TableColumn<>(Subject.GEOG);
+        geogColumn.setCellValueFactory(new PropertyValueFactory<>("geogCount"));
+        TableColumn<SubjectTableCommandResult, Integer> histColumn = new TableColumn<>(Subject.HIST);
+        histColumn.setCellValueFactory(new PropertyValueFactory<>("histCount"));
+        TableColumn<SubjectTableCommandResult, Integer> socColumn = new TableColumn<>(Subject.SOC);
+        socColumn.setCellValueFactory(new PropertyValueFactory<>("socCount"));
 
-        tableToCreate.getColumns().add(csColumn);
-        tableToCreate.getColumns().add(mathsColumn);
+        tableToCreate.getColumns().add(engColumn);
+        tableToCreate.getColumns().add(chiColumn);
+        tableToCreate.getColumns().add(emathColumn);
+        tableToCreate.getColumns().add(amathColumn);
         tableToCreate.getColumns().add(phyColumn);
         tableToCreate.getColumns().add(chemiColumn);
         tableToCreate.getColumns().add(bioColumn);
-        tableToCreate.getColumns().add(engColumn);
+        tableToCreate.getColumns().add(geogColumn);
+        tableToCreate.getColumns().add(histColumn);
+        tableToCreate.getColumns().add(socColumn);
 
         tableToCreate.getItems().add(commandResult);
 

@@ -12,12 +12,16 @@ import seedu.address.model.tag.Subject;
 public class SubjectTableCommandResult extends CommandResult {
 
     private static final String FEEDBACKTOUSERMESSAGE = "A table categorized by Subject is shown";
-    private int csCount;
-    private int mathsCount;
+    private int engCount;
+    private int chiCount;
+    private int emathCount;
+    private int amathCount;
     private int phyCount;
     private int chemiCount;
     private int bioCount;
-    private int engCount;
+    private int geogCount;
+    private int histCount;
+    private int socCount;
 
 
     /**
@@ -26,12 +30,16 @@ public class SubjectTableCommandResult extends CommandResult {
      */
     public SubjectTableCommandResult(Map<String, Integer> columnValueMapping) {
         super(FEEDBACKTOUSERMESSAGE);
-        this.csCount = columnValueMapping.get(Subject.CS);
-        this.mathsCount = columnValueMapping.get(Subject.MATHS);
+        this.engCount = columnValueMapping.get(Subject.ENG);
+        this.chiCount = columnValueMapping.get(Subject.CHI);
+        this.emathCount = columnValueMapping.get(Subject.EMATH);
+        this.amathCount = columnValueMapping.get(Subject.AMATH);
         this.phyCount = columnValueMapping.get(Subject.PHY);
         this.chemiCount = columnValueMapping.get(Subject.CHEMI);
         this.bioCount = columnValueMapping.get(Subject.BIO);
-        this.engCount = columnValueMapping.get(Subject.ENG);
+        this.geogCount = columnValueMapping.get(Subject.GEOG);
+        this.histCount = columnValueMapping.get(Subject.HIST);
+        this.socCount = columnValueMapping.get(Subject.SOC);
     }
 
     /**
@@ -44,19 +52,35 @@ public class SubjectTableCommandResult extends CommandResult {
     }
 
     /**
-     * Getter method for csCount which will auto invoked by javafx PropertyValueFactory instance.
-     * @return count for computer science category.
+     * Getter method for engCount which will auto invoked by javafx PropertyValueFactory instance.
+     * @return count for english category.
      */
-    public int getCsCount() {
-        return csCount;
+    public int getEngCount() {
+        return engCount;
     }
 
     /**
-     * Getter method for mathsCount which will auto invoked by javafx PropertyValueFactory instance.
-     * @return count for mathematics category.
+     * Getter method for chiCount which will auto invoked by javafx PropertyValueFactory instance.
+     * @return count for chinese category.
      */
-    public int getMathsCount() {
-        return mathsCount;
+    public int getChiCount() {
+        return chiCount;
+    }
+
+    /**
+     * Getter method for emathCount which will auto invoked by javafx PropertyValueFactory instance.
+     * @return count for elementary mathematics category.
+     */
+    public int getEMathCount() {
+        return emathCount;
+    }
+
+    /**
+     * Getter method for amathCount which will auto invoked by javafx PropertyValueFactory instance.
+     * @return count for additional mathematics category.
+     */
+    public int getAMathCount() {
+        return amathCount;
     }
 
     /**
@@ -84,11 +108,27 @@ public class SubjectTableCommandResult extends CommandResult {
     }
 
     /**
-     * Getter method for engCount which will auto invoked by javafx PropertyValueFactory instance.
-     * @return count for english category.
+     * Getter method for geogCount which will auto invoked by javafx PropertyValueFactory instance.
+     * @return count for geography category.
      */
-    public int getEngCount() {
-        return engCount;
+    public int getGeogCount() {
+        return geogCount;
+    }
+
+    /**
+     * Getter method for histCount which will auto invoked by javafx PropertyValueFactory instance.
+     * @return count for history category.
+     */
+    public int getHistCount() {
+        return histCount;
+    }
+
+    /**
+     * Getter method for socCount which will auto invoked by javafx PropertyValueFactory instance.
+     * @return count for social studies category.
+     */
+    public int getSocCount() {
+        return socCount;
     }
 
     @Override
@@ -104,18 +144,23 @@ public class SubjectTableCommandResult extends CommandResult {
 
         SubjectTableCommandResult otherCommandResult = (SubjectTableCommandResult) other;
         return super.equals(otherCommandResult)
-                && otherCommandResult.csCount == csCount
-                && otherCommandResult.mathsCount == mathsCount
+                && otherCommandResult.engCount == engCount
+                && otherCommandResult.chiCount == chiCount
+                && otherCommandResult.emathCount == emathCount
+                && otherCommandResult.amathCount == amathCount
                 && otherCommandResult.phyCount == phyCount
                 && otherCommandResult.chemiCount == chemiCount
                 && otherCommandResult.bioCount == bioCount
-                && otherCommandResult.engCount == engCount;
+                && otherCommandResult.geogCount == geogCount
+                && otherCommandResult.histCount == histCount
+                && otherCommandResult.socCount == socCount;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.getFeedbackToUser(), super.isShowHelp(), super.isExit(),
-                csCount, mathsCount, phyCount, chemiCount, bioCount, engCount);
+                engCount, chiCount, emathCount, amathCount, phyCount, chemiCount,
+                bioCount, geogCount, histCount, socCount);
     }
 
     @Override
