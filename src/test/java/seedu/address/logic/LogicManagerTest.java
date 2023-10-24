@@ -30,6 +30,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTeamBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonTeamBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -41,7 +42,7 @@ public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
     private static final IOException DUMMY_AD_EXCEPTION = new AccessDeniedException("dummy access denied exception");
     private static final Team SAMPLE_TEAM = new TeamBuilder().build();
-    private static final String TEAM_NAME_DESC_SAMPLE = " TeamName: " + SAMPLE_TEAM.getName();
+    private static final String TEAM_NAME_DESC_SAMPLE = " TeamName: " + SAMPLE_TEAM.getTeamName();
     private static final String ADD_TEAM_COMMAND = "addTeam" + TEAM_NAME_DESC_SAMPLE;
     @TempDir
     public Path temporaryFolder;
