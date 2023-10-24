@@ -13,6 +13,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 
 /**
@@ -28,13 +29,16 @@ class JsonAdaptedApplicant {
     private final String position;
     private final List<JsonAdaptedInterview> interviews = new ArrayList<>();
 
+    private final String status;
+
     /**
      * Constructs a {@code JsonAdaptedApplicant} with the given applicant details.
      */
     @JsonCreator
     public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("position") String position,
-            @JsonProperty("interviews") List<JsonAdaptedInterview> interviews) {
+            @JsonProperty("interviews") List<JsonAdaptedInterview> interviews,
+            @JsonProperty("status") String status) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -42,6 +46,7 @@ class JsonAdaptedApplicant {
         if (interviews != null) {
             this.interviews.addAll(interviews);
         }
+        this.status = status;
     }
 
     /**
@@ -55,6 +60,7 @@ class JsonAdaptedApplicant {
         interviews.addAll(source.getInterviews().stream()
                 .map(JsonAdaptedInterview::new)
                 .collect(Collectors.toList()));
+        status = source.getStatus().toString();
     }
 
     /**
@@ -102,8 +108,10 @@ class JsonAdaptedApplicant {
         }
         final Position modelPosition = new Position(position);
 
+        final Status modelStatus = Status.findByName(status);
+
         final List<Interview> modelInterviews = new ArrayList<>(applicantInterviews);
-        return new Applicant(modelName, modelPhone, modelEmail, modelPosition, modelInterviews);
+        return new Applicant(modelName, modelPhone, modelEmail, modelPosition, modelInterviews, modelStatus);
     }
 
 }

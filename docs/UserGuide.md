@@ -133,22 +133,26 @@ UI mockup:
 
 Adds a new interview to an applicant.
 
-Format: `addi INDEX t/TYPE`
+Format: `addi INDEX t/TYPE [r/RATING]`
 
 Examples:
-* `addi 1 t/technical` adds a Technical interview to the 1st person in the displayed applicant list.
-* `addi 3 t/screening`
+* `addi 1 t/technical r/8.6` adds a Technical interview with rating 8.6 to the 1st person in the displayed applicant list.
+* `addi 3 t/screening` adds a Screening interview without rating to the 3rd person in the displayed applicant list.
 
 ---
 ### `editi` : Editing an interview of an applicant
 
 Edits an interview of an applicant.
 
-Format: `editi INDEX i/INTERVIEW_INDEX t/TYPE`
+Format: `editi INDEX i/INTERVIEW_INDEX [t/TYPE] [r/RATING]`
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated by the input values.
 
 Examples:
-* `editi 1 i/1 t/technical` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview.
-* `editi 3 i/2 t/screening`
+* `editi 1 i/1 t/technical r/7.8` edits the 1st interview of the 1st person in the displayed applicant list to a technical interview with rating 7.8.
+* `editi 3 i/2 t/screening` edits the 2nd interview type of the 3rd person in the displayed applicant list to a screening interview.
+* `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
 
 ---
 ### `clear` : Clearing all applicant entries
