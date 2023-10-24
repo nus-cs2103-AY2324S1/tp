@@ -8,7 +8,7 @@
 
 ## User Interface Guide
 
-![User Interface Guide Example](./images/userInterfaceGuide.png)
+![User Interface Guide Example](images/user-guide/userInterfaceGuide.png)
 
 
 
@@ -34,7 +34,7 @@ Displays a message explaining how to access the help page.
 Format: `help`
 
 UI mockup:
-![Help UI Mockup](./images/help.png)
+![Help UI Mockup](images/user-guide/help.png)
 
 ---
 ### `add` : Adding a new applicant
@@ -48,7 +48,7 @@ Example:
 * `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/91234567`
 
 UI mockup:
-![Add UI Mockup](./images/add.png)
+![Add UI Mockup](images/user-guide/add.png)
 
 ---
 ### `edit` : Editing an applicant
@@ -65,7 +65,7 @@ Example:
 * `edit 2 hp/80081234 e/newEmail@hotmail.com` edits the phone number and email of the 2nd applicant in the list.
 
 UI mockup:
-![Edit UI Mockup](./images/edit.png)
+![Edit UI Mockup](images/user-guide/edit.png)
 
 ---
 ### `list` : Listing all applicants
@@ -75,7 +75,7 @@ Displays the full list of all applicants.
 Format: `list`
 
 UI mockup:
-![List UI Mockup](./images/list.png)
+![List UI Mockup](images/user-guide/list.png)
 
 ---
 ### `delete` : Deleting an applicant
@@ -92,7 +92,7 @@ Examples:
 * `sort d/name` followed by `delete 3` deletes the 3rd person in the sorted applicant list.
 
 UI mockup:
-![Delete UI Mockup](./images/delete.png)
+![Delete UI Mockup](images/user-guide/delete.png)
 
 ---
 ### `find` : Finding an applicant by name
@@ -111,7 +111,7 @@ Examples:
 * `find IVAN CHEW` finds any applicant whose name contains “ivan” or contains “chew”.
 
 UI mockup:
-![Find UI Mockup](./images/find.png)
+![Find UI Mockup](images/user-guide/find.png)
 
 ---
 ### `sort`: Sorting applicants by descriptor
@@ -126,7 +126,7 @@ Examples:
 * `sort d/phone` sorts the applicant list by phone numbers in ascending order.
 
 UI mockup:
-![Sort UI Mockup](./images/sort.png)
+![Sort UI Mockup](images/user-guide/sort.png)
 
 ---
 ### `addi` : Adding an interview to an applicant
@@ -162,7 +162,7 @@ Clears all the current data stored in the system.
 Format: `clear`
 
 UI mockup:
-![Clear UI Mockup](./images/clear.png)
+![Clear UI Mockup](images/user-guide/clear.png)
 
 ---
 ### `exit` : Exiting the program
