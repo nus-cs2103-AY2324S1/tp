@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.appointmentcommands.AppointmentComman
 
 import java.time.LocalDateTime;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentTime;
 
 /**
@@ -37,6 +38,14 @@ public class AppointmentTimeBuilder {
     public AppointmentTimeBuilder(AppointmentTime appointmentTime) {
         start = appointmentTime.getStart();
         end = appointmentTime.getEnd();
+    }
+
+    /**
+     * Creates a {@code AppointmentTimeBuilder} with data provided by {@code appointment}.
+     */
+    public AppointmentTimeBuilder(Appointment appointment) {
+        start = appointment.getAppointmentTime().getStart();
+        end = appointment.getAppointmentTime().getEnd();
     }
 
     /**
