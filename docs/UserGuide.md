@@ -347,31 +347,21 @@ Displays a list of all schedules in the address book in a table format.
 
 ### Unmarking a schedule: `unmark`
 
-Sets the status of a schedule in the address book to be `PENDING` based on their index number in the table of schedules
-listed.
+Removes the status of a schedule in the address book based on their index number in the table of schedules listed.
 
 ![unmark schedule](images/unmarkSchedule.png)
 
 **Format:** `unmark SCHEDULE_INDEX`
 
 **Example:**
-* `unmark 5` sets the status of the schedule indexed at 5 in the schedule list to be `PENDING`.
-* `list-s` followed by `unmark 2` sets the status of the schedule indexed at 2 in the schedule list to be `PENDING`.
+* `unmark 5` removes the status of the schedule indexed at 5 in the schedule list.
+* `list-s` followed by `unmark 2` removes the status of the schedule indexed at 2 in the schedule list.
 
 **Acceptable values for each parameter:**
 * `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
 
 **Expected output:**
 * `Unmarked Schedule: Alex Yeoh; Start Time: Sep 15 2023 09:00; End Time: Sep 15 2023 11:00`
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Schedule status**<br>
-
-* Only COMPLETED and MISSED statuses are displayed.
-* Newly created schedules have a status of PENDING initially.
-
-</div>
 
 **Error messages:**
 * `Index number given is out of range`: The schedule index provided is invalid
