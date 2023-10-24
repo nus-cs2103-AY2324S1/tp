@@ -1,9 +1,10 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the day and time when the Tutee has tuition every week.

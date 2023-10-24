@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Person's Begin in the address book.
@@ -35,7 +35,7 @@ public class Begin {
     private LocalTime parse(String test) {
         assert isValidBegin(test);
 
-        String pattern  = "HHmm";
+        String pattern = "HHmm";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
 
         return LocalTime.parse(test, formatter);
