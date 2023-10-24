@@ -6,10 +6,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import seedu.address.model.event.exceptions.DateOutOfBoundsException;
 
 /**
  * Represents a period in time when an event will occur.
@@ -23,6 +25,7 @@ public class EventPeriod implements Comparable<EventPeriod> {
             + "    -'HH:mm' is the time in 24-hour format.";
     public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HH:mm");
+    private static final LocalTime MAX_TIME_OF_DAY = LocalTime.MIDNIGHT.minusMinutes(1);
 
     private final LocalDateTime start;
     private final LocalDateTime end;
@@ -138,6 +141,38 @@ public class EventPeriod implements Comparable<EventPeriod> {
         String startString = start.format(DATE_TIME_STRING_FORMATTER);
         String endString = end.format(DATE_TIME_STRING_FORMATTER);
         return startString + " - " + endString;
+    }
+
+    /**
+     * Checks if another {@code @EventPeriod} occurs within a minute with this {@code @EventPeriod}.
+     *
+     * @param other the other {@code @EventPeriod}.
+     * @return true if they are apart by a single minute.
+     */
+    public boolean isContinuous(EventPeriod other) {
+        requireNonNull(other);
+
+        return this.start.plusMinutes(1) == other.end || other.start.plusMinutes(1) == this.end;
+    }
+
+    /**
+     * Bounds the {@code EventPeriod} such that the start and end lies within the specified {@code LocalDate}.
+     *
+     * @param date the specified {@code @LocalDate}.
+     * @return new {@code @EventPeriod} with adjusted start and end times.
+     */
+    public EventPeriod boundPeriodByDate(LocalDate date) {
+        requireNonNull(date);
+
+        if (date.isEqual(start.toLocalDate()) && date.isEqual(end.toLocalDate())) {
+            return this;
+        } else if (date.isEqual(start.toLocalDate())) {
+            return new EventPeriod(start, LocalDateTime.of(date, MAX_TIME_OF_DAY));
+        } else if (date.isEqual(end.toLocalDate())) {
+            return new EventPeriod(LocalDateTime.of(date, LocalTime.MIDNIGHT), end);
+        } else {
+            throw new DateOutOfBoundsException();
+        }
     }
 
     @Override

@@ -109,6 +109,19 @@ public class Event {
         return this.eventPeriod.isWithin(dateTime);
     }
 
+    /**
+     * Bounds the {@code @Event} such that the {@code @EventPeriod} of the formatted event happens within
+     * the specified {@code @LocalDate}.
+     *
+     * @param date the specified {@code @LocalDate}.
+     * @return new {@code @Event} with adjusted {@code @EventPeriod}.
+     */
+    public Event boundEventByDate(LocalDate date) {
+        requireNonNull(date);
+
+        return new Event(description, eventPeriod.boundPeriodByDate(date));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -120,6 +133,8 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return (otherEvent.description.equals(this.description) && otherEvent.eventPeriod.equals(this.eventPeriod));
+        return (otherEvent.description.equals(this.description) &&
+                (otherEvent.eventPeriod.equals(this.eventPeriod) ||
+                        otherEvent.eventPeriod.isContinuous(this.eventPeriod)));
     }
 }

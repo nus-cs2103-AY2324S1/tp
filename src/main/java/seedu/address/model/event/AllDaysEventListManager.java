@@ -49,7 +49,7 @@ public class AllDaysEventListManager {
             if (!(dayToEventListMap.containsKey(date.toString()))) {
                 dayToEventListMap.put(date.toString(), new SingleDayEventList(date));
             }
-            dayToEventListMap.get(date.toString()).addEvent(event);
+            dayToEventListMap.get(date.toString()).addEvent(event.boundEventByDate(date));
         }
     }
 
