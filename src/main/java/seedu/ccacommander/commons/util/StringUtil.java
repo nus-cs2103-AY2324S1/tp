@@ -72,11 +72,12 @@ public class StringUtil {
      */
     public static String capitaliseWordsInString(String s) {
         requireNonNull(s);
+        s = s.trim();
         if (s.length() == 0) {
             return s;
         }
 
-        String[] words = s.split(" ");
+        String[] words = s.split("\\s+");
         StringJoiner result = new StringJoiner(" ");
 
         for (String word : words) {

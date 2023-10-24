@@ -144,18 +144,18 @@ public class StringUtilTest {
     //---------------- Tests for capitaliseWordsInString --------------------------------------
 
     @Test
-    public void capitaliseWordInString_validInput_correctResult() {
+    public void capitaliseWordsInString_validInput_correctResult() {
         assertEquals("Caps", StringUtil.capitaliseWordsInString("caps"));
         assertEquals("Ca", StringUtil.capitaliseWordsInString("ca"));
         assertEquals("C", StringUtil.capitaliseWordsInString("c"));
 
-        assertEquals("Caps", StringUtil.capitaliseWordsInString("CAPS"));
-        assertEquals("Caps", StringUtil.capitaliseWordsInString("cAPS"));
-        assertEquals("Caps", StringUtil.capitaliseWordsInString("capS"));
 
-        assertEquals("John Doe", StringUtil.capitaliseWordsInString("john doe"));
-        assertEquals("John Doe", StringUtil.capitaliseWordsInString("jOHN dOE"));
-        assertEquals("John Doe", StringUtil.capitaliseWordsInString("JOHN DOE"));
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("john doe")); // Lower case
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("jOHN dOE")); // Mixed case
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("JOHN DOE")); // All caps
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("john    doe")); // Multiple space
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("     john doe")); // Leading space
+        assertEquals("John Doe", StringUtil.capitaliseWordsInString("john doe    ")); // Trailing space
     }
 
     @Test
