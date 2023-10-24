@@ -281,15 +281,30 @@ Step 6: Should user want to see the full deck, they will execute `list` to view 
 
 * **Alternative 1 (current choice):** Filter through the whole deck using the filter method on a stream of cards.
     * Pros: Easy to implement.
-    * Cons: 
+    * Cons:
       1. May have performance issues when Deck eventually gets too big.
       2. Inefficient if specific tag is a small fraction of Deck.
-
 * **Alternative 2:** Construct a \'mini-deck\' for each tag.
     * Pros: Quick search for all cards with specific tag.
     * Cons: 
       1. Will use more memory.
       2. Adding/Deleting/Editing cards will require modifications to \'mini-deck\'.
+
+### \[Proposed\] Search Filter feature
+
+Introducing a search feature that allows users to search for specific flashcards based on their questions. This feature empowers users with greater navigability over their study materials.
+
+Below is an example of the usage of the Search filter
+
+Step 1: Assuming the user has existing cards in lesson, with their own set of questions and answers
+
+Step 2: When you want to search for cards with a particular staring phrase, execute the `search q/What` command.
+
+Step 3: The system will then display the cards that match the starting phrase.
+
+Step 4: To return to viewing your full deck of cards, simply execute the `list` command to view all cards stored in lesSON
+
+Step 5: If the user wishes to practise from this view, simply `practise index` for the index of the card
 
 ### \[Proposed\] Markdown support feature
 
@@ -319,7 +334,6 @@ Step 5: The `UI` renders the `Card` with the relevant fields meant to be written
 * **Alternative 1 :** Use existing libraries that support Markdown using JavaFX.
     * Pros: Easy to implement.
     * Cons: Dependency on third party library.
-
 * **Alternative 2:** Individually support each type of Markdown language.
     * Pros: Scope of support can be determined by developer.
     * Cons:
