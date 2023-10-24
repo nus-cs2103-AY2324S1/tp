@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -16,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Meeting;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -155,7 +157,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void     updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         this.filteredPersons.setPredicate(predicate);
     }
@@ -224,6 +226,36 @@ public class ModelManager implements Model {
         }
         return false;
     }
+
+
+    public Set<Event> findEventsWithUpcomingDates(int days) {
+        Set<Event> events = new HashSet<>();
+        LocalDate endDate = LocalDate.now().plusDays(days + 1);
+            for (Event event: this.events) {
+            LocalDate date = event.getStartDate().getDate();
+            if (date.isBefore(endDate) && date.isAfter(LocalDate.now())) {
+                events.add(event);
+            }
+        }
+        return events;
+    }
+
+    public Set<Person> findPersonsWithUpcomingBirthdays(int days) {
+        Set<Person> persons = new HashSet<>();
+        LocalDate endDate = LocalDate.now().plusDays(days + 1);
+        for (Person person: this.filteredPersons) {
+            if (person.hasBirthday()) {
+                LocalDate birthday = person.getBirthday().getValue();
+                if (birthday.withYear(endDate.getYear()).isBefore(endDate)
+                        && birthday.withYear(endDate.getYear()).isAfter(LocalDate.now())) {
+                    persons.add(person);
+                }
+            }
+        }
+        return persons;
+    }
+
+
 
     @Override
     public boolean equals(Object other) {

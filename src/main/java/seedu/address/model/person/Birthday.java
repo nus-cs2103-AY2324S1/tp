@@ -56,6 +56,10 @@ public class Birthday {
         return stringValue;
     }
 
+    public LocalDate getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

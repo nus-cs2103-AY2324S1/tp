@@ -117,6 +117,20 @@ public interface Model {
      */
     Set<Name> findInvalidNames(Set<Name> names);
 
+    /**
+     * Returns a set of persons with upcoming birthdays.
+     * @param days number of days to check for upcoming birthdays.
+     * @return Set of persons with upcoming birthdays.
+     */
+    Set<Person> findPersonsWithUpcomingBirthdays(int days);
+
+    /**
+     * Returns a set of events with upcoming dates.
+     * @param days number of days to check for upcoming dates.
+     * @return Set of events with upcoming dates.
+     */
+    Set<Event> findEventsWithUpcomingDates(int days);
+
 
     /**
      * Updates any events where the person to edit is assigned to.

@@ -99,6 +99,10 @@
     -fx-padding: 0 0 0 0;
 }
 
+.list-cell:filled:highlighted {
+    -fx-background-color: #008000;
+}
+
 .list-cell:filled:even {
     -fx-background-color: #3c3e3f;
 }

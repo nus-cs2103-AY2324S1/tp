@@ -163,7 +163,7 @@ public class Person {
      * Returns true if the person has a birthday.
      */
     public boolean hasBirthday() {
-        return getBirthday() != Birthday.NULL_BIRTHDAY && getBirthday() != null;
+        return getBirthday() != Birthday.NULL_BIRTHDAY && getBirthday() != null && getBirthday().getValue() != null;
     }
     /**
      * Returns true if the person has groups.
