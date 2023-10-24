@@ -234,6 +234,45 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+
+### Reschedule feature
+
+Implementation
+
+For _Reschedule_ command, the noteworthy classes are:
+- [`RescheduleCommandParser.java`][RescheduleCommandParser.java] - For parsing the arguments to `RescheduleCommand`.
+- [`RescheduleCommand.java`][RescheduleCommand.java] - For execution.
+
+The following exceptions may be thrown during this process, namely:
+- ParseException for missing arguments
+- ParseException for invalid arguments
+- CommandException for index out of range
+- CommandException for identical appointments
+- CommandException for appointments with clashing timeslots
+
+-- user input --  
+Step 1. User executes reschedule command with correct and valid arguments.
+
+-- `AddressBookParser` --  
+Step 2. Returns new `RescheduleCommandParser`.
+
+-- `RescheduleCommandParser` --   
+Step 3. Verify that all argument prefixes are present.  
+Step 4. Verify that provided arguments are valid.     
+Step 5. Returns new `RescheduleCommand`.
+
+-- `RescheduleCommand` --   
+Step 6. Verify that the given index exist in UniqueAppointmentList.  
+Step 7. Verify that the new appointment to be added does not have time conflict with another appointment on the same day.  
+Step 8. Verify that the same appointment has not already been added.
+Step 9. Appointment is rescheduled.
+
+
+The following activity diagram shows how the reschedule operation works:
+
+![RescheduleCommandActivityDiagram](images/RescheduleCommandActivityDiagram.png)
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
