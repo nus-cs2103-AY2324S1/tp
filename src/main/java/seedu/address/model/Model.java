@@ -148,6 +148,7 @@ public interface Model {
 
     Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException;
     void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException;
+    FreeTime getFreeTimeFromPerson(String personName) throws CommandException;
 
     /**
      * Assign person to group

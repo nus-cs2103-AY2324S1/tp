@@ -67,6 +67,9 @@ public class AddressBookParser {
         case GroupRemarkCommand.COMMAND_WORD:
             return new GroupRemarkCommandParser().parse(arguments);
 
+        case ListTimeCommand.COMMAND_WORD:
+            return new ListTimeCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 

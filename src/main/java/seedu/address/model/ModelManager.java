@@ -267,6 +267,11 @@ public class ModelManager implements Model {
         return group;
     }
 
+    public FreeTime getFreeTimeFromPerson(String personName) throws CommandException {
+        Person person = addressBook.getPerson(personName);
+        return person.getFreeTime();
+    }
+
 
     private void forceUpdateList() {
         updateFilteredPersonList(user -> false);

@@ -6,27 +6,24 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteGroupCommand;
-import seedu.address.logic.commands.DeletePersonCommand;
-import seedu.address.logic.commands.GroupPersonCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new ListTimeCommand object
  */
-public class DeleteCommandParser implements Parser<DeleteCommand> {
+public class ListTimeCommandParser implements Parser<ListTimeCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ListTimeCommand
+     * and returns a ListTimeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteCommand parse(String args) throws ParseException {
+    public ListTimeCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListTimeCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap argMultimap =
@@ -34,14 +31,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         if (args.length() < 2) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListTimeCommand.MESSAGE_USAGE));
         }
 
         // check if either n/ or g/ are present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             if (!arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListTimeCommand.MESSAGE_USAGE));
             }
         }
 
@@ -49,16 +46,16 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             // check if g/ is present
             if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) { // g/ present
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListTimeCommand.MESSAGE_USAGE));
             } else {
                 String personName = argMultimap.getValue(PREFIX_NAME).get();
-                return new DeletePersonCommand(personName);
+                return new ListTimePersonCommand(personName);
             }
         }
 
         // n/ not present, g/ should be present
         String groupName = argMultimap.getValue(PREFIX_GROUPTAG).get();
-        return new DeleteGroupCommand(groupName);
+        return new ListTimeGroupCommand(groupName);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
