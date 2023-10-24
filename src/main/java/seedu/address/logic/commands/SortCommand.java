@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Sorts the address book.
  */
 public class SortCommand extends Command {
 
