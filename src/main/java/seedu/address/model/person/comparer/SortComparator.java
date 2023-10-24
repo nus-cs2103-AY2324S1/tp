@@ -34,7 +34,7 @@ public abstract class SortComparator implements Comparator<Person> {
     public SortComparator(boolean isActive, boolean isReverse, int priority) {
         this.isActive = isActive;
         this.isReverse = isReverse;
-        this.priority = isActive ? -1 : priority;
+        this.priority = isActive ? priority : -1;
     }
 
     /**
