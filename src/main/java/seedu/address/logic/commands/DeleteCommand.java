@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,18 +32,17 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Contact> lastShownList = model.getFilteredContactList();
+        List<Contact> contactsToDelete = new ArrayList<>();
 
-        // Store the contacts to delete
-        List<Contact> contactsToDelete = targetIndices.stream()
-                .map(index -> {
-                    if (index.getZeroBased() >= lastShownList.size()) {
-                        throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
-                    }
-                    return lastShownList.get(index.getZeroBased());
-                })
-                .collect(Collectors.toList());
+        // Collect contacts to delete
+        for (Index index : targetIndices) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+            }
+            contactsToDelete.add(lastShownList.get(index.getZeroBased()));
+        }
 
-        // Now delete the contacts
+        // Delete the contacts
         for (Contact contact : contactsToDelete) {
             model.removeContact(contact);
         }
