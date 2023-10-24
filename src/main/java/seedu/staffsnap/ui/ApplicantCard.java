@@ -46,9 +46,9 @@ public class ApplicantCard extends UiPart<Region> {
     @FXML
     private HBox position;
     @FXML
-    private HBox interviews;
-    @FXML
     private Label status;
+    @FXML
+    private HBox interviews;
 
     /**
      * Creates a {@code ApplicantCode} with the given {@code Applicant} and index to display.
