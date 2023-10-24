@@ -297,7 +297,7 @@ to delete. This method deletes the specified `Person` in the model.
 
 Step 7. Finally, the DeleteTutorCommand object returns the `CommandResult`.
 
-The following sequence diagram shows how the above steps for edit tutor operation works, taking
+The following sequence diagram shows how the above steps for delete tutor operation works, taking
 `execute("delete-t 1")` API call as an example.
 
 ![Interactions inside the Logic Component for the `delete-t 1` Command](images/DeleteTutorSequenceDiagram.png)
