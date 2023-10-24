@@ -18,6 +18,6 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setContactsFilter(ModelManager.FILTER_NONE);
-        return new CommandResult(Messages.MESSAGE_LIST_COMMAND_SUCCESS);
+        return new CommandResult(Messages.LIST_COMMAND_SUCCESS);
     }
 }

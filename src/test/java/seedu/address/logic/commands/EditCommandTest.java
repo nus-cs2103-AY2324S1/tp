@@ -39,7 +39,7 @@ public class EditCommandTest {
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(editedContact).build();
         EditCommand editCommand = new EditCommand(FIRST_CONTACT, descriptor);
 
-        String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
+        String expectedMessage = String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
         Model expectedModel = new ModelManager(new Contacts(model.getContacts()), new Settings());
         expectedModel.updateContact(model.getFilteredContactList().get(0), editedContact);
@@ -60,7 +60,7 @@ public class EditCommandTest {
                 .withPhone(PHONE_BOB).withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES).build();
         EditCommand editCommand = new EditCommand(indexLastContact, descriptor);
 
-        String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
+        String expectedMessage = String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
         Model expectedModel = new ModelManager(new Contacts(model.getContacts()), new Settings());
         expectedModel.updateContact(lastContact, editedContact);
@@ -73,7 +73,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(FIRST_CONTACT, new EditContactDescriptor());
         Contact editedContact = model.getFilteredContactList().get(FIRST_CONTACT.getZeroBased());
 
-        String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
+        String expectedMessage = String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
         Model expectedModel = new ModelManager(new Contacts(model.getContacts()), new Settings());
 
@@ -89,7 +89,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(FIRST_CONTACT,
                 new EditContactDescriptorBuilder().withName(NAME_BOB).build());
 
-        String expectedMessage = String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
+        String expectedMessage = String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact));
 
         Model expectedModel = new ModelManager(new Contacts(model.getContacts()), new Settings());
         expectedModel.updateContact(model.getFilteredContactList().get(0), editedContact);
@@ -103,7 +103,7 @@ public class EditCommandTest {
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact).build();
         EditCommand editCommand = new EditCommand(SECOND_CONTACT, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_COMMAND_DUPLICATE_CONTACT);
+        assertCommandFailure(editCommand, model, Messages.COMMAND_DUPLICATE_CONTACT);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(FIRST_CONTACT,
                 new EditContactDescriptorBuilder(contactInList).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_COMMAND_DUPLICATE_CONTACT);
+        assertCommandFailure(editCommand, model, Messages.COMMAND_DUPLICATE_CONTACT);
     }
 
     @Test
@@ -124,7 +124,7 @@ public class EditCommandTest {
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     /**
@@ -141,7 +141,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditContactDescriptorBuilder().withName(NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test

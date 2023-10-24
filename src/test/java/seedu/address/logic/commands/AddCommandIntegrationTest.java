@@ -34,7 +34,7 @@ public class AddCommandIntegrationTest {
         expectedModel.addContact(validContact);
 
         assertCommandSuccess(new AddCommand(validContact), model,
-                String.format(Messages.MESSAGE_ADD_COMMAND_SUCCESS, Contact.format(validContact)),
+                String.format(Messages.ADD_COMMAND_SUCCESS, Contact.format(validContact)),
                 expectedModel);
     }
 
@@ -42,7 +42,7 @@ public class AddCommandIntegrationTest {
     public void execute_duplicateContact_throwsCommandException() {
         Contact contactInList = model.getContacts().getUnmodifiableList().get(0);
         assertCommandFailure(new AddCommand(contactInList), model,
-                Messages.MESSAGE_COMMAND_DUPLICATE_CONTACT);
+                Messages.COMMAND_DUPLICATE_CONTACT);
     }
 
 }

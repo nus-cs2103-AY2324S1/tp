@@ -38,14 +38,14 @@ public class JsonContactTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonContact contact =
                 new JsonContact(TestData.Invalid.NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = Messages.MESSAGE_NAME_CONSTRAINTS;
+        String expectedMessage = Messages.NAME_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonContact contact = new JsonContact(null, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = String.format(Messages.MESSAGE_FIELD_MISSING, Name.class.getSimpleName());
+        String expectedMessage = String.format(Messages.FIELD_MISSING, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
@@ -53,14 +53,14 @@ public class JsonContactTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonContact contact =
                 new JsonContact(VALID_NAME, TestData.Invalid.PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = Messages.MESSAGE_PHONE_CONSTRAINTS;
+        String expectedMessage = Messages.PHONE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonContact contact = new JsonContact(VALID_NAME, null, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = String.format(Messages.MESSAGE_FIELD_MISSING, Phone.class.getSimpleName());
+        String expectedMessage = String.format(Messages.FIELD_MISSING, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
@@ -75,14 +75,14 @@ public class JsonContactTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonContact contact = new JsonContact(VALID_NAME, VALID_PHONE, null, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = String.format(Messages.MESSAGE_FIELD_MISSING, Email.class.getSimpleName());
+        String expectedMessage = String.format(Messages.FIELD_MISSING, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonContact contact = new JsonContact(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
-        String expectedMessage = String.format(Messages.MESSAGE_FIELD_MISSING, Note.class.getSimpleName());
+        String expectedMessage = String.format(Messages.FIELD_MISSING, Note.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 

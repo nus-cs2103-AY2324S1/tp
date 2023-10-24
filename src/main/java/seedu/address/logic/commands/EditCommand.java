@@ -70,19 +70,19 @@ public class EditCommand extends Command {
         List<Contact> lastShownList = model.getFilteredContactList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
         Contact contactToEdit = lastShownList.get(index.getZeroBased());
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
         if (!contactToEdit.isSameContact(editedContact) && model.containsContact(editedContact)) {
-            throw new CommandException(Messages.MESSAGE_COMMAND_DUPLICATE_CONTACT);
+            throw new CommandException(Messages.COMMAND_DUPLICATE_CONTACT);
         }
 
         model.updateContact(contactToEdit, editedContact);
         model.setContactsFilter(ModelManager.FILTER_NONE);
-        return new CommandResult(String.format(Messages.MESSAGE_EDIT_COMMAND_SUCCESS, Contact.format(editedContact)));
+        return new CommandResult(String.format(Messages.EDIT_COMMAND_SUCCESS, Contact.format(editedContact)));
     }
 
     /**

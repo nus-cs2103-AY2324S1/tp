@@ -80,23 +80,23 @@ class JsonContact {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(Messages.MESSAGE_FIELD_MISSING, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(Messages.FIELD_MISSING, Name.class.getSimpleName()));
         }
         if (!Name.isValid(name)) {
-            throw new IllegalValueException(Messages.MESSAGE_NAME_CONSTRAINTS);
+            throw new IllegalValueException(Messages.NAME_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(Messages.MESSAGE_FIELD_MISSING, Phone.class.getSimpleName()));
+            throw new IllegalValueException(String.format(Messages.FIELD_MISSING, Phone.class.getSimpleName()));
         }
         if (!Phone.isValid(phone)) {
-            throw new IllegalValueException(Messages.MESSAGE_PHONE_CONSTRAINTS);
+            throw new IllegalValueException(Messages.PHONE_CONSTRAINTS);
         }
         final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
-            throw new IllegalValueException(String.format(Messages.MESSAGE_FIELD_MISSING, Email.class.getSimpleName()));
+            throw new IllegalValueException(String.format(Messages.FIELD_MISSING, Email.class.getSimpleName()));
         }
         if (!Email.isValid(email)) {
             throw new IllegalValueException(Messages.EMAIL_INVALID);
@@ -104,7 +104,7 @@ class JsonContact {
         final Email modelEmail = new Email(email);
 
         if (this.note == null) {
-            throw new IllegalValueException(String.format(Messages.MESSAGE_FIELD_MISSING, Note.class.getSimpleName()));
+            throw new IllegalValueException(String.format(Messages.FIELD_MISSING, Note.class.getSimpleName()));
         }
         final Note modelNote = new Note(this.note);
 

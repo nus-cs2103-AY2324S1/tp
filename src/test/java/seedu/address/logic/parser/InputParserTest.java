@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.COMMAND_UNKNOWN;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.IndexContact.FIRST_CONTACT;
 
@@ -99,7 +98,7 @@ public class InputParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(
             ParseException.class,
-            COMMAND_UNKNOWN,
+            Messages.COMMAND_UNKNOWN,
             () -> InputParser.parseCommand("unknownCommand")
         );
     }

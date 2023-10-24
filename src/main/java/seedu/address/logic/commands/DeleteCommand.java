@@ -35,12 +35,12 @@ public class DeleteCommand extends Command {
         List<Contact> lastShownList = model.getFilteredContactList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
         Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.removeContact(contactToDelete);
-        return new CommandResult(String.format(Messages.MESSAGE_DELETE_COMMAND_SUCCESS,
+        return new CommandResult(String.format(Messages.DELETE_COMMAND_SUCCESS,
                 Contact.format(contactToDelete)));
     }
 

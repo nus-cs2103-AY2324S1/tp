@@ -153,11 +153,11 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + NOTE_DESC_BOB
-                + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.MESSAGE_NAME_CONSTRAINTS);
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.NAME_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC + EMAIL_DESC_BOB + NOTE_DESC_BOB
-                + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.MESSAGE_PHONE_CONSTRAINTS);
+                + TestData.Valid.Tag.FLAG_ALPHANUMERIC, Messages.PHONE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC + NOTE_DESC_BOB
@@ -176,7 +176,7 @@ public class AddCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, NAME_DESC + PHONE_DESC + EMAIL_DESC_BOB + NOTE_DESC_BOB,
-                Messages.MESSAGE_NAME_CONSTRAINTS);
+                Messages.NAME_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, TestData.EXTRA_WORDS + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

@@ -45,7 +45,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", Messages.MESSAGE_EDIT_COMMAND_NOT_EDITED);
+        assertParseFailure(parser, "1", Messages.EDIT_COMMAND_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -68,8 +68,8 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + NAME_DESC, Messages.MESSAGE_NAME_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + PHONE_DESC, Messages.MESSAGE_PHONE_CONSTRAINTS); // invalid phone
+        assertParseFailure(parser, "1" + NAME_DESC, Messages.NAME_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + PHONE_DESC, Messages.PHONE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + EMAIL_DESC, Messages.EMAIL_INVALID); // invalid email
         // Invalid tag
         assertParseFailure(
@@ -79,7 +79,7 @@ public class EditCommandParserTest {
         );
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + PHONE_DESC + EMAIL_DESC_AMY, Messages.MESSAGE_PHONE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + PHONE_DESC + EMAIL_DESC_AMY, Messages.PHONE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Contact} being edited,
         // parsing it together with a valid tag results in error
@@ -110,7 +110,7 @@ public class EditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + NAME_DESC + EMAIL_DESC + NOTE_AMY + PHONE_AMY,
-                Messages.MESSAGE_NAME_CONSTRAINTS);
+                Messages.NAME_CONSTRAINTS);
     }
 
     @Test
