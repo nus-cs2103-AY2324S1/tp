@@ -68,6 +68,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same policy number as {@code person} in the address book.
+     */
+    public boolean hasSamePolicyNumber(Person person) {
+        requireNonNull(person);
+        return persons.hasSamePolicyNumber(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */

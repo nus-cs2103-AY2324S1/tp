@@ -20,6 +20,8 @@ public class Messages {
 
     public static final String MESSAGE_PREAMBLE_DETECTED = "Error: Preamble Detected";
 
+    public static final String MESSAGE_USED_POLICY_NUMBER = "Error: The policy number is already in use";
+
     public static final String MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND =
             "Error: Some of the required fields are missing. "
             + "\n"
