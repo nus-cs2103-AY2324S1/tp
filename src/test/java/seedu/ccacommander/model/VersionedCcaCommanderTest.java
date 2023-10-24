@@ -14,9 +14,9 @@ public class VersionedCcaCommanderTest {
     public void constructor_validInitialState_success() {
         VersionedCcaCommander versionedCcaCommander = new VersionedCcaCommander(new CcaCommander());
 
-        assertEquals(1, versionedCcaCommander.viewStateCaptures().getStateCaptures().size());
+        assertEquals(1, versionedCcaCommander.viewVersionCaptures().getVersionCaptures().size());
         assertEquals(VersionedCcaCommander.MESSAGE_FIRST_COMMIT,
-                versionedCcaCommander.viewStateCaptures().getStateCaptures().get(0));
+                versionedCcaCommander.viewVersionCaptures().getVersionCaptures().get(0));
     }
 
     @Test
@@ -26,8 +26,8 @@ public class VersionedCcaCommanderTest {
         String commitMessage = "Added new command.";
         versionedCcaCommander.commit(commitMessage);
 
-        assertEquals(2, versionedCcaCommander.viewStateCaptures().getStateCaptures().size());
-        assertEquals(commitMessage, versionedCcaCommander.viewStateCaptures().getStateCaptures().get(1));
+        assertEquals(2, versionedCcaCommander.viewVersionCaptures().getVersionCaptures().size());
+        assertEquals(commitMessage, versionedCcaCommander.viewVersionCaptures().getVersionCaptures().get(1));
     }
 
     @Test

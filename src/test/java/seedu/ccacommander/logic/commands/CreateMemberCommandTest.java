@@ -22,7 +22,7 @@ import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ReadOnlyCcaCommander;
 import seedu.ccacommander.model.ReadOnlyUserPrefs;
-import seedu.ccacommander.model.StateCaptures;
+import seedu.ccacommander.model.VersionCaptures;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.testutil.MemberBuilder;
@@ -206,7 +206,7 @@ public class CreateMemberCommandTest {
         }
 
         @Override
-        public StateCaptures viewStateCaptures() {
+        public VersionCaptures viewVersionCaptures() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -1,7 +1,6 @@
 package seedu.ccacommander.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ccacommander.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,7 @@ import seedu.ccacommander.model.exceptions.UndoStateException;
 public class VersionedCcaCommander extends CcaCommander {
     public static final String MESSAGE_FIRST_COMMIT = "Saved data is loaded.";
 
-    private List<CcaCommanderState> ccaCommanderVersionList;
+    private List<CcaCommanderVersion> ccaCommanderVersionList;
     private int versionPointer;
 
     /**
@@ -25,7 +24,7 @@ public class VersionedCcaCommander extends CcaCommander {
     public VersionedCcaCommander(ReadOnlyCcaCommander toCopy) {
         super(toCopy);
 
-        CcaCommanderState initialVersion = new CcaCommanderState(MESSAGE_FIRST_COMMIT, this);
+        CcaCommanderVersion initialVersion = new CcaCommanderVersion(MESSAGE_FIRST_COMMIT, this);
         this.ccaCommanderVersionList = new ArrayList<>();
         this.ccaCommanderVersionList.add(initialVersion);
         this.versionPointer = 0;
@@ -40,13 +39,17 @@ public class VersionedCcaCommander extends CcaCommander {
         requireNonNull(commitMessage);
 
         purgeRedundantVersions();
-        CcaCommanderState state = new CcaCommanderState(commitMessage, this);
-        this.ccaCommanderVersionList.add(state);
-        this.versionPointer++;
+        CcaCommanderVersion state = new CcaCommanderVersion(commitMessage, this);
+        updateVersion(state);
     }
 
     private void purgeRedundantVersions() {
         this.ccaCommanderVersionList.subList(this.versionPointer + 1, this.ccaCommanderVersionList.size()).clear();
+    }
+
+    private void updateVersion(CcaCommanderVersion version) {
+        this.ccaCommanderVersionList.add(version);
+        this.versionPointer++;
     }
 
     /**
@@ -60,11 +63,11 @@ public class VersionedCcaCommander extends CcaCommander {
             throw new UndoStateException();
         }
 
-        CcaCommanderState currentState = this.ccaCommanderVersionList.get(this.versionPointer);
-        CcaCommanderState targetState = this.ccaCommanderVersionList.get(this.versionPointer - 1);
-        resetData(targetState.stateCapture);
+        CcaCommanderVersion currentVersion = this.ccaCommanderVersionList.get(this.versionPointer);
+        CcaCommanderVersion targetVersion = this.ccaCommanderVersionList.get(this.versionPointer - 1);
+        resetData(targetVersion.getVersionCapture());
         this.versionPointer--;
-        return currentState.commitMessage;
+        return currentVersion.getCommitMessage();
     }
 
     /**
@@ -77,9 +80,9 @@ public class VersionedCcaCommander extends CcaCommander {
     /**
      * Returns a summary of all {@code Command}s currently recorded by this {@code VersionedCcaCommander}.
      */
-    public StateCaptures viewStateCaptures() {
-        return new StateCaptures(versionPointer, ccaCommanderVersionList.stream().map(state ->
-                state.commitMessage).collect(Collectors.toUnmodifiableList()));
+    public VersionCaptures viewVersionCaptures() {
+        return new VersionCaptures(versionPointer, ccaCommanderVersionList.stream().map(version ->
+                version.getCommitMessage()).collect(Collectors.toUnmodifiableList()));
     }
 
     @Override
@@ -89,25 +92,5 @@ public class VersionedCcaCommander extends CcaCommander {
                 && ((VersionedCcaCommander) other).versionPointer == this.versionPointer
                 && ((VersionedCcaCommander) other).ccaCommanderVersionList.equals(this.ccaCommanderVersionList)
                 && super.equals(other));
-    }
-
-    private class CcaCommanderState {
-        private String commitMessage;
-        private ReadOnlyCcaCommander stateCapture;
-
-        CcaCommanderState(String commitMessage, ReadOnlyCcaCommander stateCapture) {
-            requireAllNonNull(commitMessage, stateCapture);
-
-            this.commitMessage = commitMessage;
-            this.stateCapture = new CcaCommander(stateCapture);
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            return other == this
-                    || (other instanceof CcaCommanderState
-                    && ((CcaCommanderState) other).stateCapture.equals(stateCapture)
-                    && ((CcaCommanderState) other).commitMessage.equals(commitMessage));
-        }
     }
 }

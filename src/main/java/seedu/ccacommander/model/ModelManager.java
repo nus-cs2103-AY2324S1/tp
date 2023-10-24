@@ -151,8 +151,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public StateCaptures viewStateCaptures() {
-        return versionedCcaCommander.viewStateCaptures();
+    public VersionCaptures viewVersionCaptures() {
+        return versionedCcaCommander.viewVersionCaptures();
     }
 
 

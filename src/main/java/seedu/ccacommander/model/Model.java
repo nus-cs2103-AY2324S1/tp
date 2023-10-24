@@ -130,5 +130,5 @@ public interface Model {
     /**
      * Returns a summary of all commands currently captured by this {@code Model}.
      */
-    StateCaptures viewStateCaptures();
+    VersionCaptures viewVersionCaptures();
 }

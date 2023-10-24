@@ -25,7 +25,7 @@ import seedu.ccacommander.testutil.CcaCommanderBuilder;
 
 public class ModelManagerTest {
 
-    private static String COMMIT_MESSAGE = "Example Commit.";
+    private static String COMMIT_MESSAGE = "Example Commit";
     private ModelManager modelManager = new ModelManager();
 
     @Test
