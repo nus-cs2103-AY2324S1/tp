@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -39,7 +38,7 @@ public class RescheduleCommandTest {
         String expectedMessage = String.format(RescheduleCommand.MESSAGE_SUCCESS,
                 Messages.format(rescheduledAppointment));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setAppointment(expectedModel.getFilteredAppointmentList().get(0), rescheduledAppointment);
 
         assertCommandSuccess(rescheduleCommand, model, expectedMessage, expectedModel);
@@ -70,6 +69,7 @@ public class RescheduleCommandTest {
 
     @Test
     public void execute_validIndexValidTimeFilteredList_success() {
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showAppointmentAtIndex(model, INDEX_SECOND_APPOINTMENT);
         Appointment newAppointment = NOCLASHAPPOINTMENT;
         AppointmentTime newAppointmentTime = new AppointmentTimeBuilder(newAppointment).build();
@@ -81,8 +81,6 @@ public class RescheduleCommandTest {
         RescheduleCommand rescheduleCommand = new RescheduleCommand(INDEX_FIRST_APPOINTMENT, newAppointmentTime);
         String expectedMessage = String.format(RescheduleCommand.MESSAGE_SUCCESS,
                 Messages.format(rescheduledAppointment));
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setAppointment(expectedModel.getFilteredAppointmentList().get(1), rescheduledAppointment);
 
         assertCommandSuccess(rescheduleCommand, model, expectedMessage, expectedModel);
@@ -105,7 +103,7 @@ public class RescheduleCommandTest {
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showAppointmentAtIndex(model, INDEX_FIRST_APPOINTMENT);
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(2);
         Appointment rescheduledAppointment = NOCLASHAPPOINTMENT;
         AppointmentTime appointmentTime = new AppointmentTimeBuilder(rescheduledAppointment).build();
         RescheduleCommand rescheduleCommand = new RescheduleCommand(outOfBoundIndex, appointmentTime);
