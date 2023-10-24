@@ -158,6 +158,31 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+## **Implementation**
+
+### [Proposed] Tag filter feature
+
+The proposed feature aims to filter the flashcards and display cards of a specific `tag`. This allows the users to 
+view specific groups of cards under the same `tag`, granting them more control over their study material.
+
+Given below is an example usage of the filter feature.
+
+Step 1: User creates various cards.
+
+Step 2: User executes `edit 1 t/CS2103T`. This causes the first card to be tagged with the tag `CS2103T`.
+
+Step 3: User repeats step 2 for all the cards associated with `CS2103T`.
+
+Step 4: User now wants to display only cards with the `CS2103T` tag. User will execute the `filter t/CS2103T`.
+
+Step 5: Deck will now display only the cards with the `CS2103T` tag.
+
+Step 6: Should user want to see the full deck, they will execute `list` to view their full deck of cards.
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
