@@ -2,17 +2,14 @@ package seedu.staffsnap.logic.commands;
 
 import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalApplicantBook;
-//import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalApplicantBook;
 
 import org.junit.jupiter.api.Test;
 
-//import seedu.staffsnap.model.ApplicantBook;
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.model.ApplicantBook;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ModelManager;
 import seedu.staffsnap.model.UserPrefs;
-//import seedu.staffsnap.model.UserPrefs;
 
 public class ClearCommandTest {
     private Command confirmStub = new ConfirmationCommand();
