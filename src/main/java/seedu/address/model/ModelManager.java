@@ -178,7 +178,9 @@ public class ModelManager implements Model {
         return filteredGroups;
     }
 
-    ;
+    public Group findGroup(String groupName) throws CommandException {
+        return addressBook.getGroup(groupName);
+    }
 
 
     @Override
@@ -246,6 +248,15 @@ public class ModelManager implements Model {
         requireNonNull(toAddPerson);
         Person person = addressBook.getPerson(toAddPerson.fullName);
         person.addFreeTime(toAddFreeTime);
+        forceUpdateList();
+    }
+
+    @Override
+    public void deleteFreeTimeFromPerson(Name personName,
+                                           ArrayList<TimeInterval> toDeleteFreeTime) throws CommandException {
+        requireNonNull(personName);
+        Person person = addressBook.getPerson(personName.fullName);
+        person.deleteFreeTime(toDeleteFreeTime);
         forceUpdateList();
     }
 
