@@ -106,7 +106,24 @@ Format: `exit`
 
 transact data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
----
+
+## Navigating the GUI
+
+Tran$act's GUI is simple and gives you access to all of its features with just one click.
+
+This should be what you see when you open Transact for the first time:
+![Ui](images/Transact_UI.png)
+
+The upper menu bar contains two tabs:
+1. File — This tab contains actions like saving data and loading data.
+2. Help — This tab contains more information about Tran$act like, for example, this User Guide.
+
+The lower menu bar contains three tabs:
+1. Overview — This tab shows you a monthly summary of your finances based on thr transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
+2. Transactions — This tab shows you the transactions you have entered in a row-by-row format.
+3. Addressbook — This tab shows you the persons or parties you have entered in a list format.
+
+The input field below this with the grey text `Enter command here...` is where you can enter your commands.
 
 ## FAQ
 
