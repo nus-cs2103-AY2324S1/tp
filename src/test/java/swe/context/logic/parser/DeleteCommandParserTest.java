@@ -28,10 +28,19 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
+    public void parse_invalidArgs1_throwsParseException() {
         assertParseFailure(
             parser,
             "a",
+            Messages.commandInvalidFormat(DeleteCommand.MESSAGE_USAGE)
+        );
+    }
+
+    @Test
+    public void parse_invalidArgs2_throwsParseException() {
+        assertParseFailure(
+            parser,
+            "",
             Messages.commandInvalidFormat(DeleteCommand.MESSAGE_USAGE)
         );
     }

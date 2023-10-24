@@ -454,13 +454,19 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete 1`
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete 0`
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Test case: `delete 1 2 3`
+      Expected: First, second, and third contacts are deleted from the list. Details of the deleted contacts shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `delete 1 1 2`
+      Expected: First and second contacts are deleted from the list without duplication. Details of the deleted contacts shown in the status message. Timestamp in the status bar is updated.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
