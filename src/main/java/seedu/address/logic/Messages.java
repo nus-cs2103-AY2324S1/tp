@@ -23,6 +23,7 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_DELETE =
             "%1$d employees found! Refer to their indexes for deletion";
+    public static final String MESSAGE_INVALID_DATE = "Invalid command format! Date should be in format: 'DD/MM/YYYY'";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

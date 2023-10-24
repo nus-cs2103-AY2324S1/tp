@@ -14,6 +14,12 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Contains utility methods used for parsing strings in the various *Parser
  * classes.
@@ -155,5 +161,18 @@ public class ParserUtil {
             throw new ParseException(AnnualLeave.MESSAGE_CONSTRAINTS);
         }
         return new AnnualLeave(trimmedAnnualLeave);
+    }
+
+    /**
+     * Returns LocalDateTime object from String
+     * @param date The String containing date from user input
+     * @return LocalDateTime
+     * @throws DateTimeException if the format of String is wrong
+     */
+    public static LocalDate stringToDate(String date) throws DateTimeParseException {
+        String dateFormat = "yyyy-MM-dd";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        return localDate;
     }
 }

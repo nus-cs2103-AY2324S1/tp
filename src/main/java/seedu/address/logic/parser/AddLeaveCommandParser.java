@@ -5,14 +5,12 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddLeaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNUAL_LEAVE;
 
 public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
 
@@ -32,39 +30,60 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         ArgumentMultimap argMultimapForFromAndTo =
                 ArgumentTokenizer.tokenize(args, PREFIX_ADD_ANNUAL_LEAVE_FROM, PREFIX_ADD_ANNUAL_LEAVE_TO);
         if (argMultimapForOn.getValue(PREFIX_ADD_ANNUAL_LEAVE_ON).isPresent()) {
-
-        } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
-        }
-        if (argMultimapForOn.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).isPresent() &&
+            return singleDayLeaveHandler(argMultimapForOn);
+        } else if (argMultimapForOn.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).isPresent() &&
                 argMultimapForOn.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).isPresent()) {
-
+            return multipleDaysLeaveHandler(argMultimapForFromAndTo);
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
         }
+    }
 
+    public AddLeaveCommand singleDayLeaveHandler(ArgumentMultimap argMultimapForOn) throws ParseException {
+        if (argMultimapForOn.getPreamble().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
+        }
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new AddLeaveCommand();
+            Index index = ParserUtil.parseIndex(argMultimapForOn.getPreamble());
+            LocalDate date = ParserUtil.stringToDate(argMultimapForOn.getValue(PREFIX_ADD_ANNUAL_LEAVE_ON).get());
+            return new AddLeaveCommand(index, date);
+
         } catch (ParseException pe) {
-            if (StringUtil.isInteger(trimmedArgs)) {
+            if (StringUtil.isInteger(argMultimapForOn.getPreamble())) {
                 throw new ParseException(
                         String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
             }
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
+        } catch (DateTimeParseException de) {
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_INVALID_DATE));
+        }
+    }
 
-            if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getPreamble().isEmpty()) {
-                String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
-                String[] nameKeywords = name.split("\\s+");
-                return new AddLeaveCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-            } else {
+    public AddLeaveCommand multipleDaysLeaveHandler(ArgumentMultimap argMultimapForFromAndTo) throws ParseException {
+        if (argMultimapForFromAndTo.getPreamble().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
+        }
+        try {
+            Index index = ParserUtil.parseIndex(argMultimapForFromAndTo.getPreamble());
+            LocalDate startDate = ParserUtil.stringToDate(argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).get());
+            LocalDate endDate = ParserUtil.stringToDate(argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).get());
+            return new AddLeaveCommand(index, startDate, endDate);
+
+        } catch (ParseException pe) {
+            if (StringUtil.isInteger(argMultimapForFromAndTo.getPreamble())) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE_FOR_NAME));
+                        String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
             }
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
+        } catch (DateTimeParseException de) {
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_INVALID_DATE));
         }
     }
 
