@@ -80,8 +80,18 @@ On top of these functionalities, we believe that tuition centre management must 
 
 ## Navigating the Interface
 
+TutorConnect comes equipped with an interface that provides visual feedback to you.
+Below is a quick overview of the various components of our interface.
+
 ### Quick Orientation
-More details coming soon...
+
+![ui overview](images/uiOverview.png)
+
+| Component      | Description                                                                                | 
+|----------------|--------------------------------------------------------------------------------------------|
+| Command Box    | You will enter your commands here.                                                         | 
+| Result Display | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
+| Tutor Details  | Contains information related to the tutor like name, phone number etc.                     |
 
 --------------------------------------------------------------------------------------------------------------------
 
