@@ -62,8 +62,8 @@ public class MarkAttendanceCommandParserTest {
     @Test
     public void parse_validArgsWithMultipleIds_returnsMarkAttendanceCommand() {
         String reasonForAbsence = "Late";
-        String userInput = " /id " + VALID_ID_AMY + "," + VALID_ID_BOB + " /attendance 0 /week 1 /reason " +
-                reasonForAbsence;
+        String userInput = " /id " + VALID_ID_AMY + "," + VALID_ID_BOB + " /attendance 0 /week 1 /reason "
+                + reasonForAbsence;
         MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_ID_AMY, VALID_ID_BOB), false,
                 new Week(1), reasonForAbsence);
         assertParseSuccess(parser, userInput, expectedCommand);

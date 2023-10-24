@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_UPDATED
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -152,7 +153,7 @@ public class MarkAttendanceCommandTest {
         // same values -> returns true
         MarkAttendanceCommand markAmyAttendanceFirstCommandCopy = new MarkAttendanceCommand(List.of("Amy Bee"), true,
                 new Week(1));
-      
+
         assertEquals(markAmyAttendanceFirstCommand, markAmyAttendanceFirstCommandCopy);
 
         // null -> returns not equals
