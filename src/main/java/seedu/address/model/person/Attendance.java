@@ -1,9 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.model.week.Week;
-
-import java.time.LocalDate;
 import java.util.Objects;
+
+import seedu.address.model.week.Week;
 
 /**
  * Represents a Student's attendance in the address book.
@@ -14,6 +13,7 @@ public class Attendance {
             + "absent and 1 indicates student is present";
     private final Week week;
     private boolean isPresent;
+    private String reason;
 
     /**
      * Constructs an {@code Attendance}.
@@ -24,6 +24,27 @@ public class Attendance {
     public Attendance(Week week, boolean isPresent) {
         this.week = week;
         this.isPresent = isPresent;
+    }
+
+    /**
+     * Constructs an {@code Attendance}.
+     *
+     * @param week A week from 0 to 13.
+     * @param isPresent A valid attendance status.
+     */
+    public Attendance(Week week, boolean isPresent, String reason) {
+        this.week = week;
+        this.isPresent = isPresent;
+        this.reason = reason;
+    }
+
+    /**
+     * Returns the reason for student's absence.
+     *
+     * @return A string representing the reason for the student's absence.
+     */
+    public String getReason() {
+        return this.reason;
     }
 
     /**
@@ -61,7 +82,7 @@ public class Attendance {
             return false;
         }
         Attendance otherAttendance = (Attendance) other;
-        return this.week == otherAttendance.week
+        return this.week.equals(otherAttendance.week)
                 && isPresent == otherAttendance.isPresent;
     }
 

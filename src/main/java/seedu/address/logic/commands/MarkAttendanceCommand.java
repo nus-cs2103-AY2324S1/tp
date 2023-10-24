@@ -15,19 +15,22 @@ import seedu.address.model.week.Week;
  */
 public class MarkAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "mark";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of a student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of a student.\n"
             + "Parameters: "
             + "/name STUDENTNAME | /id STUDENTID "
             + "/attendance ATTENDANCE "
             + "/week WEEK_NUMBER"
-            + "[/reason REASON_OF_ABSENCE] "
-            + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 1 /week 1"
-            + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 0 /week 2 /reason Took a MC";
+            + "[/reason REASON_OF_ABSENCE]\n"
+            + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 1 /week 1\n"
+            + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 0 /week 2 /reason Took a MC\n";
     public static final String MESSAGE_SUCCESS = "Attendance marked for person: ";
+    public static final String MESSAGE_ABSENT = " is absent for week ";
+    public static final String MESSAGE_PRESENT = " is present for week ";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found.";
     private final String identifier; // This can be either studentName or studentID
     private final boolean isPresent;
     private final Week week;
+    private final String reason;
 
     /**
      * Constructs a MarkAttendanceCommand to mark the specified student's attendance.
@@ -40,12 +43,21 @@ public class MarkAttendanceCommand extends Command {
         this.identifier = identifier;
         this.isPresent = isPresent;
         this.week = week;
+        this.reason = null;
+    }
+
+    public MarkAttendanceCommand(String identifier, boolean isPresent, Week week, String reason) {
+        this.identifier = identifier;
+        this.isPresent = isPresent;
+        this.week = week;
+        this.reason = reason;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        Attendance attendance;
 
         Person targetPerson = lastShownList.stream()
                 .filter(person -> person.getName().fullName.equals(identifier) || person.getId().value.equals(
@@ -58,10 +70,23 @@ public class MarkAttendanceCommand extends Command {
         }
 
         // TODO - Possibly implement module inclusion for attendance and modify UG appropriately
-        Attendance attendance = new Attendance(week, isPresent);
+        if (isPresent) {
+            attendance = new Attendance(week, true);
+        } else {
+            attendance = new Attendance(week, false, reason);
+        }
+
         targetPerson.addAttendance(attendance);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS + "%s", targetPerson.getName()));
+        if (attendance.isPresent()) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "%d",
+                    targetPerson.getName(), targetPerson.getName(), attendance.getWeek().getWeekNumber()));
+        } else {
+            return new CommandResult(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "%d\nReason: %s",
+                    targetPerson.getName(), targetPerson.getName(), attendance.getWeek().getWeekNumber(),
+                    attendance.getReason()));
+        }
+
     }
 
     @Override
@@ -78,6 +103,6 @@ public class MarkAttendanceCommand extends Command {
         MarkAttendanceCommand otherMarkAttendanceCommand = (MarkAttendanceCommand) other;
         return identifier.equals(otherMarkAttendanceCommand.identifier)
                 && isPresent == otherMarkAttendanceCommand.isPresent
-                && week == otherMarkAttendanceCommand.week;
+                && week.equals(otherMarkAttendanceCommand.week);
     }
 }

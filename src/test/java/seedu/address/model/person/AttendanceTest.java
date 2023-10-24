@@ -80,7 +80,7 @@ public class AttendanceTest {
     public void toString_validAttendance_correctStringRepresentation() {
         Week testDate = new Week(1);
         Attendance attendance = new Attendance(testDate, true);
-        String expectedString = "Date: " + testDate + ", Present: true";
+        String expectedString = "Week: " + testDate + ", Present: true";
         assertEquals(expectedString, attendance.toString());
     }
 }

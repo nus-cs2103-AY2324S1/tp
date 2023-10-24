@@ -32,7 +32,7 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ATTENDANCE,
                 PREFIX_WEEK, PREFIX_REASON);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ATTENDANCE, PREFIX_WEEK, PREFIX_NAME, PREFIX_ID)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ATTENDANCE, PREFIX_WEEK)
                 || (argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_ID).isEmpty())
                 || (argMultimap.getValue(PREFIX_ATTENDANCE).get().equals("0")
                         && argMultimap.getValue(PREFIX_REASON).isEmpty())
@@ -50,7 +50,13 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
         boolean isPresent = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());
         Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
 
-        return new MarkAttendanceCommand(identifier, isPresent, week);
+        if (isPresent) {
+            return new MarkAttendanceCommand(identifier, true, week);
+        } else {
+            String reason = argMultimap.getValue(PREFIX_REASON).get();
+            return new MarkAttendanceCommand(identifier, false, week, reason);
+        }
+
     }
 
     /**

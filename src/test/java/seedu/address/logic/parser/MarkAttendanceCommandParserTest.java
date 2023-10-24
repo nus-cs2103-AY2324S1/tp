@@ -38,8 +38,8 @@ public class MarkAttendanceCommandParserTest {
      */
     @Test
     public void parse_validArgsWithId_returnsMarkAttendanceCommand() {
-        String userInput = " /id " + VALID_ID_AMY + " /attendance 0";
-        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_ID_AMY, false, new Week(1));
+        String userInput = " /id " + VALID_ID_AMY + " /attendance 1" + " /week 1";
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_ID_AMY, true, new Week(1));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

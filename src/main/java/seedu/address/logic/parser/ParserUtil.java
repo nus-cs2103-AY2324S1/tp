@@ -148,7 +148,7 @@ public class ParserUtil {
         int weekNumber;
         try {
             weekNumber = parseInt(trimmedWeek);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new ParseException(Week.MESSAGE_CONSTRAINTS);
         }
 

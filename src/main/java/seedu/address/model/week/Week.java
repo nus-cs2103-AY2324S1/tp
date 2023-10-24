@@ -1,5 +1,7 @@
 package seedu.address.model.week;
 
+import seedu.address.model.tag.Tag;
+
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -8,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Week {
     public static final String MESSAGE_CONSTRAINTS = "Week should be an integer from 0 to 13";
-    public final int weekNumber;
+    private final int weekNumber;
 
     /**
      * Constructs a {@code Week}.
@@ -31,11 +33,26 @@ public class Week {
      * Format state as text for viewing.
      */
     public String toString() {
-        return "[ Week " + this.weekNumber + ']';
+        return "" + this.weekNumber;
     }
 
     public int getWeekNumber() {
         return this.weekNumber;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Week)) {
+            return false;
+        }
+
+        Week otherWeek = (Week) other;
+        return this.weekNumber == otherWeek.weekNumber;
     }
 }
 

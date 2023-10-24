@@ -38,7 +38,8 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceWithValidPersonName_success() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("Amy Bee", true, new Week(1));
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("Amy Bee", true,
+                new Week(1));
 
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s", amy.getName());
 
