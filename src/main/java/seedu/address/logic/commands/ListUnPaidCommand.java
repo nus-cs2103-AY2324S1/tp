@@ -1,15 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.PaidPredicate;
 
-import javax.sql.rowset.Predicate;
-
-import static java.util.Objects.requireNonNull;
-
-public class ListUnPaidCommand extends ListCommand{
+/**
+ * Lists all unpaid persons.
+ */
+public class ListUnPaidCommand extends ListCommand {
     private final PaidPredicate predicate;
 
     public ListUnPaidCommand(PaidPredicate predicate) {

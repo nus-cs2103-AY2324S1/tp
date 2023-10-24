@@ -2,6 +2,9 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests whether a person is unpaid.
+ */
 public class PaidPredicate implements Predicate<Person> {
 
     private final boolean paid;
