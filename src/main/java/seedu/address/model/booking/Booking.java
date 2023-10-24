@@ -71,10 +71,6 @@ public class Booking {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameBooking(Booking otherBooking) {
-        if (otherBooking == this) {
-            return true;
-        }
-
         return otherBooking != null
                 && otherBooking.getRoom().equals(getRoom())
                 && otherBooking.getName().equals(getName());
@@ -91,23 +87,22 @@ public class Booking {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Booking)) {
-            return false;
+        if (other instanceof Booking) {
+            Booking otherBooking = (Booking) other;
+            return this.room.equals(otherBooking.room)
+                    && this.bookingPeriod.equals(otherBooking.bookingPeriod)
+                    && this.name.equals(otherBooking.name)
+                    && this.phone.equals(otherBooking.phone)
+                    && this.email.equals(otherBooking.email)
+                    && this.tags.equals(otherBooking.tags);
         }
-
-        Booking otherBooking = (Booking) other;
-        return room.equals(otherBooking.room)
-                && bookingPeriod.equals(otherBooking.bookingPeriod)
-                && name.equals(otherBooking.name)
-                && phone.equals(otherBooking.phone)
-                && email.equals(otherBooking.email)
-                && tags.equals(otherBooking.tags);
+        return false;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(room, bookingPeriod, name, phone, email, tags);
+        return Objects.hash(this.room, this.bookingPeriod, this.name, this.phone, this.email, this.tags);
     }
 
     @Override
