@@ -95,7 +95,8 @@ public class MarkAttendanceCommandTest {
     }
 
     /**
-     * Tests if the attendance of a person is correctly updated when an attendance record for the current week already exists.
+     * Tests if the attendance of a person is correctly updated when an attendance
+     * record for the current week already exists.
      */
     @Test
     public void execute_personWithExistingAttendance_updatesAttendance() {

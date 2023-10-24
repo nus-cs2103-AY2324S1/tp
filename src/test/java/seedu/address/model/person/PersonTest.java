@@ -59,7 +59,7 @@ public class PersonTest {
      * Tests if an empty Optional is returned when there's no attendance record for the current week.
      */
     @Test
-    public void getAttendanceForCurrentWeek_noAttendance_emptyOptional()  {
+    public void getAttendanceForCurrentWeek_noAttendance_emptyOptional() {
         Person emptyAlice = new PersonBuilder(ALICE).build();
         Optional<Attendance> result = emptyAlice.getAttendanceForCurrentWeek();
         System.out.println(result);
