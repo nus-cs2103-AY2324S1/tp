@@ -39,7 +39,7 @@ public class CommandTestUtil {
     public static final String VALID_SALARY_AMY = "10000";
     public static final String VALID_SALARY_BOB = "12000";
     public static final String VALID_LEAVE_AMY = "21";
-    public static final String VALID_LEAVE_BOB = "14";
+    public static final String VALID_LEAVE_BOB = "28";
     public static final String VALID_DEPARTMENT_LOGISTIC = "logistic";
     public static final String VALID_DEPARTMENT_INVESTMENT = "investment";
 
