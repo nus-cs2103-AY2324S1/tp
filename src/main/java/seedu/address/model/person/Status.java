@@ -86,6 +86,12 @@ public class Status {
         return this.value;
     }
 
+    /**
+     * Checks the other object is equals to this one
+     *
+     * @param other the other Object
+     * @return {@code true} if equals, {@code false} otherwise.
+     */
     public boolean equals(Object other) {
         if (this == other) {
             return true;
