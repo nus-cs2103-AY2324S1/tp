@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -28,6 +29,8 @@ public class Interaction {
             return test.matches("CLOSED|INTERESTED|NOT_INTERESTED|FOLLOWUP_REQUIRED|UNKNOWN");
         }
     }
+
+    private static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy");
 
     private final String interactionNote;
     private final Outcome outcome;
@@ -84,7 +87,9 @@ public class Interaction {
 
     @Override
     public String toString() {
-        return interactionNote + "\nThe outcome of this interaction is: " + outcome;
+        return interactionNote
+            + "\nThe outcome of this interaction is: " + outcome
+            + "\nDate: " + DEFAULT_DATE_FORMAT.format(date);
     }
 
     @Override
