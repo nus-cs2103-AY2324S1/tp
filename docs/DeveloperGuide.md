@@ -158,7 +158,6 @@ This section describes some noteworthy details on how certain features are imple
 
 **API** : [`FreeTime.java`](https://github.com/AY2324S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/model/person/FreeTime.java)
 
-
 #### Implementation
 
 To find a suitable replacement TA, the user needs to know the availability of the TAs.
@@ -190,16 +189,11 @@ The teaching module feature allows users to enter the specific module they are t
 and store the information in `UserPrefs`. With this feature, users can easily browse 
 through the list of TAs teaching under them.
 
-<<<<<<< HEAD
-To key in the command, type `teach m/moduleName`. This will set the default teaching 
-course for the users and save it in UserPrefs. 
-=======
 To key in the command, type `teach t/moduleName`. This will set the default teaching 
-course for the users and save it in UserPrefs.
->>>>>>> 33ff5de4 (Add new line a EOF to FreeTimeClassDiagram)
+course for the users and save it in UserPrefs. 
 
 Hence, the next time users log into TAManager, the page will automatically display the 
-TAs teaching under the users' module.
+TAs teaching under the users' module. 
 
 The following sequence diagram displays how Teaching Module Feature is implemented.
 
