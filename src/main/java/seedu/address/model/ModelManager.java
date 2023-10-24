@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Mod;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -62,6 +63,16 @@ public class ModelManager implements Model {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Mod getTeaching() {
+        return userPrefs.getTeaching();
+    }
+    @Override
+    public void setTeaching(Mod module) {
+        requireNonNull(module);
+        userPrefs.setTeaching(module);
     }
 
     @Override
