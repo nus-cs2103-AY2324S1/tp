@@ -6,6 +6,7 @@ import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseFail
 import static seedu.staffsnap.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.staffsnap.logic.commands.FilterCommand;
 import seedu.staffsnap.model.applicant.CustomFilterPredicate;
 import seedu.staffsnap.model.applicant.Email;
@@ -15,10 +16,10 @@ import seedu.staffsnap.model.applicant.Position;
 
 class FilterCommandParserTest {
 
-    private FilterCommandParser parser = new FilterCommandParser();
-
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             FilterCommand.MESSAGE_FAILURE);
+    private FilterCommandParser parser = new FilterCommandParser();
+
 
     @Test
     void parse_missingParts_failure() {

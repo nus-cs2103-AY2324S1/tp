@@ -85,8 +85,12 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CustomFilterPredicate that = (CustomFilterPredicate) o;
         return Objects.equals(name, that.name) && Objects.equals(phone, that.phone) && Objects.equals(email,
                 that.email) && Objects.equals(position, that.position) && Objects.equals(interviews, that.interviews);

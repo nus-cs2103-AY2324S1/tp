@@ -54,7 +54,8 @@ public class ApplicantBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command =
-                (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_APPLICANT.getOneBased());
+                (DeleteCommand) parser.parseCommand(DeleteCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_APPLICANT.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_APPLICANT), command);
     }
 
@@ -63,7 +64,9 @@ public class ApplicantBookParserTest {
         Applicant applicant = new ApplicantBuilder().build();
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(applicant).build();
         EditCommand command =
-                (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_APPLICANT.getOneBased() + " " + ApplicantUtil.getEditApplicantDescriptorDetails(descriptor));
+                (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_APPLICANT.getOneBased() + " "
+                        + ApplicantUtil.getEditApplicantDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_APPLICANT, descriptor), command);
     }
 
@@ -77,7 +80,8 @@ public class ApplicantBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command =
-                (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD + " " + keywords.stream()
+                        .collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -105,13 +109,14 @@ public class ApplicantBookParserTest {
 
     @Test
     public void parseCommand_addi() throws Exception {
-        assertTrue(parser.parseCommand(AddInterviewCommand.COMMAND_WORD + " 1 " + "t/ technical") instanceof AddInterviewCommand);
+        assertTrue(parser.parseCommand(AddInterviewCommand.COMMAND_WORD + " 1 " + "t/ technical")
+                instanceof AddInterviewCommand);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE),
-                () -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test
