@@ -57,17 +57,6 @@ public class Attendance {
     }
 
     /**
-     * Checks if the given date is in the same week as the date of this Attendance object.
-     *
-     * @param otherDate The date to be checked.
-     * @return True if the given date is in the same week, otherwise false.
-     */
-    public boolean isSameWeek(LocalDate otherDate) {
-        return this.date.get(ChronoField.ALIGNED_WEEK_OF_YEAR) == otherDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR)
-                && this.date.getYear() == otherDate.getYear();
-    }
-
-    /**
      * Returns the attendance status.
      *
      * @return A boolean representing the attendance status.

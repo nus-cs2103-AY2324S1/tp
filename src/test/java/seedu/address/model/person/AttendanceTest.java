@@ -60,24 +60,6 @@ public class AttendanceTest {
     }
 
     /**
-     * Tests if two dates in the same week are correctly identified as being in the same week.
-     */
-    @Test
-    public void isSameWeek_sameWeek_true() {
-        Attendance attendance = new Attendance(LocalDate.of(2023, 10, 10), true);
-        assertTrue(attendance.isSameWeek(LocalDate.of(2023, 10, 12)));
-    }
-
-    /**
-     * Tests if two dates in different weeks are correctly identified as not being in the same week.
-     */
-    @Test
-    public void isSameWeek_differentWeek_false() {
-        Attendance attendance = new Attendance(LocalDate.of(2023, 10, 10), true);
-        assertFalse(attendance.isSameWeek(LocalDate.of(2023, 10, 17)));
-    }
-
-    /**
      * Tests the hash code generation for an Attendance object.
      */
     @Test
