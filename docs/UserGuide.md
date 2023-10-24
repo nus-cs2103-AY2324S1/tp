@@ -2,6 +2,8 @@
 layout: page
 title: User Guide
 ---
+* Table of Contents
+{:toc}
 
 NetworkBook is a **desktop contact book application**. You can use it to network with other computing students and professionals from NUS.
 
