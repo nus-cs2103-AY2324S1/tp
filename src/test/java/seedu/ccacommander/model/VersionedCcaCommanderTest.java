@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ccacommander.model.exceptions.RedoStateException;
 import seedu.ccacommander.model.exceptions.UndoStateException;
 
 public class VersionedCcaCommanderTest {
@@ -59,5 +60,39 @@ public class VersionedCcaCommanderTest {
         VersionedCcaCommander versionedCcaCommander = new VersionedCcaCommander(new CcaCommander());
 
         assertFalse(versionedCcaCommander.canUndo());
+    }
+
+    @Test
+    public void redo_validRedo_success() throws RedoStateException {
+        VersionedCcaCommander versionedCcaCommander = new VersionedCcaCommander(new CcaCommander());
+        versionedCcaCommander.commit("First commit");
+        versionedCcaCommander.undo();
+
+        String redoneMessage = versionedCcaCommander.redo();
+
+        assertEquals(1, versionedCcaCommander.viewVersionCaptures().getCurrentPointer());
+        assertEquals("First commit", redoneMessage);
+    }
+
+    @Test
+    public void redo_noVersionsToRedo_exceptionThrown() throws RedoStateException {
+        VersionedCcaCommander versionedCcaCommander = new VersionedCcaCommander(new CcaCommander());
+        assertThrows(RedoStateException.class, () -> versionedCcaCommander.redo());
+    }
+
+    @Test
+    public void canRedo_hasVersionsToRedo_returnsTrue() {
+        VersionedCcaCommander versionedCcaCommander = new VersionedCcaCommander(new CcaCommander());
+        versionedCcaCommander.commit("First commit");
+        versionedCcaCommander.undo();
+
+        assertTrue(versionedCcaCommander.canRedo());
+    }
+
+    @Test
+    public void canRedo_noVersionsToRedo_returnsFalse() {
+        VersionedCcaCommander versionedCcaCommander = new VersionedCcaCommander(new CcaCommander());
+
+        assertFalse(versionedCcaCommander.canRedo());
     }
 }

@@ -151,6 +151,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean canRedo() {
+        return versionedCcaCommander.canRedo();
+    }
+
+    @Override
+    public String redo() {
+        return versionedCcaCommander.redo();
+    }
+
+    @Override
     public VersionCaptures viewVersionCaptures() {
         return versionedCcaCommander.viewVersionCaptures();
     }

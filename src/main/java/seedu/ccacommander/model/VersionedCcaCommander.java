@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.ccacommander.model.exceptions.RedoStateException;
 import seedu.ccacommander.model.exceptions.UndoStateException;
 
 /**
@@ -71,10 +72,35 @@ public class VersionedCcaCommander extends CcaCommander {
     }
 
     /**
+     * Redoes the most recent undone command.
+     *
+     * @return the commit message of the redone command.
+     * @throws RedoStateException if there are no commands to redo.
+     */
+    public String redo() throws RedoStateException {
+        if (!canRedo()) {
+            throw new RedoStateException();
+        }
+
+        CcaCommanderVersion targetVersion = ccaCommanderVersionList.get(versionPointer + 1);
+        resetData(targetVersion.getVersionCapture());
+        this.versionPointer++;
+        return targetVersion.getCommitMessage();
+    }
+
+
+    /**
      * Returns true if there exists a {@code Command} that can be undone.
      */
     public boolean canUndo() {
         return this.versionPointer > 0;
+    }
+
+    /**
+     * Returns true if there exists a {@code Command} that can be redone.
+     */
+    public boolean canRedo() {
+        return this.versionPointer < ccaCommanderVersionList.size() - 1;
     }
 
     /**

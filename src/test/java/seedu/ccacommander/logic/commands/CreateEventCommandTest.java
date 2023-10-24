@@ -206,6 +206,16 @@ public class CreateEventCommandTest {
         }
 
         @Override
+        public boolean canRedo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String redo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public VersionCaptures viewVersionCaptures() {
             throw new AssertionError("This method should not be called.");
         }
