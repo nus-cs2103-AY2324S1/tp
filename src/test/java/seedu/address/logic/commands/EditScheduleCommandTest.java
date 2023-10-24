@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showScheduleAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SCHEDULE;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
 import static seedu.address.testutil.TypicalSchedules.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
@@ -40,13 +41,13 @@ public class EditScheduleCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Schedule editedSchedule = new ScheduleBuilder().build();
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder(editedSchedule).build();
-        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_SCHEDULE, descriptor);
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_SCHEDULE, descriptor);
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS,
             Messages.format(editedSchedule));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setSchedule(model.getFilteredScheduleList().get(0), editedSchedule);
+        expectedModel.setSchedule(model.getFilteredScheduleList().get(1), editedSchedule);
 
         assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
     }
@@ -110,22 +111,18 @@ public class EditScheduleCommandTest {
 
     @Test
     public void execute_duplicateScheduleUnfilteredList_failure() {
-        Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
-        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder(firstSchedule).build();
-        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_SCHEDULE, descriptor);
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_SCHEDULE,
+            new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN).build());
 
         assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE);
     }
 
     @Test
     public void execute_duplicateScheduleFilteredList_failure() {
-        showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
-
-        // edit schedule in filtered list into a duplicate in address book
-        Schedule scheduleInList = model.getAddressBook().getScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
+        showScheduleAtIndex(model, INDEX_SECOND_SCHEDULE);
 
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_SCHEDULE,
-            new EditScheduleDescriptorBuilder(scheduleInList).build());
+            new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN).build());
 
         assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE);
     }
