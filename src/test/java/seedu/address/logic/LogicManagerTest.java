@@ -30,6 +30,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTeamBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonTeamBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -41,7 +42,7 @@ public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
     private static final IOException DUMMY_AD_EXCEPTION = new AccessDeniedException("dummy access denied exception");
     private static final Team SAMPLE_TEAM = new TeamBuilder().build();
-    private static final String TEAM_NAME_DESC_SAMPLE = " TeamName: " + SAMPLE_TEAM.getName();
+    private static final String TEAM_NAME_DESC_SAMPLE = " TeamName: " + SAMPLE_TEAM.getTeamName();
     private static final String ADD_TEAM_COMMAND = "addTeam" + TEAM_NAME_DESC_SAMPLE;
     @TempDir
     public Path temporaryFolder;
@@ -69,7 +70,8 @@ public class LogicManagerTest {
     public void execute_addTeamCommand_teamAdded() throws Exception {
         Model expectedModel = new ModelManager();
         expectedModel.addTeam(SAMPLE_TEAM);
-        assertCommandSuccess(ADD_TEAM_COMMAND, String.format(AddTeamCommand.MESSAGE_SUCCESS, SAMPLE_TEAM), expectedModel);
+        assertCommandSuccess(ADD_TEAM_COMMAND, String.format(
+                AddTeamCommand.MESSAGE_SUCCESS, SAMPLE_TEAM), expectedModel);
     }
     @Test
     public void execute_storageThrowsIoExceptionWhileSavingTeamBook_throwsCommandException() {
@@ -86,7 +88,8 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromTeamBookStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionTeamBook.json");
 
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(
+                temporaryFolder.resolve("addressBook.json"));
         JsonTeamBookStorage teamBookStorage = new JsonTeamBookStorage(prefPath) {
             @Override
             public void saveTeamBook(ReadOnlyTeamBook teamBook, Path filePath) throws IOException {

@@ -65,7 +65,7 @@ public class AddDevToTeamCommand extends Command {
         //duplicate or team doesnt exist
         if (!model.invalidAddToTeam(teamToAddTo)) {
             throw new CommandException(MESSAGE_INVALID_TEAM);
-        } else if (!model.hasPerson(devToAdd)) {
+        } else if (!model.containsPerson(devToAdd)) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         } else if (model.personAlreadyInTeam(teamToAddTo, devToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
