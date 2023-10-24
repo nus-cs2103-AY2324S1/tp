@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYRATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -42,6 +43,7 @@ public class PersonUtil {
         sb.append(PREFIX_DAY + person.getDay().value.toString() + " ");
         sb.append(PREFIX_BEGIN + person.getBegin().value + " ");
         sb.append(PREFIX_END + person.getEnd().value + " ");
+        sb.append(PREFIX_PAYRATE + person.getPayRate().toString() + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -61,6 +63,7 @@ public class PersonUtil {
         descriptor.getDay().ifPresent(day -> sb.append(PREFIX_DAY).append(day.value).append(" "));
         descriptor.getBegin().ifPresent(begin -> sb.append(PREFIX_BEGIN).append(begin.value).append(" "));
         descriptor.getEnd().ifPresent(end -> sb.append(PREFIX_END).append(end.value).append(" "));
+        descriptor.getPayRate().ifPresent(payRate -> sb.append(PREFIX_PAYRATE).append(payRate.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

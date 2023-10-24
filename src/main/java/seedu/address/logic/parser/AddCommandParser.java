@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYRATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -22,6 +23,7 @@ import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.End;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
@@ -40,16 +42,16 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_SUBJECT, PREFIX_DAY, PREFIX_BEGIN, PREFIX_END);
+                        PREFIX_SUBJECT, PREFIX_DAY, PREFIX_BEGIN, PREFIX_END, PREFIX_PAYRATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SUBJECT,
-                PREFIX_DAY, PREFIX_BEGIN, PREFIX_END)
+                PREFIX_DAY, PREFIX_BEGIN, PREFIX_END, PREFIX_PAYRATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SUBJECT, PREFIX_DAY, PREFIX_BEGIN, PREFIX_END);
+                PREFIX_SUBJECT, PREFIX_DAY, PREFIX_BEGIN, PREFIX_END, PREFIX_PAYRATE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -59,10 +61,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Begin begin = ParserUtil.parseBegin(argMultimap.getValue(PREFIX_BEGIN).get());
         End end = ParserUtil.parseEnd(argMultimap.getValue(PREFIX_END).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        PayRate payRate = ParserUtil.parsePayRate(argMultimap.getValue(PREFIX_PAYRATE).get());
         boolean paid = false;
 
 
-        Person person = new Person(name, phone, email, address, subject, day, begin, end, tagList, paid);
+        Person person = new Person(name, phone, email, address, subject, day, begin, end, tagList, paid, payRate);
 
         return new AddCommand(person);
     }
