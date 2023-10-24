@@ -55,7 +55,7 @@ Remove a contact based on the index. The index refers to the index number shown 
 `delete INDEX`
 
 **Examples:**
-- `delete n/John Doe`
+- `delete 1`
 
 Deletes the contact at the specified `INDEX`.
 The index **must be a positive integer** 1, 2, 3, …​

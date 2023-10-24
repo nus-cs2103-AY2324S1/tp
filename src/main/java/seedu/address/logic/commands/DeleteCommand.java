@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -11,22 +12,19 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 
-/**
- * Deletes a {@link Contact} based on its displayed index in the UI list.
- */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the contact identified by the index number used in the displayed contact list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the contacts identified by the index numbers used in the displayed contact list.\n"
+            + "Parameters: INDEX_1 INDEX_2 ... (must be positive integers)\n"
+            + "Example: " + COMMAND_WORD + " 1 3 5";
 
-    private final Index targetIndex;
+    private final List<Index> targetIndices;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(List<Index> targetIndices) {
+        this.targetIndices = targetIndices;
     }
 
     @Override
@@ -34,14 +32,20 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Contact> lastShownList = model.getFilteredContactList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+        for (Index targetIndex : targetIndices) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+            }
+            Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.removeContact(contactToDelete);
         }
 
-        Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.removeContact(contactToDelete);
-        return new CommandResult(String.format(Messages.DELETE_COMMAND_SUCCESS,
-                Contact.format(contactToDelete)));
+        String formattedContacts = targetIndices.stream()
+                .map(index -> lastShownList.get(index.getZeroBased()))
+                .map(Contact::format)
+                .collect(Collectors.joining(", "));
+
+        return new CommandResult(String.format(Messages.DELETE_COMMAND_SUCCESS, formattedContacts));
     }
 
     @Override
@@ -49,20 +53,17 @@ public class DeleteCommand extends Command {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof DeleteCommand)) {
             return false;
         }
-
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return targetIndices.equals(otherDeleteCommand.targetIndices);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIndices", targetIndices)
                 .toString();
     }
 }
