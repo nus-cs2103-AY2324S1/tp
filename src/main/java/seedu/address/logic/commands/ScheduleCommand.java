@@ -26,7 +26,7 @@ public class ScheduleCommand extends Command {
             + "Example: "
             + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_DATETIME + "2023-12-31 16:30:00 "
+            + PREFIX_DATETIME + "2023-12-31 16:30 "
             + PREFIX_DESCRIPTION + "First Session";
 
     public static final String MESSAGE_SUCCESS = "New appointment scheduled: %1$s";

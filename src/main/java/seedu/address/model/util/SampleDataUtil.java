@@ -44,19 +44,19 @@ public class SampleDataUtil {
 
     public static Appointment[] getSampleAppointments() {
         return new Appointment[] {
-            new Appointment(new DateTime("2023-10-14 15:30:45"), new Name("Alex Yeoh"),
+            new Appointment(new DateTime("2023-10-14 15:30"), new Name("Alex Yeoh"),
                     new Description("First Session")),
-            new Appointment(new DateTime("2023-10-15 10:00:00"), new Name("Bernice Yu"),
+            new Appointment(new DateTime("2023-10-15 10:00"), new Name("Bernice Yu"),
                     new Description("Third Session")),
-            new Appointment(new DateTime("2023-10-16 14:45:30"), new Name("David Li"),
+            new Appointment(new DateTime("2023-10-16 14:45"), new Name("David Li"),
                     new Description("Check-up")),
-            new Appointment(new DateTime("2023-10-17 11:20:15"), new Name("Irfan Ibrahim"),
+            new Appointment(new DateTime("2023-10-17 11:20"), new Name("Irfan Ibrahim"),
                     new Description("Follow-up")),
-            new Appointment(new DateTime("2023-10-18 09:30:00"), new Name("Roy Balakrishnan"),
+            new Appointment(new DateTime("2023-10-18 09:30"), new Name("Roy Balakrishnan"),
                     new Description("Check-up")),
-            new Appointment(new DateTime("2023-10-19 16:15:45"), new Name("Alex Yeoh"),
+            new Appointment(new DateTime("2023-10-19 16:15"), new Name("Alex Yeoh"),
                     new Description("Second Session")),
-            new Appointment(new DateTime("2023-10-20 13:00:30"), new Name("Charlotte Oliveiro"),
+            new Appointment(new DateTime("2023-10-20 13:00"), new Name("Charlotte Oliveiro"),
                     new Description("Check-up")),
         };
     }

@@ -8,9 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class DateTime {
     public static final String MESSAGE_CONSTRAINTS =
-            "Date time should follow yyyy-MM-dd HH:mm:ss";
+            "Date time should follow yyyy-MM-dd HH:mm";
     public static final String VALIDATION_REGEX =
-            "^(20[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) ([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$";
+            "^(20[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) ([01][0-9]|2[0-3]):([0-5][0-9])$";
     public final String value;
 
     /**
