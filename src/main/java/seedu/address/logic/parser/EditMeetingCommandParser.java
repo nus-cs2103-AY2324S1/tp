@@ -44,7 +44,7 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
                     EditMeetingCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
 
         EditMeetingDescriptor editMeetingDescriptor = new EditMeetingDescriptor();
 
