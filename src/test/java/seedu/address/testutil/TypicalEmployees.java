@@ -14,7 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
-import static seedu.address.model.employee.Employee.MAX_OVERTIME_HOURS;
+import static seedu.address.model.employee.Employee.DEFAULT_OVERTIME_HOURS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +35,7 @@ public class TypicalEmployees {
                 .withPhone("94351253")
                 .withDepartments("Finance")
                 .withSalary("12000")
-                .withOvertimeHours(MAX_OVERTIME_HOURS).build();
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS).build();
     public static final Employee BENSON = new EmployeeBuilder().withName("Benson Meier")
                 .withPosition("Assistant Manager")
                 .withId("EID5678-1234")
@@ -43,14 +43,14 @@ public class TypicalEmployees {
                 .withPhone("98765432")
                 .withDepartments("IT", "Operations")
                 .withSalary("6000")
-                .withOvertimeHours(MAX_OVERTIME_HOURS).build();
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS).build();
     public static final Employee CARL = new EmployeeBuilder().withName("Carl Kurz")
                 .withPosition("Software Engineer")
                 .withId("EID1234-8765")
                 .withPhone("95352563")
                 .withEmail("heinz@example.com")
                 .withSalary("5800")
-                .withOvertimeHours(MAX_OVERTIME_HOURS).build();
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS).build();
     public static final Employee DANIEL = new EmployeeBuilder().withName("Daniel Meier")
                 .withPosition("Tester")
                 .withId("EID4321-5678")
@@ -58,28 +58,28 @@ public class TypicalEmployees {
                 .withEmail("cornelia@example.com")
                 .withDepartments("IT")
                 .withSalary("5000")
-                .withOvertimeHours(MAX_OVERTIME_HOURS).build();
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS).build();
     public static final Employee ELLE = new EmployeeBuilder().withName("Elle Meyer")
                 .withPosition("Junior Software Engineer")
                 .withId("EID2023-1234")
                 .withPhone("94842224")
                 .withEmail("werner@example.com")
                 .withSalary("4000")
-                .withOvertimeHours(MAX_OVERTIME_HOURS).build();
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS).build();
     public static final Employee FIONA = new EmployeeBuilder().withName("Fiona Kunz")
                 .withPosition("Senior Software Engineer")
                 .withId("EID2023-5678")
                 .withPhone("94825427")
                 .withEmail("lydia@example.com")
                 .withSalary("8000")
-                .withOvertimeHours(MAX_OVERTIME_HOURS).build();
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS).build();
     public static final Employee GEORGE = new EmployeeBuilder().withName("George Best")
                 .withPosition("Intern")
                 .withId("EID2023-9876")
                 .withPhone("94824242")
                 .withEmail("anna@example.com")
                 .withSalary("1000")
-                .withOvertimeHours(MAX_OVERTIME_HOURS).build();
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS).build();
 
     // Manually added
     public static final Employee HOON = new EmployeeBuilder().withName("Hoon Meier")
@@ -88,14 +88,14 @@ public class TypicalEmployees {
                 .withPhone("84824242")
                 .withEmail("stefan@example.com")
                 .withSalary("1000")
-                .withOvertimeHours(MAX_OVERTIME_HOURS).build();
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS).build();
     public static final Employee IDA = new EmployeeBuilder().withName("Ida Mueller")
                 .withPosition("CEO")
                 .withId("EID2021-2022")
                 .withPhone("84821311")
                 .withEmail("hans@example.com")
                 .withSalary("10000")
-                .withOvertimeHours(MAX_OVERTIME_HOURS).build();
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS).build();
 
     // Manually added - Employee's details found in {@code CommandTestUtil}
     public static final Employee AMY = new EmployeeBuilder().withName(VALID_NAME_AMY)
@@ -105,7 +105,7 @@ public class TypicalEmployees {
                 .withEmail(VALID_EMAIL_AMY)
                 .withDepartments(VALID_DEPARTMENT_FINANCE)
                 .withSalary(VALID_SALARY_AMY)
-                .withOvertimeHours(MAX_OVERTIME_HOURS)
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS)
                 .build();
     public static final Employee BOB = new EmployeeBuilder().withName(VALID_NAME_BOB)
                 .withPosition(VALID_POSITION_BOB)
@@ -114,7 +114,7 @@ public class TypicalEmployees {
                 .withEmail(VALID_EMAIL_BOB)
                 .withDepartments(VALID_DEPARTMENT_FINANCE, VALID_DEPARTMENT_IT)
                 .withSalary(VALID_SALARY_BOB)
-                .withOvertimeHours(MAX_OVERTIME_HOURS)
+                .withOvertimeHours(DEFAULT_OVERTIME_HOURS)
                 .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

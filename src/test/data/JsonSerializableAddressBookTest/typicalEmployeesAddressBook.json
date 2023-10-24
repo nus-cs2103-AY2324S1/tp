@@ -8,10 +8,8 @@
       "phone": "94351253",
       "email": "alice@example.com",
       "salary": "12000",
-      "departments": [
-        "Finance"
-      ],
-      "overtime": 72
+      "departments": ["Finance"],
+      "overtime": 0
     },
     {
       "name": "Benson Meier",
@@ -20,11 +18,8 @@
       "phone": "98765432",
       "email": "johnd@example.com",
       "salary": "6000",
-      "departments": [
-        "IT",
-        "Operations"
-      ],
-      "overtime": 72
+      "departments": ["IT", "Operations"],
+      "overtime": 0
     },
     {
       "name": "Carl Kurz",
@@ -34,7 +29,7 @@
       "email": "heinz@example.com",
       "salary": "5800",
       "departments": [],
-      "overtime": 72
+      "overtime": 0
     },
     {
       "name": "Daniel Meier",
@@ -43,10 +38,8 @@
       "phone": "87652533",
       "email": "cornelia@example.com",
       "salary": "5000",
-      "departments": [
-        "IT"
-      ],
-      "overtime": 72
+      "departments": ["IT"],
+      "overtime": 0
     },
     {
       "name": "Elle Meyer",
@@ -56,7 +49,7 @@
       "email": "werner@example.com",
       "salary": "4000",
       "departments": [],
-      "overtime": 72
+      "overtime": 0
     },
     {
       "name": "Fiona Kunz",
@@ -66,7 +59,7 @@
       "email": "lydia@example.com",
       "salary": "8000",
       "departments": [],
-      "overtime": 72
+      "overtime": 0
     },
     {
       "name": "George Best",
@@ -76,7 +69,7 @@
       "email": "anna@example.com",
       "salary": "1000",
       "departments": [],
-      "overtime": 72
+      "overtime": 0
     }
   ]
 }

@@ -45,6 +45,8 @@ public class EmployeeCard extends UiPart<Region> {
     @FXML
     private FlowPane departments;
     @FXML
+    private Label isOnLeave;
+    @FXML
     private Label overtimeHours;
 
     /**
@@ -63,6 +65,13 @@ public class EmployeeCard extends UiPart<Region> {
         employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.departmentName))
                 .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
+        if (employee.getIsOnLeave()) {
+            isOnLeave.setText("On Leave");
+            isOnLeave.setStyle("-fx-background-color: #df0000; -fx-text-fill: #ffffff;");
+        } else {
+            isOnLeave.setText("Present");
+            isOnLeave.setStyle("-fx-background-color: #00df00; -fx-text-fill: #ffffff;");
+        }
         overtimeHours.setText(employee.getOvertimeHours().toString());
     }
 }

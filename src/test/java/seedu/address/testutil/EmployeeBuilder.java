@@ -25,7 +25,8 @@ public class EmployeeBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_SALARY = "12000";
-    public static final int DEFAULT_OVERTIME_HOURS = 72;
+    public static final boolean DEFAULT_IS_ON_LEAVE = false;
+    public static final int DEFAULT_OVERTIME_HOURS = 0;
 
     private Name name;
     private Position position;
@@ -34,6 +35,7 @@ public class EmployeeBuilder {
     private Email email;
     private Salary salary;
     private Set<Department> departments;
+    private boolean isOnLeave;
     private OvertimeHours overtimeHours;
 
     /**
@@ -47,6 +49,7 @@ public class EmployeeBuilder {
         email = new Email(DEFAULT_EMAIL);
         salary = new Salary(DEFAULT_SALARY);
         departments = new HashSet<>();
+        isOnLeave = DEFAULT_IS_ON_LEAVE;
         overtimeHours = new OvertimeHours(DEFAULT_OVERTIME_HOURS);
     }
 
@@ -61,6 +64,7 @@ public class EmployeeBuilder {
         email = employeeToCopy.getEmail();
         salary = employeeToCopy.getSalary();
         departments = new HashSet<>(employeeToCopy.getDepartments());
+        isOnLeave = employeeToCopy.getIsOnLeave();
         overtimeHours = employeeToCopy.getOvertimeHours();
     }
 
@@ -114,10 +118,18 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Sets the {@code Salary} of the {@code employee} that we are building.
+     * Sets the {@code Salary} of the {@code Employee} that we are building.
      */
     public EmployeeBuilder withSalary(String salary) {
         this.salary = new Salary(salary);
+        return this;
+    }
+
+    /**
+     * Sets the {@code isOnLeave} of the {@code Employee} that we are building.
+     */
+    public EmployeeBuilder withIsOnLeave(boolean isOnLeave) {
+        this.isOnLeave = isOnLeave;
         return this;
     }
 
@@ -130,7 +142,6 @@ public class EmployeeBuilder {
     }
 
     public Employee build() {
-        return new Employee(name, position, id, phone, email, salary, departments, overtimeHours);
+        return new Employee(name, position, id, phone, email, salary, departments, isOnLeave, overtimeHours);
     }
-
 }
