@@ -11,15 +11,22 @@ import seedu.address.commons.util.StringUtil;
 public class Status {
     public static final String MESSAGE_CONSTRAINTS = "Status should be either one of the following: 'Preliminary',"
             + "'Interviewed', 'Offered', 'Rejected'";
-    public String value;
+    private String value;
     private StatusTypes statusType;
 
 
+    /**
+     * Creates a default Status - Preliminary
+     */
     public Status() {
         this.statusType = StatusTypes.PRELIMINARY;
         this.value = "Preliminary";
     }
 
+    /**
+     * Creates a Status from String
+     * @param value The status type string to used
+     */
     public Status(String value) {
         this.value = value;
         switch (value.toLowerCase()) {
@@ -32,15 +39,19 @@ public class Status {
         case "interviewed":
             this.statusType = StatusTypes.INTERVIEWED;
             break;
-            case "preliminary":
-                this.statusType = StatusTypes.PRELIMINARY;
-                break;
-            default:
-                break;
+        case "preliminary":
+            this.statusType = StatusTypes.PRELIMINARY;
+            break;
+        default:
+            break;
         }
     }
 
-    public Status(StatusTypes statusType){
+    /**
+     * Creates a Status from a StatusType
+     * @param statusType The StatusType to be used
+     */
+    public Status(StatusTypes statusType) {
         this.value = statusType.toString();
         this.statusType = statusType;
     }
@@ -70,4 +81,9 @@ public class Status {
     public String toString() {
         return statusType.toString();
     }
+
+    public String getValue() {
+        return this.value;
+    }
+
 }

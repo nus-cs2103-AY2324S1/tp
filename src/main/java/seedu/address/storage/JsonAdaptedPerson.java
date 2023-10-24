@@ -46,7 +46,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("linkedIn") String linkedIn,
-                             @JsonProperty("github") String github, @JsonProperty("remark") String remark, @JsonProperty("status") String status) {
+                             @JsonProperty("github") String github,
+                             @JsonProperty("remark") String remark, @JsonProperty("status") String status) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -74,7 +75,7 @@ class JsonAdaptedPerson {
         linkedIn = source.getLinkedIn().value;
         github = source.getGithub().value;
         remark = source.getRemark().value;
-        status = source.getStatus().value;
+        status = source.getStatus().getValue();
     }
 
     /**
@@ -133,7 +134,7 @@ class JsonAdaptedPerson {
             p.setGithub(new Github(github));
         }
         if (status != null) {
-            p.setStatus(new Status(status.toString()));
+            p.setStatus(new Status(status));
         }
         return p;
     }
