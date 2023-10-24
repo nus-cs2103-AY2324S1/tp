@@ -64,8 +64,5 @@ public class PersonCard extends UiPart<Region> {
         person.getMedicalHistories().stream()
                 .sorted(Comparator.comparing(medicalHistory -> medicalHistory.value))
                 .forEach(medicalHistory -> medicalHistories.getChildren().add(new Label(medicalHistory.value)));
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
