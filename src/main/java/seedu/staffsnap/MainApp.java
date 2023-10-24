@@ -82,7 +82,7 @@ public class MainApp extends Application {
         try {
             applicantBookOptional = storage.readApplicantBook();
             if (!applicantBookOptional.isPresent()) {
-                logger.info("No applicant book found at file path. A new data file will be created at"
+                logger.info("No applicant book found at file path. A new data file will be created at "
                         + storage.getApplicantBookFilePath()
                         + " populated with a sample ApplicantBook.");
             }

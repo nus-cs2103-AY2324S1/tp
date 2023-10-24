@@ -107,7 +107,7 @@ public class ApplicantCard extends UiPart<Region> {
 
             Label interviewRatingLabel = new Label();
             interviewRatingLabel.getStyleClass().add("rating");
-            interviewRatingLabel.setText("9.9");
+            interviewRatingLabel.setText("9.9"); // TODO: update hardcoded rating
 
             interviewHeader.getChildren().add(interviewLabel);
             interviewRating.getChildren().add(interviewRatingLabel);
