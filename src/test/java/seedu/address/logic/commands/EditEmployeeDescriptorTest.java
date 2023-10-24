@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
@@ -57,6 +58,10 @@ public class EditEmployeeDescriptorTest {
         editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withSalary(VALID_SALARY_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different leave -> returns false
+        editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withLeave(VALID_LEAVE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different departments -> returns false
         editedAmy = new EditEmployeeDescriptorBuilder(DESC_AMY).withDepartments(VALID_DEPARTMENT_LOGISTIC).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -65,13 +70,14 @@ public class EditEmployeeDescriptorTest {
     @Test
     public void toStringMethod() {
         EditCommand.EditEmployeeDescriptor editEmployeeDescriptor = new EditCommand.EditEmployeeDescriptor();
-        String expected = EditCommand.EditEmployeeDescriptor.class.getCanonicalName() + "{name="
-                + editEmployeeDescriptor.getName().orElse(null) + ", phone="
-                + editEmployeeDescriptor.getPhone().orElse(null) + ", email="
-                + editEmployeeDescriptor.getEmail().orElse(null) + ", address="
-                + editEmployeeDescriptor.getAddress().orElse(null) + ", salary="
-                + editEmployeeDescriptor.getSalary().orElse(null) + ", departments="
-                + editEmployeeDescriptor.getDepartments().orElse(null) + "}";
+        String expected = EditCommand.EditEmployeeDescriptor.class.getCanonicalName()
+                + "{name=" + editEmployeeDescriptor.getName().orElse(null)
+                + ", phone=" + editEmployeeDescriptor.getPhone().orElse(null)
+                + ", email=" + editEmployeeDescriptor.getEmail().orElse(null)
+                + ", address=" + editEmployeeDescriptor.getAddress().orElse(null)
+                + ", salary=" + editEmployeeDescriptor.getSalary().orElse(null)
+                + ", leave=" + editEmployeeDescriptor.getLeave().orElse(null)
+                + ", departments=" + editEmployeeDescriptor.getDepartments().orElse(null) + "}";
         assertEquals(expected, editEmployeeDescriptor.toString());
     }
 }

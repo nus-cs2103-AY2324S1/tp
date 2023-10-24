@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_LOGISTIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
@@ -35,7 +36,8 @@ public class EmployeeTest {
 
         // same name, all other attributes different -> returns true
         Employee editedAlice = new EmployeeBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withDepartments(VALID_DEPARTMENT_LOGISTIC).build();
+                .withAddress(VALID_ADDRESS_BOB).withSalary("1000").withLeave("14")
+                .withDepartments(VALID_DEPARTMENT_LOGISTIC).build();
         assertTrue(ALICE.isSameEmployee(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -87,7 +89,11 @@ public class EmployeeTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different salary -> returns false
-        editedAlice = new EmployeeBuilder(ALICE).withAddress(VALID_SALARY_BOB).build();
+        editedAlice = new EmployeeBuilder(ALICE).withSalary(VALID_SALARY_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different leave -> returns false
+        editedAlice = new EmployeeBuilder(ALICE).withLeave(VALID_LEAVE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different departments -> returns false
@@ -99,7 +105,7 @@ public class EmployeeTest {
     public void toStringMethod() {
         String expected = Employee.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", salary=" + ALICE.getSalary()
-                + ", departments=" + ALICE.getDepartments() + "}";
+                + ", leave=" + ALICE.getLeave() + ", departments=" + ALICE.getDepartments() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
