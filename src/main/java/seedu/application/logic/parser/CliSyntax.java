@@ -8,9 +8,9 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_COMPANY = new Prefix("c/");
     public static final Prefix PREFIX_ROLE = new Prefix("r/");
-    public static final Prefix PREFIX_DEADLINE = new Prefix("d/");
     public static final Prefix PREFIX_STATUS = new Prefix("s/");
-    public static final Prefix PREFIX_JOB_TYPE = new Prefix("t/");
     public static final Prefix PREFIX_INDUSTRY = new Prefix("i/");
+    public static final Prefix PREFIX_DEADLINE = new Prefix("d/");
+    public static final Prefix PREFIX_JOB_TYPE = new Prefix("t/");
 
 }
