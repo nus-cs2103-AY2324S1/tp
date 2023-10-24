@@ -43,6 +43,20 @@ public class Appointment {
     }
 
     /**
+     * Returns true if both appointments have the same date and time.
+     * This defines a weaker notion of equality between two appointments.
+     */
+    public boolean isSameAppointment(Appointment other) {
+        if (other == this) {
+            return true;
+        }
+
+        return other != null
+                && other.getDateTime().equals(this.getDateTime())
+                && other.getName().equals(this.getName());
+    }
+
+    /**
      * Returns true if both appointments have the same fields.
      */
     @Override

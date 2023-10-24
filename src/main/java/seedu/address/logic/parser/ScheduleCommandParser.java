@@ -33,10 +33,10 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_DATETIME,
                 CliSyntax.PREFIX_DESCRIPTION);
+        Name studentName = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
         DateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(CliSyntax.PREFIX_DATETIME).get());
         Description description = ParserUtil.parseDescription(argMultimap
                 .getValue(CliSyntax.PREFIX_DESCRIPTION).get());
-        Name studentName = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
 
         Appointment appointment = new Appointment(dateTime, studentName, description);
 
