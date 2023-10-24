@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.history.UserHistoryManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -183,6 +184,21 @@ public class AddCommandTest {
 
         @Override
         public void setAppointment(Appointment target, Appointment editedAppointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UserHistoryManager getUserHistoryManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoHistory() {
             throw new AssertionError("This method should not be called.");
         }
 

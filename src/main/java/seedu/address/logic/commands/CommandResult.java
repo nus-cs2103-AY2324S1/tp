@@ -18,22 +18,23 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
-    /** Whether the command can be changed later on */
-    private final boolean isChangeable;
+
+    /** Whether the command can be undone*/
+    private final boolean canUndo;
 
     /**
      * Overloaded constructor for {@code CommandResult} for commands that can be changed later on
      * @param feedbackToUser
      * @param showHelp
      * @param exit
-     * @param isChangeable
+     * @param canUndo
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isChangeable) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean canUndo) {
         requireNonNull(feedbackToUser);
         this.feedbackToUser = feedbackToUser;
         this.showHelp = showHelp;
         this.exit = exit;
-        this.isChangeable = isChangeable;
+        this.canUndo = canUndo;
     }
 
     /**
@@ -43,7 +44,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.isChangeable = false;
+        this.canUndo = false;
     }
 
     /**
@@ -64,6 +65,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean canBeUndone() {
+        return canUndo;
     }
 
     @Override

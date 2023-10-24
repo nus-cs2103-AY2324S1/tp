@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.history.UserHistoryManager;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -119,6 +120,21 @@ public interface Model {
      * appointment in the address book.
      */
     void setAppointment(Appointment target, Appointment editedAppointment);
+
+    /**
+     * Returns user history.
+     */
+    UserHistoryManager getUserHistoryManager();
+
+    /**
+     * Undo the history.
+     */
+    void undoHistory();
+
+    /**
+     * Redo the history.
+     */
+    void redoHistory();
 
     /** Returns an unmodifiable view of the filtered appointment list */
     ObservableList<Appointment> getFilteredAppointmentList();
