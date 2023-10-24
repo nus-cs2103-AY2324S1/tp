@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.LessonComparator;
 import seedu.address.model.person.Person;
 
 /**
@@ -36,7 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        scheduleList = new SortedList<>(this.addressBook.getPersonList());
+        scheduleList = new SortedList<>(this.addressBook.getPersonList(), new LessonComparator());
     }
 
     public ModelManager() {

@@ -28,7 +28,7 @@ public class ScheduleCard extends UiPart<Region> {
     private Label address;
 
     @FXML
-    private Label day;
+    private Label lesson;
 
     @FXML
     private FlowPane tags;
@@ -41,7 +41,7 @@ public class ScheduleCard extends UiPart<Region> {
         this.person = person;
         name.setText(person.getName().fullName);
         address.setText(person.getAddress().value);
-        day.setText(person.getDay().value.toString());
+        lesson.setText(person.getLesson().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

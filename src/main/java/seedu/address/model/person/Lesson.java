@@ -35,7 +35,7 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return day.toString() + " " + begin.toString() + " - " + end.toString();
+        return day.toString() + ", " + begin.toString() + " - " + end.toString();
     }
 
     @Override
