@@ -211,7 +211,7 @@ public class Person {
         this.freeTime.addTime(toAddFreeTime);
     }
 
-    public void deleteFreeTime(ArrayList<TimeInterval> toAddFreeTime) {
+    public void deleteFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
         this.freeTime.deleteTime(toAddFreeTime);
     }
 

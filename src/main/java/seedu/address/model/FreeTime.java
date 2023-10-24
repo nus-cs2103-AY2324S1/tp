@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 
 public class FreeTime implements Iterable<TimeInterval> {
@@ -31,14 +32,14 @@ public class FreeTime implements Iterable<TimeInterval> {
         internalList.addAll(timeIntervals);
     }
 
-    public void deleteTime(ArrayList<TimeInterval> timeIntervals) {
+    public void deleteTime(ArrayList<TimeInterval> timeIntervals) throws CommandException {
         for (TimeInterval time : timeIntervals) {
             if (internalList.contains(time)) {
-                System.out.println(time);
                 internalList.remove(time);
+            } else {
+                throw new CommandException("Not all time included is free.");
             }
         }
-//        internalList.removeAll(timeIntervals);
     }
 
     /**
