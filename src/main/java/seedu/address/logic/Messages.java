@@ -53,7 +53,7 @@ public class Messages {
                 .append(person.getAddress())
                 .append(";\n")
                 .append("Appointment: ")
-                .append(person.getAppointment())
+                .append(person.getAppointment().orElse(person.getAppointment().orElse(null)))
                 .append("; Medical Histories: ");
 
         person.getMedicalHistories().forEach(builder::append);

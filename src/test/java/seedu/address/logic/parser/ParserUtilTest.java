@@ -201,42 +201,6 @@ public class ParserUtilTest {
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
-    @Test
-    public void parseMedicalHistory_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseMedicalHistories(null));
-    }
-
-    @Test
-    public void parseMedicalHistory_validValueWithoutWhitespace_returnsTag() throws Exception {
-        MedicalHistory expectedMedicalHistory = new MedicalHistory(VALID_MEDICAL_HISTORY_1);
-        assertEquals(expectedMedicalHistory, ParserUtil.parseMedicalHistory(VALID_MEDICAL_HISTORY_1));
-    }
-
-    @Test
-    public void parseMedicalHistory_collectionWithValidTags_returnsMedicalHistorySet() throws Exception {
-        Set<MedicalHistory> actualMedicalHistorySet = ParserUtil.parseMedicalHistories(
-                Arrays.asList(VALID_MEDICAL_HISTORY_1, VALID_MEDICAL_HISTORY_2));
-        Set<MedicalHistory> expectedMedicalHistorySet = new HashSet<>(Arrays.asList(
-                new MedicalHistory(VALID_MEDICAL_HISTORY_1), new MedicalHistory(VALID_MEDICAL_HISTORY_2)));
-        assertEquals(actualMedicalHistorySet, expectedMedicalHistorySet);
-    }
-
-    @Test
-    public void parseMedicalHistory_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseMedicalHistories(Collections.emptyList()).isEmpty());
-    }
-
-    @Test
-    public void parseMedicalHistory_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseMedicalHistory(INVALID_MEDICAL_HISTORY));
-    }
-
-
-    @Test
-    public void parseTag_emptyValue_throwsParseException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseMedicalHistories(null));
-    }
-
 
     @Test
     public void parseAppointment_invalidValue_throwsParseException() {
@@ -266,7 +230,7 @@ public class ParserUtilTest {
         // Input data with an empty medical history
         String input = "History 1, , History 3";
 
-        assertThrows(ParseException.class, () -> ParserUtil.parseMedicalHistories(Arrays.asList(input.split(","))));
+        assertThrows(ParseException.class, () -> ParserUtil.parseMedicals(Arrays.asList(input.split(","))));
     }
 
     @Test

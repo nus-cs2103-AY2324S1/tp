@@ -121,7 +121,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> medicalHistorySet = medicalHistories.size() == 1 && medicalHistories.contains("")
                 ? Collections.emptySet() : medicalHistories;
-        return Optional.of(ParserUtil.parseMedicalHistories(medicalHistorySet));
+        return Optional.of(ParserUtil.parseMedicals(medicalHistorySet));
     }
 
 }
