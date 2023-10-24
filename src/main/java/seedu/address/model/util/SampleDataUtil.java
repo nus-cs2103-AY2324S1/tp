@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -44,7 +45,8 @@ public class SampleDataUtil {
                 Optional.empty(),
                 getTagSet("classmates"),
                 Optional.empty(),
-                getNoteList("Irfan has a cool sister.")),
+                getNoteList("Irfan has a cool sister."),
+                new Balance(5)),
 
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),

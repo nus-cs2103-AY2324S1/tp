@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
@@ -40,6 +41,7 @@ class JsonAdaptedPerson {
     private final Optional<String> telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final Optional<Integer> id;
+    private final Integer balance;
 
     private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
@@ -54,7 +56,8 @@ class JsonAdaptedPerson {
             @JsonProperty("telegram") Optional<String> telegram,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("id") Optional<Integer> id,
-            @JsonProperty("notes") List<JsonAdaptedNote> notes
+            @JsonProperty("notes") List<JsonAdaptedNote> notes,
+            @JsonProperty("balance") Integer balance
     ) {
         this.name = name;
         this.phone = phone;
@@ -71,6 +74,7 @@ class JsonAdaptedPerson {
         if (notes != null) {
             this.notes.addAll(notes);
         }
+        this.balance = balance;
     }
 
     /**
@@ -92,7 +96,7 @@ class JsonAdaptedPerson {
         notes.addAll(source.getNotes().stream()
             .map(JsonAdaptedNote::new)
             .collect(Collectors.toList()));
-
+        balance = source.getBalance().value;
     }
 
     /**
@@ -140,6 +144,9 @@ class JsonAdaptedPerson {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
+        if (balance == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Balance.class.getSimpleName()));
+        }
         final Address modelAddress = new Address(address);
 
         final Optional<Birthday> modelBirthday = birthday.map(monthDay -> new Birthday(monthDay));
@@ -154,8 +161,10 @@ class JsonAdaptedPerson {
         final Optional<Integer> modelID = id.map(x -> x.intValue());
         final List<Note> modelNotes = new ArrayList<>(personNotes);
 
+        final Balance modelBalance = new Balance(balance);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelLinkedin,
-                modelSecondaryEmail, modelTelegram, modelTags, modelID, modelNotes);
+                modelSecondaryEmail, modelTelegram, modelTags, modelID, modelNotes, modelBalance);
     }
 
 }
