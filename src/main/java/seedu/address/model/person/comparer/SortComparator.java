@@ -1,8 +1,8 @@
 package seedu.address.model.person.comparer;
 
-import seedu.address.model.person.Person;
-
 import java.util.Comparator;
+
+import seedu.address.model.person.Person;
 
 /**
  * An abstract class that defines a comparator for sorting Person objects.
@@ -69,7 +69,8 @@ public abstract class SortComparator implements Comparator<Person> {
      *
      * @param p1 The first Person to compare.
      * @param p2 The second Person to compare.
-     * @return A negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+     * @return A negative integer, zero, or a positive integer as the first argument is less than,
+     *      equal to, or greater than the second.
      */
     public abstract int compare(Person p1, Person p2);
 }
