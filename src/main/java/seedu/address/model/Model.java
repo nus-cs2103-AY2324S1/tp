@@ -105,7 +105,7 @@ public interface Model {
      * @param name the name
      * @return the boolean
      */
-    boolean hasPerson(Name name);
+    boolean containsPerson(Name name);
 
     /**
      * Returns person based on the {@code name}.

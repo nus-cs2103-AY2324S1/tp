@@ -62,6 +62,11 @@ public class TeamBuilder {
         return this;
     }
 
+    /**
+     * Builds team.
+     *
+     * @return the team
+     */
     public Team build() {
         Team team = new Team(leaderIdentityCode, teamName);
         for (IdentityCode devId : developerIdentityCodes) {

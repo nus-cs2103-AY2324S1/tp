@@ -16,8 +16,8 @@ public class HelpCommand extends Command {
             + "Command summary: \n"
             + "  -> add + n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n"
             + "  -> delete + INDEX\n"
-            + "  -> edit + " +
-            "INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]\n"
+            + "  -> edit + "
+            + "INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]\n"
             + "  -> remark + INDEX (must be a positive integer) r/[REMARK]\n"
             + "  -> list\n"
             + "  -> newteam + tn/TeamName tl/TeamLeader Example: newteam tn/ABC tl/JOHN DOE\n"
