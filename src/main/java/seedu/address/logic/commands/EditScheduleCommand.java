@@ -19,6 +19,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
+import seedu.address.model.schedule.Status;
 
 /**
  * Edits the details of an existing schedule in the address book.
@@ -70,7 +71,7 @@ public class EditScheduleCommand extends Command {
         Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor);
 
         boolean hasScheduleClash =
-            model.getAddressBook().getScheduleList().stream().filter(schedule -> !schedule.equals(scheduleToEdit))
+            model.getAddressBook().getScheduleList().stream().filter(schedule -> !schedule.isDuplicate(scheduleToEdit))
                 .anyMatch(schedule -> schedule.isClashing(editedSchedule));
 
         if (!scheduleToEdit.equals(editedSchedule) && model.hasSchedule(editedSchedule)) {
@@ -96,8 +97,9 @@ public class EditScheduleCommand extends Command {
         StartTime updatedStartTime = editScheduleDescriptor.getStartTime().orElse(scheduleToEdit.getStartTime());
         EndTime updatedEndTime = editScheduleDescriptor.getEndTime().orElse(scheduleToEdit.getEndTime());
         Person tutor = editScheduleDescriptor.getTutor().orElse(scheduleToEdit.getTutor());
+        Status status = scheduleToEdit.getStatus();
 
-        return new Schedule(tutor, updatedStartTime, updatedEndTime);
+        return new Schedule(tutor, updatedStartTime, updatedEndTime, status);
     }
 
     @Override
