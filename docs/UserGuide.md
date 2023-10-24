@@ -145,7 +145,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons that match the query. Supports gender, NRIC and name.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -155,11 +155,16 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* When searching by NRIC, input the NRIC as the keyword.
+* When searching by gender, input either `M` or `F` as the keyword.
+* When searching by name, input the names as per above. 
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find T1125726G` returns the person with the matching NRIC.
+* `find M` returns all male persons.
 
 ### Deleting a person : `delete`
 
