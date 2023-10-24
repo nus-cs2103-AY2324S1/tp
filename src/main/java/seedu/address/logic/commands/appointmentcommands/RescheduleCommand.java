@@ -83,7 +83,7 @@ public class RescheduleCommand extends Command {
 
         model.setAppointment(appointmentToReschedule, rescheduledAppointment);
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, Messages.format(rescheduledAppointment)), false, false);
+                String.format(MESSAGE_SUCCESS, Messages.format(rescheduledAppointment)), false, false, true);
     }
 
     private static Appointment createRescheduledAppointment(Appointment appointmentToReschedule,
