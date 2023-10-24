@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Mod;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -105,6 +106,16 @@ public class AddCommandTest {
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Mod getTeaching() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTeaching(Mod module) {
             throw new AssertionError("This method should not be called.");
         }
 
