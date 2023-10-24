@@ -33,6 +33,11 @@ public class IndicesTest {
         // convert from zero-based index to one-based index
         assertArrayEquals(ONE_TO_THREE, Indices.fromZeroBased(ZERO_TO_TWO).getOneBased());
         assertArrayEquals(FOUR_TO_SIX, Indices.fromZeroBased(THREE_TO_FIVE).getOneBased());
+
+        // check whether assertion is thrown
+        assertThrows(AssertionError.class, () -> {
+            Indices.fromZeroBased(null);
+        });
     }
 
     @Test
@@ -47,6 +52,11 @@ public class IndicesTest {
         // convert from one-based index to zero-based index
         assertArrayEquals(ZERO_TO_TWO, Indices.fromOneBased(ONE_TO_THREE).getZeroBased());
         assertArrayEquals(THREE_TO_FIVE, Indices.fromOneBased(FOUR_TO_SIX).getZeroBased());
+
+        // check whether assertion is thrown
+        assertThrows(AssertionError.class, () -> {
+            Indices.fromOneBased(null);
+        });
     }
 
     @Test

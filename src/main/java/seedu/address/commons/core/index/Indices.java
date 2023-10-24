@@ -7,7 +7,7 @@ import java.util.TreeSet;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents one or more sorted, unique Index objects.
+ * Represents zero or more sorted, unique Index objects.
  * <p>
  * All Index objects in Indices have to be either zero-based or one-based. Similar to {@code Index},
  * it should be used right from the start when parsing new user input that allows for more than
@@ -22,7 +22,6 @@ public class Indices {
      * {@link Indices#fromOneBased(int[])}.
      */
     private Indices(SortedSet<Index> zeroBasedIndices) {
-        assert(!zeroBasedIndices.isEmpty());
         this.zeroBasedIndices = zeroBasedIndices;
         this.size = zeroBasedIndices.size();
     }
