@@ -249,6 +249,15 @@ public class ModelManager implements Model {
         forceUpdateList();
     }
 
+    @Override
+    public void deleteFreeTimeFromPerson(Name personName,
+                                           ArrayList<TimeInterval> toDeleteFreeTime) throws CommandException {
+        requireNonNull(personName);
+        Person person = addressBook.getPerson(personName.fullName);
+        person.deleteFreeTime(toDeleteFreeTime);
+        forceUpdateList();
+    }
+
     /**
      * Assign person to group
      *
