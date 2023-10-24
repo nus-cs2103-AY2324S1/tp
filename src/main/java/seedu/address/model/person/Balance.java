@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Balance {
 
@@ -37,7 +38,13 @@ public class Balance {
 
     public Balance(Integer balanceInCents) {
         requireNonNull(balanceInCents);
+        checkArgument(balanceInCents <= MAX_VALUE && balanceInCents >= MIN_VALUE,
+                MESSAGE_BALANCE_LIMIT_EXCEEDED);
         value = balanceInCents;
+    }
+
+    public static boolean isWithinLimits(Integer balance) {
+        return balance <= MAX_VALUE && balance >= MIN_VALUE;
     }
 
     /**
