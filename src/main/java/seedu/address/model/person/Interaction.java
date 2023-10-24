@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Represents an interaction with the client in the addressbook.
  */
@@ -27,8 +30,11 @@ public class Interaction {
         }
     }
 
+    private static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy");
+
     private final String interactionNote;
     private final Outcome outcome;
+    private final Date date;
 
     /**
     * Constructs a {@code Interaction} with a default LeadStatus of UNKNOWN.
@@ -39,6 +45,7 @@ public class Interaction {
     public Interaction(String interactionNote) {
         this.interactionNote = interactionNote;
         this.outcome = Outcome.UNKNOWN;
+        this.date = new Date();
     }
 
     /**
@@ -50,6 +57,20 @@ public class Interaction {
     public Interaction(String interactionNote, Outcome outcome) {
         this.interactionNote = interactionNote;
         this.outcome = outcome;
+        this.date = new Date();
+    }
+
+    /**
+     * Constructs a {@code Interaction}.
+     *
+     * @param interactionNote A valid Interaction note.
+     * @param outcome A valid LeadStatus.
+     * @param date A valid date.
+     */
+    public Interaction(String interactionNote, Outcome outcome, Date date) {
+        this.interactionNote = interactionNote;
+        this.outcome = outcome;
+        this.date = date;
     }
 
     public String getInteraction() {
@@ -60,9 +81,15 @@ public class Interaction {
         return this.outcome.toString();
     }
 
+    public Date getDate() {
+        return this.date;
+    }
+
     @Override
     public String toString() {
-        return interactionNote + "\nThe outcome of this interaction is: " + outcome;
+        return interactionNote
+            + "\nThe outcome of this interaction is: " + outcome
+            + "\nDate: " + DEFAULT_DATE_FORMAT.format(date);
     }
 
     @Override

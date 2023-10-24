@@ -48,7 +48,7 @@ public class InteractionCommandParser implements Parser<Command> {
             String[] trimmedArgsParts = trimmedArgs.split("\\s+", 3);
             //This is to check if there is a note
             if (trimmedArgsParts.length > 2) {
-                note = trimmedArgsParts[3];
+                note = trimmedArgsParts[2];
             }
         } else {
             String[] trimmedArgsParts = trimmedArgs.split("\\s+", 2);
