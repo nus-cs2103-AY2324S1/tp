@@ -3,9 +3,15 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USED_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_ISSUE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -29,6 +35,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.Company;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
@@ -50,6 +57,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_NRIC + "NRIC] "
+            + "[" + PREFIX_LICENCE_PLATE + "LICENCE_PLATE] "
+            + "[" + PREFIX_COMPANY + "COMPANY] "
+            + "[" + PREFIX_POLICY_NUMBER + "POLICY_NUMBER] "
+            + "[" + PREFIX_POLICY_ISSUE_DATE + "POLICY_ISSUE_DATE] "
+            + "[" + PREFIX_POLICY_EXPIRY_DATE + "POLICY_EXPIRY_DATE] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -136,13 +149,14 @@ public class EditCommand extends Command {
     }
 
     private static Policy getUpdatedPolicy(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        Company updatedCompany = editPersonDescriptor.getCompany().orElse(personToEdit.getPolicy().getCompany());
         PolicyNumber updatedPolicyNumber =
                 editPersonDescriptor.getPolicyNumber().orElse(personToEdit.getPolicy().getPolicyNumber());
         PolicyDate updatedPolicyIssueDate =
                 editPersonDescriptor.getPolicyIssueDate().orElse(personToEdit.getPolicy().getPolicyIssueDate());
         PolicyDate updatedPolicyExpiryDate =
                 editPersonDescriptor.getPolicyExpiryDate().orElse(personToEdit.getPolicy().getPolicyExpiryDate());
-        return new Policy(updatedPolicyNumber, updatedPolicyIssueDate, updatedPolicyExpiryDate);
+        return new Policy(updatedCompany, updatedPolicyNumber, updatedPolicyIssueDate, updatedPolicyExpiryDate);
     }
 
     @Override
@@ -181,6 +195,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Nric nric;
         private LicencePlate licencePlate;
+        private Company company;
         private PolicyNumber policyNumber;
         private PolicyDate policyIssueDate;
         private PolicyDate policyExpiryDate;
@@ -200,6 +215,7 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setNric(toCopy.nric);
             setLicencePlate(toCopy.licencePlate);
+            setCompany(toCopy.company);
             setPolicyNumber(toCopy.policyNumber);
             setPolicyIssueDate(toCopy.policyIssueDate);
             setPolicyExpiryDate(toCopy.policyExpiryDate);
@@ -217,6 +233,7 @@ public class EditCommand extends Command {
                     tags,
                     nric,
                     licencePlate,
+                    company,
                     policyNumber,
                     policyIssueDate,
                     policyExpiryDate
@@ -288,6 +305,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(licencePlate);
         }
 
+        public void setCompany(Company company) {
+            this.company = company;
+        }
+
+        public Optional<Company> getCompany() {
+            return Optional.ofNullable(company);
+        }
+
         public void setPolicyNumber(PolicyNumber policyNumber) {
             this.policyNumber = policyNumber;
         }
@@ -331,6 +356,7 @@ public class EditCommand extends Command {
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(nric, otherEditPersonDescriptor.nric)
                     && Objects.equals(licencePlate, otherEditPersonDescriptor.licencePlate)
+                    && Objects.equals(company, otherEditPersonDescriptor.company)
                     && Objects.equals(policyNumber, otherEditPersonDescriptor.policyNumber)
                     && Objects.equals(policyIssueDate, otherEditPersonDescriptor.policyIssueDate)
                     && Objects.equals(policyExpiryDate, otherEditPersonDescriptor.policyExpiryDate);
@@ -338,6 +364,7 @@ public class EditCommand extends Command {
 
         protected String getPolicy() {
             return new ToStringBuilder(this)
+                    .add("company", company)
                     .add("policyNumber", policyNumber)
                     .add("policyIssueDate", policyIssueDate)
                     .add("policyExpiryDate", policyExpiryDate)

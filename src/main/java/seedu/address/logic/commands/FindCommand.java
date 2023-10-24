@@ -10,6 +10,7 @@ import seedu.address.commons.util.PredicateUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.CompanyContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.LicenceContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -35,14 +36,15 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/Alice Rodriguez";
 
     private final NameContainsKeywordsPredicate namePredicate;
-    private final LicenceContainsKeywordsPredicate licencePredicate;
-    private final NricContainsKeywordsPredicate nricPredicate;
     private final PhoneContainsKeywordsPredicate phonePredicate;
-    private final PolicyNumberContainsKeywordsPredicate policyNumberPredicate;
-    private final TagContainsKeywordsPredicate tagPredicate;
-    private final PolicyExpiryContainsKeywordsPredicate policyExpiryPredicate;
     private final EmailContainsKeywordsPredicate emailPredicate;
+    private final TagContainsKeywordsPredicate tagPredicate;
+    private final NricContainsKeywordsPredicate nricPredicate;
+    private final LicenceContainsKeywordsPredicate licencePredicate;
+    private final CompanyContainsKeywordsPredicate companyPredicate;
+    private final PolicyNumberContainsKeywordsPredicate policyNumberPredicate;
     private final PolicyIssueContainsKeywordsPredicate policyIssuePredicate;
+    private final PolicyExpiryContainsKeywordsPredicate policyExpiryPredicate;
 
     /**
      * Constructor for FindCommand
@@ -58,7 +60,8 @@ public class FindCommand extends Command {
                        TagContainsKeywordsPredicate tagPredicate,
                        PolicyExpiryContainsKeywordsPredicate policyExpiryPredicate,
                        EmailContainsKeywordsPredicate emailPredicate,
-                       PolicyIssueContainsKeywordsPredicate policyIssuePredicate) {
+                       PolicyIssueContainsKeywordsPredicate policyIssuePredicate,
+                       CompanyContainsKeywordsPredicate companyPredicate) {
         this.namePredicate = namePredicate;
         this.licencePredicate = licencePredicate;
         this.nricPredicate = nricPredicate;
@@ -68,6 +71,7 @@ public class FindCommand extends Command {
         this.policyExpiryPredicate = policyExpiryPredicate;
         this.emailPredicate = emailPredicate;
         this.policyIssuePredicate = policyIssuePredicate;
+        this.companyPredicate = companyPredicate;
     }
 
     @Override
@@ -93,7 +97,15 @@ public class FindCommand extends Command {
 
         FindCommand otherFindCommand = (FindCommand) other;
         return namePredicate.equals(otherFindCommand.namePredicate)
-                && licencePredicate.equals(otherFindCommand.licencePredicate);
+                && phonePredicate.equals(otherFindCommand.phonePredicate)
+                && emailPredicate.equals(otherFindCommand.emailPredicate)
+                && tagPredicate.equals(otherFindCommand.tagPredicate)
+                && nricPredicate.equals(otherFindCommand.nricPredicate)
+                && licencePredicate.equals(otherFindCommand.licencePredicate)
+                && companyPredicate.equals(otherFindCommand.companyPredicate)
+                && policyNumberPredicate.equals(otherFindCommand.policyNumberPredicate)
+                && policyExpiryPredicate.equals(otherFindCommand.policyExpiryPredicate)
+                && policyIssuePredicate.equals(otherFindCommand.policyIssuePredicate);
     }
 
     @Override
@@ -108,6 +120,7 @@ public class FindCommand extends Command {
                 .add("policy expiry predicate", policyExpiryPredicate)
                 .add("email predicate", emailPredicate)
                 .add("policy issue predicate", policyIssuePredicate)
+                .add("company predicate", companyPredicate)
                 .toString();
     }
 
@@ -140,6 +153,9 @@ public class FindCommand extends Command {
         }
         if (!policyIssuePredicate.isEmpty()) {
             predicates.add(policyIssuePredicate);
+        }
+        if (!companyPredicate.isEmpty()) {
+            predicates.add(companyPredicate);
         }
         return predicates;
     }

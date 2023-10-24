@@ -18,7 +18,7 @@ import seedu.address.model.person.LicencePlate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
-import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.Company;
 import seedu.address.model.policy.PolicyDate;
 import seedu.address.model.policy.PolicyNumber;
 import seedu.address.model.tag.Tag;
@@ -28,20 +28,11 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    //Policy variables used for instances of profiles with no policy specified
-    //Default policy
-    public static final PolicyNumber POLICY_NUMBER = new PolicyNumber(PolicyNumber.DEFAULT_VALUE);
-    public static final PolicyDate POLICY_ISSUE_DATE = new PolicyDate(PolicyDate.DEFAULT_VALUE);
-    public static final PolicyDate POLICY_EXPIRITY_DATE = new PolicyDate(PolicyDate.DEFAULT_VALUE);
-    public static final Policy POLICY = new Policy(POLICY_NUMBER, POLICY_ISSUE_DATE, POLICY_EXPIRITY_DATE);
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-
-
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (trimmedIndex.isEmpty()) {
@@ -215,19 +206,18 @@ public class ParserUtil {
         return new PolicyDate(trimmedPolicyExpiryDate);
     }
 
-    //    /**
-    //     * Parses a {@code String company} into an {@code Company}.
-    //     * Leading and trailing whitespaces will be trimmed.
-    //     *
-    //     * @throws ParseException if the given {@code company} is invalid.
-    //     */
-    //    public static Company parseCompany(String company) throws ParseException {
-    //        requireNonNull(company);
-    //        String trimmedCompany = company.trim();
-    //        if (!Company.isValidCompany(trimmedCompany)) {
-    //            throw new ParseException(Company.MESSAGE_CONSTRAINTS);
-    //        }
-    //        return new Company(trimmedCompany);
-    //    }
-
+    /**
+     * Parses a {@code String company} into an {@code Company}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code company} is invalid.
+     */
+    public static Company parseCompany(String company) throws ParseException {
+        requireNonNull(company);
+        String trimmedCompany = company.trim();
+        if (!Company.isValidCompany(trimmedCompany)) {
+            throw new ParseException(Company.MESSAGE_CONSTRAINTS);
+        }
+        return new Company(trimmedCompany);
+    }
 }

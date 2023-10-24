@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.CompanyContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.LicenceContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -34,7 +35,8 @@ public class FindCommandParserTest {
                         new LicenceContainsKeywordsPredicate(""), new NricContainsKeywordsPredicate(""),
                         new PhoneContainsKeywordsPredicate(""), new PolicyNumberContainsKeywordsPredicate(""),
                         new TagContainsKeywordsPredicate(""), new PolicyExpiryContainsKeywordsPredicate(""),
-                        new EmailContainsKeywordsPredicate(""), new PolicyIssueContainsKeywordsPredicate(""));
+                        new EmailContainsKeywordsPredicate(""), new PolicyIssueContainsKeywordsPredicate(""),
+                        new CompanyContainsKeywordsPredicate(""));
         assertParseSuccess(parser, "find n/Alice Bob", expectedFindCommand);
     }
 
