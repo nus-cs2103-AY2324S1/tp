@@ -12,11 +12,11 @@ import org.junit.jupiter.api.Test;
 public class StateCapturesTest {
     @Test
     public void constructor_validInputs_success() {
-        int currentIndex = 0;
+        int currentPointer = 0;
         List<String> stateCaptures = Arrays.asList("State1", "State2");
-        StateCaptures state = new StateCaptures(currentIndex, stateCaptures);
+        StateCaptures state = new StateCaptures(currentPointer, stateCaptures);
 
-        assertEquals(currentIndex, state.getCurrentIndex());
+        assertEquals(currentPointer, state.getCurrentPointer());
         assertEquals(stateCaptures, state.getStateCaptures());
     }
 
