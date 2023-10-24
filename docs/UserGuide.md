@@ -80,8 +80,18 @@ On top of these functionalities, we believe that tuition centre management must 
 
 ## Navigating the Interface
 
+TutorConnect comes equipped with an interface that provides visual feedback to you.
+Below is a quick overview of the various components of our interface.
+
 ### Quick Orientation
-More details coming soon...
+
+![ui overview](images/uiOverview.png)
+
+| Component      | Description                                                                                | 
+|----------------|--------------------------------------------------------------------------------------------|
+| Command Box    | You will enter your commands here.                                                         | 
+| Result Display | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
+| Tutor Details  | Contains information related to the tutor like name, phone number etc.                     |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -375,6 +385,21 @@ Deletes a schedule in the address book based on their index number in the table 
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: What if I make a mistake when typing a command?<br>
+**A**: Don't worry! If you make a mistake while typing a command, Tutor Connect will provide an error message to guide you. Simply correct the command and try again.
+
+**Q**: Can I view schedules in a different time zone?<br>
+**A**: Currently, Tutor Connect displays schedules in your local time zone. If you need to coordinate with tutors in different time zones, you may consider using a world clock or time zone converter alongside the application.
+
+**Q**: Is there a way to export my data from Tutor Connect?<br>
+**A**: Currently, Tutor Connect doesn't have an export feature. However, you can manually copy the `data.json` file from the "Tutor Connect" folder for backup or transfer purposes.
+
+**Q**: How do I report a bug or suggest a feature?<br>
+**A**: We value your feedback! Please visit our [Github repository](https://github.com/AY2324S1-CS2103T-T17-3/tp) and open an issue to report a bug or make a feature request.
+
+**Q**: I'm encountering an issue not covered here. What should I do?<br>
+**A**: Feel free to reach out to our support team at [support@tutorconnect.com](mailto:support@tutorconnect.com). We'll do our best to assist you.
 
 --------------------------------------------------------------------------------------------------------------------
 
