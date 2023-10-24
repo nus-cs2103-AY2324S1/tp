@@ -145,7 +145,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the name and room is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -193,6 +193,14 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
+
+### Prefix Completion
+
+Pressing `tab` during inputting a command will autocomplete relevant command prefix with examples.
+
+Example:
+
+* `add` followed by `space` and `tab` results in `add r/1`.
 
 --------------------------------------------------------------------------------------------------------------------
 
