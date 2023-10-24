@@ -25,8 +25,6 @@ public class Messages {
             + "\n(%1$d persons listed)";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
-    private static final String MESSAGE_FIELDS_MUST_BE_PRESENT =
-            "The total number of fields of %s, which is %d, must match the number of fields of %s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

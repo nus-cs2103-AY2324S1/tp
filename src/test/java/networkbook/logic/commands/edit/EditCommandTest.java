@@ -4,9 +4,12 @@ import static networkbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static networkbook.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static networkbook.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
@@ -36,6 +39,23 @@ public class EditCommandTest {
         assertThrows(NullPointerException.class, () -> new EditCommand(null, VALID_EDIT_ACTION));
         assertThrows(NullPointerException.class, () -> new EditCommand(EditCommandUtil.VALID_INDEX, null));
         assertThrows(NullPointerException.class, () -> new EditCommand(null, null));
+    }
+
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_commandFailure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        EditCommand editCommand = new EditCommand(outOfBoundIndex, VALID_EDIT_ACTION);
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_changeNameToAnExistingContact_commandFailure() {
+        Index lastIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person duplicateInModel = model.getFilteredPersonList().get(0);
+        EditCommand editCommand = new EditCommand(lastIndex, editPersonDescriptor
+                -> editPersonDescriptor.setName(duplicateInModel.getName()));
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -369,5 +389,32 @@ public class EditCommandTest {
         expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        EditAction editAction = editPersonDescriptor -> {};
+        EditCommand standardCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, editAction);
+        EditCommand sameCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, editAction);
+        EditCommand differentCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, editPersonDescriptor -> {});
+        EditCommand differentIndexCommand = new EditCommand(TypicalIndexes.INDEX_SECOND_PERSON, editAction);
+
+        // same reference
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // false for null
+        assertFalse(standardCommand.equals(null));
+
+        // different object type -> false
+        assertFalse(standardCommand.equals(1));
+
+        // equivalent commands
+        assertTrue(standardCommand.equals(sameCommand));
+
+        // different commands
+        assertFalse(standardCommand.equals(differentCommand));
+
+        // different indices
+        assertFalse(standardCommand.equals(differentIndexCommand));
     }
 }
