@@ -34,6 +34,7 @@ public class ShowCalendarCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        model.updateFilteredScheduleList(schedule -> schedule.isOnDate(date));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

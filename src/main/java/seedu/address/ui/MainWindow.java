@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ListTutorCommand;
+import seedu.address.logic.commands.ShowCalendarCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -177,6 +178,8 @@ public class MainWindow extends UiPart<Stage> {
             showSchedules();
         } else if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)) {
             showPersons();
+        } else if (commandResult.getFeedbackToUser().equals(ShowCalendarCommand.MESSAGE_SUCCESS)) {
+            showCalendar();
         }
     }
 
@@ -196,6 +199,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void showSchedules() {
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+    }
+
+    /**
+     * Shows calendar of filtered schedule cards.
+     */
+    void showCalendar() {
         listPanelPlaceholder.getChildren().clear();
         listPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
     }

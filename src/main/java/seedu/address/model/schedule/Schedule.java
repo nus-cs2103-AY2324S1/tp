@@ -66,6 +66,16 @@ public class Schedule implements Comparable<Schedule> {
     }
 
     /**
+     * Checks if this schedule is on the specified date.
+     *
+     * @param date The specified date to compare against.
+     * @return {@code true} if the schedule is on the date, {@code false} otherwise.
+     */
+    public boolean isOnDate(Date date) {
+        return this.startTime.isOnDate(date) || this.endTime.isOnDate(date);
+    }
+
+    /**
      * Returns true if both schedules have the same tutor index and time fields.
      * This defines a stronger notion of equality between two schedules.
      */

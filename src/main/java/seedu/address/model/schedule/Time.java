@@ -45,6 +45,13 @@ public abstract class Time implements Comparable<Time> {
         }
     }
 
+    /**
+     * Returns true if a given string is a valid end time.
+     */
+    public boolean isOnDate(Date date) {
+        return getTime().toLocalDate().isEqual(date.value);
+    }
+
     public LocalDateTime getTime() {
         return value;
     }

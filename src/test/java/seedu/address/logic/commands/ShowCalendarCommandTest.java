@@ -30,6 +30,7 @@ public class ShowCalendarCommandTest {
         ShowCalendarCommand showCalendarCommand = new ShowCalendarCommand(date);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredScheduleList(schedule -> schedule.isOnDate(date));
 
         assertCommandSuccess(showCalendarCommand, model, ShowCalendarCommand.MESSAGE_SUCCESS, expectedModel);
     }
