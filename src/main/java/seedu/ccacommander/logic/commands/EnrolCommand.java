@@ -21,13 +21,13 @@ import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
 
 /**
- * Adds a member to an event in CcaCommander.
+ * Enrols a member to an event in CcaCommander.
  */
-public class AddMemberCommand extends Command {
+public class EnrolCommand extends Command {
 
-    public static final String COMMAND_WORD = "addMember";
+    public static final String COMMAND_WORD = "enrol";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to an event in CCACommander. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrols a member to an event in CCACommander. \n"
             + "Parameters: "
             + PREFIX_MEMBER + "MEMBER_INDEX "
             + PREFIX_EVENT + "EVENT_INDEX "
@@ -41,7 +41,7 @@ public class AddMemberCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "Successfully added: %1$s";
-    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "This member has already been added to the event. ";
+    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "This member has already been enrolled to the event. ";
 
     private final Index memberIndex;
     private final Index eventIndex;
@@ -51,7 +51,7 @@ public class AddMemberCommand extends Command {
     /**
      * Creates an CreateEventCommand to add the specified {@code Event}
      */
-    public AddMemberCommand(Index memberIndex, Index eventIndex, Hours hours, Remark remark) {
+    public EnrolCommand(Index memberIndex, Index eventIndex, Hours hours, Remark remark) {
         requireNonNull(memberIndex);
         requireNonNull(eventIndex);
         requireNonNull(hours);
@@ -100,15 +100,15 @@ public class AddMemberCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddMemberCommand)) {
+        if (!(other instanceof EnrolCommand)) {
             return false;
         }
 
-        AddMemberCommand otherAddMemberCommand = (AddMemberCommand) other;
-        return memberIndex.equals(otherAddMemberCommand.memberIndex)
-                && eventIndex.equals(otherAddMemberCommand.eventIndex)
-                && hours.equals(otherAddMemberCommand.hours)
-                && remark.equals(otherAddMemberCommand.remark);
+        EnrolCommand otherEnrolCommand = (EnrolCommand) other;
+        return memberIndex.equals(otherEnrolCommand.memberIndex)
+                && eventIndex.equals(otherEnrolCommand.eventIndex)
+                && hours.equals(otherEnrolCommand.hours)
+                && remark.equals(otherEnrolCommand.remark);
     }
 
     @Override

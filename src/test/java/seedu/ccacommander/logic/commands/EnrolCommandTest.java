@@ -38,10 +38,10 @@ import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.UniqueMemberList;
 import seedu.ccacommander.testutil.AttendanceBuilder;
 
-public class AddMemberCommandTest {
+public class EnrolCommandTest {
     @Test
     public void constructor_nullFields_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddMemberCommand(null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new EnrolCommand(null, null, null, null));
     }
 
     @Test
@@ -50,57 +50,57 @@ public class AddMemberCommandTest {
         Attendance validAttendance = new AttendanceBuilder().build();
 
         CommandResult commandResult =
-                new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A)
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A)
                         .execute(modelStub);
 
-        assertEquals(String.format(AddMemberCommand.MESSAGE_SUCCESS, Messages.format(validAttendance)),
+        assertEquals(String.format(EnrolCommand.MESSAGE_SUCCESS, Messages.format(validAttendance)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validAttendance), modelStub.attendancesAdded);
     }
 
     @Test
     public void execute_duplicateAttendance_throwsCommandException() {
-        AddMemberCommand addMemberCommand =
-                new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+        EnrolCommand enrolCommand =
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
         ModelStubWithAttendance modelStub = new ModelStubWithAttendance(ALICE_AURORA);
 
         assertThrows(CommandException.class,
-                AddMemberCommand.MESSAGE_DUPLICATE_ATTENDANCE, () -> addMemberCommand.execute(modelStub));
+                EnrolCommand.MESSAGE_DUPLICATE_ATTENDANCE, () -> enrolCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        AddMemberCommand addMemberEventOneCommand =
-                new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
-        AddMemberCommand addMemberEventTwoCommand =
-                new AddMemberCommand(VALID_INDEX_TWO, VALID_INDEX_TWO, VALID_HOURS_B, VALID_REMARK_B);
+        EnrolCommand enrolEventOneCommand =
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+        EnrolCommand enrolEventTwoCommand =
+                new EnrolCommand(VALID_INDEX_TWO, VALID_INDEX_TWO, VALID_HOURS_B, VALID_REMARK_B);
 
         // same object -> returns true
-        assertTrue(addMemberEventOneCommand.equals(addMemberEventOneCommand));
+        assertTrue(enrolEventOneCommand.equals(enrolEventOneCommand));
 
         // same values -> returns true
-        AddMemberCommand addMemberEventOneCommandCopy =
-                new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
-        assertTrue(addMemberEventOneCommand.equals(addMemberEventOneCommandCopy));
+        EnrolCommand enrolEventOneCommandCopy =
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+        assertTrue(enrolEventOneCommand.equals(enrolEventOneCommandCopy));
 
         // different types -> returns false
-        assertFalse(addMemberEventOneCommand.equals(1));
+        assertFalse(enrolEventOneCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addMemberEventOneCommand.equals(null));
+        assertFalse(enrolEventOneCommand.equals(null));
 
         // different member -> returns false
-        assertFalse(addMemberEventOneCommand.equals(addMemberEventTwoCommand));
+        assertFalse(enrolEventOneCommand.equals(enrolEventTwoCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddMemberCommand addMemberCommand =
-                new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
-        String expected = AddMemberCommand.class.getCanonicalName() + "{member index=" + VALID_INDEX_ONE
+        EnrolCommand enrolCommand =
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+        String expected = EnrolCommand.class.getCanonicalName() + "{member index=" + VALID_INDEX_ONE
                 + ", event index=" + VALID_INDEX_ONE + ", hours=" + VALID_HOURS_A
                 + ", remark=" + VALID_REMARK_A + "}";
-        assertEquals(addMemberCommand.toString(), expected);
+        assertEquals(enrolCommand.toString(), expected);
     }
 
     /**

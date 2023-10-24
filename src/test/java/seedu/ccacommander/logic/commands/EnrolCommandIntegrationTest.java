@@ -21,9 +21,9 @@ import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.testutil.AttendanceBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddMemberCommand}.
+ * Contains integration tests (interaction with the Model) for {@code EnrolCommand}.
  */
-public class AddMemberCommandIntegrationTest {
+public class EnrolCommandIntegrationTest {
     private Model model;
 
     @BeforeEach
@@ -42,15 +42,15 @@ public class AddMemberCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.createAttendance(validAttendance);
 
-        assertCommandSuccess(new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_TWO, VALID_HOURS_A, VALID_REMARK_A),
-                model, String.format(AddMemberCommand.MESSAGE_SUCCESS, Messages.format(validAttendance)),
+        assertCommandSuccess(new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_TWO, VALID_HOURS_A, VALID_REMARK_A),
+                model, String.format(EnrolCommand.MESSAGE_SUCCESS, Messages.format(validAttendance)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
-        assertCommandFailure(new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A),
-                model, AddMemberCommand.MESSAGE_DUPLICATE_ATTENDANCE);
+        assertCommandFailure(new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A),
+                model, EnrolCommand.MESSAGE_DUPLICATE_ATTENDANCE);
     }
 
 }

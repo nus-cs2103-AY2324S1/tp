@@ -29,23 +29,23 @@ import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseS
 import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.logic.Messages;
-import seedu.ccacommander.logic.commands.AddMemberCommand;
+import seedu.ccacommander.logic.commands.EnrolCommand;
 import seedu.ccacommander.model.attendance.Hours;
 import seedu.ccacommander.model.attendance.Remark;
 
-public class AddMemberCommandParserTest {
-    private AddMemberCommandParser parser = new AddMemberCommandParser();
+public class EnrolCommandParserTest {
+    private EnrolCommandParser parser = new EnrolCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        AddMemberCommand expectedAddMemberEventCommand =
-                new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_TWO, VALID_HOURS_A, VALID_REMARK_A);
+        EnrolCommand expectedEnrolEventCommand =
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_TWO, VALID_HOURS_A, VALID_REMARK_A);
 
         // whitespace only preamble
         assertParseSuccess(parser,
                 PREAMBLE_WHITESPACE + MEMBER_INDEX_DESC_ONE
                         + EVENT_INDEX_DESC_TWO + HOURS_DESC_AURORA + REMARK_DESC_AURORA,
-                expectedAddMemberEventCommand);
+                expectedEnrolEventCommand);
     }
 
     @Test
@@ -110,7 +110,7 @@ public class AddMemberCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrolCommand.MESSAGE_USAGE);
 
         // missing name index prefix
         assertParseFailure(parser, EVENT_INDEX_DESC_TWO + HOURS_DESC_AURORA + REMARK_DESC_AURORA,
@@ -159,6 +159,6 @@ public class AddMemberCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + MEMBER_INDEX_DESC_ONE
                         + EVENT_INDEX_DESC_TWO + HOURS_DESC_AURORA + REMARK_DESC_AURORA,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrolCommand.MESSAGE_USAGE));
     }
 }

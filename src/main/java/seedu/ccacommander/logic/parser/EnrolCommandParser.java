@@ -9,28 +9,28 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
 import java.util.stream.Stream;
 
 import seedu.ccacommander.commons.core.index.Index;
-import seedu.ccacommander.logic.commands.AddMemberCommand;
+import seedu.ccacommander.logic.commands.EnrolCommand;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
 import seedu.ccacommander.model.attendance.Hours;
 import seedu.ccacommander.model.attendance.Remark;
 
 /**
- * Parses input arguments and creates a new AddMemberCommand object
+ * Parses input arguments and creates a new EnrolCommand object
  */
-public class AddMemberCommandParser implements Parser<AddMemberCommand> {
+public class EnrolCommandParser implements Parser<EnrolCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddMemberCommand
-     * and returns an AddMemberCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EnrolCommand
+     * and returns an EnrolCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddMemberCommand parse(String args) throws ParseException {
+    public EnrolCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MEMBER, PREFIX_EVENT, PREFIX_HOURS, PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MEMBER, PREFIX_EVENT, PREFIX_HOURS, PREFIX_REMARK)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrolCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MEMBER, PREFIX_EVENT, PREFIX_HOURS, PREFIX_REMARK);
@@ -39,7 +39,7 @@ public class AddMemberCommandParser implements Parser<AddMemberCommand> {
         Hours hours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
 
-        return new AddMemberCommand(memberIndex, eventIndex, hours, remark);
+        return new EnrolCommand(memberIndex, eventIndex, hours, remark);
     }
 
     /**
