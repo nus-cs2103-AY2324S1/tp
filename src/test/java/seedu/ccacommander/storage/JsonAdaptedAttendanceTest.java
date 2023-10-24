@@ -17,7 +17,7 @@ public class JsonAdaptedAttendanceTest {
     private static final String INVALID_MEMBER_NAME = "@lice";
     private static final String INVALID_EVENT_NAME = "@urora";
     private static final String INVALID_HOURS = "-1";
-    private static final String INVALID_REMARK= " ";
+    private static final String INVALID_REMARK = " ";
 
     private static final String VALID_MEMBER_NAME = ALICE_AURORA.getMemberName().toString();
     private static final String VALID_EVENT_NAME = ALICE_AURORA.getEventName().toString();

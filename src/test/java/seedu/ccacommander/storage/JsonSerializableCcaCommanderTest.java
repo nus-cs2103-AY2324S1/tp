@@ -2,7 +2,9 @@ package seedu.ccacommander.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalCcaCommander.*;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAttendanceCcaCommander;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalEventCcaCommander;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalMemberCcaCommander;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,7 +26,8 @@ public class JsonSerializableCcaCommanderTest {
     private static final Path DUPLICATE_EVENT_FILE = TEST_DATA_FOLDER.resolve("duplicateEventCcaCommander.json");
     private static final Path TYPICAL_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve("typicalAttendanceCcaCommander.json");
     private static final Path INVALID_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve("invalidAttendanceCcaCommander.json");
-    private static final Path DUPLICATE_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve("duplicateAttendanceCcaCommander.json");
+    private static final Path DUPLICATE_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve(
+            "duplicateAttendanceCcaCommander.json");
 
     @Test
     public void toModelType_typicalMembersFile_success() throws Exception {

@@ -15,6 +15,8 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
+import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
+import static seedu.ccacommander.testutil.TypicalAttendances.BENSON_BOXING;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +26,8 @@ import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
+import seedu.ccacommander.model.attendance.Hours;
+import seedu.ccacommander.model.attendance.Remark;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
 import seedu.ccacommander.model.member.Member;
@@ -58,7 +62,7 @@ public class CommandTestUtil {
     public static final String VALID_MEMBER_INDEX_ONE = "1";
     public static final String VALID_EVENT_INDEX_TWO = "2";
     public static final String VALID_HOURS_AURORA = "3";
-    public static final String VALID_HOURS_BOXING= "7";
+    public static final String VALID_HOURS_BOXING = "7";
     public static final String VALID_REMARK_AURORA = "Role: Photographer";
     public static final String VALID_REMARK_BOXING = "Bring boxing gloves";
 
@@ -107,6 +111,13 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final Index VALID_INDEX_ONE = Index.fromOneBased(1);
+    public static final Index VALID_INDEX_TWO = Index.fromOneBased(2);
+    public static final Hours VALID_HOURS_A = ALICE_AURORA.getHours();
+    public static final Hours VALID_HOURS_B = BENSON_BOXING.getHours();
+    public static final Remark VALID_REMARK_A = ALICE_AURORA.getRemark();
+    public static final Remark VALID_REMARK_B = BENSON_BOXING.getRemark();
 
     public static final EditCommand.EditMemberDescriptor DESC_AMY;
     public static final EditCommand.EditMemberDescriptor DESC_BOB;

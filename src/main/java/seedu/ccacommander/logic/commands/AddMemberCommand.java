@@ -6,6 +6,8 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
 
+import java.util.List;
+
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
@@ -17,8 +19,6 @@ import seedu.ccacommander.model.attendance.Remark;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
-
-import java.util.List;
 
 /**
  * Adds a member to an event in CcaCommander.

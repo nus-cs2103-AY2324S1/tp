@@ -2,6 +2,7 @@ package seedu.ccacommander.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.ccacommander.commons.exceptions.IllegalValueException;
 import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.model.attendance.Hours;

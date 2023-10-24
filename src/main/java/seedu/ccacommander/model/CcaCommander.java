@@ -157,7 +157,6 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     public void removeEvent(Event key) {
         events.remove(key);
     }
-    
     // attendance-level operations
 
     /**

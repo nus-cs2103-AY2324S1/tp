@@ -1,10 +1,30 @@
 package seedu.ccacommander.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_A;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_B;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_INDEX_ONE;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_INDEX_TWO;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_A;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_B;
+import static seedu.ccacommander.testutil.Assert.assertThrows;
+import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
+import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
+import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import org.junit.jupiter.api.Test;
 import seedu.ccacommander.commons.core.GuiSettings;
-import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.CcaCommander;
@@ -12,38 +32,13 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ReadOnlyCcaCommander;
 import seedu.ccacommander.model.ReadOnlyUserPrefs;
 import seedu.ccacommander.model.attendance.Attendance;
-import seedu.ccacommander.model.attendance.Hours;
-import seedu.ccacommander.model.attendance.Remark;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.UniqueEventList;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.UniqueMemberList;
 import seedu.ccacommander.testutil.AttendanceBuilder;
-import seedu.ccacommander.testutil.EventBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
-import static seedu.ccacommander.testutil.TypicalAttendances.BENSON_BOXING;
-import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
-import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
-
 
 public class AddMemberCommandTest {
-    final Index VALID_INDEX_ONE = Index.fromOneBased(1);
-    final Index VALID_INDEX_TWO = Index.fromOneBased(2);
-    final Hours VALID_HOURS_A = ALICE_AURORA.getHours();
-    final Hours VALID_HOURS_B = BENSON_BOXING.getHours();
-    final Remark VALID_REMARK_A = ALICE_AURORA.getRemark();
-    final Remark VALID_REMARK_B = BENSON_BOXING.getRemark();
-
-
     @Test
     public void constructor_nullFields_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddMemberCommand(null, null, null, null));
@@ -55,7 +50,8 @@ public class AddMemberCommandTest {
         Attendance validAttendance = new AttendanceBuilder().build();
 
         CommandResult commandResult =
-                new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A).execute(modelStub);
+                new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A)
+                        .execute(modelStub);
 
         assertEquals(String.format(AddMemberCommand.MESSAGE_SUCCESS, Messages.format(validAttendance)),
                 commandResult.getFeedbackToUser());
@@ -100,10 +96,11 @@ public class AddMemberCommandTest {
     @Test
     public void toStringMethod() {
         AddMemberCommand addMemberCommand =
-                new AddMemberCommand(VALID_INDEX_ONE,  VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+                new AddMemberCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
         String expected = AddMemberCommand.class.getCanonicalName() + "{member index=" + VALID_INDEX_ONE
                 + ", event index=" + VALID_INDEX_ONE + ", hours=" + VALID_HOURS_A
                 + ", remark=" + VALID_REMARK_A + "}";
+        assertEquals(addMemberCommand.toString(), expected);
     }
 
     /**
@@ -117,11 +114,13 @@ public class AddMemberCommandTest {
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public GuiSettings getGuiSettings() {
+
             throw new AssertionError("This method should not be called.");
         }
 

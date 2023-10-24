@@ -1,24 +1,39 @@
 package seedu.ccacommander.logic.parser;
 
+import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.EVENT_INDEX_DESC_TWO;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.HOURS_DESC_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_EVENT_INDEX_DESC;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_HOURS_DESC;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_MEMBER_INDEX_DESC;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.MEMBER_INDEX_DESC_ONE;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.REMARK_DESC_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_EVENT_INDEX_TWO;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_A;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_INDEX_ONE;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_INDEX_TWO;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_MEMBER_INDEX_ONE;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_A;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_AURORA;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
 import org.junit.jupiter.api.Test;
-import seedu.ccacommander.commons.core.index.Index;
+
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.AddMemberCommand;
 import seedu.ccacommander.model.attendance.Hours;
 import seedu.ccacommander.model.attendance.Remark;
 
-import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.*;
-import static seedu.ccacommander.logic.parser.CliSyntax.*;
-import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
-
 public class AddMemberCommandParserTest {
-    final Index VALID_INDEX_ONE = Index.fromOneBased(1);
-    final Index VALID_INDEX_TWO = Index.fromOneBased(2);
-    final Hours VALID_HOURS_A = ALICE_AURORA.getHours();
-    final Remark VALID_REMARK_A = ALICE_AURORA.getRemark();
     private AddMemberCommandParser parser = new AddMemberCommandParser();
 
     @Test
@@ -138,7 +153,7 @@ public class AddMemberCommandParserTest {
                         + INVALID_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser,INVALID_MEMBER_INDEX_DESC + EVENT_INDEX_DESC_TWO + HOURS_DESC_AURORA
+        assertParseFailure(parser, INVALID_MEMBER_INDEX_DESC + EVENT_INDEX_DESC_TWO + HOURS_DESC_AURORA
                         + INVALID_REMARK_DESC, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // non-empty preamble
