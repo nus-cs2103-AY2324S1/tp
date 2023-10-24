@@ -16,13 +16,22 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+
     public ResultDisplay() {
         super(FXML);
     }
 
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
-        resultDisplay.setText(feedbackToUser);
+        String currentText = resultDisplay.getText();
+        if (!currentText.isEmpty()) {
+            currentText += "\n"; // Add a newline to separate messages
+        }
+        resultDisplay.setText(currentText + feedbackToUser);
+        //resultDisplay.appendText(currentText + feedbackToUser);
+
+        // 将滚动条滚动到最底部
+        resultDisplay.positionCaret(resultDisplay.getLength());
     }
 
 }
