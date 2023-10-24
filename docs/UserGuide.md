@@ -164,6 +164,42 @@ Adds a tutor to the address book.
 * `Emails should be of the format local-part@domain and adhere to the following constraints:`: Tutor email input was
   either invalid or blank.
 
+### Editing a tutor: `edit-t`
+
+Edits an existing tutor in the addressbook.
+
+![edit tutor](images/editTutor.png)
+
+**Format**: `edit-t TUTOR_INDEX [n/NAME] [p/PHONE NUMBER] [e/EMAIL]`
+
+**Examples**:
+* `edit-t 1 n/John Doe`
+* `edit-t 2 n/John Doe e/johndoe@email.com`
+
+**Acceptable values for each parameter**:
+* `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of
+  tutors.
+* `NAME`: Only contain alphanumeric characters and spaces, and should not be blank
+* `PHONE NUMBER`: Only contain numbers, and should be at least 3 digits long
+* `EMAIL`: Of the format local-part@domain
+
+**Expected output**:
+* `Edited Tutor: John Doe; Phone: 99272758; Email: johndoe@email.com`
+
+**Error messages**:
+* `Invalid command format!`: Invalid or missing TUTOR_INDEX.
+* `Names should only contain alphanumeric characters and spaces, and it should not be blank`: Tutor name input was
+  either invalid or blank.
+* `Phone numbers should only contain numbers, and it should be at least 3 digits long`: Tutor phone number input was
+  either invalid or blank.
+* `Emails should be of the format local-part@domain and adhere to the following constraints:`: Tutor email input was
+  either invalid or blank.
+* `Multiple values specified for the following single-valued field(s): n/`: More than 1 `n/` was given in the command
+* `Multiple values specified for the following single-valued field(s): p/`: More than 1 `p/` was given in the command
+* `Multiple values specified for the following single-valued field(s): e/`: More than 1 `e/` was given in the command
+* `This tutor already exists in the address book.`: There is a tutor with the same name in the address book.
+* `At least one field to edit must be provided.`: There is no `n/`, `p/` or `e/` tag provided to edit a field.
+
 ### Listing all tutors: `list-t`
 
 Displays a list of all tutors in the address book in a table format.
@@ -298,7 +334,7 @@ Edits an existing schedule in the addressbook.
 
 ![edit schedule](images/editSchedule.png)
 
-**Format**: `edit-s SCHEDULE_INDEX s/START_TIME e/END_TIME`
+**Format**: `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]`
 
 **Examples**:
 * `edit-s 1 s/2023-09-15T13:00:00`
@@ -329,7 +365,6 @@ Edits an existing schedule in the addressbook.
 
 Displays a list of all schedules in the address book in a table format.
 
-
 ![view schedule](images/viewSchedule.png)
 
 **Format:** `list-s`
@@ -342,7 +377,6 @@ Displays a list of all schedules in the address book in a table format.
 * If there are no schedules in the address book, displays a message telling the user to add a tutor with `add-s`.
 
 ![empty schedule list](images/emptyScheduleList.png)
-
 
 <div markdown="block" class="alert alert-info">
 
@@ -365,7 +399,7 @@ Deletes a schedule in the address book based on their index number in the table 
 
 **Example:**
 * `delete-s 5` deletes the schedule that is indexed as 5 in the schedule list.
-* `list` followed by `delete-s 2` deletes the 2nd schedule in the schedule list.
+* `list-s` followed by `delete-s 2` deletes the 2nd schedule in the schedule list.
 
 **Acceptable values for each parameter:**
 * `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
@@ -377,7 +411,6 @@ Deletes a schedule in the address book based on their index number in the table 
 * `Index number given is out of range`: Given index is out of range.
 * `Invalid value in parameter SCHEDULE_INDEX`: Parameter given is not a numerical value.
 * `Missing parameter SCHEDULE_INDEX`: A numerical value is not provided when calling the command `delete-s`.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
