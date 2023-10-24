@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
 
 /**
@@ -12,11 +12,13 @@ public abstract class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists either students or attendance.\n"
             + "Parameters: "
-            + "LIST_TYPE (must be either 'students' or 'attendance') "
-            + PREFIX_COURSETUTORIAL + "TAG "
-            + PREFIX_TUTORIALNUMBER + "TUTORIALNUMBER (must be a positive integer) "
-            + "[applicable for list attendance only]\n"
-            + "Example: " + COMMAND_WORD + " students";
+            + "LIST_TYPE (must be either 'students' or 'attendance')\n"
+            + "(applicable for list attendance only): "
+            + PREFIX_TUTORIALNUMBER + "TUTORIAL_NUMBER (must be a positive integer) "
+            + "[" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
+            + "Example: "
+            + COMMAND_WORD + " students, "
+            + COMMAND_WORD + " attendance tn/1 tg/G01";
 
     public ListCommand() {}
 }

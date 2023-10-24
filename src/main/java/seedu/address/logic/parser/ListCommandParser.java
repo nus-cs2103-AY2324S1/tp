@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
 
 import java.util.regex.Matcher;
@@ -44,10 +44,10 @@ public class ListCommandParser implements Parser<ListCommand> {
         Index tn = Index.fromZeroBased(1);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(arguments, PREFIX_COURSETUTORIAL, PREFIX_TUTORIALNUMBER);
+                ArgumentTokenizer.tokenize(arguments, PREFIX_TUTORIALGROUP, PREFIX_TUTORIALNUMBER);
 
-        if (argMultimap.getValue(PREFIX_COURSETUTORIAL).isPresent()) {
-            String tgValue = argMultimap.getValue(PREFIX_COURSETUTORIAL).get();
+        if (argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
+            String tgValue = argMultimap.getValue(PREFIX_TUTORIALGROUP).get();
             tag = ParserUtil.parseTag(tgValue);
         }
 
@@ -56,21 +56,24 @@ public class ListCommandParser implements Parser<ListCommand> {
             tn = ParserUtil.parseIndex(tnValue);
         }
 
+        System.out.println(commandWord);
+
         switch (commandWord) {
-
-        case ListStudentsCommand.COMMAND_WORD:
-            return new ListStudentsCommand();
-
         case ListAttendanceCommand.COMMAND_WORD:
+            System.out.println(commandWord);
             if (!argMultimap.getValue(PREFIX_TUTORIALNUMBER).isPresent()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListAttendanceCommand.MESSAGE_USAGE));
             }
             return new ListAttendanceCommand(tag, tn, new ContainsTagPredicate(tag),
                     new AbsentFromTutorialPredicate(tn, tag));
+        case ListStudentsCommand.COMMAND_WORD:
+            if (arguments.isEmpty()) {
+                return new ListStudentsCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListStudentsCommand.MESSAGE_USAGE));
         default:
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
     }
 }

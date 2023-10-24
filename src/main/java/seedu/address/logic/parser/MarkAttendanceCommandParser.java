@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.MarkAttendanceCommand;
@@ -35,17 +37,23 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
         }
 
-        String identifier;
+        List<String> identifiers = new ArrayList<>();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            identifier = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).fullName;
+            String[] names = argMultimap.getValue(PREFIX_NAME).get().split(",");
+            for (String name : names) {
+                identifiers.add(ParserUtil.parseName(name.trim()).fullName);
+            }
         } else {
-            identifier = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()).value;
+            String[] ids = argMultimap.getValue(PREFIX_ID).get().split(",");
+            for (String id : ids) {
+                identifiers.add(ParserUtil.parseId(id.trim()).value);
+            }
         }
 
         boolean isPresent = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());
         LocalDate date = LocalDate.now(); // Assuming attendance is marked for the current date
 
-        return new MarkAttendanceCommand(identifier, isPresent, date);
+        return new MarkAttendanceCommand(identifiers, isPresent, date);
     }
 
     /**
