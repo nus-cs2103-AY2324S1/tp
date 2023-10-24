@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 /**
@@ -21,13 +22,6 @@ public abstract class ListTimeCommand extends Command {
             + "OR Parameters: " + PREFIX_GROUPTAG
             + "GROUP (must be the full name of a group in the existing contactlist)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GROUPTAG + "CS2103T\n";
-
-    public static final String MESSAGE_NO_PERSON_WITH_NAME_FOUND = "No person with such name found.\n"
-            + "Please provide the person's full name as in the existing contactlist.";
-
-    public static final String MESSAGE_NO_GROUP_WITH_NAME_FOUND = "No group with such name found.\n"
-            + "Please provide the group's full name as in the existing contactlist.";
-
 
     public ListTimeCommand() {
     }

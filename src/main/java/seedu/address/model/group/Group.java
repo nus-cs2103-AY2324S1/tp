@@ -1,11 +1,15 @@
 package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.FreeTime;
+import seedu.address.model.TimeInterval;
 import seedu.address.model.person.Person;
 
 import java.util.List;
@@ -19,6 +23,7 @@ public class Group {
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
     private GroupRemark groupRemark;
+    private final FreeTime freeTime = new FreeTime();
 
     /**
      * Name field must be present and not null.
@@ -167,5 +172,13 @@ public class Group {
 
     public void setGroupRemark(GroupRemark groupRemark) {
         this.groupRemark = groupRemark;
+    }
+
+    public void addFreeTime(ArrayList<TimeInterval> toAddFreeTime) {
+        this.freeTime.addTime(toAddFreeTime);
+    }
+
+    public FreeTime getFreeTime() {
+        return this.freeTime;
     }
 }

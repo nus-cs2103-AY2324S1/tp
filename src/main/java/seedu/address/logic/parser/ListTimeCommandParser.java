@@ -8,6 +8,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new ListTimeCommand object
@@ -49,13 +51,15 @@ public class ListTimeCommandParser implements Parser<ListTimeCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListTimeCommand.MESSAGE_USAGE));
             } else {
                 String personName = argMultimap.getValue(PREFIX_NAME).get();
-                return new ListTimePersonCommand(personName);
+                Name name = ParserUtil.parseName(personName);
+                return new ListTimePersonCommand(name);
             }
         }
 
         // n/ not present, g/ should be present
         String groupName = argMultimap.getValue(PREFIX_GROUPTAG).get();
-        return new ListTimeGroupCommand(groupName);
+        Group group = ParserUtil.parseSingleGroup(groupName);
+        return new ListTimeGroupCommand(group);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
