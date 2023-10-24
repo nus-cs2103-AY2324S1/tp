@@ -22,9 +22,15 @@ public class Balance {
             + "owed to any contact in CampusConnect is $10,000.\n"
             + "CampusConnect should only be used for casual transactions among friends.";
 
+    public static final String MESSAGE_TRANSACTION_LIMIT_EXCEEDED = "The maximum amount that can be "
+            + "transacted in a single transaction in CampusConnect is $20,000.\n"
+            + "CampusConnect should only be used for casual transactions among friends.";
+
     public static final int MAX_VALUE = 1000000;
 
     public static final int MIN_VALUE = -1000000;
+
+    public static final int TRANSACTION_LIMIT = 2000000;
 
     /**
      * Regex for Balance when represented as a dollar string,
@@ -47,8 +53,8 @@ public class Balance {
      */
     public Balance(Integer balanceInCents) {
         requireNonNull(balanceInCents);
-        checkArgument(balanceInCents <= MAX_VALUE && balanceInCents >= MIN_VALUE,
-                MESSAGE_BALANCE_LIMIT_EXCEEDED);
+        checkArgument(Math.abs(balanceInCents) <= TRANSACTION_LIMIT,
+                MESSAGE_TRANSACTION_LIMIT_EXCEEDED);
         value = balanceInCents;
     }
 
@@ -71,7 +77,7 @@ public class Balance {
      * Returns a dollar string representation of the balance.
      */
     public String toDollarString() {
-        return String.format("$%d.%02d", value / 100, value % 100);
+        return String.format("$%d.%02d", Math.abs(value) / 100, Math.abs(value) % 100);
     }
 
     /**
@@ -104,11 +110,9 @@ public class Balance {
      * @return true if the balance would exceed the limit once the given amount is added.
      */
     public boolean wouldExceedBalanceLimit(Balance other) {
-        return this.add(other).value > MAX_VALUE
-                || this.add(other).value < MIN_VALUE;
+        return this.value + other.value > MAX_VALUE
+                || this.value + other.value < MIN_VALUE;
     }
-
-
 
     @Override
     public String toString() {
