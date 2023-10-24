@@ -247,6 +247,46 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseDates_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDates(null));
+    }
+
+    @Test
+    public void parseDates_invalidValue_throwsParseException() {
+        Collection<String> dates = new ArrayList<>();
+        dates.add(INVALID_DATE);
+        assertThrows(ParseException.class, () -> ParserUtil.parseDates(dates));
+    }
+
+    @Test
+    public void parseDates_validValueWithoutWhitespace_returnsTag() throws Exception {
+        Collection<String> dates = new ArrayList<>();
+        dates.add(VALID_ENROL_DATE_1);
+        dates.add(VALID_ENROL_DATE_2);
+        EnrolDate expectedDate1 = new EnrolDate(VALID_ENROL_DATE_1);
+        EnrolDate expectedDate2 = new EnrolDate(VALID_ENROL_DATE_2);
+        Collection<EnrolDate> enrolDates = new ArrayList<>();
+        enrolDates.add(expectedDate1);
+        enrolDates.add(expectedDate2);
+        assertEquals(enrolDates, ParserUtil.parseDates(dates));
+    }
+
+    @Test
+    public void parseDates_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        Collection<String> dates = new ArrayList<>();
+        String dateWithWhitespace1 = WHITESPACE + VALID_ENROL_DATE_1 + WHITESPACE;
+        String dateWithWhitespace2 = WHITESPACE + VALID_ENROL_DATE_2 + WHITESPACE;
+        dates.add(dateWithWhitespace1);
+        dates.add(dateWithWhitespace2);
+        EnrolDate expectedDate1 = new EnrolDate(VALID_ENROL_DATE_1);
+        EnrolDate expectedDate2 = new EnrolDate(VALID_ENROL_DATE_2);
+        Collection<EnrolDate> enrolDates = new ArrayList<>();
+        enrolDates.add(expectedDate1);
+        enrolDates.add(expectedDate2);
+        assertEquals(enrolDates, ParserUtil.parseDates(dates));
+    }
+
+    @Test
     public void parseDate_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
     }
