@@ -56,24 +56,27 @@ public class PersonTest {
     }
 
     /**
+     * Tests if an empty Optional is returned when there's no attendance record for the current week.
+     */
+    @Test
+    public void getAttendanceForCurrentWeek_noAttendance_emptyOptional()  {
+        Person emptyAlice = new PersonBuilder(ALICE).build();
+        Optional<Attendance> result = emptyAlice.getAttendanceForCurrentWeek();
+        System.out.println(result);
+        assertFalse(result.isPresent());
+    }
+
+    /**
      * Tests if an attendance record for the current week is correctly retrieved when it exists.
      */
     @Test
     public void getAttendanceForCurrentWeek_attendanceExists_optionalWithAttendance() {
         Attendance attendance = new Attendance(LocalDate.now(), true);
-        ALICE.addAttendance(attendance);
-        Optional<Attendance> result = ALICE.getAttendanceForCurrentWeek();
+        Person emptyAlice = new PersonBuilder(ALICE).build();
+        emptyAlice.addAttendance(attendance);
+        Optional<Attendance> result = emptyAlice.getAttendanceForCurrentWeek();
         assertTrue(result.isPresent());
         assertTrue(result.get().isSameWeek(LocalDate.now()));
-    }
-
-    /**
-     * Tests if an empty Optional is returned when there's no attendance record for the current week.
-     */
-    @Test
-    public void getAttendanceForCurrentWeek_noAttendance_emptyOptional()  {
-        Optional<Attendance> result = ALICE.getAttendanceForCurrentWeek();
-        assertFalse(result.isPresent());
     }
 
     @Test

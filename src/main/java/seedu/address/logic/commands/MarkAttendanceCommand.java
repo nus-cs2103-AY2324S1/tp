@@ -24,53 +24,59 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Attendance marked for person: ";
     public static final String MESSAGE_UPDATED_SUCCESS = "Attendance updated for person: ";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found.";
-    private final String identifier; // This can be either studentName or studentID
+    private final List<String> identifiers; // This can be either studentName or studentID
     private final boolean isPresent;
     private final LocalDate date;
 
     /**
      * Constructs a MarkAttendanceCommand to mark the specified student's attendance.
      *
-     * @param identifier The student's name or ID.
+     * @param identifiers The list of student's name or ID.
      * @param isPresent The attendance status.
      * @param date The date of the attendance.
      */
-    public MarkAttendanceCommand(String identifier, boolean isPresent, LocalDate date) {
-        this.identifier = identifier;
+    public MarkAttendanceCommand(List<String> identifiers, boolean isPresent, LocalDate date) {
+        this.identifiers = identifiers;
         this.isPresent = isPresent;
         this.date = date;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        StringBuilder successMessage = new StringBuilder();
+
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Person targetPerson = lastShownList.stream()
-                .filter(person -> person.getName().fullName.equals(identifier) || person.getId().value.equals(
-                        identifier))
-                .findFirst()
-                .orElse(null);
+        for (String identifier : identifiers) {
+            Person targetPerson = lastShownList.stream()
+                    .filter(person -> person.getName().fullName.equals(identifier) || person.getId().value.equals(
+                            identifier))
+                    .findFirst()
+                    .orElse(null);
 
-        if (targetPerson == null) {
-            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            if (targetPerson == null) {
+                throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+            }
+
+
+            Optional<Attendance> existingAttendance = targetPerson.getAttendanceForCurrentWeek();
+
+            if (existingAttendance.isPresent()) {
+                // Modify the existing attendance record
+                Attendance attendance = existingAttendance.get();
+                attendance.setAttendance(isPresent);
+                successMessage.append(String.format(MESSAGE_UPDATED_SUCCESS + "%s\n", targetPerson.getName()));
+
+            } else {
+                // Add a new attendance record for the current week
+                Attendance newAttendance = new Attendance(date, isPresent);
+                targetPerson.addAttendance(newAttendance);
+                successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n", targetPerson.getName()));
+            }
         }
 
-
-        Optional<Attendance> existingAttendance = targetPerson.getAttendanceForCurrentWeek();
-
-        if (existingAttendance.isPresent()) {
-            // Modify the existing attendance record
-            Attendance attendance = existingAttendance.get();
-            attendance.setAttendance(isPresent);
-            return new CommandResult(String.format(MESSAGE_UPDATED_SUCCESS + "%s", targetPerson.getName()));
-
-        } else {
-            // Add a new attendance record for the current week
-            Attendance newAttendance = new Attendance(date, isPresent);
-            targetPerson.addAttendance(newAttendance);
-            return new CommandResult(String.format(MESSAGE_SUCCESS + "%s", targetPerson.getName()));
-        }
+        return new CommandResult(successMessage.toString());
     }
 
     @Override
@@ -85,7 +91,7 @@ public class MarkAttendanceCommand extends Command {
         }
 
         MarkAttendanceCommand otherMarkAttendanceCommand = (MarkAttendanceCommand) other;
-        return identifier.equals(otherMarkAttendanceCommand.identifier)
+        return identifiers.equals(otherMarkAttendanceCommand.identifiers)
                 && isPresent == otherMarkAttendanceCommand.isPresent
                 && date.equals(otherMarkAttendanceCommand.date);
     }

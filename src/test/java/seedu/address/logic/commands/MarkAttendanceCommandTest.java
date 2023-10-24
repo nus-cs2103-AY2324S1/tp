@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_UPDATED
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,9 +39,10 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceWithValidPersonName_success() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("Amy Bee", true, LocalDate.now());
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee"), true,
+                LocalDate.now());
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s", amy.getName());
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n", amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(LocalDate.now(), true)).build();
         expectedModel.addPerson(expectedAmy);
@@ -55,9 +57,10 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceWithValidPersonID_success() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("A1234567E", true, LocalDate.now());
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
+                LocalDate.now());
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s", amy.getName());
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n", amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(LocalDate.now(), true)).build();
         expectedModel.addPerson(expectedAmy);
@@ -72,7 +75,8 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceWithInvalidPersonName_failure() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("Bobby", true, LocalDate.now());
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Bobby"), true,
+                LocalDate.now());
 
         assertCommandFailure(markAttendanceCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
@@ -84,7 +88,8 @@ public class MarkAttendanceCommandTest {
     public void execute_marksAttendanceWithInvalidPersonID_failure() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("A1234555E", true, LocalDate.now());
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234555E"), true,
+                LocalDate.now());
 
         assertCommandFailure(markAttendanceCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
@@ -97,9 +102,10 @@ public class MarkAttendanceCommandTest {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
         amy.addAttendance(new Attendance(LocalDate.now(), false));
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("A1234567E", true, LocalDate.now());
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
+                LocalDate.now());
 
-        String expectedMessage = String.format(MESSAGE_UPDATED_SUCCESS + "%s", amy.getName());
+        String expectedMessage = String.format(MESSAGE_UPDATED_SUCCESS + "%s\n", amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(LocalDate.now(), true)).build();
         expectedModel.addPerson(expectedAmy);
@@ -113,9 +119,10 @@ public class MarkAttendanceCommandTest {
     public void execute_personWithoutExistingAttendance_addsAttendance() {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand("A1234567E", true, LocalDate.now());
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
+            LocalDate.now());
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s", amy.getName());
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n", amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(LocalDate.now(), true)).build();
         expectedModel.addPerson(expectedAmy);
@@ -128,15 +135,16 @@ public class MarkAttendanceCommandTest {
     @Test
     public void equals() {
 
-        MarkAttendanceCommand markAmyAttendanceFirstCommand = new MarkAttendanceCommand("Amy Bee", true,
+        MarkAttendanceCommand markAmyAttendanceFirstCommand = new MarkAttendanceCommand(List.of("Amy Bee"), true,
                 LocalDate.now());
-        MarkAttendanceCommand markBobAttendanceCommand = new MarkAttendanceCommand("Bob", false, LocalDate.now());
+        MarkAttendanceCommand markBobAttendanceCommand = new MarkAttendanceCommand(List.of("Bob"), false,
+                LocalDate.now());
 
         // same object -> returns true
         assertEquals(markAmyAttendanceFirstCommand, markAmyAttendanceFirstCommand);
 
         // same values -> returns true
-        MarkAttendanceCommand markAmyAttendanceFirstCommandCopy = new MarkAttendanceCommand("Amy Bee", true,
+        MarkAttendanceCommand markAmyAttendanceFirstCommandCopy = new MarkAttendanceCommand(List.of("Amy Bee"), true,
                 LocalDate.now());
         assertEquals(markAmyAttendanceFirstCommand, markAmyAttendanceFirstCommandCopy);
 
