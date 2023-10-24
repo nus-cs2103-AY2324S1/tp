@@ -44,5 +44,4 @@ class JsonAdaptedGroup {
         }
         return new Group(groupName);
     }
-
 }

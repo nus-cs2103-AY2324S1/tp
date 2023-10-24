@@ -1,13 +1,21 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * An UI component that displays information of an {@code Event}.
@@ -45,7 +53,7 @@ public class EventCard extends UiPart<Region> {
     /**
      * Creates an {@code EventCode} with the given {@code Event} and index to display.
      */
-    public EventCard(Event event, int displayedIndex) {
+    public EventCard(ObservableList<Person> personList, Event event, int displayedIndex) {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
@@ -57,8 +65,16 @@ public class EventCard extends UiPart<Region> {
         event.getNames().stream()
                 .sorted(Comparator.comparing(name -> name.fullName))
                 .forEach(name -> names.getChildren().add(new Label(name.fullName)));
-        event.getGroups().stream()
-                .sorted(Comparator.comparing(group -> group.groupName))
-                .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
+        event.getGroups().stream().sorted(Comparator.comparing(Group::getGroupName))
+                .forEach(group -> {
+                    groups.getChildren().add(new Label(group.getGroupName()));
+                    personList.stream().forEach(person -> {
+                        if (person.getGroups().contains(group)) {
+                            Label newLabel = new Label(person.getName().toString());
+                            newLabel.setId("groupPersonName");
+                            groups.getChildren().add(newLabel);
+                        }
+                    });
+                });
     }
 }

@@ -94,7 +94,6 @@ public class UniquePersonList implements Iterable<Person> {
         if (!personsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
-
         internalList.setAll(persons);
     }
 

@@ -1,5 +1,9 @@
 package seedu.address.model.group;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -13,6 +17,8 @@ public class Group {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String groupName;
+
+//    public final ObservableList<Person> persons = FXCollections.observableArrayList();
 
     /**
      * Constructs a {@code Group}.

@@ -135,6 +135,8 @@ public class ModelManager implements Model {
         this.addressBook.deleteEvent(target);
     }
 
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -200,7 +202,7 @@ public class ModelManager implements Model {
     public void updateAssignedPersons(Person personToEdit, Person editedPerson) {
         for (Event event : this.events) {
             if (event.getNames().contains(personToEdit.getName())) {
-                setEvent(event, createUpdatedEvent(event, personToEdit, editedPerson));
+                this.setEvent(event, createUpdatedEvent(event, personToEdit, editedPerson));
                 event.getNames().add(editedPerson.getName());
             }
         }
@@ -217,15 +219,12 @@ public class ModelManager implements Model {
     }
 
     private Event createUpdatedEvent(Event event, Person personToEdit, Person editedPerson) {
-
         //add other switch statements for future event types
-        switch (event.getEventType().toString()) {
-        default:
-            return new Meeting(event.getName(), event.getStartDate(),
-                    Optional.of(event.getStartTime()), Optional.of(event.getEndTime()),
-                    event.getUpdatedNames(personToEdit.getName(), editedPerson.getName()),
-                    event.getGroups());
-        }
+        event.getEventType().toString();
+        return new Meeting(event.getName(), event.getStartDate(),
+                Optional.of(event.getStartTime()), Optional.of(event.getEndTime()),
+                event.getUpdatedNames(personToEdit.getName(), editedPerson.getName()),
+                event.getGroups());
     }
 
     private boolean checkNameExists(Name name) {

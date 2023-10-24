@@ -96,29 +96,62 @@ public class EditMeetingCommand extends Command {
                                              Model model) throws CommandException {
         assert meetingToEdit != null;
 
+        // All attributes are optional, so if they are not present, use the original values
         EventName updatedName = editMeetingDescriptor.getName().orElse(meetingToEdit.getName());
         EventDate updatedDate = editMeetingDescriptor.getDate().orElse(meetingToEdit.getStartDate());
         EventTime updatedStartTime = editMeetingDescriptor.getStartTime().orElse(meetingToEdit.getStartTime());
         EventTime updatedEndTime = editMeetingDescriptor.getEndTime().orElse(meetingToEdit.getEndTime());
 
-
+        // Edit persons
         Set<Name> updatedPersonNames;
+        updatedPersonNames = handleEditAssignPersons(meetingToEdit, editMeetingDescriptor, model);
+        handleEditUnassignPersons(meetingToEdit, editMeetingDescriptor, model, updatedPersonNames);
+
+        // Editing groups
         Set<Group> updatedGroups;
+        updatedGroups = handleEditAssignGroups(meetingToEdit, editMeetingDescriptor, model);
+        handleEditUnassignGroups(meetingToEdit, editMeetingDescriptor);
 
-        if (editMeetingDescriptor.getAssignedPersons().isPresent()) {
+        return new Meeting(updatedName, updatedDate,
+                Optional.of(updatedStartTime), Optional.of(updatedEndTime), updatedPersonNames, updatedGroups);
+    }
 
-            Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getAssignedPersons().get());
+    private static void handleEditUnassignGroups(Event meetingToEdit, EditMeetingDescriptor editMeetingDescriptor)
+                throws CommandException {
+        if (editMeetingDescriptor.getUnassignGroups().isPresent()) {
+            if (!meetingToEdit.getGroups().containsAll(editMeetingDescriptor.getUnassignGroups().get())) {
 
-            if (!invalidNames.isEmpty()) {
-                throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
-                        listInvalidNames(invalidNames)));
+                Set<Group> invalidUnassignGroups = findInvalidUnassignGroups(meetingToEdit,
+                        editMeetingDescriptor.getUnassignGroups().get());
+
+                //case where the groups to be unassigned have not even been previously assigned
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_UNASSIGN_GROUP,
+                        listInvalidGroups(invalidUnassignGroups)));
+            }
+            meetingToEdit.getGroups().removeAll(editMeetingDescriptor.getUnassignGroups().get());
+        }
+    }
+
+    private static Set<Group> handleEditAssignGroups(Event meetingToEdit, EditMeetingDescriptor editMeetingDescriptor,
+                Model model) throws CommandException {
+        Set<Group> updatedGroups;
+        if (editMeetingDescriptor.getGroups().isPresent()) {
+
+            Set<Group> invalidGroups = model.findInvalidGroups(editMeetingDescriptor.getGroups().get());
+
+            if (!invalidGroups.isEmpty()) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_GROUP,
+                        listInvalidGroups(invalidGroups)));
             }
 
-            //add the new persons to the existing list of persons
-            meetingToEdit.getNames().addAll(editMeetingDescriptor.getAssignedPersons().get());
+            meetingToEdit.getGroups().addAll(editMeetingDescriptor.getGroups().get());
         }
-        updatedPersonNames = meetingToEdit.getNames();
+        updatedGroups = meetingToEdit.getGroups();
+        return updatedGroups;
+    }
 
+    private static void handleEditUnassignPersons(Event meetingToEdit, EditMeetingDescriptor editMeetingDescriptor,
+              Model model, Set<Name> updatedPersonNames) throws CommandException {
         if (editMeetingDescriptor.getUnassignedPersons().isPresent()) {
             Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getUnassignedPersons().get());
 
@@ -138,35 +171,25 @@ public class EditMeetingCommand extends Command {
             updatedPersonNames.removeAll(editMeetingDescriptor.getUnassignedPersons().get());
         }
         // no persons to be unassigned, do nothing
+    }
 
-        // Editing groups
-        if (editMeetingDescriptor.getGroups().isPresent()) {
+    private static Set<Name> handleEditAssignPersons(Event meetingToEdit, EditMeetingDescriptor editMeetingDescriptor,
+                Model model) throws CommandException {
+        Set<Name> updatedPersonNames;
+        if (editMeetingDescriptor.getAssignedPersons().isPresent()) {
 
-            Set<Group> invalidGroups = model.findInvalidGroups(editMeetingDescriptor.getGroups().get());
+            Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getAssignedPersons().get());
 
-            if (!invalidGroups.isEmpty()) {
-                throw new CommandException(String.format(Messages.MESSAGE_INVALID_GROUP,
-                        listInvalidGroups(invalidGroups)));
+            if (!invalidNames.isEmpty()) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
+                        listInvalidNames(invalidNames)));
             }
 
-            meetingToEdit.getGroups().addAll(editMeetingDescriptor.getGroups().get());
+            //add the new persons to the existing list of persons
+            meetingToEdit.getNames().addAll(editMeetingDescriptor.getAssignedPersons().get());
         }
-        updatedGroups = meetingToEdit.getGroups();
-
-        if (editMeetingDescriptor.getUnassignGroups().isPresent()) {
-            if (!meetingToEdit.getGroups().containsAll(editMeetingDescriptor.getUnassignGroups().get())) {
-
-                Set<Group> invalidUnassignGroups = findInvalidUnassignGroups(meetingToEdit,
-                        editMeetingDescriptor.getUnassignGroups().get());
-
-                //case where the groups to be unassigned have not even been previously assigned
-                throw new CommandException(String.format(Messages.MESSAGE_INVALID_UNASSIGN_GROUP,
-                        listInvalidGroups(invalidUnassignGroups)));
-            }
-            meetingToEdit.getGroups().removeAll(editMeetingDescriptor.getUnassignGroups().get());
-        }
-        return new Meeting(updatedName, updatedDate,
-                Optional.of(updatedStartTime), Optional.of(updatedEndTime), updatedPersonNames, updatedGroups);
+        updatedPersonNames = meetingToEdit.getNames();
+        return updatedPersonNames;
     }
 
     private static Set<Name> findInvalidUnassignNames(Event meetingToEdit, Set<Name> unassignNames) {

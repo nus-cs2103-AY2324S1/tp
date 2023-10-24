@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -9,6 +12,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
 
 /**
  * Panel containing the list of events.
@@ -20,11 +25,14 @@ public class EventListPanel extends UiPart<Region> {
     @FXML
     private ListView<Event> eventListView;
 
+    private ObservableList<Person> personList;
+
     /**
      * Creates a {@code EventListPanel} with the given {@code ObservableList}.
      */
-    public EventListPanel(ObservableList<Event> eventList) {
+    public EventListPanel(ObservableList<Event> eventList, ObservableList<Person> personList) {
         super(FXML);
+        this.personList = personList;
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
     }
@@ -41,7 +49,7 @@ public class EventListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(event, getIndex() + 1).getRoot());
+                setGraphic(new EventCard(personList, event, getIndex() + 1).getRoot());
             }
         }
     }
