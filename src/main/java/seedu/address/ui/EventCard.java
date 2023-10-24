@@ -39,6 +39,8 @@ public class EventCard extends UiPart<Region> {
     private Label start_time;
     @FXML
     private Label end_time;
+    @FXML
+    private Label name;
 
 
     /**
@@ -48,6 +50,7 @@ public class EventCard extends UiPart<Region> {
         super(FXML);
         this.event = event;
         description.setText(event.getDescription());
+        name.setText(event.getPerson().getName().fullName);
         start_time.setText(event.getStart_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
         end_time.setText(event.getEnd_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
     }
