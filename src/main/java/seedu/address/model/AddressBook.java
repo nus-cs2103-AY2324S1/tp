@@ -71,6 +71,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.contains(person);
     }
+
+    /**
+     * Checks if the addressbook contains the given person based on their name.
+     *
+     * @param name the name
+     * @return the boolean
+     */
     public boolean hasPerson(Name name) {
         requireNonNull(name);
         return persons.contains(name);

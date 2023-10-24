@@ -1,12 +1,10 @@
 package seedu.address.logic.parser;
 
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAMNAME;
 
 import java.util.List;
 import java.util.stream.Stream;
-
 
 import seedu.address.logic.commands.EditTeamNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;

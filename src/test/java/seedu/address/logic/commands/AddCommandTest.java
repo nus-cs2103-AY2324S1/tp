@@ -18,11 +18,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.*;
+import seedu.address.model.person.IdentityCode;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.team.Team;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -114,8 +114,18 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getTeamBookFilePath() {
+            return null;
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTeamBookFilePath(Path teamBookFilePath) {
+
         }
 
         @Override
@@ -129,12 +139,42 @@ public class AddCommandTest {
         }
 
         @Override
+        public void clearAddressBook() {
+
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPerson(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPersonByName(Name name) {
+            return null;
+        }
+
+        @Override
+        public IdentityCode getIdentityCodeByName(Name developerName) {
+            return null;
+        }
+
+        @Override
+        public Name getNameByIdentityCode(IdentityCode developerID) {
+            return null;
+        }
+
+        @Override
+        public boolean invalidAddToTeam(String teamToAddTo) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -156,6 +196,81 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToTeam(String teamToAddTo, Name devToAdd) {
+
+        }
+
+        @Override
+        public void setTeamBook(ReadOnlyTeamBook teamBook) {
+
+        }
+
+        @Override
+        public ReadOnlyTeamBook getTeamBook() {
+            return null;
+        }
+
+        @Override
+        public boolean hasTeam(String teamName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTeam(String teamName) {
+
+        }
+
+        @Override
+        public void addTeam(Team team) {
+
+        }
+
+        @Override
+        public boolean isLeaderOfTeam(String teamName, Name devToBeAdded) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteDeveloperFromTeam(String teamName, IdentityCode developerIdentityCOde) {
+
+        }
+
+        @Override
+        public boolean personAlreadyInTeam(String teamToAddTo, Name devToAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void editTeamName(String originalTeamName, String newTeamName) {
+
+        }
+
+        @Override
+        public Name getTeamLeaderOfTeam(String teamName) {
+            return null;
+        }
+
+        @Override
+        public IdentityCode getTeamLeaderIdOfTeam(String teamName) {
+            return null;
+        }
+
+        @Override
+        public void setTeamLeaderOfTeam(String teamName, IdentityCode newTeamLeaderID) {
+
+        }
+
+        @Override
+        public ObservableList<Team> getFilteredTeamList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredTeamList(Predicate<Team> predicate) {
+
         }
     }
 

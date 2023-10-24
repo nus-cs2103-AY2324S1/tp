@@ -2,14 +2,12 @@ package seedu.address.logic.parser;
 
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAMLEADER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAMNAME;
 
 import java.util.stream.Stream;
 
-
 import seedu.address.logic.commands.EditTeamLeaderCommand;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
@@ -30,7 +28,8 @@ public class EditTeamLeaderCommandParser implements Parser<EditTeamLeaderCommand
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TEAMNAME, PREFIX_TEAMLEADER)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTeamLeaderCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditTeamLeaderCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TEAMNAME, PREFIX_TEAMLEADER);
