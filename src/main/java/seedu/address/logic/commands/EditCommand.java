@@ -106,7 +106,7 @@ public class EditCommand extends Command {
 
 
         Person person = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
-        person = new PersonCreator(person).withLead(updatedLead.toString()).build();
+        person = new PersonCreator(person).withLead(updatedLead).build();
         return person;
     }
 

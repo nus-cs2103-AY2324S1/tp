@@ -115,7 +115,8 @@ class JsonAdaptedPerson {
 
         Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
         if (lead != null && !lead.isEmpty()) {
-            person = new PersonCreator(person).withLead(lead).build();
+            final Lead modelLead = new Lead(lead);
+            person = new PersonCreator(person).withLead(modelLead).build();
         }
         return person;
     }

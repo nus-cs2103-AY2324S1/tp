@@ -5,7 +5,6 @@ import java.util.Set;
 
 import seedu.address.model.lead.Lead;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -44,32 +43,32 @@ public class PersonCreator {
     /**
      * Sets the {@code Telegram} of the {@code Person} that we are building.
      */
-    public PersonCreator withTelegram(String telegramHandle) {
-        this.telegram = new TelegramHandle(telegramHandle);
+    public PersonCreator withTelegram(TelegramHandle telegramHandle) {
+        this.telegram = telegramHandle;
         return this;
     }
 
     /**
      * Parses the {@code Profession} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonCreator withProfession(String profession) {
-        this.profession = new Profession(profession);
+    public PersonCreator withProfession(Profession profession) {
+        this.profession = profession;
         return this;
     }
 
     /**
      * Sets the {@code Income} of the {@code Person} that we are building.
      */
-    public PersonCreator withIncome(Number income) {
-        this.income = new Income(income);
+    public PersonCreator withIncome(Income income) {
+        this.income = income;
         return this;
     }
 
     /**
      * Sets the {@code Details} of the {@code Person} that we are building.
      */
-    public PersonCreator withDetails(String details) {
-        this.details = new Details(details);
+    public PersonCreator withDetails(Details details) {
+        this.details = details;
         return this;
     }
 
@@ -77,16 +76,16 @@ public class PersonCreator {
      * Parses the {@code interactions} into a {@code Set<Interaction>}
      * and set it to the {@code Person} that we are building.
      */
-    public PersonCreator withInteraction(String ... interaction) {
-        this.interactions = SampleDataUtil.getInteractionSet(interaction);
+    public PersonCreator withInteractions(Set<Interaction> interactions) {
+        this.interactions = interactions;
         return this;
     }
 
     /**
      * Parses the {@code lead} of the {@code Lead} that we are building.
      */
-    public PersonCreator withLead(String lead) {
-        this.lead = new Lead(lead);
+    public PersonCreator withLead(Lead lead) {
+        this.lead = lead;
         return this;
     }
 
@@ -97,8 +96,7 @@ public class PersonCreator {
      */
     public Person build() {
         Person person = new Person(name, phone, email, address, tags, telegram,
-                profession, income, details, lead);
-        person.addInteractions(interactions);
+                profession, income, details, lead, interactions);
         return person;
     }
 

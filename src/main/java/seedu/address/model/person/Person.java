@@ -56,7 +56,7 @@ public class Person {
      * Same constructor but with optional fields.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, TelegramHandle telegram,
-                  Profession profession, Income income, Details details, Lead lead) {
+                  Profession profession, Income income, Details details, Lead lead, Set<Interaction> interactions) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -69,6 +69,7 @@ public class Person {
         this.income = income;
         this.details = details;
         this.lead = lead;
+        this.interactions.addAll(interactions);
     }
 
     public Name getName() {
