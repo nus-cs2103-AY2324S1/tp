@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -137,10 +137,13 @@ public class Person {
         return result.toString();
     }
 
-    public boolean isSameAppointmentDate(LocalDateTime date) {
+    public boolean isSameAppointmentDate(LocalDate date) {
         return appointment.isSameDate(date);
     }
 
+    /**
+     * Creates the same {@code Person} with a NullAppointment object.
+     */
     public Person clearAppointment() {
         return new Person(name, phone, email, address, nextOfKinName,
                 nextOfKinPhone, financialPlans,

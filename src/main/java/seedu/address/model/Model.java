@@ -1,7 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -106,5 +106,5 @@ public interface Model {
      */
     String gatherEmails(GatherEmailPrompt prompt);
 
-    void clearAppointments(LocalDateTime date);
+    void clearAppointments(LocalDate date);
 }

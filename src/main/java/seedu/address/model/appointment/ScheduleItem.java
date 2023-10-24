@@ -1,6 +1,6 @@
 package seedu.address.model.appointment;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * Abstract class representing schedule item.
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  * schedule items are compared.
  */
 public abstract class ScheduleItem implements Comparable<ScheduleItem> {
-    public abstract boolean isSameDate(LocalDateTime date);
+    public abstract boolean isSameDate(LocalDate date);
     @Override
     public abstract int compareTo(ScheduleItem scheduleItem);
 }

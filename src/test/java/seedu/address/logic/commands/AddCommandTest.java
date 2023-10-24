@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -174,6 +175,11 @@ public class AddCommandTest {
 
         @Override
         public String gatherEmails(GatherEmailPrompt prompt) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAppointments(LocalDate date) {
             throw new AssertionError("This method should not be called.");
         }
     }

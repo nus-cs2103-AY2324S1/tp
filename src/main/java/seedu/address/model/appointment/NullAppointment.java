@@ -1,6 +1,6 @@
 package seedu.address.model.appointment;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * An empty Appointment Object to represent Appointments that have not been made.
@@ -36,7 +36,7 @@ public class NullAppointment extends ScheduleItem implements Comparable<Schedule
     }
 
     @Override
-    public boolean isSameDate(LocalDateTime date) {
+    public boolean isSameDate(LocalDate date) {
         return false;
     }
 }

@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
@@ -26,7 +28,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Input Date should be in format of dd-MM-yyyy";
+    public static final String MESSAGE_INVALID_DATE = "Please input a valid Date";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -128,7 +131,6 @@ public class ParserUtil {
         return new NextOfKinPhone(trimmedNokPhone);
     }
 
-
     /**
      * Parses a {@code String financialPlan} into a {@code FinancialPlan}.
      * Leading and trailing whitespaces will be trimmed.
@@ -189,18 +191,29 @@ public class ParserUtil {
         return new Appointment(trimmedAppointmentName, appointmentDate);
     }
 
-    public static LocalDateTime parseDate(String date) throws ParseException{
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Appointment.isValidDateFormat(trimmedDate)) {
-            throw new ParseException(Appointment.MESSAGE_DATE_CONSTRAINTS);
+
+        String dateValidation = "\\d{2}-\\d{2}-\\d{4}";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+
+        if (!trimmedDate.matches(dateValidation)) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
 
-        LocalDateTime appointmentDate;
+        LocalDate appointmentDate;
         try {
-            appointmentDate = Appointment.parseAppointmentDate(date);
+            appointmentDate = LocalDate.parse(date, dateFormatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
+            throw new ParseException(MESSAGE_INVALID_DATE);
         }
 
         return appointmentDate;

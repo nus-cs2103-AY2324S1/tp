@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
@@ -115,7 +115,10 @@ public class UniquePersonList implements Iterable<Person> {
         return emails.toString().trim();
     };
 
-    public void clearAppointments(LocalDateTime date) {
+    /**
+     * Clears all appointments of {@code Person} in {@code persons} that match the given {@code LocalDate date}.
+     */
+    public void clearAppointments(LocalDate date) {
         for (Person person: internalList) {
             if (person.isSameAppointmentDate(date)) {
                 setPerson(person, person.clearAppointment());

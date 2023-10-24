@@ -2,10 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
-// import java.time.LocalDateTime;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
@@ -103,7 +102,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.gatherEmails(prompt);
     };
 
-    public void clearAppointments(LocalDateTime date) {
+    public void clearAppointments(LocalDate date) {
         persons.clearAppointments(date);
     }
 
