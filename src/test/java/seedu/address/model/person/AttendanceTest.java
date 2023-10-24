@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -57,24 +56,6 @@ public class AttendanceTest {
         Attendance attendance = new Attendance(new Week(1), true);
         attendance.setAttendance(false);
         assertFalse(attendance.isPresent());
-    }
-
-    /**
-     * Tests if two dates in the same week are correctly identified as being in the same week.
-     */
-    @Test
-    public void isSameWeek_sameWeek_true() {
-        Attendance attendance = new Attendance(LocalDate.of(2023, 10, 10), true);
-        assertTrue(attendance.isSameWeek(LocalDate.of(2023, 10, 12)));
-    }
-
-    /**
-     * Tests if two dates in different weeks are correctly identified as not being in the same week.
-     */
-    @Test
-    public void isSameWeek_differentWeek_false() {
-        Attendance attendance = new Attendance(LocalDate.of(2023, 10, 10), true);
-        assertFalse(attendance.isSameWeek(LocalDate.of(2023, 10, 17)));
     }
 
     /**

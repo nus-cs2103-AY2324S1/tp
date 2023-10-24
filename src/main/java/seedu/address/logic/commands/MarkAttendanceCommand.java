@@ -52,13 +52,13 @@ public class MarkAttendanceCommand extends Command {
     /**
      * Constructs a MarkAttendanceCommand to mark the specified student's attendance as absent.
      *
-     * @param identifier The student's name or ID.
+     * @param identifiers The student's name or ID.
      * @param isPresent The attendance status.
      * @param week The week of the attendance.
      * @param reason The reason why the student is absent.
      */
-    public MarkAttendanceCommand(String identifier, boolean isPresent, Week week, String reason) {
-        this.identifier = identifier;
+    public MarkAttendanceCommand(List<String> identifiers, boolean isPresent, Week week, String reason) {
+        this.identifiers = identifiers;
         this.isPresent = isPresent;
         this.week = week;
         this.reason = reason;
@@ -83,11 +83,11 @@ public class MarkAttendanceCommand extends Command {
                 throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
             }
 
-            Optional<Attendance> existingAttendance = targetPerson.getAttendanceForCurrentWeek();
+            Optional<Attendance> existingAttendance = targetPerson.getAttendanceForSpecifiedWeek(week);
 
             if (existingAttendance.isPresent()) {
                 // Modify the existing attendance record
-                Attendance attendance = existingAttendance.get();
+                attendance = existingAttendance.get();
                 attendance.setAttendance(isPresent);
                 successMessage.append(String.format(MESSAGE_UPDATED_SUCCESS + "%s\n", targetPerson.getName()));
 
@@ -98,13 +98,15 @@ public class MarkAttendanceCommand extends Command {
                 } else {
                     attendance = new Attendance(week, false, reason);
                 }
-                targetPerson.addAttendance(newAttendance);
-              
+
+                targetPerson.addAttendance(attendance);
+
                 if (attendance.isPresent()) {
                     successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "%d",
                             targetPerson.getName(), targetPerson.getName(), attendance.getWeek().getWeekNumber()));
                 } else {
-                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT + "%d\nReason: %s",
+                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT
+                                    + "%d\nReason: %s",
                             targetPerson.getName(), targetPerson.getName(), attendance.getWeek().getWeekNumber(),
                             attendance.getReason()));
                 }

@@ -31,7 +31,7 @@ public class MarkAttendanceCommandParserTest {
     @Test
     public void parse_validArgsWithName_returnsMarkAttendanceCommand() {
         String userInput = " /name " + VALID_NAME_AMY + " /attendance 1 /week 1";
-        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_NAME_AMY, true, new Week(1));
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_NAME_AMY), true, new Week(1));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -41,7 +41,7 @@ public class MarkAttendanceCommandParserTest {
     @Test
     public void parse_validArgsWithId_returnsMarkAttendanceCommand() {
         String userInput = " /id " + VALID_ID_AMY + " /attendance 1" + " /week 1";
-        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_ID_AMY, true, new Week(1));
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_ID_AMY), true, new Week(1));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -61,9 +61,11 @@ public class MarkAttendanceCommandParserTest {
      */
     @Test
     public void parse_validArgsWithMultipleIds_returnsMarkAttendanceCommand() {
-        String userInput = " /id " + VALID_ID_AMY + "," + VALID_ID_BOB + " /attendance 0 /week 1";
+        String reasonForAbsence = "Late";
+        String userInput = " /id " + VALID_ID_AMY + "," + VALID_ID_BOB + " /attendance 0 /week 1 /reason "
+                + reasonForAbsence;
         MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_ID_AMY, VALID_ID_BOB), false,
-                new Week(1));
+                new Week(1), reasonForAbsence);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
