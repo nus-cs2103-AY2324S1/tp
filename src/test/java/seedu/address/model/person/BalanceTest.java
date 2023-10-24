@@ -1,9 +1,13 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceTest {
 
@@ -86,7 +90,7 @@ class BalanceTest {
     }
 
     @Test
-    void toDollarString_() {
+    void toDollarString() {
         assertEquals("$0.00", defaultBalance.toDollarString());
         assertEquals("$10.00", new Balance(1000).toDollarString());
         assertEquals("$10.50", new Balance(1050).toDollarString());
