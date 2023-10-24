@@ -1,9 +1,14 @@
 package seedu.ccacommander.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventDate;
 import seedu.ccacommander.model.event.Location;
 import seedu.ccacommander.model.shared.Name;
+import seedu.ccacommander.model.tag.Tag;
+import seedu.ccacommander.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Events objects.
@@ -17,6 +22,7 @@ public class EventBuilder {
     private Name name;
     private EventDate date;
     private Location location;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code EventBuilder} with the default details.
@@ -25,6 +31,7 @@ public class EventBuilder {
         name = new Name(DEFAULT_EVENT_NAME);
         date = new EventDate(DEFAULT_EVENT_DATE);
         location = new Location(DEFAULT_LOCATION);
+        tags = new HashSet<>();
     }
 
     /**
@@ -34,6 +41,7 @@ public class EventBuilder {
         name = eventToCopy.getName();
         date = eventToCopy.getDate();
         location = eventToCopy.getLocation();
+        tags = new HashSet<>(eventToCopy.getTags());
     }
 
     /**
@@ -61,9 +69,16 @@ public class EventBuilder {
     }
 
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Member} that we are building.
+     */
+    public EventBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
 
     public Event build() {
-        return new Event(name, date, location);
+        return new Event(name, date, location, tags);
     }
 
 }

@@ -12,6 +12,7 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.NAME_DESC_AURORA
 import static seedu.ccacommander.logic.commands.CommandTestUtil.NAME_DESC_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.TAGS_DESC_AURORA;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_DATE_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOXING;
@@ -41,7 +42,8 @@ public class CreateEventCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser,
-                PREAMBLE_WHITESPACE + NAME_DESC_AURORA + LOCATION_DESC_AURORA + DATE_DESC_AURORA,
+                PREAMBLE_WHITESPACE + NAME_DESC_AURORA + LOCATION_DESC_AURORA + DATE_DESC_AURORA
+                        + TAGS_DESC_AURORA,
                 new CreateEventCommand(expectedEvent));
     }
 
