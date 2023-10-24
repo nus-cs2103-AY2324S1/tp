@@ -136,7 +136,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidCourses_throwsIllegalValueException() {
         List<JsonAdaptedCourse> invalidCourses = new ArrayList<>(VALID_COURSES);
-        invalidCourses.add(new JsonAdaptedCourse(Objects.requireNonNull(UniqueCourseList.findByCourseCode(INVALID_COURSE))));
+        invalidCourses.add(new JsonAdaptedCourse(Objects.requireNonNull(
+                UniqueCourseList.findByCourseCode(INVALID_COURSE))));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, VALID_TAGS,
                         VALID_FROM, VALID_TO, invalidCourses, VALID_HOUR);

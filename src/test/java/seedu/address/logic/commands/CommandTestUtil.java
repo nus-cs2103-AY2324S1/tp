@@ -75,7 +75,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TELEGRAM_DESC = " " + PREFIX_TELEGRAM; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE + "ABCD2100"; // Four character prefixes not allowed
+    public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE
+            + "ABCD2100"; // Four character prefixes not allowed
     public static final String INVALID_HOUR_DESC = " " + PREFIX_HOUR + "20000"; // Hour is out of range
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

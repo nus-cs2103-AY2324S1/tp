@@ -1,20 +1,20 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_CS1231;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.FROM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HOUR_DESC_FIVE;
 import static seedu.address.logic.commands.CommandTestUtil.HOUR_DESC_SIXTY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COURSE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOUR_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_COURSE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_CS1231;
-import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -26,11 +26,11 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TO_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_FIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_SIXTY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -80,8 +80,10 @@ public class AddCommandParserTest {
                 .withCourses(VALID_COURSE_CS1231, VALID_COURSE_CS2103T).withHour(VALID_HOUR_SIXTY)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TELEGRAM_DESC_BOB + FROM_DESC_BOB + TO_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + COURSE_DESC_CS1231 + COURSE_DESC_CS2103T + HOUR_DESC_SIXTY,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + TELEGRAM_DESC_BOB + FROM_DESC_BOB + TO_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + COURSE_DESC_CS1231
+                        + COURSE_DESC_CS2103T + HOUR_DESC_SIXTY,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -211,8 +213,9 @@ public class AddCommandParserTest {
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + COURSE_DESC_CS1231 + HOUR_DESC_FIVE, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_TELEGRAM_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + COURSE_DESC_CS1231 + HOUR_DESC_FIVE, Telegram.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + INVALID_TELEGRAM_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                + COURSE_DESC_CS1231 + HOUR_DESC_FIVE, Telegram.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TELEGRAM_DESC_BOB
