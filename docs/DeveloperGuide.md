@@ -274,26 +274,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​    | I want to …​                                 | So that I can…​                                                                      |
 |----------|------------|----------------------------------------------|--------------------------------------------------------------------------------------|
-| `* * *`  | counsellor | add student profile                          | keep track of each student's information                                             |
-| `* * *`  | counsellor | set student risk profile                     | monitor the risk profile of each student                                             |
-| `* * *`  | counsellor | delete student notes                         | remove student in the event they do not require any further consultation             |
-| `* * *`  | counsellor | view student notes                           | keep track of notes for future reference                                             |
-| `* *`    | counsellor | edit student notes                           | update student particulars should there be any changes                               |
+| `* * *`  | counsellor | add a student profile                        | keep track of each student's information                                             |
+| `* * `   | counsellor | set or edit a student's risk profile         | monitor the risk profile of each student                                             |
+| `* * *`  | counsellor | remove a student profile                     | remove student in the event they do not require any further consultation             |
+| `* * *`  | counsellor | view a student profile                       | look up a students relevant information, consultation notes etc.                     |
+| `* * *`  | counsellor | view all students as a list                  | look up all students that require consultation                                       |
+| `* *`    | counsellor | edit a student's profile                     | update student particulars should there be any changes                               |
+| `* *`    | counsellor | filter list by types of student              | look up students in particular categories                                            |
+| `* *`    | counsellor | find students by name or ID                  | look up particular students                                                          |
+| `* *`    | counsellor | schedule an appointment                      | keep track of my appointments in the application                                     |
+| `* *`    | counsellor | cancel an appointment                        | remove any appointments that have been cancelled                                     |
 | `* *`    | counsellor | view my appointments                         | look through my timetable for the day/week                                           |
-| `* *`    | counsellor | filter student notes                         | look up students in particular categories                                            |
-| `* *`    | counsellor | sort appointments by date                    | organise my appointments and plan my schedule accordingly                            |
+| `* *`    | counsellor | edit appointment info                        | plan my schedule accordingly if there are any last-minute changes                    |
+| `* *`    | counsellor | sort appointments by date                    | organise my appointments and plan my timetable accordingly                           |
 | `*`      | counsellor | block out busy times                         | prevent clashes in scheduling                                                        |
 | `*`      | counsellor | prevent double booking                       | prevent clashes in scheduling                                                        |
-| `* *`    | counsellor | set appointments                             | keep track of my appointments in the application                                     |
 | `*`      | counsellor | link students to the respective appointments | have easy access to the student profile that can help me prepare for the appointment |
-| `* *`    | counsellor | view appointment as a list                   | look at all my appointments at a glance to plan my schedule                          |
-| `* *`    | counsellor | edit appointment info                        | plan my schedule accordingly if there are any last-minute changes                    |
 | `*`      | counsellor | add todos items                              | keep track of todos for each student                                                 |
 | `*`      | counsellor | view todos items                             | view todos for students at a glance                                                  |
 | `*`      | counsellor | link todos items to students                 | have easy access to the contact information for the students                         |
 | `*`      | counsellor | sort todos items by dateline                 | organise my appointments and plan my schedule accordingly                            |
-| `* *`    | counsellor | search by name or ID                         | look up particular students                                                          |
-| `* *`    | counsellor | tag students                                 | highlight students with specific issues.                                             |
 
 ### Use cases
 
@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Use case ends.
 
 
-**Use case: Delete existing students #UC03**
+**Use case: Delete an existing student #UC03**
 
 **MSS**
 
@@ -379,13 +379,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case ends.
 
 
-**Use case: Add an appointment #UC05**
+**Use case: Schedule an appointment #UC05**
 
 **MSS**
 
 1.  User requests to list appointments
 2.  WellNUS shows the list of appointments, along with some basic information like time and student
-3.  User requests to add a new appointment to the list
+3.  User requests to schedule a new appointment to the list
 4.  WellNUS adds the appointment 
 5.  WellNUS shows confirmation message 
     
@@ -421,13 +421,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Delete existing appointment #UC07**
+**Use case: Cancel an existing appointment #UC07**
 
 **MSS**
 
 1.  User chooses to list appointments
 2.  WellNUS shows the list of appointments
-3.  User deletes an appointment at chosen index
+3.  User cancels an appointment at chosen index
 4.  WellNUS deletes the appointment with index specified by user and display status
 
     Use case ends.
@@ -437,6 +437,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. WellNUS detects an error in the entered index
 
     Use case resumes from step 1.
+
 
 **Use case: Tag student to appointment #UC08**
 
@@ -497,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Delete existing ToDos #UC11**
+**Use case: Delete an existing ToDo #UC11**
 
 **MSS**
 
@@ -556,7 +557,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  Usability and Efficiency:
     - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
     be able to perform the majority of tasks more quickly using _CLI_ commands compared to using a mouse on the _GUI_.
-    - The _CLI_ interface should prioritise efficiency by providing clear and concise commands, minimising unncessary prompts,
+    - The _CLI_ interface should prioritise efficiency by providing clear and concise commands, minimising unnecessary prompts,
     and offering time-saving shortcuts.
 4. Updates and Maintenance:
     - Updates should not disrupt the user's workflow or data.

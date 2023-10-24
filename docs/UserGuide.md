@@ -68,11 +68,11 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Add a student
+### Adding a student: `add`
 
 Adds a student with his/her relevant details.
 
-Format: `add n/<NAME> c/<CONTACT_NUMBER> a/<HOME_ADDRESS>`
+Format: `add n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS`
 
 **Parameters**:
 1. Name
@@ -87,13 +87,7 @@ Examples:
 * `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
 
 
-### View all students
-
-Shows a list of all students.
-
-Format: `view students`
-
-### Delete a student
+### Deleting a student: `delete`
 
 Deletes an existing student.
 
@@ -101,11 +95,10 @@ Format: `delete <INDEX>`
 
 **Parameters**:
 1. Appointment Index
-    - Index must be a number more than 0
+    - Index must be an integer more than 0
 
 
-
-### Tag student to risk level 
+### Assigning risk status to student (to be implemented)
 Tags a student with a risk level based on their current mental health status, categorizing them as high, medium, low tag_student <index> <RISK_LEVEL>
    
 Format: `tag_student <INDEX> <RISK_LEVEL>`
@@ -116,11 +109,11 @@ Format: `tag_student <INDEX> <RISK_LEVEL>`
 2. RISK LEVEL 
    - One of the following HIGH, MEDIUM, LOW
 
-### Add an appointment
+### Scheduling an appointment: `schedule`
 
-Adds a new appointment for a student.
+Schedules a new appointment for a student.
 
-Format: `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`
+Format: `schedule d/DESCRIPTION s/DATETIME n/STUDENT`
 
 **Parameters**:
 1. Date/Time of appointment
@@ -129,27 +122,31 @@ Format: `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`
     - Alphabetical characters only
 
 Examples:
-- `add appointment d/2023-12-31 16:30 n/Jon`
-- `add appointment d/18:30 n/Kiat`
+- `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon`
+- `schedule d/family issues consultation s/18:30 n/Kiat`
 
-### View all appointments 
+### Cancelling an appointment: `cancel`
 
-Shows a list of all appointments.
+Cancels an existing appointment.
 
-Format: `view appointments`
-
-### Delete an appointment 
-
-Deletes an existing appointment.
-
-Format: `delete appointment <INDEX>`
+Format: `cancel <INDEX>`
 
 **Parameters**:
 1. Appointment Index
     - Numerical characters only
 
 Examples:
-* `delete appointment 2`
+* `cancel 2`
+
+### Viewing all students/appointments: `view`
+
+Shows a list of all students or appointments, depending on specified input.
+
+Format: `view g/CATEGORY`
+
+**Parameters**:
+1. Category
+    - Only 'students' or 'appointments'
 
 ### Exiting the program : `exit`
 
@@ -189,17 +186,14 @@ _Details coming soon ..._
 
 ## Command summary 
 
-
-
-| Action                          | Format, Examples                                                                                                      |
-|---------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| **Add a student**               | `add n/<NAME> c/<PHONE_NUMBER> a/<ADDRESS>` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`       |
-| **View all students**           | `view students`                                                                                                       |
-| **Delete a student**            | `delete <INDEX>`<br> e.g., `delete 3`                                                                                 |
-| **Tag a student to risk level** | `tag_student <INDEX> <RISK_LEVEL>`<br> e.g.,`tag_student 4 HIGH`                                                      |
-| **Add an appointment**          | `add appointment d/<DATETIME_OF_APPOINMENT> n/<NAME_OF_STUDENT>`<br> e.g., `add appointment d/2023-12-31 16:30 n/Jon` |
-| **View all appointments**       | `view appointments`                                                                                                   |
-| **Delete an appointment**       | `delete appointment <INDEX>`<br> e.g., `delete appointment 3`                                                         |
-| **Help**                        | `help`                                                                                                                |
-| **Exit**                        | `exit`                                                                                                                |
+| Action                    | Format, Examples                                                                                                       |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------|
+| **Add**                   | `add n/NAME c/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`              |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
+| **Tag**                   | `tag_student INDEX RISK_LEVEL`<br> e.g.,`tag_student 4 HIGH`                                                           |
+| **Schedule**              | `schedule d/DESCRIPTION s/DATETIME n/NAME_OF_STUDENT`<br> e.g., `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon` |
+| **Cancel**                | `cancel INDEX`<br> e.g., `cancel 3`                                                                                    |
+| **View**                  | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                     |
+| **Help**                  | `help`                                                                                                                 |
+| **Exit**                  | `exit`                                                                                                                 |
 

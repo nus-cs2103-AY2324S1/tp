@@ -65,10 +65,8 @@ public class WellNus implements ReadOnlyWellNus {
      */
     public void resetData(ReadOnlyWellNus newData) {
         requireNonNull(newData);
-
         setStudents(newData.getStudentList());
         setAppointments(newData.getAppointmentList());
-
     }
 
     //// student-level operations
@@ -133,6 +131,7 @@ public class WellNus implements ReadOnlyWellNus {
     public void removeAppointment(Appointment key) {
         appointments.remove(key);
     }
+
     //// util methods
 
     @Override
