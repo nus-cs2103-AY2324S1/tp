@@ -70,6 +70,14 @@ public class EditCommandParserTest {
     }
 
     @Test
+    public void parse_multipleIndicesSpecified_failure() {
+        assertParseFailure(PARSER,
+                "1" + CommandTestUtil.VALID_PHONE_DESC + CommandTestUtil.VALID_INDEX_DESC
+                        + CommandTestUtil.VALID_INDEX_DESC,
+                String.format(Messages.MESSAGE_MUST_BE_PRESENT, CliSyntax.PREFIX_PHONE));
+    }
+
+    @Test
     public void parse_listItemFieldWithoutIndexSpecified_failure() {
         assertParseFailure(PARSER,
                 "1" + CommandTestUtil.VALID_PHONE_DESC,
