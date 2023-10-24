@@ -174,7 +174,7 @@ Format: `mark TUTORIAL_INDEX s/STUDENT_NUMBER`
 * The TUTORIAL_INDEX must be a valid positive integer.
 
 Examples:
-* `mark 1 s/A0249112A` 
+* `mark 1 s/A0249112A`
 
 ### Deleting a student : `delete`
 
@@ -226,7 +226,7 @@ Examples:
 
 ### Configuring Class Manager: `config`
 
-Configures Class Manager 2023 with the module information, such as tutorial count and assignment count. 
+Configures Class Manager 2023 with the module information, such as tutorial count and assignment count.
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 * Parameters can be in any order.
