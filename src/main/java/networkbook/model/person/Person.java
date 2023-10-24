@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 import networkbook.commons.util.ToStringBuilder;
-import networkbook.model.tag.Tag;
 import networkbook.model.util.Identifiable;
 import networkbook.model.util.UniqueList;
 

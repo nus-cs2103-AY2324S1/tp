@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.model.person.Tag;
+
 public class TagTest {
 
     private static final String INVALID_TAG_1 = "";
