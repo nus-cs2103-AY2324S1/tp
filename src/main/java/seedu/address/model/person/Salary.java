@@ -26,8 +26,8 @@ public class Salary extends Payment {
      * Constructs a {@code Salary}.
      *
      * @param salary A valid basic salary.
-     * @param deductions A valid deduction.
-     * @param benefits A valid benefit.
+     * @param deductions A list of valid deductions.
+     * @param benefits A list of valid benefits.
      */
     public Salary(String salary, ArrayList<Deduction> deductions, ArrayList<Benefit> benefits) {
         super(salary);
