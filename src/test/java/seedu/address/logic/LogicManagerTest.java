@@ -86,28 +86,34 @@ public class LogicManagerTest {
 
     @Test
     public void getAddressBook_success() {
-        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        ReadOnlyAddressBook addressBook = logic.getAddressBook();
         assertNotNull(addressBook);
     }
 
     @Test
     public void getSelectedStudent_success() {
-        model.setSelectedStudent(AMY);
-        assertEquals(AMY, model.getSelectedStudent().get(0));
+        logic.setSelectedStudent(AMY);
+        assertEquals(AMY, logic.getSelectedStudent().get(0));
     }
 
     @Test
     public void getAddressBookFilePath_success() {
-        Path path = model.getAddressBookFilePath();
+        Path path = logic.getAddressBookFilePath();
         assertNotNull(path);
+    }
+
+    @Test
+    public void getGuiSettings_success() {
+        GuiSettings gui = logic.getGuiSettings();
+        assertNotNull(gui);
     }
 
     @Test
     public void setGuiSettings_success() {
         GuiSettings newGuiSettings = new GuiSettings(400.0, 400.0, 0, 0);
-        model.setGuiSettings(newGuiSettings);
+        logic.setGuiSettings(newGuiSettings);
 
-        assertEquals(newGuiSettings, model.getGuiSettings());
+        assertEquals(newGuiSettings, logic.getGuiSettings());
     }
 
     /**
