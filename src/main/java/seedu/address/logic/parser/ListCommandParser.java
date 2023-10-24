@@ -56,11 +56,8 @@ public class ListCommandParser implements Parser<ListCommand> {
             tn = ParserUtil.parseIndex(tnValue);
         }
 
-        System.out.println(commandWord);
-
         switch (commandWord) {
         case ListAttendanceCommand.COMMAND_WORD:
-            System.out.println(commandWord);
             if (!argMultimap.getValue(PREFIX_TUTORIALNUMBER).isPresent()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListAttendanceCommand.MESSAGE_USAGE));
