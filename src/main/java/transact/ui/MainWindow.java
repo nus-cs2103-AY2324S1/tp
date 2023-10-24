@@ -7,7 +7,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import transact.MainApp;
 import transact.commons.core.GuiSettings;
@@ -34,8 +35,9 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private CardListPanel cardListPanel;
+    private OverviewPanel overviewPanel;
     private TransactionTablePanel transactionTablePanel;
+    private CardListPanel cardListPanel;
     private ResultDisplay resultDisplay;
 
     /**
@@ -46,13 +48,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private StackPane commandBoxPlaceholder;
-
-    @FXML
     private MenuItem userGuideMenuItem;
 
     @FXML
     private TabPane tabPane;
+
+    @FXML
+    private Tab overviewTab;
 
     @FXML
     private Tab cardListTab;
@@ -61,7 +63,7 @@ public class MainWindow extends UiPart<Stage> {
     private Tab transactionTab;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private VBox bottomBar;
 
     // @FXML
     // private StackPane statusbarPlaceholder;
@@ -116,21 +118,21 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        cardListPanel = new CardListPanel(logic.getFilteredPersonList());
-        cardListTab.setContent(cardListPanel.getRoot());
+        overviewPanel = new OverviewPanel(logic.getFilteredTransactionList());
+        overviewTab.setContent(overviewPanel.getRoot());
 
         transactionTablePanel = new TransactionTablePanel(logic.getFilteredTransactionList());
         transactionTab.setContent(transactionTablePanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        // StatusBarFooter statusBarFooter = new
-        // StatusBarFooter(logic.getAddressBookFilePath());
-        // statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        cardListPanel = new CardListPanel(logic.getFilteredPersonList());
+        cardListTab.setContent(cardListPanel.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        VBox.setVgrow(commandBox.getRoot(), Priority.NEVER);
+
+        resultDisplay = new ResultDisplay();
+
+        bottomBar.getChildren().addAll(commandBox.getRoot(), resultDisplay.getRoot());
     }
 
     /**
