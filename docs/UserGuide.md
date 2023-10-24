@@ -310,6 +310,65 @@ Example: delete 1 2 3
 The fosterer index provided is invalid
 ```
 
+### Viewing statistics : `stats`
+Displays the requested statistic about the currently displayed list.
+
+Format: `stats FIELD`
+
+Parameters:`FIELD` 
+* The requested field whose statistic is to be calculated.
+* Valid fields that can be requested for are:
+  * `avail` :  shows the statistics of fosterers  who are available to foster, and the animals they can foster.
+  * `current` : shows the statistics of fosterers who are currently fostering, and the animals they are fostering.
+  * `housing` : shows the statistics of the various housing types.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Statistics are calculated based on the currently displayed list. If you performed a `find available` command before `stats avail`, the resulting statistic will show that 100% of listed fosterers are available. Hence, please ensure that the current list for fosterers is the desired list you want your statistic to be calculated from. 
+</div>
+
+Examples: 
+* `list` followed by `stats avail` calculates the statistics of fosterers who are available, based on all fosterers in the address book.
+* `find cat` followed by `stats avail` calculates the statistics of fosterers who are available, based on the fosterers who are either currently fostering a cat or are able to foster a cat. 
+* `list` followed by `stats current` calculates the statistics of fosterers who are currently fostering, based on all fosterers in the address book.
+* `find available dog` followed by `stats housing` calculates the statistics of the various housing types based on the fosterers who are available and are able to foster a dog.
+
+Expected output (success):
+1. `list` followed by `stats avail`
+```agsl
+6 out of 10 listed fosterers are available (60%)!
+Out of those available, 
+- 2 can foster dogs (33.3%)
+- 4 can foster cats (66.7%)
+```
+
+2. `list` followed by `stats current`
+```agsl
+4 out of 10 listed fosterers are currently fostering (40%)!
+Out of those fostering, 
+- 1 foster dogs (25.0%)
+- 3 foster cats (75.0%)
+```
+
+3. `list` followed by `stats housing`
+```agsl
+Out of 10 listed fosterers,
+- 5 live in HDB (50.0%)
+- 3 live in Condo (30.0%)
+- 1 live in Landed (10.0%)
+- 1 unknown (10.0%)
+```
+
+Expected output (fail): 
+```agsl
+Invalid command format!
+stats: Displays the requested statistic about the currently displayed list.
+Parameters: FIELD, which can take the values avail, current or housing.
+Examples: 
+- stats avail 
+- stats current
+- stats housing
+```
+
 ### Clearing all entries : `reset`
 
 Clears all entries from the address book.
