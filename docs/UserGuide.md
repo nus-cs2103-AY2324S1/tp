@@ -89,17 +89,22 @@ Examples:
 
 ### Marking attendance of student: `mark`
 
-Format: `mark /name STUDENTNAME | /id STUDENTID /attendance ATTENDANCE`
-* Marks the attendance of a student corresponding to the student name or student ID.
+Format: `mark /name STUDENTNAME[, STUDENTNAME] | /id STUDENTID[, STUDENTID] /attendance ATTENDANCE`
+* Marks the attendance of one or more student corresponding to the student name or student ID.
+* To mark attendance for multiple students, provide a comma-separated list of student names or student IDs.
 * `STUDENTNAME` should be a string made up of alphabetical characters, with no numbers or special characters.
 * `STUDENTID` should be a string made up of alphabetical characters, with no special characters or space.
 * `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
 
 Examples:
 * `mark /name Zong Jin /attendance 1` Marks student named, Zong Jin, as present.
+* `mark /name Zong Jin, Fu Yiqiao /attendance 1` Marks students named, Zong Jin and Fu Yiqiao, as present.
 * `mark /name Zong Jin /attendance 0` Marks student named, Zong Jin, as absent.
+* `mark /name Zong Jin, Fu Yiqiao /attendance 0` Marks students named, Zong Jin and Fu Yiqiao, as absent.
 * `mark /id A0123456E /attendance 1` Marks student with student ID, A0123456E, as present.
+* `mark /id A0123456E, A0123457E /attendance 1` Marks students with student IDs, A0123456E and A0123457E, as present.
 * `mark /id A0123456E /attendance 0` Marks student with student ID, A0123456E, as absent.
+* `mark /id A0123456E, A0123457E /attendance 0` Marks students with student IDs, A0123456E and A0123457E, as absent.
 
 ### Viewing summary of attendance : `list attendance`
 
