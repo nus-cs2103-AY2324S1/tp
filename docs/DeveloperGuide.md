@@ -89,6 +89,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Card` object residing in the `Model`.
+* answer of the Card created is hidden from the user when they browse the deck 
+* user can scroll to see the different `Card` listed in lesSON
 
 ### Logic component
 
@@ -181,6 +183,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* decently familiar with the idea of flashcards and their usages in an academic setting
 
 **Value proposition**: For Computing students in University who struggle with memorisation and consolidation of knowledge, our app provides users the ability to create categorised flashcards to organise concepts taught to them fast. Optimised for CLI and users who type fast.
 
@@ -232,6 +235,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User inputs command to create a card, along with the necessary details.
 2. lesSON displays a success message.
+3. The answer generated is not visible to the user until card selected is practised.
 
    Use case ends.
 
@@ -285,6 +289,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 flashcards without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  User must be educated and willing to use flashcards to learn the content
+5.  Display box should be able to show the user's full input
 
 *{More to be added}*
 
@@ -293,6 +299,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Flashcard**: A two-sided card containing a question and an answer
 * **Tag**: A label used to categorise flashcards
+* **Deck**: A series of cards that is stored in lesSON
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -322,17 +329,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a card
 
-1. Deleting a person while all persons are being shown
+1. Deleting a card while all card are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
