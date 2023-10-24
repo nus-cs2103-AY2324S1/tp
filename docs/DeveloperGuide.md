@@ -157,6 +157,52 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Notifications feature
+
+#### Implementation
+
+The notifications feature is centered around `Event` instances.
+`Event`s can represent any type of event with a specific date and time.
+This could be a birthday, an upcoming meeting or a deadline.
+`Event`s also encapsulate timings where a reminder should be created.
+
+On startup, `EventFactory#createEvents(model)` is used to generate the `Event` instances from the initial state of the model.
+Any future events can be added to the data model as well during runtime.
+
+Three public methods for `Event` are important for it's usage
+* `Event#addMember(Person)` — Adds a `Person` as associated with this event.
+* `Event#addReminder(Duration)` — Sets a reminder for the event one `Duration` before the time of the actual event. If `Duration` is set to a day, the reminder will be a day in advance.
+* `Event#getNotificationAtTime(LocalDateTime)` — Check if any notifications should be generated based on a specific time, usually the current time should be passed as the parameter.
+
+Below is the class diagram for the `Event` class and it's interactions with the other classes.
+
+<puml src="diagrams/notification-system/ClassDiagram.puml" alt="NotificationClassDiagram"
+
+The startup sequence for creating initial events is given below as well.
+
+<puml src="diagrams/notification-system/InitEventsSequenceDiagram.puml" alt="InitEventsSequenceDiagram"
+
+Based on the `Event` instances present in the data model, you can call `Model#getLatestNotifications(LocalDateTime)`, passing in the current datetime, in order to get a list of `Notification` instances representing notifications that should be displayed to the user.
+The UI system will make use of this API to check if any notifications should be displayed to the user at startup.
+
+The flow for the startup notifications is described by the following sequence diagram.
+
+<puml src="diagrams/notification-system/StartupNotificationsSequenceDiagram.puml" alt="StartupNotificationsSequenceDiagram"
+
+#### Design considerations:
+
+**Aspect: Generic design**
+
+A generic event system was created, even though CampusConnect only requires a specific Birthday notification system at the moment.
+
+* **Alternative 1 (current choice):** Generic event system.
+  * Pros: Extensible for future types of Events and Notifications beyond birthdays.
+  * Cons: More code required, and more indirection in code because of the generic nature.
+
+* **Alternative 2:** Birthday notification system.
+  * Pros: Simpler to implement, code will be more straightforward to understand as well.
+  * Cons: Any future ideas to implement new notifications and events will not benefit from the existing implementation of the birthday notification system.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
