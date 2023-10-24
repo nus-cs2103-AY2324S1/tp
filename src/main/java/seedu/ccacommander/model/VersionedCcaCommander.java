@@ -13,10 +13,10 @@ import seedu.ccacommander.model.exceptions.UndoStateException;
  * A CcaCommander with versions implemented.
  */
 public class VersionedCcaCommander extends CcaCommander {
-    public static final String MESSAGE_FIRST_COMMIT = "Loaded saved data.";
+    public static final String MESSAGE_FIRST_COMMIT = "Saved data is loaded.";
 
-    private List<CcaCommanderState> ccaCommanderStateList;
-    private int statePointer;
+    private List<CcaCommanderState> ccaCommanderVersionList;
+    private int versionPointer;
 
     /**
      * Creates a {@code VersionedCcaCommander} using the Members in the {@code toCopy}.
@@ -25,10 +25,10 @@ public class VersionedCcaCommander extends CcaCommander {
     public VersionedCcaCommander(ReadOnlyCcaCommander toCopy) {
         super(toCopy);
 
-        CcaCommanderState initialState = new CcaCommanderState(MESSAGE_FIRST_COMMIT, this);
-        this.ccaCommanderStateList = new ArrayList<>();
-        this.ccaCommanderStateList.add(initialState);
-        this.statePointer = 0;
+        CcaCommanderState initialVersion = new CcaCommanderState(MESSAGE_FIRST_COMMIT, this);
+        this.ccaCommanderVersionList = new ArrayList<>();
+        this.ccaCommanderVersionList.add(initialVersion);
+        this.versionPointer = 0;
     }
 
     /**
@@ -39,14 +39,14 @@ public class VersionedCcaCommander extends CcaCommander {
     public void commit(String commitMessage) throws NullPointerException {
         requireNonNull(commitMessage);
 
-        pruneStates();
+        purgeRedundantVersions();
         CcaCommanderState state = new CcaCommanderState(commitMessage, this);
-        this.ccaCommanderStateList.add(state);
-        this.statePointer++;
+        this.ccaCommanderVersionList.add(state);
+        this.versionPointer++;
     }
 
-    private void pruneStates() {
-        this.ccaCommanderStateList.subList(this.statePointer + 1, this.ccaCommanderStateList.size()).clear();
+    private void purgeRedundantVersions() {
+        this.ccaCommanderVersionList.subList(this.versionPointer + 1, this.ccaCommanderVersionList.size()).clear();
     }
 
     /**
@@ -60,10 +60,10 @@ public class VersionedCcaCommander extends CcaCommander {
             throw new UndoStateException();
         }
 
-        CcaCommanderState currentState = this.ccaCommanderStateList.get(this.statePointer);
-        CcaCommanderState targetState = this.ccaCommanderStateList.get(this.statePointer - 1);
+        CcaCommanderState currentState = this.ccaCommanderVersionList.get(this.versionPointer);
+        CcaCommanderState targetState = this.ccaCommanderVersionList.get(this.versionPointer - 1);
         resetData(targetState.stateCapture);
-        this.statePointer--;
+        this.versionPointer--;
         return currentState.commitMessage;
     }
 
@@ -71,14 +71,14 @@ public class VersionedCcaCommander extends CcaCommander {
      * Returns true if there exists a {@code Command} that can be undone.
      */
     public boolean canUndo() {
-        return this.statePointer > 0;
+        return this.versionPointer > 0;
     }
 
     /**
      * Returns a summary of all {@code Command}s currently recorded by this {@code VersionedCcaCommander}.
      */
     public StateCaptures viewStateCaptures() {
-        return new StateCaptures(statePointer, ccaCommanderStateList.stream().map(state ->
+        return new StateCaptures(versionPointer, ccaCommanderVersionList.stream().map(state ->
                 state.commitMessage).collect(Collectors.toUnmodifiableList()));
     }
 
@@ -86,8 +86,8 @@ public class VersionedCcaCommander extends CcaCommander {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof VersionedCcaCommander
-                && ((VersionedCcaCommander) other).statePointer == this.statePointer
-                && ((VersionedCcaCommander) other).ccaCommanderStateList.equals(this.ccaCommanderStateList)
+                && ((VersionedCcaCommander) other).versionPointer == this.versionPointer
+                && ((VersionedCcaCommander) other).ccaCommanderVersionList.equals(this.ccaCommanderVersionList)
                 && super.equals(other));
     }
 
