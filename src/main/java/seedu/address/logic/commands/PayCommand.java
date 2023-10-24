@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Balance;
 import seedu.address.model.person.Person;
 
+/**
+ * Pays the specified amount to the specified person.
+ */
 public class PayCommand extends Command {
 
     public static final String COMMAND_WORD = "pay";
@@ -26,11 +29,17 @@ public class PayCommand extends Command {
     private final Index index;
     private final Balance amount;
 
+    /**
+     * Constructs a {@code PayCommand}.
+     * @param index of the person in the filtered person list to edit the remark
+     * @param amount details of the person to be updated to
+     */
     public PayCommand(Index index, Balance amount) {
         requireAllNonNull(index, amount);
         this.index = index;
         this.amount = amount;
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

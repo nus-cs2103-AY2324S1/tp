@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Balance;
 import seedu.address.model.person.Person;
 
+/**
+ * Owes the specified amount to the specified person.
+ */
 public class OweCommand extends Command {
 
     public static final String COMMAND_WORD = "owe";
@@ -26,6 +29,11 @@ public class OweCommand extends Command {
     private final Index index;
     private final Balance amount;
 
+    /**
+     * Constructs a {@code OweCommand}.
+     * @param index of the person in the filtered person list to edit the remark
+     * @param amount details of the person to be updated to
+     */
     public OweCommand(Index index, Balance amount) {
         requireAllNonNull(index, amount);
         this.index = index;

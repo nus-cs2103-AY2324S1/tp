@@ -7,6 +7,9 @@ import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Balance;
 
+/**
+ * Parses input arguments and creates a new PayCommand object
+ */
 public class PayCommandParser implements Parser<PayCommand> {
 
     /**

@@ -3,6 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's payment balance in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isWithinLimits(Integer)}
+ */
 public class Balance {
 
     /**
@@ -36,6 +40,11 @@ public class Balance {
      */
     public final Integer value;
 
+    /**
+     * Constructs a {@code Balance}.
+     *
+     * @param balanceInCents A valid balance in cents.
+     */
     public Balance(Integer balanceInCents) {
         requireNonNull(balanceInCents);
         checkArgument(balanceInCents <= MAX_VALUE && balanceInCents >= MIN_VALUE,
@@ -43,6 +52,9 @@ public class Balance {
         value = balanceInCents;
     }
 
+    /**
+     * Returns true if a given integer is within the balance limit.
+     */
     public static boolean isWithinLimits(Integer balance) {
         return balance <= MAX_VALUE && balance >= MIN_VALUE;
     }
@@ -55,13 +67,17 @@ public class Balance {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns a dollar string representation of the balance.
+     */
     public String toDollarString() {
-        if (value < 0) {
-            return String.format("-$%d.%02d", -value / 100, -value % 100);
-        }
         return String.format("$%d.%02d", value / 100, value % 100);
     }
 
+    /**
+     * Returns a full message explaining the status of a Person's
+     * balance with another Person, to be shown in a GUI.
+     */
     public String toUiMessage() {
         if (value < 0) {
             return String.format("You owe them: %s", toDollarString());
@@ -91,6 +107,8 @@ public class Balance {
         return this.add(other).value > MAX_VALUE
                 || this.add(other).value < MIN_VALUE;
     }
+
+
 
     @Override
     public String toString() {

@@ -7,6 +7,9 @@ import seedu.address.logic.commands.OweCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Balance;
 
+/**
+ * Parses input arguments and creates a new OweCommand object
+ */
 public class OweCommandParser implements Parser<OweCommand> {
 
     /**
