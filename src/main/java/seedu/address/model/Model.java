@@ -105,6 +105,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Updates the filter of the event list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
      * Adds an event to the list of events.
      * @param toAdd Event to be added.
      */
@@ -116,21 +122,6 @@ public interface Model {
      * @return Set of names that are not found in the address book.
      */
     Set<Name> findInvalidNames(Set<Name> names);
-
-    /**
-     * Returns a set of persons with upcoming birthdays.
-     * @param days number of days to check for upcoming birthdays.
-     * @return Set of persons with upcoming birthdays.
-     */
-    Set<Person> findPersonsWithUpcomingBirthdays(int days);
-
-    /**
-     * Returns a set of events with upcoming dates.
-     * @param days number of days to check for upcoming dates.
-     * @return Set of events with upcoming dates.
-     */
-    Set<Event> findEventsWithUpcomingDates(int days);
-
 
     /**
      * Updates any events where the person to edit is assigned to.

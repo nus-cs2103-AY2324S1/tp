@@ -157,9 +157,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void     updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         this.filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        this.events.setPredicate(predicate);
     }
 
     /**
@@ -226,37 +232,6 @@ public class ModelManager implements Model {
         }
         return false;
     }
-
-
-    public Set<Event> findEventsWithUpcomingDates(int days) {
-        Set<Event> events = new HashSet<>();
-        LocalDate endDate = LocalDate.now().plusDays(days + 1);
-            for (Event event: this.events) {
-            LocalDate date = event.getStartDate().getDate();
-            if (date.isBefore(endDate) && date.isAfter(LocalDate.now())) {
-                events.add(event);
-            }
-        }
-        return events;
-    }
-
-    public Set<Person> findPersonsWithUpcomingBirthdays(int days) {
-        Set<Person> persons = new HashSet<>();
-        LocalDate endDate = LocalDate.now().plusDays(days + 1);
-        for (Person person: this.filteredPersons) {
-            if (person.hasBirthday()) {
-                LocalDate birthday = person.getBirthday().getValue();
-                if (birthday.withYear(endDate.getYear()).isBefore(endDate)
-                        && birthday.withYear(endDate.getYear()).isAfter(LocalDate.now())) {
-                    persons.add(person);
-                }
-            }
-        }
-        return persons;
-    }
-
-
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

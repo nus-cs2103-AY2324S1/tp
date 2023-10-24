@@ -76,4 +76,9 @@ public class EventDate {
         return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
 
     }
+
+    public boolean isWithinDays(int days) {
+        LocalDate endDate = LocalDate.now().plusDays(days + 1);
+        return this.date.isBefore(endDate) && this.date.isAfter(LocalDate.now());
+    }
 }

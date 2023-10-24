@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -172,5 +173,15 @@ public class Person {
         return !getGroups().isEmpty();
     }
 
+    /**
+     * Returns true if the person has a birthday within the next {@code days} days.
+     */
+    public boolean hasBirthdayWithinDays(int days) {
+        Birthday birthday = getBirthday();
+        if (birthday == null) {
+            return false;
+        }
+        return birthday.isWithinDays(days);
+    }
 
 }

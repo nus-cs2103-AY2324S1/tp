@@ -85,4 +85,14 @@ public class Birthday {
     public int hashCode() {
         return value.hashCode();
     }
+
+    public boolean isWithinDays(int days) {
+        if (value == null) {
+            return false;
+        }
+        LocalDate now = LocalDate.now();
+        LocalDate endDate = LocalDate.now().plusDays(days + 1);
+        LocalDate birthday = value.withYear(now.getYear());
+        return birthday.isBefore(endDate) && birthday.isAfter(now);
+    }
 }

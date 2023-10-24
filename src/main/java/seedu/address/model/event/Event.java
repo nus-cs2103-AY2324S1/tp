@@ -122,4 +122,8 @@ public abstract class Event {
         return newNames;
 
     }
+
+    public boolean hasStartDateWithinDays(int days) {
+        return this.startDate.isWithinDays(days);
+    }
 }
