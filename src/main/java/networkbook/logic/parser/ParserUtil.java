@@ -2,9 +2,7 @@ package networkbook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.StringUtil;
@@ -234,21 +232,6 @@ public class ParserUtil {
             throw new ParseException(Specialisation.MESSAGE_CONSTRAINTS);
         }
         return new Specialisation(specialisation);
-    }
-
-    /**
-     * Parse indices for editing.
-     */
-    public static List<Index> parseIndices(Collection<String> oneBasedIndices) throws ParseException {
-        requireNonNull(oneBasedIndices);
-        List<Index> result = new ArrayList<>();
-        for (String indexString: oneBasedIndices) {
-            if (!StringUtil.isNonZeroUnsignedInteger(indexString.trim())) {
-                throw new ParseException(MESSAGE_INVALID_INDEX);
-            }
-            result.add(Index.fromOneBased(Integer.parseInt(indexString.trim())));
-        }
-        return result;
     }
 
     /**

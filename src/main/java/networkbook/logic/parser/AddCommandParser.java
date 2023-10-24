@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import networkbook.commons.core.index.Index;
@@ -172,15 +171,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
-    }
-
-    private static Optional<List<Index>> parseIndicesForEdit(Collection<String> indices) throws ParseException {
-        requireNonNull(indices);
-
-        if (indices.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(ParserUtil.parseIndices(indices));
     }
 
     /**
