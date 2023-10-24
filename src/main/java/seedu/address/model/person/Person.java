@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -23,18 +24,31 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Subject subject;
+    private final Lesson lesson;
     private final Set<Tag> tags = new HashSet<>();
+
+    private boolean paid;
+    private PayRate payRate;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+
+    public Person(Name name, Phone phone, Email email, Address address, Subject subject, Day day,
+                  Begin begin, End end, Set<Tag> tags, boolean paid, PayRate payRate) {
+        requireAllNonNull(name, phone, email, address, subject, day, begin, end, tags);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.subject = subject;
         this.tags.addAll(tags);
+        this.paid = paid;
+        this.payRate = payRate;
+
+        this.lesson = new Lesson(day, begin, end);
     }
 
     public Name getName() {
@@ -53,12 +67,61 @@ public class Person {
         return address;
     }
 
+    public Subject getSubject() {
+        return subject;
+    }
+
+    /**
+     * Return defensive copy of day
+     * @return day
+     */
+    public Day getDay() {
+        String day = lesson.day.toString();
+        return new Day(day);
+    }
+
+    /**
+     * Return defensive copy of Begin
+     * @return begin
+     */
+    public Begin getBegin() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        String begin = lesson.begin.format(formatter);
+        return new Begin(begin);
+    }
+
+    /**
+     * Return defensive copy of end
+     * @return end
+     */
+    public End getEnd() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        String end = lesson.end.format(formatter);
+        return new End(end);
+    }
+
+    public Lesson getLesson() {
+        return lesson;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public boolean getPaid() {
+        return paid;
+    }
+
+    public void setPaid() {
+        this.paid = true;
+    }
+
+    public PayRate getPayRate() {
+        return payRate;
     }
 
     /**
@@ -94,13 +157,16 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && subject.equals(otherPerson.subject)
+                && lesson.equals(otherPerson.lesson)
+                && tags.equals(otherPerson.tags)
+                && payRate.equals(otherPerson.payRate);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, subject, lesson, tags, paid, payRate);
     }
 
     @Override
@@ -110,7 +176,11 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("subject", subject)
+                .add("lesson", lesson)
                 .add("tags", tags)
+                .add("paid", paid)
+                .add("payrate", payRate)
                 .toString();
     }
 
