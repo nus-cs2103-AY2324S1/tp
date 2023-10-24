@@ -2,12 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.NullAppointment;
 import seedu.address.model.appointment.ScheduleItem;
 import seedu.address.model.financialplan.FinancialPlan;
 import seedu.address.model.tag.Tag;
@@ -133,6 +135,16 @@ public class Person {
             }
         }
         return result.toString();
+    }
+
+    public boolean isSameAppointmentDate(LocalDateTime date) {
+        return appointment.isSameDate(date);
+    }
+
+    public Person clearAppointment() {
+        return new Person(name, phone, email, address, nextOfKinName,
+                nextOfKinPhone, financialPlans,
+                tags, NullAppointment.getNullAppointment());
     }
 
     /**

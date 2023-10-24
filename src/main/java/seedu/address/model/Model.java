@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -104,4 +105,6 @@ public interface Model {
      * @return The String representation of all the gathered emails.
      */
     String gatherEmails(GatherEmailPrompt prompt);
+
+    void clearAppointments(LocalDateTime date);
 }

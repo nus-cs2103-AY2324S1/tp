@@ -145,4 +145,9 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
             return this.date.compareTo(appointment.date);
         }
     }
+
+    @Override
+    public boolean isSameDate(LocalDateTime date) {
+        return this.date.equals(date);
+    }
 }
