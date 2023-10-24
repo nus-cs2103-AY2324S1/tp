@@ -276,7 +276,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 
 * provide fast access to student’s contact information
 * provide easy ways to compare and visualise student's grades across classes
@@ -372,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ClassManager shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 3b. The student already has the given tag.
 
     * 3b1. ClassManager shows an error message.
@@ -421,7 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The JSON file cannot be found 
+* 3a. The JSON file cannot be found
   * 3a1. ClassManager shows an error message.
 
     Use case resumes at step 2.
