@@ -106,12 +106,6 @@ Format: `exit`
 
 transact data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
---------------------------------------------------------------------------------------------------------------------
-=======
----
->>>>>>> 9eae2c400b50e3078527fa2f4f06f0d273dfbfea
 
 ## Navigating the GUI
 
@@ -130,15 +124,6 @@ The lower menu bar contains three tabs:
 3. Addressbook — This tab shows you the persons or parties you have entered in a list format.
 
 The input field below this with the grey text `Enter command here...` is where you can enter your commands.
-
-<<<<<<< HEAD
---------------------------------------------------------------------------------------------------------------------
-=======
----
->>>>>>> 5e0bf2c2da510ea8a9c0bcd1ae8e1f2f43cc851a
-=======
----
->>>>>>> 9eae2c400b50e3078527fa2f4f06f0d273dfbfea
 
 ## FAQ
 
