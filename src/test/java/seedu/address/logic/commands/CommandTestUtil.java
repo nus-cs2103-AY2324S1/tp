@@ -64,6 +64,7 @@ public class CommandTestUtil {
     public static final String VALID_NRIC_ALICE = "T0131267K";
     public static final String VALID_REMARK_AMY = "She likes aardvarks.";
     public static final String VALID_REMARK_BOB = "He likes football.";
+    public static final String VALID_REMARK_CHERYL = "She wants to be a Surgeon.";
     public static final String VALID_CONDITION_BOB = "Pneumothorax";
     public static final String VALID_BLOODTYPE_BOB = "A+";
     public static final String VALID_BLOODTYPE_AMY = "A+";
@@ -74,7 +75,6 @@ public class CommandTestUtil {
     public static final String NAME_DESC_DEREK = " " + PREFIX_NAME + VALID_NAME_DEREK;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-
     public static final String PHONE_DESC_CHERYL = " " + PREFIX_NAME + VALID_PHONE_CHERYL;
     public static final String PHONE_DESC_DEREK = " " + PREFIX_NAME + VALID_PHONE_DEREK;
     public static final String EMERGENCY_CONTACT_DESC_AMY =
@@ -97,6 +97,7 @@ public class CommandTestUtil {
     public static final String NRIC_DESC_DEREK = " " + PREFIX_NRIC + VALID_NRIC_DEREK;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
+    public static final String REMARK_DESC_CHERYL = " " + PREFIX_REMARK + VALID_REMARK_CHERYL;
     public static final String CONDITION_DESC_AMY = " " + PREFIX_CONDITION + VALID_CONDITION_AMY;
     public static final String CONDITION_DESC_BOB = " " + PREFIX_CONDITION + VALID_CONDITION_BOB;
     public static final String BLOODTYPE_DESC_AMY = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_AMY;
