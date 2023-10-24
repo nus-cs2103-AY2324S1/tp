@@ -62,6 +62,8 @@ public class ScheduleCommand extends Command {
         assert personWithApt.getAppointment() instanceof Appointment
                 : "Schedule Command: person should have appointment";
 
+        toAdd.setPerson(personWithApt); //sets person to appointment
+
         model.setPerson(personToEdit, personWithApt);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SCHEDULE_SUCCESS, Messages.format(personWithApt)));

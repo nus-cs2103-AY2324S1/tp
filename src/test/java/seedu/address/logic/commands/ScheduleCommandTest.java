@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -35,5 +36,8 @@ class ScheduleCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(0), personWithSchedule);
 
         assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+
+        //checks if the person is associated with appointment
+        assertTrue(personWithSchedule.getAppointment().equals(APPOINTMENT_STUB));
     }
 }
