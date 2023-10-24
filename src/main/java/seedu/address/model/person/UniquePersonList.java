@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.policy.PolicyExpirationDateComparator;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -73,6 +74,14 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+    }
+
+    /**
+     * Sorts the people in the list based off the policy expiration date
+     * Those with no policy are at the end of the list
+     */
+    public void sort() {
+        FXCollections.sort(internalList, new PolicyExpirationDateComparator());
     }
 
     /**
