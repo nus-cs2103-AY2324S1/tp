@@ -38,8 +38,8 @@ public class ListAttendanceCommandTest {
 
     @Test
     public void equals() {
-        Tag firstTag = new Tag("CS2030S");
-        Tag secondTag = new Tag("CS2040S");
+        Tag firstTag = new Tag("G10");
+        Tag secondTag = new Tag("G01");
         Index firstIndex = Index.fromOneBased(1);
         Index secondIndex = Index.fromOneBased(2);
 
@@ -72,7 +72,7 @@ public class ListAttendanceCommandTest {
     public void execute_listAttendanceWithTag_success() {
         ALICE.addAttendance(new Attendance(LocalDate.now(), false));
 
-        Tag tag = new Tag("CS2040S");
+        Tag tag = new Tag("G02");
         Index index = Index.fromOneBased(1);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, index,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(index, tag));

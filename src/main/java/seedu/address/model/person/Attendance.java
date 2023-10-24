@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 import java.util.Objects;
 
 /**
@@ -31,6 +32,17 @@ public class Attendance {
      */
     public LocalDate getDate() {
         return date;
+    }
+
+    /**
+     * Checks if the given date is in the same week as the date of this Attendance object.
+     *
+     * @param otherDate The date to be checked.
+     * @return True if the given date is in the same week, otherwise false.
+     */
+    public boolean isSameWeek(LocalDate otherDate) {
+        return this.date.get(ChronoField.ALIGNED_WEEK_OF_YEAR) == otherDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR)
+                && this.date.getYear() == otherDate.getYear();
     }
 
     /**

@@ -19,15 +19,28 @@ public class ListCommandParserTest {
     private ListCommandParser parser = new ListCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
+    public void parse_emptyArgs_throwsParseException() {
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_listInvalidArg_throwsParseException() {
+    public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "  abc   ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_listStudentsInvalidArgs_throwsParseException() {
+        assertParseFailure(parser, "students 123",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListStudentsCommand.MESSAGE_USAGE));
+    }
+    @Test
+    public void parse_listAttendanceInvalidArgs_throwsParseException() {
+        assertParseFailure(parser, "  attendance  tg/G02 ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "  attendance  ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -42,25 +55,16 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArg_throwsParseException() {
-        // no leading and trailing whitespaces
-        Tag tag = new Tag("CS2103T");
+    public void parse_validArgs_returnsListAttendanceCommand() {
+        // with leading and trailing whitespaces
+        Tag tag = new Tag("G02");
         Index index = Index.fromOneBased(1);
         ListAttendanceCommand expectedListAttendanceCommand = new ListAttendanceCommand(tag, index,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(index, tag));
-        assertParseSuccess(parser, " attendance coursetg/CS2103T tn/1", expectedListAttendanceCommand);
+        assertParseSuccess(parser, " attendance tg/G02 tn/1 ", expectedListAttendanceCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "    attendance      coursetg/     CS2103T     tn/    1      ",
+        assertParseSuccess(parser, "    attendance      tg/     G02     tn/    1      ",
                 expectedListAttendanceCommand);
     }
-
-    @Test
-    public void parse_listAttendanceInvalidArgs_throwsParseException() {
-        assertParseFailure(parser, "  attendance  coursetg/CS2103T ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "  attendance  ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
-    }
-
 }

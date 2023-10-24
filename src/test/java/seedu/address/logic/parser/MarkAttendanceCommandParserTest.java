@@ -2,11 +2,14 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +31,8 @@ public class MarkAttendanceCommandParserTest {
     @Test
     public void parse_validArgsWithName_returnsMarkAttendanceCommand() {
         String userInput = " /name " + VALID_NAME_AMY + " /attendance 1";
-        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_NAME_AMY, true, LocalDate.now());
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_NAME_AMY), true,
+                LocalDate.now());
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -38,7 +42,30 @@ public class MarkAttendanceCommandParserTest {
     @Test
     public void parse_validArgsWithId_returnsMarkAttendanceCommand() {
         String userInput = " /id " + VALID_ID_AMY + " /attendance 0";
-        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_ID_AMY, false, LocalDate.now());
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_ID_AMY), false,
+                LocalDate.now());
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    /**
+     * Tests the parsing of valid arguments using multiple names to return a {@code MarkAttendanceCommand}.
+     */
+    @Test
+    public void parse_validArgsWithMultipleNames_returnsMarkAttendanceCommand() {
+        String userInput = " /name " + VALID_NAME_AMY + "," + VALID_NAME_BOB + " /attendance 1";
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_NAME_AMY, VALID_NAME_BOB), true,
+                LocalDate.now());
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    /**
+     * Tests the parsing of valid arguments using multiple IDs to return a {@code MarkAttendanceCommand}.
+     */
+    @Test
+    public void parse_validArgsWithMultipleIds_returnsMarkAttendanceCommand() {
+        String userInput = " /id " + VALID_ID_AMY + "," + VALID_ID_BOB + " /attendance 0";
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_ID_AMY, VALID_ID_BOB), false,
+                LocalDate.now());
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
