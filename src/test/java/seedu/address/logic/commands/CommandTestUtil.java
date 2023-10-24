@@ -26,6 +26,7 @@ import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditMeetingDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -36,17 +37,21 @@ public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_TITLE_MEETING1 = "CS2103T meeting";
+    public static final String VALID_TITLE_MEETING2 = "Lunch with coworkers";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_LOCATION_MEETING1 = "Zoom call url";
+    public static final String VALID_LOCATION_MEETING2 = "Food court";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_START_MEETING1 = "20.09.2023 1000";
+    public static final String VALID_START_MEETING2 = "11.10.2023 0900";
     public static final String VALID_STATUS_AMY = "";
     public static final String VALID_STATUS_BOB = "Prospective";
     public static final String VALID_REMARK_AMY = "Likes to swim";
     public static final String VALID_REMARK_BOB = "";
     public static final String VALID_END_MEETING1 = "20.09.2023 1200";
+    public static final String VALID_END_MEETING2 = "11.10.2023 1300";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_WORK = "work";
@@ -96,6 +101,17 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    }
+    public static final EditMeetingCommand.EditMeetingDescriptor DESC_MEET1;
+    public static final EditMeetingCommand.EditMeetingDescriptor DESC_MEET2;
+
+    static {
+        DESC_MEET1 = new EditMeetingDescriptorBuilder().withTitle(VALID_TITLE_MEETING1)
+                .withLocation(VALID_LOCATION_MEETING1).withStart(VALID_START_MEETING1)
+                .withEnd(VALID_END_MEETING1).withTags(VALID_TAG_WORK).build();
+        DESC_MEET2 = new EditMeetingDescriptorBuilder().withTitle(VALID_TITLE_MEETING2)
+                .withLocation(VALID_LOCATION_MEETING2).withStart(VALID_START_MEETING2)
+                .withEnd(VALID_END_MEETING2).withTags(VALID_TAG_FRIEND).build();
     }
 
     /**
