@@ -116,6 +116,8 @@ public interface Model {
      */
     public boolean hasGroup(Group group);
 
+    public Group findGroup(String groupName) throws CommandException;
+
     /**
      * Adds a group to the address book.
      * The group must not already exist in the address book.

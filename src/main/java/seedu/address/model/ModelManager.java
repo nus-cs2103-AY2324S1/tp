@@ -178,7 +178,9 @@ public class ModelManager implements Model {
         return filteredGroups;
     }
 
-    ;
+    public Group findGroup(String groupName) throws CommandException {
+        return addressBook.getGroup(groupName);
+    }
 
 
     @Override
