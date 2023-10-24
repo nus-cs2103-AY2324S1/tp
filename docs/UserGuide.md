@@ -252,16 +252,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                                                |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add name=[name] birthdate=[birthdate] gender=[gender] illness=[illness]` <br> e.g., `add name=John birthdate=30/09/2001 gender=Male illness=Fever`                                             |
-| **Clear**        | `clear`                                                                                                                                                                                         |
-| **Delete**       | `delete id=[patient-id]`<br> e.g., `delete id=3`                                                                                                                                                |
-| **Update**       | `update id=[patient-id] illness=[illness]`<br> e.g.,`update id=12345 illness=Fever`                                                                                                             |
-| **Search**       | `search name=[name]`<br> e.g., `search name=James Jake`                                                                                                                                         |
-| **List**         | `list`                                                                                                                                                                                          |
-| **Help**         | `help`                                                                                                                                                                                          |
+| Action           | Format, Examples                                                                                                                                                             |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add name=[name] birthdate=[birthdate] gender=[gender] illness=[illness]` <br> e.g., `add name=John birthdate=30/09/2001 gender=Male illness=Fever`                          |
+| **Clear**        | `clear`                                                                                                                                                                      |
+| **Delete**       | `delete id=[patient-id]`<br> e.g., `delete id=3`                                                                                                                             |
+| **Update**       | `update id=[patient-id] illness=[illness]`<br> e.g.,`update id=12345 illness=Fever`                                                                                          |
+| **Search**       | `search name=[name]`<br> e.g., `search name=James Jake`                                                                                                                      |
+| **List**         | `list`                                                                                                                                                                       |
+| **Help**         | `help`                                                                                                                                                                       |
 | **Schedule**     | `schedule patient=PATIENT start=START end=END description=DESCRIPTION` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray` |
-| **Reschedule**   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                     |
-| **Cancel**       | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                                             |
-| **Appointments** | `appointments`                                                                                                                                                                                  |
+| **Reschedule**   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                  |
+| **Cancel**       | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                          |
+| **Appointments** | `appointments`                                                                                                                                                               |
