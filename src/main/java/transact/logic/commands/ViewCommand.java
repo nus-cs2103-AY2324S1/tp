@@ -15,7 +15,7 @@ public class ViewCommand extends Command {
      * Enum for different types of views.
      */
     public enum ViewType {
-        STAFF, TRANSACTION
+        STAFF, TRANSACTION, OVERVIEW
     }
 
     public static final String COMMAND_WORD = "view";
@@ -23,9 +23,10 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_SUCCESS_STAFF = "Listed all staff";
 
     public static final String MESSAGE_SUCCESS_TRANSACTIONS = "Listed all transactions";
+    public static final String MESSAGE_SUCCESS_OVERVIEW = "Showed transaction overview";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays list of staff or transactions. "
-            + "Parameters: staff/transaction";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays list of staff, transactions, or overview of transactions. "
+            + "Parameters: staff/s (for staff), transaction/t (for transactions), overview/o (for overview)";
 
     private final ViewType type;
 
@@ -36,13 +37,18 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (type == ViewType.TRANSACTION) {
+        switch (type) {
+        case STAFF:
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(MESSAGE_SUCCESS_STAFF, TabWindow.ADDRESSBOOK);
+        case TRANSACTION:
             model.updateFilteredTransactionList(PREDICATE_SHOW_ALL_TRANSACTIONS);
             return new CommandResult(MESSAGE_SUCCESS_TRANSACTIONS, TabWindow.TRANSACTIONS);
+        case OVERVIEW:
+            return new CommandResult(MESSAGE_SUCCESS_OVERVIEW, TabWindow.OVERVIEW);
+        default:
+            return new CommandResult(MESSAGE_USAGE, TabWindow.CURRENT);
         }
-
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS_STAFF, TabWindow.ADDRESSBOOK);
     }
 
     @Override

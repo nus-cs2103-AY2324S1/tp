@@ -2,6 +2,7 @@ package transact.logic.commands;
 
 import static transact.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static transact.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static transact.logic.commands.CommandTestUtil.showTransactionAtIndex;
 import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static transact.testutil.TypicalPersons.getTypicalAddressBook;
 import static transact.testutil.TypicalTransactions.getTypicalTransactionBook;
@@ -29,15 +30,34 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
+    public void execute_staffListIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ViewCommand(ViewCommand.ViewType.STAFF), model, ViewCommand.MESSAGE_SUCCESS_STAFF,
                 expectedModel);
     }
 
     @Test
-    public void execute_listIsFiltered_showsEverything() {
+    public void execute_staffListIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ViewCommand(ViewCommand.ViewType.STAFF), model, ViewCommand.MESSAGE_SUCCESS_STAFF,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_transactionListIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ViewCommand(ViewCommand.ViewType.TRANSACTION), model, ViewCommand.MESSAGE_SUCCESS_TRANSACTIONS,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_transactionListIsFiltered_showsEverything() {
+        showTransactionAtIndex(model, INDEX_FIRST_PERSON);
+        assertCommandSuccess(new ViewCommand(ViewCommand.ViewType.TRANSACTION), model, ViewCommand.MESSAGE_SUCCESS_TRANSACTIONS,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_overview_showsOverview() {
+        assertCommandSuccess(new ViewCommand(ViewCommand.ViewType.OVERVIEW), model, ViewCommand.MESSAGE_SUCCESS_OVERVIEW,
                 expectedModel);
     }
 }

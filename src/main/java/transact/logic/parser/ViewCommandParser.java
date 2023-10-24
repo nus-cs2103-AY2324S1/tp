@@ -27,6 +27,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             case "t":
                 type = ViewCommand.ViewType.TRANSACTION;
                 break;
+            case "o":
+                type = ViewCommand.ViewType.OVERVIEW;
+                break;
             default:
                 type = ViewCommand.ViewType.valueOf(argList[0].toUpperCase());
             }
