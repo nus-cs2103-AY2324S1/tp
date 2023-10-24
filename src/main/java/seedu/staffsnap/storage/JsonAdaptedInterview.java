@@ -1,10 +1,11 @@
 package seedu.staffsnap.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.staffsnap.commons.exceptions.IllegalValueException;
 import seedu.staffsnap.model.interview.Interview;
+import seedu.staffsnap.model.interview.Rating;
 
 /**
  * Jackson-friendly version of {@link Interview}.
@@ -12,13 +13,15 @@ import seedu.staffsnap.model.interview.Interview;
 class JsonAdaptedInterview {
 
     private final String type;
+    private final String rating;
 
     /**
-     * Constructs a {@code JsonAdaptedInterview} with the given {@code interviewName}.
+     * Constructs a {@code JsonAdaptedInterview} with the given interview details.
      */
     @JsonCreator
-    public JsonAdaptedInterview(String type) {
+    public JsonAdaptedInterview(@JsonProperty("type") String type, @JsonProperty("rating") String rating) {
         this.type = type;
+        this.rating = rating;
     }
 
     /**
@@ -26,11 +29,7 @@ class JsonAdaptedInterview {
      */
     public JsonAdaptedInterview(Interview source) {
         type = source.type;
-    }
-
-    @JsonValue
-    public String getType() {
-        return type;
+        rating = source.getRating().value;
     }
 
     /**
@@ -42,7 +41,11 @@ class JsonAdaptedInterview {
         if (!Interview.isValidType(type)) {
             throw new IllegalValueException(Interview.MESSAGE_CONSTRAINTS);
         }
-        return new Interview(type);
+        if (!Rating.isValidRating(rating)) {
+            throw new IllegalValueException(Rating.MESSAGE_CONSTRAINTS);
+        }
+        final Rating modelRating = new Rating(rating);
+        return new Interview(type, modelRating);
     }
 
 }

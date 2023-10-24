@@ -56,8 +56,46 @@ public class ApplicantCard extends UiPart<Region> {
     public ApplicantCard(Applicant applicant, int displayedIndex) {
         super(FXML);
         this.applicant = applicant;
-        id.setText(displayedIndex + ". ");
 
+        displayApplicantId(displayedIndex);
+        displayApplicantDetails();
+        displayApplicantStatus();
+
+        for (Interview interview : applicant.getInterviews()) {
+            VBox interviewBox = new VBox();
+            HBox interviewHeader = new HBox();
+            HBox interviewRating = new HBox();
+
+            interviewBox.setMinHeight(100);
+            interviewBox.setMinWidth(100);
+            interviewRating.setPrefWidth(100);
+            interviewRating.setAlignment(Pos.CENTER);
+            interviewHeader.setAlignment(Pos.CENTER);
+            VBox.setVgrow(interviewRating, Priority.ALWAYS);
+
+            interviewHeader.setBackground(new Background(new BackgroundFill(Color.web("#3e7b91"),
+                    CornerRadii.EMPTY, Insets.EMPTY)));
+            interviewRating.setBackground(new Background(new BackgroundFill(Color.web("#7fc9e8"),
+                    CornerRadii.EMPTY, Insets.EMPTY)));
+
+            Label interviewLabel = new Label(applicant.getInterviewIndexForApplicantCard(interview)
+                    + ". " + interview.type);
+
+            Label interviewRatingLabel = new Label();
+            interviewRatingLabel.getStyleClass().add("rating");
+            interviewRatingLabel.setText(interview.getRating().toString());
+
+            interviewHeader.getChildren().add(interviewLabel);
+            interviewRating.getChildren().add(interviewRatingLabel);
+            interviewBox.getChildren().addAll(interviewHeader, interviewRating);
+
+            interviews.getChildren().add(interviewBox);
+        }
+    }
+    private void displayApplicantId(int displayedIndex) {
+        id.setText(displayedIndex + ". ");
+    }
+    private void displayApplicantDetails() {
         name.setText(applicant.getName().fullName);
 
         Label phoneLabel = new Label(applicant.getPhone().value);
@@ -80,38 +118,23 @@ public class ApplicantCard extends UiPart<Region> {
         positionIcon.setFitWidth(13.5);
         position.getChildren().add(positionIcon);
         position.getChildren().add(positionLabel);
+    }
 
+    private void displayApplicantStatus() {
         status.setText(applicant.getStatus().toString());
 
-        for (Interview interview : applicant.getInterviews()) {
-            VBox interviewBox = new VBox();
-            HBox interviewHeader = new HBox();
-            HBox interviewRating = new HBox();
-
-            interviewBox.setPrefHeight(100);
-            interviewBox.setPrefWidth(100);
-            interviewRating.setPrefWidth(100);
-            interviewRating.setAlignment(Pos.CENTER);
-            interviewHeader.setAlignment(Pos.CENTER);
-            VBox.setVgrow(interviewRating, Priority.ALWAYS);
-
-            interviewHeader.setBackground(new Background(new BackgroundFill(Color.web("#3e7b91"),
-                    CornerRadii.EMPTY, Insets.EMPTY)));
-            interviewRating.setBackground(new Background(new BackgroundFill(Color.web("#7fc9e8"),
-                    CornerRadii.EMPTY, Insets.EMPTY)));
-
-            Label interviewLabel = new Label(applicant.getInterviewIndexForApplicantCard(interview)
-                    + ". " + interview.type);
-
-            Label interviewRatingLabel = new Label();
-            interviewRatingLabel.getStyleClass().add("rating");
-            interviewRatingLabel.setText("9.9"); // TODO: update hardcoded rating
-
-            interviewHeader.getChildren().add(interviewLabel);
-            interviewRating.getChildren().add(interviewRatingLabel);
-            interviewBox.getChildren().addAll(interviewHeader, interviewRating);
-
-            interviews.getChildren().add(interviewBox);
+        switch (applicant.getStatus()) {
+        case OFFERED:
+            status.setStyle("-fx-background-color: #50c952");
+            break;
+        case REJECTED:
+            status.setStyle("-fx-background-color: #e87f7f");
+            break;
+        case UNDECIDED:
+            status.setStyle("-fx-background-color: #36769a");
+            break;
+        default:
         }
+
     }
 }

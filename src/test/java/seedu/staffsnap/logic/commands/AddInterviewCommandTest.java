@@ -2,6 +2,7 @@ package seedu.staffsnap.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
+import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
 import static seedu.staffsnap.testutil.TypicalApplicants.getTypicalApplicantBook;
 import static seedu.staffsnap.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
 
@@ -22,7 +23,7 @@ class AddInterviewCommandTest {
 
     @Test
     public void toStringMethod() {
-        Interview stubInterview = new Interview("stub");
+        Interview stubInterview = BENSON.getInterviews().get(0);
         AddInterviewCommand addInterviewCommand = new AddInterviewCommand(INDEX_FIRST_APPLICANT, stubInterview);
         String expected = AddInterviewCommand.class.getCanonicalName() + "{interviewToAdd=" + stubInterview + "}";
         assertEquals(expected, addInterviewCommand.toString());
@@ -30,7 +31,7 @@ class AddInterviewCommandTest {
 
     @Test
     public void equalsMethod() {
-        Interview stubInterview = new Interview("stub");
+        Interview stubInterview = BENSON.getInterviews().get(0);
         AddInterviewCommand addInterviewCommand = new AddInterviewCommand(INDEX_FIRST_APPLICANT, stubInterview);
         assertEquals(addInterviewCommand, addInterviewCommand);
         assertEquals(addInterviewCommand, new AddInterviewCommand(INDEX_FIRST_APPLICANT, stubInterview));
@@ -38,7 +39,7 @@ class AddInterviewCommandTest {
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {
-        Interview stubInterview = new Interview("stub");
+        Interview stubInterview = BENSON.getInterviews().get(0);
         AddInterviewCommand addInterviewCommand = new AddInterviewCommand(INDEX_FIRST_APPLICANT, stubInterview);
         assertThrows(NullPointerException.class, () -> addInterviewCommand.execute(null));
     }
