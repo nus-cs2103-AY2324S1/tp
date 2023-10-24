@@ -118,6 +118,11 @@ public class UniquePersonList implements Iterable<Person> {
         return personsList;
     }
 
+    /**
+     * Get a set of groups that are empty after deleting the person
+     * @param person person to check
+     * @return A set of groups that are empty
+     */
     public Set<Group> isLastPersonGroup(Person person) {
         Set<Group> emptyGroups = new HashSet<>();
         for (Group group: person.getGroups()) {

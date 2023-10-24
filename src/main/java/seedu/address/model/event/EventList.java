@@ -4,12 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.group.Group;
 
 /**
  * Represents a list of events in the address book. Operations for managing the list of events are implemented here.
