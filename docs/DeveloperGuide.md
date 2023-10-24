@@ -157,6 +157,44 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Filter feature
+
+#### Implementation
+
+The `filter` command allows the user to display a list of students who fulfil all predicates specified within the command.
+
+When the user enters a filter command, the `AddressBookParser` parses the user's input and returns a `FilterCommand`.
+
+Each predicate entered by the user can be modelled by exactly one of the following classes: `StudentHasAddressPredicate`, `StudentHasEmailPredicate`, `StudentHasPhonePredicate`, `StudentIsGenderPredicate`, `StudentIsSecLevelPredicate`, `StudentNearestMrtIsPredicate` and `StudentTakesSubjectPredicate`. These predicates can be added to the `predicateList` field of type `StudentPredicateList` within each `FilterCommand` object.
+
+The following sequence diagram shows how the `filter` command works. In this example, the user is executing the following command: `filter s/Physics g/M`.
+
+<puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram" />
+
+When the `FilterCommandParser` parses the arguments to the `FilterCommand`, it creates a `StudentPredicateList`, to which the relevant predicates specified within the command are added. For example, using the example command given above, the `StudentPredicateList` would consist of 2 predicates: a `StudentTakesSubjectPredicate` and a `StudentIsGenderPredicate`.
+These predicates are then combined into a single `Predicate<Student>`, using the `and()` method from the `Predicate` interface.
+
+The following activity diagram summarizes what happens when a user executes a `filter` command:
+
+<puml src="diagrams/FilterActivityDiagram.puml" alt="FilterActivityDiagram" width="250" />
+
+#### Design considerations:
+
+**Aspect: How the predicates specified within a single `FilterCommand` should be combined:**
+
+* **Alternative 1 (current choice):** Combine predicates using the `and()` method from the `Predicate` interface.
+  * Pros:
+    * More in line with what the user would expect from a `filter` command.
+  * Cons:
+    * Users would experience less flexibility when using the command (for instance, the command `filter s/Physics s/Chemistry` cannot be used to display students taking Physics and/or Chemistry at the tuition centre).
+* Alternative 2: Combine predicates using the `or()` method from the `Predicate` interface.
+  * Pros:
+    * Greater flexibility for users when filtering the list of students.
+  * Cons:
+    * Less in line with users' expectations of a `filter` command; not as intuitive.
+* We made the choice of Alternative 1 over Alternative 2 as we found that more intuitive commands would be easier for users to learn and eventually master.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -545,7 +583,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The students' data format should persistent.
+4.  The students' data format should be persistent.
 5.  The application should be usable by a novice who has never interacted with command line interface before.
 6.  The project is expected to adhere to a schedule that delivers several features implemented by 4 to 5 team members every week.
 
@@ -555,11 +593,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Student data**: Name, phone number, email, address, tag for each student
+* **Student data**: Name, phone number, email, address, gender, sec level, nearest MRT and subject(s) for each student
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -611,3 +649,7 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+
+## **Appendix: Planned Enhancements**

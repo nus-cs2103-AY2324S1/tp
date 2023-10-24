@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "User Guide"
-    pageNav: 3
+  title: "User Guide"
+  pageNav: 3
 ---
 
 # Tutorium User Guide
@@ -89,7 +89,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT 
 Examples:
 * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry s/Physics`
 * `add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics`
-  <br>  
+  <br>
   ![result for 'add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics'](images/ug_images/addedResult.png)
 
 ### Importing data from .csv file: `import`
@@ -207,7 +207,7 @@ Format: `table {prefix}`
 * prefix is case-sensitive.
 * Exactly one of `g/`, `l/` or `s/` must be provided.
 
-Examples: 
+Examples:
 * `table g/` will show a table categorized by student gender.
 * `table l/` will show a table categorized by student sec level.
 * `table s/` will show a table categorized by student subject.
