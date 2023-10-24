@@ -11,8 +11,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Address App" minWidth="800" minHeight="800" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -47,19 +48,39 @@
         </StackPane>
 
         <StackPane fx:id="cardContainer" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+
+          <VBox fx:id="singleListContainer" visible="false" VBox.vgrow="ALWAYS">
+            <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
+
+            <VBox fx:id="teamList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="teamListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
           </VBox>
 
-          <VBox fx:id="teamList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="teamListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-          </VBox>
+          <HBox fx:id="dualListContainer" HBox.hgrow="ALWAYS">
+            <VBox fx:id="D_personList" styleClass="pane-with-border" minWidth="340" prefWidth="1000" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="D_personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
+
+            <VBox fx:id="D_teamList" styleClass="pane-with-border" minWidth="340" prefWidth="1000" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="D_teamListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            </VBox>
+          </HBox>
+
         </StackPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
