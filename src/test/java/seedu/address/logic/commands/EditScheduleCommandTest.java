@@ -131,6 +131,34 @@ public class EditScheduleCommandTest {
     }
 
     @Test
+    public void execute_clashingScheduleUnfilteredList_failure() {
+        Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
+        Schedule secondSchedule = model.getFilteredScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
+        EditScheduleDescriptor descriptor =
+            new EditScheduleDescriptorBuilder(firstSchedule).withEndTime(secondSchedule.getEndTime())
+                .build();
+        System.out.println(descriptor);
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_SCHEDULE, descriptor);
+
+        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_CLASHING_SCHEDULE);
+    }
+
+    @Test
+    public void execute_clashingScheduleFilteredList_failure() {
+        Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
+        showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
+
+        // edit schedule in filtered list into a duplicate in address book
+        Schedule scheduleInList = model.getAddressBook().getScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
+
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_SCHEDULE,
+            new EditScheduleDescriptorBuilder(scheduleInList).withStartTime(firstSchedule.getStartTime())
+                .build());
+
+        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_CLASHING_SCHEDULE);
+    }
+
+    @Test
     public void execute_invalidScheduleIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredScheduleList().size() + 1);
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
