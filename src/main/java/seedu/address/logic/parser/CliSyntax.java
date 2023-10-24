@@ -14,4 +14,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_JOIN_DATE = new Prefix("/jd");
     public static final Prefix PREFIX_SALARY = new Prefix("/s");
     public static final Prefix PREFIX_ANNUAL_LEAVE = new Prefix("/l");
+    public static final Prefix PREFIX_ADD_ANNUAL_LEAVE_ON = new Prefix("/on");
+    public static final Prefix PREFIX_ADD_ANNUAL_LEAVE_FROM = new Prefix("/from");
+    public static final Prefix PREFIX_ADD_ANNUAL_LEAVE_TO = new Prefix("/to");
+
 }
