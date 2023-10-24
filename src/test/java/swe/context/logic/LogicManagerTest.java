@@ -15,9 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import swe.context.logic.Logic;
-import swe.context.logic.LogicManager;
-import swe.context.logic.Messages;
 import swe.context.logic.commands.AddCommand;
 import swe.context.logic.commands.CommandResult;
 import swe.context.logic.commands.ListCommand;
@@ -33,6 +30,8 @@ import swe.context.storage.JsonSettingsStorage;
 import swe.context.storage.StorageManager;
 import swe.context.testutil.ContactBuilder;
 import swe.context.testutil.TestData;
+
+
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");

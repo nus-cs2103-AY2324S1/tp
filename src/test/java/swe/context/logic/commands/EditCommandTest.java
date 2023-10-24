@@ -26,6 +26,8 @@ import swe.context.testutil.ContactBuilder;
 import swe.context.testutil.EditContactDescriptorBuilder;
 import swe.context.testutil.TestData;
 
+
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */

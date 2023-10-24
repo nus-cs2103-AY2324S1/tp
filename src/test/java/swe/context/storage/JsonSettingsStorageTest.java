@@ -14,9 +14,9 @@ import swe.context.commons.core.GuiSettings;
 import swe.context.commons.exceptions.DataLoadingException;
 import swe.context.model.ReadOnlySettings;
 import swe.context.model.Settings;
-import swe.context.storage.JsonSettingsStorage;
-import swe.context.storage.SettingsStorage;
 import swe.context.testutil.TestData;
+
+
 
 public class JsonSettingsStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get(

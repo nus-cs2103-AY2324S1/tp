@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import swe.context.commons.core.GuiSettings;
+
 
 public class GuiSettingsTest {
     @Test

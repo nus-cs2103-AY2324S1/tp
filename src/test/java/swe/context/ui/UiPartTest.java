@@ -12,7 +12,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import javafx.fxml.FXML;
 import swe.context.MainApp;
-import swe.context.ui.UiPart;
+
+
 
 public class UiPartTest {
 

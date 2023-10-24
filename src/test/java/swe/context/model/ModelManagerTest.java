@@ -9,9 +9,8 @@ import static swe.context.testutil.TestData.Valid.Contact.ALICE;
 import org.junit.jupiter.api.Test;
 
 import swe.context.commons.core.GuiSettings;
-import swe.context.model.Contacts;
-import swe.context.model.ModelManager;
-import swe.context.model.Settings;
+
+
 
 public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();

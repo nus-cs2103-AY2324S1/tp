@@ -10,8 +10,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import swe.context.model.contact.NameContainsKeywordsPredicate;
 import swe.context.testutil.ContactBuilder;
+
+
 
 public class NameContainsKeywordsPredicateTest {
 

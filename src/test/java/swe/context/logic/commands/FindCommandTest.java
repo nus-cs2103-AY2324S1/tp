@@ -15,11 +15,12 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import swe.context.logic.Messages;
-import swe.context.logic.commands.FindCommand;
 import swe.context.model.Model;
 import swe.context.model.ModelManager;
 import swe.context.model.Settings;
 import swe.context.model.contact.NameContainsKeywordsPredicate;
+
+
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

@@ -11,12 +11,9 @@ import swe.context.commons.core.GuiSettings;
 import swe.context.model.ReadOnlyContacts;
 import swe.context.model.ReadOnlySettings;
 import swe.context.model.Settings;
-import swe.context.storage.ContactsStorage;
-import swe.context.storage.JsonContactsStorage;
-import swe.context.storage.JsonSettingsStorage;
-import swe.context.storage.SettingsStorage;
-import swe.context.storage.StorageManager;
 import swe.context.testutil.TestData;
+
+
 
 public class StorageManagerTest {
     @TempDir

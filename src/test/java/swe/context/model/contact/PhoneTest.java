@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import swe.context.model.contact.Phone;
+
 
 public class PhoneTest {
     @Test

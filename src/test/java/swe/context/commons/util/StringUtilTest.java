@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
 
-import swe.context.commons.util.StringUtil;
+
 
 public class StringUtilTest {
 

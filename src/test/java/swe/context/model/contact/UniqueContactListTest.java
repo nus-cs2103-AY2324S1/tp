@@ -13,12 +13,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import swe.context.model.contact.Contact;
-import swe.context.model.contact.UniqueContactList;
 import swe.context.model.contact.exceptions.ContactNotFoundException;
 import swe.context.model.contact.exceptions.DuplicateContactException;
 import swe.context.testutil.ContactBuilder;
 import swe.context.testutil.TestData;
+
+
 
 public class UniqueContactListTest {
     private final UniqueContactList uniqueContactList = new UniqueContactList();
