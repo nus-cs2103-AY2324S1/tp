@@ -45,7 +45,6 @@ public class Time {
      */
     public int compareTo(Time otherTime) {
         requireNonNull(otherTime);
-        System.out.println(this.day.compareTo(otherTime.day));
         return this.day.compareTo(otherTime.day) == 0 ? this.hour.compareTo(otherTime.hour)
             : this.day.compareTo(otherTime.day);
     }
@@ -56,6 +55,7 @@ public class Time {
     }
 
     public static DayOfWeek decodeDay(String day) {
+        day = day.toLowerCase();
         if (DayOfWeek.MONDAY.toString().toLowerCase().contains(day)) {
             return DayOfWeek.MONDAY;
         } else if (DayOfWeek.TUESDAY.toString().toLowerCase().contains(day)) {
