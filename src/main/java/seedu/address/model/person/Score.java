@@ -59,6 +59,5 @@ public class Score implements Comparable<Score> {
     public int compareTo(Score other) {
         return Integer.compare(this.value, other.value);
     }
-
-
 }
+
