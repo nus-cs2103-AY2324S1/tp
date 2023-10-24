@@ -14,7 +14,7 @@ public abstract class FindCommand extends Command {
     public static final java.lang.String COMMAND_WORD = "find";
 
     public static final java.lang.String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all persons whose names contain any of the specified keywords (case insensitive)"
+            + ": Finds all persons whose names contain any of the specified keywords (case insensitive)\n"
             + "or all persons in a specified group (case sensitive) and displays them as a list.\n"
             + "Parameters: " + PREFIX_NAME
             + "KEYWORDS_IN_NAME (case insensitive)\n"
@@ -27,6 +27,8 @@ public abstract class FindCommand extends Command {
             + COMMAND_WORD + " can only handle one person/group at a time.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "nicholas\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_GROUPTAG + "CS2103T";
+
+    public static final String MESSAGE_EMPTY_NAME = "Person does not exist";
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;
