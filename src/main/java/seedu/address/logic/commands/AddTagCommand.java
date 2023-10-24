@@ -35,7 +35,6 @@ public class AddTagCommand extends TagCommand {
         Student editedStudent = new Student(
                 studentToTag.getName(), studentToTag.getPhone(), studentToTag.getEmail(),
                 studentToTag.getStudentNumber(), studentToTag.getClassDetails(), newTags);
-
         model.setStudent(studentToTag, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 

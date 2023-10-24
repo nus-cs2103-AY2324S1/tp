@@ -122,9 +122,9 @@ Tags the existing student in the address book.
 
 Format: `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
-* Tags the student with the specified `STUDENT_NUMBER`. 
+* Tags the student with the specified `STUDENT_NUMBER`.
 * When editing tags without `/add` or `/delete`, the existing tags of the student will be removed.
-* You can remove all the student’s tags by typing without `/add` and `/delete` 
+* You can remove all the student’s tags by typing without `/add` and `/delete`
   and `t/` without specifying any tags after it.
 
 Examples:
@@ -137,8 +137,8 @@ Examples:
 
 **TL;DR:** Lookup student details containing any of the given fields.
 
-This feature in Class Manager 2023 is a robust tool that empowers CS2103T TAs to 
-efficiently search for and access student information based on specific criteria. 
+This feature in Class Manager 2023 is a robust tool that empowers CS2103T TAs to
+efficiently search for and access student information based on specific criteria.
 This feature offers both broad and granular search capabilities, enabling TAs to
 list all students from a particular class or narrow down their search by providing
 one or more lookup parameters.
@@ -174,7 +174,7 @@ Format: `mark TUTORIAL_INDEX s/STUDENT_NUMBER`
 * The TUTORIAL_INDEX must be a valid positive integer.
 
 Examples:
-* `mark 1 s/A0249112A` 
+* `mark 1 s/A0249112A`
 
 ### Deleting a student : `delete`
 
@@ -182,7 +182,7 @@ Deletes the specific student.
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The STUDENT NUMBER must be valid and exist. 
+* The STUDENT NUMBER must be valid and exist.
 
 Examples:
 * `delete s/A0249112A`
@@ -226,7 +226,7 @@ Examples:
 
 ### Configuring Class Manager: `config`
 
-Configures Class Manager 2023 with the module information, such as tutorial count and assignment count. 
+Configures Class Manager 2023 with the module information, such as tutorial count and assignment count.
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 * Parameters can be in any order.

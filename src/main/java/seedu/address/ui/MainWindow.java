@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private ClassDetailBox classDetailBox;
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -46,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane studentListPanelPlaceholder;
+
+    @FXML
+    private StackPane studentClassDetail;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -117,6 +121,10 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay(WELCOME_MESSAGE);
+
+        classDetailBox = new ClassDetailBox(logic.getSelectedStudent());
+        studentClassDetail.getChildren().add(classDetailBox.getRoot());
+
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());

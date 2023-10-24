@@ -33,6 +33,12 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of students */
     ObservableList<Student> getFilteredStudentList();
 
+    /** Returns view of selected student. */
+    ObservableList<Student> getSelectedStudent();
+
+    /** Sets a student to be selected to view class details. */
+    void setSelectedStudent(Student student);
+
     /**
      * Returns the user prefs' address book file path.
      */

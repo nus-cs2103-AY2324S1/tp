@@ -94,6 +94,13 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setSelectedStudent_setStudent_success() {
+        modelManager.addStudent(ALICE);
+        modelManager.setSelectedStudent(ALICE);
+        assertEquals(ALICE, modelManager.getSelectedStudent().get(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withStudent(ALICE).withStudent(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
