@@ -122,7 +122,6 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay(WELCOME_MESSAGE);
 
-        logic.setSelectedStudent(logic.getFilteredPersonList().get(0));
         classDetailBox = new ClassDetailBox(logic.getSelectedStudent());
         studentClassDetail.getChildren().add(classDetailBox.getRoot());
 
