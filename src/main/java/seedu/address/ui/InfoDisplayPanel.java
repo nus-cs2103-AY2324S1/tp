@@ -19,9 +19,11 @@ public class InfoDisplayPanel extends UiPart<Region> {
     @FXML
     private Label personDisplay;
     @FXML
-    private FlowPane tags;
+    private FlowPane personTags;
     @FXML
     private Label meetingDisplay;
+    @FXML
+    private FlowPane meetingTags;
 
     /**
      * Creates a text display with the given {@code person}.
@@ -30,20 +32,24 @@ public class InfoDisplayPanel extends UiPart<Region> {
         super(FXML);
     }
 
-    public void setViewedPerson(Pair<Person, Meeting> pair) {
+    public void setViewedModel(Pair<Person, Meeting> pair) {
         Person person = pair.getKey();
         Meeting meeting = pair.getValue();
-        tags.getChildren().clear();
+        personTags.getChildren().clear();
+        meetingTags.getChildren().clear();
 
         if (person != null) {
             personDisplay.setText(person.toDisplayString());
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                    .forEach(tag -> personTags.getChildren().add(new Label(tag.tagName)));
         }
 
         if (meeting != null) {
             meetingDisplay.setText(meeting.toDisplayString());
+            meeting.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> meetingTags.getChildren().add(new Label(tag.tagName)));
         }
     }
 }

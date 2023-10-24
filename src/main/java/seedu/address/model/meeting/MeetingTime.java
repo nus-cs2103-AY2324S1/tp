@@ -14,8 +14,8 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class MeetingTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "MeetingTimes should be in LocalDateTime"
-            + " and start cannot be after end";
+    public static final String MESSAGE_CONSTRAINTS = "Meeting Time should have the format [dd.mm.yyyy hhmm] and Start"
+            + " cannot be after End\neg. 18.09.2023 1500 represents 18 September 2023, 3PM";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy, kkmm");
     private final LocalDateTime start;
     private final LocalDateTime end;
