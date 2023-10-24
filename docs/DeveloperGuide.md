@@ -4,13 +4,27 @@ title: Developer Guide
 ---
 
 # Table of Contents
-1. [Acknowledgements](Acknowledgements)
-2. [Setting up, getting started](#Setting up,getting started)
-3. [Design](#Design)
-4. [Implementation](#Implementation)
-5. [Documentation, logging, testing, configuration, dev-ops](#Documentation,logging,testing,configuration,dev-ops)
-6. [Appendix: Requirements](#Appendix:Requirements)
-7. [Appendix: Instructions for manual testing](#Appendix:Instructions for manual testing)
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+   - [Architecture](#architecture)
+   - [UI component](#ui-component)
+   - [Logic component](#logic-component)
+   - [Model component](#model-component)
+   - [Storage component](#storage-component)
+   - [Common classes](#common-classes)
+4. [Implementation](#implementation)
+   - [Undo/Redo](#proposed-undoredo-feature)
+   - [Filter](#proposed-filter-by-tag-feature)
+   - [Markdown Support](#proposed-markdown-support-feature)
+5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+6. [Appendix: Requirements](#appendix-requirements)
+   - [Product scope](#product-scope)
+   - [User stories](#user-stories)
+   - [Use cases](#use-cases)
+   - [Non-Functional Requirements](#non-functional-requirements)
+   - [Glossary](#glossary)
+7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -89,7 +103,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Card` object residing in the `Model`.
-* answer of the Card created is hidden from the user when they browse the deck 
+* answer of the Card created is hidden from the user when they browse the Deck 
 * user can scroll to see the different `Card` listed in lesSON
 
 ### Logic component
@@ -160,7 +174,89 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
 
-### [Proposed] Tag filter feature
+This section describes some noteworthy details on how certain features are implemented.
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()`Saves the current address book state in its history.
+* `VersionedAddressBook#undo()`Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()`Restores a previously undone address book state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+![UndoRedoState0](images/UndoRedoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+
+![UndoRedoState1](images/UndoRedoState1.png)
+
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+![UndoRedoState2](images/UndoRedoState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</div>
+
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</div>
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</div>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+
+![UndoRedoState4](images/UndoRedoState4.png)
+
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+   * Pros: Easy to implement.
+   * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+   * Cons: We must ensure that the implementation of each individual command are correct.
+
+### \[Proposed\] Filter by Tag feature
+
+#### Proposed Implementation
 
 The proposed feature aims to filter the flashcards and display cards of a specific `tag`. This allows the users to 
 view specific groups of cards under the same `tag`, granting them more control over their study material.
@@ -179,8 +275,22 @@ Step 5: Deck will now display only the cards with the `CS2103T` tag.
 
 Step 6: Should user want to see the full deck, they will execute `list` to view their full deck of cards.
 
+#### Design considerations:
 
-### [Proposed] Search Filter feature
+**Aspect: How filter executes:**
+
+* **Alternative 1 (current choice):** Filter through the whole deck using the filter method on a stream of cards.
+    * Pros: Easy to implement.
+    * Cons:
+      1. May have performance issues when Deck eventually gets too big.
+      2. Inefficient if specific tag is a small fraction of Deck.
+* **Alternative 2:** Construct a \'mini-deck\' for each tag.
+    * Pros: Quick search for all cards with specific tag.
+    * Cons: 
+      1. Will use more memory.
+      2. Adding/Deleting/Editing cards will require modifications to \'mini-deck\'.
+
+### \[Proposed\] Search Filter feature
 
 Introducing a search feature that allows users to search for specific flashcards based on their questions. This feature empowers users with greater navigability over their study materials.
 
@@ -196,6 +306,40 @@ Step 4: To return to viewing your full deck of cards, simply execute the `list` 
 
 Step 5: If the user wishes to practise from this view, simply `practise index` for the index of the card
 
+### \[Proposed\] Markdown support feature
+
+#### Proposed Implementation
+
+The proposed feature aims to support Markdown based language for inputs and renders the corresponding display (i.e. ** Bold ** will become **Bold**). 
+This provides users the freedom to adapt the content within the card, granting them more control over their study material. Users would be able to highlight more specific 
+part of the `Answer` which would be the key concept tested in the exam.
+
+Given below is an example usage of the Markdown support feature.
+
+Step 1: User creates a card.
+
+Step 2: User executes `add q/ What base is hexadecimal in? a/ Hexadecimal is in **Base 16**`
+
+Step 3: `AddCommandParser` will parse in the input and then, parse in the values collected in the multimap to a `MarkdownParser`
+to create a new `Card`.
+
+Step 4: The `Card` is added to the `Model` to be added to the `Deck`.
+
+Step 5: The `UI` renders the `Card` with the relevant fields meant to be written in Markdown.
+
+#### Design considerations:
+
+**Aspect: How Markdown support executes:**
+
+* **Alternative 1 :** Use existing libraries that support Markdown using JavaFX.
+    * Pros: Easy to implement.
+    * Cons: Dependency on third party library.
+* **Alternative 2:** Individually support each type of Markdown language.
+    * Pros: Scope of support can be determined by developer.
+    * Cons:
+        1. Time-consuming.
+        2. More checks and assertions required for increased edge cases.
+        3. More testing. 
 
 --------------------------------------------------------------------------------------------------------------------
 
