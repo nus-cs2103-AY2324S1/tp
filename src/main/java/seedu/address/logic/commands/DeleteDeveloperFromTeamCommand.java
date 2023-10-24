@@ -46,7 +46,8 @@ public class DeleteDeveloperFromTeamCommand extends Command {
      *
      * @param model The current state of the application model.
      * @return A CommandResult indicating the result of executing this command on the given model.
-     * @throws CommandException if the team name or developer name is invalid, or if the developer is not part of the team.
+     * @throws CommandException if the team name or developer name is invalid
+     *          ,or if the developer is not part of the team.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {

@@ -43,6 +43,7 @@ public class Person {
         this.identitycode = new IdentityCode(String.valueOf(IdentityCodeManager.getNextIdentityCode()));
     }
 
+
     public Name getName() {
         return name;
     }

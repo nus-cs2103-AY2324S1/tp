@@ -12,7 +12,7 @@ import seedu.address.model.team.Team;
 public class TeamBuilder {
 
     public static final String DEFAULT_TEAM_NAME = "Team Alpha";
-    public static final String DEFAULT_LEADER_IDENTITY_CODE = "TL001";
+    public static final String DEFAULT_LEADER_IDENTITY_CODE = "1";
 
     private IdentityCode leaderIdentityCode;
     private String teamName;
