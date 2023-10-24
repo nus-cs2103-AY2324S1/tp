@@ -55,6 +55,18 @@ public class Time {
         return day.toString().substring(0, 3) + " " + hour.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Time)) {
+            return false;
+        } else if (object == this) {
+            return true;
+        } else {
+            Time otherTime = (Time) object;
+            return this.day.equals(otherTime.day) && this.hour.equals(otherTime.hour);
+        }
+    }
+
     public static DayOfWeek decodeDay(String day) {
         if (DayOfWeek.MONDAY.toString().toLowerCase().contains(day)) {
             return DayOfWeek.MONDAY;

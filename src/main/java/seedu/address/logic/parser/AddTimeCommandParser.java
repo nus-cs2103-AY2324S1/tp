@@ -20,7 +20,6 @@ public class AddTimeCommandParser implements Parser<AddTimeCommand> {
     public AddTimeCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_FREETIME, PREFIX_ENDINTERVAL);
-
         //find a way to separate error msg when ";" is missing
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FREETIME)
                 || !argMultimap.getPreamble().isEmpty()) {

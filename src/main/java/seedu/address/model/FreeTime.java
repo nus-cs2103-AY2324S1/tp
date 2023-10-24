@@ -31,6 +31,33 @@ public class FreeTime implements Iterable<TimeInterval> {
         internalList.addAll(timeIntervals);
     }
 
+    public void deleteTime(ArrayList<TimeInterval> timeIntervals) {
+        for (TimeInterval time : timeIntervals) {
+            if (internalList.contains(time)) {
+                System.out.println(time);
+                internalList.remove(time);
+            }
+        }
+//        internalList.removeAll(timeIntervals);
+    }
+
+    /**
+     * Checks whether timeInterval contains the time
+     * @param timeInterval The time Interval to check
+     * @return Whether time interval is in list
+     */
+    public boolean hasTime(TimeInterval timeInterval) {
+        return internalList.contains(timeInterval);
+    }
+
+    /**
+     * Removes free time from list
+     * @param timeInterval The time interval to remove
+     */
+    public void removeTime(TimeInterval timeInterval) {
+        internalList.remove(timeInterval);
+    }
+
     @Override
     public Iterator<TimeInterval> iterator() {
         return this.internalList.iterator();
