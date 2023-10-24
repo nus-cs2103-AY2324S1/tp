@@ -33,6 +33,7 @@ public class Person {
     private Optional<Telegram> telegram;
     private final Set<Tag> tags = new HashSet<>();
     private Optional<Integer> id;
+    private Balance balance;
 
     private List<Note> notes;
 
@@ -52,6 +53,7 @@ public class Person {
         this.tags.addAll(tags);
         this.id = Optional.empty();
         this.notes = new ArrayList<>();
+        this.balance = new Balance(0);
     }
 
     /**
@@ -136,6 +138,11 @@ public class Person {
     public Optional<Integer> getId() {
         return id;
     }
+
+    public Balance getBalance() {
+        return balance;
+    }
+
     public int setId(int id) {
         this.id = Optional.of(id);
         return id;
