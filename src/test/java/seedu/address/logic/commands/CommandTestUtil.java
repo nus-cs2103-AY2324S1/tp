@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -44,6 +45,8 @@ public class CommandTestUtil {
     public static final String VALID_NRIC_BOB = "123Z";
     public static final String VALID_LICENCE_PLATE_AMY = "SBC123D";
     public static final String VALID_LICENCE_PLATE_BOB = "SYZ4321Z";
+    public static final String VALID_COMPANY_AMY = "NTUC";
+    public static final String VALID_COMPANY_BOB = "InsureMe";
     public static final String VALID_POLICY_NO_AMY = "AIA1234";
     public static final String VALID_POLICY_NO_BOB = "BBBB2";
     public static final String VALID_POLICY_ISSUE_DATE_AMY = "01-01-2023";
@@ -66,6 +69,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String COMPANY_DESC_AMY = " " + PREFIX_COMPANY + VALID_COMPANY_AMY;
+    public static final String COMPANY_DESC_BOB = " " + PREFIX_COMPANY + VALID_COMPANY_BOB;
     public static final String POLICY_NO_DESC_AMY = " " + PREFIX_POLICY_NUMBER + VALID_POLICY_NO_AMY;
     public static final String POLICY_NO_DESC_BOB = " " + PREFIX_POLICY_NUMBER + VALID_POLICY_NO_BOB;
     public static final String POLICY_ISSUE_DATE_DESC_AMY = " " + PREFIX_POLICY_ISSUE_DATE

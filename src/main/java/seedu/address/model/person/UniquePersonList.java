@@ -38,6 +38,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a particular Nric.
+     */
+    public boolean hasSamePolicyNumber(Person toCheck) {
+        return internalList.stream().anyMatch(toCheck::comparePolicyNumber);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

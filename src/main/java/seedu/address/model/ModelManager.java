@@ -109,6 +109,14 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    /**
+     * Returns true if a person with the same policy number as {@code person} in the address book.
+     */
+    public boolean hasSamePolicyNumber(Person person) {
+        requireNonNull(person);
+        return addressBook.hasSamePolicyNumber(person);
+    }
+
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);

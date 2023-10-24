@@ -33,10 +33,10 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
+        // same name, all other attributes different -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
@@ -96,7 +96,8 @@ public class PersonTest {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
                 + ", nric=" + ALICE.getNric() + ", licence plate=" + ALICE.getLicencePlate() + ", policy="
-                + Policy.class.getCanonicalName() + "{policy number=" + ALICE.getPolicy().getPolicyNumber()
+                + Policy.class.getCanonicalName() + "{company=" + ALICE.getPolicy().getCompany()
+                + ", policy number=" + ALICE.getPolicy().getPolicyNumber()
                 + ", policy issue date=" + ALICE.getPolicy().getPolicyIssueDate() + ", policy expiry date="
                 + ALICE.getPolicy().getPolicyExpiryDate() + "}}";
         assertEquals(expected, ALICE.toString());
