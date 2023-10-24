@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
@@ -222,7 +223,7 @@ public class Lesson {
      * @return stringified version of subject
      */
     public String serializeSubject() {
-        return this.subject.subjectName.toString(); // TODO public access
+        return this.subject != null ? this.subject.subjectName.toString() : Subject.Subjects.NONE.toString(); // TODO public access
     }
     /**
      * Serializes the students to a String
