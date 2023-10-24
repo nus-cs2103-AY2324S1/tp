@@ -113,16 +113,6 @@ public class Person {
     }
 
     /**
-     * Adds an interaction to the person.
-     * @param interactions the set of interaction to be added
-     * @return the updated set of interactions
-     */
-    public Set<Interaction> addInteractions(Set<Interaction> interactions) {
-        this.interactions.addAll(interactions);
-        return this.interactions;
-    }
-
-    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
