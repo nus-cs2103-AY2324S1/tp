@@ -131,7 +131,7 @@ public class UniqueTeamList implements Iterable<Team> {
         }
     }
 
-    public IdentityCode getTeamLeaderIDOfTeam(String teamName) {
+    public IdentityCode getTeamLeaderIdOfTeam(String teamName) {
         return getTeamByName(teamName).getTeamLeaderIdentityCode();
     }
 

@@ -6,7 +6,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.IdentityCode;
-import seedu.address.model.person.Name;
 import seedu.address.model.team.Team;
 import seedu.address.model.team.UniqueTeamList;
 import seedu.address.model.team.exceptions.TeamNotFoundException;
@@ -97,9 +96,9 @@ public class TeamBook implements ReadOnlyTeamBook {
      * @param teamName The name of the team to retrieve its team leader Identity code.
      * @return The Team Leader Identity code if found, or null if the team does not exist.
      */
-    public IdentityCode getTeamLeaderIDOfTeam(String teamName) {
+    public IdentityCode getTeamLeaderIdOfTeam(String teamName) {
         requireNonNull(teamName);
-        return teams.getTeamLeaderIDOfTeam(teamName);
+        return teams.getTeamLeaderIdOfTeam(teamName);
     }
 
     public void setTeamLeaderOfTeam(String teamName, IdentityCode newTeamLeaderID) {
@@ -127,6 +126,12 @@ public class TeamBook implements ReadOnlyTeamBook {
         teams.removeTeamByName(teamName);
     }
 
+    /**
+     * Remove developer from team.
+     *
+     * @param teamName              the team name
+     * @param developerIdentityCode the developer identity code
+     */
     public void removeDeveloperFromTeam(String teamName, IdentityCode developerIdentityCode) {
         if (teams.containsTeamByName(teamName)) {
             teams.removeDeveloperFromTeam(teamName, developerIdentityCode);
@@ -146,13 +151,26 @@ public class TeamBook implements ReadOnlyTeamBook {
         teams.setTeamByName(teamName, editedTeam);
     }
 
-    //handle the duplicate case
+    /**
+     * Checks if given person by identity code is in given team
+     *
+     * @param teamToAddTo          the team to add to
+     * @param devToAddIdentityCode the dev to add identity code
+     * @return the boolean
+     */
+
     public boolean personAlreadyInTeam(String teamToAddTo, IdentityCode devToAddIdentityCode) {
 
         return teams.teamContainsPerson(teamToAddTo, devToAddIdentityCode);
     }
 
-    //handle case where team doesnt exist
+
+    /**
+     * Checks if given team exists.
+     *
+     * @param teamToAddTo the team to add to
+     * @return the boolean
+     */
     public boolean invalidAddToTeam(String teamToAddTo) {
         requireNonNull(teamToAddTo);
         return teams.containsTeamByName(teamToAddTo);
