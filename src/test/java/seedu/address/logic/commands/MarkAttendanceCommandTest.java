@@ -96,15 +96,16 @@ public class MarkAttendanceCommandTest {
     public void equals() {
 
         MarkAttendanceCommand markAmyAttendanceFirstCommand = new MarkAttendanceCommand("Amy Bee", true,
-                LocalDate.now());
-        MarkAttendanceCommand markBobAttendanceCommand = new MarkAttendanceCommand("Bob", false, LocalDate.now());
+                new Week(1));
+        MarkAttendanceCommand markBobAttendanceCommand = new MarkAttendanceCommand("Bob", false,
+                new Week(1));
 
         // same object -> returns true
         assertEquals(markAmyAttendanceFirstCommand, markAmyAttendanceFirstCommand);
 
         // same values -> returns true
         MarkAttendanceCommand markAmyAttendanceFirstCommandCopy = new MarkAttendanceCommand("Amy Bee", true,
-                LocalDate.now());
+                new Week(1));
         assertEquals(markAmyAttendanceFirstCommand, markAmyAttendanceFirstCommandCopy);
 
         // null -> returns not equals

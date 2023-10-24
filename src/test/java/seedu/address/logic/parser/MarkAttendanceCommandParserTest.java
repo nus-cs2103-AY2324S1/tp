@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.model.person.Attendance;
+import seedu.address.model.week.Week;
 
 /**
  * Test class for MarkAttendanceCommandParser.
@@ -28,7 +29,7 @@ public class MarkAttendanceCommandParserTest {
     @Test
     public void parse_validArgsWithName_returnsMarkAttendanceCommand() {
         String userInput = " /name " + VALID_NAME_AMY + " /attendance 1";
-        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_NAME_AMY, true, LocalDate.now());
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_NAME_AMY, true, new Week(1));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -38,7 +39,7 @@ public class MarkAttendanceCommandParserTest {
     @Test
     public void parse_validArgsWithId_returnsMarkAttendanceCommand() {
         String userInput = " /id " + VALID_ID_AMY + " /attendance 0";
-        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_ID_AMY, false, LocalDate.now());
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(VALID_ID_AMY, false, new Week(1));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
