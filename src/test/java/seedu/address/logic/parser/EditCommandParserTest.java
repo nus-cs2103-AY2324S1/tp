@@ -19,7 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NEAREST_MRT_STATION_D
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SEC_LEVEL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_BIOLOGY;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -29,7 +29,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NEAREST_MRT_STA
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEC_LEVEL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BIOLOGY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_PHYSICS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -40,6 +40,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -118,11 +121,11 @@ public class EditCommandParserTest {
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Student} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, "1" + SUBJECT_DESC_PHYSICS
-                + SUBJECT_DESC_MATHEMATICS + TAG_EMPTY, Subject.MESSAGE_CONSTRAINTS);
+                + SUBJECT_DESC_BIOLOGY + TAG_EMPTY, Subject.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + SUBJECT_DESC_PHYSICS
-                + TAG_EMPTY + SUBJECT_DESC_MATHEMATICS, Subject.MESSAGE_CONSTRAINTS);
+                + TAG_EMPTY + SUBJECT_DESC_BIOLOGY, Subject.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_EMPTY + SUBJECT_DESC_PHYSICS
-                + SUBJECT_DESC_MATHEMATICS, Subject.MESSAGE_CONSTRAINTS);
+                + SUBJECT_DESC_BIOLOGY, Subject.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC
@@ -134,14 +137,18 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + SUBJECT_DESC_PHYSICS
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + SUBJECT_DESC_MATHEMATICS
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + SUBJECT_DESC_BIOLOGY
                 + GENDER_DESC_AMY + SEC_LEVEL_DESC_AMY + NEAREST_MRT_STATION_DESC_AMY;
+
+        Set<String> subjects = new HashSet<>();
+        subjects.add(VALID_SUBJECT_PHYSICS);
+        subjects.add(VALID_SUBJECT_BIOLOGY);
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withGender(VALID_GENDER_AMY).withSecLevel(VALID_SEC_LEVEL_AMY)
                 .withNearestMrtStation(VALID_NEAREST_MRT_STATION_AMY)
-                .withSubjects(VALID_SUBJECT_PHYSICS, VALID_SUBJECT_MATHEMATICS).build();
+                .withSubjects(subjects).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -188,7 +195,9 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + SUBJECT_DESC_PHYSICS;
-        descriptor = new EditPersonDescriptorBuilder().withSubjects(VALID_SUBJECT_PHYSICS).build();
+        Set<String> subjects = new HashSet<>();
+        subjects.add(VALID_SUBJECT_PHYSICS);
+        descriptor = new EditPersonDescriptorBuilder().withSubjects(subjects).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -212,7 +221,7 @@ public class EditCommandParserTest {
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + SUBJECT_DESC_PHYSICS + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + SUBJECT_DESC_PHYSICS
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + SUBJECT_DESC_MATHEMATICS;
+                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + SUBJECT_DESC_BIOLOGY;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
@@ -230,7 +239,9 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withSubjects().build();
+        Set<String> subjects = new HashSet<>();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withSubjects(subjects).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

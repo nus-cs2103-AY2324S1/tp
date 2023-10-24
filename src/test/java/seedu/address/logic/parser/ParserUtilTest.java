@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +22,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.SortIn;
+import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 
 public class ParserUtilTest {
@@ -28,13 +31,16 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_DATE = "06 2023";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_SUBJECT_1 = "Additional Mathematics";
+    private static final String VALID_SUBJECT_2 = "English";
+    private static final String VALID_ENROL_DATE_1 = "Jun 2023";
+    private static final String VALID_ENROL_DATE_2 = "Dec 2021";
     private static final String VALID_SORT_IN = "ASC";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -157,34 +163,67 @@ public class ParserUtilTest {
     @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null, null));
     }
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        EnrolDate date = new EnrolDate(VALID_ENROL_DATE_1);
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG, date));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Subject expectedSubject = new Subject(VALID_TAG_1);
-        assertEquals(expectedSubject, ParserUtil.parseTag(VALID_TAG_1));
+        Subject expectedSubject = new Subject(VALID_SUBJECT_1);
+        assertEquals(expectedSubject, ParserUtil.parseTag(VALID_SUBJECT_1));
+        EnrolDate date = new EnrolDate(VALID_ENROL_DATE_1);
+        assertEquals(expectedSubject, ParserUtil.parseTag(VALID_SUBJECT_1, date));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Subject expectedSubject = new Subject(VALID_TAG_1);
+        String tagWithWhitespace = WHITESPACE + VALID_SUBJECT_1 + WHITESPACE;
+        Subject expectedSubject = new Subject(VALID_SUBJECT_1);
         assertEquals(expectedSubject, ParserUtil.parseTag(tagWithWhitespace));
+        EnrolDate date = new EnrolDate(VALID_ENROL_DATE_1);
+        assertEquals(expectedSubject, ParserUtil.parseTag(tagWithWhitespace, date));
     }
 
     @Test
     public void parseTags_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+        EnrolDate date1 = new EnrolDate(VALID_ENROL_DATE_1);
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null, date1));
+        EnrolDate date2 = new EnrolDate(VALID_ENROL_DATE_2);
+        Collection<EnrolDate> dates = new ArrayList<>();
+        dates.add(date1);
+        dates.add(date2);
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null, dates));
     }
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_SUBJECT_1, INVALID_TAG)));
+        EnrolDate date1 = new EnrolDate(VALID_ENROL_DATE_1);
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(
+                Arrays.asList(VALID_SUBJECT_1, INVALID_TAG), date1));
+        EnrolDate date2 = new EnrolDate(VALID_ENROL_DATE_2);
+        Collection<EnrolDate> dates = new ArrayList<>();
+        dates.add(date1);
+        dates.add(date2);
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(
+                Arrays.asList(VALID_SUBJECT_1, INVALID_TAG), dates));
+    }
+
+    @Test
+    public void parseTags_mismatchedSubjectsAndDates_throwsParseException() {
+        EnrolDate date1 = new EnrolDate(VALID_ENROL_DATE_1);
+        EnrolDate date2 = new EnrolDate(VALID_ENROL_DATE_2);
+        Collection<EnrolDate> dates = new ArrayList<>();
+        dates.add(date1);
+        dates.add(date2);
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_SUBJECT_1), dates));
     }
 
     @Test
@@ -194,11 +233,40 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Subject> actualSubjectSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<Subject> actualSubjectSet = ParserUtil.parseTags(Arrays.asList(VALID_SUBJECT_1, VALID_SUBJECT_2));
         Set<Subject> expectedSubjectSet = new HashSet<Subject>(Arrays.asList(
-                new Subject(VALID_TAG_1), new Subject(VALID_TAG_2)));
-
+                new Subject(VALID_SUBJECT_1), new Subject(VALID_SUBJECT_2)));
         assertEquals(expectedSubjectSet, actualSubjectSet);
+        EnrolDate date1 = new EnrolDate(VALID_ENROL_DATE_1);
+        actualSubjectSet = ParserUtil.parseTags(Arrays.asList(VALID_SUBJECT_1, VALID_SUBJECT_2), date1);
+        assertEquals(expectedSubjectSet, actualSubjectSet);
+        EnrolDate date2 = new EnrolDate(VALID_ENROL_DATE_2);
+        Collection<EnrolDate> dates = new ArrayList<>();
+        actualSubjectSet = ParserUtil.parseTags(Arrays.asList(VALID_SUBJECT_1, VALID_SUBJECT_2), dates);
+        assertEquals(expectedSubjectSet, actualSubjectSet);
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsTag() throws Exception {
+        EnrolDate expectedDate = new EnrolDate(VALID_ENROL_DATE_1);
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_ENROL_DATE_1));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_ENROL_DATE_1 + WHITESPACE;
+        EnrolDate expectedDate = new EnrolDate(VALID_ENROL_DATE_1);
+        assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
     }
 
     @Test

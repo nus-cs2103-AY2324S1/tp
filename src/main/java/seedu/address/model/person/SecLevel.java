@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class SecLevel {
 
     /**
-     * Represents all possible genders.
+     * Represents all possible Secondary School Levels.
      */
     private enum SecLevels {
         SECONDARY_ONE,

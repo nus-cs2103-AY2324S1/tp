@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BIOLOGY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -43,7 +43,7 @@ public class UniqueStudentListTest {
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
         Student editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
-                .withSubjects(VALID_SUBJECT_MATHEMATICS).build();
+                .withSubjects(VALID_SUBJECT_BIOLOGY).build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
 
@@ -86,7 +86,7 @@ public class UniqueStudentListTest {
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
         Student editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
-                .withSubjects(VALID_SUBJECT_MATHEMATICS).build();
+                .withSubjects(VALID_SUBJECT_BIOLOGY).build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(editedAlice);

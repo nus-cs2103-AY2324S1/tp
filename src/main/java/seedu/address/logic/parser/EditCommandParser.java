@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROL_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEAREST_MRT_STATION;
@@ -21,6 +22,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
+import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 
 /**
@@ -37,7 +39,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_GENDER, PREFIX_SEC_LEVEL, PREFIX_NEAREST_MRT_STATION, PREFIX_SUBJECT);
+                        PREFIX_GENDER, PREFIX_SEC_LEVEL, PREFIX_NEAREST_MRT_STATION, PREFIX_SUBJECT, PREFIX_ENROL_DATE);
 
         Index index = null;
         Name name = null;
@@ -80,7 +82,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setNearestMrtStation(ParserUtil.parseMrtStation(
                     argMultimap.getValue(PREFIX_NEAREST_MRT_STATION).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(editPersonDescriptor::setSubjects);
+        Collection<EnrolDate> dates = ParserUtil.parseDates(argMultimap.getAllValues(PREFIX_ENROL_DATE));
+        Collection<String> tags = argMultimap.getAllValues(PREFIX_SUBJECT);
+        parseTagsForEdit(tags, dates).ifPresent(editPersonDescriptor::setSubjects);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -91,18 +95,23 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Subject>} if {@code tags} is non-empty.
+     * Parses {@code Collection<String> tags} and {@code Collection<String> dates}
+     * into a {@code Set<Subject>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Subject>} containing zero tags.
      */
-    private Optional<Set<Subject>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<Subject>> parseTagsForEdit(Collection<String> tags,
+                                                    Collection<EnrolDate> dates) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {
             return Optional.empty();
         }
+
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+
+        return dates.isEmpty() ? Optional.of(ParserUtil.parseTags(tagSet))
+                : Optional.of(ParserUtil.parseTags(tagSet, dates));
     }
 
 }

@@ -14,7 +14,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -44,7 +48,7 @@ public class CommandTestUtil {
     public static final String VALID_NEAREST_MRT_STATION_AMY = "Clementi";
     public static final String VALID_NEAREST_MRT_STATION_BOB = "Kent Ridge";
     public static final String VALID_SUBJECT_PHYSICS = "Physics";
-    public static final String VALID_SUBJECT_MATHEMATICS = "Mathematics";
+    public static final String VALID_SUBJECT_BIOLOGY = "Biology";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -63,8 +67,7 @@ public class CommandTestUtil {
     public static final String NEAREST_MRT_STATION_DESC_BOB = " " + PREFIX_NEAREST_MRT_STATION
             + VALID_NEAREST_MRT_STATION_BOB;
     public static final String SUBJECT_DESC_PHYSICS = " " + PREFIX_SUBJECT + VALID_SUBJECT_PHYSICS;
-    public static final String SUBJECT_DESC_MATHEMATICS = " " + PREFIX_SUBJECT + VALID_SUBJECT_MATHEMATICS;
-
+    public static final String SUBJECT_DESC_BIOLOGY = " " + PREFIX_SUBJECT + VALID_SUBJECT_BIOLOGY;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -95,12 +98,17 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withGender(VALID_GENDER_AMY).withSecLevel(VALID_SEC_LEVEL_AMY)
                 .withNearestMrtStation(VALID_NEAREST_MRT_STATION_AMY)
-                .withSubjects(VALID_SUBJECT_PHYSICS).build();
+                .withSubjects(Collections.singleton(VALID_SUBJECT_PHYSICS)).build();
+        Set<String> subjects = new HashSet<>();
+        subjects.add(VALID_SUBJECT_PHYSICS);
+        subjects.add(VALID_SUBJECT_BIOLOGY);
+        Collection<String> dates = new ArrayList<>();
+        dates.add("Jun 2023");
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withGender(VALID_GENDER_BOB).withSecLevel(VALID_SEC_LEVEL_BOB)
                 .withNearestMrtStation(VALID_NEAREST_MRT_STATION_BOB)
-                .withSubjects(VALID_SUBJECT_PHYSICS, VALID_SUBJECT_MATHEMATICS).build();
+                .withSubjects(subjects, dates).build();
     }
 
     /**

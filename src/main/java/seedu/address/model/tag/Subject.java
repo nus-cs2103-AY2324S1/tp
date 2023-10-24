@@ -3,15 +3,28 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 /**
  * Represents a Subject in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidSubjectName(String)}
  */
 public class Subject {
+
+    /**
+         * Represents all possible Subjects.
+     */
+    private enum Subjects {
+        ENGLISH,
+        CHINESE,
+        ELEMENTARY_MATHEMATICS,
+        ADDITIONAL_MATHEMATICS,
+        PHYSICS,
+        CHEMISTRY,
+        BIOLOGY,
+        GEOGRAPHY,
+        HISTORY,
+        SOCIAL_STUDIES,
+        INVALID
+    }
 
     public static final String ENG = "English";
     public static final String CHI = "Chinese";
@@ -24,15 +37,20 @@ public class Subject {
     public static final String HIST = "History";
     public static final String SOC = "Social Studies";
 
-    public static final String MESSAGE_CONSTRAINTS = "Subjects names should be alphanumeric, and should not be blank";
-    private static final String MESSAGE_INVALID_DATE_FORMAT = "Date format should be MMM YYYY (e.g. Jul 2023)";
-    private static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM", Locale.ENGLISH);
-
-
+    public static final String MESSAGE_CONSTRAINTS = "Please enter a valid subject name. Valid subject names include: "
+            + ENG + ", "
+            + CHI + ", "
+            + EMATH + ", "
+            + AMATH + ", "
+            + PHY + ", "
+            + CHEMI + ", "
+            + BIO + ", "
+            + GEOG + ", "
+            + HIST + ", "
+            + "and " + SOC + ".";
 
     public final String subjectName;
-    public final YearMonth enrolDate;
+    public final EnrolDate enrolDate;
 
     /**
      * Constructs a {@code Subject}.
@@ -42,51 +60,51 @@ public class Subject {
     public Subject(String subjectName) {
         requireNonNull(subjectName);
         checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
-
         this.subjectName = subjectName;
-        this.enrolDate = YearMonth.now();
+        this.enrolDate = new EnrolDate();
     }
 
     /**
      * Constructs a {@code Subject}.
      *
      * @param subjectName A valid subject name.
-     * @param date Subject enrol date.
+     * @param enrolDate Subject enrol date.
      */
-    public Subject(String subjectName, String date) {
+    public Subject(String subjectName, EnrolDate enrolDate) {
         requireNonNull(subjectName);
-        checkArgument(isValidSubjectName(subjectName), MESSAGE_CONSTRAINTS);
-
-        YearMonth[] enrolDate = new YearMonth[1];
-        checkArgument(isValidDate(date, enrolDate), MESSAGE_INVALID_DATE_FORMAT);
-
         this.subjectName = subjectName;
-        this.enrolDate = enrolDate[0];
+        this.enrolDate = enrolDate;
     }
 
     /**
      * Returns true if a given string is a valid subject name.
      */
     public static boolean isValidSubjectName(String subjectName) {
-        return subjectName.matches(VALIDATION_REGEX);
-    }
+        Subject.Subjects subject = Subject.Subjects.INVALID;
 
-    /**
-     * Checks if the given date is valid.
-     *
-     * @param date The given date String object.
-     * @param enrolDate An array of size 1 representing
-     *                  a student's enrol date of a
-     *                  particular subject.
-     * @return true if the given date is valid, false otherwise.
-     */
-    public static boolean isValidDate(String date, YearMonth[] enrolDate) {
-        try {
-            enrolDate[0] = YearMonth.parse(date, FORMATTER);
-            return true;
-        } catch (Exception e) {
-            return false;
+        if (subjectName.equalsIgnoreCase(ENG)) {
+            subject = Subjects.ENGLISH;
+        } else if (subjectName.equalsIgnoreCase(CHI)) {
+            subject = Subjects.CHINESE;
+        } else if (subjectName.equalsIgnoreCase(EMATH)) {
+            subject = Subjects.ELEMENTARY_MATHEMATICS;
+        } else if (subjectName.equalsIgnoreCase(AMATH)) {
+            subject = Subjects.ADDITIONAL_MATHEMATICS;
+        } else if (subjectName.equalsIgnoreCase(PHY)) {
+            subject = Subjects.PHYSICS;
+        } else if (subjectName.equalsIgnoreCase(CHEMI)) {
+            subject = Subjects.CHEMISTRY;
+        } else if (subjectName.equalsIgnoreCase(BIO)) {
+            subject = Subjects.BIOLOGY;
+        } else if (subjectName.equalsIgnoreCase(GEOG)) {
+            subject = Subjects.GEOGRAPHY;
+        } else if (subjectName.equalsIgnoreCase(HIST)) {
+            subject = Subjects.HISTORY;
+        } else if (subjectName.equalsIgnoreCase(SOC)) {
+            subject = Subjects.SOCIAL_STUDIES;
         }
+
+        return subject != Subjects.INVALID;
     }
 
     @Override
@@ -113,7 +131,7 @@ public class Subject {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + subjectName + ']';
+        return '[' + subjectName + " (enrolled in: " + enrolDate + ')' + ']';
     }
 
 }

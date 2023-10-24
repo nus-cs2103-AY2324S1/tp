@@ -14,7 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEC_LEVEL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEC_LEVEL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BIOLOGY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_PHYSICS;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withGender("M").withSecLevel("2").withNearestMrtStation("Harbour Front")
-            .withSubjects("Biology", "Music").build();
+            .withSubjects("Chemistry", "Chinese").build();
     public static final Student CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withGender("M").withSecLevel("1")
             .withNearestMrtStation("Jurong West").build();
@@ -50,12 +50,12 @@ public class TypicalPersons {
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withGender("F").withSecLevel("3")
             .withNearestMrtStation("Bugis")
-            .withSubjects("Physics", "Mathematics").build();
+            .withSubjects("Physics", "Biology").build();
     public static final Student FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withGender("F").withSecLevel("2")
             .withNearestMrtStation("Novena")
-            .withSubjects("Mathematics").build();
+            .withSubjects("Biology").build();
     public static final Student GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withGender("M").withSecLevel("2")
@@ -76,12 +76,12 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withGender(VALID_GENDER_AMY).withSecLevel(VALID_SEC_LEVEL_AMY)
             .withNearestMrtStation(VALID_NEAREST_MRT_STATION_AMY)
-            .withSubjects(VALID_SUBJECT_MATHEMATICS).build();
+            .withSubjects(VALID_SUBJECT_BIOLOGY).build();
     public static final Student BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withGender(VALID_GENDER_BOB).withSecLevel(VALID_SEC_LEVEL_BOB)
             .withNearestMrtStation(VALID_NEAREST_MRT_STATION_BOB)
-            .withSubjects(VALID_SUBJECT_MATHEMATICS, VALID_SUBJECT_PHYSICS)
+            .withSubjects(VALID_SUBJECT_BIOLOGY, VALID_SUBJECT_PHYSICS)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

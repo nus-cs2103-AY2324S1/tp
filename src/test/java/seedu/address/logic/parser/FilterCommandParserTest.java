@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BIOLOGY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_PHYSICS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEAREST_MRT_STATION;
@@ -47,13 +47,13 @@ public class FilterCommandParserTest {
         FilterCommand expectedFilterCommand = new FilterCommand(predicateList);
         assertParseSuccess(parser, " g/M m/Kent Ridge", expectedFilterCommand);
 
-        predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_MATHEMATICS)));
+        predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_BIOLOGY)));
         expectedFilterCommand = new FilterCommand(predicateList);
-        assertParseSuccess(parser, "  m/Kent Ridge s/Mathematics g/M", expectedFilterCommand);
+        assertParseSuccess(parser, "  m/Kent Ridge s/Biology g/M", expectedFilterCommand);
 
         predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_PHYSICS)));
         expectedFilterCommand = new FilterCommand(predicateList);
-        assertParseSuccess(parser, " s/Mathematics s/Physics g/M m/Kent Ridge", expectedFilterCommand);
+        assertParseSuccess(parser, " s/Biology s/Physics g/M m/Kent Ridge", expectedFilterCommand);
     }
 
     @Test
