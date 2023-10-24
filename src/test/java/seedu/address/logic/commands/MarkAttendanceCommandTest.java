@@ -43,7 +43,7 @@ public class MarkAttendanceCommandTest {
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee"), true,
                 new Week(1));
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1",
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy)
@@ -63,7 +63,7 @@ public class MarkAttendanceCommandTest {
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
                 new Week(1));
-        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1",
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy)
@@ -111,7 +111,8 @@ public class MarkAttendanceCommandTest {
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
                 testWeek);
 
-        String expectedMessage = String.format(MESSAGE_UPDATED_SUCCESS + "%s\n", amy.getName());
+        String expectedMessage = String.format(MESSAGE_UPDATED_SUCCESS + "%s\n%s" + MESSAGE_PRESENT + "%d\n",
+                amy.getName(), amy.getName(), 1);
 
         Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true)).build();
         expectedModel.addPerson(expectedAmy);
@@ -129,7 +130,7 @@ public class MarkAttendanceCommandTest {
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
             testWeek);
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1",
+        String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true)).build();
