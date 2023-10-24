@@ -50,8 +50,7 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
 
     @FXML
-    private Label ispaid;
-
+    private Label paid;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -68,9 +67,9 @@ public class PersonCard extends UiPart<Region> {
         day.setText(person.getDay().value);
         begin.setText(person.getBegin().value);
         end.setText(person.getEnd().value);
-        //ispaid.setText("1");
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        paid.setText(String.valueOf(person.getPaid()));
     }
 }

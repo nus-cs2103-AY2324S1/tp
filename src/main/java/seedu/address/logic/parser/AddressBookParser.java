@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import   static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
@@ -18,6 +18,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IsPaidCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListUnPaidCommand;
 import seedu.address.logic.commands.PaidCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 

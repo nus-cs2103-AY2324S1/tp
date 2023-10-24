@@ -35,6 +35,7 @@
       <Label fx:id="day" styleClass="cell_small_label" text="\$day" />
       <Label fx:id="begin" styleClass="cell_small_label" text="\$begin" />
       <Label fx:id="end" styleClass="cell_small_label" text="\$end" />
+      <Label fx:id="paid" styleClass="cell_small_label" text="\$paid" />
     </VBox>
   </GridPane>
 </HBox>

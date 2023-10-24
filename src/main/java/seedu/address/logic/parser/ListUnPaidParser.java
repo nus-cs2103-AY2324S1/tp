@@ -10,34 +10,25 @@ import seedu.address.model.person.Day;
 import seedu.address.model.person.DayPredicate;
 import seedu.address.model.person.PaidPredicate;
 
-/**
- * Parses input arguments and creates a new ListCommand object
- */
-public class ListCommandParser implements Parser<ListCommand> {
-    /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
+public class ListUnPaidParser implements Parser<ListCommand> {
+
     public ListCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             return new ListCommand();
         }
 
-        if (trimmedArgs.startsWith("unpaid")) {
-            return new ListUnPaidCommand(new PaidPredicate(true));
-        }
+        boolean paid;
+        paid = false;
 
-        Day day;
-
-        try {
-            day = new Day(trimmedArgs);
+        /*try {
+            paid = new Day(trimmedArgs);
         } catch (IllegalArgumentException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListByDayCommand.MESSAGE_USAGE));
-        }
+        }*/
 
-        return new ListByDayCommand(new DayPredicate(day));
+        ListUnPaidCommand listUnPaidCommand = new ListUnPaidCommand(new PaidPredicate(paid));
+        return listUnPaidCommand;
     }
 }
