@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.time.temporal.ChronoField;
+import java.util.Objects;
 
 /**
  * Represents a Student's attendance in the address book.
