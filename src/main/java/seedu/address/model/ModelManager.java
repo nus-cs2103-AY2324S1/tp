@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
 
@@ -19,7 +20,6 @@ import seedu.address.model.person.PersonType;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
@@ -69,6 +69,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ShortcutSettings getShortcutSettings() {
+        return userPrefs.getShortcutSettings();
+    }
+
+    @Override
+    public void setShortcutSettings(ShortcutSettings shortcutSettings) {
+        requireAllNonNull(shortcutSettings);
+        userPrefs.setShortcutSettings(shortcutSettings);
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
@@ -78,6 +89,9 @@ public class ModelManager implements Model {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
+    //=========== Shortcuts ==================================================================================
+
+
 
     //=========== AddressBook ================================================================================
 

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,6 +34,16 @@ public interface Model {
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' shortcut settings.
+     */
+    ShortcutSettings getShortcutSettings();
+
+    /**
+     * Sets the user prefs' shortcut settings.
+     */
+    void setShortcutSettings(ShortcutSettings shortcutSettings);
 
     /**
      * Returns the user prefs' address book file path.

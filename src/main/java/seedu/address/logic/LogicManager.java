@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,6 +18,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * The main LogicManager of the app.
@@ -39,7 +42,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        addressBookParser = new AddressBookParser(model.getShortcutSettings());
     }
 
     @Override
@@ -84,5 +87,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ShortcutSettings getShortcutSettings() {
+        return model.getShortcutSettings();
+    }
+
+    @Override
+    public void setShortcutSettings(ShortcutSettings shortcutSettings) {
+        model.setShortcutSettings(shortcutSettings);
     }
 }
