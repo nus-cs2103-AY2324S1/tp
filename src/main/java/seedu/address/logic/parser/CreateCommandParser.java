@@ -75,9 +75,9 @@ public class CreateCommandParser implements Parser<CreateCommand> {
                 ? ParserUtil.parseLead(argMultimap.getValue(PREFIX_LEAD).get())
                 : null;
 
-        Person person = new Person(name, phone, email, address, tagList);
-        person = new PersonCreator(person).withTelegram(telegram).withProfession(profession).withIncome(income)
-                .withDetails(details).withLead(lead).build();
+        Person person = new Person.PersonBuilder(name, phone, email, address, tagList)
+                .withLead(lead).withTelegram(telegram).withProfession(profession)
+                .withIncome(income).withDetails(details).build();
 
         return new CreateCommand(person);
     }

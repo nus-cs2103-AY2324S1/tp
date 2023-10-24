@@ -104,9 +104,10 @@ public class EditCommand extends Command {
         Lead updatedLead = editPersonDescriptor.getLead().orElse(personToEdit.getLead());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-
-        Person person = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
-        person = new PersonCreator(person).withLead(updatedLead).build();
+        Person person =
+                new Person.PersonBuilder(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags)
+                        .withLead(updatedLead)
+                        .build();
         return person;
     }
 

@@ -95,10 +95,9 @@ public class PersonCreator {
      * @return the built {@code Person}
      */
     public Person build() {
-        Person person = new Person(name, phone, email, address, tags, telegram,
-                profession, income, details, lead, interactions);
-        return person;
+        return new Person.PersonBuilder(name, phone, email, address, tags)
+                .withLead(lead).withTelegram(telegram).withProfession(profession)
+                .withIncome(income).withDetails(details).withInteractions(interactions)
+                .build();
     }
-
 }
-

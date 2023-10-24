@@ -113,12 +113,13 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        Person.PersonBuilder personBuilder =
+                new Person.PersonBuilder(modelName, modelPhone, modelEmail, modelAddress, modelTags);
         if (lead != null && !lead.isEmpty()) {
             final Lead modelLead = new Lead(lead);
-            person = new PersonCreator(person).withLead(modelLead).build();
+            personBuilder = personBuilder.withLead(modelLead);
         }
-        return person;
+        return personBuilder.build();
     }
 
 }
