@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventList;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -123,7 +125,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
-        this.events.setEvent(target, editedEvent);
+        Event targetEvent = removePersonsInGroups(editedEvent);
+        this.events.setEvent(target, targetEvent);
     }
 
     /**
@@ -131,11 +134,31 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param event Event to be added.
      */
     public void addEvent(Event event) {
-        this.events.addEvent(event);
+        // Get persons per group
+        Event targetEvent = removePersonsInGroups(event);
+        this.events.addEvent(targetEvent);
     }
 
     public void deleteEvent(Event event) {
         this.events.remove(event);
+    }
+
+    /**
+     * remove persons from the event if it is already in the group
+     * @param event event to operate on
+     * @return return the event after finishing
+     */
+    public Event removePersonsInGroups(Event event) {
+        for (Group group: event.getGroups()) {
+            Set<Name> personNames = new HashSet<>();
+            for (Person person: this.persons) {
+                if (person.getGroups().contains(group)) {
+                    personNames.add(person.getName());
+                }
+            }
+            event.getNames().removeAll(personNames);
+        }
+        return event;
     }
 
     // ========== Group operations ===========================================================

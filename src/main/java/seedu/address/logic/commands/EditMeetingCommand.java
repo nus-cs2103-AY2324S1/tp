@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_GROUPS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_PERSONS;
 
 import java.util.Collections;
@@ -27,6 +29,7 @@ import seedu.address.model.event.Meeting;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
+
 /**
  * Command to edit a meeting in the address book.
  */
@@ -45,13 +48,14 @@ public class EditMeetingCommand extends Command {
             + "[" + PREFIX_START_TIME + "START_TIME] "
             + "[" + PREFIX_END_TIME + "END_TIME] "
             + "[" + PREFIX_NAME + "NAME]... "
-            + "[" + PREFIX_UNASSIGN_PERSONS + "NAME]...\n"
+            + "[" + PREFIX_UNASSIGN_PERSONS + "NAME]..."
+            + "[" + PREFIX_GROUP + "GROUP]..."
+            + "[" + PREFIX_UNASSIGN_GROUPS + "GROUP]..."
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_MEETING_NAME + "TP WEEK 8 MEETING "
             + PREFIX_DATE + "2023-10-13 "
             + PREFIX_NAME + "Alice "
-            + PREFIX_UNASSIGN_PERSONS + "Bob "
-            + PREFIX_UNASSIGN_PERSONS + "Charlie ";
+            + PREFIX_GROUP + "Team2 ";
 
     public static final String MESSAGE_EDIT_SUCCESS = "Edited meeting: %1$s";
 
@@ -85,12 +89,6 @@ public class EditMeetingCommand extends Command {
         return new CommandResult(generateSuccessMessage(editedMeeting));
     }
 
-    /**
-     * Creates and returns a {@code Meeting} with the details of {@code meetingToEdit}
-     * @param meetingToEdit meeting to edit
-     * @param editMeetingDescriptor details to edit the meeting with
-     * @return meeting with the appropriate details edited
-     */
     private static Event createEditedMeeting(Event meetingToEdit,
                                              EditMeetingDescriptor editMeetingDescriptor,
                                              Model model) throws CommandException {
@@ -136,14 +134,11 @@ public class EditMeetingCommand extends Command {
                 Model model) throws CommandException {
         Set<Group> updatedGroups;
         if (editMeetingDescriptor.getGroups().isPresent()) {
-
             Set<Group> invalidGroups = model.findInvalidGroups(editMeetingDescriptor.getGroups().get());
-
             if (!invalidGroups.isEmpty()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_GROUP,
                         listInvalidGroups(invalidGroups)));
             }
-
             meetingToEdit.getGroups().addAll(editMeetingDescriptor.getGroups().get());
         }
         updatedGroups = meetingToEdit.getGroups();
@@ -154,37 +149,30 @@ public class EditMeetingCommand extends Command {
               Model model, Set<Name> updatedPersonNames) throws CommandException {
         if (editMeetingDescriptor.getUnassignedPersons().isPresent()) {
             Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getUnassignedPersons().get());
-
             if (!invalidNames.isEmpty()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
                         listInvalidNames(invalidNames)));
             } else if (!meetingToEdit.getNames().containsAll(editMeetingDescriptor.getUnassignedPersons().get())) {
                 //case where the persons to be unassigned have not even been previously assigned
-
                 Set <Name> invalidUnassignNames = findInvalidUnassignNames(meetingToEdit,
                         editMeetingDescriptor.getUnassignedPersons().get());
-
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_UNASSIGN_PERSON,
                         listInvalidNames(invalidUnassignNames)));
             }
             //remove the persons from the new list of persons
             updatedPersonNames.removeAll(editMeetingDescriptor.getUnassignedPersons().get());
-        }
-        // no persons to be unassigned, do nothing
+        } // no persons to be unassigned, do nothing
     }
 
     private static Set<Name> handleEditAssignPersons(Event meetingToEdit, EditMeetingDescriptor editMeetingDescriptor,
                 Model model) throws CommandException {
         Set<Name> updatedPersonNames;
         if (editMeetingDescriptor.getAssignedPersons().isPresent()) {
-
             Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getAssignedPersons().get());
-
             if (!invalidNames.isEmpty()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
                         listInvalidNames(invalidNames)));
             }
-
             //add the new persons to the existing list of persons
             meetingToEdit.getNames().addAll(editMeetingDescriptor.getAssignedPersons().get());
         }
@@ -194,7 +182,6 @@ public class EditMeetingCommand extends Command {
 
     private static Set<Name> findInvalidUnassignNames(Event meetingToEdit, Set<Name> unassignNames) {
         Set<Name> invalidUnassignNames = new HashSet<>();
-
         for (Name name : unassignNames) {
             if (!meetingToEdit.getNames().contains(name)) {
                 invalidUnassignNames.add(name);
@@ -205,7 +192,6 @@ public class EditMeetingCommand extends Command {
 
     private static Set<Group> findInvalidUnassignGroups(Event meetingToEdit, Set<Group> unassignGroups) {
         Set<Group> invalidUnassignGroups = new HashSet<>();
-
         for (Group group : unassignGroups) {
             if (!meetingToEdit.getGroups().contains(group)) {
                 invalidUnassignGroups.add(group);

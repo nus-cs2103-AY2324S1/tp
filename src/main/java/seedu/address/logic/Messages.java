@@ -51,32 +51,26 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName());
-
         if (person.hasPhone()) {
             builder.append("; Phone: ")
                     .append(person.getPhone());
         }
-
         if (person.hasEmail()) {
             builder.append("; Email: ")
                     .append(person.getEmail());
         }
-
         if (person.hasAddress()) {
             builder.append("; Address: ")
                     .append(person.getAddress());
         }
-
         if (person.hasBirthday()) {
             builder.append("; Birthday: ")
                     .append(person.getBirthday().forDisplay());
         }
-
         if (person.hasGroups()) {
             builder.append("; Groups: ");
             person.getGroups().forEach(builder::append);
         }
-
         return builder.toString();
     }
 
@@ -88,20 +82,16 @@ public class Messages {
         builder.append(event.getName())
                 .append("; Date: ")
                 .append(event.getStartDate().forDisplay());
-
         if (event.hasStartTime()) {
             builder.append("; Start Time: ")
                     .append(event.getStartTime().forDisplay());
         }
-
         if (event.hasEndTime()) {
             builder.append("; End Time: ")
                     .append(event.getEndTime().forDisplay());
         }
-
         if (!event.getNames().isEmpty()) {
             builder.append("; Persons involved: ");
-
             for (Name name : event.getNames()) {
                 builder.append(name.toString());
                 builder.append(", ");
@@ -110,7 +100,6 @@ public class Messages {
         }
         if (!event.getGroups().isEmpty()) {
             builder.append("; Groups involved: ");
-
             for (Group group : event.getGroups()) {
                 builder.append(group.toString());
                 builder.append(", ");
@@ -119,5 +108,4 @@ public class Messages {
         }
         return builder.toString();
     }
-
 }

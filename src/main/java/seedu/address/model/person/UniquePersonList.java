@@ -82,6 +82,10 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Removes the equivalent person from the list.
+     * @param replacement replacement list
+     */
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

@@ -26,8 +26,6 @@ import seedu.address.model.person.Name;
  * @author Yuheng
  */
 public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
-
-
     @Override
     public AddMeetingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

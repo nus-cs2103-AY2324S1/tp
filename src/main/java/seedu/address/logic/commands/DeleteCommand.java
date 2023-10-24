@@ -45,12 +45,15 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.updateAssignedPersons(personToDelete);
         model.deletePerson(personToDelete);
+
+        // Group operation
         Set<Group> emptyGroups = model.getEmptyGroups(personToDelete);
         if (!emptyGroups.isEmpty()) {
             model.removeEmptyGroups(emptyGroups);
         } else {
             model.updateGroups();
         }
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

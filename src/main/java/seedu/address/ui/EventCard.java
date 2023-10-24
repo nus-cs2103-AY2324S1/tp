@@ -41,7 +41,6 @@ public class EventCard extends UiPart<Region> {
     private Label timeDuration;
     @FXML
     private FlowPane names;
-
     @FXML
     private FlowPane groups;
 
@@ -57,13 +56,15 @@ public class EventCard extends UiPart<Region> {
         timeDuration.setText(String.format("%s - %s",
                 event.getStartTime().forDisplay(),
                 event.getEndTime().forDisplay()));
+        // names
         event.getNames().stream()
                 .sorted(Comparator.comparing(name -> name.fullName))
                 .forEach(name -> names.getChildren().add(new Label(name.fullName)));
+        // groups
         event.getGroups().stream().sorted(Comparator.comparing(Group::getGroupName))
                 .forEach(group -> {
                     groups.getChildren().add(new Label(group.getGroupName()));
-                    personList.stream().forEach(person -> {
+                    personList.forEach(person -> {
                         if (person.getGroups().contains(group)) {
                             Label newLabel = new Label(person.getName().toString());
                             newLabel.setId("groupPersonName");

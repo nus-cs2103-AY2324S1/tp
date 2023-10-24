@@ -129,6 +129,15 @@ public class ModelManager implements Model {
 
     // ========== Event ======================================================================================
 
+    /**
+     * Adds an event to the address book.
+     * @param toAdd Event to be added.
+     */
+    @Override
+    public void addEvent(Event toAdd) {
+        addressBook.addEvent(toAdd);
+    }
+
     @Override
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
@@ -157,7 +166,6 @@ public class ModelManager implements Model {
         }
     }
 
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -182,16 +190,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         this.filteredPersons.setPredicate(predicate);
-    }
-
-    /**
-     * Adds an event to the address book.
-     * @param toAdd Event to be added.
-     */
-    @Override
-    public void addEvent(Event toAdd) {
-        addressBook.addEvent(toAdd);
-
     }
 
     @Override
