@@ -110,6 +110,26 @@ public class UniqueStudentListTest {
     }
 
     @Test
+    public void setSelectedStudent_nullEditedStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setSelectedStudent(null));
+    }
+
+    @Test
+    public void setSelectedStudent_setDifferentStudent_success() {
+        uniqueStudentList.add(ALICE);
+        uniqueStudentList.add(BOB);
+        uniqueStudentList.setSelectedStudent(ALICE);
+        assertEquals(ALICE, uniqueStudentList.getSelectedStudent().get(0));
+        uniqueStudentList.setSelectedStudent(BOB);
+        assertEquals(BOB, uniqueStudentList.getSelectedStudent().get(0));
+    }
+
+    @Test
+    public void selectedStudent_isEmptyWhenStart_success() {
+        assertTrue(uniqueStudentList.getSelectedStudent().isEmpty());
+    }
+
+    @Test
     public void remove_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.remove(null));
     }
@@ -166,6 +186,27 @@ public class UniqueStudentListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueStudentList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void equalsMethod() {
+
+        // same object -> returns true
+        assertTrue(uniqueStudentList.equals(uniqueStudentList));
+
+        UniqueStudentList testList = new UniqueStudentList();
+
+        // same value -> returns true
+        assertTrue(uniqueStudentList.equals(testList));
+
+        // null value -> returns false
+        assertFalse(uniqueStudentList.equals(null));
+
+        testList.add(ALICE);
+        testList.setSelectedStudent(ALICE);
+        // different value -> return false
+        assertFalse(uniqueStudentList.equals(testList));
+
     }
 
     @Test

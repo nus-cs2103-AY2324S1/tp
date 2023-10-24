@@ -84,6 +84,32 @@ public class AddressBookTest {
     }
 
     @Test
+    public void setSelectedStudent_setStudent_success() {
+        addressBook.setSelectedStudent(ALICE);
+        assertEquals(ALICE, addressBook.getSelectedStudent().get(0));
+    }
+
+    @Test
+    public void equalsMethod() {
+        AddressBook testAddressBook = new AddressBook();
+
+        // same object -> returns true
+        assertTrue(addressBook.equals(addressBook));
+
+        // same value -> returns true
+        assertTrue(addressBook.equals(testAddressBook));
+
+        // null -> return false
+        assertFalse(addressBook.equals(null));
+
+        testAddressBook.addStudent(ALICE);
+        testAddressBook.setSelectedStudent(ALICE);
+
+        // different value -> returns false;
+        assertFalse(addressBook.equals(testAddressBook));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{students=" + addressBook.getStudentList() + "}";
         assertEquals(expected, addressBook.toString());

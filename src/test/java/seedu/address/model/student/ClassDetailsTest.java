@@ -258,6 +258,30 @@ public class ClassDetailsTest {
 
         // different values -> returns false
         assertFalse(classDetails.equals(new ClassDetails("T12")));
+
+        ClassDetails classDetailsWithTrackers = new ClassDetails("T12",
+            new AttendanceTracker(1),
+            new AssignmentTracker(1),
+            new ClassParticipationTracker(1));
+
+        // same values -> returns true
+        assertTrue(classDetailsWithTrackers.equals(new ClassDetails("T12",
+            new AttendanceTracker(1),
+            new AssignmentTracker(1),
+            new ClassParticipationTracker(1))));
+
+        // same object -> returns true
+        assertTrue(classDetailsWithTrackers.equals(classDetailsWithTrackers));
+
+        // null -> returns false
+        assertFalse(classDetailsWithTrackers.equals(null));
+
+        // different values -> returns false
+        assertFalse(classDetails.equals(new ClassDetails("T12",
+            new AttendanceTracker(2),
+            new AssignmentTracker(2),
+            new ClassParticipationTracker(2))));
+
     }
 
     @Test

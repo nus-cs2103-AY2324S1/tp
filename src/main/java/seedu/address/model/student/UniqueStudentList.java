@@ -155,7 +155,8 @@ public class UniqueStudentList implements Iterable<Student> {
         }
 
         UniqueStudentList otherUniqueStudentList = (UniqueStudentList) other;
-        return internalList.equals(otherUniqueStudentList.internalList);
+        return internalList.equals(otherUniqueStudentList.internalList) &&
+            selectedStudent.equals(otherUniqueStudentList.selectedStudent);
     }
 
     @Override
