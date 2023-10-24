@@ -64,7 +64,7 @@ public class RescheduleCommandTest {
         AppointmentTime appointmentTime = new AppointmentTimeBuilder(rescheduledAppointment).build();
         RescheduleCommand rescheduleCommand = new RescheduleCommand(outOfBoundIndex, appointmentTime);
 
-        assertCommandFailure(rescheduleCommand, model, RescheduleCommand.MESSAGE_NO_APPOINTMENT_FOUND);
+        assertCommandFailure(rescheduleCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class RescheduleCommandTest {
         AppointmentTime appointmentTime = new AppointmentTimeBuilder(rescheduledAppointment).build();
         RescheduleCommand rescheduleCommand = new RescheduleCommand(outOfBoundIndex, appointmentTime);
 
-        assertCommandFailure(rescheduleCommand, model, RescheduleCommand.MESSAGE_NO_APPOINTMENT_FOUND);
+        assertCommandFailure(rescheduleCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
     }
     @Test
     public void equals() {
