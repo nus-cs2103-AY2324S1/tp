@@ -53,6 +53,8 @@ public class PersonCard extends UiPart<Region> {
     private Label uniqueId;
     @FXML
     private Button notesButton;
+    @FXML
+    private Label balance;
 
 
     /**
@@ -84,6 +86,7 @@ public class PersonCard extends UiPart<Region> {
 
         int numberOfNotes = person.getNotes().size();
         notesButton.setText("Notes (" + numberOfNotes + ")");
+        balance.setText(person.getBalance().toUiMessage());
 
     }
 
