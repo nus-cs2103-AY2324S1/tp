@@ -78,7 +78,6 @@ If this is your first time using MediFlowR, do not worry as this is a tutorial f
 of MediFlowR. Please follow the instructions [here](#quick-start) first to set up the application before proceeding with the tutorial. 
 
 - Launch the MediFlowR application.
-
   - Note: When the application is first launched, it will contain some default patient records. 
 
 - Let us try **adding a patient** into our patient records. Enter the command `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=Fever` in the command box.
@@ -116,16 +115,21 @@ of MediFlowR. Please follow the instructions [here](#quick-start) first to set u
 
 - You should get this result screen. This will cancel the first appointment in the appointment list.
 
+- **Congratulations!** You have completed the tutorial. You are now ready to use MediFlowR.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
-
+## Glossary
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in between square brackets `[]` are the parameters to be supplied by the user.<br>
-  e.g. in `search name=[name]`, `[name]` is a parameter which can be used as `add name=John Doe`.
+* Words in `CAPITAL_LETTERS` are the parameters to be supplied by the user.<br>
+e.g. in `find NAME`, `NAME` is a parameter which can be used as `find David`.
+
+* Words between square brackets `[]` are the optional parameters that are not necessary for the command to run.<br>
+e.g. in `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL address=ADDRESS [illness=ILLNESS]`,
+`[ilness=ILLNESS]` means that it does not have to be specified.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `name=[name] birthdate=[birthdate]`, `birthdate=[birthdate] name=[name]` is also acceptable.
@@ -136,165 +140,178 @@ of MediFlowR. Please follow the instructions [here](#quick-start) first to set u
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Commands summary
+
+| Action                                                                        | Format, Examples                                                                                                                                                                                                                                                     |
+|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Adding a new patient**](#adding-a-new-patient--add)                        | `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL address=ADDRESS [illness=ILLNESS]` <br> e.g., `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=fever` |
+| [**Updating a patient's details**](#updating-a-patients-details--edit)        | `edit INDEX [name=NAME] [gender=GENDER] [birthdate=BIRTHDATE] [phone=PHONE] [email=EMAIL] [address=ADDRESS]` <br> e.g., `edit 1 birthdate=2001/12/14 phone=93842738`                                                                                                 |
+| [**Removing a patient**](#removing-a-patient--delete)                         | `delete INDEX` <br> e.g., `delete 1`                                                                                                                                                                                                                                 |
+| [**Displaying all patients**](#displaying-all-patients--list)                 | `list`                                                                                                                                                                                                                                                               |
+| [**Finding patients by name**](#finding-patients-by-name--find)               | `find NAME`<br> e.g., `search name=James Jake`                                                                                                                                                                                                                       |
+| [**Scheduling a new appointment**](#scheduling-a-new-appointment--schedule)   | `schedule patient=PATIENT start=START end=END description=DESCRIPTION` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray`                                                                      |
+| [**Rescheduling an appointment**](#rescheduling-an-appointment--reschedule)   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                          |
+| [**Cancelling an appointment**](#cancelling-an-appointment--cancel)           | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                                                                                                                  |
+| [**Displaying all appointments**](#displaying-all-appointments--appointments) | `appointments`                                                                                                                                                                                                                                                       |
+| [**Clearing all patient records**](#clearing-all-patient-records--clear)      | `clear`                                                                                                                                                                                                                                                              |
+| [**Exiting the program**](#exiting-the-program--exit)                         | `exit`                                                                                                                                                                                                                                                               |
+| [**Viewing help**](#viewing-help--help)                                       | `help`                                                                                                                                                                                                                                                               |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Features
+
+MediFlowR provides a variety of commands for you to effectively manage your patient records and appointments. This section
+will clearly guide you on how to use the commands so that you can streamline your workflow and take full advantage of the
+features present in this application.
+
+## Patient commands
+
+### Adding a new patient: `add`
+
+This command creates a new patient to be added to the patient records, along with the necessary personal information
+and contact details about the patient. It is *optional* to include what illness the patient is currently inflicted with
+when entering the patient details.
+
+Format: `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL address=ADDRESS [illness=ILLNESS]`
+
+Example: `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=fever`
+
+The example command will add a *male* patient called *John Doe*, with birthdate on *20 October 2000*, phone number at *98765432*,
+email at *johnd@example.com* and address at *311, Clementi Ave 2, #02-25*, who is currently down with *fever*.
+
+### Updating a patient's details: `edit`
+
+This command updates a patient's personal information and contact details. It will update the details of the patient at
+the specified `INDEX` shown in the patients records. You must edit *at least one* detail when using the command.
+
+Format: `edit INDEX [name=NAME] [gender=GENDER] [birthdate=BIRTHDATE] [phone=PHONE] [email=EMAIL] [address=ADDRESS]`
+
+Example: `edit 1 birthdate=2001/12/14 phone=93842738`
+
+This example command will update the patient with index 1 in the patient records (i.e. the first patient) and will change
+the patient's birthdate to *2001/12/14* and phone number to *93842738*.
+
+### Removing a patient: `delete`
+
+This commands removes the specified patient from the patient list. It will remove the patient at
+the specified `INDEX` shown in the patients records.
+
+Format: `delete INDEX`
+
+Example: `delete 1`
+
+This example command will remove the patient with index 1 in the patient records (i.e. the first patient).
+
+### Displaying all patients: `list`
+
+This command shows a list of all patients currently recorded in the MediFlowR application under the patients section.
+
+Format: `list`
+
+### Finding patients by name: `find`
+
+This command finds patients whose names contain any of the keywords that you specified.
+
+The search is case-insensitive, meaning that finding patients with the keyword `John`
+will return the same results as the keyword `john`. Only patients with names matching the full words of the keywords
+will be displayed, meaning that `Tom` will find patients with names that contain the full `Tom` but will not find patients
+with names such as `Tommy`.
+
+Format: `find NAME`
+
+Example: `find name=alex david`
+
+This example command will find all patients with names that contain either `alex` or `david`, e.g. `Alex Yeoh` and `David Li`.
+
+## Appointment Commands
+
+### Scheduling a new appointment: `schedule`
+
+This command schedules an appointment for an existing patient in the patient records. It will schedule an appointment
+for the patient with the name `PATIENT`. The start date time should be before the end date time.
+
+Format: `schedule patient=PATIENT start=START end=END description=DESCRIPTION`
+
+Example: `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray`
+
+This example command will schedule a new appointment for the patient *Alex Yeoh* on *20 October 2023* from *12pm* to *1pm*
+for his *follow-up appointment on his chest X-Ray*.
+
+### Rescheduling an appointment: `reschedule`
+
+This command reschedules an existing appointment to another timeslot. It will reschedule the appointment at the specified
+`INDEX` shown in the appointments list.
+
+Format: `reschedule INDEX start=START end=END`
+
+Example: `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`
+
+This example command will reschedule the appointment with index 1 in the appointments list (i.e. the first appointment) to
+*2 May 2023*, from *9am* to *11am*.
+
+### Cancelling an appointment: `cancel`
+
+This command cancels an existing appointment. It will cancel the appointment at the specified
+`INDEX` shown in the appointments list.
+
+Format: `cancel INDEX`
+
+Example: `cancel 3`
+
+This example command will cancel the appointment with index 1 in the appointments list (i.e. the first appointment).
+
+### Displaying all appointments: `appointments`
+
+This command shows a list of all appointments currently scheduled.
+
+Format: `appointments`
+
+## Miscellaneous commands
+
+### Clearing all patient records: `clear`
+
+This command clears all patient records from the application.
+
+Format: `clear`
+
+### Exiting the program: `exit`
+
+This command exits the program.
+
+Format: `exit`
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/userguide/helpMessage.png)
 
 Format: `help`
-
-
-### Adding a new patient: `add`
-
-Creates a new patient profile to be added to the patient records. 
-
-Format: `add name=[name] birthdate=[birthdate] gender=[gender]
-illness=[illness]​`
-
-Examples:
-*  `add name=John birthdate=30/09/2001 gender=Male illness=Fever`
-
-* `add name=Cena birthdate=30/12/1993 gender=Male illness=Schizophrenia`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Updating Patient Treatment History: `update`
-
-Updates a patient's treatment history with illness.
-
-Format: `update id=[patient-id] illness=[illness]`
-
-* Updates the illness of the patient with id `patient-id`.
-* Existing illness will be changed to the `illness`.
-
-Examples:
-*  `update id=12345 illness=Fever` updates the illness of the patient with patient ID `12345` to `Fever`.
-
-### Locating patients by name: `search`
-
-Finds patients whose names contain any of the given keywords.
-
-Format: `search name=[name]`
-
-* The search is case-insensitive. e.g. `tianrun` will match `Tianrun`
-* The order of the keywords does not matter. e.g. `Lebron James` will match `James Lebron`
-* Only the name is searched.
-* Only full words will be matched e.g. `Curr` will not match `Curry`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Chris Paul` will return `Chris Bumstead`, `Logan Paul`
-
-Examples:
-* `search name=James` returns `james` and `James Harden`
-* `search name=alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified patient from the patient list.
-
-Format: `delete id=[patient-id]`
-
-* Deletes the patient with the specified `patient-id`.
-* The patient id refers to the id of the patient shown in the displayed patient list.
-* The patient id **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-`delete id=12345` deletes the patient with id **12345** in the patient list.
-
-### Clearing all patient records : `clear`
-
-Clears all patient records from the system.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Scheduling a new appointment: `schedule`
-
-Creates an appointment to be added to the appointment records.
-
-Format: `schedule patient=PATIENT start=START end=END description=DESCRIPTION`
-
-Examples:
-*  `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray `
-
-### Rescheduling an existing appointment: `reschedule`
-
-Reschedules an appointment in the appointment records to another timeslot.
-
-Format: `reschedule INDEX start=START end=END`
-
-Examples:
-*  `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`
-
-### Cancelling an existing appointment: `cancel`
-
-Cancels an appointment in the appointment records.
-
-Format: `cancel INDEX`
-
-Examples:
-*  `cancel 3`
-
-### Listing all appointments : `appointments`
-
-Shows a list of all appointments in the address book.
-
-Format: `appointments`
-
-
-### Saving the data
-
-MediFlowR data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-MediFlowR data are saved automatically as a JSON file `[JAR file location]/data/mediflowr.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediFlowR home folder.
+**A**: 
+You can install MediFlowR on that other computer, then simply transfer over the `mediflowr.json` file located in the
+data folder to the data folder on that other computer. The data folder is located at the same place as your MediFlowR application.
+
+**Q**: How do I save my data after any changes I have made?<br>
+**A**: The data is saved automatically after any command that changes the data. There is no need to save manually.
+
+**Q** Can I edit the data file used by the application directly?<br>
+**A**: MediFlowR data are saved automatically as a JSON file `[JAR file location]/data/mediflowr.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-| Action           | Format, Examples                                                                                                                                                             |
-|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add name=[name] birthdate=[birthdate] gender=[gender] illness=[illness]` <br> e.g., `add name=John birthdate=30/09/2001 gender=Male illness=Fever`                          |
-| **Clear**        | `clear`                                                                                                                                                                      |
-| **Delete**       | `delete id=[patient-id]`<br> e.g., `delete id=3`                                                                                                                             |
-| **Update**       | `update id=[patient-id] illness=[illness]`<br> e.g.,`update id=12345 illness=Fever`                                                                                          |
-| **Search**       | `search name=[name]`<br> e.g., `search name=James Jake`                                                                                                                      |
-| **List**         | `list`                                                                                                                                                                       |
-| **Help**         | `help`                                                                                                                                                                       |
-| **Schedule**     | `schedule patient=PATIENT start=START end=END description=DESCRIPTION` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray` |
-| **Reschedule**   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                  |
-| **Cancel**       | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                          |
-| **Appointments** | `appointments`                                                                                                                                                               |
