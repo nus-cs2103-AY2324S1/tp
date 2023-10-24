@@ -99,6 +99,8 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudent(Student target) {
         wellNus.removeStudent(target);
+        logger.fine("Deleting appointments which contain the name: " + target.getName());
+        wellNus.removeRelatedAppointments(target.getName());
     }
 
     @Override

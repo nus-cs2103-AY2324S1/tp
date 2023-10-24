@@ -5,9 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
 
@@ -70,6 +72,12 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         if (!internalList.remove(toRemove)) {
             throw new StudentNotFoundException();
         }
+    }
+
+    public void removeRelatedAppointments(Name toRemove) {
+        requireNonNull(toRemove);
+        Predicate<Appointment> hasSameName = appointment -> appointment.getName().equals(toRemove);
+        internalList.removeIf(hasSameName);
     }
 
     public void setAppointments(UniqueAppointmentList replacement) {
