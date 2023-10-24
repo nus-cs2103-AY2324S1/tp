@@ -12,6 +12,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -50,6 +53,27 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    /**
+     * Tests if an attendance record for the current week is correctly retrieved when it exists.
+     */
+    @Test
+    public void getAttendanceForCurrentWeek_attendanceExists_optionalWithAttendance() {
+        Attendance attendance = new Attendance(LocalDate.now(), true);
+        ALICE.addAttendance(attendance);
+        Optional<Attendance> result = ALICE.getAttendanceForCurrentWeek();
+        assertTrue(result.isPresent());
+        assertTrue(result.get().isSameWeek(LocalDate.now()));
+    }
+
+    /**
+     * Tests if an empty Optional is returned when there's no attendance record for the current week.
+     */
+    @Test
+    public void getAttendanceForCurrentWeek_noAttendance_emptyOptional()  {
+        Optional<Attendance> result = ALICE.getAttendanceForCurrentWeek();
+        assertFalse(result.isPresent());
     }
 
     @Test

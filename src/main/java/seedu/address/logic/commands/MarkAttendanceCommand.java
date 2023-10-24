@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,6 +22,7 @@ public class MarkAttendanceCommand extends Command {
             + "/attendance ATTENDANCE "
             + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 1";
     public static final String MESSAGE_SUCCESS = "Attendance marked for person: ";
+    public static final String MESSAGE_UPDATED_SUCCESS = "Attendance updated for person: ";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found.";
     private final String identifier; // This can be either studentName or studentID
     private final boolean isPresent;
@@ -54,11 +56,21 @@ public class MarkAttendanceCommand extends Command {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
-        // TODO - Possibly implement module inclusion for attendance and modify UG appropriately
-        Attendance attendance = new Attendance(date, isPresent);
-        targetPerson.addAttendance(attendance);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS + "%s", targetPerson.getName()));
+        Optional<Attendance> existingAttendance = targetPerson.getAttendanceForCurrentWeek();
+
+        if (existingAttendance.isPresent()) {
+            // Modify the existing attendance record
+            Attendance attendance = existingAttendance.get();
+            attendance.setAttendance(isPresent);
+            return new CommandResult(String.format(MESSAGE_UPDATED_SUCCESS + "%s", targetPerson.getName()));
+
+        } else {
+            // Add a new attendance record for the current week
+            Attendance newAttendance = new Attendance(date, isPresent);
+            targetPerson.addAttendance(newAttendance);
+            return new CommandResult(String.format(MESSAGE_SUCCESS + "%s", targetPerson.getName()));
+        }
     }
 
     @Override
