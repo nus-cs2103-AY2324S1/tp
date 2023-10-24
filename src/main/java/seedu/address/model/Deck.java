@@ -41,8 +41,8 @@ public class Deck implements ReadOnlyDeck {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the card list with {@code cards}.
-     * {@code cards} must not contain duplicate cards.
+     * Replaces the contents of the card list with {@code Cards}.
+     * {@code Cards} must not contain duplicate cards.
      */
     public void setCards(List<Card> cards) {
         this.cards.setCards(cards);
@@ -60,7 +60,7 @@ public class Deck implements ReadOnlyDeck {
     //// card-level operations
 
     /**
-     * Returns true if a card with the same identity as {@code card} exists in the deck.
+     * Returns true if a Card with the same identity as {@code Card} exists in the Deck.
      */
     public boolean hasCard(Card card) {
         requireNonNull(card);
@@ -69,17 +69,17 @@ public class Deck implements ReadOnlyDeck {
     }
 
     /**
-     * Adds a card to the deck.
-     * The card must not already exist in the deck.
+     * Adds a Card to the Deck.
+     * The Card must not already exist in the Deck.
      */
     public void addCard(Card p) {
         cards.add(p);
     }
 
     /**
-     * Replaces the given card {@code target} in the list with {@code editedCard}.
-     * {@code target} must exist in the deck.
-     * The card identity of {@code editedCard} must not be the same as another existing card in the deck.
+     * Replaces the given Card {@code target} in the list with {@code editedCard}.
+     * {@code target} must exist in the Deck.
+     * The card identity of {@code editedCard} must not be the same as another existing Card in the Deck.
      */
     public void setCard(Card target, Card editedCard) {
         requireNonNull(editedCard);
@@ -89,7 +89,7 @@ public class Deck implements ReadOnlyDeck {
 
     /**
      * Removes {@code key} from this {@code Deck}.
-     * {@code key} must exist in the deck.
+     * {@code key} must exist in the Deck.
      */
     public void removeCard(Card key) {
         cards.remove(key);

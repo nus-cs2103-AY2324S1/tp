@@ -36,7 +36,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -58,7 +58,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         DeckStorage deckStorage = new JsonDeckStorage((userPrefs.getDeckFilePath()));
-        storage = new StorageManager((DeckStorage) deckStorage, userPrefsStorage);
+        storage = new StorageManager(deckStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 

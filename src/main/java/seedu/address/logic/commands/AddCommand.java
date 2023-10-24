@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -11,16 +12,17 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 
 /**
- * Adds a card to the deck.
+ * Adds a Card to the Deck.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a card to the deck. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Card to the Deck. "
             + "Parameters: "
             + PREFIX_QUESTION + "QUESTION "
-            + PREFIX_ANSWER + "ANSWER ";
+            + PREFIX_ANSWER + "ANSWER "
+            + PREFIX_TAG + "TAG ";
 
     public static final String MESSAGE_SUCCESS = "New Card added: %1$s";
     public static final String MESSAGE_DUPLICATE_CARD = "This Card already exists in the Deck";
@@ -28,7 +30,7 @@ public class AddCommand extends Command {
     private final Card toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code card}
+     * Creates an AddCommand to add the specified {@code Card}
      */
     public AddCommand(Card card) {
         requireNonNull(card);

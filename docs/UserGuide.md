@@ -34,19 +34,25 @@ Examples:
 
 #### Acceptable values for each parameters:
 1. No Empty Input after q/, a/ and t/.
+2. t/ is optional and not neccessary.
 #### Expected outputs:
 ```
 1. add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude
-“Successfully added flashcard!” message will be returned to the user via the CLI
+   “New Card added: Question: What are the three ways to implement binary systems?; Answer: 1s Complement, 2s Complement, and Sign and Magnitude “
 
 2. add q/What are the three ways to implement binary systems? a/
-”Missing answer for flashcard” error message will be returned to the user via the CLI
+   Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank
 
 3. add a/10111
-”Missing question for flashcard” error message will be returned to the user via the CLI
+   Invalid command format! 
+   add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
 ```
-#### MockUp
-![mock up of add command](./images/UserGuide/mockup_add.png)
+#### Usage
+1. User Input
+![usage of add command](./images/UserGuide/add_1.2.png)
+
+2. Successful Output
+![result of add command](./images/UserGuide/add_1.2_ans.png)
 
 
 ### Deleting a Flashcard : `delete`
@@ -66,14 +72,20 @@ Examples:
 #### Expected outputs:
 ```
 1. delete 2
-“Successfully deleted flashcard!” message will be returned to the user via the CLI
+   Deleted Card: Question: <provided question>; Answer: <provided answer>
 
 2. delete -100
-“Invalid input - input (<input>) is not an accepted value. Please enter an integer between 0 and deck.lenght()” message will be displayed on error.
+   Invalid command format! 
+   delete: Deletes the deck identified by the index number used in the displayed card list.
+   Parameters: INDEX (must be a positive integer)
+   Example: delete 1
 ```
-#### Mockup:
-![mock up of delete command](./images/UserGuide/mockup_delete.png)
+#### Usage:
+1. User Input
+   ![usage of delete command](./images/UserGuide/delete_1.2.png)
 
+2. Successful Output
+   ![result of delete command](./images/UserGuide/delete_1.2_ans.png)
 
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck.
@@ -96,8 +108,8 @@ No parameters are needed
    “No parameters are allowed for this command.”
 ```
 
-#### Mockup
-![mock up of list command](./images/UserGuide/mockup_list.png)
+#### Usage
+![usage of list command](./images/UserGuide/list_1.2.png)
 
 ### Editing a Specific Flashcard : `edit`
 Edits an existing person in the address book.
@@ -117,33 +129,72 @@ Examples:
 “Successfully edited flashcard” message will be returned to the user via the CLI
 “The card index provided is invalid"
 ```
-#### Mockup:
-![mock up of edit command](./images/UserGuide/mockup_edit.png)
+#### Usage:
+1. User Input
+   ![usage of edit command](./images/UserGuide/edit_1.2.png)
+
+2. Successful Output
+   ![result of edit command](./images/UserGuide/edit_1.2_ans.png)
+
 
 
 ### Practise Flashcards: `practise`
 Practise a single Flashcard in the deck
 
-Format: `practise INDEX d/ DIFFICULTY`
+Format: `practise INDEX`
 
 #### Acceptable values for each parameters:
 1. Index must be positive integer
 2. Index cannot exceed size of the deck
-3. Difficulty can only be `easy`, `medium` or `hard`
 
 #### Examples:
 ```
-practise 1 d/ easy
-(displays the answer of the card of index 1)
+practise 1 
+(showcases the question at index 1)
 ```
 #### Expected outputs:
 ```
-practise 1 d/ easy
-"Answer: ans (Difficulty level: easy)"
+practise 1 
+"Practising question 1 : <provided question>"
 
-practise 10 d/ easy
+practise 10
 "The card index provided is invalid"
 ```
 
-#### Mockup:
-![mock up of practise command](./images/UserGuide/mockup_practise.png)
+#### Usage:
+1. User Input
+   ![usage of practise command](./images/UserGuide/practise_1.2.png)
+
+2. Successful Output
+   ![result of practise command](./images/UserGuide/practise_1.2_ans.png)
+
+### Practise Flashcards: `solve`
+Solves the question at the given index
+
+Format: `solve INDEX d/DIFFICULTY`
+
+#### Acceptable values for each parameters:
+1. Index must be positive integer
+2. Index cannot exceed size of the deck
+3. Difficulty must be either `easy`, `medium`, `hard`.
+
+#### Examples:
+```
+solve 1 d/ easy
+(marks the priority of question to be easy)
+```
+#### Expected outputs:
+```
+solve 1 
+"Solved Question 1 (Difficulty level: easy)"
+
+solve 10 d/easy
+"The card index provided is invalid"
+```
+
+#### Usage:
+1. User Input
+   ![usage of practise command](./images/UserGuide/solve_1.2.png)
+
+2. Successful Output
+   ![result of practise command](./images/UserGuide/solve_1.2_ans.png)

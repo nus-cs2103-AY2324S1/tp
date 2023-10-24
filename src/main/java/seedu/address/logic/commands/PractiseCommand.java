@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 
 /**
- * Practises a question using it's displayed index from the deck.
+ * Practises a question using it's displayed index from the Deck.
  */
 public class PractiseCommand extends Command {
 
@@ -81,4 +81,3 @@ public class PractiseCommand extends Command {
     }
 
 }
-
