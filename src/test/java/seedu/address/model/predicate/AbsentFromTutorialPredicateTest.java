@@ -18,24 +18,17 @@ public class AbsentFromTutorialPredicateTest {
     public void test_absentFromTutorialNum_returnsTrue() {
         // With person absent
         AbsentFromTutorialPredicate predicate = new AbsentFromTutorialPredicate(
-                Index.fromOneBased(1), new Tag("CS2103T"));
-        Person person = new PersonBuilder().withTags("CS2103T").build();
-        person.addAttendance(new Attendance(new Week(1), false));
+                Index.fromOneBased(1), new Tag("G02"));
+        Person person = new PersonBuilder().withTags("G02").build();
+        person.addAttendance(new Attendance(new Week(1), false, "Late"));
         assertTrue(predicate.test(person));
 
-        // Ignore case
-        AbsentFromTutorialPredicate predicate2 = new AbsentFromTutorialPredicate(
-                Index.fromOneBased(1), new Tag("CS2103T"));
-        Person person2 = new PersonBuilder().withTags("Cs2103t").build();
-        person2.addAttendance(new Attendance(new Week(1), false));
-        assertTrue(predicate2.test(person2));
-
         // With no tag
-        AbsentFromTutorialPredicate predicate3 = new AbsentFromTutorialPredicate(
+        AbsentFromTutorialPredicate predicate2 = new AbsentFromTutorialPredicate(
                 Index.fromOneBased(1), new Tag("PLACEHOLDER"));
-        Person person3 = new PersonBuilder().withTags("CS2103T").build();
-        person3.addAttendance(new Attendance(new Week(1), false));
-        assertTrue(predicate3.test(person3));
+        Person person2 = new PersonBuilder().withTags("G10").build();
+        person2.addAttendance(new Attendance(new Week(1), false, "Late"));
+        assertTrue(predicate2.test(person2));
     }
 
     @Test

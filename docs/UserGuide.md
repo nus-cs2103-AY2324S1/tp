@@ -110,12 +110,13 @@ Examples:
 
 Shows a summary of attendance records including list of absentees.
 
-Format: `list attendance tn/TUTORIALNO [coursetg/TAG]`
-*  Shows a list of absentees and summary of the attendance records of students corresponding to the tag for the specified tutorial number.
+Format: `list attendance tn/TUTORIALNUMBER [tg/TUTORIALGROUPID]`
+*  Shows a list of absentees and summary of the attendance records of all students or students corresponding to the specified tutorial group for the specified tutorial number.
+* `TUTORIALGROUPID` is optional.
 
 Examples:
 *  `list attendance tn/1` Shows a summary of attendance records of all students for Tutorial #1.
-*  `list attendance tn/3 coursetg/CS2103T` Shows a summary of attendance records of the students in CS2103T for Tutorial #3.
+*  `list attendance tn/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Tutorial #3.
 
 ### Searching for student's contact via keyword : `find`
 
@@ -158,7 +159,7 @@ Examples:
 
 Shows a list of students from a specified tutorial group
 
-Format: `filter add coursetg/COURSECODE [tn/TUTORIALGROUPID]`
+Format: `filter add coursetg/COURSECODE [tg/TUTORIALGROUPID]`
 
 * Filters students that are in the tutorial group specified by `TUTORIALGROUPID` or course specified by `COURSECODE`
 * `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
@@ -169,14 +170,14 @@ Format: `filter add coursetg/COURSECODE [tn/TUTORIALGROUPID]`
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-* `filter add coursetg/CS2103T tn/G08` returns a list of students from tutorial group G08 for course CS2103T.
+* `filter add coursetg/CS2103T tg/G08` returns a list of students from tutorial group G08 for course CS2103T.
 * `filter add coursetg/CS2103T` returns a list of students in the course CS2103T.
 
 ### Removing filters: `filter remove`
 
 Removes specified applied filter
 
-Format: `filter remove coursetg/COURSECODE [tn/TUTORIALGROUPID]`
+Format: `filter remove coursetg/COURSECODE [tg/TUTORIALGROUPID]`
 
 * Remove the tutorial group filter specified by `TUTORIALGROUPID` or course filter specified by `COURSECODE`
 * `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
@@ -188,7 +189,7 @@ Format: `filter remove coursetg/COURSECODE [tn/TUTORIALGROUPID]`
 
 Examples:
 * `filter remove` returns the list of all students
-* `filter remove coursetg/CS2103T tn/G08` returns a list of students containing those from tutorial group G08 for course CS2103T.
+* `filter remove coursetg/CS2103T tg/G08` returns a list of students containing those from tutorial group G08 for course CS2103T.
 * `filter remove coursetg/CS2103T` returns a list of students containing those in the course CS2103T.
 
 ### Removing all filters: `filter clear`
@@ -211,8 +212,21 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in TAvigator.
+* `list students` followed by `delete 2` deletes the 2nd person in TAvigator.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Deleting a person : `delete all`
+
+Deletes all students from current address book or the specified tutorial group in the current address book.
+
+Format: `delete all [tg/TUTORIALGROUPID]`
+
+* Deletes all students or the students from the specified tutorial group.
+* `TUTORIALGROUPID` is optional.
+
+Examples:
+* `delete all` deletes all students from the current address book.
+* `delete all tg/G02` deletes all students from tutorial group G02.
 
 ### Clearing all entries : `clear`
 
@@ -260,11 +274,11 @@ _Details coming soon ..._
 ## Command summary
 | Action     | Format, Examples                                                                                |
 |------------|-------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]...` <br>        |
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSECODE TUTORIALGROUPID]...` <br>        |
 | **Clear**  | `clear`                                                                                         |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                             |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUTORIAL_GROUP]...`<br> |
+| **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`      |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSECODE TUTORIALGROUPID]...`<br> |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                      |
-| **List**   | `list attendance tn/TUTORIALNO [coursetg/TAG]` `list students`                                  |                                                           |
+| **List**   | `list attendance tn/TUTORIALNO [tg/TUTORIALGROUPID]` `list students`                            |                                                           |
 | **Help**   | `help`                                                                                          |
-| **Filter**   | `filter [add/delete/clear] [coursetg/COURSECODE] [tn/TUTORIALGROUPID]`                                                                                          |
+| **Filter**   | `filter [add/delete/clear] [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`                          |

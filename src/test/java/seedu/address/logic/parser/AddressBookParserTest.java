@@ -96,13 +96,13 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " add coursetg/CS2103T") instanceof FilterCommand);
         assertTrue(parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T tn/1") instanceof FilterCommand);
+                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T tg/1") instanceof FilterCommand);
         assertTrue(parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof FilterCommand);
         assertTrue(parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof FilterCommand);
         assertTrue(parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T tn/1") instanceof FilterCommand);
+                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T tg/1") instanceof FilterCommand);
         assertTrue(parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " clear") instanceof FilterCommand);
     }
