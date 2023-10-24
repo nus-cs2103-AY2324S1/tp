@@ -44,8 +44,53 @@ hospital management tasks done faster than current GUI apps in the industry.
 
 ## Table of Contents
 
-* Table of Contents
-{:toc}
+- [Quick Start](#quick-start)
+
+- [Tutorial for new users](#tutorial-for-new-users)
+
+- [Glossary](#glossary)
+
+- [Commands summary](#commands-summary)
+
+- [Features](#features)
+
+    - [Patient Commands](#patient-commands)
+
+        - [Adding a new patient](#adding-a-new-patient-add)
+
+        - [Updating a patient's details](#updating-a-patients-details-edit)
+
+        - [Removing a patient](#removing-a-patient-delete)
+
+        - [Displaying all patients](#displaying-all-patients-list)
+
+        - [Finding patients by name](#finding-patients-by-name-find)
+
+    - [Appointment Commands](#appointment-commands)
+
+        - [Scheduling a new appointment](#scheduling-a-new-appointment-schedule)
+
+        - [Rescheduling an appointment](#rescheduling-an-appointment-reschedule)
+
+        - [Cancelling an appointment](#cancelling-an-appointment-cancel)
+
+        - [Displaying all appointments](#displaying-all-appointments-appointments)
+
+    - [Miscellaneous Commands](#miscellaneous-commands)
+
+        - [Undoing a previous command](#undoing-a-previous-command-undo)
+
+        - [Redoing a previous command](#redoing-a-previous-command-redo)
+
+        - [Clearing all patient records](#clearing-all-patient-records-clear)
+
+        - [Exiting the program](#exiting-the-program-exit)
+
+        - [Viewing help](#viewing-help-help)
+
+- [FAQ](#faq)
+
+- [Known Issues](#known-issues)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -59,22 +104,22 @@ hospital management tasks done faster than current GUI apps in the industry.
 
 3. Copy the file to the folder you want to use as the home folder for your patient records.
 
-4. Double click to launch the application. If it does not work, follow the instructions listed [here]().
+4. Double click to launch the application. If it does not work, follow the instructions listed [here](faq).
 
 5. You should now be able to use the application.
 
-    - If you are a **new user**, you can follow a tutorial on getting started with MediFlowR [here](#getting-started-on-mediflowr).
+    - If you are a **new user**, you can follow a tutorial on getting started with MediFlowR [here](#tutorial-for-new-users).
 
     - If you are an **advanced user**, you can learn more in depth about the different commands supported by the application [here](#features).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Getting started on MediFlowR
+## Tutorial for new users
 
 If this is your first time using MediFlowR, do not worry as this is a tutorial for you to get familiar with the features
 of MediFlowR. Please follow the instructions [here](#quick-start) first to set up the application before proceeding with the tutorial. 
 
-- Launch the MediFlowR application.
+- Launch the MediFlowR application. If you are not able to launch the application, follow the instructions [here](#faq).
   - Note: When the application is first launched, it will contain some default patient records. 
 
 - Let us try **adding a patient** into our patient records. Enter the command `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=Fever` in the command box.
@@ -209,6 +254,10 @@ the specified `INDEX` shown in the patients records.
 Format: `delete INDEX`
 
 Example: `delete 1`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If you delete a patient, all appointments for that patient will also be deleted.
+</div>
 
 This example command will remove the patient with index 1 in the patient records (i.e. the first patient).
 
