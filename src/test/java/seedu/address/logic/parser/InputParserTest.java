@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestData.IndexContact.FIRST_CONTACT;
+import static seedu.address.testutil.TestData.IndexContact.SECOND_CONTACT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +48,24 @@ public class InputParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased());
-        assertEquals(new DeleteCommand(FIRST_CONTACT), command);
+        assertEquals(new DeleteCommand(List.of(FIRST_CONTACT)), command);
+    }
+
+    @Test
+    public void parseCommand_delete_mass_delete() throws Exception {
+        DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased()
+                + " " + SECOND_CONTACT.getOneBased());
+        assertEquals(new DeleteCommand(List.of(FIRST_CONTACT, SECOND_CONTACT)), command);
+    }
+
+    @Test
+    public void parseCommand_delete_duplicate_indices() throws Exception {
+        DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased()
+                + " " + FIRST_CONTACT.getOneBased()
+                + " " + FIRST_CONTACT.getOneBased());
+        assertEquals(new DeleteCommand(List.of(FIRST_CONTACT)), command);
     }
 
     @Test

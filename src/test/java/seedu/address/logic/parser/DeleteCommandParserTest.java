@@ -4,6 +4,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TestData.IndexContact.FIRST_CONTACT;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -22,7 +24,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(FIRST_CONTACT));
+        assertParseSuccess(parser, "1", new DeleteCommand(List.of(FIRST_CONTACT)));
     }
 
     @Test
