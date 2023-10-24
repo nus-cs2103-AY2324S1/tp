@@ -2,7 +2,6 @@ package transact.logic.parser;
 
 import static transact.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import transact.commons.core.index.Index;
 import transact.logic.commands.DeleteTransactionCommand;
 import transact.logic.parser.exceptions.ParseException;
 
@@ -21,9 +20,9 @@ public class DeleteTransactionCommandParser implements Parser<DeleteTransactionC
      */
     public DeleteTransactionCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteTransactionCommand(index);
-        } catch (ParseException pe) {
+            Integer transactionId = Integer.parseInt(args.trim());
+            return new DeleteTransactionCommand(transactionId);
+        } catch (NumberFormatException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTransactionCommand.MESSAGE_USAGE), pe);
         }

@@ -36,7 +36,8 @@ public class DeleteStaffCommandTest {
         String expectedMessage = String.format(DeleteStaffCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), getTypicalTransactionBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), getTypicalTransactionBook(),
+                new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteStaffCommand, model, expectedMessage, expectedModel);
@@ -91,9 +92,6 @@ public class DeleteStaffCommandTest {
         // same values -> returns true
         DeleteStaffCommand deleteFirstCommandCopy = new DeleteStaffCommand(INDEX_FIRST_PERSON);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
 
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));

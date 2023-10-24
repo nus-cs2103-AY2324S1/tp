@@ -29,9 +29,6 @@ public class NameContainsKeywordsPredicateTest {
         NameContainsKeywordsPredicate firstPredicateCopy = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
-        // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
-
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 

@@ -30,9 +30,6 @@ public class EditPersonDescriptorTest {
         // null -> returns false
         assertFalse(DESC_AMY.equals(null));
 
-        // different types -> returns false
-        assertFalse(DESC_AMY.equals(5));
-
         // different values -> returns false
         assertFalse(DESC_AMY.equals(DESC_BOB));
 

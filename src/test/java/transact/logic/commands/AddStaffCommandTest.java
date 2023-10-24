@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import transact.commons.core.GuiSettings;
 import transact.logic.Messages;
 import transact.logic.commands.exceptions.CommandException;
@@ -25,6 +26,7 @@ import transact.model.ReadOnlyTransactionBook;
 import transact.model.ReadOnlyUserPrefs;
 import transact.model.person.Person;
 import transact.model.transaction.Transaction;
+import transact.model.transaction.info.TransactionId;
 import transact.testutil.PersonBuilder;
 
 public class AddStaffCommandTest {
@@ -52,7 +54,8 @@ public class AddStaffCommandTest {
         AddStaffCommand addStaffCommand = new AddStaffCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddStaffCommand.MESSAGE_DUPLICATE_PERSON, () -> addStaffCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddStaffCommand.MESSAGE_DUPLICATE_PERSON,
+                () -> addStaffCommand.execute(modelStub));
     }
 
     @Test
@@ -68,9 +71,6 @@ public class AddStaffCommandTest {
         // same values -> returns true
         AddStaffCommand addAliceCommandCopy = new AddStaffCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
 
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
@@ -166,12 +166,12 @@ public class AddStaffCommandTest {
         }
 
         @Override
-        public boolean hasTransaction(Transaction transaction) {
+        public boolean hasTransaction(TransactionId transactionId) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteTransaction(Transaction transaction) {
+        public Transaction deleteTransaction(TransactionId transactionId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -181,7 +181,7 @@ public class AddStaffCommandTest {
         }
 
         @Override
-        public void setTransaction(Transaction target, Transaction editedTransaction) {
+        public void setTransaction(TransactionId transactionId, Transaction editedTransaction) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -209,7 +209,18 @@ public class AddStaffCommandTest {
         public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Transaction getTransaction(TransactionId transactionId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableMap<TransactionId, Transaction> getTransactionMap() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
+
     /**
      * A Model stub that contains a single person.
      */

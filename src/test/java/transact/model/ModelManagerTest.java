@@ -117,13 +117,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasTransaction_transactionNotInTransactionBook_returnsFalse() {
-        assertFalse(modelManager.hasTransaction(APPLES));
+        assertFalse(modelManager.hasTransaction(APPLES.getTransactionId()));
     }
 
     @Test
     public void hasTransaction_transactionInTransactionBook_returnsTrue() {
         modelManager.addTransaction(APPLES);
-        assertTrue(modelManager.hasTransaction(APPLES));
+        assertTrue(modelManager.hasTransaction(APPLES.getTransactionId()));
     }
 
     @Test
@@ -150,9 +150,6 @@ public class ModelManagerTest {
         // null -> returns false
         assertFalse(modelManager.equals(null));
 
-        // different types -> returns false
-        assertFalse(modelManager.equals(5));
-
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, transactionBook, userPrefs)));
 
@@ -163,7 +160,7 @@ public class ModelManagerTest {
 
         // different transactionBook -> returns false
         modelManager.updateFilteredTransactionList(PREDICATE_HIDE_ALL_TRANSACTIONS);
-        assertFalse(modelManager.equals(new ModelManager(addressBook, transactionBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentTransactionBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

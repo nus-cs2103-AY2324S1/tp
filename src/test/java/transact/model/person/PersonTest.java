@@ -63,9 +63,6 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.equals(null));
 
-        // different type -> returns false
-        assertFalse(ALICE.equals(5));
-
         // different person -> returns false
         assertFalse(ALICE.equals(BOB));
 

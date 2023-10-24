@@ -60,10 +60,10 @@
                </TabPane>
             </center>
             <bottom>
-               <VBox prefHeight="117.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+               <VBox prefHeight="181.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                   <children>
                      <StackPane fx:id="commandBoxPlaceholder" prefHeight="150.0" prefWidth="200.0" />
-                     <StackPane fx:id="resultDisplayPlaceholder" prefHeight="150.0" prefWidth="200.0" />
+                     <StackPane fx:id="resultDisplayPlaceholder" prefHeight="201.0" prefWidth="800.0" />
                   </children>
                </VBox>
             </bottom>
