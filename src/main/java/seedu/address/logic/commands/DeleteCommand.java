@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the contacts identified by the index numbers used in the displayed contact list.\n"
-            + "Parameters: INDEX_1 INDEX_2 ... (must be positive integers)\n"
+            + "Parameters: INDEX_1 INDEX_2 ... (must be 1 or more positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 3 5";
 
     private final List<Index> targetIndices;
