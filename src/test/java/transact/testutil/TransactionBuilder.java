@@ -27,7 +27,7 @@ public class TransactionBuilder {
     private Description description;
     private Amount amount;
     private Date date;
-    private Person person;
+    private Integer personId;
 
     /**
      * Creates a {@code TransactionBuilder} with the default details.
@@ -38,7 +38,7 @@ public class TransactionBuilder {
         description = new Description(DEFAULT_DESC);
         amount = new Amount(DEFAULT_AMOUNT);
         date = new Date(DEFAULT_DATE);
-        person = DEFAULT_PERSON;
+        personId = DEFAULT_PERSON.getPersonId().getValue();
     }
 
     /**
@@ -51,7 +51,7 @@ public class TransactionBuilder {
         description = transactionToCopy.getDescription();
         amount = transactionToCopy.getAmount();
         date = new Date(DEFAULT_DATE);
-        person = transactionToCopy.getPerson();
+        personId = transactionToCopy.getPersonId();
     }
 
     /**
@@ -91,13 +91,15 @@ public class TransactionBuilder {
         return this;
     }
 
-    /** Sets the {@code Person} of the {@code Transaction} that we are building. */
-    public TransactionBuilder withPerson(Person person) {
-        this.person = person;
+    /**
+     * Sets the {@code personId} of the {@code Transaction} that we are building.
+     */
+    public TransactionBuilder withPersonId(Integer personId) {
+        this.personId = personId;
         return this;
     }
 
     public Transaction build() {
-        return new Transaction(id, transactionType, description, amount, date, person);
+        return new Transaction(id, transactionType, description, amount, date, personId);
     }
 }

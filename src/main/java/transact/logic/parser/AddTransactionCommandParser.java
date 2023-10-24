@@ -11,8 +11,6 @@ import java.util.stream.Stream;
 
 import transact.logic.commands.AddTransactionCommand;
 import transact.logic.parser.exceptions.ParseException;
-import transact.model.person.Person;
-import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
@@ -46,12 +44,14 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         TransactionType transactionType = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
-        Person staff = ParserUtil.parsePerson(argMultimap.getValue(PREFIX_STAFF).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
-        Transaction transaction = new Transaction(transactionType, description, amount, date);
+        Integer personId = -1;
+        if (argMultimap.getValue(PREFIX_STAFF).isPresent()) {
+            personId = ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_STAFF).get());
+        }
 
-        return new AddTransactionCommand(transaction);
+        return new AddTransactionCommand(transactionType, description, amount, date, personId);
     }
 
     /**

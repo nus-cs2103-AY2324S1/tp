@@ -1,6 +1,7 @@
 package transact.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static transact.commons.util.CollectionUtil.requireAllNonNull;
 import static transact.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static transact.logic.parser.CliSyntax.PREFIX_DATE;
 import static transact.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
@@ -11,7 +12,12 @@ import transact.commons.util.ToStringBuilder;
 import transact.logic.Messages;
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.Model;
+import transact.model.person.Person;
 import transact.model.transaction.Transaction;
+import transact.model.transaction.info.Amount;
+import transact.model.transaction.info.Date;
+import transact.model.transaction.info.Description;
+import transact.model.transaction.info.TransactionType;
 import transact.ui.MainWindow.TabWindow;
 
 /**
@@ -38,47 +44,52 @@ public class AddTransactionCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New transaction added: %1$s";
     public static final String MESSAGE_DUPLICATE_TRANSACTION = "This transaction already exists in the transaction book.";
 
-    private final Transaction toAdd;
+    private final TransactionType transactionType;
+    private final Description description;
+    private final Amount amount;
+    private final Date date;
+    private final Integer staffId;
 
     /**
-     * Creates an AddStaffCommand to add the specified {@code Person}
+     * Creates an AddTransactionCommand to add the specified {@code Transaction} and
+     * staffId {@code Integer}
      */
-    public AddTransactionCommand(Transaction transaction) {
-        requireNonNull(transaction);
-        toAdd = transaction;
+    public AddTransactionCommand(
+            TransactionType transactionType,
+            Description description,
+            Amount amount,
+            Date date,
+            Integer staffId) {
+        requireAllNonNull(transactionType, description, amount, date, staffId);
+        this.transactionType = transactionType;
+        this.description = description;
+        this.amount = amount;
+        this.date = date;
+        this.staffId = staffId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasTransaction(toAdd.getTransactionId())) {
-            throw new CommandException(MESSAGE_DUPLICATE_TRANSACTION);
+        if (staffId >= 0 && model.getPerson(staffId).equals(Person.NULL_PERSON)) {
+            throw new CommandException("Staff not found");
         }
 
-        model.addTransaction(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), TabWindow.TRANSACTIONS);
-    }
+        Transaction newTransaction = new Transaction(transactionType, description, amount, date, staffId);
+        model.addTransaction(newTransaction);
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof AddTransactionCommand)) {
-            return false;
-        }
-
-        AddTransactionCommand otherAddTransactionCommand = (AddTransactionCommand) other;
-        return toAdd.equals(otherAddTransactionCommand.toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newTransaction)),
+                TabWindow.TRANSACTIONS);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("type", transactionType)
+                .add("description", description)
+                .add("amount", amount)
+                .add("staffId", staffId)
                 .toString();
     }
 }

@@ -62,9 +62,9 @@ public class Messages {
                 .append("; Amount: ")
                 .append(transaction.getAmount())
                 .append("; Date: ")
-                .append(transaction.getDate());
-        // .append("; Staff: ")
-        // .append(transaction.getPerson().getName());
+                .append(transaction.getDate())
+                .append("; StaffId: ")
+                .append(transaction.getPersonId());
         return builder.toString();
     }
 }

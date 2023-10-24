@@ -133,8 +133,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person getPerson(PersonId targetId) {
-        return addressBook.getPersonMap().get(targetId);
+    public Person getPerson(Integer targetId) {
+        return addressBook.getPersonMap().entrySet().stream()
+                .filter(e -> e.getKey().getValue() == targetId)
+                .findFirst()
+                .map(e -> e.getValue())
+                .orElse(Person.NULL_PERSON);
     }
 
     // =========== TransactionBook

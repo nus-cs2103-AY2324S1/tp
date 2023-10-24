@@ -11,7 +11,7 @@ import java.util.TreeSet;
  */
 public class PersonId implements Comparable<PersonId> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Person ID should be a unique number";
+    public static final String MESSAGE_CONSTRAINTS = "Person ID should be a unique non-negative number";
     public static final String VALIDATION_REGEX = "^\\d+$";
 
     private static TreeSet<Integer> usedIds = new TreeSet<>();

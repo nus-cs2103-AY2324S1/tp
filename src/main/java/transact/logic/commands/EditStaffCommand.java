@@ -24,7 +24,6 @@ import transact.model.person.Address;
 import transact.model.person.Email;
 import transact.model.person.Name;
 import transact.model.person.Person;
-import transact.model.person.PersonId;
 import transact.model.person.Phone;
 import transact.model.tag.Tag;
 import transact.ui.MainWindow.TabWindow;
@@ -74,20 +73,20 @@ public class EditStaffCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        for (PersonId id : model.getAddressBook().getPersonMap().keySet()) {
-            if (Objects.equals(id.getValue(), personId)) {
-                Person personToEdit = model.getPerson(id);
-                Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person personToEdit = model.getPerson(personId);
 
-                model.setPerson(id, editedPerson);
-
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-                return new CommandResult(
-                        String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
-                        TabWindow.ADDRESSBOOK);
-            }
+        if (personToEdit.equals(Person.NULL_PERSON)) {
+            throw new CommandException(String.format(MESSAGE_PERSON_ID_NOT_FOUND, personId));
         }
-        throw new CommandException(String.format(MESSAGE_PERSON_ID_NOT_FOUND, personId));
+
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        model.setPerson(personToEdit.getPersonId(), editedPerson);
+
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(
+                String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
+                TabWindow.ADDRESSBOOK);
     }
 
     /**

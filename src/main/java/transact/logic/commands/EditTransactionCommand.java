@@ -70,10 +70,16 @@ public class EditTransactionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (editTransactionDescriptor.staffId >= 0
+                && model.getPerson(editTransactionDescriptor.staffId).equals(Person.NULL_PERSON)) {
+            throw new CommandException("Staff not found");
+        }
+
         for (TransactionId id : model.getTransactionBook().getTransactionMap().keySet()) {
             if (id.getValue() == transactionId) {
                 Transaction transactionToEdit = model.getTransaction(id);
-                Transaction editedTransaction = createEditedTransaction(transactionToEdit, editTransactionDescriptor);
+                Transaction editedTransaction = createEditedTransaction(transactionToEdit, editTransactionDescriptor,
+                        model);
 
                 model.setTransaction(id, editedTransaction);
 
@@ -93,18 +99,32 @@ public class EditTransactionCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Transaction createEditedTransaction(Transaction transactionToEdit,
-            EditTransactionDescriptor editTransactionDescriptor) {
+            EditTransactionDescriptor editTransactionDescriptor, Model model) {
         assert transactionToEdit != null;
+
         TransactionType updatedTransactionType = editTransactionDescriptor.getType()
                 .orElse(transactionToEdit.getTransactionType());
         Description updatedDescription = editTransactionDescriptor.getDescription()
                 .orElse(transactionToEdit.getDescription());
-        Amount updatedAmount = editTransactionDescriptor.getAmount().orElse(transactionToEdit.getAmount());
-        Date updatedDate = editTransactionDescriptor.getDate().orElse(transactionToEdit.getDate());
-        Person updatedStaff = editTransactionDescriptor.getStaff()
-                .orElse(transactionToEdit.hasPersonInfo() ? transactionToEdit.getPerson() : null);
+        Amount updatedAmount = editTransactionDescriptor.getAmount()
+                .orElse(transactionToEdit.getAmount());
+        Date updatedDate = editTransactionDescriptor.getDate()
+                .orElse(transactionToEdit.getDate());
+
+        var wrapper = new Object() {
+            Integer updatedStaffId = transactionToEdit.getPersonId();
+        };
+
+        editTransactionDescriptor.getStaffId().ifPresent(staffId -> {
+            if (staffId < 0) {
+                wrapper.updatedStaffId = -1;
+            } else {
+                wrapper.updatedStaffId = staffId;
+            }
+        });
+
         return new Transaction(transactionToEdit.getTransactionId(), updatedTransactionType, updatedDescription,
-                updatedAmount, updatedDate, updatedStaff);
+                updatedAmount, updatedDate, wrapper.updatedStaffId);
     }
 
     @Override
@@ -133,9 +153,7 @@ public class EditTransactionCommand extends Command {
 
     /**
      * Stores the details to edit the transaction with. Each non-empty field value
-     * will
-     * replace the
-     * corresponding field value of the person.
+     * will replace the corresponding field value of the transaction.
      */
     public static class EditTransactionDescriptor {
 
@@ -143,7 +161,7 @@ public class EditTransactionCommand extends Command {
         private Description description;
         private Amount amount;
         private Date date;
-        private Person staff;
+        private Integer staffId;
 
         public EditTransactionDescriptor() {
         }
@@ -157,14 +175,14 @@ public class EditTransactionCommand extends Command {
             setDescription(toCopy.description);
             setAmount(toCopy.amount);
             setDate(toCopy.date);
-            setStaff(toCopy.staff);
+            setStaffId(toCopy.staffId);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(transactionType, description, amount, date, staff);
+            return CollectionUtil.isAnyNonNull(transactionType, description, amount, date, staffId);
         }
 
         // Getter and Setter for 'transactionType'
@@ -203,12 +221,12 @@ public class EditTransactionCommand extends Command {
         }
 
         // Getter and Setter for 'staff'
-        public Optional<Person> getStaff() {
-            return Optional.ofNullable(staff);
+        public Optional<Integer> getStaffId() {
+            return Optional.ofNullable(staffId);
         }
 
-        public void setStaff(Person staff) {
-            this.staff = staff;
+        public void setStaffId(Integer staffId) {
+            this.staffId = staffId;
         }
 
         @Override
@@ -227,7 +245,7 @@ public class EditTransactionCommand extends Command {
                     && Objects.equals(description, otherEditPersonDescriptor.description)
                     && Objects.equals(amount, otherEditPersonDescriptor.amount)
                     && Objects.equals(date, otherEditPersonDescriptor.date)
-                    && Objects.equals(staff, otherEditPersonDescriptor.staff);
+                    && Objects.equals(staffId, otherEditPersonDescriptor.staffId);
         }
 
         @Override
@@ -237,7 +255,7 @@ public class EditTransactionCommand extends Command {
                     .add("description", description)
                     .add("amount", amount)
                     .add("date", date)
-                    .add("staff", staff)
+                    .add("staff", staffId)
                     .toString();
         }
     }

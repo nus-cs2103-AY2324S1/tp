@@ -165,8 +165,9 @@ public class AddStaffCommandTest {
         public void setPerson(PersonId targetId, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
-        public Person getPerson(PersonId personId) {
+        public Person getPerson(Integer personId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -174,6 +175,7 @@ public class AddStaffCommandTest {
         public ObservableMap<PersonId, Person> getPersonMap() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public boolean hasTransaction(TransactionId transactionId) {
             throw new AssertionError("This method should not be called.");

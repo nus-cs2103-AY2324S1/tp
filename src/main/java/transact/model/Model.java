@@ -110,7 +110,7 @@ public interface Model {
      * Returns the person with {@code targetId}.
      * {@code targetId} must exist in the address book.
      */
-    Person getPerson(PersonId targetId);
+    Person getPerson(Integer targetId);
 
     /**
      * Returns true if a transaction with the same id as {@code transactionId}
@@ -131,7 +131,8 @@ public interface Model {
     void addTransaction(Transaction transaction);
 
     /**
-     * Replaces the given transaction {@code targetId} with {@code editedTransaction}.
+     * Replaces the given transaction {@code targetId} with
+     * {@code editedTransaction}.
      * {@code targetId} must exist in the transaction book.
      * The person identity of {@code editedTransaction} must not be the same as
      * another
@@ -147,9 +148,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
     /** Returns an unmodifiable view of the filtered person map */
     ObservableMap<PersonId, Person> getPersonMap();
-
 
     /**
      * Updates the filter of the filtered person list to filter by the given

@@ -60,7 +60,7 @@ public class EditTransactionCommandParser implements Parser<EditTransactionComma
         }
 
         if (argMultimap.getValue(PREFIX_STAFF).isPresent()) {
-            editTransactionDescriptor.setStaff(ParserUtil.parsePerson(argMultimap.getValue(PREFIX_STAFF).get()));
+            editTransactionDescriptor.setStaffId(ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_STAFF).get()));
         }
 
         if (!editTransactionDescriptor.isAnyFieldEdited()) {
