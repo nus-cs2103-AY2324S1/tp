@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_CADENCE;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_DILL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DILL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DILL;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_APPLICANT;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB_APPLICANT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,29 +18,29 @@ public class EditApplicantDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditApplicantDescriptor descriptorWithSameValues = new EditApplicantDescriptor(DESC_CADENCE);
-        assertTrue(DESC_CADENCE.equals(descriptorWithSameValues));
+        EditApplicantDescriptor descriptorWithSameValues = new EditApplicantDescriptor(DESC_AMY_APPLICANT);
+        assertTrue(DESC_AMY_APPLICANT.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertTrue(DESC_CADENCE.equals(DESC_CADENCE));
+        assertTrue(DESC_AMY_APPLICANT.equals(DESC_AMY_APPLICANT));
 
         // null -> returns false
-        assertFalse(DESC_CADENCE.equals(null));
+        assertFalse(DESC_AMY_APPLICANT.equals(null));
 
         // different types -> returns false
-        assertFalse(DESC_CADENCE.equals(5));
+        assertFalse(DESC_AMY_APPLICANT.equals(5));
 
         // different values -> returns false
-        assertFalse(DESC_CADENCE.equals(DESC_DILL));
+        assertFalse(DESC_AMY_APPLICANT.equals(DESC_BOB_APPLICANT));
 
         // different name -> returns false
-        EditApplicantDescriptor editedCadence = new EditApplicantDescriptorBuilder(DESC_CADENCE)
-                .withName(VALID_NAME_DILL).build();
-        assertFalse(DESC_CADENCE.equals(editedCadence));
+        EditApplicantDescriptor editedCadence = new EditApplicantDescriptorBuilder(DESC_AMY_APPLICANT)
+                .withName(VALID_NAME_BOB).build();
+        assertFalse(DESC_AMY_APPLICANT.equals(editedCadence));
 
         // different phone -> returns false
-        editedCadence = new EditApplicantDescriptorBuilder(DESC_CADENCE).withPhone(VALID_PHONE_DILL).build();
-        assertFalse(DESC_CADENCE.equals(editedCadence));
+        editedCadence = new EditApplicantDescriptorBuilder(DESC_AMY_APPLICANT).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(DESC_AMY_APPLICANT.equals(editedCadence));
     }
 
     @Test

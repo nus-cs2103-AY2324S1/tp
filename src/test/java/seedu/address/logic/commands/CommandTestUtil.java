@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -31,12 +31,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_NAME_CADENCE = "Cadence Lim";
-    public static final String VALID_NAME_DILL = "Dill Ho";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_PHONE_CADENCE = "33333333";
-    public static final String VALID_PHONE_DILL = "44444444";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_TELEGRAM_AMY = "@amybee123";
@@ -50,36 +46,38 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String TELEGRAM_DESC_AMY = " " + PREFIX_TELEGRAM + VALID_TELEGRAM_AMY;
+    public static final String TELEGRAM_DESC_BOB = " " + PREFIX_TELEGRAM + VALID_TELEGRAM_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_TELEGRAM_DESC = " " + PREFIX_TELEGRAM; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditMemberCommand.EditMemberDescriptor DESC_AMY;
-    public static final EditMemberCommand.EditMemberDescriptor DESC_BOB;
+    public static final EditMemberCommand.EditMemberDescriptor DESC_AMY_MEMBER;
+    public static final EditMemberCommand.EditMemberDescriptor DESC_BOB_MEMBER;
     static {
-        DESC_AMY = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY_MEMBER = new EditMemberDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withTelegram(VALID_TELEGRAM_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB_MEMBER = new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withTelegram(VALID_TELEGRAM_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
-    public static final EditApplicantCommand.EditApplicantDescriptor DESC_CADENCE;
-    public static final EditApplicantCommand.EditApplicantDescriptor DESC_DILL;
+    public static final EditApplicantCommand.EditApplicantDescriptor DESC_AMY_APPLICANT;
+    public static final EditApplicantCommand.EditApplicantDescriptor DESC_BOB_APPLICANT;
     static {
-        DESC_CADENCE = new EditApplicantDescriptorBuilder().withName(VALID_NAME_CADENCE)
-                .withPhone(VALID_PHONE_CADENCE).build();
-        DESC_DILL = new EditApplicantDescriptorBuilder().withName(VALID_NAME_DILL)
-                .withPhone(VALID_PHONE_DILL).build();
+        DESC_AMY_APPLICANT = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).build();
+        DESC_BOB_APPLICANT = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).build();
     }
 
     /**
