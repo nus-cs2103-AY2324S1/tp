@@ -32,16 +32,23 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Contact> lastShownList = model.getFilteredContactList();
 
-        for (Index targetIndex : targetIndices) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
-            }
-            Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
-            model.removeContact(contactToDelete);
+        // Store the contacts to delete
+        List<Contact> contactsToDelete = targetIndices.stream()
+                .map(index -> {
+                    if (index.getZeroBased() >= lastShownList.size()) {
+                        throw new CommandException(Messages.INVALID_CONTACT_DISPLAYED_INDEX);
+                    }
+                    return lastShownList.get(index.getZeroBased());
+                })
+                .collect(Collectors.toList());
+
+        // Now delete the contacts
+        for (Contact contact : contactsToDelete) {
+            model.removeContact(contact);
         }
 
-        String formattedContacts = targetIndices.stream()
-                .map(index -> lastShownList.get(index.getZeroBased()))
+        // Format the deleted contacts for the message
+        String formattedContacts = contactsToDelete.stream()
                 .map(Contact::format)
                 .collect(Collectors.joining(", "));
 
