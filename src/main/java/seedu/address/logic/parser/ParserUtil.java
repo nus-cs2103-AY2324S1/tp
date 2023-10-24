@@ -28,7 +28,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX =
+            "The provided indexes must be positive whole numbers (integers greater than zero).";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -53,10 +54,10 @@ public class ParserUtil {
         String trimmedIndexes = oneBasedIndexes.trim();
         List<Index> indexList = new ArrayList<>();
         String[] args = trimmedIndexes.split("\\s+");
-        verifyNoDuplicateIndexes(args);
         for (String arg : args) {
             indexList.add(parseIndex(arg));
         }
+        verifyNoDuplicateIndexes(args);
         Collections.sort(indexList);
         return indexList;
     }
