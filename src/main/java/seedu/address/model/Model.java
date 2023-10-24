@@ -87,7 +87,7 @@ public interface Model {
     void clearAddressBook();
 
     /**
-     * @return Returns the AddressBook  @return the address book
+     * @return Returns the AddressBook
      */
     ReadOnlyAddressBook getAddressBook();
 
@@ -163,7 +163,7 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * @return Returns an unmodifiable view of the filtered person list  @return the filtered person list
+     * @return Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Person> getFilteredPersonList();
 
@@ -194,7 +194,7 @@ public interface Model {
     void setTeamBook(ReadOnlyTeamBook teamBook);
 
     /**
-     * Returns the TeamBook  @return the team book
+     * @return the TeamBook
      */
     ReadOnlyTeamBook getTeamBook();
 
@@ -258,7 +258,7 @@ public interface Model {
      */
     Name getTeamLeaderOfTeam(String teamName);
 
-    IdentityCode getTeamLeaderIDOfTeam(String teamName);
+    IdentityCode getTeamLeaderIdOfTeam(String teamName);
 
     /**
      * Sets team leader of team.
@@ -269,7 +269,7 @@ public interface Model {
     void setTeamLeaderOfTeam(String teamName, IdentityCode newTeamLeaderID);
 
     /**
-     * Returns an unmodifiable view of the filtered team list  @return the filtered team list
+     * @return An unmodifiable view of the filtered team list
      */
     ObservableList<Team> getFilteredTeamList();
 

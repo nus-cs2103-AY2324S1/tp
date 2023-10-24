@@ -8,11 +8,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.team.Team;
 
-
-import java.util.List;
-
+/**
+ * The type Edit team name command.
+ */
 public class EditTeamNameCommand extends Command {
     public static final String COMMAND_WORD = "editTeamName";
 
@@ -27,15 +26,21 @@ public class EditTeamNameCommand extends Command {
             + PREFIX_TEAMNAME + "Beta team";
 
     public static final String MESSAGE_EDIT_TEAM_NAME_SUCCESS = "Edited Team Name: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "Your new Team Name should be different from " +
-            "your original Team Name.";
+    public static final String MESSAGE_NOT_EDITED = "Your new Team Name should be different from "
+           + "your original Team Name.";
     public static final String MESSAGE_DUPLICATE_TEAM_NAME = "This Team Name already exists in the Team book.";
-    public static final String MESSAGE_TEAM_NOT_FOUND = "Cannot find the team with this original Team Name" +
-            " in the Team book.";
+    public static final String MESSAGE_TEAM_NOT_FOUND = "Cannot find the team with this original Team Name"
+          + " in the Team book.";
 
     private final String originalTeamName;
     private final String newTeamName;
 
+    /**
+     * Instantiates a new Edit team name command.
+     *
+     * @param originalTeamName the original team name
+     * @param newTeamName      the new team name
+     */
     public EditTeamNameCommand(String originalTeamName, String newTeamName) {
         requireNonNull(originalTeamName);
         requireNonNull(newTeamName);

@@ -355,6 +355,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      *
+
      * @return the current personList Panel
      */
     public PersonListPanel getPersonListPanel() {
@@ -362,7 +363,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     *
      * @return the current teamList Panel
      */
     public TeamListPanel getTeamListPanel() {
