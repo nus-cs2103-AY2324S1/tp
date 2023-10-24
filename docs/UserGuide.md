@@ -221,7 +221,7 @@ Format: `delete all [tg/TUTORIALGROUPID]`
 
 Examples:
 * `delete all` deletes all students from the current address book.
-* `delete all coursetg/G02` deletes all students from tutorial group G02.
+* `delete all tg/G02` deletes all students from tutorial group G02.
 
 ### Clearing all entries : `clear`
 

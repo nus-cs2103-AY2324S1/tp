@@ -16,8 +16,8 @@ public abstract class ListCommand extends Command {
             + PREFIX_TUTORIALNUMBER + "TUTORIAL_NUMBER (must be a positive integer) "
             + "[" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID] "
             + "(applicable for list attendance only)\n"
-            + "Example:\n"
-            + COMMAND_WORD + " students\n"
+            + "Example: "
+            + COMMAND_WORD + " students, "
             + COMMAND_WORD + " attendance tn/1 tg/G01";
 
     public ListCommand() {}

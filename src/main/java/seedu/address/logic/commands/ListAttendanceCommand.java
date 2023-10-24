@@ -19,10 +19,10 @@ public class ListAttendanceCommand extends ListCommand {
     public static final String COMMAND_WORD = "attendance";
     public static final String MESSAGE_USAGE = "list " + COMMAND_WORD
             + ": Lists summary of attendance and absent students.\n"
-            + "Parameters: \n"
-            + PREFIX_TUTORIALNUMBER + "TUTORIALNUMBER (must be a positive integer) \n"
+            + "Parameters: "
+            + PREFIX_TUTORIALNUMBER + "TUTORIAL_NUMBER (must be a positive integer) "
             + "[" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
-            + "Example: list " + COMMAND_WORD + " tn/1 " + " coursetg/CS2103";
+            + "Example: list " + COMMAND_WORD + " tn/1 " + "tg/G02";
     public static final String MESSAGE_SUCCESS = "Listed all absent students:";
 
     private final Index tn;
