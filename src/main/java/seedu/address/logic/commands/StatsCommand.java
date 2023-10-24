@@ -14,6 +14,12 @@ public abstract class StatsCommand extends Command {
             + COMMAND_WORD + " " + StatsCurrentCommand.COMMAND_WORD + " \n"
             + COMMAND_WORD + " " + StatsHousingCommand.COMMAND_WORD;
 
+    public static final String MESSAGE_NO_FOSTERERS = "No fosterers to generate statistics from. "
+            + "Please add some fosterers!";
+
+    /**
+     * Calculates the percentage of a numerator and denominator.
+     */
     public float calculatePercentage(int num, int denom) {
         return num / (float) denom * 100;
     }

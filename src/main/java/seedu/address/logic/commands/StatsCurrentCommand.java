@@ -16,10 +16,11 @@ import static java.util.Objects.requireNonNull;
  */
 public class StatsCurrentCommand extends StatsCommand {
     public static final String COMMAND_WORD = "current";
-    public static final String MESSAGE_CURRENT_SUCCESS = "%1$d out of %2$d listed fosterers"
-            + " are currently fostering (%3$.1f%%)!\n"
-            + "- %4$d fostering dogs (%5$.1f%%)\n"
-            + "- %6$d fostering cats (%7$.1f%%)";
+    public static final String MESSAGE_CURRENT_SUMMARY = "%1$d out of %2$d listed fosterers are "
+            + "currently fostering (%3$.1f%%)!";
+
+    public static final String MESSAGE_CURRENT_DETAILS = "- %1$d fostering dogs (%2$.1f%%)\n"
+            + "- %3$d fostering cats (%4$.1f%%)";
 
 
     public List<Person> getCurrentFosterers(List<Person> fosterers) {
@@ -52,18 +53,28 @@ public class StatsCurrentCommand extends StatsCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
         int total = lastShownList.size();
 
+        if (total == 0) {
+            throw new CommandException(StatsCommand.MESSAGE_NO_FOSTERERS);
+        }
+
         List<Person> currentFosterers = getCurrentFosterers(lastShownList);
         int currentCount = currentFosterers.size();
+        float currentPercent = calculatePercentage(currentCount, total);
+        String resultSummary = String.format(MESSAGE_CURRENT_SUMMARY, currentCount, total, currentPercent);
+
+        if (currentCount == 0) {
+            return new CommandResult(resultSummary);
+        }
+
         int fosteringDogsCount = getCurrentDogCount(currentFosterers);
         int fosteringCatsCount = getCurrentCatCount(currentFosterers);
 
-        float currentPercent = calculatePercentage(currentCount, total);
         float fosteringDogsPercent = calculatePercentage(fosteringDogsCount, currentCount);
         float fosteringCatsPercent = calculatePercentage(fosteringCatsCount, currentCount);
 
-        String result = String.format(MESSAGE_CURRENT_SUCCESS, currentCount, total, currentPercent,
-                fosteringDogsCount, fosteringDogsPercent, fosteringCatsCount, fosteringCatsPercent);
+        String resultDetails = String.format(MESSAGE_CURRENT_DETAILS, fosteringDogsCount,
+                fosteringDogsPercent, fosteringCatsCount, fosteringCatsPercent);
 
-        return new CommandResult(result);
+        return new CommandResult(resultSummary + "\n" + resultDetails);
     }
 }

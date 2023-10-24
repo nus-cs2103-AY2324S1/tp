@@ -47,8 +47,12 @@ public class StatsHousingCommand extends StatsCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
         int total = lastShownList.size();
+
+        if (total == 0) {
+            throw new CommandException(StatsCommand.MESSAGE_NO_FOSTERERS);
+        }
+
         int hdbCount = getHdbCount(lastShownList);
         int condoCount = getCondoCount(lastShownList);
         int landedCount = getLandedCount(lastShownList);

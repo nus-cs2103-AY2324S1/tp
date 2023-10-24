@@ -16,12 +16,15 @@ import static java.util.Objects.requireNonNull;
  */
 public class StatsAvailCommand extends StatsCommand {
     public static final String COMMAND_WORD = "avail";
-    public static final String MESSAGE_AVAIL_SUCCESS = "%1$d out of %2$d listed fosterers"
-            + " are available (%3$.1f%%)!\n"
-            + "Out of those available, \n"
-            + "- %4$d can foster dogs (%5$.1f%%)\n"
-            + "- %6$d can foster cats (%7$.1f%%)";
+    public static final String MESSAGE_AVAIL_SUMMARY = "%1$d out of %2$d listed fosterers are available (%3$.1f%%)!";
 
+    public static final String MESSAGE_AVAIL_DETAILS = "Out of those available, \n"
+            + "- %1$d can foster dogs (%2$.1f%%)\n"
+            + "- %3$d can foster cats (%4$.1f%%)";
+
+    /**
+     * Returns the list of available fosterers
+     */
     public List<Person> getAvailableFosterers(List<Person> fosterers) {
         return fosterers.stream()
                 .filter(fosterer ->
@@ -52,18 +55,28 @@ public class StatsAvailCommand extends StatsCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
         int total = lastShownList.size();
 
+        if (total == 0) {
+            throw new CommandException(StatsCommand.MESSAGE_NO_FOSTERERS);
+        }
+
         List<Person> availableFosterers = getAvailableFosterers(lastShownList);
         int availableCount = availableFosterers.size();
+        float availPercent = calculatePercentage(availableCount, total);
+        String resultSummary = String.format(MESSAGE_AVAIL_SUMMARY, availableCount, total, availPercent);
+
+        if (availableCount == 0) {
+            return new CommandResult(resultSummary);
+        }
+
         int canFosterDogsCount = getAbleDogCount(availableFosterers);
         int canFosterCatsCount = getAbleCatCount(availableFosterers);
 
-        float availPercent = calculatePercentage(availableCount, total);
         float canFosterDogsPercent = calculatePercentage(canFosterDogsCount, availableCount);
         float canFosterCatsPercent = calculatePercentage(canFosterCatsCount, availableCount);
 
-        String result = String.format(MESSAGE_AVAIL_SUCCESS, availableCount, total, availPercent,
-                canFosterDogsCount, canFosterDogsPercent, canFosterCatsCount, canFosterCatsPercent);
+        String resultDetails = String.format(MESSAGE_AVAIL_DETAILS, canFosterDogsCount, canFosterDogsPercent,
+                canFosterCatsCount, canFosterCatsPercent);
 
-        return new CommandResult(result);
+        return new CommandResult(resultSummary + "\n" + resultDetails);
     }
 }
