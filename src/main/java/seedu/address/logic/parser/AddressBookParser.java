@@ -91,7 +91,7 @@ public class AddressBookParser {
             return new DeleteScheduleCommandParser().parse(arguments);
 
         case ListScheduleCommand.COMMAND_WORD:
-            return new ListScheduleCommand();
+            return new ListScheduleCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
