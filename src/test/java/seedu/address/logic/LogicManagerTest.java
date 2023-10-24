@@ -164,7 +164,6 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
@@ -173,6 +172,8 @@ public class LogicManagerTest {
         Person expectedPerson = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
+        expectedModel.commitAddressBook();
+
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

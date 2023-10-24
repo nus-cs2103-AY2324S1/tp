@@ -40,6 +40,8 @@ import seedu.address.testutil.SpecialistBuilder;
  */
 public class EditCommandTest {
 
+    private CommandHistory commandHistory = new CommandHistory();
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -52,7 +54,8 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPatient);
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        expectedModel.commitAddressBook();
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
@@ -74,8 +77,9 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
         expectedModel.setPerson(lastPerson, editedPerson);
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
@@ -86,8 +90,9 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
@@ -103,17 +108,19 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        CommandHistory commandHistory = new CommandHistory();
         EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder((Patient) firstPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON, commandHistory);
     }
 
     @Test
@@ -125,7 +132,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPatientDescriptorBuilder((Patient) personInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON, commandHistory);
     }
 
     @Test
@@ -134,7 +141,7 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, commandHistory);
     }
 
     /**
@@ -151,7 +158,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, commandHistory);
     }
 
     @Test
