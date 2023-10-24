@@ -15,7 +15,7 @@ import transact.model.entry.exceptions.EntryNotFoundException;
 /**
  * UniqueEntryHashmap class
  */
-public class UniqueEntryHashmap<K, V extends Entry> {
+public class UniqueEntryMap<K, V extends Entry> {
 
     private final ObservableMap<K, V> internalMap = FXCollections.observableMap(new TreeMap<>());
     private final ObservableMap<K, V> internalUnmodifiableMap = FXCollections
@@ -73,7 +73,7 @@ public class UniqueEntryHashmap<K, V extends Entry> {
         return v;
     }
 
-    public void setEntries(UniqueEntryHashmap<? extends K, ? extends V> replacement) {
+    public void setEntries(UniqueEntryMap<? extends K, ? extends V> replacement) {
         requireNonNull(replacement);
         internalMap.clear();
         internalMap.putAll(replacement.internalMap);
@@ -104,11 +104,11 @@ public class UniqueEntryHashmap<K, V extends Entry> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniqueEntryHashmap<?, ?>)) {
+        if (!(other instanceof UniqueEntryMap<?, ?>)) {
             return false;
         }
 
-        UniqueEntryHashmap<?, ?> otherUniqueEntryMap = (UniqueEntryHashmap<?, ?>) other;
+        UniqueEntryMap<?, ?> otherUniqueEntryMap = (UniqueEntryMap<?, ?>) other;
         return internalMap.equals(otherUniqueEntryMap.internalMap);
     }
 
