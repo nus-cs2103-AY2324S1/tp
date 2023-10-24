@@ -23,7 +23,7 @@ public class ViewCommandParserTest {
     }
 
     @Test
-    public void parse_validArgsStaff_returnsFindCommand() {
+    public void parse_validArgsStaff_returnsViewCommand() {
         // Use "staff" as argument
         ViewCommand expectedViewCommand = new ViewCommand(ViewCommand.ViewType.STAFF);
         assertParseSuccess(parser, "staff", expectedViewCommand);
@@ -33,13 +33,23 @@ public class ViewCommandParserTest {
     }
 
     @Test
-    public void parse_validArgsTransaction_returnsFindCommand() {
+    public void parse_validArgsTransaction_returnsViewCommand() {
         // Use "transaction" as argument
         ViewCommand expectedViewCommand = new ViewCommand(ViewCommand.ViewType.TRANSACTION);
         assertParseSuccess(parser, "transaction", expectedViewCommand);
 
         // Use "t" as argument
         assertParseSuccess(parser, "t", expectedViewCommand);
+    }
+
+    @Test
+    public void parse_validArgsOverview_returnsViewCommand() {
+        // Use "overview" as argument
+        ViewCommand expectedViewCommand = new ViewCommand(ViewCommand.ViewType.OVERVIEW);
+        assertParseSuccess(parser, "overview", expectedViewCommand);
+
+        // Use "o" as argument
+        assertParseSuccess(parser, "o", expectedViewCommand);
     }
 
 }
