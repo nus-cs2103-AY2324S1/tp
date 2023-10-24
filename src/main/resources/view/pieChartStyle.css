@@ -1,0 +1,16 @@
+.default-color0.chart-pie { -fx-pie-color: #C3423F; }
+.default-color1.chart-pie { -fx-pie-color: #9BC530; }
+
+.chart-legend{
+    -fx-fill: #ffffff;
+}
+
+.chart-pie-label {
+    -fx-fill: #ffffff;
+    -fx-font-size: 1em;
+}
+
+.chart-pie-label-line {
+    -fx-fill: #ffffff;
+    -fx-font-size: 1em;
+}

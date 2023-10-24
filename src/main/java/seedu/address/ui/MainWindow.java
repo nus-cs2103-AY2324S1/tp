@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private BookingListPanel bookingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private RoomPieChart roomPieChart;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +50,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+    @FXML
+    private StackPane roomPieChartPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -109,6 +112,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window.
      */
+    @FXML
     void fillInnerParts() {
         bookingListPanel = new BookingListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
@@ -119,6 +123,8 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getBookingBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
+        roomPieChart = new RoomPieChart(logic.getFilteredPersonList());
+        roomPieChartPanelPlaceholder.getChildren().add(roomPieChart.getRoot());
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
@@ -163,6 +169,16 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Show pie chart
+     */
+    @FXML
+    private void handleViewRoomStatistics() {
+        roomPieChart = new RoomPieChart(logic.getFilteredPersonList());
+        roomPieChartPanelPlaceholder.getChildren().clear();
+        roomPieChartPanelPlaceholder.getChildren().add(roomPieChart.getRoot());
+    }
+
     public BookingListPanel getPersonListPanel() {
         return bookingListPanel;
     }
@@ -185,7 +201,9 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
+            if (commandResult.isShowRoomStatistics()) {
+                handleViewRoomStatistics();
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
