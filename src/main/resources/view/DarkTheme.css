@@ -360,3 +360,7 @@
     -fx-font-size: 30;
     -fx-background-color: #7fc9e8;
 }
+
+.overall_rating_label {
+    -fx-font-size: 30;
+}

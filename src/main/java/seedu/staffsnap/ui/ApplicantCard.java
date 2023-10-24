@@ -3,6 +3,7 @@ package seedu.staffsnap.ui;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -11,8 +12,12 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Circle;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.interview.Interview;
 
@@ -48,6 +53,8 @@ public class ApplicantCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
+    private StackPane overallRating;
+    @FXML
     private HBox interviews;
 
     /**
@@ -60,37 +67,8 @@ public class ApplicantCard extends UiPart<Region> {
         displayApplicantId(displayedIndex);
         displayApplicantDetails();
         displayApplicantStatus();
-
-        for (Interview interview : applicant.getInterviews()) {
-            VBox interviewBox = new VBox();
-            HBox interviewHeader = new HBox();
-            HBox interviewRating = new HBox();
-
-            interviewBox.setMinHeight(100);
-            interviewBox.setMinWidth(100);
-            interviewRating.setPrefWidth(100);
-            interviewRating.setAlignment(Pos.CENTER);
-            interviewHeader.setAlignment(Pos.CENTER);
-            VBox.setVgrow(interviewRating, Priority.ALWAYS);
-
-            interviewHeader.setBackground(new Background(new BackgroundFill(Color.web("#3e7b91"),
-                    CornerRadii.EMPTY, Insets.EMPTY)));
-            interviewRating.setBackground(new Background(new BackgroundFill(Color.web("#7fc9e8"),
-                    CornerRadii.EMPTY, Insets.EMPTY)));
-
-            Label interviewLabel = new Label(applicant.getInterviewIndexForApplicantCard(interview)
-                    + ". " + interview.type);
-
-            Label interviewRatingLabel = new Label();
-            interviewRatingLabel.getStyleClass().add("rating");
-            interviewRatingLabel.setText(interview.getRating().toString());
-
-            interviewHeader.getChildren().add(interviewLabel);
-            interviewRating.getChildren().add(interviewRatingLabel);
-            interviewBox.getChildren().addAll(interviewHeader, interviewRating);
-
-            interviews.getChildren().add(interviewBox);
-        }
+        displayApplicantInterviews();
+        displayApplicantOverallRating();
     }
     private void displayApplicantId(int displayedIndex) {
         id.setText(displayedIndex + ". ");
@@ -135,6 +113,61 @@ public class ApplicantCard extends UiPart<Region> {
             break;
         default:
         }
+    }
 
+    private void displayApplicantInterviews() {
+        for (Interview interview : applicant.getInterviews()) {
+            VBox interviewBox = new VBox();
+            HBox interviewHeader = new HBox();
+            HBox interviewRating = new HBox();
+
+            interviewBox.setMinHeight(100);
+            interviewBox.setMinWidth(100);
+            interviewRating.setPrefWidth(100);
+            interviewRating.setAlignment(Pos.CENTER);
+            interviewHeader.setAlignment(Pos.CENTER);
+            VBox.setVgrow(interviewRating, Priority.ALWAYS);
+
+            interviewHeader.setBackground(new Background(new BackgroundFill(Color.web("#3e7b91"),
+                    CornerRadii.EMPTY, Insets.EMPTY)));
+            interviewRating.setBackground(new Background(new BackgroundFill(Color.web("#7fc9e8"),
+                    CornerRadii.EMPTY, Insets.EMPTY)));
+
+            Label interviewLabel = new Label(applicant.getInterviewIndexForApplicantCard(interview)
+                    + ". " + interview.type);
+
+            Label interviewRatingLabel = new Label();
+            interviewRatingLabel.getStyleClass().add("rating");
+            interviewRatingLabel.setText(interview.getRating().toString());
+
+            interviewHeader.getChildren().add(interviewLabel);
+            interviewRating.getChildren().add(interviewRatingLabel);
+            interviewBox.getChildren().addAll(interviewHeader, interviewRating);
+
+            interviews.getChildren().add(interviewBox);
+        }
+    }
+    private void displayApplicantOverallRating() {
+        Circle outerCircle = new Circle(50);
+        outerCircle.setFill(Color.web("#454545"));
+        Circle baseCircle = new Circle(0,0,43);
+        baseCircle.setFill(Color.web("#454545"));
+        Circle innerCircle = new Circle(36);
+        innerCircle.setFill(Color.web("#454545"));
+        Group stackedArcs = new Group();
+        stackedArcs.getChildren().addAll(outerCircle, baseCircle);
+        Label ratingLabel = new Label();
+        ratingLabel.setText("8.2"); // TODO: update with overall rating
+        ratingLabel.getStyleClass().add("overall_rating_label");
+
+        for (int i = 0; i < 10; i++) {
+            Arc arc = new Arc(0, 0, 43, 43,
+                    90 + i * 36, -30);
+            arc.setType(ArcType.ROUND);
+            arc.setFill(Color.GREY);
+            stackedArcs.getChildren().add(arc);
+        }
+
+        overallRating.getChildren().addAll(stackedArcs, innerCircle, ratingLabel);
     }
 }
