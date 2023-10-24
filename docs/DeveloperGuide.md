@@ -380,6 +380,36 @@ The following sequence diagram shows how the operation works:
     * Cons: Have to repeatedly write logic perform this check everywhere a new `Schedule` is being created.
 
 
+### Delete Schedule Feature
+#### Implementation Details
+The delete schedule feature is facilitated by `DeleteScheduleCommand`, which extends from `Command` with the necessary implementation to delete a schedule by a given index.
+The following operation is exposed in the abstract `Command` class as an abstract method:
+* `DeleteScheduleCommand#execute(Model)` - Deletes the schedule from the `Model` using the given index.
+
+The following shows the activity diagram in which a user executes the `delete-s` command:
+
+![Activity diagram for delete-s command](images/DeleteScheduleActivityDiagram.png)
+
+Given below is an example scenario on how the delete schedule command behaves:
+1. The user has the application launched with at least 1 schedule added.
+2. The user executes `list-s` to view the list of schedules.
+3. The user executes `delete-s 1` command, which deletes the schedule with index 1 shown in the list of schedules displayed. The command is parsed in the `AddressBookParser`.
+4. `DeleteScheduleCommandParser` is initialized to parse the user input to create a `DeleteSchedulecommand` with the given `Index` representing the user's input.
+5. The `DeleteScheduleCommand#execute(Model)` will perform the following checks in this order to ensure that `Schedule` can be safely deleted from the `Model`:
+   - The `Index` is a valid integer.
+   - The `Index` is not out of bounds.
+     <div markdown="span" class="alert alert-info">:information_source: **Note:** An `Index` is considered valid if it's within the range of the schedule list's size. This is enforced by throwing an `CommandException` if it is not valid.
+       </div>
+6. The `execute()` will then call `Model::getFilteredScheduleList` and get the specified Schedule using the `Index` given.
+7. Once the checks are successful, the method then calls `Model::deleteSchedule` in `ModelManager` to delete the specified `Schedule` in the model.
+8. Finally, the `DeleteScheduleCommand` returns the `CommandResult`.
+
+The following sequence diagram shows how the above steps for delete tutor operation works, taking `execute("delete-s 1")` API call as an example.
+
+![Sequence diagram for delete-s command](images/DeleteScheduleSequenceDiagram.png)
+#### Design rationale:
+The `delete-s` command was designed this way to ensure consistency with the previous delete person command.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
