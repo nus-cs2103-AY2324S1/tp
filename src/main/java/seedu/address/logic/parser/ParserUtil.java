@@ -2,14 +2,19 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.ShortcutAlias;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
@@ -25,7 +30,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX =
+            "The provided indexes must be positive whole numbers (integers greater than zero).";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -38,6 +44,37 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndexes} into a list of sorted {@code Index} in ascending order and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if any of the specified index is invalid (not non-zero unsigned integer)
+     */
+    public static List<Index> parseIndexes(String oneBasedIndexes) throws ParseException {
+        requireNonNull(oneBasedIndexes);
+        String trimmedIndexes = oneBasedIndexes.trim();
+        List<Index> indexList = new ArrayList<>();
+        String[] args = trimmedIndexes.split("\\s+");
+        for (String arg : args) {
+            indexList.add(parseIndex(arg));
+        }
+        verifyNoDuplicateIndexes(args);
+        Collections.sort(indexList);
+        return indexList;
+    }
+
+    /**
+     * Verifies that no duplicated indexes are present in user input argument.
+     */
+    private static void verifyNoDuplicateIndexes(String[] args) throws ParseException {
+        String[] duplicatedIndexes = Arrays.stream(args)
+                .filter(i -> Collections.frequency(Arrays.asList(args), i) > 1)
+                .distinct()
+                .toArray(String[]::new);
+        if (duplicatedIndexes.length > 0) {
+            throw new ParseException(Messages.getErrorMessageForDuplicateIndexes(duplicatedIndexes));
+        }
     }
 
     /**
