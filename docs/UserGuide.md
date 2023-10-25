@@ -14,28 +14,27 @@ FumbleLog is a **desktop app for managing contacts, optimized for use via a Comm
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `fumblelog.jar` from [here](hhttps://github.com/AY2324S1-CS2103T-T12-2/tp/releases).
+2. Download the latest `fumblelog.jar` from [here](https://github.com/AY2324S1-CS2103T-T12-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your FumbleLog.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fumblelog.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the fumblelog.jar file in, and use the `java -jar fumblelog.jar`
+   command to run the application. A GUI similar to the below should appear in a few seconds.<br>
+   Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type commands into the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all persons.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the FumbleLog.
+   * `add n/John Doe` : Adds a person named `John Doe` to the FumbleLog persons list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd person shown in the current persons list.
 
-   * `clear` : Deletes all contacts.
+   * `exit` : Exits the FumbleLog.
 
-   * `exit` : Exits the app.
-
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for more details of FumbleLog's command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -65,7 +64,7 @@ FumbleLog is a **desktop app for managing contacts, optimized for use via a Comm
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the user guide for help.
 
 Format: `help`
 
@@ -183,29 +182,39 @@ Expected output when the command fails:
 
 ## Commands for Events
 
-### Adding a meeting : `add_meeting`
+### Adding an event : `add_event`
 
-Add a meeting to the FumbleLog.
+Add an event to the events list in FumbleLog.
 
-Format: `add_meeting n/MEETING_DETAILS d/DATE [s/START_TIME] [e/END_TIME]`
+Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`
 
 - `START_TIME` and `END_TIME` are optional, however, **`START_TIME` must be coupled with `END_TIME`**.
+- `PERSON` is optional, however only persons that exist can be added.
+- `GROUP` is optional, however only groups that exist can be added.
+- All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
+- All time are to be in the format `HHmm`. i.e. 1400 for 2pm
 
 Example: 
-* `add_meeting n/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
+* `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
+* `add_event m/FumbleLog presentation d/2023-10-30 g/Team2`
 
 Acceptable values for each parameter:
-* `n/MEETING_DETAILS`: Details of the meeting
-* `d/DATE`: A valid date in the format `yyyy-MM-dd`
-* `s/START_TIME`: A valid time in the format `HHmm` (Optional)
-* `e/END_TIME`: A valid time in the format `HHmm` (Optional)
+* `m/EVENT_DETAILS`: Details of the meeting.
+* `d/DATE`: A valid date in the format `yyyy-MM-dd`.
+* `[s/START_TIME]`: A valid time in the format `HHmm`.
+* `[e/END_TIME]`: A valid time in the format `HHmm`.
+* `[n/PERSON_NAME]`: Name of the person to be assigned.
+* `[g/GROUP]`: Name of the group to be assigned.
 
 Expected output when the command succeeds:
-* Input: `add_meeting n/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
-* Output: `New meeting added: tP week 3 meeting; Date: 2023-10-05; Start Time: 1500; End Time: 1700; `
+* Input: `add_event n/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
+* Output: `New event added: FumbleLog meeting; Date: 05 Oct 2023; Start Time: 15:00; End Time: 17:00; Persons involved: Ken; Groups involved: [CS2103T], [CS2101];`
 
 Expected output when the command fails:
-* `Invalid command format! add_meeting: Adds a meeting to the FumbleLog. Parameters: MEETING_DETAILS d/DATE [s/START_TIME] [e/END_TIME]`
+* `Invalid command format!
+  add_event: Adds an event to the address book.
+  Parameters: m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/NAME]... [g/GROUP]...
+  Example: add_event m/FumbleLog Meeting d/2020-10-30 s/1000 e/1200 n/Ken n/Yuheng g/Team2 `
 
 ### Editing a meeting : `edit_meeting`
 

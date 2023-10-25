@@ -412,6 +412,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. FumbleLog shows an error message.
 
       Use case resumes at step 2.
+* 5a. User enters a group and certain members of the group is already 
+assigned to the the event.
+
+    * 5a1. For each Event, duplicate members will be removed from the 
+    individual Persons list.
+        
+      Use case ends
 
 **Use case: UC07 - Delete an event**
 
@@ -523,6 +530,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. FumbleLog shows an error message
 
       Use case ends.
+* 4a. User assigns a group to an event where 
 
 **Use case: UC12 - Marking an event as recurring**
 

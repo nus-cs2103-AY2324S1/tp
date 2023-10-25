@@ -106,6 +106,7 @@ public class Messages {
             }
             builder.delete(builder.length() - 2, builder.length()); //removes the last comma
         }
+        builder.append(";");
         return builder.toString();
     }
 }
