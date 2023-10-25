@@ -113,13 +113,13 @@ Shows a summary of attendance records including list of absentees.
 
 ![list attendance](images/listAttendance.png)
 
-Format: `list attendance tn/TUTORIALNUMBER [tg/TUTORIALGROUPID]`
-*  Shows a list of absentees and summary of the attendance records of all students or students corresponding to the specified tutorial group for the specified tutorial number.
+Format: `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]`
+*  Shows a list of absentees and summary of the attendance records of all students or students corresponding to the specified tutorial group for the specified week number.
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-*  `list attendance tn/1` Shows a summary of attendance records of all students for Tutorial #1.
-*  `list attendance tn/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Tutorial #3.
+*  `list attendance w/1` Shows a summary of attendance records of all students for Week 1.
+*  `list attendance w/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Week 3.
 
 ### Searching for student's contact via keyword : `find`
 
@@ -289,16 +289,16 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-| Action     | Format, Examples                                                                                                                                                                                                |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]…` <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2`                                     |
-| **Clear**  | `clear`                                                                                                                                                                                                         |
-| **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                                                      |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSECODE TUTORIALGROUPID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                                                               |
-| **Exit**   | `exit`                                                                                                                                                                                                          |
-| **Filter** | `filter [add/delete/clear] [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`                                                                                                                                          |
-| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… \| id/STUDENT_ID [STUDENT_ID]…`<br> e.g., `find n/Anthony Yiqiao`                                                                                                          |
-| **List**   | `list attendance tn/TUTORIALNO [tg/TUTORIALGROUPID]` `list students`                                                                                                                                            |                                                           |
-| **Help**   | `help`                                                                                                                                                                                                          |
-| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \| id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
+| Action     | Format, Examples                                                                                                                                                            |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]…` <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2` |
+| **Clear**  | `clear`                                                                                                                                                                     |
+| **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                  |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSECODE TUTORIALGROUPID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                           |
+| **Exit**   | `exit`                                                                                                                                                                      |
+| **Filter** | `filter [add/delete/clear] [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`                                                                                                      |
+| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… \                                                                                                                                      | id/STUDENT_ID [STUDENT_ID]…`<br> e.g., `find n/Anthony Yiqiao`                                                                                                          |
+| **List**   | `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]` `list students`                                                                                                         |                                                           |
+| **Help**   | `help`                                                                                                                                                                      |
+| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \                                                                                                                                     | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
 
