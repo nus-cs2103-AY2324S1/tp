@@ -36,12 +36,12 @@ public class Group {
     /**
      * Name field must be present and not null.
      */
-    public Group(String groupName, GroupRemark groupRemark) {
+    public Group(String groupName, GroupRemark groupRemark, TimeIntervalList timeIntervalList) {
         requireNonNull(groupName);
         this.groupName = groupName;
         this.groupRemark = groupRemark;
+        this.timeIntervalList.addAll(timeIntervalList);
     }
-
 
     /**
      * Name field must be present and not null.
