@@ -95,7 +95,7 @@ public class AddressBookParser {
 
         case RateCommand.COMMAND_WORD:
             return new RateCommandParser().parse(arguments);
-            
+
         case ListInterviewCommand.COMMAND_WORD:
             return new ListInterviewCommand();
 
