@@ -22,7 +22,7 @@ public class SortingTest {
         );
 
         // Sort the list based on the 'name' attribute
-        tags.sort(Comparator.comparing(tag -> tag.name));
+        tags.sort(Comparator.comparing(tag -> tag.tagName));
 
         // Define the expected order
         List<Tag> expectedOrder = Arrays.asList(

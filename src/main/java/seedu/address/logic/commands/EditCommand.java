@@ -26,6 +26,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.Lesson;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
@@ -114,10 +115,11 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         FreeTime updatedFreeTime = editPersonDescriptor.getFreeTime().orElse(personToEdit.getFreeTime());
         Set<Course> updatedCourses = editPersonDescriptor.getCourses().orElse(personToEdit.getCourses());
+        Set<Lesson> lessons = personToEdit.getLessons(); // edit command does not edit lessons
         Hour updatedHour = editPersonDescriptor.getHour().orElse(personToEdit.getHour());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedFreeTime,
-                updatedCourses, updatedHour);
+                updatedCourses, lessons, updatedHour);
     }
 
     @Override

@@ -46,7 +46,7 @@ public class PersonUtil {
             sb.append(PREFIX_TO).append(person.getFreeTime().getTo()).append(" ");
         }
         person.getTags().forEach(
-                s -> sb.append(PREFIX_TAG).append(s.name).append(" ")
+                s -> sb.append(PREFIX_TAG).append(s.tagName).append(" ")
         );
         person.getCourses().forEach(
             s -> sb.append(PREFIX_COURSE).append(s.getCourseCode()).append(" ")
@@ -69,7 +69,7 @@ public class PersonUtil {
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
-            tags.forEach(s -> sb.append(PREFIX_TAG).append(s.name).append(" "));
+            tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
         }
         if (descriptor.getCourses().isPresent()) {
             Set<Course> mods = descriptor.getCourses().get();

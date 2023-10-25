@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.Lesson;
-import seedu.address.model.tag.CourseTag;
 
 /**
  * Jackson-friendly version of {@link Course}.
@@ -60,8 +59,8 @@ public class JsonAdaptedCourse {
         if (courseCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "courseCode"));
         }
-        if (!CourseTag.isValidCourseCode(courseCode)) {
-            throw new IllegalValueException(CourseTag.MESSAGE_CONSTRAINTS);
+        if (!Course.isValidCourseCode(courseCode)) {
+            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
         }
         final Set<Lesson> modelLessons = new HashSet<>(courseLessons);
         return new Course(name, courseCode, modelLessons);

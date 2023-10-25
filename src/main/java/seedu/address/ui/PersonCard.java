@@ -61,8 +61,8 @@ public class PersonCard extends UiPart<Region> {
         telegram.setText("Telegram: " + person.getTelegram().value);
         email.setText("Email: " + person.getEmail().value);
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.name))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.name)));
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         freeTime.setText("Free Time: " + person.getFreeTime().toString());
         hour.setText("Work Hour: " + person.getHour().toString());
         person.getCourses().stream()

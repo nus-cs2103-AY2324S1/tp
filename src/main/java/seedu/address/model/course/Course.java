@@ -2,25 +2,26 @@ package seedu.address.model.course;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.tag.CourseTag.MESSAGE_CONSTRAINTS;
-import static seedu.address.model.tag.CourseTag.isValidCourseCode;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.CourseTag;
 
 /**
  * Represents a course that the user is managing
  */
 public class Course {
-    private String name;
-    private String courseCode;
-    private Set<Lesson> lessons = new HashSet<>();
+    public static final String MESSAGE_CONSTRAINTS = "Course codes should start with 2-3 alphabets, "
+            + "followed by 4 numbers, and optionally end with an alphabet.";
 
-    private CourseTag courseTag;
+    // 2-3 alphabets, followed by 4 digits, and optionally ending with an alphabet
+    public static final String VALIDATION_REGEX = "^[A-Za-z]{2,3}\\d{4}[A-Za-z]?$";
+    private final String name;
+    private final String courseCode;
+    private final Set<Lesson> lessons = new HashSet<>();
+
 
     /**
      * Constructs a {@code Course}.
@@ -34,12 +35,7 @@ public class Course {
         checkArgument(isValidCourseCode(courseCode), MESSAGE_CONSTRAINTS); //Check if course code is valid
         this.name = name;
         this.courseCode = courseCode;
-        this.courseTag = CourseTag.of(courseCode);
         this.lessons.addAll(lessons);
-    }
-
-    public CourseTag getCourseTag() {
-        return courseTag;
     }
 
     public String getName() {
@@ -54,6 +50,13 @@ public class Course {
         return lessons;
     }
 
+    /**
+     * Returns true if a given string is a valid course code.
+     */
+    public static boolean isValidCourseCode(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -65,20 +68,18 @@ public class Course {
         }
         Course otherCourse = (Course) other;
         return otherCourse.name.equals(this.name)
-                && otherCourse.courseTag.equals(this.courseTag)
                 && otherCourse.lessons.equals(this.lessons);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, courseTag, lessons);
+        return Objects.hash(name, lessons);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("courseTag", courseTag)
                 .add("lessons", lessons)
                 .toString();
     }

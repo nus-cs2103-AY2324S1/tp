@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_FIVE;
@@ -39,7 +39,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).withCourses(VALID_COURSE_CS1231)
+                .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).withCourses(VALID_COURSE_CS1231S)
                 .withHour(VALID_HOUR_FIVE).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -103,7 +103,7 @@ public class PersonTest {
         assertNotEquals(ALICE, editedAlice);
 
         // different mods -> returns false
-        editedAlice = new PersonBuilder(ALICE).withCourses(VALID_COURSE_CS1231).build();
+        editedAlice = new PersonBuilder(ALICE).withCourses(VALID_COURSE_CS1231S).build();
         assertNotEquals(ALICE, editedAlice);
 
         // different hour -> returns false

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_CS1231;
+import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_CS1231S;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HOUR_DESC_FIVE;
@@ -19,7 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_FIVE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_SIXTY;
@@ -178,8 +178,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // mods
-        userInput = targetIndex.getOneBased() + COURSE_DESC_CS1231;
-        descriptor = new EditPersonDescriptorBuilder().withCourses(VALID_COURSE_CS1231).build();
+        userInput = targetIndex.getOneBased() + COURSE_DESC_CS1231S;
+        descriptor = new EditPersonDescriptorBuilder().withCourses(VALID_COURSE_CS1231S).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

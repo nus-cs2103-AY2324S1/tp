@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.Lesson;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
@@ -37,6 +38,7 @@ class JsonAdaptedPerson {
     private final String to;
 
     private final List<JsonAdaptedCourse> courses = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
     private final String hour;
 
     /**
@@ -48,6 +50,7 @@ class JsonAdaptedPerson {
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("from") String from,
             @JsonProperty("to") String to,
             @JsonProperty("courses") List<JsonAdaptedCourse> courses,
+            @JsonProperty("lessons") List<JsonAdaptedLesson> lessons,
             @JsonProperty("hour") String hour) {
         this.name = name;
         this.phone = phone;
@@ -60,6 +63,9 @@ class JsonAdaptedPerson {
         this.to = to;
         if (courses != null) {
             this.courses.addAll(courses);
+        }
+        if (lessons != null) {
+            this.lessons.addAll(lessons);
         }
         this.hour = hour;
     }
@@ -80,6 +86,9 @@ class JsonAdaptedPerson {
         courses.addAll(source.getCourses().stream()
                 .map(JsonAdaptedCourse::new)
                 .collect(Collectors.toList()));
+        lessons.addAll(source.getLessons().stream()
+                .map(JsonAdaptedLesson::new)
+                .collect(Collectors.toList()));
         hour = source.getHour().value;
     }
 
@@ -99,6 +108,11 @@ class JsonAdaptedPerson {
         final List<Course> personCourses = new ArrayList<>();
         for (JsonAdaptedCourse course : courses) {
             personCourses.add(course.toModelType());
+        }
+
+        final List<Lesson> personLessons = new ArrayList<>();
+        for (JsonAdaptedLesson lesson : lessons) {
+            personLessons.add(lesson.toModelType());
         }
 
         if (name == null) {
@@ -149,6 +163,8 @@ class JsonAdaptedPerson {
 
         final Set<Course> modelCourses = new HashSet<>(personCourses);
 
+        final Set<Lesson> modelLessons = new HashSet<>(personLessons);
+
         if (hour == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Hour.class.getSimpleName()));
         }
@@ -157,7 +173,7 @@ class JsonAdaptedPerson {
         }
         final Hour modelHour = new Hour(hour);
         return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags,
-                modelFreeTime, modelCourses, modelHour);
+                modelFreeTime, modelCourses, modelLessons, modelHour);
     }
 
 }

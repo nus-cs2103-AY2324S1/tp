@@ -6,7 +6,8 @@
     "email" : "alice@example.com",
     "telegram": "@aliceheyhey",
     "tags" : [ ],
-    "mods" : [ ],
+    "courses" : [ ],
+    "lessons" : [ ],
     "hour" : "8"
   }, {
     "name" : "Benson Meier",
@@ -16,7 +17,41 @@
     "tags" : [ "owesMoney", "friends" ],
     "from": "21:15",
     "to": "22:30",
-    "mods" : [ "CS1231", "CS2103T" ],
+    "courses" : [{
+      "name": "Software Engineering",
+      "courseCode": "CS2103T",
+      "lessons" : [
+        {
+          "name": "Lecture",
+          "courseCode": "CS2103T",
+          "dayOfWeek": "MONDAY",
+          "startTime": "10:00",
+          "endTime": "12:00"
+        },
+        {
+          "name": "Tutorial",
+          "courseCode": "CS2103T",
+          "dayOfWeek": "TUESDAY",
+          "startTime": "10:00",
+          "endTime": "12:00"
+        },
+        {
+            "name": "Laboratory",
+            "courseCode": "CS2103T",
+            "dayOfWeek": "WEDNESDAY",
+            "startTime": "10:00",
+            "endTime": "12:00"
+        }
+      ]}],
+    "lessons" : [
+      {
+        "name": "Tutorial",
+        "courseCode": "CS2103T",
+        "dayOfWeek": "TUESDAY",
+        "startTime": "10:00",
+        "endTime": "12:00"
+      }
+    ],
     "hour" : "14"
   }, {
     "name" : "Carl Kurz",
@@ -24,7 +59,8 @@
     "email" : "heinz@example.com",
     "telegram": "@carlkurz",
     "tags" : [ ],
-    "mods" : [ ],
+    "courses" : [ ],
+    "lessons" : [ ],
     "hour" : "24"
   }, {
     "name" : "Daniel Meier",
@@ -34,7 +70,8 @@
     "tags" : [ "friends" ],
     "from": "10:45",
     "to": "11:30",
-    "mods" : [ ],
+    "courses" : [ ],
+    "lessons" : [ ],
     "hour" : "38"
   }, {
     "name" : "Elle Meyer",
@@ -42,7 +79,8 @@
     "email" : "werner@example.com",
     "telegram": "@hiitselle",
     "tags" : [ ],
-    "mods" : [ ],
+    "courses" : [ ],
+    "lessons" : [ ],
     "hour" : "63"
   }, {
     "name" : "Fiona Kunz",
@@ -52,7 +90,8 @@
     "tags" : [ ],
     "from": "21:10",
     "to": "23:15",
-    "mods" : [ ],
+    "courses" : [ ],
+    "lessons" : [ ],
     "hour" : "39"
   }, {
     "name" : "George Best",
@@ -62,7 +101,8 @@
     "tags" : [ ],
     "from": "07:00",
     "to": "09:00",
-    "mods" : [ ],
+    "courses" : [ ],
+    "lessons" : [ ],
     "hour" : "46"
   } ]
 }

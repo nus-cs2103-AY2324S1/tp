@@ -15,6 +15,7 @@ import seedu.address.model.course.Lesson;
 public class JsonAdaptedLesson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
     private final String name;
+    private final String courseCode;
     private final String dayOfWeek;
     private final String startTime;
     private final String endTime;
@@ -23,9 +24,13 @@ public class JsonAdaptedLesson {
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
      */
     @JsonCreator
-    public JsonAdaptedLesson(@JsonProperty("name") String name, @JsonProperty("startTime") String startTime,
-                                @JsonProperty("dayOfWeek") String dayOfWeek, @JsonProperty("endTime") String endTime) {
+    public JsonAdaptedLesson(@JsonProperty("name") String name,
+                             @JsonProperty("courseCode") String courseCode,
+                             @JsonProperty("startTime") String startTime,
+                             @JsonProperty("dayOfWeek") String dayOfWeek,
+                             @JsonProperty("endTime") String endTime) {
         this.name = name;
+        this.courseCode = courseCode;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -36,6 +41,7 @@ public class JsonAdaptedLesson {
      */
     public JsonAdaptedLesson(Lesson source) {
         name = source.getName();
+        courseCode = source.getCourseCode();
         dayOfWeek = source.getDayOfWeek().toString();
         startTime = source.getStartTime().toString();
         endTime = source.getEndTime().toString();
@@ -50,6 +56,9 @@ public class JsonAdaptedLesson {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "name"));
         }
+        if (courseCode == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "courseCode"));
+        }
         if (startTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "startTime"));
         }
@@ -59,6 +68,10 @@ public class JsonAdaptedLesson {
         if (!LocalTime.parse(startTime).isBefore(LocalTime.parse(endTime))) {
             throw new IllegalValueException("Start time must be before end time");
         }
-        return new Lesson(name, DayOfWeek.valueOf(dayOfWeek), LocalTime.parse(startTime), LocalTime.parse(endTime));
+        return new Lesson(name,
+                courseCode,
+                DayOfWeek.valueOf(dayOfWeek),
+                LocalTime.parse(startTime),
+                LocalTime.parse(endTime));
     }
 }

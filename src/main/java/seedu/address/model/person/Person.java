@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,13 +28,14 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final FreeTime freeTime;
     private final Set<Course> courses = new HashSet<>();
+    private final Set<Lesson> lessons = new HashSet<>();
     private final Hour hour;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags,
-                  FreeTime freeTime, Set<Course> courses, Hour hour) {
+                  FreeTime freeTime, Set<Course> courses, Set<Lesson> lessons, Hour hour) {
         requireAllNonNull(name, phone, email, telegram, tags, hour);
         this.name = name;
         this.phone = phone;
@@ -42,6 +44,7 @@ public class Person {
         this.tags.addAll(tags);
         this.freeTime = freeTime == null ? FreeTime.EMPTY_FREE_TIME : freeTime;
         this.courses.addAll(courses);
+        this.lessons.addAll(lessons);
         this.hour = hour;
     }
 
@@ -79,6 +82,14 @@ public class Person {
      */
     public Set<Course> getCourses() {
         return Collections.unmodifiableSet(courses);
+    }
+
+    /**
+     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Lesson> getLessons() {
+        return Collections.unmodifiableSet(lessons);
     }
 
     public Hour getHour() {

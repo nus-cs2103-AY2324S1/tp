@@ -19,7 +19,6 @@ import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.CourseTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -115,7 +114,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return Tag.of(trimmedTag);
+        return new Tag(trimmedTag);
     }
 
     /**
@@ -156,10 +155,11 @@ public class ParserUtil {
     public static Course parseCourse(String course) throws ParseException {
         requireNonNull(course);
         String trimmedCourse = course.trim();
-        if (!CourseTag.isValidCourseCode(trimmedCourse)) {
-            throw new ParseException(CourseTag.MESSAGE_CONSTRAINTS);
+        try {
+            return UniqueCourseList.findByCourseCode(trimmedCourse);
+        } catch (Exception e) {
+            throw new ParseException(e.getMessage()); // If course is not found
         }
-        return UniqueCourseList.findByCourseCode(trimmedCourse);
     }
 
     /**

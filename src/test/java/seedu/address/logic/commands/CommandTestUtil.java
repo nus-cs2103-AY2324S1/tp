@@ -45,7 +45,9 @@ public class CommandTestUtil {
 
     public static final String VALID_COURSE_CS2103T = "CS2103T";
 
-    public static final String VALID_COURSE_CS1231 = "CS1231";
+    public static final String VALID_COURSE_CS1231S = "CS1231S";
+
+    public static final String UNADDED_COURSE_GEA1000 = "GEA1000";
 
     public static final String VALID_EMPTY_HOUR = "0";
     public static final String VALID_HOUR_FIVE = "5";
@@ -65,7 +67,8 @@ public class CommandTestUtil {
     public static final String TO_DESC_BOB = " " + PREFIX_TO + VALID_TO_BOB;
 
     public static final String COURSE_DESC_CS2103T = " " + PREFIX_COURSE + VALID_COURSE_CS2103T;
-    public static final String COURSE_DESC_CS1231 = " " + PREFIX_COURSE + VALID_COURSE_CS1231;
+    public static final String COURSE_DESC_CS1231S = " " + PREFIX_COURSE + VALID_COURSE_CS1231S;
+    public static final String UNADDED_COURSE_DESC_GEA1000 = " " + PREFIX_COURSE + UNADDED_COURSE_GEA1000;
     public static final String HOUR_DESC_FIVE = " " + PREFIX_HOUR + VALID_HOUR_FIVE;
     public static final String HOUR_DESC_SIXTY = " " + PREFIX_HOUR + VALID_HOUR_SIXTY;
     public static final String HOUR_DESC_EMPTY = " " + PREFIX_HOUR + VALID_EMPTY_HOUR;

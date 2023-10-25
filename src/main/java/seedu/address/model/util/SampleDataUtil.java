@@ -1,6 +1,5 @@
 package seedu.address.model.util;
 
-import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -27,54 +26,41 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     /**
      * Populates the UniqueCourseList sample courses.
+     *
+     * @return
      */
-    public static void populateSampleCourses() {
-        Set<Lesson> cs2103TLessons = new HashSet<>();
-        cs2103TLessons.add(new Lesson("G17-L1", DayOfWeek.of(2),
-                LocalTime.parse("8:00"), LocalTime.parse("10:00")));
-        cs2103TLessons.add(new Lesson("G17-L2", DayOfWeek.of(5),
-                LocalTime.parse("8:00"), LocalTime.parse("10:00")));
-
-        Set<Lesson> cs1231SLessons = new HashSet<>();
-        cs1231SLessons.add(new Lesson("T17-L1", DayOfWeek.of(2),
-                LocalTime.parse("8:00"), LocalTime.parse("10:00")));
-        cs1231SLessons.add(new Lesson("T17-L2", DayOfWeek.of(5),
-                LocalTime.parse("8:00"), LocalTime.parse("10:00")));
-        UniqueCourseList.add(new Course("CS2103T", "Software Engineering", cs2103TLessons));
-        UniqueCourseList.add(new Course("CS1231S", "Discrete Structures", cs1231SLessons));
-    }
     public static Person[] getSamplePersons() {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                         new Telegram("@alexyeoh"),
                         getTagSet("friends"),
                         new FreeTime(LocalTime.parse("11:30"), LocalTime.parse("12:30")),
-                        getCourseSet("CS2103T"), new Hour("8")),
+                        getCourseSet("CS2103T"), new HashSet<Lesson>(), new Hour("8")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                         new Telegram("@berrrrrnice"),
                         getTagSet("colleagues", "friends"),
                         new FreeTime(LocalTime.parse("12:30"), LocalTime.parse("13:30")),
-                        getCourseSet("CS2103T"), new Hour("2")),
+                        getCourseSet("CS2103T"), new HashSet<Lesson>(), new Hour("2")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                         new Telegram("@heyimcharlotte"),
                         getTagSet("neighbours"),
                         null,
-                        getCourseSet("CS2103T"), new Hour("8")),
+                        getCourseSet("CS2103T"), new HashSet<Lesson>(), new Hour("8")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                         new Telegram("@davidli123"),
                         getTagSet("family"),
                         new FreeTime(LocalTime.parse("14:30"), LocalTime.parse("15:30")),
-                        getCourseSet("CS2103T"), new Hour("10")),
+                        getCourseSet("CS2103T"), new HashSet<Lesson>(), new Hour("10")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                         new Telegram("@irfannn"),
                         getTagSet("classmates"),
                         null,
-                        getCourseSet("CS1231S"), new Hour("20")),
+                        getCourseSet("CS1231S"), new HashSet<Lesson>(), new Hour("20")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                         new Telegram("@rollieroy"),
                         getTagSet("colleagues"),
                         new FreeTime(LocalTime.parse("11:30"), LocalTime.parse("12:30")),
-                        getCourseSet("CS1231S"), new Hour("5"))
+                        getCourseSet("CS1231S"), new HashSet<Lesson>(), new Hour("5"))
         };
     }
 
@@ -102,5 +88,16 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(UniqueCourseList::findByCourseCode)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a lesson set containing the list of strings given.
+     */
+    public static Set<Lesson> getLessonSet(String[]... strings) {
+        Set<Lesson> lessons = new HashSet<>();
+        for (String[] lesson : strings) {
+            lessons.add(UniqueCourseList.findLesson(lesson[0], lesson[1]));
+        }
+        return lessons;
     }
 }

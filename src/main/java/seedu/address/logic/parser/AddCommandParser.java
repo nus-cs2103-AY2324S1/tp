@@ -11,12 +11,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.Lesson;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
@@ -57,9 +59,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         FreeTime freeTime = ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).orElseGet(() -> null),
                 argMultimap.getValue((PREFIX_TO)).orElseGet(() -> null));
         Set<Course> courseList = ParserUtil.parseCourses(argMultimap.getAllValues(PREFIX_COURSE));
+        Set<Lesson> lessonList = new HashSet<>(); // add command does not add lessons
         Hour hour = ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).get());
 
-        Person person = new Person(name, phone, email, telegram, tagList, freeTime, courseList, hour);
+        Person person = new Person(name, phone, email, telegram, tagList, freeTime, courseList, lessonList, hour);
 
         return new AddCommand(person);
     }
