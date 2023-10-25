@@ -48,10 +48,48 @@ public class Person {
         this.animalName = animalName;
         this.animalType = animalType;
         this.tags.addAll(tags);
+
+        if (!isAvailabilityValidWhenAnimalNameNil()) {
+            throw new IllegalArgumentException("When an animal name is provided, availability should not be "
+                    + "'Available' or 'nil'.");
+        }
+        if (!isAnimalNameTypeValidWhenNotAvailable()) {
+            throw new IllegalArgumentException("When availability is 'NotAvailable', animal name and type have "
+                    + "to either be both 'nil' or both not 'nil'.");
+        }
     }
 
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         this(name, phone, email, address, null, null, null, null, tags);
+    }
+
+    /**
+     * Returns boolean value to check if animal name is valid based on availability status.
+     *
+     * @return a boolean value which represents if animal name is valid.
+     */
+    public boolean isAvailabilityValidWhenAnimalNameNil() {
+        String avail = availability.value;
+        if (!animalName.fullName.equals("nil")) {
+            return !(avail.equals("Available") || avail.equals("nil"));
+        }
+        return true;
+    }
+
+    /**
+     * Returns boolean value to check if animal name and type are valid when NotAvailable.
+     *
+     * @return a boolean value which represents if animal name and type are valid.
+     */
+    public boolean isAnimalNameTypeValidWhenNotAvailable() {
+        String avail = availability.value;
+        if (avail.equals("NotAvailable")) {
+            String type = animalType.value;
+            String name = animalName.fullName;
+            return (name.equals("nil") && type.equals("nil"))
+                    || (!name.equals("nil") && !type.equals("nil"));
+        }
+        return true;
     }
 
     public Name getAnimalName() {
