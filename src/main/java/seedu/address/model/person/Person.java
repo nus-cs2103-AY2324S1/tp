@@ -99,7 +99,7 @@ public class Person {
     }
 
     public Set<Interaction> getInteractions() {
-        return Collections.unmodifiableSet(interactions);
+        return interactions;
     }
 
     /**
