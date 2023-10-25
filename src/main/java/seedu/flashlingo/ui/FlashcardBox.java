@@ -7,7 +7,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.session.SessionManager;
 
