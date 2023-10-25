@@ -46,16 +46,30 @@ public class Email {
 
     /**
      * Returns if a given string is a valid email.
+     *
+     * @param test The string to test for validity.
+     * @return True if the string matches the expected email format, false otherwise.
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns a string representation of this email address.
+     *
+     * @return A string representation of this email address.
+     */
     @Override
     public String toString() {
         return value;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this email address.
+     *
+     * @param other The reference object with which to compare.
+     * @return True if the other object is equal to this email address, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -71,6 +85,11 @@ public class Email {
         return value.equals(otherEmail.value);
     }
 
+    /**
+     * Returns a hash code value for this email address.
+     *
+     * @return A hash code value for this email address.
+     */
     @Override
     public int hashCode() {
         return value.hashCode();

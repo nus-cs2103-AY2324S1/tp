@@ -8,10 +8,10 @@ import seedu.address.model.BookingsBook;
 import seedu.address.model.ReadOnlyBookingsBook;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
+import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.booking.Room;
 import seedu.address.model.tag.Tag;
 
 /**

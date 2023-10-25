@@ -32,18 +32,31 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns if a given string is a valid name.
+     *
+     * @param test The string to test for validity.
+     * @return True if the string matches the expected name format, false otherwise.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
-
+    /**
+     * Returns a string representation of this name.
+     *
+     * @return A string representation of this name.
+     */
     @Override
     public String toString() {
         return fullName;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this name.
+     *
+     * @param other The reference object with which to compare.
+     * @return True if the other object is equal to this name, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -59,6 +72,11 @@ public class Name {
         return fullName.equals(otherName.fullName);
     }
 
+    /**
+     * Returns a hash code value for this name.
+     *
+     * @return A hash code value for this name.
+     */
     @Override
     public int hashCode() {
         return fullName.hashCode();

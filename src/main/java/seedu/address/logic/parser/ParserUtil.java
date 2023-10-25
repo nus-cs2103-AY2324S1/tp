@@ -10,10 +10,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.booking.BookingPeriod;
+import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.booking.Room;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,7 +46,7 @@ public class ParserUtil {
     public static Room parseRoom(String room) throws ParseException {
         requireNonNull(room);
         String trimmedRoom = room.trim();
-        if (!Room.isValidRoom(trimmedRoom)) {
+        if (Room.isValidRoom(trimmedRoom)) {
             throw new ParseException(MESSAGE_INVALID_ROOM);
         }
         return new Room(room);

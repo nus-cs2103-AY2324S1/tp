@@ -7,13 +7,13 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.booking.exceptions.BookingPeriodNotFoundException;
-import seedu.address.model.booking.exceptions.EmailNotFoundException;
-import seedu.address.model.booking.exceptions.NameNotFoundException;
-import seedu.address.model.booking.exceptions.PhoneNotFoundException;
 import seedu.address.model.booking.exceptions.RoomNotFoundException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.EmailNotFoundException;
+import seedu.address.model.person.exceptions.NameNotFoundException;
+import seedu.address.model.person.exceptions.PhoneNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**

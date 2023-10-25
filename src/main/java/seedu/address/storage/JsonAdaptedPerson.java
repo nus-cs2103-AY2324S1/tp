@@ -12,10 +12,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
+import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.booking.Room;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -78,7 +78,7 @@ class JsonAdaptedPerson {
         if (room == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Room.class.getSimpleName()));
         }
-        if (!Room.isValidRoom(room)) {
+        if (Room.isValidRoom(room)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Room modelRoom = new Room(room);
