@@ -19,7 +19,7 @@ public class Status {
         inactive,
         claimant,
         renewal,
-    };
+    }
 
     public static final String DEFAULT_STATUS = "NIL";
 
