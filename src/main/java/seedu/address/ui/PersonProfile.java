@@ -7,14 +7,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnimalType;
 import seedu.address.model.person.Availability;
@@ -68,7 +71,6 @@ public class PersonProfile extends UiPart<Region> {
     }
 
     private final MainWindow mainWindow;
-    private boolean checkValidityOfPerson;
 
     private Person person;
     private final Map<Field, String> fields = new EnumMap<>(Field.class);
@@ -85,7 +87,6 @@ public class PersonProfile extends UiPart<Region> {
         super(FXML);
         this.mainWindow = mainWindow;
         this.person = person;
-        checkValidityOfPerson = true;
 
         fields.put(Field.NAME, person.getName().toString());
         fields.put(Field.PHONE, person.getPhone().toString());
@@ -96,7 +97,6 @@ public class PersonProfile extends UiPart<Region> {
         fields.put(Field.ANIMAL_NAME, person.getAnimalName().toString());
         fields.put(Field.ANIMAL_TYPE, person.getAnimalType().toString());
         person.getTags().stream().map(Tag::getTagName).forEach(tags::add);
-        //todo deal with note
         initialize();
     }
 
@@ -104,9 +104,8 @@ public class PersonProfile extends UiPart<Region> {
         super(FXML);
         this.mainWindow = mainWindow;
         this.person = null;
-        checkValidityOfPerson = false;
 
-        Arrays.stream(Field.values()).forEach(field -> fields.put(field, ""));
+        Arrays.stream(Field.values()).forEach(field -> fields.put(field, null));
         initialize();
     }
 
@@ -129,13 +128,12 @@ public class PersonProfile extends UiPart<Region> {
         vboxChildren.add(new PersonProfileHeader().getRoot());
         vboxChildren.add(new PersonProfileHeader().getRoot());
         vboxChildren.add(new PersonProfileHeader().getRoot());
-        vboxChildren.add(new PersonProfileHeader().getRoot());
+        vboxChildren.add(new PersonProfileHeader().getRoot()); //todo remove extra elements
         //todo deal with tags
-        //todo deal with note
     }
 
-    public void setFocusField(Field field) {
-        System.out.println(field.getDisplayName() + " was set to FOCUS");
+    public void setFocus(Field field) {
+        uiElements.get(field).setFocus();
     }
 
     public String getValueOfField(Field field) { //todo figure out if this is necessary
@@ -145,37 +143,53 @@ public class PersonProfile extends UiPart<Region> {
     public boolean replaceFieldIfValid(Field field, String value) {
         fields.put(field, value);
 
-        if (!checkValidityOfPerson) {
-            if (createPerson()) {
-                checkValidityOfPerson = true;
-                //todo signal to user that a valid person is created
-            }
-            return true;
+        boolean didNotHavePerson = person == null;
+
+        try {
+            createPerson();
+        } catch (IllegalArgumentException exception) {
+            mainWindow.sendFeedback(exception.getMessage());
+            return didNotHavePerson;
         }
 
-        //todo signal to user if it's not a valid person
-        return createPerson();
+        if (didNotHavePerson) {
+            mainWindow.sendFeedback("Valid fosterer has been created!");
+        } else {
+            mainWindow.sendFeedback("Valid fosterer.");
+        }
+        confirmAll();
+        return true;
     }
 
-    private boolean createPerson() {
+    private void confirmAll() {
+        uiElements.values().forEach(PersonProfileField::confirm);
+    }
+
+    private void createPerson() throws IllegalArgumentException {
         Field[] requiredFields = {Field.NAME, Field.PHONE, Field.EMAIL, Field.ADDRESS};
-        boolean anyRequiredFieldsNull = Arrays.stream(requiredFields)
-                .map(fields::get).anyMatch(Objects::isNull);
-        if (anyRequiredFieldsNull) {
-            return false;
+        Optional<Field> missingRequiredField = Arrays.stream(requiredFields)
+                .filter(field -> fields.get(field) == null).findAny();
+        if (missingRequiredField.isPresent()) {
+            throw new IllegalArgumentException(missingRequiredField.get().name + " is required, but empty!");
         }
-        this.person = new Person(
-                new Name(fields.get(Field.NAME)),
-                new Phone(fields.get(Field.PHONE)),
-                new Email(fields.get(Field.EMAIL)),
-                new Address(fields.get(Field.ADDRESS)),
-                new Housing(fields.get(Field.HOUSING)),
-                new Availability(fields.get(Field.AVAILABILITY)),
-                new Name(fields.get(Field.ANIMAL_NAME)),
-                new AnimalType(fields.get(Field.ANIMAL_TYPE), fields.get(Field.AVAILABILITY)),
-                getTags()
-        );
-        return true;
+        Name name = new Name(fields.get(Field.NAME));
+        Phone phone = new Phone(fields.get(Field.PHONE));
+        Email email = new Email(fields.get(Field.EMAIL));
+        Address address = new Address(fields.get(Field.ADDRESS));
+        Housing housing = fields.get(Field.HOUSING) != null
+                ? new Housing(fields.get(Field.HOUSING))
+                : null;
+        Availability availability = fields.get(Field.AVAILABILITY) != null
+                ? new Availability(fields.get(Field.AVAILABILITY))
+                : null;
+        Name animalName = fields.get(Field.ANIMAL_NAME) != null
+                ? new Name(fields.get(Field.ANIMAL_NAME))
+                : null;
+        AnimalType animalType = fields.get(Field.ANIMAL_TYPE) != null
+                ? new AnimalType(fields.get(Field.ANIMAL_TYPE), fields.get(Field.AVAILABILITY))
+                : null;
+
+        this.person = new Person(name, phone, email, address, housing, availability, animalName, animalType, getTags());
     }
 
     private Set<Tag> getTags() {
@@ -202,5 +216,9 @@ public class PersonProfile extends UiPart<Region> {
         if (Objects.nonNull(runnable)) {
             runnable.run();
         }
+    }
+
+    void sendFeedback(String feedback) {
+        mainWindow.sendFeedback(feedback);
     }
 }

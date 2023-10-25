@@ -4,11 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class PersonProfileField extends UiPart<SplitPane> {
     private static final String FXML = "PersonProfileField.fxml";
+    private static final String INVALID_FIELD_FEEDBACK = "Invalid value for: ";
 
     @FXML private Label valueLabel;
     @FXML private TextField valueField;
@@ -58,8 +58,9 @@ public class PersonProfileField extends UiPart<SplitPane> {
             initialize();
         }
     }
+
     @FXML
-    public void handleKey(KeyEvent keyEvent) {
+    private void handleKey(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
         case ENTER:
             handleConfirmation();
@@ -67,29 +68,53 @@ public class PersonProfileField extends UiPart<SplitPane> {
         case ESCAPE:
             handleCancellation();
             break;
-        default:
-            return;
         }
-        updateState(State.LABEL);
     }
 
     private void handleConfirmation() {
         System.out.println("Confirmation detected");
-        String newValue = valueField.getText().trim();
-        if (!field.isValid(newValue) || !personProfile.replaceFieldIfValid(field, newValue)) {
-            handleCancellation();
+        String newValue = getTextOrNull();
+        if (newValue != null && !field.isValid(newValue)) {
+            personProfile.sendFeedback(INVALID_FIELD_FEEDBACK + field.getDisplayName());
+            return;
         }
-        this.value = newValue;
-        valueLabel.setText(newValue);
+        if (!personProfile.replaceFieldIfValid(field, newValue)){
+            return;
+        }
+        confirm();
     }
 
     private void handleCancellation() {
         System.out.println("Cancellation detected");
         valueField.setText(value);
+        valueLabel.setText(value);
+        personProfile.replaceFieldIfValid(field, value);
+        updateState(State.LABEL);
+    }
+
+    void confirm() {
+        if (state == State.TEXT_FIELD) {
+            String newValue = getTextOrNull();
+            this.value = newValue;
+            valueLabel.setText(newValue);
+            updateState(State.LABEL);
+        }
+    }
+
+    private String getTextOrNull() {
+        String newValue = valueField.getText();
+        if (newValue != null) {
+            if (newValue.isEmpty() || newValue.isBlank()) {
+                newValue = null;
+            } else {
+                newValue = newValue.trim();
+            }
+        }
+        return newValue;
     }
 
     @FXML
-    private void setFocus() {
+    void setFocus() {
         System.out.println("Focus detected");
         updateState(State.TEXT_FIELD);
     }
