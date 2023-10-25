@@ -14,6 +14,7 @@ import seedu.address.model.musician.Musician;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Musician> PREDICATE_SHOW_ALL_MUSICIANS = unused -> true;
+    Predicate<Band> PREDICATE_SHOW_ALL_BANDS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -101,6 +102,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredBandList(Predicate<Band> predicate);
+
+    /**
+     * Updates the {@code FilteredBandList} to contain the {@code Band}
+     * at the specified index.
+     */
+    void updateFilteredBandList(int bandIndex);
 
     /**
      * Returns true if a band with the same identity as {@code band} exists in the address book.

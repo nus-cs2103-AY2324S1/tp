@@ -29,6 +29,7 @@ public class ListBandCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredMusicianList(targetIndex.getZeroBased());
+        model.updateFilteredBandList(targetIndex.getZeroBased());
         return new CommandResult(
             String.format(Messages.MESSAGE_MUSICIANS_LISTED_OVERVIEW, model.getFilteredMusicianList().size()));
     }

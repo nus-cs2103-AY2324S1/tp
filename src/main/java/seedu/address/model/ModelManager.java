@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.band.Band;
+import seedu.address.model.band.BandIsSamePredicate;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.MusicianInBandPredicate;
 
@@ -182,6 +183,12 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredBandList(Predicate<Band> predicate) {
         requireNonNull(predicate);
+        filteredBands.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredBandList(int bandIndex) {
+        Predicate<Band> predicate = new BandIsSamePredicate(filteredBands.get(bandIndex));
         filteredBands.setPredicate(predicate);
     }
 
