@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
@@ -49,6 +50,8 @@ public class FlashcardBoxNoButton extends UiPart<Region> {
     public FlashcardBoxNoButton(FlashCard fc, int displayedIndex) {
         super(FXML);
         this.flashCard = fc;
+        // Ensure that FlashCard with no buttons is only created when not in review session
+        assert(!FlashlingoParser.getReviewSession());
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
         translation.setText("");
