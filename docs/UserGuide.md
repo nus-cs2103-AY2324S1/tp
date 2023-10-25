@@ -172,15 +172,77 @@ Examples:
 
 ###  Find contacts
 
-Generally, search commands will contain the following tokens:
+Lists contacts whose fields match the specified the specified find expression.
 
-* `FIELD`: Specifies the field to search within (name, phone, email, address, tag).
+Format: `find FIND_EXPRESSION`
 
-* `KEYWORD`: Words or characters you're looking for in a contact's information.
+Find expressions have a low barrier to entry that allows for simple filtering by field. This basic filtering for contacts is likely sufficient for most of your use cases. We recommend that you first read the [basic filtering](#find-contacts-basic-filtering) section to learn how to perform simple filtering by a single field.
 
-Format: `find FIELD/KEYWORD [FIELD/KEYWORD]`
+If you then find that the basic filtering is insufficient for your use case, you can read the [advanced filtering](#find-contacts-advanced-filtering) section to learn how to perform more complex filtering.
 
-You may include multiple field-keyword combinations. The `find` command will perform a logical `AND` on all field-keyword combinations.
+
+
+<panel header="**Supported Fields**" type="primary" id="find-fields-table" expanded no-close>
+Across both basic and advanced filtering, the following fields are supported:<br><br>
+
+| Field | Prefix | Description |
+| ----- | ------ | ----------- |
+| Name  | `n`   | Finds contacts whose names **contain** the given keyword. |
+| Phone | `p`   | Finds contacts whose phone numbers **contain** the given digits. |
+| Email | `e`   | Finds contacts whose email addresses **contain** the given keyword. |
+| Address | `a` | Finds contacts whose addresses **contain** the given keyword. |
+| Tag   | `t`   | Finds contacts who have any tag that **exactly matches** the given keyword. |
+
+</panel>
+
+<br>
+
+<box type="info">
+
+Note that in all cases, the search is case-insensitive for alphabetic characters. For example, `n/Joe` will match contacts who have the name `Joe`, `joE`, `Ajoeia`, `BobJOe Lee`, etc., and `t/friend` will match `friend`, `FriENd`, `FRIEND`, etc.
+</box>
+
+
+<box type="warning">
+
+For now, search keywords cannot contain spaces. For example, `n/John Doe` will not work as expected. Functionality to search for keywords which spaces like `"John Doe"` will be added in a future release.
+</box>
+
+#### Find contacts: basic filtering
+
+Contacts can be filtered by a single field by typing:
+- the **prefix** of the field you're searching through, followed by
+- a **slash** (`/`), followed by
+- the **keyword** you're looking for. Such a search will return all contacts whose field matches the keyword based on the behavior specified in the [supported fields table](#find-fields-table).
+
+We call this basic block of filtering a **find condition**, which is the smallest unit that act as a valid [**`FIND_EXPRESSION`**](#find-contacts).
+
+
+<box>
+
+For example, given the following contacts:
+
+| Name | Tags |
+| ---- | ---- |
+| John Doe | neighbor, colleague |
+| Jane Doe | neighbor, friend |
+| Alex Yeoh | friend |
+| Yervis Alexis | girlfriend |
+
+
+`n/do` is a **find condition** that will return all contacts whose names contain the substring `"do"`, in this case `"John Doe"` and `"Jane Doe"`.
+
+Similarly, `t/friend` is a **find condition** that will return all contacts who have the `"friend"` tag, in this case `"Jane Doe"` and `"Alex Yeoh"` (and **not** `"Yervis Alexis"`, since [supported fields table](#find-fields-table) requires an exact tag match).
+
+Since `n/do` and `t/friend` are both **find conditions**, they can constitute a **`FIND_EXPRESSION`**. The complete commands in each case would be:
+
+- `find n/do`
+- `find t/friend`
+
+</box>
+
+#### Find contacts: advanced filtering
+
 
 #### Search contact by name
 
