@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.flashlingo.testutil.Assert.assertThrows;
-import static seedu.flashlingo.testutil.TypicalFlashCards.BOB;
 import static seedu.flashlingo.testutil.TypicalFlashCards.WORD;
 import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 
@@ -73,7 +72,7 @@ public class JsonFlashlingoStorageTest {
         assertEquals(original, new Flashlingo(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addFlashCard(BOB);
+        original.addFlashCard(WORD);
         original.removeFlashCard(WORD);
         jsonFlashlingoStorage.saveFlashlingo(original, filePath);
         readBack = jsonFlashlingoStorage.readFlashlingo(filePath).get();

@@ -41,9 +41,6 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new Flashlingo(model.getFlashlingo()), new UserPrefs());
         expectedModel.setFlashCard(model.getFilteredFlashCardList().get(0), editedFlashcard);
-
-
-
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 

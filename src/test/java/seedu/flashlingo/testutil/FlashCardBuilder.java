@@ -12,10 +12,10 @@ import seedu.flashlingo.model.flashcard.words.TranslatedWord;
  * A utility class to help with building FlashCard objects.
  */
 public class FlashCardBuilder {
-    public static final String DEFAULT_ORIGINAL_WORD = "word";
-    public static final String DEFAULT_TRANSLATED_WORD = "mot";
+    public static final String DEFAULT_ORIGINAL_WORD = "Hello";
+    public static final String DEFAULT_TRANSLATED_WORD = "你好";
     public static final String DEFAULT_ORIGINAL_WORD_LANGUAGE = "English";
-    public static final String DEFAULT_TRANSLATED_WORD_LANGUAGE = "French";
+    public static final String DEFAULT_TRANSLATED_WORD_LANGUAGE = "Mandarin";
     public static final int DEFAULT_LEVEL = 1;
     public static final String DEFAULT_WHEN_TO_REVIEW = "2023-01-01T00:00:00Z";
 

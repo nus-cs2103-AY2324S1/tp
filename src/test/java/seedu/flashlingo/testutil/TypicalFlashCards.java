@@ -17,16 +17,30 @@ import seedu.flashlingo.model.flashcard.FlashCard;
  */
 public class TypicalFlashCards {
 
-    public static final FlashCard DANIEL = new FlashCardBuilder().withOriginalWord("Daniel Meier",
-                    "English")
-            .withTranslatedWord("丹尼尔·梅尔", "Mandarin")
-            .build();
-
+    public static final FlashCard ALICE = new FlashCardBuilder().withOriginalWord("Alice Pauline", "English")
+            .withTranslatedWord("爱丽丝·宝琳", "Mandarin").build();
     public static final FlashCard BENSON = new FlashCardBuilder().withOriginalWord("Benson Meier",
                     "English")
             .withTranslatedWord("本森·梅尔", "Mandarin")
             .build();
+    public static final FlashCard CARL = new FlashCardBuilder().withOriginalWord("Carl Kurz", "English")
+            .withTranslatedWord("卡尔·库尔兹", "Mandarin")
+            .build();
+    public static final FlashCard DANIEL = new FlashCardBuilder().withOriginalWord("Daniel Meier",
+                    "English")
+            .withTranslatedWord("丹尼尔·梅尔", "Mandarin")
+            .build();
+    public static final FlashCard ELLE = new FlashCardBuilder().withOriginalWord("Elle Meyer",
+                    "English")
+            .withTranslatedWord("艾尔·迈耶", "Mandarin")
+            .build();
+    public static final FlashCard FIONA = new FlashCardBuilder().withOriginalWord("Fiona Kunz",
+                    "English")
+            .withTranslatedWord("菲奥娜昆兹", "Mandarin").build();
 
+    public static final FlashCard GEORGE = new FlashCardBuilder().withOriginalWord("George Best",
+                    "English")
+            .withTranslatedWord("乔治·贝斯特", "Mandarin").build();
 
     // Manually added
     public static final FlashCard HOON = new FlashCardBuilder().withOriginalWord("Hoon Meier",
@@ -66,6 +80,6 @@ public class TypicalFlashCards {
     }
 
     public static List<FlashCard> getTypicalFlashCards() {
-        return new ArrayList<>(Arrays.asList(WORD));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
