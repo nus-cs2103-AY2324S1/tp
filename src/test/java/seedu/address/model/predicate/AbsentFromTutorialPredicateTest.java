@@ -4,14 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.week.Week;
 import seedu.address.testutil.PersonBuilder;
 
 public class AbsentFromTutorialPredicateTest {
@@ -21,15 +20,22 @@ public class AbsentFromTutorialPredicateTest {
         AbsentFromTutorialPredicate predicate = new AbsentFromTutorialPredicate(
                 Index.fromOneBased(1), new Tag("G02"));
         Person person = new PersonBuilder().withTags("G02").build();
-        person.addAttendance(new Attendance(LocalDate.now(), false));
+        person.addAttendance(new Attendance(new Week(1), false, "Sick"));
         assertTrue(predicate.test(person));
 
-        // With no tag
+        // Ignore case
         AbsentFromTutorialPredicate predicate2 = new AbsentFromTutorialPredicate(
-                Index.fromOneBased(1), new Tag("PLACEHOLDER"));
-        Person person2 = new PersonBuilder().withTags("G10").build();
-        person2.addAttendance(new Attendance(LocalDate.now(), false));
+                Index.fromOneBased(1), new Tag("G02"));
+        Person person2 = new PersonBuilder().withTags("g02").build();
+        person2.addAttendance(new Attendance(new Week(1), false, "Sick"));
         assertTrue(predicate2.test(person2));
+
+        // With no tag
+        AbsentFromTutorialPredicate predicate3 = new AbsentFromTutorialPredicate(
+                Index.fromOneBased(1), new Tag("PLACEHOLDER"));
+        Person person3 = new PersonBuilder().withTags("G10").build();
+        person3.addAttendance(new Attendance(new Week(1), false, "Sick"));
+        assertTrue(predicate3.test(person3));
     }
 
     @Test
@@ -38,23 +44,23 @@ public class AbsentFromTutorialPredicateTest {
         AbsentFromTutorialPredicate predicate = new AbsentFromTutorialPredicate(
                 Index.fromOneBased(1), new Tag("CS2103T"));
         Person person = new PersonBuilder().withTags("CS2103T").build();
-        person.addAttendance(new Attendance(LocalDate.now(), true));
+        person.addAttendance(new Attendance(new Week(1), true));
         assertFalse(predicate.test(person));
 
         // With multiple attendances
         AbsentFromTutorialPredicate predicate2 = new AbsentFromTutorialPredicate(
                 Index.fromOneBased(3), new Tag("CS2103T"));
         Person person2 = new PersonBuilder().withTags("CS2103T").build();
-        person2.addAttendance(new Attendance(LocalDate.now(), false));
-        person2.addAttendance(new Attendance(LocalDate.now(), true));
-        person2.addAttendance(new Attendance(LocalDate.now(), true));
+        person2.addAttendance(new Attendance(new Week(1), false, "Late"));
+        person2.addAttendance(new Attendance(new Week(1), true));
+        person2.addAttendance(new Attendance(new Week(1), true));
         assertFalse(predicate2.test(person2));
 
         // With wrong tag
         AbsentFromTutorialPredicate predicate3 = new AbsentFromTutorialPredicate(
                 Index.fromOneBased(1), new Tag("CS2103T"));
         Person person3 = new PersonBuilder().withTags("CS2030S").build();
-        person.addAttendance(new Attendance(LocalDate.now(), false));
+        person.addAttendance(new Attendance(new Week(1), false, "Late"));
         assertFalse(predicate3.test(person3));
     }
 

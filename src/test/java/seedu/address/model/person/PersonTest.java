@@ -12,11 +12,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.week.Week;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -61,7 +61,7 @@ public class PersonTest {
     @Test
     public void getAttendanceForCurrentWeek_noAttendance_emptyOptional() {
         Person emptyAlice = new PersonBuilder(ALICE).build();
-        Optional<Attendance> result = emptyAlice.getAttendanceForCurrentWeek();
+        Optional<Attendance> result = emptyAlice.getAttendanceForSpecifiedWeek(new Week(1));
         System.out.println(result);
         assertFalse(result.isPresent());
     }
@@ -71,12 +71,13 @@ public class PersonTest {
      */
     @Test
     public void getAttendanceForCurrentWeek_attendanceExists_optionalWithAttendance() {
-        Attendance attendance = new Attendance(LocalDate.now(), true);
+        Week testWeek = new Week(1);
+        Attendance attendance = new Attendance(testWeek, true);
         Person emptyAlice = new PersonBuilder(ALICE).build();
         emptyAlice.addAttendance(attendance);
-        Optional<Attendance> result = emptyAlice.getAttendanceForCurrentWeek();
+        Optional<Attendance> result = emptyAlice.getAttendanceForSpecifiedWeek(testWeek);
         assertTrue(result.isPresent());
-        assertTrue(result.get().isSameWeek(LocalDate.now()));
+        assertTrue(result.get().getWeek().equals(testWeek));
     }
 
     @Test

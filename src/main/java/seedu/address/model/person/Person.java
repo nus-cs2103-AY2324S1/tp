@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.week.Week;
 
 /**
  * Represents a Person in the address book.
@@ -68,10 +68,9 @@ public class Person {
      *
      * @return An Optional containing the Attendance object for the current week, or an empty Optional if not found.
      */
-    public Optional<Attendance> getAttendanceForCurrentWeek() {
-        LocalDate currentDate = LocalDate.now();
+    public Optional<Attendance> getAttendanceForSpecifiedWeek(Week week) {
         return attendanceRecords.stream()
-                .filter(attendance -> attendance.isSameWeek(currentDate))
+                .filter(attendance -> attendance.getWeek().equals(week))
                 .findFirst();
     }
 

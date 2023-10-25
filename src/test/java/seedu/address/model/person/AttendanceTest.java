@@ -3,11 +3,10 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.week.Week;
 
 /**
  * Test class for the Attendance model.
@@ -19,9 +18,9 @@ public class AttendanceTest {
      */
     @Test
     public void equals() {
-        Attendance attendance1 = new Attendance(LocalDate.now(), true);
-        Attendance attendance2 = new Attendance(LocalDate.now(), true);
-        Attendance attendance3 = new Attendance(LocalDate.now(), false);
+        Attendance attendance1 = new Attendance(new Week(1), true);
+        Attendance attendance2 = new Attendance(new Week(1), true);
+        Attendance attendance3 = new Attendance(new Week(1), false);
 
         // same object -> returns true
         assertEquals(attendance1, attendance1);
@@ -44,9 +43,9 @@ public class AttendanceTest {
      */
     @Test
     public void getDate_validAttendance_dateRetrieved() {
-        LocalDate testDate = LocalDate.now();
+        Week testDate = new Week(1);
         Attendance attendance = new Attendance(testDate, true);
-        assertEquals(testDate, attendance.getDate());
+        assertEquals(testDate, attendance.getWeek());
     }
 
     /**
@@ -54,27 +53,9 @@ public class AttendanceTest {
      */
     @Test
     public void setAttendance_changeAttendanceStatus_attendanceStatusChanged() {
-        Attendance attendance = new Attendance(LocalDate.now(), true);
+        Attendance attendance = new Attendance(new Week(1), true);
         attendance.setAttendance(false);
         assertFalse(attendance.isPresent());
-    }
-
-    /**
-     * Tests if two dates in the same week are correctly identified as being in the same week.
-     */
-    @Test
-    public void isSameWeek_sameWeek_true() {
-        Attendance attendance = new Attendance(LocalDate.of(2023, 10, 10), true);
-        assertTrue(attendance.isSameWeek(LocalDate.of(2023, 10, 12)));
-    }
-
-    /**
-     * Tests if two dates in different weeks are correctly identified as not being in the same week.
-     */
-    @Test
-    public void isSameWeek_differentWeek_false() {
-        Attendance attendance = new Attendance(LocalDate.of(2023, 10, 10), true);
-        assertFalse(attendance.isSameWeek(LocalDate.of(2023, 10, 17)));
     }
 
     /**
@@ -82,7 +63,7 @@ public class AttendanceTest {
      */
     @Test
     public void hashCode_validAttendance_correctHashCode() {
-        LocalDate testDate = LocalDate.now();
+        Week testDate = new Week(1);
         Attendance attendance1 = new Attendance(testDate, true);
         Attendance attendance2 = new Attendance(testDate, true);
         assertEquals(attendance1.hashCode(), attendance2.hashCode());
@@ -96,9 +77,9 @@ public class AttendanceTest {
      */
     @Test
     public void toString_validAttendance_correctStringRepresentation() {
-        LocalDate testDate = LocalDate.now();
+        Week testDate = new Week(1);
         Attendance attendance = new Attendance(testDate, true);
-        String expectedString = "Date: " + testDate + ", Present: true";
+        String expectedString = "Week: " + testDate + ", Present: true";
         assertEquals(expectedString, attendance.toString());
     }
 }

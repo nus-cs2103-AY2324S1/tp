@@ -1,24 +1,24 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REASON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.week.Week;
 
 /**
  * Parses input arguments and creates a new MarkAttendanceCommand object.
  */
 public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand> {
-
-    private static final Prefix PREFIX_NAME = new Prefix("/name ");
-    private static final Prefix PREFIX_ID = new Prefix("/id ");
-    private static final Prefix PREFIX_ATTENDANCE = new Prefix("/attendance ");
-
     /**
      * Parses the given {@code String} of arguments in the context of the MarkAttendanceCommand
      * and returns a MarkAttendanceCommand object for execution.
@@ -28,16 +28,20 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public MarkAttendanceCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ATTENDANCE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ATTENDANCE,
+                PREFIX_WEEK, PREFIX_REASON);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ATTENDANCE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ATTENDANCE, PREFIX_WEEK)
                 || (argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_ID).isEmpty())
+                || (argMultimap.getValue(PREFIX_ATTENDANCE).get().equals("0")
+                        && argMultimap.getValue(PREFIX_REASON).isEmpty())
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
         }
 
         List<String> identifiers = new ArrayList<>();
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String[] names = argMultimap.getValue(PREFIX_NAME).get().split(",");
             for (String name : names) {
@@ -51,9 +55,14 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
         }
 
         boolean isPresent = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());
-        LocalDate date = LocalDate.now(); // Assuming attendance is marked for the current date
+        Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
 
-        return new MarkAttendanceCommand(identifiers, isPresent, date);
+        if (isPresent) {
+            return new MarkAttendanceCommand(identifiers, true, week);
+        } else {
+            String reason = argMultimap.getValue(PREFIX_REASON).get();
+            return new MarkAttendanceCommand(identifiers, false, week, reason);
+        }
     }
 
     /**

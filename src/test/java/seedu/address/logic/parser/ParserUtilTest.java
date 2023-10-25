@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.lang.Integer.parseInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -16,25 +17,32 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.ParserUtil.FilterOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.week.Week;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_ID = "E12345678";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_FILTER_OPERATION = "update";
+    private static final String INVALID_WEEK = "25";
+    private static final String INVALID_WEEK_UNPARSEABLE = ":";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_ID = "A1234567H";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_ADD_OPERATION = "add";
     private static final String VALID_DELETE_OPERATION = "delete";
     private static final String VALID_CLEAR_OPERATION = "clear";
+    private static final String VALID_WEEK = "2";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -128,6 +136,29 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseId((String) null));
+    }
+
+    @Test
+    public void parseId_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_ID));
+    }
+
+    @Test
+    public void parseId_validValueWithoutWhitespace_returnsId() throws Exception {
+        ID expectedId = new ID(VALID_ID);
+        assertEquals(expectedId, ParserUtil.parseId(VALID_ID));
+    }
+
+    @Test
+    public void parseId_validValueWithWhitespace_returnsTrimmedId() throws Exception {
+        String idWithWhitespace = WHITESPACE + VALID_ID + WHITESPACE;
+        ID expectedId = new ID(VALID_ID);
+        assertEquals(expectedId, ParserUtil.parseId(idWithWhitespace));
+    }
+
+    @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
     }
@@ -148,6 +179,30 @@ public class ParserUtilTest {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
         Tag expectedTag = new Tag(VALID_TAG_1);
         assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    }
+
+    @Test
+    public void parseWeek_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseWeek(null));
+    }
+
+    @Test
+    public void parseWeek_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeek(INVALID_WEEK));
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeek(INVALID_WEEK_UNPARSEABLE));
+    }
+
+    @Test
+    public void parseWeek_validValueWithoutWhitespace_returnsWeek() throws Exception {
+        Week expectedWeek = new Week(parseInt(VALID_WEEK));
+        assertEquals(expectedWeek, ParserUtil.parseWeek(VALID_WEEK));
+    }
+
+    @Test
+    public void parseWeek_validValueWithWhitespace_returnsTrimmedWeek() throws Exception {
+        String weekWithWhitespace = WHITESPACE + VALID_WEEK + WHITESPACE;
+        Week expectedWeek = new Week(parseInt(VALID_WEEK));
+        assertEquals(expectedWeek, ParserUtil.parseWeek(weekWithWhitespace));
     }
 
     @Test
