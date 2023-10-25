@@ -2,10 +2,8 @@ package seedu.flashlingo.testutil;
 
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_AMY;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_BOB;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_LANGUAGE;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_AMY;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_BOB;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_LANGUAGE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
