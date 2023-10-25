@@ -16,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Meeting;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -120,6 +121,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Set<Group> getEmptyGroups(Person target) {
+        requireAllNonNull(target);
+        return addressBook.getEmptyGroups(target);
+    }
+
     // ========== Event ======================================================================================
 
     @Override
@@ -127,11 +134,28 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedEvent);
 
         this.addressBook.setEvent(target, editedEvent);
+        sort();
     }
 
     @Override
     public void deleteEvent(Event target) {
         this.addressBook.deleteEvent(target);
+    }
+
+    @Override
+    public void removeEmptyGroups(Set<Group> groups) {
+        for (Event event: events) {
+            event.removeEmptyGroups(groups);
+            setEvent(event, event);
+        }
+    }
+
+    @Override
+    public void updateGroups() {
+        for (Event event: events) {
+            event.updateGroups();
+            setEvent(event, event);
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -173,7 +197,11 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event toAdd) {
         addressBook.addEvent(toAdd);
+        sort();
+    }
 
+    private void sort() {
+        this.addressBook.sort();
     }
 
     @Override
@@ -182,20 +210,30 @@ public class ModelManager implements Model {
 
         for (Name name : names) {
             boolean hasName = checkNameExists(name);
-
             if (!hasName) {
                 invalidNames.add(name);
             }
         }
-
         return invalidNames;
+    }
+
+    @Override
+    public Set<Group> findInvalidGroups(Set<Group> groups) {
+        Set<Group> invalidGroups = new HashSet<>();
+
+        for (Group group : groups) {
+            if (!checkGroupExists(group)) {
+                invalidGroups.add(group);
+            }
+        }
+        return invalidGroups;
     }
 
     @Override
     public void updateAssignedPersons(Person personToEdit, Person editedPerson) {
         for (Event event : this.events) {
             if (event.getNames().contains(personToEdit.getName())) {
-                setEvent(event, createUpdatedEvent(event, personToEdit, editedPerson));
+                this.setEvent(event, createUpdatedEvent(event, personToEdit, editedPerson));
                 event.getNames().add(editedPerson.getName());
             }
         }
@@ -212,14 +250,12 @@ public class ModelManager implements Model {
     }
 
     private Event createUpdatedEvent(Event event, Person personToEdit, Person editedPerson) {
-
         //add other switch statements for future event types
-        switch (event.getEventType().toString()) {
-        default:
-            return new Meeting(event.getName(), event.getStartDate(),
-                    Optional.of(event.getStartTime()), Optional.of(event.getEndTime()),
-                    event.getUpdatedNames(personToEdit.getName(), editedPerson.getName()));
-        }
+        event.getEventType().toString();
+        return new Meeting(event.getName(), event.getStartDate(),
+                Optional.of(event.getStartTime()), Optional.of(event.getEndTime()),
+                event.getUpdatedNames(personToEdit.getName(), editedPerson.getName()),
+                event.getGroups());
     }
 
     private boolean checkNameExists(Name name) {
@@ -230,6 +266,16 @@ public class ModelManager implements Model {
         }
         return false;
     }
+
+    private boolean checkGroupExists(Group group) {
+        for (Person person : this.filteredPersons) {
+            if (person.getGroups().contains(group)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -246,4 +292,5 @@ public class ModelManager implements Model {
                 && this.userPrefs.equals(otherModelManager.userPrefs)
                 && this.filteredPersons.equals(otherModelManager.filteredPersons);
     }
+
 }

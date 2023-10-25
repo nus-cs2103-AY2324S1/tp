@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -30,17 +31,18 @@ public class AddMeetingCommand extends Command {
             + PREFIX_DATE + "DATE "
             + "[" + PREFIX_START_TIME + "START_TIME]"
             + "[" + PREFIX_END_TIME + "END_TIME]\n"
-            + "[" + PREFIX_NAME + "NAME]...\n"
+            + "[" + PREFIX_NAME + "NAME]..."
+            + "[" + PREFIX_GROUP + "GROUP]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MEETING_NAME + "CS2103T Meeting "
             + PREFIX_DATE + "2020-10-10 "
             + PREFIX_START_TIME + "1000 "
             + PREFIX_END_TIME + "1200 "
             + PREFIX_NAME + "Alice "
-            + PREFIX_NAME + "Bob";
+            + PREFIX_NAME + "Bob"
+            + PREFIX_GROUP + "Team1";
 
     public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MEETING = "This meeting already exists!";
     private final Meeting toAdd;
 
     /**
@@ -51,10 +53,11 @@ public class AddMeetingCommand extends Command {
         this.toAdd = meeting;
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        CommandUtil.verifyEventTimes(this.toAdd);
 
         Set<Name> invalidNames = model.findInvalidNames(this.toAdd.getNames());
 
@@ -62,13 +65,8 @@ public class AddMeetingCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
                     listInvalidNames(invalidNames)));
         }
-
-        //else, all the names exist
-
-        model.addEvent(toAdd);
-
+        model.addEvent(this.toAdd); //else, all the names exist
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(toAdd)));
-
     }
 
     private String listInvalidNames(Set<Name> invalidNames) {
@@ -80,5 +78,4 @@ public class AddMeetingCommand extends Command {
         builder.delete(builder.length() - 2, builder.length()); //removes the last comma
         return builder.toString();
     }
-
 }

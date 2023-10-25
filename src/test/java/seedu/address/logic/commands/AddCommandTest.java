@@ -9,7 +9,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -24,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -39,12 +40,13 @@ public class AddCommandTest {
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
+        System.out.println(validPerson);
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(List.of(validPerson), modelStub.personsAdded);
     }
 
     @Test
@@ -199,6 +201,26 @@ public class AddCommandTest {
         public void deleteEvent(Event target) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Set<Group> findInvalidGroups(Set<Group> groups) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Group> getEmptyGroups(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeEmptyGroups(Set<Group> emptyGroups) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateGroups() {
+            return;
+        }
     }
 
     /**
@@ -242,5 +264,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }

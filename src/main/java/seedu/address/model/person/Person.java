@@ -163,7 +163,7 @@ public class Person {
      * Returns true if the person has a birthday.
      */
     public boolean hasBirthday() {
-        return getBirthday() != Birthday.NULL_BIRTHDAY && getBirthday() != null && getBirthday().getValue() != null;
+        return getBirthday() != Birthday.NULL_BIRTHDAY && getBirthday() != null && !getBirthday().equals("");
     }
     /**
      * Returns true if the person has groups.
@@ -181,6 +181,10 @@ public class Person {
             return false;
         }
         return birthday.isWithinDays(days);
+    }
+
+    public boolean hasGroup(Group group) {
+        return this.getGroups().contains(group);
     }
 
 }

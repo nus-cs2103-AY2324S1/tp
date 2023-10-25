@@ -13,19 +13,11 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of an {@code Event}.
+ * UI component that displays information of an expired event.
  */
-public class EventCard extends UiPart<Region> {
+public class ExpiredEventCard extends UiPart<Region> {
 
-    private static final String FXML = "EventListCard.fxml";
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
+    private static final String FXML = "ExpiredEventCard.fxml";
 
     public final Event event;
 
@@ -43,11 +35,12 @@ public class EventCard extends UiPart<Region> {
     private FlowPane names;
     @FXML
     private FlowPane groups;
-
     /**
-     * Creates an {@code EventCode} with the given {@code Event} and index to display.
+     * Creates a {@code ExpiredEventCard} with the given {@code Event} and index to display.
+     * @param event
+     * @param displayedIndex
      */
-    public EventCard(ObservableList<Person> personList, Event event, int displayedIndex) {
+    public ExpiredEventCard(ObservableList<Person> personList, Event event, int displayedIndex) {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
@@ -84,4 +77,6 @@ public class EventCard extends UiPart<Region> {
                     });
                 });
     }
+
+
 }
