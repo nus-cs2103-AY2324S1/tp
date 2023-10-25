@@ -191,6 +191,8 @@ e.g. in `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Do not include any additional arguments for `undo` and `redo` commands as it will result in an error.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
@@ -432,12 +434,19 @@ This command undoes a previous command.
 
 Format: `undo`
 
+**Notes:**
+
+- Including additional arguments will result in an error.
+
 ### Redoing a previous command: `redo`
 
 This command redoes a previous command that you undid.
 
 Format: `redo`
 
+**Notes:**
+
+- Including additional arguments will result in an error.
 ### Clearing all patient records: `clear`
 
 This command clears all patient records and appointments from the application.
