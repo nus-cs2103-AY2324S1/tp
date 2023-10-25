@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.model.Model;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.util.logging.Logger;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.model.Model;
 
 /**
  * Lists all interviews in the address book to the user.
