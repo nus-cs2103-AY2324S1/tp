@@ -78,6 +78,8 @@ In this user guide, you will learn the basics of our application and how you can
 Shows a message explaining how to access the user guide for help.
 
 Format: `help`
+![Helptab](images/Helptab.png)
+
 
 ## Commands for Persons
 
@@ -114,6 +116,9 @@ Expected output when a command succeeds:
 * Input: `add n/james p/999 e/example@gmail.com a/1 computing drive b/2001-09-20`
 * Output: `New person added: james; Phone: 999; Email: example@gmail.com; Address: 1 computing drive; Birthday: Sep 09 2001; groups:; `
 
+![Addperson](images/Addperson.png)
+
+
 Expected output when the command fails
 * `Invalid command format! add: Adds a person to the FumbleLog. Parameters: n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
 
@@ -146,6 +151,9 @@ Acceptable values for each parameter:
 Expected output when a command succeeds:
 * Input: `edit 1 n/Alexa Yeoh`
 * Output: `Edited Person: Alexa Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; groups: [friends]`
+
+![Editperson](images/Editperson.png)
+
 
 Expected output when the command fails:
 * `Invalid command format! edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values. Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
@@ -199,6 +207,8 @@ Expected output when a command succeeds:
 * Input: `delete 1`
 * Output: `Deleted Person: Roy Balakrishnan; Phone: 92624417; Email: royb@example.com; Address: Blk 45 Aljunied Street 85, #11-31; groups: [colleagues]`
 
+![DeletePerson](images/Deleteperson.png)
+
 Expected output when the command fails:
 * `Invalid command format! delete: Deletes the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer)Example: delete 1`
 
@@ -235,6 +245,9 @@ Expected output when the command succeeds:
 * Input: `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
 * Output: `New event added: FumbleLog meeting; Date: 05 Oct 2023; Start Time: 15:00; End Time: 17:00; Persons involved: Ken; Groups involved: [CS2103T], [CS2101];`
 
+![EventAdd](images/Eventadd.png)
+
+
 Expected output when the command fails:
 * `Invalid command format!
   add_event: Adds an event to the address book.
@@ -265,7 +278,7 @@ Examples:
 
 Acceptable values for each parameter:
 * `EVENT_INDEX`: The index position of the event in the displayed event list.
-* `[n/EVENT_DETAILS]`: Details of the event to be changed.
+* `[m/EVENT_DETAILS]`: Details of the event to be changed.
 * `[d/DATE]`: A valid date in the format `yyyy-MM-dd`
 * `[s/START_TIME]`: A valid time in the format `HHmm`
 * `[e/END_TIME]`: A valid time in the format `HHmm`
@@ -278,13 +291,16 @@ Expected output when the command succeeds:
 * Input: `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
 * Output: `Edited event: tP week 3 meeting; Date: 05 Oct 2023; Start Time: 15:00; End Time: 17:00; `
 
+![Eventedit](images/Eventedit.png)
+
+
 Expected output when the command fails:
 * `Invalid command format!
   edit_event: Edits the details of the event identified by the index number used in the displayed event list.
   Existing values will be overwritten by the input values, except for the list of assigned persons and the list of assigned groups
   Parameters: INDEX (must be a positive integer) [m/EVENT_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/NAME]... [u/NAME]... [g/GROUP]... [ug/GROUP]...
   Example: edit_event 1 m/FumbleLog Meeting d/2023-10-13 n/Ken g/Team2 `
-* * `You cannot enter a time that is before the current time!` - When the given `DATE`, `START_TIME` and `END_TIME` is before the current time.
+* `You cannot enter a time that is before the current time!` - When the given `DATE`, `START_TIME` and `END_TIME` is before the current time.
 * `You cannot enter an end time that is before the start time!` - When the given `START_TIME` is after the given `END_TIME`.
 
 ### Deleting an event : `delete_event`
@@ -328,8 +344,11 @@ Examples:
 * `remind 3` shows all events and birthdays happening in the next 3 days.
 
 Expected output when the command succeeds:
-* Input: `remind 3`
-* Output: `Showing all birthdays and events happening in the next 3 days: `
+* Input: `remind`
+* Output: `Showing all birthdays and events happening in the next 7 days: `
+
+![Remind](images/Remind.png)
+
 
 Expected output when the command fails:
 * `Invalid command format!
