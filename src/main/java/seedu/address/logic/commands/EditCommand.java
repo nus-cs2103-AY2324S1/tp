@@ -62,6 +62,7 @@ public class EditCommand extends Command {
     private final EditEmployeeDescriptor editEmployeeDescriptor;
 
     /**
+     * Creates an EditCommand to edit the specified employee at {@code index}.
      * @param index of the employee in the filtered employee list to edit
      * @param editEmployeeDescriptor details to edit the employee with
      */
