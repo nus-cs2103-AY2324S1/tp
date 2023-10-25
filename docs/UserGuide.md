@@ -220,7 +220,7 @@ We call this basic block of filtering a **find condition**, which is the smalles
 
 <box>
 
-For example, given the following contacts:
+For example, given the following contacts (some fields omitted for brevity):
 
 | Name | Tags |
 | ---- | ---- |
@@ -243,6 +243,52 @@ Since `n/do` and `t/friend` are both **find conditions**, they can constitute a 
 
 #### Find contacts: advanced filtering
 
+While basic filtering is sufficient for most use cases, you may find that you need to perform more complex filtering. For example, you may want to find all contacts who have the tag `"friend"` *and* whose names contain the substring `"do"`. Or you may want to find all contacts whose addresses contain the substring `"street"` *or* whose names *do not* contain the substring `"ye"`.
+
+You can accomplish this and more using our powerful advanced filtering syntax, which supports arbitrarily-complex **`FIND_EXPRESSIONs`**, which can be composed of many **find conditions** combined or transformed by **logical operators**.
+
+<panel header="**Supported Logical Operators**" type="primary" id="find-logical-operators-table" expanded no-close>
+
+The following logical operators are supported, and are listed in order of precedence (from highest to lowest):
+
+| Operator | Description | Usage |
+| -------- | ----------- | ------- |
+| `(` and `)` | Parentheses for grouping | `(FIND_EXPRESSION)`
+| `!`     | Logical NOT | `!FIND_EXPRESSION`
+| `&&`    | Logical AND | `FIND_EXPRESSION && FIND_EXPRESSION`
+| <code>&#124;&#124;</code> | Logical OR | <code>FIND_EXPRESSION &#124;&#124; FIND_EXPRESSION</code>
+
+</panel>
+
+<br>
+
+Note that the smallest possible **find expressions** is simply a **find condition**.
+
+**Find expressions** can be nested arbitrarily deeply, and that parentheses can be used to group  **find expressions** together to specify the order of evaluation.
+
+<br>
+
+<box>
+
+For example, given the following contacts (some fields omitted for brevity):
+
+| Name | Tags | Address |
+| ---- | ---- | ------- |
+| John Doe | neighbor, colleague | 123, Clementi Rd, 1234665 |
+| Jane Doe | neighbor, friend | 123, Clementi Rd, 1234665 |
+| Alex Yeoh | friend | 456, Clementi Rd, 1234665 |
+| Yervis Alexis | girlfriend | 789, Clementi Rd, 1234665 |
+
+The following are valid **`FIND_EXPRESSIONs`**:
+
+- `!n/do` will return all contacts whose names do **not** contain the substring `"do"`, in this case `"Alex Yeoh"` and `"Yervis Alexis"
+- `n/do && t/friend` will return all contacts whose names contain the substring `"do"` **and** who have the `"friend"` tag, in this case `"Jane Doe"`.
+- `n/do || t/friend` will return all contacts whose names contain the substring `"do"` **or** who have the `"friend"` tag, in this case `"John Doe"`, `"Jane Doe"`, and `"Alex Yeoh"`.
+- `n/do && (t/friend || t/colleague)` will return all contacts whose names contain the substring `"do"` **and** who have either the `"friend"` or `"colleague"` tag, in this case `"John Doe"`, `"Jane Doe"`, and `"Alex Yeoh"`.
+
+Note that the last example is **not equivalent** to `n/do && t/friend || t/colleague`. Due to the higher precedence of `&&` compared to `||`, this will return all contacts whose names contain the substring `"do"` **and** who have the `"friend"` tag, **or** who have the `"colleague"` tag, in this case `"Jane Doe"` and `"Alex Yeoh"`.
+
+</box>
 
 #### Search contact by name
 
