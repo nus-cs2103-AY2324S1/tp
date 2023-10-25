@@ -7,6 +7,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.applicant.Applicant;
 
+/**
+ * Tests that an {@code Applicant}'s {@code Set<Tag>} matches any of the keywords given.
+ */
 public class TagsContainKeywordsPredicate implements Predicate<Applicant> {
     private final List<String> keywords;
     public TagsContainKeywordsPredicate(List<String> keywords) {
@@ -17,9 +20,9 @@ public class TagsContainKeywordsPredicate implements Predicate<Applicant> {
     public boolean test(Applicant applicant) {
         return applicant.getTags().stream()
                 .reduce(false, (acc, tag) -> {
-                    return acc && keywords.stream().anyMatch(
-                            keyword -> StringUtil.containsWordIgnoreCase(keyword, tag.tagName));
-                }, (x, y) -> x && y);
+                    return acc || keywords.stream().anyMatch(
+                            keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword));
+                }, (x, y) -> x || y);
     }
 
     @Override

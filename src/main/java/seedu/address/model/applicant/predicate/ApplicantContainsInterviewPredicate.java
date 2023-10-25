@@ -8,7 +8,7 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 
 /**
- * Tests that a {@code Person}'s {@code object} matches any of the interviews' applicant given.
+ * Tests that an {@code Applicant} matches any of the interviews' applicant given.
  */
 public class ApplicantContainsInterviewPredicate implements Predicate<Applicant> {
     private final ObservableList<Interview> interviews;

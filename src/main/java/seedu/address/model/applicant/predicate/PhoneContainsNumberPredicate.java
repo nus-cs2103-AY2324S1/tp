@@ -1,14 +1,13 @@
 package seedu.address.model.applicant.predicate;
 
-import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.applicant.Applicant;
 
-import java.util.function.Predicate;
-
+/**
+ * Tests that an {@code Applicant}'s {@code Phone} contains the number given.
+ */
 public class PhoneContainsNumberPredicate implements Predicate<Applicant> {
     private final String number;
 

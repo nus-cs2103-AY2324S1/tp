@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
@@ -82,5 +81,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }
