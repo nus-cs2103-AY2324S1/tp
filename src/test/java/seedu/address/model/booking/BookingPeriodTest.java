@@ -10,7 +10,7 @@ public class BookingPeriodTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new BookingPeriod(null));
+        assertThrows(IllegalArgumentException.class, () -> new BookingPeriod(null));
     }
 
     @Test

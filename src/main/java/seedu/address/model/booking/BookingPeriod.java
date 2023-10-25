@@ -1,7 +1,5 @@
 package seedu.address.model.booking;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -22,19 +20,26 @@ public class BookingPeriod {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm",
                     Locale.US);
 
-    public final String value; // String representation of the booking period
+    // String representation of the booking period
+    public final String value;
 
     private LocalDateTime checkInDateTime;
 
     private LocalDateTime checkOutDateTime;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs a {@code BookingPeriod}.
      *
      * @param period A valid booking period.
+     * @throws IllegalArgumentException If the period is null or doesn't match the expected format.
      */
     public BookingPeriod(String period) {
-        requireNonNull(period);
+        if (period == null) {
+            throw new IllegalArgumentException("Booking period cannot be null");
+        }
+        if (!isValidBookingPeriod(period)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         value = period;
         setPeriod(period);
     }
@@ -75,21 +80,32 @@ public class BookingPeriod {
         String datePart = parts[0];
         String timePart = parts[1];
 
-        String[] dateParts = datePart.split("-");
-        String[] timeParts = timePart.split(":");
+        if (datePartIsValid(datePart) && timePartIsValid(timePart)) {
+            return true;
+        }
 
-        if (dateParts.length != 3 || timeParts.length != 2) {
-            return false; // Invalid format, should have year, month, day, hour, and minute parts
+        return false;
+    }
+
+    /**
+     * Validates a date string in the "YYYY-MM-DD" format.
+     *
+     * @param datePart The date part of the date and time string.
+     * @return True if the date part is valid, false otherwise.
+     */
+    static boolean datePartIsValid(String datePart) {
+        String[] dateParts = datePart.split("-");
+
+        if (dateParts.length != 3) {
+            return false; // Invalid format, should have year, month, day parts
         }
 
         try {
             int year = Integer.parseInt(dateParts[0]);
             int month = Integer.parseInt(dateParts[1]);
             int day = Integer.parseInt(dateParts[2]);
-            int hour = Integer.parseInt(timeParts[0]);
-            int minute = Integer.parseInt(timeParts[1]);
 
-            if (hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59 && month >= 1 && month <= 12 && day >= 1) {
+            if (year >= 0 && year <= 9999 && month >= 1 && month <= 12 && day >= 1) {
                 if (month == 2) {
                     // Check for leap year
                     if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
@@ -109,11 +125,32 @@ public class BookingPeriod {
         return false;
     }
 
+    /**
+     * Validates a time string in the "HH:MM" format.
+     *
+     * @param timePart The time part of the date and time string.
+     * @return True if the time part is valid, false otherwise.
+     */
+    static boolean timePartIsValid(String timePart) {
+        String[] timeParts = timePart.split(":");
+
+        if (timeParts.length != 2) {
+            return false; // Invalid format, should have hour and minute parts
+        }
+
+        int hour = Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
+
+        return hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59;
+    }
+
+
 
     /**
      * Sets the start and end date and time for the booking period.
      *
      * @param period A valid period in the format.
+     * @throws IllegalArgumentException If the period is not in the expected format or violates constraints.
      */
     private void setPeriod(String period) {
         try {
@@ -134,12 +171,22 @@ public class BookingPeriod {
         }
     }
 
-
+    /**
+     * Returns a string representation of this BookingPeriod.
+     *
+     * @return The string representation of this BookingPeriod.
+     */
     @Override
     public String toString() {
         return value;
     }
 
+    /**
+     * Compares this BookingPeriod with the specified object for equality.
+     *
+     * @param other The object to compare with.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -155,9 +202,13 @@ public class BookingPeriod {
         return value.equals(otherBookingPeriod.value);
     }
 
+    /**
+     * Returns a hash code value for this BookingPeriod.
+     *
+     * @return A hash code value for this BookingPeriod.
+     */
     @Override
     public int hashCode() {
         return value.hashCode();
     }
-
 }
