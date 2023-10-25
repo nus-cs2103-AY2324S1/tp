@@ -2,10 +2,9 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.week.Week;
 import seedu.address.testutil.PersonBuilder;
 
 public class TalliedAttendanceTest {
@@ -20,9 +19,9 @@ public class TalliedAttendanceTest {
     public void getTalliedAttendance_allAbsent() {
         Person person = new PersonBuilder().build();
 
-        LocalDate testDate = LocalDate.now();
-        Attendance attendance1 = new Attendance(testDate, false);
-        Attendance attendance2 = new Attendance(testDate, false);
+        Week testDate = new Week(1);
+        Attendance attendance1 = new Attendance(testDate, false, "Late");
+        Attendance attendance2 = new Attendance(testDate, false, "Late");
 
         person.addAttendance(attendance1);
         person.addAttendance(attendance2);
@@ -35,7 +34,7 @@ public class TalliedAttendanceTest {
     public void getTalliedAttendance_allPresent() {
         Person person = new PersonBuilder().build();
 
-        LocalDate testDate = LocalDate.now();
+        Week testDate = new Week(1);
         Attendance attendance1 = new Attendance(testDate, true);
         Attendance attendance2 = new Attendance(testDate, true);
 
@@ -50,9 +49,9 @@ public class TalliedAttendanceTest {
     public void getTalliedAttendance_mixedAttendanceRecords() {
         Person person = new PersonBuilder().build();
 
-        LocalDate testDate = LocalDate.now();
+        Week testDate = new Week(1);
         Attendance attendance1 = new Attendance(testDate, true);
-        Attendance attendance2 = new Attendance(testDate, false);
+        Attendance attendance2 = new Attendance(testDate, false, "Late");
 
         person.addAttendance(attendance1);
         person.addAttendance(attendance2);

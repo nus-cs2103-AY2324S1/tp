@@ -1,6 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REASON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,12 +23,14 @@ public class MarkAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of a student.\n"
             + "Parameters: "
-            + "/name STUDENTNAME | /id STUDENTID "
-            + "/attendance ATTENDANCE "
-            + "/week WEEK_NUMBER"
-            + "[/reason REASON_OF_ABSENCE]\n"
-            + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 1 /week 1\n"
-            + "Example: " + COMMAND_WORD + " /name Zong Jin /attendance 0 /week 2 /reason Took a MC\n";
+            + PREFIX_NAME + " STUDENT_NAME | " + PREFIX_ID + " STUDENT_ID "
+            + PREFIX_ATTENDANCE + " ATTENDANCE "
+            + PREFIX_WEEK + " WEEK_NUMBER "
+            + "[" + PREFIX_REASON + " REASON_OF_ABSENCE]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " Zong Jin " + PREFIX_ATTENDANCE + " 1 "
+            + PREFIX_WEEK + " 1\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " Zong Jin " + PREFIX_ATTENDANCE + " 0 "
+            + PREFIX_WEEK + " 2 " + PREFIX_REASON + " Took a MC\n";
     public static final String MESSAGE_SUCCESS = "Attendance marked for person: ";
     public static final String MESSAGE_ABSENT = " is absent for week ";
     public static final String MESSAGE_PRESENT = " is present for week ";
@@ -89,8 +96,15 @@ public class MarkAttendanceCommand extends Command {
                 // Modify the existing attendance record
                 attendance = existingAttendance.get();
                 attendance.setAttendance(isPresent);
-                successMessage.append(String.format(MESSAGE_UPDATED_SUCCESS + "%s\n", targetPerson.getName()));
-
+                if (isPresent) {
+                    successMessage.append(String.format(MESSAGE_UPDATED_SUCCESS + "%s\n%s" + MESSAGE_PRESENT + "%d\n",
+                            targetPerson.getName(), targetPerson.getName(), week.getWeekNumber()));
+                } else {
+                    attendance.setReason(this.reason);
+                    successMessage.append(String.format(MESSAGE_UPDATED_SUCCESS + "%s\n%s" + MESSAGE_ABSENT + "%d\n"
+                            + "Reason: %s\n", targetPerson.getName(), targetPerson.getName(), week.getWeekNumber(),
+                            reason));
+                }
             } else {
                 // Add a new attendance record for the current week
                 if (isPresent) {
@@ -102,11 +116,11 @@ public class MarkAttendanceCommand extends Command {
                 targetPerson.addAttendance(attendance);
 
                 if (attendance.isPresent()) {
-                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "%d",
+                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n%s" + MESSAGE_PRESENT + "%d\n",
                             targetPerson.getName(), targetPerson.getName(), attendance.getWeek().getWeekNumber()));
                 } else {
-                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT
-                                    + "%d\nReason: %s",
+                    successMessage.append(String.format(MESSAGE_SUCCESS + "%s\n%s" + MESSAGE_ABSENT
+                                    + "%d\nReason: %s\n",
                             targetPerson.getName(), targetPerson.getName(), attendance.getWeek().getWeekNumber(),
                             attendance.getReason()));
                 }

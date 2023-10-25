@@ -1,6 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REASON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +19,6 @@ import seedu.address.model.week.Week;
  * Parses input arguments and creates a new MarkAttendanceCommand object.
  */
 public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand> {
-
-    private static final Prefix PREFIX_NAME = new Prefix("/name ");
-    private static final Prefix PREFIX_ID = new Prefix("/id ");
-    private static final Prefix PREFIX_ATTENDANCE = new Prefix("/attendance ");
-    private static final Prefix PREFIX_WEEK = new Prefix("/week ");
-    private static final Prefix PREFIX_REASON = new Prefix("/reason ");
-
     /**
      * Parses the given {@code String} of arguments in the context of the MarkAttendanceCommand
      * and returns a MarkAttendanceCommand object for execution.
