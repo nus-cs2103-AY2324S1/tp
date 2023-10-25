@@ -27,7 +27,7 @@ public class CopyMemberCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Copied details member to clipboard: %1$s";
+    public static final String MESSAGE_SUCCESS = "Copied details member to clipboard:\n%1$s";
     private final Index memberIndex;
 
     public CopyMemberCommand(Index memberIndex) {
@@ -44,7 +44,7 @@ public class CopyMemberCommand extends Command {
         }
 
         Member memberToCopy = lastShownList.get(memberIndex.getZeroBased());
-        String memberString = memberToCopy.toString();
+        String memberString = memberToCopy.detailsToCopy();
 
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(new StringSelection(memberString), null);
