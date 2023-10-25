@@ -4,21 +4,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.COMMAND_WORD_1;
+import static seedu.address.logic.commands.CommandTestUtil.COMMANDWORD_DESC_VALID;
+import static seedu.address.logic.commands.CommandTestUtil.SHORTCUT_ALIAS_1;
+import static seedu.address.logic.commands.CommandTestUtil.SHORTCUT_DESC_VALID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddShortcutCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteShortcutCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.commands.EditCommand.EditSpecialistDescriptor;
@@ -44,6 +50,24 @@ import seedu.address.testutil.SpecialistUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser(new ModelManager());
+
+    @Test
+    public void parseCommand_addShortcut() throws Exception {
+        AddShortcutCommand command = (AddShortcutCommand) parser.parseCommand(AddShortcutCommand.COMMAND_WORD
+                + SHORTCUT_DESC_VALID + COMMANDWORD_DESC_VALID);
+        assertEquals(new AddShortcutCommand(SHORTCUT_ALIAS_1, COMMAND_WORD_1), command);
+    }
+
+    @Test
+    public void parseCommand_deleteShortcut() throws Exception {
+        DeleteShortcutCommand command = (DeleteShortcutCommand) parser.parseCommand(DeleteShortcutCommand.COMMAND_WORD
+                + SHORTCUT_DESC_VALID);
+        assertEquals(new DeleteShortcutCommand(new ArrayList<>() {
+            {
+                add(SHORTCUT_ALIAS_1);
+            }
+        }), command);
+    }
 
     @Test
     public void parseCommand_add_patient() throws Exception {

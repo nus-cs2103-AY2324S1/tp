@@ -55,7 +55,7 @@ public class ParserUtilTest {
     public void parseShortcutAlias_validInput_success() throws Exception{
         ShortcutAlias expectedShortcutAlias = new ShortcutAlias(VALID_SHORTCUT);
         assertEquals(expectedShortcutAlias, ParserUtil.parseShortcutAlias(VALID_SHORTCUT));
-        // Should trim trailing whitespaces
+        // Should trim leading and trailing whitespaces
         assertEquals(expectedShortcutAlias, ParserUtil.parseShortcutAlias(" " + VALID_SHORTCUT + " "));
     }
 
@@ -69,7 +69,7 @@ public class ParserUtilTest {
     public void parseCommandWord_validInput_success() throws Exception{
         CommandWord expectedShortcutAlias = new CommandWord(VALID_COMMANDWORD);
         assertEquals(expectedShortcutAlias, ParserUtil.parseCommandWord(VALID_COMMANDWORD));
-        // Should trim trailing whitespaces
+        // Should trim leading and trailing whitespaces
         assertEquals(expectedShortcutAlias, ParserUtil.parseCommandWord(" " + VALID_COMMANDWORD + " "));
     }
 

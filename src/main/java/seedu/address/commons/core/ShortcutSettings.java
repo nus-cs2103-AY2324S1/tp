@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.CommandWord;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ShortcutAlias;
 
 /**
@@ -69,11 +68,6 @@ public class ShortcutSettings implements Serializable {
         }
         ShortcutSettings otherShortcutSettings = (ShortcutSettings) other;
         return Objects.equals(shortcutMap, otherShortcutSettings.shortcutMap);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(shortcutMap);
     }
 
     @Override

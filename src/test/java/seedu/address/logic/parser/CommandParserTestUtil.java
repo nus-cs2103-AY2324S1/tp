@@ -42,7 +42,7 @@ public class CommandParserTestUtil {
     }
 
     /**
-     * Asserts that the parsing of {@code userInput} by {@code parserComplex} is successful and the command created
+     * Asserts that the parsing of {@code userInput} by {@code parserBasic} is successful and the command created
      * equals to {@code expectedCommand}.
      */
     public static void assertParseBasicSuccess(ParserBasic<? extends Command> parserBasic, String userInput,
@@ -56,7 +56,7 @@ public class CommandParserTestUtil {
     }
 
     /**
-     * Asserts that the parsing of {@code userInput} by {@code parserComplex} is unsuccessful and the error message
+     * Asserts that the parsing of {@code userInput} by {@code parserBasic} is unsuccessful and the error message
      * equals to {@code expectedMessage}.
      */
     public static void assertParseBasicFailure(ParserBasic<? extends Command> parserBasic, String userInput,

@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND_WORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHORTCUT;
 
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+
+/**
+ * Adds a shortcut to the address book.
+ */
 public class AddShortcutCommand extends Command {
     public static final String COMMAND_WORD = "addsc";
     public static final String MESSAGE_SUCCESS = "New shortcut added: %1$s";
@@ -23,6 +26,10 @@ public class AddShortcutCommand extends Command {
             + PREFIX_COMMAND_WORD + DeleteCommand.COMMAND_WORD;
     private final ShortcutAlias shortcutAlias;
     private final CommandWord command;
+
+    /**
+     * Creates an AddShortcutCommand to add the specified shortcut mapping.
+     */
     public AddShortcutCommand(ShortcutAlias shortcutAlias, CommandWord commandWord) {
         requireAllNonNull(shortcutAlias, commandWord);
         this.shortcutAlias = shortcutAlias;

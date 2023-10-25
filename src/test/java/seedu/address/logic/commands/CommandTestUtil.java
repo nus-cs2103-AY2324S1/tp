@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND_WORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICALHISTORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHORTCUT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
@@ -81,6 +83,17 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPatientDescriptor DESC_AMY;
     public static final EditCommand.EditSpecialistDescriptor DESC_BOB;
+
+    public static final ShortcutAlias SHORTCUT_ALIAS_1 = new ShortcutAlias("del");
+    public static final ShortcutAlias SHORTCUT_ALIAS_2 = new ShortcutAlias("li");
+    public static final  CommandWord COMMAND_WORD_1 = new CommandWord(DeleteCommand.COMMAND_WORD);
+    public static final CommandWord COMMAND_WORD_2 = new CommandWord(ListCommand.COMMAND_WORD);
+
+    public static final String SHORTCUT_DESC_VALID = " " + PREFIX_SHORTCUT + SHORTCUT_ALIAS_1;
+    public static final String SHORTCUT_DESC_INVALID = " " + PREFIX_SHORTCUT + COMMAND_WORD_1;
+    public static final String COMMANDWORD_DESC_VALID = " " + PREFIX_COMMAND_WORD + COMMAND_WORD_1;
+    public static final String COMMANDWORD_DESC_INVALID = " " + PREFIX_COMMAND_WORD + SHORTCUT_ALIAS_1;
+
 
     static {
         DESC_AMY = (EditCommand.EditPatientDescriptor) new EditPatientDescriptorBuilder()

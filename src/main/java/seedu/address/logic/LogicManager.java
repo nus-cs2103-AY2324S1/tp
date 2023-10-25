@@ -19,7 +19,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * The main LogicManager of the app.
