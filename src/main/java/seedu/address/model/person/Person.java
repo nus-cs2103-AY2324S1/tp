@@ -5,9 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,8 +24,6 @@ public class Person {
     private final Address address;
     private final Subject subject;
     private final Lesson lesson;
-    private final Set<Tag> tags = new HashSet<>();
-
     private boolean paid;
     private PayRate payRate;
     private Date beginTime;
@@ -38,7 +34,7 @@ public class Person {
      */
 
     public Person(Name name, Phone phone, Email email, Address address, Subject subject, Day day,
-                  Begin begin, End end, Set<Tag> tags, boolean paid, PayRate payRate) {
+                  Begin begin, End end, boolean paid, PayRate payRate) {
         requireAllNonNull(name, phone, email, address, subject, day, begin, end);
         this.name = name;
         this.phone = phone;
