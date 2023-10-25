@@ -6,15 +6,13 @@ title: DevOps guide
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Build automation
 
 This project uses Gradle for **build automation and dependency management**. **You are recommended to read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html)**.
 
-
 Given below are how to use Gradle for some important project tasks.
-
 
 * **`clean`**: Deletes the files created during the previous build tasks (e.g. files in the `build` folder).<br>
   e.g. `./gradlew clean`
@@ -32,7 +30,7 @@ Given below are how to use Gradle for some important project tasks.
   * `./gradlew test` — Runs all tests
   * `./gradlew clean test` — Cleans the project and runs tests
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Continuous integration (CI)
 
@@ -67,13 +65,12 @@ Any warnings or errors will be printed out to the console.
 
 * Check scripts must exit with a non-zero exit code if any errors occur.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Making a release
 
 Here are the steps to create a new release.
 
-1. Update the version number in [`MainApp.java`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/MainApp.java).
 1. Generate a fat JAR file using Gradle (i.e., `gradlew shadowJar`).
 1. Tag the repo with the version number. e.g. `v0.1`
 1. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/). Upload the JAR file you created.
