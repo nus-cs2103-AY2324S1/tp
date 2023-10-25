@@ -266,7 +266,7 @@ Deletes the data entry at the index-th position of the currently displayed list.
 Format: `delete INDEX [INDEX...]`
 
 Parameter: `INDEX [INDEX...]`
-* Index of a fosterer is displayed in the list that is  obtained by the `find`/`list` command.
+* Index of a fosterer is displayed in the list that is obtained by the `find`/`list` command.
 * At least one index must be provided.
 * Index must be a positive integer: 1, 2, 3, …
 
@@ -307,10 +307,10 @@ Example: delete 1 2 3
 
 2. An index exceeds the number of fosterers in the list: `delete 0 1 99` but the list only has 6 fosterers
 ```agsl
-The fosterer index provided is invalid
+The fosterer index provided is invalid.
 ```
 
-### Viewing statistics : `stats`
+### Viewing Statistics : `stats`
 Displays the requested statistic about the currently displayed list.
 
 Format: `stats FIELD`
@@ -373,7 +373,7 @@ Examples:
 
 2. No fosterers in the list
 ```agsl
-There are 0 fosterers listed. Please add 
+There are 0 fosterers listed. Please add some fosterers to view statistics.
 ```
 
 ### Clearing all entries : `reset`
