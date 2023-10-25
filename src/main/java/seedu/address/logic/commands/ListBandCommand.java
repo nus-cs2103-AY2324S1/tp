@@ -2,15 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.core.index.Index;
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.band.Band;
-import seedu.address.model.musician.Musician;
-
-import java.util.function.Predicate;
 
 /**
  * Lists all musicians in a band input by the user.
