@@ -62,7 +62,7 @@ public class AddDevToTeamCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        //duplicate or team doesnt exist
+        //duplicate or team does not exist
         if (!model.invalidAddToTeam(teamToAddTo)) {
             throw new CommandException(MESSAGE_INVALID_TEAM);
         } else if (!model.containsPerson(devToAdd)) {
