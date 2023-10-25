@@ -171,14 +171,14 @@ Examples:
 ---
 ### `status` : Editing an applicant status
 
-Clears all the current data stored in the system.
+Edits the status of an applicant.
 
 Format: `status INDEX s/STATUS`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
 
 Examples:
-* `status 3 s/o` updates the stats of the 3rd person in the displayed applicant list to OFFERED.
+* `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to OFFERED.
 
 ---
 ### `clear` : Clearing all applicant entries
