@@ -1,0 +1,13 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes YesCommand;
+:Call execute();
+:Call rememberWord(true);
+:Call nextReviewWord();
+:Generate CommandResult;
+stop
+@enduml
