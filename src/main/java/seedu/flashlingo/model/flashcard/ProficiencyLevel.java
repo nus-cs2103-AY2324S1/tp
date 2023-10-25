@@ -9,7 +9,7 @@ package seedu.flashlingo.model.flashcard;
  */
 public class ProficiencyLevel {
     public static final String MESSAGE_CONSTRAINTS =
-            "Proficiency level should be an integer between 1 and the deleteThreshold";
+        "Proficiency level should be an integer between 1 and the deleteThreshold";
     private static int deleteThreshold = 5; // After which level of proficiency to permanently remove flashcard
     private int level; // Base level of 1
 
@@ -67,6 +67,10 @@ public class ProficiencyLevel {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public static boolean isValidProficiencyLevel(int level) {
+        return level >= 1 && level < deleteThreshold;
     }
 
     /**

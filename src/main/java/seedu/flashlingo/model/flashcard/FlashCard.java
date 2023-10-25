@@ -118,6 +118,7 @@ public class FlashCard {
         if (isSuccess) {
             getProficiencyLevel().upgradeLevel();
             updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
+            this.toDelete = getProficiencyLevel().toDelete();
         } else {
             getProficiencyLevel().downgradeLevel();
             updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
@@ -132,7 +133,7 @@ public class FlashCard {
     @Override
     public String toString() {
         String sb = originalWord + " | " + originalWord.getLanguage() + " | " + translatedWord + " | "
-                + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
+            + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
         return sb;
     }
 
@@ -153,7 +154,7 @@ public class FlashCard {
 
         FlashCard otherFlashCard = (FlashCard) other;
         return originalWord.equals(otherFlashCard.originalWord)
-                && translatedWord.equals(otherFlashCard.translatedWord)
-                && originalLevel.equals(otherFlashCard.originalLevel);
+            && translatedWord.equals(otherFlashCard.translatedWord)
+            && originalLevel.equals(otherFlashCard.originalLevel);
     }
 }
