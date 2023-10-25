@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 # lesSON User Guide
-lesSON is a **flashcard software aimed to help individuals with their memory work in school, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, lesSON can get your contact management tasks done faster than traditional GUI apps.
+lesSON is a **flashcard software** aimed to help individuals with their memory work in school, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**. If you can type fast, lesSON can get your contact management tasks done faster than traditional GUI apps.
 
 # Table of Contents
 1. [Feature List](#feature-list)
@@ -20,7 +20,7 @@ lesSON is a **flashcard software aimed to help individuals with their memory wor
 ### Adding a Flashcard `add`
 Adds a flashcard to the deck for the user.
 
-Format: `add q/question a/answer [t/TAG]​`
+Format: `add q/question a/answer [t/TAG]`
 
 **Tip**: Tagging is not supported in v1.2 and earlier
 
@@ -34,7 +34,7 @@ Examples:
 
 #### Acceptable values for each parameters:
 1. No Empty Input after q/, a/ and t/.
-2. t/ is optional and not neccessary.
+2. t/ is optional and not necessary.
 #### Expected outputs:
 ```
 1. add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude
