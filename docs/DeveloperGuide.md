@@ -231,6 +231,7 @@ The following activity diagram summarizes what happens when a user executes a `s
     * Cons:
         * Users have to resort the student list for every launch. 
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
+
 ### Import feature
 
 #### Implementation
