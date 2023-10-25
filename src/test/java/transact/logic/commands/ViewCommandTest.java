@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import transact.model.Model;
 import transact.model.ModelManager;
 import transact.model.UserPrefs;
+import transact.ui.MainWindow.TabWindow;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,15 +30,34 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ViewCommand(ViewCommand.ViewType.STAFF), model, ViewCommand.MESSAGE_SUCCESS_STAFF,
+    public void execute_staffListIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ViewCommand(TabWindow.ADDRESSBOOK), model, ViewCommand.MESSAGE_SUCCESS_STAFF,
                 expectedModel);
     }
 
     @Test
-    public void execute_listIsFiltered_showsEverything() {
-        showPersonAtId(model, ID_FIRST_PERSON);
-        assertCommandSuccess(new ViewCommand(ViewCommand.ViewType.STAFF), model, ViewCommand.MESSAGE_SUCCESS_STAFF,
+    public void execute_staffListIsFiltered_showsEverything() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        assertCommandSuccess(new ViewCommand(TabWindow.ADDRESSBOOK), model, ViewCommand.MESSAGE_SUCCESS_STAFF,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_transactionListIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ViewCommand(TabWindow.TRANSACTIONS), model, ViewCommand.MESSAGE_SUCCESS_TRANSACTIONS,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_transactionListIsFiltered_showsEverything() {
+        showTransactionAtIndex(model, INDEX_FIRST_PERSON);
+        assertCommandSuccess(new ViewCommand(TabWindow.TRANSACTIONS), model, ViewCommand.MESSAGE_SUCCESS_TRANSACTIONS,
+                expectedModel);
+    }
+
+    @Test
+    public void execute_overview_showsOverview() {
+        assertCommandSuccess(new ViewCommand(TabWindow.OVERVIEW), model, ViewCommand.MESSAGE_SUCCESS_OVERVIEW,
                 expectedModel);
     }
 }

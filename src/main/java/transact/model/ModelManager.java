@@ -84,7 +84,6 @@ public class ModelManager implements Model {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
-
     @Override
     public Path getTransactionBookFilePath() {
         return userPrefs.getTransactionBookFilePath();

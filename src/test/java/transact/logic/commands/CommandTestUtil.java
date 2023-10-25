@@ -12,12 +12,15 @@ import static transact.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.AddressBook;
 import transact.model.Model;
 import transact.model.person.NameContainsKeywordsPredicate;
 import transact.model.person.Person;
+import transact.model.transaction.Transaction;
+import transact.model.transaction.info.TransactionId;
 import transact.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -127,6 +130,21 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the transaction at the given
+     * {@code targetIndex} in the
+     * {@code model}'s transaction book.
+     */
+    public static void showTransactionAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTransactionList().size());
+
+        Transaction transaction = model.getFilteredTransactionList().get(targetIndex.getZeroBased());
+        final TransactionId id = transaction.getTransactionId();
+        model.updateFilteredTransactionList(transaction1 -> Objects.equals(transaction1.getTransactionId(), id));
+
+        assertEquals(1, model.getFilteredTransactionList().size());
     }
 
 }
