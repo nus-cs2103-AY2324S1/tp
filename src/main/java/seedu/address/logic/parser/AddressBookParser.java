@@ -19,6 +19,7 @@ import seedu.address.logic.commands.appointmentcommands.CancelCommand;
 import seedu.address.logic.commands.appointmentcommands.RescheduleCommand;
 import seedu.address.logic.commands.appointmentcommands.ScheduleCommand;
 import seedu.address.logic.commands.appointmentcommands.TodayCommand;
+import seedu.address.logic.commands.appointmentcommands.UpcomingCommand;
 import seedu.address.logic.commands.personcommands.AddCommand;
 import seedu.address.logic.commands.personcommands.DeleteCommand;
 import seedu.address.logic.commands.personcommands.DiagnoseCommand;
@@ -76,14 +77,14 @@ public class AddressBookParser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
+        case DiagnoseCommand.COMMAND_WORD:
+            return new DiagnoseCommandParser().parse(arguments);
+
+        case UndiagnoseCommand.COMMAND_WORD:
+            return new UndiagnoseCommandParser().parse(arguments);
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-
-        case ScheduleCommand.COMMAND_WORD:
-            return new ScheduleCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -91,11 +92,11 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommandParser().parse(arguments);
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+        case RescheduleCommand.COMMAND_WORD:
+            return new RescheduleCommandParser().parse(arguments);
 
         case CancelCommand.COMMAND_WORD:
             return new CancelCommandParser().parse(arguments);
@@ -103,23 +104,26 @@ public class AddressBookParser {
         case AppointmentsCommand.COMMAND_WORD:
             return new AppointmentsCommand();
 
-        case RescheduleCommand.COMMAND_WORD:
-            return new RescheduleCommandParser().parse(arguments);
-
         case TodayCommand.COMMAND_WORD:
             return new TodayCommand();
+
+        case UpcomingCommand.COMMAND_WORD:
+            return new UpcomingCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommandParser().parse(arguments);
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
-
-        case DiagnoseCommand.COMMAND_WORD:
-            return new DiagnoseCommandParser().parse(arguments);
-
-        case UndiagnoseCommand.COMMAND_WORD:
-            return new UndiagnoseCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

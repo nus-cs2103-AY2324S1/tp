@@ -43,8 +43,16 @@ public class TypicalAppointments {
     public static final Appointment TODAYAPPOINTMENT = new AppointmentBuilder()
             .withPatient(ALICE)
             .withAppointmentTime(
-                    dateTimeToString(LocalDateTime.now()), dateTimeToString(LocalDateTime.now().plusMinutes(1)))
+                    dateTimeToString(LocalDateTime.now()), dateTimeToString(LocalDateTime.now().plusMinutes(5)))
             .withDescription("Appointment Today")
+            .build();
+
+    public static final Appointment UPCOMINGAPPOINTMENT = new AppointmentBuilder()
+            .withPatient(ALICE)
+            .withAppointmentTime(
+                    dateTimeToString(LocalDateTime.now().plusDays(1)),
+                    dateTimeToString(LocalDateTime.now().plusDays(1).plusMinutes(5)))
+            .withDescription("Appointment in Future")
             .build();
 
     public static List<Appointment> getTypicalAppointments() {
