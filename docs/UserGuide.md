@@ -176,18 +176,20 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-----------------
-### Gathering clients' emails by financial plan: `gather`
 
-Gathers all the emails of persons with a desired financial plan.
+### Gathering clients' emails by financial plan or tag: `gather`
 
-Format: `gather PROMPT`
+Gathers all the emails of persons with a desired financial plan or tag. 
 
-* The search is case-sensitive. e.g `fp` will not match `Fp`
-* Persons matching at least one financial plan will be returned (i.e. `OR` search).
+Format: `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]`
+
+* Only either Financial Plan or Tag can be searched at once.
+* The search is case-insensitive. e.g `financial` will match `FINANCIAL`
+* Persons emails return when the prompt matches a substring of at least one of their financial plan or tag names.
 
 Examples:
-* `gather Financial Plan A`
+* `gather fp/Financial Plan A`
+* `gather t/Elderly`
 
 Successful Output:
 `lowjunyu@gmail.com johndoe@gmail.com`
@@ -285,7 +287,7 @@ _Details coming soon ..._
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
 | **Edit**   | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
 | **Find**   | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                                       |
-| **Gather** | `gather FINANCIAL_PLAN_NAME` <br> e.g., `gather Basic Insurance Plan`                                                                                                                                                   |
+| **Gather** | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                                             |
 | **List**   | `list`                                                                                                                                                                                                                  |
 | **Help**   | `help`                                                                                                                                                                                                                  |
 | **Sort**   | `sort SORTING_FUNCTION` <br> e.g., `sort appointment`                                                                                                                                                                   |
