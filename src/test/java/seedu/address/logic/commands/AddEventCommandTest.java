@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.ContactID;
 
 public class AddEventCommandTest {
 
@@ -29,16 +30,16 @@ public class AddEventCommandTest {
 
     @Test
     public void execute_correctCommand_success() throws CommandException {
-        int personId = 1;
-        assertCommandSuccessWithFeedback(() -> new AddEventCommand(personId, VALID_EVENT_0)
+        ContactID contactID = ContactID.fromInt(1);
+        assertCommandSuccessWithFeedback(() -> new AddEventCommand(contactID, VALID_EVENT_0)
                 .execute(model), AddEventCommand.MESSAGE_SUCCESS + VALID_EVENT_0.getName());
     }
 
     @Test
     public void execute_personNotExist_fails() throws CommandException {
-        int personId = 99999;
-        assertCommandFailWithFeedback(() -> new AddEventCommand(personId, VALID_EVENT_SAME_NAME_0)
-                .execute(model), AddEventCommand.MESSAGE_PERSON_NOT_FOUND + personId);
+        ContactID contactID = ContactID.fromInt(99999);
+        assertCommandFailWithFeedback(() -> new AddEventCommand(contactID, VALID_EVENT_SAME_NAME_0)
+                .execute(model), AddEventCommand.MESSAGE_CONTACT_NOT_FOUND + contactID);
     }
 
 

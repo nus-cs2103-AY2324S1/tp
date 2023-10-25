@@ -91,7 +91,7 @@ Format: `help`
 
 Adds a person to the contact list.
 
-Format: `add contact -n NAME [-p PHONE_NUMBER] [-a ADDRESS] [-e EMAIL]`
+Format: `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL`
 
 <box type="tip" seamless>
 
@@ -99,7 +99,6 @@ Format: `add contact -n NAME [-p PHONE_NUMBER] [-a ADDRESS] [-e EMAIL]`
 
 Examples:
 * `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com`
-* `add contact -n Daniel -p 87654321 -e daniel0109@gmail.com`
 
 ### Listing all persons : `list contact`
 
@@ -219,7 +218,7 @@ _No known issues at the moment_
 
 Action             | Format, Examples
 -------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Contact**    | `add contact -n NAME [-p PHONE_NUMBER] [-a ADDRESS] [-e EMAIL]` <br> e.g., `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com`
+**Add Contact**    | `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL` <br> e.g., `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com`
 **Delete Contact** | `delete contact NAME`<br> e.g., `delete contact Aaron`
 **List Contact**   | `list contact`
 **Add Note**       | `add note -n NAME -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -n Daniel -t Open Position -e Applications for SWE full-time positions will open soon`

@@ -4,6 +4,9 @@ package seedu.address.model.event;
  * The class for holding the "information" part for an Event
  */
 public class EventInformation {
+
+    public static final String MESSAGE_CONSTRAINTS = "Event information can not be empty.";
+
     private final String information;
 
     private EventInformation() {
@@ -29,5 +32,14 @@ public class EventInformation {
     @Override
     public String toString() {
         return this.information;
+    }
+
+    /**
+     * Returns whether the given information in string is valid event information
+     * @param str The information in string
+     * @return True if the name is valid event information, false otherwise
+     */
+    public static boolean isValidEventInformation(String str) {
+        return !str.isEmpty();
     }
 }

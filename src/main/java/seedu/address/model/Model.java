@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Person;
 
 /**
@@ -95,5 +96,5 @@ public interface Model {
      * Find a person by the user-friendly ID displayed in the person card on the UI.
      * If the ID is invalid, returns null.
      */
-    Person findPersonByUserFriendlyId(int id);
+    Person findPersonByUserFriendlyId(ContactID id);
 }

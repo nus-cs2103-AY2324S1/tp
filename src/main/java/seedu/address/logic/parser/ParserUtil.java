@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INTEGER_ARGUMENT;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,7 +14,13 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventID;
+import seedu.address.model.event.EventInformation;
+import seedu.address.model.event.EventLocation;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -123,6 +131,121 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String eventName} into a {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventName} is invalid.
+     */
+    public static ContactID parseContactID(String contactID) throws ParseException {
+        requireNonNull(contactID);
+        String trimmedContactID = contactID.trim();
+        if (trimmedContactID.isEmpty()) {
+            throw new ParseException(ContactID.MESSAGE_NON_EMPTY);
+        }
+        ContactID result = null;
+        try {
+            result = ContactID.fromString(trimmedContactID);
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_INTEGER_ARGUMENT, e.getMessage()));
+        }
+        return result;
+    }
+
+
+    /**
+     * Parses a {@code String eventName} into a {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventName} is invalid.
+     */
+    public static EventName parseEventName(String eventName) throws ParseException {
+        requireNonNull(eventName);
+        String trimmedEventName = eventName.trim();
+        if (!EventName.isValidEventName(trimmedEventName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return EventName.fromString(trimmedEventName);
+    }
+
+    /**
+     * Parses a {@code String eventTime} into a {@code EventTime} with the specified date-time format.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventTime} is invalid.
+     */
+    public static EventTime parseEventTime(String eventTime) throws ParseException {
+        String trimmedEventTime = "";
+        if (eventTime != null) {
+            trimmedEventTime = eventTime.trim();
+            if (trimmedEventTime.isEmpty()) {
+                throw new ParseException(EventTime.MESSAGE_NON_EMPTY);
+            }
+        }
+        EventTime result = null;
+        try {
+            result = EventTime.fromString(trimmedEventTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(EventTime.MESSAGE_INVALID_DATETIME_FORMAT + e.getMessage());
+        }
+        return result;
+    }
+
+    /**
+     * Parses a {@code String eventLocation} into a {@code EventLocation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventLocation} is invalid.
+     */
+    public static EventLocation parseEventLocation(String eventLocation) throws ParseException {
+        if (eventLocation == null) {
+            return EventLocation.fromString("");
+        }
+        String trimmedEventLocation = eventLocation.trim();
+        if (!EventLocation.isValidEventLocation(trimmedEventLocation)) {
+            throw new ParseException(EventLocation.MESSAGE_CONSTRAINTS);
+        }
+        return EventLocation.fromString(trimmedEventLocation);
+    }
+
+    /**
+     * Parses a {@code String eventInformation} into a {@code EventInformation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventInformation} is invalid.
+     */
+    public static EventInformation parseEventInformation(String eventInformation) throws ParseException {
+        if (eventInformation == null) {
+            return EventInformation.fromString("");
+        }
+        String trimmedEventInformation = eventInformation.trim();
+        if (!EventInformation.isValidEventInformation(trimmedEventInformation)) {
+            throw new ParseException(EventInformation.MESSAGE_CONSTRAINTS);
+        }
+        return EventInformation.fromString(trimmedEventInformation);
+    }
+
+    /**
+     * Parses a {@code String eventID} into a {@code EventID}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventID} is invalid.
+     */
+    public static EventID parseEventID(String eventID) throws ParseException {
+        requireNonNull(eventID);
+        String trimmedEventID = eventID.trim();
+        if (trimmedEventID.isEmpty()) {
+            throw new ParseException(EventID.MESSAGE_NON_EMPTY);
+        }
+        EventID result = null;
+        try {
+            result = EventID.fromString(trimmedEventID);
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_INTEGER_ARGUMENT, e.getMessage()));
+        }
+        return result;
     }
 
     /**

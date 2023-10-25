@@ -4,6 +4,9 @@ package seedu.address.model.event;
  * The class for holding the "location" part for an Event
  */
 public class EventLocation {
+
+    public static final String MESSAGE_CONSTRAINTS = "Event location can not be empty.";
+
     private final String location;
 
     private EventLocation() {
@@ -32,5 +35,14 @@ public class EventLocation {
     @Override
     public String toString() {
         return this.location;
+    }
+
+    /**
+     * Returns whether the given location string in string is a valid event location
+     * @param str The location in string
+     * @return True if the location string is a valid event location, false otherwise
+     */
+    public static boolean isValidEventLocation(String str) {
+        return !str.isEmpty();
     }
 }
