@@ -150,20 +150,20 @@ Next-of-Kin Phone: 82020202
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names, tags or financial plans contain any of the specified keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 
+* At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* For names, only full words will be matched e.g. `Han` will not match `Hans`
+* For financial plans and tags, any substring will be matched e.g. `Senior` will match `SuperSenior`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Gathering clients' emails by financial plan or tag: `gather`
@@ -213,11 +213,18 @@ Example:
 * `clear`
   ![confirm clear window](images/confirmClear.png)
 
-### Sorting all entries by lexicographical order: `sort`
+### Sorting of data listed on the UI: `sort`
 
-Sorts all the entries in lexicographical order. After sorting the list, the ordering of the entries will be changed. As a result, performing delete operations that require indexing will reference the new ordering that is currently displayed on the screen.
+Sorts all the entries with predefined sorting functionalities. After sorting the list, the ordering of the entries will be changed. As a result, performing delete operations that require indexing will reference the new ordering that is currently displayed on the screen.
 
-Format: `sort`
+**Here are the current predefined sorting functions that have been implemented**
+
+* `sort` : sorts list by lexicographical ordering of name (case-insensitive).
+* `appointment`: sorts list by appointment timing in order of the earliest appointment first.
+
+Format: `sort` + `keyword`
+
+Example: `sort sort` performs sorting by lexicographical ordering
 
 ### Exiting the program : `exit`
 
@@ -263,9 +270,9 @@ _Details coming soon ..._
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​` |
 | **Clear**  | `clear`                                                                                                                                                                                                                 |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
-| **Edit**   | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL PLAN] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                 |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                              |
-| **Gather** | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                            |
+| **Edit**   | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
+| **Find**   | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                                       |
+| **Gather** | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                                             |
 | **List**   | `list`                                                                                                                                                                                                                  |
 | **Help**   | `help`                                                                                                                                                                                                                  |
-| **Sort**   | `sort`                                                                                                                                                                                                                  |
+| **Sort**   | `sort SORTING_FUNCTION` <br> e.g., `sort appointment`                                                                                                                                                                   |
