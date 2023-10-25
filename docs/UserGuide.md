@@ -203,15 +203,15 @@ If your changes to the data file makes its format invalid, CCACommander will dis
 
 Action | Format, Examples
 --------|------------------
-**Create a member** | `create /member n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br> e.g. `create /member n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278`
-**Delete a member** | `delete /member MEMBER_INDEX` <br> e.g.`delete /member 1`
+**Create a member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278`
+**Delete a member** | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
 **List all members and all events** | `list`
-**View members of event** | `view /event EVENT_INDEX` <br> e.g.`view /event 1`
-**View events of member** | `view /member MEMBER_INDEX` <br> e.g.`view /member 1`
-**Create an event** | `create /event n/EVENT_NAME [l/LOCATION] [d/DATE]` <br> e.g.`create /event n/Party l/Raffles Hall d/16-09-2023`
-**Delete an event** | `delete /event EVENT_INDEX` <br> e.g.`delete /event 1`
-**Add member to an event** | `add /member MEMBER_INDEX /event EVENT_INDEX` <br> e.g.`add /member 1 /event 5`
-**Delete member from an event** | `delete /member MEMBER_INDEX /event EVENT_INDEX` <br> e.g.`delete /member 1 /event 5`
+**View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
+**View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
+**Create an event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE]` <br> e.g.`createEvent n/Party l/Raffles Hall d/16-09-2023`
+**Delete an event** | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
+**Add member to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
+**Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
 **Edit** | coming soon...
 **Find** | coming soon...
 **Help** | coming soon...
