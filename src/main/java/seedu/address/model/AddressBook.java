@@ -156,6 +156,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         appointments.remove(key);
     }
 
+    /**
+     * Sorts appointment list.
+     */
+    public void sortAppointmentList() {
+        appointments.sort();
+    }
+
+
     //// util methods
 
     @Override

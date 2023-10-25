@@ -13,7 +13,7 @@ import java.util.Objects;
  * Represents the time slot for an appointment in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAppointmentTime(LocalDateTime, LocalDateTime)}
  */
-public class AppointmentTime {
+public class AppointmentTime implements Comparable<AppointmentTime> {
     public static final String MESSAGE_CONSTRAINTS =
             "1. AppointmentTime start must be before AppointmentTime end.\n"
             + "2. AppointmentTime must also not overlap with an existing Appointment's time.\n"
@@ -94,6 +94,10 @@ public class AppointmentTime {
         return Objects.hash(start, end);
     }
 
+    @Override
+    public int compareTo(AppointmentTime otherAppointmentTime) {
+        return start.compareTo(otherAppointmentTime.start);
+    }
     @Override
     public String toString() {
         return "START: " + dateTimeToString(start) + "\nEND: " + dateTimeToString(end);

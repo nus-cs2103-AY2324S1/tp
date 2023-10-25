@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
  * Represents an Appointment in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
     private final AppointmentTime appointmentTime;
     private final AppointmentDescription appointmentDescription;
     private final Name patientName;
@@ -115,6 +115,11 @@ public class Appointment {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(patient, appointmentTime, appointmentDescription);
+    }
+
+    @Override
+    public int compareTo(Appointment otherAppointment) {
+        return appointmentTime.compareTo(otherAppointment.appointmentTime);
     }
 
     @Override

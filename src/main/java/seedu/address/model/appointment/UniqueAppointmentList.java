@@ -3,6 +3,7 @@ package seedu.address.model.appointment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -99,6 +100,18 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         }
 
         internalList.setAll(appointments);
+    }
+
+    /**
+     * Replaces the current list with a sorted list based on delivery status in ascending order.
+     */
+    public void sort() {
+        internalList.sort(new Comparator<Appointment>() {
+            @Override
+            public int compare(Appointment appointment1, Appointment appointment2) {
+                return appointment1.compareTo(appointment2);
+            }
+        });
     }
 
     /**

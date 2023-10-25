@@ -144,4 +144,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
+
+    /**
+     * Sorts appointments in ascending order.
+     */
+    void sortAppointmentList();
 }
