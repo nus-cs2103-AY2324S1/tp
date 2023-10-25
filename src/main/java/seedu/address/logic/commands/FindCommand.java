@@ -31,7 +31,8 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredBookingList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW, model.getFilteredBookingList().size()));
+                String.format(Messages.MESSAGE_BOOKINGS_LISTED_OVERVIEW, model.getFilteredBookingList().size()),
+                false, false, false);
     }
 
     @Override
