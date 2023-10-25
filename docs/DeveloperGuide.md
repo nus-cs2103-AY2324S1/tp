@@ -81,6 +81,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* consists of 2 sides: the left side being the lists section and the right side being the details section.
+* depends on the `State` of the app currently to show the appropriate list panels.
 
 ### Logic component
 
@@ -117,7 +119,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
@@ -126,8 +128,9 @@ The `Model` component,
 * stores the schedule data i.e., all `lesson` objects (which are contained in a `Schedule` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-* links to the UI component to display the Show Details Panel in the UI (to reduce code complexity)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
+* links to the UI component to display the Show Details Panel in the UI (to reduce code complexity).
+* stores a `State` object that represents the current state of the app. Currently, the only 3 possible states are `STUDENT`, `SCHEDULE` and `NONE`.
 
 <box type="info" seamless>
 
@@ -158,6 +161,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+## List feature
+
+### Purpose
+
+The list feature is the core feature that handles the current state of the app. Depending on what the user specifies to list out, the user interface will change accordingly to show the appropriate list panels.
+It also handles displaying the relevant student details specified by the user when the student list is shown, in order to not overcrowd the interface.
+
+#### Implementation
+
+The list feature is facilitated by `ListCommand` which extends the abstract `Command` class. The `ListCommand` will change the current state of the Model (either `STUDENT`, `SCHEDULE` or `NONE`) when the `execute` method is called.
+The `MainWindow` receives changes to the app's state and renders the required panels accordingly.
+It also stores an array of display parameters which will specifies what student details are shown by the `Ui` component in the student list. The `LogicManager` will detect changes in display parameters and set the required displayed fields.
+
 
 ### Show feature
 
