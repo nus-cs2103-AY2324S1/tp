@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.EditMeetingCommand.EditMeetingDescriptor;
+import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
@@ -11,13 +11,13 @@ import seedu.address.model.event.Meeting;
  */
 public class EditMeetingDescriptorBuilder {
 
-    private EditMeetingDescriptor descriptor;
+    private EditEventDescriptor descriptor;
 
     /**
      * Returns an {@code EditMeetingDescriptor} with fields containing {@code meeting}'s details
      */
     public EditMeetingDescriptorBuilder(Meeting meeting) {
-        descriptor = new EditMeetingDescriptor();
+        descriptor = new EditEventDescriptor();
         descriptor.setName(meeting.getName());
         descriptor.setDate(meeting.getStartDate());
         descriptor.setPersonNames(meeting.getNames());
@@ -39,7 +39,7 @@ public class EditMeetingDescriptorBuilder {
         return this;
     }
 
-    public EditMeetingDescriptor build() {
+    public EditEventDescriptor build() {
         return this.descriptor;
     }
 }

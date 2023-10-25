@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
@@ -22,33 +22,33 @@ import seedu.address.model.person.Name;
  * Adds a meeting.
  * @author Yuheng
  */
-public class AddMeetingCommand extends Command {
+public class AddEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_meeting";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meeting to the address book. "
+    public static final String COMMAND_WORD = "add_event";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. \n"
             + "Parameters: "
-            + PREFIX_MEETING_NAME + "MEETING_NAME "
+            + PREFIX_EVENT_NAME + "EVENT_NAME "
             + PREFIX_DATE + "DATE "
-            + "[" + PREFIX_START_TIME + "START_TIME]"
-            + "[" + PREFIX_END_TIME + "END_TIME]\n"
-            + "[" + PREFIX_NAME + "NAME]..."
-            + "[" + PREFIX_GROUP + "GROUP]...\n"
+            + "[" + PREFIX_START_TIME + "START_TIME] "
+            + "[" + PREFIX_END_TIME + "END_TIME] "
+            + "[" + PREFIX_NAME + "NAME]... "
+            + "[" + PREFIX_GROUP + "GROUP]... \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MEETING_NAME + "CS2103T Meeting "
-            + PREFIX_DATE + "2020-10-10 "
+            + PREFIX_EVENT_NAME + "FumbleLog Meeting "
+            + PREFIX_DATE + "2020-10-30 "
             + PREFIX_START_TIME + "1000 "
             + PREFIX_END_TIME + "1200 "
-            + PREFIX_NAME + "Alice "
-            + PREFIX_NAME + "Bob"
-            + PREFIX_GROUP + "Team1";
+            + PREFIX_NAME + "Ken "
+            + PREFIX_NAME + "Yuheng "
+            + PREFIX_GROUP + "Team2 ";
 
-    public static final String MESSAGE_SUCCESS = "New meeting added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     private final Meeting toAdd;
 
     /**
      * Creates an AddMeetingCommand to add the specified {@code Meeting}
      */
-    public AddMeetingCommand(Meeting meeting) {
+    public AddEventCommand(Meeting meeting) {
         requireAllNonNull(meeting);
         this.toAdd = meeting;
     }
