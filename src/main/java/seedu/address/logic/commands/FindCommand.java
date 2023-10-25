@@ -22,13 +22,14 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names, tags or financial"
             + " plans contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers. "
+            + "At least one argument must be given.\n"
             + "Parameters: "
-            + "[" + PREFIX_NAME + "NAME] and/or "
-            + "[" + PREFIX_FINANCIAL_PLAN + "FINANCIAL_PLAN] and/or "
-            + "[" + PREFIX_TAG + "TAG]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_FINANCIAL_PLAN + "Financial Plan A"
-            + " " + PREFIX_TAG + "TagA";
+            + "[" + PREFIX_NAME + "NAME]... "
+            + "[" + PREFIX_FINANCIAL_PLAN + "FINANCIAL_PLAN]... "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_FINANCIAL_PLAN + "Financial Plan A "
+            + PREFIX_TAG + "TagA";
 
     private final Predicate<Person> predicate;
 
