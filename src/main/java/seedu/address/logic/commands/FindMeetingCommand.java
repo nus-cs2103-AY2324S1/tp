@@ -8,17 +8,19 @@ import seedu.address.model.Model;
 import seedu.address.model.meeting.GeneralMeetingPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all meetings in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindMeetingCommand extends Command {
 
     public static final String COMMAND_WORD = "findm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all meetings whose titles contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " CS2103T Meeting";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all meetings that contain at least 1 "
+            + "specified KEYWORD in all of the different fields, as well as stating the window of time they "
+            + "are specifying, and displays them as a list with index numbers.\n"
+            + "If no KEYWORD is specified for that field, the find will not be affected that field.\n"
+            + "Parameters: m/KEYWORDS a/KEYWORDS n/KEYWORDS t/KEYWORDS s/LOCALDATETIME e/LOCALDATETIME\n"
+            + "Example: " + COMMAND_WORD + " m/CS2103T Meeting s/01.09.2023 1000 e/30.09.2023 1200";
 
     private final GeneralMeetingPredicate predicate;
 

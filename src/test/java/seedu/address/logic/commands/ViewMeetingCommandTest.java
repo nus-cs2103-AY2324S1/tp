@@ -36,8 +36,8 @@ public class ViewMeetingCommandTest {
                 + "Location: Zoom call url\n"
                 + "Start: 20 September 2023, 1000\n"
                 + "End: 20 September 2023, 1200\n"
-                + "Attendees: [Alice Pauline , Benson Meier , Carl Kurz , Daniel Meier , Elle Meyer , Fiona Kunz"
-                + " , George Best , Hoon Meier ]\n";
+                + "Attendees: [\n1: Alice Pauline \n2: Benson Meier \n3: Carl Kurz \n4: Daniel Meier"
+                + " \n5: Elle Meyer \n6: Fiona Kunz \n7: George Best \n8: Hoon Meier]\n";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -65,8 +65,8 @@ public class ViewMeetingCommandTest {
                 + "Location: Zoom call url\n"
                 + "Start: 20 September 2023, 1000\n"
                 + "End: 20 September 2023, 1200\n"
-                + "Attendees: [Alice Pauline , Benson Meier , Carl Kurz , Daniel Meier , Elle Meyer , Fiona Kunz"
-                + " , George Best , Hoon Meier ]\n";
+                + "Attendees: [\n1: Alice Pauline \n2: Benson Meier \n3: Carl Kurz \n4: Daniel Meier \n5: Elle Meyer"
+                + " \n6: Fiona Kunz \n7: George Best \n8: Hoon Meier]\n";
 
         // Model displaying filtered list should not change
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

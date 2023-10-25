@@ -22,16 +22,21 @@ My contributions to the project are listed below.
 
 - **Project management**:
 
-  - to be added soon
+  - Forking workflow
+    - Review and merge pull requests
 
 - **Enhancements to existing features**:
 
-  - to be added soon
+  - New Command
+    - "editm"
+      - Command to edit fields of existing meetings
+      - Command does not edit meeting Attendees as it is handled by "addmc" and "rmmc"
 
 - **Documentation**:
-  
+
   - User Guide
     - First draft of User Guide with initial plans for v1.2
+    - Update parts of User Guide on features added/modified by me
 
 - **Community**:
 

@@ -9,17 +9,18 @@
 <VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane VBox.vgrow="ALWAYS">
     <rowConstraints>
-      <RowConstraints percentHeight="30" />
+      <RowConstraints percentHeight="40" />
       <RowConstraints percentHeight="50" />
     </rowConstraints>
 
     <children>
       <VBox GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
-        <FlowPane fx:id="tags" />
+        <FlowPane fx:id="personTags" />
         <Label fx:id="personDisplay" styleClass="result-display" wrapText="true" VBox.vgrow="ALWAYS" />
       </VBox>
 
       <VBox GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+        <FlowPane fx:id="meetingTags" />
         <Label fx:id="meetingDisplay" styleClass="result-display" wrapText="true" VBox.vgrow="ALWAYS" />
       </VBox>
     </children>
