@@ -105,12 +105,18 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        boolean checkExceptRemarkAttribute = name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && remark.equals(otherPerson.remark)
                 && tags.equals(otherPerson.tags);
+
+        if (remark != null) {
+            return checkExceptRemarkAttribute
+                    && remark.equals(otherPerson.remark);
+        } else {
+            return checkExceptRemarkAttribute && otherPerson.remark == null;
+        }
     }
 
     @Override
