@@ -20,10 +20,22 @@ class ListBandCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @Test
-    void execute_() {
+    void execute_validSingleWordBandName_correctBandFound() {
 
     }
+
+    @Test
+    void execute_validMultipleWordsBandName_correctBandFound() {
+
+    }
+
+    @Test
+    void execute_invalidBandName_noBandFound() {
+
+    }
+
 
     @Test
     public void equals() {
