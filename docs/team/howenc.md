@@ -11,15 +11,21 @@ My contributions to the project are listed below.
 
 - **New Feature**: Added the ability to undo/redo previous commands.
 
-  - Added the ability to add Meetings into address book.
-  - Added Meeting schedule into UI.
-  - Sort and filter Meeting Schedule.
+  - Add UI for showing meeting instance
+  - New Commands + Test cases
+    - "addm"
+      - Command to add a meeting into address book.
+    - "findm"
+      - Command to find a meeting in the address book.
+  - Sort meetings by start time.
+
 
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=howenc&breakdown=true)
 
 - **Project management**:
 
-  - to be added soon
+  - Forking workflow
+    - Review and merge pull requests
 
 - **Enhancements to existing features**:
 

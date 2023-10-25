@@ -31,7 +31,7 @@ public class MeetingBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code MeetingBuilder} with the default details.
      */
     public MeetingBuilder() {
         title = new Title(DEFAULT_TITLE);
@@ -43,7 +43,7 @@ public class MeetingBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the MeetingBuilder with the data of {@code meetingToCopy}.
      */
     public MeetingBuilder(Meeting meetingToCopy) {
         title = meetingToCopy.getTitle();
