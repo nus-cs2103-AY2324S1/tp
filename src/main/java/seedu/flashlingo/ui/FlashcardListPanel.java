@@ -23,13 +23,15 @@ public class FlashcardListPanel extends UiPart<Region> {
     private ListView<FlashCard> flashcardListView;
 
     private Model model;
+    private MainWindow mw;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public FlashcardListPanel(ObservableList<FlashCard> flashcardList, Model model) {
+    public FlashcardListPanel(ObservableList<FlashCard> flashcardList, Model model, MainWindow mw) {
         super(FXML);
         this.model = model;
+        this.mw = mw;
         flashcardListView.setItems(flashcardList);
         flashcardListView.setCellFactory(listView -> new FlashCardListViewCell());
     }
@@ -47,7 +49,7 @@ public class FlashcardListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 if (FlashlingoParser.getReviewSession()) {
-                    setGraphic(new FlashcardBox(fc, getIndex() + 1, model).getRoot());
+                    setGraphic(new FlashcardBox(fc, getIndex() + 1, model, mw).getRoot());
                 } else {
                     setGraphic(new FlashcardBoxNoButton(fc, getIndex() + 1).getRoot());
                 }
