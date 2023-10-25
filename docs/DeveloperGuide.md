@@ -257,11 +257,11 @@ This feature is implemented though the `TimeParser` class. This class contains s
         - `21/12/2024 5pm`
         - `21-12-2024 5pm`
         - `21-12-2024 1730`
-        - `21-12-2024 1730pm` 
+        - `21-12-2024 1730pm`
         - `nov 12 1.30pm 2023`(WIP: AM/PM not parsing properly)
         - `2023-12-12 1647`
     - The sequence diagram shown below shows how the API is called by other classes:
-  
+
       ![parseDateSequenceDiagram.png](images%2FparseDateSequenceDiagram.png)
 
 
@@ -276,9 +276,9 @@ This feature is implemented though the `TimeParser` class. This class contains s
 **Aspect: How `TimeParser#parseDate(String date)` works:**
 
 * **Alternative 1 (current choice):** Have a hardcoded list of time formats that our team deems to be acceptable.
-    * Pros: 
+    * Pros:
       * Easy to implement.
-    * Cons: 
+    * Cons:
       * May have performance issues in terms of time (i.e. might have to loop through the whole list to find a suitable format)
       * Huge number of time formats available, hence there is a need to update the list of acceptable time formats in future iterations
       * Many errors possible due to the many time fields that the user could format wrongly, which makes implementation difficult
@@ -292,7 +292,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
         * Developer is not familiar with other time libraries
 
 **Aspect: How `TimeParser#listInterviewClashes(String potentialInterview, UniqueInterviewList interviews)` works:**
-* **Alternative 1 (current planned implementation):** Loop over the entire day by hour, and list out any interview that might clash 
+* **Alternative 1 (current planned implementation):** Loop over the entire day by hour, and list out any interview that might clash
     * Pros:
         * Very simple to implement
         * Less prone to bugs
@@ -306,12 +306,12 @@ This feature is implemented though the `TimeParser` class. This class contains s
 
 **Aspect: How `TimeParser#findFreeTime(String day)` works:**
 * **Alternative 1 (current planned implementation):** Loops over the 24 hours of the given day, and if there is any interview within that hour, the day will be marked as not free
-  * Pros: 
+  * Pros:
     * Easy to implement
   * Cons:
     * Hours which have interviews are not included as free time, even though there is a portion of those hours which are free (e.g. if the user has an interview scheduled from 4.30pm on that day, the user has free time from 4pm to 4.30pm)
 * **Alternative 2 (alternate implementation):** Filters all the interviews on that day, and marks all pockets of time that are not taken by interviews as free time
-  * Pros: 
+  * Pros:
     * More accurate depiction of the free time on that day
   * Cons:
     * More complicated than alternative 1
@@ -328,7 +328,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
 * **Alternative 1 (current planned implementation):** Takes in the UniqueInterviewList, and uses the Java LocalDateTime comparator, and sorts the list in ascending order
     * Pros:
       * Easy to implement; Built-in Java library handles the sorting for us
-    * Cons: 
+    * Cons:
       * Might increase coupling in the codebase since an object from another object is passed into the API and modified
 
 **Aspect: How `TimeParser#listTodayInterviews(String day, UniqueInterviewList interviews)` works:**
