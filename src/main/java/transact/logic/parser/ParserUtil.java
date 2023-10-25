@@ -1,6 +1,7 @@
 package transact.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static transact.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,7 +13,7 @@ import transact.logic.parser.exceptions.ParseException;
 import transact.model.person.Address;
 import transact.model.person.Email;
 import transact.model.person.Name;
-import transact.model.person.Person;
+import transact.model.person.PersonId;
 import transact.model.person.Phone;
 import transact.model.tag.Tag;
 import transact.model.transaction.info.Amount;
@@ -202,16 +203,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String id} into a {@code Person}.
+     * Parses a {@code String id} into a {@code Integer}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException
-     *             if the given {@code Pesrson} is invalid.
+     * @throws NumberFormatException
+     *             if the given {@code id} is invalid.
      */
-    public static Person parsePerson(String id) throws ParseException {
-        requireNonNull(id);
+    public static Integer parsePersonId(String id) throws ParseException {
+        requireAllNonNull(id);
         String trimmedID = id.trim();
-        // TODO Parse Correctly
-        return new Person(null, null, null, null, null);
+        try {
+            return Integer.parseInt(trimmedID);
+        } catch (NumberFormatException e) {
+            throw new ParseException(PersonId.MESSAGE_CONSTRAINTS);
+        }
     }
 }

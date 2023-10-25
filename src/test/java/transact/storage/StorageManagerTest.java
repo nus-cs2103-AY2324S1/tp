@@ -2,6 +2,7 @@ package transact.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static transact.testutil.PersonUtil.clearAddressBookPersonIdUniqueness;
 import static transact.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -62,6 +63,7 @@ public class StorageManagerTest {
          */
         AddressBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
+        clearAddressBookPersonIdUniqueness(original);
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new AddressBook(retrieved));
     }
