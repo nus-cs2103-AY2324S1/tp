@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import swe.context.commons.core.GuiSettings;
 
-
-
 public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();
 

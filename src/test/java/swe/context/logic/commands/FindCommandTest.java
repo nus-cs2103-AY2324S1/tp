@@ -4,10 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static swe.context.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static swe.context.testutil.TestData.Valid.Contact.CARL;
-import static swe.context.testutil.TestData.Valid.Contact.ELLE;
-import static swe.context.testutil.TestData.Valid.Contact.FIONA;
-import static swe.context.testutil.TestData.Valid.Contact.getTypicalContacts;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,15 +15,14 @@ import swe.context.model.Model;
 import swe.context.model.ModelManager;
 import swe.context.model.Settings;
 import swe.context.model.contact.NameContainsKeywordsPredicate;
-
-
+import swe.context.testutil.TestData;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalContacts(), new Settings());
-    private Model expectedModel = new ModelManager(getTypicalContacts(), new Settings());
+    private Model model = new ModelManager(TestData.Valid.Contact.getTypicalContacts(), new Settings());
+    private Model expectedModel = new ModelManager(TestData.Valid.Contact.getTypicalContacts(), new Settings());
 
     @Test
     public void equals() {
@@ -73,7 +68,10 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.setContactsFilter(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredContactList());
+        assertEquals(
+                Arrays.asList(TestData.Valid.Contact.CARL, TestData.Valid.Contact.ELLE, TestData.Valid.Contact.FIONA),
+                model.getFilteredContactList()
+        );
     }
 
     @Test

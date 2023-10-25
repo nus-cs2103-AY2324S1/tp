@@ -11,8 +11,6 @@ import swe.context.logic.Messages;
 import swe.context.logic.commands.FindCommand;
 import swe.context.model.contact.NameContainsKeywordsPredicate;
 
-
-
 public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();
 

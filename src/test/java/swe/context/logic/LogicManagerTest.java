@@ -2,10 +2,6 @@ package swe.context.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static swe.context.testutil.Assert.assertThrows;
-import static swe.context.testutil.TestData.Valid.EMAIL_DESC_AMY;
-import static swe.context.testutil.TestData.Valid.NAME_DESC_AMY;
-import static swe.context.testutil.TestData.Valid.NOTE_DESC_AMY;
-import static swe.context.testutil.TestData.Valid.PHONE_DESC_AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -30,8 +26,6 @@ import swe.context.storage.JsonSettingsStorage;
 import swe.context.storage.StorageManager;
 import swe.context.testutil.ContactBuilder;
 import swe.context.testutil.TestData;
-
-
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -165,8 +159,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveContacts method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + NOTE_DESC_AMY;
+        String addCommand = AddCommand.COMMAND_WORD + TestData.Valid.NAME_DESC_AMY + TestData.Valid.PHONE_DESC_AMY
+                + TestData.Valid.EMAIL_DESC_AMY + TestData.Valid.NOTE_DESC_AMY;
         Contact expectedContact = new ContactBuilder(TestData.Valid.Contact.AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addContact(expectedContact);

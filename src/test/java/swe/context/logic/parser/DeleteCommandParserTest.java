@@ -2,12 +2,12 @@ package swe.context.logic.parser;
 
 import static swe.context.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static swe.context.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
 
 import org.junit.jupiter.api.Test;
 
 import swe.context.logic.Messages;
 import swe.context.logic.commands.DeleteCommand;
+import swe.context.testutil.TestData;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -22,7 +22,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(FIRST_CONTACT));
+        assertParseSuccess(parser, "1", new DeleteCommand(TestData.IndexContact.FIRST_CONTACT));
     }
 
     @Test
