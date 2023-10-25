@@ -82,14 +82,14 @@ Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL s/STATUS [t/TAG]…​`
 * NAME, PHONE_NUMBER and EMAIL are compulsory fields. STATUS and TAG are optional.
 * PHONE_NUMBER must contain only numbers, and be at least 3 digits long.
 * EMAIL must be of the format local-part@domain and adhere to the following constraints:
-  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). 
+  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
   2. The local-part may not start or end with any special characters.
   3. The domain name is made up of domain labels separated by periods.
      The domain name must:
       - end with a domain label at least 2 characters long
       - have each domain label start and end with alphanumeric characters
       - have each domain label consist of alphanumeric characters, separated only by hyphen
-* STATUS, if included, must be one of { NIL, Prospective, Active, Inactive, Claimant, Renewal } or blank. 
+* STATUS, if included, must be one of { NIL, Prospective, Active, Inactive, Claimant, Renewal } or blank.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -244,7 +244,7 @@ Examples:
 
 ### Locating meetings by name: `findm`
 
-Find meetings for which all respective field (Title, location, attendee...) given by the user, contain at least 1 keyword, as well as happen within the duration given (start & end).  
+Find meetings for which all respective field (Title, location, attendee...) given by the user, contain at least 1 keyword, as well as happen within the duration given (start & end).
 
 Format: `findm [m/KEYWORDS] [a/KEYWORDS] [t/KEYWORDS] [n/ATTENDEENAME] [s/START e/END]`
 
@@ -294,7 +294,6 @@ Format: `rmmc MEETING_INDEX ATTENDEE_INDEX`
 
 Examples:
 * `rmmc 3 2` removes the 2nd attendee from the 3rd meeting in OutBook.
-
 
 ### Clearing all entries : `clear`
 

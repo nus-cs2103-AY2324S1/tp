@@ -161,7 +161,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add attendee feature
 User can specify a Person to add as an Attendee to a specified Meeting.
 
-To avoid storing an entire `JsonAdaptedPerson` object within the `JsonAdaptedMeeting` every time a `Person` is added to a `Meeting`, 
+To avoid storing an entire `JsonAdaptedPerson` object within the `JsonAdaptedMeeting` every time a `Person` is added to a `Meeting`,
 we created the `Attendee` class to store a unique identifier for the `Person` added.
 As every `Person` has a unique name in the current iteration, `Attendee` is implemented in the following way:
 - `Attendee(attendeeName)` -- Initialized with a String obtained from `Person.getName().toString()`
@@ -173,7 +173,7 @@ The following sequence diagram shows how the add attendee operation works:
 
 ![AddAttendeeSequenceDiagram](images/AddAttendeeSequenceDiagram.png)
 
-A Person object can be obtained from a Meeting's list of attendees by searching through `UniquePersonList` 
+A Person object can be obtained from a Meeting's list of attendees by searching through `UniquePersonList`
 for a `Person` with a name matching `attendeeName`.
 
 ### \[Proposed\] Undo/redo feature

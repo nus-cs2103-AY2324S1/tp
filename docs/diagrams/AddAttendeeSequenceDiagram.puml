@@ -76,6 +76,3 @@ deactivate AddMeetingContactCommand
 [<--LogicManager
 deactivate LogicManager
 @enduml
-
-
-@enduml
