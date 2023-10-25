@@ -7,6 +7,24 @@ title: User Guide
 
 NetworkBook is a **desktop contact book application**. You can use it to network with other computing students and professionals from NUS.
 
+
+## About This User Guide
+
+This user guide provides in-depth documentation on the various commands that are available in NetworkBook.
+If you are familiar with the software, this user guide gives an overview on how to use specific commands.
+
+Additionally, if you are a new user, this user guide provides a quick start guide to aid you with installing the application and getting started.
+
+### What's new in NetworkBook 1.3
+
+NetworkBook 1.3 includes several new features and improvements for ease of use.
+* Filter command for more control with finding contacts
+* Error messages are now more specific to give useful information
+* NetworkBook is able to connect with and open other apps
+* Keyboard shortcuts added for easy access to common commands
+* Undo/redo command to fix mistakes
+* Refinement of GUI to make it more aesthetically pleasing
+
 ## Getting Started
 
 1. Make sure you have Java 11 installed on your computer.
@@ -56,7 +74,7 @@ Example usage:
 
 ![create command](images/create/create.png)
 
-[Table of Content](#table-of-contents)
+[Table of Contents](#table-of-contents)
 
 #### Add details to contact: `add [index] /phone`
 
@@ -98,7 +116,7 @@ Example usage:
 
 ![add phone](images/add-remark/add-phone.png)
 
-[Table of Content](#table-of-contents)
+[Table of Contents](#table-of-contents)
 
 ### <u>Category 2 - Edit contact details</u>
 
@@ -150,7 +168,7 @@ Example usage:
 
 ![update success](images/edit/edit.png)
 
-[Table of Content](#table-of-contents)
+[Table of Contents](#table-of-contents)
 
 #### Delete a contact: `delete` 
 
@@ -171,7 +189,7 @@ Example usage:
 
 ![delete](images/delete/delete.png)
 
-[Table of Content](#table-of-contents)
+[Table of Contents](#table-of-contents)
 
 ### <u>Category 3 - Find contacts</u>
 
@@ -190,7 +208,7 @@ Example usage:
 
 ![search](images/find/search-success.png)
 
-[Table of Content](#table-of-contents)
+[Table of Contents](#table-of-contents)
 
 #### Sort contacts list: `sort /by /order`
 
@@ -222,7 +240,7 @@ Example usage:
 
 ![sort](images/sort/sort.png)
 
-[Table of Content](#table-of-contents)
+[Table of Contents](#table-of-contents)
 
 ## Command summary
 
