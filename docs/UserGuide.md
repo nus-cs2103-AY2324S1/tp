@@ -277,7 +277,7 @@ Deletes a tutor in the address book based on their index number in the table.
 
 **Expected output**:
 * `Tutor has been deleted: Alex Yeoh; Phone: 87438807;
-  Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40`
+  Email: alexyeoh@example.com`
 
 **Error messages**:
 * `Invalid command format!`: No tutor index provided or parameter given is not a numerical value.
@@ -395,6 +395,17 @@ Adds the status of a schedule in the address book based on their index number in
 ![mark schedule](images/markSchedule.png)
 
 **Format:** `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Schedule status**<br>
+
+* There are only two types of Schedule status: MISSED or COMPLETED.
+* To set the status of the specified schedule to MISSED, input `m/0` as 0 indicates the MISSED status.
+* To set the status of the specified schedule to COMPLETED, input `m/1` as 1 indicates the COMPLETED status.
+* Any inputs other than 0 or 1 will result in an invalid status message displayed.
+
+</div>
 
 **Example:**
 * `mark 5 m/0` adds the MISSED status to the schedule indexed at 5 in the schedule list.
