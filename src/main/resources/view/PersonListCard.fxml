@@ -9,11 +9,16 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Region?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" >
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
+      <!-- Column for all labels -->
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <!-- Column for notes button -->
+      <ColumnConstraints hgrow="NEVER" minWidth="-1.0" maxWidth="-1.0"/>
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
@@ -26,23 +31,24 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-      </HBox>
-      <HBox spacing="5" alignment="CENTER_LEFT">
-        <Label text="id:" styleClass="cell_small_label" />
-        <Label fx:id="uniqueId" styleClass="cell_small_label" />
+        <Label fx:id="name" text="$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="linkedin" styleClass="cell_small_label" text="\$linkedin" />
-      <Label fx:id="secondaryEmail" styleClass="cell_small_label" text="\$secondaryEmail" />
-      <Label fx:id="telegram" styleClass="cell_small_label" text="\$telegram" />
-      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
-      <HBox spacing="5" alignment="CENTER_RIGHT">
-        <Button fx:id="notesButton" onAction="#handleNotesButtonClick" text="Notes (0)" />
-      </HBox>
+      <Label fx:id="phone" styleClass="cell_small_label" text="$phone" />
+      <Label fx:id="address" styleClass="cell_small_label" text="$address" />
+      <Label fx:id="email" styleClass="cell_small_label" text="$email" />
+      <Label fx:id="linkedin" styleClass="cell_small_label" text="$linkedin" />
+      <Label fx:id="secondaryEmail" styleClass="cell_small_label" text="$secondaryEmail" />
+      <Label fx:id="telegram" styleClass="cell_small_label" text="$telegram" />
+      <Label fx:id="birthday" styleClass="cell_small_label" text="$birthday" />
+    </VBox>
+    <!-- New VBox for the second column -->
+    <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
+      <!-- Filler to push the button to the bottom -->
+      <Region VBox.vgrow="ALWAYS" />
+      <!-- Notes button -->
+      <Button fx:id="notesButton" onAction="#handleNotesButtonClick" text="Notes (0)" />
     </VBox>
   </GridPane>
 </HBox>
+
