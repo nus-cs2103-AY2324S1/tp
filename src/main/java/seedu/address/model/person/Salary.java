@@ -86,7 +86,7 @@ public class Salary extends Payment {
         String deductions = "Total Deductions: $" + df.format(getTotalDeductions());
         String benefits = "Total Benefits: $" + df.format(getTotalBenefits());
         String netSalary = "Net Salary: $" + df.format(getNetSalary());
-        return netSalary + "\n" + basicSalary + "\n" + deductions + "\n" + benefits;
+        return String.format("%1$-40s %2$-40s\n%3$-40s %4$-40s", netSalary, basicSalary, deductions, benefits);
     }
 
     @Override
