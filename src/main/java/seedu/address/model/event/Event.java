@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Represents an event in the calendar
@@ -13,6 +14,7 @@ import java.util.List;
 public class Event {
     private EventDescription description;
     private EventPeriod eventPeriod;
+    private Optional<Event> parentEvent;
 
     /**
      * Constructs an event with a given description occurring over the given time period.
@@ -25,6 +27,22 @@ public class Event {
 
         this.description = description;
         this.eventPeriod = eventPeriod;
+        this.parentEvent = Optional.<Event>empty();
+    }
+
+    /**
+     * Constructs an event with a given description occurring over a given time period with a parent Event.
+     *
+     * @param description The description of the event.
+     * @param eventPeriod The period of the time when the event occurs.
+     * @param parent parent Event object this Event object was dervied from.
+     */
+    private Event(EventDescription description, EventPeriod eventPeriod, Event parent) {
+        requireAllNonNull(description, eventPeriod, parent);
+
+        this.description = description;
+        this.eventPeriod = eventPeriod;
+        this.parentEvent = Optional.<Event>of(parent);
     }
 
     /**
@@ -118,8 +136,28 @@ public class Event {
      */
     public Event boundEventByDate(LocalDate date) {
         requireNonNull(date);
+        if (hasParent()) {
+            return this;
+        }
+        return new Event(description, eventPeriod.boundPeriodByDate(date), this);
+    }
 
-        return new Event(description, eventPeriod.boundPeriodByDate(date));
+    /**
+     * Get the parent Event object of this Event object.
+     *
+     * @return the parent Event object. If there is no parent, returns itself.
+     */
+    public Event getParentEvent() {
+        return parentEvent.orElse(this);
+    }
+
+    /**
+     * Checks if this Event object has a parent Event.
+     *
+     * @return true if it has a parent Event object, false otherwise.
+     */
+    public boolean hasParent() {
+        return parentEvent.isPresent();
     }
 
     @Override

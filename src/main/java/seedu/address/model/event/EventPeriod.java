@@ -170,6 +170,9 @@ public class EventPeriod implements Comparable<EventPeriod> {
             return new EventPeriod(start, LocalDateTime.of(date, MAX_TIME_OF_DAY));
         } else if (date.isEqual(end.toLocalDate())) {
             return new EventPeriod(LocalDateTime.of(date, LocalTime.MIDNIGHT), end);
+        } else if (date.isAfter(start.toLocalDate()) && date.isBefore(end.toLocalDate())) {
+            return new EventPeriod(LocalDateTime.of(date, LocalTime.MIDNIGHT),
+                    LocalDateTime.of(date, MAX_TIME_OF_DAY));
         } else {
             throw new DateOutOfBoundsException();
         }
