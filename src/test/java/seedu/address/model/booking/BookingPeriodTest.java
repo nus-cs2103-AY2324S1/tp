@@ -30,36 +30,36 @@ public class BookingPeriodTest {
         assertFalse(BookingPeriod.isValidBookingPeriod("2023-01-02 to 2023-01-01"));
 
         // valid
-        assertTrue(BookingPeriod.isValidBookingPeriod("2023-01-01 to 2023-01-02"));
+        assertTrue(BookingPeriod.isValidBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00"));
 
         // catching exception
         assertFalse(BookingPeriod.isValidBookingPeriod(" to "));
-        assertFalse(BookingPeriod.isValidBookingPeriod("01/01/23 to 02/01/23"));
+        assertFalse(BookingPeriod.isValidBookingPeriod("01/01/23 to 02/01/23 12:00"));
     }
 
     @Test
     public void overlaps() {
-        BookingPeriod bookingPeriod = new BookingPeriod("2023-01-01 to 2023-01-02");
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00");
 
         //invalid input
         assertFalse(bookingPeriod.overlaps(null));
 
         //overlaps -> returns true
-        assertTrue(bookingPeriod.overlaps(new BookingPeriod("2023-01-01 to 2023-01-02")));
-        assertTrue(bookingPeriod.overlaps(new BookingPeriod("2023-01-02 to 2023-01-03")));
-        assertTrue(bookingPeriod.overlaps(new BookingPeriod("2022-12-31 to 2023-01-01")));
+        assertTrue(bookingPeriod.overlaps(new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")));
+        assertTrue(bookingPeriod.overlaps(new BookingPeriod("2023-01-02 08:00 to 2023-01-03 12:00")));
+        assertTrue(bookingPeriod.overlaps(new BookingPeriod("2022-12-31 08:00 to 2023-01-01 12:00")));
 
         //does not overlap -> return false
-        assertFalse(bookingPeriod.overlaps(new BookingPeriod("2023-01-03 to 2023-01-04")));
-        assertFalse(bookingPeriod.overlaps(new BookingPeriod("2022-12-30 to 2022-12-31")));
+        assertFalse(bookingPeriod.overlaps(new BookingPeriod("2023-01-03 08:00 to 2023-01-04 12:00")));
+        assertFalse(bookingPeriod.overlaps(new BookingPeriod("2022-12-30 08:00 to 2022-12-31 12:00")));
     }
 
     @Test
     public void equals() {
-        BookingPeriod bookingPeriod = new BookingPeriod("2023-01-01 to 2023-01-02");
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00");
 
         // same values -> returns true
-        assertTrue(bookingPeriod.equals(new BookingPeriod("2023-01-01 to 2023-01-02")));
+        assertTrue(bookingPeriod.equals(new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")));
 
         // same object -> returns true
         assertTrue(bookingPeriod.equals(bookingPeriod));
@@ -71,14 +71,85 @@ public class BookingPeriodTest {
         assertFalse(bookingPeriod.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(bookingPeriod.equals(new BookingPeriod("2023-01-03 to 2023-01-04")));
+        assertFalse(bookingPeriod.equals(new BookingPeriod("2023-01-03 08:00 to 2023-01-04 12:00")));
+    }
+
+    @Test
+    public void testIsValidBookingPeriodInvalidFormat() {
+        // Create an invalid booking period string with an incorrect format
+        String invalidBookingPeriod = "2022-Oct-01 10:00 to 2022-Nov-02 12:00";
+
+        // Check that the method returns false for an invalid format
+        assertFalse(BookingPeriod.isValidBookingPeriod(invalidBookingPeriod));
+
+        // Create an invalid booking period string with an impossible date (e.g., February 30)
+        String invalidBookingPeriod1 = "2022-02-30 10:00 to 2022-02-30 12:00";
+
+        // Check that the method returns false for an invalid date and time
+        assertFalse(BookingPeriod.isValidBookingPeriod(invalidBookingPeriod1));
+    }
+
+    @Test
+    public void testIsValidDateValidDate() {
+        // Valid date and time string
+        String validDateTime = "2023-10-24 14:30";
+        assertTrue(BookingPeriod.isValidDate(validDateTime));
+    }
+
+    @Test
+    public void testIsValidDateInvalidDate() {
+        // Invalid date and time string with an impossible date (e.g., February 30)
+        assertFalse(BookingPeriod.isValidDate("2023-02-30 12:00"));
+        assertFalse(BookingPeriod.isValidDate("2023-02-30 24:00"));
+        assertFalse(BookingPeriod.isValidDate("2023-02-30 12:00"));
+        assertFalse(BookingPeriod.isValidDate("2023-03-32 12:00"));
+        assertFalse(BookingPeriod.isValidDate("2023-02-29 12:00"));
+        assertFalse(BookingPeriod.isValidDate("2020-02-30 12:00"));
+        assertFalse(BookingPeriod.isValidDate("2020-04-32 12:00"));
+        assertFalse(BookingPeriod.isValidDate("apple-02-04 12:00"));
+        assertFalse(BookingPeriod.isValidDate("2023-02-30"));
+    }
+
+    @Test
+    public void testIsValidDateInvalidFormat() {
+        // Invalid date and time string with incorrect format
+        String invalidFormat = "2023-10-24 14:30:00";
+        assertFalse(BookingPeriod.isValidDate(invalidFormat));
+    }
+
+    @Test
+    public void testSetPeriodValidPeriod() {
+        // Valid booking period string
+        String validBookingPeriod = "2023-10-24 14:30 to 2023-10-24 15:30";
+        try {
+            BookingPeriod bookingPeriod = new BookingPeriod(validBookingPeriod);
+            // No exception should be thrown for a valid period
+        } catch (IllegalArgumentException e) {
+            // If an exception is thrown, fail the test
+            assert false : "Exception thrown for a valid period";
+        }
+    }
+
+    @Test
+    public void testSetPeriodInvalidPeriod() {
+        // Invalid booking period string with an impossible date (e.g., February 30)
+        String invalidBookingPeriod = "2023-02-30 12:00 to 2023-02-30 13:00";
+
+        try {
+            // Creating a BookingPeriod with an invalid period should throw an exception
+            BookingPeriod bookingPeriod = new BookingPeriod(invalidBookingPeriod);
+            // If no exception is thrown, fail the test
+            assert false : "No exception thrown for an invalid period";
+        } catch (IllegalArgumentException e) {
+            // Exception is expected
+        }
     }
 
     @Test
     public void hashcode() {
-        BookingPeriod bookingPeriodOne = new BookingPeriod("2023-01-01 to 2023-01-02");
-        BookingPeriod bookingPeriodTwo = new BookingPeriod("2023-01-01 to 2023-01-02");
-        BookingPeriod bookingPeriodDiff = new BookingPeriod("2023-01-03 to 2023-01-04");
+        BookingPeriod bookingPeriodOne = new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00");
+        BookingPeriod bookingPeriodTwo = new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00");
+        BookingPeriod bookingPeriodDiff = new BookingPeriod("2023-01-03 08:00 to 2023-01-04 12:00");
 
         assertTrue(bookingPeriodOne.equals(bookingPeriodTwo) && bookingPeriodTwo.equals(bookingPeriodOne));
         assertTrue(bookingPeriodOne.hashCode() == bookingPeriodTwo.hashCode());
