@@ -184,10 +184,10 @@ Format: `language SPECIFIED_LANGUAGE`
 
 Format: `review`
 
-### Switching color theme : `switch`  
-* `switch` : Switches between light and dark appearance for UI.  
+### Switching color theme : `switch`
+* `switch` : Switches between light and dark appearance for UI.
 
-Format: `switch`  
+Format: `switch`
 
 Output:![img.png](images/DarkTheme.png)
 
@@ -233,19 +233,19 @@ _Details coming soon ..._
 
 ## Command summary
 
- Action                 | Format, Examples                                               
+ Action                 | Format, Examples
 ------------------------|----------------------------------------------------------------
- **Help**               | `help`                                                         
- **List**               | `list`                                                         
- **Add**                | `add w/WORD t/TRANSLATION` <br> e.g., `add w/regarder t/look`  
- **Delete**             | `delete w/WORD`<br> e.g., `del w/look`                         
- **Edit**               | `edit index w/WORD t/TRANSLATION`<br> e.g., `edit 1 w/bye t/再见` 
- **Find**               | `find KEYWORD`<br> e.g., `find bye`                            
- **Start**              | `start`                                                        
- **Reveal**             | `reveal`                                                     
- **Yes**                | `yes`                                                          
- **No**                 | `no`                                                                                                                   
- **End**               | `end`     
+ **Help**               | `help`
+ **List**               | `list`
+ **Add**                | `add w/WORD t/TRANSLATION` <br> e.g., `add w/regarder t/look`
+ **Delete**             | `delete w/WORD`<br> e.g., `del w/look`
+ **Edit**               | `edit index w/WORD t/TRANSLATION`<br> e.g., `edit 1 w/bye t/再见`
+ **Find**               | `find KEYWORD`<br> e.g., `find bye`
+ **Start**              | `start`
+ **Reveal**             | `reveal`
+ **Yes**                | `yes`
+ **No**                 | `no` 
+ **End**               | `end`
  **Language**           | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`
  **Review**             | `review`
  **Learning Statistics** | `stats`
