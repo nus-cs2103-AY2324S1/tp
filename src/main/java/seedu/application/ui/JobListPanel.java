@@ -16,17 +16,26 @@ import seedu.application.model.job.Job;
 public class JobListPanel extends UiPart<Region> {
     private static final String FXML = "JobListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(JobListPanel.class);
-
+    private MainWindow mainWindow;
     @FXML
     private ListView<Job> jobListView;
 
     /**
      * Creates a {@code JobListPanel} with the given {@code ObservableList}.
      */
-    public JobListPanel(ObservableList<Job> jobList) {
+    public JobListPanel(ObservableList<Job> jobList, MainWindow mainWindow) {
         super(FXML);
+        this.mainWindow = mainWindow;
         jobListView.setItems(jobList);
         jobListView.setCellFactory(listView -> new JobListViewCell());
+
+        // Event listener recognise the event where a jobCard is selected
+        jobListView.getSelectionModel().selectedItemProperty()
+            .addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    mainWindow.displayJobDetails(newValue);
+                }
+            });
     }
 
     /**
