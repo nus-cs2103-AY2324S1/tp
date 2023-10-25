@@ -17,7 +17,7 @@ public class DeleteEventCommand extends DeleteCommand {
     public static final String SECONDARY_COMMAND_WORD = "event";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + SECONDARY_COMMAND_WORD + ": Deletes an event from a contact.\n"
-            + "Usage:  delete event -n CONTACT_NAME -en EVENT_NAME";
+            + "Usage:  delete event -id CONTACT_ID -eid EVENT_ID";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Can not find the target contact with ID: ";
     public static final String MESSAGE_SUCCESS = "Successfully deleted event: ";
     public static final String MESSAGE_EVENT_NOT_FOUND = "Event not found: ID = ";
