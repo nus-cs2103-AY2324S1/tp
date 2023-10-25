@@ -238,6 +238,24 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Remind feature
+
+The `remind` command in our application displays a birthdays and events that will happen within a specified number of days.
+
+#### Implementation
+
+The `remind` command interacts with multiple components in the application. The sequence diagram below shows the interactions between the components.
+
+![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
+
+It makes use of the 'Model' component to update the list of persons that have birthdays within the specified number of days using
+`Model#updateFilteredPersonList(Predicate<Person> predicate)`. It does so by passing a predicate that filters out persons that do not have birthdays within the specified number of days.
+This is also done for events using `Model#updateFilteredEventList(Predicate<Event> predicate)`.
+
+After the `ObservableList<Person>` and `ObservableList<Event>` are updated, the `UI` component is notified of the changes and updates the UI accordingly, which will show the updated persons and events.
+
+Given below is an example usage scenario and how the remind feature behaves at each step.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
