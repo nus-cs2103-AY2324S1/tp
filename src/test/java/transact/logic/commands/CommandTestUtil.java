@@ -137,10 +137,10 @@ public class CommandTestUtil {
      * {@code targetIndex} in the
      * {@code model}'s transaction book.
      */
-    public static void showTransactionAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredTransactionList().size());
+    public static void showTransactionAtIndex(Model model, Integer targetIndex) {
+        assertTrue(targetIndex < model.getFilteredTransactionList().size());
 
-        Transaction transaction = model.getFilteredTransactionList().get(targetIndex.getZeroBased());
+        Transaction transaction = model.getFilteredTransactionList().get(targetIndex);
         final TransactionId id = transaction.getTransactionId();
         model.updateFilteredTransactionList(transaction1 -> Objects.equals(transaction1.getTransactionId(), id));
 
