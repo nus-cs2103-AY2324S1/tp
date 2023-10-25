@@ -5,6 +5,8 @@ title: User Guide
 
 FumbleLog is a **productivity desktop app for managing contacts and tracking events. It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
+In this user guide, you will learn the basics of our application and how you can use it to manage your tasks and interpersonal relationships better.
+
 * Table of Contents
 {:toc}
 
@@ -12,18 +14,26 @@ FumbleLog is a **productivity desktop app for managing contacts and tracking eve
 
 # Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+**1. Ensure you have the right environment.**
+- Before you begin, make sure you have Java `11` or above installed in your computer. If not, you can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-2. Download the latest `fumblelog.jar` from [here](https://github.com/AY2324S1-CS2103T-T12-2/tp/releases).
+**2. Download our FumbleLog Application.**
+- Visit the official FumbleLog release page on Github [here](https://github.com/AY2324S1-CS2103T-T12-2/tp/releases).
+- Download the latest version of `fumblelog.jar` from the release page.
 
-3. Copy the file to the folder you want to use as the _home folder_ for your FumbleLog.
+**3. Set up your home folder..**
+- Choose a folder on your computer where you want to store you FumbleLog application, or create a new folder.
+- Copy the `fumblelog.jar` file into the folder you have chosen or created.
 
-4. Open a command terminal, `cd` into the folder you put the fumblelog.jar file in, and use the `java -jar fumblelog.jar`
-   command to run the application. A GUI similar to the below should appear in a few seconds.<br>
+**4. Launch the application.**
+- Open a command terminal (Command Prompt or Terminal, depending on your operating system), use the `cd` command to navigate to the folder where you have placed the `fumblelog.jar` file.
+- Run the application using the command: `java -jar fumblelog.jar`. You should now be able to see the FumbleLog user interface!
+<br>
    Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type commands into the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
+**5. Try out some simple commands!**
+- Type commands into the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all persons.
@@ -32,9 +42,10 @@ FumbleLog is a **productivity desktop app for managing contacts and tracking eve
 
    * `delete 3` : Deletes the 3rd person shown in the current persons list.
 
-   * `exit` : Exits the FumbleLog.
+   * `exit` : Exits FumbleLog application.
 
-6. Refer to the [Features](#features) below for more details of FumbleLog's command.
+**6. Learn more advanced commands.**
+- Refer to [Features](#features) below for more details of FumbleLog's commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -293,9 +304,33 @@ Expected output when the command fails:
 
 ## General commands
 
+### Show all upcoming events and birthdays : `remind`
+
+Shows all events and birthdays that are happening in the next specified number of days.
+
+Format: `remind` [NUMBER_OF_DAYS]
+
+* Shows all events and birthdays happening in the next [NUMBER_OF_DAYS] days.
+* If [NUMBER_OF_DAYS] is not specified, the default value is 7 days.
+* [NUMBER_OF_DAYS] **must be a positive integer** 1,2,3, ...
+
+Examples:
+* `remind` shows all events and birthdays happening in the next 7 days.
+* `remind 3` shows all events and birthdays happening in the next 3 days.
+
+Expected output when the command succeeds:
+* Input: `remind 3`
+* Output: `Showing all birthdays and events happening in the next 3 days: `
+
+Expected output when the command fails:
+* `Invalid command format!
+  remind: Reminds the user of the upcoming birthdays and events in the next n number of days. If no index is given, the default number of days is 7.
+  Parameters: INDEX (must be a positive integer)
+  Example: remind 1`
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the FumbleLog. Be very sure before using this command.
+Clears all contacts and events from the FumbleLog. Be very sure before using this command as it cannot be undone. 
 
 Format: `clear`
 
