@@ -87,13 +87,13 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public String getNextCommandString(String currentCommandString) {
-        return model.getNextCommandString(currentCommandString);
+    public String getPrevCommandString(String currentCommandString) {
+        return model.getPrevCommandString(currentCommandString);
     }
 
     @Override
-    public String getPrevCommandString(String currentCommandString) {
-        return model.getPrevCommandString(currentCommandString);
+    public String getPassedCommandString(String currentCommandString) {
+        return model.getPassedCommandString(currentCommandString);
     }
 
     @Override

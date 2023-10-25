@@ -137,13 +137,13 @@ public class ModelManager implements Model {
     //=========== Command String Stash =============================================================
 
     @Override
-    public String getNextCommandString(String currentCommandString) {
-        return commandStringStash.getNextCommandString(currentCommandString);
+    public String getPrevCommandString(String currentCommandString) {
+        return commandStringStash.getPrevCommandString(currentCommandString);
     }
 
     @Override
-    public String getPrevCommandString(String currentCommandString) {
-        return commandStringStash.getPrevCommandString(currentCommandString);
+    public String getPassedCommandString(String currentCommandString) {
+        return commandStringStash.getPassedCommandString(currentCommandString);
     }
 
     @Override

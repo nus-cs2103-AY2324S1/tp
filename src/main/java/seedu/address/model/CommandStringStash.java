@@ -4,6 +4,8 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Objects;
 
+import seedu.address.commons.util.ToStringBuilder;
+
 /**
  * Represents a stash that contains the command String of the 20 most recent
  * command executed.
@@ -22,7 +24,21 @@ public class CommandStringStash {
         this.isNext = true;
     }
 
-    public String getNextCommandString(String commandInputString) {
+    /**
+     * Creates the CommandStringStash using the initial values provided.
+     */
+    public CommandStringStash(Deque<String> prevCmdStringsStack, Deque<String> passedCmdStringsStack, boolean isNext) {
+        this.prevCmdStringsStack = prevCmdStringsStack;
+        this.passedCmdStringsStack = passedCmdStringsStack;
+        this.isNext = isNext;
+    }
+
+    /**
+     * Returns the previous command string input entered by the user.
+     * Remembers the state, so it passes previous command string inputs already gotten.
+     * Returns {@code commandInputString} if already at the first command string input entered.
+     */
+    public String getPrevCommandString(String commandInputString) {
         assert commandInputString != null;
         if (prevCmdStringsStack.isEmpty()) {
             return commandInputString;
@@ -34,12 +50,17 @@ public class CommandStringStash {
         if (!isNext) {
             // skip over this string as it was just added to the stack
             isNext = true;
-            return getNextCommandString(commandInputString);
+            return getPrevCommandString(commandInputString);
         }
         return nextCommandString;
     }
 
-    public String getPrevCommandString(String commandInputString) {
+    /**
+     * Returns the command string input passed by the user acting as an "undo" of {@code getPrevCommandString}.
+     * Remember the state, so it passes command string inputs already "undone".
+     * Returns {@code commandInputString} if the user has not passed any commands yet.
+     */
+    public String getPassedCommandString(String commandInputString) {
         assert commandInputString != null;
         if (passedCmdStringsStack.isEmpty()) {
             return commandInputString;
@@ -51,7 +72,7 @@ public class CommandStringStash {
         if (isNext) {
             // skip over this string as it was just added to the stack
             isNext = false;
-            return getPrevCommandString(commandInputString);
+            return getPassedCommandString(commandInputString);
         }
         return prevCommandString;
     }
@@ -59,6 +80,7 @@ public class CommandStringStash {
     /**
      * Adds the {@code commandString} to the stash of command Strings.
      * If the stash has size > 20, the least recently added command string is evicted.
+     * Also resets the state of the stash.
      * @param commandInputString A non-null command input String.
      */
     public void addCommandString(String commandInputString) {
@@ -80,17 +102,24 @@ public class CommandStringStash {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null || !(object instanceof CommandStringStash)) {
+        if (!(object instanceof CommandStringStash)) {
             return false;
         }
         CommandStringStash commandStringStash = (CommandStringStash) object;
-        return isNext == commandStringStash.isNext
-                && Objects.equals(prevCmdStringsStack, commandStringStash.prevCmdStringsStack)
+        return Objects.equals(prevCmdStringsStack, commandStringStash.prevCmdStringsStack)
                 && Objects.equals(passedCmdStringsStack, commandStringStash.passedCmdStringsStack);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(prevCmdStringsStack, passedCmdStringsStack, isNext);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("Previous Command Strings", prevCmdStringsStack)
+                .add("Passed Command Strings", passedCmdStringsStack)
+                .toString();
     }
 }

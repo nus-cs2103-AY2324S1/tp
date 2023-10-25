@@ -88,12 +88,12 @@ public interface Model {
     /**
      * Returns the command string of the next most recent command executed.
      */
-    String getNextCommandString(String currentCommandString);
+    String getPrevCommandString(String currentCommandString);
 
     /**
      * Returns the command string of the previous most recent command executed.
      */
-    String getPrevCommandString(String currentCommandString);
+    String getPassedCommandString(String currentCommandString);
 
     /**
      * Adds the most recent command string input by the user to the CommandStringStash.

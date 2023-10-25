@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand,
-                logic::getNextCommandString, logic::getPrevCommandString);
+                logic::getPrevCommandString, logic::getPassedCommandString);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
