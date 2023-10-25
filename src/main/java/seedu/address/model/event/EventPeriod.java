@@ -98,7 +98,7 @@ public class EventPeriod implements Comparable<EventPeriod> {
     public boolean isOverlapping(LocalDate start, LocalDate end) {
         requireAllNonNull(start, end);
 
-        return this.start.toLocalDate().isAfter(end) || this.end.toLocalDate().isBefore(start);
+        return !(this.start.toLocalDate().isAfter(end) || this.end.toLocalDate().isBefore(start));
     }
 
     /**
@@ -189,6 +189,50 @@ public class EventPeriod implements Comparable<EventPeriod> {
         } else {
             throw new DateOutOfBoundsException();
         }
+    }
+
+    /**
+     * Compare the start time (independent of date) of this EventPeriod with another.
+     *
+     * @param other other EventPeriod object.
+     * @return a negative integer if this EventPeriod has an earlier start time than the other, 0 if both have the same
+     * start time and a positive integer otherwise.
+     */
+    public int compareStartTime(EventPeriod other) {
+        requireNonNull(other);
+
+        return this.start.toLocalTime().compareTo(other.start.toLocalTime());
+    }
+
+    /**
+     * Compare the end time (independent of date) of this EventPeriod with another.
+     *
+     * @param other other EventPeriod object.
+     * @return a negative integer if this EventPeriod has an earlier end time than the other, 0 if both have the same
+     * end time and a positive integer otherwise.
+     */
+    public int compareEndTime(EventPeriod other) {
+        requireNonNull(other);
+
+        return this.end.toLocalTime().compareTo(other.end.toLocalTime());
+    }
+
+    /**
+     * Get the start time as a LocalTime of the EventPeriod, omitting the date.
+     *
+     * @return the start time as a LocalTime of the EventPeriod.
+     */
+    public LocalTime getStartTime() {
+        return start.toLocalTime();
+    }
+
+    /**
+     * Get the end time as a LocalTime of the EventPeriod, omitting the date.
+     *
+     * @return the end time as a LocalTime of the EventPeriod.
+     */
+    public LocalTime getEndTime() {
+        return end.toLocalTime();
     }
 
     @Override

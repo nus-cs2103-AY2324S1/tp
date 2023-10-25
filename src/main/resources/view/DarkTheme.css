@@ -127,6 +127,11 @@
     -fx-text-alignment: center;
 }
 
+.calendar_cell_border {
+    -fx-border-color: #654f4fba;
+    -fx-border-width: 1px;
+}
+
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;

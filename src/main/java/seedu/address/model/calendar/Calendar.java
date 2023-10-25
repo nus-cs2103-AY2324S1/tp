@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -158,6 +159,18 @@ public class Calendar implements ReadOnlyCalendar {
     @Override
     public ObservableList<Event> getCurrentWeekEventList() {
         return internalListForCurrentWeek;
+    }
+
+    @Override
+    public Optional<LocalTime> getEarliestEventStartTimeInCurrentWeek() {
+        return getCurrentWeekEventList().stream().map(Event::getParentEvent).distinct()
+                .min(Event::compareStartTime).map(Event::getStartTime);
+    }
+
+    @Override
+    public Optional<LocalTime> getLatestEventEndTimeInCurrentWeek() {
+        return getCurrentWeekEventList().stream().map(Event::getParentEvent).distinct()
+                .max(Event::compareEndTime).map(Event::getEndTime);
     }
 
     @Override

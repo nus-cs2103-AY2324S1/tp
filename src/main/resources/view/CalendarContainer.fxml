@@ -6,7 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
     <StackPane fx:id="calendarLabelPlaceholder" minWidth="50" HBox.hgrow="NEVER"/>
-    <GridPane fx:id="eventSpace" minWidth="300" HBox.hgrow="ALWAYS"/>
+    <ListView prefHeight="260" minHeight="260" maxHeight="260" VBox.vgrow="NEVER" HBox.hgrow="ALWAYS">
+        <StackPane minWidth="300" HBox.hgrow="ALWAYS">
+            <GridPane fx:id="eventSpaceBackground" HBox.hgrow="ALWAYS"/>
+            <GridPane fx:id="eventSpace"/>
+        </StackPane>
+    </ListView>
 </HBox>

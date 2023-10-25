@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -170,6 +171,50 @@ public class Event {
     public boolean occursBetweenDates(LocalDate start, LocalDate end) {
         requireAllNonNull(start, end);
         return getParentEvent().eventPeriod.isOverlapping(start, end);
+    }
+
+    /**
+     * Compare the start time (independent of date) of this Event with another.
+     *
+     * @param other other Event.
+     * @return a negative integer if this Event has an earlier start time than the other, 0 if they have the same start
+     * time and a positive integer otherwise.
+     */
+    public int compareStartTime(Event other) {
+        requireNonNull(other);
+
+        return this.eventPeriod.compareStartTime(other.eventPeriod);
+    }
+
+    /**
+     * Compare the end time (independent of date) of this Event with another.
+     *
+     * @param other other Event.
+     * @return a negative integer if this Event has an earlier end time than the other, 0 if they have the same end time
+     * and a positive integer otherwise.
+     */
+    public int compareEndTime(Event other) {
+        requireNonNull(other);
+
+        return this.eventPeriod.compareEndTime(other.eventPeriod);
+    }
+
+    /**
+     * Get the start time of the event as a LocalTime object, omitting the date.
+     *
+     * @return the start time of the event as a LocalTime object, omitting the date.
+     */
+    public LocalTime getStartTime() {
+        return eventPeriod.getStartTime();
+    }
+
+    /**
+     * Get the end time of the event as a LocalTime object, omitting the date.
+     *
+     * @return the end time of the event as a LocalTime object, omitting the date.
+     */
+    public LocalTime getEndTime() {
+        return eventPeriod.getEndTime();
     }
 
     @Override
