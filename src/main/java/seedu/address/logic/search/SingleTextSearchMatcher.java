@@ -14,15 +14,15 @@ import java.util.regex.Pattern;
 class SingleTextSearchMatcher extends SearchMatcher {
     private final String textToFind;
 
+    public SingleTextSearchMatcher(String search) {
+        textToFind = search;
+    }
+
     public static SingleTextSearchMatcher getQuotedMatch(String text) {
         SingleTextSearchMatcher matcher = new SingleTextSearchMatcher(text);
         matcher.setFlag(Flag.CASE_SENSITIVITY, true);
         matcher.setFlag(Flag.FULL_WORD_MATCHING_ONLY, true);
         return matcher;
-    }
-
-    public SingleTextSearchMatcher(String search) {
-        textToFind = search;
     }
 
     @Override
@@ -54,7 +54,7 @@ class SingleTextSearchMatcher extends SearchMatcher {
         if (isFullWord) {
             index = index(target, true);
         } else {
-            index = index(target,false);
+            index = index(target, false);
         }
         if (index == -1) {
             return null;

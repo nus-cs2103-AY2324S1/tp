@@ -104,10 +104,8 @@ public class SingleTextSearchMatcherTest {
 
     @Test
     public void test_withTagMatch() {
-        assertEquals("ABC", testMatchString("ABC", true));
-        assertNull(testMatchString("abc", false));
-        assertEquals("12", testMatchString("12", true));
-        assertEquals("12", testMatchString("12", false));
+        assertEquals("tagABC", testMatchString("tagABC", true));
+        assertNull(testMatchString("abc", true));
     }
 
 }

@@ -218,7 +218,7 @@ public class FindCommandArgumentParser {
             assert hasChar() && isCharQuote();
             incrementCharIndex();
             int predicateStartIndex = index;
-            while(hasChar() && !isCharQuote()) {
+            while (hasChar() && !isCharQuote()) {
                 incrementCharIndex();
             }
             dualStack.append(SingleTextSearchMatcher.getQuotedMatch(
