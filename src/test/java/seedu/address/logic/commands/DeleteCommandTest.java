@@ -30,6 +30,7 @@ public class DeleteCommandTest {
     public void execute_validStudentNumber_success() {
         Student studentToDelete = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(studentToDelete.getStudentNumber());
+        model.setSelectedStudent(studentToDelete);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
                 Messages.format(studentToDelete));
@@ -38,6 +39,7 @@ public class DeleteCommandTest {
         expectedModel.deleteStudent(studentToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertTrue(model.getSelectedStudent().isEmpty());
     }
 
     @Test

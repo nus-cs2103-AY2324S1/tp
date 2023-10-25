@@ -35,7 +35,7 @@ public class RecordClassPartCommandTest {
         Student editedStudent = new StudentBuilder(TypicalStudents.ALICE)
                 .withClassPartDetails(1, true)
                 .build();
-
+        model.setSelectedStudent(editedStudent);
         StudentNumber studentNumber = editedStudent.getStudentNumber();
         RecordClassPartCommand recordClassPartCommand = new RecordClassPartCommand(studentNumber, 1, true);
 
@@ -47,6 +47,7 @@ public class RecordClassPartCommandTest {
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
 
         assertCommandSuccess(recordClassPartCommand, model, expectedMessage, expectedModel);
+        assertEquals(editedStudent, model.getSelectedStudent().get(0));
     }
 
     @Test

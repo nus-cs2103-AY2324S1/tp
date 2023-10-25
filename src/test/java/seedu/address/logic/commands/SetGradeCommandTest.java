@@ -35,7 +35,7 @@ public class SetGradeCommandTest {
         Student editedStudent = new StudentBuilder(TypicalStudents.ALICE)
                 .withAssignmentDetails(1, 100)
                 .build();
-
+        model.setSelectedStudent(editedStudent);
         StudentNumber studentNumber = editedStudent.getStudentNumber();
         SetGradeCommand setGradeCommand = new SetGradeCommand(studentNumber, 1, 100);
 
@@ -46,6 +46,7 @@ public class SetGradeCommandTest {
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
 
         assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel);
+        assertEquals(editedStudent, model.getSelectedStudent().get(0));
     }
 
     @Test
