@@ -75,4 +75,54 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Verifies that one and only one of the {@code prefixes} is present.
+     */
+    public Prefix verifyExactlyOneIsPresent(Prefix ... prefixes) throws ParseException {
+        assert prefixes.length > 0;
+
+        Prefix result = null;
+        for (Prefix prefix: prefixes) {
+            if (argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() == 1) {
+                if (result != null) {
+                    throw new ParseException(Messages.MESSAGE_EXACTLY_ONE_FIELD);
+                }
+                result = prefix;
+            }
+        }
+
+        if (result == null) {
+            throw new ParseException(Messages.MESSAGE_EXACTLY_ONE_FIELD);
+        }
+
+        return result;
+    }
+
+    /**
+     * Verifies that if one of the {@code prefixesIfPresent} is present,
+     * then the {@code prefixThenPresent} must also be present with only one corresponding value.
+     * Otherwise, {@code prefixThenPresent} must be absent.
+     */
+    public void verifyIfPresentThenOnlyOne(Prefix[] prefixesIfPresent, Prefix prefixThenPresent) throws ParseException {
+        Prefix firstPresentPrefix = this.firstPresentPrefix(prefixesIfPresent);
+        if (firstPresentPrefix != null) {
+            if (!argMultimap.containsKey(prefixThenPresent) || argMultimap.get(prefixThenPresent).size() > 1) {
+                throw new ParseException(String.format(Messages.MESSAGE_MUST_BE_PRESENT, firstPresentPrefix));
+            }
+        } else {
+            if (argMultimap.containsKey(prefixThenPresent)) {
+                throw new ParseException(Messages.MESSAGE_INDEX_CANNOT_BE_PRESENT);
+            }
+        }
+    }
+
+    private Prefix firstPresentPrefix(Prefix[] prefixes) {
+        for (Prefix prefix: prefixes) {
+            if (argMultimap.containsKey(prefix)) {
+                return prefix;
+            }
+        }
+        return null;
+    }
 }
