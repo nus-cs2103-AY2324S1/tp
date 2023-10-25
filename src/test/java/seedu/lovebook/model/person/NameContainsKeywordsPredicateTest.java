@@ -71,7 +71,7 @@ public class NameContainsKeywordsPredicateTest {
         // Keywords match age, gender and lovebook, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("33", "F", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withAge("33")
-                .withGender("F").withHeight("12334").build()));
+                .withGender("F").withHeight("134").build()));
     }
 
     @Test
