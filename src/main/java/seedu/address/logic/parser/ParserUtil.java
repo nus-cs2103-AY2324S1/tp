@@ -117,7 +117,18 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
-    // NOW FOR THE OPTIONAL FIELDS
+    /**
+     * Parses {@code String lead} into a {@code Lead}.
+     */
+    public static Lead parseLead(String lead) throws ParseException {
+        requireNonNull(lead);
+        String trimmedLead = lead.trim();
+        if (!Lead.isValidLead(trimmedLead)) {
+            throw new ParseException(Lead.MESSAGE_CONSTRAINTS);
+        }
+        return new Lead(lead);
+    }
+
     /**
      * Parses a {@code String telegram} into a {@code TelegramHandle}.
      * Leading and trailing whitespaces will be trimmed.
@@ -205,17 +216,5 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
-    }
-
-    /**
-     * Parses {@code String lead} into a {@code Lead}.
-     */
-    public static Lead parseLead(String lead) {
-        requireNonNull(lead);
-        if (!Lead.isValidLead(lead)) {
-            return null;
-        } else {
-            return new Lead(lead);
-        }
     }
 }
