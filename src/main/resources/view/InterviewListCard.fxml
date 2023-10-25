@@ -28,6 +28,7 @@
             </HBox>
             <Label fx:id="jobRole" styleClass="cell_small_label" text="\$phone" />
             <Label fx:id="interviewTiming" styleClass="cell_small_label" text="\$address" />
+            <Label fx:id="rating" styleClass="cell_small_label" text="\$address" />
         </VBox>
     </GridPane>
 </HBox>

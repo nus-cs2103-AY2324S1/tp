@@ -33,6 +33,8 @@ public class InterviewCard extends UiPart<Region> {
     private Label jobRole;
     @FXML
     private Label interviewTiming;
+    @FXML
+    private Label rating;
 
     /**
      * Creates a {@code InterviewCard} with the given {@code Interview} and index to display.
@@ -44,6 +46,7 @@ public class InterviewCard extends UiPart<Region> {
         applicant.setText(interview.getInterviewApplicant().getName().fullName); // Todo: Change needed
         jobRole.setText(interview.getJobRole()); // Todo: Change needed
         interviewTiming.setText(interview.getInterviewTiming()); // Todo: Change needed
+        rating.setText(interview.getRating().rating);
         cardPane.setStyle("-fx-border-color: #7a7a2c; -fx-border-width: 3;");
     }
 }

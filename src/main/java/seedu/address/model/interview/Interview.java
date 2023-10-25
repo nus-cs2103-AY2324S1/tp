@@ -40,6 +40,18 @@ public class Interview {
     }
 
     /**
+     * Alternative constructor for creating Interview object from editing.
+     */
+    public Interview(Applicant app, String role, String timing, Rating rate, boolean isDone) {
+        requireAllNonNull(app, role, timing, rate, isDone);
+        applicant = app;
+        jobRole = role;
+        interviewTiming = timing;
+        rating = rate;
+        this.isDone = isDone;
+    }
+
+    /**
      * Returns true if both Interviews have the same Applicant & Timing or if both Interviews are the same object
      * Adapted from AB3's Person.isSamePerson() method
      */

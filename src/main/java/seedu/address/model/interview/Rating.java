@@ -9,9 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Rating {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Rating should only contain numbers with one decimal place, and it should be between 0.0 to 5.0 inclusive";
-    public static final String RATING_REGEX = "^[0-5](\\.\\d)?$";
-    private String rating;
+            "Rating should only contain a number with one decimal place and between 0.0 to 5.0 inclusive";
+    public static final String RATING_REGEX = "^(0\\.\\d|1\\.0|2\\.[0-5]|3\\.[0-5]|4\\.[0-5]|5\\.0)$";
+    public final String rating;
 
     /**
      * Constructs a rating.
@@ -27,15 +27,6 @@ public class Rating {
      */
     public static boolean isValidRating(String test) {
         return test.matches(RATING_REGEX);
-    }
-
-    /**
-     * Set rating to the given rating.
-     */
-    public void setRating(String rate) {
-        requireNonNull(rate);
-        checkArgument(isValidRating(rate), MESSAGE_CONSTRAINTS);
-        rating = rate;
     }
 
     @Override

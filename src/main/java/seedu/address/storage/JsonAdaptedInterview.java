@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.Rating;
 
 /**
  * Jackson-friendly version of {@link seedu.address.model.interview.Interview}.
@@ -21,6 +22,7 @@ class JsonAdaptedInterview {
     private final JsonAdaptedApplicant applicant;
     private final String jobRole;
     private final String interviewTiming;
+    private final String rating;
     private final boolean isDone;
 
     /**
@@ -30,10 +32,12 @@ class JsonAdaptedInterview {
     public JsonAdaptedInterview(@JsonProperty("applicant") JsonAdaptedApplicant applicant,
                                 @JsonProperty("jobRole") String jobRole,
                                 @JsonProperty("interviewTiming") String interviewTiming,
+                                @JsonProperty("rating") String rating,
                                 @JsonProperty("isDone") boolean isDone) {
         this.applicant = applicant;
         this.jobRole = jobRole;
         this.interviewTiming = interviewTiming;
+        this.rating = rating;
         this.isDone = isDone;
     }
 
@@ -44,6 +48,7 @@ class JsonAdaptedInterview {
         applicant = new JsonAdaptedApplicant(source.getInterviewApplicant());
         jobRole = source.getJobRole();
         interviewTiming = source.getInterviewTiming();
+        rating = source.getRating().rating;
         isDone = source.isDone();
     }
 
@@ -69,8 +74,17 @@ class JsonAdaptedInterview {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TIMING_MISSING));
         }
 
+        if (rating == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rating.class.getSimpleName()));
+        }
 
-        return new Interview(modelApplicant, jobRole, interviewTiming, isDone);
+        if (!Rating.isValidRating(rating)) {
+            throw new IllegalValueException(Rating.MESSAGE_CONSTRAINTS);
+        }
+
+        final Rating modelRating = new Rating(rating);
+
+        return new Interview(modelApplicant, jobRole, interviewTiming, modelRating, isDone);
     }
 
 }
