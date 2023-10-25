@@ -86,7 +86,16 @@ public class AppointmentBuilder {
         return this;
     }
 
-    public Appointment build() throws InvalidStartEndTimeException {
-        return new Appointment(date, startTime, endTime, name, description);
+    /**
+     * Builds an {@code Appointment} with the provided details
+     * @return Appointment with the given details
+     */
+    public Appointment build() {
+        try {
+            Appointment appt = new Appointment(date, startTime, endTime, name, description);
+            return appt;
+        } catch (InvalidStartEndTimeException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

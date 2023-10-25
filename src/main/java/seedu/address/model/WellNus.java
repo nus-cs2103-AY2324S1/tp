@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.UniqueAppointmentList;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -107,6 +108,8 @@ public class WellNus implements ReadOnlyWellNus {
         students.remove(key);
     }
 
+    //// appointment-level operations
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
@@ -114,7 +117,6 @@ public class WellNus implements ReadOnlyWellNus {
         requireNonNull(appointment);
         return appointments.contains(appointment);
     }
-
 
     /**
      * Adds a person to the address book.
@@ -130,6 +132,10 @@ public class WellNus implements ReadOnlyWellNus {
      */
     public void removeAppointment(Appointment key) {
         appointments.remove(key);
+    }
+
+    public void removeRelatedAppointments(Name key) {
+        appointments.removeRelatedAppointments(key);
     }
 
     //// util methods
