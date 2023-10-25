@@ -5,7 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.flashlingo.logic.Logic;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
+import seedu.flashlingo.logic.parser.FlashlingoParser;
+import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
@@ -46,13 +49,18 @@ public class FlashcardBox extends UiPart<Region> {
     private boolean isRevealed = false;
     private Model model;
 
+    private Logic logic;
+
     /**
      * Creates a {@code FlashCard code} with the given {@code FlashCard} and index to display.
      */
-    public FlashcardBox(FlashCard fc, int displayedIndex, Model model) {
+    public FlashcardBox(FlashCard fc, int displayedIndex, Model model, Logic logic) {
         super(FXML);
+        // Ensure that FlashCard with buttons is only created when in review session
+        assert(FlashlingoParser.getReviewSession());
         this.flashCard = fc;
         this.model = model;
+        this.logic = logic;
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
         translation.setText("");
@@ -63,9 +71,10 @@ public class FlashcardBox extends UiPart<Region> {
      * Handles success when user presses "Yes" button
      */
     @FXML
-    public void success() throws CommandException {
+    public void success() throws CommandException,ParseException {
         flashCard.handleUserInput(true);
         level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
+        this.logic.execute("yes 1");
         this.model.nextReviewWord();
     }
 
