@@ -80,6 +80,18 @@ class TimeTest {
     }
 
     @Test
+    void testToTimeString() {
+        StartTime startTime1 = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 0));
+        assertEquals("00:00", startTime1.toTimeString());
+
+        StartTime startTime2 = new StartTime(LocalDateTime.of(2023, 1, 1, 0, 0, 10));
+        assertEquals("00:00", startTime2.toTimeString());
+
+        StartTime startTime3 = new StartTime(LocalDateTime.of(2023, 1, 1, 12, 12, 10));
+        assertEquals("12:12", startTime3.toTimeString());
+    }
+
+    @Test
     void compareTo() {
         TimeStub time1 = new TimeStub(LocalDateTime.of(2023, 1, 1, 11, 59));
         TimeStub time2 = new TimeStub(LocalDateTime.of(2023, 1, 1, 12, 0));

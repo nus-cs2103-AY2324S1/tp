@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ScheduleListPanel scheduleListPanel;
+    private CalendarPanel calendarPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -53,7 +54,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -115,9 +115,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        calendarPanel = new CalendarPanel(logic.getFilteredPersonList(), logic.getFilteredScheduleList());
         scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
-
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+
         listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -208,7 +209,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void showCalendar() {
         listPanelPlaceholder.getChildren().clear();
-        listPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(calendarPanel.getRoot());
     }
 
     /**

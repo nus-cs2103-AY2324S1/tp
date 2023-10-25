@@ -107,6 +107,27 @@
     -fx-background-color: #515658;
 }
 
+.calendar-time-label {
+    -fx-background-color: #393f4a;
+}
+
+.calendar-person-label {
+    -fx-background-color: #4c6fa6;
+    -fx-border-style: hidden hidden solid hidden ;
+    -fx-border-color: #32496e;
+    -fx-border-width: 1;
+}
+
+.calendar-schedule-text {
+    -fx-font-size: 10px;
+}
+
+.calendar-time {
+    -fx-border-style: hidden hidden hidden solid;
+    -fx-border-color: #1c1f24;
+    -fx-border-width: 1;
+}
+
 .list-cell:filled:selected {
     -fx-background-color: #424d5f;
 }

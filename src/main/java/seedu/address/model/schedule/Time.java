@@ -56,6 +56,10 @@ public abstract class Time implements Comparable<Time> {
         return value;
     }
 
+    public String toTimeString() {
+        return value.toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
