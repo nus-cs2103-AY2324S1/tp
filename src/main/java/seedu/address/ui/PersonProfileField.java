@@ -3,9 +3,9 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 
-public class PersonProfileField extends UiPart<HBox> {
+public class PersonProfileField extends UiPart<AnchorPane> {
     private static final String FXML = "PersonProfileField.fxml";
 
     @FXML private Label valueLabel;

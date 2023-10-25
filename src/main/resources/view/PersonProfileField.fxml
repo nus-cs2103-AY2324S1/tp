@@ -3,10 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox alignment="CENTER" fillHeight="true" spacing="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS">
-   <Label fx:id="keyLabel" text="PLACEHOLDER LEFT" />
-   <StackPane HBox.hgrow="ALWAYS">
-      <TextField fx:id="valueField" onAction="#handleOnAction" />
-      <Label fx:id="valueLabel" text="PLACEHOLDER RIGHT" />
-   </StackPane>
-</HBox>
+<AnchorPane VBox.vgrow="ALWAYS" maxWidth="Infinity" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" style="-fx-border-color: red;">
+   <SplitPane dividerPositions="0.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" maxWidth="Infinity">
+      <Pane maxWidth="Infinity" HBox.hgrow="ALWAYS">
+         <Label fx:id="keyLabel" text="PLACEHOLDER LEFT" />
+      </Pane>
+      <StackPane maxWidth="Infinity" HBox.hgrow="ALWAYS">
+         <TextField fx:id="valueField" onAction="#handleOnAction" />
+         <Label fx:id="valueLabel" text="PLACEHOLDER RIGHT" />
+      </StackPane>
+   </SplitPane>
+</AnchorPane>
