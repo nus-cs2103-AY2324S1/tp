@@ -111,7 +111,6 @@ public class ModelManager implements Model {
     @Override
     public void setItem(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         networkBook.setItem(target, editedPerson);
     }
 

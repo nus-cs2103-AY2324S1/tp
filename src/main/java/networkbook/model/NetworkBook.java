@@ -6,14 +6,16 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import networkbook.commons.util.ToStringBuilder;
+import networkbook.model.person.Email;
 import networkbook.model.person.Person;
+import networkbook.model.util.Identifiable;
 import networkbook.model.util.UniqueList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the network-book level
  * Duplicates are not allowed (by .isSame comparison)
  */
-public class NetworkBook implements ReadOnlyNetworkBook {
+public class NetworkBook implements ReadOnlyNetworkBook, Identifiable<NetworkBook> {
 
     private final UniqueList<Person> persons;
     public NetworkBook() {
@@ -98,6 +100,15 @@ public class NetworkBook implements ReadOnlyNetworkBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
+    public boolean isSame(NetworkBook another) {
+        return this == another;
+    }
+
+    @Override
+    public String getValue() {
+        return "";
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -142,6 +142,18 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
         return internalList.iterator();
     }
 
+    public int size() {
+        return internalList.size();
+    }
+
+    public T get(int index) {
+        return internalList.get(index);
+    }
+
+    public void clearRange(int fromIndex, int toIndex) {
+        internalList.subList(fromIndex, toIndex).clear();
+    }
+
     /**
      * Creates a copy of this list.
      * This copy can be used to avoid modifying this list.
