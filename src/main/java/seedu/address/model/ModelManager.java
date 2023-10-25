@@ -177,6 +177,12 @@ public class ModelManager implements Model {
         return filteredBands;
     }
 
+    @Override
+    public void updateFilteredBandList(Predicate<Band> predicate) {
+        requireNonNull(predicate);
+        filteredBands.setPredicate(predicate);
+    }
+
     /**
      * Returns an unmodifiable view of the list of {@code Band} backed by the internal list of
      * {@code versionedAddressBook}. Returns an unmodifiable view of the list of {@code Musician} backed by the internal list of

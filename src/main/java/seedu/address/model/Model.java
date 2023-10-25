@@ -91,6 +91,8 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered band list */
     ObservableList<Band> getFilteredBandList();
 
+    void updateFilteredBandList(Predicate<Band> predicate);
+
     /**
      * Updates the filter of the filtered band list to filter by the given {@code predicate}.
      * Updates the musician list to reflect the members of the filtered band.
