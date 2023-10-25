@@ -61,7 +61,6 @@ public class EditCommand extends Command {
         if (editedFlashCard == null || model.hasFlashCard(editedFlashCard)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_FLASHCARD);
         }
-        System.out.println("here");
         model.setFlashCard(flashCardToEdit, editedFlashCard);
         model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         return new CommandResult(String.format(MESSAGE_EDIT_FLASHCARD_SUCCESS, Messages.format(editedFlashCard)));
