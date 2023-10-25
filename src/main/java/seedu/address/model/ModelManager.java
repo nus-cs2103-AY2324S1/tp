@@ -238,7 +238,11 @@ public class ModelManager implements Model {
         // both throw exception if not exists exact match
         Person person = addressBook.getPerson(personName);
         Group group = addressBook.getGroup(groupName);
+//        System.out.println(person);
+//        System.out.println(group.getGroupMates().size());
         this.unassignGroup(person, group);
+        //does not show
+//        System.out.println("hi");
         forceUpdateList();
         Pair<Person, Group> output = new Pair<>(person, group);
         return output;

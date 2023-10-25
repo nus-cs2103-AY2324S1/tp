@@ -33,6 +33,12 @@ public class Group {
         this.groupRemark = new GroupRemark(" ");
     }
 
+    public Group(String groupName, GroupRemark groupRemark) {
+        requireNonNull(groupName);
+        this.groupName = groupName;
+        this.groupRemark = groupRemark;
+    }
+
     /**
      * Name field must be present and not null.
      */

@@ -184,6 +184,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return groups.getGroup(groupName);
     }
 
+    public Group getGroup(Group group) throws CommandException {
+        // group list get that group object with same name
+        return groups.getGroup(group.getGroupName());
+    }
+
 
     @Override
     public ObservableList<Person> getPersonList() {
