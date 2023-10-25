@@ -280,9 +280,8 @@ Deletes a tutor in the address book based on their index number in the table.
   Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40`
 
 **Error messages**:
-* `Invalid command format!`: No tutor index provided.
-* `Index number given is out of range`: Given tutor index is out of range.
-* `Invalid parameter given`: Parameter given is not a numerical value.
+* `Invalid command format!`: No tutor index provided or parameter given is not a numerical value.
+* `Tutor index provided is out of range`: Given tutor index is out of range.
 
 ### Adding a schedule: `add-s`
 
@@ -388,6 +387,34 @@ Displays a list of all schedules in the address book in a table format.
 * No error messages as anything typed behind is ignored.
     
 </div>
+
+### Marking a schedule: `mark`
+
+Adds the status of a schedule in the address book based on their index number in the table of schedules listed.
+
+![mark schedule](images/markSchedule.png)
+
+**Format:** `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`
+
+**Example:**
+* `mark 5 m/0` adds the MISSED status to the schedule indexed at 5 in the schedule list.
+* `mark 5 m/1` adds the COMPLETED status to the schedule indexed at 5 in the schedule list.
+* `list-s` followed by `mark 1 m/0` adds the MISSED status to the schedule indexed at 1 in the schedule list.
+* `list-s` followed by `mark 1 m/1` adds the COMPLETED status to the schedule indexed at 1 in the schedule list.
+
+**Acceptable values for each parameter:**
+* `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
+* `SCHEDULE_STATUS`: Only numerical inputs of 0 to indicate MISSED and 1 to indicate COMPLETED status of the 
+specified schedule.
+
+**Expected Output:**
+* `Marked Schedule as Completed: John Doe; Start Time: Sep 15 2023 09:00; End Time: Sep 15 2023 11:00`
+* `Marked Schedule as Missed: Betsy Crowe; Start Time: Sep 16 2023 17:00; End Time: Sep 15 2023 19:00`
+
+**Error Messages:**
+* `Invalid command format!`: Invalid or missing SCHEDULE_INDEX OR SCHEDULE STATUS or both.
+* `Index number given is out of range`: The schedule index provided is invalid.
+* `Status has to be either MISSED (m/0) or COMPLETED (m/1)`: The schedule status provided is invalid.
 
 ### Unmarking a schedule: `unmark`
 
