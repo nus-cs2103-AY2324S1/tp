@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PatientBuilder;
 
 public class ModelManagerTest {
 
@@ -159,5 +160,18 @@ public class ModelManagerTest {
         // different Selected Person -> returns false
         modelManager.updateSelectedPerson(modelManager.getFilteredPersonList().get(1));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        modelManagerCopy.updateSelectedPerson(modelManagerCopy.getFilteredPersonList().get(1));
+        assertTrue(modelManager.equals(modelManagerCopy));
+
+        ModelManager differentModelManager = new ModelManager(differentAddressBook, userPrefs);
+        assertTrue(differentModelManager.equals(differentModelManager));
+        differentModelManager.addPerson(modelManager.getFilteredPersonList().get(0));
+        differentModelManager.addPerson(modelManager.getFilteredPersonList().get(1));
+        assertFalse(modelManager.equals(differentModelManager));
+        assertFalse(differentModelManager.equals(modelManager));
+
+        differentModelManager.updateSelectedPerson(differentModelManager.getFilteredPersonList().get(1));
+        assertTrue(modelManager.equals(differentModelManager));
     }
 }
