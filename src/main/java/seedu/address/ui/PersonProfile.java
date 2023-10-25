@@ -107,10 +107,18 @@ public class PersonProfile extends UiPart<Region> {
     }
 
     private void initialize() {
+        //clear
+        ObservableList<Node> vboxChildren = vbox.getChildren();
+        vboxChildren.clear();
+
+        //header
+        PersonProfileHeader header = new PersonProfileHeader();
+        vboxChildren.add(header.getRoot());
+
+        //fields
         Arrays.stream(Field.values()).forEach(field ->
                 uiElements.put(field, new PersonProfileField(this, field))
         );
-        ObservableList<Node> vboxChildren = vbox.getChildren();
         uiElements.values().stream()
                 .map(UiPart::getRoot)
                 .forEach(vboxChildren::add);
