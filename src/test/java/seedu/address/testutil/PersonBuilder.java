@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.ParserUtil.FORMAT;
+
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,12 +23,14 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_LASTTIME = "02.10.2023 1000";
     public static final String DEFAULT_STATUS = "";
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private LocalDateTime lastContactedTime;
     private Status status;
     private Remark remark;
     private Set<Tag> tags;
@@ -37,6 +42,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        lastContactedTime = LocalDateTime.parse(DEFAULT_LASTTIME, FORMAT);
         status = new Status(DEFAULT_STATUS);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
@@ -49,6 +55,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        lastContactedTime = personToCopy.getLastContactedTime().getTime();
         status = personToCopy.getStatus();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
@@ -95,6 +102,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code LastContactedTime} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLastContactedTime(String lastContactedTime) {
+        this.lastContactedTime = LocalDateTime.parse(lastContactedTime, FORMAT);
+        return this;
+    }
+
+    /**
      * Sets the {@code Status} of the {@code Person} that we are building.
      */
     public PersonBuilder withStatus(String status) {
@@ -103,7 +118,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, status, remark, tags);
+        return new Person(name, phone, email, lastContactedTime, status, remark, tags);
     }
 
 }

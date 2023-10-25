@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -41,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_LOCATION_MEETING1 = "Zoom call url";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_LASTTIME_AMY = "20.09.2023 1100";
+    public static final String VALID_LASTTIME_BOB = "20.09.2023 1200";
     public static final String VALID_START_MEETING1 = "20.09.2023 1000";
     public static final String VALID_STATUS_AMY = "";
     public static final String VALID_STATUS_BOB = "Prospective";
@@ -61,6 +64,8 @@ public class CommandTestUtil {
     public static final String LOCATION_DESC_MEETING1 = " " + PREFIX_LOCATION + VALID_LOCATION_MEETING1;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String LASTTIME_DESC_AMY = " " + PREFIX_LASTTIME + VALID_LASTTIME_AMY;
+    public static final String LASTTIME_DESC_BOB = " " + PREFIX_LASTTIME + VALID_LASTTIME_BOB;
     public static final String START_DESC_MEETING1 = " " + PREFIX_START + VALID_START_MEETING1;
     public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + "NIL";
     public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_BOB;
@@ -77,6 +82,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION + " "; // blank is not allowed in Location
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_LASTTIME_DESC = " " + PREFIX_LASTTIME + "20.21.2023"; // wrong LocalDateTime format
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "Insured"; // not in predefined status list
     public static final String INVALID_START_DESC = " " + PREFIX_START + "99.99.9999 9999";
     public static final String INVALID_END_DESC = " " + PREFIX_END + "99.99.9999 9999";
@@ -91,10 +97,10 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withLastContactedTime(VALID_LASTTIME_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withLastContactedTime(VALID_LASTTIME_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

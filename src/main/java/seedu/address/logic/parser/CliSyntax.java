@@ -17,5 +17,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_LOCATION = new Prefix("a/");
     public static final Prefix PREFIX_START = new Prefix("s/");
     public static final Prefix PREFIX_END = new Prefix("e/");
+    public static final Prefix PREFIX_LASTTIME = new Prefix("l/");
 
 }

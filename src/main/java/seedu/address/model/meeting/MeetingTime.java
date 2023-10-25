@@ -16,7 +16,7 @@ public class MeetingTime {
 
     public static final String MESSAGE_CONSTRAINTS = "MeetingTimes should be in LocalDateTime"
             + " and start cannot be after end";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy, kkmm");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy, HHmm");
     private final LocalDateTime start;
     private final LocalDateTime end;
 

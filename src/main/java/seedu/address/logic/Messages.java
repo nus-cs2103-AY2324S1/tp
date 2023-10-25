@@ -46,6 +46,8 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
+                .append("; Last Contacted Time: ")
+                .append(person.getLastContactedTime())
                 .append("; Status: ")
                 .append(person.getStatus())
                 .append("; Remark: ")

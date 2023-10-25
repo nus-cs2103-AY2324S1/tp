@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -20,6 +21,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final LastContactedTime lastContactedTime;
 
     // Data fields
     private final Remark remark;
@@ -29,11 +31,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Status status, Remark remark, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, LocalDateTime time, Status status, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, status, remark, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.lastContactedTime = new LastContactedTime(time);
         this.status = status;
         this.remark = remark;
         this.tags = new HashSet<>(tags);
@@ -49,6 +52,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public LastContactedTime getLastContactedTime() {
+        return lastContactedTime;
     }
 
     public Remark getRemark() {
@@ -99,6 +106,7 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
+                && lastContactedTime.equals(otherPerson.lastContactedTime)
                 && status.equals(otherPerson.status)
                 && remark.equals(otherPerson.remark)
                 && tags.equals(otherPerson.tags);
@@ -107,7 +115,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, status, remark, tags);
+        return Objects.hash(name, phone, email, lastContactedTime, status, remark, tags);
     }
 
     @Override
@@ -116,6 +124,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
+                .add("last contacted time", lastContactedTime)
                 .add("status", status)
                 .add("remark", remark)
                 .add("tags", tags)
@@ -126,7 +135,7 @@ public class Person {
      * Returns detailed information of Person for viewc command.
      */
     public String toDisplayString() {
-        return String.format("Name: %s\nPhone: %s\nEmail: %s\nStatus: %s\nRemark: %s",
-                name, phone, email, status, remark);
+        return String.format("Name: %s\nPhone: %s\nEmail: %s\nLast Contacted Time: %s\nStatus: %s\nRemark: %s",
+                name, phone, email, lastContactedTime, status, remark);
     }
 }
