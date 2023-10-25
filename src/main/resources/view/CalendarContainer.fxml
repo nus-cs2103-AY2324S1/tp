@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-</AnchorPane>
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane fx:id="calendarLabelPlaceholder" minWidth="50" HBox.hgrow="NEVER"/>
+    <GridPane fx:id="eventSpace" minWidth="300" HBox.hgrow="ALWAYS"/>
+</HBox>

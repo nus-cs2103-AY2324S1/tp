@@ -56,7 +56,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private GridPane calendarPlaceHolder;
+    private GridPane calendarPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -134,7 +134,7 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         CalendarContainer calendarContainer = new CalendarContainer(logic.getCurrentWeekEventList());
-        //calendarPlaceHolder.getChildren().add(calendarContainer.getRoot());
+        calendarPlaceholder.getChildren().add(calendarContainer.getRoot());
     }
 
     /**

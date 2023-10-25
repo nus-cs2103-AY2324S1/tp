@@ -35,33 +35,27 @@
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100"
-                   styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
         <HBox minHeight="300" prefHeight="300" VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border"
-                HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+          <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <padding>
               <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
 
-          <BorderPane minWidth="340" prefWidth="340" styleClass="pane-with-border"
-                      HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+          <BorderPane minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <top>
-              <Label alignment="CENTER" minHeight="40" minWidth="340" prefHeight="40.0" prefWidth="340.0"
-                     styleClass="calendar_header_label" text="Calendar" textAlignment="CENTER"
-                     HBox.hgrow="ALWAYS" VBox.vgrow="NEVER" />
+              <Label alignment="CENTER" minHeight="40" minWidth="340" prefHeight="40.0" prefWidth="340.0" styleClass="calendar_header_label" text="Calendar" textAlignment="CENTER" BorderPane.alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER" />
             </top>
 
             <center>
-              <GridPane fx:id="calendarPlaceholder" minWidth="340" prefWidth="340" styleClass="pane-without-border"
-                        HBox.hgrow="NEVER" VBox.vgrow="ALWAYS">
+              <GridPane fx:id="calendarPlaceholder" minWidth="340" prefWidth="340" styleClass="pane-without-border" HBox.hgrow="NEVER" VBox.vgrow="ALWAYS">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
