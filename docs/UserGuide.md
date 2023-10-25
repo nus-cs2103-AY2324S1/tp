@@ -234,14 +234,17 @@ Format: `load f/FILE_NAME`
 * File name is case-insensitive
 
 Examples:
-* `load f/export-v1` loads the export-v1.json file in the data folder.
+* `load f/t2` loads the t2.json file in the data folder.
+
+* ![load_outcome](images/load-outcome.png)
+
+* ![t2_contents](images/t2-contents.png)
 
 ### Configuring Class Manager: `config`
 
 Configures Class Manager 2023 with the module information, such as tutorial count and assignment count.
 
 Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
-* Parameters can be in any order.
 * Parameters must be zero or greater.
 
 Examples:
@@ -268,17 +271,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
-**Tag**    | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`
-**Lookup** | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`
-**Mark**   | `mark TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark 1 s/A0245234A`
-**View**   | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`
-**Config** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT` <br> e.g. `config #t/13 #a/5`
-**List**   | `list`
-**Help**   | `help`
-**Load**   | `load f/FILE_NAME`
+| Action     | Format, Examples                                                                                                                                   |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                            |
+| **Delete** | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                            |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                  |
+| **Tag**    | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                            |
+| **Lookup** | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                  |
+| **Mark**   | `mark TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark 1 s/A0245234A`                                                                              |
+| **View**   | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                   |
+| **List**   | `list`                                                                                                                                             |
+| **Help**   | `help`                                                                                                                                             |
+| **Load**   | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                     |
+| **Config** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                        |
