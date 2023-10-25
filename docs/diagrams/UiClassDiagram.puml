@@ -52,7 +52,10 @@ HelpWindow --|> UiPart
 
 FlashcardBox ..> Model
 FlashcardBoxNoButton ..> Model
-UiManager -right-> Logic
+
+FlashcardBox --> "1" MainWindow
+FlashcardBoxNoButton --> "1" MainWindow
+UiManager -right-> MainWindow
 MainWindow -left-> Logic
 
 FlashcardListPanel -[hidden]left- HelpWindow
