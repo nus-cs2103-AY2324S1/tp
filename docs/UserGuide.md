@@ -76,8 +76,14 @@ Adds a person to the FumbleLog.
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of groups (including 0)
+<div markdown="span" class="alert alert-primary">
+    :bulb: **Tip:**
+    A person can have any number of groups (including 0)
+</div>
+
+<div markdown="span" class="alert alert-secondary">
+    :bulb: **Tip:**
+    The parameters are optional, but at least the name must be provided.
 </div>
 
 Examples:
@@ -86,7 +92,7 @@ Examples:
 * `add n/Jonathan`
 
 Acceptable values for each parameter:
-* `n/NAME`: Name of the person
+* `n/NAME`: Name of the person (Compulsory)
 * `p/PHONE_NUMBER`: A valid phone number (Optional)
 * `e/EMAIL`: A valid email address (Optional)
 * `a/ADDRESS`: Address of the person (Optional) 
@@ -104,7 +110,7 @@ Expected output when the command fails
 
 Edits an existing person in the FumbleLog.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
+Format: `edit PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GROUP]…​`
 
 * **At least one of the optional parameters must be provided.**
 * Existing values will be updated to the input values.
@@ -118,7 +124,7 @@ Examples:
 *  `edit 3 n/Betsy Crower b/2023-09-29` Edits the name of the 3rd person to be `Betsy Crower` and changes the birthday to 29th Sep 2023. Any events that Betsy Crower is assigned to is also updated with this new name.
 
 Acceptable values for each parameter:
-* `INDEX`: A positive integer
+* `PERSON_INDEX`: A positive integer
 * `n/NAME`: Name of the person (Optional)
 * `p/PHONE`: A valid phone number (Optional)
 * `e/EMAIL`: A valid email address (Optional)
@@ -165,15 +171,18 @@ Examples:
 Deletes the specified person from FumbleLog.
 When a person is deleted, any [events](#commands-for-events) that the person is assigned to will also be updated, i.e. the person will be unassigned from the event.
 
-Format: `delete INDEX`
+Format: `delete PERSON_INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the person at the specified `PERSON_INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the FumbleLog.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command. i.e Any person named `Betsy` at index `1` will be deleted.
+
+Acceptable values for each parameter:
+* `PERSON_INDEX`: A positive integer
 
 Expected output when a command succeeds:
 * Input: `delete 1`
@@ -271,7 +280,7 @@ Expected output when the command fails:
 
 Deletes a specified event from the FumbleLog.
 
-Format: `delete_meeting EVENT_INDEX`
+Format: `delete_event EVENT_INDEX`
 
 * Deletes the meeting at the specified `EVENT_INDEX`.
 
@@ -344,8 +353,8 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add Person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague`
-**Edit Person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GROUP]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Delete Person** | `delete INDEX`<br> e.g., `delete 3`
+**Edit Person** | `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GROUP]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete Person** | `delete PERSON_INDEX`<br> e.g., `delete 3`
 **List Persons** | `list`
 **Find Person** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
