@@ -80,11 +80,7 @@ public class SampleDataUtil {
         teamGamma.addDeveloper(new IdentityCode("5"));
         teamGamma.addDeveloper(new IdentityCode("6"));
 
-        Team teamDelta = new Team(new IdentityCode("4"), "Team Delta");
-        teamDelta.addDeveloper(new IdentityCode("7"));
-        teamDelta.addDeveloper(new IdentityCode("8"));
-
-        return new Team[] {teamAlpha, teamBeta, teamGamma, teamDelta};
+        return new Team[] {teamAlpha, teamBeta, teamGamma};
     }
 
     public static ReadOnlyTeamBook getSampleTeamBook() {
