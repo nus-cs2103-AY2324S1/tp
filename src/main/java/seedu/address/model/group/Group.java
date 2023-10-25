@@ -203,10 +203,23 @@ public class Group {
      * @param duration represent duration in minutes
      * @return TimeInterval that can fit duration specified
      */
-    public TimeIntervalList findFreeTime(Duration duration) {
+    public TimeIntervalList findFreeTime(Duration duration) throws CommandException {
         // compare person to person get overlap
         // will use one getter for freeTime
         TimeIntervalList freeTime = new TimeIntervalList();
+        // nobody in group
+        if (listOfGroupMates.isEmpty()) {
+            throw new CommandException("Group is empty");
+        }
+        // only 1 person in group
+        if (listOfGroupMates.size() == 1) {
+            Person person = listOfGroupMates.get(0);
+            TimeIntervalList personFreeTime = person.getTime();
+            // check whether fits duration or not
+            personFreeTime = personFreeTime.fitDuration(duration);
+            return personFreeTime;
+        }
+
         for (int i = 0; i < listOfGroupMates.size(); i++) {
            if (i + 1 == listOfGroupMates.size()) {
                break;
@@ -216,7 +229,7 @@ public class Group {
            TimeIntervalList first = firstPerson.getTime();
            TimeIntervalList second = secondPerson.getTime();
            // uninitialised freeTime e.g. first and second person in group
-           if (freeTime == null) {
+           if (freeTime.isEmpty()) {
                freeTime = first.findOverlap(second, duration);
            } else {
                freeTime = freeTime.findOverlap(second, duration);

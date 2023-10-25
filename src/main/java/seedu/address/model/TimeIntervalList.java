@@ -114,10 +114,25 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     public void getMessage(StringBuilder br, String format) {
         int intervalCount = 1;
         for (TimeInterval t: this.internalList) {
-            br.append(br.append(String.format(format, intervalCount, t.toString())));
+            br.append(String.format(format, intervalCount, t.toString()));
             intervalCount++;
         }
 
+    }
+
+    /**
+     * Filter a TimeIntervalList to contain only intervals that fit the duration
+     * @param duration represent time in minutes
+     * @return TimeIntervalList with duration greater than duration specified
+     */
+    public TimeIntervalList fitDuration(Duration duration) {
+        TimeIntervalList personTime = new TimeIntervalList();
+        for (TimeInterval interval: internalList) {
+            if (interval.allows(duration)) {
+                personTime.addTime(interval);
+            }
+        }
+        return personTime;
     }
 
     public TimeIntervalList findOverlap(TimeIntervalList otherTime, Duration duration) {
@@ -131,7 +146,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
         while (p1 < this.internalList.size() && p2 < otherTime.internalList.size()) {
             TimeInterval firstListInterval = this.internalList.get(p1);
-            TimeInterval secondListInterval = this.internalList.get(p2);
+            TimeInterval secondListInterval = otherTime.internalList.get(p2);
 
             boolean overLap = firstListInterval.isTimeIntervalOverlapWithTimeInterval(secondListInterval);
             // given 2 intervals, return the one with smaller end to increment pointer
