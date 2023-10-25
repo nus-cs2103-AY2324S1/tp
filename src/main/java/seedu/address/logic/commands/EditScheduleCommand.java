@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
+import static seedu.address.model.schedule.Schedule.MESSAGE_CONSTRAINTS;
 
 import java.util.List;
 import java.util.Objects;
@@ -67,7 +68,13 @@ public class EditScheduleCommand extends Command {
         }
 
         Schedule scheduleToEdit = lastShownList.get(index.getZeroBased());
-        Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor);
+        Schedule editedSchedule;
+
+        try {
+            editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(MESSAGE_CONSTRAINTS);
+        }
 
         boolean hasScheduleClash =
             model.getAddressBook().getScheduleList().stream().filter(schedule -> !schedule.equals(scheduleToEdit))

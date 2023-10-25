@@ -39,10 +39,26 @@ public class EditScheduleDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code StartTime} of the {@code EditScheduleDescriptor} that we are building.
+     */
+    public EditScheduleDescriptorBuilder withStartTime(StartTime startTime) {
+        descriptor.setStartTime(startTime);
+        return this;
+    }
+
+    /**
      * Sets the {@code EndTime} of the {@code EditScheduleDescriptor} that we are building.
      */
     public EditScheduleDescriptorBuilder withEndTime(String endTime) {
         descriptor.setEndTime(new EndTime(LocalDateTime.parse(endTime)));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EndTime} of the {@code EditScheduleDescriptor} that we are building.
+     */
+    public EditScheduleDescriptorBuilder withEndTime(EndTime endTime) {
+        descriptor.setEndTime(endTime);
         return this;
     }
 
