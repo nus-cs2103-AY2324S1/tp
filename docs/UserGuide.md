@@ -110,11 +110,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [g/GRO
 * Existing values will be updated to the input values.
 * When editing groups, the existing groups of the person will be removed i.e adding of groups is not cumulative.
 * You can remove all the person’s groups by typing `g/` without specifying any groups after it.
+* When you edit a person's name, the person's name will be updated in all [events](#commands-for-events) that the person is assigned to.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower g/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing groups.
-*  `edit 3 n/Betsy Crower b/2023-09-29` Edits the name of the 3rd person to be `Betsy Crower` and changes the birthday to 29th Sep 2023.
+*  `edit 2 n/Betsy Crower g/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing groups. Any events that Betsy Crower is assigned to is also updated with this new name.
+*  `edit 3 n/Betsy Crower b/2023-09-29` Edits the name of the 3rd person to be `Betsy Crower` and changes the birthday to 29th Sep 2023. Any events that Betsy Crower is assigned to is also updated with this new name.
 
 Acceptable values for each parameter:
 * `INDEX`: A positive integer
@@ -161,7 +162,8 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the FumbleLog.
+Deletes the specified person from FumbleLog.
+When a person is deleted, any [events](#commands-for-events) that the person is assigned to will also be updated, i.e. the person will be unassigned from the event.
 
 Format: `delete INDEX`
 
@@ -171,7 +173,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the FumbleLog.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command. i.e Any person named `Betsy` at index `1` will be deleted.
 
 Expected output when a command succeeds:
 * Input: `delete 1`
@@ -188,9 +190,12 @@ Add an event to the events list in FumbleLog.
 
 Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`
 
-- `START_TIME` and `END_TIME` are optional, however, **`START_TIME` must be coupled with `END_TIME`**.
-- `PERSON` is optional, however only persons that exist can be added.
+- `START_TIME` and `END_TIME` are optional.
+- `PERSON_NAME` is optional and multiple persons can be added at once, however only persons that exist can be added.
 - `GROUP` is optional, however only groups that exist can be added.
+- The given `DATE`, `START_TIME` and `END_TIME` cannot be a time in the past.
+- The given `START_TIME` must be before the given `END_TIME`.
+- If the meeting is added successfully, it will automatically be sorted by date and time with the earliest meeting at the top of the list.
 - All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
 - All time are to be in the format `HHmm`. i.e. 1400 for 2pm
 
@@ -215,6 +220,8 @@ Expected output when the command fails:
   add_event: Adds an event to the address book.
   Parameters: m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/NAME]... [g/GROUP]...
   Example: add_event m/FumbleLog Meeting d/2020-10-30 s/1000 e/1200 n/Ken n/Yuheng g/Team2 `
+* * `You cannot enter a time that is before the current time!` - When the given `DATE`, `START_TIME` and `END_TIME` is before the current time.
+* `You cannot enter an end time that is before the start time!` - When the given `START_TIME` is after the given `END_TIME`.
 
 ### Editing an event : `edit_event`
 
@@ -227,7 +234,7 @@ Format: `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/E
 * The input values will replace the existing values, except for `PERSON` AND `GROUP`.
 * `PERSON` and `GROUP` edits are cumulative and will add to the current list of persons and groups.
   Use the unassign commands, i.e. `u/PERSON`, if you would like to unassign any person or group.
-* Only `PERSON` and `GROUP` that exist can be added to the event.
+* If there are any changes to the meeting date and time, the meeting will be automatically sorted by date and time with the earliest meeting at the top of the list.
 * All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
 * All time are to be in the format `HHmm`. i.e. 1400 for 2pm
 
@@ -242,10 +249,10 @@ Acceptable values for each parameter:
 * `[d/DATE]`: A valid date in the format `yyyy-MM-dd`
 * `[s/START_TIME]`: A valid time in the format `HHmm`
 * `[e/END_TIME]`: A valid time in the format `HHmm`
-* `[n/PERSON_NAME]`: Name of the person to be assigned.
-* `[u/PERSON_NAME]`: Name of the person to be unassigned.
-* `[g/GROUP]`: Name of the group to be assigned.
-* `[ug/GROUP]`: Name of the group to be unassigned.
+* `[n/PERSON_NAME]`: Name of the person(s) to be assigned.
+* `[u/PERSON_NAME]`: Name of the person(s) to be unassigned.
+* `[g/GROUP]`: Name of the group(s) to be assigned.
+* `[ug/GROUP]`: Name of the group(s) to be unassigned.
 
 Expected output when the command succeeds:
 * Input: `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
@@ -257,6 +264,8 @@ Expected output when the command fails:
   Existing values will be overwritten by the input values, except for the list of assigned persons and the list of assigned groups
   Parameters: INDEX (must be a positive integer) [m/EVENT_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/NAME]... [u/NAME]... [g/GROUP]... [ug/GROUP]...
   Example: edit_event 1 m/FumbleLog Meeting d/2023-10-13 n/Ken g/Team2 `
+* * `You cannot enter a time that is before the current time!` - When the given `DATE`, `START_TIME` and `END_TIME` is before the current time.
+* `You cannot enter an end time that is before the start time!` - When the given `START_TIME` is after the given `END_TIME`.
 
 ### Deleting an event : `delete_event`
 
@@ -281,37 +290,6 @@ Expected output when the command fails:
   delete_event: Deletes the event identified by the index number used in the displayed event list.
   Parameters: INDEX (must be a positive integer)
   Example: delete_event 1`
-
-## Commands between Events and Persons
-### Assign person to the meeting : `assign`
-
-Assigns a person to a meeting.
-
-Format: `assign MEETING_INDEX n/PERSON_NAME`
-
-* Assigns the person with the specified `PERSON_NAME` to the meeting at the specified `MEETING_INDEX`.
-
-Examples:
-* `assign 1 n/Bob` assigns the person named Bob to the meeting at index 1.
-
-Acceptable values for each parameter:
-* `MEETING_INDEX`: A positive integer
-* `n/MEETING_NAME`: Name of the person to be assigned
-
-### Unassign people from the meeting : `unassign`
-
-Unassigns a person from a meeting.
-
-Format: `unassign MEETING_INDEX n/PERSON_NAME`
-
-* Unassigns the person with the specified `PERSON_NAME` from the meeting at the specified `MEETING_INDEX`.
-
-Examples:
-* `unassign 1 n/Bob` unassigns the person named Bob from the meeting at index 1.
-
-Acceptable values for each parameter:
-* `PERSON_INDEX`: A positive integer
-* `n/MEETING_NAME`: Name of the person to be unassigned
 
 ## General commands
 
@@ -374,8 +352,8 @@ Action | Format, Examples
 ### Commands for Events
 Action | Format, Examples
 --------|------------------
-**Add Meeting** | `add_meeting n/MEETING_DETAILS d/DATE [s/START_TIME] [e/END_TIME]`<br> e.g., `add_meeting n/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
-**Edit Meeting** | `edit_meeting INDEX [n/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME]`<br> e.g., `edit_meeting 1 n/tP week 3 meeting`
+**Add Meeting** | `add_meeting m/MEETING_DETAILS d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_TO_ASSIGN]`<br> e.g., `add_meeting m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/John Doe`
+**Edit Meeting** | `edit_meeting INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_TO_ASSIGN]... [u/PERSON_TO_UNASSIGN]`<br> e.g., `edit_meeting 1 m/tP week 3 meeting n/Mary u/John Doe`
 **Delete Meeting** | `delete_meeting INDEX`<br> e.g., `delete_meeting 1`
 
 ### Commands between Persons and Events
