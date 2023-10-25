@@ -56,3 +56,4 @@ public class JobDetailsPanel extends UiPart<Region> {
         //TODO Initialise Interview List here
     }
 }
+
