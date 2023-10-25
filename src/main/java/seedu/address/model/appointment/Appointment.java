@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.exceptions.InvalidStartEndTimeException;
 import seedu.address.model.student.Name;
 
 /**
@@ -27,8 +28,11 @@ public class Appointment {
      * @param name        The name of the student associated with the appointment.
      * @param description A description of the appointment.
      */
-    public Appointment(Date date, Time startTime, Time endTime, Name name, Description description) {
+    public Appointment(Date date, Time startTime, Time endTime, Name name, Description description)
+            throws InvalidStartEndTimeException {
         requireAllNonNull(date, startTime, endTime, name, description);
+        checkStartEndTime(startTime, endTime);
+        assert startTime.getLocalTime().isBefore(endTime.getLocalTime());
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -54,6 +58,19 @@ public class Appointment {
 
     public Description getDescription() {
         return this.description;
+    }
+
+    /**
+     * Checks the validity of the start and end times of this appointment.
+     *
+     * @param startTime The start time of the appointment.
+     * @param endTime   The end time of the appointment.
+     * @throws InvalidStartEndTimeException If the start time is not before the end time, an exception is thrown.
+     */
+    public void checkStartEndTime(Time startTime, Time endTime) throws InvalidStartEndTimeException {
+        if (!(startTime.getLocalTime().isBefore(endTime.getLocalTime()))) {
+            throw new InvalidStartEndTimeException();
+        }
     }
 
     /**

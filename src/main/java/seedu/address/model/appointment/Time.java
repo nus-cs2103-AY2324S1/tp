@@ -2,6 +2,9 @@ package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.util.DateTimeParser.INPUT_TIME_FORMATTER;
+
+import java.time.LocalTime;
 
 /**
  * Represents the time of an appointment.
@@ -11,7 +14,11 @@ public class Time {
             "Time should follow HH:mm";
     public static final String VALIDATION_REGEX =
             "([01][0-9]|2[0-3]):([0-5][0-9])$";
+
     public final String value;
+
+    /** To facilitate time comparisons. **/
+    public final LocalTime localTime;
 
     /**
      * Constructs a {@code Time}.a
@@ -22,6 +29,7 @@ public class Time {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         value = time;
+        localTime = LocalTime.parse(time, INPUT_TIME_FORMATTER);
     }
 
     /**
@@ -33,6 +41,10 @@ public class Time {
 
     public String getTime() {
         return value;
+    }
+
+    public LocalTime getLocalTime() {
+        return localTime;
     }
 
     @Override

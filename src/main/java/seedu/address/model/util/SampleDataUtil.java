@@ -10,6 +10,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.Description;
 import seedu.address.model.appointment.Time;
+import seedu.address.model.appointment.exceptions.InvalidStartEndTimeException;
 import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
@@ -38,22 +39,26 @@ public class SampleDataUtil {
     }
 
     public static Appointment[] getSampleAppointments() {
-        return new Appointment[] {
-            new Appointment(new Date("2023-10-14"), new Time("15:30"), new Time("16:30"),
-                new Name("Alex Yeoh"), new Description("First Session")),
-            new Appointment(new Date("2023-10-15"), new Time("10:00"), new Time("11:00"),
-                new Name("Bernice Yu"), new Description("Third Session")),
-            new Appointment(new Date("2023-10-16"), new Time("14:45"), new Time("15:45"),
-                new Name("David Li"), new Description("Check-up")),
-            new Appointment(new Date("2023-10-17"), new Time("11:20"), new Time("12:20"),
-                new Name("Irfan Ibrahim"), new Description("Follow-up")),
-            new Appointment(new Date("2023-10-18"), new Time("09:30"), new Time("10:30"),
-                new Name("Roy Balakrishnan"), new Description("Check-up")),
-            new Appointment(new Date("2023-10-19"), new Time("16:15"), new Time("17:15"),
-                new Name("Alex Yeoh"), new Description("Second Session")),
-            new Appointment(new Date("2023-10-20"), new Time("13:00"), new Time("14:00"),
-                new Name("Charlotte Oliveiro"), new Description("Check-up")),
-        };
+        try {
+            return new Appointment[] {
+                new Appointment(new Date("2023-10-14"), new Time("15:30"), new Time("16:30"),
+                        new Name("Alex Yeoh"), new Description("First Session")),
+                new Appointment(new Date("2023-10-15"), new Time("10:00"), new Time("11:00"),
+                        new Name("Bernice Yu"), new Description("Third Session")),
+                new Appointment(new Date("2023-10-16"), new Time("14:45"), new Time("15:45"),
+                        new Name("David Li"), new Description("Check-up")),
+                new Appointment(new Date("2023-10-17"), new Time("11:20"), new Time("12:20"),
+                        new Name("Irfan Ibrahim"), new Description("Follow-up")),
+                new Appointment(new Date("2023-10-18"), new Time("09:30"), new Time("10:30"),
+                        new Name("Roy Balakrishnan"), new Description("Check-up")),
+                new Appointment(new Date("2023-10-19"), new Time("16:15"), new Time("17:15"),
+                        new Name("Alex Yeoh"), new Description("Second Session")),
+                new Appointment(new Date("2023-10-20"), new Time("13:00"), new Time("14:00"),
+                        new Name("Charlotte Oliveiro"), new Description("Check-up")),
+            };
+        } catch (InvalidStartEndTimeException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static ReadOnlyWellNus getSampleAddressBook() {

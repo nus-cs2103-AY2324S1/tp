@@ -1,14 +1,19 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_START_END_TIME;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.Description;
 import seedu.address.model.appointment.Time;
+import seedu.address.model.appointment.exceptions.InvalidStartEndTimeException;
 import seedu.address.model.student.Name;
+
 
 /**
  * Jackson-friendly version of {@link Appointment}.
@@ -95,7 +100,11 @@ public class JsonAdaptedAppointment {
         }
         final Description modelDescription = new Description(description);
 
-        return new Appointment(modelDate, modelStartTime, modelEndTime, modelName, modelDescription);
+        try {
+            return new Appointment(modelDate, modelStartTime, modelEndTime, modelName, modelDescription);
+        } catch (InvalidStartEndTimeException e) {
+            throw new ParseException(MESSAGE_INVALID_START_END_TIME);
+        }
     }
 
 }

@@ -4,6 +4,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.Description;
 import seedu.address.model.appointment.Time;
+import seedu.address.model.appointment.exceptions.InvalidStartEndTimeException;
 import seedu.address.model.student.Name;
 
 /**
@@ -85,7 +86,7 @@ public class AppointmentBuilder {
         return this;
     }
 
-    public Appointment build() {
+    public Appointment build() throws InvalidStartEndTimeException {
         return new Appointment(date, startTime, endTime, name, description);
     }
 }

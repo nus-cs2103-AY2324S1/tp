@@ -39,6 +39,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.Description;
 import seedu.address.model.appointment.Time;
+import seedu.address.model.appointment.exceptions.InvalidStartEndTimeException;
 import seedu.address.model.student.Name;
 import seedu.address.testutil.AppointmentBuilder;
 
@@ -46,7 +47,7 @@ public class ScheduleCommandParserTest {
     private ScheduleCommandParser parser = new ScheduleCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
+    public void parse_allFieldsPresent_success() throws InvalidStartEndTimeException {
         Appointment expectedAppointment = new AppointmentBuilder().withName(VALID_NAME_BOB)
                 .withDate(VALID_DATE_BOB).withStartTime("12:00").withEndTime(VALID_END_TIME_BOB)
                 .withDescription(VALID_DESCRIPTION_BOB).build();

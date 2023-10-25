@@ -2,6 +2,10 @@ package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.util.DateTimeParser.INPUT_DATE_FORMATTER;
+
+import java.time.LocalDate;
+
 
 /**
  * Represents the date of an appointment.
@@ -13,6 +17,9 @@ public class Date {
             "^(20[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
     public final String value;
 
+    /** To facilitate filtering Appointments by date. **/
+    public final LocalDate localDate;
+
     /**
      * Constructs a {@code Date}.a
      *
@@ -22,6 +29,7 @@ public class Date {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         value = date;
+        localDate = LocalDate.parse(date, INPUT_DATE_FORMATTER);
     }
 
     /**

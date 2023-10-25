@@ -22,6 +22,8 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX =
             "The appointment index provided is invalid";
+    public static final String MESSAGE_INVALID_START_END_TIME =
+            "Start time must be before end time";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

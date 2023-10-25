@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_START_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
@@ -15,6 +16,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.Description;
 import seedu.address.model.appointment.Time;
+import seedu.address.model.appointment.exceptions.InvalidStartEndTimeException;
 import seedu.address.model.student.Name;
 
 /**
@@ -45,8 +47,13 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        Appointment appointment;
 
-        Appointment appointment = new Appointment(date, startTime, endTime, studentName, description);
+        try {
+            appointment = new Appointment(date, startTime, endTime, studentName, description);
+        } catch (InvalidStartEndTimeException e) {
+            throw new ParseException(MESSAGE_INVALID_START_END_TIME);
+        }
 
         return new ScheduleCommand(appointment);
     }
