@@ -1,4 +1,4 @@
-    ---
+---
 layout: page
 title: User Guide
 ---
@@ -8,12 +8,20 @@ optimized for use via a Command Line Interface** (CLI) while still having the be
 Graphical User Interface (GUI). If you can type fast, UNOFAS can help you manage and retrieve client's information
 better than traditional GUI apps.
 
-**Table of Contents**
-* Quick Start
-* Features
-* FAQ
-* Known Issues
-* Command Summary
+## Table of Contents
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * [Help](#viewing-help--help)
+  * [List](#listing-all-persons--list)
+  * [Edit](#editing-a-person--edit)
+  * [Find](#locating-persons-by-name--find)
+  * [Gather](#gathering-clients-emails-by-financial-plan--gather)
+  * [Delete](#deleting-a-clients-contact--delete)
+  * [Clear](#clearing-all-entries--clear)
+  * [Sort](#sorting-of-data--sort)
+* [FAQ](#faq)
+* [Known Issues](#known-issues)
+* [Command Summary](#command-summary)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -47,7 +55,7 @@ better than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -71,8 +79,10 @@ better than traditional GUI apps.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </div>
 
+-----------------------
 ### Viewing help : `help`
 > :warning: Due to new features, help page is currently being updated.
 
@@ -81,7 +91,7 @@ Shows a message explaining how to access the help page, as well as a list of ava
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
+---------------------------
 ### Adding a client's contact: `add`
 
 Add a client’s contacts to address book (name, phone number, email, home address, next-of-kin name, next-of-kin phone number) into Address Book
@@ -103,7 +113,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​`
-
+------------------
 
 ### Listing all persons : `list`
 
@@ -111,6 +121,7 @@ Display a list of all the clients and their contact details
 
 Format: `list`
 
+--------------------------------
 ### Editing a person : `edit`
 
 Edit clients contact fields using an entry index followed by the updated details.
@@ -147,7 +158,7 @@ Address: 23 woodlands ave 123
 Next-of-Kin: Brennan
 Next-of-Kin Phone: 82020202
 `
-
+---------------
 ### Locating persons by name: `find`
 
 Finds persons whose names, tags or financial plans contain any of the specified keywords.
@@ -183,6 +194,7 @@ Examples:
 Successful Output:
 `lowjunyu@gmail.com johndoe@gmail.com`
 
+------------
 ### Deleting a client's contact : `delete`
 
 Deletes the client contact from the contact book by their index.
@@ -202,6 +214,7 @@ Successful Output:
 `Contact Deleted!
 Low Jun Yu is removed.`
 
+----------
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book. UNOFAS will ask for confirmation first to ensure it is not a mistake. Click
@@ -213,19 +226,21 @@ Example:
 * `clear`
   ![confirm clear window](images/confirmClear.png)
 
-### Sorting of data listed on the UI: `sort`
+----------------------------
+### Sorting of data: `sort`
 
 Sorts all the entries with predefined sorting functionalities. After sorting the list, the ordering of the entries will be changed. As a result, performing delete operations that require indexing will reference the new ordering that is currently displayed on the screen.
 
 **Here are the current predefined sorting functions that have been implemented**
 
-* `sort` : sorts list by lexicographical ordering of name (case-insensitive).
+* `name` : sorts list by lexicographical ordering of name (case-insensitive).
 * `appointment`: sorts list by appointment timing in order of the earliest appointment first.
 
 Format: `sort` + `keyword`
 
-Example: `sort sort` performs sorting by lexicographical ordering
+Example: `sort name` performs sorting by lexicographical ordering
 
+------------
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -240,7 +255,7 @@ UNOFAS data are saved in the hard disk automatically after any command that chan
 
 UNOFAS data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
 If your changes to the data file makes its format invalid, UNOFAS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 

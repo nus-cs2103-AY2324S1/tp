@@ -22,8 +22,11 @@ Given below are my contributions to the project.
 * **Enhancements Implemented**: Sort Command to enable the list to be sorted by lexicographical order of name of client
 
 * **Contributions to the UG**:
-    * Added documentation for the features `sort` [\#73]()
+    * Added documentation for the features `sort` [\#81](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/81)
 
 * **Contributions to the DG**: to be added soon.
+* 
+* **Community**:
+  * PRs reviewed (with non-trivial review comments): [\#125](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/125)
 
 * **Contributions to team-based tasks**: to be added soon.
