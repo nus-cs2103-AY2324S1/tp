@@ -46,6 +46,8 @@ public class Messages {
                 .append(booking.getPhone())
                 .append("; Email: ")
                 .append(booking.getEmail())
+                .append("; Remark: ")
+                .append(booking.getRemark())
                 .append("; Tags: ");
         booking.getTags().forEach(builder::append);
         return builder.toString();
