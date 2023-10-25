@@ -15,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Meeting;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
 
@@ -66,6 +67,14 @@ public class AddEventCommand extends Command {
                     listInvalidNames(invalidNames)));
         }
         model.addEvent(this.toAdd); //else, all the names exist
+
+        Set<Group> invalidGroups = model.findInvalidGroups(this.toAdd.getGroups());
+
+        if (!invalidGroups.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_GROUP,
+                    listInvalidGroups(invalidGroups)));
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(toAdd)));
     }
 
@@ -78,4 +87,17 @@ public class AddEventCommand extends Command {
         builder.delete(builder.length() - 2, builder.length()); //removes the last comma
         return builder.toString();
     }
+
+    private String listInvalidGroups(Set<Group> invalidGroups) {
+        StringBuilder builder = new StringBuilder();
+        for (Group group : invalidGroups) {
+            builder.append(group.toString());
+            builder.append(", ");
+        }
+
+        builder.delete(builder.length() - 2, builder.length()); //removes the last comma
+        return builder.toString();
+    }
+
+
 }

@@ -12,7 +12,6 @@ import seedu.address.model.event.EventTime;
 import seedu.address.model.event.Meeting;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Meeting objects.
@@ -64,11 +63,28 @@ public class MeetingBuilder {
     /**
      * Parses the {@code names} into a {@code Set<Name>} and set it to the {@code Meeting} that we are building.
      * @param names names of the persons
-     * @return this
+     * @return this instance of MeetingBuilder
      * @throws ParseException if there were any parsing errors.
      */
     public MeetingBuilder withPerson(String... names) throws ParseException {
-        this.names = SampleDataUtil.getNameSet(names);
+        for (String name : names) {
+            this.names.add(new Name(name));
+        }
+
+        return this;
+    }
+
+    /**
+     * Parses the {@code groups} into a {@code Set<Group>} and set it to the {@code Meeting} that we are building.
+     * @param groups names of the groups to add
+     * @return this instance of MeetingBuilder
+     * @throws ParseException if there were any parsing errors.
+     */
+    public MeetingBuilder withGroups(String... groups) throws ParseException {
+        for (String group : groups) {
+            this.groups.add(new Group(group));
+        }
+
         return this;
     }
 
@@ -104,6 +120,8 @@ public class MeetingBuilder {
         this.endTime = ParserUtil.parseEventTime(endTime);
         return this;
     }
+
+
 
     /**
      * Builds a meeting object.
