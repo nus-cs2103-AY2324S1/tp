@@ -194,6 +194,42 @@ The following activity diagram summarizes what happens when a user executes a `f
     * Less in line with users' expectations of a `filter` command; not as intuitive.
 * We made the choice of Alternative 1 over Alternative 2 as we found that more intuitive commands would be easier for users to learn and eventually master.
 
+### Sort feature
+
+#### Implementation
+
+The `sort` command allows the user to sort the list of students in alphabetical order to enhance efficiency in searching.
+
+When the user enters a sort command, the `AddressBookParser` parses the user's input and returns a `SortCommand`.
+
+The predicate entered by the user can be modelled by the following class: `SortIn`.
+
+The following sequence diagram shows how the `sort` command works. In this example, the user is executing the following command: `sort in/ASC`.
+
+<puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram" />
+
+When the `SortCommandParser` parses the argument to the `SortCommand`, the argument is stored as an attribute of type SortIn in `SortCommand`.
+This predicate is then passed into the current model, using the `updateSortedPersonList()` method.
+
+The following activity diagram summarizes what happens when a user executes a `sort` command:
+
+<puml src="diagrams/FilterActivityDiagram.puml" alt="FilterActivityDiagram" width="250" />
+
+#### Design considerations:
+
+**Aspect: How the predicates specified within a single `FilterCommand` should be combined:**
+
+* **Alternative 1 (current choice):** Combine predicates using the `and()` method from the `Predicate` interface.
+    * Pros:
+        * More in line with what the user would expect from a `filter` command.
+    * Cons:
+        * Users would experience less flexibility when using the command (for instance, the command `filter s/Physics s/Chemistry` cannot be used to display students taking Physics and/or Chemistry at the tuition centre).
+* Alternative 2: Combine predicates using the `or()` method from the `Predicate` interface.
+    * Pros:
+        * Greater flexibility for users when filtering the list of students.
+    * Cons:
+        * Less in line with users' expectations of a `filter` command; not as intuitive.
+* We made the choice of Alternative 1 over Alternative 2 as we found that more intuitive commands would be easier for users to learn and eventually master.
 
 ### \[Proposed\] Undo/redo feature
 

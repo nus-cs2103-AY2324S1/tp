@@ -136,7 +136,7 @@ public class SortCommandTest {
 
         /**
          * Get the student object from filtered student list by index if exists, return
-         * None if the student does not exist.
+         *  None if the student does not exist.
          *
          * @param index the index of the student the caller want to get.
          * @return The student object in the filteredlist with the given name.

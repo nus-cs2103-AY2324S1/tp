@@ -30,7 +30,6 @@ public class SortCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateSortedPersonList(validSortIn);
-
         assertCommandSuccess(new SortCommand(validSortIn), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
