@@ -28,8 +28,8 @@ public class LastContactedTime {
         return lastContactedTime;
     }
 
-    public static String toDisplayFormat(LocalDateTime dateTime) {
-        return dateTime.format(FORMATTER);
+    public static String toDisplayFormat(LastContactedTime dateTime) {
+        return dateTime.lastContactedTime.format(FORMATTER);
     }
 
     /**

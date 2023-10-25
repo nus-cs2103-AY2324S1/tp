@@ -68,6 +68,10 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code LastContactedTime} of the {@code EditPersonDescriptor} that we are
+     * building.
+     */
     public EditPersonDescriptorBuilder withLastContactedTime(String lastContactedTime) {
         descriptor.setLastContactedTime(LocalDateTime.parse(lastContactedTime, FORMAT));
         return this;

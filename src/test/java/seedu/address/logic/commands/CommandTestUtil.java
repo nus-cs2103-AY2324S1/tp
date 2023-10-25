@@ -89,7 +89,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION + " "; // blank is not allowed in Location
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_LASTTIME_DESC = " " + PREFIX_LASTTIME + "20.21.2023"; // wrong LocalDateTime format
+    public static final String INVALID_LASTTIME_DESC = " " + PREFIX_LASTTIME + "20.21.2023"; // wrong DateTime format
     public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "Insured"; // not in predefined status list
     public static final String INVALID_START_DESC = " " + PREFIX_START + "99.99.9999 9999";
     public static final String INVALID_END_DESC = " " + PREFIX_END + "99.99.9999 9999";
