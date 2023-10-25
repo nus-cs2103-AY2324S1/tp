@@ -60,6 +60,13 @@ public class UniqueBandList implements Iterable<Band> {
     }
 
     /**
+     * Returns the band at the index
+     */
+    public Band get(Index index) {
+        requireNonNull(index);
+        return internalList.get(index.getZeroBased());
+    }
+    /**
      * Replaces the band {@code target} in the list with {@code editedMusician}.
      * {@code target} must exist in the list.
      * The band identity of {@code editedBand} must not be the same as another existing band in the list.
