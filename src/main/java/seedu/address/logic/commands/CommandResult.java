@@ -36,10 +36,8 @@ public class CommandResult {
         this.listTeam = listTeam;
         this.listPerson = listPerson;
 
-        assert listTeam && listPerson : "listTeam and listPerson cannot be true at the same time!";
     }
 
-    //public CommandResult(String feedbackToUser, boolean showHelp, boolean exit)
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
