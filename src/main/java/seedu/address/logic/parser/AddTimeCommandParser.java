@@ -32,7 +32,7 @@ public class AddTimeCommandParser implements Parser<AddTimeCommand> {
         ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_ENDINTERVAL));
         timeInterval.add(0, firstInterval);
 
-        if (!TimeInterval.isTimeIntervalOverlap(timeInterval)) {
+        if (TimeInterval.isTimeIntervalOverlap(timeInterval)) {
             throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS_OVERLAP);
         }
 

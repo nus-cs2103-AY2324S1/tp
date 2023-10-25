@@ -248,7 +248,12 @@ public class ModelManager implements Model {
     public void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAddPerson);
         Person person = addressBook.getPerson(toAddPerson.fullName);
-        person.addFreeTime(toAddTime);
+        try {
+            person.addFreeTime(toAddTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
         forceUpdateList();
     }
 
@@ -257,7 +262,12 @@ public class ModelManager implements Model {
                                            ArrayList<TimeInterval> toDeleteTime) throws CommandException {
         requireNonNull(personName);
         Person person = addressBook.getPerson(personName.fullName);
-        person.deleteFreeTime(toDeleteTime);
+        try {
+            person.deleteFreeTime(toDeleteTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
         forceUpdateList();
     }
 
@@ -266,7 +276,12 @@ public class ModelManager implements Model {
                                      ArrayList<TimeInterval> toDeleteTime) throws CommandException {
         requireNonNull(group);
         Group groupToDeleteTime = addressBook.getGroup(group.getGroupName());
-        groupToDeleteTime.deleteTIme(toDeleteTime);
+        try {
+            groupToDeleteTime.deleteTime(toDeleteTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
         forceUpdateList();
     }
 
@@ -297,7 +312,12 @@ public class ModelManager implements Model {
     public void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAdd);
         Group groupToAdd = addressBook.getGroup(toAdd.getGroupName());
-        groupToAdd.addTime(toAddTime);
+        try {
+            groupToAdd.addTime(toAddTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
         forceUpdateList();
     }
 

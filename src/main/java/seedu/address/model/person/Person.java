@@ -206,20 +206,12 @@ public class Person {
         this.timeIntervalList.addTime(toAddFreeTime);
     }
 
-    public void addFreeTime(ArrayList<TimeInterval> toAddFreeTime) {
+    public void addFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
         this.timeIntervalList.addTime(toAddFreeTime);
     }
 
     public void deleteFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
         this.timeIntervalList.deleteTime(toAddFreeTime);
-    }
-
-    public boolean hasFreeTime(TimeInterval timeInterval) {
-        return this.timeIntervalList.hasTime(timeInterval);
-    }
-
-    public void removeFreeTime(TimeInterval timeInterval) {
-        this.timeIntervalList.removeTime(timeInterval);
     }
 
 }

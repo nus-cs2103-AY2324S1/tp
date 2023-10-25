@@ -173,7 +173,7 @@ public class Group {
         this.groupRemark = groupRemark;
     }
 
-    public void addTime(ArrayList<TimeInterval> toAddTime) {
+    public void addTime(ArrayList<TimeInterval> toAddTime) throws CommandException {
         this.timeIntervalList.addTime(toAddTime);
     }
 
@@ -181,5 +181,5 @@ public class Group {
         return this.timeIntervalList;
     }
 
-    public void deleteTIme(ArrayList<TimeInterval> toDeleteTime) throws CommandException { this.timeIntervalList.deleteTime(toDeleteTime);}
+    public void deleteTime(ArrayList<TimeInterval> toDeleteTime) throws CommandException { this.timeIntervalList.deleteTime(toDeleteTime);}
 }

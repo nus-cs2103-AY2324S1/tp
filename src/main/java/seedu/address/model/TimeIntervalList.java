@@ -28,8 +28,21 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return internalList.stream();
     }
 
-    public void addTime(ArrayList<TimeInterval> timeIntervals) {
-        internalList.addAll(timeIntervals);
+    public void addTime(ArrayList<TimeInterval> timeIntervals) throws CommandException{
+        StringBuilder errorCompilation = new StringBuilder();
+        errorCompilation.append("There is a clash in these timings:\n");
+        for (TimeInterval interval : timeIntervals) {
+            if (isTimeIntervalOverlap(interval)) {
+                errorCompilation.append(interval + "\n");
+            } else {
+                internalList.add(interval);
+            }
+        }
+
+        errorCompilation.append("The other times have been added\n");
+        if (errorCompilation.length() > 67) {
+            throw new CommandException(errorCompilation.toString());
+        }
     }
 
     public void deleteTime(ArrayList<TimeInterval> timeIntervals) throws CommandException {
@@ -42,8 +55,9 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
                 internalList.remove(time);
             }
         }
+        errorCompilation.append("The other times have been deleted\n");
 
-        if (errorCompilation.length() > 33) {
+        if (errorCompilation.length() > 67) {
             throw new CommandException(errorCompilation.toString());
         }
     }
@@ -63,6 +77,23 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
      */
     public void removeTime(TimeInterval timeInterval) {
         internalList.remove(timeInterval);
+    }
+
+    /**
+     * Checks if time interval overlaps with internal list
+     * @param interval The time iunterval to check
+     * @return Whether time interval overlaps with internal list
+     */
+    public boolean isTimeIntervalOverlap(TimeInterval interval) {
+        for (TimeInterval time : internalList) {
+            int startComparison = time.compareStart(interval);
+            int endComparison = time.compareEnd(interval);
+            boolean noClash = ((startComparison < 0 && endComparison < 0)|| (startComparison > 0 && endComparison > 0));
+            if ((startComparison == 0 && endComparison == 0) || !noClash) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
