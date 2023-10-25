@@ -42,14 +42,14 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         StudentNumber studentNumber = new StudentNumber(argMultimap.getPreamble());
 
-        String action = argMultimap.getValue(PREFIX_WILDCARD).orElse("");
-
         parseTags(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(this::setTags);
 
         if (this.tags == null) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
         }
+
+        String action = argMultimap.getValue(PREFIX_WILDCARD).orElse("");
 
         switch (action) {
         case TagCommand.ADD_TAGS:

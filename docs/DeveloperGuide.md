@@ -157,6 +157,53 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Tag feature
+
+#### Implementation
+
+Tagging a student with `Tag` is facilitated by 3 commands:
+* `TagCommand` will replace all existing tags of a student with input tags.
+* `AddTagCommand` will add input tags to existing tags of the student.
+* `DeleteTagCommand` will delete input tags from the existing tags of the student.
+
+These commands will be executed based on the users input. The `TagCommandParser` will be responsible for parsing the user input and create the correct command object to execute.
+Only 1 of the 3 commands will be executed per user input.
+
+Here is an example step by step of how the 3 different commands might be executed.
+
+Step 1. User inputs
+
+        tag A0245234N t/teamleader
+
+Step 2. `Logic` will receive the input and pass it to a `AddressBookParser` object which in turn creates a `TagCommandParser` object to parse the command.
+
+Step 3. Next `TagCommandParser` will check for any action identifiers, 
+`/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively, 
+else a `TagCommand` object.
+
+Step 4a. `AddTagCommand` will union the `HashSet<Tag>` with the student's existing `Tag`.
+
+Step 4b. `DeleteTagCommand` will remove all `Tag` that are in the intersection of the student's existing `Tag` and `HashSet<Tag>`.
+
+Step 4c. `TagCommand` will replace all existing `Tag` of the student with `HashSet<Tag>`.
+
+Step 5. All 3 commands will create a new `Student` object with the new `Tag` and copy all other details.
+
+Step 6. All 3 commands will update the `Model` with the new Student by calling `Model#setStudent()`.
+
+The following activity diagram summarizes what happens when a user executes a tag command:
+
+<puml src="diagrams/TagCommand.puml" alt="TagCommand" />
+
+#### Design considerations:
+**Aspect: TagCommand**
+* **Alternative 1 (current choice):** Use different types of TagCommand to handle add and delete tags.
+  * Pros: Able to handle add and delete of tags. Users do not have to retype tags that they want to keep.
+  * Cons: Users have to input more details.
+* **Alternative 2:** Replace all existing tags with input tags.
+  * Pros: Easy to implement.
+  * Cons: Users have to always replace the tag even if they want to keep it.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -281,7 +328,7 @@ The tracker classes will be stored in the `ClassDetails` class, which will be co
 * `ClassParticipationTracker` - Stores the `ClassParticipation` objects for a specific student.
 * `AssignmentTracker` - Stores the `Assignment` objects for a specific student.
 
-* <puml src="diagrams/Tracker.puml" width="250" />
+<puml src="diagrams/Tracker.puml" width="250" />
 
 These tracker classes will inherit from a `tracker` *interface*. They will also support the following operations:
 * `getPercentage()` - Returns the average grade of the student for the specific tracker class. For example, the average
@@ -414,35 +461,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 3b. The given student number does not exist in the list.
-
-    * 3b1. ClassManager shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Tag a student with a label**
-
-**MSS**
-
-1.  User requests to list students
-2.  ClassManager shows a list of students
-3.  User requests to tag a specific student in the list
-4.  ClassManager tags the student
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given student number is invalid.
-
-    * 3a1. ClassManager shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The student already has the given tag.
 
     * 3b1. ClassManager shows an error message.
 
