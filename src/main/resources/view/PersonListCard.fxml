@@ -41,6 +41,8 @@
       <Label fx:id="secondaryEmail" styleClass="cell_small_label" text="$secondaryEmail" />
       <Label fx:id="telegram" styleClass="cell_small_label" text="$telegram" />
       <Label fx:id="birthday" styleClass="cell_small_label" text="$birthday" />
+      <Label fx:id="balance" styleClass="cell_small_label" text="$balance" />
+
     </VBox>
     <!-- New VBox for the second column -->
     <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
@@ -51,4 +53,3 @@
     </VBox>
   </GridPane>
 </HBox>
-

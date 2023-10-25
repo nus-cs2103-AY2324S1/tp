@@ -39,6 +39,7 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends")
             .withId(1)
             .withNotes("Likes to swim", "Likes to run", "Is a chad")
+            .withBalance(2800)
             .build();
 
     public static final Person JOHN = new PersonBuilder().withName("Benson Meier")

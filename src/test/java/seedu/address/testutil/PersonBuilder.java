@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
@@ -39,7 +40,7 @@ public class PersonBuilder {
     private Optional<Telegram> telegram;
     private Optional<Integer> id;
     private Set<Tag> tags;
-
+    private Balance balance;
     private List<Note> notes;
 
     /**
@@ -57,6 +58,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         id = Optional.empty();
         notes = new ArrayList<>();
+        balance = new Balance(0);
     }
 
     /**
@@ -74,6 +76,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         id = personToCopy.getId();
         notes = personToCopy.getNotes();
+        balance = personToCopy.getBalance();
     }
 
     /**
@@ -168,10 +171,19 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Balance} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBalance(int balance) {
+        this.balance = new Balance(balance);
+        return this;
+    }
+
+    /**
      * Builds a {@code Person}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, birthday, linkedin, secondaryEmail, telegram, tags, id, notes);
+        return new Person(name, phone, email, address, birthday, linkedin, secondaryEmail, telegram,
+                tags, id, notes, balance);
     }
 
 }

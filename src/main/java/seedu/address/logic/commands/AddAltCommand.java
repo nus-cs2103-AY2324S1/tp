@@ -18,6 +18,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
@@ -102,10 +103,11 @@ public class AddAltCommand extends Command {
         Telegram updatedTelegram = personToEdit.getTelegram().orElse(addAltPersonDescriptor.getTelegram());
         Optional<Integer> id = personToEdit.getId();
         List<Note> notes = personToEdit.getNotes();
+        Balance balance = personToEdit.getBalance();
 
         Person updatedPerson = new Person(name, phone, email, address, Optional.ofNullable(birthday),
                 Optional.ofNullable(updatedLinkedin), Optional.ofNullable(updatedSecondaryEmail),
-                Optional.ofNullable(updatedTelegram), tags, id, notes);
+                Optional.ofNullable(updatedTelegram), tags, id, notes, balance);
 
         if ((personToEdit.hasValidLinkedin() && addAltPersonDescriptor.hasValidLinkedin())
                 || (personToEdit.hasValidBirthday() && addAltPersonDescriptor.hasValidBirthday())

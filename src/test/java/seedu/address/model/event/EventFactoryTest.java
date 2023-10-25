@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,7 +34,8 @@ public class EventFactoryTest {
             Optional.empty(),
             new HashSet<>(),
             Optional.empty(),
-            new ArrayList<>()
+            new ArrayList<>(),
+            new Balance(5)
         ));
 
         assertTrue(EventFactory.createEvents(modelManager).size() > 0);

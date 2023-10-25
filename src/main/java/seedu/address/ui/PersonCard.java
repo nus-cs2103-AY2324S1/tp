@@ -51,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Button notesButton;
+    @FXML
+    private Label balance;
 
 
     /**
@@ -81,6 +83,7 @@ public class PersonCard extends UiPart<Region> {
 
         int numberOfNotes = person.getNotes().size();
         notesButton.setText("Notes (" + numberOfNotes + ")");
+        bindLabelToProperty(balance, person.getBalance().toUiMessage());
     }
 
     private void bindLabelToProperty(Label label, String propertyValue) {
