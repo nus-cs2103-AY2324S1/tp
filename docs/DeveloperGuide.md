@@ -254,6 +254,22 @@ searching for keywords in multiple fields at the same time.
     * Pros: More flexible in usage.
     * Cons: More difficult to modify and test.
 
+### Appointment Sidebar Feature
+
+The appointment sidebar is facilitated by `ModelManager`. It etends `Model` and stores and additional `SortedList<Appointment>` object that represents all the existing appointments.
+
+The `setAppointmentList()` method always check against `filteredPersons` to look for updates with regards to existing `Appointment` objects. Tg=he `getAppointmentList()` method is called once during startup of the program by `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the `sortedList<Appointment>` object within `modelManager`.
+
+#### Design Considerations:
+
+**Aspect: Where to create SortedList<Appointment>**
+* **Alternative 1 (current choice):** Implement it within `modelManager`
+    * Pros: `SortedAppointments` object references `filteredPersons` which ensures that the appointment sidebar corresponds with `persons` from `addressBook`.
+    * Cons: Errors with respect to `addressBook` will affect the appointment sidebar rendered.
+
+* **Alternative 2:** Implement it within `addressBook`
+    * Pros: `persons` and `appointmentList` are handled separately within `addressBook` and hence the appointment sidebar is not dependent on `persons` in `addressBook`
+    * Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer dependent on `filteredPersons`.
 
 ### \[Proposed\] Undo/redo feature
 
