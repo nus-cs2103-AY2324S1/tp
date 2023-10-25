@@ -65,6 +65,10 @@ public class EnrolCommandParserTest {
         assertParseFailure(parser, HOURS_DESC_AURORA + validExpectedAttendanceString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HOURS));
 
+        // multiple remarks
+        assertParseFailure(parser, REMARK_DESC_AURORA + validExpectedAttendanceString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
+
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedAttendanceString + MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO

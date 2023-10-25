@@ -14,6 +14,7 @@ import seedu.ccacommander.model.shared.Name;
 
 public class JsonAdaptedAttendanceTest {
     private static final String MEMBER_NAME = "memberName";
+    private static final String EVENT_NAME = "eventName";
     private static final String INVALID_MEMBER_NAME = "@lice";
     private static final String INVALID_EVENT_NAME = "@urora";
     private static final String INVALID_HOURS = "-1";
@@ -50,6 +51,14 @@ public class JsonAdaptedAttendanceTest {
         JsonAdaptedAttendance attendance =
                 new JsonAdaptedAttendance(null, VALID_EVENT_NAME, VALID_HOURS, VALID_REMARK);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, MEMBER_NAME);
+        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullEventName_throwsIllegalValueException() {
+        JsonAdaptedAttendance attendance =
+                new JsonAdaptedAttendance(VALID_MEMBER_NAME, null, VALID_HOURS, VALID_REMARK);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EVENT_NAME);
         assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
     }
 
