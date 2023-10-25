@@ -39,18 +39,18 @@ public class JsonAdaptedAttendanceTest {
     }
 
     @Test
-    public void toModelType_invalidEventName_throwsIllegalValueException() {
-        JsonAdaptedAttendance attendance =
-                new JsonAdaptedAttendance(VALID_MEMBER_NAME, INVALID_EVENT_NAME, VALID_HOURS, VALID_REMARK);
-        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
-    }
-
-    @Test
     public void toModelType_nullMemberName_throwsIllegalValueException() {
         JsonAdaptedAttendance attendance =
                 new JsonAdaptedAttendance(null, VALID_EVENT_NAME, VALID_HOURS, VALID_REMARK);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, MEMBER_NAME);
+        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidEventName_throwsIllegalValueException() {
+        JsonAdaptedAttendance attendance =
+                new JsonAdaptedAttendance(VALID_MEMBER_NAME, INVALID_EVENT_NAME, VALID_HOURS, VALID_REMARK);
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
     }
 
