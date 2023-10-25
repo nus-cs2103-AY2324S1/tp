@@ -14,7 +14,7 @@ public class SalaryTest {
     }
 
     @Test
-    public void constructor_invalidPhone_throwsIllegalArgumentException() {
+    public void constructor_invalidSalary_throwsIllegalArgumentException() {
         String invalidSalary = "";
         assertThrows(IllegalArgumentException.class, () -> new Salary(invalidSalary));
     }
