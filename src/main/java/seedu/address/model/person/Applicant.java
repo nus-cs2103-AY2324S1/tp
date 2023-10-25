@@ -13,6 +13,7 @@ import seedu.address.model.person.fields.Phone;
 public class Applicant extends Person {
 
     private final Phone phone;
+
     /**
      * Every field must be present and not null.
      */
@@ -78,5 +79,11 @@ public class Applicant extends Person {
                 .add("name", getName())
                 .add("phone", phone)
                 .toString();
+    }
+
+    @Override
+    public String detailsToCopy() {
+        return "Name: " + getName() + "\n"
+                + "Phone: " + phone + "\n";
     }
 }

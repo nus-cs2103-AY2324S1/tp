@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.fields.Email;
@@ -119,5 +120,14 @@ public class Member extends Person {
                 .add("telegram", getTelegram())
                 .add("tags", getTags())
                 .toString();
+    }
+
+    @Override
+    public String detailsToCopy() {
+        return "Name: " + getName() + "\n"
+                + "Phone: " + getPhone() + "\n"
+                + "Email: " + getEmail() + "\n"
+                + "Telegram: " + getTelegram() + "\n"
+                + "Tags: " + getTags().stream().map(Tag::toString).collect(Collectors.joining(", ")) + "\n";
     }
 }
