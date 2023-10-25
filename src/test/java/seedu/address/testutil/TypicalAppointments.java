@@ -1,10 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.commons.util.DateUtil.dateTimeToString;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +39,13 @@ public class TypicalAppointments {
     public static final Appointment NOCLASHAPPOINTMENT = new AppointmentBuilder()
             .withPatient(ALICE).withAppointmentTime("3000/01/01 10:00", "3000/01/01 11:00")
             .withDescription("Checkup").build();
+
+    public static final Appointment TODAYAPPOINTMENT = new AppointmentBuilder()
+            .withPatient(ALICE)
+            .withAppointmentTime(
+                    dateTimeToString(LocalDateTime.now()), dateTimeToString(LocalDateTime.now().plusMinutes(1)))
+            .withDescription("Appointment Today")
+            .build();
 
     public static List<Appointment> getTypicalAppointments() {
         return new ArrayList<>(Arrays.asList(APPOINTMENT1, APPOINTMENT2, APPOINTMENT3, APPOINTMENT4));

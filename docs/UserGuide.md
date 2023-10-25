@@ -79,6 +79,8 @@ hospital management tasks done faster than current GUI apps in the industry.
         - [Cancelling an appointment](#cancelling-an-appointment-cancel)
 
         - [Displaying all appointments](#displaying-all-appointments-appointments)
+     
+        - [Displaying all appointments for today](#displaying-all-appointments-for-today-today)
 
     - [Miscellaneous Commands](#miscellaneous-commands)
 
@@ -191,6 +193,8 @@ e.g. in `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Do not include any additional arguments for `undo` and `redo` commands as it will result in an error.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
@@ -198,24 +202,25 @@ e.g. in `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL
 
 ## Commands summary
 
-| Action                                                                       | Format, Examples                                                                                                                                                                                                                                                     |
-|------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Adding a new patient**](#adding-a-new-patient-add)                        | `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL address=ADDRESS [illness=ILLNESS]` <br> e.g., `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=fever` |
-| [**Updating a patient's details**](#updating-a-patients-details-edit)        | `edit INDEX [name=NAME] [gender=GENDER] [birthdate=BIRTHDATE] [phone=PHONE] [email=EMAIL] [address=ADDRESS]` <br> e.g., `edit 1 birthdate=2001/12/14 phone=93842738`                                                                                                 |
-| [**Diagnosing a patient**](#diagnosing-a-patient-diagnose)                   | `diagnose INDEX illness=ILLNESS`<br> e.g., `diagnose 1 illness=fever`                                                                                                                                                                                                |
-| [**Undiagnosing a patient**](#undiagnosing-a-patient-undiagnose)             | `undiagnose INDEX illness=ILLNESS`<br> e.g., `undiagnose 1 illness=fever`                                                                                                                                                                                            |
-| [**Removing a patient**](#removing-a-patient-delete)                         | `delete INDEX` <br> e.g., `delete 1`                                                                                                                                                                                                                                 |
-| [**Displaying all patients**](#displaying-all-patients-list)                 | `list`                                                                                                                                                                                                                                                               |
-| [**Finding patients by name**](#finding-patients-by-name-find)               | `find NAME`<br> e.g., `search name=James Jake`                                                                                                                                                                                                                       |
-| [**Scheduling a new appointment**](#scheduling-a-new-appointment-schedule)   | `schedule patient=PATIENT start=START end=END description=DESCRIPTION` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray`                                                                      |
-| [**Rescheduling an appointment**](#rescheduling-an-appointment-reschedule)   | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                          |
-| [**Cancelling an appointment**](#cancelling-an-appointment-cancel)           | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                                                                                                                  |
-| [**Displaying all appointments**](#displaying-all-appointments-appointments) | `appointments`                                                                                                                                                                                                                                                       |
-| [**Undoing a previous command**](#undoing-a-previous-command-undo)           | `undo`                                                                                                                                                                                                                                                               |
-| [**Redoing a previous command**](#redoing-a-previous-command-redo)           | `redo`                                                                                                                                                                                                                                                               |
-| [**Clearing all patient records**](#clearing-all-patient-records-clear)      | `clear`                                                                                                                                                                                                                                                              |
-| [**Exiting the program**](#exiting-the-program-exit)                         | `exit`                                                                                                                                                                                                                                                               |
-| [**Viewing help**](#viewing-help-help)                                       | `help`                                                                                                                                                                                                                                                               |
+| Action                                                                                  | Format, Examples                                                                                                                                                                                                                                                     |
+|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Adding a new patient**](#adding-a-new-patient-add)                                   | `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL address=ADDRESS [illness=ILLNESS]` <br> e.g., `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=fever` |
+| [**Updating a patient's details**](#updating-a-patients-details-edit)                   | `edit INDEX [name=NAME] [gender=GENDER] [birthdate=BIRTHDATE] [phone=PHONE] [email=EMAIL] [address=ADDRESS]` <br> e.g., `edit 1 birthdate=2001/12/14 phone=93842738`                                                                                                 |
+| [**Diagnosing a patient**](#diagnosing-a-patient-diagnose)                              | `diagnose INDEX illness=ILLNESS`<br> e.g., `diagnose 1 illness=fever`                                                                                                                                                                                                |
+| [**Undiagnosing a patient**](#undiagnosing-a-patient-undiagnose)                        | `undiagnose INDEX illness=ILLNESS`<br> e.g., `undiagnose 1 illness=fever`                                                                                                                                                                                            |
+| [**Removing a patient**](#removing-a-patient-delete)                                    | `delete INDEX` <br> e.g., `delete 1`                                                                                                                                                                                                                                 |
+| [**Displaying all patients**](#displaying-all-patients-list)                            | `list`                                                                                                                                                                                                                                                               |
+| [**Finding patients by name**](#finding-patients-by-name-find)                          | `find NAME`<br> e.g., `search name=James Jake`                                                                                                                                                                                                                       |
+| [**Scheduling a new appointment**](#scheduling-a-new-appointment-schedule)              | `schedule patient=PATIENT start=START end=END description=DESCRIPTION` <br> e.g., `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray`                                                                      |
+| [**Rescheduling an appointment**](#rescheduling-an-appointment-reschedule)              | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                          |
+| [**Cancelling an appointment**](#cancelling-an-appointment-cancel)                      | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                                                                                                                  |
+| [**Displaying all appointments**](#displaying-all-appointments-appointments)            | `appointments`                                                                                                                                                                                                                                                       |
+| [**Displaying all appointments for today**](#displaying-all-appointments-for-today-today) | `today`                                                                                                                                                                                                                                                              |
+| [**Undoing a previous command**](#undoing-a-previous-command-undo)                      | `undo`                                                                                                                                                                                                                                                               |
+| [**Redoing a previous command**](#redoing-a-previous-command-redo)                      | `redo`                                                                                                                                                                                                                                                               |
+| [**Clearing all patient records**](#clearing-all-patient-records-clear)                 | `clear`                                                                                                                                                                                                                                                              |
+| [**Exiting the program**](#exiting-the-program-exit)                                    | `exit`                                                                                                                                                                                                                                                               |
+| [**Viewing help**](#viewing-help-help)                                                  | `help`                                                                                                                                                                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -416,6 +421,13 @@ This command shows a list of all appointments currently scheduled.
 
 Format: `appointments`
 
+### Displaying all appointments for today: `today`
+
+This command shows a list of all appointments currently scheduled to start today, i.e. the current date you are using
+the command on.
+
+Format: `today`
+
 ## Miscellaneous commands
 
 ### Undoing a previous command: `undo`
@@ -424,11 +436,19 @@ This command undoes a previous command.
 
 Format: `undo`
 
+**Notes:**
+
+- Including additional arguments will result in an error.
+
 ### Redoing a previous command: `redo`
 
 This command redoes a previous command that you undid.
 
 Format: `redo`
+
+**Notes:**
+
+- Including additional arguments will result in an error.
 
 ### Clearing all patient records: `clear`
 

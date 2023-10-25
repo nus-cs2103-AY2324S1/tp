@@ -54,7 +54,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         if (commandResult.canBeUndone()) {
-            model.getUserHistoryManager().addHistory(new Pair(new ArrayList<>(model.getAddressBook().getPersonList()),
+            model.getUserHistoryManager().addHistory(new Pair<>(new ArrayList<>(model.getAddressBook().getPersonList()),
                     new ArrayList<>(model.getAddressBook().getAppointmentList())));
             model.getUserHistoryManager().resetRedoHistory();
         }
