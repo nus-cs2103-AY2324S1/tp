@@ -235,6 +235,52 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{more aspects and alternatives to be added}_
 
 
+### Schedule feature 
+
+Implementation
+
+The implementation of the schedule feature is similar to the implementation for adding a patient. The Schedule command 
+takes in an _Appointment object_ (containing the Start Time, End Time and Appointment Description) and _Name object_ 
+(containing the name of the patient for whom the appointment is booked). 
+
+For _Schedule_ command, the noteworthy classes are:
+- [`ScheduleCommandParser.java`][ScheduleCommandParser.java] - For parsing the arguments to `ScheduleCommand`.
+- [`ScheduleCommand.java`][ScheduleCommand.java] - For execution.
+
+The following exceptions may be thrown during this process, namely:
+- ParseException for missing arguments
+- ParseException for invalid arguments
+- ParseException for Appointment Start Time after Appointment End Time
+- CommandException for creating appointments for patients not in MediFlowR's records
+- CommandException for identical appointments
+- CommandException for appointments with clashing timeslots
+
+-- user input --  
+Step 1. User executes schedule command by starting command with the 'schedule' keyword, followed by 
+correct and valid arguments.
+
+-- `AddressBookParser` --  
+Step 2. Returns new `ScheduleCommandParser`.
+
+-- `ScheduleCommandParser` --   
+Step 3. Verify that all argument prefixes are present and that no duplicates exist.  
+Step 4. Verify that provided arguments are valid.     
+Step 5. Returns new `ScheduleCommand`.
+
+-- `ScheduleCommand` --   
+Step 6. Verify that the patient for whom the Appointment is created exists in MediFlowR's records.   
+Step 7. Verify that the Appointment Start Time appears before the Appointment End Time.  
+Step 8. Verify that the same appointment has not already been added.  
+Step 9. Verify that the new appointment to be added does not have time conflict with another appointment on the 
+same day.  
+Step 10. Appointment is scheduled. 
+
+
+The following activity diagram shows how the schedule operation works:
+
+![ScheduleCommandActivityDiagram](images/ScheduleCommandActivityDiagram.png)
+
+
 ### Reschedule feature
 
 Implementation
