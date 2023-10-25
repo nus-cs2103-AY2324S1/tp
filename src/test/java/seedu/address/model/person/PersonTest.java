@@ -53,7 +53,7 @@ public class PersonTest {
 
     @Test
     public void equals() {
-        // same values -> returns true
+        // same values -> returns false
         Person aliceCopy = new PersonBuilder(ALICE).build();
         assertFalse(ALICE.equals(aliceCopy));
 
