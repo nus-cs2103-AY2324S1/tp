@@ -22,23 +22,23 @@ class SalaryTest {
     @Test
     public void isValidEmail() {
         // null salary
-        assertThrows(NullPointerException.class, () -> Salary.isValidSalary(null));
+        assertThrows(NullPointerException.class, () -> Salary.isValid(null));
 
         //valid salary
-        assertTrue(Salary.isValidSalary("0.00"));
-        assertTrue(Salary.isValidSalary("10.00"));
-        assertTrue(Salary.isValidSalary("100.00"));
-        assertTrue(Salary.isValidSalary("10000.00"));
-        assertTrue(Salary.isValidSalary("100000.00"));
+        assertTrue(Salary.isValid("0.00"));
+        assertTrue(Salary.isValid("10.00"));
+        assertTrue(Salary.isValid("100.00"));
+        assertTrue(Salary.isValid("10000.00"));
+        assertTrue(Salary.isValid("100000.00"));
 
         //invalid salary
-        assertFalse(Salary.isValidSalary("")); //empty value
-        assertFalse(Salary.isValidSalary(" ")); //space only
-        assertFalse(Salary.isValidSalary("*")); //only non-alphanumeric characters
-        assertFalse(Salary.isValidSalary("8+1500.00")); //contain non-alphanumeric characters
-        assertFalse(Salary.isValidSalary("8000")); //no digit
-        assertFalse(Salary.isValidSalary("1500.0")); //1 digit
-        assertFalse(Salary.isValidSalary("1500.000")); //3 digit
+        assertFalse(Salary.isValid("")); //empty value
+        assertFalse(Salary.isValid(" ")); //space only
+        assertFalse(Salary.isValid("*")); //only non-alphanumeric characters
+        assertFalse(Salary.isValid("8+1500.00")); //contain non-alphanumeric characters
+        assertFalse(Salary.isValid("8000")); //no digit
+        assertFalse(Salary.isValid("1500.0")); //1 digit
+        assertFalse(Salary.isValid("1500.000")); //3 digit
     }
 
     @Test
