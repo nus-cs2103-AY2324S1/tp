@@ -1,20 +1,25 @@
 package swe.context.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static swe.context.logic.commands.CommandTestUtil.assertCommandFailure;
+import static swe.context.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static swe.context.logic.commands.CommandTestUtil.showContactAtIndex;
+import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
+import static swe.context.testutil.TestData.IndexContact.SECOND_CONTACT;
+import static swe.context.testutil.TestData.Valid.Contact.getTypicalContacts;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import swe.context.commons.core.index.Index;
 import swe.context.logic.Messages;
 import swe.context.model.Model;
 import swe.context.model.ModelManager;
 import swe.context.model.Settings;
 import swe.context.model.contact.Contact;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static swe.context.logic.commands.CommandTestUtil.*;
-import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
-import static swe.context.testutil.TestData.IndexContact.SECOND_CONTACT;
-import static swe.context.testutil.TestData.Valid.Contact.getTypicalContacts;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
