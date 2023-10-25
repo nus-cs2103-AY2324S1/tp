@@ -133,7 +133,7 @@ Alias: `find`
 Examples:
 * `list` lists all fosterers in the address book
 * `list john doe` matches "John Doe", "Doe John", "Johnny Doe", and "Mary" who lives on "John Doe Street"
-* `list john john doe` is redundant and gives the same result as `list john doe`
+* `find john john doe` is redundant and gives the same result as `find john doe`
 * `list "John" | zam & doe` matches "John Doe" and "Doe Shazam", but not "John Grahm"
 
 Expected output (success):
