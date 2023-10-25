@@ -449,6 +449,7 @@ Format: `redo`
 **Notes:**
 
 - Including additional arguments will result in an error.
+
 ### Clearing all patient records: `clear`
 
 This command clears all patient records and appointments from the application.
