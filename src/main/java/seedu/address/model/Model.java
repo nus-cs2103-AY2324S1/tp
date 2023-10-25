@@ -150,9 +150,11 @@ public interface Model {
     void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException;
 
     /**
-     * Assign person to group
-     * @param person will store group reference
-     * @param group will store person reference
+     * Find group according to groupName
+     * @param groupName representing group name
+     * @return Group object
      */
+    Group findGroup(String groupName);
+
 
 }

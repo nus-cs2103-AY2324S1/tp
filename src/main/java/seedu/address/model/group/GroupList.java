@@ -81,6 +81,22 @@ public class GroupList implements Iterable<Group> {
         }
     }
 
+
+    /**
+     * Find Group according to an exact match to String groupName
+     * @param groupName group we are looking for
+     * @return Group that we are looking for
+     */
+    public Group findGroup(String groupName) throws GroupNotFoundException {
+        for (Group g: this.internalList) {
+            if (g.nameEquals(groupName)) {
+                return g;
+            }
+        }
+        throw new GroupNotFoundException();
+    }
+
+
     /**
      * Converts the internal list to streams.
      *

@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -141,6 +142,17 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Find Group according to an exact match to String groupName
+     * Call FindGroup() method in addressBook
+     * @param groupName of group we are looking for
+     * @return Group that we are looking for
+     */
+    @Override
+    public Group findGroup(String groupName) throws GroupNotFoundException {
+        return addressBook.findGroup(groupName);
+    }
+
+    /**
      * Adds a group to the address book.
      * The group must not already exist in the address book.
      */
@@ -157,6 +169,7 @@ public class ModelManager implements Model {
         addressBook.removeGroup(group);
         return group;
     }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -192,21 +205,6 @@ public class ModelManager implements Model {
         filteredGroups.setPredicate(predicate);
     }
 
-    // in GroupPersonCommand call model.groupPerson(person, group) note that these are simply strings!
-    // groupPerson(person, group)
-    // calls addressbook.groupPerson(person, group)
-    // addressbook -> personlist grouplist
-    // method in addressbook referencing method in personList groupList (oop) set person to group and group to person
-    // get
-    // get
-    // person.setgroup(group)
-    // person already in group throw exception also
-    // group.setperson(person)
-    // group already contain person
-    // exactPersonExist exactGroupExist
-    // better to retrieve both person and group object first then set else error prone
-    // for loop all things once name exact match for person / group
-    // this methods throws command exception, yes it works
     @Override
     public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException {
         // both throw exception if not exists exact match

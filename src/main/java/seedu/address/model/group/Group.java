@@ -6,6 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Duration;
+import seedu.address.model.FreeTime;
 import seedu.address.model.person.Person;
 
 import java.util.List;
@@ -168,4 +170,46 @@ public class Group {
     public void setGroupRemark(GroupRemark groupRemark) {
         this.groupRemark = groupRemark;
     }
+
+    /**
+     * Modify StringBuilder to display message should any groupMate not input their free time
+     * @param br StringBuilder
+     * @param format Format specifier
+     */
+    public void areAllFree(StringBuilder br, String format) {
+        for (Person p: listOfGroupMates) {
+            if (p.isNotFree()) {
+                br.append(String.format(format, p.getName()));
+            }
+        }
+    }
+
+    /**
+     * Compare each person in group to get overlap
+     * Accumulate the result
+     * @param duration represent duration in minutes
+     * @return TimeInterval that can fit duration specified
+     */
+    public FreeTime findFreeTime(Duration duration) {
+        // compare person to person get overlap
+        // will use one getter for freeTime
+        FreeTime freeTime = new FreeTime();
+        for (int i = 0; i < listOfGroupMates.size(); i++) {
+           if (i + 1 == listOfGroupMates.size()) {
+               break;
+           }
+           Person firstPerson = listOfGroupMates.get(i);
+           Person secondPerson = listOfGroupMates.get(i + 1);
+           FreeTime first = firstPerson.getFreeTime();
+           FreeTime second = secondPerson.getFreeTime();
+           // uninitialised freeTime e.g. first and second person in group
+           if (freeTime == null) {
+               freeTime = first.findOverlap(second, duration);
+           } else {
+               freeTime = freeTime.findOverlap(second, duration);
+           }
+        }
+        return freeTime;
+    }
+
 }

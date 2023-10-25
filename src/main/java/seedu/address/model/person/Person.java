@@ -212,4 +212,11 @@ public class Person {
         System.out.println(111);
     }
 
+    /**
+     * Check whether Person has input their free time
+     * @return boolean, whether person is not free
+     */
+    public boolean isNotFree() {
+        return this.freeTime.isEmpty();
+    }
 }

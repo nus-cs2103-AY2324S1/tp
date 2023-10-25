@@ -39,6 +39,16 @@ public class Time {
     }
 
     /**
+     * Convert either start or end time of timeInterval into an int
+     * Use dayOfWeek enum from 1-7 representing Mon-Sun
+      * @return Int representing duration of interval in minute
+     */
+    public int getDurationInMin() {
+        int durationInMin = this.day.getValue() * 24 * 60 + this.hour.getHour() * 60 + this.hour.getMinute();
+        return durationInMin;
+    }
+
+    /**
      * Compares this with another time object.
      * @param otherTime The other time object.
      * @return Returns an int to indicate if it less than/more than/equal.

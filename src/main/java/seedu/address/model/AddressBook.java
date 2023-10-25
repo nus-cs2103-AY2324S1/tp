@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -147,6 +148,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasGroup(Group group) {
         requireNonNull(group);
         return groups.contains(group);
+    }
+
+    /**
+     * Find Group according to an exact match to String groupName
+     * Call FindGroup() method in groupList, containing all groups in addressBook
+     * @param groupName group we are looking for
+     * @return Group that we are looking for
+     */
+    public Group findGroup(String groupName) throws GroupNotFoundException {
+        return groups.findGroup(groupName);
+
     }
 
     /**
