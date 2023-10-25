@@ -231,6 +231,40 @@ The following activity diagram summarizes what happens when a user executes a `s
     * Cons:
         * Users have to resort the student list for every launch. 
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
+### Import feature
+
+#### Implementation
+
+The `import` command allows the user to import .csv files containing their students' data in one go so that they do not need to add them one-by-one.
+
+When the user enters a import command, the `AddressBookParser` parses the user's input using `ImportCommandParser` and returns a `ImportCommand`.
+
+The following sequence diagram shows how the `import` command works. In this example, the user is executing the following command: `import student_data.csv`.
+
+<puml src="diagrams/ImportSequenceDiagram.puml" alt="ImportSequenceDiagram" />
+
+When the `ImportCommandParser` parses the arguments, it creates a list of `Student` objects using the data in the .csv file and passes the argument and the list into the `ImportCommand`. `ImportCommand` will then add the `Student` into the `AddressBook`.
+
+The following activity diagram summarizes what happens when a user executes a `import` command:
+
+<puml src="diagrams/FilterActivityDiagram.puml" alt="ImportActivityDiagram" width="250" />
+
+#### Design considerations:
+
+**Aspect: How to separate the attributes correctly from the imported data**
+
+* **Alternative 1 (current choice):** Fixed column sequence for data in the imported .csv files.
+    * Pros:
+        * Students' data with comma such as address can be detected more easily and will not be split wrongly.
+    * Cons:
+        * Users would experience less flexibility when using the command (for instance, users need to ensure their column in their .csv files matches the sequence).
+* Alternative 2: Flexible column sequence for data in the imported .csv files.
+    * Pros:
+        * Greater flexibility for users when importing students'data.
+    * Cons:
+        * Higher chance in wrong a splitting of students' data.
+* We made the choice of Alternative 1 over Alternative 2 as we found that a fixed format would be easier for users to remember and use in the .csv files.
+
 
 ### \[Proposed\] Undo/redo feature
 
