@@ -224,8 +224,7 @@ features present in this application.
 ### Adding a new patient: `add`
 
 This command creates a new patient to be added to the patient records, along with the necessary personal information
-and contact details about the patient. It is *optional* to include what illness the patient is currently inflicted with
-when entering the patient details.
+and contact details about the patient.
 
 Format: `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL address=ADDRESS [illness=ILLNESS]`
 
@@ -233,6 +232,20 @@ Example: `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 emai
 
 The example command will add a *male* patient called *John Doe*, with birthdate on *20 October 2000*, phone number at *98765432*,
 email at *johnd@example.com* and address at *311, Clementi Ave 2, #02-25*, who is currently down with *fever*.
+
+**Notes:**
+
+- A patient's name can only consist of letters and numbers.
+
+- A patient's gender can only be `MALE` or `FEMALE`.
+
+- A patient's birthdate must be in the format `yyyy/MM/dd`, e.g. `2001/04/28` for a birthdate on 28 April 2001.
+
+- A patient's phone must be a valid phone number, i.e. 8 numbers.
+
+- A patient's email must be a valid email address, i.e. of the form `name@domain.com`.
+
+- A patient's illness is optional, i.e. you do not have to enter the illness when adding a patient.
 
 ### Updating a patient's details: `edit`
 
@@ -246,6 +259,14 @@ Example: `edit 1 birthdate=2001/12/14 phone=93842738`
 This example command will update the patient with index 1 in the patient records (i.e. the first patient) and will change
 the patient's birthdate to *2001/12/14* and phone number to *93842738*.
 
+**Notes:**
+
+- You must follow the same format as the [add patient command](#adding-a-new-patient-add) for the various details of the patient.
+
+- The index provided must be a *positive integer* and a *valid index*, i.e. within the size of the patient records.
+
+- You must edit *at least one* detail when using the command.
+
 ### Removing a patient: `delete`
 
 This commands removes the specified patient from the patient list. It will remove the patient at
@@ -255,11 +276,15 @@ Format: `delete INDEX`
 
 Example: `delete 1`
 
+This example command will remove the patient with index 1 in the patient records (i.e. the first patient).
+
+**Notes:**
+
+- The index provided must be a *positive integer* and a *valid index*, i.e. within the size of the patient records.
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If you delete a patient, all appointments for that patient will also be deleted.
 </div>
-
-This example command will remove the patient with index 1 in the patient records (i.e. the first patient).
 
 ### Displaying all patients: `list`
 
@@ -271,23 +296,27 @@ Format: `list`
 
 This command finds patients whose names contain any of the keywords that you specified.
 
-The search is case-insensitive, meaning that finding patients with the keyword `John`
-will return the same results as the keyword `john`. Only patients with names matching the full words of the keywords
-will be displayed, meaning that `Tom` will find patients with names that contain the full `Tom` but will not find patients
-with names such as `Tommy`.
-
 Format: `find NAME`
 
 Example: `find name=alex david`
 
 This example command will find all patients with names that contain either `alex` or `david`, e.g. `Alex Yeoh` and `David Li`.
 
+**Notes:**
+
+- The search is *case-insensitive*, meaning that finding patients with the keyword `John`
+will return the same results as the keyword `john`.
+
+- Only patients with names matching the *full words* of the keywords will be displayed, meaning that `Tom` will find patients
+with names that contain the full `Tom` but will not find patients
+with names such as `Tommy`.
+
 ## Appointment Commands
 
 ### Scheduling a new appointment: `schedule`
 
 This command schedules an appointment for an existing patient in the patient records. It will schedule an appointment
-for the patient with the name `PATIENT`. The start date time should be before the end date time.
+for the patient with the name `PATIENT`.
 
 Format: `schedule patient=PATIENT start=START end=END description=DESCRIPTION`
 
@@ -295,6 +324,16 @@ Example: `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00
 
 This example command will schedule a new appointment for the patient *Alex Yeoh* on *20 October 2023* from *12pm* to *1pm*
 for his *follow-up appointment on his chest X-Ray*.
+
+**Notes:**
+
+- The patient provided for an appointment must be the *full name* of a patient that is already in the patient records.
+
+- An appointment start and end must be in the format `yyyy/MM/dd HH:mm`, e.g. `2023/04/28 19:00` for 28 April 2023, at 7pm.
+
+- An appointment start date time should occur before end date time of the same appointment.
+
+- An appointment description can only consist of letters and numbers.
 
 ### Rescheduling an appointment: `reschedule`
 
@@ -308,6 +347,14 @@ Example: `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`
 This example command will reschedule the appointment with index 1 in the appointments list (i.e. the first appointment) to
 *2 May 2023*, from *9am* to *11am*.
 
+**Notes:**
+
+- You must follow the same format as the [schedule appointment command](#scheduling-a-new-appointment-schedule) for the various details of the appointment.
+
+- The index provided must be a *positive integer* and a *valid index*, i.e. within the size of the appointments list.
+
+- You must edit *at least one* detail when using the command.
+
 ### Cancelling an appointment: `cancel`
 
 This command cancels an existing appointment. It will cancel the appointment at the specified
@@ -318,6 +365,10 @@ Format: `cancel INDEX`
 Example: `cancel 3`
 
 This example command will cancel the appointment with index 1 in the appointments list (i.e. the first appointment).
+
+**Notes:**
+
+- The index provided must be a *positive integer* and a *valid index*, i.e. within the size of the appointments list.
 
 ### Displaying all appointments: `appointments`
 
@@ -341,7 +392,7 @@ Format: `redo`
 
 ### Clearing all patient records: `clear`
 
-This command clears all patient records from the application.
+This command clears all patient records and appointments from the application.
 
 Format: `clear`
 
