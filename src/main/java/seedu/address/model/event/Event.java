@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
 /**
@@ -26,6 +27,7 @@ public abstract class Event {
     private Optional<EventTime> endTime;
     private EventName name;
     private EventType eventType;
+    private Set<Group> groups;
 
     /**
      * Constructor for events with optional start and end time
@@ -37,7 +39,7 @@ public abstract class Event {
      * @param names names of the people attending the event
      */
     public Event(EventType eventType, EventName name, EventDate startDate, Optional<EventTime> startTime,
-                 EventDate endDate, Optional<EventTime> endTime, Set<Name> names) {
+                 EventDate endDate, Optional<EventTime> endTime, Set<Name> names, Set<Group> groups) {
         this.eventType = eventType;
         this.name = name;
         this.startDate = startDate;
@@ -45,10 +47,15 @@ public abstract class Event {
         this.endDate = endDate;
         this.endTime = endTime;
         this.names = names;
+        this.groups = groups;
     }
 
     public EventType getEventType() {
         return this.eventType;
+    }
+
+    public Set<Group> getGroups() {
+        return this.groups;
     }
 
     /**
@@ -125,7 +132,14 @@ public abstract class Event {
             }
         }
         return newNames;
+    }
 
+    public void removeEmptyGroups(Set<Group> groups) {
+        this.groups.removeAll(groups);
+    }
+
+    public void updateGroups() {
+        this.groups = this.groups;
     }
 
     /**

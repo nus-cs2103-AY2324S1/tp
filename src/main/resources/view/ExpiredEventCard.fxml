@@ -25,6 +25,7 @@
             <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
             <Label fx:id="timeDuration" styleClass="cell_small_label" text="\$timeDuration" />
             <FlowPane fx:id="names" />
+            <FlowPane fx:id="groups" />
         </VBox>
       <rowConstraints>
          <RowConstraints />

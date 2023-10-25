@@ -172,5 +172,12 @@ public class Person {
         return !getGroups().isEmpty();
     }
 
-
+    /**
+     * Checks if a certain group is in the groups list
+     * @param group Group to check
+     * @return true if group is in the groups list
+     */
+    public boolean hasGroup(Group group) {
+        return this.getGroups().contains(group);
+    }
 }
