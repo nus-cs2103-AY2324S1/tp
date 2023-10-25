@@ -8,6 +8,9 @@ src/main/resources/docs/
 /out/
 /*.iml
 
+# ignore bin folder
+/bin/
+
 # Storage/log files
 /data/
 /config.json
