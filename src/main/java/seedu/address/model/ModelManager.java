@@ -214,14 +214,14 @@ public class ModelManager implements Model {
     @Override
     public void undoHistory() {
         this.userHistory.undo();
-        addressBook.setPersons((this.userHistory.getUndoHistory().peek().getKey()));
-        addressBook.setAppointments((this.userHistory.getUndoHistory().peek().getValue()));
+        addressBook.setPersons(this.userHistory.getUndoHistory().peek().getKey());
+        addressBook.setAppointments(this.userHistory.getUndoHistory().peek().getValue());
     }
 
     @Override
     public void redoHistory() {
-        addressBook.setPersons((this.userHistory.getRedoHistory().peek().getKey()));
-        addressBook.setAppointments((this.userHistory.getRedoHistory().peek().getValue()));
+        addressBook.setPersons(this.userHistory.getRedoHistory().peek().getKey());
+        addressBook.setAppointments(this.userHistory.getRedoHistory().peek().getValue());
         this.userHistory.redo();
     }
 }
