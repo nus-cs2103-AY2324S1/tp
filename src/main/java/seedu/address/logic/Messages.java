@@ -66,7 +66,7 @@ public class Messages {
                 .append(person.getNric())
                 .append("; Licence Plate: ")
                 .append(person.getLicencePlate())
-                .append("\nPolicy Details (Policy Number, Policy Issue Date and Policy Expiry Date): ")
+                .append("\nPolicy Details (Company, Policy Number, Policy Issue Date and Policy Expiry Date): ")
                 .append(person.getPolicy().toDisplay(false))
                 .append("\nTags: ");
         person.getTags().forEach(builder::append);
