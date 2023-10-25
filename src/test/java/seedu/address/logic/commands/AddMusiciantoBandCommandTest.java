@@ -170,6 +170,11 @@ public class AddMusiciantoBandCommandTest {
         }
 
         @Override
+        public void updateFilteredBandList(int bandIndex) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasBand(Band band) {
             throw new AssertionError("This method should not be called.");
         }
