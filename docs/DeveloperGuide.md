@@ -253,20 +253,20 @@ The following exceptions may be thrown during this process, namely:
 - CommandException for identical appointments
 - CommandException for appointments with clashing timeslots
 
--- user input --  
+-- user input -- 
 Step 1. User executes reschedule command with correct and valid arguments.
 
--- `AddressBookParser` --  
+-- `AddressBookParser` --
 Step 2. Returns new `RescheduleCommandParser`.
 
--- `RescheduleCommandParser` --   
-Step 3. Verify that all argument prefixes are present.  
-Step 4. Verify that provided arguments are valid.     
+-- `RescheduleCommandParser` --
+Step 3. Verify that all argument prefixes are present.
+Step 4. Verify that provided arguments are valid.
 Step 5. Returns new `RescheduleCommand`.
 
--- `RescheduleCommand` --   
-Step 6. Verify that the given index exist in UniqueAppointmentList.  
-Step 7. Verify that the new appointment to be added does not have time conflict with another appointment on the same day.  
+-- `RescheduleCommand` --
+Step 6. Verify that the given index exist in UniqueAppointmentList.
+Step 7. Verify that the new appointment to be added does not have time conflict with another appointment on the same day.
 Step 8. Verify that the same appointment has not already been added.
 Step 9. Appointment is rescheduled.
 
@@ -316,27 +316,27 @@ The following exceptions may be thrown during this process, namely:
 
 Given below is an example usage scenario of how the _Undo_ command executes.
 
--- user input --  
+-- user input --
 Step 1. User executes a valid `add` command.
 
--- `AddCommand` --  
-Step 2. Adds the `add` command as recent command.  
+-- `AddCommand` --
+Step 2. Adds the `add` command as recent command.
 Step 3. Adds the added `person` as new patient.
 
--- user input --  
+-- user input --
 Step 4. User executes `undo` command.
 
--- `UndoCommand` --  
-Step 5. Verify that there is a command to undo.  
+-- `UndoCommand` --
+Step 5. Verify that there is a command to undo.
 Step 6. Undo the most recent command (deletes the new patient).
 
--- `RedoCommand` --  
-Step 7. Verify that there is an undone command to undo.  
+-- `RedoCommand` --
+Step 7. Verify that there is an undone command to undo.
 Step 8. Redo the most recent undone command (restores the deleted patient).
 
 The execution can be seen in the activity diagram given below.
 
-_Activity Diagram for a typical `undo` command_  
+_Activity Diagram for a typical `undo` command_
 ![UndoCommandActivityDiagram.png](images/UndoCommandActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
