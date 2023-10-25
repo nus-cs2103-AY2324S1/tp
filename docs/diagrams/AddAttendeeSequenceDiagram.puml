@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddMeetingContactCommandParser" as AddMeetingContactCommandParser LOGIC_COLOR
+participant "a:AddMeetingContactCommand" as AddMeetingContactCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+endbox
+
+box Model MODEL_COLOR_T1
+participant "m:Meeting" as Meeting MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addmc 1 2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addmc 1 2")
+activate AddressBookParser
+
+create AddMeetingContactCommandParser
+AddressBookParser -> AddMeetingContactCommandParser
+activate AddMeetingContactCommandParser
+
+AddMeetingContactCommandParser --> AddressBookParser
+deactivate AddMeetingContactCommandParser
+
+AddressBookParser -> AddMeetingContactCommandParser : parse("1 2")
+activate AddMeetingContactCommandParser
+
+create AddMeetingContactCommand
+AddMeetingContactCommandParser -> AddMeetingContactCommand
+activate AddMeetingContactCommand
+
+AddMeetingContactCommand --> AddMeetingContactCommandParser : a
+deactivate AddMeetingContactCommand
+
+AddMeetingContactCommandParser --> AddressBookParser : a
+deactivate AddMeetingContactCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddMeetingContactCommandParser -[hidden]-> AddressBookParser
+destroy AddMeetingContactCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddMeetingContactCommand : execute()
+activate AddMeetingContactCommand
+
+create Meeting
+AddMeetingContactCommand -> Meeting : addAttendee(1, 2)
+activate Meeting
+
+Meeting --> AddMeetingContactCommand : m
+deactivate Meeting
+
+AddMeetingContactCommand -> Model : setMeeting(1, m)
+activate Model
+
+Model --> AddMeetingContactCommand
+deactivate Model
+
+create CommandResult
+AddMeetingContactCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddMeetingContactCommand
+deactivate CommandResult
+
+AddMeetingContactCommand --> LogicManager : result
+deactivate AddMeetingContactCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
