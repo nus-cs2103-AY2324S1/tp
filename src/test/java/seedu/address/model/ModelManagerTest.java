@@ -101,7 +101,6 @@ public class ModelManagerTest {
     @Test
     public void getSelectedPerson_validPerson_success() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
         modelManager = new ModelManager(addressBook, userPrefs);
@@ -113,13 +112,11 @@ public class ModelManagerTest {
     @Test
     public void updateSelectedPerson_validPerson_success() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
         modelManager = new ModelManager(addressBook, userPrefs);
         modelManager.updateSelectedPerson(modelManager.getFilteredPersonList().get(1));
         assertEquals(modelManager.getSelectedPerson(), modelManager.getFilteredPersonList().get(1));
-
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
