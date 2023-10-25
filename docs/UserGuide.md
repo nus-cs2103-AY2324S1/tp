@@ -53,7 +53,10 @@ would like the command to operate on.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [m/MEDICAL_HISTORY]` can be used as `n/John Doe m/Osteoporosis` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple times but must include at least one entry.<br>
+  e.g. `INDEX…​` can be used as `1` , `1 2 3`, `4 5 6 7 8`, but _**not**_ ` ` (i.e. 0 times).
+
+* Items with both square brackets and `…`​ can be used multiple times, including zero times as they are optional. <br>
   e.g. `[m/MEDICAL_HISTORY]…​` can be used as ` ` (i.e. 0 times), `m/Osteoporosis`, `m/Osteoporosis m/Asthma` etc.
 
 * Parameters can be in any order.<br>
@@ -130,17 +133,18 @@ Examples:
 
 ### Deleting a patient or specialist : `delete`
 
-Deletes the specified patient or specialist from the stored records.
+Deletes the specified patients or specialists from the stored records.
 
-Format: `delete INDEX`
+Format: `delete INDEX…​`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes all persons at the specified `INDEX…​`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​ with a maximum value of the list size.
+* The indexes must **not** contain any duplicate integers.
 
 Examples:
-* `list -pa` followed by `delete 2` deletes the 2nd patient in the listed patients. 
-* `find -sp n/Betsy` followed by `delete 1` deletes the 1st specialist from the specialists listed in the `find` command.
+* `list -pa` followed by `delete 2` deletes the 2nd patient in the listed patients.
+* `find -sp s/Orthopaedic` followed by `delete 2 3 4` deletes the 2nd, 3rd and 4th specialist listed in the `find` command.
 
 ### Clearing all entries : `clear`
 
