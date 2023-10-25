@@ -4,7 +4,6 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -32,7 +31,6 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <PieChart fx:id="breakdownPieChart" prefHeight="248.0" prefWidth="315.0" title="Breakdown" />
                </children>
                <padding>
                   <Insets left="30.0" right="30.0" />
