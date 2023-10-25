@@ -25,7 +25,7 @@ public class ScheduleCard extends UiPart<Region> {
     private Label address;
 
     @FXML
-    private Label day;
+    private Label lesson;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -35,6 +35,6 @@ public class ScheduleCard extends UiPart<Region> {
         this.person = person;
         name.setText(person.getName().fullName);
         address.setText(person.getAddress().value);
-        day.setText(person.getDay().value.toString());
+        lesson.setText(person.getLesson().toString());
     }
 }

@@ -40,7 +40,7 @@ public class CommandTestUtil {
     public static final String VALID_SUBJECT_AMY = "Maths";
     public static final String VALID_SUBJECT_BOB = "Physics";
     public static final String VALID_DAY_AMY = "Mon";
-    public static final String VALID_DAY_BOB = "Tues";
+    public static final String VALID_DAY_BOB = "Tue";
     public static final String VALID_BEGIN_AMY = "1200";
     public static final String VALID_BEGIN_BOB = "1300";
     public static final String VALID_END_AMY = "1400";
@@ -72,7 +72,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT; // empty string not allowed for subjects
-    public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "Monday"; // full day name not allowed
+    public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "Mond"; // full day name not allowed
     public static final String INVALID_BEGIN_DESC = " " + PREFIX_BEGIN + "9999"; //not a valid time
     public static final String INVALID_END_DESC = " " + PREFIX_END + "8888"; // not a valid time
     public static final String INVALID_PAYRATE_DESC = " " + PREFIX_PAYRATE + "hundred";

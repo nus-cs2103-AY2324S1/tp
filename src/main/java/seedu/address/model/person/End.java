@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a Person's End in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEnd(String)}
@@ -10,7 +13,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class End {
 
-    public static final String MESSAGE_CONSTRAINTS = "End has a format of HHMM";
+    public static final String MESSAGE_CONSTRAINTS = "That is not a valid time format. End has a format of HHMM";
     public static final String VALIDATION_REGEX = "^(0[0-9]|1[0-9]|2[0-3])[0-5][0-9]$";
     public final String value;
 
@@ -27,6 +30,19 @@ public class End {
 
     public static boolean isValidEnd(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    private LocalTime parse(String test) {
+        assert isValidEnd(test);
+
+        String pattern = "HHmm";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+
+        return LocalTime.parse(test, formatter);
+    }
+
+    public LocalTime getTime() {
+        return parse(value);
     }
 
     @Override
