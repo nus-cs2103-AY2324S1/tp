@@ -7,7 +7,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
-import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.session.SessionManager;
 
@@ -46,19 +45,17 @@ public class FlashcardBox extends UiPart<Region> {
     private Button reveal;
 
     private boolean isRevealed = false;
-    private Model model;
 
     private MainWindow mw;
 
     /**
      * Creates a {@code FlashCard code} with the given {@code FlashCard} and index to display.
      */
-    public FlashcardBox(FlashCard fc, int displayedIndex, Model model, MainWindow mw) {
+    public FlashcardBox(FlashCard fc, int displayedIndex, MainWindow mw) {
         super(FXML);
         // Ensure that FlashCard with buttons is only created when in review session
         assert(SessionManager.getInstance().isReviewSession());
         this.flashCard = fc;
-        this.model = model;
         this.mw = mw;
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");

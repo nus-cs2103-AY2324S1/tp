@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box LOGIC_COLOR_T1
+participant ":FlashcardBox" as FlashcardBox LOGIC_COLOR
+participant ":MainWindow" as MainWindow LOGIC_COLOR
+participant "logic:Logic" as Logic LOGIC_COLOR
+participant ":FlashlingoParser" as FlashlingoParser LOGIC_COLOR
+participant ":YesCommand" as YesCommand LOGIC_COLOR
+participant ":ResultDisplay" as ResultDisplay LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":FlashCard" as FlashCard LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> FlashcardBox : success()
+activate FlashcardBox
+
+
+FlashcardBox -> MainWindow : executeCommand("no")
+activate MainWindow
+
+MainWindow -> Logic : executeCommand("no")
+activate Logic
+
+Logic -> FlashlingoParser : parseCommand("no")
+activate FlashlingoParser
+return Command
+
+Logic -> YesCommand : execute(<<model>>)
+activate YesCommand
+YesCommand -> Model : rememberWord(false)
+activate Model
+Model -> FlashCard : updateLevel(false)
+activate FlashCard
+FlashCard --> Model
+deactivate FlashCard
+return
+return commandResult
+return commandResult
+
+alt commandResult.isShowHelp()
+MainWindow -> MainWindow ++ : handleHelp()
+deactivate MainWindow
+else commandResult.isExit()
+MainWindow -> MainWindow ++ : handleExit()
+deactivate MainWindow
+else commandResult.isSwitchTheme()
+MainWindow -> MainWindow ++ : handleSwitchTheme()
+MainWindow --> MainWindow : commandResult
+deactivate MainWindow
+end
+
+MainWindow -> CommandResult : getFeedbackToUser()
+activate CommandResult
+CommandResult --> ResultDisplay : userFeedback
+deactivate CommandResult
+activate ResultDisplay
+ResultDisplay --> MainWindow
+deactivate ResultDisplay
+
+MainWindow --> FlashcardBox
+deactivate MainWindow
+<--FlashcardBox
+deactivate FlashcardBox
+@enduml

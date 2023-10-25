@@ -121,7 +121,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashCardList(), model, this);
+        flashcardListPanel = new FlashcardListPanel(logic.getFilteredFlashCardList(), this);
         flashCardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

@@ -32,7 +32,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main.java`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/Main.java) and [`MainApp.java`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -77,7 +77,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Flashcard` object residing in the `Model`.
 
 ### Logic component
 
@@ -147,6 +147,60 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
+
+This section describes some noteworthy details on how certain features are implemented.
+
+
+### UI enhancement (Nathanael M. Tan)
+
+#### Implementation
+
+Display of flashcard details is split into two different classes of `FlashcardBox` and `FlashcardBoxNoButtons`
+FlashcardBoxNoButtons is the default way to display the details of the flashcard.\
+When `start` command is used, review session begins and FlashcardBox is then used to display the details.\
+This is to prevent users from reviewing cards that they are not scheduled to review and erroneously cause changes to the flashcard.
+
+Both `FlashcardBox` and `FlashcardBoxNoButtons` have a button at the right called that is called "Reveal" when the translation is not shown, and "Hide" when it is.\
+This button will toggle the state of whether the translation is currently displayed.
+
+`FlashcardBox` has an additional two buttons, the `Yes` button and the `No` button.\
+The `Yes` button will invoke the yes command, just like if it were to be typed into the command line
+Similarly, the `No` button will invoke the no command.
+
+#### Design considerations:
+
+**Aspect: How to invoke the command:**
+
+* **Alternative 1 (current choice):** Pass MainWindow all the way into FlashcardBox. Use `executeCommand()` method to invoke the respective command
+    * Pros: 
+      * High level of maintainability. 
+      * Outcome will be the same as if it were to be typed into the CLI.
+      * Easy to change logic of the commands
+    * Cons: 
+      * Have to pass MainWindow through multiple classes
+      * Classes that do not need references to MainWindow are now forced to have them
+
+* **Alternative 2:** Individual button can perform the `Yes` and `No` command by itself, without executing through a Command
+    * Pros: 
+      * Don't have to keep reference to the MainWindow
+    * Cons: 
+      * Low level of maintainability. 
+      * Changes made have to be replicated in different places.
+      * May not behave the same way as a Command (eg. ResultDisplay does not show the log message)
+
+* **Alternative 2:** Remove the `Yes` and `No` buttons.
+    * Pros:
+        * Easy to code
+        * Only one way to invoke the command, reduce confusion
+    * Cons:
+        * Less convenient without the buttons, needing to type
+
+### Sequence diagram when clicking the `Yes` and `No` buttons
+#### Both diagrams are the same except for the inputs to the methods.
+![YesCommand from FlashcardBox](images/UiYesButtonSequenceDiagram.png)
+
+![NoCommand from FlashcardBox](images/UiNoButtonSequenceDiagram.png)
+
 
 ### Start and End Session
 
@@ -299,15 +353,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-### Use case
-
 **System:** Flashlingo\
 **Use case:** UC1 - Help\
 **Actor:** User\
 **MSS:**
 
-1.	User requests help by keying in command
-2.	Flashlingo displays help page
+1.	User requests help by keying in command or clicking the Help Button on the UI
+2.	Flashlingo opens browser with UserGuide
+
 Use case ends.
 
 **System:** Flashlingo\
@@ -315,15 +368,21 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to add a word and its translation by keying in command.
-2.	Flashlingo adds the word and its translation.
+2.	Flashlingo adds the word and its translation.\
 Use case ends.
+
+**Extensions:**\
+1a. User adds word and translation and specifies the language of the original word and translation.\
+1a1. Flashlingo adds the word and its translation as well as the language of both.\
+Use case ends.
+
 
 **System:** Flashlingo\
 **Use case:** UC3 – Delete a word\
 **Actor:** User\
 **MSS:**
 1.	User chooses to delete a word by keying in command
-2.	Flashlingo deletes the word and its translation
+2.	Flashlingo deletes the word and its translation.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -331,7 +390,7 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to display list of flashcard.
-2.	Flashlingo displays list of cards with words and corresponding translations.
+2.	Flashlingo displays list of cards with words and corresponding translations.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -339,7 +398,7 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to start.
-2.	Flashlingo displays the words user is going to study.
+2.	Flashlingo displays the words user is going to study.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -347,31 +406,43 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to flip the flashcard
-2.	Flashlingo shows meaning of the word.
+2.	Flashlingo shows meaning of the word.\
 Use case ends.
 
 **System:** Flashlingo\
 **Use case:** UC7 – Indicate user has remembered word\
 **Actor:** User\
 **MSS:**
-1.	User confirms remembrance of the word
-2.	Flashlingo displays congratulatory message.
+1.	User confirms remembrance of the word.
+2. Flashlingo increments level of the flashcard.
+3. Flashlingo displays congratulatory message.\
 Use case ends.
+
+**Extensions:**\
+2a. Flashlingo detects that level of flashcard exceeds threshold\
+2a1. Flashlingo deletes the flashcard.\
+Use case resumes from step 3.
 
 **System:** Flashlingo\
 **Use case:** UC8 – Indicate user has forgotten word\
 **Actor:** User\
 **MSS:**
 1.	User indicates they couldn’t remember word.
-2.	Flashlingo displays motivational message to keep up.
+2. Flashlingo decements level of flashcard.
+3. Flashlingo displays motivational message to keep up.\
 Use case ends.
+
+**Extensions:**\
+2a. Flashlingo detects that level of flashcard is at base level of 1\
+2a1. Flashlingo does not decrement any further, leaving level at 1.\
+Use case resumes from step 3.
 
 **System:** Flashlingo\
 **Use case:** UC9 – Stop session\
 **Actor:** User\
 **MSS:**
 1.	User chooses to stop session.
-2.	Flashlingo stops and displays the completion message..
+2.	Flashlingo stops and displays the completion message.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -379,7 +450,7 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to exit
-2.	Flashlingo closes GUI and terminates
+2.	Flashlingo closes GUI and terminates.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -387,7 +458,7 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to change data source by adding new file-path.
-2.	Flashlingo changes data source and displays success message
+2.	Flashlingo changes data source and displays success message.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -395,7 +466,7 @@ Use case ends.
 **Actor:** user\
 **MSS:**
 1.	User chooses to load a data source at input file-path.
-2.	Flashlingo loads data source and displays success or failure message
+2.	Flashlingo loads data source and displays success or failure message.\
 Use case ends.
 
 ### Non-Functional Requirements
