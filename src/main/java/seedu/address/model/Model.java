@@ -58,6 +58,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same policy number as {@code person} in the address book.
+     */
+    boolean hasSamePolicyNumber(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -75,6 +80,11 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Sorts the list by policy expiration date
+     */
+    void sortData();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

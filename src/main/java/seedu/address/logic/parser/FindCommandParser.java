@@ -49,7 +49,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                         PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
                         PREFIX_POLICY_EXPIRY_DATE);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG,
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_COMPANY,
                 PREFIX_NRIC, PREFIX_LICENCE_PLATE, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
                 PREFIX_POLICY_EXPIRY_DATE);
 

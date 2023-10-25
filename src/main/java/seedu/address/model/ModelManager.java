@@ -94,6 +94,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortData() {
+        addressBook.sortData();
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -102,6 +107,14 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    /**
+     * Returns true if a person with the same policy number as {@code person} in the address book.
+     */
+    public boolean hasSamePolicyNumber(Person person) {
+        requireNonNull(person);
+        return addressBook.hasSamePolicyNumber(person);
     }
 
     @Override
