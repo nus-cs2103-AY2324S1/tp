@@ -127,6 +127,7 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* links to the UI component to display the Show Details Panel in the UI (to reduce code complexity)
 
 <box type="info" seamless>
 
@@ -157,6 +158,57 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Show feature
+
+#### Implementation
+
+The show feature is facilitated by `ShowCommand` which extends the abstract `Command` class. The `ShowCommand` will check the current state of the Model (either `STUDENT`, `SCHEDULE` or `NONE`) when the `execute` method is called and see whether it is currently showing a `STUDENT` list or a `SCHEDULE` list. 
+
+Additionally, the `ModelManager` class implements the following operations for the show command:
+
+`ModelManager#linkUi()` — Links the Ui of TutorMate to the Model to display the Show Panel
+`ModelManager#showPerson()` — Shows the details of the specified person in the Ui.
+`ModelManager#showLesson()` — Shows the details of the specified lesson in the Ui.
+
+The Show Command has different behaviours based on the current state in the `Model`:
+- The show Command will show the Person Details if the current state is `STUDENT`
+- The show Command will show the Lesson Details if the current state is `SCHEDULE`
+
+The `execute` method of `ShowCommand` will be called by the logicManager when the `show` command is input.
+
+Given below is an example usage scenario and how the show feature behaves at each step.
+
+Step 1. The user launches the application for the first time. The initial state of the Model will be set to `SCHEDULE`. The schedule list will be initialized with the initial schedule.
+
+Step 2. The user executes show 5 command to show the details of the 5th lesson in the schedule list. The `execute` method of the `ShowCommand` will be called by the logicManager. The `execute` command will call the `showLesson` method in the ModelManager which displays the `LessonDetailListPanel` in the Ui.
+
+Step 3. The user wants to display the details of a person and switches to the student list with the `list students` command in the Command Line Interface(CLI) Ui. The current list will display the students and the Model state will change to `STUDENT`.
+
+Step 4. The user executes show 1 command to show the details of the 1st person in the student list. The `execute` method of the `ShowCommand` will be called by the logicManager. The `execute` command will call the `showPerson` method in the ModelManager which displays the `StudentDetailListPanel` in the Ui.
+
+The following sequence diagram shows how the show operation works for showing a person from the `STUDENT` list:
+
+<puml src="diagrams/ShowSequenceDiagram.puml" alt="ShowSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ShowCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Design considerations:
+
+**Aspect: How the Show Command calls the Ui to display the Show Details Panel:**
+
+* **Alternative 1 (current choice):** Link the Model with the Ui to display the Show Details Panel.
+    * Pros: Easy to implement.
+    * Cons: May increase coupling between the Model and Ui
+
+* **Alternative 2:** Pass the Ui call from the Show Command around the currently linked files.
+    * Pros: No additional coupling created.
+    * Cons: Many files will have to be changed and will increase the complexity of the code.
+
 
 ### \[Proposed\] Undo/redo feature
 
