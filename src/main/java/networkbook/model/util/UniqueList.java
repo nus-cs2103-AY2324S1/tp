@@ -3,12 +3,16 @@ package networkbook.model.util;
 import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import networkbook.commons.util.ThrowingIOExceptionConsumer;
 import networkbook.model.person.exceptions.DuplicateException;
 import networkbook.model.person.exceptions.ItemNotFoundException;
 
@@ -131,6 +135,21 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
 
     public ObservableList<T> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    public void consumeItem(int index, ThrowingIOExceptionConsumer<T> consumer) throws IOException {
+        consumer.accept(this.internalList.get(index));
+    }
+
+    public <U> U consumeAndComputeItem(int index, ThrowingIOExceptionConsumer<T> consumer,
+                                       Function<T, U> function) throws IOException {
+        T item = this.internalList.get(index);
+        consumer.accept(item);
+        return function.apply(item);
+    }
+
+    public T get(int index) {
+        return this.internalList.get(index);
     }
 
     public Stream<T> stream() {

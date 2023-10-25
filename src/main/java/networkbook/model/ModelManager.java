@@ -3,6 +3,7 @@ package networkbook.model;
 import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.function.Predicate;
@@ -12,7 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import networkbook.commons.core.GuiSettings;
+import networkbook.commons.core.index.Index;
 import networkbook.commons.core.LogsCenter;
+import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 
 /**
@@ -113,6 +116,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         networkBook.setItem(target, editedPerson);
+    }
+
+    @Override
+    public Link openLink(Index personIndex, Index linkIndex) throws IOException {
+        return networkBook.openLink(personIndex, linkIndex);
     }
 
     //=========== Filtered Person List Accessors =============================================================

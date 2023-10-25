@@ -2,9 +2,15 @@ package networkbook.model.person;
 
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.awt.Desktop;
 import java.util.Objects;
 import java.util.Optional;
 
+import networkbook.commons.core.index.Index;
+import networkbook.commons.util.ThrowingIOExceptionConsumer;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.tag.Tag;
 import networkbook.model.util.Identifiable;
@@ -15,6 +21,24 @@ import networkbook.model.util.UniqueList;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person implements Identifiable<Person> {
+    private static class InvalidLinkFormatException extends RuntimeException {
+        public InvalidLinkFormatException() {
+            super();
+        }
+    }
+
+    public static final ThrowingIOExceptionConsumer<Link> LINK_OPENER = link -> {
+            if (!Desktop.isDesktopSupported()) {
+                return;
+            }
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                URI uri = new URI(link.getValue());
+                desktop.browse(uri);
+            } catch (URISyntaxException e) { // should not throw this exception
+                throw new InvalidLinkFormatException();
+            }
+        };
 
     // Identity fields
     private final Name name;
@@ -105,6 +129,20 @@ public class Person implements Identifiable<Person> {
      */
     public String getValue() {
         throw new UnsupportedOperationException("Person does not have String representation for Json storage");
+    }
+
+    /**
+     * Opens the link at the specified index.
+     */
+    public void openLink(Index linkIndex) throws IOException {
+        this.links.consumeItem(linkIndex.getZeroBased(), LINK_OPENER);
+    }
+
+    /**
+     * Returns the link at the given index.
+     */
+    public Link getLink(int index) {
+        return this.links.get(index);
     }
 
     /**

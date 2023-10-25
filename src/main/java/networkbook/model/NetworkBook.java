@@ -2,10 +2,13 @@ package networkbook.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.IOException;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
+import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 import networkbook.model.util.UniqueList;
 
@@ -82,6 +85,15 @@ public class NetworkBook implements ReadOnlyNetworkBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Opens the link at {@code linkIndex} in the link list of the person
+     * at index {@code personIndex}.
+     */
+    public Link openLink(Index personIndex, Index linkIndex) throws IOException {
+        return persons.consumeAndComputeItem(personIndex.getZeroBased(),
+                person -> person.openLink(linkIndex), person -> person.getLink(linkIndex.getZeroBased()));
     }
 
     //// util methods
