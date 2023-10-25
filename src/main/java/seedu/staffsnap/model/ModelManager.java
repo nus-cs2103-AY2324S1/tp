@@ -131,7 +131,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
+    public void updateFilteredApplicantList(Predicate<? super Applicant> predicate) {
         requireNonNull(predicate);
         filteredApplicants.setPredicate(predicate);
     }
@@ -162,7 +162,7 @@ public class ModelManager implements Model {
      * Refreshes the applicant list with the same predicate
      */
     public void refreshApplicantList() {
-        Predicate predicate = filteredApplicants.getPredicate();
+        Predicate<? super Applicant> predicate = filteredApplicants.getPredicate();
         if (predicate == null) {
             predicate = PREDICATE_SHOW_ALL_APPLICANTS;
         }
