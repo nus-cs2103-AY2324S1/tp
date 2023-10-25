@@ -2,8 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -30,6 +33,8 @@ public class Person {
 
     private boolean paid;
     private PayRate payRate;
+    private Date beginTime;
+    private Date endTime;
 
     /**
      * Every field must be present and not null.
@@ -38,7 +43,6 @@ public class Person {
     public Person(Name name, Phone phone, Email email, Address address, Subject subject, Day day,
                   Begin begin, End end, Set<Tag> tags, boolean paid, PayRate payRate) {
         requireAllNonNull(name, phone, email, address, subject, day, begin, end, tags);
-
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,6 +53,14 @@ public class Person {
         this.payRate = payRate;
 
         this.lesson = new Lesson(day, begin, end);
+
+        try {
+            this.beginTime = convertTime(begin.toString());
+            this.endTime = convertTime(end.toString());
+        } catch (ParseException e) {
+            //something
+        }
+
     }
 
     public Name getName() {
@@ -104,6 +116,14 @@ public class Person {
         return lesson;
     }
 
+    public Date getBeginTime() {
+        return beginTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -125,6 +145,17 @@ public class Person {
     }
 
     /**
+     * converts a string time into a date object
+     * @param time
+     * @return date object of the time
+     * @throws ParseException
+     */
+    public Date convertTime(String time) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("HHmm");
+        return format.parse(time);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -135,6 +166,22 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * checks for clashing schedules
+     * @param otherPerson other person to be checked
+     * @return boolean for whether schedules clash
+     */
+    public boolean isSameDate(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getDay().equals(getDay())
+                && getBeginTime().before(otherPerson.getEndTime())
+                && otherPerson.getBeginTime().before(getEndTime());
     }
 
     /**

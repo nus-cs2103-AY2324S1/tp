@@ -73,14 +73,17 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (argMultimap.getValue(PREFIX_DAY).isPresent()) {
             editPersonDescriptor.setDay(ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get()));
+            editPersonDescriptor.setEditSchedule(true);
         }
 
         if (argMultimap.getValue(PREFIX_BEGIN).isPresent()) {
             editPersonDescriptor.setBegin(ParserUtil.parseBegin(argMultimap.getValue(PREFIX_BEGIN).get()));
+            editPersonDescriptor.setEditSchedule(true);
         }
 
         if (argMultimap.getValue(PREFIX_END).isPresent()) {
             editPersonDescriptor.setEnd(ParserUtil.parseEnd(argMultimap.getValue(PREFIX_END).get()));
+            editPersonDescriptor.setEditSchedule(true);
         }
 
         if (argMultimap.getValue(PREFIX_PAYRATE).isPresent()) {
