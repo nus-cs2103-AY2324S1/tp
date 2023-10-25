@@ -9,32 +9,31 @@ title: User Guide
 
 Too many patients to handle? Mixing up your patient appointments?
 
-Don't worry, we got you! Taking control of your patient records management has never been easier. All you need is a 
+Don't worry, we got you! Taking control of your patient records management has never been easier. All you need is a
 desktop and **MediFlowR** will handle the rest!
 
 ### About MediFlowR:
 
-MediFlowR is a desktop application built for medical practitioners to manage their day-to-day operations. It is a 
-user-friendly and efficient patient records management system designed to help you streamline your patient management 
-processes. In the fast-paced world of healthcare, we understand the importance of keeping patient information organised 
+MediFlowR is a desktop application built for medical practitioners to manage their day-to-day operations. It is a
+user-friendly and efficient patient records management system designed to help you streamline your patient management
+processes. In the fast-paced world of healthcare, we understand the importance of keeping patient information organised
 and appointments on track. MediFlowR is your solution!
 
 ### Key Features:
 To simplify your administrative tasks, our application provides a range of features, but not limited to:
 
 1. **Patient Information Management:** Easily store, access and edit patient data, making it simple to track patient's vital information and history.
-2. **Appointment Scheduling:** Efficiently manage patient appointments and eliminate the risk of scheduling conflicting appointments. 
+2. **Appointment Scheduling:** Efficiently manage patient appointments and eliminate the risk of scheduling conflicting appointments.
 3. **Integration:** Seamlessly integrate patient records across multiple departments by allowing users to update patient information, allowing for the doctor to follow up and ensuring continuity of care.
 
+Here at MediFlowR, we believe in keeping things simple and efficient.
 
-Here at MediFlowR, we believe in keeping things simple and efficient. 
-
-_**Simple:**_  
+_**Simple:**_
 Navigating MediFlowR is a breeze. Our intuitive user interface just displays essential information allowing
-you to quickly access the information you need. Moreover, this user guide together with the in-application guidance 
-minimises the learning curve for your administrative staff. 
+you to quickly access the information you need. Moreover, this user guide together with the in-application guidance
+minimises the learning curve for your administrative staff.
 
-_**Efficient:**_  
+_**Efficient:**_
 On top of these functionalities, we believe that patient management must be efficient.
 Therefore, MediFlowR is optimised for use via a Command Line Interface (CLI) while still having
 the benefits of a Graphical User Interface (GUI). By simply typing, MediFlowR can get your
@@ -123,10 +122,10 @@ hospital management tasks done faster than current GUI apps in the industry.
 ## Tutorial for new users
 
 If this is your first time using MediFlowR, do not worry as this is a tutorial for you to get familiar with the features
-of MediFlowR. Please follow the instructions [here](#quick-start) first to set up the application before proceeding with the tutorial. 
+of MediFlowR. Please follow the instructions [here](#quick-start) first to set up the application before proceeding with the tutorial.
 
 - Launch the MediFlowR application. If you are not able to launch the application, follow the instructions [here](#faq).
-  - Note: When the application is first launched, it will contain some default patient records. 
+  - Note: When the application is first launched, it will contain some default patient records.
 
 - Let us try **adding a patient** into our patient records. Enter the command `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=Fever` in the command box.
 
@@ -432,7 +431,7 @@ Format: `today`
 
 ### Undoing a previous command: `undo`
 
-This command undoes a previous command. 
+This command undoes a previous command.
 
 Format: `undo`
 
