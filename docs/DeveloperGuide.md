@@ -449,9 +449,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 1. Upon opening the app, the system displays a dashboard.
 2. The dashboard shows total income, total expenses, net profit for the selected period (usually monthly), and a breakdown of expenses by sector.
 
-### Use
-
-Case 7: Access to Financial Reports
+### Use Case 7: Access to Financial Reports
 
 **Actor:** Accountant
 
@@ -473,16 +471,75 @@ Case 7: Access to Financial Reports
 2. The system provides tools for the accountant to customize the report parameters.
 3. The system generates and displays the customized report in common formats (PDF, CSV, Excel).
 
-### Use Case 8: Customizable Reports
+### Use Case 9: Deleting All Transactions
 
 **Actor:** Accountant
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
-1. The accountant selects the option to generate customizable reports.
-2. The system provides tools for the accountant to customize the report parameters.
-3. The system generates and displays the customized report in common formats (PDF, CSV, Excel).
+1. The accountant selects the option to delete all transactions.
+2. The system permanently deletes all recorded transactions from the database.
+
+
+### Use Case 10: Adding a Staff Member to Address Book
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects the option to add a new staff member to the address book.
+2. The system presents a form for entering staff member details, such as name, contact information, and role.
+3. The accountant enters the required information.
+4. The system validates the input data.
+5. The system adds the new staff member to the address book.
+
+**Extensions:**
+- If the input data is invalid or incomplete, the system displays an error message.
+- The system may provide an option to associate the new staff member with transactions during this process.
+
+### Use Case 11: Removing a Staff Member from Address Book
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects a staff member from the address book to remove.
+2. The system confirms the removal with the accountant.
+3. The accountant confirms the action.
+4. The system removes the selected staff member from the address book.
+
+**Extensions:**
+- If the accountant cancels the operation at the confirmation step, no staff members are removed.
+
+### Use Case 12: Editing Staff Member Information in Address Book
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects a staff member from the address book to edit.
+2. The system presents a form populated with the staff member's existing information.
+3. The accountant modifies the staff member's details as needed.
+4. The system validates the updated information.
+5. The system saves the updated staff member information in the address book.
+
+**Extensions:**
+- If the input data is invalid or incomplete, the system displays an error message.
+
+### Use Case 13: Deleting All Address Book Contacts
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects the option to delete all address book contacts.
+2. The system permanently deletes all contacts from the address book.
+
 
 ## Non-functional Requirements (NFR)
 
