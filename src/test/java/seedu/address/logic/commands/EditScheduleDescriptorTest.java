@@ -11,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_TWO;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.EditScheduleDescriptorBuilder;
-import seedu.address.testutil.TypicalPersons;
 
 public class EditScheduleDescriptorTest {
     @Test
@@ -41,9 +40,6 @@ public class EditScheduleDescriptorTest {
 
         // different endTime -> returns false
         editedAmy = new EditScheduleDescriptorBuilder(DESC_SCHEDULE_AMY).withEndTime(VALID_END_TIME_TWO).build();
-        assertFalse(DESC_SCHEDULE_AMY.equals(editedAmy));
-        // different tutor -> return false
-        editedAmy = new EditScheduleDescriptorBuilder(DESC_SCHEDULE_AMY).withTutor(TypicalPersons.BOB).build();
         assertFalse(DESC_SCHEDULE_AMY.equals(editedAmy));
     }
 

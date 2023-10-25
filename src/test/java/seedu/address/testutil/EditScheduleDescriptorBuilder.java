@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.time.LocalDateTime;
 
 import seedu.address.logic.commands.EditScheduleCommand;
-import seedu.address.model.person.Person;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
