@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.RemindCommand;
+import seedu.address.model.person.RemindPredicate;
 
 /**
  * Parses input arguments and creates a new RemindCommand object
@@ -11,6 +12,6 @@ public class RemindCommandParser implements Parser<RemindCommand> {
      * and returns a SortCommand object for execution.
      */
     public RemindCommand parse(String args) {
-        return new RemindCommand();
+        return new RemindCommand(new RemindPredicate());
     }
 }
