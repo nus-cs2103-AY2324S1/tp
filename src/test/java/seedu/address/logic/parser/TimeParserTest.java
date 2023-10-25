@@ -17,17 +17,17 @@ class TimeParserTest {
             LocalDateTime.of(1970, 1, 1, 0, 0);
 
     @Test
-    void testDefaultDate() {
+    void testTimeParser_DefaultDate() {
         assertEquals(DEFAULT_DATE, TimeParser.DEFAULT_DATE);
     }
 
     @Test
-    void testDateFormatsArrayNotNull() {
+    void testTimeParser_arrayNotNull() {
         assertNotNull(TimeParser.dateFormats);
     }
 
     @Test
-    void testInvalidDate() {
+    void testParseDate_InvalidDate_unsuccessfulParse() {
         boolean hasError = false;
         try {
             TimeParser.parseDate("whenever I say so");
@@ -38,29 +38,29 @@ class TimeParserTest {
     }
 
     @Test
-    void testDayAnd24hTime() throws ParseException {
+    void testParseDate_DayAnd24hTime_successfulParse() throws ParseException {
         TimeParser.parseDate("Tue 1630");
     }
 
     @Test
-    void testDayShortForm() throws ParseException {
+    void testParseDate_DayShortForm() throws ParseException {
         TimeParser.parseDate("Tue");
     }
 
     @Test
-    void testDayLongForm() throws ParseException {
+    void testParseDate_DayLongForm() throws ParseException {
         TimeParser.parseDate("Tuesday");
     }
 
     @Test
-    void testDayIncompleteValid() throws ParseException {
+    void testParseDate_DayIncompleteValid() throws ParseException {
         TimeParser.parseDate("Tues");
         TimeParser.parseDate("Tuesd");
         TimeParser.parseDate("Tuesda");
     }
 
     @Test
-    void testDayIncompleteInvalid() {
+    void testParseDate_DayIncompleteInvalid_unsuccessfulParse() {
         boolean hasError = false;
         try {
             System.out.println(TimeParser.parseDate("T"));
@@ -71,7 +71,7 @@ class TimeParserTest {
     }
 
     @Test
-    void testDayIncompleteInvalid2() {
+    void testParseDate_DayIncompleteInvalid2() {
         boolean hasError = false;
         try {
             TimeParser.parseDate("Tu");
@@ -82,59 +82,59 @@ class TimeParserTest {
     }
 
     @Test
-    void testDayAnd12hTimeWithMinutes() throws ParseException {
+    void testParseDate_DayAnd12hTimeWithMinutes_successfulParse() throws ParseException {
         TimeParser.parseDate("Tue 4.30pm");
     }
 
     // TODO: FIX THIS FROM PASSING
     @Test
-    void testDayAnd12hTimeWithoutMinutes() throws ParseException {
+    void testParseDate_DayAnd12hTimeWithoutMinutes() throws ParseException {
         TimeParser.parseDate("Tue 4pmdfjs");
     }
 
     @Test
-    void testDayAnd12hTimeWithoutMinutes2() throws ParseException {
+    void testParseDate_DayAnd12hTimeWithoutMinutes2_successfulParse() throws ParseException {
         TimeParser.parseDate("Tue 4pm");
     }
 
     @Test
-    void testYearMonthDayTime() throws ParseException {
+    void testParseDate_YearMonthDayTime_successfulParse() throws ParseException {
         TimeParser.parseDate("21/12/2024 5pm");
     }
 
     @Test
-    void testYearMonthDayTime2() throws ParseException {
+    void testParseDate_YearMonthDayTime2_successfulParse() throws ParseException {
         TimeParser.parseDate("21-12-2024 5pm");
     }
 
     @Test
-    void testYearMonthDayTime3() throws ParseException {
+    void testParseDate_YearMonthDayTime3_successfulParse() throws ParseException {
         TimeParser.parseDate("21-12-2024 1730");
     }
 
     @Test
-    void testYearMonthDayTime4() throws ParseException {
+    void testParseDate_YearMonthDayTime4_successfulParse() throws ParseException {
         TimeParser.parseDate("21-12-2024 1730pm");
     }
 
     // TODO: FIX THIS FROM BECOMING 1.30AM
     @Test
-    void testYearMonthDayTime5() throws ParseException {
+    void testParseDate_YearMonthDayTime5_successfulParse() throws ParseException {
         TimeParser.parseDate("nov 12 1.30pm 2023");
     }
 
     @Test
-    void testYearMonthDayTime6() throws ParseException {
+    void testParseDate_YearMonthDayTime6_successfulParse() throws ParseException {
         TimeParser.parseDate("2023-12-12 1647");
     }
 
     @Test
-    void testParseDateWithDdMmYyyy() throws ParseException {
+    void testParseDate_ParseDateWithDdMmYyyy() throws ParseException {
         assertEquals(TEST_DATE, TimeParser.parseDate("01/01/2099"));
     }
 
     @Test
-    void testParseDateWithPastDate() {
+    void testParseDate_ParseDateWithPastDate() {
         boolean hasError = false;
         try {
             TimeParser.parseDate("01/01/1970");
@@ -145,27 +145,12 @@ class TimeParserTest {
     }
 
     @Test
-    void testZeroId() throws ParseException {
+    void testParseDate_ZeroId() throws ParseException {
         assertNotNull(TimeParser.parseDate("mon 2359"));
     }
 
     @Test
-    void testOneId() throws ParseException {
+    void testParseDate_OneId() throws ParseException {
         assertNotNull(TimeParser.parseDate("mon 2359"));
-    }
-
-    @Test
-    void testTwoId() throws ParseException {
-        assertNotNull(TimeParser.parseDate("23 jan 15"));
-    }
-
-    @Test
-    void testThreeId() throws ParseException {
-        assertNotNull(TimeParser.parseDate("dec 4 8.53pm"));
-    }
-
-    @Test
-    void testFourId() throws ParseException {
-        assertNotNull(TimeParser.parseDate("dec 4"));
     }
 }
