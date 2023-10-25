@@ -150,20 +150,20 @@ Next-of-Kin Phone: 82020202
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names, tags or financial plans contain any of the specified keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`
 
+* At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* For names, only full words will be matched e.g. `Han` will not match `Hans`
+* For financial plans and tags, any substring will be matched e.g. `Senior` will match `SuperSenior`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Gathering clients' emails by financial plan: `gather`
@@ -262,7 +262,7 @@ _Details coming soon ..._
 | **Clear**  | `clear`                                                                                                                                                                                                                 |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
 | **Edit**   | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                              |
+| **Find**   | `find [n/NAME]…​ [fp/FINANCIAL_PLAN]…​ [t/TAG]…​`<br> e.g., `find n/James n/Jake`                                                                                                                                       |
 | **Gather** | `gather FINANCIAL_PLAN_NAME` <br> e.g., `gather Basic Insurance Plan`                                                                                                                                                   |
 | **List**   | `list`                                                                                                                                                                                                                  |
 | **Help**   | `help`                                                                                                                                                                                                                  |
