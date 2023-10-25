@@ -205,15 +205,38 @@ public class FindCommandArgumentParser {
             if (!hasChar()) {
                 return;
             }
+            if (getChar() == '\'' || getChar() == '"') {
+                findAndAppendQuotedPredicate();
+                return;
+            }
             int startIndexOfPredicate = index;
             incrementIndexWhileNotReservedChar();
             dualStack.append(new SingleTextSearchMatcher(search.substring(startIndexOfPredicate, index)));
+        }
+
+        private void findAndAppendQuotedPredicate() throws ParserDualStack.UnexpectedTokenException {
+            assert hasChar() && isCharQuote();
+            incrementCharIndex();
+            int predicateStartIndex = index;
+            while(hasChar() && !isCharQuote()) {
+                incrementCharIndex();
+            }
+            dualStack.append(SingleTextSearchMatcher.getQuotedMatch(
+                    search.substring(predicateStartIndex, index)
+            ));
+            if (hasChar() && isCharQuote()) {
+                incrementCharIndex();
+            }
         }
 
     }
 
     private boolean isCharJoiner() {
         return Joiner.set.containsKey(getChar());
+    }
+
+    private boolean isCharQuote() {
+        return getChar() == '"' || getChar() == '\'';
     }
 
     /**
@@ -262,6 +285,8 @@ public class FindCommandArgumentParser {
             switch (c) {
             case '(':
             case ')':
+            case '"':
+            case '\'':
                 return;
             default:
                 incrementCharIndex();
