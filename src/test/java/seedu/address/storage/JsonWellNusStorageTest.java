@@ -20,17 +20,17 @@ import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.WellNus;
 
 public class JsonWellNusStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonWellNusStorageTest");
 
     @TempDir
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readWellNus_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readWellNus(null));
     }
 
-    private java.util.Optional<ReadOnlyWellNus> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyWellNus> readWellNus(String filePath) throws Exception {
         return new JsonWellNusStorage(Paths.get(filePath)).readWellNus(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -42,27 +42,37 @@ public class JsonWellNusStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readWellNus("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
+        assertThrows(DataLoadingException.class, () -> readWellNus("notJsonFormatWellNus.json"));
     }
 
     @Test
-    public void readAddressBook_invalidStudentAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidStudentWellNus.json"));
+    public void readWellNus_invalidStudentWellNus_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readWellNus("invalidStudentWellNus.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidStudentAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidStudentAddressBook.json"));
+    public void readWellNus_invalidAndValidStudentWellNus_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readWellNus("invalidAndValidStudentWellNus.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+    public void readWellNus_invalidAppointmentWellNus_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readWellNus("invalidAppointmentWellNus.json"));
+    }
+
+    @Test
+    public void readWellNus_invalidAndValidAppointmentWellNus_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readWellNus("invalidAndValidAppointmentWellNus.json"));
+    }
+
+    @Test
+    public void readAndSaveWellNus_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempWellNus.json");
         WellNus original = getTypicalAddressBook();
         JsonWellNusStorage jsonWellNusStorage = new JsonWellNusStorage(filePath);
 
@@ -87,24 +97,24 @@ public class JsonWellNusStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveWellNus_nullWellNus_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveWellNus(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code wellNus} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyWellNus addressBook, String filePath) {
+    private void saveWellNus(ReadOnlyWellNus wellNus, String filePath) {
         try {
             new JsonWellNusStorage(Paths.get(filePath))
-                    .saveWellNus(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveWellNus(wellNus, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new WellNus(), null));
+    public void saveWellNus_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveWellNus(new WellNus(), null));
     }
 }
