@@ -194,6 +194,44 @@ The following activity diagram summarizes what happens when a user executes a `f
     * Less in line with users' expectations of a `filter` command; not as intuitive.
 * We made the choice of Alternative 1 over Alternative 2 as we found that more intuitive commands would be easier for users to learn and eventually master.
 
+### Sort feature
+
+#### Implementation
+
+The `sort` command allows the user to sort the list of students in alphabetical order to enhance efficiency in searching.
+
+When the user enters a sort command, the `AddressBookParser` parses the user's input and returns a `SortCommand`.
+
+The predicate entered by the user can be modelled by the following class: `SortIn`.
+
+The following sequence diagram shows how the `sort` command works. In this example, the user is executing the following command: `sort in/ASC`.
+
+<puml src="diagrams/SortSequenceDiagram.puml" alt="FilterSequenceDiagram" />
+
+When the `SortCommandParser` parses the argument to the `SortCommand`, the argument is stored as an attribute of type SortIn in `SortCommand`.
+This predicate is then passed into the current model, using the `updateSortedPersonList()` method.
+
+The following activity diagram summarizes what happens when a user executes a `sort` command:
+
+<puml src="diagrams/FilterActivityDiagram.puml" alt="SortActivityDiagram" width="250" />
+
+#### Design considerations:
+
+**Aspect: How the student list is sorted internally:**
+
+* **Alternative 1 (current choice):** Sort the student list in class `UniquePersonList` using method `sort`.
+    * Pros:
+        * Student list is sorted permanently, ensuring no repeated sorting needed in the next launch provided no new student is added or student's name is changed.
+        * Enhance efficiency of looking through the student list, ensure no repeated sorting needed when doing consecutive commands such as `filter`.
+    * Cons:
+        * Users would be unable to view the unsorted student list again.
+* Alternative 2: Sort the student list in class `ModelManager` using method `updateSortedPersonList`.
+    * Pros:
+        * Enable users to view the unsorted student list for every launch.
+    * Cons:
+        * Users have to resort the student list for every launch. 
+* We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
+
 ### Import feature
 
 #### Implementation
