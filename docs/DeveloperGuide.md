@@ -259,7 +259,7 @@ of an `Student` 's class details, such as their tutorial group, tutorial attenda
 grades. It will be stored as 3 separate classes to model each of the 3 different types of class details, and a tracker
 class to act as the manager for each of the classes, with the trackers composing the `ClassDetails` class.
 
-<puml src="diagrams/ClassDetails.puml" width="250" />
+<puml src="diagrams/ClassDetails.puml" />
 
 The 3 different types of class grades are:
 
@@ -270,7 +270,7 @@ will be stored as a boolean value.
 * `Assignment` - Stores the details for a students assignment grades for a specific tutorial. Assignment grades will be
 stored as an integer value, with the total marks standardized to 100 marks.
 
-<puml src="diagrams/ClassGrades.puml" width="250" />
+<puml src="diagrams/ClassGrades.puml" />
 
 These classes will be stored in their respective tracker classes, using Java Arrays to store the objects. The position
 of the classes in the array will correspond to the index of the tutorial or assignment. For example, the first index of
@@ -281,7 +281,7 @@ The tracker classes will be stored in the `ClassDetails` class, which will be co
 * `ClassParticipationTracker` - Stores the `ClassParticipation` objects for a specific student.
 * `AssignmentTracker` - Stores the `Assignment` objects for a specific student.
 
-* <puml src="diagrams/Tracker.puml" width="250" />
+<puml src="diagrams/Trackers.puml" />
 
 These tracker classes will inherit from a `tracker` *interface*. They will also support the following operations:
 * `getPercentage()` - Returns the average grade of the student for the specific tracker class. For example, the average
