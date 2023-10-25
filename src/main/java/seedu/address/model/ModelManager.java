@@ -151,12 +151,12 @@ public class ModelManager implements Model {
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
     }
+
     /**
      * Returns the current address book.
      *
      * @return the address book.
      */
-
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
