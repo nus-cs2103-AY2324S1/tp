@@ -2,14 +2,13 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.commons.core.index.Index;
+import java.util.function.Predicate;
+
 import seedu.address.logic.commands.ListBandCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.band.Band;
 import seedu.address.model.band.BandName;
 import seedu.address.model.band.BandNameContainsKeywordsPredicate;
-
-import java.util.function.Predicate;
 
 /**
  * Parses input arguments and creates a new ListBandCommand object.

@@ -185,8 +185,8 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Band} backed by the internal list of
-     * {@code versionedAddressBook}. Returns an unmodifiable view of the list of {@code Musician} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedAddressBook}. Returns an unmodifiable view of the list of {@code Musician}
+     * backed by the internal list of {@code versionedAddressBook}
      */
     @Override
     public void updateFilteredBandMusicianList(Predicate<Band> bandPredicate) {
