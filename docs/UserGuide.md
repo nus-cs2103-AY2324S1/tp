@@ -21,7 +21,7 @@ In this user guide, you will learn the basics of our application and how you can
 - Visit the official FumbleLog release page on Github [here](https://github.com/AY2324S1-CS2103T-T12-2/tp/releases).
 - Download the latest version of `fumblelog.jar` from the release page.
 
-**3. Set up your home folder..**
+**3. Set up your home folder.**
 - Choose a folder on your computer where you want to store you FumbleLog application, or create a new folder.
 - Copy the `fumblelog.jar` file into the folder you have chosen or created.
 
@@ -106,11 +106,11 @@ Examples:
 
 Acceptable values for each parameter:
 * `n/NAME`: Name of the person (Compulsory)
-* `p/PHONE_NUMBER`: A valid phone number (Optional)
-* `e/EMAIL`: A valid email address (Optional)
-* `a/ADDRESS`: Address of the person (Optional) 
-* `b/BIRTHDAY`: A valid date in the format `yyyy-MM-dd` (Optional)
-* `g/GROUP`: A group for the person to be categorised into (Optional)
+* `[p/PHONE_NUMBER]`: A valid phone number
+* `[e/EMAIL]`: A valid email address
+* `[a/ADDRESS]`: Address of the person
+* `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
+* `[g/GROUP]`: A group for the person to be categorised into
 
 Expected output when a command succeeds:
 * Input: `add n/james p/999 e/example@gmail.com a/1 computing drive b/2001-09-20`
@@ -141,12 +141,12 @@ Examples:
 
 Acceptable values for each parameter:
 * `PERSON_INDEX`: A positive integer
-* `n/NAME`: Name of the person (Optional)
-* `p/PHONE`: A valid phone number (Optional)
-* `e/EMAIL`: A valid email address (Optional)
-* `a/ADDRESS`: Address of the person (Optional)
-* `b/BIRTHDAY`: A valid date in the format `yyyy-MM-dd` (Optional)
-* `g/GROUP`: Text for the tag of the person (Optional)
+* `[n/NAME]`: Name of the person
+* `[p/PHONE]`: A valid phone number
+* `[e/EMAIL]`: A valid email address
+* `[a/ADDRESS]`: Address of the person
+* `[b/BIRTHDAY]`: A valid date in the format `yyyy-MM-dd`
+* `[g/GROUP]`: Text for the tag of the person
 
 Expected output when a command succeeds:
 * Input: `edit 1 n/Alexa Yeoh`
@@ -404,24 +404,24 @@ _Details coming soon ..._
 # Command summary
 
 ### Commands for Persons
-Action | Format, Examples
---------|------------------
-**Add Person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague`
-**Edit Person** | `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GROUP]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Delete Person** | `delete PERSON_INDEX`<br> e.g., `delete 3`
-**List Persons** | `list`
-**Find Person** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+| Action            | Format, Examples                                                                                                                                                        |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Person**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
+| **Edit Person**   | `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GROUP]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                    |
+| **Delete Person** | `delete PERSON_INDEX`<br> e.g., `delete 3`                                                                                                                              |
+| **List Persons**  | `list`                                                                                                                                                                  |
+| **Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                              |
 
 ### Commands for Events
-Action | Format, Examples
---------|------------------
-**Add Event** | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
-**Edit Event** | `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
-**Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`
+| Action           | Format, Examples                                                                                                                                                                                                                                    |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`                                                           |
+| **Edit Event**   | `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
+| **Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`                                                                                                                                                                                               |
 
 ### General commands
-Action | Format, Examples
---------|------------------
-**Clear** | `clear`
-**Exit** | `exit`
-**Help** | `help`
+| Action    | Format, Examples |
+|-----------|------------------|
+| **Clear** | `clear`          |
+| **Exit**  | `exit`           |
+| **Help**  | `help`           |
