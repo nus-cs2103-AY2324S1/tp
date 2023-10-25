@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Meeting;
 
@@ -59,6 +61,30 @@ public class TypicalMeetings {
                     .withEventStartTime("0000")
                     .withEventEndTime("2359")
                     .withPerson("Alice Pauline", "Benson Meier")
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static final Meeting MEETING_3_DAYS_AFTER_TODAY;
+
+    static {
+        try {
+            MEETING_3_DAYS_AFTER_TODAY = new MeetingBuilder().withEventName("TP MEETING TEST")
+                    .withEventDate(LocalDate.now().plusDays(3).toString())
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static final Meeting MEETING_6_DAYS_AFTER_TODAY;
+
+    static {
+        try {
+            MEETING_6_DAYS_AFTER_TODAY = new MeetingBuilder().withEventName("TP MEETING TEST")
+                    .withEventDate(LocalDate.now().plusDays(6).toString())
                     .build();
         } catch (ParseException e) {
             throw new RuntimeException(e);

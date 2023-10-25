@@ -43,9 +43,6 @@ public class PersonListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
-//                if (person.hasBirthday()) {
-//                    setStyle("-fx-background-color: #013220; -fx-border-color: #000000; -fx-border-width: 1;");
-//                }
             }
         }
     }
