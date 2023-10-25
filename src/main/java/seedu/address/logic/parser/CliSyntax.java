@@ -14,5 +14,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_APPLICANT = new Prefix("app/");
     public static final Prefix PREFIX_JOB_ROLE = new Prefix("jr/");
     public static final Prefix PREFIX_TIMING = new Prefix("time/");
+    public static final Prefix PREFIX_RATING = new Prefix("r/");
 
 }

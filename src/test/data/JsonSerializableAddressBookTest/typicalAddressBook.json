@@ -63,7 +63,8 @@
         "hasInterview": true
       },
       "jobRole": "StandardJobRole",
-      "interviewTiming": "StandardTime"
+      "interviewTiming": "StandardTime",
+      "rating": "0.0"
     },
     {
       "applicant": {
@@ -75,7 +76,8 @@
         "hasInterview": true
       },
       "jobRole": "StandardJobRole2",
-      "interviewTiming": "StandardTime2"
+      "interviewTiming": "StandardTime2",
+      "rating": "0.0"
     },
     {
       "applicant": {
@@ -87,7 +89,8 @@
         "hasInterview": true
       },
       "jobRole": "StandardJobRole3",
-      "interviewTiming": "StandardTime3"
+      "interviewTiming": "StandardTime3",
+      "rating": "0.0"
     },
     {
       "applicant": {
@@ -99,7 +102,8 @@
         "hasInterview": true
       },
       "jobRole": "StandardJobRole4",
-      "interviewTiming": "StandardTime4"
+      "interviewTiming": "StandardTime4",
+      "rating": "0.0"
     }
   ]
 }

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.util.List;
 
@@ -52,10 +51,10 @@ public class MarkCommand extends Command {
                 interviewToMark.getInterviewApplicant(),
                 interviewToMark.getJobRole(),
                 interviewToMark.getInterviewTiming(),
+                interviewToMark.getRating(),
                 true
         );
         model.setInterview(interviewToMark, markedInterview);
-        model.updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
         return new CommandResult(
                 String.format(MESSAGE_MARK_INTERVIEW_SUCCESS, Messages.formatInterview(interviewToMark)));
     }
