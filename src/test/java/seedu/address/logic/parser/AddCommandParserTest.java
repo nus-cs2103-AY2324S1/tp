@@ -10,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_NIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AVAILABLE;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_NIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -121,25 +120,6 @@ public class AddCommandParserTest {
                         + ANIMAL_NAME_NIL_DESC_BOB + AVAILABILITY_NIL_DESC_BOB + ANIMAL_TYPE_NIL_DESC_BOB
                         + HOUSING_NIL_DESC_BOB,
                 new AddCommand(expectedPerson));
-    }
-
-
-    @Test
-    public void parse_animalNameWithNilAvailability_throwsParseException() {
-        String expectedMessage = "When an animal name is provided, availability should not be 'Available' or 'nil'.";
-
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND
-                        + ANIMAL_NAME_DESC_BOB + AVAILABILITY_NIL_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
-                expectedMessage);
-    }
-
-    @Test
-    public void parse_invalidAnimalNameWithAvailableAvailability_throwsParseException() {
-        String expectedMessage = "When an animal name is provided, availability should not be 'Available' or 'nil'.";
-
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND
-                        + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_AVAILABLE + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
-                expectedMessage);
     }
 
     @Test
@@ -301,5 +281,14 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + AVAILABILITY_DESC_BOB + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB
                 + ANIMAL_NAME_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidAnimalNameTypeCombination_throwsParseException() {
+        String expectedMessage = "When availability is 'NotAvailable', animal name and type have to "
+                + "either be both 'nil' or both not 'nil'.";
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_BOB + ANIMAL_TYPE_NIL_DESC_BOB
+                + HOUSING_DESC_BOB + TAG_DESC_FRIEND, expectedMessage);
     }
 }

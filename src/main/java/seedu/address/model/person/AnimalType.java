@@ -9,9 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class AnimalType {
     public static final String MESSAGE_CONSTRAINTS = "If fosterer is available, animal type should be "
             + "'able.Dog' / 'able.Cat'.\n"
-            + "If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'.\n"
-            + "If animal type information is not available, it should be inputted as 'nil'. "
-            + "Animal type should be 'nil' when availability is 'nil'.";
+            + "If animal type information is not available, it should be inputted as 'nil'.\n"
+            + "If fosterer is NOT available and is currently fostering, animal type should be "
+            + "'current.Dog' / 'current.Cat'.\n"
+            + "If fosterer is currently unable to foster, "
+            + "animal type should be inputted as 'nil'.\n"
+            + "If availability is 'nil', animal type should be 'nil' too. ";
 
     public static final String VALIDATION_REGEX_AVAILABLE = "^(able\\.Dog|able\\.Cat|nil)$";
     public static final String VALIDATION_REGEX_NOT_AVAILABLE = "^(current\\.Dog|current\\.Cat|nil)$";
