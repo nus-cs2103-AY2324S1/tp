@@ -171,4 +171,8 @@ public abstract class Event {
             return true;
         }
     }
+
+    public boolean hasStartDateWithinDays(int days) {
+        return this.startDate.isWithinDays(days);
+    }
 }

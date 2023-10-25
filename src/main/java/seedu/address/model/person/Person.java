@@ -173,11 +173,18 @@ public class Person {
     }
 
     /**
-     * Checks if a certain group is in the groups list
-     * @param group Group to check
-     * @return true if group is in the groups list
+     * Returns true if the person has a birthday within the next {@code days} days.
      */
+    public boolean hasBirthdayWithinDays(int days) {
+        Birthday birthday = getBirthday();
+        if (birthday == null) {
+            return false;
+        }
+        return birthday.isWithinDays(days);
+    }
+
     public boolean hasGroup(Group group) {
         return this.getGroups().contains(group);
     }
+
 }

@@ -76,4 +76,15 @@ public class EventDate {
         return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
 
     }
+
+    /**
+     * Returns true if the date is within the number of days specified.
+     * @param days number of days
+     * @return true if the date is within the number of days specified
+     */
+    public boolean isWithinDays(int days) {
+        LocalDate endDate = LocalDate.now().plusDays(days + 1);
+        return (this.date.isBefore(endDate) && this.date.isAfter(LocalDate.now()))
+                || this.date.isEqual(LocalDate.now());
+    }
 }
