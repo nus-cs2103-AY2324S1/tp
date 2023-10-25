@@ -234,6 +234,57 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### View all appointments feature
+
+Implementation
+
+For _Appointments_ command, the noteworthy class is:
+- `AppointmentsCommand.java` - For execution of the view all appointments command.
+
+-- user input --  
+Step 1. User executes appointments command to view all appointments.
+
+-- `AddressBookParser` --  
+Step 2. Returns new `AppointmentsCommand`
+
+-- `AppointmentsCommand` --  
+Step 3. Shows all appointments.
+
+The following activity diagram shows how the view appointments operation works:
+
+![AppointmentsCommandActivityDiagram](images/AppointmentsCommandActivityDiagram.png)
+
+### Cancel feature
+
+Implementation
+
+For _Cancel_ command, the noteworthy classes are:
+
+- `CancelCommandParser.java` - For passing the arguments to `CancelCommand`.
+- `CancelCommand.java` - For execution of the cancel appointment command.
+
+The following exceptions may be thrown during this process, namely:
+
+- ParseException for invalid index format
+- CommandException for index out of range
+  
+-- user input --  
+Step 1. User executes cancel command with a valid appointment index.
+
+-- `AddressBookParser` --  
+Step 2. Returns new `CancelCommandParser`.
+
+-- `CancelCommandParser` --   
+Step 3. Verify that the index is correct.  
+Step 4. Returns new `CancelCommand`.
+
+-- `CancelCommand` --  
+Step 5. Verify that the index is not out of range in the appointments list.  
+Step 6. Appointment is cancelled and deleted from the appointments list.
+
+The following activity diagram shows how the cancel operation works:
+
+![CancelCommandActivityDiagram](images/CancelCommandActivityDiagram.png)
 
 ### Reschedule feature
 
@@ -264,7 +315,7 @@ Step 5. Returns new `RescheduleCommand`.
 -- `RescheduleCommand` --   
 Step 6. Verify that the given index exist in UniqueAppointmentList.  
 Step 7. Verify that the new appointment to be added does not have time conflict with another appointment on the same day.  
-Step 8. Verify that the same appointment has not already been added.
+Step 8. Verify that the same appointment has not already been added.  
 Step 9. Appointment is rescheduled.
 
 
