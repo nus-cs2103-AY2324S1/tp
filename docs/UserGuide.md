@@ -19,7 +19,6 @@ On top of these advantages, we believe that contact management must be efficient
 If you are new here, visit our [getting started guide](#getting-started) to start getting connected on NetworkBook!
 
 ## Table of Contents
-
 {:toc}
 
 ## About This User Guide
@@ -257,8 +256,39 @@ Example usage:
 
 ## Command summary
 
-| Category | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**  | `create /name [name] [/phone /email /link /grad /course /spec /priority /tag]` <br> e.g., `create /name Oreki /phone +6598765432 /grad AY2526-S2`<br><br>`add [index] /phone [phone]` <br> e.g., `add 1 /phone +6591234567`<br><br>`add [index] /email [email]` <br> e.g., `add 2 /email test@example.com`<br><br>`add [index] /link [link] [note]`<br>e.g., `add 1 /link https://nknguyenhc.github.io/ website`<br><br>`add [index] /course [course of study] /date [start date] [end date]`<br>e.g., `add 1 /course Computer Science /date 01-08-2022 07-12-2022`<br><br>`add [index] /spec [specialisation]`<br>e.g., `add 1 /spec Robotics & AI`<br><br>`add [index] /priority [priority level]`<br>e.g., `add 1 /priority high`<br><br>`add [index] /tag [tag name]`<br>e.g., `add 1 /tag friend` |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  
-| **Edit** | `update [index] /[parameter name] [new parameter value]`<br> e.g.,`update 1 /name nkn`<br><br>`delete [index]`<br>e.g., `delete 1`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| **Find** | `find [name]` <br> e.g., `find Ness`<br><br>`sort /by [field] /order [order]`<br>e.g., `sort /by name /order asc`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |  
+| Command |   Prefixes   |      Format, Example      | What it does                       |
+|---------|------------|-------------------|------------------------------------|
+| **create** | `/name` <br> `[/phone]` <br/> `[/email] `<br/> `[/link]` <br/>  `[/course]` <br/> `[/spec]` <br/>`[/grad]` <br/> `[/priority]` <br/> `[/tag]` | `create /name [name] [/optional fields`]<br><br> e.g., `create /name Oreki` <br> `create /name Ness /phone +6598765432 /grad AY2526-S2` | Creates a new contact in NetworkBook. <br>If optional fields are provided, their values will be added to the contact. |
+| **add** | `[/phone]`  <br>`[/email]` <br> `[/link]` <br> `[/course]` <br> `[/spec]` <br> `[/grad]` <br>`[/priority]` <br> `[/tag]` | `add [index] /phone [phone]` <br>`add [index] /email [email]`<br/>`add [index] /link [link]`<br/>`add [index] /course [course]`<br/>`add [index] /spec [specialisation]`<br/>`add [index] /grad [semester of graduation]`<br>`add [index] /priority [priority]`<br>`add [index] /tag [tag]`<br><br> e.g., `add 2 /email test@example.com` <br/>`add 1 /link https://nknguyenhc.github.io/`<br/>`add 1 /grad AY2223-S1` <br>`add 1 /priority high` | Adds information to the contact.                             |
+| **edit**   | Single-value fields: <br>`[/name]` <br/> `[/grad]` <br/>`[/priority]`<br><br>Multi-value fields which require `[/index]`: <br> `[/phone]`  <br/>`[/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]`  <br/> `[/tag]` | `edit [index of contact] /single-value-field [new value]` <br/><br/>`edit [index of contact] /multi-value-field [new value] /index [index of old value]`<br/> <br/><br/>e.g., `edit 1 /name Nguyen` <br/> `edit 1 /grad AY2627-S1` <br> `edit 1 /email aaa@gmail.com /index 1` <br> `edit 1 /course CS2109S /index 1` | Edits information about a contact. |
+| **delete** | N/A                                                          | `delete [index]`<br/><br>e.g., `delete 1`                    | Deletes a contact from NetworkBook.                          |
+| **find**   | N/A                                                          | `find [name]` <br/><br> e.g., `find Ness`                    | Search for contacts by their names.                          |
+| **sort**   | `/by` <br> `[/order]` | `sort /by [field] /order [order]`<br/><br>e.g., `sort /by priority /order desc` | Sort contacts by a field. |
+
+[Table of Contents](#table-of-contents)
+
+## FAQ
+
+### Launching NetworkBook 
+
+**Q:** How can I launch NetworkBook if the clicking on the JAR file does not work on my Windows computer?
+**A:** If you are familiar with the command prompt, you can follow the steps below:
+
+1. Open command prompt on your computer
+2. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
+3. Type `java -jar networkbook.jar` and press enter
+4. NetworkBook should launch
+
+If you have any further issues, please raise an issue on our [GitHub page](https://github.com/AY2324S1-CS2103T-T08-2/tp). We will attend to you as soon as we can.
+
+### Checking Java version
+
+**Q:** How can I check my Java version?
+**A: **Open command prompt (Windows) or terminal (MacOS or Linux) on your computer, and type `java -version` . If you do not have Java installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+
+### Loading data from another device
+
+**Q:** How can I load my contacts stored in NetworkBook used in another device?
+**A:** Locate the data file stored at `[JAR file location]/data/networkbook.json`. Copy over the data file to the corresponding location on your current device. After that, launch NetworkBook to check whether your contact details have been loaded properly.
+
+[Table of Contents](#table-of-contents)
