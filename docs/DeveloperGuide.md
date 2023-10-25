@@ -158,6 +158,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
 ### Find meeting feature
 
 The find meeting command is facilitated by `GeneralMeetingPredicate` that by itself is the combined predicate for all the meeting data fields. It is placed within the Model component and is only dependent on other predicate classes and `Meeting`. 
@@ -187,6 +188,24 @@ The following diagrams show the entire sequence flow for `LogicManager#execute()
 ![FindMeetingSequence](images/FindMeetingSequence.png)
 ![FindMeetingSequenceParse](images/FindMeetingSequenceParse.png)
 ![FindMeetingSequenceExecute](images/FindMeetingSequenceExecute.png)
+
+### Add attendee feature
+User can specify a Person to add as an Attendee to a specified Meeting.
+
+To avoid storing an entire `JsonAdaptedPerson` object within the `JsonAdaptedMeeting` every time a `Person` is added to a `Meeting`,
+we created the `Attendee` class to store a unique identifier for the `Person` added.
+As every `Person` has a unique name in the current iteration, `Attendee` is implemented in the following way:
+- `Attendee(attendeeName)` -- Initialized with a String obtained from `Person.getName().toString()`
+- `Attendee#getAttendeeName()` -- Returns a String representing the attendee's name
+
+![AttendeeClassDiagram](images/AttendeeClassDiagram.png)
+
+The following sequence diagram shows how the add attendee operation works:
+
+![AddAttendeeSequenceDiagram](images/AddAttendeeSequenceDiagram.png)
+
+A Person object can be obtained from a Meeting's list of attendees by searching through `UniquePersonList`
+for a `Person` with a name matching `attendeeName`.
 
 ### \[Proposed\] Undo/redo feature
 
