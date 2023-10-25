@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ListTutorCommand;
+import seedu.address.logic.commands.UnmarkScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -102,6 +104,13 @@ public class AddressBookParserTest {
                 (AddScheduleCommand) parser.parseCommand(ScheduleUtil.getAddScheduleCommand(schedule));
         assertEquals(new AddScheduleCommand(INDEX_FIRST_PERSON, schedule.getStartTime(), schedule.getEndTime()),
                 command);
+    }
+
+    @Test
+    public void parseCommand_unmarkSchedule() throws Exception {
+        UnmarkScheduleCommand command = (UnmarkScheduleCommand) parser.parseCommand(
+            UnmarkScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_SCHEDULE.getOneBased());
+        assertEquals(new UnmarkScheduleCommand(INDEX_FIRST_SCHEDULE), command);
     }
 
     @Test
