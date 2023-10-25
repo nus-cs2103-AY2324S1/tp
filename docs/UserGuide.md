@@ -273,7 +273,7 @@ Deletes the data entry at the index-th position of the currently displayed list.
 
 Format: `delete INDEX [INDEX...]`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Warning: The index of a fosterer is not fixed.**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution: The index of a fosterer is not fixed.**
 
 A fosterer's index is relative to the current list of fosterers you are handling.
 </div>
@@ -346,7 +346,7 @@ Parameters:`FIELD`
   * `current` : shows the statistics of fosterers who are currently fostering, and the animals they are fostering.
   * `housing` : shows the statistics of the various housing types.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Warning:Statistics are calculated based on the currently displayed list.**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution: Statistics are calculated based on the currently displayed list.**
 
 If you performed a `find available` command before `stats avail`, the resulting statistic will show that 100% of listed fosterers are available. Hence, please ensure that the current list for fosterers is the desired list you want your statistic to be calculated from. 
 </div>
