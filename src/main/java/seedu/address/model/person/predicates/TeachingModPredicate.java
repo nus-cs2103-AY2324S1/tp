@@ -1,9 +1,10 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Mod;
 
 /**
@@ -40,6 +41,6 @@ public class TeachingModPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", mods).toString();
+        return new ToStringBuilder(this).add("mods", mods).toString();
     }
 }

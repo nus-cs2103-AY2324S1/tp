@@ -8,16 +8,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.availability.FreeTime;
-import seedu.address.model.person.AvailableTimePredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.AvailableTimePredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.TeachingModPredicate;
+import seedu.address.model.person.predicates.TeachingModPredicate;
 import seedu.address.model.tag.Mod;
 
 /**
