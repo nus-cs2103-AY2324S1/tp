@@ -77,7 +77,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Flashcard` object residing in the `Model`.
 
 ### Logic component
 
@@ -289,15 +289,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-### Use case
-
 **System:** Flashlingo\
 **Use case:** UC1 - Help\
 **Actor:** User\
 **MSS:**
 
-1.	User requests help by keying in command
-2.	Flashlingo displays help page
+1.	User requests help by keying in command or clicking the Help Button on the UI
+2.	Flashlingo opens browser with UserGuide
+
 Use case ends.
 
 **System:** Flashlingo\
@@ -305,15 +304,21 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to add a word and its translation by keying in command.
-2.	Flashlingo adds the word and its translation.
+2.	Flashlingo adds the word and its translation.\
 Use case ends.
+
+**Extensions:**\
+1a. User adds word and translation and specifies the language of the original word and translation.\
+1a1. Flashlingo adds the word and its translation as well as the language of both.\
+Use case ends.
+
 
 **System:** Flashlingo\
 **Use case:** UC3 – Delete a word\
 **Actor:** User\
 **MSS:**
 1.	User chooses to delete a word by keying in command
-2.	Flashlingo deletes the word and its translation
+2.	Flashlingo deletes the word and its translation.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -321,7 +326,7 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to display list of flashcard.
-2.	Flashlingo displays list of cards with words and corresponding translations.
+2.	Flashlingo displays list of cards with words and corresponding translations.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -329,7 +334,7 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to start.
-2.	Flashlingo displays the words user is going to study.
+2.	Flashlingo displays the words user is going to study.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -337,31 +342,43 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to flip the flashcard
-2.	Flashlingo shows meaning of the word.
+2.	Flashlingo shows meaning of the word.\
 Use case ends.
 
 **System:** Flashlingo\
 **Use case:** UC7 – Indicate user has remembered word\
 **Actor:** User\
 **MSS:**
-1.	User confirms remembrance of the word
-2.	Flashlingo displays congratulatory message.
+1.	User confirms remembrance of the word.
+2. Flashlingo increments level of the flashcard.
+3. Flashlingo displays congratulatory message.\
 Use case ends.
+
+**Extensions:**\
+2a. Flashlingo detects that level of flashcard exceeds threshold\
+2a1. Flashlingo deletes the flashcard.\
+Use case resumes from step 3.
 
 **System:** Flashlingo\
 **Use case:** UC8 – Indicate user has forgotten word\
 **Actor:** User\
 **MSS:**
 1.	User indicates they couldn’t remember word.
-2.	Flashlingo displays motivational message to keep up.
+2. Flashlingo decements level of flashcard.
+3. Flashlingo displays motivational message to keep up.\
 Use case ends.
+
+**Extensions:**\
+2a. Flashlingo detects that level of flashcard is at base level of 1\
+2a1. Flashlingo does not decrement any further, leaving level at 1.\
+Use case resumes from step 3.
 
 **System:** Flashlingo\
 **Use case:** UC9 – Stop session\
 **Actor:** User\
 **MSS:**
 1.	User chooses to stop session.
-2.	Flashlingo stops and displays the completion message..
+2.	Flashlingo stops and displays the completion message.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -369,7 +386,7 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to exit
-2.	Flashlingo closes GUI and terminates
+2.	Flashlingo closes GUI and terminates.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -377,7 +394,7 @@ Use case ends.
 **Actor:** User\
 **MSS:**
 1.	User chooses to change data source by adding new file-path.
-2.	Flashlingo changes data source and displays success message
+2.	Flashlingo changes data source and displays success message.\
 Use case ends.
 
 **System:** Flashlingo\
@@ -385,7 +402,7 @@ Use case ends.
 **Actor:** user\
 **MSS:**
 1.	User chooses to load a data source at input file-path.
-2.	Flashlingo loads data source and displays success or failure message
+2.	Flashlingo loads data source and displays success or failure message.\
 Use case ends.
 
 ### Non-Functional Requirements
