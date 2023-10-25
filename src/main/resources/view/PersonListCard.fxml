@@ -32,6 +32,7 @@
          <Label fx:id="income" styleClass="cell_small_label" text="\$income" />
          <Label fx:id="horoscope" styleClass="cell_small_label" text="\$income" />
          <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
+          <Label fx:id="star" styleClass="cell_small_label" text="\$star" />
       </HBox>
          <GridPane.margin>
             <Insets />

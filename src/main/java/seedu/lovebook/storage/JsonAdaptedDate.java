@@ -4,12 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.lovebook.commons.exceptions.IllegalValueException;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Income;
-import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.person.*;
 import seedu.lovebook.model.person.horoscope.Horoscope;
 
 /**
@@ -25,6 +20,7 @@ class JsonAdaptedDate {
     private final String height;
     private final String income;
     private final String horoscope;
+    private final String star;
 
     /**
      * Constructs a {@code JsonAdaptedDate} with the given date details.
@@ -39,6 +35,7 @@ class JsonAdaptedDate {
         this.height = height;
         this.income = income;
         this.horoscope = horoscope;
+        this.star = "false";
     }
 
     /**
@@ -51,6 +48,7 @@ class JsonAdaptedDate {
         height = source.getHeight().value;
         income = source.getIncome().value;
         horoscope = source.getHoroscope().value;
+        star = source.getStar().isStarred;
     }
 
     /**
@@ -108,7 +106,9 @@ class JsonAdaptedDate {
         }
         final Horoscope modelHoroscope = new Horoscope(horoscope);
 
-        return new Date(modelName, modelAge, modelGender, modelHeight, modelIncome, modelHoroscope);
+        Star modelStar = new Star(star);
+
+        return new Date(modelName, modelAge, modelGender, modelHeight, modelIncome, modelHoroscope, modelStar);
     }
 
 }

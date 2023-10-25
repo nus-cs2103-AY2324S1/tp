@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label gender;
     @FXML
     private Label horoscope;
+    @FXML
+    private Label star;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Date} and index to display.
@@ -54,5 +56,6 @@ public class PersonCard extends UiPart<Region> {
         height.setText(date.getHeight().value);
         income.setText(date.getIncome().value);
         horoscope.setText(date.getHoroscope().value);
+        star.setText(date.getStar().isStarred);
     }
 }
