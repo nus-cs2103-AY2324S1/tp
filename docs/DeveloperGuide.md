@@ -235,9 +235,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Recall recent commands feature
 
-_{Explain here how the data archiving feature will be implemented}_
+The recent command feature is facilitated by the `CommandStringStash`. 
 
 
 --------------------------------------------------------------------------------------------------------------------
