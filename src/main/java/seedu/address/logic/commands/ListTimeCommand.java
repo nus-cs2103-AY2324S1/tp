@@ -15,13 +15,14 @@ public abstract class ListTimeCommand extends Command {
     public static final String COMMAND_WORD = "listtime";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists the free times of a person or a group.\n"
+            + ": Lists the times of the person/group with the name provided.\n"
+            + "Use 'listtime n/NAME' to list time of a person and 'listtime g/GROUPNAME' to list time of a group.\n"
             + "Parameters: " + PREFIX_NAME
-            + "NAME (must be the full name of a person in the existing contactlist)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Nicholas Lee\n"
-            + "OR Parameters: " + PREFIX_GROUPTAG
-            + "GROUP (must be the full name of a group in the existing contactlist)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_GROUPTAG + "CS2103T\n";
+            + "NAME (full name of an existing person)\n"
+            + "Parameters: " + PREFIX_GROUPTAG
+            + "GROUPNAME (full name of an existing group)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Nicholas Lee \n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GROUPTAG + "CS2103T";
 
     public ListTimeCommand() {
     }

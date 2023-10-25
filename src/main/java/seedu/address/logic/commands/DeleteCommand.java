@@ -17,7 +17,7 @@ public abstract class DeleteCommand extends Command {
             + ": Deletes the person/group with the name provided.\n"
             + "Use 'delete n/NAME' to delete a person and 'delete g/GROUPNAME' to delete a group.\n"
             + "Parameters: " + PREFIX_NAME
-            + "NAME (must be the full name of a person in the existing contactlist)\n"
+            + "NAME (full name of an existing person)\n"
             + "Parameters: " + PREFIX_GROUPTAG
             + "GROUPNAME (full name of an existing group)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Nicholas Lee \n"
