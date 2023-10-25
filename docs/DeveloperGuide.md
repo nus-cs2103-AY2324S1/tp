@@ -5,7 +5,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -81,7 +81,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/flashlingo/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -196,89 +196,101 @@ Similarly, the `No` button will invoke the no command.
         * Less convenient without the buttons, needing to type
 
 
-### \[Proposed\] Undo/redo feature
+### Start and End Session
 
-#### Proposed Implementation
+#### **Feature Overview**
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The "Start and End Review Session" feature is designed for users to start or end a review session. It allows users to initiate and conclude dedicated language learning sessions where they focus on reviewing and practicing vocabulary words. Each session represents a focused period of language reviewing within the application.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+#### **Implementation**
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The implementation of the "Start and End Review Session" feature involves the introduction of a `SessionManager` component. The `SessionManager` tracks the following aspect of a review session:
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+- **isReviewSession:** Indicates whether the application in a review session or not.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+In addition to that, `start` and `end` commands and their corresponding parsers are also implemented.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+Given below is an example usage scenario and how the start/end mechanism behaves at each step.  
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+**Step 1:** The user launches the application for the first time. The `SessionManager` is not yet initialized.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+**Step 2:** The user executes the "start" command by interacting with the command line. This will make `FlashlingoParser` class to create its `SessionManager` instance.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+![SessionManagerClass](images/SessionManagerClass.png)  
+**Note**: The `SessionManager` class adheres to the **Singleton pattern**, guaranteeing that only one instance of the class 
+can exist. This architectural choice provides a single point of access for managing review sessions and 
+maintaining the state of whether the session is a review session or not. With the Singleton pattern in place, you can be
+confident that there is only one `SessionManager` instance, making it a centralized and controlled entity for session 
+management within the application.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+**Step 3:** The user executes various commands within the action sequence, such as `yes` and `no`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Step 4:** The user chooses to end the review session by using `end` command. This action will alternate the boolean value 
+inside SessionManager class indicating current session is review session or not.
 
-</div>
+![StartSequnceModel](images/StartSequenceDiagram.png)  
+**Recording Vocabulary Review:**
+- The `SessionManager` logs the vocabulary words and phrases reviewed and practiced during the language learning session.
+- This feature provides users with the ability to track their progress and revisit the words they've worked on.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+**User Control:**
+- Users can initiate a new language learning session at any time and conclude their session when they have completed their vocabulary review.
+- The option to start and end language learning sessions is typically available in the language learning module or settings.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+**Data Retention:**
+- Session data, including start and end times and vocabulary review records, is stored locally on the user's device.
+- Users may have the option to export or clear session data as needed.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+**Session Summary:**
+- Users can view a summary of their language learning session, including the start and end times and a list of vocabulary words and phrases reviewed.
 
-</div>
+**Privacy and Security:**
+- The application should ensure the privacy and security of session data, particularly if it contains sensitive language learning content.
 
-The following sequence diagram shows how the undo operation works:
+#### **Usage Example**
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+1. **Starting a Language Learning Session:** The user accesses the language learning module within the application and chooses to start a new language learning session.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+2. **Vocabulary Review:** During the session, the user focuses on reviewing and practicing specific vocabulary words and phrases relevant to their language learning goals.
 
-</div>
+3. **Ending the Language Learning Session:** When the user is satisfied with their vocabulary review, they conclude the language learning session from the language learning module or settings.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+4. **Session Summary:** Users can access a summary of the language learning session, which includes the start and end times and a list of vocabulary words and phrases reviewed.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+5. **Reviewing Session History:** Users have the option to revisit their session history, allowing them to track their language learning progress over time.
 
-</div>
+#### **Design Considerations**
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+**Aspect: How start & end executes**
+* Alternative 1 (current choice): Creating another separate class to manage the logic.
+  * Pros: It better adheres to OOP principle and easier to maintain.
+  * Cons: It may potentially increase the complexity of codes.
 
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
+* Alternative 2: Introducing a boolean attribute inside `FlashlingoParser` class.
   * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+  * Cons: It doesn't conform to the principle of **Single Responsibility Principle**. 
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+**Aspect: Preventing Commands Within a Review Session**
 
-### \[Proposed\] Data archiving
+* Alternative 1 (Current Choice): Restricting Users with a Subset of Commands
 
-_{Explain here how the data archiving feature will be implemented}_
+   * Pros:
+   - Increased safety: A limited set of commands reduces the risk of unintended actions, making the review session safer for users.
+
+   * Cons:
+      - Limited flexibility: Users may feel constrained if they need to perform specific actions that are not allowed within the review session.
+      - Potential user frustration: Restricting commands may lead to user frustration if they can't perform certain actions they expected to be available.
+
+* Alternative 2: Giving Users Full Flexibility to Execute All Commands
+
+   * Pros:
+     - Complete control: Users have the freedom to use any command, providing them with full flexibility and control over their learning experience.
+     - No perceived limitations: Users are less likely to encounter restrictions or frustrations, making the experience more intuitive.
+
+  * Cons:
+     - More error-prone: Allowing all commands may lead to unexpected bugs during a review session.
+
 
 
 --------------------------------------------------------------------------------------------------------------------

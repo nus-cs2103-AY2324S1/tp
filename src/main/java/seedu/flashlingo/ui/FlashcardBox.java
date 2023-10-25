@@ -6,10 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
-import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * An UI component that displays information of a {@code FlashCard}.
@@ -55,7 +55,7 @@ public class FlashcardBox extends UiPart<Region> {
     public FlashcardBox(FlashCard fc, int displayedIndex, MainWindow mw) {
         super(FXML);
         // Ensure that FlashCard with buttons is only created when in review session
-        assert(FlashlingoParser.getReviewSession());
+        assert(SessionManager.getInstance().isReviewSession());
         this.flashCard = fc;
         this.mw = mw;
         id.setText(displayedIndex + ") ");

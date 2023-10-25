@@ -38,6 +38,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_TRANSLATED_WORD, PREFIX_TRANSLATED_WORD_LANGUAGE);
         String originalWord = argMultimap.getValue(PREFIX_ORIGINAL_WORD).get().trim();
         String translationWord = argMultimap.getValue(PREFIX_TRANSLATED_WORD).get().trim();
+
         if (originalWord.isEmpty() | translationWord.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_EMPTY_VALUE, AddCommand.MESSAGE_USAGE));
         }

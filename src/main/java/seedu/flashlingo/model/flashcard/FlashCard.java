@@ -82,8 +82,7 @@ public class FlashCard {
         }
 
         return otherFlashCard != null
-            && otherFlashCard.getOriginalWord().equals(getOriginalWord())
-            && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
+            && otherFlashCard.getOriginalWord().equals(getOriginalWord());
     }
 
     /**
@@ -134,7 +133,7 @@ public class FlashCard {
     @Override
     public String toString() {
         String sb = originalWord + " | " + originalWord.getLanguage() + " | " + translatedWord + " | "
-                + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
+            + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
         return sb;
     }
 
@@ -155,8 +154,7 @@ public class FlashCard {
 
         FlashCard otherFlashCard = (FlashCard) other;
         return originalWord.equals(otherFlashCard.originalWord)
-                && translatedWord.equals(otherFlashCard.translatedWord)
-                && whenToReview.equals(otherFlashCard.whenToReview)
-                && originalLevel.equals(otherFlashCard.originalLevel);
+            && translatedWord.equals(otherFlashCard.translatedWord)
+            && originalLevel.equals(otherFlashCard.originalLevel);
     }
 }

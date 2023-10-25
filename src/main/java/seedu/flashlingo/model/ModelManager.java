@@ -12,10 +12,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.commons.core.LogsCenter;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
-import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.NextReviewWordPredicate;
 import seedu.flashlingo.model.flashcard.WordOverduePredicate;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * Represents the in-memory model of the flashlingo data.
@@ -146,7 +146,7 @@ public class ModelManager implements Model {
     public String nextReviewWord() throws CommandException {
         updateFilteredFlashCardList(new WordOverduePredicate());
         if (filteredFlashCards.size() == 0) {
-            FlashlingoParser.setReviewSession(false);
+            SessionManager.getInstance().setSession(false);
             updateFilteredFlashCardList(unused -> true);
             throw new CommandException("There's no FlashCards to review. Well done!");
         }
