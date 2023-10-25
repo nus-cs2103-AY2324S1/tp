@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -33,11 +34,20 @@
          <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
       </HBox>
          <GridPane.margin>
-            <Insets bottom="5.0" top="5.0" />
+            <Insets />
          </GridPane.margin>
     </VBox>
       <rowConstraints>
          <RowConstraints />
       </rowConstraints>
+      <HBox.margin>
+         <Insets bottom="5.0" top="5.0" />
+      </HBox.margin>
   </GridPane>
+   <opaqueInsets>
+      <Insets bottom="10.0" top="10.0" />
+   </opaqueInsets>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </HBox>
