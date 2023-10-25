@@ -423,7 +423,7 @@ specified schedule.
 * `Marked Schedule as Missed: Betsy Crowe; Start Time: Sep 16 2023 17:00; End Time: Sep 15 2023 19:00`
 
 **Error Messages:**
-* `Invalid command format!`: Invalid or missing SCHEDULE_INDEX OR SCHEDULE STATUS or both.
+* `Invalid command format!`: Invalid or missing SCHEDULE_INDEX OR SCHEDULE_STATUS or both.
 * `Index number given is out of range`: The schedule index provided is invalid.
 * `Status has to be either MISSED (m/0) or COMPLETED (m/1)`: The schedule status provided is invalid.
 
