@@ -14,6 +14,7 @@ import seedu.address.model.musician.Musician;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Musician> PREDICATE_SHOW_ALL_MUSICIANS = unused -> true;
+    Predicate<Band> PREDICATE_SHOW_ALL_BANDS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -89,6 +90,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered band list */
     ObservableList<Band> getFilteredBandList();
+
+    void updateFilteredBandList(Predicate<Band> predicate);
 
     /**
      * Updates the filter of the filtered band list to filter by the given {@code predicate}.
