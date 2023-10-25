@@ -61,8 +61,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                     .getValue(PREFIX_BOOKING_PERIOD).get()));
         }
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            editRoomDescriptor.setBookingPeriod(ParserUtil.parseBookingPeriod(argMultimap
-                    .getValue(PREFIX_BOOKING_PERIOD).get()));
+            editRoomDescriptor.setRemark(ParserUtil.parseRemark(argMultimap
+                    .getValue(PREFIX_REMARK).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editRoomDescriptor::setTags);
 

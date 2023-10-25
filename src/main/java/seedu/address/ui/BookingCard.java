@@ -41,6 +41,8 @@ public class BookingCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -55,6 +57,7 @@ public class BookingCard extends UiPart<Region> {
         phone.setText("Contact: " + booking.getPhone().value);
         email.setText("Email: " + booking.getEmail().value);
         bookingPeriod.setText("Booking Period: " + booking.getBookingPeriod().value);
+        remark.setText("Remark: " + booking.getRemark().value);
         booking.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
