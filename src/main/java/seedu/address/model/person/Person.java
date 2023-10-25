@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -32,7 +33,7 @@ public class Person {
     private final Profession profession;
     private final Income income;
     private final Details details;
-    private final Set<Interaction> interactions = new HashSet<>();
+    private final ArrayList<Interaction> interactions = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -107,7 +108,7 @@ public class Person {
         return details;
     }
 
-    public Set<Interaction> getInteractions() {
+    public ArrayList<Interaction> getInteractions() {
         return interactions;
     }
 
@@ -116,7 +117,7 @@ public class Person {
      * @param interactions the set of interaction to be added
      * @return the updated set of interactions
      */
-    public Set<Interaction> addInteractions(Set<Interaction> interactions) {
+    public ArrayList<Interaction> addInteractions(ArrayList<Interaction> interactions) {
         this.interactions.addAll(interactions);
         return this.interactions;
     }
