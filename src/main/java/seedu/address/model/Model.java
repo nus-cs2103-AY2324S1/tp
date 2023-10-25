@@ -14,6 +14,7 @@ import seedu.address.model.musician.Musician;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Musician> PREDICATE_SHOW_ALL_MUSICIANS = unused -> true;
+    Predicate<Band> PREDICATE_SHOW_ALL_BANDS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
