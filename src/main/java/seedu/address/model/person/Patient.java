@@ -45,6 +45,22 @@ public class Patient extends Person {
     }
 
     /**
+     * Returns true if person is a doctor.
+     */
+    @Override
+    public boolean isDoctor() {
+        return false;
+    }
+
+    /**
+     * Returns true if person is a patient.
+     */
+    @Override
+    public boolean isPatient() {
+        return true;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
