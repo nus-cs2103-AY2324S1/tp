@@ -170,6 +170,18 @@ Exits the program.
 
 Format: `exit`
 
+### Recalling Recent Commands
+
+Similar to the [CLI of Unix](https://www.osc.edu/book/export/html/3022), the CLI of DoConnek Pro provides the functionality of
+recalling recent commands by pressing the 'up arrow' and the 'down arrow' on the keyboard.
+
+DoConnek Pro maintains a history of the 20 most recent commands the user has entered.
+
+The user can recall the 20 most recently entered commands by pressing the up arrow on the keyboard. Each press of the 
+up arrow cycles one command further back in the history.
+
+If the user goes too far back in history, they can 'undo' an 'up arrow' by pressing the down arrow.
+
 ### Save and Load Data
 
 The patient and specialist data will automatically be saved to the device’s harddrive every time the data is updated, and will automatically be loaded when the user starts the application. The user does not need to manually save any data.

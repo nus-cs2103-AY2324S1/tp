@@ -185,6 +185,21 @@ public class AddCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String getPrevCommandString(String currentCommandString) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPassedCommandString(String currentCommandString) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCommandString(String commandString) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
