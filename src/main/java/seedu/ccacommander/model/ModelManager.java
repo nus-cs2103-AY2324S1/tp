@@ -38,7 +38,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMembers = new FilteredList<>(this.versionedCcaCommander.getMemberList());
         filteredEvents = new FilteredList<>(this.versionedCcaCommander.getEventList());
-        filteredAttendances = new FilteredList<>(this.ccaCommander.getAttendanceList());
+        filteredAttendances = new FilteredList<>(this.versionedCcaCommander.getAttendanceList());
     }
 
     public ModelManager() {
@@ -139,6 +139,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasAttendance(Attendance attendance) {
+        requireNonNull(attendance);
+        return versionedCcaCommander.hasAttendance(attendance);
+    }
+
+    @Override
+    public void createAttendance(Attendance attendance) {
+        versionedCcaCommander.createAttendance(attendance);
+        updateFilteredAttendanceList(PREDICATE_SHOW_ALL_ATTENDANCES);
+    }
+
+    @Override
     public void commit(String commitMessage) {
         versionedCcaCommander.commit(commitMessage);
     }
@@ -168,18 +180,6 @@ public class ModelManager implements Model {
         return versionedCcaCommander.viewVersionCaptures();
     }
 
-    @Override
-    public boolean hasAttendance(Attendance attendance) {
-        requireNonNull(attendance);
-        return ccaCommander.hasAttendance(attendance);
-    }
-
-    @Override
-    public void createAttendance(Attendance attendance) {
-        ccaCommander.createAttendance(attendance);
-        updateFilteredAttendanceList(PREDICATE_SHOW_ALL_ATTENDANCES);
-    }
-  
     //=========== Filtered Member List Accessors =============================================================
 
     /**

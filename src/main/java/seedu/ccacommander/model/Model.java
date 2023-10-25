@@ -130,6 +130,12 @@ public interface Model {
      */
     void updateFilteredEventList(Predicate<Event> predicate);
 
+    /**
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAttendanceList(Predicate<Attendance> predicate);
+
     void commit(String commitMessage);
 
     /**
@@ -156,10 +162,4 @@ public interface Model {
      * Returns a summary of all commands currently captured by this {@code Model}.
      */
     VersionCaptures viewVersionCaptures();
-  
-    /**
-     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredAttendanceList(Predicate<Attendance> predicate);
 }

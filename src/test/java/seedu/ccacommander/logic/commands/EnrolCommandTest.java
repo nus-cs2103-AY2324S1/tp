@@ -31,6 +31,7 @@ import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ReadOnlyCcaCommander;
 import seedu.ccacommander.model.ReadOnlyUserPrefs;
+import seedu.ccacommander.model.VersionCaptures;
 import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.UniqueEventList;
@@ -225,6 +226,36 @@ public class EnrolCommandTest {
         public void updateFilteredAttendanceList(Predicate<Attendance> attendance) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void commit(String commitMessage) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String undo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String redo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public VersionCaptures viewVersionCaptures() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -265,10 +296,16 @@ public class EnrolCommandTest {
         final UniqueMemberList members = new UniqueMemberList();
         final UniqueEventList events = new UniqueEventList();
         final ArrayList<Attendance> attendancesAdded = new ArrayList<>();
+        final ArrayList<String> commitMessages = new ArrayList<>();
 
         public ModelStubAcceptingAttendanceAdded() {
             events.createEvent(AURORA_BOREALIS);
             members.add(ALICE);
+        }
+
+        @Override
+        public void commit(String commitMessage) {
+            commitMessages.add(commitMessage);
         }
 
         @Override

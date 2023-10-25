@@ -200,12 +200,17 @@ public class CreateEventCommandTest {
         }
 
         @Override
-        public void commit(String commitMessage) {
+        public ObservableList<Attendance> getFilteredAttendanceList() {
             throw new AssertionError("This method should not be called.");
         }
-      
+
         @Override
-        public ObservableList<Attendance> getFilteredAttendanceList() {
+        public void updateFilteredAttendanceList(Predicate<Attendance> attendance) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commit(String commitMessage) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -231,11 +236,6 @@ public class CreateEventCommandTest {
 
         @Override
         public VersionCaptures viewVersionCaptures() {
-            throw new AssertionError("This method should not be called.");
-        }
-      
-        @Override
-        public void updateFilteredAttendanceList(Predicate<Attendance> attendance) {
             throw new AssertionError("This method should not be called.");
         }
     }
