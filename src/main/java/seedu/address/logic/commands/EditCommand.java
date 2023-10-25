@@ -27,7 +27,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.availability.FreeTime;
 import seedu.address.model.course.Course;
-import seedu.address.model.course.Lesson;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
@@ -94,11 +93,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         FreeTime updatedFreeTime = editPersonDescriptor.getFreeTime().orElse(personToEdit.getFreeTime());
         Set<Course> updatedCourses = editPersonDescriptor.getCourses().orElse(personToEdit.getCourses());
-        Set<Lesson> lessons = personToEdit.getLessons(); // edit command does not edit lessons
         Hour updatedHour = editPersonDescriptor.getHour().orElse(personToEdit.getHour());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedFreeTime,
-                updatedCourses, lessons, updatedHour);
+                updatedCourses, updatedHour);
     }
 
     @Override
@@ -247,14 +245,6 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code mods} to this object's {@code mods}.
-         * A defensive copy of {@code mods} is used internally.
-         */
-        public void setCourses(Set<Course> courses) {
-            this.courses = (courses != null) ? new HashSet<>(courses) : null;
-        }
-
-        /**
          * Returns an unmodifiable mod set, which throws
          * {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -262,6 +252,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Course>> getCourses() {
             return (courses != null) ? Optional.of(Collections.unmodifiableSet(courses)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code mods} to this object's {@code mods}.
+         * A defensive copy of {@code mods} is used internally.
+         */
+        public void setCourses(Set<Course> courses) {
+            this.courses = (courses != null) ? new HashSet<>(courses) : null;
         }
 
         public Optional<Hour> getHour() {

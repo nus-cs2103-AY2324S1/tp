@@ -6,7 +6,6 @@ import java.util.Set;
 
 import seedu.address.model.availability.FreeTime;
 import seedu.address.model.course.Course;
-import seedu.address.model.course.Lesson;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
@@ -33,7 +32,6 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private FreeTime freeTime;
     private Set<Course> courses;
-    private Set<Lesson> lessons;
     private Hour hour;
 
     /**
@@ -47,7 +45,6 @@ public class PersonBuilder {
         tags = new HashSet<>();
         freeTime = FreeTime.EMPTY_FREE_TIME;
         courses = new HashSet<>();
-        lessons = new HashSet<>();
         hour = new Hour(DEFAULT_HOUR);
     }
 
@@ -62,7 +59,6 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         freeTime = personToCopy.getFreeTime();
         courses = new HashSet<>(personToCopy.getCourses());
-        lessons = new HashSet<>(personToCopy.getLessons());
         hour = personToCopy.getHour();
     }
 
@@ -85,16 +81,8 @@ public class PersonBuilder {
     /**
      * Parses the {@code courses} into a {@code Set<Course>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withCourses(String ... courses) {
+    public PersonBuilder withCourses(String... courses) {
         this.courses = SampleDataUtil.getCourseSet(courses);
-        return this;
-    }
-
-    /**
-     * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withLessons(String[] ... lessons) {
-        this.lessons = SampleDataUtil.getLessonSet(lessons);
         return this;
     }
 
@@ -143,7 +131,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, telegram, tags, freeTime, courses, lessons, hour);
+        return new Person(name, phone, email, telegram, tags, freeTime, courses, hour);
     }
 
 }

@@ -13,7 +13,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.availability.FreeTime;
 import seedu.address.model.availability.TimeInterval;
 import seedu.address.model.course.Course;
-import seedu.address.model.course.Lesson;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
@@ -37,7 +36,6 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTimeInterval> intervals = new ArrayList<>();
 
     private final List<JsonAdaptedCourse> courses = new ArrayList<>();
-    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
     private final String hour;
 
     /**
@@ -49,7 +47,6 @@ class JsonAdaptedPerson {
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("freeTime") List<JsonAdaptedTimeInterval> intervals,
                              @JsonProperty("courses") List<JsonAdaptedCourse> courses,
-                             @JsonProperty("lessons") List<JsonAdaptedLesson> lessons,
                              @JsonProperty("hour") String hour) {
         this.name = name;
         this.phone = phone;
@@ -71,10 +68,6 @@ class JsonAdaptedPerson {
             this.courses.addAll(courses);
         }
 
-        if (lessons != null) {
-            this.lessons.addAll(lessons);
-        }
-
         this.hour = hour;
     }
 
@@ -91,9 +84,6 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         courses.addAll(source.getCourses().stream()
                 .map(JsonAdaptedCourse::new)
-                .collect(Collectors.toList()));
-        lessons.addAll(source.getLessons().stream()
-                .map(JsonAdaptedLesson::new)
                 .collect(Collectors.toList()));
         source.getFreeTime().getIntervals().forEach(interval -> {
             if (interval != null) {
@@ -121,11 +111,6 @@ class JsonAdaptedPerson {
         final List<Course> personCourses = new ArrayList<>();
         for (JsonAdaptedCourse course : courses) {
             personCourses.add(course.toModelType());
-        }
-
-        final List<Lesson> personLessons = new ArrayList<>();
-        for (JsonAdaptedLesson lesson : lessons) {
-            personLessons.add(lesson.toModelType());
         }
 
         int countNulls = 0;
@@ -182,8 +167,6 @@ class JsonAdaptedPerson {
 
         final Set<Course> modelCourses = new HashSet<>(personCourses);
 
-        final Set<Lesson> modelLessons = new HashSet<>(personLessons);
-
         if (hour == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Hour.class.getSimpleName()));
         }
@@ -192,7 +175,7 @@ class JsonAdaptedPerson {
         }
         final Hour modelHour = new Hour(hour);
         return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags,
-                modelFreeTime, modelCourses, modelLessons, modelHour);
+                modelFreeTime, modelCourses, modelHour);
     }
 
 }
