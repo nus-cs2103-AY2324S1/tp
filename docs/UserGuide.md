@@ -213,7 +213,9 @@ For now, search keywords cannot contain spaces. For example, `n/John Doe` will n
 Contacts can be filtered by a single field by typing:
 - the **prefix** of the field you're searching through, followed by
 - a **slash** (`/`), followed by
-- the **keyword** you're looking for. Such a search will return all contacts whose field matches the keyword based on the behavior specified in the [supported fields table](#find-fields-table).
+- the **keyword** you're looking for.
+
+Such a search will return all contacts whose field matches the keyword based on the behavior specified in the [supported fields table](#find-fields-table).
 
 We call this basic block of filtering a **find condition**, which is the smallest unit that act as a valid [**`FIND_EXPRESSION`**](#find-contacts).
 
