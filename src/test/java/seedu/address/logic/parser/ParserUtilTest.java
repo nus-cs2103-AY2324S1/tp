@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Availability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -39,6 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_AVAILABILITY1 = "Available";
     private static final String VALID_AVAILABILITY2 = "NotAvailable";
+    private static final String VALID_AVAILABILITY3 = "nil";
     private static final String VALID_ANIMAL_TYPE = "able.Dog";
     private static final String VALID_HOUSING = "HDB";
 
@@ -47,6 +49,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("-9"));
     }
 
     @Test
@@ -67,6 +70,8 @@ public class ParserUtilTest {
     @Test
     public void parseIndices_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("1 2 a b 3 c"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("-1 2 -4 6 3 -9"));
+
     }
 
     @Test
@@ -233,12 +238,20 @@ public class ParserUtilTest {
 
     @Test
     public void parseAnimalType_invalidInputWhenAvailable_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE, VALID_AVAILABILITY1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE,
+                new Availability(VALID_AVAILABILITY1)));
     }
 
     @Test
     public void parseAnimalType_invalidInputWhenNotAvailable_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE, VALID_AVAILABILITY2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE,
+                new Availability(VALID_AVAILABILITY2)));
+    }
+
+    @Test
+    public void parseAnimalType_invalidInputWhenNilAvailable_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE,
+                new Availability(VALID_AVAILABILITY3)));
     }
 
     @Test

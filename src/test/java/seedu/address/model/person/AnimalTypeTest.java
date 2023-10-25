@@ -8,14 +8,16 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class AnimalTypeTest {
+    public static final Availability AVAILABLE = new Availability("Available");
+    public static final Availability NOT_AVAILABLE = new Availability("NotAvailable");
 
     @Test
     public void constructor_validAnimalTypeWithAvailability_success() {
         String validValue = "able.Dog";
         String validAvailability = "Available";
-        AnimalType animalType = new AnimalType(validValue, validAvailability);
+        AnimalType animalType = new AnimalType(validValue, new Availability(validAvailability));
         assertEquals(validValue, animalType.value);
-        assertEquals(validAvailability, animalType.availability);
+        assertEquals(new Availability(validAvailability), animalType.availability);
     }
 
     @Test
@@ -36,23 +38,22 @@ public class AnimalTypeTest {
 
     @Test
     public void equals_sameValues_returnsTrue() {
-        AnimalType animalType1 = new AnimalType("able.Dog", "Available");
-        AnimalType animalType2 = new AnimalType("able.Dog", "Available");
+        AnimalType animalType1 = new AnimalType("able.Dog", AVAILABLE);
+        AnimalType animalType2 = new AnimalType("able.Dog", AVAILABLE);
         assertTrue(animalType1.equals(animalType2));
     }
 
     @Test
     public void equals_differentValues_returnsFalse() {
-        AnimalType animalType1 = new AnimalType("able.Dog", "Available");
-        AnimalType animalType2 = new AnimalType("able.Cat", "Available");
+        AnimalType animalType1 = new AnimalType("current.Dog", NOT_AVAILABLE);
+        AnimalType animalType2 = new AnimalType("current.Cat", NOT_AVAILABLE);
         assertFalse(animalType1.equals(animalType2));
     }
 
     @Test
     public void constructor_invalidAnimalTypeWithAvailability_throwsIllegalArgumentException() {
         String invalidValue = "invalidCat";
-        String validAvailability = "Available";
-        assertThrows(IllegalArgumentException.class, () -> new AnimalType(invalidValue, validAvailability));
+        assertThrows(IllegalArgumentException.class, () -> new AnimalType(invalidValue, AVAILABLE));
     }
 
 }

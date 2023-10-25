@@ -124,7 +124,7 @@ class JsonAdaptedPerson {
 
         Name modelAnimalName = new Name(animalName);
         Availability modelAvailability = new Availability(availability);
-        AnimalType modelAnimaltype = new AnimalType(animalType, availability);
+        AnimalType modelAnimaltype = new AnimalType(animalType, modelAvailability);
         Housing modelHousing = new Housing(housing);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHousing,
