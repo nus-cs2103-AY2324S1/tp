@@ -142,19 +142,41 @@ public class MarkAttendanceCommandTest {
 
     /**
      * Tests if the attendance of a person is correctly updated when an attendance
-     * record for the current week already exists.
+     * record for the current week already exists, updating attendance to present.
      */
     @Test
-    public void execute_personWithExistingAttendance_updatesAttendance() {
+    public void execute_personWithExistingAttendanceMarkedAsPresent_updatesAttendanceAsPresent() {
         Person amy = new PersonBuilder().build();
         Week testWeek = new Week(1);
         model.addPerson(amy);
-        amy.addAttendance(new Attendance(testWeek, false));
+        amy.addAttendance(new Attendance(testWeek, false, "Late"));
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
                 testWeek);
 
         String expectedMessage = String.format(MESSAGE_UPDATED_SUCCESS + "%s\n%s" + MESSAGE_PRESENT + "%d\n",
                 amy.getName(), amy.getName(), 1);
+
+        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true)).build();
+        expectedModel.addPerson(expectedAmy);
+        assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests if the attendance of a person is correctly updated when an attendance
+     * record for the current week already exists, updating attendance to absent.
+     */
+    @Test
+    public void execute_personWithExistingAttendanceMarkedAsAbsent_updatesAttendanceAsAbsent() {
+        Person amy = new PersonBuilder().build();
+        Week testWeek = new Week(1);
+        model.addPerson(amy);
+        amy.addAttendance(new Attendance(testWeek, true));
+        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), false,
+                testWeek, "Late");
+
+        String expectedMessage = String.format(MESSAGE_UPDATED_SUCCESS + "%s\n" + "%s" + MESSAGE_ABSENT
+                        + "1\nReason: %s\n",
+                amy.getName(), amy.getName(), "Late");
 
         Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true)).build();
         expectedModel.addPerson(expectedAmy);
