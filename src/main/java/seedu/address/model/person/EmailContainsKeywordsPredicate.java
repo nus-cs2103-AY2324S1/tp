@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -18,9 +19,12 @@ public class EmailContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> keyword.isEmpty()
-                        || StringUtil.containsWordIgnoreCase(person.getEmail().toString(), keyword));
+        String email = person.getEmail().toString();
+        Boolean result = false;
+        for (String keyword : keywords) {
+            result |= email.contains(keyword.toLowerCase());
+        }
+        return result;
     }
 
     @Override

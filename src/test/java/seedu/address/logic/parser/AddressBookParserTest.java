@@ -47,6 +47,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonTagContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsPredicate;
 import seedu.address.model.person.StatusContainsPredicate;
+import seedu.address.testutil.EditMeetingDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.MeetingBuilder;
 import seedu.address.testutil.MeetingUtil;
