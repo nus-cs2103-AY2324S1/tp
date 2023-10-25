@@ -181,5 +181,4 @@ public class TeamBook implements ReadOnlyTeamBook {
         TeamBook otherTeamBook = (TeamBook) other;
         return teams.equals(otherTeamBook.teams);
     }
-
 }
