@@ -27,7 +27,7 @@ public class CopyMemberCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Copied details member to clipboard:\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Copied details of member to clipboard:\n%1$s";
     private final Index memberIndex;
 
     public CopyMemberCommand(Index memberIndex) {
