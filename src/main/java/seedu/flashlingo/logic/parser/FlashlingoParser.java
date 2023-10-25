@@ -65,7 +65,6 @@ public class FlashlingoParser {
             case StartCommand.COMMAND_WORD:
                 throw new ParseException(MESSAGE_IN_REVIEW_SESSION);
             case EndCommand.COMMAND_WORD:
-                sessionManager.setSession(false);
                 return new EndCommand();
             case YesCommand.COMMAND_WORD:
                 return new YesCommand();
@@ -108,7 +107,6 @@ public class FlashlingoParser {
         case StatsCommand.COMMAND_WORD:
             return new StatsCommand();
         case StartCommand.COMMAND_WORD:
-            sessionManager.setSession(true);
             return new StartCommand();
         case EndCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_NOT_IN_REVIEW_SESSION);
