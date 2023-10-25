@@ -67,6 +67,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+    /**
+     * Returns true if a person with the same schedule as {@code person} exists in the address book.
+     * @param person
+     * @return boolean for whether a person has a clashing schedule
+     */
     public boolean hasDate(Person person) {
         requireNonNull(person);
         return persons.checkSameDate(person);

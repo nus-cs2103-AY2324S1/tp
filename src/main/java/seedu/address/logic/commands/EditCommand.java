@@ -301,6 +301,7 @@ public class EditCommand extends Command {
 
         public Optional<PayRate> getPayRate() {
             return Optional.ofNullable(payRate);
+        }
         public void setEditSchedule(Boolean setTrue) {
             this.editSchedule = setTrue;
         }

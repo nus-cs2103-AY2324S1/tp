@@ -2,10 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.format.DateTimeFormatter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -56,8 +55,8 @@ public class Person {
         this.lesson = new Lesson(day, begin, end);
 
         try {
-            this.beginTime = convertTime(this.begin.toString());
-            this.endTime = convertTime(this.end.toString());
+            this.beginTime = convertTime(begin.toString());
+            this.endTime = convertTime(end.toString());
         } catch (ParseException e) {
             //something
         }
@@ -144,7 +143,13 @@ public class Person {
     public PayRate getPayRate() {
         return payRate;
     }
-  
+
+    /**
+     * converts a string time into a date object
+     * @param time
+     * @return date object of the time
+     * @throws ParseException
+     */
     public Date convertTime(String time) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("HHmm");
         return format.parse(time);
@@ -163,6 +168,11 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    /**
+     * checks for clashing schedules
+     * @param otherPerson other person to be checked
+     * @return boolean for whether schedules clash
+     */
     public boolean isSameDate(Person otherPerson) {
         if (otherPerson == this) {
             return true;

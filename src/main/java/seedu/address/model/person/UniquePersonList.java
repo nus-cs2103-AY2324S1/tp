@@ -36,6 +36,9 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
+    /**
+     * Returns true if the list contains a perosn that has a clashing schedule
+     */
     public boolean checkSameDate(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream()

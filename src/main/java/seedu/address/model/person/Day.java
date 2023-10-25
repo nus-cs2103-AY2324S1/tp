@@ -62,35 +62,42 @@ public class Day {
         default:
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
-        checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
-        value = parseDay(day);
+        //checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
+        //value = parseDay(day);
     }
 
+    /**
+     * Parses the day input
+     * @param input string of Day
+     * @return parses the day into the complete day name
+     */
     public String parseDay(String input) {
         String day = input.toLowerCase();
         String result = "";
         switch (day) {
-            case "mon":
-                result = "Mon";
-                break;
-            case "tue":
-                result = "Tue";
-                break;
-            case "wed":
-                result = "Wed";
-                break;
-            case "thu":
-                result = "Thu";
-                break;
-            case "fri":
-                result = "Fri";
-                break;
-            case "sat":
-                result = "Sat";
-                break;
-            case "sun":
-                result = "Sun";
-                break;
+        case "mon":
+            result = "Mon";
+            break;
+        case "tue":
+            result = "Tue";
+            break;
+        case "wed":
+            result = "Wed";
+            break;
+        case "thu":
+            result = "Thu";
+            break;
+        case "fri":
+            result = "Fri";
+            break;
+        case "sat":
+            result = "Sat";
+            break;
+        case "sun":
+            result = "Sun";
+            break;
+        default:
+
         }
         return result;
     }
