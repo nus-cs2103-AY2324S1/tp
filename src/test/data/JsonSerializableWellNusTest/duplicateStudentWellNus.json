@@ -1,0 +1,49 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tags": [ "high" ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "address": "4th street"
+  } ],
+  "appointments" : [ {
+    "name" : "Bernice Yu",
+    "date" : "2023-10-15",
+    "startTime" : "10:00",
+    "endTime" : "11:00",
+    "description" : "Third Session"
+  }, {
+    "name" : "David Li",
+    "date" : "2023-10-16",
+    "startTime" : "14:45",
+    "endTime" : "15:45",
+    "description" : "Check-up"
+  }, {
+    "name" : "Irfan Ibrahim",
+    "date" : "2023-10-17",
+    "startTime" : "11:20",
+    "endTime" : "12:20",
+    "description" : "Follow-up"
+  }, {
+    "name" : "Roy Balakrishnan",
+    "date" : "2023-10-18",
+    "startTime" : "09:30",
+    "endTime" : "10:30",
+    "description" : "Check-up"
+  }, {
+    "name" : "Alex Yeoh",
+    "date" : "2023-10-19",
+    "startTime" : "16:15",
+    "endTime" : "17:15",
+    "description" : "Second Session"
+  }, {
+    "name" : "Charlotte Oliveiro",
+    "date" : "2023-10-20",
+    "startTime" : "13:00",
+    "endTime" : "14:00",
+    "description" : "Check-up"
+  } ]
+}

@@ -1,5 +1,4 @@
 {
-  "_comment": "AddressBook save file which contains the same Student values as in TypicalStudents#getTypicalAddressBook()",
   "students" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
@@ -50,9 +49,9 @@
     "description" : "Second Session"
   }, {
     "name" : "John Doe",
-    "date" : "2024-02-06",
-    "startTime" : "17:30",
-    "endTime" : "18:30",
-    "description" : "Third Session"
+    "date" : "2023-11-30",
+    "startTime" : "16:30",
+    "endTime" : "17:30",
+    "description" : "First Session"
   } ]
 }

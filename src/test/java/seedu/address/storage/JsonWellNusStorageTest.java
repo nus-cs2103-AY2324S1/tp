@@ -52,7 +52,7 @@ public class JsonWellNusStorageTest {
 
     @Test
     public void readAddressBook_invalidStudentAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidStudentAddressBook.json"));
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidStudentWellNus.json"));
     }
 
     @Test
