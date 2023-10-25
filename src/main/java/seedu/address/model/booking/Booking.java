@@ -1,13 +1,19 @@
 package seedu.address.model.booking;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.booking.exceptions.BookingPeriodNotFoundException;
+import seedu.address.model.booking.exceptions.EmailNotFoundException;
+import seedu.address.model.booking.exceptions.NameNotFoundException;
+import seedu.address.model.booking.exceptions.PhoneNotFoundException;
+import seedu.address.model.booking.exceptions.RoomNotFoundException;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,10 +33,37 @@ public class Booking {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs a Booking with the specified details.
+     *
+     * @param room The room associated with the booking.
+     * @param bookingPeriod The booking period.
+     * @param name The name of the person making the booking.
+     * @param phone The phone number of the person making the booking.
+     * @param email The email of the person making the booking.
+     * @param tags The tags associated with the booking.
+     * @throws RoomNotFoundException If the room is null.
+     * @throws BookingPeriodNotFoundException If the booking period is null.
+     * @throws NameNotFoundException If the name is null.
+     * @throws PhoneNotFoundException If the phone is null.
+     * @throws EmailNotFoundException If the email is null.
      */
     public Booking(Room room, BookingPeriod bookingPeriod, Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, bookingPeriod, phone, email, tags);
+        if (room == null) {
+            throw new RoomNotFoundException();
+        }
+        if (bookingPeriod == null) {
+            throw new BookingPeriodNotFoundException();
+        }
+        if (name == null) {
+            throw new NameNotFoundException();
+        }
+        if (phone == null) {
+            throw new PhoneNotFoundException();
+        }
+        if (email == null) {
+            throw new EmailNotFoundException();
+        }
+
         this.room = room;
         this.bookingPeriod = bookingPeriod;
         this.name = name;
@@ -42,6 +75,7 @@ public class Booking {
     public Room getRoom() {
         return room;
     }
+
     public Name getName() {
         return name;
     }
@@ -116,5 +150,4 @@ public class Booking {
                 .add("tags", tags)
                 .toString();
     }
-
 }

@@ -5,9 +5,9 @@ import java.util.Set;
 
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
-import seedu.address.model.booking.Email;
-import seedu.address.model.booking.Name;
-import seedu.address.model.booking.Phone;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.booking.Room;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
