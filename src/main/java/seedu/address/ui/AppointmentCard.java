@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.util.DateTimeParser;
 
 /**
  * An UI component that displays information of a {@code Appointment}.
@@ -22,7 +23,11 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label dateTime;
+    private Label date;
+    @FXML
+    private Label startTime;
+    @FXML
+    private Label endTime;
     @FXML
     private Label description;
 
@@ -34,7 +39,9 @@ public class AppointmentCard extends UiPart<Region> {
         this.appointment = appointment;
         id.setText(displayedIndex + ". ");
         name.setText(appointment.getName().fullName);
-        dateTime.setText("Date and Time: " + appointment.getDateTime().value);
+        date.setText("Date: " + DateTimeParser.formatDate(appointment.getDate().value));
+        startTime.setText("From: " + DateTimeParser.formatTime(appointment.getStartTime().value));
+        endTime.setText("To: " + DateTimeParser.formatTime(appointment.getEndTime().value));
         description.setText("Description: " + appointment.getDescription().value);
     }
 }
