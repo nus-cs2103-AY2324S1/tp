@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parseStatusToInteger;
+import static seedu.address.logic.parser.ParserUtil.parseStatusToString;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -213,5 +215,19 @@ public class ParserUtilTest {
         String statusWithWhitespace = WHITESPACE + VALID_SCHEDULE_STATUS + WHITESPACE;
         Status expectedStatus = Status.MISSED;
         assertEquals(expectedStatus, ParserUtil.parseStatus(statusWithWhitespace));
+    }
+
+    @Test
+    public void parseStatusToString_returnsStatusString() throws Exception {
+        Status status = Status.MISSED;
+        String expectedString = "0";
+        assertEquals(parseStatusToString(status), expectedString);
+    }
+
+    @Test
+    public void parseStatusToIndex_returnsStatusIndex() throws Exception {
+        Status status = Status.MISSED;
+        int expectedIndex = 0;
+        assertEquals(parseStatusToInteger(status), expectedIndex);
     }
 }

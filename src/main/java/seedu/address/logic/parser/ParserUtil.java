@@ -123,4 +123,34 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
     }
+
+    /**
+     * Parses {@code Status status} into a {@code string}
+     */
+    public static String parseStatusToString(Status status) throws ParseException {
+        requireNonNull(status);
+
+        if (status.equals(Status.MISSED)) {
+            return "0";
+        } else if (status.equals(Status.COMPLETED)) {
+            return "1";
+        } else {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses {@code Status status} into a {@code integer}
+     */
+    public static int parseStatusToInteger(Status status) throws ParseException {
+        requireNonNull(status);
+
+        if (status.equals(Status.MISSED)) {
+            return 0;
+        } else if (status.equals(Status.COMPLETED)) {
+            return 1;
+        } else {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+    }
 }
