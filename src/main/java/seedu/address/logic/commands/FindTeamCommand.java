@@ -7,6 +7,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.team.TeamContainsKeywordsPredicate;
 
+/**
+ * The type Find team command.
+ */
 public class FindTeamCommand extends Command {
 
     public static final String COMMAND_WORD = "findTeam";

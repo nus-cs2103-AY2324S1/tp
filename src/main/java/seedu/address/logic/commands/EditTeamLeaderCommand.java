@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAMLEADER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TEAMNAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TEAMS;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -11,6 +12,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Name;
 
+/**
+ * The type Edit team leader command.
+ */
 public class EditTeamLeaderCommand extends Command {
     public static final String COMMAND_WORD = "editTeamLeader";
 
@@ -25,16 +29,22 @@ public class EditTeamLeaderCommand extends Command {
             + PREFIX_TEAMLEADER + "Bob";
 
     public static final String MESSAGE_EDIT_TEAM_LEADER_SUCCESS = "Edited Team Leader: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "Your new Team Leader should be different from " +
-            "your original Team Leader.";
-    public static final String MESSAGE_TEAM_LEADER_NOT_FOUND = "Cannot find the developer with this Name" +
-            " in the Address book.";
-    public static final String MESSAGE_TEAM_NOT_FOUND = "Cannot find the team with this Team Name" +
-            " in the Team book.";
+    public static final String MESSAGE_NOT_EDITED = "Your new Team Leader should be different from "
+           + "your original Team Leader.";
+    public static final String MESSAGE_TEAM_LEADER_NOT_FOUND = "Cannot find the developer with this Name"
+           + " in the Address book.";
+    public static final String MESSAGE_TEAM_NOT_FOUND = "Cannot find the team with this Team Name"
+           + " in the Team book.";
 
     private final String teamName;
     private final Name newTeamLeaderName;
 
+    /**
+     * Instantiates a new Edit team leader command.
+     *
+     * @param teamName          the team name
+     * @param newTeamLeaderName the new team leader name
+     */
     public EditTeamLeaderCommand(String teamName, Name newTeamLeaderName) {
         requireNonNull(teamName);
         requireNonNull(newTeamLeaderName);
@@ -49,7 +59,7 @@ public class EditTeamLeaderCommand extends Command {
             throw new CommandException(MESSAGE_TEAM_NOT_FOUND);
         }
 
-        if (!model.hasPerson(newTeamLeaderName)) {
+        if (!model.containsPerson(newTeamLeaderName)) {
             throw new CommandException(MESSAGE_TEAM_LEADER_NOT_FOUND);
         }
 

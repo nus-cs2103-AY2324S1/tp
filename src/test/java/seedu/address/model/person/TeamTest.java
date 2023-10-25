@@ -11,6 +11,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.team.Team;
+
 public class TeamTest {
 
     @Test
@@ -59,7 +61,9 @@ public class TeamTest {
         developers.add(BOB.getIdentityCode());
         aliceTeam.addDeveloper(BOB.getIdentityCode());
 
-        String expected = Team.class.getCanonicalName() + "{Team Name=Alice's Team, Team Leader=" + ALICE.getIdentityCode() + ", Developer List=" + developers + "}";
+        String expected = Team.class.getCanonicalName()
+                + "{Team Name=Alice's Team, Team Leader=" + ALICE.getIdentityCode()
+                + ", Developer List=" + developers + "}";
         assertEquals(expected, aliceTeam.toString());
     }
 }

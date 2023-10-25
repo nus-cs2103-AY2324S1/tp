@@ -35,8 +35,6 @@ public class CommandResult {
         this.exit = exit;
         this.listTeam = listTeam;
         this.listPerson = listPerson;
-
-        assert listTeam && listPerson : "listTeam and listPerson cannot be true at the same time!";
     }
 
     /**

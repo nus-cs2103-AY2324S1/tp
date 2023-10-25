@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
-import seedu.address.model.person.IdentityCode;
+import seedu.address.testutil.TypicalPersons;
 
 public class IdentityCodeManagerTest {
 
@@ -45,12 +45,12 @@ public class IdentityCodeManagerTest {
 
     @Test
     public void updateMaxID_listWithPersons_updatesToMaxIdentityCode() {
-        Person alice = new Person(new IdentityCode("3"),);
-        Person bob = new Person(new IdentityCode("5"),);
-        Person charlie = new Person(new IdentityCode("1"),);
+        Person alice = TypicalPersons.ALICE;
+        Person benson = TypicalPersons.BENSON;
+        Person carl = TypicalPersons.CARL;
 
-        IdentityCodeManager.updateMaxID(Arrays.asList(alice, bob, charlie));
+        IdentityCodeManager.updateMaxID(Arrays.asList(alice, benson, carl));
 
-        assertEquals(6, IdentityCodeManager.getNextIdentityCode());
+        assertEquals(4, IdentityCodeManager.getNextIdentityCode());
     }
 }
