@@ -88,4 +88,7 @@ public interface Model {
     Person getSelectedPerson();
 
     void updateSelectedPerson(Person person);
+
+    public boolean isSelectedEmpty();
+
 }

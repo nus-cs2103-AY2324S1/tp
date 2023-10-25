@@ -147,6 +147,7 @@ public class ModelManager implements Model {
         selectedPerson = person;
     }
 
+    @Override
     public boolean isSelectedEmpty() {
         return selectedPerson == null;
     }

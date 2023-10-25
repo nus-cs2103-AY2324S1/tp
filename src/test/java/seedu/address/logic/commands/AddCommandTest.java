@@ -167,6 +167,11 @@ public class AddCommandTest {
         public void updateSelectedPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean isSelectedEmpty() {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**
