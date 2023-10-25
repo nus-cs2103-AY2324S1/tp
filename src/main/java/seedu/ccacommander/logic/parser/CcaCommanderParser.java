@@ -15,6 +15,7 @@ import seedu.ccacommander.logic.commands.CreateMemberCommand;
 import seedu.ccacommander.logic.commands.DeleteEventCommand;
 import seedu.ccacommander.logic.commands.DeleteMemberCommand;
 import seedu.ccacommander.logic.commands.EditCommand;
+import seedu.ccacommander.logic.commands.EnrolCommand;
 import seedu.ccacommander.logic.commands.ExitCommand;
 import seedu.ccacommander.logic.commands.FindEventCommand;
 import seedu.ccacommander.logic.commands.FindMemberCommand;
@@ -70,6 +71,9 @@ public class CcaCommanderParser {
 
         case DeleteEventCommand.COMMAND_WORD:
             return new DeleteEventCommandParser().parse(arguments);
+
+        case EnrolCommand.COMMAND_WORD:
+            return new EnrolCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
