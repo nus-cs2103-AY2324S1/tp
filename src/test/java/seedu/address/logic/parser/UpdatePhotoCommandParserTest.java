@@ -11,7 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class UpdatePhotoCommandParserTest {
 
     @Test
-    public void parseInvalidCommand_exceptionThrown() {
+    public void parse_invalidCommand_exceptionThrown() {
         AddressBookParser parser = new AddressBookParser();
         try {
             Command updatePhotoCommand = parser.parseCommand("updatephoto path/D:/image/cute_cat.png");

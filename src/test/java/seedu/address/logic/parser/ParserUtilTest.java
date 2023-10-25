@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -26,6 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_BALANCE = "-2.50";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_BALANCE = "2.50";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -193,4 +196,100 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseBalance_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseBalance(null));
+    }
+
+    @Test
+    public void parseBalance_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance(INVALID_BALANCE));
+    }
+
+    @Test
+    public void parseBalance_validValueWithoutWhitespace_returnsBalance() throws Exception {
+        Balance expectedBalance = new Balance(250);
+        assertEquals(expectedBalance, ParserUtil.parseBalance(VALID_BALANCE));
+    }
+
+    @Test
+    public void parseBalance_validValueWithWhitespace_returnsTrimmedBalance() throws Exception {
+        String balanceWithWhitespace = WHITESPACE + VALID_BALANCE + WHITESPACE;
+        Balance expectedBalance = new Balance(250);
+        assertEquals(expectedBalance, ParserUtil.parseBalance(balanceWithWhitespace));
+    }
+
+    @Test
+    public void parseBalance_largeAmount_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("123456.78"));
+    }
+
+    @Test
+    public void parseBalance_noDollarSign_validBalance() throws Exception {
+        Balance expectedBalance = new Balance(250);
+        assertEquals(expectedBalance, ParserUtil.parseBalance("2.50"));
+    }
+
+    @Test
+    public void parseBalance_noCents_returnsCorrectBalance() throws Exception {
+        Balance expectedBalance = new Balance(20000); // 200 dollars in cents
+        assertEquals(expectedBalance, ParserUtil.parseBalance("$200"));
+    }
+
+    @Test
+    public void parseBalance_singleDecimalPlace_returnsCorrectBalance() throws Exception {
+        Balance expectedBalance = new Balance(210); // 2.10 dollars in cents
+        assertEquals(expectedBalance, ParserUtil.parseBalance("$2.1"));
+    }
+
+    @Test
+    public void parseBalance_zeroBalance_returnsCorrectBalance() throws Exception {
+        Balance expectedBalance = new Balance(0);
+        assertEquals(expectedBalance, ParserUtil.parseBalance("$0"));
+    }
+
+    @Test
+    public void parseBalance_nonNumericValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("abcd.ef"));
+    }
+
+    @Test
+    public void parseBalance_tooManyDecimalPoints_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("12.34.56"));
+    }
+
+    @Test
+    public void parseBalance_tooManyCentsDigits_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("12.345"));
+    }
+
+    @Test
+    public void parseBalance_onlyCents_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance(".50"));
+    }
+
+    @Test
+    public void parseBalance_leadingZeroes_returnsCorrectBalance() throws Exception {
+        Balance expectedBalance = new Balance(250); // 2.50 dollars in cents
+        assertEquals(expectedBalance, ParserUtil.parseBalance("002.50"));
+
+        expectedBalance = new Balance(500); // 5 dollars in cents
+        assertEquals(expectedBalance, ParserUtil.parseBalance("00000000000005"));
+
+        expectedBalance = new Balance(5); // 5 cents
+        assertEquals(expectedBalance, ParserUtil.parseBalance("000000000000.05"));
+    }
+
+    @Test
+    public void parseBalance_trailingZeroesAfterDecimal_returnsCorrectBalance() throws Exception {
+        Balance expectedBalance = new Balance(200); // 2.00 dollars in cents
+        assertEquals(expectedBalance, ParserUtil.parseBalance("2.00"));
+    }
+
+    @Test
+    public void parseBalance_justDollarSign_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBalance("$"));
+    }
+
 }

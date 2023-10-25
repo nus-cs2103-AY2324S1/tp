@@ -9,7 +9,7 @@ public class AvatarTest {
     private static final String DEFAULT_PATH = "/images/default_photo.png";
 
     @Test
-    public void testDefaultConstructor() {
+    public void avatar() {
         Avatar avatar = new Avatar();
         assertEquals(avatar.getPath(), DEFAULT_PATH);
     }

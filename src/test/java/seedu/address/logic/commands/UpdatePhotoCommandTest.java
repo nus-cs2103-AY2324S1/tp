@@ -13,7 +13,7 @@ import seedu.address.model.ModelManager;
 public class UpdatePhotoCommandTest {
 
     @Test
-    public void invalidIndex_exceptionThrown() {
+    public void execute_invalidIndex_exceptionThrown() {
         AddressBookParser parser = new AddressBookParser();
         try {
             Command command = parser.parseCommand("updatephoto 0 path/D:/image/cute_cat.png");

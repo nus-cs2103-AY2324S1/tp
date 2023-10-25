@@ -33,6 +33,8 @@ public class Avatar {
         try {
             return new Image(new FileInputStream(path));
         } catch (FileNotFoundException e) {
+            throw new FileNotFoundException();
+        } finally {
             return new Image(this.getClass().getResourceAsStream(DEFAULT_PATH));
         }
     }

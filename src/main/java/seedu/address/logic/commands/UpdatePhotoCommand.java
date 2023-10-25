@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Avatar;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Linkedin;
@@ -85,9 +86,10 @@ public class UpdatePhotoCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
         Optional<Integer> id = personToEdit.getId();
         List<Note> notes = personToEdit.getNotes();
+        Balance balance = personToEdit.getBalance();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                linkedin, secondaryEmail, telegram, updatedTags, id, new Avatar(path), notes);
+                linkedin, secondaryEmail, telegram, updatedTags, id, new Avatar(path), notes, balance);
     }
 }
 

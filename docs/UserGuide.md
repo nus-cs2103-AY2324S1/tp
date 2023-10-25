@@ -35,9 +35,8 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
    - Delete normal contact
    - Delete emergency contact
    - Undo last action [Coming Soon]
-   - Receive actual birthday notification 
-   - Receive upcoming birthday notification [Coming Soon]
-   - Opt out notification
+   - Receive upcoming birthday notifications
+   - Opt out notification [Coming soon]
    - Track payment [Coming Soon]
    - Change language [Coming Soon]
 3. Troubleshooting / FAQ
@@ -171,81 +170,127 @@ Examples:
   * Updates the photo for the 2nd person with a new image from the specified path.
 
 
-###  Search contact
+###  Find contacts
 
-Generally, search commands will contain the following tokens:
+Lists contacts whose fields match the specified the specified find expression.
 
-* `FIELD`: Specifies the field to search within (name, phone, email, address, tag).
+Format: `find FIND_EXPRESSION`
 
-* `KEYWORD`: Words or characters you're looking for in a contact's information.
+Find expressions have a low barrier to entry that allows for simple filtering by field. This basic filtering for contacts is likely sufficient for most of your use cases. We recommend that you first read the [basic filtering](#find-contacts-basic-filtering) section to learn how to perform simple filtering by a single field.
 
-Format: `find FIELD/KEYWORD [FIELD/KEYWORD]`
+If you then find that the basic filtering is insufficient for your use case, you can read the [advanced filtering](#find-contacts-advanced-filtering) section to learn how to perform more complex filtering.
 
-You may include multiple field-keyword combinations. The `find` command will perform a logical `AND` on all field-keyword combinations.
 
-#### Search contact by name
 
-Locates persons in the address book whose names contain the given keywords.
+<panel header="**Supported Fields**" type="primary" id="find-fields-table" expanded no-close>
+Across both basic and advanced filtering, the following fields are supported:<br><br>
 
-Format: `find name/KEYWORD`
+| Field | Prefix | Description |
+| ----- | ------ | ----------- |
+| Name  | `n`   | Finds contacts whose names **contain** the given keyword. |
+| Phone | `p`   | Finds contacts whose phone numbers **contain** the given digits. |
+| Email | `e`   | Finds contacts whose email addresses **contain** the given keyword. |
+| Address | `a` | Finds contacts whose addresses **contain** the given keyword. |
+| Tag   | `t`   | Finds contacts who have any tag that **exactly matches** the given keyword. |
 
-Examples:
-* `find name/John`
-  * Returns all contacts with names that contain "John" (e.g. "John Smith", "John Doe")
-* `find name/Alex name/Ye`
-  * Returns all contacts with names that contain both "Alex" and "Ye" (e.g. "Alex Yeoh", "Yervis Alexis")
+</panel>
 
-#### Search contact by phone number
+<br>
 
-Locates persons in the address book whose phone numbers contain the given digits.
+<box type="info">
 
-Format: `find phone/KEYWORD`
+Note that in all cases, the search is case-insensitive for alphabetic characters. For example, `n/Joe` will match contacts who have the name `Joe`, `joE`, `Ajoeia`, `BobJOe Lee`, etc., and `t/friend` will match `friend`, `FriENd`, `FRIEND`, etc.
+</box>
 
-Examples:
-* `find phone/9876`
-  * Returns all contacts with phone numbers that contain "9876"
 
-#### Search contact by email
+<box type="warning">
 
-Locates persons in the address book whose email addresses contain the given keywords.
+For now, search keywords cannot contain spaces. For example, `n/John Doe` will not work as expected. Functionality to search for keywords which spaces like `"John Doe"` will be added in a future release.
+</box>
 
-Format: `find email/KEYWORD`
+#### Find contacts: basic filtering
 
-Examples:
-* `find email/tan email/@u.nus.edu`
-  * Returns all contacts with email addresses that contain "tan" and "@u.nus.edu"
+Contacts can be filtered by a single field by typing:
+- the **prefix** of the field you're searching through, followed by
+- a **slash** (`/`), followed by
+- the **keyword** you're looking for.
 
-#### Search contact by address
+Such a search will return all contacts whose field matches the keyword based on the behavior specified in the [supported fields table](#find-fields-table).
 
-Locates persons in the address book whose addresses contain the given keywords.
+We call this basic block of filtering a **find condition**, which is the smallest unit that act as a valid [**`FIND_EXPRESSION`**](#find-contacts).
 
-Format: `find address/KEYWORD`
 
-Examples:
-* `find address/street`
-  * Returns all contacts with addresses that contain the word "street"
+<box>
 
-#### Search contact by tag
+For example, given the following contacts (some fields omitted for brevity):
 
-Locates persons in the address book that have the given tags.
+| Name | Tags |
+| ---- | ---- |
+| John Doe | neighbor, colleague |
+| Jane Doe | neighbor, friend |
+| Alex Yeoh | friend |
+| Yervis Alexis | girlfriend |
 
-Format: `find tag/KEYWORD`
 
-Examples:
-* `find tag/RA`
-  * Returns all contacts that have tags containing the string "RA"
+`n/do` is a **find condition** that will return all contacts whose names contain the substring `"do"`, in this case `"John Doe"` and `"Jane Doe"`.
 
-#### Multiple field search
+Similarly, `t/friend` is a **find condition** that will return all contacts who have the `"friend"` tag, in this case `"Jane Doe"` and `"Alex Yeoh"` (and **not** `"Yervis Alexis"`, since [supported fields table](#find-fields-table) requires an exact tag match).
 
-Combines multiple search criteria for more specific searching. Search criteria are combined with the logical `AND`.
+Since `n/do` and `t/friend` are both **find conditions**, they can constitute a **`FIND_EXPRESSION`**. The complete commands in each case would be:
 
-Format: `find FIELD/KEYWORD FIELD/KEYWORD [ANOTHER_FIELD/ANOTHER_KEYWORD]`
+- `find n/do`
+- `find t/friend`
 
-Examples:
-* `find name/John tag/friend`
-  * Returns all contacts named John who also have the "friend" tag
-* `find email/@u.nus.edu phone/9876`
-  * Returns all contacts with emails containing "@u.nus.edu" and phone numbers containing "9876"
+</box>
+
+#### Find contacts: advanced filtering
+
+While basic filtering is sufficient for most use cases, you may find that you need to perform more complex filtering. For example, you may want to find all contacts who have the tag `"friend"` *and* whose names contain the substring `"do"`. Or you may want to find all contacts whose addresses contain the substring `"street"` *or* whose names *do not* contain the substring `"ye"`.
+
+You can accomplish this and more using our powerful advanced filtering syntax, which supports arbitrarily-complex **`FIND_EXPRESSIONs`**, which can be composed of many **find conditions** combined or transformed by **logical operators**.
+
+<panel header="**Supported Logical Operators**" type="primary" id="find-logical-operators-table" expanded no-close>
+
+The following logical operators are supported, and are listed in order of precedence (from highest to lowest):
+
+| Operator | Description | Usage |
+| -------- | ----------- | ------- |
+| `(` and `)` | Parentheses for grouping | `(FIND_EXPRESSION)`
+| `!`     | Logical NOT | `!FIND_EXPRESSION`
+| `&&`    | Logical AND | `FIND_EXPRESSION && FIND_EXPRESSION`
+| <code>&#124;&#124;</code> | Logical OR | <code>FIND_EXPRESSION &#124;&#124; FIND_EXPRESSION</code>
+
+</panel>
+
+<br>
+
+Note that the smallest possible **find expressions** is simply a **find condition**.
+
+**Find expressions** can be nested arbitrarily deeply, and that parentheses can be used to group  **find expressions** together to specify the order of evaluation.
+
+<br>
+
+<box>
+
+For example, given the following contacts (some fields omitted for brevity):
+
+| Name | Tags |
+| ---- | ---- |
+| John Doe | neighbor, colleague |
+| Jane Doe | neighbor, friend |
+| Alex Yeoh | friend |
+| Yervis Alexis | girlfriend |
+
+The following are valid **`FIND_EXPRESSIONs`**:
+
+- `!n/do` will return all contacts whose names do **not** contain the substring `"do"`, in this case `"Alex Yeoh"` and `"Yervis Alexis"
+- `n/do && t/friend` will return all contacts whose names contain the substring `"do"` **and** who have the `"friend"` tag, in this case `"Jane Doe"`.
+- `n/do || t/friend` will return all contacts whose names contain the substring `"do"` **or** who have the `"friend"` tag, in this case `"John Doe"`, `"Jane Doe"`, and `"Alex Yeoh"`.
+- `n/do && (t/friend || t/colleague)` will return all contacts whose names contain the substring `"do"` **and** who have either the `"friend"` or `"colleague"` tag, in this case `"John Doe"`, `"Jane Doe"`, and `"Alex Yeoh"`.
+
+Note that the last example is **not equivalent** to `n/do && t/friend || t/colleague`. Due to the higher precedence of `&&` compared to `||`, this will return all contacts whose names contain the substring `"do"` **and** who have the `"friend"` tag, **or** who have the `"colleague"` tag, in this case `"Jane Doe"` and `"Alex Yeoh"`.
+
+</box>
 
 ###  List all contacts
 
@@ -290,18 +335,18 @@ Examples:
   * Indicates that contact at index 1 is no longer an emergency contact
 
 ###  Undo last action [Coming Soon]
-###  Receive actual birthday notification
 
-Receives a pop-up notification that contains a list of people in CampusConnect whose birthdays have arrived.
+###  Receive upcoming birthday notifications
 
-Upon launching the application, if any of your contacts’ birthday in CampusConnect have arrived, you should see the following pop-up notification: <br>
+Receives a pop-up notification for each contact in CampusConnect whose birthday is within a day.
+
+Upon launching the application, if any of your contacts’ birthday in CampusConnect is coming within a day, you should see the following pop-up notification: <br>
 
 ![birthdayNotification](images/birthdayNotification.png)
 
 The notification will contain the names of the birthday individuals saved in CampusConnect.
 
-###  Receive upcoming birthday notification [Coming Soon]
-###  Opt out notification
+###  Opt out notification [Coming soon]
 
 Opts you out from receiving birthday related notifications, such as turning off actual birthday notification feature.
 
@@ -331,6 +376,46 @@ Invalid Input Example | Application Output
 ---|---
 **optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
 **optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
+
+### Notes feature
+![Window with Notes](images/notes/window_with_notes.png)
+![Notes Window](images/notes/notes_window.png)
+
+#### 1. Adding Notes to a Person
+
+##### Command Format:
+    note INDEX NOTE_CONTENT
+
+##### Parameters:
+- `INDEX`: The position of the person in the list you want to add a note to. This should be a positive integer.
+- `NOTE_CONTENT`: The content of the note you want to add.
+
+##### Example:
+If you want to add a note to the person at position 1 in the list, you would use:
+    
+    note 1 This is a sample note for the person.
+
+This will add a note "This is a sample note for the person." to the person at index 1.
+
+#### 2. Removing Notes from a Person
+
+##### Command Format:
+    removenote INDEX_PERSON INDEX_NOTE
+
+##### Parameters:
+- `INDEX_PERSON`: The position of the person in the list you want to remove a note from. This should be a positive integer.
+- `INDEX_NOTE`: The position of the note in the person's list of notes you want to remove. This should be a positive integer.
+
+##### Example:
+If you want to remove the 2nd note from the person at position 1 in the list, you would use:
+    
+    removenote 1 2
+
+This will remove the 2nd note from the person at index 1.
+
+##### Note:
+Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
+Make sure to familiarize yourself with the commands and use them as per your needs. If you have any issues or questions, refer to the application's help section or contact the support team.
 
 ###  Track payment [Coming Soon]
 ###  Change language [Coming Soon]
