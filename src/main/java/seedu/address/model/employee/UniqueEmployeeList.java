@@ -74,7 +74,20 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     public void sortEmployees(String attribute) {
         requireNonNull(attribute);
 
-        internalList.sort(Comparator.comparing(Employee::getSalary));
+        switch (attribute.toLowerCase()) {
+        case "salary":
+            internalList.sort(Comparator.comparing(Employee::getSalary));
+            break;
+        case "name":
+            internalList.sort(Comparator.comparing(Employee::getName));
+            break;
+        case "overtime hours":
+            internalList.sort(Comparator.comparing(Employee::getOvertimeHours));
+            break;
+        // case "allocated leaves":
+        default:
+
+        }
     }
 
     /**

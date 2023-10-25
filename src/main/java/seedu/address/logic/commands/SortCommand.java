@@ -12,9 +12,10 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the list of employees from the last listing by the specified attribute. "
-            + "Parameters: by/ [ATTRIBUTE]\n"
-            + "Example: " + COMMAND_WORD + " by/ salary";
+            + ": Sorts the list of employees from the last listing by the specified attribute "
+            + "(name / salary / overtime hours / allocated leaves)."
+            + "Parameters: by/ATTRIBUTE\n"
+            + "Example: " + COMMAND_WORD + " by/salary";
 
     public static final String MESSAGE_SUCCESS = "Successfully sorted employees by %1$s. ";
     public static final String MESSAGE_NO_ATTR = "There needs to be an attribute to sort the list by. ";
@@ -32,11 +33,20 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (attribute.toLowerCase().equals("salary")) {
-            model.updateSortedEmployeeList("salary");
-        } else if (attribute.equals("")) {
+        switch (attribute.toLowerCase()) {
+        case "":
             throw new CommandException(String.format(MESSAGE_NO_ATTR, attribute));
-        } else {
+        case "salary":
+            model.updateSortedEmployeeList("salary");
+            break;
+        case "name":
+            model.updateSortedEmployeeList("name");
+            break;
+        case "overtime hours":
+            model.updateSortedEmployeeList("overtime hours");
+            break;
+        // case "allocated leaves"
+        default:
             throw new CommandException(String.format(MESSAGE_WRONG_ATTR, attribute));
         }
 

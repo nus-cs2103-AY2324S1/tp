@@ -19,7 +19,7 @@ class SortCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsSortCommand() {
 
         String userInput = " " + PREFIX_SORT + "salary";
 

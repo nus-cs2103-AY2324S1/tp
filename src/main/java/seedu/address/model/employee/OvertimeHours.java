@@ -4,7 +4,7 @@ package seedu.address.model.employee;
  * Represents an Employee's available overtime hours left in the address book.
  * Guarantees: always not less than zero
  */
-public class OvertimeHours {
+public class OvertimeHours implements Comparable<OvertimeHours> {
 
     public static final String MESSAGE_CONSTRAINTS = "Number of overtime hours left"
             + " should not exceed above 72 or below 0";
@@ -46,5 +46,10 @@ public class OvertimeHours {
     public int hashCode() {
         Integer thisVal = value;
         return thisVal.hashCode();
+    }
+
+    @Override
+    public int compareTo(OvertimeHours other) {
+        return value - other.value;
     }
 }
