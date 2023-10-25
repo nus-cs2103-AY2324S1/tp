@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showScheduleAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SCHEDULE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SCHEDULE;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
 import static seedu.address.testutil.TypicalSchedules.getTypicalAddressBook;
 
@@ -26,6 +27,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditScheduleDescriptorBuilder;
 import seedu.address.testutil.ScheduleBuilder;
@@ -125,6 +127,44 @@ public class EditScheduleCommandTest {
             new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN).build());
 
         assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE);
+    }
+
+    @Test
+    public void execute_badSchedule_failure() {
+        EditScheduleDescriptor descriptor =
+            new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN)
+                .withEndTime(new EndTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().value))
+                .build();
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_THIRD_SCHEDULE, descriptor);
+
+        assertCommandFailure(editScheduleCommand, model, Schedule.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void execute_clashingScheduleUnfilteredList_failure() {
+        Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
+        Schedule secondSchedule = model.getFilteredScheduleList().get(INDEX_THIRD_SCHEDULE.getZeroBased());
+        EditScheduleDescriptor descriptor =
+            new EditScheduleDescriptorBuilder(firstSchedule).withStartTime(secondSchedule.getStartTime())
+                .build();
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_SCHEDULE, descriptor);
+
+        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_CLASHING_SCHEDULE);
+    }
+
+    @Test
+    public void execute_clashingScheduleFilteredList_failure() {
+        Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
+        showScheduleAtIndex(model, INDEX_SECOND_SCHEDULE);
+
+        // edit schedule in filtered list into a clashing one in address book
+        Schedule scheduleInList = model.getAddressBook().getScheduleList().get(INDEX_THIRD_SCHEDULE.getZeroBased());
+
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_SCHEDULE,
+            new EditScheduleDescriptorBuilder(scheduleInList).withEndTime(firstSchedule.getEndTime())
+                .build());
+
+        assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_CLASHING_SCHEDULE);
     }
 
     @Test
