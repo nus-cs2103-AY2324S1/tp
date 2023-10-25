@@ -50,7 +50,6 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-<<<<<<< HEAD
      * Returns the user prefs' shortcut settings.
      */
     ShortcutSettings getShortcutSettings();

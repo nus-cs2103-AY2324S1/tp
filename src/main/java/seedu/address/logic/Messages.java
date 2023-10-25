@@ -13,7 +13,7 @@ import seedu.address.model.person.Specialist;
  * Container for user visible messages.
  */
 public class Messages {
-
+    public static final String MESSAGE_BLANK_ARGUMENTS = "Arguments cannot be blank! \n%1$s";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_TYPE =
