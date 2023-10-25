@@ -6,6 +6,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -29,8 +30,7 @@ public class PayrollCommandParser implements Parser<PayrollCommand>{
 
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
-                String[] nameKeywords = name.split("\\s+");
-                return new PayrollCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+                return new PayrollCommand(new NameContainsKeywordsPredicate(List.of(name)));
             } else {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayrollCommand.MESSAGE_USAGE));

@@ -4,6 +4,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -40,18 +43,19 @@ public class PayrollCommand extends Command{
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (index != null) {
-            return executeByIndex();
+            return executeByIndex(model);
         } else {
-            return executeByName();
+            return executeByName(model);
         }
     }
 
     public CommandResult executeByIndex(Model model) {
-        
+        List<Person> lastShownList = model.getFilteredPersonList();
+        return new CommandResult("byebye");
     }
 
     public CommandResult executeByName(Model model) {
-
+        return new CommandResult("byebye");
     }
 
     @Override
