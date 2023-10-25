@@ -162,12 +162,6 @@ public class ModelManager implements Model {
         filteredMusicians.setPredicate(predicate);
     }
 
-    @Override
-    public void updateFilteredMusicianList(int bandIndex) {
-        Predicate<Musician> predicate = new MusicianInBandPredicate(filteredBands.get(bandIndex));
-        filteredMusicians.setPredicate(predicate);
-    }
-
     //=========== Filtered Band List Accessors =============================================================
 
     /**
@@ -179,10 +173,16 @@ public class ModelManager implements Model {
         return filteredBands;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Band} backed by the internal list of
+     * {@code versionedAddressBook}. Returns an unmodifiable view of the list of {@code Musician} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
-    public void updateFilteredBandList(Predicate<Band> predicate) {
-        requireNonNull(predicate);
-        filteredBands.setPredicate(predicate);
+    public void updateFilteredBandMusicianList(Predicate<Band> bandPredicate) {
+        filteredBands.setPredicate(bandPredicate);
+        Predicate<Musician> musicianPredicate = new MusicianInBandPredicate(filteredBands.get(0));
+        filteredMusicians.setPredicate(musicianPredicate);
     }
 
     @Override

@@ -163,12 +163,7 @@ public class AddBandCommandTest {
         }
 
         @Override
-        public void updateFilteredMusicianList(int bandIndex) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredBandList(Predicate<Band> predicate) {
+        public void updateFilteredBandMusicianList(Predicate<Band> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
