@@ -48,7 +48,6 @@ public class ScheduleUtil {
             .format(startTimeFormatter)).append(" "));
         descriptor.getEndTime().ifPresent(endTime -> sb.append(PREFIX_END_TIME + endTime.value
             .format(endTimeFormatter)).append(" "));
-        System.out.println(sb);
-        return sb.toString();
+s        return sb.toString();
     }
 }

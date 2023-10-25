@@ -115,7 +115,6 @@ public class AddressBookParserTest {
         EditScheduleCommand expectedCommand = (EditScheduleCommand) parser.parseCommand(EditScheduleCommand.COMMAND_WORD
             + " " + INDEX_FIRST_SCHEDULE.getOneBased() + " "
             + ScheduleUtil.getEditScheduleDescriptorDetails(descriptor));
-        System.out.println(expectedCommand);
         assertEquals(new EditScheduleCommand(INDEX_FIRST_SCHEDULE, descriptor), expectedCommand);
     }
 
