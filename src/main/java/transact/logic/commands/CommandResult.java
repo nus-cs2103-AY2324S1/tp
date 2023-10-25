@@ -22,6 +22,8 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final boolean clearResultDisplay;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -30,6 +32,17 @@ public class CommandResult {
         this.tabWindow = tabWindow;
         this.showHelp = showHelp;
         this.exit = exit;
+        this.clearResultDisplay = false;
+    }
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, TabWindow tabWindow, boolean showHelp, boolean exit, boolean clearResultDisplay) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.tabWindow = tabWindow;
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.clearResultDisplay = clearResultDisplay;
     }
 
     /**
@@ -64,6 +77,11 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
+
+    public boolean isClearResultDisplay() {
+        return clearResultDisplay;
+    }
+
 
     @Override
     public boolean equals(Object other) {
