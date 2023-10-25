@@ -3,50 +3,49 @@ package seedu.ccacommander.model.attendance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_DATE_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_CLIMBING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_CLIMBING;
 import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
 import static seedu.ccacommander.testutil.TypicalAttendances.BENSON_BOXING;
-import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
-import static seedu.ccacommander.testutil.TypicalEvents.BOXING_DAY;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.testutil.AttendanceBuilder;
-import seedu.ccacommander.testutil.EventBuilder;
 
 public class AttendanceTest {
 
     @Test
-    public void isSameEvent() {
+    public void isSameAttendance() {
         // same object -> returns true
-        assertTrue(AURORA_BOREALIS.isSameEvent(AURORA_BOREALIS));
+        assertTrue(ALICE_AURORA.isSameAttendance(ALICE_AURORA));
 
         // null -> returns false
-        assertFalse(AURORA_BOREALIS.isSameEvent(null));
+        assertFalse(ALICE_AURORA.isSameAttendance(null));
 
-        // same name, all other attributes different -> returns false
-        Event editedAurora = new EventBuilder(AURORA_BOREALIS).withDate(VALID_DATE_BOXING)
-                .withLocation(VALID_LOCATION_BOXING).build();
-        assertFalse(AURORA_BOREALIS.isSameEvent(editedAurora));
+        // same name, all other attributes different -> returns true
+        Attendance editedAttendance = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_CLIMBING)
+                .withRemark(VALID_REMARK_CLIMBING).build();
+        assertTrue(ALICE_AURORA.isSameAttendance(editedAttendance));
 
         // different name, all other attributes same -> returns false
-        editedAurora = new EventBuilder(AURORA_BOREALIS).withName(VALID_NAME_BOXING).build();
-        assertFalse(AURORA_BOREALIS.isSameEvent(editedAurora));
+        editedAttendance = new AttendanceBuilder(ALICE_AURORA).withEventName(VALID_NAME_BOXING)
+                .withMemberName(VALID_NAME_BOB).build();
+        assertFalse(ALICE_AURORA.isSameAttendance(editedAttendance));
 
         // name differs in case, all other attributes same -> returns false
-        Event editedBoxing = new EventBuilder(BOXING_DAY).withName(VALID_NAME_BOXING.toLowerCase()).build();
-        assertFalse(BOXING_DAY.isSameEvent(editedBoxing));
+        editedAttendance = new AttendanceBuilder(ALICE_AURORA).withEventName(VALID_NAME_AURORA.toLowerCase())
+                .build();
+        assertFalse(ALICE_AURORA.isSameAttendance(editedAttendance));
 
         // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOXING + " ";
-        editedBoxing = new EventBuilder(BOXING_DAY).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOXING_DAY.isSameEvent(editedBoxing));
+        String nameWithTrailingSpaces = VALID_NAME_AURORA + " ";
+        editedAttendance = new AttendanceBuilder(ALICE_AURORA).withEventName(nameWithTrailingSpaces)
+                .build();
+        assertFalse(ALICE_AURORA.isSameAttendance(editedAttendance));
     }
 
     @Test

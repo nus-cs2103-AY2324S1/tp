@@ -2,7 +2,7 @@ package seedu.ccacommander.model.member;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
-import static seedu.ccacommander.commons.util.StringUtil.capitaliseString;
+import static seedu.ccacommander.commons.util.StringUtil.capitaliseWordsInString;
 
 /**
  * Represents a Member's gender in CcaCommander.
@@ -38,7 +38,7 @@ public class Gender {
 
     @Override
     public String toString() {
-        return capitaliseString(value);
+        return capitaliseWordsInString(value);
     }
 
     @Override
