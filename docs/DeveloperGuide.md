@@ -132,19 +132,18 @@ Time Slot: 14:00 - 16:00
 #### Search for a Booking
 Allows hotel receptionists to efficiently search and locate specific bookings based on various criteria.
 
-**Command Format:** `search booking [r/ROOM] [d/DATE] [n/NAME] [id/BOOKING_ID]`
+**Command Format:** `find [KEYWORD]`
 
 **Example Commands:**
-- `search booking r/102`
-- `search booking d/2023-01-01`
-- `search booking n/ji hoon`
-- `search booking r/102 n/ji hoon id/12345`
+- `find 102`
+- `find jihoon`
+- `find 102 jihoon`
 
 **Expected Outputs (Success):** A list of bookings that match the search criteria.
 
 **Expected Outputs (Failure):**
-- Invalid parameters: "Error: Invalid parameters."
-- No matching bookings: "No bookings found matching the given criteria."
+- Invalid parameters: "Invalid command format! "
+- No matching bookings: "0 bookings listed!"
 
 ## 4. User Guide for Features
 Detailed instructions for using each feature can be found in the respective sections above.
