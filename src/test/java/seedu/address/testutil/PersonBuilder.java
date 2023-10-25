@@ -49,7 +49,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         animalName = new Name(DEFAULT_ANIMAL_NAME);
         availability = new Availability(DEFAULT_AVAILABILITY);
-        animalType = new AnimalType(DEFAULT_ANIMAL_TYPE, DEFAULT_AVAILABILITY);
+        animalType = new AnimalType(DEFAULT_ANIMAL_TYPE, availability);
         housing = new Housing(DEFAULT_HOUSING);
     }
 
@@ -127,7 +127,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code AnimalType} of the animal, which the {@code Person} that we are building is fostering.
      */
-    public PersonBuilder withAnimalType(String animalType, String availability) {
+    public PersonBuilder withAnimalType(String animalType, Availability availability) {
         this.animalType = new AnimalType(animalType, availability);
         return this;
     }

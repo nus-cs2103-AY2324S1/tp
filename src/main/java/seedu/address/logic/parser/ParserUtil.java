@@ -168,18 +168,23 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code animalType} is invalid.
      */
-    public static AnimalType parseAnimalType(String animalType, String availability) throws ParseException {
+    public static AnimalType parseAnimalType(String animalType, Availability availability) throws ParseException {
         requireNonNull(animalType);
         requireNonNull(availability);
 
         String trimmedAnimalType = animalType.trim();
-        if (availability.equals("Available") && !AnimalType.isValidAnimalType(trimmedAnimalType,
+        if (availability.equals(new Availability("Available")) && !AnimalType.isValidAnimalType(trimmedAnimalType,
                 AnimalType.VALIDATION_REGEX_AVAILABLE)) {
             throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
         }
 
-        if (availability.equals("NotAvailable") && !AnimalType.isValidAnimalType(trimmedAnimalType,
+        if (availability.equals(new Availability("NotAvailable")) && !AnimalType.isValidAnimalType(trimmedAnimalType,
                 AnimalType.VALIDATION_REGEX_NOT_AVAILABLE)) {
+            throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
+        }
+
+        if (availability.equals(new Availability("nil")) && !AnimalType.isValidAnimalType(trimmedAnimalType,
+                AnimalType.VALIDATION_REGEX_NIL)) {
             throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
         }
 
