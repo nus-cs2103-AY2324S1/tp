@@ -217,19 +217,20 @@ The following activity diagram summarizes what happens when a user executes a `s
 
 #### Design considerations:
 
-**Aspect: How the predicates specified within a single `FilterCommand` should be combined:**
+**Aspect: How the student list is sorted internally:**
 
-* **Alternative 1 (current choice):** Combine predicates using the `and()` method from the `Predicate` interface.
+* **Alternative 1 (current choice):** Sort the student list in class `UniquePersonList` using method `sort`.
     * Pros:
-        * More in line with what the user would expect from a `filter` command.
+        * Student list is sorted permanently, ensuring no repeated sorting needed in the next launch provided no new student is added or student's name is changed.
+        * Enhance efficiency of looking through the student list, ensure no repeated sorting needed when doing consecutive commands such as `filter`.
     * Cons:
-        * Users would experience less flexibility when using the command (for instance, the command `filter s/Physics s/Chemistry` cannot be used to display students taking Physics and/or Chemistry at the tuition centre).
-* Alternative 2: Combine predicates using the `or()` method from the `Predicate` interface.
+        * Users would be unable to view the unsorted student list again.
+* Alternative 2: Sort the student list in class `ModelManager` using method `updateSortedPersonList`.
     * Pros:
-        * Greater flexibility for users when filtering the list of students.
+        * Enable users to view the unsorted student list for every launch.
     * Cons:
-        * Less in line with users' expectations of a `filter` command; not as intuitive.
-* We made the choice of Alternative 1 over Alternative 2 as we found that more intuitive commands would be easier for users to learn and eventually master.
+        * Users have to resort the student list for every launch. 
+* We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
 ### \[Proposed\] Undo/redo feature
 
