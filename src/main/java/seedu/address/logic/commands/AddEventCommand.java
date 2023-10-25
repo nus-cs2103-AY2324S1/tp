@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
@@ -22,19 +22,19 @@ import seedu.address.model.person.Name;
  * Adds a meeting.
  * @author Yuheng
  */
-public class AddMeetingCommand extends Command {
+public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "add_event";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. \n"
             + "Parameters: "
-            + PREFIX_MEETING_NAME + "EVENT_NAME "
+            + PREFIX_EVENT_NAME + "EVENT_NAME "
             + PREFIX_DATE + "DATE "
             + "[" + PREFIX_START_TIME + "START_TIME] "
             + "[" + PREFIX_END_TIME + "END_TIME] "
             + "[" + PREFIX_NAME + "NAME]... "
             + "[" + PREFIX_GROUP + "GROUP]... \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MEETING_NAME + "FumbleLog Meeting "
+            + PREFIX_EVENT_NAME + "FumbleLog Meeting "
             + PREFIX_DATE + "2020-10-30 "
             + PREFIX_START_TIME + "1000 "
             + PREFIX_END_TIME + "1200 "
@@ -48,7 +48,7 @@ public class AddMeetingCommand extends Command {
     /**
      * Creates an AddMeetingCommand to add the specified {@code Meeting}
      */
-    public AddMeetingCommand(Meeting meeting) {
+    public AddEventCommand(Meeting meeting) {
         requireAllNonNull(meeting);
         this.toAdd = meeting;
     }

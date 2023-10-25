@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_GROUPS;
@@ -33,7 +33,7 @@ import seedu.address.model.person.Name;
 /**
  * Command to edit a meeting in the address book.
  */
-public class EditMeetingCommand extends Command {
+public class EditEventCommand extends Command {
     public static final String COMMAND_WORD = "edit_event";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
@@ -41,7 +41,7 @@ public class EditMeetingCommand extends Command {
             + "Existing values will be overwritten by the input values, except for "
             + "the list of assigned persons and the list of assigned groups \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_MEETING_NAME + "EVENT_DETAILS] "
+            + "[" + PREFIX_EVENT_NAME + "EVENT_DETAILS] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_START_TIME + "START_TIME] "
             + "[" + PREFIX_END_TIME + "END_TIME] "
@@ -50,7 +50,7 @@ public class EditMeetingCommand extends Command {
             + "[" + PREFIX_GROUP + "GROUP]... "
             + "[" + PREFIX_UNASSIGN_GROUPS + "GROUP]... \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_MEETING_NAME + "FumbleLog Meeting "
+            + PREFIX_EVENT_NAME + "FumbleLog Meeting "
             + PREFIX_DATE + "2023-10-13 "
             + PREFIX_NAME + "Ken "
             + PREFIX_GROUP + "Team2 ";
@@ -58,16 +58,16 @@ public class EditMeetingCommand extends Command {
     public static final String MESSAGE_EDIT_SUCCESS = "Edited event: %1$s";
 
     public final Index index;
-    public final EditMeetingDescriptor editMeetingDescriptor;
+    public final EditEventDescriptor editEventDescriptor;
 
     /**
      * Takes in the index of the meeting to edit and its descriptor.
      * @param index of the meeting to edit
-     * @param editMeetingDescriptor details to edit the meeting with
+     * @param editEventDescriptor details to edit the meeting with
      */
-    public EditMeetingCommand(Index index, EditMeetingDescriptor editMeetingDescriptor) {
+    public EditEventCommand(Index index, EditEventDescriptor editEventDescriptor) {
         this.index = index;
-        this.editMeetingDescriptor = editMeetingDescriptor;
+        this.editEventDescriptor = editEventDescriptor;
     }
 
     @Override
@@ -80,12 +80,12 @@ public class EditMeetingCommand extends Command {
         }
 
         Event meetingToEdit = lastShownList.get(index.getZeroBased());
-        Event editedMeeting = createEditedMeeting(meetingToEdit, this.editMeetingDescriptor, model);
+        Event editedMeeting = createEditedMeeting(meetingToEdit, this.editEventDescriptor, model);
 
         //ensure that the user is not editing a valid time into an invalid time
-        if (this.editMeetingDescriptor.getDate().isPresent()
-                || this.editMeetingDescriptor.getStartTime().isPresent()
-                || this.editMeetingDescriptor.getEndTime().isPresent()) {
+        if (this.editEventDescriptor.getDate().isPresent()
+                || this.editEventDescriptor.getStartTime().isPresent()
+                || this.editEventDescriptor.getEndTime().isPresent()) {
             CommandUtil.verifyEventTimes(editedMeeting);
         }
 
@@ -95,91 +95,91 @@ public class EditMeetingCommand extends Command {
     }
 
     private static Event createEditedMeeting(Event meetingToEdit,
-                                             EditMeetingDescriptor editMeetingDescriptor,
+                                             EditEventDescriptor editEventDescriptor,
                                              Model model) throws CommandException {
         assert meetingToEdit != null;
 
         // All attributes are optional, so if they are not present, use the original values
-        EventName updatedName = editMeetingDescriptor.getName().orElse(meetingToEdit.getName());
-        EventDate updatedDate = editMeetingDescriptor.getDate().orElse(meetingToEdit.getStartDate());
-        EventTime updatedStartTime = editMeetingDescriptor.getStartTime().orElse(meetingToEdit.getStartTime());
-        EventTime updatedEndTime = editMeetingDescriptor.getEndTime().orElse(meetingToEdit.getEndTime());
+        EventName updatedName = editEventDescriptor.getName().orElse(meetingToEdit.getName());
+        EventDate updatedDate = editEventDescriptor.getDate().orElse(meetingToEdit.getStartDate());
+        EventTime updatedStartTime = editEventDescriptor.getStartTime().orElse(meetingToEdit.getStartTime());
+        EventTime updatedEndTime = editEventDescriptor.getEndTime().orElse(meetingToEdit.getEndTime());
 
         // Edit persons
         Set<Name> updatedPersonNames;
-        updatedPersonNames = handleEditAssignPersons(meetingToEdit, editMeetingDescriptor, model);
-        handleEditUnassignPersons(meetingToEdit, editMeetingDescriptor, model, updatedPersonNames);
+        updatedPersonNames = handleEditAssignPersons(meetingToEdit, editEventDescriptor, model);
+        handleEditUnassignPersons(meetingToEdit, editEventDescriptor, model, updatedPersonNames);
 
         // Editing groups
         Set<Group> updatedGroups;
-        updatedGroups = handleEditAssignGroups(meetingToEdit, editMeetingDescriptor, model);
-        handleEditUnassignGroups(meetingToEdit, editMeetingDescriptor);
+        updatedGroups = handleEditAssignGroups(meetingToEdit, editEventDescriptor, model);
+        handleEditUnassignGroups(meetingToEdit, editEventDescriptor);
 
         return new Meeting(updatedName, updatedDate,
                 Optional.of(updatedStartTime), Optional.of(updatedEndTime), updatedPersonNames, updatedGroups);
     }
 
-    private static void handleEditUnassignGroups(Event meetingToEdit, EditMeetingDescriptor editMeetingDescriptor)
+    private static void handleEditUnassignGroups(Event meetingToEdit, EditEventDescriptor editEventDescriptor)
                 throws CommandException {
-        if (editMeetingDescriptor.getUnassignGroups().isPresent()) {
-            if (!meetingToEdit.getGroups().containsAll(editMeetingDescriptor.getUnassignGroups().get())) {
+        if (editEventDescriptor.getUnassignGroups().isPresent()) {
+            if (!meetingToEdit.getGroups().containsAll(editEventDescriptor.getUnassignGroups().get())) {
 
                 Set<Group> invalidUnassignGroups = findInvalidUnassignGroups(meetingToEdit,
-                        editMeetingDescriptor.getUnassignGroups().get());
+                        editEventDescriptor.getUnassignGroups().get());
 
                 //case where the groups to be unassigned have not even been previously assigned
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_UNASSIGN_GROUP,
                         listInvalidGroups(invalidUnassignGroups)));
             }
-            meetingToEdit.getGroups().removeAll(editMeetingDescriptor.getUnassignGroups().get());
+            meetingToEdit.getGroups().removeAll(editEventDescriptor.getUnassignGroups().get());
         }
     }
 
-    private static Set<Group> handleEditAssignGroups(Event meetingToEdit, EditMeetingDescriptor editMeetingDescriptor,
+    private static Set<Group> handleEditAssignGroups(Event meetingToEdit, EditEventDescriptor editEventDescriptor,
                 Model model) throws CommandException {
         Set<Group> updatedGroups;
-        if (editMeetingDescriptor.getGroups().isPresent()) {
-            Set<Group> invalidGroups = model.findInvalidGroups(editMeetingDescriptor.getGroups().get());
+        if (editEventDescriptor.getGroups().isPresent()) {
+            Set<Group> invalidGroups = model.findInvalidGroups(editEventDescriptor.getGroups().get());
             if (!invalidGroups.isEmpty()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_GROUP,
                         listInvalidGroups(invalidGroups)));
             }
-            meetingToEdit.getGroups().addAll(editMeetingDescriptor.getGroups().get());
+            meetingToEdit.getGroups().addAll(editEventDescriptor.getGroups().get());
         }
         updatedGroups = meetingToEdit.getGroups();
         return updatedGroups;
     }
 
-    private static void handleEditUnassignPersons(Event meetingToEdit, EditMeetingDescriptor editMeetingDescriptor,
+    private static void handleEditUnassignPersons(Event meetingToEdit, EditEventDescriptor editEventDescriptor,
               Model model, Set<Name> updatedPersonNames) throws CommandException {
-        if (editMeetingDescriptor.getUnassignedPersons().isPresent()) {
-            Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getUnassignedPersons().get());
+        if (editEventDescriptor.getUnassignedPersons().isPresent()) {
+            Set<Name> invalidNames = model.findInvalidNames(editEventDescriptor.getUnassignedPersons().get());
             if (!invalidNames.isEmpty()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
                         listInvalidNames(invalidNames)));
-            } else if (!meetingToEdit.getNames().containsAll(editMeetingDescriptor.getUnassignedPersons().get())) {
+            } else if (!meetingToEdit.getNames().containsAll(editEventDescriptor.getUnassignedPersons().get())) {
                 //case where the persons to be unassigned have not even been previously assigned
                 Set <Name> invalidUnassignNames = findInvalidUnassignNames(meetingToEdit,
-                        editMeetingDescriptor.getUnassignedPersons().get());
+                        editEventDescriptor.getUnassignedPersons().get());
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_UNASSIGN_PERSON,
                         listInvalidNames(invalidUnassignNames)));
             }
             //remove the persons from the new list of persons
-            updatedPersonNames.removeAll(editMeetingDescriptor.getUnassignedPersons().get());
+            updatedPersonNames.removeAll(editEventDescriptor.getUnassignedPersons().get());
         } // no persons to be unassigned, do nothing
     }
 
-    private static Set<Name> handleEditAssignPersons(Event meetingToEdit, EditMeetingDescriptor editMeetingDescriptor,
+    private static Set<Name> handleEditAssignPersons(Event meetingToEdit, EditEventDescriptor editEventDescriptor,
                 Model model) throws CommandException {
         Set<Name> updatedPersonNames;
-        if (editMeetingDescriptor.getAssignedPersons().isPresent()) {
-            Set<Name> invalidNames = model.findInvalidNames(editMeetingDescriptor.getAssignedPersons().get());
+        if (editEventDescriptor.getAssignedPersons().isPresent()) {
+            Set<Name> invalidNames = model.findInvalidNames(editEventDescriptor.getAssignedPersons().get());
             if (!invalidNames.isEmpty()) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
                         listInvalidNames(invalidNames)));
             }
             //add the new persons to the existing list of persons
-            meetingToEdit.getNames().addAll(editMeetingDescriptor.getAssignedPersons().get());
+            meetingToEdit.getNames().addAll(editEventDescriptor.getAssignedPersons().get());
         }
         updatedPersonNames = meetingToEdit.getNames();
         return updatedPersonNames;
@@ -247,20 +247,20 @@ public class EditMeetingCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditMeetingCommand)) {
+        if (!(other instanceof EditEventCommand)) {
             return false;
         }
 
-        EditMeetingCommand e = (EditMeetingCommand) other;
+        EditEventCommand e = (EditEventCommand) other;
         return index.equals(e.index)
-                && this.editMeetingDescriptor.equals(e.editMeetingDescriptor);
+                && this.editEventDescriptor.equals(e.editEventDescriptor);
     }
 
     /**
      * Stores the details to edit the meeting with. Each non-empty field value will replace the
      * corresponding field value of the meeting.
      */
-    public static class EditMeetingDescriptor {
+    public static class EditEventDescriptor {
 
         private EventName name;
         private EventDate date;
@@ -273,7 +273,7 @@ public class EditMeetingCommand extends Command {
         private Set<Group> assignGroups;
         private Set<Group> unassignGroups;
 
-        public EditMeetingDescriptor() {
+        public EditEventDescriptor() {
         }
 
         public Optional<EventName> getName() {
@@ -334,11 +334,11 @@ public class EditMeetingCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditMeetingDescriptor)) {
+            if (!(other instanceof EditEventDescriptor)) {
                 return false;
             }
 
-            EditMeetingDescriptor e = (EditMeetingDescriptor) other;
+            EditEventDescriptor e = (EditEventDescriptor) other;
             return this.name.equals(e.name)
                     && this.date.equals(e.date)
                     && this.startTime.equals(e.startTime)

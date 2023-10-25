@@ -13,7 +13,7 @@ import seedu.address.model.event.Event;
 /**
  * Deletes a meeting identified using it's displayed index from the address book.
  */
-public class DeleteMeetingCommand extends Command {
+public class DeleteEventCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_event";
 
@@ -30,7 +30,7 @@ public class DeleteMeetingCommand extends Command {
      * Creates an DeleteMeetingCommand to delete the specified {@code Meeting}
      * @param targetIndex index of the meeting in the filtered meeting list to delete
      */
-    public DeleteMeetingCommand(Index targetIndex) {
+    public DeleteEventCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 

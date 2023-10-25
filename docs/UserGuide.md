@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-FumbleLog is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+FumbleLog is a **productivity desktop app for managing contacts and tracking events. It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 * Table of Contents
 {:toc}
@@ -352,15 +352,9 @@ Action | Format, Examples
 ### Commands for Events
 Action | Format, Examples
 --------|------------------
-**Add Meeting** | `add_meeting m/MEETING_DETAILS d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_TO_ASSIGN]`<br> e.g., `add_meeting m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/John Doe`
-**Edit Meeting** | `edit_meeting INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_TO_ASSIGN]... [u/PERSON_TO_UNASSIGN]`<br> e.g., `edit_meeting 1 m/tP week 3 meeting n/Mary u/John Doe`
-**Delete Meeting** | `delete_meeting INDEX`<br> e.g., `delete_meeting 1`
-
-### Commands between Persons and Events
-Action | Format, Examples
---------|------------------
-**Assign Person to Meeting** | `assign p/PERSON_INDEX m/MEETING_INDEX`<br> e.g., `assign_person_meeting p/2 m/1`
-**Unassign Person from Meeting** | `unassign p/PERSON_INDEX m/MEETING_INDEX`<br> e.g., `unassign_person_meeting p/2 m/1`
+**Add Event** | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
+**Edit Event** | `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
+**Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`
 
 ### General commands
 Action | Format, Examples
