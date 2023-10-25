@@ -14,11 +14,11 @@ OutBook is an app that allows busy professionals to manage their numerous contac
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `outbook.jar` from [here](https://github.com/AY2324S1-CS2103T-F12-4/tp/releases).
+1. Download the latest `OutBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F12-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for OutBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar outbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar OutBook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -31,7 +31,7 @@ OutBook is an app that allows busy professionals to manage their numerous contac
 
    * `deletec 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts and meetings.
 
    * `exit` : Exits the app.
 
@@ -168,7 +168,7 @@ Examples:
 
 Adds a meeting to OutBook.
 
-Format: `addc m/TITLE a/LOCATION s/START e/END`
+Format: `addm m/TITLE a/LOCATION s/START e/END`
 
 Examples:
 * `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`
@@ -186,7 +186,7 @@ Format: `listm`
 
 Deletes the specified meeting from OutBook.
 
-Format: `deletec INDEX`
+Format: `deletem INDEX`
 
 * Deletes the meeting at the specified `INDEX`.
 * The index refers to the index number shown in the displayed meeting list.
@@ -194,7 +194,7 @@ Format: `deletec INDEX`
 
 Examples:
 * `listm` followed by `deletem 2` deletes the 2nd meeting in the results of the `listm` command.
-* `findm Project` followed by `deletem 1` deletes the 1st meeting in the results of the `findm` command.
+* `findm m/Project` followed by `deletem 1` deletes the 1st meeting in the results of the `findm` command.
 
 
 ### Editing a meeting : `editm`
@@ -230,23 +230,27 @@ Examples:
 * `viewm 2` Displays detailed information related to the 2nd meeting on the list, including current participants.
 
 
-### Locating meetings by name: `findm` [to be added soon]
+### Locating meetings by name: `findm`
 
-Find meetings whose title contain any of the given keywords.
+Find meetings for which all respective field (Title, location, attendee...) given by the user, contain at least 1 keyword, as well as happen within the duration given (start & end).  
 
-Format: `findm KEYWORD [MORE_KEYWORDS]`
+Format: `findm [m/KEYWORDS] [a/KEYWORDS] [t/KEYWORDS] [n/ATTENDEENAME] [s/START e/END]`
 
 * The search is case-insensitive. e.g `shop` will match `SHOP`
 * The order of the keywords does not matter. e.g. `Shop Meet` will match `Meet Shop`
-* Only the name is searched.
+* Title, location, tags and attendees are searched, within the time frame given by START and END
 * Only full words will be matched e.g. `Meet` will not match `Meeting`
-* Meetings matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Shop Meet` will return `Shop at mall`, `Meet client`
+* For a single field, a Meeting must match at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Shop Meet` will return `Meeting: Shop at mall`, `Meeting: Meet client`
+* If there are multiple fields the meeting must match at least one keyword for each field to be returned (i.e. `AND` search).
+    e.g. `m/Shop Meet a/Mall` will return `Meeting: Shop at mall, Location:Mall`
 
 Examples:
-* `findm project` returns `project` and `Project work`
-* `findm zoom meet` returns `Zoom session`, `Zoom meet`, `Meet advisor`<br>
-
+* `findm m/project` returns `project` and `Project work`
+* `findm m/zoom meeting` returns `Zoom session`, `Zoom meeting`, `Meeting advisor`
+* `findm s/09.09.2023 0000 e/09.10.2023 0000` returns all meetings between 09.09.2023 0000 and 09.10.2023 0000<br>
+* `findm m/Meeting s/09.09.2023 0000 e/09.10.2023 0000` returns `Zoom meeting`, `Meeting advisor`, if these meetings start after 09.09.2023 0000 and end before 09.10.2023 0000<br>
+  ![result for 'findAlexMeeting'](images/findAlexMeetingResult.png)
 
 ### Add contact to meeting: `addmc`
 
@@ -258,6 +262,7 @@ Format: `addmc INDEX_1 INDEX_2`
 * `INDEX_1` refers to the index number shown in the displayed meeting list.
 * `INDEX_2` refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Both `INDEX_1` & `INDEX_2` must refer to the index of an existing meeting or contact.
 * Contacts will be listed in the detailed description of meetings when `viewm` is used.
 
 Examples:
@@ -272,8 +277,9 @@ Format: `rmmc INDEX_1 INDEX_2`
 
 * Removes a contact at the specified `INDEX_2` to the meeting at the specified `INDEX_1`.
 * `INDEX_1` refers to the index number shown in the displayed meeting list.
-* `INDEX_2` refers to the position of the attendee as shown in `viewm`.
+* `INDEX_2` refers to the index number of the attendee as shown in `viewm`.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Both `INDEX_1` & `INDEX_2` must refer to the index of an existing meeting or attendee.
 
 Examples:
 * `rmmc 3 2` removes the 2nd attendee from the 3rd meeting in OutBook.
@@ -324,17 +330,17 @@ If your changes to the data file makes its format invalid, OutBook will discard 
 | Action                          | Format, Examples                                                                                                                                      |
 |---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add contact**                 | `addc n/NAME p/PHONE_NUMBER e/EMAIL o/ORGANISATION [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/NUS t/friend t/colleague` |
-| **Add contact to meeting**      | `addmc INDEX n/NAME` <br> e.g., `addmc 2 n/James Ho`                                                                                                  |
+| **Add contact to meeting**      | `addmc MEETING_INDEX CONTACT_INDEX` <br> e.g., `addmc 2 1`                                                                                            |
 | **Add meeting**                 | `addc m/TITLE a/LOCATION s/START e/END` <br> e.g., `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`                                     |
 | **Clear**                       | `clear`                                                                                                                                               |
 | **Delete contact**              | `deletec INDEX` <br> e.g., `deletec 3`                                                                                                                |
 | **Delete meeting**              | `deletem INDEX` <br> e.g., `deletem 3`                                                                                                                |
 | **Edit contact**                | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/ORGANISATION] [t/TAG]…​`<br> e.g.,`editc 2 n/James Lee e/jameslee@example.com`                    |
 | **Find contact**                | `findc KEYWORD [MORE_KEYWORDS]` <br> e.g., `findc James Jake`                                                                                         |
-| **Find meeting**                | `findm KEYWORD [MORE_KEYWORDS]` <br> e.g., `findm Zoom Meet`                                                                                          |
+| **Find meeting**                | `findm [m/KEYWORDS] [a/KEYWORDS] [t/KEYWORDS] [n/ATTENDEENAME] [s/START e/END]` <br> e.g., `findm m/Zoom Meet s/09.09.2023 0000 e/09.10.2023 0000`    |
 | **Help**                        | `help`                                                                                                                                                |
 | **List contacts**               | `listc`                                                                                                                                               |
 | **List meetings**               | `listm`                                                                                                                                               |
-| **Remove contact from meeting** | `rmmc INDEX n/NAME` <br> e.g., `rmmc 2 n/James Ho`                                                                                                    |
+| **Remove contact from meeting** | `rmmc MEETING_INDEX ATTENDEE_INDEX` <br> e.g., `rmmc 2 2`                                                                                             |
 | **View contact details**        | `viewc INDEX` <br> e.g., `viewc 4`                                                                                                                    |
 | **View meeting details**        | `viewm INDEX` <br> e.g., `viewm 4`                                                                                                                    |
