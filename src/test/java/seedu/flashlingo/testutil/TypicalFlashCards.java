@@ -58,12 +58,12 @@ public class TypicalFlashCards {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final FlashCard AMY = new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_AMY,
-                    VALID_ORIGINAL_WORD_LANGUAGE)
-            .withTranslation(VALID_TRANSLATION_AMY, VALID_TRANSLATION_LANGUAGE)
+                    "")
+            .withTranslation(VALID_TRANSLATION_AMY, "")
             .build();
     public static final FlashCard BOB = new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB,
-                    VALID_ORIGINAL_WORD_LANGUAGE)
-            .withTranslation(VALID_TRANSLATION_BOB, VALID_TRANSLATION_LANGUAGE)
+                    "")
+            .withTranslation(VALID_TRANSLATION_BOB, "")
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
