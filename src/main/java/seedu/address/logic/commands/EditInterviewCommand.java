@@ -6,6 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,10 +17,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Edits the details of an existing interview in the address book.
@@ -87,7 +87,7 @@ public class EditInterviewCommand extends Command {
 
         String updatedJobRole = editInterviewDescriptor.getJobRole().orElse(interviewToEdit.getJobRole());
         String updatedTiming = editInterviewDescriptor.getInterviewTime().orElse(interviewToEdit.getInterviewTiming());
-        boolean updatedDoneStatus= editInterviewDescriptor.hasBeenDone().orElse(interviewToEdit.isDone());
+        boolean updatedDoneStatus = editInterviewDescriptor.hasBeenDone().orElse(interviewToEdit.isDone());
 
         return new Interview(interviewToEdit.getInterviewApplicant(), updatedJobRole, updatedTiming, updatedDoneStatus);
     }

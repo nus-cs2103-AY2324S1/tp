@@ -1,14 +1,14 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditInterviewCommand;
-import seedu.address.logic.commands.EditInterviewCommand.EditInterviewDescriptor;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditInterviewCommand;
+import seedu.address.logic.commands.EditInterviewCommand.EditInterviewDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditInterviewCommand object
@@ -19,7 +19,8 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
-     * @throws seedu.address.logic.parser.exceptions.ParseException if the user input does not conform the expected format
+     * @throws seedu.address.logic.parser.exceptions.ParseException if the user input
+     *     does not conform the expected format
      */
     public EditInterviewCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -31,8 +32,8 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE)
-                    , pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE),
+                    pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_JOB_ROLE, PREFIX_TIMING);
