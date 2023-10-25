@@ -49,11 +49,11 @@ public class AddPatientCommandTest {
     @Test
     public void execute_duplicatePatient_throwsCommandException() {
         Patient validPatient = new PatientBuilder().build();
-        AddPatientCommand AddPatientCommand = new AddPatientCommand(validPatient);
+        AddPatientCommand addPatientCommand = new AddPatientCommand(validPatient);
         ModelStub modelStub = new ModelStubWithPatient(validPatient);
 
-        assertThrows(CommandException.class, AddPatientCommand.MESSAGE_DUPLICATE_PERSON,
-                () -> AddPatientCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddPatientCommand.MESSAGE_DUPLICATE_PERSON, (
+        ) -> addPatientCommand.execute(modelStub));
     }
 
     @Test
@@ -82,9 +82,9 @@ public class AddPatientCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddPatientCommand AddPatientCommand = new AddPatientCommand(ALICE);
+        AddPatientCommand addPatientCommand = new AddPatientCommand(ALICE);
         String expected = AddPatientCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, AddPatientCommand.toString());
+        assertEquals(expected, addPatientCommand.toString());
     }
 
     /**
