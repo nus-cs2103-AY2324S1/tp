@@ -163,6 +163,14 @@ It extends `Predicate<Person>` and is composed of up to one of a `NameContainsKe
 and a `TagContainsKeywordsPredicate` each. Here's a partial class diagram of the `CombinedPredicate`.
 ![CombinedPredicate](images/CombinedPredicate.png)
 
+The `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate` and
+`TagContainsKeywordsPredicate` check a Person if the respective field contains
+any of the keywords supplied to the predicate. Note that only the `NameContainsKeywordsPredicate` 
+checks for whole words, because it is rare to search for people by substrings, while `FinancialPlanContainsKeywordsPredicate`
+and `TagContainsKeywordsPredicate` allow matching for substrings because there are certain cases where it is logical to search
+ for substrings e.g. `Plan A` and `Plan A Premium` are related, so they can show up in the same
+search.
+
 The Find command format also changes to resemble a format more similar to the `add` and `edit` commands, to allow for
 searching for keywords in multiple fields at the same time.
 
