@@ -150,6 +150,52 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### UI enhancement (Nathanael M. Tan)
+
+#### Implementation
+
+Display of flashcard details is split into two different classes of `FlashcardBox` and `FlashcardBoxNoButtons`
+FlashcardBoxNoButtons is the default way to display the details of the flashcard.\
+When `start` command is used, review session begins and FlashcardBox is then used to display the details.\
+This is to prevent users from reviewing cards that they are not scheduled to review and erroneously cause changes to the flashcard.
+
+Both `FlashcardBox` and `FlashcardBoxNoButtons` have a button at the right called that is called "Reveal" when the translation is not shown, and "Hide" when it is.\
+This button will toggle the state of whether the translation is currently displayed.
+
+`FlashcardBox` has an additional two buttons, the `Yes` button and the `No` button.\
+The `Yes` button will invoke the yes command, just like if it were to be typed into the command line
+Similarly, the `No` button will invoke the no command.
+
+#### Design considerations:
+
+**Aspect: How to invoke the command:**
+
+* **Alternative 1 (current choice):** Pass MainWindow all the way into FlashcardBox. Use `executeCommand()` method to invoke the respective command
+    * Pros: 
+      * High level of maintainability. 
+      * Outcome will be the same as if it were to be typed into the CLI.
+      * Easy to change logic of the commands
+    * Cons: 
+      * Have to pass MainWindow through multiple classes
+      * Classes that do not need references to MainWindow are now forced to have them
+
+* **Alternative 2:** Individual button can perform the `Yes` and `No` command by itself, without executing through a Command
+    * Pros: 
+      * Don't have to keep reference to the MainWindow
+    * Cons: 
+      * Low level of maintainability. 
+      * Changes made have to be replicated in different places.
+      * May not behave the same way as a Command (eg. ResultDisplay does not show the log message)
+
+* **Alternative 2:** Remove the `Yes` and `No` buttons.
+    * Pros:
+        * Easy to code
+        * Only one way to invoke the command, reduce confusion
+    * Cons:
+        * Less convenient without the buttons, needing to type
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
