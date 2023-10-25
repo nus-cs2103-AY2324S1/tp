@@ -20,9 +20,9 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
    6. [`delete`](#deleting-a-booking--delete)
    7. [`clear`](#clearing-all-entries--clear)
    8. [`exit`](#exiting-the-program--exit)
-3. [FAQ](#faq)
-4. [Known Issues](#known-issues)
-5. [Commands Summary](#commands-summary)
+4. [FAQ](#faq)
+5. [Known Issues](#known-issues)
+6. [Commands Summary](#commands-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
