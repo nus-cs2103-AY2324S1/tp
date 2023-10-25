@@ -103,20 +103,20 @@ class SalaryTest {
     @Test
     public void getNetSalaryString() {
         // null benefits and deductions
-        assertTrue(salary.getNetSalaryString().equals("Net Salary: $1500.00\n"
-            + "Basic Pay: $1500.00\n" + "Total Deductions: $0.00\n" + "Total Benefits: $0.00"));
+        assertTrue(salary.getNetSalaryString().equals("Net Salary: $1500.00\t"
+            + "Basic Pay: $1500.00\n" + "Total Deductions: $0.00\t" + "Total Benefits: $0.00"));
 
         // with benefits
-        assertTrue(salaryWithBenefit.getNetSalaryString().equals("Net Salary: $7000.00\n"
-            + "Basic Pay: $1500.00\n" + "Total Deductions: $0.00\n" + "Total Benefits: $5500.00"));
+        assertTrue(salaryWithBenefit.getNetSalaryString().equals("Net Salary: $7000.00\t"
+            + "Basic Pay: $1500.00\n" + "Total Deductions: $0.00\t" + "Total Benefits: $5500.00"));
 
         // with deductions
-        assertTrue(salaryWithDeduction.getNetSalaryString().equals("Net Salary: $1280.00\n"
-            + "Basic Pay: $1500.00\n" + "Total Deductions: $220.00\n" + "Total Benefits: $0.00"));
+        assertTrue(salaryWithDeduction.getNetSalaryString().equals("Net Salary: $1280.00\t"
+            + "Basic Pay: $1500.00\n" + "Total Deductions: $220.00\t" + "Total Benefits: $0.00"));
 
         // with benefits and deductions
-        assertTrue(salaryWithBenefitAndDeduction.getNetSalaryString().equals("Net Salary: $6780.00\n"
-            + "Basic Pay: $1500.00\n" + "Total Deductions: $220.00\n" + "Total Benefits: $5500.00"));
+        assertTrue(salaryWithBenefitAndDeduction.getNetSalaryString().equals("Net Salary: $6780.00\t"
+            + "Basic Pay: $1500.00\n" + "Total Deductions: $220.00\t" + "Total Benefits: $5500.00"));
     }
 
     @Test
