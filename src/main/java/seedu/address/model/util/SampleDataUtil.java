@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -61,9 +62,9 @@ public class SampleDataUtil {
     /**
      * Returns an interaction set containing the list of strings given.
      */
-    public static Set<Interaction> getInteractionSet(String... strings) {
+    public static ArrayList<Interaction> getInteractionList(String... strings) {
         return Arrays.stream(strings)
                 .map(Interaction::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

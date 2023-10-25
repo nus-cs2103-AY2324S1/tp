@@ -184,7 +184,7 @@ public class Person {
         private Profession profession;
         private Income income;
         private Details details;
-        private Set<Interaction> interactions = new HashSet<>();
+        private ArrayList<Interaction> interactions = new ArrayList<>();
 
         /**
          * Initialises the PersonBuilder with mandatory fields.
@@ -257,9 +257,9 @@ public class Person {
         }
 
         /**
-         * Sets the {@code Set<Interaction>} of the {@code Person} that we are building.
+         * Sets the {@code ArrayList<Interaction>} of the {@code Person} that we are building.
          */
-        public PersonBuilder withInteractions(Set<Interaction> interactions) {
+        public PersonBuilder withInteractions(ArrayList<Interaction> interactions) {
             this.interactions.addAll(interactions);
             return this;
         }
