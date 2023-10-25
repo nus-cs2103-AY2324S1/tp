@@ -50,10 +50,10 @@ public class CommandTestUtil {
     /* Schedule related */
     public static final String VALID_TUTOR_INDEX_ONE = "1";
     public static final String VALID_TUTOR_INDEX_TWO = "2";
-    public static final String VALID_START_TIME_ONE = "2023-01-01T09:00:00";
-    public static final String VALID_START_TIME_TWO = "2023-01-02T20:00:00";
-    public static final String VALID_END_TIME_ONE = "2023-01-01T11:00:00";
-    public static final String VALID_END_TIME_TWO = "2023-01-02T22:00:00";
+    public static final String VALID_START_TIME_ONE = "2023-01-01T09:00";
+    public static final String VALID_START_TIME_TWO = "2023-01-02T20:00";
+    public static final String VALID_END_TIME_ONE = "2023-01-01T11:00";
+    public static final String VALID_END_TIME_TWO = "2023-01-02T22:00";
 
     public static final String TUTOR_INDEX_DESC_ONE = VALID_TUTOR_INDEX_ONE;
     public static final String TUTOR_INDEX_DESC_TWO = VALID_TUTOR_INDEX_TWO;
