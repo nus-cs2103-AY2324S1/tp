@@ -77,7 +77,7 @@ public class AssignmentTrackerTest {
     public void toStringMethod() {
         AssignmentTracker assignmentTracker = new AssignmentTracker(3);
 
-        assertEquals("Assignments and marks:\n"
+        assertEquals("Assignment marks:\n"
                 + "Assignment 1: 0 / 100\n"
                 + "Assignment 2: 0 / 100\n"
                 + "Assignment 3: 0 / 100\n", assignmentTracker.toString());

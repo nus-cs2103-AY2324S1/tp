@@ -33,7 +33,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
 import seedu.address.logic.commands.MarkCommand;
-import seedu.address.logic.commands.RecordClassPartCommand;
+import seedu.address.logic.commands.RecordClassParticipationCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -127,12 +127,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_recordClassPart() throws Exception {
-        RecordClassPartCommand command = (RecordClassPartCommand) parser.parseCommand(
-                RecordClassPartCommand.COMMAND_WORD
-                + STUDENT_NUMBER_DESC_AMY + RecordClassPartCommandParserTest.VALID_TUT_DESC
-                + RecordClassPartCommandParserTest.VALID_PARTICIPATION_DESC, true);
-        assertEquals(new RecordClassPartCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(RecordClassPartCommandParserTest.VALID_TUT),
+        RecordClassParticipationCommand command = (RecordClassParticipationCommand) parser.parseCommand(
+                RecordClassParticipationCommand.COMMAND_WORD
+                + STUDENT_NUMBER_DESC_AMY + RecordClassParticipationCommandParserTest.VALID_TUT_DESC
+                + RecordClassParticipationCommandParserTest.VALID_PARTICIPATION_DESC, true);
+        assertEquals(new RecordClassParticipationCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
+                Integer.parseInt(RecordClassParticipationCommandParserTest.VALID_TUT),
                 true), command);
     }
 

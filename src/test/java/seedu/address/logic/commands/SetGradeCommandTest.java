@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -29,6 +30,7 @@ import seedu.address.testutil.TypicalStudents;
 public class SetGradeCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -44,8 +46,9 @@ public class SetGradeCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
@@ -64,8 +67,9 @@ public class SetGradeCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
@@ -74,7 +78,7 @@ public class SetGradeCommandTest {
         assertFalse(model.hasStudent(ida));
         SetGradeCommand setGradeCommand = new SetGradeCommand(ida.getStudentNumber(), 1, 100);
 
-        assertCommandFailure(setGradeCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
+        assertCommandFailure(setGradeCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
     }
 
     @Test

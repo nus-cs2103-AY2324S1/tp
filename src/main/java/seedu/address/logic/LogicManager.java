@@ -16,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.student.Student;
 import seedu.address.storage.Storage;
@@ -67,23 +68,29 @@ public class LogicManager implements Logic {
         }
 
         if (addressBookModified) {
-            logger.info("Address book modified, saving to file.");
+            logger.info("Class Manager modified, saving to file.");
             try {
                 storage.saveAddressBook(model.getAddressBook());
             } catch (IOException ioe) {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
-        } else if (command instanceof LoadCommand || command instanceof ConfigCommand) {
+        } else if (command instanceof LoadCommand) {
             try {
                 storage.saveAddressBook(model.getAddressBook(), model.getAddressBookFilePath());
-                storage.saveUserPrefs(model.getUserPrefs());
+                logger.info("Class Manager has loaded the save file.");
             } catch (AccessDeniedException e) {
                 throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
             } catch (IOException ioe) {
                 throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
             }
+        } else if (command instanceof ConfigCommand) {
+            try {
+                storage.saveUserPrefs(model.getUserPrefs());
+                logger.info("Class Manager has been configured.");
+            } catch (IOException ioe) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+            }
         }
-
         return commandResult;
     }
 

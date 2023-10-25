@@ -18,20 +18,20 @@ import seedu.address.model.student.StudentNumber;
  * Sets a specific assignment grade for a student.
  */
 public class SetGradeCommand extends Command {
-    public static final String COMMAND_WORD = "set-grade";
+    public static final String COMMAND_WORD = "grade";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Set a specific assignment grade of for a student.\n"
-            + "Parameters: \n"
+            + ": Set Student grade for a particular assignment.\n"
+            + "Parameters: "
             + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
             + PREFIX_ASSIGNMENT + "ASSIGNMENT_NUMBER "
             + PREFIX_GRADE + "GRADE\n"
-            + "Example: \n"
-            + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + "A0299999X "
+            + "Example: "
+            + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + "A0123456X "
             + PREFIX_ASSIGNMENT + "1 " + PREFIX_GRADE + "100";
 
-    public static final String MESSAGE_SUCCESS = "Grade set for student: %1$s, "
-            + "here are the details:\n";
+    public static final String MESSAGE_SUCCESS = "Grade set for Student: %1$s\n"
+            + "Here are the details:\n";
 
 
     private final StudentNumber studentNumber;

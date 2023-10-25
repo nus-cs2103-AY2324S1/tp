@@ -16,6 +16,13 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Undo success!";
     public static final String MESSAGE_FAILURE = "No more commands to undo!";
 
+    /**
+     * Executes an undo command and reverts to the previously saved address book.
+     * @param model {@code Model} which the command should operate on.
+     * @param history {@code CommandHistory} which the command should operate on.
+     * @return {@code CommandResult} that indicates a successful undo.
+     * @throws CommandException if there are no more commands to undo.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);

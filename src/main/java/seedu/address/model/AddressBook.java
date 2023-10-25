@@ -92,6 +92,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addStudent(Student p) {
         students.add(p);
+        indicateModified();
     }
 
     /**
@@ -104,6 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedStudent);
 
         students.setStudent(target, editedStudent);
+        indicateModified();
     }
 
     /**
@@ -112,6 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeStudent(Student key) {
         students.remove(key);
+        indicateModified();
     }
 
     /**
@@ -121,6 +124,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setSelectedStudent(Student student) {
         students.setSelectedStudent(student);
+        indicateModified();
     }
 
     //// util methods

@@ -89,8 +89,8 @@ public class ClassDetailsTest {
     public void recordClassPart_invalidValues_exceptionThrown() {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setTutorialCount(10);
-        assertThrows(CommandException.class, () -> classDetails.recordClassPart(11, true));
-        assertThrows(CommandException.class, () -> classDetails.recordClassPart(-1, false));
+        assertThrows(CommandException.class, () -> classDetails.recordClassParticipation(11, true));
+        assertThrows(CommandException.class, () -> classDetails.recordClassParticipation(-1, false));
     }
 
     @Test
@@ -98,8 +98,8 @@ public class ClassDetailsTest {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setTutorialCount(10);
         try {
-            classDetails.recordClassPart(1, true);
-            classDetails.recordClassPart(10, false);
+            classDetails.recordClassParticipation(1, true);
+            classDetails.recordClassParticipation(10, false);
         } catch (CommandException e) {
             fail();
         }
@@ -155,9 +155,9 @@ public class ClassDetailsTest {
         ClassDetails classDetails = new ClassDetails("T11");
         ClassDetails.setTutorialCount(10);
         try {
-            classDetails.recordClassPart(1, true);
-            classDetails.recordClassPart(2, true);
-            classDetails.recordClassPart(8, true);
+            classDetails.recordClassParticipation(1, true);
+            classDetails.recordClassParticipation(2, true);
+            classDetails.recordClassParticipation(8, true);
             assertEquals(30, classDetails.getClassParticipationPercentage());
         } catch (Exception e) {
             fail();
@@ -186,9 +186,9 @@ public class ClassDetailsTest {
     public void getClassPartPercentage_invalidValues_fail() {
         try {
             ClassDetails classDetails = new ClassDetails("T11", null, null, null);
-            classDetails.recordClassPart(1, true);
-            classDetails.recordClassPart(2, true);
-            classDetails.recordClassPart(7, true);
+            classDetails.recordClassParticipation(1, true);
+            classDetails.recordClassParticipation(2, true);
+            classDetails.recordClassParticipation(7, true);
             assertNotEquals(0.0, classDetails.getClassParticipationPercentage());
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);

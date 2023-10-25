@@ -94,7 +94,7 @@ public class AssignmentTracker {
 
     @Override
     public String toString() {
-        StringBuilder ret = new StringBuilder("Assignments and marks:\n");
+        StringBuilder ret = new StringBuilder("Assignment marks:\n");
         for (int i = 0; i < assignments.length; i++) {
             ret.append("Assignment ").append(i + 1).append(": ").append(assignments[i].toString()).append("\n");
         }

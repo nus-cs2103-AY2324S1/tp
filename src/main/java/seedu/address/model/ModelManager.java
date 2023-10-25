@@ -22,9 +22,9 @@ import seedu.address.model.student.StudentNumber;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private VersionedAddressBook versionedAddressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Student> filteredStudents;
+    private FilteredList<Student> filteredStudents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -223,6 +223,15 @@ public class ModelManager implements Model {
     @Override
     public void commitAddressBook() {
         versionedAddressBook.commit();
+    }
+
+    /**
+     * Resets the history of the model after a load command.
+     */
+    @Override
+    public void reset(ReadOnlyAddressBook newData) {
+        this.versionedAddressBook.reset(newData);
+        this.filteredStudents = new FilteredList<>(this.versionedAddressBook.getStudentList());
     }
 
     @Override

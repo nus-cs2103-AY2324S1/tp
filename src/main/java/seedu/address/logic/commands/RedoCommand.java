@@ -16,6 +16,13 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Redo success!";
     public static final String MESSAGE_FAILURE = "No more commands to redo!";
 
+    /**
+     * Executes a redo command and reverts to the previously undone address book.
+     * @param model {@code Model} which the command should operate on.
+     * @param history
+     * @return CommandResult
+     * @throws CommandException if there is no more commands to redo.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);

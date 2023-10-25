@@ -107,7 +107,7 @@ public class StudentBuilder {
      */
     public StudentBuilder withClassPartDetails(int tutNum, boolean isPresent) {
         try {
-            this.classDetails.recordClassPart(tutNum, isPresent);
+            this.classDetails.recordClassParticipation(tutNum, isPresent);
         } catch (CommandException e) {
             e.printStackTrace();
         }

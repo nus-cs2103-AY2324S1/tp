@@ -8,9 +8,13 @@ import java.util.List;
  */
 public class VersionedAddressBook extends AddressBook {
 
-    private final List<ReadOnlyAddressBook> addressBookStateList;
+    private List<ReadOnlyAddressBook> addressBookStateList;
     private int currentStatePointer;
 
+    /**
+     * Initializes a VersionedAddressBook with the given {@code ReadOnlyAddressBook}.
+     * @param initialState initial state of the address book
+     */
     public VersionedAddressBook(ReadOnlyAddressBook initialState) {
         super(initialState);
 
@@ -32,6 +36,16 @@ public class VersionedAddressBook extends AddressBook {
 
     private void removeStatesAfterCurrentPointer() {
         addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+    }
+
+    /**
+     * Removes all states other than the current state.
+     */
+    public void reset(ReadOnlyAddressBook newData) {
+        addressBookStateList.clear();
+        addressBookStateList.add(newData);
+        currentStatePointer = 0;
+        resetData(addressBookStateList.get(currentStatePointer));
     }
 
     /**

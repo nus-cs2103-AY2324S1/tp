@@ -47,9 +47,9 @@
               <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
-               <SplitPane dividerPositions="0.9">
+               <SplitPane dividerPositions="0.9" VBox.vgrow="ALWAYS">
                   <items>
-                    <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                    <StackPane fx:id="studentListPanelPlaceholder" />
                     <StackPane fx:id="studentClassDetail" />
                   </items>
                </SplitPane>

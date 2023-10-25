@@ -73,7 +73,10 @@ public class LoadCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
         }
         model.setAddressBookFilePath(filePath);
-        model.setAddressBook(newData);
+        model.reset(newData);
+        System.out.println(filePath);
+        System.out.println(newData);
+
         return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true);
     }
 

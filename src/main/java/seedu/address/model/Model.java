@@ -144,4 +144,9 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Resets the history of the model after a load command.
+     */
+    void reset(ReadOnlyAddressBook addressBook);
 }

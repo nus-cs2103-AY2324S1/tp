@@ -185,7 +185,7 @@ public class ClassDetails {
     /**
      * Records the class participation of the student for a particular tutorial session.
      */
-    public void recordClassPart(int sessionNumber, boolean participated) throws CommandException {
+    public void recordClassParticipation(int sessionNumber, boolean participated) throws CommandException {
         if (sessionNumber > tutorialCount || sessionNumber <= 0) {
             throw new CommandException(
                     String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
