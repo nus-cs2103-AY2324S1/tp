@@ -23,7 +23,9 @@ public class AvailableTimePredicate implements Predicate<Person> {
         }
         return person.getFreeTime().getIntervals().stream()
                 .anyMatch(personInterval -> {
-                    if (personInterval != null) return personInterval.isInBetween(interval);
+                    if (personInterval != null) {
+                        return personInterval.isInBetween(interval);
+                    }
                     return false;
                 });
     }
