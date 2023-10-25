@@ -22,7 +22,9 @@ public class StatsCurrentCommand extends StatsCommand {
     public static final String MESSAGE_CURRENT_DETAILS = "- %1$d fostering dogs (%2$.1f%%)\n"
             + "- %3$d fostering cats (%4$.1f%%)";
 
-
+    /**
+     * Returns a list of fosterers who are currently fostering.
+     */
     public List<Person> getCurrentFosterers(List<Person> fosterers) {
         return fosterers.stream()
                 .filter(fosterer ->
@@ -31,6 +33,9 @@ public class StatsCurrentCommand extends StatsCommand {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Returns the number of fosterers from the given list who are fostering dogs.
+     */
     public int getCurrentDogCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->
@@ -39,6 +44,9 @@ public class StatsCurrentCommand extends StatsCommand {
                 .count();
     }
 
+    /**
+     * Returns the number of fosterers from the given list who are fostering cats.
+     */
     public int getCurrentCatCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->

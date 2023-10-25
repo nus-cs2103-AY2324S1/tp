@@ -23,7 +23,7 @@ public class StatsAvailCommand extends StatsCommand {
             + "- %3$d can foster cats (%4$.1f%%)";
 
     /**
-     * Returns the list of available fosterers
+     * Returns a list of available fosterers.
      */
     public List<Person> getAvailableFosterers(List<Person> fosterers) {
         return fosterers.stream()
@@ -33,6 +33,9 @@ public class StatsAvailCommand extends StatsCommand {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Returns the number of fosterers from the given list who can foster dogs.
+     */
     public int getAbleDogCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->
@@ -40,7 +43,9 @@ public class StatsAvailCommand extends StatsCommand {
                                 .equals(AnimalType.ABLE_DOG))
                 .count();
     }
-
+    /**
+     * Returns the number of fosterers from the given list who can foster cats.
+     */
     public int getAbleCatCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->

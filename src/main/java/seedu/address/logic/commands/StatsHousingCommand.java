@@ -20,6 +20,9 @@ public class StatsHousingCommand extends StatsCommand {
             + "- %6$d live in Landed (%7$.1f%%)\n"
             + "- %8$d unknown (%9$.1f%%)";
 
+    /**
+     * Returns the number of fosterers who stay in HDB.
+     */
     public int getHdbCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->
@@ -27,6 +30,9 @@ public class StatsHousingCommand extends StatsCommand {
                 .count();
     }
 
+    /**
+     * Returns the number of fosterers who stay in Condos.
+     */
     public int getCondoCount(List<Person> fosterers) {
         Housing condo = new Housing("Condo");
         return (int) fosterers.stream()
@@ -35,6 +41,9 @@ public class StatsHousingCommand extends StatsCommand {
                 .count();
     }
 
+    /**
+     * Returns the number of fosterers who stay in Landed.
+     */
     public int getLandedCount(List<Person> fosterers) {
         Housing landed = new Housing("Landed");
         return (int) fosterers.stream()
