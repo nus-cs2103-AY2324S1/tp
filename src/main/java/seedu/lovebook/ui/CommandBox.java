@@ -31,6 +31,10 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
+    public void setCommandTextField(String text) {
+        commandTextField.setText(text);
+    }
+
     /**
      * Handles the Enter button pressed event.
      */
