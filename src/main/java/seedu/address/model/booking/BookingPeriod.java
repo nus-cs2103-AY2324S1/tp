@@ -3,7 +3,6 @@ package seedu.address.model.booking;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 /**
  * Represents a Person's address in the address book.
@@ -17,8 +16,7 @@ public class BookingPeriod {
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} to"
             + " \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$";
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm",
-            Locale.US);
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     // String representation of the booking period
     public final String value;
