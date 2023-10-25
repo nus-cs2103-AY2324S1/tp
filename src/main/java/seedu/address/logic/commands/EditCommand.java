@@ -212,6 +212,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Condition condition;
         private BloodType bloodType;
+        private ArrayList<Patient> patients;
 
         public EditPersonDescriptor() {
         }
@@ -232,6 +233,7 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setBloodType(toCopy.bloodType);
             setCondition(toCopy.condition);
+            setPatients(toCopy.patients);
         }
 
         /**
@@ -239,7 +241,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, emergencyContact, address,
-                    gender, ic, tags, bloodType, condition, remark);
+                    gender, ic, tags, bloodType, condition, remark, patients);
         }
 
         public void setName(Name name) {
@@ -273,7 +275,12 @@ public class EditCommand extends Command {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
-
+        public void setPatients(ArrayList<Patient> patients) {
+            this.patients = patients;
+        }
+        public Optional<ArrayList<Patient>> getPatients() {
+            return Optional.ofNullable(patients);
+        }
         public void setAddress(Address address) {
             this.address = address;
         }
