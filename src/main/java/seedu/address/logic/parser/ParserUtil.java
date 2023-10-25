@@ -1,15 +1,19 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -156,7 +160,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> status} into a {@code List<String> of status}.
+     * Parses {@code Collection<String> search status parameters} into a {@code List<String> of status}.
      */
     public static List<String> parseSearchStatusParams(Collection<String> statuses) throws ParseException {
         requireNonNull(statuses);
@@ -164,7 +168,7 @@ public class ParserUtil {
         final List<String> statusList = new ArrayList<>();
         for (String status : statusArr) {
             status = status.trim();
-            if (!Status.isValidStatus(status)) {
+            if (!StatusTypes.isValidStatusType(status)) {
                 throw new ParseException(Status.MESSAGE_CONSTRAINTS);
             }
             statusList.add(status);
@@ -173,7 +177,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> names} into a {@code List<String> of names}.
+     * Parses {@code Collection<String> search name parameters} into a {@code List<String> of names}.
      */
     public static List<String> parseSearchNameParams(Collection<String> names) throws ParseException {
         requireNonNull(names);
@@ -190,10 +194,28 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> search tag parameters} into a {@code List<String> of tags}.
+     */
+    public static List<String> parseSearchTagParams(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        String[] tagArr = parseSearchParams(tags);
+        final List<String> tagList = new ArrayList<>();
+        for (String tag : tagArr) {
+            tag = tag.trim();
+            if (!Tag.isValidTagName(tag)) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            }
+            tagList.add(tag);
+        }
+        return tagList;
+    }
+
+    /**
      * Parses a list of keywords into an array of strings.
      *
      * @param keywordsList A list of keywords, where each element may contain multiple words.
      * @return An array of strings where each element represents an individual keyword.
+     * @throws ParseException if any of the search parameters contain non-alphanumeric characters e.g. commas
      *
      *     The method first converts the list of keywords into a string representation,
      *     e.g., [Alex, Yeoh] (including square brackets). It then removes the square brackets
@@ -204,10 +226,18 @@ public class ParserUtil {
      *     Example:
      *     If keywordsList is ["John Doe"], the returned array will be ["John", "Doe"].
      */
-    private static String[] parseSearchParams(Collection<String> keywordsList) {
+    private static String[] parseSearchParams(Collection<String> keywordsList) throws ParseException {
         String list = keywordsList.toString();
         String cleanedList = list.replaceAll("[\\[\\]]", "");
-        return cleanedList.split("\\s+");
+        String[] searchParams = cleanedList.split("\\s+");
+        for (String searchParam : searchParams) {
+            Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+            Matcher matcher = pattern.matcher(searchParam);
+            if (matcher.find()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+        }
+        return searchParams;
     }
 
 
