@@ -170,12 +170,24 @@ Marking tutorial attendance for an existing student in the address book.
 
 Format: `mark TUTORIAL_INDEX s/STUDENT_NUMBER`
 
-* The STUDENT NUMBER must be valid and exist.
+* The STUDENT_NUMBER must be valid and exist.
 * The TUTORIAL_INDEX must be a valid positive integer.
 
 Examples:
 * `mark 1 s/A0249112A`
 
+### View a student's class details: `view`
+
+Views the class details of a student that will be displayed on the right side of the application.
+
+Format: `view STUDENT_NUMBER`
+
+* The STUDENT_NUMBER must be valid e.g `T*`.
+* The STUDENT_NUMBER must belong to a student in the address book.
+
+Example:
+* `view A0245234A`
+![result for 'view A0245234A'](images/ViewCommand.png)
 ### Deleting a student : `delete`
 
 Deletes the specific student.
@@ -267,7 +279,8 @@ _Details coming soon ..._
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                  |
 | **Tag**    | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                            |
 | **Lookup** | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                  |
-| **Mark**   | `mark TUTORIAL_INDEX s/STUDENT_NUMBER`                                                                                                             |
+| **Mark**   | `mark TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark 1 s/A0245234A`                                                                              |
+| **View**   | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                   |
 | **List**   | `list`                                                                                                                                             |
 | **Help**   | `help`                                                                                                                                             |
 | **Load**   | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                     |
