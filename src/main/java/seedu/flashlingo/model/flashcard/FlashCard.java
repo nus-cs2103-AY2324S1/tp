@@ -17,8 +17,6 @@ public class FlashCard {
     private final TranslatedWord translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
     private ProficiencyLevel currentLevel; // How many times successfully remembered
-
-    private boolean isUpdated;
     private final ProficiencyLevel originalLevel; // For undo function
 
     private boolean toDelete = false;
@@ -36,7 +34,6 @@ public class FlashCard {
         this.whenToReview = whenToReview;
         this.translatedWord = translatedWord;
         this.originalWord = originalWord;
-        this.isUpdated = false;
         this.originalLevel = level;
     }
     public OriginalWord getOriginalWord() {
@@ -117,11 +114,15 @@ public class FlashCard {
     /**
      * Update the flash card to next level
      */
-    public void updateLevel(boolean isUpdated) {
-        if (isUpdated) {
-            originalLevel.upgradeLevel();
+    public void updateLevel(boolean isSuccess) {
+        if (isSuccess) {
+            getProficiencyLevel().upgradeLevel();
+            updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
+            this.toDelete = getProficiencyLevel().toDelete();
+        } else {
+            getProficiencyLevel().downgradeLevel();
+            updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
         }
-        updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
     }
 
     /**
@@ -136,39 +137,8 @@ public class FlashCard {
         return sb;
     }
 
-    /**
-     * Handles when user clicks yes/no
-     * @param isSuccess Whether user has successfully remembered the word
-     */
-    public void handleUserInput(boolean isSuccess) {
-        if (isUpdated) {
-            return;
-        }
-        if (isSuccess) {
-            getProficiencyLevel().upgradeLevel();
-            updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
-            this.toDelete = getProficiencyLevel().toDelete();
-        } else {
-            getProficiencyLevel().downgradeLevel();
-            updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
-        }
-        isUpdated = true;
-    }
-
     public void updateReviewDate(long timeInMs) {
         this.whenToReview = new Date(new Date().getTime() + timeInMs);
-    }
-
-    /**
-     * Undo function to reset selection of "Yes" or "No" upon incorrect selection.
-     * Without undoing, should not be able to select "Yes" or "No" again
-     */
-    public void undo() {
-        if (isUpdated) {
-            this.currentLevel = originalLevel;
-            this.whenToReview = new Date(new Date().getTime() + getProficiencyLevel().calculateNextReviewInterval());
-            isUpdated = false;
-        }
     }
 
     @Override
