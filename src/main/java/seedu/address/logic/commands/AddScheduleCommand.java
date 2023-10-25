@@ -33,8 +33,8 @@ public class AddScheduleCommand extends Command {
             + PREFIX_END_TIME + "END_TIME\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
-            + PREFIX_START_TIME + "2023-09-15T09:00:00 "
-            + PREFIX_END_TIME + "2023-09-15T11:00:00";
+            + PREFIX_START_TIME + "2023-09-15T09:00 "
+            + PREFIX_END_TIME + "2023-09-15T11:00";
 
     public static final String MESSAGE_SUCCESS = "New schedule %1$s has been added.";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This schedule already exists in the address book";

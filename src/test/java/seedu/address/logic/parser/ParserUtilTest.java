@@ -37,7 +37,7 @@ public class ParserUtilTest {
 
     private static final String VALID_TUTOR_INDEX_STRING = "1";
     private static final Integer VALID_TUTOR_INDEX_VALUE = 1;
-    private static final String VALID_TIME_STRING = "2023-09-15T11:00:00";
+    private static final String VALID_TIME_STRING = "2023-09-15T11:00";
     private static final LocalDateTime VALID_TIME_VALUE = LocalDateTime.of(2023, 9, 15, 11, 0, 0);
 
     /* Others */

@@ -30,13 +30,13 @@ public class EditScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the schedule identified "
         + "by the index number used in the displayed schedule list. "
         + "Parameters: "
-        + "SCHEDULE_INDEX (must be a positive integer)"
+        + "SCHEDULE_INDEX (must be a positive integer) "
         + PREFIX_START_TIME + "START_TIME "
         + PREFIX_END_TIME + "END_TIME\n"
         + "Example: " + COMMAND_WORD + " "
         + "1 "
-        + PREFIX_START_TIME + "2023-09-15T09:00:00 "
-        + PREFIX_END_TIME + "2023-09-15T11:00:00";
+        + PREFIX_START_TIME + "2023-09-15T09:00 "
+        + PREFIX_END_TIME + "2023-09-15T11:00";
 
     public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Edited Schedule: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
