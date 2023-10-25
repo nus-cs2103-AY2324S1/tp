@@ -17,7 +17,7 @@
 
 <box type="tip" seamless>
 
-**Notation Guide** :rocket:<br>
+**Notation Guide**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
 * Items in square brackets are optional. 
@@ -29,7 +29,7 @@
 ---
 ### `help` : Viewing help
 
-Displays a message explaining how to access the help page.
+Opens up your browser to view the help page.
 
 Format: `help`
 
@@ -119,11 +119,15 @@ UI mockup:
 Sorts the applicant list by using a particular descriptor as the sorting criteria.
 
 Format: `sort d/DESCRIPTOR`
-* `DESCRIPTOR` must be either `name` or `phone`.
+* `DESCRIPTOR` must be either `name` or `phone` or `email` or `position` or `score` or `status`.
 
 Examples:
 * `sort d/name` sorts the applicant list by name in alphabetical order.
 * `sort d/phone` sorts the applicant list by phone numbers in ascending order.
+* `sort d/email` sorts the applicant list by email in alphabetical order.
+* `sort d/position` sorts the applicant list by positions in alphabetical order.
+* `sort d/score` sorts the applicant list by score in descending order.
+* `sort d/status` sorts the applicant list by status in alphabetical order.
 
 UI mockup:
 ![Sort UI Mockup](./images/sort.png)
@@ -155,6 +159,28 @@ Examples:
 * `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
 
 ---
+### `deletei` : Deleting an interview from an applicant
+
+Deletes an interview from an applicant.
+
+Format: `deletei INDEX i/INTERVIEW_INDEX`
+
+Examples:
+* `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
+
+---
+### `status` : Editing an applicant status
+
+Clears all the current data stored in the system.
+
+Format: `status INDEX s/STATUS`
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
+
+Examples:
+* `status 3 s/o` updates the stats of the 3rd person in the displayed applicant list to OFFERED.
+
+---
 ### `clear` : Clearing all applicant entries
 
 Clears all the current data stored in the system.
@@ -180,7 +206,7 @@ Automatically saves the data to a local storage whenever there is a change to th
 ### Editing the data file
 
 <box type="warning" header="**Caution**">
-    Editing the data file directly may result in unexpected behaviour.
+    If the format of the edited data file is invalid, Staff-Snap will override the existing data file with an empty data file in the next run. Please make a backup before you attempt to edit the data file!
 </box>
 
 Staff-Snap applicant data are saved automatically as a JSON file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
