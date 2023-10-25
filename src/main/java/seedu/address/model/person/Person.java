@@ -8,11 +8,10 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.FreeTime;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
-import seedu.address.model.group.exceptions.DuplicateGroupException;
 
 /**
  * Represents a Person in the address book.
@@ -29,7 +28,7 @@ public class Person {
     // Data fields
     private GroupList personGroups;
 
-    private final FreeTime freeTime;
+    private final TimeIntervalList timeIntervalList;
 
 
     /**
@@ -41,19 +40,19 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.personGroups = personGroups;
-        this.freeTime = new FreeTime();
+        this.timeIntervalList = new TimeIntervalList();
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, GroupList personGroups, FreeTime freeTime) {
+    public Person(Name name, Phone phone, Email email, GroupList personGroups, TimeIntervalList timeIntervalList) {
         requireAllNonNull(name, phone, email, personGroups);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.personGroups = personGroups;
-        this.freeTime = freeTime;
+        this.timeIntervalList = timeIntervalList;
     }
 
     public Name getName() {
@@ -199,17 +198,20 @@ public class Person {
             .toString();
     }
 
-    public FreeTime getFreeTime() {
-        return freeTime;
+    public TimeIntervalList getTime() {
+        return this.timeIntervalList;
     }
 
     public void addFreeTime(TimeInterval toAddFreeTime) {
-        this.freeTime.addTime(toAddFreeTime);
+        this.timeIntervalList.addTime(toAddFreeTime);
     }
 
-    public void addFreeTime(ArrayList<TimeInterval> toAddFreeTime) {
-        this.freeTime.addTime(toAddFreeTime);
-        System.out.println(111);
+    public void addFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+        this.timeIntervalList.addTime(toAddFreeTime);
+    }
+
+    public void deleteFreeTime(ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+        this.timeIntervalList.deleteTime(toAddFreeTime);
     }
 
     /**

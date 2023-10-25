@@ -1,16 +1,22 @@
 package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
+<<<<<<< HEAD
 import seedu.address.model.Duration;
 import seedu.address.model.FreeTime;
+=======
+import seedu.address.model.TimeIntervalList;
+import seedu.address.model.TimeInterval;
+>>>>>>> 0a9cefdc7517e8c5f482da5e4f4c4e20c36381f7
 import seedu.address.model.person.Person;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -21,6 +27,7 @@ public class Group {
     private final ObservableList<Person> listOfGroupMates = FXCollections.observableArrayList();
     private final String groupName;
     private GroupRemark groupRemark;
+    private final TimeIntervalList timeIntervalList = new TimeIntervalList();
 
     /**
      * Name field must be present and not null.
@@ -171,6 +178,7 @@ public class Group {
         this.groupRemark = groupRemark;
     }
 
+<<<<<<< HEAD
     /**
      * Modify StringBuilder to display message should any groupMate not input their free time
      * @param br StringBuilder
@@ -212,4 +220,15 @@ public class Group {
         return freeTime;
     }
 
+=======
+    public void addTime(ArrayList<TimeInterval> toAddTime) throws CommandException {
+        this.timeIntervalList.addTime(toAddTime);
+    }
+
+    public TimeIntervalList getTime() {
+        return this.timeIntervalList;
+    }
+
+    public void deleteTime(ArrayList<TimeInterval> toDeleteTime) throws CommandException { this.timeIntervalList.deleteTime(toDeleteTime);}
+>>>>>>> 0a9cefdc7517e8c5f482da5e4f4c4e20c36381f7
 }

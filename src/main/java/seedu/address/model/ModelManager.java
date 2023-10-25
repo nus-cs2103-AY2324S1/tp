@@ -141,16 +141,6 @@ public class ModelManager implements Model {
         return addressBook.hasGroup(group);
     }
 
-    /**
-     * Find Group according to an exact match to String groupName
-     * Call FindGroup() method in addressBook
-     * @param groupName of group we are looking for
-     * @return Group that we are looking for
-     */
-    @Override
-    public Group findGroup(String groupName) throws GroupNotFoundException {
-        return addressBook.findGroup(groupName);
-    }
 
     /**
      * Adds a group to the address book.
@@ -167,6 +157,7 @@ public class ModelManager implements Model {
     public Group deleteGroup(String groupName) throws CommandException {
         Group group = addressBook.getGroup(groupName);
         addressBook.removeGroup(group);
+        forceUpdateList();
         return group;
     }
 
@@ -191,7 +182,9 @@ public class ModelManager implements Model {
         return filteredGroups;
     }
 
-    ;
+    public Group findGroup(String groupName) throws CommandException {
+        return addressBook.getGroup(groupName);
+    }
 
 
     @Override
@@ -240,10 +233,43 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+    public void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAddPerson);
         Person person = addressBook.getPerson(toAddPerson.fullName);
-        person.addFreeTime(toAddFreeTime);
+        try {
+            person.addFreeTime(toAddTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
+        forceUpdateList();
+    }
+
+    @Override
+    public void deleteTimeFromPerson(Name personName,
+                                           ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+        requireNonNull(personName);
+        Person person = addressBook.getPerson(personName.fullName);
+        try {
+            person.deleteFreeTime(toDeleteTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
+        forceUpdateList();
+    }
+
+    @Override
+    public void deleteTimeFromGroup(Group group,
+                                     ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+        requireNonNull(group);
+        Group groupToDeleteTime = addressBook.getGroup(group.getGroupName());
+        try {
+            groupToDeleteTime.deleteTime(toDeleteTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
         forceUpdateList();
     }
 
@@ -264,6 +290,31 @@ public class ModelManager implements Model {
         group.setGroupRemark(groupRemark);
         return group;
     }
+
+    public TimeIntervalList getTimeFromPerson(Name personName) throws CommandException {
+        requireNonNull(personName);
+        Person person = addressBook.getPerson(personName.toString());
+        return person.getTime();
+    }
+
+    public void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
+        requireNonNull(toAdd);
+        Group groupToAdd = addressBook.getGroup(toAdd.getGroupName());
+        try {
+            groupToAdd.addTime(toAddTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
+        forceUpdateList();
+    }
+
+    public TimeIntervalList getTimeFromGroup(Group group) throws CommandException {
+        requireNonNull(group);
+        Group toAdd = addressBook.getGroup(group.getGroupName());
+        return toAdd.getTime();
+    }
+
 
 
     private void forceUpdateList() {

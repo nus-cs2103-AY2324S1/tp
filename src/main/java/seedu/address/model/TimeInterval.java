@@ -6,14 +6,16 @@ import java.util.ArrayList;
 
 import seedu.address.logic.parser.ParserUtil;
 
+import javax.xml.stream.FactoryConfigurationError;
+
 public class TimeInterval {
 
     public static final String MESSAGE_CONSTRAINTS_SYNTAX = "The format of an interval should be: mon 1200 - tue 1400";
 
     public static final String MESSAGE_CONSTRAINTS_LOGIC = "Your end time cannot be before your start time ";
 
-    public static final String MESSAGE_CONSTRAINTS_OVERLAP = "No overlap is allowed in your interval. Eg. "
-        + "mon 1200 - mon 1600 ;mon 1400 - mon 1800 is not allowed. Write it as mon 1200 - mon 1800";
+    public static final String MESSAGE_CONSTRAINTS_OVERLAP = "No overlap is allowed in your interval. \n "
+            + "Eg. mon 1200 - mon 1600 ;mon 1400 - mon 1800 is not allowed. Write it as mon 1200 - mon 1800";
 
 
     public static final String VALIDATION_REGEX = ".* .* - .* .*";
@@ -31,28 +33,22 @@ public class TimeInterval {
     }
 
     /**
-     * Compares timeInterval with another Time interval using the start time.
-     * @param other The other timeInterval.
-     * @return The int depending on if it is less than/more than/equal to the other timeInterval.
-     */
-    public int compareToStartTime(TimeInterval other) {
-        requireNonNull(other);
-        return this.start.compareTo(other.start);
-    }
-
-    /**
      * Returns true if the timeInterval overlaps with one another.
      * @param intervals ArrayList of TimeIntervals.
      * @return Returns true if the timeInterval overlaps with one another.
      */
     public static boolean isTimeIntervalOverlap(ArrayList<TimeInterval> intervals) {
-        intervals.sort(TimeInterval::compareToStartTime);
-        for (int i = 0; i < intervals.size() - 1; i++) {
-            if (intervals.get(i).end.compareTo(intervals.get(i + 1).start) > -1) {
-                return false;
+        for (int i = 0; i < intervals.size(); i++) {
+            for (int j = i + 1; j < intervals.size(); j++) {
+                int startComparison = intervals.get(i).compareStart(intervals.get(j));
+                int endComparison = intervals.get(i).compareEnd(intervals.get(j));
+                boolean noClash = ((startComparison < 0 && endComparison < 0)|| (startComparison > 0 && endComparison > 0));
+                if ((startComparison == 0 && endComparison == 0) || !noClash) {
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -141,6 +137,14 @@ public class TimeInterval {
         return start.compareTo(end) <= -1;
     }
 
+    public int compareStart(TimeInterval otherTime) {
+        return this.start.compareTo(otherTime.start);
+    }
+
+    public int compareEnd(TimeInterval otherTime) {
+        return this.end.compareTo(otherTime.end);
+    }
+
     /**
      * Gets the start time of the interval
      * @return Start time
@@ -160,5 +164,18 @@ public class TimeInterval {
     @Override
     public String toString() {
         return start.toString() + " - " + end.toString() + " ";
+    }
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof TimeInterval)) {
+            return false;
+        } else if (object == this) {
+            return true;
+        } else {
+            TimeInterval otherTime = (TimeInterval) object;
+            return this.start.equals(otherTime.start) && this.end.equals(otherTime.end);
+        }
     }
 }

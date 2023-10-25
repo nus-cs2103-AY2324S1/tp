@@ -151,17 +151,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Find Group according to an exact match to String groupName
-     * Call FindGroup() method in groupList, containing all groups in addressBook
-     * @param groupName group we are looking for
-     * @return Group that we are looking for
-     */
-    public Group findGroup(String groupName) throws GroupNotFoundException {
-        return groups.findGroup(groupName);
-
-    }
-
-    /**
      * Adds a group to the address book.
      * The group must not already exist in the address book.
      */
