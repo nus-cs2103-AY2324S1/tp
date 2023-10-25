@@ -43,6 +43,13 @@ public class Salary extends Payment {
      */
     public double getTotalDeductions() {
         DecimalFormat df = new DecimalFormat("0.00");
+
+        if (deductions == null) {
+            double res = 0;
+            df.format(res);
+            return res;
+        }
+
         double total = 0;
         for (Deduction deduction : deductions) {
             total += Double.parseDouble(deduction.value);
@@ -57,6 +64,13 @@ public class Salary extends Payment {
      */
     public double getTotalBenefits() {
         DecimalFormat df = new DecimalFormat("0.00");
+
+        if (benefits == null) {
+            double res = 0;
+            df.format(res);
+            return res;
+        }
+
         double total = 0;
         for (Benefit benefit : benefits) {
             total += Double.parseDouble(benefit.value);

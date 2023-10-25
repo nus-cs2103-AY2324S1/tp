@@ -63,6 +63,13 @@ dependencies {
 
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
+    // https://mvnrepository.com/artifact/com.itextpdf/kernel
+    implementation group: 'com.itextpdf', name: 'kernel', version: '7.2.5'
+    // https://mvnrepository.com/artifact/com.itextpdf/forms
+    implementation group: 'com.itextpdf', name: 'forms', version: '7.2.5'
+
+
+
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
