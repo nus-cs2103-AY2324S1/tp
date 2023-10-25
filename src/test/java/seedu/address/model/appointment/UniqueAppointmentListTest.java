@@ -37,7 +37,8 @@ public class UniqueAppointmentListTest {
     public void contains_appointmentWithSameFieldsInList_returnsTrue() {
         uniqueAppointmentList.add(ALEX);
         Appointment editedAlex = new AppointmentBuilder().withName("Alex Yeoh")
-                .withDateTime("2023-10-31 16:00:00").withDescription("First Session").build();
+                .withDate("2023-10-31").withStartTime("12:00").withEndTime("13:00")
+                .withDescription("First Session").build();
         assertTrue(uniqueAppointmentList.contains(editedAlex));
     }
 
