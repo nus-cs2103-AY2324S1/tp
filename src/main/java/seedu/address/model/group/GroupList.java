@@ -79,7 +79,8 @@ public class GroupList implements Iterable<Group> {
      */
     public void remove(Group toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        boolean isRemoved = internalList.remove(toRemove);
+        if (!isRemoved) {
             throw new GroupNotFoundException();
         }
     }

@@ -27,7 +27,7 @@ public class FindFreeTimeCommand extends Command {
 	public static final String MESSAGE_DURATION_USAGE = "Enter Duration in minutes";
 
 
-	public static final String MESSAGE_NOT_ALL_FREE = "$s has not input their free time yet\n";
+	public static final String MESSAGE_NOT_ALL_FREE = "%s has not input their free time yet\n";
 
 	public static final String MESSAGE_SUCCESS = "These are the available timeslots \n";
 	public static final String MESSAGE_INTERVAL_DISPLAY = "$d $s\n";

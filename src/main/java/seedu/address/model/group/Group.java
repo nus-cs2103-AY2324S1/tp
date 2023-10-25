@@ -60,8 +60,16 @@ public class Group {
         return groupName;
     }
 
-    public ObservableList getGroupMates() {
+    public ObservableList<Person> getGroupMates() {
         return listOfGroupMates;
+    }
+    /**
+     * Converts the internal list to streams.
+     *
+     * @return Internal list into streams.
+     */
+    public Stream<Person> toStream() {
+        return this.listOfGroupMates.stream();
     }
 
     /**
@@ -69,12 +77,13 @@ public class Group {
      * This defines a weaker notion of equality between two groups.
      */
     public boolean isSameGroup(Group otherGroup) {
-        if (otherGroup == this) {
-            return true;
-        }
-
-        return otherGroup != null
-            && this.equals(otherGroup);
+        return this.equals(otherGroup);
+//        if (otherGroup == this) {
+//            return true;
+//        }
+//
+//        return otherGroup != null
+//            && this.equals(otherGroup);
     }
 
     /**
@@ -105,7 +114,7 @@ public class Group {
      */
     public void removePerson(Person toRemove) throws CommandException {
         requireNonNull(toRemove);
-        if (!contains(toRemove)) {
+        if (!this.listOfGroupMates.contains(toRemove)) {
             throw new CommandException(
                 String.format("%s is not in this group: %s", toRemove.getName().fullName, this.groupName));
         }
@@ -163,10 +172,10 @@ public class Group {
         return this.groupName.equals(otherGroup.getGroupName());
     }
 
-    public Stream<Person> grpMatesStream() {
-        return listOfGroupMates.stream();
-    }
-
+//    public Stream<Person> grpMatesStream() {
+//        return listOfGroupMates.stream();
+//    }
+//
     public GroupRemark getGroupRemark() {
         return this.groupRemark;
     }
@@ -183,7 +192,7 @@ public class Group {
     public void areAllFree(StringBuilder br, String format) {
         for (Person p: listOfGroupMates) {
             if (p.isNotFree()) {
-                br.append(String.format(format, p.getName()));
+                br.append(String.format(format, p.getName().fullName));
             }
         }
     }
