@@ -198,6 +198,8 @@ e.g. in `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL
 |------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Adding a new patient**](#adding-a-new-patient-add)                        | `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL address=ADDRESS [illness=ILLNESS]` <br> e.g., `add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 email=johnd@example.com address=311, Clementi Ave 2, #02-25 illness=fever` |
 | [**Updating a patient's details**](#updating-a-patients-details-edit)        | `edit INDEX [name=NAME] [gender=GENDER] [birthdate=BIRTHDATE] [phone=PHONE] [email=EMAIL] [address=ADDRESS]` <br> e.g., `edit 1 birthdate=2001/12/14 phone=93842738`                                                                                                 |
+| [**Diagnosing a patient**](#diagnosing-a-patient-diagnose)                   | `diagnose INDEX illness=ILLNESS`<br> e.g., `diagnose 1 illness=fever`                                                                                                                                                                                                |
+| [**Undiagnosing a patient**](#undiagnosing-a-patient-undiagnose)             | `undiagnose INDEX illness=ILLNESS`<br> e.g., `undiagnose 1 illness=fever`                                                                                                                                                                                            |
 | [**Removing a patient**](#removing-a-patient-delete)                         | `delete INDEX` <br> e.g., `delete 1`                                                                                                                                                                                                                                 |
 | [**Displaying all patients**](#displaying-all-patients-list)                 | `list`                                                                                                                                                                                                                                                               |
 | [**Finding patients by name**](#finding-patients-by-name-find)               | `find NAME`<br> e.g., `search name=James Jake`                                                                                                                                                                                                                       |
@@ -247,6 +249,8 @@ email at *johnd@example.com* and address at *311, Clementi Ave 2, #02-25*, who i
 
 - A patient's illness is optional, i.e. you do not have to enter the illness when adding a patient.
 
+- You can enter more than one illness for a patient, e.g. `illness=fever flu` will add both fever and flu as a patient's illnesses.
+
 ### Updating a patient's details: `edit`
 
 This command updates a patient's personal information and contact details. It will update the details of the patient at
@@ -266,6 +270,38 @@ the patient's birthdate to *2001/12/14* and phone number to *93842738*.
 - The index provided must be a *positive integer* and a *valid index*, i.e. within the size of the patient records.
 
 - You must edit *at least one* detail when using the command.
+
+### Diagnosing a patient: `diagnose`
+
+This command adds (an) illness(es) to a patient's current illnesses. It will update the details of the patient at
+the specified `INDEX` shown in the patients records.
+
+Format: `diagnose INDEX illness=ILLNESS`
+
+Example: `diagnore 1 illness=fever`
+
+This example command will update the patient with index 1 in the patient records (i.e. the first patient) and will add
+*fever* to the patient's illnesses.
+
+**Notes:**
+
+- You can enter more than one illness for a patient, e.g. `illness=fever flu` will add both fever and flu as a patient's illnesses.
+
+### Undiagnosing a patient: `undiagnose`
+
+This command removes (an) illness(es) to a patient's current illnesses. It will update the details of the patient at
+the specified `INDEX` shown in the patients records.
+
+Format: `undiagnose INDEX illness=ILLNESS`
+
+Example: `undiagnore 1 illness=fever`
+
+This example command will update the patient with index 1 in the patient records (i.e. the first patient) and will remove
+*fever* from the patient's illnesses.
+
+**Notes:**
+
+- You can enter more than one illness for a patient, e.g. `illness=fever flu` will remove both fever and flu from a patient's illnesses.
 
 ### Removing a patient: `delete`
 
