@@ -72,6 +72,9 @@ public class PersonTest {
         // different type -> returns false
         assertNotEquals(5, ALICE);
 
+        // different object -> returns false
+        assertNotEquals(new Object(), ALICE);
+
         // different person -> returns false
         assertNotEquals(ALICE, BOB);
 
@@ -87,7 +90,7 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertNotEquals(ALICE, editedAlice);
 
-        // different address -> returns false
+        // different telegram -> returns false
         editedAlice = new PersonBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
         assertNotEquals(ALICE, editedAlice);
 
@@ -106,6 +109,12 @@ public class PersonTest {
         // different hour -> returns false
         editedAlice = new PersonBuilder(ALICE).withHour(VALID_HOUR_FIVE).build();
         assertNotEquals(ALICE, editedAlice);
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
     }
 
     @Test
