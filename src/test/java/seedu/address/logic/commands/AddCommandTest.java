@@ -110,7 +110,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Course getTeaching() {
+        public String getTeaching() {
             throw new AssertionError("This method should not be called.");
         }
 

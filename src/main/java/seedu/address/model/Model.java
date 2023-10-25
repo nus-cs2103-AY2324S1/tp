@@ -49,7 +49,7 @@ public interface Model {
      * Returns the module the user is teaching.
      *
      */
-    Course getTeaching();
+    String getTeaching();
 
     /**
      * Sets the module the user is teaching.

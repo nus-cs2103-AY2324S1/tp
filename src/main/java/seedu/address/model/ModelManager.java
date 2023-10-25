@@ -66,13 +66,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Course getTeaching() {
+    public String getTeaching() {
         return userPrefs.getTeaching();
     }
     @Override
     public void setTeaching(Course module) {
         requireNonNull(module);
-        userPrefs.setTeaching(module);
+        userPrefs.setTeaching(module.getName());
     }
 
     @Override
