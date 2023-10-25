@@ -195,6 +195,12 @@ Similarly, the `No` button will invoke the no command.
     * Cons:
         * Less convenient without the buttons, needing to type
 
+### Sequence diagram when clicking the `Yes` and `No` buttons
+#### Both diagrams are the same except for the inputs to the methods.
+![YesCommand from FlashcardBox](images/UiYesButtonSequenceDiagram.png)
+
+![NoCommand from FlashcardBox](images/UiNoButtonSequenceDiagram.png)
+
 
 ### Start and End Session
 

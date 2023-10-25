@@ -45,7 +45,7 @@ public class FlashcardListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 if (SessionManager.getInstance().isReviewSession()) {
-                    setGraphic(new FlashcardBox(fc, getIndex() + 1, model, mw).getRoot());
+                    setGraphic(new FlashcardBox(fc, getIndex() + 1, mw).getRoot());
                 } else {
                     setGraphic(new FlashcardBoxNoButton(fc, getIndex() + 1).getRoot());
                 }
