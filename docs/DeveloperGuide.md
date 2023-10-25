@@ -177,8 +177,8 @@ Step 1. User inputs
 
 Step 2. `Logic` will receive the input and pass it to a `AddressBookParser` object which in turn creates a `TagCommandParser` object to parse the command.
 
-Step 3. Next `TagCommandParser` will check for any action identifiers, 
-`/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively, 
+Step 3. Next `TagCommandParser` will check for any action identifiers,
+`/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively,
 else a `TagCommand` object.
 
 Step 4a. `AddTagCommand` will union the `HashSet<Tag>` with the student's existing `Tag`.
@@ -310,7 +310,7 @@ class to act as the manager for each of the classes, with the trackers composing
 
 The 3 different types of class grades are:
 
-* `Attendance` - Stores the details for a students attendance in a specific tutorial. Attendance will be stored as 
+* `Attendance` - Stores the details for a students attendance in a specific tutorial. Attendance will be stored as
 a boolean value.
 * `ClassParticipation` - Stores the details for a students participation in a specific tutorial. Class participation
 will be stored as a boolean value.
@@ -324,7 +324,7 @@ of the classes in the array will correspond to the index of the tutorial or assi
 the array will correspond to either the first tutorial or assignment, depending on the tracker class.
 
 The tracker classes will be stored in the `ClassDetails` class, which will be composed of the following classes:
-* `AttendanceTracker` - Stores the `Attendance` objects for a specific student. 
+* `AttendanceTracker` - Stores the `Attendance` objects for a specific student.
 * `ClassParticipationTracker` - Stores the `ClassParticipation` objects for a specific student.
 * `AssignmentTracker` - Stores the `Assignment` objects for a specific student.
 
@@ -335,7 +335,7 @@ These tracker classes will inherit from a `tracker` *interface*. They will also 
 tutorial attendance percentage, or the average assignment score.
 
 Each of these tracker classes will be able to be initialized with a specific size, which will be the number of tutorials
-or assignment grade. 
+or assignment grade.
 
 #### Design considerations:
 
@@ -343,13 +343,13 @@ or assignment grade.
 
 * **Alternative 1 (current choice):** Use a class for each type of class details.
   * Pros: Easy to implement, follows OOP principle. If we want to edit the implementation of each of the classes or
-  change the data structure / details of each instance, it can be easily done. 
+  change the data structure / details of each instance, it can be easily done.
   * Cons: May have performance issues in terms of memory usage.
-  
+
 * **Alternative 2:** Store class values as a primitive type (String or Integer).
   * Pros: Will use less memory.
   * Cons: We must ensure that the implementation of each individual class are correct. Implementation will be more
-  complicated as different class detail types will require different implementations for the same operation. 
+  complicated as different class detail types will require different implementations for the same operation.
 
 **Aspect: Tracker classes**
 
