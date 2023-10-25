@@ -170,7 +170,7 @@ Edits an existing tutor in the addressbook.
 
 ![edit tutor](images/editTutor.png)
 
-**Format**: `edit-t TUTOR_INDEX [n/NAME] [p/PHONE NUMBER] [e/EMAIL]`
+**Format**: `edit-t TUTOR_INDEX n/NAME p/PHONE NUMBER e/EMAIL`
 
 **Examples**:
 * `edit-t 1 n/John Doe`
@@ -512,16 +512,16 @@ This section consists of more details of format limitations mentioned above.
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                |
-|---------------------|-----------------------------------------------------------------------------------------------------------------|
-| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`              |
-| **Edit Tutor**      | `edit-t TUTOR_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com` |
-| **List Tutor**      | `list-t`                                                                                                        |
-| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                   |
-| **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                      |
-| **Add Schedule**    | `add-s TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` |
-| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]` <br> e.g., `edit-s 1 s/2023-09-15T13:00:00`                 |
+| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`               |
+| **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`        |
+| **List Tutor**      | `list-t`                                                                                                         |
+| Action              | Format, Examples                                                                                                 |
+|---------------------|------------------------------------------------------------------------------------------------------------------|
+| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                    |
+| **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                       |
+| **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s 1 st/2023-09-15T09:00:00 et/2023-09-15T11:00:00` |
+| **Edit Schedule**   | `edit-s SCHEDULE_INDEX s/START_TIME e/END_TIME` <br> e.g., `edit-s 1 s/2023-09-15T13:00:00`                      |
 | **List Schedule**   | `list-s`, `list-s KEYWORD [MORE_KEYWORDS]` <br> e.g., `list-s Alice Pauline`                                    |
-| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                    |
-| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                |
-| **Clear**           | `clear`                                                                                                         |
+| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                     |
+| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                 |
+| **Clear**           | `clear`                                                                                                          |
