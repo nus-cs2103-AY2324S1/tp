@@ -257,11 +257,11 @@ Example usage:
 
 ## Command summary
 
-| Command |   Prefixes   |      Format, Example      | What it does                       |
+| Command |   Prefixes   |      Format and examples      | What it does                       |
 |---------|------------|-------------------|------------------------------------|
-| **create** | `/name` <br> `[/phone]` <br/> `[/email] `<br/> `[/link]` <br/>  `[/course]` <br/> `[/spec]` <br/>`[/grad]` <br/> `[/priority]` <br/> `[/tag]` | `create /name [name] [/optional fields`]<br><br> e.g., `create /name Oreki` <br> `create /name Ness /phone +6598765432 /grad AY2526-S2` | Creates a new contact in NetworkBook. <br>If optional fields are provided, their values will be added to the contact. |
-| **add** | `[/phone]`  <br>`[/email]` <br> `[/link]` <br> `[/course]` <br> `[/spec]` <br> `[/grad]` <br>`[/priority]` <br> `[/tag]` | `add [index] /phone [phone]` <br>`add [index] /email [email]`<br/>`add [index] /link [link]`<br/>`add [index] /course [course]`<br/>`add [index] /spec [specialisation]`<br/>`add [index] /grad [semester of graduation]`<br>`add [index] /priority [priority]`<br>`add [index] /tag [tag]`<br><br> e.g., `add 2 /email test@example.com` <br/>`add 1 /link https://nknguyenhc.github.io/`<br/>`add 1 /grad AY2223-S1` <br>`add 1 /priority high` | Adds information to the contact.                             |
-| **edit**   | Single-value fields: <br>`[/name]` <br/> `[/grad]` <br/>`[/priority]`<br><br>Multi-value fields which require `[/index]`: <br> `[/phone]`  <br/>`[/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]`  <br/> `[/tag]` | Single-value fields: <br> `edit [index of contact] /field [new value]` <br/><br/> e.g., `edit 1 /name Nguyen` <br/> `edit 1 /grad AY2627-S1` <br><br> Multi-value fields: <br> `edit [index of contact] /field [new value] /index [index of old value]`<br/> <br/>e.g., `edit 1 /email aaa@gmail.com /index 1` <br> `edit 1 /course CS2109S /index 1` | Edits information about a contact. |
+| **create** | `/name` <br> `[/phone]` <br/> `[/email] `<br/> `[/link]` <br/>  `[/course]` <br/> `[/spec]` <br/>`[/grad]` <br/> `[/priority]` <br/> `[/tag]` | `create /name [name] [/optional fields]` <br><br> e.g., `create /name Oreki` <br> `create /name Ness /phone +6598765432 /grad AY2526-S2` | Creates a new contact in NetworkBook. <br><br> If optional fields are provided, their values will be added to the contact. |
+| **add** | `[/phone]`  <br>`[/email]` <br> `[/link]` <br> `[/course]` <br> `[/spec]` <br> `[/grad]` <br>`[/priority]` <br> `[/tag]` | `add [index] /phone [phone]` <br>`add [index] /email [email]`<br/>`add [index] /link [link]`<br/>`add [index] /course [course]`<br/>`add [index] /spec [specialisation]`<br/>`add [index] /grad [semester of graduation]`<br>`add [index] /priority [priority]`<br>`add [index] /tag [tag]`<br><br> e.g., `add 2 /email test@example.com` <br/>`add 1 /link https://nknguyenhc.github.io/`<br/>`add 1 /grad AY2223-S1` <br>`add 1 /priority high` | Adds information to a contact.                             |
+| **edit**   | Single-valued fields: <br>`[/name]` <br/> `[/grad]` <br/>`[/priority]`<br><br>Multi-valued fields which require `[/index]`: <br> `[/phone]`  <br/>`[/email]` <br/> `[/link]` <br/> `[/course]` <br/> `[/spec]`  <br/> `[/tag]` | Single-valued fields: <br> `edit [index of contact] /field [new value]` <br/><br/> e.g., `edit 1 /name Nguyen` <br/> `edit 1 /grad AY2627-S1` <br><br> Multi-valued fields: <br> `edit [index of contact] /field [new value] /index [index of old value]`<br/> <br/>e.g., `edit 1 /email aaa@gmail.com /index 1` <br> `edit 1 /course CS2109S /index 1` | Edits information about a contact. |
 | **delete** | N/A                                                          | `delete [index]`<br/><br>e.g., `delete 1`                    | Deletes a contact from NetworkBook.                          |
 | **find**   | N/A                                                          | `find [name]` <br/><br> e.g., `find Ness`                    | Searches for contacts by name.                          |
 | **sort**   | `/by` <br> `[/order]` | `sort /by [field] /order [order]`<br/><br>e.g., `sort /by priority /order desc` | Sorts contacts by a field. |
@@ -272,7 +272,7 @@ Example usage:
 
 #### Launching NetworkBook 
 
-**Q:** How can I launch NetworkBook if the clicking on the JAR file does not work on my Windows computer?
+**Q:** How can I launch NetworkBook if the clicking on the JAR file does not work on my Windows computer? <br>
 **A:** If you are familiar with the command prompt, you can follow the steps below:
 
 1. Open command prompt on your computer
@@ -284,12 +284,12 @@ If you have any further issues, please raise an issue on our [GitHub page](https
 
 #### Checking Java version
 
-**Q:** How can I check my Java version?
-**A: **Open command prompt (Windows) or terminal (MacOS or Linux) on your computer, and type `java -version` . If you do not have Java installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+**Q:** How can I check my Java version? <br>
+**A:** Open command prompt (Windows) or terminal (MacOS or Linux) on your computer, and type `java -version` . If you do not have Java installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
 #### Loading data from another device
 
-**Q:** How can I load my contacts stored in NetworkBook used in another device?
+**Q:** How can I load my contacts stored in NetworkBook used in another device? <br>
 **A:** Locate the data file stored at `[JAR file location]/data/networkbook.json`. Copy over the data file to the corresponding location on your current device. After that, launch NetworkBook to check whether your contact details have been loaded properly.
 
 [Table of Contents](#table-of-contents)
