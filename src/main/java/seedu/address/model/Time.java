@@ -68,17 +68,17 @@ public class Time {
     }
 
     public static DayOfWeek decodeDay(String day) {
-        if (DayOfWeek.MONDAY.toString().toLowerCase().contains(day)) {
+        if (DayOfWeek.MONDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.MONDAY;
-        } else if (DayOfWeek.TUESDAY.toString().toLowerCase().contains(day)) {
+        } else if (DayOfWeek.TUESDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.TUESDAY;
-        } else if (DayOfWeek.WEDNESDAY.toString().toLowerCase().contains(day)) {
+        } else if (DayOfWeek.WEDNESDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.WEDNESDAY;
-        } else if (DayOfWeek.THURSDAY.toString().toLowerCase().contains(day)) {
+        } else if (DayOfWeek.THURSDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.THURSDAY;
-        } else if (DayOfWeek.FRIDAY.toString().toLowerCase().contains(day)) {
+        } else if (DayOfWeek.FRIDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.FRIDAY;
-        } else if (DayOfWeek.SATURDAY.toString().toLowerCase().contains(day)) {
+        } else if (DayOfWeek.SATURDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.SATURDAY;
         } else {
             return DayOfWeek.SUNDAY;
