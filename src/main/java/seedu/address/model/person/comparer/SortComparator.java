@@ -56,6 +56,14 @@ public abstract class SortComparator implements Comparator<Person> {
     }
 
     /**
+     * Sets whether to sort in reverse order
+     *
+     */
+    public void setIsReverse(boolean isReverse) {
+        this.isReverse = isReverse;
+    }
+
+    /**
      * Returns the priority of this comparator.
      *
      * @return The priority of this comparator.
