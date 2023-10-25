@@ -7,12 +7,12 @@ ManaGease is a **desktop app for managing full time staff in any workplace, opti
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start (Coming soon)
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer. 
-2. Download the latest `ManaGease.jar` from [here](https://github.com/se-edu/addressbook-level3/releases)
+2. Download the latest `ManaGease.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-2/tp/releases)
 3. Copy the file to the folder you want to use as the _home folder_ for your ManaGease. 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ManaGease.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in(i.e. `cd DIRECTORY_PATH`), and enter the `java -jar ManaGease.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -23,6 +23,10 @@ ManaGease is a **desktop app for managing full time staff in any workplace, opti
    * `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789 /jd 2023-09-12 /s 1000 /al 10`: Adds an employee named `John Doe` to ManaGease
 
    * `delete 3` : Deletes the 3rd employee shown in the current list.
+   
+   * `read 3 /b` : Reads the bank account of the 3rd employee shown in the current list.
+   
+   * `edit 2 /n Betsy Crower` : Edits the name of the 2nd employee to be `Betsy Crower`.
 
    * `clear` : Deletes all employees.
 
@@ -39,16 +43,16 @@ Refer to the [Features](#features) below for details of each command.
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `edit INDEX /n NAME`, `INDEX` and `NAME` are parameters which can be used as `edit 3 /n John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `/n NAME [/t TAG]` can be used as `/n John Doe /t friend` or as `/n John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[/t TAG]…​` can be used as ` ` (i.e. 0 times), `/t friend`, `/t friend /t family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `/n NAME /p PHONE_NUMBER`, `/p PHONE_NUMBER /n NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -74,7 +78,7 @@ This feature allows users to add a new employee to the ManaGease app, creating a
 
 **Command format:**
 ```
-add /n NAME /e EMAIL /p PHONE /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /al ANNUAL_LEAVE
+add /n NAME [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]
 ```
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -83,15 +87,13 @@ A person must have at least the NAME parameter, but can have any number of param
 
 Example:
 * `add /n Jane Smith /e jane@email.com /p 12345678 /a 123 Main St /b 123456789
-  /jd 2023-09-12 /s 1000 /al 10`
+  /jd 12/09/2023 /s 1000.00 /l 10`
 
 Output:
-* The ScheduleEase app should display a confirmation message indicating that the employee has been successfully added to the database. (e.g. Employee "Jane Smith" successfully added!)
-
+* The ScheduleEase app should display a confirmation message indicating that the employee has been successfully added to the database. (e.g. `Employee "Jane Smith" successfully added!`)
 * The employee's profile should be updated with the provided information.
-  
-* “Employee “Jane Smith” successfully added”
-* If tag used is not defined, an error message will appear and say "Tag not found, please use any of the following tags: /n, /e, /p, /a, /b, /jd, /s, /al"
+
+* If prefix used is not defined, an error message will appear and say `Prefix not found, please use any of the following prefixes: /n, /e, /p, /a, /b, /jd, /s, /l`
 
 ![result for adding employee](images/addSuccess.png)
 ![failed result for adding employee](images/addFailed.png)
@@ -105,7 +107,7 @@ Edits an existing person in the address book.
 
 **Command Format:**
 
-`edit INDEX [/n NAME] [/p PHONE] [/e EMAIL] [/a ADDRESS] `
+`edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE] `
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -116,13 +118,11 @@ Examples:
 *  `edit 2 /n Betsy Crower ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 Output:
-* The ScheduleEase app should display a confirmation message indicating that the employee information has been successfully updated.
-  
-* Specifying the part that has been updated
+* The ScheduleEase app should display a confirmation message indicating that the employee information has been successfully updated, specifying the part that has been updated.
   
 * The employee's profile should be updated with the provided information.
   
-* “Employee 3’s information successfully updated!”
+* `Employee 3’s information successfully updated!`
 
 ![result for editing employee](images/editSuccess.png)
 
@@ -130,6 +130,7 @@ Output:
 ### Deleting a person : `delete`
 
 **What it does**
+
 This feature allows users to delete an employee based on index or name.
 
 **Command Format**
@@ -151,7 +152,7 @@ Output:
 * Otherwise, the ScheduleEase app should display a confirmation message indicating that the employee information has been successfully deleted. 
   * Specifying the part that has been updated
     
-  * “Employee “Jane Smith” has been removed”
+  * `Employee “Jane Smith” has been removed`
     
 * The employee's list should be updated by removing the employee.
 
@@ -163,13 +164,14 @@ Output:
 ### Reading a person's information : `read`
 
 **What it does**
+
 This feature allows users to view specific information about an employee.
 
 **Command Format**
 
-`read INDEX INFORMATION`
+`read INDEX PREFIX`
 
-* Reads the person's `INFORMATION` at the specified `INDEX`.
+* Reads the person's information specified by the `PREFIX` at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer**.
 
@@ -178,13 +180,13 @@ Examples:
 
 Output:
 
-* If the index is not within the numbers in the list, the app should display “Please enter a valid index number”.
+* If the index is not within the numbers in the list, the app should display `Please enter a valid index number`.
   
-* If the command is incorrect, the app should display “Please use the following format to read information : read INDEX INFORMATION”
+* If the command is incorrect, the app should display `Please use the following format to read information : read INDEX INFORMATION`.
   
-* If the INFORMATION provided is not in the list, the app should display “Please provide a valid information to read”.
+* If the `PREFIX` provided is not in the list, the app should display `Please provide a valid information prefix to read`.
   
-* If the INFORMATION has not been stored in the list, the app should display “There isn’t any information on this employee’s INFORMATION”
+* If the `PREFIX` has not been stored in the list, the app should display `There isn’t any information on this employee’s specified PREFIX`.
 
 
 
@@ -279,12 +281,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                       |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add /n NAME /p PHONE_NUMBER /e EMAIL /a ADDRESS`     <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`    |
-| **Clear**  | `clear`                                                                                                                                                                |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                    |
-| **Edit**   | `edit INDEX /n NAME /e EMAIL /p PHONE_NUMBER /a ADDRESS /b BANK_ACCOUNT /jd JOIN_DATE /s SALARY /al ANNUAL_LEAVE`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-| **Read**   | `read INDEX PARAM`<br> e.g., `read 3 /n`                                                                                                                               |
-| **List**   | `list`                                                                                                                                                                 |
-| **Help**   | `help`                                                                                                                                                                 |
+| Action     | Format, Examples                                                                                                                                                                                                                   |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add /n NAME [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`     <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                                                                                            |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                |
+| **Edit**   | `edit INDEX [/n NAME] [/e EMAIL] [/p PHONE] [/a ADDRESS] [/b BANK_ACCOUNT] [/jd JOIN_DATE] [/s SALARY] [/l ANNUAL_LEAVE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                     |
+| **Read**   | `read INDEX PREFIX`<br> e.g., `read 3 /n`                                                                                                                                                                                          |
+| **List**   | `list`                                                                                                                                                                                                                             |
+| **Help**   | `help`                                                                                                                                                                                                                             |

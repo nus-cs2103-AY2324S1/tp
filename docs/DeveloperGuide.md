@@ -311,6 +311,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 	
          Use case ends.
 
+<br>
+
 **Use case: Edit information of existing full-time staff members**
 
 **MSS**
@@ -329,6 +331,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 	
    	     Use case ends.
 
+<br>
+
 **Use case: Read information on existing full-time staff members**
 
 **MSS**
@@ -346,6 +350,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 	
         Use case ends.
 
+<br>
+
 **Use case: Delete existing full-time staff members**
 
 **MSS**
@@ -358,16 +364,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. Invalid command parameters are given.
-  
- * 1a1. ManaGease shows an error message.
- 
-   	Use case ends.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
  
 * 1b. User requests to delete existing member via name.
   
 	 * 1b1. ManaGease will display a list of members with the same name.
  
          Use case ends.
+
+<br>
+
+**Use case: Generate a PDF payslip for a specific employee**
+
+**MSS**
+
+1. User requests to generate a payslip for a specific employee.
+2. ManaGease generates a PDF payslip for the employee.
+3. ManaGease displays a confirmation message that a payslip has been generated.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command parameters are given.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
+
+* 2a. Template file for the payslip is not found.
+
+    * 2a1. ManaGease shows an error message.
+
+      Use case ends.
+
+
 
 *{More to be added}*
 
