@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.ShortcutAlias;
 
 /**
  * A Serializable class that contains the shortcut settings.
@@ -30,12 +32,12 @@ public class ShortcutSettings implements Serializable {
 
     /**
      * Registers the new mapping.
-     * @param alias New alias for an existing command word
+     * @param shortcutAlias New alias for an existing command word
      * @param commandWord The command word to be mapped to the alias
      * @return The alias' previously mapped command word if any, else returns null.
      */
-    public String registerShortcut(String alias, String commandWord) {
-        return shortcutMap.put(alias, commandWord);
+    public String registerShortcut(ShortcutAlias shortcutAlias, CommandWord commandWord) {
+        return shortcutMap.put(shortcutAlias.alias, commandWord.keyword);
     }
 
     /**

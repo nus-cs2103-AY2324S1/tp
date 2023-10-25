@@ -8,6 +8,9 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandWord;
+import seedu.address.logic.commands.ShortcutAlias;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
@@ -19,7 +22,7 @@ import seedu.address.model.person.Specialty;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *ParserComplex classes.
+ * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
 
@@ -170,7 +173,7 @@ public class ParserUtil {
      * Parses {@code String age} into a {@code Age}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code age} is invalid.
      */
     public static Age parseAge(String age) throws ParseException {
         requireNonNull(age);
@@ -179,5 +182,35 @@ public class ParserUtil {
             throw new ParseException(Age.MESSAGE_CONSTRAINTS);
         }
         return new Age(trimmedAge);
+    }
+
+    /**
+     * Parses {@code String commandWord} into a {@code CommandWord}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code commandWord} is invalid.
+     */
+    public static CommandWord parseCommandWord(String commandWord) throws ParseException {
+        requireNonNull(commandWord);
+        String trimmedCommandWord = commandWord.trim();
+        if (!CommandWord.isValidCommandWord(trimmedCommandWord)) {
+            throw new ParseException(CommandWord.MESSAGE_CONSTRAINTS);
+        }
+        return new CommandWord(trimmedCommandWord);
+    }
+
+    /**
+     * Parses {@code String alias} into a {@code ShortcutAlias}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code alias} is invalid.
+     */
+    public static ShortcutAlias parseShortcutAlias(String alias) throws ParseException {
+        requireNonNull(alias);
+        String trimmedAlias = alias.trim();
+        if (!ShortcutAlias.isValidShortcutAlias(trimmedAlias)) {
+            throw new ParseException(ShortcutAlias.MESSAGE_CONSTRAINTS);
+        }
+        return new ShortcutAlias(trimmedAlias);
     }
 }
