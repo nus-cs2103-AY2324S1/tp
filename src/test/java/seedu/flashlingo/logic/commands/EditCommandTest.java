@@ -133,7 +133,7 @@ public class EditCommandTest {
         String editTranslation = flashCard.getOriginalWord().getWord();
         EditCommand editCommand = new EditCommand(index, editWord, editTranslation);
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", replacedWord="
-                + editWord + ", replacedTranslation=" + editTranslation +  "}";
+                + editWord + ", replacedTranslation=" + editTranslation + "}";
         assertEquals(expected, editCommand.toString());
     }
 

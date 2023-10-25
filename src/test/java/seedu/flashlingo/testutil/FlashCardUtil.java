@@ -1,13 +1,12 @@
 package seedu.flashlingo.testutil;
 
-import seedu.flashlingo.logic.commands.AddCommand;
-import seedu.flashlingo.model.flashcard.FlashCard;
-
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD_LANGUAGE;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD_LANGUAGE;
 
+import seedu.flashlingo.logic.commands.AddCommand;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * A utility class for FlashCard.

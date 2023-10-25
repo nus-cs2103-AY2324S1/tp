@@ -2,8 +2,8 @@ package seedu.flashlingo.logic.commands;
 
 import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.showFlashCardAtIndex;
-import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
+import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -14,7 +14,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.logic.commands.FindCommand;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;

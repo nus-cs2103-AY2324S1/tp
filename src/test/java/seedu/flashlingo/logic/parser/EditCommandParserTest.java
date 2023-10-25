@@ -4,9 +4,9 @@ import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.TRANSLATION_DESC_AMY;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.TRANSLATION_DESC_BOB;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.WORD_DESC_AMY;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_AMY;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 import static seedu.flashlingo.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_AMY;
 import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 
 import org.junit.jupiter.api.Test;

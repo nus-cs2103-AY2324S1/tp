@@ -1,12 +1,5 @@
 package seedu.flashlingo.testutil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import seedu.flashlingo.model.Flashlingo;
-import seedu.flashlingo.model.flashcard.FlashCard;
-
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_AMY;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_BOB;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_LANGUAGE;
@@ -14,6 +7,12 @@ import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_BOB;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_LANGUAGE;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.flashlingo.model.Flashlingo;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
