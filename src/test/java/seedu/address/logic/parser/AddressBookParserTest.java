@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +19,8 @@ import seedu.address.logic.commands.AddTutorCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteScheduleCommand;
 import seedu.address.logic.commands.DeleteTutorCommand;
+import seedu.address.logic.commands.EditScheduleCommand;
+import seedu.address.logic.commands.EditScheduleCommand.EditScheduleDescriptor;
 import seedu.address.logic.commands.EditTutorCommand;
 import seedu.address.logic.commands.EditTutorCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -25,11 +28,13 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ListTutorCommand;
+import seedu.address.logic.commands.UnmarkScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditScheduleDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.ScheduleBuilder;
@@ -102,6 +107,23 @@ public class AddressBookParserTest {
                 (AddScheduleCommand) parser.parseCommand(ScheduleUtil.getAddScheduleCommand(schedule));
         assertEquals(new AddScheduleCommand(INDEX_FIRST_PERSON, schedule.getStartTime(), schedule.getEndTime()),
                 command);
+    }
+
+    @Test
+    public void parseCommand_editSchedule() throws Exception {
+        Schedule schedule = new ScheduleBuilder().build();
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder(schedule).build();
+        EditScheduleCommand expectedCommand = (EditScheduleCommand) parser.parseCommand(EditScheduleCommand.COMMAND_WORD
+            + " " + INDEX_FIRST_SCHEDULE.getOneBased() + " "
+            + ScheduleUtil.getEditScheduleDescriptorDetails(descriptor));
+        assertEquals(new EditScheduleCommand(INDEX_FIRST_SCHEDULE, descriptor), expectedCommand);
+    }
+
+    @Test
+    public void parseCommand_unmarkSchedule() throws Exception {
+        UnmarkScheduleCommand command = (UnmarkScheduleCommand) parser.parseCommand(
+            UnmarkScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_SCHEDULE.getOneBased());
+        assertEquals(new UnmarkScheduleCommand(INDEX_FIRST_SCHEDULE), command);
     }
 
     @Test

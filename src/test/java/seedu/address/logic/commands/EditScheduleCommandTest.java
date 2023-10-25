@@ -12,6 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showScheduleAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SCHEDULE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_SCHEDULE;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
 import static seedu.address.testutil.TypicalSchedules.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
@@ -25,7 +27,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.StartTime;
 import seedu.address.testutil.EditScheduleDescriptorBuilder;
 import seedu.address.testutil.ScheduleBuilder;
 
@@ -40,13 +44,13 @@ public class EditScheduleCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Schedule editedSchedule = new ScheduleBuilder().build();
         EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder(editedSchedule).build();
-        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_SCHEDULE, descriptor);
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_SCHEDULE, descriptor);
 
         String expectedMessage = String.format(EditScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS,
             Messages.format(editedSchedule));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setSchedule(model.getFilteredScheduleList().get(0), editedSchedule);
+        expectedModel.setSchedule(model.getFilteredScheduleList().get(1), editedSchedule);
 
         assertCommandSuccess(editScheduleCommand, model, expectedMessage, expectedModel);
     }
@@ -110,32 +114,52 @@ public class EditScheduleCommandTest {
 
     @Test
     public void execute_duplicateScheduleUnfilteredList_failure() {
-        Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
-        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder(firstSchedule).build();
-        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_SCHEDULE, descriptor);
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_SCHEDULE,
+            new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN).build());
 
         assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE);
     }
 
     @Test
     public void execute_duplicateScheduleFilteredList_failure() {
-        showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
-
-        // edit schedule in filtered list into a duplicate in address book
-        Schedule scheduleInList = model.getAddressBook().getScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
+        showScheduleAtIndex(model, INDEX_SECOND_SCHEDULE);
 
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_SCHEDULE,
-            new EditScheduleDescriptorBuilder(scheduleInList).build());
+            new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN).build());
 
         assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE);
     }
 
     @Test
-    public void execute_clashingScheduleUnfilteredList_failure() {
-        Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
-        Schedule secondSchedule = model.getFilteredScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
+    public void execute_startTimeEqualsEndTime_failure() {
         EditScheduleDescriptor descriptor =
-            new EditScheduleDescriptorBuilder(firstSchedule).withEndTime(secondSchedule.getEndTime())
+            new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN)
+                .withEndTime(new EndTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().value))
+                .build();
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_THIRD_SCHEDULE, descriptor);
+
+        assertCommandFailure(editScheduleCommand, model, Schedule.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void execute_startTimeAfterEndTime_failure() {
+        EndTime endTime = new EndTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().value);
+        EditScheduleDescriptor descriptor =
+            new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN)
+                .withStartTime(new StartTime(SCHEDULE_ALICE_FIRST_JAN.getEndTime().value))
+                .withEndTime(endTime)
+                .build();
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_THIRD_SCHEDULE, descriptor);
+
+        assertCommandFailure(editScheduleCommand, model, Schedule.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void execute_clashingScheduleUnfilteredList_failure() {
+        Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
+        Schedule secondSchedule = model.getFilteredScheduleList().get(INDEX_THIRD_SCHEDULE.getZeroBased());
+        EditScheduleDescriptor descriptor =
+            new EditScheduleDescriptorBuilder(firstSchedule).withStartTime(secondSchedule.getStartTime())
                 .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_SECOND_SCHEDULE, descriptor);
 
@@ -144,14 +168,14 @@ public class EditScheduleCommandTest {
 
     @Test
     public void execute_clashingScheduleFilteredList_failure() {
-        Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
-        showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
+        Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
+        showScheduleAtIndex(model, INDEX_SECOND_SCHEDULE);
 
-        // edit schedule in filtered list into a duplicate in address book
-        Schedule scheduleInList = model.getAddressBook().getScheduleList().get(INDEX_SECOND_SCHEDULE.getZeroBased());
+        // edit schedule in filtered list into a clashing one in address book
+        Schedule scheduleInList = model.getAddressBook().getScheduleList().get(INDEX_THIRD_SCHEDULE.getZeroBased());
 
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST_SCHEDULE,
-            new EditScheduleDescriptorBuilder(scheduleInList).withStartTime(firstSchedule.getStartTime())
+            new EditScheduleDescriptorBuilder(scheduleInList).withEndTime(firstSchedule.getEndTime())
                 .build());
 
         assertCommandFailure(editScheduleCommand, model, EditScheduleCommand.MESSAGE_CLASHING_SCHEDULE);

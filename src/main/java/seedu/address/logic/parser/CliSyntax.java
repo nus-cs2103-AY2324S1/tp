@@ -11,8 +11,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
 
     /* Schedule prefix definitions */
-    public static final Prefix PREFIX_START_TIME = new Prefix("s/");
-    public static final Prefix PREFIX_END_TIME = new Prefix("e/");
+    public static final Prefix PREFIX_START_TIME = new Prefix("st/");
+    public static final Prefix PREFIX_END_TIME = new Prefix("et/");
     public static final Prefix PREFIX_STATUS = new Prefix("m/");
 
 

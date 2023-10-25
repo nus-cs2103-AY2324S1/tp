@@ -12,7 +12,7 @@ public enum Status {
     COMPLETED,
     PENDING;
 
-    public static final String MESSAGE_CONSTRAINTS = "Status has to be either MISSED (m/ 0) or COMPLETED (m/1)";
+    public static final String MESSAGE_CONSTRAINTS = "Status has to be either MISSED (m/0) or COMPLETED (m/1)";
 
     /**
      * Checks if the provided status string is a valid schedule status.

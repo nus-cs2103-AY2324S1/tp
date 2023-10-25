@@ -53,8 +53,7 @@ public class EditScheduleDescriptorTest {
             .EditScheduleDescriptor();
         String expected = EditScheduleCommand.EditScheduleDescriptor.class.getCanonicalName() + "{startTime="
             + editScheduleDescriptor.getStartTime().orElse(null) + ", endTime="
-            + editScheduleDescriptor.getEndTime().orElse(null) + ", tutor="
-            + editScheduleDescriptor.getTutor().orElse(null) + "}";
+            + editScheduleDescriptor.getEndTime().orElse(null) + "}";
         assertEquals(expected, editScheduleDescriptor.toString());
     }
 }
