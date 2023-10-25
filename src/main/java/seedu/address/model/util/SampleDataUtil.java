@@ -52,10 +52,10 @@ public class SampleDataUtil {
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("Example"), true);
 
-        Applicant sampleApplicant3 = new Applicant(new Name("Roy Balakrishnan"),
-                new Phone("92624417"), new Email("royb@example.com"),
+        Applicant sampleApplicant3 =
+                new Applicant(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), true);
+                getTagSet("Example"), true);
 
         return new Interview[] {
             new Interview(sampleApplicant, "Frontend Engineer", "Sample Time"),
