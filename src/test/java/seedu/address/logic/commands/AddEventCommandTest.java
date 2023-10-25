@@ -29,14 +29,14 @@ public class AddEventCommandTest {
     }
 
     @Test
-    public void execute_correctCommand_success() throws CommandException {
+    public void execute_correctCommand_success() {
         ContactID contactID = ContactID.fromInt(1);
         assertCommandSuccessWithFeedback(() -> new AddEventCommand(contactID, VALID_EVENT_0)
                 .execute(model), AddEventCommand.MESSAGE_SUCCESS + VALID_EVENT_0.getName());
     }
 
     @Test
-    public void execute_personNotExist_fails() throws CommandException {
+    public void execute_personNotExist_fails() {
         ContactID contactID = ContactID.fromInt(99999);
         assertCommandFailWithFeedback(() -> new AddEventCommand(contactID, VALID_EVENT_SAME_NAME_0)
                 .execute(model), AddEventCommand.MESSAGE_CONTACT_NOT_FOUND + contactID);
