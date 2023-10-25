@@ -9,17 +9,15 @@ import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.CommandTestUtil;
-import networkbook.logic.commands.EditCommand;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
-import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
-import networkbook.testutil.EditPersonDescriptorBuilder;
+import networkbook.testutil.AddPersonDescriptorBuilder;
 import networkbook.testutil.TypicalIndexes;
 
 public class AddCommandParserTest {
@@ -59,9 +57,6 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_NAME_DESC,
-                Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser,
                 "1" + CommandTestUtil.INVALID_PHONE_DESC,
                 Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser,
@@ -93,9 +88,16 @@ public class AddCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_NAME_DESC + CommandTestUtil.INVALID_EMAIL_DESC
+                "1" + CommandTestUtil.INVALID_EMAIL_DESC
                         + CommandTestUtil.VALID_LINK_AMY + CommandTestUtil.VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+                Email.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_nameSpecified_failure() {
+        Index index = TypicalIndexes.INDEX_FIRST_PERSON;
+        String userInput = index.getOneBased() + CommandTestUtil.VALID_NAME_DESC;
+        assertParseFailure(parser, userInput, AddCommandParser.MESSAGE_MULTIPLE_NAMES);
     }
 
     @Test
@@ -105,10 +107,9 @@ public class AddCommandParserTest {
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
                 + CommandTestUtil.GRADUATION_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
                 + CommandTestUtil.SPECIALISATION_DESC_AMY
-                + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.TAG_DESC_FRIEND;
+                + CommandTestUtil.TAG_DESC_FRIEND;
 
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
-                .withName(CommandTestUtil.VALID_NAME_AMY)
+        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .withEmail(CommandTestUtil.VALID_EMAIL_AMY)
                 .withLink(CommandTestUtil.VALID_LINK_AMY)
@@ -127,7 +128,7 @@ public class AddCommandParserTest {
         Index targetIndex = TypicalIndexes.INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_AMY;
 
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
                 .withEmail(CommandTestUtil.VALID_EMAIL_AMY).build();
         AddCommand expectedCommand = new AddCommand(targetIndex, descriptor);
@@ -137,56 +138,50 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
-        // name
         Index targetIndex = TypicalIndexes.INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + CommandTestUtil.NAME_DESC_AMY;
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
-                .withName(CommandTestUtil.VALID_NAME_AMY)
-                .build();
-        AddCommand expectedCommand = new AddCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(CommandTestUtil.VALID_PHONE_AMY).build();
-        expectedCommand = new AddCommand(targetIndex, descriptor);
+        String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_AMY;
+        AddCommand.AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
+                .withPhone(CommandTestUtil.VALID_PHONE_AMY).build();
+        AddCommand expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + CommandTestUtil.EMAIL_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withEmail(CommandTestUtil.VALID_EMAIL_AMY).build();
+        descriptor = new AddPersonDescriptorBuilder().withEmail(CommandTestUtil.VALID_EMAIL_AMY).build();
         expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // link
         userInput = targetIndex.getOneBased() + CommandTestUtil.LINK_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withLink(CommandTestUtil.VALID_LINK_AMY).build();
+        descriptor = new AddPersonDescriptorBuilder().withLink(CommandTestUtil.VALID_LINK_AMY).build();
         expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // graduation date
         userInput = targetIndex.getOneBased() + CommandTestUtil.GRADUATION_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withGraduation(CommandTestUtil.VALID_GRADUATION_AMY)
+        descriptor = new AddPersonDescriptorBuilder().withGraduation(CommandTestUtil.VALID_GRADUATION_AMY)
                     .build();
         expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // course
         userInput = targetIndex.getOneBased() + CommandTestUtil.COURSE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withCourse(CommandTestUtil.VALID_COURSE_AMY).build();
+        descriptor = new AddPersonDescriptorBuilder().withCourse(CommandTestUtil.VALID_COURSE_AMY).build();
         expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // specialisation
         userInput = targetIndex.getOneBased() + CommandTestUtil.SPECIALISATION_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY)
+        descriptor = new AddPersonDescriptorBuilder().withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY)
                     .build();
         expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + CommandTestUtil.TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(CommandTestUtil.VALID_TAG_FRIEND).build();
+        descriptor = new AddPersonDescriptorBuilder().withTags(CommandTestUtil.VALID_TAG_FRIEND).build();
         expectedCommand = new AddCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

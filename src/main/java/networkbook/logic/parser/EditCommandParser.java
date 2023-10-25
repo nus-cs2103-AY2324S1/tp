@@ -2,22 +2,29 @@ package networkbook.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.EditCommand;
-import networkbook.logic.commands.EditCommand.EditPersonDescriptor;
+import networkbook.logic.commands.edit.EditAction;
+import networkbook.logic.commands.edit.EditCommand;
+import networkbook.logic.commands.edit.EditCourseAction;
+import networkbook.logic.commands.edit.EditEmailAction;
+import networkbook.logic.commands.edit.EditGraduationAction;
+import networkbook.logic.commands.edit.EditLinkAction;
+import networkbook.logic.commands.edit.EditNameAction;
+import networkbook.logic.commands.edit.EditPhoneAction;
+import networkbook.logic.commands.edit.EditPriorityAction;
+import networkbook.logic.commands.edit.EditSpecialisationAction;
+import networkbook.logic.commands.edit.EditTagAction;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
+import networkbook.model.person.Graduation;
 import networkbook.model.person.Link;
+import networkbook.model.person.Name;
 import networkbook.model.person.Phone;
+import networkbook.model.person.Priority;
 import networkbook.model.person.Specialisation;
 import networkbook.model.tag.Tag;
-import networkbook.model.util.UniqueList;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -41,7 +48,9 @@ public class EditCommandParser implements Parser<EditCommand> {
                         CliSyntax.PREFIX_GRADUATION,
                         CliSyntax.PREFIX_COURSE,
                         CliSyntax.PREFIX_SPECIALISATION,
-                        CliSyntax.PREFIX_TAG
+                        CliSyntax.PREFIX_TAG,
+                        CliSyntax.PREFIX_PRIORITY,
+                        CliSyntax.PREFIX_INDEX
                 );
 
         Index index;
@@ -58,135 +67,107 @@ public class EditCommandParser implements Parser<EditCommand> {
             );
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(
+        Prefix prefix = argMultimap.verifyExactlyOneIsPresent(
                 CliSyntax.PREFIX_NAME,
                 CliSyntax.PREFIX_PHONE,
                 CliSyntax.PREFIX_EMAIL,
                 CliSyntax.PREFIX_LINK,
                 CliSyntax.PREFIX_GRADUATION,
                 CliSyntax.PREFIX_COURSE,
-                CliSyntax.PREFIX_SPECIALISATION
+                CliSyntax.PREFIX_SPECIALISATION,
+                CliSyntax.PREFIX_TAG,
+                CliSyntax.PREFIX_PRIORITY
         );
 
-        EditPersonDescriptor editPersonDescriptor = generateEditPersonDescriptor(argMultimap);
+        argMultimap.verifyIfPresentThenOnlyOne(new Prefix[] {
+            CliSyntax.PREFIX_PHONE,
+            CliSyntax.PREFIX_EMAIL,
+            CliSyntax.PREFIX_LINK,
+            CliSyntax.PREFIX_COURSE,
+            CliSyntax.PREFIX_SPECIALISATION,
+            CliSyntax.PREFIX_TAG
+        }, CliSyntax.PREFIX_INDEX);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
+        EditAction action = generateAction(argMultimap, prefix);
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, action);
     }
 
-    /**
-     * Creates an {@code EditPersonDescriptor} based on the arguments provided in an edit or add command.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public static EditPersonDescriptor generateEditPersonDescriptor(ArgumentMultimap argMultimap)
-            throws ParseException {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-
-        if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(
-                    ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get()));
-        }
-        parsePhonesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_PHONE))
-                .ifPresent(editPersonDescriptor::setPhones);
-        parseEmailsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_EMAIL))
-                .ifPresent(editPersonDescriptor::setEmails);
-        parseLinksForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_LINK))
-                .ifPresent(editPersonDescriptor::setLinks);
-        if (argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).isPresent()) {
-            editPersonDescriptor.setGraduation(
-                    ParserUtil.parseGraduation(argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).get()));
-        }
-        parseCoursesForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_COURSE))
-                .ifPresent(editPersonDescriptor::setCourses);
-        parseSpecialisationsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_SPECIALISATION))
-                .ifPresent(editPersonDescriptor::setSpecialisations);
-        parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG))
-                .ifPresent(editPersonDescriptor::setTags);
-        if (argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).isPresent()) {
-            editPersonDescriptor.setPriority(
-                    ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).get()));
+    private static EditAction generateAction(ArgumentMultimap argMultimap, Prefix prefix) throws ParseException {
+        EditAction result = null;
+        if (prefix.equals(CliSyntax.PREFIX_NAME)) {
+            result = generateNameAction(argMultimap);
+        } else if (prefix.equals(CliSyntax.PREFIX_PHONE)) {
+            result = generatePhoneAction(argMultimap);
+        } else if (prefix.equals(CliSyntax.PREFIX_EMAIL)) {
+            result = generateEmailAction(argMultimap);
+        } else if (prefix.equals(CliSyntax.PREFIX_LINK)) {
+            result = generateLinkAction(argMultimap);
+        } else if (prefix.equals(CliSyntax.PREFIX_GRADUATION)) {
+            result = generateGraduationAction(argMultimap);
+        } else if (prefix.equals(CliSyntax.PREFIX_COURSE)) {
+            result = generateCourseAction(argMultimap);
+        } else if (prefix.equals(CliSyntax.PREFIX_SPECIALISATION)) {
+            result = generateSpecialisationAction(argMultimap);
+        } else if (prefix.equals(CliSyntax.PREFIX_TAG)) {
+            result = generateTagAction(argMultimap);
+        } else if (prefix.equals(CliSyntax.PREFIX_PRIORITY)) {
+            result = generatePriorityAction(argMultimap);
         }
 
-        return editPersonDescriptor;
+        requireNonNull(result);
+        return result;
     }
 
-    /**
-     * Parses {@code Collection<String> phones} into a {@code UniqueList<Phone>} wrapped in an {@code Optional}.
-     */
-    private static Optional<UniqueList<Phone>> parsePhonesForEdit(Collection<String> phones) throws ParseException {
-        requireNonNull(phones);
-
-        if (phones.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(ParserUtil.parsePhones(phones));
+    private static EditAction generateNameAction(ArgumentMultimap argMultimap) throws ParseException {
+        Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
+        return new EditNameAction(name);
     }
 
-    /**
-     * Parses {@code Collection<String> emails} into a {@code UniqueList<Email>} wrapped in an {@code Optional}.
-     */
-    private static Optional<UniqueList<Email>> parseEmailsForEdit(Collection<String> emails) throws ParseException {
-        requireNonNull(emails);
-
-        if (emails.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(ParserUtil.parseEmails(emails));
+    private static EditAction generatePhoneAction(ArgumentMultimap argMultimap) throws ParseException {
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        return new EditPhoneAction(index, phone);
     }
 
-    /**
-     * Parses {@code Collection<String> links} into a {@code UniqueList<Link>} wrapped in an {@code Optional}.
-     */
-    private static Optional<UniqueList<Link>> parseLinksForEdit(Collection<String> links) throws ParseException {
-        requireNonNull(links);
-
-        if (links.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(ParserUtil.parseLinks(links));
+    private static EditAction generateEmailAction(ArgumentMultimap argMultimap) throws ParseException {
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        return new EditEmailAction(index, email);
     }
 
-    /**
-     * Parses {@code Collection<String> courses} into a {@code UniqueList<Course>} wrapped in an {@code Optional}.
-     */
-    private static Optional<UniqueList<Course>> parseCoursesForEdit(Collection<String> courses) throws ParseException {
-        requireNonNull(courses);
-
-        if (courses.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(ParserUtil.parseCourses(courses));
+    private static EditAction generateLinkAction(ArgumentMultimap argMultimap) throws ParseException {
+        Link link = ParserUtil.parseLink(argMultimap.getValue(CliSyntax.PREFIX_LINK).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        return new EditLinkAction(index, link);
     }
 
-    /**
-     * Parses {@code Collection<String> tags} into a {@code UniqueList<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code UniqueList<Tag>} containing zero tags.
-     */
-    private static Optional<UniqueList<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+    private static EditAction generateGraduationAction(ArgumentMultimap argMultimap) throws ParseException {
+        Graduation graduation = ParserUtil.parseGraduation(argMultimap.getValue(CliSyntax.PREFIX_GRADUATION).get());
+        return new EditGraduationAction(graduation);
     }
 
-    /**
-     * Parses {@code Coolection<String> specialisations} into a {@code UniqueList<Specialisation>} wrapped in an
-     * {@code Optional}.
-     */
-    private static Optional<UniqueList<Specialisation>> parseSpecialisationsForEdit(Collection<String> specisalisations)
-            throws ParseException {
-        requireNonNull(specisalisations);
+    private static EditAction generateCourseAction(ArgumentMultimap argMultimap) throws ParseException {
+        Course course = ParserUtil.parseCourse(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        return new EditCourseAction(index, course);
+    }
 
-        if (specisalisations.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(ParserUtil.parseSpecialisations(specisalisations));
+    private static EditAction generateSpecialisationAction(ArgumentMultimap argMultimap) throws ParseException {
+        Specialisation specialisation =
+                ParserUtil.parseSpecialisation(argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        return new EditSpecialisationAction(index, specialisation);
+    }
+
+    private static EditAction generateTagAction(ArgumentMultimap argMultimap) throws ParseException {
+        Tag tag = ParserUtil.parseTag(argMultimap.getValue(CliSyntax.PREFIX_TAG).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+        return new EditTagAction(index, tag);
+    }
+
+    private static EditAction generatePriorityAction(ArgumentMultimap argMultimap) throws ParseException {
+        Priority priority = ParserUtil.parsePriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).get());
+        return new EditPriorityAction(priority);
     }
 }
