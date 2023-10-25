@@ -6,8 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.format.DateTimeParseException;
-
 public class BookingPeriodTest {
 
     @Test
