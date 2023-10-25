@@ -12,7 +12,8 @@ package swe.context.logic;
  * populated by calling their associated methods.
  */
 public final class Messages {
-    public static final String INVALID_CONTACT_DISPLAYED_INDEX = "One or more of the contact indices provided are invalid";
+    public static final String INVALID_CONTACT_DISPLAYED_INDEX =
+            "One or more of the contact indices provided are invalid";
     public static final String CONTACTS_LISTED_OVERVIEW = "%d contacts listed!";
     public static final String DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";

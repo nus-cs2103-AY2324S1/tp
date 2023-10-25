@@ -1,17 +1,12 @@
 package swe.context.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import static swe.context.testutil.Assert.assertThrows;
-import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
-import static swe.context.testutil.TestData.IndexContact.SECOND_CONTACT;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import swe.context.logic.Messages;
 import swe.context.logic.commands.AddCommand;
@@ -26,6 +21,10 @@ import swe.context.logic.commands.ListCommand;
 import swe.context.logic.parser.exceptions.ParseException;
 import swe.context.model.contact.Contact;
 import swe.context.model.contact.NameContainsKeywordsPredicate;
+
+import static swe.context.testutil.Assert.assertThrows;
+import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
+import static swe.context.testutil.TestData.IndexContact.SECOND_CONTACT;
 import swe.context.testutil.CommandUtil;
 import swe.context.testutil.ContactBuilder;
 import swe.context.testutil.EditContactDescriptorBuilder;
@@ -53,7 +52,7 @@ public class InputParserTest {
     }
 
     @Test
-    public void parseCommand_delete_mass_delete() throws Exception {
+    public void parseCommand_deleteMassDelete() throws Exception {
         DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased()
                 + " " + SECOND_CONTACT.getOneBased());
@@ -61,7 +60,7 @@ public class InputParserTest {
     }
 
     @Test
-    public void parseCommand_delete_duplicate_indices() throws Exception {
+    public void parseCommand_deleteDuplicateIndices() throws Exception {
         DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased()
                 + " " + FIRST_CONTACT.getOneBased()

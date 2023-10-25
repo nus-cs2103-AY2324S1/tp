@@ -8,6 +8,9 @@ import swe.context.logic.Messages;
 import swe.context.logic.commands.DeleteCommand;
 import swe.context.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new DeleteCommand object
+ */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     /**

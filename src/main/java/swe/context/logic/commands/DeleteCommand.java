@@ -13,6 +13,10 @@ import swe.context.logic.commands.exceptions.CommandException;
 import swe.context.model.Model;
 import swe.context.model.contact.Contact;
 
+/**
+ * Deletes one or more {@link Contact}s based on their displayed indices in the UI list.
+ * Duplicate indices are considered only once.
+ */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
