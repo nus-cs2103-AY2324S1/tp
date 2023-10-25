@@ -191,6 +191,9 @@ public class ParserUtil {
         // Split the string at the decimal point
         String[] parts = dollarAmount.split("\\.");
 
+        // Strip leading zeros from the dollar part
+        parts[0] = parts[0].replaceFirst("^0+(?!$)", "");
+
         // Check that the dollar amount does not clearly exceed 5 digits.
         // This prevents integer overflow when converting to cents and when
         // performing validation in subsequent pay / owe operations.

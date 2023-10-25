@@ -273,6 +273,12 @@ public class ParserUtilTest {
     public void parseBalance_leadingZeroes_returnsCorrectBalance() throws Exception {
         Balance expectedBalance = new Balance(250); // 2.50 dollars in cents
         assertEquals(expectedBalance, ParserUtil.parseBalance("002.50"));
+
+        expectedBalance = new Balance(500); // 5 dollars in cents
+        assertEquals(expectedBalance, ParserUtil.parseBalance("00000000000005"));
+
+        expectedBalance = new Balance(5); // 5 cents
+        assertEquals(expectedBalance, ParserUtil.parseBalance("000000000000.05"));
     }
 
     @Test
