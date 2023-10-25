@@ -1,4 +1,5 @@
 [![CI Status](https://github.com/AY2324S1-CS2103T-W17-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-W17-4/tp/actions)
+[!codecov](https://app.codecov.io/account/gh/AY2324S1-CS2103T-W17-4/settings/badge)
 
 ![Ui](docs/images/Ui.png)
 
