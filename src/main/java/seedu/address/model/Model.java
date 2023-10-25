@@ -82,11 +82,6 @@ public interface Model {
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
     /**
-     * Clear address book.
-     */
-    void clearAddressBook();
-
-    /**
      * @return Returns the AddressBook
      */
     ReadOnlyAddressBook getAddressBook();
@@ -197,6 +192,7 @@ public interface Model {
      * @return the TeamBook
      */
     ReadOnlyTeamBook getTeamBook();
+
 
     /**
      * Returns true if a team with the same identity as {@code teamName} exists in the team book.

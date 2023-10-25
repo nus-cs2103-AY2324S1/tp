@@ -162,13 +162,6 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
-    /**
-     * Clears all entries in the address book.
-     */
-    @Override
-    public void clearAddressBook() {
-        this.addressBook.clear();
-    }
 
     /**
      * Checks if the given person exists in the address book.
@@ -279,6 +272,7 @@ public class ModelManager implements Model {
     public ReadOnlyTeamBook getTeamBook() {
         return teamBook;
     }
+
 
     /**
      * Deletes a team with the specified team name from the team book.
