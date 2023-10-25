@@ -190,7 +190,7 @@ public class Group {
      * @param format Format specifier
      */
     public void areAllFree(StringBuilder br, String format) {
-        for (Person p: listOfGroupMates) {
+        for (Person p: this.listOfGroupMates) {
             if (p.isNotFree()) {
                 br.append(String.format(format, p.getName().fullName));
             }
