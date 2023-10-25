@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents an Appointment in the address book.
  */
@@ -29,6 +31,7 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
 
     public final String value;
     public final LocalDateTime date;
+    private Person person;
 
     /**
      * Constructs a {@code Appointment}
@@ -49,7 +52,9 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
     public LocalDateTime getDateTime() {
         return this.date;
     }
-
+    public Person getPerson() {
+        return this.person;
+    }
     @Override
     public String toString() {
         return value + ", " + date.format(DATE_FORMATTER);
@@ -125,6 +130,10 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
         String dateField = matcher.group(2).trim();
 
         return new Appointment(valueField, parseAppointmentDate(dateField));
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override

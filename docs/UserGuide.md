@@ -211,11 +211,18 @@ Example:
 * `clear`
   ![confirm clear window](images/confirmClear.png)
 
-### Sorting all entries by lexicographical order: `sort`
+### Sorting of data listed on the UI: `sort`
 
-Sorts all the entries in lexicographical order. After sorting the list, the ordering of the entries will be changed. As a result, performing delete operations that require indexing will reference the new ordering that is currently displayed on the screen.
+Sorts all the entries with predefined sorting functionalities. After sorting the list, the ordering of the entries will be changed. As a result, performing delete operations that require indexing will reference the new ordering that is currently displayed on the screen.
 
-Format: `sort`
+**Here are the current predefined sorting functions that have been implemented**
+
+* `sort` : sorts list by lexicographical ordering of name (case-insensitive).
+* `appointment`: sorts list by appointment timing in order of the earliest appointment first.
+
+Format: `sort` + `keyword`
+
+Example: `sort sort` performs sorting by lexicographical ordering
 
 ### Exiting the program : `exit`
 
@@ -266,4 +273,4 @@ _Details coming soon ..._
 | **Gather** | `gather FINANCIAL_PLAN_NAME` <br> e.g., `gather Basic Insurance Plan`                                                                                                                                                   |
 | **List**   | `list`                                                                                                                                                                                                                  |
 | **Help**   | `help`                                                                                                                                                                                                                  |
-| **Sort**   | `sort`                                                                                                                                                                                                                  |
+| **Sort**   | `sort SORTING_FUNCTION` <br> e.g., `sort appointment`                                                                                                                                                                   |

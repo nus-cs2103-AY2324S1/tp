@@ -124,6 +124,9 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `observableAppointments` object that represents existing appointments in the address book, sorted in a chronological order.
+* stores a `sortedAppointments` object that represents existing appointments in the address book.
+* `observableAppointments` and `sortedAppointments` depend on `filteredPersons`. Hence, appointments listed are for `Person` objects in `filteredPersons`.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -405,9 +408,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 1b. User enters the wrong details.
+* 3a. User enters the wrong details.
 
-    * 1b1. System shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 1.
 
@@ -449,7 +452,78 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**U6: Assign financial plan to a client** \
+**Precondition:** NIL
+
+**MSS**
+
+1.  User requests to list clients
+2.  AddressBook shows a list of clients
+3.  User request to add financial plan to client’s contacts from the list via the `edit` command.
+4.  AddressBook changes the client’s contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. User enters the wrong details.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+**U7: Schedule appointment for a client** \
+**Precondition:** Client must exist before scheduling appointment.
+
+**MSS**
+
+1.  User requests to list clients
+2.  AddressBook shows a list of clients
+3.  User request to schedule appointment for client via the `schedule` command
+4.  AddressBook changes the client’s contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+  Use case ends.
+
+* 3a. User enters the wrong details.
+    * 3a1. System shows an error message.
+      Use case resumes at step 1.
+
+* 3b. User has an existing appointment scheduled.
+    * 3a1. System shows a warning message.
+      Use case resumes at step 4.
+
+**U8: Sort client's contacts** \
+**Precondition:** NIL
+
+**MSS**
+
+1. User requests to list clients
+2. AddressBook shows a list of clients
+3. User requests to sort list of clients (by appointment time or name)
+4. AddressBook updates ordering of clients' contacts.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+  Use case ends.
+
+* 3a. User enters the wrong details.
+    * 3a1. System shows an error message.
+      Use case resumes at step 1.
+
 *{More to be added}*
+
 
 ### Non-Functional Requirements
 
@@ -478,6 +552,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Central Repository**: A centralised storage location for all user data
 * **Contact details**: Name, email, phone number, next-of-kin name, next-of-kin phone number and home address of a client
 * **Manager**: A person who is a superior in charge of managing and mentoring a group of financial advisors.
+* **Lexicographical**: Generalisation of alphabetical order to include symbols or elements of a totally ordered set.
 
 --------------------------------------------------------------------------------------------------------------------
 

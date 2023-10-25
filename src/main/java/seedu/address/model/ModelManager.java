@@ -45,7 +45,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
-        // to add comparator for sorting logic here
         observableAppointments = FXCollections.observableArrayList();
         sortedAppointments = new SortedList<>(observableAppointments,
                                               new SortByAppointmentDateComparator());
@@ -95,6 +94,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        setAppointmentList();
     }
 
     @Override
@@ -160,14 +160,19 @@ public class ModelManager implements Model {
         for (int i = 0; i < filteredPersons.size(); i++) {
             ScheduleItem appt = filteredPersons.get(i).getAppointment();
             if (appt instanceof Appointment) {
-                observableAppointments.add((Appointment) appt);
+                Appointment tmp = (Appointment) appt;
+                tmp.setPerson(filteredPersons.get(i));
+                observableAppointments.add(tmp);
             }
         }
+        sortedAppointments.setComparator(new SortByAppointmentDateComparator());
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        filteredPersons.setPredicate(predicate);
+        setAppointmentList();
         filteredPersons.setPredicate(predicate);
     }
 
