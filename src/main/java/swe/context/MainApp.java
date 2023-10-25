@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import swe.context.annotation.Nullable;
 import swe.context.commons.core.Config;
 import swe.context.commons.core.LogsCenter;
-import swe.context.commons.core.Version;
 import swe.context.commons.exceptions.DataLoadingException;
 import swe.context.commons.util.ConfigUtil;
 import swe.context.commons.util.StringUtil;
@@ -39,7 +38,6 @@ import swe.context.ui.UiManager;
  */
 public class MainApp extends Application {
     public static final String NAME = "ConText";
-    public static final Version VERSION = new Version(1, 2, 0, false);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
