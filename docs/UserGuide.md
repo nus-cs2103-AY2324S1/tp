@@ -25,6 +25,52 @@ title: User Guide
 
 ## Features
 
+Tran$act offers a range of features designed to make transaction recording and management a seamless process. These features are tailored to the needs of accountants and finance professionals in small businesses, allowing for efficient data entry and financial reporting. Here's an overview of the key features:
+
+
+**1. Adding Transactions**
+
+Tran$act allows you to add transactions with ease. Specify the transaction type, description, amount, date, and optionally, the associated person. The system validates your input data and records the transaction in the database.
+
+**2. Removing Transactions**
+
+Remove transactions from your records with ease. Simply select the transaction you wish to delete, and the system will confirm the removal before removing it from the database.
+
+**3. Viewing All Transactions**
+
+View a comprehensive list of all recorded transactions for reference. This list provides an overview of all financial activities in one place.
+
+**4. Editing Transactions**
+
+Need to make corrections or updates to transaction records? Tran$act allows you to edit transaction details, ensuring your records are accurate.
+
+**5. Restoring Deleted Transactions**
+
+Tran$act includes a feature to restore accidentally deleted transactions. Simply select a transaction from the list of deleted items to restore it to the active records.
+
+**6. Dashboard Display**
+
+Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial information, including total income, total expenses, net profit for the selected period, and a breakdown of expenses by sector.
+
+**7. Access to Financial Reports**
+
+Generate financial reports with ease. Tran$act offers the capability to produce income statements, balance sheets, and cash flow statements.
+
+**8. Customizable Reports**
+
+For those who need to share data with stakeholders, Tran$act allows you to generate customizable reports. Create reports in common formats such as PDF, CSV, and Excel, tailored to your specific needs.
+
+**9. Data Security and Backup**
+
+Tran$act takes data security seriously. It includes features to secure financial data, potentially through encryption, to protect sensitive information. Additionally, automated backups can be set up to prevent data loss due to hardware issues, and you have the ability to undo actions or restore from backups when needed.
+
+**10. Address Book**
+
+Import staff lists into the address book for quick access to contact information. You can also add, edit, and remove people from the address book as needed.
+
+---
+## Usage
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**
