@@ -25,20 +25,19 @@ class TimeTest {
         assertFalse(Time.isValidTimeString("Start Time")); // spaces within alphabets
         assertFalse(Time.isValidTimeString("9011p041")); // alphabets within digits
         assertFalse(Time.isValidTimeString("9312 1534")); // spaces within digits
-        assertFalse(Time.isValidTimeString("2024-31-12T00:00:00")); // bad month
-        assertFalse(Time.isValidTimeString("2024-01-32T00:00:00")); // bad day
-        assertFalse(Time.isValidTimeString("2024-01-01T25:00:00")); // bad hour
-        assertFalse(Time.isValidTimeString("2024-01-01T00:61:00")); // bad min
-        assertFalse(Time.isValidTimeString("2024-01-01T00:00:61")); // bad sec
-        assertFalse(Time.isValidTimeString("2023-02-29T01:00:00")); // non leap year
+        assertFalse(Time.isValidTimeString("2024-31-12T00:00")); // bad month
+        assertFalse(Time.isValidTimeString("2024-01-32T00:00")); // bad day
+        assertFalse(Time.isValidTimeString("2024-01-01T25:00")); // bad hour
+        assertFalse(Time.isValidTimeString("2024-01-01T00:61")); // bad min
+        assertFalse(Time.isValidTimeString("2023-02-29T01:00")); // non leap year
 
         // valid StartTimes
-        assertTrue(Time.isValidTimeString("2024-02-29T01:00:00")); // leap year
-        assertTrue(Time.isValidTimeString("2024-01-01T00:00:00")); // first second of a year
-        assertTrue(Time.isValidTimeString("2023-12-31T23:59:59")); // last second of a year
-        assertTrue(Time.isValidTimeString("2099-01-01T00:00:00")); // Long time in the future
-        assertTrue(Time.isValidTimeString("1899-01-01T00:00:00")); // Long time in the past
-        assertTrue(Time.isValidTimeString("2023-10-17T18:15:33")); // random date
+        assertTrue(Time.isValidTimeString("2024-02-29T01:00")); // leap year
+        assertTrue(Time.isValidTimeString("2024-01-01T00:00")); // first second of a year
+        assertTrue(Time.isValidTimeString("2023-12-31T23:59")); // last second of a year
+        assertTrue(Time.isValidTimeString("2099-01-01T00:00")); // Long time in the future
+        assertTrue(Time.isValidTimeString("1899-01-01T00:00")); // Long time in the past
+        assertTrue(Time.isValidTimeString("2023-10-17T18:15")); // random date
     }
 
     @Test
