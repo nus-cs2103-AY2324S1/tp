@@ -48,6 +48,8 @@ public class AddCommand extends Command {
      * Creates an AddCommand to add the specified {@code FlashCard}
      */
     public AddCommand(OriginalWord original, TranslatedWord translated) {
+        requireNonNull(original);
+        requireNonNull(translated);
         this.original = original;
         this.translated = translated;
         this.toAdd = new FlashCard(original, translated, new Date(), level);

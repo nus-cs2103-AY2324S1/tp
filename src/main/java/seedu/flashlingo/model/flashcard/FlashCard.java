@@ -82,8 +82,7 @@ public class FlashCard {
         }
 
         return otherFlashCard != null
-            && otherFlashCard.getOriginalWord().equals(getOriginalWord())
-            && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
+            && otherFlashCard.getOriginalWord().equals(getOriginalWord());
     }
 
     /**
@@ -156,7 +155,6 @@ public class FlashCard {
         FlashCard otherFlashCard = (FlashCard) other;
         return originalWord.equals(otherFlashCard.originalWord)
                 && translatedWord.equals(otherFlashCard.translatedWord)
-                && whenToReview.equals(otherFlashCard.whenToReview)
                 && originalLevel.equals(otherFlashCard.originalLevel);
     }
 }
