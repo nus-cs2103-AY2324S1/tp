@@ -14,7 +14,7 @@ public class LeaveTest {
     }
 
     @Test
-    public void constructor_invalidPhone_throwsIllegalArgumentException() {
+    public void constructor_invalidLeave_throwsIllegalArgumentException() {
         String invalidLeave = "";
         assertThrows(IllegalArgumentException.class, () -> new Leave(invalidLeave));
     }
