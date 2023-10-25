@@ -14,7 +14,7 @@ public class Remark {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullRemark;
+    public final String value;
 
     /**
      * Constructs a {@code Remark}.
@@ -24,7 +24,7 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         checkArgument(isValidRemark(remark), MESSAGE_CONSTRAINTS);
-        fullRemark = remark;
+        value = remark;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Remark {
      */
     @Override
     public String toString() {
-        return fullRemark;
+        return value;
     }
 
     /**
@@ -65,7 +65,7 @@ public class Remark {
         }
 
         Remark otherRemark = (Remark) other;
-        return fullRemark.equals(otherRemark.fullRemark);
+        return value.equals(otherRemark.value);
     }
 
     /**
@@ -75,6 +75,6 @@ public class Remark {
      */
     @Override
     public int hashCode() {
-        return fullRemark.hashCode();
+        return value.hashCode();
     }
 }
