@@ -16,7 +16,7 @@ import networkbook.model.Model;
 import networkbook.model.NetworkBook;
 import networkbook.model.person.NameContainsKeywordsPredicate;
 import networkbook.model.person.Person;
-import networkbook.testutil.EditPersonDescriptorBuilder;
+import networkbook.testutil.AddPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -67,36 +67,47 @@ public class CommandTestUtil {
     public static final String PRIORITY_DESC_AMY = " " + CliSyntax.PREFIX_PRIORITY + " " + "High";
     public static final String INVALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME
                                                         + " " + "James&"; // '&' not allowed in names
+    public static final String VALID_NAME_DESC = " " + CliSyntax.PREFIX_NAME + " " + "James";
     public static final String INVALID_PHONE_DESC = " " + CliSyntax.PREFIX_PHONE
                                                         + " " + "911a"; // 'a' not allowed in phones
+    public static final String VALID_PHONE_DESC = " " + CliSyntax.PREFIX_PHONE + " " + "123456";
     public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL
                                                         + " " + "bob!yahoo"; // missing '@' symbol
+    public static final String VALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + " " + "quack@gmail.com";
     public static final String INVALID_LINK_DESC =
             " " + CliSyntax.PREFIX_LINK + " "
             + "https://docs.goo_gle.com";
+    public static final String VALID_LINK_DESC = " " + CliSyntax.PREFIX_LINK + " " + "www.google.com";
     public static final String INVALID_GRADUATION_DESC =
             " " + CliSyntax.PREFIX_GRADUATION + " " + "2024/2025"; // graduation must follow format
+    public static final String VALID_GRADUATION_DESC = " " + CliSyntax.PREFIX_GRADUATION + " " + "AY2425-S1";
     public static final String INVALID_COURSE_DESC =
             " " + CliSyntax.PREFIX_COURSE; // empty string not allowed for course
+    public static final String VALID_COURSE_DESC = " " + CliSyntax.PREFIX_COURSE + " " + "CS2103T";
     public static final String INVALID_SPECIALISATION_DESC =
             " " + CliSyntax.PREFIX_SPECIALISATION; // empty string not allowed for specialisation
+    public static final String VALID_SPECIALISATION_DESC =
+            " " + CliSyntax.PREFIX_SPECIALISATION + " " + "Software Eng";
     public static final String INVALID_TAG_DESC = " " + CliSyntax.PREFIX_TAG
                                                         + " " + "hubby*"; // '*' not allowed in tags
+    public static final String VALID_TAG_DESC = " " + CliSyntax.PREFIX_TAG + " " + "talk";
     public static final String INVALID_PRIORITY_DESC = " " + CliSyntax.PREFIX_PRIORITY
                                                         + " " + "hi"; // incorrect priority format
+    public static final String VALID_PRIORITY_DESC = " " + CliSyntax.PREFIX_PRIORITY + " " + "high";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final AddCommand.AddPersonDescriptor DESC_AMY;
+    public static final AddCommand.AddPersonDescriptor DESC_BOB;
+    public static final String VALID_INDEX_DESC = " " + CliSyntax.PREFIX_INDEX + " " + "1";
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new AddPersonDescriptorBuilder()
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withLink(VALID_LINK_AMY)
                 .withGraduation(VALID_GRADUATION_AMY).withCourse(VALID_COURSE_AMY)
                 .withSpecialisation(VALID_SPECIALISATION_AMY).withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new AddPersonDescriptorBuilder()
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withLink(VALID_LINK_BOB)
                 .withGraduation(VALID_GRADUATION_BOB).withCourse(VALID_COURSE_BOB)
                 .withSpecialisation(VALID_SPECIALISATION_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();

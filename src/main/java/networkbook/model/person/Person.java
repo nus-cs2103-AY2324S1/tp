@@ -14,13 +14,9 @@ import networkbook.model.util.UniqueList;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person implements Identifiable<Person> {
-
-    // Identity fields
     private final Name name;
     private final UniqueList<Phone> phones;
     private final UniqueList<Email> emails;
-
-    // Data fields
     private final UniqueList<Link> links;
     private final Graduation graduation;
     private final UniqueList<Course> courses;

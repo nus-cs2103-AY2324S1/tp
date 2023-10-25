@@ -13,7 +13,10 @@ import networkbook.model.person.Priority;
  * Container for user visible messages.
  */
 public class Messages {
-
+    public static final String MESSAGE_EXACTLY_ONE_FIELD = "One and only one field can be edited at a time.";
+    public static final String MESSAGE_MUST_BE_PRESENT =
+            "Since %s is present, one and only one /index flag must be present.";
+    public static final String MESSAGE_INDEX_CANNOT_BE_PRESENT = "/index flag should not be indicated.";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_CONTACT_NAME = "Invalid name provided for contact to create!";
@@ -21,7 +24,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_SORTED_OVERVIEW = "Here is your sorted list of contacts:"
             + "\n(%1$d persons listed)";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

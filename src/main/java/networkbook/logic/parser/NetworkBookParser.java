@@ -11,12 +11,12 @@ import networkbook.logic.commands.ClearCommand;
 import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.DeleteCommand;
-import networkbook.logic.commands.EditCommand;
 import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
 import networkbook.logic.commands.SortCommand;
+import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 
 /**

@@ -2,6 +2,8 @@
 layout: page
 title: User Guide
 ---
+* Table of Contents
+{:toc}
 
 NetworkBook is a **desktop contact book application**. You can use it to network with other computing students and professionals from NUS.
 
@@ -9,7 +11,7 @@ NetworkBook is a **desktop contact book application**. You can use it to network
 
 ### <u>Category 1 - Add contact information</u>
 
-### Create new contact: `create /name [/optional fields]`
+#### Create new contact: `create /name [/optional fields]`
 
 You can use the create command to create a new contact. When creating a contact, you must provide the name field, and it's optional to provide other fields which will be added to the new contact.
 
@@ -52,7 +54,7 @@ When the command succeeds:
 When the command fails:
 * `Invalid response, please type ‘1, 2, 3’ only`
 
-### Add phone number to contact: `add [index] /phone`
+#### Add phone number to contact: `add [index] /phone`
 
 You can add a phone number to an existing contact. A new phone number will be added to the contact's list of phone numbers, and no new contact will be created.
 
@@ -73,7 +75,7 @@ Invalid command calls:
 * Missing index: `add /phone 91234567`
 * Non-numeric characters: `add 1 /phone 912a4567`
 
-### Add email to a contact: `add [index] /email`
+#### Add email to a contact: `add [index] /email`
 
 You can add an email to an existing contact.
 A new email will be added to the contact's list of emails,
@@ -100,7 +102,7 @@ Invalid command calls:
 * Invalid email: `add 1 /email nknguyentdn@gmail`
 * Missing index: `add /email nknguyentdn@gmail.com`
 
-### Add link to a contact: `add [index] /link`
+#### Add link to a contact: `add [index] /link`
 
 You can add a social link to an existing contact.
 A new link will be added to the contact's list of links,
@@ -126,7 +128,7 @@ Invalid command calls:
 * Missing index: `add /link https://nknguyenhc.github.io/`
 * Invalid link: `add /link https://nknguyenhc`
 
-### Add course to a contact: `add [index] /course /date`
+#### Add course to a contact: `add [index] /course /date`
 
 You can add a course of study to an existing contact.  A new course will be added to the contact's list of courses, and no new contact will be created.
 
@@ -153,7 +155,7 @@ Invalid command calls:
 * Missing start date: `add /course Computer Science`
 * Invalid index: `add 20000 /course Computer Engineering /date 01-08-2022 07-12-2022`
 
-### Add specialisation: `add [index] /spec`
+#### Add specialisation: `add [index] /spec`
 
 You can add a specialisation to an existing contact.  A new specialisation will be added to the contact's list of specialisations, and no new contact will be created.
 Specialisations are displayed in the order they are added.
@@ -175,7 +177,7 @@ Invalid command calls:
 * Invalid index: `add 20000 /spec Robotics & AI`
 * Missing index: `add /spec Robotics & AI`
 
-### Assign priority levels: `add [index] /priority` 
+#### Assign priority levels: `add [index] /priority` 
 
 You can set the priority level of a contact, 
 
@@ -210,7 +212,7 @@ Invalid command calls:
 - Invalid priority: `add 1 /priority hhhhh`
 - Invalid index: `add 100000 /priority h`
 
-### Add tag to a contact: `add [index] /tag`
+#### Add tag to a contact: `add [index] /tag`
 
 You can use the `tag` command to associate a custom category with a contact, 
 
@@ -235,7 +237,7 @@ Invalid command calls:
 - Missing index: `add /tag internship`
 - Invalid index: `add 100000 /tag internship`
 
-### Add graduation date to contact: `add [index] /grad`
+#### Add graduation date to contact: `add [index] /grad`
 
 You can set the graduation date (to the nearest semester) of an existing contact. No new contact will be created.
 
@@ -261,7 +263,7 @@ Invalid command calls:
 
 ### <u>Category 2 - Edit contact details</u>
 
-### Edit contact detail : `edit [index] /field`
+#### Edit contact detail : `edit [index] /field`
 
 You can edit contact details of existing contacts in your book.
 
@@ -310,7 +312,7 @@ Invalid command inputs:
 * Invalid email: `update 1 /email nknguyentdn@gmail`
 * Missing index: `update /email nknguyentdn@gmail.com`
 
-### Delete a contact: `delete` 
+#### Delete a contact: `delete` 
 
 You can remove a contact from your NetworkBook using the `delete` command, 
 
@@ -337,7 +339,7 @@ Invalid command inputs:
 
 ### <u>Category 3 - Find contacts</u>
 
-### Find a contact: `find [name]`
+#### Find a contact: `find [name]`
 
 You can use the `find` command to search for contacts by their name if you wish to quickly reference a particular contact’s details.
 
@@ -359,7 +361,7 @@ Invalid command inputs:
 * Missing search term: `find`
 
 
-### Sort contacts list: `sort /by /order`
+#### Sort contacts list: `sort /by /order`
 
 You can use the `sort` command to sort your list of contacts.
 
