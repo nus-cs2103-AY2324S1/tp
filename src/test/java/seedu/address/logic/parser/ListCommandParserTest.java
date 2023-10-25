@@ -4,15 +4,17 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ListAttendanceCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
 import seedu.address.model.predicate.AbsentFromTutorialPredicate;
 import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.week.Week;
 
 public class ListCommandParserTest {
 
@@ -57,14 +59,14 @@ public class ListCommandParserTest {
     @Test
     public void parse_validArgs_returnsListAttendanceCommand() {
         // with leading and trailing whitespaces
-        Tag tag = new Tag("G02");
-        Index index = Index.fromOneBased(1);
-        ListAttendanceCommand expectedListAttendanceCommand = new ListAttendanceCommand(tag, index,
-                new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(index, tag));
-        assertParseSuccess(parser, " attendance tg/G02 tn/1 ", expectedListAttendanceCommand);
+        Optional<Tag> tag = Optional.of(new Tag("G02"));
+        Week week = new Week(1);
+        ListAttendanceCommand expectedListAttendanceCommand = new ListAttendanceCommand(tag, week,
+                new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
+        assertParseSuccess(parser, " attendance tg/G02 w/1 ", expectedListAttendanceCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "    attendance      tg/     G02     tn/    1      ",
+        assertParseSuccess(parser, "    attendance      tg/     G02     w/    1      ",
                 expectedListAttendanceCommand);
     }
 }

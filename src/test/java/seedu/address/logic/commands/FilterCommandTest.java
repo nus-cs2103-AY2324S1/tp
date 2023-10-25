@@ -4,6 +4,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.ParserUtil.FilterOperation;
@@ -19,9 +21,10 @@ public class FilterCommandTest {
 
     @Test
     public void execute_addValidFilter_success() {
-        Tag tag = new Tag("CS2103T");
+        Optional<Tag> tag = Optional.of(new Tag("G02"));
+
         ContainsTagPredicate predicate = new ContainsTagPredicate(tag);
-        FilterCommand filterCommand = new FilterCommand(FilterOperation.ADD, tag);
+        FilterCommand filterCommand = new FilterCommand(FilterOperation.ADD, tag.get());
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_ADD_SUCCESS, predicate);
 
@@ -33,12 +36,13 @@ public class FilterCommandTest {
 
     @Test
     public void execute_removeValidFilter_success() {
-        Tag tag = new Tag("CS2103T");
+        Optional<Tag> tag = Optional.of(new Tag("T02"));
+
         ContainsTagPredicate predicate = new ContainsTagPredicate(tag);
 
         model.addFilter(predicate);
 
-        FilterCommand filterCommand = new FilterCommand(FilterOperation.DELETE, tag);
+        FilterCommand filterCommand = new FilterCommand(FilterOperation.DELETE, tag.get());
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_DELETE_SUCCESS, predicate);
 
@@ -49,8 +53,9 @@ public class FilterCommandTest {
 
     @Test
     public void execute_clearFilters_success() {
-        Tag firstTag = new Tag("CS2103T");
-        Tag secondTag = new Tag("CS2101");
+        Optional<Tag> firstTag = Optional.of(new Tag("G01"));
+        Optional<Tag> secondTag = Optional.of(new Tag("G02"));
+
         ContainsTagPredicate firstPredicate = new ContainsTagPredicate(firstTag);
         ContainsTagPredicate secondPredicate = new ContainsTagPredicate(secondTag);
 

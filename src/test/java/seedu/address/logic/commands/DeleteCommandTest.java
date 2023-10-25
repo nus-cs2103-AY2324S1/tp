@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -49,9 +50,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_allWithNoTag_success() {
-        Tag placeholder = new Tag("PLACEHOLDER");
-        ContainsTagPredicate pred = new ContainsTagPredicate(placeholder);
-        DeleteCommand deleteCommand = new DeleteCommand(placeholder, pred);
+        Optional<Tag> tag = Optional.empty();
+        ContainsTagPredicate pred = new ContainsTagPredicate(tag);
+        DeleteCommand deleteCommand = new DeleteCommand(tag, pred);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_NO_TAG_SUCCESS);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

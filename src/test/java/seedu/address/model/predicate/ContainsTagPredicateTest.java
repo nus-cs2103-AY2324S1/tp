@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
@@ -15,7 +17,7 @@ public class ContainsTagPredicateTest {
     public void test_idContainsKeywords_returnsTrue() {
         Tag tag = new Tag("first");
 
-        ContainsTagPredicate predicate = new ContainsTagPredicate(tag);
+        ContainsTagPredicate predicate = new ContainsTagPredicate(Optional.of(tag));
         assertTrue(predicate.test(new PersonBuilder().withTags("first", "second").build()));
     }
 
@@ -24,7 +26,7 @@ public class ContainsTagPredicateTest {
         Tag tag = new Tag("first");
 
         // Non-matching tag
-        ContainsTagPredicate predicate = new ContainsTagPredicate(tag);
+        ContainsTagPredicate predicate = new ContainsTagPredicate(Optional.of(tag));
         assertFalse(predicate.test(new PersonBuilder().withTags("second", "third").build()));
     }
 
@@ -33,14 +35,14 @@ public class ContainsTagPredicateTest {
         Tag firstTag = new Tag("first");
         Tag secondTag = new Tag("second");
 
-        ContainsTagPredicate firstPredicate = new ContainsTagPredicate(firstTag);
-        ContainsTagPredicate secondPredicate = new ContainsTagPredicate(secondTag);
+        ContainsTagPredicate firstPredicate = new ContainsTagPredicate(Optional.of(firstTag));
+        ContainsTagPredicate secondPredicate = new ContainsTagPredicate(Optional.of(secondTag));
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        ContainsTagPredicate firstPredicateCopy = new ContainsTagPredicate(firstTag);
+        ContainsTagPredicate firstPredicateCopy = new ContainsTagPredicate(Optional.of(firstTag));
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -55,17 +57,17 @@ public class ContainsTagPredicateTest {
 
     @Test
     public void create() {
-        Tag tag = Tag.create("CS2103T T02");
-        ContainsTagPredicate predicate = ContainsTagPredicate.create(tag);
+        Tag tag = Tag.create("T02");
+        ContainsTagPredicate predicate = ContainsTagPredicate.create(Optional.of(tag));
 
-        ContainsTagPredicate expected = new ContainsTagPredicate(tag);
+        ContainsTagPredicate expected = new ContainsTagPredicate(Optional.of(tag));
         assertEquals(expected, predicate);
     }
 
     @Test
     public void toStringMethod() {
-        Tag tag = Tag.create("CS2103T T02");
-        ContainsTagPredicate predicate = new ContainsTagPredicate(tag);
+        Tag tag = Tag.create("T02");
+        ContainsTagPredicate predicate = new ContainsTagPredicate(Optional.of(tag));
 
         assertEquals("Tag Filter: " + tag.getTagName(), predicate.toString());
     }

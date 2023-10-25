@@ -1,50 +1,53 @@
 package seedu.address.model.predicate;
 
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.week.Week;
 
 /**
  * Tests that a {@code Person}'s {@code Tag} matches the tag given.
  */
 public class AbsentFromTutorialPredicate extends SerializablePredicate {
-    private final Index index;
-    private final Tag tag;
+    private final Week week;
+    private final Optional<Tag> tag;
 
     /**
      * Constructor a {@code AbsentFromTutorialPredicate} with index and tutorial group.
      *
-     * @param index Tutorial number to get the attendance list for.
-     * @param tag Tutorial group to get the attendance list for.
+     * @param week Week number to get the attendance list for.
+     * @param tag  Tutorial group to get the attendance list for.
      */
-    public AbsentFromTutorialPredicate(Index index, Tag tag) {
+    public AbsentFromTutorialPredicate(Week week, Optional<Tag> tag) {
         super(person -> {
-            if (index.getOneBased() > person.getAttendanceRecords().size()) {
-                return false;
-            }
+            Stream<Attendance> attendanceStream = person.getAttendanceRecords().stream();
 
-            Tag placeholder = new Tag("PLACEHOLDER");
-            if (tag.equals(placeholder)) {
-                return !person.getAttendanceRecords().get(index.getZeroBased()).isPresent();
+            boolean isAbsentForWeek = !attendanceStream.anyMatch(atd -> atd.getWeek().equals(week) && atd.isPresent());
+
+            if (tag.isEmpty()) {
+                return isAbsentForWeek;
             }
 
             // Implicit else
-            return person.getTags().stream().anyMatch(
-                    personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.getTagName()))
-                    && !person.getAttendanceRecords().get(index.getZeroBased()).isPresent();
+            return person.getTags().stream().anyMatch(personTag ->
+                    StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.get().getTagName()))
+                    && isAbsentForWeek;
         });
-        this.index = index;
+        this.week = week;
         this.tag = tag;
     }
 
     @JsonCreator
-    public static AbsentFromTutorialPredicate create(@JsonProperty("index") Index index, @JsonProperty("tag") Tag tag) {
-        return new AbsentFromTutorialPredicate(index, tag);
+    public static AbsentFromTutorialPredicate create(@JsonProperty("week") Week week,
+                                                     @JsonProperty("tag") Optional<Tag> tag) {
+        return new AbsentFromTutorialPredicate(week, tag);
     }
 
     @Override
@@ -59,17 +62,16 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
         }
 
         AbsentFromTutorialPredicate otherPredicate = (AbsentFromTutorialPredicate) other;
-        return index.equals(otherPredicate.index)
-                && tag.equals(otherPredicate.tag);
+        return week.equals(otherPredicate.week) && tag.equals(otherPredicate.tag);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(index, tag);
+        return Objects.hash(week, tag);
     }
 
     @Override
     public String toString() {
-        return "Attendance Filter: " + index + " " + tag.getTagName();
+        return "Attendance Filter: " + week + " " + tag.get().getTagName();
     }
 }
