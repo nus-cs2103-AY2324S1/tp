@@ -341,6 +341,35 @@ Step 5: The `UI` renders the `Card` with the relevant fields meant to be written
         2. More checks and assertions required for increased edge cases.
         3. More testing. 
 
+### Spaced Repetition Feature
+
+#### Implementation
+
+This features aims to implement a Spaced Repetition system to schedule cards such that more difficult cards are 
+prioritised for studying, and less difficult cards appear less frequently. Spaced Repetition makes users give more of 
+their attention to more difficult cards, and thus has been shown to greatly improve memory retention when used as a 
+scheduling tool for flashcards.
+
+Given below is an example usage of the Spaced Repetition Feature.
+
+Step 1: Assuming the user has existing cards in lesson, with their own set of questions and answers. These 
+questions are sorted by a due date `nextPracticeDate`. Cards also have a hidden field known as `lastPracticeDate`.
+
+Step 2: After the user uses the `practise` command and `solve` command, he uses the `set` command to set how difficult 
+he felt the card was when he was practising the card. There are 3 difficulties: `easy`, `medium`, and `hard`.
+
+Step 3: After setting the difficulty, the system will calculate a new `nextPracticeDate`. 
+Firstly, it applies a multiplier (based on difficulty: 3, 1.5, 0.5 for easy, medium, hard respectively) 
+to the amount of time between `lastPracticeDate` and `nextPracticeDate`, obtaining a duration. 
+This duration is then added to the current `nextPracticeDate` to calculate the new `nextPracticeDate`. 
+If there is no suitable `lastPracticeDate` to use, then this calculation alternatively 
+adds a base duration (of 4 hours) * multiplier to `nextPracticeDate`.
+
+Step 4: The card's `nextPracticeDate` and `lastPracticeDate` is then updated with the new fields. 
+
+Step 5: The card is automatically sorted in the list according to the new `nextPracticeDate`.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
