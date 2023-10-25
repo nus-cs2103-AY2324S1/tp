@@ -56,6 +56,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             // since TimeInterval is same for all days for now, we just use the first day
             predicates.add(new AvailableTimePredicate(freeTime.getDay(0)));
         }
+        if (predicates.size() == 0) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
         return new FindCommand(predicates);
     }
 
