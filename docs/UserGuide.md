@@ -404,6 +404,7 @@ _Details coming soon ..._
 # Command summary
 
 ### Commands for Persons
+
 | Action            | Format, Examples                                                                                                                                                        |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Person**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GROUP]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
@@ -413,6 +414,7 @@ _Details coming soon ..._
 | **Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                              |
 
 ### Commands for Events
+
 | Action           | Format, Examples                                                                                                                                                                                                                                    |
 |------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [g/GROUP]...`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`                                                           |
@@ -420,6 +422,7 @@ _Details coming soon ..._
 | **Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`                                                                                                                                                                                               |
 
 ### General commands
+
 | Action    | Format, Examples |
 |-----------|------------------|
 | **Clear** | `clear`          |
