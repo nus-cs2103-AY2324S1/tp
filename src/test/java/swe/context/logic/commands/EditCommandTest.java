@@ -161,9 +161,9 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals
-                (new EditCommand(TestData.IndexContact.SECOND_CONTACT, TestData.Valid.EditDescriptor.AMY))
-        );
+        assertFalse(standardCommand.equals(
+                new EditCommand(TestData.IndexContact.SECOND_CONTACT, TestData.Valid.EditDescriptor.AMY)
+        ));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(
