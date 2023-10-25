@@ -28,7 +28,6 @@ public class EditScheduleDescriptorBuilder {
         descriptor = new EditScheduleCommand.EditScheduleDescriptor();
         descriptor.setStartTime(schedule.getStartTime());
         descriptor.setEndTime(schedule.getEndTime());
-        descriptor.setTutor(schedule.getTutor());
     }
 
     /**
