@@ -251,6 +251,39 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+### Edit Feature
+
+#### Description
+
+The `EditCommand` allows users to modify the details of an existing person within the address book.
+
+#### Implementation Details
+
+The `EditCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `edit`.
+- **Usage**: Users invoke the `EditCommand` by specifying the command word, followed by the name or IC of the person they wish to edit and the fields they wish to modify.
+    - The command format is: `edit n/NAME or id/IC_NUMBER [Fields] ...`.
+- **EditPersonDescriptor**: The `EditCommand` relies on an `EditPersonDescriptor` to capture the details to edit the person with. This descriptor allows for updating various attributes of the person, such as phone, email, address, appointment, and medical histories.
+- **Validation**: The `EditCommand` performs validation to ensure at least one field to edit is provided. It also checks for consistency when both a name and IC are provided.
+- **Execution**: When executed, the `EditCommand` identifies the person to edit based on the provided name and/or IC. If the person is found, it creates an `editedPerson` with the desired changes. The person is then updated with the new details.
+
+#### Rationale
+
+- **Flexibility**: The `EditCommand` provides flexibility to users by allowing them to choose whether to edit a person by name or IC, as per their convenience.
+- **Maintaining Data Integrity**: The feature is designed to maintain the integrity of the address book by updating existing entries rather than creating new ones.
+
+#### Alternatives Considered
+
+- **Alternative 1**: Using Numbering Index  to specify the person to edit. In this approach, users would provide the index of the person based on the list instead of specifying a name or IC. For example, they could use a command like `edit 1 p/93029393` to edit the first person of the list with the phone number.
+    - **Pros**:
+        - **Simplicity**: Using an index is straightforward and doesn't require specifying a name or IC.
+        - **Reduced Ambiguity**: Using an index avoids potential ambiguity when multiple individuals have the same name.
+
+    - **Cons**:
+         - **Lack of Context**: Users might find it challenging to remember the index of a particular person, especially in a large address book.
+         - **Potential Errors**: If the list of persons changes (e.g., due to deletions or additions), the numbering index could become outdated, leading to errors.
+         - **Limited Identifiability**: Index numbers do not provide any context about the person, which may be confusing when there are multiple people with the same name or similar information.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
