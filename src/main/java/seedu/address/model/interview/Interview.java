@@ -12,6 +12,7 @@ public class Interview {
     private final String jobRole;
     /** TODO Change from 'String' to proper 'Date/Time' once natural DT is implemented*/
     private final String interviewTiming;
+    private final Rating rating;
     private final boolean isDone;
 
     /**
@@ -22,6 +23,7 @@ public class Interview {
         applicant = app;
         jobRole = role;
         interviewTiming = timing;
+        rating = new Rating("0.0");
         isDone = false;
     }
 
@@ -33,6 +35,7 @@ public class Interview {
         applicant = app;
         jobRole = role;
         interviewTiming = timing;
+        rating = new Rating("0.0");
         this.isDone = isDone;
     }
 
@@ -62,6 +65,10 @@ public class Interview {
         return interviewTiming;
     }
 
+    public Rating getRating() {
+        return rating;
+    }
+
     public boolean isDone() {
         return isDone;
     }
@@ -86,6 +93,7 @@ public class Interview {
         return applicant.equals(otherInterview.applicant)
                 && jobRole.equals(otherInterview.jobRole)
                 && interviewTiming.equals(otherInterview.interviewTiming)
+                && rating.equals(otherInterview.rating)
                 && isDone == otherInterview.isDone;
     }
 }
