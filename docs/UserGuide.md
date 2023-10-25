@@ -48,7 +48,17 @@ Let's get started by following the [Quick Start](#quick-start) section!
 
 # GUI Summary
 
-**TO BE ADDED**
+![GUI Summary](images/GuiSummary.png)
+
+For each applicant and each interview, we see the following details:
+
+| Applicant | Interview  |
+|-----------|------------|
+| Name      | Job role   |
+ | Tags      | Start time |
+| Phone     | End time   |
+| Address   | Rating     |
+ | Email     |            |
 
 --------------------------------------------------------------------------------------------------------------------
 # Features
@@ -226,19 +236,25 @@ Format: `nuke`
 
 Finds applicants whose names contain any of the given keywords.
 
-Format: `find-a KEYWORD [MORE_KEYWORDS]`
+Format: ``find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER]
+[e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] t/KEYWORDS [MORE_KEYWORDS]...]``
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* At least one of the optional fields must be provided
+* Any of the fields (name, phone, email, address, tags) can be searched
+* Only full words will be matched e.g. `Han` will not match `Hans` for name, address and tags
+* For phone, partial numbers will match e.g. `987` will match `98765432`
 * Applicants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find-a n/John` returns `john` and `John Doe`
+* `find-a n/alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find-a n/alex david'](images/findAlexDavidResult.png)
+* `find-a p/874 a/serangoon ang` returns `97438807`, `Serangoon Gardens`,
+`Serangoon Gardens Street`, `Ang Mo Kio`<br>
+  ![result for 'find-a p/874 a/serangoon ang'](images/findPhoneAddress.png)
 
 ## Finding interview (and their index in address book) by job title: `find-i`
 
