@@ -44,9 +44,9 @@ public class FindMeetingCommandParser implements Parser<FindMeetingCommand> {
 
         String[] titleKeyWords = argMultimap.getValue(PREFIX_TITLE).orElse("").split("\\s+");
         String[] locationKeyWords = argMultimap.getValue(PREFIX_LOCATION).orElse("").split("\\s+");
-        LocalDateTime start = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START)
+        LocalDateTime start = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_START)
                 .orElse(defaultMinimumStartTime));
-        LocalDateTime end = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END)
+        LocalDateTime end = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_END)
                 .orElse(defaultMaximumEndTime));
         String[] attendeeKeyWords = argMultimap.getValue(PREFIX_NAME).orElse("").split("\\s+");
         String[] tagKeyWords = argMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");

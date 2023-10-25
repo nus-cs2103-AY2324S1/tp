@@ -55,8 +55,8 @@ public class Person {
         return email;
     }
 
-    public LastContactedTime getLastContactedTime() {
-        return lastContactedTime;
+    public LocalDateTime getLastContactedTime() {
+        return lastContactedTime.getTime();
     }
 
     public Remark getRemark() {
@@ -125,7 +125,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("last contacted time", lastContactedTime)
+                .add("last contacted time", lastContactedTime.getTime())
                 .add("status", status)
                 .add("remark", remark)
                 .add("tags", tags)

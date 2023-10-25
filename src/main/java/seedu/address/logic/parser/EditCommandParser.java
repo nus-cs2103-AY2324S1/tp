@@ -59,7 +59,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_LASTTIME).isPresent()) {
-            editPersonDescriptor.setLastContactedTime(ParserUtil.parseTime(
+            editPersonDescriptor.setLastContactedTime(ParserUtil.parseContactTime(
                     argMultimap.getValue(PREFIX_LASTTIME).get()));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {

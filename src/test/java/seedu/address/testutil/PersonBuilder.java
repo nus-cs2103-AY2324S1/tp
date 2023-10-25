@@ -55,7 +55,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        lastContactedTime = personToCopy.getLastContactedTime().getTime();
+        lastContactedTime = personToCopy.getLastContactedTime();
         status = personToCopy.getStatus();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());

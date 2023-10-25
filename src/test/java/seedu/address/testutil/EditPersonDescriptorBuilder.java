@@ -39,7 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setLastContactedTime(person.getLastContactedTime().getTime());
+        descriptor.setLastContactedTime(person.getLastContactedTime());
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
     }

@@ -49,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        LocalDateTime lastContactedTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_LASTTIME).get());
+        LocalDateTime lastContactedTime = ParserUtil.parseContactTime(argMultimap.getValue(PREFIX_LASTTIME).get());
         if (!LastContactedTime.isValidLastContactedTime(lastContactedTime)) {
             throw new ParseException(LastContactedTime.MESSAGE_CONSTRAINTS);
         }

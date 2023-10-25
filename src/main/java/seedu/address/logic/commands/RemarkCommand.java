@@ -60,7 +60,7 @@ public class RemarkCommand extends Command {
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getLastContactedTime().getTime(), personToEdit.getStatus(), remark,
+                personToEdit.getLastContactedTime(), personToEdit.getStatus(), remark,
                 personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
