@@ -45,30 +45,17 @@ public class AddCommandParser implements CommandParser<AddCommand> {
                         PREFIX_AVAILABILITY, PREFIX_ANIMAL_TYPE, PREFIX_HOUSING);
 
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ANIMAL_NAME, PREFIX_AVAILABILITY, PREFIX_ANIMAL_TYPE, PREFIX_HOUSING)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()
-                && argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("nil")) {
-            if (argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()
-                    && !argMultimap.getValue(PREFIX_ANIMAL_NAME).get().equals("nil")) {
-                throw new ParseException("Animal name should be 'nil' when availability is 'nil'.");
-            }
-
-            if (argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent()
-                    && !argMultimap.getValue(PREFIX_ANIMAL_TYPE).get().equals("nil")) {
-                throw new ParseException("Animal type should be 'nil' when availability is 'nil'.");
-            }
-        }
-
-        if (argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()
-                && !argMultimap.getValue(PREFIX_ANIMAL_NAME).get().equals("nil")) {
-            if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()
-                    && argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("Available")) {
-                throw new ParseException("Availability cannot be 'Available' when an animal name "
-                        + "is provided; animal name should be 'nil'.");
+        if (!argMultimap.getValue(PREFIX_ANIMAL_NAME).get().equals("nil")) {
+            String avail = argMultimap.getValue(PREFIX_AVAILABILITY).get();
+            if (avail.equals("Available") || avail.equals("nil")) {
+                throw new ParseException("When an animal name is provided, availability should not be "
+                        + "'Available' or 'nil'.");
             }
         }
 
@@ -79,31 +66,11 @@ public class AddCommandParser implements CommandParser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        if (!argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()) {
-            throw new ParseException("Animal name is required. Please indicate as 'nil' if information is "
-                    + "not available.");
-        }
         Name animalName = ParserUtil.parseName(argMultimap.getValue(PREFIX_ANIMAL_NAME).get());
-
-        if (!argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {
-            throw new ParseException("Availability is required. Please indicate as 'nil' if information is "
-                    + "not available.");
-        }
         Availability availability = ParserUtil.parseAvailability(argMultimap
                 .getValue(PREFIX_AVAILABILITY).get());
-
-        if (!argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent()) {
-            throw new ParseException("Animal type is required. Please indicate as 'nil' if information is "
-                    + "not available.");
-        }
         AnimalType animalType = ParserUtil.parseAnimalType(argMultimap
-                .getValue(PREFIX_ANIMAL_TYPE).get(), availability.value);
-
-        if (!argMultimap.getValue(PREFIX_HOUSING).isPresent()) {
-            throw new ParseException("Housing is required. Please indicate as 'nil' if information is "
-                    + "not available.");
-        }
-
+                .getValue(PREFIX_ANIMAL_TYPE).get(), availability);
         Housing housing = ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING).get());
 
         Person person = new Person(name, phone, email, address,
@@ -111,7 +78,6 @@ public class AddCommandParser implements CommandParser<AddCommand> {
 
         return new AddCommand(person);
     }
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

@@ -10,12 +10,14 @@ public class AnimalType {
     public static final String MESSAGE_CONSTRAINTS = "If fosterer is available, animal type should be "
             + "'able.Dog' / 'able.Cat'.\n"
             + "If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'.\n"
-            + "If animal type information is not available, it should be inputted as 'nil'.";
+            + "If animal type information is not available, it should be inputted as 'nil'. "
+            + "Animal type should be 'nil' when availability is 'nil'.";
 
     public static final String VALIDATION_REGEX_AVAILABLE = "^(able\\.Dog|able\\.Cat|nil)$";
     public static final String VALIDATION_REGEX_NOT_AVAILABLE = "^(current\\.Dog|current\\.Cat|nil)$";
+    public static final String VALIDATION_REGEX_NIL = "^(nil)$";
 
-    public final String availability;
+    public final Availability availability;
     public final String value;
 
     /**
@@ -24,14 +26,16 @@ public class AnimalType {
      * @param value A valid animal type.
      * @param availability The availability of the fosterer.
      */
-    public AnimalType(String value, String availability) {
+    public AnimalType(String value, Availability availability) {
         requireNonNull(availability);
         requireNonNull(value);
 
-        if (availability.equals("Available")) {
+        if (availability.equals(new Availability("Available"))) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_AVAILABLE), MESSAGE_CONSTRAINTS);
-        } else if (availability.equals("NotAvailable")) {
+        } else if (availability.equals(new Availability("NotAvailable"))) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_NOT_AVAILABLE), MESSAGE_CONSTRAINTS);
+        } else if (availability.equals(new Availability("nil"))) {
+            checkArgument(isValidAnimalType(value, VALIDATION_REGEX_NIL), MESSAGE_CONSTRAINTS);
         }
 
         this.value = value;

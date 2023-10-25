@@ -100,18 +100,14 @@ Expected output (fail):
 
 | Scenario                                                                                                               | Error Message                                            |
 |------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
-| Without `n/`, `p/`,`e/`, `a/`                                                                                          | `Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS housing/HOUSING availability/AVAILABILITY animal/ANIMAL_NAME animalType/ANIMAL_TYPE [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Dog t/Urgent t/goodWithDogs`                                                                  |
-| Without `housing/`                                                                                                     | `Housing is required. Please indicate as 'nil' if information is not available.` |
-| Without `availability/`                                                                                                | `Availability is required. Please indicate as 'nil' if information is not available.` |
-| Without `animal/`                                                                                                      | `Animal name is required. Please indicate as 'nil' if information is not available.` |
-| Without `animalType/`                                                                                                  | `Animal type is required. Please indicate as 'nil' if information is not available.` |
-| `availability/nil` but `animal/` is not 'nil'                                                                          | `Animal name should be 'nil' when availability is 'nil'.` |
-| `availability/nil` but `animalType/` is not 'nil'                                                                      | `Animal type should be 'nil' when availability is 'nil'.` |
-| `availability/Available` but `animal/` is not 'nil'                                                                    | `Availability cannot be 'Available' when an animal name is provided; animal name should be 'nil'.` |
+| Without `n/`, `p/`,`e/`, `a/`, `housing/`, `availability/`, `animal/`, `animalType/`                                                | `Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS housing/HOUSING availability/AVAILABILITY animal/ANIMAL_NAME animalType/ANIMAL_TYPE [t/TAG]... Note: If information for that field is not available, put 'nil'. Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Dog t/Urgent t/goodWithDogs`                                                                |
+| `availability/nil` but `animal/` is not 'nil'                                                                          | `When an animal name is provided, availability should not be 'Available' or 'nil'.` |
+| `availability/Available` but `animal/` is not 'nil'                                                                    | `When an animal name is provided, availability should not be 'Available' or 'nil'.` |
 | `housing/` with values other than ‘HDB’, ‘Condo’, ‘Landed’, ‘nil’                                                      | `Housing type should be either 'HDB', 'Condo', 'Landed' or 'nil'`   |
 | `availability/` with values other than ‘Available’, ‘NotAvailable’, ‘nil’                                              | `Availability should be either 'Available', 'NotAvailable' or 'nil'` |
-| `availability/Available` with `animalType/` values set to other values which are NOT ‘able.Cat’ or ‘able.Dog’          | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'. If animal type information is not available, it should be inputted as 'nil'.`                                                                     |
-| `availability/NotAvailable` with `animalType/` values set to other values which are NOT ‘current.Cat’ or ‘current.Dog' | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'. If animal type information is not available, it should be inputted as 'nil'.`                                                                     |
+| `availability/nil` but `animalType/` is not 'nil'                                                                      | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'. If animal type information is not available, it should be inputted as 'nil'. Animal type should be 'nil' when availability is 'nil'.` |
+| `availability/Available` with `animalType/` values set to other values which are NOT ‘able.Cat’ or ‘able.Dog’          | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'. If animal type information is not available, it should be inputted as 'nil'. Animal type should be 'nil' when availability is 'nil'.`                                                                   |
+| `availability/NotAvailable` with `animalType/` values set to other values which are NOT ‘current.Cat’ or ‘current.Dog' | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If fosterer is NOT available, animal type should be 'current.Dog' / 'current.Cat'. If animal type information is not available, it should be inputted as 'nil'. Animal type should be 'nil' when availability is 'nil'.`                                                                |
 
 ### Listing fosterers: `list`
 
@@ -256,6 +252,17 @@ Expected output (fail):
 ```agsl
 Oops! Invalid fosterer index provided, please check again.
 ```
+### Sorting fosterers: `sort`
+
+Sorts list of fosterers alphabetically, by name.
+
+Format: `sort`
+
+Expected output:
+```agsl
+List sorted in alphabetical order of names
+```
+
 ### Clearing all entries : `reset`
 
 Clears all entries from the address book.
@@ -308,10 +315,11 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                                                                     |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add**    | ` add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL_FOSTERED/WANTED [t/TAG]…` <br> e.g., `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent` |
 | **Clear**  | `clear`                                                                                                                                                              |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
 | **List**   | `list`                                                                                                                                                               |
 | **Help**   | `help`                                                                                                                                                               |
+| **Sort**   | `sort`                                                                                                                                                               |
