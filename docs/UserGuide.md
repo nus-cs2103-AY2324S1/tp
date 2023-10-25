@@ -79,6 +79,8 @@ hospital management tasks done faster than current GUI apps in the industry.
         - [Cancelling an appointment](#cancelling-an-appointment-cancel)
 
         - [Displaying all appointments](#displaying-all-appointments-appointments)
+     
+        - [Displaying all appointments for today](#displaying-all-appointments-for-today-today)
 
     - [Miscellaneous Commands](#miscellaneous-commands)
 
@@ -213,7 +215,7 @@ e.g. in `add name=NAME gender=GENDER birthdate=BIRTHDATE phone=PHONE email=EMAIL
 | [**Rescheduling an appointment**](#rescheduling-an-appointment-reschedule)              | `reschedule INDEX start=START end=END`<br> e.g., `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`                                                                                                                                                          |
 | [**Cancelling an appointment**](#cancelling-an-appointment-cancel)                      | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                                                                                                                  |
 | [**Displaying all appointments**](#displaying-all-appointments-appointments)            | `appointments`                                                                                                                                                                                                                                                       |
-| [**Displaying all appointments on today**](#displaying-all-appointments-on-today-today) | `today`                                                                                                                                                                                                                                                              |
+| [**Displaying all appointments for today**](#displaying-all-appointments-for-today-today) | `today`                                                                                                                                                                                                                                                              |
 | [**Undoing a previous command**](#undoing-a-previous-command-undo)                      | `undo`                                                                                                                                                                                                                                                               |
 | [**Redoing a previous command**](#redoing-a-previous-command-redo)                      | `redo`                                                                                                                                                                                                                                                               |
 | [**Clearing all patient records**](#clearing-all-patient-records-clear)                 | `clear`                                                                                                                                                                                                                                                              |
@@ -419,7 +421,7 @@ This command shows a list of all appointments currently scheduled.
 
 Format: `appointments`
 
-### Displaying all appointments on today: `today`
+### Displaying all appointments for today: `today`
 
 This command shows a list of all appointments currently scheduled to start today, i.e. the current date you are using
 the command on.
