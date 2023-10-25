@@ -85,6 +85,14 @@ public class Interaction {
         return this.date;
     }
 
+    /**
+     * Returns true if the outcome of the interaction is the same as the given outcome.
+     * @param outcome Outcome to be compared.
+     */
+    public boolean isOutcome(Outcome outcome) {
+        return this.outcome == outcome;
+    }
+
     @Override
     public String toString() {
         return interactionNote
