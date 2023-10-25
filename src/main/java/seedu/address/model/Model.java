@@ -147,15 +147,14 @@ public interface Model {
      * @return Pair representing Person and Group object of interest
      */
     Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException;
-
     Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException;
-    void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException;
-    void deleteFreeTimeFromPerson(Name personName, ArrayList<TimeInterval> toDeleteFreeTime) throws CommandException;
+    void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException;
+    TimeIntervalList getTimeFromPerson(Name personName) throws CommandException;
 
-    /**
-     * Assign person to group
-     * @param person will store group reference
-     * @param group will store person reference
-     */
+    void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException;
+    void deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> toDeleteTime) throws CommandException;
+
+    void deleteTimeFromGroup(Group group, ArrayList<TimeInterval> toDeleteTime) throws CommandException;
+    TimeIntervalList getTimeFromGroup(Group group) throws CommandException;
 
 }

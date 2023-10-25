@@ -16,14 +16,12 @@ import seedu.address.model.person.Person;
  */
 public class GroupPersonCommand extends Command {
 
-    public static final java.lang.String COMMAND_WORD = "group";
+    public static final String COMMAND_WORD = "group";
 
-    public static final java.lang.String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to a group in " +
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to a group in " +
         "the address book.\n" + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_GROUPTAG + "GROUP ";
 
-    public static final java.lang.String MESSAGE_SUCCESS = "%1$s is now a part of %2$s";
-    public static final java.lang.String MESSAGE_DUPLICATE_PERSON_IN_GROUP =
-        "Error, invalid input entered, unable to put the person into group";
+    public static final String MESSAGE_SUCCESS = "%1$s is now a part of %2$s";
 
     private final String personName;
     private final String groupName;
