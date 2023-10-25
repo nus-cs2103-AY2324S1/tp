@@ -56,7 +56,7 @@ public class OweCommand extends Command {
         }
         p.pay(negatedAmount);
         model.setPerson(p, p);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, amount.toDollarString(),
+        return new CommandResult(String.format(MESSAGE_SUCCESS, amount.toAbsoluteDollarString(),
                 Messages.format(p)));
     }
 

@@ -91,9 +91,9 @@ class BalanceTest {
 
     @Test
     void toDollarString() {
-        assertEquals("$0.00", defaultBalance.toDollarString());
-        assertEquals("$10.00", new Balance(1000).toDollarString());
-        assertEquals("$10.50", new Balance(1050).toDollarString());
+        assertEquals("$0.00", defaultBalance.toAbsoluteDollarString());
+        assertEquals("$10.00", new Balance(1000).toAbsoluteDollarString());
+        assertEquals("$10.50", new Balance(1050).toAbsoluteDollarString());
     }
 
     @Test

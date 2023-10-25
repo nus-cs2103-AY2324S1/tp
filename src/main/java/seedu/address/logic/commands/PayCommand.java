@@ -55,7 +55,7 @@ public class PayCommand extends Command {
         }
         p.pay(amount);
         model.setPerson(p, p);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, amount.toDollarString(),
+        return new CommandResult(String.format(MESSAGE_SUCCESS, amount.toAbsoluteDollarString(),
                 Messages.format(p)));
     }
 

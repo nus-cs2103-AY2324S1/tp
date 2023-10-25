@@ -76,7 +76,7 @@ public class Balance {
     /**
      * Returns a dollar string representation of the balance.
      */
-    public String toDollarString() {
+    public String toAbsoluteDollarString() {
         return String.format("$%d.%02d", Math.abs(value) / 100, Math.abs(value) % 100);
     }
 
@@ -86,9 +86,9 @@ public class Balance {
      */
     public String toUiMessage() {
         if (value < 0) {
-            return String.format("You owe them: %s", toDollarString());
+            return String.format("You owe them: %s", toAbsoluteDollarString());
         }
-        return String.format("They owe you: %s", toDollarString());
+        return String.format("They owe you: %s", toAbsoluteDollarString());
     }
 
     /**
