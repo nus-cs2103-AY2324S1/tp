@@ -8,7 +8,6 @@ import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.logic.commands.ListCommand;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;

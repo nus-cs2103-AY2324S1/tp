@@ -3,6 +3,7 @@ package seedu.flashlingo.logic.commands;
 import static seedu.flashlingo.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.flashlingo.model.flashcard.words.OriginalWord;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 

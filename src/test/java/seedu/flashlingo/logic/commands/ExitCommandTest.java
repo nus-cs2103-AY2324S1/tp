@@ -5,8 +5,6 @@ import static seedu.flashlingo.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLED
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.logic.commands.CommandResult;
-import seedu.flashlingo.logic.commands.ExitCommand;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 

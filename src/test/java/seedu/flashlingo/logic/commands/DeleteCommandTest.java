@@ -3,20 +3,21 @@ package seedu.flashlingo.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.*;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.showFlashCardAtIndex;
+import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.flashlingo.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
-import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.Messages;
-import seedu.flashlingo.logic.commands.DeleteCommand;
+import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
-import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

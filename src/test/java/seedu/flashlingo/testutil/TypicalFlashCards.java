@@ -7,7 +7,13 @@ import java.util.List;
 import seedu.flashlingo.model.Flashlingo;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
-import static seedu.flashlingo.logic.commands.CommandTestUtil.*;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_AMY;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_BOB;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_ORIGINAL_WORD_LANGUAGE;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_AMY;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_BOB;
+import static seedu.flashlingo.logic.commands.CommandTestUtil.VALID_TRANSLATION_LANGUAGE;
+
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -16,7 +22,7 @@ public class TypicalFlashCards {
 
     public static final FlashCard ALICE = new FlashcardBuilder().withOriginalWord("Alice Pauline",
                     "English")
-            .withTranslation("爱丽丝·宝琳","Mandarin").build();
+            .withTranslation("爱丽丝·宝琳", "Mandarin").build();
     public static final FlashCard BENSON = new FlashcardBuilder().withOriginalWord("Benson Meier",
                     "English")
             .withTranslation("本森·梅尔", "Mandarin")
@@ -48,7 +54,7 @@ public class TypicalFlashCards {
             .build();
     public static final FlashCard IDA = new FlashcardBuilder().withOriginalWord("Ida Mueller",
                     "English")
-            .withTranslation("艾达·米勒","Mandarin")
+            .withTranslation("艾达·米勒", "Mandarin")
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}

@@ -5,8 +5,6 @@ import static seedu.flashlingo.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.logic.commands.CommandResult;
-import seedu.flashlingo.logic.commands.HelpCommand;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 

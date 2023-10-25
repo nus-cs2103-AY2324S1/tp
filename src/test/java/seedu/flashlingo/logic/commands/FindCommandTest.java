@@ -3,9 +3,11 @@ package seedu.flashlingo.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.flashlingo.testutil.TypicalFlashCards.*;
 import static seedu.flashlingo.logic.Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW;
 import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.flashlingo.testutil.TypicalFlashCards.BENSON;
+import static seedu.flashlingo.testutil.TypicalFlashCards.DANIEL;
+import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
 
 import java.util.Arrays;
 import java.util.Collections;
