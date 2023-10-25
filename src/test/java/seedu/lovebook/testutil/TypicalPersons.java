@@ -26,27 +26,27 @@ import seedu.lovebook.model.person.Date;
 public class TypicalPersons {
 
     public static final Date ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withIncome("1000").withHeight("123").withGender("F")
+            .withIncome("1000").withHeight("126").withGender("F")
             .withAge("31").withHoroscope("TAURUS").build();
     public static final Date BENSON = new PersonBuilder().withName("Benson Meier")
-            .withIncome("2000").withHeight("23124")
+            .withIncome("2000").withHeight("234")
             .withGender("M").withHoroscope("LIBRA").withAge("22").build();
     public static final Date CARL = new PersonBuilder().withName("Carl Kurz").withAge("23")
-            .withGender("M").withIncome("3000").withHeight("54321").withHoroscope("ARIES").build();
+            .withGender("M").withIncome("3000").withHeight("123").withHoroscope("ARIES").build();
     public static final Date DANIEL = new PersonBuilder().withName("Daniel Meier").withAge("25")
             .withGender("M").withIncome("4000").withHeight("10").withHoroscope("LIBRA").build();
     public static final Date ELLE = new PersonBuilder().withName("Elle Meyer").withAge("34")
-            .withGender("F").withIncome("5000").withHeight("1023").withHoroscope("GEMINI").build();
+            .withGender("F").withIncome("5000").withHeight("123").withHoroscope("GEMINI").build();
     public static final Date FIONA = new PersonBuilder().withName("Fiona Kunz").withAge("24")
-            .withGender("F").withIncome("6000").withHeight("3444").withHoroscope("GEMINI").build();
+            .withGender("F").withIncome("6000").withHeight("124").withHoroscope("GEMINI").build();
     public static final Date GEORGE = new PersonBuilder().withName("George Best").withAge("94")
-            .withGender("M").withIncome("7000").withHeight("23245").withHoroscope("TAURUS").build();
+            .withGender("M").withIncome("7000").withHeight("245").withHoroscope("TAURUS").build();
 
     // Manually added
     public static final Date HOON = new PersonBuilder().withName("Hoon Meier").withAge("76")
-            .withGender("M").withIncome("8000").withHeight("232").withHoroscope("LIBRA").build();
+            .withGender("M").withIncome("8000").withHeight("132").withHoroscope("LIBRA").build();
     public static final Date IDA = new PersonBuilder().withName("Ida Mueller").withAge("38")
-            .withGender("F").withIncome("9000").withHeight("35545").withHoroscope("CAPRICORN").build();
+            .withGender("F").withIncome("9000").withHeight("145").withHoroscope("CAPRICORN").build();
 
     // Manually added - Date's details found in {@code CommandTestUtil}
     public static final Date AMY = new PersonBuilder().withName(VALID_NAME_AMY).withAge(VALID_AGE_AMY)

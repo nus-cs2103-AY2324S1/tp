@@ -63,7 +63,7 @@ public class MetricContainsKeywordPredicateTest {
         // Keywords match age, gender and lovebook, but does not match name
         predicate = new MetricContainsKeywordPredicate("Alice", PREFIX_AGE);
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withAge("33")
-                .withGender("F").withHeight("12334").build()));
+                .withGender("F").withHeight("124").build()));
     }
 
     @Test

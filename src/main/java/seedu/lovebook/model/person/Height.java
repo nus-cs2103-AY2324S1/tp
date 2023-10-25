@@ -9,13 +9,13 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
  */
 public class Height {
 
-    public static final String MESSAGE_CONSTRAINTS = "Height can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Height can take any values between 1 and 250cm";
 
     /*
-     * The first character of the lovebook must not be a whitespace,
+     * The first character of the Height must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
+    public static final String VALIDATION_REGEX = "^(?:[1-9]|[1-9][0-9]|[1-9][0-9][0-9]|1[0-9][0-9]|200|250)$";
 
     public final String value;
 
