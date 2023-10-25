@@ -571,5 +571,3 @@ This section consists of more details of format limitations mentioned above.
 | **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                    |
 | **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                |
 | **Clear**           | `clear`                                                                                                         |
-
-                                                                                                    
