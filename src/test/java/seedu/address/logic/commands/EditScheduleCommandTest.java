@@ -29,6 +29,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.StartTime;
 import seedu.address.testutil.EditScheduleDescriptorBuilder;
 import seedu.address.testutil.ScheduleBuilder;
 
@@ -130,10 +131,23 @@ public class EditScheduleCommandTest {
     }
 
     @Test
-    public void execute_badSchedule_failure() {
+    public void execute_startTimeEqualsEndTime_failure() {
         EditScheduleDescriptor descriptor =
             new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN)
                 .withEndTime(new EndTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().value))
+                .build();
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_THIRD_SCHEDULE, descriptor);
+
+        assertCommandFailure(editScheduleCommand, model, Schedule.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void execute_startTimeAfterEndTime_failure() {
+        EndTime endTime = new EndTime(SCHEDULE_ALICE_FIRST_JAN.getStartTime().value);
+        EditScheduleDescriptor descriptor =
+            new EditScheduleDescriptorBuilder(SCHEDULE_ALICE_FIRST_JAN)
+                .withStartTime(new StartTime(SCHEDULE_ALICE_FIRST_JAN.getEndTime().value))
+                .withEndTime(endTime)
                 .build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_THIRD_SCHEDULE, descriptor);
 
