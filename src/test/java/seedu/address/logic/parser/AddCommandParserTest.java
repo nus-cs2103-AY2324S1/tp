@@ -1,7 +1,51 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_NAME_NIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ANIMAL_TYPE_NIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AVAILABLE;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_NOT_AVAILABLE;
+import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_NIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.HOUSING_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.HOUSING_NIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ANIMAL_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ANIMAL_TYPE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_AVAILABILITY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOUSING_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANIMAL_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANIMAL_TYPE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AVAILABILITY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUSING_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -105,10 +149,12 @@ public class AddCommandParserTest {
                 + "both 'nil' or both not 'nil'.";
 
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND
-                        + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_NOT_AVAILABLE + HOUSING_DESC_BOB + ANIMAL_TYPE_NIL_DESC_BOB,
+                        + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_NOT_AVAILABLE
+                        + HOUSING_DESC_BOB + ANIMAL_TYPE_NIL_DESC_BOB,
                 expectedMessage);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND
-                        + ANIMAL_NAME_NIL_DESC_BOB + AVAILABILITY_DESC_NOT_AVAILABLE + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
+                        + ANIMAL_NAME_NIL_DESC_BOB + AVAILABILITY_DESC_NOT_AVAILABLE
+                        + HOUSING_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
                 expectedMessage);
     }
 
