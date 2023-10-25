@@ -145,7 +145,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidAnimalNameTypeWithNotAvailableAvailability_throwsParseException() {
-        String expectedMessage = "When availability is 'NotAvailable', animal name and type have to either "
+        String expectedMessage = "When availability is 'NotAvailable', animal name and type have to either be "
                 + "both 'nil' or both not 'nil'.";
 
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND
