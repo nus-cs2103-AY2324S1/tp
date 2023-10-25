@@ -109,7 +109,6 @@ public class BookingPeriod {
         return false;
     }
 
-
     /**
      * Sets the start and end date and time for the booking period.
      *
@@ -145,14 +144,10 @@ public class BookingPeriod {
         if (other == null) {
             return false;
         }
-        
         //A period A overlaps with another period B if:
         // A does not end before B OR B does not end before A.
         return !(checkInDateTime.isAfter(other.checkOutDateTime) || checkOutDateTime.isBefore(other.checkInDateTime));
     }
-
-
-
 
     @Override
     public String toString() {
@@ -178,5 +173,4 @@ public class BookingPeriod {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
