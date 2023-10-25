@@ -31,32 +31,32 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withTelegram("@aliceheyhey").withEmail("alice@example.com")
-            .withPhone("94351253").withHour("8")
+            .withPhone("94351253").withHour(8)
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withTelegram("@bensonnn123")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").withFreeTime("21:15", "22:30").withMods("CS1231", "CS2103T")
-            .withHour("14").build();
+            .withHour(14).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withTelegram("@carlkurz").withHour("24").build();
+            .withEmail("heinz@example.com").withTelegram("@carlkurz").withHour(24).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withTelegram("@danielmeier")
-            .withTags("friends").withFreeTime("10:45", "11:30").withHour("38").build();
+            .withTags("friends").withFreeTime("10:45", "11:30").withHour(38).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withTelegram("@hiitselle").withHour("63").build();
+            .withEmail("werner@example.com").withTelegram("@hiitselle").withHour(63).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withTelegram("@imfionaa").withFreeTime("21:10", "23:15")
-            .withHour("39").build();
+            .withHour(39).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withTelegram("@georgiey").withFreeTime("07:00", "09:00")
-            .withHour("46").build();
+            .withHour(46).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withTelegram("@hooniehoonhoon").withHour("14").build();
+            .withEmail("stefan@example.com").withTelegram("@hooniehoonhoon").withHour(14).build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withTelegram("@idamueller").withHour("27").build();
+            .withEmail("hans@example.com").withTelegram("@idamueller").withHour(27).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

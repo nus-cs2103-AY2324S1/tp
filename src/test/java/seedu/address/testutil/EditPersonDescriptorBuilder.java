@@ -43,6 +43,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setFreeTime(person.getFreeTime());
         descriptor.setTags(person.getTags().size() == 0 ? null : person.getTags());
         descriptor.setMods(person.getMods().size() == 0 ? null : person.getMods());
+        descriptor.setHour(person.getHour());
     }
 
     /**
@@ -113,7 +114,7 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code hour}  and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withHour(String hour) {
+    public EditPersonDescriptorBuilder withHour(Integer hour) {
         descriptor.setHour(new Hour(hour));
         return this;
     }

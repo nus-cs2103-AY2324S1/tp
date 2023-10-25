@@ -182,9 +182,16 @@ public class ParserUtil {
     public static Hour parseHour(String hour) throws ParseException {
         requireNonNull(hour);
         String trimmedHour = hour.trim();
-        if (!Hour.isValidHour(trimmedHour)) {
+        try {
+            Integer intHour = Integer.parseInt(trimmedHour);
+            if (!Hour.isValidHour(intHour)) {
+                throw new ParseException(Hour.MESSAGE_CONSTRAINTS);
+            }
+            return new Hour(intHour);
+        } catch (NumberFormatException nfe) {
             throw new ParseException(Hour.MESSAGE_CONSTRAINTS);
         }
-        return new Hour(trimmedHour);
+
+
     }
 }

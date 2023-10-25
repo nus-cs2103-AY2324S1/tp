@@ -208,15 +208,17 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseHour_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Hour expectedHour = new Hour(VALID_HOUR);
+    public void parseHour_validValueWithoutWhitespace_returnsHour() throws Exception {
+        // Use parseInt because we assume the VALID_HOUR can be parsed correctly, and we only want to test for parser
+        Hour expectedHour = new Hour(Integer.parseInt(VALID_HOUR));
         assertEquals(expectedHour, ParserUtil.parseHour(VALID_HOUR));
     }
 
     @Test
-    public void parseHour_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+    public void parseHour_validValueWithWhitespace_returnsTrimmedHour() throws Exception {
+        // Use parseInt because we assume the VALID_HOUR can be parsed correctly, and we only want to test for parser
         String hourWithWhitespace = WHITESPACE + VALID_HOUR + WHITESPACE;
-        Hour expectedHour = new Hour(VALID_HOUR);
+        Hour expectedHour = new Hour(Integer.parseInt(VALID_HOUR));
         assertEquals(expectedHour, ParserUtil.parseHour(hourWithWhitespace));
     }
 

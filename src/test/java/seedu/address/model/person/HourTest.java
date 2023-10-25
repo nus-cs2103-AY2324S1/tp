@@ -16,9 +16,9 @@ public class HourTest {
     }
 
     @Test
-    public void constructor_invalidHour_throwsIllegalArgumentException() {
-        String invalidHour = "";
-        assertThrows(IllegalArgumentException.class, () -> new Hour(invalidHour));
+    public void constructor_invalidHour_throwsNullPointerException() {
+        Integer invalidHour = null;
+        assertThrows(NullPointerException.class, () -> new Hour(invalidHour));
     }
 
     @Test
@@ -27,33 +27,30 @@ public class HourTest {
         assertThrows(NullPointerException.class, () -> Hour.isValidHour(null));
 
         // invalid working hour
-        assertFalse(Hour.isValidHour("")); // empty string
-        assertFalse(Hour.isValidHour(" ")); // spaces only
-        assertFalse(Hour.isValidHour("32805")); // working hour too long
-        assertFalse(Hour.isValidHour("-4")); // negative working hour
-        assertFalse(Hour.isValidHour("39o")); // invalid working hour
+        assertFalse(Hour.isValidHour(32805)); // working hour too long
+        assertFalse(Hour.isValidHour(-4)); // negative working hour
 
-        // valid telegram handle
-        assertTrue(Hour.isValidHour("38"));
+        // valid working hour
+        assertTrue(Hour.isValidHour(38));
     }
 
     @Test
     public void equals() {
-        Hour hour = new Hour("8848");
+        Hour hour = new Hour(8848);
 
         // same values -> returns true
-        assertEquals(hour, new Hour("8848"));
+        assertEquals(hour, new Hour(8848));
 
         // same object -> returns true
         assertEquals(hour, hour);
 
-        // null -> returns false
-        assertNotEquals(null, hour);
+        // default hour -> returns false
+        assertNotEquals(0, hour);
 
         // different types -> returns false
         assertNotEquals(5.0f, hour, "0.0");
 
         // different values -> returns false
-        assertNotEquals(hour, new Hour("884"));
+        assertNotEquals(hour, new Hour(884));
     }
 }

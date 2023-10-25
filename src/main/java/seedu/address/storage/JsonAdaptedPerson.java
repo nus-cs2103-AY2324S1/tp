@@ -37,7 +37,7 @@ class JsonAdaptedPerson {
     private final String to;
 
     private final List<JsonAdaptedMod> mods = new ArrayList<>();
-    private final String hour;
+    private final Integer hour;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -48,7 +48,7 @@ class JsonAdaptedPerson {
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("from") String from,
             @JsonProperty("to") String to,
             @JsonProperty("mods") List<JsonAdaptedMod> mods,
-            @JsonProperty("hour") String hour) {
+            @JsonProperty("hour") Integer hour) {
         this.name = name;
         this.phone = phone;
         this.email = email;

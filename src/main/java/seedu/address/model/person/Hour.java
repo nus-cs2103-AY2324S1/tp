@@ -5,21 +5,21 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidHour(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidHour(Integer)}
  */
 public class Hour {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Hour should only be positive integers and should be less than 9999";
-    public static final String VALIDATION_REGEX = "^[0-9]\\d{0,3}$";
-    public final String value;
+    public static final String EMPTY_HOUR = "0";
+    public final Integer value;
 
     /**
      * Constructs a {@code Name}.
      *
      * @param hour A valid hour.
      */
-    public Hour(String hour) {
+    public Hour(Integer hour) {
         requireNonNull(hour);
         checkArgument(isValidHour(hour), MESSAGE_CONSTRAINTS);
         this.value = hour;
@@ -28,14 +28,14 @@ public class Hour {
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidHour(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidHour(Integer test) {
+        return test >= 0 && test <= 9999;
     }
 
 
     @Override
     public String toString() {
-        return value;
+        return String.valueOf(value);
     }
 
     @Override

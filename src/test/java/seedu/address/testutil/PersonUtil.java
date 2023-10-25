@@ -51,7 +51,7 @@ public class PersonUtil {
         person.getMods().stream().forEach(
             s -> sb.append(PREFIX_MOD + s.tagName + " ")
         );
-        sb.append(PREFIX_HOUR + person.getHour().value + " ");
+        sb.append(PREFIX_HOUR + String.valueOf(person.getHour().value) + " ");
         return sb.toString();
     }
 
@@ -75,7 +75,7 @@ public class PersonUtil {
             Set<Mod> mods = descriptor.getMods().get();
             mods.forEach(s -> sb.append(PREFIX_MOD).append(s.tagName).append(" "));
         }
-        descriptor.getHour().ifPresent(hour -> sb.append(PREFIX_HOUR).append(hour.value).append(" "));
+        descriptor.getHour().ifPresent(hour -> sb.append(PREFIX_HOUR).append(String.valueOf(hour.value)).append(" "));
         return sb.toString();
     }
 }
