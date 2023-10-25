@@ -5,6 +5,10 @@ package seedu.address.model.booking.exceptions;
  * identity).
  */
 public class DuplicateBookingException extends RuntimeException {
+
+    /**
+     * Constructs a DuplicateBookingException with a default error message.
+     */
     public DuplicateBookingException() {
         super("Operation would result in duplicate persons");
     }
