@@ -51,6 +51,20 @@ public class Email {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns local part of the email.
+     */
+    public String getLocalPart() {
+        return value.split("@")[0];
+    }
+
+    /**
+     * Returns domain of email.
+     */
+    public String getDomain() {
+        return value.split("@")[0].split("\\.")[0];
+    }
+
     @Override
     public String toString() {
         return value;
@@ -75,5 +89,4 @@ public class Email {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

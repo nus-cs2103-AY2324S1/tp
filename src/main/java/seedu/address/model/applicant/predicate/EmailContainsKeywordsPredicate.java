@@ -3,9 +3,9 @@ package seedu.address.model.applicant.predicate;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Email;
 
 /**
  * Tests that an {@code Applicant}'s {@code Email} matches any of the keywords given.
@@ -19,8 +19,12 @@ public class EmailContainsKeywordsPredicate implements Predicate<Applicant> {
 
     @Override
     public boolean test(Applicant applicant) {
+        Email email = applicant.getEmail();
+        String localPart = email.getLocalPart();
+        String domain = email.getDomain();
+
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(applicant.getEmail().value, keyword));
+                .anyMatch(keyword -> keyword.equalsIgnoreCase(localPart) || keyword.equalsIgnoreCase(domain));
     }
 
     @Override

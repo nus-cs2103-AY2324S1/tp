@@ -103,6 +103,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        return Arrays.asList(trimmedArgs.split("\\s+"));
+        return Arrays.asList(trimmedArgs.split("[,\\s]+"));
     }
 }
