@@ -170,7 +170,7 @@ Format: `addsc sc/SHORTCUT kw/KEYWORD`
  * `KEYWORD` must match an existing command keyword.
 
 Examples:
-* `addsc sc/del kw/delete` maps `del` to the Delete command keyword.
+* `addsc sc/del kw/delete` maps `del` to the `delete` command keyword.
   * i.e. `del 3` will work the same as `delete 3`.
 
 ### Deleting custom shortcuts : `delsc`
