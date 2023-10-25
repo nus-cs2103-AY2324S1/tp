@@ -135,4 +135,31 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAttendanceList(Predicate<Attendance> predicate);
+
+    void commit(String commitMessage);
+
+    /**
+     * Returns true if there is a {@code Command} that can be undone.
+     */
+    boolean canUndo();
+
+    /**
+     * Undoes the most recent undoable {@code Command}
+     */
+    String undo();
+
+    /**
+     * Returns true if there is a {@code Command} that can be redone.
+     */
+    boolean canRedo();
+
+    /**
+     * Redoes the most recent redoable {@code Command}
+     */
+    String redo();
+
+    /**
+     * Returns a summary of all commands currently captured by this {@code Model}.
+     */
+    VersionCaptures viewVersionCaptures();
 }

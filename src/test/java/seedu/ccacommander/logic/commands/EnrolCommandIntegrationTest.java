@@ -39,8 +39,10 @@ public class EnrolCommandIntegrationTest {
                 .withRemark(ALICE_AURORA.getRemark().value)
                 .build();
 
+        String commitMessage = String.format(EnrolCommand.MESSAGE_COMMIT, validAttendance.toString());
         Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.createAttendance(validAttendance);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_TWO, VALID_HOURS_A, VALID_REMARK_A),
                 model, String.format(EnrolCommand.MESSAGE_SUCCESS, Messages.format(validAttendance)),

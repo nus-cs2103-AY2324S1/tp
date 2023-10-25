@@ -22,6 +22,7 @@ import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ReadOnlyCcaCommander;
 import seedu.ccacommander.model.ReadOnlyUserPrefs;
+import seedu.ccacommander.model.VersionCaptures;
 import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
@@ -207,6 +208,36 @@ public class CreateEventCommandTest {
         public void updateFilteredAttendanceList(Predicate<Attendance> attendance) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void commit(String commitMessage) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String undo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String redo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public VersionCaptures viewVersionCaptures() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -232,7 +263,12 @@ public class CreateEventCommandTest {
      */
     private class ModelStubAcceptingEventAdded extends ModelStub {
         final ArrayList<Event> eventsAdded = new ArrayList<>();
+        final ArrayList<String> commitMessages = new ArrayList<>();
 
+        @Override
+        public void commit(String commitMessage) {
+            commitMessages.add(commitMessage);
+        }
         @Override
         public boolean hasEvent(Event event) {
             requireNonNull(event);
