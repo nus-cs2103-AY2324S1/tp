@@ -4,6 +4,7 @@ import static networkbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static networkbook.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static networkbook.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -416,5 +417,15 @@ public class EditCommandTest {
 
         // different indices
         assertFalse(standardCommand.equals(differentIndexCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        EditAction editAction = editPersonDescriptor -> {};
+        EditCommand command = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, editAction);
+        String expectedString = command.getClass().getCanonicalName()
+                + "{index=" + TypicalIndexes.INDEX_FIRST_PERSON
+                + ", editAction=" + editAction + "}";
+        assertEquals(expectedString, command.toString());
     }
 }

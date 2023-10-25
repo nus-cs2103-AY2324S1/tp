@@ -94,6 +94,13 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_nameSpecified_failure() {
+        Index index = TypicalIndexes.INDEX_FIRST_PERSON;
+        String userInput = index.getOneBased() + CommandTestUtil.VALID_NAME_DESC;
+        assertParseFailure(parser, userInput, AddCommandParser.MESSAGE_MULTIPLE_NAMES);
+    }
+
+    @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = TypicalIndexes.INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND

@@ -404,10 +404,8 @@ public class AddCommand extends Command {
                     .add("graduation", graduation)
                     .add("courses", courses)
                     .add("specialisations", specialisations)
+                    .add("priority", priority)
                     .add("tags", tags);
-            if (priority != null) {
-                tsb.add("priority", priority);
-            }
             return tsb.toString();
         }
     }

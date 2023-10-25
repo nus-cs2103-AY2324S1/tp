@@ -92,7 +92,8 @@ public class AddPersonDescriptorTest {
                 + editPersonDescriptor.getLinks().orElse(null) + ", graduation="
                 + editPersonDescriptor.getGraduation().orElse(null) + ", courses="
                 + editPersonDescriptor.getCourses().orElse(null) + ", specialisations="
-                + editPersonDescriptor.getSpecialisations().orElse(null) + ", tags="
+                + editPersonDescriptor.getSpecialisations().orElse(null) + ", priority="
+                + editPersonDescriptor.getPriority().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

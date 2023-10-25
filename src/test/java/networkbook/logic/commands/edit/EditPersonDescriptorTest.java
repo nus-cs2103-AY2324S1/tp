@@ -1,8 +1,11 @@
 package networkbook.logic.commands.edit;
 
 import static networkbook.testutil.Assert.assertThrows;
+import static networkbook.testutil.TypicalPersons.IDA;
 import static networkbook.testutil.TypicalPersons.JACK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +20,28 @@ import networkbook.model.tag.Tag;
 import networkbook.model.util.UniqueList;
 
 public class EditPersonDescriptorTest {
+    @Test
+    public void equals() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptor(JACK);
+        EditPersonDescriptor sameDescriptor = new EditPersonDescriptor(JACK);
+        EditPersonDescriptor differentDescriptor = new EditPersonDescriptor(IDA);
+
+        //  null -> false
+        assertFalse(descriptor.equals(null));
+
+        // other object type -> false
+        assertFalse(descriptor.equals(1));
+
+        // same reference -> true
+        assertTrue(descriptor.equals(descriptor));
+
+        // same descriptor -> true
+        assertTrue(descriptor.equals(sameDescriptor));
+
+        // different descriptor -> false
+        assertFalse(descriptor.equals(differentDescriptor));
+    }
+
     @Test
     public void setName_null_throwsNullPointerException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
