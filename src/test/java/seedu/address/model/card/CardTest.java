@@ -7,8 +7,11 @@ import static seedu.address.testutil.TypicalCards.CS1101S;
 import static seedu.address.testutil.TypicalCards.CS1231S;
 import static seedu.address.testutil.TypicalCards.CS2100;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CardBuilder;
 
 public class CardTest {
@@ -56,12 +59,24 @@ public class CardTest {
         // different question -> returns false
         Card editedAlice = new CardBuilder(CS1101S).withQuestion(CS2100.getQuestion().toString()).build();
         assertFalse(CS1101S.equals(editedAlice));
+
+        // tags differs in case, all other attributes same -> return false
+        Card editedCS1231S = new CardBuilder(CS1231S)
+                .withTags(List.of(new Tag("CS1231S"))).build();
+        Card editedLowercaseCS1231S = new CardBuilder(CS1231S)
+                .withTags(List.of(new Tag("cs1231s"))).build();
+        assertFalse(editedLowercaseCS1231S.equals(editedCS1231S));
+
+        // different number of tags -> return false
+        Card editedCS1231SWithMoreTags = new CardBuilder(CS1231S)
+                .withTags(List.of(new Tag("cs1231s"), new Tag("CS1231S"))).build();
+        assertFalse(editedLowercaseCS1231S.equals(editedCS1231S));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Card.class.getCanonicalName() + "{question=" + CS1101S.getQuestion()
-                + ", answer=" + CS1101S.getAnswer() + "}";
+                + ", answer=" + CS1101S.getAnswer() + ", tags=[]" + "}";
         assertEquals(expected, CS1101S.toString());
     }
 }

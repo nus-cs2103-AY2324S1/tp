@@ -63,7 +63,7 @@ public class SetDifficultyCommand extends Command {
 
         if (Objects.equals(newDifficulty, "easy")) {
             cardToSetDifficulty.setDifficulty(newDifficulty);
-            cardToSetDifficulty.setPriority(deckSize - 1);
+            cardToSetDifficulty.setNewPracticeDateWith(newDifficulty);
             model.getDeck().sort();
             return new CommandResult(
                     String.format(Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_EASY,
@@ -72,7 +72,7 @@ public class SetDifficultyCommand extends Command {
 
         if (Objects.equals(newDifficulty, "medium")) {
             cardToSetDifficulty.setDifficulty(newDifficulty);
-            cardToSetDifficulty.setPriority(Math.floorDiv(deckSize, 2));
+            cardToSetDifficulty.setNewPracticeDateWith(newDifficulty);
             model.getDeck().sort();
             return new CommandResult(
                     String.format(Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_MEDIUM,
@@ -81,7 +81,7 @@ public class SetDifficultyCommand extends Command {
 
         if (Objects.equals(newDifficulty, "hard")) {
             cardToSetDifficulty.setDifficulty(newDifficulty);
-            cardToSetDifficulty.setPriority(deckSize - Math.floorDiv(deckSize, 10));
+            cardToSetDifficulty.setNewPracticeDateWith(newDifficulty);
             model.getDeck().sort();
             return new CommandResult(
                     String.format(Messages.MESSAGE_CARDS_SET_DIFFICULTY_VIEW_HARD,

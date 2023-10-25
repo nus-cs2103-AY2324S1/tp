@@ -15,6 +15,8 @@ import seedu.address.model.UserPrefs;
 
 public class SetDifficultyCommandTest {
 
+
+
     private Model model = new ModelManager(getTypicalDeck(), new UserPrefs());
 
     @Test
@@ -26,7 +28,7 @@ public class SetDifficultyCommandTest {
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
         expectedModel.getDeck().getCardList().get(0).setDifficulty("easy");
-        expectedModel.getDeck().getCardList().get(0).setPriority(model.getFilteredCardList().size() - 1);
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("easy");
         expectedModel.getDeck().sort();
 
         assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
@@ -41,7 +43,7 @@ public class SetDifficultyCommandTest {
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
         expectedModel.getDeck().getCardList().get(0).setDifficulty("medium");
-        expectedModel.getDeck().getCardList().get(0).setPriority(Math.floorDiv(model.getFilteredCardList().size(), 2));
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("medium");
         expectedModel.getDeck().sort();
 
         assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);
@@ -56,7 +58,7 @@ public class SetDifficultyCommandTest {
 
         Model expectedModel = new ModelManager(new Deck(model.getDeck()), new UserPrefs());
         expectedModel.getDeck().getCardList().get(0).setDifficulty("hard");
-        expectedModel.getDeck().getCardList().get(0).setPriority(model.getFilteredCardList().size() - 1);
+        expectedModel.getDeck().getCardList().get(0).setNewPracticeDateWith("hard");
         expectedModel.getDeck().sort();
 
         assertCommandSuccess(setDifficultyCommand, model, expectedMessage, expectedModel);

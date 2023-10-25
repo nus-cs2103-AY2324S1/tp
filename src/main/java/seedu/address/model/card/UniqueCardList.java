@@ -13,11 +13,14 @@ import seedu.address.model.card.exceptions.CardNotFoundException;
 import seedu.address.model.card.exceptions.DuplicateCardException;
 
 /**
- * A list of cards that enforces uniqueness between its elements and does not allow nulls.
- * A card is considered unique by comparing using {@code Card#isSameCard(Card)}. As such, adding and updating of
- * cards uses Card#isSameCard(Card) for equality so as to ensure that the card being added or updated is
- * unique in terms of identity in the UniqueCardList. However, the removal of a card uses Card#equals(Object) so
- * as to ensure that the card with exactly the same fields will be removed.
+ * A list of cards that enforces uniqueness between its elements and does not
+ * allow nulls.
+ * A card is considered unique by comparing using {@code Card#isSameCard(Card)}.
+ * As such, adding and updating of cards uses Card#isSameCard(Card) for equality
+ * to ensure that the card being added or updated is unique in terms of
+ * identity in the UniqueCardList.
+ * However, the removal of a card uses Card#equals(Object)
+ * to ensure that the card with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -26,8 +29,10 @@ import seedu.address.model.card.exceptions.DuplicateCardException;
 public class UniqueCardList implements Iterable<Card> {
 
     private final ObservableList<Card> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Card> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Card> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
+
+    private final Comparator<Card> cardComparator = new CardPracticeDateComparator();
 
     /**
      * Returns true if the list contains an equivalent card as the given argument.
@@ -59,17 +64,18 @@ public class UniqueCardList implements Iterable<Card> {
     }
 
     /**
-     * Sort the list based on card priorities.
+     * Sort the list based on the card's next practice date.
      */
     public void sort() {
-        internalList.sort(Comparator.comparingInt(Card::getPriority));
+        // internalList.sort(Comparator.comparingInt(Card::getPriority));
+        internalList.sort(cardComparator);
     }
-
 
     /**
      * Replaces the card {@code target} in the list with {@code editedCard}.
      * {@code target} must exist in the list.
-     * The card identity of {@code editedCard} must not be the same as another existing card in the list.
+     * The card identity of {@code editedCard} must not be the same as another
+     * existing card in the list.
      */
     public void setCard(Card target, Card editedCard) {
         requireAllNonNull(target, editedCard);

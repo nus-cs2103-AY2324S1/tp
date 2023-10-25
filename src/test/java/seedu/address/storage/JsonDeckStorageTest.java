@@ -48,8 +48,18 @@ public class JsonDeckStorageTest {
     }
 
     @Test
-    public void readDeck_invalidCardDeck_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readDeck("invalidCardDeck.json"));
+    public void readDeck_invalidCardDeckMissingAnswer_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readDeck("invalidCardDeckMissingAnswer.json"));
+    }
+
+    @Test
+    public void readDeck_invalidCardDeckMissingNextPracticeDate_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readDeck("invalidCardDeckMissingNextPracticeDate.json"));
+    }
+
+    @Test
+    public void readDeck_invalidCardDeckInvalidNextPracticeDate_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readDeck("invalidCardDeckInvalidNextPracticeDate.json"));
     }
 
     @Test
@@ -67,7 +77,6 @@ public class JsonDeckStorageTest {
         jsonDeckStorage.saveDeck(original, filePath);
         ReadOnlyDeck readBack = jsonDeckStorage.readDeck(filePath).get();
         assertEquals(original, new Deck(readBack));
-
     }
 
     @Test

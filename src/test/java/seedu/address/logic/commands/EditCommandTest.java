@@ -109,14 +109,13 @@ public class EditCommandTest {
 
         // same values -> returns true
         EditCardDescriptor copyDescriptor = new EditCardDescriptor(DESC_CS1101S);
-        System.out.println(copyDescriptor);
+        assertTrue(copyDescriptor.equals(DESC_CS1101S));
 
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
         assertFalse(standardCommand.equals(null));
-
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_CARD, DESC_CS2100)));

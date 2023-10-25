@@ -14,7 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.card.Card;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the Deck data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -24,12 +24,12 @@ public class ModelManager implements Model {
     private final FilteredList<Card> filteredCards;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given Deck and userPrefs.
      */
     public ModelManager(ReadOnlyDeck deck, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(deck, userPrefs);
 
-        logger.fine("Initializing with address book: " + deck + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Deck: " + deck + " and user prefs " + userPrefs);
 
         this.deck = new Deck(deck);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -112,10 +112,10 @@ public class ModelManager implements Model {
         deck.setCard(target, editedCard);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Card List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Card} backed by the internal list of
      * {@code versionedDeck}
      */
     @Override
