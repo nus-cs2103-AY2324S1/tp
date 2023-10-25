@@ -27,11 +27,10 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private LinkedIn linkedIn = new LinkedIn("");
     private Github github = new Github("");
-
     private Remark remark;
     private Score score = new Score(0);
+    private Status currentStatus = new Status();
 
-    private final Status currentStatus = new Status();
 
 
 
@@ -73,9 +72,10 @@ public class Person {
         return currentStatus;
     }
 
-    /* public void setStatus(StatusTypes newType) {
-        this.currentStatus.setStatusType(newType);
-    }*/
+    public void setStatus(Status newStatus) {
+        this.currentStatus = newStatus;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
