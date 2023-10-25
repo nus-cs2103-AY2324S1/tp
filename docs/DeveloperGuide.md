@@ -178,11 +178,11 @@ Step 1. The user launches the application and the application loads the data fro
 The existing objects are shown below. Objects not relevant to the behaviour are excluded.
 ![FindMeetingInitial](images/FindMeetingInitial.png)
 
-Step 2. The user executes `findm m/meeting` command to find all meetings that have the keyword `meeting` in their title. This results in the logic component creating an `AddressBookParser` object to make a `FindMeetingCommandParser` object. The parser creates the predicate objects that will used later on.
+Step 2. The user executes `findm m/meeting` command to find all meetings that have the keyword `meeting` in their title. This results in the logic component creating an `AddressBookParser` object to make a `FindMeetingCommandParser` object which will in turn create the predicate objects as well as the FindMeetingCommand object. The argument is broken down by `PREFIX` and for each `PREFIX` there is a String array of arguments broken down by whitespace. (s/START & e/END use `LocalDateTime` instead)
 ![FindMeetingSecond](images/FindMeetingSecond.png)
 
-Step 3. The `FindMeetingCommand` will be created by the parser, and it will be immediately executed on the `FilteredList<Meeting>` object. The `GeneralMeetingPredicate` will be used on all meetings, meetings which pass all 5 predicates be shown in `MeetingSchedulePanel`.
-![FindMeetingLast](images/FindMeetingLast.png)
+Step 3. The `FindMeetingCommand` will be immediately executed on the `FilteredList<Meeting>` object. The `GeneralMeetingPredicate` will be used on all meetings, meetings which pass all 5 predicates be shown in `MeetingSchedulePanel`. After which `FindMeetingCommand` and the predicate objects will no longer be referenced.
+![FindMeetingLast](images/FindMeetingInitial.png)
 
 The following diagrams show the entire sequence flow for `LogicManager#execute()` for FindMeetingCommand.
 ![FindMeetingSequence](images/FindMeetingSequence.png)
