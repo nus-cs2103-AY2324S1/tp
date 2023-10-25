@@ -1,4 +1,4 @@
-package networkbook.logic.commands;
+package networkbook.logic.commands.delete;
 
 import static networkbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
-import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.UserPrefs;
