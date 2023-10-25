@@ -2,10 +2,23 @@
 layout: page
 title: User Guide
 ---
+## Product Overview
+
+**Land the dream internship or job opportunity you've always wanted by networking more effectively using our application!**
+
+NetworkBook is a desktop contact book application built for NUS Computing students and professionals to manage information about the people they network with more efficiently than ever before.
+
+Here's an overview of how NetworkBook can help you manage your network of contacts better than existing alternatives:
+- You can search for and sort contacts by multiple networking-relevant fields (e.g. priority, courses taken/taking, specialization(s) taken/intending to take, graduation year)
+- You can access this application offline, with a static online page that contains user manual and download link
+- You can record only the information you find relevant on our application (e.g. you can assign one contact only their email and specialisation, and another contact nothing but their course)
+
+On top of these advantages, we believe that contact management must be efficient. Therefore, NetworkBook is optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you type fast, NetworkBook can get your contact managing done faster than existing alternatives performing a similar role.
+
+If you are new here, visit our [getting started guide](#getting-started) to start getting connected on NetworkBook!
+
 * Table of Contents
 {:toc}
-
-NetworkBook is a **desktop contact book application**. You can use it to network with other computing students and professionals from NUS.
 
 ## Features
 
