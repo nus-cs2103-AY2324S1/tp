@@ -332,6 +332,46 @@ Invalid Input Example | Application Output
 **optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
 **optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
 
+### Notes feature
+![Window with Notes](images/notes/window_with_notes.png)
+![Notes Window](images/notes/notes_window.png)
+
+#### 1. Adding Notes to a Person
+
+##### Command Format:
+    note INDEX NOTE_CONTENT
+
+##### Parameters:
+- `INDEX`: The position of the person in the list you want to add a note to. This should be a positive integer.
+- `NOTE_CONTENT`: The content of the note you want to add.
+
+##### Example:
+If you want to add a note to the person at position 1 in the list, you would use:
+    
+    note 1 This is a sample note for the person.
+
+This will add a note "This is a sample note for the person." to the person at index 1.
+
+#### 2. Removing Notes from a Person
+
+##### Command Format:
+    removenote INDEX_PERSON INDEX_NOTE
+
+##### Parameters:
+- `INDEX_PERSON`: The position of the person in the list you want to remove a note from. This should be a positive integer.
+- `INDEX_NOTE`: The position of the note in the person's list of notes you want to remove. This should be a positive integer.
+
+##### Example:
+If you want to remove the 2nd note from the person at position 1 in the list, you would use:
+    
+    removenote 1 2
+
+This will remove the 2nd note from the person at index 1.
+
+##### Note:
+Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
+Make sure to familiarize yourself with the commands and use them as per your needs. If you have any issues or questions, refer to the application's help section or contact the support team.
+
 ###  Track payment [Coming Soon]
 ###  Change language [Coming Soon]
 

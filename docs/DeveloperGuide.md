@@ -246,6 +246,156 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Notes feature
+
+#### 1. NoteCommand
+**Purpose:**  
+The NoteCommand is used to add a note to a specific person in the Address Book.
+
+**Class Description:**
+- `NoteCommand`: This class extends `Command` and is responsible for the logic of adding a note.
+- `Index`: This is used to store the index of the person in the filtered person list to whom the note will be added.
+- `Note`: This is used to store the content of the note to be added.
+
+**Logic Flow:**
+1. The user inputs a command to add a note, specifying the index of the person and the content of the note.
+2. The `NoteCommandParser` parses the user input and creates a new `NoteCommand` object.
+3. The `execute` method of `NoteCommand` is called.
+4. The method retrieves the list of all persons and checks if the provided index is valid.
+5. If the index is valid, it retrieves the person at the specified index and adds the note to this person.
+6. Finally, a `CommandResult` is returned, indicating that the note has been successfully added.
+
+**Key Methods:**
+- `NoteCommand(Index index, Note note)`: Constructor to initialize the command with the specified index and note.
+- `execute(Model model)`: Adds the note to the person at the specified index in the model's filtered person list.
+
+#### 2. RemoveNoteCommand
+**Purpose:**  
+The RemoveNoteCommand is used to remove a note from a specific person in the Address Book based on the index of the person and the index of the note.
+
+**Class Description:**
+- `RemoveNoteCommand`: This class extends `Command` and is responsible for the logic of removing a note.
+- `Index`: The first index refers to the person in the filtered person list, and the second index refers to the note to be removed.
+
+**Logic Flow:**
+1. The user inputs a command to remove a note, specifying the index of the person and the index of the note.
+2. The `RemoveNoteCommandParser` parses the user input and creates a new `RemoveNoteCommand` object.
+3. The `execute` method of `RemoveNoteCommand` is called.
+4. The method retrieves the list of all persons and checks if the provided indexes are valid.
+5. If the indexes are valid, it retrieves the person and note at the specified indexes and removes the note from this person.
+6. Finally, a `CommandResult` is returned, indicating that the note has been successfully removed.
+
+**Key Methods:**
+- `RemoveNoteCommand(Index indexPerson, Index indexNote)`: Constructor to initialize the command with the specified indexes.
+- `execute(Model model)`: Removes the note from the person at the specified index in the model's filtered person list.
+
+#### 3. Person
+**Key Modifications:**
+- `List<Note> notes`: A list to store notes associated with the person.
+- `addNote(Note note)`: Adds a note to the person.
+- `removeNote(int idx)`: Removes a note from the person at the specified index.
+
+### User Interface Implementation for Notes Feature
+
+The Notes feature in the application is implemented using a combination of JavaFX components. Below is a detailed explanation of the development and testing of the UI components relevant to this feature.
+
+#### 1. `PersonCard` UI Component
+
+The `PersonCard` UI component is responsible for displaying individual person's details. It is implemented using FXML and its associated controller class. The relevant parts for the Notes feature are:
+
+- **FXML**: The layout of the `PersonCard` includes a Button component (`notesButton`) for accessing the notes of a person. This button is placed in a VBox in the second column of a GridPane.
+
+  ```xml
+  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
+    <Region VBox.vgrow="ALWAYS" />
+    <Button fx:id="notesButton" onAction="#handleNotesButtonClick" text="Notes (0)" />
+  </VBox>
+  ```
+
+- **Controller**: In the `PersonCard` controller, there is a method `handleNotesButtonClick()`, which is called when the Notes button is clicked. This method creates a new instance of `NotesWindow` and shows it.
+
+  ```java
+  @FXML
+  public void handleNotesButtonClick() {
+      try {
+          NotesWindow notesWindow = new NotesWindow(person);
+          notesWindow.show();
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+  }
+  ```
+
+#### 2. `NotesWindow` UI Component
+
+The `NotesWindow` UI component is used to display the notes of a person in a new window.
+
+- **FXML**: It consists of a `ListView` (`notesListView`) to list the notes and a Button to close the window.
+
+  ```xml
+  <ListView fx:id="notesListView" />
+  <Button text="Close" onAction="#handleClose" />
+  ```
+
+- **Controller**: The controller class manages the population of the `ListView` with the notes from the person object and handles the closing of the window.
+
+  ```java
+  public class NotesWindow extends UiPart<Stage> {
+      //...
+      private void populateListView(List<Note> notes) {
+          ObservableList<String> notesObservableList = FXCollections.observableArrayList();
+          for (Note note : notes) {
+              notesObservableList.add(note.toString());
+          }
+          notesListView.setItems(notesObservableList);
+      }
+      
+      @FXML
+      void handleClose() {
+          Stage stage = (Stage) notesListView.getScene().getWindow();
+          stage.close();
+      }
+      //...
+  }
+  ```
+
+#### Testing
+
+For testing the UI components, we use TestFX.
+
+- `NotesWindowTest`: This test class ensures that the `NotesWindow` UI component is functioning as expected.
+
+  ```java
+  public class NotesWindowTest extends ApplicationTest {
+      //...
+      @Test
+      public void testNotesDisplay() {
+          List<String> expectedNotes = Arrays.asList("Likes to swim", "Likes to run", "Is a chad");
+          verifyThat("#notesListView", hasItems(3));
+          assertTrue(notesWindow.getNotesListView().getItems().containsAll(expectedNotes));
+      }
+
+      @Test
+      public void testIsShowing() {
+          assertTrue(notesWindow.isShowing());
+          interact(() -> notesWindow.hide());
+          assertFalse(notesWindow.isShowing());
+      }
+
+      @Test
+      public void testHandleClose() {
+          interact(() -> notesWindow.handleClose());
+          assertFalse(notesWindow.isShowing());
+      }
+      //...
+  }
+  ```
+
+In the tests, we verify that the `NotesWindow` displays the correct number of notes, that it reacts correctly to interactions, and that it properly closes when the close button is clicked.
+
+Ensure that you replace the actual code and XML content if it changes in the future to keep the documentation up to date.
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
