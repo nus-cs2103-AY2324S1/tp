@@ -35,9 +35,7 @@ public class CommandResult {
         this.exit = exit;
         this.listTeam = listTeam;
         this.listPerson = listPerson;
-
     }
-
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},

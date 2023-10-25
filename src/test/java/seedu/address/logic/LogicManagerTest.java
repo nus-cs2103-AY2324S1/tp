@@ -48,6 +48,7 @@ public class LogicManagerTest {
     private static final String SAMPLE_LEADER = TypicalPersons.ALICE.getName().toString();
     private static final String TEAM_NAME_DESC_SAMPLE = SAMPLE_TEAM.getTeamName();
     private static final String ADD_TEAM_COMMAND = "newteam" + " tn/" + TEAM_NAME_DESC_SAMPLE + " tl/" + SAMPLE_LEADER;
+
     @TempDir
     public Path temporaryFolder;
 
@@ -70,14 +71,15 @@ public class LogicManagerTest {
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
+
     @Test
     public void execute_addTeamCommand_teamAdded() throws Exception {
         Model expectedModel = new ModelManager();
-        model.addPerson(TypicalPersons.ALICE);
         expectedModel.addTeam(SAMPLE_TEAM);
         assertCommandSuccess(ADD_TEAM_COMMAND, String.format(
-                AddTeamCommand.MESSAGE_SUCCESS, Messages.format(SAMPLE_TEAM, new Name(SAMPLE_LEADER))), expectedModel);
+                AddTeamCommand.MESSAGE_SUCCESS, SAMPLE_TEAM), expectedModel);
     }
+
     @Test
     public void execute_storageThrowsIoExceptionWhileSavingTeamBook_throwsCommandException() {
         assertCommandFailureForExceptionFromTeamBookStorage(DUMMY_IO_EXCEPTION, String.format(
