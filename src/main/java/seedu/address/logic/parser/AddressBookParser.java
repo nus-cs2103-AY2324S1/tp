@@ -78,12 +78,6 @@ public class AddressBookParser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DiagnoseCommand.COMMAND_WORD:
-            return new DiagnoseCommandParser().parse(arguments);
-
-        case UndiagnoseCommand.COMMAND_WORD:
-            return new UndiagnoseCommandParser().parse(arguments);
-
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
