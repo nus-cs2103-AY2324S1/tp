@@ -143,11 +143,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void clearAddressBook() {
-
-        }
-
-        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
