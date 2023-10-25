@@ -79,7 +79,7 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SUBJECT_DESC_BOB + DAY_DESC_BOB + BEGIN_DESC_BOB
                 + END_DESC_BOB + PAYRATE_DESC_BOB;
