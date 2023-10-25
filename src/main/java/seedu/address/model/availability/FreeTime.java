@@ -2,9 +2,11 @@ package seedu.address.model.availability;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -84,7 +86,8 @@ public class FreeTime {
         StringBuilder str = new StringBuilder("\n");
 
         for (int i = 0; i < NUM_DAYS; i++) {
-            str.append(String.format("%s: %s\n", DayOfWeek.of(i + 1), this.intervals.get(i)));
+            String day = DayOfWeek.of(i + 1).getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+            str.append(String.format("%s: %s\n", day, this.intervals.get(i)));
         }
         return str.toString();
     }
