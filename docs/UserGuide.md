@@ -126,11 +126,11 @@ To add John Doe into TutorConnect:
 
 ### Planning Your Schedules
 
-Now that your tutors are in TutorConnect, it's time to start scheduling them classes!
+Now that your tutors are in TutorConnect, it's time to start scheduling classes for them!
 
 To assign schedules to your tutor, you can use the [**add-s**](#adding-a-schedule-add-s) command.
 
-Let's assign a schedules to **John Doe** at **1 October 2023** from **9AM to 11AM**.
+Let's assign a schedule for **John Doe** on **1 October 2023** from **9AM to 11AM**.
 
 To assign John Doe that schedule:
 1. Get the **TUTOR_INDEX** of the tutor you wish to assign a schedule to
