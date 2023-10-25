@@ -172,6 +172,18 @@ Examples:
 * `unenrol m/1 e/5` deletes the 1st member in the member list from the 5th event in the event list.
 * `unenrol m/5 e/1` deletes the 5th member in the member list from the 1st event in the event list.
 
+### Undoing a command: `undo`
+
+Undoes the previous command that the user has entered, which has changed the data within CCACommander.
+
+Format: `redo`
+
+### Undoing a command: `redo`
+
+Redoes a command that the user has undone previously.
+
+Format: `redo`
+
 ### Saving the data
 
 CCACommander data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -214,4 +226,6 @@ Action | Format, Examples
 **Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
 **Edit** | coming soon...
 **Find** | coming soon...
+**Redo** | `redo`
+**Undo** | `undo`
 **Help** | coming soon...
