@@ -74,9 +74,10 @@ public class LogicManagerTest {
     @Test
     public void execute_addTeamCommand_teamAdded() throws Exception {
         Model expectedModel = new ModelManager();
+        model.addPerson(TypicalPersons.ALICE);
         expectedModel.addTeam(SAMPLE_TEAM);
         assertCommandSuccess(ADD_TEAM_COMMAND, String.format(
-                AddTeamCommand.MESSAGE_SUCCESS, SAMPLE_TEAM), expectedModel);
+                AddTeamCommand.MESSAGE_SUCCESS, Messages.format(SAMPLE_TEAM, new Name(SAMPLE_LEADER))), expectedModel);
     }
 
     @Test
