@@ -357,6 +357,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …         | I want to …                                                                                                     | So that I can…                                                                                                   |
 |----------|----------------|-----------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
 | `* * *`  | foster manager | delete a fosterer from the list when they want to stop fostering with us                                        | update the list to see the fosterers who are currently in our program                                            |
+| `* * *`  | foster manager | delete multiple fosterers at once                                                                               | perform mass deletions quickly                                                                                   |
 | `* * *`  | foster manager | add each fosterer's details efficiently                                                                         | allow my colleagues who are conducting home visits to view these information without any inconvenience           |
 | `* * *`  | foster manager | provide details of the fostered animal of concern to the fosterer                                               | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for |
 | `* * *`  | foster manager | update each foster family’s and animal’s details                                                                | keep track of fosterer's most up-to-date information, including updated information of the animal fostered       |
@@ -364,10 +365,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | foster manager | to be aware of the address of the fosterer                                                                      | conduct checks on the fosterer to ensure the animal is well taken care of                                        |
 | `* * *`  |  foster manager | retrieve the information about the foster family                                                                | provide the necessary information to the Nparks authorities for audit                                            |
 | `* * *`  | foster manager  | sort the list of fosterers alphabetically                                                                       | have a neater, and more organised view of all the fosterers                                                      |
-| `* * `   |  foster manager  | have the fosterer’s important information collated neatly                                                       | get all the information I need with one glance                                                                   |
-| `* * `   | foster manager               | have an easily accessible (and visible) help button on the top left that leads to a very informative user guide | get help when I am unsure of what command to use                                                                 |
 | `* * * ` | foster manager               | know the distribution of the different housing types among fosterers                                            | allocate the animals to foster homes that are able to accommodate them                                           |
 | `* * *`  | foster manager               | obtain statistics about the currently available fosterers                                                       | better estimate the number of animals I can rescue                                                               |
+| `* * `   |  foster manager  | have the fosterer’s important information collated neatly                                                       | get all the information I need with one glance                                                                   |
+| `* * `   | foster manager               | have an easily accessible (and visible) help button on the top left that leads to a very informative user guide | get help when I am unsure of what command to use                                                                 |
 
 
 *{More to be added}*
@@ -520,7 +521,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.  
   
   
-* 2b. Requested statistic is not available.
+* 2b. Requested statistic is invalid.
   * 2b1. System indicates error, and prompts Foster Manager to request for a valid statistic. 
   * 2b2. Foster Manager enters new command.
 
