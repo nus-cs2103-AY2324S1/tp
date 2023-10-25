@@ -219,6 +219,6 @@ public class Person {
      * @return boolean, whether person is not free
      */
     public boolean isNotFree() {
-        return this.freeTime.isEmpty();
+        return this.timeIntervalList.isEmpty();
     }
 }

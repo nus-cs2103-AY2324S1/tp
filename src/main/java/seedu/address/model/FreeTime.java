@@ -56,8 +56,8 @@ public class FreeTime implements Iterable<TimeInterval> {
 
     public FreeTime findOverlap(FreeTime otherTime, Duration duration) {
         // 4 steps, sort by start time, min start min end 2 pointers, get overlap, interval >= duration check
-        this.internalList.sort(TimeInterval::compareToStartTime);
-        otherTime.internalList.sort(TimeInterval::compareToStartTime);
+        this.internalList.sort(TimeInterval::compareStart);
+        otherTime.internalList.sort(TimeInterval::compareEnd);
         FreeTime newFreeTime = new FreeTime();
 
         int p1 = 0;

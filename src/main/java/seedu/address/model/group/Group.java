@@ -8,13 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
-<<<<<<< HEAD
 import seedu.address.model.Duration;
 import seedu.address.model.FreeTime;
-=======
 import seedu.address.model.TimeIntervalList;
 import seedu.address.model.TimeInterval;
->>>>>>> 0a9cefdc7517e8c5f482da5e4f4c4e20c36381f7
 import seedu.address.model.person.Person;
 
 import java.util.stream.Stream;
@@ -178,7 +175,6 @@ public class Group {
         this.groupRemark = groupRemark;
     }
 
-<<<<<<< HEAD
     /**
      * Modify StringBuilder to display message should any groupMate not input their free time
      * @param br StringBuilder
@@ -198,18 +194,18 @@ public class Group {
      * @param duration represent duration in minutes
      * @return TimeInterval that can fit duration specified
      */
-    public FreeTime findFreeTime(Duration duration) {
+    public TimeIntervalList findFreeTime(Duration duration) {
         // compare person to person get overlap
         // will use one getter for freeTime
-        FreeTime freeTime = new FreeTime();
+        TimeIntervalList freeTime = new TimeIntervalList();
         for (int i = 0; i < listOfGroupMates.size(); i++) {
            if (i + 1 == listOfGroupMates.size()) {
                break;
            }
            Person firstPerson = listOfGroupMates.get(i);
            Person secondPerson = listOfGroupMates.get(i + 1);
-           FreeTime first = firstPerson.getFreeTime();
-           FreeTime second = secondPerson.getFreeTime();
+           TimeIntervalList first = firstPerson.getTime();
+           TimeIntervalList second = secondPerson.getTime();
            // uninitialised freeTime e.g. first and second person in group
            if (freeTime == null) {
                freeTime = first.findOverlap(second, duration);
@@ -220,7 +216,6 @@ public class Group {
         return freeTime;
     }
 
-=======
     public void addTime(ArrayList<TimeInterval> toAddTime) throws CommandException {
         this.timeIntervalList.addTime(toAddTime);
     }
@@ -230,5 +225,4 @@ public class Group {
     }
 
     public void deleteTime(ArrayList<TimeInterval> toDeleteTime) throws CommandException { this.timeIntervalList.deleteTime(toDeleteTime);}
->>>>>>> 0a9cefdc7517e8c5f482da5e4f4c4e20c36381f7
 }

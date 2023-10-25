@@ -8,6 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Duration;
 import seedu.address.model.FreeTime;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.Group;
 import seedu.address.model.Model;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
@@ -67,7 +68,7 @@ public class FindFreeTimeCommand extends Command {
 		}
 
 		// use algorithm to findFreeTime()
-		FreeTime freeTime = g.findFreeTime(duration);
+		TimeIntervalList freeTime = g.findFreeTime(duration);
 		freeTime.getMessage(br, MESSAGE_INTERVAL_DISPLAY);
 
 		return new CommandResult(MESSAGE_SUCCESS + br.toString());
