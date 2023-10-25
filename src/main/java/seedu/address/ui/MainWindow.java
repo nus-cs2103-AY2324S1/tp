@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -70,6 +72,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane tree;
+
+    @FXML
+    private StackPane personStats;
+
+    @FXML
+    private StackPane teamStats;
 
     private boolean isListingPerson;
 
@@ -180,7 +188,26 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        setStatistics();
+
         originalResultDisplayHeight = resultDisplayPlaceholder.getPrefHeight();
+    }
+
+    /**
+     * set the label and values for the statistic area.
+     */
+    private void setStatistics() {
+        Label personLabel = new Label("   Total number of developers: "
+                + logic.getFilteredPersonList().size());
+        personLabel.setStyle("-fx-text-fill: #ecbdbd;");
+        personStats.getChildren().add(personLabel);
+        StackPane.setAlignment(personLabel, Pos.CENTER_LEFT);
+
+        Label teamLabel = new Label("   Total number of teams: "
+                + logic.getFilteredTeamList().size());
+        teamLabel.setStyle("-fx-text-fill: #ecbdbd;");
+        teamStats.getChildren().add(teamLabel);
+        StackPane.setAlignment(teamLabel, Pos.CENTER_LEFT);
     }
 
     /**
@@ -195,7 +222,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills the teams list.
      */
     private void fillTeamList() {
-        teamListPanel = new TeamListPanel(logic.getFilteredTeamList());
+        teamListPanel = new TeamListPanel(logic.getFilteredTeamList(), logic.getFilteredPersonList());
         teamListPanelPlaceholder.getChildren().add(teamListPanel.getRoot());
     }
 
@@ -205,7 +232,7 @@ public class MainWindow extends UiPart<Stage> {
     private void fillBothList() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         D_personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-        teamListPanel = new TeamListPanel(logic.getFilteredTeamList());
+        teamListPanel = new TeamListPanel(logic.getFilteredTeamList(), logic.getFilteredPersonList());
         D_teamListPanelPlaceholder.getChildren().add(teamListPanel.getRoot());
     }
 
@@ -358,6 +385,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Refresh the statistics to show any changes.
+     */
+    public void refreshStatistics() {
+        teamStats.getChildren().clear();
+        personStats.getChildren().clear();
+        setStatistics();
+    }
+
+    /**
      * @return the current personList Panel
      */
     public PersonListPanel getPersonListPanel() {
@@ -428,6 +464,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             refreshCardContainer();
+            refreshStatistics();
 
             return commandResult;
         } catch (CommandException | ParseException e) {

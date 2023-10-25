@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 
 /**
@@ -17,16 +18,19 @@ public class TeamListPanel extends UiPart<Region> {
     private static final String FXML = "TeamListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TeamListPanel.class);
 
+    private ObservableList<Person> memberList;
+
     @FXML
     private ListView<Team> teamListView;
 
     /**
      * Creates a {@code TeamListPanel} with the given {@code ObservableList}.
      */
-    public TeamListPanel(ObservableList<Team> teamList) {
+    public TeamListPanel(ObservableList<Team> teamList, ObservableList<Person> memberList) {
         super(FXML);
         teamListView.setItems(teamList);
         teamListView.setCellFactory(listView -> new TeamListViewCell());
+        this.memberList = memberList;
     }
 
     /**
@@ -41,7 +45,7 @@ public class TeamListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TeamCard(team, getIndex() + 1).getRoot());
+                setGraphic(new TeamCard(team, getIndex() + 1, memberList).getRoot());
             }
         }
     }

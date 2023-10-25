@@ -47,6 +47,23 @@
           </padding>
         </StackPane>
 
+        <HBox fx:id="statistics" styleClass="pane-with-border" minHeight="40" prefHeight="40" maxHeight="40"
+              VBox.vgrow="NEVER">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+          <!-- Box for person list statistics -->
+            <StackPane fx:id="personStats" styleClass="pane-with-border" minWidth="340" prefWidth="1000"
+                       HBox.hgrow="ALWAYS">
+            <!-- design for person statistics -->
+          </StackPane>
+          <!-- Box for team list statistics -->
+          <StackPane fx:id="teamStats" styleClass="pane-with-border" minWidth="340" prefWidth="1000"
+                     HBox.hgrow="ALWAYS">
+            <!-- design for team statistics -->
+          </StackPane>
+        </HBox>
+
         <StackPane fx:id="cardContainer" VBox.vgrow="ALWAYS">
 
           <VBox fx:id="singleListContainer" visible="false" VBox.vgrow="ALWAYS">
@@ -66,7 +83,8 @@
           </VBox>
 
           <HBox fx:id="dualListContainer" HBox.hgrow="ALWAYS">
-            <VBox fx:id="D_personList" styleClass="pane-with-border" minWidth="340" prefWidth="1000" VBox.vgrow="ALWAYS">
+            <VBox fx:id="D_personList" styleClass="pane-with-border" minWidth="340" prefWidth="1000"
+                  VBox.vgrow="ALWAYS">
               <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
               </padding>
