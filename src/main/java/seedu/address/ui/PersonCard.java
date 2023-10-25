@@ -33,13 +33,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private FlowPane phone;
     @FXML
-    private Label address;
+    private FlowPane address;
     @FXML
-    private Label email;
+    private FlowPane email;
     @FXML
-    private Label birthday;
+    private FlowPane birthday;
     @FXML
     private FlowPane groups;
 
@@ -51,10 +51,18 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        birthday.setText(person.getBirthday().toString());
+        if (!person.getPhone().value.isEmpty()) {
+            phone.getChildren().add(new Label(person.getPhone().value));
+        }
+        if (!person.getAddress().value.isEmpty()) {
+            address.getChildren().add(new Label(person.getAddress().value));
+        }
+        if (!person.getEmail().value.isEmpty()) {
+            email.getChildren().add(new Label(person.getEmail().value));
+        }
+        if (!person.getBirthday().toString().isEmpty()) {
+            birthday.getChildren().add(new Label(person.getBirthday().toString()));
+        }
         person.getGroups().stream()
                 .sorted(Comparator.comparing(group -> group.groupName))
                 .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
