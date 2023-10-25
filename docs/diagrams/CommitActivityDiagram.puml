@@ -11,7 +11,7 @@ start
 if () then ([command commits CcaCommander])
     :Purge redundant states;
     :Save CcaCommander to
-    ccaCommanderStateList;
+    ccaCommanderVersionList;
 else ([else])
 endif
 stop

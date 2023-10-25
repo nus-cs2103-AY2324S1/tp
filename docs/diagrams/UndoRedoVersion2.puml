@@ -4,7 +4,7 @@ skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After command "undo"
+title After command "createMember n/David ..."
 
 package Versions <<rectangle>> {
     class Version1 as "<u>cc0:CcaCommander</u>"
@@ -17,5 +17,5 @@ Version2 -[hidden]right-> Version3
 
 class Pointer as "Current Version" #FFFFFF
 
-Pointer -up-> Version2
+Pointer -up-> Version3
 @end
