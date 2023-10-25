@@ -86,8 +86,8 @@ public class EditMeetingCommand extends Command {
 
         //ensure that the user is not editing a valid time into an invalid time
         if (this.editMeetingDescriptor.getDate().isPresent()
-        || this.editMeetingDescriptor.getStartTime().isPresent()
-        || this.editMeetingDescriptor.getEndTime().isPresent()) {
+                || this.editMeetingDescriptor.getStartTime().isPresent()
+                || this.editMeetingDescriptor.getEndTime().isPresent()) {
             CommandUtil.verifyEventTimes(editedMeeting);
         }
 
