@@ -103,6 +103,12 @@ public interface Model {
     void updateFilteredBandList(Predicate<Band> predicate);
 
     /**
+     * Updates the {@code FilteredBandList} to contain the {@code Band}
+     * at the specified index.
+     */
+    void updateFilteredBandList(int bandIndex);
+
+    /**
      * Returns true if a band with the same identity as {@code band} exists in the address book.
      */
     boolean hasBand(Band band);
