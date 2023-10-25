@@ -50,7 +50,7 @@ public class DeleteCommand extends Command {
         // Format the deleted contacts for the message
         String formattedContacts = contactsToDelete.stream()
                 .map(Contact::format)
-                .collect(Collectors.joining(",\\n"));
+                .collect(Collectors.joining(",\n"));
 
         return new CommandResult(String.format(Messages.DELETE_COMMAND_SUCCESS, formattedContacts));
     }

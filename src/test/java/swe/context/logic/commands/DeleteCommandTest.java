@@ -127,7 +127,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(List.of(FIRST_CONTACT, SECOND_CONTACT));
 
         String expectedMessage = String.format(Messages.DELETE_COMMAND_SUCCESS,
-                Contact.format(firstContactToDelete) + ",\\n" + Contact.format(secondContactToDelete));
+                Contact.format(firstContactToDelete) + ",\n" + Contact.format(secondContactToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getContacts(), new Settings());
         expectedModel.removeContact(firstContactToDelete);
@@ -146,7 +146,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(unorderedIndices);
 
         String expectedMessage = String.format(Messages.DELETE_COMMAND_SUCCESS,
-                Contact.format(secondContactToDelete) + ",\\n" + Contact.format(firstContactToDelete));
+                Contact.format(secondContactToDelete) + ",\n" + Contact.format(firstContactToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getContacts(), new Settings());
         expectedModel.removeContact(firstContactToDelete);
