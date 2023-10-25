@@ -3,6 +3,10 @@ package seedu.address.model.booking;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Remark field in a given booking.
+ * Guarantees: immutable; is valid as declared in {@link #isValidRemark(String)}
+ */
 public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS =

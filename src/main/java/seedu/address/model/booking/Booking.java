@@ -91,7 +91,9 @@ public class Booking {
         return this.email;
     }
 
-    public Remark getRemark() {return this.remark;}
+    public Remark getRemark() {
+        return this.remark;
+    }
 
     public BookingPeriod getBookingPeriod() {
         return this.bookingPeriod;

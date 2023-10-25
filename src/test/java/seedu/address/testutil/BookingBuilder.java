@@ -107,6 +107,9 @@ public class BookingBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
     public BookingBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;
