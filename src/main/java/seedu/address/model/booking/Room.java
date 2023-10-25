@@ -6,7 +6,7 @@ import static java.util.Objects.requireNonNull;
  * Represents a hotel room that a client is staying in.
  */
 public class Room {
-    public static final String MESSAGE_CONSTRAINTS = "Room must be a number between 1 and 500 inclusive.";
+    public static final String MESSAGE_CONSTRAINTS = "Room is not a between 1 and 500 inclusive.";
 
     public final Integer value;
 

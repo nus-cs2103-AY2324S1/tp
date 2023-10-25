@@ -100,23 +100,27 @@ public class BookingPeriod {
             return false; // Invalid format, should have year, month, day parts
         }
 
-        int year = Integer.parseInt(dateParts[0]);
-        int month = Integer.parseInt(dateParts[1]);
-        int day = Integer.parseInt(dateParts[2]);
+        try {
+            int year = Integer.parseInt(dateParts[0]);
+            int month = Integer.parseInt(dateParts[1]);
+            int day = Integer.parseInt(dateParts[2]);
 
-        if (year >= 0 && year <= 9999 && month >= 1 && month <= 12 && day >= 1) {
-            if (month == 2) {
-                // Check for leap year
-                if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
-                    return day <= 29;
+            if (year >= 0 && year <= 9999 && month >= 1 && month <= 12 && day >= 1) {
+                if (month == 2) {
+                    // Check for leap year
+                    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                        return day <= 29;
+                    } else {
+                        return day <= 28;
+                    }
+                } else if ((month == 4 || month == 6 || month == 9 || month == 11)) {
+                    return day <= 30;
                 } else {
-                    return day <= 28;
+                    return day <= 31;
                 }
-            } else if ((month == 4 || month == 6 || month == 9 || month == 11)) {
-                return day <= 30;
-            } else {
-                return day <= 31;
             }
+        } catch (NumberFormatException e) {
+            return false;
         }
         return false;
     }

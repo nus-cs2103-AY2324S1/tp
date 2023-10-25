@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.booking.exceptions.BookingNotFoundException;
 import seedu.address.model.booking.exceptions.DuplicateBookingException;
+import seedu.address.model.booking.exceptions.UniqueBookingListNotFoundException;
 import seedu.address.testutil.BookingBuilder;
 
 public class UniqueBookingListTest {
@@ -27,7 +28,7 @@ public class UniqueBookingListTest {
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueBookingList.contains(null));
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.contains(null));
     }
 
     @Test
@@ -52,7 +53,7 @@ public class UniqueBookingListTest {
 
     @Test
     public void add_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueBookingList.add(null));
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.add(null));
     }
 
     @Test
@@ -63,12 +64,12 @@ public class UniqueBookingListTest {
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueBookingList.setBooking(null, ALICE));
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.setBooking(null, ALICE));
     }
 
     @Test
     public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueBookingList.setBooking(ALICE, null));
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.setBooking(ALICE, null));
     }
 
     @Test
@@ -115,7 +116,7 @@ public class UniqueBookingListTest {
 
     @Test
     public void remove_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueBookingList.remove(null));
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.remove(null));
     }
 
     @Test
@@ -133,7 +134,8 @@ public class UniqueBookingListTest {
 
     @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueBookingList.setBookings((UniqueBookingList) null));
+        assertThrows(UniqueBookingListNotFoundException.class, () ->
+                uniqueBookingList.setBookings((UniqueBookingList) null));
     }
 
     @Test
@@ -214,12 +216,12 @@ public class UniqueBookingListTest {
 
     @Test
     public void setPersonWithNullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueBookingList.setBooking(null, ALICE));
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.setBooking(null, ALICE));
     }
 
     @Test
     public void setPersonWithNullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueBookingList.setBooking(ALICE, null));
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.setBooking(ALICE, null));
     }
 
     @Test
@@ -229,7 +231,7 @@ public class UniqueBookingListTest {
 
     @Test
     public void removeNullPersonThrowsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueBookingList.remove(null));
+        assertThrows(BookingNotFoundException.class, () -> uniqueBookingList.remove(null));
     }
 
     @Test
