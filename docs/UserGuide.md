@@ -88,17 +88,15 @@ The 2 identifying parameters of a patient are given below:
 
 1 or more identifying parameters must be specified in each command, unless stated otherwise.
 
-`[field]` are common optional fields that can be specified behind commands. The common optional fields are:
+`[field]` are common fields that can be specified behind commands. The common fields are:
 
-| Tag      | Representative Value   | Example Usage         | General Form in Commands | Remarks                         |
-|----------|------------------------|-----------------------|--------------------------|---------------------------------|
-| `p/`     | Phone Number           | `p/91234567`          | `p/PHONE_NUMBER`         |                                 |
-| `e/`     | Email Address          | `e/example@a.com`     | `e/EMAIL`                |                                 |
-| `a/`     | Address                | `a/Location, Here Rd` | `a/ADDRESS`              |                                 |
-| `m/`     | Medical History        | `m/Asthmatic`         | `m/MEDICAL_HISTORY`      |                                 |
-| `start/` | Appointment Start Time | `start/Nov 11, 9AM`   | `start/APPT_START`       | Must be paired with `/end`      |
-| `end/`   | Appointment End Time   | `end/Nov 11, 12PM`    | `end/APPT_END`           | Must be paired with `/start`    |
-| `t/`     | Tag                    | `t/Emergency`         | `t/TAG`                  | Can have multiple of this field |
+| Tag    | Representative Value | Example Usage              | General Form in Commands | Remarks                                      |
+|--------|----------------------|----------------------------|--------------------------|----------------------------------------------|
+| `p/`   | Phone Number         | `p/91234567`               | `p/PHONE_NUMBER`         |                                              |
+| `e/`   | Email Address        | `e/example@a.com`          | `e/EMAIL`                |                                              |
+| `a/`   | Address              | `a/Location, Here Rd`      | `a/ADDRESS`              |                                              |
+| `m/`   | Medical History      | `m/Asthmatic`              | `m/MEDICAL_HISTORY`      | Can have multiple of this field, including 0 |
+| `ap/`  | Appointment          | `ap/2022-2-11 11:00 12:00` | `ap/APPT `               | Optional field                               |
 
 ### Auto Save
 
@@ -123,10 +121,11 @@ Adds a patient into the program, with the given patient information.
 Format: `add n/NAME id/IC_NUMBER [field] ...`
 
 Example commands:
- * `add n/Aaron Tan Jun Jie id/S8943782H p/98114839`
+ * `add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123`
 
 Expected outputs when the command succeeds:
- * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H p/98114839`
+ * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H
+    p/98114839 e/example@mailhere a/Serangoon HDB 123`
 
 Expected outputs when the command fails:
  * `Unable to add the patient to the database: Patient already exists.`
