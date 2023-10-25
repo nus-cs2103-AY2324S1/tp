@@ -47,8 +47,8 @@ public class Messages {
                 .append(person.getFreeTime())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
-        builder.append("; Mods: ");
-        person.getMods().forEach(builder::append);
+        builder.append("; Courses: ");
+        person.getCourses().forEach(builder::append);
         builder.append("; Work Hour: ")
                 .append(person.getHour());
 

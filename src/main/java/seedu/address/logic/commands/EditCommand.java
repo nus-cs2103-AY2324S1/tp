@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -25,14 +25,14 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.availability.FreeTime;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -54,7 +54,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_FROM + "FROM "
             + PREFIX_TO + "TO] "
             + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_MOD + "MOD]..."
+            + "[" + PREFIX_COURSE + "COURSE]..."
             + "[" + PREFIX_HOUR + "HOUR\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -79,6 +79,26 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
+
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        FreeTime updatedFreeTime = editPersonDescriptor.getFreeTime().orElse(personToEdit.getFreeTime());
+        Set<Course> updatedCourses = editPersonDescriptor.getCourses().orElse(personToEdit.getCourses());
+        Hour updatedHour = editPersonDescriptor.getHour().orElse(personToEdit.getHour());
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedFreeTime,
+                updatedCourses, updatedHour);
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -98,26 +118,6 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
-
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Telegram updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        FreeTime updatedFreeTime = editPersonDescriptor.getFreeTime().orElse(personToEdit.getFreeTime());
-        Set<Mod> updatedMods = editPersonDescriptor.getMods().orElse(personToEdit.getMods());
-        Hour updatedHour = editPersonDescriptor.getHour().orElse(personToEdit.getHour());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags, updatedFreeTime,
-                updatedMods, updatedHour);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class EditCommand extends Command {
         private Telegram telegram;
         private Set<Tag> tags;
         private FreeTime freeTime;
-        private Set<Mod> mods;
+        private Set<Course> courses;
         private Hour hour;
 
         public EditPersonDescriptor() {
@@ -164,7 +164,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code tags} and {@code courses} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -173,7 +173,7 @@ public class EditCommand extends Command {
             setTelegram(toCopy.telegram);
             setTags(toCopy.tags);
             setFreeTime(toCopy.freeTime);
-            setMods(toCopy.mods);
+            setCourses(toCopy.courses);
             setHour(toCopy.hour);
         }
 
@@ -181,47 +181,39 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, tags, mods, freeTime, hour);
-        }
-
-        public void setName(Name name) {
-            this.name = name;
+            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, tags, courses, freeTime, hour);
         }
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setName(Name name) {
+            this.name = name;
         }
 
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setPhone(Phone phone) {
+            this.phone = phone;
         }
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
 
-        public void setTelegram(Telegram telegram) {
-            this.telegram = telegram;
+        public void setEmail(Email email) {
+            this.email = email;
         }
 
         public Optional<Telegram> getTelegram() {
             return Optional.ofNullable(telegram);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTelegram(Telegram telegram) {
+            this.telegram = telegram;
         }
 
         /**
@@ -234,22 +226,22 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setFreeTime(FreeTime freeTime) {
-            if (freeTime != FreeTime.EMPTY_FREE_TIME) {
-                this.freeTime = freeTime;
-            }
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         public Optional<FreeTime> getFreeTime() {
             return Optional.ofNullable(freeTime);
         }
 
-        /**
-         * Sets {@code mods} to this object's {@code mods}.
-         * A defensive copy of {@code mods} is used internally.
-         */
-        public void setMods(Set<Mod> mods) {
-            this.mods = (mods != null) ? new HashSet<>(mods) : null;
+        public void setFreeTime(FreeTime freeTime) {
+            if (freeTime != FreeTime.EMPTY_FREE_TIME) {
+                this.freeTime = freeTime;
+            }
         }
 
         /**
@@ -258,16 +250,24 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code mods} is null.
          */
-        public Optional<Set<Mod>> getMods() {
-            return (mods != null) ? Optional.of(Collections.unmodifiableSet(mods)) : Optional.empty();
+        public Optional<Set<Course>> getCourses() {
+            return (courses != null) ? Optional.of(Collections.unmodifiableSet(courses)) : Optional.empty();
         }
 
-        public void setHour(Hour hour) {
-            this.hour = hour;
+        /**
+         * Sets {@code mods} to this object's {@code mods}.
+         * A defensive copy of {@code mods} is used internally.
+         */
+        public void setCourses(Set<Course> courses) {
+            this.courses = (courses != null) ? new HashSet<>(courses) : null;
         }
 
         public Optional<Hour> getHour() {
             return Optional.ofNullable(hour);
+        }
+
+        public void setHour(Hour hour) {
+            this.hour = hour;
         }
 
         @Override
@@ -288,7 +288,7 @@ public class EditCommand extends Command {
                     && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(freeTime, otherEditPersonDescriptor.freeTime)
-                    && Objects.equals(mods, otherEditPersonDescriptor.mods)
+                    && Objects.equals(courses, otherEditPersonDescriptor.courses)
                     && Objects.equals(hour, otherEditPersonDescriptor.hour);
         }
 
@@ -301,7 +301,7 @@ public class EditCommand extends Command {
                     .add("telegram", telegram)
                     .add("tags", tags)
                     .add("free time", freeTime)
-                    .add("mods", mods)
+                    .add("courses", courses)
                     .add("work hour", hour)
                     .toString();
         }
