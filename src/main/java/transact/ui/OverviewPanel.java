@@ -2,6 +2,7 @@ package transact.ui;
 
 import java.time.Month;
 import java.time.YearMonth;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
@@ -98,16 +99,21 @@ public class OverviewPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Updates the {@code monthDataMap} with information from the {@code transactionList}.
+     */
     private void updateMonthData() {
         transactionList.stream().forEach((Transaction t) -> {
             if (t.getTransactionType() == TransactionType.EXPENSE) {
                 // Increase Expense
-                monthDataMap.get(YearMonth.of(t.getDate().getYear(),
-                        t.getDate().getMonth())).increaseExpense(t.getAmount().getValue().doubleValue());
+                monthDataMap.get(YearMonth.from(t.getDate().getDate().toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate())).increaseExpense(t.getAmount().getValue().doubleValue());
             } else {
                 // Increase Revenue
-                monthDataMap.get(YearMonth.of(t.getDate().getYear(),
-                        t.getDate().getMonth())).increaseRevenue(t.getAmount().getValue().doubleValue());
+                monthDataMap.get(YearMonth.from(t.getDate().getDate().toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate())).increaseRevenue(t.getAmount().getValue().doubleValue());
             }
         });
         /* Mock data
@@ -138,6 +144,12 @@ public class OverviewPanel extends UiPart<Region> {
         return xAxis;
     }
 
+
+    /**
+     * Creates an ArrayList of monthly profit data for each month in the year.
+     *
+     * @return An ArrayList of Data objects, each representing monthly profit data.
+     */
     private ArrayList<Data<String, Number>> getProfitGraphData() {
         ArrayList<Data<String, Number>> data = new ArrayList<>();
         for (int i = 0; i < MONTHS_IN_A_YEAR; i++) {
@@ -188,10 +200,18 @@ public class OverviewPanel extends UiPart<Region> {
             return expense;
         }
 
+        /**
+         * Increases each month's revenue by a certain amount.
+         * @param revenue
+         */
         public void increaseRevenue(double revenue) {
             this.revenue += revenue;
         }
 
+        /**
+         * Increases each month's expense by a certain amount.
+         * @param expense
+         */
         public void increaseExpense(double expense) {
             this.expense += expense;
         }

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 
 /**
@@ -68,21 +67,4 @@ public class Date {
         return date.hashCode();
     }
 
-    /**
-     * Returns the integer representing the Month of the date (one-based).
-     */
-    public int getMonth() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar.get(Calendar.MONTH) + 1; // Calender.MONTH is zero-based
-    }
-
-    /**
-     * Returns the integer representing the Year of the date.
-     */
-    public int getYear() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar.get(Calendar.YEAR);
-    }
 }
