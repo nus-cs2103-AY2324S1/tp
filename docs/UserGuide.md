@@ -518,16 +518,16 @@ Here are some descriptions of the words you might come across in the User Guide:
 ### Parameter Information
 Here are some parameters you might come across in the User Guide:
 
-| Parameter        | Description                                     | Limitations                                                                                  |
-|------------------|-------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `n/NAME`         | Refers to the name of the tutor.                | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
-| `p/PHONE NUMBER` | Refers to the phone number of the tutor.        | Only contain numbers, and should be at least 3 <br/>digits long.                             |
-| `e/EMAIL`        | Refers to the email address of the tutor.       | Of the format local-part@domain<sup>1</sup>.                                                 |
-| `s/START_TIME`   | Refers to the start time of the schedule.       | Only datetime in `yyyy-MM-ddTHH:mm:ss`<sup>2</sup> format is accepted.                       |
-| `e/END_TIME`     | Refers to the end time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted.                                   |
-| `TUTOR_INDEX`    | Refers to the position of tutor in the list.    | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
-| `SCHEDULE_INDEX` | Refers to the position of schedule in the list. | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
-
+| Parameter         | Description                                     | Limitations                                                                                  |
+|-------------------|-------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `n/NAME`          | Refers to the name of the tutor.                | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
+| `p/PHONE NUMBER`  | Refers to the phone number of the tutor.        | Only contain numbers, and should be at least 3 <br/>digits long.                             |
+| `e/EMAIL`         | Refers to the email address of the tutor.       | Of the format local-part@domain<sup>1</sup>.                                                 |
+| `s/START_TIME`    | Refers to the start time of the schedule.       | Only datetime in `yyyy-MM-ddTHH:mm:ss`<sup>2</sup> format is accepted.                       |
+| `e/END_TIME`      | Refers to the end time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted.                                   |
+| `TUTOR_INDEX`     | Refers to the position of tutor in the list.    | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
+| `SCHEDULE_INDEX`  | Refers to the position of schedule in the list. | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
+| `SCHEDULE_STATUS` | Refers to the status of schedule in the list.   | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
 
 ### Parameter Format
 This section consists of more details of format limitations mentioned above.
@@ -567,6 +567,7 @@ This section consists of more details of format limitations mentioned above.
 | **Add Schedule**    | `add-s TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` |
 | **Edit Schedule**   | `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]` <br> e.g., `edit-s 1 s/2023-09-15T13:00:00`                 |
 | **List Schedule**   | `list-s`                                                                                                        |
+| **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                                   |
 | **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                    |
 | **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                |
 | **Clear**           | `clear`                                                                                                         |
