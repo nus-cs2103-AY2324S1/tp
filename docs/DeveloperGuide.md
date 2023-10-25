@@ -1,169 +1,334 @@
-# CheckMate User Guide
+---
+layout: page
+title: Developer Guide
+---
+* Table of Contents
+  {:toc}
 
-## Table of Contents
-1. Introduction
-    - About CheckMate
-    - Target Users
-    - Value Proposition
-2. Getting Started
-    - Installation
-    - Command Format
-    - Acceptable Parameter Values
-3. Features
-    1. **Booking Management**
-        - Add Bookings
-        - Cancel a Booking
-    2. **Room Data Visualization**
-        - View Room Availability
-        - View All Bookings
-    3. **Search Functionality**
-        - Search for a Booking
-4. User Guide for Features
-    - Detailed instructions for each feature
-5. Non-Functional Requirements
-    - System Requirements
-    - Performance Expectations
-    - User Typing Speed
-6. Glossary
-    - Key Terminology
 
 ---
 
-## 1. Introduction
-
-### About CheckMate
 CheckMate is a powerful room booking and management system designed for hotel employees, especially those in administrative and management positions. It streamlines the process of room bookings, offering real-time room data visualization, search functionality, and efficient booking management.
 
-### Target Users
-Hotel employees, especially those in administrative and management roles.
 
-### Value Proposition
+## **Acknowledgements**
+
+* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Setting up, getting started**
+
+Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Design**
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+</div>
+
+### Architecture
+
+<img src="images/ArchitectureDiagram.png" width="280" />
+
+The ***Architecture Diagram*** given above explains the high-level design of the App.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main components of the architecture**
+
+**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+
+The bulk of the app's work is done by the following four components:
+
+* [**`UI`**](#ui-component): The UI of the App.
+* [**`Logic`**](#logic-component): The command executor.
+* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+
+Each of the four main components (also shown in the diagram above),
+
+* defines its *API* in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+
+<img src="images/ComponentManagers.png" width="300" />
+
+The sections below give more details of each component.
+
+### UI component
+
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+
+![Structure of the UI Component](images/UiClassDiagram.png)
+
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
+The `UI` component,
+
+* executes user commands using the `Logic` component.
+* listens for changes to `Model` data so that the UI can be updated with the modified data.
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+### Logic component
+
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+
+Here's a (partial) class diagram of the `Logic` component:
+
+<img src="images/LogicClassDiagram.png" width="550"/>
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+How the `Logic` component works:
+
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+
+<img src="images/ParserClasses.png" width="600"/>
+
+How the parsing works:
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+### Model component
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+
+<img src="images/ModelClassDiagram.png" width="450" />
+
+
+The `Model` component,
+
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+
+<img src="images/BetterModelClassDiagram.png" width="450" />
+
+</div>
+
+
+### Storage component
+
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+
+<img src="images/StorageClassDiagram.png" width="550" />
+
+The `Storage` component,
+* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+### Common classes
+
+Classes used by multiple components are in the `seedu.addressbook.commons` package.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Implementation**
+
+This section describes some noteworthy details on how certain features are implemented.
+
+### Prefix Autocomplete 
+
+#### Implementation
+
+The prefix autocomplete mechanism is facilitated by the `PrefixCompletion` class. This class is designed to recommend possible prefixes that a user can use to complete their commands more efficiently.
+
+The primary functions of the class include:
+
+- `PrefixCompletion#getNextCompletion(String currentInput)` - Provides the next possible prefix recommendation based on the user's current input.
+
+`PrefixCompletion` is used in the `CommandBox` class. When the user presses the `TAB` key, the `handleTabPressed` method is invoked, which runs the `PrefixCompletion` to auto-complete the user's current input.
+
+Given below is an example usage senario and how the prefix completion mechanism behaves at each step.
+
+1. The user starts typing a command in the command box.
+2. Upon pressing the `TAB` key, the current text in the command box is passed to the `PrefixCompletion#getNextCompletion` method.
+3. The method checks the user's input to determine the appropriate command (e.g., `add`, `edit`) and goes through the prefix for the command until an unused prefix is found.
+4. If a suitable prefix is identified, it is appended to the user's current input in the command box, accompanied by an example value. The example value is highlighted for easy replacement by the user.
+5. If no suitable prefix is identified or if the user's input isn't recognized, the command box runs `CommandBox#indicateCompletionFailure()` which signals the user to adjust their input by adjusting the text color for 0.5s.
+
+The following sequence diagram provides a visual representation of the prefix autocomplete operation within the `CommandBox`:
+
+![](images/PrefixCompletionSequenceDiagram.png)
+
+#### Design Considerations:
+
+**Aspect: Execution of prefix autocomplete:**
+
+- **Choice:** Uses a predefined list of prefixes and examples for each command.
+    - Pros: Simplified implementation. Easy to maintain and update.
+    - Cons: 
+      - Limited to predefined prefixes and commands.
+      - Subject to manual change when prefix changes.
+
+- **Alternative:** Dynamically generate example suggestions based on user's history or frequently used parameter.
+    - Pros: Offers more personalized and relevant suggestions.
+    - Cons: Demands a more complex implementation. Requires a mechanism to track and evaluate user's command history.
+
+**Aspect: Indication of prefix autocomplete failures:**
+
+- **Choice:** Flash the command box with an error style briefly.
+    - Pros: Visually noticeable. Informs the user that the autocomplete attempt was unsuccessful.
+    - Cons: Might be considered intrusive by some users.
+
+- **Alternative:** Display a tooltip or a message below the command box.
+    - Pros: Less intrusive. Clearly communicates the message to the user.
+    - Cons: Potential to clutter the UI if not managed gracefully.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Requirements**
+
+### Product scope
+
+**Target User profile**
+
+* Hotel employees, especially those in administrative and management roles.
+* Has a need to manage a significant number of bookings in a hotel.
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
+
+**Value Proposition**
+
 CheckMate empowers hotel employees to efficiently manage room bookings, optimize room-booking matching, and enhance guest experiences. It offers real-time room availability, service scheduling, and amenity management. It is optimized for administrative roles, ensuring seamless room allocation and guest service.
 
-## 2. Getting Started
+### User stories
 
-### Installation
-CheckMate runs on any mainstream operating system with Java 11 or above installed.
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-### Command Format
-Commands in CheckMate follow a specific format. Parameters are enclosed in square brackets, and acceptable values are specified for each parameter.
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new person               |                                                                        |
+| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
-### Acceptable Parameter Values
-- ROOM_NUMBER: Any positive integer from 0 to 500 (Maximum).
-- DATE: YYYY-MM-DD.
-- START_TIME-END_TIME: HH:MM-HH:MM.
+### Use cases
 
-## 3. Features
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-### 1. Booking Management
+**Use case: Delete a person**
 
-#### Add Bookings
-Allows hotel receptionists to add new room bookings upon confirmation of a room reservation.
+**MSS**
 
-**Command Format:** `add booking [r/ROOM_NUMBER] [d/DATE] [t/START_TIME-END_TIME]`
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to delete a specific person in the list
+4.  AddressBook deletes the person
 
-**Example Command:** `add booking r/101 d/2023-09-16 t/09:00-12:00`
+    Use case ends.
 
-**Expected Outputs (Success):** "Booking added successfully for Room ROOM_NUMBER on DATE from START_TIME to END_TIME."
+**Extensions**
 
-**Expected Outputs (Failure):**
-- Invalid ROOM_NUMBER: "Error: Invalid room number."
-- Room already booked: "Error: Room ROOM_NUMBER is already booked during this time slot."
-- Missing parameter: "Error: Missing parameter PARAMETER_NAME."
+* 2a. The list is empty.
 
-#### Cancel a Booking
-Provides hotel receptionists with the capability to cancel an existing booking efficiently.
+  Use case ends.
 
-**Command Format:** `cancelBooking [booking_id]`
+* 3a. The given index is invalid.
 
-**Example Command:** `cancelBooking 12345`
+    * 3a1. AddressBook shows an error message.
 
-**Expected Outputs (Success):** "Booking 12345 has been cancelled."
+      Use case resumes at step 2.
 
-**Expected Outputs (Failure):**
-- Invalid booking_id: "Error: Invalid booking ID."
-- Booking not found: "Error: No booking found with the given ID."
+*{More to be added}*
 
-### 2. Room Data Visualization
+###  Non-Functional Requirements
 
-#### View Room Availability
-Allows hotel receptionists to view rooms that are available on a specified date.
+1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-**Command Format:** `view availability d/DATE`
+*{More to be added}*
 
-**Example Command:** `view availability d/2023-09-16`
+### Glossary
 
-**Expected Outputs (Success):**
-```
-Available rooms:
-#01-001
-#02-002
-#03-003
-```
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Private contact detail**: A contact detail that is not meant to be shared with others
 
+--------------------------------------------------------------------------------------------------------------------
 
-**Expected Outputs (Failure):**
-- Invalid date: "Error: Invalid date format."
-- All rooms booked: "All rooms are booked on [date]."
+## **Appendix: Instructions for manual testing**
 
-#### View All Bookings
-Displays a comprehensive list of all bookings made to help hotel receptionists prepare for guest arrivals.
+Given below are instructions to test the app manually.
 
-**Command Format:** `view all bookings`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+testers are expected to do more *exploratory* testing.
 
-**Expected Outputs (Success):**
-```
-Booking ID: 12345
-Room Number: 101
-Date: 2023-09-16
-Time Slot: 09:00 - 12:00
-```
-```
-Booking ID: 12346
-Room Number: 102
-Date: 2023-09-18
-Time Slot: 14:00 - 16:00
-```
+</div>
 
-**Expected Outputs (Failure):** "No bookings available to display."
+### Launch and shutdown
 
-### 3. Search Functionality
+1. Initial launch
 
-#### Search for a Booking
-Allows hotel receptionists to efficiently search and locate specific bookings based on various criteria.
+    1. Download the jar file and copy into an empty folder
 
-**Command Format:** `find [KEYWORD]`
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-**Example Commands:**
-- `find 102`
-- `find jihoon`
-- `find 102 jihoon`
+1. Saving window preferences
 
-**Expected Outputs (Success):** A list of bookings that match the search criteria.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-**Expected Outputs (Failure):**
-- Invalid parameters: "Invalid command format! "
-- No matching bookings: "0 bookings listed!"
+    1. Re-launch the app by double-clicking the jar file.<br>
+       Expected: The most recent window size and location is retained.
 
-## 4. User Guide for Features
-Detailed instructions for using each feature can be found in the respective sections above.
+1. _{ more test cases …​ }_
 
-## 5. Non-Functional Requirements
+### Deleting a person
 
-### System Requirements
-- CheckMate works on any mainstream OS with Java 11 or above.
+1. Deleting a person while all persons are being shown
 
-### Performance Expectations
-- It can hold up to 1000 bookings without noticeable sluggishness in performance for typical usage.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-### User Typing Speed
-- A user with above-average typing speed for regular English text should be able to accomplish tasks faster using commands than using the mouse.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-## 6. Glossary
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-- **Mainstream OS**: Windows, Linux, Unix, OS-X.
-- **Private contact detail**: A contact detail not meant to be shared with others.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
----
+1. _{ more test cases …​ }_
 
-This user guide provides an overview of CheckMate and detailed instructions for its features. It empowers hotel employees to efficiently manage room bookings and enhance guest experiences.
+### Saving data
+
+1. Dealing with missing/corrupted data files
+
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+1. _{ more test cases …​ }_
