@@ -25,6 +25,7 @@ import seedu.address.model.person.fields.Phone;
 public class EditApplicantCommand extends Command {
 
     public static final String COMMAND_WORD = "editApplicant";
+    public static final String COMMAND_ALIAS = "edita";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
             + "by the index number used in the displayed applicant list. "
@@ -81,7 +82,7 @@ public class EditApplicantCommand extends Command {
      * edited with {@code editApplicantDescriptor}.
      */
     private static Applicant createEditedApplicant(Applicant applicantToEdit,
-                                                   EditApplicantDescriptor editApplicantDescriptor) {
+            EditApplicantDescriptor editApplicantDescriptor) {
         assert applicantToEdit != null;
 
         Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());

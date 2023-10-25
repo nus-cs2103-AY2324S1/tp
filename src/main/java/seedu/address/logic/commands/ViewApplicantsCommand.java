@@ -9,7 +9,9 @@ import seedu.address.model.Model;
  * Lists all applicants in the address book to the user.
  */
 public class ViewApplicantsCommand extends Command {
+
     public static final String COMMAND_WORD = "viewApplicants";
+    public static final String COMMAND_ALIAS = "viewa";
 
     public static final String MESSAGE_SUCCESS = "Listed all applicants";
 
