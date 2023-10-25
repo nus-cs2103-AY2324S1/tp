@@ -1,7 +1,8 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalJobs.CHEF;
 

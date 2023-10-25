@@ -1,7 +1,7 @@
 package seedu.application.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.commands.CommandTestUtil.DESC_CHEF;
 import static seedu.application.logic.commands.CommandTestUtil.DESC_CLEANER;
@@ -33,7 +33,7 @@ import seedu.application.testutil.JobBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -172,22 +172,22 @@ public class EditCommandTest {
         // same values -> returns true
         EditJobDescriptor copyDescriptor = new EditJobDescriptor(DESC_CHEF);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_JOB, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(standardCommand, null);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_JOB, DESC_CHEF)));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_SECOND_JOB, DESC_CHEF));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_JOB, DESC_CLEANER)));
+        assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST_JOB, DESC_CLEANER));
     }
 
     @Test

@@ -1,6 +1,8 @@
 package seedu.application.model.job;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.testutil.Assert.assertThrows;
 
@@ -40,18 +42,18 @@ public class CompanyTest {
         Company company = new Company("999");
 
         // same values -> returns true
-        assertTrue(company.equals(new Company("999")));
+        assertEquals(company, new Company("999"));
 
         // same object -> returns true
-        assertTrue(company.equals(company));
+        assertEquals(company, company);
 
         // null -> returns false
-        assertFalse(company.equals(null));
+        assertNotEquals(company, null);
 
         // different types -> returns false
-        assertFalse(company.equals(5.0f));
+        assertNotEquals(company, 5.0f);
 
         // different values -> returns false
-        assertFalse(company.equals(new Company("995")));
+        assertNotEquals(company, new Company("995"));
     }
 }

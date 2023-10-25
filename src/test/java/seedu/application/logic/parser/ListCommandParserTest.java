@@ -13,7 +13,7 @@ import seedu.application.model.job.FieldComparator;
 
 public class ListCommandParserTest {
 
-    private ListCommandParser parser = new ListCommandParser();
+    private final ListCommandParser parser = new ListCommandParser();
 
     @Test
     public void parse_invalidArgs_throwParseException() {

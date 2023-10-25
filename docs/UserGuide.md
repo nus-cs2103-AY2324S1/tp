@@ -127,9 +127,6 @@ Shows a list of all applications in the list.
 
 **Format:** `list`
 
-* List is empty: “List is empty.”
-* Arguments passed after the list command: “Unexpected arguments.”
-
 **UI mockup:**
 ![ListCommand](images/user-guide/ListCommand.png)
 
@@ -137,29 +134,47 @@ Shows a list of all applications in the list.
 
 ### Finding an application : `find`
 
-Find applications by specifying a field and keywords.
+Finds all applications with the specified fields containing any of the given keywords.
 
-**Format:** `find -FIELD [KEYWORDS]`
+**Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [s/STATUS] [i/INDUSTRY] [d/DEADLINE] [t/TYPE]`
 
-* Lists all applications whose field contains any of the provided keywords.
-* Applications are filtered by the specified `FIELD`.
-* The `FIELD` must be a valid specifier. `find` only supports searching by:
-    * Company: `-c`
-    * Role: `-r`
-
-**Successful command:**
-List is updated to contain applications meeting the search criteria.
-
-**Failed command:**
-Prints the associated error message.
-
-* No arguments provided: “Invalid command format!” and provides the command format.
-* Invalid specifier: "Invalid command format! Field specifier is invalid".
+* At least one optional field must be provided.
+* An application will be listed if at least one of the keywords match. The keywords are case-insensitive.
+* Keywords provided in the `[KEYWORDS]` field will be checked for in all fields of the applications.
+* Applications with partially matching keywords will not be listed (e.g. searching for the keyword "Goo" will not list applications with "Google").
+* Searches for Deadline must be in the format `MMM DD YYYY HHMM`.
 
 **Examples:**
 
-* `deadline 1 d/Nov 12 2022 1200`
-  Sets deadline for application at index 1 to be Nov 12 2022 1200.
+* `find c/Google`
+  Finds all applications with the keyword "Google" in the company name.
+
+---
+
+### Sorting the list : `sort`
+
+Sorts the list based on the field specifier provided.
+
+**Format:** `sort FIELD`
+
+The following are the valid values for the `FIELD` specifier:
+
+| Field    | Specifier | Sort Order    |
+|----------|-----------|---------------|
+| Company  | `-c`      | Alphabetical  |
+| Role     | `-r`      | Alphabetical  |
+| Status   | `-s`      | Alphabetical  |
+| Industry | `-i`      | Alphabetical  |
+| Deadline | `-d`      | Chronological |
+| Type     | `-t`      | Alphabetical  |
+
+* A valid specifier must be provided.
+* For optional fields, applications with empty fields will be listed first.
+
+**Examples:**
+
+* `sort -d`
+  Lists all applications sorted by deadline.
 
 ---
 
@@ -181,12 +196,13 @@ print “Error: ” and error message for:
 
 ## Command summary
 
-| Action       | Format                                        |
-|--------------|-----------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` |
-| **Delete**   | `delete INDEX`                                |
-| **List**     | `list`                                        |
-| **Mark**     | `mark INDEX s/STATUS`                         |
-| **Deadline** | `deadline INDEX d/DEADLINE`                   |
-| **Find**     | `find -FIELD [KEYWORDS]`                      |
-| **Help**     | `help `                                       |
+| Action       | Format                                                                               |
+|--------------|--------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                        |
+| **Delete**   | `delete INDEX`                                                                       |
+| **List**     | `list`                                                                               |
+| **Mark**     | `mark INDEX s/STATUS`                                                                |
+| **Deadline** | `deadline INDEX d/DEADLINE`                                                          |
+| **Find**     | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [s/STATUS] [i/INDUSTRY] [d/DEADLINE] [t/TYPE]` |
+| **Sort**     | `sort FIELD`                                                                         |
+| **Help**     | `help `                                                                              |

@@ -2,6 +2,7 @@ package seedu.application.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.model.Model.PREDICATE_SHOW_ALL_JOBS;
 import static seedu.application.model.job.Role.ROLE_SPECIFIER;
@@ -103,25 +104,25 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(applicationBook, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(applicationBook, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(modelManager, null);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(modelManager, 5);
 
         // different applicationBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentApplicationBook, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(differentApplicationBook, userPrefs));
 
         // different filteredList -> returns false
         String[] keywords = CHEF.getRole().description.split("\\s+");
         modelManager.updateFilteredJobList(
                 new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(applicationBook, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(applicationBook, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
@@ -129,6 +130,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setApplicationBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(applicationBook, differentUserPrefs)));
+        assertNotEquals(modelManager, new ModelManager(applicationBook, differentUserPrefs));
     }
 }

@@ -8,16 +8,22 @@ import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST_JOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.application.logic.parser.exceptions.ParseException;
-import seedu.application.model.job.Company;
-import seedu.application.model.job.Role;
+import seedu.application.model.job.*;
 
 public class ParserUtilTest {
     private static final String INVALID_ROLE = "Softw@re Engineer";
     private static final String INVALID_COMPANY = "      ";
+    private static final String INVALID_DEADLINE = "18 August";
+    private static final String INVALID_STATUS = "Submitted";
+    private static final String INVALID_JOBTYPE = "Intern";
+    private static final String INVALID_INDUSTRY = "$Finance";
     private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_COMPANY = "Google";
+    private static final String VALID_DEADLINE = "Dec 31 2030 1200";
+    private static final String VALID_STATUS = "Pending";
+    private static final String VALID_JOBTYPE = "INTERNSHIP";
+    private static final String VALID_INDUSTRY = "Finance";
     private static final String WHITESPACE = " \t\r\n";
-    private static final String INVALID_INDUSTRY = "$Finance";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -86,7 +92,93 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseIndustry_invalidValue_throwsParseException() throws Exception {
+    public void parseDeadline_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeadline((String) null));
+    }
+
+    @Test
+    public void parseDeadline_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeadline(INVALID_DEADLINE));
+    }
+
+    @Test
+    public void parseDeadline_validValueWithoutWhitespace_returnsDeadline() throws Exception {
+        Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE));
+    }
+
+    @Test
+    public void parseDeadline_validValueWithWhitespace_returnsTrimmedDeadline() throws Exception {
+        String deadlineWithWhitespace = WHITESPACE + VALID_DEADLINE + WHITESPACE;
+        Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(deadlineWithWhitespace));
+    }
+    @Test
+    public void parseStatus_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus((String) null));
+    }
+
+    @Test
+    public void parseStatus_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(INVALID_STATUS));
+    }
+
+    @Test
+    public void parseStatus_validValueWithoutWhitespace_returnsStatus() throws Exception {
+        Status expectedStatus = new Status(VALID_STATUS);
+        assertEquals(expectedStatus, ParserUtil.parseStatus(VALID_STATUS));
+    }
+
+    @Test
+    public void parseStatus_validValueWithWhitespace_returnsTrimmedStatus() throws Exception {
+        String statusWithWhitespace = WHITESPACE + VALID_STATUS + WHITESPACE;
+        Status expectedStatus = new Status(VALID_STATUS);
+        assertEquals(expectedStatus, ParserUtil.parseStatus(statusWithWhitespace));
+    }
+
+    @Test
+    public void parseJobType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseJobType((String) null));
+    }
+
+    @Test
+    public void parseJobType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseJobType(INVALID_JOBTYPE));
+    }
+
+    @Test
+    public void parseJobType_validValueWithoutWhitespace_returnsJobType() throws Exception {
+        JobType expectedJobType = new JobType(VALID_JOBTYPE);
+        assertEquals(expectedJobType, ParserUtil.parseJobType(VALID_JOBTYPE));
+    }
+
+    @Test
+    public void parseJobType_validValueWithWhitespace_returnsTrimmedJobType() throws Exception {
+        String jobTypeWithWhitespace = WHITESPACE + VALID_JOBTYPE + WHITESPACE;
+        JobType expectedJobType = new JobType(VALID_JOBTYPE);
+        assertEquals(expectedJobType, ParserUtil.parseJobType(jobTypeWithWhitespace));
+    }
+
+    @Test
+    public void parseIndustry_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIndustry((String) null));
+    }
+
+    @Test
+    public void parseIndustry_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndustry(INVALID_INDUSTRY));
+    }
+
+    @Test
+    public void parseIndustry_validValueWithoutWhitespace_returnsIndustry() throws Exception {
+        Industry expectedIndustry = new Industry(VALID_INDUSTRY);
+        assertEquals(expectedIndustry, ParserUtil.parseIndustry(VALID_INDUSTRY));
+    }
+
+    @Test
+    public void parseIndustry_validValueWithWhitespace_returnsTrimmedIndustry() throws Exception {
+        String industryWithWhitespace = WHITESPACE + VALID_INDUSTRY + WHITESPACE;
+        Industry expectedIndustry = new Industry(VALID_INDUSTRY);
+        assertEquals(expectedIndustry, ParserUtil.parseIndustry(industryWithWhitespace));
     }
 }

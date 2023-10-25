@@ -1,6 +1,8 @@
 package seedu.application.model.job;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.model.job.Status.IN_PROGRESS;
 import static seedu.application.testutil.Assert.assertThrows;
@@ -43,18 +45,18 @@ public class StatusTest {
         Status status = new Status(IN_PROGRESS);
 
         // same values -> returns true
-        assertTrue(status.equals(new Status(IN_PROGRESS)));
+        assertEquals(status, new Status(IN_PROGRESS));
 
         // same object -> returns true
-        assertTrue(status.equals(status));
+        assertEquals(status, status);
 
         // null -> returns false
-        assertFalse(status.equals(null));
+        assertNotEquals(status, null);
 
         // different types -> returns false
-        assertFalse(status.equals(5.0f));
+        assertNotEquals(status, 5.0f);
 
         // different values -> returns false
-        assertFalse(status.equals(new Status(Status.JobStatus.PENDING.toString())));
+        assertNotEquals(status, new Status(Status.JobStatus.PENDING.toString()));
     }
 }

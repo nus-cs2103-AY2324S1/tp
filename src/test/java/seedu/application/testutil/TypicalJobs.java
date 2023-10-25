@@ -1,6 +1,17 @@
 package seedu.application.testutil;
 
-import static seedu.application.logic.commands.CommandTestUtil.*;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_INDUSTRY_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_INDUSTRY_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_JOB_TYPE_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_JOB_TYPE_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_ROLE_CLEANER;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_STATUS_CHEF;
+import static seedu.application.logic.commands.CommandTestUtil.VALID_STATUS_CLEANER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,11 +62,11 @@ public class TypicalJobs {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Job CHEF = new JobBuilder().withRole(VALID_ROLE_CHEF)
         .withCompany(VALID_COMPANY_CHEF).withStatus(VALID_STATUS_CHEF)
-        .withDeadline(VALID_DEADLINE_CHEF).withJobType(VALID_JOBTYPE_CHEF)
+        .withDeadline(VALID_DEADLINE_CHEF).withJobType(VALID_JOB_TYPE_CHEF)
         .withIndustry(VALID_INDUSTRY_CHEF).build();
     public static final Job CLEANER = new JobBuilder().withRole(VALID_ROLE_CLEANER)
         .withCompany(VALID_COMPANY_CLEANER).withStatus(VALID_STATUS_CLEANER)
-        .withDeadline(VALID_DEADLINE_CLEANER).withJobType(VALID_JOBTYPE_CLEANER)
+        .withDeadline(VALID_DEADLINE_CLEANER).withJobType(VALID_JOB_TYPE_CLEANER)
         .withIndustry(VALID_INDUSTRY_CLEANER).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
