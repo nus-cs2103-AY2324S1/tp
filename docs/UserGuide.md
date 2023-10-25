@@ -29,6 +29,7 @@ If you type fast, lesSON can get your flashcards done faster than current GUI ap
    - [Editing a Specific Flashcard](#editing-a-specific-flashcard--edit)
    - [Practise Flashcards](#practise-flashcards-practise)
    - [Solve Flashcards](#practise-flashcards-solve)
+   - [Setting Difficulty for Flashcards](#setting-difficulty-of-flashcards-set)
 4. [FAQ](#faq)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -201,7 +202,7 @@ practise 10
 2. Successful Output
    ![result of practise command](./images/UserGuide/1.3_prac_ans.png)
 
-### Practise Flashcards: `solve`
+### Solving Flashcards: `solve`
 Solves the question at the given index
 
 Format: `solve INDEX`
@@ -232,7 +233,7 @@ solve 10
    ![result of practise command](./images/UserGuide/1.3_solve_ans.png)
 
 
-### Solve Flashcards: set
+### Setting Difficulty of Flashcards: `set`
 Setting the difficulty of a flashcard
 
 Format: set INDEX DIFFICULTY
