@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 /**
- * Lists all interviews in the address book to the user. 
+ * Lists all interviews in the address book to the user.
  * Essentially used to reset the filters applied to the interview
  * Does not affect the display of ApplicantList at all
  * (Can potentially be updated to display only the Applicants with Interviews if that is desired)

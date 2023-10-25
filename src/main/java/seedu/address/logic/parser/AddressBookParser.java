@@ -90,7 +90,7 @@ public class AddressBookParser {
 
         case DeleteInterviewCommand.COMMAND_WORD:
             return new DeleteInterviewCommandParser().parse(arguments);
-        
+
         case ListInterviewCommand.COMMAND_WORD:
             return new ListInterviewCommand();
 
