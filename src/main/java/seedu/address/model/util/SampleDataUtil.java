@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -58,9 +59,21 @@ public class SampleDataUtil {
                 getTagSet("colleagues"), true);
 
         return new Interview[] {
-            new Interview(sampleApplicant, "Frontend Engineer", "Sample Time"),
-            new Interview(sampleApplicant2, "Backend Engineer", "Sample Time 2"),
-            new Interview(sampleApplicant3, "SWE", "Sample Time 3")
+            new Interview(sampleApplicant,
+                    "Frontend Engineer",
+                    LocalDateTime.of(2025, 1, 1, 10, 0),
+                    LocalDateTime.of(2025, 1, 1, 12, 0)
+            ),
+            new Interview(sampleApplicant2,
+                    "Backend Engineer",
+                    LocalDateTime.of(2025, 1, 2, 10, 0),
+                    LocalDateTime.of(2025, 1, 2, 12, 0)
+            ),
+            new Interview(sampleApplicant3,
+                    "SWE",
+                    LocalDateTime.of(2025, 1, 3, 10, 0),
+                    LocalDateTime.of(2025, 1, 3, 12, 0)
+            )
         };
     }
 

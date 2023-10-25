@@ -6,11 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.TimeParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
@@ -41,17 +44,20 @@ public class AddInterviewCommand extends Command {
 
     private final Index applicantIndex;
     private final String jobRole;
-    private final String timing;
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
 
     /**
      * Creates an AddInterviewCommand to add the specified {@code Interview}
      */
-    public AddInterviewCommand(Index applicantIndex, String jobRole, String timing) {
-        requireAllNonNull(applicantIndex, jobRole, timing);
+    public AddInterviewCommand(Index applicantIndex, String jobRole, String startTime, String endTime)
+            throws ParseException {
+        requireAllNonNull(applicantIndex, jobRole, startTime, endTime);
 
         this.applicantIndex = applicantIndex;
         this.jobRole = jobRole;
-        this.timing = timing;
+        this.startTime = TimeParser.parseDate(startTime);
+        this.endTime = TimeParser.parseDate(endTime);
     }
 
     @Override
@@ -78,7 +84,7 @@ public class AddInterviewCommand extends Command {
                 true
         );
 
-        Interview toAdd = new Interview(applicantWithInterview, jobRole, timing);
+        Interview toAdd = new Interview(applicantWithInterview, jobRole, startTime, endTime);
 
         if (model.hasInterview(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
@@ -110,6 +116,7 @@ public class AddInterviewCommand extends Command {
         AddInterviewCommand otherAddICommand = (AddInterviewCommand) other;
         return applicantIndex.equals(otherAddICommand.applicantIndex)
                 && jobRole.equals(otherAddICommand.jobRole)
-                && timing.equals(otherAddICommand.timing);
+                && startTime.equals(otherAddICommand.startTime)
+                && endTime.equals(otherAddICommand.endTime);
     }
 }

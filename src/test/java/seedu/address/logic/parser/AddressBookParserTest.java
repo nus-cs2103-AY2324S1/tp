@@ -52,7 +52,11 @@ public class AddressBookParserTest {
         AddInterviewCommand command =
                 (AddInterviewCommand) parser.parseCommand(InterviewUtil.getAddCommand(index, interview));
         System.out.print(command);
-        assertEquals(new AddInterviewCommand(index, interview.getJobRole(), interview.getInterviewTiming()), command);
+        assertEquals(new AddInterviewCommand(index,
+                interview.getJobRole(),
+                interview.getInterviewStartTimeAsString(),
+                interview.getInterviewEndTimeAsString()
+        ), command);
     }
 
     @Test

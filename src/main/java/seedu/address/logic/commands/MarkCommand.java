@@ -51,7 +51,8 @@ public class MarkCommand extends Command {
         Interview markedInterview = new Interview(
                 interviewToMark.getInterviewApplicant(),
                 interviewToMark.getJobRole(),
-                interviewToMark.getInterviewTiming(),
+                interviewToMark.getInterviewStartTime(),
+                interviewToMark.getInterviewEndTime(),
                 true
         );
         model.setInterview(interviewToMark, markedInterview);

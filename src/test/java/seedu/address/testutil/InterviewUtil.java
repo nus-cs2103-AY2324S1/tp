@@ -28,6 +28,6 @@ public class InterviewUtil {
      */
     public static String getInterviewDetails(Interview interview) {
         return PREFIX_JOB_ROLE + interview.getJobRole() + " "
-                + PREFIX_TIMING + interview.getInterviewTiming();
+                + PREFIX_TIMING + interview.getInterviewStartTime();
     }
 }
