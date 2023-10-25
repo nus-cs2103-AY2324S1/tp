@@ -12,7 +12,7 @@ Class AssignmentTracker
 Class ClassParticipationTracker
 }
 
-package ClassGrades as ClassGradesPackage {
+package ClassComponents as ClassGradesPackage {
 Class Attendance
 Class Assignment
 Class ClassParticipation
@@ -22,9 +22,8 @@ AttendanceTracker .up.|> Tracker
 AssignmentTracker .up.|> Tracker
 ClassParticipationTracker .up.|> Tracker
 
-Attendance --* AttendanceTracker
-Assignment --* AssignmentTracker
-ClassParticipation --* ClassParticipationTracker
-
+Attendance "*" <--* AttendanceTracker
+Assignment "*" <--* AssignmentTracker
+ClassParticipation "*" <--* ClassParticipationTracker
 
 @enduml
