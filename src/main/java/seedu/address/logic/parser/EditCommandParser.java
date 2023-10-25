@@ -73,7 +73,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setTelegram(ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get()));
         }
         if (argMultimap.getValue(PREFIX_PROFESSION).isPresent()) {
-            editPersonDescriptor.setProfession(ParserUtil.parseProfession(argMultimap.getValue(PREFIX_PROFESSION).get()));
+            editPersonDescriptor.setProfession(
+                    ParserUtil.parseProfession(argMultimap.getValue(PREFIX_PROFESSION).get()));
         }
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
             editPersonDescriptor.setIncome(ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get()));
