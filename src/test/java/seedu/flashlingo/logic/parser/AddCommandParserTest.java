@@ -27,7 +27,8 @@ public class AddCommandParserTest {
         FlashCard expectedFlashCard = new FlashcardBuilder(BOB).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + WORD_DESC_BOB + TRANSLATION_DESC_BOB, new AddCommand(expectedFlashCard));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + WORD_DESC_BOB + TRANSLATION_DESC_BOB,
+                new AddCommand(expectedFlashCard));
     }
 
     @Test

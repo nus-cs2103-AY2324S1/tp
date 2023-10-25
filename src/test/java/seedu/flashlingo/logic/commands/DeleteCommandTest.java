@@ -16,8 +16,8 @@ import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
-import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.UserPrefs;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
