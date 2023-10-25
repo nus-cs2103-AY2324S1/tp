@@ -7,6 +7,23 @@ title: User Guide
 
 NetworkBook is a **desktop contact book application**. You can use it to network with other computing students and professionals from NUS.
 
+## About This User Guide
+
+This user guide provides in-depth documentation on the various commands that are available in NetworkBook.
+If you are familiar with the software, this user guide gives an overview on how to use specific commands.
+
+Additionally, if you are a new user, this user guide provides a quick start guide to aid you with installing the application and getting started.
+
+### What's new in NetworkBook 1.3
+
+NetworkBook 1.3 includes several new features and improvements for ease of use.
+* Filter command for more control with finding contacts
+* Error messages are now more specific to give useful information
+* NetworkBook is able to connect with and open other apps
+* Keyboard shortcuts added for easy access to common commands
+* Undo/redo command to fix mistakes
+* Refinement of GUI to make it more aesthetically pleasing
+
 ## Features
 
 ### <u>Category 1 - Add contact information</u>
