@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" minWidth="350" prefWidth="500" stylesheets="@css/clientProfile.css">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" minWidth="350"
+      prefWidth="500" stylesheets="@css/clientProfile.css">
     <padding>
         <Insets top="15" right="15" bottom="15" left="15" />
     </padding>

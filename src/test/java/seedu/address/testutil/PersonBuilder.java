@@ -108,9 +108,9 @@ public class PersonBuilder {
      * @return the built {@code Person}
      */
     public Person build() {
-        Person person = new Person(name, phone, email, address, tags);
-        person.setLead(lead);
-        return person;
+        return new Person.PersonBuilder(name, phone, email, address, tags)
+                .withLead(lead)
+                .build();
     }
 
 }
