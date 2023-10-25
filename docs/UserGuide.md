@@ -2,20 +2,53 @@
 layout: page
 title: User Guide
 ---
-# lesSON User Guide
-lesSON is a **flashcard software** aimed to help individuals with their memory work in school, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**. If you can type fast, lesSON can get your contact management tasks done faster than traditional GUI apps.
+# Welcome to lesSON
 
-# Table of Contents
-1. [Feature List](#feature-list)
-    - [Adding a FlashCard](#adding-a-flashcard-add)
-    - [Deleting a Flashcard](#deleting-a-flashcard--delete)
-    - [View All Flashcards](#view-all-flashcards--list)
-    - [Editing a Specific Flashcard](#editing-a-specific-flashcard--edit)
-    - [Practise Flashcards](#practise-flashcards-practise)
+***Revolutionise your studying experience with lesSON!***
+
+lesSON is a **desktop application** aimed to help NUS Computer Science undergraduates make flashcards to aid with 
+their memory work for school content.<br>
+Here are some benefits of adopting lesSON in your studying experience:
+- Create and Edit flashcards about key concepts taught in your courses
+- Take advantage of our implemented *Spaced Repetition* to maximise your memorisation
+- Categorise your flashcards based on their courses or topics
+
+On top of these functionalities, we believe that making flashcards must be efficient. Therefore, lesSON is optimized for
+use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**. 
+If you type fast, lesSON can get your flashcards done faster than current GUI apps in the industry.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Feature List
+# Table of Contents
+1. [Quick start](#quick-start)
+2. [Glossary](#glossary)
+3. [Feature list](#feature-list)
+   - [Adding a FlashCard](#adding-a-flashcard-add)
+   - [Deleting a Flashcard](#deleting-a-flashcard--delete)
+   - [View All Flashcards](#view-all-flashcards--list)
+   - [Editing a Specific Flashcard](#editing-a-specific-flashcard--edit)
+   - [Practise Flashcards](#practise-flashcards-practise)
+   - [Solve Flashcards](#practise-flashcards-solve)
+4. [FAQ](#faq)
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Quick start
+
+1. Make sure that you have **Java 11 or above** installed on your computer.
+2. Download the latest jar file from [here](https://github.com/AY2324S1-CS2103T-W17-4/tp/releases/tag/v1.3(trial)).
+3. Move the jar file installed to a working folder you would store all of your flashcards
+4. Launch lesSON.
+5. Better understand the GUI using this [guide](#table-of-contents).
+6. For new users, we recommend reading this [New User Guide](#table-of-contents).
+7. For advanced users, view all feature details in our [feature list](#feature-list).
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Glossary
+
+--------------------------------------------------------------------------------------------------------------------
+# Feature list
 
 ### Adding a Flashcard `add`
 Adds a flashcard to the deck for the user.
@@ -198,3 +231,9 @@ solve 10 d/easy
 
 2. Successful Output
    ![result of practise command](./images/UserGuide/solve_1.2_ans.png)
+
+--------------------------------------------------------------------------------------------------------------------
+
+# FAQ
+
+--------------------------------------------------------------------------------------------------------------------
