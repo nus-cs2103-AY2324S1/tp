@@ -122,7 +122,9 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         viewPersonPanel = ViewPatientPanel.updatePerson(logic.getSelectedPerson());
-        viewPersonPanelPlaceholder.getChildren().add(viewPersonPanel.getRoot());
+        if (viewPersonPanel != null) {
+            viewPersonPanelPlaceholder.getChildren().add(viewPersonPanel.getRoot());
+        }
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
