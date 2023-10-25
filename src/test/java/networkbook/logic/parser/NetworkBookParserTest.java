@@ -14,12 +14,12 @@ import networkbook.logic.Messages;
 import networkbook.logic.commands.ClearCommand;
 import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.CreateCommand;
-import networkbook.logic.commands.DeleteCommand;
 import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
 import networkbook.logic.commands.SortCommand;
+import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.edit.EditNameAction;
 import networkbook.logic.parser.exceptions.ParseException;
@@ -52,9 +52,9 @@ public class NetworkBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON), command);
+        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
+                DeletePersonCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON), command);
     }
 
     @Test

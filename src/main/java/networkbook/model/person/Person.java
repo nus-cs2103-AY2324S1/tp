@@ -1,6 +1,6 @@
 package networkbook.model.person;
 
-import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -37,7 +37,7 @@ public class Person implements Identifiable<Person> {
                   UniqueList<Specialisation> specialisations,
                   UniqueList<Tag> tags,
                   Priority priority) {
-        requireAllNonNull(name);
+        requireNonNull(name);
         this.name = name;
         this.phones = phones;
         this.emails = emails.copy();

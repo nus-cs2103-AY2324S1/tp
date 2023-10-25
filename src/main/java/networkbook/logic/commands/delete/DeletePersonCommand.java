@@ -1,4 +1,4 @@
-package networkbook.logic.commands;
+package networkbook.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,6 +8,8 @@ import java.util.Objects;
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.Messages;
+import networkbook.logic.commands.Command;
+import networkbook.logic.commands.CommandResult;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
 import networkbook.model.person.Person;
@@ -15,7 +17,7 @@ import networkbook.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the network book.
  */
-public class DeleteCommand extends Command {
+public class DeletePersonCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -29,7 +31,7 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeletePersonCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -56,12 +58,12 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeletePersonCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return Objects.equals(this.targetIndex, otherDeleteCommand.targetIndex);
+        DeletePersonCommand otherDeletePersonCommand = (DeletePersonCommand) other;
+        return Objects.equals(this.targetIndex, otherDeletePersonCommand.targetIndex);
     }
 
     @Override

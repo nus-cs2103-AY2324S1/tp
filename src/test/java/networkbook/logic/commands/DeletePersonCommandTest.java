@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
+import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.UserPrefs;
@@ -22,31 +23,31 @@ import networkbook.testutil.TypicalPersons;
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteCommand}.
  */
-public class DeleteCommandTest {
+public class DeletePersonCommandTest {
 
     private Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete))
-                + String.format(DeleteCommand.MESSAGE_DELETE_PERSON_INDEX, 1);
+                + String.format(DeletePersonCommand.MESSAGE_DELETE_PERSON_INDEX, 1);
 
         ModelManager expectedModel = new ModelManager(model.getNetworkBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -54,17 +55,17 @@ public class DeleteCommandTest {
         showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
 
         Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete))
-                + String.format(DeleteCommand.MESSAGE_DELETE_PERSON_INDEX, 1);
+                + String.format(DeletePersonCommand.MESSAGE_DELETE_PERSON_INDEX, 1);
 
         Model expectedModel = new ModelManager(model.getNetworkBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -75,21 +76,21 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of network book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getNetworkBook().getPersonList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(TypicalIndexes.INDEX_SECOND_PERSON);
+        DeletePersonCommand deleteFirstCommand = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        DeletePersonCommand deleteSecondCommand = new DeletePersonCommand(TypicalIndexes.INDEX_SECOND_PERSON);
 
         // same object -> returns true
         assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        DeletePersonCommand deleteFirstCommandCopy = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON);
         assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
@@ -102,8 +103,8 @@ public class DeleteCommandTest {
         assertNotEquals(deleteFirstCommand, deleteSecondCommand);
 
         // both have null index -> returns true
-        DeleteCommand deleteNull = new DeleteCommand(null);
-        DeleteCommand deleteNull2 = new DeleteCommand(null);
+        DeletePersonCommand deleteNull = new DeletePersonCommand(null);
+        DeletePersonCommand deleteNull2 = new DeletePersonCommand(null);
         assertEquals(deleteNull, deleteNull2);
 
         // one has null index -> returns false
@@ -113,9 +114,9 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(targetIndex);
+        String expected = DeletePersonCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, deletePersonCommand.toString());
     }
 
     /**

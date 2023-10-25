@@ -1,7 +1,6 @@
-package networkbook.logic.commands.edit;
+package networkbook.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
-import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
@@ -18,9 +17,9 @@ import networkbook.model.person.Tag;
 import networkbook.model.util.UniqueList;
 
 /**
- * Constructs a new person from an original person based on the edit actions.
+ * Class that contains temporary information about a person whose field is being deleted.
  */
-public class EditPersonDescriptor {
+public class DeletePersonDescriptor {
     public static final String MESSAGE_INVALID_PHONE_INDEX = "The phone index provided is invalid.";
     public static final String MESSAGE_INVALID_EMAIL_INDEX = "The email index provided is invalid.";
     public static final String MESSAGE_INVALID_LINK_INDEX = "The link index provided is invalid.";
@@ -40,7 +39,7 @@ public class EditPersonDescriptor {
     /**
      * Constructs a new person editor from the original {@code person}.
      */
-    public EditPersonDescriptor(Person person) {
+    public DeletePersonDescriptor(Person person) {
         this.name = person.getName();
         this.phones = person.getPhones();
         this.emails = person.getEmails();
@@ -52,67 +51,90 @@ public class EditPersonDescriptor {
         this.priority = person.getPriority().orElse(null);
     }
 
-    public void setName(Name name) {
-        requireNonNull(name);
-        this.name = name;
-    }
-
-    public void setPhone(Index index, Phone phone) throws CommandException {
-        requireAllNonNull(index, phone);
+    /**
+     * Deletes the phone entry at {@code index} in the descriptor's list of phones.
+     * @param index is the zero-based index of the entry to delete.
+     * @throws CommandException when the index is invalid in the list.
+     */
+    public void deletePhone(Index index) throws CommandException {
+        requireNonNull(index);
         if (index.getZeroBased() >= this.phones.size()) {
             throw new CommandException(MESSAGE_INVALID_PHONE_INDEX);
         }
-        this.phones.setItem(index.getZeroBased(), phone);
+        this.phones.removeAtIndex(index.getZeroBased());
     }
 
-    public void setEmail(Index index, Email email) throws CommandException {
-        requireAllNonNull(index, email);
+    /**
+     * Deletes the email entry at {@code index} in the descriptor's list of emails.
+     * @param index is the zero-based index of the entry to delete.
+     * @throws CommandException when the index is invalid in the list.
+     */
+    public void deleteEmail(Index index) throws CommandException {
+        requireNonNull(index);
         if (index.getZeroBased() >= this.emails.size()) {
             throw new CommandException(MESSAGE_INVALID_EMAIL_INDEX);
         }
-        this.emails.setItem(index.getZeroBased(), email);
+        this.emails.removeAtIndex(index.getZeroBased());
     }
 
-    public void setLink(Index index, Link link) throws CommandException {
-        requireAllNonNull(index, link);
+    /**
+     * Deletes the link entry at {@code index} in the descriptor's list of links.
+     * @param index is the zero-based index of the entry to delete.
+     * @throws CommandException when the index is invalid in the list.
+     */
+    public void deleteLink(Index index) throws CommandException {
+        requireNonNull(index);
         if (index.getZeroBased() >= this.links.size()) {
             throw new CommandException(MESSAGE_INVALID_LINK_INDEX);
         }
-        this.links.setItem(index.getZeroBased(), link);
+        this.links.removeAtIndex(index.getZeroBased());
     }
 
-    public void setGraduation(Graduation graduation) {
-        requireNonNull(graduation);
-        this.graduation = graduation;
-    }
-
-    public void setCourse(Index index, Course course) throws CommandException {
-        requireAllNonNull(index, course);
+    /**
+     * Deletes the course entry at {@code index} in the descriptor's list of courses.
+     * @param index is the zero-based index of the entry to delete.
+     * @throws CommandException when the index is invalid in the list.
+     */
+    public void deleteCourse(Index index) throws CommandException {
+        requireNonNull(index);
         if (index.getZeroBased() >= this.courses.size()) {
             throw new CommandException(MESSAGE_INVALID_COURSE_INDEX);
         }
-        this.courses.setItem(index.getZeroBased(), course);
+        this.courses.removeAtIndex(index.getZeroBased());
     }
 
-    public void setSpecialisation(Index index, Specialisation specialisation) throws CommandException {
-        requireAllNonNull(index, specialisation);
+    /**
+     * Deletes the specialisation entry at {@code index} in the descriptor's list of specialisations.
+     * @param index is the zero-based index of the entry to delete.
+     * @throws CommandException when the index is invalid in the list.
+     */
+    public void deleteSpecialisation(Index index) throws CommandException {
+        requireNonNull(index);
         if (index.getZeroBased() >= this.specialisations.size()) {
             throw new CommandException(MESSAGE_INVALID_SPECIALISATION_INDEX);
         }
-        this.specialisations.setItem(index.getZeroBased(), specialisation);
+        this.specialisations.removeAtIndex(index.getZeroBased());
     }
 
-    public void setTag(Index index, Tag tag) throws CommandException {
-        requireAllNonNull(index, tag);
+    /**
+     * Deletes the tag entry at {@code index} in the descriptor's list of tags.
+     * @param index is the zero-based index of the entry to delete.
+     * @throws CommandException when the index is invalid in the list.
+     */
+    public void deleteTag(Index index) throws CommandException {
+        requireNonNull(index);
         if (index.getZeroBased() >= this.tags.size()) {
             throw new CommandException(MESSAGE_INVALID_TAG_INDEX);
         }
-        this.tags.setItem(index.getZeroBased(), tag);
+        this.tags.removeAtIndex(index.getZeroBased());
     }
 
-    public void setPriority(Priority priority) {
-        requireNonNull(priority);
-        this.priority = priority;
+    public void deleteGraduation() {
+        this.graduation = null;
+    }
+
+    public void deletePriority() {
+        this.priority = null;
     }
 
     public Person toPerson() {
@@ -125,11 +147,11 @@ public class EditPersonDescriptor {
             return true;
         }
 
-        if (!(object instanceof EditPersonDescriptor)) {
+        if (!(object instanceof DeletePersonDescriptor)) {
             return false;
         }
 
-        EditPersonDescriptor otherDescriptor = (EditPersonDescriptor) object;
+        DeletePersonDescriptor otherDescriptor = (DeletePersonDescriptor) object;
         return this.name.equals(otherDescriptor.name)
                 && this.phones.equals(otherDescriptor.phones)
                 && this.emails.equals(otherDescriptor.emails)

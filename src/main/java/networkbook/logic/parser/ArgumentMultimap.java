@@ -77,9 +77,12 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Verifies that one and only one of the {@code prefixes} is present.
+     * Verifies that zero or one of the {@code prefixes} is present.
+     * @param prefixes
+     * @return null if no prefix is present, and the {@code Prefix} if exactly one is present.
+     * @throws ParseException when there are more than one prefix present.
      */
-    public Prefix verifyExactlyOneIsPresent(Prefix ... prefixes) throws ParseException {
+    public Prefix verifyAtMostOneIsPresent(Prefix ... prefixes) throws ParseException {
         assert prefixes.length > 0;
 
         Prefix result = null;
@@ -91,6 +94,16 @@ public class ArgumentMultimap {
                 result = prefix;
             }
         }
+        return result;
+    }
+
+    /**
+     * Verifies that one and only one of the {@code prefixes} is present.
+     */
+    public Prefix verifyExactlyOneIsPresent(Prefix ... prefixes) throws ParseException {
+        assert prefixes.length > 0;
+
+        Prefix result = verifyAtMostOneIsPresent(prefixes);
 
         if (result == null) {
             throw new ParseException(Messages.MESSAGE_EXACTLY_ONE_FIELD);

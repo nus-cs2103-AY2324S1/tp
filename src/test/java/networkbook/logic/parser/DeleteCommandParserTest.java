@@ -3,7 +3,7 @@ package networkbook.logic.parser;
 import org.junit.jupiter.api.Test;
 
 import networkbook.logic.Messages;
-import networkbook.logic.commands.DeleteCommand;
+import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.testutil.TypicalIndexes;
 
 /**
@@ -19,12 +19,13 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        CommandParserTestUtil.assertParseSuccess(parser, "1", new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON));
+        CommandParserTestUtil.assertParseSuccess(parser, "1",
+                new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         CommandParserTestUtil.assertParseFailure(parser, "a",
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
     }
 }

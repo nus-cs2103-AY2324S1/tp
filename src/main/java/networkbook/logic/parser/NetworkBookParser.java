@@ -10,12 +10,12 @@ import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.ClearCommand;
 import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CreateCommand;
-import networkbook.logic.commands.DeleteCommand;
 import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
 import networkbook.logic.commands.SortCommand;
+import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 
@@ -62,7 +62,7 @@ public class NetworkBookParser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeletePersonCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:

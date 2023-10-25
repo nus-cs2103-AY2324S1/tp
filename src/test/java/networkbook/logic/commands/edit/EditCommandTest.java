@@ -22,7 +22,7 @@ import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Specialisation;
-import networkbook.model.tag.Tag;
+import networkbook.model.person.Tag;
 import networkbook.model.util.UniqueList;
 import networkbook.testutil.TypicalIndexes;
 import networkbook.testutil.TypicalPersons;
