@@ -68,6 +68,7 @@ public class Course {
         }
         Course otherCourse = (Course) other;
         return otherCourse.name.equals(this.name)
+                && otherCourse.courseCode.equals(this.courseCode)
                 && otherCourse.lessons.equals(this.lessons);
     }
 
