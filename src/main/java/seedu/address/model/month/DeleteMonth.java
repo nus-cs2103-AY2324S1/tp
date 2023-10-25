@@ -1,10 +1,10 @@
 package seedu.address.model.month;
 
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a month in a Year in the format MM-yyyy.

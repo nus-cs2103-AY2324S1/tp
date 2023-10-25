@@ -20,14 +20,14 @@ public class BatchDeleteCommandParser implements Parser<BatchDeleteCommand> {
     public BatchDeleteCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DELETE_MONTH);
 
-        if(!argMultimap.getValue(PREFIX_DELETE_MONTH).isPresent()) {
+        if (!argMultimap.getValue(PREFIX_DELETE_MONTH).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchDeleteCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DELETE_MONTH);
 
         DeleteMonth deleteMonth = ParserUtil.parseDeleteMonth(argMultimap.getValue(PREFIX_DELETE_MONTH).get());
 
-        assert !deleteMonth.equals(null): "wrong input for deleteMonth";
+        assert !deleteMonth.equals(null) : "wrong input for deleteMonth";
 
         return new BatchDeleteCommand(deleteMonth);
     }

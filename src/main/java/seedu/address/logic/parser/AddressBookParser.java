@@ -87,7 +87,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case BatchDeleteCommand.COMMAND_WORD:
-                return new BatchDeleteCommandParser().parse(arguments);
+            return new BatchDeleteCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

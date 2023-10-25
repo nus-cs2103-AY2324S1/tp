@@ -1,7 +1,5 @@
 package seedu.address.model.policy;
 
-import seedu.address.model.month.DeleteMonth;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -9,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import seedu.address.model.month.DeleteMonth;
 
 /**
  * Represents a car insurance policy issue / expiry date in the address book.

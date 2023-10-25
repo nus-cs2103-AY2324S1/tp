@@ -8,6 +8,10 @@ import seedu.address.model.month.DeleteMonth;
 public class PolicyExpiryInDeleteMonthPredicate extends FieldPredicates {
     private final DeleteMonth deleteMonth;
 
+    /**
+     * Constructs a PolicyExpiryInDeleteMonthPredicate object.
+     * @param deleteMonth Month with year.
+     */
     public PolicyExpiryInDeleteMonthPredicate(DeleteMonth deleteMonth) {
         super(deleteMonth.toString());
         this.deleteMonth = deleteMonth;

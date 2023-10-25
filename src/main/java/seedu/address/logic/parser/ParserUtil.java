@@ -222,6 +222,12 @@ public class ParserUtil {
         return new Company(trimmedCompany);
     }
 
+    /**
+     * Parses a {@code String deleteMonth} into an {@code DeleteMonth}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deleteMonth} is invalid.
+     */
     public static DeleteMonth parseDeleteMonth(String deleteMonth) throws ParseException {
         requireNonNull(deleteMonth);
         String trimmedDeleteMonth = deleteMonth.trim();
