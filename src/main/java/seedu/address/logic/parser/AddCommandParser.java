@@ -62,8 +62,8 @@ public class AddCommandParser implements CommandParser<AddCommand> {
         if (argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("NotAvailable")) {
             String animalName = argMultimap.getValue(PREFIX_ANIMAL_NAME).get();
             String animalType = argMultimap.getValue(PREFIX_ANIMAL_TYPE).get();
-            if (!((animalName.equals("nil") && animalType.equals("nil")) ||
-                    (!animalName.equals("nil") && !animalType.equals("nil")))) {
+            if (!((animalName.equals("nil") && animalType.equals("nil"))
+                    || (!animalName.equals("nil") && !animalType.equals("nil")))) {
                 throw new ParseException("When availability is 'NotAvailable', animal name and type have to either "
                         + "both 'nil' or both not 'nil'.");
             }
