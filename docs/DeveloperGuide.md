@@ -335,12 +335,6 @@ This feature is implemented though the `TimeParser` class. This class contains s
 
 _{more aspects and alternatives to be added}_
 
-todo:
-- sequence diagram
-- how it works
-- what time formats it accepts
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
