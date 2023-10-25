@@ -149,12 +149,100 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 ### Start and End Session
-This feature is achived 
 
-#### Implementation
+#### **Feature Overview**
 
-#### Design considerations:
-_{Explain here how the data archiving feature will be implemented}_
+The "Start and End Review Session" feature is designed for users to start or end a review session. It allows users to initiate and conclude dedicated language learning sessions where they focus on reviewing and practicing vocabulary words. Each session represents a focused period of language reviewing within the application.
+
+#### **Implementation**
+
+The implementation of the "Start and End Review Session" feature involves the introduction of a `SessionManager` component. The `SessionManager` tracks the following aspect of a review session:
+
+- **isReviewSession:** Indicates whether the application in a review session or not.
+
+In addition to that, `start` and `end` commands and their corresponding parsers are also implemented.
+
+Given below is an example usage scenario and how the start/end mechanism behaves at each step.  
+
+**Step 1:** The user launches the application for the first time. The `SessionManager` is not yet initialized.
+
+**Step 2:** The user executes the "start" command by interacting with the command line. This will make `FlashlingoParser` class to create its `SessionManager` instance.
+
+![SessionManagerClass](images/SessionManagerClass.png)  
+**Note**: The `SessionManager` class adheres to the **Singleton pattern**, guaranteeing that only one instance of the class 
+can exist. This architectural choice provides a single point of access for managing review sessions and 
+maintaining the state of whether the session is a review session or not. With the Singleton pattern in place, you can be
+confident that there is only one `SessionManager` instance, making it a centralized and controlled entity for session 
+management within the application.
+
+**Step 3:** The user executes various commands within the action sequence, such as `yes` and `no`.
+
+**Step 4:** The user chooses to end the review session by using `end` command. This action will alternate the boolean value 
+inside SessionManager class indicating current session is review session or not.
+
+![StartSequnceModel](images/StartSequenceDiagram.png)  
+**Recording Vocabulary Review:**
+- The `SessionManager` logs the vocabulary words and phrases reviewed and practiced during the language learning session.
+- This feature provides users with the ability to track their progress and revisit the words they've worked on.
+
+**User Control:**
+- Users can initiate a new language learning session at any time and conclude their session when they have completed their vocabulary review.
+- The option to start and end language learning sessions is typically available in the language learning module or settings.
+
+**Data Retention:**
+- Session data, including start and end times and vocabulary review records, is stored locally on the user's device.
+- Users may have the option to export or clear session data as needed.
+
+**Session Summary:**
+- Users can view a summary of their language learning session, including the start and end times and a list of vocabulary words and phrases reviewed.
+
+**Privacy and Security:**
+- The application should ensure the privacy and security of session data, particularly if it contains sensitive language learning content.
+
+#### **Usage Example**
+
+1. **Starting a Language Learning Session:** The user accesses the language learning module within the application and chooses to start a new language learning session.
+
+2. **Vocabulary Review:** During the session, the user focuses on reviewing and practicing specific vocabulary words and phrases relevant to their language learning goals.
+
+3. **Ending the Language Learning Session:** When the user is satisfied with their vocabulary review, they conclude the language learning session from the language learning module or settings.
+
+4. **Session Summary:** Users can access a summary of the language learning session, which includes the start and end times and a list of vocabulary words and phrases reviewed.
+
+5. **Reviewing Session History:** Users have the option to revisit their session history, allowing them to track their language learning progress over time.
+
+#### **Design Considerations**
+
+**Aspect: How start & end executes**
+* Alternative 1 (current choice): Creating another separate class to manage the logic.
+  * Pros: It better adheres to OOP principle and easier to maintain.
+  * Cons: It may potentially increase the complexity of codes.
+
+* Alternative 2: Introducing a boolean attribute inside `FlashlingoParser` class.
+  * Pros: Easy to implement.
+  * Cons: It doesn't conform to the principle of **Single Responsibility Principle**. 
+
+
+**Aspect: Preventing Commands Within a Review Session**
+
+* Alternative 1 (Current Choice): Restricting Users with a Subset of Commands
+
+   * Pros:
+   - Increased safety: A limited set of commands reduces the risk of unintended actions, making the review session safer for users.
+
+   * Cons:
+      - Limited flexibility: Users may feel constrained if they need to perform specific actions that are not allowed within the review session.
+      - Potential user frustration: Restricting commands may lead to user frustration if they can't perform certain actions they expected to be available.
+
+* Alternative 2: Giving Users Full Flexibility to Execute All Commands
+
+   * Pros:
+     - Complete control: Users have the freedom to use any command, providing them with full flexibility and control over their learning experience.
+     - No perceived limitations: Users are less likely to encounter restrictions or frustrations, making the experience more intuitive.
+
+  * Cons:
+     - More error-prone: Allowing all commands may lead to unexpected bugs during a review session.
+
 
 
 --------------------------------------------------------------------------------------------------------------------
