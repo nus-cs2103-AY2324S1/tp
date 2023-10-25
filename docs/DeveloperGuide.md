@@ -347,8 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Foster Manager requests to add fosterer to the System. 
-2. System displays confirmation message of the fosterer successfully added. 
-3. System displays the updated current list of fosterers.
+2. System adds the specified fosterer.
 
    Use case ends.
 
