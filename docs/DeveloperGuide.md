@@ -237,7 +237,10 @@ _{more aspects and alternatives to be added}_
 
 ### Reschedule feature
 
-Implementation
+[RescheduleCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/appointmentparser/RescheduleCommandParser.java
+[RescheduleCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/appointmentcommands/RescheduleCommand.java
+
+#### Implementation
 
 For _Reschedule_ command, the noteworthy classes are:
 - [`RescheduleCommandParser.java`][RescheduleCommandParser.java] - For parsing the arguments to `RescheduleCommand`.
@@ -267,19 +270,38 @@ Step 7. Verify that the new appointment to be added does not have time conflict 
 Step 8. Verify that the same appointment has not already been added.
 Step 9. Appointment is rescheduled.
 
-
 The following activity diagram shows how the reschedule operation works:
 
 ![RescheduleCommandActivityDiagram](images/RescheduleCommandActivityDiagram.png)
 
-<div style="page-break-after: always;"></div>
+### Display upcoming appointments feature
 
-### **Undo/Redo Feature**
+[UpcomingCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/appointmentparser/UpcomingCommandParser.java
+[UpcomingCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/appointmentcommands/UpcomingCommand.java
+
+#### Implementation
+
+For _Upcoming_ command, the noteworthy classes involved are:
+
+- [`UpcomingCommandParser.java`][UpcomingCommandParser.java] - This parses the user input and creates a new `UpcomingCommand` object.
+
+- [`UpcomingCommand.java`][UpcomingCommand.java] - This command object executes to update the filtered appointments list to show all upcoming appointments (appointments after the current time) in the application.
+
+The feature is implemented by updating the filtered appointment list stored in the model with a predicate that will only display
+appointments with start date times after the current date time.
+
+The following sequence diagram shows how the upcoming command works:
+
+![UpcomingCommandSequenceDiagram](images/UpcomingCommandSequenceDiagram.png)
+
+### Undo/Redo Feature
 
 [UndoCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/UndoCommandParser.java
 [UndoCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/UndoCommand.java
 [RedoCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/RedoCommandParser.java
 [RedoCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/RedoCommand.java
+
+#### Implementation
 
 For _Undo/Redo_ command, the noteworthy classes are:
 - [`UndoCommandParser.java`][UndoCommandParser.java] - For parsing the arguments to `UndoCommand`.
@@ -317,14 +339,6 @@ The execution can be seen in the activity diagram given below.
 _Activity Diagram for a typical `undo` command_  
 ![UndoCommandActivityDiagram.png](images/UndoCommandActivityDiagram.png)
 
-<div style="page-break-after: always;"></div>
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -360,20 +374,20 @@ Healthcare Professionals who
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                                                                           | So that I can…​                                                                  |
-|-----|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *` | healthcare professional                    | create new patient records with relevant demographic information                                                       | add new patient records into the system                                          |
-| `* * *` | healthcare professional                    | update patient records as needed                                                                                       | keep the patient's information accurate and up to date                           |
-| `* * *` | healthcare professional                    | delete patient records as needed                                                                                       | remove unused/outdated patient records                                           |
-| `* * *` | healthcare professional                    | search and retrieve patient records using their name quickly                                                           | find the necessary information efficiently without going through the entire list |
-| `* * *` | healthcare professional                    | list all patients currently recorded in the system                                                                     | see the general workload of the service.                                         |
-| `* *` | healthcare professional                    | add custom remarks to a patient's records                                                                              | give them detailed instructions and feedback after consultation                  |
-| `* * *` | healthcare professional                    | schedule appointments for patients                                                                                     | set the date and time of patients' next appointment                              |
-| `* * *` | healthcare professional                    | reschedule appointments when necessary                                                                                 | make sure my schedule does not clash with the appointments                       |
-| `* * *` | healthcare professional                    | cancel appointments when necessary                                                                                     | clear up my schedule if a patient is not able to make it                         |
-| `* *` | healthcare professional                    | view a calendar with all scheduled appointments                                                                        | plan my day effectively                                                          |
-| `*` | healthcare professional                    | schedule appointments for patients and assign them to specific doctors with matching schedules                         | efficiently match patients with free doctors                                     |
-| `*` | healthcare professional                    | set reminders to patients for follow-up appointments                                                                   | ensure that patients know about the follow-up appointments                       |
+| Priority | As a …                  | I want to …                                                                                    | So that I can…                                                                   |
+|----------|-------------------------|------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | healthcare professional | create new patient records with relevant demographic information                               | add new patient records into the system                                          |
+| `* * *`  | healthcare professional | update patient records as needed                                                               | keep the patient's information accurate and up to date                           |
+| `* * *`  | healthcare professional | delete patient records as needed                                                               | remove unused/outdated patient records                                           |
+| `* * *`  | healthcare professional | search and retrieve patient records using their name quickly                                   | find the necessary information efficiently without going through the entire list |
+| `* * *`  | healthcare professional | list all patients currently recorded in the system                                             | see the general workload of the service.                                         |
+| `* *`    | healthcare professional | add custom remarks to a patient's records                                                      | give them detailed instructions and feedback after consultation                  |
+| `* * *`  | healthcare professional | schedule appointments for patients                                                             | set the date and time of patients' next appointment                              |
+| `* * *`  | healthcare professional | reschedule appointments when necessary                                                         | make sure my schedule does not clash with the appointments                       |
+| `* * *`  | healthcare professional | cancel appointments when necessary                                                             | clear up my schedule if a patient is not able to make it                         |
+| `* *`    | healthcare professional | view a calendar with all scheduled appointments                                                | plan my day effectively                                                          |
+| `*`      | healthcare professional | schedule appointments for patients and assign them to specific doctors with matching schedules | efficiently match patients with free doctors                                     |
+| `*`      | healthcare professional | set reminders to patients for follow-up appointments                                           | ensure that patients know about the follow-up appointments                       |
 
 *{More to be added}*
 
