@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -41,7 +40,7 @@ public class ModelManager implements Model {
         // DoConnek Pro shows all patients on startup by default.
         updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
 
-        this.selectedPerson = filteredPersons.get(0);
+        this.selectedPerson = filteredPersons.size() == 0 ? null : filteredPersons.get(0);
     }
 
     public ModelManager() {
@@ -148,6 +147,10 @@ public class ModelManager implements Model {
         selectedPerson = person;
     }
 
+    public boolean isSelectedEmpty() {
+        return selectedPerson == null;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -162,7 +165,10 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && ((this.isSelectedEmpty() && otherModelManager.isSelectedEmpty())
+                || (this.isSelectedEmpty() == otherModelManager.isSelectedEmpty()
+                && selectedPerson.equals(otherModelManager.selectedPerson)));
     }
 
 }

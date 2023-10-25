@@ -1,25 +1,25 @@
 package seedu.address.ui;
 
+import java.util.stream.Collectors;
+
 import com.sun.javafx.collections.ObservableListWrapper;
-import com.sun.javafx.collections.ObservableSetWrapper;
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Patient;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Specialist;
 
-import java.util.Comparator;
-import java.util.stream.Collectors;
-
-public class ViewPatientPanel extends ViewPersonPanel{
+/**
+ * Panel containing the patients details.
+ */
+public class ViewPatientPanel extends ViewPersonPanel {
     private static final String card = "ViewPatientPanel.fxml";
+
     @FXML
     private Label age;
+
     @FXML
     private ListView<MedicalHistory> medicalHistoryListView;
     /**
@@ -28,7 +28,8 @@ public class ViewPatientPanel extends ViewPersonPanel{
     public ViewPatientPanel(Patient patient) {
         super(patient, card);
         age.setText(": " + patient.getAge().value);
-        medicalHistoryListView.setItems(new ObservableListWrapper<>(patient.getMedicalHistory().stream().collect(Collectors.toList())));
+        medicalHistoryListView.setItems(new ObservableListWrapper<>(patient.getMedicalHistory()
+                .stream().collect(Collectors.toList())));
         medicalHistoryListView.setCellFactory(listView -> new MedicalHistoryViewCell());
     }
 

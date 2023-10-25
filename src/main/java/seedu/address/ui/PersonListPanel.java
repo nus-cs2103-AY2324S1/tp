@@ -9,7 +9,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;

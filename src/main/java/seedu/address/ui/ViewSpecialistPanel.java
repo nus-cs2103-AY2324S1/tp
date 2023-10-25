@@ -4,7 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.address.model.person.Specialist;
 
-public class ViewSpecialistPanel extends ViewPersonPanel{
+/**
+ * Panel containing the specialist details.
+ */
+public class ViewSpecialistPanel extends ViewPersonPanel {
     private static final String card = "ViewSpecialistPanel.fxml";
     @FXML
     private Label specialty;

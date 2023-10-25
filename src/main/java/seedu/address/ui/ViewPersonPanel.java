@@ -5,15 +5,13 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Specialist;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the person details.
  */
 public class ViewPersonPanel extends UiPart<Region> {
     /**
@@ -50,6 +48,13 @@ public class ViewPersonPanel extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> viewTags.getChildren().add(new Label(tag.tagName)));
     }
+
+    /**
+     * Update the person that are going to be viewed.
+     *
+     * @param person the person that is going to be viewed
+     * @return updated version of ViewPersonPanel
+     */
     public static ViewPersonPanel updatePerson(Person person) {
         if (person == null) {
             return null;

@@ -35,6 +35,7 @@ public class Patient extends Person {
     }
     @Override
     public String toString() {
+
         String stringToAdd = ", age=" + age + ", medical history=" + medicalHistory;
         return StringUtil.addFieldToPersonToString(stringToAdd, super.toString());
     }
