@@ -41,6 +41,15 @@ public class ShortcutSettings implements Serializable {
     }
 
     /**
+     * Removes the shortcut mapping.
+     * @param shortcutAlias Alias for an existing command word
+     * @return The alias' previously mapped command word if any, else returns null.
+     */
+    public String removeShortcut(ShortcutAlias shortcutAlias) {
+        return shortcutMap.remove(shortcutAlias.alias);
+    }
+
+    /**
      * Checks if the alias has a mapping registered and returns it if found.
      * @param alias Query alias
      * @return Registered command word if found, else given alias

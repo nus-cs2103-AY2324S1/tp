@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND_WORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHORTCUT;
 
 public class AddShortcutCommand extends Command {
-    public static final String COMMAND_WORD = "shortcut";
+    public static final String COMMAND_WORD = "addsc";
     public static final String MESSAGE_SUCCESS = "New shortcut added: %1$s";
     public static final String MESSAGE_REPLACED = "Old shortcut %1$s was removed as a result.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -17,8 +17,8 @@ public class AddShortcutCommand extends Command {
             + PREFIX_SHORTCUT + "SHORTCUT "
             + PREFIX_COMMAND_WORD + "KEYWORD\n"
             + "Example: " + COMMAND_WORD + " "
-            + "del "
-            + DeleteCommand.COMMAND_WORD;
+            + PREFIX_SHORTCUT + "del "
+            + PREFIX_COMMAND_WORD + DeleteCommand.COMMAND_WORD;
     private final ShortcutAlias shortcutAlias;
     private final CommandWord command;
     public AddShortcutCommand(ShortcutAlias shortcutAlias, CommandWord commandWord) {

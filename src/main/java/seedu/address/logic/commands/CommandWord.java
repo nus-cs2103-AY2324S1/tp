@@ -13,8 +13,9 @@ import static java.util.Objects.requireNonNull;
 public class CommandWord {
     private static final String[] VALID_COMMAND_WORDS = {
             AddCommand.COMMAND_WORD, AddShortcutCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD,
-            DeleteCommand.COMMAND_WORD, EditCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,
-            FindCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD, ListCommand.COMMAND_WORD,
+            DeleteCommand.COMMAND_WORD, DeleteShortcutCommand.COMMAND_WORD, EditCommand.COMMAND_WORD,
+            ExitCommand.COMMAND_WORD, FindCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD,
+            ListCommand.COMMAND_WORD
     };
 
     public static final String MESSAGE_CONSTRAINTS =
