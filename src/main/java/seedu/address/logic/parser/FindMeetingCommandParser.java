@@ -18,7 +18,7 @@ import seedu.address.model.meeting.GeneralMeetingPredicate;
 import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
 import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.MeetingTimeContainsPredicate;
-import seedu.address.model.meeting.TagContainsKeywordsPredicate;
+import seedu.address.model.meeting.MeetingTagContainsKeywordsPredicate;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
 
 /**
@@ -60,7 +60,7 @@ public class FindMeetingCommandParser implements Parser<FindMeetingCommand> {
                 new LocationContainsKeywordsPredicate(Arrays.asList(locationKeyWords)),
                 new MeetingTimeContainsPredicate(start, end),
                 new AttendeeContainsKeywordsPredicate(Arrays.asList(attendeeKeyWords)),
-                new TagContainsKeywordsPredicate(Arrays.asList(tagKeyWords)));
+                new MeetingTagContainsKeywordsPredicate(Arrays.asList(tagKeyWords)));
 
         return new FindMeetingCommand(generalMeetingPredicate);
     }

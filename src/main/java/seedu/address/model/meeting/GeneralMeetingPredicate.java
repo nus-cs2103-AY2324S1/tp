@@ -4,14 +4,14 @@ import java.util.function.Predicate;
 
 
 /**
- * The predicate class that brings together of all the other predicate class.
+ * The predicate class that brings together of all the other predicate class for Meeting.
  */
 public class GeneralMeetingPredicate implements Predicate<Meeting> {
     private final TitleContainsKeywordsPredicate titlePredicate;
     private final LocationContainsKeywordsPredicate locationPredicate;
     private final MeetingTimeContainsPredicate meetingTimePredicate;
     private final AttendeeContainsKeywordsPredicate attendeePredicate;
-    private final TagContainsKeywordsPredicate tagPredicate;
+    private final MeetingTagContainsKeywordsPredicate tagPredicate;
 
     /**
      * Constructs a predicate class that fulfills all the argument predicates
@@ -25,7 +25,7 @@ public class GeneralMeetingPredicate implements Predicate<Meeting> {
                                              LocationContainsKeywordsPredicate locationPredicate,
                                              MeetingTimeContainsPredicate meetingTimePredicate,
                                              AttendeeContainsKeywordsPredicate attendeePredicate,
-                                             TagContainsKeywordsPredicate tagPredicate) {
+                                             MeetingTagContainsKeywordsPredicate tagPredicate) {
         this.titlePredicate = titlePredicate;
         this.locationPredicate = locationPredicate;
         this.meetingTimePredicate = meetingTimePredicate;

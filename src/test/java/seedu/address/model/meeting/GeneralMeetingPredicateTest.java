@@ -143,6 +143,6 @@ public class GeneralMeetingPredicateTest {
                 new LocationContainsKeywordsPredicate(List.of(userInput[1].split("\\s+"))),
                 new MeetingTimeContainsPredicate(start, end),
                 new AttendeeContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
-                new TagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
+                new MeetingTagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
     }
 }

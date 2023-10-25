@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Meetings}'s {@code MeetingTime} duration within the given start and end.
+ * Tests that a {@code Meeting}'s {@code MeetingTime} duration within the given start and end.
  */
 public class MeetingTimeContainsPredicate implements Predicate<Meeting> {
     private final LocalDateTime start;

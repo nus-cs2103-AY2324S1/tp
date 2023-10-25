@@ -25,12 +25,12 @@ import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
 import seedu.address.model.meeting.GeneralMeetingPredicate;
 import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
 import seedu.address.model.meeting.MeetingTimeContainsPredicate;
-import seedu.address.model.meeting.TagContainsKeywordsPredicate;
+import seedu.address.model.meeting.MeetingTagContainsKeywordsPredicate;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
 import seedu.address.testutil.TypicalMeetings;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindMeetingCommand}.
  */
 public class FindMeetingCommandTest {
     private Model model = new ModelManager(TypicalMeetings.getTypicalAddressBook(), new UserPrefs());
@@ -47,13 +47,13 @@ public class FindMeetingCommandTest {
                         new LocationContainsKeywordsPredicate(List.of("")),
                         new MeetingTimeContainsPredicate(start, end),
                         new AttendeeContainsKeywordsPredicate(List.of("")),
-                        new TagContainsKeywordsPredicate(List.of("")));
+                        new MeetingTagContainsKeywordsPredicate(List.of("")));
         GeneralMeetingPredicate secondPredicate =
                 new GeneralMeetingPredicate(new TitleContainsKeywordsPredicate(List.of("")),
                         new LocationContainsKeywordsPredicate(List.of("")),
                         new MeetingTimeContainsPredicate(start2, end),
                         new AttendeeContainsKeywordsPredicate(List.of("")),
-                        new TagContainsKeywordsPredicate(List.of("")));
+                        new MeetingTagContainsKeywordsPredicate(List.of("")));
 
         FindMeetingCommand filterFirstCommand = new FindMeetingCommand(firstPredicate);
         FindMeetingCommand filterSecondCommand = new FindMeetingCommand(secondPredicate);
@@ -203,7 +203,7 @@ public class FindMeetingCommandTest {
                 new LocationContainsKeywordsPredicate(List.of("Keywords")),
                 new MeetingTimeContainsPredicate(start, end),
                 new AttendeeContainsKeywordsPredicate(List.of("Keywords")),
-                new TagContainsKeywordsPredicate(List.of("Keywords")));
+                new MeetingTagContainsKeywordsPredicate(List.of("Keywords")));
         FindMeetingCommand findMeetingCommand = new FindMeetingCommand(predicate);
         String expected = FindMeetingCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findMeetingCommand.toString());
@@ -217,6 +217,6 @@ public class FindMeetingCommandTest {
                         new LocationContainsKeywordsPredicate(List.of(userInput[1].split("\\s+"))),
                         new MeetingTimeContainsPredicate(start, end),
                         new AttendeeContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
-                        new TagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
+                        new MeetingTagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
     }
 }
