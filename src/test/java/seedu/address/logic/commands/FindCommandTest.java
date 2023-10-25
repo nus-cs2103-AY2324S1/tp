@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.CombinedPredicate;
+import seedu.address.model.person.predicates.FinancialPlanContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.TagContainsKeywordsPredicate;
 
@@ -66,6 +69,20 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
+    @Test
+    public void execute_zeroKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(List.of());
+        FinancialPlanContainsKeywordsPredicate financialPlanPredicate =
+                new FinancialPlanContainsKeywordsPredicate(List.of());
+        TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(List.of());
+        CombinedPredicate combinedPredicate = new CombinedPredicate(financialPlanPredicate,
+                namePredicate, tagPredicate);
+        FindCommand command = new FindCommand(combinedPredicate);
+        expectedModel.updateFilteredPersonList(combinedPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
