@@ -57,6 +57,7 @@ Removes one or more contacts based on their indices. The indices refer to the in
 - You can delete multiple contacts at once by specifying multiple indices separated by spaces.
 - Indices **must be positive integers** like 1, 2, 3, …​
 - Duplicated indices are only count once.
+- Invalid indices will cause abortion of the delete command.
 
 **Examples:**
 - `delete 1`
