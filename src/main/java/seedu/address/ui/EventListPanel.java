@@ -46,7 +46,7 @@ public class EventListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 if (event.isOverDue()) {
-                    setGraphic(new ExpiredEventCard(personList, event,getIndex() + 1).getRoot());
+                    setGraphic(new ExpiredEventCard(personList, event, getIndex() + 1).getRoot());
                 } else {
                     setGraphic(new EventCard(personList, event, getIndex() + 1).getRoot());
                 }
