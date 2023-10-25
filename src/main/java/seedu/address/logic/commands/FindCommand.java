@@ -77,6 +77,17 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        assert namePredicate != null : "Name Predicate should never be null";
+        assert licencePredicate != null : "Licence plate predicate should never be null";
+        assert nricPredicate != null : "NRIC predicate should never be null";
+        assert phonePredicate != null : "Phone predicate should never be null";
+        assert policyNumberPredicate != null : "Policy number predicate should never be null";
+        assert tagPredicate != null : "Tag predicate should never be null";
+        assert policyExpiryPredicate != null : "Policy expiry predicate should never be null";
+        assert emailPredicate != null : "Email predicate should never be null";
+        assert policyIssuePredicate != null : "Policy issue predicate should never be null";
+        assert companyPredicate != null : "Company predicate should never be null";
+        
         List<Predicate<Person>> predicates = addAllToPredicatesList();
         model.updateFilteredPersonList(PredicateUtil.combinePredicates(predicates));
 

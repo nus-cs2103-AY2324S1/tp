@@ -13,10 +13,16 @@ public class RemindCommand extends Command {
 
     public static final String COMMAND_WORD = "remind";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose policy expiry dates is within "
+            + "the specified number of days.\n"
+            + "Parameters: Number of days\n"
+            + "Example: " + COMMAND_WORD + " 30";
+
     private final RemindPredicate remindPredicate;
 
+
     /**
-     * Constructor for FindCommand.
+     * Constructor for RemindCommand.
      *
      * @param remindPredicate the predicate to be used for filtering the persons list based on policy expiry date.
      */
@@ -27,6 +33,7 @@ public class RemindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        assert remindPredicate != null : "Predicate should never be null";
         model.updateFilteredPersonList(remindPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
