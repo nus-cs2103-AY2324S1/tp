@@ -50,7 +50,7 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
     private static final Status statusMissed = Status.MISSED;
     private static final Status statusCompleted = Status.COMPLETED;
-
+    private static final Status invalidStatus = Status.PENDING;
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -226,6 +226,7 @@ public class ParserUtilTest {
         String expectedCompletedString = "1";
         assertEquals(parseStatusToString(statusMissed), expectedMissedString);
         assertEquals(parseStatusToString(statusCompleted), expectedCompletedString);
+        assertThrows(ParseException.class, () -> parseStatusToString(invalidStatus));
     }
 
     @Test
@@ -234,5 +235,6 @@ public class ParserUtilTest {
         int expectedCompletedIndex = 1;
         assertEquals(parseStatusToInteger(statusMissed), expectedMissedIndex);
         assertEquals(parseStatusToInteger(statusCompleted), expectedCompletedIndex);
+        assertThrows(ParseException.class, () -> parseStatusToInteger(invalidStatus));
     }
 }
