@@ -68,7 +68,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         Files.copy(prevFilePath, addressBookFilePath, StandardCopyOption.REPLACE_EXISTING);
     }
 
-    public void saveFilePath() throws IOException{
+    public void saveFilePath() throws IOException {
         Files.copy(addressBookFilePath, prevFilePath, StandardCopyOption.REPLACE_EXISTING);
     }
 

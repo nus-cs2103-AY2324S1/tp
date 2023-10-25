@@ -5,7 +5,12 @@ import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.BloodTypePredicate;
+import seedu.address.model.person.GenderPredicate;
+import seedu.address.model.person.IcContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+
 
 /**
  * Parses user input to generate corresponding predicate.
@@ -33,6 +38,6 @@ public class KeywordParser {
         }
 
         return new NameContainsKeywordsPredicate(Arrays.asList(input));
-        }
     }
+}
 
