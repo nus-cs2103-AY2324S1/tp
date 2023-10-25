@@ -515,6 +515,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Central Repository**: A centralised storage location for all user data
 * **Contact details**: Name, email, phone number, next-of-kin name, next-of-kin phone number and home address of a client
 * **Manager**: A person who is a superior in charge of managing and mentoring a group of financial advisors.
+* **Lexicographical**: Generalisation of alphabetical order to include symbols or elements of a totally ordered set.
 
 --------------------------------------------------------------------------------------------------------------------
 
