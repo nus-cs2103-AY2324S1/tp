@@ -123,6 +123,7 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail()
                 + ", telegram=" + ALICE.getTelegram() + ", tags=" + ALICE.getTags()
                 + ", free time=" + ALICE.getFreeTime() + ", courses=" + ALICE.getCourses()
+                + ", lessons=" + ALICE.getLessons()
                 + ", hours=" + ALICE.getHour() + "}";
         assertEquals(expected, ALICE.toString());
     }

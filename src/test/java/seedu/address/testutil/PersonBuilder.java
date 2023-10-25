@@ -4,10 +4,10 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.availability.FreeTime;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.Lesson;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -141,6 +141,7 @@ public class PersonBuilder {
         this.hour = new Hour(hour);
         return this;
     }
+
     public Person build() {
         return new Person(name, phone, email, telegram, tags, freeTime, courses, lessons, hour);
     }

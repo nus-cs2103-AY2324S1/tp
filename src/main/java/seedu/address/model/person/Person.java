@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.availability.FreeTime;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.Lesson;
 import seedu.address.model.tag.Tag;
@@ -138,7 +139,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, telegram, tags, courses, hour);
+        return Objects.hash(name, phone, email, telegram, tags, courses, lessons, hour);
     }
 
     @Override
@@ -151,6 +152,7 @@ public class Person {
                 .add("tags", tags)
                 .add("free time", freeTime)
                 .add("courses", courses)
+                .add("lessons", lessons)
                 .add("hours", hour)
                 .toString();
     }

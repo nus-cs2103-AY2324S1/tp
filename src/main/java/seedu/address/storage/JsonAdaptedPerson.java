@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,10 +10,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.availability.FreeTime;
+import seedu.address.model.availability.TimeInterval;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.Lesson;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -34,8 +34,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final String from;
-    private final String to;
+    private final List<JsonAdaptedTimeInterval> intervals = new ArrayList<>();
 
     private final List<JsonAdaptedCourse> courses = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
@@ -46,12 +45,12 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("from") String from,
-            @JsonProperty("to") String to,
-            @JsonProperty("courses") List<JsonAdaptedCourse> courses,
-            @JsonProperty("lessons") List<JsonAdaptedLesson> lessons,
-            @JsonProperty("hour") String hour) {
+                             @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("freeTime") List<JsonAdaptedTimeInterval> intervals,
+                             @JsonProperty("courses") List<JsonAdaptedCourse> courses,
+                             @JsonProperty("lessons") List<JsonAdaptedLesson> lessons,
+                             @JsonProperty("hour") String hour) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -59,14 +58,23 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        this.from = from;
-        this.to = to;
+
+        if (intervals != null) {
+            this.intervals.addAll(intervals);
+        } else {
+            for (int i = 0; i < FreeTime.NUM_DAYS; i++) {
+                this.intervals.add(null);
+            }
+        }
+
         if (courses != null) {
             this.courses.addAll(courses);
         }
+
         if (lessons != null) {
             this.lessons.addAll(lessons);
         }
+
         this.hour = hour;
     }
 
@@ -81,14 +89,19 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        from = source.getFreeTime().getFrom();
-        to = source.getFreeTime().getTo();
         courses.addAll(source.getCourses().stream()
                 .map(JsonAdaptedCourse::new)
                 .collect(Collectors.toList()));
         lessons.addAll(source.getLessons().stream()
                 .map(JsonAdaptedLesson::new)
                 .collect(Collectors.toList()));
+        source.getFreeTime().getIntervals().forEach(interval -> {
+            if (interval != null) {
+                intervals.add(new JsonAdaptedTimeInterval(interval));
+            } else {
+                intervals.add(null);
+            }
+        });
         hour = source.getHour().value;
     }
 
@@ -113,6 +126,17 @@ class JsonAdaptedPerson {
         final List<Lesson> personLessons = new ArrayList<>();
         for (JsonAdaptedLesson lesson : lessons) {
             personLessons.add(lesson.toModelType());
+        }
+
+        int countNulls = 0;
+        final List<TimeInterval> personTimeIntervals = new ArrayList<>();
+        for (JsonAdaptedTimeInterval timeInterval : intervals) {
+            if (timeInterval != null) {
+                personTimeIntervals.add(timeInterval.toModelType());
+            } else {
+                personTimeIntervals.add(null);
+                countNulls += 1;
+            }
         }
 
         if (name == null) {
@@ -150,16 +174,11 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        FreeTime modelFreeTime = FreeTime.EMPTY_FREE_TIME;
-        if (from != null && to != null) {
-            LocalTime start = LocalTime.parse(from);
-            LocalTime end = LocalTime.parse(to);
-            if (!FreeTime.isValidFreeTime(start, end)) {
-                throw new IllegalValueException(FreeTime.MESSAGE_CONSTRAINTS);
-            } else {
-                modelFreeTime = new FreeTime(start, end);
-            }
+        if (!FreeTime.isValidFreeTime(personTimeIntervals)) {
+            throw new IllegalValueException(FreeTime.MESSAGE_CONSTRAINTS);
         }
+        final FreeTime modelFreeTime = countNulls == FreeTime.NUM_DAYS
+                ? FreeTime.EMPTY_FREE_TIME : new FreeTime(personTimeIntervals);
 
         final Set<Course> modelCourses = new HashSet<>(personCourses);
 
