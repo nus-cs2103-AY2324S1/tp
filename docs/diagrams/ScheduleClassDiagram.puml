@@ -26,7 +26,4 @@ ScheduleCommand -down- CommandResult : produces
 Appointment -[hidden]down-> Index
 }
 
-
-
-
 @enduml

@@ -161,7 +161,6 @@ This section describes some noteworthy details on how certain features are imple
 The schedule mechanism is facilitated by 
 
 ### \[Proposed\] Undo/redo feature
-
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
