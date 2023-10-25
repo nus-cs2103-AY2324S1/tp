@@ -352,7 +352,7 @@ _{more aspects and alternatives to be added}_
 ### Notes feature
 
 #### 1. NoteCommand
-**Purpose:**  
+**Purpose:**
 The NoteCommand is used to add a note to a specific person in the Address Book.
 
 **Class Description:**
@@ -373,7 +373,7 @@ The NoteCommand is used to add a note to a specific person in the Address Book.
 - `execute(Model model)`: Adds the note to the person at the specified index in the model's filtered person list.
 
 #### 2. RemoveNoteCommand
-**Purpose:**  
+**Purpose:**
 The RemoveNoteCommand is used to remove a note from a specific person in the Address Book based on the index of the person and the index of the note.
 
 **Class Description:**
@@ -452,7 +452,7 @@ The `NotesWindow` UI component is used to display the notes of a person in a new
           }
           notesListView.setItems(notesObservableList);
       }
-      
+  
       @FXML
       void handleClose() {
           Stage stage = (Stage) notesListView.getScene().getWindow();
@@ -566,14 +566,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System requests for confirmation.
 3. User confirms.
 4. System opts out the user from receiving notifications. <br>
-Use case ends. 
+Use case ends.
 
 **Extensions**
    * 1a. System detects an error in data entered.
      * 1a1. System shows the correct format for request.
-     * 1a2. User enters a new opt out request. 
-     
-     Steps 1a1-1a2 are repeated until the data entered are correct. <br> 
+     * 1a2. User enters a new opt out request.
+
+     Steps 1a1-1a2 are repeated until the data entered are correct. <br>
      Use case resumes from step 4.
 
 **Use case: UC2 - List contacts**
@@ -588,16 +588,16 @@ Use case ends.
 **MSS**
 1. User <ins>lists all contacts (UC2).</ins>
 2. User enters an index to delete contact as an emergency contact.
-3. System deletes contact from the emergency contact list. <br> 
+3. System deletes contact from the emergency contact list. <br>
 Use case ends.
 
 **Extensions**
-* 1a. System shows an empty contact list. 
+* 1a. System shows an empty contact list.
 Use case ends.
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
-  * 2a2. User enters a new delete request. <br> 
-  Steps 2a1- 2a2 are repeated until the data entered are correct. <br> 
+  * 2a2. User enters a new delete request. <br>
+  Steps 2a1- 2a2 are repeated until the data entered are correct. <br>
   Use case resumes from step 3.
 
 **Use case: UC4 - Delete contact**
@@ -609,12 +609,12 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 1a. System shows an empty contact list. 
+* 1a. System shows an empty contact list.
 Use case ends.
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
   * 2a2. User enters a new delete request. <br>
-  Steps 2a1- 2a2 are repeated until the data entered are correct. <br> 
+  Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
   Use case resumes from step 3.
 
 **Use Case UC5: Add emergency contact**
@@ -642,11 +642,11 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed. 
-2. Able to hold up to 1000 contacts without a compromise in performance. 
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-4. Should respond within 1 second for any command the user inputs 
-5. Should be easy to use and navigate for the users. 
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Able to hold up to 1000 contacts without a compromise in performance.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should respond within 1 second for any command the user inputs
+5. Should be easy to use and navigate for the users.
 6. Should be able to accommodate growth and expansion. It should be easy to add new features and functionalities as needed. 
 7. Should be easy to maintain and update through a clear and well-documented architecture, and it should be easy to troubleshoot and fix problems should they arise. 
 8. Data stored should be persistent until removal by the user, and all contact details should be secure. 
