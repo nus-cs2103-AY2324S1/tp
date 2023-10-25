@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.lovebook.model.person.Date;
 
@@ -24,23 +23,14 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Date date;
-
-//    @FXML
-//    private HBox cardPane;
     @FXML
     private Label name;
     @FXML
     private Label id;
-//    @FXML
-//    private Label age;
-//    @FXML
-//    private Label height;
-//    @FXML
-//    private Label income;
-//    @FXML
-//    private Label horoscope;
     @FXML
     private Label aboutInfo;
+    @FXML
+    private Label star;
     @FXML
     private ImageView genderImage;
     @FXML
@@ -56,10 +46,6 @@ public class PersonCard extends UiPart<Region> {
         this.date = date;
         id.setText(displayedIndex + ". ");
         name.setText(date.getName().fullName);
-//        age.setText(date.getAge().value);
-//        height.setText(date.getHeight().value);
-//        income.setText(date.getIncome().value);
-//        horoscope.setText(date.getHoroscope().value);
         aboutInfo.setText(date.getAge().value + " years old, with a height of " + date.getHeight().value + "cm, and "
                 + "a income of $" + date.getIncome().value + " per month.");
         if (date.getGender().value.equals("M")) {
@@ -69,9 +55,10 @@ public class PersonCard extends UiPart<Region> {
         }
         displayHoroscope(date.getHoroscope().value);
         avatarImage.setImage(new Image("images/avatars/female-avatar.png"));
+        star.setText("Starred!");
     }
 
-    public void displayHoroscope(String horoscope) {
+    private void displayHoroscope(String horoscope) {
         try {
             horoscopeImage.setImage(new Image("images/horoscopes/" + horoscope.toLowerCase() + ".png"));
         } catch (IllegalArgumentException e) {
