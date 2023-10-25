@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- The features `undo`, `redo` and `history` (including the code) was reused with some changes from AB-4.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,7 +161,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo feature works similarly to the one implemented in AddressBook-Level 4, but with support for more commands. The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -175,7 +175,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete s/A0123456L` command to delete the student with the Student Number A0123456L in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete s/A0123456L` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
@@ -244,7 +244,50 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+**Aspect: Data structure to support the undo/redo commands**
+
+* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+  * Pros: Easy to understand.
+  * Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+  * 
+* **Alternative 2:** Use `HistoryManager` for undo/redo.
+  * Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
+  * Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
+
+**Aspect: Commands that support undo & redo**
+
+* **Alternative 1 (current choice):** Not supporting undo/redo for `load` and `config`
+  * Pros: Ensures that Class Manager will not run into issues when undoing `load` for missing saved files. Enforces the immutability of tutorial and attendance count after `config` has been entered.
+  * Cons: Unable to change tutorial and attendance count after `config` has been entered.
+* **Alternative 2:**Supporting undo/redo for all commands.
+  * Pros: Ensures that app is consistent with undo/redo and users will not be unsure if a certain command can be undone.
+  * Cons: Can be confusing for the user to use undo/redo with `load`.
+
+### Load feature
+
+#### About this feature
+
+The load feature allows users to load a saved JSON file into the app. Load allows data from the new JSON file to be displayed in Class Manager, while setting the new default save file to be the new JSON file. The status bar footer also updates to show the current file.
+
+This feature is an improvement to the previous method of directly editing the `addressbook.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course, and load the JSON file for the course they are currently teaching. 
+
+#### How it is implemented
+
+<puml src="diagrams/LoadSequenceDiagram.puml" alt="LoadSequenceDiagram" />
+
+The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `LoadCommand` attempts to read the JSON file and calls `setAddressBook` and `setAddressBookFilePath` of `Model` to update the new save file path and address book data to be displayed.
+
+#### Parsing user input
+
+1. The user inputs the `load` command.
+2. The `AddressBookParser` processes the input and creates a new `LoadCommandParser`.
+3. The `LoadCommandParser` then calls ArgumentTokenizer#tokenize(String argString, Prefix... prefixes) to extract the file name. If there are duplicate prefixes, a ParseException would be thrown.
+4. The file name is then check to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
+5. The `LoadCommandParser` then creates the `LoadCommand` based on the processed input.
+
+### Config feature
+
+The config feature is mandatory for TAs to enter before using Class Manager. It allows TAs to set the number of tutorials and the number of assignments in a module. This allows Class Manager to be able to display the correct number of tutorials and assignments for the TA to enter the grades for each student.
 
 ### \[Proposed\] Data archiving
 
@@ -259,7 +302,7 @@ of an `Student` 's class details, such as their tutorial group, tutorial attenda
 grades. It will be stored as 3 separate classes to model each of the 3 different types of class details, and a tracker
 class to act as the manager for each of the classes, with the trackers composing the `ClassDetails` class.
 
-<puml src="diagrams/ClassDetails.puml" width="250" />
+<puml src="diagrams/ClassDetails.puml" width="500" />
 
 The 3 different types of class grades are:
 
@@ -270,7 +313,7 @@ will be stored as a boolean value.
 * `Assignment` - Stores the details for a students assignment grades for a specific tutorial. Assignment grades will be
 stored as an integer value, with the total marks standardized to 100 marks.
 
-<puml src="diagrams/ClassGrades.puml" width="250" />
+<puml src="diagrams/ClassGrades.puml" width="500" />
 
 These classes will be stored in their respective tracker classes, using Java Arrays to store the objects. The position
 of the classes in the array will correspond to the index of the tutorial or assignment. For example, the first index of
@@ -315,11 +358,6 @@ or assignment grade.
   * Cons: Will need to implement different functions for each type of class details. Implementation will be more
   complicated. SLAP principle might not be able to be adhered to.
 
-
-
-
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -338,7 +376,7 @@ or assignment grade.
 
 **Target user profile**:
 
-* CS2103T Teaching Assistants
+* NUS Teaching Assistants
 * has a need to manage student information across different classes
 * prefer desktop apps over other types
 * can type fast
@@ -555,13 +593,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete STUDENT_NUMBER`<br>
+   1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete vnqvbr145oqrq1924`<br>
+   1. Test case: `delete s/vnqvq1924`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid student number)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
       Expected: Similar to previous.
 
 ### Saving data
