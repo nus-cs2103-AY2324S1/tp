@@ -29,12 +29,12 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
+                PREFIX_FINANCIAL_PLAN, PREFIX_TAG);
+        if (trimmedArgs.isEmpty() || argMultimap.getPreamble() != "") {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
-                PREFIX_FINANCIAL_PLAN, PREFIX_TAG);
 
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
         nameKeywords.replaceAll(name -> name.trim());
