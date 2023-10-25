@@ -27,6 +27,8 @@ public class BatchDeleteCommandParser implements Parser<BatchDeleteCommand> {
 
         DeleteMonth deleteMonth = ParserUtil.parseDeleteMonth(argMultimap.getValue(PREFIX_DELETE_MONTH).get());
 
+        assert !deleteMonth.equals(null): "wrong input for deleteMonth";
+
         return new BatchDeleteCommand(deleteMonth);
     }
 }

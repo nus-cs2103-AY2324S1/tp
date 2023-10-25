@@ -48,6 +48,10 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isBatchDelete() {
+        return feedbackToUser.contains("Batch delete people");
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

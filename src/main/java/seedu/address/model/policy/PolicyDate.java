@@ -1,5 +1,7 @@
 package seedu.address.model.policy;
 
+import seedu.address.model.month.DeleteMonth;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -48,6 +50,17 @@ public class PolicyDate implements Comparable<PolicyDate> {
         } catch (ParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if this date is in the month and year.
+     * @param deleteMonth DeleteMonth object.
+     * @return True if the date is in the month and year.
+     */
+    public boolean isInMonth(DeleteMonth deleteMonth) {
+        int year = date.getYear();
+        int month = date.getMonthValue();
+        return (year == deleteMonth.getYear()) && (month == deleteMonth.getMonth());
     }
 
     @Override

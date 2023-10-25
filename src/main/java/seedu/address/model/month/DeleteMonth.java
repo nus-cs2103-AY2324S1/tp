@@ -7,15 +7,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a month in a Year.
+ * Represents a month in a Year in the format MM-yyyy.
  */
 public class DeleteMonth {
-    public static final String MESSAGE_CONSTRAINTS = "delete month should be in the format MM-yyyy";
-
-    /*
-     * Should be in the format MM-yyyy
-     */
     public static final String VALIDATION_MONTH_FORMAT = "MM-yyyy";
+
+    public static final String MESSAGE_CONSTRAINTS = "delete month should be in the format " + VALIDATION_MONTH_FORMAT;
 
     public final YearMonth month;
 
@@ -39,10 +36,16 @@ public class DeleteMonth {
         if (test.matches(regex)) {
             return true;
         }
-
         return false;
     }
 
+    public int getYear() {
+        return month.getYear();
+    }
+
+    public int getMonth() {
+        return month.getMonthValue();
+    }
 
     @Override
     public String toString() {
