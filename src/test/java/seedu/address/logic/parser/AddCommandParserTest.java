@@ -282,4 +282,13 @@ public class AddCommandParserTest {
                 + ANIMAL_NAME_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_invalidAnimalNameTypeCombination_throwsParseException() {
+        String expectedMessage = "When availability is 'NotAvailable', animal name and type have to "
+                + "either be both 'nil' or both not 'nil'.";
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_BOB + ANIMAL_TYPE_NIL_DESC_BOB
+                + HOUSING_DESC_BOB + TAG_DESC_FRIEND, expectedMessage);
+    }
 }
