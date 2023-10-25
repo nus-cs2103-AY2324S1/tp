@@ -5,8 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.flashlingo.Main;
-import seedu.flashlingo.logic.Logic;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
@@ -72,7 +70,7 @@ public class FlashcardBox extends UiPart<Region> {
      * Handles success when user presses "Yes" button
      */
     @FXML
-    public void success() throws CommandException,ParseException {
+    public void success() throws CommandException, ParseException {
         this.mw.executeCommand("yes");
         level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
     }
@@ -81,7 +79,7 @@ public class FlashcardBox extends UiPart<Region> {
      * Handles failure when user presses "No" button
      */
     @FXML
-    public void failure() throws CommandException,ParseException {
+    public void failure() throws CommandException, ParseException {
         this.mw.executeCommand("no");
         level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
     }

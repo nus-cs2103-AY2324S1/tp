@@ -8,7 +8,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.flashlingo.commons.core.LogsCenter;
-import seedu.flashlingo.logic.Logic;
 import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
