@@ -61,15 +61,16 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        linkedin.setText(person.getLinkedin().map(l -> l.value).orElse(""));
-        secondaryEmail.setText(person.getSecondaryEmail().map(e -> e.value).orElse(""));
-        telegram.setText(person.getTelegram().map(t -> t.value).orElse(""));
-        birthday.setText(person.getBirthday().map(b -> b.toString()).orElse(""));
+        //id.setText(displayedIndex + ". ");
+        bindLabelToProperty(name, person.getName().fullName);
+        bindLabelToProperty(phone, person.getPhone().value);
+        bindLabelToProperty(address, person.getAddress().value);
+        bindLabelToProperty(email, person.getEmail().value);
+        bindLabelToProperty(linkedin, person.getLinkedin().map(l -> l.value).orElse(""));
+        bindLabelToProperty(secondaryEmail, person.getSecondaryEmail().map(e -> e.value).orElse(""));
+        bindLabelToProperty(telegram, person.getTelegram().map(t -> t.value).orElse(""));
+        bindLabelToProperty(birthday, person.getBirthday().map(b -> b.toString()).orElse(""));
+        bindLabelToProperty(uniqueId, person.getId().map(x -> Integer.toString(x)).orElse("NONE"));
         person.getEmergencyTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> {
@@ -78,13 +79,18 @@ public class PersonCard extends UiPart<Region> {
                 tags.getChildren().add(label);
             });
         person.getNonEmergencyTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         uniqueId.setText(person.getId().map(x -> Integer.toString(x)).orElse("NONE"));
 
         int numberOfNotes = person.getNotes().size();
         notesButton.setText("Notes (" + numberOfNotes + ")");
+    }
 
+    private void bindLabelToProperty(Label label, String propertyValue) {
+        label.setText(propertyValue);
+        label.visibleProperty().bind(label.textProperty().isNotEmpty());
+        label.managedProperty().bind(label.visibleProperty());
     }
 
     /**
