@@ -10,7 +10,7 @@ lesSON is a **desktop application** aimed to help NUS Computer Science undergrad
 their memory work for school content.<br>
 Here are some benefits of adopting lesSON in your studying experience:
 - Create and Edit flashcards about key concepts taught in your courses
-- Take advantage of our implemented *Spaced Repetition* to maximise your memorisation
+- Take advantage of our implemented **Spaced Repetition** to maximise your memorisation
 - Categorise your flashcards based on their courses or topics
 
 On top of these functionalities, we believe that making flashcards must be efficient. Therefore, lesSON is optimized for
@@ -82,10 +82,10 @@ Examples:
 ```
 #### Usage
 1. User Input
-![usage of add command](./images/UserGuide/add_1.2.png)
+![usage of add command](./images/UserGuide/1.3_add.png)
 
 2. Successful Output
-![result of add command](./images/UserGuide/add_1.2_ans.png)
+![result of add command](./images/UserGuide/1.3_add_ans.png)
 
 
 ### Deleting a Flashcard : `delete`
@@ -115,10 +115,10 @@ Examples:
 ```
 #### Usage:
 1. User Input
-   ![usage of delete command](./images/UserGuide/delete_1.2.png)
+   ![usage of delete command](./images/UserGuide/1.3_del.png)
 
 2. Successful Output
-   ![result of delete command](./images/UserGuide/delete_1.2_ans.png)
+   ![result of delete command](./images/UserGuide/1.3_del_ans.png)
 
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck.
@@ -142,7 +142,7 @@ No parameters are needed
 ```
 
 #### Usage
-![usage of list command](./images/UserGuide/list_1.2.png)
+![usage of list command](./images/UserGuide/1.3_list.png)
 
 ### Editing a Specific Flashcard : `edit`
 Edits an existing person in the address book.
@@ -164,10 +164,10 @@ Examples:
 ```
 #### Usage:
 1. User Input
-   ![usage of edit command](./images/UserGuide/edit_1.2.png)
+   ![usage of edit command](./images/UserGuide/1.3_edit.png)
 
 2. Successful Output
-   ![result of edit command](./images/UserGuide/edit_1.2_ans.png)
+   ![result of edit command](./images/UserGuide/1.3_edit_ans.png)
 
 
 
@@ -196,10 +196,10 @@ practise 10
 
 #### Usage:
 1. User Input
-   ![usage of practise command](./images/UserGuide/practise_1.2.png)
+   ![usage of practise command](./images/UserGuide/1.3_prac.png)
 
 2. Successful Output
-   ![result of practise command](./images/UserGuide/practise_1.2_ans.png)
+   ![result of practise command](./images/UserGuide/1.3_prac_ans.png)
 
 ### Practise Flashcards: `solve`
 Solves the question at the given index
@@ -227,10 +227,10 @@ solve 10 d/easy
 
 #### Usage:
 1. User Input
-   ![usage of practise command](./images/UserGuide/solve_1.2.png)
+   ![usage of practise command](./images/UserGuide/1.3_solve.png)
 
 2. Successful Output
-   ![result of practise command](./images/UserGuide/solve_1.2_ans.png)
+   ![result of practise command](./images/UserGuide/1.3_solve_ans.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
