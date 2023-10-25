@@ -1,10 +1,13 @@
 package seedu.address.commons.core;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.ShortcutAlias;
 
@@ -56,6 +59,25 @@ public class ShortcutSettings implements Serializable {
     public String getShortcut(String alias) {
         return shortcutMap.getOrDefault(alias, alias);
     }
+
+    /**
+     * Cleans up bad mappings from the shortcutMap.
+     * Duplicate keys are handled automatically.
+     */
+    public ShortcutSettings removeBadMappings() {
+        Iterator<Map.Entry<String, String>> iterator = shortcutMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> mapping = iterator.next();
+            String shortcut = mapping.getKey();
+            String keyword = mapping.getValue();
+            if (!ShortcutAlias.isValidShortcutAlias(shortcut)
+                    || !CommandWord.isValidCommandWord(keyword)) {
+                iterator.remove();
+            }
+        }
+        return this;
+    }
+
 
     @Override
     public boolean equals(Object other) {

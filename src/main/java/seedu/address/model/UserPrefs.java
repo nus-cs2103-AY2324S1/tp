@@ -38,7 +38,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setShortcutSettings(newUserPrefs.getShortcutSettings());
+        ShortcutSettings newShortcutSettings = newUserPrefs.getShortcutSettings()
+                .removeBadMappings();
+        setShortcutSettings(newShortcutSettings);
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
 
