@@ -7,6 +7,33 @@ title: User Guide
 
 NetworkBook is a **desktop contact book application**. You can use it to network with other computing students and professionals from NUS.
 
+## Getting Started
+
+1. Make sure you have Java 11 installed on your computer.
+    * You can check that it is installed by running the command `java --version` in the command prompt/terminal.
+1. Download the latest version of NetworkBook (`networkbook.jar`) from the top of the [NetworkBook GitHub releases page](https://github.com/AY2324S1-CS2103T-T08-2/tp/releases).
+1. Create a new folder on your computer (e.g. on your computer desktop). You can name this folder however you want.
+1. Move the `networkbook.jar` file into the folder you just created.
+1. Open NetworkBook:
+    * If you are using Windows:
+        1. Double-click the `networkbook.jar` file to open it.
+    * If you are using MacOS:
+        1. Open Terminal.app.
+        1. Navigate to the folder you have created using the `cd` command:
+            1. Type `cd`, then space, into the Terminal window.
+            1. Drag the folder icon from Finder into the Terminal window.
+            1. Press enter.
+        1. Type in `java -jar networkbook.jar`, then press enter to open the app.
+    * If you are using Linux:
+        1. Open your terminal emulator app.
+        1. Navigate to the folder you have created using `cd`.
+        1. Type in `java -jar networkbook.jar`, then press enter to open the app.
+1. You should now see the NetworkBook window on your screen. This is what NetworkBook looks like:
+    ![Annotated diagram of the NetworkBook window](./images/gui-annotated.png)
+1. You can now start using NetworkBook!
+    * Learn more about the commands in the [features](#features) section.
+
+
 ## Features
 
 ### <u>Category 1 - Add contact information</u>
