@@ -10,8 +10,6 @@ import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.team.Team;
-
 
 /**
  * Wraps all data at the address-book level
@@ -71,9 +69,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.contains(person);
     }
-    public boolean hasPerson(Name name) {
+
+    /**
+     * Checks if the addressbook contains the given person based on their name.
+     *
+     * @param name the name
+     * @return the boolean
+     */
+    public boolean containsPerson(Name name) {
         requireNonNull(name);
-        return persons.contains(name);
+        return persons.containsName(name);
     }
     public Person getPersonByName(Name name) {
         return persons.getPerson(name);
@@ -130,11 +135,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Team> getTeamList() {
-        return null;
     }
 
     @Override

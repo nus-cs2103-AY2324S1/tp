@@ -46,7 +46,8 @@ public class DeleteDeveloperFromTeamCommand extends Command {
      *
      * @param model The current state of the application model.
      * @return A CommandResult indicating the result of executing this command on the given model.
-     * @throws CommandException if the team name or developer name is invalid, or if the developer is not part of the team.
+     * @throws CommandException if the team name or developer name is invalid
+     *          ,or if the developer is not part of the team.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -55,7 +56,7 @@ public class DeleteDeveloperFromTeamCommand extends Command {
         IdentityCode developerIndentityCode = model.getIdentityCodeByName(developerToDelete);
         if (!model.hasTeam(teamName)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TEAM_NAME_DISPLAYED);
-        } else if (!model.hasPerson(developerToDelete)) {
+        } else if (!model.containsPerson(developerToDelete)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
         } else if (!model.personAlreadyInTeam(teamName, developerToDelete)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_IN_TEAM);

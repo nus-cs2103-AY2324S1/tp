@@ -2,9 +2,9 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.team.Team;
 
 /**
@@ -31,9 +31,9 @@ public class TeamCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label teamLeader;
+    private VBox teamLeader;
     @FXML
-    private FlowPane teamMembers;
+    private VBox teamMembers;
 
     /**
      * Constructor of the TeamCard class which creates a
@@ -47,8 +47,12 @@ public class TeamCard extends UiPart<Region> {
         this.team = team;
         id.setText(displayedIndex + ". ");
         teamName.setText(team.getTeamName());
-        teamLeader.setText(team.getTeamLeaderIdentityCode().toString());
+        teamLeader.getChildren()
+                .add(new Label("Team leader: " + team.getTeamLeaderIdentityCode().toString()));
+        teamMembers.getChildren()
+                .add(new Label("Developers: "));
         team.getDeveloperIdentityCodes()
-                .forEach(memberCode -> teamMembers.getChildren().add(new Label(memberCode.toString())));
+                .forEach(memberCode -> teamMembers.getChildren()
+                        .add(new Label(memberCode.toString())));
     }
 }

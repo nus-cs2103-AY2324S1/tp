@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -37,32 +38,41 @@ public class MainWindow extends UiPart<Stage> {
     private TeamListPanel teamListPanel;
     @FXML
     private ResultDisplay resultDisplay;
-
     private HelpWindow helpWindow;
-
     @FXML
     private StackPane commandBoxPlaceholder;
-
     @FXML
     private MenuItem helpMenuItem;
-
     @FXML
     private StackPane personListPanelPlaceholder;
-
     @FXML
     private StackPane teamListPanelPlaceholder;
-
+    @FXML
+    private StackPane D_personListPanelPlaceholder;
+    @FXML
+    private StackPane D_teamListPanelPlaceholder;
     @FXML
     private StackPane resultDisplayPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
-
+    @FXML
+    private VBox singleListContainer;
     @FXML
     private VBox personList;
-
     @FXML
     private VBox teamList;
+    @FXML
+    private HBox dualListContainer;
+    @FXML
+    private VBox D_personList;
+    @FXML
+    private VBox D_teamList;
+
+    private Boolean isListingPerson;
+
+    private Boolean isListingTeam;
+
+    private double originalResultDisplayHeight;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +131,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Resize the ResultDisplay to a larger size.
+     */
+    private void expandResultDisplay() {
+        resultDisplayPlaceholder.setPrefHeight(400);
+    }
+
+    /**
+     * Resize the ResultDisplay back to default size.
+     */
+    private void revertResultDisplay() {
+        resultDisplayPlaceholder.setPrefHeight(originalResultDisplayHeight);
+    }
+
+
+    /**
      * Fills up all the placeholders of this window.
      *
      * @param whatToFill String that indicates what to fill in the inner parts
@@ -130,15 +155,16 @@ public class MainWindow extends UiPart<Stage> {
             fillPersonList();
         } else if (whatToFill.equals("teams")) {
             fillTeamList();
+        } else if (whatToFill.equals("both")) {
+            fillBothList();
         }
-
         switchToListPanel(whatToFill);
     }
 
 
     void fillInnerParts() {
-        fillPersonList();
-        switchToListPanel("persons");
+        fillBothList();
+        switchToListPanel("both");
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -148,6 +174,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        originalResultDisplayHeight = resultDisplayPlaceholder.getPrefHeight();
     }
 
     /**
@@ -167,6 +195,16 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Fills both the person and the teams list.
+     */
+    private void fillBothList() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        D_personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        teamListPanel = new TeamListPanel(logic.getFilteredTeamList());
+        D_teamListPanelPlaceholder.getChildren().add(teamListPanel.getRoot());
+    }
+
+    /**
      * Method to switch between panels.
      *
      * @param panelType String indicating which panel to display
@@ -176,29 +214,53 @@ public class MainWindow extends UiPart<Stage> {
             showPersonList();
         } else if ("teams".equals(panelType)) {
             showTeamList();
+        } else if ("both".equals(panelType)) {
+            showBothList();
         }
     }
 
     /**
-     *
      * Set visibility of Vbox: personList -> visible, teamList -> not visible
      */
     public void showPersonList() {
+        singleListContainer.getChildren().setAll(personList);
+        singleListContainer.setVisible(true);
+        dualListContainer.setVisible(false);
         personList.setVisible(true);
         teamList.setVisible(false);
         personListPanelPlaceholder.setVisible(true);
         teamListPanelPlaceholder.setVisible(false);
+
+        isListingPerson = true;
+        isListingTeam = false;
     }
 
     /**
-     *
      * Set visibility of Vbox: personList -> not visible, teamList -> visible
      */
     public void showTeamList() {
+        singleListContainer.getChildren().setAll(teamList);
+        singleListContainer.setVisible(true);
+        dualListContainer.setVisible(false);
         personList.setVisible(false);
         teamList.setVisible(true);
         personListPanelPlaceholder.setVisible(false);
         teamListPanelPlaceholder.setVisible(true);
+
+        isListingTeam = true;
+        isListingPerson = false;
+    }
+
+    /**
+     * Set visibility of Vbox: personList -> not visible, teamList -> visible
+     */
+    public void showBothList() {
+        dualListContainer.getChildren().setAll(D_personList, D_teamList);
+        singleListContainer.setVisible(false);
+        dualListContainer.setVisible(true);
+
+        this.isListingPerson = false;
+        this.isListingTeam = false;
     }
 
     /**
@@ -223,20 +285,30 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+
+        expandResultDisplay();
     }
 
     /**
      * Fill the panel with list of person.
      */
     public void handleListPerson() {
-        fillInnerParts("persons");
+        if (isListingPerson) {
+            fillInnerParts("both");
+        } else {
+            fillInnerParts("persons");
+        }
     }
 
     /**
      * Fill the panel with list of teams instead of person.
      */
     public void handleListTeam() {
-        fillInnerParts("teams");
+        if (isListingTeam) {
+            fillInnerParts("both");
+        } else {
+            fillInnerParts("teams");
+        }
     }
 
     void show() {
@@ -256,7 +328,17 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     *
+     * Refresh the card container to show any changes.
+     */
+    public void refreshCardContainer() {
+        if (!isListingPerson && !isListingTeam) {
+            fillInnerParts("both");
+        } else if (isListingTeam) {
+            fillInnerParts("teams");
+        }
+    }
+
+    /**
      * @return the current personList Panel
      */
     public PersonListPanel getPersonListPanel() {
@@ -264,7 +346,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     *
      * @return the current teamList Panel
      */
     public TeamListPanel getTeamListPanel() {
@@ -284,6 +365,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            } else {
+                revertResultDisplay();
             }
 
             if (commandResult.isExit()) {
@@ -297,6 +380,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isListPerson()) {
                 handleListPerson();
             }
+
+            refreshCardContainer();
 
             return commandResult;
         } catch (CommandException | ParseException e) {
