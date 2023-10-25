@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
+import static seedu.address.model.schedule.Schedule.MESSAGE_CONSTRAINTS;
 
 import java.util.List;
 import java.util.Objects;
@@ -67,7 +68,13 @@ public class EditScheduleCommand extends Command {
         }
 
         Schedule scheduleToEdit = lastShownList.get(index.getZeroBased());
-        Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor);
+        Schedule editedSchedule;
+
+        try {
+            editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(MESSAGE_CONSTRAINTS);
+        }
 
         boolean hasScheduleClash =
             model.getAddressBook().getScheduleList().stream().filter(schedule -> !schedule.equals(scheduleToEdit))
@@ -95,7 +102,7 @@ public class EditScheduleCommand extends Command {
         EditScheduleDescriptor editScheduleDescriptor) {
         StartTime updatedStartTime = editScheduleDescriptor.getStartTime().orElse(scheduleToEdit.getStartTime());
         EndTime updatedEndTime = editScheduleDescriptor.getEndTime().orElse(scheduleToEdit.getEndTime());
-        Person tutor = editScheduleDescriptor.getTutor().orElse(scheduleToEdit.getTutor());
+        Person tutor = scheduleToEdit.getTutor();
 
         return new Schedule(tutor, updatedStartTime, updatedEndTime);
     }
@@ -131,7 +138,6 @@ public class EditScheduleCommand extends Command {
     public static class EditScheduleDescriptor {
         private StartTime startTime;
         private EndTime endTime;
-        private Person tutor;
 
         public EditScheduleDescriptor() {
         }
@@ -143,7 +149,6 @@ public class EditScheduleCommand extends Command {
         public EditScheduleDescriptor(EditScheduleDescriptor toCopy) {
             setStartTime(toCopy.startTime);
             setEndTime(toCopy.endTime);
-            setTutor(toCopy.tutor);
         }
 
         /**
@@ -169,14 +174,6 @@ public class EditScheduleCommand extends Command {
             return Optional.ofNullable(endTime);
         }
 
-        public void setTutor(Person tutor) {
-            this.tutor = tutor;
-        }
-
-        public Optional<Person> getTutor() {
-            return Optional.ofNullable(tutor);
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -190,8 +187,7 @@ public class EditScheduleCommand extends Command {
 
             EditScheduleDescriptor otherEditScheduleDescriptor = (EditScheduleDescriptor) other;
             return Objects.equals(startTime, otherEditScheduleDescriptor.startTime)
-                && Objects.equals(endTime, otherEditScheduleDescriptor.endTime)
-                && Objects.equals(tutor, otherEditScheduleDescriptor.tutor);
+                && Objects.equals(endTime, otherEditScheduleDescriptor.endTime);
         }
 
         @Override
@@ -199,7 +195,6 @@ public class EditScheduleCommand extends Command {
             return new ToStringBuilder(this)
                 .add("startTime", startTime)
                 .add("endTime", endTime)
-                .add("tutor", tutor)
                 .toString();
         }
     }

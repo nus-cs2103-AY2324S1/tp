@@ -170,7 +170,7 @@ Edits an existing tutor in the addressbook.
 
 ![edit tutor](images/editTutor.png)
 
-**Format**: `edit-t TUTOR_INDEX [n/NAME] [p/PHONE NUMBER] [e/EMAIL]`
+**Format**: `edit-t TUTOR_INDEX n/NAME p/PHONE NUMBER e/EMAIL`
 
 **Examples**:
 * `edit-t 1 n/John Doe`
@@ -290,11 +290,11 @@ Adds a schedule to a specified tutor.
 
 ![add schedule](images/addSchedule.png)
 
-**Format**: `add-s TUTOR_INDEX s/START_TIME e/END_TIME`
+**Format**: `add-s TUTOR_INDEX st/START_TIME et/END_TIME`
 
 **Examples**:
-* `add-s 1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00`
-* `add-s 2 s/2023-09-16T17:00:00 e/2023-09-16T19:00:00`
+* `add-s 1 st/2023-09-15T09:00:00 et/2023-09-15T11:00:00`
+* `add-s 2 st/2023-09-16T17:00:00 et/2023-09-16T19:00:00`
 
 **Acceptable values for each parameter**:
 * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
@@ -319,12 +319,12 @@ Adds a schedule to a specified tutor.
 * `New schedule John Doe; Start Time Sep 15 2023 09:00; End Time: Sep 15  2023 11:00 has been added.`
 
 **Error messages**:
-* `Invalid command format!`: Invalid TUTOR_INDEX or some of the tags `s/`, `e/` is missing.
+* `Invalid command format!`: Invalid TUTOR_INDEX or some of the tags `st/`, `et/` is missing.
 * `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be blank`: 
   The start time entered is not in the correct datetime format.
 * `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be blank`: The end time entered is not in the correct datetime format.
-* `Multiple values specified for the following single-valued field(s): s/`: More than 1 s/ was given in the command
-* `Multiple values specified for the following single-valued field(s): e/`: More than 1 e/ was given in the command
+* `Multiple values specified for the following single-valued field(s): st/`: More than 1 st/ was given in the command
+* `Multiple values specified for the following single-valued field(s): et/`: More than 1 et/ was given in the command
 * `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
 * `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
 
@@ -334,11 +334,11 @@ Edits an existing schedule in the addressbook.
 
 ![edit schedule](images/editSchedule.png)
 
-**Format**: `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]`
+**Format**: `edit-s SCHEDULE_INDEX st/START_TIME et/END_TIME`
 
 **Examples**:
-* `edit-s 1 s/2023-09-15T13:00:00`
-* `edit-s 2 e/2023-09-16T19:00:00`
+* `edit-s 1 st/2023-09-15T13:00:00`
+* `edit-s 2 et/2023-09-16T19:00:00`
 
 **Acceptable values for each parameter**:
 * `SCHEDULE_INDEX`: Only number input accepted, starting from 1 to the last schedule index shown in the list of 
@@ -355,11 +355,11 @@ Edits an existing schedule in the addressbook.
   The end time entered is not in the correct datetime format.
 * `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be 
   blank`: The start time entered is not in the correct datetime format.
-* `Multiple values specified for the following single-valued field(s): s/`: More than 1 `s/` was given in the command
-* `Multiple values specified for the following single-valued field(s): e/`: More than 1 `e/` was given in the command
+* `Multiple values specified for the following single-valued field(s): st/`: More than 1 `st/` was given in the command
+* `Multiple values specified for the following single-valued field(s): et/`: More than 1 `et/` was given in the command
 * `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
 * `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
-* `At least one field to edit must be provided.`: There is no `s/` or `e/` tag provided to edit a field.
+* `At least one field to edit must be provided.`: There is no `st/` or `et/` tag provided to edit a field.
 
 ### List all schedules: `list-s`
 
@@ -519,16 +519,16 @@ This section consists of more details of format limitations mentioned above.
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                |
-|---------------------|-----------------------------------------------------------------------------------------------------------------|
-| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`              |
-| **Edit Tutor**      | `edit-t TUTOR_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com` |
-| **List Tutor**      | `list-t`                                                                                                        |
-| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                   |
-| **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                      |
-| **Add Schedule**    | `add-s TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` |
-| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]` <br> e.g., `edit-s 1 s/2023-09-15T13:00:00`                 |
-| **List Schedule**   | `list-s`                                                                                                        |
-| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                    |
-| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                |
-| **Clear**           | `clear`                                                                                                         |
+| Action              | Format, Examples                                                                                                 |
+|---------------------|------------------------------------------------------------------------------------------------------------------|
+| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`               |
+| **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`        |
+| **List Tutor**      | `list-t`                                                                                                         |
+| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                    |
+| **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                       |
+| **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s 1 st/2023-09-15T09:00:00 et/2023-09-15T11:00:00` |
+| **Edit Schedule**   | `edit-s SCHEDULE_INDEX s/START_TIME e/END_TIME` <br> e.g., `edit-s 1 s/2023-09-15T13:00:00`                      |
+| **List Schedule**   | `list-s`                                                                                                         |
+| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                     |
+| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                 |
+| **Clear**           | `clear`                                                                                                          |
