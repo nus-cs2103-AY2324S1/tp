@@ -318,7 +318,7 @@ The find applicant feature is facilitated by `FindApplicantCommand`, `FindApplic
 `AddressContainsKeywordsPredicate`, `EmailContainsKeywordsPredicate`, `NameContainsKeywordsPredicate`, 
 `PhoneContainsNumberPredicate`, `TagContainsKeywordsPredicate`.
 It uses `Model#updateFilteredApplicantList(Predicate<Applicant>)` to apply the predicates 
-in order to produce a filtered list containing only entires whose name, 
+in order to produce a filtered list containing only the filtered entries.
 
 #### Design Considerations:
 
