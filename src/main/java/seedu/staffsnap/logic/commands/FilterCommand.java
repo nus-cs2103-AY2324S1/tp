@@ -5,6 +5,7 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.logic.Messages;
@@ -27,7 +28,8 @@ public class FilterCommand extends Command {
             + PREFIX_NAME + " [NAME], "
             + PREFIX_EMAIL + " [EMAIL], "
             + PREFIX_POSITION + " [POSITION], "
-            + PREFIX_PHONE + " [PHONE]";
+            + PREFIX_PHONE + " [PHONE], "
+            + PREFIX_STATUS + " [STATUS]";
 
     private final CustomFilterPredicate predicate;
 

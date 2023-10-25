@@ -6,6 +6,7 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 
 
@@ -39,14 +41,16 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_POSITION, PREFIX_INTERVIEW);
+                        PREFIX_POSITION, PREFIX_INTERVIEW, PREFIX_STATUS);
 
         Name name = null;
         Phone phone = null;
         Email email = null;
         Position position = null;
         List<Interview> interviewList = null;
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_POSITION);
+        Status status = null;
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_POSITION,
+                PREFIX_STATUS);
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         }
@@ -62,7 +66,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
             interviewList = ParserUtil.parseInterviews(argMultimap.getAllValues(PREFIX_INTERVIEW));
         }
-        return new FilterCommand(new CustomFilterPredicate(name, phone, email, position, interviewList));
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+        }
+        return new FilterCommand(new CustomFilterPredicate(name, phone, email, position, interviewList, status));
     }
 
 }

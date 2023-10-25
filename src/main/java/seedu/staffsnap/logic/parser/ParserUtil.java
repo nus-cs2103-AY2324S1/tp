@@ -15,6 +15,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.model.interview.Rating;
 
@@ -212,5 +213,15 @@ public class ParserUtil {
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code Status}.
+     * @param status String representation of Status
+     * @return Status if successful, or null of no matching status is found.
+     */
+    public static Status parseStatus(String status) {
+        requireNonNull(status);
+        return Status.findByName(status);
     }
 }

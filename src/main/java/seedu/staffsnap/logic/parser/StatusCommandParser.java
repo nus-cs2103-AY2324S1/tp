@@ -1,6 +1,7 @@
 package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.StatusCommand;
@@ -18,15 +19,24 @@ public class StatusCommandParser implements Parser<StatusCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public StatusCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args);
-
-        if (argMultimap.getPreamble().length() <= 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE));
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE));
         }
-        String[] splitString = argMultimap.getPreamble().split("\\s+");
-        Index index = ParserUtil.parseIndex(splitString[0]);
-        Status status = Status.findByName(splitString[1]);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_STATUS);
+
+        Index index = null;
+        Status status = null;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_NO_INDEX));
+        }
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+        }
         if (status == null) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_NO_STATUS));
         }

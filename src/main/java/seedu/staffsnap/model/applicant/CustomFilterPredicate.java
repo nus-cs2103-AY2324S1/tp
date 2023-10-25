@@ -21,6 +21,7 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
     private final Email email;
     private final Position position;
     private final List<Interview> interviews;
+    private final Status status;
 
     /**
      * Constructor for CustomFilterPredicate
@@ -31,12 +32,14 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
      * @param position   Position applied for by applicant
      * @param interviews Interviews applicant has to go through
      */
-    public CustomFilterPredicate(Name name, Phone phone, Email email, Position position, List<Interview> interviews) {
+    public CustomFilterPredicate(Name name, Phone phone, Email email, Position position, List<Interview> interviews,
+                                 Status status) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.position = position;
         this.interviews = interviews;
+        this.status = status;
     }
 
     /**
@@ -65,9 +68,14 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
                 return false;
             }
         }
+        if (this.status != null) {
+            if (applicant.getStatus() != this.status) {
+                return false;
+            }
+        }
         /*
          * TODO:
-         * add filtering for interviews
+         * add filtering for scores
          */
         return true;
     }
@@ -80,7 +88,8 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
                 .add("phone", phone)
                 .add("email", email)
                 .add("position", position)
-                .add("interviews", interviews).toString();
+                .add("interviews", interviews)
+                .add("status", status).toString();
     }
 
     @Override
@@ -93,7 +102,8 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
         }
         CustomFilterPredicate that = (CustomFilterPredicate) o;
         return Objects.equals(name, that.name) && Objects.equals(phone, that.phone) && Objects.equals(email,
-                that.email) && Objects.equals(position, that.position) && Objects.equals(interviews, that.interviews);
+                that.email) && Objects.equals(position, that.position) && Objects.equals(interviews, that.interviews)
+                && Objects.equals(status, that.status);
     }
 
     @Override
