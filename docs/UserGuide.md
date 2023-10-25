@@ -154,6 +154,30 @@ Exits the program.
 
 Format: `exit`
 
+### Adding a custom shortcut : `addsc`
+
+Adds a shortcut mapped to a default command keyword for easier use. </br>
+After the mapping, the new user-defined shortcut will work the same way as the command keyword, and will be preserved between user sessions.
+Duplicate mappings will override previous shortcut mappings.
+
+Format: `addsc sc/SHORTCUT kw/KEYWORD`
+ * `SHORTCUT` can only consist of Alphanumeric characters and must contain no whitespaces.
+ * `SHORTCUT` cannot be an existing command keyword.
+ * `KEYWORD` must match an existing command keyword.
+
+Examples:
+* `addsc sc/del kw/delete` maps `del` to the Delete command keyword.
+  * i.e. `del 3` will work the same as `delete 3`.
+
+### Deleting custom shortcuts : `delsc`
+
+Deletes the previously user-defined shortcuts.
+
+Format: `delsc [sc/SHORTCUT]...​`
+
+Examples:
+* `delsc sc/del sc/abc` will remove the previous mappings of `del` and `abc`.
+
 ### Save and Load Data
 
 The patient and specialist data will automatically be saved to the device’s harddrive every time the data is updated, and will automatically be loaded when the user starts the application. The user does not need to manually save any data.

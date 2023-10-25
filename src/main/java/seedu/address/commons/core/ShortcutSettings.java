@@ -2,6 +2,7 @@ package seedu.address.commons.core;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.CommandWord;
@@ -20,7 +21,6 @@ public class ShortcutSettings implements Serializable {
      */
     public ShortcutSettings() {
         shortcutMap = new LinkedHashMap<>();
-        shortcutMap.put("del", DeleteCommand.COMMAND_WORD);
     }
 
     /**
@@ -57,6 +57,25 @@ public class ShortcutSettings implements Serializable {
     public String getShortcut(String alias) {
         return shortcutMap.getOrDefault(alias, alias);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof ShortcutSettings)) {
+            return false;
+        }
+        ShortcutSettings otherShortcutSettings = (ShortcutSettings) other;
+        return Objects.equals(shortcutMap, otherShortcutSettings.shortcutMap);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(shortcutMap);
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

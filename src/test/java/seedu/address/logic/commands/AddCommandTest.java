@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -130,6 +131,16 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ShortcutSettings getShortcutSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setShortcutSettings(ShortcutSettings shortcutSettings) {
             throw new AssertionError("This method should not be called.");
         }
 

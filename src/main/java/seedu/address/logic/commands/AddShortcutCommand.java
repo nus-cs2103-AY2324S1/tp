@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND_WORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHORTCUT;
 
@@ -22,6 +24,7 @@ public class AddShortcutCommand extends Command {
     private final ShortcutAlias shortcutAlias;
     private final CommandWord command;
     public AddShortcutCommand(ShortcutAlias shortcutAlias, CommandWord commandWord) {
+        requireAllNonNull(shortcutAlias, commandWord);
         this.shortcutAlias = shortcutAlias;
         this.command = commandWord;
     }
@@ -40,5 +43,29 @@ public class AddShortcutCommand extends Command {
             );
         }
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddShortcutCommand)) {
+            return false;
+        }
+
+        AddShortcutCommand otherAddShortcutCommand = (AddShortcutCommand) other;
+        return shortcutAlias.equals(otherAddShortcutCommand.shortcutAlias)
+                && command.equals(otherAddShortcutCommand.command);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("shortcutAlias", shortcutAlias)
+                .add("command", command)
+                .toString();
     }
 }
