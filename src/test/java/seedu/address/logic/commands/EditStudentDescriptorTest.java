@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_NUMBER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -21,6 +22,7 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 
 public class EditStudentDescriptorTest {
+
 
     @Test
     public void equals() {
@@ -63,6 +65,9 @@ public class EditStudentDescriptorTest {
         // different tags -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different comment -> returns true
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withComment(VALID_COMMENT_BOB).build();
     }
 
     @Test
@@ -74,7 +79,8 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getEmail().orElse(null) + ", student number="
                 + editStudentDescriptor.getStudentNumber().orElse(null) + ", class number="
                 + editStudentDescriptor.getClassDetails().orElse(null) + ", tags="
-                + editStudentDescriptor.getTags().orElse(new HashSet<>()) + "}";
+                + editStudentDescriptor.getTags().orElse(new HashSet<>())
+                + ", comment=" + editStudentDescriptor.getComment().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }
 }

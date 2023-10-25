@@ -10,7 +10,8 @@
       "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
     },
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "comment" : "Good Student"
   }, {
     "name" : "Bernice Yu",
     "phone" : "99272758",
@@ -22,7 +23,8 @@
       "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
     },
-    "tags" : [ "colleagues", "friends" ]
+    "tags" : [ "colleagues", "friends" ],
+    "comment" : "Good Student"
   }, {
     "name" : "Charlotte Oliveiro",
     "phone" : "93210283",
@@ -34,7 +36,8 @@
       "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
     },
-    "tags" : [ "neighbours" ]
+    "tags" : [ "neighbours" ],
+    "comment" : ""
   }, {
     "name" : "David Li",
     "phone" : "91031282",
@@ -46,7 +49,8 @@
       "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
     },
-    "tags" : [ "family" ]
+    "tags" : [ "family" ],
+    "comment" : ""
   }, {
     "name" : "Irfan Ibrahim",
     "phone" : "92492021",
@@ -58,7 +62,8 @@
       "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
     },
-    "tags" : [ "classmates" ]
+    "tags" : [ "classmates" ],
+    "comment" : "Good Student"
   }, {
     "name" : "Roy Balakrishnan",
     "phone" : "92624417",
@@ -70,6 +75,7 @@
       "assignmentTracker" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
       "classParticipationTracker" : [ false, false, false, false, false, false, false, false, false, false ]
     },
-    "tags" : [ "colleagues" ]
-  } ]
+    "tags" : [ "colleagues" ],
+    "comment" : "Good Student"
+  }  ]
 }

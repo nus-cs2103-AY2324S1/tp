@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.model.student.ClassDetails;
+import seedu.address.model.student.Comment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -94,5 +95,15 @@ public class EditStudentDescriptorBuilder {
 
     public EditStudentDescriptor build() {
         return descriptor;
+    }
+
+    /**
+     * Sets the {@code Comment} of the {@code EditStudentDescriptor} that we are building.
+     * @param validComment the comment to be added
+     * @return the EditStudentDescriptorBuilder with the comment added
+     */
+    public EditStudentDescriptorBuilder withComment(String validComment) {
+        descriptor.setComment(new Comment(validComment));
+        return this;
     }
 }

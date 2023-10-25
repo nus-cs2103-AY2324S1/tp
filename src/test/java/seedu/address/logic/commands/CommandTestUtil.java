@@ -39,10 +39,13 @@ public class CommandTestUtil {
     public static final String VALID_CLASS_NUMBER_AMY = "T11";
     public static final String VALID_CLASS_NUMBER_BOB = "T12";
     public static final String INVALID_STUDENT_NUMBER = "B2103818N";
+    public static final String VALID_COMMENT_AMY = "Good student";
+    public static final String VALID_COMMENT_BOB = "Bad student";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_FRIENDS = "friends";
     public static final String VALID_TAG_SMART = "smart";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -54,6 +57,8 @@ public class CommandTestUtil {
     public static final String STUDENT_NUMBER_DESC_BOB = " " + PREFIX_STUDENT_NUMBER + VALID_STUDENT_NUMBER_BOB;
     public static final String CLASS_NUMBER_DESC_AMY = " " + PREFIX_CLASS_NUMBER + VALID_CLASS_NUMBER_AMY;
     public static final String CLASS_NUMBER_DESC_BOB = " " + PREFIX_CLASS_NUMBER + VALID_CLASS_NUMBER_BOB;
+    public static final String COMMENT_DESC_AMY = " " + PREFIX_CLASS_NUMBER + VALID_COMMENT_AMY;
+    public static final String COMMENT_DESC_BOB = " " + PREFIX_CLASS_NUMBER + VALID_COMMENT_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names

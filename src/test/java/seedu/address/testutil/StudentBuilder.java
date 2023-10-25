@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.student.ClassDetails;
+import seedu.address.model.student.Comment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -23,6 +24,7 @@ public class StudentBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_STUDENT_NUMBER = "A0249434A";
     public static final String DEFAULT_CLASS_NUMBER = "T11";
+    private static final String DEFAULT_COMMENT = "Good student";
 
     private Name name;
     private Phone phone;
@@ -31,6 +33,7 @@ public class StudentBuilder {
     private StudentNumber studentNumber;
     private ClassDetails classDetails;
     private Set<Tag> tags;
+    private Comment comment;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -42,6 +45,7 @@ public class StudentBuilder {
         studentNumber = new StudentNumber(DEFAULT_STUDENT_NUMBER);
         classDetails = new ClassDetails(DEFAULT_CLASS_NUMBER);
         tags = new HashSet<>();
+        comment = new Comment(DEFAULT_COMMENT);
     }
 
     /**
@@ -54,6 +58,7 @@ public class StudentBuilder {
         studentNumber = studentToCopy.getStudentNumber();
         classDetails = studentToCopy.getClassDetails();
         tags = new HashSet<>(studentToCopy.getTags());
+        comment = studentToCopy.getComment();
     }
 
     /**
@@ -130,8 +135,18 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Comment} of the {@code Student} that we are building.
+     * @param comment the comment to be added
+     * @return the StudentBuilder with the comment added
+     */
+    public StudentBuilder withComment(String comment) {
+        this.comment = new Comment(comment);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, phone, email, studentNumber, classDetails, tags);
+        return new Student(name, phone, email, studentNumber, classDetails, tags, comment);
     }
 
 }
