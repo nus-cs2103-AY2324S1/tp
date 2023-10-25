@@ -71,7 +71,6 @@ public class LogicManagerTest {
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
-
     @Test
     public void execute_addTeamCommand_teamAdded() throws Exception {
         Model expectedModel = new ModelManager();
