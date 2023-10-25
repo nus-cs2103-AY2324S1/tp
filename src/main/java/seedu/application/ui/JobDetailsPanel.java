@@ -9,6 +9,9 @@ import javafx.scene.layout.VBox;
 import seedu.application.commons.core.LogsCenter;
 import seedu.application.model.job.Job;
 
+/**
+ * Panel containing the details of the selected job.
+ */
 public class JobDetailsPanel extends UiPart<Region> {
     private static final String FXML = "JobDetailsPanel.fxml";
 
@@ -37,7 +40,9 @@ public class JobDetailsPanel extends UiPart<Region> {
     @FXML
     private Label interviewTitle;
 
-
+    /**
+     * Creates a {@code JobDetailsPanel} with the selected {@code Job}.
+     */
     public JobDetailsPanel(Job job) {
         super(FXML);
         this.job = job;

@@ -11,7 +11,7 @@ import seedu.application.commons.core.LogsCenter;
 import seedu.application.model.job.Job;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of jobs.
  */
 public class JobListPanel extends UiPart<Region> {
     private static final String FXML = "JobListPanel.fxml";
