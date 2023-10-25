@@ -33,12 +33,18 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     public void deleteTime(ArrayList<TimeInterval> timeIntervals) throws CommandException {
+        StringBuilder errorCompilation = new StringBuilder();
+        errorCompilation.append("These times are not in the list:\n");
         for (TimeInterval time : timeIntervals) {
-            if (internalList.contains(time)) {
-                internalList.remove(time);
+            if (!internalList.contains(time)) {
+                errorCompilation.append(time + "\n");
             } else {
-                throw new CommandException("Not all time included is free.");
+                internalList.remove(time);
             }
+        }
+
+        if (errorCompilation.length() > 33) {
+            throw new CommandException(errorCompilation.toString());
         }
     }
 

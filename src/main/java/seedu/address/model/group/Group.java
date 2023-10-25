@@ -180,4 +180,6 @@ public class Group {
     public TimeIntervalList getTime() {
         return this.timeIntervalList;
     }
+
+    public void deleteTIme(ArrayList<TimeInterval> toDeleteTime) throws CommandException { this.timeIntervalList.deleteTime(toDeleteTime);}
 }

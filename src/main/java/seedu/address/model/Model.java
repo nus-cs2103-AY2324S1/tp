@@ -153,6 +153,8 @@ public interface Model {
 
     void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException;
     void deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> toDeleteTime) throws CommandException;
+
+    void deleteTimeFromGroup(Group group, ArrayList<TimeInterval> toDeleteTime) throws CommandException;
     TimeIntervalList getTimeFromGroup(Group group) throws CommandException;
 
 }

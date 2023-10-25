@@ -261,6 +261,15 @@ public class ModelManager implements Model {
         forceUpdateList();
     }
 
+    @Override
+    public void deleteTimeFromGroup(Group group,
+                                     ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+        requireNonNull(group);
+        Group groupToDeleteTime = addressBook.getGroup(group.getGroupName());
+        groupToDeleteTime.deleteTIme(toDeleteTime);
+        forceUpdateList();
+    }
+
     /**
      * Assign person to group
      *
