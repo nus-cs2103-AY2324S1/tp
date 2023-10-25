@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Payment {
     public static final String MESSAGE_CONSTRAINTS =
-        "Salary should only contain numerical digits. It should not contain dashes or spaces."
+        "Payment should only contain numerical digits. It should not contain dashes or spaces."
             + "It should be in the format of XXXXX.XX, i.e. 2 decimal places";
 
     /*
