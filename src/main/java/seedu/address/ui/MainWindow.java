@@ -68,9 +68,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private VBox D_teamList;
 
-    private Boolean isListingPerson;
+    @FXML
+    private StackPane tree;
 
-    private Boolean isListingTeam;
+    private boolean isListingPerson;
+
+    private boolean isListingTeam;
+
+    private boolean isShowingTree;
 
     private double originalResultDisplayHeight;
 
@@ -233,6 +238,7 @@ public class MainWindow extends UiPart<Stage> {
 
         isListingPerson = true;
         isListingTeam = false;
+        isShowingTree = false;
     }
 
     /**
@@ -249,6 +255,7 @@ public class MainWindow extends UiPart<Stage> {
 
         isListingTeam = true;
         isListingPerson = false;
+        isShowingTree = false;
     }
 
     /**
@@ -261,6 +268,7 @@ public class MainWindow extends UiPart<Stage> {
 
         this.isListingPerson = false;
         this.isListingTeam = false;
+        this.isShowingTree = false;
     }
 
     /**
@@ -292,8 +300,9 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fill the panel with list of person.
      */
+    @FXML
     public void handleListPerson() {
-        if (isListingPerson) {
+        if (isListingPerson && !isShowingTree) {
             fillInnerParts("both");
         } else {
             fillInnerParts("persons");
@@ -303,6 +312,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fill the panel with list of teams instead of person.
      */
+    @FXML
     public void handleListTeam() {
         if (isListingTeam) {
             fillInnerParts("both");
@@ -327,11 +337,20 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleTree() {
+        if (isShowingTree) {
+            hideTree();
+        } else {
+            showTree();
+        }
+    }
+
     /**
      * Refresh the card container to show any changes.
      */
     public void refreshCardContainer() {
-        if (!isListingPerson && !isListingTeam) {
+        if (!isListingPerson && !isListingTeam && !isShowingTree) {
             fillInnerParts("both");
         } else if (isListingTeam) {
             fillInnerParts("teams");
@@ -350,6 +369,29 @@ public class MainWindow extends UiPart<Stage> {
      */
     public TeamListPanel getTeamListPanel() {
         return teamListPanel;
+    }
+
+    /**
+     * To toggle the tree to be shown.
+     * Called when a single 'tree' command is received.
+     */
+    public void showTree() {
+        singleListContainer.setVisible(false);
+        dualListContainer.setVisible(false);
+        tree.setVisible(true);
+
+        this.isShowingTree = true;
+        this.isListingPerson = false;
+        this.isListingTeam = false;
+    }
+
+    /**
+     * To toggle the tree to be hidden.
+     * By right only the second 'tree' command will call this function.
+     */
+    public void hideTree() {
+        tree.setVisible(false);
+        fillInnerParts("both");
     }
 
     /**
@@ -379,6 +421,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isListPerson()) {
                 handleListPerson();
+            }
+
+            if (commandResult.isShowTree()) {
+                handleTree();
             }
 
             refreshCardContainer();

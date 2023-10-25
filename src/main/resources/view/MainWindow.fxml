@@ -81,6 +81,10 @@
             </VBox>
           </HBox>
 
+          <StackPane fx:id="tree" VBox.vgrow="ALWAYS" style="-fx-background-color: grey;" visible="false">
+            <!-- add tree here -->
+          </StackPane>
+
         </StackPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
