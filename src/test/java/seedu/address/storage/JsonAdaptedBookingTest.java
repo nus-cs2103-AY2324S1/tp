@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.booking.BookingPeriod;
-import seedu.address.model.booking.Email;
-import seedu.address.model.booking.Name;
-import seedu.address.model.booking.Phone;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 
 public class JsonAdaptedBookingTest {
     private static final String INVALID_ROOM = "501";
