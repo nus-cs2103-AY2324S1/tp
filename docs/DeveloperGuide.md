@@ -159,6 +159,43 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Expanded Find feature
+
+The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing FindCommand structure. 
+It extends `Predicate<Person>` and is composed of up to one of a `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate`
+and a `TagContainsKeywordsPredicate` each. Here's a partial class diagram of the `CombinedPredicate`.
+![CombinedPredicate](images/CombinedPredicate.png)
+
+The `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate` and
+`TagContainsKeywordsPredicate` check a Person if the respective field contains
+any of the keywords supplied to the predicate. Note that only the `NameContainsKeywordsPredicate` 
+checks for whole words, because it is rare to search for people by substrings, while `FinancialPlanContainsKeywordsPredicate`
+and `TagContainsKeywordsPredicate` allow matching for substrings because there are certain cases where it is logical to search for
+substrings e.g. `Plan A` and `Plan A Premium` are related, so they can show up in the same search.
+
+The Find command format also changes to resemble a format more similar to the `add` and `edit` commands, to allow for
+searching for keywords in multiple fields at the same time.
+
+#### Design Considerations:
+
+**Aspect: How to implement find for multiple fields**
+* **Alternative 1 (current choice):** Use one unified command and format.
+    * Pros: Easy to implement (argument multimap is available), allows for more flexible usage.
+    * Cons: May get cluttered when there are many terms.
+
+* **Alternative 2:** Take an argument to decide which field to find by.
+    * Pros: More user-friendly and natural since there is no need to use prefixes.
+    * Cons: Less flexible, slightly more difficult to implement.
+
+**Aspect: How to implement `CombinedPredicate`**
+* **Alternative 1 (current choice):** Compose it with the 3 component predicates.
+    * Pros: Easier to modify and test.
+    * Cons: Less flexible when trying to combine multiple predicates (that may be of the same type).
+
+* **Alternative 2:** Use a `Predicate<Person>` and use the `or()` method to chain predicates.
+    * Pros: More flexible in usage.
+    * Cons: More difficult to modify and test.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
