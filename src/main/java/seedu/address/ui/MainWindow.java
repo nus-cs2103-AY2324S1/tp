@@ -181,8 +181,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleView(Person personToView) {
         if (personListPanelPlaceholder.isVisible()) {
-//            personProfile = new PersonProfile(personToView, this);
-            personProfile = new PersonProfile(this);
+            personProfile = new PersonProfile(personToView, this);
+//            personProfile = new PersonProfile(this);
             personProfilePlaceholder.getChildren().add(personProfile.getRoot());
             personProfilePlaceholder.setVisible(true);
             personListPanelPlaceholder.setVisible(false);

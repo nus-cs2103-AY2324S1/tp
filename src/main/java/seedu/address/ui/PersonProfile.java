@@ -162,7 +162,7 @@ public class PersonProfile extends UiPart<Region> {
     }
 
     private void confirmAll() {
-        uiElements.values().forEach(PersonProfileField::confirm);
+        uiElements.values().forEach(PersonProfileField::confirmIfSubmitted);
     }
 
     private void createPerson() throws IllegalArgumentException {
@@ -172,6 +172,7 @@ public class PersonProfile extends UiPart<Region> {
         if (missingRequiredField.isPresent()) {
             throw new IllegalArgumentException(missingRequiredField.get().name + " is required, but empty!");
         }
+
         Name name = new Name(fields.get(Field.NAME));
         Phone phone = new Phone(fields.get(Field.PHONE));
         Email email = new Email(fields.get(Field.EMAIL));

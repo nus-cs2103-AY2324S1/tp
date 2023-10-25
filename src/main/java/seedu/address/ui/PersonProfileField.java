@@ -17,6 +17,7 @@ public class PersonProfileField extends UiPart<SplitPane> {
     private PersonProfile.Field field;
     private String value;
     private State state;
+    private boolean changesSubmitted = false;
 
     enum State {
         LABEL, TEXT_FIELD
@@ -76,9 +77,11 @@ public class PersonProfileField extends UiPart<SplitPane> {
         String newValue = getTextOrNull();
         if (newValue != null && !field.isValid(newValue)) {
             personProfile.sendFeedback(INVALID_FIELD_FEEDBACK + field.getDisplayName());
+            changesSubmitted = false;
             return;
         }
         if (!personProfile.replaceFieldIfValid(field, newValue)){
+            changesSubmitted = true;
             return;
         }
         confirm();
@@ -92,12 +95,18 @@ public class PersonProfileField extends UiPart<SplitPane> {
         updateState(State.LABEL);
     }
 
-    void confirm() {
+    private void confirm() {
         if (state == State.TEXT_FIELD) {
             String newValue = getTextOrNull();
             this.value = newValue;
             valueLabel.setText(newValue);
             updateState(State.LABEL);
+        }
+    }
+
+    void confirmIfSubmitted() {
+        if (changesSubmitted) {
+            confirm();
         }
     }
 
