@@ -50,8 +50,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label uniqueId;
-    @FXML
     private Button notesButton;
     @FXML
     private Label balance;
@@ -64,30 +62,34 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        linkedin.setText(person.getLinkedin().map(l -> l.value).orElse(""));
-        secondaryEmail.setText(person.getSecondaryEmail().map(e -> e.value).orElse(""));
-        telegram.setText(person.getTelegram().map(t -> t.value).orElse(""));
-        birthday.setText(person.getBirthday().map(b -> b.toString()).orElse(""));
+        bindLabelToProperty(name, person.getName().fullName);
+        bindLabelToProperty(phone, person.getPhone().value);
+        bindLabelToProperty(address, person.getAddress().value);
+        bindLabelToProperty(email, person.getEmail().value);
+        bindLabelToProperty(linkedin, person.getLinkedin().map(l -> l.value).orElse(""));
+        bindLabelToProperty(secondaryEmail, person.getSecondaryEmail().map(e -> e.value).orElse(""));
+        bindLabelToProperty(telegram, person.getTelegram().map(t -> t.value).orElse(""));
+        bindLabelToProperty(birthday, person.getBirthday().map(b -> b.toString()).orElse(""));
         person.getEmergencyTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> {
-                Label label = new Label(tag.tagName);
-                label.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-                tags.getChildren().add(label);
-            });
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> {
+                    Label label = new Label(tag.tagName);
+                    label.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                    tags.getChildren().add(label);
+                });
         person.getNonEmergencyTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        uniqueId.setText(person.getId().map(x -> Integer.toString(x)).orElse("NONE"));
 
         int numberOfNotes = person.getNotes().size();
         notesButton.setText("Notes (" + numberOfNotes + ")");
-        balance.setText(person.getBalance().toUiMessage());
+        bindLabelToProperty(balance, person.getBalance().toUiMessage());
+    }
 
+    private void bindLabelToProperty(Label label, String propertyValue) {
+        label.setText(propertyValue);
+        label.visibleProperty().bind(label.textProperty().isNotEmpty());
+        label.managedProperty().bind(label.visibleProperty());
     }
 
     /**
