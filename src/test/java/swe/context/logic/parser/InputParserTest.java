@@ -1,5 +1,11 @@
 package swe.context.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static swe.context.testutil.Assert.assertThrows;
+import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
+import static swe.context.testutil.TestData.IndexContact.SECOND_CONTACT;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,13 +28,6 @@ import swe.context.model.contact.NameContainsKeywordsPredicate;
 import swe.context.testutil.CommandUtil;
 import swe.context.testutil.ContactBuilder;
 import swe.context.testutil.EditContactDescriptorBuilder;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static swe.context.testutil.Assert.assertThrows;
-import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
-import static swe.context.testutil.TestData.IndexContact.SECOND_CONTACT;
-
 
 
 public class InputParserTest {
