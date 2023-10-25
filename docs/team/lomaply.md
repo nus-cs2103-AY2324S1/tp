@@ -33,7 +33,7 @@ My contributions to the project are listed below.
       - Command does not edit meeting Attendees as it is handled by "addmc" and "rmmc"
 
 - **Documentation**:
-  
+
   - User Guide
     - First draft of User Guide with initial plans for v1.2
     - Update parts of User Guide on features added/modified by me

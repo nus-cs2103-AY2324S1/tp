@@ -23,7 +23,7 @@ public class Attendee {
     /**
      * Constructs a {@code Attendee}.
      *
-     * @param attendeeName A valid tag name.
+     * @param attendeeName A valid attendee name.
      */
     public Attendee(String attendeeName) {
         requireNonNull(attendeeName);
