@@ -73,23 +73,23 @@ public class Booking {
     }
 
     public Room getRoom() {
-        return room;
+        return this.room;
     }
 
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     public Phone getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public Email getEmail() {
-        return email;
+        return this.email;
     }
 
     public BookingPeriod getBookingPeriod() {
-        return bookingPeriod;
+        return this.bookingPeriod;
     }
 
     /**
@@ -97,7 +97,7 @@ public class Booking {
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+        return Collections.unmodifiableSet(this.tags);
     }
 
     /**
@@ -106,8 +106,8 @@ public class Booking {
      */
     public boolean isSameBooking(Booking otherBooking) {
         return otherBooking != null
-                && otherBooking.getRoom().equals(getRoom())
-                && otherBooking.getName().equals(getName());
+                && otherBooking.getRoom().equals(this.getRoom())
+                && otherBooking.getName().equals(this.getName());
     }
 
     /**
@@ -142,12 +142,12 @@ public class Booking {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("room", room)
-                .add("booking period", bookingPeriod)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("tags", tags)
+                .add("room", this.room)
+                .add("booking period", this.bookingPeriod)
+                .add("name", this.name)
+                .add("phone", this.phone)
+                .add("email", this.email)
+                .add("tags", this.tags)
                 .toString();
     }
 }
