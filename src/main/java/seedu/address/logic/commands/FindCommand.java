@@ -87,7 +87,6 @@ public class FindCommand extends Command {
         assert emailPredicate != null : "Email predicate should never be null";
         assert policyIssuePredicate != null : "Policy issue predicate should never be null";
         assert companyPredicate != null : "Company predicate should never be null";
-        
         List<Predicate<Person>> predicates = addAllToPredicatesList();
         model.updateFilteredPersonList(PredicateUtil.combinePredicates(predicates));
 
