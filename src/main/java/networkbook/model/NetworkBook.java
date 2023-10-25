@@ -6,14 +6,13 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import networkbook.commons.util.ToStringBuilder;
-import networkbook.model.person.Email;
 import networkbook.model.person.Person;
 import networkbook.model.util.Identifiable;
 import networkbook.model.util.UniqueList;
 
 /**
  * Wraps all data at the network-book level
- * Duplicates are not allowed (by .isSame comparison)
+ * Duplicate contacts are not allowed (by .isSame comparison)
  */
 public class NetworkBook implements ReadOnlyNetworkBook, Identifiable<NetworkBook> {
 
@@ -85,7 +84,6 @@ public class NetworkBook implements ReadOnlyNetworkBook, Identifiable<NetworkBoo
     public void removePerson(Person key) {
         persons.remove(key);
     }
-
     //// util methods
 
     @Override

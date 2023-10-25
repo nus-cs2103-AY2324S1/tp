@@ -20,8 +20,7 @@ import networkbook.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
-    private final NetworkBook networkBook;
+    private final VersionedNetworkBook versionedNetworkBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> filteredSortedPersons;
@@ -34,9 +33,9 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with network book: " + networkBook + " and user prefs " + userPrefs);
 
-        this.networkBook = new NetworkBook(networkBook);
+        this.versionedNetworkBook = new VersionedNetworkBook(networkBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.networkBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.versionedNetworkBook.getPersonList());
         filteredSortedPersons = new SortedList<>(filteredPersons, null);
     }
 
@@ -79,39 +78,59 @@ public class ModelManager implements Model {
         userPrefs.setNetworkBookFilePath(networkBookFilePath);
     }
 
-    //=========== NetworkBook ================================================================================
+    //=========== VersionedNetworkBook commands ========================================================================
 
     @Override
     public void setNetworkBook(ReadOnlyNetworkBook networkBook) {
-        this.networkBook.resetData(networkBook);
+        this.versionedNetworkBook.resetData(networkBook);
+        this.versionedNetworkBook.commit();
     }
 
     @Override
     public ReadOnlyNetworkBook getNetworkBook() {
-        return networkBook;
+        return versionedNetworkBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return networkBook.hasPerson(person);
+        return versionedNetworkBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        networkBook.removePerson(target);
+        versionedNetworkBook.removePerson(target);
+        versionedNetworkBook.commit();
     }
 
     @Override
     public void addPerson(Person person) {
-        networkBook.addPerson(person);
+        versionedNetworkBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        versionedNetworkBook.commit();
     }
 
     @Override
     public void setItem(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-        networkBook.setItem(target, editedPerson);
+        versionedNetworkBook.setItem(target, editedPerson);
+        versionedNetworkBook.commit();
+    }
+    @Override
+    public void undoNetworkBook() {
+        if (versionedNetworkBook.canUndo()) {
+            versionedNetworkBook.undo();
+        } else {
+            // throw exception
+        }
+    }
+    @Override
+    public void redoNetworkBook() {
+        if (versionedNetworkBook.canRedo()) {
+            versionedNetworkBook.redo();
+        } else {
+            // throw exception
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -149,7 +168,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return networkBook.equals(otherModelManager.networkBook)
+        return versionedNetworkBook.equals(otherModelManager.versionedNetworkBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredSortedPersons.equals(otherModelManager.filteredSortedPersons);

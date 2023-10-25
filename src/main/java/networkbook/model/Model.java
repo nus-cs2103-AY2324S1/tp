@@ -77,6 +77,15 @@ public interface Model {
      */
     void setItem(Person target, Person editedPerson);
 
+    /**
+     * Undoes the last command that changed the contacts stored in NetworkBook.
+     */
+    void undoNetworkBook();
+    /**
+     * Redoes a previously undone command that changed the contacts stored in NetworkBook.
+     */
+    void redoNetworkBook();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
