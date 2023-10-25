@@ -10,14 +10,14 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class BandNameContainsKeywordsPredicate implements Predicate<Band> {
 
-    private final BandName bandName;
+    private final String bandName;
 
-    public BandNameContainsKeywordsPredicate(BandName bandName) {
+    public BandNameContainsKeywordsPredicate(String bandName) {
         this.bandName = bandName;
     }
     @Override
     public boolean test(Band band) {
-        return StringUtil.containsWordIgnoreCase(band.getName().fullName, bandName.toString());
+        return StringUtil.containsWordIgnoreCase(band.getName().fullName, bandName);
     }
 
     @Override
