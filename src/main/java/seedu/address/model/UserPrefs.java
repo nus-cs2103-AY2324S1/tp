@@ -2,8 +2,11 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
@@ -15,6 +18,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path prevFilePath = Paths.get("data", "prevAddressbook.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -54,6 +58,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public Path getPrevFilePath() {
+        return prevFilePath;
+    }
+
+    public void setToPrevFilePath() throws IOException {
+        Files.copy(prevFilePath, addressBookFilePath, StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    public void saveFilePath() throws IOException{
+        Files.copy(addressBookFilePath, prevFilePath, StandardCopyOption.REPLACE_EXISTING);
     }
 
     @Override

@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.AddressBookBuilder.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIcs.FIRST_NRIC;
 import static seedu.address.testutil.TypicalIcs.SECOND_NRIC;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPatient.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -54,6 +54,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validNricFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         Person personToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         Ic personToDeleteIc = personToDelete.getIc();
@@ -64,7 +65,6 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }

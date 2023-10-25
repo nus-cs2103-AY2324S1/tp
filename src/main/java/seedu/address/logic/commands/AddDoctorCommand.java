@@ -15,6 +15,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Doctor;
 
+import java.io.IOException;
+
 /**
  * Adds a Doctor to the address book.
  */
@@ -58,6 +60,12 @@ public class AddDoctorCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        try {
+            model.saveFilePath();
+        } catch (IOException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 

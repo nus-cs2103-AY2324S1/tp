@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -8,6 +9,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
@@ -45,11 +47,15 @@ public class EditPersonDescriptorBuilder {
         descriptor.setGender(person.getGender());
         descriptor.setIc(person.getIc());
         descriptor.setTags(person.getTags());
+        descriptor.setRemark(person.getRemark());
         if (person instanceof Patient) {
             Patient patient = (Patient) person;
             descriptor.setBloodType(patient.getBloodType());
             descriptor.setCondition(patient.getCondition());
             descriptor.setEmergencyContact(patient.getEmergencyContact());
+        } else if (person instanceof Doctor) {
+            Doctor doctor = (Doctor) person;
+            descriptor.setPatients(doctor.getPatients());
         }
     }
 
@@ -130,6 +136,15 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code patients} into a {@code ArrayList<Patient>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withPatients(ArrayList<Patient> patients) {
+        descriptor.setPatients(patients);
         return this;
     }
 

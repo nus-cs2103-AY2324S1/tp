@@ -86,18 +86,15 @@ public class TypicalPatient {
     private TypicalPatient() {
     } // prevents instantiation
 
-    /**
-     * Returns an {@code AddressBook} with all the typical patients.
-     */
-    public static AddressBook getTypicalAddressBook() {
+    public static List<Patient> getTypicalPatients() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static AddressBook getTypicalPatientAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Patient patient : getTypicalPatients()) {
+        for (Patient patient : TypicalPatient.getTypicalPatients()) {
             ab.addPatient(patient);
         }
         return ab;
-    }
-
-    public static List<Patient> getTypicalPatients() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
