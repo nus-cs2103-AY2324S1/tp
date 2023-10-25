@@ -199,7 +199,7 @@ Example:
 * `add_event m/FumbleLog presentation d/2023-10-30 g/Team2`
 
 Acceptable values for each parameter:
-* `m/EVENT_DETAILS`: Details of the meeting.
+* `m/EVENT_DETAILS`: Details of the event.
 * `d/DATE`: A valid date in the format `yyyy-MM-dd`.
 * `[s/START_TIME]`: A valid time in the format `HHmm`.
 * `[e/END_TIME]`: A valid time in the format `HHmm`.
@@ -218,52 +218,69 @@ Expected output when the command fails:
 
 ### Editing an event : `edit_event`
 
-Edits an existing meeting in FumbleLog.
+Edits an existing event in FumbleLog.
 
 Format: `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`
 
 * **At least one of the optional parameters required.**
 * `START_TIME` must be coupled with `END_TIME`.
-* The input values will replace the existing values.
+* The input values will replace the existing values, except for `PERSON` AND `GROUP`.
+* `PERSON` and `GROUP` edits are cumulative and will add to the current list of persons and groups.
+  Use the unassign commands, i.e. `u/PERSON`, if you would like to unassign any person or group.
+* Only `PERSON` and `GROUP` that exist can be added to the event.
+* All dates are to be in the format `yyyy-MM-dd`. i.e. 2023-10-05 for 5th Oct 2023
+* All time are to be in the format `HHmm`. i.e. 1400 for 2pm
 
 Examples:
-*  `edit_meeting 1 n/tP week 4 meeting`
+* `edit_event 1 m/FumbleLog meeting d/2023-10-05 s/1500 e/1700`
+* `edit_event 1 g/CS2103T g/CS2101`: Adds the groups CS2103T and CS2101 to the event.
+* `edit_event 1 u/Ken`: Unassigns the person `Ken` from the event.
 
 Acceptable values for each parameter:
-* `INDEX`: A positive integer
-* `n/MEETING_DETAILS`: Details of the meeting to be changed (Optional)
-* `d/DATE`: A valid date in the format `yyyy-MM-dd` (Optional)
-* `s/START_TIME`: A valid time in the format `HHmm` (Optional)
-* `e/END_TIME`: A valid time in the format `HHmm` (Optional)
+* `EVENT_INDEX`: The index position of the event in the displayed event list.
+* `[n/EVENT_DETAILS]`: Details of the event to be changed.
+* `[d/DATE]`: A valid date in the format `yyyy-MM-dd`
+* `[s/START_TIME]`: A valid time in the format `HHmm`
+* `[e/END_TIME]`: A valid time in the format `HHmm`
+* `[n/PERSON_NAME]`: Name of the person to be assigned.
+* `[u/PERSON_NAME]`: Name of the person to be unassigned.
+* `[g/GROUP]`: Name of the group to be assigned.
+* `[ug/GROUP]`: Name of the group to be unassigned.
 
 Expected output when the command succeeds:
-* Input: `edit_meeting 1 n/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
-* Output: `Meeting edited: tP week 3 meeting; Date: 2023-10-05; Start Time: 1500; End Time: 1700; `
+* Input: `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
+* Output: `Edited event: tP week 3 meeting; Date: 05 Oct 2023; Start Time: 15:00; End Time: 17:00; `
 
 Expected output when the command fails:
-* `Invalid command format! edit_meeting: Edits a meeting in the FumbleLog. Parameters: INDEX [MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME]`
+* `Invalid command format!
+  edit_event: Edits the details of the event identified by the index number used in the displayed event list.
+  Existing values will be overwritten by the input values, except for the list of assigned persons and the list of assigned groups
+  Parameters: INDEX (must be a positive integer) [m/EVENT_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/NAME]... [u/NAME]... [g/GROUP]... [ug/GROUP]...
+  Example: edit_event 1 m/FumbleLog Meeting d/2023-10-13 n/Ken g/Team2 `
 
+### Deleting an event : `delete_event`
 
-### Deleting a meeting : `delete_meeting`
+Deletes a specified event from the FumbleLog.
 
-Deletes the specified meeting from the FumbleLog.
+Format: `delete_meeting EVENT_INDEX`
 
-Format: `delete_meeting INDEX`
-
-* Deletes the meeting at the specified `INDEX`.
+* Deletes the meeting at the specified `EVENT_INDEX`.
 
 Examples:
-* `delete_meeting 1`: Deletes the meeting at index 1.
+* `delete_event 1`: Deletes the 1st event in the event list.
 
 Acceptable values for each parameter:
-* `INDEX`: A positive integer
+* `EVENT_INDEX`: The index position of the event in the displayed event list.
 
 Expected output when the command succeeds:
-* Input: `delete_meeting 1`
-* Output: `Deleted Meeting: tP week 3 meeting; Date: 2023-10-05; Start Time: 1500; End Time: 1700; `
+* Input: `delete_event 1`
+* Output: `Deleted Event: tP week 3 meeting; Date: 05 Oct 2023; Start Time: 15:00; End Time: 17:00; Groups involved: [Team1];`
 
 Expected output when the command fails:
-* `Invalid command format! delete_meeting: Deletes the meeting identified by the index number used in the displayed meeting list. Parameters: INDEX (must be a positive integer`
+* `Invalid command format!
+  delete_event: Deletes the event identified by the index number used in the displayed event list.
+  Parameters: INDEX (must be a positive integer)
+  Example: delete_event 1`
 
 ## Commands between Events and Persons
 ### Assign person to the meeting : `assign`

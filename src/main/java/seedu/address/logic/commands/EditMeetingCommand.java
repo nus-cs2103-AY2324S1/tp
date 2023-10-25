@@ -34,30 +34,28 @@ import seedu.address.model.person.Name;
  * Command to edit a meeting in the address book.
  */
 public class EditMeetingCommand extends Command {
-    public static final String COMMAND_WORD = "edit_meeting";
+    public static final String COMMAND_WORD = "edit_event";
 
-    public static final String EVENT_TYPE = "meeting";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meeting identified "
-            + "by the index number used in the displayed meeting list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
+            + "by the index number used in the displayed event list.\n"
             + "Existing values will be overwritten by the input values, except for "
-            + "the list of assigned persons, which will be appended to the existing list.\n"
+            + "the list of assigned persons and the list of assigned groups \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_MEETING_NAME + "MEETING_DETAILS] "
+            + "[" + PREFIX_MEETING_NAME + "EVENT_DETAILS] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_START_TIME + "START_TIME] "
             + "[" + PREFIX_END_TIME + "END_TIME] "
             + "[" + PREFIX_NAME + "NAME]... "
-            + "[" + PREFIX_UNASSIGN_PERSONS + "NAME]..."
-            + "[" + PREFIX_GROUP + "GROUP]..."
-            + "[" + PREFIX_UNASSIGN_GROUPS + "GROUP]..."
+            + "[" + PREFIX_UNASSIGN_PERSONS + "NAME]... "
+            + "[" + PREFIX_GROUP + "GROUP]... "
+            + "[" + PREFIX_UNASSIGN_GROUPS + "GROUP]... \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_MEETING_NAME + "TP WEEK 8 MEETING "
+            + PREFIX_MEETING_NAME + "FumbleLog Meeting "
             + PREFIX_DATE + "2023-10-13 "
-            + PREFIX_NAME + "Alice "
+            + PREFIX_NAME + "Ken "
             + PREFIX_GROUP + "Team2 ";
 
-    public static final String MESSAGE_EDIT_SUCCESS = "Edited meeting: %1$s";
+    public static final String MESSAGE_EDIT_SUCCESS = "Edited event: %1$s";
 
     public final Index index;
     public final EditMeetingDescriptor editMeetingDescriptor;

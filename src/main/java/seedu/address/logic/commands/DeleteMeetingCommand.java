@@ -15,14 +15,14 @@ import seedu.address.model.event.Event;
  */
 public class DeleteMeetingCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_meeting";
+    public static final String COMMAND_WORD = "delete_event";
 
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Deletes the meeting identified by the index number used in the displayed meeting list.\n"
+            COMMAND_WORD + ": Deletes the event identified by the index number used in the displayed event list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Meeting: %1$s";
+    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
 
     private final Index targetIndex;
 
