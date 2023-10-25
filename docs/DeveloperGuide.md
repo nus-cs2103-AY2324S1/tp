@@ -50,9 +50,9 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete s/A0249112A`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="600" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -90,9 +90,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete s/A0249112A")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete s/A0249112A` Command" />
 
 <box type="info" seamless>
 
@@ -140,7 +140,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="650" />
 
 The `Storage` component,
 * can save both Class Manager data and user preference data in JSON format, and read them back into corresponding objects.
@@ -316,7 +316,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 The load feature allows users to load a saved JSON file into the app. Load allows data from the new JSON file to be displayed in Class Manager, while setting the new default save file to be the new JSON file. The status bar footer also updates to show the current file.
 
-This feature is an improvement to the previous method of directly editing the `addressbook.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course, and load the JSON file for the course they are currently teaching. 
+This feature is an improvement to the previous method of directly editing the `classmanager.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course, and load the JSON file for the course they are currently teaching. 
 
 #### How it is implemented
 
@@ -347,18 +347,18 @@ _{Explain here how the data archiving feature will be implemented}_
 The proposed class details mechanism for each student will be facilitated by `ClassDetails`. It allows for the tracking
 of an `Student` 's class details, such as their tutorial group, tutorial attendance, class participation, and assignment
 grades. It will be stored as 3 separate classes to model each of the 3 different types of class details (We will
-call them "components" for ease of understanding), and a tracker
-class to act as the manager for each of the components, with the trackers composing the `ClassDetails` class.
+call them "class grades"), and a tracker
+class to act as the manager for each of the class grades, with the trackers composing the `ClassDetails` class.
 
-<puml src="diagrams/ClassComponents.puml" />
+<puml src="diagrams/ClassGrades.puml" />
 
-The 3 different types of class components are:
+The 3 different types of class grades are:
 
-* `Attendance` - Stores the details for a students attendance in a specific tutorial. Attendance will be stored as
+* `Attendance` - Stores the details for a student's attendance in a specific tutorial. Attendance will be stored as
 a boolean value.
-* `ClassParticipation` - Stores the details for a students participation in a specific tutorial. Class participation
+* `ClassParticipation` - Stores the details for a student's participation in a specific tutorial. Class participation
 will be stored as a boolean value.
-* `Assignment` - Stores the details for a students assignment grades for a specific tutorial. Assignment grades will be
+* `Assignment` - Stores the details for a student's assignment grades for a specific tutorial. Assignment grades will be
 stored as an integer value, with the total marks standardized to 100 marks.
 
 These components will be stored in their respective tracker classes, using Java Arrays to store the objects. The position
@@ -381,7 +381,7 @@ or assignment grade.
 
 #### Design considerations:
 
-**Aspect: 'Class components' classes**
+**Aspect: 'class grade' classes**
 
 * **Alternative 1 (current choice):** Use a class for each type of class details.
   * Pros: Easy to implement, follows OOP principle. If we want to edit the implementation of each of the classes or

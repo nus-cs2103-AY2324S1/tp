@@ -20,6 +20,12 @@ Class Name
 Class Phone
 Class Tag
 Class StudentNumber
+Class AssignmentTracker
+Class ClassParticipationTracker
+Class AttendenceTracker
+Class Assignment
+Class ClassParticipation
+Class Attendence
 
 Class I #FFFFFF
 }
@@ -41,18 +47,23 @@ UniqueStudentList --> "~* all" Student
 Student *--> Name
 Student *--> Phone
 Student *--> Email
-Student *--> StudentNumber
 Student *--> ClassDetails
+Student *--> StudentNumber
 Student *--> "*" Tag
 
-Student -[hidden]up--> I
+ClassDetails *--> AssignmentTracker
+ClassDetails *--> ClassParticipationTracker
+ClassDetails *--> AttendenceTracker
+
+AssignmentTracker *--> "*" Assignment
+ClassParticipationTracker *--> "*" ClassParticipation
+AttendenceTracker *--> "*" Attendence
 UniqueStudentList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Email
-Email -[hidden]right-> StudentNumber
-StudentNumber -[hidden]right-> ClassDetails
-ClassDetails -[hidden]right-> Tag
+Email -[hidden]right-> ClassDetails
+ClassDetails -[hidden]right-> StudentNumber
 
 ModelManager --> "~* filtered" Student
 @enduml
