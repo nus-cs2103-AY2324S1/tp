@@ -125,8 +125,8 @@ How the parsing works:
 
 The `Model` component,
 
-- stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-- stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+- stores the address book data i.e., all `Person` and `Meeting` objects (which are contained in a `UniquePersonList` and `UniqueMeetingList` object).
+- stores the currently 'selected' `Person` and `Meeting` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` and `ObservableList<Meeting>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -157,6 +157,37 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+
+### Find meeting feature
+
+The find meeting command is facilitated by `GeneralMeetingPredicate` that by itself is the combined predicate for all the meeting data fields. It is placed within the Model component and is only dependent on other predicate classes and `Meeting`.
+
+`findm` is supported by 5 sub-predicates that would search their respective fields.
+- m/TITLE_KEYWORDS  —  Finds meetings which `Title` contain any of the keywords given using `TitleContainsKeywordsPredicate`.
+- a/LOCATION_KEYWORDS  —  Finds meetings which `Location` contain any of the keywords given using `LocationContainsKeywordsPredicate`.
+- n/ATTENDEE_KEYWORDS  —  Finds meetings which set of `Attendee` contain any of the keywords given using `AttendeeContainsKeywordsPredicate`.
+- t/TAG_KEYWORDS  —  Finds meetings which set of `Tag` contain any of the keywords given using `TagContainsKeywordsPredicate`.
+- s/START e/END  —  Finds meetings that fall within the range of time given by START & END using `MeetingTimeContainsPredicate`. (Both START & END must come together)
+
+All of these fields are optional and typing `findm` alone will not impose any predicates, except MeetingTimeContainsPredicate which would find all meetings from 1st January of Year 1 A.D. to 31st December of Year 9999 A.D.
+
+Given below is an example usage scenario and how the `findm` command behaves at each step.
+
+Step 1. The user launches the application and the application loads the data from storage.
+The existing objects are shown below. Objects not relevant to the behaviour are excluded.
+![FindMeetingInitial](images/FindMeetingInitial.png)
+
+Step 2. The user executes `findm m/meeting` command to find all meetings that have the keyword `meeting` in their title. This results in the logic component creating an `AddressBookParser` object to make a `FindMeetingCommandParser` object which will in turn create the predicate objects as well as the FindMeetingCommand object. The argument is broken down by `PREFIX` and for each `PREFIX` there is a String array of arguments broken down by whitespace. (s/START & e/END use `LocalDateTime` instead)
+![FindMeetingSecond](images/FindMeetingSecond.png)
+
+Step 3. The `FindMeetingCommand` will be immediately executed on the `FilteredList<Meeting>` object. The `GeneralMeetingPredicate` will be used on all meetings, meetings which pass all 5 predicates be shown in `MeetingSchedulePanel`. After which `FindMeetingCommand` and the predicate objects will no longer be referenced.
+![FindMeetingLast](images/FindMeetingInitial.png)
+
+The following diagrams show the entire sequence flow for `LogicManager#execute()` for FindMeetingCommand.
+![FindMeetingSequence](images/FindMeetingSequence.png)
+![FindMeetingSequenceParse](images/FindMeetingSequenceParse.png)
+![FindMeetingSequenceExecute](images/FindMeetingSequenceExecute.png)
 
 ### Add attendee feature
 User can specify a Person to add as an Attendee to a specified Meeting.
@@ -290,6 +321,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
+
 | Priority | As a …​                                   | I want to …​                    | So that I can…​                       |
 | -------- | ----------------------------------------- | ------------------------------- | ------------------------------------- |
 | `[EPIC]` | agent who has meetings                    | have a meeting schedule         | keep track of them                    |
@@ -313,6 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | agent                                     | remove contacts from meetings   |                                       |
 | `* * *`  | agent                                     | view contacts in meetings       |                                       |
 | `*`      | agent who wants to meet clients regularly | know the last contacted date    | when to touch base with a client      |
+
 
 _{More to be added}_
 
