@@ -12,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.CompleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.financialplan.FinancialPlan;
@@ -28,8 +29,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_DATE_FORMAT = "Input Date should be in format of dd-MM-yyyy";
-    public static final String MESSAGE_INVALID_DATE = "Please input a valid Date";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -206,14 +206,14 @@ public class ParserUtil {
 
 
         if (!trimmedDate.matches(dateValidation)) {
-            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+            throw new ParseException(CompleteCommand.MESSAGE_INVALID_DATE_FORMAT);
         }
 
         LocalDate appointmentDate;
         try {
             appointmentDate = LocalDate.parse(date, dateFormatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException(MESSAGE_INVALID_DATE);
+            throw new ParseException(CompleteCommand.MESSAGE_INVALID_DATE);
         }
 
         return appointmentDate;
