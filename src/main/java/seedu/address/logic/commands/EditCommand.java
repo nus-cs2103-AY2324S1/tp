@@ -11,15 +11,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYRATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -37,8 +33,6 @@ import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
-
 /**
  * Edits the details of an existing person in the address book.
  */
@@ -58,7 +52,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_DAY + "DAY] "
             + "[" + PREFIX_BEGIN + "BEGIN] "
             + "[" + PREFIX_END + "END] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "[" + PREFIX_PAID + "PAID]...\n"
             + "[" + PREFIX_PAYRATE + "PAYRATE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -123,12 +116,11 @@ public class EditCommand extends Command {
         Day updatedDay = editPersonDescriptor.getDay().orElse(personToEdit.getDay());
         Begin updatedBegin = editPersonDescriptor.getBegin().orElse(personToEdit.getBegin());
         End updatedEnd = editPersonDescriptor.getEnd().orElse(personToEdit.getEnd());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Boolean updatedPaid = editPersonDescriptor.getPaid().orElse(personToEdit.getPaid());
         PayRate updatedPayRate = editPersonDescriptor.getPayRate().orElse(personToEdit.getPayRate());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSubject, updatedDay,
-                updatedBegin, updatedEnd, updatedTags, updatedPaid, updatedPayRate);
+                updatedBegin, updatedEnd, updatedPaid, updatedPayRate);
     }
 
     @Override
@@ -168,9 +160,6 @@ public class EditCommand extends Command {
         private Day day;
         private Begin begin;
         private End end;
-
-        private Set<Tag> tags;
-
         private Boolean paid;
         private PayRate payRate;
         private Boolean editSchedule = false;
@@ -190,7 +179,6 @@ public class EditCommand extends Command {
             setDay(toCopy.day);
             setBegin(toCopy.begin);
             setEnd(toCopy.end);
-            setTags(toCopy.tags);
             setPaid(toCopy.paid);
             setPayRate(toCopy.payRate);
             setEditSchedule(toCopy.editSchedule);
@@ -200,8 +188,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, subject, day, begin, end, tags,
-                    paid, payRate);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, subject, day, begin, end, paid, payRate);
         }
 
         public void setName(Name name) {
@@ -236,7 +223,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-
         public void setSubject(Subject subject) {
             this.subject = subject;
         }
@@ -267,24 +253,6 @@ public class EditCommand extends Command {
 
         public Optional<End> getEnd() {
             return Optional.ofNullable(end);
-        }
-
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         public void setPaid(Boolean paid) {
@@ -330,7 +298,6 @@ public class EditCommand extends Command {
                     && Objects.equals(day, otherEditPersonDescriptor.day)
                     && Objects.equals(begin, otherEditPersonDescriptor.begin)
                     && Objects.equals(end, otherEditPersonDescriptor.end)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(paid, otherEditPersonDescriptor.paid)
                     && Objects.equals(payRate, otherEditPersonDescriptor.payRate);
 
@@ -344,7 +311,6 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("day", day)
-                    .add("tags", tags)
                     .add("paid", paid)
                     .add("payrate", payRate)
                     .add("editSchedule", editSchedule)

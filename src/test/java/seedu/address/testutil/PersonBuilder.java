@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Begin;
 import seedu.address.model.person.Day;
@@ -13,8 +10,6 @@ import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -40,8 +35,6 @@ public class PersonBuilder {
     private Day day;
     private Begin begin;
     private End end;
-    private Set<Tag> tags;
-
     private boolean paid;
 
     private PayRate payRate;
@@ -58,7 +51,6 @@ public class PersonBuilder {
         day = new Day(DEFAULT_DAY);
         begin = new Begin(DEFAULT_BEGIN);
         end = new End(DEFAULT_END);
-        tags = new HashSet<>();
         paid = false;
         payRate = new PayRate(DEFAULT_PAYRATE);
     }
@@ -75,7 +67,6 @@ public class PersonBuilder {
         day = personToCopy.getDay();
         begin = personToCopy.getBegin();
         end = personToCopy.getEnd();
-        tags = new HashSet<>(personToCopy.getTags());
         paid = false;
         payRate = personToCopy.getPayRate();
     }
@@ -85,14 +76,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -161,7 +144,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, subject, day, begin, end, tags, paid, payRate);
+        return new Person(name, phone, email, address, subject, day, begin, end, paid, payRate);
     }
 
 }

@@ -5,15 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
-
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -29,8 +24,6 @@ public class Person {
     private final Address address;
     private final Subject subject;
     private final Lesson lesson;
-    private final Set<Tag> tags = new HashSet<>();
-
     private boolean paid;
     private PayRate payRate;
     private Date beginTime;
@@ -41,17 +34,15 @@ public class Person {
      */
 
     public Person(Name name, Phone phone, Email email, Address address, Subject subject, Day day,
-                  Begin begin, End end, Set<Tag> tags, boolean paid, PayRate payRate) {
-        requireAllNonNull(name, phone, email, address, subject, day, begin, end, tags);
+                  Begin begin, End end, boolean paid, PayRate payRate) {
+        requireAllNonNull(name, phone, email, address, subject, day, begin, end);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.subject = subject;
-        this.tags.addAll(tags);
         this.paid = paid;
         this.payRate = payRate;
-
         this.lesson = new Lesson(day, begin, end);
 
         try {
@@ -128,10 +119,6 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
     public boolean getPaid() {
         return paid;
     }
@@ -206,14 +193,13 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && subject.equals(otherPerson.subject)
                 && lesson.equals(otherPerson.lesson)
-                && tags.equals(otherPerson.tags)
                 && payRate.equals(otherPerson.payRate);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, subject, lesson, tags, paid, payRate);
+        return Objects.hash(name, phone, email, address, subject, lesson, paid, payRate);
     }
 
     @Override
@@ -225,10 +211,8 @@ public class Person {
                 .add("address", address)
                 .add("subject", subject)
                 .add("lesson", lesson)
-                .add("tags", tags)
                 .add("paid", paid)
                 .add("payrate", payRate)
                 .toString();
     }
-
 }

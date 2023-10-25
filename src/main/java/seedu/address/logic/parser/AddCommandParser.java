@@ -10,9 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYRATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -27,8 +25,6 @@ import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
-import seedu.address.model.tag.Tag;
-
 /**
  * Parses input arguments and creates a new AddCommand object
  */
@@ -41,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SUBJECT, PREFIX_DAY, PREFIX_BEGIN, PREFIX_END, PREFIX_PAYRATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_SUBJECT,
@@ -60,12 +56,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         Begin begin = ParserUtil.parseBegin(argMultimap.getValue(PREFIX_BEGIN).get());
         End end = ParserUtil.parseEnd(argMultimap.getValue(PREFIX_END).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         PayRate payRate = ParserUtil.parsePayRate(argMultimap.getValue(PREFIX_PAYRATE).get());
         boolean paid = false;
 
 
-        Person person = new Person(name, phone, email, address, subject, day, begin, end, tagList, paid, payRate);
+        Person person = new Person(name, phone, email, address, subject, day, begin, end, paid, payRate);
 
         return new AddCommand(person);
     }

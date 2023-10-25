@@ -1,10 +1,7 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -30,9 +27,6 @@ public class ScheduleCard extends UiPart<Region> {
     @FXML
     private Label lesson;
 
-    @FXML
-    private FlowPane tags;
-
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -42,8 +36,5 @@ public class ScheduleCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         address.setText(person.getAddress().value);
         lesson.setText(person.getLesson().toString());
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
