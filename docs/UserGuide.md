@@ -277,11 +277,11 @@ Edits an existing schedule in the addressbook.
 
 ![edit schedule](images/editSchedule.png)
 
-**Format**: `edit-s SCHEDULE_INDEX s/START_TIME e/END_TIME`
+**Format**: `edit-s SCHEDULE_INDEX st/START_TIME et/END_TIME`
 
 **Examples**:
-* `edit-s 1 s/2023-09-15T13:00:00`
-* `edit-s 2 e/2023-09-16T19:00:00`
+* `edit-s 1 st/2023-09-15T13:00:00`
+* `edit-s 2 et/2023-09-16T19:00:00`
 
 **Acceptable values for each parameter**:
 * `SCHEDULE_INDEX`: Only number input accepted, starting from 1 to the last schedule index shown in the list of 
@@ -298,11 +298,11 @@ Edits an existing schedule in the addressbook.
   The end time entered is not in the correct datetime format.
 * `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be 
   blank`: The start time entered is not in the correct datetime format.
-* `Multiple values specified for the following single-valued field(s): s/`: More than 1 `s/` was given in the command
-* `Multiple values specified for the following single-valued field(s): e/`: More than 1 `e/` was given in the command
+* `Multiple values specified for the following single-valued field(s): st/`: More than 1 `st/` was given in the command
+* `Multiple values specified for the following single-valued field(s): et/`: More than 1 `et/` was given in the command
 * `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
 * `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
-* `At least one field to edit must be provided.`: There is no `s/` or `e/` tag provided to edit a field.
+* `At least one field to edit must be provided.`: There is no `st/` or `et/` tag provided to edit a field.
 
 ### List all schedules: `list-s`
 
