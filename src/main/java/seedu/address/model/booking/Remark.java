@@ -6,13 +6,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Remarks should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Remarks should not be more than 500 characters.";
 
     /*
-     * The first character of the remark must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * This regex matches an empty string (i.e., an optional remark) or
+     * a string of 0 to 500 characters/spaces.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^$|.{0,500}";
 
     public final String value;
 
