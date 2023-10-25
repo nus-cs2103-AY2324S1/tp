@@ -9,7 +9,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+- App icon from http://www.mcdodesign.com/ by Susumu Yoshida
+- Some code adapted from http://code.makery.ch/library/javafx-8-tutorial/ by Marco Jakob
 
 ---
 
@@ -35,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,24 +69,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -102,7 +104,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -114,28 +116,20 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Contact` objects (which are contained in a `UniqueContactList` object).
+* stores the currently 'selected' `Contact` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">
-    :information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
-    <br>
-    <img src="images/BetterModelClassDiagram.png" width="450" />
-</div>
-
-
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -146,7 +140,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `swe.context.commons` package.
 
 ---
 
@@ -155,6 +149,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### \[Proposed\] Undo/redo feature
+
+//TODO if we scrap this section, we should also delete the images & puml files it came with
 
 #### Proposed Implementation
 
@@ -172,11 +168,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -184,7 +180,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
     :information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -228,14 +224,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 ---
@@ -254,31 +246,51 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
++**Target user profile**: NUS SoC students, who
+* have a need to label their contacts by categories (e.g. classmates in a certain course, professors)
+* can type fast and prefers typing
+* is reasonably comfortable with command-line inputs
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Manage contacts quickly via text commands which computing students are familiar with,
+and with useful features relevant to computing (and in particular, SoC) students
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                         | I want to …​                                                                         | So that I can…​                                                                 |
+|----------|---------------------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| `* * *`  | user                            | add contacts                                                                         | keep track of my friends and schoolmates                                        |
+| `* * *`  | user                            | delete contacts                                                                      | remove my contact with that person                                              |
+| `* * *`  | user                            | view my contacts                                                                     | know who I have as contacts                                                     |
+| `* * `   | user                            | update contacts                                                                      | make changes to my contact info when they occur                                 |
+| `* *`    | user                            | search for contacts                                                                  | find a specific contact directly and easily                                     |
+| `* *`    | potential user                  | access an easy-to-follow tutorial                                                    | understand the app's core features                                              |
+| `* *`    | user                            | add tags to contacts                                                                 | classify them based on contact type                                             |
+| `* *`    | user                            | attach images to contacts such as a business card scan                               | store all additional or miscellaneous info about a contact                      |
+| `* *`    | user                            | share a contact with other users or apps                                             | transfer my contact info easily                                                 |
+| `* *`    | user                            | merge duplicate contacts                                                             | my contact list stays clean                                                     |
+| `* *`    | user                            | sort contacts by certain criteria                                                    | find contacts satisfying a certain criteria easily                              |
+| `* *`    | user of many communication apps | enter info about various platforms that my contacts use                              | keep track of all the various ways I can contact the same person                |
+| `* *`    | user                            | indicate whether a contact is from NUS or not                                        | differentiate between NUS and non-NUS contacts                                  |
+| `* *`    | user                            | enter names in a different format depending on contact type                          | maintain respect based on profession (e.g. prefix a professor's name with Prof) |
+| `* *`    | user                            | see my contacts in different formats depending on their profession                   | easily differentiate them in a familiar way                                     |
+| `* *`    | user                            | indicate where I met each contact                                                    | keep track of people I have various levels of familiarity with                  |
+| `* *`    | user                            | view contacts by groups or type                                                      | more easily manage related contacts                                             |
+| `* *`    | user                            | indicate where I met each contact                                                    | keep track of people I have various levels of familiarity with                  |
+| `* *`    | new user                        | perform functions to a satisfying degree despite only using simple or basic commands | use the app without a steep learning curve                                      |
+| `* *`    | long-time user                  | identify old and/or rarely-used contacts                                             | hide or delete them to reduce clutter                                           |
+| `* *`    | user                            | export my contacts to an external file                                               | backup my contacts’ information                                                 |
+| `* *`    | user                            | import my contacts from an external file                                             | quickly populate the app with my existing contacts                              |
+| `*`      | user who prefers CLI            | use keyboard shortcuts                                                               | perform tasks more efficiently                                                  |
+| `*`      | user                            | see a different background colour for each contact                                   | differentiate between contacts more easily                                      |
+| `*`      | power user with many contacts   | use some scripting capabilities                                                      | automate tedious actions or achieve the exact results I specify                 |
+| `*`      | busy user                       | use icons to denote certain contact information                                      | identify the information I want at a glance                                     |
+| `*`      | user                            | see a log of past interactions with a contact                                        | know my history with my contacts                                                |
+| `*`      | advanced user                   | search/filter by specific parts of contacts (e.g. containing certain words)          | narrow down contacts to exactly what I am looking for                           |
+| `*`      | user who prefers CLI            | switch between previously entered commands in history                                | easily repeat previous commands                                                 |
+| `*`      | infrequent user                 | view a “cheatsheet” or help dialog for the text commands                             | remember some basic commands I may have forgotten                               |
 
 ### Use cases
 
@@ -290,7 +302,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User request to add a contact
 2.  ConText adds the contact
-    
+
     Use case ends.
 
 **Extensions**
@@ -334,18 +346,66 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Non-Functional Requirements
+### Non-functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. "Brownfield" - Changes to the codebase must be done in small increments.
+1. "Typing preferred" - The product must target users who can type fast and prefer CLI as their means of input.
+1. "Single user" - The product must be designed for a single user.
+1. "Incremental" - The product must be developed breadth-first as well as consistently each week.
+1. "Human editable file" - Data must be stored locally in a human-editable text file format.
+1. "No DBMS" - DataBase Management Systems must not be used.
+1. "OO" - Software must mostly follow the object-oriented paradigm.
+1. "Platform independent" - Software must work on Windows, Linux, and OSX. I.e., avoid OS-dependent libraries and OS-specific features.
+1. "Java version" - Software must work on a computer that has Java version 11 installed.
+1. "Portable" - Software must work without requiring an installer.
+1. "No remote server" - Software must not depend on a remote server.
+1. "External software" - Any 3rd party frameworks/libraries/services used must:
+    1. Be free and open-source (except services), with permissive license terms (e.g. non-time limited trial).
+    1. Not require installation by users. Services that require account creation on their 3rd party service are strongly discouraged.
+    1. Not violate other project constraints.
+    1. Be approved by the teaching team.
+1. "Screen resolution" - GUI must work well for standard screen resolutions and scales, as specified in the admin info. GUI must still be usable if those factors are non-standard.
+1. "Single file" - Software must all be packed into a single JAR file.
+1. "File size" - Software must not exceed 100MB and must not be unnecessarily bloated. Documents must not exceed 15MB per file.
+1. "PDF-friendly" - Developer and user guides must be PDF-friendly, without using expandable panels, embedded videos, animated GIFs etc.
+1. "Minimal network" - Any public APIs used should have a fallback mechanism in the event that they are down. Any NUS data used should have the approval of NUS IT.
+1. "Testability" - Features should not be hard to test or make the product hard to test, be the testing manual or automated.
+1. "CLI first" - Users who can type fast should be able to accomplish most tasks faster via the CLI as compared to if they were to use a hypothetical GUI-only version of the product.
+1. There must exist an image with the exact name and format `docs/images/Ui.png` depicting the final product, with similar proportions as the original AB3 image.
+1. There must exist an `AboutUs` page that closely follows the original template, such that CS2103 grading scripts can understand it.
+    1. Each team member must have an appropriately named lowercase PNG of their profile picture, as specified in the admin info.
+1. There must exist Project Portfolio Pages (PPPs) in `docs/team/`, containing sections specified in the admin info.
+    1. Each team member must have their own appropriately named lowercase page file, as specified in the admin info.
+    1. The page must be written to account for paged PDF conversion.
+1. Documentation must be built using Jekyll or MarkBind, then hosted via GitHub Pages, such that they are compatible with CS2103 grading scripts.
+1. Branches must not be deleted after their associated PRs have been merged, so that CS2103 grading scripts can detect that the correct workflow was used.
+1. The `README.md` must acknowledge SE-EDU's AB3, which this project is based on. It should also contain the `Ui.png`, as well as the repo's GitHub Actions build status badge.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Architecture Diagram**: A visual representation that depicts the high-level design and structure of the software application.
+
+* **Component**: A modular part of the system with a distinct responsibility. The main components mentioned are UI, Logic, Model, and Storage.
+
+* **Commons**: Classes or utilities used by multiple components of the application.
+
+* **Sequence Diagram**: A type of diagram that visually represents how objects in the system interact with each other in a particular sequence.
+
+* **API (Application Programming Interface)**: A set of rules that allows different software entities to communicate with each other.
+
+* **JavaFx**: A Java library used to create desktop applications. It is the framework used for the UI component of the app.
+
+* **JSON (JavaScript Object Notation)**: A lightweight data-interchange format that's easy to read and write for humans and easy to parse and generate for machines.
+
+* **Brownfield**: A term used in software development to describe a project that has existing constraints, typically an existing system or codebase, as opposed to a greenfield project which starts from scratch.
+
+* **CLI (Command Line Interface)**: A type of user interface that allows users to interact with software by typing in commands.
+
+* **Platform independent**: Software that can run on any computer regardless of its operating system, such as Mac/Windows/Linux.
+
+* **Human editable file**: A file format designed to be easily readable and editable by humans.
+
+* **Portable**: Software that doesn't require installation and can be run from any location, such as from a USB stick.
 
 ---
 
@@ -375,17 +435,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

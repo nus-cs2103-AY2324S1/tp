@@ -1,0 +1,14 @@
+{
+  "contacts": [{
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "note": "Note.",
+    "tags": ["friends"]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "65433456",
+    "email": "pauline@example.com",
+    "note": "Different note."
+  }]
+}
