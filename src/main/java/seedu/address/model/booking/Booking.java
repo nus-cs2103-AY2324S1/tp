@@ -30,6 +30,7 @@ public class Booking {
 
     // Data fields
     private final BookingPeriod bookingPeriod;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -47,7 +48,8 @@ public class Booking {
      * @throws PhoneNotFoundException If the phone is null.
      * @throws EmailNotFoundException If the email is null.
      */
-    public Booking(Room room, BookingPeriod bookingPeriod, Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Booking(Room room, BookingPeriod bookingPeriod, Name name, Phone phone, Email email, Remark remark,
+                   Set<Tag> tags) {
         if (room == null) {
             throw new RoomNotFoundException();
         }
@@ -69,6 +71,7 @@ public class Booking {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.remark = remark;
         this.tags.addAll(tags);
     }
 
@@ -87,6 +90,8 @@ public class Booking {
     public Email getEmail() {
         return this.email;
     }
+
+    public Remark getRemark() {return this.remark;}
 
     public BookingPeriod getBookingPeriod() {
         return this.bookingPeriod;
@@ -128,6 +133,7 @@ public class Booking {
                     && this.name.equals(otherBooking.name)
                     && this.phone.equals(otherBooking.phone)
                     && this.email.equals(otherBooking.email)
+                    && this.remark.equals(otherBooking.remark)
                     && this.tags.equals(otherBooking.tags);
         }
         return false;
@@ -136,7 +142,8 @@ public class Booking {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.room, this.bookingPeriod, this.name, this.phone, this.email, this.tags);
+        return Objects.hash(this.room, this.bookingPeriod, this.name, this.phone, this.email, this.remark,
+                this.tags);
     }
 
     @Override
@@ -147,6 +154,7 @@ public class Booking {
                 .add("name", this.name)
                 .add("phone", this.phone)
                 .add("email", this.email)
+                .add("remark", this.remark)
                 .add("tags", this.tags)
                 .toString();
     }
