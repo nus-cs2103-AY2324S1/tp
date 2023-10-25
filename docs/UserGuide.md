@@ -59,6 +59,10 @@ hospital management tasks done faster than current GUI apps in the industry.
         - [Adding a new patient](#adding-a-new-patient-add)
 
         - [Updating a patient's details](#updating-a-patients-details-edit)
+     
+        - [Diagnosing a patient](#diagnosing-a-patient-diagnose)
+     
+        - [Undiagnosing a patient](#undiagnosing-a-patient-undiagnose)
 
         - [Removing a patient](#removing-a-patient-delete)
 
