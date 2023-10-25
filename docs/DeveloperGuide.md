@@ -206,14 +206,14 @@ The predicate entered by the user can be modelled by the following class: `SortI
 
 The following sequence diagram shows how the `sort` command works. In this example, the user is executing the following command: `sort in/ASC`.
 
-<puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram" />
+<puml src="diagrams/SortSequenceDiagram.puml" alt="FilterSequenceDiagram" />
 
 When the `SortCommandParser` parses the argument to the `SortCommand`, the argument is stored as an attribute of type SortIn in `SortCommand`.
 This predicate is then passed into the current model, using the `updateSortedPersonList()` method.
 
 The following activity diagram summarizes what happens when a user executes a `sort` command:
 
-<puml src="diagrams/FilterActivityDiagram.puml" alt="FilterActivityDiagram" width="250" />
+<puml src="diagrams/FilterActivityDiagram.puml" alt="SortActivityDiagram" width="250" />
 
 #### Design considerations:
 
