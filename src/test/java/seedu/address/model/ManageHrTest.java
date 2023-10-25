@@ -91,6 +91,26 @@ public class ManageHrTest {
         assertEquals(expected, manageHr.toString());
     }
 
+    @Test
+    public void equals() {
+        // different type -> returns false
+        assertFalse(manageHr.equals(new Object()));
+
+        // same values -> returns true
+        ManageHr other = new ManageHr();
+        assertTrue(manageHr.equals(other));
+
+        // different values -> returns false
+        other.addEmployee(ALICE);
+        assertFalse(manageHr.equals(other));
+
+        // same object -> returns true
+        assertTrue(manageHr.equals(manageHr));
+
+        // null -> returns false
+        assertFalse(manageHr.equals(null));
+    }
+
     /**
      * A stub ReadOnlyManageHr whose people list can violate interface constraints.
      */

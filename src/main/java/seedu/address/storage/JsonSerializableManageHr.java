@@ -24,7 +24,7 @@ class JsonSerializableManageHr {
     private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableManageHR} with the given employees.
+     * Constructs a {@code JsonSerializableManageHr} with the given employees.
      */
     @JsonCreator
     public JsonSerializableManageHr(@JsonProperty("employees") List<JsonAdaptedEmployee> employees) {
@@ -41,7 +41,7 @@ class JsonSerializableManageHr {
     }
 
     /**
-     * Converts this ManageHR app into the model's {@code ManageHR} object.
+     * Converts this ManageHR app into the model's {@code ManageHr} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

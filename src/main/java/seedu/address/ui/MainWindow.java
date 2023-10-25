@@ -161,6 +161,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Displays the JavaFX primary stage.
+     */
     void show() {
         primaryStage.show();
     }
@@ -175,10 +178,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-    }
-
-    public EmployeeListPanel getEmployeeListPanel() {
-        return employeeListPanel;
     }
 
     /**

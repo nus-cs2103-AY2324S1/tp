@@ -49,7 +49,7 @@ public class ManageHr implements ReadOnlyManageHr {
     }
 
     /**
-     * Resets the existing data of this {@code ManageHR} with {@code newData}.
+     * Resets the existing data of this {@code ManageHr} with {@code newData}.
      */
     public void resetData(ReadOnlyManageHr newData) {
         requireNonNull(newData);
@@ -87,7 +87,7 @@ public class ManageHr implements ReadOnlyManageHr {
     }
 
     /**
-     * Removes {@code key} from this {@code ManageHR}.
+     * Removes {@code key} from this {@code ManageHr}.
      * {@code key} must exist in the ManageHr.
      */
     public void removeEmployee(Employee key) {
