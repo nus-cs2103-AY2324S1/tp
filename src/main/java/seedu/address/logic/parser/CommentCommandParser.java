@@ -38,7 +38,7 @@ public class CommentCommandParser implements Parser<CommentCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CommentCommand.MESSAGE_USAGE), ive);
         }
 
-        Comment comment = new Comment(argMultimap.getValue(PREFIX_COMMENT).orElse(""));
+        Comment comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).orElse(""));
 
         return new CommentCommand(studentNumber, comment);
     }

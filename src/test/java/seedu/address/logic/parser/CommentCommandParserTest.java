@@ -30,4 +30,10 @@ public class CommentCommandParserTest {
         assertParseSuccess(parser, "comment s/ " + VALID_STUDENT_NUMBER_BOB + " cm/ Good student",
                 new CommentCommand(new StudentNumber(VALID_STUDENT_NUMBER_BOB), new Comment("Good student")));
     }
+
+    @Test
+    public void parse_invalidStudentNumber_throwsParseException() {
+        assertParseFailure(parser, "comment s/ " + "T1234567M" + " cm/ Good student",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CommentCommand.MESSAGE_USAGE));
+    }
 }

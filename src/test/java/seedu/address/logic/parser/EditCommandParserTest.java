@@ -155,7 +155,6 @@ public class EditCommandParserTest {
         descriptor = new EditStudentDescriptorBuilder().withClassDetails(VALID_CLASS_NUMBER_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
-
     }
 
     @Test

@@ -53,4 +53,29 @@ public class CommentCommandTest {
             assertEquals("The student number provided does not exist here.", e.getMessage());
         }
     }
+
+    public void equals() {
+        StudentNumber studentNumber = new StudentNumber("A0239123A");
+        Comment comment = new Comment("Struggling with tutorials");
+        CommentCommand commentCommand = new CommentCommand(studentNumber, comment);
+        CommentCommand diffCommentCommand = new CommentCommand(studentNumber, new Comment("Different comment"));
+
+        // same object -> returns true
+        assertEquals(commentCommand, commentCommand);
+
+        // same values -> returns true
+        assertEquals(commentCommand, new CommentCommand(studentNumber, comment));
+
+        // different types -> returns false
+        assertEquals(commentCommand, 1);
+
+        // null -> returns false
+        assertEquals(commentCommand, null);
+
+        // different student -> returns false
+        assertEquals(commentCommand, diffCommentCommand);
+
+        // different comment -> returns false
+        assertEquals(commentCommand, new CommentCommand(studentNumber, new Comment("Different comment")));
+    }
 }
