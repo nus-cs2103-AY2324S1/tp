@@ -61,6 +61,11 @@ public class RecordClassPartCommand extends Command {
             studentToMark.getEmail(), studentToMark.getStudentNumber(), classDetails, studentToMark.getTags());
 
         model.setStudent(studentToMark, markedStudent);
+
+        if (model.isSelectedStudent(markedStudent)) {
+            model.setSelectedStudent(markedStudent);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
                 + classDetails.displayParticipations());
     }

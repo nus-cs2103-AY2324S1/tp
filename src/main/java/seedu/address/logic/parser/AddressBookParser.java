@@ -25,6 +25,7 @@ import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RecordClassPartCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -115,6 +116,9 @@ public class AddressBookParser {
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         case ConfigCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED);

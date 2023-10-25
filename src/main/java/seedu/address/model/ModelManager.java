@@ -160,6 +160,11 @@ public class ModelManager implements Model {
     public void setSelectedStudent(Student student) {
         addressBook.setSelectedStudent(student);
     }
+
+    @Override
+    public boolean isSelectedStudent(Student student) {
+        return !getSelectedStudent().isEmpty() && getSelectedStudent().get(0).equals(student);
+    }
     //=========== Filtered Student List Accessors =============================================================
 
     /**
@@ -180,9 +185,6 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
-        if (!filteredStudents.isEmpty()) {
-            addressBook.setSelectedStudent(filteredStudents.get(0));
-        }
     }
 
     @Override
