@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StatusContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 
 /**
@@ -29,27 +31,34 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         List<String> nameKeywords = new ArrayList<>();
         List<String> statusKeywords = new ArrayList<>();
+        List<String> tagKeywords = new ArrayList<>();
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STATUS);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STATUS, PREFIX_TAG);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STATUS);
-        if (!(arePrefixesPresent(argMultimap, PREFIX_NAME) || arePrefixesPresent(argMultimap, PREFIX_STATUS))
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STATUS, PREFIX_TAG);
+        if (!(arePrefixesPresent(argMultimap, PREFIX_NAME) || arePrefixesPresent(argMultimap, PREFIX_STATUS)
+                || arePrefixesPresent(argMultimap, PREFIX_TAG))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            setKeywords(nameKeywords, statusKeywords, argMultimap, PREFIX_NAME);
+            setKeywords(nameKeywords, statusKeywords, tagKeywords, argMultimap, PREFIX_NAME);
         }
         if (arePrefixesPresent(argMultimap, PREFIX_STATUS)) {
-            setKeywords(nameKeywords, statusKeywords, argMultimap, PREFIX_STATUS);
+            setKeywords(nameKeywords, statusKeywords, tagKeywords, argMultimap, PREFIX_STATUS);
+        }
+        if (arePrefixesPresent(argMultimap, PREFIX_TAG)) {
+            setKeywords(nameKeywords, statusKeywords, tagKeywords, argMultimap, PREFIX_TAG);
         }
 
 
         NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
         StatusContainsKeywordsPredicate statusPredicate = new StatusContainsKeywordsPredicate(statusKeywords);
+        TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(tagKeywords);
 
-        return new FindCommand(getPredicatesList(nameKeywords, statusKeywords, namePredicate, statusPredicate));
+        return new FindCommand(getPredicatesList(nameKeywords, statusKeywords, tagKeywords,
+                namePredicate, statusPredicate, tagPredicate));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
@@ -58,14 +67,19 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     private List<Predicate<Person>> getPredicatesList(List<String> nameKeywords,
                                                       List<String> statusKeywords,
+                                                      List<String> tagKeywords,
                                                       NameContainsKeywordsPredicate namePredicate,
-                                                      StatusContainsKeywordsPredicate statusPredicate) {
+                                                      StatusContainsKeywordsPredicate statusPredicate,
+                                                      TagContainsKeywordsPredicate tagPredicate) {
         List<Predicate<Person>> predicatesList = new ArrayList<>() {{
                 if (!nameKeywords.isEmpty()) {
                     add(namePredicate);
                 }
                 if (!statusKeywords.isEmpty()) {
                     add(statusPredicate);
+                }
+                if (!tagKeywords.isEmpty()) {
+                    add(tagPredicate);
                 }
             }};
 
@@ -74,6 +88,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     private void setKeywords(List<String> nameKeywords,
                              List<String> statusKeywords,
+                             List<String> tagKeywords,
                              ArgumentMultimap argMultimap,
                              Prefix prefix) throws ParseException {
         if (prefix.equals(PREFIX_NAME)) {
@@ -86,6 +101,12 @@ public class FindCommandParser implements Parser<FindCommand> {
             List<String> keywords = ParserUtil.parseSearchStatusParams(argMultimap.getAllValues(PREFIX_STATUS));
             for (String keyword : keywords) {
                 statusKeywords.add(keyword);
+            }
+        }
+        if (prefix.equals(PREFIX_TAG)) {
+            List<String> keywords = ParserUtil.parseSearchTagParams(argMultimap.getAllValues(PREFIX_TAG));
+            for (String keyword : keywords) {
+                tagKeywords.add(keyword);
             }
         }
     }
