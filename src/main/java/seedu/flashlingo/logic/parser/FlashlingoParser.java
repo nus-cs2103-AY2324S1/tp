@@ -28,6 +28,7 @@ import seedu.flashlingo.logic.commands.StatsCommand;
 import seedu.flashlingo.logic.commands.SwitchCommand;
 import seedu.flashlingo.logic.commands.YesCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * Parses user input.
@@ -38,14 +39,7 @@ public class FlashlingoParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(FlashlingoParser.class);
-    private static boolean isReviewSession = false;
-    public static void setReviewSession(boolean edited) {
-        isReviewSession = edited;
-    }
-
-    public static boolean getReviewSession() {
-        return isReviewSession;
-    }
+    private static final SessionManager sessionManager = SessionManager.getInstance();
     /**
      * Parses user input into command for execution.
      *
@@ -66,12 +60,12 @@ public class FlashlingoParser {
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
-        if (isReviewSession) {
+        if (sessionManager.isReviewSession()) {
             switch (commandWord) {
             case StartCommand.COMMAND_WORD:
                 throw new ParseException(MESSAGE_IN_REVIEW_SESSION);
             case EndCommand.COMMAND_WORD:
-                isReviewSession = false;
+                sessionManager.setSession(false);
                 return new EndCommand();
             case YesCommand.COMMAND_WORD:
                 return new YesCommand();
@@ -114,7 +108,7 @@ public class FlashlingoParser {
         case StatsCommand.COMMAND_WORD:
             return new StatsCommand();
         case StartCommand.COMMAND_WORD:
-            isReviewSession = true;
+            sessionManager.setSession(true);
             return new StartCommand();
         case EndCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_NOT_IN_REVIEW_SESSION);
