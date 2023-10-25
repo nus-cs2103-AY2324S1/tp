@@ -92,9 +92,9 @@ public class BookingPeriod {
         }
 
         //A period A overlaps with another period B if:
-        // A starts before B AND A ends after B starts.
+        // A does not end before B OR B does not end before A.
 
-        return !(checkInDate.isAfter(other.checkOutDate)) || checkOutDate.isBefore(other.checkInDate);
+        return !(checkInDate.isAfter(other.checkOutDate) || checkOutDate.isBefore(other.checkInDate));
     }
 
     @Override
