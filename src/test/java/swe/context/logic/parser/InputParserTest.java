@@ -30,6 +30,7 @@ import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
 import static swe.context.testutil.TestData.IndexContact.SECOND_CONTACT;
 
 
+
 public class InputParserTest {
 
     @Test
