@@ -363,31 +363,24 @@ Edits an existing schedule in the addressbook.
 
 ### List all schedules: `list-s`
 
-Displays a list of all schedules in the address book in a table format.
+Displays a list of all schedules in the address book in a table format. List can be filtered by tutors whose names contain any of the given keywords.
 
 ![view schedule](images/viewSchedule.png)
 
-**Format:** `list-s`
+**Format:** `list-s` or `list-s KEYWORD [MORE_KEYWORDS]`
 
 **Example:**
 * `list-s` shows all recorded schedules in the address book.
+* `list-s John` returns schedules by `John Smith` and `John Doe`.
+* `list-s Alice Pauline` returns schedules by `Alice Pauline`.
 
 **Expected output:**
 * Displays a table of schedules with columns for List number, Tutor Name, Start Time, and End Time
-* If there are no schedules in the address book, displays a message telling the user to add a tutor with `add-s`.
 
-![empty schedule list](images/emptyScheduleList.png)
+![list schedule](images/listScheduleAll.png)
+* If name of the tutor is added as an optional keyword search, the list will be filtered accordingly to show the schedules based on the tutor's name.
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Information**<br>
-    
-* list-s command does not take in any parameters.
-* Any extraneous parameters after `list-s` will be ignored.
-    e.g. if the command specifies `list-s 123`, it will be interpreted as `list-s`.
-* No error messages as anything typed behind is ignored.
-    
-</div>
+![list schedule filtered](images/listScheduleFilter.png)
 
 ### Unmarking a schedule: `unmark`
 
@@ -528,7 +521,7 @@ This section consists of more details of format limitations mentioned above.
 | **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                      |
 | **Add Schedule**    | `add-s TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` |
 | **Edit Schedule**   | `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]` <br> e.g., `edit-s 1 s/2023-09-15T13:00:00`                 |
-| **List Schedule**   | `list-s`                                                                                                        |
+| **List Schedule**   | `list-s`, `list-s KEYWORD [MORE_KEYWORDS]` <br> e.g., `list-s Alice Pauline`                                    |
 | **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                    |
 | **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                |
 | **Clear**           | `clear`                                                                                                         |
