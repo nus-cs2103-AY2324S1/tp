@@ -41,7 +41,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reschedules the appointment of the patient identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits details of the patient identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (index must be a positive integer) "

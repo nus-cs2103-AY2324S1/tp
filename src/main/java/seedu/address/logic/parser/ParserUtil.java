@@ -161,6 +161,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String tags} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseIllnesses(String tags) throws ParseException {
+        requireNonNull(tags);
+        String[] tagsArray = tags.split(",");
+        Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tagsArray) {
+            tagSet.add(parseTag(tagName));
+        }
+        return tagSet;
+    }
+
+    /**
      * Parses a {@code String dateAndTime} into a {@code LocalDateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
