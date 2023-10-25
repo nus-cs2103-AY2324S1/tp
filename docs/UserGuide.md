@@ -87,16 +87,71 @@ Below is a quick overview of the various components of our interface.
 
 ![ui overview](images/uiOverview.png)
 
-| Component      | Description                                                                                | 
-|----------------|--------------------------------------------------------------------------------------------|
-| Command Box    | You will enter your commands here.                                                         | 
-| Result Display | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
-| Tutor Details  | Contains information related to the tutor like name, phone number etc.                     |
+| Component        | Description                                                                                | 
+|------------------|--------------------------------------------------------------------------------------------|
+| Command Box      | You will enter your commands here.                                                         | 
+| Result Display   | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
+| Tutor Details    | Contains information related to the tutor like name, phone number etc.                     |
+| Schedule Details | Contains information related to the schedule like tutor, start time, end time etc.         |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## TutorConnect Tutorial (for new users)
-More details coming soon...
+
+Hello and welcome to TutorConnect! We're delighted you've chosen our platform to manage your tuition center's tutors and schedules. 
+
+This tutorial aims to guide you through the essential features and functionalities of TutorConnect that you will use on a day-to-day basis.
+
+Before we begin, please ensure that you have viewed the following sections of the guide:
+* [Quick Start](#quick-start) to help you get TutorConnect up and running.
+* [Navigating the Interface](#navigating-the-interface) to get you familiarised on how to navigate TutorConnect.
+
+### Start
+![start](images/tutorial/start.png)
+
+When you first launch TutorConnect, you will be greeted with an empty screen with no tutors. It's time to start adding your tutors to TutorConnect.
+
+### Adding Your First Tutor
+
+![add-t](images/tutorial/add-t.png)
+
+To add your first tutor, you can use the [**add-t**](#adding-a-tutor-add-t) command.
+
+Let's say you have a tutor named **John Doe**, he has provided you with his phone number: **9123 4567** and his email address: **johndoe@example.com**.
+
+To add John Doe into TutorConnect:
+1. Simply type into the Command Box: `add-t n/John Doe p/91234567 e/johnd@example.com`
+2. Hit enter.
+3. Voila! John Doe is now in TutorConnect
+
+### Planning Your Schedules
+
+Now that your tutors are in TutorConnect, it's time to start scheduling them classes!
+
+To assign schedules to your tutor, you can use the [**add-s**](#adding-a-schedule-add-s) command.
+
+Let's assign a schedules to **John Doe** at **1 October 2023** from **9AM to 11AM**.
+
+To assign John Doe that schedule:
+1. Get the **TUTOR_INDEX** of the tutor you wish to assign a schedule to
+   ![tutor-index](images/tutorial/tutor-index.png)
+2. Simply type into the Command Box: `add-s 1 st/2023-10-01T09:00 et/2023-10-01T11:00`
+2. Hit enter.
+3. Voila! John Doe now has a schedule at **1 October 2023** from **9AM to 11AM**. 
+
+### Viewing Your Tutors/Schedules
+
+![list-s](images/tutorial/list-s.png)
+
+Now that you have schedules in TutorConnect, you can view them using the [**list-s**](#list-all-schedules-list-s) command.
+
+1. Simply type into the Command Box: `list-s`
+2. Hit enter.
+3. Voila! You can view all your schedules in TutorConnect.
+
+Similarly, you can use the [**list-t**](#listing-all-tutors-list-t) command to go back to viewing all your tutors instead.
+
+You have successfully added your first tutor and schedule to TutorConnect! We hope that this tutorial has helped guide you through the basic features of TutorConnect. Please refer to the [**Features Section**](#features) to see what else TutorConnect can do. Alternatively visit the [**FAQ**](#faq) to view the frequently asked questions.
 
 --------------------------------------------------------------------------------------------------------------------
 
