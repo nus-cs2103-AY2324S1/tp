@@ -102,12 +102,13 @@ public class EditMeetingCommand extends Command {
         LocalDateTime updatedEnd = editMeetingDescriptor.getEnd().orElse(meetingToEdit.getEnd());
         Set<Attendee> attendees = meetingToEdit.getAttendees();
         Set<Tag> updatedTags = editMeetingDescriptor.getTags().orElse(meetingToEdit.getTags());
+        Boolean status = meetingToEdit.getStatus();
 
         if (!MeetingTime.isValidMeetingTime(updatedStart, updatedEnd)) {
             throw new CommandException(MeetingTime.MESSAGE_CONSTRAINTS);
         }
 
-        return new Meeting(updatedTitle, updatedLocation, updatedStart, updatedEnd, attendees, updatedTags);
+        return new Meeting(updatedTitle, updatedLocation, updatedStart, updatedEnd, attendees, updatedTags, status);
     }
 
     @Override

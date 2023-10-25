@@ -79,7 +79,7 @@ public class AddMeetingContactCommand extends Command {
         Set<Attendee> updatedAttendees = new LinkedHashSet<>(meeting.getAttendees());
         updatedAttendees.add(attendeeToAdd);
         Meeting updatedMeeting = new Meeting(meeting.getTitle(), meeting.getLocation(), meeting.getStart(),
-                meeting.getEnd(), updatedAttendees, meeting.getTags());
+                meeting.getEnd(), updatedAttendees, meeting.getTags(), meeting.getStatus());
 
         return updatedMeeting;
     }

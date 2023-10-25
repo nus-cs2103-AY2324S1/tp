@@ -68,7 +68,7 @@ public class RemoveMeetingContactCommand extends Command {
         Set<Attendee> updatedAttendees = new LinkedHashSet<>(meeting.getAttendees());
         updatedAttendees.remove(attendeeToRemove);
         Meeting updatedMeeting = new Meeting(meeting.getTitle(), meeting.getLocation(), meeting.getStart(),
-                meeting.getEnd(), updatedAttendees, meeting.getTags());
+                meeting.getEnd(), updatedAttendees, meeting.getTags(), meeting.getStatus());
 
         return updatedMeeting;
     }

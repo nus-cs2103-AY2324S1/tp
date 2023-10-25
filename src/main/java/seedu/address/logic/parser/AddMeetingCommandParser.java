@@ -51,7 +51,7 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         Set<Attendee> attendeeList = ParserUtil.parseAttendees(argMultimap.getAllValues(PREFIX_NAME));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Meeting meeting = new Meeting(title, location, start, end, attendeeList, tagList);
+        Meeting meeting = new Meeting(title, location, start, end, attendeeList, tagList, false);
 
         return new AddMeetingCommand(meeting);
     }

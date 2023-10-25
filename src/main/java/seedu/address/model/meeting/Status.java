@@ -5,6 +5,7 @@ package seedu.address.model.meeting;
  */
 public class Status {
 
+    public static final String MESSAGE_CONSTRAINTS = "Status must be exactly 'true' or 'false'";
     private Boolean isComplete;
 
     /**

@@ -16,6 +16,7 @@ import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingTime;
+import seedu.address.model.meeting.Status;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.tag.Tag;
 
@@ -32,6 +33,7 @@ class JsonAdaptedMeeting {
     private final String end;
     private final List<JsonAdaptedAttendee> attendees = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -40,7 +42,7 @@ class JsonAdaptedMeeting {
     public JsonAdaptedMeeting(@JsonProperty("title") String title, @JsonProperty("location") String location,
                              @JsonProperty("start") String start, @JsonProperty("end") String end,
                              @JsonProperty("attendees") List<JsonAdaptedAttendee> attendees,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("status") String status) {
 
         this.title = title;
         this.location = location;
@@ -52,6 +54,7 @@ class JsonAdaptedMeeting {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.status = status;
     }
 
     /**
@@ -68,6 +71,7 @@ class JsonAdaptedMeeting {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        status = source.getStatus().toString();
     }
 
     /**
@@ -80,11 +84,13 @@ class JsonAdaptedMeeting {
         for (JsonAdaptedAttendee person : attendees) {
             meetingAttendees.add(person.toModelType());
         }
+        final Set<Attendee> modelAttendees = new HashSet<>(meetingAttendees);
 
         final List<Tag> meetingTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             meetingTags.add(tag.toModelType());
         }
+        final Set<Tag> modelTags = new HashSet<>(meetingTags);
 
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -118,10 +124,16 @@ class JsonAdaptedMeeting {
         final LocalDateTime modelStart = LocalDateTime.parse(start);
         final LocalDateTime modelEnd = LocalDateTime.parse(end);
 
-        final Set<Attendee> modelAttendees = new HashSet<>(meetingAttendees);
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Status.class.getSimpleName()));
+        }
+        if (status != Boolean.FALSE.toString() && status != Boolean.TRUE.toString()) {
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
+        final Boolean modelStatus = Boolean.parseBoolean(status);
 
-        final Set<Tag> modelTags = new HashSet<>(meetingTags);
-        return new Meeting(modelTitle, modelLocation, modelStart, modelEnd, modelAttendees, modelTags);
+        return new Meeting(modelTitle, modelLocation, modelStart, modelEnd, modelAttendees, modelTags, modelStatus);
     }
 
 }
