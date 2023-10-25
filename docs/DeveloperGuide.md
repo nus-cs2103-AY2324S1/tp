@@ -369,15 +369,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System deletes selected fosterers.
 4. System displays the updated list of fosterers.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. The displayed list is empty. 
   * 2a1. System indicates error.
-
-      Use case ends.
-
+  
+    Use case ends.
+  
 
 * 2b. System detects invalid indices.
     * 2b1. System indicates the error and requests for valid indices.
@@ -395,14 +395,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Foster Manager requests to view a certain statistic of the displayed fosterers.
 3. System displays the relevant statistic.
 
-    Use case ends. 
+   Use case ends.
 
 **Extensions**
 
 * 2a. The displayed list is empty.
   * 2a1. System indicates error.
-
-      Use case ends.
+  
+    Use case ends.  
   
   
 * 2b. Requested statistic is not available.

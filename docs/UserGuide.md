@@ -266,7 +266,7 @@ Deletes the data entry at the index-th position of the currently displayed list.
 Format: `delete INDEX [INDEX...]`
 
 Parameter: `INDEX [INDEX...]`
-* Index of a fosterer is displayed in the list that is  obtained by the `find/list` command.
+* Index of a fosterer is displayed in the list that is  obtained by the `find`/`list` command.
 * At least one index must be provided.
 * Index must be a positive integer: 1, 2, 3, …
 
@@ -281,7 +281,7 @@ Multiple indices are allowed for mass deletion, each index separated by a white 
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd fosterer in the address book
-* `find Jerry` followed by `delete 1` deletes the 1st fosterer in the result list of the find command
+* `find Jerry` or `list Jerry`, followed by `delete 1`, deletes the 1st fosterer in the resulting list
 * `list` followed by `delete 1 3 7` deletes the 1st, 3rd and 7th fosterers in the address book
 * `list` followed by `delete 3 3 3 3` deletes the 3rd fosterer in the address book
 
@@ -318,7 +318,7 @@ Format: `stats FIELD`
 Parameters:`FIELD` 
 * The requested field whose statistic is to be calculated.
 * Valid fields that can be requested for are:
-  * `avail` :  shows the statistics of fosterers  who are available to foster, and the animals they can foster.
+  * `avail` :  shows the statistics of fosterers who are available to foster, and the animals they can foster.
   * `current` : shows the statistics of fosterers who are currently fostering, and the animals they are fostering.
   * `housing` : shows the statistics of the various housing types.
 
@@ -338,15 +338,16 @@ Expected output (success):
 6 out of 10 listed fosterers are available (60%)!
 Out of those available, 
 - 2 can foster dogs (33.3%)
-- 4 can foster cats (66.7%)
+- 3 can foster cats (50.0%)
+- 1 unknown (16.7%)
 ```
 
 2. `list` followed by `stats current`
 ```agsl
 4 out of 10 listed fosterers are currently fostering (40%)!
 Out of those fostering, 
-- 1 foster dogs (25.0%)
-- 3 foster cats (75.0%)
+- 1 fostering dogs (25.0%)
+- 3 fostering cats (75.0%)
 ```
 
 3. `list` followed by `stats housing`
@@ -358,15 +359,21 @@ Out of 10 listed fosterers,
 - 1 unknown (10.0%)
 ```
 
-Expected output (fail): 
+Expected output (fail):
+1. Invalid command format: `stats`
 ```agsl
 Invalid command format!
 stats: Displays the requested statistic about the currently displayed list.
-Parameters: FIELD, which can take the values avail, current or housing.
+Parameters: FIELD (which can take the values avail, current or housing).
 Examples: 
 - stats avail 
 - stats current
 - stats housing
+```
+
+2. No fosterers in the list
+```agsl
+There are 0 fosterers listed. Please add 
 ```
 
 ### Clearing all entries : `reset`
