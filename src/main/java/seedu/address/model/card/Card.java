@@ -20,7 +20,7 @@ public class Card implements Comparable<Card> {
     private final Question question;
     private final Answer answer;
 
-    // Data fields
+    // Data fields for card
     private String difficulty;
     private PracticeDate lastPracticeDate; // last date card was practiced, can be null.
     private PracticeDate nextPracticeDate; // next date card should be practiced.
