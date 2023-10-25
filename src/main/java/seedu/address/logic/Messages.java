@@ -23,6 +23,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_DELETE =
             "%1$d employees found! Refer to their indexes for deletion";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_PAYROLL =
+            "%1$d employees found! Refer to their indexes for payroll calculation";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

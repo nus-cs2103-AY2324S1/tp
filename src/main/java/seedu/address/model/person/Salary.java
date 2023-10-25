@@ -101,7 +101,7 @@ public class Salary extends Payment {
         String deductions = "Total Deductions: $" + getTotalDeductions();
         String benefits = "Total Benefits: $" + getTotalBenefits();
         String netSalary = "Net Salary: $" + getNetSalary();
-        return netSalary + "\n" + basicSalary + "\n" + deductions + "\n" + benefits;
+        return String.format("%1$-40s %2$-40s\n%3$-40s %4$-40s", netSalary, basicSalary, deductions, benefits);
     }
 
     @Override

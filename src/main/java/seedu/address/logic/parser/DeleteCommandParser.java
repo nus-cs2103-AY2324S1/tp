@@ -36,7 +36,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
-                
                 String[] nameKeywords = name.split("\\s+");
                 return new DeleteCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
             } else {
