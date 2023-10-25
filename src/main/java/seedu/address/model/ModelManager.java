@@ -288,6 +288,7 @@ public class ModelManager implements Model {
         requireNonNull(toAdd);
         Group groupToAdd = addressBook.getGroup(toAdd.getGroupName());
         groupToAdd.addTime(toAddTime);
+        forceUpdateList();
     }
 
     public TimeIntervalList getTimeFromGroup(Group group) throws CommandException {
