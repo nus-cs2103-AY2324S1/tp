@@ -137,7 +137,7 @@ Format: `delete INDEX…​`
 
 Examples:
 * `list -pa` followed by `delete 2` deletes the 2nd patient in the listed patients.
-* `find -sp s/s/Orthopaedic` followed by `delete 2 3 4` deletes the 2nd, 3rd and 4th specialist listed in the `find` command.
+* `find -sp s/Orthopaedic` followed by `delete 2 3 4` deletes the 2nd, 3rd and 4th specialist listed in the `find` command.
 
 ### Clearing all entries : `clear`
 
