@@ -1,11 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -22,11 +19,11 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules a new appointment. "
             + "Parameters: "
-            + PREFIX_DESCRIPTION + "DESCRIPTION "
+            + PREFIX_NAME + "STUDENT "
             + PREFIX_DATE + "DATE "
             + PREFIX_START_TIME + "STARTTIME "
-            + PREFIX_END_TIME + "ENDTIME"
-            + PREFIX_NAME + "STUDENT\n"
+            + PREFIX_END_TIME + "ENDTIME "
+            + PREFIX_DESCRIPTION + "DESCRIPTION\n"
             + "Example: "
             + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
