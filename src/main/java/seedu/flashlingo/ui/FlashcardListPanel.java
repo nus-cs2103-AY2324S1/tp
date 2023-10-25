@@ -11,6 +11,7 @@ import seedu.flashlingo.commons.core.LogsCenter;
 import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * Panel containing the list of persons.
@@ -48,7 +49,7 @@ public class FlashcardListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                if (FlashlingoParser.getReviewSession()) {
+                if (SessionManager.getInstance().isReviewSession()) {
                     setGraphic(new FlashcardBox(fc, getIndex() + 1, model, mw).getRoot());
                 } else {
                     setGraphic(new FlashcardBoxNoButton(fc, getIndex() + 1).getRoot());
