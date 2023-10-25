@@ -22,6 +22,8 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
     private final Position position;
     private final List<Interview> interviews;
     private final Status status;
+    private final Double lessThanScore;
+    private final Double greaterThanScore;
 
     /**
      * Constructor for CustomFilterPredicate
@@ -33,13 +35,15 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
      * @param interviews Interviews applicant has to go through
      */
     public CustomFilterPredicate(Name name, Phone phone, Email email, Position position, List<Interview> interviews,
-                                 Status status) {
+                                 Status status, Double lessThanScore, Double greaterThanScore) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.position = position;
         this.interviews = interviews;
         this.status = status;
+        this.lessThanScore = lessThanScore;
+        this.greaterThanScore = greaterThanScore;
     }
 
     /**
@@ -73,10 +77,16 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
                 return false;
             }
         }
-        /*
-         * TODO:
-         * add filtering for scores
-         */
+        if (this.lessThanScore != null) {
+            if (applicant.getScore() >= this.lessThanScore) {
+                return false;
+            }
+        }
+        if (this.greaterThanScore != null) {
+            if (applicant.getScore() <= this.greaterThanScore) {
+                return false;
+            }
+        }
         return true;
     }
 

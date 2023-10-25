@@ -2,6 +2,8 @@ package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_GREATER_THAN_SCORE;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_LESS_THAN_SCORE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -29,7 +31,11 @@ public class FilterCommand extends Command {
             + PREFIX_EMAIL + " [EMAIL], "
             + PREFIX_POSITION + " [POSITION], "
             + PREFIX_PHONE + " [PHONE], "
-            + PREFIX_STATUS + " [STATUS]";
+            + PREFIX_STATUS + " [STATUS], "
+            + PREFIX_LESS_THAN_SCORE + " [SCORE], "
+            + PREFIX_GREATER_THAN_SCORE + " [SCORE]";
+    public static final String MESSAGE_SCORE_PARSE_FAILURE = "Score in lts/ or gts/ has to be a number with up to 1 "
+            + "decimal place";
 
     private final CustomFilterPredicate predicate;
 

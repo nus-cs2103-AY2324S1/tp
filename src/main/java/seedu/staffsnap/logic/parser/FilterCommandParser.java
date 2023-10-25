@@ -2,7 +2,9 @@ package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_GREATER_THAN_SCORE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_LESS_THAN_SCORE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -41,7 +43,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_POSITION, PREFIX_INTERVIEW, PREFIX_STATUS);
+                        PREFIX_POSITION, PREFIX_INTERVIEW, PREFIX_STATUS, PREFIX_LESS_THAN_SCORE,
+                        PREFIX_GREATER_THAN_SCORE);
 
         Name name = null;
         Phone phone = null;
@@ -49,8 +52,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Position position = null;
         List<Interview> interviewList = null;
         Status status = null;
+        Double lessThanScore = null;
+        Double greaterThanScore = null;
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_POSITION,
-                PREFIX_STATUS);
+                PREFIX_STATUS, PREFIX_LESS_THAN_SCORE, PREFIX_GREATER_THAN_SCORE);
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         }
@@ -69,7 +74,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         }
-        return new FilterCommand(new CustomFilterPredicate(name, phone, email, position, interviewList, status));
+        if (argMultimap.getValue(PREFIX_LESS_THAN_SCORE).isPresent()) {
+            lessThanScore = ParserUtil.parseScore(argMultimap.getValue(PREFIX_LESS_THAN_SCORE).get());
+        }
+        if (argMultimap.getValue(PREFIX_GREATER_THAN_SCORE).isPresent()) {
+            greaterThanScore = ParserUtil.parseScore(argMultimap.getValue(PREFIX_GREATER_THAN_SCORE).get());
+        }
+        return new FilterCommand(new CustomFilterPredicate(name, phone, email, position, interviewList, status,
+                lessThanScore, greaterThanScore));
     }
 
 }
