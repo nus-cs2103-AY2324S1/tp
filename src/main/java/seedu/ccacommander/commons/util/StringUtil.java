@@ -6,6 +6,7 @@ import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 /**
  * Helper functions for handling strings.
@@ -67,14 +68,22 @@ public class StringUtil {
     }
 
     /**
-     * Returns the string {@code s} with the first character capitalised.
+     * Returns the string {@code s} with the first character of each word capitalised.
      */
-    public static String capitaliseString(String s) {
+    public static String capitaliseWordsInString(String s) {
         requireNonNull(s);
+        s = s.trim();
         if (s.length() == 0) {
             return s;
         }
 
-        return s.substring(0, 1).toUpperCase() + s.substring(1);
+        String[] words = s.split("\\s+");
+        StringJoiner result = new StringJoiner(" ");
+
+        for (String word : words) {
+            result.add(word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase());
+        }
+
+        return result.toString();
     }
 }

@@ -12,27 +12,25 @@ import seedu.ccacommander.model.event.Event;
 public class TypicalEvents {
 
     public static final Event AURORA_BOREALIS = new EventBuilder().withName("Aurora Borealis")
-            .withDate("2023-11-30").withLocation("Greenland").build();
+            .withDate("2023-11-30").withLocation("Greenland").withTags("nature").build();
 
     public static final Event BOXING_DAY = new EventBuilder().withName("Boxing Day")
-            .withDate("2023-12-26").withLocation("Ridge View Residential College").build();
+            .withDate("2023-12-26").withLocation("Ridge View Residential College").withTags("rvrc").build();
 
     public static final Event CHINESE_NEW_YEAR = new EventBuilder().withName("Chinese New Year")
-            .withDate("2024-02-10").withLocation("Communal Hall").build();
+            .withDate("2024-02-10").withLocation("Communal Hall").withTags("holiday").build();
 
     public static final Event DOG_DAY = new EventBuilder().withName("Dog Celebration Day")
-            .withDate("2024-08-26").withLocation("UTown Pitstop").build();
+            .withDate("2024-08-26").withLocation("UTown Pitstop").withTags("animals").build();
 
     public static final Event ECHO_DAY = new EventBuilder().withName("Echo Day")
-            .withDate("2023-05-05").withLocation("Batu Cave").build();
+            .withDate("2023-05-05").withLocation("Batu Cave").withTags("nature", "overseas").build();
 
     public static final Event FESTIVAL = new EventBuilder().withName("Festival")
-            .withDate("2023-10-05").withLocation("Clementi 321").build();
+            .withDate("2023-10-05").withLocation("Clementi 321").withTags("holiday").build();
 
     public static final Event GRAVITY_DISCOVERY_DAY = new EventBuilder().withName("Gravity Discovery Day")
-            .withDate("1666-06-18").withLocation("Cambridge University").build();
-
-    public static final String KEYWORD_MATCHING_FESTIVAL = "Festival"; // A keyword that matches Festival
+            .withDate("1666-06-18").withLocation("Cambridge University").withTags("science").build();
 
     private TypicalEvents() {} // prevents instantiation
 

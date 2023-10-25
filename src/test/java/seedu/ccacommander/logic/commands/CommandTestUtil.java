@@ -58,6 +58,8 @@ public class CommandTestUtil {
     public static final String VALID_DATE_BOXING = "2023-12-26";
     public static final String VALID_LOCATION_AURORA = "Greenland";
     public static final String VALID_LOCATION_BOXING = "Ridge View Residential College";
+    public static final String VALID_TAG_AURORA = "nature";
+    public static final String VALID_TAG_BOXING = "rvrc";
 
     public static final String VALID_MEMBER_INDEX_ONE = "1";
     public static final String VALID_EVENT_INDEX_TWO = "2";
@@ -85,13 +87,11 @@ public class CommandTestUtil {
     public static final String DATE_DESC_BOXING = " " + PREFIX_DATE + VALID_DATE_BOXING;
     public static final String LOCATION_DESC_AURORA = " " + PREFIX_LOCATION + VALID_LOCATION_AURORA;
     public static final String LOCATION_DESC_BOXING = " " + PREFIX_LOCATION + VALID_LOCATION_BOXING;
-
     public static final String MEMBER_INDEX_DESC_ONE = " " + PREFIX_MEMBER + VALID_MEMBER_INDEX_ONE;
     public static final String EVENT_INDEX_DESC_TWO = " " + PREFIX_EVENT + VALID_EVENT_INDEX_TWO;
     public static final String HOURS_DESC_AURORA = " " + PREFIX_HOURS + VALID_HOURS_AURORA;
-    public static final String HOURS_DESC_BOXING = " " + PREFIX_HOURS + VALID_HOURS_BOXING;
     public static final String REMARK_DESC_AURORA = " " + PREFIX_REMARK + VALID_REMARK_AURORA;
-    public static final String REMARK_DESC_BOXING = " " + PREFIX_REMARK + VALID_REMARK_BOXING;
+    public static final String TAGS_DESC_AURORA = " " + PREFIX_TAG + VALID_TAG_AURORA;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "F"; // "F" not allowed in gender

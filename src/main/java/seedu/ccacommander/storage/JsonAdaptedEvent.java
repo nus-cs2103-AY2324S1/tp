@@ -1,7 +1,10 @@
 package seedu.ccacommander.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,6 +14,7 @@ import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventDate;
 import seedu.ccacommander.model.event.Location;
 import seedu.ccacommander.model.shared.Name;
+import seedu.ccacommander.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -29,10 +33,14 @@ class JsonAdaptedEvent {
      */
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("eventDate") String eventDate,
-                             @JsonProperty("location") String location) {
+                             @JsonProperty("location") String location,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.eventDate = eventDate;
         this.location = location;
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
     }
 
     /**
@@ -42,6 +50,9 @@ class JsonAdaptedEvent {
         name = source.getName().name;
         eventDate = source.getDate().date.toString();
         location = source.getLocation().value;
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -50,6 +61,10 @@ class JsonAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
     public Event toModelType() throws IllegalValueException {
+        final List<Tag> eventTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            eventTags.add(tag.toModelType());
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Name.class.getSimpleName()));
@@ -77,7 +92,9 @@ class JsonAdaptedEvent {
         }
         final Location modelLocation = new Location(location);
 
-        return new Event(modelName, modelEventDate, modelLocation);
+        final Set<Tag> modelTags = new HashSet<>(eventTags);
+
+        return new Event(modelName, modelEventDate, modelLocation, modelTags);
     }
 
 }
