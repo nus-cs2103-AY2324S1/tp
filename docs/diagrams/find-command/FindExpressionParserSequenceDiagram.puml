@@ -8,7 +8,7 @@ C -> FEP : parseToPredicate(tokens)
 activate FEP
 
 note right of FEP
-  Starting with the expression: 
+  Starting with the expression:
   "n/John && (t/friends || !a/clementi)"
 end note
 
@@ -93,7 +93,7 @@ deactivate FEP
 note right of FEP
   In this next "Term processed",
   predicate for "!a/clementi" is combined with
-  predicate for "t/friends" using "||" 
+  predicate for "t/friends" using "||"
   to form the compound predicate for the bracketed expression.
 end note
 
@@ -116,8 +116,8 @@ deactivate FEP
 
 note right of FEP
   In this next "Expression processed",
-  the compound predicate from the parentheses 
-  is now combined with "n/John" using "&&" 
+  the compound predicate from the parentheses
+  is now combined with "n/John" using "&&"
   to form the final predicate.
 end note
 
