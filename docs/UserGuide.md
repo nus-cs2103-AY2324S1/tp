@@ -277,12 +277,11 @@ Deletes a tutor in the address book based on their index number in the table.
 
 **Expected output**:
 * `Tutor has been deleted: Alex Yeoh; Phone: 87438807;
-  Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40`
+  Email: alexyeoh@example.com`
 
 **Error messages**:
-* `Invalid command format!`: No tutor index provided.
-* `Index number given is out of range`: Given tutor index is out of range.
-* `Invalid parameter given`: Parameter given is not a numerical value.
+* `Invalid command format!`: No tutor index provided or parameter given is not a numerical value.
+* `Tutor index provided is out of range`: Given tutor index is out of range.
 
 ### Adding a schedule: `add-s`
 
@@ -389,6 +388,45 @@ Displays a list of all schedules in the address book in a table format.
     
 </div>
 
+### Marking a schedule: `mark`
+
+Adds the status of a schedule in the address book based on their index number in the table of schedules listed.
+
+![mark schedule](images/markSchedule.png)
+
+**Format:** `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Schedule status**<br>
+
+* There are only two types of Schedule status: MISSED or COMPLETED.
+* To set the status of the specified schedule to MISSED, input `m/0` as 0 indicates the MISSED status.
+* To set the status of the specified schedule to COMPLETED, input `m/1` as 1 indicates the COMPLETED status.
+* Any inputs other than 0 or 1 will result in an invalid status message displayed.
+
+</div>
+
+**Example:**
+* `mark 5 m/0` adds the MISSED status to the schedule indexed at 5 in the schedule list.
+* `mark 5 m/1` adds the COMPLETED status to the schedule indexed at 5 in the schedule list.
+* `list-s` followed by `mark 1 m/0` adds the MISSED status to the schedule indexed at 1 in the schedule list.
+* `list-s` followed by `mark 1 m/1` adds the COMPLETED status to the schedule indexed at 1 in the schedule list.
+
+**Acceptable values for each parameter:**
+* `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
+* `SCHEDULE_STATUS`: Only numerical inputs of 0 to indicate MISSED and 1 to indicate COMPLETED status of the 
+specified schedule.
+
+**Expected Output:**
+* `Marked Schedule as Completed: John Doe; Start Time: Sep 15 2023 09:00; End Time: Sep 15 2023 11:00`
+* `Marked Schedule as Missed: Betsy Crowe; Start Time: Sep 16 2023 17:00; End Time: Sep 15 2023 19:00`
+
+**Error Messages:**
+* `Invalid command format!`: Invalid or missing SCHEDULE_INDEX OR SCHEDULE_STATUS or both.
+* `Index number given is out of range`: The schedule index provided is invalid.
+* `Status has to be either MISSED (m/0) or COMPLETED (m/1)`: The schedule status provided is invalid.
+
 ### Unmarking a schedule: `unmark`
 
 Removes the status of a schedule in the address book based on their index number in the table of schedules listed.
@@ -480,16 +518,16 @@ Here are some descriptions of the words you might come across in the User Guide:
 ### Parameter Information
 Here are some parameters you might come across in the User Guide:
 
-| Parameter        | Description                                     | Limitations                                                                                  |
-|------------------|-------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `n/NAME`         | Refers to the name of the tutor.                | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
-| `p/PHONE NUMBER` | Refers to the phone number of the tutor.        | Only contain numbers, and should be at least 3 <br/>digits long.                             |
-| `e/EMAIL`        | Refers to the email address of the tutor.       | Of the format local-part@domain<sup>1</sup>.                                                 |
-| `s/START_TIME`   | Refers to the start time of the schedule.       | Only datetime in `yyyy-MM-ddTHH:mm:ss`<sup>2</sup> format is accepted.                       |
-| `e/END_TIME`     | Refers to the end time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted.                                   |
-| `TUTOR_INDEX`    | Refers to the position of tutor in the list.    | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
-| `SCHEDULE_INDEX` | Refers to the position of schedule in the list. | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
-
+| Parameter         | Description                                     | Limitations                                                                                  |
+|-------------------|-------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `n/NAME`          | Refers to the name of the tutor.                | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
+| `p/PHONE NUMBER`  | Refers to the phone number of the tutor.        | Only contain numbers, and should be at least 3 <br/>digits long.                             |
+| `e/EMAIL`         | Refers to the email address of the tutor.       | Of the format local-part@domain<sup>1</sup>.                                                 |
+| `s/START_TIME`    | Refers to the start time of the schedule.       | Only datetime in `yyyy-MM-ddTHH:mm:ss`<sup>2</sup> format is accepted.                       |
+| `e/END_TIME`      | Refers to the end time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted.                                   |
+| `TUTOR_INDEX`     | Refers to the position of tutor in the list.    | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
+| `SCHEDULE_INDEX`  | Refers to the position of schedule in the list. | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
+| `SCHEDULE_STATUS` | Refers to the status of schedule in the list.   | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
 
 ### Parameter Format
 This section consists of more details of format limitations mentioned above.
@@ -519,16 +557,17 @@ This section consists of more details of format limitations mentioned above.
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                 |
-|---------------------|------------------------------------------------------------------------------------------------------------------|
-| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`               |
-| **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`        |
-| **List Tutor**      | `list-t`                                                                                                         |
-| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                    |
-| **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                       |
-| **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s 1 st/2023-09-15T09:00:00 et/2023-09-15T11:00:00` |
-| **Edit Schedule**   | `edit-s SCHEDULE_INDEX s/START_TIME e/END_TIME` <br> e.g., `edit-s 1 s/2023-09-15T13:00:00`                      |
-| **List Schedule**   | `list-s`                                                                                                         |
-| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                     |
-| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                 |
-| **Clear**           | `clear`                                                                                                          |
+| Action              | Format, Examples                                                                                                |
+|---------------------|-----------------------------------------------------------------------------------------------------------------|
+| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`              |
+| **Edit Tutor**      | `edit-t TUTOR_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com` |
+| **List Tutor**      | `list-t`                                                                                                        |
+| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                   |
+| **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                      |
+| **Add Schedule**    | `add-s TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` |
+| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]` <br> e.g., `edit-s 1 s/2023-09-15T13:00:00`                 |
+| **List Schedule**   | `list-s`                                                                                                        |
+| **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                                  |
+| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                    |
+| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                |
+| **Clear**           | `clear`                                                                                                         |
