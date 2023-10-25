@@ -27,9 +27,31 @@ public class BookingPeriodTest {
         // invalid
         assertFalse(BookingPeriod.isValidBookingPeriod("")); // empty string
         assertFalse(BookingPeriod.isValidBookingPeriod(" ")); // spaces only
+        assertFalse(BookingPeriod.isValidBookingPeriod("2023-01-02 to 2023-01-01"));
 
         // valid
         assertTrue(BookingPeriod.isValidBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00"));
+
+        // catching exception
+        assertFalse(BookingPeriod.isValidBookingPeriod(" to "));
+        assertFalse(BookingPeriod.isValidBookingPeriod("01/01/23 to 02/01/23 12:00"));
+    }
+
+    @Test
+    public void overlaps() {
+        BookingPeriod bookingPeriod = new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00");
+
+        //invalid input
+        assertFalse(bookingPeriod.overlaps(null));
+
+        //overlaps -> returns true
+        assertTrue(bookingPeriod.overlaps(new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")));
+        assertTrue(bookingPeriod.overlaps(new BookingPeriod("2023-01-02 08:00 to 2023-01-03 12:00")));
+        assertTrue(bookingPeriod.overlaps(new BookingPeriod("2022-12-31 08:00 to 2023-01-01 12:00")));
+
+        //does not overlap -> return false
+        assertFalse(bookingPeriod.overlaps(new BookingPeriod("2023-01-03 08:00 to 2023-01-04 12:00")));
+        assertFalse(bookingPeriod.overlaps(new BookingPeriod("2022-12-30 08:00 to 2022-12-31 12:00")));
     }
 
     @Test
@@ -121,5 +143,18 @@ public class BookingPeriodTest {
         } catch (IllegalArgumentException e) {
             // Exception is expected
         }
+    }
+
+    @Test
+    public void hashcode() {
+        BookingPeriod bookingPeriodOne = new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00");
+        BookingPeriod bookingPeriodTwo = new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00");
+        BookingPeriod bookingPeriodDiff = new BookingPeriod("2023-01-03 08:00 to 2023-01-04 12:00");
+
+        assertTrue(bookingPeriodOne.equals(bookingPeriodTwo) && bookingPeriodTwo.equals(bookingPeriodOne));
+        assertTrue(bookingPeriodOne.hashCode() == bookingPeriodTwo.hashCode());
+
+        assertFalse(bookingPeriodOne.equals(bookingPeriodDiff) || bookingPeriodDiff.equals(bookingPeriodOne));
+        assertFalse(bookingPeriodOne.hashCode() == bookingPeriodDiff.hashCode());
     }
 }

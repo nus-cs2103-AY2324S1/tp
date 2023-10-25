@@ -31,6 +31,9 @@ public class BookingTest {
         // same object -> returns true
         assertTrue(ALICE.isSameBooking(ALICE));
 
+        // null -> returns false
+        assertFalse(ALICE.isSameBooking(null));
+
         // same room, all other attributes different -> returns true
         Booking editedAlice = new BookingBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withBookingPeriod(VALID_BOOKING_PERIOD_BOB).withTags(VALID_TAG_HUSBAND).build();

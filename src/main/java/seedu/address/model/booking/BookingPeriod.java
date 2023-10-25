@@ -18,7 +18,7 @@ public class BookingPeriod {
             + " \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$";
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm",
-                    Locale.US);
+            Locale.US);
 
     // String representation of the booking period
     public final String value;
@@ -61,7 +61,7 @@ public class BookingPeriod {
         LocalDateTime endDateTime = LocalDateTime.parse(dateTimeParts[1], dateTimeFormatter);
 
         return isValidDate(dateTimeParts[0]) && isValidDate(dateTimeParts[1])
-                    && !endDateTime.isBefore(startDateTime);
+                && !endDateTime.isBefore(startDateTime);
     }
 
     /**
@@ -144,8 +144,6 @@ public class BookingPeriod {
         return hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59;
     }
 
-
-
     /**
      * Sets the start and end date and time for the booking period.
      *
@@ -169,6 +167,22 @@ public class BookingPeriod {
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS, e);
         }
+    }
+
+    /**
+     * Checks if the current BookingPeriod overlaps with another BookingPeriod.
+     * Two BookingPeriods are considered to overlap if there is any common date between them.
+     *
+     * @param other The BookingPeriod to compare against.
+     * @return True if the BookingPeriods overlap; false otherwise.
+     */
+    public boolean overlaps(BookingPeriod other) {
+        if (other == null) {
+            return false;
+        }
+        //A period A overlaps with another period B if:
+        // A does not end before B OR B does not end before A.
+        return !(checkInDateTime.isAfter(other.checkOutDateTime) || checkOutDateTime.isBefore(other.checkInDateTime));
     }
 
     /**
