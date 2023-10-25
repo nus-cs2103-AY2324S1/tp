@@ -272,12 +272,12 @@ Note that the smallest possible **find expressions** is simply a **find conditio
 
 For example, given the following contacts (some fields omitted for brevity):
 
-| Name | Tags | Address |
-| ---- | ---- | ------- |
-| John Doe | neighbor, colleague | 123, Clementi Rd, 1234665 |
-| Jane Doe | neighbor, friend | 123, Clementi Rd, 1234665 |
-| Alex Yeoh | friend | 456, Clementi Rd, 1234665 |
-| Yervis Alexis | girlfriend | 789, Clementi Rd, 1234665 |
+| Name | Tags |
+| ---- | ---- |
+| John Doe | neighbor, colleague |
+| Jane Doe | neighbor, friend |
+| Alex Yeoh | friend |
+| Yervis Alexis | girlfriend |
 
 The following are valid **`FIND_EXPRESSIONs`**:
 
