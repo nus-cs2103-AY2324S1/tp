@@ -1,7 +1,10 @@
 package seedu.ccacommander.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.ccacommander.model.event.Event;
@@ -34,6 +37,9 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label eventDate;
 
+    @FXML
+    private FlowPane tags;
+
     /**
      * Creates a {@code EventCode} with the given {@code Event} and index to display.
      */
@@ -44,5 +50,8 @@ public class EventCard extends UiPart<Region> {
         name.setText(event.getName().name);
         eventLocation.setText(event.getLocation().value);
         eventDate.setText(event.getDate().toString());
+        event.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

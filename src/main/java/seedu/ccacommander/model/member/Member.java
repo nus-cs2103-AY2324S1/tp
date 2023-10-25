@@ -1,6 +1,7 @@
 package seedu.ccacommander.model.member;
 
 import static seedu.ccacommander.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.ccacommander.commons.util.StringUtil.capitaliseWordsInString;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -32,13 +33,15 @@ public class Member {
      */
     public Member(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, gender, phone, email, address, tags);
-        this.name = name;
+        Name capitalisedName = new Name(capitaliseWordsInString(name.name));
+        this.name = capitalisedName;
         this.gender = gender;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
     }
+
 
     public Name getName() {
         return name;

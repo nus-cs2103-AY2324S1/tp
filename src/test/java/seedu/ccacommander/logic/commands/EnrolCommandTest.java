@@ -4,8 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_A;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_B;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_INDEX_ONE;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_INDEX_TWO;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_A;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_B;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalEvents.BOXING_DAY;
+import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
+import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
+import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -15,6 +23,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
@@ -22,70 +31,76 @@ import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ReadOnlyCcaCommander;
 import seedu.ccacommander.model.ReadOnlyUserPrefs;
-import seedu.ccacommander.model.VersionCaptures;
 import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.model.event.Event;
+import seedu.ccacommander.model.event.UniqueEventList;
 import seedu.ccacommander.model.member.Member;
-import seedu.ccacommander.testutil.EventBuilder;
+import seedu.ccacommander.model.member.UniqueMemberList;
+import seedu.ccacommander.testutil.AttendanceBuilder;
 
-public class CreateEventCommandTest {
-
+public class EnrolCommandTest {
     @Test
-    public void constructor_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new CreateEventCommand(null));
+    public void constructor_nullFields_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new EnrolCommand(null, null, null, null));
     }
 
     @Test
-    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
-        Event validEvent = new EventBuilder().build();
+    public void execute_attendanceAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingAttendanceAdded modelStub = new ModelStubAcceptingAttendanceAdded();
+        Attendance validAttendance = new AttendanceBuilder().build();
 
-        CommandResult commandResult = new CreateEventCommand(validEvent).execute(modelStub);
+        CommandResult commandResult =
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A)
+                        .execute(modelStub);
 
-        assertEquals(String.format(CreateEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),
+        assertEquals(String.format(EnrolCommand.MESSAGE_SUCCESS, Messages.format(validAttendance)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
+        assertEquals(Arrays.asList(validAttendance), modelStub.attendancesAdded);
     }
 
     @Test
-    public void execute_duplicateEvent_throwsCommandException() {
-        Event validEvent = new EventBuilder().build();
-        CreateEventCommand createEventCommand = new CreateEventCommand(validEvent);
-        ModelStub modelStub = new ModelStubWithEvent(validEvent);
+    public void execute_duplicateAttendance_throwsCommandException() {
+        EnrolCommand enrolCommand =
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+        ModelStubWithAttendance modelStub = new ModelStubWithAttendance(ALICE_AURORA);
 
         assertThrows(CommandException.class,
-                CreateEventCommand.MESSAGE_DUPLICATE_EVENT, () -> createEventCommand.execute(modelStub));
+                EnrolCommand.MESSAGE_DUPLICATE_ATTENDANCE, () -> enrolCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Event party = new EventBuilder().withName("Party").build();
-        Event marathon = new EventBuilder().withName("Marathon").build();
-        CreateEventCommand addPartyCommand = new CreateEventCommand(party);
-        CreateEventCommand addMarathonCommand = new CreateEventCommand(marathon);
+        EnrolCommand enrolEventOneCommand =
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+        EnrolCommand enrolEventTwoCommand =
+                new EnrolCommand(VALID_INDEX_TWO, VALID_INDEX_TWO, VALID_HOURS_B, VALID_REMARK_B);
 
         // same object -> returns true
-        assertTrue(addPartyCommand.equals(addPartyCommand));
+        assertTrue(enrolEventOneCommand.equals(enrolEventOneCommand));
 
         // same values -> returns true
-        CreateEventCommand addPartyCommandCopy = new CreateEventCommand(party);
-        assertTrue(addPartyCommand.equals(addPartyCommandCopy));
+        EnrolCommand enrolEventOneCommandCopy =
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+        assertTrue(enrolEventOneCommand.equals(enrolEventOneCommandCopy));
 
         // different types -> returns false
-        assertFalse(addPartyCommand.equals(1));
+        assertFalse(enrolEventOneCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addPartyCommand.equals(null));
+        assertFalse(enrolEventOneCommand.equals(null));
 
         // different member -> returns false
-        assertFalse(addPartyCommand.equals(addMarathonCommand));
+        assertFalse(enrolEventOneCommand.equals(enrolEventTwoCommand));
     }
 
     @Test
     public void toStringMethod() {
-        CreateEventCommand createEventCommand = new CreateEventCommand(BOXING_DAY);
-        String expected = CreateEventCommand.class.getCanonicalName() + "{toAdd=" + BOXING_DAY + "}";
-        assertEquals(expected, createEventCommand.toString());
+        EnrolCommand enrolCommand =
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
+        String expected = EnrolCommand.class.getCanonicalName() + "{member index=" + VALID_INDEX_ONE
+                + ", event index=" + VALID_INDEX_ONE + ", hours=" + VALID_HOURS_A
+                + ", remark=" + VALID_REMARK_A + "}";
+        assertEquals(enrolCommand.toString(), expected);
     }
 
     /**
@@ -99,11 +114,13 @@ public class CreateEventCommandTest {
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public GuiSettings getGuiSettings() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -200,40 +217,10 @@ public class CreateEventCommandTest {
         }
 
         @Override
-        public void commit(String commitMessage) {
-            throw new AssertionError("This method should not be called.");
-        }
-      
-        @Override
         public ObservableList<Attendance> getFilteredAttendanceList() {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public boolean canUndo() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public String undo() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean canRedo() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public String redo() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public VersionCaptures viewVersionCaptures() {
-            throw new AssertionError("This method should not be called.");
-        }
-      
         @Override
         public void updateFilteredAttendanceList(Predicate<Attendance> attendance) {
             throw new AssertionError("This method should not be called.");
@@ -241,44 +228,69 @@ public class CreateEventCommandTest {
     }
 
     /**
-     * A Model stub that contains a single member.
+     * A Model stub that contains a single attendance.
      */
-    private class ModelStubWithEvent extends ModelStub {
-        private final Event event;
+    private class ModelStubWithAttendance extends ModelStub {
+        final UniqueMemberList members = new UniqueMemberList();
+        final UniqueEventList events = new UniqueEventList();
+        private final Attendance attendance;
 
-        ModelStubWithEvent(Event event) {
-            requireNonNull(event);
-            this.event = event;
+        ModelStubWithAttendance(Attendance attendance) {
+            requireNonNull(attendance);
+            events.createEvent(AURORA_BOREALIS);
+            members.add(ALICE);
+            this.attendance = attendance;
         }
 
         @Override
-        public boolean hasEvent(Event event) {
-            requireNonNull(event);
-            return this.event.isSameEvent(event);
+        public ObservableList<Event> getFilteredEventList() {
+            return new FilteredList<>(events.asUnmodifiableObservableList());
+        }
+
+        @Override
+        public ObservableList<Member> getFilteredMemberList() {
+            return new FilteredList<>(members.asUnmodifiableObservableList());
+        }
+        @Override
+        public boolean hasAttendance(Attendance attendance) {
+            requireNonNull(attendance);
+            return this.attendance.isSameAttendance(attendance);
         }
     }
 
     /**
-     * A Model stub that always accept the event being added.
+     * A Model stub that always accept the attendance being added.
      */
-    private class ModelStubAcceptingEventAdded extends ModelStub {
-        final ArrayList<Event> eventsAdded = new ArrayList<>();
-        final ArrayList<String> commitMessages = new ArrayList<>();
+    private class ModelStubAcceptingAttendanceAdded extends ModelStub {
+        final UniqueMemberList members = new UniqueMemberList();
+        final UniqueEventList events = new UniqueEventList();
+        final ArrayList<Attendance> attendancesAdded = new ArrayList<>();
 
-        @Override
-        public void commit(String commitMessage) {
-            commitMessages.add(commitMessage);
-        }
-        @Override
-        public boolean hasEvent(Event event) {
-            requireNonNull(event);
-            return eventsAdded.stream().anyMatch(event::isSameEvent);
+        public ModelStubAcceptingAttendanceAdded() {
+            events.createEvent(AURORA_BOREALIS);
+            members.add(ALICE);
         }
 
         @Override
-        public void createEvent(Event event) {
-            requireNonNull(event);
-            eventsAdded.add(event);
+        public boolean hasAttendance(Attendance attendance) {
+            requireNonNull(attendance);
+            return attendancesAdded.stream().anyMatch(attendance::isSameAttendance);
+        }
+
+        @Override
+        public void createAttendance(Attendance attendance) {
+            requireNonNull(attendance);
+            attendancesAdded.add(attendance);
+        }
+
+        @Override
+        public ObservableList<Event> getFilteredEventList() {
+            return new FilteredList<>(events.asUnmodifiableObservableList());
+        }
+
+        @Override
+        public ObservableList<Member> getFilteredMemberList() {
+            return new FilteredList<>(members.asUnmodifiableObservableList());
         }
 
         @Override
