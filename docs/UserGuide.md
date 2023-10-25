@@ -148,10 +148,12 @@ Examples:
 * `find john john doe` is redundant and gives the same result as `find john doe`
 * `list "John" | zam & doe` matches "John Doe" and "Doe Shazam", but not "John Grahm"
 
-Expected output (success) (replace `_` with number of persons):
+Expected output (success):
 ```agsl
 _ persons listed!
 ```
+With `_` being replaced with the number of persons found.
+
 UI also updates with a list of fosterers matching the query.
 
 Expected output (fail):

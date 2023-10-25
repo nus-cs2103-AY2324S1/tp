@@ -110,4 +110,9 @@ public class SingleTextSearchMatcherTest {
         assertNull(testMatchString("abc", true));
     }
 
+    @Test
+    public void test_toString() {
+        assertEquals("test", new SingleTextSearchMatcher("test").toString());
+    }
+
 }

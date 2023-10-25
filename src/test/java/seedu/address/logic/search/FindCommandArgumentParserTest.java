@@ -155,7 +155,9 @@ class FindCommandArgumentParserTest {
 
     @Test
     void test_nullConstructor() {
-        assertDoesNotThrow(() -> new FindCommandArgumentParser().parse(null));
+        assertDoesNotThrow(() -> assertTrue(
+                new FindCommandArgumentParser().parse(null).test(null)
+        ));
     }
 
     @Test
