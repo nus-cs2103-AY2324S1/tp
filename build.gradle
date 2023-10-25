@@ -60,7 +60,11 @@ java {
 }
 
 application {
-    mainClass = 'seedu.address.Main'
+    mainClass = 'swe.context.Main'
+}
+
+run {
+    enableAssertions true
 }
 
 test {
