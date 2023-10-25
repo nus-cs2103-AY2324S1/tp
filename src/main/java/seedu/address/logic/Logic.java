@@ -50,6 +50,7 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
+<<<<<<< HEAD
      * Returns the user prefs' shortcut settings.
      */
     ShortcutSettings getShortcutSettings();
@@ -58,4 +59,18 @@ public interface Logic {
      * Sets the user prefs' shortcut settings.
      */
     void setShortcutSettings(ShortcutSettings shortcutSettings);
+
+    /**
+     * Returns the command string of the next most recent command executed.
+     */
+    String getPrevCommandString(String currentCommandString);
+
+    /**
+     * Returns the command string of the previous most recent command executed.
+     */
+    String getPassedCommandString(String currentCommandString);
+    /**
+     * Adds the most recent command string input by the user to the CommandStringStash.
+     */
+    void addCommandString(String commandString);
 }

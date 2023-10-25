@@ -97,4 +97,20 @@ public class LogicManager implements Logic {
     public void setShortcutSettings(ShortcutSettings shortcutSettings) {
         model.setShortcutSettings(shortcutSettings);
     }
+
+    @Override
+    public String getPrevCommandString(String currentCommandString) {
+        return model.getPrevCommandString(currentCommandString);
+    }
+
+    @Override
+    public String getPassedCommandString(String currentCommandString) {
+        return model.getPassedCommandString(currentCommandString);
+    }
+
+    @Override
+    public void addCommandString(String commandString) {
+        model.addCommandString(commandString);
+    }
+
 }
