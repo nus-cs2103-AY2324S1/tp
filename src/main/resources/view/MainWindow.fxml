@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="MediFlowR" minWidth="700" minHeight="700" onCloseRequest="#handleExit">
+         title="MediFlowR" minWidth="900" minHeight="700" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -33,6 +33,7 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
+          <Menu fx:id="currentTime" disable="true" />
         </MenuBar>
 
         <HBox minWidth="700" prefWidth="700" prefHeight="10000">

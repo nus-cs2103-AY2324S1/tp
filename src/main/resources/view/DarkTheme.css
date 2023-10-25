@@ -209,6 +209,10 @@
     -fx-opacity: 0.9;
 }
 
+.menu:disabled {
+    -fx-opacity: 1;
+}
+
 .menu .left-container {
     -fx-background-color: black;
 }
