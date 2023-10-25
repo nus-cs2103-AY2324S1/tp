@@ -44,7 +44,6 @@ class EndTimeTest {
         assertTrue(EndTime.isValidEndTime("2099-01-01T00:00:00")); // Long time in the future
         assertTrue(EndTime.isValidEndTime("1899-01-01T00:00:00")); // Long time in the past
         assertTrue(EndTime.isValidEndTime("2023-10-17T18:15:33")); // random date
-
     }
 
     @Test

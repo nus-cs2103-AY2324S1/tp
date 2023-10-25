@@ -22,6 +22,12 @@ public class TypicalSchedules {
             .withStatus(Status.PENDING)
             .build();
 
+    public static final Schedule SCHEDULE_ALICE_SECOND_JAN = new ScheduleBuilder()
+        .withTutor(TypicalPersons.ALICE)
+        .withStartTime(LocalDateTime.of(2023, 1, 2, 9, 0, 0))
+        .withEndTime(LocalDateTime.of(2023, 1, 2, 11, 0, 0))
+        .build();
+
     public static final Schedule SCHEDULE_BOB_SECOND_JAN = new ScheduleBuilder()
             .withTutor(TypicalPersons.BOB)
             .withStartTime(LocalDateTime.of(2023, 1, 2, 20, 0, 0))
@@ -46,6 +52,7 @@ public class TypicalSchedules {
     }
 
     public static List<Schedule> getTypicalSchedules() {
-        return new ArrayList<>(Arrays.asList(SCHEDULE_ALICE_FIRST_JAN, SCHEDULE_BOB_SECOND_JAN));
+        return new ArrayList<>(Arrays.asList(SCHEDULE_ALICE_FIRST_JAN, SCHEDULE_ALICE_SECOND_JAN,
+            SCHEDULE_BOB_SECOND_JAN));
     }
 }

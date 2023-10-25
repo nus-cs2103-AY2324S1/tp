@@ -19,6 +19,8 @@ import seedu.address.logic.commands.AddTutorCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteScheduleCommand;
 import seedu.address.logic.commands.DeleteTutorCommand;
+import seedu.address.logic.commands.EditScheduleCommand;
+import seedu.address.logic.commands.EditScheduleCommand.EditScheduleDescriptor;
 import seedu.address.logic.commands.EditTutorCommand;
 import seedu.address.logic.commands.EditTutorCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -32,6 +34,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditScheduleDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.ScheduleBuilder;
@@ -104,6 +107,16 @@ public class AddressBookParserTest {
                 (AddScheduleCommand) parser.parseCommand(ScheduleUtil.getAddScheduleCommand(schedule));
         assertEquals(new AddScheduleCommand(INDEX_FIRST_PERSON, schedule.getStartTime(), schedule.getEndTime()),
                 command);
+    }
+
+    @Test
+    public void parseCommand_editSchedule() throws Exception {
+        Schedule schedule = new ScheduleBuilder().build();
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder(schedule).build();
+        EditScheduleCommand expectedCommand = (EditScheduleCommand) parser.parseCommand(EditScheduleCommand.COMMAND_WORD
+            + " " + INDEX_FIRST_SCHEDULE.getOneBased() + " "
+            + ScheduleUtil.getEditScheduleDescriptorDetails(descriptor));
+        assertEquals(new EditScheduleCommand(INDEX_FIRST_SCHEDULE, descriptor), expectedCommand);
     }
 
     @Test
