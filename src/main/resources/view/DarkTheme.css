@@ -120,6 +120,13 @@
     -fx-text-fill: white;
 }
 
+.calendar_header_label {
+    -fx-text-fill: "Segoe UI Semibold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #c21c1c;
+    -fx-text-alignment: center;
+}
+
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
@@ -140,6 +147,10 @@
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
+}
+
+.pane-without-border {
+     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .status-bar {

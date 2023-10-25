@@ -160,6 +160,18 @@ public class Event {
         return parentEvent.isPresent();
     }
 
+    /**
+     * Checks if parent Event's EventPeriod overlaps with the start and end dates(inclusive).
+     *
+     * @param start start date.
+     * @param end end date.
+     * @return true if the parent Event's EventPeriod overlaps with the start and end date.
+     */
+    public boolean occursBetweenDates(LocalDate start, LocalDate end) {
+        requireAllNonNull(start, end);
+        return getParentEvent().eventPeriod.isOverlapping(start, end);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

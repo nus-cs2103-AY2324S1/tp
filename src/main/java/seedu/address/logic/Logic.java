@@ -31,8 +31,11 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of events */
     ObservableList<Event> getEventList();
+
+    /** Returns an unmodifiable view of the filtered list of events for the week */
+    ObservableList<Event> getCurrentWeekEventList();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();

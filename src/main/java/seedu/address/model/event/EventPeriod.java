@@ -89,6 +89,19 @@ public class EventPeriod implements Comparable<EventPeriod> {
     }
 
     /**
+     * Checks if this EventPeriod overlaps with the given start date and end date.
+     *
+     * @param start start date.
+     * @param end end date.
+     * @return True if there is an overlap, false otherwise.
+     */
+    public boolean isOverlapping(LocalDate start, LocalDate end) {
+        requireAllNonNull(start, end);
+
+        return this.start.toLocalDate().isAfter(end) || this.end.toLocalDate().isBefore(start);
+    }
+
+    /**
      * Checks if a specified {@code @LocalDateTime} is within the {@code @EventPeriod}.
      *
      * @param dateTime the specified {@code @LocalDateTime}.
