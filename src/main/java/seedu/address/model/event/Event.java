@@ -3,6 +3,8 @@ package seedu.address.model.event;
 
 import static seedu.address.model.event.EventTime.NULL_EVENT_TIME;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -14,6 +16,9 @@ import seedu.address.model.person.Name;
  * Represents an Event in the address book.
  */
 public abstract class Event {
+
+    public static final String START_TIME_CONSTRAINTS = "You cannot enter a time that is before the current time!";
+    public static final String END_TIME_CONSTRAINTS = "You cannot enter an end time that is before the start time!";
 
     private Set<Name> names;
     private EventDate startDate;
@@ -135,5 +140,35 @@ public abstract class Event {
 
     public void updateGroups() {
         this.groups = this.groups;
+    }
+
+    /**
+     * Returns true if the event is overdue.
+     */
+    public boolean isOverDue() {
+        if (!hasStartTime() && !hasEndTime()) {
+            if (LocalDateTime.now().isBefore(this.getStartDate().getDate().atTime(LocalTime.MAX))) {
+                return false;
+            }
+            return true;
+        } else if (!hasStartTime()) {
+            if (LocalDateTime.now().isBefore(this.getEndDate().getDate()
+                    .atTime(this.getEndTime().getEventTime()))) {
+                return false;
+            }
+            return true;
+        } else if (!hasEndTime()) {
+            if (LocalDateTime.now().isBefore(this.getStartDate().getDate()
+                    .atTime(this.getStartTime().getEventTime()))) {
+                return false;
+            }
+            return true;
+        } else {
+            if (LocalDateTime.now().isBefore(this.getStartDate().getDate()
+                    .atTime(this.getStartTime().getEventTime()))) {
+                return false;
+            }
+            return true;
+        }
     }
 }

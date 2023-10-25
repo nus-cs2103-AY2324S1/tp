@@ -137,6 +137,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         // Get persons per group
         Event targetEvent = removePersonsInGroups(event);
         this.events.addEvent(targetEvent);
+        sort();
     }
 
     public void deleteEvent(Event event) {
@@ -209,5 +210,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    /**
+     * Sorts the list of events.
+     */
+    public void sort() {
+        this.events.sort();
     }
 }

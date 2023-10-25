@@ -53,6 +53,7 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
             meetingEndTime = ParserUtil.parseEventTime(argMultimap.getValue(PREFIX_END_TIME).get());
         }
 
+
         Meeting meeting = new Meeting(meetingName, eventDate,
                 Optional.of(meetingStartTime), Optional.of(meetingEndTime), nameList, groupList);
 

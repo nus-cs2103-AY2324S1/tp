@@ -57,6 +57,8 @@ public class AddMeetingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        CommandUtil.verifyEventTimes(this.toAdd);
+
         Set<Name> invalidNames = model.findInvalidNames(this.toAdd.getNames());
 
         if (!invalidNames.isEmpty()) {

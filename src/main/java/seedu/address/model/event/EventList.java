@@ -69,4 +69,11 @@ public class EventList {
             throw new EventNotFoundException();
         }
     }
+
+    /**
+     * Sorts the list of events.
+     */
+    public void sort() {
+        this.internalList.sort(new EventComparator());
+    }
 }
