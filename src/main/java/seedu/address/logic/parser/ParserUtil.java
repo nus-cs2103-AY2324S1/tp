@@ -12,6 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ImpossibleIndexException;
 import seedu.address.logic.parser.exceptions.MissingIndexException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.month.DeleteMonth;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LicencePlate;
@@ -219,5 +220,14 @@ public class ParserUtil {
             throw new ParseException(Company.MESSAGE_CONSTRAINTS);
         }
         return new Company(trimmedCompany);
+    }
+
+    public static DeleteMonth parseDeleteMonth(String deleteMonth) throws ParseException {
+        requireNonNull(deleteMonth);
+        String trimmedDeleteMonth = deleteMonth.trim();
+        if (!DeleteMonth.isValidDeleteMonth(trimmedDeleteMonth)) {
+            throw new ParseException(DeleteMonth.MESSAGE_CONSTRAINTS);
+        }
+        return new DeleteMonth(trimmedDeleteMonth);
     }
 }

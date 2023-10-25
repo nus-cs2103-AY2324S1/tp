@@ -17,5 +17,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_POLICY_NUMBER = new Prefix("pn/");
     public static final Prefix PREFIX_POLICY_ISSUE_DATE = new Prefix("pi/");
     public static final Prefix PREFIX_POLICY_EXPIRY_DATE = new Prefix("pe/");
-
+    public static final Prefix PREFIX_DELETE_MONTH = new Prefix("dm/");
 }
