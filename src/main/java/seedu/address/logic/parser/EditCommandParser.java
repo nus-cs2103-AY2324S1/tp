@@ -49,7 +49,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_LEAD, PREFIX_TELEGRAM, PREFIX_PROFESSION, PREFIX_INCOME, PREFIX_DETAILS);
+                PREFIX_LEAD, PREFIX_TELEGRAM, PREFIX_PROFESSION, PREFIX_INCOME, PREFIX_DETAILS);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -103,5 +103,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }
