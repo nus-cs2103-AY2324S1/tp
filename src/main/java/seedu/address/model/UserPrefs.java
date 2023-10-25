@@ -51,7 +51,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public ShortcutSettings getShortcutSettings() { return shortcutSettings; }
+    public ShortcutSettings getShortcutSettings() {
+        return shortcutSettings;
+    }
 
     public void setShortcutSettings(ShortcutSettings shortcutSettings) {
         requireNonNull(shortcutSettings);

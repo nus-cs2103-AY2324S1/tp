@@ -1,10 +1,4 @@
 package seedu.address.logic.commands;
-
-import org.junit.jupiter.api.Test;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,6 +6,11 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 
 public class AddShortcutCommandTest {
 
@@ -23,7 +22,7 @@ public class AddShortcutCommandTest {
 
     @Test
     public void execute_newMapping_success() {
-        AddShortcutCommand addShortcutCommand= new AddShortcutCommand(new ShortcutAlias("del"),
+        AddShortcutCommand addShortcutCommand = new AddShortcutCommand(new ShortcutAlias("del"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
 
         String expectedMessage = String.format(AddShortcutCommand.MESSAGE_SUCCESS, "del --> delete");
@@ -41,10 +40,10 @@ public class AddShortcutCommandTest {
         modelWithExistingMapping.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
 
-        AddShortcutCommand addShortcutCommand= new AddShortcutCommand(new ShortcutAlias("del"),
+        AddShortcutCommand addShortcutCommand = new AddShortcutCommand(new ShortcutAlias("del"),
                 new CommandWord(ListCommand.COMMAND_WORD));
 
-        String expectedMessage = String.format(AddShortcutCommand.MESSAGE_SUCCESS,  "del --> list")
+        String expectedMessage = String.format(AddShortcutCommand.MESSAGE_SUCCESS, "del --> list")
                 + "\n"
                 + String.format(AddShortcutCommand.MESSAGE_REPLACED, "del --> delete");
 

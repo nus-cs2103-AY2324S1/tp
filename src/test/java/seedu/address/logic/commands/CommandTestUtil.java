@@ -86,7 +86,7 @@ public class CommandTestUtil {
 
     public static final ShortcutAlias SHORTCUT_ALIAS_1 = new ShortcutAlias("del");
     public static final ShortcutAlias SHORTCUT_ALIAS_2 = new ShortcutAlias("li");
-    public static final  CommandWord COMMAND_WORD_1 = new CommandWord(DeleteCommand.COMMAND_WORD);
+    public static final CommandWord COMMAND_WORD_1 = new CommandWord(DeleteCommand.COMMAND_WORD);
     public static final CommandWord COMMAND_WORD_2 = new CommandWord(ListCommand.COMMAND_WORD);
 
     public static final String SHORTCUT_DESC_VALID = " " + PREFIX_SHORTCUT + SHORTCUT_ALIAS_1;

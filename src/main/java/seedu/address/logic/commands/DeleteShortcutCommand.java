@@ -47,7 +47,7 @@ public class DeleteShortcutCommand extends Command {
                 message.append(String.format(MESSAGE_SUCCESS, shortcutAlias + " --> " + feedback));
             }
         });
-       return new CommandResult(message.toString());
+        return new CommandResult(message.toString());
     }
 
     @Override

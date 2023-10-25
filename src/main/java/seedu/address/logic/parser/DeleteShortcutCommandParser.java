@@ -1,14 +1,15 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.DeleteShortcutCommand;
-import seedu.address.logic.commands.ShortcutAlias;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHORTCUT;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SHORTCUT;
+import seedu.address.logic.commands.DeleteShortcutCommand;
+import seedu.address.logic.commands.ShortcutAlias;
+import seedu.address.logic.parser.exceptions.ParseException;
+
 /**
  * Parses input arguments and creates a new DeleteShortcutCommand object
  */
@@ -29,10 +30,11 @@ public class DeleteShortcutCommandParser implements ParserBasic<DeleteShortcutCo
 
                 || !argMultimap.getPreamble().isEmpty()) {
 
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteShortcutCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteShortcutCommand.MESSAGE_USAGE));
         }
         List<String> stringList = argMultimap.getAllValues(PREFIX_SHORTCUT);
-        List<ShortcutAlias> shortcutList  = new ArrayList<>();
+        List<ShortcutAlias> shortcutList = new ArrayList<>();
         for (String str : stringList) {
             shortcutList.add(ParserUtil.parseShortcutAlias(str));
         }

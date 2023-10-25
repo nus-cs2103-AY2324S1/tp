@@ -26,7 +26,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.person.PersonType;
 
 /**
@@ -48,6 +47,9 @@ public class AddressBookParser {
 
     private final Model model;
 
+    /**
+     * Constructs an AddressBookParser with a reference to the {@code Model}
+     */
     public AddressBookParser(Model model) {
         requireNonNull(model);
         this.model = model;

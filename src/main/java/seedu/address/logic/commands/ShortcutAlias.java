@@ -3,11 +3,15 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a default command keyword.
+ * Guarantees: immutable; is valid as declared in {@link #isValidShortcutAlias(String)}
+ */
 public class ShortcutAlias {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Aliases should only contain alphanumeric characters and should not be blank" +
-                    "It should also not match any default command keywords.";
+            "Aliases should only contain alphanumeric characters and should not be blank"
+                    + "It should also not match any default command keywords.";
 
     /*
      * The first character of the shortcut alias must not be a whitespace,
@@ -29,7 +33,7 @@ public class ShortcutAlias {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid shortcut alias.
      */
     public static boolean isValidShortcutAlias(String test) {
         return test.matches(VALIDATION_REGEX) && !CommandWord.isValidCommandWord(test);
