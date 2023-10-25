@@ -24,11 +24,9 @@ Given below are my contributions to the project.
 
 * **Contributions to the UG**:
   * Added documentation for the features `gather`
-
 * **Contributions to the DG**:
   * Added target user profile, value proposition, user stories and user cases.
   * Added implementation details for gather.
-
 * **Contributions to team-based tasks**:
   * Release v1.2 JAR file .
   * Added screenshots into project notes document.
