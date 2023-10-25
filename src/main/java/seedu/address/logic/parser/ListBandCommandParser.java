@@ -6,6 +6,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ListBandCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.band.Band;
+import seedu.address.model.band.BandName;
 import seedu.address.model.band.BandNameContainsKeywordsPredicate;
 
 import java.util.function.Predicate;
@@ -18,7 +19,8 @@ public class ListBandCommandParser implements Parser<ListBandCommand> {
     @Override
     public ListBandCommand parse(String args) throws ParseException {
         try {
-            Predicate<Band> bandNamePredicate = new BandNameContainsKeywordsPredicate(ParserUtil.parseBandName(args));
+            BandName bandName = ParserUtil.parseBandName(args);
+            Predicate<Band> bandNamePredicate = new BandNameContainsKeywordsPredicate(bandName.toString());
             return new ListBandCommand(bandNamePredicate);
         } catch (ParseException pe) {
             throw new ParseException(
