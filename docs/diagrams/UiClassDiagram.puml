@@ -49,6 +49,7 @@ FlashcardBox --|> UiPart
 FlashcardBoxNoButton --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+MainWindow --|> UiPart
 
 FlashcardBox ..> Model
 FlashcardBoxNoButton ..> Model
