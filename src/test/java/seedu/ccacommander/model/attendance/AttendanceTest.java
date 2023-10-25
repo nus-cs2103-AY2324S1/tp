@@ -3,7 +3,6 @@ package seedu.ccacommander.model.attendance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_AURORA;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AMY;
