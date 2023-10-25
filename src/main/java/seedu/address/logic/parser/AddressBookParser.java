@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddShortcutCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -23,6 +24,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.PersonType;
 
 /**
@@ -42,11 +45,11 @@ public class AddressBookParser {
             "(?<commandWord>\\S+)\\s(?<personType>-\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
-    private final ShortcutSettings shortcutSettings;
+    private final Model model;
 
-    public AddressBookParser(ShortcutSettings shortcutSettings) {
-        requireNonNull(shortcutSettings);
-        this.shortcutSettings = shortcutSettings;
+    public AddressBookParser(Model model) {
+        requireNonNull(model);
+        this.model = model;
     }
 
     /**
@@ -61,7 +64,7 @@ public class AddressBookParser {
         final Matcher matcherPersonType = COMPLEX_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (matcherPersonType.matches()) {
-            final String commandWord = shortcutSettings.getShortcut(matcherPersonType.group("commandWord"));
+            final String commandWord = model.getShortcut(matcherPersonType.group("commandWord"));
             final String personTypeWord = matcherPersonType.group("personType");
             final String arguments = matcherPersonType.group("arguments");
 
@@ -102,7 +105,7 @@ public class AddressBookParser {
 
             }
         } else if (matcherBasic.matches()) {
-            final String commandWord = shortcutSettings.getShortcut(matcherBasic.group("commandWord"));
+            final String commandWord = model.getShortcut(matcherBasic.group("commandWord"));
             final String arguments = matcherBasic.group("arguments");
 
             // Note to developers: Change the log level in config.json to enable lower level
@@ -123,6 +126,9 @@ public class AddressBookParser {
 
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
+
+            case AddShortcutCommand.COMMAND_WORD:
+                return new AddShortcutCommandParser().parse(arguments);
 
             case AddCommand.COMMAND_WORD:
             case EditCommand.COMMAND_WORD:

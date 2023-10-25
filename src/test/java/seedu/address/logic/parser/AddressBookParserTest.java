@@ -28,6 +28,7 @@ import seedu.address.logic.commands.FindPredicateMap;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.person.Specialist;
@@ -42,7 +43,7 @@ import seedu.address.testutil.SpecialistUtil;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser(new ShortcutSettings());
+    private final AddressBookParser parser = new AddressBookParser(new ModelManager());
 
     @Test
     public void parseCommand_add_patient() throws Exception {

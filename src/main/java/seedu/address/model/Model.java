@@ -45,6 +45,9 @@ public interface Model {
      */
     void setShortcutSettings(ShortcutSettings shortcutSettings);
 
+    String getShortcut(String alias);
+    String registerShortcut(String alias, String keyword);
+
     /**
      * Returns the user prefs' address book file path.
      */
