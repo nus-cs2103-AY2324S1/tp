@@ -97,7 +97,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</box>
+
 
 How the `Logic` component works:
 
@@ -278,7 +278,25 @@ _{Explain here how the data archiving feature will be implemented}_
 2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future update.
 3. The state of the parser, rather than the app is used to reduce the chances of accidental clears.
 
+### Interview Feature
 
+#### Purpose
+
+As a hiring management software, we need to perform CRUD operations for the interviews of applicants. This allows us to add new 
+interviews, view existing interviews, edit current interviews, and delete interviews. As we aim so make our program intuitive 
+and efficient, the UI design and data structure used to store these interview objects were crucial considerations in the 
+implementation process.
+
+#### Implementation
+
+The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`.
+The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in 
+an interview (out of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and 
+`DeleteInterviewCommand`. These are implementation in a largely similar manner to the `Applicant` class. The main difference is in how 
+an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the 
+applicant index as well as the chosen interview index.
+
+#### Design Considerations
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -606,7 +624,6 @@ Given below are instructions to test the app manually.
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </box>
 
 ### Launch and shutdown
