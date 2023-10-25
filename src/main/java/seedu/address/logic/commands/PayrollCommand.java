@@ -141,6 +141,7 @@ public class PayrollCommand extends Command {
             return index.equals(otherPayrollCommand.index);
         }
 
+        assert this.name != null;
         return this.name.equals(otherPayrollCommand.name);
     }
 }
