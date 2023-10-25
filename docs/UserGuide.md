@@ -27,9 +27,9 @@ CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to man
 
    * `list` : Lists all members and events.
 
-   * `create /member n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278` : Creates a member named `CHU WEI RONG` in CCACommander.
+   * `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278` : Creates a member named `CHU WEI RONG` in CCACommander.
 
-   * `delete /member 3` : Deletes the 3rd member shown in the current list.
+   * `deleteMember 3` : Deletes the 3rd member shown in the current list.
 
 1. Refer to the [Features](#features) below for details of each command.
 
