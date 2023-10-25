@@ -204,24 +204,23 @@ practise 10
 ### Practise Flashcards: `solve`
 Solves the question at the given index
 
-Format: `solve INDEX d/DIFFICULTY`
+Format: `solve INDEX`
 
 #### Acceptable values for each parameters:
 1. Index must be positive integer
 2. Index cannot exceed size of the deck
-3. Difficulty must be either `easy`, `medium`, `hard`.
 
 #### Examples:
 ```
-solve 1 d/ easy
-(marks the priority of question to be easy)
+solve 1
 ```
 #### Expected outputs:
 ```
 solve 1 
-"Solved Question 1 (Difficulty level: easy)"
+"Solved Question 1: What pipline protocols are covered
+Answer:2"
 
-solve 10 d/easy
+solve 10
 "The card index provided is invalid"
 ```
 
@@ -231,6 +230,40 @@ solve 10 d/easy
 
 2. Successful Output
    ![result of practise command](./images/UserGuide/1.3_solve_ans.png)
+
+
+### Solve Flashcards: set
+Setting the difficulty of a flashcard
+
+Format: set INDEX DIFFICULTY
+
+#### Acceptable values for each parameters:
+1. Index must be positive integer
+2. Index cannot exceed size of the deck
+3. Difficulty must be either ‘easy’, ‘medium’, ‘hard’
+
+#### Examples:
+```
+set 1
+```
+   
+#### Expected outputs:
+```
+set 1 d/ easy
+"Set Difficulty for Question 1 (Diffculty Level: easy)
+
+set 10 d/ easy
+"The card index provided is invalid"
+```
+
+#### Usage:
+1. User Input
+   ![usage of practise command](./images/UserGuide/1.3_set.png)
+
+2. Successful Output
+   ![result of practise command](./images/UserGuide/1.3_set_ans.png)
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
