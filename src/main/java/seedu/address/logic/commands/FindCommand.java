@@ -9,6 +9,8 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TeachingModPredicate;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 /**
@@ -26,20 +28,26 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final Predicate<Person> predicate;
+//    private final Predicate<Person> predicate;
+    private final ArrayList<Predicate<Person>> predicateList = new ArrayList<>();
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
-    }
+//    public FindCommand(NameContainsKeywordsPredicate predicate) {
+//        this.predicate = predicate;
+//    }
+//
+//    public FindCommand(TeachingModPredicate predicate) {
+//        this.predicate = predicate;
+//    }
 
-    public FindCommand(TeachingModPredicate predicate) {
-        this.predicate = predicate;
+    public FindCommand(ArrayList<Predicate<Person>> predicates) {
+        this.predicateList.addAll(predicates);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        Predicate<Person> combinedPredicate = predicateList.stream().reduce(x -> true, Predicate::and);
+        model.updateFilteredPersonList(combinedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -56,13 +64,13 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return predicateList.equals(otherFindCommand.predicateList);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("predicate", predicateList)
                 .toString();
     }
 }

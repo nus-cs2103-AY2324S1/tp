@@ -3,24 +3,24 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Mod;
 
 /**
  * Tests that a {@code Person}'s {@code Mods} matches any of the keywords given.
  */
 public class TeachingModPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+    private final List<Mod> mods;
 
-    public TeachingModPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public TeachingModPredicate(List<Mod> mods) {
+        this.mods = mods;
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> person.getMods().stream()
-                        .anyMatch(mod -> StringUtil.containsWordIgnoreCase(mod.toString(), keyword)));
+        return mods.stream()
+                .anyMatch(predicateMod -> person.getMods().stream()
+                        .anyMatch(predicateMod::equals));
     }
 
     @Override
@@ -35,11 +35,11 @@ public class TeachingModPredicate implements Predicate<Person> {
         }
 
         TeachingModPredicate otherNameContainsKeywordsPredicate = (TeachingModPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        return mods.equals(otherNameContainsKeywordsPredicate.mods);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
+        return new ToStringBuilder(this).add("keywords", mods).toString();
     }
 }
