@@ -35,9 +35,8 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
    - Delete normal contact
    - Delete emergency contact
    - Undo last action [Coming Soon]
-   - Receive actual birthday notification 
-   - Receive upcoming birthday notification [Coming Soon]
-   - Opt out notification
+   - Receive upcoming birthday notifications
+   - Opt out notification [Coming soon]
    - Track payment [Coming Soon]
    - Change language [Coming Soon]
 3. Troubleshooting / FAQ
@@ -290,18 +289,18 @@ Examples:
   * Indicates that contact at index 1 is no longer an emergency contact
 
 ###  Undo last action [Coming Soon]
-###  Receive actual birthday notification
 
-Receives a pop-up notification that contains a list of people in CampusConnect whose birthdays have arrived.
+###  Receive upcoming birthday notifications
 
-Upon launching the application, if any of your contacts’ birthday in CampusConnect have arrived, you should see the following pop-up notification: <br>
+Receives a pop-up notification for each contact in CampusConnect whose birthday is within a day.
+
+Upon launching the application, if any of your contacts’ birthday in CampusConnect is coming within a day, you should see the following pop-up notification: <br>
 
 ![birthdayNotification](images/birthdayNotification.png)
 
 The notification will contain the names of the birthday individuals saved in CampusConnect.
 
-###  Receive upcoming birthday notification [Coming Soon]
-###  Opt out notification
+###  Opt out notification [Coming soon]
 
 Opts you out from receiving birthday related notifications, such as turning off actual birthday notification feature.
 
