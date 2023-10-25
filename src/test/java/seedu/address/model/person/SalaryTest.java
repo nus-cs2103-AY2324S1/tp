@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,21 +103,35 @@ class SalaryTest {
 
     @Test
     public void getNetSalaryString() {
+        DecimalFormat df = new DecimalFormat("0.00");
         // null benefits and deductions
-        assertTrue(salary.getNetSalaryString().equals("Net Salary: $1500.00\t"
-            + "Basic Pay: $1500.00\n" + "Total Deductions: $0.00\t" + "Total Benefits: $0.00"));
+        assertTrue(salary.getNetSalaryString().equals(String.format("%1$-40s %2$-40s\n%3$-40s %4$-40s",
+            "Net Salary: $" + df.format(1500.0),
+            "Basic Pay: $" + df.format(1500.0),
+            "Total Deductions: $" + df.format(0.0),
+            "Total Benefits: $" + df.format(0.0))));
 
         // with benefits
-        assertTrue(salaryWithBenefit.getNetSalaryString().equals("Net Salary: $7000.00\t"
-            + "Basic Pay: $1500.00\n" + "Total Deductions: $0.00\t" + "Total Benefits: $5500.00"));
+        assertTrue(salaryWithBenefit.getNetSalaryString().equals(String.format("%1$-40s %2$-40s\n%3$-40s %4$-40s",
+            "Net Salary: $" + df.format(7000.0),
+            "Basic Pay: $" + df.format(1500.0),
+            "Total Deductions: $" + df.format(0.0),
+            "Total Benefits: $" + df.format(5500.0))));
 
         // with deductions
-        assertTrue(salaryWithDeduction.getNetSalaryString().equals("Net Salary: $1280.00\t"
-            + "Basic Pay: $1500.00\n" + "Total Deductions: $220.00\t" + "Total Benefits: $0.00"));
+        assertTrue(salaryWithDeduction.getNetSalaryString().equals(String.format("%1$-40s %2$-40s\n%3$-40s %4$-40s",
+            "Net Salary: $" + df.format(1280.0),
+            "Basic Pay: $" + df.format(1500.0),
+            "Total Deductions: $" + df.format(220.0),
+            "Total Benefits: $" + df.format(0.0))));
 
         // with benefits and deductions
-        assertTrue(salaryWithBenefitAndDeduction.getNetSalaryString().equals("Net Salary: $6780.00\t"
-            + "Basic Pay: $1500.00\n" + "Total Deductions: $220.00\t" + "Total Benefits: $5500.00"));
+        assertTrue(salaryWithBenefitAndDeduction.getNetSalaryString().equals(
+            String.format("%1$-40s %2$-40s\n%3$-40s %4$-40s",
+            "Net Salary: $" + df.format(6780.0),
+            "Basic Pay: $" + df.format(1500.0),
+            "Total Deductions: $" + df.format(220.0),
+            "Total Benefits: $" + df.format(5500.0))));
     }
 
     @Test
