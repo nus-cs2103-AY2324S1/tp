@@ -272,6 +272,53 @@ The following activity diagram shows how the reschedule operation works:
 
 ![RescheduleCommandActivityDiagram](images/RescheduleCommandActivityDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
+### **Undo/Redo Feature**
+
+[UndoCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/UndoCommandParser.java
+[UndoCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/UndoCommand.java
+[RedoCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/RedoCommandParser.java
+[RedoCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/RedoCommand.java
+
+For _Undo/Redo_ command, the noteworthy classes are:
+- [`UndoCommandParser.java`][UndoCommandParser.java] - For parsing the arguments to `UndoCommand`.
+- [`RedoCommandParser.java`][UndoCommandParser.java] - For parsing the arguments to `RedoCommand`.
+- [`UndoCommand.java`][UndoCommand.java] - For execution.
+- [`RedoCommand.java`][UndoCommand.java] - For execution.
+
+The following exceptions may be thrown during this process, namely:
+- ParseException for additional arguments with undo/redo command
+- CommandException for attempting to execute undo when there is no command to undo
+- CommandException for attempting to execute redo when there is no undone command to redo
+
+Given below is an example usage scenario of how the _Undo_ command executes.
+
+-- user input --  
+Step 1. User executes a valid `add` command.
+
+-- `AddCommand` --  
+Step 2. Adds the `add` command as recent command.  
+Step 3. Adds the added `person` as new patient.
+
+-- user input --  
+Step 4. User executes `undo` command.
+
+-- `UndoCommand` --  
+Step 5. Verify that there is a command to undo.  
+Step 6. Undo the most recent command (deletes the new patient).
+
+-- `RedoCommand` --  
+Step 7. Verify that there is an undone command to undo.  
+Step 8. Redo the most recent undone command (restores the deleted patient).
+
+The execution can be seen in the activity diagram given below.
+
+_Activity Diagram for a typical `undo` command_  
+![UndoCommandActivityDiagram.png](images/UndoCommandActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
+
 
 ### \[Proposed\] Data archiving
 
