@@ -154,6 +154,16 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Interactions Feature
+
+As a CRM, taking notes of previous interactions and their different outcomes is one of the most imporant features.
+
+This section will describe in details the current implementation and design considerations of the interactions feature.
+
+
+
+#### Design Considerations
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
