@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -21,7 +20,8 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private final AddressBook addressBook;
+    private AddressBook addressBook;
+    private AddressBook prevAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Doctor> filteredDoctors;
     private final FilteredList<Patient> filteredPatients;
@@ -39,10 +39,14 @@ public class ModelManager implements Model {
         filteredDoctors = new FilteredList<>(this.addressBook.getDoctorList());
         filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
     }
-
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
+
+    private void updateBackup() {
+        this.prevAddressBook = addressBook;
+    }
+
 
     //=========== UserPrefs ==================================================================================
 
@@ -79,21 +83,6 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    @Override
-    public Path getPrevFilePath() {
-        return userPrefs.getPrevFilePath();
-    }
-
-    @Override
-    public void setToPrevFilePath() throws IOException {
-        userPrefs.setToPrevFilePath();
-    }
-
-    @Override
-    public void saveFilePath() throws IOException {
-        userPrefs.saveFilePath();
-    }
-
     //=========== AddressBook ================================================================================
 
     @Override
@@ -105,6 +94,7 @@ public class ModelManager implements Model {
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
+
 
     @Override
     public boolean hasPerson(Person person) {
@@ -121,8 +111,10 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         if (target instanceof Patient) {
+            updateBackup();
             addressBook.removePatient((Patient) target);
         } else if (target instanceof Doctor) {
+            updateBackup();
             addressBook.removeDoctor((Doctor) target);
         }
 
@@ -131,8 +123,10 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         if (person instanceof Patient) {
+            updateBackup();
             addressBook.addPatient((Patient) person);
         } else if (person instanceof Doctor) {
+            updateBackup();
             addressBook.addDoctor((Doctor) person);
         }
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -142,8 +136,10 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         if (target instanceof Patient && editedPerson instanceof Patient) {
+            updateBackup();
             addressBook.setPatient((Patient) target, (Patient) editedPerson);
         } else if (target instanceof Doctor && editedPerson instanceof Doctor) {
+            updateBackup();
             addressBook.setDoctor((Doctor) target, (Doctor) editedPerson);
         }
     }
@@ -181,7 +177,13 @@ public class ModelManager implements Model {
         filteredPatients.setPredicate(predicate);
         filteredDoctors.setPredicate(predicate);
     }
-
+    @Override
+    public void undo() {
+        if (this.prevAddressBook == null) {
+            this.prevAddressBook = new AddressBook();
+        }
+        this.addressBook = this.prevAddressBook;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
