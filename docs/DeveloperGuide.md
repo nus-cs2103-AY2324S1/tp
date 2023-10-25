@@ -159,6 +159,64 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Gather Emails Feature
+
+The **Gather Emails** feature in our software system is a critical functionality designed to efficiently collect email addresses. This feature is facilitated through the `GatherCommand` class, which plays a central role in the process.
+
+#### Implementation Overview
+
+The `GatherCommand` class is instantiated by the `GatherCommandParser`, which parses user input commands. The `GatherCommandParser` class implements the following operations:
+
+- **`GatherCommandParser#parse(String args)` — Checks the prefixes (fp/ and t/) and instantiates `GatherCommand` accordingly. It passes either a `GatherEmailByFinancialPlan` or a `GatherEmailByTag` object, both implementations of the `GatherEmailPrompt` interface.
+
+The `GatherCommand` takes in a `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand` class implements the following operations:
+
+- **`GatherCommand#GatherCommand(GatherEmailPrompt prompt)` — Constructor that initializes the command with the provided `GatherEmailPrompt` object.
+- **`GatherCommand#execute()` —  Executes the gathering operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`.
+
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data. It contains the following method:
+
+- **`ModelManager#gatherEmails(GatherEmailPrompt prompt)` —  Carries out the gathering operation by calling `AddressBook#gatherEmails(GatherEmailPrompt prompt)`.
+
+These operations are exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
+
+The `UniquePersonsList` class maintains a list of unique persons. Additionally, it implements the following operation:
+
+- **`UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or `Person#gatherEmailsContainsFinancialPlan(String prompt)`.
+
+- **`Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of the name of any Tag in the `Set<Tag>` of the current person.
+- **`Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of the name of any Financial Plan in the `Set<Tag>` of the current person.
+
+This is the class diagram for the gather command:
+
+<img src="images/GatherClassDiagram.png" width="500"/>
+
+**Aspect: Usage Scenario:**
+
+**Scenario 1:**
+User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
+
+**Scenario 2:**
+User enters a gather `t/Elderly`. The `GatherEmailByTag` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByTag#gatherEmails(Person person)`.
+
+The following sequence diagram shows how the gather operation works:
+
+<img src="images/GatherSequenceDiagram.png" width="700"/>
+
+#### Design Considerations
+
+**Aspect: How Gather Executes**
+
+**Alternative 1 (Current Choice):** User can only search by one Financial Plan or Tag.
+- **Pros:** Easy to implement. Limits the potential for bugs.
+- **Cons:** Limited filtering options. Hard to scale to gather by other fields.
+
+**Alternative 2:** User can search by multiple Financial Plans or Tags.
+- **Pros:** More filtering options. Easy to scale to gather by other fields.
+- **Cons:** Introduces more complexity and requires additional error handling.
+
+_{more aspects and alternatives to be added}_
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -222,7 +280,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/CommitActivityDiagram.png" width="400" />
 
 #### Design considerations:
 

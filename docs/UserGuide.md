@@ -166,17 +166,19 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Gathering clients' emails by financial plan: `gather`
+### Gathering clients' emails by financial plan or tag: `gather`
 
-Gathers all the emails of persons with a desired financial plan.
+Gathers all the emails of persons with a desired financial plan or tag. 
 
-Format: `gather PROMPT`
+Format: `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]`
 
-* The search is case-sensitive. e.g `fp` will not match `Fp`
-* Persons matching at least one financial plan will be returned (i.e. `OR` search).
+* Only either Financial Plan or Tag can be searched at once.
+* The search is case-insensitive. e.g `financial` will match `FINANCIAL`
+* Persons emails return when the prompt matches a substring of at least one of their financial plan or tag names.
 
 Examples:
-* `gather Financial Plan A`
+* `gather fp/Financial Plan A`
+* `gather t/Elderly`
 
 Successful Output:
 `lowjunyu@gmail.com johndoe@gmail.com`
@@ -261,9 +263,9 @@ _Details coming soon ..._
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [t/TAG]…​` <br> e.g., `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​` |
 | **Clear**  | `clear`                                                                                                                                                                                                                 |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
-| **Edit**   | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                                     |
+| **Edit**   | `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL PLAN] [t/TAG]…​`<br> e.g.,`edit 1 n/john doe a/23 woodlands ave 123`                                 |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                              |
-| **Gather** | `gather FINANCIAL_PLAN_NAME` <br> e.g., `gather Basic Insurance Plan`                                                                                                                                                   |
+| **Gather** | `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]` <br> e.g., `gather fp/Basic Insurance Plan`                                                                                                                            |
 | **List**   | `list`                                                                                                                                                                                                                  |
 | **Help**   | `help`                                                                                                                                                                                                                  |
 | **Sort**   | `sort`                                                                                                                                                                                                                  |
