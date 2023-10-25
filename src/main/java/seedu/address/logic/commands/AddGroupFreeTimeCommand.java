@@ -47,7 +47,7 @@ public class AddGroupFreeTimeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.hasGroup(toAdd)) {
-            model.addFreeTimeToGroup(toAdd, toAddFreeTime);
+            model.addTimeToGroup(toAdd, toAddFreeTime);
         } else {
             throw new CommandException(MESSAGE_NO_GROUP_WITH_NAME_FOUND);
         }

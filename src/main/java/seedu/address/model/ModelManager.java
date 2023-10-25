@@ -244,19 +244,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+    public void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAddPerson);
         Person person = addressBook.getPerson(toAddPerson.fullName);
-        person.addFreeTime(toAddFreeTime);
+        person.addFreeTime(toAddTime);
         forceUpdateList();
     }
 
     @Override
-    public void deleteFreeTimeFromPerson(Name personName,
-                                           ArrayList<TimeInterval> toDeleteFreeTime) throws CommandException {
+    public void deleteTimeFromPerson(Name personName,
+                                           ArrayList<TimeInterval> toDeleteTime) throws CommandException {
         requireNonNull(personName);
         Person person = addressBook.getPerson(personName.fullName);
-        person.deleteFreeTime(toDeleteFreeTime);
+        person.deleteFreeTime(toDeleteTime);
         forceUpdateList();
     }
 
@@ -278,22 +278,22 @@ public class ModelManager implements Model {
         return group;
     }
 
-    public FreeTime getFreeTimeFromPerson(Name personName) throws CommandException {
+    public TimeIntervalList getTimeFromPerson(Name personName) throws CommandException {
         requireNonNull(personName);
         Person person = addressBook.getPerson(personName.toString());
-        return person.getFreeTime();
+        return person.getTime();
     }
 
-    public void addFreeTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+    public void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAdd);
         Group groupToAdd = addressBook.getGroup(toAdd.getGroupName());
-        groupToAdd.addFreeTime(toAddFreeTime);
+        groupToAdd.addTime(toAddTime);
     }
 
-    public FreeTime getFreeTimeFromGroup(Group group) throws CommandException {
+    public TimeIntervalList getTimeFromGroup(Group group) throws CommandException {
         requireNonNull(group);
         Group toAdd = addressBook.getGroup(group.getGroupName());
-        return toAdd.getFreeTime();
+        return toAdd.getTime();
     }
 
 

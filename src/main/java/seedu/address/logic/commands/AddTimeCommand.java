@@ -49,7 +49,7 @@ public class AddTimeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.hasPerson(toAddPerson)) {
-            model.addFreeTimeToPerson(toAddPerson, toAddFreeTime);
+            model.addTimeToPerson(toAddPerson, toAddFreeTime);
         } else {
             throw new CommandException("Person does not exists");
         }

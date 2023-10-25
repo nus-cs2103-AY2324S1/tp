@@ -62,7 +62,7 @@ public class DeleteTimeCommand extends Command{
 //            //delete time from person
 //        }
         if (model.hasPerson(personName)) {
-            model.deleteFreeTimeFromPerson(personName, timeIntervalsToDelete);
+            model.deleteTimeFromPerson(personName, timeIntervalsToDelete);
         } else {
             throw new CommandException("Person does not exists");
         }

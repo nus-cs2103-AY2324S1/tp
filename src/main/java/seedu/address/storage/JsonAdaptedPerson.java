@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.FreeTime;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.group.GroupList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -58,7 +58,7 @@ class JsonAdaptedPerson {
         groupList.addAll(source.getGroups().toStream()
                 .map(JsonAdaptedGroup::new)
                 .collect(Collectors.toList()));
-        freeTimeList.addAll(source.getFreeTime().toStream()
+        freeTimeList.addAll(source.getTime().toStream()
                 .map(JsonAdaptedTime::new)
                 .collect(Collectors.toList()));
     }
@@ -98,12 +98,12 @@ class JsonAdaptedPerson {
             modelGroupList.add(group.toModelType());
         }
 
-        FreeTime modelFreeTimeList = new FreeTime();
+        TimeIntervalList modelTimeIntervalListList = new TimeIntervalList();
         for (JsonAdaptedTime freeTime : freeTimeList) {
-            modelFreeTimeList.addTime(freeTime.toModelType());
+            modelTimeIntervalListList.addTime(freeTime.toModelType());
         }
 
-        return new Person(modelName, modelPhone, modelEmail, modelGroupList, modelFreeTimeList);
+        return new Person(modelName, modelPhone, modelEmail, modelGroupList, modelTimeIntervalListList);
     }
 
 }
