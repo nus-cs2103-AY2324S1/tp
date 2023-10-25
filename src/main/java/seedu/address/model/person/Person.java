@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -38,6 +39,7 @@ public class Person {
      * Creates a {@code Person} given a PersonBuilder.
      */
     private Person(PersonBuilder builder) {
+        requireNonNull(builder);
         this.name = builder.name;
         this.phone = builder.phone;
         this.email = builder.email;
@@ -97,7 +99,7 @@ public class Person {
     }
 
     public Set<Interaction> getInteractions() {
-        return interactions;
+        return Collections.unmodifiableSet(interactions);
     }
 
     /**
@@ -189,6 +191,7 @@ public class Person {
          * Initializes the PersonBuilder with the data of {@code personToCopy}.
          */
         public PersonBuilder(Person personToCopy) {
+            requireNonNull(personToCopy);
             name = personToCopy.getName();
             phone = personToCopy.getPhone();
             email = personToCopy.getEmail();
