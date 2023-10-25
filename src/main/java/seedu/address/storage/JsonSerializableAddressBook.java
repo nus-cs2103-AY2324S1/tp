@@ -25,15 +25,17 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
 
+    private final List<JsonAdaptedGroup> groups = new ArrayList<>();
+
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons and meetings.
      * Extracted from the database
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("events") List<JsonAdaptedEvent> meetings) {
+                                       @JsonProperty("events") List<JsonAdaptedEvent> events) {
         this.persons.addAll(persons);
-        this.events.addAll(meetings);
+        this.events.addAll(events);
     }
 
     /**

@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_GROUPS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_PERSONS;
 
 import java.util.Collection;
@@ -19,6 +21,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditMeetingCommand;
 import seedu.address.logic.commands.EditMeetingCommand.EditMeetingDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
 /**
@@ -31,7 +34,8 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MEETING_NAME, PREFIX_DATE,
-                        PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_NAME, PREFIX_UNASSIGN_PERSONS);
+                        PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_NAME, PREFIX_UNASSIGN_PERSONS,
+                        PREFIX_GROUP, PREFIX_UNASSIGN_GROUPS);
 
         Index index;
 
@@ -65,6 +69,10 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
         parseNamesForEdit(argMultimap.getAllValues(PREFIX_UNASSIGN_PERSONS))
                 .ifPresent(editMeetingDescriptor::setUnassignPersons);
 
+        parseGroupsForEdit(argMultimap.getAllValues(PREFIX_GROUP)).ifPresent(editMeetingDescriptor::setGroups);
+        parseGroupsForEdit(argMultimap.getAllValues(PREFIX_UNASSIGN_GROUPS))
+                .ifPresent(editMeetingDescriptor::setUnassignGroups);
+
         if (!editMeetingDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
@@ -80,5 +88,15 @@ public class EditMeetingCommandParser implements Parser<EditMeetingCommand> {
         }
         Collection<String> nameSet = names.size() == 1 && names.contains("") ? Collections.emptySet() : names;
         return Optional.of(ParserUtil.parsePersonNames(nameSet));
+    }
+
+    private Optional<Set<Group>> parseGroupsForEdit(Collection<String> groups) throws ParseException {
+        assert groups != null;
+
+        if (groups.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> groupSet = groups.size() == 1 && groups.contains("") ? Collections.emptySet() : groups;
+        return Optional.of(ParserUtil.parseGroups(groupSet));
     }
 }

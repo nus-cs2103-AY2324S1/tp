@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Person;
 
 /**
  * Panel containing the list of events.
@@ -20,11 +21,14 @@ public class EventListPanel extends UiPart<Region> {
     @FXML
     private ListView<Event> eventListView;
 
+    private ObservableList<Person> personList;
+
     /**
      * Creates a {@code EventListPanel} with the given {@code ObservableList}.
      */
-    public EventListPanel(ObservableList<Event> eventList) {
+    public EventListPanel(ObservableList<Event> eventList, ObservableList<Person> personList) {
         super(FXML);
+        this.personList = personList;
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
     }
@@ -42,9 +46,9 @@ public class EventListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 if (event.isOverDue()) {
-                    setGraphic(new ExpiredEventCard(event, getIndex() + 1).getRoot());
+                    setGraphic(new ExpiredEventCard(personList, event,getIndex() + 1).getRoot());
                 } else {
-                    setGraphic(new EventCard(event, getIndex() + 1).getRoot());
+                    setGraphic(new EventCard(personList, event, getIndex() + 1).getRoot());
                 }
             }
         }

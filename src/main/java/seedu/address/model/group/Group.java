@@ -32,6 +32,10 @@ public class Group {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getGroupName() {
+        return groupName;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
