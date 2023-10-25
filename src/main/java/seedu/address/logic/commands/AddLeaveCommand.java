@@ -12,26 +12,26 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ANNUAL_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
 
 public class AddLeaveCommand extends Command {
     public static final String COMMAND_WORD = "addleave";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds leave to an employee.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + PREFIX_ADD_ANNUAL_LEAVE_ON + "DATE "
-            + "OR "
-            + PREFIX_ADD_ANNUAL_LEAVE_FROM + "DATE "
-            + PREFIX_ADD_ANNUAL_LEAVE_TO + "DATE \n"
+            + PREFIX_ADD_ANNUAL_LEAVE_ON + " DATE     "
+            + "OR     "
+            + PREFIX_ADD_ANNUAL_LEAVE_FROM + " DATE "
+            + PREFIX_ADD_ANNUAL_LEAVE_TO + " DATE \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ADD_ANNUAL_LEAVE_ON + "01/01/2023 "
-            + "OR "
-            + PREFIX_ADD_ANNUAL_LEAVE_FROM + "01/01/2023 "
-            + PREFIX_ADD_ANNUAL_LEAVE_TO + "05/01/2023 \n";
+            + PREFIX_ADD_ANNUAL_LEAVE_ON + " 01/01/2023     "
+            + "OR     "
+            + PREFIX_ADD_ANNUAL_LEAVE_FROM + " 01/01/2023 "
+            + PREFIX_ADD_ANNUAL_LEAVE_TO + " 05/01/2023 \n";
 
-    public static final String MESSAGE_SUCCESS = "Leave has been added for employee: %1$s!";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "Leave has been added for employee: %1$s!\n";
 
     private final Index index;
 
@@ -63,6 +63,13 @@ public class AddLeaveCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person employeeToAddLeave = lastShownList.get(index.getZeroBased());
+        LocalDate currentDate = LocalDate.now();
+        if (startDate.isBefore(currentDate)) {
+            throw new CommandException(String.format(AnnualLeave.MESSAGE_EXPIRED_LEAVE));
+        }
+        if (employeeToAddLeave.getAnnualLeave().containsDuplicateLeave(startDate, endDate)) {
+            throw new CommandException(AnnualLeave.MESSAGE_DUPLICATE_LEAVE);
+        }
         if (endDate == null) {
             if (employeeToAddLeave.getAnnualLeave().isValidLeave(startDate, startDate)) {
                 employeeToAddLeave.getAnnualLeave().addLeave(startDate);
@@ -76,7 +83,8 @@ public class AddLeaveCommand extends Command {
                 throw new CommandException(AnnualLeave.MESSAGE_LEAVE_CONSTRAINTS);
             }
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(employeeToAddLeave)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS + this.getLeaveStatus(employeeToAddLeave),
+                Messages.format(employeeToAddLeave)));
     }
 
     @Override
@@ -99,5 +107,11 @@ public class AddLeaveCommand extends Command {
         return new ToStringBuilder(this)
                 .add("toAddLeave", index)
                 .toString();
+    }
+
+    public String getLeaveStatus(Person employee) {
+        requireNonNull(employee);
+        return "Number of leaves left: " + employee.getAnnualLeave().numOfLeaveLeft() + " / " +
+                employee.getAnnualLeave().value;
     }
 }

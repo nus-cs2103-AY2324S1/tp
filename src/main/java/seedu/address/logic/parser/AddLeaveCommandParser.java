@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
 
 public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
 
@@ -31,8 +33,8 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_ADD_ANNUAL_LEAVE_FROM, PREFIX_ADD_ANNUAL_LEAVE_TO);
         if (argMultimapForOn.getValue(PREFIX_ADD_ANNUAL_LEAVE_ON).isPresent()) {
             return singleDayLeaveHandler(argMultimapForOn);
-        } else if (argMultimapForOn.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).isPresent() &&
-                argMultimapForOn.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).isPresent()) {
+        } else if (argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).isPresent() &&
+                argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).isPresent()) {
             return multipleDaysLeaveHandler(argMultimapForFromAndTo);
         } else {
             throw new ParseException(
@@ -49,11 +51,9 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
             Index index = ParserUtil.parseIndex(argMultimapForOn.getPreamble());
             LocalDate date = ParserUtil.stringToDate(argMultimapForOn.getValue(PREFIX_ADD_ANNUAL_LEAVE_ON).get());
             return new AddLeaveCommand(index, date);
-
         } catch (ParseException pe) {
             if (StringUtil.isInteger(argMultimapForOn.getPreamble())) {
-                throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX));
             }
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));

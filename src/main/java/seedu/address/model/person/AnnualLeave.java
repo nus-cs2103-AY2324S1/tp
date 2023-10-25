@@ -1,8 +1,5 @@
 package seedu.address.model.person;
 
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -24,6 +21,10 @@ public class AnnualLeave {
 
     public static final String MESSAGE_LEAVE_CONSTRAINTS =
             "Number of days of annual leave taken should not exceed the total limit.";
+
+    public static final String MESSAGE_EXPIRED_LEAVE = "Date of the leave that you are trying to add is already over!";
+    public static final String MESSAGE_DUPLICATE_LEAVE = "Some or all the leave(s) that you " +
+            "are trying to add has already been added! Please check again!";
 
     /*
      * The first character of the annual leave must not be a whitespace,
@@ -57,11 +58,11 @@ public class AnnualLeave {
 
     @Override
     public String toString() {
-        String result = "";
+        String result = value;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         for (LocalDate date : this.leaveList) {
             String formattedDate = date.format(formatter);
-            result += formattedDate + " | ";
+            result += " | " + formattedDate;
         }
         return result;
     }
@@ -104,6 +105,35 @@ public class AnnualLeave {
             return true;
         }
         return false;
+    }
+
+    public int numOfLeaveLeft() {
+        return parseInt(value) - this.leaveList.size();
+    }
+
+    public boolean containsDuplicateLeave(LocalDate startDate, LocalDate endDate) {
+        LocalDate tempEndDate;
+        if (endDate == null) {
+            tempEndDate = startDate;
+        } else {
+            tempEndDate = endDate;
+        }
+        for (LocalDate date: this.leaveList) {
+            if (!date.isBefore(startDate) && !date.isAfter(tempEndDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getWorkingStatus() {
+        LocalDate currentDate = LocalDate.now();
+        for (LocalDate date: this.leaveList) {
+            if (currentDate.equals(date)) {
+                return "On Leave";
+            }
+        }
+        return "Working";
     }
 
 }

@@ -16,7 +16,6 @@ import seedu.address.model.person.Salary;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -170,7 +169,7 @@ public class ParserUtil {
      * @throws DateTimeException if the format of String is wrong
      */
     public static LocalDate stringToDate(String date) throws DateTimeParseException {
-        String dateFormat = "yyyy-MM-dd";
+        String dateFormat = "dd/MM/yyyy";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         LocalDate localDate = LocalDate.parse(date, formatter);
         return localDate;

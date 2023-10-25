@@ -23,7 +23,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_DELETE =
             "%1$d employees found! Refer to their indexes for deletion";
-    public static final String MESSAGE_INVALID_DATE = "Invalid command format! Date should be in format: 'DD/MM/YYYY'";
+    public static final String MESSAGE_INVALID_DATE = "Invalid command format! Date should be in format: 'dd/MM/yyyy'" +
+            "and date should be valid!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -56,7 +57,7 @@ public class Messages {
                 .append("; Salary: ")
                 .append(person.getSalary())
                 .append("; Annual Leave: ")
-                .append(person.getAnnualLeave());
+                .append(person.getAnnualLeave().value);
         return builder.toString();
     }
 

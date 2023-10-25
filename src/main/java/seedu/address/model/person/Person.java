@@ -129,7 +129,7 @@ public class Person {
                 .add("bankAccount", bankAccount)
                 .add("joinDate", joinDate)
                 .add("salary", salary)
-                .add("annualLeave", annualLeave)
+                .add("annualLeave", annualLeave.value)
                 .toString();
     }
 }
