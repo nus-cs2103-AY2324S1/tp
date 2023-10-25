@@ -34,7 +34,7 @@ public class Birthday {
             LocalDate parsedDate = LocalDate.parse(birthday, formatter);
             this.value = parsedDate;
         } catch (java.time.format.DateTimeParseException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
     }
     /**
@@ -44,7 +44,17 @@ public class Birthday {
         if (test.trim().isEmpty()) {
             return true;
         }
-        return test.matches(VALIDATION_REGEX);
+
+        if (test.matches(VALIDATION_REGEX)) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate parsedDate = LocalDate.parse(test, formatter);
+                return true;
+            } catch (java.time.format.DateTimeParseException e) {
+                return false;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -54,6 +64,10 @@ public class Birthday {
 
     public String getStringValue() {
         return stringValue;
+    }
+
+    public LocalDate getValue() {
+        return value;
     }
 
     @Override
@@ -80,5 +94,21 @@ public class Birthday {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Returns true if the birthday is within the next {@code days} days.
+     */
+    public boolean isWithinDays(int days) {
+        if (value == null) {
+            return false;
+        }
+        LocalDate now = LocalDate.now();
+        LocalDate endDate = LocalDate.now().plusDays(days + 1);
+        LocalDate birthday = value.withYear(now.getYear());
+        if (birthday.isBefore(now)) {
+            birthday = birthday.plusYears(1);
+        }
+        return (birthday.isBefore(endDate) && birthday.isAfter(now)) || birthday.isEqual(now);
     }
 }

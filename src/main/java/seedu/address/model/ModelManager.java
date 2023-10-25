@@ -184,6 +184,12 @@ public class ModelManager implements Model {
         this.filteredPersons.setPredicate(predicate);
     }
 
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        this.events.setPredicate(predicate);
+    }
+
     /**
      * Adds an event to the address book.
      * @param toAdd Event to be added.

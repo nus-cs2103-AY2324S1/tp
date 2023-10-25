@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,6 +60,12 @@ public class TypicalPersons {
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withBirthday("1998-01-09").build();
 
+    // Manually added for remind command
+    public static final Person JOHN = new PersonBuilder().withName("John")
+            .withBirthday(LocalDate.now().plusDays(3).toString()).build();
+    public static final Person JANE = new PersonBuilder().withName("Jane")
+            .withBirthday(LocalDate.now().plusDays(5).toString()).build();
+
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -89,5 +96,22 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static AddressBook getBirthdayAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getBirthdayPersons()) {
+            ab.addPerson(person);
+        }
+        for (Event event : new ArrayList<>(
+                Arrays.asList(TypicalMeetings.MEETING_3_DAYS_AFTER_TODAY,
+                        TypicalMeetings.MEETING_6_DAYS_AFTER_TODAY))) {
+            ab.addEvent(event);
+        }
+        return ab;
+    }
+
+    public static List<Person> getBirthdayPersons() {
+        return new ArrayList<>(Arrays.asList(JOHN, JANE));
     }
 }
