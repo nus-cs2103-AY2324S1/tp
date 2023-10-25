@@ -28,7 +28,7 @@ public class AddScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a schedule to the address book for a tutor "
             + "by the index number used in the displayed tutor list.\n"
             + "Parameters: "
-            + "TUTOR_INDEX (must be a positive integer)"
+            + "TUTOR_INDEX (must be a positive integer) "
             + PREFIX_START_TIME + "START_TIME "
             + PREFIX_END_TIME + "END_TIME\n"
             + "Example: " + COMMAND_WORD + " "

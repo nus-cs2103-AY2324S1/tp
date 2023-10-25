@@ -2,6 +2,7 @@ package seedu.address.model.schedule;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,7 +11,7 @@ import java.time.format.DateTimeParseException;
  * Represents an abstract time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTimeString(String)}
  */
-public abstract class Time {
+public abstract class Time implements Comparable<Time> {
     public static final String DATETIME_INPUT_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
     public static final String DATETIME_OUTPUT_FORMAT = "MMM d yyyy HH:mm";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
@@ -71,5 +72,35 @@ public abstract class Time {
     @Override
     public String toString() {
         return value.format(DateTimeFormatter.ofPattern(DATETIME_OUTPUT_FORMAT));
+    }
+
+    /**
+     * Compares this {@code Time} object with another {@code Time} object for order.
+     * The comparison is based on the {@code LocalDateTime} values of the two {@code Time} objects.
+     *
+     * @param other the {@code Time} object to be compared.
+     * @return a negative integer if this {@code Time} is before the other {@code Time},
+     *         zero if they are equal,
+     *         or a positive integer if this {@code Time} is after the other {@code Time}.
+     */
+    @Override
+    public int compareTo(Time other) {
+        return this.getTime().compareTo(other.getTime());
+    }
+
+    /**
+     * Compares this {@code Time} object with another {@code Time} object for order.
+     * The comparison does not take the time into account as it is based on the {@code LocalDate} values of the two
+     * {@code Time} objects.
+     *
+     * @param other the {@code Time} object to be compared.
+     * @return a negative integer if this {@code Time} is before the other {@code Time},
+     *         zero if they are equal,
+     *         or a positive integer if this {@code Time} is after the other {@code Time}.
+     */
+    public int compareDays(Time other) {
+        LocalDate thisTime = this.getTime().toLocalDate();
+        LocalDate otherTime = other.getTime().toLocalDate();
+        return thisTime.compareTo(otherTime);
     }
 }
