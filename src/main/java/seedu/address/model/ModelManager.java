@@ -155,6 +155,7 @@ public class ModelManager implements Model {
     public Group deleteGroup(String groupName) throws CommandException {
         Group group = addressBook.getGroup(groupName);
         addressBook.removeGroup(group);
+        forceUpdateList();
         return group;
     }
 
