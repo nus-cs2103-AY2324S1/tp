@@ -207,7 +207,7 @@ Acceptable values for each parameter:
 * `[g/GROUP]`: Name of the group to be assigned.
 
 Expected output when the command succeeds:
-* Input: `add_event n/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
+* Input: `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
 * Output: `New event added: FumbleLog meeting; Date: 05 Oct 2023; Start Time: 15:00; End Time: 17:00; Persons involved: Ken; Groups involved: [CS2103T], [CS2101];`
 
 Expected output when the command fails:
@@ -216,15 +216,15 @@ Expected output when the command fails:
   Parameters: m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/NAME]... [g/GROUP]...
   Example: add_event m/FumbleLog Meeting d/2020-10-30 s/1000 e/1200 n/Ken n/Yuheng g/Team2 `
 
-### Editing a meeting : `edit_meeting`
+### Editing an event : `edit_event`
 
-Edits an existing meeting in the FumbleLog.
+Edits an existing meeting in FumbleLog.
 
-Format: `edit_meeting INDEX [n/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME]`
+Format: `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]... [u/PERSON_NAME]... [g/GROUP]... [ug/GROUP]...`
 
 * **At least one of the optional parameters required.**
-* Existing values will be updated to the input values.
 * `START_TIME` must be coupled with `END_TIME`.
+* The input values will replace the existing values.
 
 Examples:
 *  `edit_meeting 1 n/tP week 4 meeting`
