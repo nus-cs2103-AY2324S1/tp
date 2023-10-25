@@ -20,6 +20,8 @@ public class Employee {
     public static final int MAX_OVERTIME_HOURS = 72;
     public static final int DEFAULT_OVERTIME_HOURS = 0;
     public static final boolean DEFAULT_IS_ON_LEAVE = false;
+    public static final int MAX_NUM_OF_LEAVES = 14;
+    public static final int DEFAULT_NUM_OF_LEAVES = 0;
 
     // Identity fields
     private final Name name;

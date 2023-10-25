@@ -1,0 +1,88 @@
+package seedu.address.model.employee;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class LeaveList {
+
+    private final ArrayList<Leave> leaveList;
+
+    /**
+     * The constructor for an empty LeaveList.
+     */
+    public LeaveList() {
+        this.leaveList = new ArrayList<>();
+    }
+
+    /**
+     * The constructor for a (non-empty) LeaveList.
+     *
+     * @param leaves The arraylist of leaves.
+     */
+    public LeaveList(ArrayList<Leave> leaves) {
+        this.leaveList = leaves;
+    }
+
+    /**
+     * Returns the specific leave in this LeaveList.
+     *
+     * @param index The zero-based index of the leave.
+     * @return Returns the leave with the specified index.
+     */
+    public Leave getLeave(int index) {
+        return leaveList.get(index);
+    }
+
+    /**
+     * Returns the number of leaves in this LeaveList.
+     * @return Returns the size of the list.
+     */
+    public int getSize() {
+        return leaveList.size();
+    }
+
+    /**
+     * Returns true if the current size of the LeaveList is less than the maximum allowable size.
+     *
+     * @param maxLeaves The maximum number of leaves allowed in the LeaveList.
+     */
+    public boolean isWithinLimit(int maxLeaves) {
+        return leaveList.size() < maxLeaves;
+    }
+
+    /**
+     * Adds a new leave of type Leave to this LeaveList.
+     * @param leave The leave that is added to the list.
+     */
+    public void addLeave(Leave leave) {
+        leaveList.add(leave);
+    }
+
+    public boolean getCurrentLeaveStatus() {
+        if (leaveList.size() == 0) {
+            return false;
+        }
+        for (int i = 0; i < leaveList.size(); i++) {
+            if (leaveList.get(i).equals(LocalDate.now())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        if (!leaveList.isEmpty()) {
+            sb.append("Leaves taken:\n");
+            for (int i = 0; i < leaveList.size(); i++) {
+                sb.append(i + 1).append(".").append(leaveList.get(i));
+                sb.append("\n");
+            }
+        } else {
+            sb.append("No leaves taken.\n");
+        }
+        return sb.toString();
+    }
+
+}

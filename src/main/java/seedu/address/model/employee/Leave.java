@@ -16,14 +16,24 @@ public class Leave {
 
     public final LocalDate leaveDate;
 
+    /**
+     * The constructor for a leave with a date.
+     *
+     * @param leaveDate The date of the leave.
+     */
     private Leave(String leaveDate) {
         requireNonNull(leaveDate);
         this.leaveDate = LocalDate.parse(leaveDate, DATE_FORMAT);
     }
 
+    /**
+     * The constructor for an empty leave.
+     */
     private Leave() {
         this.leaveDate = null;
     }
+
+
 
     @Override
     public String toString() {
