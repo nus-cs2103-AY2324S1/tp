@@ -7,6 +7,7 @@ import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Salary;
@@ -22,12 +23,13 @@ public class EmployeeBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SALARY = "1234";
-
+    public static final String DEFAULT_LEAVE = "14";
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Salary salary;
+    private Leave leave;
     private Set<Department> departments;
 
     /**
@@ -39,6 +41,7 @@ public class EmployeeBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         salary = new Salary(DEFAULT_SALARY);
+        leave = new Leave(DEFAULT_LEAVE);
         departments = new HashSet<>();
     }
 
@@ -51,6 +54,7 @@ public class EmployeeBuilder {
         email = employeeToCopy.getEmail();
         address = employeeToCopy.getAddress();
         salary = employeeToCopy.getSalary();
+        leave = employeeToCopy.getLeave();
         departments = new HashSet<>(employeeToCopy.getDepartments());
     }
 
@@ -103,8 +107,16 @@ public class EmployeeBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code leave} of the {@code Employee} that we are building.
+     */
+    public EmployeeBuilder withLeave(String leave) {
+        this.leave = new Leave(leave);
+        return this;
+    }
+
     public Employee build() {
-        return new Employee(name, phone, email, address, salary, departments);
+        return new Employee(name, phone, email, address, salary, leave, departments);
     }
 
 }

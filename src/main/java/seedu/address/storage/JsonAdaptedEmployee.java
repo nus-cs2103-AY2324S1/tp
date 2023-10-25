@@ -14,6 +14,7 @@ import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Salary;
@@ -30,6 +31,7 @@ class JsonAdaptedEmployee {
     private final String email;
     private final String address;
     private final String salary;
+    private final String leave;
     private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
 
     /**
@@ -38,13 +40,14 @@ class JsonAdaptedEmployee {
     @JsonCreator
     public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                @JsonProperty("email") String email, @JsonProperty("address") String address,
-                               @JsonProperty("salary") String salary,
+                               @JsonProperty("salary") String salary, @JsonProperty("leave") String leave,
                                @JsonProperty("departments") List<JsonAdaptedDepartment> departments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.salary = salary;
+        this.leave = leave;
         if (departments != null) {
             this.departments.addAll(departments);
         }
@@ -59,6 +62,7 @@ class JsonAdaptedEmployee {
         email = source.getEmail().value;
         address = source.getAddress().value;
         salary = source.getSalary().value;
+        leave = source.getLeave().value;
         departments.addAll(source.getDepartments().stream()
                 .map(JsonAdaptedDepartment::new)
                 .collect(Collectors.toList()));
@@ -115,8 +119,16 @@ class JsonAdaptedEmployee {
         }
         final Salary modelSalary = new Salary(salary);
 
+        if (leave == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Leave.class.getSimpleName()));
+        }
+        if (!Leave.isValidLeave(leave)) {
+            throw new IllegalValueException(Leave.MESSAGE_CONSTRAINTS);
+        }
+        final Leave modelLeave = new Leave(leave);
+
         final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
-        return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelSalary, modelDepartments);
+        return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelSalary, modelLeave, modelDepartments);
     }
 
 }

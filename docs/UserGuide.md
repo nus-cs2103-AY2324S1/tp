@@ -95,13 +95,13 @@ Expected outputs:
 
 Adds an employee to ManageHR’s entries.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY d/DEPARTMENT`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE d/DEPARTMENT`
 - Adds an employee with the above fields
 - All fields must be provided
 
 Examples:
-* `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/ 5300 d/ R&D`
-* `add n/Elon p/12345678 e/elonma@gmail.com a/Elon street, block 140, #20-01 s/ 2100 d/R&D`
+* `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/5300 l/14 d/ R&D`
+* `add n/Elon p/12345678 e/elonma@gmail.com a/Elon street, block 140, #20-01 s/2100 l/21 d/R&D`
 
 Acceptable values for each parameter:
 
@@ -112,14 +112,15 @@ Acceptable values for each parameter:
 | `EMAIL` | Email with the pattern x@x.com where ‘x’ are alphanumerics |
 | `ADDRESS` | Alphanumerics and ascii characters i.e. #, - |
 | `SALARY` | Numerals |
+| `LEAVE` | Numerals |
 | `DEPARTMENT` | Alphabets and ascii characters i.e. &, - |
 
 Expected outputs:
 
-| Outcome | Output                                                                                                       |
-| --- |--------------------------------------------------------------------------------------------------------------|
-| **Success** | Employee added! Johnny \| 12345678 \| johnnysins@gmail.com \| Johnny Street, block 69, #05-05 \| 5300 \| R&D |
-| **Fail** | Please check the parameter inputs                                                                            |
+| Outcome | Output                                                                                                             |
+| --- |--------------------------------------------------------------------------------------------------------------------|
+| **Success** | Employee added! Johnny \| 12345678 \| johnnysins@gmail.com \| Johnny Street, block 69, #05-05 \| 5300 \| 14 \| R&D |
+| **Fail** | Please check the parameter inputs                                                                                  |
 
 ### Listing all employees : `list`
 
@@ -147,7 +148,7 @@ Fail:
 
 Edits an existing employee in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [d/DEPARTMENT]​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [d/DEPARTMENT]​`
 
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list.
 * At least one of the optional fields must be provided.
@@ -247,7 +248,7 @@ Now, your data should be successfully transferred to the new computer.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEPARTMENT` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 d/ R&D`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY l/LEAVE d/DEPARTMENT` <br> e.g., `add n/Johnny p/91242712 e/johnnysins@gmail.com a/Johnny street, block 69, #05-05 s/14000 l/21 d/R&D`
 **Exit** | `exit`
 **Delete** | `delete INDEX`<br> e.g., `delete 4`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT]`<br> e.g.,`edit 1 p/91234567 e/johnsimmons@gmail.com`

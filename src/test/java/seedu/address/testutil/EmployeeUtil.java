@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
@@ -36,6 +37,7 @@ public class EmployeeUtil {
         sb.append(PREFIX_EMAIL + employee.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + employee.getAddress().value + " ");
         sb.append(PREFIX_SALARY + employee.getSalary().value + " ");
+        sb.append(PREFIX_LEAVE + employee.getLeave().value + " ");
         employee.getDepartments().stream().forEach(
             s -> sb.append(PREFIX_DEPARTMENT + s.departmentName + " ")
         );
@@ -52,6 +54,7 @@ public class EmployeeUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.value).append(" "));
+        descriptor.getLeave().ifPresent(leave -> sb.append(PREFIX_LEAVE).append(leave.value).append(" "));
         if (descriptor.getDepartments().isPresent()) {
             Set<Department> departments = descriptor.getDepartments().get();
             if (departments.isEmpty()) {

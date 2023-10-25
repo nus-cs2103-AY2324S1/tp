@@ -9,6 +9,7 @@ import seedu.address.model.department.Department;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
+import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.employee.Salary;
@@ -38,6 +39,7 @@ public class EditEmployeeDescriptorBuilder {
         descriptor.setEmail(employee.getEmail());
         descriptor.setAddress(employee.getAddress());
         descriptor.setSalary(employee.getSalary());
+        descriptor.setLeave(employee.getLeave());
         descriptor.setDepartments(employee.getDepartments());
     }
 
@@ -78,6 +80,14 @@ public class EditEmployeeDescriptorBuilder {
      */
     public EditEmployeeDescriptorBuilder withSalary(String salary) {
         descriptor.setSalary(new Salary(salary));
+        return this;
+    }
+
+    /**
+     * Sets the {@code leave} of the {@code EditEmployeeDescriptor} that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withLeave(String leave) {
+        descriptor.setLeave(new Leave(leave));
         return this;
     }
 
