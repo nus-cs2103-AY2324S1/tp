@@ -42,6 +42,7 @@ used to display the data on the UI).
     * PLACEHOLDER
   * Developer Guide:
     * Use Cases for v1.1
+  * Removed most traces of AB3 from the markdown pages, UG and DG in `v1.1`
 
 
 * **PRs reviewed**:
