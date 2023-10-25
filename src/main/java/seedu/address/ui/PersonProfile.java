@@ -1,8 +1,10 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -22,6 +24,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * An interactive UI component that contains all the fields associated with a {@link Person}, and their values.
@@ -91,7 +95,7 @@ public class PersonProfile extends UiPart<Region> {
         fields.put(Field.AVAILABILITY, person.getAvailability().toString());
         fields.put(Field.ANIMAL_NAME, person.getAnimalName().toString());
         fields.put(Field.ANIMAL_TYPE, person.getAnimalType().toString());
-        //todo deal with tags
+        person.getTags().stream().map(Tag::getTagName).forEach(tags::add);
         //todo deal with note
         initialize();
     }
@@ -122,20 +126,12 @@ public class PersonProfile extends UiPart<Region> {
         uiElements.values().stream()
                 .map(UiPart::getRoot)
                 .forEach(vboxChildren::add);
+        vboxChildren.add(new PersonProfileHeader().getRoot());
+        vboxChildren.add(new PersonProfileHeader().getRoot());
+        vboxChildren.add(new PersonProfileHeader().getRoot());
+        vboxChildren.add(new PersonProfileHeader().getRoot());
         //todo deal with tags
         //todo deal with note
-    }
-
-    private boolean personIsValid() {
-        //fake code for handoff purposes, THESE .isValid CHECKS ARE ALREADY DONE
-        String name = fields.get(Field.NAME);
-        if (!Field.NAME.isValid(name)) {
-            return false;
-        }
-        String address = fields.get(Field.ADDRESS);
-        //do something
-        this.person = null; //todo if valid, replace this.person with the new person
-        return true;
     }
 
     public void setFocusField(Field field) {
@@ -147,24 +143,27 @@ public class PersonProfile extends UiPart<Region> {
     }
 
     public boolean replaceFieldIfValid(Field field, String value) {
+        fields.put(field, value);
+
         if (!checkValidityOfPerson) {
-            fields.put(field, value);
-            if (personIsValid()) {
+            if (createPerson()) {
                 checkValidityOfPerson = true;
+                //todo signal to user that a valid person is created
             }
             return true;
         }
 
-        String oldValue = fields.put(field, value);
-        if (!personIsValid()) {
-            fields.put(field, oldValue);
-            return false;
-        }
-        createPerson();
-        return true;
+        //todo signal to user if it's not a valid person
+        return createPerson();
     }
 
-    private void createPerson() {
+    private boolean createPerson() {
+        Field[] requiredFields = {Field.NAME, Field.PHONE, Field.EMAIL, Field.ADDRESS};
+        boolean anyRequiredFieldsNull = Arrays.stream(requiredFields)
+                .map(fields::get).anyMatch(Objects::isNull);
+        if (anyRequiredFieldsNull) {
+            return false;
+        }
         this.person = new Person(
                 new Name(fields.get(Field.NAME)),
                 new Phone(fields.get(Field.PHONE)),
@@ -176,10 +175,13 @@ public class PersonProfile extends UiPart<Region> {
                 new AnimalType(fields.get(Field.ANIMAL_TYPE), fields.get(Field.AVAILABILITY)),
                 getTags()
         );
+        return true;
     }
 
     private Set<Tag> getTags() {
-        return null; //todo
+        Set<Tag> set = new HashSet<>();
+        tags.stream().map(Tag::new).forEach(set::add);
+        return set;
     }
 
     /**

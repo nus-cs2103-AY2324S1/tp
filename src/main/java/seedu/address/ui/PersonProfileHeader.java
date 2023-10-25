@@ -2,10 +2,10 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 
-public class PersonProfileHeader extends UiPart<AnchorPane> {
+public class PersonProfileHeader extends UiPart<SplitPane> {
     private static final String FXML = "PersonProfileField.fxml";
     private static final String KEY_HEADER = "Field";
     private static final String VALUE_HEADER = "Value";
@@ -29,7 +29,10 @@ public class PersonProfileHeader extends UiPart<AnchorPane> {
     }
 
     @FXML
-    private void handleOnAction() {}
+    private void handleKey() {}
+
+    @FXML
+    private void setFocus() {}
 
 
 }

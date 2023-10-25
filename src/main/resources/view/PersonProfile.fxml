@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="-Infinity" style="-fx-border-color: purple;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <VBox fx:id="vbox" fillWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-color: green;">
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="NEVER" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <VBox fx:id="vbox">
       <Label text="PLACEHOLDER" />
    </VBox>
 </ScrollPane>

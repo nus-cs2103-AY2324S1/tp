@@ -2,10 +2,12 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
-public class PersonProfileField extends UiPart<AnchorPane> {
+public class PersonProfileField extends UiPart<SplitPane> {
     private static final String FXML = "PersonProfileField.fxml";
 
     @FXML private Label valueLabel;
@@ -36,19 +38,9 @@ public class PersonProfileField extends UiPart<AnchorPane> {
         state = State.LABEL;
     }
 
-    private void toggleState() {
-        switch (state) {
-        case LABEL:
-            state = State.TEXT_FIELD;
-            updateState();
-            break;
-        case TEXT_FIELD:
-            state = State.LABEL;
-            updateState();
-            break;
-        default:
-            initialize();
-        }
+    private void updateState(State state) {
+        this.state = state;
+        updateState();
     }
 
     private void updateState() {
@@ -60,16 +52,46 @@ public class PersonProfileField extends UiPart<AnchorPane> {
         case TEXT_FIELD:
             valueLabel.setVisible(false);
             valueField.setVisible(true);
+            valueField.requestFocus();
             break;
         default:
             initialize();
         }
     }
+    @FXML
+    public void handleKey(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+        case ENTER:
+            handleConfirmation();
+            break;
+        case ESCAPE:
+            handleCancellation();
+            break;
+        default:
+            return;
+        }
+        updateState(State.LABEL);
+    }
+
+    private void handleConfirmation() {
+        System.out.println("Confirmation detected");
+        String newValue = valueField.getText().trim();
+        if (!field.isValid(newValue) || !personProfile.replaceFieldIfValid(field, newValue)) {
+            handleCancellation();
+        }
+        this.value = newValue;
+        valueLabel.setText(newValue);
+    }
+
+    private void handleCancellation() {
+        System.out.println("Cancellation detected");
+        valueField.setText(value);
+    }
 
     @FXML
-    private void handleOnAction() {
-        System.out.println("Action detected");
-        toggleState();
+    private void setFocus() {
+        System.out.println("Focus detected");
+        updateState(State.TEXT_FIELD);
     }
 
 
