@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Name;
@@ -24,7 +25,13 @@ public class Lesson {
     private LocalDateTime end;
     // Data fields
     private Subject subject;
-    private ArrayList<Name> students; // TOOD: change to student object
+
+    private ArrayList<Name> students; // TODO: change to student object
+
+    /**
+     * The Task List to store the Lesson Tasks.
+     */
+    private TaskList taskList;
 
     /**
      * Constructor for a Lesson Object with at least one student.
@@ -36,32 +43,36 @@ public class Lesson {
      * @param studentNames The student attending this lesson. Note: Converted to ArrayList when stored
      * @see seedu.address.logic.parser.ParserUtil
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, Name... studentNames) {
+    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, TaskList taskList, Name... studentNames) {
         requireAllNonNull(start, end, subject);
         this.start = start;
         this.end = end;
         this.subject = subject;
         this.students = new ArrayList<>(Arrays.asList(studentNames));
+        this.taskList = taskList;
     }
 
     /**
      * Alternative constructor for a Lesson Object without subject
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Name... studentNames) {
+    public Lesson(LocalDateTime start, LocalDateTime end, TaskList taskList, Name... studentNames) {
         requireAllNonNull(start, end);
         this.start = start;
         this.end = end;
         this.students = new ArrayList<>(Arrays.asList(studentNames));
+        this.taskList = taskList;
     }
     /**
      * Alternative constructor for a Lesson Object with an ArrayList of students
      */
-    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject, ArrayList<Name> studentNames) {
+    public Lesson(LocalDateTime start, LocalDateTime end, Subject subject,
+                  TaskList taskList, ArrayList<Name> studentNames) {
         requireAllNonNull(start, end, subject);
         this.start = start;
         this.end = end;
         this.subject = subject;
         this.students = studentNames;
+        this.taskList = taskList;
     }
 
     /**
@@ -112,7 +123,7 @@ public class Lesson {
     /**
      * Gets a one-line overview of the lesson.
      *
-     * If a lesson is on Thursday, 10 Oct 10 am - 12 pm, it will be formatted as:
+     * If a lesson is on Tuesday, 10 Oct 10 am - 12 pm, it will be formatted as:
      *
      * 10 am - 12 pm
      * @return A formatted overview of the time of the lesson
@@ -159,8 +170,13 @@ public class Lesson {
         // TODO - change to something more concrete,
     }
 
-    // TODO: Tasks
-    // private TaskContainer tasks;
+    /**
+     * Returns the Task List.
+     * @return
+     */
+    public ObservableList<Task> getTaskList() {
+        return taskList.asUnmodifiableObservableList();
+    }
 
     public LocalDateTime getStart() {
         return start;
@@ -232,6 +248,22 @@ public class Lesson {
      */
     public String serializeStudents() {
         return getStudentsStr();
+    }
+
+    /**
+     * Serializes the Task List to a String
+     * @return stringified version of the task list
+     */
+    public String serializeTaskList() { //TODO
+        return "";
+    }
+
+    /**
+     * Deserialize the String to a Task List
+     * @return Task List
+     */
+    public static TaskList deserializeTaskList(String taskList) throws IllegalValueException { //TODO
+        return new TaskList();
     }
 
     /**
