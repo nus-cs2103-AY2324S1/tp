@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_NO_STUDENTS;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -94,7 +95,21 @@ public class ListAttendanceCommandTest {
     }
 
     @Test
-    public void execute_incompleteAttendance_success() {
+    public void execute_listWithNoStudentsWithTag_success() {
+        Optional<Tag> tag = Optional.of(new Tag("TAG1"));
+        Week week = new Week(2);
+        ListAttendanceCommand command = new ListAttendanceCommand(tag, week,
+                new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
+
+        expectedModel.addFilter(new ContainsTagPredicate(tag));
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(MESSAGE_NO_STUDENTS, tag.get().getTagName()));
+
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_listWithIncompleteAttendance_success() {
         ALICE.addAttendance(new Attendance(new Week(3), true));
         BENSON.addAttendance(new Attendance(new Week(3), true));
         CARL.addAttendance(new Attendance(new Week(3), true));
