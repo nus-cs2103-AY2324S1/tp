@@ -21,6 +21,7 @@ public class Doctor extends Person {
                   Ic ic, Set<Tag> tags) {
         super(name, phone, email, address, remark, gender, ic, tags);
     }
+
     /**
      * Retrieves the list of patients stored in this medical facility.
      *

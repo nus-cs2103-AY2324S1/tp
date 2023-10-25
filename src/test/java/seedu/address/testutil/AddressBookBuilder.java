@@ -37,4 +37,15 @@ public class AddressBookBuilder {
     public AddressBook build() {
         return addressBook;
     }
+
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Patient patient : TypicalPatient.getTypicalPatients()) {
+            ab.addPatient(patient);
+        }
+        for (Doctor doctor : TypicalDoctor.getTypicalDoctors()) {
+            ab.addDoctor(doctor);
+        }
+        return ab;
+    }
 }

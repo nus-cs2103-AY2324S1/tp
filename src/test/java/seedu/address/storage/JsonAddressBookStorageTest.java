@@ -2,11 +2,11 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static seedu.address.testutil.AddressBookBuilder.getTypicalAddressBook;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatient.ALICE;
 import static seedu.address.testutil.TypicalPatient.HOON;
 import static seedu.address.testutil.TypicalPatient.IDA;
-import static seedu.address.testutil.TypicalPatient.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
