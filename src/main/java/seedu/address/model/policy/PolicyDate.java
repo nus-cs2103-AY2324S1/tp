@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.model.month.DeleteMonth;
+
 /**
  * Represents a car insurance policy issue / expiry date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPolicyDate(String)}
@@ -48,6 +50,17 @@ public class PolicyDate implements Comparable<PolicyDate> {
         } catch (ParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if this date is in the month and year.
+     * @param deleteMonth DeleteMonth object.
+     * @return True if the date is in the month and year.
+     */
+    public boolean isInMonth(DeleteMonth deleteMonth) {
+        int year = date.getYear();
+        int month = date.getMonthValue();
+        return (year == deleteMonth.getYear()) && (month == deleteMonth.getMonth());
     }
 
     @Override

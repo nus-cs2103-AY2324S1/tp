@@ -94,4 +94,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Delete all people fulfil the predicate, show all people in address book.
+     * @param predicate Predicate indicate whether a person should be deleted.
+     */
+    void batchDeleteWithPredicate(Predicate<Person> predicate);
 }

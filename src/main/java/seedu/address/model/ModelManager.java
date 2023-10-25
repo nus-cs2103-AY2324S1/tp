@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -139,6 +141,22 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void batchDeleteWithPredicate(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        filteredPersons.setPredicate(predicate);
+        ObservableList<Person> listToDelete = this.getFilteredPersonList();
+
+        List<Person> copyList = new ArrayList<>(listToDelete);
+        for (Person person : copyList) {
+            addressBook.removePerson(person);
+        }
+
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
