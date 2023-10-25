@@ -1,9 +1,10 @@
-package seedu.address.model.applicant;
+package seedu.address.model.applicant.predicate;
 
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
 
 /**
