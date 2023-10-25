@@ -14,7 +14,7 @@
         null,
         null
       ],
-      "mods": [],
+      "courses": [],
       "hour": "8"
     },
     {
@@ -33,9 +33,43 @@
         "21:15-22:30",
         "21:15-22:30"
       ],
-      "mods": [
-        "CS1231",
-        "CS2103T"
+      "courses": [
+        {
+          "name": "Software Engineering",
+          "courseCode": "CS2103T",
+          "lessons": [
+            {
+              "name": "Lecture",
+              "courseCode": "CS2103T",
+              "dayOfWeek": "MONDAY",
+              "startTime": "10:00",
+              "endTime": "12:00"
+            },
+            {
+              "name": "Tutorial",
+              "courseCode": "CS2103T",
+              "dayOfWeek": "TUESDAY",
+              "startTime": "10:00",
+              "endTime": "12:00"
+            },
+            {
+              "name": "Laboratory",
+              "courseCode": "CS2103T",
+              "dayOfWeek": "WEDNESDAY",
+              "startTime": "10:00",
+              "endTime": "12:00"
+            }
+          ]
+        }
+      ],
+      "lessons": [
+        {
+          "name": "Tutorial",
+          "courseCode": "CS2103T",
+          "dayOfWeek": "TUESDAY",
+          "startTime": "10:00",
+          "endTime": "12:00"
+        }
       ],
       "hour": "14"
     },
@@ -52,7 +86,7 @@
         null,
         null
       ],
-      "mods": [],
+      "courses": [],
       "hour": "24"
     },
     {
@@ -70,7 +104,7 @@
         "10:45-11:30",
         "10:45-11:30"
       ],
-      "mods": [],
+      "courses": [],
       "hour": "38"
     },
     {
@@ -86,7 +120,7 @@
         null,
         null
       ],
-      "mods": [],
+      "courses": [],
       "hour": "63"
     },
     {
@@ -102,7 +136,7 @@
         "21:10-23:15",
         "21:10-23:15"
       ],
-      "mods": [],
+      "courses": [],
       "hour": "39"
     },
     {
@@ -118,7 +152,7 @@
         "07:00-09:00",
         "07:00-09:00"
       ],
-      "mods": [],
+      "courses": [],
       "hour": "46"
     }
   ]

@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
@@ -15,11 +15,11 @@ import java.util.function.Predicate;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.availability.FreeTime;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.AvailableTimePredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.TeachingModPredicate;
-import seedu.address.model.tag.Mod;
+import seedu.address.model.person.predicates.TeachingCoursePredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -35,8 +35,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         String trimmedArgs = args.trim();
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MOD, PREFIX_FROM, PREFIX_TO);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_MOD, PREFIX_FROM, PREFIX_TO);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COURSE, PREFIX_FROM, PREFIX_TO);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_COURSE, PREFIX_FROM, PREFIX_TO);
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -46,9 +46,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().trim().split("\\s+");
             predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }
-        if (argMultimap.getValue(PREFIX_MOD).isPresent()) {
-            Set<Mod> modList = ParserUtil.parseMods(argMultimap.getAllValues(PREFIX_MOD));
-            predicates.add(new TeachingModPredicate(new ArrayList<>(modList)));
+        if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
+            Set<Course> courseList = ParserUtil.parseCourses(argMultimap.getAllValues(PREFIX_COURSE));
+            predicates.add(new TeachingCoursePredicate(new ArrayList<>(courseList)));
         }
         if (argMultimap.getValue(PREFIX_FROM).isPresent() && argMultimap.getValue(PREFIX_TO).isPresent()) {
             FreeTime freeTime = ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).orElse(null),

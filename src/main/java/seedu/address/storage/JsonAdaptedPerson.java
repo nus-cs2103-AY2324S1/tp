@@ -12,13 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.availability.FreeTime;
 import seedu.address.model.availability.TimeInterval;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,7 +35,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedTimeInterval> intervals = new ArrayList<>();
 
-    private final List<JsonAdaptedMod> mods = new ArrayList<>();
+    private final List<JsonAdaptedCourse> courses = new ArrayList<>();
     private final String hour;
 
     /**
@@ -46,7 +46,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("freeTime") List<JsonAdaptedTimeInterval> intervals,
-                             @JsonProperty("mods") List<JsonAdaptedMod> mods,
+                             @JsonProperty("courses") List<JsonAdaptedCourse> courses,
                              @JsonProperty("hour") String hour) {
         this.name = name;
         this.phone = phone;
@@ -63,9 +63,11 @@ class JsonAdaptedPerson {
                 this.intervals.add(null);
             }
         }
-        if (mods != null) {
-            this.mods.addAll(mods);
+
+        if (courses != null) {
+            this.courses.addAll(courses);
         }
+
         this.hour = hour;
     }
 
@@ -80,6 +82,9 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        courses.addAll(source.getCourses().stream()
+                .map(JsonAdaptedCourse::new)
+                .collect(Collectors.toList()));
         source.getFreeTime().getIntervals().forEach(interval -> {
             if (interval != null) {
                 intervals.add(new JsonAdaptedTimeInterval(interval));
@@ -87,9 +92,6 @@ class JsonAdaptedPerson {
                 intervals.add(null);
             }
         });
-        mods.addAll(source.getMods().stream()
-                .map(JsonAdaptedMod::new)
-                .collect(Collectors.toList()));
         hour = source.getHour().value;
     }
 
@@ -106,9 +108,9 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<Mod> personMods = new ArrayList<>();
-        for (JsonAdaptedMod mod : mods) {
-            personMods.add(mod.toModelType());
+        final List<Course> personCourses = new ArrayList<>();
+        for (JsonAdaptedCourse course : courses) {
+            personCourses.add(course.toModelType());
         }
 
         int countNulls = 0;
@@ -163,7 +165,7 @@ class JsonAdaptedPerson {
         final FreeTime modelFreeTime = countNulls == FreeTime.NUM_DAYS
                 ? FreeTime.EMPTY_FREE_TIME : new FreeTime(personTimeIntervals);
 
-        final Set<Mod> modelMods = new HashSet<>(personMods);
+        final Set<Course> modelCourses = new HashSet<>(personCourses);
 
         if (hour == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Hour.class.getSimpleName()));
@@ -173,7 +175,7 @@ class JsonAdaptedPerson {
         }
         final Hour modelHour = new Hour(hour);
         return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelTags,
-                modelFreeTime, modelMods, modelHour);
+                modelFreeTime, modelCourses, modelHour);
     }
 
 }
