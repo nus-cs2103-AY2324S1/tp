@@ -151,7 +151,7 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
-        
+
         // last contacted time
         userInput = targetIndex.getOneBased() + LASTTIME_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withLastContactedTime(VALID_LASTTIME_AMY).build();
