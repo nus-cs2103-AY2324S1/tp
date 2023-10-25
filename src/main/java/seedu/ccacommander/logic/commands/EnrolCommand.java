@@ -49,7 +49,7 @@ public class EnrolCommand extends Command {
     private final Remark remark;
 
     /**
-     * Creates an CreateEventCommand to add the specified {@code Event}
+     * Creates an EnrolCommand to add the specified {@code Attendance}
      */
     public EnrolCommand(Index memberIndex, Index eventIndex, Hours hours, Remark remark) {
         requireNonNull(memberIndex);
