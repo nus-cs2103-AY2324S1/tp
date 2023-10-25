@@ -18,7 +18,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantContainsInterviewPredicate;
 import seedu.address.model.applicant.NameContainsKeywordsPredicate;
+import seedu.address.model.interview.Interview;
 import seedu.address.testutil.EditApplicantDescriptorBuilder;
 
 /**
@@ -123,6 +125,19 @@ public class CommandTestUtil {
         model.updateFilteredApplicantList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredApplicantList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the interview at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     * Adapted from showApplicantAtIndex (above)
+     */
+    public static void showInterviewAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredInterviewList().size());
+
+        Interview interview = model.getFilteredInterviewList().get(targetIndex.getZeroBased());
+        final Applicant applicant = interview.getInterviewApplicant();
+        assertTrue(new ApplicantContainsInterviewPredicate(model.getFilteredInterviewList()).test(applicant));
     }
 
 }
