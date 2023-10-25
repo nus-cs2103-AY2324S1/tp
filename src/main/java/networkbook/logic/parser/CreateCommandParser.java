@@ -52,12 +52,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(
                 CliSyntax.PREFIX_NAME,
-                CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_LINK,
                 CliSyntax.PREFIX_GRADUATION,
-                CliSyntax.PREFIX_COURSE,
-                CliSyntax.PREFIX_SPECIALISATION,
                 CliSyntax.PREFIX_PRIORITY
         );
 
