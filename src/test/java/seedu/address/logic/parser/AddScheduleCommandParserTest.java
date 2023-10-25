@@ -39,7 +39,6 @@ public class AddScheduleCommandParserTest {
         EndTime endTime = new EndTime(LocalDateTime.parse(VALID_END_TIME_ONE));
 
         String userInput = INDEX_FIRST_PERSON.getOneBased() + START_TIME_DESC_ONE + END_TIME_DESC_ONE;
-        System.out.println(userInput);
 
         assertParseSuccess(parser,
                 INDEX_FIRST_PERSON.getOneBased() + START_TIME_DESC_ONE + END_TIME_DESC_ONE,

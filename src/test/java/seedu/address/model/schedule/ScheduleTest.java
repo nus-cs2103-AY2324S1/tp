@@ -167,6 +167,100 @@ class ScheduleTest {
     }
 
     @Test
+    void testCompareTo() {
+        LocalDateTime today = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime tomorrow = today.plusDays(1);
+        LocalDateTime yesterday = today.minusDays(1);
+
+        // Same schedule
+        Schedule schedule =
+                new ScheduleBuilder().withStartTime(today).withEndTime(today.withHour(1)).build();
+
+        assertTrue(schedule.compareTo(schedule) == 0);
+
+        Schedule copy = new ScheduleBuilder(schedule).build();
+
+        assertTrue(schedule.compareTo(copy) == 0);
+
+        // Both schedules before today
+        Schedule ealierSchedule =
+                new ScheduleBuilder().withStartTime(yesterday.withHour(9)).withEndTime(yesterday.withHour(11)).build();
+
+        Schedule laterSchedule =
+                new ScheduleBuilder().withStartTime(yesterday.withHour(11)).withEndTime(yesterday.withHour(13)).build();
+
+        assertTrue(ealierSchedule.compareTo(laterSchedule) > 0);
+        assertTrue(laterSchedule.compareTo(ealierSchedule) < 0);
+
+        copy = new ScheduleBuilder(ealierSchedule).build();
+
+        assertTrue(ealierSchedule.compareTo(copy) == 0);
+
+        // Both schedules from today
+
+        ealierSchedule =
+                new ScheduleBuilder().withStartTime(today.withHour(9)).withEndTime(today.withHour(11)).build();
+
+        laterSchedule =
+                new ScheduleBuilder().withStartTime(today.withHour(11)).withEndTime(today.withHour(13)).build();
+
+        assertTrue(ealierSchedule.compareTo(laterSchedule) < 0);
+        assertTrue(laterSchedule.compareTo(ealierSchedule) > 0);
+
+        copy = new ScheduleBuilder(ealierSchedule).build();
+
+        assertTrue(ealierSchedule.compareTo(copy) == 0);
+
+        // Both schedules after today
+
+        ealierSchedule =
+                new ScheduleBuilder().withStartTime(tomorrow.withHour(9)).withEndTime(tomorrow.withHour(11)).build();
+
+        laterSchedule =
+                new ScheduleBuilder().withStartTime(tomorrow.withHour(11)).withEndTime(tomorrow.withHour(13)).build();
+
+        assertTrue(ealierSchedule.compareTo(laterSchedule) < 0);
+        assertTrue(laterSchedule.compareTo(ealierSchedule) > 0);
+
+        copy = new ScheduleBuilder(ealierSchedule).build();
+
+        assertTrue(ealierSchedule.compareTo(copy) == 0);
+
+        // One before, one after
+
+        ealierSchedule =
+                new ScheduleBuilder().withStartTime(yesterday.withHour(9)).withEndTime(yesterday.withHour(11)).build();
+
+        laterSchedule =
+                new ScheduleBuilder().withStartTime(tomorrow.withHour(11)).withEndTime(tomorrow.withHour(13)).build();
+
+        assertTrue(ealierSchedule.compareTo(laterSchedule) > 0);
+        assertTrue(laterSchedule.compareTo(ealierSchedule) < 0);
+
+        // One on, one after
+
+        ealierSchedule =
+                new ScheduleBuilder().withStartTime(today.withHour(9)).withEndTime(today.withHour(11)).build();
+
+        laterSchedule =
+                new ScheduleBuilder().withStartTime(tomorrow.withHour(11)).withEndTime(tomorrow.withHour(13)).build();
+
+        assertTrue(ealierSchedule.compareTo(laterSchedule) < 0);
+        assertTrue(laterSchedule.compareTo(ealierSchedule) > 0);
+
+        // One on, one before
+
+        ealierSchedule =
+                new ScheduleBuilder().withStartTime(yesterday.withHour(9)).withEndTime(yesterday.withHour(11)).build();
+
+        laterSchedule =
+                new ScheduleBuilder().withStartTime(today.withHour(11)).withEndTime(today.withHour(13)).build();
+
+        assertTrue(ealierSchedule.compareTo(laterSchedule) > 0);
+        assertTrue(laterSchedule.compareTo(ealierSchedule) < 0);
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Schedule.class.getCanonicalName() + "{tutor=" + SCHEDULE_ALICE_FIRST_JAN.getTutor()
                 + ", startTime=" + SCHEDULE_ALICE_FIRST_JAN.getStartTime()

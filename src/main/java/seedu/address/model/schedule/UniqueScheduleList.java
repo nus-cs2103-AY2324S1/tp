@@ -12,7 +12,7 @@ import seedu.address.model.schedule.exceptions.DuplicateScheduleException;
 import seedu.address.model.schedule.exceptions.ScheduleNotFoundException;
 
 /**
- * A list of schedules that enforces uniqueness between its elements and does not allow nulls.
+ * A sorted list of schedules that enforces uniqueness between its elements and does not allow nulls.
  * A Schedule is considered unique by comparing using {@code Schedule#equals(Object)}. As such, adding and
  * updating of schedules uses Schedule#equals(Object) for equality so as to ensure that the schedule being added
  * or updated is unique in terms of identity in the UniqueScheduleList. The removal of a schedule uses
@@ -21,6 +21,7 @@ import seedu.address.model.schedule.exceptions.ScheduleNotFoundException;
  * Supports a minimal set of list operations.
  *
  * @see Schedule#equals(Object)
+ * @see Schedule#compareTo(Schedule)
  */
 public class UniqueScheduleList implements Iterable<Schedule> {
     private final ObservableList<Schedule> internalList = FXCollections.observableArrayList();
@@ -45,6 +46,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
             throw new DuplicateScheduleException();
         }
         internalList.add(toAdd);
+        sort();
     }
 
     /**
@@ -65,6 +67,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
         }
 
         internalList.set(index, editedSchedule);
+        sort();
     }
 
     /**
@@ -86,6 +89,7 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     public void setSchedules(UniqueScheduleList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sort();
     }
 
     /**
@@ -99,6 +103,14 @@ public class UniqueScheduleList implements Iterable<Schedule> {
         }
 
         internalList.setAll(schedules);
+        sort();
+    }
+
+    /**
+     * Sorts the {@code internalList} of schedules based on {@link Schedule#compareTo(Schedule)} method.
+     */
+    public void sort() {
+        FXCollections.sort(internalList);
     }
 
     /**
