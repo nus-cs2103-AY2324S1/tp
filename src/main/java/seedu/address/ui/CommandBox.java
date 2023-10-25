@@ -27,7 +27,8 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor, KeyPressExecutor keyUpExecutor, KeyPressExecutor keyDownExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, KeyPressExecutor keyUpExecutor, KeyPressExecutor
+            keyDownExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
         this.keyUpExecutor = keyUpExecutor;
