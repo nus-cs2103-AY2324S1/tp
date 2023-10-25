@@ -33,14 +33,12 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_LOCATION + "LOCATION "
             + "[" + PREFIX_TAG + "TAG]... ";
 
     private static final String PERSON_EXAMPLE =
             PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney ";
 
@@ -61,10 +59,12 @@ public class AddCommand extends Command {
             + SPECIALIST_TAG
             + ": Adds a specialist to the address book. \n"
             + MESSAGE_USAGE_GENERAL
+            + PREFIX_LOCATION + "LOCATION "
             + PREFIX_SPECIALTY + "SPECIALTY \n"
             + "Example: " + COMMAND_WORD + " "
             + SPECIALIST_TAG + " "
             + PERSON_EXAMPLE
+            + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SPECIALTY + "Physiotherapist ";
 
     private final Person toAdd;
