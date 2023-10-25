@@ -3,12 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -43,6 +45,15 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.updateAssignedPersons(personToDelete);
         model.deletePerson(personToDelete);
+
+        // Group operation
+        Set<Group> emptyGroups = model.getEmptyGroups(personToDelete);
+        if (!emptyGroups.isEmpty()) {
+            model.removeEmptyGroups(emptyGroups);
+        } else {
+            model.updateGroups();
+        }
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

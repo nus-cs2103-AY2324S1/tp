@@ -17,4 +17,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_END_TIME = new Prefix("e/");
     public static final Prefix PREFIX_MEETING_NAME = new Prefix("m/");
     public static final Prefix PREFIX_UNASSIGN_PERSONS = new Prefix("u/");
+
+    public static final Prefix PREFIX_UNASSIGN_GROUPS = new Prefix("ug/");
 }

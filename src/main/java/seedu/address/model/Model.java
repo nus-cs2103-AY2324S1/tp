@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -117,6 +118,18 @@ public interface Model {
      */
     Set<Name> findInvalidNames(Set<Name> names);
 
+    /**
+     * Returns a set of groups that are not found in the address book.
+     * @param groups Set of groups to be checked.
+     * @return Set of groups that are not found in the address book.
+     */
+    Set<Group> findInvalidGroups(Set<Group> groups);
+
+    Set<Group> getEmptyGroups(Person person);
+
+    void removeEmptyGroups(Set<Group> emptyGroups);
+
+    void updateGroups();
 
     /**
      * Updates any events where the person to edit is assigned to.

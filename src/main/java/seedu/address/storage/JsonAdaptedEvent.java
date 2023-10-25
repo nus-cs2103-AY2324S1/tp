@@ -17,6 +17,7 @@ import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
 import seedu.address.model.event.Meeting;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 
 
@@ -36,6 +37,8 @@ public class JsonAdaptedEvent {
 
     private final List<JsonAdaptedName> assignedPersons = new ArrayList<>();
 
+    private final List<JsonAdaptedGroup> assignedGroups = new ArrayList<>();
+
     /**
      * Constructs a {@code JsonAdaptedMeeting} with the given person details.
      */
@@ -45,7 +48,8 @@ public class JsonAdaptedEvent {
                             @JsonProperty("date") String date,
                             @JsonProperty("startTime") String startTime,
                             @JsonProperty("endTime") String endTime,
-                            @JsonProperty("assignedPersons") List<JsonAdaptedName> assignedPersons) {
+                            @JsonProperty("assignedPersons") List<JsonAdaptedName> assignedPersons,
+                            @JsonProperty("assignedGroups") List<JsonAdaptedGroup> assignedGroups) {
         this.eventType = eventType;
         this.name = name;
         this.date = date;
@@ -54,6 +58,10 @@ public class JsonAdaptedEvent {
 
         if (assignedPersons != null) {
             this.assignedPersons.addAll(assignedPersons);
+        }
+
+        if (assignedGroups != null) {
+            this.assignedGroups.addAll(assignedGroups);
         }
     }
 
@@ -70,6 +78,10 @@ public class JsonAdaptedEvent {
         this.assignedPersons.addAll(source.getNames().stream()
                 .map(JsonAdaptedName::new)
                 .collect(Collectors.toList()));
+
+        this.assignedGroups.addAll(source.getGroups().stream()
+                .map(JsonAdaptedGroup::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -83,6 +95,12 @@ public class JsonAdaptedEvent {
 
         for (JsonAdaptedName name : assignedPersons) {
             personNames.add(name.toModelType());
+        }
+
+        final List<Group> groups = new ArrayList<>();
+
+        for (JsonAdaptedGroup group : assignedGroups) {
+            groups.add(group.toModelType());
         }
 
         if (this.name == null) {
@@ -123,9 +141,11 @@ public class JsonAdaptedEvent {
 
         final Set<Name> modelNames = new HashSet<>(personNames);
 
+        final Set<Group> modelGroups = new HashSet<>(groups);
+
         // no other events for now
         return checkEventType(modelName, modelEventDate,
-                Optional.of(modelEventStartTime), Optional.of(modelEventEndTime), modelNames);
+                Optional.of(modelEventStartTime), Optional.of(modelEventEndTime), modelNames, modelGroups);
     }
 
 
@@ -133,15 +153,13 @@ public class JsonAdaptedEvent {
                                  EventDate eventDate,
                                  Optional<EventTime> startTime,
                                  Optional<EventTime> endTime,
-                                 Set<Name> personNames) throws IllegalValueException {
+                                 Set<Name> personNames,
+                                 Set<Group> groups) throws IllegalValueException {
 
-        switch (this.eventType) {
-        case "meeting":
-            return new Meeting(eventName, eventDate, startTime, endTime, personNames);
-        default:
-            throw new IllegalValueException(UNKNOWN_EVENT_TYPE);
+        if (this.eventType.equals("meeting")) {
+            return new Meeting(eventName, eventDate, startTime, endTime, personNames, groups);
         }
-
+        throw new IllegalValueException(UNKNOWN_EVENT_TYPE);
     }
 
     @Override

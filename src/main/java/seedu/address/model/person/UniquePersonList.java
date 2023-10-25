@@ -3,11 +3,14 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -79,6 +82,10 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Removes the equivalent person from the list.
+     * @param replacement replacement list
+     */
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -93,7 +100,6 @@ public class UniquePersonList implements Iterable<Person> {
         if (!personsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
-
         internalList.setAll(persons);
     }
 
@@ -102,6 +108,40 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Get a list of persons based on group name
+     * @param groupName groupName to search by
+     * @return A copy of the persons list with the same group name
+     */
+    public ObservableList<Person> getPersonsByGroup(Group groupName) {
+        ObservableList<Person> personsList = FXCollections.observableArrayList();
+        FXCollections.copy(personsList, internalList);
+        personsList.filtered(person -> person.hasGroup(groupName));
+        return personsList;
+    }
+
+    /**
+     * Get a set of groups that are empty after deleting the person
+     * @param person person to check
+     * @return A set of groups that are empty
+     */
+    public Set<Group> isLastPersonGroup(Person person) {
+        Set<Group> emptyGroups = new HashSet<>();
+        for (Group group: person.getGroups()) {
+            boolean isEmptyGroup = true;
+            for (Person p: internalList) {
+                if (p.hasGroup(group) && !p.equals(person)) {
+                    isEmptyGroup = false;
+                    break;
+                }
+            }
+            if (isEmptyGroup) {
+                emptyGroups.add(group);
+            }
+        }
+        return emptyGroups;
     }
 
     @Override
