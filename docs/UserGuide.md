@@ -170,7 +170,7 @@ Examples:
   * Updates the photo for the 2nd person with a new image from the specified path.
 
 
-###  Search contact
+###  Find contacts
 
 Generally, search commands will contain the following tokens:
 
