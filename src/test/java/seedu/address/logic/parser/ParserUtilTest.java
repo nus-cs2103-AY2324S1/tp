@@ -48,6 +48,9 @@ public class ParserUtilTest {
 
     /* Others */
     private static final String WHITESPACE = " \t\r\n";
+    private static final Status statusMissed = Status.MISSED;
+    private static final Status statusCompleted = Status.COMPLETED;
+
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -219,15 +222,17 @@ public class ParserUtilTest {
 
     @Test
     public void parseStatusToString_returnsStatusString() throws Exception {
-        Status status = Status.MISSED;
-        String expectedString = "0";
-        assertEquals(parseStatusToString(status), expectedString);
+        String expectedMissedString = "0";
+        String expectedCompletedString = "1";
+        assertEquals(parseStatusToString(statusMissed), expectedMissedString);
+        assertEquals(parseStatusToString(statusCompleted), expectedCompletedString);
     }
 
     @Test
     public void parseStatusToIndex_returnsStatusIndex() throws Exception {
-        Status status = Status.MISSED;
-        int expectedIndex = 0;
-        assertEquals(parseStatusToInteger(status), expectedIndex);
+        int expectedMissedIndex = 0;
+        int expectedCompletedIndex = 1;
+        assertEquals(parseStatusToInteger(statusMissed), expectedMissedIndex);
+        assertEquals(parseStatusToInteger(statusCompleted), expectedCompletedIndex);
     }
 }
