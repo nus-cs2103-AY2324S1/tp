@@ -58,25 +58,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.shortcutSettings = shortcutSettings;
     }
 
-    /**
-     * Registers the new mapping.
-     * @param alias New alias for an existing command word
-     * @param commandWord The command word to be mapped to the alias
-     * @return The alias' previously mapped command word if any, else returns null.
-     */
-    public String registerShortcut(String alias, String commandWord) {
-        return shortcutSettings.registerShortcut(alias, commandWord);
-    }
-
-    /**
-     * Checks if the alias has a mapping registered and returns it if found.
-     * @param alias Query alias
-     * @return Registered command word if found, else given alias
-     */
-    public String getShortcut(String alias) {
-        return shortcutSettings.getShortcut(alias);
-    }
-
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
     }

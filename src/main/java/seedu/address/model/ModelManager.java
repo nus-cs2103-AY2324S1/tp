@@ -89,17 +89,6 @@ public class ModelManager implements Model {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
-    //=========== Shortcuts ==================================================================================
-
-    @Override
-    public String getShortcut(String alias) {
-        return userPrefs.getShortcut(alias);
-    }
-    @Override
-    public String registerShortcut(String alias, String keyword) {
-        return userPrefs.registerShortcut(alias, keyword);
-    }
-
 
     //=========== AddressBook ================================================================================
 

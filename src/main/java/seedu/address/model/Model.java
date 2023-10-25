@@ -44,10 +44,6 @@ public interface Model {
      * Sets the user prefs' shortcut settings.
      */
     void setShortcutSettings(ShortcutSettings shortcutSettings);
-
-    String getShortcut(String alias);
-    String registerShortcut(String alias, String keyword);
-
     /**
      * Returns the user prefs' address book file path.
      */
