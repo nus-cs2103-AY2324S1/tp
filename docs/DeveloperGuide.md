@@ -272,26 +272,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                           | I want to …​                    | So that I can…​                          |
-| -------- | --------------------------------- | ------------------------------- | ---------------------------------------- |
-| `[EPIC]` | user who has meetings             | have a meeting schedule         | keep track of them                       |
-| `* * *`  | user                              | create new meetings             |                                          |
-| `* * *`  | user                              | delete meetings                 |                                          |
-| `* * *`  | user                              | view meetings                   |                                          |
-| `* * *`  | user                              | view a specific meeting         | see more details                         |
-| `* *`    | user                              | sort my meetings by date        | see which ones come first                |
-| `[EPIC]` | user who meets people             | have an address book            | keep track of them                       |
-| `* * *`  | user                              | create new contacts             |                                          |
-| `* * *`  | user                              | delete contacts                 |                                          |
-| `* * *`  | user                              | view contacts                   |                                          |
-| `* * *`  | user                              | view a specific contact         | see more details                         |
-| `[EPIC]` | user who has meetings with people | schedule meetings with contacts | keep track of who is attending a meeting |
-| `* * *`  | user                              | add contacts to meetings        |                                          |
-| `* * *`  | user                              | remove contacts from meetings   |                                          |
-| `* * *`  | user                              | view contacts in meetings       |                                          |
-| `*`      | user                              | assign named tags to meetings   | organise meetings                        |
-| `*`      | user                              | filter meetings by tags         | view related meetings together           |
-
+| Priority | As a …​                                   | I want to …​                    | So that I can…​                       |
+| -------- | ----------------------------------------- | ------------------------------- | ------------------------------------- |
+| `[EPIC]` | agent who has meetings                    | have a meeting schedule         | keep track of them                    |
+| `* * *`  | agent                                     | create new meetings             |                                       |
+| `* * *`  | agent                                     | delete meetings                 |                                       |
+| `* * *`  | agent                                     | view meetings                   |                                       |
+| `* * *`  | agent                                     | view a specific meeting         | see more details                      |
+| `* *`    | agent                                     | edit a meeting                  | change its details                    |
+| `* *`    | agent                                     | sort my meetings by date        | see which ones come first             |
+| `*`      | agent                                     | mark meetings as complete       | know which meetings are done          |
+| `[EPIC]` | agent who has clients                     | have an address book            | keep track of them                    |
+| `* * *`  | agent                                     | create new contacts             |                                       |
+| `* * *`  | agent                                     | delete contacts                 |                                       |
+| `* * *`  | agent                                     | view contacts                   |                                       |
+| `* * *`  | agent                                     | view a specific contact         | see more details                      |
+| `* *`    | agent                                     | edit a contact                  | change its details                    |
+| `*`      | agent                                     | assign named tags to meetings   | organise meetings                     |
+| `*`      | agent                                     | filter meetings by tags         | view related meetings together        |
+| `[EPIC]` | agent who meets with clients              | schedule meetings with contacts | keep track of the client I am meeting |
+| `* * *`  | agent                                     | add contacts to meetings        |                                       |
+| `* * *`  | agent                                     | remove contacts from meetings   |                                       |
+| `* * *`  | agent                                     | view contacts in meetings       |                                       |
+| `*`      | agent who wants to meet clients regularly | know the last contacted date    | when to touch base with a client      |
 
 _{More to be added}_
 
@@ -345,6 +348,7 @@ _{More to be added}_
 1.  User requests to list meetings.
 2.  OutBook shows a list of meetings.
 3.  User requests to view details of a specific meeting.
+4.  OutBook shows the details of the meeting. 
 4.  User requests to remove a specific contact from the meeting.
 5.  OutBook removes the contact from the meeting.
 
@@ -356,21 +360,52 @@ _{More to be added}_
 
   Use case ends.
 
-- 3a. There are no contacts in the meeting.
+- 3a. The given meeting index is invalid.
 
-  Use case ends.
-
-- 4a. The given meeting index is invalid.
-
-  - 4a1. OutBook shows an error message.
+  - 3a1. OutBook shows an error message.
 
     Use case resumes at step 2.
 
-- 4b. The given contact index is invalid.
+- 4a. There are no contacts in the meeting.
 
-  - 4b1. OutBook shows an error message.
+  Use case ends.
+
+- 5a. The given meeting index is invalid.
+
+  - 5a1. OutBook shows an error message.
+
+    Use case resumes at step 2.
+
+- 5b. The given contact index is invalid.
+
+  - 5b1. OutBook shows an error message.
 
     Use case resumes at step 3.
+
+
+**Use case: Mark meeting as complete**
+
+**MSS**
+
+1. User requests to mark a specific meeting as complete
+2. OutBook marks the specific meeting as complete
+3. OutBook updates the last contacted date of attendees to the meeting date
+
+   Use case ends. 
+
+**Extensions**
+
+- 1a. The given meeting index is invalid.
+
+  - 1a1. OutBook shows an error message.
+
+    Use case resumes from the start.
+
+- 1b. The given meeting is already marked complete.
+
+  - 1b1. OutBook shows an error message.
+
+    Use case ends.
 
 _{More to be added}_
 
