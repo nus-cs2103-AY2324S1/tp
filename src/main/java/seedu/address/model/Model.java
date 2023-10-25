@@ -5,8 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Mod;
 
 /**
  * The API of the Model component.
@@ -49,12 +49,12 @@ public interface Model {
      * Returns the module the user is teaching.
      *
      */
-    Mod getTeaching();
+    Course getTeaching();
 
     /**
      * Sets the module the user is teaching.
      */
-    void setTeaching(Mod module);
+    void setTeaching(Course module);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

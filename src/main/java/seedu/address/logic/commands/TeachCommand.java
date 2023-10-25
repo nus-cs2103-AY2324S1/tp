@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Mod;
+import seedu.address.model.course.Course;
 
 /**
  * Adds the default course for users in the address book.
@@ -15,22 +15,22 @@ public class TeachCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets up default module users are teaching.\n"
             + "Parameters: "
-            + PREFIX_MOD + "MODULE \n"
+            + PREFIX_COURSE + "MODULE \n"
             + "Example: " + COMMAND_WORD
-            + " " + PREFIX_MOD + "CS1231S ";
+            + " " + PREFIX_COURSE + "CS1231S ";
 
     public static final String MESSAGE_SUCCESS = "Default module successfully added.";
 
     /**
      * Sets module as the default.
      */
-    private final Mod module;
+    private final Course module;
 
     /**
      * Creates TeachCommand object.
      * @param module
      */
-    public TeachCommand(Mod module) {
+    public TeachCommand(Course module) {
         requireNonNull(module);
         this.module = module;
     }

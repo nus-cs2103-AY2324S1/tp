@@ -2,12 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
-import static seedu.address.logic.parser.ParserUtil.parseMod;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
+import static seedu.address.logic.parser.ParserUtil.parseCourse;
 
 import seedu.address.logic.commands.TeachCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Mod;
+import seedu.address.model.course.Course;
 
 /**
  * Parses input arguments and creates a new TeachCommand object.
@@ -22,15 +22,15 @@ public class TeachCommandParser implements Parser<TeachCommand> {
     public TeachCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MOD);
+                ArgumentTokenizer.tokenize(args, PREFIX_COURSE);
 
         try {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MOD);
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COURSE);
 
-            Mod module = null;
+            Course module = null;
 
-            if (argMultimap.getValue(PREFIX_MOD).isPresent()) {
-                module = parseMod(argMultimap.getValue(PREFIX_MOD).get());
+            if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
+                module = parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
             }
 
             return new TeachCommand(module);

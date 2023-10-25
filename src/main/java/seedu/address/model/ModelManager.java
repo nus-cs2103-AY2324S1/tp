@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Mod;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -66,11 +66,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Mod getTeaching() {
+    public Course getTeaching() {
         return userPrefs.getTeaching();
     }
     @Override
-    public void setTeaching(Mod module) {
+    public void setTeaching(Course module) {
         requireNonNull(module);
         userPrefs.setTeaching(module);
     }

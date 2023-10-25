@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.tag.Mod;
+import seedu.address.model.course.Course;
 
 /**
  * Represents User's preferences.
@@ -17,7 +17,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
-    private Mod teaching;
+    private Course teaching;
     /**
      * Creates a {@code UserPrefs} with default values.
      */
@@ -58,10 +58,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
-    public Mod getTeaching() {
+    public Course getTeaching() {
         return this.teaching;
     }
-    public void setTeaching(Mod module) {
+    public void setTeaching(Course module) {
         requireNonNull(module);
         this.teaching = module;
     }
