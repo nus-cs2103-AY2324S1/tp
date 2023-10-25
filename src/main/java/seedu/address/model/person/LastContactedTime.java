@@ -32,6 +32,9 @@ public class LastContactedTime {
         return dateTime.format(FORMATTER);
     }
 
+    /**
+     * Returns true if a given LocalDateTime input is valid.
+     */
     public static boolean isValidLastContactedTime(LocalDateTime input) {
         if (input == null) {
             return false;

@@ -104,12 +104,14 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        LocalDateTime updatedLastContactedTime = editPersonDescriptor.getLastContactedTime().orElse(personToEdit.getLastContactedTime().getTime());
+        LocalDateTime updatedLastContactedTime = editPersonDescriptor.getLastContactedTime()
+                .orElse(personToEdit.getLastContactedTime().getTime());
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(personToEdit.getStatus());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedLastContactedTime, updatedStatus, updatedRemark, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedLastContactedTime, updatedStatus,
+                updatedRemark, updatedTags);
     }
 
     @Override

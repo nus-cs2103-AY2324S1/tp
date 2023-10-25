@@ -106,7 +106,8 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (lastContactedTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, LocalDateTime.class.getSimpleName()));
         }
         try {
             if (!LastContactedTime.isValidLastContactedTime(LocalDateTime.parse(lastContactedTime))) {
@@ -126,7 +127,8 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelLastContactedTime, modelStatus, modelRemark, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelLastContactedTime, modelStatus, modelRemark,
+                modelTags);
     }
 
 }
