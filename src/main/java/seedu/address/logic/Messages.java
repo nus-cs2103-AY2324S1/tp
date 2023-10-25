@@ -38,10 +38,10 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append("Room number: ")
                 .append(booking.getRoom())
-                .append("; Name: ")
-                .append(booking.getName())
                 .append("; Booking Period: ")
                 .append(booking.getBookingPeriod())
+                .append("; Name: ")
+                .append(booking.getName())
                 .append("; Phone: ")
                 .append(booking.getPhone())
                 .append("; Email: ")

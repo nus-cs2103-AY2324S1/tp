@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.booking.exceptions.BookingNotFoundException;
 import seedu.address.model.booking.exceptions.DuplicateBookingException;
-import seedu.address.model.booking.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -17,7 +17,7 @@ import seedu.address.model.booking.exceptions.PersonNotFoundException;
  * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Booking#isSameBooking(Booking)
@@ -58,7 +58,7 @@ public class UniqueBookingList implements Iterable<Booking> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new BookingNotFoundException();
         }
 
         if (!target.isSameBooking(editedBooking) && contains(editedBooking)) {
@@ -75,7 +75,7 @@ public class UniqueBookingList implements Iterable<Booking> {
     public void remove(Booking toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new BookingNotFoundException();
         }
     }
 

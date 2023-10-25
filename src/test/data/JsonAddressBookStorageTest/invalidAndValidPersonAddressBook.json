@@ -1,13 +1,13 @@
 {
   "persons": [ {
     "room": "1",
-    "bookingPeriod" : "2023-01-01 to 2023-01-01",
+    "bookingPeriod" : "2023-01-01 08:00 to 2023-01-01 12:00",
     "name": "Valid Person",
     "phone": "9482424",
     "email": "hans@example.com"
   }, {
     "room": "2",
-    "bookingPeriod" : "2023-01-01 to 2023-01-01",
+    "bookingPeriod" : "2023-01-01 08:00 to 2023-01-01 12:00",
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com"
