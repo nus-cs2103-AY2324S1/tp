@@ -49,8 +49,8 @@ public class PersonCard extends UiPart<Region> {
     private Label telegram;
     @FXML
     private FlowPane tags;
-    @FXML
-    private Label uniqueId;
+    //@FXML
+    //private Label uniqueId;
     @FXML
     private Button notesButton;
 
@@ -61,7 +61,7 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        //id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + ". ");
         bindLabelToProperty(name, person.getName().fullName);
         bindLabelToProperty(phone, person.getPhone().value);
         bindLabelToProperty(address, person.getAddress().value);
@@ -70,7 +70,7 @@ public class PersonCard extends UiPart<Region> {
         bindLabelToProperty(secondaryEmail, person.getSecondaryEmail().map(e -> e.value).orElse(""));
         bindLabelToProperty(telegram, person.getTelegram().map(t -> t.value).orElse(""));
         bindLabelToProperty(birthday, person.getBirthday().map(b -> b.toString()).orElse(""));
-        bindLabelToProperty(uniqueId, person.getId().map(x -> Integer.toString(x)).orElse("NONE"));
+        //bindLabelToProperty(uniqueId, person.getId().map(x -> Integer.toString(x)).orElse("NONE"));
         person.getEmergencyTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> {
@@ -81,7 +81,7 @@ public class PersonCard extends UiPart<Region> {
         person.getNonEmergencyTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        uniqueId.setText(person.getId().map(x -> Integer.toString(x)).orElse("NONE"));
+        //uniqueId.setText(person.getId().map(x -> Integer.toString(x)).orElse("NONE"));
 
         int numberOfNotes = person.getNotes().size();
         notesButton.setText("Notes (" + numberOfNotes + ")");
