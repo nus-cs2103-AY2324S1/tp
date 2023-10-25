@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -21,7 +21,7 @@ class SortCommandParserTest {
     @Test
     public void parse_validArgs_returnsSortCommand() {
 
-        String userInput = " " + PREFIX_SORT + "salary";
+        String userInput = " " + PREFIX_FIELD + "salary";
 
         SortCommand expectedSortCommand = new SortCommand("salary");
 
