@@ -31,7 +31,8 @@ public class BandIsSamePredicate implements Predicate<Band> {
             return false;
         }
 
-        seedu.address.model.band.BandIsSamePredicate otherBandIsSamePredicate = (seedu.address.model.band.BandIsSamePredicate) other;
+        seedu.address.model.band.BandIsSamePredicate otherBandIsSamePredicate =
+                (seedu.address.model.band.BandIsSamePredicate) other;
         return bandToCheck.equals(otherBandIsSamePredicate.bandToCheck);
     }
 
