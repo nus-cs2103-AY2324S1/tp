@@ -1,6 +1,7 @@
 package transact.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static transact.commons.util.CollectionUtil.requireAllNonNull;
 import static transact.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static transact.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static transact.logic.parser.CliSyntax.PREFIX_NAME;
@@ -10,12 +11,10 @@ import static transact.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import transact.commons.core.index.Index;
 import transact.commons.util.CollectionUtil;
 import transact.commons.util.ToStringBuilder;
 import transact.logic.Messages;
@@ -37,9 +36,9 @@ public class EditStaffCommand extends Command {
     public static final String COMMAND_WORD = "editstaff";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by their unqiue id displayed in the person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: ID (must be a non-negative integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -52,43 +51,41 @@ public class EditStaffCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_PERSON_ID_NOT_FOUND = "Cannot find person with id: %d";
 
-    private final Index index;
+    private final Integer personId;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index
-     *            of the person in the filtered person list to edit
+     * @param personId
+     *            of the person to edit
      * @param editPersonDescriptor
      *            details to edit the person with
      */
-    public EditStaffCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+    public EditStaffCommand(Integer personId, EditPersonDescriptor editPersonDescriptor) {
+        requireAllNonNull(personId, editPersonDescriptor);
 
-        this.index = index;
+        this.personId = personId;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Person personToEdit = model.getPerson(personId);
+
+        if (personToEdit.equals(Person.NULL_PERSON)) {
+            throw new CommandException(String.format(MESSAGE_PERSON_ID_NOT_FOUND, personId));
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSameEntry(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        model.setPerson(personToEdit.getPersonId(), editedPerson);
 
-        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
+        return new CommandResult(
+                String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)),
                 TabWindow.ADDRESSBOOK);
     }
 
@@ -105,7 +102,8 @@ public class EditStaffCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(personToEdit.getPersonId(), updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags);
     }
 
     @Override
@@ -120,14 +118,14 @@ public class EditStaffCommand extends Command {
         }
 
         EditStaffCommand otherEditStaffCommand = (EditStaffCommand) other;
-        return index.equals(otherEditStaffCommand.index)
+        return personId.equals(otherEditStaffCommand.personId)
                 && editPersonDescriptor.equals(otherEditStaffCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                .add("personId", personId)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }

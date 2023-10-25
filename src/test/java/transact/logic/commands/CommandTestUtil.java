@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import transact.commons.core.index.Index;
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.AddressBook;
 import transact.model.Model;
@@ -123,10 +122,10 @@ public class CommandTestUtil {
      * {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showPersonAtId(Model model, Integer targetId) {
+        assertTrue(targetId < model.getFilteredPersonList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Person person = model.getFilteredPersonList().get(targetId);
         final String[] splitName = person.getName().fullName.split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
@@ -138,10 +137,10 @@ public class CommandTestUtil {
      * {@code targetIndex} in the
      * {@code model}'s transaction book.
      */
-    public static void showTransactionAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredTransactionList().size());
+    public static void showTransactionAtIndex(Model model, Integer targetIndex) {
+        assertTrue(targetIndex < model.getFilteredTransactionList().size());
 
-        Transaction transaction = model.getFilteredTransactionList().get(targetIndex.getZeroBased());
+        Transaction transaction = model.getFilteredTransactionList().get(targetIndex);
         final TransactionId id = transaction.getTransactionId();
         model.updateFilteredTransactionList(transaction1 -> Objects.equals(transaction1.getTransactionId(), id));
 

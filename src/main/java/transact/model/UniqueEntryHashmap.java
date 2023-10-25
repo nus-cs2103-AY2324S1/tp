@@ -3,6 +3,8 @@ package transact.model;
 import static java.util.Objects.requireNonNull;
 import static transact.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -85,6 +87,9 @@ public class UniqueEntryHashmap<K, V extends Entry> {
      */
     public void setEntries(Map<? extends K, ? extends V> entries) {
         requireAllNonNull(entries);
+        if (!entriesAreUnique(entries)) {
+            throw new DuplicateEntryException();
+        }
 
         internalMap.clear();
         internalMap.putAll(entries);
@@ -120,5 +125,20 @@ public class UniqueEntryHashmap<K, V extends Entry> {
     @Override
     public String toString() {
         return internalMap.toString();
+    }
+
+    /**
+     * Returns true if {@code entries} contains only unique entries.
+     */
+    private boolean entriesAreUnique(Map<? extends K, ? extends V> entries) {
+        List<? extends V> allLists = new ArrayList<>(entries.values());
+        for (int i = 0; i < allLists.size() - 1; i++) {
+            for (int j = i + 1; j < allLists.size(); j++) {
+                if (allLists.get(i).isSameEntry(allLists.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

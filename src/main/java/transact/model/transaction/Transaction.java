@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import transact.commons.util.ToStringBuilder;
 import transact.model.entry.Entry;
-import transact.model.person.Person;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
 import transact.model.transaction.info.Description;
@@ -23,7 +22,7 @@ public class Transaction implements Entry {
     private final Description description;
     private final Amount amount;
     private final Date date;
-    private final Person person;
+    private final Integer personId;
 
     /**
      * Creates a new Transaction.
@@ -40,8 +39,8 @@ public class Transaction implements Entry {
      *            The person associated with the transaction.
      */
     public Transaction(TransactionType transactionType, Description description, Amount amount, Date date,
-            Person person) {
-        this(new TransactionId(), transactionType, description, amount, date, person);
+            Integer personId) {
+        this(new TransactionId(), transactionType, description, amount, date, personId);
     }
 
     /**
@@ -60,7 +59,7 @@ public class Transaction implements Entry {
      */
     public Transaction(TransactionId transactionId, TransactionType transactionType, Description description,
             Amount amount, Date date) {
-        this(transactionId, transactionType, description, amount, date, Person.NULL_PERSON);
+        this(transactionId, transactionType, description, amount, date, -1);
     }
 
     /**
@@ -97,13 +96,13 @@ public class Transaction implements Entry {
      *            The person associated with the transaction.
      */
     public Transaction(TransactionId transactionId, TransactionType transactionType, Description description,
-            Amount amount, Date date, Person person) {
+            Amount amount, Date date, Integer personId) {
         this.transactionId = transactionId;
         this.transactionType = transactionType;
         this.description = description;
         this.amount = amount;
         this.date = date;
-        this.person = person;
+        this.personId = personId;
     }
 
     public TransactionId getTransactionId() {
@@ -111,12 +110,11 @@ public class Transaction implements Entry {
     }
 
     public Boolean hasPersonInfo() {
-        return person != Person.NULL_PERSON;
+        return personId >= 0;
     }
 
-    public Person getPerson() {
-        // checkArgument(hasPersonInfo(), MESSAGE_CONSTRAINTS);
-        return person;
+    public Integer getPersonId() {
+        return personId;
     }
 
     public Description getDescription() {
@@ -150,12 +148,12 @@ public class Transaction implements Entry {
                 && Objects.equals(transactionType, that.transactionType)
                 && Objects.equals(description, that.description)
                 && Objects.equals(amount, that.amount)
-                && Objects.equals(person, that.person);
+                && Objects.equals(personId, that.personId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, transactionType, description, amount, person);
+        return Objects.hash(transactionId, transactionType, description, amount, personId);
     }
 
     @Override
@@ -165,7 +163,7 @@ public class Transaction implements Entry {
                 .add("type", transactionType)
                 .add("description", description)
                 .add("amount", amount)
-                .add("person", person)
+                .add("personId", personId)
                 .toString();
     }
 

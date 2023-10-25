@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import transact.commons.core.GuiSettings;
 import transact.commons.core.LogsCenter;
 import transact.model.person.Person;
+import transact.model.person.PersonId;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.TransactionId;
 
@@ -108,14 +109,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasPerson(PersonId personId) {
+        requireNonNull(personId);
+        return addressBook.hasPerson(personId);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public Person deletePerson(PersonId targetId) {
+        return addressBook.removePerson(targetId);
     }
 
     @Override
@@ -125,10 +126,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(PersonId targetId, Person editedPerson) {
+        requireAllNonNull(targetId, editedPerson);
+        addressBook.setPerson(targetId, editedPerson);
+    }
 
-        addressBook.setPerson(target, editedPerson);
+    @Override
+    public Person getPerson(Integer targetId) {
+        return addressBook.getPersonMap().entrySet().stream()
+                .filter(e -> e.getKey().getValue() == targetId)
+                .findFirst()
+                .map(e -> e.getValue())
+                .orElse(Person.NULL_PERSON);
     }
 
     // =========== TransactionBook
@@ -178,6 +187,12 @@ public class ModelManager implements Model {
      * internal list of
      * {@code versionedAddressBook}
      */
+
+    @Override
+    public ObservableMap<PersonId, Person> getPersonMap() {
+        return addressBook.getPersonMap();
+    }
+
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
