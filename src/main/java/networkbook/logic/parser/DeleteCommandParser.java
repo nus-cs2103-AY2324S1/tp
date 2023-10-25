@@ -19,7 +19,7 @@ import networkbook.logic.commands.delete.DeleteTagAction;
 import networkbook.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteCommand object.
  */
 public class DeleteCommandParser implements Parser<Command> {
     public static final String MESSAGE_DELETE_NAME = "Name of a contact cannot be deleted.";
@@ -53,7 +53,7 @@ public class DeleteCommandParser implements Parser<Command> {
         Index index;
 
         try {
-            index = ParserUtil.parseIndex(args);
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE), pe);
@@ -71,6 +71,10 @@ public class DeleteCommandParser implements Parser<Command> {
         );
 
         if (prefix == null) {
+            if (argMultimap.getValue(CliSyntax.PREFIX_INDEX).isPresent()) {
+                throw new ParseException(
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
+            }
             return new DeletePersonCommand(index);
         }
 
@@ -113,41 +117,49 @@ public class DeleteCommandParser implements Parser<Command> {
     }
 
     private DeletePhoneAction generatePhoneAction(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_PHONE);
         Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
         return new DeletePhoneAction(index);
     }
 
     private DeleteEmailAction generateEmailAction(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_EMAIL);
         Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
         return new DeleteEmailAction(index);
     }
 
     private DeleteLinkAction generateLinkAction(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_LINK);
         Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
         return new DeleteLinkAction(index);
     }
 
     private DeleteCourseAction generateCourseAction(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_COURSE);
         Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
         return new DeleteCourseAction(index);
     }
 
     private DeleteSpecialisationAction generateSpecialisationAction(ArgumentMultimap argMultimap)
             throws ParseException {
+        argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_SPECIALISATION);
         Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
         return new DeleteSpecialisationAction(index);
     }
 
     private DeleteTagAction generateTagAction(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_TAG);
         Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
         return new DeleteTagAction(index);
     }
 
     private DeleteGraduationAction generateGraduationAction(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_GRADUATION);
         return new DeleteGraduationAction();
     }
 
     private DeletePriorityAction generatePriorityAction(ArgumentMultimap argMultimap) throws ParseException {
+        argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_PRIORITY);
         return new DeletePriorityAction();
     }
 

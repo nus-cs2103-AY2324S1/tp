@@ -22,9 +22,14 @@ public class DeletePersonCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: [LIST INDEX OF CONTACT]\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes a person or a piece of information about a person.\n"
+            + "Usage 1: " + COMMAND_WORD + " [LIST INDEX OF CONTACT]\n"
+            + "This deletes the person identified by the index number used in the displayed person list.\n"
+            + "Example: " + COMMAND_WORD + " 1\n"
+            + "Usage 2: " + COMMAND_WORD + " [LIST INDEX OF CONTACT] [FIELD PREFIX]\n"
+            + "Example: " + COMMAND_WORD + " 1 /priority\n"
+            + "If the field can have multiple values, /index must be used to specify index of the entry to delete.\n"
+            + "Example: " + COMMAND_WORD + " 1 /email /index 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Noted, deleted contact:\n%1$s";
     public static final String MESSAGE_DELETE_PERSON_INDEX = "\nAt index %1$s";
