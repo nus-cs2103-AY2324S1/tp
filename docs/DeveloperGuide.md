@@ -406,8 +406,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The displayed list is empty. 
-  * 2a1. System indicates error.
+* 2a. The displayed list is empty.
+  * 2a1. System indicates error as there are no fosterers to delete.
   
     Use case ends.
   
