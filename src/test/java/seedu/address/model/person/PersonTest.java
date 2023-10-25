@@ -115,13 +115,12 @@ public class PersonTest {
     }
 
     @Test
-    public void isAvailabilityValidWhenAnimalNameNil_validAvailability() {
-        // when animal name is "nil", availability can be "Available" or "nil"
+    public void isAvailabilityValidWhenAnimalNameNotNil_validAvailability() {
         Person person = new PersonBuilder(ALICE)
                 .withAnimalName("nil")
                 .withAvailability("Available")
                 .build();
-        assertTrue(person.isAvailabilityValidWhenAnimalNameNil());
+        assertTrue(person.isAvailabilityValidWhenAnimalNameNotNil());
     }
 
     @Test

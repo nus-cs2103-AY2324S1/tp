@@ -49,7 +49,7 @@ public class Person {
         this.animalType = animalType;
         this.tags.addAll(tags);
 
-        if (!isAvailabilityValidWhenAnimalNameNil()) {
+        if (!isAvailabilityValidWhenAnimalNameNotNil()) {
             throw new IllegalArgumentException("When an animal name is provided, availability should not be "
                     + "'Available' or 'nil'.");
         }
@@ -68,7 +68,7 @@ public class Person {
      *
      * @return a boolean value which represents if animal name is valid.
      */
-    public boolean isAvailabilityValidWhenAnimalNameNil() {
+    public boolean isAvailabilityValidWhenAnimalNameNotNil() {
         String avail = availability.value;
         if (!animalName.fullName.equals("nil")) {
             return !(avail.equals("Available") || avail.equals("nil"));
