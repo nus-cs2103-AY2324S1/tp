@@ -56,7 +56,7 @@ public class TransactionTablePanel extends UiPart<Region> {
             public ObservableValue<String> call(CellDataFeatures<Transaction, String> t) {
                 // TODO Show name of staff beside the id
                 String displayString = "";
-                if (t.getValue().getPersonId() > 0) {
+                if (t.getValue().getPersonId() >= 0) {
                     displayString = t.getValue().getPersonId().toString();
                 }
                 return new ReadOnlyObjectWrapper(displayString);
