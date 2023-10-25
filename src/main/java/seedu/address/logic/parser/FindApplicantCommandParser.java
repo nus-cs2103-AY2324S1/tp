@@ -10,13 +10,14 @@ import seedu.address.model.person.ApplicantContainsKeywordsPredicate;
 
 
 /**
- * Parses input arguments and creates a new FindApplicant object
+ * Parses input arguments and creates a new FindApplicantCommand object
  */
 public class FindApplicantCommandParser implements Parser<FindApplicantCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindApplicantCommand
      * and returns a FindApplicantCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindApplicantCommand parse(String args) throws ParseException {
