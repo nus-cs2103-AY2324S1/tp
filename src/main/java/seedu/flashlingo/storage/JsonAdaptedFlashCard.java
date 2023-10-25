@@ -102,9 +102,6 @@ public class JsonAdaptedFlashCard {
         }
         final Date modelWhenToReview = Date.from(ZonedDateTime.parse(whenToReview).toInstant());
 
-        if (!ProficiencyLevel.isValidProficiencyLevel(level)) {
-            throw new IllegalValueException(ProficiencyLevel.MESSAGE_CONSTRAINTS);
-        }
         final int modelLevel = level;
 
         return new FlashCard(new OriginalWord(modelOriginalWord, modelOriginalWordLanguage),

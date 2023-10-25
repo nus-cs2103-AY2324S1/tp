@@ -69,10 +69,6 @@ public class ProficiencyLevel {
         this.level = level;
     }
 
-    public static boolean isValidProficiencyLevel(int level) {
-        return level >= 1 && level < deleteThreshold;
-    }
-
     /**
      * Checks if two proficiency levels are equal.
      * @param other

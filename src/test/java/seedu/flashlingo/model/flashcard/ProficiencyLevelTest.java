@@ -34,12 +34,6 @@ class ProficiencyLevelTest {
     }
 
     @Test
-    void toDelete() {
-        ProficiencyLevel pl1 = new ProficiencyLevel(5);
-        assert(pl1.toDelete());
-    }
-
-    @Test
     void getLevel() {
         ProficiencyLevel pl1 = new ProficiencyLevel(4);
         assertEquals(pl1.getLevel(), 4);

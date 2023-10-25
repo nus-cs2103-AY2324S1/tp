@@ -119,7 +119,6 @@ public class FlashCard {
         if (isSuccess) {
             getProficiencyLevel().upgradeLevel();
             updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
-            this.toDelete = getProficiencyLevel().toDelete();
         } else {
             getProficiencyLevel().downgradeLevel();
             updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
