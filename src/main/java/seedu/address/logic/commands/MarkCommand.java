@@ -55,6 +55,10 @@ public class MarkCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
+        if (model.isSelectedStudent(student)) {
+            model.setSelectedStudent(student);
+        }
+
         return new CommandResult(MESSAGE_MARK_SUCCESS);
     }
 

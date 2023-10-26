@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- The features `undo`, `redo` and `history` (including the code) was reused with some changes from AB-4.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -157,11 +157,58 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Tag feature
+
+#### Implementation
+
+Tagging a student with `Tag` is facilitated by 3 commands:
+* `TagCommand` will replace all existing tags of a student with input tags.
+* `AddTagCommand` will add input tags to existing tags of the student.
+* `DeleteTagCommand` will delete input tags from the existing tags of the student.
+
+These commands will be executed based on the users input. The `TagCommandParser` will be responsible for parsing the user input and create the correct command object to execute.
+Only 1 of the 3 commands will be executed per user input.
+
+Here is an example step by step of how the 3 different commands might be executed.
+
+Step 1. User inputs
+
+        tag A0245234N t/teamleader
+
+Step 2. `Logic` will receive the input and pass it to a `AddressBookParser` object which in turn creates a `TagCommandParser` object to parse the command.
+
+Step 3. Next `TagCommandParser` will check for any action identifiers,
+`/add` or `/delete`, which will create a `AddTagCommand` object or `DeleteTagCommand` object respectively,
+else a `TagCommand` object.
+
+Step 4a. `AddTagCommand` will union the `HashSet<Tag>` with the student's existing `Tag`.
+
+Step 4b. `DeleteTagCommand` will remove all `Tag` that are in the intersection of the student's existing `Tag` and `HashSet<Tag>`.
+
+Step 4c. `TagCommand` will replace all existing `Tag` of the student with `HashSet<Tag>`.
+
+Step 5. All 3 commands will create a new `Student` object with the new `Tag` and copy all other details.
+
+Step 6. All 3 commands will update the `Model` with the new Student by calling `Model#setStudent()`.
+
+The following activity diagram summarizes what happens when a user executes a tag command:
+
+<puml src="diagrams/TagCommand.puml" alt="TagCommand" />
+
+#### Design considerations:
+**Aspect: TagCommand**
+* **Alternative 1 (current choice):** Use different types of TagCommand to handle add and delete tags.
+  * Pros: Able to handle add and delete of tags. Users do not have to retype tags that they want to keep.
+  * Cons: Users have to input more details.
+* **Alternative 2:** Replace all existing tags with input tags.
+  * Pros: Easy to implement.
+  * Cons: Users have to always replace the tag even if they want to keep it.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo feature works similarly to the one implemented in AddressBook-Level 4, but with support for more commands. The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -175,7 +222,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete s/A0123456L` command to delete the student with the Student Number A0123456L in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete s/A0123456L` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
@@ -244,7 +291,50 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+**Aspect: Data structure to support the undo/redo commands**
+
+* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+  * Pros: Easy to understand.
+  * Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+  * 
+* **Alternative 2:** Use `HistoryManager` for undo/redo.
+  * Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
+  * Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
+
+**Aspect: Commands that support undo & redo**
+
+* **Alternative 1 (current choice):** Not supporting undo/redo for `load` and `config`
+  * Pros: Ensures that Class Manager will not run into issues when undoing `load` for missing saved files. Enforces the immutability of tutorial and attendance count after `config` has been entered.
+  * Cons: Unable to change tutorial and attendance count after `config` has been entered.
+* **Alternative 2:**Supporting undo/redo for all commands.
+  * Pros: Ensures that app is consistent with undo/redo and users will not be unsure if a certain command can be undone.
+  * Cons: Can be confusing for the user to use undo/redo with `load`.
+
+### Load feature
+
+#### About this feature
+
+The load feature allows users to load a saved JSON file into the app. Load allows data from the new JSON file to be displayed in Class Manager, while setting the new default save file to be the new JSON file. The status bar footer also updates to show the current file.
+
+This feature is an improvement to the previous method of directly editing the `addressbook.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course, and load the JSON file for the course they are currently teaching. 
+
+#### How it is implemented
+
+<puml src="diagrams/LoadSequenceDiagram.puml" alt="LoadSequenceDiagram" />
+
+The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `LoadCommand` attempts to read the JSON file and calls `setAddressBook` and `setAddressBookFilePath` of `Model` to update the new save file path and address book data to be displayed.
+
+#### Parsing user input
+
+1. The user inputs the `load` command.
+2. The `AddressBookParser` processes the input and creates a new `LoadCommandParser`.
+3. The `LoadCommandParser` then calls ArgumentTokenizer#tokenize(String argString, Prefix... prefixes) to extract the file name. If there are duplicate prefixes, a ParseException would be thrown.
+4. The file name is then check to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
+5. The `LoadCommandParser` then creates the `LoadCommand` based on the processed input.
+
+### Config feature
+
+The config feature is mandatory for TAs to enter before using Class Manager. It allows TAs to set the number of tutorials and the number of assignments in a module. This allows Class Manager to be able to display the correct number of tutorials and assignments for the TA to enter the grades for each student.
 
 ### \[Proposed\] Data archiving
 
@@ -259,36 +349,36 @@ of an `Student` 's class details, such as their tutorial group, tutorial attenda
 grades. It will be stored as 3 separate classes to model each of the 3 different types of class details, and a tracker
 class to act as the manager for each of the classes, with the trackers composing the `ClassDetails` class.
 
-<puml src="diagrams/ClassDetails.puml" width="250" />
+<puml src="diagrams/ClassDetails.puml" width="500" />
 
 The 3 different types of class grades are:
 
-* `Attendance` - Stores the details for a students attendance in a specific tutorial. Attendance will be stored as 
+* `Attendance` - Stores the details for a students attendance in a specific tutorial. Attendance will be stored as
 a boolean value.
 * `ClassParticipation` - Stores the details for a students participation in a specific tutorial. Class participation
 will be stored as a boolean value.
 * `Assignment` - Stores the details for a students assignment grades for a specific tutorial. Assignment grades will be
 stored as an integer value, with the total marks standardized to 100 marks.
 
-<puml src="diagrams/ClassGrades.puml" width="250" />
+<puml src="diagrams/ClassGrades.puml" width="500" />
 
 These classes will be stored in their respective tracker classes, using Java Arrays to store the objects. The position
 of the classes in the array will correspond to the index of the tutorial or assignment. For example, the first index of
 the array will correspond to either the first tutorial or assignment, depending on the tracker class.
 
 The tracker classes will be stored in the `ClassDetails` class, which will be composed of the following classes:
-* `AttendanceTracker` - Stores the `Attendance` objects for a specific student. 
+* `AttendanceTracker` - Stores the `Attendance` objects for a specific student.
 * `ClassParticipationTracker` - Stores the `ClassParticipation` objects for a specific student.
 * `AssignmentTracker` - Stores the `Assignment` objects for a specific student.
 
-* <puml src="diagrams/Tracker.puml" width="250" />
+<puml src="diagrams/Tracker.puml" width="250" />
 
 These tracker classes will inherit from a `tracker` *interface*. They will also support the following operations:
 * `getPercentage()` - Returns the average grade of the student for the specific tracker class. For example, the average
 tutorial attendance percentage, or the average assignment score.
 
 Each of these tracker classes will be able to be initialized with a specific size, which will be the number of tutorials
-or assignment grade. 
+or assignment grade.
 
 #### Design considerations:
 
@@ -296,13 +386,13 @@ or assignment grade.
 
 * **Alternative 1 (current choice):** Use a class for each type of class details.
   * Pros: Easy to implement, follows OOP principle. If we want to edit the implementation of each of the classes or
-  change the data structure / details of each instance, it can be easily done. 
+  change the data structure / details of each instance, it can be easily done.
   * Cons: May have performance issues in terms of memory usage.
-  
+
 * **Alternative 2:** Store class values as a primitive type (String or Integer).
   * Pros: Will use less memory.
   * Cons: We must ensure that the implementation of each individual class are correct. Implementation will be more
-  complicated as different class detail types will require different implementations for the same operation. 
+  complicated as different class detail types will require different implementations for the same operation.
 
 **Aspect: Tracker classes**
 
@@ -314,11 +404,6 @@ or assignment grade.
   * Pros: Will use less memory.
   * Cons: Will need to implement different functions for each type of class details. Implementation will be more
   complicated. SLAP principle might not be able to be adhered to.
-
-
-
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -338,7 +423,7 @@ or assignment grade.
 
 **Target user profile**:
 
-* CS2103T Teaching Assistants
+* NUS Teaching Assistants
 * has a need to manage student information across different classes
 * prefer desktop apps over other types
 * can type fast
@@ -414,35 +499,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 3b. The given student number does not exist in the list.
-
-    * 3b1. ClassManager shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Tag a student with a label**
-
-**MSS**
-
-1.  User requests to list students
-2.  ClassManager shows a list of students
-3.  User requests to tag a specific student in the list
-4.  ClassManager tags the student
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given student number is invalid.
-
-    * 3a1. ClassManager shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The student already has the given tag.
 
     * 3b1. ClassManager shows an error message.
 
@@ -555,13 +611,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete STUDENT_NUMBER`<br>
+   1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete vnqvbr145oqrq1924`<br>
+   1. Test case: `delete s/vnqvq1924`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid student number)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
       Expected: Similar to previous.
 
 ### Saving data
