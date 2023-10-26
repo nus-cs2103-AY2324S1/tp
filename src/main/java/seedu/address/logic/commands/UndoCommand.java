@@ -6,6 +6,10 @@ import java.io.IOException;
 
 import seedu.address.model.Model;
 
+/**
+ * Represents a command for undoing the previous command in the application.
+ * Extends the abstract class {@link Command}.
+ */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
