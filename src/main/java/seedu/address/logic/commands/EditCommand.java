@@ -46,7 +46,6 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Example: p/98742122.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book.";
     public static final String MESSAGE_INCONSISTENT_NAME_AND_ID =
             "Both a name and an NRIC were provided, but they do not match the same person.";
@@ -85,10 +84,6 @@ public class EditCommand extends Command {
         Person personToEdit = personOptional.get();
         logger.log(Level.INFO, "Editing person: {0}", personToEdit);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
