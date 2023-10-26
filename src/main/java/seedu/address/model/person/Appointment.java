@@ -28,7 +28,39 @@ public class Appointment {
         return appointmentTime;
     }
 
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
     public void setAppointmentTime(LocalDateTime appointmentTime) {
         this.appointmentTime = appointmentTime;
+    }
+    public void changeDoctor(Doctor newDoctor) {
+        this.doctor = newDoctor;
+    }
+
+    public void changePatient(Patient newPatient) {
+        this.patient = newPatient;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Appointment)) {
+            return false;
+        }
+
+        Appointment otherAppointment = (Appointment) other;
+        return this.doctor.equals(otherAppointment.doctor)
+                && this.patient.equals(otherAppointment.patient)
+                && this.appointmentTime.equals(otherAppointment.appointmentTime);
     }
 }
