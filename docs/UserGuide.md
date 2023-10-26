@@ -154,6 +154,21 @@ Expected output: `Preferences have been updated!`
 Output if error:
 `Please follow the required format to add a new date (setPreference /gender M /age -3 height/ -20 income/ 2000)`
 
+### Star a person: `star`
+Format: `star INDEX`
+
+Expected output: `NAME has been starred!`
+
+Output if error:
+`The index you have provided is out of bounds of your current list of dates`
+
+### Unstar a person: `star`
+Format: `unstar INDEX`
+
+Expected output: `NAME has been unstarred!`
+
+Output if error:
+`The index you have provided is out of bounds of your current list of dates`
 --------------------------------------------------------------------------------------------------------------------
 
 # 3 [FAQ](#3-faq)

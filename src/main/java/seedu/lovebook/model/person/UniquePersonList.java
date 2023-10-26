@@ -64,7 +64,6 @@ public class UniquePersonList implements Iterable<Date> {
         if (!target.isSamePerson(editedDate) && contains(editedDate)) {
             throw new DuplicatePersonException();
         }
-
         internalList.set(index, editedDate);
     }
 

@@ -32,6 +32,7 @@
                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
             <ImageView fx:id="genderImage" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="horoscopeImage" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="starImage"  fitHeight="39.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true"/>
             </HBox>
          <HBox prefHeight="100.0" prefWidth="200.0">
             <children>
@@ -55,14 +56,6 @@
                   <Insets />
                </VBox.margin>
             </ImageView>
-            <Label fx:id="star" style="-fx-background-color: #FFEA00; -fx-background-radius: 8;" text="Label">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-               </padding>
-            </Label>
          </children>
          <padding>
             <Insets left="10.0" />

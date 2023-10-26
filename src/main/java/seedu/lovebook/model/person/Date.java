@@ -24,6 +24,8 @@ public class Date {
     private final Income income;
     private final Horoscope horoscope;
 
+    private final Star star;
+
     /**
      * Every field must be present and not null.
      */
@@ -35,6 +37,21 @@ public class Date {
         this.height = height;
         this.income = income;
         this.horoscope = horoscope;
+        this.star = new Star("false");
+    }
+
+    /**
+     * Constructor for setting the value of star
+     */
+    public Date(Name name, Age age, Gender gender, Height height, Income income, Horoscope horoscope, Star star) {
+        requireAllNonNull(name, age, gender, height);
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.height = height;
+        this.income = income;
+        this.horoscope = horoscope;
+        this.star = star;
     }
 
     /**
@@ -47,6 +64,7 @@ public class Date {
         this.height = null;
         this.income = null;
         this.horoscope = null;
+        this.star = null;
     }
 
     public Name getName() {
@@ -71,6 +89,10 @@ public class Date {
 
     public Horoscope getHoroscope() {
         return horoscope;
+    }
+
+    public Star getStar() {
+        return star;
     }
 
     /**

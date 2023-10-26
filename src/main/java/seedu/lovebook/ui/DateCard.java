@@ -32,13 +32,14 @@ public class DateCard extends UiPart<Region> {
     @FXML
     private Label aboutInfo;
     @FXML
-    private Label star;
+    private ImageView starImage;
     @FXML
     private ImageView genderImage;
     @FXML
     private ImageView horoscopeImage;
     @FXML
     private ImageView avatarImage;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Date} and index to display.
@@ -48,10 +49,13 @@ public class DateCard extends UiPart<Region> {
         this.date = date;
         id.setText(displayedIndex + ". ");
         name.setText(date.getName().fullName);
+
         aboutInfo.setText(date.getAge().value + " years old, with a height of " + date.getHeight().value + "cm, and "
                 + "a income of $" + date.getIncome().value + " per month.");
+        if (date.getStar().isStarred.equals("true")) {
+            starImage.setImage(new Image("images/star.png"));
+        }
         displayIcons(date.getHoroscope().value, date.getGender().value);
-        star.setText("Starred!");
     }
     private void displayIcons(String horoscope, String gender) {
         try {
@@ -67,6 +71,7 @@ public class DateCard extends UiPart<Region> {
         } catch (IllegalArgumentException e) {
             horoscopeImage.setImage(new Image("images/bot.png"));
         }
+
     }
 
     private int generateRandomNumber() {

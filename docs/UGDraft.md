@@ -7,7 +7,7 @@ online dating journey.
 
 ## Wireframes
 
-![Figma](/docs/images/user-guide/Figma.png)  
+![Figma](/docs/images/user-guide/Figma.png)
 
 ## Features
 
@@ -84,14 +84,14 @@ Format: `random`
 Expected Output: `A random date entry is printed`
 
 Output if error: ```No dates in list!```
-	
+
 ### Filter by Metric
 Format: `filter /METRIC ARG`
 
 Parameter constraints:
 - Filter must be from list of metrics
 - Metric is limited to `gender, age, horoscope, name` only
-	
+
 Example:
 - `filter /name Cleon`
 - `filter /gender M`
