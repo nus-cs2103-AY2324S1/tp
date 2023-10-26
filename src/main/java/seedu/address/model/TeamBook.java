@@ -128,6 +128,19 @@ public class TeamBook implements ReadOnlyTeamBook {
             throw new TeamNotFoundException();
         }
     }
+    /**
+     * Checks if the given id is an id of team leader.
+     *
+     * @param id the id
+     * @return the boolean
+     */
+    public boolean isTeamLeader(IdentityCode id) {
+        return teams.isTeamLeader(id);
+    }
+
+    public boolean removeDeveloperFromAllTeams(IdentityCode developerIdentityCode) {
+        return teams.removeDeveloperFromAllTeams(developerIdentityCode);
+    }
 
 
     /**

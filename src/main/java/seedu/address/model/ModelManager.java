@@ -329,11 +329,18 @@ public class ModelManager implements Model {
         return teamBook.invalidAddToTeam(teamToAddTo);
     }
 
-
     @Override
     public void addToTeam(String teamToAddTo, Name devToAdd) {
         IdentityCode devToAddIdentityCode = getIdentityCodeByName(devToAdd);
         teamBook.addDevToTeam(teamToAddTo, devToAddIdentityCode);
+    }
+    @Override
+    public boolean developerIsTeamLeader(IdentityCode developerIdentityCode) {
+        return teamBook.isTeamLeader(developerIdentityCode);
+    }
+    @Override
+    public boolean removeDeveloperFromAllTeams(IdentityCode developerIdentityCode) {
+        return teamBook.removeDeveloperFromAllTeams(developerIdentityCode);
     }
 
     @Override

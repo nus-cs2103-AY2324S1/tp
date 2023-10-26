@@ -28,8 +28,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTeamCommand;
 import seedu.address.logic.commands.RemarkCommand;
-import seedu.address.logic.commands.WelcomeCommand;
 import seedu.address.logic.commands.TreeCommand;
+import seedu.address.logic.commands.WelcomeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -91,7 +91,7 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case DeleteTeamCommand.COMMAND_WORD:
-            return new DeleteTeamParser().parse(arguments);
+            return new DeleteTeamCommandParser().parse(arguments);
 
         case DeleteDeveloperFromTeamCommand.COMMAND_WORD:
             return new DeleteDeveloperFromTeamParser().parse(arguments);

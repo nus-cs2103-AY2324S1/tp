@@ -233,6 +233,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean developerIsTeamLeader(IdentityCode developerIdentityCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean removeDeveloperFromAllTeams(IdentityCode developerIdentityCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteDeveloperFromTeam(String teamName, IdentityCode developerIdentityCOde) {
 
         }
