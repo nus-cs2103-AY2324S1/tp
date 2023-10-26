@@ -60,6 +60,11 @@ public class StringUtilTest {
     }
 
     @Test
+    public void containsWordIgnoreCase_emptyWord_throwsNullPointerException() {
+        assertThrows(IllegalArgumentException.class, () -> StringUtil.containsWordIgnoreCase("typical sentence", ""));
+    }
+
+    @Test
     public void containsWordIgnoreCase_nullSentence_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase(null, "abc"));
     }
