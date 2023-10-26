@@ -62,6 +62,9 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* When using parentheses ( ) with items separated by the pipe symbol |, at least one item must be included. <br>
+  e.g in the command `search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -190,7 +193,9 @@ Examples:
 
 ### Search job applicants by category: `search`
 
-Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status
+Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
+
+Format: ``search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])``
 
 #### Search job applicants by name
 
@@ -213,24 +218,36 @@ Examples:
 
 Finds job applicants whose status match any of the given keywords
 
-Format: `search s/KEYWORD [MORE KEYWORDS]`
+Format: `search st/KEYWORD [MORE KEYWORDS]`
 
-* Keywords can only be from the following list: `Pending`, `Interviewed`, `Rejected`, `Offered`
-  e.g. `search s/interviewing` will give an error.
-* Keywords are case-insensitive: `search s/interviewd` and `search s/INTERVIEWED` return the same result.
+* Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
+  e.g. `search st/interviewing` will give an error.
+* Keywords are case-insensitive: `search st/interviewed` and `search st/INTERVIEWED` return the same result.
 
 Example:
-* `search s/interviewed`
+* `search st/interviewed`
+
+#### Search job applicants by tag
+
+Finds job applicants whose tag(s) match any of the given tag keywords
+
+Format: `search t/KEYWORD [MORE KEYWORDS]`
+
+* Keywords are case-insensitive: `search t/hardworking' and `search t/HARDWORKING` return the same result.
+
+Example:
+* `search t/hardworking`
 
 #### Notes for advanced users:
-* You can combine the name and status search categories (e.g. `search n/Alex s/offered`) in a single search command.
+* You can combine the search categories (e.g. `search n/Alex st/offered t/software engineer`) in a single search command.
 * Each search category can be used at most once in a single search command
-  e.g. `search n/Alex n/Adam s/rejected` is not allowed.
+  e.g. `search n/Alex n/Adam st/rejected` is not allowed.
 
 Example:
-* `search n/Alex Bernice s/interviewed rejected` will output applicants whose:
+* `search n/Alex Bernice st/interviewed rejected t/analyst` will output applicants whose:
     * names contain either Alex `or` Bernice
     * `and` status is either interviewed `or` rejected.
+    * `and` has a tag `analyst`
 
 ### Deleting a person : `delete`
 
@@ -309,7 +326,7 @@ _Details coming soon ..._
 ## Command summary
 
 Action                     | Format, Examples
----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**                    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Remark**                 | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`
 **View**                   | `view INDEX` <br> e.g., `view 1`
@@ -319,7 +336,7 @@ Action                     | Format, Examples
 **Delete**                 | `delete INDEX`<br> e.g., `delete 3`
 **Set**                    | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`
 **Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Search**                 | `search (n/KEYWORD | st/KEYWORD | t/KEYWORD) [MORE_KEYWORDS]` <br> e.g., `search n/alex`
 **List**                   | `list s/ATTRIBUTE` <br> e.g. `list s/name`
 **Help**                   | `help`
 
