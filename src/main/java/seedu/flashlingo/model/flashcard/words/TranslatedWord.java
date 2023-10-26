@@ -32,6 +32,17 @@ public class TranslatedWord extends Word {
     public boolean isTranslatedWord() {
         return true;
     }
+
+    /**
+     * Edits this word
+     * @param newWord The new word to replace this word
+     * @return The new word
+     */
+    @Override
+    public TranslatedWord editWord(String newWord) {
+        return new TranslatedWord(newWord, getLanguage());
+    }
+
     /**
      * Checks whether this Translated Word is equal to the passed object
      * @param other Passed object to check equality against

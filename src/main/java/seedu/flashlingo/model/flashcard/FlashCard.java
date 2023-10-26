@@ -18,8 +18,6 @@ public class FlashCard {
     private Date whenToReview; // Date the flashcard was needs to be reviewed
     private ProficiencyLevel currentLevel; // How many times successfully remembered
 
-    private boolean isUpdated;
-    private final ProficiencyLevel originalLevel; // For undo function
     /**
      * Constructor for Flashcard
      *
@@ -34,8 +32,6 @@ public class FlashCard {
         this.whenToReview = whenToReview;
         this.translatedWord = translatedWord;
         this.originalWord = originalWord;
-        this.isUpdated = false;
-        this.originalLevel = level;
     }
     public OriginalWord getOriginalWord() {
         return originalWord;
@@ -53,6 +49,26 @@ public class FlashCard {
         return currentLevel;
     }
 
+    public boolean isDeletedFromReview() {
+        return this.currentLevel.isDeletedFromReview();
+    }
+
+    /**
+     * Edits the flashCard
+     * @param newWord The new word to replace the old word
+     * @param newTranslation The new translation to replace old translation
+     * @return The new flashcard
+     */
+    public FlashCard editFlashCard(String newWord, String newTranslation) {
+        OriginalWord originalWord = this.originalWord.editWord(newWord);
+        TranslatedWord translatedWord = this.translatedWord.editWord(newTranslation);
+        if (this.originalWord.equals(originalWord) && this.translatedWord.equals(translatedWord)) {
+            return null;
+        } else {
+            return new FlashCard(originalWord, translatedWord, whenToReview, currentLevel);
+        }
+    }
+
     /**
      * Returns true if both flashcards have the same originalWord and translatedWord.
      * This defines a weaker notion of equality between two flashcards.
@@ -63,8 +79,7 @@ public class FlashCard {
         }
 
         return otherFlashCard != null
-            && otherFlashCard.getOriginalWord().equals(getOriginalWord())
-            && otherFlashCard.getTranslatedWord().equals(getTranslatedWord());
+            && otherFlashCard.getOriginalWord().equals(getOriginalWord());
     }
 
     /**
@@ -96,11 +111,14 @@ public class FlashCard {
     /**
      * Update the flash card to next level
      */
-    public void updateLevel(boolean isUpdated) {
-        if (isUpdated) {
-            originalLevel.upgradeLevel();
+    public void updateLevel(boolean isSuccess) {
+        if (isSuccess) {
+            getProficiencyLevel().upgradeLevel();
+            updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
+        } else {
+            getProficiencyLevel().downgradeLevel();
+            updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
         }
-        updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
     }
 
     /**
@@ -111,42 +129,12 @@ public class FlashCard {
     @Override
     public String toString() {
         String sb = originalWord + " | " + originalWord.getLanguage() + " | " + translatedWord + " | "
-                + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
+            + originalWord.getLanguage() + " | " + whenToReview.toString() + " | " + currentLevel + "\n";
         return sb;
-    }
-
-    /**
-     * Handles when user clicks yes/no
-     * @param isSuccess Whether user has successfully remembered the word
-     */
-    public void handleUserInput(boolean isSuccess) {
-        if (isUpdated) {
-            return;
-        }
-        if (isSuccess) {
-            getProficiencyLevel().upgradeLevel();
-            updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
-        } else {
-            getProficiencyLevel().downgradeLevel();
-            updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
-        }
-        isUpdated = true;
     }
 
     public void updateReviewDate(long timeInMs) {
         this.whenToReview = new Date(new Date().getTime() + timeInMs);
-    }
-
-    /**
-     * Undo function to reset selection of "Yes" or "No" upon incorrect selection.
-     * Without undoing, should not be able to select "Yes" or "No" again
-     */
-    public void undo() {
-        if (isUpdated) {
-            this.currentLevel = originalLevel;
-            this.whenToReview = new Date(new Date().getTime() + getProficiencyLevel().calculateNextReviewInterval());
-            isUpdated = false;
-        }
     }
 
     @Override
@@ -162,8 +150,6 @@ public class FlashCard {
 
         FlashCard otherFlashCard = (FlashCard) other;
         return originalWord.equals(otherFlashCard.originalWord)
-                && translatedWord.equals(otherFlashCard.translatedWord)
-                && whenToReview.equals(otherFlashCard.whenToReview)
-                && originalLevel.equals(otherFlashCard.originalLevel);
+            && translatedWord.equals(otherFlashCard.translatedWord);
     }
 }
