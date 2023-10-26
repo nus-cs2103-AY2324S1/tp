@@ -26,7 +26,7 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="question" text="\$first" />
+        <Label fx:id="question" text="\$first" styleClass="cell_big_label"/>
       </HBox>
          <Label fx:id="dueDate" styleClass="cell_small_label" />
       
