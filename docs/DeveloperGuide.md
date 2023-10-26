@@ -251,13 +251,35 @@ to `Model#updateFilteredPersonList(Predicate<Person> predicate)` and `Model#upda
 As a result, the `ObservableList<Person>` and `ObservableList<Event>` are updated with the filtered lists of persons and events respectively. 
 The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons and events.
 
+The `remind` command is implemented this way as it reuses the logic for the `find` command where it utilises the `Model` component to update the current list of persons based on the given predicate.
+Instead of filtering out persons based on names, the `BirthdayWithinDaysPredicate` filters out persons based on their birthdays and the `EventWithinDaysPredicate` filters out events based on their starting dates.
+
 The flow for the `remind` command is described by the following sequence diagram:
 
 ![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
 
+#### Feature details
+1. The `remind` command can accept an optional parameter `days` which specifies the number of days to search for birthdays and events. If `days` is not specified, the default value of 7 days will be used.
+2. The application will validate the argument `days` to ensure that it is a positive integer. If it is not, an error message will be shown to the user and prompts the user for a corrected input.
+3. If it is a valid input, a `BirthdayWithinDaysPredicate` and `EventWithinDaysPredicate` will be created and a `Remind` command will be created with the predicates.
+4. The `Remind` command will then be executed and the `UI` will be updated with the filtered lists of persons and events.
+
+#### General design considerations
+
+- **Alternative 1 (Current choice): Updating list with predicate.**
+    - Pros: 
+      - Reuses the logic for the `find` command.
+      - The `UI` component is notified of the changes to the list and updates the UI accordingly.
+    - Cons: 
+      - The `Model` component is tightly coupled with the `UI` component.
+- **Alternative 2: Checking current list for birthdays and events, and adding to new list.**
+  - Pros: 
+    - Easier to implement.
+  - Cons: 
+    - Performance overhead. New addressbook objects needs to be created.
 
 
-
+    
 
 --------------------------------------------------------------------------------------------------------------------
 
