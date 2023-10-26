@@ -245,6 +245,36 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Proposed Group Remark Feature
+
+#### Proposed Implementation
+
+The proposed group remark feature is facilitated by the `Group` class. It includes a `Group Remark` field and implements the `Group#setGroupRemark()` operation. This feature is exposed in the `Model` interface as `Model#addGroupRemark()`.
+
+Here's an example usage scenario and how the group remark mechanism behaves at each step:
+
+**Step 1.** The user creates a group called `CS2103T`. The `Group` is initialized with an empty `groupRemark`.
+
+**Step 2.** The user executes the `remark g/CS2103T r/Quiz tomorrow` command to add the remark "Quiz tomorrow" to the `CS2103T` group. The `GroupRemarkCommandParser` extracts the group and remark from the input and creates a `GroupRemarkCommand`, which calls `Model#addGroupRemark(groupName, groupRemark)`. The model retrieves the existing `CS2103T` group from the database and calls the group's `Group#setRemark(groupRemark)`, adding the `groupRemark` to the group.
+
+**Note:** If the user wants to modify the group remark, they can execute the same command with the new remark. The existing remark will be deleted and overwritten, and the new remark is stored in the group.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/GroupRemarkSequenceDiagram.puml" alt="GroupRemarkSequenceDiagram" />
+
+#### Design Considerations
+
+**Aspects:**
+
+- **Alternative 1 (current choice):** Overrides original remark
+    - Pros: Easy to implement.
+    - Cons: May be troublesome if the user wants to keep contents from the original remark.
+- **Alternative 2:** Edits original remark
+    - Pros: Easy to add more information.
+    - Cons: Could be confusing to edit if there are many changes.
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
