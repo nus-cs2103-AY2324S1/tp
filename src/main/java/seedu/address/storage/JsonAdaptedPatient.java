@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,7 @@ import seedu.address.model.person.Phone;
 /**
  * Jackson-friendly version of {@link Patient}.
  */
-class JsonAdaptedPatient extends JsonAdaptedPerson {
+public class JsonAdaptedPatient extends JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
 
@@ -44,7 +46,6 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
      */
     public JsonAdaptedPatient(Patient source) {
         super(source);
-
         this.emergencyContact = source.getEmergencyContact().value;
         this.bloodType = source.getBloodType().value;
         this.condition = source.getCondition().value;
@@ -56,11 +57,9 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Patient toModelType() throws IllegalValueException {
-        Person p = super.toModelType();
         final Phone modelEmergencyContact = checkEmergencyContact();
         final Condition modelCondition = checkCondition();
         final BloodType modelBloodType = checkBloodType();
-
         return new Patient(p.getName(), p.getPhone(), modelEmergencyContact, p.getEmail(), p.getAddress(),
                 p.getRemark(), p.getGender(), p.getIc(), modelCondition, modelBloodType, p.getTags());
     }

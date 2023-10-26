@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Person}.
  */
-class JsonAdaptedPerson {
+public abstract class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -90,8 +90,6 @@ class JsonAdaptedPerson {
         final Remark modelRemark = checkRemark();
         final Gender modelGender = checkGender();
         final Ic modelIc = checkIc();
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelGender, modelIc,
-                modelTags);
     }
 
     /**
