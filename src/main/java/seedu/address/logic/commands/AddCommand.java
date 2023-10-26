@@ -10,7 +10,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,16 +20,16 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. \n"
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_GROUPTAG + "GROUPNAME \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_GROUPTAG + "CS2103T";
+        + "Parameters: "
+        + PREFIX_NAME + "NAME "
+        + PREFIX_PHONE + "PHONE "
+        + PREFIX_EMAIL + "EMAIL "
+        + PREFIX_GROUPTAG + "GROUPNAME \n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_NAME + "John Doe "
+        + PREFIX_PHONE + "98765432 "
+        + PREFIX_EMAIL + "johnd@example.com "
+        + PREFIX_GROUPTAG + "CS2103T";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
@@ -52,31 +51,26 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        boolean[] fields = model.usedFields(toAdd);
+
         if (model.hasPerson(toAdd)) {
-            try {
-                boolean[] fields = model.usedFields(toAdd);
-                if (fields[0]) {
-                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-                } else if (fields[1]) {
-                    throw new CommandException(MESSAGE_DUPLICATE_NAME);
-                } else if (fields[2]) {
-                    throw new CommandException(MESSAGE_DUPLICATE_PHONE);
-                } else {
-                    throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
-                }
-            } catch (CommandException e) {
-                return new CommandResult(e.getMessage());
-            }
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        } else if (fields[1]) {
+            throw new CommandException(MESSAGE_DUPLICATE_NAME);
+        } else if (fields[2]) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
+        } else if (fields[3]) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
         model.addPerson(toAdd);
         toAdd.getGroups().toStream().findFirst().ifPresent(group -> {
-            model.addGroup(group);
+            if (!model.hasGroup(group)) {
+                model.addGroup(group);
+            }
             try {
                 group.addPerson(toAdd);
             } catch (CommandException e) {
-
-                System.out.println(e.toString());
                 throw new RuntimeException(e);
             }
         });
@@ -101,7 +95,7 @@ public class AddCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+            .add("toAdd", toAdd)
+            .toString();
     }
 }

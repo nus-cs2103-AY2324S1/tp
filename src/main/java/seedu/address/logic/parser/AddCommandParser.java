@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -27,7 +28,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        GroupList groupList;
+        GroupList groupList = new GroupList();
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GROUPTAG);
 
@@ -44,9 +45,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         // edit here of add more than 1 group
         if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
-            groupList = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUPTAG).get());
-        } else {
-            groupList = new GroupList();
+            Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUPTAG).get());
+            groupList.add(group);
         }
 
         Person person = new Person(name, phone, email, groupList);
