@@ -122,9 +122,9 @@ Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]`
 * TAG **must only contain** Alphanumeric Characters with no space in between.
 
 Examples:
-* `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1` edits the 5th event in the event list to change the name to Halloween
-Surprise Party, the location to UTR, the date to 31st October 2023 and the tag to sem1.
-* `editEvent 3 l/UCC Theater` edits the 3rd event in the event list to change the location to UCC Theater.
+* `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1` edits the 5th event in the event list to change the name to `Halloween
+Surprise Party`, the location to `UTR`, the date to `2023-10-31` and the tag to `sem1`.
+* `editEvent 3 l/UCC Theater` edits the 3rd event in the event list to change the location to `UCC Theater`.
 
 ### Link a Member to an Event: `enrol`
 
