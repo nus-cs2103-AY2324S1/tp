@@ -274,7 +274,7 @@ The following sequence diagram shows how the undo operation works:
 
 <puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
 
-<box type="info" seamless>
+[//]: # (<box type="info" seamless>)
 
 **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -379,6 +379,35 @@ Note: No duplication is allowed in addressbook for most of Person’s attribute 
   * Pros: Conveniently adds a person into group while creating a new contact at the same time
   * Cons: User input can get potentially very long, increasing the chance of invalid input
 
+--------------------------------------------------------------------------------------------------------------------
+
+### Create Group
+
+#### Proposed Implementation
+
+The Create Group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#addGroup()`.
+
+Given below is an example usage scenario and how the group creation mechanism behaves at each step.
+
+**Step 1:** User launches the application.
+
+**Step 2:** The user executes `new g/GROUPNAME` to create a new group with the name GROUPNAME. `CreateGroupCommandParser` parses the GROUPNAME, ensuring the input is valid, and creates a `CreateGroupCommand`, which calls `Model#addGroup()`. The model retrieves the existing groupList from the addressBook and adds this new group to the groupList.
+
+The following sequence diagram summarizes what happens when a user executes a new command:
+
+#### Design Considerations
+
+**Aspect: Groups with the same name**
+
+* **Alternative 1 (current choice):** Group names are Unique
+    * Pros: Allow users to create groups with the same name
+    * Cons: User might have to be creative with naming groups
+
+* **Alternative 2:** Group names are not unique but tagged with an id
+    * Pros: Users can reuse commonly used group names
+    * Cons: Users may get confused as to what each group is meant for
+
+
 ### [Proposed] Delete Time Feature
 
 #### Proposed Implementation
@@ -433,8 +462,37 @@ The following activity diagram summarizes what happens when a user executes a ne
   Pros: More time and memory efficient.
   Cons: Not as user-friendly since users will have to delete time intervals that were originally correct, wasting their time.
 
-
 --------------------------------------------------------------------------------------------------------------------
+
+### [Proposed] Group Person
+
+#### Proposed Implementation
+
+The group remark mechanism is facilitated by `Group`. It is stored internally as a `Group Remark`. This operation is exposed in the `Model` interface as `Model#groupPerson(personName, groupName)`.
+
+Given below is an example usage scenario and how the group remark mechanism behaves at each step.
+
+**Step 1:** User launches the application.
+
+**Step 2:** The user executes `group n/personName g/groupName` to group a person `personName` into group `groupName`. `GroupPersonCommandParser` parses the personName and groupName ensuring the input is valid and creates a `GroupPersonCommand`, which calls `Model#groupPerson(personName, groupName)`. The model retrieves the existing person and group from the addressBook. Should a person or group not exist, it throws an error. Model calls `Model#assignGroup(Person person, Group group)` which adds a group to a person's groupList and person to the personList in group.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+#### Design Considerations:
+
+**Aspect: Whether to store references in both person and group**
+
+* **Alternative 1 (current choice):** Store references in both person and group
+    * Pros: Easy to implement. More efficient when searching.
+    * Cons: More bug-prone. May have object referencing and loading from storage issues as both the person reference to group, and group reference to person has to be loaded properly.
+
+* **Alternative 2:** Store reference to the other entity, e.g. store a list of groups in person.
+    * Pros: Easier to load from storage. One centralized place to store data. Less coupling.
+    * Cons: Searching might become more costly.
+  
+* --------------------------------------------------------------------------------------------------------------------
+
+
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
