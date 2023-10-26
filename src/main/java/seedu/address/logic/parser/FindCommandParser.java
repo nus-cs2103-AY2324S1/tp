@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -16,6 +17,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.predicate.AddressContainsKeywordsPredicate;
+import seedu.address.model.applicant.predicate.ApplicantPredicate;
 import seedu.address.model.applicant.predicate.EmailContainsKeywordsPredicate;
 import seedu.address.model.applicant.predicate.NameContainsKeywordsPredicate;
 import seedu.address.model.applicant.predicate.PhoneContainsNumberPredicate;
@@ -34,12 +36,11 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        Predicate<Applicant> alwaysFalse = t -> false;
-        Predicate<Applicant> namePredicate;
-        Predicate<Applicant> phonePredicate;
-        Predicate<Applicant> emailPredicate;
-        Predicate<Applicant> addressPredicate;
-        Predicate<Applicant> tagsPredicate;
+        NameContainsKeywordsPredicate namePredicate;
+        PhoneContainsNumberPredicate phonePredicate;
+        EmailContainsKeywordsPredicate emailPredicate;
+        AddressContainsKeywordsPredicate addressPredicate;
+        TagsContainKeywordsPredicate tagsPredicate;
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
@@ -51,44 +52,34 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
+        List<Predicate<Applicant>> predicateList = new ArrayList<>();
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             namePredicate = new NameContainsKeywordsPredicate(
                     parseFieldsForFind(argMultimap.getValue(PREFIX_NAME).get()));
-        } else {
-            namePredicate = alwaysFalse;
+            predicateList.add(namePredicate);
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             phonePredicate = new PhoneContainsNumberPredicate(argMultimap.getValue(PREFIX_PHONE).get());
-        } else {
-            phonePredicate = alwaysFalse;
+            predicateList.add(phonePredicate);
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             emailPredicate = new EmailContainsKeywordsPredicate(
                     parseFieldsForFind(argMultimap.getValue(PREFIX_EMAIL).get()));
-        } else {
-            emailPredicate = alwaysFalse;
+            predicateList.add(emailPredicate);
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             addressPredicate = new AddressContainsKeywordsPredicate(
                     parseFieldsForFind(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        } else {
-            addressPredicate = alwaysFalse;
+            predicateList.add(addressPredicate);
         }
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             tagsPredicate = new TagsContainKeywordsPredicate(
                     parseFieldsForFind(argMultimap.getValue(PREFIX_TAG).get()));
-        } else {
-            tagsPredicate = alwaysFalse;
+            predicateList.add(tagsPredicate);
         }
 
-        Predicate<Applicant> applicantPredicate = applicant ->
-                namePredicate.test(applicant)
-                        || phonePredicate.test(applicant)
-                        || emailPredicate.test(applicant)
-                        || addressPredicate.test(applicant)
-                        || tagsPredicate.test(applicant);
-
-        return new FindCommand(applicantPredicate);
+        return new FindCommand(new ApplicantPredicate(predicateList));
     }
 
 

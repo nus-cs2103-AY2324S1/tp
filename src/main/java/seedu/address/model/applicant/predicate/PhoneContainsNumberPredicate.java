@@ -31,8 +31,8 @@ public class PhoneContainsNumberPredicate implements Predicate<Applicant> {
             return false;
         }
 
-        PhoneContainsNumberPredicate otherNameContainsKeywordsPredicate = (PhoneContainsNumberPredicate) other;
-        return number.equals(otherNameContainsKeywordsPredicate.number);
+        PhoneContainsNumberPredicate otherPhoneContainsNumberPredicate = (PhoneContainsNumberPredicate) other;
+        return number.equals(otherPhoneContainsNumberPredicate.number);
     }
 
     @Override
