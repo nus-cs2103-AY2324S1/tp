@@ -234,6 +234,23 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Viewing a client's full profile
+
+As we add more attributes and interactions with clients, we will need a better way to view all of the information associated with a client. Therefore instead of displaying all information in a `PersonCard` within the list of clients, we will need a new component to display the client profile in a better way.
+
+The new `ClientProfilePanel` UI component is the replacement for displaying client profiles. Beside the require and optional fields, the user can also see all of their past interactions with the client.
+
+The client profile to display is tracked using a `SimpleObjectProperty` inside a `Model`. Since a `SimpleObjectProperty` is an `ObservableValue`, we can add listeners to its change event and update our UI whenever the currently selected profile changes.
+
+We currently support 2 ways of viewing a client's profile:
+
+1. By clicking on a client's card from the client list
+2. By using the `view` command
+
+Both methods will update the currently selected client, which will then trigger a listener to update the UI to show the profile panel.
+
+To exit out of the profile view, the user can enter the `list` command, which will hide the profile panel and restore the client list to occupy the full window width.
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
