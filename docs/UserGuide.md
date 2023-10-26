@@ -28,8 +28,12 @@ OutBook is an app that allows busy professionals to manage their numerous contac
    * `listc` : Lists all contacts.
 
    * `addc n/John Doe p/98765432 e/johnd@example.com o/NUS` : Adds a contact named `John Doe` to OutBook.
+   
+   * `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300` : Adds a meeting titled `Lunch` to OutBook.
 
-   * `deletec 3` : Deletes the 3rd contact shown in the current list.
+   * `deletec 3` : Deletes the 3rd contact shown in the contact list.
+
+   * `deletem 1` : Deletes the 1st meeting shown in the meeting list.
 
    * `clear` : Deletes all contacts and meetings.
 
@@ -89,7 +93,7 @@ Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL s/STATUS [t/TAG]…​`
       - end with a domain label at least 2 characters long
       - have each domain label start and end with alphanumeric characters
       - have each domain label consist of alphanumeric characters, separated only by hyphen
-* STATUS, if included, must be one of { NIL, Prospective, Active, Inactive, Claimant, Renewal } or blank.
+* STATUS, if included, must be one of { NIL, Prospective, Active, Inactive, Claimant, Renewal } or blank. (Capitalization is optional)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -97,7 +101,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `addc n/John Doe p/98765432 e/johnd@example.com`
-* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/Professor`
+* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/Professor s/active`
 
 
 ### Listing all persons : `listc`
@@ -180,7 +184,7 @@ Examples:
 
 Adds a meeting to OutBook.
 
-Format: `addm m/TITLE a/LOCATION s/START e/END`
+Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`
 
 Examples:
 * `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`
@@ -307,7 +311,7 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
+## Saving the data
 
 OutBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
