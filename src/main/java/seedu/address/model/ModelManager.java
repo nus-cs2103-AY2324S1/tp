@@ -152,6 +152,8 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteInterview(Interview target) {
+        Applicant applicantToUpdate = target.getInterviewApplicant();
+        addressBook.setApplicant(applicantToUpdate, applicantToUpdate.getApplicantWithoutInterview());
         addressBook.removeInterview(target);
     }
 
