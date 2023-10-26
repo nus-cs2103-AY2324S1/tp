@@ -32,6 +32,14 @@ public class Question {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if question starts with a given prefix.
+     *
+     */
+    public boolean startsWith(String prefix) {
+        return question.startsWith(prefix);
+    }
+
     @Override
     public String toString() {
         return question;
