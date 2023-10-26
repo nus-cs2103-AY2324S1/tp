@@ -239,6 +239,19 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+### [Proposed] Total revenue command
+#### Proposed implementation
+The proposed total revenue command is facilitated by the payRate field in Person class, as well as the start and end fields in person class.
+
+The following sequence diagram shows how the total revenue command works:
+_{to be implemented in the future}_
+
+The logic behind finding total revenue is
+
+*Total Revenue* = payRate.value x hours of lesson x  number of lessons in current month
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
