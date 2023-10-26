@@ -5,13 +5,13 @@ skinparam ArrowFontSize 13
 start
 :User requests to add shortcut;
 
-'Since the beta syntax does not support placing the condition outside the
-'diamond we place it as the true branch instead.
 if () then ([Request parsed successfully)
     switch ()
-    case ([Mapping taken])
-        :Notify user of existing mapping to be overwritten;
+    case ([Shortcut alias taken])
+        :Notify user of existing shortcut to be overwritten;
         :Register new shortcut;
+    case ([Mapping taken])
+        :Notify user of existing mapping;
     case ([else])
         :Register new shortcut;
     endswitch
