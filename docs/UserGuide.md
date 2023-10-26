@@ -109,6 +109,7 @@ Add a new contact with basic details like name, phone number, email, and address
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
 <box type="info">
+
 All the fields must be provided except `TAG`. The fields you enter should follow the following format:
 
 | Field          | Format                                                                                                                  | Example                         |
@@ -191,7 +192,8 @@ Examples:
     * Edits the second person in your contact list with existing name to "John Doe", existing phone number to "98765432", existing email to "johndoe@gmail.com", existing address to "John street, block 123, #01-01", and a existing tag to "friend"
 
 <box type="warning">
-You are not allowed to edit any alternative contact information, i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` if any of these fields are empty. You will receive an error message that directs you to use `addalt` command.
+
+You are not allowed to edit any alternative contact information, i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` if any of these fields are empty. You will receive an error message that directs you to use [**`addalt`**](#add-alternative-information-to-contact) command.
 </box>
 
 ###  Upload contact's photo
