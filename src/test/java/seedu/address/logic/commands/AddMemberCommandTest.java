@@ -41,8 +41,10 @@ public class AddMemberCommandTest {
 
     @Test
     public void equals() {
-        Member alan = new MemberBuilder().withName("Alan").withEmail("alan@gmail.com").withPhone("81684544").withTelegram("@alanedabest").build();
-        Member bob = new MemberBuilder().withName("Bob").withEmail("bob@gmail.com").withPhone("90021929").withTelegram("@bobisdaworst").build();
+        Member alan = new MemberBuilder().withName("Alan").withEmail("alan@gmail.com").withPhone("81684544")
+                .withTelegram("@alanedabest").build();
+        Member bob = new MemberBuilder().withName("Bob").withEmail("bob@gmail.com").withPhone("90021929")
+                .withTelegram("@bobisdaworst").build();
         AddMemberCommand addAlanCommand = new AddMemberCommand(alan);
         AddMemberCommand addBobCommand = new AddMemberCommand(bob);
 
