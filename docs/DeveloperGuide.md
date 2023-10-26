@@ -304,8 +304,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: Commands that support undo & redo**
 
 * **Alternative 1 (current choice):** Not supporting undo/redo for `load` and `config`
-  * Pros: Ensures that Class Manager will not run into issues when undoing `load` for missing saved files. Enforces the immutability of tutorial and attendance count after `config` has been entered.
-  * Cons: Unable to change tutorial and attendance count after `config` has been entered.
+  * Pros: Ensures that Class Manager will not run into issues when undoing `load` for missing saved files. Enforces the immutability of tutorial and assignment count after `config` has been entered.
+  * Cons: Unable to change tutorial and assignment count after `config` has been entered.
 * **Alternative 2:**Supporting undo/redo for all commands.
   * Pros: Ensures that app is consistent with undo/redo and users will not be unsure if a certain command can be undone.
   * Cons: Can be confusing for the user to use undo/redo with `load`.
