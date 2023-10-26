@@ -18,10 +18,12 @@ import seedu.staffsnap.logic.commands.DeleteInterviewCommand;
 import seedu.staffsnap.logic.commands.EditCommand;
 import seedu.staffsnap.logic.commands.EditInterviewCommand;
 import seedu.staffsnap.logic.commands.ExitCommand;
+import seedu.staffsnap.logic.commands.FilterCommand;
 import seedu.staffsnap.logic.commands.FindCommand;
 import seedu.staffsnap.logic.commands.HelpCommand;
 import seedu.staffsnap.logic.commands.ListCommand;
 import seedu.staffsnap.logic.commands.SortCommand;
+import seedu.staffsnap.logic.commands.StatusCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 
 /**
@@ -65,7 +67,7 @@ public class ApplicantBookParser {
         isConfirmed = isConfirmedNext;
         isConfirmedNext = false;
 
-        switch (commandWord) {
+        switch (commandWord.toLowerCase()) {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
@@ -105,11 +107,18 @@ public class ApplicantBookParser {
         case AddInterviewCommand.COMMAND_WORD:
             return new AddInterviewCommandParser().parse(arguments);
 
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
+
         case EditInterviewCommand.COMMAND_WORD:
             return new EditInterviewCommandParser().parse(arguments);
 
         case DeleteInterviewCommand.COMMAND_WORD:
             return new DeleteInterviewCommandParser().parse(arguments);
+
+        case StatusCommand.COMMAND_WORD:
+            return new StatusCommandParser().parse(arguments);
+
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

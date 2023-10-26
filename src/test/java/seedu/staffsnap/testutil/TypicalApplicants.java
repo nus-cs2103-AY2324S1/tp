@@ -2,6 +2,8 @@ package seedu.staffsnap.testutil;
 
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_BEHAVIORAL;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_INTERVIEW_TECHNICAL;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.staffsnap.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -26,11 +28,13 @@ public class TypicalApplicants {
             .withPosition("Software Engineer").withEmail("alice@example.com").withPhone("94351253").build();
     public static final Applicant BENSON = new ApplicantBuilder().withName("Benson Meier")
             .withPosition("Frontend Engineer").withEmail("benson@example.com").withPhone("98765432")
-            .withInterviews("technical").build();
+            .withInterviews(VALID_INTERVIEW_TECHNICAL).build();
     public static final Applicant CARL = new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("carl@example.com").withPosition("Backend Engineer").build();
+            .withEmail("carl@example.com").withPosition("Backend Engineer").withInterviews(VALID_INTERVIEW_BEHAVIORAL)
+            .build();
     public static final Applicant DANIEL = new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("daniel@example.com").withPosition("Testing Engineer").withInterviews("screening").build();
+            .withEmail("daniel@example.com").withPosition("Testing Engineer").withInterviews(VALID_INTERVIEW_TECHNICAL)
+            .build();
     public static final Applicant ELLE = new ApplicantBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("elle@example.com").withPosition("Frontend Engineer").build();
     public static final Applicant FIONA = new ApplicantBuilder().withName("Fiona Kunz").withPhone("9482427")

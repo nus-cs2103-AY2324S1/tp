@@ -13,7 +13,7 @@ You can reach us at the email `craigton.lian[at]gmail.com`
 
 ### Craigton Lian Ee John
 
-<img src="images/craigtonlian.png" width="200px" height = "200px" style = "border-radius: 50%;">
+<img src="images/developer-profiles/craigtonlian.png" width="200px" height = "200px" style = "border-radius: 50%;">
 
 
 * Links: 
@@ -28,7 +28,7 @@ You can reach us at the email `craigton.lian[at]gmail.com`
 
 ### Austin Huang De Yu
 
-<img src="images/austinhuang1203.png" width="200px" height = "200px" style = "border-radius: 50%;">
+<img src="images/developer-profiles/austinhuang1203.png" width="200px" height = "200px" style = "border-radius: 50%;">
 
 * Links: 
   [[github](http://github.com/austinhuang1203)]
@@ -39,7 +39,7 @@ You can reach us at the email `craigton.lian[at]gmail.com`
 
 ### Ivan Lee Kai Kiat
 
-<img src="images/ivanleekk.png" width="200px" height = "200px" style = "border-radius: 50%;">
+<img src="images/developer-profiles/ivanleekk.png" width="200px" height = "200px" style = "border-radius: 50%;">
 
 
 * Links:
@@ -52,7 +52,7 @@ You can reach us at the email `craigton.lian[at]gmail.com`
 
 ### Celestine Tan Yen Tong
 
-<img src="images/celestinetan03.png" width="200px" height = "200px" style = "border-radius: 50%;">
+<img src="images/developer-profiles/celestinetan03.png" width="200px" height = "200px" style = "border-radius: 50%;">
 
 
 * Links:
@@ -66,7 +66,7 @@ You can reach us at the email `craigton.lian[at]gmail.com`
 
 ### Wang Jingting
 
-<img src="images/jingting1412.png" width="200px" height = "200px" style = "border-radius: 50%;">
+<img src="images/developer-profiles/jingting1412.png" width="200px" height = "200px" style = "border-radius: 50%;">
 
 
 * Links:

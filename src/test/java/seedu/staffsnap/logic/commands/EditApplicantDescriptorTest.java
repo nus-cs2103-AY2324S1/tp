@@ -60,7 +60,8 @@ public class EditApplicantDescriptorTest {
                 + editApplicantDescriptor.getName().orElse(null) + ", phone="
                 + editApplicantDescriptor.getPhone().orElse(null) + ", email="
                 + editApplicantDescriptor.getEmail().orElse(null) + ", position="
-                + editApplicantDescriptor.getPosition().orElse(null) + "}";
+                + editApplicantDescriptor.getPosition().orElse(null) + ", status="
+                + editApplicantDescriptor.getStatus().orElse(null) + "}";
         assertEquals(expected, editApplicantDescriptor.toString());
     }
 }

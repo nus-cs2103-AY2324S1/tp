@@ -6,6 +6,7 @@ import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.staffsnap.testutil.Assert.assertThrows;
 
@@ -19,6 +20,8 @@ import seedu.staffsnap.model.ApplicantBook;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.NameContainsKeywordsPredicate;
+import seedu.staffsnap.model.interview.Interview;
+import seedu.staffsnap.model.interview.Rating;
 import seedu.staffsnap.testutil.EditApplicantDescriptorBuilder;
 
 /**
@@ -36,6 +39,9 @@ public class CommandTestUtil {
     public static final String VALID_POSITION_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TYPE_TECHNICAL = "technical";
     public static final String VALID_TYPE_BEHAVIORAL = "behavioral";
+    public static final String VALID_RATING_TEN = "10.0";
+    public static final Interview VALID_INTERVIEW_BEHAVIORAL = new Interview("behavioral", new Rating("8.5"));
+    public static final Interview VALID_INTERVIEW_TECHNICAL = new Interview("technical", new Rating("8.0"));
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,6 +53,7 @@ public class CommandTestUtil {
     public static final String POSITION_DESC_BOB = " " + PREFIX_POSITION + VALID_POSITION_BOB;
     public static final String TYPE_DESC_TECHNICAL = " " + PREFIX_TYPE + VALID_TYPE_TECHNICAL;
     public static final String TYPE_DESC_BEHAVIORAL = " " + PREFIX_TYPE + VALID_TYPE_BEHAVIORAL;
+    public static final String RATING_DESC_TEN = " " + PREFIX_RATING + VALID_RATING_TEN;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -54,7 +61,8 @@ public class CommandTestUtil {
     public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION; // empty string not allowed for positions
     public static final String INVALID_TYPE_DESC = " "
             + PREFIX_TYPE + "hubby*"; // '*' not allowed in interviews
-
+    public static final String INVALID_RATING_DESC = " " + PREFIX_RATING
+            + "-1"; // negative numbers not allowed for ratings
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

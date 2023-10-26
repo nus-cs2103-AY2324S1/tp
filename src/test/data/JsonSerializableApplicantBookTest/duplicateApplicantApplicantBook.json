@@ -4,7 +4,10 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "position": "123, Jurong West Ave 6, #08-111",
-    "interviews": [ "friends" ]
+    "interviews": [ {
+      "type" : "behavioral",
+      "rating" : "7.5"
+    } ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",

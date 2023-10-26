@@ -1,7 +1,12 @@
 package seedu.staffsnap.model.interview;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
+import static seedu.staffsnap.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.List;
+import java.util.Objects;
+
+import seedu.staffsnap.commons.util.ToStringBuilder;
 
 /**
  * Represents an Interview in the applicant book.
@@ -14,15 +19,18 @@ public class Interview implements Comparable<Interview> {
 
     public final String type;
 
+    public final Rating rating;
+
     /**
      * Constructs a {@code Interview}.
      *
      * @param type A valid interview type.
      */
-    public Interview(String type) {
-        requireNonNull(type);
+    public Interview(String type, Rating rating) {
+        requireAllNonNull(type);
         checkArgument(isValidType(type), MESSAGE_CONSTRAINTS);
         this.type = type;
+        this.rating = rating;
     }
 
     /**
@@ -34,6 +42,10 @@ public class Interview implements Comparable<Interview> {
 
     public String getType() {
         return type;
+    }
+
+    public Rating getRating() {
+        return rating;
     }
 
     @Override
@@ -48,19 +60,30 @@ public class Interview implements Comparable<Interview> {
         }
 
         Interview otherInterview = (Interview) other;
-        return type.equals(otherInterview.type);
+        return type.equals(otherInterview.type)
+                && rating.equals(otherInterview.rating);
+    }
+
+    /**
+     * Returns true if the applicant has an interview with the same interview type.
+     */
+    public boolean isContainedIn(List<Interview> otherInterviews) {
+        return otherInterviews.stream().anyMatch(interview -> interview.getType().equals(getType()));
     }
 
     @Override
     public int hashCode() {
-        return type.hashCode();
+        return Objects.hash(type, rating);
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + type + ']';
+        return new ToStringBuilder(this)
+                .add("type", type)
+                .add("rating", rating)
+                .toString();
     }
 
     /**

@@ -69,4 +69,8 @@ shadowJar {
     archiveFileName = 'staffsnap.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
