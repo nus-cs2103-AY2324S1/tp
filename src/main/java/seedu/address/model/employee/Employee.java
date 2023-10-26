@@ -112,7 +112,7 @@ public class Employee {
     /**
      * Returns the current leave status of the employee.
      */
-    public boolean getLeaveStatus() {
+    public boolean isOnLeaveToday() {
         return leaveList.getCurrentLeaveStatus();
     }
 

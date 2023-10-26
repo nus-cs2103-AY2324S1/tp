@@ -35,7 +35,7 @@ public class AddLeaveCommand extends Command {
             + PREFIX_FROM + "START DATE "
             + PREFIX_TO + "END DATE\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ID + "EID2023-6789"
+            + PREFIX_ID + "EID2023-6789 "
             + PREFIX_FROM + "26-12-2023 "
             + PREFIX_TO + "28-12-2023";
 
@@ -91,18 +91,27 @@ public class AddLeaveCommand extends Command {
         return dates;
     }
 
+    /**
+     * Adds all dates from the start to end date to the LeaveList as Leaves.
+     * @param currentList The LeaveList to add to
+     * @param startDate The start date of the leave period
+     * @param endDate The end date of the leave period
+     * @return LeaveList with leaves added
+     * @throws CommandException if the user input does not conform the expected format
+     */
     private LeaveList addLeavesToList(LeaveList currentList, LocalDate startDate, LocalDate endDate)
             throws CommandException {
         ArrayList<Leave> datesToAdd = getDatesBetween(startDate, endDate);
         if ((Employee.MAX_NUM_OF_LEAVES - currentList.getSize()) < datesToAdd.size()) {
             throw new CommandException(MESSAGE_NOT_ENOUGH_LEAVES);
         }
-        for (Leave leaveDate : datesToAdd) {
-            if (!currentList.contains(leaveDate)) {
-                currentList.addLeave(leaveDate);
-            } else {
+        for (Leave leaveDate : datesToAdd) { // ensure no duplicate dates
+            if (currentList.contains(leaveDate)) {
                 throw new CommandException(MESSAGE_DUPLICATE_LEAVE);
             }
+        }
+        for (Leave leaveDate : datesToAdd) {
+            currentList.addLeave(leaveDate);
         }
         return currentList;
     }

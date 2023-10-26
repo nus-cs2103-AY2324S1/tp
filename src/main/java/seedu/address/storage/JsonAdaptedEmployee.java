@@ -14,6 +14,8 @@ import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Id;
+import seedu.address.model.employee.Leave;
+import seedu.address.model.employee.LeaveList;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
@@ -36,6 +38,7 @@ class JsonAdaptedEmployee {
     private final String salary;
     private final boolean isOnLeave;
     private final int overtimeHours;
+    private final ArrayList<Leave> leaveList;
 
     /**
      * Constructs a {@code JsonAdaptedEmployee} with the given employee details.
@@ -45,7 +48,7 @@ class JsonAdaptedEmployee {
             @JsonProperty("id") String id, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments,
             @JsonProperty("salary") String salary, @JsonProperty("isOnLeave") boolean isOnLeave,
-            @JsonProperty("overtime") int overtimeHours) {
+            @JsonProperty("overtime") int overtimeHours, @JsonProperty("leaves") ArrayList<Leave> leaveList) {
         this.name = name;
         this.position = position;
         this.id = id;
@@ -57,6 +60,7 @@ class JsonAdaptedEmployee {
         }
         this.isOnLeave = isOnLeave;
         this.overtimeHours = overtimeHours;
+        this.leaveList = leaveList;
     }
 
     /**
@@ -74,6 +78,7 @@ class JsonAdaptedEmployee {
                 .collect(Collectors.toList()));
         isOnLeave = source.getIsOnLeave();
         overtimeHours = source.getOvertimeHours().value;
+        leaveList = source.getLeaveList().leaveList;
     }
 
     /**
@@ -143,9 +148,18 @@ class JsonAdaptedEmployee {
         }
         final OvertimeHours modelOvertimeHours = new OvertimeHours(overtimeHours);
 
+        if (leaveList == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LeaveList.class.getSimpleName()));
+        }
+        if (!LeaveList.isValidLeaveList(leaveList)) {
+            throw new IllegalValueException(Leave.MESSAGE_CONSTRAINTS);
+        }
+        final LeaveList modelLeaveList = new LeaveList(leaveList);
+
         final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
 
         return new Employee(modelName, modelPosition, modelId, modelPhone,
-                modelEmail, modelSalary, modelDepartments, isOnLeave, modelOvertimeHours);
+                modelEmail, modelSalary, modelDepartments, isOnLeave, modelOvertimeHours, modelLeaveList);
     }
 }

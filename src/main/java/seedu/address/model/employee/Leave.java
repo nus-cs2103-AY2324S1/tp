@@ -12,8 +12,7 @@ public class Leave {
     public static final String MESSAGE_CONSTRAINTS = "Leave dates have to be of format dd-MM-yyyy!"
             + " Please ensure that the date is valid!";
 
-    public static final DateTimeFormatter VALID_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-            .withResolverStyle(ResolverStyle.STRICT);
+    public static final DateTimeFormatter VALID_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public final LocalDate leaveDate;
 

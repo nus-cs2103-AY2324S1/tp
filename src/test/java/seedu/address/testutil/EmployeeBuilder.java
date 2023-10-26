@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +8,8 @@ import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Id;
+import seedu.address.model.employee.Leave;
+import seedu.address.model.employee.LeaveList;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
@@ -37,6 +40,7 @@ public class EmployeeBuilder {
     private Set<Department> departments;
     private boolean isOnLeave;
     private OvertimeHours overtimeHours;
+    private LeaveList leaveList;
 
     /**
      * Creates a {@code EmployeeBuilder} with the default details.
@@ -51,6 +55,7 @@ public class EmployeeBuilder {
         departments = new HashSet<>();
         isOnLeave = DEFAULT_IS_ON_LEAVE;
         overtimeHours = new OvertimeHours(DEFAULT_OVERTIME_HOURS);
+        leaveList = new LeaveList();
     }
 
     /**
@@ -66,6 +71,7 @@ public class EmployeeBuilder {
         departments = new HashSet<>(employeeToCopy.getDepartments());
         isOnLeave = employeeToCopy.getIsOnLeave();
         overtimeHours = employeeToCopy.getOvertimeHours();
+        leaveList = employeeToCopy.getLeaveList();
     }
 
     /**
@@ -141,7 +147,15 @@ public class EmployeeBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code LeaveList} of the {@code employee} that we are building.
+     */
+    public EmployeeBuilder withLeaveList(ArrayList<Leave> leaves) {
+        this.leaveList = new LeaveList(leaves);
+        return this;
+    }
+
     public Employee build() {
-        return new Employee(name, position, id, phone, email, salary, departments, isOnLeave, overtimeHours);
+        return new Employee(name, position, id, phone, email, salary, departments, isOnLeave, overtimeHours, leaveList);
     }
 }

@@ -62,13 +62,15 @@ public class LeaveList {
         leaveList.add(leave);
     }
 
-    public void addAllLeaves(ArrayList<Leave> leaves) {
-        leaveList.addAll(leaves);
-    }
-
+    /**
+     * Returns true if the LeaveList contains the specified Leave.
+     *
+     * @param date The Leave to be checked.
+     */
     public boolean contains(Leave date) {
         return leaveList.contains(date);
     }
+
 
     public boolean getCurrentLeaveStatus() {
         if (leaveList.size() == 0) {
@@ -112,7 +114,7 @@ public class LeaveList {
                 sb.append("\n");
             }
         } else {
-            sb.append("No leaves taken.\n");
+            sb.append("No leaves taken");
         }
         return sb.toString();
     }
