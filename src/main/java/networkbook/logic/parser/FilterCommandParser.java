@@ -37,6 +37,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         );
 
         Optional<String> fieldString = argMultimap.getValue(CliSyntax.PREFIX_FILTER_FIELD);
+        if (fieldString.isEmpty()) {
+            throw new ParseException(
+                    String.format(
+                            Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            FilterCommand.MESSAGE_USAGE
+                    )
+            );
+        }
 
         String trimmedArgs = fieldString.get().trim();
         if (trimmedArgs.isEmpty()) {
