@@ -311,7 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `FumbleLog`, the **Person** is the `user` and the **Actors** are `student`, unless specified otherwise)
+(For all use cases below, the **System** is `FumbleLog`, the **Person** is the `user` and the **Actors** are `Computing student`, unless specified otherwise)
 
 **Use case: UC01 - Delete a person**
 
@@ -335,6 +335,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. FumbleLog shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. The person is assigned to an event.
+
+    * 3b1. The event is updated to remove the person from the event.
+
+      Use case resumes at step 4.
 
 **Use case: UC02 - Add a person**
 
@@ -374,21 +380,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
- **Use case: UC04 - Show events**
+* 4a. User modifies the name of the person
 
- **MSS**
- 
- 1. User requests to show all events
- 2. FumbleLog shows a list of events
+    * 4a1. FumbleLog updates the name of the person in all events that the person is <u> assigned </u> to.
 
-    Use case ends.
+      Use case resumes at step 5.
 
-**Extensions**
-* 2a. List is empty
-
-  Use case ends.
-
-**Use case: UC05 - Add an event**
+    
+**Use case: UC04 - Add an event**
 
 **MSS**
 
@@ -405,36 +404,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
- **Use case: UC06 - Edit an event**
+ **Use case: UC05 - Edit an event**
 
  **MSS**
-1. User requests to list events
-2. FumbleLog shows a list of events
-3. User request to edit a specific event in the list
-4. User supplies parameters that they want to change
-5. FumbleLog edits the event
+1. User request to edit a specific event in the list
+2. User supplies parameters that they want to change
+3. FumbleLog edits the event
 
    Use case ends.
 
 **Extensions**
-* 2a. List is empty
+* 1a. List is empty
 
   Use case ends.
 
-* 3a. User supplies an invalid index to edit
+* 2a. User supplies an invalid index to edit
     
-    * 3a1. FumbleLog shows an error message.
+    * 2a1. FumbleLog shows an error message.
 
       Use case resumes at step 2.
-* 5a. User enters a group and certain members of the group is already 
+* 3a. User enters a group and certain members of the group is already 
 assigned to the the event.
 
-    * 5a1. For each Event, duplicate members will be removed from the 
+    * 3a1. For each Event, duplicate members will be removed from the 
     individual Persons list.
         
       Use case ends
 
-**Use case: UC07 - Delete an event**
+**Use case: UC06 - Delete an event**
 
 **MSS**
 
@@ -458,7 +455,7 @@ assigned to the the event.
       Use case resumes at step 2.
 
  
-**Use case: UC08 - Filter persons by group**
+**Use case: UC07 - Filter persons by group**
 
 1. User requests to filter persons by specifying a group
 2. FumbleLog shows the list of persons that belong in the specified group
@@ -478,7 +475,7 @@ assigned to the the event.
   Use case ends.
 
 
-**Use case: UC09 - Show reminders for events/birthdays happening soon**
+**Use case: UC08 - Show reminders for events/birthdays happening soon**
 
 **MSS**
 1. User request a reminder for events/birthdays happening soon
@@ -498,7 +495,7 @@ assigned to the the event.
   Use case ends.
 
 
-**Use case: UC10 - Customise short form commands**
+**Use case: UC09 - Customise short form commands**
 
 **MSS**
 1. User request to define a command in a custom format
@@ -519,7 +516,7 @@ assigned to the the event.
  
       Use case ends.
 
-**Use case: UC11 - Assigning a group to an event**
+**Use case: UC10 - Assigning a group to an event**
 
 **MSS**
 1. User requests to show a list of events
@@ -546,7 +543,7 @@ assigned to the the event.
       Use case ends.
 * 4a. User assigns a group to an event where 
 
-**Use case: UC12 - Marking an event as recurring**
+**Use case: UC11 - Marking an event as recurring**
 
 **MSS**
 1. User requests to show a list of events
@@ -573,7 +570,7 @@ assigned to the the event.
 
       Use case ends.
 
-**Use case: UC13 - Pin a person**
+**Use case: UC12 - Pin a person**
 
 **MSS**
 
@@ -595,7 +592,7 @@ assigned to the the event.
 
   Use case resumes at step 3.
 
-**Use case: UC14 - Display events in Calendar**
+**Use case: UC13 - Display events in Calendar**
 
 1. User requests to show events in a calendar form
 2. FumbleLog shows all the events in a calendar
