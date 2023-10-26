@@ -144,7 +144,7 @@ class FlashCardTest {
                 new ProficiencyLevel(1));
         fc1.updateLevel(true);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 2);
-        assert(!fc1.isToBeDeleted());
+        assert(!fc1.isDeletedFromReview());
         assert(!fc1.getWhenToReview().equals(date));
     }
 
@@ -157,7 +157,7 @@ class FlashCardTest {
                 new ProficiencyLevel(2));
         fc1.updateLevel(false);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 1);
-        assert(!fc1.isToBeDeleted());
+        assert(!fc1.isDeletedFromReview());
         assert(!fc1.getWhenToReview().equals(date));
     }
 
@@ -170,7 +170,7 @@ class FlashCardTest {
                 new ProficiencyLevel(1));
         fc1.updateLevel(false);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 1);
-        assert(!fc1.isToBeDeleted());
+        assert(!fc1.isDeletedFromReview());
         assert(!fc1.getWhenToReview().equals(date));
     }
 
@@ -183,7 +183,7 @@ class FlashCardTest {
                 new ProficiencyLevel(5));
         fc1.updateLevel(true);
         assertEquals(fc1.getProficiencyLevel().getLevel(), 6);
-        assert(fc1.isToBeDeleted());
+        assert(fc1.isDeletedFromReview());
         assert(!fc1.getWhenToReview().equals(date));
     }
 }
