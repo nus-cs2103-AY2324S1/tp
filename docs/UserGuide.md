@@ -28,7 +28,7 @@ organise and manage patient details faster than traditional GUI apps.
 
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/UI_v1.2.1.jpg)
 
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -98,7 +98,6 @@ The 2 identifying parameters of a patient are given below:
 | `m/`     | Medical History        | `m/Asthmatic`         | `m/MEDICAL_HISTORY`      |                                 |
 | `start/` | Appointment Start Time | `start/Nov 11, 9AM`   | `start/APPT_START`       | Must be paired with `/end`      |
 | `end/`   | Appointment End Time   | `end/Nov 11, 12PM`    | `end/APPT_END`           | Must be paired with `/start`    |
-| `t/`     | Tag                    | `t/Emergency`         | `t/TAG`                  | Can have multiple of this field |
 
 
 ### Auto Save
