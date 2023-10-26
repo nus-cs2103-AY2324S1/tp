@@ -31,7 +31,7 @@ public class Group {
     public Group(String groupName) {
         requireNonNull(groupName);
         this.groupName = groupName;
-        this.groupRemark = new GroupRemark(" ");
+        this.groupRemark = new GroupRemark("");
     }
 
     /**
