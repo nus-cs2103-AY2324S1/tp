@@ -12,7 +12,7 @@ Here’s an overview of what you can do with TutorConnect:
 * Create and plan your tutor availability and schedule
 * View upcoming schedules
 
-On top of these functionalities, we believe that tuition centre management must be efficient. Therefore, TutorConnect is **optimised for users who can type fast** and utilise the [Command Line Interface (CLI)](#cli) to complete tasks using the keyboard faster than using the mouse.
+On top of these functionalities, we believe that tuition centre management must be efficient. Therefore, TutorConnect is **optimised for users who can type fast** and utilise the [Command Line Interface (CLI)](#glossary) to complete tasks using the keyboard faster than using the mouse.
 
 * Table of Contents
 {:toc}
