@@ -139,6 +139,20 @@ Examples:
 * `unenrol m/1 e/5` unlinks the 1st member in the member list from the 5th event in the event list.
 * `unenrol m/5 e/1` unlinks the 5th member in the member list from the 1st event in the event list.
 
+### Edit an enrolment: editAttendance
+Edits the attendance details of a specified member at a specified event with the specified attributes.
+
+Format: `editAttendance m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
+
+* Links the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
+* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the displayed member/event list.
+* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
+* At least one field to edit must be provided.
+* The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
+
+Examples:
+* `editAttendance m/1 e/1 h/0 r/Absent due to Covid` edits the attendance of the 1st member in the member list for the 1st event of the event list.
+
 ### List all Members and all Events : `list`
 
 List all members and all events in the CCA in 2 separate columns.
