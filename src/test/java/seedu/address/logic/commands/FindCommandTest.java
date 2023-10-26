@@ -65,6 +65,7 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        expectedMessage = "Filters applied: " + predicate.toFilterString() + "\n" + expectedMessage;
         ArrayList<Predicate<Person>> predicates = new ArrayList<>();
         predicates.add(predicate);
         FindCommand command = new FindCommand(predicates);
@@ -77,6 +78,7 @@ public class FindCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        expectedMessage = "Filters applied: " + predicate.toFilterString() + "\n" + expectedMessage;
         ArrayList<Predicate<Person>> predicates = new ArrayList<>();
         predicates.add(predicate);
         FindCommand command = new FindCommand(predicates);

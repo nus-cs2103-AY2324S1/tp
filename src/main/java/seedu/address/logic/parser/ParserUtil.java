@@ -188,7 +188,7 @@ public class ParserUtil {
      */
     public static Course parseCourse(String course) throws ParseException {
         requireNonNull(course);
-        String trimmedCourse = course.trim();
+        String trimmedCourse = course.trim().toUpperCase();
         try {
             return UniqueCourseList.findByCourseCode(trimmedCourse);
         } catch (Exception e) {
