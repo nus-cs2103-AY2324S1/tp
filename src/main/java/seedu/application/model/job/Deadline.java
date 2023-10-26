@@ -66,6 +66,7 @@ public class Deadline {
     /**
      * Checks if the date and time represented by this {@code Deadline} is earlier
      * than the other Deadline. Empty deadlines are considered to be earlier.
+     *
      * @param other The other {@code Deadline} to be compared to.
      * @return -1 if this deadline is earlier, 0 if they are equal, and 1 if this deadline is later.
      */

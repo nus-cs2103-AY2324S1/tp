@@ -58,7 +58,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         ApplicationBookStorage applicationBookStorage =
-                new JsonApplicationBookStorage(userPrefs.getApplicationBookFilePath());
+            new JsonApplicationBookStorage(userPrefs.getApplicationBookFilePath());
         storage = new StorageManager(applicationBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -83,12 +83,12 @@ public class MainApp extends Application {
             applicationBookOptional = storage.readApplicationBook();
             if (!applicationBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getApplicationBookFilePath()
-                        + " populated with a sample ApplicationBook.");
+                    + " populated with a sample ApplicationBook.");
             }
             initialData = applicationBookOptional.orElseGet(SampleDataUtil::getSampleApplicationBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getApplicationBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty ApplicationBook.");
+                + " Will be starting with an empty ApplicationBook.");
             initialData = new ApplicationBook();
         }
 
@@ -125,7 +125,7 @@ public class MainApp extends Application {
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataLoadingException e) {
             logger.warning("Config file at " + configFilePathUsed + " could not be loaded."
-                    + " Using default config properties.");
+                + " Using default config properties.");
             initializedConfig = new Config();
         }
 
@@ -156,7 +156,7 @@ public class MainApp extends Application {
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
-                    + " Using default preferences.");
+                + " Using default preferences.");
             initializedPrefs = new UserPrefs();
         }
 
