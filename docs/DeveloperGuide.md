@@ -252,6 +252,89 @@ searching for keywords in multiple fields at the same time.
     * Pros: More flexible in usage.
     * Cons: More difficult to modify and test.
 
+### Sort Feature
+
+The **Sort** feature in our software system is designed to sort the list of clients by name as well as appointment time. This feature is facilitated through the `SortCommand` class.
+
+#### Implementation Overview
+
+The `SortCommand` class is instantiated by the `SortCommandParser`, which parses user input commands. The `SortCommandParser` class implements the following operations:
+
+- **`SortCommandParser#parse(String args)` —  Checks the sort command keyword passed in by the user. 
+
+The `SortCommand` takes in a `Comparator<Person>` object and passes it into the current `Model` model. The `SortCommand` class implements the following operations:
+
+- **`SortCommand#execute()` —  Executes the sort operation by calling `model.sortFilteredPersonList(comparator)`.
+
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data. It contains the following method:
+
+- **`ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by setting the comparator on the list of clients wrapped in a SortedList wrapper.
+
+**Aspect: Usage Scenario:**
+
+**Scenario 1:**
+User enters a sort command `sort appointment`. The `SortByAppointmentComparator` will be initialized and used to instantiate a SortCommand that when executed causes the list to be sorted by appointment, showing the earlier appointment first.
+
+**Scenario 2:**
+User enters a sort command `sort name`. The `SortByNameComparator` will be initialized and used to instantiate a SortCommand that when executed causes the list to be sorted by lexicographical ordering of name.
+
+The following sequence diagram shows how the gather operation works:
+
+<img src="images/SortClassSequenceDiagram.png" width="700"/>
+
+#### Design Considerations
+
+**Aspect: How Sort Executes**
+
+**Aspect 1 :** User can sort by name and appointment at any time. As such, calling find on the sorted list will result in the ordering of find to also be sorted.
+- **Pros:** Improved usability of maintaining order of list throughout without the list having to be reordered after each command
+- **Cons:** Limitedsorting options as of now
+
+**Aspect 2:** After sorting the first time, it will not be possible to return the list to its original ordering
+- **Pros:** Easier implementation of the sorting function.
+- **Cons:** Unlikely, but if for some reason the user wants the list sorted back to its original order, the only way is to restart the app at the current moment.
+
+_{more aspects and alternatives to be added}_
+
+### Expanded Find feature
+
+The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing FindCommand structure.
+It extends `Predicate<Person>` and is composed of up to one of a `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate`
+and a `TagContainsKeywordsPredicate` each. Here's a partial class diagram of the `CombinedPredicate`.
+![CombinedPredicate](images/CombinedPredicate.png)
+
+The `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate` and
+`TagContainsKeywordsPredicate` check a Person if the respective field contains
+any of the keywords supplied to the predicate. Note that only the `NameContainsKeywordsPredicate`
+checks for whole words, because it is rare to search for people by substrings, while `FinancialPlanContainsKeywordsPredicate`
+and `TagContainsKeywordsPredicate` allow matching for substrings because there are certain cases where it is logical to search for
+substrings e.g. `Plan A` and `Plan A Premium` are related, so they can show up in the same search.
+
+The Find command format also changes to resemble a format more similar to the `add` and `edit` commands, to allow for
+searching for keywords in multiple fields at the same time.
+
+#### Design Considerations:
+
+**Aspect: How to implement find for multiple fields**
+* **Alternative 1 (current choice):** Use one unified command and format.
+    * Pros: Easy to implement (argument multimap is available), allows for more flexible usage.
+    * Cons: May get cluttered when there are many terms.
+
+* **Alternative 2:** Take an argument to decide which field to find by.
+    * Pros: More user-friendly and natural since there is no need to use prefixes.
+    * Cons: Less flexible, slightly more difficult to implement.
+
+**Aspect: How to implement `CombinedPredicate`**
+* **Alternative 1 (current choice):** Compose it with the 3 component predicates.
+    * Pros: Easier to modify and test.
+    * Cons: Less flexible when trying to combine multiple predicates (that may be of the same type).
+
+* **Alternative 2:** Use a `Predicate<Person>` and use the `or()` method to chain predicates.
+    * Pros: More flexible in usage.
+    * Cons: More difficult to modify and test.
+
+
+
 ### Appointment Sidebar Feature
 
 The appointment sidebar is facilitated by `ModelManager`. It etends `Model` and stores and additional `SortedList<Appointment>` object that represents all the existing appointments.
