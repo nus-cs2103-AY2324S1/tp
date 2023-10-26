@@ -25,16 +25,20 @@ public class CommandResult {
     /** The application should list all persons. */
     private final boolean listPerson;
 
+    /** The application should show the Tree */
+    private final boolean showTree;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-                         boolean listTeam, boolean listPerson) {
+                         boolean listTeam, boolean listPerson, boolean showTree) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.listTeam = listTeam;
         this.listPerson = listPerson;
+        this.showTree = showTree;
     }
 
     /**
@@ -42,7 +46,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -65,6 +69,10 @@ public class CommandResult {
         return listPerson;
     }
 
+    public boolean isShowTree() {
+        return showTree;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -81,12 +89,13 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && listTeam == otherCommandResult.listTeam
-                && listPerson == otherCommandResult.listPerson;
+                && listPerson == otherCommandResult.listPerson
+                && showTree == otherCommandResult.showTree;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, listTeam, listPerson);
+        return Objects.hash(feedbackToUser, showHelp, exit, listTeam, listPerson, showTree);
     }
 
     @Override
@@ -97,6 +106,7 @@ public class CommandResult {
                 .add("exit", exit)
                 .add("listTeam", listTeam)
                 .add("listPerson", listPerson)
+                .add("showTree", showTree)
                 .toString();
     }
 

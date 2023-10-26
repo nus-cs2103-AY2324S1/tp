@@ -14,7 +14,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +29,10 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, false, false)));
     }
 
     @Test
@@ -47,20 +47,26 @@ public class CommandResultTest {
 
         // different showHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult(
-                "feedback", true, false, false, false).hashCode());
+                "feedback", true, false, false, false, false).hashCode());
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult(
-                "feedback", false, true, false, false ).hashCode());
+                "feedback", false, true, false, false, false).hashCode());
     }
 
     @Test
     public void toStringMethod() {
         CommandResult commandResult = new CommandResult("feedback");
-        String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + ", listTeam=" + commandResult.isListTeam()
-                + ", listPerson=" + commandResult.isListPerson() + "}";
+        String expected = CommandResult.class.getCanonicalName()
+                + "{feedbackToUser="
+                + commandResult.getFeedbackToUser()
+                + ", showHelp="
+                + commandResult.isShowHelp()
+                + ", exit=" + commandResult.isExit()
+                + ", listTeam=" + commandResult.isListTeam()
+                + ", listPerson=" + commandResult.isListPerson()
+                + ", showTree=" + commandResult.isShowTree()
+                + "}";
 
         assertEquals(expected, commandResult.toString());
     }

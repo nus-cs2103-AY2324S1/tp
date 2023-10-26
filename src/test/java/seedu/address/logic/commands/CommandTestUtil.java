@@ -103,7 +103,7 @@ public class CommandTestUtil {
     public static void assertCommandSuccessForListPersons(Command command, Model actualModel, String expectedMessage,
                                             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(
-                expectedMessage, false, false, false, true);
+                expectedMessage, false, false, false, true, false);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

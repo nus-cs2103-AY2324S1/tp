@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -68,9 +70,20 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private VBox D_teamList;
 
-    private Boolean isListingPerson;
+    @FXML
+    private StackPane tree;
 
-    private Boolean isListingTeam;
+    @FXML
+    private StackPane personStats;
+
+    @FXML
+    private StackPane teamStats;
+
+    private boolean isListingPerson;
+
+    private boolean isListingTeam;
+
+    private boolean isShowingTree;
 
     private double originalResultDisplayHeight;
 
@@ -175,7 +188,26 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        setStatistics();
+
         originalResultDisplayHeight = resultDisplayPlaceholder.getPrefHeight();
+    }
+
+    /**
+     * set the label and values for the statistic area.
+     */
+    private void setStatistics() {
+        Label personLabel = new Label("   Total number of developers: "
+                + logic.getFilteredPersonList().size());
+        personLabel.setStyle("-fx-text-fill: #ecbdbd;");
+        personStats.getChildren().add(personLabel);
+        StackPane.setAlignment(personLabel, Pos.CENTER_LEFT);
+
+        Label teamLabel = new Label("   Total number of teams: "
+                + logic.getFilteredTeamList().size());
+        teamLabel.setStyle("-fx-text-fill: #ecbdbd;");
+        teamStats.getChildren().add(teamLabel);
+        StackPane.setAlignment(teamLabel, Pos.CENTER_LEFT);
     }
 
     /**
@@ -190,7 +222,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills the teams list.
      */
     private void fillTeamList() {
-        teamListPanel = new TeamListPanel(logic.getFilteredTeamList());
+        teamListPanel = new TeamListPanel(logic.getFilteredTeamList(), logic.getFilteredPersonList());
         teamListPanelPlaceholder.getChildren().add(teamListPanel.getRoot());
     }
 
@@ -200,7 +232,7 @@ public class MainWindow extends UiPart<Stage> {
     private void fillBothList() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         D_personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-        teamListPanel = new TeamListPanel(logic.getFilteredTeamList());
+        teamListPanel = new TeamListPanel(logic.getFilteredTeamList(), logic.getFilteredPersonList());
         D_teamListPanelPlaceholder.getChildren().add(teamListPanel.getRoot());
     }
 
@@ -233,6 +265,7 @@ public class MainWindow extends UiPart<Stage> {
 
         isListingPerson = true;
         isListingTeam = false;
+        isShowingTree = false;
     }
 
     /**
@@ -249,6 +282,7 @@ public class MainWindow extends UiPart<Stage> {
 
         isListingTeam = true;
         isListingPerson = false;
+        isShowingTree = false;
     }
 
     /**
@@ -261,6 +295,7 @@ public class MainWindow extends UiPart<Stage> {
 
         this.isListingPerson = false;
         this.isListingTeam = false;
+        this.isShowingTree = false;
     }
 
     /**
@@ -292,8 +327,9 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fill the panel with list of person.
      */
+    @FXML
     public void handleListPerson() {
-        if (isListingPerson) {
+        if (isListingPerson && !isShowingTree) {
             fillInnerParts("both");
         } else {
             fillInnerParts("persons");
@@ -303,6 +339,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fill the panel with list of teams instead of person.
      */
+    @FXML
     public void handleListTeam() {
         if (isListingTeam) {
             fillInnerParts("both");
@@ -327,15 +364,33 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleTree() {
+        if (isShowingTree) {
+            hideTree();
+        } else {
+            showTree();
+        }
+    }
+
     /**
      * Refresh the card container to show any changes.
      */
     public void refreshCardContainer() {
-        if (!isListingPerson && !isListingTeam) {
+        if (!isListingPerson && !isListingTeam && !isShowingTree) {
             fillInnerParts("both");
         } else if (isListingTeam) {
             fillInnerParts("teams");
         }
+    }
+
+    /**
+     * Refresh the statistics to show any changes.
+     */
+    public void refreshStatistics() {
+        teamStats.getChildren().clear();
+        personStats.getChildren().clear();
+        setStatistics();
     }
 
     /**
@@ -350,6 +405,29 @@ public class MainWindow extends UiPart<Stage> {
      */
     public TeamListPanel getTeamListPanel() {
         return teamListPanel;
+    }
+
+    /**
+     * To toggle the tree to be shown.
+     * Called when a single 'tree' command is received.
+     */
+    public void showTree() {
+        singleListContainer.setVisible(false);
+        dualListContainer.setVisible(false);
+        tree.setVisible(true);
+
+        this.isShowingTree = true;
+        this.isListingPerson = false;
+        this.isListingTeam = false;
+    }
+
+    /**
+     * To toggle the tree to be hidden.
+     * By right only the second 'tree' command will call this function.
+     */
+    public void hideTree() {
+        tree.setVisible(false);
+        fillInnerParts("both");
     }
 
     /**
@@ -381,7 +459,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleListPerson();
             }
 
+            if (commandResult.isShowTree()) {
+                handleTree();
+            }
+
             refreshCardContainer();
+            refreshStatistics();
 
             return commandResult;
         } catch (CommandException | ParseException e) {
