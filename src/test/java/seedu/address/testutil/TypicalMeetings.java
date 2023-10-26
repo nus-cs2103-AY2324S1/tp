@@ -25,12 +25,70 @@ public class TypicalMeetings {
         }
     }
 
+    public static final Meeting TP_MEETING_LATER_START_TIME;
+
+    static {
+        try {
+            TP_MEETING_LATER_START_TIME = new MeetingBuilder().withEventName("TP MEETING TEST")
+                    .withEventDate("2023-10-18")
+                    .withEventStartTime("0100")
+                    .withEventEndTime("2359")
+                    .withPerson("Alice Pauline", "Benson Meier")
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static final Meeting TP_MEETING_EARLIER_END_TIME;
+
+    static {
+        try {
+            TP_MEETING_EARLIER_END_TIME = new MeetingBuilder().withEventName("TP MEETING TEST")
+                    .withEventDate("2023-10-18")
+                    .withEventStartTime("0000")
+                    .withEventEndTime("2358")
+                    .withPerson("Alice Pauline", "Benson Meier")
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static final Meeting MEETING_WITHOUT_TIME;
 
     static {
         try {
             MEETING_WITHOUT_TIME = new MeetingBuilder().withEventName("TP MEETING TEST")
                     .withEventDate("2023-10-18")
+                    .withPerson("Alice Pauline", "Benson Meier")
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static final Meeting MEETING_WITHOUT_START_TIME;
+
+    static {
+        try {
+            MEETING_WITHOUT_START_TIME = new MeetingBuilder().withEventName("TP MEETING TEST")
+                    .withEventDate("2023-10-18")
+                    .withEventEndTime("2359")
+                    .withPerson("Alice Pauline", "Benson Meier")
+                    .build();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static final Meeting MEETING_WITHOUT_END_TIME;
+
+    static {
+        try {
+            MEETING_WITHOUT_END_TIME = new MeetingBuilder().withEventName("TP MEETING TEST")
+                    .withEventDate("2023-10-18")
+                    .withEventStartTime("0000")
                     .withPerson("Alice Pauline", "Benson Meier")
                     .build();
         } catch (ParseException e) {
