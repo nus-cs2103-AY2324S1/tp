@@ -1,5 +1,6 @@
 package networkbook.logic.commands;
 
+import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,6 +26,14 @@ import networkbook.testutil.TypicalPersons;
 public class AddCommandTest {
 
     private Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
+
+    @Test
+    public void execute_doNothing_throwsAssertionError() {
+        AddCommand addCommand = new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON,
+                new AddPersonDescriptorBuilder().build());
+        assertThrowsAssertionError(() -> addCommand.execute(model));
+    }
+
     @Test
     public void execute_callAddPhoneOnFilteredList_success() {
         CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
@@ -126,19 +135,6 @@ public class AddCommandTest {
 
         Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
         expectedModel.setItem(model.getFilteredPersonList().get(0), editedPerson);
-
-        CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_noFieldSpecifiedFilteredList_success() {
-        AddCommand addCommand =
-                new AddCommand(TypicalIndexes.INDEX_FIRST_PERSON, new AddCommand.AddPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(AddCommand.MESSAGE_ADD_INFO_SUCCESS, Messages.format(editedPerson));
-
-        Model expectedModel = new ModelManager(new NetworkBook(model.getNetworkBook()), new UserPrefs());
 
         CommandTestUtil.assertCommandSuccess(addCommand, model, expectedMessage, expectedModel);
     }

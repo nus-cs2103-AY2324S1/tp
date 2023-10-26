@@ -1,6 +1,7 @@
 package networkbook.logic.commands.edit;
 
 import static networkbook.testutil.Assert.assertThrows;
+import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static networkbook.testutil.TypicalPersons.JACK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -38,8 +39,8 @@ public class EditLinkActionTest {
     }
 
     @Test
-    public void edit_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> SAMPLE_VALID_EDIT_LINK_ACTION.edit(null));
+    public void edit_null_throwsAssertionError() {
+        assertThrowsAssertionError(() -> SAMPLE_VALID_EDIT_LINK_ACTION.edit(null));
     }
 
     @Test
