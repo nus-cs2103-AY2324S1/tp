@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.lovebook.commons.core.GuiSettings;
-import seedu.lovebook.model.person.NameContainsKeywordsPredicate;
+import seedu.lovebook.model.date.NameContainsKeywordsPredicate;
 import seedu.lovebook.testutil.LoveBookBuilder;
 
 public class ModelManagerTest {

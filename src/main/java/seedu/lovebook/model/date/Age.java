@@ -1,32 +1,33 @@
-package seedu.lovebook.model.person;
+package seedu.lovebook.model.date;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the date's gender in the lovebook book.
+ * Represents a Date's age in the lovebook.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
  */
-public class Gender {
+public class Age {
     public static final String MESSAGE_CONSTRAINTS =
-            "Gender should be a single character, either M or F";
-    public static final String VALIDATION_REGEX = "[MF]{1}";
+            "Age should only contain positive numbers.";
+    public static final String VALIDATION_REGEX = "^(?:[1-9]|[1-9][0-9]|1[0-4][0-9]|150)$"; // 1-150 Age Accepted
     public final String value;
 
     /**
      * Constructs a {@code Age}.
      *
-     * @param gender A valid gender.
+     * @param age A valid age.
      */
-    public Gender(String gender) {
-        requireNonNull(gender);
-        checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
-        value = gender;
+    public Age(String age) {
+        requireNonNull(age);
+        checkArgument(isValidAge(age), MESSAGE_CONSTRAINTS);
+        value = age;
     }
 
     /**
-     * Returns true if a given string is a valid gender.
+     * Returns true if a given string is a valid age.
      */
-    public static boolean isValidGender(String test) {
+    public static boolean isValidAge(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -42,11 +43,11 @@ public class Gender {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Gender)) {
+        if (!(other instanceof Age)) {
             return false;
         }
 
-        Gender otherAge = (Gender) other;
+        Age otherAge = (Age) other;
         return value.equals(otherAge.value);
     }
 
@@ -54,4 +55,5 @@ public class Gender {
     public int hashCode() {
         return value.hashCode();
     }
+
 }

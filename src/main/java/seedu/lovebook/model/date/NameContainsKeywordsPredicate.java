@@ -1,4 +1,4 @@
-package seedu.lovebook.model.person;
+package seedu.lovebook.model.date;
 
 import java.util.List;
 import java.util.function.Predicate;

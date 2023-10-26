@@ -12,7 +12,7 @@ import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * Adds a date to the lovebook book.

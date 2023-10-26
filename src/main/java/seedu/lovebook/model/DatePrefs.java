@@ -5,11 +5,11 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.lovebook.commons.util.ToStringBuilder;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Income;
-import seedu.lovebook.model.person.horoscope.Horoscope;
+import seedu.lovebook.model.date.Age;
+import seedu.lovebook.model.date.Gender;
+import seedu.lovebook.model.date.Height;
+import seedu.lovebook.model.date.Income;
+import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
  * Represents the preferences of the user for a date.

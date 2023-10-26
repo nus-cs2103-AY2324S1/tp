@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.lovebook.logic.commands.FindCommand;
-import seedu.lovebook.model.person.NameContainsKeywordsPredicate;
+import seedu.lovebook.model.date.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

@@ -13,8 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.lovebook.commons.core.GuiSettings;
 import seedu.lovebook.commons.core.LogsCenter;
 import seedu.lovebook.logic.Messages;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.RandomPredicate;
+import seedu.lovebook.model.date.Date;
+import seedu.lovebook.model.date.RandomPredicate;
 
 /**
  * Represents the in-memory model of the lovebook book data.

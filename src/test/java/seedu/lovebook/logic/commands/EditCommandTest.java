@@ -24,7 +24,7 @@ import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
 import seedu.lovebook.model.UserPrefs;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 import seedu.lovebook.testutil.EditPersonDescriptorBuilder;
 import seedu.lovebook.testutil.PersonBuilder;
 

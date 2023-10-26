@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
+import seedu.lovebook.model.date.MetricContainsKeywordPredicate;
 
 
 /**

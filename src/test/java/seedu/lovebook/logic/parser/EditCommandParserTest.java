@@ -32,10 +32,10 @@ import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.EditCommand;
 import seedu.lovebook.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Name;
+import seedu.lovebook.model.date.Age;
+import seedu.lovebook.model.date.Gender;
+import seedu.lovebook.model.date.Height;
+import seedu.lovebook.model.date.Name;
 import seedu.lovebook.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {

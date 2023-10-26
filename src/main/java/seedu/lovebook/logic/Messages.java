@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import seedu.lovebook.logic.commands.SetPrefCommand;
 import seedu.lovebook.logic.parser.Prefix;
 import seedu.lovebook.model.DatePrefs;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * Container for user visible messages.

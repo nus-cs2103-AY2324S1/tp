@@ -1,10 +1,10 @@
-package seedu.lovebook.model.person;
+package seedu.lovebook.model.date;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the date's income in the lovebook book.
+ * Represents the date's income in the lovebook.
  */
 public class Income {
 

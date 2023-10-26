@@ -15,7 +15,7 @@ import seedu.lovebook.logic.parser.LoveBookParser;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ReadOnlyLoveBook;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 import seedu.lovebook.storage.Storage;
 
 /**

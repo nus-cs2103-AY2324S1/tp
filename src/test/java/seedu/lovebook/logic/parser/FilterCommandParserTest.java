@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import seedu.lovebook.logic.commands.FilterCommand;
-import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
+import seedu.lovebook.model.date.MetricContainsKeywordPredicate;
 
 public class FilterCommandParserTest {
 

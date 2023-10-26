@@ -1,13 +1,14 @@
 package seedu.lovebook.testutil;
 
 import seedu.lovebook.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Income;
-import seedu.lovebook.model.person.Name;
-import seedu.lovebook.model.person.horoscope.Horoscope;
+import seedu.lovebook.model.date.Age;
+import seedu.lovebook.model.date.Avatar;
+import seedu.lovebook.model.date.Date;
+import seedu.lovebook.model.date.Gender;
+import seedu.lovebook.model.date.Height;
+import seedu.lovebook.model.date.Income;
+import seedu.lovebook.model.date.Name;
+import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -35,6 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setHeight(date.getHeight());
         descriptor.setIncome(date.getIncome());
         descriptor.setHoroscope(date.getHoroscope());
+        descriptor.setAvatar(date.getAvatar());
     }
 
     /**
@@ -82,6 +84,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withHoroscope(String horoscope) {
         descriptor.setHoroscope(new Horoscope(horoscope));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Avatar} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAvatar(String avatar) {
+        descriptor.setAvatar(new Avatar(avatar));
         return this;
     }
 
