@@ -285,8 +285,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner user | remove a member from an event               | I can amend adding the wrong person to an event                                   |
 | `* * *`  | beginner user | view the members who attended an event      | I can estimate the number of members who will attend similar events in the future |
 | `* * *`  | beginner user | view events of a member                     | I can check how involved that particular member is                                |
-| `* * *`  | power user    | undo                                        | I can correct any wrong commands that I have entered previously                   |
-| `* * *`  | power user    | redo                                        | I can correct any wrong undo commands that I have entered previously              |
+| `* * *`  | power user    | undo a command                              | I can correct any wrong commands that I have entered previously                   |
+| `* * *`  | power user    | redo a command                              | I can correct any wrong undo commands that I have entered previously              |
 
 *{More to be added}*
 
