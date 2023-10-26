@@ -23,6 +23,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final CommandStringStash commandStringStash;
+    private Person selectedPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -133,6 +135,42 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+    //=========== Command String Stash =============================================================
+
+    @Override
+    public String getPrevCommandString(String currentCommandString) {
+        return commandStringStash.getPrevCommandString(currentCommandString);
+    }
+
+    @Override
+    public String getPassedCommandString(String currentCommandString) {
+        return commandStringStash.getPassedCommandString(currentCommandString);
+    }
+
+    @Override
+    public void addCommandString(String commandString) {
+        commandStringStash.addCommandString(commandString);
+    }
+
+
+    //=========== Selected Person Accessors ==================================================================
+    @Override
+    public Person getSelectedPerson() {
+        return selectedPerson;
+    }
+
+    @Override
+    public void updateSelectedPerson(Person person) {
+        requireNonNull(person);
+        selectedPerson = person;
+    }
+
+    @Override
+    public boolean isSelectedEmpty() {
+        return selectedPerson == null;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
