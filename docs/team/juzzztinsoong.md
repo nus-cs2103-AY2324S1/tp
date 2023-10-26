@@ -20,14 +20,17 @@ My contributions to the project are listed below.
 
 - **Project management**:
 
-  - to be added soon
+  - Forking workflow
+    - Review and merge pull requests
 
 - **Enhancements to existing features**:
 
-  - to be added soon
+  - Configured the model and storage to support LastContactedTime field for Person.
 
 - **Documentation**:
 
+  - User Guide
+    - Update parts of User Guide on `addc`, `editc` and `addm`.
   - Developer Guide
     - Non-functional Requirements
     - Glossary
