@@ -1,8 +1,8 @@
 @startuml
 
 actor User
-participant EditCommand
-participant Model
+participant ":EditCommand" as EditCommand
+participant ":Model" as Model
 
 User -> EditCommand: Execute Edit Command
 EditCommand -> Model: Execute Edit
@@ -19,4 +19,6 @@ else Person Not Found
   Model --> EditCommand: Person Not Found
   EditCommand --> User: Person Not Found Error
 end
+User -> EditCommand: (Additional Interactions)
+
 @enduml
