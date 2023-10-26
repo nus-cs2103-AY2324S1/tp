@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalTags.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +59,10 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
+    // Person with Typical Tag
+    public static final Person TYPICAL_TAG_PERSON = new PersonBuilder()
+            .withTags(TEST_TAG_STRING).build();
+
     private TypicalPersons() {} // prevents instantiation
 
     /**
@@ -72,6 +77,10 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, TYPICAL_TAG_PERSON));
+    }
+
+    public static Person getTypicalTagPerson() {
+        return TYPICAL_TAG_PERSON;
     }
 }

@@ -3,12 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalTagPerson;
+import static seedu.address.testutil.TypicalTags.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,11 +42,39 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validTagsUnfilteredList_success() {
+        Person personToDelete = getTypicalTagPerson();
+        DeleteCommand deleteCommand = new DeleteCommand(TEST_TAG_SET);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+   public void execute_emptyTagsUnfilteredList_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(EMPTY_TAG_SET);
+
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_NO_INDEX_OR_TAGS);
+    }
+
+    @Test
+    public void execute_noMatchingTagsUnfilteredList_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(NO_MATCHING_TAG_SET);
+
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSONS_NOT_FOUND);
     }
 
     @Test
