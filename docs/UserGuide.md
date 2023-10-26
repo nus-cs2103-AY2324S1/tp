@@ -34,14 +34,14 @@ applications.
    open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists all applications.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe`
-      to the Address Book.
+    * `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 i/Technology s/Pending` : 
+       Adds an application for the company named `Microsoft` to the Application Book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd application shown in the current list.
 
-    * `clear` : Deletes all contacts.
+    * `clear` : Deletes all applications.
 
     * `exit` : Exits the app.
 
