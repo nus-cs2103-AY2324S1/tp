@@ -10,7 +10,7 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":FlashCard" as FlashCard MODEL_COLOR
-participant "s:YesCommand" as YesCommand MODEL_COLOR
+participant ":YesCommand" as YesCommand MODEL_COLOR
 participant ":CommandResult" as CommandResult MODEL_COLOR
 end box
 
@@ -29,10 +29,8 @@ activate Model
 Model -> FlashCard : flashCard.updateLevel(true)
 activate FlashCard
 
-FlashCard -> FlashCard : getProficiencyLevel().upgradeLevel()
-note over FlashCard: Call upgradeLevel() on ProficiencyLevel
+FlashCard -> FlashCard : upgradeLevel()
 FlashCard -> FlashCard : updateReviewDate()
-note over FlashCard: Call calculateNextReviewInterval() and update date
 FlashCard -> FlashCard : set toDelete
 FlashCard --> Model : Return from updateLevel method
 deactivate FlashCard
