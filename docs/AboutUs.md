@@ -34,11 +34,11 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/alvinlim277.png" width="200px">
 
-[[github](http://github.com/alvinlim277)] 
+[[github](http://github.com/alvinlim277)]
 [[portfolio](team/alvinlim277.md)]
 
 * Role: Developer
-* Responsibilities: Documentation, Testing 
+* Responsibilities: Documentation, Testing
 
 ### Ng Kok Seng
 

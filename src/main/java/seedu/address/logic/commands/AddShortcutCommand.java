@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 public class AddShortcutCommand extends Command {
     public static final String COMMAND_WORD = "addsc";
     public static final String MESSAGE_SUCCESS = "New shortcut added: %1$s";
+    public static final String MESSAGE_DUPLICATE = "That short cut already exists: %1$s;";
     public static final String MESSAGE_REPLACED = "Old shortcut %1$s was removed as a result.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Registers the shortcut to the valid command keyword for future use.\n"
@@ -38,10 +39,15 @@ public class AddShortcutCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
-        String feedback = model.getShortcutSettings().registerShortcut(shortcutAlias, command);
+        String feedback = model.registerShortcut(shortcutAlias, command);
         if (feedback == null) {
+            // Completely new mapping
             return new CommandResult(String.format(MESSAGE_SUCCESS, shortcutAlias + " --> " + command));
+        } else if (feedback.equals(command.keyword)) {
+            // A duplicate mapping was replaced
+            return new CommandResult(String.format(MESSAGE_DUPLICATE, shortcutAlias + " --> " + command));
         } else {
+            // A non-duplicate mapping was replaced
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS, shortcutAlias + " --> " + command)
                             + "\n"
