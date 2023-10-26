@@ -17,14 +17,14 @@ import org.junit.jupiter.api.Test;
 import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.testutil.FlashcardBuilder;
+import seedu.flashlingo.testutil.FlashCardBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        FlashCard expectedFlashCard = new FlashcardBuilder(BOB).build();
+        FlashCard expectedFlashCard = new FlashCardBuilder(BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + WORD_DESC_BOB + TRANSLATION_DESC_BOB,

@@ -16,8 +16,8 @@ import seedu.flashlingo.logic.commands.HelpCommand;
 import seedu.flashlingo.logic.commands.ListCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.testutil.FlashCardBuilder;
 import seedu.flashlingo.testutil.FlashCardUtil;
-import seedu.flashlingo.testutil.FlashcardBuilder;
 
 public class FlashlingoParserTest {
 
@@ -25,7 +25,7 @@ public class FlashlingoParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        FlashCard flashCard = new FlashcardBuilder().build();
+        FlashCard flashCard = new FlashCardBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(FlashCardUtil.getAddCommand(flashCard));
         assertEquals(new AddCommand(flashCard), command);
     }

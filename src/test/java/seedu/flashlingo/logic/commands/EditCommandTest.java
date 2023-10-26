@@ -22,7 +22,7 @@ import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.testutil.FlashcardBuilder;
+import seedu.flashlingo.testutil.FlashCardBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -33,7 +33,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        FlashCard editedFlashcard = new FlashcardBuilder().build();
+        FlashCard editedFlashcard = new FlashCardBuilder().build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD,
                 editedFlashcard.getOriginalWord().getWord(), editedFlashcard.getTranslatedWord().getWord());
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS,
@@ -41,9 +41,6 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new Flashlingo(model.getFlashlingo()), new UserPrefs());
         expectedModel.setFlashCard(model.getFilteredFlashCardList().get(0), editedFlashcard);
-
-
-
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -52,10 +49,10 @@ public class EditCommandTest {
         Index indexLastFlashcard = Index.fromOneBased(model.getFilteredFlashCardList().size());
         FlashCard lastFlashcard = model.getFilteredFlashCardList().get(indexLastFlashcard.getZeroBased());
 
-        FlashcardBuilder flashcardInList = new FlashcardBuilder(lastFlashcard);
+        FlashCardBuilder flashcardInList = new FlashCardBuilder(lastFlashcard);
         FlashCard editedFlashcard = flashcardInList.withOriginalWord(VALID_ORIGINAL_WORD_BOB,
                         VALID_ORIGINAL_WORD_LANGUAGE)
-                .withTranslation(VALID_TRANSLATION_BOB, VALID_TRANSLATION_LANGUAGE)
+                .withTranslatedWord(VALID_TRANSLATION_BOB, VALID_TRANSLATION_LANGUAGE)
                 .build();
 
         String editWord = editedFlashcard.getOriginalWord().getWord();
@@ -75,10 +72,9 @@ public class EditCommandTest {
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
         FlashCard firstFlashcard = model.getFilteredFlashCardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
-        FlashCard descriptor = new FlashcardBuilder(firstFlashcard).build();
-        String editWord = descriptor.getOriginalWord().getWord();
-        String editTranslation = descriptor.getTranslatedWord().getWord();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_FLASHCARD, editWord, editTranslation);
+        FlashCard descriptor = new FlashCardBuilder(firstFlashcard).build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_FLASHCARD,
+                descriptor.getOriginalWord().getWord(), descriptor.getTranslatedWord().getWord());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }
@@ -89,10 +85,9 @@ public class EditCommandTest {
 
         // edit person in filtered list into a duplicate in address book
         FlashCard flashCardInList = model.getFlashlingo().getFlashCardList().get(INDEX_SECOND_FLASHCARD.getZeroBased());
-        FlashCard editedFlashcard = new FlashcardBuilder(flashCardInList).build();
-        String editWord = editedFlashcard.getOriginalWord().getWord();
-        String editTranslation = editedFlashcard.getTranslatedWord().getWord();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, editWord, editTranslation);
+        FlashCard editedFlashcard = new FlashCardBuilder(flashCardInList).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD,
+                editedFlashcard.getOriginalWord().getWord(), editedFlashcard.getTranslatedWord().getWord());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }
@@ -100,7 +95,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashCardList().size() + 1);
-        FlashCard descriptor = new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB,
+        FlashCard descriptor = new FlashCardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB,
                 VALID_ORIGINAL_WORD_LANGUAGE).build();
         String editWord = descriptor.getOriginalWord().getWord();
         String editTranslation = descriptor.getTranslatedWord().getWord();
@@ -120,7 +115,7 @@ public class EditCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFlashlingo().getFlashCardList().size());
 
-        FlashCard editedFlashcard = new FlashcardBuilder()
+        FlashCard editedFlashcard = new FlashCardBuilder()
                 .withOriginalWord(VALID_ORIGINAL_WORD_BOB, VALID_TRANSLATION_LANGUAGE).build();
         String editWord = editedFlashcard.getOriginalWord().getWord();
         String editTranslation = editedFlashcard.getTranslatedWord().getWord();
@@ -133,7 +128,7 @@ public class EditCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        FlashCard flashCard = new FlashcardBuilder().build();
+        FlashCard flashCard = new FlashCardBuilder().build();
         String editWord = flashCard.getOriginalWord().getWord();
         String editTranslation = flashCard.getOriginalWord().getWord();
         EditCommand editCommand = new EditCommand(index, editWord, editTranslation);
