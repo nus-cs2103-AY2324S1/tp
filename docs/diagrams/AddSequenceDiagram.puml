@@ -77,4 +77,5 @@ deactivate AddCommand
 
 [<--LogicManager
 deactivate LogicManager
+
 @enduml
