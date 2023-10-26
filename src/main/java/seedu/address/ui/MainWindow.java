@@ -161,6 +161,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the events window.
+     */
     @FXML
     public void handleEvent() {
         if (!eventWindow.isShowing()) {

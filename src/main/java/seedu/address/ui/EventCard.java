@@ -1,15 +1,12 @@
 package seedu.address.ui;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -36,9 +33,9 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label start_time;
+    private Label startTime;
     @FXML
-    private Label end_time;
+    private Label endTime;
     @FXML
     private Label name;
 
@@ -51,7 +48,7 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         description.setText(event.getDescription());
         name.setText(event.getPerson().getName().fullName);
-        start_time.setText(event.getStart_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
-        end_time.setText(event.getEnd_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+        startTime.setText(event.getStart_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+        endTime.setText(event.getEnd_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
     }
 }

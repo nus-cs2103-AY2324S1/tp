@@ -24,8 +24,6 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Event> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -102,7 +100,7 @@ public class UniqueEventList implements Iterable<Event> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Event> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
+        return internalList;
     }
 
     @Override

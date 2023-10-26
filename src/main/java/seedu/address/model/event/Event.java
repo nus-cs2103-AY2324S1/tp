@@ -2,30 +2,40 @@ package seedu.address.model.event;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import seedu.address.commons.util.ToStringBuilder;
+
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
+/**
+ * Represents an Event in JABPro.
+ */
 public class Event {
     private final Person person;
     private final Index index;
-    private final LocalDateTime start_time;
-    private final LocalDateTime end_time;
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
     private final String description;
 
-    public Event(Person person, String description, LocalDateTime start_time, LocalDateTime end_time) {
+    /**
+     * Initialises an Event object.
+     */
+    public Event(Person person, String description, LocalDateTime startTime, LocalDateTime endTime) {
         this.person = person;
         this.description = description;
-        this.start_time = start_time;
-        this.end_time = end_time;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.index = null;
     }
 
-    public Event(Index index, String description, LocalDateTime start_time, LocalDateTime end_time) {
+    /**
+     * Initialises an Event object.
+     */
+    public Event(Index index, String description, LocalDateTime startTime, LocalDateTime endTime) {
         this.index = index;
         this.description = description;
-        this.start_time = start_time;
-        this.end_time = end_time;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.person = null;
     }
 
@@ -38,17 +48,21 @@ public class Event {
     }
 
     public LocalDateTime getStart_time() {
-        return start_time;
+        return startTime;
     }
 
     public LocalDateTime getEnd_time() {
-        return end_time;
+        return endTime;
     }
 
     public Index getIndex() {
         return index;
     }
 
+    /**
+     * Returns true if both events are associated with the same person, and have the same description.
+     * This defines a weaker notion of equality between two events.
+     */
     public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
             return true;
@@ -73,8 +87,8 @@ public class Event {
 
         return person.equals(otherEvent.person)
                 && description.equals(otherEvent.description)
-                && start_time.equals(otherEvent.start_time)
-                && end_time.equals(otherEvent.end_time);
+                && startTime.equals(otherEvent.startTime)
+                && endTime.equals(otherEvent.endTime);
     }
 
     @Override
@@ -82,8 +96,8 @@ public class Event {
         ToStringBuilder builder = new ToStringBuilder(this.getClass().getSimpleName());
         builder.add("name", person.getName().fullName)
                 .add("description", description)
-                .add("start_time", start_time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")))
-                .add("end_time", end_time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+                .add("startTime", startTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")))
+                .add("endTime", endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
         return builder.toString();
     }

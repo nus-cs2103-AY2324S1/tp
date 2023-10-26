@@ -45,29 +45,41 @@ public interface Model {
      */
     Path getAddressBookFilePath();
 
+    Path getEventBookFilePath();
+
     /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    void setEventBookFilePath(Path eventBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    void setEventBook(ReadOnlyEventBook eventBook);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    ReadOnlyEventBook getEventBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
 
+    boolean hasEvent(Event event);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
+
+    void deleteEvent(Event event);
 
     /**
      * Adds the given person.
@@ -93,13 +105,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-    void updateFilteredEventList(Predicate<Event> predicate);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicates}.
      * @throws NullPointerException if any of the {@code predicatesList} is null.
      */
     void updateFilteredPersonList(List<Predicate<Person>> predicatesList);
+
+    void updateFilteredEventList(Predicate<Event> predicate);
+
     void updateFilteredEventList(List<Predicate<Event>> predicateList);
 
     /**
