@@ -11,22 +11,24 @@ public class NoteTest {
     @Test
     public void isValidNote() {
 
-        String hundredCharNote = "ijdoasfsjfjsfisfjdijfjfdijfdpsjifpjfdiasfdjfdjfpdjfids"
-                + "ajidsjipfsjifdsjcjpdmaspacmdspcmdmcpsdmcdppsdp";
-        String moreThanHundredCharNote = "ijdoasfsjfjsfisfjdijfjfdijfdpsjifpjfdiasfdjfdjfpdjfids"
-                + "ajidsjipfsjifdsjcjpdmaspacmdspcmdmcpsdmcdppsdpasad";
+        String twoHundredCharNote = "ijdoasfsjfjsfisfjdijfjfdijfdpsjifpjfdiasfdjfdjfpdjfidsajidsjipfsjifdsjcjpdmaspa"
+                + "cmdspcmdmcpsdmcdppsdpsdadspoadjaspdasopksapascjaspcjfsapjcspjdasjcaspjdsjapcjsapsajcpsajfasijcia"
+                + "sjfpasjfaciasjdajadasdasa";
+        String moreThanTwoHundredCharNote = "ijdoasfsjfjsfisfjdijfjfdijfdpsjifpjfdiasfdjfdjfpdjfidsajidsjipfsjifdsjcjp"
+                + "dmaspacmdspcmdmcpsdmcdppsdpsdadspoadjaspdasopksapascjaspcjfsapjcspjdasjcaspjdsjapcjsapsajcpsajfas"
+                + "ijciasjfpasjfaciasjdajadasdasaasdasd";
 
         // null note
         assertThrows(NullPointerException.class, () -> Note.isValidNote(null));
 
         // invalid notes
         assertFalse(Note.isValidNote("")); // empty string
-        assertFalse(Note.isValidNote(moreThanHundredCharNote)); // more than 100 characters
+        assertFalse(Note.isValidNote(moreThanTwoHundredCharNote)); // more than 100 characters
 
         // valid note numbers
         assertTrue(Note.isValidNote("Likes dogs."));
         assertTrue(Note.isValidNote("a")); // 1 character
-        assertTrue(Note.isValidNote(hundredCharNote)); // exactly 100 characters
+        assertTrue(Note.isValidNote(twoHundredCharNote)); // exactly 100 characters
     }
 
     @Test
