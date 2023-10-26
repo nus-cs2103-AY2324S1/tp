@@ -96,7 +96,7 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ViewMembersCommand.COMMAND_WORD) instanceof ViewMembersCommand);
         assertTrue(parser.parseCommand(ViewMembersCommand.COMMAND_WORD + " 3") instanceof ViewMembersCommand);
     }
-    
+
     @Test
     public void parseCommand_copyMember() throws Exception {
         CopyMemberCommand command = (CopyMemberCommand) parser.parseCommand(
