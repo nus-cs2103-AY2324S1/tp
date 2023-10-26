@@ -159,6 +159,79 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### LinkedIn/Github feature
+
+#### Implementation
+
+The LinkedIn/Github feature consists of two parts - adding the linkedin/github username to the candidate's data, and viewing the profile. 
+
+The addition is performed by the `AddLCommand` and `AddGCommand` classes. They extend `Command` and override the `execute()` method to add the username to the candidate's existing details. 
+
+It involves the command `AddLCommand` and `AddGCommand` classes, and their corresponding parsers `AddLCommandParser` and `AddGCommandParser`, that take in user input and return either `AddLCommand` or `AddGCommand` objects.
+
+When executed, `AddLCommand` and `AddGCommand` find the person at the specified index in the list, and adds either their linkedin or github username to the `LinkedIn` or `Github` class associated with that `Person`. The list is then updated, and a `CommandResult` object is returned.
+
+The viewing is performed by the `LinkedInCommand` and `GithubCommand` classes. They extend `Command` and override the `execute()` method to redirect the user to the candidate's LinkedIn or Github profile on the browser.
+
+It involves the command `LinkedInCommand` and `GithubCommand` classes, and their corresponding parsers `LinkedInCommandParser` and `GithubCommandParser`, that take in user input and return either `LinkedInCommand` or `GithubCommand` objects.
+
+When executed, `LinkedInCommand` and `GithubCommand` append the username of the person to the base URLs for LinkedIn and Github, and open the URL in the browser.
+
+
+
+Given below is an example usage scenario and how the linkedin and github feature behaves at each step.
+
+Step 1. The user launches the application. `JABPro` will be initialized with the current saved state
+
+User should see the UI as shown below.
+
+![Ui](images/Ui.png)
+
+Step 2. The user wants to add the LinkedIn username to the first person in the list. The user enters the command `addL 1 u/alexyeoh` to add the username to the candidate's existing details.
+
+The following sequence diagram shows how the AddL and AddG operations work:
+
+<puml src="diagrams/AddLSequenceDiagram.puml" alt="AddLSequenceDiagram" />
+<puml src="diagram/AddGSequenceDiagram.puml" alt="AddGSequenceDiagram" />
+
+User should see the UI as shown below after entering `addL 1 u/alexyeoh`
+
+![AddL](images/addLState.png)
+
+Step 3. The user can then view the linkedin profile for the candidate at index 1. The user enters the command `linkedin 1`.
+
+User should see the UI asa shown below after entering `linkedin 1`
+
+![LinkedIn](images/linkedinState.png)
+
+
+Alternatives considered
+
+Alternative 1 (Chosen): 
+
+`LinkedIn` and `Github` are attributes of a `Person` that can be added using the `AddLCommand` and `AddGCommand` and are initially provided with default string values when a Person is initialised.
+
+Pros: There may be candidates who do not provide their LinkedIn or Github profiles as part of their application.
+
+Cons: Person is always initialised with empty values for LinkedIn and Github, and those values would have to be manually set using the commands.
+
+Alternative 2:
+
+`LinkedIn` and `Github`, like all other attributes of `Person`, are required to be non null.
+
+Pros: These details will be provided at the time of addition of a new Person, without having to add them later separately.
+
+Cons: It limits the scope for candidates that do not possess a LinkedIn or Github account.
+
+Alternative 3:
+
+`LinkedIn` and `Github` are attributes of `Person` but are allowed to be null.
+
+Pros: This accounts for candidates that do not have those social profiles, and allows for their addition at the time of Person creation
+
+Cons: With defensive programming in mind, not the best approach having to deal with null values.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -474,6 +547,21 @@ Use case ends.
     Use case ends.
 * 3a. User does not exist on the social platform
   Use case ends.
+
+**Use case: Add events relating to candidates**
+
+**MSS**
+1. User requests to add an event relating to a candidate
+2. JABPro shows that command has been executed successfully.
+3. JABPro adds the event to the list of events.
+   Use case ends.
+
+**Extension**
+* 2a. User does not provide the correct information for an event to be added.
+  * 2a1. JABPro shows an error message anf provides course of action for remedy. Use case resumes at step 1.
+* 2b. Event has already been added to the list of events.
+  * 2b1. JABPro shows an error message and provides course of action for remedy. Use case resumes at step 1.
+
 
 *{More to be added}*
 
