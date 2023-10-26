@@ -72,6 +72,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        setColorTheme(logic.getTheme());
 
         setAccelerators();
 
@@ -132,8 +133,6 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
-        setColorTheme();
     }
 
     /**
@@ -208,9 +207,8 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isSwitchTheme()) {
-                handleSwitchTheme();
-                commandResult = new CommandResult(commandResult.getFeedbackToUser() + logic.getTheme()
-                        + " mode!", false, false, false);
+                setColorTheme(logic.getTheme());
+                commandResult = new CommandResult(commandResult.getFeedbackToUser(), false, false, false);
             }
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -222,21 +220,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void setColorTheme() {
-        if (logic.getTheme().equals("Default")) {
+    private void setColorTheme(String theme) {
+        if (theme.equals("Default")) {
             switchTheme("Light");
         } else {
             switchTheme("Dark");
-        }
-    }
-
-    private void handleSwitchTheme() {
-        if (logic.getTheme().equals("Default")) {
-            logic.setTheme("Dark");
-            switchTheme("Dark");
-        } else {
-            logic.setTheme("Default");
-            switchTheme("Light");
         }
     }
 
