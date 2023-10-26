@@ -21,8 +21,9 @@ class JsonAdaptedInterview {
 
     private final JsonAdaptedApplicant applicant;
     private final String jobRole;
-    private final String interviewTiming;
     private final String rating;
+    private final String interviewStartTime;
+    private final String interviewEndTime;
     private final boolean isDone;
 
     /**
@@ -31,13 +32,15 @@ class JsonAdaptedInterview {
     @JsonCreator
     public JsonAdaptedInterview(@JsonProperty("applicant") JsonAdaptedApplicant applicant,
                                 @JsonProperty("jobRole") String jobRole,
-                                @JsonProperty("interviewTiming") String interviewTiming,
                                 @JsonProperty("rating") String rating,
+                                @JsonProperty("interviewStartTime") String interviewStartTime,
+                                @JsonProperty("interviewEndTime") String interviewEndTime,
                                 @JsonProperty("isDone") boolean isDone) {
         this.applicant = applicant;
         this.jobRole = jobRole;
-        this.interviewTiming = interviewTiming;
         this.rating = rating;
+        this.interviewStartTime = interviewStartTime;
+        this.interviewEndTime = interviewEndTime;
         this.isDone = isDone;
     }
 
@@ -47,8 +50,9 @@ class JsonAdaptedInterview {
     public JsonAdaptedInterview(Interview source) {
         applicant = new JsonAdaptedApplicant(source.getInterviewApplicant());
         jobRole = source.getJobRole();
-        interviewTiming = source.getInterviewTiming();
         rating = source.getRating().rating;
+        interviewStartTime = source.getInterviewStartTimeAsString();
+        interviewEndTime = source.getInterviewEndTimeAsString();
         isDone = source.isDone();
     }
 
@@ -70,7 +74,7 @@ class JsonAdaptedInterview {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, JOB_ROLE_MISSING));
         }
 
-        if (interviewTiming == null) {
+        if (interviewStartTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TIMING_MISSING));
         }
 
@@ -82,9 +86,13 @@ class JsonAdaptedInterview {
             throw new IllegalValueException(Rating.MESSAGE_CONSTRAINTS);
         }
 
+        if (interviewEndTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TIMING_MISSING));
+        }
+
         final Rating modelRating = new Rating(rating);
 
-        return new Interview(modelApplicant, jobRole, interviewTiming, modelRating, isDone);
+        return new Interview(modelApplicant, jobRole, interviewStartTime, interviewEndTime, modelRating, isDone);
     }
 
 }

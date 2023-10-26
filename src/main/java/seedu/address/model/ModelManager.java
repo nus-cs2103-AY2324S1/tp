@@ -121,7 +121,8 @@ public class ModelManager implements Model {
             Interview interviewWithEditedApplicant = new Interview(
                     editedApplicant,
                     interviewWithTarget.getJobRole(),
-                    interviewWithTarget.getInterviewTiming()
+                    interviewWithTarget.getInterviewStartTime(),
+                    interviewWithTarget.getInterviewEndTime()
             );
             addressBook.setInterview(interviewWithTarget, interviewWithEditedApplicant);
         }

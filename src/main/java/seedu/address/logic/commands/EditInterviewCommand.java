@@ -15,6 +15,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
 
@@ -38,6 +39,7 @@ public class EditInterviewCommand extends Command {
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS = "Edited Interview: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists in the address book.";
+    public static final String MESSAGE_INVALID_TIME = "This interview already exists in the address book.";
 
     private final Index index;
     private final EditInterviewDescriptor editInterviewDescriptor;
@@ -64,7 +66,12 @@ public class EditInterviewCommand extends Command {
         }
 
         Interview interviewToEdit = lastShownList.get(index.getZeroBased());
-        Interview editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor);
+        Interview editedInterview = null;
+        try {
+            editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor);
+        } catch (ParseException e) {
+            throw new CommandException(MESSAGE_INVALID_TIME);
+        }
 
         if (!interviewToEdit.isNotValidOrNewInterview(editedInterview) && model.hasInterview(editedInterview)) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
@@ -82,14 +89,19 @@ public class EditInterviewCommand extends Command {
      * edited with {@code editInterviewDescriptor}.
      */
     private static Interview createEditedInterview(Interview interviewToEdit,
-                                                   EditInterviewDescriptor editInterviewDescriptor) {
+                                                   EditInterviewDescriptor editInterviewDescriptor)
+            throws ParseException {
         assert interviewToEdit != null;
 
         String updatedJobRole = editInterviewDescriptor.getJobRole().orElse(interviewToEdit.getJobRole());
-        String updatedTiming = editInterviewDescriptor.getInterviewTime().orElse(interviewToEdit.getInterviewTiming());
+        String updatedStartTime = editInterviewDescriptor
+                .getInterviewTime().orElse(interviewToEdit.getInterviewStartTimeAsString());
+        String updatedEndTime = editInterviewDescriptor
+                .getInterviewTime().orElse(interviewToEdit.getInterviewEndTimeAsString());
         boolean updatedDoneStatus = editInterviewDescriptor.hasBeenDone().orElse(interviewToEdit.isDone());
 
-        return new Interview(interviewToEdit.getInterviewApplicant(), updatedJobRole, updatedTiming, updatedDoneStatus);
+        return new Interview(interviewToEdit.getInterviewApplicant(),
+                updatedJobRole, updatedStartTime, updatedEndTime, updatedDoneStatus);
     }
 
     @Override

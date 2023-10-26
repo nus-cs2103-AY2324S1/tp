@@ -61,7 +61,7 @@ public class Messages {
                 + "; Role: "
                 + interview.getJobRole()
                 + "; Scheduled for: "
-                + interview.getInterviewTiming();
+                + interview.getInterviewStartTimeAsString();
     }
 
 }
