@@ -26,9 +26,10 @@
                 </Label>
                 <Label fx:id="applicant" text="\$first" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="jobRole" styleClass="cell_small_label" text="\$phone" />
-            <Label fx:id="interviewTiming" styleClass="cell_small_label" text="\$address" />
-            <Label fx:id="rating" styleClass="cell_small_label" text="\$address" />
+            <Label fx:id="jobRole" styleClass="cell_small_label" text="\$job" />
+            <Label fx:id="interviewStartTime" styleClass="cell_small_label" text="\$interview-start-time" />
+            <Label fx:id="interviewEndTime" styleClass="cell_small_label" text="\$interview-end-time" />
+            <Label fx:id="rating" styleClass="cell_small_label" text="\$rating" />
         </VBox>
     </GridPane>
 </HBox>

@@ -2,8 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditInterviewCommand;
@@ -25,7 +26,7 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
     public EditInterviewCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_JOB_ROLE, PREFIX_TIMING);
+                ArgumentTokenizer.tokenize(args, PREFIX_JOB_ROLE, PREFIX_START_TIME, PREFIX_END_TIME);
 
         Index index;
 
@@ -36,15 +37,18 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
                     pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_JOB_ROLE, PREFIX_TIMING);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_JOB_ROLE, PREFIX_START_TIME, PREFIX_END_TIME);
 
         EditInterviewDescriptor editInterviewDescriptor = new EditInterviewDescriptor();
 
         if (argMultimap.getValue(PREFIX_JOB_ROLE).isPresent()) {
             editInterviewDescriptor.setJobRole(argMultimap.getValue(PREFIX_JOB_ROLE).get());
         }
-        if (argMultimap.getValue(PREFIX_TIMING).isPresent()) {
-            editInterviewDescriptor.setInterviewTime(argMultimap.getValue(PREFIX_TIMING).get());
+        if (argMultimap.getValue(PREFIX_START_TIME).isPresent()) {
+            editInterviewDescriptor.setInterviewTime(argMultimap.getValue(PREFIX_START_TIME).get());
+        }
+        if (argMultimap.getValue(PREFIX_END_TIME).isPresent()) {
+            editInterviewDescriptor.setInterviewTime(argMultimap.getValue(PREFIX_END_TIME).get());
         }
 
         if (!editInterviewDescriptor.isAnyFieldEdited()) {

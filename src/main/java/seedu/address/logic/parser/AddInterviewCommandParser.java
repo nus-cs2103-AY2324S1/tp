@@ -3,9 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -26,17 +28,21 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
      */
     public AddInterviewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_APPLICANT, PREFIX_JOB_ROLE, PREFIX_TIMING);
+                ArgumentTokenizer.tokenize(args, PREFIX_APPLICANT,
+                        PREFIX_JOB_ROLE, PREFIX_START_TIME, PREFIX_END_TIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_APPLICANT, PREFIX_JOB_ROLE, PREFIX_TIMING)
+        if (!arePrefixesPresent(argMultimap, PREFIX_APPLICANT, PREFIX_JOB_ROLE,
+                PREFIX_START_TIME, PREFIX_END_TIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInterviewCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPLICANT, PREFIX_JOB_ROLE, PREFIX_TIMING);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPLICANT, PREFIX_JOB_ROLE,
+                PREFIX_START_TIME, PREFIX_END_TIME);
         String applicantArgs = argMultimap.getValue(PREFIX_APPLICANT).get().trim();
         String jobRole = argMultimap.getValue(PREFIX_JOB_ROLE).get().trim();
-        String timing = argMultimap.getValue(PREFIX_TIMING).get().trim();
+        LocalDateTime startTime = TimeParser.parseDate(argMultimap.getValue(PREFIX_START_TIME).get().trim());
+        LocalDateTime endTime = TimeParser.parseDate(argMultimap.getValue(PREFIX_END_TIME).get().trim());
 
         Index applicantIndex;
         try {
@@ -46,8 +52,7 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
                     MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX, pe);
         }
 
-        // TODO: CONSULT WITH GROUP ON HOW TO IMPLEMENT THIS
-        return new AddInterviewCommand(applicantIndex, jobRole, timing, timing);
+        return new AddInterviewCommand(applicantIndex, jobRole, startTime, endTime);
     }
 
     /**
