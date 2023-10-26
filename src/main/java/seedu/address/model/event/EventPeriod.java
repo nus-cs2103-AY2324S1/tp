@@ -1,8 +1,10 @@
 package seedu.address.model.event;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -235,6 +237,45 @@ public class EventPeriod implements Comparable<EventPeriod> {
         return end.toLocalTime();
     }
 
+    /**
+     * Get the duration of the EventPeriod stored in a LocalTime.
+     *
+     * @return duration of the EventPeriod stored in a LocalTime.
+     */
+    public LocalTime getDuration() {
+        return LocalTime.of(getEndTime().getHour() - getStartTime().getHour(),
+                getEndTime().getMinute() - getStartTime().getMinute());
+    }
+
+    /**
+     * Checks if the start and end LocalDateTime objects occur on the same date.
+     *
+     * @return true if they both occur on the same date, false otherwise.
+     */
+    public boolean isSingleDay() {
+        return start.toLocalDate().isEqual(end.toLocalDate());
+    }
+
+    /**
+     * Get the DayOfWeek of this EventPeriod. EventPeriod has to only span a single day.
+     *
+     * @return DayOfWeek of this EventPeriod.
+     */
+    public DayOfWeek getDayOfWeek() {
+        assert(isSingleDay());
+
+        return start.getDayOfWeek();
+    }
+
+    /**
+     * Get the number of minutes elapsed from the input time to the start time of this EventPeriod.
+     *
+     * @param time input time.
+     * @return minutes elapsed from the input time to the start time of the EventPeriod.
+     */
+    public long getMinutesFromTimeToStartTime(LocalTime time) {
+        return MINUTES.between(time, getStartTime());
+    }
     @Override
     public boolean equals(Object other) {
         requireNonNull(other);

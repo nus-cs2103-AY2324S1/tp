@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -162,6 +163,15 @@ public class Event {
     }
 
     /**
+     * Checks if the Event's eventDuration spans a single day.
+     *
+     * @return true if it spans a single day, false otherwise.
+     */
+    private boolean isEventDurationSingleDay() {
+        return eventPeriod.isSingleDay();
+    }
+
+    /**
      * Checks if parent Event's EventPeriod overlaps with the start and end dates(inclusive).
      *
      * @param start start date.
@@ -215,6 +225,46 @@ public class Event {
      */
     public LocalTime getEndTime() {
         return eventPeriod.getEndTime();
+    }
+
+    /**
+     * Get the duration of the Event, stored in a LocalTime object.
+     *
+     * @return LocalTime object of the duration of the Event.
+     */
+    public LocalTime getDurationOfEvent() {
+        return eventPeriod.getDuration();
+    }
+
+    /**
+     * Get the description of the Event in a String format.
+     *
+     * @return String of the description of the Event.
+     */
+    public String getDescriptionString() {
+        return description.getDescription();
+    }
+
+    /**
+     * Get the DayOfWeek of the Event. Event has to have a EventPeriod that spans a single day.
+     *
+     * @return DayOfWeek of the Event.
+     */
+    public DayOfWeek getDayOfWeek() {
+        assert(isEventDurationSingleDay());
+
+        return eventPeriod.getDayOfWeek();
+    }
+
+    /**
+     * Get the number of minutes elapsed from the input time to the start time of the Event.
+     *
+     * @param time input time.
+     * @return number of minutes elapsed from the input time to the start time of the Event.
+     */
+    public long getMinutesFromTimeToStartTime(LocalTime time) {
+        requireNonNull(time);
+        return eventPeriod.getMinutesFromTimeToStartTime(time);
     }
 
     @Override

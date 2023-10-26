@@ -15,6 +15,8 @@ public class CalendarContainer extends UiPart<Region> {
     private StackPane calendarLabelPlaceholder;
 
     @FXML
+    private GridPane eventSpaceBackground;
+    @FXML
     private GridPane eventSpace;
 
     public CalendarContainer(ReadOnlyCalendar calendar) {
@@ -26,6 +28,7 @@ public class CalendarContainer extends UiPart<Region> {
 
     public void fillCalendar() {
         calendarLabelPlaceholder.getChildren().add(new CalendarLabelColumn().getRoot());
-        eventSpace.getChildren().add(new EventSpaceBackground(calendar).getRoot());
+        eventSpaceBackground.getChildren().add(new EventSpaceBackground(calendar).getRoot());
+        eventSpace.getChildren().add(new CalendarEventSpace(calendar).getRoot());
     }
 }
