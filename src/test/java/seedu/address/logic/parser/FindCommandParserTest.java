@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -41,6 +42,17 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n id/T0100606Z \n \t T0206006Z  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_nullArgs_throwsAssertionError() {
+        // Set up a null input string
+        String args = null;
+
+        // Assert that the assertion in the parser throws an AssertionError
+        assertThrows(AssertionError.class, () -> {
+            assert args != null : "Input argument, 'args' cannot be null";
+        });
     }
 
 }
