@@ -162,9 +162,6 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        System.out.println(loveBook);
-        System.out.println("======");
-        System.out.println(otherModelManager.loveBook);
         return loveBook.equals(otherModelManager.loveBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredDates.equals(otherModelManager.filteredDates);
