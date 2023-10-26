@@ -67,7 +67,7 @@ public class ParserUtil {
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return Phone.of(trimmedPhone);
     }
 
     /**
@@ -82,7 +82,7 @@ public class ParserUtil {
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return Address.of(trimmedAddress);
     }
 
     /**
@@ -97,7 +97,7 @@ public class ParserUtil {
         if (!Birthday.isValidBirthday(trimmedBirthday)) {
             throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
         }
-        return new Birthday(trimmedBirthday);
+        return Birthday.of(trimmedBirthday);
     }
 
     /**
@@ -112,7 +112,7 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return Email.of(trimmedEmail);
     }
 
     /**

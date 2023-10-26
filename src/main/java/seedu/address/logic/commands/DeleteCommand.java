@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -29,6 +31,8 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    private Logger logger = LogsCenter.getLogger(DeleteCommand.class);
+
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -49,6 +53,9 @@ public class DeleteCommand extends Command {
         // Group operation
         Set<Group> emptyGroups = model.getEmptyGroups(personToDelete);
         if (!emptyGroups.isEmpty()) {
+            for (Group group : emptyGroups) {
+                logger.info(String.format("Removing empty group: %s", group));
+            }
             model.removeEmptyGroups(emptyGroups);
         } else {
             model.updateGroups();
