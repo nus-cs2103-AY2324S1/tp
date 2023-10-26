@@ -2,8 +2,6 @@ package networkbook.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -77,7 +75,6 @@ public class PersonCard extends UiPart<Region> {
         courses.setText(COURSE_HEADER + person.getCourses().toString());
         specialisations.setText(SPECIALISATION_HEADER + person.getSpecialisations().toString());
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.getValue()))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.getValue())));
         person.getPriority().ifPresentOrElse((Priority p) ->
                         priority.setText(PRIORITY_HEADER + p), () -> priority.setVisible(false));
