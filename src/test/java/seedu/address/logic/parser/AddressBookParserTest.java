@@ -57,8 +57,8 @@ public class AddressBookParserTest {
                 (AddInterviewCommand) parser.parseCommand(addCommand);
         AddInterviewCommand duplicate = new AddInterviewCommand(index,
                 interview.getJobRole(),
-                interview.getInterviewStartTimeAsString(),
-                interview.getInterviewStartTimeAsString()
+                interview.getInterviewStartTime(),
+                interview.getInterviewEndTime()
         );
         assertEquals(duplicate, command);
     }

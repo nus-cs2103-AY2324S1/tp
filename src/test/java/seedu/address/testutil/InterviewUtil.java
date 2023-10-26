@@ -1,8 +1,9 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICANT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddInterviewCommand;
@@ -28,6 +29,7 @@ public class InterviewUtil {
      */
     public static String getInterviewDetails(Interview interview) {
         return PREFIX_JOB_ROLE + interview.getJobRole() + " "
-                + PREFIX_TIMING + interview.getInterviewStartTimeAsString();
+                + PREFIX_START_TIME + interview.getInterviewStartTimeAsString() + " "
+                + PREFIX_END_TIME + interview.getInterviewEndTimeAsString();
     }
 }
