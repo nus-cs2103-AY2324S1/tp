@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "bp:BatchDeleteCommandParser" as BatchDeleteCommandParser LOGIC_COLOR
+participant "deleteMonth:DeleteMonth" as DeleteMonth LOGIC_COLOR
+participant "b:BatchDeleteCommand" as BatchDeleteCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute(batchDelete dm/09-2022)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("batchdelete dm/09-2022")
+activate AddressBookParser
+
+create BatchDeleteCommandParser
+AddressBookParser -> BatchDeleteCommandParser
+activate BatchDeleteCommandParser
+BatchDeleteCommandParser --> AddressBookParser
+deactivate BatchDeleteCommandParser
+
+AddressBookParser -> BatchDeleteCommandParser : parse("batchdelete dm/09-2022")
+activate BatchDeleteCommandParser
+
+create DeleteMonth
+BatchDeleteCommandParser -> DeleteMonth
+activate DeleteMonth
+DeleteMonth --> BatchDeleteCommandParser : deleteMonth
+deactivate DeleteMonth
+
+create BatchDeleteCommand
+BatchDeleteCommandParser -> BatchDeleteCommand : BatchDeleteCommand(deleteMonth)
+activate BatchDeleteCommand
+
+BatchDeleteCommand --> BatchDeleteCommandParser : b
+deactivate BatchDeleteCommand
+BatchDeleteCommandParser --> AddressBookParser : b
+deactivate BatchDeleteCommandParser
+
+AddressBookParser --> LogicManager : b
+deactivate AddressBookParser
+
+destroy BatchDeleteCommandParser
+
+BatchDeleteCommand -[hidden]-> LogicManager : empty row
+ref over LogicManager, BatchDeleteCommand : execute BatchDeleteCommand
+
+BatchDeleteCommand -[hidden]-> LogicManager : empty row
+destroy BatchDeleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

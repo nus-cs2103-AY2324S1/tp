@@ -154,6 +154,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### New Added Features
+
+#### _batchdelete_
+
+The `batchDelete` command allows users to batch delete people whose policy expiry is in the specified month and year.
+
+The batch delete mechanism is facilitated by `DeleteMonth`
+
+It is also facilitated by the operation:
+* `ModelManager#batchDeleteWithPredicate(Predicate<Person> predicate)` - batch delete all people in address book who fulfil the given predicate.
+
+This operation is exposed in the `Model` interface as `Model# batchDeleteWithPredicate(Predicate<Person> predicate)`
+
+The following sequence diagram shows how the batch delete operation works:
+
+![BatchDeleteSequenceDiagram1](images/BatchDeleteSequenceDiagram1.png)
+
+* instance if DeleteMonth is constructed to construct a BatchDeleteCommand
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BatchDeleteCommand` and `BatchDeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+![BatchDeleteSequenceDiagram2](images/BatchDeleteSequenceDiagram2.png)
+
+* Calling method updateFilteredPersonList to get all people in the addressBook
+* Using predicate p to get list of people to delete
+* Delete all people in the list and return all people left in addressBook
+
+##### Design consideration:
+* Users may use batch delete to delete all people whose policy expiry is in the specified month and year. For example, delete people didn’t contact the user to renew their policies for one year. 
+* Besides, if users leave an insurance company, they may like to delete people purchase policy from that company. 
+* Therefore, `Model# batchDeleteWithPredicate(Predicate<Person> predicate)` is introduced to allow batch delete by month or company.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

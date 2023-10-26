@@ -17,7 +17,7 @@ import seedu.address.model.person.PolicyExpiryInDeleteMonthPredicate;
  */
 public class BatchDeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "batchDelete";
+    public static final String COMMAND_WORD = "batchdelete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": batch delete people whose policy expiry date "
             + "is in the corresponding month and year. "
