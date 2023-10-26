@@ -73,8 +73,8 @@ public class DiagnoseCommand extends Command {
 
         StringBuilder feedbackToUser = new StringBuilder(String.format(MESSAGE_DIAGNOSE_PERSON_SUCCESS,
                 Messages.format(diagnosedPerson)));
-        feedbackToUser.append("\n");
         if (!duplicateIllnesses.isEmpty()) {
+            feedbackToUser.append("\n");
             feedbackToUser.append(MESSAGE_ALREADY_DIAGNOSED);
             feedbackToUser.append(duplicateIllnesses);
         }
@@ -122,6 +122,6 @@ public class DiagnoseCommand extends Command {
         }
 
         DiagnoseCommand otherDiagnoseCommand = (DiagnoseCommand) other;
-        return targetIndex.equals(otherDiagnoseCommand.targetIndex);
+        return targetIndex.equals(otherDiagnoseCommand.targetIndex) && illnesses.equals(otherDiagnoseCommand.illnesses);
     }
 }
