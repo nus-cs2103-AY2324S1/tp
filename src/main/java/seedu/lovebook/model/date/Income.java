@@ -6,7 +6,7 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
 /**
  * Represents the date's income in the lovebook.
  */
-public class Income {
+public class Income implements Comparable<Income> {
 
     public static final String MESSAGE_CONSTRAINTS = "Income can only take on positive values"
             + ", and it should not be blank";
@@ -62,4 +62,15 @@ public class Income {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Income o) {
+        int thisIncome = Integer.parseInt(this.toString());
+        int otherIncome = Integer.parseInt(o.toString());
+        if (thisIncome > otherIncome) {
+            return 1;
+        } else if (thisIncome < otherIncome) {
+            return -1;
+        }
+        return 0;
+    }
 }

@@ -11,7 +11,7 @@ import seedu.lovebook.model.date.horoscope.Horoscope;
  * Represents a Date in the lovebook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     // Identity fields
     private final Name name;
@@ -190,4 +190,8 @@ public class Date {
                 .toString();
     }
 
+    @Override
+    public int compareTo(Date o) {
+        return this.getName().toString().compareTo(o.getName().toString());
+    }
 }

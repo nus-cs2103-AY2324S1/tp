@@ -21,6 +21,7 @@ import seedu.lovebook.logic.commands.ListCommand;
 import seedu.lovebook.logic.commands.ListPrefsCommand;
 import seedu.lovebook.logic.commands.RandomCommand;
 import seedu.lovebook.logic.commands.SetPrefCommand;
+import seedu.lovebook.logic.commands.SortCommand;
 import seedu.lovebook.logic.commands.StarCommand;
 import seedu.lovebook.logic.commands.UnstarCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
@@ -100,6 +101,9 @@ public class LoveBookParser {
 
         case UnstarCommand.COMMAND_WORD:
             return new UnstarCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

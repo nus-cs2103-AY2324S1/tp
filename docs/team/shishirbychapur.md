@@ -20,7 +20,7 @@ Given below are my contributions to the project.
     * Highlights:
     * Credits:
 
-* **New Feature**: 
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 

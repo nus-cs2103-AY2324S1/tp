@@ -25,6 +25,11 @@ public class Messages {
     public static final String MESSAGE_RANDOM_PERSON_SUCCESS = "Here's a random date for you!";
     public static final String MESSAGE_NO_PERSONS = "There are no dates in your list!";
 
+    public static final String MESSAGE_SORTED = "Sorted!";
+
+    public static final String MESSAGE_INVALID_PREFIX = "Invalid prefix!";
+    public static final String MESSAGE_INVALID_SEQUENCE = "Invalid sequence!";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
