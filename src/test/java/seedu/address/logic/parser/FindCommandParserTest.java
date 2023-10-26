@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 
@@ -41,6 +42,14 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n id/T0100606Z \n \t T0206006Z  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_nullArgs_throwsAssertionError() {
+        String args = null;
+
+        // Use assertThrows to check if an AssertionError is thrown
+        assertThrows(AssertionError.class, () -> parser.parse(args));
     }
 
 }
