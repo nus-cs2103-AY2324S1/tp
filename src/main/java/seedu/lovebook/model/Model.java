@@ -104,6 +104,6 @@ public interface Model {
     void setDatePrefs(ReadOnlyDatePrefs datePrefs);
 
     ReadOnlyDatePrefs getDatePrefs();
-
     void updateSortedPersonList(Comparator<Date> comparator);
+    void getBestDate();
 }

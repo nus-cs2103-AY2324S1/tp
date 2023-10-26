@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.lovebook.commons.core.LogsCenter;
 import seedu.lovebook.logic.commands.AddCommand;
+import seedu.lovebook.logic.commands.BestMatchCommand;
 import seedu.lovebook.logic.commands.ClearCommand;
 import seedu.lovebook.logic.commands.Command;
 import seedu.lovebook.logic.commands.DeleteCommand;
@@ -104,6 +105,9 @@ public class LoveBookParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case BestMatchCommand.COMMAND_WORD:
+            return new BestMatchCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
