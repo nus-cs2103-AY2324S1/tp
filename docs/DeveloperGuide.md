@@ -116,21 +116,14 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+<img src="images/ModelClassDiagram.png" width="550" />
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object), and all `Course` objects (which are contained in a `UniqueCourseList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
@@ -181,21 +174,21 @@ Valid input to `FreeTime#getDay(day)` are integers from [1,5] where 1 represents
 
 `TimeInterval#GetFrom()` and `TimeInterval#GetTo()` represents the string representation of time in `HH:mm` format.
 
-### Teaching Module Feature
+### Teaching course Feature
 
 #### Implementation
 
-The teaching module feature allows users to enter the specific module they are teaching
+The teaching course feature allows users to enter the specific course they are teaching
 and store the information in `UserPrefs`. With this feature, users can easily browse 
 through the list of TAs teaching under them.
 
-To key in the command, type `teach t/moduleName`. This will set the default teaching 
+To key in the command, type `teach t/courseName`. This will set the default teaching 
 course for the users and save it in UserPrefs. 
 
 Hence, the next time users log into TAManager, the page will automatically display the 
-TAs teaching under the users' module. 
+TAs teaching under the users' course. 
 
-The following sequence diagram displays how Teaching Module Feature is implemented.
+The following sequence diagram displays how Teaching course Feature is implemented.
 
 ![TeachingDiagram](images/TeachingDiagram.png)
 
