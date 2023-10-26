@@ -40,6 +40,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_APPOINTMENT =
             "This appointment has already been created and we have taken note!";
 
+    public static final String MESSAGE_APPOINTMENTS_LISTED_OVERVIEW = "%1$d appointments listed!";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
