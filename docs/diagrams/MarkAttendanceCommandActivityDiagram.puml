@@ -2,14 +2,14 @@
 start
 :User enters mark attendance command;
 :Parse user input;
-if (Is input valid?) then (yes)
+if (Is input valid?) then ([yes])
   :Create MarkAttendanceCommand object;
-  if (Does attendance for the week exist?) then (yes)
+  if (Does attendance for the week exist?) then ([yes])
     :Update existing attendance record;
-  else (no)
+  else ([no])
     :Add new attendance record;
   endif
-else (no)
+else ([no])
   :Show error message;
 endif
 stop
