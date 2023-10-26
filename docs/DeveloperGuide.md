@@ -156,11 +156,23 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Interactions Feature
 
-As a CRM software, taking notes of previous interactions and their different outcomes is one of the most imporant features.
+As a CRM software, taking notes of previous interactions with customers as well as their different outcomes is one of the most imporant features. It will allow the user to keep track of the progress of their interactions with their customers and help them to better plan their future interactions with them.
 
 This section will describe in details the current implementation and design considerations of the interactions feature.
 
+#### Current Implementation
 
+The Interaction feature is implemented using the `Interaction` class. It is a simple class that contains the following fields:
+
+![InteractionClassDiagram](images/InteractionClassDiagram.png)
+
+InteractionNote will store the details of the interaction.
+InteractionOutcome is an Enumeration with the following values: Interested, NotInterested, FollowUpRequired, Unknown and Closed. They are used to store the outcome of the interaction.
+There is also a date field to store the date of the interaction. This is set to the current date when the interaction is created.
+
+The `Person` class will contain a list of `Interaction` objects, which will be used to store the interactions with the client.
+
+The class also has getters and setters for the fields, as well as a `toString()` method to display the interaction in a readable format.
 
 #### Design Considerations
 
@@ -243,6 +255,23 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
+
+### Viewing a client's full profile
+
+As we add more attributes and interactions with clients, we will need a better way to view all of the information associated with a client. Therefore instead of displaying all information in a `PersonCard` within the list of clients, we will need a new component to display the client profile in a better way.
+
+The new `ClientProfilePanel` UI component is the replacement for displaying client profiles. Beside the require and optional fields, the user can also see all of their past interactions with the client.
+
+The client profile to display is tracked using a `SimpleObjectProperty` inside a `Model`. Since a `SimpleObjectProperty` is an `ObservableValue`, we can add listeners to its change event and update our UI whenever the currently selected profile changes.
+
+We currently support 2 ways of viewing a client's profile:
+
+1. By clicking on a client's card from the client list
+2. By using the `view` command
+
+Both methods will update the currently selected client, which will then trigger a listener to update the UI to show the profile panel.
+
+To exit out of the profile view, the user can enter the `list` command, which will hide the profile panel and restore the client list to occupy the full window width.
 
 ### \[Proposed\] Data archiving
 
