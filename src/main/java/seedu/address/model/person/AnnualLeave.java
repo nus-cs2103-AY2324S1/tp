@@ -92,6 +92,10 @@ public class AnnualLeave {
         return value.hashCode();
     }
 
+    public List<LocalDate> getLeaveList() {
+        return leaveList;
+    }
+
     /**
      * Adds in a single day of leave.
      * @param startDate of the leave to be added to the leaveList

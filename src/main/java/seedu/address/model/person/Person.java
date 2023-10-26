@@ -2,7 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -74,6 +76,10 @@ public class Person {
 
     public AnnualLeave getAnnualLeave() {
         return annualLeave;
+    }
+
+    public List<LocalDate> getLeaveList() {
+        return annualLeave.getLeaveList();
     }
 
     /**
