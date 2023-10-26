@@ -138,7 +138,6 @@ public class TimeParser {
                 res.add(currentInterview);
             }
         }
-        System.out.println(res);
         return res;
     }
 

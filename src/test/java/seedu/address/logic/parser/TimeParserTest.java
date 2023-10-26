@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +21,14 @@ import seedu.address.testutil.TypicalInterviews;
 class TimeParserTest {
     private static final LocalDateTime DEFAULT_DATE =
             LocalDateTime.of(1970, 1, 1, 0, 0);
+    private final Logger logger = Logger.getLogger("TimeParserTestLogger");
 
     /*
      * Tests for the timeParser class
      */
     @Test
     void testTimeParserDefaultDate() {
+        logger.log(Level.INFO, "Tests that field does not disappear");
         assertEquals(DEFAULT_DATE, TimeParser.DEFAULT_DATE);
     }
 
@@ -130,12 +134,12 @@ class TimeParserTest {
 
     @Test
     void testParseDateYearMonthDayTime5SuccessfulParse() throws ParseException {
-        System.out.println(TimeParser.parseDate("15 Dec 2023 1.30pm"));
+        TimeParser.parseDate("15 Dec 2023 1.30pm");
     }
 
     @Test
     void testParseDateYearMonthDayTime6SuccessfulParse() throws ParseException {
-        System.out.println(TimeParser.parseDate("31 mar 2099 1453"));
+        TimeParser.parseDate("31 mar 2099 1453");
     }
 
     @Test
@@ -308,7 +312,6 @@ class TimeParserTest {
         element.add(LocalDateTime.of(2024, 12, 21, 17, 0));
         expected.add(element);
         List<List<LocalDateTime>> actual = TimeParser.listPocketsOfTimeOnGivenDay(day, uniqueInterviewList);
-        System.out.println(actual);
         assertEquals(expected, actual);
     }
 
