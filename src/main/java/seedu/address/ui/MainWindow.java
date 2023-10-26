@@ -257,6 +257,7 @@ public class MainWindow extends UiPart<Stage> {
     public void showPersonList() {
         singleListContainer.getChildren().setAll(personList);
         singleListContainer.setVisible(true);
+        tree.setVisible(false);
         dualListContainer.setVisible(false);
         personList.setVisible(true);
         teamList.setVisible(false);
@@ -274,6 +275,7 @@ public class MainWindow extends UiPart<Stage> {
     public void showTeamList() {
         singleListContainer.getChildren().setAll(teamList);
         singleListContainer.setVisible(true);
+        tree.setVisible(false);
         dualListContainer.setVisible(false);
         personList.setVisible(false);
         teamList.setVisible(true);
@@ -290,6 +292,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void showBothList() {
         dualListContainer.getChildren().setAll(D_personList, D_teamList);
+        tree.setVisible(false);
         singleListContainer.setVisible(false);
         dualListContainer.setVisible(true);
 
@@ -329,7 +332,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleListPerson() {
-        if (isListingPerson && !isShowingTree) {
+        if (isListingPerson) {
             fillInnerParts("both");
         } else {
             fillInnerParts("persons");

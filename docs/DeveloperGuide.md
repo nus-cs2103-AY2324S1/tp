@@ -67,20 +67,26 @@ The sections below give more details of each component.
 
 ### UI component
 
+![UI Class Diagram](images/UML_images/UiDiagram.jpg)
+
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, 
+`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures 
+the commonalities between classes that represent parts of the visible GUI.
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
-
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
+that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in
+[`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands, and it also 
+displays the statistical information of how many developers and teams are there at the moment.
+* depends on some classes in the `Model` component, as it displays `Person` and `Team` object residing in the `Model`.
+
 
 ### Logic component
 
@@ -155,92 +161,59 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Feature: Create a new team
 
-#### Proposed Implementation
+####  Introduction
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The create new team feature is facilitated by the AddTeamCommand. It extends `Command` class.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The operations are exposed in the `Model` interface as `Model#addTeam()`.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+#### Usage
+Given below is an example usage scenario and how the add team behaves at each step.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
 
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
 
+#### Step-by-Step Implementation
+
+1. Create a newteam parser class called `AddTeamCommandParser` to parse input from user. This implements the `Parser` interface for type `AddTeamCommand`
+2. Create a `parse` method in `AddTeamCommandParser` that parses the user input and specify the user flags that are used `tn/` for teamName and `tl/` for teamLeader.
+3. The flags for user input can be added to class `CliSyntax`.
+4. For the `AddTeamCommand` class, specify the Command Word. In this case, it is `newteam`.
+5. Add relevant messages for use cases like `Duplicate team creation` and `Person not found error`.
+6. Implement the `execute` method in `AddTeamCommand`. Handle the cases where a team with specified `teamName` already exists and also one where specified `person` with given `teamLeaderName` does not exist.
+7. Use the `Model#addTeam` and `Model#containsPerson` to do these checks.
+8. Throw exception in the case where adding new team is not possible.
+9. If not such exception is thrown, create the new team at this point. 
+10. Run the `Model#addTeam` method to add the created team to TeamBook.
+11. `Model#addTeam` calls `TeamBook#addTeam` which in turn calls `UniqueTeamList#add`. Finally this method calls the `ObservableList#add` which adds the `team` to the list.
 </box>
-
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: Where the team is stored:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Store the teams in a separate class called UniqueTeamList.
+  * Pros: Better use of OOP.
+  * Cons: Multiple layers of abstraction(through Model, TeamBook, UniqueTeamList).
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Store the teams in the same class as Persons in the class AddressBook.
+  * Pros: Easier implementation.
+  * Cons: Breaks principle of abstraction and OOP. Information hiding is also not done.
 
 _{more aspects and alternatives to be added}_
 
@@ -267,7 +240,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Developers engaged in medium to large-scale software projects; 
+* Project managers engaged in software projects at the startup/small level companies; 
 * Collaborates frequently with multiple teams or departments; 
 * Requires quick access to contact details of other team members based on their roles and responsibilities; 
 * Prefers an organized and streamlined method for contact management; 
@@ -280,84 +253,72 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-### User stories
-
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-### User stories
-
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​             | I want to …​                                 | So that I can…​                                                                 |
-|----------|---------------------|----------------------------------------------|--------------------------------------------------------------------------------|
-| `* * *`  | developer           | view all members of my team                  | get their email address/contact                                                 |
-| `* * *`  | developer           | search contacts using a tag-based system     | swiftly find contacts relevant to specific responsibilities                      |
-| `* * *`  | developer           | view my team leader’s contact details        | contact him when I need direction on an issue                                    |
-| `* *`    | developer           | edit or update my information                | easily update my info                                                           |
-| `* *`    | developer           | set a status (available, busy, OOO)          | others know when to reach out to me                                             |
-| `* *`    | developer           | search contact with partial information      | find the person without remembering their full name                              |
-| `* *`    | developer           | add a tag/short bio about my expertise       | others recognize my specialties                                                 |
-| `* * *`  | project manager     | access the names of all my developers        | contact them regarding the project                                              |
-| `* * *`  | project manager     | view all my team leaders                     | contact them when collaborating on developing a certain feature                  |
-| `* * *`  | project manager     | assign a node for a team leader              | target team leaders can fill in their information by themselves                 |
-| `* * *`  | project manager     | remove another user                          | if he leaves the team/company                                                   |
-| `* *`    | project manager     | choose to share my contact information       | not everyone can contact me directly                                            |
-| `* *`    | project manager     | archive old contacts or groups               | keep active list clutter-free while retaining old information                   |
-| `* *`    | software team lead  | color-code my contacts                       | visually scan and prioritize my interactions                                    |
-| `* *`    | software team lead  | set a verification code                      | control who registers as a project manager                                      |
-| `*`      | software team lead  | get notifications on birthdays               | maintain relationships through personal touches                                 |
-| `*`      | software team lead  | create a public profile for my team          | external stakeholders can find and reach out to the right member                |
-| `* * *`  | team leader         | assign a node for a developers               | target developer can fill in his information by himself                         |
-| `* * *`  | team leader         | see info of other team leaders               | coordinate work for the project                                                 |
-| `* *`    | new user            | use a help command                           | understand available functions of the app                                       |
-| `* *`    | user                | use bye command                              | close the app easily                                                            |
-| `* *`    | user with access    | receive notifications on contact changes     | stay updated on team changes                                                    |
-| `* *`    | first-time user     | easily register                              | access the phonebook                                                            |
+| Priority | As a …​         | I want to …​                                                  | So that I can…​                                                           |
+|----------|-----------------|---------------------------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | project manager | view all members of my project                                | get their email address/contact                                           |
+| `* * *`  | project manager | search contacts using a tag-based system                      | swiftly find contacts relevant to specific responsibilities               |
+| `* * *`  | project manager | view the leader of any team                                   | contact him when I want to find out about the status of a task            |
+| `* *`    | project manager | edit or update my information                                 | easily update my info                                                     |
+| `* *`    | project manager | search contact with partial information                       | find the person without remembering their full name                       |
+| `* *`    | project manager | add a tag/short bio about every developer                     | I can know the specialities/traits of every developer                     |
+| `* * *`  | project manager | access the names of all my developers                         | contact them regarding the project                                        |
+| `* * *`  | project manager | view all my team leaders                                      | contact them when collaborating on developing a certain feature           |
+| `* * *`  | project manager | assign a node for a team leader                               | target team leaders can fill in their information by themselves           |
+| `* * *`  | project manager | remove another user                                           | if he leaves the team/company                                             |
+| `*`      | project manager | archive old contacts or groups                                | keep active list clutter-free while retaining old information             |
+| `*`      | project manager | get notifications on birthdays                                | maintain relationships through personal touches                           |
+| `*`      | project manager | create a public profile for my project                        | external stakeholders can find and reach out to the right member          |
+| `* * *`  | project manager | use a help command                                            | understand available functions of the app                                 |
+| `* *`    | project manager | use a bye command                                             | close the app easily                                                      |
+| `*`      | project manager | receive request to change contact information                 | stay updated on team changes                                              |
+| `* * *`  | project manager | view my teams and all members in my organisation side by side | have a glance at the current structure of my organisation                 |
+| `* * *`  | project manager | remove all the users and teams                                | create a new project with new team members.                               |
+| `* * *`  | project manager | create a new team                                             | reflect the changes done in actual project structure accurately           |
+| `* * *`  | project manager | add new developers after a team is created                    | reflect the growth in size of my teams                                    |
+| `* * *`  | project manager | remove developers from a team                                 | keep my information up to date when a developer shifts to another project |
+| `* * *`  | project manager | receive request to change contact information                 | stay updated on team changes                                              |
 
 
 
-
-
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `LinkTree` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: View all members of my team**
-**Actor: Developer**
+**Use case: View all members of my project**
+**Actor: Project Manager**
 
 **MSS**
 
-1. Developer requests to list team members.
+1. Project manager requests to list members.
 2. LinkTree displays a list of team members.
-3. Developer views the members' contact information.
+3. Project manager views the members' contact information.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The team member list is empty.
-  * 2a1. TeamDirectory indicates there are no members currently.
+* 2a. The member list is empty.
+  * 2a1. LinkTree indicates there are no members currently.
     Use case ends.
 
 ---
 
-**Use case: Search contacts using tags**
-**Actor: Developer**
+**Use case: Search for team leaders**
+**Actor: Project Manager **
 
 **MSS**
 
-1. Developer wants to find contacts with a specific tag.
-2. Developer inputs the desired tag into TeamDirectory.
-3. TeamDirectory displays a list of contacts with that tag.
+1. User wants to find team leader of a given team.
+2. User inputs the desired team name into LinkTree.
+3. LinkTree displays the name of the team leader.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. No contacts have the specified tag.
-  * 2a1. TeamDirectory shows a message that no contacts were found with that tag.
+* 2a. No such team exists
+  * 2a1. LinkTree shows a message that no such team exists.
     Use case ends.
 
 ---
@@ -368,115 +329,134 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Project manager requests a list of all developers.
-2. TeamDirectory displays the list of developers.
+2. LinkTree displays the list of developers.
 
     Use case ends.
 
 ---
 
-**Use case: Edit or update my information**
-**Actor: Developer**
-
-**MSS**
-
-1. Developer wants to update their contact info.
-2. Developer selects their profile and makes desired changes.
-3. TeamDirectory confirms the updates.
-
-    Use case ends.
-
----
-
-**Use case: Assign a node for a team leader**
+**Use case: Edit or update information**
 **Actor: Project Manager**
 
 **MSS**
 
-1. Project manager wants to assign a node to a team leader.
-2. Project manager selects the desired team leader and assigns a node.
-3. TeamDirectory confirms the assignment.
+1. User wants to update the contact info of a developer.
+2. User provides the name of person and info to edit
+3. LinkTree confirms the updates.
 
     Use case ends.
+
+**Extensions**
+
+* 2a. No such person exists
+    * 2a1. LinkTree shows a message that no such person exists.
+      Use case ends.
 
 ---
 
-**Use case: Create a public profile for a team**
-**Actor: Team lead**
+**Use case: Change the team leader**
+**Actor: Project Manager**
 
 **MSS**
 
-1. Software team lead wants to create a public profile.
-2. Software team lead inputs relevant information for the public profile.
-3. TeamDirectory creates and displays the new public profile.
+1. Project manager wants to change the team leader of a team.
+2. Project manager selects the team and provides a new team leader name.
+3. LinkTree confirms the change.
 
     Use case ends.
+
+**Extensions**
+
+* 2a. No such team exists
+    * 2a1. LinkTree shows a message that no such team exists.
+      Use case ends.
+  2b. No such person exists
+    * 2b1. LinkTree shows a message that no such person exists.
+    * Use case ends.
+---
+
+
+**Use case: Remove a person from project**
+**Actor: Project Manager**
+
+**MSS**
+
+1. Project manager wants to remove a person from project.
+2. Project manager provides name and requests the removal.
+3. LinkTree confirms the removal of the person.
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. No such person exists
+    * 2a1. LinkTree shows a message that no such person exists.
+      Use case ends.
 
 ---
 
-**Use case: Remove a user**
+**Extensions**
 
-**MSS**
-
-1. Project manager wants to remove a user.
-2. Project manager selects the user and requests removal.
-3. TeamDirectory confirms the removal of the user.
-
-    Use case ends.
+* 2a. No such team exists
+    * 2a1. LinkTree shows a message that no such team exists.
+      Use case ends.
 
 ---
 
-**Use case: Set a verification code for project manager registration**
-
-**MSS**
-
-1. Software team lead sets a verification code.
-2. New project managers must input this code to register.
-3. TeamDirectory verifies the code and allows the registration.
-
-    Use case ends.
-
 ---
 
-**Use case: Receive notifications about contact changes**
+**Use case: Create a new team**
 
 **MSS**
 
-1. User with access wants to be notified of contact changes.
-2. TeamDirectory sends notifications whenever there are contact changes.
-3. User views the notifications.
+1. User provides a team name and team leader name.
+2. LinkTree creates team with given name and with team leader set to the provided name.
+3. LinkTree confirms creation of team
 
     Use case ends.
 
+**Extensions**
+
+* 1a. Team already exists
+    * 1a1. LinkTree shows a message that you are trying to create a duplicate team.
+      Use case ends.
+  * 1b. No such person with given name exists
+      * 1b1. LinkTree shows a message that the person you are trying to set as team leader does not exist.
+        Use case ends.
 ---
 
-**Use case: Easily register as a first-time user**
+**Use case: Display the tree of organisation**
 
 **MSS**
 
-1. First-time user wants to register.
-2. First-time user inputs necessary details into TeamDirectory.
-3. TeamDirectory confirms successful registration.
+1. User requests for tree to be shown.
+2. LinkTree displays existing tree
+3. User views the tree.
 
     Use case ends.
 
+4. **Extensions**
+
+* 1a. Tree is empty
+    * 1a1. LinkTree shows a message that the tree is empty.
+      Use case ends.
 ---
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 500 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be able to generate output in less than 5 seconds.
 5. Should be able to show correct input format in case the user enters the input in wrong format.
-6. The system should be usable by a new developer/intern who has not used such a software before.
+6. The system should be usable by a new project manager who has not used such a software before.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Team Directory**: The system or platform where all the contact details of developers, team leaders, and project managers are stored.
-* **Node**: A designated area or profile within the Team Directory where specific users (like team leaders or developers) can input or update their information.
-* **Tag-Based System**: A system in the Team Directory that allows contacts to be tagged with specific roles or responsibilities, like "Database Management" or "Code Review".
+* **Tag-Based System**: A system in LinkTree that allows contacts to be tagged with specific roles or responsibilities, like "Database Management" or "Code Review".
 * **Public Profile**: A profile in the Team Directory visible to all users, containing non-sensitive information about a team or individual.
 * **Status Feature**: A tool enabling users to set and display their current status or availability (e.g., online, busy, away) within the Team Directory.
 * **Inventory Checking**: A feature that logs the state of an item (like an apartment) at a specific time, allowing for easy comparison at a later date.
