@@ -12,10 +12,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import seedu.address.model.person.Income;
-import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Profession;
 import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.person.interaction.Interaction;
 
 /**
  * A UI component that displays the profile of a {@code Client}.

@@ -8,8 +8,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.InteractionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Interaction;
-import seedu.address.model.person.Interaction.Outcome;
+import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.person.interaction.Interaction.Outcome;
 
 /**
  * Parses input arguments and creates a new InteractionCommand object.

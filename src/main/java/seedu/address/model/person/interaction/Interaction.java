@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.interaction;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

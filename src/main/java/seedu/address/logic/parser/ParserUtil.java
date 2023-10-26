@@ -13,11 +13,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Income;
-import seedu.address.model.person.Interaction.Outcome;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Profession;
 import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.person.interaction.Interaction.Outcome;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
