@@ -1,5 +1,7 @@
 package networkbook.ui;
 
+import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
+
 import javafx.scene.control.Hyperlink;
 
 /**
@@ -11,7 +13,8 @@ public class FieldHyperlink extends Hyperlink {
      * Creates a {@code FieldHyperlink} with the given label and action.
      */
     public FieldHyperlink(String labelText, Runnable action) {
-        super(labelText);
+        requireAllNonNull(labelText, action);
+        this.setText(labelText);
         this.setOnAction(e -> action.run());
     }
 
