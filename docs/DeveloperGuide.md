@@ -194,7 +194,7 @@ If parsed successfully, it returns a `MarkAttendanceCommand` object.
 
 The following activity diagram shows how the `MarkAttendanceCommand` works:
 
-[MarkAttendanceActivityDiagram](images/MarkAttendanceActivityDiagram.png)
+![MarkAttendanceActivityDiagram](images/MarkAttendanceActivityDiagram.png)
 
 #### Design considerations:
 
@@ -464,11 +464,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User decides to mark attendance for a student.
-2.  User enters student name or ID, followed by the attendance status.
-3.  TAvigator marks the attendance of student and displays message for confirmation of attendance.
+1.  User requests to mark attendance for a student  and enters student name or ID, followed by the attendance status and week and reason if any.
+2.  TAvigator marks the attendance of student and displays message for confirmation of attendance.
 
-    Use case ends.
+
 
 **Extensions**
 
@@ -479,6 +478,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. The given attendance record is invalid
     * 1b1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1c. The given week is invalid 
+    * 1c1. TAvigator shows an error message.
+
+      Use case ends.
+
+* 1d. The given reason is not provided for absence
+    * 1d1. TAvigator shows an error message.
 
       Use case ends.
 
