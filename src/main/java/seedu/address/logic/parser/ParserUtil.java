@@ -225,7 +225,5 @@ public class ParserUtil {
         } catch (NumberFormatException nfe) {
             throw new ParseException(Hour.MESSAGE_CONSTRAINTS);
         }
-
-
     }
 }

@@ -127,4 +127,25 @@ public class PersonTest {
         assertEquals(expected, ALICE.toString());
     }
 
+    @Test
+    public void updateHourMethod() {
+
+        Person increasedAlice = ALICE.updateHour(4);
+        Person decreasedAlice = ALICE.updateHour(-4);
+
+        // check invalid hour
+        assertThrows(IllegalArgumentException.class, () -> ALICE.updateHour(80000));
+        assertThrows(IllegalArgumentException.class, () -> ALICE.updateHour(-80000));
+
+        // check Alice is the same person
+        assertTrue(ALICE.isSamePerson(increasedAlice));
+        assertTrue(ALICE.isSamePerson(decreasedAlice));
+
+        // check updated Alice has correct updated hours
+        assertEquals(12, increasedAlice.getHour().value);
+        assertEquals(4, decreasedAlice.getHour().value);
+
+        // check Alice still has same hours
+        assertEquals(8, ALICE.getHour().value);
+    }
 }

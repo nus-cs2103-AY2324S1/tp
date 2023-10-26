@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+
 public class HourTest {
 
     @Test
@@ -52,5 +53,26 @@ public class HourTest {
 
         // different values -> returns false
         assertNotEquals(hour, new Hour(884));
+    }
+
+    @Test
+    public void addHourTest() {
+        Hour hour = new Hour(100);
+        // null hour added
+        assertThrows(NullPointerException.class, () -> hour.addHour(null));
+
+        // invalid updated hour
+        assertThrows(IllegalArgumentException.class, () -> hour.addHour(100000));
+        assertThrows(IllegalArgumentException.class, () -> hour.addHour(-100000));
+
+        // successfully update valid hour
+        Hour updatedHour = hour.addHour(10); // Adding a valid positive duration
+        assertEquals(110, updatedHour.value);
+
+        updatedHour = hour.addHour(-5); // Adding a valid negative duration
+        assertEquals(95, updatedHour.value);
+
+        // Make sure that the original hour object remains unchanged
+        assertEquals(100, hour.value);
     }
 }

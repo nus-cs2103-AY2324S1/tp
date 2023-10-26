@@ -32,6 +32,16 @@ public class Hour {
         return test >= 0 && test <= 9999;
     }
 
+    /**
+     * @param duration It can be both negative and positive.
+     * @return An updated Hour.
+     */
+    public Hour addHour(Integer duration) {
+        requireNonNull(duration);
+        Integer updatedValue = this.value + duration;
+        checkArgument(isValidHour(updatedValue), MESSAGE_CONSTRAINTS);
+        return new Hour(updatedValue);
+    }
 
     @Override
     public String toString() {
