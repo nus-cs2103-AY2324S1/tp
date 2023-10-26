@@ -165,9 +165,9 @@ Expected outputs when command fails:
 
 ### Undoing a command: `undo`
 
-Undoes an undoable command within the address book.
+Undoes an undo-able command within the address book.
 
-* An undoable command include an edit command, add commmand or delete command
+* An undo-able command include an edit command, add commmand or delete command
 * The command allows you to undo the last command or to undo a specific number of previous commands
 
 Format:
