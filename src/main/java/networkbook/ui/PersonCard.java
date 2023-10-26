@@ -3,6 +3,7 @@ package networkbook.ui;
 import static java.util.Objects.requireNonNull;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -31,7 +32,7 @@ public class PersonCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/networkbook-level4/issues/336">The issue on NetworkBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
     public final Person person;
@@ -45,7 +46,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phones;
     @FXML
-    private Label links;
+    private Label linksHeader;
+    @FXML
+    private FlowPane links;
     @FXML
     private Label graduation;
     @FXML
@@ -53,14 +56,16 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label specialisations;
     @FXML
-    private Label emails;
+    private Label emailsHeader;
+    @FXML
+    private FlowPane emails;
     @FXML
     private FlowPane tags;
     @FXML
     private Label priority;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -69,8 +74,14 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phones.setText(PHONES_HEADER + person.getPhones().toString());
-        emails.setText(EMAILS_HEADER + person.getEmails().toString());
-        links.setText(LINKS_HEADER + person.getLinks().toString());
+        emailsHeader.setText(EMAILS_HEADER);
+        // TODO: implement actual link opening
+        person.getEmails().stream()
+                .forEach(email -> emails.getChildren().add(new FieldHyperlink(email.getValue(), () -> System.out.println("open email: " + email.getValue()))));
+        linksHeader.setText(LINKS_HEADER);
+        // TODO: implement actual link opening
+        person.getLinks().stream()
+                .forEach(link -> links.getChildren().add(new FieldHyperlink(link.getValue(), () -> System.out.println("open link: " + link.getValue()))));
         person.getGraduation().ifPresentOrElse((Graduation g) ->
                 graduation.setText(GRADUATION_HEADER + g.getFullString()), () -> graduation.setText(GRADUATION_HEADER + EMPTY_FIELD));
         courses.setText(COURSE_HEADER + person.getCourses().toString());
