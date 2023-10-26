@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import seedu.address.model.tag.Tag;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for providing typical Tag objects and sets of tags for testing.
@@ -18,14 +18,14 @@ public class TypicalTags {
 
     // A set of typical tags, used by Typical Tag Person
     public static final Set<Tag> TEST_TAG_SET = new HashSet<>() {{
-        add(TEST_TAG);
-    }};
+            add(TEST_TAG);
+        }};
 
     // An empty set of tags
     public static final Set<Tag> EMPTY_TAG_SET = new HashSet<>();
 
     // A set of tags used by no person
     public static final Set<Tag> NO_MATCHING_TAG_SET = new HashSet<>() {{
-        add(NO_MATCHING_TAG);
-    }};
+            add(NO_MATCHING_TAG);
+        }};
 }

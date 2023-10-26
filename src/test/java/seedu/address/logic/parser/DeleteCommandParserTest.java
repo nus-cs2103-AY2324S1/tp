@@ -33,6 +33,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_emptyTags_throwsParseException() {
-        assertParseFailure(parser, PREFIX_TAG.toString(), String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, PREFIX_TAG.toString(),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }

@@ -3,12 +3,16 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalTagPerson;
-import static seedu.address.testutil.TypicalTags.*;
+import static seedu.address.testutil.TypicalTags.EMPTY_TAG_SET;
+import static seedu.address.testutil.TypicalTags.NO_MATCHING_TAG_SET;
+import static seedu.address.testutil.TypicalTags.TEST_TAG_SET;
 
 import org.junit.jupiter.api.Test;
 
