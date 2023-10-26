@@ -174,7 +174,7 @@ Given below is an example usage senario and how the prefix completion mechanism 
 
 1. The user starts typing a command in the command box.
 2. Upon pressing the `TAB` key, the current text in the command box is passed to the `PrefixCompletion#getNextCompletion` method.
-3. The method checks the user's input to determine the appropriate command (e.g., `add`, `edit`) and goes through the prefix for the command until an unused prefix is found.
+3. The method checks the user's input to determine the appropriate command (e.g., `add`, `edit`) and use necessary `PrefixFinder` to find the unused prefix.
 4. If a suitable prefix is identified, it is appended to the user's current input in the command box, accompanied by an example value. The example value is highlighted for easy replacement by the user.
 5. If no suitable prefix is identified or if the user's input isn't recognized, the command box runs `CommandBox#indicateCompletionFailure()` which signals the user to adjust their input by adjusting the text color for 0.5s.
 

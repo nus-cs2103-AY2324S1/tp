@@ -41,8 +41,8 @@ public class PrefixCompletionTest {
 
     @Test
     public void getNextCompletion_somePrefixesPresent_returnsNextCompletion() throws PrefixCompletionException {
-        String input = "add r/1 ";
-        String expectedCompletion = "d/2023-01-01 08:00 to 2023-01-02 12:00";
+        String input = "add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 ";
+        String expectedCompletion = "n/John Doe";
 
         String completion = prefixCompletion.getNextCompletion(input);
 
