@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ListView?>
+<VBox minWidth="480.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" style="-fx-border-color: black; -fx-border-radius: 15; -fx-background-radius: 15;">
+    <VBox minWidth="440.0" prefWidth="440.0" HBox.hgrow="ALWAYS">
+        <VBox minWidth="440.0" prefWidth="470.0 " VBox.vgrow="ALWAYS">
+            <Label fx:id="personType" styleClass="cell_view_field_label" style="-fx-text-fill: aqua" text="Patient" />
+            <padding>
+                <Insets bottom="5.0"/>
+            </padding>
+            <Label minHeight="70" id="name" fx:id="name" styleClass="cell_view_name_label" wrapText="true" />
+            <FlowPane fx:id="viewTags" style="-fx-font-size: 15;"/>
+            <HBox>
+                <Label minWidth="200.0" styleClass="cell_view_field_label" text="Phone number" />
+                <Label fx:id="phone" styleClass="cell_view_field_label" wrapText="true" />
+                <padding>
+                    <Insets bottom="5.0" top="15.0"/>
+                </padding>
+            </HBox>
+            <HBox>
+                <Label minWidth="200.0" styleClass="cell_view_field_label" text="Email" />
+                <Label fx:id="email" styleClass="cell_view_field_label" wrapText="true" />
+                <padding>
+                    <Insets bottom="5.0" top="5.0"/>
+                </padding>
+            </HBox>
+            <HBox>
+                <Label minWidth="200.0" styleClass="cell_view_field_label" text="Age" />
+                <Label fx:id="age" styleClass="cell_view_field_label" wrapText="true" />
+                <padding>
+                    <Insets bottom="5.0" top="5.0"/>
+                </padding>
+            </HBox>
+            <padding>
+                <Insets bottom="10.0" left="5.0" right="15.0" top="10.0" />
+            </padding>
+        </VBox>
+        <padding>
+            <Insets bottom="5.0" left="15.0" right="25.0" top="5.0" />
+        </padding>
+        <HBox>
+            <Label styleClass="cell_view_medicalHistory_label" text="Medical History: " />
+            <padding>
+                <Insets bottom="5.0" top="5.0"/>
+            </padding>
+        </HBox>
+        <ListView fx:id="medicalHistoryListView" VBox.vgrow="ALWAYS" />
+    </VBox>
+</VBox>

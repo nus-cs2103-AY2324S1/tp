@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final TrackedAddressBook trackedAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Person selectedPerson;
     private final CommandStringStash commandStringStash;
 
     /**
@@ -40,6 +41,8 @@ public class ModelManager implements Model {
 
         // DoConnek Pro shows all patients on startup by default.
         updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
+
+        this.selectedPerson = filteredPersons.size() == 0 ? null : filteredPersons.get(0);
     }
 
     public ModelManager() {
@@ -134,6 +137,24 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Selected Person Accessors ==================================================================
+
+    @Override
+    public Person getSelectedPerson() {
+        return selectedPerson;
+    }
+
+    @Override
+    public void updateSelectedPerson(Person person) {
+        requireNonNull(person);
+        selectedPerson = person;
+    }
+
+    @Override
+    public boolean isSelectedEmpty() {
+        return selectedPerson == null;
+    }
+
     //=========== Command String Stash =============================================================
 
     @Override
@@ -150,7 +171,6 @@ public class ModelManager implements Model {
     public void addCommandString(String commandString) {
         commandStringStash.addCommandString(commandString);
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -165,7 +185,10 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return trackedAddressBook.equals(otherModelManager.trackedAddressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && ((this.isSelectedEmpty() && otherModelManager.isSelectedEmpty())
+                || (this.isSelectedEmpty() == otherModelManager.isSelectedEmpty()
+                && selectedPerson.equals(otherModelManager.selectedPerson)));
     }
 
     @Override

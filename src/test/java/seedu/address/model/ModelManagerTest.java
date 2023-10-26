@@ -94,6 +94,33 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getSelectedPerson_null_success() {
+        assertEquals(modelManager.getSelectedPerson(), null);
+    }
+
+    @Test
+    public void getSelectedPerson_validPerson_success() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, userPrefs);
+        assertEquals(modelManager.getSelectedPerson(), modelManager.getFilteredPersonList().get(0));
+
+        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Test
+    public void updateSelectedPerson_validPerson_success() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, userPrefs);
+        modelManager.updateSelectedPerson(modelManager.getFilteredPersonList().get(1));
+        assertEquals(modelManager.getSelectedPerson(), modelManager.getFilteredPersonList().get(1));
+        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -128,5 +155,19 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+
+        // different Selected Person -> returns false
+        modelManager.updateSelectedPerson(modelManager.getFilteredPersonList().get(1));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        modelManagerCopy.updateSelectedPerson(modelManagerCopy.getFilteredPersonList().get(1));
+        assertTrue(modelManager.equals(modelManagerCopy));
+
+        ModelManager differentModelManager = new ModelManager(differentAddressBook, userPrefs);
+        assertTrue(differentModelManager.equals(differentModelManager));
+        differentModelManager.addPerson(modelManager.getFilteredPersonList().get(0));
+        differentModelManager.addPerson(modelManager.getFilteredPersonList().get(1));
+        assertFalse(modelManager.equals(differentModelManager));
+        assertFalse(differentModelManager.equals(modelManager));
     }
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<?import javafx.geometry.Insets?>
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="5.0" top="5.0"/>
+    </padding>
+    <HBox spacing="5" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+        <padding>
+            <Insets left="15.0"/>
+        </padding>
+        <Label fx:id="id" styleClass="cell_view_field_label">
+            <minWidth>
+                <!-- Ensures that the label text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+        </Label>
+        <Label fx:id="medicalHistory" text="\$first" styleClass="cell_view_field_label" />
+    </HBox>
+</HBox>

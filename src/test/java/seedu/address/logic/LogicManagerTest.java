@@ -90,6 +90,11 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void getSelectedPerson_null_success() {
+        assertEquals(logic.getSelectedPerson(), null);
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>

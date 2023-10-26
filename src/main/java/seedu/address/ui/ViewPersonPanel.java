@@ -5,15 +5,15 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Specialist;
 
 /**
- * A UI component that displays information of a {@code Person}.
+ * Panel containing the person details.
  */
-public abstract class PersonCard extends UiPart<Region> {
-
+public class ViewPersonPanel extends UiPart<Region> {
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -25,30 +25,45 @@ public abstract class PersonCard extends UiPart<Region> {
     public final Person person;
 
     @FXML
-    private HBox cardPane;
+    private Label personType;
     @FXML
     private Label name;
-    @FXML
-    private Label id;
     @FXML
     private Label phone;
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane viewTags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex, String fxml) {
+    public ViewPersonPanel(Person person, String fxml) {
         super(fxml);
         this.person = person;
-        id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
+        phone.setText(": " + person.getPhone().value);
+        email.setText(": " + person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> viewTags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Update the person that are going to be viewed.
+     *
+     * @param person the person that is going to be viewed
+     * @return updated version of ViewPersonPanel
+     */
+    public static ViewPersonPanel updatePerson(Person person) {
+        if (person == null) {
+            return null;
+        }
+        if (person instanceof Patient) {
+            return new ViewPatientPanel((Patient) person);
+        } else {
+            return new ViewSpecialistPanel((Specialist) person);
+        }
     }
 }
+
