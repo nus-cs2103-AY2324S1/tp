@@ -206,59 +206,62 @@ The `member`/`applicant` is added into the `AddressBook` if it is not present. O
 
 ### Delete an applicant
 
-The applicant at the specific applicantIndex in the applicant list will be deleted. Compulsory fields for the
-deleteApplicant command include: applicantIndex. An example of how this feature can be used is as follows:
+The applicant at the specific `applicantIndex` in the applicant list will be deleted. Compulsory fields for the
+`DeleteApplicantCommand` include: `applicantIndex`. An example of how this feature can be used is as follows:
 
-* Step 1. The deleteApplicantCommand object's execute() method is called.
-* Step 2. The applicantIndex is checked to be within the valid range of the applicant list. If the applicantIndex given
-  is invalid, a CommandException is thrown.
-* Step 3. The applicant at the given applicantIndex is referenced.
-* Step 4. The model object's deleteApplicant() method is called. The input parameter is the referenced applicant.
+* Step 1. The `DeleteApplicantCommand` object's `execute()` method is called.
+* Step 2. The `applicantIndex` is checked to be within the valid range of the applicant list. If the `applicantIndex`
+  given
+  is invalid, a `CommandException` is thrown.
+* Step 3. The applicant at the given `applicantIndex` is referenced.
+* Step 4. The model object's `deleteApplicant()` method is called. The input parameter is the referenced applicant.
 * Step 5. The applicant is deleted from the applicant list.
 
 ### Delete a member
 
-The member at the specific memberIndex in the member list will be deleted. Compulsory fields for the deleteMember
-command include: memberIndex. An example of how this feature can be used is as follows:
+The member at the specific memberIndex in the member list will be deleted. Compulsory fields for
+the `DeleteMemberCommand`
+include: `memberIndex`. An example of how this feature can be used is as follows:
 
-* Step 1. The deleteMemberCommand object's execute() method is called.
-* Step 2. The memberIndex is checked to be within the valid range of the member list. If the memberIndex given is
-  invalid, a CommandException is thrown.
-* Step 3. The member at the given memberIndex is referenced.
-* Step 4. The model object's deleteMember() method is called. The input parameter is the referenced member.
+* Step 1. The `DeleteMemberCommand` object's `execute()` method is called.
+* Step 2. The `memberIndex` is checked to be within the valid range of the member list. If the `memberIndex` given is
+  invalid, a `CommandException` is thrown.
+* Step 3. The member at the given `memberIndex` is referenced.
+* Step 4. The model object's `deleteMember()` method is called. The input parameter is the referenced member.
 * Step 5. The member is deleted from the member list.
 
 ### Delete an applicant
 
-The applicant at the specific applicantIndex in the applicant list will be deleted. Compulsory fields for the
-deleteApplicant command include: applicantIndex. An example of how this feature can be used is as follows:
+The applicant at the specific `applicantIndex` in the applicant list will be deleted. Compulsory fields for the
+`DeleteApplicantCommand` include: `applicantIndex`. An example of how this feature can be used is as follows:
 
-* Step 1. The deleteApplicantCommand object's execute() method is called.
-* Step 2. The applicantIndex is checked to be within the valid range of the applicant list. If the applicantIndex given
-  is invalid, a CommandException is thrown.
-* Step 3. The applicant at the given applicantIndex is referenced.
-* Step 4. The model object's deleteApplicant() method is called. The input parameter is the referenced applicant.
+* Step 1. The `DeleteApplicantCommand` object's `execute()` method is called.
+* Step 2. The `applicantIndex` is checked to be within the valid range of the applicant list. If the `applicantIndex`
+  given
+  is invalid, a `CommandException` is thrown.
+* Step 3. The applicant at the given `applicantIndex` is referenced.
+* Step 4. The model object's `deleteApplicant()` method is called. The input parameter is the referenced applicant.
 * Step 5. The applicant is deleted from the applicant list.
 
 ### Find an applicant
 
 All applicants that contains any field with the specified keyword will be listed. Compulsory fields for the
-findApplicant command include : keyword. An example of how this feature can be used is as follows:
+`FindApplicantCommand` include: `keyword`. An example of how this feature can be used is as follows:
 
-* Step 1. The findApplicantCommand object's execute() method is called.
-* Step 2. The model object's updateFilteredApplicantList() is called, with the keyword as the predicate.
-* Step 3. The applicant list is filtered to only reflect applicants with fields(name, phone number) that contain the
+* Step 1. The `FindApplicantCommand` object's `execute()` method is called.
+* Step 2. The model object's `updateFilteredApplicantList()` is called, with the keyword as the predicate.
+* Step 3. The applicant list is filtered to only reflect applicants with fields (name, phone number) that contain the
   keyword.
 * Step 4. The filtered member list is shown.
 
 ### Find a member
 
-All members that contains any field with the specified keyword will be listed. Compulsory fields for the findApplicant
-command include : keyword. An example of how this feature can be used is as follows:
+All members that contains any field with the specified keyword will be listed. Compulsory fields for
+`FindApplicantCommand` include: `keyword`. An example of how this feature can be used is as follows:
 
-* Step 1. The findMemberCommand object's execute() method is called.
-* Step 2. The model object's updateFilteredMemberList() is called, with the keyword as the predicate.
-* Step 3. The member list is filtered to only reflect members with fields(name, email, phone number, telegram handle,
+* Step 1. The `FindMemberCommand` object's `execute()` method is called.
+* Step 2. The model object's `updateFilteredMemberList()` is called, with the keyword as the predicate.
+* Step 3. The member list is filtered to only reflect members with fields (name, email, phone number, telegram handle,
   tag) that contain the keyword.
 * Step 4. The filtered member list is shown.
 
@@ -267,26 +270,29 @@ command include : keyword. An example of how this feature can be used is as foll
 Edits the details of an existing member identified by their index number in the displayed member list. Existing values
 will be overwritten by the input values.
 
-* Step 1: The editMemberCommand object's execute() method is called.
+* Step 1: The `EditMemberCommand` object's `execute()` method is called.
 * Step 2: The member index is checked to be within the valid range of the member list. If the member index given is
-  invalid (e.g., out of range), a CommandException is thrown.
+  invalid (e.g., out of range), a `CommandException` is thrown.
 * Step 3: The member at the given index is referenced based on the provided member index.
-* Step 4: The editMemberCommand calls the model object's setMember() method. It updates the member with the new details
+* Step 4: The `EditMemberCommand` calls the model object's `setMember()` method. It updates the member with the new
+  details
   provided, effectively modifying the existing member's information.
-* Step 5: After the execution of the editMemberCommand, the member's details are successfully edited in the member list.
+* Step 5: After the execution of the `EditMemberCommand`, the member's details are successfully edited in the member
+  list.
 
 ### Edit an applicant
 
 Edits the details of an existing applicant identified by their index number in the displayed applicant list. Existing
 values will be overwritten by the input values.
 
-* Step 1: The editApplicantCommand object's execute() method is called.
+* Step 1: The `EditApplicantCommand` object's `execute()` method is called.
 * Step 2: The applicant index is checked to be within the valid range of the applicant list. If the applicant index
-  given is invalid (e.g., out of range), a CommandException is thrown.
+  given is invalid (e.g., out of range), a `CommandException` is thrown.
 * Step 3: The applicant at the given index is referenced based on the provided applicant index.
-* Step 4: The editApplicantCommand calls the model object's setApplicant() method. It updates the member with the new
+* Step 4: The `EditApplicantCommand` calls the model object's `setApplicant()` method. It updates the member with the
+  new
   details provided, effectively modifying the existing applicant's information.
-* Step 5: After the execution of the editApplicantCommand, the applicant's details are successfully edited in the
+* Step 5: After the execution of the `EditApplicantCommand`, the applicant's details are successfully edited in the
   applicant list.
 
 ### View all members
@@ -294,8 +300,8 @@ values will be overwritten by the input values.
 Lists all members in the address book to the user; e.g., If previous list was filtered (say by `FindMemberCommand`),
 then set it to unfiltered again.
 
-* Step 1: The ViewMembersCommand object's execute() method is called.
-* Step 2: The model object's updateFilteredMemberList() method is called with the predicate as always returning true.
+* Step 1: The `ViewMembersCommand` object's execute() method is called.
+* Step 2: The model object's `updateFilteredMemberList()` method is called with the predicate as always returning true.
 * Step 3: All members in the address book are shown to the user in the members list.
 
 ### View all applicants
@@ -303,8 +309,9 @@ then set it to unfiltered again.
 Lists all applicants in the address book to the user; e.g., If previous list was filtered (say
 by `FindApplicantCommand`), then set it to unfiltered again.
 
-* Step 1: The ViewApplicantsCommand object's execute() method is called.
-* Step 2: The model object's updateFilteredApplicantList() method is called with the predicate as always returning true.
+* Step 1: The `ViewApplicantsCommand` object's execute() method is called.
+* Step 2: The model object's `updateFilteredApplicantList()` method is called with the predicate as always returning
+  true.
 * Step 3: All applicants in the address book are shown to the user in the applicants list.
 
 ### Copy a member
@@ -312,11 +319,12 @@ by `FindApplicantCommand`), then set it to unfiltered again.
 Copies the details of an existing member identified by their index number in the displayed member list into the
 clipboard.
 
-* Step 1: The CopyMemberCommand object's execute() method is called.
+* Step 1: The `CopyMemberCommand` object's execute() method is called.
 * Step 2: The member index is checked to be within the valid range of the member list. If the member index given is
-  invalid (e.g., out of range), a CommandException is thrown.
+  invalid (e.g., out of range), a `CommandException` is thrown.
 * Step 3: The member at the given index is referenced based on the provided member index.
-* Step 4: The CopyMemberCommand calls the copies the member's details given by the Member `detailsToCopy()` method into
+* Step 4: The `CopyMemberCommand` calls the copies the member's details given by the `Member` `detailsToCopy()` method
+  into
   the clipboard.
 
 ### Copy an applicant
@@ -324,11 +332,11 @@ clipboard.
 Copies the details of an existing applicant identified by their index number in the displayed applicant list into the
 clipboard.
 
-* Step 1: The CopyApplicantCommand object's execute() method is called.
+* Step 1: The `CopyApplicantCommand` object's `execute()` method is called.
 * Step 2: The applicant index is checked to be within the valid range of the applicant list. If the applicant index
-  given is invalid (e.g., out of range), a CommandException is thrown.
+  given is invalid (e.g., out of range), a `CommandException` is thrown.
 * Step 3: The applicant at the given index is referenced based on the provided applicant index.
-* Step 4: The CopyApplicantCommand calls the copies the applicant's details given by the Applicant `detailsToCopy()`
+* Step 4: The `CopyApplicantCommand` calls the copies the applicant's details given by the `Applicant` `detailsToCopy()`
   method into the clipboard.
 
 ### \[Proposed\] Undo/redo feature
