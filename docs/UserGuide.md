@@ -205,6 +205,8 @@ Examples:
   ![result for 'findContact'](images/findContactResult.png)
 
 
+<div style="page-break-after: always;"></div>
+
 ## Meeting commands
 
 ### Adding a meeting: `addm`
@@ -276,6 +278,7 @@ Format: `viewm INDEX`
 Examples:
 * `viewm 2` Displays detailed information related to the 2nd meeting on the list, including current attendees.
 
+<div style="page-break-after: always;"></div>
 
 ### Search for Meetings using meeting fields: `findm`
 
@@ -299,6 +302,7 @@ Examples:
 * `findm m/Meeting s/09.09.2023 0000 e/09.10.2023 0000` returns `Zoom meeting`, `Meeting advisor`, if these meetings start after 09.09.2023 0000 and end before 09.10.2023 0000<br>
   ![result for 'findAlexMeeting'](images/findAlexMeetingResult.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Add contact to meeting: `addmc`
 
@@ -357,6 +361,7 @@ If your changes to the data file makes its format invalid, OutBook will discard 
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -370,6 +375,7 @@ If your changes to the data file makes its format invalid, OutBook will discard 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
