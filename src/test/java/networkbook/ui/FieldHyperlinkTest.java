@@ -41,15 +41,15 @@ public class FieldHyperlinkTest {
 
     @Test
     public void constructor_nullParams_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(AssertionError.class, () -> {
             FieldHyperlink f = new FieldHyperlink("test", null);
         });
 
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(AssertionError.class, () -> {
             FieldHyperlink f = new FieldHyperlink(null, null);
         });
 
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(AssertionError.class, () -> {
             FieldHyperlink f = new FieldHyperlink(null, () -> {});
         });
     }
