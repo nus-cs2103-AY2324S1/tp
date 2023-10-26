@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
 import java.util.List;
 
@@ -44,8 +46,8 @@ public class DeleteInterviewCommand extends Command {
 
         Interview interviewToDelete = lastShownList.get(targetIndex.getZeroBased());
         Applicant applicantToUpdate = interviewToDelete.getInterviewApplicant();
-        model.deleteInterview(interviewToDelete);
         model.setApplicant(applicantToUpdate, applicantToUpdate.getApplicantWithoutInterview());
+        model.deleteInterview(lastShownList.get(targetIndex.getZeroBased()));
         return new CommandResult(String.format(MESSAGE_DELETE_INTERVIEW_SUCCESS,
                 Messages.formatInterview(interviewToDelete)));
     }
