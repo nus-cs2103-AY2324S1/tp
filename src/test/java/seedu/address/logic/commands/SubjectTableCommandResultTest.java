@@ -160,8 +160,8 @@ public class SubjectTableCommandResultTest {
 
         assertEquals(commandResult.getEngCount(), 50);
         assertEquals(commandResult.getChiCount(), 10);
-        assertEquals(commandResult.getEMathCount(), 30);
-        assertEquals(commandResult.getAMathCount(), 20);
+        assertEquals(commandResult.getEmathCount(), 30);
+        assertEquals(commandResult.getAmathCount(), 20);
         assertEquals(commandResult.getChemiCount(), 40);
         assertEquals(commandResult.getPhyCount(), 50);
         assertEquals(commandResult.getBioCount(), 25);

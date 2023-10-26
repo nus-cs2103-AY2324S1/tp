@@ -71,7 +71,7 @@ public class SubjectTableCommandResult extends CommandResult {
      * Getter method for emathCount which will auto invoked by javafx PropertyValueFactory instance.
      * @return count for elementary mathematics category.
      */
-    public int getEMathCount() {
+    public int getEmathCount() {
         return emathCount;
     }
 
@@ -79,7 +79,7 @@ public class SubjectTableCommandResult extends CommandResult {
      * Getter method for amathCount which will auto invoked by javafx PropertyValueFactory instance.
      * @return count for additional mathematics category.
      */
-    public int getAMathCount() {
+    public int getAmathCount() {
         return amathCount;
     }
 
