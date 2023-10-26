@@ -26,6 +26,12 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_PAYROLL =
             "%1$d employees found! Refer to their indexes for payroll calculation";
 
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_DEDUCT =
+            "%1$d employees found! Refer to their indexes for deduction";
+
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_BENEFIT =
+            "%1$d employees found! Refer to their indexes for benefit";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
