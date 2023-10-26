@@ -13,58 +13,58 @@ import seedu.flashlingo.model.Flashlingo;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code FlashCard} objects to be used in tests.
  */
 public class TypicalFlashCards {
 
-    public static final FlashCard ALICE = new FlashcardBuilder().withOriginalWord("Alice Pauline",
+    public static final FlashCard ALICE = new FlashCardBuilder().withOriginalWord("Alice Pauline", "English")
+            .withTranslatedWord("爱丽丝·宝琳", "Mandarin").build();
+    public static final FlashCard BENSON = new FlashCardBuilder().withOriginalWord("Benson Meier",
                     "English")
-            .withTranslation("爱丽丝·宝琳", "Mandarin").build();
-    public static final FlashCard BENSON = new FlashcardBuilder().withOriginalWord("Benson Meier",
+            .withTranslatedWord("本森·梅尔", "Mandarin")
+            .build();
+    public static final FlashCard CARL = new FlashCardBuilder().withOriginalWord("Carl Kurz", "English")
+            .withTranslatedWord("卡尔·库尔兹", "Mandarin")
+            .build();
+    public static final FlashCard DANIEL = new FlashCardBuilder().withOriginalWord("Daniel Meier",
                     "English")
-            .withTranslation("本森·梅尔", "Mandarin")
+            .withTranslatedWord("丹尼尔·梅尔", "Mandarin")
             .build();
-    public static final FlashCard CARL = new FlashcardBuilder().withOriginalWord("Carl Kurz", "English")
-            .withTranslation("卡尔·库尔兹", "Mandarin")
-            .build();
-    public static final FlashCard DANIEL = new FlashcardBuilder().withOriginalWord("Daniel Meier",
+    public static final FlashCard ELLE = new FlashCardBuilder().withOriginalWord("Elle Meyer",
                     "English")
-            .withTranslation("丹尼尔·梅尔", "Mandarin")
+            .withTranslatedWord("艾尔·迈耶", "Mandarin")
             .build();
-    public static final FlashCard ELLE = new FlashcardBuilder().withOriginalWord("Elle Meyer",
+    public static final FlashCard FIONA = new FlashCardBuilder().withOriginalWord("Fiona Kunz",
                     "English")
-            .withTranslation("艾尔·迈耶", "Mandarin")
-            .build();
-    public static final FlashCard FIONA = new FlashcardBuilder().withOriginalWord("Fiona Kunz",
+            .withTranslatedWord("菲奥娜昆兹", "Mandarin").build();
+
+    public static final FlashCard GEORGE = new FlashCardBuilder().withOriginalWord("George Best",
                     "English")
-            .withTranslation("菲奥娜昆兹", "Mandarin")
-            .build();
-    public static final FlashCard GEORGE = new FlashcardBuilder().withOriginalWord("George Best",
-                    "English")
-            .withTranslation("乔治·贝斯特", "Mandarin")
-            .build();
+            .withTranslatedWord("乔治·贝斯特", "Mandarin").build();
 
     // Manually added
-    public static final FlashCard HOON = new FlashcardBuilder().withOriginalWord("Hoon Meier",
+    public static final FlashCard HOON = new FlashCardBuilder().withOriginalWord("Hoon Meier",
                     "English")
-            .withTranslation("胡恩·梅尔", "Mandarin")
+            .withTranslatedWord("胡恩·梅尔", "Mandarin")
             .build();
-    public static final FlashCard IDA = new FlashcardBuilder().withOriginalWord("Ida Mueller",
+    public static final FlashCard IDA = new FlashCardBuilder().withOriginalWord("Ida Mueller",
                     "English")
-            .withTranslation("艾达·米勒", "Mandarin")
+            .withTranslatedWord("艾达·米勒", "Mandarin")
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final FlashCard AMY = new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_AMY,
+    public static final FlashCard AMY = new FlashCardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_AMY,
                     "")
-            .withTranslation(VALID_TRANSLATION_AMY, "")
+            .withTranslatedWord(VALID_TRANSLATION_AMY, "")
             .build();
-    public static final FlashCard BOB = new FlashcardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB,
+    public static final FlashCard BOB = new FlashCardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB,
                     "")
-            .withTranslation(VALID_TRANSLATION_BOB, "")
+            .withTranslatedWord(VALID_TRANSLATION_BOB, "")
             .build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final FlashCard WORD = new FlashCardBuilder().withOriginalWord("你好", "Chinese")
+            .withTranslatedWord("hi", "English").withLevel(2)
+            .withWhenToReview("2023-12-12T23:59:59Z").build();
 
     private TypicalFlashCards() {} // prevents instantiation
 

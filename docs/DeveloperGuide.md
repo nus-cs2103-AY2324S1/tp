@@ -297,7 +297,75 @@ inside SessionManager class indicating current session is review session or not.
   * Cons:
      - More error-prone: Allowing all commands may lead to unexpected bugs during a review session.
 
+### Yes and No
 
+#### **Feature Overview**
+
+The "Yes" and "No" commands feature has been created with the intention of enabling users to provide feedback during the review session. It empowers users to share their opinions regarding whether they have successfully committed the words to memory or not. Following the receipt of this feedback, the application will adjust the proficiency level of the specific word in question. The greater the number of times a user memorizes a word, the higher its proficiency level will rise, and subsequently, the longer the user will have before revisiting that particular word during future review sessions.
+
+*Usage*
+
+Both commands can be executed with the following command words:
+
+- For indicating successful memorization: `yes`
+- For indicating unsuccessful memorization: `no`
+
+### **Code Structure**
+
+The YesCommand and NoCommand classes consist of important methods:
+
+- `execute(Model model)`: This method is responsible for executing the command. It updates the model and retrieves the next review word. It returns a `CommandResult` with the success message and, if applicable, the response from the model.
+
+#### **Implementation**
+
+The implementation of the "Yes" and "No" commands invoke the `rememberWord` and `nextReviewWord` methods.
+
+- **rememberWord:** denotes whether the user has successfully memorized the word or not.
+
+The application recognizes a word as memorized if the user inputs either 'yes' or 'no.' 
+
+It's important to note that the 'yes' and 'no' commands are only functional once the review session has commenced.
+
+Given below is an example usage scenario and how the yes/no mechanism behaves at each step.
+
+**Step 1:** The user initiates the review session, and a single word appears on the screen without its translation.
+
+**Step 2:** The user recalls the translation from memory and compares it with the provided translation.
+
+**Step 3:** The user responds with either 'yes' or 'no' to indicate whether the recalled translation matches the recorded one.
+
+**Step 4:** If 'yes' is chosen, the `rememberWord` method within the `Model` class is invoked with the 'true' parameter; if 'no' is chosen, it is invoked with 'false'.
+
+**Step 5:** Inside the `rememberWord` method, the proficiency level of the current word is updated, and the next review date for the word is determined based on the updated proficiency level.
+
+**Step 6:** The `nextReviewWord` method is called to present the next word for review. If there are no more words to review, the session concludes.
+
+The following sequence diagram summarizes the workflow when a user executes a `yes` command:
+
+![StartSequnceModel](images/YesSequenceDiagram.png)
+
+**User Control:**
+- User can update the proficiency level of every individual word and also the revisited date, which allows the user to learn in a more targeted manner
+
+The following activity diagram summarizes what happens when a user executes a `yes` command:
+
+![StartSequnceModel](images/YesCommandActivityDiagram.png)
+#### **Usage Example**
+To use the YesCommand, simply type yes during a review session. For example:
+
+- `yes` 
+- `no`
+
+#### **Design Considerations**
+
+**Aspect: How to make our programs more interactive**
+* Alternative 1 (current choice): Let the user judge whether he has remembered the word.
+    * Pros: Get real-time feedback from users and adjust the proficiency of each word.
+    * Cons: Users may trick the program to achieve higher accuracy.
+
+* Alternative 2: Let the user enter the translation he recalls and the program compares it with the recorded translation.
+    * Pros: Get real reactions from users.
+    * Cons: It is difficult for the program to determine whether the meaning expressed by the two translations is consistent
 
 --------------------------------------------------------------------------------------------------------------------
 
