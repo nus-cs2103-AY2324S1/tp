@@ -132,7 +132,23 @@ Examples:
 * `listc` followed by `delete 2` deletes the 2nd person in the results of the `listc` command.
 * `findc Betsy` followed by `delete 1` deletes the 1st person in the results of the `findc` command.
 
-<br/><br/><br/><br/><br/><br/><br/><br/>
+### Viewing detailed contact information : `viewc`
+
+Views detailed information of a contact in OutBook.
+
+Format: `viewc INDEX`
+
+* Views detailed information of the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Displays contact Name, Phone, Email, Last Contacted Time, Status, Remarks and Tags.
+
+Examples:
+* `viewc 2` Displays detailed information related to the 2nd contact on the list.
+
+
+<div style="page-break-after: always;"></div>
+
 ### Editing a contact : `editc`
 
 Edits an existing contact in OutBook.
@@ -163,21 +179,7 @@ Format: `remark INDEX r/REMARK`
 
 *Examples: 
 * `remark 1 r/Owes me a favour` Replaces the previous remark for the 1st contact with "Owes me a favour".
-
-### Viewing detailed contact information : `viewc`
-
-Views detailed information of a contact in OutBook.
-
-Format: `viewc INDEX`
-
-* Views detailed information of the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Displays contact Name, Phone, Email, Last Contacted Time, Status, Remarks and Tags.
-
-Examples:
-* `viewc 2` Displays detailed information related to the 2nd contact on the list.
-
+* 
 
 ### Search for persons using contact fields: `findc`
 Find persons whose contact details match the keywords specified for at least 1 of these fields: name, phone, email, status, tag
