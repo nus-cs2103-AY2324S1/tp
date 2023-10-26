@@ -123,11 +123,13 @@ public class ModelManagerTest {
 
     @Test
     public void deleteInterview_interviewNotInAddressBook_throwInterviewNotFoundException() {
+        modelManager.addApplicant(ALICE);
         assertThrows(InterviewNotFoundException.class, () -> modelManager.deleteInterview(STANDARD_INTERVIEW));
     }
 
     @Test
     public void getFilteredApplicantList_modifyList_throwsUnsupportedOperationException() {
+        modelManager.addApplicant(ALICE);
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredApplicantList().remove(0));
     }
 
