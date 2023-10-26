@@ -49,6 +49,8 @@ public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    private CommandHistory commandHistory = new CommandHistory();
+
     //TODO: Change equals method, remember to do the tags.
     @Test
     public void findCommandEquals() {
@@ -159,7 +161,7 @@ public class FindCommandTest {
         Predicate<Person> predicate = combinePersonPredicates(findPredicateMap, PersonType.PATIENT);
         FindCommand command = new FindCommand(findPredicateMap, PersonType.PATIENT);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
@@ -172,7 +174,7 @@ public class FindCommandTest {
         Predicate<Person> predicate = combinePersonPredicates(findPredicateMap, PersonType.SPECIALIST);
         FindCommand command = new FindCommand(findPredicateMap, PersonType.SPECIALIST);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
@@ -184,7 +186,7 @@ public class FindCommandTest {
         Predicate<Person> predicate = combinePersonPredicates(findPredicateMap, PersonType.SPECIALIST);
         FindCommand command = new FindCommand(findPredicateMap, PersonType.SPECIALIST);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(Arrays.asList(FIONA, GEORGE), model.getFilteredPersonList());
     }
 
@@ -196,7 +198,7 @@ public class FindCommandTest {
         Predicate<Person> predicate = combinePersonPredicates(findPredicateMap, PersonType.PATIENT);
         FindCommand command = new FindCommand(findPredicateMap, PersonType.PATIENT);
         expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(Arrays.asList(ALICE, DANIEL), model.getFilteredPersonList());
     }
 

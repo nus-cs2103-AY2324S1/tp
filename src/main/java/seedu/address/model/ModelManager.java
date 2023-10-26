@@ -20,7 +20,7 @@ import seedu.address.model.person.PersonType;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TrackedAddressBook trackedAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private Person selectedPerson;
@@ -34,9 +34,9 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.trackedAddressBook = new TrackedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.trackedAddressBook.getPersonList());
         this.commandStringStash = new CommandStringStash();
 
         // DoConnek Pro shows all patients on startup by default.
@@ -88,28 +88,28 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        this.trackedAddressBook.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return trackedAddressBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return trackedAddressBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        trackedAddressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        trackedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -117,7 +117,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        trackedAddressBook.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -183,7 +183,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return trackedAddressBook.equals(otherModelManager.trackedAddressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && ((this.isSelectedEmpty() && otherModelManager.isSelectedEmpty())
@@ -191,4 +191,28 @@ public class ModelManager implements Model {
                 && selectedPerson.equals(otherModelManager.selectedPerson)));
     }
 
+    @Override
+    public boolean hasHistory() {
+        return trackedAddressBook.hasHistory();
+    }
+
+    @Override
+    public boolean canRedo() {
+        return trackedAddressBook.canRedo();
+    }
+
+    @Override
+    public void undoAddressBook() {
+        trackedAddressBook.undo();
+    }
+
+    @Override
+    public void commitAddressBook() {
+        trackedAddressBook.commit();
+    }
+
+    @Override
+    public void redoAddressBook() {
+        trackedAddressBook.redo();
+    }
 }
