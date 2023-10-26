@@ -69,4 +69,8 @@ shadowJar {
     archiveFileName = 'tutormate.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
