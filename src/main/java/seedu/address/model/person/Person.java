@@ -143,6 +143,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && remark.equals(otherPerson.remark)
+                && score.equals(otherPerson.score)
                 && tags.equals(otherPerson.tags);
 
     }

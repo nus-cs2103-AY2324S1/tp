@@ -92,6 +92,11 @@ public class PersonTest {
         // different remark -> returns false
         editedAlice = new PersonBuilder(ALICE).withRemark("Some remark").build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different score -> returns false
+        editedAlice = new PersonBuilder(ALICE).withScore(100).build();
+        assertFalse(ALICE.equals(editedAlice));
+
     }
 
     @Test
