@@ -140,18 +140,15 @@ public class ModelManager implements Model {
     public Person getSelectedPerson() {
         return selectedPerson;
     }
-
     @Override
     public void updateSelectedPerson(Person person) {
         requireNonNull(person);
         selectedPerson = person;
     }
-
     @Override
     public boolean isSelectedEmpty() {
         return selectedPerson == null;
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
