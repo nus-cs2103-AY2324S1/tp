@@ -547,4 +547,21 @@ class TimeParserTest {
         List<Interview> actual = TimeParser.listInterviewsToday(uniqueInterviewList);
         assertEquals(expected, actual);
     }
+
+    /*
+     * Tests for the method which sorts the interviews in chronological order
+     */
+    @Test
+    void testSortInterviews() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_3);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_2);
+        List<Interview> actual = TimeParser.sortInterviewsInChronologicalAscendingOrder(uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
 }

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import seedu.address.model.interview.Interview;
@@ -244,6 +245,21 @@ public class TimeParser {
     }
 
     /**
+     * Sorts the list of interviews in ascending chronological order.
+     *
+     * @author Tan Kerway
+     *
+     */
+    public static List<Interview> sortInterviewsInChronologicalAscendingOrder(UniqueInterviewList interviews) {
+        List<Interview> res = new ArrayList<>();
+        for (Interview interview : interviews) {
+            res.add(interview);
+        }
+        res.sort(Comparator.comparing(Interview::getInterviewStartTime));
+        return res;
+    }
+
+    /**
      * Formats the time String.
      *
      * @author Tan Kerway
@@ -252,7 +268,6 @@ public class TimeParser {
      */
     public static String formatDate(LocalDateTime time) {
         assert time != null : "time should be not null";
-        // TODO FIX THIS; NEED TO FORMAT INTO AN ACCEPTABLE DATE
         return time.format(DateTimeFormatter.ofPattern("d/M/yy HHmm"));
     }
 }
