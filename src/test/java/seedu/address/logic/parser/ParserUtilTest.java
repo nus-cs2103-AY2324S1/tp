@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Score;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -193,5 +194,28 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+    @Test
+    public void parseStatus_collectionWithInvalidStatus_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(Arrays.asList(VALID_STATUS, INVALID_STATUS)));
+    }
 
+    @Test
+    public void parseScore_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseScore(null));
+    }
+
+    @Test
+    public void parseScore_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseScore("a"));
+    }
+
+    @Test
+    public void parseScore_validValueWithoutWhitespace_returnsScore() throws Exception {
+        assertEquals(ParserUtil.parseScore("1"), new Score(1));
+    }
+
+    @Test
+    public void parseScore_negativeValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseScore("-1"));
+    }
 }

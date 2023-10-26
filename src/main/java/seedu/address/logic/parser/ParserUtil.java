@@ -19,6 +19,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Score;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
@@ -177,6 +178,7 @@ public class ParserUtil {
     }
 
     /**
+<<<<<<< HEAD
      * Parses {@code Collection<String> search name parameters} into a {@code List<String> of names}.
      */
     public static List<String> parseSearchNameParams(Collection<String> names) throws ParseException {
@@ -240,5 +242,17 @@ public class ParserUtil {
         return searchParams;
     }
 
-
+    /* Parses a {@code String score} into a {@code Score}.
+     * @param score String to be parsed
+     * @return Score object
+     * @throws ParseException if the given {@code score} is invalid.
+     */
+    public static Score parseScore(String score) throws ParseException {
+        requireNonNull(score);
+        String trimmedScore = score.trim();
+        if (!StringUtil.isNonNegativeInteger(trimmedScore)) {
+            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
+        }
+        return new Score(Integer.parseInt(trimmedScore));
+    }
 }

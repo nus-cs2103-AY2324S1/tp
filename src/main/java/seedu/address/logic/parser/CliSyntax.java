@@ -17,4 +17,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SORT = new Prefix("so/");
     public static final Prefix PREFIX_STATUS = new Prefix("st/");
     public static final Prefix PREFIX_USERNAME = new Prefix("u/");
+
+    public static final Prefix PREFIX_SCORE = new Prefix("sc/");
 }
