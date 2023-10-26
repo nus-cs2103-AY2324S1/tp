@@ -1,13 +1,14 @@
-package seedu.address.model.applicant;
+package seedu.address.model.applicant.predicate;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.applicant.Applicant;
 
 /**
- * Tests that a {@code Applicant}'s {@code Name} matches any of the keywords given.
+ * Tests that an {@code Applicant}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Applicant> {
     private final List<String> keywords;
