@@ -83,6 +83,13 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
+    public void setTheme(String themePath) {
+        logger.info("Setting theme with path: " + themePath);
+        primaryStage.getScene().getStylesheets().clear();
+        primaryStage.getScene().getStylesheets().add(themePath);
+        primaryStage.getScene().getStylesheets().add("view/Extensions.css");
+    }
+
     /**
      * Sets the accelerator of a MenuItem.
      * @param keyCombination the KeyCombination value of the accelerator
@@ -188,6 +195,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates the application's theme.
+     */
+    @FXML
+    public void handleTheme(String theme) {
+        setTheme(getThemePath(theme));
+    }
+
+    /**
+     * Returns the path of the theme stylesheet.
+     */
+    private String getThemePath(String theme) {
+        return theme.equalsIgnoreCase("dark") ? "view/DarkTheme.css" : "view/LightTheme.css";
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -208,6 +230,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isLoad()) {
                 handleLoad();
+            }
+
+            if (commandResult.isTheme()) {
+                handleTheme(logic.getTheme());
             }
 
             return commandResult;

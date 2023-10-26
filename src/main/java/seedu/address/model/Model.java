@@ -31,6 +31,11 @@ public interface Model {
     void setTutorialCount(int tutorialCount);
 
     /**
+     * Toggles the color theme.
+     */
+    void toggleColorTheme();
+
+    /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
@@ -44,6 +49,11 @@ public interface Model {
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' theme.
+     */
+    String getTheme();
 
     /**
      * Returns the user prefs' address book file path.

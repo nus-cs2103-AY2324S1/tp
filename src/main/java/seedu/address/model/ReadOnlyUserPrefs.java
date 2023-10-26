@@ -18,4 +18,6 @@ public interface ReadOnlyUserPrefs {
     int getAssignmentCount();
 
     int getTutorialCount();
+
+    String getTheme();
 }

@@ -22,14 +22,19 @@ public class CommandResult {
     /** The application's file path should be updated */
     private final boolean load;
 
+    /** The application's theme should be updated */
+    private final boolean theme;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean load) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean load, boolean theme) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.load = load;
+        this.theme = theme;
     }
 
     /**
@@ -37,7 +42,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -56,6 +61,10 @@ public class CommandResult {
         return load;
     }
 
+    public boolean isTheme() {
+        return theme;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -63,6 +72,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("load", load)
+                .add("theme", theme)
                 .toString();
     }
 
@@ -81,11 +91,12 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && load == otherCommandResult.load;
+                && load == otherCommandResult.load
+                && theme == otherCommandResult.theme;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, load);
+        return Objects.hash(feedbackToUser, showHelp, exit, load, theme);
     }
 }
