@@ -235,7 +235,7 @@ _{more aspects and alternatives to be added}_
 
 ### [Proposed] Command History
 
-### Implementation
+#### Implementation
 The proposed commandHistory mechanism is facilitated by `CommandHistory`. It contains `commandHistoryList` and `currentCommandPointer`. Additionally, it implements the following operations:
 * `CommandHistory#hasPreviousCommand()` — Returns if there is a previously command from the history based on `currentCommandPointer`.
 * `CommandHistory#hasNextCommand()` — Returns if there is a next command from the history based on `currentCommandPointer`.
@@ -247,28 +247,28 @@ The proposed commandHistory mechanism is facilitated by `CommandHistory`. It con
 Given below is an example usage scenario and how the commandHistory behaves at each step.
 
 Step 1. The user launches the application for the first time and enters their first command. 
-The `CommandHistory` will save the command and the `currentCommandPointer` won't be pointing to any state.
+The `CommandHistory` will save the command and the `currentCommandPointer` won't be pointing to any command.
 
 ![CommandHistoryState0](images/CommandHistoryState0.png)
 
-Step 2. The user presses '↑' while the commandBox is selected. `commandHistoryList#getPreviousCommand` and the previous command is displayed in the commandBox. 
+Step 2. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called and the previous command is displayed in the commandBox. 
 When the previous command is entered into the commandBox, the newly edited version of command will not be stored in `CommandHistory`.
 
 ![CommandHistoryState1](images/CommandHistoryState1.png)
 
-Step 3. The user presses '↑' while the commandBox is selected. `commandHistoryList#getPreviousCommand` 
+Step 3. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called 
 and the previous command is displayed in the commandBox. When the previous command is edited and is entered into the commandBox, the newly edited version of command will be stored in `CommandHistory` after calling `CommandHistory#addCommand`.
 
 ![CommandHistoryState3](images/CommandHistoryState2.png)
 
-Step 4. The user has pressed '↑' while selecting the commandBox until the first Command and `CommandHistory#getPreviousCommand` 
+Step 4. The user has pressed '↑' while selecting the commandBox until the first Command and `CommandHistory#getPreviousCommand()` 
 is called multiple times. The user then presses '↓' and `CommandHistory#getNextCommand()` is called and the command1 (the next command) will then be displayed in the commandBox.
 
 ![CommandHistoryState3](images/CommandHistoryState3.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentCommandPointer` is at 
 index 0, pointing to the initial first command, then there are no previous commands to restore. The program uses 
-`Model#hasPreviousCommand()` to check if this is the case. If so, it will not change anything.
+`CommandHistory#hasPreviousCommand()` to check if this is the case. If so, it will not change anything.
 
 </div>
 
@@ -283,7 +283,7 @@ The program uses `CommandHistory#hasNextCommand()` to check if this is the case.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommandHistoryActivityDiagram.png" width="250" />
+<img src="images/CommandHistoryActivityDiagram.png" width="600" />
 
 #### Design considerations:
 
