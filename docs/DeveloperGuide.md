@@ -37,7 +37,7 @@ The UI component,
 
 **Component Structure:**
 
-{Insert UML}
+<img src="images/UiClassDiagram.png" width="900" />
 
 The UI consists of a `MainWindow` that is made up of parts like `CommandBox` and `ResultDisplay`.
 These parts are always being shown in `MainWindow`, while other parts like `JobListPanel`, `JobDetailsPanel` are only
@@ -80,7 +80,7 @@ The following sequence diagram illustrates the process of invocation for the com
 (insert UML sequence diagram)
 
 The `SortCommand` class implements this command. It accepts a `FieldComparator` which will be set as the comparator when
-`Model::sortJobs` is called. 
+`Model::sortJobs` is called.
 
 The `SortCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
 not conform to the expected format, a `ParseException` is thrown. If the user input is valid, then `SortCommandParser`
@@ -90,7 +90,7 @@ The overriding `FieldComparator::compare` method compares the field indicated by
 relevant field method must be invoked.
 
 * For alphabetically sorted fields (`Company`, `Role`, `Status`, `Industry`, `JobType`), `String::compareToIgnoreCase`
-is used.
+  is used.
 * For chronologically sorted fields (`Deadline`), a custom `compareTo()` method is implemented.
 
 #### Design considerations
