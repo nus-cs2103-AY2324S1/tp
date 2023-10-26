@@ -148,7 +148,7 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        filteredPersons.setPredicate(predicate);
+        this.updateFilteredPersonList(predicate);
         ObservableList<Person> listToDelete = this.getFilteredPersonList();
 
         List<Person> copyList = new ArrayList<>(listToDelete);
