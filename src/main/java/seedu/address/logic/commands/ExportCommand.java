@@ -1,15 +1,17 @@
 package seedu.address.logic.commands;
 
+import java.io.FileWriter;
+import java.io.IOException;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Exports the current dataset into Excel (.csv) format -- into the /data folder
+ */
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
@@ -25,7 +27,7 @@ public class ExportCommand extends Command {
      */
     public ExportCommand() {}
 
-    public String treatAsString(String str){
+    public String treatAsString(String str) {
         return "\"" + str + "\"";
     }
 
