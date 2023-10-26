@@ -27,6 +27,7 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
    - Add normal contact
    - Add emergency contact
    - Add alternative information to contact
+   - Edit contact information
    - Upload contact's photo
    - Update contact's photo
    - Search contact
@@ -35,9 +36,8 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
    - Delete normal contact
    - Delete emergency contact
    - Undo last action [Coming Soon]
-   - Receive actual birthday notification 
-   - Receive upcoming birthday notification [Coming Soon]
-   - Opt out notification
+   - Receive upcoming birthday notifications
+   - Opt out notification [Coming soon]
    - Track payment [Coming Soon]
    - Change language [Coming Soon]
 3. Troubleshooting / FAQ
@@ -86,7 +86,7 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional, ___with `addalt` as an exception. (Refer to [addalt](#addalt) under Features)___<br>
+* Items in square brackets are optional, ___with `addalt` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact) under Features)___<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -108,17 +108,24 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 Add a new contact with basic details like name, phone number, email, and address.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
-* `n/NAME` Replace NAME with the contact's name.
-* `p/PHONE_NUMBER` Replace PHONE_NUMBER with the contact's phone number.
-* `e/EMAIL` Replace EMAIL with the contact's email address.
-* `a/ADDRESS` Replace ADDRESS with the contact's physical address.
-* `[t/TAG] (Optional)` You can add tags to help categorise your contacts. Replace TAG with the desired tag, e.g., "friend", "colleague", etc. Multiple tags can be added by repeating the `[t/TAG]` format.
+<box type="info">
+
+All the fields must be provided except `TAG`. The fields you enter should follow the following format:
+
+| Field          | Format                                                                                                                  | Example                         |
+|----------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------|
+| `NAME`         | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                            | John Doe                        |
+| `PHONE_NUMBER` | Use `0-9` only and should be 3 digits long                                                                              | 98765432                        |
+| `EMAIL`        | Have the format of `local-part@domain`                                                                                  | johndoe@gmail.com               |
+| `ADDRESS`      | Use any characters                                                                                                      | John street, block 123, #01-01  |
+| `TAG`          | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined emergency tags for your contact  | friend                          |
+</box>
 
 Examples
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/friend`
-  * Adds a contact named "John Doe" with the phone number "98765432", email "johnd@example.com", address "John street, block 123, #01-01", and a tag "friend"
+* `add n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01 t/friend`
+    * Adds a contact named "John Doe" with the phone number "98765432", email "johndoe@gmail.com", address "John street, block 123, #01-01", and a tag "friend"
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/friend t/colleague`
-  * Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "1234567", and two tags "friend" and "colleague"
+    * Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "1234567", and two tags "friend" and "colleague"
 
 
 ### Add emergency contact
@@ -130,21 +137,64 @@ Format: `addemer INDEX [tag/TAG]`
 
 Examples:
 * `addemer 1 RA`
-  * Indicates that the contact at index 1 is the residential assistant (RA) for contact during emergencies
+    * Indicates that the contact at index 1 is the residential assistant (RA) for contact during emergencies
 
 ###  Add alternative information to contact
 
 Adds alternative contact information to an existing contact.
 
-Format: `addalt INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN]`
+Format: `addalt INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
 
-At least one of the optional fields must be provided.
+<box type="info">
+At least one of the optional fields must be provided. The fields you enter should follow the following format:
+
+| Field             | Format                                                                                                        | Example               |
+|-------------------|---------------------------------------------------------------------------------------------------------------|-----------------------|
+| `TELEGRAM`        | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only | @johndoe              |
+| `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                        | johndoe@hotmail.com   |
+| `LINKEDIN`        | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                     | john-doe-b9a38128a    |
+| `BIRTHDAY`        | Have the format of `DD/MM`                                                                                    | 31/10                 |
+
+</box>
 
 Examples:
-* addalt 1 tg/johndoe_telegram e2/johndoe2@example.com 
-  * Adds John Doe's Telegram and secondary email
-* addalt 2 li/betsycrowe_linkedin
-  * Adds Betsy Crowe's LinkedIn
+* `addalt 1 tg/@johndoe e2/johndoe@hotmail.com`
+    * Adds John Doe's telegram "@johndoe" and secondary email "johndoe@hotmail.com"
+* `addalt 1 li/john-doe-b9a38128a`
+    * Adds John Doe's linkedin "john-doe-b9a38128a"
+
+###  Edit contact information
+
+Edits contact information of an existing contact.
+
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
+
+<box type="info">
+At least one of the optional fields must be provided. The fields you enter should follow the following format:
+
+| Field             | Format                                                                                                                 | Example                        |
+|-------------------|------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| `NAME`            | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                           | John Doe                       |
+| `PHONE_NUMBER`    | Use `0-9` only and should be 3 digits long                                                                             | 98765432                       |
+| `EMAIL`           | Have the format of `local-part@domain`                                                                                 | johndoe@gmail.com              |
+| `ADDRESS`         | Use any characters                                                                                                     | John street, block 123, #01-01 |
+| `TAG`             | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined emergency tags for your contact | friend                         |
+| `TELEGRAM`        | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only          | @johndoe                       |
+| `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                                 | johndoe@hotmail.com            |
+| `LINKEDIN`        | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                              | john-doe-b9a38128a             |
+| `BIRTHDAY`        | Have the format of `DD/MM`                                                                                             | 31/10                          |
+</box>
+
+Examples:
+* `edit 1 tg/@johndoe e2/johndoe@hotmail.com`
+    * Edits the first person in your contact list with existing telegram to "@johndoe" and existing secondary email to "johndoe@hotmail.com"
+* `edit 2 n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01 t/friend`
+    * Edits the second person in your contact list with existing name to "John Doe", existing phone number to "98765432", existing email to "johndoe@gmail.com", existing address to "John street, block 123, #01-01", and a existing tag to "friend"
+
+<box type="warning">
+
+You are not allowed to edit any alternative contact information, i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` if any of these fields are empty. You will receive an error message that directs you to use [**`addalt`**](#add-alternative-information-to-contact) command.
+</box>
 
 ###  Upload contact's photo
 
@@ -171,81 +221,127 @@ Examples:
   * Updates the photo for the 2nd person with a new image from the specified path.
 
 
-###  Search contact
+###  Find contacts
 
-Generally, search commands will contain the following tokens:
+Lists contacts whose fields match the specified the specified find expression.
 
-* `FIELD`: Specifies the field to search within (name, phone, email, address, tag).
+Format: `find FIND_EXPRESSION`
 
-* `KEYWORD`: Words or characters you're looking for in a contact's information.
+Find expressions have a low barrier to entry that allows for simple filtering by field. This basic filtering for contacts is likely sufficient for most of your use cases. We recommend that you first read the [basic filtering](#find-contacts-basic-filtering) section to learn how to perform simple filtering by a single field.
 
-Format: `find FIELD/KEYWORD [FIELD/KEYWORD]`
+If you then find that the basic filtering is insufficient for your use case, you can read the [advanced filtering](#find-contacts-advanced-filtering) section to learn how to perform more complex filtering.
 
-You may include multiple field-keyword combinations. The `find` command will perform a logical `AND` on all field-keyword combinations.
 
-#### Search contact by name
 
-Locates persons in the address book whose names contain the given keywords.
+<panel header="**Supported Fields**" type="primary" id="find-fields-table" expanded no-close>
+Across both basic and advanced filtering, the following fields are supported:<br><br>
 
-Format: `find name/KEYWORD`
+| Field | Prefix | Description |
+| ----- | ------ | ----------- |
+| Name  | `n`   | Finds contacts whose names **contain** the given keyword. |
+| Phone | `p`   | Finds contacts whose phone numbers **contain** the given digits. |
+| Email | `e`   | Finds contacts whose email addresses **contain** the given keyword. |
+| Address | `a` | Finds contacts whose addresses **contain** the given keyword. |
+| Tag   | `t`   | Finds contacts who have any tag that **exactly matches** the given keyword. |
 
-Examples:
-* `find name/John`
-  * Returns all contacts with names that contain "John" (e.g. "John Smith", "John Doe")
-* `find name/Alex name/Ye`
-  * Returns all contacts with names that contain both "Alex" and "Ye" (e.g. "Alex Yeoh", "Yervis Alexis")
+</panel>
 
-#### Search contact by phone number
+<br>
 
-Locates persons in the address book whose phone numbers contain the given digits.
+<box type="info">
 
-Format: `find phone/KEYWORD`
+Note that in all cases, the search is case-insensitive for alphabetic characters. For example, `n/Joe` will match contacts who have the name `Joe`, `joE`, `Ajoeia`, `BobJOe Lee`, etc., and `t/friend` will match `friend`, `FriENd`, `FRIEND`, etc.
+</box>
 
-Examples:
-* `find phone/9876`
-  * Returns all contacts with phone numbers that contain "9876"
 
-#### Search contact by email
+<box type="warning">
 
-Locates persons in the address book whose email addresses contain the given keywords.
+For now, search keywords cannot contain spaces. For example, `n/John Doe` will not work as expected. Functionality to search for keywords which spaces like `"John Doe"` will be added in a future release.
+</box>
 
-Format: `find email/KEYWORD`
+#### Find contacts: basic filtering
 
-Examples:
-* `find email/tan email/@u.nus.edu`
-  * Returns all contacts with email addresses that contain "tan" and "@u.nus.edu"
+Contacts can be filtered by a single field by typing:
+- the **prefix** of the field you're searching through, followed by
+- a **slash** (`/`), followed by
+- the **keyword** you're looking for.
 
-#### Search contact by address
+Such a search will return all contacts whose field matches the keyword based on the behavior specified in the [supported fields table](#find-fields-table).
 
-Locates persons in the address book whose addresses contain the given keywords.
+We call this basic block of filtering a **find condition**, which is the smallest unit that act as a valid [**`FIND_EXPRESSION`**](#find-contacts).
 
-Format: `find address/KEYWORD`
 
-Examples:
-* `find address/street`
-  * Returns all contacts with addresses that contain the word "street"
+<box>
 
-#### Search contact by tag
+For example, given the following contacts (some fields omitted for brevity):
 
-Locates persons in the address book that have the given tags.
+| Name | Tags |
+| ---- | ---- |
+| John Doe | neighbor, colleague |
+| Jane Doe | neighbor, friend |
+| Alex Yeoh | friend |
+| Yervis Alexis | girlfriend |
 
-Format: `find tag/KEYWORD`
 
-Examples:
-* `find tag/RA`
-  * Returns all contacts that have tags containing the string "RA"
+`n/do` is a **find condition** that will return all contacts whose names contain the substring `"do"`, in this case `"John Doe"` and `"Jane Doe"`.
 
-#### Multiple field search
+Similarly, `t/friend` is a **find condition** that will return all contacts who have the `"friend"` tag, in this case `"Jane Doe"` and `"Alex Yeoh"` (and **not** `"Yervis Alexis"`, since [supported fields table](#find-fields-table) requires an exact tag match).
 
-Combines multiple search criteria for more specific searching. Search criteria are combined with the logical `AND`.
+Since `n/do` and `t/friend` are both **find conditions**, they can constitute a **`FIND_EXPRESSION`**. The complete commands in each case would be:
 
-Format: `find FIELD/KEYWORD FIELD/KEYWORD [ANOTHER_FIELD/ANOTHER_KEYWORD]`
+- `find n/do`
+- `find t/friend`
 
-Examples:
-* `find name/John tag/friend`
-  * Returns all contacts named John who also have the "friend" tag
-* `find email/@u.nus.edu phone/9876`
-  * Returns all contacts with emails containing "@u.nus.edu" and phone numbers containing "9876"
+</box>
+
+#### Find contacts: advanced filtering
+
+While basic filtering is sufficient for most use cases, you may find that you need to perform more complex filtering. For example, you may want to find all contacts who have the tag `"friend"` *and* whose names contain the substring `"do"`. Or you may want to find all contacts whose addresses contain the substring `"street"` *or* whose names *do not* contain the substring `"ye"`.
+
+You can accomplish this and more using our powerful advanced filtering syntax, which supports arbitrarily-complex **`FIND_EXPRESSIONs`**, which can be composed of many **find conditions** combined or transformed by **logical operators**.
+
+<panel header="**Supported Logical Operators**" type="primary" id="find-logical-operators-table" expanded no-close>
+
+The following logical operators are supported, and are listed in order of precedence (from highest to lowest):
+
+| Operator | Description | Usage |
+| -------- | ----------- | ------- |
+| `(` and `)` | Parentheses for grouping | `(FIND_EXPRESSION)`
+| `!`     | Logical NOT | `!FIND_EXPRESSION`
+| `&&`    | Logical AND | `FIND_EXPRESSION && FIND_EXPRESSION`
+| <code>&#124;&#124;</code> | Logical OR | <code>FIND_EXPRESSION &#124;&#124; FIND_EXPRESSION</code>
+
+</panel>
+
+<br>
+
+Note that the smallest possible **find expressions** is simply a **find condition**.
+
+**Find expressions** can be nested arbitrarily deeply, and that parentheses can be used to group  **find expressions** together to specify the order of evaluation.
+
+<br>
+
+<box>
+
+For example, given the following contacts (some fields omitted for brevity):
+
+| Name | Tags |
+| ---- | ---- |
+| John Doe | neighbor, colleague |
+| Jane Doe | neighbor, friend |
+| Alex Yeoh | friend |
+| Yervis Alexis | girlfriend |
+
+The following are valid **`FIND_EXPRESSIONs`**:
+
+- `!n/do` will return all contacts whose names do **not** contain the substring `"do"`, in this case `"Alex Yeoh"` and `"Yervis Alexis"
+- `n/do && t/friend` will return all contacts whose names contain the substring `"do"` **and** who have the `"friend"` tag, in this case `"Jane Doe"`.
+- `n/do || t/friend` will return all contacts whose names contain the substring `"do"` **or** who have the `"friend"` tag, in this case `"John Doe"`, `"Jane Doe"`, and `"Alex Yeoh"`.
+- `n/do && (t/friend || t/colleague)` will return all contacts whose names contain the substring `"do"` **and** who have either the `"friend"` or `"colleague"` tag, in this case `"John Doe"`, `"Jane Doe"`, and `"Alex Yeoh"`.
+
+Note that the last example is **not equivalent** to `n/do && t/friend || t/colleague`. Due to the higher precedence of `&&` compared to `||`, this will return all contacts whose names contain the substring `"do"` **and** who have the `"friend"` tag, **or** who have the `"colleague"` tag, in this case `"Jane Doe"` and `"Alex Yeoh"`.
+
+</box>
 
 ###  List all contacts
 
@@ -290,18 +386,18 @@ Examples:
   * Indicates that contact at index 1 is no longer an emergency contact
 
 ###  Undo last action [Coming Soon]
-###  Receive actual birthday notification
 
-Receives a pop-up notification that contains a list of people in CampusConnect whose birthdays have arrived.
+###  Receive upcoming birthday notifications
 
-Upon launching the application, if any of your contacts’ birthday in CampusConnect have arrived, you should see the following pop-up notification: <br>
+Receives a pop-up notification for each contact in CampusConnect whose birthday is within a day.
+
+Upon launching the application, if any of your contacts’ birthday in CampusConnect is coming within a day, you should see the following pop-up notification: <br>
 
 ![birthdayNotification](images/birthdayNotification.png)
 
 The notification will contain the names of the birthday individuals saved in CampusConnect.
 
-###  Receive upcoming birthday notification [Coming Soon]
-###  Opt out notification
+###  Opt out notification [Coming soon]
 
 Opts you out from receiving birthday related notifications, such as turning off actual birthday notification feature.
 
@@ -331,6 +427,46 @@ Invalid Input Example | Application Output
 ---|---
 **optout notifications** | Invalid `NOTIFICATION_DESCRIPTION` (refer to aforementioned for the list of `NOTIFICATION_DESCRIPTION` to enter).
 **optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
+
+### Notes feature
+![Window with Notes](images/notes/window_with_notes.png)
+![Notes Window](images/notes/notes_window.png)
+
+#### 1. Adding Notes to a Person
+
+##### Command Format:
+    note INDEX NOTE_CONTENT
+
+##### Parameters:
+- `INDEX`: The position of the person in the list you want to add a note to. This should be a positive integer.
+- `NOTE_CONTENT`: The content of the note you want to add.
+
+##### Example:
+If you want to add a note to the person at position 1 in the list, you would use:
+    
+    note 1 This is a sample note for the person.
+
+This will add a note "This is a sample note for the person." to the person at index 1.
+
+#### 2. Removing Notes from a Person
+
+##### Command Format:
+    removenote INDEX_PERSON INDEX_NOTE
+
+##### Parameters:
+- `INDEX_PERSON`: The position of the person in the list you want to remove a note from. This should be a positive integer.
+- `INDEX_NOTE`: The position of the note in the person's list of notes you want to remove. This should be a positive integer.
+
+##### Example:
+If you want to remove the 2nd note from the person at position 1 in the list, you would use:
+    
+    removenote 1 2
+
+This will remove the 2nd note from the person at index 1.
+
+##### Note:
+Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
+Make sure to familiarize yourself with the commands and use them as per your needs. If you have any issues or questions, refer to the application's help section or contact the support team.
 
 ###  Track payment [Coming Soon]
 ###  Change language [Coming Soon]

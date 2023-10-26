@@ -33,6 +33,7 @@ public class Person {
     private Optional<Telegram> telegram;
     private final Set<Tag> tags = new HashSet<>();
     private Optional<Integer> id;
+    private Balance balance;
 
     private List<Note> notes;
 
@@ -52,6 +53,7 @@ public class Person {
         this.tags.addAll(tags);
         this.id = Optional.empty();
         this.notes = new ArrayList<>();
+        this.balance = new Balance(0);
     }
 
     /**
@@ -59,7 +61,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
                   Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
-                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id, List<Note> notes) {
+                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id, List<Note> notes,
+                  Balance balance) {
         requireAllNonNull(name, phone, email, address, birthday, tags);
         this.name = name;
         this.phone = phone;
@@ -72,6 +75,7 @@ public class Person {
         this.tags.addAll(tags);
         this.id = id;
         this.notes = notes;
+        this.balance = balance;
     }
 
     public Name getName() {
@@ -136,6 +140,11 @@ public class Person {
     public Optional<Integer> getId() {
         return id;
     }
+
+    public Balance getBalance() {
+        return balance;
+    }
+
     public int setId(int id) {
         this.id = Optional.of(id);
         return id;
@@ -169,6 +178,15 @@ public class Person {
      */
     public void removeNote(int idx) {
         notes.remove(idx);
+    }
+
+    /**
+     * Sets new balance for the person by adding
+     * given amount.
+     * @param amount
+     */
+    public void pay(Balance amount) {
+        balance = balance.add(amount);
     }
 
     /**

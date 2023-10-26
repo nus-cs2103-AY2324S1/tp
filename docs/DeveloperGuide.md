@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# CampusConnect Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -203,6 +203,112 @@ A generic event system was created, even though CampusConnect only requires a sp
   * Pros: Simpler to implement, code will be more straightforward to understand as well.
   * Cons: Any future ideas to implement new notifications and events will not benefit from the existing implementation of the birthday notification system.
 
+
+### AddAlt feature
+
+#### Implementation Details
+
+The `addalt` feature involves creating a new `Person` object with additional contact details to replace the previous `Person` object.
+This is done using the `AddAltPersonDescriptor` class; `AddAltPersonDescriptor` object stores the additional contact information to be added to the previous `Person` object.
+
+As a result, the existing `Person` class in AB3's implementation is enhanced to have the capacity of containing more attributes.
+Below is a class diagram on the `Person` class and the classes related to its attributes:
+
+<puml src="diagrams/PersonClassDiagram.puml" alt="PersonClassDiagram" />
+
+The `Person` object is now composed of the following additional attributes due to the `addalt` feature:
+
+* `Email`: The secondary email address of the contact.
+* `Linkedin`: The linkedin of the contact.
+* `Telegram`: The telegram handle of the contact.
+* `Birthday`: The birthday of the contact.
+
+The [**`java.util.Optional<T>`**](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html) class is utilised to encapsulate the optional logic of the above attributes.
+
+To add these additional attributes into a `Person` object, an `INDEX` parameter, followed by the [prefixes](#prefix-summary) that represent the attributes needs to be specified for the `addalt` command.
+`INDEX` represents the index number of the contact to be edited in the contact list.
+
+<box type="info">
+
+While all the fields are optional, at least one needs to be given to the `addalt` command.
+</box>
+
+The flow for the `addalt` command is described by the following sequence diagram:
+
+<puml src="diagrams/AddAltSequenceDiagram.puml" alt="AddAltSequenceDiagram" />
+
+#### Feature details
+1. The application will validate the arguments supplied by the user; whether the `INDEX` provided is valid and each of the additional attribute input follows the pre-determined formats defined in their respective classes.
+2. If any of the inputs fails the validation check, an error message is provided with details of the input error and prompts the user for a corrected input.
+3. If all of the inputs pass the validation check, a new `Person` objected with the updated attributes is created and stored in the `AddressBook`.
+
+#### Design Considerations
+
+**Aspect: Generic design**
+
+The additional attributes to be added into a `Person` object on top of the original AB3 attributes are encapsulated into their respective classes: `Linkedin`, `Telegram` and `Birthday`. These classes are implemented similarly to the other existing attributes of `Person`, but they are modified according to the respective input patterns that model the real world.
+As these attributes are additional information for a `Person` object, every attribute has been made optional in the case when user only keys in several, but not all of the additional attributes into the command. However, the purpose of using this command only exists when users would like to add additional attributes to a `Person` in the contact list. Thus, the `addalt` command is designed to ensure that the user adds at least one of the additional attributes aforementioned.
+
+As this command merely adds additional attributes to a `Person` object, this can be done by enhancing the `add` command.
+
+* **Alternative 1 (current choice):** Create a separate command, `addalt`.
+    * Pros:
+        * Many cases of empty/*null* inputs in the optional fields need not be accounted for when saving the data and testing when a new `Person` is added by the `add` command.
+    * Cons:
+        * Inconveniences users as users have to key in two separate commands in order to add additional attributes of a `Person`.
+* **Alternative 2:** Enhance the current `add` command.
+    * Pros:
+        * Improves the user's convenience by allowing them to add both compulsory and optional attributes to a new `Person` entry.
+    * Cons:
+        * Many cases of empty/*null* inputs in the optional fields have to be accounted for when saving the data and testing.
+
+### Edit Feature
+
+#### Implementation Details
+
+The `edit` feature is similar to the implementation of [**`addalt`**](#addalt-feature); it involves creating a new `Person` object with edited contact details to replace the previous `Person` object.
+This is done using the `EditPersonDescriptor` class; `EditPersonDescriptor` object stores the contact information to be updated to the previous `Person` object.
+
+The `edit` command has similar input fields to the [**`addalt`**](#addalt-feature) command with the difference being that it is able to edit all the attributes of a `Person` object except:
+
+* `Note`: The notes of the contact. Read [**`Notes feature`**](#notes-feature) for more details.
+* `Avatar`: The profile picture of the contact. Read [**`Update photo feature`**](#update-photo-feature) for more details.
+
+<box type="info">
+
+While all the fields are optional, at least one needs to be given to the `edit` command.
+</box>
+
+#### Feature details
+1. Similar to [`addalt`](#addalt-feature), the application will validate the arguments supplied by the user; whether the `INDEX` provided is valid and each of `Person` attribute input follows the pre-determined formats defined in their respective classes. However, it also checks that the `edit` command does not update any empty additional attributes of `Person` and update `Person` object to have same primary and secondary email.
+2. If an input fails the validation check, an error message is provided which details the error and prompts the user the course of action.
+3. If the input passes the validation check, the application checks if the corresponding `Person` and the new `Person` object with the edited attributes is the same.
+4. If the check fails, user will be prompted that current `edit` command does not update the `Person` object.
+5. Otherwise, a new `Person` objected with the updated attributes is created and stored in the `AddressBook`.
+
+The following activity diagram shows the logic of a user using the `edit` command:
+
+<puml src="diagrams/EditActivityDiagram.puml" alt="EditActivityDiagram" />
+
+The flow for the `edit` command is described by the following sequence diagram:
+
+<puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
+
+#### General Design Considerations
+Since `edit` command updates attributes of a `Person` object, setting the values directly to the `Person` object could be another viable option.
+
+* **Alternative 1 (Current choice):** Create a new `Person` object.
+    * Pros:
+        * Guarantees immutability of `Person` class, reducing possible bugs.
+    * Cons:
+        * Performance overhead; a `Person` object is always created even if for instance, only one attribute of `Person` object is changed.
+
+* **Alternative 2:** Set the edited attributes to the existing `Person` object.
+    * Pros:
+        * Minimal performance overhead; less memory usage.
+    * Cons:
+        * More bug prone.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -292,6 +398,156 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Notes feature
+
+#### 1. NoteCommand
+**Purpose:**
+The NoteCommand is used to add a note to a specific person in the Address Book.
+
+**Class Description:**
+- `NoteCommand`: This class extends `Command` and is responsible for the logic of adding a note.
+- `Index`: This is used to store the index of the person in the filtered person list to whom the note will be added.
+- `Note`: This is used to store the content of the note to be added.
+
+**Logic Flow:**
+1. The user inputs a command to add a note, specifying the index of the person and the content of the note.
+2. The `NoteCommandParser` parses the user input and creates a new `NoteCommand` object.
+3. The `execute` method of `NoteCommand` is called.
+4. The method retrieves the list of all persons and checks if the provided index is valid.
+5. If the index is valid, it retrieves the person at the specified index and adds the note to this person.
+6. Finally, a `CommandResult` is returned, indicating that the note has been successfully added.
+
+**Key Methods:**
+- `NoteCommand(Index index, Note note)`: Constructor to initialize the command with the specified index and note.
+- `execute(Model model)`: Adds the note to the person at the specified index in the model's filtered person list.
+
+#### 2. RemoveNoteCommand
+**Purpose:**
+The RemoveNoteCommand is used to remove a note from a specific person in the Address Book based on the index of the person and the index of the note.
+
+**Class Description:**
+- `RemoveNoteCommand`: This class extends `Command` and is responsible for the logic of removing a note.
+- `Index`: The first index refers to the person in the filtered person list, and the second index refers to the note to be removed.
+
+**Logic Flow:**
+1. The user inputs a command to remove a note, specifying the index of the person and the index of the note.
+2. The `RemoveNoteCommandParser` parses the user input and creates a new `RemoveNoteCommand` object.
+3. The `execute` method of `RemoveNoteCommand` is called.
+4. The method retrieves the list of all persons and checks if the provided indexes are valid.
+5. If the indexes are valid, it retrieves the person and note at the specified indexes and removes the note from this person.
+6. Finally, a `CommandResult` is returned, indicating that the note has been successfully removed.
+
+**Key Methods:**
+- `RemoveNoteCommand(Index indexPerson, Index indexNote)`: Constructor to initialize the command with the specified indexes.
+- `execute(Model model)`: Removes the note from the person at the specified index in the model's filtered person list.
+
+#### 3. Person
+**Key Modifications:**
+- `List<Note> notes`: A list to store notes associated with the person.
+- `addNote(Note note)`: Adds a note to the person.
+- `removeNote(int idx)`: Removes a note from the person at the specified index.
+
+### User Interface Implementation for Notes Feature
+
+The Notes feature in the application is implemented using a combination of JavaFX components. Below is a detailed explanation of the development and testing of the UI components relevant to this feature.
+
+#### 1. `PersonCard` UI Component
+
+The `PersonCard` UI component is responsible for displaying individual person's details. It is implemented using FXML and its associated controller class. The relevant parts for the Notes feature are:
+
+- **FXML**: The layout of the `PersonCard` includes a Button component (`notesButton`) for accessing the notes of a person. This button is placed in a VBox in the second column of a GridPane.
+
+  ```xml
+  <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
+    <Region VBox.vgrow="ALWAYS" />
+    <Button fx:id="notesButton" onAction="#handleNotesButtonClick" text="Notes (0)" />
+  </VBox>
+  ```
+
+- **Controller**: In the `PersonCard` controller, there is a method `handleNotesButtonClick()`, which is called when the Notes button is clicked. This method creates a new instance of `NotesWindow` and shows it.
+
+  ```java
+  @FXML
+  public void handleNotesButtonClick() {
+      try {
+          NotesWindow notesWindow = new NotesWindow(person);
+          notesWindow.show();
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+  }
+  ```
+
+#### 2. `NotesWindow` UI Component
+
+The `NotesWindow` UI component is used to display the notes of a person in a new window.
+
+- **FXML**: It consists of a `ListView` (`notesListView`) to list the notes and a Button to close the window.
+
+  ```xml
+  <ListView fx:id="notesListView" />
+  <Button text="Close" onAction="#handleClose" />
+  ```
+
+- **Controller**: The controller class manages the population of the `ListView` with the notes from the person object and handles the closing of the window.
+
+  ```java
+  public class NotesWindow extends UiPart<Stage> {
+      //...
+      private void populateListView(List<Note> notes) {
+          ObservableList<String> notesObservableList = FXCollections.observableArrayList();
+          for (Note note : notes) {
+              notesObservableList.add(note.toString());
+          }
+          notesListView.setItems(notesObservableList);
+      }
+  
+      @FXML
+      void handleClose() {
+          Stage stage = (Stage) notesListView.getScene().getWindow();
+          stage.close();
+      }
+      //...
+  }
+  ```
+
+#### Testing
+
+For testing the UI components, we use TestFX.
+
+- `NotesWindowTest`: This test class ensures that the `NotesWindow` UI component is functioning as expected.
+
+  ```java
+  public class NotesWindowTest extends ApplicationTest {
+      //...
+      @Test
+      public void testNotesDisplay() {
+          List<String> expectedNotes = Arrays.asList("Likes to swim", "Likes to run", "Is a chad");
+          verifyThat("#notesListView", hasItems(3));
+          assertTrue(notesWindow.getNotesListView().getItems().containsAll(expectedNotes));
+      }
+
+      @Test
+      public void testIsShowing() {
+          assertTrue(notesWindow.isShowing());
+          interact(() -> notesWindow.hide());
+          assertFalse(notesWindow.isShowing());
+      }
+
+      @Test
+      public void testHandleClose() {
+          interact(() -> notesWindow.handleClose());
+          assertFalse(notesWindow.isShowing());
+      }
+      //...
+  }
+  ```
+
+In the tests, we verify that the `NotesWindow` displays the correct number of notes, that it reacts correctly to interactions, and that it properly closes when the close button is clicked.
+
+Ensure that you replace the actual code and XML content if it changes in the future to keep the documentation up to date.
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -359,14 +615,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System requests for confirmation.
 3. User confirms.
 4. System opts out the user from receiving notifications. <br>
-Use case ends. 
+Use case ends.
 
 **Extensions**
    * 1a. System detects an error in data entered.
      * 1a1. System shows the correct format for request.
-     * 1a2. User enters a new opt out request. 
-     
-     Steps 1a1-1a2 are repeated until the data entered are correct. <br> 
+     * 1a2. User enters a new opt out request.
+
+     Steps 1a1-1a2 are repeated until the data entered are correct. <br>
      Use case resumes from step 4.
 
 **Use case: UC2 - List contacts**
@@ -381,16 +637,16 @@ Use case ends.
 **MSS**
 1. User <ins>lists all contacts (UC2).</ins>
 2. User enters an index to delete contact as an emergency contact.
-3. System deletes contact from the emergency contact list. <br> 
+3. System deletes contact from the emergency contact list. <br>
 Use case ends.
 
 **Extensions**
-* 1a. System shows an empty contact list. 
+* 1a. System shows an empty contact list.
 Use case ends.
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
-  * 2a2. User enters a new delete request. <br> 
-  Steps 2a1- 2a2 are repeated until the data entered are correct. <br> 
+  * 2a2. User enters a new delete request. <br>
+  Steps 2a1- 2a2 are repeated until the data entered are correct. <br>
   Use case resumes from step 3.
 
 **Use case: UC4 - Delete contact**
@@ -402,12 +658,12 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 1a. System shows an empty contact list. 
+* 1a. System shows an empty contact list.
 Use case ends.
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
   * 2a2. User enters a new delete request. <br>
-  Steps 2a1- 2a2 are repeated until the data entered are correct. <br> 
+  Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
   Use case resumes from step 3.
 
 **Use Case UC5: Add emergency contact**
@@ -435,11 +691,11 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed. 
-2. Able to hold up to 1000 contacts without a compromise in performance. 
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-4. Should respond within 1 second for any command the user inputs 
-5. Should be easy to use and navigate for the users. 
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Able to hold up to 1000 contacts without a compromise in performance.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should respond within 1 second for any command the user inputs
+5. Should be easy to use and navigate for the users.
 6. Should be able to accommodate growth and expansion. It should be easy to add new features and functionalities as needed. 
 7. Should be easy to maintain and update through a clear and well-documented architecture, and it should be easy to troubleshoot and fix problems should they arise. 
 8. Data stored should be persistent until removal by the user, and all contact details should be secure. 
@@ -454,6 +710,20 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+
+### Prefix summary
+
+| Prefix | Meaning                        | Example                          |
+|--------|--------------------------------|----------------------------------|
+| n/     | Name of contact                | `n/John Doe`                     |
+| p/     | Phone number of contact        | `p/98765432`                     |
+| e/     | Email of contact               | `e/johndoe@gmail.com`            |
+| a/     | Address of contact             | `a/16 Bukit Timah Road, S156213` |
+| t/     | Tags of contact                | 'friend'                         |
+| li/    | Linkedin of contact            | `li/john-doe`                    |
+| tg/    | Telegram handle of contact     | `tg/@johndoe`                    |
+| e2/    | Secondary email of contact     | `e2/johndoe@hotmail.com`         |
+| b/     | Birthday of contact            | `b/23/10`                        |
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -19,6 +19,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.commands.OweCommand;
+import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.commands.RemoveNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Note;
@@ -106,4 +108,15 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+    @Test
+    public void parseCommand_pay() throws Exception {
+        assertTrue(parser.parseCommand("pay 1 2.50") instanceof PayCommand);
+    }
+
+    @Test
+    public void parseCommand_owe() throws Exception {
+        assertTrue(parser.parseCommand("owe 1 2.50") instanceof OweCommand);
+    }
+
 }
