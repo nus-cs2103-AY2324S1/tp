@@ -13,7 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSchedules.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +45,9 @@ public class EditTutorCommandTest {
             Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        Person oldPerson = model.getFilteredPersonList().get(0);
+        expectedModel.updateTutorSchedules(oldPerson, editedPerson);
+        expectedModel.setPerson(oldPerson, editedPerson);
 
         assertCommandSuccess(editTutorCommand, model, expectedMessage, expectedModel);
     }
@@ -66,6 +68,7 @@ public class EditTutorCommandTest {
             Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateTutorSchedules(lastPerson, editedPerson);
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editTutorCommand, model, expectedMessage, expectedModel);
@@ -97,7 +100,9 @@ public class EditTutorCommandTest {
             Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        Person oldPerson = model.getFilteredPersonList().get(0);
+        expectedModel.updateTutorSchedules(oldPerson, editedPerson);
+        expectedModel.setPerson(oldPerson, editedPerson);
 
         assertCommandSuccess(editTutorCommand, model, expectedMessage, expectedModel);
     }
