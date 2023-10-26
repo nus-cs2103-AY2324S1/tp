@@ -37,8 +37,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label remark;
-    @FXML
     private Label email;
     @FXML
     private Label status;
@@ -59,7 +57,6 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         LocalDateTime time = person.getLastContactedTime();
         lastContactedTime.setText(time.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm")));
-        remark.setText(person.getRemark().value);
         status.setText(person.getStatus().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

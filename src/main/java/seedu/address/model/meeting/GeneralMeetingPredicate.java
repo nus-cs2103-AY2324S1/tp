@@ -1,5 +1,7 @@
 package seedu.address.model.meeting;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 /**
@@ -30,6 +32,24 @@ public class GeneralMeetingPredicate implements Predicate<Meeting> {
         this.meetingTimePredicate = meetingTimePredicate;
         this.attendeePredicate = attendeePredicate;
         this.tagPredicate = tagPredicate;
+    }
+
+    /**
+     * Constructs a predicate class that fulfills all the argument predicates
+     * @param titleKeyWords String array that will be used to construct TitleContainsKeywordsPredicate
+     * @param locationKeyWords String array that will be used to construct LocationContainsKeywordsPredicate
+     * @param start The start time of MeetingTimeContainsPredicate
+     * @param end the end time of MeetingTimeContainsPredicate
+     * @param attendeeKeyWords String array that will be used to construct AttendeeContainsKeywordsPredicate
+     * @param tagKeyWords String array that will be used to construct TagContainsKeywordsPredicate
+     */
+    public GeneralMeetingPredicate(String[] titleKeyWords, String[] locationKeyWords, LocalDateTime start,
+                                           LocalDateTime end, String[] attendeeKeyWords, String[] tagKeyWords) {
+        this.titlePredicate = new TitleContainsKeywordsPredicate(Arrays.asList(titleKeyWords));
+        this.locationPredicate = new LocationContainsKeywordsPredicate(Arrays.asList(locationKeyWords));
+        this.meetingTimePredicate = new MeetingTimeContainsPredicate(start, end);
+        this.attendeePredicate = new AttendeeContainsKeywordsPredicate(Arrays.asList(attendeeKeyWords));
+        this.tagPredicate = new TagContainsKeywordsPredicate(Arrays.asList(tagKeyWords));
     }
 
     @Override

@@ -5,9 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.FORMAT;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -24,8 +22,8 @@ import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
 public class FindMeetingCommandParserTest {
 
     private FindMeetingCommandParser parser = new FindMeetingCommandParser();
-    private LocalDateTime start = LocalDateTime.of(LocalDate.of(0001, 01, 01), LocalTime.of(00, 00));
-    private LocalDateTime end = LocalDateTime.of(LocalDate.of(9999, 12, 31), LocalTime.of(23, 59));
+    private LocalDateTime start = LocalDateTime.MIN;
+    private LocalDateTime end = LocalDateTime.MAX;
     @Test
     public void parse_nonEmptyPreambleArg_throwsParseException() {
         assertParseFailure(parser, " dfvuv m/CS2103T",
