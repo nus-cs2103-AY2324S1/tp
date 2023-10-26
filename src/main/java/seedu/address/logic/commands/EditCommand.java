@@ -87,7 +87,6 @@ public class EditCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            logger.log(Level.WARNING, "Duplicate person found after editing");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 

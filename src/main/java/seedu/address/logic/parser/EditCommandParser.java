@@ -95,7 +95,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            logger.log(Level.WARNING, "No fields to edit provided in edit command: {0}", args);
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
