@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ShortcutAlias {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Aliases should only contain alphanumeric characters and should not be blank!\n"
+            "Shortcuts should only contain alphanumeric characters and should not be blank!\n"
                     + "It should also not match any default command keywords.";
 
     /*
