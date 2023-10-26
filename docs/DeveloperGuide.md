@@ -252,6 +252,13 @@ The following sequence diagram shows how the add attendee operation works:
 A Person object can be obtained from a Meeting's list of attendees by searching through `UniquePersonList`
 for a `Person` with a name matching `attendeeName`.
 
+### Remove attendee feature
+User can specify an Attendee to remove from a specified Meeting by specifying its index in the list of Attendees. 
+This is the main motivation behind using a LinkedHashSet for the implementation of the Attendee Set. 
+
+The following sequence diagram shows how the remove attendee operation works:
+
+![RemoveAttendeeSequenceDiagram](images/RemoveAttendeeSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
