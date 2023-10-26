@@ -123,7 +123,7 @@ public class ParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         if (!Remark.isValidRemark(trimmedRemark)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedRemark);
     }

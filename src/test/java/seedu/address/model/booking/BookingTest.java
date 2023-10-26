@@ -100,6 +100,7 @@ public class BookingTest {
                 + ", name=" + ALICE.getName()
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
+                + ", remark=" + ALICE.getRemark()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

@@ -16,7 +16,7 @@ public class Remark {
      * This regex matches an empty string (i.e., an optional remark) or
      * a string of 0 to 500 characters/spaces.
      */
-    public static final String VALIDATION_REGEX = "^$|.{0,500}";
+    public static final String VALIDATION_REGEX = "^$|.{1,50}";
 
     public final String value;
 
@@ -27,6 +27,9 @@ public class Remark {
      */
     public Remark(String remark) {
         requireNonNull(remark);
+        if (!isValidRemark(remark)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         checkArgument(isValidRemark(remark), MESSAGE_CONSTRAINTS);
         value = remark;
     }

@@ -47,7 +47,7 @@ public class AddCommand extends Command {
     public static final List<Prefix> PREFIXES = List.of(PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME, PREFIX_PHONE,
             PREFIX_EMAIL, PREFIX_REMARK, PREFIX_TAG);
     public static final List<String> EXAMPLES = List.of("1", "2023-01-01 08:00 to 2023-01-02 12:00", "John Doe",
-            "98765432", "johnd@example.com", "Requested extra Queen's size bed", "friends");
+            "98765432", "johnd@example.com", "Requested extra Queen's sized bed", "friends");
 
     public static final String MESSAGE_SUCCESS = "New booking added: %1$s";
     public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in the bookings book";

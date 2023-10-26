@@ -54,13 +54,18 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_REMARK);
+                PREFIX_EMAIL);
         Room room = ParserUtil.parseRoom(argMultimap.getValue(PREFIX_ROOM).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         BookingPeriod bookingPeriod = ParserUtil.parseBookingPeriod(argMultimap.getValue(PREFIX_BOOKING_PERIOD).get());
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        Remark remark;
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        } else {
+            remark = new Remark("N/A");
+        }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Booking booking = new Booking(room, bookingPeriod, name, phone, email, remark, tagList);

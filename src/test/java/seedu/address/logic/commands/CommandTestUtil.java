@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -37,6 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_BOOKING_PERIOD_AMY = "2023-01-01 08:00 to 2023-01-02 12:00";
     public static final String VALID_BOOKING_PERIOD_BOB = "2023-01-03 16:00 to 2023-01-04 23:59";
+    public static final String VALID_REMARK_AMY = "Requested Extra Towels";
+    public static final String VALID_REMARK_BOB = "N/A";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -50,6 +53,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String BOOKING_PERIOD_DESC_AMY = " " + PREFIX_BOOKING_PERIOD + VALID_BOOKING_PERIOD_AMY;
     public static final String BOOKING_PERIOD_DESC_BOB = " " + PREFIX_BOOKING_PERIOD + VALID_BOOKING_PERIOD_BOB;
+    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
+    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -71,12 +76,16 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withRoom(VALID_ROOM_AMY)
                 .withBookingPeriod(VALID_BOOKING_PERIOD_AMY)
                 .withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY)
+                .withRemark(VALID_REMARK_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withRoom(VALID_ROOM_BOB)
                 .withBookingPeriod(VALID_BOOKING_PERIOD_BOB)
                 .withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withRemark(VALID_REMARK_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
