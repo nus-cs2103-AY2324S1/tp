@@ -162,7 +162,7 @@
 }
 
 .check-box:selected .box {
-    -fx-background-color: derive(#2e4a8a, 50%);
+    -fx-background-color: derive(#34549a, 50%);
 }
 
 .stack-pane {
@@ -170,7 +170,7 @@
 }
 
 .status-bar {
-    -fx-background-color: derive(#2e4a8a, 50%);
+    -fx-background-color: derive(#34549a, 50%);
 }
 
 .status-bar .label {
