@@ -266,13 +266,13 @@ Given below is an example usage scenario and how the recall recent commands feat
 Step 1. The user launches the application for the first time. The `CommandStringStash` will be initialised
 with no command strings and a `currentCmdIndex` of 1.
 
-![Recall Step 1](/images/RecallStep1.png)
+![Recall Step 1](images/RecallStep1.png)
 
 Step 2. The user executes the `list -sp` command to list the specialists in DoConnek Pro. Upon success,
 `Logic#addCommandString("list -sp")` is called, adding this command string to the `CommandStringStash` and moving the
 `currentCmdIndex` to point to right after the element added.
 
-![Recall Step 2](/images/RecallStep2.png)
+![Recall Step 2](images/RecallStep2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **note:** After an addition, the `currentCmdIndex` is set to point
 one index after the last element in the `CommandStringStash`. The `Logic#getPrevCommandString` method decrements
@@ -284,21 +284,21 @@ so the user starts to cycle from the most recently added command again.
 Step 3. The user executes two more commands `help` and `delete 1` in the respective order. As before, the 
 `CommandStringStash` is updated appropriately.
 
-![Recall Step 3](/images/RecallStep3.png)
+![Recall Step 3](images/RecallStep3.png)
 
 The following activity diagram summarises what happens when a user executes a command.
 
-![Add Command String](/images/AddCommandStringActivityDiagram.png)
+![Add Command String](images/AddCommandStringActivityDiagram.png)
 
 Step 4. The user wants to list the patients in DoConnek Pro but forgot how to do so. They decide to execute the `help`
 command. To do so efficiently, they press the up arrow on the keyboard to recall the `help` command they recently entered.
 This results in `Logic#getPrevCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
 
-![Recall Step 4](/images/RecallStep4.png)
+![Recall Step 4](images/RecallStep4.png)
 
 The following sequence diagram shows how this recalling of the previous command string works.
 
-![Recall Command Sequence Diagram](/images/RecallCommandSequenceDiagram.png)
+![Recall Command Sequence Diagram](images/RecallCommandSequenceDiagram.png)
 
 To cycle forward in history, a similar sequence is followed, but `Logic#getPassedCommandString` and its
 corresponding methods are called instead.
@@ -306,17 +306,17 @@ corresponding methods are called instead.
 Step 5. The user presses the up arrow again, and this time `Logic#getPrevCommandString` returns `help` which is displayed
 on the user's CLI, so they can execute `help` easily.
 
-![Recall Step 5](/images/RecallStep5.png)
+![Recall Step 5](images/RecallStep5.png)
 
 The following activity diagram summarises what happens when a user presses the up arrow.
 
-![Up Arrow Activity Diagram](/images/UpArrowActivityDiagram.png)
+![Up Arrow Activity Diagram](images/UpArrowActivityDiagram.png)
 
 Step 6. The user realises they don't need help and actually want to delete the first specialist currently displayed.
 They press the down arrow on the keyboard to recall the `delete 1` command they just passed.
 This results in `Logic#getPrevCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
 
-![Recall Step 6](/images/RecallStep6.png)
+![Recall Step 6](images/RecallStep6.png)
 
 
 
