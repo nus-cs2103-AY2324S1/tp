@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -18,21 +19,21 @@ public class AbsentFromTutorialPredicateTest {
     public void test_absentFromTutorialNum_returnsTrue() {
         // With person absent
         AbsentFromTutorialPredicate predicate = new AbsentFromTutorialPredicate(
-                Index.fromOneBased(1), new Tag("G02"));
+                new Week(1), Optional.of(new Tag("G02")));
         Person person = new PersonBuilder().withTags("G02").build();
         person.addAttendance(new Attendance(new Week(1), false, "Sick"));
         assertTrue(predicate.test(person));
 
         // Ignore case
         AbsentFromTutorialPredicate predicate2 = new AbsentFromTutorialPredicate(
-                Index.fromOneBased(1), new Tag("G02"));
+                new Week(1), Optional.of(new Tag("G02")));
         Person person2 = new PersonBuilder().withTags("g02").build();
         person2.addAttendance(new Attendance(new Week(1), false, "Sick"));
         assertTrue(predicate2.test(person2));
 
         // With no tag
         AbsentFromTutorialPredicate predicate3 = new AbsentFromTutorialPredicate(
-                Index.fromOneBased(1), new Tag("PLACEHOLDER"));
+                new Week(1), Optional.empty());
         Person person3 = new PersonBuilder().withTags("G10").build();
         person3.addAttendance(new Attendance(new Week(1), false, "Sick"));
         assertTrue(predicate3.test(person3));
@@ -42,14 +43,14 @@ public class AbsentFromTutorialPredicateTest {
     public void test_absentFromTutorialNum_returnsFalse() {
         // With person not absent
         AbsentFromTutorialPredicate predicate = new AbsentFromTutorialPredicate(
-                Index.fromOneBased(1), new Tag("CS2103T"));
-        Person person = new PersonBuilder().withTags("CS2103T").build();
+                new Week(1), Optional.of(new Tag("G01")));
+        Person person = new PersonBuilder().withTags("G01").build();
         person.addAttendance(new Attendance(new Week(1), true));
         assertFalse(predicate.test(person));
 
         // With multiple attendances
         AbsentFromTutorialPredicate predicate2 = new AbsentFromTutorialPredicate(
-                Index.fromOneBased(3), new Tag("CS2103T"));
+                new Week(1), Optional.of(new Tag("G01")));
         Person person2 = new PersonBuilder().withTags("CS2103T").build();
         person2.addAttendance(new Attendance(new Week(1), false, "Late"));
         person2.addAttendance(new Attendance(new Week(1), true));
@@ -58,8 +59,8 @@ public class AbsentFromTutorialPredicateTest {
 
         // With wrong tag
         AbsentFromTutorialPredicate predicate3 = new AbsentFromTutorialPredicate(
-                Index.fromOneBased(1), new Tag("CS2103T"));
-        Person person3 = new PersonBuilder().withTags("CS2030S").build();
+                new Week(1), Optional.of(new Tag("G01")));
+        Person person3 = new PersonBuilder().withTags("G02").build();
         person.addAttendance(new Attendance(new Week(1), false, "Late"));
         assertFalse(predicate3.test(person3));
     }
@@ -67,19 +68,19 @@ public class AbsentFromTutorialPredicateTest {
 
     @Test
     public void equals() {
-        Tag firstTag = new Tag("first");
-        Tag secondTag = new Tag("second");
-        Index firstIndex = Index.fromZeroBased(1);
-        Index secondIndex = Index.fromZeroBased(2);
+        Optional<Tag> firstTag = Optional.of(new Tag("first"));
+        Optional<Tag> secondTag = Optional.of(new Tag("second"));
+        Week firstWeek = new Week(1);
+        Week secondWeek = new Week(2);
 
-        AbsentFromTutorialPredicate firstPredicate = new AbsentFromTutorialPredicate(firstIndex, firstTag);
-        AbsentFromTutorialPredicate secondPredicate = new AbsentFromTutorialPredicate(secondIndex, secondTag);
+        AbsentFromTutorialPredicate firstPredicate = new AbsentFromTutorialPredicate(firstWeek, firstTag);
+        AbsentFromTutorialPredicate secondPredicate = new AbsentFromTutorialPredicate(secondWeek, secondTag);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        AbsentFromTutorialPredicate firstPredicateCopy = new AbsentFromTutorialPredicate(firstIndex, firstTag);
+        AbsentFromTutorialPredicate firstPredicateCopy = new AbsentFromTutorialPredicate(firstWeek, firstTag);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -94,20 +95,20 @@ public class AbsentFromTutorialPredicateTest {
 
     @Test
     public void create() {
-        Tag tag = Tag.create("CS2103T T02");
-        Index index = Index.fromZeroBased(0);
-        AbsentFromTutorialPredicate predicate = AbsentFromTutorialPredicate.create(index, tag);
+        Tag tag = Tag.create("T02");
+        Week week = new Week(1);
+        AbsentFromTutorialPredicate predicate = AbsentFromTutorialPredicate.create(week, Optional.of(tag));
 
-        AbsentFromTutorialPredicate expected = new AbsentFromTutorialPredicate(index, tag);
+        AbsentFromTutorialPredicate expected = new AbsentFromTutorialPredicate(week, Optional.of(tag));
         assertEquals(expected, predicate);
     }
 
     @Test
     public void toStringMethod() {
-        Tag tag = Tag.create("CS2103T T02");
-        Index index = Index.fromZeroBased(0);
-        AbsentFromTutorialPredicate predicate = AbsentFromTutorialPredicate.create(index, tag);
+        Tag tag = Tag.create("T02");
+        Week week = new Week(1);
+        AbsentFromTutorialPredicate predicate = AbsentFromTutorialPredicate.create(week, Optional.of(tag));
 
-        assertEquals("Attendance Filter: " + index + " " + tag.getTagName(), predicate.toString());
+        assertEquals("Attendance Filter: " + week + " " + tag.getTagName(), predicate.toString());
     }
 }

@@ -1,5 +1,7 @@
 package seedu.address.model.predicate;
 
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,7 +12,7 @@ import seedu.address.model.tag.Tag;
  * Tests that a {@code Person}'s {@code Tag} matches the tag given.
  */
 public class ContainsTagPredicate extends SerializablePredicate {
-    private final Tag tag;
+    private final Optional<Tag> tag;
 
 
     /**
@@ -18,14 +20,14 @@ public class ContainsTagPredicate extends SerializablePredicate {
      *
      * @param tag Tag to check for in a person.
      */
-    public ContainsTagPredicate(Tag tag) {
+    public ContainsTagPredicate(Optional<Tag> tag) {
         super(person -> person.getTags().stream().anyMatch(
-                personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.getTagName())));
+                personTag -> StringUtil.containsWordIgnoreCase(personTag.getTagName(), tag.get().getTagName())));
         this.tag = tag;
     }
 
     @JsonCreator
-    public static ContainsTagPredicate create(@JsonProperty("tag") Tag tag) {
+    public static ContainsTagPredicate create(@JsonProperty("tag") Optional<Tag> tag) {
         return new ContainsTagPredicate(tag);
     }
 
@@ -51,6 +53,6 @@ public class ContainsTagPredicate extends SerializablePredicate {
 
     @Override
     public String toString() {
-        return "Tag Filter: " + tag.getTagName();
+        return "Tag Filter: " + tag.get().getTagName();
     }
 }

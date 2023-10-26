@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
@@ -26,11 +28,11 @@ public class DeleteCommandParserTest {
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
 
-        Tag placeholder = new Tag("PLACEHOLDER");
-        assertParseSuccess(parser, "all", new DeleteCommand(placeholder, new ContainsTagPredicate(placeholder)));
+        Optional<Tag> tag = Optional.empty();
+        assertParseSuccess(parser, "all", new DeleteCommand(tag, new ContainsTagPredicate(tag)));
 
-        Tag tag = new Tag("G10");
-        assertParseSuccess(parser, "all tg/G10", new DeleteCommand(tag, new ContainsTagPredicate(tag)));
+        Optional<Tag> tag2 = Optional.of(new Tag("G10"));
+        assertParseSuccess(parser, "all tg/G10", new DeleteCommand(tag2, new ContainsTagPredicate(tag)));
     }
 
     @Test

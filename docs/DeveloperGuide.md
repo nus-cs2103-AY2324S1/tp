@@ -154,6 +154,38 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### List features
+Two types of list commands, `list students` and `list attendance`, have been implemented.
+`list students` allows users to return to the full list of students.
+`list attendance` allows users to view a summary of the attendances for each week.
+
+#### Implementation
+Both list commands are parsed with `ListCommandParser`. If parsed successfully, it returns either
+a `ListStudentsCommand` or `ListAttendanceCommand`.
+
+The following is a class diagram depicting `ListCommand`, `ListStudentsCommand` and `ListAttendanceCommand`:
+![ListCommandClassDiagram](images/ListCommandClassDiagram.png)
+
+Shown below is the sequence diagram of `ListStudentsCommand` when `list students` is entered by the User:
+![ListStudentsSeqDiagram](images/ListStudentsSeqDiagram.png)
+
+The following sequence diagram shows how `ListAttendanceCommand` works:
+![ListAttendanceSeqDiagram](images/ListAttendanceSeqDiagram.png)
+In this example, the user enters `list attendance w/1 tg/G2`.
+
+#### Design considerations:
+**Aspect: Class Structure of ListCommands:**
+
+* **Alternative 1 (current choice):** Separating ListAttendanceCommand and ListStudentsCommand into two classes that extend from ListCommand.
+    * Pros: Improves OOP, allows for additional List commands.
+    * Cons: ListCommand currently does not have any functionality, might be redundant.
+* **Alternative 2:** Only using ListCommand, splitting Attendance and Students into the 2 cases.
+    * Pros: Simplifies class structure.
+    * Cons: Reduces OOP and extensibility.
+
+_{more aspects and alternatives to be added}_
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -313,28 +345,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User creates a new contact. 
+1. User creates a new contact.
 
     Use case ends.
-    
 
 **Extensions**
 
-1a. User edits the contact name. 
+1a. User edits the contact name.
 
-1b. User edits the Module Code associated with the contact. 
+1b. User edits the Module Code associated with the contact.
 
 1c. User edits the Tutorial Group Number associated with the contact.
 
     Use case ends.
-    
+
 
 **Use case: UC02 - View Summary of Attendance Records**
 
 **MSS**
 
-1.  User requests to view a summary of attendance records and enters a tutorial group ID.
-2.  TAvigator shows a summary of attendance records for the corresponding tutorial group.
+1.  User requests to view a summary of attendance records and enters a week and a tutorial group ID.
+2.  TAvigator shows a summary of attendance records for the corresponding week and tutorial group.
 
     Use case ends.
 
@@ -348,7 +379,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 2b. User leaves the tutorial group ID blank.
-    * 2b1. TAvigator shows a summary of all attendance records.
+    * 2b1. TAvigator shows a summary of all attendance records for the week and the contact list of absentees.
+
+      Use case ends.
+
+
+* 2c. User leaves the week blank.
+    * 2c1. TAvigator shows an error message.
 
       Use case ends.
 
@@ -356,8 +393,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to view a list of students and enters a tutorial group ID.
-2.  TAvigator shows a list of students in the corresponding tutorial group.
+1.  User requests to view a list of students.
+2.  TAvigator shows a list of all students.
 
     Use case ends.
 
@@ -447,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. TAvigator removes all applied filters.
 
       Use case ends.
-      
+
 **Use case: UC07 - Search For Contacts via Student Name or ID**
 
 **MSS**

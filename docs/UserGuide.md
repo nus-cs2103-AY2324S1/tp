@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-TAvigator is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still 
-having the benefits of a Graphical User Interface (GUI). If you can type fast, TAvigator can get your contact management 
+TAvigator is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still
+having the benefits of a Graphical User Interface (GUI). If you can type fast, TAvigator can get your contact management
 tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -89,7 +89,7 @@ Examples:
 
 ### Marking attendance of student: `mark`
 
-Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER 
+Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER
 [r/REASON_OF_ABSENCE]`
 * Marks the attendance of one or more student corresponding to the `STUDENT_NAME` or `STUDENT_ID`.
 * To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
@@ -113,13 +113,13 @@ Shows a summary of attendance records including list of absentees.
 
 ![list attendance](images/listAttendance.png)
 
-Format: `list attendance tn/TUTORIALNUMBER [tg/TUTORIALGROUPID]`
-*  Shows a list of absentees and summary of the attendance records of all students or students corresponding to the specified tutorial group for the specified tutorial number.
+Format: `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]`
+*  Shows a list of absentees and summary of the attendance records of all students or students corresponding to the specified tutorial group for the specified week number.
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-*  `list attendance tn/1` Shows a summary of attendance records of all students for Tutorial #1.
-*  `list attendance tn/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Tutorial #3.
+*  `list attendance w/1` Shows a summary of attendance records of all students for Week 1.
+*  `list attendance w/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Week 3.
 
 ### Searching for student's contact via keyword : `find`
 
@@ -302,4 +302,3 @@ _Details coming soon ..._
 | **List**   | `list attendance tn/TUTORIALNO [tg/TUTORIALGROUPID]` `list students`                                                                                                                                            |                                                           |
 | **Help**   | `help`                                                                                                                                                                                                          |
 | **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \| id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
-

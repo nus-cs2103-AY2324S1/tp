@@ -9,6 +9,10 @@ bin/
 /out/
 /*.iml
 
+# docs IDEA files
+/docs/
+.idea/*
+
 # Storage/log files
 /data/
 /config.json
