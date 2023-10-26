@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class Person {
+  -Appointment: appointment
+  +gatherEmailsContainsFinancialPlan(): String
+  +gatherEmailsContainsTag(): String
+}
+
+Class SortCommandParser {
+  +parse(String args): SortCommand
+}
+
+Class SortCommand {
+  -Comparator<Person> comparator
+  +SortCommand(Comparator<Person> comparator)
+  +execute(): CommandResult
+}
+
+package "Sort" {
+    Class "<<interface>>\nGatherEmailPrompt" as GatherEmailPrompt {
+      +gatherEmails(Person person): void
+    }
+
+    Class GatherEmailByFinancialPlan {
+      - promptFp: String
+      +gatherEmails(Person person): void
+    }
+
+    Class GatherEmailByTag {
+      - promptTag: String
+      +gatherEmails(Person person): void
+    }
+}
+
+SortCommandParser --> SortCommand
+GatherCommand  -right-> "1" GatherEmailPrompt
+GatherEmailByFinancialPlan .up.|>  GatherEmailPrompt
+GatherEmailByTag .up.|> GatherEmailPrompt
+GatherEmailPrompt .right.> "1" Person
+@enduml
