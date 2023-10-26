@@ -42,4 +42,19 @@ public class ContactID {
     public String toString() {
         return String.valueOf(this.id);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ContactID)) {
+            return false;
+        }
+
+        ContactID otherContactID = (ContactID) other;
+        return id == otherContactID.id;
+    }
 }

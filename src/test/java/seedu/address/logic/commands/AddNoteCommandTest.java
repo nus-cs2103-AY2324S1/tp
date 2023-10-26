@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.note.Note;
+import seedu.address.model.person.ContactID;
 
 public class AddNoteCommandTest {
 
@@ -35,16 +36,16 @@ public class AddNoteCommandTest {
 
     @Test
     public void execute_correctCommand_success() throws CommandException {
-        int personId = 1;
-        assertCommandSuccessWithFeedback(() -> new AddNoteCommand(personId, VALID_NOTE_0)
+        ContactID contactId = ContactID.fromInt(1);
+        assertCommandSuccessWithFeedback(() -> new AddNoteCommand(contactId, VALID_NOTE_0)
                 .execute(model), AddNoteCommand.MESSAGE_SUCCESS + VALID_NOTE_0.getTitle());
     }
 
     @Test
     public void execute_personNotExist_fails() throws CommandException {
-        int personId = 99999;
-        assertCommandFailWithFeedback(() -> new AddNoteCommand(personId, VALID_NOTE_SAME_TITLE_0)
-                .execute(model), AddNoteCommand.MESSAGE_PERSON_NOT_FOUND + personId);
+        ContactID contactId = ContactID.fromInt(99999);
+        assertCommandFailWithFeedback(() -> new AddNoteCommand(contactId, VALID_NOTE_SAME_TITLE_0)
+                .execute(model), AddNoteCommand.MESSAGE_PERSON_NOT_FOUND + contactId);
     }
 
     private void assertCommandSuccessWithFeedback(ThrowingSupplier<CommandResult> function, String result) {
@@ -72,14 +73,14 @@ public class AddNoteCommandTest {
     public void equals() {
         Note noteA = NOTE_A;
         Note noteB = NOTE_B;
-        AddNoteCommand addNoteACommand = new AddNoteCommand(Integer.parseInt(VALID_NOTE_A_PERSON_ID), noteA);
-        AddNoteCommand addNoteBCommand = new AddNoteCommand(Integer.parseInt(VALID_NOTE_B_PERSON_ID), noteB);
+        AddNoteCommand addNoteACommand = new AddNoteCommand(ContactID.fromString(VALID_NOTE_A_PERSON_ID), noteA);
+        AddNoteCommand addNoteBCommand = new AddNoteCommand(ContactID.fromString(VALID_NOTE_B_PERSON_ID), noteB);
 
         // same object -> returns true
         assertTrue(addNoteACommand.equals(addNoteACommand));
 
         // same values -> returns true
-        AddNoteCommand addNoteACommandCopy = new AddNoteCommand(Integer.parseInt(VALID_NOTE_A_PERSON_ID), noteA);
+        AddNoteCommand addNoteACommandCopy = new AddNoteCommand(ContactID.fromString(VALID_NOTE_A_PERSON_ID), noteA);
         assertTrue(addNoteACommand.equals(addNoteACommandCopy));
 
         // different types -> returns false

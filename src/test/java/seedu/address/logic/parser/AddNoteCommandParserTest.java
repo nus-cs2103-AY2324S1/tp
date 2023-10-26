@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddNoteCommand;
 import seedu.address.model.note.Note;
+import seedu.address.model.person.ContactID;
 
 public class AddNoteCommandParserTest {
     private AddNoteCommandParser parser = new AddNoteCommandParser();
@@ -34,7 +35,7 @@ public class AddNoteCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NOTE_A_PERSON_ID_DESC + NOTE_A_TITLE_DESC
                 + NOTE_A_CONTENT_DESC,
-                new AddNoteCommand(Integer.parseInt(VALID_NOTE_A_PERSON_ID), expectedNote));
+                new AddNoteCommand(ContactID.fromString(VALID_NOTE_A_PERSON_ID), expectedNote));
     }
 
     @Test
