@@ -3,7 +3,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
-import java.util.Objects;
 
 import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.commons.util.ToStringBuilder;
