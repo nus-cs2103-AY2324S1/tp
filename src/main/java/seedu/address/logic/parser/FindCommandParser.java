@@ -17,9 +17,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.availability.FreeTime;
 import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.predicates.AvailableTimePredicate;
+import seedu.address.model.person.predicates.AvailableTimeCommandPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.TeachingCoursePredicate;
+import seedu.address.model.person.predicates.TeachingCourseCommandPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -48,13 +48,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
             Set<Course> courseList = ParserUtil.parseCourses(argMultimap.getAllValues(PREFIX_COURSE));
-            predicates.add(new TeachingCoursePredicate(new ArrayList<>(courseList)));
+            predicates.add(new TeachingCourseCommandPredicate(new ArrayList<>(courseList)));
         }
         if (argMultimap.getValue(PREFIX_FROM).isPresent() && argMultimap.getValue(PREFIX_TO).isPresent()) {
             FreeTime freeTime = ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).orElse(null),
                     argMultimap.getValue((PREFIX_TO)).orElse(null));
             // since TimeInterval is same for all days for now, we just use the first day
-            predicates.add(new AvailableTimePredicate(freeTime.getDay(0)));
+            predicates.add(new AvailableTimeCommandPredicate(freeTime.getDay(0)));
         }
         if (predicates.size() == 0) {
             throw new ParseException(
