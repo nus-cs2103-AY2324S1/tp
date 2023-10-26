@@ -83,10 +83,15 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
-    public void setTheme(String themePath) {
-        logger.info("Setting theme with path: " + themePath);
+    private void setTheme(String primaryThemePath, String helpWindowThemePath) {
+        logger.info("Setting primary theme with path: " + primaryThemePath);
         primaryStage.getScene().getStylesheets().clear();
-        primaryStage.getScene().getStylesheets().add(themePath);
+        primaryStage.getScene().getStylesheets().add(primaryThemePath);
+
+        logger.info("Setting help window theme with path: " + helpWindowThemePath);
+        Stage helpWindowStage = helpWindow.getRoot();
+        helpWindowStage.getScene().getStylesheets().clear();
+        helpWindowStage.getScene().getStylesheets().add(helpWindowThemePath);
     }
 
     /**
@@ -198,14 +203,25 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleTheme(String theme) {
-        setTheme(getThemePath(theme));
+        setTheme(getPrimaryThemePath(theme), getHelpWindowThemePath(theme));
     }
 
     /**
-     * Returns the path of the theme stylesheet.
+     * Returns the path of the theme stylesheet for primary stage.
      */
-    private String getThemePath(String theme) {
-        return theme.equalsIgnoreCase("dark") ? "view/DarkTheme.css" : "view/LightTheme.css";
+    private String getPrimaryThemePath(String theme) {
+        return theme.equalsIgnoreCase("dark")
+                ? "view/DarkTheme.css"
+                : "view/LightTheme.css";
+    }
+
+    /**
+     * Returns the path of the theme stylesheet for the help window.
+     */
+    private String getHelpWindowThemePath(String theme) {
+        return theme.equalsIgnoreCase("dark")
+                ? "view/DarkHelpWindow.css"
+                : "view/LightHelpWindow.css";
     }
 
     /**
