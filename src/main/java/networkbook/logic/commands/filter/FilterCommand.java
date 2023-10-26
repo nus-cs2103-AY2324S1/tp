@@ -2,10 +2,20 @@ package networkbook.logic.commands.filter;
 
 import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandResult;
-import networkbook.logic.commands.exceptions.CommandException;
+// import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
 
+/**
+ * Filters the list of contacts to contacts that have courses that contain
+ * at least one course that contains some specified key terms.
+ *
+ * Additionally, we can further specify whether all courses should be counted,
+ * or only contacts that are currently taking the courses are counted.
+ *
+ * TODO: Implement filter
+ * TODO: Extend functionality to grad year and specialisation
+ */
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";

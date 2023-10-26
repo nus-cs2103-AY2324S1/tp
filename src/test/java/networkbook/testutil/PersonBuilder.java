@@ -119,10 +119,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Adds a course with a start date to the person we are building.
+     */
     public PersonBuilder addCourse(String course, String startDate) {
         this.courses.add(new Course(course, startDate));
         return this;
     }
+    /**
+     * Adds a course with a start and end date to the person we are building.
+     */
     public PersonBuilder addCourse(String course, String startDate, String endDate) {
         this.courses.add(new Course(course, startDate, endDate));
         return this;

@@ -1,4 +1,4 @@
-package networkbook.model.person.filterCourse;
+package networkbook.model.person.filter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,6 +29,12 @@ public class CourseIsStillBeingTakenPredicate implements Predicate<Course> {
         return date1.isBefore(date2) || date1.isEqual(date2);
     }
 
+    /**
+     * Tests given course's start and end date and returns true if the
+     * specified date of this predicate is between the start and end date.
+     *
+     * If there is no start and end date, the function always returns true.
+     */
     public boolean test(Course course) {
         if (!course.startDateExists()) {
             return true;
@@ -42,7 +48,7 @@ public class CourseIsStillBeingTakenPredicate implements Predicate<Course> {
 
     @Override
     public boolean equals(Object other) {
-        if (other==this) {
+        if (other == this) {
             return true;
         }
 

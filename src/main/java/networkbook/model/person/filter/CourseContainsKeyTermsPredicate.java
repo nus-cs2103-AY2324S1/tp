@@ -1,4 +1,4 @@
-package networkbook.model.person.filterCourse;
+package networkbook.model.person.filter;
 
 import java.util.List;
 import java.util.function.Predicate;

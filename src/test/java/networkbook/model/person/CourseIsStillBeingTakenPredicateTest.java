@@ -11,7 +11,7 @@ import java.time.format.ResolverStyle;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.model.person.filterCourse.CourseIsStillBeingTakenPredicate;
+import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
 
 public class CourseIsStillBeingTakenPredicateTest {
     @Test
@@ -128,7 +128,7 @@ public class CourseIsStillBeingTakenPredicateTest {
         assertEquals(predicate, new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 1)));
 
         // Different date -> returns false
-        assertNotEquals(predicate, new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000,2)));
+        assertNotEquals(predicate, new CourseIsStillBeingTakenPredicate(LocalDate.ofYearDay(2000, 2)));
 
         // Different type -> returns false
         assertNotEquals(predicate, 5);

@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.model.person.filterCourse.CourseContainsKeyTermsPredicate;
+import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
 import networkbook.testutil.PersonBuilder;
 
 public class CourseContainsKeyTermsPredicateTest {
