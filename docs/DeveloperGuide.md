@@ -162,6 +162,18 @@ The following activity diagram summarises what happens when a user executes a ne
 
 ![AddActivityDiagram](images/AddActivityDiagram.png)
 
+### Edit feature
+
+The edit feature is facilitated by `ModelManager` and implements `Model`.
+
+It is similar in implementation to the add feature, 
+except it edits an contact by calling `Model#updateContact`, 
+which replaces the old contact with the edited contact in the `UniqueContactList`.
+
+The following activity diagram summarises what happens when a user executes an edit command.
+
+![EditActivityDiagram](images/AddActivityDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 //TODO if we scrap this section, we should also delete the images & puml files it came with
