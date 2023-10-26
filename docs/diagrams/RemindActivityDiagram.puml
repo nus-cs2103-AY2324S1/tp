@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 13
+start
+:User executes "remind 30" command;
+:Model goes through Address Book that contains Persons;
+
+repeat
+if () then ([Person have policy expiry date within 30 days])
+    : Add Person to Filtered List;
+
+else ([else])
+endif
+repeat while () is ([There is still Person to check])
+->[else];
+
+:Displays Filtered List;
+stop
+@enduml
