@@ -173,7 +173,7 @@ public class ParserUtil {
 
         for (Reason r : Reason.values()) {
             String expected = String.join(" ", r.toString().split("_"));
-            if (FuzzySearch.tokenSetRatio(trimmedReason.toLowerCase(), expected.toLowerCase()) > 30) {
+            if (FuzzySearch.tokenSetRatio(trimmedReason.toLowerCase(), expected.toLowerCase()) > 50) {
                 return r;
             }
         }
