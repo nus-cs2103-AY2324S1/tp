@@ -355,25 +355,26 @@ It serves as a one-stop addressbook for managing job applications.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                                                                                  | So that I can…​                                                                                          |
-|---------|------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `* * *` | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                                    | I can easily access and reach out to candidates when needed                                              |
-| `* * *` | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                                   | I can maintain a record of interactions and feedback                                                     |
-| `* * *` | Hiring Manager   | delete job applicants information                                                                                             | I can remove redundant/unecessary data bloat and also to abide to privacy laws                           |
-| `* * *` | Hiring Manager   | view a specific job applicant's resume or portfolio                                                                           | I can check whether they meet the requirements requested by other department heads                       |
-| `* * *` | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                                     | I can find suitable candidates for a project                                                             |
-| `* * *` | Hiring Manager   | List all candidate's information                                                                                              | I can easily view each candidates information                                                            |
-| `* * `  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                                     | I can keep track of each candidate's progress in the hiring process                                      |
-| `* * `  | Hiring Manager   | filter candidates based on their skills, experience, or application date                                                      | I can efficiently evaluate compare candidates                                                            |
-| `* * `  | Hiring Manager   | compare candidates that I am handling using the information i have stored such as that comparing CAP, Years of experience etc | so that I can choose the best candidates to the next stage of the hiring process                         |
-| `* * `  | Hiring Manager   | collate job applicants who were rejected but have potential for other positions in the company                                | I can forward this data to other departments who might need it                                           |
-| `* * `  | Hiring Manager   | collate job applicants who were offered the job and accepted it as well as deleting their details from JABPro                 | I can send this data to the HR department that manages existing employees                                |
-| `* * `  | Hiring Manager   | collate job applicants who were offered the job but rejected it                                                               | I can contact them to ask why they rejected the offer and get feedback                                   |
-| `* * `  | Hiring Manager   | add candidates key features into a multi-formatted form                                                                       | I can have a visual way to objectively view a candidates skills and information                          |
-| `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers                   | I can have a summary overview without going into each candidate data specifically                        |
-| `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles           |
-| `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it |
-| `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process               |
+| Priority | As a …​          | I want to …​                                                                                                                  | So that I can…​                                                                                             |
+|---------|------------------|-------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `* * *` | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                                    | I can easily access and reach out to candidates when needed                                                 |
+| `* * *` | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                                   | I can maintain a record of interactions and feedback                                                        |
+| `* * *` | Hiring Manager   | delete job applicants information                                                                                             | I can remove redundant/unecessary data bloat and also to abide to privacy laws                              |
+| `* * *` | Hiring Manager   | view a specific job applicant's resume or portfolio                                                                           | I can check whether they meet the requirements requested by other department heads                          |
+| `* * *` | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                                     | I can find suitable candidates for a project                                                                |
+| `* * *` | Hiring Manager   | list all candidate's information and sort them based on a specific attribute                                                  | I can easily view each candidates information and arrange them according to my preferences and requirements |
+| `* * `  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                                     | I can keep track of each candidate's progress in the hiring process                                         |
+| `* * `  | Hiring Manager   | filter candidates based on their skills, experience, or application date                                                      | I can efficiently evaluate compare candidates                                                               |
+| `* * `  | Hiring Manager   | compare candidates that I am handling using the information i have stored such as that comparing CAP, Years of experience etc | I can choose the best candidates to the next stage of the hiring process                                    |
+| `* * `  | Hiring Manager   | collate job applicants who were rejected but have potential for other positions in the company                                | I can forward this data to other departments who might need it                                              |
+| `* * `  | Hiring Manager   | collate job applicants who were offered the job and accepted it as well as deleting their details from JABPro                 | I can send this data to the HR department that manages existing employees                                   |
+| `* * `  | Hiring Manager   | collate job applicants who were offered the job but rejected it                                                               | I can contact them to ask why they rejected the offer and get feedback                                      |
+| `* * `  | Hiring Manager   | add candidates key features into a multi-formatted form                                                                       | I can have a visual way to objectively view a candidates skills and information                             |
+| `* * `  | Hiring Manager   | delete job applicants who are tagged with specific labels                                                                     | I can maintain an organized pool by removing candidates that are no longer relevant or needed               |
+| `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers                   | I can have a summary overview without going into each candidate data specifically                           |
+| `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles              |
+| `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it    |
+| `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process                  |
 *{More to be added}*
 
 ### Use cases
@@ -386,15 +387,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a person.
 2. JABPro shows that command has been executed successfully.
 3. JABPro adds the person to the list of persons.
-4. JABPro shows the person added at the end of the list of persons.
+4. JABPro shows the person added at the end of the list of persons.   
 Use case ends.
 
 **Extensions**
 * 2a. User does not provide the correct information for a person to be added.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.
+    * 2a1. JABPro shows an error message and provides course of action for remedy.  
     Use case resumes at step 1.
 * 2b. User has already been added to the list of persons.
-    * 2b1. JABPro shows an error message and provides course of action for remedy.
+    * 2b1. JABPro shows an error message and provides course of action for remedy.   
     Use case resumes at step 1.
 
 **Use case: Add a remark to a person**
@@ -402,15 +403,15 @@ Use case ends.
 **MSS**
 1. User requests to add a remark to a person.
 2. JABPro shows that command has been executed successfully.
-3. JABPro adds the remark to the person.
+3. JABPro adds the remark to the person.  
 Use case ends.
 
 **Extensions**
 * 2a. User provides invalid index.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.
+    * 2a1. JABPro shows an error message and provides course of action for remedy.  
     Use case resumes at step 1.
 * 2b. User does not provide a remark.
-    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.
+    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.  
     Use case ends.
 
 **Use case: List all persons**
@@ -428,14 +429,14 @@ Use case ends.
   * 2a1. JABPro shows an error message and provides course of action for remedy.  
   Use case resumes at step 1.
 * 2b. User attempts to list persons when there are no entries in the address book.
-  * 2b1. JABPro shows a message indicating that there are no persons to display. 
+  * 2b1. JABPro shows a message indicating that there are no persons to display.   
   Use case ends.
 
 **Use case: Search a person by name**
 
 **MSS**
 1.  Hiring manager types in name keywords to search users by name.
-2.  JABPro shows a list of persons whose names contain matching keywords. 
+2.  JABPro shows a list of persons whose names contain matching keywords.   
     Use case ends.
 
 **Extensions**
@@ -450,7 +451,7 @@ Use case ends.
 
 **MSS**
 1.  User keys in search command with application status (i.e. interviewed, pending, rejected, offered).
-2.  JABPro shows a list of persons whose status match the given status keywords. 
+2.  JABPro shows a list of persons whose status match the given status keywords.   
     Use case ends.
 
 **Extensions**
@@ -458,28 +459,31 @@ Use case ends.
 * 1a. The given name status is invalid (not from the given list of valid status keywords).
     * 1a1. JABPro shows an error message.
       Use case resumes at step 1.
-* 2a. The list is empty.
+* 2a. The list is empty. <br/>
   Use case ends.
 
 
 **Use case: Delete a person**
 
 **MSS**
-1.  User requests to list persons.
-2.  AddressBook shows a list of persons.
-3.  User requests to delete a specific person in the list.
-4.  AddressBook deletes the person.
-    Use case ends.
+1. User requests to list persons.
+2. AddressBook shows a list of persons.
+3. User requests to delete a specific person in the list by providing either the person's index or tags.
+4. AddressBook deletes the specified person(s).   
+Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.   
       Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
       Use case resumes at step 3.
+* 3b. The given tags do not match any persons. 
+    * 3b1. AddressBook shows an error message indicating that no persons with the specified tags were found.  
+    Use case resumes at step 3
 * 4a. Deletion encounters an error
-    * 4a1. AddressBook displays an error message indicating that the deletion process failed.
+    * 4a1. AddressBook displays an error message indicating that the deletion process failed.  
       Use case ends.
 
 **Use case: Set a person's status**
@@ -488,18 +492,18 @@ Use case ends.
 1.  User requests to list persons.
 2.  AddressBook shows a list of persons.
 3.  User requests to set the status of a specific person in the list.
-4.  AddressBook sets the status of that person in the list.
+4.  AddressBook sets the status of that person in the list.  
     Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.  
       Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
       Use case resumes at step 3.
 * 3b. The given status is invalid.
-    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.
+    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.  
       Use case resumes at step 3.
 
 **Use case: View a person's details**
@@ -508,17 +512,16 @@ Use case ends.
 1.  User requests to list persons.
 2.  AddressBook shows a list of persons.
 3.  User requests to view a specific person in the current displayed AddressBook.
-4.  The UI shows the details of that person.
+4.  The UI shows the details of that person.  
     Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.  
       Use case ends.
 * 3a. The given index is invalid.
     * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
       Use case resumes at step 3.
-
 * 3b. User decides to search for a person based on a criteria such as name.
     * 3b1. Displayed AddressBook changes to match that of search result.  
       Use case resumes at step 3.
@@ -528,35 +531,35 @@ Use case ends.
 **Use case: Add social profile to person's details**
 
 **MSS**
-1. User requests to add social profile (linkedin or github)
-2. JABPro shows that command has been executed successfully
-3. JABPro adds the social profile to the person's existing details in the list
+1. User requests to add social profile (linkedin or github).
+2. JABPro shows that command has been executed successfully.
+3. JABPro adds the social profile to the person's existing details in the list.  
    Use case ends.
 
 **Extensions**
 * 2a. User does not provide valid information for the person.
-    * 2a1. JABPro displays error message.
+    * 2a1. JABPro displays error message.  
       Use case resumes at Step 1.
 * 2b. User requests to add social profile other than LinkedIn or Github
-    * 2b1. JABPro displays error message.
+    * 2b1. JABPro displays error message.  
       Use case resumes at Step 1.
 
 **Use case: Open social profile for a person**
 
 **MSS**
-1. User requests to open social profile for a person
-2. JABPro shows that command has been executed successfully
-3. JABPro redirects to the webpage of the corresponding profile
+1. User requests to open social profile for a person.
+2. JABPro shows that command has been executed successfully.
+3. JABPro redirects to the webpage of the corresponding profile.  
    Use case ends.
 
 **Extension**
 * 1a. Person does not exist in the list.
-    * 1a1. JABPro displays error message.
+    * 1a1. JABPro displays error message.  
     Use case ends.
-* 1b. Social profile requested other than LinkedIn or Github
-    * 1b1. JABPro displays error message.
+* 1b. Social profile requested other than LinkedIn or Github.
+    * 1b1. JABPro displays error message.  
     Use case ends.
-* 3a. User does not exist on the social platform
+* 3a. User does not exist on the social platform.  
   Use case ends.
 
 *{More to be added}*
