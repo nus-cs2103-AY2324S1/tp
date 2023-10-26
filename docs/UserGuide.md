@@ -118,6 +118,28 @@ Examples:
 * `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`
 * `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/High Priority pt/T0123556H`
 
+### Creating an Appointment : `new-appt`
+
+Creates a new appointment for patients.
+
+Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm:ss`
+
+<div markdown="span" class="alert alert-primary">:bulb:
+**Tip:**
+A person can have any number of tags (including 0)
+</div>
+<div markdown="span" class="alert alert-primary">:note:
+**Take Note:**
+
+- All fields are Required.
+- EMAIL must follow the specified format (ie. `yyyy-MM-dd HH:mm:ss`).
+- PATIENT must contain the valid IC of a Patient in the Database.
+- DOCTOR must contain the valid IC of a Doctor in the Database.
+</div>
+
+Examples:
+* `new-appt pic/T0123456H dic/S9851586G time/yyyy-MM-dd 13:00:00`
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the MediLink Contacts.
@@ -183,6 +205,22 @@ Examples:
 Clears all entries from the MdeiLink Contacts.
 
 Format: `clear`
+
+### Undo last action : `undo`
+
+Undoes the effect of the last command.
+
+Format: `undo`
+
+* Can only do upto 5 undos at any one time.
+
+### Redo last action : `redo`
+
+Repeats the previous command; an 'undo' for an 'undo' command.
+
+Format: `redo`
+
+* Can only do upto 5 redos at any one time.
 
 ### Exiting the program : `exit`
 
