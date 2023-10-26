@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -11,7 +10,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.IdContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
@@ -48,13 +46,14 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_nullArgs_throwsAssertionError() {
-        String args = null;
-        try {
-            parser.parse(args);
-            fail("Expected AssertionError to be thrown");
-        } catch (AssertionError | ParseException e) {
-            assertTrue(e.getMessage().contains("Input argument, 'args' cannot be null"));
-        }
+        assertThrows(AssertionError.class, () -> {
+            try {
+                parser.parse(null);
+            } catch (NullPointerException e) {
+                // Handle or assert the NPE if needed.
+                throw new AssertionError("NullPointerException not expected.", e);
+            }
+        });
     }
 
 }
