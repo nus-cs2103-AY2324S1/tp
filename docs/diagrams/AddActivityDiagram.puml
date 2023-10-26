@@ -15,5 +15,4 @@ if () then ([Contact object is unique])
 else ([else])
 endif
 stop
-
 @enduml
