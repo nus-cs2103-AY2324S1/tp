@@ -23,7 +23,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final CommandStringStash commandStringStash;
     private Person selectedPerson;
 
     /**
@@ -135,24 +134,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
-
-    //=========== Command String Stash =============================================================
-
-    @Override
-    public String getPrevCommandString(String currentCommandString) {
-        return commandStringStash.getPrevCommandString(currentCommandString);
-    }
-
-    @Override
-    public String getPassedCommandString(String currentCommandString) {
-        return commandStringStash.getPassedCommandString(currentCommandString);
-    }
-
-    @Override
-    public void addCommandString(String commandString) {
-        commandStringStash.addCommandString(commandString);
-    }
-
 
     //=========== Selected Person Accessors ==================================================================
     @Override
