@@ -34,7 +34,7 @@ public class EventWindow extends UiPart<Stage> {
      * Shows the event window.
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing events page.");
         getRoot().show();
         getRoot().centerOnScreen();
     }

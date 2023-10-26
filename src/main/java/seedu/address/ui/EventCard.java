@@ -43,7 +43,7 @@ public class EventCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public EventCard(Event event, int displayedIndex) {
+    public EventCard(Event event) {
         super(FXML);
         this.event = event;
         description.setText(event.getDescription());
