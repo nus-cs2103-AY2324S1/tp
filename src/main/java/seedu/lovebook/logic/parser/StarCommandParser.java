@@ -1,13 +1,16 @@
 package seedu.lovebook.logic.parser;
+import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.logic.commands.StarCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 
-import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-public class StarCommandParser implements Parser<StarCommand>{
 
+/**
+ * Parses input arguments and creates a new starCommand object
+ */
+public class StarCommandParser implements Parser<StarCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the StarCommand
      * and returns a StarCommand object for execution.
