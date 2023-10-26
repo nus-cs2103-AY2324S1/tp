@@ -51,14 +51,14 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        if (!person.getPhone().value.isEmpty()) {
-            phone.getChildren().add(new Label(person.getPhone().value));
+        if (!person.getPhone().toString().isEmpty()) {
+            phone.getChildren().add(new Label(person.getPhone().toString()));
         }
-        if (!person.getAddress().value.isEmpty()) {
-            address.getChildren().add(new Label(person.getAddress().value));
+        if (!person.getAddress().toString().isEmpty()) {
+            address.getChildren().add(new Label(person.getAddress().toString()));
         }
-        if (!person.getEmail().value.isEmpty()) {
-            email.getChildren().add(new Label(person.getEmail().value));
+        if (!person.getEmail().toString().isEmpty()) {
+            email.getChildren().add(new Label(person.getEmail().toString()));
         }
         if (!person.getBirthday().toString().isEmpty()) {
             birthday.getChildren().add(new Label(person.getBirthday().toString()));
