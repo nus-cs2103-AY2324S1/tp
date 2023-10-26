@@ -24,8 +24,6 @@ This guide is to help you explore and learn about what are its features and how 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-<div style="page-break-after: always;"></div>
-
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -40,7 +38,6 @@ This guide is to help you explore and learn about what are its features and how 
    * `clear` : Deletes all contacts and meetings.
 
    * `exit` : Exits the app.
-
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -112,6 +109,7 @@ You can put any number of tags (including 0) on a contact.
 * `addc n/John Doe p/98765432 e/johnd@example.com l/01.10.2023 1000`
 * `addc n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 l/01.01.2023 0100 t/Professor`
 
+<br/><br/>
 
 ### Listing all persons : `listc`
 
@@ -134,7 +132,7 @@ Examples:
 * `listc` followed by `delete 2` deletes the 2nd person in the results of the `listc` command.
 * `findc Betsy` followed by `delete 1` deletes the 1st person in the results of the `findc` command.
 
-
+<br/><br/><br/><br/><br/><br/><br/><br/>
 ### Editing a contact : `editc`
 
 Edits an existing contact in OutBook.
