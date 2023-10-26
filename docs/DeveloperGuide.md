@@ -162,6 +162,15 @@ The applicant at the specific applicantIndex in the applicant list will be delet
 * Step 4. The model object's deleteApplicant() method is called. The input parameter is the referenced applicant.
 * Step 5. The applicant is deleted from the applicant list.
 
+### Delete a member
+The member at the specific memberIndex in the member list will be deleted. Compulsory fields for the deleteMember command include: memberIndex. An example of how this feature can be used is as follows:
+
+* Step 1. The deleteMemberCommand object's execute() method is called.
+* Step 2. The memberIndex is checked to be within the valid range of the member list. If the memberIndex given is invalid, a CommandException is thrown.
+* Step 3. The member at the given memberIndex is referenced.
+* Step 4. The model object's deleteMember() method is called. The input parameter is the referenced member.
+* Step 5. The member is deleted from the member list.
+
 ### Find an applicant
 All applicants that contains any field with the specified keyword will be listed. Compulsory fields for the findApplicant command include : keyword. An example of how this feature can be used is as follows:
 
