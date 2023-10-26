@@ -72,7 +72,7 @@ management tasks done faster than traditional GUI apps.
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+<img alt="help message" src="images/helpMessage.png" width="600"> 
 
 Format: `help`
 
@@ -174,10 +174,21 @@ _At least one_ of the optional fields must be provided. `lookup` alone is not al
 
 Examples:
 
-* `lookup n/Alex David` returns `Alex Li`, `David Li`<br>
-<img alt="result for 'lookup n/Alex David'" src="images/lookupLastNameResult.png" width="600"> </br></br>
-* `lookup c/T11` returns all students in class number T11<br>
-<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="600"> </br></br>
+* `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="600"> </br></br>
+* `lookup c/t11` returns all students in class number T11<br>
+<img alt="result for 'lookup c/t11'" src="images/lookupClassResult.png" width="600"> </br></br>
+
+---
+### Configuring Class Manager: `config`
+
+Configures Class Manager 2023 with the module information, such as tutorial count and assignment count.
+
+Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
+* Parameters must be zero or greater.
+
+Examples:
+* `config #t/2 #a/3` sets the tutorial count to 2 and assignment count to 3.
 
 ---
 ### Marking tutorial attendance for a student : `mark`
@@ -297,15 +308,16 @@ Examples:
 * ![t2_contents](images/t2-contents.png)
 
 ---
-### Configuring Class Manager: `config`
+### Toggling color themes: `theme`
 
-Configures Class Manager 2023 with the module information, such as tutorial count and assignment count.
+Toggles between light and dark color themes.
 
-Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
-* Parameters must be zero or greater.
+Format: `theme`
+##### Dark theme
+<img alt="theme_dark" src="images/theme-dark.png" width="575" > <br><br>
 
-Examples:
-* `config #t/2 #a/3` sets the tutorial count to 2 and assignment count to 3.
+##### Light theme
+<img alt="theme_light" src="images/theme-light.png" width="575" >
 
 ---
 ### Archiving data files `[coming in v2.0]`
@@ -328,21 +340,23 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-| Action     | Format, Examples                                                                                                                                   |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                            |
-| **Comment**| `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.` |
-| **Delete** | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                            |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                               |
-| **Tag**    | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                         |
-| **Lookup** | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                  |
-| **Mark**   | `mark TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark 1 s/A0245234A`                                                                              |
-| **Set Grade**   | `set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `set-grade s/A0245234A a/1 g/100`                                           |
-| **Record Part** | `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record-part s/A0245234A tut/1 part/true`                |
-| **View**   | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                   |
-| **List**   | `list`                                                                                                                                             |
-| **Help**   | `help`                                                                                                                                             |
-| **Load**   | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                     |
-| **Config** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                        |
+| Action     | Format, Examples                                                                                                                                    |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague`  |
+| **Comment**| `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                            |
+| **Delete** | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                             |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                   |
+| **Tag**    | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                             |
+| **Lookup** | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                   |
+| **Config** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                         |
+| **Mark**   | `mark TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark 1 s/A0245234A`                                                                               |
+| **Set Grade**   | `set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `set-grade s/A0245234A a/1 g/100`                                                 |
+| **Record Part** | `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record-part s/A0245234A tut/1 part/true`                      |
+| **View**   | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                    |
+| **Load**   | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                      |
+| **Clear**  | `clear`                                                                                                                                             |
+| **List**   | `list`                                                                                                                                              |
+| **Help**   | `help`                                                                                                                                              |
+| **Exit**   | `exit`                                                                                                                                              |
+| **Theme**  | `theme`                                                                                                                                             |
 

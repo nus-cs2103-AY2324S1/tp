@@ -201,8 +201,8 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Updates the application's theme.
      */
-    @FXML
-    public void handleTheme(String theme) {
+    public void handleTheme() {
+        String theme = logic.getTheme();
         setTheme(getPrimaryThemePath(theme), getHelpWindowThemePath(theme));
     }
 
@@ -248,7 +248,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isTheme()) {
-                handleTheme(logic.getTheme());
+                handleTheme();
             }
 
             return commandResult;
