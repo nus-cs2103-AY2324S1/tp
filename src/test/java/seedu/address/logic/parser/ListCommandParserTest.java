@@ -38,10 +38,16 @@ public class ListCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListStudentsCommand.MESSAGE_USAGE));
     }
     @Test
-    public void parse_listAttendanceInvalidArgs_throwsParseException() {
+    public void parse_listAttendanceMissingArgs_throwsParseException() {
         assertParseFailure(parser, "  attendance  tg/G02 ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "  attendance  ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_listAttendanceExtraPreamble_throwsParseException() {
+        assertParseFailure(parser, " attendance abc w/1 tg/G02 ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
     }
 
