@@ -148,6 +148,20 @@ Classes used by multiple components are in the `swe.context.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+
+The add feature is facilitated by `ModelManager` and implements `Model`.
+
+The following sequence diagram shows how the add command works:
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+It adds an contact by calling `Model#addContact`, which adds the newly created contact into the `UniqueContactList`.
+
+The following activity diagram summarises what happens when a user executes a new command.
+
+![AddActivityDiagram](images/AddActivityDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 //TODO if we scrap this section, we should also delete the images & puml files it came with

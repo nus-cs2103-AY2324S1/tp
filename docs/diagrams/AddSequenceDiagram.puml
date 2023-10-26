@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InputParser" as InputParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "a:AddCommand" as AddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "contact:Contact" as Contact MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add n/Alice ...")
+activate LogicManager
+
+LogicManager -> InputParser : parseCommand("add n/Alice ...")
+activate InputParser
+
+create AddCommandParser
+InputParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> InputParser
+deactivate AddCommandParser
+
+InputParser -> AddCommandParser : parse("n/Alice ...")
+activate AddCommandParser
+
+
+
+create Contact
+AddCommandParser -> Contact
+activate Contact
+
+Contact --> AddCommandParser : contact
+deactivate Contact
+
+create AddCommand
+AddCommandParser -> AddCommand
+activate AddCommand
+
+AddCommand --> AddCommandParser : a
+deactivate AddCommand
+
+AddCommandParser --> InputParser : a
+deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> InputParser
+destroy AddCommandParser
+
+InputParser --> LogicManager : a
+deactivate InputParser
+
+LogicManager -> AddCommand : execute()
+activate AddCommand
+
+AddCommand -> Model : addContact(contact)
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand
+deactivate CommandResult
+
+AddCommand --> LogicManager : result
+deactivate AddCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
