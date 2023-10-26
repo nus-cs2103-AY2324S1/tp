@@ -9,9 +9,6 @@ public class ThemeCommand extends Command {
 
     public static final String COMMAND_WORD = "theme";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Toggles different themes for the class manager.\n"
-            + "Example: " + COMMAND_WORD;
-
     public static final String SHOWING_THEME_MESSAGE = "Theme has been toggled.";
 
     @Override
