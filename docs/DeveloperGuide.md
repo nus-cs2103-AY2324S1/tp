@@ -182,6 +182,7 @@ To add these additional attributes into a `Person` object, an `INDEX` parameter,
 `INDEX` represents the index number of the contact to be edited in the contact list.
 
 <box type="info">
+
 While all the fields are optional, at least one needs to be given to the `addalt` command.
 </box>
 
@@ -227,6 +228,7 @@ The `edit` command has similar input fields to the [**`addalt`**](#addalt-featur
 * `Avatar`: The profile picture of the contact. Read [**`Update photo feature`**](#update-photo-feature) for more details.
 
 <box type="info">
+
 While all the fields are optional, at least one needs to be given to the `edit` command.
 </box>
 
