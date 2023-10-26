@@ -238,6 +238,20 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] Mark paid/check paid features
+The proposed mark paid/check paid mechanism can check whether the person has paid or not by implementing a new boolean field 'paid' in the person object, it implements the following operations:
+
+* `paid [index]` — Mark the person at the index as paid.
+* `ispaid [index]` — Check whether the person at the index is paid.
+* `list unpaid` — List all the persons who haven't paid in the list.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+More graphs To be added. 
+
+#### Design considerations:
+
+_{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 
