@@ -23,7 +23,8 @@ This guide is to help you explore and learn about what are its features and how 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar OutBook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
-   <div style="page-break-after: always;"></div>
+
+<div style="page-break-after: always;"></div>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -43,6 +44,8 @@ This guide is to help you explore and learn about what are its features and how 
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 # Features
 
@@ -76,6 +79,8 @@ Shows you a message explaining how to access the help page.
 
 Format: `help`
 
+<div style="page-break-after: always;"></div>
+
 ## Contact commands
 
 ### Adding a contact: `addc`
@@ -106,7 +111,6 @@ You can put any number of tags (including 0) on a contact.
 
 * `addc n/John Doe p/98765432 e/johnd@example.com l/01.10.2023 1000`
 * `addc n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 l/01.01.2023 0100 t/Professor`
-
 
 
 ### Listing all persons : `listc`
