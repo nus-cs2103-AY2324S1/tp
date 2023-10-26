@@ -154,9 +154,24 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### List by day feature
+
+The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
+the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
+
+* **Alternative 1 (current choice):** Extend the `ListCommand` class.
+    * Pros: Greater use of OOP.
+    * Cons: Harder to implement.
+
+* **Alternative 2:** Individual command class without extending `ListCommand`.
+    * Pros: Easier to implement.
+    * Cons: Less abstraction.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
+
+
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -272,13 +287,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                 |
-| -------- |--------------------------------------------|---------------------------------------------|-----------------------------------------------------------------|
-| `* * *`  | tutor                                      | view a list of all tutees                   |                                                                 |
-| `* * *`  | tutor                                      | view the specific details of a single tutee |                                                                 |
-| `* * *`  | tutor                                      | add a new tutee                             |                                                                 |
-| `* * *`  | tutor                                      | edit their details                          | account for changes in their information e.g. change in address |
-| `* *`    | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching               |
+| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                        |
+| ------ |--------------------------------------------|---------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | tutor                                      | view a list of all tutees                   |                                                                        |
+| `* *`  | tutor                                      | view a list tutees on a specified day       | so that I can be reminded if I have any classes on that particular day |
+| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                        |
+| `* * *` | tutor                                      | add a new tutee                             |                                                                        |
+| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address        |
+| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                      |
 
 *{More to be added}*
 
