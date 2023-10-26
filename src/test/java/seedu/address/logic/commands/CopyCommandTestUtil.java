@@ -8,6 +8,9 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
+/**
+ * Contains helper methods for testing CopyCommands that copy text to the clipboard.
+ */
 public class CopyCommandTestUtil {
 
     /**
