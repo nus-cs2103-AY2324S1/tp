@@ -174,6 +174,22 @@ Valid input to `FreeTime#getDay(day)` are integers from [1,5] where 1 represents
 
 `TimeInterval#GetFrom()` and `TimeInterval#GetTo()` represents the string representation of time in `HH:mm` format.
 
+### Finding TA feature
+
+#### Implementation
+
+The finding TA feature allows users to search for a specific TA, using various filters 
+such as name, course and free time. With this feature, users can easily search for TAs
+that fall under a certain set of filters.
+
+To key in the command, type `find n/alex c/cs2103t from/12:00 to/14:00`. This will
+search for all TAs with the name `alex` and course `cs2103t` that are free from `12:00`
+to `14:00`.
+
+The following sequence diagram displays how the finding TA feature is implemented.
+
+![FindDiagram](images/FindDiagram.png)
+
 ### Teaching course Feature
 
 #### Implementation
