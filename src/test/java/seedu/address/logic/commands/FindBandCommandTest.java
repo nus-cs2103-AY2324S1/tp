@@ -12,7 +12,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.band.BandNameContainsKeywordsPredicate;
 
-class ListBandCommandTest {
+class FindBandCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -28,8 +28,8 @@ class ListBandCommandTest {
         BandNameContainsKeywordsPredicate secondPredicate =
                 new BandNameContainsKeywordsPredicate("second_band");
 
-        ListBandCommand listBandFirstCommand = new ListBandCommand(firstPredicate);
-        ListBandCommand listBandSecondCommand = new ListBandCommand(secondPredicate);
+        FindBandCommand listBandFirstCommand = new FindBandCommand(firstPredicate);
+        FindBandCommand listBandSecondCommand = new FindBandCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(listBandFirstCommand.equals(listBandFirstCommand));
@@ -37,8 +37,8 @@ class ListBandCommandTest {
         // same values -> returns true
         BandNameContainsKeywordsPredicate firstPredicateCopy =
                 new BandNameContainsKeywordsPredicate("first_band");
-        ListBandCommand listBandFirstCommandDeepCopy = new ListBandCommand(firstPredicateCopy);
-        ListBandCommand listBandFirstCommandCopy = new ListBandCommand(firstPredicate);
+        FindBandCommand listBandFirstCommandDeepCopy = new FindBandCommand(firstPredicateCopy);
+        FindBandCommand listBandFirstCommandCopy = new FindBandCommand(firstPredicate);
         assertTrue(listBandFirstCommand.equals(listBandFirstCommandDeepCopy));
         assertTrue(listBandFirstCommand.equals(listBandFirstCommandCopy));
 
@@ -55,8 +55,8 @@ class ListBandCommandTest {
     @Test
     public void toStringMethod() {
         BandNameContainsKeywordsPredicate predicate = new BandNameContainsKeywordsPredicate("Prima Donna");
-        ListBandCommand listBandCommand = new ListBandCommand(predicate);
-        String expected = ListBandCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, listBandCommand.toString());
+        FindBandCommand findBandCommand = new FindBandCommand(predicate);
+        String expected = FindBandCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, findBandCommand.toString());
     }
 }
