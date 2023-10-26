@@ -40,10 +40,6 @@ public class MarkScheduleCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSchedule(firstSchedule, editedSchedule);
 
-        System.out.println(expectedModel);
-        System.out.println(firstSchedule);
-        System.out.println(editedSchedule);
-
         assertCommandSuccess(markScheduleCommand, model, expectedMessage, expectedModel);
     }
 
@@ -59,10 +55,6 @@ public class MarkScheduleCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSchedule(firstSchedule, editedSchedule);
-
-        System.out.println(expectedModel);
-        System.out.println(firstSchedule);
-        System.out.println(editedSchedule);
 
         assertCommandSuccess(markScheduleCommand, model, expectedMessage, expectedModel);
     }
@@ -103,10 +95,6 @@ public class MarkScheduleCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSchedule(firstSchedule, editedSchedule);
-
-        System.out.println(expectedModel);
-        System.out.println(firstSchedule);
-        System.out.println(editedSchedule);
 
         assertCommandSuccess(markScheduleCommand, model, expectedMessage, expectedModel);
     }
