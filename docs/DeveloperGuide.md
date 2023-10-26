@@ -530,13 +530,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. User inputs a tags that does not exist.
+* 1c. User inputs a tag that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the tags cannot be found.
 
       Use case ends.
 
-**Use case: UC12 - Exit the program**
+**Use case: UC12 - Edit tags in a contact**
+
+**MSS**
+
+1.  User requests to edit tags in a contact.
+2.  KeepInTouch edits the tags from the specified contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case ends.
+
+* 1b. User inputs a contact that does not exist.
+
+    * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
+
+      Use case ends.
+
+* 1c. User inputs a tag that does not exist.
+
+    * 1c1. KeepInTouch shows a message indicating that the tags cannot be found.
+
+      Use case ends.
+
+**Use case: UC13 - Exit the program**
 
 **MSS**
 
