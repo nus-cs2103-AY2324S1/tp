@@ -3,7 +3,6 @@ package networkbook.logic.commands.filter;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandResult;
-// import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
 import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
