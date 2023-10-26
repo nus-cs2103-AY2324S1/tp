@@ -105,8 +105,8 @@ public class Person {
         return interactions;
     }
 
-    public Set<Interaction> getFilteredInteraction(Predicate<Interaction> predicate) {
-        return interactions.stream().filter(predicate).collect(Collectors.toSet());
+    public ArrayList<Interaction> getFilteredInteraction(Predicate<Interaction> predicate) {
+        return interactions.stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
