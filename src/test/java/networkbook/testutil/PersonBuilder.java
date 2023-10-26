@@ -119,6 +119,15 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder addCourse(String course, String startDate) {
+        this.courses.add(new Course(course, startDate));
+        return this;
+    }
+    public PersonBuilder addCourse(String course, String startDate, String endDate) {
+        this.courses.add(new Course(course, startDate, endDate));
+        return this;
+    }
+
     /**
      * Sets the {@code Course} of the {@code Person} that we are building.
      */
