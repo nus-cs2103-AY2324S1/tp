@@ -190,14 +190,11 @@ Step 3. The ReadCommand is then executed. If the index is not out of bounds, it 
 
 ![ReadSequenceDiagram2](images/ReadSequenceDiagram2.png)
 
-Step 4. After getting the specific field, it will then create a CommandResult for the UI to display. This is the final sequence diagram to show how the undo operation works.
+Step 4. After getting the specific field, it will then create a CommandResult for the UI to display. This is the final sequence diagram to show how the read operation works.
 
 ![ReadSequenceDiagram3](images/ReadSequenceDiagram3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ReadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
+:information_source: **Note:** The lifeline for `ReadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 #### Design considerations:
 
