@@ -374,6 +374,47 @@ user which command was deleted.
  * The design of the `deleteEvent` command is dependent on the structure of the `Calendar` object. Should the structure 
 of how the event objects are stored change, a new implementation will be required for the command.
 
+### TaskList Feature (Work in Progress)
+
+#### Implementation
+
+The proposed tasklist feature is facilitated by 'TaskList'. It extends a ReadOnlyTaskList that will be used for the
+saving of the users' tasks. Additionally, it implements the following operations:
+
+*`TaskList#addTask()` -- Adds a task to the current tasklist and saves it to memory.
+*`TaskList#deleteTask()` -- Delete an existing task from the current tasklist and saves it to memory.
+*`TaskList#editTask()` -- Edits an existing task from the current tasklist and saves it to memory.
+
+These operations are exposed in the `Model` interface as `Model#addTask()`, `Model#deleteTask()` and `Model#editTask()`
+respectively.
+
+##### Adding Task
+
+The adding of tasks is facilitated by the `model#addTask()` method. 
+The method adds a task to the `TaskList` object which itself is an attribute of the `ModelManager` object by
+calling a similar method `Model::addTask()`. 
+These methods take in a `Description` and `Optional(Deadline)` object and finds the method within the `TaskList` object,
+then adds the `Task` object to the TaskList.
+Given below is an example usage scenario of the command.
+
+Step 1. The user launches the application and creates a task.
+
+Step 2. The user executes `addTask d/CS2105 Assignment te/2023-12-12 12:00 ` command to add the task.
+The `addTask` method in the model is called, adding the task to the tasklist, and saving the tasklist to memory.
+
+**Note**: There is no limit to the number of tasks of the same description or deadline that can be created.
+
+**Design considerations**
+
+* The design of the `addTask` command is such that a deadline is made optional.
+* This current implementation allows for more freedom to the user but might be more difficult to manage with the 
+* addition of Optionals.
+
+##### Delete Task (To be added)
+
+##### Edit Task (To be added)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
