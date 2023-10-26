@@ -148,6 +148,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public String registerShortcut(ShortcutAlias shortcutAlias, CommandWord commandWord) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String removeShortcut(ShortcutAlias shortcutAlias) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getShortcut(String alias) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }

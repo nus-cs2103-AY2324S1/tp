@@ -12,7 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddShortcutCommand;
 import seedu.address.logic.commands.ClearCommand;
