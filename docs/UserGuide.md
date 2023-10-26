@@ -12,13 +12,14 @@ better than traditional GUI apps.
 * [Quick Start](#quick-start)
 * [Features](#features)
   * [Help](#viewing-help--help)
+  * [Add](#adding-a-person--add)
   * [List](#listing-all-persons--list)
   * [Edit](#editing-a-person--edit)
   * [Find](#locating-persons-by-name--find)
-  * [Gather](#gathering-clients-emails-by-financial-plan--gather)
+  * [Gather](#gathering-emails-of-matching-persons--gather)
   * [Schedule](#scheduling-an-appointment--schedule)
   * [Complete](#completing-an-appointment--complete)
-  * [Delete](#deleting-a-clients-contact--delete)
+  * [Delete](#deleting-a-person--delete)
   * [Clear](#clearing-all-entries--clear)
   * [Sort](#sorting-of-data--sort)
 * [FAQ](#faq)
@@ -91,10 +92,9 @@ better than traditional GUI apps.
 Shows a message explaining how to access the help page, as well as a list of available keywords.
 
 ![help message](images/helpMessage.png)
-
 Format: `help`
 ---------------------------
-### Adding a client's contact: `add`
+### Adding a person: `add`
 
 Add a client’s contacts to address book (name, phone number, email, home address, next-of-kin name, next-of-kin phone number) into Address Book
 
@@ -107,6 +107,8 @@ Acceptable Values:
 4. ADDRESS - any value is possible
 5. NEXT_KIN - any value is possible
 6. NEXT_KIN_PHONE - Numbers (0-9), and symbols, no alphabets
+7. FINANCIAL_PLAN - Alphanumeric or Space characters
+8. TAG - Alphanumeric
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of Financial Plans (including 0)
@@ -128,7 +130,7 @@ Format: `list`
 
 Edit clients contact fields using an entry index followed by the updated details.
 
-Format: `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [t/TAG]…​`
+Format: `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NEXT_KIN] [nkp/NEXT_KIN_PHONE] [fp/FINANCIAL_PLAN] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -148,6 +150,7 @@ Acceptable Values:
 6. NEXT_KIN - any value is possible
 7. NEXT_KIN_PHONE - Numbers (0-9), and symbols, no alphabets
 8. FINANCIAL_PLAN - Alphanumeric or Space characters
+9. TAG - Alphanumeric
 
 Examples:
 *  `edit 1 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st person to be `john doe` and `woodlands ave 123` respectively.
@@ -179,14 +182,14 @@ Examples:
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Gathering clients' emails by financial plan or tag: `gather`
+### Gathering emails of matching persons: `gather`
 
 Gathers all the emails of persons with a desired financial plan or tag. 
 
-Format: `gather [fp/FINANCIAL PLAN]` or `gather [t/TAG]`
+Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
 
 * Only either Financial Plan or Tag can be searched at once.
-* The search is case-insensitive. e.g `financial` will match `FINANCIAL`
+* The search is case-insensitive. e.g `financial` will match `FINANCIAL` or `Financial`.
 * Persons emails return when the prompt matches a substring of at least one of their financial plan or tag names.
 
 Examples:
@@ -197,7 +200,7 @@ Successful Output:
 `lowjunyu@gmail.com johndoe@gmail.com`
 
 ------------
-### Deleting a client's contact : `delete`
+### Deleting a person : `delete`
 
 Deletes the client contact from the contact book by their index.
 
@@ -254,7 +257,8 @@ Format: `clear`
 
 Example:
 * `clear`
-  ![confirm clear window](images/confirmClear.png)
+  
+![confirm clear window](images/confirmClear.png)
 
 ----------------------------
 ### Sorting of data: `sort`
@@ -323,3 +327,4 @@ _Details coming soon ..._
 | **List**     | `list`                                                                                                                                                                                                                 |
 | **Help**     | `help`                                                                                                                                                                                                                 |
 | **Sort**     | `sort SORTING_FUNCTION` <br> e.g., `sort appointment`                                                                                                                                                                  |
+
