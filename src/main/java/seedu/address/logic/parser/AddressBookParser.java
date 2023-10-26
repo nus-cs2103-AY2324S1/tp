@@ -48,6 +48,12 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddTimeCommand.COMMAND_WORD:
+            return new AddTimeCommandParser().parse(arguments);
+
+        case DeleteTimeCommand.COMMAND_WORD:
+            return new DeleteTimeCommandParser().parse(arguments);
+
         case CreateGroupCommand.COMMAND_WORD:
             return new CreateGroupParser().parse(arguments);
 
@@ -63,14 +69,26 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case GroupRemarkCommand.COMMAND_WORD:
+            return new GroupRemarkCommandParser().parse(arguments);
+
+        case ListTimeCommand.COMMAND_WORD:
+            return new ListTimeCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case AddGroupFreeTimeCommand.COMMAND_WORD:
+            return new AddGroupFreeTimeCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case FindFreeTimeCommand.COMMAND_WORD:
+            return new FindFreeTimeParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
