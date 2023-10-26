@@ -4,10 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.ShortcutSettings;
+import seedu.address.logic.commands.CommandWord;
+import seedu.address.logic.commands.ShortcutAlias;
 
 /**
  * Represents User's preferences.

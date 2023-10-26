@@ -40,7 +40,7 @@ public class DeleteShortcutCommand extends Command {
         requireNonNull(model);
         StringBuilder message = new StringBuilder();
         shortcutAliasList.forEach(shortcutAlias -> {
-            String feedback = model.getShortcutSettings().removeShortcut(shortcutAlias);
+            String feedback = model.removeShortcut(shortcutAlias);
             if (feedback == null) {
                 message.append(String.format(MESSAGE_NONEXISTENT, shortcutAlias));
             } else {

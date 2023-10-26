@@ -18,7 +18,8 @@ public class CommandWord {
         AddCommand.COMMAND_WORD, AddShortcutCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD,
         DeleteCommand.COMMAND_WORD, DeleteShortcutCommand.COMMAND_WORD, EditCommand.COMMAND_WORD,
         ExitCommand.COMMAND_WORD, FindCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD,
-        ListCommand.COMMAND_WORD
+        ListCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD,
+        ViewCommand.COMMAND_WORD
     };
 
     public final String keyword;
