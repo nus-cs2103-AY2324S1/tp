@@ -164,9 +164,9 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 
 The Room Statistics PieChart is facilitated by the RoomPieChart class, and the actual pie chart object is created using
-the DoughnutChart class. This is designed to enable hotel receptionists to be able to determine the 
+the DoughnutChart class. This is designed to enable hotel receptionists to be able to determine the
 number of available and unavailable rooms at a glance during the hustle and bustle of handling multiple
-guest check ins, allowing them to be able to either report to their manager or supervisor the current number of rooms 
+guest check ins, allowing them to be able to either report to their manager or supervisor the current number of rooms
 occupied, or to inform a guest that they are entertaining that perhaps a specific room that they desire is not available
 due to the large number of rooms occupied on that day.
 
@@ -175,7 +175,7 @@ The primary functions of the class include:
 - `RoomPieChart(ObservableList<Booking> bookingList)` - Creates the pie chart object with the appropriate dimensions and labels.
 
 The RoomPieChart object is updated by the `handleViewRoomStatistics()` method declared in /main/java/seedu/address/ui/MainWindow.java class,
-which is called after every command except `find` command is returned. The reason why it is not updated after `find` is because 
+which is called after every command except `find` command is returned. The reason why it is not updated after `find` is because
 the pie chart is generated using the filteredList returned after every command, and since `find` generates a filteredList
 based on the user's input, we do not want to update the pie chart with only the Bookings that fit the user's input.
 
@@ -190,7 +190,6 @@ The following sequence diagram provides a visual representation of the piec char
 - **Choice:** Edit the CommandResult method signature to take in another boolean parameter to indicate whether handleViewRoomStatistics is called.
     - Pros: For every command, it is easy to edit the command's class to either update the pie chart or not.
     - Cons: Might be too simple of an implementation. If the developer chooses to add in more complex commands that rely on other commands, regressions may occur.
-        
 
 - **Alternative:** Use a ListChangeListener object to monitor the list to see if there is a change in the number of bookings, and call handleViewRoomStatistics accordingly.
     - Pros: Reduces chances of regressions occuring when more complex commands are added as updating the pie chart only relies on any changes to the Bookings list.
@@ -202,7 +201,7 @@ The following sequence diagram provides a visual representation of the piec char
     - Pros: Visually noticeable to users as they can see if there is no change to the pie chart when there should be.
     - Cons: Users may somehow not notice that the pie chart is not changing.
 
-### Prefix Autocomplete 
+### Prefix Autocomplete
 
 #### Implementation
 
@@ -232,7 +231,7 @@ The following sequence diagram provides a visual representation of the prefix au
 
 - **Choice:** Uses a predefined list of prefixes and examples for each command.
     - Pros: Simplified implementation. Easy to maintain and update.
-    - Cons: 
+    - Cons:
       - Limited to predefined prefixes and commands.
       - Subject to manual change when prefix changes.
 
