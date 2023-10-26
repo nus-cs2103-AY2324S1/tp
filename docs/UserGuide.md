@@ -85,17 +85,18 @@ Examples:
 * `deleteMember 10 ` deletes the 10th member in the member list.
 
 ### Edit a Member: `editMember`
-Edits the member at the specified index with the specified attributes.
+Edits the member at the specified index with the specified fields.
 
 Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 
 * The index refers to the index number shown in the displayed member list.
 * The index **must be a positive integer** that is within the range of the length of the member list.
 * At least one field to edit must be provided.
-
+* Acceptable values for `GENDER`: `Male`, `Female`, `Others`.
+* Acceptable values for `EMAIL`: A string with an email extension (e.g. `@gmail.com`).
 
 Examples:
-* `editMember 1 a/RH t/Musician` edits the address and tag of the 1st member in the member list.
+* `editMember 1 a/RH t/Musician` edits the address and the tag of the 1st member in the member list.
 
 ### Create an Event : `createEvent`
 
