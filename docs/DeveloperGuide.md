@@ -397,19 +397,87 @@ The following diagram summarises what happens when a user executes a Sort comman
       other fields when it becomes supported.
     - Cons: Applicant#compareTo has to return different values depending on which descriptor has been chosen, causing
       some bugs when working with other Java functions as the order of Objects compared to each other is not meant to
-      change during runtime. 
+      change during runtime.
 
 ##### Aspect: Command syntax
 
 - Alternative 1 (current choice): `sort d/ [valid field]`
-  - Pros: Simple and minimal text fields, with a single prefix required to enable sorting.
-  - Cons: Only able to sort in ascending order.
+    - Pros: Simple and minimal text fields, with a single prefix required to enable sorting.
+    - Cons: Only able to sort in ascending order.
 - Alternative 2: `sort d/ [valid field] o/ [a/d]`
-  - Pros: Able to sort in either ascending or descending order.
-  - Cons: Requires additional input from the user, slowing down the use of the command.
+    - Pros: Able to sort in either ascending or descending order.
+    - Cons: Requires additional input from the user, slowing down the use of the command.
 - Alternative 3: `sort d/ [valid field] o/ [a/d]` where `o/` is optional
-  - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1.
-  - Cons: Users who are not aware of the `o/` feature may not use it.
+    - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1.
+    - Cons: Users who are not aware of the `o/` feature may not use it.
+
+### Filter feature
+
+#### Implementation
+
+The filter feature works by updating the `Predicate` used in the `FilteredList<Applicant>` of `ModelManager`. Using
+the predicate, minimal changes to the implementation of StaffSnap is required.
+
+To create a single predicate that is able to search and filter for multiple fields, a `CustomFilterPredicate` class is
+created
+It currently contains the following fields and is able to filter for applicants which match all specified fields.
+
+1. Name
+2. Phone
+3. Email
+4. Position
+5. Status
+6. Less than score
+7. Greater than score
+
+When `CustomFilterPredicate#test` is called, it will check if the specified fields are a substring of the same field of
+the applicant,
+returning true if all specified fields match, and false otherwise.
+
+#### Steps to trigger
+
+1. User opens the app
+2. User enters `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where one or more of the prefixes can be specified to
+   be filtered by
+
+Once step 2 is complete, the GUI will update and refresh the applicant list with only applicants which match all
+specified fields.
+The following diagram summarises what happens when a user executes a Filter command:
+
+<puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommandActivityDiagram" />
+
+### Design considerations
+
+#### Aspect: How to filter applicants
+
+- Alternative 1 (current choice): use a custom predicate and FilteredList, **compare using strings**
+    - Pros: Current implementation of ModelManager already uses FilteredList, making a custom predicate an easy
+      extension.
+      The `CustomFilterPredicate` can easily be extended when more applicant fields are ready to expand the utility of
+      the
+      filter command.
+    - Cons: Comparison of predicate fields to applicant fields are done using string comparison.
+- Alternative 2: use a custom predicate and FilteredList, **compare within field classes**
+    - Pros: Same as alternative 1, and definition of what is considered a match can be defined in the field class (e.g.
+      Name, Phone, etc).
+    - Cons: Will require greater complexity than alternative 1 in implementation. May be slower to integrate new classes
+      in the future.
+
+#### Aspect: Command syntax
+
+- Alternative 1: `filter n/ [Name] e/ [Email] p/ [Position] hp/ [Phone] s/ [Status] lts/ [Score] gts/ [Score]`
+    - Pros: Unambiguous and forces all fields to be entered, preventing errors.
+    - Cons: Users cannot filter by single fields. Requires more key presses to enter a filter command.
+- Alternative 2: `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where only one term is allowed
+    - Pros: Quicker to key in command than alternative 1.
+    - Cons: Only allows users to filter by one field at a time, limiting utility of filter command.
+- Alternative 3 (current choice): `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where at least one term is required
+  and the others
+  are optional
+    - Pros: Provides flexibility in the filter command to filter by one or more fields, while still retaining the speed
+      of alternative 2 when few fields are required.
+    - Cons: Unfamiliar users may not know that fields can be optional anc continue to key in the full command at all
+      times.
 
 --------------------------------------------------------------------------------------------------------------------
 

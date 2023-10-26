@@ -19,7 +19,7 @@ class StatusCommandParserTest {
     @Test
     void parse_validArgs_returnsStatusCommand() {
         StatusCommand expectedStatusCommand = new StatusCommand(Index.fromOneBased(1), Status.OFFERED);
-        assertParseSuccess(parser, "1 o", expectedStatusCommand);
+        assertParseSuccess(parser, "1 s/ o", expectedStatusCommand);
     }
 
     @Test
@@ -29,11 +29,12 @@ class StatusCommandParserTest {
 
     @Test
     void parse_missingStatus_throwsParseException() {
-        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_NO_STATUS));
     }
 
     @Test
     void parse_missingIndex_throwsParseException() {
-        assertParseFailure(parser, "o", String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatusCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "s/ o", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                StatusCommand.MESSAGE_NO_INDEX));
     }
 }
