@@ -95,6 +95,7 @@ public class AddDoctorCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
@@ -173,6 +174,11 @@ public class AddDoctorCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undo() {
             throw new AssertionError("This method should not be called.");
         }
     }
