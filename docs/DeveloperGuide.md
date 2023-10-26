@@ -4,7 +4,7 @@ title: "Developer Guide"
 pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# UniMate Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -157,7 +157,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Adding `Event` feature
+### Adding Events
 
 #### Implementation
 
@@ -218,6 +218,132 @@ is a timing conflict will be reflected in the UI status bar.
     * Cons: For multi-day `Event`, user has to call the command multiple times for all the relevant days
 
 {more aspects and alternatives to be added}
+
+### Deleting Events
+
+#### Implementation
+
+The deletion of events is facilitated by the `model::deleteEventAt` method and the `model::findEventAt` method. The
+former method deletes the event stored in the `Calendar` object which itself is an attribute of the `Model` object by
+calling a similar method `Calendar::deleteEventAt`. These methods take in a `LocalDateTime` object and finds the method
+within the `Calendar` object, then in the case of `model::deleteEventAt`, deletes the event. Given below is an example
+usage scenario of the command.
+
+Step 1. The user launches the application and creates an event.
+
+Step 2. The user executes `deleteEvent 2023-12-09 12:00` command to delete the event at that time. The `deleteEvent`
+command calls `Model#findEventAt(LocalDateTime)` to find an event at the specified date and time. This event is then stored as a
+variable `toDelete`.
+
+**Note**: If no event is found at the specified date and time at any point of the command execution, an
+`EventNotFoundException` is thrown which causes an error message to be displayed.
+
+Step 3. The command then calls `Model#deleteEventAt(LocalDateTime)`. This method calls similar methods of
+`Calendar#deleteEventAt(LocalDateTime)` which calls `AllDaysEventListManager#deleteEventAt(LocalDateTime)`.
+
+Step 4. The `AllDaysEventListManager` checks for an event at the specified date and time again, then checks for all days
+for which the event lasts for. Then, for each day, the event is removed from the `SingleDayEventList`.
+
+Step 5. The deleted event which was previously stored in as a variable is displayed in the `CommandResult` to show the
+user which command was deleted.
+
+**Design considerations**
+
+* The design of the `deleteEvent` command is dependent on the structure of the `Calendar` object. Should the structure
+  of how the event objects are stored change, a new implementation will be required for the command.
+
+### Contact Filtering
+
+#### Implementation
+
+The filtering function executed by `FilterCommand` is facilitated by the `PersonFilter` class.
+which itself is similar to the `EditPersonDescriptor` class found in `EditCommand.java`. It stores the fields by which
+the contacts are to be filtered and creates a predicate to facilitate the filtering. Notably, it implements the
+following operation:
+
+* `PersonFilter#matchesFilter(Person)` - Compares the values of the attributes of the `Person` to the strings stored as
+  attributes in the `PersonFilter` object. This method is later used as a lambda method to filter the contact list.
+
+Given below is an example of how the filter function works at each step.
+
+Step 1. The user executes `filter n/Bob t/CS` to filter contacts to see only people with "Bob" in their name and have at
+least 1 tag with "CS" in it. The input is passed to `UniMateParser` which then parses it with the `FilterCommandParser`.
+
+Step 2. The `FilterCommandParser` parses the input and creates a corresponding `PersonFilter` object with null for all
+parameters. It then sets all specified attributes of the created `PersonFilter` while leaving unspecified fields as
+null. The `FilterCommandParser` finally returns a newly created `FilterCommand` with the PersonFilter used in the
+constructor.
+
+Step 3. `FilterCommand#execute` is called. In this method, `model#updateFilteredPersonList` is called with
+`PersonFilter#matchesFilter` being used as the predicate. This updates the GUI and populates the filtered list with
+only `Person` objects that match the filter.
+
+Step 4. The number of people displayed is returned as a `CommandResult`.
+
+### Contact Sorting
+
+#### Implementation
+The sort function executed by `SortCommand`.
+
+The sort function allows users to sort all persons in `UniMate` based on a given criteria. The following criterion for sort are shown below
+- Sort by name (optional: in the reverse order)
+- Sort by address (optional: in the reverse order)
+- Sort by email (optional: in the reverse order)
+- Sort by phone (optional: in the reverse order)
+
+The syntax used to call this command is as follows, without the [ ] braces: `sort [/byname][/byaddress][/byemail][byphone] [/reverse]`. Do note that sorting by reverse is optional.
+
+Given below is an example of how the sort function works at each step. We will simulate a user using the sort function to sort UniMate contacts by name in descending order.
+1. The user executes `sort /byname /reverse` to find his friend's contact. The input is passed into `UniMateParser` which then parses it with the `SortCommandParser`.
+2. The `SortCommandParser` parses the input and first checks for arguments provided. If the arguments are empty, invalid or in the wrong format, a helper message will appear to allow the user to reference the sample run case. The arguments are then matched by the keywords provided to determine the basis for sorting using a `SortComparator`. All the comparators are added into an ArrayList of `SortComparator` for `SortCommand` to parse.
+3. `SortCommand` is initialized parses the array from step 2 to determine the basis of comparison when the command is executed. The `SortCommandParser` finally returns a newly created `SortCommand` consisting of a Person Comparator that decides the method of sorting for the UniMate address book.
+4. `SortCommand#execute` is called. In this method, `model#sortPersonList` is called with the Person Comparator created in step 3. This in turn calls `AddressBook#sortPersons` which calls the storage function to save the contacts in the json file based on the sorted order.
+5. The GUI then reads in the json file to obtain the order of addresses and populates the sorted list with the sorting criteria provided.
+6. The success message is returned as a `CommandResult` and displayed on the GUI result display panel.
+
+**Design considerations**
+
+* The design of the `sort` command is dependent on the structure of the `AddressBookStorage` object. Should the structure
+  of how the AddressBook objects are stored change, a new implementation will be required for the command.
+
+### TaskList Feature (Work in Progress)
+
+#### Implementation
+
+The proposed tasklist feature is facilitated by 'TaskList'. It extends a ReadOnlyTaskList that will be used for the
+saving of the users' tasks. Additionally, it implements the following operations:
+
+*`TaskList#addTask()` -- Adds a task to the current tasklist and saves it to memory.
+*`TaskList#deleteTask()` -- Delete an existing task from the current tasklist and saves it to memory.
+*`TaskList#editTask()` -- Edits an existing task from the current tasklist and saves it to memory.
+
+These operations are exposed in the `Model` interface as `Model#addTask()`, `Model#deleteTask()` and `Model#editTask()`
+respectively.
+
+##### Adding Task
+
+The adding of tasks is facilitated by the `model#addTask()` method. 
+The method adds a task to the `TaskList` object which itself is an attribute of the `ModelManager` object by
+calling a similar method `Model::addTask()`. 
+These methods take in a `Description` and `Optional(Deadline)` object and finds the method within the `TaskList` object,
+then adds the `Task` object to the TaskList.
+Given below is an example usage scenario of the command.
+
+Step 1. The user launches the application and creates a task.
+
+Step 2. The user executes `addTask d/CS2105 Assignment te/2023-12-12 12:00 ` command to add the task.
+The `addTask` method in the model is called, adding the task to the tasklist, and saving the tasklist to memory.
+
+**Note**: There is no limit to the number of tasks of the same description or deadline that can be created.
+
+**Design considerations**
+
+* The design of the `addTask` command is such that a deadline is made optional.
+* This current implementation allows for more freedom to the user but might be more difficult to manage with the addition of Optionals.
+
+##### Delete Task (To be added)
+
+##### Edit Task (To be added)
 
 
 ### \[Proposed\] Undo/redo feature
@@ -313,92 +439,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Contact Filtering
-
-#### Implementation
-
-The filtering function executed by `FilterCommand` is facilitated by the `PersonFilter` class.
-which itself is similar to the `EditPersonDescriptor` class found in `EditCommand.java`. It stores the fields by which
-the contacts are to be filtered and creates a predicate to facilitate the filtering. Notably, it implements the
-following operation:
-
-* `PersonFilter#matchesFilter(Person)` - Compares the values of the attributes of the `Person` to the strings stored as
-  attributes in the `PersonFilter` object. This method is later used as a lambda method to filter the contact list.
-
-Given below is an example of how the filter function works at each step.
-
-Step 1. The user executes `filter n/Bob t/CS` to filter contacts to see only people with "Bob" in their name and have at
-least 1 tag with "CS" in it. The input is passed to `UniMateParser` which then parses it with the `FilterCommandParser`.
-
-Step 2. The `FilterCommandParser` parses the input and creates a corresponding `PersonFilter` object with null for all
-parameters. It then sets all specified attributes of the created `PersonFilter` while leaving unspecified fields as
-null. The `FilterCommandParser` finally returns a newly created `FilterCommand` with the PersonFilter used in the
-constructor.
-
-Step 3. `FilterCommand#execute` is called. In this method, `model#updateFilteredPersonList` is called with
-`PersonFilter#matchesFilter` being used as the predicate. This updates the GUI and populates the filtered list with
-only `Person` objects that match the filter.
-
-Step 4. The number of people displayed is returned as a `CommandResult`.
-
-### Deleting Events
-
-### Implementation
-
-The deletion of events is facilitated by the `model::deleteEventAt` method and the `model::findEventAt` method. The
-former method deletes the event stored in the `Calendar` object which itself is an attribute of the `Model` object by
-calling a similar method `Calendar::deleteEventAt`. These methods take in a `LocalDateTime` object and finds the method
-within the `Calendar` object, then in the case of `model::deleteEventAt`, deletes the event. Given below is an example
-usage scenario of the command.
-
-Step 1. The user launches the application and creates an event.
-
-Step 2. The user executes `deleteEvent 2023-12-09 12:00` command to delete the event at that time. The `deleteEvent`
-command calls `Model#findEventAt(LocalDateTime)` to find an event at the specified date and time. This event is then stored as a
-variable `toDelete`.
-
-**Note**: If no event is found at the specified date and time at any point of the command execution, an
-`EventNotFoundException` is thrown which causes an error message to be displayed.
-
-Step 3. The command then calls `Model#deleteEventAt(LocalDateTime)`. This method calls similar methods of
-`Calendar#deleteEventAt(LocalDateTime)` which calls `AllDaysEventListManager#deleteEventAt(LocalDateTime)`.
-
-Step 4. The `AllDaysEventListManager` checks for an event at the specified date and time again, then checks for all days
-for which the event lasts for. Then, for each day, the event is removed from the `SingleDayEventList`.
-
-Step 5. The deleted event which was previously stored in as a variable is displayed in the `CommandResult` to show the
-user which command was deleted.
-
-**Design considerations**
-
-* The design of the `deleteEvent` command is dependent on the structure of the `Calendar` object. Should the structure
-  of how the event objects are stored change, a new implementation will be required for the command.
-
-### Contact Sorting
-
-#### Implementation
-The sort function executed by `SortCommand`.
-
-The sort function allows users to sort all persons in `UniMate` based on a given criteria. The following criterion for sort are shown below
-- Sort by name (optional: in the reverse order)
-- Sort by address (optional: in the reverse order)
-- Sort by email (optional: in the reverse order)
-- Sort by phone (optional: in the reverse order)
-
-The syntax used to call this command is as follows, without the [ ] braces: `sort [/byname][/byaddress][/byemail][byphone] [/reverse]`. Do note that sorting by reverse is optional.
-
-Given below is an example of how the sort function works at each step. We will simulate a user using the sort function to sort UniMate contacts by name in descending order.
-1. The user executes `sort /byname /reverse` to find his friend's contact. The input is passed into `UniMateParser` which then parses it with the `SortCommandParser`.
-2. The `SortCommandParser` parses the input and first checks for arguments provided. If the arguments are empty, invalid or in the wrong format, a helper message will appear to allow the user to reference the sample run case. The arguments are then matched by the keywords provided to determine the basis for sorting using a `SortComparator`. All the comparators are added into an ArrayList of `SortComparator` for `SortCommand` to parse.
-3. `SortCommand` is initialized parses the array from step 2 to determine the basis of comparison when the command is executed. The `SortCommandParser` finally returns a newly created `SortCommand` consisting of a Person Comparator that decides the method of sorting for the UniMate address book.
-4. `SortCommand#execute` is called. In this method, `model#sortPersonList` is called with the Person Comparator created in step 3. This in turn calls `AddressBook#sortPersons` which calls the storage function to save the contacts in the json file based on the sorted order.
-5. The GUI then reads in the json file to obtain the order of addresses and populates the sorted list with the sorting criteria provided.
-6. The success message is returned as a `CommandResult` and displayed on the GUI result display panel.
-
-**Design considerations**
-
-* The design of the `sort` command is dependent on the structure of the `AddressBookStorage` object. Should the structure
-  of how the AddressBook objects are stored change, a new implementation will be required for the command.
 
 --------------------------------------------------------------------------------------------------------------------
 
