@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import seedu.address.model.interview.Interview;
@@ -138,6 +139,36 @@ public class TimeParser {
                 res.add(currentInterview);
             }
         }
+        System.out.println(res);
+        return res;
+    }
+
+    /**
+     * Lists out all interviews that have a start time of today
+     *
+     * @author Tan Kerway
+     * @param interviews the list of interviews that the user has
+     * @return a list of interviews whose start time is today, as given by LocalDateTime.now()
+     */
+    public static List<Interview> listInterviewsToday(UniqueInterviewList interviews) {
+        // get today's day, month, and year for checking
+        LocalDateTime today = LocalDateTime.now();
+        int todayDay = today.getDayOfMonth();
+        int todayMonth = today.getMonthValue();
+        int todayYear = today.getYear();
+        List<Interview> res = new ArrayList<>();
+        // loop over all the interviews, and add those that have today as the start time
+        for (Interview interview : interviews) {
+            LocalDateTime currentInterviewStartTime = interview.getInterviewStartTime();
+            int currentInterviewDay = currentInterviewStartTime.getDayOfMonth();
+            int currentInterviewMonth = currentInterviewStartTime.getMonthValue();
+            int currentInterviewYear = currentInterviewStartTime.getYear();
+            if (currentInterviewDay == todayDay
+                    && currentInterviewMonth == todayMonth
+                    && currentInterviewYear == todayYear) {
+                res.add(interview); // add the current interview if its start date is today
+            }
+        }
         return res;
     }
 
@@ -214,6 +245,21 @@ public class TimeParser {
     }
 
     /**
+     * Sorts the list of interviews in ascending chronological order.
+     *
+     * @author Tan Kerway
+     *
+     */
+    public static List<Interview> sortInterviewsInChronologicalAscendingOrder(UniqueInterviewList interviews) {
+        List<Interview> res = new ArrayList<>();
+        for (Interview interview : interviews) {
+            res.add(interview);
+        }
+        res.sort(Comparator.comparing(Interview::getInterviewStartTime));
+        return res;
+    }
+
+    /**
      * Formats the time String.
      *
      * @author Tan Kerway
@@ -222,7 +268,6 @@ public class TimeParser {
      */
     public static String formatDate(LocalDateTime time) {
         assert time != null : "time should be not null";
-        // TODO FIX THIS; NEED TO FORMAT INTO AN ACCEPTABLE DATE
         return time.format(DateTimeFormatter.ofPattern("d/M/yy HHmm"));
     }
 }
