@@ -9,6 +9,8 @@ import static seedu.address.testutil.TypicalInterviews.STANDARD_INTERVIEW_2;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.TypicalIndexes;
 
 /**
@@ -20,25 +22,29 @@ public class AddInterviewCommandTest {
     @Test
     public void constructor_nullInterview_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new AddInterviewCommand(null, null, null));
+                new AddInterviewCommand(null, null, null, null));
     }
 
     @Test
-    public void equals() {
+    public void equals() throws CommandException, ParseException {
         Index index = TypicalIndexes.INDEX_FIRST;
         AddInterviewCommand addInterview1Cmd =
                 new AddInterviewCommand(index, STANDARD_INTERVIEW.getJobRole(),
-                        STANDARD_INTERVIEW.getInterviewTiming());
+                        STANDARD_INTERVIEW.getInterviewStartTimeAsString(),
+                        STANDARD_INTERVIEW.getInterviewEndTimeAsString()
+                        );
         AddInterviewCommand addInterview2Cmd =
                 new AddInterviewCommand(index, STANDARD_INTERVIEW_2.getJobRole(),
-                        STANDARD_INTERVIEW_2.getInterviewTiming());
+                        STANDARD_INTERVIEW_2.getInterviewStartTimeAsString(),
+                        STANDARD_INTERVIEW_2.getInterviewEndTimeAsString());
 
         // same object -> returns true
         assertEquals(addInterview1Cmd, addInterview1Cmd);
 
         // same values -> returns true
         AddInterviewCommand addInterview1Copy = new AddInterviewCommand(index, STANDARD_INTERVIEW.getJobRole(),
-                STANDARD_INTERVIEW.getInterviewTiming());
+                STANDARD_INTERVIEW.getInterviewStartTimeAsString(),
+                STANDARD_INTERVIEW.getInterviewEndTimeAsString());
         assertEquals(addInterview1Cmd, addInterview1Copy);
 
         // different types -> returns false
