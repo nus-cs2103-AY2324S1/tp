@@ -155,23 +155,27 @@ Examples:
 * `viewc 2` Displays detailed information related to the 2nd contact on the list.
 
 
-### Locating persons by name: `findc`
+### Search for persons using contact fields: `findc`
+Find persons whose contact details match the keywords specified for at least 1 of these fields: name, phone, email, status, tag
 
-Find contacts whose names contain any of the given keywords.
+Format: `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [s/KEYWORDS] [t/KEYWORDS]`
 
-Format: `findc KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g `shop` will match `SHOP`
+* The order of the keywords does not matter. e.g. `Shop Meet` will match `Meet Shop`
+* For name, status and tags, only full words will be matched e.g. `Meet` will not match `Meeting`
+* For email, any characters (alphanumeric, special characters) will be matched e.g. `_` will match `m_e@gmail.com`
+* For phone, the entire length of the input digits will be matched e.g. `913` will match `90091300` but not `90103000`
+* For a single field, a Person must match at least one keyword to be returned as a result (i.e. `OR` search).
+  e.g. `John Doe` will return `John Lee`, `James Doe`
+* If there are multiple fields specified, the Person must match at least one keyword in each field to be returned as a result (i.e. `AND` search).
+  e.g. `m/Shop Meet a/Mall` will return `Meeting: Shop at mall, Location:Mall`
 
 Examples:
-* `findc John` returns `john` and `John Doe`
-* `findc alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `findc n/alice` returns `Alice` and `alice tan`
+* `findc p/51` returns `95163890` and `40351`
+* `findc e/_@GMAIL` returns `alice_@gmail.com`
+* `findc p/9 s/inactive claimant t/friend` returns persons with a `9` in their phone number, whose status is either `inactive` or `claimant`, and has a `friend` tag
+  ![result for 'findContact'](images/findContactResult.png)
 
 
 ## Meeting commands
