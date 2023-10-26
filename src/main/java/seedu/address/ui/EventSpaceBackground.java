@@ -56,12 +56,9 @@ public class EventSpaceBackground extends UiPart<Region> {
 
     public void showRelevantBackground() {
         columns.stream().filter(column -> !column.isWithin(calendarStartTime, calendarEndTime))
-                .map(EventSpaceBackgroundColumn::getRoot).forEach(new Consumer<Region>() {
-                    @Override
-                    public void accept(Region region) {
-                        region.setVisible(false);
-                        region.setManaged(false);
-                    }
-        });
+                .map(EventSpaceBackgroundColumn::getRoot).forEach(region -> {
+                    region.setVisible(false);
+                    region.setManaged(false);
+                });
     }
 }
