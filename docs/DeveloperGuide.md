@@ -155,13 +155,13 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Create a new team
 
-#### Proposed Implementation
+####  Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#commit()` - Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
@@ -267,7 +267,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Developers engaged in medium to large-scale software projects; 
+* Project managers engaged in software projects at the startup/small level companies; 
 * Collaborates frequently with multiple teams or departments; 
 * Requires quick access to contact details of other team members based on their roles and responsibilities; 
 * Prefers an organized and streamlined method for contact management; 
@@ -308,8 +308,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `LinkTree` and the **Actor** is the `user`, unless specified otherwise)
@@ -338,16 +336,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Developer wants to find contacts with a specific tag.
-2. Developer inputs the desired tag into TeamDirectory.
-3. TeamDirectory displays a list of contacts with that tag.
+1. User wants to find team leader of a given team.
+2. User inputs the desired team name into LinkTree.
+3. LinkTree displays the name of the team leader.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. No contacts have the specified tag.
-  * 2a1. TeamDirectory shows a message that no contacts were found with that tag.
+* 2a. No such team exists
+  * 2a1. LinkTree shows a message that no such team exists.
     Use case ends.
 
 ---
@@ -358,115 +356,134 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Project manager requests a list of all developers.
-2. TeamDirectory displays the list of developers.
+2. LinkTree displays the list of developers.
 
     Use case ends.
 
 ---
 
-**Use case: Edit or update my information**
-**Actor: Developer**
-
-**MSS**
-
-1. Developer wants to update their contact info.
-2. Developer selects their profile and makes desired changes.
-3. TeamDirectory confirms the updates.
-
-    Use case ends.
-
----
-
-**Use case: Assign a node for a team leader**
+**Use case: Edit or update information**
 **Actor: Project Manager**
 
 **MSS**
 
-1. Project manager wants to assign a node to a team leader.
-2. Project manager selects the desired team leader and assigns a node.
-3. TeamDirectory confirms the assignment.
+1. User wants to update the contact info of a developer.
+2. User provides the name of person and info to edit
+3. LinkTree confirms the updates.
 
     Use case ends.
+
+**Extensions**
+
+* 2a. No such person exists
+    * 2a1. LinkTree shows a message that no such person exists.
+      Use case ends.
 
 ---
 
-**Use case: Create a public profile for a team**
-**Actor: Team lead**
+**Use case: Change the team leader**
+**Actor: Project Manager**
 
 **MSS**
 
-1. Software team lead wants to create a public profile.
-2. Software team lead inputs relevant information for the public profile.
-3. TeamDirectory creates and displays the new public profile.
+1. Project manager wants to change the team leader of a team.
+2. Project manager selects the team and provides a new team leader name.
+3. LinkTree confirms the change.
 
     Use case ends.
+
+**Extensions**
+
+* 2a. No such team exists
+    * 2a1. LinkTree shows a message that no such team exists.
+      Use case ends.
+  2b. No such person exists
+    * 2b1. LinkTree shows a message that no such person exists.
+    * Use case ends.
+---
+
+
+**Use case: Remove a person from project**
+**Actor: Project Manager**
+
+**MSS**
+
+1. Project manager wants to remove a person from project.
+2. Project manager provides name and requests the removal.
+3. LinkTree confirms the removal of the person.
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. No such person exists
+    * 2a1. LinkTree shows a message that no such person exists.
+      Use case ends.
 
 ---
 
-**Use case: Remove a user**
+**Extensions**
 
-**MSS**
-
-1. Project manager wants to remove a user.
-2. Project manager selects the user and requests removal.
-3. TeamDirectory confirms the removal of the user.
-
-    Use case ends.
+* 2a. No such team exists
+    * 2a1. LinkTree shows a message that no such team exists.
+      Use case ends.
 
 ---
 
-**Use case: Set a verification code for project manager registration**
-
-**MSS**
-
-1. Software team lead sets a verification code.
-2. New project managers must input this code to register.
-3. TeamDirectory verifies the code and allows the registration.
-
-    Use case ends.
-
 ---
 
-**Use case: Receive notifications about contact changes**
+**Use case: Create a new team**
 
 **MSS**
 
-1. User with access wants to be notified of contact changes.
-2. TeamDirectory sends notifications whenever there are contact changes.
-3. User views the notifications.
+1. User provides a team name and team leader name.
+2. LinkTree creates team with given name and with team leader set to the provided name.
+3. LinkTree confirms creation of team
 
     Use case ends.
 
+**Extensions**
+
+* 1a. Team already exists
+    * 1a1. LinkTree shows a message that you are trying to create a duplicate team.
+      Use case ends.
+  * 1b. No such person with given name exists
+      * 1b1. LinkTree shows a message that the person you are trying to set as team leader does not exist.
+        Use case ends.
 ---
 
-**Use case: Easily register as a first-time user**
+**Use case: Display the tree of organisation**
 
 **MSS**
 
-1. First-time user wants to register.
-2. First-time user inputs necessary details into TeamDirectory.
-3. TeamDirectory confirms successful registration.
+1. User requests for tree to be shown.
+2. LinkTree displays existing tree
+3. User views the tree.
 
     Use case ends.
 
+4. **Extensions**
+
+* 1a. Tree is empty
+    * 1a1. LinkTree shows a message that the tree is empty.
+      Use case ends.
 ---
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 500 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be able to generate output in less than 5 seconds.
 5. Should be able to show correct input format in case the user enters the input in wrong format.
-6. The system should be usable by a new developer/intern who has not used such a software before.
+6. The system should be usable by a new project manager who has not used such a software before.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Team Directory**: The system or platform where all the contact details of developers, team leaders, and project managers are stored.
-* **Node**: A designated area or profile within the Team Directory where specific users (like team leaders or developers) can input or update their information.
-* **Tag-Based System**: A system in the Team Directory that allows contacts to be tagged with specific roles or responsibilities, like "Database Management" or "Code Review".
+* **Tag-Based System**: A system in LinkTree that allows contacts to be tagged with specific roles or responsibilities, like "Database Management" or "Code Review".
 * **Public Profile**: A profile in the Team Directory visible to all users, containing non-sensitive information about a team or individual.
 * **Status Feature**: A tool enabling users to set and display their current status or availability (e.g., online, busy, away) within the Team Directory.
 * **Inventory Checking**: A feature that logs the state of an item (like an apartment) at a specific time, allowing for easy comparison at a later date.
