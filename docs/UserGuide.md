@@ -5,6 +5,9 @@ and enjoyable tool to enhance their dating experiences. Featuring user profile m
 compatibility ranking, and customizable filtering options, LoveBook enhances the efficiency and effectiveness of your
 online dating journey.
 
+<!-- * Table of Contents -->
+<page-nav-print />
+
 - [Quick Start](#1-quick-start)
 - [Features](#2-features)
    - [Listing current dates : `list`](#list-all-dates-list)
@@ -16,6 +19,8 @@ online dating journey.
    - [Sorting list of dates by Metric: `sort`](#sorting-list-of-dates-by-metric-sort)
    - [Getting a recommended date: `match`](#getting-a-recommended-date-match)
    - [Setting the matching algorithm: `setPreference`](#setting-the-matching-algorithm-setPreference)
+   - [Star a date: `star`](#star-a-date-star)
+   - [Unstar a date: `unstar`](#unstar-a-date-unstar)
 - [FAQ](#3-faq)
 - [Summary](#4-summary)
 - [Glossary](#5-glossary)
@@ -154,6 +159,21 @@ Expected output: `Preferences have been updated!`
 Output if error:
 `Please follow the required format to add a new date (setPreference /gender M /age -3 height/ -20 income/ 2000)`
 
+### [Star a date: `star`](#star-a-date-star)
+Format: `star INDEX`
+
+Expected output: `NAME has been starred!`
+
+Output if error:
+`The index you have provided is out of bounds of your current list of dates`
+
+### [Unstar a date: `unstar`](#unstar-a-date-unstar)
+Format: `unstar INDEX`
+
+Expected output: `NAME has been unstarred!`
+
+Output if error:
+`The index you have provided is out of bounds of your current list of dates`
 --------------------------------------------------------------------------------------------------------------------
 
 # 3 [FAQ](#3-faq)
@@ -187,8 +207,8 @@ your data. In the event of a power outage, all your data will be safe.
 | Sorting list of dates  | `sort METRIC/`                                 | `sort name/`                              |
 | Getting a recommended date | `match`                                      | `match`                                   |
 | Setting the matching algorithm | `setPreference gender/M age/-3 height/-20 income/2000` | `setPreference gender/M age/-3 height/-20 income/2000` |
-
-
+ | Star a date            | `star INDEX`                                   | `star 1`                                  |
+ | Unstar a date          | `unstar INDEX`                                 | `unstar 1`                                |
 --------------------------------------------------------------------------------------------------------------------
 
 # 5 [Glossary](#5-glossary)

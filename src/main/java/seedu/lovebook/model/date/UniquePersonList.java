@@ -1,4 +1,4 @@
-package seedu.lovebook.model.person;
+package seedu.lovebook.model.date;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.lovebook.model.person.exceptions.DuplicatePersonException;
-import seedu.lovebook.model.person.exceptions.PersonNotFoundException;
+import seedu.lovebook.model.date.exceptions.DuplicatePersonException;
+import seedu.lovebook.model.date.exceptions.PersonNotFoundException;
 
 /**
  * A list of dates that enforces uniqueness between its elements and does not allow nulls.
@@ -64,7 +64,6 @@ public class UniquePersonList implements Iterable<Date> {
         if (!target.isSamePerson(editedDate) && contains(editedDate)) {
             throw new DuplicatePersonException();
         }
-
         internalList.set(index, editedDate);
     }
 

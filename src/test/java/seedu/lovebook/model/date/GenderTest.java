@@ -1,4 +1,4 @@
-package seedu.lovebook.model.person;
+package seedu.lovebook.model.date;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

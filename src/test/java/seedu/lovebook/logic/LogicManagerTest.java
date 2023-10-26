@@ -29,7 +29,7 @@ import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
 import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.UserPrefs;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 import seedu.lovebook.storage.JsonLoveBookStorage;
 import seedu.lovebook.storage.JsonUserPrefsStorage;
 import seedu.lovebook.storage.StorageManager;

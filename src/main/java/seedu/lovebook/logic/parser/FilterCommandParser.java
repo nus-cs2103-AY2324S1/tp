@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import seedu.lovebook.logic.commands.FilterCommand;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
-import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
+import seedu.lovebook.model.date.MetricContainsKeywordPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

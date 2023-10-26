@@ -24,7 +24,7 @@ import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ReadOnlyDatePrefs;
 import seedu.lovebook.model.ReadOnlyLoveBook;
 import seedu.lovebook.model.ReadOnlyUserPrefs;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 import seedu.lovebook.testutil.PersonBuilder;
 
 public class AddCommandTest {

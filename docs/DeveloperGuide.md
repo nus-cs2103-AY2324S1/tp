@@ -147,6 +147,15 @@ The `Storage` component,
 * inherits from both `LoveBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+### Preferences component
+
+The `Preferences` component,
+- can save the user's preferences in the dates they are looking for (gender, height, income, age).
+- stores these entries collected in a `Preferences.json` file.
+- can be changed using the `setP` command (also called `setPreferences` command).
+- It extends the `Storage` component and inherits from `LoveBookStorage` and `UserPrefStorage` and `DatePrefStorage`.
+- It is show on typing on command `showP`.
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.LoveBook.commons` package.

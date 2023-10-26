@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * An UI component that displays information of a {@code Date}.
@@ -32,13 +32,14 @@ public class DateCard extends UiPart<Region> {
     @FXML
     private Label aboutInfo;
     @FXML
-    private Label star;
+    private ImageView starImage;
     @FXML
     private ImageView genderImage;
     @FXML
     private ImageView horoscopeImage;
     @FXML
     private ImageView avatarImage;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Date} and index to display.
@@ -50,26 +51,24 @@ public class DateCard extends UiPart<Region> {
         name.setText(date.getName().fullName);
         aboutInfo.setText(date.getAge().value + " years old, with a height of " + date.getHeight().value + "cm, and "
                 + "a income of $" + date.getIncome().value + " per month.");
-        displayIcons(date.getHoroscope().value, date.getGender().value);
-        star.setText("Starred!");
+        displayIcons();
     }
-    private void displayIcons(String horoscope, String gender) {
+    private void displayIcons() {
         try {
-            horoscopeImage.setImage(new Image("images/horoscopes/" + horoscope.toLowerCase() + ".png"));
-            int randomNum = generateRandomNumber();
-            if (gender.equals("M")) {
+            horoscopeImage.setImage(new Image("images/horoscopes/" + date.getHoroscope().value.toLowerCase()
+                    + ".png"));
+            if (date.getGender().value.equals("M")) {
                 genderImage.setImage(new Image("images/genders/male.png"));
-                avatarImage.setImage(new Image("images/avatars/male/" + randomNum + ".png"));
+                avatarImage.setImage(new Image("images/avatars/male/" + date.getAvatar().value + ".png"));
             } else {
                 genderImage.setImage(new Image("images/genders/female.png"));
-                avatarImage.setImage(new Image("images/avatars/female/" + randomNum + ".png"));
+                avatarImage.setImage(new Image("images/avatars/female/" + date.getAvatar().value + ".png"));
+            }
+            if (date.getStar().isStarred.equals("true")) {
+                starImage.setImage(new Image("images/star.png"));
             }
         } catch (IllegalArgumentException e) {
             horoscopeImage.setImage(new Image("images/bot.png"));
         }
-    }
-
-    private int generateRandomNumber() {
-        return (int) (Math.random() * (UPPER_BOUND - LOWER_BOUND + 1)) + LOWER_BOUND;
     }
 }
