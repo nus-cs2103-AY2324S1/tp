@@ -194,7 +194,7 @@ The following sequence diagram shows how the batch delete operation works:
 The `remind` command allows the user to filter out people whose policy expiry date is approaching within the given number of days.
 
 #### Implementation:
-The filtered list will be displayed to the UI. The remind mechanism is facilitated by `Model` through the following operations:
+The filtered list will be displayed in the UI. The remind mechanism is facilitated by `Model` through the following operations:
 * `Model#RemindPredicate(int days)` - The Predicate to be used for filtering. `days` represents the number of days from the current date given by the user.
 * `Model#updateFilteredPersonList(Predicate<Person> p)` - Filters the list of Persons to display by the Predicate `p`.
 
