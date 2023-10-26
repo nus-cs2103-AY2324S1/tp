@@ -9,8 +9,9 @@ OutBook is a desktop personal secretary application used for saving contacts and
 
 My contributions to the project are listed below.
 
-- **New Feature**: Added the ability to undo/redo previous commands.
+- **New Feature**: 
 
+  - Add LastContactedTime field to Person
   - New Commands + Test cases
     - "deletem"
       - Command to delete meeting
@@ -19,14 +20,17 @@ My contributions to the project are listed below.
 
 - **Project management**:
 
-  - to be added soon
+  - Forking workflow
+    - Review and merge pull requests
 
 - **Enhancements to existing features**:
 
-  - to be added soon
+  - Configured the model and storage to support LastContactedTime field for Person.
 
 - **Documentation**:
 
+  - User Guide
+    - Update parts of User Guide on `addc`, `editc` and `addm`.
   - Developer Guide
     - Non-functional Requirements
     - Glossary
