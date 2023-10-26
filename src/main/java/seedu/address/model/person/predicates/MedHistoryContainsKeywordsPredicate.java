@@ -31,7 +31,7 @@ public class MedHistoryContainsKeywordsPredicate implements Predicate<Person> {
                 .stream()
                 .map(medicalHistory -> keywords
                         .stream()
-                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medicalHistory.value, keyword)))
+                        .anyMatch(keyword -> StringUtil.wordsContainSubstringIgnoreCase(medicalHistory.value, keyword)))
                 .reduce(false, (x, y) -> x || y);
     }
     @Override
