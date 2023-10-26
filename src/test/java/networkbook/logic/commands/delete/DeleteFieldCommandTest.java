@@ -3,7 +3,7 @@ package networkbook.logic.commands.delete;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static networkbook.logic.commands.delete.DeleteFieldCommand.MESSAGE_DELETE_PERSON_FIELD_SUCCESS;
-import static networkbook.testutil.Assert.assertThrows;
+import static networkbook.testutil.Assert.assertThrowsAssertionError;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,12 +45,9 @@ public class DeleteFieldCommandTest {
 
     @Test
     public void constructor_null_nullPointerException() {
-        assertThrows(NullPointerException.class, () ->
-                new DeleteFieldCommand(null, DELETE_PRIORITY_ACTION));
-        assertThrows(NullPointerException.class, () ->
-                new DeleteFieldCommand(INDEX_ONE, null));
-        assertThrows(NullPointerException.class, () ->
-                new DeleteFieldCommand(null, null));
+        assertThrowsAssertionError(() -> new DeleteFieldCommand(null, DELETE_PRIORITY_ACTION));
+        assertThrowsAssertionError(() -> new DeleteFieldCommand(INDEX_ONE, null));
+        assertThrowsAssertionError(() -> new DeleteFieldCommand(null, null));
     }
 
     @Test
