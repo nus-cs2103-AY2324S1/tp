@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.StringBuilder;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -32,11 +31,21 @@ public class ExportCommand extends Command {
      */
     public ExportCommand() {}
 
+    /**
+     * Uses escape quotations to specify a string as a string
+     * @param str
+     * @return
+     */
     public String treatAsString(String str) {
         return "\"" + str + "\"";
     }
 
-    public StringBuilder appendPersons(Model model){
+    /**
+     * Appends the persons to a StringBuilder
+     * @param model the model in use
+     * @return returns the StringBuilder containing all the data of Persons
+     */
+    public StringBuilder appendPersons(Model model) {
         StringBuilder sb = new StringBuilder("Name,Phone,Email,Address,Tags,LinkedIn,Github,Remark,Status\n");
 
         for (Person p : model.getAddressBook().getPersonList()) {
