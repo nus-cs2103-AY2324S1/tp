@@ -3,9 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -41,7 +38,7 @@ public class CommandStringStashTest {
 
     @Test
     public void addCommandString_withValidCommandString_resetsCurrentCmd() {
-        CommandStringStash commandStringStash = new CommandStringStash( createCmdStringStackIntegers(0, 9), 5);
+        CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 9), 5);
         CommandStringStash expectedCommandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 10), 11);
 
         commandStringStash.addCommandString("10");
@@ -51,7 +48,7 @@ public class CommandStringStashTest {
 
     @Test
     public void getPrevCommandString_afterAdd_getsCorrectly() {
-        CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 15), 9 );
+        CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 15), 9);
 
         commandStringStash.addCommandString("16");
 
@@ -74,7 +71,7 @@ public class CommandStringStashTest {
 
     @Test
     public void getPassedCommandString_afterAdd_getsCorrectly() {
-        CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 15), 9 );
+        CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 15), 9);
 
         commandStringStash.addCommandString("16");
 
