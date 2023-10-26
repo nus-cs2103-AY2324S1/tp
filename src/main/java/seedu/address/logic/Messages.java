@@ -13,20 +13,14 @@ import seedu.address.model.person.Person;
 public class Messages {
 
     public static final String MESSAGE_NOT_FOUND_INDEX = "Error: Invalid Index";
-
     public static final String MESSAGE_MISSING_INDEX = "Error: Missing Index";
-
     public static final String MESSAGE_IMPOSSIBLE_INDEX = "Error: The parameter is not of the type positive integer";
-
     public static final String MESSAGE_PREAMBLE_DETECTED = "Error: Preamble Detected";
-
     public static final String MESSAGE_USED_POLICY_NUMBER = "Error: The policy number is already in use";
-
     public static final String MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND =
             "Error: Some of the required fields are missing. "
             + "\n"
             + "Please include the following: ";
-
     public static final String MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND =
             "Please include either all or none of the policy variables. "
             + "\n"
@@ -37,6 +31,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_NOT_NUMBERS = "Error: The value is not a number";
+    public static final String MESSAGE_NOT_POSITIVE_NUMBER = "Error: The value has to be 0 or more";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
