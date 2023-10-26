@@ -24,6 +24,7 @@ public class MeetingTimeContainsPredicate implements Predicate<Meeting> {
         this.end = end;
         this.start.format(FORMAT);
         this.end.format(FORMAT);
+        MeetingTime.isValidMeetingTime(start, end);
     }
 
     @Override
