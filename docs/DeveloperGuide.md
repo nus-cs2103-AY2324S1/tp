@@ -153,6 +153,14 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add `Member`/`Applicant` feature
+The `addMember` and `addApplicant` command is used to add a member or an applicant to the address book. 
+The commands are implemented in the `AddMemberCommand` and `AddApplicantCommand` class, which extends the `Command` class.
+
+The add mechanism is facilitated by `LogicManager` which parses the command input from the user to determine the appropriate
+command to execute. The execute function checks whether the `member`/`applicant` is present in the `AddressBook`.
+The `member`/`applicant` is added into the `AddressBook` if it is not present. Otherwise, an error message is returned.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
