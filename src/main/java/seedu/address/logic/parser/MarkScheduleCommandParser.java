@@ -10,7 +10,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.MarkScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.schedule.Status;
 
 /**
  * Parses input arguments and creates a new {@code MarkScheduleCommand} object
@@ -26,7 +25,7 @@ public class MarkScheduleCommandParser implements Parser<MarkScheduleCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STATUS);
 
         Index index;
-        int status = 0;
+        int status;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -39,10 +38,7 @@ public class MarkScheduleCommandParser implements Parser<MarkScheduleCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MarkScheduleCommand.MESSAGE_USAGE));
         } else {
-            Status scheduleStatus = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-            if (scheduleStatus.equals(Status.COMPLETED)) {
-                status = 1;
-            }
+            status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         }
 
         return new MarkScheduleCommand(index, status);

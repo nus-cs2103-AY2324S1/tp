@@ -23,11 +23,11 @@ public class MarkScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets the status of the schedule identified to be missed for 0 and completed for 1.\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer)"
+            + "INDEX (must be a positive integer) "
             + PREFIX_STATUS + "0 or 1\n"
             + "Example: "
             + COMMAND_WORD + " 1 "
-            + PREFIX_STATUS + " 1 ";
+            + PREFIX_STATUS + "1 ";
 
     public static final String MESSAGE_MARK_MISSED_SUCCESS = "Marked Schedule as Missed: %1$s";
 

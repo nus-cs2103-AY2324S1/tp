@@ -109,16 +109,16 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String status} into a {@code status}
+     * Parses {@code String status} into a {@code integer}
      */
-    public static Status parseStatus(String status) throws ParseException {
+    public static int parseStatus(String status) throws ParseException {
         requireNonNull(status);
         String trimmedStatus = status.trim();
 
         if (trimmedStatus.equals("0")) {
-            return Status.MISSED;
+            return 0;
         } else if (trimmedStatus.equals("1")) {
-            return Status.COMPLETED;
+            return 1;
         } else {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
