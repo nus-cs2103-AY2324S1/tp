@@ -25,7 +25,7 @@ Given below are my contributions to the project.
     * Added documentation for the features `sort` [\#81](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/81)
 
 * **Contributions to the DG**: to be added soon.
-* 
+
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#125](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/125)
 
