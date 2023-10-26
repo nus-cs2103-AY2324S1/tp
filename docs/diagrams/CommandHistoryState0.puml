@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title User enters the first command
+
+package CommandHistory{
+    class State1 as "<u>command0:String</u>"
+    class State2 as "<u>command1:String</u>"
+    class State3 as "<u>command2:String</u>"
+}
+State1 -[hidden]right-> State2
+State2 -[hidden]right-> State3
+hide CommandHistory.State2
+hide CommandHistory.State3
+
+class Pointer as "Current Command" #FFFFFF
+Pointer -up-> State2
+@end

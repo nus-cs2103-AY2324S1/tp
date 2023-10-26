@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User presses '↓' or '↑' while \nthe command box is empty\nand is selected.;
+
+if () then ([↑]))
+    if() then ([has previous\ncommand])
+    :Set the previous command\n in commandBox;
+    else ([else])
+    endif
+else ([else])
+    if() then ([has next\ncommand])
+    :Set the next command\n in commandBox;
+    else ([else])
+    endif
+endif
+stop
+@enduml
