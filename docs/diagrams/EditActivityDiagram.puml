@@ -11,7 +11,7 @@ start
 'diamond we place it as the true branch instead.
 if () then ([new Contact is not duplicate])
     :Replace existing Contact with new Contact
-    UniqueContactList;
+    in UniqueContactList;
 else ([else])
 endif
 stop

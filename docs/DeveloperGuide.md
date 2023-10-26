@@ -172,7 +172,7 @@ which replaces the old contact with the edited contact in the `UniqueContactList
 
 The following activity diagram summarises what happens when a user executes an edit command.
 
-![EditActivityDiagram](images/AddActivityDiagram.png)
+![EditActivityDiagram](images/EditActivityDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
