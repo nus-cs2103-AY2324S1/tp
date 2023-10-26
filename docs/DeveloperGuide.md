@@ -227,7 +227,7 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
     - Flexibility: Allows for multiple attendance records within the same week, which might be useful in some scenarios.
 
   **Cons:**
-    - Redundancy:  Multiple attendance records for the same week can lead to confusion and redundancy.
+    - Redundancy: Multiple attendance records for the same week can lead to confusion and redundancy.
     - Inefficiency: Consumes more memory and might make querying slower if there are many redundant records.
 
     **Evaluation**:
@@ -464,7 +464,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to mark attendance for a student  and enters student name or ID, followed by the attendance status and week and reason if any.
+1.  User requests to mark attendance for a student and enters student name or ID, followed by the attendance status and week and reason if any.
 2.  TAvigator marks the attendance of student and displays message for confirmation of attendance.
 
 
