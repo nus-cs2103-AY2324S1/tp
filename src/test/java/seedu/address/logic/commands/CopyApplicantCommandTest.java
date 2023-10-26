@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIf;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -29,6 +30,7 @@ public class CopyApplicantCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBookWithApplicants(), new UserPrefs());
 
     @Test
+    @DisabledIf(value = "java.awt.GraphicsEnvironment#isHeadless", reason = "Headless environment has no clipboard")
     public void execute_validIndexUnfilteredList_success() {
         Applicant applicantToCopy = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
         CopyApplicantCommand copyApplicantCommand = new CopyApplicantCommand(INDEX_FIRST_PERSON);
@@ -49,6 +51,7 @@ public class CopyApplicantCommandTest {
     }
 
     @Test
+    @DisabledIf(value = "java.awt.GraphicsEnvironment#isHeadless", reason = "Headless environment has no clipboard")
     public void execute_validIndexFilteredList_success() {
         showApplicantAtIndex(model, INDEX_FIRST_PERSON);
 
