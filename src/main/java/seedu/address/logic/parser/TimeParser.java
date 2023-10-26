@@ -22,50 +22,50 @@ public class TimeParser {
             // TODO: ADD THIS PATTERN: 2024-12-21T19:00
             // time string with day and time (formatID == 0)
             {
-                    "E HHmm",
-                    "E h'.'mma",
-                    "E ha"
+            "E HHmm",
+            "E h'.'mma",
+            "E ha"
             },
             // time with all required information: year, month, day of month, time (formatID == 1)
             {
-                    "d MMM yyyy h'.'mma",
-                    "d MMM yyyy HHmm",
-                    "dd-MM-y HHmm",
-                    "dd-MM-yyyy HHmm",
-                    "dd-MM-yyyy HH'.'mma",
-                    "d M y HH'.'mma",
-                    "d M y HH:mm",
-                    "MMM d HH:mm yyyy",
-                    "d/M/yy HHmm",
-                    "d/M/yyyy HHmm",
-                    "d/M/y hh'.'mma",
-                    "d/M/yyyy hh'.'mma",
-                    "d/M/y ha"
+            "d MMM yyyy h'.'mma",
+            "d MMM yyyy HHmm",
+            "dd-MM-y HHmm",
+            "dd-MM-yyyy HHmm",
+            "dd-MM-yyyy HH'.'mma",
+            "d M y HH'.'mma",
+            "d M y HH:mm",
+            "MMM d HH:mm yyyy",
+            "d/M/yy HHmm",
+            "d/M/yyyy HHmm",
+            "d/M/y hh'.'mma",
+            "d/M/yyyy hh'.'mma",
+            "d/M/y ha"
             },
             // time with these information: month, day of month, time (formatID == 2)
             {
-                    "MMM dd HH'.'mma",
-                    "dd MMM HH'.'mma",
-                    "MMM dd ha",
-                    "MMM dd hh'.'mma",
-                    "MMM dd HHmm",
-                    "dd MMM HHmm",
-                    "d/M HHmm",
-                    "MMM dd ha",
-                    "dd MMM ha",
-                    "dd MMM hh'.'mma",
-                    "d/M ha"
+            "MMM dd HH'.'mma",
+            "dd MMM HH'.'mma",
+            "MMM dd ha",
+            "MMM dd hh'.'mma",
+            "MMM dd HHmm",
+            "dd MMM HHmm",
+            "d/M HHmm",
+            "MMM dd ha",
+            "dd MMM ha",
+            "dd MMM hh'.'mma",
+            "d/M ha"
             },
             // correct format but string is missing the time (formatID == 3)
             {
-                    "E",
-                    "y-MM-dd",
-                    "d/M/yy",
-                    "d/M/yyyy",
-                    "d/M/y",
-                    "MMM dd",
-                    "dd MMM",
-                    "d/M"
+            "E",
+            "y-MM-dd",
+            "d/M/yy",
+            "d/M/yyyy",
+            "d/M/y",
+            "MMM dd",
+            "dd MMM",
+            "d/M"
             },
     };
 

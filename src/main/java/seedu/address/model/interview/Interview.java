@@ -44,7 +44,8 @@ public class Interview {
      * @param rating the rating of the interviewee
      * @throws ParseException if the start and/or end time string are invalid
      */
-    public Interview(Applicant app, String role, String startTimeString, String endTimeString, Rating rating, boolean isDone)
+    public Interview(Applicant app, String role, String startTimeString, String endTimeString,
+                     Rating rating, boolean isDone)
             throws ParseException {
         requireAllNonNull(app, role, startTimeString, endTimeString);
         this.applicant = app;
@@ -93,7 +94,8 @@ public class Interview {
     /**
      * Alternative constructor for creating Interview object from editing.
      */
-    public Interview(Applicant app, String role, LocalDateTime startTime, LocalDateTime endTime, Rating rate, boolean isDone) {
+    public Interview(Applicant app, String role, LocalDateTime startTime, LocalDateTime endTime,
+                     Rating rate, boolean isDone) {
         requireAllNonNull(app, role, startTime, endTime, rate, isDone);
         this.applicant = app;
         this.jobRole = role;
@@ -195,9 +197,15 @@ public class Interview {
 
     @Override
     public String toString() {
-        return "applicant: " + applicant + "\n" +
-                "job role: " + jobRole + "\n" +
-                "start time: " + startTime +
-                "end time: " + endTime;
+        return "applicant: "
+                + applicant
+                + "\n"
+                + "job role: "
+                + jobRole
+                + "\n"
+                + "start time: "
+                + startTime
+                + "end time: "
+                + endTime;
     }
 }
