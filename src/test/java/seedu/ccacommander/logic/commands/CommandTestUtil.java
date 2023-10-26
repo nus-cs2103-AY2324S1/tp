@@ -32,6 +32,7 @@ import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
+import seedu.ccacommander.testutil.EditEventDescriptorBuilder;
 import seedu.ccacommander.testutil.EditMemberDescriptorBuilder;
 
 /**
@@ -92,6 +93,7 @@ public class CommandTestUtil {
     public static final String HOURS_DESC_AURORA = " " + PREFIX_HOURS + VALID_HOURS_AURORA;
     public static final String REMARK_DESC_AURORA = " " + PREFIX_REMARK + VALID_REMARK_AURORA;
     public static final String TAGS_DESC_AURORA = " " + PREFIX_TAG + VALID_TAG_AURORA;
+    public static final String TAGS_DESC_BOXING = " " + PREFIX_TAG + VALID_TAG_BOXING;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "F"; // "F" not allowed in gender
@@ -131,6 +133,17 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
+    public static final EditEventCommand.EditEventDescriptor DESC_AURORA;
+    public static final EditEventCommand.EditEventDescriptor DESC_BOXING;
+
+    static {
+        DESC_AURORA = new EditEventDescriptorBuilder().withName(VALID_NAME_AURORA).withLocation(VALID_LOCATION_AURORA)
+                .withDate(VALID_DATE_AURORA)
+                .withTags(VALID_TAG_AURORA).build();
+        DESC_BOXING = new EditEventDescriptorBuilder().withName(VALID_NAME_BOXING).withLocation(VALID_LOCATION_BOXING)
+                .withDate(VALID_DATE_BOXING)
+                .withTags(VALID_TAG_BOXING).build();
+    }
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
