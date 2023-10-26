@@ -18,6 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String github;
 
     private final String remark;
+    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -44,7 +46,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("linkedIn") String linkedIn,
-                             @JsonProperty("github") String github, @JsonProperty("remark") String remark) {
+                             @JsonProperty("github") String github,
+                             @JsonProperty("remark") String remark, @JsonProperty("status") String status) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,7 +58,7 @@ class JsonAdaptedPerson {
         this.linkedIn = linkedIn;
         this.github = github;
         this.remark = remark;
-
+        this.status = status;
     }
 
     /**
@@ -72,6 +75,7 @@ class JsonAdaptedPerson {
         linkedIn = source.getLinkedIn().value;
         github = source.getGithub().value;
         remark = source.getRemark().value;
+        status = source.getStatus().getValue();
     }
 
     /**
@@ -128,6 +132,9 @@ class JsonAdaptedPerson {
         }
         if (github != null) {
             p.setGithub(new Github(github));
+        }
+        if (status != null) {
+            p.setStatus(new Status(status));
         }
         return p;
     }
