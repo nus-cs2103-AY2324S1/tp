@@ -7,7 +7,7 @@ skinparam ClassFontColor<<Hide>> #FFFFFF
 skinparam ClassBorderColor<<Hide>> #FFFFFF
 skinparam ClassBackgroundColor<<Hide>> #FFFFFF
 
-title User gets the previous method
+title User enters the same command
 
 package "After pressing ↑" <<Rectangle>>{
     package CommandHistory as Before{
