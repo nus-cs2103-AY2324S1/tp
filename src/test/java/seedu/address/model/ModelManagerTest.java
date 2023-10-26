@@ -115,6 +115,7 @@ public class ModelManagerTest {
 
     @Test
     public void deleteInterview_successfulInterviewDeletion_returnTrue() {
+        modelManager.addApplicant(ALICE);
         modelManager.addInterview(STANDARD_INTERVIEW);
         assertTrue(modelManager.hasInterview(STANDARD_INTERVIEW));
         modelManager.deleteInterview(STANDARD_INTERVIEW);
@@ -123,7 +124,6 @@ public class ModelManagerTest {
 
     @Test
     public void deleteInterview_interviewNotInAddressBook_throwInterviewNotFoundException() {
-        modelManager.addApplicant(ALICE);
         assertThrows(InterviewNotFoundException.class, () -> modelManager.deleteInterview(STANDARD_INTERVIEW));
     }
 
