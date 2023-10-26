@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -42,9 +43,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
             + "[" + PREFIX_INCOME + "INCOME] "
+            + "[" + PREFIX_HOROSCOPE + "HOROSCOPE] "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_AGE + "91234567 "
-            + PREFIX_GENDER + "johndoe@example.com";
+            + PREFIX_AGE + "24 "
+            + PREFIX_GENDER + "M "
+            + PREFIX_HEIGHT + "180 "
+            + PREFIX_INCOME + "3000 "
+            + PREFIX_HOROSCOPE + "SCORPIO ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Date: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
