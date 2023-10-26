@@ -90,9 +90,9 @@ public class OverviewPanel extends UiPart<Region> {
         });
 
         YearMonthPickerCombo ymp = new YearMonthPickerCombo(
-                YearMonth.now().minusYears(1),
-                YearMonth.now(),
-                YearMonth.now(),
+                monthDataMap.firstKey(),
+                monthDataMap.lastKey(),
+                monthDataMap.lastKey(),
                 Locale.ENGLISH,
                 "MMM yyyy");
 
