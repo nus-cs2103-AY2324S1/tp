@@ -12,7 +12,7 @@ Here’s an overview of what you can do with TutorConnect:
 * Create and plan your tutor availability and schedule
 * View upcoming schedules
 
-On top of these functionalities, we believe that tuition centre management must be efficient. Therefore, TutorConnect is **optimised for users who can type fast** and utilise the Command Line Interface (CLI) to complete tasks using the keyboard faster than using the mouse.
+On top of these functionalities, we believe that tuition centre management must be efficient. Therefore, TutorConnect is **optimised for users who can type fast** and utilise the [Command Line Interface (CLI)](#glossary) to complete tasks using the keyboard faster than using the mouse.
 
 * Table of Contents
 {:toc}
@@ -80,7 +80,7 @@ On top of these functionalities, we believe that tuition centre management must 
 
 ## Navigating the Interface
 
-TutorConnect comes equipped with an interface that provides visual feedback to you.
+TutorConnect comes equipped with a [GUI](#glossary) interface that provides visual feedback to you.
 Below is a quick overview of the various components of our interface.
 
 ### Quick Orientation
@@ -89,7 +89,7 @@ Below is a quick overview of the various components of our interface.
 
 | Component      | Description                                                                                | 
 |----------------|--------------------------------------------------------------------------------------------|
-| Command Box    | You will enter your commands here.                                                         | 
+| Command Box    | You will enter your [commands](#glossary) along with its [parameters](#glossary) here.     | 
 | Result Display | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
 | Tutor Details  | Contains information related to the tutor like name, phone number etc.                     |
 
@@ -415,39 +415,32 @@ Edits an existing schedule in the addressbook.
 
 ### List all schedules: `list-s`
 
-Displays a list of all schedules in the address book in a table format.
+Displays a list of all schedules in the address book in a table format. List can be filtered by tutors whose names contain any of the given keywords.
 
 ![view schedule](images/viewSchedule.png)
 
-**Format:** `list-s`
+**Format:** `list-s` or `list-s KEYWORD [MORE_KEYWORDS]`
 
 **Example:**
 * `list-s` shows all recorded schedules in the address book.
+* `list-s John` returns schedules by `John Smith` and `John Doe`.
+* `list-s Alice Pauline` returns schedules by `Alice Pauline`.
 
 **Expected output:**
 * Displays a table of schedules with columns for List number, Tutor Name, Start Time, and End Time
-* If there are no schedules in the address book, displays a message telling the user to add a tutor with `add-s`.
 
-![empty schedule list](images/emptyScheduleList.png)
+![list schedule](images/listScheduleAll.png)
+* If name of the tutor is added as an optional keyword search, the list will be filtered accordingly to show the schedules based on the tutor's name.
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Information**<br>
-    
-* list-s command does not take in any parameters.
-* Any extraneous parameters after `list-s` will be ignored.
-    e.g. if the command specifies `list-s 123`, it will be interpreted as `list-s`.
-* No error messages as anything typed behind is ignored.
-    
-</div>
+![list schedule filtered](images/listScheduleFilter.png)
 
 ### Marking a schedule: `mark`
 
 Adds the status of a schedule in the address book based on their index number in the table of schedules listed.
 
 ![mark schedule](images/markSchedule.png)
-
 **Format:** `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`
+
 
 <div markdown="block" class="alert alert-info">
 
@@ -456,26 +449,26 @@ Adds the status of a schedule in the address book based on their index number in
 * There are only two types of Schedule status: MISSED or COMPLETED.
 * To set the status of the specified schedule to MISSED, input `m/0` as 0 indicates the MISSED status.
 * To set the status of the specified schedule to COMPLETED, input `m/1` as 1 indicates the COMPLETED status.
+</div>
 * Any inputs other than 0 or 1 will result in an invalid status message displayed.
 
-</div>
 
 **Example:**
 * `mark 5 m/0` adds the MISSED status to the schedule indexed at 5 in the schedule list.
 * `mark 5 m/1` adds the COMPLETED status to the schedule indexed at 5 in the schedule list.
 * `list-s` followed by `mark 1 m/0` adds the MISSED status to the schedule indexed at 1 in the schedule list.
 * `list-s` followed by `mark 1 m/1` adds the COMPLETED status to the schedule indexed at 1 in the schedule list.
-
 **Acceptable values for each parameter:**
-* `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
-* `SCHEDULE_STATUS`: Only numerical inputs of 0 to indicate MISSED and 1 to indicate COMPLETED status of the 
-specified schedule.
 
+* `SCHEDULE_STATUS`: Only numerical inputs of 0 to indicate MISSED and 1 to indicate COMPLETED status of the 
+* `SCHEDULE_INDEX`: Only numerical input that ranges from 1 to the last schedule shown in the list of schedules.
+
+specified schedule.
 **Expected Output:**
 * `Marked Schedule as Completed: John Doe; Start Time: Sep 15 2023 09:00; End Time: Sep 15 2023 11:00`
-* `Marked Schedule as Missed: Betsy Crowe; Start Time: Sep 16 2023 17:00; End Time: Sep 15 2023 19:00`
 
 **Error Messages:**
+* `Marked Schedule as Missed: Betsy Crowe; Start Time: Sep 16 2023 17:00; End Time: Sep 15 2023 19:00`
 * `Invalid command format!`: Invalid or missing SCHEDULE_INDEX OR SCHEDULE_STATUS or both.
 * `Index number given is out of range`: The schedule index provided is invalid.
 * `Status has to be either MISSED (m/0) or COMPLETED (m/1)`: The schedule status provided is invalid.
@@ -560,12 +553,12 @@ Deletes a schedule in the address book based on their index number in the table 
 ### Definitions
 Here are some descriptions of the words you might come across in the User Guide:
 
-| Term                | Definition                                                                                                                                                                                                                                                 |
-|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Parameter           | Parameters are like fields in a form you are required to fill up. They include details you provide to execute a command. <br> For example, in the command `add-t n/NAME p/PHONE NUMBER e/EMAIL`, `n/NAME`, `p/PHONE NUMBER`, and `e/EMAIL` are parameters. |
-| Command             | A command is an instruction given to the application to perform a specific action. For example, `list-t` is a command to list all tutors in the address book.                                                                                              |
-| GUI                 | GUI is a user interface that allows users to interact with the application using graphical elements like text fields, buttons, and menus.                                                                                                                  |
-| CLI                 | CLI is a text-based user interface that allows users to interact with the application by typing commands.                                                                                                                                                  |
+| Term                       | Definition                                                                                                                                                                                                                                                 |
+|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Parameter                  | Parameters are like fields in a form you are required to fill up. They include details you provide to execute a command. <br> For example, in the command `add-t n/NAME p/PHONE NUMBER e/EMAIL`, `n/NAME`, `p/PHONE NUMBER`, and `e/EMAIL` are parameters. |
+| Command                    | A command is an instruction given to the application to perform a specific action. For example, `list-t` is a command to list all tutors in the address book.                                                                                              |
+| GUI                        | GUI is a user interface that allows users to interact with the application using graphical elements like text fields, buttons, and menus.                                                                                                                  |
+| <span id="cli">CLI</span>  | CLI is a text-based user interface that allows users to interact with the application by typing commands.                                                                                                                                                  |
 
 
 ### Parameter Information
@@ -611,14 +604,14 @@ This section consists of more details of format limitations mentioned above.
 
 | Action              | Format, Examples                                                                                                |
 |---------------------|-----------------------------------------------------------------------------------------------------------------|
-| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`              |
-| **Edit Tutor**      | `edit-t TUTOR_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com` |
-| **List Tutor**      | `list-t`                                                                                                        |
+| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`               |
+| **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`        |
+| **List Tutor**      | `list-t`                                                                                                         |
 | **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                   |
 | **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                      |
 | **Add Schedule**    | `add-s TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00 e/2023-09-15T11:00`       |
 | **Edit Schedule**   | `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]` <br> e.g., `edit-s 1 s/2023-09-15T13:00`                    |
-| **List Schedule**   | `list-s`                                                                                                        |
+| **List Schedule**   | `list-s`, `list-s KEYWORD [MORE_KEYWORDS]` <br> e.g., `list-s Alice Pauline`                                    |
 | **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                                  |
 | **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                    |
 | **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                |
