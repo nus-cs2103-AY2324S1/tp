@@ -6,10 +6,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 
 
 public class ExportCommandTest {
@@ -45,7 +43,8 @@ public class ExportCommandTest {
 
     @Test
     public void testAppendPersons_two() {
-        assertEquals(exportCommand.appendPersons(model).toString(),"Name,Phone,Email,Address,Tags,LinkedIn,Github,Remark,Status\n");
+        assertEquals(exportCommand.appendPersons(model).toString(),
+                 "Name,Phone,Email,Address,Tags,LinkedIn,Github,Remark,Status\n");
     }
 
 
