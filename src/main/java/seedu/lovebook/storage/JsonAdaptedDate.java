@@ -11,7 +11,6 @@ import seedu.lovebook.model.person.Height;
 import seedu.lovebook.model.person.Income;
 import seedu.lovebook.model.person.Name;
 import seedu.lovebook.model.person.Star;
-
 import seedu.lovebook.model.person.horoscope.Horoscope;
 
 /**
