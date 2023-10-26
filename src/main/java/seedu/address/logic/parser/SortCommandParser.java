@@ -19,14 +19,14 @@ import seedu.address.model.person.comparer.SortComparator;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
+    public static final String PARSE_EXCEPTION_MESSAGE = "Invalid syntax for sort. Please use the "
+            + "following syntax in []: sort [/byname][/byemail][/byphone][/byaddress] (Optional)[/reverse]";
     private static final Prefix PREFIX_DELIMITER = new Prefix("/");
     private static final String SORT_BY_ADDRESS_KEYWORD = "byaddress";
     private static final String SORT_BY_EMAIL_KEYWORD = "byemail";
     private static final String SORT_BY_NAME_KEYWORD = "byname";
     private static final String SORT_BY_PHONE_KEYWORD = "byphone";
     private static final String REVERSE_KEYWORD = "reverse";
-    private static final String PARSE_EXCEPTION_MESSAGE = "Invalid syntax for sort. Please use the "
-            + "following syntax in []: sort [/byname][/byemail][/byphone][/byaddress] (Optional)[/reverse]";
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
      * and returns an SortCommand object for execution.
