@@ -25,11 +25,11 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all tutees.
+   * `list` : Lists all tutees.
 
-    * `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` : Adds a tutee named `John Doe` to the list.
+   * `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` : Adds a tutee named `John Doe` to the list.
 
-    * `delete 3` : Deletes the 3rd tutee shown in the current list.
+   * `delete 3` : Deletes the 3rd tutee shown in the current list.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -48,7 +48,7 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 * **Phone number (Optional field)**: 8 digit number.
 * **Address (Optional field)**: String without restriction in characters.
 * **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tues/Wed/Thurs/Fri/Sat/Sun).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
 * **Begin (Optional field)**: String with restrictions (HHMM).
 * **End (Optional field)**: String with restrictions (HHMM).
 * **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
@@ -74,6 +74,15 @@ Tuition connect is a desktop app that helps tutors keep track of their tutees an
 
 Format: `list`
 
+### View the list of tutees specified by day : `list [DAY]`
+
+**Description** : Shows the current list of tutees filtered by the specified dat.
+
+Format: `list [DAY]`
+
+**Expected Input**:
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+
 ### Editing a tutee : `edit`
 
 **Description** : Edit a tutee in the current list.
@@ -86,7 +95,7 @@ Format: `list`
 * **Phone number (Optional field)**: 8 digit number.
 * **Address (Optional field)**: String without restriction in characters.
 * **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tues/Wed/Thurs/Fri/Sat/Sun).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
 * **Begin (Optional field)**: String with restrictions (HHMM).
 * **End (Optional field)**: String with restrictions (HHMM).
 * **PayRate (Optional field)** String with restrictions in characters, only numbers allowed (no negative numbers).
