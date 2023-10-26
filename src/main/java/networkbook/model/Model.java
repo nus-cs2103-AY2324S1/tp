@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
+import networkbook.commons.exceptions.IllegalStateChangeException;
 import networkbook.model.person.Person;
 
 /**
@@ -79,12 +80,14 @@ public interface Model {
 
     /**
      * Undoes the last command that changed the contacts stored in NetworkBook.
+     * @throws IllegalStateChangeException if NetworkBook has no previous states stored to undo to.
      */
-    void undoNetworkBook();
+    void undoNetworkBook() throws IllegalStateChangeException;
     /**
      * Redoes a previously undone command that changed the contacts stored in NetworkBook.
+     * @throws IllegalStateChangeException if NetworkBook has no subsequent states stored to redo to.
      */
-    void redoNetworkBook();
+    void redoNetworkBook() throws IllegalStateChangeException;
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

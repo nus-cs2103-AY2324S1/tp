@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.LogsCenter;
+import networkbook.commons.exceptions.IllegalStateChangeException;
 import networkbook.model.person.Person;
 
 /**
@@ -20,6 +21,10 @@ import networkbook.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final String MESSAGE_UNDO_DISALLOWED = "Illegal state change requested.\n"
+            + "NetworkBook does not have a previous state stored to undo to.";
+    private static final String MESSAGE_REDO_DISALLOWED = "Illegal state change requested.\n"
+            + "NetworkBook does not have a previous state stored to undo to.";
     private final VersionedNetworkBook versionedNetworkBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
@@ -117,19 +122,19 @@ public class ModelManager implements Model {
         versionedNetworkBook.commit();
     }
     @Override
-    public void undoNetworkBook() {
+    public void undoNetworkBook() throws IllegalStateChangeException {
         if (versionedNetworkBook.canUndo()) {
             versionedNetworkBook.undo();
         } else {
-            // throw exception
+            throw new IllegalStateChangeException(MESSAGE_UNDO_DISALLOWED);
         }
     }
     @Override
-    public void redoNetworkBook() {
+    public void redoNetworkBook() throws IllegalStateChangeException {
         if (versionedNetworkBook.canRedo()) {
             versionedNetworkBook.redo();
         } else {
-            // throw exception
+            throw new IllegalStateChangeException(MESSAGE_REDO_DISALLOWED);
         }
     }
 

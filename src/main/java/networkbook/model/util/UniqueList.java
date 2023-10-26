@@ -94,7 +94,7 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      * Checks if this list is empty.
      */
     public boolean isEmpty() {
-        return this.internalList.size() == 0;
+        return this.internalList.isEmpty();
     }
 
     /**
@@ -140,18 +140,6 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return internalList.iterator();
-    }
-
-    public int size() {
-        return internalList.size();
-    }
-
-    public T get(int index) {
-        return internalList.get(index);
-    }
-
-    public void clearRange(int fromIndex, int toIndex) {
-        internalList.subList(fromIndex, toIndex).clear();
     }
 
     /**
