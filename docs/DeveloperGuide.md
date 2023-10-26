@@ -355,26 +355,26 @@ It serves as a one-stop addressbook for managing job applications.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                                                                                  | So that I can…​                                                                                             |
-|---------|------------------|-------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| `* * *` | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                                    | I can easily access and reach out to candidates when needed                                                 |
-| `* * *` | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                                   | I can maintain a record of interactions and feedback                                                        |
-| `* * *` | Hiring Manager   | delete job applicants information                                                                                             | I can remove redundant/unecessary data bloat and also to abide to privacy laws                              |
-| `* * *` | Hiring Manager   | view a specific job applicant's resume or portfolio                                                                           | I can check whether they meet the requirements requested by other department heads                          |
-| `* * *` | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                                     | I can find suitable candidates for a project                                                                |
-| `* * *` | Hiring Manager   | list all candidate's information and sort them based on a specific attribute                                                  | I can easily view each candidates information and arrange them according to my preferences and requirements |
-| `* * `  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                                     | I can keep track of each candidate's progress in the hiring process                                         |
-| `* * `  | Hiring Manager   | filter candidates based on their skills, experience, or application date                                                      | I can efficiently evaluate compare candidates                                                               |
-| `* * `  | Hiring Manager   | compare candidates that I am handling using the information i have stored such as that comparing CAP, Years of experience etc | I can choose the best candidates to the next stage of the hiring process                                    |
-| `* * `  | Hiring Manager   | collate job applicants who were rejected but have potential for other positions in the company                                | I can forward this data to other departments who might need it                                              |
-| `* * `  | Hiring Manager   | collate job applicants who were offered the job and accepted it as well as deleting their details from JABPro                 | I can send this data to the HR department that manages existing employees                                   |
-| `* * `  | Hiring Manager   | collate job applicants who were offered the job but rejected it                                                               | I can contact them to ask why they rejected the offer and get feedback                                      |
-| `* * `  | Hiring Manager   | add candidates key features into a multi-formatted form                                                                       | I can have a visual way to objectively view a candidates skills and information                             |
-| `* * `  | Hiring Manager   | delete job applicants who are tagged with specific labels                                                                     | I can maintain an organized pool by removing candidates that are no longer relevant or needed               |
-| `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers                   | I can have a summary overview without going into each candidate data specifically                           |
-| `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles              |
-| `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it    |
-| `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process                  |
+| Priority | As a …​          | I want to …​                                                                                                                  | So that I can…​                                                                                          |
+|---------|------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `* * *` | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                                    | I can easily access and reach out to candidates when needed                                              |
+| `* * *` | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                                   | I can maintain a record of interactions and feedback                                                     |
+| `* * *` | Hiring Manager   | delete job applicants information                                                                                             | I can remove redundant/unecessary data bloat and also to abide to privacy laws                           |
+| `* * *` | Hiring Manager   | view a specific job applicant's resume or portfolio                                                                           | I can check whether they meet the requirements requested by other department heads                       |
+| `* * *` | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                                     | I can find suitable candidates for a project                                                             |
+| `* * *` | Hiring Manager   | List all candidate's information                                                                                              | I can easily view each candidates information                                                            |
+| `* * `  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                                     | I can keep track of each candidate's progress in the hiring process                                      |
+| `* * `  | Hiring Manager   | filter candidates based on their skills, experience, or application date                                                      | I can efficiently evaluate compare candidates                                                            |
+| `* * `  | Hiring Manager   | compare candidates that I am handling using the information i have stored such as that comparing CAP, Years of experience etc | so that I can choose the best candidates to the next stage of the hiring process                         |
+| `* * `  | Hiring Manager   | collate job applicants who were rejected but have potential for other positions in the company                                | I can forward this data to other departments who might need it                                           |
+| `* * `  | Hiring Manager   | collate job applicants who were offered the job and accepted it as well as deleting their details from JABPro                 | I can send this data to the HR department that manages existing employees                                |
+| `* * `  | Hiring Manager   | collate job applicants who were offered the job but rejected it                                                               | I can contact them to ask why they rejected the offer and get feedback                                   |
+| `* * `  | Hiring Manager   | add candidates key features into a multi-formatted form                                                                       | I can have a visual way to objectively view a candidates skills and information                          |
+| `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers                   | I can have a summary overview without going into each candidate data specifically                        |
+| `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles           |
+| `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it |
+| `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process               |
+| `*` | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                               | I can perform further analysis using alternate tools on candidate data                                   |
 *{More to be added}*
 
 ### Use cases
@@ -522,12 +522,23 @@ Use case ends.
 * 3a. The given index is invalid.
     * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
       Use case resumes at step 3.
+
 * 3b. User decides to search for a person based on a criteria such as name.
     * 3b1. Displayed AddressBook changes to match that of search result.  
       Use case resumes at step 3.
 
+**Use case: Export the current data to excel**
 
-    
+**MSS**
+1.  User requests to export persons.
+2.  JABPro exports the list of persons to a .csv file.
+    Use case ends.
+
+**Extensions**
+* 2a. The .csv file to edit is open
+    * 2a1. AddressBook displays a message indicating that we cannot write to it as it is open.
+      Use case ends.
+
 **Use case: Add social profile to person's details**
 
 **MSS**
