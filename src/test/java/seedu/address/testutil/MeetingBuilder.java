@@ -111,7 +111,7 @@ public class MeetingBuilder {
     /**
      * Sets the {@code Status} of the {@code Meeting} that we are building.
      */
-    public MeetingBuilder withLocation(Boolean status) {
+    public MeetingBuilder withStatus(Boolean status) {
         this.status = new MeetingStatus(status);
         return this;
     }
