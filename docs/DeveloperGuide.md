@@ -3,8 +3,50 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents
-  {:toc}
+# Developer Guide
+
+Table of Contents
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### UI Component
+
+**API:**
+[`Ui.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/ui/Ui.java)
+
+**Description:**
+
+The `UI` component is responsible for managing the user interface of the application so that it can respond according to
+the user's actions or commands entered.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
+are in the `src/main/resources/view folder`. For example, the layout of
+the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/ui/MainWindow.java)
+is specified
+in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml).
+
+**Functionality:**
+
+The UI component,
+
+- executes user commands using the `Logic` component.
+- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- keeps a reference to the `Logic` component, because the UI relies on the Logic to execute commands.
+- depends on some classes in the `Model` component, as it displays Person object residing in the Model.
+
+**Component Structure:**
+
+{Insert UML}
+
+The UI consists of a `MainWindow` that is made up of parts like `CommandBox` and `ResultDisplay`.
+These parts are always being shown in `MainWindow`, while other parts like `JobListPanel`, `JobDetailsPanel` are only
+visible
+to the user depending on the state of the application e.g. when the job list if not empty, when a job is selected.
+
+etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities
+between classes that represent parts of the visible GUI.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
