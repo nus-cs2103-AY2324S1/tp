@@ -63,8 +63,27 @@ LinkTree is the top contact solution for software professionals. Using our uniqu
 ### Editing Contacts
 
 * To edit personal information:
-  - Command: `edit- [id] [field] [new_field]`
-  - Example: `edit 01 email new.email@example.com`
+  - Command: `edit INDEX(must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`
+  - Example: `edit 1 n/John Wick e/new.email@example.com`
+  - Result: The person of index `1` now has a new name `John Wick` and a new
+  email address `new.email@example.com`.
+  - Note: You **do not need to provide** the arguments that you do not want to edit. In the
+  given example above, I only want to edit this person's name and email address and nothing else,
+  so I only provided this person's index `1`, new name `n/John Wick` 
+  and new email address `e/new.email@example.com`.
+
+
+* To edit team name:
+  - Command: `editTeamName [tn/TEAMNAME(original team name)] [tn/TEAMNAME(new team name)]`
+  - Example: `editTeamName tn/Alpha Team tn/Beta Team`
+  - Result: Now, the team with original team name `Alpha Team` changed its team name
+  to `Beta Team`.
+
+
+* To edit team leader:
+  - Command: `editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]`
+  - Example: `editTeamLeader tn/Alpha Team tl/Bob`
+  - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
 
 ### Deleting Contacts
 
