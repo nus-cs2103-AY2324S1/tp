@@ -88,11 +88,10 @@ Examples:
 
 Creates a new event and adds it to the database.
 
-Format: `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]`
+Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]`
 
 Examples:
 * `createEvent n/Party l/Raffles Hall d/16-09-2023` creates an event `Party` in CCACommander.
-* `createEvent n/Combined Hall Ensemble Concert d/16-02-2024` creates an event `Combined Hall Ensemble Concert` in CCACommander.
 
 ### Delete an Event: `deleteEvent`
 
