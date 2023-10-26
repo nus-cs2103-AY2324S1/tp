@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Button?>
-
-
-<Button fx:controller="FieldHyperlink" accessibleRole="HYPERLINK" mnemonicParsing="false" onAction="#runAction" style="-fx-background-color: inherit;" text="Button" textFill="#5e97ff" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" />

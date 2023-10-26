@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
@@ -26,28 +27,31 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phones" styleClass="cell_small_label" text="\$phones" />
          <HBox alignment="CENTER_LEFT" spacing="5">
             <children>
-               <Label fx:id="emailsHeader" styleClass="cell_big_label" text="\$emailsHeader">
+               <Label fx:id="emailsHeader" styleClass="cell_small_label" text="\$emailsHeader">
                   <minWidth>
                      <Region fx:constant="USE_PREF_SIZE" />
                   </minWidth>
                </Label>
-               <FlowPane fx:id="emails" alignment="CENTER_LEFT" />
+               <FlowPane fx:id="emails" alignment="CENTER_LEFT" styleClass="hyperlink_list" />
             </children>
          </HBox>
          <HBox alignment="CENTER_LEFT" spacing="5">
             <children>
-               <Label fx:id="linksHeader" styleClass="cell_big_label" text="\\$linksHeader">
+               <Label fx:id="linksHeader" styleClass="cell_small_label" text="\$linksHeader">
                   <minWidth>
                      <Region fx:constant="USE_PREF_SIZE" />
                   </minWidth>
                </Label>
-               <FlowPane fx:id="links" alignment="CENTER_LEFT" />
+               <FlowPane fx:id="links" alignment="CENTER_LEFT" styleClass="hyperlink_list" />
             </children>
          </HBox>
       <Label fx:id="graduation" styleClass="cell_small_label" text="\$graduation" />
