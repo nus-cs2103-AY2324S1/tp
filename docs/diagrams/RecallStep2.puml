@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title After command "list - sp"
+
+show members
+
+object "<u>:CommandStringStash</u>" as CommandStringStash #FFFFAA {
+    currentCmdIndex = 1
+}
+
+object "<u>command0:String</u>" as cmd0 {
+    value = "list - sp"
+}
+
+CommandStringStash -down->cmd0
+
+@end

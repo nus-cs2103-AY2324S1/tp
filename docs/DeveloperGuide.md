@@ -198,7 +198,7 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **note:** the lifeline for `undocommand` should end at the destroy marker (x) but due to a limitation of plantuml, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -235,9 +235,92 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Recall recent commands feature
 
-_{Explain here how the data archiving feature will be implemented}_
+The recent command feature is facilitated by the `CommandStringStash`. This is a stash that stores the history
+of the command string of the 20 most recent commands executed. Internally, it is stored as a `cmdStringStack`,
+and `currentCmdIndex`. This internal representation allows cycling through the recent commands both forwards
+and backwards.
+
+
+These operations are exposed in the `Logic` interface as `Logic#getPrevCommandString(String commandInputString)`,
+`Logic#getPassedCommandString(String commandInputString)`, and `Logic#addCommandString(String commandInputString)`.
+
+The following operations are implemented by the `CommandStringStash`:
+* `CommandStringStash#addCommandString(String commandInputString)` - Adds `commandInputString` to the history.
+* `CommandStringStash#getPrevCommandString(String commandInputString)` - Cycles one command further back in history.
+* `CommandStringStash#getPassedCommandString(String commandInputString)` - Cycles one command further forward in history 
+<div markdown="span" class="alert alert-info">:information_source: **note:** Cycling fowards or backwards may not always be
+valid operations. No cycling forward or backward can be done if the stash is empty. No cycling backward 
+can be done if the user is already on the least recent command in the stash, and no cycling forward can be done
+if the user has not yet cycled backward. To consider all these cases, the `commandInputString` is passed as a parameter
+to `CommandStringStash#getPrevCommandString(String commandInputString)` and `CommandStringStash#getPassedCommandString(String commandInputString)`.
+The `commandInputString` is the current command in the CLI textbox and is returned from these methods in the case of invalid operations
+so there is no change to the CLI textbox.
+
+</div>
+
+Given below is an example usage scenario and how the recall recent commands feature works at each step.
+ 
+Step 1. The user launches the application for the first time. The `CommandStringStash` will be initialised
+with no command strings and a `currentCmdIndex` of 0.
+
+![Recall Step 1](images/RecallStep1.png)
+
+Step 2. The user executes the `list -sp` command to list the specialists in DoConnek Pro. Upon success,
+`Logic#addCommandString("list -sp")` is called, adding this command string to the `CommandStringStash` and moving the
+`currentCmdIndex` to point to right after the element added.
+
+![Recall Step 2](images/RecallStep2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **note:** After an addition, the `currentCmdIndex` is set to point
+one index after the last element in the `CommandStringStash`. The `Logic#getPrevCommandString` method decrements
+this index before returning the String pointed to by `currentCmdIndex` so this works as a way of 'resetting' the state
+allowing the user to start to cycle back from the most recently added command again.
+
+</div>
+
+<br/>
+
+Step 3. The user executes two more commands `help` and `delete 1` in the respective order. As before, the 
+`CommandStringStash` is updated appropriately.
+
+![Recall Step 3](images/RecallStep3.png)
+
+The following activity diagram summarises how the `CommandStringStash` is updated hen a user executes a command.
+
+![Add Command String](images/AddCommandStringActivityDiagram.png)
+
+Step 4. The user wants to list the patients in DoConnek Pro but forgot how to do so. They decide to execute the `help`
+command. To do so efficiently, they press the up arrow on the keyboard to recall the `help` command they recently entered.
+This results in `Logic#getPrevCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
+
+![Recall Step 4](images/RecallStep4.png)
+
+The following sequence diagram shows how this recalling of the previous command string works.
+
+![Recall Command Sequence Diagram](images/RecallCommandSequenceDiagram.png)
+
+To cycle forward in history, a similar sequence is followed, but `Logic#getPassedCommandString` and its
+corresponding methods are called instead.
+
+Step 5. The user presses the up arrow again, and this time `Logic#getPrevCommandString` returns `help` which is displayed
+on the user's CLI, so they can execute `help` easily.
+
+![Recall Step 5](images/RecallStep5.png)
+
+The following activity diagram summarises what happens when a user presses the up arrow.
+
+![Up Arrow Activity Diagram](images/UpArrowActivityDiagram.png)
+
+Step 6. The user realises they don't need help and actually want to delete the first specialist currently displayed.
+They press the down arrow on the keyboard to recall the `delete 1` command they just passed.
+This results in `Logic#getPrevCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
+
+![Recall Step 6](images/RecallStep6.png)
+
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Initial state
+
+show members
+
+object "<u>:CommandStringStash</u>" as CommandStringStash #FFFFAA {
+    currentCmdIndex = 0
+}
+
+@end
