@@ -19,6 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICALHISTORY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -194,5 +195,23 @@ public class EditCommandParserTest {
         String userInput = "edit" + " n/" + VALID_NAME_BOB;
 
         assertParseFailure(parser, userInput, MESSAGE_NOT_EDITED);
+    }
+
+    @Test
+    public void nameAndNric_assertionTest() {
+        boolean hasNamePrefix = true;
+        boolean hasNricPrefix = true;
+
+        Name name = null;
+        Nric nric = null;
+
+        if (hasNamePrefix) {
+            name = new Name(VALID_NAME_AMY);
+            assert name != null : "Name should not be null!";
+        }
+        if (hasNricPrefix) {
+            nric = new Nric(VALID_NRIC_AMY);
+            assert nric != null : "Nric should not be null!";
+        }
     }
 }
