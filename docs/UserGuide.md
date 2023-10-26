@@ -156,13 +156,7 @@ Examples:
 ---
 ### Lookup students : `lookup`
 
-**TL;DR:** Lookup student details containing any of the given fields.
-
-This feature in Class Manager 2023 is a robust tool that empowers CS2103T TAs to
-efficiently search for and access student information based on specific criteria.
-This feature offers both broad and granular search capabilities, enabling TAs to
-list all students from a particular class or narrow down their search by providing
-one or more lookup parameters.
+Lookup student details containing any of the given fields.
 
 Format: `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]`
 
