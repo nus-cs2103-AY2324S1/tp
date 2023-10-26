@@ -102,6 +102,40 @@ is used.
 #### Design considerations
 
 --------------------------------------------------------------------------------------------------------------------
+### Clear Command
+
+The clear command allows the user to delete all job applications.
+
+#### Implementation
+
+The following sequence diagram illustrates the process of invocation for the command:
+
+(insert UML sequence diagram)
+
+The `ClearCommand` class implements this command.
+
+#### Design considerations
+
+--------------------------------------------------------------------------------------------------------------------
+### Delete Command
+
+The delete command allows the user to delete a job application using its index.
+
+#### Implementation
+
+The following sequence diagram illustrates the process of invocation for the command:
+
+(insert UML sequence diagram)
+
+The `DeleteCommand` class implements this command. It accepts an index and deletes the job application at the specified index.
+
+The `DeleteCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
+not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown. If the user input is valid, 
+then `DeleteCommandParser` returns the corresponding `DeleteCommand`.
+
+#### Design considerations
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
 
