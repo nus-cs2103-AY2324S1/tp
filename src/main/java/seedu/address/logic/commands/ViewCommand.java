@@ -51,11 +51,13 @@ public class ViewCommand extends Command {
             return new CommandResult(personToView.getName().toString() + MESSAGE_NO_ATTENDANCE_RECORD);
         }
 
+        attendanceRecordString.append(personToView.getName() + "'s attendance records\n");
+
         for (Attendance record : personAttendanceRecord) {
             String attendanceStatus = record.isPresent()
-                    ? "Present\n"
-                    : "Absent\n";
-            attendanceRecordString.append("Week " + record.getWeek() + " : " + attendanceStatus);
+                    ? "Present"
+                    : "Absent - " + record.getReason();
+            attendanceRecordString.append("Week " + record.getWeek() + " : " + attendanceStatus + "\n");
         }
 
         return new CommandResult(attendanceRecordString.toString());
