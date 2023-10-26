@@ -113,32 +113,58 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteByIndexFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteByIndexSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteByTagsFirstCommand = new DeleteCommand(TEST_TAG_SET);
+        DeleteCommand deleteByTagsSecondCommand = new DeleteCommand(NO_MATCHING_TAG_SET);
+
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(deleteByIndexFirstCommand.equals(deleteByIndexFirstCommand));
+        assertTrue(deleteByTagsFirstCommand.equals(deleteByTagsFirstCommand));
 
-        // same values -> returns true
+        // same values (delete by index) -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        assertTrue(deleteByIndexFirstCommand.equals(deleteFirstCommandCopy));
+
+        // same values (delete by tags) -> returns true
+        DeleteCommand deleteByTagsCommandCopy = new DeleteCommand(TEST_TAG_SET);
+        assertTrue(deleteByTagsFirstCommand.equals(deleteByTagsCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(deleteByIndexFirstCommand.equals(1));
+        assertFalse(deleteByTagsFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(deleteByIndexFirstCommand.equals(null));
+        assertFalse(deleteByTagsFirstCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        // different person or set of tags -> returns false
+        assertFalse(deleteByIndexFirstCommand.equals(deleteByIndexSecondCommand));
+        assertFalse(deleteByTagsFirstCommand.equals(deleteByTagsSecondCommand));
     }
 
     @Test
-    public void toStringMethod() {
+    public void toString_index() {
         Index targetIndex = Index.fromOneBased(1);
         DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
+        String expectedToString = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expectedToString, deleteCommand.toString());
+    }
+
+    @Test
+    public void toString_tags() {
+        DeleteCommand deleteCommand = new DeleteCommand(TEST_TAG_SET);
+        String expectedString = DeleteCommand.class.getCanonicalName()
+                + String.format("{targetTags=%s}", TEST_TAG_SET.toString());
+        assertEquals(expectedString, deleteCommand.toString());
+    }
+
+    @Test
+    public void toString_invalid() {
+        DeleteCommand deleteCommand = new DeleteCommand(Index.getDefaultIndex());
+        String expectedToString = "seedu.address.logic.commands.DeleteCommand{invalid=No valid target specified}";
+        assertEquals(expectedToString, deleteCommand.toString());
     }
 
     /**
