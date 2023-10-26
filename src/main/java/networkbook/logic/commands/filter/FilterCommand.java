@@ -1,7 +1,5 @@
 package networkbook.logic.commands.filter;
 
-import static java.util.Objects.requireNonNull;
-
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandResult;
@@ -62,7 +60,7 @@ public class FilterCommand extends Command {
      * @param model {@code Model} which the command should operate on.
      */
     public CommandResult execute(Model model) {
-        requireNonNull(model);
+        assert model != null : "Model should not be null";
         model.updateFilteredPersonList(keyTermsPredicate);
         String feedback = String.format(MESSAGE_SUCCESS, keyTermsPredicate.getKeyTerms()
                 .stream()

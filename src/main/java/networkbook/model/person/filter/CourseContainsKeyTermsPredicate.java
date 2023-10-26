@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import networkbook.commons.util.CollectionUtil;
 import networkbook.commons.util.StringUtil;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Course;
@@ -15,12 +16,19 @@ import networkbook.model.person.Person;
 public class CourseContainsKeyTermsPredicate implements Predicate<Person> {
     private final List<String> keyTerms;
 
+    /**
+     * Creates a predicate that returns true for any Person object that has at least one that
+     * partially matches any of the key terms given.
+     */
     public CourseContainsKeyTermsPredicate(List<String> keyTerms) {
+        assert keyTerms != null : "List should not be null";
+        CollectionUtil.requireAllNonNull(keyTerms);
         this.keyTerms = keyTerms;
     }
 
     @Override
     public boolean test(Person person) {
+        assert person != null : "Person should not be null";
         return keyTerms.stream()
                 .anyMatch(keyTerm -> person.getCourses().stream()
                         .anyMatch(course -> StringUtil.containsTermIgnoreCase(course.getCourse(), keyTerm)));
@@ -54,6 +62,7 @@ public class CourseContainsKeyTermsPredicate implements Predicate<Person> {
      * Gets all courses that match any of the key terms.
      */
     public List<Course> getCourses(Person person) {
+        assert person != null : "Person should not be null";
         return person.getCourses()
                 .stream()
                 .filter(course ->
