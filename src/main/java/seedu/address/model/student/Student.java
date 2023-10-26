@@ -27,7 +27,7 @@ public class Student {
     private final ClassDetails classDetails;
 
     // Data fields
-
+    private final Comment comment;
     private final Set<Tag> tags = new HashSet<>();
 
 
@@ -41,13 +41,14 @@ public class Student {
         this.phone = null;
         this.email = null;
         this.classDetails = null;
+        this.comment = null;
     }
 
     /**
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, StudentNumber studentNumber,
-                   ClassDetails classDetails, Set<Tag> tags) {
+                   ClassDetails classDetails, Set<Tag> tags, Comment comment) {
         requireAllNonNull(name, phone, email, studentNumber, classDetails, tags);
         this.name = name;
         this.phone = phone;
@@ -55,6 +56,7 @@ public class Student {
         this.studentNumber = studentNumber;
         this.classDetails = classDetails;
         this.tags.addAll(tags);
+        this.comment = comment;
     }
 
     public Name getName() {
@@ -89,6 +91,10 @@ public class Student {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Comment getComment() {
+        return comment;
+    }
+
     /**
      * Returns true if both persons have the same student number.
      * This defines a weaker notion of equality between two persons.
@@ -107,7 +113,7 @@ public class Student {
      */
     public Student markPresent(Index tutNum) {
         return new Student(this.name, this.phone, this.email,
-                this.studentNumber, this.classDetails.markPresent(tutNum), this.tags);
+                this.studentNumber, this.classDetails.markPresent(tutNum), this.tags, this.comment);
     }
 
     /**
@@ -133,7 +139,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, studentNumber, classDetails, tags);
+        return Objects.hash(name, phone, email, studentNumber, classDetails, tags, comment);
     }
 
     @Override
@@ -145,6 +151,7 @@ public class Student {
                 .add("student number", studentNumber)
                 .add("class number", classDetails)
                 .add("tags", tags)
+                .add("comment", comment)
                 .toString();
     }
 

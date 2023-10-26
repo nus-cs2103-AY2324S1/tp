@@ -58,7 +58,8 @@ public class SetGradeCommand extends Command {
         ClassDetails classDetails = studentToGrade.getClassDetails();
         classDetails.setAssignGrade(assignmentNumber, grade);
         Student gradedStudent = new Student(studentToGrade.getName(), studentToGrade.getPhone(),
-            studentToGrade.getEmail(), studentToGrade.getStudentNumber(), classDetails, studentToGrade.getTags());
+            studentToGrade.getEmail(), studentToGrade.getStudentNumber(), classDetails, studentToGrade.getTags(),
+                studentToGrade.getComment());
 
         model.setStudent(studentToGrade, gradedStudent);
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)

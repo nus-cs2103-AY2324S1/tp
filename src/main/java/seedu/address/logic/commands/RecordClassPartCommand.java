@@ -58,7 +58,8 @@ public class RecordClassPartCommand extends Command {
         ClassDetails classDetails = studentToMark.getClassDetails();
         classDetails.recordClassPart(sessionNumber, isParticipated);
         Student markedStudent = new Student(studentToMark.getName(), studentToMark.getPhone(),
-            studentToMark.getEmail(), studentToMark.getStudentNumber(), classDetails, studentToMark.getTags());
+            studentToMark.getEmail(), studentToMark.getStudentNumber(), classDetails, studentToMark.getTags(),
+                studentToMark.getComment());
 
         model.setStudent(studentToMark, markedStudent);
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)

@@ -22,6 +22,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.ClassDetails;
+import seedu.address.model.student.Comment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -104,9 +105,10 @@ public class EditCommand extends Command {
         ClassDetails updatedClassDetails = editStudentDescriptor.getClassDetails()
                         .orElse(studentToEdit.getClassDetails());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Comment updatedComment = editStudentDescriptor.getComment().orElse(studentToEdit.getComment());
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedStudentNumber,
-                updatedClassDetails, updatedTags);
+                updatedClassDetails, updatedTags, updatedComment);
     }
 
     @Override
@@ -144,6 +146,7 @@ public class EditCommand extends Command {
         private StudentNumber studentNumber;
         private ClassDetails classDetails;
         private Set<Tag> tags = new HashSet<>();
+        private Comment comment;
 
         public EditStudentDescriptor() {}
 
@@ -158,6 +161,7 @@ public class EditCommand extends Command {
             setStudentNumber(toCopy.studentNumber);
             setClassDetails(toCopy.classDetails);
             setTags(toCopy.tags);
+            setComment(toCopy.comment);
         }
 
         /**
@@ -224,6 +228,13 @@ public class EditCommand extends Command {
             return (!tags.isEmpty()) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setComment(Comment comment) {
+            this.comment = comment;
+        }
+        public Optional<Comment> getComment() {
+            return Optional.ofNullable(comment);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -241,7 +252,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditStudentDescriptor.email)
                     && Objects.equals(studentNumber, otherEditStudentDescriptor.studentNumber)
                     && Objects.equals(classDetails, otherEditStudentDescriptor.classDetails)
-                    && Objects.equals(tags, otherEditStudentDescriptor.tags);
+                    && Objects.equals(tags, otherEditStudentDescriptor.tags)
+                    && Objects.equals(comment, otherEditStudentDescriptor.comment);
         }
 
         @Override
@@ -253,7 +265,9 @@ public class EditCommand extends Command {
                     .add("student number", studentNumber)
                     .add("class number", classDetails)
                     .add("tags", tags)
+                    .add("comment", comment)
                     .toString();
         }
+
     }
 }

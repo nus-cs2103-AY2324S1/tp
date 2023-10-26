@@ -34,7 +34,7 @@ public class DeleteTagCommand extends TagCommand {
         Set<Tag> newTags = deleteTags(studentToTag.getTags(), super.tags);
         Student editedStudent = new Student(
                 studentToTag.getName(), studentToTag.getPhone(), studentToTag.getEmail(),
-                studentToTag.getStudentNumber(), studentToTag.getClassDetails(), newTags);
+                studentToTag.getStudentNumber(), studentToTag.getClassDetails(), newTags, studentToTag.getComment());
 
         model.setStudent(studentToTag, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
