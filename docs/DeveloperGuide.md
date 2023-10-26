@@ -358,6 +358,59 @@ _{Explain here how the data archiving feature will be implemented}_
    update.
 3. The state of the parser, rather than the app is used to reduce the chances of accidental clears.
 
+### Sort feature
+
+#### Implementation
+
+The sort feature is facilitated by `Descriptor`, an enumeration which describes the valid fields which can be used to
+sort an applicant.
+
+To enable sorting, `Applicant` implements `Comparable<Applicant>`, to allow for comparison between applicants.
+To allow for applicants to be sorted by different descriptors, `Applicant` is augmented to contain a static `Descriptor`
+field. This is used in `Applicant#compareTo()`, where a switch case checking the state of the `Descriptor` field will
+then compare the specified field of both applicants.
+
+In order to enable comparison of each valid field, these fields will implement the `Comparable` interface. Currently
+valid
+fields for sorting are
+
+1. Name
+2. Phone
+
+#### Steps to trigger
+
+1. User opens the app
+2. User enters `sort d/ [valid field]`, where valid field is one of the fields listed above to be sorted by
+
+Once step 2 has been completed, the GUI will update and refresh the applicant list to be sorted by the specified field.
+
+The following diagram summarises what happens when a user executes a Sort command:
+<puml src="diagrams/SortCommandActivityDiagram.puml" alt="SortCommandActivityDiagram" />
+
+#### Design considerations
+
+##### Aspect: How to compare applicants
+
+- Alternative 1 (current choice): use Comparable interface
+    - Pros: Standard method of comparison between objects in Java and implementing it will make it compatible with most
+      other sorting functions in Java. Easily extensible by adding more cases to the switch statement, to compare by
+      other fields when it becomes supported.
+    - Cons: Applicant#compareTo has to return different values depending on which descriptor has been chosen, causing
+      some bugs when working with other Java functions as the order of Objects compared to each other is not meant to
+      change during runtime.
+
+##### Aspect: Command syntax
+
+- Alternative 1 (current choice): `sort d/ [valid field]`
+    - Pros: Simple and minimal text fields, with a single prefix required to enable sorting.
+    - Cons: Only able to sort in ascending order.
+- Alternative 2: `sort d/ [valid field] o/ [a/d]`
+    - Pros: Able to sort in either ascending or descending order.
+    - Cons: Requires additional input from the user, slowing down the use of the command.
+- Alternative 3: `sort d/ [valid field] o/ [a/d]` where `o/` is optional
+    - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1.
+    - Cons: Users who are not aware of the `o/` feature may not use it.
+
 ### Filter feature
 
 #### Implementation
@@ -373,6 +426,9 @@ It currently contains the following fields and is able to filter for applicants 
 2. Phone
 3. Email
 4. Position
+5. Status
+6. Less than score
+7. Greater than score
 
 When `CustomFilterPredicate#test` is called, it will check if the specified fields are a substring of the same field of
 the applicant,
@@ -381,7 +437,8 @@ returning true if all specified fields match, and false otherwise.
 #### Steps to trigger
 
 1. User opens the app
-2. User enters `filter [n/, e/, p/, hp/] [term]`, where one or more of the prefixes can be specified to be filtered by
+2. User enters `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where one or more of the prefixes can be specified to
+   be filtered by
 
 Once step 2 is complete, the GUI will update and refresh the applicant list with only applicants which match all
 specified fields.
@@ -408,13 +465,14 @@ The following diagram summarises what happens when a user executes a Filter comm
 
 #### Aspect: Command syntax
 
-- Alternative 1: `filter n/ [Name] e/ [Email] p/ [Position] hp/ [Phone]`
+- Alternative 1: `filter n/ [Name] e/ [Email] p/ [Position] hp/ [Phone] s/ [Status] lts/ [Score] gts/ [Score]`
     - Pros: Unambiguous and forces all fields to be entered, preventing errors.
     - Cons: Users cannot filter by single fields. Requires more key presses to enter a filter command.
-- Alternative 2: `filter [n/, e/, p/, hp/] [term]`, where only one term is allowed
+- Alternative 2: `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where only one term is allowed
     - Pros: Quicker to key in command than alternative 1.
     - Cons: Only allows users to filter by one field at a time, limiting utility of filter command.
-- Alternative 3 (current choice): `filter [n/, e/, p/, hp/] [term]`, where at least one term is required and the others
+- Alternative 3 (current choice): `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where at least one term is required
+  and the others
   are optional
     - Pros: Provides flexibility in the filter command to filter by one or more fields, while still retaining the speed
       of alternative 2 when few fields are required.
