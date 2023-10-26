@@ -45,6 +45,12 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         }
     }
 
+    public void addAll(TimeIntervalList timeIntervalList) {
+        for (TimeInterval timeInterval : timeIntervalList) {
+            this.internalList.add(timeInterval);
+        }
+    }
+
     public void deleteTime(ArrayList<TimeInterval> timeIntervals) throws CommandException {
         StringBuilder errorCompilation = new StringBuilder();
         errorCompilation.append("These times are not in the list:\n");

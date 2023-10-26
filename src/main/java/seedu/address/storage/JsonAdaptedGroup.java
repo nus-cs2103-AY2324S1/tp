@@ -45,7 +45,6 @@ class JsonAdaptedGroup {
                     .map(JsonAdaptedTime::new)
                     .collect(Collectors.toList()));
         }
-
     }
 
     /**
@@ -57,16 +56,12 @@ class JsonAdaptedGroup {
         if (!Group.isValidGroup(groupName)) {
             throw new IllegalValueException("illegal value");
         }
-        if (groupRemark != null) {
-            return new Group(groupName, new GroupRemark(groupRemark));
-        }
-
         TimeIntervalList modelTimeIntervalListList = new TimeIntervalList();
         for (JsonAdaptedTime freeTime : meetingTimeList) {
             modelTimeIntervalListList.addTime(freeTime.toModelType());
         }
 
-        return new Group(groupName);
+        return new Group(groupName, new GroupRemark(groupRemark), modelTimeIntervalListList);
     }
 
 }
