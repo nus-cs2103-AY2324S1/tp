@@ -15,4 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_SALARY = new Prefix("s/");
     public static final Prefix PREFIX_SORT = new Prefix("by/");
 
+    public static final Prefix PREFIX_FROM = new Prefix("from/");
+    public static final Prefix PREFIX_TO = new Prefix("to/");
+
 }

@@ -1,11 +1,13 @@
 package seedu.address.model.employee;
 
+import static seedu.address.model.employee.Employee.MAX_NUM_OF_LEAVES;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LeaveList {
 
-    private final ArrayList<Leave> leaveList;
+    public final ArrayList<Leave> leaveList;
 
     /**
      * The constructor for an empty LeaveList.
@@ -35,6 +37,7 @@ public class LeaveList {
 
     /**
      * Returns the number of leaves in this LeaveList.
+     *
      * @return Returns the size of the list.
      */
     public int getSize() {
@@ -52,10 +55,19 @@ public class LeaveList {
 
     /**
      * Adds a new leave of type Leave to this LeaveList.
+     *
      * @param leave The leave that is added to the list.
      */
     public void addLeave(Leave leave) {
         leaveList.add(leave);
+    }
+
+    public void addAllLeaves(ArrayList<Leave> leaves) {
+        leaveList.addAll(leaves);
+    }
+
+    public boolean contains(Leave date) {
+        return leaveList.contains(date);
     }
 
     public boolean getCurrentLeaveStatus() {
@@ -64,6 +76,26 @@ public class LeaveList {
         }
         for (int i = 0; i < leaveList.size(); i++) {
             if (leaveList.get(i).equals(LocalDate.now())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if a given ArrayList is a valid LeaveList.
+     *
+     * @param test List to be tested
+     */
+    public static boolean isValidLeaveList(ArrayList<Leave> test) {
+        if (test.size() == 0) {
+            return true;
+        }
+        if (test.size() > MAX_NUM_OF_LEAVES) {
+            return false;
+        }
+        for (int i = 0; i < test.size(); i++) {
+            if (Leave.isValidLeaveDate(test.get(i).toString())) {
                 return true;
             }
         }

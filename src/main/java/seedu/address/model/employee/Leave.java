@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 public class Leave {
@@ -11,7 +12,7 @@ public class Leave {
     public static final String MESSAGE_CONSTRAINTS = "Leave dates have to be of format dd-MM-yyyy!"
             + " Please ensure that the date is valid!";
 
-    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+    public static final DateTimeFormatter VALID_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy")
             .withResolverStyle(ResolverStyle.STRICT);
 
     public final LocalDate leaveDate;
@@ -21,23 +22,42 @@ public class Leave {
      *
      * @param leaveDate The date of the leave.
      */
-    private Leave(String leaveDate) {
+    public Leave(LocalDate leaveDate) {
         requireNonNull(leaveDate);
-        this.leaveDate = LocalDate.parse(leaveDate, DATE_FORMAT);
+        this.leaveDate = leaveDate;
+        // this.leaveDate = LocalDate.parse(leaveDate, VALID_DATE_FORMAT);
     }
 
     /**
-     * The constructor for an empty leave.
+     * Returns true if the appointment date is in the valid format.
+     *
+     * @param test Date to be tested.
+     * @return True if the date is in the valid format.
      */
-    private Leave() {
-        this.leaveDate = null;
+    public static boolean isValidLeaveDate(String test) {
+        try {
+            LocalDate.parse(test, VALID_DATE_FORMAT);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
-
+    /**
+     * Returns true if the date is the present date or in the future.
+     *
+     * @param test Date to be tested.
+     * @return True if date is not in the past.
+     */
+    public static boolean isFutureDate(String test) {
+        LocalDate currDate = LocalDate.now();
+        LocalDate testDate = LocalDate.parse(test, VALID_DATE_FORMAT);
+        return !testDate.isBefore(currDate);
+    }
 
     @Override
     public String toString() {
-        return leaveDate == null ? "no leave scheduled!" : leaveDate.format(DATE_FORMAT);
+        return leaveDate == null ? "no leave scheduled!" : leaveDate.format(VALID_DATE_FORMAT);
     }
 
     @Override
