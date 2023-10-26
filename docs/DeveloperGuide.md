@@ -246,6 +246,76 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Implementation of Single, optional Appointment Field
+
+#### Proposed Implementation
+
+_{Explain how `Appointment` as an optional field is implemented}_
+
+_{Explain how `Appointment` is stored inside each `Person`}_
+
+#### Design Considerations:
+
+**Aspect: Parsing of `Appointment` Field**
+
+* **Alternative 1 (current choice):** Use of the single `ap/` flag.
+  * Pros: Easy to input on the user-end.
+  * Cons: Hard to separate time fields, could be troublesome to implement a parse format string.
+
+* **Alternative 2:** Use of 2 flags to denote start and end time for appointment.
+  * Pros: Immediate clarity on what fields to implement, and how to parse input string.
+  * Cons: Strong dependence between 2 flags requires more fail-state management.
+
+**Aspect: Value to store `Appointment` as**
+
+* **Alternative 1 (current choice):** Use of raw `String` format for Appointment
+  * Pros: Far easier to parse and store as an object.
+  * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
+
+* **Alternative 2:** Use of `DateTime`-related objects for Appointment
+  * Pros: More direct paths of feature extension in the long run.
+  * Cons: Translation to and from `DateTime` objects can be non-trivial.
+
+We are currently in the process of switching to Alternative 2, as Alternative 1 was chosen primarily for its
+fast implementation for the MVP.
+
+### Delete Feature
+
+#### Description
+
+The `DeleteCommand` allows users to delete a patient's profile or a specified field from the patient's profile.
+
+#### Implementation Details
+
+The `DeleteCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `delete`
+- **Usage**: Users invoke the `DeleteCommand` by specifying the command word, followed by the name or IC of the person they wish to delete and any fields they wish to delete.
+- **Command Format**: `delete n/Name or id/IC_Number[Fields] ...`
+- **DeletePersonDescriptor**: The `DeleteCommand` relies on an `DeletePersonDescriptor` to capture which fields the user wishes to delete from the patient's profile. The descriptor will be passed to the `DeleteCommand` to execute the deletion.
+- **Validation**: The `DeleteCommand` performs validation to ensure that the IC or Name provided is valid.
+- **Execution**: When executed, the `DeleteCommand` identifies the patient to be deleted based on the provided name or IC. When the patient is found, if no there are no specified fields to delete, the entire patient profile will be deleted from the database. Otherwise, the specified fields will be deleted from the patient's profile.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src=diagrams/DeleteActivityDiagram.puml width="250"/>
+
+#### Rationale
+
+- **Flexibility**: The `DeleteCommand` provides flexibility to users, allowing them to choose what to be deleted from the patient's profile, instead of an "all-or-nothing" approach.
+- **Data Accuracy**: The `DeleteCommand` allows users to delete outdated or incorrect information from the patient's profile, ensuring that the database is up-to-date and accurate.
+- **Privacy and Compliance**: The `DeleteCommand` supports "right to erasure" under the PDPA, allowing users to delete patient's information from the database when requested.
+
+#### Alternative Implementation
+
+- **Alternative 1**: The `DeleteCommand` could be implemented as a `DeleteFieldCommand` and a `DeletePersonCommand`. The `DeleteFieldCommand` will delete the specified fields from the patient's profile, while the `DeletePersonCommand` will delete the entire patient profile from the database. This approach will require the user to invoke two commands to delete a patient's profile and the specified fields from the patient's profile. This approach is not chosen as it is less intuitive and requires more effort from the user.
+
+
+### Addition of Interface for Find-type commands
+
+#### Proposed Implementation
+
+_{Explain how there is overlap in function for `find`, `delete`, `edit`}_
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -287,6 +357,43 @@ The HealthSync GUI utilizes specific color choices to create a visually pleasing
 2. Secondary Colour: #231335
 
 
+### Edit Feature
+
+#### Description
+
+The `EditCommand` allows users to modify the details of an existing person within the address book.
+
+#### Implementation Details
+
+The `EditCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `edit`.
+- **Usage**: Users invoke the `EditCommand` by specifying the command word, followed by the name or IC of the person they wish to edit and the fields they wish to modify.
+    - The command format is: `edit n/NAME or id/IC_NUMBER [Fields] ...`.
+- **EditPersonDescriptor**: The `EditCommand` relies on an `EditPersonDescriptor` to capture the details to edit the person with. This descriptor allows for updating various attributes of the person, such as phone, email, address, appointment, and medical histories.
+- **Validation**: The `EditCommand` performs validation to ensure at least one field to edit is provided. It also checks for consistency when both a name and IC are provided.
+- **Execution**: When executed, the `EditCommand` identifies the person to edit based on the provided name and/or IC. If the person is found, it creates an `editedPerson` with the desired changes. The person is then updated with the new details.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/EditActivityDiagram.puml" width="250" />
+
+#### Rationale
+
+- **Flexibility**: The `EditCommand` provides flexibility to users by allowing them to choose whether to edit a person by name or IC, as per their convenience.
+- **Maintaining Data Integrity**: The feature is designed to maintain the integrity of the address book by updating existing entries rather than creating new ones.
+
+#### Alternatives Considered
+
+- **Alternative 1**: Using Numbering Index to specify the person to edit. In this approach, users would provide the index of the person based on the list instead of specifying a name or IC. For example, they could use a command like `edit 1 p/93029393` to edit the first person of the list with the phone number.
+    - **Pros**:
+        - **Simplicity**: Using an index is straightforward and doesn't require specifying a name or IC.
+        - **Reduced Ambiguity**: Using an index avoids potential ambiguity when multiple individuals have the same name.
+
+    - **Cons**:
+         - **Lack of Context**: Users might find it challenging to remember the index of a particular person, especially in a large address book.
+         - **Potential Errors**: If the list of persons changes (e.g., due to deletions or additions), the numbering index could become outdated, leading to errors.
+         - **Limited Identifiability**: Index numbers do not provide any context about the person, which may be confusing when there are multiple people with the same name or similar information.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -313,7 +420,7 @@ The HealthSync GUI utilizes specific color choices to create a visually pleasing
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 
 HealthSync caters to counter staff, enabling them to register and access patient information within 2-3 minutes. It offers a user-friendly platform, optimizing contact management, patient tracking, department coordination, and health record access, ensuring efficient patient management, appointment scheduling, and comprehensive health record retrieval, enhancing care delivery and saving time.
 
@@ -348,38 +455,203 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HealthSync` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add a patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a patient into the list.
+2.  HealthSync adds the target patient into the list
+    and displays the patient inside the updated list.
+3.  HealthSync <u>performs an auto-save (UC0A)</u>.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The user does not specify one or more of the compulsory fields.
 
-  Use case ends.
+  * 1a1. HealthSync shows an error message.
 
-* 3a. The given index is invalid.
+    Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+  * 1b. The user specifies an IC that is already exists in the current list.
 
-      Use case resumes at step 2.
+    * 1b1. HealthSync shows an error message.
+
+      Use case ends.
+
+**Use case: UC2 - Delete a patient**
+
+**MSS**
+
+1.  User requests to delete a specific patient based on an identifier from the list.
+2.  HealthSync searches for the patient in the list.
+3.  HealthSync deletes the specified patient from the list.
+4.  HealthSync <u>performs an auto-save (UC0A)</u>.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not exist in the list.
+
+    * 2a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 2b. HealthSync finds more than 1 patient for the list.
+
+    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
+    * 2b2. User indicates the patient to delete in the list.
+
+      Use case continues from step 3.
+
+**Use case: UC3 - Delete fields from a patient**
+
+**MSS**
+
+1.  User requests to delete fields from a specific patient based
+    on an identifier from the list.
+2.  HealthSync searches for the patient in the list.
+3.  HealthSync deletes the fields of a specified patient from the list.
+4.  HealthSync <u>performs an auto-save (UC0A)</u>.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user does not specify any fields they want to delete.
+
+    * 1a1. HealthSync <u>deletes the patient from the list instead (UC2).</u>
+
+      Use case ends.
+
+* 1b. The user attempts to delete a name/IC field.
+
+    * 1b1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 2a. The user does not exist in the list.
+
+    * 2a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 2b. HealthSync finds more than 1 patient for the list.
+
+    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
+    * 2b2. User indicates the patient to delete from in the list.
+
+      Use case continues from step 3.
+
+**Use case: UC4 - Edit a patient**
+
+**MSS**
+
+1.  User requests to change a specific user's fields
+based on an identifier
+    with a new value in the list.
+2.  HealthSync searches for the patient in the list.
+3.  HealthSync edits the specified patient's fields in the list.
+4.  HealthSync <u>performs an auto-save (UC0A)</u>.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user does not specify any fields they want to edit.
+
+    * 1a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 1b. The user specifies duplicate fields they want to edit.
+
+    * 1b1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 1c. The user specifies no value in a name/IC field that they wish to edit.
+
+    * 1c1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 1d. The user attempts to change the IC of the patient to one that already
+      exists in the list.
+
+    * 1d1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 2a. The user does not exist in the list.
+
+    * 2a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 2b. HealthSync finds more than 1 patient for the list.
+
+    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
+    * 2b2. User indicates the patient to edit in the list.
+
+      Use case continues from step 3.
+
+**Use case: UC5 - Find a patient**
+
+**MSS**
+
+1.  User requests for matches to the given query.
+2.  HealthSync displays the list of patients matching the query.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. No matches exist in the list.
+
+    * 1a1. HealthSync displays a "no matches found" message.
+
+      Use case ends.
+
+* 1b. User additionally specifies fields of the patient that they are interested in.
+
+    * 1b1. HealthSync displays only the specific fields of the patients that match the query.
+
+      Use case ends.
+
+**Use case: UC0A - Auto-save**
+
+**Actors:** Operating System (OS)
+
+**MSS**
+
+1.  HealthSync requests for permissions from the OS to access its save location.
+2.  OS grants HealthSync permission to access its save location.
+3.  HealthSync saves the session data into the save location.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. OS does not grant HealthSync save location permissions.
+
+    * 1a1. HealthSync shows an error message.
+
+    Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The application should be compatible with the designated operating systems and hardware configurations, as specified in the system requirements.
+2. The application should respond promptly to user inputs, with minimal latency and loading times for data retrieval and processing.
+3. The user interface should be user-friendly and intuitive, designed to optimize the workflow of frontdesk staff who need to complete tasks within 2-3 minutes.
+4. The application should be designed to handle an increasing volume of patient records efficiently without noticeable performance degradation.
+5. Ensure that the application complies with PDPA and healthcare regulations.
 
 *{More to be added}*
 
@@ -387,6 +659,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Architecture Diagram**: A visual representation that illustrates the high-level design of the application
+* **Main**: The function responsible for launching the application
+* **UI**: Stands for User Interface
+* **API**: Stands for Application Programming Interface, it defines the methods and protocols of the application
+* **ObservableList**: A list implementation that allows other objects to observe and be notified when there is changes
+* **JSON**: Stands for JavaScript Object Notation, it is a lightweight data interchange format
+* **Classes**: Defines an object in the application
+* **CLI**: Stands for Command-Line Interface, it is a text-based interface for interaction with computer system or software applications through use of commands
+* **IC**: Stands for Identity Card
+* **Database**: A structured collection of data organized and stored in computer system
+* **Latency**: The time delay between user's action or request and the system's response
+* **PDPA**: Stands for Personal Data Protection Act, it is the legislation related to the protection of personal data and privacy
+
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -18,27 +19,40 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final Nric nric;
     private final Phone phone;
     private final Email email;
 
+
     // Data fields
     private final Address address;
+    private final Appointment appointment;
+    private final Set<MedicalHistory> medicalHistories = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Nric nric, Phone phone, Email email, Address address, Appointment appointment,
+                  Set<MedicalHistory> medicalHistories, Set<Tag> tags) {
+        requireAllNonNull(name, nric, phone, email, address, medicalHistories, tags);
         this.name = name;
+        this.nric = nric;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.appointment = appointment;
+        this.medicalHistories.addAll(medicalHistories);
         this.tags.addAll(tags);
     }
 
+
     public Name getName() {
         return name;
+    }
+
+    public Nric getNric() {
+        return nric;
     }
 
     public Phone getPhone() {
@@ -53,6 +67,16 @@ public class Person {
         return address;
     }
 
+    public Optional<Appointment> getAppointment() {
+        return Optional.ofNullable(appointment);
+    }
+    /**
+     * Returns an immutable medical history set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<MedicalHistory> getMedicalHistories() {
+        return Collections.unmodifiableSet(medicalHistories);
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -90,26 +114,33 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+
         return name.equals(otherPerson.name)
+                && nric.equals(otherPerson.nric)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && Objects.equals(appointment, otherPerson.appointment)
+                && medicalHistories.equals(otherPerson.medicalHistories)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, nric, phone, email, address, appointment, medicalHistories, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("nric", nric)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("appointment", appointment)
+                .add("medicalHistories", medicalHistories)
                 .add("tags", tags)
                 .toString();
     }
