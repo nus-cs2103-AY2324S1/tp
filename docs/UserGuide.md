@@ -95,7 +95,7 @@ Adds an applicant to the address book.
 Format: `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
 
 Examples:
-* `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 
 ## Adding an interview: `add-i`
 
@@ -140,7 +140,7 @@ Format: `add-i app/APPLICANT_ID jr/JOB_ROLE time/INTERVIEW_DATETIME`
   * When there is an interview clash: `“Oops! You have an <insert interview object> scheduled at <from date & by date>`
 
 Examples:
-* `add-job app/18 j/software-engineer time/2023-10-24 18:00`
+* `add-i app/18 jr/software engineer time/2023-10-24 18:00`
 
 ## Listing all applicants : `list-a`
 

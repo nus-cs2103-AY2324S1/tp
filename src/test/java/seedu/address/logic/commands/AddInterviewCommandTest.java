@@ -30,21 +30,21 @@ public class AddInterviewCommandTest {
         Index index = TypicalIndexes.INDEX_FIRST;
         AddInterviewCommand addInterview1Cmd =
                 new AddInterviewCommand(index, STANDARD_INTERVIEW.getJobRole(),
-                        STANDARD_INTERVIEW.getInterviewStartTimeAsString(),
-                        STANDARD_INTERVIEW.getInterviewEndTimeAsString()
+                        STANDARD_INTERVIEW.getInterviewStartTime(),
+                        STANDARD_INTERVIEW.getInterviewEndTime()
                         );
         AddInterviewCommand addInterview2Cmd =
                 new AddInterviewCommand(index, STANDARD_INTERVIEW_2.getJobRole(),
-                        STANDARD_INTERVIEW_2.getInterviewStartTimeAsString(),
-                        STANDARD_INTERVIEW_2.getInterviewEndTimeAsString());
+                        STANDARD_INTERVIEW_2.getInterviewStartTime(),
+                        STANDARD_INTERVIEW_2.getInterviewEndTime());
 
         // same object -> returns true
         assertEquals(addInterview1Cmd, addInterview1Cmd);
 
         // same values -> returns true
         AddInterviewCommand addInterview1Copy = new AddInterviewCommand(index, STANDARD_INTERVIEW.getJobRole(),
-                STANDARD_INTERVIEW.getInterviewStartTimeAsString(),
-                STANDARD_INTERVIEW.getInterviewEndTimeAsString());
+                STANDARD_INTERVIEW.getInterviewStartTime(),
+                STANDARD_INTERVIEW.getInterviewEndTime());
         assertEquals(addInterview1Cmd, addInterview1Copy);
 
         // different types -> returns false
