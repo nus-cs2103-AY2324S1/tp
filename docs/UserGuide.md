@@ -16,7 +16,6 @@ online dating journey.
    - [Sorting list of dates by Metric: `sort`](#sorting-list-of-dates-by-metric-sort)
    - [Getting a recommended date: `match`](#getting-a-recommended-date-match)
    - [Setting the matching algorithm: `setPreference`](#setting-the-matching-algorithm-setPreference)
-   - [Exiting the program: `exit`](#exiting-the-program-exit)
 - [FAQ](#3-faq)
 - [Summary](#4-summary)
 - [Glossary](#5-glossary)
