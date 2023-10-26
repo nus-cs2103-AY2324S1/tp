@@ -279,6 +279,37 @@ _{Explain how `Appointment` is stored inside each `Person`}_
 We are currently in the process of switching to Alternative 2, as Alternative 1 was chosen primarily for its
 fast implementation for the MVP.
 
+### Delete Feature
+
+#### Description
+
+The `DeleteCommand` allows users to delete a patient's profile or a specified field from the patient's profile.
+
+#### Implementation Details
+
+The `DeleteCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `delete`
+- **Usage**: Users invoke the `DeleteCommand` by specifying the command word, followed by the name or IC of the person they wish to delete and any fields they wish to delete.
+- **Command Format**: `delete n/Name or id/IC_Number[Fields] ...`
+- **DeletePersonDescriptor**: The `DeleteCommand` relies on an `DeletePersonDescriptor` to capture which fields the user wishes to delete from the patient's profile. The descriptor will be passed to the `DeleteCommand` to execute the deletion.
+- **Validation**: The `DeleteCommand` performs validation to ensure that the IC or Name provided is valid.
+- **Execution**: When executed, the `DeleteCommand` identifies the patient to be deleted based on the provided name or IC. When the patient is found, if no there are no specified fields to delete, the entire patient profile will be deleted from the database. Otherwise, the specified fields will be deleted from the patient's profile.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src=diagrams/DeleteActivityDiagram.puml width="250"/>
+
+#### Rationale
+
+- **Flexibility**: The `DeleteCommand` provides flexibility to users, allowing them to choose what to be deleted from the patient's profile, instead of an "all-or-nothing" approach.
+- **Data Accuracy**: The `DeleteCommand` allows users to delete outdated or incorrect information from the patient's profile, ensuring that the database is up-to-date and accurate.
+- **Privacy and Compliance**: The `DeleteCommand` supports "right to erasure" under the PDPA, allowing users to delete patient's information from the database when requested.
+
+#### Alternative Implementation
+
+- **Alternative 1**: The `DeleteCommand` could be implemented as a `DeleteFieldCommand` and a `DeletePersonCommand`. The `DeleteFieldCommand` will delete the specified fields from the patient's profile, while the `DeletePersonCommand` will delete the entire patient profile from the database. This approach will require the user to invoke two commands to delete a patient's profile and the specified fields from the patient's profile. This approach is not chosen as it is less intuitive and requires more effort from the user.
+
+
 ### Addition of Interface for Find-type commands
 
 #### Proposed Implementation
