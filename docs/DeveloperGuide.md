@@ -272,11 +272,44 @@ parameters. It then sets all specified attributes of the created `PersonFilter` 
 null. The `FilterCommandParser` finally returns a newly created `FilterCommand` with the PersonFilter used in the
 constructor.
 
-Step 3. `FilterCommand::execute` is called. In this method, `model::updateFilteredPersonList` is called with
-`PersonFilter::matchesFilter` being used as the predicate. This updates the GUI and populates the filtered list with
+Step 3. `FilterCommand#execute` is called. In this method, `model#updateFilteredPersonList` is called with
+`PersonFilter#matchesFilter` being used as the predicate. This updates the GUI and populates the filtered list with
 only `Person` objects that match the filter.
 
 Step 4. The number of people displayed is returned as a `CommandResult`.
+
+### Deleting Events
+
+### Implementation
+
+The deletion of events is facilitated by the `model::deleteEventAt` method and the `model::findEventAt` method. The
+former method deletes the event stored in the `Calendar` object which itself is an attribute of the `Model` object by
+calling a similar method `Calendar::deleteEventAt`. These methods take in a `LocalDateTime` object and finds the method
+within the `Calendar` object, then in the case of `model::deleteEventAt`, deletes the event. Given below is an example
+usage scenario of the command.
+
+Step 1. The user launches the application and creates an event.
+
+Step 2. The user executes `deleteEvent 2023-12-09 12:00` command to delete the event at that time. The `deleteEvent` 
+command calls `Model#findEventAt(LocalDateTime)` to find an event at the specified date and time. This event is then stored as a
+variable `toDelete`.
+
+**Note**: If no event is found at the specified date and time at any point of the command execution, an 
+`EventNotFoundException` is thrown which causes an error message to be displayed.
+
+Step 3. The command then calls `Model#deleteEventAt(LocalDateTime)`. This method calls similar methods of 
+`Calendar#deleteEventAt(LocalDateTime)` which calls `AllDaysEventListManager#deleteEventAt(LocalDateTime)`.
+
+Step 4. The `AllDaysEventListManager` checks for an event at the specified date and time again, then checks for all days
+for which the event lasts for. Then, for each day, the event is removed from the `SingleDayEventList`.
+
+Step 5. The deleted event which was previously stored in as a variable is displayed in the `CommandResult` to show the
+user which command was deleted. 
+
+**Design considerations**
+
+ * The design of the `deleteEvent` command is dependent on the structure of the `Calendar` object. Should the structure 
+of how the event objects are stored change, a new implementation will be required for the command.
 
 --------------------------------------------------------------------------------------------------------------------
 
