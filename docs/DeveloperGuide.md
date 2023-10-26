@@ -358,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1c. User edits the Tutorial Group Number associated with the contact.
 
     Use case ends.
-    
+
 
 **Use case: UC02 - View Summary of Attendance Records**
 
