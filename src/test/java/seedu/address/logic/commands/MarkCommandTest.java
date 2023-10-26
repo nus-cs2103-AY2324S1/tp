@@ -29,8 +29,9 @@ public class MarkCommandTest {
         Interview doneInterview = new Interview(
                 interviewToMark.getInterviewApplicant(),
                 interviewToMark.getJobRole(),
-                interviewToMark.getInterviewTiming(),
-                true);
+                interviewToMark.getInterviewStartTime(),
+                interviewToMark.getInterviewEndTime(),
+                 true);
         expectedModel.setInterview(interviewToMark, doneInterview);
 
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);

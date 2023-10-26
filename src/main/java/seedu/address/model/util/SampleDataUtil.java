@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -52,15 +53,27 @@ public class SampleDataUtil {
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("Example"), true);
 
-        Applicant sampleApplicant3 = new Applicant(new Name("Roy Balakrishnan"),
-                new Phone("92624417"), new Email("royb@example.com"),
+        Applicant sampleApplicant3 =
+                new Applicant(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), true);
+                getTagSet("Example"), true);
 
         return new Interview[] {
-            new Interview(sampleApplicant, "Frontend Engineer", "Sample Time"),
-            new Interview(sampleApplicant2, "Backend Engineer", "Sample Time 2"),
-            new Interview(sampleApplicant3, "SWE", "Sample Time 3")
+            new Interview(sampleApplicant,
+                    "Frontend Engineer",
+                    LocalDateTime.of(2025, 1, 1, 10, 0),
+                    LocalDateTime.of(2025, 1, 1, 12, 0)
+            ),
+            new Interview(sampleApplicant2,
+                    "Backend Engineer",
+                    LocalDateTime.of(2025, 1, 2, 10, 0),
+                    LocalDateTime.of(2025, 1, 2, 12, 0)
+            ),
+            new Interview(sampleApplicant3,
+                    "SWE",
+                    LocalDateTime.of(2025, 1, 3, 10, 0),
+                    LocalDateTime.of(2025, 1, 3, 12, 0)
+            )
         };
     }
 
