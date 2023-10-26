@@ -174,29 +174,29 @@ Examples:
 
 ### Find Member in member list : `findMember`
 
-Finds and lists a member of a specified member index in the full member list.
+Finds and lists member(s) whose name(s) contain the provided `KEYWORD`.
 
-Format: `findMember MEMBER_INDEX`
-* Finds and lists the member at the specified `MEMBER_INDEX` of the full member list.
-* The index refers to the index number shown in the full member list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
+Format: `findMember KEYWORD [MORE_KEYWORDS]`
+* Finds and lists member(s) whose name(s) contain the specified `KEYWORD`.
+* More than 1 `KEYWORD` can be provided to find more members.
+* The `KEYWORD` must match minimally one of the words in the name of the member to be found, where capitalisation does not matter.
 
-Examples:
-* `findMember 1` displays the 1st member of the full member list.
-* `findMember 10` displays the 10th member of the full member list.
+* Examples:
+* `findMember alice` displays the member(s) whose name(s) contain 'alice'
+* `findMember alice bob charlie` displays the member(s) whose name(s) contain 'alice', 'bob' and/or 'charlie'.
 
 ### Find Event in event list : `findEvent`
 
-Finds and lists an event of a specified event index in the full event list.
+Finds and lists event(s) which name(s) contain the provided `KEYWORD`.
 
-Format: `findEvent EVENT_INDEX`
-* Finds and lists the event at the specified `EVENT_INDEX` of the full event list.
-* The index refers to the index number shown in the full event list.
-* The index **must be a positive integer** that is within the range of the length of the event list.
+Format: `findEvent KEYWORD [MORE_KEYWORDS]`
+* Finds and lists event(s) which name(s) contain the specified `KEYWORD`.
+* More than 1 `KEYWORD` can be provided to find more events.
+* The `KEYWORD` must match minimally one of the words in the name of the event to be found, where capitalisation does not matter.
 
-Examples:
-* `findEvent 1` displays the 1st event of the full event list.
-* `findEvent 10` displays the 10th event of the full event list.
+* Examples:
+* `findEvent party` displays the event(s) which name(s) contain 'party'
+* `findMember party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
 
 ### Undoing a command: `undo`
 
@@ -253,8 +253,8 @@ Action | Format, Examples
 **List all members and all events** | `list`
 **View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
 **View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
-**Find member in list** | `findMember MEMBER_INDEX` <br> e.g.`findMember 1`
-**Find event in list** | `findEvent EVENT_INDEX` <br> e.g.`findEvent 1`
+**Find member in list** | `findMember KEYWORD [MORE_KEYWORDS]` <br> e.g.`findMember alice`
+**Find event in list** | `findEvent KEYWORD [MORE_KEYWORDS]` <br> e.g.`findEvent party`
 **Redo** | `redo`
 **Undo** | `undo`
 **Help** | coming soon...
