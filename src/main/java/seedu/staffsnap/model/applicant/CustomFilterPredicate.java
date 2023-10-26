@@ -47,7 +47,7 @@ public class CustomFilterPredicate implements Predicate<Applicant> {
     }
 
     /**
-     * @param applicant the input argument
+     * @param applicant the applicant to be tested.
      * @return true if applicant matches all specified fields in the predicate
      */
     @Override

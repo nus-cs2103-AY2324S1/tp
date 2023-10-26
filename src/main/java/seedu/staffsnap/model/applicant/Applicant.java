@@ -223,8 +223,7 @@ public class Applicant implements Comparable<Applicant> {
     public Double getScore() {
         List<Interview> interviews = getInterviews();
         Double totalScore = 0.;
-        for (Interview interview: interviews
-             ) {
+        for (Interview interview: interviews) {
             totalScore += new Double(interview.rating.value);
         }
         Double averageScore = totalScore / interviews.size();

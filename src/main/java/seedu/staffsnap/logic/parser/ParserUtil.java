@@ -218,8 +218,9 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String status} into a {@code Status}.
+     *
      * @param status String representation of Status
-     * @return Status if successful, or null of no matching status is found.
+     * @return Status if successful, or null if no matching status is found.
      */
     public static Status parseStatus(String status) {
         requireNonNull(status);
@@ -228,6 +229,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String score} into a {@code Double}.
+     *
      * @param score String representation of score
      * @return Double score which is the average rating of all interviews
      * @throws ParseException if a NumberFormatException is caught

@@ -39,14 +39,15 @@ public class StringUtil {
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
+     *   Ignores case.
      *   <br>examples:<pre>
-     *       containsWordIgnoreCase("ABc def", "abc") == true
-     *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsStringIgnoreCase("ABc def", "abc") == true
+     *       containsStringIgnoreCase("ABc def", "DEF") == true
+     *       containsStringIgnoreCase("ABc def", "AB") == true
+     *       containsStringIgnoreCase("ABc def", "acd") == false // "acd" is not a substring in "ABc def"
      *       </pre>
-     * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param sentence a String that is not null
+     * @param word a String that is not empty and is not null
      */
     public static boolean containsStringIgnoreCase(String sentence, String word) {
         requireNonNull(sentence);

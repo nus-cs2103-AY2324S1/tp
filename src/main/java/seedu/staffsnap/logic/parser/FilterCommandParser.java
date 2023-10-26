@@ -26,7 +26,6 @@ import seedu.staffsnap.model.interview.Interview;
 /**
  * Parses input arguments and creates a new FilterCommand object
  */
-
 public class FilterCommandParser implements Parser<FilterCommand> {
 
     /**

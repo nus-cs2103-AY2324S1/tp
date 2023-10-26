@@ -52,8 +52,8 @@ public class FilterCommand extends Command {
     }
 
     /**
-     * Checks if the applicant exists.
-     * @param other Other applicant.
+     * Checks if the two FilterCommand objects are equivalent, by comparing the equivalence of their predicates.
+     * @param other Other FilterCommand.
      * @return true if equals, false if not equals.
      */
     @Override
@@ -68,7 +68,6 @@ public class FilterCommand extends Command {
         }
 
         FilterCommand otherFilterCommand = (FilterCommand) other;
-        System.out.println("predicate = " + predicate);
         return predicate.equals(otherFilterCommand.predicate);
     }
 
