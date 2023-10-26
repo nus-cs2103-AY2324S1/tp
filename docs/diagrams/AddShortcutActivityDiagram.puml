@@ -8,18 +8,15 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 if () then ([Request parsed successfully)
-if () then ([Valid shortcut mapping])
     switch ()
     case ([Mapping taken])
-        :Notify user of existing mapping;
+        :Notify user of existing mapping to be overwritten;
+        :Register new shortcut;
     case ([else])
         :Register new shortcut;
     endswitch
 else ([else])
     :Show error and usage message;
-endif
-else ([else])
-:Show error and usage message;
 endif
 
 
