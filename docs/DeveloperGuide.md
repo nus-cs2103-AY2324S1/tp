@@ -319,9 +319,42 @@ This results in `Logic#getPrevCommandString` being called which returns `delete 
 
 ![Recall Step 6](images/RecallStep6.png)
 
+<br>
 
+### Find feature
 
+#### Overview
+The find feature allows the user to find patients or specialists by checking whether their attributes contain certain keywords.
+Upon entering a `find` command, an instance of `FindCommandParser` is created to process the prefixes along with their corresponding arguments into
+predicates. The predicates are represented as `Predicate<Person>` (using Java's in-built functional interface), and are mapped
+to their prefixes in a `FindPredicateMap`. A `FindPredicateMap` encapsulates **all** predicates indicated by the user,
+which are later combined and used to test each `Person` in the `FilteredPersonList` of the `Model`.
 
+As patients and specialists have common and differing attributes, so do their predicates.<br>
+Predicates common to both:<br>
+`NameContainsKeywordsPredicate`, `PhoneContainsKeywordsPredicate`, `EmailContainsKeywordsPredicate`, `TagsContainsKeywordsPredicate`
+
+Predicates unique to patients:<br>
+`AgeContainsKeywordsPredicate`, `MedHistoryContainsKeywordsPredicate`
+
+Predicates unique to specialist:<br>
+`LocationContainsKeywordsPredicate`, `SpecialtyContainsKeywordsPredicate`
+
+The following sequence diagram shows how a find command is parsed and executed to find a patient.
+In this example, the command entered is <br>
+`find -pa n/Tim m/Anaemia`
+
+![FindCommandSequenceDiagram](images/FindCommandSequenceDiagram.png)
+
+When the `FindCommandParser` parses the prefix arguments, a `NameContainsKeywordsPredicate` and `MedHistoryContainsKeywordsPredicate`
+is instantiated by their corresponding arguments and are mapped to their prefixes in the `FindPredicateMap`.
+
+![FindPredicateMapExample](images/FindPredicateMapExample.png)
+
+The predicates are combined into a single `Predicate<Person>` in `FindCommand::execute` and applied to each `Person` in the 
+`FilteredPersonList` of the `Model`.
+
+To find a specialist, a similar parse and execution flow is conducted. 
 
 --------------------------------------------------------------------------------------------------------------------
 
