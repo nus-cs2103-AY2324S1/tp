@@ -16,6 +16,7 @@ import seedu.application.logic.Logic;
 import seedu.application.logic.commands.CommandResult;
 import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.logic.parser.exceptions.ParseException;
+import seedu.application.model.job.Job;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX
@@ -43,6 +44,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane jobListPanelPlaceholder;
+
+    @FXML
+    private StackPane jobDetailsPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -105,7 +109,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        jobListPanel = new JobListPanel(logic.getFilteredJobList());
+        jobListPanel = new JobListPanel(logic.getFilteredJobList(), this);
         jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -125,6 +129,15 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Handles display job details event on JobCard object.
+     */
+    public void displayJobDetails(Job job) {
+        JobDetailsPanel jobDetailsPanel = new JobDetailsPanel(job);
+        jobDetailsPanelPlaceholder.getChildren().clear();
+        jobDetailsPanelPlaceholder.getChildren().add(jobDetailsPanel.getRoot());
     }
 
     /**
@@ -149,7 +162,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+            (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();

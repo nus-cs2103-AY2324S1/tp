@@ -8,6 +8,101 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Implementation**
+This section describes some noteworthy details on how certain features are implemented.
+
+### Add Command
+
+The add command allows the user to add job applications with various attributes.
+
+Compulsory attributes are `Company` and `Role`.
+
+Optional attributes are `Status`, `Industry`, `Deadline` and `JobType`
+
+#### Implementation
+
+It is implemented by `AddCommand` and `AddCommandParser`.
+
+`AddCommandParser` parses the users' input and checks for the presence of compulsory and optional prefixes. 
+The information is then used to create a new Job Application through the `AddCommand`.
+
+(insert UML diagram here)
+
+The following sequence/activity diagram illustrates the process of invocation for the AddCommand:
+
+(insert UML diagram here)
+
+#### Design Considerations
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Edit Command
+
+The edit command allows the user to edit any field in their job application.
+
+#### Implementation
+It is implemented by `EditCommand` and `EditCommandParser`.
+
+`EditCommandParser` parses the users' input and checks for the valid prefixes to determine the field the user wants to change.
+The information is then used to create a new Job Application with the updated fields while retaining the unchanged fields through the `EditCommand`.
+
+The following Class Diagram of EditCommand illustrates the interactions between EditCommand and other classes:
+
+(insert UML diagram here)
+
+The following sequence diagram illustrates the process of invocation for the EditCommand:
+
+(insert UML diagram here)
+
+#### Design Considerations
+
+--------------------------------------------------------------------------------------------------------------------
+
+### List Command
+
+The list command allows the user to view the list of all job applications.
+
+#### Implementation
+
+The following sequence diagram illustrates the process of invocation for the command:
+
+(insert UML diagram here)
+
+The `ListCommand` class implements this command. It sets the predicate for the `filteredList` of `Model` to
+`PREDICATE_SHOW_ALL_JOBS` which evaluates any `Job` to true.
+
+#### Design Considerations
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Sort Command
+
+The sort command allows the user to sort the current list of job applications based on a specified field.
+
+#### Implementation
+
+The following sequence diagram illustrates the process of invocation for the command:
+
+(insert UML sequence diagram)
+
+The `SortCommand` class implements this command. It accepts a `FieldComparator` which will be set as the comparator when
+`Model::sortJobs` is called. 
+
+The `SortCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
+not conform to the expected format, a `ParseException` is thrown. If the user input is valid, then `SortCommandParser`
+generates the corresponding `FieldComparator` which will be set as the comparator when sorting the list.
+
+The overriding `FieldComparator::compare` method compares the field indicated by the specifier. To achieve this, the
+relevant field method must be invoked.
+
+* For alphabetically sorted fields (`Company`, `Role`, `Status`, `Industry`, `JobType`), `String::compareToIgnoreCase`
+is used.
+* For chronologically sorted fields (`Deadline`), a custom `compareTo()` method is implemented.
+
+#### Design considerations
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Requirements**
 
 ### Product scope
