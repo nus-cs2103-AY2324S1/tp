@@ -12,7 +12,8 @@ package swe.context.logic;
  * populated by calling their associated methods.
  */
 public final class Messages {
-    public static final String INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
+    public static final String INVALID_CONTACT_DISPLAYED_INDEX =
+            "One or more of the contact indices provided are invalid";
     public static final String CONTACTS_LISTED_OVERVIEW = "%d contacts listed!";
     public static final String DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
@@ -22,7 +23,7 @@ public final class Messages {
     // Messages associated with various Commands
     public static final String ADD_COMMAND_SUCCESS = "New contact added: %1$s";
     public static final String COMMAND_DUPLICATE_CONTACT = "This contact is already in your contact list.";
-    public static final String DELETE_COMMAND_SUCCESS = "Deleted Contact: %1$s";
+    public static final String DELETE_COMMAND_SUCCESS = "Deleted Contact(s): " + "\n" + "%1$s";
     public static final String EDIT_COMMAND_SUCCESS = "Edited Contact: %1$s";
     public static final String EDIT_COMMAND_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String HELP_COMMAND_SHOW_HELP = "Opened help window.";

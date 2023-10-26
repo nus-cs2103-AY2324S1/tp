@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static swe.context.testutil.Assert.assertThrows;
 import static swe.context.testutil.TestData.IndexContact.FIRST_CONTACT;
+import static swe.context.testutil.TestData.IndexContact.SECOND_CONTACT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +29,7 @@ import swe.context.testutil.CommandUtil;
 import swe.context.testutil.ContactBuilder;
 import swe.context.testutil.EditContactDescriptorBuilder;
 
+
 public class InputParserTest {
 
     @Test
@@ -47,7 +49,24 @@ public class InputParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased());
-        assertEquals(new DeleteCommand(FIRST_CONTACT), command);
+        assertEquals(new DeleteCommand(List.of(FIRST_CONTACT)), command);
+    }
+
+    @Test
+    public void parseCommand_deleteMassDelete() throws Exception {
+        DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased()
+                + " " + SECOND_CONTACT.getOneBased());
+        assertEquals(new DeleteCommand(List.of(FIRST_CONTACT, SECOND_CONTACT)), command);
+    }
+
+    @Test
+    public void parseCommand_deleteDuplicateIndices() throws Exception {
+        DeleteCommand command = (DeleteCommand) InputParser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " " + FIRST_CONTACT.getOneBased()
+                + " " + FIRST_CONTACT.getOneBased()
+                + " " + FIRST_CONTACT.getOneBased());
+        assertEquals(new DeleteCommand(List.of(FIRST_CONTACT)), command);
     }
 
     @Test
