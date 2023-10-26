@@ -1,5 +1,9 @@
 package seedu.address.model.schedule;
 
+import static java.util.Objects.requireNonNull;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+
 /**
  * Enum class representing the status of a schedule task.
  * This can be one of the following:
@@ -26,6 +30,21 @@ public enum Status {
             return true;
         } catch (IllegalArgumentException e) {
             return false;
+        }
+    }
+
+    /**
+     * Parses {@code Status status} into a {@code string}
+     */
+    public static String parseStatusToString(Status status) throws ParseException {
+        requireNonNull(status);
+
+        if (status.equals(Status.MISSED)) {
+            return "0";
+        } else if (status.equals(Status.COMPLETED)) {
+            return "1";
+        } else {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
     }
 }

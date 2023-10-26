@@ -23,11 +23,11 @@ public class MarkScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets the status of the schedule identified to be missed for 0 and completed for 1.\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer)"
+            + "INDEX (must be a positive integer) "
             + PREFIX_STATUS + "0 or 1\n"
             + "Example: "
             + COMMAND_WORD + " 1 "
-            + PREFIX_STATUS + " 1 ";
+            + PREFIX_STATUS + "1 ";
 
     public static final String MESSAGE_MARK_MISSED_SUCCESS = "Marked Schedule as Missed: %1$s";
 
@@ -35,13 +35,13 @@ public class MarkScheduleCommand extends Command {
 
     private final Index index;
 
-    private final int status;
+    private final Status status;
 
     /**
      * @param index of the schedule in the filtered schedule list to edit the status
      * @param status to determine whether to mark the schedule as missed or completed
      */
-    public MarkScheduleCommand(Index index, int status) {
+    public MarkScheduleCommand(Index index, Status status) {
         requireNonNull(index);
 
         this.index = index;
@@ -58,23 +58,21 @@ public class MarkScheduleCommand extends Command {
         }
 
         Schedule scheduleToEdit = lastShownList.get(index.getZeroBased());
-        Schedule editedSchedule;
 
-        if (status == 0) {
-            editedSchedule = new Schedule(scheduleToEdit.getTutor(), scheduleToEdit.getStartTime(),
-                    scheduleToEdit.getEndTime(), Status.MISSED);
-            model.setSchedule(scheduleToEdit, editedSchedule);
-            model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
-            return new CommandResult(String.format(MESSAGE_MARK_MISSED_SUCCESS, Messages.format(scheduleToEdit)));
-        } else if (status == 1) {
-            editedSchedule = new Schedule(scheduleToEdit.getTutor(), scheduleToEdit.getStartTime(),
-                    scheduleToEdit.getEndTime(), Status.COMPLETED);
-            model.setSchedule(scheduleToEdit, editedSchedule);
-            model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
-            return new CommandResult(String.format(MESSAGE_MARK_COMPLETED_SUCCESS, Messages.format(scheduleToEdit)));
-        } else {
+        if (status.equals(Status.PENDING)) {
             throw new CommandException(Messages.MESSAGE_INVALID_SCHEDULE_STATUS_INDEX);
         }
+
+        Schedule editedSchedule = new Schedule(scheduleToEdit.getTutor(), scheduleToEdit.getStartTime(),
+                scheduleToEdit.getEndTime(), status);
+        model.setSchedule(scheduleToEdit, editedSchedule);
+        model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
+
+        return new CommandResult(
+                String.format(status.equals(Status.MISSED)
+                        ? MESSAGE_MARK_MISSED_SUCCESS : MESSAGE_MARK_COMPLETED_SUCCESS,
+                        Messages.format(scheduleToEdit))
+        );
     }
 
     @Override

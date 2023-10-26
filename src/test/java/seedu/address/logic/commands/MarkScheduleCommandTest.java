@@ -32,7 +32,7 @@ public class MarkScheduleCommandTest {
         Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
         Schedule editedSchedule = new ScheduleBuilder(firstSchedule).withStatus(Status.MISSED).build();
 
-        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, 0);
+        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, Status.MISSED);
 
         String expectedMessage = String.format(MarkScheduleCommand.MESSAGE_MARK_MISSED_SUCCESS,
                 Messages.format(editedSchedule));
@@ -48,7 +48,7 @@ public class MarkScheduleCommandTest {
         Schedule firstSchedule = model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased());
         Schedule editedSchedule = new ScheduleBuilder(firstSchedule).withStatus(Status.COMPLETED).build();
 
-        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, 1);
+        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, Status.COMPLETED);
 
         String expectedMessage = String.format(MarkScheduleCommand.MESSAGE_MARK_COMPLETED_SUCCESS,
                 Messages.format(editedSchedule));
@@ -68,7 +68,7 @@ public class MarkScheduleCommandTest {
                 new ScheduleBuilder(model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased()))
                         .withStatus(Status.MISSED).build();
 
-        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, 0);
+        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, Status.MISSED);
 
         String expectedMessage = String.format(MarkScheduleCommand.MESSAGE_MARK_MISSED_SUCCESS,
                 Messages.format(editedSchedule));
@@ -88,7 +88,7 @@ public class MarkScheduleCommandTest {
                 new ScheduleBuilder(model.getFilteredScheduleList().get(INDEX_FIRST_SCHEDULE.getZeroBased()))
                         .withStatus(Status.COMPLETED).build();
 
-        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, 1);
+        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, Status.COMPLETED);
 
         String expectedMessage = String.format(MarkScheduleCommand.MESSAGE_MARK_COMPLETED_SUCCESS,
                 Messages.format(editedSchedule));
@@ -110,7 +110,7 @@ public class MarkScheduleCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getScheduleList().size());
 
-        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(outOfBoundIndex, 0);
+        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(outOfBoundIndex, Status.MISSED);
         assertCommandFailure(markScheduleCommand, model, Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
     }
 
@@ -125,7 +125,7 @@ public class MarkScheduleCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getScheduleList().size());
 
-        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(outOfBoundIndex, 1);
+        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(outOfBoundIndex, Status.COMPLETED);
         assertCommandFailure(markScheduleCommand, model, Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);
     }
 
@@ -133,16 +133,16 @@ public class MarkScheduleCommandTest {
     public void execute_invalidScheduleStatusFilteredList_failure() {
         showScheduleAtIndex(model, INDEX_FIRST_SCHEDULE);
 
-        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, 2);
+        MarkScheduleCommand markScheduleCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, Status.PENDING);
         assertCommandFailure(markScheduleCommand, model, Messages.MESSAGE_INVALID_SCHEDULE_STATUS_INDEX);
     }
 
     @Test
     public void equals() {
-        final MarkScheduleCommand standardCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, 0);
+        final MarkScheduleCommand standardCommand = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, Status.MISSED);
 
         // same values -> returns true
-        MarkScheduleCommand commandWithSameValues = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, 0);
+        MarkScheduleCommand commandWithSameValues = new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, Status.MISSED);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -155,12 +155,12 @@ public class MarkScheduleCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new MarkScheduleCommand(INDEX_SECOND_SCHEDULE, 0)));
+        assertFalse(standardCommand.equals(new MarkScheduleCommand(INDEX_SECOND_SCHEDULE, Status.MISSED)));
 
         // different status -> false
-        assertFalse(standardCommand.equals(new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, 1)));
+        assertFalse(standardCommand.equals(new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, Status.COMPLETED)));
 
         // different index and status -> false
-        assertFalse(standardCommand.equals(new MarkScheduleCommand(INDEX_SECOND_SCHEDULE, 1)));
+        assertFalse(standardCommand.equals(new MarkScheduleCommand(INDEX_SECOND_SCHEDULE, Status.COMPLETED)));
     }
 }

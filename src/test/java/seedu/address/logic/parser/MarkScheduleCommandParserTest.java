@@ -64,9 +64,9 @@ public class MarkScheduleCommandParserTest {
     @Test
     public void parse_validArgs_success() {
         // valid Schedule status for Missed
-        assertParseSuccess(parser, "1 m/ 0", new MarkScheduleCommand(INDEX_FIRST_PERSON, 0));
+        assertParseSuccess(parser, "1 m/0", new MarkScheduleCommand(INDEX_FIRST_PERSON, Status.MISSED));
 
         // valid Schedule status for Completed
-        assertParseSuccess(parser, "1 m/ 1", new MarkScheduleCommand(INDEX_FIRST_PERSON, 1));
+        assertParseSuccess(parser, "1 m/1", new MarkScheduleCommand(INDEX_FIRST_PERSON, Status.COMPLETED));
     }
 }

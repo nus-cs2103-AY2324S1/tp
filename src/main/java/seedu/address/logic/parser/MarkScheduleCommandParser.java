@@ -26,7 +26,7 @@ public class MarkScheduleCommandParser implements Parser<MarkScheduleCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STATUS);
 
         Index index;
-        int status = 0;
+        Status status;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -39,10 +39,7 @@ public class MarkScheduleCommandParser implements Parser<MarkScheduleCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MarkScheduleCommand.MESSAGE_USAGE));
         } else {
-            Status scheduleStatus = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-            if (scheduleStatus.equals(Status.COMPLETED)) {
-                status = 1;
-            }
+            status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         }
 
         return new MarkScheduleCommand(index, status);

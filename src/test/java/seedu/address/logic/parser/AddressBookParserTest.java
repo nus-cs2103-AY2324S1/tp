@@ -127,9 +127,8 @@ public class AddressBookParserTest {
         Schedule schedule = new ScheduleBuilder().withStatus(Status.MISSED).build();
         MarkScheduleCommand command = (MarkScheduleCommand) parser.parseCommand(
                 MarkScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_SCHEDULE.getOneBased() + " "
-                        + PREFIX_STATUS + ParserUtil.parseStatusToString(schedule.getStatus()));
-        assertEquals(new MarkScheduleCommand(INDEX_FIRST_SCHEDULE,
-                ParserUtil.parseStatusToInteger(Status.MISSED)), command);
+                        + PREFIX_STATUS + Status.parseStatusToString(schedule.getStatus()));
+        assertEquals(new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, schedule.getStatus()), command);
     }
 
     @Test
