@@ -62,6 +62,11 @@ public class SetGradeCommand extends Command {
                 studentToGrade.getComment());
 
         model.setStudent(studentToGrade, gradedStudent);
+
+        if (model.isSelectedStudent(gradedStudent)) {
+            model.setSelectedStudent(gradedStudent);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)
                 + classDetails.displayAssignments());
     }
