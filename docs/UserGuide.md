@@ -202,7 +202,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the MdeiLink Contacts.
+Clears all entries from the MediLink Contacts.
 
 Format: `clear`
 
