@@ -318,22 +318,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at 1.
 
+- 1b. User inputs a name that already exists in the address book.
+    - 1b1. System informs user about that name being taken already.
+
+      Use case resumes at 1.
+  
+- 1c. User inputs a clash in schedule.
+    - 1c1. System informs user of the clash in schedules.
+
+      Use case resumes at 1.
+
 **Use case: UC03 - Delete a tutee**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests to delete a tutee.
-2.  System deletes the tutee
+3.  System deletes the tutee.
 
     Use case ends.
 
 **Extensions**
 
-* 2a1. The tutee that the user is trying to delete does not exist in the list.
-* 3a1. System informs that the list of tutees is now empty
+* 2a1. User tries to edit the schedule of a tutee which clashes with an existing schedule.
 
     Use case ends.
+
+**Use case: UC04 - Editing a tutee**
+
+**MSS**
+
+1.  User views the list of tutees.
+2.  User requests to edit a tutee.
+3.  System edit the tutee
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The tutee that the user is trying to delete does not exist in the list.
+  - 2a1. System informs that user does not exist.
+  
+    Use case resumes at 2.
+  - 
+- 2b. The schedule of the edited tutee clashes with an existing schedule.
+  - 2b1. System informs that there is a clash in schedules.
+
+    Use case resumes at 2.
+
+
+  Use case ends.
 
 *{More to be added}*
 
