@@ -1,6 +1,6 @@
 {
   "students": [ {
-    "name": "Student with invalid name field: Ha!ns Mu@ster",
+    "name": "John Loh",
     "phone": "9482424",
     "address": "4th street"
   } ],
@@ -13,7 +13,7 @@
       "description" : "Second Session"
     },
     {
-      "name": "John Doe",
+      "name": "John Loh",
       "date": "202311-30",
       "startTime": "16:30",
       "endTime": "17:30",
