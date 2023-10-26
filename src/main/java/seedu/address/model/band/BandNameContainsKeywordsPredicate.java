@@ -17,7 +17,7 @@ public class BandNameContainsKeywordsPredicate implements Predicate<Band> {
     }
     @Override
     public boolean test(Band band) {
-        return StringUtil.containsWordIgnoreCase(band.getName().fullName, bandName);
+        return band.getName().fullName.equalsIgnoreCase(bandName);
     }
 
     @Override
