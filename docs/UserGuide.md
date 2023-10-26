@@ -6,10 +6,13 @@
 
 # JABPro User Guide
 
+## Product Overview
+
 JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of companies to ease the management of applicants, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JABPro can get your applicant management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,25 +24,25 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 
 1. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>  
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>  
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
 
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: adds an applicant with the specified contact details
-   
+
     * `remark 1 r/Great attitude, hardworking`: edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
-   
+
     * `search n/John`: Searches for applicants whose names contain the keyword `John`
 
     * `delete 3` : Deletes the 3rd contact shown in the current list.
 
     * `set` : sets the applicant status to either of: (Preliminary, Interviewed, Rejected, Offered)
-   
+
     * `add linkedin 1 alexyeoh`: Adds LinkedIn account to candidate's existing contact information
-   
+
     * `github Alex Yeoh`: Redirects the user to the Github account of the candidate
 
 
@@ -109,6 +112,28 @@ Examples:
 *  `remark 1 r/Great attitude, hardworking` Edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
 *  `remark 1 r/` Empties the remark of the 1st person.
 
+### Viewing a person's details: `view`
+
+Creates a complete view for details of a person in the address book
+
+Format: `view INDEX`
+
+* Shows the complete details of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The index used will be the same as the index used in the `list` command.
+* Compatible with search and other features that change the order and content of the list.
+
+Examples:
+* `view 1` Shows the complete details of the 1st person on the list.
+
+<box type="tip" seamless>
+
+**Tip:** Other operations that affect user's data will trigger a refresh of the view.
+These include `add`, `edit`, `set`, `remark`, `addL`, `addG` 
+
+
+</box>
+
+
 ### Adding Github/LinkedIn username for a user: 'add linkedin/github'
 
 Adds the username for their social profile [LinkedIn/Github] to the existing contact details of users
@@ -133,12 +158,14 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-Format: `list s/ATTRIBUTE`
+Format: `list so/ATTRIBUTE`
 
-* `s/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
+* `so/ATTRIBUTE` is completely **optional**, on default will NOT be sorted.
 * As of v1.2, the attributes that are supported are `name` and `email`.
-* Attribute is case-insensitive: `list s/NAME` and `list s/name` return the same result.
+* Attribute is case-insensitive: `list so/NAME` and `list so/name` return the same result.
 * The result will be sorted in **ascending** order.
+* Note: as of v1.2, the sorting algorithm is case-sensitive, which means it will treat uppercase and 
+lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
 Examples:
 * `list` Shows a list of all persons.
@@ -285,6 +312,7 @@ Action                     | Format, Examples
 ---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**                    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Remark**                 | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`
+**View**                   | `view INDEX` <br> e.g., `view 1`
 **Add Github/LinkedIn**    | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`
 **Open Github/LinkedIn**   | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`
 **Clear**                  | `clear`

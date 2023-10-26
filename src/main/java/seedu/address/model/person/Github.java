@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Represents a person's Github details in JABPro.
  */
@@ -14,7 +12,6 @@ public class Github {
      * @param github A valid Github username
      */
     public Github(String github) {
-        requireNonNull(github);
         value = github;
     }
 

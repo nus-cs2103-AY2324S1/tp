@@ -20,15 +20,16 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.SetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
-import seedu.address.model.person.StatusContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -77,8 +78,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + "n/" + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords),
-                new StatusContainsKeywordsPredicate(Arrays.asList(""))), command);
+        assertEquals(new FindCommand(Arrays.asList(new NameContainsKeywordsPredicate(keywords))), command);
     }
 
     @Test
@@ -88,8 +88,24 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_set() throws Exception {
+        assertTrue(parser.parseCommand(SetCommand.COMMAND_WORD + " 5 Interviewed") instanceof SetCommand);
+        assertTrue(parser.parseCommand(SetCommand.COMMAND_WORD + " 3 Interviewed") instanceof SetCommand);
+    }
+
+    @Test
+    public void parseCommand_parseStatusType() throws Exception {
+        assertTrue(ParserUtil.parseStatusType("Interviewed").toString().equals("Interviewed"));
+    }
+
+    @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        // assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    public void parseCommand_export() throws Exception {
+        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD) instanceof ExportCommand);
         // assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 

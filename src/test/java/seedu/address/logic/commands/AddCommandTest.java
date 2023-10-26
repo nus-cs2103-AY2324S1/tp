@@ -11,10 +11,12 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
@@ -161,9 +163,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2) {
+        public void updateFilteredPersonList(List<Predicate<Person>> predicatesList) {
             throw new AssertionError("This method should not be called.");
-
         }
 
         @Override
@@ -179,8 +180,8 @@ public class AddCommandTest {
         @Override
         public void setLastViewedPersonIndex(Index index) {
             throw new AssertionError("This method should not be called.");
-        }
 
+        }
     }
 
     /**
@@ -206,6 +207,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private Index index;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -218,6 +220,18 @@ public class AddCommandTest {
             requireNonNull(person);
             personsAdded.add(person);
         }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            ObservableList<Person> filteredList = FXCollections.observableArrayList(personsAdded);
+            return filteredList;
+        }
+
+        @Override
+        public void setLastViewedPersonIndex(Index index) {
+            this.index = index;
+        }
+
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {

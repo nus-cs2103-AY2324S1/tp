@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-This is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).  
+This is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). 
 
 _{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
@@ -159,6 +159,66 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### View feature
+
+#### Implementation
+
+The view feature is implemented using the `ViewCommand` class. It extends `Command` and overrides the `execute()` method to display the person's details in full in a new window.
+
+Like every other command class, it involves a command `ViewCommand` class and a parser `ViewCommandParser`. `ViewCommand Parser` takes in the user input and returns a `ViewCommand` object.    
+  
+When executed, `ViewCommand` saves the index of the person to be viewed as `LastViewedPersonIndex` in the `Model` and returns a `CommandResult` object with `isView` property being true.  
+
+By having a `isView` property in `CommandResult`, the `MainWindow` component is able to toggle the `UI` to the view the person of the `LastViewedPersonIndex` after the command has been executed.
+
+
+
+
+
+Given below is an example usage scenario and how the view feature behaves at each step.
+
+Step 1. The user launches the application. The `AddressBook` will be initialized with the current saved address book state
+
+User should see the UI as shown below.  
+
+![Ui](images/Ui.png)
+
+Step 2. The user wants to see the full information displayed for the first person in the displayed list. The user enters the command `view 1` to view the first person in the list.
+
+The following sequence diagram shows how the view operation works:
+
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
+
+**Note:** The lifeline for `RemarkCommand` and `RemarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+User should see the UI as shown below after entering `View 1`  
+
+![View](images/viewState.png)
+
+Step 3. The user can then read or process the information stored for the viewed person.
+
+
+
+**Note:** The view command can be most effectively used with `search` and `list`. Since the view index is dependent on the Index on the filtered list shown, the user can view the profile after filtering for specific properties in a person using `search` and sorting them using `list`.
+
+Alternatives considered
+
+Alternative 1 (Chosen):   
+The view feature is implemented using the `ViewCommand` class. It extends `Command` and overrides the `execute()` method to display the person's details in full in a new window.  
+
+Pros: Follows the Software Design Patterns of Command. This is the same pattern used for all other commands thus creating consistency.  
+
+Cons: Tougher to implement since other commands do not have the ability to trigger the `ViewCommand` in their execution.  That is we specifically need to set the isView property to true if we want the `ViewCommand` to occur simultaneously with another command.  
+
+Alternative 2 (Not Chosen):  
+The view feature is implemented using the `ViewCommand` class. It extends `Command` and overrides the `execute()` method to display the person's details in full in a new window.  
+Commands that involved viewing will extend `ViewCommand` instead of the `Command` class. All of them are returned as `ViewCommand` to ensure toggling of the UI after command is executed.    
+
+Pros: Arguably a more OOP approach since all commands that trigger view IS-A `ViewCommand`.  
+
+Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
+An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -280,11 +340,11 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**:  
+**Value proposition**:
 
-JABPro aims to solve the problem of HR managers having to sort through tons of job applications.  
+JABPro aims to solve the problem of HR managers having to sort through tons of job applications.
 
-It makes their life easier by allowing them to easily fetch important info about job applicants such as their contact details, application status etc.   
+It makes their life easier by allowing them to easily fetch important info about job applicants such as their contact details, application status etc.
 
 It serves as a one-stop addressbook for managing job applications.
 
@@ -299,7 +359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |---------|------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `* * *` | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                                    | I can easily access and reach out to candidates when needed                                              |
 | `* * *` | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                                   | I can maintain a record of interactions and feedback                                                     |
-| `* * *` | Hiring Manager   | delete job applicants information                                                                                             | I can remove redundant/unecessary data bloat and also to abide to privacy laws                           | 
+| `* * *` | Hiring Manager   | delete job applicants information                                                                                             | I can remove redundant/unecessary data bloat and also to abide to privacy laws                           |
 | `* * *` | Hiring Manager   | view a specific job applicant's resume or portfolio                                                                           | I can check whether they meet the requirements requested by other department heads                       |
 | `* * *` | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                                     | I can find suitable candidates for a project                                                             |
 | `* * *` | Hiring Manager   | List all candidate's information                                                                                              | I can easily view each candidates information                                                            |
@@ -325,15 +385,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to add a person.
 2. JABPro shows that command has been executed successfully.
-3. JABPro adds the person to the list of persons.   
+3. JABPro adds the person to the list of persons.
+4. JABPro shows the person added at the end of the list of persons.
 Use case ends.
 
 **Extensions**
 * 2a. User does not provide the correct information for a person to be added.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.  
+    * 2a1. JABPro shows an error message and provides course of action for remedy.
     Use case resumes at step 1.
 * 2b. User has already been added to the list of persons.
-    * 2b1. JABPro shows an error message and provides course of action for remedy.  
+    * 2b1. JABPro shows an error message and provides course of action for remedy.
     Use case resumes at step 1.
 
 **Use case: Add a remark to a person**
@@ -341,15 +402,15 @@ Use case ends.
 **MSS**
 1. User requests to add a remark to a person.
 2. JABPro shows that command has been executed successfully.
-3. JABPro adds the remark to the person.  
+3. JABPro adds the remark to the person.
 Use case ends.
 
 **Extensions**
 * 2a. User provides invalid index.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.  
+    * 2a1. JABPro shows an error message and provides course of action for remedy.
     Use case resumes at step 1.
 * 2b. User does not provide a remark.
-    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.  
+    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.
     Use case ends.
 
 **Use case: List all persons**
@@ -357,47 +418,47 @@ Use case ends.
 **MSS**
 1. User  requests to view a list of all persons.
 2. JABPro retrieves the list of all persons from the database.
-3. JABPro displays the list of all persons to the user. 
+3. JABPro displays the list of all persons to the user.
 4. If the user specifies an attribute to sort by, e.g., "s/name" for sorting by name, the application sorts the list accordingly. If no attribute is provided, the list remains unsorted.
-5. The sorted or unsorted list is displayed to the user in ascending order based on the specified attribute.   
+5. The sorted or unsorted list is displayed to the user in ascending order based on the specified attribute.  
 Use case ends.
 
 **Extensions**
 * 2a. User provides an incorrect attribute for sorting (e.g., "list s/phone").
-  * 2a1. JABPro shows an error message and provides course of action for remedy.   
+  * 2a1. JABPro shows an error message and provides course of action for remedy.  
   Use case resumes at step 1.
 * 2b. User attempts to list persons when there are no entries in the address book.
-  * 2b1. JABPro shows a message indicating that there are no persons to display.  
+  * 2b1. JABPro shows a message indicating that there are no persons to display. 
   Use case ends.
 
 **Use case: Search a person by name**
 
 **MSS**
 1.  Hiring manager types in name keywords to search users by name.
-2.  JABPro shows a list of persons whose names contain matching keywords.  
+2.  JABPro shows a list of persons whose names contain matching keywords. 
     Use case ends.
 
 **Extensions**
 
 * 1a. The given name keyword is invalid (invalid name).
-    * 1a1. JABPro shows an error message.  
+    * 1a1. JABPro shows an error message.
       Use case resumes at step 1.
-* 2a. The list is empty.  
+* 2a. The list is empty.
   Use case ends.
 
 **Use case: Search a person by application status**
 
 **MSS**
 1.  User keys in search command with application status (i.e. interviewed, pending, rejected, offered).
-2.  JABPro shows a list of persons whose status match the given status keywords.  
+2.  JABPro shows a list of persons whose status match the given status keywords. 
     Use case ends.
 
 **Extensions**
 
 * 1a. The given name status is invalid (not from the given list of valid status keywords).
-    * 1a1. JABPro shows an error message.  
+    * 1a1. JABPro shows an error message.
       Use case resumes at step 1.
-* 2a. The list is empty.  
+* 2a. The list is empty.
   Use case ends.
 
 
@@ -407,18 +468,18 @@ Use case ends.
 1.  User requests to list persons.
 2.  AddressBook shows a list of persons.
 3.  User requests to delete a specific person in the list.
-4.  AddressBook deletes the person.  
+4.  AddressBook deletes the person.
     Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.  
+    * 2a1. AddressBook displays a message indicating that the list is empty.
       Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
       Use case resumes at step 3.
 * 4a. Deletion encounters an error
-    * 4a1. AddressBook displays an error message indicating that the deletion process failed.  
+    * 4a1. AddressBook displays an error message indicating that the deletion process failed.
       Use case ends.
 
 **Use case: Set a person's status**
@@ -427,20 +488,43 @@ Use case ends.
 1.  User requests to list persons.
 2.  AddressBook shows a list of persons.
 3.  User requests to set the status of a specific person in the list.
-4.  AddressBook sets the status of that person in the list.  
+4.  AddressBook sets the status of that person in the list.
     Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.  
+    * 2a1. AddressBook displays a message indicating that the list is empty.
+      Use case ends.
+* 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
+      Use case resumes at step 3.
+* 3b. The given status is invalid.
+    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.
+      Use case resumes at step 3.
+
+**Use case: View a person's details**
+
+**MSS**
+1.  User requests to list persons.
+2.  AddressBook shows a list of persons.
+3.  User requests to view a specific person in the current displayed AddressBook.
+4.  The UI shows the details of that person.
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.
       Use case ends.
 * 3a. The given index is invalid.
     * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
       Use case resumes at step 3.
-* 3b. The given status is invalid.
-    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.  
+
+* 3b. User decides to search for a person based on a criteria such as name.
+    * 3b1. Displayed AddressBook changes to match that of search result.  
       Use case resumes at step 3.
 
+
+    
 **Use case: Add social profile to person's details**
 
 **MSS**
@@ -486,9 +570,9 @@ Use case ends.
 5.  Should not deal with `external database` or `network connections`.
 6.  Product is expected to be used by a `single user` only.
 7.  Product is `not expected to contain API` for other software to communicate with.
-8.  Product is expected to be used in a system with at least 4GB RAM and `1GB free disk space`. 
-9.  Product Visuals should be `unambiguous` and clear to the user 
-10. Commands should be `easy to remember` and `intuitive` to use 
+8.  Product is expected to be used in a system with at least 4GB RAM and `1GB free disk space`.
+9.  Product Visuals should be `unambiguous` and clear to the user
+10. Commands should be `easy to remember` and `intuitive` to use
 11. Product should be `consistent` in its visuals and commands formatting
 
 *{More to be added}*
@@ -555,3 +639,21 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## Adding a person while all persons are being shown 
+
+1. Adding a person while all persons are being shown  
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    
+   1. Test case:   
+      `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
+   
+      **Note**:  The current AddressBook cannot contain anyone named `John Poh`  
+      Expected: New person is added to the list. Details of the new person shown in the status message. 
+   2. Test case:   
+      `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
+      **Note**:  The current AddressBook should contain a person named `John Poh`
+      Expected: No person is added. Error details shown in the status message. List of persons remains the same.
+
+   
+

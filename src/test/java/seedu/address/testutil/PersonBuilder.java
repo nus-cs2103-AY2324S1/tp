@@ -5,10 +5,13 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
+import seedu.address.model.person.LinkedIn;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Score;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
@@ -24,6 +27,10 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "";
+    public static final String DEFAULT_LINKEDIN = "";
+    public static final String DEFAULT_GITHUB = "";
+
+    public static final int DEFAULT_SCORE_VALUE = 0;
 
 
     private Name name;
@@ -32,8 +39,12 @@ public class PersonBuilder {
     private Address address;
     private Remark remark;
 
+    private Score score;
+
     private Set<Tag> tags;
     private Status status;
+    private LinkedIn linkedIn;
+    private Github github;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,8 +55,10 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
+        score = new Score(DEFAULT_SCORE_VALUE);
         tags = new HashSet<>();
         status = new Status(); // default status is preliminary
+        linkedIn = new LinkedIn(DEFAULT_LINKEDIN);
     }
 
     /**
@@ -57,7 +70,9 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
+        score = personToCopy.getScore();
         tags = new HashSet<>(personToCopy.getTags());
+        linkedIn = personToCopy.getLinkedIn();
     }
 
     /**
@@ -107,6 +122,26 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Score} of the {@code Person} that we are building.
+     * @param score integer value of score
+     * @return PersonBuilder
+     */
+    public PersonBuilder withScore(int score) {
+        this.score = new Score(score);
+        return this;
+    }
+
+    /**
+     * Sets the {@code LinkedIn} of the {@code Person} that we are building.
+     * @param username
+     * @return PersonBuilder
+     */
+    public PersonBuilder withLinkedIn(String username) {
+        this.linkedIn = new LinkedIn(username);
+        return this;
+    }
+
 
     /**
      * Sets the {@code Status} of the {@code Person} that we are building.
@@ -128,12 +163,26 @@ public class PersonBuilder {
         default:
             this.status.setStatusType(StatusTypes.PRELIMINARY);
         }
-        System.out.println(this.status);
         return this;
     }
 
+    /**
+     * Builds a person with the given parameters.
+     * @return Person
+     */
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags);
+        Person createdPerson = new Person(name, phone, email, address, remark, tags);
+        createdPerson.setScore(score);
+        return createdPerson;
     }
 
+    /**
+     * Sets the {@code Github} of the {@code Person} that we are building.
+     * @param username
+     * @return
+     */
+    public PersonBuilder withGithub(String username) {
+        this.github = new Github(username);
+        return this;
+    }
 }
