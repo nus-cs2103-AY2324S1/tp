@@ -36,7 +36,8 @@ class JsonSerializableCalendar {
      * @param source future changes to this will not affect the created {@code JsonSerializableCalendar}.
      */
     public JsonSerializableCalendar(ReadOnlyCalendar source) {
-        events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
+        events.addAll(source.getEventList().stream().map(Event::getParentEvent).distinct()
+                .map(JsonAdaptedEvent::new).collect(Collectors.toList()));
     }
 
     /**

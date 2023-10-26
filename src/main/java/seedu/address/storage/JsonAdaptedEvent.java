@@ -76,5 +76,4 @@ class JsonAdaptedEvent {
 
         return new Event(modelDescription, modelEventPeriod);
     }
-
 }

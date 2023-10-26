@@ -87,8 +87,9 @@ public class SingleDayEventList {
     public Optional<Event> eventAtTime(LocalDateTime dateTime) {
         requireNonNull(dateTime);
         for (Event event : this.eventTree.values()) {
-            if (event.isDuring(dateTime)) {
-                return Optional.of(event);
+            Event parentEvent = event.getParentEvent();
+            if (parentEvent.isDuring(dateTime)) {
+                return Optional.of(event.getParentEvent());
             }
         }
         return Optional.empty();
@@ -101,7 +102,7 @@ public class SingleDayEventList {
     public void remove(Event toRemove) {
         requireNonNull(toRemove);
         for (Event thisEvent : this.eventTree.values()) {
-            if (toRemove.equals(thisEvent)) {
+            if (toRemove.getParentEvent().equals(thisEvent.getParentEvent())) {
                 this.eventTree.remove(thisEvent.getEventPeriod(), thisEvent);
                 return;
             }

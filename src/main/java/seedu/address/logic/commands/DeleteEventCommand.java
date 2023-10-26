@@ -44,6 +44,7 @@ public class DeleteEventCommand extends Command {
         Event toDelete;
         try {
             toDelete = model.findEventAt(eventTime);
+            System.out.println(toDelete);
             model.deleteEventAt(eventTime);
         } catch (EventNotFoundException e) {
             throw new CommandException(MESSAGE_NO_EVENT);
