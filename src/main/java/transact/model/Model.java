@@ -25,7 +25,7 @@ public interface Model {
     /** Transaction {@code Predicate} that always evaluate to false */
     Predicate<Transaction> PREDICATE_HIDE_ALL_TRANSACTIONS = unused -> false;
     /** Transaction {@code Comparator} that sorts by id in ascending order */
-    Comparator<Transaction> PREDICATE_SORT_ASC_BY_ID = Comparator.comparing(Transaction::getTransactionId);
+    Comparator<Transaction> COMPARATOR_ASC_BY_ID = Comparator.comparing(Transaction::getTransactionId);
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

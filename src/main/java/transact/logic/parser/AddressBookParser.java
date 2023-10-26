@@ -11,6 +11,7 @@ import transact.commons.core.LogsCenter;
 import transact.logic.commands.AddStaffCommand;
 import transact.logic.commands.AddTransactionCommand;
 import transact.logic.commands.ClearResultBoxCommand;
+import transact.logic.commands.ClearSortCommand;
 import transact.logic.commands.ClearStaffCommand;
 import transact.logic.commands.ClearTransactionCommand;
 import transact.logic.commands.Command;
@@ -102,6 +103,9 @@ public class AddressBookParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case ClearSortCommand.COMMAND_WORD:
+            return new ClearSortCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

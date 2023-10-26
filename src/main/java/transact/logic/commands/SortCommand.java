@@ -1,5 +1,6 @@
 package transact.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static transact.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static transact.logic.parser.CliSyntax.PREFIX_DATE_SORTING;
 
@@ -129,6 +130,7 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         model.updateFilteredTransactionList(sortRules.getComparator());
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortRules),

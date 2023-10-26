@@ -46,7 +46,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTransactions = new FilteredList<>(this.transactionBook.getTransactionList());
-        sortedTransactions = new SortedList<>(filteredTransactions, PREDICATE_SORT_ASC_BY_ID);
+        sortedTransactions = new SortedList<>(filteredTransactions, COMPARATOR_ASC_BY_ID);
     }
 
     public ModelManager() {
