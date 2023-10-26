@@ -82,24 +82,29 @@ public class PersonCard extends UiPart<Region> {
         emailsHeader.setText(EMAILS_HEADER);
         // TODO: implement actual link opening
         person.getEmails().stream()
-                .forEach(email -> emails.getChildren().add(new FieldHyperlink(email.getValue(),() -> System.out.println("open email: " + email.getValue()))));
+                .forEach(email -> emails.getChildren().add(new FieldHyperlink(email.getValue(), () -> {
+                    System.out.println("open email: " + email.getValue());
+                })));
 
         // Website links
         linksHeader.setText(LINKS_HEADER);
         // TODO: implement actual link opening
         person.getLinks().stream()
-                .forEach(link -> links.getChildren().add(new FieldHyperlink(link.getValue(), () -> System.out.println("open link: " + link.getValue()))));
-        
+                .forEach(link -> links.getChildren().add(new FieldHyperlink(link.getValue(), () -> {
+                    System.out.println("open link: " + link.getValue());
+                })));
+
         // Graduation
         person.getGraduation().ifPresentOrElse((Graduation g) ->
-                graduation.setText(GRADUATION_HEADER + g.getFullString()), () -> graduation.setText(GRADUATION_HEADER + EMPTY_FIELD));
-        
+                graduation.setText(GRADUATION_HEADER + g.getFullString()), () ->
+                graduation.setText(GRADUATION_HEADER + EMPTY_FIELD));
+
         // Courses
         courses.setText(COURSE_HEADER + person.getCourses().toString());
-        
+
         // Specialisations
         specialisations.setText(SPECIALISATION_HEADER + person.getSpecialisations().toString());
-        
+
         // Tags
         person.getTags().stream()
                 .forEach(tag -> tags.getChildren().add(new Label(tag.getValue())));
