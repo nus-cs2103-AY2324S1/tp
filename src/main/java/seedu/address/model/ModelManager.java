@@ -223,14 +223,11 @@ public class ModelManager implements Model {
 
     @Override
     public Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException {
-        // both throw exception if not exists exact match
         Person person = addressBook.getPerson(personName);
         Group group = addressBook.getGroup(groupName);
-        person.removeGroup(group)
-        group.removePeron(person)
+        person.removeGroup(group);
+        group.removePerson(person);
         this.unassignGroup(person, group);
-        //does not show
-//        System.out.println("hi");
         forceUpdateList();
         Pair<Person, Group> output = new Pair<>(person, group);
         return output;
