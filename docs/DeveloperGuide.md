@@ -313,6 +313,32 @@ user which command was deleted.
  * The design of the `deleteEvent` command is dependent on the structure of the `Calendar` object. Should the structure 
 of how the event objects are stored change, a new implementation will be required for the command.
 
+### Contact Sorting
+
+#### Implementation
+The sort function executed by `SortCommand`.
+
+The sort function allows users to sort all persons in `UniMate` based on a given criteria. The following criterion for sort are shown below
+- Sort by name (optional: in the reverse order)
+- Sort by address (optional: in the reverse order)
+- Sort by email (optional: in the reverse order)
+- Sort by phone (optional: in the reverse order)
+
+The syntax used to call this command is as follows, without the [ ] braces: `sort [/byname][/byaddress][/byemail][byphone] [/reverse]`. Do note that sorting by reverse is optional.
+
+Given below is an example of how the sort function works at each step. We will simulate a user using the sort function to sort UniMate contacts by name in descending order.
+1. The user executes `sort /byname /reverse` to find his friend's contact. The input is passed into `UniMateParser` which then parses it with the `SortCommandParser`.
+2. The `SortCommandParser` parses the input and first checks for arguments provided. If the arguments are empty, invalid or in the wrong format, a helper message will appear to allow the user to reference the sample run case. The arguments are then matched by the keywords provided to determine the basis for sorting using a `SortComparator`. All the comparators are added into an ArrayList of `SortComparator` for `SortCommand` to parse.
+3. `SortCommand` is initialized parses the array from step 2 to determine the basis of comparison when the command is executed. The `SortCommandParser` finally returns a newly created `SortCommand` consisting of a Person Comparator that decides the method of sorting for the UniMate address book.
+4. `SortCommand#execute` is called. In this method, `model#sortPersonList` is called with the Person Comparator created in step 3. This in turn calls `AddressBook#sortPersons` which calls the storage function to save the contacts in the json file based on the sorted order.
+5. The GUI then reads in the json file to obtain the order of addresses and populates the sorted list with the sorting criteria provided.
+6. The success message is returned as a `CommandResult` and displayed on the GUI result display panel.
+
+**Design considerations**
+
+* The design of the `sort` command is dependent on the structure of the `AddressBookStorage` object. Should the structure
+  of how the AddressBook objects are stored change, a new implementation will be required for the command.
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 - [Documentation guide](Documentation.md)
