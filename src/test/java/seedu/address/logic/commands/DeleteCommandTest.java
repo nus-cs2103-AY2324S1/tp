@@ -28,6 +28,7 @@ import seedu.address.model.person.Person;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
+    private CommandHistory commandHistory = new CommandHistory();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -42,8 +43,9 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(deleteCommand, model, expectedMessageBuilder.toString(), expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessageBuilder.toString(), expectedModel, commandHistory);
     }
 
     @Test
@@ -66,7 +68,8 @@ public class DeleteCommandTest {
         for (Person person: personsToDelete) {
             expectedModel.deletePerson(person);
         }
-        assertCommandSuccess(deleteCommand, model, expectedMessageBuilder.toString(), expectedModel);
+        expectedModel.commitAddressBook();
+        assertCommandSuccess(deleteCommand, model, expectedMessageBuilder.toString(), expectedModel, commandHistory);
     }
 
     @Test
@@ -75,7 +78,7 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         List<Index> invalidIndexes = Arrays.asList(validIndex, outOfBoundIndex);
         DeleteCommand deleteCommand = new DeleteCommand(invalidIndexes);
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, commandHistory);
     }
 
     @Test
@@ -93,8 +96,9 @@ public class DeleteCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
+        expectedModel.commitAddressBook();
 
-        assertCommandSuccess(deleteCommand, model, expectedMessageBuilder.toString(), expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessageBuilder.toString(), expectedModel, commandHistory);
     }
 
     @Test
@@ -107,7 +111,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(List.of(outOfBoundIndex));
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, commandHistory);
     }
 
     @Test

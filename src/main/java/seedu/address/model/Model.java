@@ -100,4 +100,9 @@ public interface Model {
      */
     void addCommandString(String commandString);
 
+    boolean hasHistory();
+    boolean canRedo();
+    void undoAddressBook();
+    void redoAddressBook();
+    void commitAddressBook();
 }
