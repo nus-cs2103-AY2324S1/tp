@@ -8,7 +8,7 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if (command is valid?)) then ([yes])
+if (command is successful?) then ([yes])
     :Add command string to CommandStringStash;
     :Move currentCmdIndex to right after the recently added
     command string in the CommandStringStash;

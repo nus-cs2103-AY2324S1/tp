@@ -8,7 +8,7 @@ title After single up arrow press
 
 show members
 
-object "<u>:CommandStringStash</u>" as CommandStringStash {
+object "<u>:CommandStringStash</u>" as CommandStringStash #FFFFAA {
     currentCmdIndex = 2
 }
 

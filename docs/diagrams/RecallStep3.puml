@@ -8,7 +8,7 @@ title After commands "help" and "delete 1"
 
 show members
 
-object "<u>:CommandStringStash</u>" as CommandStringStash {
+object "<u>:CommandStringStash</u>" as CommandStringStash #FFFFAA {
     currentCmdIndex = 3
 }
 

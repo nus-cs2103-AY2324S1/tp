@@ -1,14 +1,11 @@
 @startuml
 !include style.puml
-skinparam ClassFontColor #000000
-skinparam ClassBorderColor #000000
-skinparam ClassBackgroundColor #FFFFAA
 
-title After two up arrow presses followed by down arrow press
+title After down arrow press
 
 show members
 
-object "<u>:CommandStringStash</u>" as CommandStringStash {
+object "<u>:CommandStringStash</u>" as CommandStringStash #FFFFAA {
     currentCmdIndex = 2
 }
 

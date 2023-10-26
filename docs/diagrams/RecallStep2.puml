@@ -8,7 +8,7 @@ title After command "list - sp"
 
 show members
 
-object "<u>:CommandStringStash</u>" as CommandStringStash {
+object "<u>:CommandStringStash</u>" as CommandStringStash #FFFFAA {
     currentCmdIndex = 1
 }
 

@@ -242,6 +242,10 @@ of the command string of the 20 most recent commands executed. Internally, it is
 and `currentCmdIndex`. This internal representation allows cycling through the recent commands both forwards
 and backwards.
 
+
+These operations are exposed in the `Logic` interface as `Logic#getPrevCommandString(String commandInputString)`,
+`Logic#getPassedCommandString(String commandInputString)`, and `Logic#addCommandString(String commandInputString)`.
+
 The following operations are implemented by the `CommandStringStash`:
 * `CommandStringStash#addCommandString(String commandInputString)` - Adds `commandInputString` to the history.
 * `CommandStringStash#getPrevCommandString(String commandInputString)` - Cycles one command further back in history.
@@ -249,22 +253,17 @@ The following operations are implemented by the `CommandStringStash`:
 <div markdown="span" class="alert alert-info">:information_source: **note:** Cycling fowards or backwards may not always be
 valid operations. No cycling forward or backward can be done if the stash is empty. No cycling backward 
 can be done if the user is already on the least recent command in the stash, and no cycling forward can be done
-if the user has not yet cycled backward. 
-
-To consider all these cases, the `commandInputString` is passed as a parameter
+if the user has not yet cycled backward. To consider all these cases, the `commandInputString` is passed as a parameter
 to `CommandStringStash#getPrevCommandString(String commandInputString)` and `CommandStringStash#getPassedCommandString(String commandInputString)`.
 The `commandInputString` is the current command in the CLI textbox and is returned from these methods in the case of invalid operations
 so there is no change to the CLI textbox.
 
 </div>
 
-These operations are exposed in the `Logic` interface as `Logic#getPrevCommandString(String commandInputString)`, 
-`Logic#getPassedCommandString(String commandInputString)`, and `Logic#addCommandString(String commandInputString)`.
-
 Given below is an example usage scenario and how the recall recent commands feature works at each step.
  
 Step 1. The user launches the application for the first time. The `CommandStringStash` will be initialised
-with no command strings and a `currentCmdIndex` of 1.
+with no command strings and a `currentCmdIndex` of 0.
 
 ![Recall Step 1](images/RecallStep1.png)
 
@@ -277,16 +276,18 @@ Step 2. The user executes the `list -sp` command to list the specialists in DoCo
 <div markdown="span" class="alert alert-info">:information_source: **note:** After an addition, the `currentCmdIndex` is set to point
 one index after the last element in the `CommandStringStash`. The `Logic#getPrevCommandString` method decrements
 this index before returning the String pointed to by `currentCmdIndex` so this works as a way of 'resetting' the state
-so the user starts to cycle from the most recently added command again.
+allowing the user to start to cycle back from the most recently added command again.
 
 </div>
+
+<br/>
 
 Step 3. The user executes two more commands `help` and `delete 1` in the respective order. As before, the 
 `CommandStringStash` is updated appropriately.
 
 ![Recall Step 3](images/RecallStep3.png)
 
-The following activity diagram summarises what happens when a user executes a command.
+The following activity diagram summarises how the `CommandStringStash` is updated hen a user executes a command.
 
 ![Add Command String](images/AddCommandStringActivityDiagram.png)
 
