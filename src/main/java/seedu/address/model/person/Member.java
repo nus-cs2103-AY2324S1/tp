@@ -29,6 +29,12 @@ public class Member extends Person {
 
     /**
      * Every field must be present and not null.
+     *
+     * @param name     The name of the member.
+     * @param phone    The phone number of the member.
+     * @param email    The email of the member.
+     * @param telegram The telegram handle of the member.
+     * @param tags     The tags of the member.
      */
     public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags) {
         super(name);
@@ -128,6 +134,6 @@ public class Member extends Person {
                 + "Phone: " + getPhone() + "\n"
                 + "Email: " + getEmail() + "\n"
                 + "Telegram: " + getTelegram() + "\n"
-                + "Tags: " + getTags().stream().map(Tag::toString).collect(Collectors.joining(", ")) + "\n";
+                + "Tags: " + getTags().stream().map(Tag::toString).collect(Collectors.joining(", "));
     }
 }

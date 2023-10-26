@@ -12,8 +12,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMembers.ALAN_MEMBER;
 import static seedu.address.testutil.TypicalMembers.BOB_MEMBER;
 
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.MemberBuilder;
 
 public class MemberTest {
@@ -101,5 +104,15 @@ public class MemberTest {
                 + ", telegram=" + ALAN_MEMBER.getTelegram()
                 + ", tags=" + ALAN_MEMBER.getTags() + "}";
         assertEquals(expected, ALAN_MEMBER.toString());
+    }
+
+    @Test
+    public void detailsToCopyMethod() {
+        String expected = "Name: " + ALAN_MEMBER.getName() + "\n"
+                + "Phone: " + ALAN_MEMBER.getPhone() + "\n"
+                + "Email: " + ALAN_MEMBER.getEmail() + "\n"
+                + "Telegram: " + ALAN_MEMBER.getTelegram() + "\n"
+                + "Tags: " + ALAN_MEMBER.getTags().stream().map(Tag::toString).collect(Collectors.joining(", "));
+        assertEquals(expected, ALAN_MEMBER.detailsToCopy());
     }
 }

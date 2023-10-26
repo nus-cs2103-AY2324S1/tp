@@ -16,6 +16,9 @@ public class Applicant extends Person {
 
     /**
      * Every field must be present and not null.
+     *
+     * @param name  The name of the applicant.
+     * @param phone The phone number of the applicant.
      */
     public Applicant(Name name, Phone phone) {
         super(name);
@@ -84,6 +87,6 @@ public class Applicant extends Person {
     @Override
     public String detailsToCopy() {
         return "Name: " + getName() + "\n"
-                + "Phone: " + phone + "\n";
+                + "Phone: " + phone;
     }
 }
