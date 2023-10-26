@@ -7,9 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMemberAtIndex;
+import static seedu.address.logic.commands.CopyCommandTestUtil.checkClipboardContents;
+import static seedu.address.logic.commands.CopyCommandTestUtil.replaceClipboardContents;
+import static seedu.address.logic.commands.CopyCommandTestUtil.saveClipboardContents;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalMembers.getTypicalAddressBookWithMembers;
+
+import java.awt.datatransfer.Transferable;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIf;
@@ -32,6 +37,9 @@ public class CopyMemberCommandTest {
     @Test
     @DisabledIf("java.awt.GraphicsEnvironment.isHeadless()")
     public void execute_validIndexUnfilteredList_success() {
+        // Save clipboard contents before executing command
+        Transferable clipboardContentsBefore = saveClipboardContents();
+
         Member memberToCopy = model.getFilteredMemberList().get(INDEX_FIRST_PERSON.getZeroBased());
         CopyMemberCommand copyMemberCommand = new CopyMemberCommand(INDEX_FIRST_PERSON);
 
@@ -40,6 +48,12 @@ public class CopyMemberCommandTest {
 
         // Expected model is the same as the model before executing the command
         assertCommandSuccess(copyMemberCommand, model, expectedMessage, model);
+
+        // Check clipboard contents is correct
+        checkClipboardContents(memberToCopy.detailsToCopy());
+
+        // Restore clipboard contents
+        replaceClipboardContents(clipboardContentsBefore);
     }
 
     @Test
@@ -53,6 +67,9 @@ public class CopyMemberCommandTest {
     @Test
     @DisabledIf("java.awt.GraphicsEnvironment.isHeadless()")
     public void execute_validIndexFilteredList_success() {
+        // Save clipboard contents before executing command
+        Transferable clipboardContentsBefore = saveClipboardContents();
+
         showMemberAtIndex(model, INDEX_FIRST_PERSON);
 
         Member memberToCopy = model.getFilteredMemberList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -63,6 +80,12 @@ public class CopyMemberCommandTest {
 
         // Expected model is the same as the model before executing the command
         assertCommandSuccess(copyMemberCommand, model, expectedMessage, model);
+
+        // Check clipboard contents is correct
+        checkClipboardContents(memberToCopy.detailsToCopy());
+
+        // Restore clipboard contents
+        replaceClipboardContents(clipboardContentsBefore);
     }
 
     @Test

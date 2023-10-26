@@ -7,9 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showApplicantAtIndex;
+import static seedu.address.logic.commands.CopyCommandTestUtil.checkClipboardContents;
+import static seedu.address.logic.commands.CopyCommandTestUtil.replaceClipboardContents;
+import static seedu.address.logic.commands.CopyCommandTestUtil.saveClipboardContents;
 import static seedu.address.testutil.TypicalApplicants.getTypicalAddressBookWithApplicants;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+
+import java.awt.datatransfer.Transferable;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIf;
@@ -32,6 +37,9 @@ public class CopyApplicantCommandTest {
     @Test
     @DisabledIf("java.awt.GraphicsEnvironment.isHeadless()")
     public void execute_validIndexUnfilteredList_success() {
+        // Save clipboard contents before executing command
+        Transferable clipboardContentsBefore = saveClipboardContents();
+
         Applicant applicantToCopy = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
         CopyApplicantCommand copyApplicantCommand = new CopyApplicantCommand(INDEX_FIRST_PERSON);
 
@@ -40,6 +48,12 @@ public class CopyApplicantCommandTest {
 
         // Expected model is the same as the model before executing the command
         assertCommandSuccess(copyApplicantCommand, model, expectedMessage, model);
+
+        // Check clipboard contents is correct
+        checkClipboardContents(applicantToCopy.detailsToCopy());
+
+        // Restore clipboard contents
+        replaceClipboardContents(clipboardContentsBefore);
     }
 
     @Test
@@ -53,6 +67,9 @@ public class CopyApplicantCommandTest {
     @Test
     @DisabledIf("java.awt.GraphicsEnvironment.isHeadless()")
     public void execute_validIndexFilteredList_success() {
+        // Save clipboard contents before executing command
+        Transferable clipboardContentsBefore = saveClipboardContents();
+
         showApplicantAtIndex(model, INDEX_FIRST_PERSON);
 
         Applicant applicantToCopy = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -63,6 +80,12 @@ public class CopyApplicantCommandTest {
 
         // Expected model is the same as the model before executing the command
         assertCommandSuccess(copyApplicantCommand, model, expectedMessage, model);
+
+        // Check clipboard contents is correct
+        checkClipboardContents(applicantToCopy.detailsToCopy());
+
+        // Restore clipboard contents
+        replaceClipboardContents(clipboardContentsBefore);
     }
 
     @Test
