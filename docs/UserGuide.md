@@ -26,7 +26,7 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
    Here are some example commands you can try:
 
    - `list`: Lists all teaching assistants.
-   - `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime m/CS1231S h/10`: Adds a teaching assistant named Snowball to the list.
+   - `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`: Adds a teaching assistant named Snowball to the list.
    - `delete 3`: Deletes the 3rd teaching assistant shown in the current list.
    - `clear`: Deletes all teaching assistants.
    - `exit`: Exits the app.
@@ -45,7 +45,7 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -61,7 +61,7 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -75,7 +75,7 @@ Adds a new teaching assistant to the address book.
 
 ![add TA](images/addTA.png)
 
-Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [m/MOD]... h/HOUR`
+Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR`
 
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
@@ -84,26 +84,26 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [
 - `YEAR` should be an integer.
 - `FROM` should be a time in "HH:SS" format
 - `TO` should be a time in "HH:SS" format
-- `TAG` should be a alphanumeric string without spaces.
-- `MODULE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
+- `TAG` should be an alphanumeric string without spaces.
+- `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 - `HOUR` should be an integer
 
 Examples:
-- `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime m/CS1231S h/10`
+- `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`
 
 When the command succeeds:
 
 ```
 New teaching assistant added: Snowball; Phone: 98765432; Email: snowball@example.com; Telegram: @snowball;
-Free Time: 10:00-12:00; Tags: [fulltime]; Mods: [CS1231S]; Work Hour: 10
+Free Time: 10:00-12:00; Tags: [fulltime]; Courses: [CS1231S]; Work Hour: 10
 ```
 
 When the command fails:
 
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- Invalid invalid module code: `Mod codes should have 2-3 alphabets, followed by 4 digits,
-and optionally ending with an alphabet.`
+- Invalid invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
+and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
 - Invalid work hour: `Hour should only be positive integers and should be less than 9999`
 
@@ -127,7 +127,7 @@ Examples:
 When the command succeeds:
 
 ```
-Deleted Teaching Assistant: Snowball; Phone: 98765432; Email: snowball@example.com; Telegram: @snowball; Free Time: 10:00-12:00; Tags: [fulltime]; Mods: [CS1231S]; Work Hour: 10
+Deleted Teaching Assistant: Snowball; Phone: 98765432; Email: snowball@example.com; Telegram: @snowball; Free Time: 10:00-12:00; Tags: [fulltime]; Courses: [CS1231S]; Work Hour: 10
 ```
 
 When the command fails:
@@ -200,7 +200,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [m/MOD]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime m/CS1231S h/10`
+**Add** | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **List** | `list`
