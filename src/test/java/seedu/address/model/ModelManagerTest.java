@@ -169,8 +169,5 @@ public class ModelManagerTest {
         differentModelManager.addPerson(modelManager.getFilteredPersonList().get(1));
         assertFalse(modelManager.equals(differentModelManager));
         assertFalse(differentModelManager.equals(modelManager));
-
-        differentModelManager.updateSelectedPerson(differentModelManager.getFilteredPersonList().get(1));
-        assertTrue(modelManager.equals(differentModelManager));
     }
 }

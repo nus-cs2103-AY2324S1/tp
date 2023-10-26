@@ -119,7 +119,7 @@ public class AddressBookParser {
 
             case ViewCommand.COMMAND_WORD:
                 return new ViewCommandParser().parse(arguments);
-                
+
             case UndoCommand.COMMAND_WORD:
                 return new UndoCommand();
 
