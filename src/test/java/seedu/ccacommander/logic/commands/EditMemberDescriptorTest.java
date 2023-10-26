@@ -13,7 +13,7 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_HUSBAN
 
 import org.junit.jupiter.api.Test;
 
-import seedu.ccacommander.logic.commands.EditCommand.EditMemberDescriptor;
+import seedu.ccacommander.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.ccacommander.testutil.EditMemberDescriptorBuilder;
 
 public class EditMemberDescriptorTest {
@@ -21,7 +21,7 @@ public class EditMemberDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditCommand.EditMemberDescriptor descriptorWithSameValues = new EditMemberDescriptor(DESC_AMY);
+        EditMemberCommand.EditMemberDescriptor descriptorWithSameValues = new EditMemberDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -59,8 +59,8 @@ public class EditMemberDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        EditCommand.EditMemberDescriptor editMemberDescriptor = new EditCommand.EditMemberDescriptor();
-        String expected = EditCommand.EditMemberDescriptor.class.getCanonicalName() + "{name="
+        EditMemberCommand.EditMemberDescriptor editMemberDescriptor = new EditMemberCommand.EditMemberDescriptor();
+        String expected = EditMemberCommand.EditMemberDescriptor.class.getCanonicalName() + "{name="
                 + editMemberDescriptor.getGender().orElse(null) + ", gender="
                 + editMemberDescriptor.getName().orElse(null) + ", phone="
                 + editMemberDescriptor.getPhone().orElse(null) + ", email="

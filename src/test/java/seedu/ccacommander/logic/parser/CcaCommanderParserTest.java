@@ -19,8 +19,8 @@ import seedu.ccacommander.logic.commands.CreateEventCommand;
 import seedu.ccacommander.logic.commands.CreateMemberCommand;
 import seedu.ccacommander.logic.commands.DeleteEventCommand;
 import seedu.ccacommander.logic.commands.DeleteMemberCommand;
-import seedu.ccacommander.logic.commands.EditCommand;
-import seedu.ccacommander.logic.commands.EditCommand.EditMemberDescriptor;
+import seedu.ccacommander.logic.commands.EditMemberCommand;
+import seedu.ccacommander.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.ccacommander.logic.commands.ExitCommand;
 import seedu.ccacommander.logic.commands.FindEventCommand;
 import seedu.ccacommander.logic.commands.FindMemberCommand;
@@ -84,9 +84,9 @@ public class CcaCommanderParserTest {
     public void parseCommand_edit() throws Exception {
         Member member = new MemberBuilder().build();
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditMemberCommand command = (EditMemberCommand) parser.parseCommand(EditMemberCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_MEMBER.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_MEMBER, descriptor), command);
+        assertEquals(new EditMemberCommand(INDEX_FIRST_MEMBER, descriptor), command);
     }
 
     @Test
