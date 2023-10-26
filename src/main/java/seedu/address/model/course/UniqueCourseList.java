@@ -15,6 +15,9 @@ import seedu.address.model.course.exceptions.LessonNotFoundException;
  * Represents a list of courses with TAs in SOC. Immutable.
  */
 public class UniqueCourseList implements Iterable<Course> {
+    public static final String COURSE_LIST = UniqueCourseList.getList().stream()
+            .map(Course::getCourseCode).reduce((courseCode1, courseCode2) -> courseCode1 + ", "
+                    + courseCode2).orElse("");
     private static final ObservableList<Course> internalList = FXCollections.observableArrayList(
             CourseData.getCourseList()
     );
@@ -25,7 +28,7 @@ public class UniqueCourseList implements Iterable<Course> {
      * Returns a course with the given course code.
      */
     public static Course findByCourseCode(String courseCode) {
-        checkArgument(isValidCourseCode(courseCode), MESSAGE_CONSTRAINTS); //Check if course code is valid
+        checkArgument(isValidCourseCode(courseCode), MESSAGE_CONSTRAINTS); //Check if the course code is valid
         for (Course course : internalList) {
             if (course.getCourseCode().equals(courseCode)) {
                 return course;
