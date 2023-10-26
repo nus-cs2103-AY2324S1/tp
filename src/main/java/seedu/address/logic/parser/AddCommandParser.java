@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_BEGIN_AFTER_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
@@ -20,6 +21,7 @@ import seedu.address.model.person.Begin;
 import seedu.address.model.person.Day;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.End;
+import seedu.address.model.person.Lesson;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PayRate;
 import seedu.address.model.person.Person;
@@ -58,6 +60,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         End end = ParserUtil.parseEnd(argMultimap.getValue(PREFIX_END).get());
         PayRate payRate = ParserUtil.parsePayRate(argMultimap.getValue(PREFIX_PAYRATE).get());
         boolean paid = false;
+
+        if (!Lesson.isValid(begin, end)) {
+            throw new ParseException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
+        }
+
 
 
         Person person = new Person(name, phone, email, address, subject, day, begin, end, paid, payRate);
