@@ -1,6 +1,5 @@
 ---
-layout: page
-title: User Guide
+UNOFAS
 ---
 
 UNOFAS (One Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts,
@@ -46,7 +45,7 @@ better than traditional GUI apps.
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Contact Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -96,7 +95,7 @@ Format: `help`
 ---------------------------
 ### Adding a person: `add`
 
-Add a client’s contacts to address book (name, phone number, email, home address, next-of-kin name, next-of-kin phone number) into Address Book
+Add a client’s contacts to contact book (name, phone number, email, home address, next-of-kin name, next-of-kin phone number) into contact book
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN] [t/TAG]…​`
 
@@ -142,7 +141,7 @@ Format: `edit ENTRY_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nk/NE
   specifying any tags after it.
 
 Acceptable Values:
-1. ENTRY_INDEX - Number (1 to current size of the address book)
+1. ENTRY_INDEX - Number (1 to current size of the contact book)
 2. NAME - any value is possible
 3. PHONE_NUMBER - Numbers (0-9) and symbols, no alphabets
 4. EMAIL - string in valid email format
@@ -210,10 +209,10 @@ Format: `delete ENTRY_INDEX`
 * The index refers to the index number shown in the displayed person list.
 
 Acceptable Values:
-1. ENTRY_INDEX - Number (1 to current size of the address book).
+1. ENTRY_INDEX - Number (1 to current size of the contact book).
 
 Examples:
-* `list` followed by `delete 1` deletes the 1st person in the address book.
+* `list` followed by `delete 1` deletes the 1st person in the contact book.
 
 Successful Output:
 `Contact Deleted!
@@ -250,7 +249,7 @@ Examples:
 ----------
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book. UNOFAS will ask for confirmation first to ensure it is not a mistake. Click
+Clears all entries from the contact book. UNOFAS will ask for confirmation first to ensure it is not a mistake. Click
 the clear button to confirm.
 
 Format: `clear`
