@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -87,7 +88,7 @@ public class CopyApplicantCommandTest {
         assertEquals(copyApplicantFirstCommand, copyApplicantFirstCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(1, copyApplicantFirstCommand);
+        assertFalse(copyApplicantFirstCommand.equals(1));
 
         // null -> returns false
         assertNotEquals(null, copyApplicantFirstCommand);
