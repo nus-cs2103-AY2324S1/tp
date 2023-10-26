@@ -6,14 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
@@ -128,10 +121,24 @@ public class ApplicantCard extends UiPart<Region> {
             interviewHeader.setAlignment(Pos.CENTER);
             VBox.setVgrow(interviewRating, Priority.ALWAYS);
 
-            interviewHeader.setBackground(new Background(new BackgroundFill(Color.web("#3e7b91"),
-                    CornerRadii.EMPTY, Insets.EMPTY)));
-            interviewRating.setBackground(new Background(new BackgroundFill(Color.web("#7fc9e8"),
-                    CornerRadii.EMPTY, Insets.EMPTY)));
+            //sets the individual interview rating box with a border radius of 10
+            interviewBox.setBackground(new Background(new BackgroundFill(
+                    Color.TRANSPARENT,
+                    new CornerRadii(10),
+                    Insets.EMPTY)));
+            interviewBox.setBorder(new Border(new BorderStroke(
+                    Color.TRANSPARENT,
+                    BorderStrokeStyle.NONE,
+                    new CornerRadii(10),
+                    BorderWidths.DEFAULT)));
+            interviewHeader.setBackground(new Background(new BackgroundFill(
+                    Color.web("#3e7b91"),
+                    new CornerRadii(10, 10, 0, 0, false),
+                    Insets.EMPTY)));
+            interviewRating.setBackground(new Background(new BackgroundFill(
+                    Color.web("#7fc9e8"),
+                    new CornerRadii(0, 0, 10, 10, false),
+                    Insets.EMPTY)));
 
             Label interviewLabel = new Label(applicant.getInterviewIndexForApplicantCard(interview)
                     + ". " + interview.type);
@@ -157,7 +164,7 @@ public class ApplicantCard extends UiPart<Region> {
         Group stackedArcs = new Group();
         stackedArcs.getChildren().addAll(outerCircle, midCircle);
         Label ratingLabel = new Label();
-        ratingLabel.setText("8.2"); // TODO: update with overall rating
+        ratingLabel.setText(applicant.getOverallInterviewRating()); // TODO: update with overall rating
         ratingLabel.getStyleClass().add("overall_rating_label");
 
         for (int i = 0; i < 10; i++) {
