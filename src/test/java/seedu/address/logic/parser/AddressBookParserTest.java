@@ -11,12 +11,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CopyApplicantCommand;
+import seedu.address.logic.commands.CopyMemberCommand;
 import seedu.address.logic.commands.EditApplicantCommand;
 import seedu.address.logic.commands.EditApplicantCommand.EditApplicantDescriptor;
 import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ViewMembersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
@@ -101,17 +104,36 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
-    // TODO: adapt for ViewMemberCommand and ViewApplicantCommand
-    //    @Test
-    //    public void parseCommand_list() throws Exception {
-    //        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-    //        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
-    //    }
+    @Test
+    public void parseCommand_viewMember() throws Exception {
+        assertTrue(parser.parseCommand(ViewMembersCommand.COMMAND_WORD) instanceof ViewMembersCommand);
+        assertTrue(parser.parseCommand(ViewMembersCommand.COMMAND_WORD + " 3") instanceof ViewMembersCommand);
+    }
+
+    @Test
+    public void parseCommand_viewApplicant() throws Exception {
+        assertTrue(parser.parseCommand(ViewMembersCommand.COMMAND_WORD) instanceof ViewMembersCommand);
+        assertTrue(parser.parseCommand(ViewMembersCommand.COMMAND_WORD + " 3") instanceof ViewMembersCommand);
+    }
+
+    @Test
+    public void parseCommand_copyMember() throws Exception {
+        CopyMemberCommand command = (CopyMemberCommand) parser.parseCommand(
+                CopyMemberCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new CopyMemberCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_copyApplicant() throws Exception {
+        CopyApplicantCommand command = (CopyApplicantCommand) parser.parseCommand(
+                CopyApplicantCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new CopyApplicantCommand(INDEX_FIRST_PERSON), command);
+    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test

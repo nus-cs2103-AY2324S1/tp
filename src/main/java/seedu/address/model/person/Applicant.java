@@ -13,8 +13,12 @@ import seedu.address.model.person.fields.Phone;
 public class Applicant extends Person {
 
     private final Phone phone;
+
     /**
      * Every field must be present and not null.
+     *
+     * @param name  The name of the applicant.
+     * @param phone The phone number of the applicant.
      */
     public Applicant(Name name, Phone phone) {
         super(name);
@@ -78,5 +82,11 @@ public class Applicant extends Person {
                 .add("name", getName())
                 .add("phone", phone)
                 .toString();
+    }
+
+    @Override
+    public String detailsToCopy() {
+        return "Name: " + getName() + "\n"
+                + "Phone: " + phone;
     }
 }
