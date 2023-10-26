@@ -32,7 +32,7 @@ public class CompleteCommand extends Command {
             + "[" + PREFIX_APPOINTMENT_DATE + "Appointment Date] "
             + "Example: " + COMMAND_WORD + " 1 ";
     public static final String MESSAGE_COMPLETE_SUCCESS = "Appointments Completed!";
-    public static final String MESSAGE_NOT_COMPLETED = "At least one identifier must be provided.";
+    public static final String MESSAGE_NOT_COMPLETED = "Must input either an INDEX or an appointment date";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Input Date should be in format of dd-MM-yyyy";
     public static final String MESSAGE_INVALID_DATE = "Please input a valid Date";
     private final CompleteDescriptor completeDescriptor;
