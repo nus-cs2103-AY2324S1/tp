@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
+import seedu.address.model.booking.Remark;
 import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -21,12 +22,15 @@ public class BookingBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_BOOKING_PERIOD = "2023-01-01 08:00 to 2023-01-02 12:00";
+    public static final String DEFAULT_REMARK = "N/A";
 
     private Room room;
     private Name name;
     private Phone phone;
     private Email email;
     private BookingPeriod bookingPeriod;
+
+    private Remark remark;
     private Set<Tag> tags;
 
     /**
@@ -38,6 +42,7 @@ public class BookingBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
 
@@ -50,6 +55,7 @@ public class BookingBuilder {
         name = bookingToCopy.getName();
         phone = bookingToCopy.getPhone();
         email = bookingToCopy.getEmail();
+        remark = bookingToCopy.getRemark();
         tags = new HashSet<>(bookingToCopy.getTags());
     }
 
@@ -101,8 +107,16 @@ public class BookingBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public BookingBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
     public Booking build() {
-        return new Booking(room, bookingPeriod, name, phone, email, tags);
+        return new Booking(room, bookingPeriod, name, phone, email, remark, tags);
     }
 
 }

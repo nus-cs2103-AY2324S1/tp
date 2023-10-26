@@ -8,6 +8,7 @@ import seedu.address.model.BookingsBook;
 import seedu.address.model.ReadOnlyBookingsBook;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
+import seedu.address.model.booking.Remark;
 import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -22,29 +23,35 @@ public class SampleDataUtil {
         return new Booking[] {
             new Booking(new Room("69"), new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00"),
                     new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                    new Remark("More Bedsheets"),
                 getTagSet("friends")),
             new Booking(new Room("420"), new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00"),
                     new Name("Bernice Yu"), new Phone("99272758"),
                     new Email("berniceyu@example.com"),
+                    new Remark("More Pillows"),
                 getTagSet("colleagues", "friends")),
             new Booking(new Room("300"),
                     new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00"),
                     new Name("Charlotte Oliveiro"), new Phone("93210283"),
                     new Email("charlotte@example.com"),
+                    new Remark("Do Not Disturb"),
                 getTagSet("neighbours")),
             new Booking(new Room("111"),
                     new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00"),
                     new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+                    new Remark("Extra Bed"),
                 getTagSet("family")),
             new Booking(new Room("500"),
                     new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00"),
                     new Name("Irfan Ibrahim"), new Phone("92492021"),
                     new Email("irfan@example.com"),
+                    new Remark("More Bedsheets"),
                 getTagSet("classmates")),
             new Booking(new Room("1"),
                     new BookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00"),
                     new Name("Roy Balakrishnan"), new Phone("92624417"),
                     new Email("royb@example.com"),
+                    new Remark("Overrun Room Service"),
                 getTagSet("colleagues"))
         };
     }

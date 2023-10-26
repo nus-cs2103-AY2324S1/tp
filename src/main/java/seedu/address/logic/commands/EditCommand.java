@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -24,6 +25,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
+import seedu.address.model.booking.Remark;
 import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -46,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -54,7 +57,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_BOOKING_SUCCESS = "Edited Booking: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_BOOKING = "This person already exists in the address book.";
-
     private final Index index;
     private final EditRoomDescriptor editRoomDescriptor;
 
@@ -83,9 +85,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editRoomDescriptor.getEmail().orElse(bookingToEdit.getEmail());
         BookingPeriod updatedBookingPeriod = editRoomDescriptor.getBookingPeriod()
                 .orElse(bookingToEdit.getBookingPeriod());
+        Remark updatedRemark = editRoomDescriptor.getRemark().orElse(bookingToEdit.getRemark());
         Set<Tag> updatedTags = editRoomDescriptor.getTags().orElse(bookingToEdit.getTags());
 
-        return new Booking(updatedRoom, updatedBookingPeriod, updatedName, updatedPhone, updatedEmail, updatedTags);
+        return new Booking(updatedRoom, updatedBookingPeriod, updatedName, updatedPhone, updatedEmail, updatedRemark,
+                updatedTags);
     }
 
     @Override
@@ -143,6 +147,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private BookingPeriod bookingPeriod;
+        private Remark remark;
         private Set<Tag> tags;
 
         public EditRoomDescriptor() {
@@ -158,6 +163,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setBookingPeriod(toCopy.bookingPeriod);
+            setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
 
@@ -208,6 +214,14 @@ public class EditCommand extends Command {
             this.bookingPeriod = bookingPeriod;
         }
 
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -242,6 +256,7 @@ public class EditCommand extends Command {
                     && Objects.equals(name, otherEditRoomDescriptor.name)
                     && Objects.equals(phone, otherEditRoomDescriptor.phone)
                     && Objects.equals(email, otherEditRoomDescriptor.email)
+                    && Objects.equals(remark, otherEditRoomDescriptor.remark)
                     && Objects.equals(tags, otherEditRoomDescriptor.tags);
         }
 
@@ -253,6 +268,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
+                    .add("remark", remark)
                     .add("tags", tags)
                     .toString();
         }

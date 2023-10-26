@@ -35,6 +35,7 @@ public class TypicalPersons {
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
+            .withRemark("Overran Hotel Supplies")
             .withTags("owesMoney", "friends").build();
     public static final Booking CARL = new BookingBuilder().withRoom("3")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")

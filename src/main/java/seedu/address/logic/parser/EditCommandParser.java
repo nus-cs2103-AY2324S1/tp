@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -33,7 +34,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ROOM, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_BOOKING_PERIOD, PREFIX_TAG);
+                        PREFIX_EMAIL, PREFIX_BOOKING_PERIOD, PREFIX_REMARK, PREFIX_TAG);
 
         Index index;
 
@@ -44,7 +45,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROOM, PREFIX_NAME, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_BOOKING_PERIOD);
+                PREFIX_EMAIL, PREFIX_BOOKING_PERIOD, PREFIX_REMARK);
 
         EditCommand.EditRoomDescriptor editRoomDescriptor = new EditCommand.EditRoomDescriptor();
 
@@ -64,6 +65,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_BOOKING_PERIOD).isPresent()) {
             editRoomDescriptor.setBookingPeriod(ParserUtil.parseBookingPeriod(argMultimap
                     .getValue(PREFIX_BOOKING_PERIOD).get()));
+        }
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            editRoomDescriptor.setRemark(ParserUtil.parseRemark(argMultimap
+                    .getValue(PREFIX_REMARK).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editRoomDescriptor::setTags);
 

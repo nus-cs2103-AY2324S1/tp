@@ -17,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -60,8 +61,8 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
 
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + ROOM_DESC_BOB + NAME_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + BOOKING_PERIOD_DESC_BOB
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + ROOM_DESC_BOB + BOOKING_PERIOD_DESC_BOB
+                + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + REMARK_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedBooking));
 
 
@@ -69,8 +70,9 @@ public class AddCommandParserTest {
         Booking expectedBookingMultipleTags = new BookingBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                ROOM_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + BOOKING_PERIOD_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                ROOM_DESC_BOB + BOOKING_PERIOD_DESC_BOB
+                        + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + REMARK_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedBookingMultipleTags));
     }
 

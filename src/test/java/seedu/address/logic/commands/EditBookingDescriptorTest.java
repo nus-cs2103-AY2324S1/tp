@@ -61,11 +61,12 @@ public class EditBookingDescriptorTest {
     public void toStringMethod() {
         EditCommand.EditRoomDescriptor editRoomDescriptor = new EditCommand.EditRoomDescriptor();
         String expected = EditCommand.EditRoomDescriptor.class.getCanonicalName() + "{room="
-                + editRoomDescriptor.getEmail().orElse(null) + ", booking period="
-                + editRoomDescriptor.getRoom().orElse(null) + ", name="
+                + editRoomDescriptor.getRoom().orElse(null) + ", booking period="
+                + editRoomDescriptor.getBookingPeriod().orElse(null) + ", name="
                 + editRoomDescriptor.getName().orElse(null) + ", phone="
                 + editRoomDescriptor.getPhone().orElse(null) + ", email="
-                + editRoomDescriptor.getBookingPeriod().orElse(null) + ", tags="
+                + editRoomDescriptor.getEmail().orElse(null) + ", remark="
+                + editRoomDescriptor.getRemark().orElse(null) + ", tags="
                 + editRoomDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editRoomDescriptor.toString());
     }

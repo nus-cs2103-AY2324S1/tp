@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
+import seedu.address.model.booking.Remark;
 import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final String remark;
     private final String bookingPeriod;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -39,12 +41,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("room") String room, @JsonProperty("name") String name,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("bookingPeriod") String bookingPeriod,
+                             @JsonProperty("remark") String remark,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.room = room;
         this.bookingPeriod = bookingPeriod;
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -59,6 +63,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -115,9 +120,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(BookingPeriod.MESSAGE_CONSTRAINTS);
         }
         final BookingPeriod modelBookingPeriod = new BookingPeriod(bookingPeriod);
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        if (!Remark.isValidRemark(remark)) {
+            throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Booking(modelRoom, modelBookingPeriod, modelName, modelPhone, modelEmail, modelTags);
+        return new Booking(modelRoom, modelBookingPeriod, modelName, modelPhone, modelEmail, modelRemark, modelTags);
     }
-
 }
