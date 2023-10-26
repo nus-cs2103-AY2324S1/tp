@@ -29,7 +29,7 @@ public class JsonAdaptedLesson {
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("start") String start, @JsonProperty("end") String end,
                              @JsonProperty("subject") String subject, @JsonProperty("students") String students,
-                             @JsonProperty("students") String taskList) {
+                             @JsonProperty("taskList") String taskList) {
         this.start = start;
         this.end = end;
         this.subject = subject;
