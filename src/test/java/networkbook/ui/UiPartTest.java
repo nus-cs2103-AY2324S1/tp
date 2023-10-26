@@ -1,6 +1,7 @@
 package networkbook.ui;
 
 import static networkbook.testutil.Assert.assertThrows;
+import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -33,15 +34,15 @@ public class UiPartTest {
     @Test
     public void constructor_missingFileUrl_throwsAssertionError() throws Exception {
         URL missingFileUrl = new URL(testFolder.toUri().toURL(), MISSING_FILE_PATH);
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(missingFileUrl));
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(missingFileUrl, new Object()));
+        assertThrowsAssertionError(() -> new TestUiPart<Object>(missingFileUrl));
+        assertThrowsAssertionError(() -> new TestUiPart<Object>(missingFileUrl, new Object()));
     }
 
     @Test
     public void constructor_invalidFileUrl_throwsAssertionError() {
         URL invalidFileUrl = getTestFileUrl(INVALID_FILE_PATH);
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(invalidFileUrl));
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(invalidFileUrl, new Object()));
+        assertThrowsAssertionError(() -> new TestUiPart<Object>(invalidFileUrl));
+        assertThrowsAssertionError(() -> new TestUiPart<Object>(invalidFileUrl, new Object()));
     }
 
     @Test
@@ -71,8 +72,8 @@ public class UiPartTest {
 
     @Test
     public void constructor_invalidFileName_throwsAssertionError() {
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(INVALID_FILE_PATH));
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(INVALID_FILE_PATH, new Object()));
+        assertThrowsAssertionError(() -> new TestUiPart<Object>(INVALID_FILE_PATH));
+        assertThrowsAssertionError(() -> new TestUiPart<Object>(INVALID_FILE_PATH, new Object()));
     }
 
     private URL getTestFileUrl(String testFilePath) {
