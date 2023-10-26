@@ -11,9 +11,7 @@ bin/
 
 # docs IDEA files
 /docs/
-/.idea
-/out
-/*.iml
+.idea/*
 
 # Storage/log files
 /data/
