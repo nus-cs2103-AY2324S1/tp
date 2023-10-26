@@ -7,7 +7,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
-    public static final Email NULL_EMAIL = new Email("");
+    public static final Email NULL_EMAIL;
+    static {
+        try {
+            NULL_EMAIL = new Email("");
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private static final String SPECIAL_CHARACTERS = "+_.-";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
@@ -30,7 +37,7 @@ public class Email {
             + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs an {@code Email}.
@@ -70,6 +77,22 @@ public class Email {
 
         Email otherEmail = (Email) other;
         return value.equals(otherEmail.value);
+    }
+
+    /**
+     * Factory method to create an Email object.
+     * @param email
+     * @return Email object
+     * @throws IllegalArgumentException
+     */
+    public static Email of(String email) throws IllegalArgumentException {
+        if (!isValidEmail(email)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        } else if (email.isBlank()) {
+            return Email.NULL_EMAIL;
+        } else {
+            return new Email(email);
+        }
     }
 
     @Override

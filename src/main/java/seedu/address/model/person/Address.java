@@ -17,9 +17,17 @@ public class Address {
     // Updated: Allow empty address, so whitespace is allowed.
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public static final Address NULL_ADDRESS = new Address("");
+    public static final Address NULL_ADDRESS;
 
-    public final String value;
+    static {
+        try {
+            NULL_ADDRESS = new Address("");
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private final String value;
 
     /**
      * Constructs an {@code Address}.
@@ -59,6 +67,22 @@ public class Address {
 
         Address otherAddress = (Address) other;
         return value.equals(otherAddress.value);
+    }
+
+    /**
+     * Factory method to create an Address object.
+     * @param address
+     * @return Address object
+     * @throws IllegalArgumentException
+     */
+    public static Address of(String address) throws IllegalArgumentException {
+        if (!isValidAddress(address)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        } else if (address.isBlank()) {
+            return Address.NULL_ADDRESS;
+        } else {
+            return new Address(address);
+        }
     }
 
     @Override
