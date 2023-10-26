@@ -321,14 +321,14 @@ _Details coming soon ..._
 
 ## Applicant Management Command
 
-| Action                     | Format, Examples                                                                                                                                                      |
-|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add applicant**          | `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear all applicants**   | `clear-a`                                                                                                                                                             |
-| **Delete applicant**       | `delete-a INDEX`<br> e.g., `delete-a 3`                                                                                                                               |
-| **Edit applicant**         | `edit-a APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit-a 2 n/John Doe`                                        |
-| **Find applicant by name** | `find-a KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-a John`                                                                                                              |
-| **List applicants**        | `list-a`                                                                                                                                                              |
+| Action                   | Format, Examples                                                                                                                                                                                              |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add applicant**        | `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                         |
+| **Clear all applicants** | `clear-a`                                                                                                                                                                                                     |
+| **Delete applicant**     | `delete-a INDEX`<br> e.g., `delete-a 3`                                                                                                                                                                       |
+| **Edit applicant**       | `edit-a APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit-a 2 n/John Doe`                                                                                |
+| **Find applicant**       | `find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER] [e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] t/KEYWORDS [MORE_KEYWORDS]...]` <br> e.g., `find-a n/John Bob p/98765432 e/John@example.com` |
+| **List applicants**      | `list-a`                                                                                                                                                                                                      |
 
 ## Interview Management Command
 
