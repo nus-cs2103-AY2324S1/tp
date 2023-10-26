@@ -298,6 +298,13 @@ applicant index as well as the chosen interview index.
 
 #### Design Considerations
 
+In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and a `List`.
+A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult to implement
+the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()` method. Also, if we wanted to
+extend a sorting function for interviews in the future, a `PriorityQueue` would make it more difficult for us to change the comparator
+for `Interview` objects. For the sake of extensibility of the codebase, we decided to use a `List` instead. This is because a `List` 
+provides us with greater abstraction and code flexibility in extending various functions for the `Interview` class. 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
