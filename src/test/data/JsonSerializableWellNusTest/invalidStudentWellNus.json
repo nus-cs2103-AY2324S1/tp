@@ -2,7 +2,8 @@
   "students": [ {
     "name": "Hans Muster",
     "phone": "9",
-    "address": "4th street"
+    "address": "4th street",
+    "note" : " "
   } ],
   "appointments" : [ {
     "name" : "Hans Muster",

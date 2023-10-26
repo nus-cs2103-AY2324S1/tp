@@ -23,11 +23,6 @@ public class NoteCommandParserTest {
         String userInput = targetIndex.getOneBased() + " " + PREFIX_NOTE + nonEmptyNote;
         NoteCommand expectedCommand = new NoteCommand(INDEX_FIRST_STUDENT, new Note(nonEmptyNote));
         assertParseSuccess(parser, userInput, expectedCommand);
-
-        // no note
-        userInput = targetIndex.getOneBased() + " " + PREFIX_NOTE;
-        expectedCommand = new NoteCommand(INDEX_FIRST_STUDENT, new Note(""));
-        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test

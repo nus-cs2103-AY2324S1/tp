@@ -23,7 +23,7 @@ import seedu.address.model.student.Student;
  */
 public class SampleDataUtil {
 
-    public static final Note EMPTY_NOTE = new Note("");
+    public static final Note EMPTY_NOTE = new Note(" ");
 
     public static Student[] getSampleStudents() {
         return new Student[] {
