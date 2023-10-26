@@ -84,39 +84,6 @@ Examples:
 * `deleteMember 1 ` deletes the 1st member in the member list.
 * `deleteMember 10 ` deletes the 10th member in the member list.
 
-### List all Members and all Events : `list`
-
-List all members and all events in the CCA in 2 separate columns.
-
-Format: `list`
-
-### View Members of Event : `viewEvent`
-
-Lists all the members of a specified event index.
-
-Format: `viewEvent EVENT_INDEX`
-* Views the members of the event at the specified `EVENT_INDEX`.
-* The index refers to the index number shown in the displayed event list.
-* The index **must be a positive integer** that is within the range of the length of the event list.
-
-Examples:
-* `viewEvent 1` displays members of the 1st event in the event list.
-* `viewEvent 10` displays members of the 10th event in the event list.
-
-### View Events of Member : `viewMember`
-
-Lists all the events of a specified member index.
-
-Format: `viewMember MEMBER_INDEX`
-
-* Views the events of the member at the specified `MEMBER_INDEX`.
-* The index refers to the index number shown in the displayed member list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
-
-Examples:
-* `viewMember 1` displays events of the 1st member in the member list.
-* `viewMember 10` displays events of the 10th member in the member list.
-
 ### Create an Event : `createEvent`
 
 Creates a new event and adds it to the database.
@@ -171,6 +138,39 @@ Format: `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
 Examples:
 * `unenrol m/1 e/5` unlinks the 1st member in the member list from the 5th event in the event list.
 * `unenrol m/5 e/1` unlinks the 5th member in the member list from the 1st event in the event list.
+
+### List all Members and all Events : `list`
+
+List all members and all events in the CCA in 2 separate columns.
+
+Format: `list`
+
+### View Events of Member : `viewMember`
+
+Lists all the events of a specified member index.
+
+Format: `viewMember MEMBER_INDEX`
+
+* Views the events of the member at the specified `MEMBER_INDEX`.
+* The index refers to the index number shown in the displayed member list.
+* The index **must be a positive integer** that is within the range of the length of the member list.
+
+Examples:
+* `viewMember 1` displays events of the 1st member in the member list.
+* `viewMember 10` displays events of the 10th member in the member list.
+
+### View Members of Event : `viewEvent`
+
+Lists all the members of a specified event index.
+
+Format: `viewEvent EVENT_INDEX`
+* Views the members of the event at the specified `EVENT_INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** that is within the range of the length of the event list.
+
+Examples:
+* `viewEvent 1` displays members of the 1st event in the event list.
+* `viewEvent 10` displays members of the 10th event in the event list.
 
 ### Undoing a command: `undo`
 
