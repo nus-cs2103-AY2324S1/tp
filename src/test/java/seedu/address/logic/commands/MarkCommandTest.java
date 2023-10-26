@@ -42,6 +42,7 @@ public class MarkCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setStudent(studentToMark, studentToMark.markPresent(i));
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(studentToMark, model.getSelectedStudent().get(0));

@@ -39,7 +39,8 @@ public class RecordClassParticipationCommandTest {
                 .build();
         model.setSelectedStudent(editedStudent);
         StudentNumber studentNumber = editedStudent.getStudentNumber();
-        RecordClassParticipationCommand recordClassParticipationCommand = new RecordClassParticipationCommand(studentNumber, 1, true);
+        RecordClassParticipationCommand recordClassParticipationCommand =
+                new RecordClassParticipationCommand(studentNumber, 1, true);
 
         String expectedMessage = String.format(RecordClassParticipationCommand.MESSAGE_SUCCESS,
                 editedStudent.getStudentNumber())

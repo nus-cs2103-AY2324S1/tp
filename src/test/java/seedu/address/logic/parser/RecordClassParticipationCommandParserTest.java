@@ -68,8 +68,10 @@ public class RecordClassParticipationCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         String userInput = STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + VALID_PARTICIPATION_DESC;
 
-        RecordClassParticipationCommand expectedCommand = new RecordClassParticipationCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(VALID_TUT), Boolean.parseBoolean(VALID_PARTICIPATION));
+        RecordClassParticipationCommand expectedCommand = new RecordClassParticipationCommand(
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY),
+                Integer.parseInt(VALID_TUT),
+                Boolean.parseBoolean(VALID_PARTICIPATION));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -77,8 +79,10 @@ public class RecordClassParticipationCommandParserTest {
     public void parse_differentOrdering_success() {
         String userInput = VALID_PARTICIPATION_DESC + VALID_TUT_DESC + STUDENT_NUMBER_DESC_AMY;
 
-        RecordClassParticipationCommand expectedCommand = new RecordClassParticipationCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-                Integer.parseInt(VALID_TUT), Boolean.parseBoolean(VALID_PARTICIPATION));
+        RecordClassParticipationCommand expectedCommand = new RecordClassParticipationCommand(
+                new StudentNumber(VALID_STUDENT_NUMBER_AMY),
+                Integer.parseInt(VALID_TUT),
+                Boolean.parseBoolean(VALID_PARTICIPATION));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         userInput = VALID_TUT_DESC + VALID_PARTICIPATION_DESC + STUDENT_NUMBER_DESC_AMY;
