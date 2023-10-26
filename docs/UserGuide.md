@@ -178,7 +178,7 @@ Examples:
 
 Deletes the previously user-defined shortcuts.
 
-Format: `delsc [sc/SHORTCUT]...​`
+Format: `delsc sc/SHORTCUT...​`
 
 Examples:
 * `delsc sc/del sc/abc` will remove the previous mappings of `del` and `abc`.
@@ -236,5 +236,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
+**Add shortcut** | `addsc sc/SHORTCUT kw/KEYWORD` <br> e.g., `addsc sc/del kw/delete`
+**Delete shortcut** | `delsc sc/SHORTCUT [sc/SHORTCUT]...` <br> e.g., `delsc sc/del sc/li`
 **List** | `list -pa`
 **Help** | `help`
