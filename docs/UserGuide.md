@@ -172,6 +172,32 @@ Examples:
 * `viewEvent 1` displays members of the 1st event in the event list.
 * `viewEvent 10` displays members of the 10th event in the event list.
 
+### Find Member in member list : `findMember`
+
+Finds and lists a member of a specified member index in the full member list.
+
+Format: `findMember MEMBER_INDEX`
+* Finds and lists the member at the specified `MEMBER_INDEX` of the full member list.
+* The index refers to the index number shown in the full member list.
+* The index **must be a positive integer** that is within the range of the length of the member list.
+
+Examples:
+* `findMember 1` displays the 1st member of the full member list.
+* `findMember 10` displays the 10th member of the full member list.
+
+### Find Event in event list : `findEvent`
+
+Finds and lists an event of a specified event index in the full event list.
+
+Format: `findEvent EVENT_INDEX`
+* Finds and lists the event at the specified `EVENT_INDEX` of the full event list.
+* The index refers to the index number shown in the full event list.
+* The index **must be a positive integer** that is within the range of the length of the event list.
+
+Examples:
+* `findEvent 1` displays the 1st event of the full event list.
+* `findEvent 10` displays the 10th event of the full event list.
+
 ### Undoing a command: `undo`
 
 Undoes the previous command that the user has entered, which has changed the data within CCACommander.
@@ -227,8 +253,8 @@ Action | Format, Examples
 **List all members and all events** | `list`
 **View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
 **View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
-**Find member in list** | coming soon...
-**Find event in list** | coming soon...
+**Find member in list** | `findMember MEMBER_INDEX` <br> e.g.`findMember 1`
+**Find event in list** | `findEvent EVENT_INDEX` <br> e.g.`findEvent 1`
 **Redo** | `redo`
 **Undo** | `undo`
 **Help** | coming soon...
