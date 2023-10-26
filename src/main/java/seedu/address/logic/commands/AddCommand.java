@@ -78,7 +78,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
@@ -91,6 +91,7 @@ public class AddCommand extends Command {
         } else {
             model.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
         }
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

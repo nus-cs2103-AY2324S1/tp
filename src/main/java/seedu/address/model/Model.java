@@ -95,6 +95,11 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    Person getSelectedPerson();
+
+    void updateSelectedPerson(Person person);
+
+    public boolean isSelectedEmpty();
     /**
      * Returns the command string of the next most recent command executed.
      */
@@ -110,4 +115,9 @@ public interface Model {
      */
     void addCommandString(String commandString);
 
+    boolean hasHistory();
+    boolean canRedo();
+    void undoAddressBook();
+    void redoAddressBook();
+    void commitAddressBook();
 }

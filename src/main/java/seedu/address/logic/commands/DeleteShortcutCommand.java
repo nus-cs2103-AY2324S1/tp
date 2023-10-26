@@ -36,7 +36,7 @@ public class DeleteShortcutCommand extends Command {
         this.shortcutAliasList = shortcutAlias;
     }
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         StringBuilder message = new StringBuilder();
         shortcutAliasList.forEach(shortcutAlias -> {

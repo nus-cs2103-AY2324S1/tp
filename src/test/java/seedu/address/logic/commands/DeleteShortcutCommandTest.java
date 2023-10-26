@@ -19,6 +19,7 @@ import seedu.address.model.UserPrefs;
 
 public class DeleteShortcutCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void constructor_nullParameters_throwsNullPointerException() {
@@ -39,7 +40,7 @@ public class DeleteShortcutCommandTest {
 
         ModelManager afterModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        assertCommandSuccess(deleteShortcutCommand, beforeModel, expectedMessage, afterModel);
+        assertCommandSuccess(deleteShortcutCommand, beforeModel, expectedMessage, afterModel, commandHistory);
     }
 
     @Test
@@ -58,7 +59,7 @@ public class DeleteShortcutCommandTest {
 
         ModelManager afterModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        assertCommandSuccess(deleteShortcutCommand, beforeModel, expectedMessage, afterModel);
+        assertCommandSuccess(deleteShortcutCommand, beforeModel, expectedMessage, afterModel, commandHistory);
     }
 
     @Test
@@ -75,7 +76,7 @@ public class DeleteShortcutCommandTest {
 
         ModelManager afterModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        assertCommandSuccess(deleteShortcutCommand, beforeModel, expectedMessage, afterModel);
+        assertCommandSuccess(deleteShortcutCommand, beforeModel, expectedMessage, afterModel, commandHistory);
     }
     @Test
     public void equals() {

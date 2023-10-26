@@ -36,7 +36,7 @@ public class AddShortcutCommand extends Command {
         this.command = commandWord;
     }
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         String feedback = model.getShortcutSettings().registerShortcut(shortcutAlias, command);
         if (feedback == null) {

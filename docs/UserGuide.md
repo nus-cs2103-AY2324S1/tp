@@ -152,6 +152,18 @@ Clears all entries from the stored records.
 
 Format: `clear`
 
+### Undo previous entry : `undo`
+
+Undo the previous command, stackable. (Able to keep undo-ing till there are no commands left to be undone)
+
+Format: `undo`
+
+### Redo previous undo : `redo`
+
+Redo the previous 'undo', stackable. (Able to keep redoing-ing till there are no undo left to be redone)
+
+Format: `redo`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -236,7 +248,9 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
+**List** | `list -pa`
+**Undo** | `undo`
+**Redo** | `redo`
 **Add shortcut** | `addsc sc/SHORTCUT kw/KEYWORD` <br> e.g., `addsc sc/del kw/delete`
 **Delete shortcut** | `delsc sc/SHORTCUT [sc/SHORTCUT]...` <br> e.g., `delsc sc/del sc/li`
-**List** | `list -pa`
 **Help** | `help`

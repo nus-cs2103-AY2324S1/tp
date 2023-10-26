@@ -34,6 +34,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindPredicateMap;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Patient;
@@ -153,6 +154,13 @@ public class AddressBookParserTest {
         findPredicateMap.put(PREFIX_TAG, new TagsContainsKeywordsPredicate(tagKeywords));
         assertEquals(findPredicateMap, command.getPredicate());
         assertEquals(PersonType.SPECIALIST, command.getPersonType());
+    }
+
+    @Test
+    public void parseCommand_view_patient() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ViewCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

@@ -15,6 +15,8 @@ import seedu.address.model.UserPrefs;
 public class AddShortcutCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    private CommandHistory commandHistory = new CommandHistory();
     @Test
     public void constructor_nullParameters_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddShortcutCommand(null, null));
@@ -31,7 +33,7 @@ public class AddShortcutCommandTest {
         expectedModel.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
 
-        assertCommandSuccess(addShortcutCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addShortcutCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
@@ -51,7 +53,8 @@ public class AddShortcutCommandTest {
         expectedModel.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(ListCommand.COMMAND_WORD));
 
-        assertCommandSuccess(addShortcutCommand, modelWithExistingMapping, expectedMessage, expectedModel);
+        assertCommandSuccess(addShortcutCommand, modelWithExistingMapping,
+                expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
