@@ -210,18 +210,14 @@ public class MainWindow extends UiPart<Stage> {
      * Returns the path of the theme stylesheet for primary stage.
      */
     private String getPrimaryThemePath(String theme) {
-        return theme.equalsIgnoreCase("dark")
-                ? "view/DarkTheme.css"
-                : "view/LightTheme.css";
+        return theme.equalsIgnoreCase("dark") ? "view/DarkTheme.css" : "view/LightTheme.css";
     }
 
     /**
      * Returns the path of the theme stylesheet for the help window.
      */
     private String getHelpWindowThemePath(String theme) {
-        return theme.equalsIgnoreCase("dark")
-                ? "view/DarkHelpWindow.css"
-                : "view/LightHelpWindow.css";
+        return theme.equalsIgnoreCase("dark") ? "view/DarkHelpWindow.css" : "view/LightHelpWindow.css";
     }
 
     /**

@@ -4,11 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import java.nio.file.Path;
-
 import org.junit.jupiter.api.Test;
-
-import seedu.address.model.UserPrefs;
 
 public class GuiSettingsTest {
     @Test
