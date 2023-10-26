@@ -6,10 +6,13 @@
 
 # JABPro User Guide
 
+## Product Overview
+
 JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of companies to ease the management of applicants, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JABPro can get your applicant management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -120,8 +123,15 @@ Format: `view INDEX`
 * Compatible with search and other features that change the order and content of the list.
 
 Examples:
-* `view 1`
-  Shows the complete details of the 1st person on the list.
+* `view 1` Shows the complete details of the 1st person on the list.
+
+<box type="tip" seamless>
+
+**Tip:** Other operations that affect user's data will trigger a refresh of the view.
+These include `add`, `edit`, `set`, `remark`, `addL`, `addG` 
+
+
+</box>
 
 
 ### Adding Github/LinkedIn username for a user: 'add linkedin/github'

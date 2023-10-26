@@ -506,7 +506,7 @@ Use case ends.
 **MSS**
 1.  User requests to list persons.
 2.  AddressBook shows a list of persons.
-3.  User requests to view a specific person in the list.
+3.  User requests to view a specific person in the current displayed AddressBook.
 4.  The UI shows the details of that person.
     Use case ends.
 
@@ -515,11 +515,15 @@ Use case ends.
     * 2a1. AddressBook displays a message indicating that the list is empty.
       Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
+      Use case resumes at step 3.
+
+* 3b. User decides to search for a person based on a criteria such as name.
+    * 3b1. Displayed AddressBook changes to match that of search result.  
       Use case resumes at step 3.
 
 
-
+    
 **Use case: Add social profile to person's details**
 
 **MSS**
