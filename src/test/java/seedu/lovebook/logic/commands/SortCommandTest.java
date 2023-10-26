@@ -1,17 +1,19 @@
 package seedu.lovebook.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.lovebook.logic.Messages.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_PREFIX;
+import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_SEQUENCE;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.lovebook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.lovebook.logic.parser.CliSyntax.*;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.testutil.TypicalDatePrefs.getTypicalDatePrefs;
 import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.lovebook.logic.commands.exceptions.CommandException;
-import seedu.lovebook.logic.parser.exceptions.ParseException;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
 import seedu.lovebook.model.UserPrefs;
@@ -31,14 +33,14 @@ public class SortCommandTest {
         // same values -> returns true
         SortCommand sortFirstCommandCopy = new SortCommand(PREFIX_NAME, sequence);
         assertTrue(sortFirstCommand.equals(sortFirstCommandCopy));
-//
-//        // different types -> returns false
+
+        // different types -> returns false
         assertFalse(sortFirstCommand.equals(1));
-//
-//        // null -> returns false
+
+        // null -> returns false
         assertFalse(sortFirstCommand.equals(null));
-//
-//        // different date -> returns false
+
+        // different date -> returns false
         assertFalse(sortFirstCommand.equals(sortSecondCommand));
     }
 

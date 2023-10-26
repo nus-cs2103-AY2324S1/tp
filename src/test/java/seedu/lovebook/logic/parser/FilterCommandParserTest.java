@@ -29,13 +29,13 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "filter name", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, " name", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyKeyword_throwsParseException() {
-        assertParseFailure(parser, "filter name/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, " name/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FilterCommand.MESSAGE_USAGE));
     }
 
@@ -44,20 +44,20 @@ public class FilterCommandParserTest {
         predicateList.add(new MetricContainsKeywordPredicate("Alice", PREFIX_NAME));
         predicateList.add(new MetricContainsKeywordPredicate("22", PREFIX_AGE));
         FilterCommand expectedFilterCommand = new FilterCommand(predicateList);
-        assertParseSuccess(parser, "filter age/ 22 name/ Alice", expectedFilterCommand);
+        assertParseSuccess(parser, " age/ 22 name/ Alice", expectedFilterCommand);
     }
     @Test
     public void parse_validArgs_returnsFilterCommand2() {
         predicateList.add(new MetricContainsKeywordPredicate("123", PREFIX_HEIGHT));
         predicateList.add(new MetricContainsKeywordPredicate("3000", PREFIX_INCOME));
         FilterCommand expectedFilterCommand = new FilterCommand(predicateList);
-        assertParseSuccess(parser, "filter income/ 3000 height/ 123", expectedFilterCommand);
+        assertParseSuccess(parser, " income/ 3000 height/ 123", expectedFilterCommand);
     }
     @Test
     public void parse_validArgs_returnsFilterCommand3() {
         predicateList.add(new MetricContainsKeywordPredicate("F", PREFIX_GENDER));
         predicateList.add(new MetricContainsKeywordPredicate("Libra", PREFIX_HOROSCOPE));
         FilterCommand expectedFilterCommand = new FilterCommand(predicateList);
-        assertParseSuccess(parser, "filter horoscope/ Libra gender/ F", expectedFilterCommand);
+        assertParseSuccess(parser, " horoscope/ Libra gender/ F", expectedFilterCommand);
     }
 }

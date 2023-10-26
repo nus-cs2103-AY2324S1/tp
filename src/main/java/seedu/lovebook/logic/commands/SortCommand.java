@@ -1,6 +1,7 @@
 package seedu.lovebook.logic.commands;
 
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_PREFIX;
+import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_SEQUENCE;
 import static seedu.lovebook.logic.Messages.MESSAGE_SORTED;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
@@ -14,7 +15,7 @@ import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.logic.parser.Prefix;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * Sorts all dates in lovebook book alphabetically or numerically.
@@ -57,7 +58,7 @@ public class SortCommand extends Command {
             } else {
                 throw new CommandException(MESSAGE_INVALID_PREFIX);
             }
-        } else {
+        } else if (sequence.equals(SortCommand.SEQUENCE_DESCENDING)) {
             if (prefix.equals(PREFIX_NAME)) {
                 c = Comparator.comparing(Date::getName).reversed();
             } else if (prefix.equals(PREFIX_INCOME)) {
@@ -72,6 +73,8 @@ public class SortCommand extends Command {
                 System.out.println("THROWING");
                 throw new CommandException(MESSAGE_INVALID_PREFIX);
             }
+        } else {
+            throw new CommandException(MESSAGE_INVALID_SEQUENCE);
         }
         model.updateSortedPersonList(c);
         return new CommandResult(MESSAGE_SORTED);

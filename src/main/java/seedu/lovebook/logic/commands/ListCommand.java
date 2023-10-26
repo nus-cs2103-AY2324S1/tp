@@ -6,7 +6,7 @@ import static seedu.lovebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.Comparator;
 
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * Lists all dates in the lovebook book to the user.
