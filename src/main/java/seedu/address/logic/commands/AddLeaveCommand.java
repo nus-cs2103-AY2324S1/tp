@@ -1,5 +1,13 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
+
+import java.time.LocalDate;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -7,15 +15,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.Person;
-
-import java.time.LocalDate;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
-
 /**
  * Adds leave to an existing employee in the list.
  */
@@ -129,9 +128,11 @@ public class AddLeaveCommand extends Command {
      */
     public String getLeaveStatusMessage(Person employee) {
         requireNonNull(employee);
-        return "Number of leaves left for this year: " + employee.getAnnualLeave().numOfLeaveLeftForCurrYear() + " / " +
-                employee.getAnnualLeave().value + "\nNumber of leaves left for next year: " +
-                employee.getAnnualLeave().numOfLeaveLeftForNextYear() + " / " +
-                employee.getAnnualLeave().value;
+        return "Number of leaves left for this year: " + employee.getAnnualLeave().numOfLeaveLeftForCurrYear()
+                + " / "
+                + employee.getAnnualLeave().value + "\nNumber of leaves left for next year: "
+                + employee.getAnnualLeave().numOfLeaveLeftForNextYear()
+                + " / "
+                + employee.getAnnualLeave().value;
     }
 }

@@ -1,5 +1,9 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,10 +18,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -127,7 +127,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(AnnualLeave.MESSAGE_CONSTRAINTS);
         }
         final AnnualLeave modelAnnualLeave = new AnnualLeave(getTotalNumOfLeaves(annualLeave));
-        modelAnnualLeave.leaveList = stringToLeaveListConverter(annualLeave);
+        modelAnnualLeave.setLeaveList(stringToLeaveListConverter(annualLeave));
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBankAccount, modelJoinDate, modelSalary,
                 modelAnnualLeave);

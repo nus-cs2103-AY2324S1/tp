@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.logic.parser.ParserUtil;
+import static java.lang.Integer.parseInt;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,9 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import seedu.address.logic.parser.ParserUtil;
 
 /**
  * Represents a Person's annual leave in the address book.
@@ -22,12 +22,12 @@ public class AnnualLeave {
                 + "It should not contain dashes or spaces.";
 
     public static final String MESSAGE_LEAVE_CONSTRAINTS =
-            "Number of days of annual leave taken should not exceed the total limit." +
-                    "You can only apply leave for this year and next year.";
+            "Number of days of annual leave taken should not exceed the total limit."
+                    + "You can only apply leave for this year and next year.";
 
     public static final String MESSAGE_EXPIRED_LEAVE = "Date of the leave that you are trying to add is already over.";
-    public static final String MESSAGE_DUPLICATE_LEAVE = "Some or all the leave(s) that you " +
-            "are trying to add has already been added. Please check again.";
+    public static final String MESSAGE_DUPLICATE_LEAVE = "Some or all the leave(s) that you "
+            + "are trying to add has already been added. Please check again.";
     public static final String MESSAGE_INVALID_LEAVE = "The end date of the leave must be after the start date.";
 
     /*
@@ -38,7 +38,7 @@ public class AnnualLeave {
 
     public final String value;
 
-    public List<LocalDate> leaveList;
+    private List<LocalDate> leaveList;
 
     /**
      * Constructs a {@code AnnualLeave}.
@@ -133,8 +133,8 @@ public class AnnualLeave {
                 numOfLeaveForNextYear += 1;
             }
         }
-        if (numOfLeaveForCurrYear + this.numOfLeaveUsedForCurrYear() <= this.getTotalNumOfLeave() &&
-                numOfLeaveForNextYear + this.numOfLeaveUsedForNextYear() <= this.getTotalNumOfLeave()) {
+        if (numOfLeaveForCurrYear + this.numOfLeaveUsedForCurrYear() <= this.getTotalNumOfLeave()
+                && numOfLeaveForNextYear + this.numOfLeaveUsedForNextYear() <= this.getTotalNumOfLeave()) {
             return true;
         }
         return false;
@@ -229,6 +229,10 @@ public class AnnualLeave {
         return "Working";
     }
 
+    /**
+     * Return the string for the dates of the leave for current year and next year.
+     * @return string for the dates of the leave for current year and next year
+     */
     public String printListLeaveTaken() {
         LocalDate currentDate = LocalDate.now();
         String datesForCurrYear = "Leave taken for current year: [ ";
@@ -244,6 +248,10 @@ public class AnnualLeave {
         datesForNextYear += " ]";
         return datesForCurrYear + datesForNextYear;
 
+    }
+
+    public void setLeaveList(List<LocalDate> list) {
+        this.leaveList = list;
     }
 
 }

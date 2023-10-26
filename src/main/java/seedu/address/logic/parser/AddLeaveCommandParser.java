@@ -1,18 +1,18 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddLeaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
 
 /**
  * Parses input arguments and creates a new AddLeaveCommand object
@@ -32,9 +32,9 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         }
         ArgumentMultimap argMultimapForAll = ArgumentTokenizer.tokenize(args, PREFIX_ADD_ANNUAL_LEAVE_ON,
                 PREFIX_ADD_ANNUAL_LEAVE_FROM, PREFIX_ADD_ANNUAL_LEAVE_TO);
-        if (argMultimapForAll.getValue(PREFIX_ADD_ANNUAL_LEAVE_ON).isPresent() &&
-                (argMultimapForAll.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).isPresent() ||
-                        argMultimapForAll.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).isPresent())) {
+        if (argMultimapForAll.getValue(PREFIX_ADD_ANNUAL_LEAVE_ON).isPresent()
+                && (argMultimapForAll.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).isPresent()
+                || argMultimapForAll.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).isPresent())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argMultimapForOn =
@@ -43,8 +43,8 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_ADD_ANNUAL_LEAVE_FROM, PREFIX_ADD_ANNUAL_LEAVE_TO);
         if (argMultimapForOn.getValue(PREFIX_ADD_ANNUAL_LEAVE_ON).isPresent()) {
             return singleDayLeaveHandler(argMultimapForOn);
-        } else if (argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).isPresent() &&
-                argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).isPresent()) {
+        } else if (argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).isPresent()
+                && argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).isPresent()) {
             return multipleDaysLeaveHandler(argMultimapForFromAndTo);
         } else {
             throw new ParseException(
@@ -92,8 +92,10 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         }
         try {
             Index index = ParserUtil.parseIndex(argMultimapForFromAndTo.getPreamble());
-            LocalDate startDate = ParserUtil.stringToDate(argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).get());
-            LocalDate endDate = ParserUtil.stringToDate(argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).get());
+            LocalDate startDate =
+                    ParserUtil.stringToDate(argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).get());
+            LocalDate endDate =
+                    ParserUtil.stringToDate(argMultimapForFromAndTo.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).get());
             return new AddLeaveCommand(index, startDate, endDate);
 
         } catch (ParseException pe) {
