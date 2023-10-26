@@ -10,8 +10,8 @@ title: Developer Guide
 ## **Acknowledgements**
 
 - Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-- App icon from http://www.mcdodesign.com/ by Susumu Yoshida
-- Some code adapted from http://code.makery.ch/library/javafx-8-tutorial/ by Marco Jakob
+- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
+- Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
 
 ---
 
