@@ -5,9 +5,25 @@ and enjoyable tool to enhance their dating experiences. Featuring user profile m
 compatibility ranking, and customizable filtering options, LoveBook enhances the efficiency and effectiveness of your
 online dating journey.
 
+- [Quick Start](#1-quick-start)
+- [Features](#2-features)
+   - [Listing current dates : `list`](#list-all-dates-list)
+   - [Deletion of dates: `delete`](#deletion-of-dates-delete)
+   - [Creation of new date: `add`](#creation-of-new-date-add)
+   - [Edit existing dates: `edit`](#edit-existing-dates-edit)
+   - [Random Date Generator: `random`](#random-date-generator-random)
+   - [Filter by Metric: `filter`](#filter-by-metric-filter)
+   - [Sorting list of dates by Metric: `sort`](#sorting-list-of-dates-by-metric-sort)
+   - [Getting a recommended date: `match`](#getting-a-recommended-date-match)
+   - [Setting the matching algorithm: `setPreference`](#setting-the-matching-algorithm-setPreference)
+   - [Exiting the program: `exit`](#exiting-the-program-exit)
+- [FAQ](#3-faq)
+- [Summary](#4-summary)
+- [Glossary](#5-glossary)
+
 --------------------------------------------------------------------------------------------------------------------
 
-# 1 Quick start
+# 1 [Quick start](#1-quick-start)
 
 1. Ensure that you have Java `11` or above installed in your Computer.
 
@@ -22,7 +38,7 @@ online dating journey.
    open the help window.<br>
    Some commands you can try:
 
-    * `list 1` : Lists all dates and their associated details
+    * `list` : Lists all dates and their associated details
 
     * `exit` : Exits the app
 
@@ -30,15 +46,15 @@ online dating journey.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 2 Features
+# 2 [Features](#2-features)
 
-### Listing current dates : `list`
+### [List all dates: `list`](#list-all-dates-list)
 
 Format: `list`
 
 Expected output: `Lists all dates and their associated details`
 
-### Deletion of dates: `delete`
+### [Deletion of dates: `delete`](#deletion-of-dates-delete)
 
 Format: `delete INDEX`
 
@@ -51,7 +67,7 @@ Expected output: `Deletes the date at the specified INDEX.`
 
 Output if error : `The index you have provided is out of bounds of your current list of dates`
 
-### Creation of new date
+### [Creation of new date: `add`](#creation-of-new-date-add)
 Format: `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME`
 Parameter constraints:
 - Name should be a non non-empty string.
@@ -69,7 +85,7 @@ Output if error: `Invalid command format! add: Adds a date to the LoveBook. Para
 height/HEIGHT income/INCOME horoscope/HOROSCOPE Example: add name/John Doe age/21 gender/M height/23124 income/3000
 horoscope/Libra`
 
-### Edit existing dates
+### [Edit existing dates: `edit`](#edit-existing-dates-edit)
 Format: `edit INDEX METRIC/NEW ARG`
 
 Parameter constraints:
@@ -85,14 +101,14 @@ Example:
 
 Expected Output: `Edited Date: Cleon Tan; Age: 12; Gender: M; Height: 123; Income: 3000; Horoscope: CANCER`
 
-### Random Date Generator
+### [Random Date Generator: `random`](#random-date-generator-random)
 Format: `random`
 
 Expected Output: `A random date entry is printed`
 
 Output if error: ```No dates in list!```
 
-### Filter by Metric
+### [Filter by Metric: `filter`](#filter-by-metric-filter)
 Format: `filter METRIC/ ARG`
 
 Parameter constraints:
@@ -108,7 +124,7 @@ Expected Output: `Lists the dates with the metric specified`
 
 Output if error: ```No dates found!```
 
-### Sorting list of dates by Metric
+### [Sorting list of dates by Metric: `sort`](#sorting-list-of-dates-by-metric-sort)
 Format: `sort METRIC/`
 
 Parameter constraints:
@@ -124,14 +140,14 @@ Expected Output: `Lists the dates in the order specified`
 
 Output if error: ```No dates found!```
 
-### Getting a recommended date: `match`
+### [Getting a recommended date: `match`](#getting-a-recommended-date-match)
 Format: `match`
 
 Expected Output: `List the most compatible date`
 
 Output if error: `No dates found!`
 
-### Setting the matching algorithm: `setPreference`
+### [Setting the matching algorithm: `setPreference`](#setting-the-matching-algorithm-setPreference)
 Format: `setPreference gender/M age/-3 height/-20 income/2000`
 
 Expected output: `Preferences have been updated!`
@@ -141,7 +157,7 @@ Output if error:
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 3 FAQ 
+# 3 [FAQ](#3-faq)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file with the file that
@@ -159,11 +175,23 @@ your data. In the event of a power outage, all your data will be safe.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 4 Summary
+# 4 [Summary](#4-summary)
 
-Action | Format, Examples |
---------|------------------|
+| Action                 | Format                                         | Examples                                 |
+|------------------------|------------------------------------------------|-------------------------------------------|
+| Listing current dates  | `list`                                         | `list`                                    |
+| Deletion of dates      | `delete INDEX`                                | `delete 2`                               |
+| Creation of new date   | `add name/NAME age/AGE gender/GENDER height/HEIGHT horoscope/HOROSCOPE income/INCOME` | `add name/John age/25 gender/M height/175 horoscope/Aries income/5000` |
+| Edit existing dates    | `edit INDEX METRIC/NEW ARG`                   | `edit 3 name/Cleon`                      |
+| Random Date Generator  | `random`                                       | `random`                                  |
+| Filter by Metric       | `filter METRIC/ARG`                           | `filter name/Cleon`                      |
+| Sorting list of dates  | `sort METRIC/`                                 | `sort name/`                              |
+| Getting a recommended date | `match`                                      | `match`                                   |
+| Setting the matching algorithm | `setPreference gender/M age/-3 height/-20 income/2000` | `setPreference gender/M age/-3 height/-20 income/2000` |
 
-# 5 Glossary
+
+--------------------------------------------------------------------------------------------------------------------
+
+# 5 [Glossary](#5-glossary)
 
 ### Mainstream OS: Windows, Linux, Unix, OS-X.
