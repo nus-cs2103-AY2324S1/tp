@@ -81,7 +81,7 @@ Adds a contact to OutBook.
 
 Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL l/LAST_CONTACTED_TIME s/STATUS [t/TAG]…​`
 
-* NAME, PHONE_NUMBER, EMAIL and LAST_CONTACTED_TIME are compulsory fields. STATUS and TAG are optional.
+* NAME, PHONE_NUMBER, and EMAIL are compulsory fields. STATUS, TAG and LAST_CONTACTED_TIME are optional.
 * PHONE_NUMBER must contain only numbers, and be at least 3 digits long.
 * EMAIL must be of the format local-part@domain and adhere to the following constraints:
   1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
@@ -177,13 +177,14 @@ Examples:
 ### Search for persons using contact fields: `findc`
 Find persons whose contact details match the keywords specified for at least 1 of these fields: name, phone, email, status, tag
 
-Format: `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [s/KEYWORDS] [t/KEYWORDS]`
+Format: `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [l/DATETIME] [s/KEYWORDS] [t/KEYWORDS]`
 
 * The search is case-insensitive. e.g `shop` will match `SHOP`
 * The order of the keywords does not matter. e.g. `Shop Meet` will match `Meet Shop`
 * For name, status and tags, only full words will be matched e.g. `Meet` will not match `Meeting`
 * For email, any characters (alphanumeric, special characters) will be matched e.g. `_` will match `m_e@gmail.com`
 * For phone, the entire length of the input digits will be matched e.g. `913` will match `90091300` but not `90103000`
+* For last contacted time, the input must adhere to the dd.MM.yyyy HHmm format e.g. 9th October 2023 10.30am will be `09.10.2023 1030`
 * For a single field, a Person must match at least one keyword to be returned as a result (i.e. `OR` search).
   e.g. `John Doe` will return `John Lee`, `James Doe`
 * If there are multiple fields specified, the Person must match at least one keyword in each field to be returned as a result (i.e. `AND` search).
