@@ -33,7 +33,10 @@ public class FindBandCommand extends Command {
         requireNonNull(model);
         model.updateFilteredBandMusicianList(predicate);
 
-        if (model.getFilteredBandList().size() > 1) {
+        // If the band exists, filtered band list is guaranteed to have only one band
+        // If filtered band list size > 1 or size == 1 but the band filtered does not pass the predicate,
+        // it means that the band name is invalid
+        if (model.getFilteredBandList().size() > 1 || !predicate.test(model.getFilteredBandList().get(0))) {
             throw new CommandException(Messages.MESSAGE_UNKNOWN_BAND);
         }
 
