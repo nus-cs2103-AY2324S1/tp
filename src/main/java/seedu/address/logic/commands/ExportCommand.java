@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.StringBuilder;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -31,12 +32,12 @@ public class ExportCommand extends Command {
      */
     public ExportCommand() {}
 
-    private String treatAsString(String str) {
+    public String treatAsString(String str) {
         return "\"" + str + "\"";
     }
 
-    private void appendPersons(FileWriter writer, Model model) throws IOException {
-        writer.append("Name,Phone,Email,Address,Tags,LinkedIn,Github,Remark,Status\n");
+    public StringBuilder appendPersons(Model model){
+        StringBuilder sb = new StringBuilder("Name,Phone,Email,Address,Tags,LinkedIn,Github,Remark,Status\n");
 
         for (Person p : model.getAddressBook().getPersonList()) {
             String name = treatAsString(p.getName().toString());
@@ -49,7 +50,7 @@ public class ExportCommand extends Command {
             String remark = treatAsString(p.getRemark().toString());
             String status = treatAsString(p.getStatus().toString());
 
-            writer.append(name)
+            sb.append(name)
                     .append(",").append(phone)
                     .append(",").append(email)
                     .append(",").append(address)
@@ -60,6 +61,7 @@ public class ExportCommand extends Command {
                     .append(",").append(status)
                     .append("\n");
         }
+        return sb;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class ExportCommand extends Command {
         requireNonNull(model);
 
         try (FileWriter writer = new FileWriter(defaulltPath)) {
-            appendPersons(writer, model);
+            writer.append(appendPersons(model));
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (IOException e) {
             throw new CommandException("Error exporting data: " + e.getMessage());

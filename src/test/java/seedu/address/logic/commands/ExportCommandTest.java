@@ -11,9 +11,8 @@ import seedu.address.model.ModelManager;
 
 
 public class ExportCommandTest {
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
-    private ExportCommand exportCommand = new ExportCommand();
+    private final Model model = new ModelManager();
+    private final ExportCommand exportCommand = new ExportCommand();
     @Test
     public void equalsMethod() {
         assert(new ExportCommand().equals(new ExportCommand()));
@@ -38,8 +37,18 @@ public class ExportCommandTest {
     }
 
     @Test
+    public void testAppendPersons() {
+        assert(exportCommand.appendPersons(model) instanceof StringBuilder);
+    }
+
+    @Test
+    public void testString() {
+        assert(exportCommand.treatAsString("5").equals("\"5\""));
+    }
+
+    @Test
     public void equals_sameObject_true() {
-        assertEquals(exportCommand, exportCommand);
+        assertEquals(exportCommand, new ExportCommand());
     }
 
     @Test
