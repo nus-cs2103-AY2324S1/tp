@@ -45,7 +45,7 @@ public class StudentTakesSubjectPredicateTest {
     @Test
     public void test_studentDoesNotTakeSubject_returnsFalse() {
         // Non-matching subject
-        StudentTakesSubjectPredicate predicate = new StudentTakesSubjectPredicate(new Subject("Mathematics"));
+        StudentTakesSubjectPredicate predicate = new StudentTakesSubjectPredicate(new Subject("Biology"));
         assertFalse(predicate.test(new PersonBuilder().withSubjects("English", "Chinese").build()));
     }
 
