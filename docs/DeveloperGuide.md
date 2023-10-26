@@ -386,6 +386,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a person.
 2. JABPro shows that command has been executed successfully.
 3. JABPro adds the person to the list of persons.
+4. JABPro shows the person added at the end of the list of persons.
 Use case ends.
 
 **Extensions**
@@ -638,3 +639,21 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## Adding a person while all persons are being shown 
+
+1. Adding a person while all persons are being shown  
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    
+   1. Test case:   
+      `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
+   
+      **Note**:  The current AddressBook cannot contain anyone named `John Poh`  
+      Expected: New person is added to the list. Details of the new person shown in the status message. 
+   2. Test case:   
+      `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
+      **Note**:  The current AddressBook should contain a person named `John Poh`
+      Expected: No person is added. Error details shown in the status message. List of persons remains the same.
+
+   
+
