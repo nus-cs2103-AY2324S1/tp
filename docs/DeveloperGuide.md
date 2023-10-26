@@ -173,7 +173,21 @@ The flow of how a `Command` is executed is illustrated with the `Schedule` Comma
 
 #### Implementation Overview
 
-Upon entering the `Schedule Command`
+<img src="images/ScheduleClassDiagram.png" width="400"/>
+
+Upon entering the `Schedule Command`, 
+- The user input will be parsed by `AddressBookParser`. The `schedule` command word will be parsed and an instance of a `ScheduleCommandParser` will be created.
+- The `ScheduleCommandParser` will parse the user arguments, creating a `ScheduleCommand` that has a single `Index` and `Appointment`. 
+- The `ScheduleCommand` will then be executed by the `LogicManager`, which then adds an `Appointment` to the specified person and returns the `CommandResult` containing the success message.
+
+**Design Considerations**
+
+<img src="images/ScheduleItemClassDiagram.png" width="300"/> 
+
+- When a Person is first added to the contact book, a Person will have a `NullAppointment`. A `Person` have a compulsory 1 to 1 relationship with ScheduleItem. This is to ensure a `Person` will not have multiple appointments scheduled. 
+- When a `ScheduleCommand` is executed, the Person will be associated with an `Appointment` object that contains the appointment name and date.
+- There is only one static instance of `NullAppointment` which is returned when the method `#getNullAppointment` is called. 
+- The abstract class ScheduleItem is created so that LSP is adhered to.
 
 
 ### Gather Emails Feature
