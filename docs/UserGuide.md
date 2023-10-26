@@ -164,21 +164,16 @@ Parameters:
 <div markdown="span" class="alert alert-primary">
   :exclamation: <b>Important:</b>
 Only specific commands are available in the profile view page. 
-The list of available commands are: 
-<ul>
-  <li> <code>help</code> </li>
-  <li> <code>save</code> </li>
-  <li> <code>exit</code> command to <b>exit the profile view page</b> </li>
-</ul>
+The list of available commands are <code>help</code>, <code>save</code>, and <code>exit</code> commands. 
 </div> 
 
-Editing a fosterer’s details in profile view page:
+#### Editing a fosterer’s details in profile view page:
 
 1. Enter a fosterer’s profile view page with `view INDEX` 
-2. Type in the name of the field you want to edit onto the command box, for example name. This will make the textbox visible next to the name field and automatically set the text cursor to the textbox.
-3. Edit the original value - if it exists - to a new value, for example John.
+2. Type in the name of the field you want to edit onto the command box, for example `name`. This will make the textbox visible next to the `name` field and automatically set the text cursor to the textbox.
+3. Edit the original value - if it exists - to a new value, for example `John`.
 4. Press enter to return the text cursor back to the command box.
-5. Type in save  command and enter to save the changes of the fosterer. 
+5. Type in `save` command and enter to save the changes of the fosterer. 
 
 Example:
 * `list` followed by `view 2` to view the profile of the 2nd fosterer in the address book.
@@ -259,9 +254,9 @@ If the parameters are not provided, <b><code>edit INDEX</code> operates the same
 <br>
 
 Examples:
-*  `list` followed by `edit 3 n/John` edits the name of the 3rd fosterer in the address book to John.
-*  `list` followed by `edit 1 p/12345678 animal/Bob` edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
-*  `list` followed by `edit 2` changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
+*  `find` or `list` followed by `edit 3 n/John` edits the name of the 3rd fosterer in the address book to John.
+*  `find` or `list` followed by `edit 1 p/12345678 animal/Bob` edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
+*  `find` or `list` followed by `edit 2` changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
 
 Expected output (if successful):
 Format 1: 
@@ -274,7 +269,7 @@ Format 2:
 ```agsl
 Viewing Fosterer: [NAME]; Phone: [NUMBER]; Email: [EMAIL]; Address: [ADDRESS]; Housing: [HOUSING]; Availability: [AVAILABILITY]; Animal name: [ANIMAL NAME]; Animal type: [ANIMAL TYPE]; Tags: [TAG]
 ```
-*  The UI generates a pop-up window where details of the fosterer are shown.
+*  The UI generates a window where details of the fosterer are shown.
 *  Aside from the details added by the add command, here is the list of fields the pop-up window shows:
     *  NOTE : Notes for the user, examples include but are not limited to (optional and non-exhaustive):
         *  Health condition of the animal
@@ -287,12 +282,12 @@ Empty compulsory values disable the save command that saves the edited fosterer 
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:** Edit may cause information loss. 
-Before you type the save command, make sure there are no accidental overwrites with faulty information. 
+Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 </div>
 
 Expected Output (failure):
 ```agsl
-Oops! There seems to be an error, please check the format of your input again.
+The fosterer index provided is invalid. 
 ```
 
 ### Deleting a fosterer : `delete`
@@ -319,7 +314,7 @@ Fosterers Jerry Chee, John Doe, and Mary Ann are successfully deleted!
 
 Expected output (fail):
 ```agsl
-Oops! Invalid fosterer index provided, please check again.
+The fosterer index provided is invalid. 
 ```
 ### Sorting fosterers: `sort`
 
