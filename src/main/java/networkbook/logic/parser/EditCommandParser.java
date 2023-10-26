@@ -115,7 +115,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             result = generatePriorityAction(argMultimap);
         }
 
-        requireNonNull(result);
+        assert result != null;
         return result;
     }
 

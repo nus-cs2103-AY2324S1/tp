@@ -3,7 +3,7 @@ package networkbook.logic.commands.edit;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static networkbook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static networkbook.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static networkbook.testutil.Assert.assertThrows;
+import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,6 +19,7 @@ import networkbook.model.UserPrefs;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
 import networkbook.model.person.Link;
+import networkbook.model.person.Name;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Specialisation;
@@ -32,14 +33,15 @@ import networkbook.testutil.TypicalPersons;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-    private static final EditAction VALID_EDIT_ACTION = editPersonDescriptor -> {};
+    private static final EditAction VALID_EDIT_ACTION =
+            editPersonDescriptor -> editPersonDescriptor.setName(new Name("test"));
     private final Model model = new ModelManager(TypicalPersons.getTypicalNetworkBook(), new UserPrefs());
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new EditCommand(null, VALID_EDIT_ACTION));
-        assertThrows(NullPointerException.class, () -> new EditCommand(EditCommandUtil.VALID_INDEX, null));
-        assertThrows(NullPointerException.class, () -> new EditCommand(null, null));
+    public void constructor_null_throwsAssertionError() {
+        assertThrowsAssertionError(() -> new EditCommand(null, VALID_EDIT_ACTION));
+        assertThrowsAssertionError(() -> new EditCommand(EditCommandUtil.VALID_INDEX, null));
+        assertThrowsAssertionError(() -> new EditCommand(null, null));
     }
 
     @Test
