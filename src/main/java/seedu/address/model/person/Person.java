@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.lead.Lead;
+import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
 /**
