@@ -24,19 +24,24 @@ public class StatsCurrentCommand extends StatsCommand {
 
     /**
      * Returns a list of fosterers who are currently fostering.
+     * A fosterer is considered currently fostering if and only if they are not available, and
+     * currently has a dog or has a cat in their care, and animal name is not nil.
      */
-    public List<Person> getCurrentFosterers(List<Person> fosterers) {
+    protected List<Person> getCurrentFosterers(List<Person> fosterers) {
         return fosterers.stream()
                 .filter(fosterer ->
                         fosterer.getAvailability()
-                                .equals(Availability.NOT_AVAILABLE))
+                                .equals(Availability.NOT_AVAILABLE) &&
+                                !fosterer.getAnimalName().fullName.equals("nil") &&
+                                fosterer.getAnimalType().equals(AnimalType.CURRENT_DOG) ||
+                                fosterer.getAnimalType().equals(AnimalType.CURRENT_CAT))
                 .collect(Collectors.toList());
     }
 
     /**
      * Returns the number of fosterers from the given list who are fostering dogs.
      */
-    public int getCurrentDogCount(List<Person> fosterers) {
+    protected int getCurrentDogCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->
                         fosterer.getAnimalType()
@@ -47,7 +52,7 @@ public class StatsCurrentCommand extends StatsCommand {
     /**
      * Returns the number of fosterers from the given list who are fostering cats.
      */
-    public int getCurrentCatCount(List<Person> fosterers) {
+    protected int getCurrentCatCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->
                         fosterer.getAnimalType()
@@ -84,5 +89,19 @@ public class StatsCurrentCommand extends StatsCommand {
                 fosteringDogsPercent, fosteringCatsCount, fosteringCatsPercent);
 
         return new CommandResult(resultSummary + "\n" + resultDetails);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof StatsCurrentCommand)) {
+            return false;
+        }
+
+        return true;
     }
 }

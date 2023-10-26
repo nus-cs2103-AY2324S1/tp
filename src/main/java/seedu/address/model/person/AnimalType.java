@@ -18,10 +18,16 @@ public class AnimalType {
 
     public static final String VALIDATION_REGEX_AVAILABLE = "^(able\\.Dog|able\\.Cat|nil)$";
     public static final String VALIDATION_REGEX_NOT_AVAILABLE = "^(current\\.Dog|current\\.Cat|nil)$";
-    public static final AnimalType ABLE_CAT = new AnimalType("able.Cat", Availability.AVAILABLE);
-    public static final AnimalType ABLE_DOG = new AnimalType("able.Dog", Availability.AVAILABLE);
-    public static final AnimalType CURRENT_CAT = new AnimalType("current.Cat", Availability.NOT_AVAILABLE);
-    public static final AnimalType CURRENT_DOG = new AnimalType("current.Dog", Availability.NOT_AVAILABLE);
+
+    public static final String ABLE_CAT_WORD = "able.Cat";
+    public static final String ABLE_DOG_WORD = "able.Dog";
+    public static final String CURRENT_CAT_WORD = "current.Cat";
+    public static final String CURRENT_DOG_WORD = "current.Dog";
+    public static final AnimalType ABLE_CAT = new AnimalType(ABLE_CAT_WORD, Availability.AVAILABLE);
+    public static final AnimalType ABLE_DOG = new AnimalType(ABLE_DOG_WORD, Availability.AVAILABLE);
+    public static final AnimalType CURRENT_CAT = new AnimalType(CURRENT_CAT_WORD, Availability.NOT_AVAILABLE);
+    public static final AnimalType CURRENT_DOG = new AnimalType(CURRENT_DOG_WORD, Availability.NOT_AVAILABLE);
+
     public static final String VALIDATION_REGEX_NIL = "^(nil)$";
 
 

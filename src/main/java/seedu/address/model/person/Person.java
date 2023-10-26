@@ -32,6 +32,8 @@ public class Person {
     private final Housing housing;
     private final AnimalType animalType;
 
+    public static final String NIL_WORD = "nil";
+
     /**
      * Every field must be present and not null.
      */

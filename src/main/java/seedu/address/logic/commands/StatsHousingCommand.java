@@ -23,7 +23,7 @@ public class StatsHousingCommand extends StatsCommand {
     /**
      * Returns the number of fosterers who stay in HDB.
      */
-    public int getHdbCount(List<Person> fosterers) {
+    protected int getHdbCount(List<Person> fosterers) {
         return (int) fosterers.stream()
                 .filter(fosterer ->
                         fosterer.getHousing().equals(Housing.HDB))
@@ -33,7 +33,7 @@ public class StatsHousingCommand extends StatsCommand {
     /**
      * Returns the number of fosterers who stay in Condos.
      */
-    public int getCondoCount(List<Person> fosterers) {
+    protected int getCondoCount(List<Person> fosterers) {
         Housing condo = new Housing("Condo");
         return (int) fosterers.stream()
                 .filter(fosterer ->
@@ -44,7 +44,7 @@ public class StatsHousingCommand extends StatsCommand {
     /**
      * Returns the number of fosterers who stay in Landed.
      */
-    public int getLandedCount(List<Person> fosterers) {
+    protected int getLandedCount(List<Person> fosterers) {
         Housing landed = new Housing("Landed");
         return (int) fosterers.stream()
                 .filter(fosterer ->
@@ -76,5 +76,19 @@ public class StatsHousingCommand extends StatsCommand {
                 condoCount, condoPercent, landedCount, landedPercent, unknownCount, unknownPercent);
 
         return new CommandResult(result);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof StatsHousingCommand)) {
+            return false;
+        }
+
+        return true;
     }
 }

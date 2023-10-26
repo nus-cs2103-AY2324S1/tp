@@ -398,7 +398,7 @@ Examples:
 
 2. No fosterers in the list
 ```agsl
-There are 0 fosterers listed. Please add some fosterers to view statistics.
+No fosterers to generate statistics from. Please add some fosterers!
 ```
 
 ### Clearing all entries : `reset`
