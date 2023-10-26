@@ -122,6 +122,28 @@ To edit name and address of your tutee:
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the list.
 
+### Marking a person as paid : `paid`
+
+**Description** Mark the specific tutee as paid in the list.
+
+**Format**: `paid INDEX`
+
+**Expected Input**:
+
+* **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
+
+**Expected Output when the command succeeds**: MARK PERSON PAID SUCCESS, Paid: true
+
+**Expected Output when the command fails**: Invalid command format! paidExample: paid 1
+
+Examples:
+* `list` followed by `paid 2` marks the 2nd person in the list.
+
+### Show all the unpaid persons : `list unpaid`
+
+**Description** : Shows all the unpaid tutees in your list.
+
+Format: `list unpaid`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,9 +161,11 @@ To be added soon
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                 |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECT d/DAY b/BEGIN e/END` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                              |
-| **Edit**   | `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END`<br> e.g.,`edit p/91234567 d/Sun`                                                                     |
-| **List**   | `list`|
+| Action          | Format, Examples                                                                                                                                                                  |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **add**         | `add n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECT d/DAY b/BEGIN e/END` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 e/1600` |
+| **delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                               |
+| **edit**        | `edit INDEX n/NAME p/PHONE_NUMBER a/ADDRESS s/SUBJECTS d/DAY b/BEGIN e/END`<br> e.g.,`edit p/91234567 d/Sun`                                                                      |
+| **list**        | `list`                                                                                                                                                                            |
+| **paid**        | `paid INDEX`<br> e.g., `paid 1`                                                                                                                                                   |
+| **list unpaid** | `list unpaid`                                                                                                                                                                     |
