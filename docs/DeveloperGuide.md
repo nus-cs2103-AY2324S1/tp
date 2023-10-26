@@ -154,6 +154,38 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### List features
+Two types of list commands, `list students` and `list attendance`, have been implemented.
+`list students` allows users to return to the full list of students.
+`list attendance` allows users to view a summary of the attendances for each week.
+
+#### Implementation
+Both list commands are parsed with `ListCommandParser`. If parsed successfully, it returns either 
+a `ListStudentsCommand` or `ListAttendanceCommand`.
+
+The following is a class diagram depicting `ListCommand`, `ListStudentsCommand` and `ListAttendanceCommand`:
+![ListCommandClassDiagram](images/ListCommandClassDiagram.png)
+
+Shown below is the sequence diagram of `ListStudentsCommand` when `list students` is entered by the User:
+![ListStudentsSeqDiagram](images/ListStudentsSeqDiagram.png)
+
+The following sequence diagram shows how `ListAttendanceCommand` works:
+![ListAttendanceSeqDiagram](images/ListAttendanceSeqDiagram.png)
+In this example, the user enters `list attendance w/1 tg/G2`.
+
+#### Design considerations:
+**Aspect: Class Structure of ListCommands:**
+
+* **Alternative 1 (current choice):** Separating ListAttendanceCommand and ListStudentsCommand into two classes that extend from ListCommand.
+    * Pros: Improves OOP, allows for additional List commands.
+    * Cons: ListCommand currently does not have any functionality, might be redundant.
+* **Alternative 2:** Only using ListCommand, splitting Attendance and Students into the 2 cases.
+    * Pros: Simplifies class structure.
+    * Cons: Reduces OOP and extensibility.
+
+_{more aspects and alternatives to be added}_
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

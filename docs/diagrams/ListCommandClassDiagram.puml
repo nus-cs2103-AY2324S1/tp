@@ -1,0 +1,18 @@
+@startuml
+ListCommand <|-- ListAttendanceCommand
+ListCommand <|-- ListStudentsCommand
+
+ListStudentsCommand : +equals()
+ListStudentsCommand : +execute()
+
+class ListAttendanceCommand {
+  -week: Week
+  -absencePredicate: AbsentFromTutorialPredicate
+  -tag: Optional<Tag>
+  -tutorialPredicate: ContainsTagPredicate
+  +getAttendanceSummary()
+  +getUnmarkedPersons()
+  +equals()
+  +execute()
+}
+@enduml
