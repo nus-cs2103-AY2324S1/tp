@@ -112,6 +112,8 @@ public class FlashlingoParser {
             throw new ParseException(MESSAGE_NOT_IN_REVIEW_SESSION);
         case SwitchCommand.COMMAND_WORD:
             return new SwitchCommand();
+        case RevealCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_NOT_IN_REVIEW_SESSION);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

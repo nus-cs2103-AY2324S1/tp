@@ -137,34 +137,72 @@ To start a review session, user simply needs to type in `start` command, and a n
 
 Format: `start`
 
+Output: `Review Session has been started.`
 
-### Ending the current flashcard session : `end`
+**Note** 
+* Users are not allowed to start a new review session if they are already in one. In this case,   
+`Sorry, currently you are in a review session. Your command is not supported.`   
+`Please end the review session first.` will be prompted.
+* If there are no words to review, users will not be able to start review session. `There's no FlashCards to review. Well done!`  
+will be displayed.
+
+
+### Ending the current review session : `end`
 
 Ends the current flashcard session and returns to the main menu.
 
 Format: `end`
 
-### Revealing the other side (translation) of the flash card : `reveal`
+Output: `Review Session has ended.`
 
-To show the meaning of 
+**Note** 
+* Users are not allowed to end a review session if the session hasn't been started yet. The message of `You are not in a review session.`  
+will be given.
+
+### Revealing translation of the flashcard : `reveal`
+
+To show the translation of the flashcard in 
 
 Format: `reveal`
 
-Output :
-![img.png](images/Reveal.png)
+Output : `The translation is [CURRENT FLASHCARD'S TRANSLATION]`  
+
+Examples:![img.png](images/Reveal.png)
+
+**Note**
+* `reveal` command will only take effect during review session. Otherwise, error message`You are not in a review session.`  
+will be printed out.
 
 ### Indicating user has memorized the word : `yes`
 
-Marks the word as memorized and pushes the word into the next retention stage.
+Marks the word as memorized and advances the word into the next retention stage. If there are still remaining words to review,
+they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
 Format: `yes`
 
+Output: ![img.png](images/Yes.png)
+or
+![img.png](images/Yes2.png)
+if there's no word left in the review session.
+
+**Note**
+* `yes` command will only take effect during review session. Otherwise, error message`You are not in a review session.`  
+  will be printed out.
 
 ###  Indicating user has forgotten the word : `no`
 
-Marks the word as not grasped and leaves it in its current retention stage.
+Marks the word as not grasped and leaves it in its current retention stage. If there are still remaining words to review,
+they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
 Format: `no`
+
+Output: ![img.png](images/No.png)
+or
+![img.png](images/No2.png)
+if there's no word left in the review session.
+**Note**
+* `no` command will only take effect during review session. Otherwise, error message`You are not in a review session.`  
+  will be printed out.
 
 ### Show learning statistics : `stats`
 
