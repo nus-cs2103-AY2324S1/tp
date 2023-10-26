@@ -42,21 +42,6 @@ public class MarkAttendanceCommand extends Command {
     private final String reason;
 
     /**
-     * Constructs a MarkAttendanceCommand to mark the specified student's attendance as present.
-     *
-     * @param identifiers The list of student's name or ID.
-     * @param isPresent The attendance status.
-     * @param week The week of the attendance.
-     */
-
-    public MarkAttendanceCommand(List<String> identifiers, boolean isPresent, Week week) {
-        this.identifiers = identifiers;
-        this.isPresent = isPresent;
-        this.week = week;
-        this.reason = null;
-    }
-
-    /**
      * Constructs a MarkAttendanceCommand to mark the specified student's attendance as absent.
      *
      * @param identifiers The student's name or ID.

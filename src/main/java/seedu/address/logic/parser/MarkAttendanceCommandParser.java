@@ -58,7 +58,7 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
         Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
 
         if (isPresent) {
-            return new MarkAttendanceCommand(identifiers, true, week);
+            return new MarkAttendanceCommand(identifiers, true, week, null);
         } else {
             String reason = argMultimap.getValue(PREFIX_REASON).get();
             return new MarkAttendanceCommand(identifiers, false, week, reason);
