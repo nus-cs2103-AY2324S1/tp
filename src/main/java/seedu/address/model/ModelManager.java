@@ -40,7 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.userHistory = new UserHistoryManager();
-        userHistory.initialiseHistory(new Pair(addressBook.getPersonList(), addressBook.getAppointmentList()));
+        userHistory.initialiseHistory(new Pair<>(addressBook.getPersonList(), addressBook.getAppointmentList()));
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
     }

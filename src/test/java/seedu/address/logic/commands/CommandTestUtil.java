@@ -13,7 +13,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -70,6 +73,10 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+    public static final String TYPICAL_ILLNESS_1 = "AIDS";
+    public static final String TYPICAL_ILLNESS_2 = "COVID19";
+
+    public static final String INVALID_ILLNESS_1 = "COVID-19";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
@@ -148,6 +155,25 @@ public class CommandTestUtil {
         model.updateFilteredAppointmentList(x -> x.isSameAppointment(appointment));
 
         assertEquals(1, model.getFilteredAppointmentList().size());
+    }
+
+    /**
+     * Creates new TypicalIllnessSet
+     */
+    public static Set<Tag> createTypicalIllnessSet() {
+        Set<Tag> set = new HashSet<>();
+        set.add(new Tag(TYPICAL_ILLNESS_1));
+        return set;
+    }
+
+    /**
+     * Creates new TypicalIllnessesSet
+     */
+    public static Set<Tag> createTypicalIllnessesSet() {
+        Set<Tag> set = new HashSet<>();
+        set.add(new Tag(TYPICAL_ILLNESS_1));
+        set.add(new Tag(TYPICAL_ILLNESS_2));
+        return set;
     }
 
 }

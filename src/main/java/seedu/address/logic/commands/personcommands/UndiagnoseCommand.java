@@ -70,8 +70,9 @@ public class UndiagnoseCommand extends Command {
         String illnessesNotOriginallyThere = getIllnessesNotOriginallyThere(personToUndiagnose, illnesses);
         StringBuilder feedbackToUser = new StringBuilder(String.format(MESSAGE_UNDIAGNOSE_PERSON_SUCCESS,
                 Messages.format(undiagnosedPerson)));
-        feedbackToUser.append("\n");
+
         if (!illnessesNotOriginallyThere.isEmpty()) {
+            feedbackToUser.append("\n");
             feedbackToUser.append(MESSAGE_ILLNESS_NOT_THERE);
             feedbackToUser.append(illnessesNotOriginallyThere);
         }
@@ -120,6 +121,7 @@ public class UndiagnoseCommand extends Command {
         }
 
         UndiagnoseCommand otherUndiagnoseCommand = (UndiagnoseCommand) other;
-        return targetIndex.equals(otherUndiagnoseCommand.targetIndex);
+        return targetIndex.equals(otherUndiagnoseCommand.targetIndex)
+                && illnesses.equals(otherUndiagnoseCommand.illnesses);
     }
 }
