@@ -17,6 +17,7 @@ import seedu.address.model.person.Score;
 import seedu.address.model.person.Status;
 import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -138,7 +139,8 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return UniqueTagList.getTag(tag);
+//        return new Tag(tag);
     }
 
     /**
@@ -151,6 +153,16 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static String[] parseTagCategories(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        String listTags = tags.toString();
+        String cleanedList = listTags.replaceAll("[\\[\\]]", "");
+        String[] tagParams = cleanedList.split(",\\s*");
+        return tagParams;
+
     }
 
     /**

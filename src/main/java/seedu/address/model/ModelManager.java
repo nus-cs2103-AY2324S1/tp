@@ -14,7 +14,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -158,6 +162,11 @@ public class ModelManager implements Model {
     @Override
     public Index getLastViewedPersonIndex() {
         return lastViewedPersonIndex;
+    }
+
+    @Override
+    public void addTagToCategory(String category, String tagName) {
+        addressBook.addTagToCategory(category, tagName);
     }
 
 
