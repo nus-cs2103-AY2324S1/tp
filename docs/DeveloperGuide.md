@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# KeepInTouch Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -299,6 +299,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                                        | delete notes to a contact       | remove additional information that are no longer needed about that contact in the notes   |
 | `* *`    | user who has some event to do             | add an event                         | record an event with start time and also end time, location and any additional information like what to do during the event   |
 | `* *`    | user who has/had some event to do      | delete an event                     | remove an event after it is obsolete, cancelled or no longer needed to be recorded |
+| `* *` | tidy user | tag a contact with a label | keep my contacts oraganised and categorised |
 | `* * *` | user who finishes using the application  | exit the program                   | exit the program normally while ensuring all my data is currectly saved |
 
 *{More to be added}*
@@ -347,8 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User inputs a contact that does not exist.
 
-    * 1a1. KeepInTouch shows a message indicating the non-existent contact.
-
+    * 1a1. KeepInTouch shows a message indicating that the contact cannot be found.
       Use case ends.
 
 * 2a. The contact list is empty.
@@ -391,12 +391,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC06 - Add notes to a contact**
+**Use case: UC06 - Add a note to a contact**
 
 **MSS**
 
-1.  User requests to add notes to a contact.
-2.  KeepInTouch adds the notes to the contact.
+1.  User requests to add a note to a contact.
+2.  KeepInTouch adds the note to the contact.
 
     Use case ends.
 
@@ -410,16 +410,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. User inputs a contact that does not exist.
 
-    * 1b1. KeepInTouch shows a message indicating the non-existent contact.
+    * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
 
       Use case resumes at step 1.
 
-**Use case: UC07 - Delete notes from a contact**
+**Use case: UC07 - Delete a note from a contact**
 
 **MSS**
 
-1.  User requests to delete notes from a contact.
-2.  KeepInTouch deletes the notes from the contact.
+1.  User requests to delete a note from a contact.
+2.  KeepInTouch deletes the note from the contact.
 
     Use case ends.
 
@@ -433,14 +433,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. User inputs a contact that does not exist.
 
-    * 1b1. KeepInTouch shows a message indicating the non-existent contact.
+    * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
 
       Use case ends.
 
-* 1c. User inputs notes that does not exist.
+* 1c. User inputs a note that does not exist.
 
-    * 1c1. KeepInTouch shows a message indicating the non-existent notes.
-
+    * 1c1. KeepInTouch shows a message indicating that the note cannnot be found
       Use case ends.
 
 **Use case: UC08 - Add an event**
@@ -479,11 +478,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. User inputs an event that does not exist.
 
-    * 1b1. KeepInTouch shows a message indicating the non-existent event.
+    * 1b1. KeepInTouch shows a message indicating that the event cannot be found.
 
       Use case ends.
 
-**Use case: UC10 - Exit the program**
+**Use case: UC10 - Adding tags to a contact**
+
+**MSS**
+
+1.  User requests add tags to a contact.
+2.  KeepInTouch appends that tags to the specified contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs a non-alphanumeric tag.
+
+    * 1a1. KeepInTouch shows a message indicating that tags should be alphanumeric.
+
+      Use case resumes at step 1.
+
+* 1b. User inputs a contact that does not exist
+
+    * 1b1. KeepInTouch shows a message indicating the contact cannot be found.
+
+      Use case resumes at step 1.
+
+**Use case: UC11 - Exit the program**
 
 **MSS**
 
