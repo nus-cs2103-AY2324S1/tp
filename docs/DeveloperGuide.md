@@ -116,6 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -161,6 +162,14 @@ It adds an contact by calling `Model#addContact`, which adds the newly created c
 The following activity diagram summarises what happens when a user executes a new command.
 
 ![AddActivityDiagram](images/AddActivityDiagram.png)
+
+### Maintaining sorting while supporting filtering
+
+The contact list is automatically kept in a constantly sorted state by leveraging `SortedList` from the JavaFX Collections library. Since the class works with `ObservableList`s, which the Model's `Contacts` also utilises, we are able to leverage this class more easily.
+
+The Model obtains an unsorted, unmodifiable list from `Contacts` and wraps it in a `SortedList`. A custom `Comparator` is provided to define our own sorting order, to facilitate the propagation of changes from the nested list to the sorted list.
+
+For operability with the find feature, this sorted list is further wrapped in a `FilteredList` to limit the scope of what the user sees as needed. A dummy filter `Predicate` which allows all contacts to pass is used as the default filter. It is this filtered list that the model stores in a field.
 
 ### \[Proposed\] Undo/redo feature
 
