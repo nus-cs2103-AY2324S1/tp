@@ -18,8 +18,10 @@ public class StatusContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        StatusContainsKeywordsPredicate firstPredicate = new StatusContainsKeywordsPredicate(firstPredicateKeywordList);
-        StatusContainsKeywordsPredicate secondPredicate = new StatusContainsKeywordsPredicate(secondPredicateKeywordList);
+        StatusContainsKeywordsPredicate firstPredicate =
+                new StatusContainsKeywordsPredicate(firstPredicateKeywordList);
+        StatusContainsKeywordsPredicate secondPredicate =
+                new StatusContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));

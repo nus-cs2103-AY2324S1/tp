@@ -19,14 +19,17 @@ public class MeetingTagContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        MeetingTagContainsKeywordsPredicate firstPredicate = new MeetingTagContainsKeywordsPredicate(firstPredicateKeywordList);
-        MeetingTagContainsKeywordsPredicate secondPredicate = new MeetingTagContainsKeywordsPredicate(secondPredicateKeywordList);
+        MeetingTagContainsKeywordsPredicate firstPredicate =
+                new MeetingTagContainsKeywordsPredicate(firstPredicateKeywordList);
+        MeetingTagContainsKeywordsPredicate secondPredicate =
+                new MeetingTagContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        MeetingTagContainsKeywordsPredicate firstPredicateCopy = new MeetingTagContainsKeywordsPredicate(firstPredicateKeywordList);
+        MeetingTagContainsKeywordsPredicate firstPredicateCopy =
+                new MeetingTagContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -62,7 +65,8 @@ public class MeetingTagContainsKeywordsPredicateTest {
     @Test
     public void test_locationDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        MeetingTagContainsKeywordsPredicate predicate = new MeetingTagContainsKeywordsPredicate(Collections.emptyList());
+        MeetingTagContainsKeywordsPredicate predicate =
+                new MeetingTagContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new MeetingBuilder().withTags("Alice").build()));
 
         // Non-matching keyword
@@ -70,7 +74,8 @@ public class MeetingTagContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new MeetingBuilder().withTags("Alice", "Bob").build()));
 
         // Keywords match others
-        predicate = new MeetingTagContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        predicate =
+                new MeetingTagContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new MeetingBuilder().withTags("Alice")
                 .build()));
     }
