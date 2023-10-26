@@ -83,4 +83,8 @@ public class ExportCommand extends Command {
     public boolean equals(Object other) {
         return other instanceof ExportCommand;
     }
+
+    public String toString() {
+        return "ExportCommand";
+    }
 }
