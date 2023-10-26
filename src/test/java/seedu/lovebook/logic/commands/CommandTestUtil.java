@@ -18,8 +18,8 @@ import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.NameContainsKeywordsPredicate;
+import seedu.lovebook.model.date.Date;
+import seedu.lovebook.model.date.NameContainsKeywordsPredicate;
 import seedu.lovebook.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -39,7 +39,10 @@ public class CommandTestUtil {
     public static final String VALID_INCOME_BOB = "2000";
     public static final String VALID_HOROSCOPE_AMY = "TAURUS";
     public static final String VALID_HOROSCOPE_BOB = "LIBRA";
-
+    public static final String VALID_STAR_AMY = "false";
+    public static final String VALID_STAR_BOB = "false";
+    public static final String VALID_AVATAR_AMY = "4";
+    public static final String VALID_AVATAR_BOB = "4";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String AGE_DESC_AMY = " " + PREFIX_AGE + VALID_AGE_AMY;

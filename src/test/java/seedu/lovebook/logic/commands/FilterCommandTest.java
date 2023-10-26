@@ -28,7 +28,7 @@ import seedu.lovebook.logic.parser.Prefix;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
 import seedu.lovebook.model.UserPrefs;
-import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
+import seedu.lovebook.model.date.MetricContainsKeywordPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.

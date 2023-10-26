@@ -5,12 +5,12 @@ import static java.util.Objects.requireNonNull;
 import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.commons.util.StringUtil;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Income;
-import seedu.lovebook.model.person.Name;
-import seedu.lovebook.model.person.horoscope.Horoscope;
+import seedu.lovebook.model.date.Age;
+import seedu.lovebook.model.date.Gender;
+import seedu.lovebook.model.date.Height;
+import seedu.lovebook.model.date.Income;
+import seedu.lovebook.model.date.Name;
+import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

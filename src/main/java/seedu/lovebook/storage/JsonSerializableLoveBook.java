@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.lovebook.commons.exceptions.IllegalValueException;
 import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.ReadOnlyLoveBook;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * An Immutable LoveBook that is serializable to JSON format.

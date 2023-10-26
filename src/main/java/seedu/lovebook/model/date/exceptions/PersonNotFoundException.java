@@ -1,4 +1,4 @@
-package seedu.lovebook.model.person.exceptions;
+package seedu.lovebook.model.date.exceptions;
 
 /**
  * Signals that the operation is unable to find the specified date.

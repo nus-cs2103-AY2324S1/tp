@@ -1,7 +1,7 @@
 package seedu.lovebook.testutil;
 
 import seedu.lovebook.model.LoveBook;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * A utility class to help with building LoveBook objects.

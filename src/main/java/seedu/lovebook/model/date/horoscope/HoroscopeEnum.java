@@ -1,4 +1,4 @@
-package seedu.lovebook.model.person.horoscope;
+package seedu.lovebook.model.date.horoscope;
 
 /**
  * An enumeration representing the 12 zodiac signs.

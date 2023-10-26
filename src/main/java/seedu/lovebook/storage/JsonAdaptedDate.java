@@ -4,14 +4,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.lovebook.commons.exceptions.IllegalValueException;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Income;
-import seedu.lovebook.model.person.Name;
-import seedu.lovebook.model.person.Star;
-import seedu.lovebook.model.person.horoscope.Horoscope;
+import seedu.lovebook.model.date.Age;
+import seedu.lovebook.model.date.Avatar;
+import seedu.lovebook.model.date.Date;
+import seedu.lovebook.model.date.Gender;
+import seedu.lovebook.model.date.Height;
+import seedu.lovebook.model.date.Income;
+import seedu.lovebook.model.date.Name;
+import seedu.lovebook.model.date.Star;
+import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
  * Jackson-friendly version of {@link Date}.
@@ -19,6 +20,7 @@ import seedu.lovebook.model.person.horoscope.Horoscope;
 class JsonAdaptedDate {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Date's %sg field is missing!";
+    public static final String INVALID_AVATAR = "Date's avatar is invalid!";
 
     private final String name;
     private final String age;
@@ -27,6 +29,7 @@ class JsonAdaptedDate {
     private final String income;
     private final String horoscope;
     private final String star;
+    private final String avatar;
 
     /**
      * Constructs a {@code JsonAdaptedDate} with the given date details.
@@ -34,7 +37,8 @@ class JsonAdaptedDate {
     @JsonCreator
     public JsonAdaptedDate(@JsonProperty("name") String name, @JsonProperty("age") String age,
             @JsonProperty("gender") String gender, @JsonProperty("height") String height,
-             @JsonProperty("income") String income, @JsonProperty("horoscope") String horoscope) {
+            @JsonProperty("income") String income, @JsonProperty("horoscope") String horoscope,
+            @JsonProperty("avatar") String avatar) {
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -42,6 +46,7 @@ class JsonAdaptedDate {
         this.income = income;
         this.horoscope = horoscope;
         this.star = "false";
+        this.avatar = avatar;
     }
 
     /**
@@ -55,6 +60,7 @@ class JsonAdaptedDate {
         income = source.getIncome().value;
         horoscope = source.getHoroscope().value;
         star = source.getStar().isStarred;
+        avatar = source.getAvatar().value;
     }
 
     /**
@@ -112,9 +118,17 @@ class JsonAdaptedDate {
         }
         final Horoscope modelHoroscope = new Horoscope(horoscope);
 
-        Star modelStar = new Star(star);
+        if (avatar == null) {
+            throw new IllegalValueException(INVALID_AVATAR);
+        }
+        if (!Avatar.isValidAvatar(avatar)) {
+            throw new IllegalValueException(Avatar.MESSAGE_CONSTRAINTS);
+        }
+        final Avatar modelAvatar = new Avatar(avatar);
+        final Star modelStar = new Star(star);
 
-        return new Date(modelName, modelAge, modelGender, modelHeight, modelIncome, modelHoroscope, modelStar);
+        return new Date(modelName, modelAge, modelGender, modelHeight,
+                modelIncome, modelHoroscope, modelStar, modelAvatar);
     }
 
 }
