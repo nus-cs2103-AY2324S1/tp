@@ -11,7 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.student.Student;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -19,25 +20,27 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final WellNus wellNus;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Appointment> filteredAppointments;
+    private final FilteredList<Student> filteredStudents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyWellNus addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.wellNus = new WellNus(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredStudents = new FilteredList<>(this.wellNus.getStudentList());
+        this.filteredAppointments = new FilteredList<>(this.wellNus.getAppointmentList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new WellNus(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -78,54 +81,87 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setAddressBook(ReadOnlyWellNus addressBook) {
+        this.wellNus.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyWellNus getAddressBook() {
+        return wellNus;
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return wellNus.hasStudent(student);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteStudent(Student target) {
+        wellNus.removeStudent(target);
+        logger.fine("Deleting appointments which contain the name: " + target.getName());
+        wellNus.removeRelatedAppointments(target.getName());
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addStudent(Student student) {
+        wellNus.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        wellNus.setStudent(target, editedStudent);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
+        requireAllNonNull(appointment);
+        return wellNus.hasAppointment(appointment);
+    }
+
+    @Override
+    public void addAppointment(Appointment appointment) {
+        wellNus.addAppointment(appointment);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+    }
+
+    @Override
+    public void deleteAppointment(Appointment target) {
+        wellNus.removeAppointment(target);
+    }
+
+    //=========== Filtered Student List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Student> getFilteredStudentList() {
+        return filteredStudents;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Appointment} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return filteredAppointments;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
+        requireNonNull(predicate);
+        filteredAppointments.setPredicate(predicate);
     }
 
     @Override
@@ -140,9 +176,9 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return wellNus.equals(otherModelManager.wellNus)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredStudents.equals(otherModelManager.filteredStudents);
     }
 
 }

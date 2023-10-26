@@ -4,8 +4,8 @@ title: User Guide
 ---
 
 WellNUS is a **desktop application used by NUS Counsellors to manage and schedule appointments with their student clients**
-It is optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+It is optimised for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, WellNUS can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -42,8 +42,8 @@ If you can type fast, AB3 can get your contact management tasks done faster than
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-e.g. in `add student n/NAME c/CONTACT_NUMBER`, `NAME` and `CONTACT_NUMBER` are parameters 
-which can be used as `add student n/John Doe c/98172645`.
+e.g. in `add n/NAME c/CONTACT_NUMBER`, `NAME` and `CONTACT_NUMBER` are parameters 
+which can be used as `add n/John Doe c/98172645`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -68,39 +68,85 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-
 ### Adding a student: `add`
 
 Adds a student with his/her relevant details.
 
-Format: `add student n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS`
-
+Format: `add n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS`
 
 **Parameters**:
 1. Name
    - Alphabetical characters only
 2. Contact Number
-   - Numerical characters only
+   - Numerical characters only, must be 8 characters long
 3. Home Address
    - No restrictions
 
 Examples:
-* `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
-* `add student n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
+* `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
+* `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
 
 
+### Deleting a student: `delete`
 
-### View all students //TODO
+Deletes an existing student.
 
-### Delete a student //TODO
+Format: `delete <INDEX>`
 
-### Tag student to risk level //TODO
-
-### Add an appointment //TODO
-
-### View all appointments //TODO
+**Parameters**:
+1. Appointment Index
+    - Index must be an integer more than 0
 
 
+### Assigning risk status to student (to be implemented)
+Tags a student with a risk level based on their current mental health status, categorizing them as high, medium, low tag_student <index> <RISK_LEVEL>
+   
+Format: `tag_student <INDEX> <RISK_LEVEL>`
+   
+**Parameters**:
+1. Student Index
+    - The index of an existing student in the system
+2. RISK LEVEL 
+   - One of the following HIGH, MEDIUM, LOW
+
+### Scheduling an appointment: `schedule`
+
+Schedules a new appointment for a student.
+
+Format: `schedule d/DESCRIPTION s/DATETIME n/STUDENT`
+
+**Parameters**:
+1. Date/Time of appointment
+   - Must be in one of the following formats: `yyyy-MM-dd HH:mm`, or `HH:mm`. If in `HH:mm` the appointment date is set on the date of creation
+2. Name
+    - Alphabetical characters only
+
+Examples:
+- `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon`
+- `schedule d/family issues consultation s/18:30 n/Kiat`
+
+### Cancelling an appointment: `cancel`
+
+Cancels an existing appointment.
+
+Format: `cancel <INDEX>`
+
+**Parameters**:
+1. Appointment Index
+    - Numerical characters only
+
+Examples:
+* `cancel 2`
+
+### Viewing all students/appointments: `view`
+
+Shows a list of all students or appointments, depending on specified input.
+
+Format: `view g/CATEGORY`
+
+**Parameters**:
+1. Category
+    - Only 'students' or 'appointments'
 
 ### Exiting the program : `exit`
 
@@ -114,8 +160,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
@@ -139,15 +184,16 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary //TODO: update your respective things
+## Command summary 
 
-Action | Format, Examples
---------|------------------
-**Add student** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add student n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
-**View Students** | `clear`
-**Delete student** | `delete INDEX`<br> e.g., `delete 3`
-**Tag student to risk level** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Add appointment** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**View appointments** | `list`
-**Help** | `help`
-**Exit** | `exit`
+| Action                    | Format, Examples                                                                                                       |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------|
+| **Add**                   | `add n/NAME c/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`              |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
+| **Tag**                   | `tag_student INDEX RISK_LEVEL`<br> e.g.,`tag_student 4 HIGH`                                                           |
+| **Schedule**              | `schedule d/DESCRIPTION s/DATETIME n/NAME_OF_STUDENT`<br> e.g., `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon` |
+| **Cancel**                | `cancel INDEX`<br> e.g., `cancel 3`                                                                                    |
+| **View**                  | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                     |
+| **Help**                  | `help`                                                                                                                 |
+| **Exit**                  | `exit`                                                                                                                 |
+

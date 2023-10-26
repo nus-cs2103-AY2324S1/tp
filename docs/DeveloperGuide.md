@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
@@ -102,7 +102,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -121,12 +121,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -149,7 +149,12 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+## **WellNus Implementation**
 
+
+
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -172,11 +177,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -184,7 +189,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -229,7 +234,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -274,39 +279,221 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​    | I want to …​                                 | So that I can…​                                                                      |
 |----------|------------|----------------------------------------------|--------------------------------------------------------------------------------------|
-| `* * *`  | counsellor | add student profile                          | keep track of each student's information                                             |
-| `* * *`  | counsellor | set student risk profile                     | monitor the risk profile of each student                                             |
-| `* * *`  | counsellor | delete student notes                         | remove student in the event they do not require any further consultation             |
-| `* * *`  | counsellor | view student notes                           | keep track of notes for future reference                                             |
-| `* *`    | counsellor | edit student notes                           | update student particulars should there be any changes                               |
+| `* * *`  | counsellor | add a student profile                        | keep track of each student's information                                             |
+| `* * `   | counsellor | set or edit a student's risk profile         | monitor the risk profile of each student                                             |
+| `* * *`  | counsellor | remove a student profile                     | remove student in the event they do not require any further consultation             |
+| `* * *`  | counsellor | view a student profile                       | look up a students relevant information, consultation notes etc.                     |
+| `* * *`  | counsellor | view all students as a list                  | look up all students that require consultation                                       |
+| `* *`    | counsellor | edit a student's profile                     | update student particulars should there be any changes                               |
+| `* *`    | counsellor | filter list by types of student              | look up students in particular categories                                            |
+| `* *`    | counsellor | find students by name or ID                  | look up particular students                                                          |
+| `* *`    | counsellor | schedule an appointment                      | keep track of my appointments in the application                                     |
+| `* *`    | counsellor | cancel an appointment                        | remove any appointments that have been cancelled                                     |
 | `* *`    | counsellor | view my appointments                         | look through my timetable for the day/week                                           |
-| `* *`    | counsellor | filter student notes                         | look up students in particular categories                                            |
-| `* *`    | counsellor | sort appointments by date                    | organise my appointments and plan my schedule accordingly                            |
+| `* *`    | counsellor | edit appointment info                        | plan my schedule accordingly if there are any last-minute changes                    |
+| `* *`    | counsellor | sort appointments by date                    | organise my appointments and plan my timetable accordingly                           |
 | `*`      | counsellor | block out busy times                         | prevent clashes in scheduling                                                        |
 | `*`      | counsellor | prevent double booking                       | prevent clashes in scheduling                                                        |
-| `* *`    | counsellor | set appointments                             | keep track of my appointments in the application                                     |
 | `*`      | counsellor | link students to the respective appointments | have easy access to the student profile that can help me prepare for the appointment |
-| `* *`    | counsellor | view appointment as a list                   | look at all my appointments at a glance to plan my schedule                          |
-| `* *`    | counsellor | edit appointment info                        | plan my schedule accordingly if there are any last-minute changes                    |
 | `*`      | counsellor | add todos items                              | keep track of todos for each student                                                 |
 | `*`      | counsellor | view todos items                             | view todos for students at a glance                                                  |
 | `*`      | counsellor | link todos items to students                 | have easy access to the contact information for the students                         |
 | `*`      | counsellor | sort todos items by dateline                 | organise my appointments and plan my schedule accordingly                            |
-| `* *`    | counsellor | search by name or ID                         | look up particular students                                                          |
-| `* *`    | counsellor | tag students                                 | highlight students with specific issues.                                             |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `WellNUS` and the **Actor** is the `counselor`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a student #UC01**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User requests to add a new student to the list
+4.  WellNUS adds the student, and shows confirmation message
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The student name/contact number already exists.
+  * 3a1. WellNUS shows an error message. 
+    * Use case ends.
+
+* 3b. The given name is invalid (non-alphabetical input) or contact number is invalid (non-numerical input).
+  * 3b1. WellNUS shows an error message.
+    * Use case ends.
+
+
+**Use case: View existing students #UC02**
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index that can be used for other use cases, eg. edit student info
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+  * Use case ends.
+
+
+**Use case: Delete an existing student #UC03**
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index
+4.  Delete user by specifying the index
+5.  Get confirmation of successful delete
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The student index is invalid.
+  * 3a1. WellNUS shows an error message.
+    * Use case ends.
+
+
+**Use case: Tag student to risk level #UC04**
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index
+4.  Tag/change student risk level using the student index
+5.  Information gets updated for future reference
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. The student index is invalid.
+  * 4a1. WellNUS shows an error message.
+    * Use case ends.
+
+* 4b. The risk level is invalid (not high/medium/low)
+  * 4b1. WellNUS shows an error message.
+    * Use case ends.
+
+
+**Use case: Schedule an appointment #UC05**
+
+**MSS**
+
+1.  User requests to list appointments
+2.  WellNUS shows the list of appointments, along with some basic information like time and student
+3.  User requests to schedule a new appointment to the list
+4.  WellNUS adds the appointment 
+5.  WellNUS shows confirmation message 
+    
+    Use case ends.
+
+**Extensions**
+
+* 3a. The student index is invalid.
+  * 3a1. WellNUS shows an error message.
+    * Use case ends.
+
+* 3b. The given time is invalid (wrong time format).
+  * 3b1. WellNUS shows an error message.
+    * Use case ends.
+
+* 3c. The given time overlaps with an existing appointment.
+  * 3c1. WellNUS shows an error message.
+    * Use case ends.
+
+**Use case: View existing appointments #UC06**
+
+**MSS**
+
+1.  User chooses to list appointments
+2.  WellNUS shows the list of appointments
+3.  User can view appointment information such as student involved and time of appointment
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. User unable to view appointment information as list is empty
+
+    Use case ends.
+
+**Use case: Cancel an existing appointment #UC07**
+
+**MSS**
+
+1.  User chooses to list appointments
+2.  WellNUS shows the list of appointments
+3.  User cancels an appointment at chosen index
+4.  WellNUS deletes the appointment with index specified by user and display status
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. WellNUS detects an error in the entered index
+
+    Use case resumes from step 1.
+
+
+**Use case: Tag student to appointment #UC08**
+
+**MSS**
+
+1.  User chooses to list appointments
+2.  WellNUS shows the list of appointments
+3.  User chooses to list students
+4.  WellNUS shows the list of students
+5.  User tags student to appointment
+6.  WellNUS tags student to appointment and display status
+    
+    Use case ends.
+
+**Extensions**
+* 5a. WellNUS detects an error in either the entered student index or appointment index
+    
+  Use case resumes from step 1.
+
+**Use case: Add a ToDo #UC09**
+
+**MSS**
+
+1.  User requests to list existing ToDos
+2.  WellNUS shows the list of ToDos, along with some basic information like dateline and student
+3.  User requests to add a new ToDo to the list
+4.  WellNUS adds the ToDo, and shows confirmation message
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given student name does not exist.
+
+    * 3a1. WellNUS shows an error message.
+
+    Use case ends.
+
+* 3b. The given student name is invalid (non-alphabetical input) / dateline is invalid (past dateline, invalid format).
+
+    * 3b1. WellNUS shows an error message.
+
+    Use case ends.
+
+**Use case: View existing ToDos #UC10**
+
+**MSS**
+
+1.  User requests to list ToDos
+2.  WellNUS shows the list of ToDos
+3.  Users can find information like dateline, student, etc.
 
     Use case ends.
 
@@ -316,11 +503,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Delete an existing ToDo #UC11**
+
+**MSS**
+
+1.  User requests to list ToDos
+2.  WellNUS shows the list of ToDos
+3.  User can find ToDos index
+4.  Delete ToDos by specifying the index
+5.  Get confirmation of successful delete
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The ToDo index is invalid.
+
+    * 3a1. WellNUS shows an error message.
+
+    Use case ends.
+
+**Use case: Tag student to ToDo #UC12**
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index
+4.  Tag/change student to ToDo
+5.  Information gets updated for future reference
+
+    Use case ends.
+
+
+**Extensions**
+
+
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. WellNUS shows an error message.
 
-      Use case resumes at step 2.
+    Use case ends.
+
+* 3b. The referenced ToDo is invalid.
+
+    * 3a1. WellNUS shows an error message.
+
+    Use case ends.
 
 *{More to be added}*
 
@@ -328,12 +557,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Cross-Platform Compatibility:
     - Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Scalability and Performance:
-    - Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+    - Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
     - Should support efficient data retrieval and manipulation for the specified contact volume.
 3.  Usability and Efficiency:
     - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
     be able to perform the majority of tasks more quickly using _CLI_ commands compared to using a mouse on the _GUI_.
-    - The _CLI_ interface should prioritise efficiency by providing clear and concise commands, minimising unncessary prompts,
+    - The _CLI_ interface should prioritise efficiency by providing clear and concise commands, minimising unnecessary prompts,
     and offering time-saving shortcuts.
 4. Updates and Maintenance:
     - Updates should not disrupt the user's workflow or data.
@@ -376,17 +605,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
