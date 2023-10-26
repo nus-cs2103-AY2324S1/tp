@@ -85,10 +85,10 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * Returns true if any of the prefixes contains present but blank {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
     public boolean anyValuesBlank(Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> getValue(prefix).orElseGet(() -> "notBlank").isBlank());
+        return Stream.of(prefixes).anyMatch(prefix -> getValue(prefix).orElseGet(() -> "emptyNotBlank").isBlank());
     }
 }
