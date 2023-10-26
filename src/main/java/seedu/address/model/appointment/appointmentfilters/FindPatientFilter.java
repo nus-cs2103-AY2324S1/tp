@@ -1,6 +1,7 @@
 package seedu.address.model.appointment.appointmentfilters;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 
 import java.util.List;
@@ -44,5 +45,9 @@ public class FindPatientFilter implements Predicate<Appointment> {
         }
 
         return false;
+    }
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("keywords", KEYWORDS).toString();
     }
 }

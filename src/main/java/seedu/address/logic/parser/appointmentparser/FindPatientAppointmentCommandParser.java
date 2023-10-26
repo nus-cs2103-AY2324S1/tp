@@ -3,6 +3,11 @@ package seedu.address.logic.parser.appointmentparser;
 import seedu.address.logic.commands.appointmentcommands.FindPatientAppointmentCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.appointmentfilters.FindPatientFilter;
+
+import java.util.Arrays;
+
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class FindPatientAppointmentCommandParser implements Parser<FindPatientAppointmentCommand> {
     /**
@@ -13,6 +18,14 @@ public class FindPatientAppointmentCommandParser implements Parser<FindPatientAp
      */
     @Override
     public FindPatientAppointmentCommand parse(String userInput) throws ParseException {
-        return null;
+        String trimmedArgs = userInput.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPatientAppointmentCommand.MESSAGE_USAGE));
+        }
+
+        String[] nameKeywords = trimmedArgs.split("\\s+");
+
+        return new FindPatientAppointmentCommand(new FindPatientFilter(Arrays.asList(nameKeywords)));
     }
 }

@@ -13,7 +13,7 @@ import static java.util.Objects.requireNonNull;
 
 public class FindPatientAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "a-find patient";
+    public static final String COMMAND_WORD = "appointment-find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all appointments belonging to the patients" +
             " whose names are provided. The keywords are case-insensitive and may just contain part of the patient's" +

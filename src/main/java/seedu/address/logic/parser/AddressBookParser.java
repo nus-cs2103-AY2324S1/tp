@@ -16,6 +16,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.appointmentcommands.AppointmentsCommand;
 import seedu.address.logic.commands.appointmentcommands.CancelCommand;
+import seedu.address.logic.commands.appointmentcommands.FindPatientAppointmentCommand;
 import seedu.address.logic.commands.appointmentcommands.RescheduleCommand;
 import seedu.address.logic.commands.appointmentcommands.ScheduleCommand;
 import seedu.address.logic.commands.personcommands.AddCommand;
@@ -24,6 +25,7 @@ import seedu.address.logic.commands.personcommands.EditCommand;
 import seedu.address.logic.commands.personcommands.FindCommand;
 import seedu.address.logic.commands.personcommands.ListCommand;
 import seedu.address.logic.parser.appointmentparser.CancelCommandParser;
+import seedu.address.logic.parser.appointmentparser.FindPatientAppointmentCommandParser;
 import seedu.address.logic.parser.appointmentparser.RescheduleCommandParser;
 import seedu.address.logic.parser.appointmentparser.ScheduleCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -106,6 +108,9 @@ public class AddressBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
+
+        case FindPatientAppointmentCommand.COMMAND_WORD:
+            return new FindPatientAppointmentCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
