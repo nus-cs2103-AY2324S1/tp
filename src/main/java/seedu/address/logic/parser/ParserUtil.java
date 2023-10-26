@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -235,7 +235,7 @@ public class ParserUtil {
             Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
             Matcher matcher = pattern.matcher(searchParam);
             if (matcher.find()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
             }
         }
         return searchParams;
