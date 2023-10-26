@@ -159,6 +159,23 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Overview 
+
+The basic idea of what happens when a user types a command: 
+1. The LogicManager executes method is called and takes in the user's input.
+2. The user's input is then parsed by `AddressBookParser`, which then creates the respective `XYZCommandParser`. 
+3. `XYZCommandParser` parses the additional arguments provided by the user and creates and `XYZCommand`.
+4. `XYZCommand` then communicates with ModelManager to execute and returns a `CommandResult` which is displayed to the user.
+
+
+The flow of how a `Command` is executed is illustrated with the `Schedule` Command below.
+### Schedule Command
+
+#### Implementation Overview
+
+Upon entering the `Schedule Command`
+
+
 ### Gather Emails Feature
 
 The **Gather Emails** feature in our software system is a critical functionality designed to efficiently collect email addresses. This feature is facilitated through the `GatherCommand` class, which plays a central role in the process.
