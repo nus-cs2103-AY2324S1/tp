@@ -7,9 +7,9 @@ skinparam ClassBackgroundColor #FFFFAA
 title Initial state
 
 package List {
-    class Person1 as "<u>p0:Person</u>"
-    class Person2 as "<u>p1:Person</u>"
-    class Person3 as "<u>p2:Person</u>"
+    class Person1 as "<u>p1:Person</u>"
+    class Person2 as "<u>p2:Person</u>"
+    class Person3 as "<u>p3:Person</u>"
 }
 Person1 -[hidden]right-> Person2
 Person2 -[hidden]right-> Person3

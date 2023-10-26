@@ -241,9 +241,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### View Command Feature
 
-The view mechanism is facilitated by ``DoConnek Pro``
-
-It allows the user to view the details of a specific patient or specialist.
+The view command feature allows the user to view the details of a specific patient or specialist.
 
 Given below is an example usage scenario and how the view mechanism behaves at each step.
 
@@ -258,8 +256,7 @@ input.
 ![ViewState2](images/ViewState2.png)
 
 
-Step 3. The UI now update the change of the selected person and display the current selected person
-details.
+Step 3. The UI now updates the view panel to display the newly selected person and their details.
 
 The sequence diagram below shows how the view operation works:
 ![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
@@ -554,12 +551,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `view 1`<br>
-       Expected: First person is viewed from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First person is selected to be viewed. Details of the viewed person shown in the View Person Panel.
+Timestamp in the status bar is updated.
 
     1. Test case: `view 0`<br>
        Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
