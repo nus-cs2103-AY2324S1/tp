@@ -85,7 +85,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TA
 
 * **ALL** the fields must be provided.
 * The FIRST NAME and LAST NAME fields are case-sensitive.
-* SCHOOL EMAIL and STUDENT NUMBER needs to be unique
+* STUDENT NUMBER needs to be unique
 
 <box type="tip" seamless>
 
@@ -132,6 +132,22 @@ Examples:
 * `tag A1234567N /add t/Java` adds the Java tag to specified student.
 * `tag A1234567N /delete t/shy` removes the shy tag from the specified student.
 * `tag A1234567N t/` clear all tags from the specified student.
+
+### Adding comment to a student : `comment`
+
+Adds a comment to an existing student in the address book.
+
+Format: `comment s/STUDENT_NUMBER c/COMMENT`
+
+* The STUDENT NUMBER must be valid and exist.
+* The COMMENT must be a valid string.
+* Comment can only be performed after the student is created.
+* Edit commands will not impact the comment tagged to the student.
+
+Examples:
+* `comment s/A0249112A c/This student is very hardworking.`
+* `comment s/A0249112A c/This student is very hardworking and smart.`
+
 
 ### Lookup students : `lookup`
 
@@ -270,11 +286,11 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-
 | Action     | Format, Examples                                                                                                                                   |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague` |
 | **Clear**  | `clear`                                                                                                                                            |
+| **Comment**| `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.` |
 | **Delete** | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                            |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                  |
 | **Tag**    | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                            |
@@ -285,3 +301,4 @@ _Details coming soon ..._
 | **Help**   | `help`                                                                                                                                             |
 | **Load**   | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                     |
 | **Config** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                        |
+
