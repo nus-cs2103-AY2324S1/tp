@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingStatus;
 import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.tag.Tag;
@@ -102,7 +103,7 @@ public class EditMeetingCommand extends Command {
         LocalDateTime updatedEnd = editMeetingDescriptor.getEnd().orElse(meetingToEdit.getEnd());
         Set<Attendee> attendees = meetingToEdit.getAttendees();
         Set<Tag> updatedTags = editMeetingDescriptor.getTags().orElse(meetingToEdit.getTags());
-        Boolean status = meetingToEdit.getStatus();
+        MeetingStatus status = meetingToEdit.getStatus();
 
         if (!MeetingTime.isValidMeetingTime(updatedStart, updatedEnd)) {
             throw new CommandException(MeetingTime.MESSAGE_CONSTRAINTS);

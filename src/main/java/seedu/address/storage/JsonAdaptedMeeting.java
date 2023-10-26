@@ -16,7 +16,7 @@ import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingTime;
-import seedu.address.model.meeting.Status;
+import seedu.address.model.meeting.MeetingStatus;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.tag.Tag;
 
@@ -126,12 +126,12 @@ class JsonAdaptedMeeting {
 
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Status.class.getSimpleName()));
+                    MeetingStatus.class.getSimpleName()));
         }
         if (status != Boolean.FALSE.toString() && status != Boolean.TRUE.toString()) {
-            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MeetingStatus.MESSAGE_CONSTRAINTS);
         }
-        final Boolean modelStatus = Boolean.parseBoolean(status);
+        final MeetingStatus modelStatus = new MeetingStatus(Boolean.parseBoolean(status));
 
         return new Meeting(modelTitle, modelLocation, modelStart, modelEnd, modelAttendees, modelTags, modelStatus);
     }

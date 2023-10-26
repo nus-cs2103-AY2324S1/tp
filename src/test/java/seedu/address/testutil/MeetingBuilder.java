@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.model.meeting.Attendee;
 import seedu.address.model.meeting.Location;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingStatus;
 import seedu.address.model.meeting.Title;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -31,7 +32,7 @@ public class MeetingBuilder {
     private LocalDateTime end;
     private Set<Attendee> attendees;
     private Set<Tag> tags;
-    private Boolean status;
+    private MeetingStatus status;
 
     /**
      * Creates a {@code MeetingBuilder} with the default details.
@@ -43,7 +44,7 @@ public class MeetingBuilder {
         end = DEFAULT_END;
         attendees = new LinkedHashSet<>();
         tags = new HashSet<>();
-        status = DEFAULT_STATUS;
+        status = new MeetingStatus(DEFAULT_STATUS);
     }
 
     /**
@@ -110,7 +111,7 @@ public class MeetingBuilder {
      * Sets the {@code Status} of the {@code Meeting} that we are building.
      */
     public MeetingBuilder withLocation(Boolean status) {
-        this.status = status;
+        this.status = new MeetingStatus(status);
         return this;
     }
 

@@ -24,19 +24,19 @@ public class Meeting {
     private final MeetingTime meetingTime;
     private final Set<Attendee> attendees;
     private final Set<Tag> tags;
-    private final Status status;
+    private final MeetingStatus status;
 
     /**
      * Every field must be present and not null.
      */
     public Meeting(Title title, Location location, LocalDateTime start, LocalDateTime end, Set<Attendee> attendees,
-            Set<Tag> tags, Boolean status) {
+            Set<Tag> tags, MeetingStatus status) {
         this.title = title;
         this.location = location;
         this.meetingTime = new MeetingTime(start, end);
         this.attendees = new LinkedHashSet<>(attendees);
         this.tags = new HashSet<>(tags);
-        this.status = new Status(status);
+        this.status = status;
     }
 
     public Title getTitle() {
@@ -59,12 +59,8 @@ public class Meeting {
         return meetingTime;
     }
 
-    public Boolean getStatus() {
-        return status.get();
-    }
-
-    public void mark() {
-        status.mark();
+    public MeetingStatus getStatus() {
+        return status;
     }
 
     public boolean withinSpecifiedTime(LocalDateTime start, LocalDateTime end) {

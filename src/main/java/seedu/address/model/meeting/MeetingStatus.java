@@ -3,36 +3,16 @@ package seedu.address.model.meeting;
 /**
  * Contains a Boolean representing whether a meeting is completed.
  */
-public class Status {
+public class MeetingStatus {
 
     public static final String MESSAGE_CONSTRAINTS = "Status must be exactly 'true' or 'false'";
-    private Boolean isComplete;
+    public final Boolean isComplete;
 
     /**
      * Constructs a {@code Status} field representing whether a meeting is complete.
      */
-    public Status(Boolean isComplete) {
+    public MeetingStatus(Boolean isComplete) {
         this.isComplete = isComplete;
-    }
-
-    /**
-     * Returns the current status
-     */
-    public Boolean get() {
-        return isComplete;
-    }
-
-    /**
-     * Changes the completion status to true
-     *
-     * @throws IllegalStateException if it is already completed
-     */
-    public void mark() {
-        if(isComplete) { 
-            throw new IllegalStateException();
-        }
-
-        isComplete = true;
     }
 
     @Override
@@ -46,11 +26,11 @@ public class Status {
             return true;
         }
 
-        if (!(other instanceof Status)) {
+        if (!(other instanceof MeetingStatus)) {
             return false;
         }
 
-        Status completed = (Status) other;
+        MeetingStatus completed = (MeetingStatus) other;
         return isComplete.equals(completed.isComplete);
     }
 
