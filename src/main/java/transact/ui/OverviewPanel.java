@@ -104,11 +104,15 @@ public class OverviewPanel extends UiPart<Region> {
      */
     private void updateMonthData() {
         transactionList.stream().forEach((Transaction t) -> {
+            YearMonth yearMonth = YearMonth.from(t.getDate().getDate().toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate());
+            if (monthDataMap.get(yearMonth) == null) {
+                monthDataMap.put(yearMonth, new MonthData(0, 0));
+            }
             if (t.getTransactionType() == TransactionType.EXPENSE) {
                 // Increase Expense
-                monthDataMap.get(YearMonth.from(t.getDate().getDate().toInstant()
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDate())).increaseExpense(t.getAmount().getValue().doubleValue());
+                monthDataMap.get(yearMonth).increaseExpense(t.getAmount().getValue().doubleValue());
             } else {
                 // Increase Revenue
                 monthDataMap.get(YearMonth.from(t.getDate().getDate().toInstant()
