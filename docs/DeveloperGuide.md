@@ -492,7 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC08 - Get help on commands**
+**Use case: UC10 - Get help on commands**
 
 **MSS**
 
