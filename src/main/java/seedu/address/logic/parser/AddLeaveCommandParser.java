@@ -10,9 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Parses input arguments and creates a new AddLeaveCommand object
@@ -29,6 +27,13 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
+        }
+        ArgumentMultimap argMultimapForAll = ArgumentTokenizer.tokenize(args, PREFIX_ADD_ANNUAL_LEAVE_ON,
+                PREFIX_ADD_ANNUAL_LEAVE_FROM, PREFIX_ADD_ANNUAL_LEAVE_TO);
+        if (argMultimapForAll.getValue(PREFIX_ADD_ANNUAL_LEAVE_ON).isPresent() &&
+                (argMultimapForAll.getValue(PREFIX_ADD_ANNUAL_LEAVE_FROM).isPresent() ||
+                        argMultimapForAll.getValue(PREFIX_ADD_ANNUAL_LEAVE_TO).isPresent())) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLeaveCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argMultimapForOn =
                 ArgumentTokenizer.tokenize(args, PREFIX_ADD_ANNUAL_LEAVE_ON);

@@ -129,7 +129,9 @@ public class AddLeaveCommand extends Command {
      */
     public String getLeaveStatusMessage(Person employee) {
         requireNonNull(employee);
-        return "Number of leaves left for this year: " + employee.getAnnualLeave().numOfLeaveLeft() + " / " +
+        return "Number of leaves left for this year: " + employee.getAnnualLeave().numOfLeaveLeftForCurrYear() + " / " +
+                employee.getAnnualLeave().value + "\nNumber of leaves left for next year: " +
+                employee.getAnnualLeave().numOfLeaveLeftForNextYear() + " / " +
                 employee.getAnnualLeave().value;
     }
 }

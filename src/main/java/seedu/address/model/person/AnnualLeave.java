@@ -20,7 +20,8 @@ public class AnnualLeave {
                 + "It should not contain dashes or spaces.";
 
     public static final String MESSAGE_LEAVE_CONSTRAINTS =
-            "Number of days of annual leave taken should not exceed the total limit.";
+            "Number of days of annual leave taken should not exceed the total limit." +
+                    "You can only apply leave for this year and next year.";
 
     public static final String MESSAGE_EXPIRED_LEAVE = "Date of the leave that you are trying to add is already over.";
     public static final String MESSAGE_DUPLICATE_LEAVE = "Some or all the leave(s) that you " +
@@ -116,9 +117,22 @@ public class AnnualLeave {
      * @return true or false depending on whether the total number of days of leave is exceeded
      */
     public boolean isValidAddLeave(LocalDate startDate, LocalDate endDate) {
+        LocalDate currentDate = LocalDate.now();
+        if (endDate.getYear() > currentDate.getYear() + 1) {
+            return false;
+        }
         long numOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
-        int totalNumOfLeaves = parseInt(value);
-        if (numOfDays + this.leaveList.size() <= totalNumOfLeaves) {
+        int numOfLeaveForCurrYear = 0;
+        int numOfLeaveForNextYear = 0;
+        for (int i = 0; i < numOfDays; i++) {
+            if (startDate.plusDays(i).getYear() == currentDate.getYear()) {
+                numOfLeaveForCurrYear += 1;
+            } else if (startDate.plusDays(i).getYear() == currentDate.getYear() + 1) {
+                numOfLeaveForNextYear += 1;
+            }
+        }
+        if (numOfLeaveForCurrYear + this.numOfLeaveUsedForCurrYear() <= this.getTotalNumOfLeave() &&
+                numOfLeaveForNextYear + this.numOfLeaveUsedForNextYear() <= this.getTotalNumOfLeave()) {
             return true;
         }
         return false;
@@ -128,19 +142,42 @@ public class AnnualLeave {
      * To get the number of days of leave remaining for the current year.
      * @return the number of days of leave left for the current year
      */
-    public int numOfLeaveLeft() {
-        return parseInt(value) - this.numOfLeaveUsed();
+    public int numOfLeaveLeftForCurrYear() {
+        return this.getTotalNumOfLeave() - this.numOfLeaveUsedForCurrYear();
+    }
+
+    /**
+     * To get the number of days of leave remaining for the next year.
+     * @return the number of days of leave left for the next year
+     */
+    public int numOfLeaveLeftForNextYear() {
+        return this.getTotalNumOfLeave() - this.numOfLeaveUsedForNextYear();
     }
 
     /**
      * To get the number of days of leave used for the current year.
      * @return the number of days of leave used for the current year
      */
-    public int numOfLeaveUsed() {
+    public int numOfLeaveUsedForCurrYear() {
         int numOfDays = 0;
         LocalDate currentDate = LocalDate.now();
         for (LocalDate date: this.leaveList) {
             if (date.getYear() == currentDate.getYear()) {
+                numOfDays += 1;
+            }
+        }
+        return numOfDays;
+    }
+
+    /**
+     * To get the number of days of leave used for the next year.
+     * @return the number of days of leave used for the next year
+     */
+    public int numOfLeaveUsedForNextYear() {
+        int numOfDays = 0;
+        LocalDate currentDate = LocalDate.now();
+        for (LocalDate date: this.leaveList) {
+            if (date.getYear() == currentDate.getYear() + 1) {
                 numOfDays += 1;
             }
         }

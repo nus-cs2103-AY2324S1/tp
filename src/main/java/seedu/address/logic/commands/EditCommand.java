@@ -91,7 +91,10 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (employeeToEdit.getAnnualLeave().numOfLeaveUsed() > editedEmployee.getAnnualLeave().getTotalNumOfLeave()) {
+        if (employeeToEdit.getAnnualLeave().numOfLeaveUsedForCurrYear() >
+                editedEmployee.getAnnualLeave().getTotalNumOfLeave() ||
+                employeeToEdit.getAnnualLeave().numOfLeaveUsedForNextYear() >
+                        editedEmployee.getAnnualLeave().getTotalNumOfLeave()) {
             throw new CommandException(MESSAGE_EDIT_LEAVE_ERROR);
         }
 
