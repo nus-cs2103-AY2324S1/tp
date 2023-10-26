@@ -1,5 +1,4 @@
 {
-  "_comment": "AddressBook save file which contains the same Student values as in TypicalStudents#getTypicalAddressBook()",
   "students" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
@@ -37,19 +36,19 @@
     "tags" : [ ]
   } ],
   "appointments" : [ {
-    "name" : "John Doe",
-    "date" : "2023-11-30",
+    "name" : "Daniel Meier",
+    "date" : "202311-30",
     "startTime" : "16:30",
     "endTime" : "17:30",
     "description" : "First Session"
   }, {
-    "name" : "John Loh",
+    "name" : "George Best",
     "date" : "2023-10-14",
     "startTime" : "17:30",
     "endTime" : "18:30",
     "description" : "Second Session"
   }, {
-    "name" : "John Doe",
+    "name" : "Elle Meyer",
     "date" : "2024-02-06",
     "startTime" : "17:30",
     "endTime" : "18:30",
