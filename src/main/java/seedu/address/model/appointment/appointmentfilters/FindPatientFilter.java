@@ -1,18 +1,24 @@
 package seedu.address.model.appointment.appointmentfilters;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 
-import java.util.List;
-import java.util.function.Predicate;
 
+/**
+ * Represents a filter for finding appointments based on patient names.
+ * This filter is used to match appointments with patient names that contain
+ * one or more of the provided keywords in a case-insensitive manner.
+ */
 public class FindPatientFilter implements Predicate<Appointment> {
 
-    private final List<String> KEYWORDS;
+    private final List<String> keywords;
 
     public FindPatientFilter(List<String> keywords) {
-        this.KEYWORDS = keywords;
+        this.keywords = keywords;
     }
 
     /**
@@ -20,12 +26,12 @@ public class FindPatientFilter implements Predicate<Appointment> {
      *
      * @param appointment the input argument
      * @return {@code true} if the input argument matches the predicate,
-     * otherwise {@code false}
+     *     otherwise {@code false}
      */
     @Override
     public boolean test(Appointment appointment) {
         String patientName = appointment.getPatientName().toString();
-        return KEYWORDS.stream()
+        return keywords.stream()
                 .anyMatch(keyword -> StringUtil
                         .containsWordIgnoreCase(patientName, keyword));
     }
@@ -41,13 +47,13 @@ public class FindPatientFilter implements Predicate<Appointment> {
         if (other instanceof FindPatientFilter) {
             FindPatientFilter otherFilter = (FindPatientFilter) other;
 
-            return this.KEYWORDS.equals(otherFilter.KEYWORDS);
+            return this.keywords.equals(otherFilter.keywords);
         }
 
         return false;
     }
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", KEYWORDS).toString();
+        return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 }
