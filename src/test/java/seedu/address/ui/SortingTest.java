@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 
@@ -23,7 +22,7 @@ public class SortingTest {
         );
 
         // Sort the list based on the 'name' attribute
-        tags.sort(Comparator.comparing(tag -> tag.name));
+        tags.sort(Comparator.comparing(tag -> tag.tagName));
 
         // Define the expected order
         List<Tag> expectedOrder = Arrays.asList(
@@ -34,27 +33,5 @@ public class SortingTest {
 
         // Assert that the list is sorted as expected
         assertEquals(expectedOrder, tags);
-    }
-    @Test
-    public void sortMods_correct() {
-        // Create a list of Mod objects
-        List<Mod> mods = Arrays.asList(
-                new Mod("CS2103T"),
-                new Mod("CS1101S"),
-                new Mod("CS1231")
-        );
-
-        // Sort the list based on the 'name' attribute
-        mods.sort(Comparator.comparing(mod -> mod.name));
-
-        // Define the expected order
-        List<Mod> expectedOrder = Arrays.asList(
-                new Mod("CS1101S"),
-                new Mod("CS1231"),
-                new Mod("CS2103T")
-        );
-
-        // Assert that the list is sorted as expected
-        assertEquals(expectedOrder, mods);
     }
 }

@@ -26,7 +26,7 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
    Here are some example commands you can try:
 
    - `list`: Lists all teaching assistants.
-   - `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime m/CS1231S h/10`: Adds a teaching assistant named Snowball to the list.
+   - `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`: Adds a teaching assistant named Snowball to the list.
    - `delete 3`: Deletes the 3rd teaching assistant shown in the current list.
    - `clear`: Deletes all teaching assistants.
    - `exit`: Exits the app.
@@ -45,7 +45,7 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -61,13 +61,21 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+### View course : `course` View course information and tutorial timings. 
 
+![view course](images/viewCourse.png) 
+
+Format: `course c/COURSE_CODE` 
+
+Example: `course c/CS1231S` returns the course information and tutorial timings for CS1231S. 
+
+If you are unsure about the course code, you can simply type `course` and a list of all courses will be shown.
 
 ### Adding a Teaching Assistant: `add`
 
@@ -75,7 +83,7 @@ Adds a new teaching assistant to the address book.
 
 ![add TA](images/addTA.png)
 
-Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [m/MOD]... h/HOUR`
+Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR`
 
 - `NAME` should be a string.
 - `PHONE` should be an 8-digit integer.
@@ -84,26 +92,26 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [
 - `YEAR` should be an integer.
 - `FROM` should be a time in "HH:SS" format
 - `TO` should be a time in "HH:SS" format
-- `TAG` should be a alphanumeric string without spaces.
-- `MODULE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
+- `TAG` should be an alphanumeric string without spaces.
+- `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
 - `HOUR` should be an integer
 
 Examples:
-- `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime m/CS1231S h/10`
+- `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`
 
 When the command succeeds:
 
 ```
 New teaching assistant added: Snowball; Phone: 98765432; Email: snowball@example.com; Telegram: @snowball;
-Free Time: 10:00-12:00; Tags: [fulltime]; Mods: [CS1231S]; Work Hour: 10
+Free Time: 10:00-12:00; Tags: [fulltime]; Courses: [CS1231S]; Work Hour: 10
 ```
 
 When the command fails:
 
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- Invalid invalid module code: `Mod codes should have 2-3 alphabets, followed by 4 digits,
-and optionally ending with an alphabet.`
+- Invalid invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
+and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
 - Invalid work hour: `Hour should only be positive integers and should be less than 9999`
 
@@ -122,12 +130,12 @@ Format: `delete INDEX`
 Examples:
 
 - `list` followed by `delete 2` deletes the 2nd teaching assistant in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the `find` command.
+- `find n/Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the `find` command.
 
 When the command succeeds:
 
 ```
-Deleted Teaching Assistant: Snowball; Phone: 98765432; Email: snowball@example.com; Telegram: @snowball; Free Time: 10:00-12:00; Tags: [fulltime]; Mods: [CS1231S]; Work Hour: 10
+Deleted Teaching Assistant: Snowball; Phone: 98765432; Email: snowball@example.com; Telegram: @snowball; Free Time: 10:00-12:00; Tags: [fulltime]; Courses: [CS1231S]; Work Hour: 10
 ```
 
 When the command fails:
@@ -136,6 +144,38 @@ When the command fails:
 - Index does not correspond to a TA: For example, there are only 5 TAs but the user tried to delete a TA at index 6
   
   `The person index provided is invalid`
+
+### Finding a Teaching Assistant: `find`
+
+Finds specified teaching assistants from the address book using search parameters.
+
+![remove TA](images/findTA.png)
+
+Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
+
+- We can search by name, course or free time, using the prefixes `n/`, `c/` or `from/ to/` respectively.
+- The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
+- We can apply multiple search filters to narrow down the search results.
+- Teaching assistants matching all the search parameters will be returned.
+
+Examples:
+
+- `find n/Alex` returns all teaching assistants with names containing `alex` (e.g. `Alex`, `Alexis`).
+- `find c/cs1231s` returns all teaching assistants that are teaching `cs1231s`.
+- `find from/10:00 to/12:00` returns all teaching assistants that are free from `10:00` to `12:00`.
+- `find n/Alex c/cs1231s` returns all teaching assistants with names containing `alex` and are teaching `cs1231s`.
+- `find c/cs2103t from/10:00 to/12:00` returns all teaching assistants that are teaching `cs2103t` and are free from `10:00` to `12:00`.
+
+When the command succeeds:
+
+```
+Filters applied: [filters applied by the user]
+[number of TAs found] persons listed!
+```
+
+When the command fails:
+
+- Incorrect format (missing prefix or parameter): `Invalid command format!`
 
 ### Viewing Teaching Assistants: `list`
 
@@ -200,8 +240,9 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [m/MOD]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime m/CS1231S h/10`
+**Add** | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Find** | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`
 **List** | `list`
 **Help** | `help`

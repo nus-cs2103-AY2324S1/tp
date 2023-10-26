@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,13 +12,15 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.availability.FreeTime;
+import seedu.address.model.availability.TimeInterval;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FreeTime;
 import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -113,7 +116,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return Tag.of(trimmedTag);
+        return new Tag(trimmedTag);
     }
 
     /**
@@ -129,49 +132,82 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String from} and {@code String to} into a {@code FreeTime}.
+     * Parses a collection of {@code intervals} into a {@code FreeTime}.
      */
-    public static FreeTime parseFreeTime(String from, String to) throws DateTimeParseException, ParseException {
-        if (from == null || to == null) {
-            return FreeTime.EMPTY_FREE_TIME;
-        }
+    public static FreeTime parseFreeTime(Collection<String> intervals) throws DateTimeParseException, ParseException {
         try {
-            LocalTime start = LocalTime.parse(from);
-            LocalTime end = LocalTime.parse(to);
-            if (!FreeTime.isValidFreeTime(start, end)) {
+            requireNonNull(intervals);
+            final ArrayList<TimeInterval> timeIntervals = new ArrayList<>();
+            for (String interval : intervals) {
+                String[] splitInterval = interval.split("-");
+                LocalTime from = LocalTime.parse(splitInterval[0]);
+                LocalTime to = LocalTime.parse(splitInterval[1]);
+                if (!TimeInterval.isValidTimeInterval(from, to)) {
+                    throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS);
+                }
+                timeIntervals.add(new TimeInterval(from, to));
+            }
+            if (!FreeTime.isValidFreeTime(timeIntervals)) {
                 throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
             }
-            return new FreeTime(start, end);
+            return new FreeTime(timeIntervals);
         } catch (DateTimeParseException e) {
             throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
         }
-
     }
 
     /**
-     * Parses a {@code String mod} into a {@code Mod}.
+     * Parses a collection of {@code String from} and {@code String to} into a {@code FreeTime}.
+     * This assumes that the TA has the same availability throughout the week.
      */
-    public static Mod parseMod(String mod) throws ParseException {
-        requireNonNull(mod);
-        String trimmedMod = mod.trim();
-        if (!Mod.isValidModName(trimmedMod)) {
-            throw new ParseException(Mod.MESSAGE_CONSTRAINTS);
+    public static FreeTime parseFreeTime(String from, String to) throws DateTimeParseException, ParseException {
+        try {
+            if (from == null || to == null) {
+                return FreeTime.EMPTY_FREE_TIME;
+            }
+            final ArrayList<TimeInterval> timeIntervals = new ArrayList<>();
+            for (int i = 0; i < FreeTime.NUM_DAYS; i++) {
+                LocalTime fromDate = LocalTime.parse(from);
+                LocalTime toDate = LocalTime.parse(to);
+                if (!TimeInterval.isValidTimeInterval(fromDate, toDate)) {
+                    throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS);
+                }
+                timeIntervals.add(new TimeInterval(fromDate, toDate));
+            }
+            if (!FreeTime.isValidFreeTime(timeIntervals)) {
+                throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
+            }
+            return new FreeTime(timeIntervals);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
         }
-        return Mod.of(trimmedMod);
     }
 
     /**
-     * Parses a {@code String mod} into a {@code Mod}.
+     * Parses a {@code String course} into a {@code Course}.
+     */
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
+        String trimmedCourse = course.trim().toUpperCase();
+        try {
+            return UniqueCourseList.findByCourseCode(trimmedCourse);
+        } catch (Exception e) {
+            throw new ParseException(e.getMessage()); // If course is not found
+        }
+    }
+
+    /**
+     * Parses a {@code String course} into a {@code Course}.
      *
-     * @throws ParseException if the given {@code mod} is invalid.
+     * @throws ParseException if the given {@code course} is invalid.
      */
-    public static Set<Mod> parseMods(Collection<String> mods) throws ParseException {
-        requireNonNull(mods);
-        final Set<Mod> modSet = new HashSet<>();
-        for (String modName : mods) {
-            modSet.add(parseMod(modName));
+    public static Set<Course> parseCourses(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+        final Set<Course> courseSet = new HashSet<>();
+        for (String courseName : courses) {
+            courseSet.add(parseCourse(courseName));
         }
-        return modSet;
+        return courseSet;
     }
 
     /**
