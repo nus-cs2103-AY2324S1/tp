@@ -179,6 +179,18 @@ public class ParserUtil {
     }
 
     /**
+     * Returns String from LocalDate object.
+     * @param date The LocalDate object
+     * @return String format of LocalDate object
+     */
+    public static String dateToString(LocalDate date) {
+        String dateFormat = "dd/MM/yyyy";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        String localDate = date.format(formatter);
+        return localDate;
+    }
+
+    /**
      * Parses a {@code String reason} into an {@code Reason}.
      * Leading and trailing whitespaces will be trimmed.
      *

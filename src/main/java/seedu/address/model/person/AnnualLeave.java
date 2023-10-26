@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import seedu.address.logic.parser.ParserUtil;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -225,6 +227,23 @@ public class AnnualLeave {
             }
         }
         return "Working";
+    }
+
+    public String printListLeaveTaken() {
+        LocalDate currentDate = LocalDate.now();
+        String datesForCurrYear = "Leave taken for current year: [ ";
+        String datesForNextYear = "Leave taken for next year: [ ";
+        for (LocalDate date: this.leaveList) {
+            if (date.getYear() == currentDate.getYear()) {
+                datesForCurrYear += " " + ParserUtil.dateToString(date) + ", ";
+            } else if (date.getYear() == currentDate.getYear() + 1) {
+                datesForNextYear += " " + ParserUtil.dateToString(date) + ", ";
+            }
+        }
+        datesForCurrYear += " ]\n";
+        datesForNextYear += " ]";
+        return datesForCurrYear + datesForNextYear;
+
     }
 
 }
