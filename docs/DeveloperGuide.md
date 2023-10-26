@@ -389,6 +389,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - System informs that begin time must be smaller than the end time.
 
     Use case resumes at 2.
+  
 - 2d. The edited begin time is after the edited begin time.
   - 2d1. System informs that begin time must be smaller than the end time.
     
