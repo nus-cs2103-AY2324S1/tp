@@ -260,14 +260,12 @@ _{more aspects and alternatives to be added}_
 
 ### Product scope
 
-+**Target user profile**: NUS SoC students, who
-* have a need to label their contacts by categories (e.g. classmates in a certain course, professors)
-* can type fast and prefers typing
-* is reasonably comfortable with command-line inputs
+**Target user profile**: NUS SoC students, who:
+- can type fast and prefer typing
+- are reasonably comfortable with command-line inputs
+- wish to label contacts by category (e.g. classmates from certain courses, professors)
 
-**Value proposition**: Manage contacts quickly via text commands which computing students are familiar with,
-and with useful features relevant to computing (and in particular, SoC) students
-
+**Value proposition**: Manage contacts quickly via text commands, with useful features relevant to SoC students.
 
 ### User stories
 
