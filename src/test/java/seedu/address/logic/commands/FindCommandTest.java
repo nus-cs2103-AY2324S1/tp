@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_MUSICIANS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalMusicians.BENSON;
-import static seedu.address.testutil.TypicalMusicians.CARL;
-import static seedu.address.testutil.TypicalMusicians.ELLE;
-import static seedu.address.testutil.TypicalMusicians.FIONA;
-import static seedu.address.testutil.TypicalMusicians.getTypicalAddressBook;
+import static seedu.address.testutil.typicalentities.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.BENSON;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.CARL;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.ELLE;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.FIONA;
 
 import java.util.Arrays;
 import java.util.Collections;

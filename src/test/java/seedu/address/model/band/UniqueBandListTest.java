@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalBands.ACE;
-import static seedu.address.testutil.TypicalBands.BOOM;
-import static seedu.address.testutil.TypicalBands.CANDY;
-import static seedu.address.testutil.TypicalBands.ELISE;
-import static seedu.address.testutil.TypicalMusicians.ALICE;
-import static seedu.address.testutil.TypicalMusicians.ELLE;
+import static seedu.address.testutil.typicalentities.TypicalBands.ACE;
+import static seedu.address.testutil.typicalentities.TypicalBands.BOOM;
+import static seedu.address.testutil.typicalentities.TypicalBands.CANDY;
+import static seedu.address.testutil.typicalentities.TypicalBands.ELISE;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.ALICE;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.ELLE;
 
 import java.util.Arrays;
 import java.util.Collections;

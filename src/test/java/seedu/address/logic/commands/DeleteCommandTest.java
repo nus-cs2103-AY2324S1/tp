@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMusicianAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MUSICIAN;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MUSICIAN;
-import static seedu.address.testutil.TypicalMusicians.getTypicalAddressBook;
+import static seedu.address.testutil.typicalentities.TypicalAddressBook.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 

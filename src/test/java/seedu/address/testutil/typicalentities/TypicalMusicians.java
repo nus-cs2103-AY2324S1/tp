@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.address.testutil.typicalentities;
 
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.musician.Musician;
+import seedu.address.testutil.MusicianBuilder;
 
 /**
  * A utility class containing a list of {@code Musician} objects to be used in tests.
@@ -58,17 +58,6 @@ public class TypicalMusicians {
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalMusicians() {} // prevents instantiation
-
-    /**
-     * Returns an {@code AddressBook} with all the typical persons.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Musician musician : getTypicalMusicians()) {
-            ab.addMusician(musician);
-        }
-        return ab;
-    }
 
     public static List<Musician> getTypicalMusicians() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));

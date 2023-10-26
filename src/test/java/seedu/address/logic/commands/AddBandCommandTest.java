@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalBands.ACE;
+import static seedu.address.testutil.typicalentities.TypicalBands.ACE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
