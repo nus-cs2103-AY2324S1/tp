@@ -196,22 +196,4 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput, MESSAGE_NOT_EDITED);
     }
-
-    @Test
-    public void nameAndNric_assertionTest() {
-        boolean hasNamePrefix = true;
-        boolean hasNricPrefix = true;
-
-        Name name = null;
-        Nric nric = null;
-
-        if (hasNamePrefix) {
-            name = new Name(VALID_NAME_AMY);
-            assert name != null : "Name should not be null!";
-        }
-        if (hasNricPrefix) {
-            nric = new Nric(VALID_NRIC_AMY);
-            assert nric != null : "Nric should not be null!";
-        }
-    }
 }

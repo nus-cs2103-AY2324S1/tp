@@ -60,27 +60,22 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         if (hasNamePrefix) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            assert name != null;
         }
         if (hasNricPrefix) {
             nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-            assert nric != null;
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-            assert editPersonDescriptor.getPhone().isPresent();
         }
 
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-            assert editPersonDescriptor.getEmail().isPresent();
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-            assert editPersonDescriptor.getAddress().isPresent();
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG))
                 .ifPresent(editPersonDescriptor::setTags);
@@ -97,7 +92,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        assert editPersonDescriptor.isAnyFieldEdited();
         logger.log(Level.INFO, "Parsed EditCommand with Name: {0}, NRIC: {1}", new Object[]{name, nric});
         return new EditCommand(name, nric, editPersonDescriptor);
     }
