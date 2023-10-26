@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("read 1 /a")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("read 1 /a")
+activate AddressBookParser
+
+
+@enduml
