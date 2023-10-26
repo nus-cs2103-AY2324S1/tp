@@ -122,23 +122,24 @@ Import staff lists into the address book for quick access to contact information
 * \<amount>: Any number
 * \<date>: In dd/mm/yy format
 * \<staff>: ID of staff, an integer
+* []: Multiple entries allowed, separated by a space
 </div>
 
 
 ### Adding transaction : `add`
 
-Format: `add <type> <description> a/<amount> <date> <?staff>`
+Format: `add ty/<type> d/<description> a/<amount> on/<date> s/<?staff>`
 
 Examples:
 
-- `add R Sold 1 Mug a/10 10/10/23 John`
-- `add E “Paid Manufacturer” 100 10/11/23`
+- `add ty/R d/Sold 1 Mug a/10 on/10/10/23 s/1`
+- `add ty/E d/Paid Manufacturer a/100 on/10/11/23`
 
 Success/Fail Output:
 
-- Added revenue (Toast)
-- Added expenditure (Toast)
-- Error: <Error Message> (Toast)
+- Added revenue
+- Added expenditure
+- Error: <Error Message>
 
 ### Removing transaction: `del`
 
@@ -148,23 +149,23 @@ Example:`del 1`
 
 Success/Fail Output:
 
-- Removed transaction (Toast)
-- Error: <Error Message> (Toast)
+- Removed transaction
+- Error: <Error Message>
 
 ### Viewing transactions : `view t`
 
-Switches UI to transaction tabs, which shows the full list of transactions
+Switches UI to transaction tab, which shows the full list of transactions
 
 Format: `view t` or `view transaction`
 
-### Adding staff : `addstaf`
+### Adding staff : `addstaff`
 
 Format: `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>]`
 
 Success/Fail Output:
 
-- Added staff (Toast)
-- Error: <Error Message> (Toast)
+- Added staff
+- Error: <Error Message>
 
 ### Removing staff: `delstaff`
 
@@ -174,14 +175,26 @@ Example: `delstaff 1`
 
 Success/Fail Output:
 
-- Removed staff (Toast)
-- Error: <Error Message> (Toast)
+- Removed staff
+- Error: <Error Message>
 
 ### Viewing staff : `view s`
 
-Switches UI to staff tabs, which shows the full list of staff
+Switches UI to staff tab, which shows the full list of staff
 
 Format: `view s` or `view staff`
+
+### Viewing overview : `view o`
+
+Switches UI to overview tab, which shows the overview of transactions
+
+Format: `view o` or `view overview`
+
+### Clearing the output : `clear`
+
+Clears the output of the previous command.
+
+Format: `clear`
 
 ### Exiting the program : `exit`
 
@@ -224,14 +237,17 @@ The input field below this with the grey text `Enter command here...` is where y
 
 ## Command summary
 
-| Action                 | Format, Examples                                                 |
-| ---------------------- | ---------------------------------------------------------------- |
-| **Add transaction**    | `add <type> <description> a/<amount> <date> <?staff>`            |
-| **Remove transaction** | `del <id>`                                                       |
-| **View transaction**   | `view t` or `view transaction`                                   |
-| **Add staff**          | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>]` |
-| **Remove staff**       | `delstaff <staff id>`                                            |
-| **View staff**         | `view s` or `view staff`                                         |
+| Action                  | Format, Examples                                                  |
+|-------------------------|-------------------------------------------------------------------|
+| **Add transaction**     | `add ty/<type> d/<description> a/<amount> on/<date> s/<?staff>`   |
+| **Remove transaction**  | `del <id>`                                                        |
+| **View transaction**    | `view t` or `view transaction`                                    |
+| **Add staff**           | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<?tag>]` |
+| **Remove staff**        | `delstaff <staff id>`                                             |
+| **View staff**          | `view s` or `view staff`                                          |
+| **View overview**       | `view o` or `view overview`                                       |
+| **Clear output**        | `clear`                                                           |
+| **Exit**                | `exit`                                                            |
 
 ## Glossary
 
