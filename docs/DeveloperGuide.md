@@ -249,9 +249,9 @@ These operations are exposed in the `Logic` interface as `Logic#getPrevCommandSt
 The following operations are implemented by the `CommandStringStash`:
 * `CommandStringStash#addCommandString(String commandInputString)` - Adds `commandInputString` to the history.
 * `CommandStringStash#getPrevCommandString(String commandInputString)` - Cycles one command further back in history.
-* `CommandStringStash#getPassedCommandString(String commandInputString)` - Cycles one command further forward in history 
+* `CommandStringStash#getPassedCommandString(String commandInputString)` - Cycles one command further forward in history
 <div markdown="span" class="alert alert-info">:information_source: **note:** Cycling fowards or backwards may not always be
-valid operations. No cycling forward or backward can be done if the stash is empty. No cycling backward 
+valid operations. No cycling forward or backward can be done if the stash is empty. No cycling backward
 can be done if the user is already on the least recent command in the stash, and no cycling forward can be done
 if the user has not yet cycled backward. To consider all these cases, the `commandInputString` is passed as a parameter
 to `CommandStringStash#getPrevCommandString(String commandInputString)` and `CommandStringStash#getPassedCommandString(String commandInputString)`.
@@ -261,7 +261,7 @@ so there is no change to the CLI textbox.
 </div>
 
 Given below is an example usage scenario and how the recall recent commands feature works at each step.
- 
+
 Step 1. The user launches the application for the first time. The `CommandStringStash` will be initialised
 with no command strings and a `currentCmdIndex` of 0.
 
@@ -282,7 +282,7 @@ allowing the user to start to cycle back from the most recently added command ag
 
 <br/>
 
-Step 3. The user executes two more commands `help` and `delete 1` in the respective order. As before, the 
+Step 3. The user executes two more commands `help` and `delete 1` in the respective order. As before, the
 `CommandStringStash` is updated appropriately.
 
 ![Recall Step 3](images/RecallStep3.png)
