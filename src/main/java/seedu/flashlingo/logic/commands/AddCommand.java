@@ -28,10 +28,12 @@ public class AddCommand extends Command {
             + PREFIX_ORIGINAL_WORD + "ORIGINAL WORD "
             + PREFIX_ORIGINAL_WORD_LANGUAGE + "ORIGINAL WORD LANGUAGE "
             + PREFIX_TRANSLATED_WORD + "TRANSLATION "
-            + PREFIX_TRANSLATED_WORD_LANGUAGE + "TRANSLATED WORD LANGUAGE "
+            + PREFIX_TRANSLATED_WORD_LANGUAGE + "TRANSLATED WORD LANGUAGE \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ORIGINAL_WORD + "hello "
-            + PREFIX_TRANSLATED_WORD + "你好 ";
+            + PREFIX_ORIGINAL_WORD_LANGUAGE + "English "
+            + PREFIX_TRANSLATED_WORD + "你好 "
+            + PREFIX_TRANSLATED_WORD_LANGUAGE + "Chinese";
 
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %s - %s";
@@ -46,6 +48,8 @@ public class AddCommand extends Command {
      * Creates an AddCommand to add the specified {@code FlashCard}
      */
     public AddCommand(OriginalWord original, TranslatedWord translated) {
+        requireNonNull(original);
+        requireNonNull(translated);
         this.original = original;
         this.translated = translated;
         this.toAdd = new FlashCard(original, translated, new Date(), level);

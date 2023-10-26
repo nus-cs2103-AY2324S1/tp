@@ -15,6 +15,7 @@ import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.NextReviewWordPredicate;
 import seedu.flashlingo.model.flashcard.WordOverduePredicate;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * Represents the in-memory model of the flashlingo data.
@@ -80,6 +81,17 @@ public class ModelManager implements Model {
         userPrefs.setFlashlingoFilePath(flashlingoFilePath);
     }
 
+    @Override
+    public String getTheme() {
+        return userPrefs.getTheme();
+    }
+
+    @Override
+    public void setTheme(String theme) {
+        requireNonNull(theme);
+        userPrefs.setTheme(theme);
+    }
+
     //=========== Flashlingo ================================================================================
 
     @Override
@@ -134,6 +146,8 @@ public class ModelManager implements Model {
     public String nextReviewWord() throws CommandException {
         updateFilteredFlashCardList(new WordOverduePredicate());
         if (filteredFlashCards.size() == 0) {
+            SessionManager.getInstance().setSession(false);
+            updateFilteredFlashCardList(unused -> true);
             throw new CommandException("There's no FlashCards to review. Well done!");
         }
         FlashCard toBeReviewed = getFilteredFlashCardList().get(0);
@@ -148,6 +162,7 @@ public class ModelManager implements Model {
         FlashCard flashCard = getFilteredFlashCardList().get(0);
         flashCard.updateLevel(isUpdated);
     }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

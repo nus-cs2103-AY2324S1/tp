@@ -16,7 +16,7 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 
 1. Download the latest `flashlingo.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-4/tp/releases) (Not finished yet).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your Flashlingo.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -42,6 +42,7 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
    * `stats` : Displays learning statistics for current user.
    * `language` : Filters the list with specified language.
    * `review` : Returns a list of words that the user should revise today.
+   * `switch` : Switches between light/dark color theme.
    * `exit` : Terminates the program.
 
 2. Refer to the [Features](#features) below for details of each command.
@@ -76,8 +77,7 @@ Shows the list of cards with both the original word and the corresponding transl
 Format: `list`
 
 Output:
-* `There are no words in the list! Add your flashcards now!`
-* `Here are the words:`
+* `Listed all flashcards`
 `1. ORIGINAL_WORD - TRANSLATION`
   `2. ORIGINAL_WORD - TRANSLATION`
   `3. ORIGINAL_WORD - TRANSLATION`
@@ -91,11 +91,12 @@ Adds a word to the flashcard with its translation.
 * Works to add a word with its translation in their respective languages.
 * The already saved translation can be overridden with a new translation in a different language.
 
-Format: `add w/WORD wl/WORD LANGUAGE t/TRANSLATION tl/TRANSLATION LANGUAGE`
+Format: `add w/WORD t/TRANSLATION`
+or`add w/WORD wl/WORD LANGUAGE t/TRANSLATION tl/TRANSLATION LANGUAGE`
 
 Examples:
-* `add w/regarder wl/French t/look tl/English` saves the translation of regarder as look
-* `add w/entschuldigung wl/Deutsch t/sorry tl/English` saves the translation of entschuldigung as sorry
+* `add w/regarder t/look` saves the translation of regarder as look
+* `add w/entschuldigung wl/Deutsch t/sorry tl/English` saves the translation of the Deutsch word entschuldigung as an English word sorry
 
 
 ### Deleting a word card : `delete`
@@ -130,21 +131,27 @@ Examples:
 * `find look` returns the flashcard list  and its translation that contains the keyword `look`
 
 
-###  Showing flashcard, starts today’s flashcard session : `start`
+###  Starts review session : `start`
 
-Starts a review session and shows the words the user is going to study sequentially.
+To start a review session, user simply needs to type in `start` command, and a new review session will be started.
 
 Format: `start`
 
 
+### Ending the current flashcard session : `end`
+
+Ends the current flashcard session and returns to the main menu.
+
+Format: `end`
+
 ### Revealing the other side (translation) of the flash card : `reveal`
 
-Shows the meaning of the word.
+To show the meaning of 
 
 Format: `reveal`
 
 Output :
-![img.png](images/StartUi.png)
+![img.png](images/Reveal.png)
 
 ### Indicating user has memorized the word : `yes`
 
@@ -165,11 +172,7 @@ Displays learning statistics, i.e, the total number of flashcards and the number
 
 Format: `stats`
 
-### Stopping the current flashcard session : `stop`
 
-Stops the current flashcard session and returns to the main menu.
-
-Format: `end`
 
 ### Filtering list with specified language : `language`
 
@@ -182,6 +185,13 @@ Format: `language SPECIFIED_LANGUAGE`
 * `review` : Returns a list of words that the user should revise today.
 
 Format: `review`
+
+### Switching color theme : `switch`
+* `switch` : Switches between light and dark appearance for UI.
+
+Format: `switch`
+
+Output:![img.png](images/DarkTheme.png)
 
 ### Exiting the program : `exit`
 
@@ -200,7 +210,7 @@ Flashlingo data are saved in the hard disk automatically after any command that 
 Flashlingo data are saved automatically as a JSON file `[JAR file location]/data/flashlingo.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, Flashlingo will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -225,18 +235,21 @@ _Details coming soon ..._
 
 ## Command summary
 
- Action                 | Format, Examples                                               
+ Action                 | Format, Examples
 ------------------------|----------------------------------------------------------------
- **Help**               | `help`                                                         
- **List**               | `list`                                                         
- **Add**                | `add w/WORD t/TRANSLATION` <br> e.g., `add w/regarder t/look`  
- **Delete**             | `delete w/WORD`<br> e.g., `del w/look`                         
- **Edit**               | `edit index w/WORD t/TRANSLATION`<br> e.g., `edit 1 w/bye t/再见` 
- **Find**               | `find KEYWORD`<br> e.g., `find bye`                            
- **Start**              | `start`                                                        
- **Flip**               | `flip`/`f`                                                     
- **Yes**                | `yes`                                                          
- **No**                 | `no`                                                           
- **Learning Statistics** | `stats`                                                        
- **Stop**               | `stop`                                                         
-**Exit**                | `exit`
+ **Help**               | `help`
+ **List**               | `list`
+ **Add**                | `add w/WORD t/TRANSLATION` <br> e.g., `add w/regarder t/look`
+ **Delete**             | `delete w/WORD`<br> e.g., `del w/look`
+ **Edit**               | `edit index w/WORD t/TRANSLATION`<br> e.g., `edit 1 w/bye t/再见`
+ **Find**               | `find KEYWORD`<br> e.g., `find bye`
+ **Start**              | `start`
+ **Reveal**             | `reveal`
+ **Yes**                | `yes`
+ **No**                 | `no` 
+ **End**               | `end`
+ **Language**           | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`
+ **Review**             | `review`
+ **Learning Statistics** | `stats`
+ **Switch**              | `switch`
+ **Exit**                | `exit`

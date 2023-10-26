@@ -11,8 +11,8 @@ public interface ReadOnlyUserPrefs {
 
     GuiSettings getGuiSettings();
 
-    Path getAddressBookFilePath();
-
     Path getFlashlingoFilePath();
+
+    String getTheme();
 
 }

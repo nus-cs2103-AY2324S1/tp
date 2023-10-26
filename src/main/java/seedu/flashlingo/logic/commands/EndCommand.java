@@ -1,10 +1,12 @@
 package seedu.flashlingo.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * Ends the session of reviewing.
@@ -23,6 +25,8 @@ public class EndCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        SessionManager.getInstance().setSession(false);
+        model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 

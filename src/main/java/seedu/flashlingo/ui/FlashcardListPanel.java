@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.flashlingo.commons.core.LogsCenter;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * Panel containing the list of persons.
@@ -19,12 +20,14 @@ public class FlashcardListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<FlashCard> flashcardListView;
+    private MainWindow mw;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public FlashcardListPanel(ObservableList<FlashCard> flashcardList) {
+    public FlashcardListPanel(ObservableList<FlashCard> flashcardList, MainWindow mw) {
         super(FXML);
+        this.mw = mw;
         flashcardListView.setItems(flashcardList);
         flashcardListView.setCellFactory(listView -> new FlashCardListViewCell());
     }
@@ -41,7 +44,11 @@ public class FlashcardListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new FlashcardBox(fc, getIndex() + 1).getRoot());
+                if (SessionManager.getInstance().isReviewSession()) {
+                    setGraphic(new FlashcardBox(fc, getIndex() + 1, mw).getRoot());
+                } else {
+                    setGraphic(new FlashcardBoxNoButton(fc, getIndex() + 1).getRoot());
+                }
             }
         }
     }

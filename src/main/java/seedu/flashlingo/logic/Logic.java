@@ -47,7 +47,17 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
-     * Set the user prefs' GUI settings.
+     * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' theme.
+     */
+    String getTheme();
+
+    /**
+     * Sets the user prefs' theme.
+     */
+    void setTheme(String theme);
 }

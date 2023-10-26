@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FlashlingoParser" as FlashlingoParser LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":FlashCard" as FlashCard MODEL_COLOR
+participant ":YesCommand" as YesCommand MODEL_COLOR
+participant ":CommandResult" as CommandResult MODEL_COLOR
+end box
+
+[-> LogicManager : execute("yes")
+activate LogicManager
+
+LogicManager -> FlashlingoParser : parseCommand("yes")
+activate FlashlingoParser
+
+FlashlingoParser -> YesCommand : Create instance
+activate YesCommand
+
+YesCommand -> Model : rememberWord(true)
+activate Model
+
+Model -> FlashCard : flashCard.updateLevel(true)
+activate FlashCard
+
+FlashCard -> FlashCard : upgradeLevel()
+FlashCard -> FlashCard : updateReviewDate()
+FlashCard -> FlashCard : set toDelete
+FlashCard --> Model : Return from updateLevel method
+deactivate FlashCard
+
+Model --> YesCommand : Return from rememberWord method
+deactivate Model
+
+YesCommand -> CommandResult : Create CommandResult
+activate CommandResult
+
+CommandResult --> YesCommand
+deactivate CommandResult
+
+YesCommand --> FlashlingoParser : Return CommandResult
+deactivate YesCommand
+
+FlashlingoParser --> LogicManager : Return result
+deactivate FlashlingoParser
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

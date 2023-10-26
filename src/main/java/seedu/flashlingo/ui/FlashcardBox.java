@@ -5,7 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.flashlingo.logic.commands.exceptions.CommandException;
+import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.session.SessionManager;
 
 /**
  * An UI component that displays information of a {@code FlashCard}.
@@ -43,12 +46,17 @@ public class FlashcardBox extends UiPart<Region> {
 
     private boolean isRevealed = false;
 
+    private MainWindow mw;
+
     /**
      * Creates a {@code FlashCard code} with the given {@code FlashCard} and index to display.
      */
-    public FlashcardBox(FlashCard fc, int displayedIndex) {
+    public FlashcardBox(FlashCard fc, int displayedIndex, MainWindow mw) {
         super(FXML);
+        // Ensure that FlashCard with buttons is only created when in review session
+        assert(SessionManager.getInstance().isReviewSession());
         this.flashCard = fc;
+        this.mw = mw;
         id.setText(displayedIndex + ") ");
         original.setText(fc.getOriginalWord().toString() + ": ");
         translation.setText("");
@@ -59,8 +67,8 @@ public class FlashcardBox extends UiPart<Region> {
      * Handles success when user presses "Yes" button
      */
     @FXML
-    public void success() {
-        flashCard.handleUserInput(true);
+    public void success() throws CommandException, ParseException {
+        this.mw.executeCommand("yes");
         level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
     }
 
@@ -68,8 +76,8 @@ public class FlashcardBox extends UiPart<Region> {
      * Handles failure when user presses "No" button
      */
     @FXML
-    public void failure() {
-        flashCard.handleUserInput(false);
+    public void failure() throws CommandException, ParseException {
+        this.mw.executeCommand("no");
         level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
     }
 
@@ -88,15 +96,4 @@ public class FlashcardBox extends UiPart<Region> {
         }
         isRevealed = !isRevealed;
     }
-
-    /**
-     * Handles Undo when "Undo" button is pressed
-     * Should reverse the previous "Yes" or "No" click and allow reselection
-     */
-    @FXML
-    public void undo() {
-        flashCard.undo();
-        level.setText("Current Level: " + flashCard.getProficiencyLevel().getLevel());
-    }
-
 }
