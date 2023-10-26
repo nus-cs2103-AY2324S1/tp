@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -29,14 +30,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
+    /**
+     * Creates an empty AddressBook with the given {@code courseCode}.
+     */
     public AddressBook(String courseCode) {
         requireNonNull(courseCode);
-
         this.courseCode = courseCode.toUpperCase();
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons in the {@code toBeCopied} and {@code courseCode}.
      */
     public AddressBook(String courseCode, ReadOnlyAddressBook toBeCopied) {
         requireNonNull(courseCode);
@@ -45,11 +48,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
-    //// course-level operations
+    ///// course level operations
     public void setCourseCode(String courseCode) {
         requireNonNull(courseCode);
-        // TODO: Check this line
-        setCourseCode(courseCode.toUpperCase());
+        this.courseCode = courseCode.toUpperCase();
     }
 
     @Override
@@ -140,11 +142,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && courseCode.equalsIgnoreCase(otherAddressBook.courseCode);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, courseCode);
     }
 }

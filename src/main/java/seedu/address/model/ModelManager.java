@@ -27,26 +27,27 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBookManager and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(AddressBookManager addressBookManager, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBookManager, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book manager: " + addressBookManager + " and user prefs " + userPrefs);
 
-        this.addressBookManager = new AddressBookManager();
+        this.addressBookManager = addressBookManager;
         this.userPrefs = new UserPrefs(userPrefs);
 
         if (addressBookManager.getActiveAddressBook() == null) {
             filteredPersons = new FilteredList<>(new UniquePersonList().asUnmodifiableObservableList());
         } else {
-             filteredPersons = new FilteredList<>(this.addressBookManager.getActiveAddressBook().getPersonList());
+            filteredPersons = new FilteredList<>(this.addressBookManager.getActiveAddressBook().getPersonList());
             filteredPersons.setPredicate(this.userPrefs.getFilterSettings().getComposedFilter());
         }
     }
 
+
     public ModelManager() {
-        this(new AddressBook("TEST"), new UserPrefs());
+        this(new AddressBookManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -105,6 +106,11 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBookManager.getActiveAddressBook();
+    }
+
+    @Override
+    public AddressBookManager getAddressBookManager() {
+        return addressBookManager;
     }
 
     @Override
