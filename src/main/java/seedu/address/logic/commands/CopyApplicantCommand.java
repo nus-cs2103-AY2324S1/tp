@@ -23,14 +23,18 @@ public class CopyApplicantCommand extends Command {
     public static final String COMMAND_ALIAS = "cpa";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Copies the details of the applicant identified by the index number used"
-            + " in the displayed applicant list.\n"
+            + ": Copies the name and phone number of the applicant at the specified index to clipboard.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COPY_APPLICANT_SUCCESS = "Copied details of applicant to clipboard:\n%1$s";
     private final Index applicantIndex;
 
+    /**
+     * Creates a CopyApplicantCommand to copy the {@code Applicant} at the specified {@code Index}.
+     *
+     * @param applicantIndex The index of the applicant to copy.
+     */
     public CopyApplicantCommand(Index applicantIndex) {
         this.applicantIndex = applicantIndex;
     }

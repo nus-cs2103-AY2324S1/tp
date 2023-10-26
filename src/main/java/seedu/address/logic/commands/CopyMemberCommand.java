@@ -23,14 +23,19 @@ public class CopyMemberCommand extends Command {
     public static final String COMMAND_ALIAS = "cpm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Copies the details of the member identified by the index number used"
-            + " in the displayed member list.\n"
+            + ": Copies the details (name, phone number, email, telegram, and tags) of the member"
+            + " at the specified index to clipboard\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_COPY_MEMBER_SUCCESS = "Copied details of member to clipboard:\n%1$s";
     private final Index memberIndex;
 
+    /**
+     * Creates a CopyMemberCommand to copy the {@code Member} at the specified {@code Index}.
+     *
+     * @param memberIndex The index of the member to copy.
+     */
     public CopyMemberCommand(Index memberIndex) {
         this.memberIndex = memberIndex;
     }
