@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 
-public class AddGroupFreeTimeCommand extends Command {
+public class AddGroupMeetingTimeCommand extends Command {
     public static final String COMMAND_WORD = "addmeeting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add free time to a group.\n"
             + "Parameters: "
-            + PREFIX_GROUPTAG + "GROUP\n"
-            + PREFIX_FREETIME + "FREE TIME \n"
+            + PREFIX_GROUPTAG + "GROUP "
+            + PREFIX_FREETIME + "MEETING TIME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUPTAG + "CS2103T "
             + PREFIX_FREETIME + "mon 1200 - mon 1400 ;tue 1000 - wed 1600";
@@ -36,7 +36,7 @@ public class AddGroupFreeTimeCommand extends Command {
      * @param toAdd The group object to be added to.
      * @param toAddFreeTime ArrayList of time intervals to be added to group.
      */
-    public AddGroupFreeTimeCommand(Group toAdd, ArrayList<TimeInterval> toAddFreeTime) {
+    public AddGroupMeetingTimeCommand(Group toAdd, ArrayList<TimeInterval> toAddFreeTime) {
         requireNonNull(toAdd);
         requireNonNull(toAddFreeTime);
         this.toAddFreeTime = toAddFreeTime;
@@ -62,12 +62,12 @@ public class AddGroupFreeTimeCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddGroupFreeTimeCommand)) {
+        if (!(other instanceof AddGroupMeetingTimeCommand)) {
             return false;
         }
 
-        AddGroupFreeTimeCommand otherAddGroupFreeTimeCommand = (AddGroupFreeTimeCommand) other;
-        return toAdd.equals(otherAddGroupFreeTimeCommand.toAdd)
-                && toAddFreeTime.equals(otherAddGroupFreeTimeCommand.toAddFreeTime);
+        AddGroupMeetingTimeCommand otherAddGroupMeetingTimeCommand = (AddGroupMeetingTimeCommand) other;
+        return toAdd.equals(otherAddGroupMeetingTimeCommand.toAdd)
+                && toAddFreeTime.equals(otherAddGroupMeetingTimeCommand.toAddFreeTime);
     }
 }

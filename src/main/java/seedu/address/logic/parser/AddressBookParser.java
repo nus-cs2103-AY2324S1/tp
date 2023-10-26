@@ -81,8 +81,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case AddGroupFreeTimeCommand.COMMAND_WORD:
-            return new AddGroupFreeTimeCommandParser().parse(arguments);
+        case AddGroupMeetingTimeCommand.COMMAND_WORD:
+            return new AddGroupMeetingTimeCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

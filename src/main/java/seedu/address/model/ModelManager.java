@@ -226,8 +226,8 @@ public class ModelManager implements Model {
         // both throw exception if not exists exact match
         Person person = addressBook.getPerson(personName);
         Group group = addressBook.getGroup(groupName);
-        person.removeGroup(group)
-        group.removePeron(person)
+        person.removeGroup(group);
+        group.removePerson(person);
         this.unassignGroup(person, group);
         //does not show
 //        System.out.println("hi");
