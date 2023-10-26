@@ -5,6 +5,7 @@ title: User Guide
 
 MediLink Contacts(MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC can get your patients management tasks done faster than traditional GUI apps.
 
+### Table of Contents
 * Table of Contents
 {:toc}
 
@@ -128,7 +129,7 @@ Creates a new appointment for patients.
 Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm:ss`
 
 <div markdown="block" class="alert alert-info">
-**:Note: Take Note:**<br>
+**:information_source: Take Note:**<br>
 
 - All fields are Required.
 - EMAIL must follow the specified format (ie. `yyyy-MM-dd HH:mm:ss`).

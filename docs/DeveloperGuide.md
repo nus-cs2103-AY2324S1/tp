@@ -3,6 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
+## Table Of Contents
 * Table of Contents
   {:toc}
 
@@ -175,6 +176,42 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Patient/Doctor Feature
+This feature allows users to add patients or doctors to the address book. No duplicated person should be added. There are many fields for each patient/doctor which can be found in the user guide.
+
+#### Implementation
+Implementation of adding patients is similar to the original addCommand. The adding mechanism is facilitated by the AddressBook in the model.
+
+Given below is an example usage scenario and how the add patient/doctor mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial address book state.
+
+Step 2. The user types `add-patient` (or `add-Doctor`) as command, with the appropriate arguments for the person, for example, `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`.
+
+Step 3. The `AddressBookParser` parses the arguments and determine the required command parser based on the first word of the arguments. 
+
+Step 4. Then `addPatientCommandParser` parses the remaining arguments and creates an `AddPatientCommand` with the details of the patient given.
+
+:information_source: **Note:** If the details of the person added does not match the correct format for any fields, there will be an error telling user that the attributes are in the wrong format. 
+
+Step 5. The `AddPatientCommand` then gets executed and calls the Model#addPatient() and the patient will be added to the `uniquePatientList` of the addressbook in the model.
+
+:information_source: **Note:** If the Person to be added is already in the respective list in the addressbook, it will return an error saying that this is a duplicate person. This will be checked during the execution of the Add command.
+
+Step 6. The UI should display using the updated list of patients and the newly added patient should be in the patient section of the GUI.
+
+The following sequence diagram shows how the add patient works:
+
+![AddPatientSequenceDiagram](images/AddPatientSequenceDiagram.png)
+
+### Design Considerations
+1. Option 1 (Current Choice): Use two different commands for adding patients and doctors
+   - Pros: Easier to implement. Clear to the user which type of person to add, since we have different fields for patients and doctors.
+   - Cons: Increased number of classes and tests.
+2. Option 2: Use a single add command like the original implmentation
+   - Pros: Fewer files to be changed.
+   - Cons: Harder to implement, since we will have more checkings to be done when adding the person.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -276,7 +313,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**: Hospital staff who
+**Target user profile**: Clinic staff who
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
@@ -298,6 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hospital Staff                    | add a new patient                   | access patient details quickly next time                               |
 | `* * *`  | Hospital Staff                    | add a new doctor                    | include doctors assigned to the patients                               |
 | `* * *`  | Hospital Staff                    | delete a patient/doctor             | remove entries that I no longer need                                   |
+| `* * *`  | Hospital Staff                    | add an appointment                  | tell which patient/doctor is coming at what time                       |
 | `* * *`  | Hospital Staff                    | update patient details              | information remains accurate                                           |
 | `* * *`  | Hospital Staff                    | find a patient/doctor by NRIC       | locate details of persons without having to go through the entire list |
 | `* * *`  | Hospital Staff                    | reassign patients to doctors/nurses | account for changes in the people treating the patients                |
