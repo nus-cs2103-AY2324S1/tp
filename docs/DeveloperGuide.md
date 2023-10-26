@@ -299,8 +299,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                                        | delete notes to a contact       | remove additional information that are no longer needed about that contact in the notes   |
 | `* *`    | user who has some event to do             | add an event                         | record an event with start time and also end time, location and any additional information like what to do during the event   |
 | `* *`    | user who has/had some event to do      | delete an event                     | remove an event after it is obsolete, cancelled or no longer needed to be recorded |
-| `* *` | tidy user | tag a contact with a label | keep my contacts oraganised and categorised |
-| `* * *` | user who finishes using the application  | exit the program                   | exit the program normally while ensuring all my data is currectly saved |
+| `* *`    | tidy user | tag a contact with a label | keep my contacts oraganised and categorised |
+| `* *`    | tidy user | delete a tag from a contact | remove tags that are no longer relevant                                                                                      |
+| `* * *`  | user who finishes using the application  | exit the program                   | exit the program normally while ensuring all my data is currectly saved |
 
 *{More to be added}*
 
@@ -439,7 +440,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1c. User inputs a note that does not exist.
 
-    * 1c1. KeepInTouch shows a message indicating that the note cannnot be found
+    * 1c1. KeepInTouch shows a message indicating that the note cannot be found.
+  
       Use case ends.
 
 **Use case: UC08 - Add an event**
@@ -486,7 +488,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests add tags to a contact.
+1.  User requests to add tags to a contact.
 2.  KeepInTouch appends that tags to the specified contact.
 
     Use case ends.
@@ -499,13 +501,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1b. User inputs a contact that does not exist
+* 1b. User inputs a contact that does not exist.
 
     * 1b1. KeepInTouch shows a message indicating the contact cannot be found.
 
       Use case resumes at step 1.
 
-**Use case: UC11 - Exit the program**
+**Use case: UC11 - Delete tags from a contact**
+
+**MSS**
+
+1.  User requests to delete tags from a contact.
+2.  KeepInTouch deletes the tags from the specified contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case ends.
+
+* 1b. User inputs a contact that does not exist.
+
+    * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
+
+      Use case ends.
+
+* 1c. User inputs a tags that does not exist.
+
+    * 1c1. KeepInTouch shows a message indicating that the tags cannot be found.
+
+      Use case ends.
+
+**Use case: UC12 - Exit the program**
 
 **MSS**
 
