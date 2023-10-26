@@ -46,13 +46,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             );
         }
 
-        String trimmedArgs = fieldString.get().trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-        }
-
-        String[] predicateTerms = trimmedArgs.split("\\s+");
+        String[] predicateTerms = fieldString.get().trim().split("\\s+");
         Optional<String> booleanToCheck = argMultimap.getValue(CliSyntax.PREFIX_FILTER_FIN);
         String booleanToCheckString = booleanToCheck.orElse("false").trim().toLowerCase();
 
