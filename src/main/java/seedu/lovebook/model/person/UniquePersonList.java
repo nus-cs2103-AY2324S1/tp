@@ -22,6 +22,7 @@ import seedu.lovebook.model.person.exceptions.PersonNotFoundException;
  *
  * @see Date#isSamePerson(Date)
  */
+
 public class UniquePersonList implements Iterable<Date> {
 
     private final ObservableList<Date> internalList = FXCollections.observableArrayList();

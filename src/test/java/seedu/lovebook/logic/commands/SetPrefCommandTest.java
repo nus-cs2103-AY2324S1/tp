@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.lovebook.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -135,6 +136,11 @@ public class SetPrefCommandTest {
 
         @Override
         public DatePrefs getDatePrefs() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedPersonList(Comparator<Date> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Represents the date's horoscope in the lovebook book.
  */
-public class Horoscope {
+public class Horoscope implements Comparable<Horoscope> {
     public static final String MESSAGE_CONSTRAINTS = "Horoscope should only contain valid horoscope signs.\n"
             + "If you aren't aware of Horoscope signs, please refer to the following list\n"
             + "ARIES\n"
@@ -68,5 +68,10 @@ public class Horoscope {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Horoscope o) {
+        return this.toString().toLowerCase().compareTo(o.toString().toLowerCase());
     }
 }
