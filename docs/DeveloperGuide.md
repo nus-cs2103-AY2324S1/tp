@@ -185,6 +185,55 @@ In this example, the user enters `list attendance w/1 tg/G2`.
 
 _{more aspects and alternatives to be added}_
 
+### Mark attendance feature
+
+#### Implementation
+
+The mark attendance feature is implemented using the `MarkAttendanceCommand` class. It is parsed by the `MarkAttendanceCommandParser` class.
+If parsed successfully, it returns a `MarkAttendanceCommand` object.
+
+The following activity diagram shows how the `MarkAttendanceCommand` works:
+
+[MarkAttendanceActivityDiagram](images/MarkAttendanceActivityDiagram.png)
+
+#### Design considerations:
+
+`MarkAttendanceCommand` was implemented this way with the idea of providing flexibility to the user. By allowing user to mark attendance using either the student's name or ID, it caters to different user preferences. The check for existing attendance for the current week ensures that the user does not accidentally create duplicate records for the same week.
+
+#### Alternative implementations considered but not adopted:
+
+- Using a separate command for updating attendance
+
+    > Instead of having the command handle both marking and updating attendance, we could have a seperate command, say `UpdateAttendanceCommand`, to handle updates.
+    
+    **Pros:** 
+    - Easier to understand and maintain: Developers can quickly grasp the purpose of each command.
+        
+    **Cons:**
+    - Increased complexity: Introducing more commands can make the system more complex and harder for users to remember.
+    - Redundancy: Both commands would have overlapping code, leading to potential redundancy.
+    
+    **Evaluation**:
+    
+    The current implementation is preferred as it is simpler and more straightforward. It reduces the need for users to remember additional commands, while resolving potential user mistakes behind the scene, providing convenience and a better user experience. The additional complexity introduced by having a separate command for updating attendance is not justified.
+
+
+- Not checking for same week's attendance
+
+  > Instead of checking if the attendance for the same week, we could simply add a new attendance record every time the command is invoked. 
+
+  **Pros:**
+    - Simplicity: Implementation would be straightforward without the need for additional checks.
+    - Flexibility: Allows for multiple attendance records within the same week, which might be useful in some scenarios.
+
+  **Cons:**
+    - Redundancy:  Multiple attendance records for the same week can lead to confusion and redundancy.
+    - Inefficiency: Consumes more memory and might make querying slower if there are many redundant records.
+
+    **Evaluation**:
+    
+    The current implementation is preferred as the pros simply do not outweigh the cons. The potential scenario that multiple attendance records within the same week being potentially useful is not justified as it is virtually unlikely to happen. The current implementation is much better preferred as the check prevents potential user mistakes behind the scene, providing convenience and a better user experience.
+
 
 ### \[Proposed\] Undo/redo feature
 
