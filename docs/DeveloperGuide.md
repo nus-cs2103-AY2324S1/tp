@@ -121,7 +121,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e., all `Person`(which are contained in a `UniquePersonList` object) and `Event` objects (which are contained in a `EventList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -153,6 +153,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Ability to assign persons to an event
+
+The ability to assign persons to an event is facilitated by `ModelManager`. 
+
+Each event stores a list of persons assigned to it. The person(s) are represented by their `Name` stored in FumbleLog. This is because the `Name` is the only unique identifier for a person. 
+
+When a person is assigned to an event, the person's `Name` is added to the event's list of assigned persons. When a person is unassigned from an event, the person's `Name` is removed from the event's list of assigned persons. When a person's `Name` is modified, the change is also reflected in the event(s) that they are previously assigned to.
+
+Users can assign multiple names to an event by using multiple `n/` identifiers following with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, i.e the `Name` currently exists in FumbleLog. 
+
+When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event
+
+
 
 ### \[Proposed\] Undo/redo feature
 
