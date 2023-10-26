@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Messages;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Meeting;
 import seedu.address.model.group.Group;
@@ -233,6 +234,8 @@ public class ModelManager implements Model {
     public void updateAssignedPersons(Person personToEdit, Person editedPerson) {
         for (Event event : this.events) {
             if (event.getNames().contains(personToEdit.getName())) {
+                logger.info(String.format("Updating events that involves %s : ", personToEdit.getName())
+                        + Messages.formatEvent(event));
                 this.setEvent(event, createUpdatedEvent(event, personToEdit, editedPerson));
                 event.getNames().add(editedPerson.getName());
             }
