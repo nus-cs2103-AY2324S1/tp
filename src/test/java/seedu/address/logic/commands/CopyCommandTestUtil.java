@@ -10,10 +10,20 @@ import java.io.IOException;
 
 public class CopyCommandTestUtil {
 
-    public static Transferable saveClipboardContents() {
+    /**
+     * Gets the contents of the clipboard.
+     *
+     * @return the contents of the clipboard as a {@code Transferable} object.
+     */
+    public static Transferable getClipboardContents() {
         return Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
     }
 
+    /**
+     * Checks that the contents of the clipboard is equal to the correct text.
+     *
+     * @param correctText the correct text to check against.
+     */
     public static void checkClipboardContents(String correctText) {
         try {
             assertEquals(correctText,
@@ -25,6 +35,11 @@ public class CopyCommandTestUtil {
         }
     }
 
+    /**
+     * Replaces the contents of the clipboard with the specified {@code Transferable} object.
+     *
+     * @param clipboardContent the {@code Transferable} object to replace the clipboard contents with.
+     */
     public static void replaceClipboardContents(Transferable clipboardContent) {
         if (clipboardContent != null) {
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(clipboardContent, null);

@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMemberAtIndex;
 import static seedu.address.logic.commands.CopyCommandTestUtil.checkClipboardContents;
+import static seedu.address.logic.commands.CopyCommandTestUtil.getClipboardContents;
 import static seedu.address.logic.commands.CopyCommandTestUtil.replaceClipboardContents;
-import static seedu.address.logic.commands.CopyCommandTestUtil.saveClipboardContents;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalMembers.getTypicalAddressBookWithMembers;
@@ -38,7 +38,7 @@ public class CopyMemberCommandTest {
     @DisabledIf("java.awt.GraphicsEnvironment.isHeadless()")
     public void execute_validIndexUnfilteredList_success() {
         // Save clipboard contents before executing command
-        Transferable clipboardContentsBefore = saveClipboardContents();
+        Transferable clipboardContentsBefore = getClipboardContents();
 
         Member memberToCopy = model.getFilteredMemberList().get(INDEX_FIRST_PERSON.getZeroBased());
         CopyMemberCommand copyMemberCommand = new CopyMemberCommand(INDEX_FIRST_PERSON);
@@ -68,7 +68,7 @@ public class CopyMemberCommandTest {
     @DisabledIf("java.awt.GraphicsEnvironment.isHeadless()")
     public void execute_validIndexFilteredList_success() {
         // Save clipboard contents before executing command
-        Transferable clipboardContentsBefore = saveClipboardContents();
+        Transferable clipboardContentsBefore = getClipboardContents();
 
         showMemberAtIndex(model, INDEX_FIRST_PERSON);
 
