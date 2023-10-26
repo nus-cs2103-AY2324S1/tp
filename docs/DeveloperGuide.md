@@ -278,7 +278,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Alternatives Considered
 
-- **Alternative 1**: Using Numbering Index  to specify the person to edit. In this approach, users would provide the index of the person based on the list instead of specifying a name or IC. For example, they could use a command like `edit 1 p/93029393` to edit the first person of the list with the phone number.
+- **Alternative 1**: Using Numbering Index to specify the person to edit. In this approach, users would provide the index of the person based on the list instead of specifying a name or IC. For example, they could use a command like `edit 1 p/93029393` to edit the first person of the list with the phone number.
     - **Pros**:
         - **Simplicity**: Using an index is straightforward and doesn't require specifying a name or IC.
         - **Reduced Ambiguity**: Using an index avoids potential ambiguity when multiple individuals have the same name.
