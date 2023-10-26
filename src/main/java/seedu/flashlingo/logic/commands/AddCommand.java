@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             + PREFIX_TRANSLATED_WORD_LANGUAGE + "TRANSLATED WORD LANGUAGE \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ORIGINAL_WORD + "hello "
-            + PREFIX_ORIGINAL_WORD_LANGUAGE + "English"
+            + PREFIX_ORIGINAL_WORD_LANGUAGE + "English "
             + PREFIX_TRANSLATED_WORD + "你好 "
             + PREFIX_TRANSLATED_WORD_LANGUAGE + "Chinese";
 

@@ -17,9 +17,7 @@ public class FlashCard {
     private final TranslatedWord translatedWord;
     private Date whenToReview; // Date the flashcard was needs to be reviewed
     private ProficiencyLevel currentLevel; // How many times successfully remembered
-    private final ProficiencyLevel originalLevel; // For undo function
 
-    private boolean toDelete = false;
     /**
      * Constructor for Flashcard
      *
@@ -34,7 +32,6 @@ public class FlashCard {
         this.whenToReview = whenToReview;
         this.translatedWord = translatedWord;
         this.originalWord = originalWord;
-        this.originalLevel = level;
     }
     public OriginalWord getOriginalWord() {
         return originalWord;
@@ -52,8 +49,8 @@ public class FlashCard {
         return currentLevel;
     }
 
-    public boolean isToBeDeleted() {
-        return this.toDelete;
+    public boolean isDeletedFromReview() {
+        return this.currentLevel.isDeletedFromReview();
     }
 
     /**
@@ -118,7 +115,6 @@ public class FlashCard {
         if (isSuccess) {
             getProficiencyLevel().upgradeLevel();
             updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
-            this.toDelete = getProficiencyLevel().toDelete();
         } else {
             getProficiencyLevel().downgradeLevel();
             updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
@@ -154,7 +150,6 @@ public class FlashCard {
 
         FlashCard otherFlashCard = (FlashCard) other;
         return originalWord.equals(otherFlashCard.originalWord)
-            && translatedWord.equals(otherFlashCard.translatedWord)
-            && originalLevel.equals(otherFlashCard.originalLevel);
+            && translatedWord.equals(otherFlashCard.translatedWord);
     }
 }
