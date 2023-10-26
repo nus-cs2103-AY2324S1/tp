@@ -2,8 +2,23 @@
 layout: page
 title: User Guide
 ---
+# Tra$act User Guide
 
-**Tran$act** is a simple and easy to use transaction recorder and tracker built in Java.
+Welcome to **Tran$act**, your solution for effortless transaction recording and management.
+Transact is a desktop application designed to cater the needs of startup or small scale
+retailers looking for a cheap and efficient way to record daily transactions.
+
+Here's an overview of our main features:
+- **Transaction Management** : Add, Edit and Delete Income and Expenses
+- **Comprehensive Dashboard**: An instant snapshot of your monthly financial situation 
+- **Data Integration**: Export/Import financial statements in CSV format
+- **Address Book**: Add people to your address book and link them to transactions 
+
+In addition, Tran$act's **Command Line Interface (CLI)** functionality will allow you to unlock
+greater efficiency as you type faster, while still having the benefits of a Graphical User Interface (GUI)
+
+This user guide will walk you through how to get started with our app and dive into our features
+to help you streamline your accounting 
 
 ---
 
@@ -198,12 +213,14 @@ The lower menu bar contains three tabs:
 The input field below this with the grey text `Enter command here...` is where you can enter your commands.
 
 ## FAQ
-
+1. How to check my Java Version?
+* Open a Terminal/ Command Prompt and type java --version. If you do not have Java installed, you can check the instructions [here](https://nus-cs2103-ay2223s2.github.io/website/admin/programmingLanguages.html)
+2. Can I do further analysis with the transaction data
+* The purpose of Tran$act is to keep accounting and analysis simple to improve efficiency. Nonetheless, you can export the data as a CSV file and use the data in third party apps such as excel and do further analysis if needed.
+3. How can I launch Tran$act  if clicking on the JAR file does not work?
+* Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter to run the application. 
 ---
 
-## Known issues
-
----
 
 ## Command summary
 
