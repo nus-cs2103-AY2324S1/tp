@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.MusicianInBandPredicate;
@@ -193,7 +194,7 @@ public class ModelManager implements Model {
         if (filteredBands.size() == 0) {
             updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
             updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
-            return;
+
         }
 
         Predicate<Musician> musicianPredicate = new MusicianInBandPredicate(filteredBands.get(0));

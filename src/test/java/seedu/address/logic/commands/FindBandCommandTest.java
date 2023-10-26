@@ -3,7 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalMusicians.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +18,37 @@ class FindBandCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
-    void execute() {
+    void execute_validBandNameNoMusician_success() {
+        // expected
+
+        FindBandCommand command = new FindBandCommand(new BandNameContainsKeywordsPredicate("ACE"));
+
+//        String expectedMessage = String.format(MESSAGE_MUSICIANS_LISTED_OVERVIEW, 3);
+//        NameContainsKeywordsPredicate predicate = prepareNameKeywordsPredicate("Kurz Elle Kunz");
+//
+//        HashSet<Predicate<Musician>> predicates = new HashSet<>(Arrays.asList(predicate));
+//        FindCommand command = new FindCommand(predicates);
+//        expectedModel.updateFilteredMusicianList(predicate);
+//        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+//        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredMusicianList());
+    }
+
+    @Test
+    void execute_validBandNameHasMusician_success() {
 
     }
+
+    @Test
+    void execute_invalidBandNameListLengthOne_exceptionThrown() {
+
+    }
+
+    @Test
+    void execute_invalidBandNameListLengthLong_exceptionThrown() {
+
+    }
+
+
 
     @Test
     public void equals() {

@@ -1,16 +1,17 @@
-package seedu.address.testutil;
+package seedu.address.testutil.typicalentities;
 
-import static seedu.address.testutil.TypicalMusicians.ALICE;
-import static seedu.address.testutil.TypicalMusicians.BOB;
-import static seedu.address.testutil.TypicalMusicians.CARL;
-import static seedu.address.testutil.TypicalMusicians.DANIEL;
-import static seedu.address.testutil.TypicalMusicians.ELLE;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.ALICE;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.BOB;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.CARL;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.DANIEL;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.ELLE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.band.Band;
+import seedu.address.testutil.BandBuilder;
 
 
 /**
