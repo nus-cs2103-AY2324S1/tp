@@ -27,6 +27,8 @@
                   <children>
                      <Label alignment="CENTER" prefHeight="39.0" prefWidth="51.0" text="Files" />
                      <Button mnemonicParsing="false" text="Settings" />
+                      <Button mnemonicParsing="false" text="Import Data" />
+                      <Button mnemonicParsing="false" text="Export Data" />
                      <Label alignment="CENTER" prefHeight="39.0" prefWidth="50.0" text="Help" />
                      <Button mnemonicParsing="false" onAction="#handleHelp" text="User Guide" />
                      <Button mnemonicParsing="false" text="Release Notes" />
@@ -46,7 +48,7 @@
                      <HBox prefHeight="376.0" prefWidth="200.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                         <children>
                             <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="367.0" prefWidth="643.0" HBox.hgrow="ALWAYS" />
-                           <StackPane fx:id="personListPanelPlaceholder1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="376.0" prefWidth="332.0" HBox.hgrow="ALWAYS">
+                           <StackPane fx:id="loggerPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="376.0" prefWidth="332.0" styleClass="logger-tab" HBox.hgrow="ALWAYS">
                               <children>
                                  <Label styleClass="label-logger" text="Logger tab" />
                               </children>

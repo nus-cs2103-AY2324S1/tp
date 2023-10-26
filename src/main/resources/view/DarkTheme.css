@@ -382,3 +382,10 @@
     -fx-border-width: 0;
     /* Set border width to 0 */
 }
+
+.logger-tab {
+    -fx-background-color: #314A5A;
+    -fx-padding: 10px;
+    /* inset of left and right */
+    -fx-background-insets: 0 10px 0 10px;
+}
