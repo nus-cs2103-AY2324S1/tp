@@ -24,7 +24,7 @@ class CompleteCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompleteCommand.MESSAGE_USAGE);
     private CompleteCommandParser parser = new CompleteCommandParser();
     @Test
-    public void parse_missingParts_Failure() {
+    public void parse_missingParts_failure() {
         //no index or date specified
         assertParseFailure(parser, " ", MESSAGE_NOT_COMPLETED);
     }
