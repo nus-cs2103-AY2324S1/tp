@@ -154,6 +154,30 @@ Classes used by multiple components are in the `seedu.ccacommander.commons` pack
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Attendance Model
+This section explains how the `Attendace` model is implemented and the various design consideration when implementing this model.
+
+#### Implementation
+The `Attendance` and `UniqueAttendanceList` classes are implemented as shown in the diagram below:
+
+#### Design considerations:
+
+**Aspect: How to store each member's events and each event's members.**
+
+* **Alternative 1 (current choice):** Saves the attendance as an independent list.
+  * Pros: 
+    * Easy to implement. 
+    * No performance issues when loading and storing attendances.
+  * Cons: 
+    * O(mn) time to view members of event or events of members where `m` is the number of events and `n` is the number of members. This is because the entire list of attendance has to iterated through to filter out the correct attendances for that member or event.
+
+* **Alternative 2:** Each member or event has its own list of attendances.
+  * Pros: 
+    * Linear time to view members of event or events of members.
+  * Cons: 
+    * Hard to implement.
+    * Will have high memory usage as we will store duplicate attendances. And if we store duplicate attendances, there will be performance issues when loading the attendances.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
