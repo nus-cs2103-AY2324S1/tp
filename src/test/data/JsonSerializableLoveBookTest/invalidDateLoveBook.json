@@ -3,6 +3,8 @@
     "name": "Hans Muster",
     "age": "24",
     "gender": "Transgender",
-    "height": "232"
+    "height": "232",
+    "star": "false",
+    "avatar": "4"
   } ]
 }

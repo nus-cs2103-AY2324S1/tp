@@ -1,4 +1,4 @@
-package seedu.lovebook.model.person.horoscope;
+package seedu.lovebook.model.date.horoscope;
 
 import static java.util.Objects.requireNonNull;
 

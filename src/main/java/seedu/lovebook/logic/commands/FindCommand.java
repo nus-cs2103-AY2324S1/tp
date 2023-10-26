@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.NameContainsKeywordsPredicate;
+import seedu.lovebook.model.date.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all dates in lovebook book whose name contains any of the argument keywords.

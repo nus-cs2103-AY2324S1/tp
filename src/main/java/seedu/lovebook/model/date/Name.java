@@ -1,10 +1,10 @@
-package seedu.lovebook.model.person;
+package seedu.lovebook.model.date;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Date's name in the lovebook book.
+ * Represents a Date's name in the lovebook.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {

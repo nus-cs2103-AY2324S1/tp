@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * A utility class for test cases.

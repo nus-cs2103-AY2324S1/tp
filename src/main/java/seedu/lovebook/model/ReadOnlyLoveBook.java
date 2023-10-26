@@ -1,7 +1,7 @@
 package seedu.lovebook.model;
 
 import javafx.collections.ObservableList;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * Unmodifiable view of the LoveBook.

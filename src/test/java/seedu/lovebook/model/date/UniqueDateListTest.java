@@ -1,4 +1,4 @@
-package seedu.lovebook.model.person;
+package seedu.lovebook.model.date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,8 +14,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.lovebook.model.person.exceptions.DuplicatePersonException;
-import seedu.lovebook.model.person.exceptions.PersonNotFoundException;
+import seedu.lovebook.model.date.exceptions.DuplicatePersonException;
+import seedu.lovebook.model.date.exceptions.PersonNotFoundException;
 import seedu.lovebook.testutil.PersonBuilder;
 
 public class UniqueDateListTest {

@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
 import seedu.lovebook.model.UserPrefs;
-import seedu.lovebook.model.person.NameContainsKeywordsPredicate;
+import seedu.lovebook.model.date.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

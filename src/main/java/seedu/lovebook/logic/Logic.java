@@ -8,7 +8,7 @@ import seedu.lovebook.logic.commands.CommandResult;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.logic.parser.exceptions.ParseException;
 import seedu.lovebook.model.ReadOnlyLoveBook;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * API of the Logic component
