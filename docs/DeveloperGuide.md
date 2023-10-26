@@ -244,17 +244,19 @@ The `remind` command in our application displays a birthdays and events that wil
 
 #### Implementation
 
-The `remind` command interacts with multiple components in the application. The sequence diagram below shows the interactions between the components.
+The `remind` feature involves checking the current filtered list of persons and events and filtering out persons with birthdays and events with starting date 
+that are within the specified number of days. This is done using `BirthdayWithinDaysPredicate` and `EventWithinDaysPredicate` which implements the `Predicate<T>` interface. These predicates are passed 
+to `Model#updateFilteredPersonList(Predicate<Person> predicate)` and `Model#updateFilteredEventList(Predicate<Event> predicate)` respectively.
+
+As a result, the `ObservableList<Person>` and `ObservableList<Event>` are updated with the filtered lists of persons and events respectively. 
+The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons and events.
+
+The flow for the `remind` command is described by the following sequence diagram:
 
 ![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
 
-It makes use of the 'Model' component to update the list of persons that have birthdays within the specified number of days using
-`Model#updateFilteredPersonList(Predicate<Person> predicate)`. It does so by passing a predicate that filters out persons that do not have birthdays within the specified number of days.
-This is also done for events using `Model#updateFilteredEventList(Predicate<Event> predicate)`.
 
-After the `ObservableList<Person>` and `ObservableList<Event>` are updated, the `UI` component is notified of the changes and updates the UI accordingly, which will show the updated persons and events.
 
-Given below is an example usage scenario and how the remind feature behaves at each step.
 
 
 --------------------------------------------------------------------------------------------------------------------
