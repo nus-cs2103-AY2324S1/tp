@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,7 +23,9 @@ public class DeleteCommand extends Command {
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-
+    public static final String MESSAGE_TEAM_LEADER_CANNOT_BE_DELETED =
+            "The developer you have mentioned is a team leader, you can only edit team leader.";
+    public static final String MESSAGE_DELETE_PERSON_FROM_ALL_TEAMS = "Deleted Person : %1$s from all the teams.";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final Index targetIndex;
@@ -53,8 +56,17 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        IdentityCode personID = personToDelete.getIdentityCode();
+        if (model.developerIsTeamLeader(personID)) {
+            throw new CommandException(MESSAGE_TEAM_LEADER_CANNOT_BE_DELETED);
+        } else if (model.removeDeveloperFromAllTeams(personID)) {
+            model.deletePerson(personToDelete);
+            return new CommandResult(String.format(
+                    MESSAGE_DELETE_PERSON_FROM_ALL_TEAMS, Messages.format(personToDelete)));
+        } else {
+            model.deletePerson(personToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        }
     }
 
     /**

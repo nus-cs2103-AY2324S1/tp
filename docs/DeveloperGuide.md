@@ -215,6 +215,73 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
   * Pros: Easier implementation.
   * Cons: Breaks principle of abstraction and OOP. Information hiding is also not done.
 
+### Feature: Remove an existing Team
+
+#### Introduction
+
+Removing an existing team feature is facilitated by the `DeleteTeamCommand`. It extends the `Command` class. 
+
+The operations are exposed in the `Model` interface as `Model#deleteTeam()`.
+
+#### Usage
+
+Given below is an example usage scenario and how the "Remove an existing team" feature behaves at each step.
+
+##### Step 1
+
+The user launches the application and uses the `deleteteam` command to specify the `teamname` they want to delete.
+
+##### Step 2
+
+The user executes the `deleteteam` command `deleteteam tn/Team1` to delete the team named `Team1`.
+
+##### Step 3
+
+LinkTree provides feedback based on whether the operation was successful or not.
+
+**Note:** If a command fails its execution, it will not call `Model#deleteTeam()`, so the team will not be removed from `TeamBook`.
+
+#### Step-by-Step Implementation
+
+1. Create a `deleteteam` parser class called `DeleteTeamCommandParser` to parse input from the user. This class implements the `Parser` interface for the type `DeleteTeamCommand`.
+
+2. Create a `parse` method in `DeleteTeamCommandParser` that parses the user input and specifies the user flag used for `teamName` (e.g., `tn/` for teamName).
+
+3. Add the flag for user input to the `CliSyntax` class.
+
+4. For the `DeleteTeamCommand` class, specify the Command Word, which is `deleteteam`.
+
+5. Add relevant error messages for use cases like "The team name provided is invalid".
+
+6. Implement the `execute` method in `DeleteTeamCommand`. Handle cases where a team with the specified `teamName` does not exist.
+
+7. Use the `Model#deleteTeam` method to perform these checks.
+
+8. Throw exceptions in the case where deleting the team is not possible.
+
+9. If no such exception is thrown, proceed to delete the team.
+
+10. Run the `Model#deleteTeam` method to remove the specified team from TeamBook.
+
+11. `Model#deleteTeam` calls `TeamBook#removeTeamByName`, which in turn calls `UniqueTeamList#remove`. Finally, this method calls `ObservableList#remove` to remove the team from the list.
+
+#### Design Considerations
+
+**Aspect: Where the teams are stored:**
+
+- **Alternative 1 (current choice):** Store the teams in a separate class called `UniqueTeamList`.
+
+    - Pros: Better use of object-oriented programming.
+    - Cons: Multiple layers of abstraction (through Model, TeamBook, UniqueTeamList).
+
+- **Alternative 2:** Store the teams in the same class as persons in the `AddressBook` class.
+
+    - Pros: Easier implementation.
+    - Cons: Breaks the principle of abstraction and object-oriented programming. Information hiding is also not maintained.
+
+The choice between these alternatives depends on your specific project requirements and architectural preferences.
+
+
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
@@ -253,7 +320,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                                  | So that I can…​                                                           |
+| Priority | As a …          | I want to …                                                   | So that I can…​                                                           |
 |----------|-----------------|---------------------------------------------------------------|---------------------------------------------------------------------------|
 | `* * *`  | project manager | view all members of my project                                | get their email address/contact                                           |
 | `* * *`  | project manager | search contacts using a tag-based system                      | swiftly find contacts relevant to specific responsibilities               |
@@ -467,12 +534,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
+< box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</box>
+</ box>
 
 ### Launch and shutdown
 

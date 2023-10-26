@@ -127,7 +127,38 @@ public class UniqueTeamList implements Iterable<Team> {
             throw new DeveloperNotFoundException();
         }
     }
+    /**
+     * Checks if the given id is an id of team leader.
+     *
+     * @param developerIdentityCode the developerIdentityCode
+     * @return the boolean
+     */
+    public boolean isTeamLeader(IdentityCode developerIdentityCode) {
+        requireNonNull(developerIdentityCode);
 
+        for (Team team : internalList) {
+            return team.getTeamLeaderIdentityCode().equals(developerIdentityCode);
+        }
+        return false;
+    }
+
+    /**
+     * Removes developer from all teams boolean.
+     *
+     * @param developerIdentityCode the developer identity code
+     * @return the boolean
+     */
+    public boolean removeDeveloperFromAllTeams(IdentityCode developerIdentityCode) {
+        requireNonNull(developerIdentityCode);
+        boolean developerIsInTeam = false;
+        for (Team team: internalList) {
+            if (team.containsDevloperIdentityCode(developerIdentityCode)) {
+                team.removeDeveloper(developerIdentityCode);
+                developerIsInTeam = true;
+            }
+        }
+        return developerIsInTeam;
+    }
     public IdentityCode getTeamLeaderIdOfTeam(String teamName) {
         return getTeamByName(teamName).getTeamLeaderIdentityCode();
     }

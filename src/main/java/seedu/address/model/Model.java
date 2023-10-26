@@ -220,6 +220,9 @@ public interface Model {
 
     boolean isLeaderOfTeam(String teamName, Name devToBeAdded);
 
+    boolean developerIsTeamLeader(IdentityCode developerIdentityCode);
+    boolean removeDeveloperFromAllTeams(IdentityCode developerIdentityCode);
+
     /**
      * Deletes the given developer from the specified team.
      * The developer and team must exist in the model.
