@@ -149,7 +149,12 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+## **WellNus Implementation**
 
+
+
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
