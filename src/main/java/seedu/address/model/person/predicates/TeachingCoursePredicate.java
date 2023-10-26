@@ -10,10 +10,10 @@ import seedu.address.model.person.Person;
 /**
  * Tests that a {@code Person}'s {@code Courses} matches any of the keywords given.
  */
-public class TeachingCourseCommandPredicate implements FindCommandPredicate {
+public class TeachingCoursePredicate implements FindCommandPredicate {
     private final List<Course> courses;
 
-    public TeachingCourseCommandPredicate(List<Course> courses) {
+    public TeachingCoursePredicate(List<Course> courses) {
         this.courses = courses;
     }
 
@@ -36,11 +36,11 @@ public class TeachingCourseCommandPredicate implements FindCommandPredicate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TeachingCourseCommandPredicate)) {
+        if (!(other instanceof TeachingCoursePredicate)) {
             return false;
         }
 
-        TeachingCourseCommandPredicate otherNameContainsKeywordsPredicate = (TeachingCourseCommandPredicate) other;
+        TeachingCoursePredicate otherNameContainsKeywordsPredicate = (TeachingCoursePredicate) other;
         return courses.equals(otherNameContainsKeywordsPredicate.courses);
     }
 

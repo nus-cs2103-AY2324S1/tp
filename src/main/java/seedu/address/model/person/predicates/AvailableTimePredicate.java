@@ -7,10 +7,10 @@ import seedu.address.model.person.Person;
 /**
  * Tests that a {@code Person}'s {@code FreeTime} is within the FreeTime that is given.
  */
-public class AvailableTimeCommandPredicate implements FindCommandPredicate {
+public class AvailableTimePredicate implements FindCommandPredicate {
     private final TimeInterval interval;
 
-    public AvailableTimeCommandPredicate(TimeInterval interval) {
+    public AvailableTimePredicate(TimeInterval interval) {
         this.interval = interval;
     }
 
@@ -40,11 +40,11 @@ public class AvailableTimeCommandPredicate implements FindCommandPredicate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AvailableTimeCommandPredicate)) {
+        if (!(other instanceof AvailableTimePredicate)) {
             return false;
         }
 
-        AvailableTimeCommandPredicate otherNameContainsKeywordsPredicate = (AvailableTimeCommandPredicate) other;
+        AvailableTimePredicate otherNameContainsKeywordsPredicate = (AvailableTimePredicate) other;
         return interval.equals(otherNameContainsKeywordsPredicate.interval);
     }
 
