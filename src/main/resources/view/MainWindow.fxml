@@ -23,7 +23,7 @@
       </stylesheets>
          <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="540.0" prefWidth="824.0" HBox.hgrow="ALWAYS">
             <children>
-               <VBox prefHeight="540.0" prefWidth="168.0" style="-fx-background-color: #282828;" VBox.vgrow="ALWAYS">
+               <VBox prefHeight="540.0" prefWidth="168.0" style="-fx-background-color: #231335;" VBox.vgrow="ALWAYS">
                   <children>
                      <Label alignment="CENTER" prefHeight="39.0" prefWidth="51.0" text="Files" />
                      <Button mnemonicParsing="false" text="Settings" />
@@ -37,7 +37,7 @@
                   </children>
                </VBox>
       
-                <VBox prefHeight="540.0" prefWidth="656.0" HBox.hgrow="ALWAYS">
+                <VBox prefHeight="540.0" prefWidth="656.0" style="-fx-background-color: #624583;" HBox.hgrow="ALWAYS">
                   <VBox fx:id="personList" prefHeight="453.0" prefWidth="523.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                   <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -49,12 +49,13 @@
                            <StackPane fx:id="personListPanelPlaceholder1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="376.0" prefWidth="332.0" HBox.hgrow="ALWAYS">
                               <children>
                                  <Label styleClass="label-logger" text="Logger tab" />
-                              </children></StackPane>
+                              </children>
+                            </StackPane>
                         </children>
                      </HBox>
                   </VBox>
       
-                  <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="69.0" prefHeight="70.0" prefWidth="633.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                  <StackPane fx:id="resultDisplayPlaceholder" maxHeight="150" minHeight="120.0" prefHeight="120.0" prefWidth="633.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
                     <padding>
                       <Insets bottom="5" left="10" right="10" top="5" />
                     </padding>
