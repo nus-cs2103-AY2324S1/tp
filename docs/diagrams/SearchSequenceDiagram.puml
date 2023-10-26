@@ -6,8 +6,8 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
-participant "f:FindCommand" as FindCommand LOGIC_COLOR
+participant ":SearchCommandParser" as SearchCommandParser LOGIC_COLOR
+participant "f:SearchCommand" as SearchCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -21,50 +21,50 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("search st/offered")
 activate AddressBookParser
 
-create FindCommandParser
-AddressBookParser -> FindCommandParser
-activate FindCommandParser
+create SearchCommandParser
+AddressBookParser -> SearchCommandParser
+activate SearchCommandParser
 
-FindCommandParser --> AddressBookParser
-deactivate FindCommandParser
+SearchCommandParser --> AddressBookParser
+deactivate SearchCommandParser
 
-AddressBookParser -> FindCommandParser : parse("search st/offered")
-activate FindCommandParser
+AddressBookParser -> SearchCommandParser : parse("search st/offered")
+activate SearchCommandParser
 
-create FindCommand
-FindCommandParser -> FindCommand : findCommand(predicatesList)
-activate FindCommand
+create SearchCommand
+SearchCommandParser -> SearchCommand : searchCommand(predicatesList)
+activate SearchCommand
 
-FindCommand --> FindCommandParser : f
-deactivate FindCommand
+SearchCommand --> SearchCommandParser : f
+deactivate SearchCommand
 
-FindCommandParser --> AddressBookParser : f
-deactivate FindCommandParser
+SearchCommandParser --> AddressBookParser : f
+deactivate SearchCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-FindCommandParser -[hidden]-> AddressBookParser
-destroy FindCommandParser
+SearchCommandParser -[hidden]-> AddressBookParser
+destroy SearchCommandParser
 
 AddressBookParser --> LogicManager : f
 deactivate AddressBookParser
 
-LogicManager -> FindCommand  : execute()
-activate FindCommand
+LogicManager -> SearchCommand  : execute()
+activate SearchCommand
 
-FindCommand -> Model : updateFilteredPersonList(predicatesList)
+SearchCommand -> Model : updateFilteredPersonList(predicatesList)
 activate Model
 
-Model --> FindCommand
+Model --> SearchCommand
 deactivate Model
 
 create CommandResult
-FindCommand -> CommandResult
+SearchCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> FindCommand
+CommandResult --> SearchCommand
 deactivate CommandResult
 
-FindCommand --> LogicManager : result
-deactivate FindCommand
+SearchCommand --> LogicManager : result
+deactivate SearchCommand
 
 
 
