@@ -8,8 +8,6 @@ import swe.context.logic.Messages;
 import swe.context.model.Model;
 import swe.context.model.ModelManager;
 
-
-
 public class HelpCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
