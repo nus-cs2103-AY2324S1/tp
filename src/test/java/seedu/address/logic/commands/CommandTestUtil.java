@@ -37,6 +37,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_RISK_LEVEL_LOW = "low";
     public static final String VALID_RISK_LEVEL_HIGH = "high";
+    public static final String VALID_NOTE_AMY = "course: psychology";
+    public static final String VALID_NOTE_BOB = "likes playing football";
     public static final String VALID_CATEGORY_APPOINTMENT = "appointments";
     public static final String VALID_CATEGORY_STUDENT = "students";
 

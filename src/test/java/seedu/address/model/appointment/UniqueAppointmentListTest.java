@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAppointments.ALEX;
-import static seedu.address.testutil.TypicalAppointments.ALEX_SECOND;
+import static seedu.address.testutil.TypicalAppointments.ALEX_APPOINTMENT;
+import static seedu.address.testutil.TypicalAppointments.ALEX_SECOND_APPOINTMENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,18 +24,18 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void contains_appointmentNotInList_returnsFalse() {
-        assertFalse(uniqueAppointmentList.contains(ALEX));
+        assertFalse(uniqueAppointmentList.contains(ALEX_APPOINTMENT));
     }
 
     @Test
     public void contains_appointmentInList_returnsTrue() {
-        uniqueAppointmentList.add(ALEX);
-        assertTrue(uniqueAppointmentList.contains(ALEX));
+        uniqueAppointmentList.add(ALEX_APPOINTMENT);
+        assertTrue(uniqueAppointmentList.contains(ALEX_APPOINTMENT));
     }
 
     @Test
     public void contains_appointmentWithSameFieldsInList_returnsTrue() {
-        uniqueAppointmentList.add(ALEX);
+        uniqueAppointmentList.add(ALEX_APPOINTMENT);
         Appointment editedAlex = new AppointmentBuilder().withName("Alex Yeoh")
                 .withDate("2023-10-31").withStartTime("12:00").withEndTime("13:00")
                 .withDescription("First Session").build();
@@ -49,8 +49,8 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void add_duplicateAppointment_throwsDuplicateAppointmentException() {
-        uniqueAppointmentList.add(ALEX);
-        assertThrows(DuplicateAppointmentException.class, () -> uniqueAppointmentList.add(ALEX));
+        uniqueAppointmentList.add(ALEX_APPOINTMENT);
+        assertThrows(DuplicateAppointmentException.class, () -> uniqueAppointmentList.add(ALEX_APPOINTMENT));
     }
 
     @Test
@@ -60,30 +60,30 @@ public class UniqueAppointmentListTest {
 
     @Test
     public void remove_appointmentDoesNotExist_throwsAppointmentNotFoundException() {
-        assertThrows(AppointmentNotFoundException.class, () -> uniqueAppointmentList.remove(ALEX));
+        assertThrows(AppointmentNotFoundException.class, () -> uniqueAppointmentList.remove(ALEX_APPOINTMENT));
     }
 
     @Test
     public void remove_existingAppointment_removesAppointment() {
-        uniqueAppointmentList.add(ALEX);
-        uniqueAppointmentList.remove(ALEX);
+        uniqueAppointmentList.add(ALEX_APPOINTMENT);
+        uniqueAppointmentList.remove(ALEX_APPOINTMENT);
         UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
         assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
     }
 
     @Test
     public void removeRelatedAppointments_existingAppointment_removesAppointment() {
-        uniqueAppointmentList.add(ALEX);
-        uniqueAppointmentList.removeRelatedAppointments(ALEX.getName());
+        uniqueAppointmentList.add(ALEX_APPOINTMENT);
+        uniqueAppointmentList.removeRelatedAppointments(ALEX_APPOINTMENT.getName());
         UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
         assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
     }
 
     @Test
     public void removeRelatedAppointments_existingAppointment_removesAllAppointmentsWithSameName() {
-        uniqueAppointmentList.add(ALEX);
-        uniqueAppointmentList.add(ALEX_SECOND);
-        uniqueAppointmentList.removeRelatedAppointments(ALEX.getName());
+        uniqueAppointmentList.add(ALEX_APPOINTMENT);
+        uniqueAppointmentList.add(ALEX_SECOND_APPOINTMENT);
+        uniqueAppointmentList.removeRelatedAppointments(ALEX_APPOINTMENT.getName());
         UniqueAppointmentList expectedUniqueAppointmentList = new UniqueAppointmentList();
         assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
     }

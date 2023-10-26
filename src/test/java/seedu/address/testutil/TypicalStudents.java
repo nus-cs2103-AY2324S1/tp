@@ -22,8 +22,7 @@ import seedu.address.model.student.Student;
 public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111")
-            .withPhone("94351253")
+            .withAddress("123, Jurong West Ave 6, #08-111").withPhone("94351253")
             .withTags("high").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
