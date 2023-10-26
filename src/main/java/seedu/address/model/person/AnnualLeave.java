@@ -22,8 +22,9 @@ public class AnnualLeave {
                 + "It should not contain dashes or spaces.";
 
     public static final String MESSAGE_LEAVE_CONSTRAINTS =
-            "Number of days of annual leave taken should not exceed the total limit."
-                    + "You can only apply leave for this year and next year.";
+            "The leave that you are trying to add is invalid.\nCheck that "
+            + "the number of days of annual leave taken should not exceed the total limit and \n"
+                    + "you can only add leave for this year and next year.";
 
     public static final String MESSAGE_EXPIRED_LEAVE = "Date of the leave that you are trying to add is already over.";
     public static final String MESSAGE_DUPLICATE_LEAVE = "Some or all the leave(s) that you "
