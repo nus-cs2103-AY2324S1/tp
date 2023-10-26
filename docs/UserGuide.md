@@ -96,7 +96,61 @@ Below is a quick overview of the various components of our interface.
 --------------------------------------------------------------------------------------------------------------------
 
 ## TutorConnect Tutorial (for new users)
-More details coming soon...
+
+Hello and welcome to TutorConnect! We're delighted you've chosen our platform to manage your tuition center's tutors and schedules. 
+
+This tutorial aims to guide you through the essential features and functionalities of TutorConnect that you will use on a day-to-day basis.
+
+Before we begin, please ensure that you have viewed the following sections of the guide:
+* [Quick Start](#quick-start) to help you get TutorConnect up and running.
+* [Navigating the Interface](#navigating-the-interface) to get you familiarised on how to navigate TutorConnect.
+
+### Start
+![start](images/tutorial/start.png)
+
+When you first launch TutorConnect, you will be greeted with an empty screen with no tutors. It's time to start adding your tutors to TutorConnect.
+
+### Adding Your First Tutor
+
+![add-t](images/tutorial/add-t.png)
+
+To add your first tutor, you can use the [**add-t**](#adding-a-tutor-add-t) command.
+
+Let's say you have a tutor named **John Doe**, he has provided you with his phone number: **9123 4567** and his email address: **johndoe@example.com**.
+
+To add John Doe into TutorConnect:
+1. Simply type into the Command Box: `add-t n/John Doe p/91234567 e/johnd@example.com`
+2. Hit enter.
+3. Voila! John Doe is now in TutorConnect
+
+### Planning Your Schedules
+
+Now that your tutors are in TutorConnect, it's time to start scheduling classes for them!
+
+To assign schedules to your tutor, you can use the [**add-s**](#adding-a-schedule-add-s) command.
+
+Let's assign a schedule for **John Doe** on **1 October 2023** from **9AM to 11AM**.
+
+To assign John Doe that schedule:
+1. Get the **TUTOR_INDEX** of the tutor you wish to assign a schedule to
+   ![tutor-index](images/tutorial/tutor-index.png)
+2. Simply type into the Command Box: `add-s 1 st/2023-10-01T09:00 et/2023-10-01T11:00`
+3. Hit enter.
+4. Voila! John Doe now has a schedule on **1 October 2023** from **9AM to 11AM**. 
+
+### Viewing Your Tutors/Schedules
+
+![list-s](images/tutorial/list-s.png)
+
+Now that you have schedules in TutorConnect, you can view them using the [**list-s**](#list-all-schedules-list-s) command.
+
+1. Simply type into the Command Box: `list-s`
+2. Hit enter.
+3. Voila! You can view all your schedules in TutorConnect.
+
+Similarly, you can use the [**list-t**](#listing-all-tutors-list-t) command to go back to viewing all your tutors instead.
+
+Congratulations! You have successfully added your first tutor and schedule to TutorConnect. We hope that this tutorial has helped guide you through the basic features of TutorConnect. Please refer to the [**Features Section**](#features) to see what else TutorConnect can do. Alternatively visit the [**FAQ**](#faq) to view the frequently asked questions.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -292,13 +346,13 @@ Adds a schedule to a specified tutor.
 **Format**: `add-s TUTOR_INDEX st/START_TIME et/END_TIME`
 
 **Examples**:
-* `add-s 1 st/2023-09-15T09:00:00 et/2023-09-15T11:00:00`
-* `add-s 2 st/2023-09-16T17:00:00 et/2023-09-16T19:00:00`
+* `add-s 1 st/2023-09-15T09:00 et/2023-09-15T11:00`
+* `add-s 2 st/2023-09-16T17:00 et/2023-09-16T19:00`
 
 **Acceptable values for each parameter**:
 * `TUTOR_INDEX`: Only number input accepted, starting from 1 to the last tutor index shown in the list of tutors.
-* `START_TIME`: Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted
-* `END_TIME`: Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted
+* `START_TIME`: Only datetime in `yyyy-MM-ddTHH:mm` format is accepted
+* `END_TIME`: Only datetime in `yyyy-MM-ddTHH:mm` format is accepted
 
     <div markdown="block" class="alert alert-info">
 
@@ -310,7 +364,6 @@ Adds a schedule to a specified tutor.
     * `T` is a **separator** indicating the start of the time portion.
     * `HH` represents the **hour** in **24-hour format** with a leading zero (e.g., 09 for 9 AM, 21 for 9 PM).
     * `mm` represents the **minutes** with a leading zero (e.g., 05).
-    * `ss` represents the **seconds** with a leading zero (e.g., 05).
 
     </div>
 
@@ -319,9 +372,9 @@ Adds a schedule to a specified tutor.
 
 **Error messages**:
 * `Invalid command format!`: Invalid TUTOR_INDEX or some of the tags `st/`, `et/` is missing.
-* `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be blank`: 
+* `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`: 
   The start time entered is not in the correct datetime format.
-* `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be blank`: The end time entered is not in the correct datetime format.
+* `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`: The end time entered is not in the correct datetime format.
 * `Multiple values specified for the following single-valued field(s): st/`: More than 1 st/ was given in the command
 * `Multiple values specified for the following single-valued field(s): et/`: More than 1 et/ was given in the command
 * `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
@@ -336,23 +389,23 @@ Edits an existing schedule in the addressbook.
 **Format**: `edit-s SCHEDULE_INDEX st/START_TIME et/END_TIME`
 
 **Examples**:
-* `edit-s 1 st/2023-09-15T13:00:00`
-* `edit-s 2 et/2023-09-16T19:00:00`
+* `edit-s 1 st/2023-09-15T13:00`
+* `edit-s 2 et/2023-09-16T19:00`
 
 **Acceptable values for each parameter**:
 * `SCHEDULE_INDEX`: Only number input accepted, starting from 1 to the last schedule index shown in the list of 
   schedules.
-* `START_TIME`: Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted
-* `END_TIME`: Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted
+* `START_TIME`: Only datetime in `yyyy-MM-ddTHH:mm` format is accepted
+* `END_TIME`: Only datetime in `yyyy-MM-ddTHH:mm` format is accepted
 
 **Expected output**:
 * `Edited Schedule: Alex Yeoh; Start Time: Sep 15 2023 09:00; End Time: Sep 15 2023 13:00`
 
 **Error messages**:
 * `Invalid command format!`: Invalid or missing SCHEDULE_INDEX.
-* `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be blank`:
+* `EndTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be blank`:
   The end time entered is not in the correct datetime format.
-* `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm:ss", and it should not be 
+* `StartTime should only contain a valid date and time in the format "yyyy-MM-ddTHH:mm", and it should not be 
   blank`: The start time entered is not in the correct datetime format.
 * `Multiple values specified for the following single-valued field(s): st/`: More than 1 `st/` was given in the command
 * `Multiple values specified for the following single-valued field(s): et/`: More than 1 `et/` was given in the command
@@ -523,8 +576,8 @@ Here are some parameters you might come across in the User Guide:
 | `n/NAME`          | Refers to the name of the tutor.                | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
 | `p/PHONE NUMBER`  | Refers to the phone number of the tutor.        | Only contain numbers, and should be at least 3 <br/>digits long.                             |
 | `e/EMAIL`         | Refers to the email address of the tutor.       | Of the format local-part@domain<sup>1</sup>.                                                 |
-| `s/START_TIME`    | Refers to the start time of the schedule.       | Only datetime in `yyyy-MM-ddTHH:mm:ss`<sup>2</sup> format is accepted.                       |
-| `e/END_TIME`      | Refers to the end time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm:ss` format is accepted.                                   |
+| `s/START_TIME`    | Refers to the start time of the schedule.       | Only datetime in `yyyy-MM-ddTHH:mm`<sup>2</sup> format is accepted.                          |
+| `e/END_TIME`      | Refers to the end time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm` format is accepted.                                      |
 | `TUTOR_INDEX`     | Refers to the position of tutor in the list.    | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
 | `SCHEDULE_INDEX`  | Refers to the position of schedule in the list. | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
 | `SCHEDULE_STATUS` | Refers to the status of schedule in the list.   | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
@@ -542,7 +595,7 @@ This section consists of more details of format limitations mentioned above.
     * have each domain label start and end with alphanumeric characters
     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
-**<sup>2</sup> `yyyy-MM-ddTHH:mm:ss`**
+**<sup>2</sup> `yyyy-MM-ddTHH:mm`**
 
     * `yyyy` represents the **year** (e.g., 2023).
     * `MM` represents the **month** with a leading zero (e.g., 09 for September, 10 for October).
@@ -550,7 +603,6 @@ This section consists of more details of format limitations mentioned above.
     * `T` is a **separator** indicating the start of the time portion.
     * `HH` represents the **hour** in **24-hour format** with a leading zero (e.g., 09 for 9 AM, 21 for 9 PM).
     * `mm` represents the **minutes** with a leading zero (e.g., 05).
-    * `ss` represents the **seconds** with a leading zero (e.g., 05).
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -564,8 +616,8 @@ This section consists of more details of format limitations mentioned above.
 | **List Tutor**      | `list-t`                                                                                                        |
 | **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                   |
 | **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                      |
-| **Add Schedule**    | `add-s TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00:00 e/2023-09-15T11:00:00` |
-| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]` <br> e.g., `edit-s 1 s/2023-09-15T13:00:00`                 |
+| **Add Schedule**    | `add-s TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00 e/2023-09-15T11:00`       |
+| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]` <br> e.g., `edit-s 1 s/2023-09-15T13:00`                    |
 | **List Schedule**   | `list-s`                                                                                                        |
 | **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                                  |
 | **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                    |
