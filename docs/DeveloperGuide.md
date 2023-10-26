@@ -191,7 +191,7 @@ This is the class diagram for the gather command:
 
 ![GatherClassDiagram](images/GatherClassDiagram.png)
 
-**Aspect: Usage Scenario:**
+**Usage Scenario:**
 
 **Scenario 1:**
 User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
@@ -205,7 +205,7 @@ The following sequence diagram shows how the gather operation works:
 
 #### Design Considerations
 
-**Aspect: How Gather Executes**
+**Aspect: How implement more fields**
 
 **Alternative 1 (Current Choice):** User can only search by one Financial Plan or Tag.
 - **Pros:** Easy to implement. Limits the potential for bugs.
