@@ -151,8 +151,22 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 --------------------------------------------------------------------------------------------------------------------
 ## **WellNus Implementation**
 
+This section describes some noteworthy details on how certain features of WellNus are implemented.
 
+### View Feature
 
+This feature is facilitated by the use of the ViewCommand class which extends the Command interface.
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+![Interactions between LogicManager and ModelManager for a view command](images/ViewSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+View Command handles both the viewing of all students and all appointments. The workflow is shown below:
+![ViewCommand Control Flow](images/ViewActivityDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** There should be a diamond connecting the 3 separate branches
+but due to a limitation of PlantUML, the 3 branches leads to the "end" individually .
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
