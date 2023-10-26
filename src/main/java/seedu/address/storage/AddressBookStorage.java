@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.AddressBookManager;
+import seedu.address.model.ReadOnlyAddressBookManager;
 
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
@@ -35,11 +36,11 @@ public interface AddressBookStorage {
      * @param addressBookManager cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBooks(AddressBookManager addressBookManager) throws IOException;
+    void saveAddressBooks(ReadOnlyAddressBookManager addressBookManager) throws IOException;
 
     /**
      * @see #saveAddressBook(AddressBookManager)
      */
-    void saveAddressBooks(AddressBookManager addressBookManager, Path filePath) throws IOException;
+    void saveAddressBooks(ReadOnlyAddressBookManager addressBookManager, Path filePath) throws IOException;
 
 }

@@ -29,15 +29,15 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBookManager and userPrefs.
      */
-    public ModelManager(AddressBookManager addressBookManager, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBookManager addressBookManager, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBookManager, userPrefs);
 
         logger.fine("Initializing with address book manager: " + addressBookManager + " and user prefs " + userPrefs);
 
-        this.addressBookManager = addressBookManager;
+        this.addressBookManager = new AddressBookManager(addressBookManager);
         this.userPrefs = new UserPrefs(userPrefs);
 
-        if (addressBookManager.getActiveAddressBook() == null) {
+        if (getAddressBook() == null) {
             filteredPersons = new FilteredList<>(new UniquePersonList().asUnmodifiableObservableList());
         } else {
             filteredPersons = new FilteredList<>(this.addressBookManager.getActiveAddressBook().getPersonList());
@@ -108,33 +108,37 @@ public class ModelManager implements Model {
         return addressBookManager.getActiveAddressBook();
     }
 
+    private AddressBook getActiveAddressBook() {
+        return addressBookManager.getActiveAddressBook();
+    }
+
     @Override
-    public AddressBookManager getAddressBookManager() {
+    public ReadOnlyAddressBookManager getAddressBookManager() {
         return addressBookManager;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBookManager.getActiveAddressBook().hasPerson(person);
+        return getActiveAddressBook().hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBookManager.getActiveAddressBook().removePerson(target);
+        getActiveAddressBook().removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
         requireNonNull(person);
-        addressBookManager.getActiveAddressBook().addPerson(person);
+        getActiveAddressBook().addPerson(person);
         clearFilters();
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-        addressBookManager.getActiveAddressBook().setPerson(target, editedPerson);
+        getActiveAddressBook().setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================

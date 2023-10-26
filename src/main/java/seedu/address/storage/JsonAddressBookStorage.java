@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBookManager;
+import seedu.address.model.ReadOnlyAddressBookManager;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -55,7 +56,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBooks(AddressBookManager addressBookManager) throws IOException {
+    public void saveAddressBooks(ReadOnlyAddressBookManager addressBookManager) throws IOException {
         saveAddressBooks(addressBookManager, filePath);
     }
 
@@ -64,7 +65,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBooks(AddressBookManager addressBookManager, Path filePath) throws IOException {
+    public void saveAddressBooks(ReadOnlyAddressBookManager addressBookManager, Path filePath) throws IOException {
         requireNonNull(addressBookManager);
         requireNonNull(filePath);
 

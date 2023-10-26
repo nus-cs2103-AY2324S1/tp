@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -27,7 +28,7 @@ import seedu.address.storage.JsonSerializableAddressBook;
  */
 @JsonSerialize(using = AddressBookManager.AddressBookManagerSerializer.class)
 @JsonDeserialize(using = AddressBookManager.AddressBookManagerDeserializer.class)
-public class AddressBookManager {
+public class AddressBookManager implements ReadOnlyAddressBookManager {
     private HashMap<String, ReadOnlyAddressBook> addressBooks;
     private AddressBook currentAddressBook;
     private String currentCourseCode;
@@ -37,7 +38,15 @@ public class AddressBookManager {
      */
     public AddressBookManager() {
         this.addressBooks = new HashMap<>();
-        this.currentCourseCode = "";
+        addAddressBook(new AddressBook("Temp"));
+        setActiveAddressBook("Temp");
+    }
+
+    /**
+     * Creates an address book manager with the given read only addressBookManager.
+     */
+    public AddressBookManager(ReadOnlyAddressBookManager addressBookManager) {
+        this(addressBookManager.getAddressBooks(), addressBookManager.getActiveCourseCode());
     }
 
     /**
@@ -62,6 +71,22 @@ public class AddressBookManager {
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         requireNonNull(addressBook);
         this.currentAddressBook = new AddressBook(addressBook.getCourseCode(), addressBook);
+    }
+
+    /**
+     * Replaces the given address book {@code target} in the list with {@code editedAddressBook}.
+     * {@code target} must exist in the address book manager.
+     * The address book identity of {@code editedAddressBook} must not be the same as another existing address book
+     * in the address book manager.
+     */
+    public void setAddressBook(String targetCourseCode, ReadOnlyAddressBook editedAddressBook) {
+        requireAllNonNull(targetCourseCode, editedAddressBook);
+
+        if (!this.addressBooks.containsKey(targetCourseCode.toUpperCase())) {
+            throw new IllegalArgumentException("Address book does not exist");
+        }
+
+        this.addressBooks.put(targetCourseCode.toUpperCase(), editedAddressBook);
     }
 
     public void setActiveAddressBook(String courseCode) {
@@ -99,6 +124,55 @@ public class AddressBookManager {
     public void removeAddressBook(String courseCode) {
         requireNonNull(courseCode);
         this.addressBooks.remove(courseCode.toUpperCase());
+    }
+
+    @Override
+    public HashMap<String, ReadOnlyAddressBook> getAddressBooks() {
+        HashMap<String, ReadOnlyAddressBook> copiedAddressBooks = new HashMap<>();
+        addressBooks.forEach((courseCode, addressBook) ->
+                copiedAddressBooks.put(courseCode, new AddressBook(courseCode, currentAddressBook)));
+        return copiedAddressBooks;
+    }
+
+    @Override
+    public String getActiveCourseCode() {
+        return currentCourseCode;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddressBookManager)) {
+            return false;
+        }
+
+        AddressBookManager otherModelManager = (AddressBookManager) other;
+        return addressBooks.equals(otherModelManager.addressBooks)
+                && currentAddressBook.equals(otherModelManager.currentAddressBook)
+                && currentCourseCode.equalsIgnoreCase(otherModelManager.currentCourseCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(addressBooks, currentAddressBook, currentCourseCode);
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("Address books: ")
+                .append(addressBooks)
+                .append("\n")
+                .append("Current address book: ")
+                .append(currentAddressBook)
+                .append("\n")
+                .append("Current course code: ")
+                .append(currentCourseCode)
+                .toString();
     }
 
     /**
