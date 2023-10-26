@@ -23,6 +23,7 @@ public class RemindCommandParser implements Parser<RemindCommand> {
 
         try {
             int parsedArgs = Integer.parseInt(trimmedArgs);
+
             if (parsedArgs < 0) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                         Messages.MESSAGE_NOT_POSITIVE_NUMBER));
