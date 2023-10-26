@@ -35,8 +35,8 @@ public class Transaction implements Entry {
      *            The amount of the transaction.
      * @param date
      *            The date of the transaction.
-     * @param person
-     *            The person associated with the transaction.
+     * @param personId
+     *            The ID of the person associated with the transaction.
      */
     public Transaction(TransactionType transactionType, Description description, Amount amount, Date date,
             Integer personId) {
@@ -92,8 +92,8 @@ public class Transaction implements Entry {
      *            The amount of the transaction.
      * @param date
      *            The date of the transaction.
-     * @param person
-     *            The person associated with the transaction.
+     * @param personId
+     *            The ID of the person associated with the transaction.
      */
     public Transaction(TransactionId transactionId, TransactionType transactionType, Description description,
             Amount amount, Date date, Integer personId) {
