@@ -82,22 +82,43 @@ applications.
 
 Adds an application to a company to the list.
 
-**Format:** `add c/COMPANY r/ROLE d/DEADLINE s/STATUS`
+**Format:** `add c/COMPANY r/ROLE d/DEADLINE s/STATUS i/INDUSTRY t/JOB_TYPE`
 
 * Users must input a company `COMPANY` and a role `ROLE`
-* Details of the company such as `DEADLINE` and `STATUS` are optional
+* Details of the company such as `DEADLINE`, `STATUS`, `INDUSTRY`, `JOB_TYPE` are optional
+* `DEADLINE` must be in the following format: MMM dd yyyy HHmm (E.g Dec 31 2030 1200)
+* `STATUS`can only be in the following 4 formats: _TO_BE_SUBMITTED, PENDING, APPROVED, REJECTED_, the default status is _TO_BE_SUBMITTED_
+* `JOBTYPE` can only be in the following 7 formats: _FULL_TIME, PART_TIME, INTERNSHIP, TEMPORARY, CONTRACT, FREELANCE, VOLUNTEER_
 
 **Examples:**
 
-* `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 s/pending`
-  Adds a company called microsoft, with the role Software Engineer,
+* `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 i/Technology s/pending`
+  Adds a company called Microsoft, with the role Software Engineer in the technology industry,
   deadline Nov 12 2022 1200 and status as pending.
 * `add c/Google r/Cleaner`
-  Adds a company called Google, with the role Cleaner,
-  deadline TO_BE_ADDED and status TO_BE_SUBMITTED.
+  Adds a company called Google, with the role Cleaner and status TO_BE_SUBMITTED.
 
 **UI mockup:**
 ![AddCommand](images/user-guide/AddCommand.png)
+
+---
+
+### Editing an application : `edit`
+
+Edits an application in the list.
+
+**Format:** `edit INDEX [CHANGE]`
+
+* The `INDEX` refers to the index number shown in the displayed application list.
+* `[CHANGE]` refers to the field(s) the user wants to change and must start with the field prefix
+* The `INDEX` must be a _positive integer_ 1, 2, 3, …
+
+**Examples:**
+
+* `edit 1 r/Announcer`
+    Changes the role of the 1st job application to an announcer
+* `edit 5 s/approved t/volunteer`
+    Changes the status and job type of the 5th job application to approved and volunteer respectively
 
 ---
 
@@ -198,7 +219,8 @@ print “Error: ” and error message for:
 
 | Action       | Format                                                                               |
 |--------------|--------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`                                        |
+| **Add**      | `add c/COMPANY r/ROLE d/DEADLINE s/STATUS i/INDUSTRY t/JOB_TYPE`                     |
+| **Edit**     | `edit INDEX [CHANGE]`                                                                |
 | **Delete**   | `delete INDEX`                                                                       |
 | **List**     | `list`                                                                               |
 | **Mark**     | `mark INDEX s/STATUS`                                                                |
