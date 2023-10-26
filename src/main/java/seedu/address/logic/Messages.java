@@ -14,10 +14,15 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_INVALID_NRIC = "Please provide a valid NRIC";
+    public static final String MESSAGE_INVALID_NAME = "Please provide a valid Name";
+    public static final String MESSAGE_INVALID_NRIC_AND_NAME = "Please provide either a valid NRIC or Name";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_MISSING_IDENTIFICATION =
+            "Missing identification! Use the n/ or id/ tag to specify the patient";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -36,16 +41,24 @@ public class Messages {
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append("\nName: ")
+                .append(person.getName())
+                .append("; NRIC: ")
+                .append(person.getNric())
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
+                .append(";\n")
+                .append("Appointment: ")
+                .append(person.getAppointment().orElse(person.getAppointment().orElse(null)))
+                .append("; Medical Histories: ");
+
+        person.getMedicalHistories().forEach(builder::append);
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }

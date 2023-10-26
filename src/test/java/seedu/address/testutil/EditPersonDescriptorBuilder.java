@@ -6,7 +6,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -36,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setAppointment(person.getAppointment().get());
         descriptor.setTags(person.getTags());
     }
 
@@ -44,6 +47,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAppointment(String appointment) {
+        descriptor.setAppointment(new Appointment(appointment));
         return this;
     }
 
@@ -80,6 +91,20 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
+
+
+    /**
+     * Parses the {@code medicalHistories} into a {@code Set<MedicalHistory>} and set
+     * it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withMedicalHistories(String... medicalHistories) {
+        Set<MedicalHistory> medicalHistorySet =
+                Stream.of(medicalHistories).map(MedicalHistory::new).collect(Collectors.toSet());
+        descriptor.setMedicalHistories(medicalHistorySet);
+        return this;
+    }
+
 
     public EditPersonDescriptor build() {
         return descriptor;

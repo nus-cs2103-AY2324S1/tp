@@ -4,9 +4,11 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# HealthSync User Guide
 
-HealthSync is a **desktop app for managing patient details, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HealthSync can help you organise and manage patient details faster than traditional GUI apps
+HealthSync is a **desktop app for managing patient details, optimised for use via a Command Line Interface** (CLI)
+while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HealthSync can help you
+organise and manage patient details faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,28 +19,32 @@ HealthSync is a **desktop app for managing patient details, optimised for use vi
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `healthsync.jar` from [here](https://github.com/AY2324S1-CS2103T-T14-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your HealthSync.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar healthsync.jar`
+   command to run the application.<br>
+
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/UI_v1.2.1.jpg)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it.
+   e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all patients.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe id/S8943782H p/98114839` : Adds a patient named `John Doe` to HealthSync.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete n/Alex Yeoh` : Deletes Alex Yeoh details from the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all patients.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -51,119 +57,175 @@ HealthSync is a **desktop app for managing patient details, optimised for use vi
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* The word `or` indicates that at least one of the fields has to be supplied by the user. The output `or` will return the above field that was supplied by the user.
+* The word `or` indicates that at least one of the fields has to be supplied by the user.
+  The output `or` will return the above field that was supplied by the user.
+* `[field]` are optional tags that can be added after a command.
 
-* [field] … indicate that multiple fields can be supplied by the user.
+* `[field] …` indicate that multiple fields can be supplied by the user.
 
-* [field] … can be in any order.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [ap/APPOINTMENT]` can be used as `n/John Doe ap/2023-10-17 11:00 13:00` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[m/medicalHistories]…​` can be used as ` ` (i.e. 0 times), `m/diabetes`, `m/diabetes m/hypertension` etc.
+* `[field] …` can be in any order.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
+  will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Auto Save : `nil`
+### Common Shared Fields
 
-HealthSync data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-Format: `nil` , saving is done automatically
+The 2 identifying parameters of a patient are given below:
 
-### Viewing help : `help`
+| Tag   | Representative Value  | Example Usage  | General Form in Commands |
+|-------|-----------------------|----------------|--------------------------|
+| `n/`  | Name                  | `n/Alex`       | `n/NAME`                 |
+| `id/` | Identification Number | `id/S2345678A` | `id/IC_NUMBER`           |
 
-Shows a message explaning how to access the help page.
+1 or more identifying parameters must be specified in each command, unless stated otherwise.
+
+`[field]` are common optional fields that can be specified behind commands. The common optional fields are:
+
+| Tag      | Representative Value   | Example Usage         | General Form in Commands | Remarks                         |
+|----------|------------------------|-----------------------|--------------------------|---------------------------------|
+| `p/`     | Phone Number           | `p/91234567`          | `p/PHONE_NUMBER`         |                                 |
+| `e/`     | Email Address          | `e/example@a.com`     | `e/EMAIL`                |                                 |
+| `a/`     | Address                | `a/Location, Here Rd` | `a/ADDRESS`              |                                 |
+| `m/`     | Medical History        | `m/Asthmatic`         | `m/MEDICAL_HISTORY`      |                                 |
+| `start/` | Appointment Start Time | `start/Nov 11, 9AM`   | `start/APPT_START`       | Must be paired with `/end`      |
+| `end/`   | Appointment End Time   | `end/Nov 11, 12PM`    | `end/APPT_END`           | Must be paired with `/start`    |
+
+### Auto Save
+
+HealthSync data are saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
+
+### Viewing help: `help`
+
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a patient: `add`
 
-Adds a person to the address book.
+Adds a patient into the program, with the given patient information.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/MedicalHistories]…​`
+* A patient's name and IC are required when creating a new entry into the program.
 
-<box type="tip" seamless>
+Format: `add n/NAME id/IC_NUMBER [field] ...`
 
-**Tip:** A person can have any number of medicalHistories (including 0)
-</box>
+Example commands:
+ * `add n/Aaron Tan Jun Jie id/S8943782H p/98114839`
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+Expected outputs when the command succeeds:
+ * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H p/98114839`
 
-### Listing all persons : `list`
+Expected outputs when the command fails:
+ * `Unable to add the patient to the database: Patient already exists.`
+ * `Unable to add the patient to the database: IC required.`
+
+### Listing all persons: `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a patient's details: `edit`
 
-Edits an existing person in the address book.
+Edits an existing patient's details in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [m/medicalHistories]…​`
+ * Edits the person with the specified name or id.
+ * If an invalid name or id is passed, an error message will be logged.
+ * At least one of the optional fields must be provided.
+ * Existing fields will be updated to the input values.
+ * If the fields do not exist, the corresponding field with details will be added.
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing medicalHistories, the existing medicalHistories of the person will be removed i.e adding of medicalHistories is not cumulative.
-* You can remove all the person’s medicalHistories by typing `m/` without
-    specifying any medicalHistories after it.
+Format: `edit n/NAME or id/IC_NUMBER [field] ...`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower m/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing medicalHistories.
+Example commands:
+ * `edit n/John Doe p/91234567 e/johndoe@example.com`
+
+
+Expected outputs when the command succeeds:
+* `Patient John Doe has been updated with the fields:  p/91234567 e/johndoe@example.com`
+
+Expected outputs when command fails:
+* `Unable to edit the patient: Patient identification does not exist.`
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Enables front desk workers to quickly retrieve patient information based on command executed.
+The function returns all the patient’s related information.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+ * The search is case-insensitive. e.g `hans` will match `Hans`.
+ * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+ * Only the name or IC number is searched.
+ * Only full words will be matched e.g. `Han` will not match `Hans`.
+ * For the name, only persons matching at least one keyword will be returned (i.e. `OR` search).
+   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Formats:
+ 1. `find n/NAME` *or* `id/IC_NUMBER`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Example commands:
+* `find n/John` returns `john` and `John Doe`
+* `find id/S872D` returns `Alex Yeoh`, with IC number `S872D` <br>
 
-### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+  ![result for 'find id/S872D'](images/findidS872DResult.png)
 
-Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Expected outputs when the command succeeds:
+ * `Patient n/NAME or id/IC_NUMBER: [field] …`
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+Expected output when the command fails:
+ * `Unable to find the patient. Check if the patient’s information is correct.`
 
-### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+### Deleting a person or field: `delete`
+
+Deletes the specified person or the fields for the person from HealthSync.
+
+* Deletes the person with the specified `n/NAME or id/IC_NUMBER`.
+* The name or ic number must be a valid input.
+* To delete a specified field only instead of the entire person, we indicate the field behind of the identification.
+* If multiple people has the same name, HealthSync will display a list of people with that name together with their IC number.
+
+Format: `delete n/NAME or id/IC_NUMBER [field]`
+
+Example commands:
+* `delete id/S9987362H` deletes all the details of the person with the specified IC number from HealthSync.
+* `delete n/John Doe` deletes all the details of John Doe from HealthSync.
+* `delete n/John Doe p/` deletes John Doe phone number from his profile.
+
+
+Expected outputs when the command succeeds:
+ * `Patient n/NAME or id/IC_NUMBER has been removed from the database`
+ * `The [field] of Patient n/NAME or id/IC_NUMBER has been removed from the database`
+
+Expected output when the command fails:
+ * `Error code’s message (i.e. Invalid NRIC/ Invalid Field(s) / Database Error) `
+
+<!--
+Original format, can consider using
+list followed by delete 2 deletes the 2nd person in the address book.
+find Betsy followed by delete 1 deletes the 1st person in the results of the find command.
+-->
+
+### Delete all patients: `clear`
+
+Deletes all patients from the program.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -171,12 +233,14 @@ Format: `exit`
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+HealthSync data are saved automatically as a JSON file `[JAR file location]/data/healthsync.json`.
+Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, HealthSync will discard all data and start with an empty
+data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -188,24 +252,27 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+       the data of your previous HealthSync home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
+   the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by
+   the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/medicalHistories]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend m/Diabetes`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/medicalHistories]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+| Action     | Format, Examples                                                                                                           |
+|------------|----------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
+| **Clear**  | `clear`                                                                                                                    |
+| **Delete** | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
+| **Edit**   | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
+| **Find**   | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
+| **List**   | `list`                                                                                                                     |
+| **Help**   | `help`                                                                                                                     |
