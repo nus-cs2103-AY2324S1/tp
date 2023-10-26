@@ -12,7 +12,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -155,6 +155,76 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Delete feature
+
+#### Implementation
+
+The proposed delete person/group mechanism is facilitated by `AddressBook`. It implements the following operations:
+
+* `AddressBook#removePerson(Person p)` — Removes Person p from the address book.
+* `AddressBook#removeGroup(Group g)` — Remove Group g from the address book.
+
+These operations are exposed in the `Model` interface as `Model#deletePerson()`, `Model#deleteGroup()` respectively.
+
+##### Delete Person
+
+Given below is an example usage scenario and how the Delete Person mechanism behaves at each step.
+
+Step 1. The user executes `delete n/Alex Yeoh` command to delete a person named 'Alex Yeoh' in the address book. After parsing, a new `DeletePersonCommand` object will be returned.
+
+Step 2. `DeletePersonCommand` is executed, in which `Model#deletePerson()` is called, removing the Person with name 'Alex Yeoh' from the address book while returning the `Person` object.
+
+<box type="info" seamless>
+
+**Note:** If no such person named 'Alex Yeoh' exists, a `CommandException` will be thrown.
+
+</box>
+
+Step 3. `Person#getGroups()` is called to obtain a `GroupList` of groups the target person is part of.
+
+Step 4. The `GroupList` is converted into a stream, where each element is a `Group`. `Group#removePerson()` is called for each Group in the stream, removing the target Person from all `ObserverableList<Person> listOfGroupMates` in `Group`.
+
+The following sequence diagram shows how the Delete Person operation works:
+
+<puml src="diagrams/DeletePersonSequenceDiagram.puml" alt="DeletePersonSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeletePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+##### Delete Group
+
+Given below is an example usage scenario and how the Delete Group mechanism behaves at each step.
+
+Step 1. The user executes `delete g/CS2100` command to delete a group named 'CS2100' in the address book. After parsing, a new `DeleteGroupCommand` object will be returned.
+
+Step 2. `DeleteGroupCommand` is executed, in which `Model#deleteGroup()` is called, removing the `Group` with name 'CS2100' (the target group) from the address book while returning the `Group` object.
+
+<box type="info" seamless>
+
+**Note:** If no such group named 'CS2100' exists, a `CommandException` will be thrown.
+
+</box>
+
+Step 3. `Group#getListOfGroupMates()` is called to obtain a `ObservableList<Person>` of Persons that are a part of the target group.
+
+Step 4. The `ObservableList<Person>` is converted into a stream, where each element is a `Person`. `Person#removeGroup()` is called for each Person in the stream, removing the target Group from all `GroupList groups` in `Person`.
+
+Step 5. `DeleteGroupCommand` creates a new `CommandResult` with the corresponding message, and returns the result to the `LogicManager`.
+
+The following sequence diagram shows how the Delete Group operation works:
+
+<puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="DeleteGroupSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteGroupCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 
 ### \[Proposed\] Undo/redo feature
 
