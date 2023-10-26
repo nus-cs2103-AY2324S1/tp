@@ -224,4 +224,8 @@ public class ModelManager implements Model {
         addressBook.setAppointments(this.userHistory.getRedoHistory().peek().getValue());
         this.userHistory.redo();
     }
+    @Override
+    public void sortAppointmentList() {
+        addressBook.sortAppointmentList();
+    }
 }

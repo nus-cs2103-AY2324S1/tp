@@ -19,11 +19,16 @@ import seedu.address.logic.commands.appointmentcommands.CancelCommand;
 import seedu.address.logic.commands.appointmentcommands.FindPatientAppointmentCommand;
 import seedu.address.logic.commands.appointmentcommands.RescheduleCommand;
 import seedu.address.logic.commands.appointmentcommands.ScheduleCommand;
+import seedu.address.logic.commands.appointmentcommands.SortCommand;
+import seedu.address.logic.commands.appointmentcommands.TodayCommand;
+import seedu.address.logic.commands.appointmentcommands.UpcomingCommand;
 import seedu.address.logic.commands.personcommands.AddCommand;
 import seedu.address.logic.commands.personcommands.DeleteCommand;
+import seedu.address.logic.commands.personcommands.DiagnoseCommand;
 import seedu.address.logic.commands.personcommands.EditCommand;
 import seedu.address.logic.commands.personcommands.FindCommand;
 import seedu.address.logic.commands.personcommands.ListCommand;
+import seedu.address.logic.commands.personcommands.UndiagnoseCommand;
 import seedu.address.logic.parser.appointmentparser.CancelCommandParser;
 import seedu.address.logic.parser.appointmentparser.FindPatientAppointmentCommandParser;
 import seedu.address.logic.parser.appointmentparser.RescheduleCommandParser;
@@ -31,8 +36,10 @@ import seedu.address.logic.parser.appointmentparser.ScheduleCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.personparser.AddCommandParser;
 import seedu.address.logic.parser.personparser.DeleteCommandParser;
+import seedu.address.logic.parser.personparser.DiagnoseCommandParser;
 import seedu.address.logic.parser.personparser.EditCommandParser;
 import seedu.address.logic.parser.personparser.FindCommandParser;
+import seedu.address.logic.parser.personparser.UndiagnoseCommandParser;
 
 /**
  * Parses user input.
@@ -76,23 +83,17 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ScheduleCommand.COMMAND_WORD:
-            return new ScheduleCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommandParser().parse(arguments);
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+        case RescheduleCommand.COMMAND_WORD:
+            return new RescheduleCommandParser().parse(arguments);
 
         case CancelCommand.COMMAND_WORD:
             return new CancelCommandParser().parse(arguments);
@@ -100,8 +101,20 @@ public class AddressBookParser {
         case AppointmentsCommand.COMMAND_WORD:
             return new AppointmentsCommand();
 
-        case RescheduleCommand.COMMAND_WORD:
-            return new RescheduleCommandParser().parse(arguments);
+        case TodayCommand.COMMAND_WORD:
+            return new TodayCommand();
+
+        case UpcomingCommand.COMMAND_WORD:
+            return new UpcomingCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommandParser().parse(arguments);
@@ -111,6 +124,16 @@ public class AddressBookParser {
 
         case FindPatientAppointmentCommand.COMMAND_WORD:
             return new FindPatientAppointmentCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
+
+        case DiagnoseCommand.COMMAND_WORD:
+            return new DiagnoseCommandParser().parse(arguments);
+
+        case UndiagnoseCommand.COMMAND_WORD:
+            return new UndiagnoseCommandParser().parse(arguments);
+
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

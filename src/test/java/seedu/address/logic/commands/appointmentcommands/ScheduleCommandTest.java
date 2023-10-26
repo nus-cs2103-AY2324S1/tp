@@ -193,6 +193,11 @@ public class ScheduleCommandTest {
         public void updateFilteredAppointmentList(Predicate<Appointment> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void sortAppointmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
