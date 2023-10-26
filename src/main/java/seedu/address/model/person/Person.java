@@ -29,7 +29,7 @@ public class Person {
     private Github github = new Github("");
 
     private Remark remark;
-    private final Status currentStatus = new Status();
+    private Status currentStatus = new Status();
 
 
 
@@ -72,9 +72,10 @@ public class Person {
         return currentStatus;
     }
 
-    /* public void setStatus(StatusTypes newType) {
-        this.currentStatus.setStatusType(newType);
-    }*/
+    public void setStatus(Status newStatus) {
+        this.currentStatus = newStatus;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
