@@ -208,9 +208,7 @@ This is the class diagram for the gather command:
 
 <img src="images/GatherClassDiagram.png" width="500"/>
 
-**Aspect: Usage Scenario:**
-
-**Scenario 1:**
+**Aspect: Usage Scenario:****Scenario 1:**
 User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
 
 **Scenario 2:**
@@ -290,6 +288,7 @@ The `setAppointmentList()` method always check against `filteredPersons` to look
 
 ### \[Proposed\] Undo/redo feature
 
+### \[Proposed\] Undo/redo feature
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
