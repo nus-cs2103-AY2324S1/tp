@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_AGE + "21 "
             + PREFIX_GENDER + "M "
-            + PREFIX_HEIGHT + "23124 "
+            + PREFIX_HEIGHT + "123 "
             + PREFIX_INCOME + "3000 "
             + PREFIX_HOROSCOPE + "Libra";
 

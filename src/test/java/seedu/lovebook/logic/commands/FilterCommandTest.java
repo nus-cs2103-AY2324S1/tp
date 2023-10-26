@@ -14,6 +14,7 @@ import static seedu.lovebook.testutil.TypicalPersons.ALICE;
 import static seedu.lovebook.testutil.TypicalPersons.BENSON;
 import static seedu.lovebook.testutil.TypicalPersons.ELLE;
 import static seedu.lovebook.testutil.TypicalPersons.FIONA;
+import static seedu.lovebook.testutil.TypicalPersons.GEORGE;
 import static seedu.lovebook.testutil.TypicalPersons.getTypicalLoveBook;
 
 import java.util.ArrayList;
@@ -113,7 +114,7 @@ public class FilterCommandTest {
     @Test
     public void execute_filterByHeight_personsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        ArrayList<MetricContainsKeywordPredicate> predicateList = preparePredicate("123", PREFIX_HEIGHT);
+        ArrayList<MetricContainsKeywordPredicate> predicateList = preparePredicate("245", PREFIX_HEIGHT);
         System.out.println("predicateList: " + predicateList);
         FilterCommand command = new FilterCommand(predicateList);
         expectedModel.updateFilteredPersonList((person) -> {
@@ -125,7 +126,7 @@ public class FilterCommandTest {
             return true;
         });
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(GEORGE), model.getFilteredPersonList());
     }
 
     @Test
