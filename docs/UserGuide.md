@@ -59,16 +59,16 @@ CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to man
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Create a Member: `createMmember`
-Creates a new member with accompanying personal details (name, phone number, email address, home address).
+### Create a Member: `createMember`
+Creates a new member with accompanying personal details (name, gender, phone number, email address, home address, tag).
 
-Format: `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format: `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 
 * Acceptable values for `GENDER`: `Male`, `Female`, `Others`.
 * Acceptable values for `EMAIL`: A string with an email extension (e.g. `@gmail.com`).
 
 Examples:
-* `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278` creates a member `CHU WEI RONG` in CCACommander.
+* `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader` creates a member `CHU WEI RONG` in CCACommander.
 
 ### Delete a Member : `deleteMember`
 
@@ -114,14 +114,14 @@ Format: `viewMember MEMBER_INDEX`
 * The index **must be a positive integer** that is within the range of the length of the member list.
 
 Examples:
-* `viewMember 1` displays members of the 1st member in the member list.
-* `viewMember 10` displays members of the 10th member in the member list.
+* `viewMember 1` displays events of the 1st member in the member list.
+* `viewMember 10` displays events of the 10th member in the member list.
 
 ### Create an Event : `createEvent`
 
 Creates a new event and adds it to the database.
 
-Format: `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE]`
+Format: `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]`
 
 Examples:
 * `createEvent n/Party l/Raffles Hall d/16-09-2023` creates an event `Party` in CCACommander.
@@ -141,36 +141,36 @@ Examples:
 * `deleteEvent 1` deletes the 1st event in the event list.
 * `deleteEvent 10` deletes the 10th event in the event list.
 
-### Add Member to an Event: `enrol`
+### Link a Member to an Event: `enrol`
 
-Adds a member to an event.
+Links a member to an event.
 
 Format: `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
-* Adds the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARKS` stating extra remarks about the member and event.
+* Links the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
 * The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the displayed member/event list.
 * The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
-* The `NUMBER_OF_HOURS` **must be a positive integer**.
+* The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
 
 Examples:
-* `enrol m/1 e/5 h/3 r/did planning` adds the 1st member in the member list to the 5th event in the event list, where the member had 3 hours of contributions to that event and has a remark stating that he/she "did planning"".
-* `enrol m/5 e/1` adds the 5th member in the member list to the 1st event in the event list.
+* `enrol m/1 e/5 h/3 r/did planning` links the 1st member in the member list to the 5th event in the event list, where the member had 3 hours of contributions to that event and has a remark stating that the member "did planning"".
+* `enrol m/5 e/1` links the 5th member in the member list to the 1st event in the event list.
 
-### Delete Member from an Event: `unenrol`
+### Unlink a Member from an Event: `unenrol`
 
-Deletes a member from an event.
+Unlink a member from an event.
 
 Format: `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
 
-* Delete the member at the specified `MEMBER_INDEX` from the event at the specified `EVENT_INDEX`.
+* Unlink the member at the specified `MEMBER_INDEX` from the event at the specified `EVENT_INDEX`.
 * The member at `MEMBER_INDEX` must be a part of the event at `EVENT_INDEX`.
 * The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the displayed member/event list.
 * The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
 
 
 Examples:
-* `unenrol m/1 e/5` deletes the 1st member in the member list from the 5th event in the event list.
-* `unenrol m/5 e/1` deletes the 5th member in the member list from the 1st event in the event list.
+* `unenrol m/1 e/5` unlinks the 1st member in the member list from the 5th event in the event list.
+* `unenrol m/5 e/1` unlinks the 5th member in the member list from the 1st event in the event list.
 
 ### Undoing a command: `undo`
 
@@ -215,12 +215,12 @@ If your changes to the data file makes its format invalid, CCACommander will dis
 
 Action | Format, Examples
 --------|------------------
-**Create a member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278`
+**Create a member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader`
 **Delete a member** | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
 **List all members and all events** | `list`
 **View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
 **View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
-**Create an event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE]` <br> e.g.`createEvent n/Party l/Raffles Hall d/16-09-2023`
+**Create an event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g.`createEvent n/Party l/Raffles Hall d/16-09-2023 t/Fun`
 **Delete an event** | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
 **Add member to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
 **Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
