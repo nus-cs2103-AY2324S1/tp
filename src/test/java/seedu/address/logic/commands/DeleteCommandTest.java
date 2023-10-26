@@ -43,6 +43,7 @@ public class DeleteCommandTest {
         assertThrows(CommandException.class, () -> DeleteCommand.isValidIndex(1, 1));
         assertThrows(CommandException.class, () -> DeleteCommand.isValidIndex(-1, 1));
     }
+
     @Test
     public void getPeopleToDelete_validIndices_success() throws CommandException {
         Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), ONEBASED_ONE_TO_THREE);
@@ -57,6 +58,24 @@ public class DeleteCommandTest {
         Indices outOfBoundIndices = Indices.fromOneBased(new int[]{size, size + 10, size + 20});
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndices);
         assertThrows(CommandException.class, () -> deleteCommand.getPeopleToDelete(unfilteredList));
+    }
+
+    @Test
+    public void getDeleteResultMessage_singleFosterer() {
+        Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), ONEBASED_ONE);
+        String expected = "1 fosterer deleted:\n" + Messages.format(peopleToDelete);
+
+        DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE);
+        assertEquals(expected, deleteCommand.getDeleteResultMessage(peopleToDelete));
+    }
+
+    @Test
+    public void getDeleteResultMessage_multipleFosterers() {
+        Person[] peopleToDelete = getPeople(model.getFilteredPersonList(), ONEBASED_ONE_TO_THREE);
+        String expected = peopleToDelete.length + " fosterers deleted:\n" + Messages.format(peopleToDelete);
+
+        DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE_TO_THREE);
+        assertEquals(expected, deleteCommand.getDeleteResultMessage(peopleToDelete));
     }
 
     @Test
@@ -83,7 +102,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE_TO_THREE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PEOPLE_SUCCESS,
-                Messages.format(peopleToDelete));
+                peopleToDelete.length, Messages.format(peopleToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         for (Person person : peopleToDelete) {
@@ -128,7 +147,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(ONEBASED_ONE_TO_THREE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PEOPLE_SUCCESS,
-                Messages.format(peopleToDelete));
+                peopleToDelete.length, Messages.format(peopleToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         for (Person person : peopleToDelete) {
