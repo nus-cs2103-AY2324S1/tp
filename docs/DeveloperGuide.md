@@ -316,6 +316,43 @@ This class extends the Command abstract class, it implements the following opera
 
 {what are the design considerations?}
 
+### Leave Tracking
+
+#### Proposed Implementation
+
+The proposed leave tracking feature is facilitated by `AnnualLeave`, `AddLeaveCommand` and `AddLeaveCommandParser` classes.
+
+The `AnnualLeave` class is responsible for storing the leave data for a specific employee. It contains the following methods:
+(Class diagram to be added)
+
+The `AddLeaveCommand` class is responsible for executing the `addleave` command. It contains the following methods:
+(Class diagram to be added)
+
+The `AddLeaveCommandParser` class is responsible for parsing the user input for the `addleave` command. It contains the following methods:
+(Class diagram to be added)
+
+The following sequence diagram shows how the `addleave` operation works:
+(Sequence diagram to be added)
+
+After `AddLeaveCommandParser` class parses the user input, the `AddLeaveCommand` class will be called to execute the command. The `AddLeaveCommand` class will then call the `Model` component to add leave for the employee, and store the leave as an arraylist in `AnnualLeave`.
+
+The following activity diagram summarises the process of adding leave for an employee:
+(Activity diagram to be added)
+
+#### Design considerations:
+ 
+**Aspect: How addleave executes:**
+
+* **Alternative 1 (current choice):** Saves the dates of the leave added.
+  * Pros: Easy to trace and track when the leaves are applied, and whether employee is working on specific day.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Saves only the total number of days of leave added.
+  * Pros: will use less memory (e.g. each employee will only need to store an integer for the total number of days of leave per annul)
+  * Cons: Not much useful information that can be used (e.g. we do not know the working status of each employee for each day)
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -498,7 +535,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Add leave for a specific employee**
 
+**MSS**
+
+1. User requests to add leave for a specific employee.
+2. ManaGease adds leave for the employee.
+3. ManaGease displays a confirmation message that the leave has been added.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command parameters are given.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
+
+* 1b. Invalid date(s) are given.
+
+    * 1b1. ManaGease shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 
