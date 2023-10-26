@@ -209,14 +209,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseStatus_validValueWithoutWhitespace_returnsStatus() throws Exception {
-        int expectedStatus = 0;
+        Status expectedStatus = Status.MISSED;
         assertEquals(expectedStatus, ParserUtil.parseStatus(VALID_SCHEDULE_STATUS));
     }
 
     @Test
     public void parseStatus_validValueWithWhitespace_returnsTrimmedStatus() throws Exception {
         String statusWithWhitespace = WHITESPACE + VALID_SCHEDULE_STATUS + WHITESPACE;
-        int expectedStatus = 0;
+        Status expectedStatus = Status.MISSED;
         assertEquals(expectedStatus, ParserUtil.parseStatus(statusWithWhitespace));
     }
 
