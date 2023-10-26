@@ -27,7 +27,7 @@ MediLink Contacts(MLC) is a **desktop app for managing patients and doctors deta
 
    * `list` : Lists all contacts.
 
-   * `add Doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H` : Adds a doctor named `John Doe` to the Address Book.
+   * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a doctor named `John Doe` to the Address Book.
 
    * `delete ic/S9851386G` : Deletes the person with ic S9851386G.
 
@@ -74,11 +74,11 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a Doctor: `add Doctor`
+### Adding a Doctor: `add-doctor`
 
 Adds a Doctor to the hospital database.
 
-Format: `add Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​`
+Format: `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb:
 **Tip:**
@@ -94,11 +94,11 @@ A person can have any number of tags (including 0)
 - PATIENT must contain the valid IC of a Patient in the Database.
 
 Examples:
-* `add Doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
-* `add Doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon pt/T0123556H`
+* `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
+* `add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`
 
 
-### Adding a Patient: `add Patient`
+### Adding a Patient: `add-patient`
 
 Adds a Patient to the hospital database.
 
@@ -224,13 +224,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                                                                                                                                                                                                |
-|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **New Doctor**  | `add Doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pt/PATIENT_1 …​` <br> e.g., `add Doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`                                                                               |
-| **New Patient** | `add Patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add Patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+` |
-| **Clear**       | `clear`                                                                                                                                                                                                                                                                                                         |
-| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                                             |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                                     |
-| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                                      |
-| **List**        | `list`                                                                                                                                                                                                                                                                                                          |
-| **Help**        | `help`                                                                                                                                                                                                                                                                                                          |
+| Action          | Format, Examples                                                                                                                                                                                                                                                                                             |
+|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **New Doctor**  | `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add Doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`                                                                               |
+| **New Patient** | `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add Patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+` |
+| **Clear**       | `clear`                                                                                                                                                                                                                                                                                                      |
+| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                                          |
+| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                                  |
+| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                                   |
+| **List**        | `list`                                                                                                                                                                                                                                                                                                       |
+| **Help**        | `help`                                                                                                                                                                                                                                                                                                       |
