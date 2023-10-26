@@ -24,6 +24,8 @@ This guide is to help you explore and learn about what are its features and how 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
+<br/><br/><br/><br/><br/><br/>
+
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -179,7 +181,8 @@ Format: `remark INDEX r/REMARK`
 
 *Examples: 
 * `remark 1 r/Owes me a favour` Replaces the previous remark for the 1st contact with "Owes me a favour".
-* 
+
+<br/><br/><br/><br/>
 
 ### Search for persons using contact fields: `findc`
 Find persons whose contact details match the keywords specified for at least 1 of these fields: name, phone, email, status, tag
@@ -222,7 +225,6 @@ Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`
 Examples:
 * `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`
 * `addm m/CS2103T meeting a/Zoom call url s/20.09.2023 1000 e/20.09.2023 1200`
-
 
 ### Listing all meetings : `listm`
 
@@ -334,6 +336,8 @@ Format: `rmmc MEETING_INDEX ATTENDEE_INDEX`
 
 Examples:
 * `rmmc 3 2` removes the 2nd attendee from the 3rd meeting in OutBook.
+
+<br/><br/><br/><br/>
 
 ### Clearing all entries : `clear`
 
