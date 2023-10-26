@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "rp:RemindCommandParser" as RemindCommandParser LOGIC_COLOR
+participant "r:RemindCommand" as RemindCommand LOGIC_COLOR
+end box
+
+MainWindow -> LogicManager : execute("remind 30")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("remind 30")
+activate AddressBookParser
+
+create RemindCommandParser
+AddressBookParser -> RemindCommandParser : RemindCommandParser()
+activate RemindCommandParser
+RemindCommandParser --> AddressBookParser
+deactivate RemindCommandParser
+
+AddressBookParser -> RemindCommandParser : parse(" 30")
+activate RemindCommandParser
+
+box Model MODEL_COLOR_T1
+participant "p:RemindPredicate" as RemindPredicate MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+participant ":FilteredList" as FilteredList MODEL_COLOR
+
+create RemindPredicate
+RemindCommandParser -> RemindPredicate : RemindPredicate(30)
+activate RemindPredicate
+RemindPredicate --> RemindCommandParser
+deactivate RemindPredicate
+
+RemindPredicate -[hidden]-> RemindCommandParser
+create RemindCommand
+RemindCommandParser -> RemindCommand : RemindCommand(p)
+activate RemindCommand
+RemindCommand --> RemindCommandParser
+deactivate RemindCommand
+RemindCommand -[hidden]-> RemindCommandParser
+
+RemindCommandParser --> AddressBookParser
+deactivate RemindCommandParser
+RemindCommandParser -[hidden]-> AddressBookParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+destroy RemindCommandParser
+
+RemindPredicate -[hidden]-> LogicManager : empty row
+ref over LogicManager, FilteredList: execute RemindCommand
+LogicManager -[hidden]-> MainWindow : empty row
+LogicManager --> MainWindow
+deactivate LogicManager
+@enduml

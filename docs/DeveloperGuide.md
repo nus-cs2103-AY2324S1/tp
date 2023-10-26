@@ -154,13 +154,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-<br>
+### _Features in InsureIQ_
 
 ### `batchdelete`
 
 The `batchdelete` command allows users to batch delete people whose policy expiry is in the specified month and year.
 
-<br>
 
 #### Implementation:
 The batch delete mechanism is facilitated by `DeleteMonth`
@@ -170,7 +169,7 @@ It is also facilitated by the operation:
 
 This operation is exposed in the `Model` interface as `Model# batchDeleteWithPredicate(Predicate<Person> predicate)`
 
-**The following sequence diagram shows how the batch delete operation works:**
+The following sequence diagram shows how the batch delete operation works:
 
 ![BatchDeleteSequenceDiagram1](images/BatchDeleteSequenceDiagram1.png)
 
@@ -189,8 +188,47 @@ This operation is exposed in the `Model` interface as `Model# batchDeleteWithPre
 #### Design consideration:
 * Users may use batch delete to delete all people whose policy expiry is in the specified month and year. For example, delete people didn’t contact the user to renew their policies for one year. 
 * Besides, if users leave an insurance company, they may like to delete people purchase policy from that company. 
-* Therefore, `Model# batchDeleteWithPredicate(Predicate<Person> predicate)` is introduced to allow batch delete by month or company.
+* Therefore, `Model#batchDeleteWithPredicate(Predicate<Person> predicate)` is introduced to allow batch delete by month or company.
 
+### `remind`
+The `remind` command allows the user to filter out people whose policy expiry date is approaching within the given number of days.
+
+#### Implementation:
+The filtered list will be displayed in the UI. The remind mechanism is facilitated by `Model` through the following operations:
+* `Model#RemindPredicate(int days)` - The Predicate to be used for filtering. `days` represents the number of days from the current date given by the user.
+* `Model#updateFilteredPersonList(Predicate<Person> p)` - Filters the list of Persons to display by the Predicate `p`.
+
+Given below is an example usage scenario and how the remind mechanism behaves at each step:
+
+Step 1. The user realises that there may be a set of Persons whose policy expiry date is approaching within 30 days.
+
+Step 2. The user executes `remind 30` command in an attempt to find this set of Persons. A `Model#RemindPredicate(int days)` instance with `days` being `30` will be created. As described in the [Logic Component](#logic-component) above, this will create a `RemindCommand` instance having the `RemindPredicate` instance as its field.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the number of days given is out of range, an error will be thrown and the application will re-prompt the user to input a valid value.</div>
+
+Step 3. The `LogicManager` will call `RemindCommand#execute()` to start filtering the Persons list with the given `RemindPredicate`. Then, `Model#updateFilteredPersonList(Predicate<Person> p)` is called with the `RemindPredicate` as the input to perform the filtering of the list.
+
+Step 4. Finally, a `CommandResult` instance will be created and returned to display filtered list of Persons to the user.
+
+The following sequence diagram shows how the `remind` command works:
+
+![RemindSequenceDiagram1](images/RemindSequenceDiagram1.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RemindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. </div>
+
+![RemindSequenceDiagram2](images/RemindSequenceDiagram2.png)
+
+The following activity diagram summarises what happens when a user executes the command `remind 30`:
+
+![RemindActivityDiagram](images/RemindActivityDiagram.png)
+
+#### Design considerations
+
+**Aspect: Whether `remind` command should take in a value:**
+* Alternative 1: `remind` command without specifying the number of days, default 30 days (which is 1 month).
+  * Pros: Shorter command for the user to use, simply just one word.
+  * Cons: Not enough flexibility, user may want to find expiry dates beyond 30 days.
+* Alternative 2 (current choice): `remind` command with number of days given by the user.
+  * Pros: Allows more flexibility, now the user can find persons whose expiry dates is not only 30 days.
+  * Cons: Need to determine the range of days allowed for the user to enter, security concerns such as integer overflow could occur if user decides to perform malicious activities.
 
 ### \[Proposed\] Undo/redo feature
 

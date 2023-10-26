@@ -10,7 +10,7 @@ participant "deleteMonth:DeleteMonth" as DeleteMonth LOGIC_COLOR
 participant "b:BatchDeleteCommand" as BatchDeleteCommand LOGIC_COLOR
 end box
 
-[-> LogicManager : execute(batchDelete dm/09-2022)
+[-> LogicManager : execute(batchdelete dm/09-2022)
 activate LogicManager
 
 LogicManager -> AddressBookParser : parseCommand("batchdelete dm/09-2022")
