@@ -16,6 +16,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.ui.CalendarPanel.PersonWithSchedules;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -48,7 +49,7 @@ public class CalendarRow extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public CalendarRow(CalendarPanel.PersonWithSchedules personWithSchedules, int displayedIndex) {
+    public CalendarRow(PersonWithSchedules personWithSchedules, int displayedIndex) {
         super(FXML);
         displayedIndex--;
 
