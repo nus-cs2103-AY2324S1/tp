@@ -216,7 +216,7 @@ Format: `undo`
 
 ### Redo last action : `redo`
 
-Repeats the previous command; an 'undo' for an 'undo' command.
+Repeats the previous command; an `undo` for an `undo` command.
 
 Format: `redo`
 
@@ -236,7 +236,8 @@ MediLink Contacts data are saved in the hard disk automatically after any comman
 
 MediLink Contacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, MediLink Contacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
