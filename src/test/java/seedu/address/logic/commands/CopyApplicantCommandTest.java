@@ -11,11 +11,8 @@ import static seedu.address.testutil.TypicalApplicants.getTypicalAddressBookWith
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
+import org.junit.jupiter.api.condition.DisabledIf;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -33,10 +30,8 @@ public class CopyApplicantCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBookWithApplicants(), new UserPrefs());
 
     @Test
-    @DisabledIfSystemProperty(named = "java.awt.headless", matches = "true")
+    @DisabledIf("java.awt.GraphicsEnvironment.isHeadless()")
     public void execute_validIndexUnfilteredList_success() {
-        Logger.getLogger(this.getClass().getName())
-                .log(Level.INFO, "headless property: " + System.getProperty("java.awt.headless"));
         Applicant applicantToCopy = model.getFilteredApplicantList().get(INDEX_FIRST_PERSON.getZeroBased());
         CopyApplicantCommand copyApplicantCommand = new CopyApplicantCommand(INDEX_FIRST_PERSON);
 
@@ -56,7 +51,7 @@ public class CopyApplicantCommandTest {
     }
 
     @Test
-    @DisabledIfSystemProperty(named = "java.awt.headless", matches = "true")
+    @DisabledIf("java.awt.GraphicsEnvironment.isHeadless()")
     public void execute_validIndexFilteredList_success() {
         showApplicantAtIndex(model, INDEX_FIRST_PERSON);
 

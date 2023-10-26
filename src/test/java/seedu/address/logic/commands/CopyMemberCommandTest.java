@@ -12,7 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalMembers.getTypicalAddressBookWithMembers;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
+import org.junit.jupiter.api.condition.DisabledIf;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -30,7 +30,7 @@ public class CopyMemberCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBookWithMembers(), new UserPrefs());
 
     @Test
-    @DisabledIfSystemProperty(named = "java.awt.headless", matches = "true")
+    @DisabledIf("java.awt.GraphicsEnvironment.isHeadless()")
     public void execute_validIndexUnfilteredList_success() {
         Member memberToCopy = model.getFilteredMemberList().get(INDEX_FIRST_PERSON.getZeroBased());
         CopyMemberCommand copyMemberCommand = new CopyMemberCommand(INDEX_FIRST_PERSON);
@@ -51,7 +51,7 @@ public class CopyMemberCommandTest {
     }
 
     @Test
-    @DisabledIfSystemProperty(named = "java.awt.headless", matches = "true")
+    @DisabledIf("java.awt.GraphicsEnvironment.isHeadless()")
     public void execute_validIndexFilteredList_success() {
         showMemberAtIndex(model, INDEX_FIRST_PERSON);
 
