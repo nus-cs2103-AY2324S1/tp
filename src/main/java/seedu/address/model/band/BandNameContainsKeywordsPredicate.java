@@ -2,7 +2,6 @@ package seedu.address.model.band;
 
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -17,7 +16,7 @@ public class BandNameContainsKeywordsPredicate implements Predicate<Band> {
     }
     @Override
     public boolean test(Band band) {
-        return StringUtil.containsWordIgnoreCase(band.getName().fullName, bandName);
+        return band.getName().fullName.equalsIgnoreCase(bandName);
     }
 
     @Override

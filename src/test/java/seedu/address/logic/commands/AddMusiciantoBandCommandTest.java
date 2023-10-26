@@ -56,8 +56,8 @@ public class AddMusiciantoBandCommandTest {
         CommandResult commandResult = new AddMusiciantoBandCommand(bandIndex, musicianIndex).execute(modelBandStub);
 
         assertEquals(String.format(AddMusiciantoBandCommand.MESSAGE_SUCCESS,
-                Messages.format(modelBandStub.bandsAdded.get(bandIndex),
-                        modelBandStub.musiciansAdded.get(musicianIndex))),
+                        Messages.format(modelBandStub.bandsAdded.get(bandIndex),
+                                modelBandStub.musiciansAdded.get(musicianIndex))),
                 commandResult.getFeedbackToUser());
         assertEquals(validBand, modelBandStub.bandsAdded.get(bandIndex));
         assertEquals(validBand.getMusicians(), modelBandStub.bandsAdded.get(bandIndex).getMusicians());
@@ -160,17 +160,12 @@ public class AddMusiciantoBandCommandTest {
         }
 
         @Override
-        public void updateFilteredMusicianList(int bandIndex) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateFilteredBandList(Predicate<Band> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredBandList(int bandIndex) {
+        public void updateFilteredBandMusicianList(Predicate<Band> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

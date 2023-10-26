@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.band.Band;
-import seedu.address.model.band.BandIsSamePredicate;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.MusicianInBandPredicate;
 
@@ -163,12 +162,6 @@ public class ModelManager implements Model {
         filteredMusicians.setPredicate(predicate);
     }
 
-    @Override
-    public void updateFilteredMusicianList(int bandIndex) {
-        Predicate<Musician> predicate = new MusicianInBandPredicate(filteredBands.get(bandIndex));
-        filteredMusicians.setPredicate(predicate);
-    }
-
     //=========== Filtered Band List Accessors =============================================================
 
     /**
@@ -186,10 +179,25 @@ public class ModelManager implements Model {
         filteredBands.setPredicate(predicate);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Band} backed by the internal list of
+     * {@code versionedAddressBook}. Returns an unmodifiable view of the list of {@code Musician}
+     * backed by the internal list of {@code versionedAddressBook}
+     * If there is no band with the corresponding name, an error message will be displayed
+     * And the panel will show initial state of listing all.
+     */
     @Override
-    public void updateFilteredBandList(int bandIndex) {
-        Predicate<Band> predicate = new BandIsSamePredicate(filteredBands.get(bandIndex));
-        filteredBands.setPredicate(predicate);
+    public void updateFilteredBandMusicianList(Predicate<Band> bandPredicate) {
+        filteredBands.setPredicate(bandPredicate);
+
+        if (filteredBands.size() == 0) {
+            updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
+            updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
+            return;
+        }
+
+        Predicate<Musician> musicianPredicate = new MusicianInBandPredicate(filteredBands.get(0));
+        filteredMusicians.setPredicate(musicianPredicate);
     }
 
     @Override
