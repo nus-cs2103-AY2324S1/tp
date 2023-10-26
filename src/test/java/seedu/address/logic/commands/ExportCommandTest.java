@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -22,5 +21,6 @@ public class ExportCommandTest {
     public void toStringMethod() {
         assertEquals(new ExportCommand().toString(), "ExportCommand");
     }
+    
 
 }
