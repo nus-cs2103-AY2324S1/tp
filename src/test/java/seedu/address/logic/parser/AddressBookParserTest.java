@@ -41,6 +41,7 @@ import seedu.address.model.meeting.MeetingTimeContainsPredicate;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.GeneralPersonPredicate;
+import seedu.address.model.person.LastContactTimeContainsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonTagContainsKeywordsPredicate;
@@ -112,9 +113,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findc() throws Exception {
+        LocalDateTime lastContacted = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         FindCommand command = (FindCommand) parser
-                .parseCommand(FindCommand.COMMAND_WORD + " n/Alice p/913 e/gmail s/Active t/friend");
-        assertEquals(new FindCommand(preparePersonPredicate(new String[]{"Alice", "913", "gmail", "Active", "friend"})),
+                .parseCommand(FindCommand.COMMAND_WORD + " n/Alice p/913 e/gmail l/20.09.2023 1000 s/Active t/friend");
+        assertEquals(new FindCommand(
+                preparePersonPredicate(new String[]{"Alice", "913", "gmail", "Active", "friend"}, lastContacted)),
                 command);
     }
 
@@ -190,11 +193,12 @@ public class AddressBookParserTest {
     /**
      * Parses {@code userInput} into a {@code GeneralPersonPredicate}.
      */
-    private GeneralPersonPredicate preparePersonPredicate(String[] userInput) {
+    private GeneralPersonPredicate preparePersonPredicate(String[] userInput, LocalDateTime lastContacted) {
         return new GeneralPersonPredicate(
                 new NameContainsKeywordsPredicate(List.of(userInput[0].split("\\s+"))),
                 new PhoneContainsPredicate(List.of(userInput[1].split("\\s+"))),
                 new EmailContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
+                new LastContactTimeContainsPredicate(lastContacted),
                 new StatusContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))),
                 new PersonTagContainsKeywordsPredicate(List.of(userInput[4].split("\\s+")))
         );
