@@ -138,6 +138,36 @@ public class TimeParser {
                 res.add(currentInterview);
             }
         }
+        System.out.println(res);
+        return res;
+    }
+
+    /**
+     * Lists out all interviews that have a start time of today
+     *
+     * @author Tan Kerway
+     * @param interviews the list of interviews that the user has
+     * @return a list of interviews whose start time is today, as given by LocalDateTime.now()
+     */
+    public static List<Interview> listInterviewsToday(UniqueInterviewList interviews) {
+        // get today's day, month, and year for checking
+        LocalDateTime today = LocalDateTime.now();
+        int todayDay = today.getDayOfMonth();
+        int todayMonth = today.getMonthValue();
+        int todayYear = today.getYear();
+        List<Interview> res = new ArrayList<>();
+        // loop over all the interviews, and add those that have today as the start time
+        for (Interview interview : interviews) {
+            LocalDateTime currentInterviewStartTime = interview.getInterviewStartTime();
+            int currentInterviewDay = currentInterviewStartTime.getDayOfMonth();
+            int currentInterviewMonth = currentInterviewStartTime.getMonthValue();
+            int currentInterviewYear = currentInterviewStartTime.getYear();
+            if (currentInterviewDay == todayDay
+                    && currentInterviewMonth == todayMonth
+                    && currentInterviewYear == todayYear) {
+                res.add(interview); // add the current interview if its start date is today
+            }
+        }
         return res;
     }
 

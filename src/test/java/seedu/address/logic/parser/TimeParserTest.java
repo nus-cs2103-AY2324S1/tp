@@ -5,16 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.UniqueInterviewList;
+import seedu.address.testutil.TypicalApplicants;
+import seedu.address.testutil.TypicalInterviews;
 
 class TimeParserTest {
     private static final LocalDateTime DEFAULT_DATE =
             LocalDateTime.of(1970, 1, 1, 0, 0);
 
-    // TESTS FOR THE TIMEPARSER STATIC FIELDS
+    /*
+     * Tests for the timeParser class
+     */
     @Test
     void testTimeParserDefaultDate() {
         assertEquals(DEFAULT_DATE, TimeParser.DEFAULT_DATE);
@@ -283,5 +291,260 @@ class TimeParserTest {
             hasError = true;
         }
         assertTrue(hasError);
+    }
+
+    /*
+     * Tests for the listInterviewClashes class
+     */
+    @Test
+    void testListInterviewClashesListFirstElement() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime startTime = LocalDateTime.of(2024, 12, 21, 20, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 20, 30);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = TimeParser.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewClashesListFirstElement2() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime startTime = LocalDateTime.of(2024, 12, 21, 18, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 22, 0);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = TimeParser.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewClashesListFirstElement3() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime startTime = LocalDateTime.of(2024, 12, 21, 18, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 19, 1);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = TimeParser.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewClashesListFirstElement4() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime startTime = LocalDateTime.of(2024, 12, 21, 20, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 22, 0);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        List<Interview> actual = TimeParser.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewClashesListTwoClashes() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime startTime = LocalDateTime.of(2024, 7, 12, 9, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 22, 0);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
+        List<Interview> actual = TimeParser.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewClashesListThreeClashes() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime startTime = LocalDateTime.of(2024, 5, 12, 9, 0);
+        LocalDateTime endTime = LocalDateTime.of(2024, 12, 21, 22, 0);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_3);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
+        List<Interview> actual = TimeParser.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewClashesListThreeClashes2() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime startTime = LocalDateTime.of(2023, 5, 12, 9, 0);
+        LocalDateTime endTime = LocalDateTime.of(2025, 12, 21, 14, 0);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_3);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
+        List<Interview> actual = TimeParser.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewClashesListFourClashes() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime startTime = LocalDateTime.of(2023, 5, 12, 9, 0);
+        LocalDateTime endTime = LocalDateTime.of(2025, 12, 21, 22, 0);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_2);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_3);
+        expected.add(TypicalInterviews.STANDARD_INTERVIEW_4);
+        List<Interview> actual = TimeParser.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewClashesListNoClashes() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime startTime = LocalDateTime.of(2023, 5, 12, 9, 0);
+        LocalDateTime endTime = LocalDateTime.of(2023, 12, 21, 22, 0);
+        List<Interview> expected = new ArrayList<>();
+        List<Interview> actual = TimeParser.listInterviewClashes(startTime, endTime, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    /*
+     * Tests for the listsInterviewsToday class
+     */
+    @Test
+    void testListInterviewsToday() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        List<Interview> expected = new ArrayList<>();
+        List<Interview> actual = TimeParser.listInterviewsToday(uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewsToday2() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        LocalDateTime today = LocalDateTime.now();
+        Interview interviewNow = new Interview(TypicalApplicants.ALICE, "SWE", today, today);
+        interviewList.add(interviewNow);
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(interviewNow);
+        List<Interview> actual = TimeParser.listInterviewsToday(uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewsToday3() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        LocalDateTime today = LocalDateTime.now();
+        int todayDay = today.getDayOfMonth();
+        int todayMonth = today.getMonthValue();
+        int todayYear = today.getYear();
+        Interview interviewNow = new Interview(TypicalApplicants.ALICE,
+                "SWE",
+                LocalDateTime.of(todayYear, todayMonth, todayDay, 9, 11),
+                LocalDateTime.of(todayYear, todayMonth, todayDay, 11, 11)
+                );
+        interviewList.add(interviewNow);
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        List<Interview> expected = new ArrayList<>();
+        expected.add(interviewNow);
+        List<Interview> actual = TimeParser.listInterviewsToday(uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewsToday4() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        LocalDateTime today = LocalDateTime.now();
+        int todayDay = today.getDayOfMonth();
+        int todayMonth = today.getMonthValue();
+        int todayYear = today.getYear();
+        Interview interviewNow = new Interview(TypicalApplicants.ALICE,
+                "SWE",
+                LocalDateTime.of(todayYear, todayMonth, todayDay + 1, 9, 11),
+                LocalDateTime.of(todayYear, todayMonth, todayDay + 1, 11, 11)
+        );
+        interviewList.add(interviewNow);
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        List<Interview> expected = new ArrayList<>();
+        List<Interview> actual = TimeParser.listInterviewsToday(uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewsToday5() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        LocalDateTime today = LocalDateTime.now();
+        int todayDay = today.getDayOfMonth();
+        int todayMonth = today.getMonthValue();
+        int todayYear = today.getYear();
+        Interview interviewNow = new Interview(TypicalApplicants.ALICE,
+                "SWE",
+                LocalDateTime.of(todayYear, todayMonth + 1, todayDay, 9, 11),
+                LocalDateTime.of(todayYear, todayMonth + 1, todayDay, 11, 11)
+        );
+        interviewList.add(interviewNow);
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        List<Interview> expected = new ArrayList<>();
+        List<Interview> actual = TimeParser.listInterviewsToday(uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewsToday6() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        LocalDateTime today = LocalDateTime.now();
+        int todayDay = today.getDayOfMonth();
+        int todayMonth = today.getMonthValue();
+        int todayYear = today.getYear();
+        Interview interviewNow = new Interview(TypicalApplicants.ALICE,
+                "SWE",
+                LocalDateTime.of(todayYear + 1, todayMonth, todayDay, 9, 11),
+                LocalDateTime.of(todayYear + 1, todayMonth, todayDay, 11, 11)
+        );
+        interviewList.add(interviewNow);
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        List<Interview> expected = new ArrayList<>();
+        List<Interview> actual = TimeParser.listInterviewsToday(uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testListInterviewsToday7() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        LocalDateTime today = LocalDateTime.now();
+        int todayDay = today.getDayOfMonth();
+        int todayMonth = today.getMonthValue();
+        int todayYear = today.getYear();
+        Interview interviewNow = new Interview(TypicalApplicants.ALICE,
+                "SWE",
+                LocalDateTime.of(todayYear, todayMonth, todayDay - 1, 9, 11),
+                LocalDateTime.of(todayYear, todayMonth, todayDay - 1, 11, 11)
+        );
+        interviewList.add(interviewNow);
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        List<Interview> expected = new ArrayList<>();
+        List<Interview> actual = TimeParser.listInterviewsToday(uniqueInterviewList);
+        assertEquals(expected, actual);
     }
 }
