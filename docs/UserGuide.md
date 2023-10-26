@@ -38,9 +38,6 @@ MediLink Contacts(MLC) is a **desktop app for managing patients and doctors deta
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-## Contents
-- [Adding a Doctor: `add Doctor`](#adding-a-doctor--add-doctor)
-- [Adding a Patient: `add Patient`](#adding-a-patient--add-patient)
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -87,11 +84,13 @@ A person can have any number of tags (including 0)
 <div markdown="span" class="alert alert-primary">:note:
 **Take Note:**
 
-- A doctor **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result in an error.
+- A doctor **MUST** have a non-empty NAME and a valid IC at the very least. 
+Failure to include these details may result in an error.
 - Phone Numbers and Emails have to be in a valid format.
 - PHONE_NUMBER must have exactly 8 digits.
 - EMAIL must contain email domain (eg. `@gmail.com`).
 - PATIENT must contain the valid IC of a Patient in the Database.
+</div>
 
 Examples:
 * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pt/T0123456H`
