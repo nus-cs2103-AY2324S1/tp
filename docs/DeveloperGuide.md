@@ -280,40 +280,30 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-### User stories
-
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-### User stories
-
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​             | I want to …​                                 | So that I can…​                                                                 |
-|----------|---------------------|----------------------------------------------|--------------------------------------------------------------------------------|
-| `* * *`  | developer           | view all members of my team                  | get their email address/contact                                                 |
-| `* * *`  | developer           | search contacts using a tag-based system     | swiftly find contacts relevant to specific responsibilities                      |
-| `* * *`  | developer           | view my team leader’s contact details        | contact him when I need direction on an issue                                    |
-| `* *`    | developer           | edit or update my information                | easily update my info                                                           |
-| `* *`    | developer           | set a status (available, busy, OOO)          | others know when to reach out to me                                             |
-| `* *`    | developer           | search contact with partial information      | find the person without remembering their full name                              |
-| `* *`    | developer           | add a tag/short bio about my expertise       | others recognize my specialties                                                 |
-| `* * *`  | project manager     | access the names of all my developers        | contact them regarding the project                                              |
-| `* * *`  | project manager     | view all my team leaders                     | contact them when collaborating on developing a certain feature                  |
-| `* * *`  | project manager     | assign a node for a team leader              | target team leaders can fill in their information by themselves                 |
-| `* * *`  | project manager     | remove another user                          | if he leaves the team/company                                                   |
-| `* *`    | project manager     | choose to share my contact information       | not everyone can contact me directly                                            |
-| `* *`    | project manager     | archive old contacts or groups               | keep active list clutter-free while retaining old information                   |
-| `* *`    | software team lead  | color-code my contacts                       | visually scan and prioritize my interactions                                    |
-| `* *`    | software team lead  | set a verification code                      | control who registers as a project manager                                      |
-| `*`      | software team lead  | get notifications on birthdays               | maintain relationships through personal touches                                 |
-| `*`      | software team lead  | create a public profile for my team          | external stakeholders can find and reach out to the right member                |
-| `* * *`  | team leader         | assign a node for a developers               | target developer can fill in his information by himself                         |
-| `* * *`  | team leader         | see info of other team leaders               | coordinate work for the project                                                 |
-| `* *`    | new user            | use a help command                           | understand available functions of the app                                       |
-| `* *`    | user                | use bye command                              | close the app easily                                                            |
-| `* *`    | user with access    | receive notifications on contact changes     | stay updated on team changes                                                    |
-| `* *`    | first-time user     | easily register                              | access the phonebook                                                            |
-
+| Priority | As a …​         | I want to …​                                                  | So that I can…​                                                           |
+|----------|-----------------|---------------------------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | project manager | view all members of my project                                | get their email address/contact                                           |
+| `* * *`  | project manager | search contacts using a tag-based system                      | swiftly find contacts relevant to specific responsibilities               |
+| `* * *`  | project manager | view the leader of any team                                   | contact him when I want to find out about the status of a task            |
+| `* *`    | project manager | edit or update my information                                 | easily update my info                                                     |
+| `* *`    | project manager | search contact with partial information                       | find the person without remembering their full name                       |
+| `* *`    | project manager | add a tag/short bio about every developer                     | I can know the specialities/traits of every developer                     |
+| `* * *`  | project manager | access the names of all my developers                         | contact them regarding the project                                        |
+| `* * *`  | project manager | view all my team leaders                                      | contact them when collaborating on developing a certain feature           |
+| `* * *`  | project manager | assign a node for a team leader                               | target team leaders can fill in their information by themselves           |
+| `* * *`  | project manager | remove another user                                           | if he leaves the team/company                                             |
+| `*`      | project manager | archive old contacts or groups                                | keep active list clutter-free while retaining old information             |
+| `*`      | project manager | get notifications on birthdays                                | maintain relationships through personal touches                           |
+| `*`      | project manager | create a public profile for my project                        | external stakeholders can find and reach out to the right member          |
+| `* * *`  | project manager | use a help command                                            | understand available functions of the app                                 |
+| `* *`    | project manager | use a bye command                                             | close the app easily                                                      |
+| `*`      | project manager | receive request to change contact information                 | stay updated on team changes                                              |
+| `* * *`  | project manager | view my teams and all members in my organisation side by side | have a glance at the current structure of my organisation                 |
+| `* * *`  | project manager | remove all the users and teams                                | create a new project with new team members.                               |
+| `* * *`  | project manager | create a new team                                             | reflect the changes done in actual project structure accurately           |
+| `* * *`  | project manager | add new developers after a team is created                    | reflect the growth in size of my teams                                    |
+| `* * *`  | project manager | remove developers from a team                                 | keep my information up to date when a developer shifts to another project |
+| `* * *`  | project manager | receive request to change contact information                 | stay updated on team changes                                              |
 
 
 
@@ -324,27 +314,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LinkTree` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: View all members of my team**
-**Actor: Developer**
+**Use case: View all members of my project**
+**Actor: Project Manager**
 
 **MSS**
 
-1. Developer requests to list team members.
+1. Project manager requests to list members.
 2. LinkTree displays a list of team members.
-3. Developer views the members' contact information.
+3. Project manager views the members' contact information.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The team member list is empty.
-  * 2a1. TeamDirectory indicates there are no members currently.
+* 2a. The member list is empty.
+  * 2a1. LinkTree indicates there are no members currently.
     Use case ends.
 
 ---
 
-**Use case: Search contacts using tags**
-**Actor: Developer**
+**Use case: Search for team leaders**
+**Actor: Project Manager **
 
 **MSS**
 
