@@ -70,7 +70,7 @@ public class EditTransactionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (editTransactionDescriptor.staffId >= 0
+        if (editTransactionDescriptor.staffId != null && editTransactionDescriptor.staffId >= 0
                 && model.getPerson(editTransactionDescriptor.staffId).equals(Person.NULL_PERSON)) {
             throw new CommandException("Staff not found");
         }

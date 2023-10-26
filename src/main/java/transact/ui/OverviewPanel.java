@@ -1,14 +1,12 @@
 package transact.ui;
 
-import java.time.Month;
 import java.time.YearMonth;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TreeMap;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,6 +19,7 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import se.alipsa.ymp.YearMonthPickerCombo;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.TransactionType;
@@ -32,7 +31,7 @@ public class OverviewPanel extends UiPart<Region> {
 
     private static final String FXML = "Overview.fxml";
 
-    private static final int MONTHS_IN_A_YEAR = 12;
+    private static final DateTimeFormatter yearMonthFormat = DateTimeFormatter.ofPattern("MMM yy");
 
     @FXML
     private StackPane pickerContainer;
@@ -44,14 +43,16 @@ public class OverviewPanel extends UiPart<Region> {
     private Label expensesLabel;
 
     @FXML
-    private LineChart<String, Number> profitGraph;
+    private VBox graphContainer;
 
     @FXML
     private PieChart breakdownPieChart;
 
+    private LineChart<String, Number> profitGraph;
+
     private ObservableList<Transaction> transactionList;
 
-    private Map<YearMonth, MonthData> monthDataMap = new TreeMap<>();
+    private TreeMap<YearMonth, MonthData> monthDataMap = new TreeMap<>();
 
     /**
      * Creates a {@code OverviewPanel} with the given
@@ -64,7 +65,21 @@ public class OverviewPanel extends UiPart<Region> {
 
         this.transactionList = transactionList;
 
-        // Init view
+        // Init UI elements
+        final NumberAxis yAxis = new NumberAxis();
+        yAxis.setAutoRanging(true);
+        yAxis.setForceZeroInRange(false);
+
+        final CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setAutoRanging(true);
+        xAxis.setLabel("Date");
+
+        profitGraph = new LineChart<String, Number>(xAxis, yAxis);
+        profitGraph.setTitle("Profit Graph");
+        profitGraph.setLegendVisible(false);
+
+        graphContainer.getChildren().add(profitGraph);
+
         updateMonthData();
         updateGraph();
         changeMonthView(YearMonth.now());
@@ -100,7 +115,8 @@ public class OverviewPanel extends UiPart<Region> {
     }
 
     /**
-     * Updates the {@code monthDataMap} with information from the {@code transactionList}.
+     * Updates the {@code monthDataMap} with information from the
+     * {@code transactionList}.
      */
     private void updateMonthData() {
         transactionList.stream().forEach((Transaction t) -> {
@@ -120,66 +136,39 @@ public class OverviewPanel extends UiPart<Region> {
                         .toLocalDate())).increaseRevenue(t.getAmount().getValue().doubleValue());
             }
         });
-        /* Mock data
-        monthDataMap.put(YearMonth.of(2023, 1), new MonthData(1000, 2000));
-        monthDataMap.put(YearMonth.of(2023, 2), new MonthData(2000, 3000));
-        monthDataMap.put(YearMonth.of(2023, 3), new MonthData(3000, 5000));
-        monthDataMap.put(YearMonth.of(2023, 4), new MonthData(4000, 1000));
-        monthDataMap.put(YearMonth.of(2023, 5), new MonthData(5000, 56000));
-        monthDataMap.put(YearMonth.of(2023, 6), new MonthData(6000, 66000));
-        monthDataMap.put(YearMonth.of(2023, 7), new MonthData(7000, 72000));
-        monthDataMap.put(YearMonth.of(2023, 8), new MonthData(8000, 80000));
-        monthDataMap.put(YearMonth.of(2023, 9), new MonthData(9000, 91000));
-
-        // This month
-        monthDataMap.put(YearMonth.of(2023, 10), new MonthData(1234, 1234));
-         */
     }
-
-    private CategoryAxis generateMonthAxis() {
-        // TODO Implement this method
-        /*
-         * Axis should show 12 months, ending at the month of the latest transaction
-         */
-        ObservableList<String> months = FXCollections.observableArrayList();
-        months.addAll("Jan", "Feb", "Mar");
-        CategoryAxis xAxis = new CategoryAxis(months);
-        xAxis.setLabel("Month");
-        return xAxis;
-    }
-
 
     /**
-     * Creates an ArrayList of monthly profit data for each month in the year.
+     * Creates an ArrayList of monthly profit data for each month in the year,
+     * starting from the first available data to the last
      *
      * @return An ArrayList of Data objects, each representing monthly profit data.
      */
     private ArrayList<Data<String, Number>> getProfitGraphData() {
         ArrayList<Data<String, Number>> data = new ArrayList<>();
-        for (int i = 0; i < MONTHS_IN_A_YEAR; i++) {
-            String monthName = Month.of(i + 1).toString().substring(0, 3);
-            if (monthDataMap.get(YearMonth.of(2023, i + 1)) != null) {
-                data.add(new Data<String, Number>(monthName,
-                        monthDataMap.get(YearMonth.of(2023, i + 1)).getProfit()));
-            }
+
+        YearMonth startMonth = monthDataMap.firstKey();
+        YearMonth lastMonth = monthDataMap.lastKey().plusMonths(1);
+
+        while (startMonth.isBefore(lastMonth)) {
+            String displayDate = startMonth.format(yearMonthFormat);
+            MonthData monthData = monthDataMap.get(startMonth);
+            XYChart.Data<String, Number> d = new XYChart.Data<>(displayDate,
+                    monthData == null ? 0 : monthData.getProfit());
+
+            data.add(d);
+
+            startMonth = startMonth.plusMonths(1);
         }
         return data;
     }
 
     private void updateGraph() {
-        final NumberAxis yAxis = new NumberAxis();
-
-        yAxis.setLabel("Profit/$");
-
-        profitGraph = new LineChart<String, Number>(generateMonthAxis(), yAxis);
-
-        profitGraph.setTitle("Profit Graph");
-
+        profitGraph.getData().clear();
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
         series.getData().addAll(getProfitGraphData());
 
-        profitGraph.getData().clear();
         profitGraph.getData().add(series);
     }
 
@@ -206,6 +195,7 @@ public class OverviewPanel extends UiPart<Region> {
 
         /**
          * Increases each month's revenue by a certain amount.
+         *
          * @param revenue
          */
         public void increaseRevenue(double revenue) {
@@ -214,6 +204,7 @@ public class OverviewPanel extends UiPart<Region> {
 
         /**
          * Increases each month's expense by a certain amount.
+         *
          * @param expense
          */
         public void increaseExpense(double expense) {
