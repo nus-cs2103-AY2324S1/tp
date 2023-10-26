@@ -250,6 +250,42 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Improved GUI
+
+_The Graphical User Interface (GUI) is designed using JavaFX and employs a combination of HBox, VBox, and StackPane layouts. It also utilizes specific color choices to create an appealing and user-friendly interface._
+
+_Developers can use this information as a reference when working with the HealthSync GUI code._
+
+#### Layout Structure:
+
+The primary layout structure for the HealthSync GUI is based on HBox and VBox containers, which allow for a flexible arrangement of UI elements.
+
+1. HBox
+   Location: The HBox is the top-level container in the GUI and spans the entire application window.
+
+2. VBox
+   Location: There are two VBox containers within the HBox, which are responsible for organizing various elements of the GUI.
+
+StackPane
+The StackPane is used to organize specific UI elements within the VBox containers. It allows for the layering of elements and effective management of screen real estate.
+
+1. StackPane (Person List)
+
+   Location: Inside the first VBox (fx:id="personList").
+2. StackPane (Logger Panel)
+   
+    Location: Also inside the first VBox (fx:id="personList").
+3. StackPane (Result Display, Command Box, and Status Bar)
+   
+    Location: These StackPanes are located inside the second VBox
+
+#### Color Choice:
+
+The HealthSync GUI utilizes specific color choices to create a visually pleasing and organized interface, while still maintaining the original Dark Theme.
+
+1. Primary Colour: #43314E 
+2. Secondary Colour: #231335
+
 
 --------------------------------------------------------------------------------------------------------------------
 
