@@ -18,7 +18,7 @@ import seedu.address.model.person.Reason;
 /**
  * Parses input arguments and creates a new DeductCommand object.
  */
-public class DeductCommandParser implements Parser {
+public class DeductCommandParser implements Parser<DeductCommand> {
     @Override
     public DeductCommand parse(String args) throws ParseException {
         requireNonNull(args);

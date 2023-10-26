@@ -238,6 +238,62 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Deductions and Benefits
+
+#### Proposed Implementation
+
+The proposed deductions and benefits feature is facilitated by `Deduction` and `Benefit` classes. They represent payment deducted from and paid to an employee respectively.
+
+A `Deduction` object contains the following information:
+(Class diagram to be added)
+
+A `Benefit` object contains the following information:
+(Class diagram to be added)
+
+Both `Deduction` and `Benefit` classes extend the `Payment` class, which contains the following information:
+(Class diagram to be added)
+
+Adding deductions and benefits to an employee is done by the `DeductCommand` and `DeductCommandParser` classes and `BenefitCommand` and `BenefitCommandParser` classes respectively.
+
+The following sequence diagram shows how the `deduct`/`benefit` operation works:
+(Sequence diagram to be added)
+
+After `DeductCommandParser` and `BenefitCommandParser` classes parse the user input, the `DeductCommand` and `BenefitCommand` classes will be called to execute the command. The `DeductCommand` and `BenefitCommand` classes will then call the `Model` component to add the deduction/benefit to the employee.
+`DeductCommand::execute(Model)` and `BenefitCommand::execute(Model)` will decide to call `DeductCommand::executeByIndex(Model)`/`BenefitCommand::executeByIndex(Model)` or `DeductCommand::executeByName(Model)`/`BenefitCommand::executeByName(Model)` based on whether an index has been specified in the user input.
+
+The following activity diagram summarises the process of adding a deduction/benefit to an employee:
+(Activity diagram to be added)
+
+#### Design considerations:
+
+{what are the design considerations?}
+
+### Payslip generation
+
+#### Proposed Implementation
+
+The proposed payslip generation feature is facilitated by `PayslipGenerator`, `PayslipCommand` and `PayslipCommandParser` classes.
+
+The `PayslipGenerator` class is responsible for generating the payslip for a specific employee. It contains the following methods:
+(Class diagram to be added)
+
+The `PayslipCommand` class is responsible for executing the `payslip` command. It contains the following methods:
+(Class diagram to be added)
+
+The `PayslipCommandParser` class is responsible for parsing the user input for the `payslip` command. It contains the following methods:
+(Class diagram to be added)
+
+The following sequence diagram shows how the `payslip` operation works:
+(Sequence diagram to be added)
+
+After `PayslipCommandParser` class parses the user input, the `PayslipCommand` class will be called to execute the command. The `PayslipCommand` class will then call the `Model` component to generate the payslip for the employee, and store the payslip as a PDF file at `payslips/`.
+
+The following activity diagram summarises the process of generating a payslip for an employee:
+(Activity diagram to be added)
+
+#### Design considerations:
+
+{what are the design considerations?}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -374,6 +430,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 	 * 1b1. ManaGease will display a list of members with the same name.
  
          Use case ends.
+
+<br>
+
+**Use case: Add deductions/benefits to the monthly salary of an employee**
+
+**MSS**
+
+1. User requests to add deductions/benefits to the monthly salary of an employee.
+2. ManaGease adds deductions/benefits to the monthly salary of an employee.
+3. ManaGease displays a confirmation message that deductions/benefits have been added.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command parameters are given.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
 
 <br>
 
