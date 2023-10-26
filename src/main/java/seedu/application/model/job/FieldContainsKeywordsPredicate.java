@@ -1,55 +1,75 @@
 package seedu.application.model.job;
 
-import static seedu.application.model.job.Company.COMPANY_SPECIFIER;
-import static seedu.application.model.job.Role.ROLE_SPECIFIER;
-
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.application.commons.util.StringUtil;
 import seedu.application.commons.util.ToStringBuilder;
+import seedu.application.logic.parser.CliSyntax;
+import seedu.application.logic.parser.Prefix;
 
 /**
  * Tests that a {@code Job}'s field matches any of the keywords given.
  */
 public class FieldContainsKeywordsPredicate implements Predicate<Job> {
-    private final String specifier;
+    private final Prefix prefix;
     private final List<String> keywords;
 
     /**
-     * Constructs a {@code FieldContainsKeywordsPredicate} using the specifier and keywords given.
-     * @param specifier String denoting which field to search in.
+     * Constructs a {@code FieldContainsKeywordsPredicate} using the prefix and keywords given.
+     * @param prefix Prefix denoting which field to search in.
      * @param keywords List of keywords which the user is searching for.
      */
-    public FieldContainsKeywordsPredicate(String specifier, List<String> keywords) {
-        this.specifier = specifier;
+    public FieldContainsKeywordsPredicate(Prefix prefix, List<String> keywords) {
+        this.prefix = prefix;
         this.keywords = keywords;
     }
 
     private String getField(Job job) {
-        switch (specifier) {
-        case COMPANY_SPECIFIER:
+        if (prefix.equals(CliSyntax.PREFIX_COMPANY)) {
             return job.getCompany().name;
-        case ROLE_SPECIFIER:
-            return job.getRole().description;
-        default:
-            return null;
         }
+
+        if (prefix.equals(CliSyntax.PREFIX_ROLE)) {
+            return job.getRole().description;
+        }
+
+        if (prefix.equals(CliSyntax.PREFIX_STATUS)) {
+            return job.getStatus().status;
+        }
+
+        if (prefix.equals(CliSyntax.PREFIX_INDUSTRY)) {
+            return job.getIndustry().industry;
+        }
+
+        if (prefix.equals(CliSyntax.PREFIX_DEADLINE)) {
+            return job.getDeadline().deadline;
+        }
+
+        if (prefix.equals(CliSyntax.PREFIX_JOB_TYPE)) {
+            return job.getJobType().jobType;
+        }
+
+        return null;
     }
 
     /**
-     * Checks if a {@code String} is a valid specifier.
-     * @param specifier The user String input.
+     * Checks if a {@code Prefix} is a valid prefix in the context of the Find command.
+     * @param prefix The prefix specified by the user.
      */
-    public static boolean isValidSpecifier(String specifier) {
-        return specifier.equals(COMPANY_SPECIFIER)
-                || specifier.equals(ROLE_SPECIFIER);
+    public static boolean isValidPrefix(Prefix prefix) {
+        return prefix.equals(CliSyntax.PREFIX_COMPANY)
+                || prefix.equals(CliSyntax.PREFIX_ROLE)
+                || prefix.equals(CliSyntax.PREFIX_STATUS)
+                || prefix.equals(CliSyntax.PREFIX_INDUSTRY)
+                || prefix.equals(CliSyntax.PREFIX_DEADLINE)
+                || prefix.equals(CliSyntax.PREFIX_JOB_TYPE);
     }
 
     @Override
     public boolean test(Job job) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(getField(job), keyword));
+                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(getField(job), keyword));
     }
 
     @Override
@@ -64,7 +84,7 @@ public class FieldContainsKeywordsPredicate implements Predicate<Job> {
         }
 
         FieldContainsKeywordsPredicate otherFieldContainsKeywordsPredicate = (FieldContainsKeywordsPredicate) other;
-        return specifier.equals(otherFieldContainsKeywordsPredicate.specifier)
+        return prefix.equals(otherFieldContainsKeywordsPredicate.prefix)
                 && keywords.equals(otherFieldContainsKeywordsPredicate.keywords);
     }
 
