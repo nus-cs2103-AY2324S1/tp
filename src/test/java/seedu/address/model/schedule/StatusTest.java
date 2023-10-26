@@ -1,7 +1,7 @@
 package seedu.address.model.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.parser.ParserUtil.parseStatusToString;
+import static seedu.address.model.schedule.Status.parseStatusToString;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
