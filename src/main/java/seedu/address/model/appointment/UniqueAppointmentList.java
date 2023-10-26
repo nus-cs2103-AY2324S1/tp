@@ -5,11 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.student.exceptions.DuplicateStudentException;
-import seedu.address.model.student.exceptions.StudentNotFoundException;
+import seedu.address.model.appointment.exceptions.AppointmentNotFoundException;
+import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
+import seedu.address.model.student.Name;
+
 
 /**
  * A list of appointments that enforces uniqueness between its elements and does not allow nulls.
@@ -35,7 +38,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     public void add(Appointment toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateStudentException();
+            throw new DuplicateAppointmentException();
         }
         internalList.add(toAdd);
     }
@@ -51,11 +54,11 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new StudentNotFoundException();
+            throw new AppointmentNotFoundException();
         }
 
         if (!target.equals(editedAppointment) && contains(editedAppointment)) {
-            throw new DuplicateStudentException();
+            throw new DuplicateAppointmentException();
         }
 
         internalList.set(index, editedAppointment);
@@ -68,8 +71,17 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     public void remove(Appointment toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new StudentNotFoundException();
+            throw new AppointmentNotFoundException();
         }
+    }
+
+    /**
+     * Removes all appointments which contain the name {@code toRemove} from the list.
+     */
+    public void removeRelatedAppointments(Name toRemove) {
+        requireNonNull(toRemove);
+        Predicate<Appointment> hasSameName = appointment -> appointment.getName().equals(toRemove);
+        internalList.removeIf(hasSameName);
     }
 
     public void setAppointments(UniqueAppointmentList replacement) {
@@ -84,7 +96,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     public void setAppointments(List<Appointment> appointments) {
         requireAllNonNull(appointments);
         if (!appointmentsAreUnique(appointments)) {
-            throw new DuplicateStudentException();
+            throw new DuplicateAppointmentException();
         }
         internalList.setAll(appointments);
     }

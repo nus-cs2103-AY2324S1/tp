@@ -16,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.WellNus;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.exceptions.InvalidStartEndTimeException;
 import seedu.address.testutil.AppointmentBuilder;
 import seedu.address.testutil.ModelStub;
 
@@ -40,7 +41,7 @@ public class ScheduleCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() {
+    public void execute_duplicateStudent_throwsCommandException() throws InvalidStartEndTimeException {
         Appointment validAppointment = new AppointmentBuilder().build();
         ScheduleCommand scheduleCommand = new ScheduleCommand(validAppointment);
         ModelStub modelStub = new ScheduleCommandTest.ModelStubWithAppointment(validAppointment);
@@ -49,7 +50,7 @@ public class ScheduleCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws InvalidStartEndTimeException {
         Appointment alice = new AppointmentBuilder().withName("Alice").build();
         Appointment bob = new AppointmentBuilder().withName("Bob").build();
         ScheduleCommand scheduleAliceCommand = new ScheduleCommand(alice);
@@ -73,8 +74,8 @@ public class ScheduleCommandTest {
     }
 
     @Test
-    public void toStringMethod() {
-        Appointment alice = new AppointmentBuilder().withName("John Doe").withDateTime("2023-12-31 16:30:00")
+    public void toStringMethod() throws InvalidStartEndTimeException {
+        Appointment alice = new AppointmentBuilder().withName("John Doe").withStartTime("16:30").withEndTime("17:30")
                 .withDescription("First Session").build();
         ScheduleCommand scheduleCommand = new ScheduleCommand(alice);
         String expected = ScheduleCommand.class.getCanonicalName() + "{toAdd=" + alice + "}";

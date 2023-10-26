@@ -22,6 +22,8 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX =
             "The appointment index provided is invalid";
+    public static final String MESSAGE_INVALID_START_END_TIME =
+            "Start time must be before end time";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -56,11 +58,14 @@ public class Messages {
     public static String format(Appointment appointment) {
         final StringBuilder builder = new StringBuilder();
         builder.append(appointment.getName())
-                .append("; Date and Time: ")
-                .append(appointment.getDateTime())
+                .append("; Date: ")
+                .append(appointment.getDate())
+                .append("; Start Time: ")
+                .append(appointment.getStartTime())
+                .append("; End Time: ")
+                .append(appointment.getEndTime())
                 .append("; Description: ")
                 .append(appointment.getDescription());
         return builder.toString();
     }
-
 }
