@@ -196,6 +196,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateTutorSchedules(Person oldPerson, Person editedPerson) {
+        ObservableList<Schedule> schedules = getSchedulesFromTutor(oldPerson);
+        schedules.forEach(schedule -> {
+            Schedule newSchedule = new Schedule(
+                editedPerson,
+                schedule.getStartTime(),
+                schedule.getEndTime()
+            );
+            setSchedule(schedule, newSchedule);
+        });
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

@@ -28,13 +28,13 @@ public class AddScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a schedule to the address book for a tutor "
             + "by the index number used in the displayed tutor list.\n"
             + "Parameters: "
-            + "TUTOR_INDEX (must be a positive integer)"
+            + "TUTOR_INDEX (must be a positive integer) "
             + PREFIX_START_TIME + "START_TIME "
             + PREFIX_END_TIME + "END_TIME\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
-            + PREFIX_START_TIME + "2023-09-15T09:00:00 "
-            + PREFIX_END_TIME + "2023-09-15T11:00:00";
+            + PREFIX_START_TIME + "2023-09-15T09:00 "
+            + PREFIX_END_TIME + "2023-09-15T11:00";
 
     public static final String MESSAGE_SUCCESS = "New schedule %1$s has been added.";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This schedule already exists in the address book";
