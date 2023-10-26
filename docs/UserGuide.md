@@ -124,6 +124,9 @@ Creates a new appointment for patients.
 
 Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm:ss`
 
+<div markdown="span" class="alert alert-primary">:note:
+**Take Note:**
+
 - All fields are Required.
 - EMAIL must follow the specified format (ie. `yyyy-MM-dd HH:mm:ss`).
 - PATIENT must contain the valid IC of a Patient in the Database.
