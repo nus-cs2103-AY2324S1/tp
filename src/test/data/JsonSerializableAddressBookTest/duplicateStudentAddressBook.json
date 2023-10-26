@@ -10,7 +10,8 @@
       "assignmentTracker" : [ 0, 0 ],
       "classParticipationTracker" : [ false, false, false ]
     },
-    "tags": [ "friends" ]
+    "tags": [ "friends" ],
+    "comment" : "She is a very nice person"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -21,6 +22,7 @@
       "attendanceTracker" : [ false, false, false ],
       "assignmentTracker" : [ 0, 0 ],
       "classParticipationTracker" : [ false, false, false ]
-    }
+    },
+    "comment" : "She is a very nice person"
   } ]
 }

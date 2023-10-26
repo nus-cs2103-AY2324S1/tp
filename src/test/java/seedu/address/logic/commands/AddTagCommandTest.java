@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -30,6 +31,7 @@ import seedu.address.testutil.TypicalStudents;
 public class AddTagCommandTest {
 
     private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_addTag_success() {
@@ -45,7 +47,7 @@ public class AddTagCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), taggedStudent);
 
-        assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(taggedStudent.getTags(), model.getFilteredStudentList().get(0).getTags());
     }
 
@@ -54,7 +56,7 @@ public class AddTagCommandTest {
         AddTagCommand addTagCommand = new AddTagCommand(
             new StudentNumber(VALID_STUDENT_NUMBER_AMY), SampleDataUtil.getTagSet(VALID_TAG_SMART));
 
-        assertCommandFailure(addTagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST);
+        assertCommandFailure(addTagCommand, model, Messages.MESSAGE_STUDENT_DOES_NOT_EXIST, commandHistory);
     }
 
     @Test

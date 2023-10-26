@@ -30,8 +30,7 @@ import seedu.address.testutil.StudentBuilder;
 public class AddCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
-
-    private CommandHistory commandHistory = new CommandHistory();
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
@@ -192,6 +191,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isSelectedStudent(Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -218,6 +222,11 @@ public class AddCommandTest {
 
         @Override
         public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void reset(ReadOnlyAddressBook addressBook) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -160,6 +160,11 @@ public class ModelManager implements Model {
     public void setSelectedStudent(Student student) {
         versionedAddressBook.setSelectedStudent(student);
     }
+
+    @Override
+    public boolean isSelectedStudent(Student student) {
+        return !getSelectedStudent().isEmpty() && getSelectedStudent().get(0).equals(student);
+    }
     //=========== Filtered Student List Accessors =============================================================
 
     /**

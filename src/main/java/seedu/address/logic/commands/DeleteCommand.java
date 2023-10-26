@@ -41,8 +41,11 @@ public class DeleteCommand extends Command {
         }
 
         Student studentToDelete = model.getStudent(targetStudentNumber);
-
         model.deleteStudent(studentToDelete);
+        if (model.isSelectedStudent(studentToDelete)) {
+            model.getSelectedStudent().clear();
+        }
+
         model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, Messages.format(studentToDelete)));

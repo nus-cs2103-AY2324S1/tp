@@ -34,6 +34,7 @@ public class DeleteCommandTest {
     public void execute_validStudentNumber_success() {
         Student studentToDelete = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(studentToDelete.getStudentNumber());
+        model.setSelectedStudent(studentToDelete);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
                 Messages.format(studentToDelete));
@@ -43,6 +44,7 @@ public class DeleteCommandTest {
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertTrue(model.getSelectedStudent().isEmpty());
     }
 
     @Test
@@ -63,7 +65,7 @@ public class DeleteCommandTest {
         // delete -> first student deleted
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered student list to show all students
+        // undo -> reverts Class Manager back to previous state and filtered student list to show all students
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_SUCCESS, expectedModel, commandHistory);
 

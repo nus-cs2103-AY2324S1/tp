@@ -45,6 +45,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label comment;
+    @FXML
     private BarChart<String, Double> barChart;
 
     /**
@@ -59,6 +61,7 @@ public class StudentCard extends UiPart<Region> {
         studentNumber.setText(student.getStudentNumber().value);
         classDetails.setText(student.getClassDetails().classDetails);
         email.setText(student.getEmail().value);
+        comment.setText(student.getComment().comment);
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

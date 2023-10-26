@@ -9,6 +9,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
@@ -23,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CommentCommand;
 import seedu.address.logic.commands.ConfigCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -38,6 +40,7 @@ import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.ClassDetails;
+import seedu.address.model.student.Comment;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentContainsKeywordsPredicate;
 import seedu.address.model.student.StudentNumber;
@@ -161,6 +164,17 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED, ()
                 -> parser.parseCommand("config", true));
     }
+
+    @Test
+    public void parseCommand_comment() throws Exception {
+        Student student = new StudentBuilder().build();
+        Comment comment = new Comment("Struggling with tutorials.");
+        CommentCommand command = (CommentCommand) parser.parseCommand(CommentCommand.COMMAND_WORD + " "
+                + PREFIX_STUDENT_NUMBER + student.getStudentNumber() + " "
+                + PREFIX_COMMENT + comment, true);
+        assertEquals(new CommentCommand(student.getStudentNumber(), comment), command);
+    }
+
 
     @Test
     public void parseCommandNotConfigured_config() throws Exception {

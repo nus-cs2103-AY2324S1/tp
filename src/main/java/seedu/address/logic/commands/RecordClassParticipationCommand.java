@@ -59,9 +59,14 @@ public class RecordClassParticipationCommand extends Command {
         ClassDetails classDetails = studentToMark.getClassDetails();
         classDetails.recordClassParticipation(sessionNumber, isParticipated);
         Student markedStudent = new Student(studentToMark.getName(), studentToMark.getPhone(),
-            studentToMark.getEmail(), studentToMark.getStudentNumber(), classDetails, studentToMark.getTags());
+            studentToMark.getEmail(), studentToMark.getStudentNumber(), classDetails, studentToMark.getTags(),
+                studentToMark.getComment());
 
         model.setStudent(studentToMark, markedStudent);
+        if (model.isSelectedStudent(markedStudent)) {
+            model.setSelectedStudent(markedStudent);
+        }
+
         model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)

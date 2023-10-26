@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.NONEXISTENT_STUDENT_NUMBER;
@@ -11,6 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -25,11 +27,13 @@ import seedu.address.testutil.TypicalStudents;
 public class MarkCommandTest {
 
     private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_validStudentNumber_success() {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
+        model.setSelectedStudent(studentToMark);
 
         MarkCommand markCommand = new MarkCommand(i, studentToMark.getStudentNumber());
 
@@ -39,7 +43,8 @@ public class MarkCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setStudent(studentToMark, studentToMark.markPresent(i));
 
-        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertEquals(studentToMark, model.getSelectedStudent().get(0));
     }
 
     @Test
@@ -49,14 +54,14 @@ public class MarkCommandTest {
 
         MarkCommand markCommand = new MarkCommand(i, studentToMark.getStudentNumber());
 
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX);
+        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX, commandHistory);
     }
 
     @Test
     public void execute_nonexistentStudentNumber_throwsCommandException() {
         MarkCommand markCommand = new MarkCommand(Index.fromOneBased(1), NONEXISTENT_STUDENT_NUMBER);
 
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
+        assertCommandFailure(markCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
     }
 
     @Test

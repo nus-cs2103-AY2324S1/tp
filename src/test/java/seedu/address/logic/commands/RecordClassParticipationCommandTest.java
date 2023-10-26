@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -29,13 +30,14 @@ import seedu.address.testutil.TypicalStudents;
 public class RecordClassParticipationCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Student editedStudent = new StudentBuilder(TypicalStudents.ALICE)
                 .withClassPartDetails(1, true)
                 .build();
-
+        model.setSelectedStudent(editedStudent);
         StudentNumber studentNumber = editedStudent.getStudentNumber();
         RecordClassParticipationCommand recordClassParticipationCommand = new RecordClassParticipationCommand(studentNumber, 1, true);
 
@@ -46,7 +48,8 @@ public class RecordClassParticipationCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
 
-        assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertEquals(editedStudent, model.getSelectedStudent().get(0));
     }
 
     @Test
@@ -68,7 +71,7 @@ public class RecordClassParticipationCommandTest {
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
 
-        assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
@@ -78,7 +81,8 @@ public class RecordClassParticipationCommandTest {
         RecordClassParticipationCommand recordClassParticipationCommand = new RecordClassParticipationCommand(
                 ida.getStudentNumber(), 1, true);
 
-        assertCommandFailure(recordClassParticipationCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
+        assertCommandFailure(
+                recordClassParticipationCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
     }
 
     @Test

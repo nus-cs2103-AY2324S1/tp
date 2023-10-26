@@ -17,6 +17,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -30,6 +31,7 @@ public class LoadCommandTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonLoadCommandTest");
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void load_validFile_success() throws CommandException {
@@ -40,7 +42,7 @@ public class LoadCommandTest {
         loadAddressBook(expectedModel, validFileName, validFilePath);
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(MESSAGE_LOAD_SUCCESS, validFileName), false, false, true);
-        assertCommandSuccess(loadCommand, model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(loadCommand, model, expectedCommandResult, expectedModel, commandHistory);
     }
 
     @Test
@@ -48,7 +50,8 @@ public class LoadCommandTest {
         String missingFileName = "missingAddressBook";
         Path missingFilePath = TEST_DATA_FOLDER.resolve(missingFileName + ".json");
         LoadCommand loadCommand = new LoadCommand(missingFileName, missingFilePath);
-        assertCommandFailure(loadCommand, model, String.format(MESSAGE_FILE_NOT_FOUND, missingFileName));
+        assertCommandFailure(
+                loadCommand, model, String.format(MESSAGE_FILE_NOT_FOUND, missingFileName), commandHistory);
     }
 
     @Test
@@ -56,7 +59,8 @@ public class LoadCommandTest {
         String corruptFileName = "NotJsonFormatAddressBook";
         Path corruptFilePath = TEST_DATA_FOLDER.resolve(corruptFileName + ".json");
         LoadCommand loadCommand = new LoadCommand(corruptFileName, corruptFilePath);
-        assertCommandFailure(loadCommand, model, String.format(MESSAGE_FILE_CANNOT_LOAD, corruptFileName));
+        assertCommandFailure(
+                loadCommand, model, String.format(MESSAGE_FILE_CANNOT_LOAD, corruptFileName), commandHistory);
     }
 
     public void loadAddressBook(Model expectedModel, String fileName, Path filePath) throws CommandException {

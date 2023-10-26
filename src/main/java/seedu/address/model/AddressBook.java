@@ -50,9 +50,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setStudents(List<Student> students) {
         this.students.setStudents(students);
-        if (!students.isEmpty()) {
-            this.students.setSelectedStudent(students.get(0));
-        }
     }
 
     /**
@@ -61,9 +58,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setStudents(newData.getStudentList());
-        if (!newData.getSelectedStudent().isEmpty()) {
-            setSelectedStudent(newData.getSelectedStudent().get(0));
-        }
     }
 
     //// student-level operations

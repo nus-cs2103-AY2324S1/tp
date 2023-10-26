@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.ClassDetails;
+import seedu.address.model.student.Comment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -31,6 +32,7 @@ class JsonAdaptedStudent {
     private final String studentNumber;
     private final JsonAdaptedClassDetails classDetails;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String comment;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -39,7 +41,8 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("studentNumber") String studentNumber,
                               @JsonProperty("classDetails") JsonAdaptedClassDetails classDetails,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("comment") String comment) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,6 +51,7 @@ class JsonAdaptedStudent {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.comment = comment;
     }
 
     /**
@@ -62,6 +66,7 @@ class JsonAdaptedStudent {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        comment = source.getComment().comment;
     }
 
     /**
@@ -114,8 +119,15 @@ class JsonAdaptedStudent {
         }
         final ClassDetails modelClassDetails = classDetails.toModelType();
 
+        if (comment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Comment.class.getSimpleName()));
+        }
+        final Comment modelComment = new Comment(comment);
+
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelStudentNumber, modelClassDetails, modelTags);
+        return new Student(modelName, modelPhone, modelEmail, modelStudentNumber, modelClassDetails,
+                modelTags, modelComment);
     }
 
 }
