@@ -9,6 +9,54 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
+This section describes some noteworthy details on how certain features are implemented.
+
+### Add Command
+
+The add command allows the user to add job applications with various attributes.
+
+Compulsory attributes are `Company` and `Role`.
+
+Optional attributes are `Status`, `Industry`, `Deadline` and `JobType`
+
+#### Implementation
+
+It is implemented by `AddCommand` and `AddCommandParser`.
+
+`AddCommandParser` parses the users' input and checks for the presence of compulsory and optional prefixes. 
+The information is then used to create a new Job Application through the `AddCommand`.
+
+(insert UML diagram here)
+
+The following sequence/activity diagram illustrates the process of invocation for the AddCommand:
+
+(insert UML diagram here)
+
+#### Design Considerations
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Edit Command
+
+The edit command allows the user to edit any field in their job application.
+
+#### Implementation
+It is implemented by `EditCommand` and `EditCommandParser`.
+
+`EditCommandParser` parses the users' input and checks for the valid prefixes to determine the field the user wants to change.
+The information is then used to create a new Job Application with the updated fields while retaining the unchanged fields through the `EditCommand`.
+
+The following Class Diagram of EditCommand illustrates the interactions between EditCommand and other classes:
+
+(insert UML diagram here)
+
+The following sequence diagram illustrates the process of invocation for the EditCommand:
+
+(insert UML diagram here)
+
+#### Design Considerations
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### List Command
 
