@@ -29,7 +29,7 @@
         <Label fx:id="question" text="\$first" styleClass="cell_big_label"/>
       </HBox>
          <Label fx:id="dueDate" styleClass="cell_small_label" />
-      
+
       <FlowPane fx:id="tags" />
 
     </VBox>
