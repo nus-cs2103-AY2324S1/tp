@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 
+import java.util.List;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseData;
+import seedu.address.model.person.predicates.TeachingCoursePredicate;
 
 /**
  * Adds the default course for users in the address book.
@@ -13,31 +17,53 @@ import seedu.address.model.course.Course;
 public class TeachCommand extends Command {
     public static final String COMMAND_WORD = "teach";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets up default module users are teaching.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets up default course users are teaching.\n"
             + "Parameters: "
-            + PREFIX_COURSE + "MODULE \n"
+            + PREFIX_COURSE + "COURSE \n"
             + "Example: " + COMMAND_WORD
-            + " " + PREFIX_COURSE + "CS1231S ";
+            + " " + PREFIX_COURSE + "CS1231S \n"
+            + CourseData.getCourseListString();
 
-    public static final String MESSAGE_SUCCESS = "Default module successfully added.";
+    public static final String MESSAGE_SUCCESS = " is successfully added as default course.";
 
     /**
-     * Sets module as the default.
+     * Sets course as the default.
      */
-    private final Course module;
+    private final Course course;
 
     /**
      * Creates TeachCommand object.
-     * @param module
+     * @param course The course to be added as default course.
      */
-    public TeachCommand(Course module) {
-        requireNonNull(module);
-        this.module = module;
+    public TeachCommand(Course course) {
+        requireNonNull(course);
+        this.course = course;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.setTeaching(module);
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        model.setTeaching(course);
+
+        //Filter the TAs by the default course
+        TeachingCoursePredicate predicate = new TeachingCoursePredicate(List.of(course));
+        model.updateFilteredPersonList(predicate);
+
+        return new CommandResult(course.getCourseCode() + MESSAGE_SUCCESS, false, false, true);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TeachCommand)) {
+            return false;
+        }
+
+        TeachCommand otherTeachCommand = (TeachCommand) other;
+        return course.equals(otherTeachCommand.course);
     }
 }

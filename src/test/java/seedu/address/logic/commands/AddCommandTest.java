@@ -115,7 +115,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setTeaching(Course module) {
+        public void setTeaching(Course course) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -24,18 +24,14 @@ public class TeachCommandParser implements Parser<TeachCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COURSE);
 
-        try {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COURSE);
 
-            Course module = null;
-
-            if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
-                module = parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
-            }
-
-            return new TeachCommand(module);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TeachCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.getValue(PREFIX_COURSE).isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TeachCommand.MESSAGE_USAGE));
         }
+
+        Course course = parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
+
+        return new TeachCommand(course);
     }
 }

@@ -46,15 +46,15 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Returns the module the user is teaching.
+     * Returns the course the user is teaching.
      *
      */
     String getTeaching();
 
     /**
-     * Sets the module the user is teaching.
+     * Sets the course the user is teaching.
      */
-    void setTeaching(Course module);
+    void setTeaching(Course course);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

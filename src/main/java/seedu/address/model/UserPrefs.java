@@ -16,7 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
-    private String teaching;
+    private String teaching = "";
     /**
      * Creates a {@code UserPrefs} with default values.
      */
@@ -61,9 +61,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public String getTeaching() {
         return this.teaching;
     }
-    public void setTeaching(String module) {
-        requireNonNull(module);
-        this.teaching = module;
+    public void setTeaching(String course) {
+        requireNonNull(course);
+        this.teaching = course;
     }
 
     @Override

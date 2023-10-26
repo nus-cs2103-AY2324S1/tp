@@ -9,6 +9,6 @@ import seedu.address.model.course.CourseData;
 public class CourseNotFoundException extends RuntimeException {
     @Override
     public String getMessage() {
-        return "Course not found." + CourseData.getCourseListString();
+        return "Course not found.\n" + CourseData.getCourseListString();
     }
 }
