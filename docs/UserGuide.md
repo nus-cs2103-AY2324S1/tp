@@ -146,19 +146,6 @@ Examples:
 *  `editc 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 
-### Editing a contact : `remark`
-
-Adds a remark to a contact.
-
-Format: `remark INDEX r/REMARK`
-
-* Adds a remark to the contact specified with `INDEX`. The index refers to the index number shown in the displayed person list. The index**must be a positive integer** 1, 2, 3, …​
-* Existing remark will be replaced with `REMARK`.
-* You can remove an existing remark by typing `r/`.
-
-*Examples: 
-* `remark 1 r/Owes me a favour` Replaces the previous remark for the 1st contact with "Owes me a favour".
-
 ### Viewing detailed contact information : `viewc`
 
 Views detailed information of a contact in OutBook.

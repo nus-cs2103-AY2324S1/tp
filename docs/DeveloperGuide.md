@@ -170,16 +170,15 @@ As such, this section shall only detail the implementation of the `viewc` comman
 
 When `viewc 2` is used, an instance of a `ViewContactCommand` (`ViewMeetingCommand` in the case of `viewm`) is created as shown in the following Sequence Diagram. This step does not differ from the way other commands have been shown to be created. The argument for our example would just be `2`, which would be stored as the `targetIndex` field of the `ViewContactCommand` object.
 
-![ViewContactCommandSequenceDiagram](images/tracing/ViewContactCommandSequenceDiagram-View%20Contact%20Command%20Sequence.png)
+![ViewContactCommandSequenceDiagram](images/tracing/ViewContactCommandSequenceDiagram-ViewContactCommandSequence.png)
 
 Once the instance of `ViewContactCommand` is created, it is executed. During execution, the command stores the contents of its `targetIndex` field in the `ModelManager` using its `setViewedPersonIndex` method as shown in the next Sequence Diagram. For `ViewMeetingCommand` it would use the `setViewedMeetingIndex` method instead.
 
-![StoreViewedItemsToModelDiagram](images/tracing/ViewCommandsSequenceDiagram-Store%20viewed%20Items%20to%20Model.png)
+![StoreViewedItemsToModelDiagram](images/tracing/ViewCommandsSequenceDiagram-StoreViewedItemsToModel.png)
 
 Once the indexes of the `Person` and `Meeting` objects to view (if any) are stored in `ModelManager`, their corresponding `Person` and `Meeting` objects (in this case the 2nd `Person` as displayed on the list) are obtained by the `MainWindow` as a `Pair` through the `getViewedItems` method of the `LogicManager` class. As such, both objects can then be forwarded to the `InfoDisplayPanel` using `setViewedModel`, which then displays detailed information of both objects. This process is denoted in the final Sequence Diagram below.
 
-![ForwardViewedPersonMeetingtoUiDiagram](images/tracing/UiViewItemsSequenceDiagram-Forward%20Viewed%20Person%20&%20Meeting%20to%20Ui.png)
-
+![ForwardViewedPersonMeetingtoUiDiagram](images/tracing/UiViewItemsSequenceDiagram-ForwardViewedPerson&MeetingToUi.png)
 #### Design Considerations and Rationale
 
 1. Passing viewed `Person` and `Meeting` from Model to Ui through Logic:
