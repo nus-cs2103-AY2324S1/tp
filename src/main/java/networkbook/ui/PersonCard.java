@@ -3,7 +3,6 @@ package networkbook.ui;
 import static java.util.Objects.requireNonNull;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
