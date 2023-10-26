@@ -24,6 +24,9 @@ public class InterviewTest {
         // null -> returns false
         assertFalse(STANDARD_INTERVIEW.isNotValidOrNewInterview(null));
 
+        System.out.println(STANDARD_INTERVIEW.isNotValidOrNewInterview(STANDARD_INTERVIEW_DIFFERENT_ROLE));
+        System.out.println(STANDARD_INTERVIEW);
+        System.out.println(STANDARD_INTERVIEW_DIFFERENT_ROLE);
         // same Applicant and time, all other attributes different -> returns true
         assertTrue(STANDARD_INTERVIEW.isNotValidOrNewInterview(STANDARD_INTERVIEW_DIFFERENT_ROLE));
 
@@ -38,8 +41,8 @@ public class InterviewTest {
     public void equals() {
         // same values -> returns true
         Interview standardInterviewCopy = new Interview(STANDARD_INTERVIEW.getInterviewApplicant(),
-                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getInterviewTiming(),
-                STANDARD_INTERVIEW.isDone());
+                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getInterviewStartTime(),
+                STANDARD_INTERVIEW.getInterviewEndTime(), STANDARD_INTERVIEW.isDone());
         assertTrue(STANDARD_INTERVIEW.equals(standardInterviewCopy));
 
         // same object -> returns true
@@ -56,17 +59,20 @@ public class InterviewTest {
 
         // different Applicant -> returns false
         Interview editedStandardinterview = new Interview(STANDARD_INTERVIEW_2.getInterviewApplicant(),
-                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getInterviewTiming());
+                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getInterviewStartTime(),
+                STANDARD_INTERVIEW.getInterviewEndTime(), STANDARD_INTERVIEW.isDone());
         assertFalse(STANDARD_INTERVIEW.equals(editedStandardinterview));
 
         // different job role -> returns false
         editedStandardinterview = new Interview(STANDARD_INTERVIEW.getInterviewApplicant(),
-                STANDARD_INTERVIEW_2.getJobRole(), STANDARD_INTERVIEW.getInterviewTiming());
+                STANDARD_INTERVIEW_2.getJobRole(), STANDARD_INTERVIEW.getInterviewStartTime(),
+                STANDARD_INTERVIEW.getInterviewEndTime(), STANDARD_INTERVIEW.isDone());
         assertFalse(STANDARD_INTERVIEW.equals(editedStandardinterview));
 
         // different Timing -> returns false
         editedStandardinterview = new Interview(STANDARD_INTERVIEW.getInterviewApplicant(),
-                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW_2.getInterviewTiming());
+                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW_2.getInterviewStartTime(),
+                STANDARD_INTERVIEW.getInterviewEndTime(), STANDARD_INTERVIEW.isDone());
         assertFalse(STANDARD_INTERVIEW.equals(editedStandardinterview));
     }
 }

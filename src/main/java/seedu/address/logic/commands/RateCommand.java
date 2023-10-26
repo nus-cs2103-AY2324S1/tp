@@ -48,7 +48,8 @@ public class RateCommand extends Command {
         Interview ratedInterview = new Interview(
                 interviewToRate.getInterviewApplicant(),
                 interviewToRate.getJobRole(),
-                interviewToRate.getInterviewTiming(),
+                interviewToRate.getInterviewStartTime(),
+                interviewToRate.getInterviewEndTime(),
                 newRating,
                 false
         );

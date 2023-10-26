@@ -5,6 +5,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.UniqueInterviewList;
 
 /**
  * This class encapsulates the methods that are part of the TimeParser API.
@@ -14,52 +19,53 @@ import java.time.format.DateTimeFormatter;
 public class TimeParser {
     protected static final LocalDateTime DEFAULT_DATE = LocalDateTime.of(1970, 1, 1, 0, 0);
     protected static final String[][] DATE_FORMATS = new String[][] {
+            // TODO: ADD THIS PATTERN: 2024-12-21T19:00
             // time string with day and time (formatID == 0)
             {
-            "E HHmm",
-            "E h'.'mma",
-            "E ha"
+                    "E HHmm",
+                    "E h'.'mma",
+                    "E ha"
             },
             // time with all required information: year, month, day of month, time (formatID == 1)
             {
-            "d MMM yyyy h'.'mma",
-            "d MMM yyyy HHmm",
-            "dd-MM-y HHmm",
-            "dd-MM-yyyy HHmm",
-            "dd-MM-yyyy HH'.'mma",
-            "d M y HH'.'mma",
-            "d M y HH:mm",
-            "MMM d HH:mm yyyy",
-            "d/M/yy HHmm",
-            "d/M/yyyy HHmm",
-            "d/M/y hh'.'mma",
-            "d/M/yyyy hh'.'mma",
-            "d/M/y ha"
+                    "d MMM yyyy h'.'mma",
+                    "d MMM yyyy HHmm",
+                    "dd-MM-y HHmm",
+                    "dd-MM-yyyy HHmm",
+                    "dd-MM-yyyy HH'.'mma",
+                    "d M y HH'.'mma",
+                    "d M y HH:mm",
+                    "MMM d HH:mm yyyy",
+                    "d/M/yy HHmm",
+                    "d/M/yyyy HHmm",
+                    "d/M/y hh'.'mma",
+                    "d/M/yyyy hh'.'mma",
+                    "d/M/y ha"
             },
             // time with these information: month, day of month, time (formatID == 2)
             {
-            "MMM dd HH'.'mma",
-            "dd MMM HH'.'mma",
-            "MMM dd ha",
-            "MMM dd hh'.'mma",
-            "MMM dd HHmm",
-            "dd MMM HHmm",
-            "d/M HHmm",
-            "MMM dd ha",
-            "dd MMM ha",
-            "dd MMM hh'.'mma",
-            "d/M ha"
+                    "MMM dd HH'.'mma",
+                    "dd MMM HH'.'mma",
+                    "MMM dd ha",
+                    "MMM dd hh'.'mma",
+                    "MMM dd HHmm",
+                    "dd MMM HHmm",
+                    "d/M HHmm",
+                    "MMM dd ha",
+                    "dd MMM ha",
+                    "dd MMM hh'.'mma",
+                    "d/M ha"
             },
             // correct format but string is missing the time (formatID == 3)
             {
-            "E",
-            "y-MM-dd",
-            "d/M/yy",
-            "d/M/yyyy",
-            "d/M/y",
-            "MMM dd",
-            "dd MMM",
-            "d/M"
+                    "E",
+                    "y-MM-dd",
+                    "d/M/yy",
+                    "d/M/yyyy",
+                    "d/M/y",
+                    "MMM dd",
+                    "dd MMM",
+                    "d/M"
             },
     };
 
@@ -93,6 +99,46 @@ public class TimeParser {
             }
         }
         throw new seedu.address.logic.parser.exceptions.ParseException("Please specify a valid date!");
+    }
+
+    /**
+     * Returns the interviews which clash with the current interview
+     *
+     * @author Tan Kerway
+     * @param startTime the start time of the interview that the user wants to schedule
+     * @param endTime the end time of the interview that the user wants to schedule
+     * @param interviews the list of interviews that the user has already
+     *                   scheduled
+     * @return a list of interviews that clash with the interview to be
+     *         scheduled
+     */
+    public static List<Interview> listInterviewClashes(LocalDateTime startTime,
+                                                       LocalDateTime endTime, UniqueInterviewList interviews) {
+        List<Interview> res = new ArrayList<>();
+        for (Interview currentInterview : interviews) {
+            // get the start time of the current interview
+            LocalDateTime currentInterviewStartTime = currentInterview.getInterviewStartTime();
+            // get the end time of the current interview
+            LocalDateTime currentInterviewEndTime = currentInterview.getInterviewEndTime();
+            // case 1: the current interview is completely within the interview to be added
+            boolean completelyInside = (currentInterviewStartTime.isAfter(startTime)
+                    && currentInterviewStartTime.isBefore(endTime))
+                    && (currentInterviewEndTime.isAfter(startTime)
+                    && currentInterviewEndTime.isBefore(endTime));
+            // case 2: the interview to be added is completely within the current interview
+            boolean completelyOutside = currentInterviewStartTime.isBefore(startTime)
+                    && currentInterviewEndTime.isAfter(endTime);
+            // case 3: the current interview end time falls within the interview to be added
+            boolean endInside = currentInterviewEndTime.isAfter(startTime)
+                    && currentInterviewEndTime.isBefore(endTime);
+            // case 4: the current interview start time falls within the interview to be added
+            boolean startInside = currentInterviewStartTime.isAfter(startTime)
+                    && currentInterviewStartTime.isBefore(endTime);
+            if (completelyInside || completelyOutside || endInside || startInside) {
+                res.add(currentInterview);
+            }
+        }
+        return res;
     }
 
     /**
@@ -176,6 +222,7 @@ public class TimeParser {
      */
     public static String formatDate(LocalDateTime time) {
         assert time != null : "time should be not null";
-        return time.format(DateTimeFormatter.ofPattern("MMM dd yyyy',' H.mma"));
+        // TODO FIX THIS; NEED TO FORMAT INTO AN ACCEPTABLE DATE
+        return time.format(DateTimeFormatter.ofPattern("d/M/yy HHmm"));
     }
 }
