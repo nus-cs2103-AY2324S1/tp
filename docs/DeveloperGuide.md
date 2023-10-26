@@ -299,8 +299,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                                        | delete notes to a contact       | remove additional information that are no longer needed about that contact in the notes   |
 | `* *`    | user who has some event to do             | add an event                         | record an event with start time and also end time, location and any additional information like what to do during the event   |
 | `* *`    | user who has/had some event to do      | delete an event                     | remove an event after it is obsolete, cancelled or no longer needed to be recorded |
-| `* *` | tidy user | tag a contact with a label | keep my contacts oraganised and categorised |
-| `* * *` | user who finishes using the application  | exit the program                   | exit the program normally while ensuring all my data is currectly saved |
+| `* *`    | tidy user | tag a contact with a label | keep my contacts oraganised and categorised |
+| `* *`    | tidy user | delete a tag from a contact | remove tags that are no longer relevant                                                                                      |
+| `* * *`  | user who finishes using the application  | exit the program                   | exit the program normally while ensuring all my data is currectly saved |
 
 *{More to be added}*
 
