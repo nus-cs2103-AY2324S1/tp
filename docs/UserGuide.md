@@ -131,16 +131,22 @@ Examples:
 * `find look` returns the flashcard list  and its translation that contains the keyword `look`
 
 
-###  Showing flashcard, starts today’s flashcard session : `start`
+###  Starts review session : `start`
 
-Starts a review session and shows the words the user is going to study sequentially.
+To start a review session, user simply needs to type in `start` command, and a new review session will be started.
 
 Format: `start`
 
 
+### Ending the current flashcard session : `end`
+
+Ends the current flashcard session and returns to the main menu.
+
+Format: `end`
+
 ### Revealing the other side (translation) of the flash card : `reveal`
 
-Shows the meaning of the word.
+To show the meaning of 
 
 Format: `reveal`
 
@@ -166,11 +172,7 @@ Displays learning statistics, i.e, the total number of flashcards and the number
 
 Format: `stats`
 
-### Endding the current flashcard session : `end`
 
-Ends the current flashcard session and returns to the main menu.
-
-Format: `end`
 
 ### Filtering list with specified language : `language`
 
