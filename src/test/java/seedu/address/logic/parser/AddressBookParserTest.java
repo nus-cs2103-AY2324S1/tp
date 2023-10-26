@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -46,7 +45,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonTagContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsPredicate;
-import seedu.address.model.person.StatusContainsPredicate;
+import seedu.address.model.person.StatusContainsKeywordsPredicate;
 import seedu.address.testutil.EditMeetingDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.MeetingBuilder;
@@ -196,7 +195,7 @@ public class AddressBookParserTest {
                 new NameContainsKeywordsPredicate(List.of(userInput[0].split("\\s+"))),
                 new PhoneContainsPredicate(List.of(userInput[1].split("\\s+"))),
                 new EmailContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
-                new StatusContainsPredicate(List.of(userInput[3].split("\\s+"))),
+                new StatusContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))),
                 new PersonTagContainsKeywordsPredicate(List.of(userInput[4].split("\\s+")))
         );
     }

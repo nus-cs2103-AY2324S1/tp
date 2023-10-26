@@ -29,7 +29,7 @@ import seedu.address.model.person.GeneralPersonPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PersonTagContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsPredicate;
-import seedu.address.model.person.StatusContainsPredicate;
+import seedu.address.model.person.StatusContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -45,7 +45,7 @@ public class FindCommandTest {
                         new NameContainsKeywordsPredicate(Collections.singletonList("first")),
                         new PhoneContainsPredicate(List.of("")),
                         new EmailContainsKeywordsPredicate(List.of("")),
-                        new StatusContainsPredicate(List.of("")),
+                        new StatusContainsKeywordsPredicate(List.of("")),
                         new PersonTagContainsKeywordsPredicate(List.of(""))
                 );
         GeneralPersonPredicate secondPredicate =
@@ -53,7 +53,7 @@ public class FindCommandTest {
                         new NameContainsKeywordsPredicate(Collections.singletonList("second")),
                         new PhoneContainsPredicate(List.of("")),
                         new EmailContainsKeywordsPredicate(List.of("")),
-                        new StatusContainsPredicate(List.of("")),
+                        new StatusContainsKeywordsPredicate(List.of("")),
                         new PersonTagContainsKeywordsPredicate(List.of(""))
                 );
 
@@ -135,7 +135,7 @@ public class FindCommandTest {
                 new NameContainsKeywordsPredicate(List.of("keyword")),
                 new PhoneContainsPredicate(List.of("0")),
                 new EmailContainsKeywordsPredicate(List.of("keyword")),
-                new StatusContainsPredicate(List.of("keyword")),
+                new StatusContainsKeywordsPredicate(List.of("keyword")),
                 new PersonTagContainsKeywordsPredicate(List.of("keyword"))
         );
         FindCommand findCommand = new FindCommand(predicate);
@@ -151,7 +151,7 @@ public class FindCommandTest {
                 new NameContainsKeywordsPredicate(List.of(userInput[0].split("\\s+"))),
                 new PhoneContainsPredicate(List.of(userInput[1].split("\\s+"))),
                 new EmailContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
-                new StatusContainsPredicate(List.of(userInput[3].split("\\s+"))),
+                new StatusContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))),
                 new PersonTagContainsKeywordsPredicate(List.of(userInput[4].split("\\s+")))
         );
     }

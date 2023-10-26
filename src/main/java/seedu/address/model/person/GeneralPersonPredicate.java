@@ -9,7 +9,7 @@ public class GeneralPersonPredicate implements Predicate<Person> {
     private final NameContainsKeywordsPredicate namePredicate;
     private final PhoneContainsPredicate phonePredicate;
     private final EmailContainsKeywordsPredicate emailPredicate;
-    private final StatusContainsPredicate statusPredicate;
+    private final StatusContainsKeywordsPredicate statusPredicate;
     private final PersonTagContainsKeywordsPredicate tagPredicate;
 
     /**
@@ -23,7 +23,7 @@ public class GeneralPersonPredicate implements Predicate<Person> {
     public GeneralPersonPredicate(NameContainsKeywordsPredicate namePredicate,
                                    PhoneContainsPredicate phonePredicate,
                                    EmailContainsKeywordsPredicate emailPredicate,
-                                   StatusContainsPredicate statusPredicate,
+                                   StatusContainsKeywordsPredicate statusPredicate,
                                    PersonTagContainsKeywordsPredicate tagPredicate) {
         this.namePredicate = namePredicate;
         this.phonePredicate = phonePredicate;

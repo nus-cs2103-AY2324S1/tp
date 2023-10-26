@@ -9,10 +9,10 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Person}'s {@code Status} duration within the given start and end.
  */
-public class StatusContainsPredicate implements Predicate<Person> {
+public class StatusContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public StatusContainsPredicate(List<String> keywords) {
+    public StatusContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -30,12 +30,12 @@ public class StatusContainsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StatusContainsPredicate)) {
+        if (!(other instanceof StatusContainsKeywordsPredicate)) {
             return false;
         }
 
-        StatusContainsPredicate otherStatusContainsPredicate = (StatusContainsPredicate) other;
-        return keywords.equals(otherStatusContainsPredicate.keywords);
+        StatusContainsKeywordsPredicate otherStatusContainsKeywordsPredicate = (StatusContainsKeywordsPredicate) other;
+        return keywords.equals(otherStatusContainsKeywordsPredicate.keywords);
     }
 
     @Override

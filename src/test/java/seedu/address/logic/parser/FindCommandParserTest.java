@@ -14,7 +14,7 @@ import seedu.address.model.person.GeneralPersonPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PersonTagContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsPredicate;
-import seedu.address.model.person.StatusContainsPredicate;
+import seedu.address.model.person.StatusContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -77,7 +77,7 @@ public class FindCommandParserTest {
                 new NameContainsKeywordsPredicate(List.of(userInput[0].split("\\s+"))),
                 new PhoneContainsPredicate(List.of(userInput[1].split("\\s+"))),
                 new EmailContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
-                new StatusContainsPredicate(List.of(userInput[3].split("\\s+"))),
+                new StatusContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))),
                 new PersonTagContainsKeywordsPredicate(List.of(userInput[4].split("\\s+")))
         );
     }

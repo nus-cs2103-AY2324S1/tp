@@ -16,7 +16,7 @@ import seedu.address.model.person.GeneralPersonPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PersonTagContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsPredicate;
-import seedu.address.model.person.StatusContainsPredicate;
+import seedu.address.model.person.StatusContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -47,7 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 new NameContainsKeywordsPredicate(Arrays.asList(nameKeyWords)),
                 new PhoneContainsPredicate(Arrays.asList(phoneValues)),
                 new EmailContainsKeywordsPredicate(Arrays.asList(emailKeyWords)),
-                new StatusContainsPredicate(Arrays.asList(statusKeyWords)),
+                new StatusContainsKeywordsPredicate(Arrays.asList(statusKeyWords)),
                 new PersonTagContainsKeywordsPredicate(Arrays.asList(tagKeyWords)));
 
         return new FindCommand(generalPersonPredicate);
