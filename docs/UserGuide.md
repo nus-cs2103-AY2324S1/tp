@@ -223,6 +223,6 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
 **List** | `list -pa`
-**Undo** | `rndo`
+**Undo** | `undo`
 **Redo** | `redo`
 **Help** | `help`
