@@ -249,6 +249,61 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### [Proposed] Delete Time Feature
+
+#### Proposed Implementation
+
+The proposed delete time feature is facilitated by the `timeIntervalList` and `Person` class. It accesses the `timeIntervalList` from the `Person` class and deletes a time interval with `Person#deleteFreeTime()`. The operation is exposed in the `Model` interface as `Model#deleteTimeFromPerson`.
+
+Step 1. The user launches the application. The `AddressBook` will be initialized with the free time of its contacts.
+
+Step 2. The user executes the command `deleteTime n/Alex Yeoh t/mon 1200 - mon 1400 ;tue 1000 - wed 1600`. The `deleteTimeCommandParser` will be called to parse the inputs and call the `deletePersonTimeCommand`. The `deletePersonTime` command calls `Model#deleteTimeFromPerson()`, which will call `Person#deleteFreeTime()`.
+
+**Note:** Since multiple inputs are allowed, an array list of time intervals are passed around, each of which is to be deleted.
+
+Step 3. The function will be called in the person's `timeInterval` list. The application will loop through each time interval that is to be deleted and in the person's `timeInterval` list. Each time interval will be compared to see whether the `timeIntervalList` contains the time interval to be deleted. Afterwards, the new `timeInterval` list will be saved.
+
+**Note:** If a time interval is not in the person's list, that interval will be collated and printed to specifically notify the user which time intervals are not in the list. The other time intervals that are in the list will still be deleted.
+
+Similarly, the group command does the same, except for the `Group` class.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/DeletePersonTimeDiagram.puml" alt="DeletePersonTimeDiagram"/>
+
+#### Design Considerations
+
+**Aspect: Error Messages**
+
+* Alternative 1 (current choice): Print specific error messages.
+  Pros: Allow users to understand which inputs went wrong.
+  Cons: May have performance issues in terms of runtime as more functions will be used to craft the error message. Currently, we utilized a `StringBuilder` to craft the message and did extra checks to see whether there had been any errors appended to the error message.
+
+* Alternative 2: Generalized error message.
+  Pros: Will be faster to implement.
+  Cons: User might be unsure why the function went wrong.
+
+**Aspect: How to Handle Multiple Time Inputs**
+
+* Alternative 1 (current choice): Parse each time input one by one and execute the commands.
+  Pros: More user-friendly and efficient as users can delete more time intervals at once.
+  Cons: More expensive as more functions will be called to parse the inputs.
+
+* Alternative 2: Allow only single input.
+  Pros: Faster as fewer functions are called.
+  Cons: Not as user-friendly since users will have to delete time intervals one by one.
+
+**Aspect: How to Handle Errors in Time Intervals**
+
+* Alternative 1 (current choice): Delete the time intervals that are correct and return the intervals that are wrong.
+  Pros: Better user experience as users need not rewrite intervals that were right.
+  Cons: Increased memory usage to store the errors.
+
+* Alternative 2: Do not carry out the delete at all.
+  Pros: More time and memory efficient.
+  Cons: Not as user-friendly since users will have to delete time intervals that were originally correct, wasting their time.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
