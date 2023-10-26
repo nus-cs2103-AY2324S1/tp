@@ -208,6 +208,24 @@ The following sequence diagram displays how Teaching course Feature is implement
 
 ![TeachingDiagram](images/TeachingDiagram.png)
 
+### Updating Hour Feature
+
+#### Implementation
+
+The updating hour feature allows users to update hours for all the TAs in the current list.
+This feature allows users to easily update the working hours for TAs in batches. This feature
+can be applied concurrently with the `find` command allowing users to update working hours for
+filtered target users.
+
+To key in the command, type `hour 10`. This will increase the working hours of all TAs in the
+current list by 10, while others not showing in the list will not be changed. Similarly, users
+can type `hour -10` and hours for TAs in the current users will be decreased by 10. The updated 
+hour must be within the valid range(0 - 9999).
+
+The following sequence diagram displays how updating hour Feature is implemented.
+
+![UpdateHourSequenceDiagram](images/UpdateHourSequenceDiagram.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
