@@ -18,8 +18,8 @@ import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
 import seedu.lovebook.model.UserPrefs;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.Star;
+import seedu.lovebook.model.date.Date;
+import seedu.lovebook.model.date.Star;
 
 
 /**
