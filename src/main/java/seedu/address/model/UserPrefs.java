@@ -15,7 +15,7 @@ import seedu.address.model.student.ClassDetails;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data" , "classmanager.json");
     private boolean isConfigured = false;
     private int tutorialCount = ClassDetails.DEFAULT_COUNT;
     private int assignmentCount = ClassDetails.DEFAULT_COUNT;
