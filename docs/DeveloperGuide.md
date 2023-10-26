@@ -154,93 +154,58 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Find Interview by Job Title Feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The find interview by job title feature allows users to query the list of added interview
+for interviews that match the job title via the command `find-i JOB_TITLE`, where `JOB_TITLE` must not
+be an empty string.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The `find-i` command is facilitated by the `FindInterviewCommand`, `FindInterviewCommandParser`, `JobContainsKeywordsPredicate` and `ApplicantContainsInterviewPredicate`.
+It uses `Model#updateFilteredInterviewList(Predicate<Interview> predicate)` to apply the `JobContainsKeywordsPredicate`
+in order to produce a filtered list containing only entries whose job correspond to `JOB_TITLE`.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The find interview command will affect the applicant list. The new applicant list will contain the applicant who have their respective interview 
+listed in the interview list. The applicant list index represents an applicant at that index has an interview at the same index in the interview list.
+The applicant list uses `Model#updateFilteredApplicantList(Predicate<Applicant> predicate)` to apply the `ApplicantContainsInterviewPredicate`
+in order to produce a filtered list containing only entries whose interview correspond to the interview list.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### Design Consideration
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+**Aspect: How filter is done:**
 
-![UndoRedoState0](images/UndoRedoState0.png)
+* **Alternative 1 (current choice):** Use a predicate object (JobContainsKeywordsPredicate) to handle filtering.
+    * Pros: Decrease the coupling effect by separating the predicate and increase extendability.
+    * Cons: Difficult to implement as more abstraction is being used.
 
-Step 2. The user executes `delete 5` command to delete the 5th applicant in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+* **Alternative 2:** Implement filtering logic directly within the FindCourseCommand.
+    * Pros: The implementation will be simpler without the consideration of abstraction.
+    * Cons: Less abstraction and less extendable for future features.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+**Aspect: Case-sensitivity in search:**
 
-Step 3. The user executes `add n/David …​` to add a new applicant. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+* **Alternative 1 (current choice):** Case-insensitive search.
+    * Pros: Offers flexibility and speed up the input process without worrying on casing.
+    * Cons: A less accurate filters as it will return any matched keyword regardless of casing which might not be intended by the user.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+* **Alternative 2:** Case-sensitive search.
+    * Pros: A more precise filtering as the string is exact match
+    * Cons: Less flexible as the users need to be precise with the input.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Aspect: Accept multiple keywords:**
 
-</div>
+* **Alternative 1 (current choice):** Accept multiple keywords.
+    * Pros: Offers a stronger filter to search the interview easily.
+    * Cons: Requires more care to parse the input correctly in order to not miss any keywords.
 
-Step 4. The user now decides that adding the applicant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+* **Alternative 2:** Accept one keyword.
+    * Pros: Easier to control the input and filtering.
+    * Cons: Less powerful since users can only search job based on one keyword.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+### Multiple time formats
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the applicant being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-### \[Proposed\] Multiple time formats
-
-#### Proposed Implementation
+#### Implementation
 This feature is implemented though the `TimeParser` class. This class contains several public static methods related to manipulating time:
 - `TimeParser#parseDate(String date)`  —  Takes in a time String as input, and returns a LocalDateTime which contains the information of the String
   - Accepted time formats examples:
@@ -257,11 +222,11 @@ This feature is implemented though the `TimeParser` class. This class contains s
         - `21/12/2024 5pm`
         - `21-12-2024 5pm`
         - `21-12-2024 1730`
-        - `21-12-2024 1730pm` 
+        - `21-12-2024 1730pm`
         - `nov 12 1.30pm 2023`(WIP: AM/PM not parsing properly)
         - `2023-12-12 1647`
     - The sequence diagram shown below shows how the API is called by other classes:
-  
+
       ![parseDateSequenceDiagram.png](images%2FparseDateSequenceDiagram.png)
 
 
@@ -276,9 +241,9 @@ This feature is implemented though the `TimeParser` class. This class contains s
 **Aspect: How `TimeParser#parseDate(String date)` works:**
 
 * **Alternative 1 (current choice):** Have a hardcoded list of time formats that our team deems to be acceptable.
-    * Pros: 
+    * Pros:
       * Easy to implement.
-    * Cons: 
+    * Cons:
       * May have performance issues in terms of time (i.e. might have to loop through the whole list to find a suitable format)
       * Huge number of time formats available, hence there is a need to update the list of acceptable time formats in future iterations
       * Many errors possible due to the many time fields that the user could format wrongly, which makes implementation difficult
@@ -292,7 +257,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
         * Developer is not familiar with other time libraries
 
 **Aspect: How `TimeParser#listInterviewClashes(String potentialInterview, UniqueInterviewList interviews)` works:**
-* **Alternative 1 (current planned implementation):** Loop over the entire day by hour, and list out any interview that might clash 
+* **Alternative 1 (current planned implementation):** Loop over the entire day by hour, and list out any interview that might clash
     * Pros:
         * Very simple to implement
         * Less prone to bugs
@@ -306,12 +271,12 @@ This feature is implemented though the `TimeParser` class. This class contains s
 
 **Aspect: How `TimeParser#findFreeTime(String day)` works:**
 * **Alternative 1 (current planned implementation):** Loops over the 24 hours of the given day, and if there is any interview within that hour, the day will be marked as not free
-  * Pros: 
+  * Pros:
     * Easy to implement
   * Cons:
     * Hours which have interviews are not included as free time, even though there is a portion of those hours which are free (e.g. if the user has an interview scheduled from 4.30pm on that day, the user has free time from 4pm to 4.30pm)
 * **Alternative 2 (alternate implementation):** Filters all the interviews on that day, and marks all pockets of time that are not taken by interviews as free time
-  * Pros: 
+  * Pros:
     * More accurate depiction of the free time on that day
   * Cons:
     * More complicated than alternative 1
@@ -328,7 +293,7 @@ This feature is implemented though the `TimeParser` class. This class contains s
 * **Alternative 1 (current planned implementation):** Takes in the UniqueInterviewList, and uses the Java LocalDateTime comparator, and sorts the list in ascending order
     * Pros:
       * Easy to implement; Built-in Java library handles the sorting for us
-    * Cons: 
+    * Cons:
       * Might increase coupling in the codebase since an object from another object is passed into the API and modified
 
 **Aspect: How `TimeParser#listTodayInterviews(String day, UniqueInterviewList interviews)` works:**
