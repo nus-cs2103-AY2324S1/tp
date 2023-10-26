@@ -43,6 +43,11 @@ public class FilterCommand extends Command {
     private final CourseIsStillBeingTakenPredicate takenPredicate;
     private final boolean checkFin;
 
+    /**
+     * Creates a FilterCommand object that searches using a list of key terms,
+     * a specified date to check whether a course is being taken, and a
+     * boolean that specifies whether the date check needs to be done.
+     */
     public FilterCommand(CourseContainsKeyTermsPredicate keyTermsPredicate,
                          CourseIsStillBeingTakenPredicate takenPredicate,
                          boolean checkFin) {
@@ -51,6 +56,11 @@ public class FilterCommand extends Command {
         this.checkFin = checkFin;
     }
 
+    /**
+     * Executes the FilterCommand object and returns a message to the user.
+     *
+     * @param model {@code Model} which the command should operate on.
+     */
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(keyTermsPredicate);
