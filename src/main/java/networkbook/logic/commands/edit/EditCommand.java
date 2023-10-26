@@ -1,6 +1,5 @@
 package networkbook.logic.commands.edit;
 
-import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -59,7 +58,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        assert model != null : "Model should not be null";
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -70,6 +69,7 @@ public class EditCommand extends Command {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(personToEdit);
         this.editAction.edit(editPersonDescriptor);
         Person editedPerson = editPersonDescriptor.toPerson();
+        assert editedPerson != null : "Edited person should not be null";
 
         if (!personToEdit.isSame(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

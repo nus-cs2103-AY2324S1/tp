@@ -1,6 +1,7 @@
 package networkbook.logic.commands.edit;
 
 import static networkbook.testutil.Assert.assertThrows;
+import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static networkbook.testutil.TypicalPersons.IDA;
 import static networkbook.testutil.TypicalPersons.JACK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,9 +44,9 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
-    public void setName_null_throwsNullPointerException() {
+    public void setName_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setName(null));
+        assertThrowsAssertionError(() -> actualDescriptor.setName(null));
     }
 
     @Test
@@ -69,13 +70,11 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
-    public void setPhone_null_throwsNullPointerException() {
+    public void setPhone_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setPhone(null, EditCommandUtil.VALID_PHONE));
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setPhone(EditCommandUtil.VALID_INDEX, null));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setPhone(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setPhone(null, EditCommandUtil.VALID_PHONE));
+        assertThrowsAssertionError(() -> actualDescriptor.setPhone(EditCommandUtil.VALID_INDEX, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setPhone(null, null));
     }
 
     @Test
@@ -109,13 +108,11 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
-    public void setEmail_null_throwsNullPointerException() {
+    public void setEmail_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setEmail(null, EditCommandUtil.VALID_EMAIL));
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setEmail(EditCommandUtil.VALID_INDEX, null));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setEmail(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setEmail(null, EditCommandUtil.VALID_EMAIL));
+        assertThrowsAssertionError(() -> actualDescriptor.setEmail(EditCommandUtil.VALID_INDEX, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setEmail(null, null));
     }
 
     @Test
@@ -149,13 +146,11 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
-    public void setLink_null_throwsNullPointerException() {
+    public void setLink_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setLink(null, EditCommandUtil.VALID_LINK));
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setLink(EditCommandUtil.VALID_INDEX, null));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setLink(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setLink(null, EditCommandUtil.VALID_LINK));
+        assertThrowsAssertionError(() -> actualDescriptor.setLink(EditCommandUtil.VALID_INDEX, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setLink(null, null));
     }
 
     @Test
@@ -189,9 +184,9 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
-    public void setGraduation_null_throwsNullPointerException() {
+    public void setGraduation_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setGraduation(null));
+        assertThrowsAssertionError(() -> actualDescriptor.setGraduation(null));
     }
 
     @Test
@@ -215,13 +210,11 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
-    public void setCourse_null_throwsNullPointerException() {
+    public void setCourse_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setCourse(null, EditCommandUtil.VALID_COURSE));
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setCourse(EditCommandUtil.VALID_INDEX, null));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setCourse(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setCourse(null, EditCommandUtil.VALID_COURSE));
+        assertThrowsAssertionError(() -> actualDescriptor.setCourse(EditCommandUtil.VALID_INDEX, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setCourse(null, null));
     }
 
     @Test
@@ -255,14 +248,13 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
-    public void setSpecialisation_null_throwsNullPointerException() {
+    public void setSpecialisation_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, ()
+        assertThrowsAssertionError(()
                 -> actualDescriptor.setSpecialisation(null, EditCommandUtil.VALID_SPECIALISATION));
-        assertThrows(NullPointerException.class, ()
+        assertThrowsAssertionError(()
                 -> actualDescriptor.setSpecialisation(EditCommandUtil.VALID_INDEX, null));
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setSpecialisation(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setSpecialisation(null, null));
     }
 
     @Test
@@ -298,13 +290,11 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
-    public void setTag_null_throwsNullPointerException() {
+    public void setTag_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setTag(null, EditCommandUtil.VALID_TAG));
-        assertThrows(NullPointerException.class, ()
-                -> actualDescriptor.setTag(EditCommandUtil.VALID_INDEX, null));
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setTag(null, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setTag(null, EditCommandUtil.VALID_TAG));
+        assertThrowsAssertionError(() -> actualDescriptor.setTag(EditCommandUtil.VALID_INDEX, null));
+        assertThrowsAssertionError(() -> actualDescriptor.setTag(null, null));
     }
 
     @Test
@@ -338,9 +328,9 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
-    public void setPriority_null_throwsNullPointerException() {
+    public void setPriority_null_throwsAssertionError() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
-        assertThrows(NullPointerException.class, () -> actualDescriptor.setPriority(null));
+        assertThrowsAssertionError(() -> actualDescriptor.setPriority(null));
     }
 
     @Test

@@ -1,7 +1,5 @@
 package networkbook.logic.commands.edit;
 
-import static java.util.Objects.requireNonNull;
-
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Name;
 
@@ -21,7 +19,7 @@ public class EditNameAction implements EditAction {
 
     @Override
     public void edit(EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(editPersonDescriptor);
+        assert editPersonDescriptor != null : "editPersonDescriptor should not be null";
         editPersonDescriptor.setName(name);
     }
 

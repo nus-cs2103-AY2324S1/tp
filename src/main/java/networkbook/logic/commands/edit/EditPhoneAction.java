@@ -1,7 +1,5 @@
 package networkbook.logic.commands.edit;
 
-import static java.util.Objects.requireNonNull;
-
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.commands.exceptions.CommandException;
@@ -26,7 +24,7 @@ public class EditPhoneAction implements EditAction {
 
     @Override
     public void edit(EditPersonDescriptor editPersonDescriptor) throws CommandException {
-        requireNonNull(editPersonDescriptor);
+        assert editPersonDescriptor != null : "editPersonDescriptor should not be null";
         editPersonDescriptor.setPhone(index, phone);
     }
 

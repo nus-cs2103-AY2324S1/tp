@@ -31,4 +31,11 @@ public class Assert {
         Throwable thrownException = Assertions.assertThrows(expectedType, executable);
         Assertions.assertEquals(expectedMessage, thrownException.getMessage());
     }
+
+    /**
+     * Asserts that the {@code executable} throws an assertion error.
+     */
+    public static void assertThrowsAssertionError(Executable executable) {
+        Assertions.assertThrows(AssertionError.class, executable);
+    }
 }
