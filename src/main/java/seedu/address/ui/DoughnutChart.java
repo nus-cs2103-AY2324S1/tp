@@ -75,6 +75,6 @@ public class DoughnutChart extends PieChart {
         innerCircle.setCenterX(minX + (maxX - minX) / 2);
         innerCircle.setCenterY(minY + (maxY - minY) / 2);
 
-        innerCircle.setRadius((maxX - minX) / 4);
+        innerCircle.setRadius((maxX - minX) / 3);
     }
 }
