@@ -26,8 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/RB9823)]
 [[portfolio](team/rb9823.md)]
 
-* Role: close
-* Responsibilities: Add a booking
+* Role: Developer
+* Responsibilities: Project Management and Implementation
 
 ### Mark Garcera
 

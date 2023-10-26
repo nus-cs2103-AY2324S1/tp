@@ -10,7 +10,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 1. [Quick Start](#quick-start)
 2. [Input Formats](#input-formats)
    1. [`Command Format`](#command-format)
-   2. [`Paramter Format`](#parameter-format)
+   2. [`Parameter Format`](#parameter-format)
 3. [Commands](#commands)
    1. [`help`](#viewing-help--help)
    2. [`add`](#adding-a-booking-add)
@@ -85,6 +85,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 * `n/NAME`: `NAME` can be any String.
 * `p/PHONE_NUMBER`: `PHONE_NUMBER` can be any integer.
 * `e/EMAIL`: `EMAIL` can be any String as long as it contains `@` inside the String.
+* `rm/REMARK`: `REMARK` can be any String less than or equal to 50 characters in length.
 * `t/TAG`: `TAG` can be any String.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -93,7 +94,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings for h
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -103,7 +104,7 @@ Format: `help`
 
 Adds a booking to the bookings book.
 
-Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
+Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A booking can have any number of tags (including 0)
@@ -123,7 +124,7 @@ Format: `list`
 
 Edits an existing booking in the bookings book.
 
-Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL] [rm/REMARK] [t/TAG]…​`
 
 * Edits the booking at the specified `INDEX`. The index refers to the index number shown in the displayed booking list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -221,10 +222,10 @@ Example:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add r/1 d/2023-01-01 to 2023-01-02 n/James Ho p/22224444 e/jamesho@example.com t/friend t/colleague`
+**Add** | `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rm/REMARK [t/TAG]…​` <br> e.g., `add r/1 d/2023-01-01 to 2023-01-02 n/James Ho p/22224444 e/jamesho@example.com rm/Extra Towels t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 r/2 d/2023-01-01 to 2023-01-02 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [r/ROOM] [d/BOOKING _PERIOD] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [rm/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 r/2 d/2023-01-01 to 2023-01-02 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find 1`
 **List** | `list`
 **Help** | `help`
