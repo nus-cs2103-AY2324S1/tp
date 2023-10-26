@@ -153,6 +153,15 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Add `Member`/`Applicant` feature
+The `addMember` and `addApplicant` command is used to add a member or an applicant to the address book. 
+The commands are implemented in the `AddMemberCommand` and `AddApplicantCommand` class, which extends the `Command` class.
+
+The add mechanism is facilitated by `LogicManager` which parses the command input from the user to determine the appropriate
+command to execute. The execute function checks whether the `member`/`applicant` is present in the `AddressBook`.
+The `member`/`applicant` is added into the `AddressBook` if it is not present. Otherwise, an error message is returned.
+
 ### Delete an applicant
 The applicant at the specific applicantIndex in the applicant list will be deleted. Compulsory fields for the deleteApplicant command include: applicantIndex. An example of how this feature can be used is as follows:
 
@@ -186,6 +195,7 @@ All members that contains any field with the specified keyword will be listed. C
 * Step 2. The model object's updateFilteredMemberList() is called, with the keyword as the predicate.
 * Step 3. The member list is filtered to only reflect members with fields(name, email, phone number, telegram handle, tag) that contain the keyword.
 * Step 4. The filtered member list is shown.
+
 
 ### \[Proposed\] Undo/redo feature
 
