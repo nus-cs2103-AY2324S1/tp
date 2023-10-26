@@ -12,7 +12,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Format full help instructions for every command for display.
+ * Represents command to view full detailed attendance record of a student.
  */
 public class ViewCommand extends Command {
 
@@ -23,6 +23,7 @@ public class ViewCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_NO_ATTENDANCE_RECORD = " has no attendance records.";
+    public static final String MESSAGE_HEADER = "'s attendance records\n";
 
     private final Index targetIndex;
 
@@ -39,8 +40,7 @@ public class ViewCommand extends Command {
         StringBuilder attendanceRecordString = new StringBuilder();
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex == null || (targetIndex.getZeroBased() >= lastShownList.size()
-                || targetIndex.getZeroBased() < 0)) {
+        if (targetIndex == null || targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -48,10 +48,10 @@ public class ViewCommand extends Command {
         List<Attendance> personAttendanceRecord = personToView.getAttendanceRecords();
 
         if (personAttendanceRecord.isEmpty()) {
-            return new CommandResult(personToView.getName().toString() + MESSAGE_NO_ATTENDANCE_RECORD);
+            return new CommandResult(personToView.getName() + MESSAGE_NO_ATTENDANCE_RECORD);
         }
 
-        attendanceRecordString.append(personToView.getName() + "'s attendance records\n");
+        attendanceRecordString.append(personToView.getName() + MESSAGE_HEADER);
 
         for (Attendance record : personAttendanceRecord) {
             String attendanceStatus = record.isPresent()
@@ -61,5 +61,20 @@ public class ViewCommand extends Command {
         }
 
         return new CommandResult(attendanceRecordString.toString());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewCommand)) {
+            return false;
+        }
+
+        ViewCommand otherViewCommand = (ViewCommand) other;
+        return otherViewCommand.targetIndex.equals(this.targetIndex);
     }
 }

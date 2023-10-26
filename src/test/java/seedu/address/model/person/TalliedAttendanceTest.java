@@ -35,8 +35,8 @@ public class TalliedAttendanceTest {
         Person person = new PersonBuilder().build();
 
         Week testDate = new Week(1);
-        Attendance attendance1 = new Attendance(testDate, true);
-        Attendance attendance2 = new Attendance(testDate, true);
+        Attendance attendance1 = new Attendance(testDate, true, null);
+        Attendance attendance2 = new Attendance(testDate, true, null);
 
         person.addAttendance(attendance1);
         person.addAttendance(attendance2);
@@ -50,7 +50,7 @@ public class TalliedAttendanceTest {
         Person person = new PersonBuilder().build();
 
         Week testDate = new Week(1);
-        Attendance attendance1 = new Attendance(testDate, true);
+        Attendance attendance1 = new Attendance(testDate, true, null);
         Attendance attendance2 = new Attendance(testDate, false, "Late");
 
         person.addAttendance(attendance1);

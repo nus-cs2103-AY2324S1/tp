@@ -6,7 +6,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-public class ViewCommandParser {
+/**
+ * Parses input arguments and creates a new ViewCommand object.
+ */
+public class ViewCommandParser implements Parser<ViewCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand

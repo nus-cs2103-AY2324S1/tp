@@ -93,7 +93,7 @@ public class MarkAttendanceCommand extends Command {
             } else {
                 // Add a new attendance record for the current week
                 if (isPresent) {
-                    attendance = new Attendance(week, true);
+                    attendance = new Attendance(week, true, null);
                 } else {
                     attendance = new Attendance(week, false, reason);
                 }
