@@ -119,4 +119,9 @@ public class LeaveList {
         return sb.toString();
     }
 
+    @Override
+    public int hashCode() {
+        return leaveList.hashCode();
+    }
+
 }
