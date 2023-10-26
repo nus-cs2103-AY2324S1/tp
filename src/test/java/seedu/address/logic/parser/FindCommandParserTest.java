@@ -47,8 +47,6 @@ public class FindCommandParserTest {
     @Test
     public void parse_nullArgs_throwsAssertionError() {
         String args = null;
-
-        // Use assertThrows to check if an AssertionError is thrown
         assertThrows(AssertionError.class, () -> parser.parse(args));
     }
 

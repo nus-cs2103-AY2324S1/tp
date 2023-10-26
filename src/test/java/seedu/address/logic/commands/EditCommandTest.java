@@ -214,4 +214,3 @@ public class EditCommandTest {
         assertEquals(editedPerson.getTags(), personToEdit.getTags());
     }
 }
-
