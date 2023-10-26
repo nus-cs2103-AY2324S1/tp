@@ -138,19 +138,23 @@ public class ModelManager implements Model {
     }
 
     //=========== Selected Person Accessors ==================================================================
+
     @Override
     public Person getSelectedPerson() {
         return selectedPerson;
     }
+
     @Override
     public void updateSelectedPerson(Person person) {
         requireNonNull(person);
         selectedPerson = person;
     }
+
     @Override
     public boolean isSelectedEmpty() {
         return selectedPerson == null;
-      
+    }
+
     //=========== Command String Stash =============================================================
 
     @Override
