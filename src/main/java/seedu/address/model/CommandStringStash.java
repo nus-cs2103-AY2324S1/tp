@@ -7,8 +7,8 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a stash that contains the command String of the 20 most recent
- * command executed.
+ * Represents a stash that stores the history of the command String of the 20 most recent
+ * commands executed.
  */
 public class CommandStringStash {
     private List<String> cmdStringStack;
