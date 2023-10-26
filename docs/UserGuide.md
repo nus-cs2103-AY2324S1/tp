@@ -122,7 +122,7 @@ Format: `delete INDEX`
 Examples:
 
 - `list` followed by `delete 2` deletes the 2nd teaching assistant in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the `find` command.
+- `find n/Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the `find` command.
 
 When the command succeeds:
 
@@ -136,6 +136,38 @@ When the command fails:
 - Index does not correspond to a TA: For example, there are only 5 TAs but the user tried to delete a TA at index 6
   
   `The person index provided is invalid`
+
+### Finding a Teaching Assistant: `find`
+
+Finds specified teaching assistants from the address book using search parameters.
+
+![remove TA](images/findTA.png)
+
+Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
+
+- We can search by name, course or free time, using the prefixes `n/`, `c/` or `from/ to/` respectively.
+- The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
+- We can apply multiple search filters to narrow down the search results.
+- Teaching assistants matching all the search parameters will be returned.
+
+Examples:
+
+- `find n/Alex` returns all teaching assistants with names containing `alex` (e.g. `Alex`, `Alexis`).
+- `find c/cs1231s` returns all teaching assistants that are teaching `cs1231s`.
+- `find from/10:00 to/12:00` returns all teaching assistants that are free from `10:00` to `12:00`.
+- `find n/Alex c/cs1231s` returns all teaching assistants with names containing `alex` and are teaching `cs1231s`.
+- `find c/cs2103t from/10:00 to/12:00` returns all teaching assistants that are teaching `cs2103t` and are free from `10:00` to `12:00`.
+
+When the command succeeds:
+
+```
+Filters applied: [filters applied by the user]
+[number of TAs found] persons listed!
+```
+
+When the command fails:
+
+- Incorrect format (missing prefix or parameter): `Invalid command format!`
 
 ### Viewing Teaching Assistants: `list`
 
@@ -203,5 +235,6 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [from/FROM to/TO] [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g., `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Find** | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`
 **List** | `list`
 **Help** | `help`
