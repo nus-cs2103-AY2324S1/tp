@@ -13,7 +13,7 @@ import seedu.address.model.band.BandNameContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new FindBandCommand object.
  */
-public class ListBandCommandParser implements Parser<FindBandCommand> {
+public class FindBandCommandParser implements Parser<FindBandCommand> {
 
     @Override
     public FindBandCommand parse(String args) throws ParseException {

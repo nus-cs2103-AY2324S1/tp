@@ -56,7 +56,7 @@ public class BandName {
         }
 
         BandName otherName = (BandName) other;
-        return fullName.toLowerCase().equals(otherName.fullName.toLowerCase());
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     @Override

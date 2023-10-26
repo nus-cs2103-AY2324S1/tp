@@ -62,7 +62,7 @@ public class ParserUtil {
     public static BandName parseBandName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
+        if (!BandName.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new BandName(trimmedName);
