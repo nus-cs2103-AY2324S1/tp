@@ -52,10 +52,15 @@ public class AddressBookParserTest {
     public void parseCommand_addInterview() throws Exception {
         Interview interview = TypicalInterviews.STANDARD_INTERVIEW;
         Index index = INDEX_FIRST;
+        String addCommand = InterviewUtil.getAddCommand(index, interview);
         AddInterviewCommand command =
-                (AddInterviewCommand) parser.parseCommand(InterviewUtil.getAddCommand(index, interview));
-        System.out.print(command);
-        assertEquals(new AddInterviewCommand(index, interview.getJobRole(), interview.getInterviewTiming()), command);
+                (AddInterviewCommand) parser.parseCommand(addCommand);
+        AddInterviewCommand duplicate = new AddInterviewCommand(index,
+                interview.getJobRole(),
+                interview.getInterviewStartTimeAsString(),
+                interview.getInterviewStartTimeAsString()
+        );
+        assertEquals(duplicate, command);
     }
 
     @Test

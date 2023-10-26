@@ -46,7 +46,8 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
                     MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX, pe);
         }
 
-        return new AddInterviewCommand(applicantIndex, jobRole, timing);
+        // TODO: CONSULT WITH GROUP ON HOW TO IMPLEMENT THIS
+        return new AddInterviewCommand(applicantIndex, jobRole, timing, timing);
     }
 
     /**

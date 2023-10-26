@@ -303,6 +303,83 @@ This feature is implemented though the `TimeParser` class. This class contains s
     * Cons:
       * Might increase coupling in the codebase since an object from another object is passed into the API and modified
 
+### Find applicant feature
+
+#### Implementation
+
+The find applicant feature allows users to query the list of applicants for applicants 
+whose name, phone, email, address and tags match the given arguments. 
+
+This can be done 
+via the command `find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER]
+[e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] t/KEYWORDS [MORE_KEYWORDS]...]`.
+
+The find applicant feature is facilitated by `FindApplicantCommand`, `FindApplicantCommandParser`, 
+`AddressContainsKeywordsPredicate`, `EmailContainsKeywordsPredicate`, `NameContainsKeywordsPredicate`, 
+`PhoneContainsNumberPredicate`, `TagContainsKeywordsPredicate`.
+It uses `Model#updateFilteredApplicantList(Predicate<Applicant>)` to apply the predicates 
+in order to produce a filtered list containing only the filtered entries.
+
+#### Design Considerations:
+
+Aspect: How find applicant command filters applicants:
+* **Alternative 1 (current choice):** Use a predicate for each field
+  * Pros: 
+    * Decrease coupling and increases extensibility.
+    * Easier to maintain
+  * Cons:
+    * More difficult and tedious to implement
+    * More test cases needed for each predicate
+
+* **Alternative 2:** Use one predicate for the entire applicant
+  * Pros:
+    * Easier to code and less code to write
+  * Cons:
+    * Harder to maintain
+    * More coupling as predicates for different fields are not abstracted out
+
+Aspect: Which find command format
+* **Alternative 1 (current choice):** Accepts multiple space or comma separated keywords for each prefix
+  * Pros: 
+    * Allows filtering using multiple keywords in a single find command
+    * User can type the command quickly
+  * Cons:
+    * Only allows filtering by words and not phrases
+* **Alternative 2:** Accepts one keyword for each prefix
+  * Pros:
+    * Easy to implement
+    * User can type the command quickly
+  * Cons:
+    * Can only find using one keyword for each applicant field in a single find command
+* **Alternative 3:** Accepts duplicate prefixes and a keyphrase for each prefix
+  * Pros:
+    * Allows filtering of multiple keywords or keyphrase in a single find command
+    * The most specific filter out of all the alternatives
+  * Cons:
+    * Most difficult to implement of all alternatives considered
+    * The command can be slow to type due to the need to type many prefixes
+
+Aspect: How find command matches the arguments for name
+* **Alternative 1 (current choice):** Match keywords to words in the name
+  * Pros:
+    * Can find a person with only the first name or last name
+  * Cons:
+    * Less specific than exact matching
+* **Alternative 2:** Require exact match between arguments and name
+  * Pros:
+    * More specific search
+  * Cons:
+    * Users need to type longer commands to search for an applicant
+    * Less flexibility
+* **Alternative 3:** Check if argument is substring of the name
+  * Pros:
+    * Users can find an applicant without typing an entire word
+    * More flexibility
+  * Cons:
+    * Too many applicants might show up in a single find command which defeats
+    the purpose of the find command
+
+
 _{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
