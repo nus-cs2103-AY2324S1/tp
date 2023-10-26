@@ -20,7 +20,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Interaction.Outcome;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for InteractionCommand.
@@ -39,8 +38,9 @@ public class InteractionCommandTest {
         Interaction interactionToAdd = new Interaction(INTERACTION_NOTE_STUB, INTERACTION_OUTCOME_STUB);
         interactions.add(interactionToAdd);
 
-        Person editedPerson = new PersonBuilder(personToAddInteractions).build();
-        editedPerson.addInteractions(interactions);
+        Person editedPerson = new Person.PersonBuilder(personToAddInteractions)
+                .withInteractions(interactions)
+                .build();
 
         InteractionCommand interactionCommand = new InteractionCommand(INDEX_FIRST_PERSON, interactionToAdd);
 

@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -27,7 +28,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Optional fields
-    private Lead lead;
+    private final Lead lead;
     private final TelegramHandle telegram;
     private final Profession profession;
     private final Income income;
@@ -35,40 +36,22 @@ public class Person {
     private final Set<Interaction> interactions = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Creates a {@code Person} given a PersonBuilder.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+    private Person(PersonBuilder builder) {
+        requireNonNull(builder);
+        this.name = builder.name;
+        this.phone = builder.phone;
+        this.email = builder.email;
+        this.address = builder.address;
+        this.tags.addAll(builder.tags);
 
-        this.lead = null;
-        this.telegram = null;
-        this.profession = null;
-        this.income = null;
-        this.details = null;
-    }
-
-    /**
-     * Same constructor but with optional fields.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-        TelegramHandle telegram, Profession profession, Income income, Details details, Lead lead) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-
-        this.telegram = telegram;
-        this.profession = profession;
-        this.income = income;
-        this.details = details;
-        this.lead = lead;
+        this.lead = builder.lead;
+        this.telegram = builder.telegram;
+        this.profession = builder.profession;
+        this.income = builder.income;
+        this.details = builder.details;
+        this.interactions.addAll(builder.interactions);
     }
 
     public Name getName() {
@@ -85,6 +68,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     public Lead getLead() {
@@ -109,31 +100,6 @@ public class Person {
 
     public Set<Interaction> getInteractions() {
         return interactions;
-    }
-
-    /**
-     * Adds an interaction to the person.
-     * @param interactions the set of interaction to be added
-     * @return the updated set of interactions
-     */
-    public Set<Interaction> addInteractions(Set<Interaction> interactions) {
-        this.interactions.addAll(interactions);
-        return this.interactions;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Changes the lead potential of the client.
-     */
-    public void setLead(Lead newLead) {
-        this.lead = newLead;
     }
 
     /**
@@ -189,4 +155,111 @@ public class Person {
                 .toString();
     }
 
+    /**
+     * A builder factory class for Person.
+     * This is used to prevent long argument lists for Person and handles optional fields well.
+     */
+    public static class PersonBuilder {
+        // Mandatory fields
+        private Name name;
+        private Phone phone;
+        private Email email;
+        private Address address;
+        private Set<Tag> tags = new HashSet<>();
+
+        // Optional fields
+        private Lead lead;
+        private TelegramHandle telegram;
+        private Profession profession;
+        private Income income;
+        private Details details;
+        private Set<Interaction> interactions = new HashSet<>();
+
+        /**
+         * Initialises the PersonBuilder with mandatory fields.
+         */
+        public PersonBuilder(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+            requireAllNonNull(name, phone, email, address, tags);
+            this.name = name;
+            this.phone = phone;
+            this.email = email;
+            this.address = address;
+            this.tags.addAll(tags);
+        }
+
+        /**
+         * Initializes the PersonBuilder with the data of {@code personToCopy}.
+         */
+        public PersonBuilder(Person personToCopy) {
+            requireNonNull(personToCopy);
+            name = personToCopy.getName();
+            phone = personToCopy.getPhone();
+            email = personToCopy.getEmail();
+            address = personToCopy.getAddress();
+            lead = personToCopy.getLead();
+            tags = new HashSet<>(personToCopy.getTags());
+            telegram = personToCopy.getTelegram();
+            profession = personToCopy.getProfession();
+            income = personToCopy.getIncome();
+            details = personToCopy.getDetails();
+            interactions = new HashSet<>(personToCopy.getInteractions());
+        }
+
+        /**
+         * Sets the {@code Lead} of the {@code Person} that we are building.
+         */
+        public PersonBuilder withLead(Lead lead) {
+            this.lead = lead;
+            return this;
+        }
+
+        /**
+         * Sets the {@code TelegramHandle} of the {@code Person} that we are building.
+         */
+        public PersonBuilder withTelegram(TelegramHandle telegram) {
+            this.telegram = telegram;
+            return this;
+        }
+
+        /**
+         * Sets the {@code Profession} of the {@code Person} that we are building.
+         */
+        public PersonBuilder withProfession(Profession profession) {
+            this.profession = profession;
+            return this;
+        }
+
+        /**
+         * Sets the {@code Income} of the {@code Person} that we are building.
+         */
+        public PersonBuilder withIncome(Income income) {
+            this.income = income;
+            return this;
+        }
+
+        /**
+         * Sets the {@code Details} of the {@code Person} that we are building.
+         */
+        public PersonBuilder withDetails(Details details) {
+            this.details = details;
+            return this;
+        }
+
+        /**
+         * Sets the {@code Set<Interaction>} of the {@code Person} that we are building.
+         */
+        public PersonBuilder withInteractions(Set<Interaction> interactions) {
+            this.interactions.addAll(interactions);
+            return this;
+        }
+
+        /**
+         * Creates the built {@code Person} after building.
+         *
+         * @return the built {@code Person}
+         */
+        public Person build() {
+            return new Person(this);
+        }
+    }
 }
