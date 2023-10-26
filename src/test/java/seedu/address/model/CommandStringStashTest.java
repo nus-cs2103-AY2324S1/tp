@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,19 @@ public class CommandStringStashTest {
     }
 
     @Test
+    public void addCommandString_withNullCommandString_throwsAssertionError() {
+        CommandStringStash commandStringStash = new CommandStringStash();
+        assertThrows(AssertionError.class, () -> commandStringStash.addCommandString(null));
+    }
+
+    @Test
+    public void getPrevCommandString_valid_getsCorrectly() {
+        CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 15), 9);
+
+        assertEquals("8", commandStringStash.getPrevCommandString("0"));
+    }
+
+    @Test
     public void getPrevCommandString_afterAdd_getsCorrectly() {
         CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 15), 9);
 
@@ -70,6 +84,17 @@ public class CommandStringStashTest {
     }
 
     @Test
+    public void getPrevCommandString_withNullCommandString_throwsAssertionError() {
+        CommandStringStash commandStringStash = new CommandStringStash();
+        assertThrows(AssertionError.class, () -> commandStringStash.getPrevCommandString(null));
+    }
+
+    @Test
+    public void getPassedCommandString_valid_getsCorrectly() {
+        CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 15), 9);
+        assertEquals("10", commandStringStash.getPassedCommandString("0"));
+    }
+    @Test
     public void getPassedCommandString_afterAdd_getsCorrectly() {
         CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 15), 9);
 
@@ -90,6 +115,12 @@ public class CommandStringStashTest {
         CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(1, 5), 4);
 
         assertEquals("0", commandStringStash.getPassedCommandString("0"));
+    }
+
+    @Test
+    public void getPassedCommandString_withNullCommandString_throwsAssertionError() {
+        CommandStringStash commandStringStash = new CommandStringStash();
+        assertThrows(AssertionError.class, () -> commandStringStash.getPassedCommandString(null));
     }
 
     /**
