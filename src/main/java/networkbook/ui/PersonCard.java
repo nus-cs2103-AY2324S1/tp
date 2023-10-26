@@ -24,6 +24,7 @@ public class PersonCard extends UiPart<Region> {
     private static final String COURSE_HEADER = "Courses: ";
     private static final String SPECIALISATION_HEADER = "Specialisations: ";
     private static final String PRIORITY_HEADER = "Priority: ";
+    private static final String EMPTY_FIELD = "-";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -71,13 +72,13 @@ public class PersonCard extends UiPart<Region> {
         emails.setText(EMAILS_HEADER + person.getEmails().toString());
         links.setText(LINKS_HEADER + person.getLinks().toString());
         person.getGraduation().ifPresentOrElse((Graduation g) ->
-                graduation.setText(GRADUATION_HEADER + g.getFullString()), () -> graduation.setVisible(false));
+                graduation.setText(GRADUATION_HEADER + g.getFullString()), () -> graduation.setText(GRADUATION_HEADER + EMPTY_FIELD));
         courses.setText(COURSE_HEADER + person.getCourses().toString());
         specialisations.setText(SPECIALISATION_HEADER + person.getSpecialisations().toString());
         person.getTags().stream()
                 .forEach(tag -> tags.getChildren().add(new Label(tag.getValue())));
         person.getPriority().ifPresentOrElse((Priority p) ->
-                        priority.setText(PRIORITY_HEADER + p), () -> priority.setVisible(false));
+                        priority.setText(PRIORITY_HEADER + p), () -> priority.setText(PRIORITY_HEADER + EMPTY_FIELD));
     }
 
     public Label getPhones() {
