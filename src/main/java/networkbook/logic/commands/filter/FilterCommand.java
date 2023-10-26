@@ -98,7 +98,7 @@ public class FilterCommand extends Command {
         return new ToStringBuilder(this)
                 .add("predicate", keyTermsPredicate)
                 .add("time", takenPredicate)
-                .add("countFin", checkFin)
+                .add("taken", checkFin)
                 .toString();
     }
 }
