@@ -25,7 +25,7 @@ public class UniqueCourseList implements Iterable<Course> {
      * Returns a course with the given course code.
      */
     public static Course findByCourseCode(String courseCode) {
-        checkArgument(isValidCourseCode(courseCode), MESSAGE_CONSTRAINTS); //Check if course code is valid
+        checkArgument(isValidCourseCode(courseCode), MESSAGE_CONSTRAINTS); //Check if the course code is valid
         for (Course course : internalList) {
             if (course.getCourseCode().equals(courseCode)) {
                 return course;

@@ -1,7 +1,7 @@
 package seedu.address.model.person.predicates;
 
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.course.Course;
@@ -10,16 +10,21 @@ import seedu.address.model.person.Person;
 /**
  * Tests that a {@code Person}'s {@code Courses} matches any of the keywords given.
  */
-public class TeachingCoursePredicate implements Predicate<Person> {
-    private final List<Course> mods;
+public class TeachingCoursePredicate implements FindCommandPredicate {
+    private final List<Course> courses;
 
-    public TeachingCoursePredicate(List<Course> mods) {
-        this.mods = mods;
+    public TeachingCoursePredicate(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    @Override
+    public String toFilterString() {
+        return "course: [" + courses.stream().map(Course::getCourseCode).collect(Collectors.joining("")) + "]";
     }
 
     @Override
     public boolean test(Person person) {
-        return mods.stream()
+        return courses.stream()
                 .anyMatch(predicateCourse -> person.getCourses().stream()
                         .anyMatch(predicateCourse::equals));
     }
@@ -36,11 +41,11 @@ public class TeachingCoursePredicate implements Predicate<Person> {
         }
 
         TeachingCoursePredicate otherNameContainsKeywordsPredicate = (TeachingCoursePredicate) other;
-        return mods.equals(otherNameContainsKeywordsPredicate.mods);
+        return courses.equals(otherNameContainsKeywordsPredicate.courses);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("mods", mods).toString();
+        return new ToStringBuilder(this).add("courses", courses).toString();
     }
 }
