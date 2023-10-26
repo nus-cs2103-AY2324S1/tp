@@ -1,6 +1,7 @@
 package networkbook.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
+import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 import static networkbook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -18,7 +19,6 @@ import networkbook.model.person.Person;
  */
 public class DeleteFieldCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_FIELD_SUCCESS = "Deleted some information of person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the network book.";
     private Index indexOfPerson;
     private DeleteFieldAction action;
 
@@ -28,6 +28,7 @@ public class DeleteFieldCommand extends Command {
      * @param action
      */
     public DeleteFieldCommand(Index indexOfPerson, DeleteFieldAction action) {
+        requireAllNonNull(indexOfPerson, action);
         this.indexOfPerson = indexOfPerson;
         this.action = action;
     }
@@ -45,10 +46,6 @@ public class DeleteFieldCommand extends Command {
         DeletePersonDescriptor descriptor = new DeletePersonDescriptor(personToDeleteField);
         action.delete(descriptor);
         Person personWithFieldDeleted = descriptor.toPerson();
-
-        if (!personToDeleteField.isSame(personWithFieldDeleted) && model.hasPerson(personWithFieldDeleted)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
 
         model.setItem(personToDeleteField, personWithFieldDeleted);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

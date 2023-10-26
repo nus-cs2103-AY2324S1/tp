@@ -2,6 +2,8 @@ package networkbook.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+
 import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Course;
@@ -156,10 +158,10 @@ public class DeletePersonDescriptor {
                 && this.phones.equals(otherDescriptor.phones)
                 && this.emails.equals(otherDescriptor.emails)
                 && this.links.equals(otherDescriptor.links)
-                && this.graduation.equals(otherDescriptor.graduation)
+                && Objects.equals(this.graduation, otherDescriptor.graduation)
                 && this.courses.equals(otherDescriptor.courses)
                 && this.specialisations.equals(otherDescriptor.specialisations)
                 && this.tags.equals(otherDescriptor.tags)
-                && this.priority.equals(otherDescriptor.priority);
+                && Objects.equals(this.priority, otherDescriptor.priority);
     }
 }
