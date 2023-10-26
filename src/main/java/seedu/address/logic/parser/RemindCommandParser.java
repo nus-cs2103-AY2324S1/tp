@@ -27,6 +27,7 @@ public class RemindCommandParser implements Parser<RemindCommand> {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                         Messages.MESSAGE_NOT_POSITIVE_NUMBER));
             }
+            
             return new RemindCommand(new RemindPredicate(parsedArgs));
         } catch (NumberFormatException e) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
