@@ -30,9 +30,9 @@
                      <Label alignment="CENTER" prefHeight="39.0" prefWidth="50.0" text="Help" />
                      <Button mnemonicParsing="false" onAction="#handleHelp" text="User Guide" />
                      <Button mnemonicParsing="false" text="Release Notes" />
+                     <Label alignment="CENTER" layoutX="10.0" layoutY="229.0" prefHeight="35.0" prefWidth="60.0" text="Others" />
                      <Button mnemonicParsing="false" text="About Us" />
                      <Button mnemonicParsing="false" text="Feedback" />
-                     <Label alignment="CENTER" layoutX="10.0" layoutY="229.0" prefHeight="35.0" prefWidth="60.0" text="Others" />
                      <Button mnemonicParsing="false" onAction="#handleExit" styleClass="button" text="Exit" />
                   </children>
                </VBox>
