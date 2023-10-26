@@ -159,6 +159,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedCcaCommander`. It extends `CcaCommander` with an undo/redo history, stored internally as an `ccaCommanderStateList` and `currentStatePointer`. Additionally, it implements the following operations: 
+
 * `VersionedCcaCommander#commit()` — Saves the current CCACommander state in its history.
 * `VersionedCcaCommander#undo()` — Restores the previous CCACommander state from its history.
 * `VersionedCcaCommander#redo()` — Restores a previously undone CCACommander state from its history.
@@ -345,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner user | remove a member from an event               | I can amend adding the wrong person to an event                                   |
 | `* * *`  | beginner user | view the members who attended an event      | I can estimate the number of members who will attend similar events in the future |
 | `* * *`  | beginner user | view events of a member                     | I can check how involved that particular member is                                |
-| `* * *`  | beginner user | recall the previous commands                | I can correct any mistakes in the command                                         |
+| `* * *`  | beginner user | recall the previous commands                | I can enter similar commands quickly                                              |
 
 *{More to be added}*
 
