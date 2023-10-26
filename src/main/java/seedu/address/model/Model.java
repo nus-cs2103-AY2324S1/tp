@@ -96,7 +96,7 @@ public interface Model {
     /**
      * Updates the filter of the filtered band list to filter by the given {@code predicate}.
      * Updates the musician list to reflect the members of the filtered band.
-     * An abstraction for ListBandCommand which requires updating both panels simultaneously.
+     * An abstraction for FindBandCommand which requires updating both panels simultaneously.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredBandMusicianList(Predicate<Band> predicate);

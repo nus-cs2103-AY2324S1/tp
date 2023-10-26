@@ -17,6 +17,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_MUSICIAN_DISPLAYED_INDEX = "The musician index provided is invalid";
     public static final String MESSAGE_MUSICIANS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_UNKNOWN_BAND = "Band does not exist!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_BAND_DISPLAYED_INDEX = "The band index provided is invalid";
