@@ -394,6 +394,57 @@ The following activity diagram summarizes what happens when a user executes a ne
          - **Potential Errors**: If the list of persons changes (e.g., due to deletions or additions), the numbering index could become outdated, leading to errors.
          - **Limited Identifiability**: Index numbers do not provide any context about the person, which may be confusing when there are multiple people with the same name or similar information.
 
+### Find Feature
+
+#### Description
+
+The `FindCommand` allows users to find existing person(s) within the patient list, using their name or NRIC, and view their field data.
+
+#### Implementation Details
+
+The `FindCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `find`.
+- **Usage**: Users invoke the `FindCommand` by specifying the command word, followed by the name or NRIC of the person(s) they wish to find.
+    - The command format is: `find n/NAME` or `find id/IC_NUMBER`.
+- **`execute` method**: The `FindCommand` executes the search by using the specified predicates (`NameContainsKeywordsPredicate` or `IdContainsKeywordsPredicate`) to filter and list all persons matching the search criteria.
+- **Validation**: The `FindCommand` performs validation to ensure at least one keyword is provided. It searches based on either name or NRIC, to speed up the search and prevent possible conflicts if name and NRIC do not match each other.
+- **Execution**: When executed, the `FindCommand` identifies the person(s) being searched for based on the provided name or NRIC. If a name is provided as keyword, a `FindCommand(NameContainsKeywordsPredicate)` is created, and if an NRIC is provided as keyword, a `FindCommand(IdContainsKeywordsPredicate)` is created. `updateFilteredPersonList` will then update the filter of the filtered person list to filter by the given name or NRIC predicate (keyword).
+
+The following sequence diagram shows how the find operation works:
+
+<puml src="diagrams/FindSequenceDiagram.puml" width="400" />
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/FindActivityDiagram.puml" width="500" />
+
+#### Rationale
+
+- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to edit a person by name or NRIC, whichever is faster or available.
+- **User Experience**: The keyword matching is case-insensitive, making the search faster and more user-friendly.
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data.
+
+#### Alternatives Considered
+
+- **Alternative 1**: Using only name to find patients.
+    - **Pros**:
+        - **Standardisation**: The command format is fixed and will always only be `find n/NAME`, which may be easier to remember.
+        - **User Convenience**: Searching primarily by name is a common way to look up a patient in a healthcare system and users may be more familiar with this method.
+
+    - **Cons**:
+        - **Potential Errors**: If patients' names change over time, there may be failed searches and other identifiers, like NRIC, may be needed.
+        - **Limited Identifiability**: If multiple patients share the same name, they will be indistinguishable name-wise and other identifiers, like NRIC, may be needed.
+
+
+- **Alternative 2**: Requiring both name and NRIC keywords to find patients within a single find command.
+  - **Pros**:
+    - **Enhanced Precision**: Combining both name and NRIC is a more unique identification method, making it easier to find a patient sharing a name with other patients.
+    - **Patient Verification**: Searching by both criteria adds an additional layer of verification, ensuring the correct patient is selected.
+
+  - **Cons**: 
+    - **Additional User Effort**: Users need to provide both name and NRIC, which may take longer or require extra effort, especially if they only have one piece of information readily available.
+    - **Increased Ambiguity**: If the name keyword does not match the NRIC keyword, this may lead to potential confusion in which patient is being searched for.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -614,12 +665,6 @@ based on an identifier
 * 1a. No matches exist in the list.
 
     * 1a1. HealthSync displays a "no matches found" message.
-
-      Use case ends.
-
-* 1b. User additionally specifies fields of the patient that they are interested in.
-
-    * 1b1. HealthSync displays only the specific fields of the patients that match the query.
 
       Use case ends.
 
