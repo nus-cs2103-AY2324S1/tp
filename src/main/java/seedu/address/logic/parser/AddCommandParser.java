@@ -39,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LASTTIME,
                         PREFIX_STATUS, PREFIX_REMARK, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LASTTIME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -49,10 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        LocalDateTime lastContactedTime = ParserUtil.parseContactTime(argMultimap.getValue(PREFIX_LASTTIME).get());
-        if (!LastContactedTime.isValidLastContactedTime(lastContactedTime)) {
-            throw new ParseException(LastContactedTime.MESSAGE_CONSTRAINTS);
-        }
+        LocalDateTime lastContactedTime = ParserUtil.parseContactTime(argMultimap.getValue(PREFIX_LASTTIME).orElse(""));
         Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElse(""));
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
