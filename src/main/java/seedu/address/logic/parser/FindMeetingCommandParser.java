@@ -59,7 +59,6 @@ public class FindMeetingCommandParser implements Parser<FindMeetingCommand> {
         String[] attendeeKeyWords = argMultimap.getValue(PREFIX_NAME).orElse("").split("\\s+");
         String[] tagKeyWords = argMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");
 
-
         GeneralMeetingPredicate generalMeetingPredicate = new GeneralMeetingPredicate(
                 titleKeyWords,
                 locationKeyWords,

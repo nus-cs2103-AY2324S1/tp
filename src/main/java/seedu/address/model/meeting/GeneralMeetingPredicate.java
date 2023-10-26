@@ -4,18 +4,15 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import seedu.address.model.tag.TagContainsKeywordsPredicate;
-
-
 /**
- * The predicate class that brings together of all the other predicate class.
+ * The predicate class that brings together of all the other predicate class for Meeting.
  */
 public class GeneralMeetingPredicate implements Predicate<Meeting> {
     private final TitleContainsKeywordsPredicate titlePredicate;
     private final LocationContainsKeywordsPredicate locationPredicate;
     private final MeetingTimeContainsPredicate meetingTimePredicate;
     private final AttendeeContainsKeywordsPredicate attendeePredicate;
-    private final TagContainsKeywordsPredicate tagPredicate;
+    private final MeetingTagContainsKeywordsPredicate tagPredicate;
 
     /**
      * Constructs a predicate class that fulfills all the argument predicates
@@ -29,7 +26,7 @@ public class GeneralMeetingPredicate implements Predicate<Meeting> {
                                              LocationContainsKeywordsPredicate locationPredicate,
                                              MeetingTimeContainsPredicate meetingTimePredicate,
                                              AttendeeContainsKeywordsPredicate attendeePredicate,
-                                             TagContainsKeywordsPredicate tagPredicate) {
+                                             MeetingTagContainsKeywordsPredicate tagPredicate) {
         this.titlePredicate = titlePredicate;
         this.locationPredicate = locationPredicate;
         this.meetingTimePredicate = meetingTimePredicate;
@@ -52,7 +49,7 @@ public class GeneralMeetingPredicate implements Predicate<Meeting> {
         this.locationPredicate = new LocationContainsKeywordsPredicate(Arrays.asList(locationKeyWords));
         this.meetingTimePredicate = new MeetingTimeContainsPredicate(start, end);
         this.attendeePredicate = new AttendeeContainsKeywordsPredicate(Arrays.asList(attendeeKeyWords));
-        this.tagPredicate = new TagContainsKeywordsPredicate(Arrays.asList(tagKeyWords));
+        this.tagPredicate = new MeetingTagContainsKeywordsPredicate(Arrays.asList(tagKeyWords));
     }
 
     @Override
