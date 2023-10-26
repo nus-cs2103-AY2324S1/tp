@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.logic.parser.ParserUtil.parseStatusToInteger;
 import static seedu.address.logic.parser.ParserUtil.parseStatusToString;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -227,14 +226,5 @@ public class ParserUtilTest {
         assertEquals(parseStatusToString(statusMissed), expectedMissedString);
         assertEquals(parseStatusToString(statusCompleted), expectedCompletedString);
         assertThrows(ParseException.class, () -> parseStatusToString(invalidStatus));
-    }
-
-    @Test
-    public void parseStatusToIndex_returnsStatusIndex() throws Exception {
-        int expectedMissedIndex = 0;
-        int expectedCompletedIndex = 1;
-        assertEquals(parseStatusToInteger(statusMissed), expectedMissedIndex);
-        assertEquals(parseStatusToInteger(statusCompleted), expectedCompletedIndex);
-        assertThrows(ParseException.class, () -> parseStatusToInteger(invalidStatus));
     }
 }
