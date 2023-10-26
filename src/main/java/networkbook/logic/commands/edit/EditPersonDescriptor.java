@@ -1,6 +1,5 @@
 package networkbook.logic.commands.edit;
 
-import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
 import networkbook.commons.core.index.Index;
@@ -53,7 +52,7 @@ public class EditPersonDescriptor {
     }
 
     public void setName(Name name) {
-        requireNonNull(name);
+        assert name != null;
         this.name = name;
     }
 
@@ -82,7 +81,7 @@ public class EditPersonDescriptor {
     }
 
     public void setGraduation(Graduation graduation) {
-        requireNonNull(graduation);
+        assert graduation != null;
         this.graduation = graduation;
     }
 
@@ -111,7 +110,7 @@ public class EditPersonDescriptor {
     }
 
     public void setPriority(Priority priority) {
-        requireNonNull(priority);
+        assert priority != null;
         this.priority = priority;
     }
 
