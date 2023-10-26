@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private Person selectedPerson;
+    private final CommandStringStash commandStringStash;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.commandStringStash = new CommandStringStash();
 
         // DoConnek Pro shows all patients on startup by default.
         updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
@@ -150,6 +152,22 @@ public class ModelManager implements Model {
     @Override
     public boolean isSelectedEmpty() {
         return selectedPerson == null;
+      
+    //=========== Command String Stash =============================================================
+
+    @Override
+    public String getPrevCommandString(String currentCommandString) {
+        return commandStringStash.getPrevCommandString(currentCommandString);
+    }
+
+    @Override
+    public String getPassedCommandString(String currentCommandString) {
+        return commandStringStash.getPassedCommandString(currentCommandString);
+    }
+
+    @Override
+    public void addCommandString(String commandString) {
+        commandStringStash.addCommandString(commandString);
     }
 
     @Override

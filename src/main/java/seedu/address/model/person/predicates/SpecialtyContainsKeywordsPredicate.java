@@ -29,7 +29,8 @@ public class SpecialtyContainsKeywordsPredicate implements Predicate<Person> {
         Specialist specialist = (Specialist) person;
 
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(specialist.getSpecialty().value, keyword));
+                .anyMatch(keyword ->
+                        StringUtil.wordsContainSubstringIgnoreCase(specialist.getSpecialty().value, keyword));
     }
 
     @Override

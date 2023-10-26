@@ -50,4 +50,18 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the command string of the next most recent command executed.
+     */
+    String getPrevCommandString(String currentCommandString);
+
+    /**
+     * Returns the command string of the previous most recent command executed.
+     */
+    String getPassedCommandString(String currentCommandString);
+    /**
+     * Adds the most recent command string input by the user to the CommandStringStash.
+     */
+    void addCommandString(String commandString);
 }

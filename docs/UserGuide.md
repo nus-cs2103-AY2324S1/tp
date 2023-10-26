@@ -53,7 +53,10 @@ would like the command to operate on.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [m/MEDICAL_HISTORY]` can be used as `n/John Doe m/Osteoporosis` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple times but must include at least one entry.<br>
+  e.g. `INDEX…​` can be used as `1` , `1 2 3`, `4 5 6 7 8`, but _**not**_ ` ` (i.e. 0 times).
+
+* Items with both square brackets and `…`​ can be used multiple times, including zero times as they are optional. <br>
   e.g. `[m/MEDICAL_HISTORY]…​` can be used as ` ` (i.e. 0 times), `m/Osteoporosis`, `m/Osteoporosis m/Asthma` etc.
 
 * Parameters can be in any order.<br>
@@ -78,12 +81,12 @@ Format: `help`
 
 Adds a patient or specialist to the address book.
 
-Format (for patients): `add -pa n/NAME p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...​`<br>
+Format (for patients): `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...​`<br>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A patient can have any number of medical histories (including 0)
 </div>
 
-Format (for specialists): `add -sp n/NAME p/PHONE_NUMBER s/SPECIALISATION l/LOCATION`
+Format (for specialists): `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION`
 
 
 Examples:
@@ -108,32 +111,40 @@ with all attributes containing any of the corresponding keywords in the command.
 
 Format: `find -PERSON_TYPE [PREFIX/KEYWORDS]`
 
-* All prefixes are optional. Hence, calling `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* All prefixes are optional. Hence, calling `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed.
+* The search is case-insensitive.
+  * e.g `hans` will match `Hans`
+* The order of the keywords does not matter. 
+  * e.g. `Hans Bo` will match `Bo Hans`
+* There are different behaviours regarding the searching of different parameters:
+  * For `NAME`, `MEDICAL_HISTORY`, `SPECIALISATION`, `EMAIL`, `LOCATION` and `PHONE`, even substrings will be matched. 
+    * e.g. `ha` will match `Hans`
+  * For `AGE` and `TAGS` only full words will be matched. 
+    * e.g. `1` will not match `18`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  * The keywords will be separated out by whitespaces e.g. `hans bo` is akin to searching for `hans` and `bo` simultaneously.
+    * e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find -pa n/John` returns the patient `john` and the patient `John Doe`
+* `find -pa n/John` returns the patient `Johnny Depp` and the patient `John Doe`
 * `find -sp n/alex david` returns the specialists `Alex Yeoh` and `David Li` 
-* `find -sp n/Alex s/Orthopaedic` returns any specialists with the name `Alex` who has the `Orthopaedic` specialty
+* `find -sp n/Alex s/Orthopaedic` returns any specialists names including the string `Alex` who has the `Orthopaedic` specialty
 <br>
 
 ### Deleting a patient or specialist : `delete`
 
-Deletes the specified patient or specialist from the stored records.
+Deletes the specified patients or specialists from the stored records.
 
-Format: `delete INDEX`
+Format: `delete INDEX…​`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes all persons at the specified `INDEX…​`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​ with a maximum value of the list size.
+* The indexes must **not** contain any duplicate integers.
 
 Examples:
-* `list -pa` followed by `delete 2` deletes the 2nd patient in the listed patients. 
-* `find -sp n/Betsy` followed by `delete 1` deletes the 1st specialist from the specialists listed in the `find` command.
+* `list -pa` followed by `delete 2` deletes the 2nd patient in the listed patients.
+* `find -sp s/Orthopaedic` followed by `delete 2 3 4` deletes the 2nd, 3rd and 4th specialist listed in the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -146,6 +157,18 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+### Recalling Recent Commands
+
+Similar to the [CLI of Unix](https://www.osc.edu/book/export/html/3022), the CLI of DoConnek Pro provides the functionality of
+recalling recent commands by pressing the 'up arrow' and the 'down arrow' on the keyboard.
+
+DoConnek Pro maintains a history of the 20 most recent commands the user has entered.
+
+The user can recall the 20 most recently entered commands by pressing the up arrow on the keyboard. Each press of the 
+up arrow cycles one command further back in the history.
+
+If the user goes too far back in history, they can 'undo' an 'up arrow' by pressing the down arrow.
 
 ### Save and Load Data
 
@@ -182,8 +205,8 @@ If your changes to the data file makes its format invalid, DoConnek Pro will dis
 
 Action | Format, Examples
 --------|------------------
-**Add (patient)** | `add -pa n/NAME p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...` <br> e.g., `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
-**Add (specialist)** | `add -sp n/NAME p/PHONE_NUMBER s/SPECIALISATION l/LOCATION` <br> e.g., `add -sp n/Jane p/73331515 s/Dermatologist l/Ang Mo Kio`
+**Add (patient)** | `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...` <br> e.g., `add -pa n/John e/johnjohn@example.com p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
+**Add (specialist)** | `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION` <br> e.g., `add -sp n/Jane e/janejane@example.com p/73331515 s/Dermatologist l/Ang Mo Kio`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
