@@ -6,7 +6,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.gatheremail.GatherEmailPrompt;
 
 /**
  * The API of the Model component.
@@ -80,6 +82,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the appointment list */
+    ObservableList<Appointment> getAppointmentList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -98,5 +103,5 @@ public interface Model {
      * @param prompt The user input for command
      * @return The String representation of all the gathered emails.
      */
-    String gatherEmails(String prompt);
+    String gatherEmails(GatherEmailPrompt prompt);
 }

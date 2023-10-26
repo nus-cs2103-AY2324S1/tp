@@ -104,18 +104,35 @@ public class Person {
     }
 
     /**
-     * Checks if the given {@code prompt} is in the {@code financialPlans} and returns the email if true.
+     * Checks if the given {@code prompt} is a substring of {@code financialPlan} name in {@code financialPlans}
+     * and returns the email if true.
      */
     public String gatherEmailsContainsFinancialPlan(String prompt) {
-        FinancialPlan fp = new FinancialPlan(prompt);
-        /*
-         .contains() method checks if the hashcode of objects in the Hashset
-         and the object passed as argument corresponds.
-         */
-        if (financialPlans.contains(fp)) {
-            return this.email.toString();
+        StringBuilder result = new StringBuilder();
+
+        for (FinancialPlan financialPlan : financialPlans) {
+            // Perform a case-insensitive check if the financial plan contains the prompt as a substring
+            if (financialPlan.containsSubstring(prompt)) {
+                result.append(email); // Add the email to the result string
+            }
         }
-        return new String();
+        return result.toString();
+    }
+
+    /**
+     * Checks if the given {@code prompt} is a substring of {@code tag} name in {@code Tags}
+     * and returns the email if true.
+     */
+    public String gatherEmailsContainsTag(String prompt) {
+        StringBuilder result = new StringBuilder();
+
+        for (Tag tag : tags) {
+            // Perform a case-insensitive check if the tag contains the prompt substring
+            if (tag.containsSubstring(prompt)) {
+                result.append(email); // Add the email to the result string
+            }
+        }
+        return result.toString();
     }
 
     /**

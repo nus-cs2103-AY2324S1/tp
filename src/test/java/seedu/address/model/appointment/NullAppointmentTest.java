@@ -13,8 +13,8 @@ class NullAppointmentTest {
     public void getNullAppointment() {
 
         // Factory method should return same null appointment instance
-        NullAppointment nullAppointment1 = NullAppointment.getNullappointment();
-        NullAppointment nullAppointment2 = NullAppointment.getNullappointment();
+        NullAppointment nullAppointment1 = NullAppointment.getNullAppointment();
+        NullAppointment nullAppointment2 = NullAppointment.getNullAppointment();
 
         assertTrue(nullAppointment1 == nullAppointment2);
     }
@@ -22,13 +22,13 @@ class NullAppointmentTest {
     @Test
     public void equals() {
 
-        NullAppointment nullAppointment1 = NullAppointment.getNullappointment();
+        NullAppointment nullAppointment1 = NullAppointment.getNullAppointment();
         Appointment appointment = new Appointment("Review Insurance",
                 LocalDateTime.of(2023, 1, 1, 20, 00));
 
         assertFalse(nullAppointment1.equals(appointment));
 
-        NullAppointment nullAppointment2 = NullAppointment.getNullappointment();
+        NullAppointment nullAppointment2 = NullAppointment.getNullAppointment();
         assertTrue(nullAppointment1.equals(nullAppointment2));
     }
 }

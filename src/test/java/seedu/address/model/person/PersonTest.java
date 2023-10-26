@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FINANCIAL_PLAN_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_PHONE_BOB;
@@ -113,8 +114,7 @@ public class PersonTest {
 
     @Test
     public void gatherEmails_noPersonFound() {
-        String prompt = "Sample Financial Plan 3";
-        assertEquals(new String(), ALICE.gatherEmailsContainsFinancialPlan(prompt));
+        assertEquals(new String(), ELLE.gatherEmailsContainsFinancialPlan(VALID_FINANCIAL_PLAN_1));
     }
 
     @Test
@@ -124,6 +124,16 @@ public class PersonTest {
         String prompt2 = "Sample Financial Plan 2";
         assertEquals(ELLE.getEmail().toString(), ELLE.gatherEmailsContainsFinancialPlan(prompt));
         assertEquals(ELLE.getEmail().toString(), ELLE.gatherEmailsContainsFinancialPlan(prompt2));
+    }
+
+    @Test
+    public void gatherByTag_noPersonFound() {
+        assertEquals(new String(), ALICE.gatherEmailsContainsTag(VALID_TAG_HUSBAND));
+    }
+
+    @Test
+    public void gatherByTag_personFound() {
+        assertEquals(BOB.getEmail().toString(), BOB.gatherEmailsContainsTag(VALID_TAG_HUSBAND));
     }
 
     @Test

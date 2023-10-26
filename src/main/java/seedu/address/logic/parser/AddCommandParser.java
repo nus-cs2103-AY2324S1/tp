@@ -60,7 +60,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<FinancialPlan> financialPlanList = ParserUtil.parseFinancialPlans(
                 argMultimap.getAllValues(PREFIX_FINANCIAL_PLAN));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        ScheduleItem appointment = NullAppointment.getNullappointment();
+        ScheduleItem appointment = NullAppointment.getNullAppointment();
 
         Person person = new Person(name, phone, email, address, nokName, nokPhone,
                 financialPlanList, tagList, appointment);

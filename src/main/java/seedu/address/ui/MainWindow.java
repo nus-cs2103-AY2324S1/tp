@@ -17,6 +17,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,9 +35,13 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private AppointmentListPanel appointmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ClearWindow clearWindow;
+    private OverrideWindow overrideWindow;
+    private Appointment appointment;
+    private Person personToEdit;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -45,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane appointmentListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -64,9 +73,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-
         setAccelerators();
-
         helpWindow = new HelpWindow();
         clearWindow = new ClearWindow(this::executeCommand);
     }
@@ -116,6 +123,9 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
+        appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -159,6 +169,19 @@ public class MainWindow extends UiPart<Stage> {
             clearWindow.show();
         } else {
             clearWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the override window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleOverride(Appointment appointment, Person personToEdit) {
+        overrideWindow = new OverrideWindow(this::executeCommand, appointment, personToEdit);
+        if (!overrideWindow.isShowing()) {
+            overrideWindow.show();
+        } else {
+            overrideWindow.focus();
         }
     }
 
@@ -233,6 +256,11 @@ public class MainWindow extends UiPart<Stage> {
         }
         if (commandResult.isShowClear()) {
             handleClear();
+        }
+        if (commandResult.isShowOverride()) {
+            this.appointment = commandResult.getAppointment();
+            this.personToEdit = commandResult.getPersonToEdit();
+            handleOverride(appointment, personToEdit);
         }
     }
 }

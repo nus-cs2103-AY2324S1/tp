@@ -24,12 +24,18 @@ public class Tag {
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
     }
-
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if the given string is a substring of {@code tagName}
+     */
+    public boolean containsSubstring(String substring) {
+        return tagName.toLowerCase().contains(substring.toLowerCase());
     }
 
     @Override

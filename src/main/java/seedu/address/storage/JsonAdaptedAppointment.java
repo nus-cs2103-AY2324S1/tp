@@ -25,13 +25,6 @@ class JsonAdaptedAppointment {
         this.appointment = appointment;
     }
 
-    /**
-     * Converts a given {@code Appointment} into this class for Jackson use.
-     */
-    public JsonAdaptedAppointment(Appointment source) {
-        appointment = source.toString();
-    }
-
     @JsonValue
     public String getAptDescription() {
         return appointment;
@@ -45,7 +38,7 @@ class JsonAdaptedAppointment {
     public ScheduleItem toModelType() throws IllegalValueException {
 
         if (appointment.equals(MESSAGE_NULL_APT)) {
-            return NullAppointment.getNullappointment();
+            return NullAppointment.getNullAppointment();
         }
 
         if (!Appointment.isValidAppointment(appointment)) {
