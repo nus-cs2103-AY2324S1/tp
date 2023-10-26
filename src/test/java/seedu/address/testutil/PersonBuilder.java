@@ -166,6 +166,10 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a person with the given parameters.
+     * @return Person
+     */
     public Person build() {
         Person createdPerson = new Person(name, phone, email, address, remark, tags);
         createdPerson.setScore(score);

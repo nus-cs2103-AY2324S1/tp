@@ -73,6 +73,9 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Score} of the {@code EditPersonDescriptor} that we are building.
+     */
     public EditPersonDescriptorBuilder withScore(int score) {
         descriptor.setScore(new Score(score));
         return this;
