@@ -159,6 +159,69 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Adding `Event` feature
+
+#### Implementation
+
+The addEvent feature is facilitated by the `Calendar` class. It allows the users to block out some time
+in their personal `Calendar` with some `Event` that has the following attributes:
+
+* `DESCRIPTION`  —  Brief description of the `Event`
+* `START_DATE_TIME`  —  Starting date and time of the `Event`
+* `END_DATE_TIME`  —  End date and time of the `Event`
+
+The syntax used to call this command is as follows: `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME`,
+with the `START_DATE_TIME` and `END_DATE_TIME` in the `yyyy-MM-dd HH:mm` format. If any of the fields are missing
+or if the formatting is incorrect, an error message will be thrown along with usage instructions on the correct
+formatting.
+
+Given below is an example usage scenario and how the addEvent feature behaves at each step.
+
+Step 1. The user launches the application for the first time. The user's personal `Calendar` will be initialized
+as an empty calendar.
+
+Step 2. The user executes `addEvent d/Go to school ts/2023-10-26 08:00 te/2023-10-26 16:00` to add the `Event`
+of `Go to school` from `2023-10-26 8am` to `2023-10-26 4pm`. This will call the `UniMateParser#execute()`,
+passing in the user input from the user. 
+
+Step 3. Since the command is an `addEvent` command, it passes the user input to `AddEventCommandParser#parse()`
+for parsing.
+
+Step 4. The `AddEventCommandParser#parse` command will parse the command into 3 argument fields  — 
+`DESCRIPTION`, `START_DATE_TIME` and `END_DATE_TIME`. The `DESCRIPTION` is passed into 
+`ParserUtil#parseEventDescription()` to produce a `EventDescription` object, while the `START_DATE_TIME` 
+and `END_DATE_TIME` are passed into `ParserUtil#parseEventPeriod()` to produce a `EventPeriod` object.
+
+**Note**: If the `DESCRIPTION` is empty, or the `START_DATE_TIME` or `END_DATE_TIME` are of invalid
+format, a `ParseException` will be thrown, displaying the appropriate command usage format.
+
+Step 5. The `EventDescription` and `EventPeriod` objects produced in Step 4 are then passed into 
+the constructor for `Event`, creating an `Event` object with the respective user-defined attributes. This
+`Event` object is then passed into the constructor of the `AddEventCommand` object.
+
+Step 6. `AddEventCommand#execute()` is then called, and the calendar will check if there is an existing
+`Event` that has a conflicting timing with the new `Event` to be added. Since the calendar is empty,
+no errors will be raised and the user will see his new `Event` displayed in the UI in the `My Calendar`
+region.
+
+**Note**: Suppose there is a conflicting `Event` that already exists in the `Calendar` 
+with the `Event` to be added, the new `Event` will not be added, and a message that states that there
+is a timing conflict will be reflected in the UI status bar.
+
+#### Design considerations:
+
+**Aspect: Appropriate time period of an event:**
+
+* **Alternative 1 (Current choice): No restriction on time period** 
+    * Pros: Allows users to add multi-day `Event` such as multi-day business trips.
+    * Cons: For users that rarely have multi-day `Event`, having to type the date twice when calling the command might be troublesome.
+* **Alternative 2: Restrict events to a single day**
+    * Pros: User only has to type date once when calling command.
+    * Cons: For multi-day `Event`, user has to call the command multiple times for all the relevant days
+
+{more aspects and alternatives to be added}
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
