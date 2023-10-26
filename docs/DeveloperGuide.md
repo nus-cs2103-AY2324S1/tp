@@ -291,6 +291,27 @@ After `PayslipCommandParser` class parses the user input, the `PayslipCommand` c
 The following activity diagram summarises the process of generating a payslip for an employee:
 (Activity diagram to be added)
 
+### Payroll calculation feature
+
+#### Implementation
+
+The feature is facilitated by the four classes below:
+1.	PayrollCommandParser
+2.	PayrollCommand
+3.	Payroll
+4.	Salary
+
+
+<u>PayrollCommandParser</u>
+
+This class extends the Parser interface, it implements the following operations:
+- PayrollCommandParser#parse() – Parses the user input and returns a PayrollCommand object.
+
+<u>PayrollCommand</u>
+
+This class extends the Command abstract class, it implements the following operations:
+- PayrollCommand#execute() – Determines whether the user used employee name as reference or the index number. Once it confirms, it will calculate the payroll of the employee.
+
 #### Design considerations:
 
 {what are the design considerations?}
