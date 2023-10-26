@@ -87,7 +87,6 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Setting theme with path: " + themePath);
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add(themePath);
-        primaryStage.getScene().getStylesheets().add("view/Extensions.css");
     }
 
     /**
