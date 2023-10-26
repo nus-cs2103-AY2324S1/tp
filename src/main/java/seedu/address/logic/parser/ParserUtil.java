@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -159,6 +163,31 @@ public class ParserUtil {
             throw new ParseException(AnnualLeave.MESSAGE_CONSTRAINTS);
         }
         return new AnnualLeave(trimmedAnnualLeave);
+    }
+
+    /**
+     * Returns LocalDate object from String
+     * @param date The String containing date from user input
+     * @return LocalDate
+     * @throws DateTimeParseException if the format of String is wrong
+     */
+    public static LocalDate stringToDate(String date) throws DateTimeParseException {
+        String dateFormat = "dd/MM/yyyy";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        return localDate;
+    }
+
+    /**
+     * Returns String from LocalDate object.
+     * @param date The LocalDate object
+     * @return String format of LocalDate object
+     */
+    public static String dateToString(LocalDate date) {
+        String dateFormat = "dd/MM/yyyy";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        String localDate = date.format(formatter);
+        return localDate;
     }
 
     /**
