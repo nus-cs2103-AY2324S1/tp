@@ -109,7 +109,7 @@ public class EditApplicantCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + PHONE_DESC_AMY
                 + PHONE_DESC_BOB;
 
