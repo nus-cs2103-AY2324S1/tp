@@ -28,7 +28,7 @@ public class AddInterviewCommand extends Command {
             + "Parameters: "
             + PREFIX_APPLICANT + "APPLICANT_ID "
             + PREFIX_JOB_ROLE + "ROLE "
-            + PREFIX_TIMING + "TIMING"
+            + PREFIX_TIMING + "TIMING" + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_APPLICANT + "18 "
             + PREFIX_JOB_ROLE + "Junior Software Engineer "

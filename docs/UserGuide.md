@@ -48,7 +48,17 @@ Let's get started by following the [Quick Start](#quick-start) section!
 
 # GUI Summary
 
-**TO BE ADDED**
+![GUI Summary](images/GuiSummary.png)
+
+For each applicant and each interview, we see the following details:
+
+| Applicant | Interview  |
+|-----------|------------|
+| Name      | Job role   |
+ | Tags      | Start time |
+| Phone     | End time   |
+| Address   | Rating     |
+ | Email     |            |
 
 --------------------------------------------------------------------------------------------------------------------
 # Features
@@ -226,19 +236,25 @@ Format: `nuke`
 
 Finds applicants whose names contain any of the given keywords.
 
-Format: `find-a KEYWORD [MORE_KEYWORDS]`
+Format: ``find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER]
+[e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] [t/KEYWORDS [MORE_KEYWORDS]...]``
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* At least one of the optional fields must be provided
+* Any of the fields (name, phone, email, address, tags) can be searched
+* Only full words will be matched e.g. `Han` will not match `Hans` for name, address and tags
+* For phone, partial numbers will match e.g. `987` will match `98765432`
 * Applicants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find-a n/John` returns `john` and `John Doe`
+* `find-a n/alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find-a n/alex david'](images/findAlexDavidResult.png)
+* `find-a p/874 a/serangoon ang` returns `97438807`, `Serangoon Gardens`,
+`Serangoon Gardens Street`, `Ang Mo Kio`<br>
+  ![result for 'find-a p/874 a/serangoon ang'](images/findPhoneAddress.png)
 
 ## Finding interview (and their index in address book) by job title: `find-i`
 
@@ -305,14 +321,14 @@ _Details coming soon ..._
 
 ## Applicant Management Command
 
-| Action                     | Format, Examples                                                                                                                                                      |
-|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add applicant**          | `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear all applicants**   | `clear-a`                                                                                                                                                             |
-| **Delete applicant**       | `delete-a INDEX`<br> e.g., `delete-a 3`                                                                                                                               |
-| **Edit applicant**         | `edit-a APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit-a 2 n/John Doe`                                        |
-| **Find applicant by name** | `find-a KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-a John`                                                                                                              |
-| **List applicants**        | `list-a`                                                                                                                                                              |
+| Action                   | Format, Examples                                                                                                                                                                                                 |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add applicant**        | `add-a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                            |
+| **Clear all applicants** | `clear-a`                                                                                                                                                                                                        |
+| **Delete applicant**     | `delete-a INDEX`<br> e.g., `delete-a 3`                                                                                                                                                                          |
+| **Edit applicant**       | `edit-a APPLICANT_INDEX [n/NAME] [t/INTERVIEW_DATETIME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit-a 2 n/John Doe`                                                                                   |
+| **Find applicant**       | `find-a [n/KEYWORDS [MORE_KEYWORDS]...] [p/NUMBER] [e/KEYWORDS [MORE_KEYWORDS]...] [a/KEYWORDS [MORE_KEYWORDS]...] [t/KEYWORDS [MORE_KEYWORDS]...]` <br> e.g., `find-a n/John Bob p/98765432 e/John@example.com` |
+| **List applicants**      | `list-a`                                                                                                                                                                                                         |
 
 ## Interview Management Command
 
