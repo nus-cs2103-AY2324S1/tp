@@ -20,10 +20,11 @@ Class Name
 Class Phone
 Class Tag
 Class FinancialPlan
-Class ScheduleItem
+abstract Class ScheduleItem
 Class NullAppointment
 Class Appointment
-
+Class NextOfKinName
+Class NextOfKinPhone
 Class I #FFFFFF
 }
 
@@ -48,9 +49,11 @@ Person *--> Address
 Person *--> "*" Tag
 Person *--> "*" FinancialPlan
 Person *--> ScheduleItem
+Person *--> NextOfKinName
+Person *--> NextOfKinPhone
 
-Appointment .up.|> ScheduleItem
-NullAppointment .-|> ScheduleItem
+Appointment -up-|> ScheduleItem
+NullAppointment --|> ScheduleItem
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
