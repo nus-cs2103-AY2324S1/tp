@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_TYPE;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -11,10 +12,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddShortcutCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteShortcutCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -24,6 +28,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.person.PersonType;
 
 /**
@@ -43,6 +48,16 @@ public class AddressBookParser {
             "(?<commandWord>\\S+)\\s(?<personType>-\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
+    private final Model model;
+
+    /**
+     * Constructs an AddressBookParser with a reference to the {@code Model}
+     */
+    public AddressBookParser(Model model) {
+        requireNonNull(model);
+        this.model = model;
+    }
+
     /**
      * Parses user input into command for execution.
      *
@@ -53,11 +68,13 @@ public class AddressBookParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcherBasic = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         final Matcher matcherPersonType = COMPLEX_COMMAND_FORMAT.matcher(userInput.trim());
+        ShortcutSettings shortcutSettings = model.getShortcutSettings();
 
         if (matcherPersonType.matches()) {
-            final String commandWord = matcherPersonType.group("commandWord");
+            final String commandWord = shortcutSettings.getShortcut(matcherPersonType.group("commandWord"));
             final String personTypeWord = matcherPersonType.group("personType");
             final String arguments = matcherPersonType.group("arguments");
+
 
             // Note to developers: Change the log level in config.json to enable lower level
             // (i.e., FINE, FINER and lower) log messages such as the one below.
@@ -95,7 +112,7 @@ public class AddressBookParser {
 
             }
         } else if (matcherBasic.matches()) {
-            final String commandWord = matcherBasic.group("commandWord");
+            final String commandWord = shortcutSettings.getShortcut(matcherBasic.group("commandWord"));
             final String arguments = matcherBasic.group("arguments");
 
             // Note to developers: Change the log level in config.json to enable lower level
@@ -116,6 +133,12 @@ public class AddressBookParser {
 
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
+
+            case AddShortcutCommand.COMMAND_WORD:
+                return new AddShortcutCommandParser().parse(arguments);
+
+            case DeleteShortcutCommand.COMMAND_WORD:
+                return new DeleteShortcutCommandParser().parse(arguments);
 
             case ViewCommand.COMMAND_WORD:
                 return new ViewCommandParser().parse(arguments);

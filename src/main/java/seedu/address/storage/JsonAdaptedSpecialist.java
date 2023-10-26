@@ -55,6 +55,12 @@ class JsonAdaptedSpecialist extends JsonAdaptedPerson {
         return specialty;
     }
 
+
+    /**
+     * Converts this Jackson-friendly adapted specialist object into the model's {@code Specialist} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted specialist.
+     */
     @Override
     public Specialist toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();

@@ -13,6 +13,9 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.CommandWord;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ShortcutAlias;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Location;
@@ -33,8 +36,43 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_SHORTCUT = "del";
 
+    private static final String VALID_COMMANDWORD = ListCommand.COMMAND_WORD;
     private static final String WHITESPACE = " \t\r\n";
+
+    @Test
+    public void parseShortcutAlias_invalidInput_throwsParseException() {
+        // Shortcuts should not include whitespaces
+        assertThrows(ParseException.class, () -> ParserUtil.parseShortcutAlias(" "));
+        // Shortcuts should not match existing command keywords
+        assertThrows(ParseException.class, () -> ParserUtil.parseShortcutAlias("delete"));
+        // Shortcuts should not contain non-alphanumeric characters
+        assertThrows(ParseException.class, () -> ParserUtil.parseShortcutAlias("n/"));
+    }
+
+    @Test
+    public void parseShortcutAlias_validInput_success() throws Exception {
+        ShortcutAlias expectedShortcutAlias = new ShortcutAlias(VALID_SHORTCUT);
+        assertEquals(expectedShortcutAlias, ParserUtil.parseShortcutAlias(VALID_SHORTCUT));
+        // Should trim leading and trailing whitespaces
+        assertEquals(expectedShortcutAlias, ParserUtil.parseShortcutAlias(" " + VALID_SHORTCUT + " "));
+    }
+
+    @Test
+    public void parseCommandWord_invalidInput_throwsParseException() {
+        // Should match one of the existing default command keywords
+        assertThrows(ParseException.class, () -> ParserUtil.parseCommandWord("del"));
+    }
+
+    @Test
+    public void parseCommandWord_validInput_success() throws Exception {
+        CommandWord expectedShortcutAlias = new CommandWord(VALID_COMMANDWORD);
+        assertEquals(expectedShortcutAlias, ParserUtil.parseCommandWord(VALID_COMMANDWORD));
+        // Should trim leading and trailing whitespaces
+        assertEquals(expectedShortcutAlias, ParserUtil.parseCommandWord(" " + VALID_COMMANDWORD + " "));
+    }
+
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
