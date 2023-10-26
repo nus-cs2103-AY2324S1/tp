@@ -213,7 +213,7 @@ public class Person {
             profession = personToCopy.getProfession();
             income = personToCopy.getIncome();
             details = personToCopy.getDetails();
-            interactions = new HashSet<>(personToCopy.getInteractions());
+            interactions = new ArrayList<>(personToCopy.getInteractions());
         }
 
         /**
