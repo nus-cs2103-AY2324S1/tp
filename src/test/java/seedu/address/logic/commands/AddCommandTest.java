@@ -139,6 +139,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasDate(Person person) {
+            throw new AssertionError("This hasDate method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -201,6 +206,12 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasDate(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameDate);
         }
 
         @Override

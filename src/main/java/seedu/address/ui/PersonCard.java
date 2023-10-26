@@ -1,10 +1,7 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -41,17 +38,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label subject;
     @FXML
+    private Label day;
+    @FXML
     private Label lesson;
     @FXML
     private Label begin;
     @FXML
     private Label end;
     @FXML
-    private FlowPane tags;
-
-    @FXML
-    private Label ispaid;
-
+    private Label paid;
     @FXML
     private Label payRate;
 
@@ -67,10 +62,11 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         subject.setText(person.getSubject().value);
+        day.setText(person.getDay().value.toString());
+        begin.setText(person.getBegin().value);
+        end.setText(person.getEnd().value);
         lesson.setText(person.getLesson().toString());
         payRate.setText("rate: " + person.getPayRate().toString() + "/h");
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        paid.setText(String.valueOf(person.getPaid()));
     }
 }
