@@ -370,7 +370,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1c1. System informs user of the clash in schedules.
 
       Use case resumes at 1.
+  
+- 1d. User inputs begin time which is greater than the end time.
+  - 1d1. System informs that begin time must be smaller than the end time.
 
+    Use case resumes at 1.
+  
 **Use case: UC03 - Delete a tutee**
 
 **MSS**
@@ -383,9 +388,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a1. User tries to edit the schedule of a tutee which clashes with an existing schedule.
-
-    Use case ends.
+- 2a. The tutee that the user is trying to delete does not exist in the list.
+    - 2a1. System informs that user does not exist.
 
 **Use case: UC04 - Editing a tutee**
 
@@ -399,18 +403,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. The tutee that the user is trying to delete does not exist in the list.
-  - 2a1. System informs that user does not exist.
   
-    Use case resumes at 2.
-  - 
-- 2b. The schedule of the edited tutee clashes with an existing schedule.
-  - 2b1. System informs that there is a clash in schedules.
+- 2a. The schedule of the edited tutee clashes with an existing schedule.
+  - 2a1. System informs that there is a clash in schedules.
 
     Use case resumes at 2.
+  
+- 2b. The edited begin time is after than the original end time.
+  - 2b1. System informs that begin time must be smaller than the end time.
 
+    Use case resumes at 2.
+  
+- 2c. The edited end time is before the original begin time.
+  - System informs that begin time must be smaller than the end time.
 
-  Use case ends.
+    Use case resumes at 2.
+  
+- 2d. The edited begin time is after the edited begin time.
+  - 2d1. System informs that begin time must be smaller than the end time.
+    
+    Use case resumes at 2.
 
 *{More to be added}*
 
