@@ -196,6 +196,8 @@ Once the indexes of the `Person` and `Meeting` objects to view (if any) are stor
 
 ### Find meeting feature
 
+#### Behaviour and Implementation
+
 The find meeting command is facilitated by `GeneralMeetingPredicate` that by itself is the combined predicate for all the meeting data fields. It is placed within the Model component and is only dependent on other predicate classes and `Meeting`.
 
 `findm` is supported by 5 sub-predicates that would search their respective fields.
@@ -205,7 +207,7 @@ The find meeting command is facilitated by `GeneralMeetingPredicate` that by its
 - t/TAG_KEYWORDS  —  Finds meetings which set of `Tag` contain any of the keywords given using `TagContainsKeywordsPredicate`.
 - s/START e/END  —  Finds meetings that fall within the range of time given by START & END using `MeetingTimeContainsPredicate`. (Both START & END must come together)
 
-All of these fields are optional and typing `findm` alone will not impose any predicates, except MeetingTimeContainsPredicate which would find all meetings from 1st January of Year 1 A.D. to 31st December of Year 9999 A.D.
+All of these fields are optional and typing `findm` alone will not impose any predicates, except MeetingTimeContainsPredicate which will give the largest `LocalDateTime` range possible.
 
 Given below is an example usage scenario and how the `findm` command behaves at each step.
 
@@ -216,7 +218,7 @@ The existing objects are shown below. Objects not relevant to the behaviour are 
 Step 2. The user executes `findm m/meeting` command to find all meetings that have the keyword `meeting` in their title. This results in the logic component creating an `AddressBookParser` object to make a `FindMeetingCommandParser` object which will in turn create the predicate objects as well as the FindMeetingCommand object. The argument is broken down by `PREFIX` and for each `PREFIX` there is a String array of arguments broken down by whitespace. (s/START & e/END use `LocalDateTime` instead)
 ![FindMeetingSecond](images/FindMeetingSecond.png)
 
-Step 3. The `FindMeetingCommand` will be immediately executed on the `FilteredList<Meeting>` object. The `GeneralMeetingPredicate` will be used on all meetings, meetings which pass all 5 predicates be shown in `MeetingSchedulePanel`. After which `FindMeetingCommand` and the predicate objects will no longer be referenced.
+Step 3. The `FindMeetingCommand` will be immediately executed on the `FilteredList<Meeting>` object. The `GeneralMeetingPredicate` will be used on all meetings, meetings which pass all 5 predicates are shown in `MeetingSchedulePanel`. After which `FindMeetingCommand` and the predicate objects will no longer be referenced.
 ![FindMeetingLast](images/FindMeetingInitial.png)
 
 The following diagrams show the entire sequence flow for `LogicManager#execute()` for FindMeetingCommand.
@@ -224,6 +226,13 @@ The following diagrams show the entire sequence flow for `LogicManager#execute()
 ![FindMeetingSequenceParse](images/FindMeetingSequenceParse.png)
 ![FindMeetingSequenceExecute](images/FindMeetingSequenceExecute.png)
 
+#### Design Considerations and Rationale
+
+1. Given the amount of predicates `FindMeetingCommand` is supposed to use, every predicate needs to be combined in order to maintain good SLAP.
+   - `GeneralMeetingPredicate` is made with the user input KEYWORDS, if there are no inputs for the predicate must return true.
+   - If there are no inputs for s/START and e/END, `FindMeetingCommandParser` will give `MeetingTimeContainsPredicate` both `LocalDateTime.MAX` & `LocaLDateTime.MIN`
+2. The coupling between predicate classes and `Logic` needs to be minimal as `FindMeetingCommandParser` should only be dependent on `GeneralMeetingPredicate` and `MeetingTime`.
+   - `MeetingTime`is needed to check the validity of START and END in order for `parse()` to stop any invalid inputs, it cannot be removed.
 
 ### Add attendee feature
 User can specify a Person to add as an Attendee to a specified Meeting.
