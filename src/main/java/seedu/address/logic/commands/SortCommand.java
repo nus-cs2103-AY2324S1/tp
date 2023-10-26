@@ -15,17 +15,20 @@ import seedu.address.model.person.comparer.SortComparator;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
-    public static final String SORTBY_KEYWORD = "/byname";
+    public static final String SORTBY_KEYWORD1 = "/byaddress";
+    public static final String SORTBY_KEYWORD2 = "/byemail";
+    public static final String SORTBY_KEYWORD3 = "/byname";
+    public static final String SORTBY_KEYWORD4 = "/byphone";
     public static final String REVERSE_KEYWORD = "/reverse";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all persons in UniMate "
             + "by the alphabetical order of their name. \n"
-            + "Example: " + COMMAND_WORD + " " + SORTBY_KEYWORD + " " + REVERSE_KEYWORD;
+            + "Example: " + COMMAND_WORD + " " + SORTBY_KEYWORD1 + " " + REVERSE_KEYWORD;
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons by specified order";
     private Comparator<Person> personComparator;
 
     /**
-     * Constructor for SortCommand, creates a comparator to sort by Person's full name.
+     * Constructor for SortCommand, creates a comparator to sort by the way person specifies
      */
     public SortCommand(ArrayList<SortComparator> sortComparatorList) {
         SortComparator sortComparator = sortComparatorList.get(0);

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import seedu.address.model.person.comparer.SortComparator;
 /**
  * Parses input arguments and creates a new SortCommand object
  */
-public class SortCommandParser {
+public class SortCommandParser implements Parser<SortCommand> {
 
     private static final Prefix PREFIX_DELIMITER = new Prefix("/");
     private static final String SORT_BY_ADDRESS_KEYWORD = "byaddress";
@@ -24,17 +25,19 @@ public class SortCommandParser {
     private static final String SORT_BY_NAME_KEYWORD = "byname";
     private static final String SORT_BY_PHONE_KEYWORD = "byphone";
     private static final String REVERSE_KEYWORD = "reverse";
-    private static final String PARSE_EXCEPTION_MESSAGE = "Sorry! I did not understand that. Please use the "
+    private static final String PARSE_EXCEPTION_MESSAGE = "Invalid syntax for sort. Please use the "
             + "following syntax in []: sort [/byname][/byemail][/byphone][/byaddress] (Optional)[/reverse]";
-
-
-
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
      * and returns an SortCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DELIMITER);
         argMultimap.verifyNoDuplicatePrefixesFor();
