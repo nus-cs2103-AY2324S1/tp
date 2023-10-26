@@ -193,12 +193,12 @@ Once the indexes of the `Person` and `Meeting` objects to view (if any) are stor
    - Storing the `Index` fixes this issue as the `Person` and `Meeting` objects are only forwarded to the Ui after the execution of a command.
    - This does lead to a separate issue where deleting a `Person` or `Meeting` object might lead to the wrong item being displayed due to a change in displayed list index. A simple solution is to simply reset the viewed item in question to nothing until their respective view commands are used again.
 
-
 ### Find meeting feature
 
 The find meeting command is facilitated by `GeneralMeetingPredicate` that by itself is the combined predicate for all the meeting data fields. It is placed within the Model component and is only dependent on other predicate classes and `Meeting`.
 
 `findm` is supported by 5 sub-predicates that would search their respective fields.
+
 - m/TITLE_KEYWORDS  —  Finds meetings which `Title` contain any of the keywords given using `TitleContainsKeywordsPredicate`.
 - a/LOCATION_KEYWORDS  —  Finds meetings which `Location` contain any of the keywords given using `LocationContainsKeywordsPredicate`.
 - n/ATTENDEE_KEYWORDS  —  Finds meetings which set of `Attendee` contain any of the keywords given using `AttendeeContainsKeywordsPredicate`.
@@ -224,13 +224,14 @@ The following diagrams show the entire sequence flow for `LogicManager#execute()
 ![FindMeetingSequenceParse](images/FindMeetingSequenceParse.png)
 ![FindMeetingSequenceExecute](images/FindMeetingSequenceExecute.png)
 
-
 ### Add attendee feature
+
 User can specify a Person to add as an Attendee to a specified Meeting.
 
 To avoid storing an entire `JsonAdaptedPerson` object within the `JsonAdaptedMeeting` every time a `Person` is added to a `Meeting`,
 we created the `Attendee` class to store a unique identifier for the `Person` added.
 As every `Person` has a unique name in the current iteration, `Attendee` is implemented in the following way:
+
 - `Attendee(attendeeName)` -- Initialized with a String obtained from `Person.getName().toString()`
 - `Attendee#getAttendeeName()` -- Returns a String representing the attendee's name
 
@@ -242,7 +243,6 @@ The following sequence diagram shows how the add attendee operation works:
 
 A Person object can be obtained from a Meeting's list of attendees by searching through `UniquePersonList`
 for a `Person` with a name matching `attendeeName`.
-
 
 ### \[Proposed\] Undo/redo feature
 
@@ -327,12 +327,32 @@ _{more aspects and alternatives to be added}_
 
 ### Keeping track of last meeting with contact
 
-Keeping track of the user's last meeting with their contact is facilitated by the addition of a `LastContactedTime` object to `Person`.
+Keeping track of the user's last meeting with their contact is facilitated by the addition of a `LastContactedTime` object to `Person`.  
+Thus, each instance of `Person` will contain an immutable `LastContactedTime` object that stores the user's last meeting with that contact.  
+The following steps shows how `LastContactedTime` is implemented and utilized in the application.
 
+Step 1. The user inputs the `addc` command into the `CommandBox` input field, with the added field `l/[LAST_CONTACTED_TIME]`.
 
-### \[Proposed\] Data archiving
+The following diagram summarizes steps 2 to 6:  
+<img src="images/LastContactedTime1.png" width="1000" />
 
-_{Explain here how the data archiving feature will be implemented}_
+Step 2. Entering a correct command with the `Enter` key then calls `execute` on `LogicManager`.  
+Step 3. `LogicManager` then calls `AddressBookParser#parseCommand(commandText)` on the `commandText` String, which recognizes that it is an `addc` command.  
+Step 4. `AddressBookParser` then calls `AddCommandParser#parse()` on the command arguments.  
+Step 5. `AddCommandParser` then calls `ParserUtil#parseContactTime()` which parses the last contacted time and returns a `LocalDateTime` object called `lastContactedTime`.  
+Step 6. The `lastContactedTime` object is then passed to the `Person` constructor, which creates a new `Person` that calls the `LastContactedTime` constructor with it.
+
+The following diagram summarizes steps 7 and 8:
+<img src="images/LastContactedTime2.png" width="1000" />
+
+Step 7. The completed `Person` is passed to an `AddCommand` constructor which return a new `AddCommand` that can be executed.  
+Step 8. `LogicManager` then executes the `AddCommand` on the application model.  
+Step 9. Futher execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
+
+#### Design Consideration: Updating last meeting with contact
+
+Solution:  
+This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is marked as done, the attendees of the meeting will be updated with their LastContactedTime field updated to the end time of the meeting.
 
 ---
 
@@ -363,7 +383,6 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-
 | Priority | As a …​                                   | I want to …​                    | So that I can…​                       |
 | -------- | ----------------------------------------- | ------------------------------- | ------------------------------------- |
 | `[EPIC]` | agent who has meetings                    | have a meeting schedule         | keep track of them                    |
@@ -387,7 +406,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | agent                                     | remove contacts from meetings   |                                       |
 | `* * *`  | agent                                     | view contacts in meetings       |                                       |
 | `*`      | agent who wants to meet clients regularly | know the last contacted date    | when to touch base with a client      |
-
 
 _{More to be added}_
 
@@ -441,9 +459,9 @@ _{More to be added}_
 1.  User requests to list meetings.
 2.  OutBook shows a list of meetings.
 3.  User requests to view details of a specific meeting.
-4.  OutBook shows the details of the meeting. 
-4.  User requests to remove a specific contact from the meeting.
-5.  OutBook removes the contact from the meeting.
+4.  OutBook shows the details of the meeting.
+5.  User requests to remove a specific contact from the meeting.
+6.  OutBook removes the contact from the meeting.
 
     Use case ends.
 
@@ -475,7 +493,6 @@ _{More to be added}_
 
     Use case resumes at step 3.
 
-
 **Use case: Mark meeting as complete**
 
 **MSS**
@@ -484,7 +501,7 @@ _{More to be added}_
 2. OutBook marks the specific meeting as complete
 3. OutBook updates the last contacted date of attendees to the meeting date
 
-   Use case ends. 
+   Use case ends.
 
 **Extensions**
 
