@@ -56,10 +56,10 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        birthday = source.getBirthday().stringValue;
+        phone = source.hasPhone() ? source.getPhone().toString() : "";
+        email = source.hasEmail() ? source.getEmail().toString() : "";
+        address = source.hasAddress() ? source.getAddress().toString() : "";
+        birthday = source.hasBirthday() ? source.getBirthday().toString() : "";
         groups.addAll(source.getGroups().stream()
                 .map(JsonAdaptedGroup::new)
                 .collect(Collectors.toList()));

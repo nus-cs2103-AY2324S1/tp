@@ -14,9 +14,17 @@ public class Birthday {
     public static final String MESSAGE_CONSTRAINTS =
             "Birthdays should only contain numbers, and it should be in yyyy-MM-dd format";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
-    public static final Birthday NULL_BIRTHDAY = new Birthday("");
-    public final String stringValue;
-    public final LocalDate value;
+    public static final Birthday NULL_BIRTHDAY;
+
+    static {
+        try {
+            NULL_BIRTHDAY = new Birthday("");
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private String stringValue;
+    private LocalDate value;
     /**
      * Constructs a {@code Birthday}.
      *
@@ -83,6 +91,24 @@ public class Birthday {
 
         Birthday otherBirthday = (Birthday) other;
         return value.equals(otherBirthday.value);
+    }
+
+    /**
+     * Factory method for Birthday.
+     * @param birthday the birthday in yyyy-MM-dd format.
+     * @return an instance of Birthday.
+     * @throws IllegalArgumentException if the given birthday does not follow the format.
+     */
+    public static Birthday of(String birthday) throws IllegalArgumentException {
+        if (!isValidBirthday(birthday)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
+
+        if (birthday.isBlank()) {
+            return NULL_BIRTHDAY;
+        }
+
+        return new Birthday(birthday);
     }
 
     /**

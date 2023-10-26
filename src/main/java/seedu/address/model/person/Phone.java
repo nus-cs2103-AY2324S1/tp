@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
@@ -12,8 +14,17 @@ public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
-    public static final Phone NULL_PHONE = new Phone("");
-    public final String value;
+    public static final Phone NULL_PHONE;
+
+    static {
+        try {
+            NULL_PHONE = new Phone("");
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private final String value;
 
     /**
      * Constructs a {@code Phone}.
@@ -54,6 +65,20 @@ public class Phone {
 
         Phone otherPhone = (Phone) other;
         return value.equals(otherPhone.value);
+    }
+
+    /**
+     * Factory method of Phone class.
+     */
+    public static Phone of(String phone) throws ParseException {
+        if (!isValidPhone(phone)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
+        if (phone.isBlank()) {
+            return Phone.NULL_PHONE;
+        } else {
+            return new Phone(phone);
+        }
     }
 
     @Override
