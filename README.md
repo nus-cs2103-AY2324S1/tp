@@ -8,7 +8,7 @@ It is based on the AddressBook-Level3 project created by the [SE-EDU initiative]
 
 > An applicant management program for Hiring Managers to track applicants throughout the hiring process.
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/readme/Ui.png)
 
 Staff-Snap is a desktop app for HR Managers to track staff information, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Staff-Snap can get your staff information management tasks done faster than traditional GUI apps.
 
