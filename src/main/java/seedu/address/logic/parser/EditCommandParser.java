@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -21,7 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Mod;
+import seedu.address.model.course.Course;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,7 +39,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM,
-                        PREFIX_TAG, PREFIX_MOD, PREFIX_FROM, PREFIX_TO, PREFIX_HOUR);
+                        PREFIX_TAG, PREFIX_COURSE, PREFIX_FROM, PREFIX_TO, PREFIX_HOUR);
 
         Index index;
 
@@ -71,8 +71,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setFreeTime(ParserUtil.parseFreeTime(argMultimap.getValue(PREFIX_FROM).get(),
                     argMultimap.getValue(PREFIX_TO).get()));
         }
-        Set<Mod> mods = parseModsForEdit(argMultimap.getAllValues(PREFIX_MOD)).orElse(null);
-        editPersonDescriptor.setMods(mods);
+        Set<Course> courses = parseCoursesForEdit(argMultimap.getAllValues(PREFIX_COURSE)).orElse(null);
+        editPersonDescriptor.setCourses(courses);
 
         if (argMultimap.getValue(PREFIX_HOUR).isPresent()) {
             editPersonDescriptor.setHour(ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).get()));
@@ -101,18 +101,18 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> mods} into a {@code Set<Mod>} if {@code mods} is non-empty.
-     * If {@code mods} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Mod>} containing zero mods.
+     * Parses {@code Collection<String> courses} into a {@code Set<Course>} if {@code courses} is non-empty.
+     * If {@code courses} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Course>} containing zero courses.
      */
-    private Optional<Set<Mod>> parseModsForEdit(Collection<String> mods) throws ParseException {
-        assert mods != null;
+    private Optional<Set<Course>> parseCoursesForEdit(Collection<String> courses) throws ParseException {
+        assert courses != null;
 
-        if (mods.isEmpty()) {
+        if (courses.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> modSet = mods.size() == 1 && mods.contains("") ? Collections.emptySet() : mods;
-        return Optional.of(ParserUtil.parseMods(modSet));
+        Collection<String> courseSet = courses.size() == 1 && courses.contains("") ? Collections.emptySet() : courses;
+        return Optional.of(ParserUtil.parseCourses(courseSet));
     }
 
 }

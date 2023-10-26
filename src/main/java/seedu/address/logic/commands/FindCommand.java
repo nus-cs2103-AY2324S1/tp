@@ -1,18 +1,20 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.FindCommandPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -28,7 +30,7 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: PREFIX KEYWORD [MORE_KEYWORDS]...\n"
             + "Examples: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie" + ", "
-            + COMMAND_WORD + " " + PREFIX_MOD + "cs1231s" + ", "
+            + COMMAND_WORD + " " + PREFIX_COURSE + "cs1231s" + ", "
             + COMMAND_WORD + " " + PREFIX_FROM + "10:00" + " " + PREFIX_TO + "12:00";
 
     private final ArrayList<Predicate<Person>> predicateList = new ArrayList<>();
@@ -42,8 +44,12 @@ public class FindCommand extends Command {
         requireNonNull(model);
         Predicate<Person> combinedPredicate = predicateList.stream().reduce(x -> true, Predicate::and);
         model.updateFilteredPersonList(combinedPredicate);
+        String filtersApplied = "Filters applied: " + predicateList.stream()
+                .map(predicate -> ((FindCommandPredicate) predicate).toFilterString())
+                .collect(Collectors.joining(", "));
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(filtersApplied + "\n"
+                        + Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override

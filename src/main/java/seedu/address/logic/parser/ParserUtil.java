@@ -14,12 +14,13 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.availability.FreeTime;
 import seedu.address.model.availability.TimeInterval;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.UniqueCourseList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Hour;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-import seedu.address.model.tag.Mod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -115,7 +116,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return Tag.of(trimmedTag);
+        return new Tag(trimmedTag);
     }
 
     /**
@@ -183,29 +184,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String mod} into a {@code Mod}.
+     * Parses a {@code String course} into a {@code Course}.
      */
-    public static Mod parseMod(String mod) throws ParseException {
-        requireNonNull(mod);
-        String trimmedMod = mod.trim();
-        if (!Mod.isValidModName(trimmedMod)) {
-            throw new ParseException(Mod.MESSAGE_CONSTRAINTS);
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
+        String trimmedCourse = course.trim().toUpperCase();
+        try {
+            return UniqueCourseList.findByCourseCode(trimmedCourse);
+        } catch (Exception e) {
+            throw new ParseException(e.getMessage()); // If course is not found
         }
-        return Mod.of(trimmedMod);
     }
 
     /**
-     * Parses a {@code String mod} into a {@code Mod}.
+     * Parses a {@code String course} into a {@code Course}.
      *
-     * @throws ParseException if the given {@code mod} is invalid.
+     * @throws ParseException if the given {@code course} is invalid.
      */
-    public static Set<Mod> parseMods(Collection<String> mods) throws ParseException {
-        requireNonNull(mods);
-        final Set<Mod> modSet = new HashSet<>();
-        for (String modName : mods) {
-            modSet.add(parseMod(modName));
+    public static Set<Course> parseCourses(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+        final Set<Course> courseSet = new HashSet<>();
+        for (String courseName : courses) {
+            courseSet.add(parseCourse(courseName));
         }
-        return modSet;
+        return courseSet;
     }
 
     /**

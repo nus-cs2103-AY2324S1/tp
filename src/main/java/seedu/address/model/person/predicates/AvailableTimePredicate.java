@@ -1,7 +1,5 @@
 package seedu.address.model.person.predicates;
 
-import java.util.function.Predicate;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.availability.TimeInterval;
 import seedu.address.model.person.Person;
@@ -9,11 +7,16 @@ import seedu.address.model.person.Person;
 /**
  * Tests that a {@code Person}'s {@code FreeTime} is within the FreeTime that is given.
  */
-public class AvailableTimePredicate implements Predicate<Person> {
+public class AvailableTimePredicate implements FindCommandPredicate {
     private final TimeInterval interval;
 
     public AvailableTimePredicate(TimeInterval interval) {
         this.interval = interval;
+    }
+
+    @Override
+    public String toFilterString() {
+        return "free time: [" + interval.toString() + "]";
     }
 
     @Override
