@@ -27,6 +27,6 @@ Given below are my contributions to the project.
 * **Contributions to the DG**: to be added soon.
 * 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#125](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/125)
+  * PRs reviewed (with non-trivial review comments): [\#125](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/125) [\#133](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/133#pullrequestreview-1699166607)
 
 * **Contributions to team-based tasks**: to be added soon.
