@@ -23,6 +23,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -47,6 +48,8 @@ public class EditCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
+
+
 
     @Test
     public void parse_missingParts_failure() {
@@ -184,5 +187,12 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parser_noFieldsProvided_failure() {
+        String userInput = "edit" + " n/" + VALID_NAME_BOB;
+
+        assertParseFailure(parser, userInput, MESSAGE_NOT_EDITED);
     }
 }
