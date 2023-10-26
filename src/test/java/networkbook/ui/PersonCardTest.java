@@ -5,8 +5,6 @@ import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATION_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_GRADUATION_FULL_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_SPECIALISATION_BOB;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -79,12 +77,12 @@ public class PersonCardTest {
     }
 
     @Test
-    public void constructor_noPriority_notVisible() {
+    public void constructor_noPriority_showsBlank() {
         Person person = new PersonBuilder().withName("Bob").build();
         PersonCard personCard = new PersonCard(person, 1);
         Label priority = personCard.getPriority();
-        assertNull(null, priority.getText());
-        assertFalse(priority.isVisible());
+        assertEquals("Priority: -", priority.getText());
+        assertTrue(priority.isVisible());
     }
 
 }
