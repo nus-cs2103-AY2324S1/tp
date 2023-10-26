@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
+import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.Model;
 
+/**
+ * Represents a command for undoing the previous command in the application.
+ * Extends the abstract class {@link Command}.
+ */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
