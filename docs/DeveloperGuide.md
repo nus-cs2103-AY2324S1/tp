@@ -345,10 +345,14 @@ Step 5: The `UI` renders the `Card` with the relevant fields meant to be written
 
 #### Implementation
 
-This features aims to implement a Spaced Repetition system to schedule cards such that more difficult cards are 
-prioritised for studying, and less difficult cards appear less frequently. Spaced Repetition makes users give more of 
-their attention to more difficult cards, and thus has been shown to greatly improve memory retention when used as a 
-scheduling tool for flashcards.
+This features aim to implement a Spaced Repetition system to schedule cards based on the level of difficulty indicated by the user.
+In combination with the difficulty feature, Spaced Repetition determines when is the next recommended revision date
+for each flashcard, to make user give more of their attention to the difficult ones and practice it earlier, optimising learning.
+
+Using the difficulty system, we can decide a `nextPracticeDate` for the specified card based on the difficulty selected by the user. 
+This helps to remove the need to manually set `nextPracticeDate`, and provides user with a more intuitive way to determine their `nextPracticeDate` based on `difficulty`.
+
+Possible difficulty inputs: `easy`, `medium`, `hard`
 
 Given below is an example usage of the Spaced Repetition Feature.
 
@@ -356,7 +360,7 @@ Step 1: Assuming the user has existing cards in lesson, with their own set of qu
 questions are sorted by a due date `nextPracticeDate`. Cards also have a hidden field known as `lastPracticeDate`.
 
 Step 2: After the user uses the `practise` command and `solve` command, he uses the `set` command to set how difficult 
-he felt the card was when he was practising the card. There are 3 difficulties: `easy`, `medium`, and `hard`.
+he felt the card was when he was practising the card.
 
 Step 3: After setting the difficulty, the system will calculate a new `nextPracticeDate`. 
 Firstly, it applies a multiplier (based on difficulty: 3, 1.5, 0.5 for easy, medium, hard respectively) 
@@ -367,7 +371,12 @@ adds a base duration (of 4 hours) * multiplier to `nextPracticeDate`.
 
 Step 4: The card's `nextPracticeDate` and `lastPracticeDate` is then updated with the new fields. 
 
-Step 5: The card is automatically sorted in the list according to the new `nextPracticeDate`.
+Step 5: The card is automatically sorted in the list according to the new `nextPracticeDate` and the more difficult cards
+will now appear earlier when using the `practice` command without index now.
+
+
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------
