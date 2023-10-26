@@ -55,8 +55,9 @@ public class EditCommandTest {
                 .withTranslatedWord(VALID_TRANSLATION_BOB, VALID_TRANSLATION_LANGUAGE)
                 .build();
 
-        EditCommand editCommand = new EditCommand(indexLastFlashcard,
-                editedFlashcard.getOriginalWord().getWord(), editedFlashcard.getTranslatedWord().getWord());
+        String editWord = editedFlashcard.getOriginalWord().getWord();
+        String editTranslation = editedFlashcard.getTranslatedWord().getWord();
+        EditCommand editCommand = new EditCommand(indexLastFlashcard, editWord, editTranslation);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS,
                 Messages.format(editedFlashcard));
@@ -96,8 +97,9 @@ public class EditCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashCardList().size() + 1);
         FlashCard descriptor = new FlashCardBuilder().withOriginalWord(VALID_ORIGINAL_WORD_BOB,
                 VALID_ORIGINAL_WORD_LANGUAGE).build();
-        EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                descriptor.getOriginalWord().getWord(), descriptor.getTranslatedWord().getWord());
+        String editWord = descriptor.getOriginalWord().getWord();
+        String editTranslation = descriptor.getTranslatedWord().getWord();
+        EditCommand editCommand = new EditCommand(outOfBoundIndex, editWord, editTranslation);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
@@ -115,8 +117,9 @@ public class EditCommandTest {
 
         FlashCard editedFlashcard = new FlashCardBuilder()
                 .withOriginalWord(VALID_ORIGINAL_WORD_BOB, VALID_TRANSLATION_LANGUAGE).build();
-        EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                editedFlashcard.getOriginalWord().getWord(), editedFlashcard.getTranslatedWord().getWord());
+        String editWord = editedFlashcard.getOriginalWord().getWord();
+        String editTranslation = editedFlashcard.getTranslatedWord().getWord();
+        EditCommand editCommand = new EditCommand(outOfBoundIndex, editWord, editTranslation);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
