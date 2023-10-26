@@ -71,7 +71,7 @@ public class DeleteCommandTest {
         Name invalidName = new Name("Does Not Exist");
         DeleteCommand command = new DeleteCommand(null, invalidName, new DeletePersonDescriptor());
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NAME, () -> command.execute(model));
+        assertThrows(CommandException.class, DeleteCommand.MESSAGE_PERSON_NOT_FOUND, () -> command.execute(model));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class DeleteCommandTest {
         Nric invalidNric = new Nric("S000000X");
         DeleteCommand command = new DeleteCommand(invalidNric, null, new DeletePersonDescriptor());
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_NRIC, () -> command.execute(model));
+        assertThrows(CommandException.class, DeleteCommand.MESSAGE_PERSON_NOT_FOUND, () -> command.execute(model));
     }
 
     @Test

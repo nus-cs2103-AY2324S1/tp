@@ -38,6 +38,9 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_FIELD_SUCCESS = "Deleted Person's field: %1$s";
 
+    public static final String MESSAGE_PERSON_NOT_FOUND =
+            "The given combination of Name and NRIC does not match any person in the patients list.";
+
     private final DeletePersonDescriptor deletePersonDescriptor;
 
     private final Nric nric;
@@ -60,15 +63,13 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Optional<Person> findPersonToDelete = null;
+        Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, nric, lastShownList);
 
-        if (name != null) {
-            findPersonToDelete = findPersonToDeleteName(lastShownList);
-        } else if (nric != null) {
-            findPersonToDelete = findPersonToDeleteIc(lastShownList);
+        if (personOptional.isEmpty()) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
-        Person personToDelete = findPersonToDelete.get();
+        Person personToDelete = personOptional.get();
 
         if (deletePersonDescriptor.isAllFalse()) {
             model.deletePerson(personToDelete);
@@ -78,44 +79,6 @@ public class DeleteCommand extends Command {
             model.setPerson(personToDelete, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(editedPerson)));
-        }
-    }
-
-    /**
-     * Finds the person to delete by NRIC.
-     *
-     * @param persons list of persons in the address book.
-     * @return the person to delete.
-     * @throws CommandException if the person is not found.
-     */
-    public Optional<Person> findPersonToDeleteIc(List<Person> persons)
-            throws CommandException {
-        Optional<Person> personbyNric = persons.stream()
-                .filter(person -> person.getNric().equals(nric))
-                .findFirst();
-        if (personbyNric.isPresent()) {
-            return personbyNric;
-        } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_NRIC);
-        }
-    }
-
-    /**
-     * Finds the person to delete by name.
-     *
-     * @param persons list of persons in the address book.
-     * @return the person to delete.
-     * @throws CommandException if the person is not found.
-     */
-    public Optional<Person> findPersonToDeleteName(List<Person> persons)
-            throws CommandException {
-        Optional<Person> personbyName = persons.stream()
-                .filter(person -> person.getName().equals(name))
-                .findFirst();
-        if (personbyName.isPresent()) {
-            return personbyName;
-        } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_NAME);
         }
     }
 
