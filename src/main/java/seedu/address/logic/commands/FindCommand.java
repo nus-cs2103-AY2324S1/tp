@@ -18,8 +18,8 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all contacts whose specified fields (except remarks) contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: n/KEYWORDS p/KEYWORDS e/KEYWORDS s/KEYWORDS t/KEYWORDS\n"
-            + "Example: " + COMMAND_WORD + " n/alice s/Prospective t/Health";
+            + "Parameters: n/KEYWORDS p/KEYWORDS e/KEYWORDS l/LOCALDATETIME s/KEYWORDS t/KEYWORDS\n"
+            + "Example: " + COMMAND_WORD + " n/alice l/10.10.2023 0900 s/Prospective t/Health";
 
     private final GeneralPersonPredicate predicate;
 

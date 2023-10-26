@@ -49,7 +49,7 @@ public class GeneralMeetingPredicate implements Predicate<Meeting> {
         this.locationPredicate = new LocationContainsKeywordsPredicate(Arrays.asList(locationKeyWords));
         this.meetingTimePredicate = new MeetingTimeContainsPredicate(start, end);
         this.attendeePredicate = new AttendeeContainsKeywordsPredicate(Arrays.asList(attendeeKeyWords));
-        this.tagPredicate = new TagContainsKeywordsPredicate(Arrays.asList(tagKeyWords));
+        this.tagPredicate = new MeetingTagContainsKeywordsPredicate(Arrays.asList(tagKeyWords));
     }
 
     @Override

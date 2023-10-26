@@ -16,15 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FindMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.GeneralMeetingPredicate;
-<<<<<<< HEAD
-import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
-import seedu.address.model.meeting.MeetingTagContainsKeywordsPredicate;
 import seedu.address.model.meeting.MeetingTime;
-import seedu.address.model.meeting.MeetingTimeContainsPredicate;
-import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
-=======
-import seedu.address.model.meeting.MeetingTime;
->>>>>>> master
 
 /**
  * Parses input arguments and creates a new FindMeetingCommand object
@@ -67,21 +59,12 @@ public class FindMeetingCommandParser implements Parser<FindMeetingCommand> {
         String[] attendeeKeyWords = argMultimap.getValue(PREFIX_NAME).orElse("").split("\\s+");
         String[] tagKeyWords = argMultimap.getValue(PREFIX_TAG).orElse("").split("\\s+");
 
-
         GeneralMeetingPredicate generalMeetingPredicate = new GeneralMeetingPredicate(
-<<<<<<< HEAD
-                new TitleContainsKeywordsPredicate(Arrays.asList(titleKeyWords)),
-                new LocationContainsKeywordsPredicate(Arrays.asList(locationKeyWords)),
-                new MeetingTimeContainsPredicate(start, end),
-                new AttendeeContainsKeywordsPredicate(Arrays.asList(attendeeKeyWords)),
-                new MeetingTagContainsKeywordsPredicate(Arrays.asList(tagKeyWords)));
-=======
                 titleKeyWords,
                 locationKeyWords,
                 start, end,
                 attendeeKeyWords,
                 tagKeyWords);
->>>>>>> master
 
         logger.info("All Meeting predicates created");
 
