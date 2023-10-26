@@ -176,18 +176,18 @@ Three public methods for `Event` are important for its usage
 
 Below is the class diagram for the `Event` class and it's interactions with the other classes.
 
-<puml src="diagrams/notification-system/ClassDiagram.puml" alt="NotificationClassDiagram"
+<puml src="diagrams/notification-system/ClassDiagram.puml" alt="NotificationClassDiagram" />
 
 The startup sequence for creating initial events is given below as well.
 
-<puml src="diagrams/notification-system/InitEventsSequenceDiagram.puml" alt="InitEventsSequenceDiagram"
+<puml src="diagrams/notification-system/InitEventsSequenceDiagram.puml" alt="InitEventsSequenceDiagram" />
 
 Based on the `Event` instances present in the data model, you can call `Model#getLatestNotifications(LocalDateTime)`, passing in the current datetime, in order to get a list of `Notification` instances representing notifications that should be displayed to the user.
 The UI system will make use of this API to check if any notifications should be displayed to the user at startup.
 
 The flow for the startup notifications is described by the following sequence diagram.
 
-<puml src="diagrams/notification-system/StartupNotificationsSequenceDiagram.puml" alt="StartupNotificationsSequenceDiagram"
+<puml src="diagrams/notification-system/StartupNotificationsSequenceDiagram.puml" alt="StartupNotificationsSequenceDiagram" />
 
 #### Design considerations:
 

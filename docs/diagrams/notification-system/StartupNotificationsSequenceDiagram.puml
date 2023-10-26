@@ -2,21 +2,21 @@
 !include ../style.puml
 skinparam ArrowFontStyle plain
 
-participant ":UiManager" as UiManager
+participant ":UiManager" as UiManager UI_COLOR
 [-> UiManager : start()
 activate UiManager
 
-participant ":MainWindow" as MainWindow
+participant ":MainWindow" as MainWindow LOGIC_COLOR
 UiManager -> MainWindow : getStartupNotifications()
 activate MainWindow
 
-participant ":LogicManager" as LogicManager
+participant ":LogicManager" as LogicManager LOGIC_COLOR
 MainWindow -> LogicManager : getLatestNotifications(currentTime)
 activate LogicManager
 LogicManager --> MainWindow : notifications
 deactivate LogicManager
 
-participant ":NotificationWindow" as NotificationWindow
+participant ":NotificationWindow" as NotificationWindow UI_COLOR
 
 loop until end iterating notifications
 create NotificationWindow
