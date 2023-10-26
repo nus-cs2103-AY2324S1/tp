@@ -39,13 +39,22 @@ public class Time {
     }
 
     /**
+     * Convert either start or end time of timeInterval into an int
+     * Use dayOfWeek enum from 1-7 representing Mon-Sun
+      * @return Int representing duration of interval in minute
+     */
+    public int getDurationInMin() {
+        int durationInMin = this.day.getValue() * 24 * 60 + this.hour.getHour() * 60 + this.hour.getMinute();
+        return durationInMin;
+    }
+
+    /**
      * Compares this with another time object.
      * @param otherTime The other time object.
      * @return Returns an int to indicate if it less than/more than/equal.
      */
     public int compareTo(Time otherTime) {
         requireNonNull(otherTime);
-        System.out.println(this.day.compareTo(otherTime.day));
         return this.day.compareTo(otherTime.day) == 0 ? this.hour.compareTo(otherTime.hour)
             : this.day.compareTo(otherTime.day);
     }
@@ -68,17 +77,17 @@ public class Time {
     }
 
     public static DayOfWeek decodeDay(String day) {
-        if (DayOfWeek.MONDAY.toString().toLowerCase().contains(day)) {
+        if (DayOfWeek.MONDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.MONDAY;
-        } else if (DayOfWeek.TUESDAY.toString().toLowerCase().contains(day)) {
+        } else if (DayOfWeek.TUESDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.TUESDAY;
-        } else if (DayOfWeek.WEDNESDAY.toString().toLowerCase().contains(day)) {
+        } else if (DayOfWeek.WEDNESDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.WEDNESDAY;
-        } else if (DayOfWeek.THURSDAY.toString().toLowerCase().contains(day)) {
+        } else if (DayOfWeek.THURSDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.THURSDAY;
-        } else if (DayOfWeek.FRIDAY.toString().toLowerCase().contains(day)) {
+        } else if (DayOfWeek.FRIDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.FRIDAY;
-        } else if (DayOfWeek.SATURDAY.toString().toLowerCase().contains(day)) {
+        } else if (DayOfWeek.SATURDAY.toString().toLowerCase().contains(day.toLowerCase())) {
             return DayOfWeek.SATURDAY;
         } else {
             return DayOfWeek.SUNDAY;

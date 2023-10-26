@@ -20,6 +20,14 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_NO_PERSON_WITH_NAME_FOUND = "No person with such name found.\n"
+            + "Please provide the person's full name as in the existing contactlist.";
+    public static final java.lang.String MESSAGE_DUPLICATE_PERSON_IN_GROUP =
+            "Error, invalid input entered, unable to put the person into group";
+    public static final String MESSAGE_NO_GROUP_WITH_NAME_FOUND = "No group with such name found.\n"
+            + "Please provide the group's full name as in the existing contactlist.";
+
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.

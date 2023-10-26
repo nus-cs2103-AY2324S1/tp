@@ -2,10 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.FreeTime;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 
@@ -27,7 +24,7 @@ public class ListTimePersonCommand extends ListTimeCommand{
         if (!model.hasPerson(personName)) {
             throw new CommandException(MESSAGE_NO_PERSON_WITH_NAME_FOUND);
         }
-        FreeTime freetime = model.getFreeTimeFromPerson(personName);
+        TimeIntervalList freetime = model.getTimeFromPerson(personName);
         return new CommandResult(String.format(MESSAGE_LISTTIME_PERSON_SUCCESS, personName.fullName) + freetime);
     }
 

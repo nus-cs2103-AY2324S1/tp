@@ -30,18 +30,18 @@ public class AddTimeCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Free time added to: %1$s";
 
 
-    private final ArrayList<TimeInterval> toAddFreeTime;
+    private final ArrayList<TimeInterval> toAddFreeTimes;
     private final Name toAddPerson;
 
     /**
      * AddTimeCommand constructor.
      * @param toAddPerson The person object to be added to.
-     * @param toAddFreeTime ArrayList of time intervals to be added to person.
+     * @param toAddFreeTimes ArrayList of time intervals to be added to person.
      */
-    public AddTimeCommand(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) {
+    public AddTimeCommand(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTimes) {
         requireNonNull(toAddPerson);
-        requireNonNull(toAddFreeTime);
-        this.toAddFreeTime = toAddFreeTime;
+        requireNonNull(toAddFreeTimes);
+        this.toAddFreeTimes = toAddFreeTimes;
         this.toAddPerson = toAddPerson;
     }
 
@@ -49,7 +49,7 @@ public class AddTimeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (model.hasPerson(toAddPerson)) {
-            model.addFreeTimeToPerson(toAddPerson, toAddFreeTime);
+            model.addTimeToPerson(toAddPerson, toAddFreeTimes);
         } else {
             throw new CommandException("Person does not exists");
         }

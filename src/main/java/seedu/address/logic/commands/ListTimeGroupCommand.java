@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.FreeTime;
+import seedu.address.model.TimeIntervalList;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
@@ -23,8 +23,8 @@ public class ListTimeGroupCommand extends ListTimeCommand{
         if (!model.hasGroup(group)) {
             throw new CommandException(MESSAGE_NO_GROUP_WITH_NAME_FOUND);
         }
-        FreeTime freeTime = model.getFreeTimeFromGroup(group);
-        return new CommandResult(String.format(MESSAGE_LISTTIME_GROUP_SUCCESS, group.getGroupName()) + freeTime);
+        TimeIntervalList timeIntervalList = model.getTimeFromGroup(group);
+        return new CommandResult(String.format(MESSAGE_LISTTIME_GROUP_SUCCESS, group.getGroupName()) + timeIntervalList);
     }
 
     @Override

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UngroupPersonCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -89,7 +90,8 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        boolean isRemoved = internalList.remove(toRemove);
+        if (!isRemoved) {
             throw new PersonNotFoundException();
         }
     }
@@ -169,6 +171,6 @@ public class UniquePersonList implements Iterable<Person> {
                 return person;
             }
         }
-        throw new CommandException(UngroupPersonCommand.MESSAGE_NO_PERSON_WITH_NAME_FOUND);
+        throw new CommandException(Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND);
     }
 }

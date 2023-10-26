@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -140,6 +141,7 @@ public class ModelManager implements Model {
         return addressBook.hasGroup(group);
     }
 
+
     /**
      * Adds a group to the address book.
      * The group must not already exist in the address book.
@@ -155,8 +157,10 @@ public class ModelManager implements Model {
     public Group deleteGroup(String groupName) throws CommandException {
         Group group = addressBook.getGroup(groupName);
         addressBook.removeGroup(group);
+        forceUpdateList();
         return group;
     }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -194,21 +198,6 @@ public class ModelManager implements Model {
         filteredGroups.setPredicate(predicate);
     }
 
-    // in GroupPersonCommand call model.groupPerson(person, group) note that these are simply strings!
-    // groupPerson(person, group)
-    // calls addressbook.groupPerson(person, group)
-    // addressbook -> personlist grouplist
-    // method in addressbook referencing method in personList groupList (oop) set person to group and group to person
-    // get
-    // get
-    // person.setgroup(group)
-    // person already in group throw exception also
-    // group.setperson(person)
-    // group already contain person
-    // exactPersonExist exactGroupExist
-    // better to retrieve both person and group object first then set else error prone
-    // for loop all things once name exact match for person / group
-    // this methods throws command exception, yes it works
     @Override
     public Pair<Person, Group> groupPerson(String personName, String groupName) throws CommandException {
         // both throw exception if not exists exact match
@@ -237,26 +226,54 @@ public class ModelManager implements Model {
         // both throw exception if not exists exact match
         Person person = addressBook.getPerson(personName);
         Group group = addressBook.getGroup(groupName);
+        person.removeGroup(group)
+        group.removePeron(person)
         this.unassignGroup(person, group);
+        //does not show
+//        System.out.println("hi");
         forceUpdateList();
         Pair<Person, Group> output = new Pair<>(person, group);
         return output;
     }
 
     @Override
-    public void addFreeTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+    public void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAddPerson);
         Person person = addressBook.getPerson(toAddPerson.fullName);
-        person.addFreeTime(toAddFreeTime);
+        try {
+            person.addFreeTime(toAddTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
         forceUpdateList();
     }
 
     @Override
-    public void deleteFreeTimeFromPerson(Name personName,
-                                           ArrayList<TimeInterval> toDeleteFreeTime) throws CommandException {
+    public void deleteTimeFromPerson(Name personName,
+                                           ArrayList<TimeInterval> toDeleteTime) throws CommandException {
         requireNonNull(personName);
         Person person = addressBook.getPerson(personName.fullName);
-        person.deleteFreeTime(toDeleteFreeTime);
+        try {
+            person.deleteFreeTime(toDeleteTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
+        forceUpdateList();
+    }
+
+    @Override
+    public void deleteTimeFromGroup(Group group,
+                                     ArrayList<TimeInterval> toDeleteTime) throws CommandException {
+        requireNonNull(group);
+        Group groupToDeleteTime = addressBook.getGroup(group.getGroupName());
+        try {
+            groupToDeleteTime.deleteTime(toDeleteTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
         forceUpdateList();
     }
 
@@ -278,23 +295,28 @@ public class ModelManager implements Model {
         return group;
     }
 
-    public FreeTime getFreeTimeFromPerson(Name personName) throws CommandException {
+    public TimeIntervalList getTimeFromPerson(Name personName) throws CommandException {
         requireNonNull(personName);
         Person person = addressBook.getPerson(personName.toString());
-        return person.getFreeTime();
+        return person.getTime();
     }
 
-    public void addFreeTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddFreeTime) throws CommandException {
+    public void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException {
         requireNonNull(toAdd);
         Group groupToAdd = addressBook.getGroup(toAdd.getGroupName());
-        groupToAdd.addFreeTime(toAddFreeTime);
+        try {
+            groupToAdd.addTime(toAddTime);
+        } catch (CommandException e) {
+            forceUpdateList();
+            throw new CommandException(e.getMessage());
+        }
         forceUpdateList();
     }
 
-    public FreeTime getFreeTimeFromGroup(Group group) throws CommandException {
+    public TimeIntervalList getTimeFromGroup(Group group) throws CommandException {
         requireNonNull(group);
         Group toAdd = addressBook.getGroup(group.getGroupName());
-        return toAdd.getFreeTime();
+        return toAdd.getTime();
     }
 
 

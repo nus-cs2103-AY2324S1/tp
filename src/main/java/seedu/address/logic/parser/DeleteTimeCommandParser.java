@@ -25,28 +25,32 @@ public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand>{
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUPTAG, PREFIX_FREETIME, PREFIX_ENDINTERVAL);
 
         //find a way to separate error msg when ";" is missing
-        if ((!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FREETIME)
-                && !arePrefixesPresent(argMultimap, PREFIX_GROUPTAG, PREFIX_FREETIME))
+        if (!arePrefixesPresent(argMultimap, PREFIX_FREETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));
         }
 
-        if (arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_FREETIME)) {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+        try {
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GROUPTAG);
+        } catch (ParseException e) {
+            throw new ParseException(String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteCommand.MESSAGE_USAGE));
+        }
+
+        TimeInterval firstInterval = ParserUtil.parseEachInterval(argMultimap.getValue(PREFIX_FREETIME).get());
+        ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_ENDINTERVAL));
+        timeInterval.add(0, firstInterval);
+
+        if ((arePrefixesPresent(argMultimap, PREFIX_NAME) && arePrefixesPresent(argMultimap, PREFIX_GROUPTAG))
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(DeleteCommand.MESSAGE_TWO_PARAMETERS, DeleteCommand.MESSAGE_USAGE));
+        } else if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            TimeInterval firstInterval = ParserUtil.parseEachInterval(argMultimap.getValue(PREFIX_FREETIME).get());
-            ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_ENDINTERVAL));
-            timeInterval.add(0, firstInterval);
-
-            return new DeleteTimeCommand(name, timeInterval);
-        } else {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUPTAG);
+            return new DeletePersonTimeCommand(name, timeInterval);
+        } else if (arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)) {
             Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUPTAG).get());
-            TimeInterval firstInterval = ParserUtil.parseEachInterval(argMultimap.getValue(PREFIX_FREETIME).get());
-            ArrayList<TimeInterval> timeInterval = ParserUtil.parseInterval(argMultimap.getAllValues(PREFIX_ENDINTERVAL));
-            timeInterval.add(0, firstInterval);
-
-            return new DeleteTimeCommand(group, timeInterval);
+            return new DeleteGroupTimeCommand(group, timeInterval);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
     }
 
