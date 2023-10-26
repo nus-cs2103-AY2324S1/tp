@@ -2,7 +2,7 @@ package seedu.address.model.band;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalBands.ACE;
+import static seedu.address.testutil.typicalentities.TypicalBands.ACE;
 
 import org.junit.jupiter.api.Test;
 
