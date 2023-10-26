@@ -151,8 +151,7 @@ public class Date {
                 && gender.equals(otherDate.gender)
                 && height.equals(otherDate.height)
                 && income.equals(otherDate.income)
-                && horoscope.equals(otherDate.horoscope)
-                && star.equals(otherDate.star);
+                && horoscope.equals(otherDate.horoscope);
     }
 
     @Override
