@@ -38,8 +38,8 @@ public class EmailContainsKeywordsPredicate implements Predicate<Applicant> {
             return false;
         }
 
-        EmailContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (EmailContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        EmailContainsKeywordsPredicate otherEmailContainsKeywordsPredicate = (EmailContainsKeywordsPredicate) other;
+        return keywords.equals(otherEmailContainsKeywordsPredicate.keywords);
     }
 
     @Override
