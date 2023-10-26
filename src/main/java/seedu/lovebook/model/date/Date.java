@@ -156,7 +156,7 @@ public class Date {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing :your own
         return Objects.hash(name, age, gender, height, income, horoscope, avatar);
     }
 
