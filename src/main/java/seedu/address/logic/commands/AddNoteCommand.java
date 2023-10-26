@@ -6,6 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.Note;
+import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Person;
 
 /**
@@ -35,7 +36,7 @@ public class AddNoteCommand extends AddCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person person = model.findPersonByUserFriendlyId(this.contactId);
+        Person person = model.findPersonByUserFriendlyId(ContactID.fromInt(this.contactId));
         if (person == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND + this.contactId);
         }

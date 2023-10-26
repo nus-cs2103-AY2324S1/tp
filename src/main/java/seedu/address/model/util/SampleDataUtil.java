@@ -28,10 +28,10 @@ public class SampleDataUtil {
         sampleNotes.add(new Note("Hello", "Sample content"));
 
         ArrayList<Event> sampleEvents = new ArrayList<Event>();
-        sampleEvents.add(new Event("Sample event", LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                LocalDateTime.now().plusHours(1)
-                        .format(DateTimeFormatter.ofPattern("HH:mm:ss")), "Some Location",
+        sampleEvents.add(new Event("Sample event",
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                LocalDateTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                "Some Location",
                 "Some Information"));
 
         return new Person[] {

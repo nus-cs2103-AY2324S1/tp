@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -165,7 +166,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public Person findPersonByUserFriendlyId(int id) {
+        public Person findPersonByUserFriendlyId(ContactID id) {
             throw new AssertionError("This method should not be called.");
         }
     }

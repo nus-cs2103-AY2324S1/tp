@@ -10,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.ContactID;
 
 public class ListEventCommandTest {
     private static final Event VALID_EVENT_0 = new Event("Have a meeting", "02:00", "04:00",
@@ -28,9 +29,9 @@ public class ListEventCommandTest {
 
     @Test
     public void execute_correctCommand_success() {
-        model.findPersonByUserFriendlyId(1).addEvent(VALID_EVENT_0);
-        model.findPersonByUserFriendlyId(2).addEvent(VALID_EVENT_1);
-        model.findPersonByUserFriendlyId(2).addEvent(VALID_EVENT_2);
+        model.findPersonByUserFriendlyId(ContactID.fromInt(1)).addEvent(VALID_EVENT_0);
+        model.findPersonByUserFriendlyId(ContactID.fromInt(2)).addEvent(VALID_EVENT_1);
+        model.findPersonByUserFriendlyId(ContactID.fromInt(2)).addEvent(VALID_EVENT_2);
         assertCommandSuccess(() -> new ListEventCommand().execute(model));
     }
 

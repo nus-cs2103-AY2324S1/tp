@@ -11,6 +11,10 @@ import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventInformation;
+import seedu.address.model.event.EventLocation;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
 
 public class AddCommandParserTest {
 
@@ -34,6 +38,25 @@ public class AddCommandParserTest {
         assertParseFailedWithError(() -> parser.parse(" "
                 + AddEventCommand.SECONDARY_COMMAND_WORD + " -...."),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_emptyStringArguments_fails() {
+        assertParseFailedWithError(() -> parser.parse(" "
+                        + AddEventCommand.SECONDARY_COMMAND_WORD + " -id 1 -en -st 12:00"),
+                EventName.MESSAGE_CONSTRAINTS);
+        assertParseFailedWithError(() -> parser.parse(" "
+                        + AddEventCommand.SECONDARY_COMMAND_WORD + " -id 1 -en Sample -st"),
+                EventTime.MESSAGE_NON_EMPTY);
+        assertParseFailedWithError(() -> parser.parse(" "
+                        + AddEventCommand.SECONDARY_COMMAND_WORD + " -id 1 -en Sample -st 12:00 -et"),
+                EventTime.MESSAGE_NON_EMPTY);
+        assertParseFailedWithError(() -> parser.parse(" "
+                        + AddEventCommand.SECONDARY_COMMAND_WORD + " -id 1 -en Sample -st 12:00 -loc"),
+                EventLocation.MESSAGE_CONSTRAINTS);
+        assertParseFailedWithError(() -> parser.parse(" "
+                        + AddEventCommand.SECONDARY_COMMAND_WORD + " -id 1 -en Sample -st 12:00 -info"),
+                EventInformation.MESSAGE_CONSTRAINTS);
     }
 
     private void assertParseSuccessWithCommand(ThrowingSupplier<Command> function, String commandClassName) {
