@@ -160,7 +160,7 @@ Two types of list commands, `list students` and `list attendance`, have been imp
 `list attendance` allows users to view a summary of the attendances for each week.
 
 #### Implementation
-Both list commands are parsed with `ListCommandParser`. If parsed successfully, it returns either 
+Both list commands are parsed with `ListCommandParser`. If parsed successfully, it returns either
 a `ListStudentsCommand` or `ListAttendanceCommand`.
 
 The following is a class diagram depicting `ListCommand`, `ListStudentsCommand` and `ListAttendanceCommand`:
@@ -345,16 +345,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User creates a new contact. 
+1. User creates a new contact.
 
     Use case ends.
-    
 
 **Extensions**
 
-1a. User edits the contact name. 
+1a. User edits the contact name.
 
-1b. User edits the Module Code associated with the contact. 
+1b. User edits the Module Code associated with the contact.
 
 1c. User edits the Tutorial Group Number associated with the contact.
 
@@ -365,8 +364,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to view a summary of attendance records and enters a tutorial group ID.
-2.  TAvigator shows a summary of attendance records for the corresponding tutorial group.
+1.  User requests to view a summary of attendance records and enters a week and a tutorial group ID.
+2.  TAvigator shows a summary of attendance records for the corresponding week and tutorial group.
 
     Use case ends.
 
@@ -380,7 +379,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 2b. User leaves the tutorial group ID blank.
-    * 2b1. TAvigator shows a summary of all attendance records.
+    * 2b1. TAvigator shows a summary of all attendance records for the week and the contact list of absentees.
+
+      Use case ends.
+
+
+* 2c. User leaves the week blank.
+    * 2c1. TAvigator shows an error message.
 
       Use case ends.
 
@@ -388,8 +393,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to view a list of students and enters a tutorial group ID.
-2.  TAvigator shows a list of students in the corresponding tutorial group.
+1.  User requests to view a list of students.
+2.  TAvigator shows a list of all students.
 
     Use case ends.
 
@@ -479,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. TAvigator removes all applied filters.
 
       Use case ends.
-      
+
 **Use case: UC07 - Search For Contacts via Student Name or ID**
 
 **MSS**

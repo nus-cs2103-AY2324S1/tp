@@ -5,9 +5,9 @@ title: Anthony's Project Portfolio Page
 
 ### Project: TAvigator
 
-TAs sometimes have many tutorial groups to manage, it could be chaotic to manage the attendance and work submission of 
-each individual student. TAvigator aims to provide a one-stop platform for National University of Singapore 
-Computer Science modules’ Teaching Assistants (TAs) to keep track of the work submission and attendance of each student 
+TAs sometimes have many tutorial groups to manage, it could be chaotic to manage the attendance and work submission of
+each individual student. TAvigator aims to provide a one-stop platform for National University of Singapore
+Computer Science modules’ Teaching Assistants (TAs) to keep track of the work submission and attendance of each student
 via a contact management application.
 
 Given below are my contributions to the project.

@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-TAvigator is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still 
-having the benefits of a Graphical User Interface (GUI). If you can type fast, TAvigator can get your contact management 
+TAvigator is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still
+having the benefits of a Graphical User Interface (GUI). If you can type fast, TAvigator can get your contact management
 tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -89,7 +89,7 @@ Examples:
 
 ### Marking attendance of student: `mark`
 
-Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER 
+Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER
 [r/REASON_OF_ABSENCE]`
 * Marks the attendance of one or more student corresponding to the `STUDENT_NAME` or `STUDENT_ID`.
 * To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
