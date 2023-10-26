@@ -24,7 +24,7 @@ import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
 import seedu.lovebook.model.UserPrefs;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 import seedu.lovebook.testutil.EditPersonDescriptorBuilder;
 import seedu.lovebook.testutil.PersonBuilder;
 
@@ -38,6 +38,7 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Date editedDate = new PersonBuilder().build();
+        System.out.println(editedDate);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedDate).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -54,6 +55,7 @@ public class EditCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Date lastDate = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        System.out.println(lastDate);
 
         PersonBuilder personInList = new PersonBuilder(lastDate);
         Date editedDate = personInList.withName(VALID_NAME_BOB).withAge(VALID_AGE_BOB).build();

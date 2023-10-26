@@ -65,11 +65,8 @@ public class MainApp extends Application {
         LoveBookStorage loveBookStorage = new JsonLoveBookStorage(userPrefs.getLoveBookFilePath());
         DatePrefsStorage datePrefsStorage = new JsonLoveBookDatePrefs(userPrefs.getDatePrefsFilePath());
         storage = new StorageManager(loveBookStorage, userPrefsStorage, datePrefsStorage);
-
         model = initModelManager(storage, userPrefs);
-
         logic = new LogicManager(model, storage);
-
         ui = new UiManager(logic);
     }
 
@@ -92,6 +89,7 @@ public class MainApp extends Application {
                         + " populated with a sample LoveBook.");
             }
             initialData = loveBookOptional.orElseGet(SampleDataUtil::getSampleLoveBook);
+            System.out.println(initialData);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getLoveBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty LoveBook.");

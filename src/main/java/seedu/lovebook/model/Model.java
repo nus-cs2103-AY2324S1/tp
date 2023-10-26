@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.lovebook.commons.core.GuiSettings;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * The API of the Model component.

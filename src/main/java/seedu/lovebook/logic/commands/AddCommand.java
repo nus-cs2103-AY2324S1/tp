@@ -12,7 +12,7 @@ import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * Adds a date to the lovebook book.
@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_AGE + "21 "
             + PREFIX_GENDER + "M "
-            + PREFIX_HEIGHT + "23124 "
+            + PREFIX_HEIGHT + "123 "
             + PREFIX_INCOME + "3000 "
             + PREFIX_HOROSCOPE + "Libra";
 

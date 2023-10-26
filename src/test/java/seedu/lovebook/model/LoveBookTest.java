@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.exceptions.DuplicatePersonException;
+import seedu.lovebook.model.date.Date;
+import seedu.lovebook.model.date.exceptions.DuplicatePersonException;
 import seedu.lovebook.testutil.PersonBuilder;
 
 public class LoveBookTest {

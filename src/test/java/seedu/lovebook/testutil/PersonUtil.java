@@ -9,7 +9,7 @@ import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.lovebook.logic.commands.AddCommand;
 import seedu.lovebook.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * A utility class for Date.

@@ -1,11 +1,11 @@
 package seedu.lovebook.testutil;
 
 import seedu.lovebook.logic.commands.SetPrefCommand;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Income;
-import seedu.lovebook.model.person.horoscope.Horoscope;
+import seedu.lovebook.model.date.Age;
+import seedu.lovebook.model.date.Gender;
+import seedu.lovebook.model.date.Height;
+import seedu.lovebook.model.date.Income;
+import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
  * A utility class to help with building preference objects.

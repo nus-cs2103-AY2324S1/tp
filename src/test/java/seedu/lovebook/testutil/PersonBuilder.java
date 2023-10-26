@@ -1,12 +1,14 @@
 package seedu.lovebook.testutil;
 
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Income;
-import seedu.lovebook.model.person.Name;
-import seedu.lovebook.model.person.horoscope.Horoscope;
+import seedu.lovebook.model.date.Age;
+import seedu.lovebook.model.date.Avatar;
+import seedu.lovebook.model.date.Date;
+import seedu.lovebook.model.date.Gender;
+import seedu.lovebook.model.date.Height;
+import seedu.lovebook.model.date.Income;
+import seedu.lovebook.model.date.Name;
+import seedu.lovebook.model.date.Star;
+import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
  * A utility class to help with building Date objects.
@@ -19,6 +21,8 @@ public class PersonBuilder {
     public static final String DEFAULT_HEIGHT = "123";
     public static final String DEFAULT_INCOME = "3000";
     public static final String DEFAULT_HOROSCOPE = "TAURUS";
+    public static final String DEFAULT_STAR = "false";
+    public static final String DEFAULT_AVATAR = "4";
 
     private Name name;
     private Age age;
@@ -26,6 +30,8 @@ public class PersonBuilder {
     private Height height;
     private Income income;
     private Horoscope horoscope;
+    private Avatar avatar;
+    private Star star;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -49,6 +55,8 @@ public class PersonBuilder {
         height = dateToCopy.getHeight();
         income = dateToCopy.getIncome();
         horoscope = dateToCopy.getHoroscope();
+        star = dateToCopy.getStar();
+        avatar = dateToCopy.getAvatar();
     }
 
     /**
@@ -99,8 +107,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Star} of the {@code Date} that we are building.
+     */
+    public PersonBuilder withStar(String star) {
+        this.star = new Star(star);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Avatar} of the {@code Date} that we are building.
+     */
+    public PersonBuilder withAvatar(String avatar) {
+        this.avatar = new Avatar(avatar);
+        return this;
+    }
+
     public Date build() {
-        return new Date(name, age, gender, height, income, horoscope);
+        return new Date(name, age, gender, height, income, horoscope, avatar);
     }
 
 }

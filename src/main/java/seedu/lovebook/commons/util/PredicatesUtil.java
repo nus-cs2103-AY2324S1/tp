@@ -3,8 +3,8 @@ package seedu.lovebook.commons.util;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.MetricContainsKeywordPredicate;
+import seedu.lovebook.model.date.Date;
+import seedu.lovebook.model.date.MetricContainsKeywordPredicate;
 
 /**
  * A class that takes in an arraylist of predicates and package it into a predicate

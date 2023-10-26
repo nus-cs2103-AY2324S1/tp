@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.lovebook.commons.core.LogsCenter;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 
 /**
  * Panel containing the list of dates.
@@ -27,21 +27,21 @@ public class PersonListPanel extends UiPart<Region> {
         super(FXML);
         personListView.setItems(dateList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setSelectionModel(new NoSelectionModel<Date>());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Date} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Date} using a {@code DateCard}.
      */
     class PersonListViewCell extends ListCell<Date> {
         @Override
         protected void updateItem(Date date, boolean empty) {
             super.updateItem(date, empty);
-
             if (empty || date == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(date, getIndex() + 1).getRoot());
+                setGraphic(new DateCard(date, getIndex() + 1).getRoot());
             }
         }
     }

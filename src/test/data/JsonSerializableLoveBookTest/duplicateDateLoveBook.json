@@ -5,13 +5,17 @@
     "gender": "F",
     "height": "123",
     "income": "2000",
-    "horoscope": "TAURUS"
+    "horoscope": "TAURUS",
+    "star": "false",
+    "avatar": "4"
   }, {
     "name": "Alice Pauline",
     "age": "31",
     "gender": "F",
     "height": "123",
     "income": "2000",
-    "horoscope": "TAURUS"
+    "horoscope": "TAURUS",
+    "star": "false",
+    "avatar": "4"
   } ]
 }

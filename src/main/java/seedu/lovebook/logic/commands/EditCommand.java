@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.lovebook.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -18,13 +19,14 @@ import seedu.lovebook.commons.util.ToStringBuilder;
 import seedu.lovebook.logic.Messages;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
 import seedu.lovebook.model.Model;
-import seedu.lovebook.model.person.Age;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.Gender;
-import seedu.lovebook.model.person.Height;
-import seedu.lovebook.model.person.Income;
-import seedu.lovebook.model.person.Name;
-import seedu.lovebook.model.person.horoscope.Horoscope;
+import seedu.lovebook.model.date.Age;
+import seedu.lovebook.model.date.Avatar;
+import seedu.lovebook.model.date.Date;
+import seedu.lovebook.model.date.Gender;
+import seedu.lovebook.model.date.Height;
+import seedu.lovebook.model.date.Income;
+import seedu.lovebook.model.date.Name;
+import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
  * Edits the details of an existing date in the LoveBook.
@@ -42,9 +44,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
             + "[" + PREFIX_INCOME + "INCOME] "
+            + "[" + PREFIX_HOROSCOPE + "HOROSCOPE] "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_AGE + "91234567 "
-            + PREFIX_GENDER + "johndoe@example.com";
+            + PREFIX_AGE + "24 "
+            + PREFIX_GENDER + "M "
+            + PREFIX_HEIGHT + "180 "
+            + PREFIX_INCOME + "3000 "
+            + PREFIX_HOROSCOPE + "SCORPIO ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Date: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -100,7 +106,8 @@ public class EditCommand extends Command {
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(dateToEdit.getIncome());
         Horoscope updatedHoroscope = editPersonDescriptor.getHoroscope().orElse(dateToEdit.getHoroscope());
 
-        return new Date(updatedName, updatedAge, updatedGender, updatedHeight, updatedIncome, updatedHoroscope);
+        return new Date(updatedName, updatedAge, updatedGender, updatedHeight, updatedIncome, updatedHoroscope,
+                dateToEdit.getStar(), dateToEdit.getAvatar());
     }
 
     @Override
@@ -138,6 +145,7 @@ public class EditCommand extends Command {
         private Height height;
         private Income income;
         private Horoscope horoscope;
+        private Avatar avatar;
 
         public EditPersonDescriptor() {}
 
@@ -152,6 +160,7 @@ public class EditCommand extends Command {
             setHeight(toCopy.height);
             setIncome(toCopy.income);
             setHoroscope(toCopy.horoscope);
+            setAvatar(toCopy.avatar);
         }
 
         /**
@@ -206,6 +215,13 @@ public class EditCommand extends Command {
         }
         public Optional<Horoscope> getHoroscope() {
             return Optional.ofNullable(horoscope);
+        }
+
+        public void setAvatar(Avatar avatar) {
+            this.avatar = avatar;
+        }
+        public Optional<Avatar> getAvatar() {
+            return Optional.ofNullable(avatar);
         }
 
         @Override

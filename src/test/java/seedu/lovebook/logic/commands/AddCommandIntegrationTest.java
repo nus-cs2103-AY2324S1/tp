@@ -12,7 +12,7 @@ import seedu.lovebook.logic.Messages;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.ModelManager;
 import seedu.lovebook.model.UserPrefs;
-import seedu.lovebook.model.person.Date;
+import seedu.lovebook.model.date.Date;
 import seedu.lovebook.testutil.PersonBuilder;
 
 /**

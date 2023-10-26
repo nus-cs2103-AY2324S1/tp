@@ -6,8 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.lovebook.commons.util.ToStringBuilder;
-import seedu.lovebook.model.person.Date;
-import seedu.lovebook.model.person.UniquePersonList;
+import seedu.lovebook.model.date.Date;
+import seedu.lovebook.model.date.UniquePersonList;
 
 /**
  * Wraps all data at the lovebook-book level
