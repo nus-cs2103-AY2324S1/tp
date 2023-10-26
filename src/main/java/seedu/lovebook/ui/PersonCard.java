@@ -2,7 +2,8 @@ package seedu.lovebook.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import seedu.lovebook.model.person.Date;
 
@@ -11,7 +12,7 @@ import seedu.lovebook.model.person.Date;
  */
 public class PersonCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "DateListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -22,26 +23,21 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Date date;
-
-    @FXML
-    private HBox cardPane;
     @FXML
     private Label name;
     @FXML
     private Label id;
     @FXML
-    private Label age;
+    private Label aboutInfo;
     @FXML
-    private Label height;
+    private ImageView starImage;
+    @FXML
+    private ImageView genderImage;
+    @FXML
+    private ImageView horoscopeImage;
+    @FXML
+    private ImageView avatarImage;
 
-    @FXML
-    private Label income;
-    @FXML
-    private Label gender;
-    @FXML
-    private Label horoscope;
-    @FXML
-    private Label star;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Date} and index to display.
@@ -51,11 +47,27 @@ public class PersonCard extends UiPart<Region> {
         this.date = date;
         id.setText(displayedIndex + ". ");
         name.setText(date.getName().fullName);
-        age.setText(date.getAge().value);
-        gender.setText(date.getGender().value);
-        height.setText(date.getHeight().value);
-        income.setText(date.getIncome().value);
-        horoscope.setText(date.getHoroscope().value);
-        star.setText(date.getStar().isStarred);
+
+        aboutInfo.setText(date.getAge().value + " years old, with a height of " + date.getHeight().value + "cm, and "
+                + "a income of $" + date.getIncome().value + " per month.");
+        if (date.getGender().value.equals("M")) {
+            genderImage.setImage(new Image("images/genders/male.png"));
+        } else {
+            genderImage.setImage(new Image("images/genders/female.png"));
+        }
+        displayHoroscope(date.getHoroscope().value);
+        avatarImage.setImage(new Image("images/avatars/female-avatar.png"));
+        if (date.getStar().isStarred.equals("true")) {
+            starImage.setImage(new Image("images/star.png"));
+        }
+    }
+
+    private void displayHoroscope(String horoscope) {
+        try {
+            horoscopeImage.setImage(new Image("images/horoscopes/" + horoscope.toLowerCase() + ".png"));
+        } catch (IllegalArgumentException e) {
+            horoscopeImage.setImage(new Image("images/bot.png"));
+        }
+
     }
 }

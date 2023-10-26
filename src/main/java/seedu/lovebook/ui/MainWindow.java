@@ -34,12 +34,16 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private PresetsBar presetsBar;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane presetsBarPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -113,6 +117,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+
         resultDisplay = new ResultDisplay();
         resultDisplay.setWelcomeMessage(logic.getWelcomeMessage());
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -122,6 +127,10 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        presetsBar = new PresetsBar(commandBox);
+        presetsBarPlaceholder.getChildren().add(presetsBar.getRoot());
+
     }
 
     /**
