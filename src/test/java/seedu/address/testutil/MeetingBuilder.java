@@ -57,6 +57,7 @@ public class MeetingBuilder {
         end = meetingToCopy.getEnd();
         attendees = new LinkedHashSet<>(meetingToCopy.getAttendees());
         tags = new HashSet<>(meetingToCopy.getTags());
+        status = meetingToCopy.getStatus();
     }
 
     /**

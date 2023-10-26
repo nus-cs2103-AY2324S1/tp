@@ -39,6 +39,6 @@ public class MeetingStatus {
      */
     @Override
     public String toString() {
-        return isComplete + " ";
+        return isComplete.toString();
     }
 }

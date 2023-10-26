@@ -121,7 +121,7 @@ public class Meeting {
         Meeting otherMeeting = (Meeting) other;
         return title.equals(otherMeeting.title) && location.equals(otherMeeting.location)
                 && meetingTime.equals(otherMeeting.meetingTime) && attendees.equals(otherMeeting.attendees)
-                && tags.equals(otherMeeting.tags);
+                && tags.equals(otherMeeting.tags) && status.equals(otherMeeting.status);
     }
 
     @Override
@@ -134,7 +134,7 @@ public class Meeting {
     public String toString() {
         return new ToStringBuilder(this).add("title", title).add("location", location)
                 .add("start", meetingTime.getStart()).add("end", meetingTime.getEnd()).add("attendees", attendees)
-                .add("tags", tags).toString();
+                .add("tags", tags).add("status", status).toString();
     }
 
     /**
