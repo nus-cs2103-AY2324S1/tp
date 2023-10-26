@@ -40,7 +40,9 @@ public class RoomPieChart extends UiPart<Region> {
                 FXCollections.observableArrayList(
                         new PieChart.Data("Occupied Rooms: " + occupiedRooms, occupiedRooms),
                         new PieChart.Data("Available Rooms: " + availableRooms, availableRooms));
-        final PieChart roomPieChart = new PieChart(pieChartData);
+        final PieChart roomPieChart = new DoughnutChart(pieChartData);
+        roomPieChart.setTitle("Room Statistics");
+        roomPieChart.setLabelsVisible(false);
         roomPieChartPane.getChildren().add(roomPieChart);
     }
 }
