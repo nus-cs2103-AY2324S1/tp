@@ -169,7 +169,7 @@ public class ParserUtil {
         final List<String> statusList = new ArrayList<>();
         for (String status : statusArr) {
             status = status.trim();
-            if (!StatusTypes.isValidStatusType(status)) {
+            if (!StatusTypes.isValidStatusType(status.toLowerCase())) {
                 throw new ParseException(Status.MESSAGE_CONSTRAINTS);
             }
             statusList.add(status);
@@ -178,7 +178,6 @@ public class ParserUtil {
     }
 
     /**
-<<<<<<< HEAD
      * Parses {@code Collection<String> search name parameters} into a {@code List<String> of names}.
      */
     public static List<String> parseSearchNameParams(Collection<String> names) throws ParseException {
@@ -242,7 +241,9 @@ public class ParserUtil {
         return searchParams;
     }
 
-    /* Parses a {@code String score} into a {@code Score}.
+    /**
+     * Parses a {@code String score} into a {@code Score}.
+     *
      * @param score String to be parsed
      * @return Score object
      * @throws ParseException if the given {@code score} is invalid.
