@@ -43,9 +43,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public AddressBook(String courseCode, ReadOnlyAddressBook toBeCopied) {
         requireNonNull(courseCode);
+        requireNonNull(toBeCopied);
 
         this.courseCode = courseCode.toUpperCase();
         resetData(toBeCopied);
+    }
+
+    /**
+     * Creates an AddressBook using the Persons in the {@code toBeCopied}.
+     */
+    public static AddressBook createFromAddressBook(ReadOnlyAddressBook toBeCopied) {
+        requireNonNull(toBeCopied);
+        return new AddressBook(toBeCopied.getCourseCode(), toBeCopied);
     }
 
     ///// course level operations
