@@ -332,6 +332,8 @@ These shortcut mappings need to be updated by command execution, as well as used
    * `Model#getShortcut(String alias)`
 2. `AddressBookParser` now has a dependency to the `Model`. This is required so that the shortcut mappings can be accessed for use in parsing user input.
 
+![Class Diagram](images/ShortcutSettingsClassDiagram.png)
+
 Within `ShortcutSettings` similar operations are implemented to `register`, `remove`, and `get` shortcuts. Additionally to resolve bugs that might arise from users tampering with the `preferences.json` file,
 `ShortcutSettings#removeBadMappings()` clears the `shortcutMap` of invalid mappings and is called on initialisation.
 
@@ -351,12 +353,24 @@ The sequence diagram below outlines the command execution of a sample `AddShortc
 
 ![Add Shortcut Sequence](images/AddShortcutCommandSequenceDiagram.png)
 
+The following activity diagrams summarise the process of adding and removing shortcuts from DoConnek Pro.
+
+![Add Shortcut Activity](images/AddShortcutActivityDiagram.png)
+![Delete Shortcut Activity](images/DeleteShortcutActivityDiagram.png)
+
 #### Saving between sessions
+ShortcutSettings implements the `Serializable` interface, thus is saved to `json` format as a part of `UserPrefs`. 
 
+#### Design considerations:
+**Aspect: How shortcuts are stored and accessed:**
 
+* **Alternative 1 (current choice):** Stored in a separate `ShortcutSettings` class.
+    * Pros: Separation of responsibility and easier management.
+    * Cons: More memory usage and introduces one dependency between `AddressBookParser` and `Model`.
 
-
-
+* **Alternative 2:** Individual command knows its own list of shortcuts.
+    * Pros: Will use less memory (No extra data structure created).
+    * Cons: Difficult to manage duplicate shortcut mappings.
 
 --------------------------------------------------------------------------------------------------------------------
 
