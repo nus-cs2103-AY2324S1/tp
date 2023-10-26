@@ -43,10 +43,12 @@ public class FilterCommand extends Command {
         // TODO: Improve flow of this
         if (tutorial.isPresent()) {
             this.operation = operation;
-            this.predicate = new ContainsTagPredicate(new Tag(String.join(" ", course.get(), tutorial.get())));
+            this.predicate = new ContainsTagPredicate(Optional.of(
+                    new Tag(String.join(" ", course.get(), tutorial.get()))));
         } else {
             this.operation = operation;
-            this.predicate = new ContainsTagPredicate(new Tag(course.orElse("PLACEHOLDER")));
+            this.predicate = new ContainsTagPredicate(Optional.of(
+                    new Tag(course.orElse("PLACEHOLDER"))));
         }
     }
 
@@ -56,7 +58,7 @@ public class FilterCommand extends Command {
      */
     public FilterCommand(FilterOperation operation, Tag tag) {
         this.operation = operation;
-        this.predicate = new ContainsTagPredicate(tag);
+        this.predicate = new ContainsTagPredicate(Optional.ofNullable(tag));
     }
 
     @Override

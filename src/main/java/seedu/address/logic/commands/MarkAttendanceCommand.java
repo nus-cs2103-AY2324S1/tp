@@ -127,6 +127,10 @@ public class MarkAttendanceCommand extends Command {
             }
         }
 
+        // Allows marked attendance to be shown immediately, but breaks all MarkAttendanceCommandTests
+        // ArrayList<Person> copyList = new ArrayList<>(lastShownList);
+        // model.addFilter(new SerializablePredicate(person -> copyList.contains(person)));
+
         return new CommandResult(successMessage.toString());
     }
 

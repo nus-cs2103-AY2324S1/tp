@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 
 /**
  * Lists all persons in the address book to the user.
@@ -14,11 +17,12 @@ public abstract class ListCommand extends Command {
             + "Parameters: "
             + "LIST_TYPE (must be either 'students' or 'attendance')\n"
             + "(applicable for list attendance only): "
-            + PREFIX_TUTORIALNUMBER + "TUTORIAL_NUMBER (must be a positive integer) "
+            + PREFIX_WEEK + "WEEK_NUMBER "
             + "[" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
             + "Example: "
             + COMMAND_WORD + " students, "
-            + COMMAND_WORD + " attendance tn/1 tg/G01";
+            + COMMAND_WORD + " attendance w/1 tg/G01";
 
-    public ListCommand() {}
+    @Override
+    public abstract CommandResult execute(Model model) throws CommandException;
 }

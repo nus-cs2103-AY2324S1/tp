@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -35,7 +36,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_NO_TAG_SUCCESS = "Deleted all contacts";
 
     private final Index targetIndex;
-    private final Tag tag;
+    private final Optional<Tag> tag;
     private final ContainsTagPredicate tagPredicate;
 
     /**
@@ -51,7 +52,7 @@ public class DeleteCommand extends Command {
      * @param tag Course and tutorial groups to delete all students from
      * @param tagPredicate Predicate used to filter for students in the course and tutorial group
      */
-    public DeleteCommand(Tag tag, ContainsTagPredicate tagPredicate) {
+    public DeleteCommand(Optional<Tag> tag, ContainsTagPredicate tagPredicate) {
         this.targetIndex = null;
         this.tag = tag;
         this.tagPredicate = tagPredicate;
@@ -62,7 +63,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (tag == null) {
+        if (!(targetIndex == null)) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
@@ -72,8 +73,7 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         }
 
-        Tag placeholder = new Tag("PLACEHOLDER");
-        if (!tag.equals(placeholder)) {
+        if (tag.isPresent()) {
             model.addFilter(tagPredicate);
         }
 
@@ -86,8 +86,8 @@ public class DeleteCommand extends Command {
 
         model.clearFilters();
 
-        return !tag.equals(placeholder)
-                ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS, tag.getTagName()))
+        return tag.isPresent()
+                ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS, tag.get().getTagName()))
                 : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS));
     }
 
