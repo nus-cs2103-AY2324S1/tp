@@ -45,7 +45,8 @@ public class PersonListPanel extends UiPart<Region> {
 
     }
     private void refreshUI() {
-        personListView.refresh();
+        personListView.setItems(logic.getFilteredPersonList());
+        personListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
     /**

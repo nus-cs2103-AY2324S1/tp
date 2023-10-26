@@ -6,7 +6,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
@@ -29,15 +28,12 @@ public class StringUtil {
         requireNonNull(sentence);
         requireNonNull(word);
 
-        String preppedWord = word.trim();
+        String preppedWord = word.toLowerCase();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String preppedSentence = sentence.toLowerCase();
 
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        return preppedSentence.contains(preppedWord);
     }
 
     /**
