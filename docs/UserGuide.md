@@ -263,6 +263,3 @@ set 10 d/ easy
 
 2. Successful Output
    ![result of practise command](./images/UserGuide/1.3_set_ans.png)
-
-
-
