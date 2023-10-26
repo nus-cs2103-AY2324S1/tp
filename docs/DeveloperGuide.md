@@ -209,6 +209,8 @@ The find meeting command is facilitated by `GeneralMeetingPredicate` that by its
 
 All of these fields are optional and typing `findm` alone will not impose any predicates, except MeetingTimeContainsPredicate which will give the largest `LocalDateTime` range possible.
 
+![FindMeetingClass](images/FindMeetingClass.png)
+
 Given below is an example usage scenario and how the `findm` command behaves at each step.
 
 Step 1. The user launches the application and the application loads the data from storage.
@@ -219,12 +221,10 @@ Step 2. The user executes `findm m/meeting` command to find all meetings that ha
 ![FindMeetingSecond](images/FindMeetingSecond.png)
 
 Step 3. The `FindMeetingCommand` will be immediately executed on the `FilteredList<Meeting>` object. The `GeneralMeetingPredicate` will be used on all meetings, meetings which pass all 5 predicates are shown in `MeetingSchedulePanel`. After which `FindMeetingCommand` and the predicate objects will no longer be referenced.
-![FindMeetingLast](images/FindMeetingInitial.png)
 
 The following diagrams show the entire sequence flow for `LogicManager#execute()` for FindMeetingCommand.
 ![FindMeetingSequence](images/FindMeetingSequence.png)
-![FindMeetingSequenceParse](images/FindMeetingSequenceParse.png)
-![FindMeetingSequenceExecute](images/FindMeetingSequenceExecute.png)
+`XYZPredicate` represent the various predicate classes.
 
 #### Design Considerations and Rationale
 
