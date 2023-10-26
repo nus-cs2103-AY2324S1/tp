@@ -13,7 +13,9 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.LogsCenter;
-import networkbook.commons.exceptions.IllegalStateChangeException;
+import networkbook.logic.commands.RedoCommand;
+import networkbook.logic.commands.UndoCommand;
+import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Person;
 
 /**
@@ -21,10 +23,6 @@ import networkbook.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final String MESSAGE_UNDO_DISALLOWED = "Illegal state change requested.\n"
-            + "NetworkBook does not have a previous state stored to undo to.";
-    private static final String MESSAGE_REDO_DISALLOWED = "Illegal state change requested.\n"
-            + "NetworkBook does not have a previous state stored to undo to.";
     private final VersionedNetworkBook versionedNetworkBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
@@ -122,19 +120,19 @@ public class ModelManager implements Model {
         versionedNetworkBook.commit();
     }
     @Override
-    public void undoNetworkBook() throws IllegalStateChangeException {
+    public void undoNetworkBook() throws CommandException {
         if (versionedNetworkBook.canUndo()) {
             versionedNetworkBook.undo();
         } else {
-            throw new IllegalStateChangeException(MESSAGE_UNDO_DISALLOWED);
+            throw new CommandException(UndoCommand.MESSAGE_UNDO_DISALLOWED);
         }
     }
     @Override
-    public void redoNetworkBook() throws IllegalStateChangeException {
+    public void redoNetworkBook() throws CommandException {
         if (versionedNetworkBook.canRedo()) {
             versionedNetworkBook.redo();
         } else {
-            throw new IllegalStateChangeException(MESSAGE_REDO_DISALLOWED);
+            throw new CommandException(RedoCommand.MESSAGE_REDO_DISALLOWED);
         }
     }
 

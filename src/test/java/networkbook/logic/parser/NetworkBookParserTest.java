@@ -19,7 +19,9 @@ import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
+import networkbook.logic.commands.RedoCommand;
 import networkbook.logic.commands.SortCommand;
+import networkbook.logic.commands.UndoCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.NameContainsKeyTermsPredicate;
 import networkbook.model.person.Person;
@@ -36,7 +38,7 @@ public class NetworkBookParserTest {
     private final NetworkBookParser parser = new NetworkBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_create() throws Exception {
         Person person = new PersonBuilder().build();
         CreateCommand command = (CreateCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new CreateCommand(person), command);
@@ -63,6 +65,18 @@ public class NetworkBookParserTest {
                 + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased() + " "
                 + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD + " 3") instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD + " 3") instanceof RedoCommand);
     }
 
     @Test

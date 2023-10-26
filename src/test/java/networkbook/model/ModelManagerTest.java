@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
-import networkbook.commons.exceptions.IllegalStateChangeException;
+import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.NameContainsKeywordsPredicate;
 import networkbook.model.person.Person;
 import networkbook.model.person.PersonSortComparator;
@@ -99,7 +99,7 @@ public class ModelManagerTest {
     @Test
     public void undoNetworkBook_noPreviousState_throwsIllegalStateChangeException() {
         ModelManager modelManager = new ModelManager();
-        assertThrows(IllegalStateChangeException.class, () -> modelManager.undoNetworkBook());
+        assertThrows(CommandException.class, () -> modelManager.undoNetworkBook());
     }
 
     @Test
@@ -108,7 +108,7 @@ public class ModelManagerTest {
         modelManager.addPerson(TypicalPersons.ALICE);
         try {
             modelManager.undoNetworkBook();
-        } catch (IllegalStateChangeException e) {
+        } catch (CommandException e) {
             fail();
         }
         assertEquals(0, modelManager.getNetworkBook().getPersonList().size());
@@ -117,7 +117,7 @@ public class ModelManagerTest {
     @Test
     public void redoNetworkBook_noNextState_throwsIllegalStateChangeException() {
         ModelManager modelManager = new ModelManager();
-        assertThrows(IllegalStateChangeException.class, () -> modelManager.redoNetworkBook());
+        assertThrows(CommandException.class, () -> modelManager.redoNetworkBook());
     }
 
     @Test
@@ -127,7 +127,7 @@ public class ModelManagerTest {
         try {
             modelManager.undoNetworkBook();
             modelManager.redoNetworkBook();
-        } catch (IllegalStateChangeException e) {
+        } catch (CommandException e) {
             fail();
         }
         assertEquals(1, modelManager.getNetworkBook().getPersonList().size());
