@@ -160,6 +160,27 @@ Expected outputs when the command succeeds:
 Expected outputs when command fails:
 * `Unable to edit the patient: Patient identification does not exist.`
 
+### Undoing a command: `undo`
+
+Undoes an undoable command within the address book.
+
+* An undoable command include an edit command, add commmand or delete command
+* The command allows you to undo the last command or to undo a specific number of previous commands
+
+Format:
+* `undo` or `undo [number]`
+
+Example commands:
+*  `undo`
+*  `undo 2`
+
+Expected outputs when the command succeeds:
+* `The last command has been undone`
+* `The last 2 commands have been undone`
+
+Expected outputs when command fails:
+* `There is no valid command to be undone`
+
 ### Locating persons by name: `find`
 
 Enables front desk workers to quickly retrieve patient information based on command executed.

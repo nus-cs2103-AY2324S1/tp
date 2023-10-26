@@ -267,6 +267,10 @@ The `EditCommand` is implemented as follows:
 - **Validation**: The `EditCommand` performs validation to ensure at least one field to edit is provided. It also checks for consistency when both a name and IC are provided.
 - **Execution**: When executed, the `EditCommand` identifies the person to edit based on the provided name and/or IC. If the person is found, it creates an `editedPerson` with the desired changes. The person is then updated with the new details.
 
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/EditActivityDiagram.puml" width="250" />
+
 #### Rationale
 
 - **Flexibility**: The `EditCommand` provides flexibility to users by allowing them to choose whether to edit a person by name or IC, as per their convenience.
