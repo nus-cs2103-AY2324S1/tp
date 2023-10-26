@@ -37,7 +37,7 @@ public class AddShortcutCommandTest {
     }
 
     @Test
-    public void execute_duplicateMapping_success() {
+    public void execute_duplicateAlias_success() {
         ModelManager modelWithExistingMapping = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         modelWithExistingMapping.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(DeleteCommand.COMMAND_WORD));
@@ -52,6 +52,25 @@ public class AddShortcutCommandTest {
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
                 new CommandWord(ListCommand.COMMAND_WORD));
+
+        assertCommandSuccess(addShortcutCommand, modelWithExistingMapping,
+                expectedMessage, expectedModel, commandHistory);
+    }
+
+    @Test
+    public void execute_duplicateMapping_correctMessage() {
+        ModelManager modelWithExistingMapping = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelWithExistingMapping.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
+                new CommandWord(DeleteCommand.COMMAND_WORD));
+
+        AddShortcutCommand addShortcutCommand = new AddShortcutCommand(new ShortcutAlias("del"),
+                new CommandWord(DeleteCommand.COMMAND_WORD));
+
+        String expectedMessage = String.format(AddShortcutCommand.MESSAGE_DUPLICATE, "del --> delete");
+
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.getShortcutSettings().registerShortcut(new ShortcutAlias("del"),
+                new CommandWord(DeleteCommand.COMMAND_WORD));
 
         assertCommandSuccess(addShortcutCommand, modelWithExistingMapping,
                 expectedMessage, expectedModel, commandHistory);
