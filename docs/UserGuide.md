@@ -172,6 +172,7 @@ Examples:![img.png](images/Reveal.png)
 **Note**
 * `reveal` command will only take effect during review session. Otherwise, error message`You are not in a review session.`  
 will be printed out.
+* Pressing `reveal` button will have the same effect, and users can reveal the translation without the constrain of review session.
 
 ### Indicating user has memorized the word : `yes`
 
@@ -188,6 +189,7 @@ if there's no word left in the review session.
 **Note**
 * `yes` command will only take effect during review session. Otherwise, error message`You are not in a review session.`  
   will be printed out.
+* Pressing `yes` button will have the same effect. 
 
 ###  Indicating user has forgotten the word : `no`
 
@@ -203,6 +205,7 @@ if there's no word left in the review session.
 **Note**
 * `no` command will only take effect during review session. Otherwise, error message`You are not in a review session.`  
   will be printed out.
+* Pressing `no` button will have the same effect.
 
 ### Show learning statistics : `stats`
 
