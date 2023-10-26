@@ -12,13 +12,15 @@ import static transact.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-import transact.commons.core.index.Index;
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.AddressBook;
 import transact.model.Model;
 import transact.model.person.NameContainsKeywordsPredicate;
 import transact.model.person.Person;
+import transact.model.transaction.Transaction;
+import transact.model.transaction.info.TransactionId;
 import transact.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -120,14 +122,29 @@ public class CommandTestUtil {
      * {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showPersonAtId(Model model, Integer targetId) {
+        assertTrue(targetId < model.getFilteredPersonList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Person person = model.getFilteredPersonList().get(targetId);
         final String[] splitName = person.getName().fullName.split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the transaction at the given
+     * {@code targetIndex} in the
+     * {@code model}'s transaction book.
+     */
+    public static void showTransactionAtIndex(Model model, Integer targetIndex) {
+        assertTrue(targetIndex < model.getFilteredTransactionList().size());
+
+        Transaction transaction = model.getFilteredTransactionList().get(targetIndex);
+        final TransactionId id = transaction.getTransactionId();
+        model.updateFilteredTransactionList(transaction1 -> Objects.equals(transaction1.getTransactionId(), id));
+
+        assertEquals(1, model.getFilteredTransactionList().size());
     }
 
 }

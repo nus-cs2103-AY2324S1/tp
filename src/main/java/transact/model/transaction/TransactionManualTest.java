@@ -67,7 +67,8 @@ public class TransactionManualTest {
         TransactionType transactionType = TransactionType.getType(typeInput);
 
         // Create a Transaction object
-        Transaction transaction = new Transaction(transactionId, transactionType, description, amount, date, person);
+        Transaction transaction = new Transaction(transactionId, transactionType, description, amount, date,
+                person.getPersonId().getValue());
 
         // Print Transaction information for verification
         System.out.println("\nTransaction Information:");
@@ -76,7 +77,7 @@ public class TransactionManualTest {
         System.out.println("Description: " + transaction.getDescription());
         System.out.println("Amount: " + transaction.getAmount());
         System.out.println("Date: " + transaction.getDate());
-        System.out.println("Person: " + transaction.getPerson());
+        System.out.println("PersonId: " + transaction.getPersonId());
 
         scanner.close();
     }

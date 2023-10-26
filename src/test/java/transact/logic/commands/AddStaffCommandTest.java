@@ -25,6 +25,7 @@ import transact.model.ReadOnlyAddressBook;
 import transact.model.ReadOnlyTransactionBook;
 import transact.model.ReadOnlyUserPrefs;
 import transact.model.person.Person;
+import transact.model.person.PersonId;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.TransactionId;
 import transact.testutil.PersonBuilder;
@@ -151,17 +152,27 @@ public class AddStaffCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasPerson(PersonId personId) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public Person deletePerson(PersonId targetId) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setPerson(PersonId targetId, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPerson(Integer personId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableMap<PersonId, Person> getPersonMap() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -233,9 +244,9 @@ public class AddStaffCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSameEntry(person);
+        public boolean hasPerson(PersonId personId) {
+            requireNonNull(personId);
+            return this.person.getPersonId().equals(personId);
         }
     }
 
@@ -246,9 +257,9 @@ public class AddStaffCommandTest {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSameEntry);
+        public boolean hasPerson(PersonId personId) {
+            requireNonNull(personId);
+            return personsAdded.stream().anyMatch(p -> p.getPersonId().equals(personId));
         }
 
         @Override

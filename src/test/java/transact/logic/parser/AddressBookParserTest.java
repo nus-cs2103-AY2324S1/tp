@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static transact.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static transact.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static transact.testutil.Assert.assertThrows;
-import static transact.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static transact.testutil.TypicalIndexes.ID_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import transact.logic.commands.AddStaffCommand;
-import transact.logic.commands.ClearCommand;
+import transact.logic.commands.ClearStaffCommand;
 import transact.logic.commands.DeleteStaffCommand;
 import transact.logic.commands.EditStaffCommand;
 import transact.logic.commands.EditStaffCommand.EditPersonDescriptor;
@@ -35,22 +35,22 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new PersonBuilder().withNextIdAndFree().build();
         AddStaffCommand command = (AddStaffCommand) parser.parseCommand(PersonUtil.getAddStaffCommand(person));
         assertEquals(new AddStaffCommand(person), command);
     }
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearStaffCommand.COMMAND_WORD) instanceof ClearStaffCommand);
+        assertTrue(parser.parseCommand(ClearStaffCommand.COMMAND_WORD + " 3") instanceof ClearStaffCommand);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteStaffCommand command = (DeleteStaffCommand) parser.parseCommand(
-                DeleteStaffCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteStaffCommand(INDEX_FIRST_PERSON), command);
+                DeleteStaffCommand.COMMAND_WORD + " " + ID_FIRST_PERSON);
+        assertEquals(new DeleteStaffCommand(ID_FIRST_PERSON), command);
     }
 
     @Test
@@ -58,8 +58,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditStaffCommand command = (EditStaffCommand) parser.parseCommand(EditStaffCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditStaffCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + ID_FIRST_PERSON + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditStaffCommand(ID_FIRST_PERSON, descriptor), command);
     }
 
     @Test

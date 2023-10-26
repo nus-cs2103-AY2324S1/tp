@@ -7,6 +7,7 @@ import static transact.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import org.junit.jupiter.api.Test;
 
 import transact.logic.commands.ViewCommand;
+import transact.ui.MainWindow.TabWindow;
 
 public class ViewCommandParserTest {
 
@@ -23,9 +24,9 @@ public class ViewCommandParserTest {
     }
 
     @Test
-    public void parse_validArgsStaff_returnsFindCommand() {
+    public void parse_validArgsStaff_returnsViewCommand() {
         // Use "staff" as argument
-        ViewCommand expectedViewCommand = new ViewCommand(ViewCommand.ViewType.STAFF);
+        ViewCommand expectedViewCommand = new ViewCommand(TabWindow.ADDRESSBOOK);
         assertParseSuccess(parser, "staff", expectedViewCommand);
 
         // Use "s" as argument
@@ -33,13 +34,23 @@ public class ViewCommandParserTest {
     }
 
     @Test
-    public void parse_validArgsTransaction_returnsFindCommand() {
+    public void parse_validArgsTransaction_returnsViewCommand() {
         // Use "transaction" as argument
-        ViewCommand expectedViewCommand = new ViewCommand(ViewCommand.ViewType.TRANSACTION);
+        ViewCommand expectedViewCommand = new ViewCommand(TabWindow.TRANSACTIONS);
         assertParseSuccess(parser, "transaction", expectedViewCommand);
 
         // Use "t" as argument
         assertParseSuccess(parser, "t", expectedViewCommand);
+    }
+
+    @Test
+    public void parse_validArgsOverview_returnsViewCommand() {
+        // Use "overview" as argument
+        ViewCommand expectedViewCommand = new ViewCommand(TabWindow.OVERVIEW);
+        assertParseSuccess(parser, "overview", expectedViewCommand);
+
+        // Use "o" as argument
+        assertParseSuccess(parser, "o", expectedViewCommand);
     }
 
 }

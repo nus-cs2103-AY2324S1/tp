@@ -1,11 +1,15 @@
 package transact.ui;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
+import javafx.util.Callback;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
@@ -44,9 +48,22 @@ public class TransactionTablePanel extends UiPart<Region> {
         TableColumn<Transaction, Amount> amtCol = new TableColumn<>("Amount");
         amtCol.setCellValueFactory(new PropertyValueFactory<Transaction, Amount>("amount"));
 
-        // TableColumn<Transaction, Integer> staffCol = new TableColumn<>("Staff");
+        TableColumn<Transaction, String> staffCol = new TableColumn<>("Staff");
+        // staffCol.setCellValueFactory(new PropertyValueFactory<Transaction,
+        // Integer>("personId"));
 
-        transactionTable.getColumns().setAll(idCol, typeCol, dateCol, descCol, amtCol);
+        staffCol.setCellValueFactory(new Callback<CellDataFeatures<Transaction, String>, ObservableValue<String>>() {
+            public ObservableValue<String> call(CellDataFeatures<Transaction, String> t) {
+                // TODO Show name of staff beside the id
+                String displayString = "";
+                if (t.getValue().getPersonId() >= 0) {
+                    displayString = t.getValue().getPersonId().toString();
+                }
+                return new ReadOnlyObjectWrapper(displayString);
+            }
+        });
+
+        transactionTable.getColumns().setAll(idCol, typeCol, dateCol, descCol, amtCol, staffCol);
 
         transactionTable.setItems(transactionList);
     }

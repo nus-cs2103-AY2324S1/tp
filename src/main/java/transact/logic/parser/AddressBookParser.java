@@ -10,7 +10,9 @@ import java.util.regex.Pattern;
 import transact.commons.core.LogsCenter;
 import transact.logic.commands.AddStaffCommand;
 import transact.logic.commands.AddTransactionCommand;
-import transact.logic.commands.ClearCommand;
+import transact.logic.commands.ClearResultBoxCommand;
+import transact.logic.commands.ClearStaffCommand;
+import transact.logic.commands.ClearTransactionCommand;
 import transact.logic.commands.Command;
 import transact.logic.commands.DeleteStaffCommand;
 import transact.logic.commands.DeleteTransactionCommand;
@@ -76,8 +78,8 @@ public class AddressBookParser {
         case DeleteStaffCommand.COMMAND_WORD:
             return new DeleteStaffCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case ClearStaffCommand.COMMAND_WORD:
+            return new ClearStaffCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -91,6 +93,11 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case ClearTransactionCommand.COMMAND_WORD:
+            return new ClearTransactionCommand();
+
+        case ClearResultBoxCommand.COMMAND_WORD:
+            return new ClearResultBoxCommand();
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

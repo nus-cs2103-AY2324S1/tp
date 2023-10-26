@@ -16,7 +16,7 @@ import transact.model.transaction.info.TransactionType;
 public class TypicalTransactions {
     public static final Transaction APPLES = new Transaction(TransactionType.EXPENSE,
             new Description("Apples"),
-            new Amount(1.50), new Date("15/11/2018"), ALICE);
+            new Amount(1.50), new Date("15/11/2018"), ALICE.getPersonId().getValue());
     public static final Transaction BANANAS = new Transaction(TransactionType.EXPENSE,
             new Description("Bananas"),
             new Amount(1.50), new Date("15/11/2018"));
@@ -32,7 +32,6 @@ public class TypicalTransactions {
     public static final Transaction FISH = new Transaction(TransactionType.REVENUE,
             new Description("Fish"),
             new Amount(6.50), new Date("15/11/2018"));
-
 
     /**
      * Returns a {@code TransactionBook} with all the typical transactions.

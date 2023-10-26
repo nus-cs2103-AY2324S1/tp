@@ -18,12 +18,13 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import transact.model.entry.exceptions.DuplicateEntryException;
 import transact.model.person.Person;
+import transact.model.person.PersonId;
 import transact.testutil.PersonBuilder;
 
 public class AddressBookTest {
-
     private final AddressBook addressBook = new AddressBook();
 
     @Test
@@ -45,7 +46,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
+        // Two persons with the same identity fields (but assuming they were mistakenly put with the wrong person ID keys)
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
@@ -61,13 +62,13 @@ public class AddressBookTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(addressBook.hasPerson(ALICE.getPersonId()));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        assertTrue(addressBook.hasPerson(ALICE.getPersonId()));
     }
 
     @Test
@@ -75,7 +76,7 @@ public class AddressBookTest {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(addressBook.hasPerson(editedAlice.getPersonId()));
     }
 
     @Test
@@ -85,7 +86,7 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonMap() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -95,15 +96,25 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableMap<PersonId, Person> personMap = FXCollections.observableHashMap();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
+            for (Person person : persons) {
+                // We instantiate unique arbitrary person IDs for testing that UniqueEntryHashmap still enforces
+                // uniqueness among values (not just keys)
+                this.personMap.put(new PersonId(), person);
+            }
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
         }
-    }
 
+        @Override
+        public ObservableMap<PersonId, Person> getPersonMap() {
+            return personMap;
+        }
+    }
 }

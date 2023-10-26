@@ -57,6 +57,7 @@ public class Person implements Entry {
     };
 
     // Identity fields
+    private final PersonId personId;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -73,18 +74,37 @@ public class Person implements Entry {
         phone = null;
         email = null;
         address = null;
+        personId = null;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(PersonId personId, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(personId, name, phone, email, address, tags);
+        this.personId = personId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Creates new Person
+     *
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param tags
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(new PersonId(), name, phone, email, address, tags);
+    }
+
+    public PersonId getPersonId() {
+        return personId;
     }
 
     public Name getName() {
@@ -126,7 +146,7 @@ public class Person implements Entry {
         }
 
         Person otherPerson = (Person) otherEntry;
-        return otherPerson.getName().equals(getName());
+        return otherPerson.getPersonId().equals(personId);
     }
 
     /**
@@ -145,7 +165,8 @@ public class Person implements Entry {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        return personId.equals(otherPerson.personId)
+                && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -155,12 +176,13 @@ public class Person implements Entry {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(personId, name, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("id", personId)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)

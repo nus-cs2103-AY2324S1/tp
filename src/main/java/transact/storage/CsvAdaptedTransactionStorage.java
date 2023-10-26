@@ -65,11 +65,10 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
                     Description description = ParserUtil.parseDescription(row[2]);
                     Amount amount = ParserUtil.parseAmount(row[3]);
                     Date date = ParserUtil.parseDate(row[4]);
+                    Integer personId = ParserUtil.parsePersonId(row[5]);
 
-                    // TODO Read in optional staff when ready
-                    // Person person = ParserUtil.parsePerson(null);
-
-                    Transaction t = new Transaction(transactionId, transactionType, description, amount, date);
+                    Transaction t = new Transaction(transactionId, transactionType, description, amount, date,
+                            personId);
 
                     transactions.addTransaction(t);
 
@@ -113,9 +112,9 @@ public class CsvAdaptedTransactionStorage implements TransactionBookStorage {
                 String description = transaction.getDescription().toString();
                 String amount = transaction.getAmount().toString();
                 String date = transaction.getDate().toString();
-                String person = (transaction.hasPersonInfo()) ? transaction.getPerson().toString() : "";
+                String personId = transaction.getPersonId().toString();
 
-                String[] row = { transactionId, transactionType, description, amount, date, person };
+                String[] row = { transactionId, transactionType, description, amount, date, personId };
 
                 writer.writeNext(row);
             }

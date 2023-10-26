@@ -53,7 +53,7 @@ public class CsvAdaptedTransactionStorageManualTest {
                 new Address("PGP"), Collections.emptySet());
         Transaction transaction1 = new Transaction(new TransactionId(100), TransactionType.REVENUE,
                 new Description("Revenue 1"),
-                new Amount(new BigDecimal("10.50")), new Date("01/05/2023"), person1);
+                new Amount(new BigDecimal("10.50")), new Date("01/05/2023"), person1.getPersonId().getValue());
         Transaction transaction2 = new Transaction(new TransactionId(101), TransactionType.EXPENSE,
                 new Description("Expense 1"),
                 new Amount(new BigDecimal("21.50")), new Date("01/05/2023"));
