@@ -17,9 +17,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Interaction;
-import seedu.address.model.person.Interaction.Outcome;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.person.interaction.Interaction.Outcome;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for InteractionCommand.
