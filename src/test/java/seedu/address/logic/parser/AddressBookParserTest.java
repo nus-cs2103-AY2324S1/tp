@@ -13,13 +13,22 @@ import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CopyApplicantCommand;
 import seedu.address.logic.commands.CopyMemberCommand;
+import seedu.address.logic.commands.EditApplicantCommand;
+import seedu.address.logic.commands.EditApplicantCommand.EditApplicantDescriptor;
+import seedu.address.logic.commands.EditMemberCommand;
+import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ViewMembersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Applicant;
+import seedu.address.model.person.Member;
 import seedu.address.testutil.ApplicantBuilder;
 import seedu.address.testutil.ApplicantUtil;
+import seedu.address.testutil.EditApplicantDescriptorBuilder;
+import seedu.address.testutil.EditMemberDescriptorBuilder;
+import seedu.address.testutil.MemberBuilder;
+import seedu.address.testutil.MemberUtil;
 
 public class AddressBookParserTest {
 
@@ -55,15 +64,24 @@ public class AddressBookParserTest {
     //        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     //    }
 
-    // TODO: adapt for editMember and editApplicant
-    //    @Test
-    //    public void parseCommand_edit() throws Exception {
-    //        Person person = new PersonBuilder().build();
-    //        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-    //        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-    //                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-    //        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
-    //    }
+    @Test
+    public void parseCommand_editMember() throws Exception {
+        Member member = new MemberBuilder().build();
+        EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
+        EditMemberCommand command = (EditMemberCommand) parser.parseCommand(EditMemberCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor));
+        assertEquals(new EditMemberCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editApplicant() throws Exception {
+        Applicant applicant = new ApplicantBuilder().build();
+        EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(applicant).build();
+        EditApplicantCommand command = (EditApplicantCommand) parser.parseCommand(
+                EditApplicantCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + ApplicantUtil.getEditApplicantDescriptorDetails(descriptor));
+        assertEquals(new EditApplicantCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
 
     @Test
     public void parseCommand_exit() throws Exception {

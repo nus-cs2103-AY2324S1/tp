@@ -153,6 +153,75 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add `Member`/`Applicant` feature
+The `addMember` and `addApplicant` command is used to add a member or an applicant to the address book. 
+The commands are implemented in the `AddMemberCommand` and `AddApplicantCommand` class, which extends the `Command` class.
+
+The add mechanism is facilitated by `LogicManager` which parses the command input from the user to determine the appropriate
+command to execute. The execute function checks whether the `member`/`applicant` is present in the `AddressBook`.
+The `member`/`applicant` is added into the `AddressBook` if it is not present. Otherwise, an error message is returned.
+
+### Delete an applicant
+The applicant at the specific applicantIndex in the applicant list will be deleted. Compulsory fields for the deleteApplicant command include: applicantIndex. An example of how this feature can be used is as follows:
+
+* Step 1. The deleteApplicantCommand object's execute() method is called.
+* Step 2. The applicantIndex is checked to be within the valid range of the applicant list. If the applicantIndex given is invalid, a CommandException is thrown.
+* Step 3. The applicant at the given applicantIndex is referenced.
+* Step 4. The model object's deleteApplicant() method is called. The input parameter is the referenced applicant.
+* Step 5. The applicant is deleted from the applicant list.
+
+### Delete a member
+The member at the specific memberIndex in the member list will be deleted. Compulsory fields for the deleteMember command include: memberIndex. An example of how this feature can be used is as follows:
+
+* Step 1. The deleteMemberCommand object's execute() method is called.
+* Step 2. The memberIndex is checked to be within the valid range of the member list. If the memberIndex given is invalid, a CommandException is thrown.
+* Step 3. The member at the given memberIndex is referenced.
+* Step 4. The model object's deleteMember() method is called. The input parameter is the referenced member.
+* Step 5. The member is deleted from the member list.
+
+### Delete an applicant
+The applicant at the specific applicantIndex in the applicant list will be deleted. Compulsory fields for the deleteApplicant command include: applicantIndex. An example of how this feature can be used is as follows:
+
+* Step 1. The deleteApplicantCommand object's execute() method is called.
+* Step 2. The applicantIndex is checked to be within the valid range of the applicant list. If the applicantIndex given is invalid, a CommandException is thrown.
+* Step 3. The applicant at the given applicantIndex is referenced.
+* Step 4. The model object's deleteApplicant() method is called. The input parameter is the referenced applicant.
+* Step 5. The applicant is deleted from the applicant list.
+
+### Find an applicant
+All applicants that contains any field with the specified keyword will be listed. Compulsory fields for the findApplicant command include : keyword. An example of how this feature can be used is as follows:
+
+* Step 1. The findApplicantCommand object's execute() method is called.
+* Step 2. The model object's updateFilteredApplicantList() is called, with the keyword as the predicate.
+* Step 3. The applicant list is filtered to only reflect applicants with fields(name, phone number) that contain the keyword.
+* Step 4. The filtered member list is shown.
+
+### Find a member
+All members that contains any field with the specified keyword will be listed. Compulsory fields for the findApplicant command include : keyword. An example of how this feature can be used is as follows:
+
+* Step 1. The findMemberCommand object's execute() method is called.
+* Step 2. The model object's updateFilteredMemberList() is called, with the keyword as the predicate.
+* Step 3. The member list is filtered to only reflect members with fields(name, email, phone number, telegram handle, tag) that contain the keyword.
+* Step 4. The filtered member list is shown.
+
+### Edit a member
+Edits the details of an existing member identified by their index number in the displayed member list. Existing values will be overwritten by the input values.
+
+* Step 1: The editMemberCommand object's execute() method is called.
+* Step 2: The member index is checked to be within the valid range of the member list. If the member index given is invalid (e.g., out of range), a CommandException is thrown.
+* Step 3: The member at the given index is referenced based on the provided member index.
+* Step 4: The editMemberCommand calls the model object's setMember() method. It updates the member with the new details provided, effectively modifying the existing member's information.
+* Step 5: After the execution of the editMemberCommand, the member's details are successfully edited in the member list.
+
+### Edit an applicant
+Edits the details of an existing applicant identified by their index number in the displayed applicant list. Existing values will be overwritten by the input values.
+
+* Step 1: The editApplicantCommand object's execute() method is called.
+* Step 2: The applicant index is checked to be within the valid range of the applicant list. If the applicant index given is invalid (e.g., out of range), a CommandException is thrown.
+* Step 3: The applicant at the given index is referenced based on the provided applicant index.
+* Step 4: The editApplicantCommand calls the model object's setApplicant() method. It updates the member with the new details provided, effectively modifying the existing applicant's information.
+* Step 5: After the execution of the editApplicantCommand, the applicant's details are successfully edited in the applicant list.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -236,6 +305,7 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
 
 --------------------------------------------------------------------------------------------------------------------
 
