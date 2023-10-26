@@ -174,21 +174,21 @@ Valid input to `FreeTime#getDay(day)` are integers from [1,5] where 1 represents
 
 `TimeInterval#GetFrom()` and `TimeInterval#GetTo()` represents the string representation of time in `HH:mm` format.
 
-### Teaching Module Feature
+### Teaching course Feature
 
 #### Implementation
 
-The teaching module feature allows users to enter the specific module they are teaching
+The teaching course feature allows users to enter the specific course they are teaching
 and store the information in `UserPrefs`. With this feature, users can easily browse 
 through the list of TAs teaching under them.
 
-To key in the command, type `teach t/moduleName`. This will set the default teaching 
+To key in the command, type `teach t/courseName`. This will set the default teaching 
 course for the users and save it in UserPrefs. 
 
 Hence, the next time users log into TAManager, the page will automatically display the 
-TAs teaching under the users' module. 
+TAs teaching under the users' course. 
 
-The following sequence diagram displays how Teaching Module Feature is implemented.
+The following sequence diagram displays how Teaching course Feature is implemented.
 
 ![TeachingDiagram](images/TeachingDiagram.png)
 
