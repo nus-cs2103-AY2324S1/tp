@@ -258,6 +258,7 @@ The flow for the `remind` command is described by the following sequence diagram
 
 ![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
 
+
 #### Feature details
 1. The `remind` command can accept an optional parameter `days` which specifies the number of days to search for birthdays and events. If `days` is not specified, the default value of 7 days will be used.
 2. The application will validate the argument `days` to ensure that it is a positive integer. If it is not, an error message will be shown to the user and prompts the user for a corrected input.
