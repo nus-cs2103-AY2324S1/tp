@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.ParserUtil.FORMAT;
+
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,6 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setLastContactedTime(person.getLastContactedTime());
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
     }
@@ -61,6 +65,15 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code LastContactedTime} of the {@code EditPersonDescriptor} that we are
+     * building.
+     */
+    public EditPersonDescriptorBuilder withLastContactedTime(String lastContactedTime) {
+        descriptor.setLastContactedTime(LocalDateTime.parse(lastContactedTime, FORMAT));
         return this;
     }
 

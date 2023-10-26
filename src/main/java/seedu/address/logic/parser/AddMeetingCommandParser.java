@@ -49,8 +49,8 @@ public class AddMeetingCommandParser implements Parser<AddMeetingCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_LOCATION, PREFIX_START, PREFIX_END);
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
-        LocalDateTime start = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START).get());
-        LocalDateTime end = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END).get());
+        LocalDateTime start = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_START).get());
+        LocalDateTime end = ParserUtil.parseMeetingTime(argMultimap.getValue(PREFIX_END).get());
         if (!MeetingTime.isValidMeetingTime(start, end)) {
             throw new ParseException(MeetingTime.MESSAGE_CONSTRAINTS);
         }
