@@ -74,7 +74,6 @@ public class ReadCommand extends Command {
      * @return The information specified by the field.
      * @throws CommandException if the field is invalid.
      */
-
     public String fieldValueToString(Person person) throws CommandException {
         switch (field) {
         case "phone":

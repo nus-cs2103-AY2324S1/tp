@@ -2,19 +2,22 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
+import seedu.address.model.person.Benefit;
+import seedu.address.model.person.Deduction;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reason;
 import seedu.address.model.person.Salary;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -141,7 +144,7 @@ public class ParserUtil {
     public static Salary parseSalary(String salary) throws ParseException {
         requireNonNull(salary);
         String trimmedSalary = salary.trim();
-        if (!Salary.isValidSalary(trimmedSalary)) {
+        if (!Salary.isValid(trimmedSalary)) {
             throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
         }
         return new Salary(trimmedSalary);
@@ -173,5 +176,56 @@ public class ParserUtil {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         LocalDate localDate = LocalDate.parse(date, formatter);
         return localDate;
+    }
+
+    /**
+     * Parses a {@code String reason} into an {@code Reason}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reason} is invalid.
+     */
+    public static Reason parseReason(String reason) throws ParseException {
+        requireNonNull(reason);
+        String trimmedReason = reason.trim();
+
+        for (Reason r : Reason.values()) {
+            String expected = String.join(" ", r.toString().split("_"));
+            if (FuzzySearch.tokenSetRatio(trimmedReason.toLowerCase(), expected.toLowerCase()) > 50) {
+                return r;
+            }
+        }
+        throw new ParseException(Reason.MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String deduction} into an {@code Deduction}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deduction} is invalid.
+     */
+    public static Deduction parseDeduction(String value, Reason reason) throws ParseException {
+        requireNonNull(value);
+        requireNonNull(reason);
+        String trimmedDeduction = value.trim();
+        if (!Deduction.isValid(trimmedDeduction)) {
+            throw new ParseException(Deduction.MESSAGE_CONSTRAINTS);
+        }
+        return new Deduction(trimmedDeduction, reason);
+    }
+
+    /**
+     * Parses a {@code String benefit} into an {@code Benefit}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code benefit} is invalid.
+     */
+    public static Benefit parseBenefit(String value, Reason reason) throws ParseException {
+        requireNonNull(value);
+        requireNonNull(reason);
+        String trimmedBenefit = value.trim();
+        if (!Benefit.isValid(trimmedBenefit)) {
+            throw new ParseException(Benefit.MESSAGE_CONSTRAINTS);
+        }
+        return new Benefit(trimmedBenefit, reason);
     }
 }
