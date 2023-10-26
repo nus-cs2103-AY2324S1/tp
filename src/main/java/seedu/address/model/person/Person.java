@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.lead.Lead;
@@ -100,6 +102,10 @@ public class Person {
 
     public Set<Interaction> getInteractions() {
         return interactions;
+    }
+
+    public Set<Interaction> getFilteredInteraction(Predicate<Interaction> predicate) {
+        return interactions.stream().filter(predicate).collect(Collectors.toSet());
     }
 
     /**

@@ -2,10 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROFESSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -22,11 +27,15 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.lead.Lead;
+import seedu.address.model.person.Profession;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,7 +53,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_LEAD + "LEAD] "
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
+            + "[" + PREFIX_PROFESSION + "PROFESSION] "
+            + "[" + PREFIX_INCOME + "INCOME] "
+            + "[" + PREFIX_DETAILS + "DETAILS]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -100,14 +114,17 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Lead updatedLead = editPersonDescriptor.getLead().orElse(personToEdit.getLead());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Lead updatedLead = editPersonDescriptor.getLead().orElse(personToEdit.getLead());
+        TelegramHandle updatedTelegram = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
+        Profession updatedProfession = editPersonDescriptor.getProfession().orElse(personToEdit.getProfession());
+        Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
+        Details updatedDetails = editPersonDescriptor.getDetails().orElse(personToEdit.getDetails());
 
-        Person person =
-                new Person.PersonBuilder(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags)
-                        .withLead(updatedLead)
-                        .build();
-        return person;
+        return new Person.PersonBuilder(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags)
+                .withLead(updatedLead).withTelegram(updatedTelegram).withProfession(updatedProfession)
+                .withIncome(updatedIncome).withDetails(updatedDetails)
+                .build();
     }
 
     @Override
@@ -145,6 +162,10 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Lead lead;
+        private TelegramHandle telegram;
+        private Profession profession;
+        private Income income;
+        private Details details;
 
         public EditPersonDescriptor() {}
 
@@ -159,13 +180,18 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setLead(toCopy.lead);
+            setTelegram(toCopy.telegram);
+            setProfession(toCopy.profession);
+            setIncome(toCopy.income);
+            setDetails(toCopy.details);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, lead);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags,
+                    lead, telegram, profession, income, details);
         }
 
         public void setName(Name name) {
@@ -200,14 +226,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setLead(Lead lead) {
-            this.lead = lead;
-        }
-
-        public Optional<Lead> getLead() {
-            return Optional.ofNullable(lead);
-        }
-
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -223,6 +241,46 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setLead(Lead lead) {
+            this.lead = lead;
+        }
+
+        public Optional<Lead> getLead() {
+            return Optional.ofNullable(lead);
+        }
+
+        public void setTelegram(TelegramHandle telegram) {
+            this.telegram = telegram;
+        }
+
+        public Optional<TelegramHandle> getTelegram() {
+            return Optional.ofNullable(telegram);
+        }
+
+        public void setProfession(Profession profession) {
+            this.profession = profession;
+        }
+
+        public Optional<Profession> getProfession() {
+            return Optional.ofNullable(profession);
+        }
+
+        public void setIncome(Income income) {
+            this.income = income;
+        }
+
+        public Optional<Income> getIncome() {
+            return Optional.ofNullable(income);
+        }
+
+        public void setDetails(Details details) {
+            this.details = details;
+        }
+
+        public Optional<Details> getDetails() {
+            return Optional.ofNullable(details);
         }
 
         @Override
@@ -241,7 +299,12 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(lead, otherEditPersonDescriptor.lead)
+                    && Objects.equals(telegram, otherEditPersonDescriptor.telegram)
+                    && Objects.equals(profession, otherEditPersonDescriptor.profession)
+                    && Objects.equals(income, otherEditPersonDescriptor.income)
+                    && Objects.equals(details, otherEditPersonDescriptor.details);
         }
 
         @Override
@@ -252,6 +315,11 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("lead", lead)
+                    .add("telegram", telegram)
+                    .add("profession", profession)
+                    .add("income", income)
+                    .add("details", details)
                     .toString();
         }
     }
