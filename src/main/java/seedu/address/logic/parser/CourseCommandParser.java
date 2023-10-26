@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import seedu.address.logic.commands.CourseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.course.Course;
-import seedu.address.model.course.UniqueCourseList;
 
 /**
  * Parses input arguments and creates a new CourseCommand object
@@ -26,8 +25,7 @@ public class CourseCommandParser implements Parser<CourseCommand> {
 
         if (argMultimap.getValue(PREFIX_COURSE).isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE) + "\n"
-                            + "Available Courses: " + UniqueCourseList.COURSE_LIST);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE));
         }
 
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());

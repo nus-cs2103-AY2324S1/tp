@@ -1,6 +1,6 @@
 package seedu.address.model.course.exceptions;
 
-import seedu.address.model.course.UniqueCourseList;
+import seedu.address.model.course.CourseData;
 
 /**
  * Signals that the operation is unable to find the specified course.
@@ -9,6 +9,6 @@ import seedu.address.model.course.UniqueCourseList;
 public class CourseNotFoundException extends RuntimeException {
     @Override
     public String getMessage() {
-        return "Course not found. Available Courses: " + UniqueCourseList.COURSE_LIST;
+        return "Course not found." + CourseData.getCourseListString();
     }
 }
