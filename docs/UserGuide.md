@@ -5,7 +5,7 @@ title: User Guide
 
 WellNUS is a **desktop application used by NUS Counsellors to manage and schedule appointments with their student clients**
 It is optimised for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+If you can type fast, WellNUS can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
