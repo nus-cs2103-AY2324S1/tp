@@ -27,7 +27,14 @@ public class FindCommand extends Command {
 
     private final Predicate<Person> predicate;
 
+    /**
+     * Creates a {@code FindCommand} to find persons by name with the specified namePredicate.
+     *
+     * @param namePredicate The predicate to match persons by name.
+     * @throws NullPointerException if {@code namePredicate} is null.
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate) {
+        assert namePredicate != null;
         this.predicate = namePredicate;
     }
 
