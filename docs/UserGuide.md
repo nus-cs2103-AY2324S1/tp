@@ -84,6 +84,19 @@ Examples:
 * `deleteMember 1 ` deletes the 1st member in the member list.
 * `deleteMember 10 ` deletes the 10th member in the member list.
 
+### Edit a Member: `editMember`
+Edits the member at the specified index with the specified attributes.
+
+Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+
+* The index refers to the index number shown in the displayed member list.
+* The index **must be a positive integer** that is within the range of the length of the member list.
+* At least one field to edit must be provided.
+
+
+Examples:
+* `editMember 1 a/RH t/Musician` edits the address and tag of the 1st member in the member list.
+
 ### Create an Event : `createEvent`
 
 Creates a new event and adds it to the database.
@@ -217,7 +230,7 @@ Action | Format, Examples
 --------|------------------
 **Create a member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader`
 **Delete a member** | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
-**Edit a member** | coming soon...
+**Edit a member** | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g.`editMember 1 a/One North`
 **Create an event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g.`createEvent n/Party l/Raffles Hall d/16-09-2023 t/Fun`
 **Delete an event** | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
 **Edit an event** | coming soon...
