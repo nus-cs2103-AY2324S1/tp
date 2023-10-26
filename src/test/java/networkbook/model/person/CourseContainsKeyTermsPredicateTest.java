@@ -149,4 +149,23 @@ public class CourseContainsKeyTermsPredicateTest {
         String expected = CourseContainsKeyTermsPredicate.class.getCanonicalName() + "{key terms=" + keyTerms + "}";
         assertEquals(predicate.toString(), expected);
     }
+
+    @Test
+    public void getKeyTerms() {
+        List<String> keyTerms = List.of("First", "Second");
+        CourseContainsKeyTermsPredicate predicate = new CourseContainsKeyTermsPredicate(keyTerms);
+
+        assertEquals(keyTerms, predicate.getKeyTerms());
+    }
+
+    @Test
+    public void getCourses() {
+        List<String> keyTerms = List.of("First", "Second", "Third");
+        CourseContainsKeyTermsPredicate predicate = new CourseContainsKeyTermsPredicate(keyTerms);
+
+        Person personWithSomeMatchingCourses = new PersonBuilder().addCourse("First").addCourse("Third").build();
+        List<Course> expected = List.of(new Course("First"), new Course("Third"));
+
+        assertEquals(expected, predicate.getCourses(personWithSomeMatchingCourses));
+    }
 }
