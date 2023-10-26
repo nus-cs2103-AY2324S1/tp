@@ -22,9 +22,10 @@ public class AnnualLeave {
     public static final String MESSAGE_LEAVE_CONSTRAINTS =
             "Number of days of annual leave taken should not exceed the total limit.";
 
-    public static final String MESSAGE_EXPIRED_LEAVE = "Date of the leave that you are trying to add is already over!";
+    public static final String MESSAGE_EXPIRED_LEAVE = "Date of the leave that you are trying to add is already over.";
     public static final String MESSAGE_DUPLICATE_LEAVE = "Some or all the leave(s) that you " +
-            "are trying to add has already been added! Please check again!";
+            "are trying to add has already been added. Please check again.";
+    public static final String MESSAGE_INVALID_LEAVE = "The end date of the leave must be after the start date.";
 
     /*
      * The first character of the annual leave must not be a whitespace,
@@ -87,18 +88,34 @@ public class AnnualLeave {
         return value.hashCode();
     }
 
+    /**
+     * Adds in a single day of leave.
+     * @param startDate of the leave to be added to the leaveList
+     */
     public void addLeave(LocalDate startDate) {
         this.leaveList.add(startDate);
     }
 
+    /**
+     * Adds in multiple days of leave.
+     * @param startDate of the leave to be added to the leaveList
+     * @param endDate of the leave to be added to the leaveList
+     */
     public void addLeave(LocalDate startDate, LocalDate endDate) {
         long numOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
-        for (int i = 0; i <= numOfDays; i++) {
+        for (int i = 0; i < numOfDays; i++) {
             this.leaveList.add(startDate.plusDays(i));
         }
     }
 
-    public boolean isValidLeave(LocalDate startDate, LocalDate endDate) {
+    /**
+     * Returns true if the number of days of leave to be added does not exceed the remaining days of leave
+     * that the emplyee has, else false.
+     * @param startDate of the leave to be added to the leaveList
+     * @param endDate of the leave to be added to the leaveList
+     * @return true or false depending on whether the total number of days of leave is exceeded
+     */
+    public boolean isValidAddLeave(LocalDate startDate, LocalDate endDate) {
         long numOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
         int totalNumOfLeaves = parseInt(value);
         if (numOfDays + this.leaveList.size() <= totalNumOfLeaves) {
@@ -107,10 +124,43 @@ public class AnnualLeave {
         return false;
     }
 
+    /**
+     * To get the number of days of leave remaining for the current year.
+     * @return the number of days of leave left for the current year
+     */
     public int numOfLeaveLeft() {
-        return parseInt(value) - this.leaveList.size();
+        return parseInt(value) - this.numOfLeaveUsed();
     }
 
+    /**
+     * To get the number of days of leave used for the current year.
+     * @return the number of days of leave used for the current year
+     */
+    public int numOfLeaveUsed() {
+        int numOfDays = 0;
+        LocalDate currentDate = LocalDate.now();
+        for (LocalDate date: this.leaveList) {
+            if (date.getYear() == currentDate.getYear()) {
+                numOfDays += 1;
+            }
+        }
+        return numOfDays;
+    }
+
+    /**
+     * To get the total number of days of leave.
+     * @return the total number of days of leave
+     */
+    public int getTotalNumOfLeave() {
+        return parseInt(this.value);
+    }
+
+    /**
+     * Returns true if the leave to be added has already been added before, else false.
+     * @param startDate of the leave to be added to the leaveList
+     * @param endDate of the leave to be added to the leaveList
+     * @return true or false depending on whether there are duplicate leave
+     */
     public boolean containsDuplicateLeave(LocalDate startDate, LocalDate endDate) {
         LocalDate tempEndDate;
         if (endDate == null) {
@@ -126,6 +176,10 @@ public class AnnualLeave {
         return false;
     }
 
+    /**
+     * To get whether the employee is working or on leave on the current day.
+     * @return "Working" if the employee is not one leave, else return "On Leave"
+     */
     public String getWorkingStatus() {
         LocalDate currentDate = LocalDate.now();
         for (LocalDate date: this.leaveList) {

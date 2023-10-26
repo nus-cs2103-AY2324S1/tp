@@ -14,6 +14,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_ON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_ANNUAL_LEAVE_TO;
 
+/**
+ * Parses input arguments and creates a new AddLeaveCommand object
+ */
 public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
 
     /**
@@ -42,6 +45,12 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         }
     }
 
+    /**
+     * Handles the command based on user input if user wish to add in a single day of leave for employee.
+     * @param argMultimapForOn The ArgumentMultimap consisting of the user input
+     * @return AddLeaveCommand object for execution
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public AddLeaveCommand singleDayLeaveHandler(ArgumentMultimap argMultimapForOn) throws ParseException {
         if (argMultimapForOn.getPreamble().isEmpty()) {
             throw new ParseException(
@@ -63,6 +72,12 @@ public class AddLeaveCommandParser implements Parser<AddLeaveCommand> {
         }
     }
 
+    /**
+     * Handles the command based on user input if user wish to add in multiple days of leave for employee.
+     * @param argMultimapForFromAndTo The ArgumentMultimap consisting of the user input
+     * @return AddLeaveCommand object for execution
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public AddLeaveCommand multipleDaysLeaveHandler(ArgumentMultimap argMultimapForFromAndTo) throws ParseException {
         if (argMultimapForFromAndTo.getPreamble().isEmpty()) {
             throw new ParseException(

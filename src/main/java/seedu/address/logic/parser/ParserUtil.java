@@ -163,10 +163,10 @@ public class ParserUtil {
     }
 
     /**
-     * Returns LocalDateTime object from String
+     * Returns LocalDate object from String
      * @param date The String containing date from user input
-     * @return LocalDateTime
-     * @throws DateTimeException if the format of String is wrong
+     * @return LocalDate
+     * @throws DateTimeParseException if the format of String is wrong
      */
     public static LocalDate stringToDate(String date) throws DateTimeParseException {
         String dateFormat = "dd/MM/yyyy";
