@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -27,16 +28,20 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -195,5 +200,26 @@ public class EditCommandParserTest {
         String userInput = "edit" + " n/" + VALID_NAME_BOB;
 
         assertParseFailure(parser, userInput, MESSAGE_NOT_EDITED);
+    }
+    @Test
+    public void parse_invalidInput_throwsParseException() {
+        // Missing NAME or NRIC prefix
+        String invalidInput = " edit " + INVALID_EMAIL_DESC;
+        assertThrows(ParseException.class, () -> parser.parse(invalidInput));
+    }
+
+    @Test
+    public void parse_validInput_returnsEditCommand() throws ParseException {
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        // Valid input with NRIC
+        String validInputWithNric = " edit " + PREFIX_NRIC + "S1234567A " + PREFIX_PHONE + "91234567 "
+                + PREFIX_NAME + "John Doe";
+        EditCommand expectedCommandWithNric = new EditCommand(new Name("John Doe"), new Nric("S1234567A"), descriptor);
+        assertEquals(parser.parse(validInputWithNric), expectedCommandWithNric);
+
+        // Valid input with Name
+        String validInputWithName = " edit " + PREFIX_NAME + "Alice " + PREFIX_EMAIL + "alice@example.com";
+        EditCommand expectedCommandWithName = new EditCommand(new Name("Alice"), null, descriptor);
+        assertEquals(parser.parse(validInputWithName), expectedCommandWithName);
     }
 }
