@@ -32,8 +32,9 @@ public class ViewContactCommandTest {
         ViewContactCommand viewContactCommand = new ViewContactCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW, personToView.getName());
-        String expectedDisplayString = String.format("Name: %s\nPhone: %s\nEmail: %s\nStatus: %s\nRemark: %s",
-                "Alice Pauline", "94351253", "alice@example.com", "NIL", "");
+        String expectedDisplayString = String.format(
+                "Name: %s\nPhone: %s\nEmail: %s\nLast Meeting:\n%s\nStatus: %s\nRemark: %s",
+                "Alice Pauline", "94351253", "alice@example.com", "20 October 2023, 1100", "NIL", "");
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -57,8 +58,9 @@ public class ViewContactCommandTest {
         ViewContactCommand viewContactCommand = new ViewContactCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(Messages.MESSAGE_PERSON_VIEWED_OVERVIEW, personToView.getName());
-        String expectedDisplayString = String.format("Name: %s\nPhone: %s\nEmail: %s\nStatus: %s\nRemark: %s",
-                "Alice Pauline", "94351253", "alice@example.com", "NIL", "");
+        String expectedDisplayString = String.format(
+                "Name: %s\nPhone: %s\nEmail: %s\nLast Meeting:\n%s\nStatus: %s\nRemark: %s",
+                "Alice Pauline", "94351253", "alice@example.com", "20 October 2023, 1100", "NIL", "");
 
         // Model displaying filtered list should not change
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
