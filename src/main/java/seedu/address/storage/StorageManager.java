@@ -84,7 +84,7 @@ public class StorageManager implements Storage {
     @Override
     public void backupAddressBook() throws IOException {
         try {
-            saveAddressBookToPrevStorage(readAddressBook().orElseThrow());
+            saveAddressBookToPrevStorage(readAddressBook(addressBookStorage.getAddressBookFilePath()).orElseThrow());
         } catch (DataLoadingException e) {
             throw new IOException("Couldn't read data");
         }
