@@ -48,6 +48,10 @@ public class Attendance {
         return remark;
     }
 
+    public String getMemberAndEventAttendance() {
+        return getMemberName().toString() + " to " + getEventName().toString();
+    }
+
     /**
      * Returns true if both attendance have the same identity fields.
      * This defines a weaker notion of equality between two attendance.

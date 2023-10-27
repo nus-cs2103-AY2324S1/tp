@@ -39,7 +39,8 @@ public class EnrolCommandIntegrationTest {
                 .withRemark(ALICE_AURORA.getRemark().value)
                 .build();
 
-        String commitMessage = String.format(EnrolCommand.MESSAGE_COMMIT, validAttendance.toString());
+        String commitMessage = String.format(EnrolCommand.MESSAGE_COMMIT,
+                validAttendance.getMemberAndEventAttendance());
         Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.createAttendance(validAttendance);
         expectedModel.commit(commitMessage);
