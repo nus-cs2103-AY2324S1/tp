@@ -24,6 +24,12 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parse_noFields_throwsParseException() {
+        assertParseFailure(parser, "filter /with ",
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsFilterCommand() {
         FilterCommand expectedCommand = new FilterCommand(
                 new CourseContainsKeyTermsPredicate(List.of("Alice", "Bob")),

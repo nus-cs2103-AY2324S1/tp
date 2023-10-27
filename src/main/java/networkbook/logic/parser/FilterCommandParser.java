@@ -1,6 +1,7 @@
 package networkbook.logic.parser;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +48,15 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         String[] predicateTerms = fieldString.get().trim().split("\\s+");
+        if (Arrays.stream(predicateTerms).anyMatch(s -> s.equals(""))) {
+            throw new ParseException(
+                    String.format(
+                            Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                            FilterCommand.MESSAGE_USAGE
+                    )
+            );
+        }
+
         Optional<String> booleanToCheck = argMultimap.getValue(CliSyntax.PREFIX_FILTER_FIN);
         String booleanToCheckString = booleanToCheck.orElse("false").trim().toLowerCase();
 
