@@ -2,15 +2,20 @@ package seedu.address.model.musician;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.typicalentities.TypicalMusicians.ALICE;
 import static seedu.address.testutil.typicalentities.TypicalMusicians.BOB;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.CARL;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.DANIEL;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
@@ -169,7 +174,80 @@ public class UniqueMusicianListTest {
     }
 
     @Test
+    public void getMusician_indexWithinList_returnsMusician() {
+        uniqueMusicianList.add(ALICE);
+        assertEquals(uniqueMusicianList.getMusician(0), ALICE);
+    }
+
+    @Test
+    public void getMusician_indexNotWithinList_throwsIndexOutOfBoundsError() {
+        uniqueMusicianList.add(ALICE);
+        assertThrows(IndexOutOfBoundsException.class, () -> uniqueMusicianList.getMusician(1));
+    }
+
+    @Test
     public void toStringMethod() {
         assertEquals(uniqueMusicianList.asUnmodifiableObservableList().toString(), uniqueMusicianList.toString());
+    }
+
+    @Test
+    public void hashcode() {
+        uniqueMusicianList.add(ALICE);
+        UniqueMusicianList copyList = new UniqueMusicianList();
+        copyList.add(ALICE);
+        // not same object but same hashcode
+        assertNotSame(uniqueMusicianList, copyList);
+        assertEquals(uniqueMusicianList.hashCode(), copyList.hashCode());
+    }
+
+    @Test
+    public void iterator() {
+        // empty iterator hasNext -> returns false
+        Iterator<Musician> emptyIterated = uniqueMusicianList.iterator();
+        assertFalse(emptyIterated.hasNext());
+        // empty iterator next -> throws exception
+        assertThrows(NoSuchElementException.class, () -> emptyIterated.next());
+        // iterator with a musician hasNext -> returns true
+        uniqueMusicianList.add(ALICE);
+        Iterator<Musician> iterated = uniqueMusicianList.iterator();
+        assertTrue(iterated.hasNext());
+        // iterator with musician next -> returns the musician
+        assertEquals(iterated.next(), ALICE);
+        // iterator with a musician hasNext after next -> returns false
+        assertFalse(iterated.hasNext());
+    }
+
+    @Test
+    public void equals() {
+        uniqueMusicianList.add(ALICE);
+        uniqueMusicianList.add(BOB);
+        // same values -> returns true
+        UniqueMusicianList copyList = new UniqueMusicianList();
+        copyList.add(ALICE);
+        copyList.add(BOB);
+        assertTrue(uniqueMusicianList.equals(copyList));
+
+        // same object -> returns true
+        assertTrue(uniqueMusicianList.equals(uniqueMusicianList));
+
+        // null -> returns false
+        assertFalse(uniqueMusicianList.equals(null));
+
+        // different type -> returns false
+        assertFalse(uniqueMusicianList.equals(ALICE));
+
+        // empty list -> returns false
+        UniqueMusicianList emptyList = new UniqueMusicianList();
+        assertFalse(uniqueMusicianList.equals(emptyList));
+
+        // different musicians -> returns false
+        UniqueMusicianList differentList = new UniqueMusicianList();
+        differentList.add(CARL);
+        differentList.add(DANIEL);
+        assertFalse(uniqueMusicianList.equals(differentList));
+
+        // empty list and empty list -> returns true
+        UniqueMusicianList emptyListTwo = new UniqueMusicianList();
+        assertTrue(emptyList.equals(emptyListTwo));
     }
 }
