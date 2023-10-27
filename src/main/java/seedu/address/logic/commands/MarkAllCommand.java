@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
 
 /**
  * Marks all displayed students' attendance.
@@ -34,9 +35,12 @@ public class MarkAllCommand extends Command {
         requireNonNull(model);
 
         List<Student> lastShownList = model.getFilteredStudentList();
-
-        for (Student s : lastShownList) {
-            model.setStudent(s, s.markPresent(index));
+        try {
+            for (Student s : lastShownList) {
+                model.setStudent(s, s.markPresent(index));
+            }
+        } catch (InvalidTutorialIndexException e) {
+            throw new CommandException(e.getMessage());
         }
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);

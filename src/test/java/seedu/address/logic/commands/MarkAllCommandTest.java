@@ -1,13 +1,9 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.NONEXISTENT_STUDENT_NUMBER;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,77 +17,53 @@ import seedu.address.model.student.Student;
 import seedu.address.testutil.TypicalStudents;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for MarkCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for MarkAllCommand.
  */
-public class MarkCommandTest {
+public class MarkAllCommandTest {
 
     private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validStudentNumber_success() {
-        Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
+    public void execute_success() {
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
-        model.setSelectedStudent(studentToMark);
 
-        MarkCommand markCommand = new MarkCommand(i, studentToMark.getStudentNumber());
+        MarkAllCommand markAllCommand = new MarkAllCommand(i);
 
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS,
-                Messages.format(studentToMark));
+        String expectedMessage = MarkAllCommand.MESSAGE_MARK_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setStudent(studentToMark, studentToMark.markPresent(i));
+        for (Student s : TypicalStudents.getTypicalStudents()) {
+            expectedModel.setStudent(s, s.markPresent(i));
+        }
 
-        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
-        assertEquals(studentToMark, model.getSelectedStudent().get(0));
+        assertCommandSuccess(markAllCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
-        Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT + 1);
 
-        MarkCommand markCommand = new MarkCommand(i, studentToMark.getStudentNumber());
+        MarkAllCommand markAllCommand = new MarkAllCommand(i);
 
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX);
-    }
-
-    @Test
-    public void execute_nonexistentStudentNumber_throwsCommandException() {
-        MarkCommand markCommand = new MarkCommand(Index.fromOneBased(1), NONEXISTENT_STUDENT_NUMBER);
-
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
+        assertCommandFailure(markAllCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX);
     }
 
     @Test
     public void equals() {
-        Student firstStudent = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Student secondStudent = TypicalStudents.getTypicalStudents().get(INDEX_SECOND_STUDENT.getZeroBased());
-        MarkCommand markFirstStudentForFirstTutorial = new MarkCommand(Index.fromOneBased(1),
-                firstStudent.getStudentNumber());
-        MarkCommand markFirstStudentForSecondTutorial = new MarkCommand(Index.fromOneBased(2),
-                firstStudent.getStudentNumber());
-        MarkCommand markSecondStudentForFirstTutorial = new MarkCommand(Index.fromOneBased(1),
-                secondStudent.getStudentNumber());
-        MarkCommand markSecondStudentForSecondTutorial = new MarkCommand(Index.fromOneBased(2),
-                secondStudent.getStudentNumber());
+        MarkAllCommand markForFirstTutorial = new MarkAllCommand(Index.fromOneBased(1));
+        MarkAllCommand markForSecondTutorial = new MarkAllCommand(Index.fromOneBased(2));
 
         // same object -> returns true
-        assertTrue(markFirstStudentForFirstTutorial.equals(markFirstStudentForFirstTutorial));
+        assertTrue(markForFirstTutorial.equals(markForFirstTutorial));
 
         // null -> returns false
-        assertFalse(markFirstStudentForFirstTutorial.equals(null));
+        assertFalse(markForFirstTutorial.equals(null));
 
         // different types -> returns false
-        assertFalse(markSecondStudentForFirstTutorial.equals(1));
+        assertFalse(markForFirstTutorial.equals(1));
 
-        // same student and different tutorial index -> returns false
-        assertFalse(markFirstStudentForFirstTutorial.equals(markFirstStudentForSecondTutorial));
-
-        // different student and same tutorial index -> returns false
-        assertFalse(markFirstStudentForFirstTutorial.equals(markSecondStudentForFirstTutorial));
-
-        // different student and different tutorial index -> returns false
-        assertFalse(markFirstStudentForFirstTutorial.equals(markSecondStudentForSecondTutorial));
+        // different tutorial index -> returns false
+        assertFalse(markForFirstTutorial.equals(markForSecondTutorial));
     }
 
 }
