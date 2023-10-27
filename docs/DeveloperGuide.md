@@ -154,6 +154,38 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Employee management
+
+#### The employee class
+
+ManageHR keeps track of employees within the company with the use of `Employee` and `UniqueEmployeeList`. The `UniqueEmployeeList` serves as a container for the `Employee` objects
+within the company, while enforcing the constraints that no 2 employees can have the same name.
+
+The `Employee` class contains the following attributes.
+
+1. `Name`: The name of the employee.
+2. `Email`: The email of the employee.
+3. `Address`: The home address of the employee.
+4. `Leave`: The amount of leave remaining for the employee.
+5. `Salary`: The monthly salary accorded to the employee.
+6. `Phone`: The phone number of the employee.
+7. `Departments`: A set of departments in which the employee can belong to.
+
+All the attributes except Departments are compulsory fields.
+
+### List command
+
+#### Overview
+
+The `ListCommand` displays the `Employee` objects currently stored in `UniqueEmployeeList` object.
+
+The following sequence diagram shows how the different components of ManageHR interact with each other.
+
+<img src="images/ManageHR/ListCommandSequenceDiagram.png" width="700" />
+
+The above sequence diagram omits details on the internal implementations within each directory in order to improve 
+overall readability of the diagram.
+
 ### Filter feature
 
 The filter feature filters employees by parameters/prefixes.
