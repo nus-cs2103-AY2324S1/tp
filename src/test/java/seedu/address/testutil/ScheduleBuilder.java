@@ -6,6 +6,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
+import seedu.address.model.schedule.Status;
 
 /**
  * A utility class to help with building Schedule objects.
@@ -17,6 +18,7 @@ public class ScheduleBuilder {
     private Person tutor;
     private StartTime startTime;
     private EndTime endTime;
+    private Status status;
 
     /**
      * Creates a {@code ScheduleBuilder} with the default details.
@@ -25,6 +27,7 @@ public class ScheduleBuilder {
         tutor = DEFAULT_TUTOR;
         startTime = new StartTime(DEFAULT_START_TIME);
         endTime = new EndTime(DEFAULT_END_TIME);
+        status = Status.PENDING;
     }
 
     /**
@@ -34,6 +37,7 @@ public class ScheduleBuilder {
         tutor = scheduleToCopy.getTutor();
         startTime = scheduleToCopy.getStartTime();
         endTime = scheduleToCopy.getEndTime();
+        status = scheduleToCopy.getStatus();
     }
 
     /**
@@ -60,7 +64,15 @@ public class ScheduleBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Status} of the {@code Schedule} that we are building.
+     */
+    public ScheduleBuilder withStatus(Status status) {
+        this.status = status;
+        return this;
+    }
+
     public Schedule build() {
-        return new Schedule(tutor, startTime, endTime);
+        return new Schedule(tutor, startTime, endTime, status);
     }
 }

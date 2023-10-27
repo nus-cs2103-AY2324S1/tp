@@ -2,13 +2,16 @@ package seedu.address.model.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_SECOND_JAN;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_BOB_SECOND_JAN;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -171,5 +174,59 @@ public class UniqueScheduleListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniqueScheduleList.asUnmodifiableObservableList().toString(), uniqueScheduleList.toString());
+    }
+
+    @Test
+    public void testHashcode() {
+        UniqueScheduleList otherUniqueScheduleList1 = new UniqueScheduleList();
+        UniqueScheduleList otherUniqueScheduleList2 = new UniqueScheduleList();
+
+        uniqueScheduleList.add(SCHEDULE_ALICE_FIRST_JAN);
+        otherUniqueScheduleList1.add(SCHEDULE_ALICE_FIRST_JAN);
+
+        // different list and different contents -> different hashcode
+        assertNotEquals(uniqueScheduleList.hashCode(), otherUniqueScheduleList2.hashCode());
+
+        // same object -> same hashcode
+        assertEquals(uniqueScheduleList.hashCode(), uniqueScheduleList.hashCode());
+        // different list but same contents -> same hashcode
+        assertEquals(uniqueScheduleList.hashCode(), otherUniqueScheduleList1.hashCode());
+    }
+
+    @Test
+    public void testEquals() {
+        UniqueScheduleList otherUniqueScheduleList1 = new UniqueScheduleList();
+        UniqueScheduleList otherUniqueScheduleList2 = new UniqueScheduleList();
+
+        uniqueScheduleList.add(SCHEDULE_ALICE_FIRST_JAN);
+        otherUniqueScheduleList1.add(SCHEDULE_ALICE_FIRST_JAN);
+        otherUniqueScheduleList2.add(SCHEDULE_ALICE_SECOND_JAN);
+
+        // null -> returns false
+        assertFalse(uniqueScheduleList.equals(null));
+
+        // different types -> returns false
+        assertFalse(uniqueScheduleList.equals("String"));
+
+        // different list and different contents -> returns false
+        assertFalse(uniqueScheduleList.equals(otherUniqueScheduleList2));
+
+        // same object -> returns true
+        assertTrue(uniqueScheduleList.equals(uniqueScheduleList));
+
+        // different list but same contents -> returns true
+        assertTrue(uniqueScheduleList.equals(otherUniqueScheduleList1));
+    }
+
+    @Test
+    public void iterator_validList_returnsIterator() {
+        uniqueScheduleList.add(SCHEDULE_ALICE_FIRST_JAN);
+        uniqueScheduleList.add(SCHEDULE_ALICE_SECOND_JAN);
+
+        Iterator<Schedule> iterator = uniqueScheduleList.iterator();
+
+        assertEquals(SCHEDULE_ALICE_SECOND_JAN, iterator.next());
+        assertEquals(SCHEDULE_ALICE_FIRST_JAN, iterator.next());
+        assertFalse(iterator.hasNext());
     }
 }

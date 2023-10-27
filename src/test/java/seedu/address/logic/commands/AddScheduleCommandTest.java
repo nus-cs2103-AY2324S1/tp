@@ -384,6 +384,11 @@ class AddScheduleCommandTest {
         public ObservableList<Schedule> getSchedulesFromTutor(Person tutor) throws PersonNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateTutorSchedules(Person oldPerson, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

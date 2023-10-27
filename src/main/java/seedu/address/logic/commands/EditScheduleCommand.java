@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
+import static seedu.address.model.schedule.Schedule.MESSAGE_CONSTRAINTS;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +20,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
+import seedu.address.model.schedule.Status;
 
 /**
  * Edits the details of an existing schedule in the address book.
@@ -29,13 +31,13 @@ public class EditScheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the schedule identified "
         + "by the index number used in the displayed schedule list. "
         + "Parameters: "
-        + "SCHEDULE_INDEX (must be a positive integer)"
+        + "SCHEDULE_INDEX (must be a positive integer) "
         + PREFIX_START_TIME + "START_TIME "
         + PREFIX_END_TIME + "END_TIME\n"
         + "Example: " + COMMAND_WORD + " "
         + "1 "
-        + PREFIX_START_TIME + "2023-09-15T09:00:00 "
-        + PREFIX_END_TIME + "2023-09-15T11:00:00";
+        + PREFIX_START_TIME + "2023-09-15T09:00 "
+        + PREFIX_END_TIME + "2023-09-15T11:00";
 
     public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Edited Schedule: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -67,10 +69,16 @@ public class EditScheduleCommand extends Command {
         }
 
         Schedule scheduleToEdit = lastShownList.get(index.getZeroBased());
-        Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor);
+        Schedule editedSchedule;
+
+        try {
+            editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(MESSAGE_CONSTRAINTS);
+        }
 
         boolean hasScheduleClash =
-            model.getAddressBook().getScheduleList().stream().filter(schedule -> !schedule.equals(scheduleToEdit))
+            model.getAddressBook().getScheduleList().stream().filter(schedule -> !schedule.isDuplicate(scheduleToEdit))
                 .anyMatch(schedule -> schedule.isClashing(editedSchedule));
 
         if (!scheduleToEdit.equals(editedSchedule) && model.hasSchedule(editedSchedule)) {
@@ -96,8 +104,9 @@ public class EditScheduleCommand extends Command {
         StartTime updatedStartTime = editScheduleDescriptor.getStartTime().orElse(scheduleToEdit.getStartTime());
         EndTime updatedEndTime = editScheduleDescriptor.getEndTime().orElse(scheduleToEdit.getEndTime());
         Person tutor = scheduleToEdit.getTutor();
+        Status status = scheduleToEdit.getStatus();
 
-        return new Schedule(tutor, updatedStartTime, updatedEndTime);
+        return new Schedule(tutor, updatedStartTime, updatedEndTime, status);
     }
 
     @Override
