@@ -155,6 +155,10 @@ class DeleteEventCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getCurrentWeekEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }

@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
 import seedu.address.model.event.exceptions.DateOutOfBoundsException;
 
 /**
@@ -198,7 +199,7 @@ public class EventPeriod implements Comparable<EventPeriod> {
      *
      * @param other other EventPeriod object.
      * @return a negative integer if this EventPeriod has an earlier start time than the other, 0 if both have the same
-     * start time and a positive integer otherwise.
+     *     start time and a positive integer otherwise.
      */
     public int compareStartTime(EventPeriod other) {
         requireNonNull(other);
@@ -211,7 +212,7 @@ public class EventPeriod implements Comparable<EventPeriod> {
      *
      * @param other other EventPeriod object.
      * @return a negative integer if this EventPeriod has an earlier end time than the other, 0 if both have the same
-     * end time and a positive integer otherwise.
+     *     end time and a positive integer otherwise.
      */
     public int compareEndTime(EventPeriod other) {
         requireNonNull(other);

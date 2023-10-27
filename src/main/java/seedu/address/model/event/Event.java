@@ -188,7 +188,7 @@ public class Event {
      *
      * @param other other Event.
      * @return a negative integer if this Event has an earlier start time than the other, 0 if they have the same start
-     * time and a positive integer otherwise.
+     *     time and a positive integer otherwise.
      */
     public int compareStartTime(Event other) {
         requireNonNull(other);
@@ -201,7 +201,7 @@ public class Event {
      *
      * @param other other Event.
      * @return a negative integer if this Event has an earlier end time than the other, 0 if they have the same end time
-     * and a positive integer otherwise.
+     *     and a positive integer otherwise.
      */
     public int compareEndTime(Event other) {
         requireNonNull(other);
@@ -278,8 +278,8 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return (otherEvent.description.equals(this.description) &&
-                (otherEvent.eventPeriod.equals(this.eventPeriod) ||
-                        otherEvent.eventPeriod.isContinuous(this.eventPeriod)));
+        return (otherEvent.description.equals(this.description)
+                && (otherEvent.eventPeriod.equals(this.eventPeriod)
+                        || otherEvent.eventPeriod.isContinuous(this.eventPeriod)));
     }
 }
