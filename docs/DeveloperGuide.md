@@ -132,16 +132,16 @@ The `People` component,
 (`Remark`)
 * Has `Tag` which can store any amount of tags
 * Has a `Policy`, which is optional for a person to have, but is stored in the `Person` class regardless
-  * If a person has a policy attached to them, `Policy` will simply hold their information (i.e. `PolicyNumber`, 
+  * If a person has a policy attached to them, `Policy` will simply hold their information (i.e. `Company`, `PolicyNumber`, 
   policy issue and expiry date as `PolicyDate`)
-  * If a person does not have a policy attached to them, `Policy` will hold default values (`NOPOLICY` for 
+  * If a person does not have a policy attached to them, `Policy` will hold default values (`NOCOMPANY` for `Company`, `NOPOLICY` for 
   `PolicyNumber` and `01-01-1000` for both `PolicyDate`)
 
 #### Design considerations
   * Defensive programming was used for the handling of persons with no policy over the alternative implementation:
   * Make `Policy = null` for `Person` with no policy. This was unsafe as when `Person` is displayed in the UI, methods 
 like `toString()` would throw errors, violating type safety.
-  * Make `PolicyNumber` and `PolicyDate` be `null`. This was unsafe as the RegEx check (e.g. `isValidPolicyNumber()`)
+  * Make `Company`, `PolicyNumber` and `PolicyDate` be `null`. This was unsafe as the RegEx check (e.g. `isValidPolicyNumber()`)
   done in the constructors would have to be removed, leading to improper input validation.
 
 
