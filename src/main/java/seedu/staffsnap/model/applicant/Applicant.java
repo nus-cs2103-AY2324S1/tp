@@ -159,6 +159,16 @@ public class Applicant implements Comparable<Applicant> {
     }
 
     /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Score is equal to this Score; a value less than 0 if this Score is
+     *      less than the Score argument; and a value greater than 0 if this Score is
+     *      greater than the Score argument.
+     */
+    public int compareByRating(Applicant o) {
+        return this.getScore().compareTo(o.getScore());
+    }
+
+    /**
      * @param o the object to be compared.
      * @return the value 0 if the argument Applicant is equal to this Applicant;
      *      a value less than 0 if this Applicant is lexicographically less than the Applicant argument;
@@ -171,6 +181,8 @@ public class Applicant implements Comparable<Applicant> {
             return compareByName(o);
         case PHONE:
             return compareByPhone(o);
+        case RATING:
+            return compareByRating(o);
         default:
             return 0;
         }
