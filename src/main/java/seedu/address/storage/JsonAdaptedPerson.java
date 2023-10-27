@@ -13,6 +13,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.attendance.AttendanceStorage;
+import seedu.address.model.person.attendance.AttendanceType;
+
+import java.util.ArrayList;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -29,6 +33,7 @@ class JsonAdaptedPerson {
     private final String joinDate;
     private final String salary;
     private final String annualLeave;
+    private final ArrayList<String> attendanceStorage;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -37,7 +42,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("bankAccount") String bankAccount, @JsonProperty("joinDate") String joinDate,
-            @JsonProperty("salary") String salary, @JsonProperty("annualLeave") String annualLeave) {
+            @JsonProperty("salary") String salary, @JsonProperty("annualLeave") String annualLeave,
+            @JsonProperty("attendanceStorage") ArrayList<String> attendanceStorage) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,6 +52,7 @@ class JsonAdaptedPerson {
         this.joinDate = joinDate;
         this.salary = salary;
         this.annualLeave = annualLeave;
+        this.attendanceStorage = attendanceStorage;
     }
 
     /**
@@ -60,6 +67,7 @@ class JsonAdaptedPerson {
         joinDate = source.getJoinDate().value;
         salary = source.getSalary().value;
         annualLeave = source.getAnnualLeave().value;
+        attendanceStorage = source.getAttendanceStorage().getValue();
     }
 
     /**
@@ -123,8 +131,12 @@ class JsonAdaptedPerson {
         }
         final AnnualLeave modelAnnualLeave = new AnnualLeave(annualLeave);
 
+        final AttendanceStorage modelAttendanceStorage = new AttendanceStorage(attendanceStorage);
+
+
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBankAccount, modelJoinDate, modelSalary,
-                modelAnnualLeave);
+                modelAnnualLeave, modelAttendanceStorage);
     }
 
 }

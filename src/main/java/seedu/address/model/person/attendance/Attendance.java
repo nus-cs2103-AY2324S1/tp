@@ -1,6 +1,7 @@
-package seedu.address.model.attendance;
+package seedu.address.model.person.attendance;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Attendance {
     private LocalDate date;
@@ -25,6 +26,11 @@ public class Attendance {
 
     public void markLate() {
         this.attendanceType = AttendanceType.LATE;
+    }
+
+    @Override
+    public String toString() {
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "//" + attendanceType.toString().toLowerCase();
     }
 
 }

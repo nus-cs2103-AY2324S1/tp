@@ -10,8 +10,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT;
-
 /**
  * Stores mapping of prefixes to their respective arguments.
  * Each key may be associated with multiple argument values.
@@ -77,23 +75,4 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
-
-//    /**
-//     * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
-//     * once among the arguments.
-//     */
-//    public void verifyNoDuplicateAttendanceTypes(Prefix... attendanceType) throws ParseException {
-//        Prefix[] attendanceTypes
-//
-//
-//
-//
-//        Prefix[] duplicatedPrefixes = Stream.of(prefixes).distinct()
-//                .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
-//                .toArray(Prefix[]::new);
-//
-//        if (duplicatedPrefixes.length > 0) {
-//            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
-//        }
-//    }
 }

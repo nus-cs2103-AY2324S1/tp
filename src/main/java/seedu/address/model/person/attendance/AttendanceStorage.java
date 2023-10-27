@@ -1,4 +1,4 @@
-package seedu.address.model.attendance;
+package seedu.address.model.person.attendance;
 
 import seedu.address.model.person.JoinDate;
 
@@ -14,7 +14,17 @@ public class AttendanceStorage {
 
     private ArrayList<Attendance> storage;
 
+    public AttendanceStorage(ArrayList<String> attendances) {
+        for (String attendance : attendances) {
+            String[] attendanceArr = attendance.split("//");
+            LocalDate date = LocalDate.parse(attendanceArr[0]);
+            AttendanceType attendanceType = AttendanceType.valueOf(attendanceArr[1]);
+            storage.add(new Attendance(date, attendanceType));
+        }
+    }
+
     public AttendanceStorage() {
+
     }
 
     /**
@@ -85,6 +95,23 @@ public class AttendanceStorage {
                 .filter(attendance -> attendance.getType() == type)
                 .count();
     }
+
+    /**
+     * Gets value of storage.
+     *
+     * @return
+     */
+    public ArrayList<String> getValue() {
+        ArrayList<Attendance> attendancesCopy = new ArrayList<>(storage); // Assuming storage is an ArrayList<Attendance>
+
+        ArrayList<String> result = new ArrayList<>();
+        for (Attendance attendance : attendancesCopy) {
+            result.add(attendance.toString());
+        }
+
+        return result;
+    }
+
 
 
 

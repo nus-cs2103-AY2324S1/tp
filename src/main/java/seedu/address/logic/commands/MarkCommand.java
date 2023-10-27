@@ -12,8 +12,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.attendance.AttendanceStorage;
-import seedu.address.model.attendance.AttendanceType;
+import seedu.address.model.person.attendance.AttendanceStorage;
+import seedu.address.model.person.attendance.AttendanceType;
 import seedu.address.model.person.*;
 
 /**

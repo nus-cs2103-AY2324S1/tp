@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.attendance.AttendanceStorage;
-import seedu.address.model.attendance.AttendanceType;
+import seedu.address.model.person.attendance.AttendanceStorage;
+import seedu.address.model.person.attendance.AttendanceType;
 
 /**
  * Represents a Person in the address book.
