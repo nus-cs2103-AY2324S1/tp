@@ -36,6 +36,9 @@ public class DisplayCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    @FXML
+    private Label dueDate;
+
     /**
      * Creates a {@code DisplayCard} with the given {@code card} and index to display.
      */
@@ -45,6 +48,7 @@ public class DisplayCard extends UiPart<Region> {
         this.card = card;
         id.setText(displayedIndex + ". ");
         question.setText(card.getQuestion().question);
+        dueDate.setText("Due: " + card.getNextPracticeDate().getDisplayName());
         card.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
