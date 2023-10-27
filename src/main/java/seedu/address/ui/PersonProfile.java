@@ -141,17 +141,22 @@ public class PersonProfile extends UiPart<Region> {
             mainWindow.sendFeedback(exception.getMessage());
             return didNotHavePerson;
         }
+        confirmAllIfSubmitted();
+
+        if (uiElements.values().stream().anyMatch(PersonProfileField::isEditing)) {
+            clearFeedback();
+            return true;
+        }
 
         if (didNotHavePerson) {
-            mainWindow.sendFeedback("Valid fosterer has been created!");
+            sendFeedback("Valid fosterer has been created!");
         } else {
-            mainWindow.sendFeedback("Valid fosterer.");
+            sendFeedback("Valid fosterer.");
         }
-        confirmAll();
         return true;
     }
 
-    private void confirmAll() {
+    private void confirmAllIfSubmitted() {
         uiElements.values().forEach(PersonProfileField::confirmIfSubmitted);
     }
 

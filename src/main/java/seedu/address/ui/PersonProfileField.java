@@ -90,8 +90,8 @@ public class PersonProfileField extends UiPart<SplitPane> {
     private void handleCancellation() {
         valueField.setText(value);
         valueLabel.setText(value);
-        personProfile.replaceFieldIfValid(field, value);
         updateState(State.LABEL);
+        personProfile.replaceFieldIfValid(field, value);
     }
 
     private void confirm() {
@@ -107,6 +107,10 @@ public class PersonProfileField extends UiPart<SplitPane> {
         if (changesSubmitted) {
             confirm();
         }
+    }
+
+    boolean isEditing() {
+        return state == State.TEXT_FIELD;
     }
 
     private String getTextOrNull() {
