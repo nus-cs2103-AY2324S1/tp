@@ -59,6 +59,11 @@ CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to man
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+### Clear all Members and Events: `clear`
+Clears all Member and Event entries from CCACommander.
+
+Format: `clear`
+
 ### Create a Member: `createMember`
 Creates a new member with accompanying personal details (name, gender, phone number, email address, home address, tag).
 
@@ -229,6 +234,7 @@ If your changes to the data file makes its format invalid, CCACommander will dis
 
 Action | Format, Examples
 --------|------------------
+**Clear all members and events** | `clear`
 **Create a member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader`
 **Delete a member** | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
 **Edit a member** | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g.`editMember 1 a/One North`
