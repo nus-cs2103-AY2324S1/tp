@@ -37,7 +37,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the name or IC of the patient.\n"
+            + "by the name or NRIC of the patient.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Format: edit n/NAME or id/IC_NUMBER [Fields] ...\n"
             + "Example: " + COMMAND_WORD + " "
