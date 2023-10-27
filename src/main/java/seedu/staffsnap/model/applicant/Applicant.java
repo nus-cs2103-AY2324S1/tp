@@ -205,14 +205,14 @@ public class Applicant implements Comparable<Applicant> {
             return "N.A";
         }
 
-        double overallRating = 0.0;
+        double overallRating = 0;
         for (Interview i : interviews) {
             double rating = Double.parseDouble(i.getRating().value);
             overallRating += rating;
         }
         overallRating /=  interviews.size();
 
-        return String.format("%.2f", overallRating);
+        return String.format("%.1f", overallRating);
     }
 
     /**

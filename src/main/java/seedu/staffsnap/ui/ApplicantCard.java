@@ -140,7 +140,7 @@ public class ApplicantCard extends UiPart<Region> {
                     new CornerRadii(0, 0, 10, 10, false),
                     Insets.EMPTY)));
 
-            Label interviewLabel = new Label(applicant.getInterviewIndexForApplicantCard(interview)
+            Label interviewLabel = new Label((int) applicant.getInterviewIndexForApplicantCard(interview)
                     + ". " + interview.type);
 
             Label interviewRatingLabel = new Label();
@@ -157,15 +157,25 @@ public class ApplicantCard extends UiPart<Region> {
     private void displayApplicantOverallRating() {
         Circle outerCircle = new Circle(50);
         outerCircle.setFill(Color.web("#454545"));
+
         Circle midCircle = new Circle(43);
         midCircle.setFill(Color.web("#454545"));
+
         Circle innerCircle = new Circle(36);
         innerCircle.setFill(Color.web("#454545"));
+
         Group stackedArcs = new Group();
         stackedArcs.getChildren().addAll(outerCircle, midCircle);
+
         Label ratingLabel = new Label();
-        ratingLabel.setText(applicant.getOverallInterviewRating()); // TODO: update with overall rating
+        String applicantOverallInterviewRating = applicant.getOverallInterviewRating();
+        ratingLabel.setText(applicantOverallInterviewRating);
         ratingLabel.getStyleClass().add("overall_rating_label");
+
+        Color[] colours = { Color.TRANSPARENT, Color.web("#1a8cff"), Color.web("#3333cc"), Color.web("#7a00cc"),
+                Color.web("#cc0099"), Color.web("#ff0066"), Color.web("#ff6600"),
+                Color.web("#ffcc00"), Color.web("#ccff33"), Color.web("#66ff33"),
+                Color.web("#00ffcc")};
 
         for (int i = 0; i < 10; i++) {
             Arc arc = new Arc(0, 0, 43, 43,
@@ -174,6 +184,18 @@ public class ApplicantCard extends UiPart<Region> {
             arc.setFill(Color.GREY);
             stackedArcs.getChildren().add(arc);
         }
+
+        double applicantRating = applicantOverallInterviewRating.equals("N.A")
+                               ? 0
+                               : Double.parseDouble(applicantOverallInterviewRating);
+        double ratingArcLength = -360 * (applicantRating / 10);
+        Arc ratingArc = new Arc(0, 0, 43, 43, 90, ratingArcLength);
+        Color arcColour = colours[(int) Math.floor(applicantRating)];
+        ratingArc.setFill(arcColour);
+        ratingArc.setType(ArcType.ROUND);
+
+        stackedArcs.getChildren().add(ratingArc);
+
 
         overallRating.getChildren().addAll(stackedArcs, innerCircle, ratingLabel);
     }
