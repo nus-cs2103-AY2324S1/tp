@@ -48,13 +48,19 @@ public class AddMusicianToBandCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Band> lastShownBandList = model.getFilteredBandList();
+        List<Musician> lastShownMusicianList = model.getFilteredMusicianList();
+        if (bandToAddInto.getZeroBased() >= lastShownBandList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_BAND_DISPLAYED_INDEX);
+        }
+        if (musicianToAdd.getZeroBased() >= lastShownMusicianList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_MUSICIAN_DISPLAYED_INDEX);
+        }
 
         if (model.hasMusicianInBand(bandToAddInto.getZeroBased(), musicianToAdd.getZeroBased())) {
             throw new CommandException(MESSAGE_DUPLICATE_MUSICIAN);
         }
 
-        List<Band> lastShownBandList = model.getFilteredBandList();
-        List<Musician> lastShownMusicianList = model.getFilteredMusicianList();
         Band band = lastShownBandList.get(bandToAddInto.getZeroBased());
         Musician musician = lastShownMusicianList.get(musicianToAdd.getZeroBased());
         model.addMusicianToBand(bandToAddInto.getZeroBased(), musicianToAdd.getZeroBased());
