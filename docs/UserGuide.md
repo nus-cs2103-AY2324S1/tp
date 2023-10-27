@@ -149,6 +149,7 @@ Format: `editAttendance m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMA
 * The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
 * At least one field to edit must be provided.
 * The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
+* `REMARK` can take any value, but should not be blank.
 
 Examples:
 * `editAttendance m/1 e/1 h/0 r/Absent due to Covid` edits the attendance of the 1st member in the member list for the 1st event of the event list to be `0` hours and have a remark `Absent due to Covid`.
