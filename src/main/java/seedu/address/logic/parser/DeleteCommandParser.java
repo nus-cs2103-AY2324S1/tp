@@ -30,40 +30,37 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        try {
-            requireNonNull(args);
+        requireNonNull(args);
 
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE,
-                    PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
 
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL,
-                    PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
 
-            boolean hasNamePrefix = argMultimap.getValue(PREFIX_NAME).isPresent();
-            boolean hasNricPrefix = argMultimap.getValue(PREFIX_NRIC).isPresent();
+        boolean hasNamePrefix = argMultimap.getValue(PREFIX_NAME).isPresent();
+        boolean hasNricPrefix = argMultimap.getValue(PREFIX_NRIC).isPresent();
 
-            Name name = null;
-            Nric nric = null;
-
-            if (hasNamePrefix) {
-                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            } else if (hasNricPrefix) {
-                nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteCommand.MESSAGE_USAGE));
-            }
-
-            DeletePersonDescriptor deletePersonDescriptor = new DeletePersonDescriptor();
-
-            if (argMultimap.prefixExist(PREFIX_APPOINTMENT)) {
-                deletePersonDescriptor.setAppointment();
-            }
-
-            return new DeleteCommand(nric, name, deletePersonDescriptor);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteCommand.MESSAGE_USAGE));
+        if (!hasNamePrefix && !hasNricPrefix) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+
+        Name name = null;
+        Nric nric = null;
+
+        if (hasNamePrefix) {
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        }
+        if (hasNricPrefix) {
+            nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        }
+
+        DeletePersonDescriptor deletePersonDescriptor = new DeletePersonDescriptor();
+
+        if (argMultimap.prefixExist(PREFIX_APPOINTMENT)) {
+            deletePersonDescriptor.setAppointment();
+        }
+
+        return new DeleteCommand(nric, name, deletePersonDescriptor);
     }
 }
