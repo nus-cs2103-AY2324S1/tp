@@ -408,7 +408,26 @@ in `CommandResult`, informing `UI` to update similarly to what we did in **help*
     * Cons: Needs to include more information returned from the execution of command. A potential gap between current storage
   and UI theme setting would occur since `UI` wouldn't rely on `Logic` component to update the theme.
 
+### Learning Statistics
 
+#### **Feature Overview**
+
+The stats command provides insights into a user's learning journey within Flashlingo. By visualizing progress and areas of improvement, this feature aims to motivate users and enhance their learning experience.
+
+#### Implementation
+
+The stats command accesses the stored number of words remembered from the last session, accesses them and retrun the result as a success rate to help inspire the user to continue learning.
+
+The execute method accesses the numberOfWords from the model.
+
+To be added: Making th success rate more relatable by remembering data(storing) from the last session.
+### Usage
+To know their learning rate, the user can just type in:
+* `stats`
+#### Design Considerations
+**Aspect: How should the learning statistics be presented to ensure clarity and comprehensibility?**
+* Decision: We chose to represent data in numerical formats accompanied by textual descriptions. In future versions, we may integrate visual charts and graphs.
+* Rationale: A straightforward representation ensures that users can quickly grasp their progress without misinterpretations.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
