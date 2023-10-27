@@ -1,14 +1,15 @@
 package seedu.address.ui;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
+
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
+
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -19,18 +20,20 @@ import javafx.scene.shape.Rectangle;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
 
+/**
+ * The UI component that represents the space for displaying events in a calendar view.
+ */
 public class CalendarEventSpace extends UiPart<Region> {
     private static final String FXML = "CalendarEventSpace.fxml";
     private static final LocalTime DEFAULT_CALENDAR_START_TIME = LocalTime.of(8, 0);
     private static final LocalTime DEFAULT_CALENDAR_END_TIME = LocalTime.of(18, 0);
     private static final int NUMBER_OF_ROWS = 8;
-    private static final int NUMBER_OF_HALF_HOURS_IN_HOUR= 2;
+    private static final int NUMBER_OF_HALF_HOURS_IN_HOUR = 2;
     private static final int NUMBER_OF_MINUTES_IN_HALF_HOUR = 30;
     private static final int NUMBER_OF_MINUTES_IN_AN_HOUR = 60;
     private static final int NODE_WIDTH_PER_HALF_HOUR = 25;
     private static final int MAXIMUM_DISPLAY_HOUR_OF_DAY = 23;
     private static final int NODE_HEIGHT = 30;
-
 
     private final ReadOnlyCalendar calendar;
     private final ObservableList<Event> eventList;
@@ -41,25 +44,59 @@ public class CalendarEventSpace extends UiPart<Region> {
     @FXML
     private GridPane eventSpace;
 
+    /**
+     * Constructs a CalendarEventSpace with the given ReadOnlyCalendar.
+     *
+     * @param calendar The ReadOnlyCalendar to be displayed in the event space.
+     */
     public CalendarEventSpace(ReadOnlyCalendar calendar) {
         super(FXML);
         this.calendar = calendar;
-        this.eventList = calendar.getEventList();
+        eventList = calendar.getCurrentWeekEventList();
 
         updateStartAndEnd();
         initializeEventSpace();
         addEventCards();
+        addListenerToEventList();
     }
 
+    /**
+     * Initializes the event space by creating and adding empty rows to the grid.
+     */
     private void initializeEventSpace() {
         Stream.<AnchorPane>generate(AnchorPane::new).limit(NUMBER_OF_ROWS).forEachOrdered(pane -> {
             pane.setPrefHeight(NODE_HEIGHT);
             pane.setPrefWidth(calculateCalendarWidth());
             eventSpace.addRow(eventSpace.getRowCount(), pane);
             rowList.add(pane);
-                });
+        });
     }
 
+    /**
+     * Adds a listener to the event list to update the event space when events change.
+     */
+    private void addListenerToEventList() {
+        eventList.addListener((ListChangeListener<Event>) c -> {
+            clear();
+            updateStartAndEnd();
+            initializeEventSpace();
+            addEventCards();
+        });
+    }
+
+    /**
+     * Clears the event space by removing all event cards.
+     */
+    private void clear() {
+        eventSpace.getChildren().clear();
+        rowList.clear();
+    }
+
+    /**
+     * Calculates the width of the calendar space based on the time range being displayed.
+     *
+     * @return The calculated width of the calendar space.
+     */
     private int calculateCalendarWidth() {
         long minutesBetweenStartAndEnd = MINUTES.between(calendarStartTime, calendarEndTime);
         int numberOfHoursToShow = calendarEndTime.getHour() - calendarStartTime.getHour();
@@ -69,7 +106,11 @@ public class CalendarEventSpace extends UiPart<Region> {
         return numberOfHoursToShow * NODE_WIDTH_PER_HALF_HOUR * NUMBER_OF_HALF_HOURS_IN_HOUR;
     }
 
-    public void updateStartAndEnd() {
+
+    /**
+     * Updates the start and end times for the displayed calendar.
+     */
+    private void updateStartAndEnd() {
         LocalTime newStartTime = calendar.getEarliestEventStartTimeInCurrentWeek()
                 .map(time -> {
                     return time.minusMinutes(time.getMinute());
@@ -89,13 +130,16 @@ public class CalendarEventSpace extends UiPart<Region> {
                 })
                 .orElse(calendarEndTime);
 
-        calendarStartTime = newStartTime.isBefore(DEFAULT_CALENDAR_START_TIME) ?
-                newStartTime : DEFAULT_CALENDAR_START_TIME;
-        calendarEndTime = newEndTime.isAfter(DEFAULT_CALENDAR_END_TIME) ?
-                newEndTime : DEFAULT_CALENDAR_END_TIME;
+        calendarStartTime = newStartTime.isBefore(DEFAULT_CALENDAR_START_TIME)
+                ? newStartTime : DEFAULT_CALENDAR_START_TIME;
+        calendarEndTime = newEndTime.isAfter(DEFAULT_CALENDAR_END_TIME)
+                ? newEndTime : DEFAULT_CALENDAR_END_TIME;
     }
 
-    public void addEventCards() {
+    /**
+     * Adds event cards to the event space for all events.
+     */
+    private void addEventCards() {
         eventList.forEach(event -> {
             StackPane eventNode = generateEventCard(event);
             rowList.get(findRow(event)).getChildren().add(eventNode);
@@ -103,7 +147,13 @@ public class CalendarEventSpace extends UiPart<Region> {
         });
     }
 
-    public StackPane generateEventCard(Event event) {
+    /**
+     * Generates an event card for the given event.
+     *
+     * @param event The event for which to create a card.
+     * @return A StackPane containing the event card.
+     */
+    private StackPane generateEventCard(Event event) {
         double widthMultiplier = event.getDurationOfEvent().getHour()
                 + ((double) (event.getDurationOfEvent().getMinute()) / NUMBER_OF_MINUTES_IN_AN_HOUR);
         StackPane cardHolder = new StackPane();
@@ -112,21 +162,36 @@ public class CalendarEventSpace extends UiPart<Region> {
         cardRectangle.setHeight(NODE_HEIGHT);
         cardRectangle.setWidth(widthMultiplier * NODE_WIDTH_PER_HALF_HOUR * NUMBER_OF_HALF_HOURS_IN_HOUR);
         cardRectangle.setFill(Color.CRIMSON);
+        cardRectangle.setStroke(Color.BLACK);
 
 
         Label description = new Label();
         description.setMaxHeight(NODE_HEIGHT);
         description.setMaxWidth(widthMultiplier * NODE_WIDTH_PER_HALF_HOUR * NUMBER_OF_HALF_HOURS_IN_HOUR);
         description.setText(event.getDescriptionString());
+        description.setAlignment(Pos.CENTER);
 
         cardHolder.getChildren().addAll(cardRectangle, description);
         return cardHolder;
     }
 
+    /**
+     * Determines the row (day) in which an event should be placed in the event space.
+     *
+     * @param event The event for which to find the row.
+     * @return The row (day) index.
+     */
     private int findRow(Event event) {
         return event.getDayOfWeek().getValue();
     }
 
+
+    /**
+     * Calculates the left offset for positioning an event card in the event space.
+     *
+     * @param event The event for which to calculate the left offset.
+     * @return The left offset in pixels.
+     */
     private double findLeftOffset(Event event) {
         return ((double) event.getMinutesFromTimeToStartTime(calendarStartTime)
                 / NUMBER_OF_MINUTES_IN_HALF_HOUR) * NODE_WIDTH_PER_HALF_HOUR;

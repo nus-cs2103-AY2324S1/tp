@@ -149,7 +149,7 @@ public class AllDaysEventListManager {
      * @param startDate start date.
      * @param endDate end date.
      * @return the event list storing events that occur between the start and end dates as an unmodifiable
-     * ObservableList.
+     *     ObservableList.
      */
     public ObservableList<Event> asUnmodifiableObservableList(LocalDate startDate, LocalDate endDate) {
         List<Event> list = dayToEventListMap.values().stream()

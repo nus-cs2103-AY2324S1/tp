@@ -2,6 +2,7 @@ package seedu.address.model.calendar;
 
 import java.time.LocalTime;
 import java.util.Optional;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 

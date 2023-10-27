@@ -163,14 +163,12 @@ public class Calendar implements ReadOnlyCalendar {
 
     @Override
     public Optional<LocalTime> getEarliestEventStartTimeInCurrentWeek() {
-        return getCurrentWeekEventList().stream().map(Event::getParentEvent).distinct()
-                .min(Event::compareStartTime).map(Event::getStartTime);
+        return getCurrentWeekEventList().stream().min(Event::compareStartTime).map(Event::getStartTime);
     }
 
     @Override
     public Optional<LocalTime> getLatestEventEndTimeInCurrentWeek() {
-        return getCurrentWeekEventList().stream().map(Event::getParentEvent).distinct()
-                .max(Event::compareEndTime).map(Event::getEndTime);
+        return getCurrentWeekEventList().stream().max(Event::compareEndTime).map(Event::getEndTime);
     }
 
     @Override
