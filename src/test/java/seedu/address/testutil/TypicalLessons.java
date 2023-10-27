@@ -13,7 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Subject;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Lesson} objects to be used in tests.
  */
 public class TypicalLessons {
     private static LocalDateTime startLesson1 = LocalDateTime.of(2022, 10, 10, 14, 30);
@@ -25,8 +25,7 @@ public class TypicalLessons {
     private static Subject math = new Subject("MATHEMATICS");
     private static Subject bio = new Subject("BIOLOGY");
     private static TaskList taskList = new TaskList();
-
-    private static List<Task> fillerTasks = Arrays.asList(new Task("first"), new Task("second"), new Task("third"));
+    private static List<Task> fillerTasks = TypicalTasks.getTypicalTasks();
 
     public static final Lesson LESSON1 = new Lesson(startLesson1, endLesson1, math, taskList, new Name("Alex Yeoh"));
 
@@ -36,7 +35,7 @@ public class TypicalLessons {
     private TypicalLessons() {} // prevents instantiation
 
     /**
-     * Returns an {@code ScheduleList} with all the typical persons.
+     * Returns an {@code ScheduleList} with all the typical lessons.
      */
     public static ScheduleList getTypicalScheduleList() {
         ScheduleList sc = new ScheduleList();
