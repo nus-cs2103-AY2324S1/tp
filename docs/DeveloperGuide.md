@@ -282,7 +282,7 @@ and not break any existing functionality.
 - Updating the structure in `ModelManager`
 
   > Instead of having a new class `AddressBookManager`, we simply update the existing structure to use a
-  > `HashMap<String, AddressBook>`
+  > `HashMap<String, AddressBook>`.
 
   **Pros:**
     - Easier to understand: Developers who are new to the codebase do not need to learn and understand the
