@@ -9,10 +9,10 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.FindBandCommand;
 import seedu.address.logic.commands.band.AddBandCommand;
 import seedu.address.logic.commands.band.AddMusiciantoBandCommand;
 import seedu.address.logic.commands.band.DeleteBandCommand;
-import seedu.address.logic.commands.band.ListBandCommand;
 import seedu.address.logic.commands.general.ClearCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
@@ -24,7 +24,6 @@ import seedu.address.logic.commands.musician.ListCommand;
 import seedu.address.logic.parser.band.AddBandCommandParser;
 import seedu.address.logic.parser.band.AddMusiciantoBandCommandParser;
 import seedu.address.logic.parser.band.DeleteBandCommandParser;
-import seedu.address.logic.parser.band.ListBandCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.musician.AddCommandParser;
 import seedu.address.logic.parser.musician.DeleteCommandParser;
@@ -83,8 +82,8 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ListBandCommand.COMMAND_WORD:
-            return new ListBandCommandParser().parse(arguments);
+        case FindBandCommand.COMMAND_WORD:
+            return new FindBandCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
