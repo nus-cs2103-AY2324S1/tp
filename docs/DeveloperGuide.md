@@ -88,13 +88,31 @@ The `UI` component,
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+At high level, Logic Component is responsible for making sense of the user inputs, and modify storage and ui accordingly.
+It is like a controller that glue the other components together.
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+To be more specific, it interacts with ui component by taking the user input from it, and setting the ui display accordingly.
+It also calls APIs (addPerson, deleteLesson for example) from model component to modify the data representation, and call APIs
+from storage component to save the data to local storage each time the data is modified.
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
-
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+
+Inside the `Logic` component, there are 4 main components: LogicManager, AddressBookParser, ScheduleParser and Command.
+
+The command class will do the actual modification of the data, on been executed by the LogicManager, and communicate with logic
+manager its execution result via the CommandResult class. 
+
+Parser classes are responsible for parsing the user input and create
+the corresponding command object. 
+
+AddressBookParser is responsible for parsing the user input for finding the corresponding parser and return the corresponding command object. 
+
+And logicManager will do the actual execution of command, and update to ui and storage.
+The sequence diagram below
+
+Here's a (partial) class diagram of the `Logic` component:
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 <box type="info" seamless>
 
