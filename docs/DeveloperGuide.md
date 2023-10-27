@@ -235,12 +235,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### Recall recent commands feature
-
-The recent command feature is facilitated by the `CommandStringStash`. This is a stash that stores the history
-of the command string of the 20 most recent commands executed. Internally, it is stored as a `cmdStringStack`,
-and `currentCmdIndex`. This internal representation allows cycling through the recent commands both forwards
-and backwards.
+<br>
 
 ### View Command Feature
 
@@ -249,13 +244,15 @@ The view command feature allows the user to view the details of a specific patie
 Given below is an example usage scenario and how the view mechanism behaves at each step.
 
 Step 1. The user launches the application. The List of person will be initialized with the initial
-state, and the `Current Selected Person` pointer pointing to the first person on the list.
+state, and the `Current Selected Person` pointer pointing to the first person on the list. <br>
+
 ![ViewState1](images/ViewState1.png)
 
 
 Step 2. The user executes `view 2` command to view the 2nd person details in the `DoConnek Pro`.
 The `view` command update the `Current Selected Person` pointer with the corresponding index from the
-input.
+input. <br>
+
 ![ViewState2](images/ViewState2.png)
 
 
@@ -267,13 +264,23 @@ The sequence diagram below shows how the view operation works:
 The following activity diagram summarizes what happens when a user executes the view command:
 ![ViewActivityDiagram](images/ViewActivityDiagram.png)
 
+<br>
+
+### Recall recent commands feature
+
+The recent command feature is facilitated by the `CommandStringStash`. This is a stash that stores the history
+of the command string of the 20 most recent commands executed. Internally, it is stored as a `cmdStringStack`,
+and `currentCmdIndex`. This internal representation allows cycling through the recent commands both forwards
+and backwards.
+
 These operations are exposed in the `Logic` interface as `Logic#getPrevCommandString(String commandInputString)`,
 `Logic#getPassedCommandString(String commandInputString)`, and `Logic#addCommandString(String commandInputString)`.
 
 The following operations are implemented by the `CommandStringStash`:
 * `CommandStringStash#addCommandString(String commandInputString)` - Adds `commandInputString` to the history.
 * `CommandStringStash#getPrevCommandString(String commandInputString)` - Cycles one command further back in history.
-* `CommandStringStash#getPassedCommandString(String commandInputString)` - Cycles one command further forward in history
+* `CommandStringStash#getPassedCommandString(String commandInputString)` - Cycles one command further forward in history.
+
 <div markdown="span" class="alert alert-info">:information_source: **note:** Cycling fowards or backwards may not always be
 valid operations. No cycling forward or backward can be done if the stash is empty. No cycling backward
 can be done if the user is already on the least recent command in the stash, and no cycling forward can be done
@@ -303,8 +310,6 @@ this index before returning the String pointed to by `currentCmdIndex` so this w
 allowing the user to start to cycle back from the most recently added command again.
 
 </div>
-
-<br/>
 
 Step 3. The user executes two more commands `help` and `delete 1` in the respective order. As before, the
 `CommandStringStash` is updated appropriately.
@@ -342,6 +347,46 @@ They press the down arrow on the keyboard to recall the `delete 1` command they 
 This results in `Logic#getPrevCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
 
 ![Recall Step 6](images/RecallStep6.png)
+
+<br>
+
+### Find feature
+
+#### Overview
+The find feature allows the user to find patients or specialists by checking whether their attributes contain certain keywords.
+Upon entering a `find` command, an instance of `FindCommandParser` is created to process the prefixes along with their corresponding arguments into
+predicates. The predicates are represented as `Predicate<Person>` (using Java's in-built functional interface), and are mapped
+to their prefixes in a `FindPredicateMap`. A `FindPredicateMap` encapsulates **all** predicates indicated by the user,
+which are later combined and used to test each `Person` in the `FilteredPersonList` of the `Model`.
+
+As patients and specialists have common and differing attributes, so do their predicates.<br>
+Predicates common to both:<br>
+`NameContainsKeywordsPredicate`, `PhoneContainsKeywordsPredicate`, `EmailContainsKeywordsPredicate`, `TagsContainsKeywordsPredicate`
+
+Predicates unique to patients:<br>
+`AgeContainsKeywordsPredicate`, `MedHistoryContainsKeywordsPredicate`
+
+Predicates unique to specialist:<br>
+`LocationContainsKeywordsPredicate`, `SpecialtyContainsKeywordsPredicate`
+
+#### Example
+The following sequence diagram shows how a find command is parsed and executed to find a patient.
+In this example, the command entered is <br>
+`find -pa n/Tim m/Anaemia`
+
+![FindCommandSequenceDiagram](images/FindCommandSequenceDiagram.png)
+
+When the `FindCommandParser` parses the prefix arguments, a `NameContainsKeywordsPredicate` and `MedHistoryContainsKeywordsPredicate`
+is instantiated by their corresponding arguments and are mapped to their prefixes in the `FindPredicateMap`.
+
+![FindPredicateMapExample](images/FindPredicateMapExample.png)
+
+The predicates are combined into a single `Predicate<Person>` in `FindCommand::execute` and applied to each `Person` in the 
+`FilteredPersonList` of the `Model`.
+
+To find a specialist, a similar parse and execution flow is conducted. 
+
+<br>
 
 ### Shortcut management feature
 
@@ -395,6 +440,7 @@ ShortcutSettings implements the `Serializable` interface, thus is saved to `json
 * **Alternative 2:** Individual command knows its own list of shortcuts.
     * Pros: Will use less memory (No extra data structure created).
     * Cons: Difficult to manage duplicate shortcut mappings.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
