@@ -195,6 +195,11 @@ public class ModelManager implements Model {
         return addressBook.getPersonByIdentityCode(developerID).getName();
     }
 
+    @Override
+    public Person getPersonByIdentityCode(IdentityCode id) {
+        return addressBook.getPersonByIdentityCode(id);
+    }
+
     /**
      * Deletes the specified person from the address book.
      *

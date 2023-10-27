@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="170.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="150.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc91f" height="100.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+            <VBox layoutX="15.0" layoutY="170.0" prefHeight="200.0" prefWidth="120.0">
+               <children>
+                  <ListView fx:id="developerListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <Line endX="75.0" endY="170.0" startX="75.0" startY="150.0" />
+            <Label fx:id="teamName" layoutX="10.0" layoutY="50.0" prefHeight="30.0" prefWidth="130.0" text="teamName" />
+            <Label fx:id="teamLeader" layoutX="20.0" layoutY="80.0" prefHeight="60.0" prefWidth="110.0" text="teamLeader" />
+            <Line endX="75.0" layoutX="1.0" startX="75.0" startY="50.0" />
+         </children></AnchorPane>
+  </content>
+</ScrollPane>
