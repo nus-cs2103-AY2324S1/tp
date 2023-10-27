@@ -92,6 +92,15 @@ public class ModelManager implements Model {
         userPrefs.setTheme(theme);
     }
 
+    @Override
+    public void switchTheme() {
+        if (getTheme().equals("Default")) {
+            setTheme("Dark");
+        } else {
+            setTheme("Default");
+        }
+    }
+
     //=========== Flashlingo ================================================================================
 
     @Override
