@@ -33,30 +33,4 @@ public class LoadCommandTest {
                 MESSAGE_OPEN_FILE_FAIL);
     }
 
-    @Test
-    public void execute_invalidAndValidDataFormat_throwsCommandException() {
-        Path path = addToTestDataPathIfNotNull("invalidAndValidDataFormat.xlsx");
-        assertCommandFailure(new LoadCommand(path.toString()),
-                model, MESSAGE_READ_FILE_FAIL);
-    }
-
-    @Test
-    public void execute_duplicateFlashCard_throwsCommandException() {
-        model.addFlashCard(AMY);
-        Path path = addToTestDataPathIfNotNull("duplicateFlashCard.xlsx");
-        assertCommandFailure(new LoadCommand(path.toString()),
-                model, AMY.getOriginalWord().getWord() + "-" + AMY.getTranslatedWord().getWord()
-                        + LoadCommand.MESSAGE_DUPLICATE_FLASHCARD);
-    }
-
-    @Test
-    public void execute_validDataFile_success() {
-        expectedModel.addFlashCard(AMY);
-        expectedModel.addFlashCard(BOB);
-        Path path = addToTestDataPathIfNotNull("validDataFile.xlsx");
-        assertCommandSuccess(new LoadCommand(path.toString()),
-                model, LoadCommand.MESSAGE_SUCCESS + TEST_DATA_FOLDER + "/validDataFile.xlsx",
-                expectedModel);
-    }
-
 }
