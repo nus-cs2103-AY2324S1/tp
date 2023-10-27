@@ -68,7 +68,7 @@ public class ApplicantCard extends UiPart<Region> {
         displayApplicantDetails();
         displayApplicantStatus();
         displayApplicantInterviews();
-        displayApplicantOverallRating();
+        displayApplicantScore();
     }
     private void displayApplicantId(int displayedIndex) {
         id.setText(displayedIndex + ". ");
@@ -147,7 +147,7 @@ public class ApplicantCard extends UiPart<Region> {
             interviews.getChildren().add(interviewBox);
         }
     }
-    private void displayApplicantOverallRating() {
+    private void displayApplicantScore() {
         Circle outerCircle = new Circle(50);
         outerCircle.setFill(Color.web("#454545"));
         Circle midCircle = new Circle(43);
@@ -156,9 +156,11 @@ public class ApplicantCard extends UiPart<Region> {
         innerCircle.setFill(Color.web("#454545"));
         Group stackedArcs = new Group();
         stackedArcs.getChildren().addAll(outerCircle, midCircle);
-        Label ratingLabel = new Label();
-        ratingLabel.setText("8.2"); // TODO: update with overall rating
-        ratingLabel.getStyleClass().add("overall_rating_label");
+        Label scoreLabel = new Label();
+        scoreLabel.setText(applicant.getScore().hasRating()
+                ? applicant.getScore().toString()
+                : "-");
+        scoreLabel.getStyleClass().add("score_label");
 
         for (int i = 0; i < 10; i++) {
             Arc arc = new Arc(0, 0, 43, 43,
@@ -168,6 +170,6 @@ public class ApplicantCard extends UiPart<Region> {
             stackedArcs.getChildren().add(arc);
         }
 
-        overallRating.getChildren().addAll(stackedArcs, innerCircle, ratingLabel);
+        overallRating.getChildren().addAll(stackedArcs, innerCircle, scoreLabel);
     }
 }

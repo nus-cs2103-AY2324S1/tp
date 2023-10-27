@@ -24,6 +24,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Score;
 import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 
@@ -107,9 +108,10 @@ public class EditCommand extends Command {
         Position updatedPosition = editApplicantDescriptor.getPosition().orElse(applicantToEdit.getPosition());
         List<Interview> updatedInterviews = applicantToEdit.getInterviews();
         Status updatedStatus = editApplicantDescriptor.getStatus().orElse(applicantToEdit.getStatus());
+        Score updatedScore = editApplicantDescriptor.getScore().orElse(applicantToEdit.getScore());
 
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedPosition,
-                updatedInterviews, updatedStatus);
+                updatedInterviews, updatedStatus, updatedScore);
     }
 
     @Override
@@ -145,9 +147,8 @@ public class EditCommand extends Command {
         private Email email;
         private Position position;
         private List<Interview> interviews;
-
-
         private Status status;
+        private Score score;
 
         public EditApplicantDescriptor() {
         }
@@ -163,6 +164,7 @@ public class EditCommand extends Command {
             setPosition(toCopy.position);
             setInterviews(toCopy.interviews);
             setStatus(toCopy.status);
+            setScore(toCopy.score);
         }
 
         /**
@@ -229,6 +231,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(status);
         }
 
+        public void setScore(Score score) {
+            this.score = score;
+        }
+
+        public Optional<Score> getScore() {
+            return Optional.ofNullable(score);
+        }
+
 
         @Override
         public boolean equals(Object other) {
@@ -256,7 +266,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("position", position)
-                    .add("status", status).toString()
+                    .add("status", status)
+                    .add("score", score)
                     .toString();
         }
     }

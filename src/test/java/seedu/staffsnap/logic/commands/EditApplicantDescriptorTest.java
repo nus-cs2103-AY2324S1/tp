@@ -61,7 +61,8 @@ public class EditApplicantDescriptorTest {
                 + editApplicantDescriptor.getPhone().orElse(null) + ", email="
                 + editApplicantDescriptor.getEmail().orElse(null) + ", position="
                 + editApplicantDescriptor.getPosition().orElse(null) + ", status="
-                + editApplicantDescriptor.getStatus().orElse(null) + "}";
+                + editApplicantDescriptor.getStatus().orElse(null) + ", score="
+                + editApplicantDescriptor.getScore().orElse(null) + "}";
         assertEquals(expected, editApplicantDescriptor.toString());
     }
 }
