@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BANDS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MUSICIANS;
 
 import java.util.Collections;
@@ -83,7 +84,9 @@ public class EditCommand extends Command {
         }
 
         model.setMusician(musicianToEdit, editedMusician);
+
         model.updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
+        model.updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
         return new CommandResult(String.format(MESSAGE_EDIT_MUSICIAN_SUCCESS, Messages.format(editedMusician)));
     }
 

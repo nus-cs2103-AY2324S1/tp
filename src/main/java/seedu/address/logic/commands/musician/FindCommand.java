@@ -53,6 +53,7 @@ public class FindCommand extends Command {
         // since it will always be overridden by the first predicate.
         Predicate<Musician> combinedPredicate = predicates.stream().reduce(x -> true, Predicate::and);
         model.updateFilteredMusicianList(combinedPredicate);
+        model.updateFilteredBandList(Model.PREDICATE_SHOW_ALL_BANDS);
         return new CommandResult(
                 String.format(Messages.MESSAGE_MUSICIANS_LISTED_OVERVIEW, model.getFilteredMusicianList().size()));
     }

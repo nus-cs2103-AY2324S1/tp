@@ -56,6 +56,7 @@ public class AddCommand extends Command {
         }
 
         model.addMusician(toAdd);
+        model.updateFilteredBandList(Model.PREDICATE_SHOW_ALL_BANDS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
