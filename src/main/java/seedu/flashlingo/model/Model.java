@@ -1,6 +1,7 @@
 package seedu.flashlingo.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -12,7 +13,9 @@ import seedu.flashlingo.model.flashcard.FlashCard;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<FlashCard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
     Predicate<FlashCard> PREDICATE_SHOW_NONE_FLASHCARDS = unused -> false;
 
@@ -63,7 +66,9 @@ public interface Model {
      */
     void setFlashlingo(ReadOnlyFlashlingo flashlingo);
 
-    /** Returns the Flashlingo */
+    /**
+     * Returns the Flashlingo
+     */
     ReadOnlyFlashlingo getFlashlingo();
 
     /**
@@ -83,6 +88,8 @@ public interface Model {
      */
     void addFlashCard(FlashCard flashCard);
 
+    void addFlashCards(ArrayList<FlashCard> flashCards);
+
     /**
      * Replaces the given flashcard {@code target} with {@code editedFlashCard}.
      * {@code target} must exist in the Flashlingo .
@@ -91,19 +98,27 @@ public interface Model {
      */
     void setFlashCard(FlashCard target, FlashCard editedFlashCard);
 
-    /** Returns an unmodifiable view of the filtered flashcard list */
+    /**
+     * Returns an unmodifiable view of the filtered flashcard list
+     */
     ObservableList<FlashCard> getFilteredFlashCardList();
 
     /**
      * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFlashCardList(Predicate<FlashCard> predicate);
-    void setReviewWord(Predicate<FlashCard> predicate, FlashCard flashCard);
-    int getNumberOfFlashCards();
-    int getNumberOfRememberedWords();
-    void incrementRememberedWords();
-    String nextReviewWord() throws CommandException;
-    void rememberWord(boolean isUpdated);
 
+    void setReviewWord(Predicate<FlashCard> predicate, FlashCard flashCard);
+
+    int getNumberOfFlashCards();
+
+    int getNumberOfRememberedWords();
+
+    void incrementRememberedWords();
+
+    String nextReviewWord() throws CommandException;
+
+    void rememberWord(boolean isUpdated);
 }
