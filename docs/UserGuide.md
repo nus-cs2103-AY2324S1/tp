@@ -144,7 +144,7 @@ Edits the attendance details of a specified member at a specified event with the
 
 Format: `editAttendance m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
-* Links the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
+* Edits the specified `MEMBER_INDEX`'s attendance of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
 * The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the displayed member/event list.
 * The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
 * At least one field to edit must be provided.
