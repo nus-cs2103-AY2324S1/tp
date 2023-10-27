@@ -28,7 +28,7 @@ public class SortCommand extends Command {
     private Comparator<Person> personComparator;
 
     /**
-     * Constructor for SortCommand, creates a comparator to sort by the way person specifies
+     * Constructor for SortCommand, creates a comparator to sort by the specified field and order.
      */
     public SortCommand(ArrayList<SortComparator> sortComparatorList) {
         SortComparator sortComparator = sortComparatorList.get(0);

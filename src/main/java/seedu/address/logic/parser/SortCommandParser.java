@@ -51,7 +51,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         for (String command: sortValues) {
             String commandLower = command.toLowerCase();
-            SortComparator sortComparator = null;
+            SortComparator sortComparator;
 
             switch (commandLower) {
             case SORT_BY_ADDRESS_KEYWORD:
@@ -75,8 +75,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                 break;
 
             case REVERSE_KEYWORD:
-                boolean arrayIsEmpty = sortComparatorList.isEmpty();
-                if (arrayIsEmpty) {
+                if (sortComparatorList.isEmpty()) {
                     throw new ParseException(PARSE_EXCEPTION_MESSAGE);
                 }
                 int lastIdx = sortComparatorList.size() - 1;
