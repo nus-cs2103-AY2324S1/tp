@@ -8,7 +8,11 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -110,5 +114,7 @@ public interface Model {
      * Sets the Index of the last view command called.
      */
     void setLastViewedPersonIndex(Index index);
+
+    void addTagToCategory(String category, String tagName) throws IllegalValueException;
 
 }

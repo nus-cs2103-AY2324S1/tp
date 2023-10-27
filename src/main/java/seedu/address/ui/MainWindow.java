@@ -199,7 +199,6 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
 
-
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

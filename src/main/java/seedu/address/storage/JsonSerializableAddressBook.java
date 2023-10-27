@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -9,9 +11,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -23,12 +28,18 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
+//    private final JsonAdaptedUniqueTagList tags;
+    private final HashMap<String, List<JsonAdaptedTag>> tagList = new HashMap<>();
+
+//    @JsonProperty("tagList") HashMap<String, List<JsonAdaptedTag>> tags
+
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("tagList") HashMap<String, List<JsonAdaptedTag>> tags) {
         this.persons.addAll(persons);
+        this.tagList.putAll(tags);
     }
 
     /**
@@ -38,6 +49,17 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+
+        Map<String, List<Tag>> tags = source.getTagList().getCategories();
+        for (Map.Entry<String, List<Tag>> entry : tags.entrySet()) {
+            String category = entry.getKey();
+            List<Tag> tagList = entry.getValue();
+            List<JsonAdaptedTag> jsonAdaptedTagList = new ArrayList<>();
+            for (Tag tag : tagList) {
+                jsonAdaptedTagList.add(new JsonAdaptedTag(tag));
+            }
+            this.tagList.put(category, jsonAdaptedTagList);
+        }
     }
 
     /**
@@ -54,6 +76,22 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+
+        for (Map.Entry<String, List<JsonAdaptedTag>> entry : this.tagList.entrySet()) {
+            // for each entry
+            String category = entry.getKey();
+            List<JsonAdaptedTag> jsonAdaptedTagList = entry.getValue();
+            List<Tag> tagList = new ArrayList<>();
+            for (JsonAdaptedTag jsonAdaptedTag : jsonAdaptedTagList) {
+                Tag tag = jsonAdaptedTag.toModelType();
+                tagList.add(tag);
+            }
+            for (Tag tag : tagList) {
+                addressBook.addTagToCategory(category, tag.tagName);
+            }
+
+        }
+
         return addressBook;
     }
 
