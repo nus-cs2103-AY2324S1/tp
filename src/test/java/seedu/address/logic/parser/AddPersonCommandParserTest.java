@@ -66,8 +66,8 @@ public class AddPersonCommandParserTest {
             expectedPerson.setPhone(new Phone("12345678"));
             expectedPerson.setEmail(new Email("email@u.com"));
             expectedPerson.setAddress(new Address("Blk 123, Clementi Ave 3, #12,34"));
-            expectedPerson.setTagsIfNotNull(Set.of(new Tag("friends")));
-            expectedPerson.setSubjectsIfNotNull(Set.of(new Subject("English")));
+            expectedPerson.setTagsIfNotDefault(Set.of(new Tag("friends")));
+            expectedPerson.setSubjectsIfNotDefault(Set.of(new Subject("English")));
             assertEquals(expectedPerson, actualPerson);
         } catch (ParseException e) {
             fail();

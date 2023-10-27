@@ -16,13 +16,7 @@ import java.util.Set;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.Subject;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 // hello world
 /**
@@ -85,13 +79,13 @@ public class EditCommand extends Command {
         }
         Person original = lastShownList.get(index - 1);
         Person edited = original.clone();
-        edited.setNameIfNotNull(name);
-        edited.setPhoneIfNotNull(phone);
-        edited.setEmailIfNotNull(email);
-        edited.setAddressIfNotNull(address);
-        edited.setSubjectsIfNotNull(subjects);
-        edited.setTagsIfNotNull(tags);
-        edited.setRemarkIfNotNull(remark);
+        edited.setNameIfNotDefault(name);
+        edited.setPhoneIfNotDefault(phone);
+        edited.setEmailIfNotDefault(email);
+        edited.setAddressIfNotDefault(address);
+        edited.setSubjectsIfNotDefault(subjects);
+        edited.setTagsIfNotDefault(new Tags(tags));
+        edited.setRemarkIfNotDefault(remark);
         if (edited.equals(original)) {
             throw new CommandException("No change detected.");
         }

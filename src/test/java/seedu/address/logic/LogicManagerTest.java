@@ -188,7 +188,7 @@ public class LogicManagerTest {
         expectedPerson.setPhone(new Phone("11111111"));
         expectedPerson.setEmail(new Email("amy@example.com"));
         expectedPerson.setAddress(new Address("Block 312, Amy Street 1"));
-        expectedPerson.setSubjectsIfNotNull(Set.of(new Subject("Mathematics")));
+        expectedPerson.setSubjectsIfNotDefault(Set.of(new Subject("Mathematics")));
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

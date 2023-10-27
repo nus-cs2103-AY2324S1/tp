@@ -45,11 +45,11 @@ public class AddCommandParser implements Parser<AddPersonCommand> {
      */
     public static Person parsePerson(String args) throws ParseException {
         Person person = new Person(TypeParsingUtil.parseName("name", args));
-        person.setPhoneIfNotNull(TypeParsingUtil.parsePhone("phone", args, true));
-        person.setEmailIfNotNull(TypeParsingUtil.parseEmail("email", args, true));
-        person.setAddressIfNotNull(TypeParsingUtil.parseAddress("address", args, true));
-        person.setSubjectsIfNotNull(TypeParsingUtil.parseSubjects("subject", args, true));
-        person.setTagsIfNotNull(TypeParsingUtil.parseTags("tag", args, true));
+        person.setPhoneIfNotDefault(TypeParsingUtil.parsePhone("phone", args, true));
+        person.setEmailIfNotDefault(TypeParsingUtil.parseEmail("email", args, true));
+        person.setAddressIfNotDefault(TypeParsingUtil.parseAddress("address", args, true));
+        person.setSubjectsIfNotDefault(TypeParsingUtil.parseSubjects("subject", args, true));
+        person.setTagsIfNotDefault(TypeParsingUtil.parseTags("tag", args, true));
         String remarkString = null;
         // should not use exception to control flow, will change in future
         try {
@@ -57,7 +57,7 @@ public class AddCommandParser implements Parser<AddPersonCommand> {
         } catch (ParseException e) {
             return person;
         }
-        person.setRemarkIfNotNull(new Remark(remarkString));
+        person.setRemarkIfNotDefault(new Remark(remarkString));
         return person;
     }
 }

@@ -64,10 +64,10 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        subjects.addAll(source.getSubjects()
+        subjects.addAll(source.getSubjectsSet()
                 .stream().map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));
-        tags.addAll(source.getTags().stream()
+        tags.addAll(source.getTagsSet().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         remark = source.getRemark().value;

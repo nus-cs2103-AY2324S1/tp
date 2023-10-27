@@ -67,10 +67,10 @@ public class StudentDetailListPanel extends UiPart<Region> {
         tags.getChildren().clear();
         subjects.getChildren().clear();
 
-        person.getTags().stream()
+        person.getTagsSet().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getSubjects().stream()
+        person.getSubjectsSet().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren()
                         .add(new ColoredTextEntry(subject.subjectName.toString(), subject.getColour())));
