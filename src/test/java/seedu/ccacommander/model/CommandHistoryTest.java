@@ -2,7 +2,6 @@ package seedu.ccacommander.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
 
@@ -11,10 +10,10 @@ import org.junit.jupiter.api.Test;
 
 
 public class CommandHistoryTest {
-    private CommandHistory commandHistory;
-
     public static final String FIRST_COMMAND = "FIRST COMMAND";
     public static final String SECOND_COMMAND = "SECOND COMMAND";
+
+    private CommandHistory commandHistory;
 
     @BeforeEach
     public void setUp() {

@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The facilitator of commands and functions related to recalling previously entered commands.
+ */
 public class CommandHistory {
     private List<String> commandHistoryList;
     private int currentCommandPointer;
@@ -25,8 +28,8 @@ public class CommandHistory {
      */
     public void addCommand(String command) {
         requireNonNull(command);
-        if (this.commandHistoryList.size() == 0 ||
-                !this.commandHistoryList.get(this.commandHistoryList.size() - 1).equals(command)) {
+        if (this.commandHistoryList.size() == 0
+                || !this.commandHistoryList.get(this.commandHistoryList.size() - 1).equals(command)) {
             this.commandHistoryList.add(command);
             resetPointer();
         }

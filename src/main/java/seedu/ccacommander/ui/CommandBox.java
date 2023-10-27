@@ -33,24 +33,26 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(event -> {
             switch (event.getCode()) {
             case UP:
-                if(COMMAND_HISTORY.hasPreviousCommand()) {
+                if (COMMAND_HISTORY.hasPreviousCommand()) {
                     String previousCommand = COMMAND_HISTORY.getPreviousCommand();
                     commandTextField.setText(previousCommand);
                     commandTextField.positionCaret(previousCommand.length());
                 }
                 break;
             case DOWN:
-                if(COMMAND_HISTORY.hasNextCommand()) {
+                if (COMMAND_HISTORY.hasNextCommand()) {
                     String nextCommand = COMMAND_HISTORY.getNextCommand();
                     commandTextField.setText(nextCommand);
                     commandTextField.positionCaret(nextCommand.length());
-                } else if(COMMAND_HISTORY.isLastCommand()) {
+                } else if (COMMAND_HISTORY.isLastCommand()) {
                     COMMAND_HISTORY.resetPointer();
                     commandTextField.setText("");
                 }
                 break;
             case BACK_SPACE:
                 COMMAND_HISTORY.resetPointer();
+                break;
+            default:
                 break;
             }
         });
