@@ -14,10 +14,10 @@ import seedu.address.logic.commands.FindMeetingCommand;
 import seedu.address.model.meeting.AttendeeContainsKeywordsPredicate;
 import seedu.address.model.meeting.GeneralMeetingPredicate;
 import seedu.address.model.meeting.LocationContainsKeywordsPredicate;
+import seedu.address.model.meeting.MeetingTagContainsKeywordsPredicate;
 import seedu.address.model.meeting.MeetingTime;
 import seedu.address.model.meeting.MeetingTimeContainsPredicate;
 import seedu.address.model.meeting.TitleContainsKeywordsPredicate;
-import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 public class FindMeetingCommandParserTest {
 
@@ -97,6 +97,6 @@ public class FindMeetingCommandParserTest {
                 new LocationContainsKeywordsPredicate(List.of(userInput[1].split("\\s+"))),
                 new MeetingTimeContainsPredicate(start, end),
                 new AttendeeContainsKeywordsPredicate(List.of(userInput[2].split("\\s+"))),
-                new TagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
+                new MeetingTagContainsKeywordsPredicate(List.of(userInput[3].split("\\s+"))));
     }
 }
