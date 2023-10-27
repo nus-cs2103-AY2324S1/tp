@@ -5,14 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showEmployeeAtIndex;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIds.ID_EMPLOYEE_NOT_EXISTS;
 import static seedu.address.testutil.TypicalIds.ID_FIRST_EMPLOYEE;
 import static seedu.address.testutil.TypicalIds.ID_SECOND_EMPLOYEE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EMPLOYEE;
-
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 

@@ -53,11 +53,12 @@ public class EmployeeTest {
 
     @Test
     public void isOnLeaveToday_validEmployee_returnsTrue() {
-        Employee employee = new EmployeeBuilder().withLeaveList(new ArrayList<Leave>(Arrays.asList(new Leave(LocalDate.now())))).build();
+        Employee employee = new EmployeeBuilder().withLeaveList(
+            new ArrayList<Leave>(Arrays.asList(new Leave(LocalDate.now())))).build();
         assertTrue(employee.isOnLeaveToday());
     }
 
-    @Test 
+    @Test
     public void isOnLeaveToday_invalidEmployee_returnsFalse() {
         Employee employee = new EmployeeBuilder().withIsOnLeave(false).build();
         assertFalse(employee.isOnLeaveToday());
@@ -72,7 +73,7 @@ public class EmployeeTest {
     @Test
     public void getOvertimePay_validEmployee_returnsOvertimePay() {
         Employee employee = new EmployeeBuilder().withSalary("9000").withOvertimeHours(5).build();
-        assertEquals(employee.getOvertimePay(), Math.round((5*9000*1.5/(52*44) * 100)) / 100d);
+        assertEquals(employee.getOvertimePay(), Math.round((5 * 9000 * 1.5 / (52 * 44) * 100)) / 100d);
     }
 
     @Test

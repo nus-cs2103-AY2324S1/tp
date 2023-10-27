@@ -34,7 +34,7 @@ public class Salary implements Comparable<Salary> {
     }
 
     public double getOvertimeHourlyRate() {
-        return Double.parseDouble(value)* 1.5/(52*44);
+        return Double.parseDouble(value) * 1.5 / (52 * 44);
     }
 
     @Override

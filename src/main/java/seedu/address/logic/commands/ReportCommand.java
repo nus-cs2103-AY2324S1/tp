@@ -37,7 +37,8 @@ public class ReportCommand extends Command {
 
         for (Employee employee : lastShownList) {
             if (employee.getId().equals(targetId)) {
-                return new CommandResult(String.format(Messages.MESSAGE_REPORT_STRING, employee.getName(), employee.getOvertimeHours(),
+                return new CommandResult(String.format(Messages.MESSAGE_REPORT_STRING,
+                        employee.getName(), employee.getOvertimeHours(),
                         employee.getOvertimePay(), employee.getNumOfLeaves()));
             }
         }
