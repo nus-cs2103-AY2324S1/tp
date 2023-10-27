@@ -38,7 +38,6 @@
                      <Button mnemonicParsing="false" onAction="#handleExit" styleClass="button" text="Exit" />
                   </children>
                </VBox>
-      
                 <VBox prefHeight="540.0" prefWidth="656.0" style="-fx-background-color: #624583;" HBox.hgrow="ALWAYS">
                   <VBox fx:id="personList" prefHeight="453.0" prefWidth="523.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                   <padding>
@@ -52,19 +51,16 @@
                         </children>
                      </HBox>
                   </VBox>
-      
                   <StackPane fx:id="resultDisplayPlaceholder" maxHeight="150" minHeight="120.0" prefHeight="120.0" prefWidth="633.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
                     <padding>
                       <Insets bottom="5" left="10" right="10" top="5" />
                     </padding>
                   </StackPane>
-        
                   <StackPane fx:id="commandBoxPlaceholder" prefHeight="17.0" prefWidth="842.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
                     <padding>
                       <Insets bottom="5" left="10" right="10" top="5" />
                     </padding>
                   </StackPane>
-      
                   <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
                 </VBox>
             </children>
