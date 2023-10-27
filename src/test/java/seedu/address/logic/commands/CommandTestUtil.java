@@ -45,7 +45,7 @@ public class CommandTestUtil {
     public static final int VALID_OVERTIME_HOURS_AMY = 72;
     public static final int VALID_OVERTIME_HOURS_BOB = 70;
     public static final boolean VALID_IS_ON_LEAVE_AMY = false;
-    public static final boolean VALID_IS_ON_LEAVE_BOB = true;;
+    public static final boolean VALID_IS_ON_LEAVE_BOB = true;
     public static final ArrayList VALID_LEAVELIST_AMY = new ArrayList<>();
     public static final ArrayList VALID_LEAVELIST_BOB = new ArrayList<>();
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
