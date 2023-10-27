@@ -1,9 +1,6 @@
 package seedu.flashlingo.logic.commands;
 
 import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.flashlingo.testutil.TypicalFlashCards.AMY;
-import static seedu.flashlingo.testutil.TypicalFlashCards.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
