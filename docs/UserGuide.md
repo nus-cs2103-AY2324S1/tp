@@ -259,6 +259,8 @@ Action             | Format, Examples
 **Add Contact**    | `add contact -n NAME -p PHONE_NUMBER -a ADDRESS -e EMAIL` <br> e.g., `add contact -n Aaron -p 12345678 -a Baker Street 12 -e aaron123@gmail.com`
 **Delete Contact** | `delete contact NAME`<br> e.g., `delete contact Aaron`
 **List Contact**   | `list contact`
+**Add Tag**        | `add tag -id CONTACT_ID -t TAGNAME` <br> eg., `add tag -id 1 -t frontend`
+**Delete Tag**        | `delete tag -id CONTACT_ID -t TAGNAME` <br> eg., `delete tag -id 1 -t frontend`
 **Add Note**       | `add note -n NAME -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -n Daniel -t Open Position -e Applications for SWE full-time positions will open soon`
 **Delete Note**    | `delete note -n NAME -t NOTE_TITLE`<br> e.g., `delete note -n Aaron -t Meeting Topics`
 **List Notes**     | `list notes`
