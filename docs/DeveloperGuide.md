@@ -339,6 +339,39 @@ clipboard.
 * Step 4: The `CopyApplicantCommand` calls the copies the applicant's details given by the `Applicant` `detailsToCopy()`
   method into the clipboard.
 
+### \[Proposed\] Allocating tasks to Members
+
+#### Proposed Implementation
+
+The proposed allocating tasks to `Member` objects is implemented using either `ToDo` or `Deadline` or `Events` object.
+They extend from the `Tasks` class. A `Tasklist` object will be instantiated for each `Member` object, used to store the
+list of tasks assigned to each individual. Additionally, it implements the following operations:
+
+* `ToDo#markAsDone()`— Will be used to mark the todo of each Member as done
+* `ToDo#markAsUnDone()`— Will be used to mark the todo of each Member as undone
+* `Deadline#markAsDone()`— Will be used to mark the deadline of each Member as done
+* `Deadline#markAsUnDone()`— Will be used to mark the deadline of each Member as done
+* `Event#markAsDone()`— Will be used to mark the deadline of each Member as done
+* `Event#markAsUnDone()`— Will be used to mark the deadline of each Member as done
+
+These operations are exposed in the `Task` parent class as `Task#markAsDone()` and `Task#markAsUnDone()` to execute the
+above-mentioned operations.
+
+Step 1: The user adds a new `Member` using the `addMember` command. At this point, a `TaskList` instance will be 
+assigned to that member.
+
+Step 2: When the user uses the `addToDo` command, a `ToDo` object containing the details parsed in through the code will
+be stored and under the user identified by their telegram handle, which is passed as a parameter. It namely stores the 
+`Tasks.taskName`.
+
+Step 3: When the user uses the `addDeadline` command, a `Deadline` object containing the details parsed in through the code will
+be stored and under the user identified by their telegram handle, which is passed as a parameter. It namely stores the 
+`Tasks.taskName`, `Deadline.dueDate` and `Deadline.dueTime`.
+
+Step 4: When the user uses the `addEvent` command, an `Event` object containing the details parsed in through the code will
+be stored and under the user identified by their telegram handle, which is passed as a parameter. It namely stores the
+`Tasks.taskName`, `Event.startDate`, `Deadline.startTime`, `Event.endDate` and `Deadline.endTime`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
