@@ -219,6 +219,48 @@ Pros: Arguably a more OOP approach since all commands that trigger view IS-A `Vi
 Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
 An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
 
+
+### Search feature
+
+#### Implementation
+
+The search feature is implemented using the `SearchCommand` class. It extends `Command` and overrides the `execute()` method to
+filter users by the specified parameters.
+
+The search parameters from the user input are parsed using the parse method in the `SearchCommandParser` class. `SearchCommandParser::Parse`
+takes in the search parameters from the user input and combines them into a list of predicates. This list of predicates is then 
+passed as an argument to the `SearchCommand` constructor and the method returns a `SearchCommand` instance with the associated list of predicates.
+
+Currently, the search parameters could belong to any of the three following categories: `Name`, `Status`, and `Tag`. Prefixes
+`n/`, `st/` and `t/` are used to denote the category of the search parameters respectively. E.g. `search n/alex st/interviewed t/swe`
+
+The list of predicates is a list comprising predicate objects whose classes implement the `Predicate` class in Java.
+Each category has its own predicate class i.e. `NameContainsKeywordPredicate`, `StatusContainsKeywordPredicate`, `TagContainsKeywordPredicate`
+and each class overrides the `test` method which returns true if the persons list contains any of the given names/status/tags.
+
+Finally, the execute method in `SearchCommand` class invokes the `updateFilteredPersonList(predicatesList)` which will 
+update the list of persons displayed.
+
+Given below is an example usage scenario and how the search mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `search n/john st/offered t/swe` command to filter candidates having the name john,
+offered status and tagged as swe. 
+
+The following sequence diagram shows how the search operation works:
+
+**Note:** The lifeline for `SearchCommand` and `SearchCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+<puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram" />
+
+Step 3. The user should see the UI below upon entering `search n/john st/interviewed t/friends`.
+
+![View](images/search.png)
+
+**Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
+It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -432,31 +474,16 @@ Use case ends.
   * 2b1. JABPro shows a message indicating that there are no persons to display. 
   Use case ends.
 
-**Use case: Search a person by name**
+**Use case: Search persons by the specified categories(name, status and/ tag)**
 
 **MSS**
-1.  Hiring manager types in name keywords to search users by name.
-2.  JABPro shows a list of persons whose names contain matching keywords. 
-    Use case ends.
+1.  Hiring manager types in search parameters to search users by the specified categories.
+2.  JABPro shows a list of persons whose profile matches the given parameters.
+Use case ends.
 
 **Extensions**
 
-* 1a. The given name keyword is invalid (invalid name).
-    * 1a1. JABPro shows an error message.
-      Use case resumes at step 1.
-* 2a. The list is empty.
-  Use case ends.
-
-**Use case: Search a person by application status**
-
-**MSS**
-1.  User keys in search command with application status (i.e. interviewed, pending, rejected, offered).
-2.  JABPro shows a list of persons whose status match the given status keywords. 
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given name status is invalid (not from the given list of valid status keywords).
+* 1a. The given name/status/tag parameter is invalid.
     * 1a1. JABPro shows an error message.
       Use case resumes at step 1.
 * 2a. The list is empty.
