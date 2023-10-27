@@ -3,8 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -21,7 +24,10 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private final AddressBook addressBook;
+    private static final int UNDOS_ALLOWED = 5;
+    private AddressBook addressBook;
+    private final ArrayList<AddressBook> undoList;
+    private final ArrayList<AddressBook> redoList;
     private final UserPrefs userPrefs;
     private final FilteredList<Doctor> filteredDoctors;
     private final FilteredList<Patient> filteredPatients;
@@ -33,15 +39,41 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.undoList = new ArrayList<>();
+        this.redoList = new ArrayList<>();
         filteredDoctors = new FilteredList<>(this.addressBook.getDoctorList());
         filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
     }
-
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
+    }
+
+    private void updateBackup() {
+        if (undoList.size() == UNDOS_ALLOWED) {
+            undoList.remove(0);
+        }
+        undoList.add(new AddressBook(addressBook));
+        redoList.clear();
+    }
+    @Override
+    public void undo() throws CommandException {
+        if (!undoList.isEmpty()) {
+            redoList.add(addressBook);
+            addressBook = undoList.remove(undoList.size() - 1);
+        } else {
+            throw new CommandException(UndoCommand.MESSAGE_EMPTY);
+        }
+    }
+    @Override
+    public void redo() throws CommandException {
+        if (!redoList.isEmpty()) {
+            undoList.add(addressBook);
+            addressBook = redoList.remove(redoList.size() - 1);
+        } else {
+            throw new CommandException(RedoCommand.MESSAGE_EMPTY);
+        }
     }
 
     //=========== UserPrefs ==================================================================================
@@ -79,21 +111,6 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    @Override
-    public Path getPrevFilePath() {
-        return userPrefs.getPrevFilePath();
-    }
-
-    @Override
-    public void setToPrevFilePath() throws IOException {
-        userPrefs.setToPrevFilePath();
-    }
-
-    @Override
-    public void saveFilePath() throws IOException {
-        userPrefs.saveFilePath();
-    }
-
     //=========== AddressBook ================================================================================
 
     @Override
@@ -121,8 +138,10 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         if (target instanceof Patient) {
+            updateBackup();
             addressBook.removePatient((Patient) target);
         } else if (target instanceof Doctor) {
+            updateBackup();
             addressBook.removeDoctor((Doctor) target);
         }
 
@@ -131,8 +150,10 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         if (person instanceof Patient) {
+            updateBackup();
             addressBook.addPatient((Patient) person);
         } else if (person instanceof Doctor) {
+            updateBackup();
             addressBook.addDoctor((Doctor) person);
         }
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -142,8 +163,10 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         if (target instanceof Patient && editedPerson instanceof Patient) {
+            updateBackup();
             addressBook.setPatient((Patient) target, (Patient) editedPerson);
         } else if (target instanceof Doctor && editedPerson instanceof Doctor) {
+            updateBackup();
             addressBook.setDoctor((Doctor) target, (Doctor) editedPerson);
         }
     }
@@ -181,7 +204,6 @@ public class ModelManager implements Model {
         filteredPatients.setPredicate(predicate);
         filteredDoctors.setPredicate(predicate);
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
