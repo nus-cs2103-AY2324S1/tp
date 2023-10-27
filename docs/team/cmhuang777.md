@@ -22,6 +22,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
     * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+    * Managed milestones and issues
 
 * **Enhancements to existing features**:
     * (to be added soon)

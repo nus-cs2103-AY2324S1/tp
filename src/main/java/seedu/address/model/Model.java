@@ -1,11 +1,11 @@
 package seedu.address.model;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
@@ -47,18 +47,6 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
-
-    /**
-     * Returns the user prefs' previous address book file path.
-     */
-    Path getPrevFilePath();
-
-    /**
-     * Sets the user prefs' address book file path to the previous file path.
-     */
-    void setToPrevFilePath() throws IOException;
-
-    void saveFilePath() throws IOException;
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -108,4 +96,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void undo() throws CommandException;
+    void redo() throws CommandException;
 }

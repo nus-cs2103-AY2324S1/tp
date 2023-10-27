@@ -23,8 +23,6 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     private Path currentfilePath;
 
-    private Path previousfilePath;
-
     public JsonAddressBookStorage(Path filePath) {
         this.currentfilePath = filePath;
     }
