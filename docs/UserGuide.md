@@ -151,7 +151,7 @@ Format: `editAttendance m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMA
 * The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
 
 Examples:
-* `editAttendance m/1 e/1 h/0 r/Absent due to Covid` edits the attendance of the 1st member in the member list for the 1st event of the event list.
+* `editAttendance m/1 e/1 h/0 r/Absent due to Covid` edits the attendance of the 1st member in the member list for the 1st event of the event list to be `0` hours and have a remark `Absent due to Covid`.
 
 ### List all Members and all Events : `list`
 
