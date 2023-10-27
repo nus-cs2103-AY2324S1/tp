@@ -154,18 +154,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Ability to assign persons to an event
-
-The ability to assign persons to an event is facilitated by `ModelManager`. 
-
-Each event stores a list of persons assigned to it. The person(s) are represented by their `Name` stored in FumbleLog. This is because the `Name` is the only unique identifier for a person. 
-
-When a person is assigned to an event, the person's `Name` is added to the event's list of assigned persons. When a person is unassigned from an event, the person's `Name` is removed from the event's list of assigned persons. When a person's `Name` is modified, the change is also reflected in the event(s) that they are previously assigned to.
-
-Users can assign multiple names to an event by using multiple `n/` identifiers following with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, i.e the `Name` currently exists in FumbleLog. 
-
-When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event
-
 ### Ability to add persons
 
 #### Implementation details
@@ -177,7 +165,7 @@ This is done using `AddCommand` which implements the `Command` interface. The `A
 As a result, the existing 'Person' class in AB3's implementation is enhanced to have the capacity of storing optional fields.
 Below is a class diagram of the enhanced 'Person' class:
 
-<puml src="diagrams/"PersonClassDiagram.puml" alt="PersonClassDiagram" />
+<img src="images/PersonClassDiagram.png" alt="PersonClassDiagram" width=500 />
 
 The `Person` object is now composed of the following optional attributes due to the refactored `add` feature:
 
@@ -198,7 +186,7 @@ Except for the name, all the fields given to the `add` command are optional.
 
 The flow for the `add` command is described by the following sequence diagram:
 
-<puml src="diagrams/"AddPersonSequenceDiagram.puml" alt="AddPersonSequenceDiagram" />
+<img src="images/AddPersonSequenceDiagram.png" alt="AddPersonSequenceDiagram" width=600 />
 
 ### Feature details
 1. The application will validate the arguments supplied by the user; whether the "NAME" is unique and supplied, and whether the optional fields follow the correct format. 
@@ -229,6 +217,37 @@ for empty/null inputs in the Person object by checking if the optional field is 
     * Do not have to account for empty/null inputs in the optional fields when saving the data and testing it
   * Cons:
     * Inconveniences the user as they have to remember a new command to add a person with optional fields.
+
+### Ability to assign persons to an event
+
+The ability to assign persons to an event is facilitated by `ModelManager`.
+
+Each event stores a list of persons assigned to it. The person(s) are represented by their `Name` stored in FumbleLog. This is because the `Name` is the only unique identifier for a person.
+
+When a person is assigned to an event, the person's `Name` is added to the event's list of assigned persons. When a person is unassigned from an event, the person's `Name` is removed from the event's list of assigned persons. When a person's `Name` is modified, the change is also reflected in the event(s) that they are previously assigned to.
+
+Users can assign multiple names to an event by using multiple `n/` identifiers following with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, i.e the `Name` currently exists in FumbleLog.
+
+When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event.
+
+### Ability to assign groups to an event
+
+#### Implementation
+
+The ability to assign groups to an event is facilitated by `ModelManager`.
+
+Each event stores a list of groups assigned to it. The groups(s) are represented by their name and that acts as their id. 
+
+When a group is assigned to an event, the group's name is stored into the event's list of groups. When un-assigned, the corresponding groups are then removed from the group list.
+
+With the group name, person(s) with that specific group in their group list is displayed with the event.
+
+#### Design considerations
+
+- When adding and displaying groups, persons that has been added individually previously will be displayed twice. To counter that, checks are done to ensure that
+when a group is added, duplicate persons will be deleted from the individual persons list
+- A person can belong to multiple groups, due to the multiplicity between groups and persons. In this case, we allow multiple persons to be displayed, as it is clear which group they belong to.
+- As the persons are searched by their group name only when displaying, adding new persons, editing and deleting persons is simple as the component just reloads and searches for everybody in the groups again.
 
 ### Improved find feature
 
@@ -392,9 +411,6 @@ The flow for the `remind` command is described by the following sequence diagram
   - Cons: 
     - Performance overhead. New addressbook objects needs to be created.
 
-
-    
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -484,6 +500,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
+* 4a. The person is the last member of a group and that group is assigned to an event.
+
+    * 4a1. The group is deleted from the event.
+
+      Use case exits.
+
 **Use case: UC02 - Add a person**
 
 **MSS**
@@ -499,6 +521,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FumbleLog shows an error message.
 
       Use case resumes at step 2.
+* 3a. Person is added with a group and that group is assigned to an event
+  
+    * 3a1. FumbleLog reloaded the event component and displays the newly added person in the event.
+
+      Use case ends.
 
 **Use case: UC03 - Edit a person**
 
@@ -524,11 +551,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. User modifies the name of the person
 
-    * 4a1. FumbleLog updates the name of the person in all events that the person is <u> assigned </u> to.
+    * 4a1. FumbleLog updates the name of the person in all events that the person is <u> assigned </u> to. This includes persons in groups.
 
       Use case resumes at step 5.
 
-    
+* User removes a group from the person
+
+    * 4b1. FumbleLog removes the person from the corresponding group in all events.
+
+      Use case resumes at step 5.
+
 **Use case: UC04 - Add an event**
 
 **MSS**
