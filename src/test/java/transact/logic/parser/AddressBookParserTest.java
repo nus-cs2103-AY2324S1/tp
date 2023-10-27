@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import transact.logic.commands.AddStaffCommand;
-import transact.logic.commands.ClearCommand;
+import transact.logic.commands.ClearStaffCommand;
 import transact.logic.commands.DeleteStaffCommand;
 import transact.logic.commands.EditStaffCommand;
 import transact.logic.commands.EditStaffCommand.EditPersonDescriptor;
@@ -42,8 +42,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearStaffCommand.COMMAND_WORD) instanceof ClearStaffCommand);
+        assertTrue(parser.parseCommand(ClearStaffCommand.COMMAND_WORD + " 3") instanceof ClearStaffCommand);
     }
 
     @Test
