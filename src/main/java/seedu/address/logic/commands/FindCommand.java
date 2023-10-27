@@ -34,7 +34,6 @@ public class FindCommand extends Command {
      * @throws NullPointerException if {@code namePredicate} is null.
      */
     public FindCommand(NameContainsKeywordsPredicate namePredicate) {
-        assert namePredicate != null;
         this.predicate = namePredicate;
     }
 
