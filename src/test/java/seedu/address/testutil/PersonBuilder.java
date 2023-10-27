@@ -108,8 +108,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code IdentityCode} of the {@code Person} that we are building.
      */
-    public PersonBuilder withIdentityCode(String IdentityCode) {
-        this.identityCode = new IdentityCode(IdentityCode);
+    public PersonBuilder withIdentityCode(String identityCode) {
+        this.identityCode = new IdentityCode(identityCode);
         return this;
     }
     public Person build() {
