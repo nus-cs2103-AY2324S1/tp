@@ -154,89 +154,182 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Read feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed implementation involves the ReadCommand and some associated classes:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `ReadCommand` — This class is responsible for executing the "Read" command. It parses the user input, retrieves information from the model, and passes the results to the UI for display.
+(class diagram to be added)
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+* `ReadCommandParser` — Responsible for parsing user input and creating a ReadCommand object. It extracts the index of the employee in the last shown list and the requested field.
+(Class diagram to be added)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+* `PersonCardWithSpecificField` - Since we have to display only one specific field, we created another person card with just one field. This class is responsible for displaying the name of the person and a specific field requested by the user in the UI. It receives the necessary information from the command result and formats it for display.
+(Class diagram to be added)
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Displaying a specific field with the new PersonCardWithSpecificField class.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+1. Before we execute a command, the MainWindow will display a list of person with all their fields as shown below.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+![ReadCommandBeforeExecute](images/ReadCommandBeforeExecute.png)
 
-![UndoRedoState1](images/UndoRedoState1.png)
+2. After we execute the command, and it is a ReadCommand, the ReadCommand will set CommandResult::isRead to true. The MainWindow of UI will then remove all the existing PersonCard with a PersonCardWithSpecificField as shown below.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+![ReadCommandAfterExecute](images/ReadCommandAfterExecute.png)
 
-![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+How the read feature works in sequence diagram.
 
-</div>
+The user enters the command "read 1 /a" and executes it. The command is then parsed by AddressBookParser. The AddressBookParser parsed the input and created ReadCommandParser and ReadCommandParser parsed the remaining input(exclude the command word). If it parses successfully, it will eventually create a ReadCommand. The ReadCommand is then executed. If the index is not out of bounds, it will call Model#setSpecificPersonToDisplay() to filter the list to only the specific person. Then it will also call the respective getter to get the specific field from the Person. After getting the specific field, it will then create a CommandResult for the UI to display. 
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+This is the sequence diagram to show how the read operation works.
+![ReadSequenceDiagram3](images/ReadSequenceDiagram.png)
 
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
+:information_source: **Note:** The lifeline for `ReadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: Data Retrieval:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Retrieve only the specific field of the person being read.
+  * Pros: Reduces memory usage and may improve performance.
+  * Cons: Requires more complex implementation and handling of different data retrieval scenarios.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Retrieve the entire person's data when executing the "Read" command.
+  * Pros: Simple and consistent with other command implementations.
+  * Cons: May have performance issues if the person's data is extensive.
+    
+**Aspect: Using Index:**
+
+* **Alternative 1 (current choice):** Use an index to identify the target person for the "Read" command.
+  * Pros: Faster and more efficient execution when working with a large number of people.
+  * Cons: This may require users to remember or find the index of the person.
+
+* **Alternative 2:** Use the person's name to identify the target person for the "Read" command.
+  * Pros: User-friendly, especially when users are more likely to identify persons by name.
+  * Cons: This may result in slower execution when many persons exist in the address book.
 
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
+### Deductions and Benefits
+
+#### Proposed Implementation
+
+The proposed deductions and benefits feature is facilitated by `Deduction` and `Benefit` classes. They represent payment deducted from and paid to an employee respectively.
+
+A `Deduction` object contains the following information:
+(Class diagram to be added)
+
+A `Benefit` object contains the following information:
+(Class diagram to be added)
+
+Both `Deduction` and `Benefit` classes extend the `Payment` class, which contains the following information:
+(Class diagram to be added)
+
+Adding deductions and benefits to an employee is done by the `DeductCommand` and `DeductCommandParser` classes and `BenefitCommand` and `BenefitCommandParser` classes respectively.
+
+The following sequence diagram shows how the `deduct`/`benefit` operation works:
+(Sequence diagram to be added)
+
+After `DeductCommandParser` and `BenefitCommandParser` classes parse the user input, the `DeductCommand` and `BenefitCommand` classes will be called to execute the command. The `DeductCommand` and `BenefitCommand` classes will then call the `Model` component to add the deduction/benefit to the employee.
+`DeductCommand::execute(Model)` and `BenefitCommand::execute(Model)` will decide to call `DeductCommand::executeByIndex(Model)`/`BenefitCommand::executeByIndex(Model)` or `DeductCommand::executeByName(Model)`/`BenefitCommand::executeByName(Model)` based on whether an index has been specified in the user input.
+
+The following activity diagram summarises the process of adding a deduction/benefit to an employee:
+(Activity diagram to be added)
+
+#### Design considerations:
+
+{what are the design considerations?}
+
+### Payslip generation
+
+#### Proposed Implementation
+
+The proposed payslip generation feature is facilitated by `PayslipGenerator`, `PayslipCommand` and `PayslipCommandParser` classes.
+
+The `PayslipGenerator` class is responsible for generating the payslip for a specific employee. It contains the following methods:
+(Class diagram to be added)
+
+The `PayslipCommand` class is responsible for executing the `payslip` command. It contains the following methods:
+(Class diagram to be added)
+
+The `PayslipCommandParser` class is responsible for parsing the user input for the `payslip` command. It contains the following methods:
+(Class diagram to be added)
+
+The following sequence diagram shows how the `payslip` operation works:
+(Sequence diagram to be added)
+
+After `PayslipCommandParser` class parses the user input, the `PayslipCommand` class will be called to execute the command. The `PayslipCommand` class will then call the `Model` component to generate the payslip for the employee, and store the payslip as a PDF file at `payslips/`.
+
+The following activity diagram summarises the process of generating a payslip for an employee:
+(Activity diagram to be added)
+
+### Payroll calculation feature
+
+#### Implementation
+
+The feature is facilitated by the four classes below:
+1.	PayrollCommandParser
+2.	PayrollCommand
+3.	Payroll
+4.	Salary
+
+
+<u>PayrollCommandParser</u>
+
+This class extends the Parser interface, it implements the following operations:
+- PayrollCommandParser#parse() – Parses the user input and returns a PayrollCommand object.
+
+<u>PayrollCommand</u>
+
+This class extends the Command abstract class, it implements the following operations:
+- PayrollCommand#execute() – Determines whether the user used employee name as reference or the index number. Once it confirms, it will calculate the payroll of the employee.
+
+#### Design considerations:
+
+{what are the design considerations?}
+
+### Leave Tracking
+
+#### Proposed Implementation
+
+The proposed leave tracking feature is facilitated by `AnnualLeave`, `AddLeaveCommand` and `AddLeaveCommandParser` classes.
+
+The `AnnualLeave` class is responsible for storing the leave data for a specific employee. It contains the following methods:
+(Class diagram to be added)
+
+The `AddLeaveCommand` class is responsible for executing the `addleave` command. It contains the following methods:
+(Class diagram to be added)
+
+The `AddLeaveCommandParser` class is responsible for parsing the user input for the `addleave` command. It contains the following methods:
+(Class diagram to be added)
+
+The following sequence diagram shows how the `addleave` operation works:
+(Sequence diagram to be added)
+
+After `AddLeaveCommandParser` class parses the user input, the `AddLeaveCommand` class will be called to execute the command. The `AddLeaveCommand` class will then call the `Model` component to add leave for the employee, and store the leave as an arraylist in `AnnualLeave`.
+
+The following activity diagram summarises the process of adding leave for an employee:
+(Activity diagram to be added)
+
+#### Design considerations:
+ 
+**Aspect: How addleave executes:**
+
+* **Alternative 1 (current choice):** Saves the dates of the leave added.
+  * Pros: Easy to trace and track when the leaves are applied, and whether employee is working on specific day.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Saves only the total number of days of leave added.
+  * Pros: will use less memory (e.g. each employee will only need to store an integer for the total number of days of leave per annul)
+  * Cons: Not much useful information that can be used (e.g. we do not know the working status of each employee for each day)
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -377,6 +470,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
+**Use case: Add deductions/benefits to the monthly salary of an employee**
+
+**MSS**
+
+1. User requests to add deductions/benefits to the monthly salary of an employee.
+2. ManaGease adds deductions/benefits to the monthly salary of an employee.
+3. ManaGease displays a confirmation message that deductions/benefits have been added.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command parameters are given.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
+
+<br>
+
 **Use case: Generate a PDF payslip for a specific employee**
 
 **MSS**
@@ -401,7 +514,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Add leave for a specific employee**
 
+**MSS**
+
+1. User requests to add leave for a specific employee.
+2. ManaGease adds leave for the employee.
+3. ManaGease displays a confirmation message that the leave has been added.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command parameters are given.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
+
+* 1b. Invalid date(s) are given.
+
+    * 1b1. ManaGease shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 
