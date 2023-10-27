@@ -111,6 +111,12 @@ public interface Model {
      */
     void createAttendance(Attendance attendance);
 
+    /**
+     * Replaces the given member {@code target} with {@code editedEnrolment}.
+     * {@code target} must exist in CcaCommander.
+     */
+    void setEnrolment(Attendance target, Attendance editedEnrolment);
+
     /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();
 
