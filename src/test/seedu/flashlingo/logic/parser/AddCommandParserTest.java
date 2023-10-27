@@ -21,6 +21,7 @@ import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.logic.commands.Command;
 import seedu.flashlingo.logic.parser.AddCommandParser;
+import seedu.flashlingo.logic.parser.Parser;
 import seedu.flashlingo.model.flashcard.FlashCard;
 
 
@@ -32,7 +33,7 @@ public class AddCommandParserTest {
         FlashCard expectedFlashCard = new FlashCardBuilder(BOB).build();
 
         // whitespace only preamble
-        assertParseSuccess((Parser<? extends Command>) parser, PREAMBLE_WHITESPACE + WORD_DESC_BOB + TRANSLATION_DESC_BOB,
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + WORD_DESC_BOB + TRANSLATION_DESC_BOB,
                 new AddCommand(expectedFlashCard));
     }
 

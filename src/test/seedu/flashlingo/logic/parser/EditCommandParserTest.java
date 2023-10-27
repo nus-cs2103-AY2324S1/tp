@@ -9,7 +9,6 @@ import static flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 
-import flashlingo.logic.parser.Parser;
 import org.junit.jupiter.api.Test;
 
 import seedu.flashlingo.commons.core.index.Index;
@@ -28,10 +27,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure((Parser<? extends Command>) parser, VALID_ORIGINAL_WORD_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_ORIGINAL_WORD_AMY, MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
-        assertParseFailure((Parser<? extends Command>) parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
