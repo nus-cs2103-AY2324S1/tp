@@ -93,7 +93,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](./images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -167,6 +167,29 @@ View Command handles both the viewing of all students and all appointments. The 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** There should be a diamond connecting the 3 separate branches
 but due to a limitation of PlantUML, the 3 branches leads to the "end" individually .
 </div>
+### Student Notes feature
+
+The adding of student notes is facilitated by `NoteCommand`. It extends `Command` and allows the addition of a `Note`
+to the student at the index specified by the user.
+
+The sequence diagram below illustrates the interactions within the `Logic` component, 
+taking `execute("note 1 note/Likes dogs.")` as an example.
+
+![Interactions inside the Logic component for "note 1 note/Likes dogs." command](images/NoteSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How a `Note` should be added to a `Student`**
+
+* **Alternative 1 (current choice):** Create a new `NoteCommand` class which handles the addition of a note 
+to a `Student`.
+    * Pros: User input will be shorter in length and easier to read
+    * Cons: More work to implement
+
+* **Alternative 2:** Add `Note` as a field in the `AddCommand`
+    * Pros: Easier to implement
+    * Cons: User will have to type much longer commands, since `Note` can be up to 200 characters long,
+  leads to very lengthy commands
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
