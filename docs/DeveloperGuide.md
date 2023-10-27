@@ -157,6 +157,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
 ### Notifications feature
 
 #### Implementation
@@ -308,6 +309,97 @@ Since `edit` command updates attributes of a `Person` object, setting the values
         * Minimal performance overhead; less memory usage.
     * Cons:
         * More bug prone.
+
+### Find feature
+
+The find command feature allows users to locate specific Person instances within the application based on keywords provided. Users can input specific terms, and the system will filter and present Person instances that match the given keywords in either their name, address, email, phone number, or tags.
+
+The find command is not just a simple string matching utility within our system. It is an advanced search mechanism that employs tokenization, parsing, and supports the evaluation of complex boolean expressions. This makes it an invaluable tool for users who want to execute intricate searches and filter results based on a combination of criteria.
+
+#### Implementation
+
+##### `FindCommand` and `FindCommandParser`
+
+The heart of the Find command system is the combination of `FindCommand` and `FindCommandParser`. The latter is responsible for processing raw user input, tokenizing the search criteria using the `FindFilterStringTokenizer`, and subsequently parsing it with the `FindExpressionParser`. The end product is a `FindCommand` object that executes the search based on a `Predicate<Person>` that checks all relevant fields of a `Person`.
+
+Sequence Diagram for FindCommandParser:
+
+<puml src="diagrams/find-command/FindCommandParserSequenceDiagram.puml" alt="FindCommandParserSequenceDiagram" />
+
+##### `FindFilterStringTokenizer`
+
+The `FindFilterStringTokenizer` is tailored to break down the user's search criteria, a `String` into meaningful tokens which can later be parsed into a final `Predicate<Person>`. This process includes recognizing individual terms (in the form of conditions of the form `PREFIX/KEYWORD`), Boolean operators (including `!`, `&&`, and `||`), and parentheses (`(` and `)`).
+
+Class Diagram for FindFilterStringTokenizer:
+
+<puml src="diagrams/find-command/FindFilterStringTokenizerClassDiagram.puml" alt="FindFilterStringTokenizerClassDiagram" />
+
+##### `FindExpressionParser``
+
+The `FindExpressionParser` ingests the tokens produced by the `FindFilterStringTokenizer` and interprets them, creating a singular complete `Predicate<Person>` that's applied on the PersonList.
+
+Class Diagram for FindExpressionParser:
+
+<puml src="diagrams/find-command/FindExpressionParserClassDiagram.puml" alt="FindExpressionParserClassDiagram" />
+
+FindExpressionParser uses the recursive gradient descent algorithm to parse the tokens into a `Predicate<Person>`.
+
+Sequence Diagram for FindExpressionParser showing how a sample input is parsed using the recursive gradient descent algorithm:
+
+<puml src="diagrams/find-command/FindExpressionParserSequenceDiagram.puml" alt="FindExpressionParserSequenceDiagram" />
+
+#### Design considerations:
+
+**Aspect: Command Flexibility vs. Complexity**
+
+* **Alternative 1 (current choice)**: Support boolean operations in `FindCommand`.
+  * **Pros**: Provides powerful search capabilities.
+  * **Cons**: Increases code complexity and potential for user input errors.
+
+* **Alternative 2**: Only allow simple keyword-based searches.
+  * **Pros**: Easier to implement and use.
+  * **Cons**: Limits user's searching abilities.
+
+
+**Aspect: Tokenizer library**
+
+* **Alternative 1 (current choice):** Custom-built tokenizer.
+  * **Pros:** Allows for more flexibility in terms of the syntax of the search criteria. Can handle our custom-defined terms, operators, and grouping symbols explicitly.
+  * **Cons**: More code required, requires regular maintenance to adapt to new features or changes.
+
+* **Alternative 2:** Use a third-party library.
+  * **Pros:** Less code required, might be more robust and have additional features.
+  * **Cons**: Less flexibility in terms of the syntax of the search criteria. May not be able to handle our custom-defined terms, operators, and grouping symbols explicitly. Might not cater explicitly to the specific requirements of the Find command. Requires integration efforts.
+
+**Aspect: Tokenization Strategy**
+
+* **Alternative 1 (current choice)**: Custom tokenizer.
+  * **Pros**: Greater control and flexibility.
+  * **Cons**: More complex to implement and maintain.
+
+* **Alternative 2**: Regular expression-based tokenizer.
+  * **Pros**: Can be more concise.
+  * **Cons**: May not handle all edge cases or complexities.
+
+
+**Aspect: Supported Logical Operators**
+
+* **Alternative 1 (current choice):** Use standard boolean operators (`&&`, `||`, `!`).
+  * **Pros:** Universally recognized and understood.
+  * **Cons**: Limited to boolean logic.
+
+* **Alternative 2:** Support more advanced operators or functions (e.g., nearness search, regex patterns).
+  * **Pros:** Provides more power and flexibility to users.
+  * **Cons**: Significantly complicates parsing and understanding for users.
+
+**Aspect: Handling Invalid Inputs**
+
+* **Alternative 1 (current choice)**: Throw an exception and inform the user.
+  * **Pros**: User is made aware of mistakes immediately.
+  * **Cons**: Stops the command processing.
+* **Alternative 2**: Silently ignore or correct invalid inputs.
+  * **Pros**: Smoother user experience.
+  * **Cons**: User might not realize they made a mistake.
 
 ### \[Proposed\] Undo/redo feature
 
