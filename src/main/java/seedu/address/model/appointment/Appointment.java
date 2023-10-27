@@ -2,6 +2,7 @@ package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -144,5 +145,10 @@ public class Appointment extends ScheduleItem implements Comparable<ScheduleItem
             Appointment appointment = (Appointment) scheduleItem;
             return this.date.compareTo(appointment.date);
         }
+    }
+
+    @Override
+    public boolean isSameDate(LocalDate date) {
+        return this.date.toLocalDate().equals(date);
     }
 }
