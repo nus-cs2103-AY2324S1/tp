@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 
-import seedu.address.model.Model;
-import seedu.address.model.card.Card;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.model.Model;
+import seedu.address.model.card.Card;
 
 /**
  * Lists all Cards in the Deck to the user.
