@@ -12,7 +12,15 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.employee.*;
+import seedu.address.model.employee.Email;
+import seedu.address.model.employee.Id;
+import seedu.address.model.employee.Leave;
+import seedu.address.model.employee.LeaveList;
+import seedu.address.model.employee.Name;
+import seedu.address.model.employee.OvertimeHours;
+import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Position;
+import seedu.address.model.employee.Salary;
 
 public class JsonAdaptedEmployeeTest {
     private static final String INVALID_NAME = "R@chel";
