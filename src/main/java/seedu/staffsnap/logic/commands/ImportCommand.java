@@ -1,5 +1,7 @@
 package seedu.staffsnap.logic.commands;
 
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_FILENAME;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -18,10 +20,13 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports applicants from a CSV file.\n"
-            + "Parameters: fileName\n"
-            + "Example: " + COMMAND_WORD + " data.csv";
+            + "Parameters: "
+            + PREFIX_FILENAME + "FILENAME" + " "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_FILENAME + " applicants.csv";
 
-    public static final String MESSAGE_SUCCESS = "Imported %d applicants from %s";
+    public static final String MESSAGE_SUCCESS_SINGULAR = "Imported %d applicant from %s";
+    public static final String MESSAGE_SUCCESS_PLURAL = "Imported %d applicants from %s";
     public static final String MESSAGE_INVALID_CSV_FORMAT = "The csv file has an invalid format!";
     public static final String MESSAGE_INVALID_FILENAME = "The file name provided is not a valid csv file!";
     public static final String MESSAGE_DUPLICATE_APPLICANT = "The csv file contains an applicant "
@@ -65,7 +70,12 @@ public class ImportCommand extends Command {
             model.addApplicant(applicant);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, applicantsToImport.size(), fileName));
+        return new CommandResult(String.format(
+                applicantsToImport.size() == 1 ? MESSAGE_SUCCESS_SINGULAR : MESSAGE_SUCCESS_PLURAL,
+                applicantsToImport.size(),
+                fileName));
+
+
     }
 
     private boolean containsDuplicates(List<Applicant> applicantsToImport) {
