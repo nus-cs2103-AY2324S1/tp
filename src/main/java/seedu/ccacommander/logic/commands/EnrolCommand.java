@@ -41,7 +41,7 @@ public class EnrolCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "Successfully added: %1$s";
-    public static final String MESSAGE_COMMIT = "Successfully added: %1$s";
+    public static final String MESSAGE_COMMIT = "Successfully enrolled: %1$s";
     public static final String MESSAGE_DUPLICATE_ATTENDANCE = "This member has already been enrolled to the event. ";
 
     private final Index memberIndex;
@@ -91,7 +91,7 @@ public class EnrolCommand extends Command {
         }
 
         model.createAttendance(toAdd);
-        model.commit(String.format(MESSAGE_COMMIT, toAdd.toString()));
+        model.commit(String.format(MESSAGE_COMMIT, toAdd.getMemberAndEventAttendance()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
