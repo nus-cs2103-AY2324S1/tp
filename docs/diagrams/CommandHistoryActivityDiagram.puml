@@ -10,7 +10,7 @@ if () then ([↑])
     :Set the previous command\n in commandBox;
     else ([else])
     endif
-else ([else])
+else ([↓])
     if() then ([has next\ncommand])
     :Set the next command\n in commandBox;
     else ([else])

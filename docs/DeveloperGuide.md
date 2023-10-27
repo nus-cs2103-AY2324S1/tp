@@ -287,11 +287,11 @@ The program uses `CommandHistory#hasNextCommand()` to check if this is the case.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommandHistoryActivityDiagram.png" width="600" />
+<img src="images/CommandHistoryActivityDiagram.png" width="400" style="padding-left:170px" />
 
 #### Design considerations:
 
-**Aspect: Implementation of Command History:**
+**Aspect: Storing of Command History:**
 
 * **Alternative 1 (current choice):** Stores the list of all commands.
     * Pros: Allows user to iterate through all commands listed.
