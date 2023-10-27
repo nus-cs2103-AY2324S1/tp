@@ -30,8 +30,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.EnrolCommand;
-import seedu.ccacommander.model.attendance.Hours;
-import seedu.ccacommander.model.attendance.Remark;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 
 public class EnrolCommandParserTest {
     private EnrolCommandParser parser = new EnrolCommandParser();

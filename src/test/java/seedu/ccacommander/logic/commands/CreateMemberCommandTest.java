@@ -23,7 +23,7 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ReadOnlyCcaCommander;
 import seedu.ccacommander.model.ReadOnlyUserPrefs;
 import seedu.ccacommander.model.VersionCaptures;
-import seedu.ccacommander.model.attendance.Attendance;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.testutil.MemberBuilder;
@@ -172,11 +172,11 @@ public class CreateMemberCommandTest {
         }
 
         @Override
-        public void createAttendance(Attendance attendance) {
+        public void createAttendance(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public boolean hasAttendance(Attendance attendance) {
+        public boolean hasAttendance(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -201,12 +201,12 @@ public class CreateMemberCommandTest {
         }
 
         @Override
-        public ObservableList<Attendance> getFilteredAttendanceList() {
+        public ObservableList<Enrolment> getFilteredAttendanceList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredAttendanceList(Predicate<Attendance> attendance) {
+        public void updateFilteredAttendanceList(Predicate<Enrolment> attendance) {
             throw new AssertionError("This method should not be called.");
         }
 

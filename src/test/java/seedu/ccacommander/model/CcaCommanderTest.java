@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.ccacommander.model.attendance.Attendance;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.exceptions.DuplicateEventException;
 import seedu.ccacommander.model.member.Member;
@@ -146,7 +146,7 @@ public class CcaCommanderTest {
     private static class CcaCommanderStub implements ReadOnlyCcaCommander {
         private final ObservableList<Member> members = FXCollections.observableArrayList();
         private final ObservableList<Event> events = FXCollections.observableArrayList();
-        private final ObservableList<Attendance> attendances = FXCollections.observableArrayList();
+        private final ObservableList<Enrolment> enrolments = FXCollections.observableArrayList();
 
         CcaCommanderStub(Collection<Member> members, Collection<Event> events) {
             this.members.setAll(members);
@@ -162,8 +162,8 @@ public class CcaCommanderTest {
             return events;
         }
         @Override
-        public ObservableList<Attendance> getAttendanceList() {
-            return attendances;
+        public ObservableList<Enrolment> getAttendanceList() {
+            return enrolments;
         }
     }
 

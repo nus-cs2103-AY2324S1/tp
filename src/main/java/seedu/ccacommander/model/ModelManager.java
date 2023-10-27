@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.commons.core.LogsCenter;
-import seedu.ccacommander.model.attendance.Attendance;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 
@@ -24,7 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Event> filteredEvents;
-    private final FilteredList<Attendance> filteredAttendances;
+    private final FilteredList<Enrolment> filteredEnrolments;
 
     /**
      * Initializes a ModelManager with the given CcaCommander and userPrefs.
@@ -38,7 +38,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMembers = new FilteredList<>(this.versionedCcaCommander.getMemberList());
         filteredEvents = new FilteredList<>(this.versionedCcaCommander.getEventList());
-        filteredAttendances = new FilteredList<>(this.versionedCcaCommander.getAttendanceList());
+        filteredEnrolments = new FilteredList<>(this.versionedCcaCommander.getAttendanceList());
     }
 
     public ModelManager() {
@@ -139,14 +139,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAttendance(Attendance attendance) {
-        requireNonNull(attendance);
-        return versionedCcaCommander.hasAttendance(attendance);
+    public boolean hasAttendance(Enrolment enrolment) {
+        requireNonNull(enrolment);
+        return versionedCcaCommander.hasAttendance(enrolment);
     }
 
     @Override
-    public void createAttendance(Attendance attendance) {
-        versionedCcaCommander.createAttendance(attendance);
+    public void createAttendance(Enrolment enrolment) {
+        versionedCcaCommander.createAttendance(enrolment);
         updateFilteredAttendanceList(PREDICATE_SHOW_ALL_ATTENDANCES);
     }
 
@@ -197,8 +197,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Attendance> getFilteredAttendanceList() {
-        return filteredAttendances;
+    public ObservableList<Enrolment> getFilteredAttendanceList() {
+        return filteredEnrolments;
     }
 
     @Override
@@ -214,9 +214,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredAttendanceList(Predicate<Attendance> predicate) {
+    public void updateFilteredAttendanceList(Predicate<Enrolment> predicate) {
         requireNonNull(predicate);
-        filteredAttendances.setPredicate(predicate);
+        filteredEnrolments.setPredicate(predicate);
     }
 
     @Override

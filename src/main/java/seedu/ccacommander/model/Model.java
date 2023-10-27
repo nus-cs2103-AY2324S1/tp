@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ccacommander.commons.core.GuiSettings;
-import seedu.ccacommander.model.attendance.Attendance;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 
@@ -16,7 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Member> PREDICATE_SHOW_ALL_MEMBERS = unused -> true;
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
-    Predicate<Attendance> PREDICATE_SHOW_ALL_ATTENDANCES = unused -> true;
+    Predicate<Enrolment> PREDICATE_SHOW_ALL_ATTENDANCES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -101,22 +101,22 @@ public interface Model {
     void setEvent(Event target, Event editedEvent);
 
     /**
-     * Returns true if an attendance with the same identity as {@code attendance} exists in CcaCommander.
+     * Returns true if an enrolment with the same identity as {@code enrolment} exists in CcaCommander.
      */
-    boolean hasAttendance(Attendance attendance);
+    boolean hasAttendance(Enrolment enrolment);
 
     /**
      * Creates the given event.
-     * {@code attendance} must not already exist in CcaCommander.
+     * {@code enrolment} must not already exist in CcaCommander.
      */
-    void createAttendance(Attendance attendance);
+    void createAttendance(Enrolment enrolment);
 
     /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();
 
     ObservableList<Event> getFilteredEventList();
 
-    ObservableList<Attendance> getFilteredAttendanceList();
+    ObservableList<Enrolment> getFilteredAttendanceList();
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
@@ -134,7 +134,7 @@ public interface Model {
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredAttendanceList(Predicate<Attendance> predicate);
+    void updateFilteredAttendanceList(Predicate<Enrolment> predicate);
 
     void commit(String commitMessage);
 

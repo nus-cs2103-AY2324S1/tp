@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.ccacommander.logic.parser.Prefix;
-import seedu.ccacommander.model.attendance.Attendance;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 
@@ -68,18 +68,18 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code attendance} for display to the user.
+     * Formats the {@code enrolment} for display to the user.
      */
-    public static String format(Attendance attendance) {
+    public static String format(Enrolment enrolment) {
         final StringBuilder builder = new StringBuilder();
         builder.append("Member: ")
-                .append(attendance.getMemberName())
+                .append(enrolment.getMemberName())
                 .append(" to Event: ")
-                .append(attendance.getEventName())
+                .append(enrolment.getEventName())
                 .append(" | Hours: ")
-                .append(attendance.getHours())
+                .append(enrolment.getHours())
                 .append(" | Remark: ")
-                .append(attendance.getRemark());
+                .append(enrolment.getRemark());
         return builder.toString();
     }
 }

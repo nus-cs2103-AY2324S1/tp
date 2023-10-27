@@ -24,10 +24,10 @@ public class JsonSerializableCcaCommanderTest {
     private static final Path TYPICAL_EVENT_FILE = TEST_DATA_FOLDER.resolve("typicalEventsCcaCommander.json");
     private static final Path INVALID_EVENT_FILE = TEST_DATA_FOLDER.resolve("invalidEventCcaCommander.json");
     private static final Path DUPLICATE_EVENT_FILE = TEST_DATA_FOLDER.resolve("duplicateEventCcaCommander.json");
-    private static final Path TYPICAL_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve("typicalAttendanceCcaCommander.json");
-    private static final Path INVALID_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve("invalidAttendanceCcaCommander.json");
+    private static final Path TYPICAL_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve("typicalEnrolmentCcaCommander.json");
+    private static final Path INVALID_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve("invalidEnrolmentCcaCommander.json");
     private static final Path DUPLICATE_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve(
-            "duplicateAttendanceCcaCommander.json");
+            "duplicateEnrolmentCcaCommander.json");
 
     @Test
     public void toModelType_typicalMembersFile_success() throws Exception {

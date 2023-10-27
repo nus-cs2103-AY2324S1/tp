@@ -13,9 +13,9 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.attendance.Attendance;
-import seedu.ccacommander.model.attendance.Hours;
-import seedu.ccacommander.model.attendance.Remark;
+import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
@@ -84,7 +84,7 @@ public class EnrolCommand extends Command {
         Name memberName = member.getName();
         Name eventName = event.getName();
 
-        Attendance toAdd = new Attendance(memberName, eventName, this.hours, this.remark);
+        Enrolment toAdd = new Enrolment(memberName, eventName, this.hours, this.remark);
 
         if (model.hasAttendance(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
