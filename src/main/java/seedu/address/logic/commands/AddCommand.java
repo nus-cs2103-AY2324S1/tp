@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_LASTTIME + "LAST CONTACTED TIME "
+            + "[" + PREFIX_LASTTIME + "LAST CONTACTED TIME] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"

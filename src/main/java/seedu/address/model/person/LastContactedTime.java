@@ -40,7 +40,8 @@ public class LastContactedTime {
      * Returns true if a given LocalDateTime input is valid.
      */
     public static boolean isValidLastContactedTime(LocalDateTime input) {
-        return input != null;
+        return input.isEqual(LocalDateTime.MIN)
+                || input.isAfter(LocalDateTime.MIN) && input.isBefore(LocalDateTime.MAX);
     }
 
     @Override
