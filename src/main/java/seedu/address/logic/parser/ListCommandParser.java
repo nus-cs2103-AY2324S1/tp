@@ -3,12 +3,15 @@ package seedu.address.logic.parser;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.card.Card;
+import seedu.address.model.tag.Tag;
 
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 
 /**
@@ -22,24 +25,25 @@ public class ListCommandParser implements Parser<ListCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QUESTION);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_QUESTION)
-                || !argMultimap.getPreamble().isEmpty()) {
-            return new ListCommand(PREDICATE_SHOW_ALL_CARDS);
-        }
-
-        if (arePrefixesPresent(argMultimap, PREFIX_QUESTION)
-                && argMultimap.getValue(PREFIX_QUESTION).get().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-        }
+        List<Predicate<Card>> predicates = new ArrayList<>(Collections.singleton(PREDICATE_SHOW_ALL_CARDS));
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_QUESTION);
-        String prefix = argMultimap.getValue(PREFIX_QUESTION).get();
-        Predicate<Card> predicate = card -> card.getQuestion().startsWith(prefix);
+        if (argMultimap.getValue(PREFIX_QUESTION).isPresent()) {
+            if (argMultimap.getValue(PREFIX_QUESTION).get().isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+            }
 
-        return new ListCommand(predicate);
+            predicates.add(parseQuestionPrefix(argMultimap.getValue(PREFIX_QUESTION).get()));
+        }
+
+        if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
+            predicates.add(parseTagPrefix(argMultimap.getAllValues(PREFIX_TAG)));
+        }
+
+        return new ListCommand(predicates);
     }
 
     /**
@@ -49,6 +53,26 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses {@code <String> prefix} into a {@code Predicate<Card>} if {@code prefix} is non-empty.
+     */
+    private static Predicate<Card> parseQuestionPrefix(String prefix) {
+        assert(!prefix.isEmpty());
+
+        return (card -> card.getQuestion().startsWith(prefix));
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Predicate<Card>} if {@code tags} is non-empty.
+     */
+    private static Predicate<Card> parseTagPrefix(Collection<String> tags) throws ParseException {
+        assert(!tags.isEmpty());
+
+        List<Tag> tagSet = ParserUtil.parseTags(tags);
+
+        return (card -> new HashSet<>(card.getTags()).containsAll(tagSet));
     }
 
 }

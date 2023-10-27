@@ -11,6 +11,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
+import java.util.Collections;
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
@@ -27,6 +29,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(PREDICATE_SHOW_ALL_CARDS), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(Collections.singletonList(PREDICATE_SHOW_ALL_CARDS)),
+                model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

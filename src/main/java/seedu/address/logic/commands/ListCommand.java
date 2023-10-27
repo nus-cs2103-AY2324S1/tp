@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -21,19 +22,20 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all cards";
 
-    private final Predicate<Card> predicate;
+    private final List<Predicate<Card>> predicates;
 
     /**
      * Creates an ListCommand to list {@code Card} containing a prefix
      */
-    public ListCommand(Predicate<Card> predicate) {
-        requireNonNull(predicate);
-        this.predicate = predicate;
+    public ListCommand(List<Predicate<Card>> predicates) {
+        requireNonNull(predicates);
+        this.predicates = predicates;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        Predicate<Card> predicate = predicates.stream().reduce((card -> true), (Predicate::and));
         model.updateFilteredCardList(predicate);
         return new CommandResult(MESSAGE_SUCCESS);
     }
