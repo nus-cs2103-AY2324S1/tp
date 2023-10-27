@@ -3,10 +3,11 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
+hide <<tag>>
 
-title After command "undo"
+title Initial Version
 
-package Versions <<rectangle>> {
+package Versions {
     class Version1 as "<u>cc0:CcaCommander</u>"
     class Version2 as "<u>cc1:CcaCommander</u>"
     class Version3 as "<u>cc2:CcaCommander</u>"
@@ -15,7 +16,9 @@ package Versions <<rectangle>> {
 Version1 -[hidden]right-> Version2
 Version2 -[hidden]right-> Version3
 
-class Pointer as "Current Version" #FFFFFF
+hide Version.Version2
+hide Version.Version3
 
-Pointer -up-> Version2
+class Pointer as "Current Version" #FFFFFF
+Pointer -up-> Version1
 @end
