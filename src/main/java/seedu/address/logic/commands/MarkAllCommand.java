@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Marks a student's attendance.
+ * Marks all displayed students' attendance.
  */
 public class MarkAllCommand extends Command {
     public static final String COMMAND_WORD = "markall";

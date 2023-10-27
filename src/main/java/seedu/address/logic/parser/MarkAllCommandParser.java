@@ -9,7 +9,7 @@ import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new MarkCommand object
+ * Parses input arguments and creates a new MarkAllCommand object
  */
 public class MarkAllCommandParser implements Parser<MarkAllCommand> {
     /**
