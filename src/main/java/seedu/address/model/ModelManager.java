@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Person;
 
 /**
@@ -139,8 +140,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person findPersonByUserFriendlyId(int id) {
-        return this.findPersonByIndex(id - 1);
+    public Person findPersonByUserFriendlyId(ContactID id) {
+        return this.findPersonByIndex(id.getId() - 1);
     }
 
     @Override

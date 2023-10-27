@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.note.Note;
+import seedu.address.model.person.ContactID;
 
 public class DeleteNoteCommandTest {
     private static final Note VALID_NOTE_0 = new Note("Meeting Topics",
@@ -32,9 +33,9 @@ public class DeleteNoteCommandTest {
 
     @Test
     public void execute_correctCommand_success() throws CommandException {
-        int personId = 1;
-        model.findPersonByUserFriendlyId(personId).addNote(VALID_NOTE_0);
-        assertCommandSuccessWithFeedback(() -> new DeleteNoteCommand(personId, 1)
+        ContactID contactId = ContactID.fromInt(1);
+        model.findPersonByUserFriendlyId(contactId).addNote(VALID_NOTE_0);
+        assertCommandSuccessWithFeedback(() -> new DeleteNoteCommand(contactId.getId(), 1)
                 .execute(model), DeleteNoteCommand.MESSAGE_SUCCESS + "1");
     }
 
@@ -47,10 +48,10 @@ public class DeleteNoteCommandTest {
 
     @Test
     public void execute_noteNotFound_fails() throws CommandException {
-        int personId = 1;
+        ContactID contactId = ContactID.fromInt(1);
         int invalidNoteId = 99999;
-        model.findPersonByUserFriendlyId(personId).addNote(VALID_NOTE_0);
-        assertCommandFailWithFeedback(() -> new DeleteNoteCommand(personId, invalidNoteId)
+        model.findPersonByUserFriendlyId(contactId).addNote(VALID_NOTE_0);
+        assertCommandFailWithFeedback(() -> new DeleteNoteCommand(contactId.getId(), invalidNoteId)
                 .execute(model), DeleteNoteCommand.MESSAGE_NOTE_NOT_FOUND + invalidNoteId);
     }
 

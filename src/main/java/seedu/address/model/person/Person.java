@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventID;
 import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
@@ -127,18 +128,18 @@ public class Person {
     /**
      * Remove an event by its user-friendly id
      * @param id The id of the event you want to remove
-     * @return {@code true} if the operation is successful and {@code false} if the event with this name does not exist
+     * @return The event object that is just deleted if the operation is successful
+     *     or {@code null} if the event with this name does not exist
      */
-    public boolean removeEventByUserFriendlyId(int id) {
-        return this.removeEventByIndex(id - 1);
+    public Event removeEventByUserFriendlyId(EventID id) {
+        return this.removeEventByIndex(id.getId() - 1);
     }
 
-    private boolean removeEventByIndex(int index) {
+    private Event removeEventByIndex(int index) {
         if (index < 0 || index >= this.events.size()) {
-            return false;
+            return null;
         }
-        this.events.remove(index);
-        return true;
+        return this.events.remove(index);
     }
 
     /**

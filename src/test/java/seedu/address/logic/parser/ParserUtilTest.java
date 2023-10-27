@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,8 +15,15 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventID;
+import seedu.address.model.event.EventInformation;
+import seedu.address.model.event.EventLocation;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -192,5 +201,105 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseContactID_success() throws Exception {
+        assertEquals("1", ParserUtil.parseContactID("1").toString());
+    }
+
+    @Test
+    public void parseContactID_fail_emptyString() {
+        assertThrows(ParseException.class, ContactID.MESSAGE_NON_EMPTY, () -> ParserUtil.parseContactID("").toString());
+    }
+
+    @Test
+    public void parseContactID_fail_invalidInteger() {
+        assertThrows(ParseException.class, String.format(Messages.MESSAGE_INVALID_INTEGER_ARGUMENT,
+                "For input string: \"abc\""), () -> ParserUtil.parseContactID("abc").toString());
+        assertThrows(ParseException.class, String.format(Messages.MESSAGE_INVALID_INTEGER_ARGUMENT,
+                "For input string: \"1.23\""), () -> ParserUtil.parseContactID("1.23").toString());
+    }
+
+    @Test
+    public void parseEventID_success() throws Exception {
+        assertEquals("1", ParserUtil.parseEventID("1").toString());
+    }
+
+    @Test
+    public void parseEventID_fail_emptyString() {
+        assertThrows(ParseException.class, EventID.MESSAGE_NON_EMPTY, () -> ParserUtil.parseEventID("").toString());
+    }
+
+    @Test
+    public void parseEventID_fail_invalidInteger() {
+        assertThrows(ParseException.class, String.format(Messages.MESSAGE_INVALID_INTEGER_ARGUMENT,
+                "For input string: \"abc\""), () -> ParserUtil.parseEventID("abc").toString());
+        assertThrows(ParseException.class, String.format(Messages.MESSAGE_INVALID_INTEGER_ARGUMENT,
+                "For input string: \"1.23\""), () -> ParserUtil.parseEventID("1.23").toString());
+    }
+
+    @Test
+    public void parseEventName_success() throws Exception {
+        assertEquals("SomeName", ParserUtil.parseEventName("SomeName").toString());
+    }
+
+    @Test
+    public void parseEventName_fail_emptyString() throws Exception {
+        assertThrows(ParseException.class, EventName.MESSAGE_CONSTRAINTS, () ->
+                ParserUtil.parseEventName("").toString());
+    }
+
+    @Test
+    public void parseEventTime_success() throws Exception {
+        assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " 12:00:00",
+                ParserUtil.parseEventTime("12:00").toString());
+        assertEquals("2023-12-01 00:00:00",
+                ParserUtil.parseEventTime("2023-12-01").toString());
+        assertEquals("2023-12-01 10:02:03",
+                ParserUtil.parseEventTime("2023-12-01 10:02:03").toString());
+        assertEquals("",
+                ParserUtil.parseEventTime(null).toString());
+    }
+
+    @Test
+    public void parseEventTime_fail_emptyString() {
+        assertThrows(ParseException.class, EventTime.MESSAGE_NON_EMPTY, () -> ParserUtil.parseEventTime(""));
+    }
+
+    @Test
+    public void parseEventTime_fail_wrongFormat() {
+        assertThrows(ParseException.class, EventTime.MESSAGE_NON_EMPTY, () -> ParserUtil.parseEventTime(""));
+        String dateNow = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        assertThrows(ParseException.class,
+                EventTime.MESSAGE_INVALID_DATETIME_FORMAT + "Text '" + dateNow
+                        + " 1' could not be parsed at index 11", () ->
+                        ParserUtil.parseEventTime("1"));
+        assertThrows(ParseException.class,
+                EventTime.MESSAGE_INVALID_DATETIME_FORMAT + "Text '" + dateNow
+                        + " 1,2,3,4' could not be parsed at index 11", () ->
+                        ParserUtil.parseEventTime("1,2,3,4"));
+    }
+
+    @Test
+    public void parseEventLocation_success() throws Exception {
+        assertEquals("SomeLocation", ParserUtil.parseEventLocation("SomeLocation").toString());
+    }
+
+    @Test
+    public void parseEventLocation_fail_emptyString() throws Exception {
+        assertThrows(ParseException.class, EventLocation.MESSAGE_CONSTRAINTS, () ->
+                ParserUtil.parseEventLocation("").toString());
+    }
+
+    @Test
+    public void parseEventInformation_success() throws Exception {
+        assertEquals("SomeInformation", ParserUtil.parseEventInformation("SomeInformation").toString());
+    }
+
+    @Test
+    public void parseEventInformation_fail_emptyString() throws Exception {
+        assertThrows(ParseException.class, EventInformation.MESSAGE_CONSTRAINTS, () ->
+                ParserUtil.parseEventInformation("").toString());
     }
 }

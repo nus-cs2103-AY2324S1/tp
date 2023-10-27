@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# KeepInTouch Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -113,6 +113,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* Some commands contains secondary command, like `add contact`, `add note` and `add event`.
+*   - In this case, the primary command parser (in the example it is `AddCommand`) will check the secondary command word and use the correspond secondary command parser (like `AddPersonCommandParser`, `AddEventCommandParser` and `AddNoteCommandParser`) to continue parsing the command.
+* The parser will turn the arguments in the command from raw `String` into corresponding Object. During this process, the parser also needs to check whether the arguments are valid or not.
+*   - The parsing method for each types of arguments are mainly in `ParserUtil.java`
+* If the command is correct in format, the parser will then return a Command Object for the execution of the command.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -297,18 +302,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                               | get a list of the commands    | know how to use the commands and their parameters |
-| `* * *`  | user                                                       | add a new contact                 | record one person's phone number and email address |
-| `* * *`  | user                                                       | delete a contact                     | remove a contact (by name) that I do not need |
-| `* * *`  | user                                                       | view all contact                      | easily see and know what contacts are currently stored in the application in one place  |
-| `* *`    | user                                                        | view all notes                        | easily see and know what notes are currently stored in the application in one place |
-| `* *`    | user                                                        | add notes to a contact          | record additional information about that contact in the notes |
-| `* *`    | user                                                        | delete notes to a contact       | remove additional information that are no longer needed about that contact in the notes   |
-| `* *`    | user who has some event to do             | add an event                         | record an event with start time and also end time, location and any additional information like what to do during the event   |
-| `* *`    | user who has/had some event to do      | delete an event                     | remove an event after it is obsolete, cancelled or no longer needed to be recorded |
-| `* * *` | user who finishes using the application  | exit the program                   | exit the program normally while ensuring all my data is currectly saved |
+| Priority | As a …​                                    | I want to …​                | So that I can…​                                                                                                             |
+|----------|--------------------------------------------|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                               | get a list of the commands  | know how to use the commands and their parameters                                                                           |
+| `* * *`  | user                                                       | add a new contact           | record one person's phone number and email address                                                                          |
+| `* * *`  | user                                                       | delete a contact            | remove a contact (by name) that I do not need                                                                               |
+| `* * *`  | user                                                       | view all contact            | easily see and know what contacts are currently stored in the application in one place                                      |
+| `* *`    | user                                                        | view all notes              | easily see and know what notes are currently stored in the application in one place                                         |
+| `* *`    | user                                                        | add notes to a contact      | record additional information about that contact in the notes                                                               |
+| `* *`    | user                                                        | delete notes to a contact   | remove additional information that are no longer needed about that contact in the notes                                     |
+| `* *`    | user who has some event to do             | add an event                | record an event with start time and also end time, location and any additional information like what to do during the event |
+| `* *`    | user who has/had some event to do      | delete an event             | remove an event after it is obsolete, cancelled or no longer needed to be recorded                                          |
+| `* *`    | tidy user | tag a contact with a label  | keep my contacts oraganised and categorised                                                                                 |
+| `* *`    | tidy user | delete a tag from a contact | remove tags that are no longer relevant                                                                                     |
+| `* *`    | tidy user | edit a tag from a contact     | edit tags in a contact that needs to be changed                                                                             |
+| `* * *`  | user who finishes using the application  | exit the program            | exit the program normally while ensuring all my data is currectly saved                                                     |
 
 *{More to be added}*
 
@@ -356,8 +364,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User inputs a contact that does not exist.
 
-    * 1a1. KeepInTouch shows a message indicating the non-existent contact.
-
+    * 1a1. KeepInTouch shows a message indicating that the contact cannot be found.
       Use case ends.
 
 * 2a. The contact list is empty.
@@ -400,12 +407,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC06 - Add notes to a contact**
+**Use case: UC06 - Add a note to a contact**
 
 **MSS**
 
-1.  User requests to add notes to a contact.
-2.  KeepInTouch adds the notes to the contact.
+1.  User requests to add a note to a contact.
+2.  KeepInTouch adds the note to the contact.
 
     Use case ends.
 
@@ -419,16 +426,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. User inputs a contact that does not exist.
 
-    * 1b1. KeepInTouch shows a message indicating the non-existent contact.
+    * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
 
       Use case resumes at step 1.
 
-**Use case: UC07 - Delete notes from a contact**
+**Use case: UC07 - Delete a note from a contact**
 
 **MSS**
 
-1.  User requests to delete notes from a contact.
-2.  KeepInTouch deletes the notes from the contact.
+1.  User requests to delete a note from a contact.
+2.  KeepInTouch deletes the note from the contact.
 
     Use case ends.
 
@@ -442,14 +449,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. User inputs a contact that does not exist.
 
-    * 1b1. KeepInTouch shows a message indicating the non-existent contact.
+    * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
 
       Use case ends.
 
-* 1c. User inputs notes that does not exist.
+* 1c. User inputs a note that does not exist.
 
-    * 1c1. KeepInTouch shows a message indicating the non-existent notes.
-
+    * 1c1. KeepInTouch shows a message indicating that the note cannot be found.
+  
       Use case ends.
 
 **Use case: UC08 - Add an event**
@@ -488,7 +495,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. User inputs an event that does not exist.
 
-    * 1b1. KeepInTouch shows a message indicating the non-existent event.
+    * 1b1. KeepInTouch shows a message indicating that the event cannot be found.
 
       Use case ends.
 

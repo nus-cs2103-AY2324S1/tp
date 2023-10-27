@@ -6,7 +6,7 @@ package seedu.address.model.event;
 public class Event {
     private final EventTime start;
     private final EventTime end;
-    private final String name;
+    private final EventName name;
 
     private final EventLocation location;
 
@@ -17,15 +17,31 @@ public class Event {
      * @param name The event name
      * @param start The start time of the event
      * @param end The end time of the event
-     * @param locationStr The location of the event
-     * @param informationStr The information of the event
+     * @param location The location of the event
+     * @param information The information of the event
      */
-    public Event(String name, String start, String end, String locationStr, String informationStr) {
+    public Event(EventName name, EventTime start, EventTime end, EventLocation location, EventInformation information) {
         this.name = name;
+        this.start = start;
+        this.end = end;
+        this.location = location;
+        this.information = information;
+    }
+
+    /**
+     * Constructor for the `Event` class, with Strings as parameters
+     * @param name The event name
+     * @param start The start time of the event
+     * @param end The end time of the event
+     * @param location The location of the event
+     * @param information The information of the event
+     */
+    public Event(String name, String start, String end, String location, String information) {
+        this.name = EventName.fromString(name);
         this.start = EventTime.fromString(start);
         this.end = EventTime.fromString(end);
-        this.location = EventLocation.fromString(locationStr);
-        this.information = EventInformation.fromString(informationStr);
+        this.location = EventLocation.fromString(location);
+        this.information = EventInformation.fromString(information);
     }
 
     /**
@@ -33,7 +49,7 @@ public class Event {
      * @return The name of the event
      */
     public String getName() {
-        return name;
+        return name.toString();
     }
 
     /**
