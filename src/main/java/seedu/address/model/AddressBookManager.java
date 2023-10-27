@@ -70,23 +70,11 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
 
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         requireNonNull(addressBook);
-        this.currentAddressBook = new AddressBook(addressBook.getCourseCode(), addressBook);
-    }
 
-    /**
-     * Replaces the given address book {@code target} in the list with {@code editedAddressBook}.
-     * {@code target} must exist in the address book manager.
-     * The address book identity of {@code editedAddressBook} must not be the same as another existing address book
-     * in the address book manager.
-     */
-    public void setAddressBook(String targetCourseCode, ReadOnlyAddressBook editedAddressBook) {
-        requireAllNonNull(targetCourseCode, editedAddressBook);
-
-        if (!this.addressBooks.containsKey(targetCourseCode.toUpperCase())) {
-            throw new IllegalArgumentException("Address book does not exist");
-        }
-
-        this.addressBooks.put(targetCourseCode.toUpperCase(), editedAddressBook);
+        removeAddressBook(currentCourseCode);
+        addAddressBook(addressBook);
+        this.currentCourseCode = addressBook.getCourseCode();
+        setActiveAddressBook(currentCourseCode);
     }
 
     public void setActiveAddressBook(String courseCode) {
@@ -112,7 +100,7 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
      * Adds an address book to the address book manager.
      * {@code addressBook} must not already exist in the address book manager.
      */
-    public void addAddressBook(AddressBook addressBook) {
+    public void addAddressBook(ReadOnlyAddressBook addressBook) {
         requireAllNonNull(addressBook);
         this.addressBooks.put(addressBook.getCourseCode().toUpperCase(), addressBook);
     }
