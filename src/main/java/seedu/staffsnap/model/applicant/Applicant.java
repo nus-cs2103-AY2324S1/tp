@@ -19,7 +19,7 @@ public class Applicant implements Comparable<Applicant> {
     // Field to compare by, default to Name
     private static Descriptor descriptor = Descriptor.NAME;
     // Order of comparision, default to ascending
-    private static Boolean descendingOrder = false;
+    private static Boolean isDescendingOrder = false;
 
 
     // Identity fields
@@ -151,7 +151,7 @@ public class Applicant implements Comparable<Applicant> {
      *      lexicographically greater than the Name argument.
      */
     public int compareByName(Applicant o) {
-        if (descendingOrder) {
+        if (isDescendingOrder) {
             return -this.name.compareTo(o.name);
         }
         return this.name.compareTo(o.name);
@@ -164,7 +164,7 @@ public class Applicant implements Comparable<Applicant> {
      *      lexicographically greater than the Phone argument.
      */
     public int compareByPhone(Applicant o) {
-        if (descendingOrder) {
+        if (isDescendingOrder) {
             return -this.phone.compareTo(o.phone);
         }
         return this.phone.compareTo(o.phone);
@@ -177,7 +177,7 @@ public class Applicant implements Comparable<Applicant> {
      *      greater than the Score argument.
      */
     public int compareByRating(Applicant o) {
-        if (descendingOrder) {
+        if (isDescendingOrder) {
             return -this.getScore().compareTo(o.getScore());
         }
         return this.getScore().compareTo(o.getScore());
@@ -257,11 +257,11 @@ public class Applicant implements Comparable<Applicant> {
         return averageScore;
     }
 
-    public static Boolean getDescendingOrder() {
-        return descendingOrder;
+    public static Boolean getIsDescendingOrder() {
+        return isDescendingOrder;
     }
 
-    public static void setDescendingOrder(Boolean newDescendingOrder) {
-        descendingOrder = newDescendingOrder;
+    public static void setIsDescendingOrder(Boolean newIsDescendingOrder) {
+        isDescendingOrder = newIsDescendingOrder;
     }
 }

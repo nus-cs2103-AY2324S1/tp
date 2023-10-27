@@ -139,7 +139,7 @@ public class ModelManager implements Model {
     @Override
     public void updateSortedApplicantList(Descriptor descriptor, Boolean descendingOrder) {
         Applicant.setDescriptor(descriptor);
-        Applicant.setDescendingOrder(descendingOrder);
+        Applicant.setIsDescendingOrder(descendingOrder);
     }
 
     @Override

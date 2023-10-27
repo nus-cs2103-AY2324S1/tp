@@ -33,14 +33,14 @@ public class SortCommandParser implements Parser<SortCommand> {
         Descriptor descriptor = ParserUtil.parseDescriptor(argMultimap.getValue(PREFIX_DESCRIPTOR).get());
 
         // default behaviour is to sort in ascending order if none are specified, or if both are specified
-        boolean descendingOrder = false;
+        boolean isDescendingOrder = false;
         if (argMultimap.getValue(PREFIX_DESCENDING).isPresent()) {
-            descendingOrder = true;
+            isDescendingOrder = true;
         }
         if (argMultimap.getValue(PREFIX_ASCENDING).isPresent()) {
-            descendingOrder = false;
+            isDescendingOrder = false;
         }
 
-        return new SortCommand(descriptor, descendingOrder);
+        return new SortCommand(descriptor, isDescendingOrder);
     }
 }

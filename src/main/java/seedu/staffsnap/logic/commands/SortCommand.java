@@ -21,19 +21,19 @@ public class SortCommand extends Command {
     public static final String MESSAGE_FAILURE = "Please add a descriptor with d/ [name/phone].";
 
     private final Descriptor descriptor;
-    private final Boolean descendingOrder;
+    private final Boolean isDescendingOrder;
 
     /**
      * Creates a SortCommand to add the specified {@code descriptor}
      */
-    public SortCommand(Descriptor descriptor, Boolean descendingOrder) {
+    public SortCommand(Descriptor descriptor, Boolean isDescendingOrder) {
         requireNonNull(descriptor);
         this.descriptor = descriptor;
 
-        if (descendingOrder == null) {
-            this.descendingOrder = false;
+        if (isDescendingOrder == null) {
+            this.isDescendingOrder = false;
         } else {
-            this.descendingOrder = descendingOrder;
+            this.isDescendingOrder = isDescendingOrder;
         }
     }
 
@@ -41,7 +41,7 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateSortedApplicantList(descriptor, descendingOrder);
+        model.updateSortedApplicantList(descriptor, isDescendingOrder);
         model.refreshApplicantList();
         return new CommandResult(MESSAGE_SUCCESS);
     }
