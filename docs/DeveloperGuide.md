@@ -420,7 +420,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Rationale
 
-- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to edit a person by name or NRIC, whichever is faster or available.
+- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to find a person by name or NRIC, whichever is faster or available.
 - **User Experience**: The keyword matching is case-insensitive, making the search faster and more user-friendly.
 - **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data.
 
