@@ -85,6 +85,14 @@ public class Person {
     }
 
     /**
+     * Returns the latest payroll of this person.
+     * @return Latest payroll.
+     */
+    public Payroll getLatestPayroll() {
+        return this.payrolls.get(this.payrolls.size() - 1);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

@@ -34,6 +34,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_BENEFIT =
             "%1$d employees found! Refer to their indexes for benefit";
 
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_PAYSLIP =
+            "%1$d employees found! Refer to their indexes for payslip generation";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
