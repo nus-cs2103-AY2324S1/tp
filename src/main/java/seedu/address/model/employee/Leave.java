@@ -1,5 +1,6 @@
 package seedu.address.model.employee;
 
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
@@ -12,10 +13,10 @@ import java.time.format.DateTimeParseException;
  */
 public class Leave {
 
-    public static final String MESSAGE_CONSTRAINTS = "Leave dates have to be of format dd-MM-yyyy!"
-            + " Please ensure that the date is valid!";
+    public static final String MESSAGE_CONSTRAINTS = "Leave dates have to be of format yyyy-MM-dd!"
+            + "Please ensure that the date is valid!";
 
-    public static final DateTimeFormatter VALID_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final DateTimeFormatter VALID_DATE_FORMAT = ISO_LOCAL_DATE;
 
     public final LocalDate leaveDate;
 

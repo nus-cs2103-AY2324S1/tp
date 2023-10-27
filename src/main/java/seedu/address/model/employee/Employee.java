@@ -108,7 +108,7 @@ public class Employee {
     }
 
     public LeaveList getLeaveList() {
-        return leaveList;
+        return leaveList.getCopiedLeaveList();
     }
 
     /**
