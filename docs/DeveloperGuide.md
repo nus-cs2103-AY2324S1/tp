@@ -533,6 +533,43 @@ The following diagram summarises what happens when a user executes a Filter comm
     - Cons: Unfamiliar users may not know that fields can be optional anc continue to key in the full command at all
       times.
 
+### Find feature
+
+#### Purpose
+The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient 
+way of finding and tracking specific candidates.
+
+#### Implementation
+After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`, the input is passed to
+the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords in the input 
+and creates a list of keywords.
+
+`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords.
+This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object.
+`LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by
+calling `ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
+
+An instance of `CommandResult` is then created which contains the message and information that will be displayed to
+the user. The GUI then updates to show this information to the user.
+
+
+#### Steps to trigger
+1. User opens the app
+2. User keys in `find KEYWORD [MORE_KEYWORDS]`
+3. The GUI will update to show a list of applicants with name containing any of the keywords.
+
+
+#### Notes
+
+1. The search is case-insensitive, e.g. `find JOHN` will return both john and John. 
+2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice. 
+3. Only the applicant name is searched. 
+4. Any person whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
+   Persons matching at least one keyword will be returned (i.e. OR search). 
+   e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
+
+
+   
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
