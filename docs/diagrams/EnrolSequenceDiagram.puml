@@ -6,7 +6,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":CcaCommanderParser" as CcaCommanderParser LOGIC_COLOR
 participant ":EnrolCommandParser" as EnrolCommandParser LOGIC_COLOR
 participant ":EnrolCommand" as EnrolCommand LOGIC_COLOR
-participant ":Attendance" as Attendance LOGIC_COLOR
+participant ":Enrolment" as Enrolment LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -57,13 +57,13 @@ EnrolCommand -> Model : getFilteredEventClassList()
 activate Model
 deactivate Model
 
-create Attendance
-EnrolCommand -> Attendance
-activate Attendance
-Attendance --> EnrolCommand : attendance
-deactivate Attendance
+create Enrolment
+EnrolCommand -> Enrolment
+activate Enrolment
+Enrolment --> EnrolCommand : enrolment
+deactivate Enrolment
 
-EnrolCommand -> Model : createAttendance(attendance)
+EnrolCommand -> Model : createEnrolment(enrolment)
 activate Model
 deactivate Model
 

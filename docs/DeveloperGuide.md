@@ -117,7 +117,7 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/model/Model.java)
 * The class diagram below gives an overview of the model package.<br/>
 *Details of the `Member`, `Event`, and `Enrolment` packages have be omitted for brevity.
-Please refer to the [Member](#member-class-diagram), [Event](#event-class-diagram) and [Enrolment](#attendance-class-diagram) diagrams for more information.*
+Please refer to the [Member](#member-class-diagram), [Event](#event-class-diagram) and [Enrolment](#enrolment-model) diagrams for more information.*
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -159,7 +159,7 @@ implementing this model.
 #### Implementation
 The `Enrolment` and `UniqueEnrolmentList` classes are implemented as shown in the diagram below:
 
-![EnrolmentClassDiagram](images/AttendanceClassDiagram.png)
+![EnrolmentClassDiagram](images/EnrolmentClassDiagram.png)
 
 `Enrolment` encapsulates the enrolment of a member into an event. It composes of the `Name` of the member and
 the `Name` of the event enrolled in, number of `Hours` they contributed, and a `Remark` to note for that
@@ -434,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | power user    | view a list of all events hosted by the CCA | I can see event history                                                           |
 | `* * *`  | beginner user | add a member to an event                    | I can track which members are participating in the event                          |
 | `* * *`  | beginner user | remove a member from an event               | I can amend adding the wrong member to an event                                   |
-| `* * *`  | beginner user | view the members who attended an event      | I can estimate the number of members who will attend similar events in the future |
+| `* * *`  | beginner user | view the members who enrolled in an event   | I can estimate the number of members who will attend similar events in the future |
 | `* * *`  | beginner user | view events of a member                     | I can check how involved that particular member is                                |
 | `* * *`  | beginner user | recall the previous commands                | I can enter similar commands quickly                                              |
 | `* * *`  | power user    | undo a command                              | I can correct any wrong commands that I have entered previously                   |
