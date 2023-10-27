@@ -12,9 +12,9 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidTimeString(String)}
  */
 public abstract class Time implements Comparable<Time> {
-    public static final String DATETIME_INPUT_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    public static final String DATETIME_INPUT_FORMAT = "yyyy-MM-dd'T'HH:mm";
     public static final String DATETIME_OUTPUT_FORMAT = "MMM d yyyy HH:mm";
-    public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
+    public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}";
 
     public final LocalDateTime value;
 

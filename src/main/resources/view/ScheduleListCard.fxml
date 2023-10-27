@@ -24,6 +24,7 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+                <Label fx:id="status" styleClass="cell_small_label" text="\$status"/>
             </HBox>
             <GridPane>
                 <columnConstraints>

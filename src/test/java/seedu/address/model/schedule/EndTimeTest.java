@@ -30,20 +30,19 @@ class EndTimeTest {
         assertFalse(EndTime.isValidEndTime("End Time")); // spaces within alphabets
         assertFalse(EndTime.isValidEndTime("9011p041")); // alphabets within digits
         assertFalse(EndTime.isValidEndTime("9312 1534")); // spaces within digits
-        assertFalse(EndTime.isValidEndTime("2024-31-12T00:00:00")); // bad month
-        assertFalse(EndTime.isValidEndTime("2024-01-32T00:00:00")); // bad day
-        assertFalse(EndTime.isValidEndTime("2024-01-01T25:00:00")); // bad hour
-        assertFalse(EndTime.isValidEndTime("2024-01-01T00:61:00")); // bad min
-        assertFalse(EndTime.isValidEndTime("2024-01-01T00:00:61")); // bad sec
-        assertFalse(EndTime.isValidEndTime("2023-02-29T01:00:00")); // non leap year
+        assertFalse(EndTime.isValidEndTime("2024-31-12T00:00")); // bad month
+        assertFalse(EndTime.isValidEndTime("2024-01-32T00:00")); // bad day
+        assertFalse(EndTime.isValidEndTime("2024-01-01T25:00")); // bad hour
+        assertFalse(EndTime.isValidEndTime("2024-01-01T00:61")); // bad min
+        assertFalse(EndTime.isValidEndTime("2023-02-29T01:00")); // non leap year
 
         // valid EndTimes
-        assertTrue(EndTime.isValidEndTime("2024-02-29T01:00:00")); // leap year
-        assertTrue(EndTime.isValidEndTime("2024-01-01T00:00:00")); // first second of a year
-        assertTrue(EndTime.isValidEndTime("2023-12-31T23:59:59")); // last second of a year
-        assertTrue(EndTime.isValidEndTime("2099-01-01T00:00:00")); // Long time in the future
-        assertTrue(EndTime.isValidEndTime("1899-01-01T00:00:00")); // Long time in the past
-        assertTrue(EndTime.isValidEndTime("2023-10-17T18:15:33")); // random date
+        assertTrue(EndTime.isValidEndTime("2024-02-29T01:00")); // leap year
+        assertTrue(EndTime.isValidEndTime("2024-01-01T00:00")); // first second of a year
+        assertTrue(EndTime.isValidEndTime("2023-12-31T23:59")); // last second of a year
+        assertTrue(EndTime.isValidEndTime("2099-01-01T00:00")); // Long time in the future
+        assertTrue(EndTime.isValidEndTime("1899-01-01T00:00")); // Long time in the past
+        assertTrue(EndTime.isValidEndTime("2023-10-17T18:15")); // random date
     }
 
     @Test

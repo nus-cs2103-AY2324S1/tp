@@ -22,6 +22,8 @@ public class Messages {
     public static final String MESSAGE_SCHEDULES_LISTED_OVERVIEW = "%1$d schedules listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_SCHEDULE_STATUS_INDEX =
+            "The schedule status index provided is invalid";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SCHEDULE;
@@ -29,10 +30,13 @@ import seedu.address.logic.commands.FindScheduleCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ListTutorCommand;
+import seedu.address.logic.commands.MarkScheduleCommand;
+import seedu.address.logic.commands.UnmarkScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.Status;
 import seedu.address.model.schedule.TutorNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditScheduleDescriptorBuilder;
@@ -118,6 +122,22 @@ public class AddressBookParserTest {
             + " " + INDEX_FIRST_SCHEDULE.getOneBased() + " "
             + ScheduleUtil.getEditScheduleDescriptorDetails(descriptor));
         assertEquals(new EditScheduleCommand(INDEX_FIRST_SCHEDULE, descriptor), expectedCommand);
+    }
+
+    @Test
+    public void parseCommand_markSchedule() throws Exception {
+        Schedule schedule = new ScheduleBuilder().withStatus(Status.MISSED).build();
+        MarkScheduleCommand command = (MarkScheduleCommand) parser.parseCommand(
+                MarkScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_SCHEDULE.getOneBased() + " "
+                        + PREFIX_STATUS + Status.parseStatusToString(schedule.getStatus()));
+        assertEquals(new MarkScheduleCommand(INDEX_FIRST_SCHEDULE, schedule.getStatus()), command);
+    }
+
+    @Test
+    public void parseCommand_unmarkSchedule() throws Exception {
+        UnmarkScheduleCommand command = (UnmarkScheduleCommand) parser.parseCommand(
+            UnmarkScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_SCHEDULE.getOneBased());
+        assertEquals(new UnmarkScheduleCommand(INDEX_FIRST_SCHEDULE), command);
     }
 
     @Test
