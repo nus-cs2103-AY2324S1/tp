@@ -91,8 +91,14 @@ public class UniMateParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD) instanceof SortCommand);
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " 3") instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + SortCommand.SORTBY_KEYWORD1) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + SortCommand.SORTBY_KEYWORD2) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + SortCommand.SORTBY_KEYWORD3 + " " + SortCommand.REVERSE_KEYWORD) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + SortCommand.SORTBY_KEYWORD4 + " " + SortCommand.REVERSE_KEYWORD) instanceof SortCommand);
     }
 
     @Test
