@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,8 @@ public class TimeInterval {
     public static final String MESSAGE_CONSTRAINTS_LOGIC = "Your end time cannot be before your start time ";
 
     public static final String MESSAGE_CONSTRAINTS_OVERLAP = "No overlap is allowed in your interval. \n "
-            + "Eg. mon 1200 - mon 1600 ;mon 1400 - mon 1800 is not allowed. Write it as mon 1200 - mon 1800";
+            + PREFIX_FREETIME + "Eg. mon 1200 - mon 1600" + PREFIX_FREETIME  + "mon 1400 - mon 1800 is not allowed. " +
+            "Write it as mon 1200 - mon 1800";
 
 
     public static final String VALIDATION_REGEX = ".* .* - .* .*";
