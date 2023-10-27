@@ -5,8 +5,8 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":CcaCommanderParser" as CcaCommanderParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":DeleteMemberCommandParser" as DeleteMemberCommandParser LOGIC_COLOR
+participant "d:DeleteMemberCommand" as DeleteMemberCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -14,56 +14,56 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("deleteMember 1")
 activate LogicManager
 
-LogicManager -> CcaCommanderParser : parseCommand("delete 1")
+LogicManager -> CcaCommanderParser : parseCommand("deleteMember 1")
 activate CcaCommanderParser
 
-create DeleteCommandParser
-CcaCommanderParser -> DeleteCommandParser
-activate DeleteCommandParser
+create DeleteMemberCommandParser
+CcaCommanderParser -> DeleteMemberCommandParser
+activate DeleteMemberCommandParser
 
-DeleteCommandParser --> CcaCommanderParser
-deactivate DeleteCommandParser
+DeleteMemberCommandParser --> CcaCommanderParser
+deactivate DeleteMemberCommandParser
 
-CcaCommanderParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+CcaCommanderParser -> DeleteMemberCommandParser : parse("1")
+activate DeleteMemberCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteMemberCommand
+DeleteMemberCommandParser -> DeleteMemberCommand
+activate DeleteMemberCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeleteMemberCommand --> DeleteMemberCommandParser : d
+deactivate DeleteMemberCommand
 
-DeleteCommandParser --> CcaCommanderParser : d
-deactivate DeleteCommandParser
+DeleteMemberCommandParser --> CcaCommanderParser : d
+deactivate DeleteMemberCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> CcaCommanderParser
-destroy DeleteCommandParser
+DeleteMemberCommandParser -[hidden]-> CcaCommanderParser
+destroy DeleteMemberCommandParser
 
 CcaCommanderParser --> LogicManager : d
 deactivate CcaCommanderParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeleteMemberCommand : execute()
+activate DeleteMemberCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteMemberCommand -> Model : deleteMember(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeleteMemberCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteMemberCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteMemberCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeleteMemberCommand --> LogicManager : result
+deactivate DeleteMemberCommand
 
 [<--LogicManager
 deactivate LogicManager
