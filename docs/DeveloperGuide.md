@@ -154,6 +154,42 @@ Classes used by multiple components are in the `seedu.ccacommander.commons` pack
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Attendance Model
+This section explains how the `Attendance` model is implemented and the various design consideration when
+implementing this model.
+
+#### Implementation
+The `Attendance` and `UniqueAttendanceList` classes are implemented as shown in the diagram below:
+
+![AttendanceClassDiagram](images/AttendanceClassDiagram.png)
+
+`Attendance` encapsulates the attendance of an event by a member. It composes of the `Name` of the member and
+the `Name` of the event enrolled in, number of `Hours` they contributed, and a `Remark` to note for that
+attendance. `UniqueAttendanceList` stores all unique instances of `Attendance`.
+
+#### Design considerations:
+
+**Aspect: How to store each member's events and each event's members.**
+
+* **Alternative 1 (current choice):** Saves the attendance as an independent list.
+  * Pros:
+    * Easy to implement.
+    * Less performance issues when loading and storing attendances.
+  * Cons:
+    * Incur high performance cost when viewing members of event or events of member.
+
+* **Alternative 2:** Each member or event has its own list of attendances.
+  * Pros:
+    * Linear time to view members of event or events of members.
+  * Cons:
+    * Hard to implement.
+    * Will encounter more difficulties when implementing other features related to attendance.
+
+Alternative 1 was chosen as the benefit of having a simple design outweighs the cost of having a higher
+performance overhead when viewing members of event or events of member. Alternative 2 has multiple layers of
+complexities that are difficult to navigate and this will compound when dealing with other features related to
+attendance. The simpler design of alternative 1 also allows for more rigorous testing.
+
 ### Enrol Feature
 The enrol feature allows users to link a member to an event in order to keep track of their attendance and contributions to the event.
 
