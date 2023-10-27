@@ -53,9 +53,11 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 **:information_source: Notes about the command format:**<br>
 
 * Words in `<UPPER_CASE>` are the parameters to be supplied by the user.<br>
-  e.g. in `add w/<WORD> t/<TRANSLATION>`, `WORD` and `TRANSLATION` are a parameter which can be used as `add w/regarder t/look`.
+  e.g. in `delete <INDEX>`, index is a parameter which needs to be added to the command, without the <>. `delete 1` is an example of the usage.
 
-* Words
+* Words in square brackets, ie. `[<UPPER_CASE>]` indicate that the parameter is optional and can be omitted if deemed unnecessary
+  e.g. in `add w/<WORD> t/<TRANSLATION> [wl/WORD_LANGUAGE] [tl/TRANSLATION_LANGUAGE]`, the `WORD` and `TRANSLATION` parameters are *MANDATORY*, whereas the `WORD_LANGUAGE` and `TRANSLATION_LANGUAGE` do not need to be in the command.
+  For example, both `add w/entschuldigung wl/Deutsch t/sorry tl/English` and `add w/regarder t/look` are valid usage of the command
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -90,8 +92,7 @@ Adds a word to the flashcard with its translation.
 * Works to add a word with its translation in their respective languages.
 * The already saved translation can be overridden with a new translation in a different language.
 
-Format: `add w/WORD t/TRANSLATION`
-or`add w/WORD wl/WORD LANGUAGE t/TRANSLATION tl/TRANSLATION LANGUAGE`
+Format: `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
 
 Examples:
 * `add w/regarder t/look` saves the translation of regarder as look
@@ -103,7 +104,7 @@ Examples:
 Deletes a words and its related information
 * Deletes a flashcard.
 
-Format: `deletle index`
+Format: `delete <INDEX>`
 
 Examples:
 * `delete 1` deletes the word and its translation at index 1
@@ -113,7 +114,7 @@ Examples:
 Edits the word and its translation at the given index.
 * Edits a wild card.
 
-Format: `edit index w/WORD t/TRANSLATION`
+Format: `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>]`
 
 Examples:
 * `edit 1 w/Bye t/再见` edits the word and its translation at index 1
@@ -124,7 +125,7 @@ Finds words whose original word or translation contains the given keyword.
 * Finds a flashcard.
 * The search is insensitive. e.g `look` will match `Look`
 
-Format: `find KEYWORD`
+Format: `find <KEYWORD>`
 
 Examples:
 * `find look` returns the flashcard list  and its translation that contains the keyword `look`
@@ -175,7 +176,7 @@ Format: `end`
 
 Displays a list where each word is from specified language.
 
-Format: `language SPECIFIED_LANGUAGE`
+Format: `language <SPECIFIED_LANGUAGE>`
 
 ### Getting list for revision : `review`
 
@@ -232,9 +233,9 @@ _Details coming soon ..._
 
 ## Command summary
 
- Action                 | Format, Examples
-------------------------|----------------------------------------------------------------
- **Help**               | `help`
+ Action                 | Format, Examples                                                
+------------------------|-----------------------------------------------------------------
+ **Help**               | `help`  
  **List**               | `list`
  **Add**                | `add w/WORD t/TRANSLATION` <br> e.g., `add w/regarder t/look`
  **Delete**             | `delete w/WORD`<br> e.g., `del w/look`
