@@ -1,7 +1,7 @@
 package networkbook.commons.util;
 
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
-import static networkbook.testutil.Assert.assertThrows;
+import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,61 +16,61 @@ public class CollectionUtilTest {
     @Test
     public void requireAllNonNullVarargs() {
         // no arguments
-        assertNullPointerExceptionNotThrown();
+        assertAssertionErrorNotThrown();
 
         // any non-empty argument list
-        assertNullPointerExceptionNotThrown(new Object(), new Object());
-        assertNullPointerExceptionNotThrown("test");
-        assertNullPointerExceptionNotThrown("");
+        assertAssertionErrorNotThrown(new Object(), new Object());
+        assertAssertionErrorNotThrown("test");
+        assertAssertionErrorNotThrown("");
 
         // argument lists with just one null at the beginning
-        assertNullPointerExceptionThrown((Object) null);
-        assertNullPointerExceptionThrown(null, "", new Object());
-        assertNullPointerExceptionThrown(null, new Object(), new Object());
+        assertAssertionErrorThrown((Object) null);
+        assertAssertionErrorThrown(null, "", new Object());
+        assertAssertionErrorThrown(null, new Object(), new Object());
 
         // argument lists with nulls in the middle
-        assertNullPointerExceptionThrown(new Object(), null, null, "test");
-        assertNullPointerExceptionThrown("", null, new Object());
+        assertAssertionErrorThrown(new Object(), null, null, "test");
+        assertAssertionErrorThrown("", null, new Object());
 
         // argument lists with one null as the last argument
-        assertNullPointerExceptionThrown("", new Object(), null);
-        assertNullPointerExceptionThrown(new Object(), new Object(), null);
+        assertAssertionErrorThrown("", new Object(), null);
+        assertAssertionErrorThrown(new Object(), new Object(), null);
 
         // null reference
-        assertNullPointerExceptionThrown((Object[]) null);
+        assertAssertionErrorThrown((Object[]) null);
 
         // confirms nulls inside lists in the argument list are not considered
         List<Object> containingNull = Arrays.asList((Object) null);
-        assertNullPointerExceptionNotThrown(containingNull, new Object());
+        assertAssertionErrorNotThrown(containingNull, new Object());
     }
 
     @Test
     public void requireAllNonNullCollection() {
         // lists containing nulls in the front
-        assertNullPointerExceptionThrown(Arrays.asList((Object) null));
-        assertNullPointerExceptionThrown(Arrays.asList(null, new Object(), ""));
+        assertAssertionErrorThrown(Arrays.asList((Object) null));
+        assertAssertionErrorThrown(Arrays.asList(null, new Object(), ""));
 
         // lists containing nulls in the middle
-        assertNullPointerExceptionThrown(Arrays.asList("spam", null, new Object()));
-        assertNullPointerExceptionThrown(Arrays.asList("spam", null, "eggs", null, new Object()));
+        assertAssertionErrorThrown(Arrays.asList("spam", null, new Object()));
+        assertAssertionErrorThrown(Arrays.asList("spam", null, "eggs", null, new Object()));
 
         // lists containing nulls at the end
-        assertNullPointerExceptionThrown(Arrays.asList("spam", new Object(), null));
-        assertNullPointerExceptionThrown(Arrays.asList(new Object(), null));
+        assertAssertionErrorThrown(Arrays.asList("spam", new Object(), null));
+        assertAssertionErrorThrown(Arrays.asList(new Object(), null));
 
         // null reference
-        assertNullPointerExceptionThrown((Collection<Object>) null);
+        assertAssertionErrorThrown((Collection<Object>) null);
 
         // empty list
-        assertNullPointerExceptionNotThrown(Collections.emptyList());
+        assertAssertionErrorNotThrown(Collections.emptyList());
 
         // list with all non-null elements
-        assertNullPointerExceptionNotThrown(Arrays.asList(new Object(), "ham", Integer.valueOf(1)));
-        assertNullPointerExceptionNotThrown(Arrays.asList(new Object()));
+        assertAssertionErrorNotThrown(Arrays.asList(new Object(), "ham", Integer.valueOf(1)));
+        assertAssertionErrorNotThrown(Arrays.asList(new Object()));
 
         // confirms nulls inside nested lists are not considered
         List<Object> containingNull = Arrays.asList((Object) null);
-        assertNullPointerExceptionNotThrown(Arrays.asList(containingNull, new Object()));
+        assertAssertionErrorNotThrown(Arrays.asList(containingNull, new Object()));
     }
 
     @Test
@@ -86,23 +86,23 @@ public class CollectionUtilTest {
      * Asserts that {@code CollectionUtil#requireAllNonNull(Object...)} throw {@code NullPointerException}
      * if {@code objects} or any element of {@code objects} is null.
      */
-    private void assertNullPointerExceptionThrown(Object... objects) {
-        assertThrows(NullPointerException.class, () -> requireAllNonNull(objects));
+    private void assertAssertionErrorThrown(Object... objects) {
+        assertThrowsAssertionError(() -> requireAllNonNull(objects));
     }
 
     /**
      * Asserts that {@code CollectionUtil#requireAllNonNull(Collection<?>)} throw {@code NullPointerException}
      * if {@code collection} or any element of {@code collection} is null.
      */
-    private void assertNullPointerExceptionThrown(Collection<?> collection) {
-        assertThrows(NullPointerException.class, () -> requireAllNonNull(collection));
+    private void assertAssertionErrorThrown(Collection<?> collection) {
+        assertThrowsAssertionError(() -> requireAllNonNull(collection));
     }
 
-    private void assertNullPointerExceptionNotThrown(Object... objects) {
+    private void assertAssertionErrorNotThrown(Object... objects) {
         requireAllNonNull(objects);
     }
 
-    private void assertNullPointerExceptionNotThrown(Collection<?> collection) {
+    private void assertAssertionErrorNotThrown(Collection<?> collection) {
         requireAllNonNull(collection);
     }
 }

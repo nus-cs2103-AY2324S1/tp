@@ -1,6 +1,7 @@
 package networkbook.model.util;
 
 import static networkbook.testutil.Assert.assertThrows;
+import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -10,172 +11,236 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import networkbook.model.person.exceptions.DuplicateException;
-import networkbook.model.person.exceptions.ItemNotFoundException;
-
 public class UniqueListTest {
+    private static final UniqueNumber ITEM1 = new UniqueNumber(1, 1);
+    private static final UniqueNumber ITEM1_COPY = new UniqueNumber(1, 1);
+    private static final UniqueNumber ITEM1_SAME = new UniqueNumber(1, 2);
+    private static final UniqueNumber ITEM2 = new UniqueNumber(2, 1);
+    private static final UniqueNumber ITEM3 = new UniqueNumber(3, 0);
+    private static final UniqueNumber ITEM_NOT_IN_LIST = new UniqueNumber(4, 0);
+    private static final UniqueNumber ITEM_NOT_IN_LIST1 = new UniqueNumber(5, 0);
+    private static final int INDEX1 = 0;
+    private static final int INDEX2 = 1;
+    private static final int INDEX_OUT_OF_BOUND = 3;
+    private static final int NEGATIVE_INDEX = -1;
+    private static final UniqueList<UniqueNumber> SAMPLE_LIST = new UniqueList<UniqueNumber>().setItems(List.of(
+            ITEM1, ITEM2, ITEM3));
+
+    private static UniqueList<UniqueNumber> getSampleList() {
+        return SAMPLE_LIST.copy();
+    }
+
     @Test
-    public void contains_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new UniqueList<UniqueNumber>().contains(null));
+    public void contains_null_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().contains(null));
     }
 
     @Test
     public void contains_elementNotInList_returnsFalse() {
-        assertFalse(new UniqueList<UniqueNumber>().contains(new UniqueNumber(3, 0)));
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        uniqueList.add(new UniqueNumber(3, 0));
-        assertFalse(uniqueList.contains(new UniqueNumber(4, 0)));
-        uniqueList.add(new UniqueNumber(2, 0));
-        assertFalse(uniqueList.contains(new UniqueNumber(4, 0)));
+        assertFalse(getSampleList().contains(ITEM_NOT_IN_LIST));
     }
 
     @Test
     public void contains_elementInList_returnsTrue() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        uniqueList.add(new UniqueNumber(3, 0));
-        assertTrue(uniqueList.contains(new UniqueNumber(3, 1)));
-        assertTrue(uniqueList.contains(new UniqueNumber(3, 0)));
-        UniqueNumber uniqueNumber = new UniqueNumber(4, 10);
-        uniqueList.add(uniqueNumber);
-        assertTrue(uniqueList.contains(uniqueNumber));
+        assertTrue(getSampleList().contains(ITEM1));
+        assertTrue(getSampleList().contains(ITEM1_SAME));
+        assertTrue(getSampleList().contains(ITEM1_COPY));
     }
 
     @Test
-    public void add_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new UniqueList<UniqueNumber>().add(null));
+    public void containsNotAtIndex_null_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().containsNotAtIndex(null, INDEX1));
     }
 
     @Test
-    public void add_duplicate_throwsDuplicateException() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        uniqueList.add(new UniqueNumber(1, 0));
-        assertThrows(DuplicateException.class, () -> uniqueList.add(new UniqueNumber(1, 10)));
+    public void containsNotAtIndex_indexOutOfBound_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().containsNotAtIndex(ITEM1_COPY, NEGATIVE_INDEX));
+        assertThrowsAssertionError(() -> getSampleList().containsNotAtIndex(ITEM1_COPY, INDEX_OUT_OF_BOUND));
     }
 
     @Test
-    public void addAll_null_throwsNullPointerException() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        assertThrows(NullPointerException.class, () -> uniqueList.addAllFromList(null));
+    public void containsNotAtIndex_elementInListNotAtIndex_returnsTrue() {
+        assertTrue(getSampleList().containsNotAtIndex(ITEM1, INDEX2));
+        assertTrue(getSampleList().containsNotAtIndex(ITEM1_COPY, INDEX2));
+        assertTrue(getSampleList().containsNotAtIndex(ITEM1_SAME, INDEX2));
+    }
+
+    @Test
+    public void containsNotAtIndex_elementInListAtIndex_returnsFalse() {
+        assertFalse(getSampleList().containsNotAtIndex(ITEM1, INDEX1));
+        assertFalse(getSampleList().containsNotAtIndex(ITEM1_COPY, INDEX1));
+        assertFalse(getSampleList().containsNotAtIndex(ITEM1_SAME, INDEX1));
+    }
+
+    @Test
+    public void containsNotAtIndex_elementNotInList_returnFalse() {
+        assertFalse(getSampleList().containsNotAtIndex(ITEM_NOT_IN_LIST, INDEX1));
+    }
+
+    @Test
+    public void add_null_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().add(null));
+    }
+
+    @Test
+    public void add_duplicate_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().add(ITEM1));
+        assertThrowsAssertionError(() -> getSampleList().add(ITEM1_SAME));
+        assertThrowsAssertionError(() -> getSampleList().add(ITEM1_COPY));
+    }
+
+    @Test
+    public void addAll_null_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().addAllFromList(null));
     }
 
     @Test
     public void addAll_duplicate_duplicateNotAdded() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        uniqueList.add(new UniqueNumber(1, 0));
-        UniqueList<UniqueNumber> duplicateUniqueList = new UniqueList<>();
-        duplicateUniqueList.add(new UniqueNumber(1, 10));
-        uniqueList.addAllFromList(duplicateUniqueList);
-        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
-        expectedList.add(new UniqueNumber(1, 0));
+        UniqueList<UniqueNumber> uniqueList = getSampleList();
+        UniqueList<UniqueNumber> addList = new UniqueList<UniqueNumber>().setItems(List.of(
+                ITEM1_SAME, ITEM_NOT_IN_LIST));
+        uniqueList.addAllFromList(addList);
+        UniqueList<UniqueNumber> expectedList = getSampleList();
+        expectedList.add(ITEM_NOT_IN_LIST);
+        assertEquals(expectedList, uniqueList);
+
+        uniqueList = getSampleList();
+        addList = new UniqueList<UniqueNumber>().setItems(List.of(
+                ITEM1_COPY, ITEM_NOT_IN_LIST));
+        uniqueList.addAllFromList(addList);
         assertEquals(expectedList, uniqueList);
     }
 
     @Test
     public void addAll_noDuplicate_success() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        uniqueList.add(new UniqueNumber(1, 0));
-        UniqueList<UniqueNumber> toAddList = new UniqueList<>();
-        toAddList.add(new UniqueNumber(2, 2));
-        uniqueList.addAllFromList(toAddList);
-        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
-        expectedList.add(new UniqueNumber(1, 0));
-        expectedList.add(new UniqueNumber(2, 2));
+        UniqueList<UniqueNumber> uniqueList = getSampleList();
+        UniqueList<UniqueNumber> addList = new UniqueList<UniqueNumber>().setItems(List.of(ITEM_NOT_IN_LIST));
+        uniqueList.addAllFromList(addList);
+        UniqueList<UniqueNumber> expectedList = new UniqueList<UniqueNumber>().setItems(List.of(
+                ITEM1, ITEM2, ITEM3, ITEM_NOT_IN_LIST));
         assertEquals(expectedList, uniqueList);
     }
 
     @Test
-    public void setItem_nullTarget_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, ()
-                -> new UniqueList<UniqueNumber>().setItem(null, new UniqueNumber(5, 0)));
+    public void setItem_nullTarget_throwsAssertionError() {
+        assertThrowsAssertionError(()
+                -> getSampleList().setItem(null, ITEM_NOT_IN_LIST));
     }
 
     @Test
-    public void setItem_nullEdited_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, ()
-                -> new UniqueList<UniqueNumber>().setItem(new UniqueNumber(5, 0), null));
+    public void setItem_nullEdited_throwsAssertionError() {
+        assertThrowsAssertionError(()
+                -> getSampleList().setItem(ITEM1, null));
     }
 
     @Test
-    public void setItem_targetNotInList_throwsItemNotFoundException() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<UniqueNumber>();
-        uniqueList.add(new UniqueNumber(1, 0));
-        assertThrows(ItemNotFoundException.class, ()
-                -> uniqueList.setItem(new UniqueNumber(1, 1), new UniqueNumber(2, 0)));
+    public void setItem_targetNotInList_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().setItem(ITEM_NOT_IN_LIST, ITEM_NOT_IN_LIST1));
     }
 
     @Test
     public void setItem_editedEqualToTarget_success() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        UniqueNumber uniqueNumber = new UniqueNumber(1, 0);
-        uniqueList.add(uniqueNumber);
-        uniqueList.setItem(uniqueNumber, uniqueNumber);
-        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
-        expectedList.add(uniqueNumber);
+        UniqueList<UniqueNumber> uniqueList = getSampleList();
+        uniqueList.setItem(ITEM1, ITEM1_COPY);
+        UniqueList<UniqueNumber> expectedList = getSampleList();
+        assertEquals(expectedList, uniqueList);
+
+        uniqueList.setItem(ITEM1, ITEM1);
         assertEquals(expectedList, uniqueList);
     }
 
     @Test
     public void setItem_editedIsSameAsTarget_success() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        UniqueNumber target = new UniqueNumber(1, 0);
-        UniqueNumber edited = new UniqueNumber(1, 10);
-        uniqueList.add(target);
-        uniqueList.setItem(target, edited);
-        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
-        expectedList.add(edited);
-        UniqueList<UniqueNumber> wrongList = new UniqueList<>();
-        wrongList.add(target);
+        UniqueList<UniqueNumber> uniqueList = getSampleList();
+        uniqueList.setItem(ITEM1, ITEM1_SAME);
+        UniqueList<UniqueNumber> expectedList = new UniqueList<UniqueNumber>().setItems(List.of(
+                ITEM1_SAME, ITEM2, ITEM3));
         assertEquals(expectedList, uniqueList);
-        assertNotEquals(wrongList, uniqueList);
     }
 
     @Test
     public void setItem_editedDifferentFromTarget_success() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        UniqueNumber target = new UniqueNumber(1, 0);
-        UniqueNumber edited = new UniqueNumber(2, 10);
-        uniqueList.add(target);
-        uniqueList.setItem(target, edited);
-        UniqueList<UniqueNumber> expectedList = new UniqueList<>();
-        expectedList.add(edited);
-        UniqueList<UniqueNumber> wrongList = new UniqueList<>();
-        wrongList.add(target);
+        UniqueList<UniqueNumber> uniqueList = getSampleList();
+        uniqueList.setItem(ITEM1, ITEM_NOT_IN_LIST);
+        UniqueList<UniqueNumber> expectedList = new UniqueList<UniqueNumber>().setItems(List.of(
+                ITEM_NOT_IN_LIST, ITEM2, ITEM3));
         assertEquals(expectedList, uniqueList);
-        assertNotEquals(wrongList, uniqueList);
     }
 
     @Test
-    public void setItem_editedNotUnique_throwsDuplicateException() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        UniqueNumber target = new UniqueNumber(1, 0);
-        UniqueNumber edited = new UniqueNumber(2, 10);
-        UniqueNumber duplicate = new UniqueNumber(2, 10);
-        uniqueList.add(target);
-        uniqueList.add(edited);
-        assertThrows(DuplicateException.class, () -> uniqueList.setItem(target, duplicate));
+    public void setItem_editedNotUnique_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().setItem(ITEM3, ITEM1_SAME));
     }
 
     @Test
-    public void remove_itemDoesNotExist_throwsItemNotFoundException() {
-        assertThrows(ItemNotFoundException.class, ()
-                -> new UniqueList<UniqueNumber>().remove(new UniqueNumber(1, 0)));
+    public void setItemWithIndex_nullEdited_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().setItem(INDEX1, null));
+    }
+
+    @Test
+    public void setItemWithIndex_invalidIndex_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().setItem(NEGATIVE_INDEX, ITEM_NOT_IN_LIST));
+        assertThrowsAssertionError(() -> getSampleList().setItem(INDEX_OUT_OF_BOUND, ITEM_NOT_IN_LIST));
+    }
+
+    @Test
+    public void setItemWithIndex_editedItemAlreadyInList_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().setItem(INDEX2, ITEM1));
+        assertThrowsAssertionError(() -> getSampleList().setItem(INDEX2, ITEM1_COPY));
+        assertThrowsAssertionError(() -> getSampleList().setItem(INDEX2, ITEM1_SAME));
+    }
+
+    @Test
+    public void setItemWithIndex_editedItemEqualTarget_success() {
+        UniqueList<UniqueNumber> uniqueList = getSampleList();
+        uniqueList.setItem(INDEX1, ITEM1_COPY);
+        UniqueList<UniqueNumber> expectedList = getSampleList();
+        assertEquals(expectedList, uniqueList);
+
+        uniqueList.setItem(INDEX1, ITEM1);
+        assertEquals(expectedList, uniqueList);
+    }
+
+    @Test
+    public void setItemWithIndex_editedItemSameAsTarget_success() {
+        UniqueList<UniqueNumber> uniqueList = getSampleList();
+        uniqueList.setItem(INDEX1, ITEM1_SAME);
+        UniqueList<UniqueNumber> expectedList = new UniqueList<UniqueNumber>().setItems(List.of(
+                ITEM1_SAME, ITEM2, ITEM3));
+        assertEquals(expectedList, uniqueList);
+    }
+
+    @Test
+    public void setItemWithIndex_editedNotInList_success() {
+        UniqueList<UniqueNumber> uniqueList = getSampleList();
+        uniqueList.setItem(INDEX1, ITEM_NOT_IN_LIST);
+        UniqueList<UniqueNumber> expectedList = new UniqueList<UniqueNumber>().setItems(List.of(
+                ITEM_NOT_IN_LIST, ITEM2, ITEM3));
+        assertEquals(expectedList, uniqueList);
+    }
+
+    @Test
+    public void remove_itemDoesNotExist_throwsAssertionError() {
+        assertThrowsAssertionError(() -> getSampleList().remove(ITEM_NOT_IN_LIST));
     }
 
     @Test
     public void remove_itemExists_removesItem() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        uniqueList.add(new UniqueNumber(1, 0));
-        uniqueList.remove(new UniqueNumber(1, 0));
-        UniqueList<UniqueNumber> expected = new UniqueList<>();
+        UniqueList<UniqueNumber> uniqueList = getSampleList();
+        uniqueList.remove(ITEM1);
+        UniqueList<UniqueNumber> expected = new UniqueList<UniqueNumber>().setItems(List.of(
+                ITEM2, ITEM3));
+        assertEquals(expected, uniqueList);
+
+        uniqueList = getSampleList();
+        uniqueList.remove(ITEM1_COPY);
         assertEquals(expected, uniqueList);
     }
 
     @Test
-    public void setItems_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, ()
-                -> new UniqueList<UniqueNumber>().setItems((List<UniqueNumber>) null));
-        assertThrows(NullPointerException.class, ()
-                -> new UniqueList<UniqueNumber>().setItems((UniqueList<UniqueNumber>) null));
+    public void setItems_nullList_throwsAssertionError() {
+        assertThrowsAssertionError(() -> new UniqueList<UniqueNumber>().setItems((List<UniqueNumber>) null));
+        assertThrowsAssertionError(() -> new UniqueList<UniqueNumber>().setItems((UniqueList<UniqueNumber>) null));
     }
 
     @Test
@@ -190,9 +255,9 @@ public class UniqueListTest {
     }
 
     @Test
-    public void setItems_listWithDuplicate_throwsDuplicateException() {
-        List<UniqueNumber> list = List.of(new UniqueNumber(1, 0), new UniqueNumber(1, 1));
-        assertThrows(DuplicateException.class, () -> new UniqueList<UniqueNumber>().setItems(list));
+    public void setItems_listWithDuplicate_throwsAssertionError() {
+        List<UniqueNumber> list = List.of(ITEM1, ITEM1_SAME);
+        assertThrowsAssertionError(() -> getSampleList().setItems(list));
     }
 
     @Test
@@ -202,17 +267,15 @@ public class UniqueListTest {
 
     @Test
     public void isEmpty_notEmptyList_returnsFalse() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        uniqueList.add(new UniqueNumber(1, 0));
-        assertFalse(uniqueList.isEmpty());
+        assertFalse(getSampleList().isEmpty());
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> new UniqueList<UniqueNumber>()
+                -> getSampleList()
                 .asUnmodifiableObservableList()
-                .add(new UniqueNumber(1, 0)));
+                .add(ITEM_NOT_IN_LIST));
     }
 
     @Test
@@ -244,8 +307,6 @@ public class UniqueListTest {
 
     @Test
     public void toStringMethod() {
-        UniqueList<UniqueNumber> uniqueList = new UniqueList<>();
-        uniqueList.setItems(List.of(new UniqueNumber(1, 0)));
-        assertEquals(uniqueList.asUnmodifiableObservableList().toString(), uniqueList.toString());
+        assertEquals(getSampleList().asUnmodifiableObservableList().toString(), getSampleList().toString());
     }
 }

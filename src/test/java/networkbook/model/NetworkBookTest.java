@@ -3,6 +3,7 @@ package networkbook.model;
 import static networkbook.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static networkbook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static networkbook.testutil.Assert.assertThrows;
+import static networkbook.testutil.Assert.assertThrowsAssertionError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import networkbook.model.person.Person;
-import networkbook.model.person.exceptions.DuplicateException;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.TypicalPersons;
 
@@ -43,7 +43,7 @@ public class NetworkBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicateException() {
+    public void resetData_withDuplicatePersons_throwsAssertionError() {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE)
                 .withCourses(List.of(VALID_COURSE_BOB))
@@ -52,7 +52,7 @@ public class NetworkBookTest {
         List<Person> newPersons = Arrays.asList(TypicalPersons.ALICE, editedAlice);
         NetworkBookStub newData = new NetworkBookStub(newPersons);
 
-        assertThrows(DuplicateException.class, () -> networkBook.resetData(newData));
+        assertThrowsAssertionError(() -> networkBook.resetData(newData));
     }
 
     @Test

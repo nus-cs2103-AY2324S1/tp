@@ -73,6 +73,15 @@ public class TypicalPersons {
             .withEmails(List.of("stefan@example.com")).build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhones(List.of("8482131"))
             .withEmails(List.of("hans@example.com")).build();
+    public static final Person JACK = new PersonBuilder().withName("Jacky")
+            .withPhones(List.of("12345678", "61828284"))
+            .withEmails(List.of("jack@gmail.com", "jacky@test.com"))
+            .withLinks(List.of("nkn.com", "https://www.google.com"))
+            .withGraduation("AY2526-S2")
+            .withCourses(List.of("CS2103T", "CS2109S"))
+            .withSpecialisations(List.of("Software Engineering", "Artificial Intelligence"))
+            .withPriority("High")
+            .withTags("software eng enthusiast", "AI enthusiast").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhones(List.of(VALID_PHONE_AMY))

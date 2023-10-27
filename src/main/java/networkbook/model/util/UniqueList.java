@@ -1,6 +1,5 @@
 package networkbook.model.util;
 
-import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
@@ -13,8 +12,6 @@ import java.util.stream.Stream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import networkbook.commons.util.ThrowingIOExceptionConsumer;
-import networkbook.model.person.exceptions.DuplicateException;
-import networkbook.model.person.exceptions.ItemNotFoundException;
 
 /**
  * Represents a list of items that need to be unique.
@@ -27,12 +24,29 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
 
     /**
      * Checks whether the list contains the element.
-     * This makes use of {@code T::equals}.
+     * This makes use of {@code T::isSame}.
      * @param toCheck The element to check.
      */
     public boolean contains(T toCheck) {
-        requireNonNull(toCheck);
+        assert toCheck != null : "T toCheck should not be null";
         return internalList.stream().anyMatch(toCheck::isSame);
+    }
+
+    /**
+     * Checks whether the list contains the element {@code toCheck} not at the specified {@code index}.
+     * Meaning that element at the specified {@code index} is ignored.
+     */
+    public boolean containsNotAtIndex(T toCheck, int index) {
+        assert toCheck != null;
+        assert index >= 0;
+        assert index < this.size();
+
+        for (int i = 0; i < internalList.size(); i++) {
+            if (i != index && internalList.get(i).isSame(toCheck)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -41,10 +55,8 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      * @param toAdd The element to add.
      */
     public void add(T toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateException();
-        }
+        assert toAdd != null : "T toAdd should not be null";
+        assert !contains(toAdd) : "toAdd should not exist in UniqueList beforehand.";
         internalList.add(toAdd);
     }
 
@@ -53,7 +65,7 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      * If there are items in the specified list that are already in this list, they are simply ignored.
      */
     public void addAllFromList(UniqueList<T> listToAddFrom) {
-        requireNonNull(listToAddFrom);
+        assert listToAddFrom != null : "listToAddFrom should not be null";
         listToAddFrom.internalList.forEach(toAdd -> {
             if (!contains(toAdd)) {
                 internalList.add(toAdd);
@@ -71,15 +83,27 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
         requireAllNonNull(target, edited);
 
         int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new ItemNotFoundException();
-        }
+        assert index != -1 : "Target item should be in list.";
 
-        if (!target.isSame(edited) && contains(edited)) {
-            throw new DuplicateException();
-        }
+        assert target.isSame(edited) || !contains(edited) : "Edited item is already in the list.";
 
         internalList.set(index, edited);
+    }
+
+    /**
+     * Replaces the element of zero-based {@code index} with the new element.
+     */
+    public void setItem(int index, T edited) {
+        assert edited != null : "edited item should not be null";
+        assert index >= 0 : "index should be non-negative";
+        assert index < this.internalList.size() : "index should not be out of bound";
+
+        for (int i = 0; i < internalList.size(); i++) {
+            assert i == index || !edited.isSame(internalList.get(i))
+                    : "edited item should not already exist in UniqueList";
+        }
+
+        this.internalList.set(index, edited);
     }
 
     /**
@@ -88,10 +112,18 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      * @param toRemove The element to remove.
      */
     public void remove(T toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new ItemNotFoundException();
-        }
+        assert toRemove != null : "T toRemove should not be null";
+        boolean isRemoved = internalList.remove(toRemove);
+        assert isRemoved : "T toRemove should exists in UniqueList";
+    }
+
+    /**
+     * Removes the element at the index in the list.
+     * @param index The zero-based index of the element to remove.
+     */
+    public void removeAtIndex(int index) {
+        assert(index < this.internalList.size());
+        this.internalList.remove(index);
     }
 
     /**
@@ -102,6 +134,13 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
     }
 
     /**
+     * Returns the size of this list.
+     */
+    public int size() {
+        return this.internalList.size();
+    }
+
+    /**
      * Replaces the contents of this list with {@code items}.
      * {@code items} must not contain duplicate items.
      * @param items Items to replace.
@@ -109,15 +148,13 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      */
     public UniqueList<T> setItems(List<T> items) {
         requireAllNonNull(items);
-        if (!itemsAreUnique(items)) {
-            throw new DuplicateException();
-        }
+        assert itemsAreUnique(items) : "All items in the list should be unique.";
         internalList.setAll(items);
         return this;
     }
 
     public UniqueList<T> setItems(UniqueList<T> items) {
-        requireNonNull(items);
+        assert items != null : "items should not be null";
         internalList.setAll(items.internalList);
         return this;
     }

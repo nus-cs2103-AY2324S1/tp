@@ -1,6 +1,6 @@
 package networkbook.model.person;
 
-import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,7 +12,6 @@ import java.util.Optional;
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ThrowingIOExceptionConsumer;
 import networkbook.commons.util.ToStringBuilder;
-import networkbook.model.tag.Tag;
 import networkbook.model.util.Identifiable;
 import networkbook.model.util.UniqueList;
 
@@ -28,24 +27,22 @@ public class Person implements Identifiable<Person> {
     }
 
     public static final ThrowingIOExceptionConsumer<Link> LINK_OPENER = link -> {
-            if (!Desktop.isDesktopSupported()) {
-                return;
-            }
-            Desktop desktop = Desktop.getDesktop();
-            try {
-                URI uri = new URI(link.getValue());
-                desktop.browse(uri);
-            } catch (URISyntaxException e) { // should not throw this exception
-                throw new InvalidLinkFormatException();
-            }
-        };
+        if (!Desktop.isDesktopSupported()) {
+            return;
+        }
+        Desktop desktop = Desktop.getDesktop();
+        try {
+            URI uri = new URI(link.getValue());
+            desktop.browse(uri);
+        } catch (URISyntaxException e) { // should not throw this exception
+            throw new InvalidLinkFormatException();
+        }
+    };
 
     // Identity fields
     private final Name name;
     private final UniqueList<Phone> phones;
     private final UniqueList<Email> emails;
-
-    // Data fields
     private final UniqueList<Link> links;
     private final Graduation graduation;
     private final UniqueList<Course> courses;
@@ -66,7 +63,7 @@ public class Person implements Identifiable<Person> {
                   UniqueList<Specialisation> specialisations,
                   UniqueList<Tag> tags,
                   Priority priority) {
-        requireAllNonNull(name);
+        requireNonNull(name);
         this.name = name;
         this.phones = phones;
         this.emails = emails.copy();
