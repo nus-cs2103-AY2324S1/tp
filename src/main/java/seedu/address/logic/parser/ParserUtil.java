@@ -14,6 +14,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.schedule.Date;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.StartTime;
+import seedu.address.model.schedule.Status;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -107,6 +108,22 @@ public class ParserUtil {
         }
 
         return new EndTime(LocalDateTime.parse(trimmedTime));
+    }
+
+    /**
+     * Parses {@code String status} into a {@code status}
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+
+        if (trimmedStatus.equals("0")) {
+            return Status.MISSED;
+        } else if (trimmedStatus.equals("1")) {
+            return Status.COMPLETED;
+        } else {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

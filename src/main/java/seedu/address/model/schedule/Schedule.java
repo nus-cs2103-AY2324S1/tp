@@ -18,6 +18,7 @@ public class Schedule implements Comparable<Schedule> {
     private final Person tutor;
     private final StartTime startTime;
     private final EndTime endTime;
+    private final Status status;
 
     /**
      * Every field must be present and not null.
@@ -29,6 +30,20 @@ public class Schedule implements Comparable<Schedule> {
         this.tutor = tutor;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.status = Status.PENDING;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Schedule(Person tutor, StartTime startTime, EndTime endTime, Status status) {
+        requireAllNonNull(tutor, startTime, endTime, status);
+        checkArgument(isValidSchedule(startTime, endTime), MESSAGE_CONSTRAINTS);
+
+        this.tutor = tutor;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.status = status;
     }
 
     private boolean isValidSchedule(StartTime startTime, EndTime endTime) {
@@ -47,6 +62,10 @@ public class Schedule implements Comparable<Schedule> {
         return endTime;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     /**
      * Checks if this schedule clashes with another schedule.
      * Two schedules are considered clashing if they have the same tutor and their time intervals overlap.
@@ -63,6 +82,23 @@ public class Schedule implements Comparable<Schedule> {
         boolean isStartAfterOrEqualOtherEnd = !this.startTime.getTime().isBefore(other.endTime.getTime());
 
         return !(isEndBeforeOrEqualOtherStart || isStartAfterOrEqualOtherEnd);
+    }
+
+    /**
+     * Checks if this schedule is a duplicate of another schedule.
+     * Two schedules are considered duplicate if they have the same tutor and their time intervals are equal.
+     *
+     * @param other The other schedule to compare against.
+     * @return {@code true} if the schedules are duplicates, {@code false} otherwise.
+     */
+    public boolean isDuplicate(Schedule other) {
+        if (other == this) {
+            return true;
+        }
+
+        return tutor.equals(other.tutor)
+            && startTime.equals(other.startTime)
+            && endTime.equals(other.endTime);
     }
 
     /**
@@ -93,13 +129,14 @@ public class Schedule implements Comparable<Schedule> {
         Schedule otherSchedule = (Schedule) other;
         return tutor.equals(otherSchedule.tutor)
                 && startTime.equals(otherSchedule.startTime)
-                && endTime.equals(otherSchedule.endTime);
+                && endTime.equals(otherSchedule.endTime)
+                && status.equals(otherSchedule.status);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(tutor, startTime, endTime);
+        return Objects.hash(tutor, startTime, endTime, status);
     }
 
     @Override
@@ -108,6 +145,7 @@ public class Schedule implements Comparable<Schedule> {
                 .add("tutor", tutor)
                 .add("startTime", startTime)
                 .add("endTime", endTime)
+                .add("status", status)
                 .toString();
     }
 
