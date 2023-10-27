@@ -44,7 +44,4 @@ public class TutorNameContainsKeywordsPredicate implements Predicate<Schedule> {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 
-    public boolean isKeywordEmpty() {
-        return keywords.isEmpty() || keywords.contains("");
-    }
 }
