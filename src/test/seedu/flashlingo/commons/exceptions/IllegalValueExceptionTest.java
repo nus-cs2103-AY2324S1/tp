@@ -1,4 +1,4 @@
-package flashlingo.commons.exceptions;
-
-public class IllegalValueExceptionTest {
-}
+//package flashlingo.commons.exceptions;
+//
+//public class IllegalValueExceptionTest {
+//}
