@@ -14,6 +14,10 @@ public class AttendanceStorage {
 
     private ArrayList<Attendance> storage;
 
+    public AttendanceStorage() {
+        storage = new ArrayList<>();
+
+    }
     public AttendanceStorage(ArrayList<String> attendances) {
         for (String attendance : attendances) {
             String[] attendanceArr = attendance.split("//");
@@ -23,10 +27,6 @@ public class AttendanceStorage {
         }
     }
 
-    public AttendanceStorage() {
-
-    }
-
     /**
      * Gets the attendance given the date.
      *
@@ -34,6 +34,10 @@ public class AttendanceStorage {
      * @return the type of attendance of the person on this date
      */
     private Attendance getAttendance(LocalDate date) {
+        if (storage.size() == 0) {
+            // Anything not in storage is present.
+            return null;
+        }
 
         for (Attendance attendance : storage) {
             if (attendance.getDate() == date) {
@@ -41,8 +45,8 @@ public class AttendanceStorage {
             }
         }
 
-        // Anything not in storage is present.
         return null;
+
     }
 
     public AttendanceType getType(LocalDate date) {
@@ -73,7 +77,9 @@ public class AttendanceStorage {
     }
 
     public void markPresent(LocalDate date) {
-        storage.remove(getAttendance(date));
+        if (getAttendance(date) != null) {
+            storage.remove(getAttendance(date));
+        }
     }
 
     /**
