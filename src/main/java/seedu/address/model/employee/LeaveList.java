@@ -109,6 +109,21 @@ public class LeaveList {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof LeaveList)) {
+            return false;
+        }
+
+        LeaveList otherLeaveList = (LeaveList) other;
+        return leaveList.equals(otherLeaveList.leaveList);
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (!leaveList.isEmpty()) {

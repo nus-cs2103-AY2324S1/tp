@@ -41,7 +41,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalEmployees.AMY;
-import static seedu.address.testutil.TypicalEmployees.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -62,20 +61,20 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Employee expectedEmployee = new EmployeeBuilder(BOB).withDepartments(VALID_DEPARTMENT_FINANCE).build();
+        Employee expectedEmployee = new EmployeeBuilder(AMY).withDepartments(VALID_DEPARTMENT_FINANCE).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + POSITION_DESC_BOB + ID_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + DEPARTMENT_DESC_FRIEND + SALARY_DESC_BOB,
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_AMY + POSITION_DESC_AMY + ID_DESC_AMY
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + DEPARTMENT_DESC_FRIEND + SALARY_DESC_AMY,
                 new AddCommand(expectedEmployee));
 
         // multiple departments - all accepted
-        Employee expectedEmployeeMultipleDepartments = new EmployeeBuilder(BOB)
+        Employee expectedEmployeeMultipleDepartments = new EmployeeBuilder(AMY)
                 .withDepartments(VALID_DEPARTMENT_FINANCE, VALID_DEPARTMENT_IT)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + POSITION_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + DEPARTMENT_DESC_HUSBAND + DEPARTMENT_DESC_FRIEND + SALARY_DESC_BOB,
+                NAME_DESC_AMY + POSITION_DESC_AMY + ID_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + DEPARTMENT_DESC_HUSBAND + DEPARTMENT_DESC_FRIEND + SALARY_DESC_AMY,
                 new AddCommand(expectedEmployeeMultipleDepartments));
     }
 
