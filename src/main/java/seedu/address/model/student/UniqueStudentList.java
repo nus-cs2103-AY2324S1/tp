@@ -18,7 +18,6 @@ import seedu.address.model.student.exceptions.StudentNotFoundException;
  * persons uses Student#isSamePerson(Student) for equality so as to ensure that the student being added or updated is
  * unique in terms of identity in the UniqueStudentList. However, the removal of a student uses
  * Student#equals(Object) so as to ensure that the student with exactly the same fields will be removed.
- *
  * Supports a minimal set of list operations.
  *
  * @see Student#isSameStudent(Student)
@@ -28,6 +27,8 @@ public class UniqueStudentList implements Iterable<Student> {
     private final ObservableList<Student> internalList = FXCollections.observableArrayList();
     private final ObservableList<Student> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Student> selectedStudent =
+        FXCollections.observableArrayList();
 
     /**
      * Returns true if the list contains an equivalent student as the given argument.
@@ -110,10 +111,38 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Replace the selected student with the input student.
+     * @param student to be selected
+     */
+    public void setSelectedStudent(Student student) {
+        requireNonNull(student);
+        if (selectedStudent.isEmpty()) {
+            selectedStudent.add(student);
+        } else {
+            selectedStudent.set(0, student);
+        }
+    }
+
+    /**
+     * Clears the selection of a student so that no student is currently selected.
+     */
+    public void clearSelectedStudent() {
+        selectedStudent.clear();
+    }
+
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Student> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns the {@code ObservableList} containing the selected student.
+     */
+    public ObservableList<Student> getSelectedStudent() {
+        return selectedStudent;
     }
 
     @Override

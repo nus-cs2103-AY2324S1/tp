@@ -15,7 +15,7 @@ import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexExcepti
  * Represents a Student's AttendanceTracker grades in the class manager.
  * Guarantees: is valid as declared in {@link #isValidAttendance(int)}
  */
-public class AttendanceTracker {
+public class AttendanceTracker implements Tracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance Tracker needs to have positive number of tutorials.";
 
@@ -88,7 +88,7 @@ public class AttendanceTracker {
     /**
      * Returns a Json friendly version of the attendanceTracker.
      */
-    public List<Boolean> getJsonAttendanceTracker() {
+    public List<Boolean> getJson() {
         List<Boolean> attendanceTracker = new ArrayList<>();
         for (Attendance attendance : this.attendanceList) {
             attendanceTracker.add(attendance.getIsPresent());
@@ -101,6 +101,29 @@ public class AttendanceTracker {
      */
     public int getNumOfTut() {
         return this.attendanceList.length;
+    }
+
+    /**
+     * Returns the percentage of tutorials attended.
+     *
+     * @return Percentage of tutorials attended.
+     */
+    public double getPercentage() {
+        // Case when there are no tutorials
+        if (attendanceList.length == 0) {
+            return 100;
+        }
+        int score = 0;
+        int totalScore = 0;
+        for (int i = 0; i < attendanceList.length; i++) {
+            if (attendanceList[i] != null) {
+                totalScore += 1;
+                if (attendanceList[i].getIsPresent()) {
+                    score += 1;
+                }
+            }
+        }
+        return (double) score / totalScore * 100;
     }
 
     @Override

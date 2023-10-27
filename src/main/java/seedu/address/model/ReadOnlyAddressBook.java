@@ -14,4 +14,10 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Student> getStudentList();
 
+    /**
+     * Returns the list containing the selected student.
+     * The list only has one selected student.
+     */
+    ObservableList<Student> getSelectedStudent();
+
 }

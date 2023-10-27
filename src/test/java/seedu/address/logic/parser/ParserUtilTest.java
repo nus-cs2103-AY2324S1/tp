@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.ClassDetails;
+import seedu.address.model.student.Comment;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -213,5 +214,16 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseComment_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseComment(null));
+    }
+
+    @Test
+    public void parseComment_validValueWithoutWhitespace_returnsComment() throws Exception {
+        Comment expectedComment = new Comment(VALID_TAG_1);
+        assertEquals(expectedComment, ParserUtil.parseComment(VALID_TAG_1));
     }
 }

@@ -7,6 +7,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+
 public class ClassParticipationTrackerTest {
 
     @Test
@@ -38,6 +40,20 @@ public class ClassParticipationTrackerTest {
     }
 
     @Test
+    public void classPartPercentage_validValues_returnsCorrectPercentage() {
+        ClassParticipationTracker classParticipationTracker = new ClassParticipationTracker(10);
+        classParticipationTracker.markParticipated(Index.fromZeroBased(0));
+        classParticipationTracker.markParticipated(Index.fromZeroBased(2));
+        assertEquals(20, classParticipationTracker.getPercentage());
+    }
+
+    @Test
+    public void classPartPercentage_noValues_returnsHundred() {
+        ClassParticipationTracker classParticipationTracker = new ClassParticipationTracker(0);
+        assertEquals(100, classParticipationTracker.getPercentage());
+    }
+
+    @Test
     public void equals() {
         ClassParticipationTracker classParticipationTracker = new ClassParticipationTracker(13);
 
@@ -58,7 +74,7 @@ public class ClassParticipationTrackerTest {
     public void toStringMethod() {
         ClassParticipationTracker classParticipationTracker = new ClassParticipationTracker(3);
 
-        assertEquals("Class Part Tracker:\n"
+        assertEquals("Class Part:\n"
                 + "Tutorial 1: Did not Participate\n"
                 + "Tutorial 2: Did not Participate\n"
                 + "Tutorial 3: Did not Participate\n", classParticipationTracker.toString());

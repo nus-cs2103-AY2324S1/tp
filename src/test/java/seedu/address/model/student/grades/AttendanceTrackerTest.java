@@ -41,6 +41,20 @@ public class AttendanceTrackerTest {
     }
 
     @Test
+    public void attendancePercentage_validValues_returnsCorrectPercentage() {
+        AttendanceTracker attendanceTracker = new AttendanceTracker(10);
+        attendanceTracker.markPresent(Index.fromZeroBased(0));
+        attendanceTracker.markPresent(Index.fromZeroBased(2));
+        assertEquals(20, attendanceTracker.getPercentage());
+    }
+
+    @Test
+    public void attendancePercentage_noValues_returnsHundred() {
+        AttendanceTracker attendanceTracker = new AttendanceTracker(0);
+        assertEquals(100, attendanceTracker.getPercentage());
+    }
+
+    @Test
     public void markPresent_validTutorialIndex_success() {
         AttendanceTracker attendanceTracker = new AttendanceTracker(10);
         int tutNum = 1;

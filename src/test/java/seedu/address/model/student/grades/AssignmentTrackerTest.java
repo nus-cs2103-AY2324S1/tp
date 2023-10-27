@@ -7,6 +7,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+
 public class AssignmentTrackerTest {
 
     @Test
@@ -36,6 +38,23 @@ public class AssignmentTrackerTest {
         assignmentTracker.updateAssignmentCountChange(5);
         assertEquals(expectedAssignmentTracker, assignmentTracker);
     }
+
+    @Test
+    public void assignmentPercentage_validValues_returnsCorrectPercentage() {
+        AssignmentTracker assignmentTracker = new AssignmentTracker(3);
+        assignmentTracker.editMarks(Index.fromZeroBased(0), 50);
+        assignmentTracker.editMarks(Index.fromZeroBased(1), 100);
+        assignmentTracker.editMarks(Index.fromZeroBased(2), 75);
+        assertEquals(75, assignmentTracker.getPercentage());
+    }
+
+    @Test
+    public void assignmentPercentage_noValues_returnsHundred() {
+        AssignmentTracker assignmentTracker = new AssignmentTracker(0);
+        assertEquals(100, assignmentTracker.getPercentage());
+    }
+
+
 
     @Test
     public void equals() {

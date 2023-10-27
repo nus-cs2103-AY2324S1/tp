@@ -108,6 +108,15 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
+    /** Returns view of selected student. */
+    ObservableList<Student> getSelectedStudent();
+
+    /** Sets a student to be selected to view class details. */
+    void setSelectedStudent(Student student);
+
+    /** Check if the Student is the selected student. */
+    boolean isSelectedStudent(Student student);
+
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

@@ -14,7 +14,7 @@ import seedu.address.commons.core.index.Index;
  * Represents a Student's class participation grades in the class manager.
  * Guarantees: is valid as declared in {@link #isValidClassPart(int)}
  */
-public class ClassParticipationTracker {
+public class ClassParticipationTracker implements Tracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Class Participation needs to be a positive integer";
 
@@ -86,7 +86,7 @@ public class ClassParticipationTracker {
     /**
      * Returns a Json friendly version of the classParticipationTracker.
      */
-    public List<Boolean> getJsonClassParticipationTracker() {
+    public List<Boolean> getJson() {
         List<Boolean> classParticipationTracker = new ArrayList<>();
         for (ClassParticipation classParticipation : classPartList) {
             classParticipationTracker.add(classParticipation.getParticipated());
@@ -94,9 +94,32 @@ public class ClassParticipationTracker {
         return classParticipationTracker;
     }
 
+    /**
+     * Returns the percentage of class participation.
+     *
+     * @return Percentage of class participation.
+     */
+    public double getPercentage() {
+        // Case when there are no tutorials
+        if (classPartList.length == 0) {
+            return 100;
+        }
+        int score = 0;
+        int totalScore = 0;
+        for (int i = 0; i < classPartList.length; i++) {
+            if (classPartList[i] != null) {
+                totalScore += 1;
+                if (classPartList[i].getParticipated()) {
+                    score += 1;
+                }
+            }
+        }
+        return (double) score / totalScore * 100;
+    }
+
     @Override
     public String toString() {
-        StringBuilder ret = new StringBuilder("Class Part Tracker:\n");
+        StringBuilder ret = new StringBuilder("Class Part:\n");
         for (int i = 0; i < classPartList.length; i++) {
             ret.append("Tutorial ").append(i + 1).append(": ").append(classPartList[i].toString()).append("\n");
         }

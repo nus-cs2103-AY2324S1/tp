@@ -14,7 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 /**
  * Represents an array of assignments to track the student's grades.
  */
-public class AssignmentTracker {
+public class AssignmentTracker implements Tracker {
 
     public static final String MESSAGE_CONSTRAINTS = "Assignment Tracker needs to have positive number of assignments.";
 
@@ -64,12 +64,32 @@ public class AssignmentTracker {
     /**
      * Returns a Json friendly version of the assignmentTracker.
      */
-    public List<Integer> getJsonAssignmentTracker() {
+    public List<Integer> getJson() {
         List<Integer> assignmentTracker = new ArrayList<>();
         for (Assignment assignment : assignments) {
             assignmentTracker.add(assignment.getMarks());
         }
         return assignmentTracker;
+    }
+
+    /**
+     * Returns of overall assignment grades.
+     *
+     * @return Percentage of overall assignment grades.
+     */
+    public double getPercentage() {
+        if (assignments.length == 0) {
+            return 100;
+        }
+        int score = 0;
+        int totalScore = 0;
+        for (int i = 0; i < assignments.length; i++) {
+            if (assignments[i] != null) {
+                totalScore += 100;
+                score += assignments[i].getMarks();
+            }
+        }
+        return (double) score / totalScore * 100;
     }
 
     @Override

@@ -156,6 +156,15 @@ public class ModelManager implements Model {
         return addressBook.getStudent(studentNumber);
     }
 
+    @Override
+    public void setSelectedStudent(Student student) {
+        addressBook.setSelectedStudent(student);
+    }
+
+    @Override
+    public boolean isSelectedStudent(Student student) {
+        return !getSelectedStudent().isEmpty() && getSelectedStudent().get(0).equals(student);
+    }
     //=========== Filtered Student List Accessors =============================================================
 
     /**
@@ -165,6 +174,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
+    }
+
+    @Override
+    public ObservableList<Student> getSelectedStudent() {
+        return addressBook.getSelectedStudent();
     }
 
     @Override

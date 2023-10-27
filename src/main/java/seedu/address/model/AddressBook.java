@@ -105,6 +105,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    /**
+     * Sets the student to be the selected student.
+     *
+     * @param student to be selected
+     */
+    public void setSelectedStudent(Student student) {
+        students.setSelectedStudent(student);
+    }
+
     //// util methods
 
     @Override
@@ -117,6 +126,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Student> getSelectedStudent() {
+        return students.getSelectedStudent();
     }
 
     @Override
