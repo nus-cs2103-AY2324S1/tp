@@ -1,5 +1,6 @@
 package flashlingo.logic;
 
+import static flashlingo.testutil.Assert.assertThrows;
 import static flashlingo.testutil.TypicalFlashCards.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
