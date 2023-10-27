@@ -18,7 +18,9 @@ public class SwitchCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+        model.switchTheme();
+        String theme = model.getTheme().equals("Default") ? "light" : "dark";
+        return new CommandResult(MESSAGE_SUCCESS + theme + " theme!", false, false, true);
     }
 
     @Override

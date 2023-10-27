@@ -6,7 +6,7 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 /**
  * A utility class to help with building Flashlingo objects.
  * Example usage: <br>
- *     {@code Flashlingo ab = new FlashlingoBuilder().withTranslation("再见").build();}
+ *     {@code Flashlingo fl = new FlashlingoBuilder().withTranslation("再见").build();}
  */
 public class FlashlingoBuilder {
 
@@ -23,7 +23,7 @@ public class FlashlingoBuilder {
     /**
      * Adds a new {@code Flashcard} to the {@code Flashlingo} that we are building.
      */
-    public FlashlingoBuilder withPerson(FlashCard flashCard) {
+    public FlashlingoBuilder withFlashCard(FlashCard flashCard) {
         flashlingo.addFlashCard(flashCard);
         return this;
     }
