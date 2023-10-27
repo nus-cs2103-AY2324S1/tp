@@ -23,15 +23,4 @@ public class HelpCommandTest {
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 
-//    public static final String COMMAND_WORD = "help";
-//
-//    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-//            + "Example: " + COMMAND_WORD;
-//
-//    public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
-//
-//    @Override
-//    public CommandResultTest execute(Model model) {
-//        return new CommandResultTest(SHOWING_HELP_MESSAGE, true, false, false);
-//    }
 }

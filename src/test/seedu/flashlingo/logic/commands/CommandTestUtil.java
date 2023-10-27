@@ -15,7 +15,7 @@ import static flashlingo.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.flashcard.WordContainsKeywordsPredicate;
-import seedu.flashlingo.model.person.NameContainsKeywordsPredicate;
+
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
@@ -36,11 +36,21 @@ public class CommandTestUtil {
     public static final String VALID_TRANSLATED_WORD_THANKS = "thanks";
     public static final String VALID_TRANSLATED_WORD_PLEASE = "please";
     public static final String VALID_TRANSLATED_WORD_HONEST = "honest";
+    public static final String VALID_ORIGINAL_WORD_AMY = "Amy";
+    public static final String VALID_ORIGINAL_WORD_BOB = "Bob";
+    public static final String VALID_ORIGINAL_WORD_LANGUAGE = "English";
+    public static final String VALID_TRANSLATION_AMY = "艾米";
+    public static final String VALID_TRANSLATION_BOB = "鲍勃";
+    public static final String VALID_TRANSLATION_LANGUAGE = "Mandarin";
 
     public static final String ORIGINAL_WORD_DESC_HELLO = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_HELLO;
     public static final String ORIGINAL_WORD_DESC_WELCOME = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_WELCOME;
     public static final String TRANSLATED_WORD_DESC_HELLO = " " + PREFIX_TRANSLATED_WORD + VALID_TRANSLATED_WORD_HELLO;
     public static final String TRANSLATED_WORD_DESC_WELCOME = " " + PREFIX_TRANSLATED_WORD + VALID_TRANSLATED_WORD_HELLO;
+    public static final String WORD_DESC_AMY = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_AMY;
+    public static final String WORD_DESC_BOB = " " + PREFIX_ORIGINAL_WORD + VALID_ORIGINAL_WORD_BOB;
+    public static final String TRANSLATION_DESC_AMY = " " + PREFIX_TRANSLATED_WORD + VALID_TRANSLATION_AMY;
+    public static final String TRANSLATION_DESC_BOB = " " + PREFIX_TRANSLATED_WORD + VALID_TRANSLATION_BOB;
 //    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
 //    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
 //    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;

@@ -53,15 +53,15 @@ public class FlashCardBuilder {
     /**
      * Sets the {@code OriginalWord} of the {@code FlashCard} that we are building.
      */
-    public FlashCardBuilder withOriginalWord(String originalWord) {
-        this.originalWord = new OriginalWord(originalWord,"");
+    public FlashCardBuilder withOriginalWord(String originalWord, String language) {
+        this.originalWord = new OriginalWord(originalWord,language);
         return this;
     }
 
     /**
      * Sets the {@code TranslatedWord} of the {@code FlashCard} that we are building.
      */
-    public FlashCardBuilder withTranslatedWord(String translatedWord) {
+    public FlashCardBuilder withTranslatedWord(String translatedWord, String language) {
         this.translatedWord = new TranslatedWord(translatedWord,"");
         return this;
     }

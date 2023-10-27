@@ -1,10 +1,8 @@
 package flashlingo.logic.commands;
 
-import flashlingo.testutil.FlashCardBuilder;
+
 import org.junit.jupiter.api.Test;
-import seedu.flashlingo.commons.util.ToStringBuilder;
-import seedu.flashlingo.logic.Messages;
-import seedu.flashlingo.logic.commands.EditCommand;
+
 import seedu.flashlingo.logic.commands.NoCommand;
 import seedu.flashlingo.model.Flashlingo;
 import seedu.flashlingo.model.Model;
@@ -14,8 +12,7 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 
 import static flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
-import static flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
-import static java.util.Objects.requireNonNull;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
