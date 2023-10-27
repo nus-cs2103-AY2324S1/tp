@@ -33,9 +33,9 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      * Meaning that element at the specified {@code index} is ignored.
      */
     public boolean containsNotAtIndex(T toCheck, int index) {
-        assert toCheck != null : "T toCheck should not be null.";
-        assert index >= 0 : "Index should be non-negative.";
-        assert index < this.size() : "Index should be within bound.";
+        assert toCheck != null;
+        assert index >= 0;
+        assert index < this.size();
 
         for (int i = 0; i < internalList.size(); i++) {
             if (i != index && internalList.get(i).isSame(toCheck)) {
