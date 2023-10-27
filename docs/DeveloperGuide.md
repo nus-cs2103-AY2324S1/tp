@@ -479,6 +479,7 @@ Use case ends.
 **MSS**
 1.  Hiring manager types in search parameters to search users by the specified categories.
 2.  JABPro shows a list of persons whose profile matches the given parameters.
+Use case ends.
 
 **Extensions**
 
