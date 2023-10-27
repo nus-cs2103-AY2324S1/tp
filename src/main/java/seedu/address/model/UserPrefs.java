@@ -19,6 +19,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private boolean isConfigured = false;
     private int tutorialCount = ClassDetails.DEFAULT_COUNT;
     private int assignmentCount = ClassDetails.DEFAULT_COUNT;
+    private String theme = "dark";
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -43,6 +44,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setConfigured(newUserPrefs.getConfigured());
         setAssignmentCount(newUserPrefs.getAssignmentCount());
         setTutorialCount(newUserPrefs.getTutorialCount());
+        setTheme(newUserPrefs.getTheme());
+    }
+
+    private void setTheme(String theme) {
+        this.theme = theme;
     }
 
     public GuiSettings getGuiSettings() {
@@ -116,5 +122,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public int getTutorialCount() {
         return tutorialCount;
+    }
+
+    public void toggleColorTheme() {
+        theme = theme.equals("dark") ? "light" : "dark";
+    }
+
+    public String getTheme() {
+        return theme;
     }
 }

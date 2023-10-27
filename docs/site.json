@@ -1,10 +1,9 @@
 {
   "baseUrl": "",
   "titlePrefix": "Class Manager 2023",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "faviconPath": "images/Logo.png",
   "style": {
-    "codeTheme": "dark"
+    "codeTheme": "light"
   },
   "ignore": [
     "_markbind/layouts/*",
