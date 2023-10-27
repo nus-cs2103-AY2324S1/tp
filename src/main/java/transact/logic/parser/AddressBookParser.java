@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import transact.commons.core.LogsCenter;
 import transact.logic.commands.AddStaffCommand;
 import transact.logic.commands.AddTransactionCommand;
+import transact.logic.commands.ClearFilterCommand;
 import transact.logic.commands.ClearResultBoxCommand;
 import transact.logic.commands.ClearSortCommand;
 import transact.logic.commands.ClearStaffCommand;
@@ -110,6 +111,9 @@ public class AddressBookParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
+
+        case ClearFilterCommand.COMMAND_WORD:
+            return new ClearFilterCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
