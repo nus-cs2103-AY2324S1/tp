@@ -260,6 +260,32 @@ The following sequence diagram shows how the add patient works:
     - Pros: Fewer files to be changed.
     - Cons: Harder to implement, since we will have more checkings to be done when adding the person.
 
+### Delete Patient/Doctor Feature
+
+This feature allows users to delete the desired patient or doctor based on the 
+nric provided.
+
+#### Implementation
+
+Implementation of the delete feature is similar to the original delete command, except that it is done with Ic instead
+of Index.
+
+Given below is an example usage scenario and how the delete mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial 
+address book state.
+
+Step 2. The user populates the AddressBook with patients and doctors using the appropriate commands, if not already 
+done.
+
+Step 3. The user types `delete` as the command, with the appropriate nric of the patient/doctor to be deleted, for 
+example `delete S9567312G`.
+
+Step 4. The `deleteCommandParser` parses the delete command and creates a `deleteCommand` with the target Ic.
+
+Step 5. The PatientCard / DoctorCard then processes the deletion and The UI should display the updated list without the 
+deleted Doctor/Patient.
+
 ### Create New Appointment Feature
 
 This feature allows users to create a new appointment between patients and doctors. The patient and doctor for whom the
