@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.FindBandCommand;
+import seedu.address.logic.commands.band.FindBandCommand;
 import seedu.address.logic.commands.band.AddBandCommand;
 import seedu.address.logic.commands.band.AddMusiciantoBandCommand;
 import seedu.address.logic.commands.band.DeleteBandCommand;
