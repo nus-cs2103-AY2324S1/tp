@@ -1,13 +1,15 @@
 package seedu.address.storage;
 
-import java.text.DateFormat;
+import static seedu.address.model.person.interaction.Interaction.DEFAULT_DATE_FORMAT;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.interaction.Interaction.Outcome;
@@ -18,13 +20,12 @@ import seedu.address.model.person.interaction.Interaction.Outcome;
 class JsonAdaptedInteraction {
     private static final String MISSING_FIELD_MESSAGE_FORMAT = "Interaction's %s field is missing!";
     private static final String INVALID_DATE_FIELD_MESSAGE = "Date format is invalid. Please use dd-MMM-yyyy format";
-
-
-    private final DateFormat defaultDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedInteraction.class);
 
     private final String interactionNote;
     private final String outcome;
     private final String date;
+
 
     /**
      * Constructs a {@code JsonAdaptedInteraction} with the given details.
@@ -37,6 +38,13 @@ class JsonAdaptedInteraction {
         this.interactionNote = interactionNote;
         this.outcome = outcome;
         this.date = date;
+    }
+
+    public JsonAdaptedInteraction(Interaction interaction) {
+        this.interactionNote = interaction.getInteractionNote();
+        this.outcome = interaction.getOutcome().toString();
+        this.date = DEFAULT_DATE_FORMAT.format(interaction.getDate()).toString();
+        logger.info("Saving Date into JSON: " + date);
     }
 
     /**
@@ -61,7 +69,8 @@ class JsonAdaptedInteraction {
         }
         Date modelDate;
         try {
-            modelDate = defaultDateFormat.parse(date);
+            logger.info("Read Date into JSON: " + date);
+            modelDate = DEFAULT_DATE_FORMAT.parse(date);
         } catch (ParseException e) {
             throw new IllegalValueException(INVALID_DATE_FIELD_MESSAGE, e);
         }

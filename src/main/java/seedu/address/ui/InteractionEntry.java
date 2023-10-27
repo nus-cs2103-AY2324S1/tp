@@ -25,7 +25,7 @@ public class InteractionEntry extends UiPart<Region> {
     public InteractionEntry(Interaction interaction) {
         super(FXML);
         this.interaction = interaction;
-        note.setText(interaction.getInteraction());
+        note.setText(interaction.getInteractionNote());
         outcome.setText(interaction.getOutcome().toString());
     }
 }
