@@ -145,6 +145,7 @@ public class UniqueBandList implements Iterable<Band> {
         }
         internalList.get(bandIndex).getModifiableMusicianList().add(musician);
     }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
