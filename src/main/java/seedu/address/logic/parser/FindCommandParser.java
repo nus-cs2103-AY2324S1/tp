@@ -46,13 +46,13 @@ public class FindCommandParser implements Parser<FindCommand> {
                 Arrays.asList(statusKeywords));
 
         List<Predicate<Person>> predicatesList = new ArrayList<>() {{
-            if (!nameKeywords[0].isEmpty()) {
-                add(namePredicate);
-            }
-            if (!statusKeywords[0].isEmpty()) {
-                add(statusPredicate);
-            }
-        }};
+                if (!nameKeywords[0].isEmpty()) {
+                    add(namePredicate);
+                }
+                if (!statusKeywords[0].isEmpty()) {
+                    add(statusPredicate);
+                }
+            }};
 
         return new FindCommand(predicatesList);
     }
