@@ -151,8 +151,30 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 --------------------------------------------------------------------------------------------------------------------
 ## **WellNus Implementation**
 
+### \[Proposed\] Check clashing appointments feature
+
+#### Proposed Implementation
+
+The proposed check clashing appointments mechanism is facilitated by `UniqueAppointmentList`. It implements the `Iterable`
+interface that stores an `ObservableList` of type `Appointment`.
+
+The following methods are implemented to facilitate the check clashing appointments process:
+
+* `UniqueAppointmentList#hasOverlap(Appointment appt1, Appointment appt2)` —  Checks if two appointments have overlapping time.
+* `UniqueAppointmentList#hasOverlappingAppointments(Appointment newAppt)` —  Compares the new appointment to schedule with every other appointment currently in `UniqueAppointmentList`.
 
 
+The following sequence diagram shows how the class operates when an appointment is added:
+
+![ClashSequenceDiagram](images/ClashSequenceDiagram.png)
+
+
+When the user schedules a new command, the `UniqueAppointmentList` runs its `hasOverlappingAppointments()` method to check if the
+new appointment clashes with any existing appointments. It raises a `OverlappingAppointmentsException` if the method returns true,
+and prevents the user from scheduling that appointment.
+
+The following activity diagram summarises what happens when a user schedules an apppointment:
+![ClashActivityDiagram](images/ClashActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
