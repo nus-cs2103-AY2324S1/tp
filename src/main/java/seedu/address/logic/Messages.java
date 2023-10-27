@@ -24,6 +24,8 @@ public class Messages {
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_SCHEDULE_STATUS_INDEX =
             "The schedule status index provided is invalid";
+    public static final String MESSAGE_THEME_SHOWN = "Changed theme to %1$s";
+    public static final String MESSAGE_UNKNOWN_THEME = "Theme provided does not exist";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
