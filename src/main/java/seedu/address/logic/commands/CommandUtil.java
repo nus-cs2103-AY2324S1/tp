@@ -16,6 +16,8 @@ import seedu.address.model.person.Person;
 public class CommandUtil {
     public static final String MESSAGES_ALL_FIELDS_NULL = "At least one identifying field should be provided.";
 
+    private CommandUtil() {}
+
     /**
      * Finds a {@code Person} from {@code List<Person> persons} using the given {@code Name name}
      * and {@code Nric nric}, if able.<br>
