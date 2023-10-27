@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,59 +10,68 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.ListView?>
-
-<AnchorPane prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #322D46; -fx-background-radius: 10;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="10.0" layoutY="10.0" style="-fx-text-fill: white;" styleClass="panel-label" text="Lesson Details" />
-      <VBox layoutX="20.0" layoutY="58.0" prefHeight="200.0" prefWidth="320.0" spacing="10.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="48.0">
+<ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background: #231F31; -fx-background-radius: 10; -fx-border-width: 0; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane style="-fx-background-color: #322D46; -fx-background-radius: 10; -fx-border-width: 0;">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
+            <Label layoutX="10.0" layoutY="10.0" style="-fx-text-fill: white;" styleClass="panel-label" text="Lesson Details" />
+            <VBox layoutX="20.0" layoutY="58.0" prefHeight="200.0" prefWidth="320.0" spacing="10.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="48.0">
                <children>
-                  <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/calendar.png" />
-                     </image>
-                  </ImageView>
-                  <TextField fx:id="date" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$date" HBox.hgrow="ALWAYS" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/calendar.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="date" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$date" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
+                     <children>
+                        <Label style="-fx-text-fill: white;" text="Start Time: " />
+                        <TextField fx:id="startTime" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$startTime" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
+                     <children>
+                        <Label style="-fx-text-fill: white;" text="End Time: " />
+                        <TextField fx:id="endTime" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$endTime" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
+                     <children>
+                        <Label style="-fx-text-fill: white;" text="Subject:" />
+                        <TextField fx:id="subject" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$subject" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="254.0">
+                     <children>
+                        <Label style="-fx-text-fill: white;" text="Student(s): " />
+                        <TextField fx:id="students" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$students" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <VBox VBox.vgrow="ALWAYS">
+                        <Label styleClass="panel-label" text="Task List" />
+<!--                        <ListView fx:id="taskListView" minHeight="100" style="-fx-border-color: #201e26; -fx-border-radius: 5; -fx-background-radius: 10; -fx-border-width: 3;" VBox.vgrow="ALWAYS">-->
+<!--                           <VBox.margin>-->
+<!--                              <Insets />-->
+<!--                           </VBox.margin>-->
+<!--                           <opaqueInsets>-->
+<!--                              <Insets />-->
+<!--                           </opaqueInsets>-->
+<!--                        </ListView>-->
+                     <VBox fx:id="taskListContainer" spacing="10" VBox.vgrow="ALWAYS">
+                        <padding>
+                           <Insets bottom="5.0" top="5.0" />
+                        </padding></VBox>
+                  </VBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="120.0">
-               <children>
-                  <Label style="-fx-text-fill: white;" text="Start Time: " />
-                  <TextField fx:id="startTime" alignment="BOTTOM_LEFT" editable="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$startTime" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
-               <children>
-                  <Label style="-fx-text-fill: white;" text="End Time: " />
-                  <TextField fx:id="endTime" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$endTime" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="254.0">
-               <children>
-                  <Label style="-fx-text-fill: white;" text="Subject:" />
-                  <TextField fx:id="subject" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$subject" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="254.0">
-               <children>
-                  <Label style="-fx-text-fill: white;" text="Student(s): " />
-                  <TextField fx:id="students" editable="false" style="-fx-background-color: transparent; -fx-text-fill: white;" text="\$students" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            <ListView fx:id="taskListView" VBox.vgrow="ALWAYS">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </ListView>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
          </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </VBox>
-   </children>
-</AnchorPane>
+      </AnchorPane>
+   </content>
+</ScrollPane>
