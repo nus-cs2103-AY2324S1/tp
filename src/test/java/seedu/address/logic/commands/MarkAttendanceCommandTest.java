@@ -41,13 +41,13 @@ public class MarkAttendanceCommandTest {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Amy Bee"), true,
-                new Week(1));
+                new Week(1), null);
 
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true))
+                .withAttendance(new Attendance(new Week(1), true, null))
                 .build();
         expectedModel.addPerson(expectedAmy);
 
@@ -68,7 +68,7 @@ public class MarkAttendanceCommandTest {
                 amy.getName(), amy.getName(), "Late");
 
         Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true))
+                .withAttendance(new Attendance(new Week(1), true, null))
                 .build();
         expectedModel.addPerson(expectedAmy);
 
@@ -83,12 +83,12 @@ public class MarkAttendanceCommandTest {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
-                new Week(1));
+                new Week(1), null);
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true))
+                .withAttendance(new Attendance(new Week(1), true, null))
                 .build();
         expectedModel.addPerson(expectedAmy);
 
@@ -103,12 +103,12 @@ public class MarkAttendanceCommandTest {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
-                new Week(1));
+                new Week(1), null);
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy)
-                .withAttendance(new Attendance(new Week(1), true))
+                .withAttendance(new Attendance(new Week(1), true, null))
                 .build();
         expectedModel.addPerson(expectedAmy);
 
@@ -123,7 +123,7 @@ public class MarkAttendanceCommandTest {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("Bobby"), true,
-                new Week(1));
+                new Week(1), null);
         assertCommandFailure(markAttendanceCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
 
@@ -135,7 +135,7 @@ public class MarkAttendanceCommandTest {
         Person amy = new PersonBuilder().build();
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234555E"), true,
-                new Week(1));
+                new Week(1), null);
         assertCommandFailure(markAttendanceCommand, model, MESSAGE_PERSON_NOT_FOUND);
     }
 
@@ -150,12 +150,12 @@ public class MarkAttendanceCommandTest {
         model.addPerson(amy);
         amy.addAttendance(new Attendance(testWeek, false, "Late"));
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
-                testWeek);
+                testWeek, null);
 
         String expectedMessage = String.format(MESSAGE_UPDATED_SUCCESS + "%s\n%s" + MESSAGE_PRESENT + "%d\n",
                 amy.getName(), amy.getName(), 1);
 
-        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true)).build();
+        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true, null)).build();
         expectedModel.addPerson(expectedAmy);
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
     }
@@ -169,7 +169,7 @@ public class MarkAttendanceCommandTest {
         Person amy = new PersonBuilder().build();
         Week testWeek = new Week(1);
         model.addPerson(amy);
-        amy.addAttendance(new Attendance(testWeek, true));
+        amy.addAttendance(new Attendance(testWeek, true, null));
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), false,
                 testWeek, "Late");
 
@@ -177,7 +177,7 @@ public class MarkAttendanceCommandTest {
                         + "1\nReason: %s\n",
                 amy.getName(), amy.getName(), "Late");
 
-        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true)).build();
+        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true, null)).build();
         expectedModel.addPerson(expectedAmy);
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
     }
@@ -191,12 +191,12 @@ public class MarkAttendanceCommandTest {
         Week testWeek = new Week(1);
         model.addPerson(amy);
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(List.of("A1234567E"), true,
-            testWeek);
+            testWeek, null);
 
         String expectedMessage = String.format(MESSAGE_SUCCESS + "%s\n" + "%s" + MESSAGE_PRESENT + "1\n",
                 amy.getName(), amy.getName());
 
-        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true)).build();
+        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true, null)).build();
         expectedModel.addPerson(expectedAmy);
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
     }
@@ -207,16 +207,16 @@ public class MarkAttendanceCommandTest {
     @Test
     public void equals() {
         MarkAttendanceCommand markAmyAttendanceFirstCommand = new MarkAttendanceCommand(List.of("Amy Bee"), true,
-                new Week(1));
+                new Week(1), null);
         MarkAttendanceCommand markBobAttendanceCommand = new MarkAttendanceCommand(List.of("Bob"), false,
-                new Week(1));
+                new Week(1), "Late");
 
         // same object -> returns true
         assertEquals(markAmyAttendanceFirstCommand, markAmyAttendanceFirstCommand);
 
         // same values -> returns true
         MarkAttendanceCommand markAmyAttendanceFirstCommandCopy = new MarkAttendanceCommand(List.of("Amy Bee"), true,
-                new Week(1));
+                new Week(1), null);
 
         assertEquals(markAmyAttendanceFirstCommand, markAmyAttendanceFirstCommandCopy);
 

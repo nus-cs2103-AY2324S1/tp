@@ -110,12 +110,12 @@ public class ListAttendanceCommandTest {
 
     @Test
     public void execute_listWithIncompleteAttendance_success() {
-        ALICE.addAttendance(new Attendance(new Week(3), true));
-        BENSON.addAttendance(new Attendance(new Week(3), true));
-        CARL.addAttendance(new Attendance(new Week(3), true));
-        ELLE.addAttendance(new Attendance(new Week(3), true));
-        FIONA.addAttendance(new Attendance(new Week(3), true));
-        GEORGE.addAttendance(new Attendance(new Week(3), true));
+        ALICE.addAttendance(new Attendance(new Week(3), true, null));
+        BENSON.addAttendance(new Attendance(new Week(3), true, null));
+        CARL.addAttendance(new Attendance(new Week(3), true, null));
+        ELLE.addAttendance(new Attendance(new Week(3), true, null));
+        FIONA.addAttendance(new Attendance(new Week(3), true, null));
+        GEORGE.addAttendance(new Attendance(new Week(3), true, null));
 
         Optional<Tag> tag = Optional.empty();
         Week week = new Week(3);
@@ -132,13 +132,13 @@ public class ListAttendanceCommandTest {
 
     @Test
     public void execute_listAttendanceNoTag_success() {
-        ALICE.addAttendance(new Attendance(new Week(1), true));
-        BENSON.addAttendance(new Attendance(new Week(1), true));
-        CARL.addAttendance(new Attendance(new Week(1), true));
-        DANIEL.addAttendance(new Attendance(new Week(1), false));
-        ELLE.addAttendance(new Attendance(new Week(1), true));
-        FIONA.addAttendance(new Attendance(new Week(1), true));
-        GEORGE.addAttendance(new Attendance(new Week(1), true));
+        ALICE.addAttendance(new Attendance(new Week(1), true, null));
+        BENSON.addAttendance(new Attendance(new Week(1), true, null));
+        CARL.addAttendance(new Attendance(new Week(1), true, null));
+        DANIEL.addAttendance(new Attendance(new Week(1), false, "Late"));
+        ELLE.addAttendance(new Attendance(new Week(1), true, null));
+        FIONA.addAttendance(new Attendance(new Week(1), true, null));
+        GEORGE.addAttendance(new Attendance(new Week(1), true, null));
 
         Optional<Tag> tag = Optional.empty();
         Week week = new Week(1);
