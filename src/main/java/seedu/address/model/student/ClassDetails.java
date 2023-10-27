@@ -75,6 +75,7 @@ public class ClassDetails {
      * Marks the specific tutorial as present.
      */
     public ClassDetails markPresent(Index tutNum) {
+        requireNonNull(tutNum);
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markPresent(tutNum);
         return this;
