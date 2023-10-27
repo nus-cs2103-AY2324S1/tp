@@ -59,25 +59,21 @@ public class EditCommand extends Command {
                     + PREFIX_TAG + "owesMoney ";
 
     public static final String MESSAGE_USAGE_PATIENT = COMMAND_WORD + " "
-            + PATIENT_TAG
             + ": Edit a patient in the address book. \n"
             + MESSAGE_USAGE_GENERAL
             + PREFIX_AGE + "AGE "
             + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY \n"
             + "Example: " + COMMAND_WORD + " "
-            + PATIENT_TAG + " "
             + PERSON_EXAMPLE
             + PREFIX_AGE + "30 "
             + PREFIX_MEDICALHISTORY + "Osteoporosis";
 
     public static final String MESSAGE_USAGE_SPECIALIST = COMMAND_WORD + " "
-            + SPECIALIST_TAG
-            + ": edit a specialist in the address book. \n"
+            + ": Edit a specialist in the address book. \n"
             + MESSAGE_USAGE_GENERAL
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_SPECIALTY + "SPECIALTY \n"
             + "Example: " + COMMAND_WORD + " "
-            + SPECIALIST_TAG + " "
             + PERSON_EXAMPLE
             + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SPECIALTY + "Physiotherapist ";

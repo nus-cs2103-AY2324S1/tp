@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_BLANK_ARGUMENTS;
 import static seedu.address.logic.Messages.MESSAGE_ERROR_STATE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -19,6 +21,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditCommand.EditSpecialistDescriptor;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.PersonType;
@@ -49,6 +52,17 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_TAG, PREFIX_AGE, PREFIX_MEDICALHISTORY);
 
+        if (!argMultimap.getPreamble().isBlank() && !args.isBlank()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE_PATIENT));
+        }
+
+        if (argMultimap.anyValuesBlank(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_TAG, PREFIX_AGE, PREFIX_MEDICALHISTORY)) {
+            throw new ParseException(String.format(MESSAGE_BLANK_ARGUMENTS,
+                    EditCommand.MESSAGE_USAGE_PATIENT));
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_AGE);
 
@@ -72,6 +86,17 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION,
                         PREFIX_TAG, PREFIX_SPECIALTY);
+
+        if (!argMultimap.getPreamble().isBlank() && !args.isBlank()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE_SPECIALIST));
+        }
+
+        if (argMultimap.anyValuesBlank(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION,
+                PREFIX_TAG, PREFIX_SPECIALTY)) {
+            throw new ParseException(String.format(MESSAGE_BLANK_ARGUMENTS,
+                    EditCommand.MESSAGE_USAGE_SPECIALIST));
+        }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_LOCATION, PREFIX_SPECIALTY);
