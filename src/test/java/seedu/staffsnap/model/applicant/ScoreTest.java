@@ -62,7 +62,7 @@ public class ScoreTest {
     public void updateScore_newInterview() {
         Interview newInterview = new Interview("technical", new Rating("10"));
         Applicant applicant = new ApplicantBuilder(ALICE).build();
-        applicant.getScore().updateScore(newInterview);
+        applicant.getScore().updateScoreAfterAdd(newInterview);
         assertEquals(10.0, applicant.getScore().getAverageScore());
         assertEquals(10.0, applicant.getScore().getTotalScore());
         assertEquals(1, applicant.getScore().getNumberOfRatings());
@@ -72,7 +72,7 @@ public class ScoreTest {
     public void updateScore_editInterview() {
         Interview newInterview = new Interview("technical", new Rating("10"));
         Applicant applicant = new ApplicantBuilder(BENSON).build();
-        applicant.getScore().updateScore(applicant.getInterviews().get(0),
+        applicant.getScore().updateScoreAfterEdit(applicant.getInterviews().get(0),
                 newInterview);
         assertEquals(10.0, applicant.getScore().getAverageScore());
         assertEquals(10.0, applicant.getScore().getTotalScore());
@@ -84,7 +84,7 @@ public class ScoreTest {
         Applicant applicant = new ApplicantBuilder(ALICE)
                 .withScore(new Score(8.1, 8.1, 1)).build();
         Interview interviewToBeDeleted = new Interview("technical", new Rating("8.1"));
-        applicant.getScore().decreaseScore(interviewToBeDeleted);
+        applicant.getScore().updateScoreAfterDelete(interviewToBeDeleted);
         assertEquals(0.0, ALICE.getScore().getAverageScore());
         assertEquals(0.0, ALICE.getScore().getTotalScore());
         assertEquals(0, ALICE.getScore().getNumberOfRatings());

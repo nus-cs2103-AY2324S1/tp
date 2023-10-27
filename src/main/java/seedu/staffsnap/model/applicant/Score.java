@@ -33,7 +33,7 @@ public class Score {
     public Score(List<Interview> interviews) {
         requireNonNull(interviews);
         for (Interview interview : interviews) {
-            updateScore(interview);
+            updateScoreAfterAdd(interview);
         }
     }
 
@@ -69,7 +69,7 @@ public class Score {
      *
      * @param interview The interview that was added or updated.
      */
-    public void updateScore(Interview interview) {
+    public void updateScoreAfterAdd(Interview interview) {
         String rating = interview.getRating().value;
         if (!rating.equals("-")) {
             numberOfRatings++;
@@ -84,7 +84,7 @@ public class Score {
      * @param oldInterview The interview before it was edited.
      * @param newInterview The interview after it was edited.
      */
-    public void updateScore(Interview oldInterview, Interview newInterview) {
+    public void updateScoreAfterEdit(Interview oldInterview, Interview newInterview) {
         String oldRating = oldInterview.getRating().value;
         String newRating = newInterview.getRating().value;
 
@@ -105,7 +105,7 @@ public class Score {
      *
      * @param interview The interview that was deleted.
      */
-    public void decreaseScore(Interview interview) {
+    public void updateScoreAfterDelete(Interview interview) {
         String rating = interview.getRating().value;
         if (!rating.equals("-")) {
             numberOfRatings--;
