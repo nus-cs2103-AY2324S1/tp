@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 
 /**
@@ -20,9 +22,30 @@ public class Appointment {
      * @param appointmentTime The date and time of the appointment.
      */
     public Appointment(Doctor doctor, Patient patient, LocalDateTime appointmentTime) {
+        requireNonNull(doctor);
+        requireNonNull(patient);
+        requireNonNull(appointmentTime);
         this.doctor = doctor;
         this.patient = patient;
         this.appointmentTime = appointmentTime;
+    }
+
+    /**
+     * Constructs a new appointment with the specified doctor, patient, and appointment time.
+     *
+     * @param doctor         The doctor involved in the appointment.
+     * @param patient        The patient involved in the appointment.
+     * @param appointmentTime The date and time of the appointment.
+     * @param status         The status of the appointment.
+     */
+    public Appointment(Doctor doctor, Patient patient, LocalDateTime appointmentTime, String status) {
+        requireNonNull(doctor);
+        requireNonNull(patient);
+        requireNonNull(appointmentTime);
+        this.doctor = doctor;
+        this.patient = patient;
+        this.appointmentTime = appointmentTime;
+        this.status = status;
     }
 
     public LocalDateTime getAppointmentTime() {
