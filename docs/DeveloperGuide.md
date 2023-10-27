@@ -231,7 +231,7 @@ The following activity diagram summarises what happens when a user executes the 
   * Cons: Need to determine the range of days allowed for the user to enter, security concerns such as integer overflow could occur if user decides to perform malicious activities.
 
 ### `sort`
-The `remind` command allows the user to view the profiles arranged in order of earliest to latest policy expiration date, with those profiles that have no policy data placed at the end of the late
+The `sort` command allows the user to view the profiles arranged in order of earliest to latest policy expiration date, with those profiles that have no policy data placed at the end of the late
 
 #### Implementation:
 The sorted list will be displayed in the UI. The remind mechanism is facilitated by `Model` through the following operations:
