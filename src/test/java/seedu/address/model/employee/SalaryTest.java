@@ -40,6 +40,12 @@ public class SalaryTest {
     }
 
     @Test
+    public void getOvertimeHourlyRate_validSalary_returnsOvertimeHourlyRate() {
+        Salary salary = new Salary("9000");
+        assertTrue(salary.getOvertimeHourlyRate() == 1.5 * 9000/(52*44));
+    }
+
+    @Test
     public void equals() {
         Salary salary = new Salary("9000");
 
