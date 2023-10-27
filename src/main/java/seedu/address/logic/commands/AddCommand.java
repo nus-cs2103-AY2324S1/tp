@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_BEGIN_AFTER_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
@@ -14,7 +15,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -59,6 +62,10 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (!Lesson.isValid(toAdd.getBegin(), toAdd.getEnd())) {
+            throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
+        }
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

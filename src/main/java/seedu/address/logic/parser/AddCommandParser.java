@@ -61,12 +61,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         PayRate payRate = ParserUtil.parsePayRate(argMultimap.getValue(PREFIX_PAYRATE).get());
         boolean paid = false;
 
-        if (!Lesson.isValid(begin, end)) {
-            throw new ParseException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
-        }
-
-
-
         Person person = new Person(name, phone, email, address, subject, day, begin, end, paid, payRate);
 
         return new AddCommand(person);
