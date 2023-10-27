@@ -136,10 +136,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         bands.addMusician(bandIndex, musician);
     }
 
-    public void removeMusicianFromBand(int bandIndex, Musician musician) {
-        bands.removeMusician(bandIndex, musician);
-    }
-
     /**
      * Removes a band from the address book.
      * The band must exist in the address book.
