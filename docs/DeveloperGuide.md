@@ -115,6 +115,9 @@ How the parsing works:
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/model/Model.java)
+* The class diagram below gives an overview of the model package.<br/>
+*Details of the `Member`, `Event`, and `Attendance` packages have be omitted for brevity.
+Please refer to the [Member](#member-class-diagram), [Event](#event-class-diagram) and [Attendance](#attendance-class-diagram) diagrams for more information.*
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -126,11 +129,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `CcaCommander`, which `Member` references. This allows `CcaCommander` to only require one `Tag` object per unique tag, instead of each `Member` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component

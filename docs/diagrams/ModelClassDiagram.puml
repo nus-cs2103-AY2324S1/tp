@@ -10,6 +10,7 @@ Class "<<interface>>\nReadOnlyCcaCommander" as ReadOnlyCcaCommander
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class CcaCommander
+Class versionedCcaCommander
 Class ModelManager
 Class UserPrefs
 
@@ -35,15 +36,15 @@ CcaCommander .right.|> ReadOnlyCcaCommander
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyCcaCommander
-ModelManager -right-> versionedCcaCommander
-versionedCcaCommander *-right-> CcaCommander
+ModelManager -right-> "1" versionedCcaCommander
+versionedCcaCommander *-right-> "*" CcaCommander
 
 ModelManager -left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-CcaCommander *--> Member
-CcaCommander *--> Event
-CcaCommander *--> Attendance
+CcaCommander *--> "*" Member
+CcaCommander *--> "*" Event
+CcaCommander *--> "*" Attendance
 
 
 
