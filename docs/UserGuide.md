@@ -39,7 +39,7 @@ For **Experienced Users**, thank you for choosing TutorConnect! You may refer to
 TutorConnect's User Guide is made with you mind. It is designed to be user-friendly and easy to navigate. Here are a 
 few tips for smooth navigation:
 * Hyperlinks: Throughout this guide, you'll find [hyperlinks](#usage-of-the-user-guide) that can take you to related sections or external 
-  resources. CLick on these links to access additional information or jump to different parts of the guide.
+  resources. Click on these links to access additional information or jump to different parts of the guide.
 * Back to Top Button: At the end of each section, you'll find a [Back To Top](#table-of-contents) button, to return 
   you to the Table of Contents.
 
@@ -129,7 +129,8 @@ Before we begin, please ensure that you have viewed the following sections of th
 * [Quick Start](#quick-start) to help you get TutorConnect up and running.
 * [Navigating the Interface](#navigating-the-interface) to get you familiarised on how to navigate TutorConnect.
 
-This tutorial aims to guide you through the essential features and functionalities of TutorConnect that you will use on a day-to-day basis.
+This tutorial aims to guide you through the essential features and functionalities of TutorConnect that you will use 
+on a day-to-day basis. You will be adding your first tutor and corresponding schedule!
 
 Click on any of these below to jump to the respective sections of the guide!
 * [Start](#start)
