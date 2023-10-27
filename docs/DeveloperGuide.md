@@ -415,8 +415,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers                   | I can have a summary overview without going into each candidate data specifically                        |
 | `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles           |
 | `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it |
-| `*` | Hiring Manager   | get a visual alert or a section to display urgent task         <br/>                                                               | I can stay organized and ensure that remain up to date and on task with the hiring process               |
-| `*` | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                                    | I can perform further analysis using alternate tools on candidate data                                   |
+| `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process               |
+| `*` | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                               | I can perform further analysis using alternate tools on candidate data                                   |
 *{More to be added}*
 
 ### Use cases
@@ -429,15 +429,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a person.
 2. JABPro shows that command has been executed successfully.
 3. JABPro adds the person to the list of persons.
-4. JABPro shows the person added at the end of the list of persons.
+4. JABPro shows the person added at the end of the list of persons.   
 Use case ends.
 
 **Extensions**
 * 2a. User does not provide the correct information for a person to be added.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.
+    * 2a1. JABPro shows an error message and provides course of action for remedy.  
     Use case resumes at step 1.
 * 2b. User has already been added to the list of persons.
-    * 2b1. JABPro shows an error message and provides course of action for remedy.
+    * 2b1. JABPro shows an error message and provides course of action for remedy.   
     Use case resumes at step 1.
 
 **Use case: Add a remark to a person**
@@ -445,15 +445,15 @@ Use case ends.
 **MSS**
 1. User requests to add a remark to a person.
 2. JABPro shows that command has been executed successfully.
-3. JABPro adds the remark to the person.
+3. JABPro adds the remark to the person.  
 Use case ends.
 
 **Extensions**
 * 2a. User provides invalid index.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.
+    * 2a1. JABPro shows an error message and provides course of action for remedy.  
     Use case resumes at step 1.
 * 2b. User does not provide a remark.
-    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.
+    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.  
     Use case ends.
 
 **Use case: List all persons**
@@ -471,7 +471,7 @@ Use case ends.
   * 2a1. JABPro shows an error message and provides course of action for remedy.  
   Use case resumes at step 1.
 * 2b. User attempts to list persons when there are no entries in the address book.
-  * 2b1. JABPro shows a message indicating that there are no persons to display. 
+  * 2b1. JABPro shows a message indicating that there are no persons to display.   
   Use case ends.
 
 **Use case: Search persons by the specified categories(name, status and/ tag)**
@@ -486,28 +486,31 @@ Use case ends.
 * 1a. The given name/status/tag parameter is invalid.
     * 1a1. JABPro shows an error message.
       Use case resumes at step 1.
-* 2a. The list is empty.
+* 2a. The list is empty. <br/>
   Use case ends.
 
 
 **Use case: Delete a person**
 
 **MSS**
-1.  User requests to list persons.
-2.  AddressBook shows a list of persons.
-3.  User requests to delete a specific person in the list.
-4.  AddressBook deletes the person.
-    Use case ends.
+1. User requests to list persons.
+2. AddressBook shows a list of persons.
+3. User requests to delete a specific person in the list by providing either the person's index or tags.
+4. AddressBook deletes the specified person(s).   
+Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.   
       Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
       Use case resumes at step 3.
+* 3b. The given tags do not match any persons. 
+    * 3b1. AddressBook shows an error message indicating that no persons with the specified tags were found.  
+    Use case resumes at step 3
 * 4a. Deletion encounters an error
-    * 4a1. AddressBook displays an error message indicating that the deletion process failed.
+    * 4a1. AddressBook displays an error message indicating that the deletion process failed.  
       Use case ends.
 
 **Use case: Set a person's status**
@@ -516,18 +519,18 @@ Use case ends.
 1.  User requests to list persons.
 2.  AddressBook shows a list of persons.
 3.  User requests to set the status of a specific person in the list.
-4.  AddressBook sets the status of that person in the list.
+4.  AddressBook sets the status of that person in the list.  
     Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.  
       Use case ends.
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.
+    * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
       Use case resumes at step 3.
 * 3b. The given status is invalid.
-    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.
+    * 3b1. AddressBook shows an error message indicating that the specified status is invalid.  
       Use case resumes at step 3.
 
 **Use case: View a person's details**
@@ -536,12 +539,12 @@ Use case ends.
 1.  User requests to list persons.
 2.  AddressBook shows a list of persons.
 3.  User requests to view a specific person in the current displayed AddressBook.
-4.  The UI shows the details of that person.
+4.  The UI shows the details of that person.  
     Use case ends.
 
 **Extensions**
 * 2a. The list is empty.
-    * 2a1. AddressBook displays a message indicating that the list is empty.
+    * 2a1. AddressBook displays a message indicating that the list is empty.  
       Use case ends.
 * 3a. The given index is invalid.
     * 3a1. AddressBook shows an error message indicating that the specified index is invalid.  
@@ -566,35 +569,35 @@ Use case ends.
 **Use case: Add social profile to person's details**
 
 **MSS**
-1. User requests to add social profile (linkedin or github)
-2. JABPro shows that command has been executed successfully
-3. JABPro adds the social profile to the person's existing details in the list
+1. User requests to add social profile (linkedin or github).
+2. JABPro shows that command has been executed successfully.
+3. JABPro adds the social profile to the person's existing details in the list.  
    Use case ends.
 
 **Extensions**
 * 2a. User does not provide valid information for the person.
-    * 2a1. JABPro displays error message.
+    * 2a1. JABPro displays error message.  
       Use case resumes at Step 1.
 * 2b. User requests to add social profile other than LinkedIn or Github
-    * 2b1. JABPro displays error message.
+    * 2b1. JABPro displays error message.  
       Use case resumes at Step 1.
 
 **Use case: Open social profile for a person**
 
 **MSS**
-1. User requests to open social profile for a person
-2. JABPro shows that command has been executed successfully
-3. JABPro redirects to the webpage of the corresponding profile
+1. User requests to open social profile for a person.
+2. JABPro shows that command has been executed successfully.
+3. JABPro redirects to the webpage of the corresponding profile.  
    Use case ends.
 
 **Extension**
 * 1a. Person does not exist in the list.
-    * 1a1. JABPro displays error message.
+    * 1a1. JABPro displays error message.  
     Use case ends.
-* 1b. Social profile requested other than LinkedIn or Github
-    * 1b1. JABPro displays error message.
+* 1b. Social profile requested other than LinkedIn or Github.
+    * 1b1. JABPro displays error message.  
     Use case ends.
-* 3a. User does not exist on the social platform
+* 3a. User does not exist on the social platform.  
   Use case ends.
 
 *{More to be added}*

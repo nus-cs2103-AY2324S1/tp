@@ -20,15 +20,15 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `jabpro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-4/tp/releases).
+2. Download the latest `jabpro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
+3. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>  
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>  
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>  
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it.<br>
+5. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
 
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: adds an applicant with the specified contact details
@@ -45,8 +45,7 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 
     * `github Alex Yeoh`: Redirects the user to the Github account of the candidate
 
-
-1. Refer to the [Features](#features) below for details of each command.
+Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,7 +93,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of tags (including 0)!
 </box>
 
 Examples:
@@ -103,21 +102,21 @@ Examples:
 
 ### Adding a remark to a person: `remark`
 
-Edits a remark to an existing person to the address book
+Edits a remark to an existing person to the address book.
 
 Format: `remark INDEX r/REMARK`
 
 * Edits the remark for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark
-* You can empty out a remark by inputting an empty string
+* The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark.
+* You can empty out a remark by inputting an empty string.
 
 Examples:
-*  `remark 1 r/Great attitude, hardworking` Edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
+*  `remark 1 r/Great attitude, hardworking` Edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`.
 *  `remark 1 r/` Empties the remark of the 1st person.
 
 ### Viewing a person's details: `view`
 
-Creates a complete view for details of a person in the address book
+Creates a complete view for details of a person in the address book.
 
 Format: `view INDEX`
 
@@ -131,15 +130,15 @@ Examples:
 <box type="tip" seamless>
 
 **Tip:** Other operations that affect user's data will trigger a refresh of the view.
-These include `add`, `edit`, `set`, `remark`, `addL`, `addG` 
+These include `add`, `edit`, `set`, `remark`, `addL`, `addG`. 
 
 
 </box>
 
 
-### Adding Github/LinkedIn username for a user: 'add linkedin/github'
+### Adding Github/LinkedIn username for a user: `addG` or `addL`
 
-Adds the username for their social profile [LinkedIn/Github] to the existing contact details of users
+Adds the username for their social profile [LinkedIn/Github] to the existing contact details of users.
 
 Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
 
@@ -150,9 +149,9 @@ Examples:
 * `addG 2 u/MadLamprey`
 * `addL 4 u/aditya-misra`
 
-### Opening user LinkedIn or GitHub account: 'linkedin' or 'github'
+### Opening user LinkedIn or GitHub account: `linkedin` or `github`
 
-Redirect user to candidate's LinkedIn or Github account
+Redirect user to candidate's LinkedIn or Github account.
 
 Format: `linkedin INDEX` or `github INDEX`
 
@@ -211,10 +210,10 @@ Format: `search n/KEYWORD [MORE KEYWORDS]`
 
 * Keywords are case-insensitive: `search n/Josh` and `search n/josh` return the same result.
 * Keyword has to be a string that does not contain any non-alpha numeric characters.
-* The order of the keywords does not matter. e.g. `Josh Peck` will match `Peck Josh`
-* Only full words will be matched e.g. `Jo` will not match `Josh`
+* The order of the keywords does not matter. e.g. `Josh Peck` will match `Peck Josh`.
+* Only full words will be matched e.g. `Jo` will not match `Josh`.
 * Applicants matching at least one keyword will be returned (i.e. `OR` search)
-  e.g. `Josh Peck` will return `Josh Gad`, `Josh Job`
+  e.g. `Josh Peck` will return `Josh Gad`, `Josh Job`.
 
 Examples:
 * `search n/John` returns `john` and `John Doe`
@@ -222,7 +221,7 @@ Examples:
 
 #### Search job applicants by status
 
-Finds job applicants whose status match any of the given keywords
+Finds job applicants whose status match any of the given keywords.
 
 Format: `search st/KEYWORD [MORE KEYWORDS]`
 
@@ -257,13 +256,17 @@ Example:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified job applicants from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX` or `delete t/TAG`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Delete by index
+  * Deletes the person at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed person list.
+  * The index **must be a positive integer** 1, 2, 3, …​
+* Delete by tags
+  * Deletes all persons who have the specified TAG or a combination of tags. 
+  * The tag(s) must be prefixed with t/.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -359,6 +362,7 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+
 
  Action                   | Format, Examples                                                                                                                                               
 --------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
