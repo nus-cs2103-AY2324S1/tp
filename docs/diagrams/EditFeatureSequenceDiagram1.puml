@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "ep:EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "index:Index" as Index LOGIC_COLOR
+participant "editPersonDescriptor:EditPersonDescriptor" as EditPersonDescriptor LOGIC_COLOR
+participant "e:EditCommand" as EditCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute(edit 1 c/ABCInsurance)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edit 1 c/ABCInsurance")
+activate AddressBookParser
+
+create EditCommandParser
+AddressBookParser -> EditCommandParser
+activate EditCommandParser
+EditCommandParser --> AddressBookParser
+deactivate EditCommandParser
+
+AddressBookParser -> EditCommandParser : parse("edit 1 c/ABCInsurance")
+activate EditCommandParser
+
+create Index
+EditCommandParser -> Index
+activate Index
+Index --> EditCommandParser : Index
+deactivate Index
+
+create EditPersonDescriptor
+EditCommandParser -> EditPersonDescriptor
+activate EditPersonDescriptor
+EditPersonDescriptor --> EditCommandParser : editPersonDescriptor
+deactivate EditPersonDescriptor
+
+create EditCommand
+EditCommandParser -> EditCommand : EditCommand(index, editPersonDescriptor)
+activate EditCommand
+
+EditCommand --> EditCommandParser : e
+deactivate EditCommand
+EditCommandParser --> AddressBookParser : e
+deactivate EditCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+destroy EditCommandParser
+
+EditCommand -[hidden]-> LogicManager : empty row
+ref over LogicManager, EditCommand : execute EditCommand
+
+EditCommand -[hidden]-> LogicManager : empty row
+destroy EditCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

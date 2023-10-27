@@ -209,6 +209,38 @@ The following sequence diagram shows how the batch delete operation works:
 * Besides, if users leave an insurance company, they may like to delete people purchase policy from that company. 
 * Therefore, `Model#batchDeleteWithPredicate(Predicate<Person> predicate)` is introduced to allow batch delete by month or company.
 
+<br>
+
+### Edit Feature
+
+The `edit` command allows users to edit the details of a person in the address book.
+
+#### Implementation:
+
+The edit mechanism is facilitated by `EditCommand`. It extends `Command` with an `EditPersonDescriptor` to store the details of the person to be edited. 
+
+Additionally, it implements the following operations:
+* `EditCommand#createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)` — Creates and returns a `Person` with the details of `personToEdit` edited with `editPersonDescriptor`.
+* `EditCommand#execute(Model model)` — Edits the details of the `Person` in the address book.
+
+The changes are finally made to the address book by calling `Model#setPerson(Person target, Person editedPerson)`.
+
+Given below is the sequence diagram for the `edit` command:
+
+![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram1.png)
+
+:information_source: **Note:** The lifeline for `EditCommandParser` and `EditCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram2.png)
+* Calling method setPerson to edit the person in addressBook.
+* Calling method updateFilteredPersonList to update the addressBook with the edited person.
+
+#### Design considerations:
+* Users may like to edit the details of a person in the address book, in case of changes in the personal details or policy of the person. For example, users may like to update the policy number of a person.
+* Therefore, `EditCommand` is introduced to allow users to edit the details of a person in the address book.
+
+<br>
+
 ### `remind`
 The `remind` command allows the user to filter out people whose policy expiry date is approaching within the given number of days.
 
@@ -248,6 +280,8 @@ The following activity diagram summarises what happens when a user executes the 
 * Alternative 2 (current choice): `remind` command with number of days given by the user.
   * Pros: Allows more flexibility, now the user can find persons whose expiry dates is not only 30 days.
   * Cons: Need to determine the range of days allowed for the user to enter, security concerns such as integer overflow could occur if user decides to perform malicious activities.
+
+<br>
 
 ### `sort`
 The `sort` command allows the user to view the profiles arranged in order of earliest to latest policy expiration date, with those profiles that have no policy data placed at the end of the late
