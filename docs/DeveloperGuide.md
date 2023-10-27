@@ -330,6 +330,35 @@ The following activity diagram summarises the process of adding leave for an emp
   * Pros: will use less memory (e.g. each employee will only need to store an integer for the total number of days of leave per annul)
   * Cons: Not much useful information that can be used (e.g. we do not know the working status of each employee for each day)
 
+### Attendance Marking
+
+#### Proposed Implementation
+
+The mark mechanism is dependent on the Attendance class. The Attendance class contains information on the date and AttendanceType of a Person.  It implements the following operations:
+* `Attendance#markAbsent(LocalDate date)` -- marks the attendance of the employee on the provided date as absent.
+* `Attendance#markLate(LocalDate date)` -- marks the attendance of the employee on the provided date as late.
+  The AttendanceStorage stores all the Attendance objects of one Person, only storing Attendances that are late or absent. Dates that are not in the storage are assumed to be marked as present for that given Person.
+
+Given below is an example usage scenario and how the mechanism behaves at each step.
+
+Step 1. The user executes `mark 5 P` command to mark the 5th person in the address book as present.
+
+Step 2. The `mark` command calls `AttendanceStorage#markAbsent()` of the given employee, which calls the `Attendance#markAbsent()`.
+(Sequence diagram to be added).
+
+#### Design considerations:
+
+**Aspect: How AttendanceStorage is assigned to each Person**
+* **Alternative 1 (current choice):** As an attribute of a Person.
+  * Pros: Easy to query for a Person's attendance status
+  * Cons: May be sub-par performance as it would store identical Attendance objects for each Person (person A: absent on 24th oct, person B: also absent on 24th oct)
+* **Alternative 2:** As a UniqueAttendanceList.
+  * Pros: No copies of Attendance objects having the same attribute values
+  * Cons: Difficult to reference a Person to each Attendance.
+
+
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------
