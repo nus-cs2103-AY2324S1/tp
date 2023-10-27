@@ -1,9 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalTags.TEST_TAG_SET;
+import static seedu.address.testutil.TypicalTags.TEST_TAG_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +23,28 @@ public class DeleteCommandParserTest {
 
     private DeleteCommandParser parser = new DeleteCommandParser();
 
+    // Delete by index tests
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validIndex_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
+    public void parse_invalidIndex_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    // Delete by tags tests
+    @Test
+    public void parse_validTags_returnsDeleteCommand() {
+        String userInput = " " + PREFIX_TAG + TEST_TAG_STRING;
+        DeleteCommand expectedCommand = new DeleteCommand(TEST_TAG_SET);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_emptyTags_throwsParseException() {
+        assertParseFailure(parser, PREFIX_TAG.toString(),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
