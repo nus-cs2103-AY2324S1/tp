@@ -13,6 +13,7 @@ import seedu.address.model.department.Department;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Id;
+import seedu.address.model.employee.LeaveList;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.OvertimeHours;
 import seedu.address.model.employee.Phone;
@@ -30,7 +31,10 @@ public class SampleDataUtil {
                 new Phone("87438807"),
                 new Email("alexyeoh@example.com"),
                 new Salary("8500"),
-                getDepartmentSet("IT"), true, new OvertimeHours(DEFAULT_OVERTIME_HOURS)),
+                getDepartmentSet("IT"),
+                true,
+                new OvertimeHours(DEFAULT_OVERTIME_HOURS),
+                new LeaveList()),
 
             new Employee(new Name("Bernice Yu"), new Position("Systems analyst"),
                 new Id("EID5678-1234"),
@@ -44,7 +48,10 @@ public class SampleDataUtil {
                 new Phone("93210283"),
                 new Email("charlotte@example.com"),
                 new Salary("8000"),
-                getDepartmentSet("Marketing"), true, new OvertimeHours(MAX_OVERTIME_HOURS)),
+                getDepartmentSet("Marketing"),
+                true,
+                new OvertimeHours(MAX_OVERTIME_HOURS),
+                new LeaveList()),
 
             new Employee(new Name("David Li"), new Position("Operations manager"),
                 new Id("EID2023-5678"),
@@ -58,7 +65,10 @@ public class SampleDataUtil {
                 new Phone("92492021"),
                 new Email("irfan@example.com"),
                 new Salary("8500"),
-                getDepartmentSet("IT"), true, new OvertimeHours(MAX_OVERTIME_HOURS)),
+                getDepartmentSet("IT"),
+                true,
+                new OvertimeHours(MAX_OVERTIME_HOURS),
+                new LeaveList()),
 
             new Employee(new Name("Roy Balakrishnan"), new Position("Graphic design intern"),
                 new Id("EID2024-5678"),

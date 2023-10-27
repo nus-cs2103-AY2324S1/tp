@@ -95,10 +95,10 @@ public class EmployeeTest {
 
         // different isOnLeave -> returns false
         editedAlice = new EmployeeBuilder(ALICE).withIsOnLeave(VALID_IS_ON_LEAVE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
 
         // different overtime hours left -> returns false
         editedAlice = new EmployeeBuilder(ALICE).withOvertimeHours(VALID_OVERTIME_HOURS_BOB).build();
-
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -108,7 +108,8 @@ public class EmployeeTest {
                 + ", position=" + ALICE.getPosition() + ", id=" + ALICE.getId() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", salary=" + ALICE.getSalary()
                 + ", departments=" + ALICE.getDepartments() + ", isOnLeave=" + ALICE.getIsOnLeave()
-                + ", overtimeHours=" + ALICE.getOvertimeHours() + "}";
+                + ", overtimeHours=" + ALICE.getOvertimeHours()
+                + ", leaves=" + ALICE.getLeaveList() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
