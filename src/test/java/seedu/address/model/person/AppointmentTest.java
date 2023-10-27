@@ -24,14 +24,16 @@ public class AppointmentTest {
         Doctor invalidDoctor = null;
         Patient validPatient = AMY;
         LocalDateTime validAppointmentTime = LocalDateTime.parse("2022-02-14 13:30:00");
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidDoctor, validPatient, validAppointmentTime));
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidDoctor, validPatient,
+                validAppointmentTime));
     }
     @Test
     public void constructor_invalidPatient_throwsIllegalArgumentException() {
         Doctor validDoctor = DEREK;
         Patient invalidPatient = null;
         LocalDateTime validAppointmentTime = LocalDateTime.parse("2022-02-14 13:30:00");
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validDoctor, invalidPatient, validAppointmentTime));
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(validDoctor, invalidPatient,
+                validAppointmentTime));
     }
 
     @Test
@@ -39,7 +41,8 @@ public class AppointmentTest {
         Doctor validDoctor = DEREK;
         Patient validPatient = AMY;
         LocalDateTime invalidAppointmentTime = null;
-        assertThrows(IllegalArgumentException.class, () -> new Appointment(validDoctor, validPatient, invalidAppointmentTime));
+        assertThrows(IllegalArgumentException.class, () -> new Appointment(validDoctor, validPatient,
+                invalidAppointmentTime));
     }
 
     @Test
