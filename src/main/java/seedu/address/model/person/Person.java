@@ -106,7 +106,7 @@ public class Person {
      *
      * @param tags The tags to be added.
      */
-    public void addTag(Set<Tag> tags) {
+    public void addTags(Set<Tag> tags) {
         this.tags.addAll(tags);
     }
 

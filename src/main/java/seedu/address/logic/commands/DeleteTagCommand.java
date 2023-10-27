@@ -11,6 +11,9 @@ import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
+/**
+ * The command handler for {@code delete tag} command
+ */
 public class DeleteTagCommand extends DeleteCommand {
     public static final String SECONDARY_COMMAND_WORD = "tag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " "
