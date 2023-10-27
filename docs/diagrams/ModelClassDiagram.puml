@@ -19,6 +19,13 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Nric
+Class LicencePlate
+Class Policy
+Class Remarks
+Class PolicyNumber
+Class PolicyDate
+Class Company
 
 Class I #FFFFFF
 }
@@ -44,10 +51,11 @@ Person *--> Address
 Person *--> "*" Tag
 Person *--> Nric
 Person *--> LicencePlate
-Person *--> "0..1" Remark
+Person *--> "0..1" Remarks
 Person *--> Policy
-Policy *--> PolicyName
+Policy *--> PolicyNumber
 Policy *--> "2" PolicyDate
+Policy *--> Company
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

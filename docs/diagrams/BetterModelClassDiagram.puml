@@ -24,5 +24,6 @@ Person *--> "0..1" Remark
 Person *--> Policy
 Policy *--> PolicyName
 Policy *--> "2" PolicyDate
+Policy *--> Company
 
 @enduml
