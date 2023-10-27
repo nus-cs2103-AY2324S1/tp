@@ -62,7 +62,7 @@ public class ReportCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("id", targetId)
+                .add("targetId", targetId)
                 .toString();
     }
 }
