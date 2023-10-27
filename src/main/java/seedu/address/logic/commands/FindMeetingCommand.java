@@ -42,6 +42,7 @@ public class FindMeetingCommand extends Command {
     public CommandResult execute(Model model) {
         logger.info("Begin FindMeetingCommand execution");
         requireNonNull(model);
+        model.setViewedMeetingIndex(null);
         model.updateFilteredMeetingList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_MEETINGS_LISTED_OVERVIEW, model.getFilteredMeetingList().size()));

@@ -40,9 +40,9 @@ public class DeleteMeetingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_MEETING_DISPLAYED_INDEX);
         }
 
+        model.setViewedMeetingIndex(null);
         Meeting meetingToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteMeeting(meetingToDelete);
-        model.setViewedMeetingIndex(null);
         return new CommandResult(String.format(MESSAGE_DELETE_MEETING_SUCCESS, Messages.format(meetingToDelete)));
     }
 

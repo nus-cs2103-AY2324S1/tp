@@ -170,16 +170,15 @@ As such, this section shall only detail the implementation of the `viewc` comman
 
 When `viewc 2` is used, an instance of a `ViewContactCommand` (`ViewMeetingCommand` in the case of `viewm`) is created as shown in the following Sequence Diagram. This step does not differ from the way other commands have been shown to be created. The argument for our example would just be `2`, which would be stored as the `targetIndex` field of the `ViewContactCommand` object.
 
-![ViewContactCommandSequenceDiagram](images/tracing/ViewContactCommandSequenceDiagram-View%20Contact%20Command%20Sequence.png)
+![ViewContactCommandSequenceDiagram](images/tracing/ViewContactCommandSequenceDiagram-ViewContactCommandSequence.png)
 
 Once the instance of `ViewContactCommand` is created, it is executed. During execution, the command stores the contents of its `targetIndex` field in the `ModelManager` using its `setViewedPersonIndex` method as shown in the next Sequence Diagram. For `ViewMeetingCommand` it would use the `setViewedMeetingIndex` method instead.
 
-![StoreViewedItemsToModelDiagram](images/tracing/ViewCommandsSequenceDiagram-Store%20viewed%20Items%20to%20Model.png)
+![StoreViewedItemsToModelDiagram](images/tracing/ViewCommandsSequenceDiagram-StoreViewedItemsToModel.png)
 
 Once the indexes of the `Person` and `Meeting` objects to view (if any) are stored in `ModelManager`, their corresponding `Person` and `Meeting` objects (in this case the 2nd `Person` as displayed on the list) are obtained by the `MainWindow` as a `Pair` through the `getViewedItems` method of the `LogicManager` class. As such, both objects can then be forwarded to the `InfoDisplayPanel` using `setViewedModel`, which then displays detailed information of both objects. This process is denoted in the final Sequence Diagram below.
 
-![ForwardViewedPersonMeetingtoUiDiagram](images/tracing/UiViewItemsSequenceDiagram-Forward%20Viewed%20Person%20&%20Meeting%20to%20Ui.png)
-
+![ForwardViewedPersonMeetingtoUiDiagram](images/tracing/UiViewItemsSequenceDiagram-ForwardViewedPerson&MeetingToUi.png)
 #### Design Considerations and Rationale
 
 1. Passing viewed `Person` and `Meeting` from Model to Ui through Logic:
@@ -191,7 +190,11 @@ Once the indexes of the `Person` and `Meeting` objects to view (if any) are stor
    - Storing a copy of the objects was done initially but led to a display issue.
    - When the fields of any currently viewed item are edited, the display does not update as the copy of the original viewed item does not get updated as well.
    - Storing the `Index` fixes this issue as the `Person` and `Meeting` objects are only forwarded to the Ui after the execution of a command.
-   - This does lead to a separate issue where deleting a `Person` or `Meeting` object might lead to the wrong item being displayed due to a change in displayed list index. A simple solution is to simply reset the viewed item in question to nothing until their respective view commands are used again.
+4. As a continuation to point 3, this leads to a new issue with commands that can modify the display list length/order such as `editc`, `findc`, `deletec` and their meeting variants.
+   - Since the stored `Index` may now reference a different item, or even point out-of-bounds in the case of the display list being shortened, this implementation may potentially lead to unpredictable results for both view commands.
+   - For the case of `editc` and `editm`, this is judged to not be an issue as the view commands still obey their definition of displaying the item at a specified list index.
+   - For the case of `deletec`, `deletem`, `findc` and `findm`, a simple fix is to simply set the stored `Index` to null only for these commands.
+
 
 ### Find meeting feature
 

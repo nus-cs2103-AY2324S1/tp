@@ -15,7 +15,7 @@ import seedu.address.commons.util.ToStringBuilder;
 public class LastContactedTime {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Last Contacted Time should have the format [dd.mm.yyyy HHmm] and Start cannot be after End\n"
+            "Last Contacted Time should have the format [dd.mm.yyyy HHmm]\n"
             + "eg. 18.09.2023 1500 represents 18 September 2023, 3PM";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy, HHmm");
     private LocalDateTime lastContactedTime;

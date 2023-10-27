@@ -115,7 +115,7 @@ public class AddressBookParserTest {
     public void parseCommand_findc() throws Exception {
         LocalDateTime lastContacted = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         FindCommand command = (FindCommand) parser
-                .parseCommand(FindCommand.COMMAND_WORD + " n/Alice p/913 e/gmail l/20.09.2023 1000 s/Active t/friend");
+                .parseCommand(FindCommand.COMMAND_WORD + " n/Alice p/913 e/gmail lc/20.09.2023 1000 s/Active t/friend");
         assertEquals(new FindCommand(
                 preparePersonPredicate(new String[]{"Alice", "913", "gmail", "Active", "friend"}, lastContacted)),
                 command);
