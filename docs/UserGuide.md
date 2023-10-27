@@ -35,9 +35,10 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 ### Using the application
 
 1. Type the command in the command box and press Enter to execute it.
+   <img width="728" alt="Screenshot 2023-10-27 at 3 14 07 PM 1" src="https://github.com/itsNatTan/tp/assets/64185574/a4a8dbd2-94ff-417d-84a4-175bf85ff100">
 
    
-2. 
+2. The image below shows the result of typing in a command. A log message will be displayed below the command box to give information about the outcome of the command.
    <img width="729" alt="Screenshot 2023-10-27 at 3 11 50 PM" src="https://github.com/itsNatTan/tp/assets/64185574/48b74efc-2a39-48d5-b0aa-70f165484c5e">
 
 
