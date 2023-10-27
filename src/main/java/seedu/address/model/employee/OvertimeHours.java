@@ -50,6 +50,6 @@ public class OvertimeHours implements Comparable<OvertimeHours> {
 
     @Override
     public int compareTo(OvertimeHours other) {
-        return value - other.value;
+        return Integer.compare(value, other.value);
     }
 }
