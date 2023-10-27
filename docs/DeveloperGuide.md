@@ -159,6 +159,23 @@ The user can add a new Band entity to the storage through the `addb` Command.
 Within the execute method of the command, a check is done to ensure that the model does not currently contain the band
 to be added. This is achieved through the use of `Model#hasBand(Band)` method.
 
+### Tagging a Musician Feature
+
+#### Types of Tags
+
+There are three types of tags: 
+
+* the general tag which denotes anything noteworthy about a specific musician;
+* the `instrument` tag which denotes what instrument the musician specialises in;
+* the `genre` tag which denotes what genre the musician specialises in.
+
+There are no input restriction on the general tag, but there are input validation for `instrument` and `genre` tags against a pre-defined fix set of values to prevent typo and irrelevant information to be keyed in mistakenly.
+
+The three types of tags are implemented in a class hierarchy shown below. The `instrument` and `genre` tags are the subclasses of the general `tag` class. They all have a single attribute called `tagName`, which denotes the content of the tag. However, they have different static methods for checking the validity of the inputs. While `isValidTag(String)` allows any alphanumeric characters, `isValidInstrument(String)` and `isValidGenre(String)` checks for the semantics (against a comprehensive list of instruments/genres) to prevent any input that does not make sense or has typos.
+
+### Filtering Musicians by Name and Tags Feature
+To be Added.
+
 
 ### \[Proposed\] Undo/redo feature
 
