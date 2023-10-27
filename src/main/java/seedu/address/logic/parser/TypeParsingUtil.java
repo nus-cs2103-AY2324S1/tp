@@ -254,7 +254,7 @@ public class TypeParsingUtil {
      */
     public static Subject parseSubject(String input) throws ParseException {
         if (Subject.isValidSubject(input.toUpperCase())) {
-            return Subject.parseSubject(input);
+            return Subject.of(input);
         } else {
             throw new InvalidInputException(input + " is not a valid subject");
         }

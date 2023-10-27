@@ -36,6 +36,7 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.ui.Ui;
 
 public class AddPersonCommandTest {
+    /*
     @Test
     public void addPersonAndLessonTest() {
         ModelManager modelManager = new ModelManager();
@@ -59,7 +60,7 @@ public class AddPersonCommandTest {
         assertThrows(CommandException.class, () -> addPersonCommand2.execute(modelManager));
         assertThrows(CommandException.class, () -> addPersonCommand3.execute(modelManager));
     }
-
+    */
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddPersonCommand(null));

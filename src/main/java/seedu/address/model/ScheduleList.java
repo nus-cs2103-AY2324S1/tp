@@ -11,7 +11,7 @@ import seedu.address.model.lessons.Schedule;
 
 /**
  * Wraps all data at the schedule-list level
- * Duplicates are not allowed (by .isSameLesson comparison)
+ * Duplicates are not allowed (by .equals comparison)
  */
 public class ScheduleList implements ReadOnlySchedule {
 

@@ -16,14 +16,13 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
- * A lesson is considered unique by comparing using {@code Lesson#isSameLesson(Lesson)}. As such, adding and updating of
+ * A lesson is considered unique by comparing using {@code Lesson#equals(Lesson)}. As such, adding and updating of
  * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Lesson#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Lesson#isSameLesson(Lesson)
  */
 public class Schedule implements Iterable<Lesson> {
 
@@ -64,7 +63,7 @@ public class Schedule implements Iterable<Lesson> {
     public boolean contains(Lesson toCheck) {
         requireNonNull(toCheck);
         System.out.println(internalSchedule);
-        return internalSchedule.stream().anyMatch(toCheck::isSameLesson);
+        return internalSchedule.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -113,7 +112,7 @@ public class Schedule implements Iterable<Lesson> {
             throw new LessonNotFoundException();
         }
 
-        if (!target.isSameLesson(editedLesson) && contains(editedLesson)) {
+        if (!target.equals(editedLesson) && contains(editedLesson)) {
             throw new DuplicatePersonException();
         }
 
@@ -195,7 +194,7 @@ public class Schedule implements Iterable<Lesson> {
     private boolean lessonsAreUnique(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {
             for (int j = i + 1; j < lessons.size(); j++) {
-                if (lessons.get(i).isSameLesson(lessons.get(j))) {
+                if (lessons.get(i).equals(lessons.get(j))) {
                     return false;
                 }
             }

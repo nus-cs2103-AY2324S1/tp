@@ -6,9 +6,10 @@ import java.util.List;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ScheduleList;
-import seedu.address.model.listentries.Lesson;
-import seedu.address.model.listentries.Task;
-import seedu.address.model.lists.TaskList;
+import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
+import seedu.address.model.lessons.TaskList;
+
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

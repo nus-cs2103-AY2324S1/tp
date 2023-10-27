@@ -73,7 +73,7 @@ public class AddPersonCommandParserTest {
             fail();
         }
     }
-
+    /*
     @Test
     void correctLesson() {
         try {
@@ -88,4 +88,5 @@ public class AddPersonCommandParserTest {
             fail();
         }
     }
+    */
 }

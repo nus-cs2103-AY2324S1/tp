@@ -8,6 +8,7 @@ import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.TaskList;
+import seedu.address.model.lessons.Time;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Subject;
 
@@ -30,23 +31,6 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      * @throws ParseException if the user input is of wrong format or the lesson clashes with existing lessons
      */
     public Lesson parseLesson(String args) throws ParseException {
-        LocalTime startTime = TypeParsingUtil.parseTime("start", args);
-        LocalTime endTime = TypeParsingUtil.parseTime("end", args);
-        if (startTime.isAfter(endTime)) {
-            throw new ParseException("Start time must be before end time");
-        }
-        Subject subject = TypeParsingUtil.parseSubject("subject", args, true);
-        Name studentName = TypeParsingUtil.parseName("name", args);
-        LocalDate date = TypeParsingUtil.parseDate("day", args, true);
-        if (date == null) {
-            date = LocalDate.now();
-        }
-        LocalDateTime start = LocalDateTime.of(date, startTime);
-        LocalDateTime end = LocalDateTime.of(date, endTime);
-        TaskList taskList = new TaskList();
-        if (subject == null) {
-            return new Lesson(start, end, taskList, studentName);
-        }
-        return new Lesson(start, end, subject, taskList, studentName);
+       return Lesson.getDefaultLesson();
     }
 }

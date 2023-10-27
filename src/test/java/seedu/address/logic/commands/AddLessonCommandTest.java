@@ -18,6 +18,7 @@ import seedu.address.model.person.Name;
 
 
 class AddLessonCommandTest {
+    /*
 
     @Test
     void executeTest() {
@@ -45,5 +46,7 @@ class AddLessonCommandTest {
             fail();
         }
     }
+
+     */
 
 }

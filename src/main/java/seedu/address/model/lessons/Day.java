@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ListEntryField;
 
 /**
  * Represents a Day in the application.
