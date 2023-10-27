@@ -8,7 +8,7 @@
 [![CI Status](https://github.com/AY2324S1-CS2103T-T11-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-T11-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T11-1/tp/graph/badge.svg?token=V7P4WC496H)](https://codecov.io/gh/AY2324S1-CS2103T-T11-1/tp)
 
-<img alt="Ui" src="images/Ui.png" width="800" >
+<img alt="Ui" src="images/Ui.png" width="650" >
 
 **_Class Manager 2023_ is a desktop application for managing your students' details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 

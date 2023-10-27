@@ -73,7 +73,7 @@ public class LoadCommand extends Command {
         }
         model.setAddressBookFilePath(filePath);
         model.setAddressBook(newData);
-        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true);
+        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true, false);
     }
 
     /**
