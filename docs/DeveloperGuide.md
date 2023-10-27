@@ -245,7 +245,7 @@ Given below is an example usage scenario and how the search mechanism behaves at
 
 Step 1. The user launches the application.
 
-Step 2. The user executes `search n/john st/offered t/swe` command to filter candidates having the name alex,
+Step 2. The user executes `search n/john st/offered t/swe` command to filter candidates having the name john,
 offered status and tagged as swe. 
 
 The following sequence diagram shows how the search operation works:
