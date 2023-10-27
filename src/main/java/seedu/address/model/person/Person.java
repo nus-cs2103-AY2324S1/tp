@@ -33,4 +33,6 @@ public abstract class Person {
 
     public abstract String toString();
 
+    public abstract String detailsToCopy();
+
 }

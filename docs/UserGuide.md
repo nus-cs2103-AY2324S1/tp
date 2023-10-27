@@ -28,15 +28,14 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. 
-   Some example commands you can try:
+   Try the following commands in order:
 
-   * viewMembers : view all members in the members list.
-  
-   * viewApplicants : view all applicants in the applicants list.
-
-   * addMember /name Alicia /number 92345678 : The member will be added with the specified name and phone number
-
-   * deleteMember 3 : The specified member at the index will be deleted from the member list. (index starts at 1)
+   1. `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia` : Adds a member named Alicia to the members list
+   2. `addm /name John Doe /phone 92345677 /email Johndoe@xyz.com /tele @Johndoe` : Adds a member named John Doe to the members list
+   3. `findm Alicia` : Only member Alicia will be listed under the members list
+   4. `findm John Doe` : Only member John Doe will be listed under the members list
+   5. `findm Alicia Johndoe@xyz.com` : Both members Alicia and John Doe will be listed under the members list
+   6. `delm 2` : Member John Doe will be deleted from the members list
 
 
 6. Refer to the [Features](#features) below for details of each command.
@@ -46,221 +45,344 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 ## Features
 
 ## Add Member
+Adds a new member to the members list. Tag field is optional.
 
-### Usage: 
+### Usage:
+`addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
-`addMember /name {memberName} /number {phoneNumber} /email {email} /tele {telegramHandle}`
+`addMember /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
 ### Acceptable values for parameters:
 - memberName: Only alphabetical characters, @, () are allowed
-- phoneNumber: Only 8 digits allowed, must start with 6, 8, or 9
+- phoneNumber: Only numbers are allowed
 - email: Must follow the format of xyz@abc.wsd
-- telegramHandle: Only alphanumeric characters, and underscore, are allowed
+- telegramHandle: Only alphanumeric characters and underscore are allowed
+- tag: Only alphanumeric characters are allowed
 
 ### Example of usage:
+`addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`
 
-`addMember /name Alicia /number 92345678`
+`addMember /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`
 
 ### Expected Outcome:
 ```
-The member will be added with specified details: name and phone number
+New member added: Alicia
 ```
 
-### If member added successfully (Success)
+### If any field(s) not specified:
 
 ```
-Got it! This member has been added: Alicia (Phone number: 92345678)
+Invalid command format! 
 ```
 
-### If name or number parameter is not specified (Failure):
+### If name is invalid:
 
 ```
-Incorrect Usage! Usage: addMember /name {memberName} /number {phoneNumber}
+Names should only contain alphanumeric characters and spaces, and it should not be blank
 ```
 
-### If name contains invalid characters (Failure):
+### If phone number is invalid:
 
 ```
-Name can only contain alphabetical characters and: @, (, )
+Phone numbers should only contain numbers, and it should be at least 3 digits long
 ```
 
-### If phone number is invalid (Failure):
+### If telegram handle is invalid:
 
 ```
-Phone number should be 8 numbers, and must start with 6, 8, or 9
+Telegram handle should follow the format: @exampleHandle 
 ```
 
-### If telegram handle is invalid (Failure):
-
+### If tag is invalid:
 ```
-Telegram handles can only contain alphanumeric characters and underscore!
+Tags names should be alphanumeric
 ```
 
 ## Delete Member
+The member at the specified index will be deleted from the members list.
 
-### Usage: 
+### Usage:
+`delm {index}`
 
 `deleteMember {index}`
 
+### Acceptable values for parameters:
+- index: Only numbers are allowed, starting from 1
+
+### Example of usage:
+`delm 1`
+
+`deleteMember 1`
+
 ### Expected Outcome:
 ```
-The specified member at the index will be deleted from the member list.(index starts at 1)
+Deleted member: Alicia
 ```
 
-### If member is found (Success):
+### If index is out of range:
 
 ```
-Got it! This member has been removed: {memberName}
+The member index provided is invalid
 ```
 
-### If index is out of range (Failure):
+### If there are no members:
 
 ```
-Invalid index! Use viewMembers to see all members and their indices.
+The member index provided is invalid
 ```
 
-### If there are 0 members (Failure):
-
-```
-There are no members to be deleted.
-```
-
-### Acceptable values for parameters:
-- index: Index of member to be deleted (starting from 1).
-
-## View Members
+## Edit Member
+The member at the specified index will have its specified fields edited. At least 1 field to be specified, not all fields have to be specified.
 
 ### Usage:
+`editm {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
+
+`editMember {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
+
+
+### Acceptable values for parameters:
+- index: Only numbers are allowed, starting from 1
+- memberName: Only alphabetical characters, @, () are allowed
+- phoneNumber: Only numbers are allowed
+- email: Must follow the format of xyz@abc.wsd
+- telegramHandle: Only alphanumeric characters and underscore are allowed
+- tag: Only alphanumeric characters are allowed
+
+### Example of usage:
+`editm 1 /name Aliciaa /phone 12345678`
+
+`editMember 1 /name Aliciaa /phone 12345678`
+
+### Expected Outcome:
+```
+Edited member: Aliciaa
+```
+
+### If name is invalid:
+
+```
+Names should only contain alphanumeric characters and spaces, and it should not be blank
+```
+
+### If phone number is invalid:
+
+```
+Phone numbers should only contain numbers, and it should be at least 3 digits long
+```
+
+### If telegram handle is invalid:
+
+```
+Telegram handle should follow the format: @exampleHandle 
+```
+
+### If tag is invalid:
+```
+Tags names should be alphanumeric
+```
+
+## Find Member(s)
+Find and generate a list of all existing member(s) whose information contain any of specified keyword(s). Keywords to be separated by a spacing between 2 keywords.
+
+### Usage:
+`findm {keyword(s)}`
+
+`findMember {keyword(s)}`
+
+### Acceptable values for parameters:
+- keyword(s): All alphanumerical characters are allowed
+
+### Example of usage:
+`findm Alicia`
+
+`findMember Alicia`
+
+### Expected Outcome:
+```
+1 member listed!
+```
+
+### If unable to find member(s) with matching keyword(s)
+```
+0 members listed!
+```
+
+## View Member(s)
+Generates a list of all existing member(s) in the members list.
+
+### Usage:
+`viewm`
 
 `viewMembers`
 
 ### Expected Outcome:
-Generates a list of all existing members in the members list.
-
-### If there is at least 1 member (Success):
 
 ```
-Got it! These are the current members in the CCA.
-	1. Alicia
-	2. Rui Jia
-	3. Jonas
-	4. Win Sheng
-	5. Alfred
-```
-
-### If there are 0 members (Failure):
-```
-There are no members in the CCA!
+Listed all members
 ```
 
 ## Add Applicant
+Adds a new applicant to the applicants list.
 
-### Expected Outcome:
-The specified applicant will be added to the applicant list.
+### Usage:
+`adda /name {applicantName} /phone {phoneNumber}`
 
-### Usage: 
-
-`addApplicant /name {applicantName} /email {email}`
+`addApplicant /name {applicantName} /phone {phoneNumber}`
 
 ### Acceptable values for parameters:
-applicantName: Only alphabetical characters, @, () are allowed
-email: Must follow the format of xyz@abc.wsd
+- applicantName: Only alphabetical characters, @, () are allowed
+- phoneNumber: Only numbers are allowed
 
 ### Example of usage:
+`adda /name Alicia /phone 92345678`
 
-`addApplicant /name Alicia /email abc@gmail.com`
+`addApplicant /name Alicia /phone 92345678`
 
 ### Expected Outcome:
-The applicant will be added with specified details: name and email.
-
-### If member added successfully (Success):
-
 ```
-Got it! This applicant has been added: Alicia (Email : abc@gmail.com)
+New applicant added: Alicia
 ```
 
-### If name or email parameter is not specified (Failure):
+### If any field(s) not specified:
 
 ```
-Incorrect Usage! Usage: addApplicant /name {applicantName} /email {email}
+Invalid command format! 
 ```
 
-### If name contains invalid characters (Failure):
+### If name is invalid:
 
 ```
-Name can only contain alphabetical characters and: @, (, )
+Names should only contain alphanumeric characters and spaces, and it should not be blank
 ```
 
-### If email has invalid format (Failure):
+### If phone number is invalid:
+
 ```
-Email must be in the format of abc@def.ghi
+Phone numbers should only contain numbers, and it should be at least 3 digits long
 ```
 
 ## Delete Applicant
+The applicant at the specified index will be deleted from the applicants list.
 
-### Usage: 
+### Usage:
+`dela {index}`
 
 `deleteApplicant {index}`
 
-### Expected Outcome:
-The specified member at the index will be deleted from the member list. (Index starts at 1)
-
-
-### If applicant is found (Success):
-```
-	Got it! This applicant has been removed: {applicantName}
-```
-
-### If index is out of range (Failure):
-```
-Invalid index! Use viewApplicants to see all members and their indices.
-```
-
-### If 0 members in member list (Failure)
-
-```
-There are no applicants to be deleted.
-```
-
 ### Acceptable values for parameters:
-- index: Index of applicant to be deleted (starting from 1).
+- index: Only numbers are allowed, starting from 1
 
+### Example of usage:
+`dela 1`
 
+`deleteApplicant 1`
 
-## View Applicants
+### Expected Outcome:
+```
+Deleted applicant: Alicia
+```
+
+### If index is out of range:
+
+```
+The applicant index provided is invalid
+```
+
+### If there are no applicants:
+Generates a list of all existing applicants in the applicants list.
+
+```
+The applicant index provided is invalid
+```
+
+## Edit Applicant
+The applicant at the specified index will have its specified fields edited. At least 1 field to be specified, not all fields have to be specified.
 
 ### Usage:
+`edita {index} /name {applicantName} /phone {phoneNumber}`
+
+`editApplicant {index} /name {applicantName} /phone {phoneNumber}`
+
+### Acceptable values for parameters:
+- index: Only numbers are allowed, starting from 1
+- applicantName: Only alphabetical characters, @, () are allowed
+- phoneNumber: Only numbers are allowed
+
+### Example of usage:
+`edita 1 /name Aliciaa /phone 12345678`
+
+`editApplicant 1 /name Aliciaa /phone 12345678`
+
+### Expected Outcome:
+```
+Edited applicant: Aliciaa
+```
+
+### If name is invalid:
+
+```
+Names should only contain alphanumeric characters and spaces, and it should not be blank
+```
+
+### If phone number is invalid:
+
+```
+Phone numbers should only contain numbers, and it should be at least 3 digits long
+```
+
+## Find Applicant(s)
+Find and generate a list of all existing applicant(s) whose information contain any of specified keyword(s). Keywords to be separated by a spacing between 2 keywords.
+
+### Usage:
+`finda {keyword(s)}`
+
+`findApplicant {keyword(s)}`
+
+### Acceptable values for parameters:
+- keyword(s): All alphanumerical characters are allowed
+
+### Example of usage:
+`finda Alicia`
+
+`findApplicant Alicia`
+
+### Expected Outcome:
+```
+1 applicant listed!
+```
+
+### If unable to find applicant(s) with matching keyword(s)
+```
+0 applicants listed!
+```
+
+## View Applicant(s)
+Generates a list of all existing applicant(s) in the applicants list.
+
+### Usage:
+`viewa`
 
 `viewApplicants`
 
 ### Expected Outcome:
-Generates a list of all existing members in the applicant list.
-
-### If there is at least 1 applicant (Success):
 ```
-Got it! These are the applicants for the CCA.
-	1. Alicia
-	2. Rui Jia
-	3. Jonas
-	4. Win Sheng
-	5. Alfred
-```
-
-### If there are 0 applicants (Failure):
-```
-	There are no applicants for the CCA :--(
+Listed all applicants
 ```
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                                                 |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **View Members**    | `viewMembers`                                                                                                                                                                                    |
-| **view Applicants** | `viewApplicants`                                                                                                                                                                                 |
-| **Add Member**      | `addMember /name {memberName} /number {phoneNumber} /email {email} /tele {telegramHandle}`   e.g., `addMember /name Alicia /number 92345678`                                                     |
-| **Add Applicant**   | `addApplicant /name {applicantName} /email {email}` e.g,  `addApplicant /name Alicia /email abc@gmail.com`                                                                                       |
-| **Delete Member**   | `deleteMember INDEX` e.g., `deleteMember 3`                                                                                                                                                      |
-| **Delete Applicant**| `deleteApplicant INDEX`  e.g., `deleteApplicant 3`                                                                                                                                               |
+| Action                | Format                                                                                                   | Example(s)                                                                     |
+|-----------------------|----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| **Add Member**        | `addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`          | `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`        |
+| **Delete Member**     | `delm {index}`                                                                                           | `delm 1`                                                                       |
+| **Edit Member**       | `editm {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}` | `editm 1 /name Aliciaa /phone 12345678`  <br/>`editm 1 /email Aliciaa@xyz.com` |
+| **Find Member(s)**    | `findm {keyword}`                                                                                        | `findm Alicia`<br/>`findm John 92345678`                                       |
+| **View Member(s)**    | `viewm`                                                                                                  | `viewm`                                                                        |
+| **Add Applicant**     | `adda /name {applicantName} /phone {phoneNumber}`                                                        | `adda /name Alicia /phone 92345678`                                            |
+| **Delete Applicant**  | `dela {index}`                                                                                           | `dela 1`                                                                       |
+| **Edit Applicant**    | `edita {index} /name {applicantName} /phone {phoneNumber}`                                               | `edita 1 /name John`<br/>`edita 1 /name Aliciaa /phone 12345678`               |
+| **Find Applicant(s)** | `finda {keyword}`                                                                                        | `finda Alicia`<br/>`finda John 92345678`                                       |
+| **View Applicant(s)** | `viewa`                                                                                                  | `viewa`                                                                        |
 
