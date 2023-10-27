@@ -5,7 +5,7 @@ skinparam ArrowFontSize 12
 start
 :User presses '↓' or '↑' while \nthe command box is selected.;
 
-if () then ([↑]))
+if () then ([↑])
     if() then ([has previous\ncommand])
     :Set the previous command\n in commandBox;
     else ([else])
