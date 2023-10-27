@@ -125,10 +125,6 @@ public class PersonProfile extends UiPart<Region> {
         uiElements.values().stream()
                 .map(UiPart::getRoot)
                 .forEach(vboxChildren::add);
-        vboxChildren.add(new PersonProfileHeader().getRoot());
-        vboxChildren.add(new PersonProfileHeader().getRoot());
-        vboxChildren.add(new PersonProfileHeader().getRoot());
-        vboxChildren.add(new PersonProfileHeader().getRoot()); //todo remove extra elements
         //todo deal with tags
     }
 
@@ -187,7 +183,7 @@ public class PersonProfile extends UiPart<Region> {
                 ? new Name(fields.get(Field.ANIMAL_NAME))
                 : null;
         AnimalType animalType = fields.get(Field.ANIMAL_TYPE) != null
-                ? new AnimalType(fields.get(Field.ANIMAL_TYPE), fields.get(Field.AVAILABILITY))
+                ? new AnimalType(fields.get(Field.ANIMAL_TYPE), availability)
                 : null;
 
         this.person = new Person(name, phone, email, address, housing, availability, animalName, animalType, getTags());
