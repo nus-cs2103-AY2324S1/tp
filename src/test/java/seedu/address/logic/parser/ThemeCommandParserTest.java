@@ -26,8 +26,16 @@ public class ThemeCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsThemeCommand() {
-        ThemeCommand expectedThemeCommand =
+        ThemeCommand expectedThemeCommand1 =
             new ThemeCommand("/view/DarkTheme.css", "dark");
-        assertParseSuccess(parser, "dark", expectedThemeCommand);
+        assertParseSuccess(parser, "dark", expectedThemeCommand1);
+
+        ThemeCommand expectedThemeCommand2 =
+            new ThemeCommand("/view/LightTheme.css", "light");
+        assertParseSuccess(parser, "light", expectedThemeCommand2);
+
+        ThemeCommand expectedThemeCommand3 =
+            new ThemeCommand("/view/BlueTheme.css", "blue");
+        assertParseSuccess(parser, "blue", expectedThemeCommand3);
     }
 }
