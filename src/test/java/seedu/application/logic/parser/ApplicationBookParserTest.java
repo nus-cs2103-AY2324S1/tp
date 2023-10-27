@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.application.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.application.model.job.Company.COMPANY_SPECIFIER;
-import static seedu.application.model.job.Deadline.DEADLINE_SPECIFIER;
-import static seedu.application.model.job.Role.ROLE_SPECIFIER;
-import static seedu.application.model.job.Status.STATUS_SPECIFIER;
+import static seedu.application.logic.parser.CliSyntax.*;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST_JOB;
 
@@ -17,16 +14,11 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.application.logic.commands.AddCommand;
-import seedu.application.logic.commands.ClearCommand;
-import seedu.application.logic.commands.DeleteCommand;
-import seedu.application.logic.commands.EditCommand;
+import seedu.application.logic.commands.*;
 import seedu.application.logic.commands.EditCommand.EditJobDescriptor;
-import seedu.application.logic.commands.ExitCommand;
-import seedu.application.logic.commands.FindCommand;
-import seedu.application.logic.commands.HelpCommand;
-import seedu.application.logic.commands.ListCommand;
+import seedu.application.logic.commands.SortCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
+import seedu.application.model.job.CombinedPredicate;
 import seedu.application.model.job.FieldContainsKeywordsPredicate;
 import seedu.application.model.job.Job;
 import seedu.application.testutil.EditJobDescriptorBuilder;
@@ -76,9 +68,11 @@ public class ApplicationBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-            FindCommand.COMMAND_WORD + " " + ROLE_SPECIFIER
+            FindCommand.COMMAND_WORD + " " + PREFIX_ROLE
                 + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new FieldContainsKeywordsPredicate(ROLE_SPECIFIER, keywords)), command);
+        FieldContainsKeywordsPredicate fieldPredicate = new FieldContainsKeywordsPredicate(PREFIX_ROLE, keywords);
+        CombinedPredicate combinedPredicate = new CombinedPredicate(List.of(fieldPredicate));
+        assertEquals(new FindCommand(combinedPredicate), command);
     }
 
     @Test
@@ -88,12 +82,19 @@ public class ApplicationBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " " + COMPANY_SPECIFIER) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " " + ROLE_SPECIFIER) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " " + DEADLINE_SPECIFIER) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " " + STATUS_SPECIFIER) instanceof ListCommand);
+    public void parseCommand_sort() throws Exception {
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + PREFIX_COMPANY) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + PREFIX_ROLE) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + PREFIX_STATUS) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + PREFIX_INDUSTRY) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + PREFIX_DEADLINE) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + PREFIX_JOB_TYPE) instanceof SortCommand);
     }
 
     @Test

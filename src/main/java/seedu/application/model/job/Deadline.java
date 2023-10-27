@@ -13,7 +13,6 @@ import seedu.application.commons.util.AppUtil;
  */
 public class Deadline {
 
-    public static final String DEADLINE_SPECIFIER = "-d";
     public static final String MESSAGE_CONSTRAINTS =
         "Deadline should be in valid DateTime format: "
             + "MMM dd yyyy HHmm\n"

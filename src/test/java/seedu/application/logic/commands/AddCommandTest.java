@@ -158,11 +158,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void unsortJobs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void sortJobs(FieldComparator comparator) {
             throw new AssertionError("This method should not be called.");
         }

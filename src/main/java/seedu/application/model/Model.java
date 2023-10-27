@@ -87,11 +87,6 @@ public interface Model {
     void updateFilteredJobList(Predicate<Job> predicate);
 
     /**
-     * Restores the jobs in application book to the original unsorted order.
-     */
-    public void unsortJobs();
-
-    /**
      * Sorts the jobs in the application book based on the comparator provided.
      * @param comparator The comparator used to compare 2 jobs.
      */
