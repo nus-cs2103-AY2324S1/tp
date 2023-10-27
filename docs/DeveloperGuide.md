@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `EventListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Event` object residing in the `Model`.
 
 ### Logic component
 
@@ -126,7 +126,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Group` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Group` object per unique group, instead of each `Group` needing their own `Group` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -229,6 +229,43 @@ for empty/null inputs in the Person object by checking if the optional field is 
     * Do not have to account for empty/null inputs in the optional fields when saving the data and testing it
   * Cons:
     * Inconveniences the user as they have to remember a new command to add a person with optional fields.
+
+### Improved find feature
+
+The `find` command in our application displays persons that fit the keyword(s)
+
+#### Implementation
+
+The `find` feature involves checking the current filtered list of persons and filtering out persons with fitting names 
+or groups. This is done using `NameOrGroupContainsKeywordsPredicate`, which enhanced from the original 
+`NameContainsKeywordsPredicate` class. The predicate is then passed to `Model#updateFilteredPersonList(Predicate<Person> predicate)`.
+
+As a result, the `ObservableList<Person>` is updated with the filtered lists of persons.
+The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons.
+
+The enhanced `find` command remains its original ability i.e. find the person whose name fits the keyword. Except it will also
+find person whose group(s) fits the keyword. If a person's group name fits the keyword, it will be shown on the UI, 
+even though the person's name does not fit the keyword(s).
+
+#### Feature details
+1. The `find` command can accept one or more parameter `keyword` for searching person and events.
+2. A `NameOrGroupContainsKeywordsPredicate` will be created and a `Find` command will be created with the predicates.
+3. The `Find` command will then be executed and the `UI` will be updated with the filtered lists of persons.
+
+#### General design considerations
+
+**Aspect: Keyword target differentiation**
+
+- **Alternative 1 (Current choice): Find all persons that fits the keyword.**
+    - Pros:
+        - Easier to implement.
+    - Cons:
+        - Might get unwanted results, which decreases overall experience.
+- **Alternative 2: Differentiate the target of keyword with syntax.**
+    - Pros:
+        - User can find exact person or group.
+    - Cons:
+        - Adding constraint the original command by requiring syntax, which may cause convenience.
 
 ### \[Proposed\] Undo/redo feature
 
