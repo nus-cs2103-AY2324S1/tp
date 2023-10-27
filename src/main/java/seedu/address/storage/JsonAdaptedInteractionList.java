@@ -8,33 +8,34 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.person.interaction.InteractionList;
 
 /**
  * Jackson-friendly version of {@link Interaction}.
  */
 public class JsonAdaptedInteractionList {
 
-    private final List<JsonAdaptedInteraction> modules = new ArrayList<>();
+    private final List<JsonAdaptedInteraction> interactions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableDatabase} with the given modules.
      */
     @JsonCreator
-    public JsonAdaptedInteractionList(@JsonProperty("interactions") List<JsonAdaptedInteraction> modules) {
-        this.modules.addAll(modules);
+    public JsonAdaptedInteractionList(@JsonProperty("interactions") List<JsonAdaptedInteraction> interactions) {
+        this.interactions.addAll(interactions);
     }
 
     /**
-     * Converts the list into the form required in {@code ModuleDatabase}.
+     * Converts the list into the form required in {@code Interaction}.
      *
-     * @throws IllegalValueException if there were any data constraints violated.
+     * @throws IllegalValueException if there were any input constraints violated.
      */
-    public DbModuleList toDbModuleList() throws IllegalValueException {
-        DbModuleList dbModuleList = new DbModuleList();
-        for (JsonAdaptedDbModule jsonAdaptedDbModule : modules) {
-            DbModule dbModule = jsonAdaptedDbModule.toModelType();
-            dbModuleList.addDbModule(dbModule);
+    public InteractionList toInteractionList() throws IllegalValueException {
+        InteractionList interactionList = new InteractionList();
+        for (JsonAdaptedInteraction jsonAdaptedInteraction : interactions) {
+            Interaction interaction = jsonAdaptedInteraction.toModelType();
+            interactionList.addInteraction(interaction);
         }
-        return dbModuleList;
+        return interactionList;
     }
 }

@@ -7,8 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -20,6 +18,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.interaction.Interaction.Outcome;
+import seedu.address.model.person.interaction.InteractionList;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for InteractionCommand.
@@ -34,9 +33,9 @@ public class InteractionCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() throws CommandException {
         Person personToAddInteractions = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ArrayList<Interaction> interactions = personToAddInteractions.getInteractions();
+        InteractionList interactions = new InteractionList(personToAddInteractions.getInteractions());
         Interaction interactionToAdd = new Interaction(INTERACTION_NOTE_STUB, INTERACTION_OUTCOME_STUB);
-        interactions.add(interactionToAdd);
+        interactions.addInteraction(interactionToAdd);
 
         Person editedPerson = new Person.PersonBuilder(personToAddInteractions)
                 .withInteractions(interactions)
