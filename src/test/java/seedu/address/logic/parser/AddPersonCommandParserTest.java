@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
 
 
 
-public class AddCommandParserTest {
+public class AddPersonCommandParserTest {
     private AddCommandParser p = new AddCommandParser();
 
     @Test

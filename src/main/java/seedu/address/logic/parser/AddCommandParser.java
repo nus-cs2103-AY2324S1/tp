@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.person.Person;
@@ -9,14 +9,14 @@ import seedu.address.model.person.Remark;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddCommandParser implements Parser<AddCommand> {
+public class AddCommandParser implements Parser<AddPersonCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public AddPersonCommand parse(String args) throws ParseException {
         Person person = parsePerson(args);
 
         // I see no reason why execute needs to take in a Model. Since model is not singleton, global variable.
@@ -31,10 +31,10 @@ public class AddCommandParser implements Parser<AddCommand> {
                 subStrAfterLessonFlag = "-name " + person.getName() + subStrAfterLessonFlag;
             }
             Lesson lesson = new AddLessonCommandParser().parseLesson(subStrAfterLessonFlag);
-            return new AddCommand(person, lesson);
+            return new AddPersonCommand(person, lesson);
         }
 
-        return new AddCommand(person);
+        return new AddPersonCommand(person);
     }
 
     /**

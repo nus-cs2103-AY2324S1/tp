@@ -35,7 +35,7 @@ import seedu.address.model.state.State;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.ui.Ui;
 
-public class AddCommandTest {
+public class AddPersonCommandTest {
     @Test
     public void addPersonAndLessonTest() {
         ModelManager modelManager = new ModelManager();
@@ -43,26 +43,26 @@ public class AddCommandTest {
         Person p2 = new Person(new Name("Wang"));
         Lesson lesson1 = new Lesson(LocalDateTime.now(), LocalDateTime.now().plusHours(1), new TaskList());
         Lesson lesson2 = new Lesson(LocalDateTime.now(), LocalDateTime.now().plusHours(1), new TaskList());
-        AddCommand addCommand1 = new AddCommand(p1, lesson1);
-        AddCommand addCommand2 = new AddCommand(p1, lesson2);
-        AddCommand addCommand3 = new AddCommand(p2, lesson1);
+        AddPersonCommand addPersonCommand1 = new AddPersonCommand(p1, lesson1);
+        AddPersonCommand addPersonCommand2 = new AddPersonCommand(p1, lesson2);
+        AddPersonCommand addPersonCommand3 = new AddPersonCommand(p2, lesson1);
         assertFalse(modelManager.hasPerson(p1));
         assertFalse(modelManager.hasLesson(lesson1));
         try {
-            addCommand1.execute(modelManager);
+            addPersonCommand1.execute(modelManager);
             assertTrue(modelManager.hasPerson(p1));
-            assertEquals(p1, addCommand1.getPerson());
+            assertEquals(p1, addPersonCommand1.getPerson());
             assertTrue(modelManager.hasLesson(lesson1));
         } catch (CommandException e) {
             fail();
         }
-        assertThrows(CommandException.class, () -> addCommand2.execute(modelManager));
-        assertThrows(CommandException.class, () -> addCommand3.execute(modelManager));
+        assertThrows(CommandException.class, () -> addPersonCommand2.execute(modelManager));
+        assertThrows(CommandException.class, () -> addPersonCommand3.execute(modelManager));
     }
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddPersonCommand(null));
     }
 
     @Test
@@ -70,9 +70,9 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddPersonCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -80,24 +80,24 @@ public class AddCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
+        AddPersonCommand addPersonCommand = new AddPersonCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        AddPersonCommand addAliceCommand = new AddPersonCommand(alice);
+        AddPersonCommand addBobCommand = new AddPersonCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddPersonCommand addAliceCommandCopy = new AddPersonCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -112,9 +112,9 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        AddPersonCommand addPersonCommand = new AddPersonCommand(ALICE);
+        String expected = AddPersonCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        assertEquals(expected, addPersonCommand.toString());
     }
 
     /**
@@ -266,6 +266,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasCurrentShownEntry() {
+            return false;
+        }
+
+        @Override
         public boolean hasLessonClashWith(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -315,6 +320,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public ReadOnlySchedule getScheduleList() {
+            return new seedu.address.model.ScheduleList();
         }
     }
 

@@ -9,7 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -33,8 +33,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        assertTrue(parser.parseCommand(AddCommand.COMMAND_WORD + " -name Yiwen") instanceof AddCommand);
-        assertTrue(parser.parseCommand(AddCommand.COMMAND_WORD + " -name Yiwen -phone 12345678") instanceof AddCommand);
+        assertTrue(parser.parseCommand(AddPersonCommand.COMMAND_WORD + " -name Yiwen") instanceof AddPersonCommand);
+        assertTrue(parser.parseCommand(AddPersonCommand.COMMAND_WORD + " -name Yiwen -phone 12345678") instanceof AddPersonCommand);
     }
 
     @Test
