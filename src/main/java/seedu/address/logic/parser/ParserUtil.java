@@ -204,7 +204,7 @@ public class ParserUtil {
         for (String tag : tagArr) {
             tag = tag.trim();
             if (!Tag.isValidTagName(tag)) {
-                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
             }
             tagList.add(tag);
         }
