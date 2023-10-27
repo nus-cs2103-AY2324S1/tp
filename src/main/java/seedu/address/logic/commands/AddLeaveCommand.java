@@ -36,12 +36,12 @@ public class AddLeaveCommand extends Command {
             + PREFIX_TO + "END DATE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "EID1234-5678 "
-            + PREFIX_FROM + "26-12-2023 "
-            + PREFIX_TO + "28-12-2023";
+            + PREFIX_FROM + "2023-12-26 "
+            + PREFIX_TO + "2023-12-28";
 
     public static final String MESSAGE_SUCCESS = "New leave period added: %1$s";
     public static final String MISSING_DATE = "No date given! "
-            + "Leaves must have date in dd-MM-yyyy format.";
+            + "Leaves must have date in yyyy-MM-dd format.";
     public static final String MESSAGE_INVALID_DATE_ORDER = "START DATE should not be after END DATE!";
     public static final String MESSAGE_DUPLICATE_LEAVE = "This leave period overlaps with an existing leave";
     public static final String MESSAGE_NOT_ENOUGH_LEAVES = "This leave period exceeds the number of leaves remaining";
