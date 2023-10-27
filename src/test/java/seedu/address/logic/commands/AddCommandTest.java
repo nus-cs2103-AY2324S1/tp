@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
+import static seedu.address.logic.Messages.MESSAGE_BEGIN_AFTER_END;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -51,6 +52,35 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_BeginBeforeEnd_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person validPerson = new PersonBuilder()
+                .withBegin("1500")
+                .withEnd("1600")
+                .build();
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_BeginAfterEnd_throwsCommandException() {
+        Person invalidPerson = new PersonBuilder()
+                .withBegin("2200")
+                .withEnd("2100")
+                .build();
+
+        AddCommand addCommand = new AddCommand(invalidPerson);
+        ModelStub modelStub = new ModelStubWithPerson(invalidPerson);
+
+        assertThrows(CommandException.class, MESSAGE_BEGIN_AFTER_END, () -> addCommand.execute(modelStub));
     }
 
     @Test
