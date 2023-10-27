@@ -10,6 +10,7 @@ public class Appointment {
     private Doctor doctor;
     private Patient patient;
     private LocalDateTime appointmentTime;
+    private String status = "scheduled";
 
     /**
      * Constructs a new appointment with the specified doctor, patient, and appointment time.
@@ -36,6 +37,10 @@ public class Appointment {
         return patient;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public void setAppointmentTime(LocalDateTime appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
@@ -45,6 +50,10 @@ public class Appointment {
 
     public void changePatient(Patient newPatient) {
         this.patient = newPatient;
+    }
+
+    public void changeStatus(String newStatus) {
+        this.status = newStatus;
     }
 
     @Override
@@ -61,6 +70,7 @@ public class Appointment {
         Appointment otherAppointment = (Appointment) other;
         return this.doctor.equals(otherAppointment.doctor)
                 && this.patient.equals(otherAppointment.patient)
-                && this.appointmentTime.equals(otherAppointment.appointmentTime);
+                && this.appointmentTime.equals(otherAppointment.appointmentTime)
+                && this.status.equals(otherAppointment.status);
     }
 }

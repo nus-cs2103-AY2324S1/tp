@@ -87,6 +87,15 @@ public class AppointmentTest {
     }
 
     @Test
+    public void testChangeStatus() {
+        LocalDateTime appointmentTime = LocalDateTime.parse("2022/02/14 13:30:00");
+        String newStatus = "Completed";
+        Appointment newAppointment = new Appointment(DEREK, AMY, appointmentTime);
+        newAppointment.changeStatus(newStatus);
+        assertEquals(newAppointment.getStatus(), newStatus);
+    }
+
+    @Test
     public void equals() {
         LocalDateTime appointmentTime = LocalDateTime.parse("2022/02/14 13:30:00");
         Appointment newAppointment = new Appointment(DEREK, AMY, appointmentTime);
