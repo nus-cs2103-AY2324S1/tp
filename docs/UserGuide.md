@@ -109,8 +109,6 @@ Welcome to TutorConnect! We are excited to get you started with a more efficient
 TutorConnect comes equipped with a [GUI](#glossary) interface that provides visual feedback to you.
 Below is a quick overview of the various components of our interface.
 
-#### Quick Orientation
-
 ![ui overview](images/uiOverview.png)
 
 | Component      | Description                                                                                | 
