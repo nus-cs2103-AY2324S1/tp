@@ -94,18 +94,18 @@ public class EditCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
 
-        if(!Lesson.isValid(editedPerson.getBegin(), editedPerson.getEnd())) {
+        if (!Lesson.isValid(editedPerson.getBegin(), editedPerson.getEnd())) {
             throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
         }
 
-        if(editedPerson.getBegin() == null) {
+        if (editedPerson.getBegin() == null) {
             if (!Lesson.isValid(personToEdit.getBegin(), editedPerson.getEnd())) {
                 throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
             }
         }
 
-        if(editedPerson.getEnd() == null) {
-            if(!Lesson.isValid(editedPerson.getBegin(), personToEdit.getEnd())) {
+        if (editedPerson.getEnd() == null) {
+            if (!Lesson.isValid(editedPerson.getBegin(), personToEdit.getEnd())) {
                 throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
             }
         }
