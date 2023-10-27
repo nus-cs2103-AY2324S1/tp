@@ -339,6 +339,18 @@ clipboard.
 * Step 4: The `CopyApplicantCommand` calls the copies the applicant's details given by the `Applicant` `detailsToCopy()`
   method into the clipboard.
 
+### \[Proposed\] View all available tags
+
+The view tags mechanism lists all available tags in the address book that a user can use to tag a member.
+The `ViewTagsCommand` object's `execute()` method is called. The model object's `getTagList()` method is called. All
+available tags in the address book are shown to the user in the tags list.
+
+<img src="images/TagListClass.png" width="250" />
+
+The implementation will follow the Observer design pattern, where the UI will observe the changes made to the list of tags
+available for the user to tag other members. The `TagsListPanel` will implement the `Observer` interface and the `TagList`
+class will have a method to notify the `Observer` of its changes.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
