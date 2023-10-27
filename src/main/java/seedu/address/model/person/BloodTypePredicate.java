@@ -10,6 +10,9 @@ import seedu.address.commons.util.ToStringBuilder;
 public class BloodTypePredicate implements Predicate<Person> {
     private final String keywords;
 
+    /**
+     * Constructs a predicate that tests that a {@code Person}'s {@code Gender} matches either male or female.
+     */
     public BloodTypePredicate(String keywords) {
         String[] trimmed = keywords.split(" ");
         this.keywords = trimmed[2];
