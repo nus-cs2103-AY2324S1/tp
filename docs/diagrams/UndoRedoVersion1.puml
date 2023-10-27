@@ -4,7 +4,7 @@ skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After command "undo"
+title After command "deleteMember 5"
 
 package Versions <<rectangle>> {
     class Version1 as "<u>cc0:CcaCommander</u>"
@@ -14,6 +14,8 @@ package Versions <<rectangle>> {
 
 Version1 -[hidden]right-> Version2
 Version2 -[hidden]right-> Version3
+
+hide Versions.Version3
 
 class Pointer as "Current Version" #FFFFFF
 

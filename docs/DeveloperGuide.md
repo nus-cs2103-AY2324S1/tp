@@ -190,41 +190,45 @@ performance overhead when viewing members of event or events of member. Alternat
 complexities that are difficult to navigate and this will compound when dealing with other features related to
 attendance. The simpler design of alternative 1 also allows for more rigorous testing. 
 
-### \[Proposed\] Undo/redo feature
+### Undo/Redo Feature
 
-#### Proposed Implementation
+The Undo/Redo feature allows the user to revert commands that were entered wrongly.
 
-The proposed undo/redo mechanism is facilitated by `VersionedCcaCommander`. It extends `CcaCommander` with an undo/redo history, stored internally as an `ccaCommanderStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+This section will explain how the redo and undo features were implemented and the various design considerations when implementing the feature.
 
-* `VersionedCcaCommander#commit()` — Saves the current CCACommander state in its history.
-* `VersionedCcaCommander#undo()` — Restores the previous CCACommander state from its history.
-* `VersionedCcaCommander#redo()` — Restores a previously undone CCACommander state from its history.
+#### Implementation
 
-These operations are exposed in the `Model` interface as `Model#commitCcaCommander()`, `Model#undoCcaCommander()` and `Model#redoCcaCommander()` respectively.
+The undo/redo mechanism is facilitated by `VersionedCcaCommander`. It extends `CcaCommander` with an undo/redo history, stored internally as an `ccaCommanderVersionList` and `versionPointer`. Additionally, it implements the following operations:
+
+* `VersionedCcaCommander#commit(String commitMessage)` — Saves the current CCACommander version and its commit message in its history.
+* `VersionedCcaCommander#undo()` — Restores the previous CCACommander version from its history.
+* `VersionedCcaCommander#redo()` — Restores a previously undone CCACommander version from its history.
+
+These operations are exposed in the `Model` interface as `Model#commit()`, `Model#undo()` and `Model#redo()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedCcaCommander` will be initialized with the initial CCACommander state, and the `currentStatePointer` pointing to that single CCACommander state.
+Step 1. The user launches the application for the first time. The `VersionedCcaCommander` will be initialized with the initial CCACommander version, and the `versionPointer` pointing to that single CCACommander version. This initial CCACommander version will be saved into the `ccaCommanderVersionList`
 
-![UndoRedoState0](images/UndoRedoState0.png)
+![UndoRedoVersion0](images/UndoRedoVersion0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in CCACommander. The `delete` command calls `Model#commitCcaCommander()`, causing the modified state of the CCACommander after the `delete 5` command executes to be saved in the `ccaCommanderStateList`, and the `currentStatePointer` is shifted to the newly inserted CCACommander state.
+Step 2. The user executes `deleteMember 5` command to delete the 5th member in CCACommander. The `deleteMember` command calls `Model#commit(String commitMessage)`, causing the modified version of the CCACommander after the `deleteMember 5` command executes to be saved in the `ccaCommanderVersionList`, and the `versionPointer` is shifted to the newly inserted CCACommander version.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![UndoRedoVersion1](images/UndoRedoVersion1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitCcaCommander()`, causing another modified CCACommander state to be saved into the `ccaCommanderStateList`.
+Step 3. The user executes `createMember n/David …​` to add a new member. The `createMember` command also calls `Model#commit(String commitMessage)`, causing another modified CCACommander version to be saved into the `ccaCommanderVersionList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+![UndoRedoVersion2](images/UndoRedoVersion2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitCcaCommander()`, so the CCACommander state will not be saved into the `ccaCommanderStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commit(String commitMessage)`, so the CCACommander version will not be saved into the `ccaCommanderVersionList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCcaCommander()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous CCACommander state, and restores the CCACommander to that state.
+Step 4. The user now decides that adding the member was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undo()`, which will shift the `versionPointer` once to the left, pointing it to the previous CCACommander version, and restores the CCACommander to that version.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![UndoRedoVersion3](images/UndoRedoVersion3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial CcaCommander state, then there are no previous CcaCommander states to restore. The `undo` command uses `Model#canUndoCcaCommander()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `versionPointer` is at index 0, pointing to the initial CcaCommander version, then there are no previous CcaCommander versions to restore. The `undo` command uses `Model#canUndo()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -237,23 +241,23 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoCcaCommander()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores CCACommander to that state.
+The `redo` command does the opposite — it calls `Model#redo()`, which shifts the `versionPointer` once to the right, pointing to the previously undone version, and restores CCACommander to that version.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `ccaCommanderStateList.size() - 1`, pointing to the latest CCACommander state, then there are no undone CcaCommander states to restore. The `redo` command uses `Model#canRedoCcaCommander()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `versionPointer` is at index `ccaCommanderVersionList.size() - 1`, pointing to the latest CCACommander version, then there are no undone CcaCommander versions to restore. The `redo` command uses `Model#canRedo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the CCACommander, such as `list`, will usually not call `Model#commitCcaCommander()`, `Model#undoCcaCommander()` or `Model#redoCcaCommander()`. Thus, the `ccaCommanderStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the CCACommander, such as `list`, will usually not call `Model#commit(String commitMessage)`, `Model#undo()` or `Model#redo()`. Thus, the `ccaCommanderVersionList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+![UndoRedoVersion4](images/UndoRedoVersion4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitCcaCommander()`. Since the `currentStatePointer` is not pointing at the end of the `ccaCommanderStateList`, all CCACommander states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commit(String commitMessage)`. Since the `versionPointer` is not pointing at the end of the `ccaCommanderVersionList`, all CCACommander versions after the `versionPointer` will be purged. Reason: It no longer makes sense to redo the `createMember n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+![UndoRedoVersion5](images/UndoRedoVersion5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+![CommitActivityDiagram](images/CommitActivityDiagram.png)
 
 #### Design considerations:
 
@@ -265,10 +269,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the member being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
@@ -306,18 +309,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​       | I can …​                                    | So that …​                                                                     |
-|----------|---------------|---------------------------------------------|--------------------------------------------------------------------------------|
-| `* * *`  | beginner user | create a new profile of a CCA member        | I can keep track of their information                                          |
-| `* * *`  | power user    | delete the profile of a CCA member          | I can remove them from the system when needed                                  |
-| `* * *`  | beginner user | list all members in my CCA                  | I can keep track of my CCA strength                                            |
-| `* * *`  | beginner user | add a new event hosted by the CCA           | I can keep track of upcoming activities                                        |
-| `* * *`  | power user    | delete an event                             | I can remove it from the schedule                                              |
-| `* * *`  | power user    | view a list of all events hosted by the CCA | I can see event history                                                        |
-| `* * *`  | beginner user | add a member to an event                    | I can track which members are participating in the event                       |
-| `* * *`  | beginner user | remove a member from an event               | I can amend adding the wrong person to an event                                |
+| Priority | As a …​       | I can …​                                    | So that …​                                                                        |
+|----------|---------------|---------------------------------------------|-----------------------------------------------------------------------------------|
+| `* * *`  | beginner user | create a new profile of a CCA member        | I can keep track of their information                                             |
+| `* * *`  | power user    | delete the profile of a CCA member          | I can remove them from the system when needed                                     |
+| `* * *`  | beginner user | list all members in my CCA                  | I can keep track of my CCA strength                                               |
+| `* * *`  | beginner user | add a new event hosted by the CCA           | I can keep track of upcoming activities                                           |
+| `* * *`  | power user    | delete an event                             | I can remove it from the schedule                                                 |
+| `* * *`  | power user    | view a list of all events hosted by the CCA | I can see event history                                                           |
+| `* * *`  | beginner user | add a member to an event                    | I can track which members are participating in the event                          |
+| `* * *`  | beginner user | remove a member from an event               | I can amend adding the wrong person to an event                                   |
 | `* * *`  | beginner user | view the members who attended an event      | I can estimate the number of members who will attend similar events in the future |
-| `* * *`  | beginner user | view events of a member                     | I can check how involved that particular member is                             |
+| `* * *`  | beginner user | view events of a member                     | I can check how involved that particular member is                                |
+| `* * *`  | power user    | undo a command                              | I can correct any wrong commands that I have entered previously                   |
+| `* * *`  | power user    | redo a command                              | I can correct any wrong undo commands that I have entered previously              |
 
 *{More to be added}*
 

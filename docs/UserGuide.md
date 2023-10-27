@@ -59,6 +59,11 @@ CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to man
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+### Clear all Members and Events: `clear`
+Clears all Member and Event entries from CCACommander.
+
+Format: `clear`
+
 ### Create a Member: `createMember`
 Creates a new member with accompanying personal details (name, gender, phone number, email address, home address, tag).
 
@@ -84,48 +89,28 @@ Examples:
 * `deleteMember 1 ` deletes the 1st member in the member list.
 * `deleteMember 10 ` deletes the 10th member in the member list.
 
-### List all Members and all Events : `list`
+### Edit a Member: `editMember`
+Edits the member at the specified index with the specified fields.
 
-List all members and all events in the CCA in 2 separate columns.
+Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 
-Format: `list`
-
-### View Members of Event : `viewEvent`
-
-Lists all the members of a specified event index.
-
-Format: `viewEvent EVENT_INDEX`
-* Views the members of the event at the specified `EVENT_INDEX`.
-* The index refers to the index number shown in the displayed event list.
-* The index **must be a positive integer** that is within the range of the length of the event list.
-
-Examples:
-* `viewEvent 1` displays members of the 1st event in the event list.
-* `viewEvent 10` displays members of the 10th event in the event list.
-
-### View Events of Member : `viewMember`
-
-Lists all the events of a specified member index.
-
-Format: `viewMember MEMBER_INDEX`
-
-* Views the events of the member at the specified `MEMBER_INDEX`.
 * The index refers to the index number shown in the displayed member list.
 * The index **must be a positive integer** that is within the range of the length of the member list.
+* At least one field to edit must be provided.
+* Acceptable values for `GENDER`: `Male`, `Female`, `Others`.
+* Acceptable values for `EMAIL`: A string with an email extension (e.g. `@gmail.com`).
 
 Examples:
-* `viewMember 1` displays events of the 1st member in the member list.
-* `viewMember 10` displays events of the 10th member in the member list.
+* `editMember 1 a/RH t/Musician` edits the address and the tag of the 1st member in the member list.
 
 ### Create an Event : `createEvent`
 
 Creates a new event and adds it to the database.
 
-Format: `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]`
+Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]`
 
 Examples:
 * `createEvent n/Party l/Raffles Hall d/16-09-2023` creates an event `Party` in CCACommander.
-* `createEvent n/Combined Hall Ensemble Concert d/16-02-2024` creates an event `Combined Hall Ensemble Concert` in CCACommander.
 
 ### Delete an Event: `deleteEvent`
 
@@ -140,6 +125,25 @@ Format: `deleteEvent EVENT_INDEX`
 Examples:
 * `deleteEvent 1` deletes the 1st event in the event list.
 * `deleteEvent 10` deletes the 10th event in the event list.
+
+### Edits an Event : `editEvent`
+
+Edits the event at the specified index with the specified attributes.
+
+Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]`
+
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** that is within the range of the length of the member list.
+* At least one field to edit must be provided.
+* EVENT_NAME **must only contain** Alphanumeric Characters and spaces, and it should not be blank
+* LOCATION **must not** be blank and can take in any values.
+* DATE **must be a valid date** in the format of **YYYY-MM-DD** e.g. 2023-10-31.
+* TAG **must only contain** Alphanumeric Characters with no space in between.
+
+Examples:
+* `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1` edits the 5th event in the event list to change the name to `Halloween
+Surprise Party`, the location to `UTR`, the date to `2023-10-31` and the tag to `sem1`.
+* `editEvent 3 l/UCC Theater` edits the 3rd event in the event list to change the location to `UCC Theater`.
 
 ### Link a Member to an Event: `enrol`
 
@@ -171,6 +175,80 @@ Format: `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
 Examples:
 * `unenrol m/1 e/5` unlinks the 1st member in the member list from the 5th event in the event list.
 * `unenrol m/5 e/1` unlinks the 5th member in the member list from the 1st event in the event list.
+
+### Edit an enrolment: editAttendance
+Edits the attendance details of a specified member at a specified event with the specified attributes.
+
+Format: `editAttendance m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
+
+* Edits the specified `MEMBER_INDEX`'s attendance of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
+* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the displayed member/event list.
+* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
+* At least one field to edit must be provided.
+* The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
+* `REMARK` can take any value, but should not be blank.
+
+Examples:
+* `editAttendance m/1 e/1 h/0 r/Absent due to Covid` edits the attendance of the 1st member in the member list for the 1st event of the event list to be `0` hours and have a remark `Absent due to Covid`.
+
+### List all Members and all Events : `list`
+
+List all members and all events in the CCA in 2 separate columns.
+
+Format: `list`
+
+### View Events of Member : `viewMember`
+
+Lists all the events of a specified member index.
+
+Format: `viewMember MEMBER_INDEX`
+
+* Views the events of the member at the specified `MEMBER_INDEX`.
+* The index refers to the index number shown in the displayed member list.
+* The index **must be a positive integer** that is within the range of the length of the member list.
+
+Examples:
+* `viewMember 1` displays events of the 1st member in the member list.
+* `viewMember 10` displays events of the 10th member in the member list.
+
+### View Members of Event : `viewEvent`
+
+Lists all the members of a specified event index.
+
+Format: `viewEvent EVENT_INDEX`
+* Views the members of the event at the specified `EVENT_INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** that is within the range of the length of the event list.
+
+Examples:
+* `viewEvent 1` displays members of the 1st event in the event list.
+* `viewEvent 10` displays members of the 10th event in the event list.
+
+### Find Member in member list : `findMember`
+
+Finds and lists member(s) whose name(s) contain the provided `KEYWORD`.
+
+Format: `findMember KEYWORD [MORE_KEYWORDS]`
+* Finds and lists member(s) whose name(s) contain the specified `KEYWORD`.
+* More than 1 `KEYWORD` can be provided to find more members.
+* The `KEYWORD` must match minimally one of the words in the name of the member to be found, where capitalisation does not matter.
+
+* Examples:
+* `findMember alice` displays the member(s) whose name(s) contain 'alice'
+* `findMember alice bob charlie` displays the member(s) whose name(s) contain 'alice', 'bob' and/or 'charlie'.
+
+### Find Event in event list : `findEvent`
+
+Finds and lists event(s) which name(s) contain the provided `KEYWORD`.
+
+Format: `findEvent KEYWORD [MORE_KEYWORDS]`
+* Finds and lists event(s) which name(s) contain the specified `KEYWORD`.
+* More than 1 `KEYWORD` can be provided to find more events.
+* The `KEYWORD` must match minimally one of the words in the name of the event to be found, where capitalisation does not matter.
+
+* Examples:
+* `findEvent party` displays the event(s) which name(s) contain 'party'
+* `findEvent party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
 
 ### Undoing a command: `undo`
 
@@ -215,17 +293,21 @@ If your changes to the data file makes its format invalid, CCACommander will dis
 
 Action | Format, Examples
 --------|------------------
+**Clear all members and events** | `clear`
 **Create a member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader`
 **Delete a member** | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
+**Edit a member** | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g.`editMember 1 a/One North`
+**Create an event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g.`createEvent n/Party l/Raffles Hall d/16-09-2023 t/Fun`
+**Delete an event** | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
+**Edit an event** | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g. `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1`                                                                            
+**Add member to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
+**Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
+**Edit an enrolment** | `editAttendance m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editAttendance m/1 e/1 h/0 r/Absent due to Covid`
 **List all members and all events** | `list`
 **View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
 **View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
-**Create an event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g.`createEvent n/Party l/Raffles Hall d/16-09-2023 t/Fun`
-**Delete an event** | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
-**Add member to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
-**Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
-**Edit** | coming soon...
-**Find** | coming soon...
+**Find member in list** | `findMember KEYWORD [MORE_KEYWORDS]` <br> e.g.`findMember alice`
+**Find event in list** | `findEvent KEYWORD [MORE_KEYWORDS]` <br> e.g.`findEvent party`
 **Redo** | `redo`
 **Undo** | `undo`
 **Help** | coming soon...
