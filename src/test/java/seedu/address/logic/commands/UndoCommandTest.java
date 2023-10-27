@@ -132,7 +132,7 @@ public class UndoCommandTest {
         try {
             CommandResult undoCommand1 = new UndoCommand().execute(model);
             CommandResult undoCommand2 = new UndoCommand().execute(model);
-        } catch(CommandException e) {
+        } catch (CommandException e) {
             assertEquals(model.getUserHistoryManager().getUndoHistorySize(), 1);
         }
     }
@@ -193,8 +193,8 @@ public class UndoCommandTest {
         boolean isPhoneEdited = true;
 
         for (Person person : model.getAddressBook().getPersonList()) {
-            if (person.getName().toString().equals("John Doe") &&
-                    person.getPhone().toString().equals("98765432")) {
+            if (person.getName().toString().equals("John Doe")
+                    && person.getPhone().toString().equals("98765432")) {
                 isPhoneEdited = false;
             }
         }
