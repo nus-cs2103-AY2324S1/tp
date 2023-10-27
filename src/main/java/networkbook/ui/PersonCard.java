@@ -2,6 +2,9 @@ package networkbook.ui;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -25,6 +28,8 @@ public class PersonCard extends UiPart<Region> {
     private static final String SPECIALISATION_HEADER = "Specialisations: ";
     private static final String PRIORITY_HEADER = "Priority: ";
     private static final String EMPTY_FIELD = "-";
+
+    private static final Logger LOGGER = Logger.getLogger("PersonCard");
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -83,7 +88,7 @@ public class PersonCard extends UiPart<Region> {
         // TODO: implement actual link opening
         person.getEmails().stream()
                 .forEach(email -> emails.getChildren().add(new FieldHyperlink(email.getValue(), () -> {
-                    System.out.println("open email: " + email.getValue());
+                    LOGGER.log(Level.INFO, "Opening email: " + email.getValue());
                 })));
 
         // Website links
@@ -91,7 +96,7 @@ public class PersonCard extends UiPart<Region> {
         // TODO: implement actual link opening
         person.getLinks().stream()
                 .forEach(link -> links.getChildren().add(new FieldHyperlink(link.getValue(), () -> {
-                    System.out.println("open link: " + link.getValue());
+                    LOGGER.log(Level.INFO, "Opening link: " + link.getValue());
                 })));
 
         // Graduation
