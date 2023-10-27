@@ -7,12 +7,12 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Status} duration within the given start and end.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class StatusContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public StatusContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -20,7 +20,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> keyword.isEmpty()
-                        || StringUtil.containsWordIgnoreCase(person.getName().toString(), keyword));
+                        || StringUtil.containsWordIgnoreCase(person.getStatus().toString(), keyword));
     }
 
     @Override
@@ -30,16 +30,17 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof StatusContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        StatusContainsKeywordsPredicate otherStatusContainsKeywordsPredicate = (StatusContainsKeywordsPredicate) other;
+        return keywords.equals(otherStatusContainsKeywordsPredicate.keywords);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
+
 }

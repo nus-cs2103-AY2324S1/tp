@@ -20,8 +20,8 @@ public class LastContactedTimeTest {
 
     @Test
     public void isValidLastContactedTime() {
-        // null and invalid
-        assertFalse(LastContactedTime.isValidLastContactedTime(null));
+        // default value
+        assertTrue(LastContactedTime.isValidLastContactedTime(LocalDateTime.MIN));
 
         // valid
         assertTrue(LastContactedTime.isValidLastContactedTime(LocalDateTime.parse("02.10.2023 1000", FORMAT)));
