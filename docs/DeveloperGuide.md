@@ -160,7 +160,7 @@ The enrol feature allows users to link a member to an event in order to keep tra
 This section will explain how the enrol feature was implemented and the various design considerations when implementing the feature.
 
 #### Implementation
-The enrollment mechanism is facilitated by `EnrolCommand`. It extends `Command`.
+The enrolment mechanism is facilitated by `EnrolCommand`. It extends `Command`.
 The method, `EnrolCommand#execute(Model model)`, performs a validity check and adds a member's attendance for a particular event if
 all the supplied parameters are valid.
 
