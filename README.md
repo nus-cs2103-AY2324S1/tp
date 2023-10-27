@@ -1,6 +1,10 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+# ConText
 
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
+[![Java CI](https://github.com/AY2324S1-CS2103-W14-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2324S1-CS2103-W14-3/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103-W14-3/tp/graph/badge.svg?token=KT7MNHKALX)](https://codecov.io/gh/AY2324S1-CS2103-W14-3/tp)
+
+For information as well as detailed user/developer documentation, check out the [product website](https://ay2324s1-cs2103-w14-3.github.io/tp/).
+
+![UI](./docs/images/Ui.png)
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

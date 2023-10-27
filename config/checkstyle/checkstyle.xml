@@ -14,12 +14,6 @@
         <property name="lineSeparator" value="lf_cr_crlf"/>
     </module>
 
-    <module name="RegexpSingleline">
-        <!-- Checks that FIXME is not used in comments. TODO is preferred. -->
-        <property name="format" value="((//.*)|(\*.*))FIXME" />
-        <property name="message" value='TODO is preferred to FIXME."' />
-    </module>
-
     <module name="SuppressionFilter">
         <property name="file" value="${config_loc}/suppressions.xml"/>
     </module>
@@ -56,7 +50,6 @@
                         value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
                 <property name="specialImportsRegExp" value="^org\."/>
                 <property name="thirdPartyPackageRegExp" value="^com\."/>
-                <property name="sortImportsInGroupAlphabetically" value="true"/>
         </module>
 
         <!--
@@ -94,7 +87,7 @@
         </module>
 
         <module name="TypeName">
-            <!-- Validates static, final fields against the expression "^[A-Z][a-zA-Z0-9]*$". -->
+            <!-- Validates type names against the expression "^[A-Z][a-zA-Z0-9]*$". -->
             <metadata name="altname" value="TypeName"/>
             <property name="severity" value="warning"/>
         </module>
@@ -285,7 +278,7 @@
 
         <module name="WhitespaceAfter">
             <!-- Checks that commas, semicolons and typecasts are followed by whitespace. -->
-            <property name="tokens" value="COMMA, SEMI, TYPECAST"/>
+            <property name="tokens" value="COMMA, SEMI"/>
         </module>
 
         <module name="NoWhitespaceAfter">

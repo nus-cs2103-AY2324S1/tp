@@ -3,57 +3,50 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We are a team taking CS2103 at NUS in AY23/24 S1.
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+This page is designed to closely follow the format required by grading scripts.
 
 ## Project team
 
-### John Doe
+### Cloud7050
 
-<img src="images/johndoe.png" width="200px">
+*The public name and image are placeholders.*
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="./images/cloud7050.png" width="200px">
 
-* Role: Project Advisor
+[[github](https://github.com/Cloud7050)]
+[[portfolio](./team/cloud7050.md)]
 
-### Jane Doe
+- Role: Team Lead
+- Responsibilities: Code quality. Assists with: Integration (e.g. maintaining repo, merging PRs), scheduling & tracking (e.g. defining/assigning/editing issues/PRs)
 
-<img src="images/johndoe.png" width="200px">
+### mamayuan
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/mamayuan.png" width="200px">
 
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/mamayuan)]
+[[portfolio](./team/mamayuan.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing and Integration (e.g. maintaining repo, merging PRs)
 
-### Jean Doe
+### bwangpj
 
-<img src="images/johndoe.png" width="200px">
+<img src="./images/bwangpj.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/bwangpj)]
+[[portfolio](./team/bwangpj.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Documentation
 
-### James Doe
+### rayshawntan
 
-<img src="images/johndoe.png" width="200px">
+<img src="./images/rayshawntan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/rayshawntan)]
+[[portfolio](./team/rayshawntan.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: Scheduling and tracking
