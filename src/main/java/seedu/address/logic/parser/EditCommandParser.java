@@ -15,6 +15,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -29,6 +31,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
+    private static final Logger logger = Logger.getLogger(EditCommandParser.class.getName());
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -48,6 +51,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         boolean hasNricPrefix = argMultimap.getValue(PREFIX_NRIC).isPresent();
 
         if (!hasNamePrefix && !hasNricPrefix) {
+            logger.log(Level.WARNING, "Missing NAME or NRIC prefix in edit command: {0}", args);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
@@ -88,6 +92,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
+        logger.log(Level.INFO, "Parsed EditCommand with Name: {0}, NRIC: {1}", new Object[]{name, nric});
         return new EditCommand(name, nric, editPersonDescriptor);
     }
 

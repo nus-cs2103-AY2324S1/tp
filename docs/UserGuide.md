@@ -28,7 +28,7 @@ organise and manage patient details faster than traditional GUI apps.
 
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/UI_v1.2.1.jpg)
 
 5. Type the command in the command box and press Enter to execute it.
    e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -88,18 +88,15 @@ The 2 identifying parameters of a patient are given below:
 
 1 or more identifying parameters must be specified in each command, unless stated otherwise.
 
-`[field]` are common optional fields that can be specified behind commands. The common optional fields are:
+`[field]` are common fields that can be specified behind commands. The common fields are:
 
-| Tag      | Representative Value   | Example Usage         | General Form in Commands | Remarks                         |
-|----------|------------------------|-----------------------|--------------------------|---------------------------------|
-| `p/`     | Phone Number           | `p/91234567`          | `p/PHONE_NUMBER`         |                                 |
-| `e/`     | Email Address          | `e/example@a.com`     | `e/EMAIL`                |                                 |
-| `a/`     | Address                | `a/Location, Here Rd` | `a/ADDRESS`              |                                 |
-| `m/`     | Medical History        | `m/Asthmatic`         | `m/MEDICAL_HISTORY`      |                                 |
-| `start/` | Appointment Start Time | `start/Nov 11, 9AM`   | `start/APPT_START`       | Must be paired with `/end`      |
-| `end/`   | Appointment End Time   | `end/Nov 11, 12PM`    | `end/APPT_END`           | Must be paired with `/start`    |
-| `t/`     | Tag                    | `t/Emergency`         | `t/TAG`                  | Can have multiple of this field |
-
+| Tag    | Representative Value | Example Usage              | General Form in Commands | Remarks                                      |
+|--------|----------------------|----------------------------|--------------------------|----------------------------------------------|
+| `p/`   | Phone Number         | `p/91234567`               | `p/PHONE_NUMBER`         |                                              |
+| `e/`   | Email Address        | `e/example@a.com`          | `e/EMAIL`                |                                              |
+| `a/`   | Address              | `a/Location, Here Rd`      | `a/ADDRESS`              |                                              |
+| `m/`   | Medical History      | `m/Asthmatic`              | `m/MEDICAL_HISTORY`      | Can have multiple of this field, including 0 |
+| `ap/`  | Appointment          | `ap/2022-2-11 11:00 12:00` | `ap/APPT `               | Optional field                               |
 
 ### Auto Save
 
@@ -125,10 +122,11 @@ Adds a patient into the program, with the given patient information.
 Format: `add n/NAME id/IC_NUMBER [field] ...`
 
 Example commands:
- * `add n/Aaron Tan Jun Jie id/S8943782H p/98114839`
+ * `add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123`
 
 Expected outputs when the command succeeds:
- * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H p/98114839`
+ * `Patient Aaron Tan Jun Jie has been added with the fields: id/S8943782H
+    p/98114839 e/example@mailhere a/Serangoon HDB 123`
 
 Expected outputs when the command fails:
  * `Unable to add the patient to the database: Patient already exists.`
@@ -163,6 +161,26 @@ Expected outputs when the command succeeds:
 Expected outputs when command fails:
 * `Unable to edit the patient: Patient identification does not exist.`
 
+### Undoing a command: `undo`
+
+Undoes an undo-able command within the address book.
+
+* An undo-able command include an edit command, add commmand or delete command
+* The command allows you to undo the last command or to undo a specific number of previous commands
+
+Format:
+* `undo` or `undo [number]`
+
+Example commands:
+*  `undo`
+*  `undo 2`
+
+Expected outputs when the command succeeds:
+* `The last command has been undone`
+* `The last 2 commands have been undone`
+
+Expected outputs when command fails:
+* `There is no valid command to be undone`
 
 ### Locating persons by name or NRIC: `find`
 
@@ -289,12 +307,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                           |
-|------------|----------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
-| **Clear**  | `clear`                                                                                                                    |
-| **Delete** | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
-| **Edit**   | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
-| **Find**   | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
-| **List**   | `list`                                                                                                                     |
-| **Help**   | `help`                                                                                                                     |
+| Action     | Shortcut | Format, Examples                                                                                                           |
+|------------|----------|----------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
+| **Clear**  | `c`      | `clear`                                                                                                                    |
+| **Delete** | `d`      | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
+| **Edit**   | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
+| **Find**   | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
+| **List**   | `li`      | `list`                                                                                                                     |
+| **Help**   | `h`      | `help`                                                                                                                     |
