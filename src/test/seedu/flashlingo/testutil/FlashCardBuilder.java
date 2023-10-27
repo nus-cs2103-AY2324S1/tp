@@ -1,14 +1,13 @@
 package flashlingo.testutil;
 
-import seedu.flashlingo.model.flashcard.ProficiencyLevel;
-import seedu.flashlingo.model.flashcard.words.OriginalWord;
-import seedu.flashlingo.model.flashcard.words.TranslatedWord;
-import seedu.flashlingo.model.flashcard.FlashCard;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
+
+import seedu.flashlingo.model.flashcard.ProficiencyLevel;
+import seedu.flashlingo.model.flashcard.FlashCard;
+import seedu.flashlingo.model.flashcard.words.OriginalWord;
+import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 /**
  * A utility class to help with building FlashCard objects.
@@ -33,8 +32,8 @@ public class FlashCardBuilder {
      * Creates a {@code FlashcardBuilder} with the default details.
      */
     public FlashCardBuilder() {
-        this.originalWord = new OriginalWord(ORIGINAL_WORD,"");
-        this.translatedWord = new TranslatedWord(TRANSLATED_WORD,"");
+        this.originalWord = new OriginalWord(ORIGINAL_WORD, "");
+        this.translatedWord = new TranslatedWord(TRANSLATED_WORD, "");
         this.whenToReview = WHEN_TO_REVIEW;
         this.level = new ProficiencyLevel(LEVEL);
     }
@@ -54,7 +53,7 @@ public class FlashCardBuilder {
      * Sets the {@code OriginalWord} of the {@code FlashCard} that we are building.
      */
     public FlashCardBuilder withOriginalWord(String originalWord, String language) {
-        this.originalWord = new OriginalWord(originalWord,language);
+        this.originalWord = new OriginalWord(originalWord, language);
         return this;
     }
 
@@ -62,7 +61,7 @@ public class FlashCardBuilder {
      * Sets the {@code TranslatedWord} of the {@code FlashCard} that we are building.
      */
     public FlashCardBuilder withTranslatedWord(String translatedWord, String language) {
-        this.translatedWord = new TranslatedWord(translatedWord,"");
+        this.translatedWord = new TranslatedWord(translatedWord, "");
         return this;
     }
 
