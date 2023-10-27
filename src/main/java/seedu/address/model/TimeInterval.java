@@ -140,8 +140,8 @@ public class TimeInterval {
     }
 
     public boolean isClash(TimeInterval otherTime) {
-        boolean isBefore = this.start.compareTo(otherTime.start) < 0 && this.end.compareTo(otherTime.end) < 0 && this.end.compareTo(otherTime.start) <= 0;
-        boolean isAfter = this.start.compareTo(otherTime.start) > 0 && this.end.compareTo(otherTime.end) > 0 && this.start.compareTo(otherTime.end) >= 0;
+        boolean isBefore = this.start.compareTo(otherTime.start) < 0 && this.end.compareTo(otherTime.end) < 0 && this.end.compareTo(otherTime.start) < 0;
+        boolean isAfter = this.start.compareTo(otherTime.start) > 0 && this.end.compareTo(otherTime.end) > 0 && this.start.compareTo(otherTime.end) > 0;
         return !(isBefore || isAfter);
     }
 
