@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,24 +67,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -115,21 +115,21 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+[//]: # (**Note:** An alternative &#40;arguably, a more OOP&#41; model is given below. It has a `Subject` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Subject` object per unique subject, instead of each `Student` needing their own `Subject` objects.<br>)
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -138,7 +138,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -193,6 +193,78 @@ The following activity diagram summarizes what happens when a user executes a `f
   * Cons:
     * Less in line with users' expectations of a `filter` command; not as intuitive.
 * We made the choice of Alternative 1 over Alternative 2 as we found that more intuitive commands would be easier for users to learn and eventually master.
+
+### Sort feature
+
+#### Implementation
+
+The `sort` command allows the user to sort the list of students in alphabetical order to enhance efficiency in searching.
+
+When the user enters a sort command, the `AddressBookParser` parses the user's input and returns a `SortCommand`.
+
+The predicate entered by the user can be modelled by the following class: `SortIn`.
+
+The following sequence diagram shows how the `sort` command works. In this example, the user is executing the following command: `sort in/ASC`.
+
+<puml src="diagrams/SortSequenceDiagram.puml" alt="FilterSequenceDiagram" />
+
+When the `SortCommandParser` parses the argument to the `SortCommand`, the argument is stored as an attribute of type SortIn in `SortCommand`.
+This predicate is then passed into the current model, using the `updateSortedPersonList()` method.
+
+The following activity diagram summarizes what happens when a user executes a `sort` command:
+
+<puml src="diagrams/FilterActivityDiagram.puml" alt="SortActivityDiagram" width="250" />
+
+#### Design considerations:
+
+**Aspect: How the student list is sorted internally:**
+
+* **Alternative 1 (current choice):** Sort the student list in class `UniquePersonList` using method `sort`.
+    * Pros:
+        * Student list is sorted permanently, ensuring no repeated sorting needed in the next launch provided no new student is added or student's name is changed.
+        * Enhance efficiency of looking through the student list, ensure no repeated sorting needed when doing consecutive commands such as `filter`.
+    * Cons:
+        * Users would be unable to view the unsorted student list again.
+* Alternative 2: Sort the student list in class `ModelManager` using method `updateSortedPersonList`.
+    * Pros:
+        * Enable users to view the unsorted student list for every launch.
+    * Cons:
+        * Users have to resort the student list for every launch. 
+* We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
+
+### Import feature
+
+#### Implementation
+
+The `import` command allows the user to import .csv files containing their students' data in one go so that they do not need to add them one-by-one.
+
+When the user enters a import command, the `AddressBookParser` parses the user's input using `ImportCommandParser` and returns a `ImportCommand`.
+
+The following sequence diagram shows how the `import` command works. In this example, the user is executing the following command: `import student_data.csv`.
+
+<puml src="diagrams/ImportSequenceDiagram.puml" alt="ImportSequenceDiagram" />
+
+When the `ImportCommandParser` parses the arguments, it creates a list of `Student` objects using the data in the .csv file and passes the argument and the list into the `ImportCommand`. `ImportCommand` will then add the `Student` into the `AddressBook`.
+
+The following activity diagram summarizes what happens when a user executes a `import` command:
+
+<puml src="diagrams/FilterActivityDiagram.puml" alt="ImportActivityDiagram" width="250" />
+
+#### Design considerations:
+
+**Aspect: How to separate the attributes correctly from the imported data**
+
+* **Alternative 1 (current choice):** Fixed column sequence for data in the imported .csv files.
+    * Pros:
+        * Students' data with comma such as address can be detected more easily and will not be split wrongly.
+    * Cons:
+        * Users would experience less flexibility when using the command (for instance, users need to ensure their column in their .csv files matches the sequence).
+* Alternative 2: Flexible column sequence for data in the imported .csv files.
+    * Pros:
+        * Greater flexibility for users when importing students'data.
+    * Cons:
+        * Higher chance in wrong a splitting of students' data.
+* We made the choice of Alternative 1 over Alternative 2 as we found that a fixed format would be easier for users to remember and use in the .csv files.
 
 
 ### \[Proposed\] Undo/redo feature
@@ -367,12 +439,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Staff chooses to add student data.
-2. Tutorium stores the new data. <br>
+2. Tutorium stores the new student's data. <br>
     Use case ends.
 
 **Extensions**
 
-* 1a. Tutorium detects a format error in the entered command.
+* 1a. Tutorium detects a format error or missing attributes in the entered command.
   * 1a1. Tutorium requests for the correctly formatted command.
   * 1a2. User enters a new command. <br>
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>

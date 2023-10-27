@@ -63,7 +63,8 @@ public class PersonCard extends UiPart<Region> {
         nearestMrtStation.setText("Nearest MRT Station: " + student.getNearestMrtStation().mrtStationName);
         student.getSubjects().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
-                .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName)));
+                .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName
+                        + " (enrolled in: " + subject.enrolDate + ")")));
 
     }
 }

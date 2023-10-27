@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BIOLOGY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ELLE;
@@ -28,7 +28,7 @@ public class FilterCommandTest {
     public void execute_oneCondition_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         StudentPredicateList predicateList = new StudentPredicateList();
-        predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_MATHEMATICS)));
+        predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_BIOLOGY)));
         FilterCommand command = new FilterCommand(predicateList);
         expectedModel.updateFilteredPersonList(predicateList.reduce());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -39,7 +39,7 @@ public class FilterCommandTest {
     public void execute_multipleConditions_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         StudentPredicateList predicateList = new StudentPredicateList();
-        predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_MATHEMATICS)));
+        predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_BIOLOGY)));
         predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_PHYSICS)));
         FilterCommand command = new FilterCommand(predicateList);
         expectedModel.updateFilteredPersonList(predicateList.reduce());
@@ -50,7 +50,7 @@ public class FilterCommandTest {
     @Test
     public void toStringMethod() {
         StudentPredicateList predicateList = new StudentPredicateList();
-        predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_MATHEMATICS)));
+        predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_BIOLOGY)));
         predicateList.add(new StudentTakesSubjectPredicate(new Subject(VALID_SUBJECT_PHYSICS)));
         FilterCommand filterCommand = new FilterCommand(predicateList);
         String expected = FilterCommand.class.getCanonicalName() + "{predicateList=" + predicateList + "}";

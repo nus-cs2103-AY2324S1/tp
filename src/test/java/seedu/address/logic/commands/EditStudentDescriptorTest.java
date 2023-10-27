@@ -9,7 +9,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATHEMATICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BIOLOGY;
+
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +55,8 @@ public class EditStudentDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSubjects(VALID_SUBJECT_MATHEMATICS).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY)
+                .withSubjects(Collections.singleton(VALID_SUBJECT_BIOLOGY)).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 

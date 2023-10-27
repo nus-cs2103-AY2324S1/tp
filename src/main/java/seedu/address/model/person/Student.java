@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -35,8 +34,6 @@ public class Student {
     private final MrtStation nearestMrtStation;
     private final Set<Subject> subjects = new HashSet<>();
 
-    private final LocalDateTime dateModified;
-
     /**
      * Every field must be present and not null.
      */
@@ -54,8 +51,6 @@ public class Student {
         this.secLevel = secLevel;
         this.nearestMrtStation = nearestMrtStation;
         this.subjects.addAll(subjects);
-
-        this.dateModified = LocalDateTime.now(SINGAPORE_ZONE_ID);
     }
 
     public Name getName() {
@@ -84,10 +79,6 @@ public class Student {
 
     public MrtStation getNearestMrtStation() {
         return nearestMrtStation;
-    }
-
-    public LocalDateTime getDateModified() {
-        return dateModified;
     }
 
     /**
