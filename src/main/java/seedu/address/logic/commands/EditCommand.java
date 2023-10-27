@@ -61,8 +61,10 @@ public class EditCommand extends Command {
     private final EditRoomDescriptor editRoomDescriptor;
 
     /**
-     * @param index              of the person in the filtered person list to edit
-     * @param editRoomDescriptor details to edit the person with
+     * Constructs an EditCommand to edit the booking at the specified index with the given editRoomDescriptor.
+     *
+     * @param index              The index of the booking to be edited.
+     * @param editRoomDescriptor The details to edit the booking with.
      */
     public EditCommand(Index index, EditRoomDescriptor editRoomDescriptor) {
         requireNonNull(index);
@@ -92,6 +94,13 @@ public class EditCommand extends Command {
                 updatedTags);
     }
 
+    /**
+     * Executes the edit command by modifying the details of the booking at the specified index.
+     *
+     * @param model The current model.
+     * @return The result of the command execution.
+     * @throws CommandException If the index is invalid, or if the booking cannot be edited.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -113,6 +122,12 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_BOOKING_SUCCESS, Messages.format(editedBooking)));
     }
 
+    /**
+     * Checks if this edit command is equal to another object.
+     *
+     * @param other The object to compare.
+     * @return True if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -129,6 +144,11 @@ public class EditCommand extends Command {
                 && editRoomDescriptor.equals(otherEditCommand.editRoomDescriptor);
     }
 
+    /**
+     * Returns a string representation of this edit command.
+     *
+     * @return A string representation of this edit command.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -150,6 +170,9 @@ public class EditCommand extends Command {
         private Remark remark;
         private Set<Tag> tags;
 
+        /**
+         * Creates an EditRoomDescriptor object.
+         */
         public EditRoomDescriptor() {
         }
 
@@ -169,55 +192,121 @@ public class EditCommand extends Command {
 
         /**
          * Returns true if at least one field is edited.
+         *
+         * @return True if at least one field is edited, false otherwise.
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(room, bookingPeriod, name, phone, email, tags);
         }
 
+        /**
+         * Returns an optional Room containing the room to edit. If the field is not edited, returns an empty optional.
+         *
+         * @return An optional containing the room to edit, or an empty optional if the field is not edited.
+         */
         public Optional<Room> getRoom() {
             return Optional.ofNullable(room);
         }
 
+        /**
+         * Sets the room to edit.
+         *
+         * @param room The new room value.
+         */
         public void setRoom(Room room) {
             this.room = room;
         }
 
+        /**
+         * Returns an optional Name containing the name to edit. If the field is not edited, returns an empty optional.
+         *
+         * @return An optional containing the name to edit, or an empty optional if the field is not edited.
+         */
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
+        /**
+         * Sets the name to edit.
+         *
+         * @param name The new name value.
+         */
         public void setName(Name name) {
             this.name = name;
         }
 
+        /**
+         * Returns an optional Phone containing the phone to edit. If the field is not edited, returns an empty
+         * optional.
+         *
+         * @return An optional containing the phone to edit, or an empty optional if the field is not edited.
+         */
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
         }
 
+        /**
+         * Sets the phone to edit.
+         *
+         * @param phone The new phone value.
+         */
         public void setPhone(Phone phone) {
             this.phone = phone;
         }
 
+        /**
+         * Returns an optional Email containing the email to edit. If the field is not edited, returns an empty
+         * optional.
+         *
+         * @return An optional containing the email to edit, or an empty optional if the field is not edited.
+         */
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
 
+        /**
+         * Sets the email to edit.
+         *
+         * @param email The new email value.
+         */
         public void setEmail(Email email) {
             this.email = email;
         }
 
+        /**
+         * Returns an optional BookingPeriod containing the booking period to edit. If the field is not edited, returns
+         * an empty optional.
+         *
+         * @return An optional containing the booking period to edit, or an empty optional if the field is not edited.
+         */
         public Optional<BookingPeriod> getBookingPeriod() {
             return Optional.ofNullable(bookingPeriod);
         }
 
+        /**
+         * Sets the booking period to edit.
+         *
+         * @param bookingPeriod The new booking period value.
+         */
         public void setBookingPeriod(BookingPeriod bookingPeriod) {
             this.bookingPeriod = bookingPeriod;
         }
 
+        /**
+         * Returns an optional Remark containing the remark to edit. If the field is not edited, returns an empty
+         * optional.
+         *
+         * @return An optional containing the remark to edit, or an empty optional if the field is not edited.
+         */
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
         }
 
+        /**
+         * Sets the remark to edit.
+         *
+         * @param remark The new remark value.
+         */
         public void setRemark(Remark remark) {
             this.remark = remark;
         }
@@ -239,6 +328,12 @@ public class EditCommand extends Command {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
+        /**
+         * Checks if this edit room descriptor is equal to another object.
+         *
+         * @param other The object to compare.
+         * @return True if the objects are equal, false otherwise.
+         */
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -260,6 +355,11 @@ public class EditCommand extends Command {
                     && Objects.equals(tags, otherEditRoomDescriptor.tags);
         }
 
+        /**
+         * Returns a string representation of this edit room descriptor.
+         *
+         * @return A string representation of this edit room descriptor.
+         */
         @Override
         public String toString() {
             return new ToStringBuilder(this)

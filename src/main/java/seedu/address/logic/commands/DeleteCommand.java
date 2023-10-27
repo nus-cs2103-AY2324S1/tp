@@ -1,48 +1,78 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes one or more bookings identified using their displayed indices from the address book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the bookings identified by the index numbers used in the displayed booking list.\n"
+            + "Parameters: INDEX [INDEX]...\n"
+            + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_BOOKING_SUCCESS = "Deleted Booking: %1$s";
+    public static final String MESSAGE_DELETE_BOOKING_SUCCESS = "Deleted Booking(s): %1$s";
 
-    private final Index targetIndex;
+    private final Index[] targetIndices;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    /**
+     * Constructs a {@code DeleteCommand} to delete bookings at the specified indices.
+     *
+     * @param targetIndices The indices of the bookings to be deleted.
+     */
+    public DeleteCommand(Index... targetIndices) {
+        this.targetIndices = targetIndices;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Booking> lastShownList = model.getFilteredBookingList();
+        List<Booking> deleteList = new ArrayList<>();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        StringBuilder deletedBookings = new StringBuilder();
+        boolean atLeastOneBookingDeleted = false;
+
+        for (Index targetIndex : targetIndices) {
+            int zeroBasedIndex = targetIndex.getZeroBased();
+            if (zeroBasedIndex >= 0 && zeroBasedIndex < lastShownList.size()) {
+                Booking bookingToDelete = lastShownList.get(zeroBasedIndex);
+                deleteList.add(bookingToDelete);
+                atLeastOneBookingDeleted = true;
+            }
+        }
+
+        if (!atLeastOneBookingDeleted) {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOKING_DISPLAYED_INDEX);
         }
 
-        Booking bookingToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteBooking(bookingToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_BOOKING_SUCCESS, Messages.format(bookingToDelete)));
+        for (int i = 0; i < targetIndices.length; i++) {
+            Booking deletedBooking = deleteList.get(i);
+            model.deleteBooking(deletedBooking);
+            deletedBookings.append(Messages.format(deletedBooking)).append(", ");
+        }
+
+        deletedBookings.setLength(deletedBookings.length() - 2); // Remove the trailing comma and space
+
+        model.updateFilteredBookingList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_BOOKING_SUCCESS, deletedBookings),
+                false, false, true);
     }
 
     @Override
@@ -51,19 +81,27 @@ public class DeleteCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof DeleteCommand)) {
             return false;
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return Arrays.equals(targetIndices, otherDeleteCommand.targetIndices);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
+        // Create a list of index strings
+        List<String> indexStrings = Arrays.stream(targetIndices)
+                .map(Index::getOneBased)
+                .map(String::valueOf)
+                .collect(Collectors.toList());
+
+        // Join the index strings into a single string
+        String indicesString = String.join(" ", indexStrings);
+
+        return getClass().getCanonicalName() + "{targetIndices=" + indicesString + "}";
     }
+
+
 }
