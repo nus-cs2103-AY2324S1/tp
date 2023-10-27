@@ -18,15 +18,13 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE_SORTING,
                 PREFIX_AMOUNT);
+        argMultimap.verifyNotEmpty(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SortCommand.MESSAGE_USAGE));
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE_SORTING, PREFIX_AMOUNT);
 
         List<ArgumentTokenizer.PrefixPosition> prefixPositions = ArgumentTokenizer.findAllPrefixPositions(args,
                 PREFIX_DATE_SORTING, PREFIX_AMOUNT);
         prefixPositions.sort(Comparator.comparingInt(ArgumentTokenizer.PrefixPosition::getStartPosition));
-
-        if (prefixPositions.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SortCommand.MESSAGE_USAGE));
-        }
 
         SortCommand.SortRules sortRules = new SortCommand.SortRules();
         for (ArgumentTokenizer.PrefixPosition prefixPosition : prefixPositions) {

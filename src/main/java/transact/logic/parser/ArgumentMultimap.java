@@ -85,4 +85,17 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Throws a {@code ParseException} with the provided error message if
+     * the map contains no mappings
+     */
+    public void verifyNotEmpty(String onEmptyMessage) throws ParseException {
+        // Empty if truly empty, or contains 1 element but that element is the end of
+        // string prefix with empty string
+        if (argMultimap.isEmpty()
+                || (argMultimap.size() == 1 && argMultimap.containsKey(new Prefix("")))) {
+            throw new ParseException(onEmptyMessage);
+        }
+    }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import transact.model.StringContainsKeywordsPredicate;
 import transact.testutil.PersonBuilder;
 
 public class NameContainsKeywordsPredicateTest {
@@ -75,8 +76,9 @@ public class NameContainsKeywordsPredicateTest {
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keywords);
+        StringContainsKeywordsPredicate stringPredicate = new StringContainsKeywordsPredicate(keywords);
 
-        String expected = NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected = NameContainsKeywordsPredicate.class.getCanonicalName() + "{predicate=" + stringPredicate + "}";
         assertEquals(expected, predicate.toString());
     }
 }
