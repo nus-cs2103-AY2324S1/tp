@@ -186,7 +186,7 @@ We have considered the following alternative implementations:
   This is not optimal for our use case as having a regex expression to parse the field values would be more complicated to scale and debug.
 
 ### \[Proposed\] Undo/redo feature
-
+    
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `NetworkBook` with an undo/redo history, stored internally as an `networkBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
