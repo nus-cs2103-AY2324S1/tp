@@ -187,6 +187,17 @@ The following sequence diagram shows how the different components of ManageHR in
 The above sequence diagram omits details on the internal implementations within each directory in order to improve 
 overall readability of the diagram.
 
+### Help command
+
+#### Overview
+
+The `HelpCommand` displays help for the current command.
+- `help COMMAND`
+  - example: `help add`
+  - expected: Shows functionality for `add` in the help window.
+  - Should show the same content as the user guide.
+
+
 ### Filter feature
 
 The filter feature filters employees by parameters/prefixes.
