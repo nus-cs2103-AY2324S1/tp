@@ -7,7 +7,12 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.BloodTypePredicate;
+import seedu.address.model.person.GenderPredicate;
+import seedu.address.model.person.IcContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+
 
 public class KeywordParserTest {
 
