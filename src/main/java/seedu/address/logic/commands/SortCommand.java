@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.comparer.SortComparator;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -13,27 +15,27 @@ import seedu.address.model.person.Person;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
-
-    public static final String REVERSE_KEYWORD = "R";
-
+    public static final String SORTBY_KEYWORD1 = "/byaddress";
+    public static final String SORTBY_KEYWORD2 = "/byemail";
+    public static final String SORTBY_KEYWORD3 = "/byname";
+    public static final String SORTBY_KEYWORD4 = "/byphone";
+    public static final String REVERSE_KEYWORD = "/reverse";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all persons in UniMate "
-            + "by the alphabetical order of their name. "
-            + "Existing remark will be overwritten by the input.\n"
-            + "Example: " + COMMAND_WORD;
+            + "by the alphabetical order of their name. \n"
+            + "Example: " + COMMAND_WORD + " " + SORTBY_KEYWORD1 + " " + REVERSE_KEYWORD;
 
-    public static final String MESSAGE_SUCCESS = "Sorted all persons by alphabetical order";
+    public static final String MESSAGE_SUCCESS = "Sorted all persons by specified order";
     private Comparator<Person> personComparator;
 
     /**
-     * Constructor for SortCommand, creates a comparator to sort by Person's full name.
+     * Constructor for SortCommand, creates a comparator to sort by the specified field and order.
      */
-    public SortCommand() {
-        this.personComparator = (o1, o2) -> {
-            if (o1.getName().fullName.equals(o2.getName().fullName)) {
-                return 0;
-            }
-            return o1.getName().fullName.compareTo(o2.getName().fullName);
-        };
+    public SortCommand(ArrayList<SortComparator> sortComparatorList) {
+        SortComparator sortComparator = sortComparatorList.get(0);
+        boolean isReverse = sortComparator.getIsReverse();
+        this.personComparator = isReverse
+                ? sortComparator.reversed()
+                : sortComparator;
     }
 
     @Override
