@@ -126,6 +126,16 @@ public class Employee {
     }
 
     /**
+     * Calculates the overtime pay of the employee.
+     * 
+     * @return the overtime pay of the employee.
+     */
+    public double getOvertimePay() {
+        return overtimeHours.value * salary.getOvertimeHourlyRate();
+    }
+    
+
+    /**
      * Returns an immutable department set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
