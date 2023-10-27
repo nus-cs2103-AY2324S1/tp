@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,6 +9,30 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PatientBuilder;
 
 public class BloodTypePredicateTest {
+    @Test
+    public void equals() {
+        String firstPredicateKeyword = "Blood Type A+";
+        String secondPredicateKeyword = "Blood Type B-";
+
+        BloodTypePredicate firstPredicate = new BloodTypePredicate(firstPredicateKeyword);
+        BloodTypePredicate secondPredicate = new BloodTypePredicate(secondPredicateKeyword);
+
+        // same object -> returns true
+        assertTrue(firstPredicate.equals(firstPredicate));
+
+        // same values -> returns true
+        BloodTypePredicate firstPredicateCopy = new BloodTypePredicate(firstPredicateKeyword);
+        assertTrue(firstPredicate.equals(firstPredicateCopy));
+
+        // different types -> returns false
+        assertFalse(firstPredicate.equals(1));
+
+        // null -> returns false
+        assertFalse(firstPredicate.equals(null));
+
+        // different person -> returns false
+        assertFalse(firstPredicate.equals(secondPredicate));
+    }
 
     @Test
     public void testCorrectBloodTypePredicate() {
@@ -59,5 +84,14 @@ public class BloodTypePredicateTest {
         assertFalse(bMinusPredicate.test(new PatientBuilder().withBloodType("A-").build()));
         assertFalse(abPlusPredicate.test(new PatientBuilder().withBloodType("A+").build()));
         assertFalse(abMinusPredicate.test(new PatientBuilder().withBloodType("B+").build()));
+    }
+
+    @Test
+    public void toStringMethod() {
+        String keyword = "keyword1";
+        BloodTypePredicate predicate = new BloodTypePredicate("Blood type keyword1");
+
+        String expected = BloodTypePredicate.class.getCanonicalName() + "{keywords=" + keyword + "}";
+        assertEquals(expected, predicate.toString());
     }
 }
