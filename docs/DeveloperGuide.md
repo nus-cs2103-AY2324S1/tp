@@ -155,6 +155,36 @@ Classes used by multiple components are in the `seedu.networkbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Create new contact
+
+The implementation of the create command follows the convention of a normal command,
+where `CreateCommandParser` is responsible for parsing the user input string
+into an executable command.
+
+![create_contact](images/create/CreateDiagram.png)
+
+`CreateCommandParser` first obtains the values corresponding to the flags
+`/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index`.
+`CreateCommandParser` ensures that:
+* There is no preamble text between the `create` keyword and the flags.
+* One and only one of the flag`/name` is present.
+* At most one of the flags `/grad` or `/priority` is present.
+* All values corresponding to the flags `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index` are valid.
+
+If any of the above constraints are violated, `CreateCommandParser` throws a `ParseException`.
+Otherwise, it creates a new instance of `CreateCommand` that corresponds to the user input.
+
+`CreateCommand` comprises of the person to be added, which is an instance of `Person`.
+
+Upon execution, `CreateCommand` first queries the supplied model if it contains a person with an identical name.
+If no such person exists, `CreateCommand` then calls on `model::addPerson` to add the person into the networkBook data.
+`EditCommand` then converts the current `EditPersonDescriptor` into a new `Person`.
+`EditCommand` then asks the `model` to update the original `Person` with the edited `Person`.
+
+We have considered the following alternative implementations:
+* Implement `CreateCommandParser` to parse the arguments using regular expressions.
+  This is not optimal for our use case as having a regex expression to parse the field values would be more complicated to scale and debug.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
