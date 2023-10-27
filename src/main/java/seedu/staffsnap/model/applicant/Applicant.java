@@ -7,10 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import com.opencsv.bean.CsvBindByName;
-
 import seedu.staffsnap.commons.util.ToStringBuilder;
-import seedu.staffsnap.logic.parser.ParserUtil;
 import seedu.staffsnap.model.interview.Interview;
 
 /**

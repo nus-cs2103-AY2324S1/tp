@@ -3,16 +3,11 @@ package seedu.staffsnap.model.applicant;
 import static seedu.staffsnap.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
-import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
-import seedu.staffsnap.model.interview.Interview;
 
 /**
  * Represents a CSV version of Applicant in the applicant book.

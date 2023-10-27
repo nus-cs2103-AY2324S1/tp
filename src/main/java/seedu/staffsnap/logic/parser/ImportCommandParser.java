@@ -1,16 +1,11 @@
 package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_FILENAME;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.staffsnap.logic.commands.ImportCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
-import seedu.staffsnap.model.applicant.Name;
 
 /**
  * Parses input arguments and creates a new ImportCommand object

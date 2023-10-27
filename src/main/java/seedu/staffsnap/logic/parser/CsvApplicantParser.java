@@ -1,21 +1,14 @@
 package seedu.staffsnap.logic.parser;
 
-import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_FILENAME;
-import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.opencsv.CSVParser;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.bean.CsvToBeanBuilder;
 
-import seedu.staffsnap.logic.commands.ImportCommand;
-import seedu.staffsnap.logic.commands.exceptions.CommandException;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.CsvApplicant;

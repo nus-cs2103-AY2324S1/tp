@@ -252,6 +252,12 @@ public class ParserUtil {
         return result;
     }
 
+    /**
+     * Parses a {@code String fileName} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code fileName} is invalid.
+     */
     public static String parseFileName(String fileName) throws ParseException {
         requireNonNull(fileName);
         String trimmedFileName = fileName.trim();
@@ -262,6 +268,12 @@ public class ParserUtil {
         return trimmedFileName;
     }
 
+    /**
+     * Parses a {@code CsvApplicant csvApplicant} into a {@code Applicant}.
+     * Interviews and status will be given default values.
+     *
+     * @throws ParseException if the given {@code csvApplicant} is invalid.
+     */
     public static Applicant parseApplicantFromCsv(CsvApplicant csvApplicant) throws ParseException {
         Name name = ParserUtil.parseName(csvApplicant.getName());
         Phone phone = ParserUtil.parsePhone(csvApplicant.getPhone());
