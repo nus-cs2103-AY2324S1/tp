@@ -246,7 +246,7 @@ Step 4. The user now decides that adding the member was a mistake, and decides t
 ![UndoRedoVersion3](images/UndoRedoVersion3.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `versionPointer` is at index 0, pointing to the initial CcaCommander version, then there are no previous CcaCommander versions to restore. The `undo` command uses `Model#canUndo()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.[DeveloperGuide.md](..%2F..%2FDeveloperGuide.md)
+than attempting to perform the undo.
 
 </div>
 
