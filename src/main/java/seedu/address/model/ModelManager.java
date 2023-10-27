@@ -16,6 +16,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.statistics.ReadOnlySummaryStatistic;
+import seedu.address.model.statistics.SummaryStatistic;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -24,6 +26,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final SummaryStatistic summaryStatistic;
     private final EventBook eventBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
@@ -45,6 +48,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredEvents = new FilteredList<>(this.eventBook.getEventList());
+        summaryStatistic = new SummaryStatistic(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -120,6 +124,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ReadOnlySummaryStatistic getSummaryStatistic() {
+        return summaryStatistic;
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
@@ -163,6 +172,8 @@ public class ModelManager implements Model {
     public void setEvent(Event target, Event editedEvent) {
         eventBook.setEvent(target, editedEvent);
     }
+
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -226,6 +237,10 @@ public class ModelManager implements Model {
         return lastViewedPersonIndex;
     }
 
+    @Override
+    public void loadSummaryStatistics() {
+        summaryStatistic.updatePersonData(addressBook.getPersonList());
+    }
 
 
     @Override

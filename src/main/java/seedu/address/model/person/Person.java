@@ -31,6 +31,8 @@ public class Person {
     private Score score = new Score(0);
     private Status currentStatus = new Status();
 
+    private final ScoreList scoreList = new ScoreList();
+
 
 
 
@@ -72,9 +74,6 @@ public class Person {
         return currentStatus;
     }
 
-    public void setStatus(Status newStatus) {
-        this.currentStatus = newStatus;
-    }
 
 
     /**
@@ -97,6 +96,10 @@ public class Person {
         return score;
     }
 
+    public ScoreList getScoreList() {
+        return scoreList;
+    }
+
     public void setLinkedIn(LinkedIn linkedIn) {
         this.linkedIn = linkedIn;
     }
@@ -108,6 +111,17 @@ public class Person {
     public void setScore(Score score) {
         this.score = score;
     }
+
+    public void setScoreForTag(Tag tag, Score score) {
+        requireAllNonNull(tag, score);
+        scoreList.updateScoreList(tag, score);
+    }
+
+    public void setStatus(Status newStatus) {
+        this.currentStatus = newStatus;
+    }
+
+
 
     /**
      * Returns true if both persons have the same name.

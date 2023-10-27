@@ -4,6 +4,8 @@ import seedu.address.model.tag.Tag;
 
 import java.util.HashMap;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 public class ScoreList {
     private final HashMap<String, Score> scoreList;
 
@@ -13,6 +15,7 @@ public class ScoreList {
 
     // TODO: have a TAG parser that checks if its a interview-related tag
     public void updateScoreList(Tag tag, Score score) {
+        requireAllNonNull(tag, score);
         scoreList.put(tag.tagName, score);
     }
 
