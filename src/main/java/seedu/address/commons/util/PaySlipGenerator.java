@@ -3,7 +3,6 @@ package seedu.address.commons.util;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,7 +24,8 @@ import seedu.address.model.person.Person;
 public class PaySlipGenerator {
     private static final String TEMPLATE_PATH = "./resources/template.pdf";
     private static final String OUTPUT_DIRECTORY_PATH = "./payslips/";
-    private static final InputStream TEMPLATE = PaySlipGenerator.class.getClassLoader().getResourceAsStream("template.pdf");
+    private static final InputStream TEMPLATE = PaySlipGenerator.class.getClassLoader()
+        .getResourceAsStream("template.pdf");
 
     /**
      * Generates a PDF payslip for an employee.
@@ -98,8 +98,8 @@ public class PaySlipGenerator {
             fieldMap.put("otherAdditionalPayments", "0.00");
         }
 
-        if (Double.parseDouble(latest.getTotalDeductionsString()) >
-            Double.parseDouble(latest.getEmployeeCpfDeductionsString())) {
+        if (Double.parseDouble(latest.getTotalDeductionsString())
+            > Double.parseDouble(latest.getEmployeeCpfDeductionsString())) {
             String deductionReason1 = "";
             String deduction1 = "";
 
