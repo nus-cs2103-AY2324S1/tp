@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -35,7 +37,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the name or IC of the patient.\n"
+            + "by the name or NRIC of the patient.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Format: edit n/NAME or id/IC_NUMBER [Fields] ...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -44,10 +46,10 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Example: p/98742122.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book.";
     public static final String MESSAGE_INCONSISTENT_NAME_AND_ID =
             "Both a name and an NRIC were provided, but they do not match the same person.";
+    private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -75,18 +77,18 @@ public class EditCommand extends Command {
         Optional<Person> personOptional = findPersonToEdit(lastShownList);
 
         if (personOptional.isEmpty()) {
+            logger.log(Level.WARNING, "Person not found for editing");
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
         Person personToEdit = personOptional.get();
+        logger.log(Level.INFO, "Editing person: {0}", personToEdit);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        logger.log(Level.INFO, "EditCommand executed successfully");
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -130,11 +132,11 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
+        Name name = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Nric nric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -144,7 +146,7 @@ public class EditCommand extends Command {
                 editPersonDescriptor.getMedicalHistories().orElse((personToEdit.getMedicalHistories()));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress,
+        return new Person(name, nric, updatedPhone, updatedEmail, updatedAddress,
                 updatedAppointment, updatedMedicalHistories, updatedTags);
     }
 
