@@ -20,7 +20,7 @@ class SortCommandTest {
     void execute_sortName() {
         model = new ModelManager(getUnsortedApplicantBook(), new UserPrefs());
         try {
-            new SortCommand(Descriptor.NAME).execute(model);
+            new SortCommand(Descriptor.NAME, false).execute(model);
         } catch (CommandException e) {
             throw new RuntimeException(e);
         }
@@ -31,7 +31,7 @@ class SortCommandTest {
     void execute_sortPhone() {
         model = new ModelManager(getUnsortedApplicantBook(), new UserPrefs());
         try {
-            new SortCommand(Descriptor.PHONE).execute(model);
+            new SortCommand(Descriptor.PHONE, false).execute(model);
         } catch (CommandException e) {
             throw new RuntimeException(e);
         }

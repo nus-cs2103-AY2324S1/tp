@@ -43,7 +43,7 @@ public class ListCommandTest {
     @Test
     public void execute_sortAndList_success() throws CommandException {
         // Execute the SortCommand
-        SortCommand sortCommand = new SortCommand(Descriptor.NAME);
+        SortCommand sortCommand = new SortCommand(Descriptor.NAME, false);
         CommandResult sortResult = sortCommand.execute(model);
 
         // Create a ListCommand
