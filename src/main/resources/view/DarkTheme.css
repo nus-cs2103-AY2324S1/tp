@@ -38,6 +38,18 @@
     /* Add padding to top and bottom for spacing */
 }
 
+.menu-header {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: derive(#ddb533, 10%);
+    -fx-opacity: 1;
+    -fx-font-size: 11pt;
+    /* Change the color to your preferred color */
+    -fx-background-color: transparent;
+    /* Set a transparent background */
+    -fx-padding: 10px 0;
+    /* Add padding to top and bottom for spacing */
+}
+
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -126,10 +138,13 @@
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #FFFFCC;
-    -fx-border-width: 1;
-    -fx-background-color: #800000;
+    -fx-border-color: derive(#ffffff, 10%);
+    -fx-border-width: 0.5;
+    /* -fx-background-color: #242424; */
+    -fx-background-color: #010a31;
+    /* -fx-background-color: #f0746c; */
 }
+
 
 .list-cell .label {
     -fx-text-fill: white;
@@ -139,6 +154,7 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    
 }
 
 .cell_small_label {

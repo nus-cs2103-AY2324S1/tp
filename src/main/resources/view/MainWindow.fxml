@@ -25,14 +25,14 @@
             <children>
                <VBox prefHeight="540.0" prefWidth="168.0" style="-fx-background-color: #16071f;" VBox.vgrow="ALWAYS">
                   <children>
-                     <Label alignment="CENTER" prefHeight="39.0" prefWidth="51.0" styleClass="label-header" text="Files" />
+                     <Label alignment="CENTER" prefHeight="39.0" prefWidth="51.0" styleClass="menu-header" text=" Files" />
                      <Button mnemonicParsing="false" text="Settings" />
                       <Button mnemonicParsing="false" text="Import Data" />
                       <Button mnemonicParsing="false" text="Export Data" />
-                     <Label alignment="CENTER" prefHeight="39.0" prefWidth="50.0" styleClass="label-header" text="Help" />
+                     <Label alignment="CENTER" prefHeight="39.0" prefWidth="50.0" styleClass="menu-header" text=" Help" />
                      <Button mnemonicParsing="false" onAction="#handleHelp" text="User Guide" />
                      <Button mnemonicParsing="false" text="Release Notes" />
-                     <Label alignment="CENTER" layoutX="10.0" layoutY="229.0" prefHeight="35.0" prefWidth="60.0" styleClass="label-header" text="Others" />
+                     <Label alignment="CENTER" layoutX="10.0" layoutY="229.0" prefHeight="35.0" prefWidth="60.0" styleClass="menu-header" text=" Others" />
                      <Button mnemonicParsing="false" text="About Us" />
                      <Button mnemonicParsing="false" text="Feedback" />
                      <Button mnemonicParsing="false" onAction="#handleExit" styleClass="button" text="Exit" />
