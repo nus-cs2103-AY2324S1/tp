@@ -94,6 +94,7 @@ public class Person {
 
     /**
      * Adds a note to this person
+     *
      * @param note The note to be added.
      */
     public void addNote(Note note) {
@@ -101,9 +102,20 @@ public class Person {
     }
 
     /**
+     * Add a set of tags to this person
+     *
+     * @param tags The tags to be added.
+     */
+    public void addTag(Set<Tag> tags) {
+        this.tags.addAll(tags);
+    }
+
+    /**
      * Remove a note by its user-friendly id
+     *
      * @param id The id of the note you want to remove
-     * @return {@code true} if the operation is successful and {@code false} if the note with this id does not exist
+     * @return {@code true} if the operation is successful and {@code false} if the
+     *         note with this id does not exist
      */
     public boolean removeNoteByUserFriendlyId(int id) {
         return this.removeNoteByIndex(id - 1);
@@ -119,6 +131,7 @@ public class Person {
 
     /**
      * Adds an event to this person.
+     *
      * @param event The event to be added.
      */
     public void addEvent(Event event) {
@@ -127,9 +140,10 @@ public class Person {
 
     /**
      * Remove an event by its user-friendly id
+     *
      * @param id The id of the event you want to remove
      * @return The event object that is just deleted if the operation is successful
-     *     or {@code null} if the event with this name does not exist
+     *         or {@code null} if the event with this name does not exist
      */
     public Event removeEventByUserFriendlyId(EventID id) {
         return this.removeEventByIndex(id.getId() - 1);
