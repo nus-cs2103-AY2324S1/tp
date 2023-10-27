@@ -13,6 +13,8 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
+        assert !keywords.isEmpty();
+
         this.keywords = keywords;
     }
 

@@ -230,6 +230,43 @@ for empty/null inputs in the Person object by checking if the optional field is 
   * Cons:
     * Inconveniences the user as they have to remember a new command to add a person with optional fields.
 
+### Improved find feature
+
+The `find` command in our application displays persons that fit the keyword(s)
+
+#### Implementation
+
+The `find` feature involves checking the current filtered list of persons and filtering out persons with fitting names 
+or groups. This is done using `NameOrGroupContainsKeywordsPredicate`, which enhanced from the original 
+`NameContainsKeywordsPredicate` class. The predicate is then passed to `Model#updateFilteredPersonList(Predicate<Person> predicate)`.
+
+As a result, the `ObservableList<Person>` is updated with the filtered lists of persons.
+The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons.
+
+The enhanced `find` command remains its original ability i.e. find the person whose name fits the keyword. Except it will also
+find person whose group(s) fits the keyword. If the person's group name fits the keyword, it will be shown on the UI, 
+even though the person's name does not fit the keyword(s).
+
+#### Feature details
+1. The `find` command can accept one or more parameter `keyword` for searching person and events.
+2. A `NameOrGroupContainsKeywordsPredicate` will be created and a `Find` command will be created with the predicates.
+3. The `Find` command will then be executed and the `UI` will be updated with the filtered lists of persons.
+
+#### General design considerations
+
+**Aspect: Keyword target differentiation**
+
+- **Alternative 1 (Current choice): Find all persons that fits the keyword.**
+    - Pros:
+        - Easier to implement.
+    - Cons:
+        - Might get unwanted results, which decreases overall experience.
+- **Alternative 2: Differentiate the target of keyword with syntax.**
+    - Pros:
+        - User can find exact person or group.
+    - Cons:
+        - Adding constraint the original command by requiring syntax, which may cause convenience.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
