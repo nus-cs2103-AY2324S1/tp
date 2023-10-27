@@ -417,6 +417,12 @@ public class MainWindow extends UiPart<Stage> {
     public void showTree() {
         singleListContainer.setVisible(false);
         dualListContainer.setVisible(false);
+
+        //todo: maybe add functions to define project name
+        String projectName = "LinkTree";
+
+        LinkTreeDisplay linkTreeDisplay = new LinkTreeDisplay(logic.getTeamBook(), logic, projectName);
+        tree.getChildren().add(linkTreeDisplay.getRoot());
         tree.setVisible(true);
 
         this.isShowingTree = true;
@@ -429,6 +435,7 @@ public class MainWindow extends UiPart<Stage> {
      * By right only the second 'tree' command will call this function.
      */
     public void hideTree() {
+        tree.getChildren().clear();
         tree.setVisible(false);
         fillInnerParts("both");
     }
