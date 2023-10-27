@@ -1,4 +1,4 @@
-package transact.model.transaction;
+package transact.model.transaction.predicates;
 
 import java.util.List;
 import java.util.Objects;
@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import transact.commons.util.ToStringBuilder;
 import transact.model.StringContainsKeywordsPredicate;
+import transact.model.transaction.Transaction;
 
 /**
  * Tests that a {@code Transaction}'s {@code Description} matches any of the keywords given.

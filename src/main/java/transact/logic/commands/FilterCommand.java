@@ -15,10 +15,15 @@ import java.util.function.Predicate;
 import transact.logic.Messages;
 import transact.logic.commands.exceptions.CommandException;
 import transact.model.Model;
-import transact.model.transaction.DescriptionContainsKeywordsPredicate;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
+import transact.model.transaction.predicates.AfterOrOnDatePredicate;
+import transact.model.transaction.predicates.BeforeOrOnDatePredicate;
+import transact.model.transaction.predicates.ByPersonIdPredicate;
+import transact.model.transaction.predicates.DescriptionContainsKeywordsPredicate;
+import transact.model.transaction.predicates.LessThanOrEqualAmountPredicate;
+import transact.model.transaction.predicates.MoreThanOrEqualAmountPredicate;
 import transact.ui.MainWindow.TabWindow;
 
 /**
@@ -68,17 +73,15 @@ public class FilterCommand extends Command {
                     .and(transaction -> descriptionHas == null
                             || new DescriptionContainsKeywordsPredicate(descriptionHas).test(transaction))
                     .and(transaction -> afterDate == null
-                            || transaction.getDate().getDate().after(afterDate.getDate())
-                            || transaction.getDate().getDate().equals(afterDate.getDate()))
+                            || new AfterOrOnDatePredicate(afterDate).test(transaction))
                     .and(transaction -> beforeDate == null
-                            || transaction.getDate().getDate().before(beforeDate.getDate())
-                            || transaction.getDate().getDate().equals(beforeDate.getDate()))
+                            || new BeforeOrOnDatePredicate(beforeDate).test(transaction))
                     .and(transaction -> moreThanAmount == null
-                            || transaction.getAmount().getValue().compareTo(moreThanAmount.getValue()) >= 0)
+                            || new MoreThanOrEqualAmountPredicate(moreThanAmount).test(transaction))
                     .and(transaction -> lessThanAmount == null
-                            || transaction.getAmount().getValue().compareTo(lessThanAmount.getValue()) <= 0)
+                            || new LessThanOrEqualAmountPredicate(lessThanAmount).test(transaction))
                     .and(transaction -> byPersonId == null
-                            || transaction.getPersonId().equals(byPersonId));
+                            || new ByPersonIdPredicate(byPersonId).test(transaction));
         }
     }
 
