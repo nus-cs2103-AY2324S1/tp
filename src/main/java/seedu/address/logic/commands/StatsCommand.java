@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Calculates the requested statistic about the currently displayed list.
@@ -25,5 +26,11 @@ public abstract class StatsCommand extends Command {
     protected static float calculatePercentage(int num, int denom) {
         assert(denom != 0);
         return num / (float) denom * 100;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .toString();
     }
 }

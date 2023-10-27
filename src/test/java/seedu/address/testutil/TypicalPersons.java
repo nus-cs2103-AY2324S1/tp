@@ -32,7 +32,7 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends")
             .withAnimalName(Person.NIL_WORD)
             .withAvailability(Availability.AVAILABLE_WORD)
-            .withAnimalType(Person.NIL_WORD,Availability.AVAILABLE)
+            .withAnimalType(Person.NIL_WORD, Availability.AVAILABLE)
             .withHousing(Housing.HDB_WORD).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
@@ -95,7 +95,8 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalPersons() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
@@ -110,5 +111,19 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    /**
+     * Returns the fosterers who are available to foster.
+     */
+    public static List<Person> getAvailable() {
+        return new ArrayList<>(Arrays.asList(BENSON, CARL, ELLE));
+    }
+
+    /**
+     * Returns the fosterers who are currently fostering.
+    */
+     public static List<Person> getCurrent() {
+        return new ArrayList<>(Arrays.asList(FIONA, GEORGE));
     }
 }
