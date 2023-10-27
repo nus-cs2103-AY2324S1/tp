@@ -76,9 +76,9 @@ public class Messages {
                 .append(attendance.getMemberName())
                 .append(" to Event: ")
                 .append(attendance.getEventName())
-                .append("; Hours: ")
+                .append(" | Hours: ")
                 .append(attendance.getHours())
-                .append("; Remark: ")
+                .append(" | Remark: ")
                 .append(attendance.getRemark());
         return builder.toString();
     }

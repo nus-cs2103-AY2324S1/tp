@@ -19,6 +19,8 @@ import seedu.ccacommander.logic.commands.CreateEventCommand;
 import seedu.ccacommander.logic.commands.CreateMemberCommand;
 import seedu.ccacommander.logic.commands.DeleteEventCommand;
 import seedu.ccacommander.logic.commands.DeleteMemberCommand;
+import seedu.ccacommander.logic.commands.EditEventCommand;
+import seedu.ccacommander.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.ccacommander.logic.commands.EditMemberCommand;
 import seedu.ccacommander.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.ccacommander.logic.commands.ExitCommand;
@@ -33,6 +35,7 @@ import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
+import seedu.ccacommander.testutil.EditEventDescriptorBuilder;
 import seedu.ccacommander.testutil.EditMemberDescriptorBuilder;
 import seedu.ccacommander.testutil.EventBuilder;
 import seedu.ccacommander.testutil.EventUtil;
@@ -81,12 +84,21 @@ public class CcaCommanderParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editMember() throws Exception {
         Member member = new MemberBuilder().build();
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
         EditMemberCommand command = (EditMemberCommand) parser.parseCommand(EditMemberCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_MEMBER.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor));
         assertEquals(new EditMemberCommand(INDEX_FIRST_MEMBER, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editEvent() throws Exception {
+        Event event = new EventBuilder().build();
+        EditEventDescriptor descriptor = new EditEventDescriptorBuilder(event).build();
+        EditEventCommand command = (EditEventCommand) parser.parseCommand(EditEventCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_EVENT.getOneBased() + " " + EventUtil.getEditEventDescriptorDetails(descriptor));
+        assertEquals(new EditEventCommand(INDEX_FIRST_EVENT, descriptor), command);
     }
 
     @Test
