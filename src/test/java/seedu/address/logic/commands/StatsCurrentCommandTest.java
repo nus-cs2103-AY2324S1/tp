@@ -1,6 +1,16 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.List;
+import java.util.Objects;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -9,14 +19,6 @@ import seedu.address.model.person.AnimalType;
 import seedu.address.model.person.Availability;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
-
-import java.util.List;
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class StatsCurrentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -29,7 +31,7 @@ public class StatsCurrentCommandTest {
     }
 
     @Test
-    public void getCurrentFosterers_filteredList_Available() {
+    public void getCurrentFosterers_filteredList_available() {
         model.updateFilteredPersonList(fosterer -> fosterer.getAvailability().equals(Availability.AVAILABLE));
         List<Person> result = currentCommand.getCurrentFosterers(model.getFilteredPersonList());
         assertTrue(result.isEmpty());

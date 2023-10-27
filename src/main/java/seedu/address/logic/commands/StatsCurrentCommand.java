@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.AnimalType;
 import seedu.address.model.person.Availability;
 import seedu.address.model.person.Person;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Calculates the statistics of fosterers who are currently fostering from the currently displayed list.
@@ -31,10 +31,10 @@ public class StatsCurrentCommand extends StatsCommand {
         return fosterers.stream()
                 .filter(fosterer ->
                         fosterer.getAvailability()
-                                .equals(Availability.NOT_AVAILABLE) &&
-                                !fosterer.getAnimalName().fullName.equals("nil") &&
-                                fosterer.getAnimalType().equals(AnimalType.CURRENT_DOG) ||
-                                fosterer.getAnimalType().equals(AnimalType.CURRENT_CAT))
+                                .equals(Availability.NOT_AVAILABLE)
+                                && !fosterer.getAnimalName().fullName.equals("nil")
+                                && fosterer.getAnimalType().equals(AnimalType.CURRENT_DOG)
+                                || fosterer.getAnimalType().equals(AnimalType.CURRENT_CAT))
                 .collect(Collectors.toList());
     }
 

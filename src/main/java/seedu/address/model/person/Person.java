@@ -18,6 +18,8 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    public static final String NIL_WORD = "nil";
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -31,8 +33,6 @@ public class Person {
     private final Availability availability;
     private final Housing housing;
     private final AnimalType animalType;
-
-    public static final String NIL_WORD = "nil";
 
     /**
      * Every field must be present and not null.

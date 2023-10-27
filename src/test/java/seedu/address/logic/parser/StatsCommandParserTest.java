@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.StatsAvailCommand;
 import seedu.address.logic.commands.StatsCommand;
 import seedu.address.logic.commands.StatsCurrentCommand;
@@ -16,8 +17,8 @@ public class StatsCommandParserTest {
     @Test
     public void parse_validArgs_returnsStatsCommand() {
         assertParseSuccess(parser, StatsAvailCommand.COMMAND_WORD, new StatsAvailCommand());
-        assertParseSuccess(parser,  StatsCurrentCommand.COMMAND_WORD, new StatsCurrentCommand());
-        assertParseSuccess(parser,  StatsHousingCommand.COMMAND_WORD, new StatsHousingCommand());
+        assertParseSuccess(parser, StatsCurrentCommand.COMMAND_WORD, new StatsCurrentCommand());
+        assertParseSuccess(parser, StatsHousingCommand.COMMAND_WORD, new StatsHousingCommand());
     }
 
     @Test

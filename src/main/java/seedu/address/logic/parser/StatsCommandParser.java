@@ -2,11 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.StatsCommand;
 import seedu.address.logic.commands.StatsAvailCommand;
+import seedu.address.logic.commands.StatsCommand;
 import seedu.address.logic.commands.StatsCurrentCommand;
 import seedu.address.logic.commands.StatsHousingCommand;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

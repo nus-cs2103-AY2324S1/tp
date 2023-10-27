@@ -1,16 +1,15 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.AnimalType;
 import seedu.address.model.person.Availability;
 import seedu.address.model.person.Person;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Calculates the statistics of available fosterers from the currently displayed list.
