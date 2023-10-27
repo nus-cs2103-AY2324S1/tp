@@ -242,6 +242,30 @@ of the command string of the 20 most recent commands executed. Internally, it is
 and `currentCmdIndex`. This internal representation allows cycling through the recent commands both forwards
 and backwards.
 
+### View Command Feature
+
+The view command feature allows the user to view the details of a specific patient or specialist.
+
+Given below is an example usage scenario and how the view mechanism behaves at each step.
+
+Step 1. The user launches the application. The List of person will be initialized with the initial
+state, and the `Current Selected Person` pointer pointing to the first person on the list.
+![ViewState1](images/ViewState1.png)
+
+
+Step 2. The user executes `view 2` command to view the 2nd person details in the `DoConnek Pro`.
+The `view` command update the `Current Selected Person` pointer with the corresponding index from the
+input.
+![ViewState2](images/ViewState2.png)
+
+
+Step 3. The UI now updates the view panel to display the newly selected person and their details.
+
+The sequence diagram below shows how the view operation works:
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes the view command:
+![ViewActivityDiagram](images/ViewActivityDiagram.png)
 
 These operations are exposed in the `Logic` interface as `Logic#getPrevCommandString(String commandInputString)`,
 `Logic#getPassedCommandString(String commandInputString)`, and `Logic#addCommandString(String commandInputString)`.
@@ -542,6 +566,29 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
       Use case ends.
 
+**Use case: View a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  System shows a list of persons
+3.  User requests to view the details a specific person in the list
+4.  System shows the person details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
+
 **Use case: Exit the program**
 
 **MSS**
@@ -625,6 +672,24 @@ testers are expected to do more *exploratory* testing.
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Viewing a person
+
+1. Viewing a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `view 1`<br>
+       Expected: First person is selected to be viewed. Details of the viewed person shown in the View Person Panel.
+Timestamp in the status bar is updated.
+
+    1. Test case: `view 0`<br>
+       Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
