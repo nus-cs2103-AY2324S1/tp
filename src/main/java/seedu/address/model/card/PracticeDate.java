@@ -5,7 +5,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.format.DateTimeParseException;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  * Represents a Card's answer in lesSON.
@@ -77,6 +80,14 @@ public class PracticeDate implements Comparable<PracticeDate> {
             return false;
         }
         return true;
+    }
+
+    public String getDisplayName() {
+        int year = this.practiceDate.getYear();
+        Month month = this.practiceDate.getMonth();
+        String monthString = month.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        int day = this.practiceDate.getDayOfMonth();
+        return String.format("%d %s %d", day, monthString, year);
     }
 
     @Override
