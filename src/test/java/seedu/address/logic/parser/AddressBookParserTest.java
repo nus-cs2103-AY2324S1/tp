@@ -25,6 +25,7 @@ import seedu.address.logic.commands.EditTutorCommand;
 import seedu.address.logic.commands.EditTutorCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindScheduleCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ListTutorCommand;
@@ -32,6 +33,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.TutorNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditScheduleDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -121,6 +123,15 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_listSchedule() throws Exception {
         assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD) instanceof ListScheduleCommand);
+        assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD) instanceof ListScheduleCommand);
+    }
+
+    @Test
+    public void parseCommand_findSchedule() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindScheduleCommand command = (FindScheduleCommand) parser.parseCommand(
+            FindScheduleCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindScheduleCommand(new TutorNameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
