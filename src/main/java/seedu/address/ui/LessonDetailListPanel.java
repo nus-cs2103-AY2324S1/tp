@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -66,9 +65,6 @@ public class LessonDetailListPanel extends UiPart<Region> {
         endTime.setText(lesson.getEndTimeStr());
         students.setText(lesson.getStudentsStr());
         subject.setText(lesson.getSubjectStr());
-
-//        taskListView.setItems(lesson.getTaskList());
-//        taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
 
         taskListContainer.getChildren().clear();
         ObservableList<Task> taskList = lesson.getTaskList();
