@@ -326,7 +326,7 @@ _Details coming soon ..._
 ## Command summary
 
 Action                     | Format, Examples
----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**                    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Remark**                 | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`
 **View**                   | `view INDEX` <br> e.g., `view 1`
@@ -336,7 +336,7 @@ Action                     | Format, Examples
 **Delete**                 | `delete INDEX`<br> e.g., `delete 3`
 **Set**                    | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`
 **Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Search**                 | `search (n/KEYWORD | st/KEYWORD | t/KEYWORD) [MORE_KEYWORDS]` <br> e.g., `search n/alex`
+**Find**                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**                   | `list s/ATTRIBUTE` <br> e.g. `list s/name`
 **Help**                   | `help`
 

@@ -219,6 +219,7 @@ Pros: Arguably a more OOP approach since all commands that trigger view IS-A `Vi
 Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
 An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
 
+
 ### Search feature
 
 #### Implementation
@@ -259,9 +260,6 @@ Step 3. The user should see the UI below upon entering `search n/john st/intervi
 
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
-
-
-
 
 ### \[Proposed\] Undo/redo feature
 
@@ -479,8 +477,7 @@ Use case ends.
 
 **MSS**
 1.  Hiring manager types in search parameters to search users by the specified categories.
-2.  JABPro shows a list of persons whose profile matches the given parameters. 
-    Use case ends.
+2.  JABPro shows a list of persons whose profile matches the given parameters.
 
 **Extensions**
 
@@ -489,6 +486,7 @@ Use case ends.
       Use case resumes at step 1.
 * 2a. The list is empty.
   Use case ends.
+
 
 **Use case: Delete a person**
 
