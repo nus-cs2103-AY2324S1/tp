@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.StartTime;
+import seedu.address.model.schedule.Status;
 
 public class ParserUtilTest {
 
@@ -40,8 +41,14 @@ public class ParserUtilTest {
     private static final String VALID_TIME_STRING = "2023-09-15T11:00";
     private static final LocalDateTime VALID_TIME_VALUE = LocalDateTime.of(2023, 9, 15, 11, 0, 0);
 
+    private static final String VALID_SCHEDULE_STATUS = "0";
+    private static final String INVALID_SCHEDULE_STATUS = "3";
+
     /* Others */
     private static final String WHITESPACE = " \t\r\n";
+    private static final Status statusMissed = Status.MISSED;
+    private static final Status statusCompleted = Status.COMPLETED;
+    private static final Status invalidStatus = Status.PENDING;
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -186,5 +193,28 @@ public class ParserUtilTest {
         String endTimeWithWhitespace = WHITESPACE + VALID_TIME_STRING + WHITESPACE;
         EndTime expectedEndTime = new EndTime(VALID_TIME_VALUE);
         assertEquals(expectedEndTime, ParserUtil.parseEndTime(endTimeWithWhitespace));
+    }
+
+    @Test
+    public void parseStatus_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus((String) null));
+    }
+
+    @Test
+    public void parseStatus_invalidStatus_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(INVALID_SCHEDULE_STATUS));
+    }
+
+    @Test
+    public void parseStatus_validValueWithoutWhitespace_returnsStatus() throws Exception {
+        Status expectedStatus = Status.MISSED;
+        assertEquals(expectedStatus, ParserUtil.parseStatus(VALID_SCHEDULE_STATUS));
+    }
+
+    @Test
+    public void parseStatus_validValueWithWhitespace_returnsTrimmedStatus() throws Exception {
+        String statusWithWhitespace = WHITESPACE + VALID_SCHEDULE_STATUS + WHITESPACE;
+        Status expectedStatus = Status.MISSED;
+        assertEquals(expectedStatus, ParserUtil.parseStatus(statusWithWhitespace));
     }
 }
