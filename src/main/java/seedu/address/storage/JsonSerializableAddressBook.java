@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -32,7 +33,7 @@ public class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
             @JsonProperty("courseCode") String courseCode) {
         this.persons.addAll(persons);
-        this.courseCode = courseCode;
+        this.courseCode = Objects.requireNonNullElse(courseCode, "");;
     }
 
     /**
