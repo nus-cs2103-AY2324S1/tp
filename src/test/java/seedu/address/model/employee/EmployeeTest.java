@@ -16,6 +16,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEmployees.ALICE;
 import static seedu.address.testutil.TypicalEmployees.BOB;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.EmployeeBuilder;
@@ -45,6 +49,30 @@ public class EmployeeTest {
         // different id, all other attributes same -> returns false
         editedAlice = new EmployeeBuilder(ALICE).withId(VALID_ID_BOB).build();
         assertFalse(ALICE.isSameEmployee(editedAlice));
+    }
+
+    @Test
+    public void isOnLeaveToday_validEmployee_returnsTrue() {
+        Employee employee = new EmployeeBuilder().withLeaveList(new ArrayList<Leave>(Arrays.asList(new Leave(LocalDate.now())))).build();
+        assertTrue(employee.isOnLeaveToday());
+    }
+
+    @Test 
+    public void isOnLeaveToday_invalidEmployee_returnsFalse() {
+        Employee employee = new EmployeeBuilder().withIsOnLeave(false).build();
+        assertFalse(employee.isOnLeaveToday());
+    }
+
+    @Test
+    public void getNumOfLeaves_validEmployee_returnsNumOfLeaves() {
+        Employee employee = new EmployeeBuilder().withLeaveList(new ArrayList<Leave>()).build();
+        assertEquals(employee.getNumOfLeaves(), 0);
+    }
+
+    @Test
+    public void getOvertimePay_validEmployee_returnsOvertimePay() {
+        Employee employee = new EmployeeBuilder().withSalary("9000").withOvertimeHours(5).build();
+        assertEquals(employee.getOvertimePay(), Math.round((5*9000*1.5/(52*44) * 100)) / 100d);
     }
 
     @Test
