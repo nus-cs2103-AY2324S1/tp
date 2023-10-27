@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.time.LocalTime;
+
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;

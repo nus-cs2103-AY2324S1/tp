@@ -11,8 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATE
 import static seedu.address.model.event.EventPeriod.isValidPeriod;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
