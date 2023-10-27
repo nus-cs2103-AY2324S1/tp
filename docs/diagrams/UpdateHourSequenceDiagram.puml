@@ -76,8 +76,6 @@ loop through each Person in currentList
     deactivate Model
 end
 
-
-
 create CommandResult
 HourCommand -> CommandResult
 activate CommandResult
