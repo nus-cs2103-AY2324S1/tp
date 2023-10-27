@@ -256,7 +256,7 @@ The following sequence diagram shows how the `sort` command works:
 #### Design considerations
 
 **Aspect: Whether ‘sort’ command should take in a value.**
-*Alternative 1: (current choice) ‘sort’ command does not take in a value but does not an exception if an input is produced.
+* Alternative 1: (current choice) ‘sort’ command does not take in a value but does not an exception if an input is produced.
 * Pros: Prevents the need for un necessary exceptions that might affect the running of the program
 * Cons: The arguments might be nonsensical, for instance ‘sort 2’ could instead be used to provide the 2 most closely expiring profiles.
 * Alternative 2 : `sort` command does not take in a value and produces exception if an input is produced
