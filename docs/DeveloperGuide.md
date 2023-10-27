@@ -243,6 +243,66 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Sorting feature
+
+#### Implementation
+
+The sorting feature builds on the existing filter feature present in `Model`. `Model` has a getter method `Model#getFilteredPersonList()` which returns an `ObservableList<Person>`. `Model#getFilteredPersonList()` is called by `LogicManager#getFilteredPersonList()`, which is then called in `MainWindow` to render a filtered list of contacts. The implementation of the filter feature in `ModelManager` uses JavaFX's `FilteredList`, an implementation of the `SortedList` interface.
+
+The new sort feature makes use of JavaFX's `SortedList`, another implementation of the `ObservableList` interface. `SortedList` takes a predicate which it then uses to sort the list.
+
+To implement the sort feature, the method `Model#updateSortedPersonList()` was exposed via the `Model` interface. A `SortedList` was then added to the implementation in `ModelManager` as a wrapper of the existing `FilteredList`. `ModelManager`'s implementation of `updateSortedPersonList()` method updates the predicate of the `SortedList`. Finally, the implementation of `getFilteredPersonList()` was updated to return the sorted list.
+
+The sort command updates the predicate of the model's `SortedList` to a `PersonSortComparator`. `PersonSortComparator` extends `Comparator<Person>`, adding in a few extra methods specific to sorting persons:
+
+* `parseSortField()` parses a given string into a value of the `SortField` enumeration. This value is then used later to determine the predicate implementation.
+* `parseSortOrder()` parses a given string into a value of the `SortOrder` enumeration. This value is then used later to determine the predicate implementation.
+* `generateXXComparator()` methods. These methods return comparators which compare based on XX field of Person in either ascending or descending order.
+* `generateComparator()` takes in a `SortField` and `SortOrder` and calls the relevant `generateXXComparator()` based on the given sort order and field.
+
+Given below is an example usage scenario and how the sorting mechanism behaves at each step.
+
+Step 1. The user launches the app. The rendered list is unsorted and unfiltered.
+
+<!-- todo insert diagram -->
+
+Step 2. The user executes `find al` command to filter contacts by name. This updates the predicate of the `FilteredList` to only show contacts with names matching "al". The `SortedList` predicate remains unchanged (i.e. `null`).
+
+<!-- todo insert diagram -->
+
+Step 3. The user executes `sort /by name /order desc​` to sort the filtered list by name in descending order. The `sort` command parser calls `PersonSortComparator#generateComparator()` to generate the appropriate comparator. The sort command then calls `Model#updateSortedPersonList()`, updating the predicate of the `SortedList`. This newly sorted list is then rendered in the main UI.
+
+<!-- todo insert diagram -->
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `find` command is called again, the sorting will persist.
+
+</div>
+
+The following sequence diagram shows how the sort operation works:
+
+_{insert diagram here}_
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+Step 4. The user executes `sort /by none`, which updates the `SortedList` predicate and resets the sorting.
+
+<!-- todo insert diagram-->
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+_{insert diagram here}_
+
+#### Design considerations:
+
+**Aspect: How sort executes:**
+
+* **Alternative 1 (current choice):** _{to be added}_
+
+* **Alternative 2:** _{to be added}_
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
