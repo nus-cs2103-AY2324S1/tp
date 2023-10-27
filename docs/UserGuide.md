@@ -143,6 +143,9 @@ Adds the username for their social profile [LinkedIn/Github] to the existing con
 
 Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
 
+* User is expected to enter a valid username for the specified social profile, and an account must exist
+* The username gets added as an attribute to the existing details of a candidate
+
 Examples:
 * `addG 2 u/MadLamprey`
 * `addL 4 u/aditya-misra`
@@ -152,6 +155,9 @@ Examples:
 Redirect user to candidate's LinkedIn or Github account
 
 Format: `linkedin INDEX` or `github INDEX`
+
+* Browser window opens, showing the profile
+* If the user has not provided a valid username for the corresponding social profile, an appropriate message is displayed on the interface of the social profile (JABPro does not perform error handling for this case).
 
 Examples:
 * `linkedin 1`
@@ -277,6 +283,29 @@ Sets the applicant to a specific status ("Preliminary"/ "Interviewed"/ "Rejected
 Examples:
 * `list` followed by `set 2 Interviewed` sets the 2nd person in the address book to "Interviewed".
 * `find Betsy` followed by `set 1 Interviewed` sets the status of 1st person in the results of the `find` command.
+
+### Adding an Event: `event`
+
+Adds an event to JABPro.
+
+Format: `event INDEX d/DESCRIPTION bt/BEGIN_TIME et/END_TIME`
+
+* `BEGIN_TIME` and `END_TIME` must be in the format `yyyy-MM-dd HH:mm`
+* Event gets added to the current list of events, and also gets written to the `eventbook.json` file
+
+Example:
+* `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds an event to the list, and stores the name of the person the event is associated with, the description, start time and end time, in a JSON file.
+
+### Viewing events: `schedule`
+
+Displays all events that have been added to JABPro.
+
+Format: `schedule`
+
+* Opens the `Events` window, which can also be accessed by clicking on `Events > Event` in the menu bar
+
+Example:
+* First, entering `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds the event, and entering `schedule` displays this event in a separate window, titled `Events`
 
 ### Clearing all entries : `clear`
 
