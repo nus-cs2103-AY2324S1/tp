@@ -27,6 +27,9 @@ public class GuiSettingsTest {
 
         GuiSettings guiSettings2 = new GuiSettings(windowWidth, windowHeight, xPosition, yPosition, theme);
         assertEquals(guiSettings2.getTheme(), theme);
+
+        GuiSettings guiSettings3 = new GuiSettings(windowWidth, windowHeight, xPosition, yPosition, null);
+        assertEquals(guiSettings3.getTheme(), GuiSettings.DEFAULT_THEME);
     }
 
     @Test
@@ -88,6 +91,22 @@ public class GuiSettingsTest {
         // null -> returns false
         assertFalse(guiSettings1.equals(null));
         assertFalse(guiSettings2.equals(null));
+
+        // different windowWidth
+        assertFalse(guiSettings2.equals(
+            new GuiSettings(windowWidth + 1, windowHeight, xPosition, yPosition, theme)));
+
+        // different windowHeight
+        assertFalse(guiSettings2.equals(
+            new GuiSettings(windowWidth, windowHeight + 1, xPosition, yPosition, theme)));
+
+        // different windowCoordinates
+        assertFalse(guiSettings2.equals(
+            new GuiSettings(windowWidth, windowHeight, xPosition + 1, yPosition + 1, theme)));
+
+        // different theme
+        assertFalse(guiSettings2.equals(
+            new GuiSettings(windowWidth, windowHeight, xPosition, yPosition, "other theme")));
 
         // different values
         assertFalse(guiSettings1.equals(otherGuiSettings2));
