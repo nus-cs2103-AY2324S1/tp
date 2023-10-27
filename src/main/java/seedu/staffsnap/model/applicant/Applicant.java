@@ -184,6 +184,45 @@ public class Applicant implements Comparable<Applicant> {
     }
 
     /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Email is equal to this Email; a value less than 0 if this Email is
+     *      lexicographically less than the Email argument; and a value greater than 0 if this Email is
+     *      lexicographically greater than the Email argument.
+     */
+    public int compareByEmail(Applicant o) {
+        if (isDescendingOrder) {
+            return -this.email.compareTo(o.email);
+        }
+        return this.email.compareTo(o.email);
+    }
+
+    /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Status is equal to this Status; a value less than 0 if this Status is
+     *      lexicographically less than the Status argument; and a value greater than 0 if this Status is
+     *      lexicographically greater than the Status argument.
+     */
+    public int compareByStatus(Applicant o) {
+        if (isDescendingOrder) {
+            return -this.status.compareTo(o.status);
+        }
+        return this.status.compareTo(o.status);
+    }
+
+    /**
+     * @param o the Applicant to be compared.
+     * @return the value 0 if the argument Position is equal to this Position; a value less than 0 if this Position is
+     *      lexicographically less than the Position argument; and a value greater than 0 if this Position is
+     *      lexicographically greater than the Position argument.
+     */
+    public int compareByPosition(Applicant o) {
+        if (isDescendingOrder) {
+            return -this.position.compareTo(o.position);
+        }
+        return this.position.compareTo(o.position);
+    }
+
+    /**
      * @param o the object to be compared.
      * @return the value 0 if the argument Applicant is equal to this Applicant;
      *      a value less than 0 if this Applicant is lexicographically less than the Applicant argument;
@@ -198,6 +237,12 @@ public class Applicant implements Comparable<Applicant> {
             return compareByPhone(o);
         case RATING:
             return compareByRating(o);
+        case EMAIL:
+            return compareByEmail(o);
+        case STATUS:
+            return compareByStatus(o);
+        case POSITION:
+            return compareByPosition(o);
         default:
             return 0;
         }
