@@ -61,6 +61,9 @@ Refer to the [Features](#features) below for details of each command.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* When using parentheses ( ) with items separated by the pipe symbol |, at least one item must be included. <br>
+  e.g in the command `search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -139,6 +142,9 @@ Adds the username for their social profile [LinkedIn/Github] to the existing con
 
 Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
 
+* User is expected to enter a valid username for the specified social profile, and an account must exist
+* The username gets added as an attribute to the existing details of a candidate
+
 Examples:
 * `addG 2 u/MadLamprey`
 * `addL 4 u/aditya-misra`
@@ -148,6 +154,9 @@ Examples:
 Redirect user to candidate's LinkedIn or Github account.
 
 Format: `linkedin INDEX` or `github INDEX`
+
+* Browser window opens, showing the profile
+* If the user has not provided a valid username for the corresponding social profile, an appropriate message is displayed on the interface of the social profile (JABPro does not perform error handling for this case).
 
 Examples:
 * `linkedin 1`
@@ -189,7 +198,9 @@ Examples:
 
 ### Search job applicants by category: `search`
 
-Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status.
+Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
+
+Format: `search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])`
 
 #### Search job applicants by name
 
@@ -212,24 +223,36 @@ Examples:
 
 Finds job applicants whose status match any of the given keywords.
 
-Format: `search s/KEYWORD [MORE KEYWORDS]`
+Format: `search st/KEYWORD [MORE KEYWORDS]`
 
-* Keywords can only be from the following list: `Pending`, `Interviewed`, `Rejected`, `Offered`
-  e.g. `search s/interviewing` will give an error.
-* Keywords are case-insensitive: `search s/interviewd` and `search s/INTERVIEWED` return the same result.
+* Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
+  e.g. `search st/interviewing` will give an error.
+* Keywords are case-insensitive: `search st/interviewed` and `search st/INTERVIEWED` return the same result.
 
 Example:
-* `search s/interviewed`
+* `search st/interviewed`
+
+#### Search job applicants by tag
+
+Finds job applicants whose tag(s) match any of the given tag keywords
+
+Format: `search t/KEYWORD [MORE KEYWORDS]`
+
+* Keywords are case-insensitive: `search t/hardworking' and `search t/HARDWORKING` return the same result.
+
+Example:
+* `search t/hardworking`
 
 #### Notes for advanced users:
-* You can combine the name and status search categories (e.g. `search n/Alex s/offered`) in a single search command.
+* You can combine the search categories (e.g. `search n/Alex st/offered t/software engineer`) in a single search command.
 * Each search category can be used at most once in a single search command
-  e.g. `search n/Alex n/Adam s/rejected` is not allowed.
+  e.g. `search n/Alex n/Adam st/rejected` is not allowed.
 
 Example:
-* `search n/Alex Bernice s/interviewed rejected` will output applicants whose:
+* `search n/Alex Bernice st/interviewed rejected t/analyst` will output applicants whose:
     * names contain either Alex `or` Bernice
     * `and` status is either interviewed `or` rejected.
+    * `and` has a tag `analyst`
 
 ### Deleting a person : `delete`
 
@@ -263,6 +286,29 @@ Sets the applicant to a specific status ("Preliminary"/ "Interviewed"/ "Rejected
 Examples:
 * `list` followed by `set 2 Interviewed` sets the 2nd person in the address book to "Interviewed".
 * `find Betsy` followed by `set 1 Interviewed` sets the status of 1st person in the results of the `find` command.
+
+### Adding an Event: `event`
+
+Adds an event to JABPro.
+
+Format: `event INDEX d/DESCRIPTION bt/BEGIN_TIME et/END_TIME`
+
+* `BEGIN_TIME` and `END_TIME` must be in the format `yyyy-MM-dd HH:mm`
+* Event gets added to the current list of events, and also gets written to the `eventbook.json` file
+
+Example:
+* `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds an event to the list, and stores the name of the person the event is associated with, the description, start time and end time, in a JSON file.
+
+### Viewing events: `schedule`
+
+Displays all events that have been added to JABPro.
+
+Format: `schedule`
+
+* Opens the `Events` window, which can also be accessed by clicking on `Events > Event` in the menu bar
+
+Example:
+* First, entering `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds the event, and entering `schedule` displays this event in a separate window, titled `Events`
 
 ### Clearing all entries : `clear`
 
@@ -328,7 +374,7 @@ Action                     | Format, Examples
 **Delete**                 | `delete INDEX`or `delete t/TAG` <br> e.g., `delete 3`, `delete t/friend t/colleague`
 **Set**                    | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`
 **Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Search**                 | `search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])`<br> e.g., `search n/alex st/interviewed`
 **List**                   | `list s/ATTRIBUTE` <br> e.g. `list s/name`
 **Export**                 | `export`
 **Help**                   | `help`
