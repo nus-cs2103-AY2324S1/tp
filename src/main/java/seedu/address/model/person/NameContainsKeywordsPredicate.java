@@ -18,7 +18,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
      * @param keywords keywords from user input.
      */
     public NameContainsKeywordsPredicate(List<String> keywords) {
-        assert !keywords.isEmpty();
+        assert keywords != null;
 
         this.keywords = keywords;
     }

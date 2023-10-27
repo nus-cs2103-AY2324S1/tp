@@ -244,7 +244,7 @@ As a result, the `ObservableList<Person>` is updated with the filtered lists of 
 The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons.
 
 The enhanced `find` command remains its original ability i.e. find the person whose name fits the keyword. Except it will also
-find person whose group(s) fits the keyword. If the person's group name fits the keyword, it will be shown on the UI, 
+find person whose group(s) fits the keyword. If a person's group name fits the keyword, it will be shown on the UI, 
 even though the person's name does not fit the keyword(s).
 
 #### Feature details
