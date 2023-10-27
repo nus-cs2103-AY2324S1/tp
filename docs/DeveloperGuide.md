@@ -99,6 +99,25 @@ The following sequence diagram illustrates the process of invocation for the Edi
 #### Design Considerations
 
 --------------------------------------------------------------------------------------------------------------------
+### Delete Command
+
+The delete command allows the user to delete a job application using its index.
+
+#### Implementation
+
+The following sequence diagram illustrates the process of invocation for the command:
+
+(insert UML sequence diagram)
+
+The `DeleteCommand` class implements this command. It accepts an index and deletes the job application at the specified index.
+
+The `DeleteCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
+not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown. If the user input is valid,
+then `DeleteCommandParser` returns the corresponding `DeleteCommand`.
+
+#### Design considerations
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### List Command
 
@@ -144,6 +163,27 @@ relevant field method must be invoked.
 #### Design considerations
 
 --------------------------------------------------------------------------------------------------------------------
+
+### FInd Command
+
+The find command allows the user to get a filtered list of job applications.
+
+#### Implementation
+
+The following sequence diagram illustrates the process of invocation for the command:
+
+(insert UML sequence diagram)
+
+The `FindCommand` class implements this command. 
+It accepts a `FieldContainsKeywordsPredicate` which will be set as the predicate when `Model::updateFilteredJobList` is called.
+
+The `FindCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
+not conform to the expected format, a `ParseException` is thrown. If the user input is valid, then `FindCommandParser`
+generates the corresponding `FindCommand` with a `FieldContainsKeywordsPredicate` which will be set as the predicate when filtering through the list.
+
+#### Design considerations
+
+--------------------------------------------------------------------------------------------------------------------
 ### Clear Command
 
 The clear command allows the user to delete all job applications.
@@ -155,25 +195,6 @@ The following sequence diagram illustrates the process of invocation for the com
 (insert UML sequence diagram)
 
 The `ClearCommand` class implements this command.
-
-#### Design considerations
-
---------------------------------------------------------------------------------------------------------------------
-### Delete Command
-
-The delete command allows the user to delete a job application using its index.
-
-#### Implementation
-
-The following sequence diagram illustrates the process of invocation for the command:
-
-(insert UML sequence diagram)
-
-The `DeleteCommand` class implements this command. It accepts an index and deletes the job application at the specified index.
-
-The `DeleteCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
-not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown. If the user input is valid, 
-then `DeleteCommandParser` returns the corresponding `DeleteCommand`.
 
 #### Design considerations
 
@@ -234,54 +255,6 @@ _Extensions_
 * 1a. The company is not specified
 
   Use case ends.
-
----
-
-**Use case: Set deadline for an application**
-
-_MSS_
-
-1. User requests to list applications
-2. System shows a list of applications
-3. User requests to set a deadline for an application, specifying an index and deadline
-4. System adds deadline to the application at the index specified
-
-   Use case ends.
-
-_Extensions_
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index/deadline is invalid.
-    * 3a1. System shows an error message.
-
-      Use case resumes at step 3.
-
----
-
-**Use case: Mark an application**
-
-_MSS_
-
-1. User requests to list applications
-2. System shows a list of applications
-3. User requests to mark an application in the list, specifying an index and status
-4. System marks the application at the index specified
-
-   Use case ends.
-
-_Extensions_
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index/deadline is invalid.
-    * 3a1. System shows an error message.
-
-      Use case resumes at step 3.
 
 ---
 

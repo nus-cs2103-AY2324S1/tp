@@ -34,14 +34,14 @@ applications.
    open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists all applications.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe`
-      to the Address Book.
+    * `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 i/Technology s/Pending` : 
+       Adds an application for the company named `Microsoft` to the Application Book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd application shown in the current list.
 
-    * `clear` : Deletes all contacts.
+    * `clear` : Deletes all applications.
 
     * `exit` : Exits the app.
 
@@ -55,24 +55,40 @@ applications.
 
 **information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
-  ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  * e.g. in `add c/COMPANY`, `COMPANY` is a parameter which can be used as `add c/Google`.
+
+
+* Items in square brackets are optional.<br>
+  * e.g. `c/COMPANY [s/STATUS]` can be used as `c/Google s/Pending` or as `c/Google`.
+
+
+* Parameters can be in any order.<br>
+  * e.g. if the command specifies `c/COMPANY r/ROLE`, `r/ROLE c/COMPANY` is also acceptable.
+
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be
+  ignored.<br>
+  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+
+* `INDEX` refers to the index number of the chosen application in the displayed application list 
+  and must be a _positive integer_ 1, 2, 3, …
+
+* Structure of a job application
+
+| Field    | Prefix | Specifier | Optional? | Sort Order    |
+|----------|--------|-----------|-----------|---------------|
+| Company  | `c/`   | `-c`      | No        | Alphabetical  |
+| Role     | `r/`   | `-r`      | No        | Alphabetical  |
+| Status   | `s/`   | `-s`      | Yes       | Alphabetical  |
+| Industry | `i/`   | `-i`      | Yes       | Alphabetical  |
+| Deadline | `d/`   | `-d`      | Yes       | Chronological |
+| Type     | `t/`   | `-t`      | Yes       | Alphabetical  |
 
 </div>
 
@@ -82,17 +98,36 @@ applications.
 
 Adds an application to a company to the list.
 
-**Format:** `add c/COMPANY r/ROLE d/DEADLINE s/STATUS i/INDUSTRY t/JOB_TYPE`
+**Format:** `add c/COMPANY r/ROLE [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
 
 * Users must input a company `COMPANY` and a role `ROLE`
 * Details of the company such as `DEADLINE`, `STATUS`, `INDUSTRY`, `JOB_TYPE` are optional
 * `DEADLINE` must be in the following format: MMM dd yyyy HHmm (E.g Dec 31 2030 1200)
-* `STATUS`can only be in the following 4 formats: _TO_BE_SUBMITTED, PENDING, APPROVED, REJECTED_, the default status is _TO_BE_SUBMITTED_
-* `JOBTYPE` can only be in the following 7 formats: _FULL_TIME, PART_TIME, INTERNSHIP, TEMPORARY, CONTRACT, FREELANCE, VOLUNTEER_
+
+* `STATUS`can only be in the following formats: 
+
+| Status          | Remark                                                                                   |
+|-----------------|------------------------------------------------------------------------------------------|
+| TO_BE_SUBMITTED | An application that you plan to apply for. The default status if no status is specified. |
+| PENDING         | An application that you have applied for but have yet to receive a result.               |
+| APPROVED        | An application that you have received a job offer for.                                   |
+| REJECTED        | An application that you have been rejected for.                                          |
+
+* `JOBTYPE` can only be in the following formats: 
+
+| Job Type   | An application for |
+|------------|--------------------|
+| FULL_TIME  | A full time job    |
+| PART_TIME  | A part time job    |
+| INTERNSHIP | An internship      |
+| TEMPORARY  | A temporary job    |
+| CONTRACT   | A contract job     |
+| FREELANCE  | A freelance job    |
+| VOLUNTEER  | A volunteered job  |
 
 **Examples:**
 
-* `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 i/Technology s/pending`
+* `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 i/Technology s/Pending`
   Adds a company called Microsoft, with the role Software Engineer in the technology industry,
   deadline Nov 12 2022 1200 and status as pending.
 * `add c/Google r/Cleaner`
@@ -107,18 +142,17 @@ Adds an application to a company to the list.
 
 Edits an application in the list.
 
-**Format:** `edit INDEX [CHANGE]`
+**Format:** `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
 
-* The `INDEX` refers to the index number shown in the displayed application list.
-* `[CHANGE]` refers to the field(s) the user wants to change and must start with the field prefix
-* The `INDEX` must be a _positive integer_ 1, 2, 3, …
+* Edits the application to the company at the specified `INDEX`.
+* At least one of the optional fields must be provided.
 
 **Examples:**
 
 * `edit 1 r/Announcer`
-    Changes the role of the 1st job application to an announcer
+    Changes the role of the 1st job application to an announcer.
 * `edit 5 s/approved t/volunteer`
-    Changes the status and job type of the 5th job application to approved and volunteer respectively
+    Changes the status and job type of the 5th job application to approved and volunteer respectively.
 
 ---
 
@@ -129,8 +163,6 @@ Deletes the specified application from the list.
 **Format:** `delete INDEX`
 
 * Deletes the application to the company at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed application list.
-* The `INDEX` must be a _positive integer_ 1, 2, 3, …
 
 **Examples:**
 
@@ -144,7 +176,7 @@ Deletes the specified application from the list.
 
 ### Listing all applications : `list`
 
-Shows a list of all applications in the list.
+Shows a list of all applications in the list in alphabetical order.
 
 **Format:** `list`
 
@@ -157,12 +189,12 @@ Shows a list of all applications in the list.
 
 Finds all applications with the specified fields containing any of the given keywords.
 
-**Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [s/STATUS] [i/INDUSTRY] [d/DEADLINE] [t/TYPE]`
+**Format:** `find [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`
 
 * At least one optional field must be provided.
 * An application will be listed if at least one of the keywords match. The keywords are case-insensitive.
-* Keywords provided in the `[KEYWORDS]` field will be checked for in all fields of the applications.
-* Applications with partially matching keywords will not be listed (e.g. searching for the keyword "Goo" will not list applications with "Google").
+* Applications with partially matching keywords will not be listed.
+  * e.g. searching for the keyword "Goo" will not list applications with "Google".
 * Searches for Deadline must be in the format `MMM DD YYYY HHMM`.
 
 **Examples:**
@@ -176,20 +208,9 @@ Finds all applications with the specified fields containing any of the given key
 
 Sorts the list based on the field specifier provided.
 
-**Format:** `sort FIELD`
+**Format:** `sort SPECIFIER`
 
-The following are the valid values for the `FIELD` specifier:
-
-| Field    | Specifier | Sort Order    |
-|----------|-----------|---------------|
-| Company  | `-c`      | Alphabetical  |
-| Role     | `-r`      | Alphabetical  |
-| Status   | `-s`      | Alphabetical  |
-| Industry | `-i`      | Alphabetical  |
-| Deadline | `-d`      | Chronological |
-| Type     | `-t`      | Alphabetical  |
-
-* A valid specifier must be provided.
+* A single valid `SPECIFIER` must be provided.
 * For optional fields, applications with empty fields will be listed first.
 
 **Examples:**
@@ -205,26 +226,34 @@ Shows a list of commands and how they can be used.
 
 **Format:** `help`
 
-**Successful command:**
-A help window displaying the help message will pop up.
+---
 
-**Failed command:**
-print “Error: ” and error message for:
+### Clearing all applications: `clear`
 
-* Arguments passed after the help command: “Unexpected arguments.”
+Clears all applications from the application book.
+
+**Format:** `clear`
+
+---
+
+### Exiting the programme: `exit`
+
+Exits the program.
+
+**Format:** `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action       | Format                                                                               |
-|--------------|--------------------------------------------------------------------------------------|
-| **Add**      | `add c/COMPANY r/ROLE d/DEADLINE s/STATUS i/INDUSTRY t/JOB_TYPE`                     |
-| **Edit**     | `edit INDEX [CHANGE]`                                                                |
-| **Delete**   | `delete INDEX`                                                                       |
-| **List**     | `list`                                                                               |
-| **Mark**     | `mark INDEX s/STATUS`                                                                |
-| **Deadline** | `deadline INDEX d/DEADLINE`                                                          |
-| **Find**     | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [s/STATUS] [i/INDUSTRY] [d/DEADLINE] [t/TYPE]` |
-| **Sort**     | `sort FIELD`                                                                         |
-| **Help**     | `help `                                                                              |
+| Action       | Format                                                                                   |
+|--------------|------------------------------------------------------------------------------------------|
+| **Add**      | `add c/COMPANY r/ROLE d/DEADLINE s/STATUS i/INDUSTRY t/JOB_TYPE`                         |
+| **Edit**     | `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`      |
+| **Delete**   | `delete INDEX`                                                                           |
+| **List**     | `list`                                                                                   |
+| **Find**     | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
+| **Sort**     | `sort FIELD_SPECIFIER`                                                                   |
+| **Help**     | `help`                                                                                   |
+| **Clear**    | `clear`                                                                                  |
+| **Exit**     | `exit`                                                                                   |
