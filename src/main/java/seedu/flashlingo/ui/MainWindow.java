@@ -1,8 +1,6 @@
 package seedu.flashlingo.ui;
 
 import java.awt.Desktop;
-import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.logging.Logger;
 
