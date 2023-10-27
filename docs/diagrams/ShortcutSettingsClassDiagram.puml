@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class AddressBookParser LOGIC_COLOR
+Class "<<interface>>\nModel" as Model
+Class ModelManager
+Class UserPrefs
+Class ShortcutSettings
+Class GuiSettings
+
+AddressBookParser -[LOGIC_COLOR]right-> "1" ModelManager
+ModelManager .up.|> Model
+ModelManager -right-> "1" UserPrefs
+UserPrefs *-up-> "1" ShortcutSettings
+UserPrefs *-down-> "1" GuiSettings
+
+@enduml

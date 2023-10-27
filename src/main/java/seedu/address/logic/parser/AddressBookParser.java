@@ -12,7 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddShortcutCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -68,10 +67,9 @@ public class AddressBookParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcherBasic = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         final Matcher matcherPersonType = COMPLEX_COMMAND_FORMAT.matcher(userInput.trim());
-        ShortcutSettings shortcutSettings = model.getShortcutSettings();
 
         if (matcherPersonType.matches()) {
-            final String commandWord = shortcutSettings.getShortcut(matcherPersonType.group("commandWord"));
+            final String commandWord = model.getShortcut(matcherPersonType.group("commandWord"));
             final String personTypeWord = matcherPersonType.group("personType");
             final String arguments = matcherPersonType.group("arguments");
 
@@ -112,7 +110,7 @@ public class AddressBookParser {
 
             }
         } else if (matcherBasic.matches()) {
-            final String commandWord = shortcutSettings.getShortcut(matcherBasic.group("commandWord"));
+            final String commandWord = model.getShortcut(matcherBasic.group("commandWord"));
             final String arguments = matcherBasic.group("arguments");
 
             // Note to developers: Change the log level in config.json to enable lower level

@@ -235,6 +235,37 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+<br>
+
+### View Command Feature
+
+The view command feature allows the user to view the details of a specific patient or specialist.
+
+Given below is an example usage scenario and how the view mechanism behaves at each step.
+
+Step 1. The user launches the application. The List of person will be initialized with the initial
+state, and the `Current Selected Person` pointer pointing to the first person on the list. <br>
+
+![ViewState1](images/ViewState1.png)
+
+
+Step 2. The user executes `view 2` command to view the 2nd person details in the `DoConnek Pro`.
+The `view` command update the `Current Selected Person` pointer with the corresponding index from the
+input. <br>
+
+![ViewState2](images/ViewState2.png)
+
+
+Step 3. The UI now updates the view panel to display the newly selected person and their details.
+
+The sequence diagram below shows how the view operation works:
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes the view command:
+![ViewActivityDiagram](images/ViewActivityDiagram.png)
+
+<br>
+
 ### Recall recent commands feature
 
 The recent command feature is facilitated by the `CommandStringStash`. This is a stash that stores the history
@@ -242,16 +273,16 @@ of the command string of the 20 most recent commands executed. Internally, it is
 and `currentCmdIndex`. This internal representation allows cycling through the recent commands both forwards
 and backwards.
 
-
 These operations are exposed in the `Logic` interface as `Logic#getPrevCommandString(String commandInputString)`,
 `Logic#getPassedCommandString(String commandInputString)`, and `Logic#addCommandString(String commandInputString)`.
 
 The following operations are implemented by the `CommandStringStash`:
 * `CommandStringStash#addCommandString(String commandInputString)` - Adds `commandInputString` to the history.
 * `CommandStringStash#getPrevCommandString(String commandInputString)` - Cycles one command further back in history.
-* `CommandStringStash#getPassedCommandString(String commandInputString)` - Cycles one command further forward in history 
+* `CommandStringStash#getPassedCommandString(String commandInputString)` - Cycles one command further forward in history.
+
 <div markdown="span" class="alert alert-info">:information_source: **note:** Cycling fowards or backwards may not always be
-valid operations. No cycling forward or backward can be done if the stash is empty. No cycling backward 
+valid operations. No cycling forward or backward can be done if the stash is empty. No cycling backward
 can be done if the user is already on the least recent command in the stash, and no cycling forward can be done
 if the user has not yet cycled backward. To consider all these cases, the `commandInputString` is passed as a parameter
 to `CommandStringStash#getPrevCommandString(String commandInputString)` and `CommandStringStash#getPassedCommandString(String commandInputString)`.
@@ -261,7 +292,7 @@ so there is no change to the CLI textbox.
 </div>
 
 Given below is an example usage scenario and how the recall recent commands feature works at each step.
- 
+
 Step 1. The user launches the application for the first time. The `CommandStringStash` will be initialised
 with no command strings and a `currentCmdIndex` of 0.
 
@@ -280,9 +311,7 @@ allowing the user to start to cycle back from the most recently added command ag
 
 </div>
 
-<br/>
-
-Step 3. The user executes two more commands `help` and `delete 1` in the respective order. As before, the 
+Step 3. The user executes two more commands `help` and `delete 1` in the respective order. As before, the
 `CommandStringStash` is updated appropriately.
 
 ![Recall Step 3](images/RecallStep3.png)
@@ -340,6 +369,7 @@ Predicates unique to patients:<br>
 Predicates unique to specialist:<br>
 `LocationContainsKeywordsPredicate`, `SpecialtyContainsKeywordsPredicate`
 
+#### Example
 The following sequence diagram shows how a find command is parsed and executed to find a patient.
 In this example, the command entered is <br>
 `find -pa n/Tim m/Anaemia`
@@ -355,6 +385,62 @@ The predicates are combined into a single `Predicate<Person>` in `FindCommand::e
 `FilteredPersonList` of the `Model`.
 
 To find a specialist, a similar parse and execution flow is conducted. 
+
+<br>
+
+### Shortcut management feature
+
+User defined shortcuts are managed by `ShortcutSettings`. Internally it contains a `shortcutMap` that stores mappings of 
+user defined _shortcut aliases_ to existing valid _command keywords_. This class provides functionality for registering new shortcuts,
+removing previously defined shortcuts, and querying the map to see check if a shortcut has previously been defined.
+
+These shortcut mappings need to be updated by command execution, as well as used in parsing of user input. Thus, the following design decisions have been made:
+1. Shortcut operations are exposed in the `Model` interface as 
+   * `Model#registerShortcut(ShortcutAlias shortcutAlias, CommandWord commandWord)` 
+   * `Model#removeShortcut(ShortcutAlias shortcutAlias)`
+   * `Model#getShortcut(String alias)`
+2. `AddressBookParser` now has a dependency to the `Model`. This is required so that the shortcut mappings can be accessed for use in parsing user input.
+
+![Class Diagram](images/ShortcutSettingsClassDiagram.png)
+
+Within `ShortcutSettings` similar operations are implemented to `register`, `remove`, and `get` shortcuts. Additionally to resolve bugs that might arise from users tampering with the `preferences.json` file,
+`ShortcutSettings#removeBadMappings()` clears the `shortcutMap` of invalid mappings and is called on initialisation.
+
+<div markdown="block" class="alert alert-info">
+
+#### Invalid Mappings
+On this subject, in order to not jeopardise parsing operations and the user experience, some restrictions have been put on the mappings that can be registered. 
+These restrictions are enforced by the wrapper class `ShortcutAlias`, along with the relevant method in `ParserUtil`.
+1. Shortcut aliases must not be blank.
+2. Shortcut aliases must only contain alphanumeric characters without any whitespaces.
+3. Shortcut aliases must not match the default `COMMAND_WORD` of any existing commands.
+   * This is to prevent any unintended behaviour, and users might even accidentally 'lock' themselves out of using certain commands if they are unaware of how to manipulate `preferences.json`.
+</div>
+
+#### Command execution
+The sequence diagram below outlines the command execution of a sample `AddShortcutCommand` that wants to register `del` as a shortcut for `delete`.
+
+![Add Shortcut Sequence](images/AddShortcutCommandSequenceDiagram.png)
+
+The following activity diagrams summarise the process of adding and removing shortcuts from DoConnek Pro.
+
+![Add Shortcut Activity](images/AddShortcutActivityDiagram.png)
+![Delete Shortcut Activity](images/DeleteShortcutActivityDiagram.png)
+
+#### Saving between sessions
+ShortcutSettings implements the `Serializable` interface, thus is saved to `json` format as a part of `UserPrefs`. 
+
+#### Design considerations:
+**Aspect: How shortcuts are stored and accessed:**
+
+* **Alternative 1 (current choice):** Stored in a separate `ShortcutSettings` class.
+    * Pros: Separation of responsibility and easier management.
+    * Cons: More memory usage and introduces one dependency between `AddressBookParser` and `Model`.
+
+* **Alternative 2:** Individual command knows its own list of shortcuts.
+    * Pros: Will use less memory (No extra data structure created).
+    * Cons: Difficult to manage duplicate shortcut mappings.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -526,6 +612,29 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
       Use case ends.
 
+**Use case: View a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  System shows a list of persons
+3.  User requests to view the details a specific person in the list
+4.  System shows the person details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
+
 **Use case: Exit the program**
 
 **MSS**
@@ -609,6 +718,24 @@ testers are expected to do more *exploratory* testing.
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Viewing a person
+
+1. Viewing a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `view 1`<br>
+       Expected: First person is selected to be viewed. Details of the viewed person shown in the View Person Panel.
+Timestamp in the status bar is updated.
+
+    1. Test case: `view 0`<br>
+       Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_

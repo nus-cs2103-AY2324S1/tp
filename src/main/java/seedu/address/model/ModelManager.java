@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.ShortcutSettings;
+import seedu.address.logic.commands.CommandWord;
+import seedu.address.logic.commands.ShortcutAlias;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
 
@@ -84,6 +86,20 @@ public class ModelManager implements Model {
         userPrefs.setShortcutSettings(shortcutSettings);
     }
 
+    @Override
+    public String registerShortcut(ShortcutAlias shortcutAlias, CommandWord commandWord) {
+        return getShortcutSettings().registerShortcut(shortcutAlias, commandWord);
+    }
+
+    @Override
+    public String removeShortcut(ShortcutAlias shortcutAlias) {
+        return getShortcutSettings().removeShortcut(shortcutAlias);
+    }
+
+    @Override
+    public String getShortcut(String alias) {
+        return getShortcutSettings().getShortcut(alias);
+    }
     @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();

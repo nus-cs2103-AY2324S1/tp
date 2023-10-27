@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.ShortcutSettings;
+import seedu.address.logic.commands.CommandWord;
+import seedu.address.logic.commands.ShortcutAlias;
 import seedu.address.model.person.Person;
 
 /**
@@ -44,6 +46,18 @@ public interface Model {
      * Sets the user prefs' shortcut settings.
      */
     void setShortcutSettings(ShortcutSettings shortcutSettings);
+    /**
+     * Registers a new shortcut mapping.
+     */
+    String registerShortcut(ShortcutAlias shortcutAlias, CommandWord commandWord);
+    /**
+     * Removes the shortcut mapping.
+     */
+    String removeShortcut(ShortcutAlias shortcutAlias);
+    /**
+     * Checks if the alias has a mapping registered.
+     */
+    String getShortcut(String alias);
     /**
      * Returns the user prefs' address book file path.
      */
