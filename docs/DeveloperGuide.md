@@ -314,7 +314,7 @@ When the previous command is entered into the commandBox, the newly edited versi
 ![CommandHistoryState1](images/CommandHistoryState1.png)
 
 Step 3. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called 
-and the previous command is displayed in the commandBox. When the previous command is edited and is entered into the commandBox, the newly edited version of command will be stored in `CommandHistory` after calling `CommandHistory#addCommand`.
+and the previous command is displayed in the commandBox. When the previous command is edited and is entered into the commandBox, the newly edited version of command will be stored in `CommandHistory` after calling `CommandHistory#addCommand()`.
 
 ![CommandHistoryState3](images/CommandHistoryState2.png)
 
