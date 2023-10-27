@@ -171,6 +171,9 @@ There are 5 main features in that you came up with for LoveBook.
 3. Get random date
 4. Filter dates
 5. Sort dates
+6. Get best match
+7. Star dates
+8. Unstar dates
 
 ### Filter dates
 The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
@@ -187,6 +190,16 @@ The best match feature is implemented using the `BestMatchCommand` class. The `B
 through the list of Dates, and calls `GetScore` to get the score of the date based on height, age, horoscope and 
 income. Each metric will be scored upon 10, and when it deviates from the user's preferences, the score is reduced.
 The maximum score is 40.
+
+### Star dates
+The star feature is implemented using the `StarCommand` class. The `StarCommand` class takes in a an 'Index' 
+object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be
+starred. The `StarCommand` class then returns a `CommandResult` object that contains the starred `Date` object
+
+### Unstar dates
+The unstar feature is implemented using the `UnstarCommand` class. The `UnstarCommand` class takes in a an 'Index' 
+object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be
+unstarred. The `UnstarCommand` class then returns a `CommandResult` object that contains the unstarred `Date` object
 
 --------------------------------------------------------------------------------------------------------------------
 
