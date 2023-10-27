@@ -10,6 +10,7 @@ import java.util.Objects;
 import com.opencsv.bean.CsvBindByName;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
+import seedu.staffsnap.logic.parser.ParserUtil;
 import seedu.staffsnap.model.interview.Interview;
 
 /**
@@ -22,14 +23,10 @@ public class Applicant implements Comparable<Applicant> {
     private static Descriptor descriptor = Descriptor.NAME;
 
     // Identity fields
-    @CsvBindByName(column = "name", required = true)
     private final Name name;
-    @CsvBindByName(column = "phone", required = true)
     private final Phone phone;
     // Data fields
-    @CsvBindByName(column = "email", required = true)
     private final Email email;
-    @CsvBindByName(column = "position", required = true)
     private final Position position;
     private final List<Interview> interviews = new ArrayList<>();
     private Status status;

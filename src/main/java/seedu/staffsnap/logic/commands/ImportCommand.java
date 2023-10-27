@@ -2,14 +2,21 @@ package seedu.staffsnap.logic.commands;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.exceptions.CsvException;
 
 import seedu.staffsnap.logic.commands.exceptions.CommandException;
+import seedu.staffsnap.logic.parser.CsvApplicantParser;
+import seedu.staffsnap.logic.parser.Parser;
+import seedu.staffsnap.logic.parser.ParserUtil;
+import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.CsvApplicant;
 
 
 /**
@@ -23,7 +30,8 @@ public class ImportCommand extends Command {
             + "Example: " + COMMAND_WORD + " data.csv";
 
     public static final String MESSAGE_SUCCESS = "Imported %d applicants from %s";
-    public static final String MESSAGE_FILE_NOT_FOUND = "File not found: %s";
+    public static final String MESSAGE_INVALID_CSV_FORMAT = "The csv file has an invalid format!";
+
 
     private final String fileName;
 
@@ -33,21 +41,17 @@ public class ImportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Applicant> applicants;
-
-        try (CSVReader reader = new CSVReader(new FileReader(fileName))) {
-            applicants = new CsvToBeanBuilder<Applicant>(reader)
-                    .withType(Applicant.class)
-                    .build()
-                    .parse();
-        } catch (IOException e) {
-            throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));
+        List<Applicant> applicantsToImport;
+        try {
+            applicantsToImport = CsvApplicantParser.parse(fileName);
+        } catch (ParseException e) {
+            throw new CommandException(MESSAGE_INVALID_CSV_FORMAT);
         }
 
-        int count = applicants.size();
+        for (Applicant applicant : applicantsToImport) {
+            model.addApplicant(applicant);
+        }
 
-        applicants.forEach(model::addApplicant);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, count, fileName));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, applicantsToImport.size(), fileName));
     }
 }

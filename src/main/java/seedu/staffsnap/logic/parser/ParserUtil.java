@@ -11,6 +11,8 @@ import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.logic.commands.FilterCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.CsvApplicant;
 import seedu.staffsnap.model.applicant.Descriptor;
 import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
@@ -243,5 +245,14 @@ public class ParserUtil {
             throw new ParseException(FilterCommand.MESSAGE_SCORE_PARSE_FAILURE);
         }
         return result;
+    }
+
+    public static Applicant parseApplicantFromCsv(CsvApplicant csvApplicant) throws ParseException {
+        Name name = ParserUtil.parseName(csvApplicant.getName());
+        Phone phone = ParserUtil.parsePhone(csvApplicant.getPhone());
+        Email email = ParserUtil.parseEmail(csvApplicant.getEmail());
+        Position position = ParserUtil.parsePosition(csvApplicant.getPosition());
+
+        return new Applicant(name, phone, email, position, new ArrayList<>(), Status.UNDECIDED);
     }
 }
