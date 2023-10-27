@@ -21,6 +21,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.attendance.AttendanceStorage;
+import seedu.address.model.attendance.AttendanceType;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
@@ -113,9 +115,11 @@ public class EditCommand extends Command {
             .orElse(employeeToEdit.getSalary());
         AnnualLeave updatedAnnualLeave = editEmployeeDescriptor.getAnnualLeave()
             .orElse(employeeToEdit.getAnnualLeave());
+        AttendanceStorage updatedAttendanceStorage = editEmployeeDescriptor.getAttendanceStorage()
+                .orElse(employeeToEdit.getAttendanceStorage());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBankAccount, updatedJoinDate,
-            updatedSalary, updatedAnnualLeave);
+            updatedSalary, updatedAnnualLeave, updatedAttendanceStorage);
     }
 
     @Override
@@ -155,6 +159,7 @@ public class EditCommand extends Command {
         private BankAccount bankAccount;
         private JoinDate joinDate;
         private Salary salary;
+        private AttendanceStorage attendanceStorage;
 
         public EditEmployeeDescriptor() {}
 
@@ -170,6 +175,7 @@ public class EditCommand extends Command {
             setBankAccount(toCopy.bankAccount);
             setJoinDate(toCopy.joinDate);
             setSalary(toCopy.salary);
+            setAttendanceStorage(toCopy.attendanceStorage);
         }
 
         /**
@@ -241,6 +247,14 @@ public class EditCommand extends Command {
 
         public Optional<AnnualLeave> getAnnualLeave() {
             return Optional.ofNullable(annualLeave);
+        }
+
+        public void setAttendanceStorage(AttendanceStorage attendanceStorage) {
+            this.attendanceStorage = attendanceStorage;
+        }
+
+        public Optional<AttendanceStorage> getAttendanceStorage() {
+            return Optional.ofNullable(attendanceStorage);
         }
 
         @Override

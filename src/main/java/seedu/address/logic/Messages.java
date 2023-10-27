@@ -23,6 +23,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_DELETE =
             "%1$d employees found! Refer to their indexes for deletion";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_MARK =
+            "%1$d employees found! Refer to their indexes for marking attendance";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -55,7 +57,9 @@ public class Messages {
                 .append("; Salary: ")
                 .append(person.getSalary())
                 .append("; Annual Leave: ")
-                .append(person.getAnnualLeave());
+                .append(person.getAnnualLeave())
+                .append("; Attendance: ")
+                .append(person.getAttendanceToday());
         return builder.toString();
     }
 
