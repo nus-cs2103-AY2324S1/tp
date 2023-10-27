@@ -285,7 +285,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 
 **Value proposition**:
-LoveBook simplifies the process of storing information of dates and assessing compatibility betweenn user and his/ her dates by taking into account the user’s preferences and profile, thereby enhancing the efficiency and effectiveness of finding the perfect match.
+LoveBook simplifies the process of storing information of dates and assessing compatibility between user and his/ her dates by taking into account the user’s preferences and profile, thereby enhancing the efficiency and effectiveness of finding the perfect match.
 
 ### User stories
 
@@ -422,6 +422,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Use case resumes at step 3.
 
 5a. User cancels the deletion.
+- Use case ends.
+
+#### Use Case: Get Best Match
+
+**Main Success Scenario (MSS):**
+
+1. User requests his/her best match.
+
+**Extensions:**
+1a. The list is empty.
+- Lovebook displays a message indicating that there are no dates.
 - Use case ends.
 
 
