@@ -123,6 +123,11 @@ public class LeaveList {
         return leaveList.equals(otherLeaveList.leaveList);
     }
 
+    public LeaveList getCopiedLeaveList() {
+        ArrayList<Leave> copiedList = (ArrayList<Leave>) leaveList.clone();
+        return new LeaveList(copiedList);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
