@@ -133,11 +133,11 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_cannotFindPerson_throwsCommandException() {
+    public void execute_allNullFields_throwsAssertionError() {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
         EditCommand editCommand = new EditCommand(null, null, descriptor);
 
-        assertThrows(CommandException.class, () -> editCommand.execute(model), EditCommand.MESSAGE_PERSON_NOT_FOUND);
+        assertThrows(AssertionError.class, () -> editCommand.execute(model), EditCommand.MESSAGE_PERSON_NOT_FOUND);
     }
 }
 
