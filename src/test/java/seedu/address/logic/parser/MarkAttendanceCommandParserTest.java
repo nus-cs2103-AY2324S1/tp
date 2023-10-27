@@ -37,7 +37,8 @@ public class MarkAttendanceCommandParserTest {
     public void parse_validArgsWithName_returnsMarkAttendanceCommand() {
         String userInput = " " + PREFIX_NAME + " " + VALID_NAME_AMY + " " + PREFIX_ATTENDANCE + " 1 "
                 + PREFIX_WEEK + " 1";
-        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_NAME_AMY), true, new Week(1));
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_NAME_AMY), true,
+                new Week(1), null);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -47,7 +48,8 @@ public class MarkAttendanceCommandParserTest {
     @Test
     public void parse_validArgsWithId_returnsMarkAttendanceCommand() {
         String userInput = " " + PREFIX_ID + " " + VALID_ID_AMY + " " + PREFIX_ATTENDANCE + " 1 " + PREFIX_WEEK + " 1";
-        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_ID_AMY), true, new Week(1));
+        MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_ID_AMY), true,
+                new Week(1), null);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -59,7 +61,7 @@ public class MarkAttendanceCommandParserTest {
         String userInput = " " + PREFIX_NAME + " " + VALID_NAME_AMY + "," + VALID_NAME_BOB + " "
                 + PREFIX_ATTENDANCE + " 1 " + PREFIX_WEEK + " 1";
         MarkAttendanceCommand expectedCommand = new MarkAttendanceCommand(List.of(VALID_NAME_AMY, VALID_NAME_BOB), true,
-                new Week(1));
+                new Week(1), null);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
