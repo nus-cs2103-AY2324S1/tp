@@ -19,3 +19,7 @@
     -fx-text-fill: #000000;
     -fx-font-size: 1.6em;
 }
+
+.chart-legend {
+    -fx-background-color: transparent;
+}
