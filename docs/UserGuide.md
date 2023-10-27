@@ -122,24 +122,32 @@ Examples:
    ![result of delete command](./images/UserGuide/1.3_del_ans.png)
 
 ### View All Flashcards : `list`
-Shows a list of all flashcards in the deck.
+Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
 
-Format: `list`
+Format: `list (q/t)/ (prefix question starts with/ tag)`
 Examples:
 ```
-(list shows the full list of flashcards.)
+1. list
+   (list shows the full list of flashcards)
+   
+2. list q/ What
+   (list shows all flashcards with questions starting with 'What')
+   
+3. list t/ CS2100
+   (list shows all flashcards with the CS2100 Tag)
+
+4. list q/ what t/ CS2100
+   (list shows all flashcards with questions starting with 'What' and has the CS2100 Tag)
 ```
 
 #### Acceptable values for each parameters:
-No parameters are needed
+1. No Empty Input after q/ and t/.
+2. q/ and t/ is optional.
 
 #### Expected output:
 ```
 1. list
-   (Questions to all the flashcards that are added with their index)
-
-2. list potato
-   “No parameters are allowed for this command.”
+   "All cards listed" message will be returned to the user via the CLI
 ```
 
 #### Usage
@@ -263,3 +271,5 @@ set 10 d/ easy
 
 2. Successful Output
    ![result of practise command](./images/UserGuide/1.3_set_ans.png)
+
+## FAQ
