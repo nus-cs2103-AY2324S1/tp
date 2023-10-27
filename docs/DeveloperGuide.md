@@ -154,6 +154,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
 ### Employee management
 
 #### The employee class
@@ -325,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `***`    | User              | Retrieve information of past records                 | Find details of applicants that have been keyed in previously. |
 | `***`    | Beginner user     | There is a ‘help’ command to list functions/features | Know how to use the app                                        |
 | `***`    | Beginner user     | Exception handling                                   | Handle invalid inputs                                          |
- | `***`    | Intermediate user | Filter employee by parameters                        | Easily search/track certain details of employees               |
+| `***`    | Intermediate user | Filter employee by parameters                        | Easily search/track certain details of employees               |
 
 *{More to be added}*
 
