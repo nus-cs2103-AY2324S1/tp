@@ -160,10 +160,14 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed implementation involves the ReadCommand and some associated classes:
 
-* `ReadCommand` — This class is responsible for executing the "Read" command. It parses the user input, retrieves information from the model, and passes the results to the UI for display. 
-* `ReadCommandParser` — Responsible for parsing user input and creating a ReadCommand object. It extracts the index of the employee in the last shown list and the requested field. 
-* `PersonCardWithSpecificField` - Since we have to display only one specific field, so we created another person card with just one field. This class is responsible for displaying the name of the person and a specific field requested by the user in the UI. It receives the necessary information from the command result and formats it for display.
-  
+* `ReadCommand` — This class is responsible for executing the "Read" command. It parses the user input, retrieves information from the model, and passes the results to the UI for display.
+(class diagram to be added)
+
+* `ReadCommandParser` — Responsible for parsing user input and creating a ReadCommand object. It extracts the index of the employee in the last shown list and the requested field.
+(Class diagram to be added)
+
+* `PersonCardWithSpecificField` - Since we have to display only one specific field, we created another person card with just one field. This class is responsible for displaying the name of the person and a specific field requested by the user in the UI. It receives the necessary information from the command result and formats it for display.
+(Class diagram to be added)
 
 Displaying a specific field with the new PersonCardWithSpecificField class.
 
@@ -176,23 +180,12 @@ Displaying a specific field with the new PersonCardWithSpecificField class.
 ![ReadCommandAfterExecute](images/ReadCommandAfterExecute.png)
 
 
-Demonstration of how the read feature works in sequence diagram.
+How the read feature works in sequence diagram.
 
-Step 1. The user enters the command "read 1 /a" and executes it. The command is then parsed by AddressBookParser.
+The user enters the command "read 1 /a" and executes it. The command is then parsed by AddressBookParser. The AddressBookParser parsed the input and created ReadCommandParser and ReadCommandParser parsed the remaining input(exclude the command word). If it parses successfully, it will eventually create a ReadCommand. The ReadCommand is then executed. If the index is not out of bounds, it will call Model#setSpecificPersonToDisplay() to filter the list to only the specific person. Then it will also call the respective getter to get the specific field from the Person. After getting the specific field, it will then create a CommandResult for the UI to display. 
 
-![ReadSequenceDiagram0](images/ReadSequenceDiagram0.png)
-
-Step 2. The AddressBookParser parsed the input and created ReadCommandParser and ReadCommandParser parsed the remaining input(exclude the command word). If it parses successfully, it will eventually create a ReadCommand. 
-
-![ReadSequenceDiagram1](images/ReadSequenceDiagram1.png)
-
-Step 3. The ReadCommand is then executed. If the index is not out of bounds, it will call Model#setSpecificPersonToDisplay() to filter the list to only the specific person. Then it will also call the respective getter to get the specific field from the Person.
-
-![ReadSequenceDiagram2](images/ReadSequenceDiagram2.png)
-
-Step 4. After getting the specific field, it will then create a CommandResult for the UI to display. This is the final sequence diagram to show how the read operation works.
-
-![ReadSequenceDiagram3](images/ReadSequenceDiagram3.png)
+This is the sequence diagram to show how the read operation works.
+![ReadSequenceDiagram3](images/ReadSequenceDiagram.png)
 
 :information_source: **Note:** The lifeline for `ReadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
