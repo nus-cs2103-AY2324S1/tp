@@ -288,20 +288,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                               | get a list of the commands    | know how to use the commands and their parameters |
-| `* * *`  | user                                                       | add a new contact                 | record one person's phone number and email address |
-| `* * *`  | user                                                       | delete a contact                     | remove a contact (by name) that I do not need |
-| `* * *`  | user                                                       | view all contact                      | easily see and know what contacts are currently stored in the application in one place  |
-| `* *`    | user                                                        | view all notes                        | easily see and know what notes are currently stored in the application in one place |
-| `* *`    | user                                                        | add notes to a contact          | record additional information about that contact in the notes |
-| `* *`    | user                                                        | delete notes to a contact       | remove additional information that are no longer needed about that contact in the notes   |
-| `* *`    | user who has some event to do             | add an event                         | record an event with start time and also end time, location and any additional information like what to do during the event   |
-| `* *`    | user who has/had some event to do      | delete an event                     | remove an event after it is obsolete, cancelled or no longer needed to be recorded |
-| `* *`    | tidy user | tag a contact with a label | keep my contacts oraganised and categorised |
-| `* *`    | tidy user | delete a tag from a contact | remove tags that are no longer relevant                                                                                      |
-| `* * *`  | user who finishes using the application  | exit the program                   | exit the program normally while ensuring all my data is currectly saved |
+| Priority | As a …​                                    | I want to …​                | So that I can…​                                                                                                             |
+|----------|--------------------------------------------|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                               | get a list of the commands  | know how to use the commands and their parameters                                                                           |
+| `* * *`  | user                                                       | add a new contact           | record one person's phone number and email address                                                                          |
+| `* * *`  | user                                                       | delete a contact            | remove a contact (by name) that I do not need                                                                               |
+| `* * *`  | user                                                       | view all contact            | easily see and know what contacts are currently stored in the application in one place                                      |
+| `* *`    | user                                                        | view all notes              | easily see and know what notes are currently stored in the application in one place                                         |
+| `* *`    | user                                                        | add notes to a contact      | record additional information about that contact in the notes                                                               |
+| `* *`    | user                                                        | delete notes to a contact   | remove additional information that are no longer needed about that contact in the notes                                     |
+| `* *`    | user who has some event to do             | add an event                | record an event with start time and also end time, location and any additional information like what to do during the event |
+| `* *`    | user who has/had some event to do      | delete an event             | remove an event after it is obsolete, cancelled or no longer needed to be recorded                                          |
+| `* *`    | tidy user | tag a contact with a label  | keep my contacts oraganised and categorised                                                                                 |
+| `* *`    | tidy user | delete a tag from a contact | remove tags that are no longer relevant                                                                                     |
+| `* *`    | tidy user | edit a tag from a contact     | edit tags in a contact that needs to be changed                                                                             |
+| `* * *`  | user who finishes using the application  | exit the program            | exit the program normally while ensuring all my data is currectly saved                                                     |
 
 *{More to be added}*
 
@@ -530,13 +531,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. User inputs a tags that does not exist.
+* 1c. User inputs a tag that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the tags cannot be found.
 
       Use case ends.
 
-**Use case: UC12 - Exit the program**
+**Use case: UC12 - Edit tags in a contact**
+
+**MSS**
+
+1.  User requests to edit tags in a contact.
+2.  KeepInTouch edits the tags from the specified contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs incomplete data.
+
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
+
+      Use case ends.
+
+* 1b. User inputs a contact that does not exist.
+
+    * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
+
+      Use case ends.
+
+* 1c. User inputs a tag that does not exist.
+
+    * 1c1. KeepInTouch shows a message indicating that the tags cannot be found.
+
+      Use case ends.
+
+**Use case: UC13 - Exit the program**
 
 **MSS**
 
