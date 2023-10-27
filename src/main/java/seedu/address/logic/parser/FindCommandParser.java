@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -21,14 +21,14 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class SearchCommandParser implements Parser<SearchCommand> {
+public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public SearchCommand parse(String args) throws ParseException {
+    public FindCommand parse(String args) throws ParseException {
         List<String> nameKeywords = new ArrayList<>();
         List<String> statusKeywords = new ArrayList<>();
         List<String> tagKeywords = new ArrayList<>();
@@ -40,7 +40,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         if (!(arePrefixesPresent(argMultimap, PREFIX_NAME) || arePrefixesPresent(argMultimap, PREFIX_STATUS)
                 || arePrefixesPresent(argMultimap, PREFIX_TAG))
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             setKeywords(nameKeywords, statusKeywords, tagKeywords, argMultimap, PREFIX_NAME);
@@ -57,7 +57,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         StatusContainsKeywordsPredicate statusPredicate = new StatusContainsKeywordsPredicate(statusKeywords);
         TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(tagKeywords);
 
-        return new SearchCommand(getPredicatesList(nameKeywords, statusKeywords, tagKeywords,
+        return new FindCommand(getPredicatesList(nameKeywords, statusKeywords, tagKeywords,
                 namePredicate, statusPredicate, tagPredicate));
     }
 
