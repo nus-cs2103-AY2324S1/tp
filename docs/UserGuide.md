@@ -196,7 +196,7 @@ Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 
 * Examples:
 * `findEvent party` displays the event(s) which name(s) contain 'party'
-* `findMember party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
+* `findEvent party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
 
 ### Undoing a command: `undo`
 
