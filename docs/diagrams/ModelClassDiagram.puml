@@ -12,6 +12,7 @@ Class "<<interface>>\nModel" as Model
 Class CcaCommander
 Class versionedCcaCommander
 Class ModelManager
+
 Class UserPrefs
 
 Package Member {
@@ -35,6 +36,7 @@ HiddenOutside ..> Model
 CcaCommander .right.|> ReadOnlyCcaCommander
 
 ModelManager .up.|> Model
+Model .left.> ReadOnlyUserPrefs
 Model .right.> ReadOnlyCcaCommander
 ModelManager -right-> "1" versionedCcaCommander
 versionedCcaCommander *-right-> "*" CcaCommander
