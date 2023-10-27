@@ -342,14 +342,15 @@ clipboard.
 ### \[Proposed\] View all available tags
 
 The view tags mechanism lists all available tags in the address book that a user can use to tag a member.
-The `ViewTagsCommand` object's `execute()` method is called. The model object's `getTagList()` method is called. All
-available tags in the address book are shown to the user in the tags list.
+The `ViewTagsCommand` object's `execute()` method is called. All available tags in the address book are shown to the 
+user in the tags list.
 
 <img src="images/TagListClassDiagram.png" width="282" alt="TagListClassDiagram"/>
 
 The implementation will follow the Observer design pattern, where the UI will observe the changes made to the list of tags
-available for the user to tag other members. The `TagsListPanel` will implement the `Observer` interface and the `TagList`
-class will have a method to notify the `Observer` of its changes.
+available for the user to tag other members. The `TagsListPanel` will implement the `Observer` interface and the 
+`TagList` class will have a method `notifyUis()` to notify the `Observer` of its changes and an `addUi()` method to
+add classes implementing `Observer` that will be updated of its changes.
 
 ### \[Proposed\] Undo/redo feature
 
