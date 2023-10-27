@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 
 import java.util.stream.Stream;
 
@@ -24,7 +24,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALNUMBER, PREFIX_COURSETUTORIAL);
+                ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALGROUP, PREFIX_COURSETUTORIAL);
 
         FilterOperation operation;
 
@@ -45,11 +45,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             }
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIALNUMBER, PREFIX_COURSETUTORIAL);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIALGROUP, PREFIX_COURSETUTORIAL);
 
         return new FilterCommand(operation,
                 argMultimap.getValue(PREFIX_COURSETUTORIAL),
-                argMultimap.getValue(PREFIX_TUTORIALNUMBER));
+                argMultimap.getValue(PREFIX_TUTORIALGROUP));
     }
 
     /**

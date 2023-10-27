@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -15,8 +17,8 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names or IDs contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: /name STUDENTNAME | /id STUDENTID\n"
-            + "Example: " + COMMAND_WORD + " /name Anthony";
+            + "Parameters: " + PREFIX_NAME + " STUDENT_NAME | " + PREFIX_ID + " STUDENT_ID\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " Anthony";
 
     private final SerializablePredicate predicate;
 

@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-TAvigator is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still 
-having the benefits of a Graphical User Interface (GUI). If you can type fast, TAvigator can get your contact management 
+TAvigator is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still
+having the benefits of a Graphical User Interface (GUI). If you can type fast, TAvigator can get your contact management
 tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -27,9 +27,9 @@ tasks done faster than traditional GUI apps.
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list students` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to TAvigator.
+   * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G10` : Adds a contact named `Fu Yiqiao` to TAvigator.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -56,8 +56,8 @@ tasks done faster than traditional GUI apps.
 * Items with `|` indicate that the command accepts either parameters.<br>
   e.g `mark /name STUDENTNAME | /id STUDENTID` takes in `STUDENTNAME` or `STUDENTID` as its first argument.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…​` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as many times as desired (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -76,59 +76,71 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a new contact: `add`
 
 Creates a new contact with the specified name and course code.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]...`
+![add contact](images/addContact.png)
 
+Format: `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]…`
 Examples:
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E`
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2`
 
 ### Marking attendance of student: `mark`
 
-Format: `mark /name STUDENTNAME | /id STUDENTID /attendance ATTENDANCE`
-* Marks the attendance of a student corresponding to the student name or student ID.
-* `STUDENTNAME` should be a string made up of alphabetical characters, with no numbers or special characters.
-* `STUDENTID` should be a string made up of alphabetical characters, with no special characters or space.
+Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER
+[r/REASON_OF_ABSENCE]`
+* Marks the attendance of one or more student corresponding to the `STUDENT_NAME` or `STUDENT_ID`.
+* To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
+* If a student is present, `REASON_OF_ABSENCE` is not required.
+* If a student is absent, `REASON_OF_ABSENCE` is mandatory.
+* `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `STUDENT_ID` should be a string made up of alphabetical characters, with no special characters or space.
 * `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
 
+![mark attendance](images/markAttendance.png)
+
 Examples:
-* `mark /name Zong Jin /attendance 1` Marks student named, Zong Jin, as present.
-* `mark /name Zong Jin /attendance 0` Marks student named, Zong Jin, as absent.
-* `mark /id A0123456E /attendance 1` Marks student with student ID, A0123456E, as present.
-* `mark /id A0123456E /attendance 0` Marks student with student ID, A0123456E, as absent.
+* `mark n/Zong Jin, Fu Yiqiao a/1 w/1` Marks students named, Zong Jin and Fu Yiqiao, as present for the tutorial in Week 1.
+* `mark n/Zong Jin a/0 w/1 r/not feeling well` Marks student named, Zong Jin, as absent for the tutorial in Week 1 as he is not feeling well.
+* `mark id/A0123456E, A0123457E a/1 w/1` Marks students with student IDs, A0123456E and A0123457E, as present for the tutorial in Week 1.
+* `mark id/A0123456E a/0 w/1 r/no valid reason` Marks student with student ID, A0123456E, as absent for the tutorial in Week 1 with no valid reason.
 
 ### Viewing summary of attendance : `list attendance`
 
 Shows a summary of attendance records including list of absentees.
 
-Format: `list attendance tn/TUTORIALNO [coursetg/TAG]`
-*  Shows a list of absentees and summary of the attendance records of students corresponding to the tag for the specified tutorial number.
+![list attendance](images/listAttendance.png)
+
+Format: `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]`
+*  Shows a list of absentees and summary of the attendance records of all students or students corresponding to the specified tutorial group for the specified week number.
+* `TUTORIALGROUPID` is optional.
 
 Examples:
-*  `list attendance tn/1` Shows a summary of attendance records of all students for Tutorial #1.
-*  `list attendance tn/3 coursetg/CS2103T` Shows a summary of attendance records of the students in CS2103T for Tutorial #3.
+*  `list attendance w/1` Shows a summary of attendance records of all students for Week 1.
+*  `list attendance w/3 tg/G01` Shows a summary of attendance records of the students in the tutorial group G01 for Week 3.
 
 ### Searching for student's contact via keyword : `find`
 
-Finds a student's contact either via their name or student ID.
+Finds a student's or multiple students' contact either via their name or student ID.
 
-Format: `find /name STUDENTNAME | /id STUDENTID`
+![find command](images/findCommand.png)
 
-* Finds a student's contact either via their name or student ID.
-* `STUDENTNAME` should be a string made up of alphabetical characters, with no numbers or special characters.
-* `STUDENTID` should be a string made up of alphabetical characters and numbers, with no special characters or space.
+Format: `find n/STUDENT_NAME [STUDENT_NAME]… | id/STUDENT_ID [STUDENT_ID]…`
+
+* `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `STUDENT_ID` should be a string made up of alphabetical characters and numbers, with no special characters or space.
 
 Examples:
-*  `find /name Anthony` Finds all contacts with the name "Anthony".
-*  `find /id A0123456H` Finds all contacts with the student ID "A0123456H".
+*  `find n/Anthony Yiqiao` Finds all contacts with the name "Anthony" and "Yiqiao".
+*  `find id/A0123456H` Finds all contacts with the student ID "A0123456H".
 
 ### Listing students : `list students`
 
 Shows a list of students.
+
+![list students](images/listStudents.png)
 
 Format: `list students`
 *  Shows a list of all students.
@@ -137,7 +149,9 @@ Format: `list students`
 
 Edits the contact details.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUTORIAL_GROUP]...`
+![edit contact](images/editContact.png)
+
+Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUTORIAL_GROUP]...`
 
 * Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -153,7 +167,9 @@ Examples:
 
 Shows a list of students from a specified tutorial group
 
-Format: `filter add coursetg/COURSECODE [tn/TUTORIALGROUPID]`
+![add filter](images/addFilter.png)
+
+Format: `filter add coursetg/COURSECODE [tg/TUTORIALGROUPID]`
 
 * Filters students that are in the tutorial group specified by `TUTORIALGROUPID` or course specified by `COURSECODE`
 * `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
@@ -164,14 +180,14 @@ Format: `filter add coursetg/COURSECODE [tn/TUTORIALGROUPID]`
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-* `filter add coursetg/CS2103T tn/G08` returns a list of students from tutorial group G08 for course CS2103T.
+* `filter add coursetg/CS2103T tg/G08` returns a list of students from tutorial group G08 for course CS2103T.
 * `filter add coursetg/CS2103T` returns a list of students in the course CS2103T.
 
 ### Removing filters: `filter remove`
 
 Removes specified applied filter
 
-Format: `filter remove coursetg/COURSECODE [tn/TUTORIALGROUPID]`
+Format: `filter remove coursetg/COURSECODE [tg/TUTORIALGROUPID]`
 
 * Remove the tutorial group filter specified by `TUTORIALGROUPID` or course filter specified by `COURSECODE`
 * `COURSECODE` should be a string made up of alphabetical characters and numbers, with no special characters.
@@ -182,13 +198,14 @@ Format: `filter remove coursetg/COURSECODE [tn/TUTORIALGROUPID]`
 * `TUTORIALGROUPID` is optional.
 
 Examples:
-* `filter remove` returns the list of all students
-* `filter remove coursetg/CS2103T tn/G08` returns a list of students containing those from tutorial group G08 for course CS2103T.
+* `filter remove coursetg/CS2103T tg/G08` returns a list of students containing those from tutorial group G08 for course CS2103T.
 * `filter remove coursetg/CS2103T` returns a list of students containing those in the course CS2103T.
 
 ### Removing all filters: `filter clear`
 
 Removes all applied filters
+
+![filter clear](images/filterClear.png)
 
 Format: `filter clear`
 
@@ -199,6 +216,8 @@ Examples:
 
 Deletes the specified person from TAvigator.
 
+![delete contact](images/deleteContact.png)
+
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
@@ -206,12 +225,29 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in TAvigator.
+* `list students` followed by `delete 2` deletes the 2nd person in TAvigator.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Deleting a person : `delete all`
+
+Deletes all students from current address book or the specified tutorial group in the current address book.
+
+![delete all](images/deleteAll.png)
+
+Format: `delete all [tg/TUTORIALGROUPID]`
+
+* Deletes all students or the students from the specified tutorial group.
+* `TUTORIALGROUPID` is optional.
+
+Examples:
+* `delete all` deletes all students from the current address book.
+* `delete all tg/G02` deletes all students from tutorial group G02.
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the TAvigator.
+
+![clear](images/clear.png)
 
 Format: `clear`
 
@@ -253,13 +289,16 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-| Action     | Format, Examples                                                                                |
-|------------|-------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]...` <br>        |
-| **Clear**  | `clear`                                                                                         |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                             |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUTORIAL_GROUP]...`<br> |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                      |
-| **List**   | `list attendance tn/TUTORIALNO [coursetg/TAG]` `list students`                                  |                                                           |
-| **Help**   | `help`                                                                                          |
-| **Filter**   | `filter [add/delete/clear] [coursetg/COURSECODE] [tn/TUTORIALGROUPID]`                                                                                          |
+| Action     | Format, Examples                                                                                                                                                            |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]…` <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2` |
+| **Clear**  | `clear`                                                                                                                                                                     |
+| **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                  |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSECODE TUTORIALGROUPID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                           |
+| **Exit**   | `exit`                                                                                                                                                                      |
+| **Filter** | `filter [add/delete/clear] [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`                                                                                                      |
+| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… \                                                                                                                                      | id/STUDENT_ID [STUDENT_ID]…`<br> e.g., `find n/Anthony Yiqiao`                                                                                                          |
+| **List**   | `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]` `list students`                                                                                                         |                                                           |
+| **Help**   | `help`                                                                                                                                                                      |
+| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \                                                                                                                                     | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
+

@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
@@ -15,6 +16,7 @@ import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.week.Week;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -41,7 +43,7 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Index.fromOneBased(parseInt(trimmedIndex));
     }
 
     /**
@@ -132,6 +134,28 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String week} into a {@code Week}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code week} is invalid.
+     */
+    public static Week parseWeek(String week) throws ParseException {
+        requireNonNull(week);
+        String trimmedWeek = week.trim();
+        int weekNumber;
+        try {
+            weekNumber = parseInt(trimmedWeek);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Week.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Week.isValidWeek(weekNumber)) {
+            throw new ParseException(Week.MESSAGE_CONSTRAINTS);
+        }
+        return new Week(weekNumber);
     }
 
     /**

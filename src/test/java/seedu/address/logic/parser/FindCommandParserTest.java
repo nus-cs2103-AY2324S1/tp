@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -27,10 +29,11 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, " /name Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, " " + PREFIX_NAME + " Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "       /name        Alice         Bob      ", expectedFindCommand);
+        assertParseSuccess(parser, "       " + PREFIX_NAME + "        Alice         Bob      ",
+                expectedFindCommand);
     }
 
     @Test
@@ -38,9 +41,10 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new IdContainsKeywordsPredicate(Arrays.asList("A1234567B", "A1234567E")));
-        assertParseSuccess(parser, " /id A1234567B A1234567E", expectedFindCommand);
+        assertParseSuccess(parser, " " + PREFIX_ID + " A1234567B A1234567E", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "       /id        A1234567E         A1234567B      ", expectedFindCommand);
+        assertParseSuccess(parser, "       " + PREFIX_ID + "        A1234567E         A1234567B      ",
+                expectedFindCommand);
     }
 }

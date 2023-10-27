@@ -7,10 +7,12 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.week.Week;
 
 /**
  * Represents a Person in the address book.
@@ -62,6 +64,18 @@ public class Person {
     }
 
     /**
+     * Retrieves the Attendance object for the current week, if it exists.
+     *
+     * @return An Optional containing the Attendance object for the current week, or an empty Optional if not found.
+     */
+    public Optional<Attendance> getAttendanceForSpecifiedWeek(Week week) {
+        return attendanceRecords.stream()
+                .filter(attendance -> attendance.getWeek().equals(week))
+                .findFirst();
+    }
+
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -84,6 +98,27 @@ public class Person {
 
     public void addAttendance(Attendance attendance) {
         attendanceRecords.add(attendance);
+    }
+
+    /**
+     * Returns a string representation of the number of tutorials that the person attended and missed.
+     * @return number of tutorials attanded, total tutorials, number of tutorials missed
+     */
+    public String getTalliedAttendance() {
+        int tutorialsAttended = 0;
+        int totalTutorials = attendanceRecords.size();
+
+        for (int i = 0; i < totalTutorials; i++) {
+            if (attendanceRecords.get(i).isPresent()) {
+                tutorialsAttended++;
+            }
+        }
+
+        if (totalTutorials == 0) {
+            return "Attendance : No attendance records.";
+        }
+        return "Attendance : " + tutorialsAttended + " / " + totalTutorials + " ("
+                + (totalTutorials - tutorialsAttended) + " tutorials missed)";
     }
 
     /**

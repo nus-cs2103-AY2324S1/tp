@@ -2,13 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ListAttendanceCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.predicate.AbsentFromTutorialPredicate;
 import seedu.address.model.predicate.ContainsTagPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.week.Week;
 
 /**
  * Parses input arguments and creates a new ListCommand object
@@ -40,37 +41,30 @@ public class ListCommandParser implements Parser<ListCommand> {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        Tag tag = new Tag("PLACEHOLDER");
-        Index tn = Index.fromZeroBased(1);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_TUTORIALGROUP, PREFIX_WEEK);
+        Optional<Tag> tag = Optional.empty();
 
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(arguments, PREFIX_COURSETUTORIAL, PREFIX_TUTORIALNUMBER);
-
-        if (argMultimap.getValue(PREFIX_COURSETUTORIAL).isPresent()) {
-            String tgValue = argMultimap.getValue(PREFIX_COURSETUTORIAL).get();
-            tag = ParserUtil.parseTag(tgValue);
+        if (argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
+            tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIALGROUP).get()));
         }
 
-        if (argMultimap.getValue(PREFIX_TUTORIALNUMBER).isPresent()) {
-            String tnValue = argMultimap.getValue(PREFIX_TUTORIALNUMBER).get();
-            tn = ParserUtil.parseIndex(tnValue);
-        }
-
-        switch (commandWord) {
-
-        case ListStudentsCommand.COMMAND_WORD:
-            return new ListStudentsCommand();
-
+        switch (commandWord.trim()) {
         case ListAttendanceCommand.COMMAND_WORD:
-            if (!argMultimap.getValue(PREFIX_TUTORIALNUMBER).isPresent()) {
+            if (!argMultimap.getValue(PREFIX_WEEK).isPresent() || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListAttendanceCommand.MESSAGE_USAGE));
             }
-            return new ListAttendanceCommand(tag, tn, new ContainsTagPredicate(tag),
-                    new AbsentFromTutorialPredicate(tn, tag));
+            String weekString = argMultimap.getValue(PREFIX_WEEK).get();
+            Week week = ParserUtil.parseWeek(weekString);
+            return new ListAttendanceCommand(tag, week, new ContainsTagPredicate(tag),
+                    new AbsentFromTutorialPredicate(week, tag));
+        case ListStudentsCommand.COMMAND_WORD:
+            if (arguments.isEmpty()) {
+                return new ListStudentsCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListStudentsCommand.MESSAGE_USAGE));
         default:
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
     }
 }

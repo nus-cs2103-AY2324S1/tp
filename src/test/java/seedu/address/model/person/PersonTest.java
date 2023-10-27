@@ -7,13 +7,16 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_G01;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.week.Week;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -35,7 +38,7 @@ public class PersonTest {
         // same name, all other attributes different -> returns true
         Person editedAlice =
                 new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withId(VALID_ID_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_G01).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -50,6 +53,31 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    /**
+     * Tests if an empty Optional is returned when there's no attendance record for the current week.
+     */
+    @Test
+    public void getAttendanceForCurrentWeek_noAttendance_emptyOptional() {
+        Person emptyAlice = new PersonBuilder(ALICE).build();
+        Optional<Attendance> result = emptyAlice.getAttendanceForSpecifiedWeek(new Week(1));
+        System.out.println(result);
+        assertFalse(result.isPresent());
+    }
+
+    /**
+     * Tests if an attendance record for the current week is correctly retrieved when it exists.
+     */
+    @Test
+    public void getAttendanceForCurrentWeek_attendanceExists_optionalWithAttendance() {
+        Week testWeek = new Week(1);
+        Attendance attendance = new Attendance(testWeek, true);
+        Person emptyAlice = new PersonBuilder(ALICE).build();
+        emptyAlice.addAttendance(attendance);
+        Optional<Attendance> result = emptyAlice.getAttendanceForSpecifiedWeek(testWeek);
+        assertTrue(result.isPresent());
+        assertTrue(result.get().getWeek().equals(testWeek));
     }
 
     @Test
@@ -83,7 +111,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_G01).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
