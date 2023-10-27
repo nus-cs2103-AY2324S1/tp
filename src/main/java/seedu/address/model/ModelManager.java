@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.band.Band;
-import seedu.address.model.band.BandIsSamePredicate;
 import seedu.address.model.musician.Musician;
 import seedu.address.model.musician.MusicianInBandPredicate;
 
@@ -129,7 +128,9 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasMusicianInBand(int bandIndex, int musicianIndex) {
-        return addressBook.hasMusicianInBand(bandIndex, filteredMusicians.get(musicianIndex));
+        requireNonNull(bandIndex);
+        requireNonNull(musicianIndex);
+        return addressBook.hasMusicianInBand(bandIndex, musicianIndex);
     }
 
     @Override
@@ -137,11 +138,6 @@ public class ModelManager implements Model {
         requireNonNull(bandIndex);
         requireNonNull(musicianIndex);
         addressBook.addMusicianToBand(bandIndex, filteredMusicians.get(musicianIndex));
-    }
-
-    @Override
-    public void removeMusicianFromBand(int bandIndex, int musicianIndex) {
-        addressBook.removeMusicianFromBand(bandIndex, filteredMusicians.get(musicianIndex));
     }
 
     @Override
@@ -202,12 +198,6 @@ public class ModelManager implements Model {
 
         Predicate<Musician> musicianPredicate = new MusicianInBandPredicate(filteredBands.get(0));
         filteredMusicians.setPredicate(musicianPredicate);
-    }
-
-    @Override
-    public void updateFilteredBandList(int bandIndex) {
-        Predicate<Band> predicate = new BandIsSamePredicate(filteredBands.get(bandIndex));
-        filteredBands.setPredicate(predicate);
     }
 
     @Override

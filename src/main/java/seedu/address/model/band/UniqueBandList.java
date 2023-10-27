@@ -51,6 +51,7 @@ public class UniqueBandList implements Iterable<Band> {
         }
         internalList.add(toAdd);
     }
+
     /**
      * Returns the band at the index
      */
@@ -58,7 +59,6 @@ public class UniqueBandList implements Iterable<Band> {
         requireNonNull(index);
         return internalList.get(index.getZeroBased());
     }
-
     /**
      * Returns the band at the index
      */

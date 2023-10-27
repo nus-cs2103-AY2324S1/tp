@@ -102,12 +102,6 @@ public interface Model {
     void updateFilteredBandMusicianList(Predicate<Band> predicate);
 
     /**
-     * Updates the {@code FilteredBandList} to contain the {@code Band}
-     * at the specified index.
-     */
-    void updateFilteredBandList(int bandIndex);
-
-    /**
      * Returns true if a band with the same identity as {@code band} exists in the address book.
      */
     boolean hasBand(Band band);
@@ -135,10 +129,4 @@ public interface Model {
      * {@code musician} must not already exist in the band.
      */
     void addMusicianToBand(int addInto, int toAdd);
-
-    /**
-     * Removes the given musician from the band.
-     * {@code Musician} must already exist in the band.
-     */
-    void removeMusicianFromBand(int bandIndex, int musicianIndex);
 }
