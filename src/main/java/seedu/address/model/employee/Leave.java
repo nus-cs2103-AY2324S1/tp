@@ -13,7 +13,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Leave {
 
-    public static final String MESSAGE_CONSTRAINTS = "Leave dates have to be of format yyyy-MM-dd! Please ensure that the date is valid!";
+    public static final String MESSAGE_CONSTRAINTS = "Leave dates have to be of format yyyy-MM-dd!"
+            + "Please ensure that the date is valid!";
 
     public static final DateTimeFormatter VALID_DATE_FORMAT = ISO_LOCAL_DATE;
 

@@ -1,15 +1,18 @@
 package seedu.address.storage;
 
+import static seedu.address.model.employee.Leave.VALID_DATE_FORMAT;
+
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.employee.Leave;
 
-import java.time.LocalDate;
-
-import static seedu.address.model.employee.Leave.VALID_DATE_FORMAT;
-
+/**
+ * Jackson-friendly version of {@link Leave}.
+ */
 public class JsonAdaptedLeave {
     private final String leaveDate;
 
