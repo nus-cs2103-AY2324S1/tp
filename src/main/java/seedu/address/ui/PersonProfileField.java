@@ -6,6 +6,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
+import java.util.Objects;
+
 public class PersonProfileField extends UiPart<SplitPane> {
     private static final String FXML = "PersonProfileField.fxml";
     private static final String INVALID_FIELD_FEEDBACK = "Invalid value for: ";
@@ -36,6 +38,11 @@ public class PersonProfileField extends UiPart<SplitPane> {
         valueLabel.setText(value);
         valueField.setText(value);
         valueField.setVisible(false);
+        valueField.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (oldValue) {
+                handleLoseFocus();
+            }
+        }));
         state = State.LABEL;
     }
 
@@ -128,6 +135,12 @@ public class PersonProfileField extends UiPart<SplitPane> {
     @FXML
     void setFocus() {
         updateState(State.TEXT_FIELD);
+    }
+
+    private void handleLoseFocus() {
+        if (state == State.TEXT_FIELD && Objects.equals(value, valueField.getText())) {
+            updateState(State.LABEL);
+        }
     }
 
 
