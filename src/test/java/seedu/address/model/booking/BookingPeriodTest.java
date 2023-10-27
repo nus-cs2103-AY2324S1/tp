@@ -51,7 +51,9 @@ public class BookingPeriodTest {
 
         //does not overlap -> return false
         assertFalse(bookingPeriod.overlaps(new BookingPeriod("2023-01-03 08:00 to 2023-01-04 12:00")));
+        assertFalse(bookingPeriod.overlaps(new BookingPeriod("2023-01-02 13:00 to 2023-01-04 12:00")));
         assertFalse(bookingPeriod.overlaps(new BookingPeriod("2022-12-30 08:00 to 2022-12-31 12:00")));
+        assertFalse(bookingPeriod.overlaps(new BookingPeriod("2022-12-30 08:00 to 2023-01-01 07:00")));
     }
 
     @Test
