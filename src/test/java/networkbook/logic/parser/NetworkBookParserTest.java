@@ -4,6 +4,7 @@ import static networkbook.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ import networkbook.logic.commands.ListCommand;
 import networkbook.logic.commands.SortCommand;
 import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.edit.EditNameAction;
+import networkbook.logic.commands.filter.FilterCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Name;
 import networkbook.model.person.NameContainsKeyTermsPredicate;
@@ -29,6 +31,8 @@ import networkbook.model.person.Person;
 import networkbook.model.person.PersonSortComparator;
 import networkbook.model.person.PersonSortComparator.SortField;
 import networkbook.model.person.PersonSortComparator.SortOrder;
+import networkbook.model.person.filter.CourseContainsKeyTermsPredicate;
+import networkbook.model.person.filter.CourseIsStillBeingTakenPredicate;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.PersonUtil;
 import networkbook.testutil.TypicalIndexes;
@@ -88,6 +92,20 @@ public class NetworkBookParserTest {
                 + CliSyntax.PREFIX_SORT_ORDER + " desCending");
         PersonSortComparator expectedCmp = new PersonSortComparator(SortField.NAME, SortOrder.DESCENDING);
         assertEquals(new SortCommand(expectedCmp), command);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " "
+                        + CliSyntax.PREFIX_FILTER_FIELD + " "
+                        + keywords.stream().collect(Collectors.joining(" "))
+        );
+        assertEquals(new FilterCommand(
+                new CourseContainsKeyTermsPredicate(keywords),
+                new CourseIsStillBeingTakenPredicate(LocalDate.now()),
+                false), command);
     }
 
     @Test
