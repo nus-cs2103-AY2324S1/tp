@@ -209,7 +209,13 @@ The changes are finally made to the address book by calling `Model#setPerson(Per
 
 Given below is the sequence diagram for the `edit` command:
 
-[add diagrams]
+![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram1.png)
+
+:information_source: **Note:** The lifeline for `EditCommandParser` and `EditCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram2.png)
+* Calling method setPerson to edit the person in addressBook.
+* Calling method updateFilteredPersonList to update the addressBook with the edited person.
 
 #### Design considerations:
 * Users may like to edit the details of a person in the address book, in case of changes in the personal details or policy of the person. For example, users may like to update the policy number of a person.
