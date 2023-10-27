@@ -10,7 +10,7 @@ public class Rating {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Rating should only contain a number with one decimal place and between 0.0 to 5.0 inclusive";
-    public static final String RATING_REGEX = "^(0\\.\\d|1\\.0|2\\.[0-5]|3\\.[0-5]|4\\.[0-5]|5\\.0)$";
+    public static final String RATING_REGEX = "^([0-4]\\.\\d|5\\.0)$";
     public final String rating;
 
     /**
