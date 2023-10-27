@@ -162,6 +162,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Enhanced help feature
+
+#### Design considerations:
+
+**Rationale**
+
+  * Previous help feature simply opens a page with a link to the website, this is bad because:
+    * The flow is lengthy
+    * User may not be able to access website when operating without the internet
+    
+    Therefore, we want to make this better by simplifying the flow. We do this by adding:
+    * Making the help command return things in the application console
+    * Letting users enter an extra argument to specify what command they need guiding on
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -485,7 +499,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC10 - Adding tags to a contact**
+**Use case: UC10 - Get help on commands**
+
+**MSS**
+
+1.  User requests for help.
+2.  KeepInTouch returns relevant documentation.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs no extra argument.
+
+    * 1a1. KeepInTouch shows a list of all command words.
+
+      Use case ends.
+
+* 1b. User inputs an extra argument corresponding to a command.
+
+    * 1b1. Extra argument is a command word.
+
+      * KeepInTouch returns documentation on that command word.
+
+    * 1b2. Extra argument is not a command word, but is somewhat similar.
+
+      * KeepInTouch suggests the command word with the highest degree of similarity to the input
+
+    * 1b3. Extra argument is not a command word, and isn't recognizably close to a command word.
+
+      * KeepInTouch lets the user know that it is unable to recognize the input.
+
+      Use case ends.
+
+**Use case: UC11 - Adding tags to a contact**
 
 **MSS**
 
@@ -508,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC11 - Delete tags from a contact**
+**Use case: UC12 - Delete tags from a contact**
 
 **MSS**
 
@@ -537,7 +584,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC12 - Edit tags in a contact**
+**Use case: UC13 - Edit tags in a contact**
 
 **MSS**
 
@@ -566,7 +613,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC13 - Exit the program**
+**Use case: UC14 - Exit the program**
 
 **MSS**
 
