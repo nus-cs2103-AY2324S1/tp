@@ -28,11 +28,13 @@ public class Applicant implements Comparable<Applicant> {
     private final List<Interview> interviews = new ArrayList<>();
     private Status status;
 
+    private final Score score;
+
     /**
      * Every field must be present and not null.
      */
     public Applicant(Name name, Phone phone, Email email, Position position, List<Interview> interviews,
-                     Status status) {
+                     Status status, Score score) {
         requireAllNonNull(name, phone, email, position, interviews);
         this.name = name;
         this.phone = phone;
@@ -45,6 +47,7 @@ public class Applicant implements Comparable<Applicant> {
         } else {
             this.status = status;
         }
+        this.score = new Score(score);
     }
 
     public Name getName() {
@@ -61,6 +64,10 @@ public class Applicant implements Comparable<Applicant> {
 
     public Position getPosition() {
         return position;
+    }
+
+    public Score getScore() {
+        return score;
     }
 
     /**
@@ -214,19 +221,5 @@ public class Applicant implements Comparable<Applicant> {
      */
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    /**
-     * Get the score of an Applicant
-     * @return Double score of Applicant
-     */
-    public Double getScore() {
-        List<Interview> interviews = getInterviews();
-        Double totalScore = 0.;
-        for (Interview interview: interviews) {
-            totalScore += new Double(interview.rating.value);
-        }
-        Double averageScore = totalScore / interviews.size();
-        return averageScore;
     }
 }

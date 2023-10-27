@@ -90,6 +90,7 @@ public class EditInterviewCommand extends Command {
 
         applicantToEdit.deleteInterview(interviewToEdit);
         applicantToEdit.addInterview(editedInterview);
+        applicantToEdit.getScore().updateScoreAfterEdit(interviewToEdit, editedInterview);
 
         model.updateFilteredApplicantList(PREDICATE_HIDE_ALL_APPLICANTS);
         model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);

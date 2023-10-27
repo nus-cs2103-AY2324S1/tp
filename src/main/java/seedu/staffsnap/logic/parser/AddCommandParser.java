@@ -17,6 +17,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Score;
 import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 
@@ -47,8 +48,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Position position = ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
         List<Interview> interviewList = new ArrayList<>();
         Status status = Status.UNDECIDED;
+        Score score = new Score(interviewList);
 
-        Applicant applicant = new Applicant(name, phone, email, position, interviewList, status);
+        Applicant applicant = new Applicant(name, phone, email, position, interviewList, status, score);
 
         return new AddCommand(applicant);
     }

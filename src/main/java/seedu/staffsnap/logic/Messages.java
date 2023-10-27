@@ -51,7 +51,9 @@ public class Messages {
                 .append(interview.getRating())
                 .append("); "));
         builder.append("; Status: ")
-                .append(applicant.getStatus());
+                .append(applicant.getStatus())
+                .append("; Score: ")
+                .append(applicant.getScore());
         return builder.toString();
     }
 
