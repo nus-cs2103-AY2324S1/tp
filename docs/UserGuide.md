@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Flashlingo is a **desktop app for learning words by flashcard, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Flashlingo can help you to schedule your language learning plan.
+Flashlingo is a **desktop app for learning words by flashcard, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Flashlingo is designed with beginner language learners in mind, specialising in helping them expand their vocabulary.
 
 * Table of Contents
 {:toc}
@@ -18,7 +18,14 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Flashlingo.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.
+   Below shows the steps to perform such a task
+   1. Open up the terminal. For mac users, open up `terminal` through the finder. For windows users, search `cmd` and run it.
+  <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">      
+   2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
+<img width="219" alt="Screenshot 2023-10-27 at 2 41 08 PM" src="https://github.com/itsNatTan/tp/assets/64185574/6f723fd8-0f43-456a-b566-9073334831e3">
+   3. Simply type in java -jar flashlingo.jar to get started!<img width="361" alt="Screenshot 2023-10-27 at 2 39 31 PM" src="https://github.com/itsNatTan/tp/assets/64185574/e65a1562-9af9-4290-b5e0-b5a53e4d52c8">
+   <br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/MainUi.png)
 
