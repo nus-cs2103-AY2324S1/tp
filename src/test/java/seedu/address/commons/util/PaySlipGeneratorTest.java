@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Payroll;
+
 class PaySlipGeneratorTest {
 
     @Test
@@ -22,6 +24,7 @@ class PaySlipGeneratorTest {
 
     @Test
     void getFieldMap() {
+        ALICE.addPayroll(new Payroll(ALICE.getSalary()));
         Map<String, String> fieldMap = PaySlipGenerator.getFieldMap(ALICE);
 
         assertTrue(fieldMap.containsKey("employerName"));
