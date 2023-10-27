@@ -33,6 +33,14 @@ public class CommandHistoryTest {
     }
 
     @Test
+    public void addCommand_doesNotAddDuplicateCommand() {
+        commandHistory.addCommand(FIRST_COMMAND);
+        commandHistory.addCommand(FIRST_COMMAND);
+        commandHistory.getPreviousCommand();
+        assertFalse(commandHistory.hasPreviousCommand());
+    }
+
+    @Test
     public void hasNextCommand_noCommandsAdded_returnsFalse() {
         assertFalse(commandHistory.hasNextCommand());
     }
@@ -74,6 +82,13 @@ public class CommandHistoryTest {
         commandHistory.addCommand(FIRST_COMMAND);
         String previousCommand = commandHistory.getPreviousCommand();
         assertEquals(FIRST_COMMAND, previousCommand);
+    }
+
+    @Test
+    public void isLastCommand_returnsTrue() {
+        commandHistory.addCommand(FIRST_COMMAND);
+        commandHistory.getPreviousCommand();
+        assertTrue(commandHistory.isLastCommand());
     }
 
 }
