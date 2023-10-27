@@ -44,10 +44,6 @@ public class SetDifficultyCommand extends Command {
         this.difficulty = difficulty;
     }
 
-
-
-
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
