@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+skinparam ClassFontColor<<Hide>> #FFFFFF
+skinparam ClassBorderColor<<Hide>> #FFFFFF
+skinparam ClassBackgroundColor<<Hide>> #FFFFFF
+
+title User gets the previous method
+
+package "After pressing ↑" <<Rectangle>>{
+'    note "The cached value\nis returned" as N1
+'    note "The pointer was\nset to the\ndefault position" as N2
+    package CommandHistory as AFTER <<Rectangle>>{
+        class State1 as "<u>command0:String</u>"
+        class State2 as "<u>command1:String</u>" <<Hide>>
+        class State3 as "<u>command2:String</u>" <<Hide>>
+    }
+    class Pointer1 as "Current Command" #FFFFFF
+}
+
+package "After entering an edited version of command0" <<Rectangle>>{
+'    note "The cached value\nis returned" as N1
+'    note "The pointer was\nset to the\ndefault position" as N2
+    package CommandHistory as AFTER <<Rectangle>>{
+        class State4 as "<u>command0:String</u>"
+        class State5 as "<u>command1:String</u>"
+        class State6 as "<u>command2:String</u>" <<Hide>>
+    }
+    class Pointer2 as "Current Command" #FFFFFF
+}
+State1 -[hidden]right-> State2
+State2 -[hidden]right-> State3
+
+State4 -[hidden]right-> State5
+State5 -[hidden]right-> State6
+Pointer1 -up-> State1
+Pointer2 -up-> State6
+@end

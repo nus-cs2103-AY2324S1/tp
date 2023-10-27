@@ -326,6 +326,70 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 
+### [Proposed] Command History
+
+#### Implementation
+The proposed commandHistory mechanism is facilitated by `CommandHistory`. It contains `commandHistoryList` and `currentCommandPointer`. Additionally, it implements the following operations:
+* `CommandHistory#hasPreviousCommand()` — Returns if there is a previously command from the history based on `currentCommandPointer`.
+* `CommandHistory#hasNextCommand()` — Returns if there is a next command from the history based on `currentCommandPointer`.
+* `CommandHistory#getPreviousCommand()` — Restores the previous command from its history based on `currentCommandPointer`.
+* `CommandHistory#getNextCommand()` — Restores the next command from its history based on `currentCommandPointer`.
+* `CommandHistory#addCommand()` — Add the command into the history.
+
+
+Given below is an example usage scenario and how the commandHistory behaves at each step.
+
+Step 1. The user launches the application for the first time and enters their first command. 
+The `CommandHistory` will save the command and the `currentCommandPointer` won't be pointing to any command.
+
+![CommandHistoryState0](images/CommandHistoryState0.png)
+
+Step 2. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called and the previous command is displayed in the commandBox. 
+When the previous command is entered into the commandBox, the newly edited version of command will not be stored in `CommandHistory`.
+
+![CommandHistoryState1](images/CommandHistoryState1.png)
+
+Step 3. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called 
+and the previous command is displayed in the commandBox. When the previous command is edited and is entered into the commandBox, the newly edited version of command will be stored in `CommandHistory` after calling `CommandHistory#addCommand()`.
+
+![CommandHistoryState3](images/CommandHistoryState2.png)
+
+Step 4. The user has pressed '↑' while selecting the commandBox until the first Command and `CommandHistory#getPreviousCommand()` 
+is called multiple times. The user then presses '↓' and `CommandHistory#getNextCommand()` is called and the command1 (the next command) will then be displayed in the commandBox.
+
+![CommandHistoryState3](images/CommandHistoryState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentCommandPointer` is at 
+index 0, pointing to the initial first command, then there are no previous commands to restore. The program uses 
+`CommandHistory#hasPreviousCommand()` to check if this is the case. If so, it will not change anything.
+
+</div>
+
+
+The opposite occurs too when calling the next command  —  the program calls `CommandHistory#hasNextCommand()`, which shifts the `currentCommandPointer` once to the right, pointing to the previously entered command and displaying that command instead.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `commandHistoryPointer` is at index `commandHistoryList.size()`, pointing to nothing, and there are no undone CcaCommander states to restore. 
+The program uses `CommandHistory#hasNextCommand()` to check if this is the case. If so, it will not change anything.
+
+</div>
+
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommandHistoryActivityDiagram.png" width="400" style="padding-left:170px" />
+
+#### Design considerations:
+
+**Aspect: Storing of Command History:**
+
+* **Alternative 1 (current choice):** Stores the list of all commands.
+    * Pros: Allows user to iterate through all commands listed.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** CommandHistory only stores previous command.
+    * Pros: Will use less memory and reduces user error.
+    * Cons: Quite limited as a feature.
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -374,6 +438,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner user | remove a member from an event               | I can amend adding the wrong person to an event                                   |
 | `* * *`  | beginner user | view the members who attended an event      | I can estimate the number of members who will attend similar events in the future |
 | `* * *`  | beginner user | view events of a member                     | I can check how involved that particular member is                                |
+| `* * *`  | beginner user | recall the previous commands                | I can enter similar commands quickly                                              |
 | `* * *`  | power user    | undo a command                              | I can correct any wrong commands that I have entered previously                   |
 | `* * *`  | power user    | redo a command                              | I can correct any wrong undo commands that I have entered previously              |
 
