@@ -260,6 +260,47 @@ The following sequence diagram shows how the add patient works:
     - Pros: Fewer files to be changed.
     - Cons: Harder to implement, since we will have more checkings to be done when adding the person.
 
+### Create New Appointment Feature
+
+This feature allows users to create a new appointment between patients and doctors. The patient and doctor for whom the
+appointment is created should already exist in the address book. No conflicting appointment should be added (i.e, the
+same doctor/patient cannot have 2 different appointments at the same time. More details about the fields for Appointment
+can be found in the user guide.
+
+#### Implementation
+
+Implementation of creating an appointment is comprised of fairly new code. The adding mechanism is facilitated by the
+AddressBook in the model.
+
+Given below is an example usage scenario and how the new appointment mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial
+address book state.
+
+Step 2. The user populates the AddressBook with patients and doctors using the appropriate commands, if not already
+done.
+
+Step 3. The user types `new-appointment`as command, with the appropriate arguments for the appointment, for example,
+`new-appt pic/T0123456H dic/S9851586G time/2022-02-14 13:00:00`.
+
+Step 4. The `Doctor` and `Patient` Class methods are used to add the details to the respective objects. This works in
+a similar way to how the `NRIC` Class works for the `Doctor` and `Patient` Classes. `Appointment` is done externally for
+OOP reasons.
+
+Step 5. The `addPatientCommandParser`/ `addDoctorCommandParser` parses the Appointment and creates an `AddPatientCommand`/
+`addDoctorCommand` with the details of the `Appointment` given.
+
+:information_source: **Note:** If the details of the person added does not match the correct format for any fields,
+there will be an error telling user that the attributes are in the wrong format.
+
+Step 6. The `PatientCard` / `DoctorCard` then processes the appointment details and The UI should display the appointment
+details for each Person in the AddressBook.
+
+The following sequence diagram shows how the New Appointment works:
+
+![AddPatientSequenceDiagram](images/AddPatientSequenceDiagram.png) //change this
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
