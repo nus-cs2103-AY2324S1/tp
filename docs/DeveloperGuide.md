@@ -10,8 +10,8 @@ title: Developer Guide
 ## **Acknowledgements**
 
 - Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-- App icon from http://www.mcdodesign.com/ by Susumu Yoshida
-- Some code adapted from http://code.makery.ch/library/javafx-8-tutorial/ by Marco Jakob
+- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
+- Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
 
 ---
 
@@ -116,6 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -162,6 +163,15 @@ The following activity diagram summarises what happens when a user executes a ne
 
 ![AddActivityDiagram](images/AddActivityDiagram.png)
 
+
+### Maintaining sorting while supporting filtering
+
+The contact list is automatically kept in a constantly sorted state by leveraging `SortedList` from the JavaFX Collections library. Since the class works with `ObservableList`s, which the Model's `Contacts` also utilises, we are able to leverage this class more easily.
+
+The Model obtains an unsorted, unmodifiable list from `Contacts` and wraps it in a `SortedList`. A custom `Comparator` is provided to define our own sorting order, to facilitate the propagation of changes from the nested list to the sorted list.
+
+For operability with the find feature, this sorted list is further wrapped in a `FilteredList` to limit the scope of what the user sees as needed. A dummy filter `Predicate` which allows all contacts to pass is used as the default filter. It is this filtered list that the model stores in a field.
+
 ### Edit feature
 
 The edit feature is facilitated by `ModelManager` and implements `Model`.
@@ -173,6 +183,7 @@ which replaces the old contact with the edited contact in the `UniqueContactList
 The following activity diagram summarises what happens when a user executes an edit command.
 
 ![EditActivityDiagram](images/EditActivityDiagram.png)
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -272,14 +283,12 @@ _{more aspects and alternatives to be added}_
 
 ### Product scope
 
-+**Target user profile**: NUS SoC students, who
-* have a need to label their contacts by categories (e.g. classmates in a certain course, professors)
-* can type fast and prefers typing
-* is reasonably comfortable with command-line inputs
+**Target user profile**: NUS SoC students, who:
+- can type fast and prefer typing
+- are reasonably comfortable with command-line inputs
+- wish to label contacts by category (e.g. classmates from certain courses, professors)
 
-**Value proposition**: Manage contacts quickly via text commands which computing students are familiar with,
-and with useful features relevant to computing (and in particular, SoC) students
-
+**Value proposition**: Manage contacts quickly via text commands, with useful features relevant to SoC students.
 
 ### User stories
 
