@@ -154,9 +154,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ### Student Notes feature
 
 The adding of student notes is facilitated by `NoteCommand`. It extends `Command` and allows the addition of a `Note`
-to the student at the specified index. The `Note` given in the user input can contain any
-kind of characters, but it cannot be empty, and must be 200 characters or less. If there is an existing `Note` for
-the student, it will be overwritten when another `NoteCommand` is created.
+to the student at the index specified by the user.
 
 The sequence diagram below illustrates the interactions within the `Logic` component, 
 taking `execute("note 1 note/Likes dogs.")` as an example.
