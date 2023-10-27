@@ -524,7 +524,22 @@ otherwise)
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: UC3 - Find Patient**
+
+**MSS**
+
+1. User inputs a query for a patient or doctor with an attribute.
+2. Medilink Contacts lists all patients or doctors with matching attribute.
+   Use case ends.
+
+**Extensions**
+
+* 1a. No person with matching attribute found.
+    * 1a1. Medilink Contacts lists 0 persons. 
+
+      Use case ends.
+
+
 
 ### Non-Functional Requirements
 

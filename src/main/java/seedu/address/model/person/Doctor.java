@@ -39,10 +39,28 @@ public class Doctor extends Person {
     public void addPatient(Patient patient) {
         this.patients.add(patient);
     }
+
+    /**
+     * Returns true if person is a doctor.
+     */
+    @Override
+    public boolean isDoctor() {
+        return true;
+    }
+
+    /**
+     * Returns true if person is a patient.
+     */
+    @Override
+    public boolean isPatient() {
+        return false;
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
