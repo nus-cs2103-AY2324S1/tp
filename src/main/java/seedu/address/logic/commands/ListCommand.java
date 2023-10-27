@@ -14,7 +14,12 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all bookings";
 
-
+    /**
+     * Executes the list command to display all bookings to the user.
+     *
+     * @param model The current model.
+     * @return A CommandResult indicating the result of the list operation and the success message.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
