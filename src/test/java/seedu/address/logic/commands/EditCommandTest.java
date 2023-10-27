@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.EditCommand.createEditedPerson;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -197,5 +199,18 @@ public class EditCommandTest {
         Optional<Person> person = editCommand.findPersonToEdit(personList);
         assertFalse(person.isPresent());
     }
-}
 
+    @Test
+    public void createEditedPerson_validInput_returnsEditedPerson() {
+        Person personToEdit = ALICE;
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        assertEquals(editedPerson.getNric(), personToEdit.getNric());
+        assertEquals(editedPerson.getPhone(), personToEdit.getPhone());
+        assertEquals(editedPerson.getAddress(), personToEdit.getAddress());
+        assertEquals(editedPerson.getMedicalHistories(), personToEdit.getMedicalHistories());
+        assertEquals(editedPerson.getTags(), personToEdit.getTags());
+    }
+}
