@@ -6,7 +6,7 @@ title: User Guide
 
 ***Revolutionise your studying experience with lesSON!***
 
-lesSON is a **desktop application** aimed to help NUS Computer Science undergraduates make flashcards to aid with 
+lesSON is a **desktop application** aimed to help NUS Computer Science undergraduates make flashcards to aid with
 their memory work for school content.<br>
 Here are some benefits of adopting lesSON in your studying experience:
 - Create and Edit flashcards about key concepts taught in your courses
@@ -14,7 +14,7 @@ Here are some benefits of adopting lesSON in your studying experience:
 - Categorise your flashcards based on their courses or topics
 
 On top of these functionalities, we believe that making flashcards must be efficient. Therefore, lesSON is optimized for
-use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**. 
+use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**.
 If you type fast, lesSON can get your flashcards done faster than current GUI apps in the industry.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ Examples:
    Answers should only contain alphanumeric characters, some special characters and spaces, and it should not be blank
 
 3. add a/10111
-   Invalid command format! 
+   Invalid command format!
    add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
 ```
 #### Usage
@@ -109,7 +109,7 @@ Examples:
    Deleted Card: Question: <provided question>; Answer: <provided answer>
 
 2. delete -100
-   Invalid command format! 
+   Invalid command format!
    delete: Deletes the deck identified by the index number used in the displayed card list.
    Parameters: INDEX (must be a positive integer)
    Example: delete 1
@@ -122,24 +122,32 @@ Examples:
    ![result of delete command](./images/UserGuide/1.3_del_ans.png)
 
 ### View All Flashcards : `list`
-Shows a list of all flashcards in the deck.
+Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
 
-Format: `list`
+Format: `list (q/t)/ (prefix question starts with/ tag)`
 Examples:
 ```
-(list shows the full list of flashcards.)
+1. list
+   (list shows the full list of flashcards)
+
+2. list q/ What
+   (list shows all flashcards with questions starting with 'What')
+
+3. list t/ CS2100
+   (list shows all flashcards with the CS2100 Tag)
+
+4. list q/ what t/ CS2100
+   (list shows all flashcards with questions starting with 'What' and has the CS2100 Tag)
 ```
 
 #### Acceptable values for each parameters:
-No parameters are needed
+1. No Empty Input after q/ and t/.
+2. q/ and t/ is optional.
 
 #### Expected output:
 ```
 1. list
-   (Questions to all the flashcards that are added with their index)
-
-2. list potato
-   “No parameters are allowed for this command.”
+   "All cards listed" message will be returned to the user via the CLI
 ```
 
 #### Usage
@@ -183,12 +191,12 @@ Format: `practise INDEX`
 
 #### Examples:
 ```
-practise 1 
+practise 1
 (showcases the question at index 1)
 ```
 #### Expected outputs:
 ```
-practise 1 
+practise 1
 "Practising question 1 : <provided question>"
 
 practise 10
@@ -217,7 +225,7 @@ solve 1
 ```
 #### Expected outputs:
 ```
-solve 1 
+solve 1
 "Solved Question 1: What pipline protocols are covered
 Answer:2"
 
@@ -247,7 +255,7 @@ Format: set INDEX DIFFICULTY
 ```
 set 1
 ```
-   
+
 #### Expected outputs:
 ```
 set 1 d/ easy

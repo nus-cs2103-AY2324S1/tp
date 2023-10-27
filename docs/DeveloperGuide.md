@@ -103,7 +103,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Card` object residing in the `Model`.
-* answer of the Card created is hidden from the user when they browse the Deck 
+* answer of the Card created is hidden from the user when they browse the Deck
 * user can scroll to see the different `Card` listed in lesSON
 
 ### Logic component
@@ -258,7 +258,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Proposed Implementation
 
-The proposed feature aims to filter the flashcards and display cards of a specific `tag`. This allows the users to 
+The proposed feature aims to filter the flashcards and display cards of a specific `tag`. This allows the users to
 view specific groups of cards under the same `tag`, granting them more control over their study material.
 
 Given below is an example usage of the filter feature.
@@ -286,7 +286,7 @@ Step 6: Should user want to see the full deck, they will execute `list` to view 
       2. Inefficient if specific tag is a small fraction of Deck.
 * **Alternative 2:** Construct a \'mini-deck\' for each tag.
     * Pros: Quick search for all cards with specific tag.
-    * Cons: 
+    * Cons:
       1. Will use more memory.
       2. Adding/Deleting/Editing cards will require modifications to \'mini-deck\'.
 
@@ -310,8 +310,8 @@ Step 5: If the user wishes to practise from this view, simply `practise index` f
 
 #### Proposed Implementation
 
-The proposed feature aims to support Markdown based language for inputs and renders the corresponding display (i.e. ** Bold ** will become **Bold**). 
-This provides users the freedom to adapt the content within the card, granting them more control over their study material. Users would be able to highlight more specific 
+The proposed feature aims to support Markdown based language for inputs and renders the corresponding display (i.e. ** Bold ** will become **Bold**).
+This provides users the freedom to adapt the content within the card, granting them more control over their study material. Users would be able to highlight more specific
 part of the `Answer` which would be the key concept tested in the exam.
 
 Given below is an example usage of the Markdown support feature.
@@ -339,7 +339,7 @@ Step 5: The `UI` renders the `Card` with the relevant fields meant to be written
     * Cons:
         1. Time-consuming.
         2. More checks and assertions required for increased edge cases.
-        3. More testing. 
+        3. More testing.
 
 ### Spaced Repetition Feature
 
@@ -349,27 +349,27 @@ This features aim to implement a Spaced Repetition system to schedule cards base
 In combination with the difficulty feature, Spaced Repetition determines when is the next recommended revision date
 for each flashcard, to make user give more of their attention to the difficult ones and practice it earlier, optimising learning.
 
-Using the difficulty system, we can decide a `nextPracticeDate` for the specified card based on the difficulty selected by the user. 
+Using the difficulty system, we can decide a `nextPracticeDate` for the specified card based on the difficulty selected by the user.
 This helps to remove the need to manually set `nextPracticeDate`, and provides user with a more intuitive way to determine their `nextPracticeDate` based on `difficulty`.
 
 Possible difficulty inputs: `easy`, `medium`, `hard`
 
 Given below is an example usage of the Spaced Repetition Feature.
 
-Step 1: Assuming the user has existing cards in lesson, with their own set of questions and answers. These 
+Step 1: Assuming the user has existing cards in lesson, with their own set of questions and answers. These
 questions are sorted by a due date `nextPracticeDate`. Cards also have a hidden field known as `lastPracticeDate`.
 
-Step 2: After the user uses the `practise` command and `solve` command, he uses the `set` command to set how difficult 
+Step 2: After the user uses the `practise` command and `solve` command, he uses the `set` command to set how difficult
 he felt the card was when he was practising the card.
 
-Step 3: After setting the difficulty, the system will calculate a new `nextPracticeDate`. 
-Firstly, it applies a multiplier (based on difficulty: 3, 1.5, 0.5 for easy, medium, hard respectively) 
-to the amount of time between `lastPracticeDate` and `nextPracticeDate`, obtaining a duration. 
-This duration is then added to the current `nextPracticeDate` to calculate the new `nextPracticeDate`. 
-If there is no suitable `lastPracticeDate` to use, then this calculation alternatively 
+Step 3: After setting the difficulty, the system will calculate a new `nextPracticeDate`.
+Firstly, it applies a multiplier (based on difficulty: 3, 1.5, 0.5 for easy, medium, hard respectively)
+to the amount of time between `lastPracticeDate` and `nextPracticeDate`, obtaining a duration.
+This duration is then added to the current `nextPracticeDate` to calculate the new `nextPracticeDate`.
+If there is no suitable `lastPracticeDate` to use, then this calculation alternatively
 adds a base duration (of 4 hours) * multiplier to `nextPracticeDate`.
 
-Step 4: The card's `nextPracticeDate` and `lastPracticeDate` is then updated with the new fields. 
+Step 4: The card's `nextPracticeDate` and `lastPracticeDate` is then updated with the new fields.
 
 Step 5: The card is automatically sorted in the list according to the new `nextPracticeDate` and the more difficult cards
 will now appear earlier when using the `practice` command without index now.
