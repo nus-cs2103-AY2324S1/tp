@@ -102,7 +102,7 @@ public class Person {
     }
 
     /**
-     * Add a set of tags to this person
+     * Adds a set of {@code Tag} to this person
      *
      * @param tags The tags to be added.
      */
@@ -111,7 +111,16 @@ public class Person {
     }
 
     /**
-     * Remove a note by its user-friendly id
+     * Removes a set of {@code Tag} from this person
+     *
+     * @param tags The tags to be removed.
+     */
+    public void removeTags(Set<Tag> tags) {
+        tags.forEach(tag -> this.tags.remove(tag));
+    }
+
+    /**
+     * Removes a note by its user-friendly id
      *
      * @param id The id of the note you want to remove
      * @return {@code true} if the operation is successful and {@code false} if the
@@ -139,7 +148,7 @@ public class Person {
     }
 
     /**
-     * Remove an event by its user-friendly id
+     * Removes an event by its user-friendly id
      *
      * @param id The id of the event you want to remove
      * @return The event object that is just deleted if the operation is successful

@@ -11,28 +11,24 @@ import seedu.address.model.person.ContactID;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
-/**
- * The command handler for {@code add tag} command
- */
-public class AddTagCommand extends AddCommand {
+public class DeleteTagCommand extends DeleteCommand {
     public static final String SECONDARY_COMMAND_WORD = "tag";
-    public static final String MESSAGE_SUCCESS = "New tags added: ";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SECONDARY_COMMAND_WORD
-            + ": Adds tags to a contact from the contact list.\n"
-            + "Usage:  add tag -id CONTACT_ID -t TAGNAME";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
+            + SECONDARY_COMMAND_WORD + ": Delete one or more tags from a contact.\n"
+            + "Usage:  delete tag -id CONTACT_ID -t TAGNAME";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Can not find the target contact with ID: ";
+    public static final String MESSAGE_SUCCESS = "Successfully deleted tags: ";
 
-    private final Set<Tag> toAdd;
+    private final Set<Tag> toDelete;
     private final int contactId;
 
     /**
-     * Creates an AddTagCommand to add the specified {@code Tag}(s).
+     * Creates an DeleteTagCommand to delete the specified {@code Tag}(s).
      */
-    public AddTagCommand(int contactId, Set<Tag> tagList) {
+    public DeleteTagCommand(int contactId, Set<Tag> tagList) {
         requireNonNull(tagList);
         this.contactId = contactId;
-        this.toAdd = tagList;
+        this.toDelete = tagList;
     }
 
     @Override
@@ -42,11 +38,11 @@ public class AddTagCommand extends AddCommand {
         if (person == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND + this.contactId);
         }
-        person.addTag(this.toAdd);
+        person.removeTags(toDelete);
 
         final StringBuilder builder = new StringBuilder();
         builder.append(MESSAGE_SUCCESS);
-        toAdd.forEach(builder::append);
+        toDelete.forEach(builder::append);
 
         return new CommandResult(builder.toString());
     }
@@ -58,21 +54,21 @@ public class AddTagCommand extends AddCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddTagCommand)) {
+        if (!(other instanceof DeleteTagCommand)) {
             return false;
         }
 
-        AddTagCommand otherAddNoteCommand = (AddTagCommand) other;
+        DeleteTagCommand otherAddNoteCommand = (DeleteTagCommand) other;
 
-        boolean equalToAdd = toAdd.equals(otherAddNoteCommand.toAdd);
+        boolean equalToDelete = toDelete.equals(otherAddNoteCommand.toDelete);
         boolean equalContactId = (contactId == otherAddNoteCommand.contactId);
-        return equalToAdd && equalContactId;
+        return equalToDelete && equalContactId;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("toDelete", toDelete)
                 .add("contactId", contactId)
                 .toString();
     }
