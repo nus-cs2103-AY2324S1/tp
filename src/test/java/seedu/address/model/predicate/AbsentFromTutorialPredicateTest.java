@@ -45,7 +45,7 @@ public class AbsentFromTutorialPredicateTest {
         AbsentFromTutorialPredicate predicate = new AbsentFromTutorialPredicate(
                 new Week(1), Optional.of(new Tag("G01")));
         Person person = new PersonBuilder().withTags("G01").build();
-        person.addAttendance(new Attendance(new Week(1), true));
+        person.addAttendance(new Attendance(new Week(1), true, null));
         assertFalse(predicate.test(person));
 
         // With multiple attendances
@@ -53,8 +53,8 @@ public class AbsentFromTutorialPredicateTest {
                 new Week(1), Optional.of(new Tag("G01")));
         Person person2 = new PersonBuilder().withTags("CS2103T").build();
         person2.addAttendance(new Attendance(new Week(1), false, "Late"));
-        person2.addAttendance(new Attendance(new Week(1), true));
-        person2.addAttendance(new Attendance(new Week(1), true));
+        person2.addAttendance(new Attendance(new Week(1), true, null));
+        person2.addAttendance(new Attendance(new Week(1), true, null));
         assertFalse(predicate2.test(person2));
 
         // With wrong tag
