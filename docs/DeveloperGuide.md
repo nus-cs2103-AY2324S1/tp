@@ -76,12 +76,12 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component
+The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-
+* depends on some classes in the `Model` component, as it displays `Member` and `Event` objects residing in the Model
 
 ### Logic component
 
@@ -280,7 +280,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | power user    | delete an event                             | I can remove it from the schedule                                                 |
 | `* * *`  | power user    | view a list of all events hosted by the CCA | I can see event history                                                           |
 | `* * *`  | beginner user | add a member to an event                    | I can track which members are participating in the event                          |
-| `* * *`  | beginner user | remove a member from an event               | I can amend adding the wrong  member to an event                                   |
+| `* * *`  | beginner user | remove a member from an event               | I can amend adding the wrong member to an event                                   |
 | `* * *`  | beginner user | view the members who attended an event      | I can estimate the number of members who will attend similar events in the future |
 | `* * *`  | beginner user | view events of a member                     | I can check how involved that particular member is                                |
 | `* * *`  | power user    | undo a command                              | I can correct any wrong commands that I have entered previously                   |
@@ -444,7 +444,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <ins>**Use case: UC09 - Enrol member to an event**</ins>
 
-**Guarantees: MSS -> Specified member will be enroled to the event.**
+**Guarantees: MSS -> Specified member will be enrolled to the event.**
 
 **MSS**
 
@@ -475,7 +475,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <ins>**Use case: UC10 - Unenrol member from an event**</ins>
 
-**Guarantees: MSS -> Specified member will be unenroled from the event.**
+**Guarantees: MSS -> Specified member will be unenrolled from the event.**
 
 **MSS**
 
