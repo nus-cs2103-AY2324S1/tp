@@ -20,17 +20,7 @@ public class Attendance {
      *
      * @param week A week from 0 to 13.
      * @param isPresent A valid attendance status.
-     */
-    public Attendance(Week week, boolean isPresent) {
-        this.week = week;
-        this.isPresent = isPresent;
-    }
-
-    /**
-     * Constructs an {@code Attendance}.
-     *
-     * @param week A week from 0 to 13.
-     * @param isPresent A valid attendance status.
+     * @param reason A valid reason for student to be absent if applicable.
      */
     public Attendance(Week week, boolean isPresent, String reason) {
         this.week = week;

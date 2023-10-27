@@ -72,7 +72,7 @@ public class PersonTest {
     @Test
     public void getAttendanceForCurrentWeek_attendanceExists_optionalWithAttendance() {
         Week testWeek = new Week(1);
-        Attendance attendance = new Attendance(testWeek, true);
+        Attendance attendance = new Attendance(testWeek, true, null);
         Person emptyAlice = new PersonBuilder(ALICE).build();
         emptyAlice.addAttendance(attendance);
         Optional<Attendance> result = emptyAlice.getAttendanceForSpecifiedWeek(testWeek);

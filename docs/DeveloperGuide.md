@@ -213,7 +213,7 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
     - Increased complexity: Introducing more commands can make the system more complex and harder for users to remember.
     - Redundancy: Both commands would have overlapping code, leading to potential redundancy.
     
-    **Evaluation**:
+    **Evaluation:**
     
     The current implementation is preferred as it is simpler and more straightforward. It reduces the need for users to remember additional commands, while resolving potential user mistakes behind the scene, providing convenience and a better user experience. The additional complexity introduced by having a separate command for updating attendance is not justified.
 
@@ -230,9 +230,9 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
     - Redundancy: Multiple attendance records for the same week can lead to confusion and redundancy.
     - Inefficiency: Consumes more memory and might make querying slower if there are many redundant records.
 
-    **Evaluation**:
+  **Evaluation:**
     
-    The current implementation is preferred as the pros simply do not outweigh the cons. The potential scenario that multiple attendance records within the same week being potentially useful is not justified as it is virtually unlikely to happen. The current implementation is much better preferred as the check prevents potential user mistakes behind the scene, providing convenience and a better user experience.
+  The current implementation is preferred as the pros simply do not outweigh the cons. The potential scenario that multiple attendance records within the same week being potentially useful is not justified as it is virtually unlikely to happen. The current implementation is much better preferred as the check prevents potential user mistakes behind the scene, providing convenience and a better user experience.
 
 ### View Tallied Attendance feature
 
@@ -255,6 +255,76 @@ Another possible way to implement this feature would be to abstract the attendan
 **Cons:**
 
 - Redundancy: At the current stage, abstracting it into a separate class will greatly increase code complexity without bringing much convenience.
+
+### View Detailed Attendance Records feature 
+
+#### Implementation
+
+The view feature allows the user to view the detailed attendance records of the students in the contact list. This 
+feature is implemented using the `ViewCommand` class. It is parsed by the `ViewCommandParser` class. If parsed 
+successfully, it returns a `ViewCommand` object.
+
+#### Design considerations
+
+The feature is implemented this way in order to access each individual's attendance records in a quick and efficient
+manner. By using the index of the contact, the user need not type out the individual's full name, keeping the command
+short and quick, especially when the user may have to view multiple attendance records in quick succession.
+
+#### Alternative implementations considered but not adopted:
+
+- Integrate the attendance records to be part of the UI 
+
+  > Instead of having the user to enter a command to view indiviudal attendance records, we could have the attendance records being shown constantly on the UI for every single contact
+
+  **Pros:**
+    - Implementation would be quite straightforward and simple without having to add a new command `ViewCommand` and its parser `ViewCommandParser`.
+    - Theoretically, users would be able to view every student's attendance records almost instantly.
+
+  **Cons:**
+    - The UI could end up being extremely cluttered especially considering that each student might have 13 rows of attendance to show. This could result in information overload and drastically reduce the user friendliness of the UI.
+
+  **Evaluation**:
+
+  The current implementation, despite having to add new classes, is the optimal way to go about implementing this feature as we believe that having a user-friendly UI is a priority.
+
+### \[Proposed\] Multiple Address Books for each Course
+
+#### Proposed Implementation
+
+In the `ModelManager` class, instead of storing an `AddressBook`, we instead store a `AddressBookManager`. 
+
+The `AddressBookManager` has a few responsibilities:
+- Adding or deleting `AddressBook`
+- Setting the active `AddressBook`
+- Getting the active `AddressBook`
+
+The `getAddressBook` method in `ModelManager` is now a wrapper for the `getActiveAddressBook` method in
+`AddressBookManager`. This ensures that any existing commands will still "see" the model as having one `AddressBook`,
+and not break any existing functionality.
+
+#### Design considerations:
+
+The `getAddressBook` method in `ModelManager` is now a wrapper for the `getActiveAddressBook` method in
+`AddressBookManager`. This ensures that any existing commands will still "see" the model as having one `AddressBook`,
+and not break any existing functionality.
+
+#### Alternative implementations considered but not adopted:
+
+- Updating the structure in `ModelManager`
+
+  > Instead of having a new class `AddressBookManager`, we simply update the existing structure to use a
+  > `HashMap<String, AddressBook>`.
+
+  **Pros:**
+    - Easier to understand: Developers who are new to the codebase do not need to learn and understand the
+    `AddressBookManager` class and its interactions, which could potentially increase the learning curve.
+
+  **Cons:**
+    - Harder to maintain: In the future, should any changes be needed for address book management, there may need to refactor a significant portion of the codebase, as the logic is distributed. This can be error-prone and time-consuming.
+    - Harder to Store: Without a dedicated AddressBookManager class, there is a need to refactor a significant portion of the existing storage mechanism to take in a HashMap of `AddressBook`.
+
+  **Evaluation:**
+  The proposed implementation is preferred as even though it introduces additional complexity, it allows for better maintainability of the codebase as the responsibility of handling `AddressBook` is now handled by the `AddressBookManager` class. The ease of extensibility outweighs the complexity introduced.
 
 ### \[Proposed\] Undo/redo feature
 

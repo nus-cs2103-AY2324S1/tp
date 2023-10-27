@@ -314,4 +314,3 @@ _Details coming soon ..._
 | **List**   | `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]` `list students`                                                                                                         |                                                           |
 | **Help**   | `help`                                                                                                                                                                      |
 | **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \                                                                                                                                     | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
-
