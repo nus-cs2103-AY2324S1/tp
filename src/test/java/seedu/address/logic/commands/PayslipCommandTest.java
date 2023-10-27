@@ -16,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 class PayslipCommandTest {
@@ -27,7 +28,8 @@ class PayslipCommandTest {
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new PayslipCommand(null));
+        assertThrows(NullPointerException.class, () -> new PayslipCommand((Index) null));
+        assertThrows(NullPointerException.class, () -> new PayslipCommand((NameContainsKeywordsPredicate) null));
     }
 
     @Test

@@ -1,6 +1,8 @@
 package seedu.address.commons.util;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,14 +16,16 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 
+import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Person;
 
 /**
  * Generates a PDF payslip for an employee.
  */
 public class PaySlipGenerator {
-    private static final String TEMPLATE_PATH = "payslips/template.pdf";
-    private static final String OUTPUT_DIRECTORY_PATH = "payslips/";
+    private static final String TEMPLATE_PATH = "./resources/template.pdf";
+    private static final String OUTPUT_DIRECTORY_PATH = "./payslips/";
+    private static final InputStream TEMPLATE = PaySlipGenerator.class.getClassLoader().getResourceAsStream("template.pdf");
 
     /**
      * Generates a PDF payslip for an employee.
@@ -29,7 +33,12 @@ public class PaySlipGenerator {
      * @throws IOException If the template file cannot be found.
      */
     public static void generateReport(Person employee) throws IOException {
-        PdfDocument pdfDocument = new PdfDocument(new PdfReader(TEMPLATE_PATH),
+        File dir = new File(OUTPUT_DIRECTORY_PATH);
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        PdfDocument pdfDocument = new PdfDocument(new PdfReader(TEMPLATE),
             new PdfWriter(OUTPUT_DIRECTORY_PATH + getFileName(employee)));
         PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDocument, false);
         PdfFont font = PdfFontFactory.createFont();
@@ -71,12 +80,52 @@ public class PaySlipGenerator {
      */
     public static Map<String, String> getFieldMap(Person employee) {
         Map<String, String> fieldMap = new HashMap<>();
-        DecimalFormat df = new DecimalFormat("0.00");
+        Payroll latest = employee.getLatestPayroll();
         fieldMap.put("employerName", "XXX Limited");
         fieldMap.put("employeeName", employee.getName().toString());
-        fieldMap.put("basicPay", employee.getSalary().toString());
-        fieldMap.put("totalDeductions", df.format(employee.getSalary().getTotalDeductions()));
-        fieldMap.put("netPay", df.format(employee.getSalary().getNetSalary()));
+        fieldMap.put("basicPay", latest.getBasicSalaryString());
+        fieldMap.put("totalDeductions", latest.getTotalDeductionsString());
+        fieldMap.put("netPay", latest.getNetSalaryString());
+        fieldMap.put("totalAllowances", latest.getTotalAllowancesExceptBonusesString());
+        fieldMap.put("grossPay", latest.getGrossPayString());
+        fieldMap.put("CPFDeduction", latest.getEmployeeCpfDeductionsString());
+
+        if (Double.parseDouble(latest.getAnnualBonusesString()) > 0.0) {
+            fieldMap.put("otherAdditionalPayments", latest.getAnnualBonusesString());
+            fieldMap.put("additionalPaymentReason1", "Annual Bonus");
+            fieldMap.put("additionalPayment1", latest.getAnnualBonusesString());
+        } else {
+            fieldMap.put("otherAdditionalPayments", "0.00");
+        }
+
+        if (Double.parseDouble(latest.getTotalDeductionsString()) >
+            Double.parseDouble(latest.getEmployeeCpfDeductionsString())) {
+            String deductionReason1 = "";
+            String deduction1 = "";
+
+            if (Double.parseDouble(latest.getAbsencesString()) != 0.0) {
+                deductionReason1 += "Absence\n";
+                deduction1 += latest.getAbsencesString() + "\n";
+            }
+
+            if (Double.parseDouble(latest.getNoPayLeavesString()) != 0.0) {
+                deductionReason1 += "No-Pay Leave\n";
+                deduction1 += latest.getNoPayLeavesString() + "\n";
+            }
+
+            if (!deductionReason1.isEmpty()) {
+                fieldMap.put("deductionReason1", deductionReason1);
+                fieldMap.put("deduction1", deduction1);
+            }
+        }
+
+        if (Double.parseDouble(latest.getTotalAllowancesExceptBonusesString()) != 0.0) {
+            if (Double.parseDouble(latest.getTransportAllowancesString()) != 0.0) {
+                fieldMap.put("allowanceReason1", "Transport Allowance");
+                fieldMap.put("allowance1", latest.getTransportAllowancesString());
+            }
+        }
+
         return fieldMap;
     }
 }
