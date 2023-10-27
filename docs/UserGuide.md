@@ -177,7 +177,7 @@ Format: `remark INDEX r/REMARK`
 * Existing remark will be replaced with `REMARK`.
 * You can remove an existing remark by typing `r/`.
 
-*Examples: 
+*Examples:
 * `remark 1 r/Owes me a favour` Replaces the previous remark for the 1st contact with "Owes me a favour".
 
 <br/><br/><br/><br/>
@@ -212,7 +212,7 @@ Examples:
 
 ### Adding a meeting: `addm`
 
-Adds a meeting to OutBook. 
+Adds a meeting to OutBook.
 Meetings are sorted by start time given.
 
 Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`

@@ -9,7 +9,7 @@ OutBook is a desktop personal secretary application used for saving contacts and
 
 My contributions to the project are listed below.
 
-- **New Feature**: 
+- **New Feature**:
 
   - Add LastContactedTime field to Person
   - New Commands + Test cases

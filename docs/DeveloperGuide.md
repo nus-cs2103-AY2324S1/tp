@@ -253,8 +253,8 @@ A Person object can be obtained from a Meeting's list of attendees by searching 
 for a `Person` with a name matching `attendeeName`.
 
 ### Remove attendee feature
-User can specify an Attendee to remove from a specified Meeting by specifying its index in the list of Attendees. 
-This is the main motivation behind using a LinkedHashSet for the implementation of the Attendee Set. 
+User can specify an Attendee to remove from a specified Meeting by specifying its index in the list of Attendees.
+This is the main motivation behind using a LinkedHashSet for the implementation of the Attendee Set.
 
 The following sequence diagram shows how the remove attendee operation works:
 
@@ -452,7 +452,7 @@ _{More to be added}_
 1.  User requests to list meetings.
 2.  OutBook shows a list of meetings.
 3.  User requests to view details of a specific meeting.
-4.  OutBook shows the details of the meeting. 
+4.  OutBook shows the details of the meeting.
 4.  User requests to remove a specific contact from the meeting.
 5.  OutBook removes the contact from the meeting.
 
@@ -495,7 +495,7 @@ _{More to be added}_
 2. OutBook marks the specific meeting as complete
 3. OutBook updates the last contacted date of attendees to the meeting date
 
-   Use case ends. 
+   Use case ends.
 
 **Extensions**
 

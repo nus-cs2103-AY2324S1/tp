@@ -10,7 +10,7 @@ OutBook is a desktop personal secretary application used for saving contacts and
 My contributions to the project are listed below.
 
 
-- **New Feature**: Remove contact from meeting command  
+- **New Feature**: Remove contact from meeting command
   - Added command and parser
   - Thorough testing
 
@@ -28,7 +28,7 @@ My contributions to the project are listed below.
 
 - **Documentation**:
 
-  - User Guide 
+  - User Guide
     - Remove meeting contact command
     - Minor edits
 
