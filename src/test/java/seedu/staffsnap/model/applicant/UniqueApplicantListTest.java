@@ -17,14 +17,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.staffsnap.model.applicant.exceptions.DuplicateApplicantException;
-import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.testutil.ApplicantBuilder;
 
 public class UniqueApplicantListTest {
 
     private final UniqueApplicantList uniqueApplicantList = new UniqueApplicantList();
-
-    private Interview wrongList = new Interview("tester");
 
     @Test
     public void contains_nullApplicant_throwsNullPointerException() {
