@@ -21,49 +21,40 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar flashlingo.jar` command to run the application.
    Below shows the steps to perform such a task
    1. Open up the terminal. For mac users, open up `terminal` through the finder. For windows users, search `cmd` and run it.
-  <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">      
-   2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
+  <img width="674" alt="Screenshot 2023-10-27 at 2 36 16 PM" src="https://github.com/itsNatTan/tp/assets/64185574/039d9f37-e45e-410f-b819-117ff312e13b">
+
+   3. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder.
 <img width="219" alt="Screenshot 2023-10-27 at 2 41 08 PM" src="https://github.com/itsNatTan/tp/assets/64185574/6f723fd8-0f43-456a-b566-9073334831e3">
-   3. Simply type in java -jar flashlingo.jar to get started!<img width="361" alt="Screenshot 2023-10-27 at 2 39 31 PM" src="https://github.com/itsNatTan/tp/assets/64185574/e65a1562-9af9-4290-b5e0-b5a53e4d52c8">
+
+   4. Simply type in java -jar flashlingo.jar to get started!
+<img width="361" alt="Screenshot 2023-10-27 at 2 39 31 PM" src="https://github.com/itsNatTan/tp/assets/64185574/e65a1562-9af9-4290-b5e0-b5a53e4d52c8">
    <br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/MainUi.png)
 
+### Using the application
+
 1. Type the command in the command box and press Enter to execute it.
-   Some example commands you can try:
 
-   * `help` : Shows the User Guide.
+   
+2. 
+   <img width="729" alt="Screenshot 2023-10-27 at 3 11 50 PM" src="https://github.com/itsNatTan/tp/assets/64185574/48b74efc-2a39-48d5-b0aa-70f165484c5e">
 
-   * `list` : Shows the list of cards.
 
-   * `add w/WORD wl/WORD LANGUAGE t/TRANSLATION tl/TRANSLATION LANGUAGE` :Adds a word to the flashcard with its translation.
-
-   * `delete index` : Deletes a words and its related information at the given index.
-   * `edit index w/WORD t/TRANSALTION` : Edits the word and its translation at the given index.
-   * `find KEYWORD` : Finds words whose original word or translation contains the given keyword.
-   * `start` : Starts today’s flashcard session.
-   * `end` :  Ends the current flashcard review session.
-   * `reveal` : Shows the other side of the flash card.
-   * `yes` :  Indicates user has memorized the word.
-   * `no` :  Indicates user has forgotten the word.
-   * `stats` : Displays learning statistics for current user.
-   * `language` : Filters the list with specified language.
-   * `review` : Returns a list of words that the user should revise today.
-   * `switch` : Switches between light/dark color theme.
-   * `exit` : Terminates the program.
-
-2. Refer to the [Features](#features) below for details of each command.
+2. Refer to the [Commands](#commands) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Commands
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add w/WORD t/TRANSLATION`, `WORD` and `TRANSLATION` are a parameter which can be used as `add w/regarder t/look`.
+* Words in `<UPPER_CASE>` are the parameters to be supplied by the user.<br>
+  e.g. in `add w/<WORD> t/<TRANSLATION>`, `WORD` and `TRANSLATION` are a parameter which can be used as `add w/regarder t/look`.
+
+* Words
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
