@@ -155,7 +155,7 @@ Classes used by multiple components are in the `seedu.ccacommander.commons` pack
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Attendance Model
-This section explains how the `Attendace` model is implemented and the various design consideration when
+This section explains how the `Attendance` model is implemented and the various design consideration when
 implementing this model.
 
 #### Implementation
