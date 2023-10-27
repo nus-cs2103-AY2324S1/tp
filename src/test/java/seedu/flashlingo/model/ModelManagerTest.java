@@ -128,4 +128,12 @@ public class ModelManagerTest {
         differentUserPrefs.setFlashlingoFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(flashlingo, differentUserPrefs)));
     }
+
+    @Test
+    public void switchTheme_success() {
+        modelManager.switchTheme();
+        assertEquals("Dark", modelManager.getTheme());
+        modelManager.switchTheme();
+        assertEquals("Default", modelManager.getTheme());
+    }
 }
