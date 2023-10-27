@@ -10,7 +10,7 @@ HealthSync is an application designed to streamline the workflow of healthcare c
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to undo a Command
-  * What it does: allows the user to undo an edit, add and delete command 
+  * What it does: allows the user to undo an edit, add and delete command
   * Justification: This feature allows users to be able to quickly recover from errors made without having to go through a series of other commands to achieve the same goal.
 
 
