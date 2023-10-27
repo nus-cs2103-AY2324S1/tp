@@ -159,6 +159,48 @@ The user can add a new Band entity to the storage through the `addb` Command.
 Within the execute method of the command, a check is done to ensure that the model does not currently contain the band
 to be added. This is achieved through the use of `Model#hasBand(Band)` method.
 
+### Find Band Members Feature
+**Command**:`findb [BANDNAME]`
+
+This feature lists all the musicians in band with name of `BANDNAME`. 
+
+#### Behaviour
+* **Success Scenario:**
+  1. A success message is returned.
+  2. In the musician panel, it shows every musician who is a member of the band. In the band panel, it shows only this particular band.
+
+* **Failed Scenario (when band name is invalid):** 
+    1. An error message is returned.
+    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+#### Implementation
+Find band members through a band name is achieved via `ModelManager.updateFilteredBandMusicianList(Predicate<Band>)` method.
+
+Step 1: It takes in a `BandNameContainsKeywordPredicate` as argument and updates the filtered band based on this predicate. 
+
+Step 2: If the band name is valid, the filtered band list is guaranteed to contain only the correct (one) band. Next, it updates the musician list based on `MusicianInBandPredicate` and successfully returns all musicians in that band.
+
+Step 3: If the band name is not valid (There is no band with such a name), a `MESSAGE_UNKNOWN_BAND` error message will be throw as a command exception.
+
+#### Rationale 
+1. **Rationale for abstracting a method for updating band and musician list simultaneously:**
+
+    While it is possible to use existing methods `updateFilteredBandList` followed by `updateFilteredMusicianList` to compose the same logic, abstracting it out makes it obvious that filtering musicians is based on the results from filtering bands, which is a main mechanism the feature relies on. If the alternative is used and a person accidentally inserts any statements that modifies the filtered band list in between the two methods,  this feature will break.
+
+
+2. **Rationale for the error condition:**
+    
+   Our current error condition:
+   
+    ~~~
+   if (model.getFilteredBandList().size() > 1 || !predicate.test(model.getFilteredBandList().get(0)) {
+       // throw exception
+   }
+    ~~~
+   i. If the band is valid and exists, filtered band list is guaranteed to have only one band (because add a band enforce no band with the same name (case-insensitive) is allowed). Hence, If filtered band list size > 1, the band name must be invalid, exception is thrown.
+
+   ii. If filtered band list size == 1 but the band obtained does not pass the predicate (in the possible scenario of user only stored 1 band), it means that the band name is invalid and does not correspond to the current band, exception is thrown.
+
+
 
 ### \[Proposed\] Undo/redo feature
 
