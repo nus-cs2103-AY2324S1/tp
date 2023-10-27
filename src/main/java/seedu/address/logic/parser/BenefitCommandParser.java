@@ -18,7 +18,7 @@ import seedu.address.model.person.Reason;
 /**
  * Parses input arguments and creates a new BenefitCommand object.
  */
-public class BenefitCommandParser implements Parser {
+public class BenefitCommandParser implements Parser<BenefitCommand> {
     @Override
     public BenefitCommand parse(String args) throws ParseException {
         requireNonNull(args);
