@@ -173,9 +173,9 @@ attendance. `UniqueAttendanceList` stores all unique instances of `Attendance`.
 
 * **Alternative 1 (current choice):** Saves the attendance as an independent list.
   * Pros:
-    * Easy to implement. 
+    * Easy to implement.
     * Less performance issues when loading and storing attendances.
-  * Cons: 
+  * Cons:
     * Incur high performance cost when viewing members of event or events of member.
 
 * **Alternative 2:** Each member or event has its own list of attendances.
@@ -185,10 +185,10 @@ attendance. `UniqueAttendanceList` stores all unique instances of `Attendance`.
     * Hard to implement.
     * Will encounter more difficulties when implementing other features related to attendance.
 
-Alternative 1 was chosen as the benefit of having a simple design outweighs the cost of having a higher 
+Alternative 1 was chosen as the benefit of having a simple design outweighs the cost of having a higher
 performance overhead when viewing members of event or events of member. Alternative 2 has multiple layers of
 complexities that are difficult to navigate and this will compound when dealing with other features related to
-attendance. The simpler design of alternative 1 also allows for more rigorous testing. 
+attendance. The simpler design of alternative 1 also allows for more rigorous testing.
 
 ### Undo/Redo Feature
 
