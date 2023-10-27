@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Score;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,7 +27,6 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_STATUS = "Accepted";
 
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -35,7 +35,6 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_STATUS = "Interviewed";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -197,7 +196,22 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseStatus_collectionWithInvalidStatus_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(Arrays.asList(VALID_STATUS, INVALID_STATUS)));
+    public void parseScore_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseScore(null));
+    }
+
+    @Test
+    public void parseScore_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseScore("a"));
+    }
+
+    @Test
+    public void parseScore_validValueWithoutWhitespace_returnsScore() throws Exception {
+        assertEquals(ParserUtil.parseScore("1"), new Score(1));
+    }
+
+    @Test
+    public void parseScore_negativeValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseScore("-1"));
     }
 }
