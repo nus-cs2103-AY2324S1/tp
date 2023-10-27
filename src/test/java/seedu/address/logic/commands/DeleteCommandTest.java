@@ -9,11 +9,16 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalTagPerson;
+import static seedu.address.testutil.TypicalTags.EMPTY_TAG_SET;
+import static seedu.address.testutil.TypicalTags.NO_MATCHING_TAG_SET;
+import static seedu.address.testutil.TypicalTags.TEST_TAG_SET;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.model.EventBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -25,7 +30,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -35,7 +40,21 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new EventBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validTagsUnfilteredList_success() {
+        Person personToDelete = getTypicalTagPerson();
+        DeleteCommand deleteCommand = new DeleteCommand(TEST_TAG_SET);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new EventBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -50,6 +69,20 @@ public class DeleteCommandTest {
     }
 
     @Test
+   public void execute_emptyTagsUnfilteredList_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(EMPTY_TAG_SET);
+
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_NO_INDEX_OR_TAGS);
+    }
+
+    @Test
+    public void execute_noMatchingTagsUnfilteredList_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(NO_MATCHING_TAG_SET);
+
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSONS_NOT_FOUND);
+    }
+
+    @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
@@ -59,7 +92,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new EventBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
@@ -81,32 +114,58 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteByIndexFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteByIndexSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteByTagsFirstCommand = new DeleteCommand(TEST_TAG_SET);
+        DeleteCommand deleteByTagsSecondCommand = new DeleteCommand(NO_MATCHING_TAG_SET);
+
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(deleteByIndexFirstCommand.equals(deleteByIndexFirstCommand));
+        assertTrue(deleteByTagsFirstCommand.equals(deleteByTagsFirstCommand));
 
-        // same values -> returns true
+        // same values (delete by index) -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        assertTrue(deleteByIndexFirstCommand.equals(deleteFirstCommandCopy));
+
+        // same values (delete by tags) -> returns true
+        DeleteCommand deleteByTagsCommandCopy = new DeleteCommand(TEST_TAG_SET);
+        assertTrue(deleteByTagsFirstCommand.equals(deleteByTagsCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(deleteByIndexFirstCommand.equals(1));
+        assertFalse(deleteByTagsFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(deleteByIndexFirstCommand.equals(null));
+        assertFalse(deleteByTagsFirstCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        // different person or set of tags -> returns false
+        assertFalse(deleteByIndexFirstCommand.equals(deleteByIndexSecondCommand));
+        assertFalse(deleteByTagsFirstCommand.equals(deleteByTagsSecondCommand));
     }
 
     @Test
-    public void toStringMethod() {
+    public void toString_index() {
         Index targetIndex = Index.fromOneBased(1);
         DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
+        String expectedToString = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expectedToString, deleteCommand.toString());
+    }
+
+    @Test
+    public void toString_tags() {
+        DeleteCommand deleteCommand = new DeleteCommand(TEST_TAG_SET);
+        String expectedString = DeleteCommand.class.getCanonicalName()
+                + String.format("{targetTags=%s}", TEST_TAG_SET.toString());
+        assertEquals(expectedString, deleteCommand.toString());
+    }
+
+    @Test
+    public void toString_invalid() {
+        DeleteCommand deleteCommand = new DeleteCommand(Index.getDefaultIndex());
+        String expectedToString = "seedu.address.logic.commands.DeleteCommand{invalid=No valid target specified}";
+        assertEquals(expectedToString, deleteCommand.toString());
     }
 
     /**

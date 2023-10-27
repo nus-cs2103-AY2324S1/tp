@@ -34,8 +34,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private EventWindow eventWindow;
 
     private PersonInformationPanel personInformationPanel;
 
@@ -47,6 +50,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -73,6 +78,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        eventWindow = new EventWindow(new Stage(), logic);
     }
 
     public Stage getPrimaryStage() {
@@ -155,6 +161,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the events window.
+     */
+    @FXML
+    public void handleEvent() {
+        if (!eventWindow.isShowing()) {
+            eventWindow.show();
+        } else {
+            eventWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -187,6 +205,10 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -212,10 +234,14 @@ public class MainWindow extends UiPart<Stage> {
                 handleView();
             }
 
+            if (commandResult.isShowEvent()) {
+                handleEvent();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(commandText);
             throw e;
         }
     }

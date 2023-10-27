@@ -21,14 +21,17 @@ public class CommandResult {
 
     private final boolean isView;
 
+    private final boolean showEvent;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isView) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isView, boolean showEvent) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.isView = isView;
+        this.showEvent = showEvent;
     }
 
     /**
@@ -36,7 +39,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     /**
@@ -45,9 +48,8 @@ public class CommandResult {
      * @param isView whether to show the view
      */
     public CommandResult(String feedbackToUser, boolean isView) {
-        this(feedbackToUser, false, false, isView);
+        this(feedbackToUser, false, false, isView, false);
     }
-
 
     public String getFeedbackToUser() {
         return feedbackToUser;
@@ -69,6 +71,10 @@ public class CommandResult {
         return isView;
     }
 
+    public boolean isShowEvent() {
+        return showEvent;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -84,7 +90,8 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && isView == otherCommandResult.isView;
+                && isView == otherCommandResult.isView
+                && showEvent == otherCommandResult.showEvent;
     }
 
     @Override
@@ -99,6 +106,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("isView", isView)
+                .add("showEvent", showEvent)
                 .toString();
     }
 
