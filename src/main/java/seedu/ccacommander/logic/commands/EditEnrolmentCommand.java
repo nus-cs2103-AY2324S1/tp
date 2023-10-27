@@ -99,6 +99,10 @@ public class EditEnrolmentCommand extends Command {
 
         model.updateFilteredAttendanceList(new EnrolmentExistsPredicate(enrolmentToCheck));
         List<Attendance> enrolmentToEditList = model.getFilteredAttendanceList();
+        if (enrolmentToEditList.size() == 0) {
+            throw new CommandException(String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
+                    memberIndex.getOneBased(), eventIndex.getOneBased()));
+        }
         assert enrolmentToEditList.size() == 1: "There should not be duplicate enrolments";
 
         Attendance enrolmentToEdit = enrolmentToEditList.get(0);
