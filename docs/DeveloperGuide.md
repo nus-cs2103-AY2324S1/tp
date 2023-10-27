@@ -415,7 +415,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers                   | I can have a summary overview without going into each candidate data specifically                        |
 | `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles           |
 | `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it |
-| `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process               |
+| `*` | Hiring Manager   | get a visual alert or a section to display urgent task         <br/>                                                               | I can stay organized and ensure that remain up to date and on task with the hiring process               |
+| `*` | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                                    | I can perform further analysis using alternate tools on candidate data                                   |
 *{More to be added}*
 
 ### Use cases
@@ -549,8 +550,18 @@ Use case ends.
     * 3b1. Displayed AddressBook changes to match that of search result.  
       Use case resumes at step 3.
 
+**Use case: Export the current data to excel**
 
-    
+**MSS**
+1.  User requests to export persons.
+2.  JABPro exports the list of persons to a .csv file.
+    Use case ends.
+
+**Extensions**
+* 2a. The .csv file to edit is open
+    * 2a1. AddressBook displays a message indicating that we cannot write to it as it is open.
+      Use case ends.
+
 **Use case: Add social profile to person's details**
 
 **MSS**

@@ -284,6 +284,12 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Exporting all entries : `export`
+
+Exports the entries into a .csv file
+
+Format: `export`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -338,6 +344,7 @@ Action                     | Format, Examples
 **Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Search**                 | `search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])`<br> e.g., `search n/alex st/interviewed`
 **List**                   | `list s/ATTRIBUTE` <br> e.g. `list s/name`
+**Export**                 | `export`
 **Help**                   | `help`
 
 
