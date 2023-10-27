@@ -2,13 +2,10 @@
 UNOFAS
 ---
 
-UNOFAS (UNO: One FAS: Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts,
+UNOFAS (One Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts,
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
 Graphical User Interface (GUI). If you can type fast, UNOFAS can help you manage and retrieve client's information
-better than traditional GUI apps. 
-
-This guide provides you with comprehensive instructions on utilizing UNOFAS. It also serves as a mode of referral to help learn the various commands required
-to effectively learn and be able to integrate the application to your daily use as financial advisors.
+better than traditional GUI apps.
 
 ## Table of Contents
 * [Quick Start](#quick-start)
@@ -17,7 +14,7 @@ to effectively learn and be able to integrate the application to your daily use 
   * [Add](#adding-a-person--add)
   * [List](#listing-all-persons--list)
   * [Edit](#editing-a-person--edit)
-  * [Find](#locating-persons-by-name-financial-plan-andor-tag--find)
+  * [Find](#locating-persons-by-name--find)
   * [Gather](#gathering-emails-of-matching-persons--gather)
   * [Schedule](#scheduling-an-appointment--schedule)
   * [Complete](#completing-an-appointment--complete)
@@ -27,6 +24,7 @@ to effectively learn and be able to integrate the application to your daily use 
 * [FAQ](#faq)
 * [Known Issues](#known-issues)
 * [Command Summary](#command-summary)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,7 +92,6 @@ Shows a message explaining how to access the help page, as well as a list of ava
 
 ![help message](images/helpMessage.png)
 Format: `help`
-
 ---------------------------
 ### Adding a person: `add`
 
@@ -119,29 +116,13 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202 [t/TAG]…​`
-
-Successful Output: `New person added: John; 
-Phone: 80101010; 
-Email: johndoe@gmail.com; 
-Address: Punggol Central Blk 444 #15-32 820123; 
-Next-of-kin Name: Brennan; 
-Next-of-kin Phone: 82020202; 
-Appointment: No Appointment made!; 
-Financial Plans: ; 
-Tags:`
-
-![result for 'add n/John p/80101010 e/johndoe@gmail.com a/Punggol Central Blk 444 #15-32 820123 nk/Brennan nkp/82020202'](images/addUi.png)
-
 ------------------
+
 ### Listing all persons : `list`
 
 Display a list of all the clients and their contact details
 
 Format: `list`
-
-Successful Output:`Listed all persons`
-
-![result for 'list'](images/ListUi.png)
 
 --------------------------------
 ### Editing a person : `edit`
@@ -171,23 +152,18 @@ Acceptable Values:
 9. TAG - Alphanumeric
 
 Examples:
-*  `edit 4 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st person to be `john doe` and `woodlands ave 123` respectively.
+*  `edit 1 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st person to be `john doe` and `woodlands ave 123` respectively.
 
 Successful Output:
-`Edited Person: john doe; 
-Phone: 80101010; 
-Email: johndoe@gmail.com; 
-Address: 23 woodlands ave 123; 
-Next-of-kin Name: Brennan; 
-Next-of-kin Phone: 82020202; 
-Appointment: No Appointment made!; 
-Financial Plans: ; 
-Tags:`
-
-![result for 'edit 4 n/john doe a/23 woodlands ave 123'](images/editUi.png)
-
+`This contact has been updated: Name: john doe
+Phone: 80101010
+Email: johndoe@gmail.com
+Address: 23 woodlands ave 123
+Next-of-Kin: Brennan
+Next-of-Kin Phone: 82020202
+`
 ---------------
-### Locating persons by name, financial plan, and/or tag: `find`
+### Locating persons by name: `find`
 
 Finds persons whose names, tags or financial plans contain any of the specified keywords.
 
@@ -216,13 +192,11 @@ Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
 * Persons emails return when the prompt matches a substring of at least one of their financial plan or tag names.
 
 Examples:
-* `gather t/Elderly`
 * `gather fp/Financial Plan A`
+* `gather t/Elderly`
 
 Successful Output:
 `lowjunyu@gmail.com johndoe@gmail.com`
-
-![result for`gather fp/Financial Plan A'](images/gatherUi.png)
 
 ------------
 ### Deleting a person : `delete`
@@ -253,15 +227,10 @@ Format: `schedule ENTRY_INDEX [ap/APPOINTMENT_NAME] [d/APPOINTMENT_DATE]`
 
 - Schedules appointment with the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 - Both appointment name and date must be provided.
-- If there is an existing appointment with the person when command is executed, you can replace it with a new appointment by clicking confirm when prompt is given.
-  ![schedule prompt](images/schedulePrompt.png)
+- If there is an existing appointment with the person when command is executed, you can replace it with a new appointment by clicking confirm when prompt is given. 
 
 Example: 
 - `schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00`
-
-Successful Output:`Appointment updated!`
-
-![result for`schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00'](images/scheduleUi.png)
 
 ----------
 ### Completing an Appointment: `complete`
@@ -277,10 +246,6 @@ Examples:
 - `complete 1`
 - `complete d/01-05-2023`
 
-Successful Output:`Appointment Completed!`
-
-![result for 'complete 1'](images/completeUi.png)
-
 ----------
 ### Clearing all entries : `clear`
 
@@ -291,7 +256,7 @@ Format: `clear`
 
 Example:
 * `clear`
-
+  
 ![confirm clear window](images/confirmClear.png)
 
 ----------------------------
@@ -307,10 +272,6 @@ Sorts all the entries with predefined sorting functionalities. After sorting the
 Format: `sort` + `keyword`
 
 Example: `sort name` performs sorting by lexicographical ordering
-
-Successful Output:`4 persons listed!`
-
-![result for`sort name'](images/sortUi.png)
 
 ------------
 ### Exiting the program : `exit`
