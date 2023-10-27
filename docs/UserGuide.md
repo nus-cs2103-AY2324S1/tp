@@ -61,8 +61,8 @@ Refer to the [Features](#features) below for details of each command.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* When using parentheses ( ) with items separated by the pipe symbol |, at least one item must be included. <br>
-  e.g in the command `search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
+* When using parentheses ( ) with items separated by the slash symbol /, at least one item must be included. <br>
+  e.g in the command `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -200,7 +200,7 @@ Examples:
 
 Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
 
-Format: `search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])`
+Format: `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`
 
 #### Search job applicants by name
 
@@ -363,20 +363,23 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action                     | Format, Examples
----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**                    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Remark**                 | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`
-**View**                   | `view INDEX` <br> e.g., `view 1`
-**Add Github/LinkedIn**    | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`
-**Open Github/LinkedIn**   | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`
-**Clear**                  | `clear`
-**Delete**                 | `delete INDEX`or `delete t/TAG` <br> e.g., `delete 3`, `delete t/friend t/colleague`
-**Set**                    | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`
-**Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Search**                 | `search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])`<br> e.g., `search n/alex st/interviewed`
-**List**                   | `list s/ATTRIBUTE` <br> e.g. `list s/name`
-**Export**                 | `export`
-**Help**                   | `help`
+
+ Action                   | Format, Examples                                                                                                                                               
+--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Remark**               | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`                                                                                          
+ **View**                 | `view INDEX` <br> e.g., `view 1`                                                                                                                               
+ **Add Github/LinkedIn**  | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`                                                    
+ **Open Github/LinkedIn** | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`                                                                                              
+ **Clear**                | `clear`                                                                                                                                                        
+ **Delete**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                            
+ **Set**                  | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`                                                                                                               
+ **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                    
+ **Search**               | `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])` <br> e.g., `search n/alex`
+ **List**                 | `list s/ATTRIBUTE` <br> e.g. `list s/name`    `hello`                                                                                                                 
+ **Export**               | `export`                                                                                                                                                       
+ **Help**                 | `help`                                                                                                                                                         
+
+
 
 
