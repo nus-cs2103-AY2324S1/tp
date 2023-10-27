@@ -22,7 +22,7 @@ class JsonAdaptedEnrolment {
     private final String remark;
 
     /**
-     * Constructs a {@code JsonAdaptedAttendance} with the given enrolment details.
+     * Constructs a {@code JsonAdaptedEnrolment} with the given enrolment details.
      */
     @JsonCreator
     public JsonAdaptedEnrolment(@JsonProperty("memberName") String memberName,
@@ -35,7 +35,7 @@ class JsonAdaptedEnrolment {
     }
 
     /**
-     * Converts a given {@code Attendance} into this class for Jackson use.
+     * Converts a given {@code Enrolment} into this class for Jackson use.
      */
     public JsonAdaptedEnrolment(Enrolment source) {
         memberName = source.getMemberName().name;
@@ -45,7 +45,7 @@ class JsonAdaptedEnrolment {
     }
 
     /**
-     * Converts this Jackson-friendly adapted enrolment object into the model's {@code Attendance} object.
+     * Converts this Jackson-friendly adapted enrolment object into the model's {@code Enrolment} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */

@@ -1,7 +1,7 @@
 package seedu.ccacommander.model.enrolment.exceptions;
 
 /**
- * Signals that the operation will result in duplicate Attendance.
+ * Signals that the operation will result in duplicate Enrolment.
  */
 
 public class DuplicateEnrolmentException extends RuntimeException {

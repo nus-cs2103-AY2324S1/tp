@@ -6,7 +6,7 @@ import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.shared.Name;
 
 /**
- * A utility class to help with building Attendance objects.
+ * A utility class to help with building Enrolment objects.
  */
 public class EnrolmentBuilder {
 
@@ -21,7 +21,7 @@ public class EnrolmentBuilder {
     private Remark remark;
 
     /**
-     * Creates an {@code AttendanceBuilder} with the default details.
+     * Creates an {@code EnrolmentBuilder} with the default details.
      */
     public EnrolmentBuilder() {
         memberName = new Name(DEFAULT_MEMBER_NAME);
@@ -31,7 +31,7 @@ public class EnrolmentBuilder {
     }
 
     /**
-     * Initializes the AttendanceBuilder with the data of {@code attendanceToCopy}.
+     * Initializes the EnrolmentBuilder with the data of {@code enrolmentToCopy}.
      */
     public EnrolmentBuilder(Enrolment enrolmentToCopy) {
         memberName = enrolmentToCopy.getMemberName();
@@ -41,7 +41,7 @@ public class EnrolmentBuilder {
     }
 
     /**
-     * Sets the Member's {@code Name} of the {@code Attendance} that we are building.
+     * Sets the Member's {@code Name} of the {@code Enrolment} that we are building.
      */
     public EnrolmentBuilder withMemberName(String name) {
         this.memberName = new Name(name);
@@ -49,7 +49,7 @@ public class EnrolmentBuilder {
     }
 
     /**
-     * Sets the Event's {@code Name} of the {@code Attendance} that we are building.
+     * Sets the Event's {@code Name} of the {@code Enrolment} that we are building.
      */
     public EnrolmentBuilder withEventName(String name) {
         this.eventName = new Name(name);
@@ -57,7 +57,7 @@ public class EnrolmentBuilder {
     }
 
     /**
-     * Sets the {@code Hours} of the {@code Attendance} that we are building.
+     * Sets the {@code Hours} of the {@code Enrolment} that we are building.
      */
     public EnrolmentBuilder withHours(String hours) {
         this.hours = new Hours(hours);
@@ -65,7 +65,7 @@ public class EnrolmentBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Attendance} that we are building.
+     * Sets the {@code Remark} of the {@code Enrolment} that we are building.
      */
     public EnrolmentBuilder withRemark(String remark) {
         this.remark = new Remark(remark);

@@ -38,7 +38,7 @@ public class TypicalCcaCommander {
     }
 
     /**
-     * Returns a {@code CcaCommander} with only typical attendances.
+     * Returns a {@code CcaCommander} with only typical enrolments.
      */
     public static CcaCommander getTypicalEnrolmentCcaCommander() {
         CcaCommander cc = new CcaCommander();
