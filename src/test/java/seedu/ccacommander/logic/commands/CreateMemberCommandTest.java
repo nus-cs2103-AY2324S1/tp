@@ -206,7 +206,7 @@ public class CreateMemberCommandTest {
         }
 
         @Override
-        public void updateFilteredEnrolmentList(Predicate<Enrolment> attendance) {
+        public void updateFilteredEnrolmentList(Predicate<Enrolment> enrolment) {
             throw new AssertionError("This method should not be called.");
         }
 

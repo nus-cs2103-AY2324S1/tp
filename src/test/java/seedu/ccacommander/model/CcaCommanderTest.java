@@ -136,7 +136,7 @@ public class CcaCommanderTest {
     @Test
     public void toStringMethod() {
         String expected = CcaCommander.class.getCanonicalName() + "{members=" + ccaCommander.getMemberList()
-                + ", events=" + ccaCommander.getEventList() + ", attendances=" + ccaCommander.getEventList() + "}";
+                + ", events=" + ccaCommander.getEventList() + ", enrolments=" + ccaCommander.getEventList() + "}";
         assertEquals(expected, ccaCommander.toString());
     }
 

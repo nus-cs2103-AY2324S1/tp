@@ -1,5 +1,5 @@
 {
-  "_comment": "CCACommander save file which contains the same Attendance values as in TypicalAttendances#getTypicalAttendance()",
+  "_comment": "CCACommander save file which contains the same Enrolment values as in TypicalEnrolments#getTypicalEnrolment()",
   "members" : [ ],
   "events": [ ],
   "enrolments" : [{

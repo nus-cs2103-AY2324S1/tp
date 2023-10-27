@@ -182,7 +182,7 @@ public class CcaCommander implements ReadOnlyCcaCommander {
         return new ToStringBuilder(this)
                 .add("members", members)
                 .add("events", events)
-                .add("attendances", enrolments)
+                .add("enrolments", enrolments)
                 .toString();
     }
 

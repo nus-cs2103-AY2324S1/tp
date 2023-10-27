@@ -6,6 +6,6 @@ package seedu.ccacommander.model.enrolment.exceptions;
 
 public class DuplicateEnrolmentException extends RuntimeException {
     public DuplicateEnrolmentException() {
-        super("Operation would result in duplicate attendances");
+        super("Operation would result in duplicate enrolments");
     }
 }
