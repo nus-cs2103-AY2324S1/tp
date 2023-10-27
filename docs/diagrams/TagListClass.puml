@@ -1,27 +1,23 @@
 @startuml
-'https://plantuml.com/class-diagram
+'!include style.puml
+'skinparam arrowThickness 1.1
+'skinparam arrowColor MODEL_COLOR
+'skinparam classBackgroundColor MODEL_COLOR
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+'Note: Commented out style.puml because it hides members, also very ugly design tbh
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+interface Observer {
+    + update()
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class TagList {
+    + addUi(Observer)
+    - notifyUis()
 }
+class TagListPanel implements Observer {
+    + update()
+}
+
+TagList -> "*" Observer
 
 @enduml
