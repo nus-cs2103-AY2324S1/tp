@@ -2,12 +2,14 @@ package seedu.staffsnap.model.applicant;
 
 import static seedu.staffsnap.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByPosition;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.model.interview.Interview;
@@ -16,16 +18,15 @@ import seedu.staffsnap.model.interview.Interview;
  * Represents a CSV version of Applicant in the applicant book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class CsvApplicant {
-    @CsvBindByName(required = true)
-    private final String name;
-    @CsvBindByName(required = true)
-    private final String phone;
-    // Data fields
-    @CsvBindByName(required = true)
-    private final String email;
-    @CsvBindByName(required = true)
-    private final String position;
+public class CsvApplicant implements Serializable {
+    @CsvBindByPosition(position = 0)
+    private String name;
+    @CsvBindByPosition(position = 1)
+    private String phone;
+    @CsvBindByPosition(position = 2)
+    private String email;
+    @CsvBindByPosition(position = 3)
+    private String position;
 
     /**
      * Every field must be present and not null.
@@ -36,6 +37,16 @@ public class CsvApplicant {
         this.phone = phone;
         this.email = email;
         this.position = position;
+    }
+
+    /**
+     * Default no-argument constructor for JavaBean standard.
+     */
+    public CsvApplicant() {
+        this.name = "";
+        this.phone = "";
+        this.email = "";
+        this.position = "";
     }
 
     public String getName() {

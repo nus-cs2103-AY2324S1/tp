@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.logic.commands.FilterCommand;
+import seedu.staffsnap.logic.commands.ImportCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
 import seedu.staffsnap.model.applicant.Applicant;
 import seedu.staffsnap.model.applicant.CsvApplicant;
@@ -52,6 +53,9 @@ public class ParserUtil {
         String[] tokens = content.split(" ");
         StringBuilder newContent = new StringBuilder();
         for (String token : tokens) {
+            if (token.isEmpty()) {
+                continue;
+            }
             char capLetter = Character.toUpperCase(token.charAt(0));
             newContent.append(" ");
             newContent.append(capLetter);
@@ -209,10 +213,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String rating} into a {@code Rating}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Checks if all prefixes are present in the given {@code ArgumentMultimap}.
      *
-     * @throws ParseException if the given {@code rating} is invalid.
+     * @param argumentMultimap
+     * @param prefixes
+     * @return true if all prefixes are present, false otherwise
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
@@ -240,11 +245,21 @@ public class ParserUtil {
         requireNonNull(score);
         Double result;
         try {
-            result = new Double(score);
+            result = Double.parseDouble(score);
         } catch (NumberFormatException e) {
             throw new ParseException(FilterCommand.MESSAGE_SCORE_PARSE_FAILURE);
         }
         return result;
+    }
+
+    public static String parseFileName(String fileName) throws ParseException {
+        requireNonNull(fileName);
+        String trimmedFileName = fileName.trim();
+        if (!trimmedFileName.matches(ImportCommand.FILENAME_VALIDATION_REGEX)) {
+            throw new ParseException(ImportCommand.MESSAGE_INVALID_FILENAME);
+        }
+
+        return trimmedFileName;
     }
 
     public static Applicant parseApplicantFromCsv(CsvApplicant csvApplicant) throws ParseException {

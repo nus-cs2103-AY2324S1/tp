@@ -1,17 +1,21 @@
 package seedu.staffsnap.logic.parser;
 
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_FILENAME;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.staffsnap.logic.commands.ImportCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
+import seedu.staffsnap.model.applicant.Name;
 
 /**
  * Parses input arguments and creates a new ImportCommand object
  */
 public class ImportCommandParser implements Parser<ImportCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the ImportCommand
      * and returns an ImportCommand object for execution.
@@ -26,8 +30,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
 
-        String fileName = argMultimap.getValue(PREFIX_FILENAME).orElseThrow(() ->
-                new ParseException("Filename is missing."));
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILENAME);
+        String fileName = ParserUtil.parseFileName(argMultimap.getValue(PREFIX_FILENAME).get());
 
         return new ImportCommand(fileName);
     }

@@ -14,8 +14,7 @@ import seedu.staffsnap.commons.util.ToStringBuilder;
  */
 public class Interview implements Comparable<Interview> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Interview types should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Interview types should not be empty";
 
     public final String type;
 
@@ -37,7 +36,7 @@ public class Interview implements Comparable<Interview> {
      * Returns true if a given string is a valid interview type.
      */
     public static boolean isValidType(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.isEmpty();
     }
 
     public String getType() {
