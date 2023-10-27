@@ -42,6 +42,7 @@ public class Appointment {
         requireNonNull(doctor);
         requireNonNull(patient);
         requireNonNull(appointmentTime);
+        requireNonNull(status);
         this.doctor = doctor;
         this.patient = patient;
         this.appointmentTime = appointmentTime;

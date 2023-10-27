@@ -49,6 +49,40 @@ public class AppointmentTest {
     }
 
     @Test
+    public void secondConstructor_invalidDoctor_throwsIllegalArgumentException() {
+        Doctor invalidDoctor = null;
+        Patient validPatient = AMY;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime validAppointmentTime = LocalDateTime.parse("2022-02-14 13:30:00", formatter);
+        assertThrows(NullPointerException.class, () -> new Appointment(invalidDoctor, validPatient,
+                validAppointmentTime, "Follow-Up"));
+    }
+    @Test
+    public void secondConstructorr_invalidPatient_throwsIllegalArgumentException() {
+        Doctor validDoctor = DEREK;
+        Patient invalidPatient = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime validAppointmentTime = LocalDateTime.parse("2022-02-14 13:30:00", formatter);
+        assertThrows(NullPointerException.class, () -> new Appointment(validDoctor, invalidPatient,
+                validAppointmentTime, "Follow-Up"));
+    }
+
+    @Test
+    public void secondConstructor_invalidAppointmentTime_throwsIllegalArgumentException() {
+        Doctor validDoctor = DEREK;
+        Patient validPatient = AMY;
+        LocalDateTime invalidAppointmentTime = null;
+        assertThrows(NullPointerException.class, () -> new Appointment(validDoctor, validPatient,
+                invalidAppointmentTime, "Follow-Up"));
+    }
+    @Test
+    public void constructor_nullStatus() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime appointmentTime = LocalDateTime.parse("2022-02-14 13:30:00", formatter);
+        assertThrows(NullPointerException.class, () -> new Appointment(DEREK, AMY, appointmentTime, null));
+    }
+
+    @Test
     public void testGetDoctor() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime appointmentTime = LocalDateTime.parse("2022-02-14 13:30:00", formatter);
