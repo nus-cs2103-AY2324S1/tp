@@ -10,7 +10,7 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.ccacommander.logic.commands.CreateMemberCommand;
-import seedu.ccacommander.logic.commands.EditCommand.EditMemberDescriptor;
+import seedu.ccacommander.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.tag.Tag;
 
@@ -48,6 +48,7 @@ public class MemberUtil {
     public static String getEditMemberDescriptorDetails(EditMemberDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.name).append(" "));
+        descriptor.getGender().ifPresent(gender -> sb.append(PREFIX_GENDER).append(gender.value).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));

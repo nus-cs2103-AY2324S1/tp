@@ -4,8 +4,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.ccacommander.logic.commands.EditCommand;
-import seedu.ccacommander.logic.commands.EditCommand.EditMemberDescriptor;
+import seedu.ccacommander.logic.commands.EditMemberCommand;
+import seedu.ccacommander.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.ccacommander.model.member.Address;
 import seedu.ccacommander.model.member.Email;
 import seedu.ccacommander.model.member.Gender;
@@ -19,21 +19,21 @@ import seedu.ccacommander.model.tag.Tag;
  */
 public class EditMemberDescriptorBuilder {
 
-    private EditCommand.EditMemberDescriptor descriptor;
+    private EditMemberCommand.EditMemberDescriptor descriptor;
 
     public EditMemberDescriptorBuilder() {
         descriptor = new EditMemberDescriptor();
     }
 
-    public EditMemberDescriptorBuilder(EditCommand.EditMemberDescriptor descriptor) {
-        this.descriptor = new EditCommand.EditMemberDescriptor(descriptor);
+    public EditMemberDescriptorBuilder(EditMemberCommand.EditMemberDescriptor descriptor) {
+        this.descriptor = new EditMemberCommand.EditMemberDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditMemberDescriptor} with fields containing {@code member}'s details
      */
     public EditMemberDescriptorBuilder(Member member) {
-        descriptor = new EditCommand.EditMemberDescriptor();
+        descriptor = new EditMemberCommand.EditMemberDescriptor();
         descriptor.setName(member.getName());
         descriptor.setGender(member.getGender());
         descriptor.setPhone(member.getPhone());
@@ -92,7 +92,7 @@ public class EditMemberDescriptorBuilder {
         return this;
     }
 
-    public EditCommand.EditMemberDescriptor build() {
+    public EditMemberCommand.EditMemberDescriptor build() {
         return descriptor;
     }
 }

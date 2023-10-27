@@ -41,13 +41,13 @@ public class Messages {
     public static String format(Member member) {
         final StringBuilder builder = new StringBuilder();
         builder.append(member.getName())
-                .append("; Phone: ")
+                .append(" | Phone: ")
                 .append(member.getPhone())
-                .append("; Email: ")
+                .append(" | Email: ")
                 .append(member.getEmail())
-                .append("; Address: ")
+                .append(" | Address: ")
                 .append(member.getAddress())
-                .append("; Tags: ");
+                .append(" | Tags: ");
         member.getTags().forEach(builder::append);
         return builder.toString();
     }
@@ -58,10 +58,12 @@ public class Messages {
     public static String format(Event event) {
         final StringBuilder builder = new StringBuilder();
         builder.append(event.getName())
-                .append("; Date: ")
+                .append(" | Date: ")
                 .append(event.getDate())
-                .append("; Location: ")
-                .append(event.getLocation());
+                .append(" | Location: ")
+                .append(event.getLocation())
+                .append(" | Tags: ");
+        event.getTags().forEach(builder::append);
         return builder.toString();
     }
 
@@ -74,9 +76,9 @@ public class Messages {
                 .append(attendance.getMemberName())
                 .append(" to Event: ")
                 .append(attendance.getEventName())
-                .append("; Hours: ")
+                .append(" | Hours: ")
                 .append(attendance.getHours())
-                .append("; Remark: ")
+                .append(" | Remark: ")
                 .append(attendance.getRemark());
         return builder.toString();
     }
