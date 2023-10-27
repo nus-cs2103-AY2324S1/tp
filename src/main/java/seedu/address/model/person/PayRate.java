@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class PayRate {
 
-    public static final String MESSAGE_CONSTRAINTS = "PayRate can take any values, as long as they are integers.";
+    public static final String MESSAGE_CONSTRAINTS = "PayRate can take any values, as long as they are positive integers.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -61,6 +61,10 @@ public class PayRate {
     public int hashCode() {
         Integer payRate = (Integer) value;
         return payRate.hashCode();
+    }
+
+    public int getValue() {
+        return value;
     }
 
 }
