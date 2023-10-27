@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +21,14 @@ import seedu.address.testutil.TypicalInterviews;
 class TimeParserTest {
     private static final LocalDateTime DEFAULT_DATE =
             LocalDateTime.of(1970, 1, 1, 0, 0);
+    private final Logger logger = Logger.getLogger("TimeParserTestLogger");
 
     /*
      * Tests for the timeParser class
      */
     @Test
     void testTimeParserDefaultDate() {
+        logger.log(Level.INFO, "Tests that field does not disappear");
         assertEquals(DEFAULT_DATE, TimeParser.DEFAULT_DATE);
     }
 
@@ -130,12 +134,12 @@ class TimeParserTest {
 
     @Test
     void testParseDateYearMonthDayTime5SuccessfulParse() throws ParseException {
-        System.out.println(TimeParser.parseDate("15 Dec 2023 1.30pm"));
+        TimeParser.parseDate("15 Dec 2023 1.30pm");
     }
 
     @Test
     void testParseDateYearMonthDayTime6SuccessfulParse() throws ParseException {
-        System.out.println(TimeParser.parseDate("31 mar 2099 1453"));
+        TimeParser.parseDate("31 mar 2099 1453");
     }
 
     @Test
@@ -294,6 +298,24 @@ class TimeParserTest {
     }
 
     /*
+     * Tests for the listPocketsOfTimeOnGivenDay method
+     */
+    @Test
+    void testListPocketsOfFreeTime() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime day = LocalDateTime.of(2024, 12, 21, 0, 0);
+        List<List<LocalDateTime>> expected = new ArrayList<>();
+        List<LocalDateTime> element = new ArrayList<>();
+        element.add(LocalDateTime.of(2024, 12, 21, 9, 0));
+        element.add(LocalDateTime.of(2024, 12, 21, 17, 0));
+        expected.add(element);
+        List<List<LocalDateTime>> actual = TimeParser.listPocketsOfTimeOnGivenDay(day, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
+    /*
      * Tests for the listInterviewClashes class
      */
     @Test
@@ -310,6 +332,29 @@ class TimeParserTest {
     }
 
     @Test
+    void testListPocketsOfFreeTime2() {
+        List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
+        interviewList.add(new Interview(TypicalApplicants.HOON,
+                "SWE",
+                LocalDateTime.of(2024, 12, 21, 10, 0),
+                LocalDateTime.of(2024, 12, 21, 11, 0)
+        ));
+        UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
+        uniqueInterviewList.setInterviews(interviewList);
+        LocalDateTime day = LocalDateTime.of(2024, 12, 21, 0, 0);
+        List<List<LocalDateTime>> expected = new ArrayList<>();
+        List<LocalDateTime> element1 = new ArrayList<>();
+        element1.add(LocalDateTime.of(2024, 12, 21, 9, 0));
+        element1.add(LocalDateTime.of(2024, 12, 21, 10, 0));
+        List<LocalDateTime> element2 = new ArrayList<>();
+        element2.add(LocalDateTime.of(2024, 12, 21, 11, 0));
+        element2.add(LocalDateTime.of(2024, 12, 21, 17, 0));
+        expected.add(element1);
+        expected.add(element2);
+        List<List<LocalDateTime>> actual = TimeParser.listPocketsOfTimeOnGivenDay(day, uniqueInterviewList);
+        assertEquals(expected, actual);
+    }
+
     void testListInterviewClashesListFirstElement2() {
         List<Interview> interviewList = TypicalInterviews.getTypicalInterviews();
         UniqueInterviewList uniqueInterviewList = new UniqueInterviewList();
