@@ -18,7 +18,7 @@ import transact.model.person.PersonId;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueEntryHashmap<PersonId, Person> persons;
+    private final UniqueEntryMap<PersonId, Person> persons;
     private ObservableList<Person> personList;
     private ObservableList<Person> internalUnmodifiablePersonList;
 
@@ -33,7 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * among constructors.
      */
     {
-        persons = new UniqueEntryHashmap<>();
+        persons = new UniqueEntryMap<>();
         personList = FXCollections.observableArrayList();
         internalUnmodifiablePersonList = FXCollections.unmodifiableObservableList(personList);
 
