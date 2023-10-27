@@ -191,6 +191,32 @@ Examples:
 * `viewEvent 1` displays members of the 1st event in the event list.
 * `viewEvent 10` displays members of the 10th event in the event list.
 
+### Find Member in member list : `findMember`
+
+Finds and lists member(s) whose name(s) contain the provided `KEYWORD`.
+
+Format: `findMember KEYWORD [MORE_KEYWORDS]`
+* Finds and lists member(s) whose name(s) contain the specified `KEYWORD`.
+* More than 1 `KEYWORD` can be provided to find more members.
+* The `KEYWORD` must match minimally one of the words in the name of the member to be found, where capitalisation does not matter.
+
+* Examples:
+* `findMember alice` displays the member(s) whose name(s) contain 'alice'
+* `findMember alice bob charlie` displays the member(s) whose name(s) contain 'alice', 'bob' and/or 'charlie'.
+
+### Find Event in event list : `findEvent`
+
+Finds and lists event(s) which name(s) contain the provided `KEYWORD`.
+
+Format: `findEvent KEYWORD [MORE_KEYWORDS]`
+* Finds and lists event(s) which name(s) contain the specified `KEYWORD`.
+* More than 1 `KEYWORD` can be provided to find more events.
+* The `KEYWORD` must match minimally one of the words in the name of the event to be found, where capitalisation does not matter.
+
+* Examples:
+* `findEvent party` displays the event(s) which name(s) contain 'party'
+* `findEvent party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
+
 ### Undoing a command: `undo`
 
 Undoes the previous command that the user has entered, which has changed the data within CCACommander.
@@ -247,8 +273,8 @@ Action | Format, Examples
 **List all members and all events** | `list`
 **View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
 **View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
-**Find member in list** | coming soon...
-**Find event in list** | coming soon...
+**Find member in list** | `findMember KEYWORD [MORE_KEYWORDS]` <br> e.g.`findMember alice`
+**Find event in list** | `findEvent KEYWORD [MORE_KEYWORDS]` <br> e.g.`findEvent party`
 **Redo** | `redo`
 **Undo** | `undo`
 **Help** | coming soon...
