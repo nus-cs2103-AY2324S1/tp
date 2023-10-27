@@ -6,15 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Appointment;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Wraps all data at the address-book level
@@ -36,28 +29,28 @@ public class LogBook implements ReadOnlyAddressBook {
      */
     {
         loggedPersons = new UniquePersonList();
-        // placeholder data
-        loggedPersons.add(
-                new Person(new Name("Alex Yeoh"), new Nric("T0123456F"), new Phone("87438807"),
-                        new Email("alexyeoh@example.com"),
-                        new Address("Blk 30 Geylang Street 29, #06-40"),
-                        new Appointment("2023-08-08 10:00 12:00"),
-                        SampleDataUtil.getMedicalHistorySet(),
-                        SampleDataUtil.getTagSet("friends")));
-        loggedPersons.add(
-                new Person(new Name("Bernice Yu"), new Nric("S0123452F"), new Phone("99272758"),
-                        new Email("berniceyu@example.com"),
-                        new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                        new Appointment("2023-08-08 12:00 14:00"),
-                        SampleDataUtil.getMedicalHistorySet("Diabetes"),
-                        SampleDataUtil.getTagSet("colleagues", "friends")));
-        loggedPersons.add(
-                new Person(new Name("Charlotte Oliveiro"), new Nric("T0123456Y"), new Phone("93210283"),
-                        new Email("charlotte@example.com"),
-                        new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                        null,
-                        SampleDataUtil.getMedicalHistorySet("AB+ Blood"),
-                        SampleDataUtil.getTagSet("neighbours")));
+        // placeholder data (commented for the sake of test case), constructor should start with an empty list
+        // loggedPersons.add(
+        //         new Person(new Name("Alex Yeoh"), new Nric("T0123456F"), new Phone("87438807"),
+        //                 new Email("alexyeoh@example.com"),
+        //                 new Address("Blk 30 Geylang Street 29, #06-40"),
+        //                 new Appointment("2023-08-08 10:00 12:00"),
+        //                 SampleDataUtil.getMedicalHistorySet(),
+        //                 SampleDataUtil.getTagSet("friends")));
+        // loggedPersons.add(
+        //         new Person(new Name("Bernice Yu"), new Nric("S0123452F"), new Phone("99272758"),
+        //                 new Email("berniceyu@example.com"),
+        //                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+        //                 new Appointment("2023-08-08 12:00 14:00"),
+        //                 SampleDataUtil.getMedicalHistorySet("Diabetes"),
+        //                 SampleDataUtil.getTagSet("colleagues", "friends")));
+        // loggedPersons.add(
+        //         new Person(new Name("Charlotte Oliveiro"), new Nric("T0123456Y"), new Phone("93210283"),
+        //                 new Email("charlotte@example.com"),
+        //                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+        //                 null,
+        //                 SampleDataUtil.getMedicalHistorySet("AB+ Blood"),
+        //                 SampleDataUtil.getTagSet("neighbours")));
     }
 
     public LogBook() {
