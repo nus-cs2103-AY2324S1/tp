@@ -32,6 +32,13 @@ public class LogBookTest {
     }
 
     @Test
+    public void constructor_withValidReadOnlyAddressBook() {
+        LogBook newData = getTypicalLogBook();
+        LogBook newLogBook = new LogBook(newData);
+        assertEquals(newData, newLogBook);
+    }
+
+    @Test
     public void resetData_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> logbook.resetData(null));
     }
@@ -81,6 +88,50 @@ public class LogBookTest {
     @Test
     public void getPersonListInLogBook_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logbook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void setPersons_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> logbook.setPersons(null));
+    }
+
+    @Test
+    public void setPersons_withValidReadOnlyAddressBook_replacesData() {
+        LogBook newData = getTypicalLogBook();
+        logbook.setPersons(newData.getPersonList());
+        assertEquals(newData, logbook);
+    }
+
+    @Test
+    public void addPersons_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> logbook.addPerson(null));
+    }
+
+    @Test
+    public void addPersons_withValidReadOnlyAddressBook_replacesData() {
+        LogBook newData = getTypicalLogBook();
+        logbook.setPersons(newData.getPersonList());
+        assertThrows(DuplicatePersonException.class, () -> logbook.addPerson(newData.getPersonList().get(0)));
+    }
+
+    @Test
+    public void removePersons_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> logbook.removePerson(null));
+    }
+
+    @Test
+    public void removePersons_withValidReadOnlyAddressBook_replacesData() {
+        LogBook newData = getTypicalLogBook();
+        logbook.setPersons(newData.getPersonList());
+        logbook.removePerson(newData.getPersonList().get(0));
+        assertFalse(logbook.equals(newData));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        LogBook newData = getTypicalLogBook();
+        logbook.setPersons(newData.getPersonList());
+        assertEquals(newData.hashCode(), logbook.hashCode());
     }
 
     @Test
