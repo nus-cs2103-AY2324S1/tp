@@ -213,7 +213,7 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
     - Increased complexity: Introducing more commands can make the system more complex and harder for users to remember.
     - Redundancy: Both commands would have overlapping code, leading to potential redundancy.
     
-    **Evaluation**:
+    **Evaluation:**
     
     The current implementation is preferred as it is simpler and more straightforward. It reduces the need for users to remember additional commands, while resolving potential user mistakes behind the scene, providing convenience and a better user experience. The additional complexity introduced by having a separate command for updating attendance is not justified.
 
@@ -230,10 +230,48 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
     - Redundancy: Multiple attendance records for the same week can lead to confusion and redundancy.
     - Inefficiency: Consumes more memory and might make querying slower if there are many redundant records.
 
-    **Evaluation**:
+  **Evaluation:**
     
-    The current implementation is preferred as the pros simply do not outweigh the cons. The potential scenario that multiple attendance records within the same week being potentially useful is not justified as it is virtually unlikely to happen. The current implementation is much better preferred as the check prevents potential user mistakes behind the scene, providing convenience and a better user experience.
+  The current implementation is preferred as the pros simply do not outweigh the cons. The potential scenario that multiple attendance records within the same week being potentially useful is not justified as it is virtually unlikely to happen. The current implementation is much better preferred as the check prevents potential user mistakes behind the scene, providing convenience and a better user experience.
 
+### \[Proposed\] Multiple Address Books for each Course
+
+#### Proposed Implementation
+
+In the `ModelManager` class, instead of storing an `AddressBook`, we instead store a `AddressBookManager`. 
+
+The `AddressBookManager` has a few responsibilities:
+- Adding or deleting `AddressBook`
+- Setting the active `AddressBook`
+- Getting the active `AddressBook`
+
+The `getAddressBook` method in `ModelManager` is now a wrapper for the `getActiveAddressBook` method in
+`AddressBookManager`. This ensures that any existing commands will still "see" the model as having one `AddressBook`,
+and not break any existing functionality.
+
+#### Design considerations:
+
+The `getAddressBook` method in `ModelManager` is now a wrapper for the `getActiveAddressBook` method in
+`AddressBookManager`. This ensures that any existing commands will still "see" the model as having one `AddressBook`,
+and not break any existing functionality.
+
+#### Alternative implementations considered but not adopted:
+
+- Updating the structure in `ModelManager`
+
+  > Instead of having a new class `AddressBookManager`, we simply update the existing structure to use a
+  > `HashMap<String, AddressBook>`
+
+  **Pros:**
+    - Easier to understand: Developers who are new to the codebase do not need to learn and understand the
+    `AddressBookManager` class and its interactions, which could potentially increase the learning curve.
+
+  **Cons:**
+    - Harder to maintain: In the future, should any changes be needed for address book management, there may need to refactor a significant portion of the codebase, as the logic is distributed. This can be error-prone and time-consuming.
+    - Harder to Store: Without a dedicated AddressBookManager class, there is a need to refactor a significant portion of the existing storage mechanism to take in a HashMap of `AddressBook`.
+
+  **Evaluation:**
+  The proposed implementation is preferred as even though it introduces additional complexity, it allows for better maintainability of the codebase as the responsibility of handling `AddressBook` is now handled by the `AddressBookManager` class. The ease of extensibility outweighs the complexity introduced.
 
 ### \[Proposed\] Undo/redo feature
 
