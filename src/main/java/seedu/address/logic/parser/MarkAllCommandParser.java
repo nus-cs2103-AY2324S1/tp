@@ -23,7 +23,7 @@ public class MarkAllCommandParser implements Parser<MarkAllCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
         if (argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAllCommand.MESSAGE_USAGE));
         }
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
