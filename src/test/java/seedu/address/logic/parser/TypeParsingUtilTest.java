@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Tags;
 import seedu.address.model.tag.Tag;
 
 class TypeParsingUtilTest {
@@ -146,6 +147,8 @@ class TypeParsingUtilTest {
             Set<Tag> tags = new HashSet<>();
             tags.add(new Tag("friends"));
             assertEquals(TypeParsingUtil.parseTags("tag", "-tag friends"), tags);
+            assertEquals(TypeParsingUtil.parseField("tag", "-tag friends, friends2", Tags::of, true),
+                    Tags.of("friends, friends2"));
             assertThrows(ParseException.class, () -> TypeParsingUtil.parseTags("tag", "-tag friends, friends"));
         } catch (ParseException e) {
             fail(e.getMessage());

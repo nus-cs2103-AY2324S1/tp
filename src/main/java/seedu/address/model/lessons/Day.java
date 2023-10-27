@@ -22,19 +22,15 @@ public class Day extends ListEntryField {
     /**
      * Constructs a {@code Day} from input of format "dd-MM-yyyy".
      */
-    public Day(String str) throws IllegalArgumentException {
-        try {
-            this.day = parseDate(str);
-        } catch (ParseException e) {
-            throw new IllegalArgumentException(e);
-        }
+    public Day(String str) throws ParseException {
+        this.day = parseDate(str);
     }
     private Day() {
     }
     /**
      * Constructs a {@code Day} from input of format "dd-MM-yyyy".
      */
-    public static Day of(String str) throws IllegalArgumentException {
+    public static Day of(String str) throws ParseException {
         return new Day(str);
     }
     /**

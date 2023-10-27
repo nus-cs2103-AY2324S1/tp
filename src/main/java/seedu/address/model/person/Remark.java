@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.model.ListEntryField;
-
 import static java.util.Objects.requireNonNull;
+
+import seedu.address.model.ListEntryField;
 
 /**
  * Represents a Person's remark in the address book.

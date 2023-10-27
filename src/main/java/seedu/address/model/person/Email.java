@@ -1,10 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.model.ListEntryField;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ListEntryField;
 /**
  * Represents a Person's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
@@ -41,9 +40,11 @@ public class Email extends ListEntryField {
      *
      * @param email A valid email address.
      */
-    public Email(String email) {
+    public Email(String email) throws ParseException {
         requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+        if (!Email.isValidEmail(email)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
         value = email;
     }
 
@@ -60,7 +61,7 @@ public class Email extends ListEntryField {
     public static Boolean isValid(String input) {
         return isValidEmail(input);
     }
-    public static Email of(String input) {
+    public static Email of(String input) throws ParseException {
         return new Email(input);
     }
     @Override
@@ -93,9 +94,14 @@ public class Email extends ListEntryField {
      */
     public Email clone() {
         if (this == DEFAULT_EMAIL) {
-            return DEFAULT_EMAIL;
+            return this;
+        } else {
+            try {
+                return new Email(value);
+            } catch (ParseException e) {
+                throw new AssertionError("Email should be valid.");
+            }
         }
-        return new Email(value);
     }
 
 }

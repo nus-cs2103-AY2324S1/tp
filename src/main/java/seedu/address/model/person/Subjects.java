@@ -1,14 +1,16 @@
 package seedu.address.model.person;
 
-import seedu.address.model.ListEntryField;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ListEntryField;
 
 /**
  * Represents a group of Subjects in the application.
  */
 public class Subjects extends ListEntryField {
+    public static final Subjects DEFAULT_SUBJECTS = new Subjects();
     private Set<Subject> subjects;
     public Subjects() {
         subjects = new HashSet<>();
@@ -36,7 +38,7 @@ public class Subjects extends ListEntryField {
     /**
      * Constructs a {@code Subjects} from input of format "subject1, subject2, subject3".
      */
-    public static Subjects of(String input) throws IllegalArgumentException {
+    public static Subjects of(String input) throws ParseException {
         Subjects t = new Subjects();
         for (String str : input.split(",")) {
             t.add(Subject.of(str.trim()));

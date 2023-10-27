@@ -1,16 +1,18 @@
 package seedu.address.model.person;
 
-import seedu.address.model.ListEntryField;
-import seedu.address.model.tag.Tag;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ListEntryField;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a ListEntry's tags in the address book.
  */
 public class Tags extends ListEntryField {
+    public static final Tags DEFAULT_TAGS = new Tags();
     private Set<Tag> tags;
     public Tags() {
         tags = new HashSet<>();
@@ -23,6 +25,9 @@ public class Tags extends ListEntryField {
      */
     @Override
     public Tags clone() {
+        if (this == DEFAULT_TAGS) {
+            return DEFAULT_TAGS;
+        }
         return new Tags(getTagSetClone());
     }
     /**
@@ -39,9 +44,13 @@ public class Tags extends ListEntryField {
     /**
      * Constructs a {@code Tags} from input of format "tag1, tag2, tag3".
      */
-    public static Tags of(String input) throws IllegalArgumentException {
+    public static Tags of(String input) throws ParseException {
         Tags t = new Tags();
-        Arrays.stream(input.split(",")).forEach(str -> t.add(new Tag(str.trim())));
+        try {
+            Arrays.stream(input.split(",")).forEach(str -> t.add(new Tag(str.trim())));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
         return t;
     }
 

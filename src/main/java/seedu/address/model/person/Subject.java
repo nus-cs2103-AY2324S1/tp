@@ -1,11 +1,11 @@
 package seedu.address.model.person;
 
-import seedu.address.model.ListEntryField;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.HashMap;
+
+import seedu.address.model.ListEntryField;
 
 
 /**

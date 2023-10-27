@@ -1,5 +1,5 @@
 package seedu.address.logic.parser;
-
+/*
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -11,7 +11,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 
 class AddLessonCommandParserTest {
-    /*
     @Test
     void testParse() {
         AddLessonCommandParser p = new AddLessonCommandParser();
@@ -26,5 +25,5 @@ class AddLessonCommandParserTest {
             fail();
         }
     }
-    */
 }
+*/

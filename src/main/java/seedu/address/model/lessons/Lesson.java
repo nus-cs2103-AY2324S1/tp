@@ -2,39 +2,24 @@ package seedu.address.model.lessons;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntry;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Subject;
 
 /**
  * Represents a student's lesson in the schedule.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Lesson extends ListEntry {
+public class Lesson extends ListEntry<Lesson> {
     public static final Lesson DEFAULT_LESSON = new Lesson();
-    private Name name;
-    // Lesson fields
     private Time start;
     private Time end;
     // Data fields
     private Subject subject;
     private Day day;
-
-    private ArrayList<Name> students; // TODO: change to student object
-
-    /**
-     * The Task List to store the Lesson Tasks.
-     */
-    private TaskList taskList;
 
     /**
      * Constructor for a Lesson Object with at least one student.
@@ -52,8 +37,6 @@ public class Lesson extends ListEntry {
         this.start = start;
         this.end = end;
         this.subject = subject;
-        this.students = new ArrayList<>(Arrays.asList(studentNames));
-        this.taskList = new TaskList();
         this.day = day;
     }
     public Lesson(String name, String start, String end, String day, String subject) throws ParseException {
@@ -64,59 +47,11 @@ public class Lesson extends ListEntry {
         this.start = Time.DEFAULT_TIME;
         this.end = Time.DEFAULT_TIME;
         this.subject = Subject.DEFAULT_SUBJECT;
-        this.students = new ArrayList<>();
-        this.taskList = new TaskList();
         this.day = Day.DEFAULT_DAY;
     }
 
     public static Lesson getDefaultLesson() {
         return DEFAULT_LESSON.clone();
-    }
-
-    public Name getName() {
-        return name;
-    }
-
-    public void setName(Name name) {
-        this.name = name;
-    }
-
-    public void setNameIfNotDefault(Name name) {
-        if (name != null && !name.equals(Name.DEFAULT_NAME)) {
-            setName(name);
-        }
-    }
-
-    /**
-     * Returns true if the lesson has the specified student.
-     * @param person The person to check
-     * @return true if the lesson has the specified student
-     */
-    public boolean hasStudent(Person person) {
-        return hasStudent(person.getName());
-    }
-
-    /**
-     * Returns true if the lesson has the specified student.
-     * @param name The name of the student to check
-     * @return true if the lesson has the specified student
-     */
-    public boolean hasStudent(Name name) {
-        return students.contains(name);
-    }
-
-    /**
-     * Gets the start time formatted in 12h
-     */
-    public String getStartTimeStr() {
-        return start.toString();
-    }
-
-    /**
-     * Gets the end time formatted in 12h
-     */
-    public String getEndTimeStr() {
-        return end.toString();
     }
 
     public Day getDay() {
@@ -141,7 +76,7 @@ public class Lesson extends ListEntry {
      * 10 am - 12 pm
      * @return A formatted overview of the time of the lesson
      */
-    public String getLessonDuration() {
+    public String getLessonDurationStr() {
         return start + " - " + end;
     }
 
@@ -160,27 +95,8 @@ public class Lesson extends ListEntry {
      * @return
      */
     public String getStudentsStr() {
-        ArrayList<String> studentNames = new ArrayList<>();
-        for (Name student : students) {
-            studentNames.add(student.toString());
-        }
-        return StringUtil.joinArray(studentNames, ", ");
-    }
-
-    /**
-     * Returns the subject.
-     * @return
-     */
-    public String getSubjectStr() {
-        return subject.toString();
-    }
-
-    /**
-     * Returns the Task List.
-     * @return
-     */
-    public ObservableList<Task> getTaskList() {
-        return taskList.asUnmodifiableObservableList();
+        return "getStudentsStr in lesson is to be implemented";
+        //todo, get the students str from model in the future instead of from the lesson
     }
 
     public Time getStart() {
@@ -214,6 +130,23 @@ public class Lesson extends ListEntry {
         }
     }
 
+    /**
+     * Updates the start and end time of the lesson if the start is before the end after the update.
+     */
+    public void updateStartAndEnd(Time start, Time end) throws ParseException {
+        if (start == Time.DEFAULT_TIME) {
+            start = this.start;
+        }
+        if (end == Time.DEFAULT_TIME) {
+            end = this.end;
+        }
+        if (start != Time.DEFAULT_TIME && end != Time.DEFAULT_TIME && start.isAfter(end)) {
+            throw new ParseException("End time cannot be before start time");
+        }
+        this.start = start;
+        this.end = end;
+    }
+
     public Subject getSubject() {
         return subject;
     }
@@ -226,26 +159,6 @@ public class Lesson extends ListEntry {
             setSubject(subject);
         }
     }
-
-    public ArrayList<Name> getStudents() {
-        return students;
-    }
-
-    public void setStudents(ArrayList<Name> students) {
-        this.students = students;
-    }
-    /**
-     * Adds a student to the lesson.
-     * @param student The student to add
-     * @throws IllegalValueException if the student already exists in the lesson
-     */
-    public void addStudent(Name student) throws IllegalValueException {
-        if (this.students.contains(student)) {
-            throw new IllegalValueException("Student already exists in lesson");
-        }
-        this.students.add(student);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -261,15 +174,14 @@ public class Lesson extends ListEntry {
         return start.equals(otherLesson.start)
                 && end.equals(otherLesson.end)
                 && subject.equals(otherLesson.subject)
-                && students.equals(otherLesson.students)
                 && name.equals(otherLesson.name)
-                && taskList.equals(otherLesson.taskList)
-                && day.equals(otherLesson.day);
+                && day.equals(otherLesson.day)
+                && remark.equals(otherLesson.remark);
     }
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(start, end, subject, students);
+        return Objects.hash(name, start, end, day, subject);
     }
 
     /**
@@ -304,19 +216,21 @@ public class Lesson extends ListEntry {
         String subjectStr = subject == null
                              ? ""
                              : " for " + subject;
-        return "Lesson from " + start + " to " + end + subjectStr + " with " + students;
+        return "Lesson from " + start + " to " + end + subjectStr;
     }
 
     /**
      * Returns a clone of the lesson.
      */
+    @Override
     public Lesson clone() {
         Lesson cloned = new Lesson();
         cloned.setStartIfNotDefault(this.start);
         cloned.setEndIfNotDefault(this.end);
         cloned.setSubjectIfNotDefault(this.subject);
-        cloned.setStudents(this.students);
         cloned.setNameIfNotDefault(this.name);
+        cloned.setDayIfNotDefault(this.day);
+        cloned.setRemarkIfNotDefault(this.remark);
         return cloned;
     }
 }

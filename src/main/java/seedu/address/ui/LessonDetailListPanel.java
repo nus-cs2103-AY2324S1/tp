@@ -57,11 +57,11 @@ public class LessonDetailListPanel extends UiPart<Region> {
      */
     public void setLessonDetails(Lesson lesson) {
         date.setText(lesson.getLessonDateStr());
-        startTime.setText(lesson.getStartTimeStr());
-        endTime.setText(lesson.getEndTimeStr());
+        startTime.setText(lesson.getStart().toString());
+        endTime.setText(lesson.getEnd().toString());
         students.setText(lesson.getStudentsStr());
-        subject.setText(lesson.getSubjectStr());
-        taskListView.setItems(lesson.getTaskList());
+        subject.setText(lesson.getSubject().toString());
+        //taskListView.setItems("to be implemented");
         taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
     }
 

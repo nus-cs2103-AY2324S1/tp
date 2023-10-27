@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,19 +13,14 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person extends ListEntry {
+public class Person extends ListEntry<Person> {
     public static final Person DEFAULT_PERSON = new Person(Name.DEFAULT_NAME);
-
-    // Identity fields
-    private Name name;
     private Phone phone = Phone.DEFAULT_PHONE;
     private Email email = Email.DEFAULT_EMAIL;
 
     // Data fields
     private Address address = Address.DEFAULT_ADDRESS;
     private Subjects subjects = new Subjects();
-    private Tags tags = new Tags();
-    private Remark remark = Remark.DEFAULT_REMARK;
 
 
     /**
@@ -52,19 +46,6 @@ public class Person extends ListEntry {
     }
     public static Person getDefaultPerson() {
         return DEFAULT_PERSON.clone();
-    }
-
-    public Name getName() {
-        return name;
-    }
-
-    public void setName(Name name) {
-        this.name = name;
-    }
-    public void setNameIfNotDefault(Name name) {
-        if (name != null && !name.equals(Name.DEFAULT_NAME)) {
-            setName(name);
-        }
     }
 
     public Phone getPhone() {
@@ -143,57 +124,6 @@ public class Person extends ListEntry {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTagSet() {
-        return Collections.unmodifiableSet(tags.getTagSetClone());
-    }
-    public Tags getTags() {
-        return tags;
-    }
-
-    public Set<Tag> getTagsSet() {
-        return tags.getTagSetClone();
-    }
-
-    public void setTags(Set<Tag> tags) {
-        requireAllNonNull(tags);
-        setTags(new Tags(tags));
-    }
-
-    public void setTags(Tags tags) {
-        requireAllNonNull(tags);
-        this.tags = tags;
-    }
-    public void setTagsIfNotDefault(Set<Tag> tags) {
-        if (tags != null) {
-            setTagsIfNotDefault(new Tags(tags));
-        }
-    }
-
-    public void setTagsIfNotDefault(Tags tags) {
-        if (tags != null && !tags.equals(new Tags())) {
-            setTags(tags);
-        }
-    }
-
-    public Remark getRemark() {
-        return remark;
-    }
-
-    public void setRemark(Remark remark) {
-        requireAllNonNull(remark);
-        this.remark = remark;
-    }
-
-    public void setRemarkIfNotDefault(Remark remark) {
-        if (remark != null && !remark.equals(Remark.DEFAULT_REMARK)) {
-            setRemark(remark);
-        }
-    }
-
-    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -204,6 +134,10 @@ public class Person extends ListEntry {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public boolean hasSameName(Person person) {
+        return person != null && person.getName().equals(getName());
     }
 
     /**

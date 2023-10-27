@@ -4,14 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -23,7 +20,7 @@ import seedu.address.model.tag.Tag;
 
 
 public class AddPersonCommandParserTest {
-    private AddCommandParser p = new AddCommandParser();
+    private AddPersonCommandParser p = new AddPersonCommandParser();
 
     @Test
     void happyCases() {
@@ -59,7 +56,7 @@ public class AddPersonCommandParserTest {
     @Test
     void correctPerson() {
         try {
-            Person actualPerson = AddCommandParser.parsePerson("add -name Yiwen"
+            Person actualPerson = AddPersonCommandParser.parsePerson("add -name Yiwen"
                     + " -phone 12345678 -email email@u.com -address Blk 123, Clementi Ave 3, #12,34 "
                     + "-tag friends -subject English");
             Person expectedPerson = new Person(new Name("Yiwen"));

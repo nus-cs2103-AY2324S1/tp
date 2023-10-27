@@ -2,10 +2,15 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-
+/**
+ * Command as a combination of multiple commands
+ */
 public class MacroCommand extends Command {
     private final Command[] commands;
-    public MacroCommand (Command... commands) {
+    /**
+     * Creates a Command as a combination of multiple commands
+     */
+    public MacroCommand(Command... commands) {
         assert commands.length > 0;
         this.commands = commands;
     }
@@ -22,9 +27,9 @@ public class MacroCommand extends Command {
                     result.append(commandName).append(": ").append(temp.getFeedbackToUser()).append("\n");
                 }
             }
-                } catch (CommandException e) {
-                    throw new CommandException(result + commandName + " failed: " + e.getMessage());
-                }
+        } catch (CommandException e) {
+            throw new CommandException(result + commandName + " failed: " + e.getMessage());
+        }
         return new CommandResult(result.toString());
     }
 }

@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class EditCommandParserTest {
+public class EditPersonCommandParserTest {
 
-    private EditCommandParser p = new EditCommandParser();
+    private EditPersonCommandParser p = new EditPersonCommandParser();
 
     @Test
     void happyCases() {

@@ -1,29 +1,26 @@
 package seedu.address.logic.commands;
+/*
+import org.junit.jupiter.api.Test;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+
+import org.junit.jupiter.api.Test;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.EditCommandParser;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-
-
-/**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
- */
 public class EditCommandTest {
-    /*
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
     private EditCommandParser p = new EditCommandParser();
@@ -55,5 +52,5 @@ public class EditCommandTest {
             fail();
         }
     }
-     */
 }
+*/

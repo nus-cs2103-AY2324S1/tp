@@ -26,17 +26,12 @@ public class Time extends ListEntryField {
     /**
      * Constructs a {@code Time} from input of format "hh:mm".
      */
-    public Time(String str) throws IllegalArgumentException {
-        try {
-            this.time = parseTime(str);
-        } catch (ParseException e) {
-            throw new IllegalArgumentException(e);
-        }
-
+    public Time(String str) throws ParseException {
+        this.time = parseTime(str);
     }
     private Time() {
     }
-    public static Time of(String str) throws IllegalArgumentException {
+    public static Time of(String str) throws ParseException {
         return new Time(str);
     }
 

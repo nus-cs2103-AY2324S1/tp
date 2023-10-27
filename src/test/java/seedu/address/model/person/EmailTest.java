@@ -2,9 +2,12 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class EmailTest {
 
@@ -16,7 +19,7 @@ public class EmailTest {
     @Test
     public void constructor_invalidEmail_throwsIllegalArgumentException() {
         String invalidEmail = "";
-        assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
+        assertThrows(ParseException.class, () -> new Email(invalidEmail));
     }
 
     @Test
@@ -68,21 +71,25 @@ public class EmailTest {
 
     @Test
     public void equals() {
-        Email email = new Email("valid@email");
+        try {
+            Email email = new Email("valid@email");
 
-        // same values -> returns true
-        assertTrue(email.equals(new Email("valid@email")));
+            // same values -> returns true
+            assertTrue(email.equals(new Email("valid@email")));
 
-        // same object -> returns true
-        assertTrue(email.equals(email));
+            // same object -> returns true
+            assertTrue(email.equals(email));
 
-        // null -> returns false
-        assertFalse(email.equals(null));
+            // null -> returns false
+            assertFalse(email.equals(null));
 
-        // different types -> returns false
-        assertFalse(email.equals(5.0f));
+            // different types -> returns false
+            assertFalse(email.equals(5.0f));
 
-        // different values -> returns false
-        assertFalse(email.equals(new Email("other.valid@email")));
+            // different values -> returns false
+            assertFalse(email.equals(new Email("other.valid@email")));
+        } catch (Exception e) {
+            fail();
+        }
     }
 }

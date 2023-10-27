@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.model.ListEntryField;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ListEntryField;
 
 /**
  * Represents a Person's address in the address book.
@@ -28,9 +28,11 @@ public class Address extends ListEntryField {
      *
      * @param address A valid address.
      */
-    public Address(String address) {
+    public Address(String address) throws ParseException {
         requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        if (!Address.isValidAddress(address)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
         value = address;
     }
 
@@ -47,7 +49,7 @@ public class Address extends ListEntryField {
     public static Boolean isValid(String input) {
         return isValidAddress(input);
     }
-    public static Address of(String input) {
+    public static Address of(String input) throws ParseException {
         return new Address(input);
     }
     @Override
@@ -79,9 +81,14 @@ public class Address extends ListEntryField {
      */
     public Address clone() {
         if (this == DEFAULT_ADDRESS) {
-            return DEFAULT_ADDRESS;
+            return this;
+        } else {
+            try {
+                return new Address(value);
+            } catch (ParseException e) {
+                throw new AssertionError("Clone of valid name failed.");
+            }
         }
-        return new Address(value);
     }
 
 }

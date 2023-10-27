@@ -1,10 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.model.ListEntryField;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ListEntryField;
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
@@ -24,9 +23,11 @@ public class Phone extends ListEntryField {
      *
      * @param phone A valid phone number.
      */
-    public Phone(String phone) {
+    public Phone(String phone) throws ParseException {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        if (!Phone.isValidPhone(phone)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
         value = phone;
     }
 
@@ -43,7 +44,7 @@ public class Phone extends ListEntryField {
     public static Boolean isValid(String input) {
         return isValidPhone(input);
     }
-    public static Phone of(String input) {
+    public static Phone of(String input) throws ParseException {
         return new Phone(input);
     }
     @Override
@@ -76,9 +77,14 @@ public class Phone extends ListEntryField {
      */
     public Phone clone() {
         if (this == DEFAULT_PHONE) {
-            return DEFAULT_PHONE;
+            return this;
+        } else {
+            try {
+                return new Phone(value);
+            } catch (ParseException e) {
+                throw new AssertionError("This should not happen.");
+            }
         }
-        return new Phone(value);
     }
 
 }

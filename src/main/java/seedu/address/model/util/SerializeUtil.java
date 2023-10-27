@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ListEntryField;
 
 /**
@@ -17,7 +18,7 @@ public class SerializeUtil {
     /**
      * Deserializes a string into a ListEntryField.
      */
-    public static <T extends ListEntryField> T deserialize(T defaultValue, Of<T> of, String str) {
+    public static <T extends ListEntryField> T deserialize(T defaultValue, Of<T> of, String str) throws ParseException {
         return str.equals(defaultValue.toString())
                 ? defaultValue
                 : of.apply(str);

@@ -11,6 +11,7 @@ import seedu.address.model.lessons.Day;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Time;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Subject;
 
 
@@ -23,8 +24,7 @@ public class JsonAdaptedLesson {
     private final String day;
     private final String subject;
     private final String name;
-    //private final String students; // comma-separated
-    //private final String taskList;
+    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -34,12 +34,14 @@ public class JsonAdaptedLesson {
                              @JsonProperty("start") String start,
                              @JsonProperty("end") String end,
                              @JsonProperty("day") String day,
-                             @JsonProperty("subject") String subject) {
+                             @JsonProperty("subject") String subject,
+                             @JsonProperty("remarks") String remark) {
         this.name = name;
         this.start = start;
         this.end = end;
         this.day = day;
         this.subject = subject;
+        this.remark = remark;
     }
 
     /**
@@ -51,8 +53,7 @@ public class JsonAdaptedLesson {
         end = serialize(source.getEnd());
         day = serialize(source.getDay());
         subject = serialize(source.getSubject());
-        //students = serialize(source.getStudents());
-        //taskList =
+        remark = serialize(source.getRemark());
     }
     /**
      * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.
@@ -66,9 +67,8 @@ public class JsonAdaptedLesson {
             Time end = deserialize(Time.DEFAULT_TIME, Time::deserialize, this.end);
             Day day = deserialize(Day.DEFAULT_DAY, Day::deserialize, this.day);
             Subject subject = deserialize(Subject.DEFAULT_SUBJECT, Subject::of, this.subject);
+            Remark remark = deserialize(Remark.DEFAULT_REMARK, Remark::of, this.remark);
             return new Lesson(name, start, end, day, subject);
-            //ArrayList<String> students = Lesson.deserializeStudents(this.students);
-            //TaskList taskList = Lesson.deserializeTaskList(this.taskList); //TODO
         } catch (Exception e) {
             throw new IllegalValueException(e.getMessage());
         }

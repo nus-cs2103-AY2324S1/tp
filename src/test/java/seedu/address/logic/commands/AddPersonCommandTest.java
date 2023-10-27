@@ -5,12 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -23,44 +21,16 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.TaskList;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.ui.Ui;
 
 public class AddPersonCommandTest {
-    /*
-    @Test
-    public void addPersonAndLessonTest() {
-        ModelManager modelManager = new ModelManager();
-        Person p1 = new Person(new Name("Yiwen"));
-        Person p2 = new Person(new Name("Wang"));
-        Lesson lesson1 = new Lesson(LocalDateTime.now(), LocalDateTime.now().plusHours(1), new TaskList());
-        Lesson lesson2 = new Lesson(LocalDateTime.now(), LocalDateTime.now().plusHours(1), new TaskList());
-        AddPersonCommand addPersonCommand1 = new AddPersonCommand(p1, lesson1);
-        AddPersonCommand addPersonCommand2 = new AddPersonCommand(p1, lesson2);
-        AddPersonCommand addPersonCommand3 = new AddPersonCommand(p2, lesson1);
-        assertFalse(modelManager.hasPerson(p1));
-        assertFalse(modelManager.hasLesson(lesson1));
-        try {
-            addPersonCommand1.execute(modelManager);
-            assertTrue(modelManager.hasPerson(p1));
-            assertEquals(p1, addPersonCommand1.getPerson());
-            assertTrue(modelManager.hasLesson(lesson1));
-        } catch (CommandException e) {
-            fail();
-        }
-        assertThrows(CommandException.class, () -> addPersonCommand2.execute(modelManager));
-        assertThrows(CommandException.class, () -> addPersonCommand3.execute(modelManager));
-    }
-    */
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddPersonCommand(null));
@@ -84,7 +54,8 @@ public class AddPersonCommandTest {
         AddPersonCommand addPersonCommand = new AddPersonCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand.execute(modelStub));
     }
 
     @Test
@@ -269,6 +240,11 @@ public class AddPersonCommandTest {
         @Override
         public boolean hasCurrentShownEntry() {
             return false;
+        }
+
+        @Override
+        public Boolean hasPersonClashWith(Person person) {
+            return null;
         }
 
         @Override

@@ -1,27 +1,44 @@
 package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 
-public class EditLessonCommand extends Command {
-    private final Lesson edit;
-    private final int index;
-    private final boolean parseFromShown;
-    public EditLessonCommand(Lesson edit, int index, boolean parseFromShown) {
-        this.edit = edit;
-        this.index = index;
-        this.parseFromShown = parseFromShown;
+/**
+ * Edits the details of an existing lesson in the schedule.
+ */
+public class EditLessonCommand extends AbstractEditCommand<Lesson> {
+    public EditLessonCommand(int index, Lesson editDescriptor) {
+        super(index, editDescriptor);
+    }
+
+    public EditLessonCommand(Lesson editDescriptor) {
+        super(editDescriptor);
+    }
+
+    public EditLessonCommand(Lesson editDescriptor, Lesson originalLesson) {
+        super(editDescriptor, originalLesson);
+    }
+
+    @Override
+    void init() throws CommandException {
+        init(model.getCurrentlyDisplayedLesson(), model.getFilteredScheduleList());
+    }
+
+    @Override
+    void setNonDefaultFields() throws CommandException {
+        setNameRemarkTags();
+        edited.setDayIfNotDefault(editDescriptor.getDay());
+        edited.setStartIfNotDefault(editDescriptor.getStart());
+        edited.setEndIfNotDefault(editDescriptor.getEnd());
+        edited.setSubjectIfNotDefault(editDescriptor.getSubject());
+    }
+
+    @Override
+    void validateEdited() throws CommandException {
+        validateEdited(model::hasLessonClashWith);
     }
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        Lesson original;
-        if (parseFromShown) {
-            original = model.getCurrentlyDisplayedLesson();
-        } else {
-            original = model.getFilteredScheduleList().get(index - 1);
-        }
-        //model.setLesson(original, edit);
-        return new CommandResult("Edited lesson: " + edit);
+    void writeBack() throws CommandException {
+        model.setLesson(original, edited);
     }
 }

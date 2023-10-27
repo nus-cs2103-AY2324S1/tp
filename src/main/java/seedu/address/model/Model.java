@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
@@ -202,4 +201,5 @@ public interface Model {
     default Boolean hasTaskClashWith(Task task) {
         return null;
     }
+    Boolean hasPersonClashWith(Person person);
 }

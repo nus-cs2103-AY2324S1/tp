@@ -120,6 +120,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Boolean hasPersonClashWith(Person person) {
+        requireNonNull(person);
+        return addressBook.hasPersonClashWith(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
