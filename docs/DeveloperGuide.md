@@ -126,6 +126,25 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+The `People` component,
+
+* Has 6 compulsory attributes (`Name`, `Phone`, `Address`, `Email`, `Nric`, `LicencePlate`) and 1 optional attrbiute 
+(`Remark`)
+* Has `Tag` which can store any amount of tags
+* Has a `Policy`, which is optional for a person to have, but is stored in the `Person` class regardless
+  * If a person has a policy attached to them, `Policy` will simply hold their information (i.e. `PolicyNumber`, 
+  policy issue and expiry date as `PolicyDate`)
+  * If a person does not have a policy attached to them, `Policy` will hold default values (`NOPOLICY` for 
+  `PolicyNumber` and `01-01-1000` for both `PolicyDate`)
+
+#### Design considerations
+  * Defensive programming was used for the handling of persons with no policy over the alternative implementation:
+  * Make `Policy = null` for `Person` with no policy. This was unsafe as when `Person` is displayed in the UI, methods 
+like `toString()` would throw errors, violating type safety.
+  * Make `PolicyNumber` and `PolicyDate` be `null`. This was unsafe as the RegEx check (e.g. `isValidPolicyNumber()`)
+  done in the constructors would have to be removed, leading to improper input validation.
+
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
@@ -229,6 +248,16 @@ The following activity diagram summarises what happens when a user executes the 
 * Alternative 2 (current choice): `remind` command with number of days given by the user.
   * Pros: Allows more flexibility, now the user can find persons whose expiry dates is not only 30 days.
   * Cons: Need to determine the range of days allowed for the user to enter, security concerns such as integer overflow could occur if user decides to perform malicious activities.
+
+### `remark`
+The `remark` command allows the user to add optional remarks / comments to a person.
+
+#### Implementation:
+`remark` works similarly to `edit`, but is only editing the `Remark` attribute of the `Person`. 
+To add this feature, the following were done:
+- Include optional `Remark` attribute in `Person` class
+- Edit existing features to parse remarks (e.g. in `add` and `edit` to have a new CLI flag)
+
 
 ### \[Proposed\] Undo/redo feature
 
