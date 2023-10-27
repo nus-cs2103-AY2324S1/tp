@@ -14,6 +14,8 @@ public class ListScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all schedules";
 
+    public ListScheduleCommand() {
+    }
 
     @Override
     public CommandResult execute(Model model) {
@@ -21,4 +23,5 @@ public class ListScheduleCommand extends Command {
         model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
 }

@@ -18,6 +18,7 @@ import seedu.address.logic.commands.EditScheduleCommand;
 import seedu.address.logic.commands.EditTutorCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindScheduleCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ListTutorCommand;
@@ -100,6 +101,9 @@ public class AddressBookParser {
 
         case UnmarkScheduleCommand.COMMAND_WORD:
             return new UnmarkScheduleCommandParser().parse(arguments);
+
+        case FindScheduleCommand.COMMAND_WORD:
+            return new FindScheduleCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
