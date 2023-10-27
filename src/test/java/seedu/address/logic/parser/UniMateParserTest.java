@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -27,6 +28,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -87,6 +89,23 @@ public class UniMateParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addEvent() throws Exception {
+        String description = "sleep";
+        String startDateTime = "2023-10-10 10:00";
+        String endDateTime = "2023-10-10 12:00";
+        String validArg = "d/" + description
+                + " ts/" + startDateTime
+                + " te/" + endDateTime;
+        validArg = AddEventCommand.COMMAND_WORD + " " + validArg;
+        EventBuilder eventBuilder = new EventBuilder();
+        eventBuilder.withDescription(description);
+        eventBuilder.withStartEndDate(startDateTime, endDateTime);
+
+        AddEventCommand addEventCommand = (AddEventCommand) parser.parseCommand(validArg);
+        assertEquals(addEventCommand, new AddEventCommand(eventBuilder.build()));
     }
 
     @Test
