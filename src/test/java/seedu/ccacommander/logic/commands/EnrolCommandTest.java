@@ -46,8 +46,8 @@ public class EnrolCommandTest {
     }
 
     @Test
-    public void execute_attendanceAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingAttendanceAdded modelStub = new ModelStubAcceptingAttendanceAdded();
+    public void execute_enrolmentAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEnrolmentAdded modelStub = new ModelStubAcceptingEnrolmentAdded();
         Enrolment validEnrolment = new EnrolmentBuilder().build();
 
         CommandResult commandResult =
@@ -56,17 +56,17 @@ public class EnrolCommandTest {
 
         assertEquals(String.format(EnrolCommand.MESSAGE_SUCCESS, Messages.format(validEnrolment)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validEnrolment), modelStub.attendancesAdded);
+        assertEquals(Arrays.asList(validEnrolment), modelStub.enrolmentsAdded);
     }
 
     @Test
-    public void execute_duplicateAttendance_throwsCommandException() {
+    public void execute_duplicateEnrolment_throwsCommandException() {
         EnrolCommand enrolCommand =
                 new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
-        ModelStubWithAttendance modelStub = new ModelStubWithAttendance(ALICE_AURORA);
+        ModelStubWithEnrolment modelStub = new ModelStubWithEnrolment(ALICE_AURORA);
 
         assertThrows(CommandException.class,
-                EnrolCommand.MESSAGE_DUPLICATE_ATTENDANCE, () -> enrolCommand.execute(modelStub));
+                EnrolCommand.MESSAGE_DUPLICATE_ENROLMENT, () -> enrolCommand.execute(modelStub));
     }
 
     @Test
@@ -190,11 +190,11 @@ public class EnrolCommandTest {
         }
 
         @Override
-        public void createAttendance(Enrolment enrolment) {
+        public void createEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public boolean hasAttendance(Enrolment enrolment) {
+        public boolean hasEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -218,12 +218,12 @@ public class EnrolCommandTest {
         }
 
         @Override
-        public ObservableList<Enrolment> getFilteredAttendanceList() {
+        public ObservableList<Enrolment> getFilteredEnrolmentList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredAttendanceList(Predicate<Enrolment> attendance) {
+        public void updateFilteredEnrolmentList(Predicate<Enrolment> enrolment) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -261,12 +261,12 @@ public class EnrolCommandTest {
     /**
      * A Model stub that contains a single enrolment.
      */
-    private class ModelStubWithAttendance extends ModelStub {
+    private class ModelStubWithEnrolment extends ModelStub {
         final UniqueMemberList members = new UniqueMemberList();
         final UniqueEventList events = new UniqueEventList();
         private final Enrolment enrolment;
 
-        ModelStubWithAttendance(Enrolment enrolment) {
+        ModelStubWithEnrolment(Enrolment enrolment) {
             requireNonNull(enrolment);
             events.createEvent(AURORA_BOREALIS);
             members.add(ALICE);
@@ -283,22 +283,22 @@ public class EnrolCommandTest {
             return new FilteredList<>(members.asUnmodifiableObservableList());
         }
         @Override
-        public boolean hasAttendance(Enrolment enrolment) {
+        public boolean hasEnrolment(Enrolment enrolment) {
             requireNonNull(enrolment);
-            return this.enrolment.isSameAttendance(enrolment);
+            return this.enrolment.isSameEnrolment(enrolment);
         }
     }
 
     /**
      * A Model stub that always accept the enrolment being added.
      */
-    private class ModelStubAcceptingAttendanceAdded extends ModelStub {
+    private class ModelStubAcceptingEnrolmentAdded extends ModelStub {
         final UniqueMemberList members = new UniqueMemberList();
         final UniqueEventList events = new UniqueEventList();
-        final ArrayList<Enrolment> attendancesAdded = new ArrayList<>();
+        final ArrayList<Enrolment> enrolmentsAdded = new ArrayList<>();
         final ArrayList<String> commitMessages = new ArrayList<>();
 
-        public ModelStubAcceptingAttendanceAdded() {
+        public ModelStubAcceptingEnrolmentAdded() {
             events.createEvent(AURORA_BOREALIS);
             members.add(ALICE);
         }
@@ -309,15 +309,15 @@ public class EnrolCommandTest {
         }
 
         @Override
-        public boolean hasAttendance(Enrolment enrolment) {
+        public boolean hasEnrolment(Enrolment enrolment) {
             requireNonNull(enrolment);
-            return attendancesAdded.stream().anyMatch(enrolment::isSameAttendance);
+            return enrolmentsAdded.stream().anyMatch(enrolment::isSameEnrolment);
         }
 
         @Override
-        public void createAttendance(Enrolment enrolment) {
+        public void createEnrolment(Enrolment enrolment) {
             requireNonNull(enrolment);
-            attendancesAdded.add(enrolment);
+            enrolmentsAdded.add(enrolment);
         }
 
         @Override

@@ -1,6 +1,6 @@
 {"members" : [ ],
   "events": [ ],
-  "attendances" : [{
+  "enrolments" : [{
     "memberName" : "Benson Meier",
     "eventName" : "Boxing Day",
     "hours" : "7",

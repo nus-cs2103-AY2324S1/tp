@@ -16,7 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Member> PREDICATE_SHOW_ALL_MEMBERS = unused -> true;
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
-    Predicate<Enrolment> PREDICATE_SHOW_ALL_ATTENDANCES = unused -> true;
+    Predicate<Enrolment> PREDICATE_SHOW_ALL_ENROLMENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -103,20 +103,20 @@ public interface Model {
     /**
      * Returns true if an enrolment with the same identity as {@code enrolment} exists in CcaCommander.
      */
-    boolean hasAttendance(Enrolment enrolment);
+    boolean hasEnrolment(Enrolment enrolment);
 
     /**
      * Creates the given event.
      * {@code enrolment} must not already exist in CcaCommander.
      */
-    void createAttendance(Enrolment enrolment);
+    void createEnrolment(Enrolment enrolment);
 
     /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();
 
     ObservableList<Event> getFilteredEventList();
 
-    ObservableList<Enrolment> getFilteredAttendanceList();
+    ObservableList<Enrolment> getFilteredEnrolmentList();
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
@@ -134,7 +134,7 @@ public interface Model {
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredAttendanceList(Predicate<Enrolment> predicate);
+    void updateFilteredEnrolmentList(Predicate<Enrolment> predicate);
 
     void commit(String commitMessage);
 

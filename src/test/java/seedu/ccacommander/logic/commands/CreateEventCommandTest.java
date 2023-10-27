@@ -172,11 +172,11 @@ public class CreateEventCommandTest {
         }
 
         @Override
-        public void createAttendance(Enrolment enrolment) {
+        public void createEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public boolean hasAttendance(Enrolment enrolment) {
+        public boolean hasEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -200,12 +200,12 @@ public class CreateEventCommandTest {
         }
 
         @Override
-        public ObservableList<Enrolment> getFilteredAttendanceList() {
+        public ObservableList<Enrolment> getFilteredEnrolmentList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredAttendanceList(Predicate<Enrolment> attendance) {
+        public void updateFilteredEnrolmentList(Predicate<Enrolment> attendance) {
             throw new AssertionError("This method should not be called.");
         }
 

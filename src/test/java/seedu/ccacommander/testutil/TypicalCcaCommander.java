@@ -1,6 +1,6 @@
 package seedu.ccacommander.testutil;
 
-import static seedu.ccacommander.testutil.TypicalEnrolments.getTypicalAttendance;
+import static seedu.ccacommander.testutil.TypicalEnrolments.getTypicalEnrolment;
 import static seedu.ccacommander.testutil.TypicalEvents.getTypicalEvents;
 import static seedu.ccacommander.testutil.TypicalMembers.getTypicalMembers;
 
@@ -40,10 +40,10 @@ public class TypicalCcaCommander {
     /**
      * Returns a {@code CcaCommander} with only typical attendances.
      */
-    public static CcaCommander getTypicalAttendanceCcaCommander() {
+    public static CcaCommander getTypicalEnrolmentCcaCommander() {
         CcaCommander cc = new CcaCommander();
-        for (Enrolment enrolment : getTypicalAttendance()) {
-            cc.createAttendance(enrolment);
+        for (Enrolment enrolment : getTypicalEnrolment()) {
+            cc.createEnrolment(enrolment);
         }
 
         return cc;
@@ -62,8 +62,8 @@ public class TypicalCcaCommander {
             cc.createEvent(event);
         }
 
-        for (Enrolment enrolment : getTypicalAttendance()) {
-            cc.createAttendance(enrolment);
+        for (Enrolment enrolment : getTypicalEnrolment()) {
+            cc.createEnrolment(enrolment);
         }
 
         return cc;

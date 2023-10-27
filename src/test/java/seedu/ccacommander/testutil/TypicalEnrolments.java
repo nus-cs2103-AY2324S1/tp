@@ -6,7 +6,7 @@ import java.util.List;
 
 import seedu.ccacommander.model.enrolment.Enrolment;
 /**
- * A utility class containing a list of {@code Attendance} objects to be used in tests.
+ * A utility class containing a list of {@code Enrolment} objects to be used in tests.
  */
 public class TypicalEnrolments {
 
@@ -32,7 +32,7 @@ public class TypicalEnrolments {
 
     private TypicalEnrolments() {} // prevents instantiation
 
-    public static List<Enrolment> getTypicalAttendance() {
+    public static List<Enrolment> getTypicalEnrolment() {
         return new ArrayList<>(Arrays.asList(ALICE_AURORA, BENSON_BOXING, CARL_CNY, DANIEL_DOG_DAY, ELLE_ECHO_DAY,
                 FIONA_FESTIVAL, GEORGE_GRAVITY_DISCOVERY_DAY));
     }

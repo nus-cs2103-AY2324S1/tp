@@ -38,7 +38,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMembers = new FilteredList<>(this.versionedCcaCommander.getMemberList());
         filteredEvents = new FilteredList<>(this.versionedCcaCommander.getEventList());
-        filteredEnrolments = new FilteredList<>(this.versionedCcaCommander.getAttendanceList());
+        filteredEnrolments = new FilteredList<>(this.versionedCcaCommander.getEnrolmentList());
     }
 
     public ModelManager() {
@@ -139,15 +139,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasAttendance(Enrolment enrolment) {
+    public boolean hasEnrolment(Enrolment enrolment) {
         requireNonNull(enrolment);
-        return versionedCcaCommander.hasAttendance(enrolment);
+        return versionedCcaCommander.hasEnrolment(enrolment);
     }
 
     @Override
-    public void createAttendance(Enrolment enrolment) {
-        versionedCcaCommander.createAttendance(enrolment);
-        updateFilteredAttendanceList(PREDICATE_SHOW_ALL_ATTENDANCES);
+    public void createEnrolment(Enrolment enrolment) {
+        versionedCcaCommander.createEnrolment(enrolment);
+        updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
     }
 
     @Override
@@ -197,7 +197,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Enrolment> getFilteredAttendanceList() {
+    public ObservableList<Enrolment> getFilteredEnrolmentList() {
         return filteredEnrolments;
     }
 
@@ -214,7 +214,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredAttendanceList(Predicate<Enrolment> predicate) {
+    public void updateFilteredEnrolmentList(Predicate<Enrolment> predicate) {
         requireNonNull(predicate);
         filteredEnrolments.setPredicate(predicate);
     }

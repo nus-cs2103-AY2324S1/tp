@@ -2,7 +2,7 @@
   "_comment": "CCACommander save file which contains the same Attendance values as in TypicalAttendances#getTypicalAttendance()",
   "members" : [ ],
   "events": [ ],
-  "attendances" : [{
+  "enrolments" : [{
     "memberName" : "Alice Pauline",
     "eventName" : "Aurora Borealis",
     "hours" : "3",

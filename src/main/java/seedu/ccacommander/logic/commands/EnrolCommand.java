@@ -42,7 +42,7 @@ public class EnrolCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Successfully added: %1$s";
     public static final String MESSAGE_COMMIT = "Successfully enrolled: %1$s";
-    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "This member has already been enrolled to the event. ";
+    public static final String MESSAGE_DUPLICATE_ENROLMENT = "This member has already been enrolled to the event. ";
 
     private final Index memberIndex;
     private final Index eventIndex;
@@ -50,7 +50,7 @@ public class EnrolCommand extends Command {
     private final Remark remark;
 
     /**
-     * Creates an EnrolCommand to add the specified {@code Attendance}
+     * Creates an EnrolCommand to add the specified {@code Enrolment}
      */
     public EnrolCommand(Index memberIndex, Index eventIndex, Hours hours, Remark remark) {
         requireNonNull(memberIndex);
@@ -86,12 +86,12 @@ public class EnrolCommand extends Command {
 
         Enrolment toAdd = new Enrolment(memberName, eventName, this.hours, this.remark);
 
-        if (model.hasAttendance(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
+        if (model.hasEnrolment(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ENROLMENT);
         }
 
-        model.createAttendance(toAdd);
-        model.commit(String.format(MESSAGE_COMMIT, toAdd.getMemberAndEventAttendance()));
+        model.createEnrolment(toAdd);
+        model.commit(String.format(MESSAGE_COMMIT, toAdd.getMemberAndEventEnrolment()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

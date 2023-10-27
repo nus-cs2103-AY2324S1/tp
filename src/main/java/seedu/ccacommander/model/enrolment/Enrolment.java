@@ -48,7 +48,7 @@ public class Enrolment {
         return remark;
     }
 
-    public String getMemberAndEventAttendance() {
+    public String getMemberAndEventEnrolment() {
         return getMemberName().toString() + " to " + getEventName().toString();
     }
 
@@ -56,7 +56,7 @@ public class Enrolment {
      * Returns true if both enrolment have the same identity fields.
      * This defines a weaker notion of equality between two enrolment.
      */
-    public boolean isSameAttendance(Enrolment otherEnrolment) {
+    public boolean isSameEnrolment(Enrolment otherEnrolment) {
         if (otherEnrolment == this) {
             return true;
         }
@@ -68,7 +68,7 @@ public class Enrolment {
 
     /**
      * Returns true if both enrolment have the same identity and data fields.
-     * This defines a stronger notion of equality between two attendances.
+     * This defines a stronger notion of equality between two enrolments.
      */
     @Override
     public boolean equals(Object other) {

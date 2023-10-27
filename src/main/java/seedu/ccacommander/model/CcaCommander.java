@@ -21,7 +21,7 @@ public class CcaCommander implements ReadOnlyCcaCommander {
 
     private final UniqueMemberList members;
     private final UniqueEventList events;
-    private final UniqueEnrolmentList attendances;
+    private final UniqueEnrolmentList enrolments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -33,7 +33,7 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     {
         members = new UniqueMemberList();
         events = new UniqueEventList();
-        attendances = new UniqueEnrolmentList();
+        enrolments = new UniqueEnrolmentList();
     }
 
     public CcaCommander() {}
@@ -65,11 +65,11 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     }
 
     /**
-     * Replaces the contents of the enrolment list with {@code attendances}.
-     * {@code attendances} must not contain duplicate attendances.
+     * Replaces the contents of the enrolment list with {@code enrolments}.
+     * {@code enrolments} must not contain duplicate enrolments.
      */
-    public void setAttendances(List<Enrolment> enrolments) {
-        this.attendances.setAttendances(enrolments);
+    public void setEnrolments(List<Enrolment> enrolments) {
+        this.enrolments.setEnrolments(enrolments);
     }
 
     /**
@@ -80,7 +80,7 @@ public class CcaCommander implements ReadOnlyCcaCommander {
 
         setMembers(newData.getMemberList());
         setEvents(newData.getEventList());
-        setAttendances(newData.getAttendanceList());
+        setEnrolments(newData.getEnrolmentList());
 
     }
 
@@ -162,17 +162,17 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     /**
      * Returns true if an enrolment with the same identity as {@code enrolment} exists in CcaCommander.
      */
-    public boolean hasAttendance(Enrolment enrolment) {
+    public boolean hasEnrolment(Enrolment enrolment) {
         requireNonNull(enrolment);
-        return attendances.contains(enrolment);
+        return enrolments.contains(enrolment);
     }
 
     /**
      * Adds an enrolment to CcaCommander.
      * The enrolment must not already exist in CcaCommander.
      */
-    public void createAttendance(Enrolment a) {
-        attendances.createAttendance(a);
+    public void createEnrolment(Enrolment a) {
+        enrolments.createEnrolment(a);
     }
 
     // util methods
@@ -182,7 +182,7 @@ public class CcaCommander implements ReadOnlyCcaCommander {
         return new ToStringBuilder(this)
                 .add("members", members)
                 .add("events", events)
-                .add("attendances", attendances)
+                .add("attendances", enrolments)
                 .toString();
     }
 
@@ -195,8 +195,8 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
     }
-    public ObservableList<Enrolment> getAttendanceList() {
-        return attendances.asUnmodifiableObservableList();
+    public ObservableList<Enrolment> getEnrolmentList() {
+        return enrolments.asUnmodifiableObservableList();
     }
 
     @Override

@@ -13,15 +13,15 @@ import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
 
 /**
  * A list of enrolment that enforces uniqueness between its elements and does not allow nulls.
- * An enrolment is considered unique by comparing using {@code Attendance#isSameAttendance(Object)}. As such, adding
- * and updating of attendances uses Attendance#isSameAttendance(Attendance) for equality so as to ensure that the
- * enrolment being added or updated is unique in terms of identity in the UniqueAttendanceList. However, the removal of
- * an enrolment uses Attendance#equals(Object) so as to ensure that the enrolment with exactly the same fields will be
+ * An enrolment is considered unique by comparing using {@code Enrolment#isSameEnrolment(Object)}. As such, adding
+ * and updating of enrolments uses Enrolment#isSameEnrolment(Enrolment) for equality so as to ensure that the
+ * enrolment being added or updated is unique in terms of identity in the UniqueEnrolmentList. However, the removal of
+ * an enrolment uses Enrolment#equals(Object) so as to ensure that the enrolment with exactly the same fields will be
  * removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Enrolment#isSameAttendance(Enrolment)
+ * @see Enrolment#isSameEnrolment(Enrolment)
  */
 public class UniqueEnrolmentList implements Iterable<Enrolment> {
 
@@ -34,14 +34,14 @@ public class UniqueEnrolmentList implements Iterable<Enrolment> {
      */
     public boolean contains(Enrolment enrolmentToCheck) {
         requireNonNull(enrolmentToCheck);
-        return internalList.stream().anyMatch(enrolmentToCheck::isSameAttendance);
+        return internalList.stream().anyMatch(enrolmentToCheck::isSameEnrolment);
     }
 
     /**
      * Adds an enrolment to the list.
      * The enrolment must not already exist in the list.
      */
-    public void createAttendance(Enrolment enrolmentToCreate) {
+    public void createEnrolment(Enrolment enrolmentToCreate) {
         requireNonNull(enrolmentToCreate);
         if (contains(enrolmentToCreate)) {
             throw new DuplicateEnrolmentException();
@@ -50,11 +50,11 @@ public class UniqueEnrolmentList implements Iterable<Enrolment> {
     }
 
     /**
-     * Replaces the enrolment {@code target} in the list with {@code editedAttendance}.
-     * {@code targetAttendance} must exist in the list.
-     * The {@code editedAttendance} must not be the same as another enrolment existing  in the list.
+     * Replaces the enrolment {@code target} in the list with {@code editedEnrolment}.
+     * {@code targetEnrolment} must exist in the list.
+     * The {@code editedEnrolment} must not be the same as another enrolment existing  in the list.
      */
-    public void setAttendance(Enrolment targetEnrolment, Enrolment editedEnrolment) {
+    public void setEnrolment(Enrolment targetEnrolment, Enrolment editedEnrolment) {
         requireAllNonNull(targetEnrolment, editedEnrolment);
 
         int index = internalList.indexOf(targetEnrolment);
@@ -62,7 +62,7 @@ public class UniqueEnrolmentList implements Iterable<Enrolment> {
             throw new EnrolmentNotFoundException();
         }
 
-        if (!targetEnrolment.isSameAttendance(editedEnrolment) && contains(editedEnrolment)) {
+        if (!targetEnrolment.isSameEnrolment(editedEnrolment) && contains(editedEnrolment)) {
             throw new DuplicateEnrolmentException();
         }
 
@@ -83,18 +83,18 @@ public class UniqueEnrolmentList implements Iterable<Enrolment> {
     /**
      * Replaces the contents of this list with {@code replacement}.
      */
-    public void setAttendances(UniqueEnrolmentList replacement) {
+    public void setEnrolments(UniqueEnrolmentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code attendances}.
-     * {@code attendances} must not contain duplicate attendances.
+     * Replaces the contents of this list with {@code enrolments}.
+     * {@code enrolments} must not contain duplicate enrolments.
      */
-    public void setAttendances(List<Enrolment> enrolments) {
+    public void setEnrolments(List<Enrolment> enrolments) {
         requireAllNonNull(enrolments);
-        if (!attendancesAreUnique(enrolments)) {
+        if (!enrolmentsAreUnique(enrolments)) {
             throw new DuplicateEnrolmentException();
         }
 
@@ -139,12 +139,12 @@ public class UniqueEnrolmentList implements Iterable<Enrolment> {
     }
 
     /**
-     * Returns true if {@code attendances} contains only unique attendances.
+     * Returns true if {@code enrolments} contains only unique enrolments.
      */
-    private boolean attendancesAreUnique(List<Enrolment> enrolments) {
+    private boolean enrolmentsAreUnique(List<Enrolment> enrolments) {
         for (int i = 0; i < enrolments.size() - 1; i++) {
             for (int j = i + 1; j < enrolments.size(); j++) {
-                if (enrolments.get(i).isSameAttendance(enrolments.get(j))) {
+                if (enrolments.get(i).isSameEnrolment(enrolments.get(j))) {
                     return false;
                 }
             }

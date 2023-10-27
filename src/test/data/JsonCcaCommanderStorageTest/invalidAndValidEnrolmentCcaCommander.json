@@ -1,6 +1,6 @@
 {"members" : [ ],
   "events": [ ],
-  "attendances" : [{
+  "enrolments" : [{
     "memberName" : "Alice Pauline",
     "eventName" : "Aurora Borealis",
     "hours" : "1",

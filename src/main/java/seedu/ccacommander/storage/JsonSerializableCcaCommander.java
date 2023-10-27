@@ -23,11 +23,11 @@ class JsonSerializableCcaCommander {
 
     public static final String MESSAGE_DUPLICATE_MEMBER = "Members list contains duplicate member(s).";
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
-    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Attendances list contains duplicate enrolment(s).";
+    public static final String MESSAGE_DUPLICATE_ENROLMENT = "Enrolment list contains duplicate enrolment(s).";
 
     private final List<JsonAdaptedMember> members = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
-    private final List<JsonAdaptedEnrolment> attendances = new ArrayList<>();
+    private final List<JsonAdaptedEnrolment> enrolments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableCcaCommander} with the given members and events.
@@ -35,10 +35,10 @@ class JsonSerializableCcaCommander {
     @JsonCreator
     public JsonSerializableCcaCommander(@JsonProperty("members") List<JsonAdaptedMember> members,
                                         @JsonProperty("events") List<JsonAdaptedEvent> events,
-                                        @JsonProperty("attendances") List<JsonAdaptedEnrolment> attendances) {
+                                        @JsonProperty("enrolments") List<JsonAdaptedEnrolment> enrolments) {
         this.members.addAll(members);
         this.events.addAll(events);
-        this.attendances.addAll(attendances);
+        this.enrolments.addAll(enrolments);
     }
 
     /**
@@ -49,7 +49,7 @@ class JsonSerializableCcaCommander {
     public JsonSerializableCcaCommander(ReadOnlyCcaCommander source) {
         members.addAll(source.getMemberList().stream().map(JsonAdaptedMember::new).collect(Collectors.toList()));
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
-        attendances.addAll(source.getAttendanceList().stream().map(JsonAdaptedEnrolment::new)
+        enrolments.addAll(source.getEnrolmentList().stream().map(JsonAdaptedEnrolment::new)
                 .collect(Collectors.toList()));
     }
 
@@ -74,12 +74,12 @@ class JsonSerializableCcaCommander {
             }
             ccaCommander.createEvent(event);
         }
-        for (JsonAdaptedEnrolment jsonAdaptedEnrolment : attendances) {
+        for (JsonAdaptedEnrolment jsonAdaptedEnrolment : enrolments) {
             Enrolment enrolment = jsonAdaptedEnrolment.toModelType();
-            if (ccaCommander.hasAttendance(enrolment)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_ATTENDANCE);
+            if (ccaCommander.hasEnrolment(enrolment)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ENROLMENT);
             }
-            ccaCommander.createAttendance(enrolment);
+            ccaCommander.createEnrolment(enrolment);
         }
         return ccaCommander;
     }

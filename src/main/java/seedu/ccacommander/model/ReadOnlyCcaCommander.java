@@ -26,6 +26,6 @@ public interface ReadOnlyCcaCommander {
      * Returns an unmodifiable view of the attendances list.
      * This list will not contain any duplicate attendances.
      */
-    ObservableList<Enrolment> getAttendanceList();
+    ObservableList<Enrolment> getEnrolmentList();
 
 }

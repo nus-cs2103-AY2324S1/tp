@@ -21,33 +21,33 @@ import seedu.ccacommander.testutil.EnrolmentBuilder;
 public class EnrolmentTest {
 
     @Test
-    public void isSameAttendance() {
+    public void isSameEnrolment() {
         // same object -> returns true
-        assertTrue(ALICE_AURORA.isSameAttendance(ALICE_AURORA));
+        assertTrue(ALICE_AURORA.isSameEnrolment(ALICE_AURORA));
 
         // null -> returns false
-        assertFalse(ALICE_AURORA.isSameAttendance(null));
+        assertFalse(ALICE_AURORA.isSameEnrolment(null));
 
         // same name, all other attributes different -> returns true
         Enrolment editedEnrolment = new EnrolmentBuilder(ALICE_AURORA).withHours(VALID_HOURS_AURORA)
                 .withRemark(VALID_REMARK_AURORA).build();
-        assertTrue(ALICE_AURORA.isSameAttendance(editedEnrolment));
+        assertTrue(ALICE_AURORA.isSameEnrolment(editedEnrolment));
 
         // different name, all other attributes same -> returns false
         editedEnrolment = new EnrolmentBuilder(ALICE_AURORA).withEventName(VALID_NAME_BOXING)
                 .withMemberName(VALID_NAME_BOB).build();
-        assertFalse(ALICE_AURORA.isSameAttendance(editedEnrolment));
+        assertFalse(ALICE_AURORA.isSameEnrolment(editedEnrolment));
 
         // name differs in case, all other attributes same -> returns false
         editedEnrolment = new EnrolmentBuilder(ALICE_AURORA).withEventName(VALID_NAME_AURORA.toLowerCase())
                 .build();
-        assertFalse(ALICE_AURORA.isSameAttendance(editedEnrolment));
+        assertFalse(ALICE_AURORA.isSameEnrolment(editedEnrolment));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_AURORA + " ";
         editedEnrolment = new EnrolmentBuilder(ALICE_AURORA).withEventName(nameWithTrailingSpaces)
                 .build();
-        assertFalse(ALICE_AURORA.isSameAttendance(editedEnrolment));
+        assertFalse(ALICE_AURORA.isSameEnrolment(editedEnrolment));
     }
 
     @Test

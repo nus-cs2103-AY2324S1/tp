@@ -32,7 +32,7 @@ public class EnrolCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newAttendance_success() {
+    public void execute_newEnrolment_success() {
         Enrolment validEnrolment = new EnrolmentBuilder().withMemberName(ALICE_AURORA.getMemberName().name)
                 .withEventName(BENSON_BOXING.getEventName().name)
                 .withHours(ALICE_AURORA.getHours().value.toString())
@@ -40,9 +40,9 @@ public class EnrolCommandIntegrationTest {
                 .build();
 
         String commitMessage = String.format(EnrolCommand.MESSAGE_COMMIT,
-                validEnrolment.getMemberAndEventAttendance());
+                validEnrolment.getMemberAndEventEnrolment());
         Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
-        expectedModel.createAttendance(validEnrolment);
+        expectedModel.createEnrolment(validEnrolment);
         expectedModel.commit(commitMessage);
 
         assertCommandSuccess(new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_TWO, VALID_HOURS_A, VALID_REMARK_A),
@@ -53,7 +53,7 @@ public class EnrolCommandIntegrationTest {
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
         assertCommandFailure(new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A),
-                model, EnrolCommand.MESSAGE_DUPLICATE_ATTENDANCE);
+                model, EnrolCommand.MESSAGE_DUPLICATE_ENROLMENT);
     }
 
 }

@@ -25,73 +25,73 @@ public class JsonAdaptedEnrolmentTest {
     private static final String VALID_HOURS = ALICE_AURORA.getHours().value.toString();
     private static final String VALID_REMARK = ALICE_AURORA.getRemark().toString();
     @Test
-    public void toModelType_validAttendanceDetails_returnsAttendance() throws Exception {
-        JsonAdaptedEnrolment attendance = new JsonAdaptedEnrolment(ALICE_AURORA);
-        assertEquals(ALICE_AURORA, attendance.toModelType());
+    public void toModelType_validEnrolmentDetails_returnsEnrolment() throws Exception {
+        JsonAdaptedEnrolment enrolment = new JsonAdaptedEnrolment(ALICE_AURORA);
+        assertEquals(ALICE_AURORA, enrolment.toModelType());
     }
 
     @Test
     public void toModelType_invalidMemberName_throwsIllegalValueException() {
-        JsonAdaptedEnrolment attendance =
+        JsonAdaptedEnrolment enrolment =
                 new JsonAdaptedEnrolment(INVALID_MEMBER_NAME, VALID_EVENT_NAME, VALID_HOURS, VALID_REMARK);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, enrolment::toModelType);
     }
 
     @Test
     public void toModelType_nullMemberName_throwsIllegalValueException() {
-        JsonAdaptedEnrolment attendance =
+        JsonAdaptedEnrolment enrolment =
                 new JsonAdaptedEnrolment(null, VALID_EVENT_NAME, VALID_HOURS, VALID_REMARK);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, MEMBER_NAME);
-        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, enrolment::toModelType);
     }
 
     @Test
     public void toModelType_invalidEventName_throwsIllegalValueException() {
-        JsonAdaptedEnrolment attendance =
+        JsonAdaptedEnrolment enrolment =
                 new JsonAdaptedEnrolment(VALID_MEMBER_NAME, INVALID_EVENT_NAME, VALID_HOURS, VALID_REMARK);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, enrolment::toModelType);
     }
 
     @Test
     public void toModelType_nullEventName_throwsIllegalValueException() {
-        JsonAdaptedEnrolment attendance =
+        JsonAdaptedEnrolment enrolment =
                 new JsonAdaptedEnrolment(VALID_MEMBER_NAME, null, VALID_HOURS, VALID_REMARK);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EVENT_NAME);
-        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, enrolment::toModelType);
     }
 
     @Test
     public void toModelType_invalidHours_throwsIllegalValueException() {
-        JsonAdaptedEnrolment attendance =
+        JsonAdaptedEnrolment enrolment =
                 new JsonAdaptedEnrolment(VALID_MEMBER_NAME, VALID_EVENT_NAME, INVALID_HOURS, VALID_REMARK);
         String expectedMessage = Hours.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, enrolment::toModelType);
     }
 
     @Test
     public void toModelType_nullHours_throwsIllegalValueException() {
-        JsonAdaptedEnrolment attendance =
+        JsonAdaptedEnrolment enrolment =
                 new JsonAdaptedEnrolment(VALID_MEMBER_NAME, VALID_EVENT_NAME, null, VALID_REMARK);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Hours.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, enrolment::toModelType);
     }
 
     @Test
     public void toModelType_invalidRemark_throwsIllegalValueException() {
-        JsonAdaptedEnrolment attendance =
+        JsonAdaptedEnrolment enrolment =
                 new JsonAdaptedEnrolment(VALID_MEMBER_NAME, VALID_EVENT_NAME, VALID_HOURS, INVALID_REMARK);
         String expectedMessage = Remark.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, enrolment::toModelType);
     }
 
     @Test
     public void toModelType_nullRemark_throwsIllegalValueException() {
-        JsonAdaptedEnrolment attendance =
+        JsonAdaptedEnrolment enrolment =
                 new JsonAdaptedEnrolment(VALID_MEMBER_NAME, VALID_EVENT_NAME, VALID_HOURS, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, attendance::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, enrolment::toModelType);
     }
 
 

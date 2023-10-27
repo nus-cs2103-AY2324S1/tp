@@ -162,7 +162,7 @@ public class CcaCommanderTest {
             return events;
         }
         @Override
-        public ObservableList<Enrolment> getAttendanceList() {
+        public ObservableList<Enrolment> getEnrolmentList() {
             return enrolments;
         }
     }
