@@ -345,7 +345,7 @@ The view tags mechanism lists all available tags in the address book that a user
 The `ViewTagsCommand` object's `execute()` method is called. The model object's `getTagList()` method is called. All
 available tags in the address book are shown to the user in the tags list.
 
-<img src="images/TagListClass.png" width="250" />
+<img src="images/TagListClassDiagram.png" width="282" alt="TagListClassDiagram"/>
 
 The implementation will follow the Observer design pattern, where the UI will observe the changes made to the list of tags
 available for the user to tag other members. The `TagsListPanel` will implement the `Observer` interface and the `TagList`
