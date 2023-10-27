@@ -312,6 +312,34 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Add applicant feature
+
+#### Implementation
+The add applicant feature allows users to add an applicant to the applicant list.
+
+#### Steps to trigger
+1. The user launches the application.
+2. The user executes `add n/John Doe hp/98765432 e/jd@gmail.com p/software engineer` to add a new applicant.
+3. The `AddCommandParser#parse()` checks whether all the prefixes and the required values are provided.
+4. If the check is successful, the `AddCommand#execute()` checks if the applicant exists in the applicant list.
+5. If the applicant does not exist, the `Model#addApplicant()` adds the applicant to the applicant list.
+
+### Edit applicant feature
+
+#### Implementation
+The edit applicant feature allows users to edit the details of an applicant.
+
+#### Steps to trigger
+1. The user launches the application.
+2. The user executes `edit 1 hp/87654321 p/front-end engineer` to edit the phone number and position of 
+the first applicant.
+3. The `EditCommandParser#parse()` checks whether the index of the applicant is valid and at least one prefix with
+the required values are provided.
+4. If the check is successful, the `EditCommand#execute()` checks if the identity of the applicant after the edit 
+is the same as the identity of another existing applicant. 
+5. If the identity is not the same, the `Model#setApplicant()` updates the details of the applicant while
+the `Model#updateFilteredApplicantList()` updates applicant list to display the updated applicant list.
+
 ### Help feature
 
 #### Steps to trigger
