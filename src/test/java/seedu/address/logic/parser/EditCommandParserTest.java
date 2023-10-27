@@ -128,7 +128,7 @@ public class EditCommandParserTest {
                 .withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(descriptor);
 
         assertParseComplexSuccess(parser, userInput, expectedCommand, PersonType.SPECIALIST);
     }
@@ -140,7 +140,7 @@ public class EditCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(descriptor);
 
         assertParseComplexSuccess(parser, userInput, expectedCommand, PersonType.PATIENT);
     }
@@ -151,25 +151,25 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(descriptor);
         assertParseComplexSuccess(parser, userInput, expectedCommand, PersonType.PATIENT);
 
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
         descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand(descriptor);
         assertParseComplexSuccess(parser, userInput, expectedCommand, PersonType.PATIENT);
 
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
         descriptor = new EditPatientDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand(descriptor);
         assertParseComplexSuccess(parser, userInput, expectedCommand, PersonType.PATIENT);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand( descriptor);
         assertParseComplexSuccess(parser, userInput, expectedCommand, PersonType.PATIENT);
     }
 
@@ -215,7 +215,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditPersonDescriptor descriptor = new EditSpecialistDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(descriptor);
 
         assertParseComplexSuccess(parser, userInput, expectedCommand, PersonType.SPECIALIST);
     }

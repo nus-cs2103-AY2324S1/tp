@@ -106,7 +106,7 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
                 + " " + CliSyntax.PATIENT_TAG + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditCommand(descriptor), command);
     }
 
     @Test
@@ -117,7 +117,7 @@ public class AddressBookParserTest {
                 + " " + CliSyntax.SPECIALIST_TAG + " "
                 + INDEX_FIRST_PERSON.getOneBased()
                 + " " + SpecialistUtil.getEditSpecialistDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditCommand(descriptor), command);
     }
 
     @Test

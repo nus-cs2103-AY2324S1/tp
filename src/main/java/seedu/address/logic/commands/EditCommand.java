@@ -14,12 +14,10 @@ import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -69,7 +67,6 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PATIENT_TAG + " "
             + PERSON_EXAMPLE
-            + PREFIX_TAG + "owesMoney "
             + PREFIX_AGE + "30 "
             + PREFIX_MEDICALHISTORY + "Osteoporosis";
 
@@ -85,18 +82,13 @@ public class EditCommand extends Command {
             + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SPECIALTY + "Physiotherapist ";
 
-    private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditCommand(EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
-
-        this.index = index;
         if (editPersonDescriptor instanceof EditPatientDescriptor) {
             this.editPersonDescriptor = new EditPatientDescriptor((EditPatientDescriptor) editPersonDescriptor);
         } else {
@@ -107,19 +99,15 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = model.getSelectedPerson();
         Person editedPerson;
+
         if (personToEdit instanceof Patient) {
             if (!(editPersonDescriptor instanceof EditPatientDescriptor)) {
                 throw new CommandException(Messages.MESSAGE_PERSON_TYPE_MISMATCH_INDEX);
             }
-            editedPerson = createEditedPatient((Patient) personToEdit, (EditPatientDescriptor) editPersonDescriptor);
+            editedPerson = createEditedPatient((Patient) personToEdit,
+                    (EditPatientDescriptor) editPersonDescriptor);
         } else {
             if (!(editPersonDescriptor instanceof EditSpecialistDescriptor)) {
                 throw new CommandException(Messages.MESSAGE_PERSON_TYPE_MISMATCH_INDEX);
@@ -131,9 +119,9 @@ public class EditCommand extends Command {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         model.setPerson(personToEdit, editedPerson);
         model.commitAddressBook();
+        model.updateSelectedPerson(editedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -187,14 +175,12 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        return this.editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
