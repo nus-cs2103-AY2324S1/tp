@@ -56,5 +56,32 @@ public class FindCommandParserTest {
         });
     }
 
+    @Test
+    public void parse_validNameArgsMultipleKeywords_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob", "Charlie")));
+        assertParseSuccess(parser, "n/Alice Bob Charlie", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validIdArgsMultipleKeywords_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new IdContainsKeywordsPredicate(Arrays.asList("T0100606Z", "T0206006Z", "T0307007Z")));
+        assertParseSuccess(parser, "id/T0100606Z T0206006Z T0307007Z", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validNameArgsWithLeadingAndTrailingWhitespace_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        assertParseSuccess(parser, "  n/Alice Bob  ", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validIdArgsWithLeadingAndTrailingWhitespace_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new IdContainsKeywordsPredicate(Arrays.asList("T0100606Z", "T0206006Z")));
+        assertParseSuccess(parser, "  id/T0100606Z T0206006Z  ", expectedFindCommand);
+    }
 
 }
