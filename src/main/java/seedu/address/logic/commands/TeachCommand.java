@@ -19,7 +19,7 @@ public class TeachCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets up default course users are teaching.\n"
             + "Parameters: "
-            + PREFIX_COURSE + "COURSE \n"
+            + PREFIX_COURSE + "COURSE_CODE \n"
             + "Example: " + COMMAND_WORD
             + " " + PREFIX_COURSE + "CS1231S \n"
             + CourseData.getCourseListString();
