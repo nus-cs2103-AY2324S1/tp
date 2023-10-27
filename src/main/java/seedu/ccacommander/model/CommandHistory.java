@@ -26,14 +26,14 @@ public class CommandHistory {
     public void addCommand(String command) {
         requireNonNull(command);
         if (this.commandHistoryList.size() == 0 ||
-                this.commandHistoryList.get(this.commandHistoryList.size() - 1) != command) {
+                !this.commandHistoryList.get(this.commandHistoryList.size() - 1).equals(command)) {
             this.commandHistoryList.add(command);
-            this.currentCommandPointer = this.commandHistoryList.size();
+            resetPointer();
         }
     }
 
     /**
-     * @return if there is a next command.
+     * @return true if there is a next command.
      */
     public boolean hasNextCommand() {
         boolean hasCommands = this.commandHistoryList.size() > 0;
@@ -41,8 +41,9 @@ public class CommandHistory {
         return pointerHasNext && hasCommands;
 
     }
+
     /**
-     * @return if there is a previous command.
+     * @return true if there is a previous command.
      */
     public boolean hasPreviousCommand() {
         boolean hasCommands = this.commandHistoryList.size() > 0;
@@ -54,22 +55,33 @@ public class CommandHistory {
      * @return next command in the {@code commandHistoryList} based on the {@code currentCommandPointer}
      */
     public String getNextCommand() {
-        if (hasNextCommand()) {
-            this.currentCommandPointer++;
-            return this.commandHistoryList.get(currentCommandPointer);
-        }
-        return null;
+        this.currentCommandPointer++;
+        String nextCommand = this.commandHistoryList.get(this.currentCommandPointer);
+        return nextCommand;
     }
 
     /**
      * @return previous command in the {@code commandHistoryList} based on the {@code currentCommandPointer}
      */
     public String getPreviousCommand() {
-        if (hasPreviousCommand()) {
-            this.currentCommandPointer--;
-            return this.commandHistoryList.get(currentCommandPointer);
-        }
-        return null;
+        this.currentCommandPointer--;
+        String command = this.commandHistoryList.get(this.currentCommandPointer);
+        return command;
+    }
+
+    /**
+     * Resets the pointer to after the last command (no next command available, only previous commands available)
+     * This will be used to move the pointer past the last command.
+     */
+    public void resetPointer() {
+        this.currentCommandPointer = this.commandHistoryList.size();
+    }
+
+    /**
+     * @return true if the pointer is at the last command.
+     */
+    public boolean isLastCommand() {
+        return this.currentCommandPointer == this.commandHistoryList.size() - 1;
     }
 
 }

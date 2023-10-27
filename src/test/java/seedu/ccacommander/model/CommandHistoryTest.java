@@ -22,6 +22,13 @@ public class CommandHistoryTest {
     }
 
     @Test
+    public void constructor_hasNoCommands() {
+        assertFalse(commandHistory.hasNextCommand());
+        assertFalse(commandHistory.hasPreviousCommand());
+        assertFalse(commandHistory.isLastCommand());
+    }
+
+    @Test
     public void addCommand_nullCommand_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> commandHistory.addCommand(null));
     }
@@ -62,10 +69,6 @@ public class CommandHistoryTest {
         assertEquals(SECOND_COMMAND, nextCommand);
     }
 
-    @Test
-    public void getNextCommand_noNextCommand_returnsNull() {
-        assertNull(commandHistory.getNextCommand());
-    }
 
     @Test
     public void getPreviousCommand_hasPreviousCommand_returnsPreviousCommand() {
@@ -74,8 +77,4 @@ public class CommandHistoryTest {
         assertEquals(FIRST_COMMAND, previousCommand);
     }
 
-    @Test
-    public void getPreviousCommand_noPreviousCommand_returnsNull() {
-        assertNull(commandHistory.getPreviousCommand());
-    }
 }
