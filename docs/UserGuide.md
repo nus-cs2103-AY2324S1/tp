@@ -31,10 +31,9 @@ enjoyable experience tracking and scheduling tuition classes.
 A warm welcome to TutorConnect! Before we dive into the details, let's get you started with a quick overview of how 
 to navigate and use this User Guide successfully.
 
-For **Beginner Users**, we're thrilled to have you onboard! Get started with a [Tutorial]
-(#tutorconnect-tutorial--for-new-users-) here.
-For **Experienced Users**, thank you for choosing TutorConnect! You may refer to the [Command Summary]
-(#command-summary) here.
+For **Beginner Users**, we're thrilled to have you onboard! Get started with a [Tutorial](#tutorconnect-tutorial--for-new-users-) here.
+
+For **Experienced Users**, thank you for choosing TutorConnect! You may refer to the [Command Summary](#command-summary) here.
 
 ### Navigating the User Guide
 TutorConnect's User Guide is made with you mind. It is designed to be user-friendly and easy to navigate. Here are a 
