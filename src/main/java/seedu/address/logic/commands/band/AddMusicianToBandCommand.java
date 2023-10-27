@@ -18,7 +18,7 @@ import seedu.address.model.musician.Musician;
 /**
  * Adds a musician to a band.
  */
-public class AddMusiciantoBandCommand extends Command {
+public class AddMusicianToBandCommand extends Command {
     public static final String COMMAND_WORD = "addm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a musician to a band. "
@@ -38,7 +38,7 @@ public class AddMusiciantoBandCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Musician}
      */
-    public AddMusiciantoBandCommand(Index bandToAddInto, Index musicianToAdd) {
+    public AddMusicianToBandCommand(Index bandToAddInto, Index musicianToAdd) {
         requireNonNull(bandToAddInto);
         requireNonNull(musicianToAdd);
         this.bandToAddInto = bandToAddInto;
