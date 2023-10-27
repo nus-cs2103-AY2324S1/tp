@@ -28,7 +28,9 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.PersonType;
+import seedu.address.model.person.Specialist;
 
 /**
  * Parses user input.
@@ -95,9 +97,6 @@ public class AddressBookParser {
             case AddCommand.COMMAND_WORD:
                 return new AddCommandParser().parse(personType, arguments);
 
-            case EditCommand.COMMAND_WORD:
-                return new EditCommandParser().parse(personType, arguments);
-
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(personType, arguments);
 
@@ -119,6 +118,14 @@ public class AddressBookParser {
             logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
             switch (commandWord) {
+            case EditCommand.COMMAND_WORD:
+                if (model.getSelectedPerson() instanceof Patient) {
+                    return new EditCommandParser().parse(PersonType.PATIENT, arguments);
+                }
+                if (model.getSelectedPerson() instanceof Specialist) {
+                    return new EditCommandParser().parse(PersonType.SPECIALIST, arguments);
+                }
+                break;
 
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommandParser().parse(arguments);
@@ -148,7 +155,6 @@ public class AddressBookParser {
                 return new RedoCommand();
 
             case AddCommand.COMMAND_WORD:
-            case EditCommand.COMMAND_WORD:
             case FindCommand.COMMAND_WORD:
             case ListCommand.COMMAND_WORD:
                 throw new ParseException(MESSAGE_INVALID_PERSON_TYPE);
