@@ -8,7 +8,7 @@
 
 ## User Interface Guide
 
-![User Interface Guide Example](./images/userInterfaceGuide.png)
+![User Interface Guide Example](images/user-guide/userInterfaceGuide.png)
 
 
 
@@ -17,7 +17,7 @@
 
 <box type="tip" seamless>
 
-**Notation Guide** :rocket:<br>
+**Notation Guide**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
 * Items in square brackets are optional. 
@@ -29,12 +29,12 @@
 ---
 ### `help` : Viewing help
 
-Displays a message explaining how to access the help page.
+Opens up your browser to view the help page.
 
 Format: `help`
 
 UI mockup:
-![Help UI Mockup](./images/help.png)
+![Help UI Mockup](images/user-guide/help.png)
 
 ---
 ### `add` : Adding a new applicant
@@ -48,7 +48,7 @@ Example:
 * `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/91234567`
 
 UI mockup:
-![Add UI Mockup](./images/add.png)
+![Add UI Mockup](images/user-guide/add.png)
 
 ---
 ### `edit` : Editing an applicant
@@ -65,7 +65,7 @@ Example:
 * `edit 2 hp/80081234 e/newEmail@hotmail.com` edits the phone number and email of the 2nd applicant in the list.
 
 UI mockup:
-![Edit UI Mockup](./images/edit.png)
+![Edit UI Mockup](images/user-guide/edit.png)
 
 ---
 ### `list` : Listing all applicants
@@ -75,7 +75,7 @@ Displays the full list of all applicants.
 Format: `list`
 
 UI mockup:
-![List UI Mockup](./images/list.png)
+![List UI Mockup](images/user-guide/list.png)
 
 ---
 ### `delete` : Deleting an applicant
@@ -92,7 +92,7 @@ Examples:
 * `sort d/name` followed by `delete 3` deletes the 3rd person in the sorted applicant list.
 
 UI mockup:
-![Delete UI Mockup](./images/delete.png)
+![Delete UI Mockup](images/user-guide/delete.png)
 
 ---
 ### `find` : Finding an applicant by name
@@ -111,7 +111,7 @@ Examples:
 * `find IVAN CHEW` finds any applicant whose name contains “ivan” or contains “chew”.
 
 UI mockup:
-![Find UI Mockup](./images/find.png)
+![Find UI Mockup](images/user-guide/find.png)
 
 ---
 ### `sort`: Sorting applicants by descriptor
@@ -119,14 +119,18 @@ UI mockup:
 Sorts the applicant list by using a particular descriptor as the sorting criteria.
 
 Format: `sort d/DESCRIPTOR`
-* `DESCRIPTOR` must be either `name` or `phone`.
+* `DESCRIPTOR` must be either `name` or `phone` or `email` or `position` or `score` or `status`.
 
 Examples:
 * `sort d/name` sorts the applicant list by name in alphabetical order.
 * `sort d/phone` sorts the applicant list by phone numbers in ascending order.
+* `sort d/email` sorts the applicant list by email in alphabetical order.
+* `sort d/position` sorts the applicant list by positions in alphabetical order.
+* `sort d/score` sorts the applicant list by score in descending order.
+* `sort d/status` sorts the applicant list by status in alphabetical order.
 
 UI mockup:
-![Sort UI Mockup](./images/sort.png)
+![Sort UI Mockup](images/user-guide/sort.png)
 
 ---
 ### `addi` : Adding an interview to an applicant
@@ -155,6 +159,28 @@ Examples:
 * `editi 2 i/1 r/8.9` edits the 1st interview rating of the 2nd person in the displayed applicant list to 8.9.
 
 ---
+### `deletei` : Deleting an interview from an applicant
+
+Deletes an interview from an applicant.
+
+Format: `deletei INDEX i/INTERVIEW_INDEX`
+
+Examples:
+* `deletei 1 i/2` deletes the 2nd interview of the 1st person in the displayed applicant list.
+
+---
+### `status` : Editing an applicant status
+
+Edits the status of an applicant.
+
+Format: `status INDEX s/STATUS`
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* `STATUS` must be either `o`(offered) or `r`(rejected) or `u`(undecided).
+
+Examples:
+* `status 3 s/o` updates the status of the 3rd person in the displayed applicant list to OFFERED.
+
+---
 ### `clear` : Clearing all applicant entries
 
 Clears all the current data stored in the system.
@@ -162,7 +188,7 @@ Clears all the current data stored in the system.
 Format: `clear`
 
 UI mockup:
-![Clear UI Mockup](./images/clear.png)
+![Clear UI Mockup](images/user-guide/clear.png)
 
 ---
 ### `exit` : Exiting the program
@@ -180,7 +206,7 @@ Automatically saves the data to a local storage whenever there is a change to th
 ### Editing the data file
 
 <box type="warning" header="**Caution**">
-    Editing the data file directly may result in unexpected behaviour.
+    If the format of the edited data file is invalid, Staff-Snap will override the existing data file with an empty data file in the next run. Please make a backup before you attempt to edit the data file!
 </box>
 
 Staff-Snap applicant data are saved automatically as a JSON file `[JAR file location]/data/applicantBook.json`. Advanced users are welcome to update data directly by editing that data file.
