@@ -10,13 +10,14 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 public class CommandUtilTest {
     @Test
-    public void findPersonByIdentifier_consistentPersonInfo_returnsPerson() {
+    public void findPersonByIdentifier_consistentPersonInfo_returnsPerson() throws CommandException {
         List<Person> personList = new ArrayList<>();
         personList.add(new PersonBuilder(TypicalPersons.ALICE).build());
         personList.add(new PersonBuilder(TypicalPersons.BENSON).build());
@@ -37,7 +38,7 @@ public class CommandUtilTest {
     }
 
     @Test
-    public void findPersonByIdentifier_inconsistentPersonInfo_returnsEmpty() {
+    public void findPersonByIdentifier_inconsistentPersonInfo_returnsEmpty() throws CommandException {
         List<Person> personList = new ArrayList<>();
         personList.add(new PersonBuilder(TypicalPersons.ALICE).build());
         personList.add(new PersonBuilder(TypicalPersons.BENSON).build());
@@ -54,7 +55,7 @@ public class CommandUtilTest {
     }
 
     @Test
-    public void findPersonByIdentifier_personNotInList_returnsEmpty() {
+    public void findPersonByIdentifier_personNotInList_returnsEmpty() throws CommandException {
         List<Person> personList = new ArrayList<>();
         personList.add(new PersonBuilder(TypicalPersons.ALICE).build());
         personList.add(new PersonBuilder(TypicalPersons.BENSON).build());
@@ -71,16 +72,17 @@ public class CommandUtilTest {
     }
 
     @Test
-    public void findPersonByIdentifier_emptyPersonInfo_throwsAssertionError() {
+    public void findPersonByIdentifier_emptyPersonInfo_throwsCommandException() {
         List<Person> personList = new ArrayList<>();
         personList.add(new PersonBuilder(TypicalPersons.ALICE).build());
         personList.add(new PersonBuilder(TypicalPersons.BENSON).build());
 
-        assertThrows(AssertionError.class, () -> CommandUtil.findPersonByIdentifier(null, null, personList));
+        assertThrows(CommandException.class, () ->
+                CommandUtil.findPersonByIdentifier(null, null, personList));
     }
 
     @Test
-    public void findPersonByIdentifier_emptyList_returnsEmpty() {
+    public void findPersonByIdentifier_emptyList_returnsEmpty() throws CommandException {
         List<Person> personList = new ArrayList<>();
         Optional<Person> nameFetch = CommandUtil.findPersonByIdentifier(
                 TypicalPersons.ALICE.getName(), null, personList);

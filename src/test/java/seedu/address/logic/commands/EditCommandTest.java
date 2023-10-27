@@ -135,11 +135,11 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_allNullFields_throwsAssertionError() {
+    public void execute_allNullFields_throwsCommandException() {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
         EditCommand editCommand = new EditCommand(null, null, descriptor);
 
-        assertThrows(AssertionError.class, () -> editCommand.execute(model), EditCommand.MESSAGE_PERSON_NOT_FOUND);
+        assertThrows(CommandException.class, () -> editCommand.execute(model), CommandUtil.MESSAGES_ALL_FIELDS_NULL);
     }
 
     @Test
