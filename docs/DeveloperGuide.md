@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `EventListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Event` object residing in the `Model`.
 
 ### Logic component
 
@@ -126,7 +126,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Group` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Group` object per unique group, instead of each `Group` needing their own `Group` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -154,19 +154,137 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Ability to add persons
+
+#### Implementation details
+
+The 'add' feature involves creating a new "Person" object with optional fields and adding it to FumbleLog. 
+
+This is done using `AddCommand` which implements the `Command` interface. The `AddCommand` is then executed by `LogicManager` which calls `ModelManager` to add the person to the address book.
+
+As a result, the existing 'Person' class in AB3's implementation is enhanced to have the capacity of storing optional fields.
+Below is a class diagram of the enhanced 'Person' class:
+
+<img src="images/PersonClassDiagram.png" alt="PersonClassDiagram" width=500 />
+
+The `Person` object is now composed of the following optional attributes due to the refactored `add` feature:
+
+* `Name`: The name of the person. Compulsory field.
+* `Phone`: The phone number of the person. Optional field.
+* `Email`: The email address of the person. Optional field.
+* `Address`: The address of the person. Optional field.
+* `Birthday`: The birthday of the person. Optional field.
+* `Groups`: The groups that the person is associated with. Optional field.
+
+The [**`java.util.Optional<T>`**](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html) class is used to represent the optional attributes of the `Person` object.
+
+To add a person, the user must specify the name of the person using the `n/` prefix. The user can then specify the optional attributes of the person using the following prefixes:
+
+<box type="info">
+Except for the name, all the fields given to the `add` command are optional.
+</box>
+
+The flow for the `add` command is described by the following sequence diagram:
+
+<img src="images/AddPersonSequenceDiagram.png" alt="AddPersonSequenceDiagram" width=600 />
+
+### Feature details
+1. The application will validate the arguments supplied by the user; whether the "NAME" is unique and supplied, and whether the optional fields follow the correct format. 
+2. If the arguments are invalid, an error message will be shown to the user and prompts the user for a corrected input.
+3. If the arguments are valid, a `Person` object will be created with the fields supplied and stored in FumbleLog.
+
+#### Design Considerations
+
+**Aspect: Generic Design**
+
+The original implementation of AB3's `Person` class is refactored to have the capacity of storing optional fields. This is done by using the `java.util.Optional<T>` class to represent the optional attributes of the `Person` object.
+Furthermore, we have added additional fields into the `Person` class to allow users to store more information about the person, such as their birthday.
+
+As the original `add` command already exists in AB3, this feature can be implemented by enhancing the `add` command.
+
+Furthermore, we accounted for empty/null inputs in the optional fields by generating a NULL_INSTANCE for the optional fields when the user does not specify the optional fields. This design decision allowed us to easily check
+for empty/null inputs in the Person object by checking if the optional field is not equal to the NULL_INSTANCE, instead of doing null pointer and empty string checks.
+
+* **Alternative 1 (current choice):** Enhance the existing `add` command.
+  * Pros: 
+    * Easier to implement.
+    * Reuses the logic for the `add` command.
+  * Cons:
+    * Have to account for empty/null inputs in the optional fields when saving the data and testing it
+    * Have to account for empty/null inputs in the optional fields when displaying the data
+* **Alternative 2**: Create a new `add_optional` command.
+  * Pros: 
+    * Do not have to account for empty/null inputs in the optional fields when saving the data and testing it
+  * Cons:
+    * Inconveniences the user as they have to remember a new command to add a person with optional fields.
+
 ### Ability to assign persons to an event
 
-The ability to assign persons to an event is facilitated by `ModelManager`. 
+The ability to assign persons to an event is facilitated by `ModelManager`.
 
-Each event stores a list of persons assigned to it. The person(s) are represented by their `Name` stored in FumbleLog. This is because the `Name` is the only unique identifier for a person. 
+Each event stores a list of persons assigned to it. The person(s) are represented by their `Name` stored in FumbleLog. This is because the `Name` is the only unique identifier for a person.
 
 When a person is assigned to an event, the person's `Name` is added to the event's list of assigned persons. When a person is unassigned from an event, the person's `Name` is removed from the event's list of assigned persons. When a person's `Name` is modified, the change is also reflected in the event(s) that they are previously assigned to.
 
-Users can assign multiple names to an event by using multiple `n/` identifiers following with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, i.e the `Name` currently exists in FumbleLog. 
+Users can assign multiple names to an event by using multiple `n/` identifiers following with the `Name` specified. The `ModelManager` will perform checks on whether the names supplied are valid, i.e the `Name` currently exists in FumbleLog.
 
-When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event
+When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event.
 
+### Ability to assign groups to an event
 
+#### Implementation
+
+The ability to assign groups to an event is facilitated by `ModelManager`.
+
+Each event stores a list of groups assigned to it. The groups(s) are represented by their name and that acts as their id. 
+
+When a group is assigned to an event, the group's name is stored into the event's list of groups. When un-assigned, the corresponding groups are then removed from the group list.
+
+With the group name, person(s) with that specific group in their group list is displayed with the event.
+
+#### Design considerations
+
+- When adding and displaying groups, persons that has been added individually previously will be displayed twice. To counter that, checks are done to ensure that
+when a group is added, duplicate persons will be deleted from the individual persons list
+- A person can belong to multiple groups, due to the multiplicity between groups and persons. In this case, we allow multiple persons to be displayed, as it is clear which group they belong to.
+- As the persons are searched by their group name only when displaying, adding new persons, editing and deleting persons is simple as the component just reloads and searches for everybody in the groups again.
+
+### Improved find feature
+
+The `find` command in our application displays persons that fit the keyword(s)
+
+#### Implementation
+
+The `find` feature involves checking the current filtered list of persons and filtering out persons with fitting names 
+or groups. This is done using `NameOrGroupContainsKeywordsPredicate`, which enhanced from the original 
+`NameContainsKeywordsPredicate` class. The predicate is then passed to `Model#updateFilteredPersonList(Predicate<Person> predicate)`.
+
+As a result, the `ObservableList<Person>` is updated with the filtered lists of persons.
+The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons.
+
+The enhanced `find` command remains its original ability i.e. find the person whose name fits the keyword. Except it will also
+find person whose group(s) fits the keyword. If a person's group name fits the keyword, it will be shown on the UI, 
+even though the person's name does not fit the keyword(s).
+
+#### Feature details
+1. The `find` command can accept one or more parameter `keyword` for searching person and events.
+2. A `NameOrGroupContainsKeywordsPredicate` will be created and a `Find` command will be created with the predicates.
+3. The `Find` command will then be executed and the `UI` will be updated with the filtered lists of persons.
+
+#### General design considerations
+
+**Aspect: Keyword target differentiation**
+
+- **Alternative 1 (Current choice): Find all persons that fits the keyword.**
+    - Pros:
+        - Easier to implement.
+    - Cons:
+        - Might get unwanted results, which decreases overall experience.
+- **Alternative 2: Differentiate the target of keyword with syntax.**
+    - Pros:
+        - User can find exact person or group.
+    - Cons:
+        - Adding constraint the original command by requiring syntax, which may cause convenience.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -293,9 +411,6 @@ The flow for the `remind` command is described by the following sequence diagram
   - Cons: 
     - Performance overhead. New addressbook objects needs to be created.
 
-
-    
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -385,6 +500,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
+* 4a. The person is the last member of a group and that group is assigned to an event.
+
+    * 4a1. The group is deleted from the event.
+
+      Use case exits.
+
 **Use case: UC02 - Add a person**
 
 **MSS**
@@ -400,6 +521,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. FumbleLog shows an error message.
 
       Use case resumes at step 2.
+* 3a. Person is added with a group and that group is assigned to an event
+  
+    * 3a1. FumbleLog reloaded the event component and displays the newly added person in the event.
+
+      Use case ends.
 
 **Use case: UC03 - Edit a person**
 
@@ -425,11 +551,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. User modifies the name of the person
 
-    * 4a1. FumbleLog updates the name of the person in all events that the person is <u> assigned </u> to.
+    * 4a1. FumbleLog updates the name of the person in all events that the person is <u> assigned </u> to. This includes persons in groups.
 
       Use case resumes at step 5.
 
-    
+* User removes a group from the person
+
+    * 4b1. FumbleLog removes the person from the corresponding group in all events.
+
+      Use case resumes at step 5.
+
 **Use case: UC04 - Add an event**
 
 **MSS**
