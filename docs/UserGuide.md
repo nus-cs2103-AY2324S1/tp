@@ -307,12 +307,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                           |
-|------------|----------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
-| **Clear**  | `clear`                                                                                                                    |
-| **Delete** | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
-| **Edit**   | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
-| **Find**   | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
-| **List**   | `list`                                                                                                                     |
-| **Help**   | `help`                                                                                                                     |
+| Action     | Shortcut | Format, Examples                                                                                                           |
+|------------|----------|----------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `a`      | `add n/NAME id/IC_NUMBER [field] ...` <br> e.g., `add n/James Ho id/SXXXX123D p/91234567 a/A Estate, Clementi Rd, 1234665` |
+| **Clear**  | `c`      | `clear`                                                                                                                    |
+| **Delete** | `d`      | `delete n/NAME [field]` *or* `delete id/IC_NUMBER [field]`<br> e.g., `delete n/John Doe e/`                                |
+| **Edit**   | `e`      | `edit n/NAME [field]` *or* `edit id/IC_NUMBER [field] ... `<br> e.g.,`edit n/James Lee e/jameslee@example.com`             |
+| **Find**   | `f`      | `find n/NAME [field]` *or* `find id/IC_NUMBER [field]`<br> e.g., `find n/James Jake` *or* `find id/S872D`                  |
+| **List**   | `li`      | `list`                                                                                                                     |
+| **Help**   | `h`      | `help`                                                                                                                     |
