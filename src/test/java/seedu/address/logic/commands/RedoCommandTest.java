@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.AddressBookBuilder.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -93,5 +94,45 @@ public class RedoCommandTest {
         assertCommandSuccess(redoCommand, model, expectedMessage, expectedModelThree);
         assertCommandSuccess(redoCommand, model, expectedMessage, expectedModelTwo);
         assertCommandSuccess(redoCommand, model, expectedMessage, expectedModelOne);
+    }
+
+    @Test
+    public void execute_exceedFiveRedos_failure() throws CommandException {
+        RedoCommand redoCommand = new RedoCommand();
+        String expectedMessage = RedoCommand.MESSAGE_SUCCESS;
+
+        /* add and delete patients */
+        Patient patientToAdd = new PatientBuilder().build();
+        model.addPerson(patientToAdd);
+        Model expectedModelOne = model;
+        Patient patientToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.deletePerson(patientToDelete);
+        Model expectedModelTwo = model;
+        Patient secondPatientToDelete = model.getFilteredPatientList().get(INDEX_SECOND_PERSON.getZeroBased());
+        model.deletePerson(secondPatientToDelete);
+        Model expectedModelThree = model;
+
+        /* add and delete doctors */
+        Doctor doctorToAdd = new DoctorBuilder().build();
+        model.addPerson(doctorToAdd);
+        Model expectedModelFour = model;
+        Doctor doctorToDelete = model.getFilteredDoctorList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.deletePerson(doctorToDelete);
+        Model expectedModelFive = model;
+        Doctor secondDoctorToDelete = model.getFilteredDoctorList().get(INDEX_SECOND_PERSON.getZeroBased());
+        model.deletePerson(secondDoctorToDelete);
+
+        /* undo 5 times */
+        for (int i = 0; i < 5; i++) {
+            model.undo();
+        }
+
+        /* redo 6 times */
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModelFive);
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModelFour);
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModelThree);
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModelTwo);
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModelOne);
+        assertCommandFailure(redoCommand, model, RedoCommand.MESSAGE_EMPTY);
     }
 }

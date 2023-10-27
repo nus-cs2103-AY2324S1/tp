@@ -60,8 +60,8 @@ public class ModelManager implements Model {
     @Override
     public void undo() throws CommandException {
         if (!undoList.isEmpty()) {
-            redoList.add(addressBook);
-            addressBook = undoList.remove(undoList.size() - 1);
+            redoList.add(new AddressBook(addressBook));
+            addressBook.resetData(undoList.remove(undoList.size() - 1));
         } else {
             throw new CommandException(UndoCommand.MESSAGE_EMPTY);
         }
@@ -69,8 +69,8 @@ public class ModelManager implements Model {
     @Override
     public void redo() throws CommandException {
         if (!redoList.isEmpty()) {
-            undoList.add(addressBook);
-            addressBook = redoList.remove(redoList.size() - 1);
+            undoList.add(new AddressBook(addressBook));
+            addressBook.resetData(redoList.remove(redoList.size() - 1));
         } else {
             throw new CommandException(RedoCommand.MESSAGE_EMPTY);
         }
