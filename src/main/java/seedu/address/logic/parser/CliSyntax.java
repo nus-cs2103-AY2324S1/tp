@@ -20,4 +20,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_STARTTIME = new Prefix("bt/");
     public static final Prefix PREFIX_ENDTIME = new Prefix("et/");
+    public static final Prefix PREFIX_SCORE = new Prefix("sc/");
 }
