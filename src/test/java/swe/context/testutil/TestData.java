@@ -17,8 +17,6 @@ import swe.context.model.Contacts;
 import swe.context.model.Settings;
 import swe.context.model.contact.Contact;
 
-
-
 /**
  * Holds test data used by test cases, such as strings and {@link Contact}s.
  */
