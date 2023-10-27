@@ -155,12 +155,25 @@ class FindCommandArgumentParserTest {
 
     @Test
     void test_nullConstructor() {
-        assertDoesNotThrow(() -> new FindCommandArgumentParser().parse(null));
+        assertDoesNotThrow(() -> assertTrue(
+                new FindCommandArgumentParser().parse(null).test(null)
+        ));
     }
 
     @Test
     void test_consecutiveJoiners_throw() {
         assertThrows(ParseException.class, () -> new FindCommandArgumentParser().parse("&&"));
+    }
+
+    @Test
+    public void test_quotesMatch() throws ParseException {
+        SearchPredicate query;
+        query = new FindCommandArgumentParser().parse("'ABC'");
+        assertTrue(query.test(TEST_PERSON));
+        query = new FindCommandArgumentParser().parse("'AB'");
+        assertFalse(query.test(TEST_PERSON));
+        query = new FindCommandArgumentParser().parse("'abc'");
+        assertFalse(query.test(TEST_PERSON));
     }
 
 }

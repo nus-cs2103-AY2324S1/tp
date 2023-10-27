@@ -32,86 +32,47 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements CommandParser<AddCommand> {
 
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ANIMAL_NAME,
-                        PREFIX_AVAILABILITY, PREFIX_ANIMAL_TYPE, PREFIX_HOUSING);
+        try {
+            ArgumentMultimap argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ANIMAL_NAME,
+                            PREFIX_AVAILABILITY, PREFIX_ANIMAL_TYPE, PREFIX_HOUSING);
 
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-
-        if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()
-                && argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("nil")) {
-            if (argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()
-                    && !argMultimap.getValue(PREFIX_ANIMAL_NAME).get().equals("nil")) {
-                throw new ParseException("Animal name should be 'nil' when availability is 'nil'.");
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
+                    PREFIX_ANIMAL_NAME, PREFIX_AVAILABILITY, PREFIX_ANIMAL_TYPE, PREFIX_HOUSING)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
-            if (argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent()
-                    && !argMultimap.getValue(PREFIX_ANIMAL_TYPE).get().equals("nil")) {
-                throw new ParseException("Animal type should be 'nil' when availability is 'nil'.");
-            }
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+            Name animalName = ParserUtil.parseName(argMultimap.getValue(PREFIX_ANIMAL_NAME).get());
+            Availability availability = ParserUtil.parseAvailability(argMultimap
+                    .getValue(PREFIX_AVAILABILITY).get());
+            AnimalType animalType = ParserUtil.parseAnimalType(argMultimap
+                    .getValue(PREFIX_ANIMAL_TYPE).get(), availability);
+            Housing housing = ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING).get());
+
+            Person person = new Person(name, phone, email, address,
+                    housing, availability, animalName, animalType, tagList);
+
+            return new AddCommand(person);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
-
-        if (argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()
-                && !argMultimap.getValue(PREFIX_ANIMAL_NAME).get().equals("nil")) {
-            if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()
-                    && argMultimap.getValue(PREFIX_AVAILABILITY).get().equals("Available")) {
-                throw new ParseException("Availability cannot be 'Available' when an animal name "
-                        + "is provided; animal name should be 'nil'.");
-            }
-        }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-        if (!argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()) {
-            throw new ParseException("Animal name is required. Please indicate as 'nil' if information is "
-                    + "not available.");
-        }
-        Name animalName = ParserUtil.parseName(argMultimap.getValue(PREFIX_ANIMAL_NAME).get());
-
-        if (!argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {
-            throw new ParseException("Availability is required. Please indicate as 'nil' if information is "
-                    + "not available.");
-        }
-        Availability availability = ParserUtil.parseAvailability(argMultimap
-                .getValue(PREFIX_AVAILABILITY).get());
-
-        if (!argMultimap.getValue(PREFIX_ANIMAL_TYPE).isPresent()) {
-            throw new ParseException("Animal type is required. Please indicate as 'nil' if information is "
-                    + "not available.");
-        }
-        AnimalType animalType = ParserUtil.parseAnimalType(argMultimap
-                .getValue(PREFIX_ANIMAL_TYPE).get(), availability.value);
-
-        if (!argMultimap.getValue(PREFIX_HOUSING).isPresent()) {
-            throw new ParseException("Housing is required. Please indicate as 'nil' if information is "
-                    + "not available.");
-        }
-
-        Housing housing = ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING).get());
-
-        Person person = new Person(name, phone, email, address,
-                housing, availability, animalName, animalType, tagList);
-
-        return new AddCommand(person);
     }
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
