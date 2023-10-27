@@ -36,11 +36,23 @@ Flashlingo is a **desktop app for learning words by flashcard, optimized for use
 
 1. Type the command in the command box and press Enter to execute it.
    <img width="728" alt="Screenshot 2023-10-27 at 3 14 07 PM 1" src="https://github.com/itsNatTan/tp/assets/64185574/a4a8dbd2-94ff-417d-84a4-175bf85ff100">
-
    
 2. The image below shows the result of typing in a command. A log message will be displayed below the command box to give information about the outcome of the command.
    <img width="729" alt="Screenshot 2023-10-27 at 3 11 50 PM" src="https://github.com/itsNatTan/tp/assets/64185574/48b74efc-2a39-48d5-b0aa-70f165484c5e">
 
+   * `delete index` : Deletes a words and its related information at the given index.
+   * `edit index w/WORD t/TRANSALTION` : Edits the word and its translation at the given index.
+   * `find KEYWORD` : Finds words whose original word or translation contains the given keyword.
+   * `start` : Starts today’s flashcard session.
+   * `end` :  Ends the current flashcard review session.
+   * `reveal` : Shows the other side of the flashcard.
+   * `yes` :  Indicates user has memorized the word.
+   * `no` :  Indicates user has forgotten the word.
+   * `stats` : Displays learning statistics for current user.
+   * `language` : Filters the list with specified language.
+   * `review` : Returns a list of words that the user should revise today.
+   * `switch` : Switches between light/dark color theme.
+   * `exit` : Terminates the program.
 
 2. Refer to the [Commands](#commands) below for details of each command.
 
@@ -71,9 +83,9 @@ Opens a browser with the help page (User Guide).
 
 Format: `help`
 
-### Listing all cards : `list`
+### Listing all flashcards : `list`
 
-Shows the list of cards with both the original word and the corresponding translation.
+Shows the list of flashcards with both the original word and the corresponding translation.
 
 Format: `list`
 
@@ -85,10 +97,10 @@ Output:
   `...`
 
 
-### Adding a word card: `add`
+### Adding a flashcard: `add`
 
 Adds a word to the flashcard with its translation.
-* Creates a wild card.
+* Creates a wild flashcard.
 * Works to add a word with its translation in their respective languages.
 * The already saved translation can be overridden with a new translation in a different language.
 
@@ -99,7 +111,7 @@ Examples:
 * `add w/entschuldigung wl/Deutsch t/sorry tl/English` saves the translation of the Deutsch word entschuldigung as an English word sorry
 
 
-### Deleting a word card : `delete`
+### Deleting a flashcard : `delete`
 
 Deletes a words and its related information
 * Deletes a flashcard.
@@ -109,17 +121,17 @@ Format: `delete <INDEX>`
 Examples:
 * `delete 1` deletes the word and its translation at index 1
 
-### Editing a word card : `edit`
+### Editing a flashcard : `edit`
 
 Edits the word and its translation at the given index.
-* Edits a wild card.
+* Edits a wild flashcard.
 
 Format: `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>]`
 
 Examples:
 * `edit 1 w/Bye t/再见` edits the word and its translation at index 1
 
-### Finding a word card : `find`
+### Finding a flashcard : `find`
 
 Finds words whose original word or translation contains the given keyword.
 * Finds a flashcard.
@@ -131,34 +143,81 @@ Examples:
 * `find look` returns the flashcard list  and its translation that contains the keyword `look`
 
 
-###  Showing flashcard, starts today’s flashcard session : `start`
+###  Starts review session : `start`
 
-Starts a review session and shows the words the user is going to study sequentially.
+To start a review session, user simply needs to type in `start` command.
 
 Format: `start`
 
+Output: `Review Session has been started.`
 
-### Revealing the other side (translation) of the flash card : `reveal`
+**Note** 
+* Users are not allowed to start a new review session if they are already in one. In this case,   
+`Sorry, currently you are in a review session. Your command is not supported.`   
+`Please end the review session first.` will be prompted.
+* If there are no words to review, users will not be able to start review session. `There's no FlashCards to review. Well done!`  
+will be displayed.
 
-Shows the meaning of the word.
+
+### Ending the current review session : `end`
+
+Ends the current flashcard session and returns to the main menu.
+
+Format: `end`
+
+Output: `Review Session has ended.`
+
+**Note** 
+* Users are not allowed to end a review session if the session hasn't been started yet. The message of `You are not in a review session.`  
+will be given.
+
+### Revealing translation of the flashcard : `reveal`
+
+To show the translation of the flashcard in 
 
 Format: `reveal`
 
-Output :
-![img.png](images/Reveal.png)
+Output : `The translation is [CURRENT FLASHCARD'S TRANSLATION]`  
+
+Examples:![img.png](images/Reveal.png)
+
+**Note**
+* `reveal` command will only take effect during review session. Otherwise, error message `You are not in a review session.`  
+will be printed out.
+* Pressing `reveal` button will have the same effect, and users can reveal the translation without the constrain of review session.
 
 ### Indicating user has memorized the word : `yes`
 
-Marks the word as memorized and pushes the word into the next retention stage.
+Marks the word as memorized and advances the word into the next retention stage. If there are still remaining words to review,
+they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
 Format: `yes`
 
+Output: ![img.png](images/Yes.png)
+or
+![img.png](images/Yes2.png)
+if there's no word left in the review session.
+
+**Note**
+* `yes` command will only take effect during review session. Otherwise, error message `You are not in a review session.`  
+  will be printed out.
+* Pressing `yes` button will have the same effect. 
 
 ###  Indicating user has forgotten the word : `no`
 
-Marks the word as not grasped and leaves it in its current retention stage.
+Marks the word as not grasped and leaves it in its current retention stage. If there are still remaining words to review,
+they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
 Format: `no`
+
+Output: ![img.png](images/No.png)
+or
+![img.png](images/No2.png)
+if there's no word left in the review session.
+**Note**
+* `no` command will only take effect during review session. Otherwise, error message`You are not in a review session.`  
+  will be printed out.
+* Pressing `no` button will have the same effect.
 
 ### Show learning statistics : `stats`
 
@@ -166,11 +225,7 @@ Displays learning statistics, i.e, the total number of flashcards and the number
 
 Format: `stats`
 
-### Endding the current flashcard session : `end`
 
-Ends the current flashcard session and returns to the main menu.
-
-Format: `end`
 
 ### Filtering list with specified language : `language`
 
