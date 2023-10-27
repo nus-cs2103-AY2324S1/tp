@@ -172,16 +172,21 @@ There are 5 main features in that you came up with for LoveBook.
 4. Filter dates
 5. Sort dates
 
-### \[Proposed\] Filter dates
+### Filter dates
 The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
 object as a parameter. The `Predicate` object is used to filter the `Date` objects in the `Model` component.
 The `FilterCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
 
-### \[Proposed\] Sort dates
+### Sort dates
 The sort feature is implemented using the `SortCommand` class. The `SortCommand` class takes in a `Comparator`
 object as a parameter. The `Comparator` object is used to sort the `Date` objects in the `Model` component.
 The `SortCommand` class then returns a `CommandResult` object that contains the sorted `Date` objects.
 
+### Get best match
+The best match feature is implemented using the `BestMatchCommand` class. The `BestMatchCommand` class iterates
+through the list of Dates, and calls `GetScore` to get the score of the date based on height, age, horoscope and 
+income. Each metric will be scored upon 10, and when it deviates from the user's preferences, the score is reduced.
+The maximum score is 40.
 
 --------------------------------------------------------------------------------------------------------------------
 
