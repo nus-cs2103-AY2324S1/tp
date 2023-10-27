@@ -124,6 +124,9 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `observableAppointments` object that represents existing appointments in the address book, sorted in a chronological order.
+* stores a `sortedAppointments` object that represents existing appointments in the address book.
+* `observableAppointments` and `sortedAppointments` depend on `filteredPersons`. Hence, appointments listed are for `Person` objects in `filteredPersons`.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -156,8 +159,235 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Overview 
+
+The basic idea of what happens when a user types a command: 
+1. The LogicManager executes method is called and takes in the user's input.
+2. The user's input is then parsed by `AddressBookParser`, which then creates the respective `XYZCommandParser`. 
+3. `XYZCommandParser` parses the additional arguments provided by the user and creates and `XYZCommand`.
+4. `XYZCommand` then communicates with ModelManager to execute and returns a `CommandResult` which is displayed to the user.
+
+
+The flow of how a `Command` is executed is illustrated with the `Schedule` Command below.
+### Schedule Command
+
+#### Implementation Overview
+
+<img src="images/ScheduleClassDiagram.png" width="400"/>
+
+Upon entering the `Schedule Command`, 
+- The user input will be parsed by `AddressBookParser`. The `schedule` command word will be parsed and an instance of a `ScheduleCommandParser` will be created.
+- The `ScheduleCommandParser` will parse the user arguments, creating a `ScheduleCommand` that has a single `Index` and `Appointment`. 
+- The `ScheduleCommand` will then be executed by the `LogicManager`, which then adds an `Appointment` to the specified person and returns the `CommandResult` containing the success message.
+
+**Design Considerations**
+
+<img src="images/ScheduleItemClassDiagram.png" width="300"/> 
+
+- When a Person is first added to the contact book, a Person will have a `NullAppointment`. A `Person` have a compulsory 1 to 1 relationship with ScheduleItem. This is to ensure a `Person` will not have multiple appointments scheduled. 
+- When a `ScheduleCommand` is executed, the Person will be associated with an `Appointment` object that contains the appointment name and date.
+- There is only one static instance of `NullAppointment` which is returned when the method `#getNullAppointment` is called. 
+- The abstract class ScheduleItem is created so that LSP is adhered to.
+
+
+### Gather Emails Feature
+
+The **Gather Emails** feature in our software system is a critical functionality designed to efficiently collect email addresses. This feature is facilitated through the `GatherCommand` class, which plays a central role in the process.
+
+#### Implementation Overview
+
+The `GatherCommand` class is instantiated by the `GatherCommandParser`, which parses user input commands. The `GatherCommandParser` class implements the following operations:
+
+* `GatherCommandParser#parse(String args)` — Checks the prefixes (fp/ and t/) and instantiates `GatherCommand` accordingly. It passes either a `GatherEmailByFinancialPlan` or a `GatherEmailByTag` object, both implementations of the `GatherEmailPrompt` interface.
+
+The `GatherCommand` takes in a `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand` class implements the following operations:
+
+* `GatherCommand#GatherCommand(GatherEmailPrompt prompt)` — Constructor that initializes the command with the provided `GatherEmailPrompt` object.
+* `GatherCommand#execute()` —  Executes the gathering operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`.
+
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data. It contains the following method:
+
+* `ModelManager#gatherEmails(GatherEmailPrompt prompt)` —  Carries out the gathering operation by calling `AddressBook#gatherEmails(GatherEmailPrompt prompt)`.
+
+This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
+
+The `UniquePersonsList` class maintains a list of unique persons. Additionally, it implements the following operation:
+* `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
+
+Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or `Person#gatherEmailsContainsFinancialPlan(String prompt)`:
+* `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of the name of any Tag in the `Set<Tag>` of the current person.
+* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of the name of any Financial Plan in the `Set<Tag>` of the current person.
+
+This is the class diagram for the gather command:
+
+![GatherClassDiagram](images/GatherClassDiagram.png)
+
+**Usage Scenario:**
+
+**Scenario 1:**
+User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
+
+**Scenario 2:**
+User enters a gather `t/Elderly`. The `GatherEmailByTag` will be initialized. Each person in the `UniquePersonList` will be passed into the `GatherEmailByTag#gatherEmails(Person person)`.
+
+The following sequence diagram shows how the gather operation works:
+
+![GatherSequenceDiagram](images/GatherSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect: How implement more fields**
+
+**Alternative 1 (Current Choice):** User can only search by one Financial Plan or Tag.
+- **Pros:** Easy to implement. Limits the potential for bugs.
+- **Cons:** Limited filtering options. Hard to scale to gather by other fields.
+
+**Alternative 2:** User can search by multiple Financial Plans or Tags.
+- **Pros:** More filtering options. Easy to scale to gather by other fields.
+- **Cons:** Introduces more complexity and requires additional error handling.
+
+_{more aspects and alternatives to be added}_
+
+### Expanded Find feature
+
+The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing FindCommand structure. 
+It extends `Predicate<Person>` and is composed of up to one of a `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate`
+and a `TagContainsKeywordsPredicate` each. Here's a partial class diagram of the `CombinedPredicate`.
+![CombinedPredicate](images/CombinedPredicate.png)
+
+The `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate` and
+`TagContainsKeywordsPredicate` check a Person if the respective field contains
+any of the keywords supplied to the predicate. Note that only the `NameContainsKeywordsPredicate` 
+checks for whole words, because it is rare to search for people by substrings, while `FinancialPlanContainsKeywordsPredicate`
+and `TagContainsKeywordsPredicate` allow matching for substrings because there are certain cases where it is logical to search for
+substrings e.g. `Plan A` and `Plan A Premium` are related, so they can show up in the same search.
+
+The Find command format also changes to resemble a format more similar to the `add` and `edit` commands, to allow for
+searching for keywords in multiple fields at the same time.
+
+#### Design Considerations:
+
+**Aspect: How to implement find for multiple fields**
+* **Alternative 1 (current choice):** Use one unified command and format.
+    * Pros: Easy to implement (argument multimap is available), allows for more flexible usage.
+    * Cons: May get cluttered when there are many terms.
+
+* **Alternative 2:** Take an argument to decide which field to find by.
+    * Pros: More user-friendly and natural since there is no need to use prefixes.
+    * Cons: Less flexible, slightly more difficult to implement.
+
+**Aspect: How to implement `CombinedPredicate`**
+* **Alternative 1 (current choice):** Compose it with the 3 component predicates.
+    * Pros: Easier to modify and test.
+    * Cons: Less flexible when trying to combine multiple predicates (that may be of the same type).
+
+* **Alternative 2:** Use a `Predicate<Person>` and use the `or()` method to chain predicates.
+    * Pros: More flexible in usage.
+    * Cons: More difficult to modify and test.
+
+### Sort Feature
+
+The **Sort** feature in our software system is designed to sort the list of clients by name as well as appointment time. This feature is facilitated through the `SortCommand` class.
+
+#### Implementation Overview
+
+The `SortCommand` class is instantiated by the `SortCommandParser`, which parses user input commands. The `SortCommandParser` class implements the following operations:
+
+- **`SortCommandParser#parse(String args)` —  Checks the sort command keyword passed in by the user. 
+
+The `SortCommand` takes in a `Comparator<Person>` object and passes it into the current `Model` model. The `SortCommand` class implements the following operations:
+
+- **`SortCommand#execute()` —  Executes the sort operation by calling `model.sortFilteredPersonList(comparator)`.
+
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data. It contains the following method:
+
+- **`ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by setting the comparator on the list of clients wrapped in a SortedList wrapper.
+
+**Aspect: Usage Scenario:**
+
+**Scenario 1:**
+User enters a sort command `sort appointment`. The `SortByAppointmentComparator` will be initialized and used to instantiate a SortCommand that when executed causes the list to be sorted by appointment, showing the earlier appointment first.
+
+**Scenario 2:**
+User enters a sort command `sort name`. The `SortByNameComparator` will be initialized and used to instantiate a SortCommand that when executed causes the list to be sorted by lexicographical ordering of name.
+
+The following sequence diagram shows how the gather operation works:
+
+<img src="images/SortClassSequenceDiagram.png" width="700"/>
+
+#### Design Considerations
+
+**Aspect: How Sort Executes**
+
+**Aspect 1 :** User can sort by name and appointment at any time. As such, calling find on the sorted list will result in the ordering of find to also be sorted.
+- **Pros:** Improved usability of maintaining order of list throughout without the list having to be reordered after each command
+- **Cons:** Limitedsorting options as of now
+
+**Aspect 2:** After sorting the first time, it will not be possible to return the list to its original ordering
+- **Pros:** Easier implementation of the sorting function.
+- **Cons:** Unlikely, but if for some reason the user wants the list sorted back to its original order, the only way is to restart the app at the current moment.
+
+_{more aspects and alternatives to be added}_
+
+### Expanded Find feature
+
+The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing FindCommand structure.
+It extends `Predicate<Person>` and is composed of up to one of a `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate`
+and a `TagContainsKeywordsPredicate` each. Here's a partial class diagram of the `CombinedPredicate`.
+![CombinedPredicate](images/CombinedPredicate.png)
+
+The `NameContainsKeywordsPredicate`, `FinancialPlanContainsKeywordsPredicate` and
+`TagContainsKeywordsPredicate` check a Person if the respective field contains
+any of the keywords supplied to the predicate. Note that only the `NameContainsKeywordsPredicate`
+checks for whole words, because it is rare to search for people by substrings, while `FinancialPlanContainsKeywordsPredicate`
+and `TagContainsKeywordsPredicate` allow matching for substrings because there are certain cases where it is logical to search for
+substrings e.g. `Plan A` and `Plan A Premium` are related, so they can show up in the same search.
+
+The Find command format also changes to resemble a format more similar to the `add` and `edit` commands, to allow for
+searching for keywords in multiple fields at the same time.
+
+#### Design Considerations:
+
+**Aspect: How to implement find for multiple fields**
+* **Alternative 1 (current choice):** Use one unified command and format.
+    * Pros: Easy to implement (argument multimap is available), allows for more flexible usage.
+    * Cons: May get cluttered when there are many terms.
+
+* **Alternative 2:** Take an argument to decide which field to find by.
+    * Pros: More user-friendly and natural since there is no need to use prefixes.
+    * Cons: Less flexible, slightly more difficult to implement.
+
+**Aspect: How to implement `CombinedPredicate`**
+* **Alternative 1 (current choice):** Compose it with the 3 component predicates.
+    * Pros: Easier to modify and test.
+    * Cons: Less flexible when trying to combine multiple predicates (that may be of the same type).
+
+* **Alternative 2:** Use a `Predicate<Person>` and use the `or()` method to chain predicates.
+    * Pros: More flexible in usage.
+    * Cons: More difficult to modify and test.
+
+
+
+### Appointment Sidebar Feature
+
+The appointment sidebar is facilitated by `ModelManager`. It etends `Model` and stores and additional `SortedList<Appointment>` object that represents all the existing appointments.
+
+The `setAppointmentList()` method always check against `filteredPersons` to look for updates with regards to existing `Appointment` objects. Tg=he `getAppointmentList()` method is called once during startup of the program by `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the `sortedList<Appointment>` object within `modelManager`.
+
+#### Design Considerations:
+
+**Aspect: Where to create SortedList<Appointment>**
+* **Alternative 1 (current choice):** Implement it within `modelManager`
+    * Pros: `SortedAppointments` object references `filteredPersons` which ensures that the appointment sidebar corresponds with `persons` from `addressBook`.
+    * Cons: Errors with respect to `addressBook` will affect the appointment sidebar rendered.
+
+* **Alternative 2:** Implement it within `addressBook`
+    * Pros: `persons` and `appointmentList` are handled separately within `addressBook` and hence the appointment sidebar is not dependent on `persons` in `addressBook`
+    * Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer dependent on `filteredPersons`.
+
 ### \[Proposed\] Undo/redo feature
 
+### \[Proposed\] Undo/redo feature
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -219,7 +449,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/CommitActivityDiagram.png" width="400" />
 
 #### Design considerations:
 
@@ -368,9 +598,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 1b. User enters the wrong details.
+* 3a. User enters the wrong details.
 
-    * 1b1. System shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 1.
 
@@ -412,7 +642,78 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**U6: Assign financial plan to a client** \
+**Precondition:** NIL
+
+**MSS**
+
+1.  User requests to list clients
+2.  AddressBook shows a list of clients
+3.  User request to add financial plan to client’s contacts from the list via the `edit` command.
+4.  AddressBook changes the client’s contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. User enters the wrong details.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+**U7: Schedule appointment for a client** \
+**Precondition:** Client must exist before scheduling appointment.
+
+**MSS**
+
+1.  User requests to list clients
+2.  AddressBook shows a list of clients
+3.  User request to schedule appointment for client via the `schedule` command
+4.  AddressBook changes the client’s contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+  Use case ends.
+
+* 3a. User enters the wrong details.
+    * 3a1. System shows an error message.
+      Use case resumes at step 1.
+
+* 3b. User has an existing appointment scheduled.
+    * 3a1. System shows a warning message.
+      Use case resumes at step 4.
+
+**U8: Sort client's contacts** \
+**Precondition:** NIL
+
+**MSS**
+
+1. User requests to list clients
+2. AddressBook shows a list of clients
+3. User requests to sort list of clients (by appointment time or name)
+4. AddressBook updates ordering of clients' contacts.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+  Use case ends.
+
+* 3a. User enters the wrong details.
+    * 3a1. System shows an error message.
+      Use case resumes at step 1.
+
 *{More to be added}*
+
 
 ### Non-Functional Requirements
 
@@ -441,6 +742,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Central Repository**: A centralised storage location for all user data
 * **Contact details**: Name, email, phone number, next-of-kin name, next-of-kin phone number and home address of a client
 * **Manager**: A person who is a superior in charge of managing and mentoring a group of financial advisors.
+* **Lexicographical**: Generalisation of alphabetical order to include symbols or elements of a totally ordered set.
 
 --------------------------------------------------------------------------------------------------------------------
 
