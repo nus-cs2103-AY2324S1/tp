@@ -84,6 +84,20 @@ Examples:
 * `deleteMember 1 ` deletes the 1st member in the member list.
 * `deleteMember 10 ` deletes the 10th member in the member list.
 
+### Edit a Member: `editMember`
+Edits the member at the specified index with the specified fields.
+
+Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+
+* The index refers to the index number shown in the displayed member list.
+* The index **must be a positive integer** that is within the range of the length of the member list.
+* At least one field to edit must be provided.
+* Acceptable values for `GENDER`: `Male`, `Female`, `Others`.
+* Acceptable values for `EMAIL`: A string with an email extension (e.g. `@gmail.com`).
+
+Examples:
+* `editMember 1 a/RH t/Musician` edits the address and the tag of the 1st member in the member list.
+
 ### Create an Event : `createEvent`
 
 Creates a new event and adds it to the database.
@@ -231,22 +245,22 @@ If your changes to the data file makes its format invalid, CCACommander will dis
 
 ## Command summary
 
- Action                              | Format, Examples                                                                                                                                                                                                              
--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Create a member**                 | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader` 
- **Delete a member**                 | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`                                                                                                                                                                         
- **Edit a member**                   | coming soon...                                                                                                                                                                                                                
- **Create an event**                 | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g.`createEvent n/Party l/Raffles Hall d/16-09-2023 t/Fun`                                                                                                     
- **Delete an event**                 | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`                                                                                                                                                                            
- **Edit an event**                   | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g. `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1`                                                                             
- **Add member to an event**          | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`                                                                                                               
- **Delete member from an event**     | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`                                                                                                                                                             
- **Edit an enrolment**               | coming soon...                                                                                                                                                                                                                
- **List all members and all events** | `list`                                                                                                                                                                                                                        
- **View members of event**           | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`                                                                                                                                                                                
- **View events of member**           | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`                                                                                                                                                                             
- **Find member in list**             | coming soon...                                                                                                                                                                                                                
- **Find event in list**              | coming soon...                                                                                                                                                                                                                
- **Redo**                            | `redo`                                                                                                                                                                                                                        
- **Undo**                            | `undo`                                                                                                                                                                                                                        
- **Help**                            | coming soon...                                                                                                                                                                                                                
+Action | Format, Examples
+--------|------------------
+**Create a member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader`
+**Delete a member** | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
+**Edit a member** | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g.`editMember 1 a/One North`
+**Create an event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g.`createEvent n/Party l/Raffles Hall d/16-09-2023 t/Fun`
+**Delete an event** | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
+**Edit an event**                   | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g. `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1`                                                                            
+**Add member to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
+**Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
+**Edit an enrolment** | coming soon...
+**List all members and all events** | `list`
+**View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
+**View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
+**Find member in list** | coming soon...
+**Find event in list** | coming soon...
+**Redo** | `redo`
+**Undo** | `undo`
+**Help** | coming soon...
