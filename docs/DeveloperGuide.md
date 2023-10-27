@@ -166,7 +166,69 @@ Users can assign multiple names to an event by using multiple `n/` identifiers f
 
 When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. To un-assign a person, the user must manually specify `u/` with the `Name` to un-assign the person from the event
 
+### Ability to add persons
 
+#### Implementation details
+
+The 'add' feature involves creating a new "Person" object with optional fields and adding it to FumbleLog. 
+
+This is done using `AddCommand` which implements the `Command` interface. The `AddCommand` is then executed by `LogicManager` which calls `ModelManager` to add the person to the address book.
+
+As a result, the existing 'Person' class in AB3's implementation is enhanced to have the capacity of storing optional fields.
+Below is a class diagram of the enhanced 'Person' class:
+
+<puml src="diagrams/"PersonClassDiagram.puml" alt="PersonClassDiagram" />
+
+The `Person` object is now composed of the following optional attributes due to the refactored `add` feature:
+
+* `Name`: The name of the person. Compulsory field.
+* `Phone`: The phone number of the person. Optional field.
+* `Email`: The email address of the person. Optional field.
+* `Address`: The address of the person. Optional field.
+* `Birthday`: The birthday of the person. Optional field.
+* `Groups`: The groups that the person is associated with. Optional field.
+
+The [**`java.util.Optional<T>`**](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html) class is used to represent the optional attributes of the `Person` object.
+
+To add a person, the user must specify the name of the person using the `n/` prefix. The user can then specify the optional attributes of the person using the following prefixes:
+
+<box type="info">
+Except for the name, all the fields given to the `add` command are optional.
+</box>
+
+The flow for the `add` command is described by the following sequence diagram:
+
+<puml src="diagrams/"AddPersonSequenceDiagram.puml" alt="AddPersonSequenceDiagram" />
+
+### Feature details
+1. The application will validate the arguments supplied by the user; whether the "NAME" is unique and supplied, and whether the optional fields follow the correct format. 
+2. If the arguments are invalid, an error message will be shown to the user and prompts the user for a corrected input.
+3. If the arguments are valid, a `Person` object will be created with the fields supplied and stored in FumbleLog.
+
+#### Design Considerations
+
+**Aspect: Generic Design**
+
+The original implementation of AB3's `Person` class is refactored to have the capacity of storing optional fields. This is done by using the `java.util.Optional<T>` class to represent the optional attributes of the `Person` object.
+Furthermore, we have added additional fields into the `Person` class to allow users to store more information about the person, such as their birthday.
+
+As the original `add` command already exists in AB3, this feature can be implemented by enhancing the `add` command.
+
+Furthermore, we accounted for empty/null inputs in the optional fields by generating a NULL_INSTANCE for the optional fields when the user does not specify the optional fields. This design decision allowed us to easily check
+for empty/null inputs in the Person object by checking if the optional field is not equal to the NULL_INSTANCE, instead of doing null pointer and empty string checks.
+
+* **Alternative 1 (current choice):** Enhance the existing `add` command.
+  * Pros: 
+    * Easier to implement.
+    * Reuses the logic for the `add` command.
+  * Cons:
+    * Have to account for empty/null inputs in the optional fields when saving the data and testing it
+    * Have to account for empty/null inputs in the optional fields when displaying the data
+* **Alternative 2**: Create a new `add_optional` command.
+  * Pros: 
+    * Do not have to account for empty/null inputs in the optional fields when saving the data and testing it
+  * Cons:
+    * Inconveniences the user as they have to remember a new command to add a person with optional fields.
 
 ### \[Proposed\] Undo/redo feature
 
