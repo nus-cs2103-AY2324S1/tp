@@ -167,6 +167,7 @@ View Command handles both the viewing of all students and all appointments. The 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** There should be a diamond connecting the 3 separate branches
 but due to a limitation of PlantUML, the 3 branches leads to the "end" individually .
 </div>
+
 ### Student Notes feature
 
 The adding of student notes is facilitated by `NoteCommand`. It extends `Command` and allows the addition of a `Note`
@@ -190,6 +191,27 @@ to a `Student`.
     * Pros: Easier to implement
     * Cons: User will have to type much longer commands, since `Note` can be up to 200 characters long,
   leads to very lengthy commands
+
+### Cancel Appointment Feature
+
+The canceling of an appointment is facilitated by the `CancelCommand`. It extends `Command` and allows the user to cancel an appointment at a specified index.
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("cancel 1")` as an example.
+
+![Interactions inside the Logic component for "cancel 1" command](images/CancelSequenceDiagram.png)
+
+#### Design Considerations:
+
+**Aspect: How an Appointment should be canceled**
+
+* **Current Choice:** Create a new `CancelCommand` class which handles the cancellation of an appointment.
+    * Pros: User input will be shorter and easier to read.
+    * Cons: More work to implement.
+
+* **Alternative 1:** Add appointment cancellation functionality to the existing `DeleteCommand`.
+    * Pros: Easier to implement.
+    * Cons: User will have to type longer commands since appointment details can be lengthy, which may lead to more complex commands.
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
