@@ -90,7 +90,8 @@ public class SampleDataUtil {
         Subject math = new Subject("MATHEMATICS");
         Subject bio = new Subject("BIOLOGY");
         TaskList taskList = new TaskList();
-        List<Task> tasks = Arrays.asList(new Task("first"), new Task("second"), new Task("third"));
+        List<Task> tasks = Arrays.asList(new Task("first"), new Task("second"),
+                new Task("third long words test sentrence bomvasnv haha loanfafsszzzz sss"));
         taskList.setTasks(tasks);
         return new Lesson[] {
             new Lesson(startLesson1, endLesson1, math, taskList, new Name("Alex Yeoh")),

@@ -2,11 +2,14 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.lessons.Lesson;
@@ -39,6 +42,8 @@ public class LessonDetailListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Task> taskListView;
+    @FXML
+    private VBox taskListContainer;
 
 
     /**
@@ -61,8 +66,17 @@ public class LessonDetailListPanel extends UiPart<Region> {
         endTime.setText(lesson.getEndTimeStr());
         students.setText(lesson.getStudentsStr());
         subject.setText(lesson.getSubjectStr());
-        taskListView.setItems(lesson.getTaskList());
-        taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
+
+//        taskListView.setItems(lesson.getTaskList());
+//        taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
+
+        taskListContainer.getChildren().clear();
+        ObservableList<Task> taskList = lesson.getTaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            taskListContainer.getChildren().add(new TaskCard(task, i + 1).getRoot());
+        }
+
     }
 
     class TaskListViewCell extends ListCell<Task> {
