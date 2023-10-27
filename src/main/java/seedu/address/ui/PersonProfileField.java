@@ -14,7 +14,7 @@ public class PersonProfileField extends UiPart<SplitPane> {
     @FXML private TextField valueField;
     @FXML private Label keyLabel;
     private final PersonProfile personProfile;
-    private PersonProfile.Field field;
+    private final PersonProfile.Field field;
     private String value;
     private State state;
     private boolean changesSubmitted = false;
@@ -54,6 +54,7 @@ public class PersonProfileField extends UiPart<SplitPane> {
             valueLabel.setVisible(false);
             valueField.setVisible(true);
             valueField.requestFocus();
+            personProfile.clearFeedback();
             break;
         default:
             initialize();
@@ -73,7 +74,6 @@ public class PersonProfileField extends UiPart<SplitPane> {
     }
 
     private void handleConfirmation() {
-        System.out.println("Confirmation detected");
         String newValue = getTextOrNull();
         if (newValue != null && !field.isValid(newValue)) {
             personProfile.sendFeedback(INVALID_FIELD_FEEDBACK + field.getDisplayName());
@@ -88,7 +88,6 @@ public class PersonProfileField extends UiPart<SplitPane> {
     }
 
     private void handleCancellation() {
-        System.out.println("Cancellation detected");
         valueField.setText(value);
         valueLabel.setText(value);
         personProfile.replaceFieldIfValid(field, value);
@@ -124,7 +123,6 @@ public class PersonProfileField extends UiPart<SplitPane> {
 
     @FXML
     void setFocus() {
-        System.out.println("Focus detected");
         updateState(State.TEXT_FIELD);
     }
 

@@ -1,23 +1,19 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnimalType;
 import seedu.address.model.person.Availability;
@@ -27,8 +23,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * An interactive UI component that contains all the fields associated with a {@link Person}, and their values.
@@ -217,5 +211,9 @@ public class PersonProfile extends UiPart<Region> {
 
     void sendFeedback(String feedback) {
         mainWindow.sendFeedback(feedback);
+    }
+
+    void clearFeedback() {
+        mainWindow.sendFeedback("");
     }
 }
