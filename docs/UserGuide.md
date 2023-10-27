@@ -176,12 +176,12 @@ Examples:
 * `unenrol m/1 e/5` unlinks the 1st member in the member list from the 5th event in the event list.
 * `unenrol m/5 e/1` unlinks the 5th member in the member list from the 1st event in the event list.
 
-### Edit an enrolment: editAttendance
-Edits the attendance details of a specified member at a specified event with the specified attributes.
+### Edit an enrolment: editEnrolment
+Edits the enrolment details of a specified member at a specified event with the specified attributes.
 
-Format: `editAttendance m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
+Format: `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
-* Edits the specified `MEMBER_INDEX`'s attendance of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
+* Edits the specified `MEMBER_INDEX`'s enrolment of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
 * The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the displayed member/event list.
 * The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
 * At least one field to edit must be provided.
@@ -189,7 +189,7 @@ Format: `editAttendance m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMA
 * `REMARK` can take any value, but should not be blank.
 
 Examples:
-* `editAttendance m/1 e/1 h/0 r/Absent due to Covid` edits the attendance of the 1st member in the member list for the 1st event of the event list to be `0` hours and have a remark `Absent due to Covid`.
+* `editEnrolment m/1 e/1 h/0 r/Absent due to Covid` edits the enrolment of the 1st member in the member list for the 1st event of the event list to be `0` hours and have a remark `Absent due to Covid`.
 
 ### List all Members and all Events : `list`
 
@@ -302,7 +302,7 @@ Action | Format, Examples
 **Edit an event** | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]` <br> e.g. `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1`
 **Add member to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
 **Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
-**Edit an enrolment** | `editAttendance m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editAttendance m/1 e/1 h/0 r/Absent due to Covid`
+**Edit an enrolment** | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnrolment m/1 e/1 h/0 r/Absent due to Covid`
 **List all members and all events** | `list`
 **View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
 **View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
