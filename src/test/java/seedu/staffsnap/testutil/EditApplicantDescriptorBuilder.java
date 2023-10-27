@@ -11,6 +11,7 @@ import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
 import seedu.staffsnap.model.interview.Interview;
+import seedu.staffsnap.model.interview.Rating;
 
 /**
  * A utility class to help with building EditApplicantDescriptor objects.
@@ -76,7 +77,8 @@ public class EditApplicantDescriptorBuilder {
      * that we are building.
      */
     public EditApplicantDescriptorBuilder withInterviews(String... interviews) {
-        List<Interview> interviewList = Stream.of(interviews).map(Interview::new).collect(Collectors.toList());
+        List<Interview> interviewList = Stream.of(interviews).map(interview ->
+                new Interview(interview, new Rating("-"))).collect(Collectors.toList());
         descriptor.setInterviews(interviewList);
         return this;
     }

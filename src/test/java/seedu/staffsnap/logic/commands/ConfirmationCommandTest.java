@@ -1,22 +1,20 @@
 package seedu.staffsnap.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.staffsnap.testutil.TypicalApplicants.getUnsortedApplicantBook;
-
-import java.util.Objects;
+import static seedu.staffsnap.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.staffsnap.model.Model;
 import seedu.staffsnap.model.ModelManager;
-import seedu.staffsnap.model.UserPrefs;
 
-class ConfirmationCommandTest {
 
+public class ConfirmationCommandTest {
     @Test
-    void execute() {
-        Model model = new ModelManager(getUnsortedApplicantBook(), new UserPrefs());
-        ConfirmationCommand command = new ConfirmationCommand();
-        assertTrue(Objects.equals(command.execute(model), new CommandResult(ConfirmationCommand.CONFIRM)));
+    public void execute_emptyApplicantBook_success() {
+        Model model = new ModelManager();
+        Model expectedModel = new ModelManager();
+
+        assertCommandSuccess(new ConfirmationCommand(), model, ConfirmationCommand.CONFIRM, expectedModel);
     }
+
 }

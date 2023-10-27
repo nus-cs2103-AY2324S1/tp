@@ -13,6 +13,7 @@ import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
 import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
+import seedu.staffsnap.model.interview.Rating;
 
 /**
  * Contains utility methods for populating {@code ApplicantBook} with sample data.
@@ -22,22 +23,25 @@ public class SampleDataUtil {
         return new Applicant[] {
             new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Position("Software Engineer"),
-                getInterviewList("screening"), Status.OFFERED),
+                getInterviewList(new Interview("behavioral", new Rating("7.5")),
+                        new Interview("technical", new Rating("7.0"))), Status.OFFERED),
             new Applicant(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Position("Testing Engineer"),
-                getInterviewList("technical", "screening"), Status.UNDECIDED),
+                new Position("Software Engineer"),
+                getInterviewList(new Interview("behavioral", new Rating("7.9")),
+                        new Interview("technical", new Rating("8.0"))), Status.UNDECIDED),
             new Applicant(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                 new Email("charlotte@example.com"), new Position("Software Engineer"),
-                getInterviewList("behavioral"), Status.REJECTED),
+                getInterviewList(new Interview("behavioral", new Rating("8.8")),
+                        new Interview("technical", new Rating("8.7"))), Status.REJECTED),
             new Applicant(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Position("Staff Engineer"),
-                getInterviewList("technical"), Status.OFFERED),
+                new Position("Frontend Engineer"),
+                getInterviewList(new Interview("behavioral", new Rating("7.7"))), Status.OFFERED),
             new Applicant(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Position("DevOps Engineer"),
-                getInterviewList("technical", "behavioral"), Status.UNDECIDED),
+                new Position("Backend Engineer"),
+                getInterviewList(new Interview("behavioral", new Rating("7.9"))), Status.UNDECIDED),
             new Applicant(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Position("Software Engineer"),
-                getInterviewList("screening", "technical", "behavioral"), Status.REJECTED)
+                new Position("Testing Engineer"),
+                getInterviewList(new Interview("behavioral", new Rating("6.0"))), Status.REJECTED)
         };
     }
 
@@ -52,9 +56,8 @@ public class SampleDataUtil {
     /**
      * Returns a interview set containing the list of strings given.
      */
-    public static List<Interview> getInterviewList(String... strings) {
-        return Arrays.stream(strings)
-                .map(Interview::new)
+    public static List<Interview> getInterviewList(Interview... interviews) {
+        return Arrays.stream(interviews)
                 .collect(Collectors.toList());
     }
 

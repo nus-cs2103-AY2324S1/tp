@@ -3,8 +3,10 @@ package seedu.staffsnap.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
+import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.staffsnap.logic.parser.ParserUtil.arePrefixesPresent;
+
+import java.util.NoSuchElementException;
 
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.logic.commands.EditInterviewCommand;
@@ -24,29 +26,32 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
     public EditInterviewCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INTERVIEW, PREFIX_TYPE);
+                ArgumentTokenizer.tokenize(args, PREFIX_INTERVIEW, PREFIX_TYPE, PREFIX_RATING);
 
         Index applicantIndex;
         Index interviewIndex;
 
         try {
             applicantIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
+            interviewIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INTERVIEW).get());
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE), pe);
+        } catch (NoSuchElementException ex) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE), ex);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_INTERVIEW, PREFIX_TYPE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInterviewCommand.MESSAGE_USAGE));
-        }
-
-        interviewIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INTERVIEW).get());
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INTERVIEW, PREFIX_TYPE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INTERVIEW, PREFIX_TYPE, PREFIX_RATING);
 
         EditInterviewDescriptor editInterviewDescriptor = new EditInterviewDescriptor();
         if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
             editInterviewDescriptor.setType(ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get()));
         }
+        if (argMultimap.getValue(PREFIX_RATING).isPresent()) {
+            editInterviewDescriptor.setRating(ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get()));
+        }
+
         if (!editInterviewDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditInterviewCommand.MESSAGE_NOT_EDITED);
         }
