@@ -195,7 +195,7 @@ Examples:
 
 Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
 
-Format: ``search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])``
+Format: `search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])`
 
 #### Search job applicants by name
 
@@ -336,7 +336,7 @@ Action                     | Format, Examples
 **Delete**                 | `delete INDEX`<br> e.g., `delete 3`
 **Set**                    | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`
 **Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Search**                 | `search (n/KEYWORD [MORE KEYWORDS] | st/KEYWORD [MORE KEYWORDS] | t/KEYWORD [MORE KEYWORDS])`<br> e.g., `search n/alex st/interviewed`
 **List**                   | `list s/ATTRIBUTE` <br> e.g. `list s/name`
 **Help**                   | `help`
 
