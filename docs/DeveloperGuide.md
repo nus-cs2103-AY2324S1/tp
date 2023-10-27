@@ -195,6 +195,7 @@ Once the indexes of the `Person` and `Meeting` objects to view (if any) are stor
    - For the case of `editc` and `editm`, this is judged to not be an issue as the view commands still obey their definition of displaying the item at a specified list index.
    - For the case of `deletec`, `deletem`, `findc` and `findm`, a simple fix is to simply set the stored `Index` to null only for these commands.
 
+
 ### Find meeting feature
 
 #### Behaviour and Implementation

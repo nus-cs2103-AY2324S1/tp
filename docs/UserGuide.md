@@ -81,6 +81,7 @@ Adds a contact to OutBook.
 
 Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [s/STATUS] [r/REMARK] [t/TAG]…​`
 
+
 * NAME, PHONE_NUMBER, EMAIL and LAST_CONTACTED_TIME are compulsory fields. STATUS, REMARK and TAG are optional.
 * PHONE_NUMBER must contain only numbers, and be at least 3 digits long.
 * EMAIL must be of the format local-part@domain and adhere to the following constraints:
