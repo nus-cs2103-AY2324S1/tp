@@ -34,6 +34,10 @@ public class Lesson {
         this.end = end.getTime();
     }
 
+    public String getTimeSlot() {
+        return begin.toString() + " - " + end.toString();
+    }
+
     @Override
     public String toString() {
         return day.toString() + ", " + begin.toString() + " - " + end.toString();

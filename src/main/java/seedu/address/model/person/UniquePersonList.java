@@ -33,6 +33,10 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
+        internalList.stream()
+                .filter(person -> person.getDay().toString().equals("Sun"))
+                .forEach(System.out::println);
+
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
