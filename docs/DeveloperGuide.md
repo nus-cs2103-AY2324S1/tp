@@ -154,6 +154,59 @@ Classes used by multiple components are in the `seedu.ccacommander.commons` pack
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Enrol Feature
+The enrol feature allows users to link a member to an event in order to keep track of their attendance and contributions to the event.
+
+This section will explain how the enrol feature was implemented and the various design considerations when implementing the feature.
+
+#### Implementation
+The enrollment mechanism is facilitated by `EnrolCommand`. It extends `Command`.
+The method, `EnrolCommand#execute(Model model)`, performs a validity check and adds a member's attendance for a particular event if
+all the supplied parameters are valid.
+
+The sequence diagram below shows how the `Model` and `LogicManager` components interact when a `EnrolCommand` is executed with user input
+`enrol m/1 e/1 h/1 r/Role: Photographer` represented by `...`
+
+![EnrolSequenceDiagram](images/EnrolSequenceDiagram.png)
+
+1. `LogicManager` uses the `CcaCommanderParser` class to parse the user command, creating a new instance of `EnrolCommandParser` object.
+2. The `EnrolCommandParser` creates a new instance of a `EnrolCommand` object and returns it to `CcaCommanderParser`
+1. `CcaCommanderParser` encapsulates the `EnrolCommand` object as a `Command` object which is executed by
+   the `LogicManager`.
+1. The command execution calls `Model#getFilteredMemberList()` and `Model#getFilteredEventList()` to get the desired `member` and
+   `event` respectively using indexes supplied by the user.
+1. Next, the command execution creates a new instance of an `Attendance` object.
+1. `Model#createAttendance()` is then called, adding the new `Attendance` object to the `uniqueAttendanceList` object in `model`.
+1. The change resulting from the command's execution is saved using the `Model#commit()` method for the `undo`/`redo` feature.
+1. A `CommandResult` object which encapsulates the result of the command execution is passed back to the `Ui`.
+
+The following activity diagram shows how the `EnrolCommand` works.
+
+![EnrolActivityDiagram](images/EnrolActivityDiagram.png)
+
+#### Design Considerations
+
+##### Aspect 1: `EnrolCommand` parameters
+
+* **Alternative 1 (current choice):** `EnrolCommand` has parameters `Name memberName`, `Name eventName`, `Hours hours` and `Remark remark`.
+    * Pros:
+        * Less complex code reduces the possibility of bugs.
+        * Reduced coupling, enhancing maintainability
+    * Cons:
+        * Not standardised with other creation commands.
+
+* **Alternative 2:** `EnrolCommand` has parameter `Attendance attendance`
+    * Pros:
+        * Standardised with other creation commands
+    * Cons:
+        * More complex code leading to higher possibility of bugs.
+        * Increased coupling, reducing maintainability.
+
+Alternative 1 was chosen because the cons of implementing alternative 2 outweighs the benefits derived from it. Alternative 2
+would require `EnrolCommandParser` to have knowledge of the `Model`. This would result in an increased coupling as it would
+then have greater dependence on more modules. Hence, while Alternative 1 would result in the `EnrolCommand` to be not standardised
+with other create commands, it provides a simpler implementation with fewer changes needed while also maintaining ease of testing.
+
 ### Undo/Redo Feature
 
 The Undo/Redo feature allows the user to revert commands that were entered wrongly.
@@ -193,7 +246,7 @@ Step 4. The user now decides that adding the member was a mistake, and decides t
 ![UndoRedoVersion3](images/UndoRedoVersion3.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `versionPointer` is at index 0, pointing to the initial CcaCommander version, then there are no previous CcaCommander versions to restore. The `undo` command uses `Model#canUndo()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+than attempting to perform the undo.[DeveloperGuide.md](..%2F..%2FDeveloperGuide.md)
 
 </div>
 
