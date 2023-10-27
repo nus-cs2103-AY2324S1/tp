@@ -230,6 +230,44 @@ The following activity diagram summarises what happens when a user executes the 
   * Pros: Allows more flexibility, now the user can find persons whose expiry dates is not only 30 days.
   * Cons: Need to determine the range of days allowed for the user to enter, security concerns such as integer overflow could occur if user decides to perform malicious activities.
 
+### `sort`
+The `sort` command allows the user to view the profiles arranged in order of earliest to latest policy expiration date, with those profiles that have no policy data placed at the end of the late
+
+#### Implementation:
+The sorted list will be displayed in the UI. The remind mechanism is facilitated by `Model` through the following operations:
+* `Model#SortData()` - The Unique Person List of the Address Book is sorted using a PolicyExpiryDateComparator that implements Comparator<Person>
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step:
+
+Step 1. The user wishes to see whose policy expires soon.
+
+Step 2. The user executes ‘sort’ command to determine the persons whose insurance is going to finish the soonest. The ‘Main Window’ will call ‘LogicManager#execute(String s)’. The ‘LogicManager’ in turn calls ‘AddressBookParser#parseCommand(String s)’. Here the input is matched to ‘SortCommandParser’ and ‘ParseCommand#execute()’ is called.
+
+Step 3. ‘SortCommandParser’ creates an instance of ‘SortCommand’ that is returned to ‘LogicManager#execute(String) s’. The method ‘CommandResult#execute()’ is then called where `Model#SortData()`is called **Note** If an additional argument is added following ‘sort’ command, for instance ‘sort 2’, no error will be thrown and the sorted list will be shown as normal. This is because the implementation ignores the arguments.
+
+Step 4. Finally, a `CommandResult` instance will be created and returned to display sorted list of Persons to the user.
+
+The following sequence diagram shows how the `sort` command works:
+
+![SortSequenceDiagram1](images/SortSequenceDiagram1.png)
+
+![SortSequenceDiagram2](images/SortSequenceDiagram2.png)
+
+#### Design considerations
+
+**Aspect: Whether ‘sort’ command should take in a value.**
+* Alternative 1: (current choice) ‘sort’ command does not take in a value but does not an exception if an input is produced.
+* Pros: Prevents the need for un necessary exceptions that might affect the running of the program
+* Cons: The arguments might be nonsensical, for instance ‘sort 2’ could instead be used to provide the 2 most closely expiring profiles.
+* Alternative 2 : `sort` command does not take in a value and produces exception if an input is produced
+    * Pros: Prevents nonsensical inputs
+    * Cons: Lack of functionality as specified for alternative 1. There is also a lack of flexibility.
+* Alternative 3 : `sort` command takes in a value so the user can specify how many profiles they wish to view
+    * Pros: Provides maximum flexibility and functionality
+
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
