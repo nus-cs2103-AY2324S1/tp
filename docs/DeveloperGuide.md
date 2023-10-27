@@ -153,6 +153,13 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Band Feature 
+The user can add a new Band entity to the storage through the `addb` Command.
+
+Within the execute method of the command, a check is done to ensure that the model does not currently contain the band
+to be added. This is achieved through the use of `Model#hasBand(Band)` method.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -442,6 +449,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b1. System shows a message showing the proper input format.
 
   Use case ends.
+
+**Use case: UC09 - Delete band**
+
+**MSS**
+
+1. User enters the band details they want to delete.
+2. User requests to delete band.
+3. BandConnect++ deletes the band.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User enters input wrongly
+* 2a1. System shows a message showing the proper input format.
+
+  Use case ends.
+
+**Use case: UC10 - View all musicians inside a band**
+
+**MSS**
+
+1. User enters the band details they want to view the members of.
+2. User requests view musicians inside the band.
+3. BandConnect++ shows the musicians inside the specified band.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User enters input wrongly
+* 2a1. System shows a message showing the proper input format.
+
+  Use case ends.
+
+
 *{More to be added}*
 
 
