@@ -38,8 +38,8 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
      */
     public AddressBookManager() {
         this.addressBooks = new HashMap<>();
-        addAddressBook(new AddressBook("Temp"));
-        setActiveAddressBook("Temp");
+        this.currentCourseCode = "Temp";
+        setAddressBook(new AddressBook("Temp"));
     }
 
     /**
@@ -81,11 +81,11 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
         requireNonNull(courseCode);
         this.currentCourseCode = courseCode.toUpperCase();
 
-        if (!this.addressBooks.containsKey(courseCode.toUpperCase())) {
+        if (!this.addressBooks.containsKey(currentCourseCode)) {
             throw new IllegalArgumentException("Address book does not exist");
         }
 
-        this.currentAddressBook = (AddressBook) this.addressBooks.get(courseCode.toUpperCase());
+        this.currentAddressBook = (AddressBook) this.addressBooks.get(currentCourseCode);
     }
 
     /**

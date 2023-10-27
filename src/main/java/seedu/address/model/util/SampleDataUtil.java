@@ -53,8 +53,7 @@ public class SampleDataUtil {
         }
 
         sampleAbm.addAddressBook(sampleCS2030SAb);
-        sampleAbm.addAddressBook(sampleCS2103TAb);
-        sampleAbm.setActiveAddressBook("CS2030S");
+        sampleAbm.setAddressBook(sampleCS2103TAb);
 
         return sampleAbm;
 
