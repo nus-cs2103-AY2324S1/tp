@@ -38,7 +38,7 @@ public class AppointmentTest {
     public void constructor_invalidAppointmentTime_throwsIllegalArgumentException() {
         Doctor validDoctor = DEREK;
         Patient validPatient = AMY;
-        LocalDateTime invalidAppointmentTime = LocalDateTime.parse("2022/02/14 13:30:00"); // null?
+        LocalDateTime invalidAppointmentTime = null;
         assertThrows(IllegalArgumentException.class, () -> new Appointment(validDoctor, validPatient, invalidAppointmentTime));
     }
 
