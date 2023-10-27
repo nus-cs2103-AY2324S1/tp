@@ -3,12 +3,18 @@ layout: page
 title: User Guide
 ---
 
-TAvigator is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still
-having the benefits of a Graphical User Interface (GUI). If you can type fast, TAvigator can get your contact management
-tasks done faster than traditional GUI apps.
+TAvigator is a **desktop app** targeted towards Teaching Assistants **for managing contacts, optimized for use via a 
+Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type 
+fast, TAvigator can get your contact management tasks done faster than traditional GUI apps. We offer a one-stop
+solution to manage your student details, including attendance records and assignment details.
 
-* Table of Contents
-{:toc}
+### Table of Contents
+
+- [Quick start](#Quick-start)
+- [Features](#features)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -16,15 +22,15 @@ tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `tavigator.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-4/tp/releases).
+2. Download the latest `tavigator.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TAvigator.
+3. Copy the file to the folder you want to use as the _home folder_ for your TAvigator.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tavigator.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tavigator.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list students` : Lists all contacts.
@@ -37,7 +43,7 @@ tasks done faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -83,20 +89,44 @@ Creates a new contact with the specified name and course code.
 ![add contact](images/addContact.png)
 
 Format: `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]…`
+
+* `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `PHONE_NUMBER` should be a string made up of numbers
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space.
+
 Examples:
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E`
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2`
+
+### Editing a contact : `edit`
+
+Edits the contact details.
+
+![edit contact](images/editContact.png)
+
+Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUTORIAL_GROUP]...`
+
+* Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+
+Examples:
+*  `edit 1 n/Tan Liyan` Edits the name of the first person to be Tan Liyan.
+*  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tags.
 
 ### Marking attendance of student: `mark`
 
 Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER
 [r/REASON_OF_ABSENCE]`
+
 * Marks the attendance of one or more student corresponding to the `STUDENT_NAME` or `STUDENT_ID`.
 * To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
 * If a student is present, `REASON_OF_ABSENCE` is not required.
 * If a student is absent, `REASON_OF_ABSENCE` is mandatory.
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
-* `STUDENT_ID` should be a string made up of alphabetical characters, with no special characters or space.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space.
 * `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
 
 ![mark attendance](images/markAttendance.png)
@@ -144,24 +174,6 @@ Shows a list of students.
 
 Format: `list students`
 *  Shows a list of all students.
-
-### Editing a contact : `edit`
-
-Edits the contact details.
-
-![edit contact](images/editContact.png)
-
-Format: `edit INDEX [n/STUDENT_NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSE_CODE TUTORIAL_GROUP]...`
-
-* Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
-
-Examples:
-*  `edit 1 n/Tan Liyan` Edits the name of the first person to be Tan Liyan.
-*  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tags.
 
 ### Adding a filter: `filter add`
 
@@ -228,7 +240,7 @@ Examples:
 * `list students` followed by `delete 2` deletes the 2nd person in TAvigator.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Deleting a person : `delete all`
+### Deleting all students : `delete all`
 
 Deletes all students from current address book or the specified tutorial group in the current address book.
 
@@ -290,15 +302,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]…` <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2`                                     |
-| **Clear**  | `clear`                                                                                                                                                                                                         |
-| **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                                                      |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSECODE TUTORIALGROUPID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                                                               |
-| **Exit**   | `exit`                                                                                                                                                                                                          |
-| **Filter** | `filter [add/delete/clear] [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`                                                                                                                                          |
-| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… \| id/STUDENT_ID [STUDENT_ID]…`<br> e.g., `find n/Anthony Yiqiao`                                                                                                          |
-| **List**   | `list attendance tn/TUTORIALNO [tg/TUTORIALGROUPID]` `list students`                                                                                                                                            |                                                           |
-| **Help**   | `help`                                                                                                                                                                                                          |
-| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \| id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
+| Action     | Format, Examples                                                                                                                                                            |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/COURSE_CODE TUTORIAL_GROUP]…` <br> e.g., `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/CS2103T G2` |
+| **Clear**  | `clear`                                                                                                                                                                     |
+| **Delete** | `delete all [tg/TUTORIALGROUPID]` `delete INDEX` <br> e.g., `delete all tg/G10` `delete 3`                                                                                  |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/COURSECODE TUTORIALGROUPID]...`<br> e.g., `edit 1 n/Tan Liyan` `edit 2 p/92345678 t/`                           |
+| **Exit**   | `exit`                                                                                                                                                                      |
+| **Filter** | `filter [add/delete/clear] [coursetg/COURSECODE] [tg/TUTORIALGROUPID]`                                                                                                      |
+| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… \                                                                                                                                      | id/STUDENT_ID [STUDENT_ID]…`<br> e.g., `find n/Anthony Yiqiao`                                                                                                          |
+| **List**   | `list attendance w/WEEKNUMBER [tg/TUTORIALGROUPID]` `list students`                                                                                                         |                                                           |
+| **Help**   | `help`                                                                                                                                                                      |
+| **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… \                                                                                                                                     | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEKNUMBER [r/REASON_OF_ABSENCE]`<br/> e.g., `mark id/A0123456E, A0123457E a/1 w/1` `mark id/A0123456E, A0123457E a/1 w/1` |
