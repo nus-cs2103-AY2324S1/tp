@@ -62,8 +62,7 @@ public class TypicalPersons {
      */
     public static AddressBookManager getTypicalAddressBookManager() {
         AddressBookManager abm = new AddressBookManager();
-        abm.addAddressBook(getTypicalAddressBook());
-        abm.setActiveAddressBook("Test Course Code");
+        abm.setAddressBook(getTypicalAddressBook());
         return abm;
     }
 

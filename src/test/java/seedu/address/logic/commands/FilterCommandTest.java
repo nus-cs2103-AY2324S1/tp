@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
 
 public class FilterCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookManager(), new UserPrefs());
 
     @Test
     public void execute_addValidFilter_success() {
@@ -25,7 +25,7 @@ public class FilterCommandTest {
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_ADD_SUCCESS, predicate);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBookManager(), new UserPrefs());
         expectedModel.addFilter(predicate);
 
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
@@ -42,7 +42,7 @@ public class FilterCommandTest {
 
         String expectedMessage = String.format(FilterCommand.MESSAGE_DELETE_SUCCESS, predicate);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBookManager(), new UserPrefs());
 
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
     }
@@ -61,7 +61,7 @@ public class FilterCommandTest {
 
         String expectedMessage = FilterCommand.MESSAGE_CLEAR_SUCCESS;
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBookManager(), new UserPrefs());
 
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
     }

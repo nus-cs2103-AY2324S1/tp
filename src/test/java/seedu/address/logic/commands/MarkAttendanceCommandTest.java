@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_SUCCESS;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
 
 import java.time.LocalDate;
 
@@ -26,9 +26,8 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class MarkAttendanceCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookManager(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBookManager(), new UserPrefs());
 
     /**
      * Test for marking attendance using a valid person's name.

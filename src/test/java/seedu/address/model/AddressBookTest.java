@@ -23,7 +23,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final AddressBook addressBook = new AddressBook("Test Course Code");
 
     @Test
     public void constructor() {
@@ -94,6 +94,11 @@ public class AddressBookTest {
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
+        }
+
+        @Override
+        public String getCourseCode() {
+            return "Test Course Code";
         }
 
         @Override
