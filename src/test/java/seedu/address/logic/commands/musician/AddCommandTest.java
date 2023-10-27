@@ -1,11 +1,11 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.musician;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.typicalentities.TypicalBands.ACE;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.band.AddBandCommand;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -25,65 +25,68 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.band.Band;
 import seedu.address.model.musician.Musician;
-import seedu.address.testutil.BandBuilder;
+import seedu.address.testutil.MusicianBuilder;
 
-public class AddBandCommandTest {
+public class AddCommandTest {
 
     @Test
-    public void constructor_nullBand_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddBandCommand(null));
+    public void constructor_nullMusician_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
     public void execute_musicianAcceptedByModel_addSuccessful() throws Exception {
-        AddBandCommandTest.ModelStubAcceptingBandAdded modelStub = new AddBandCommandTest.ModelStubAcceptingBandAdded();
-        Band validBand = new BandBuilder().build();
+        ModelStubAcceptingMusicianAdded modelStub = new ModelStubAcceptingMusicianAdded();
+        Musician validMusician = new MusicianBuilder().build();
 
-        CommandResult commandResult = new AddBandCommand(validBand).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validMusician).execute(modelStub);
 
-        assertEquals(String.format(AddBandCommand.MESSAGE_SUCCESS, Messages.format(validBand)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validMusician)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validBand), modelStub.bandsAdded);
+        assertEquals(Arrays.asList(validMusician), modelStub.musiciansAdded);
     }
 
     @Test
-    public void execute_duplicateBand_throwsCommandException() {
-        Band validBand = new BandBuilder().build();
-        AddBandCommand addBandCommand = new AddBandCommand(validBand);
-        AddBandCommandTest.ModelStub modelStub = new AddBandCommandTest.ModelStubWithBand(validBand);
+    public void execute_duplicateMusician_throwsCommandException() {
+        Musician validMusician = new MusicianBuilder().build();
+        AddCommand addCommand = new AddCommand(validMusician);
+        ModelStub modelStub = new ModelStubWithMusician(validMusician);
 
         assertThrows(CommandException.class,
-                AddBandCommand.MESSAGE_DUPLICATE_BAND, () -> addBandCommand.execute(modelStub));
+                AddCommand.MESSAGE_DUPLICATE_MUSICIAN, () -> addCommand.execute(modelStub));
     }
+
     @Test
     public void equals() {
-        Band coldplay = new BandBuilder().withName("Coldplay").build();
-        Band imagineDragons = new BandBuilder().withName("ImagineDragons").build();
-        AddBandCommand addColdplayCommand = new AddBandCommand(coldplay);
-        AddBandCommand addImagineDragonsCommand = new AddBandCommand(imagineDragons);
+        Musician alice = new MusicianBuilder().withName("Alice").build();
+        Musician bob = new MusicianBuilder().withName("Bob").build();
+        AddCommand addAliceCommand = new AddCommand(alice);
+        AddCommand addBobCommand = new AddCommand(bob);
 
         // same object -> returns true
-        assertTrue(addColdplayCommand.equals(addColdplayCommand));
+        assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddBandCommand addColdplayCommandCopy = new AddBandCommand(coldplay);
-        assertTrue(addColdplayCommand.equals(addColdplayCommandCopy));
+        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
-        assertFalse(addColdplayCommand.equals(1));
+        assertFalse(addAliceCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addColdplayCommand.equals(null));
+        assertFalse(addAliceCommand.equals(null));
 
         // different musician -> returns false
-        assertFalse(addColdplayCommand.equals(addImagineDragonsCommand));
+        assertFalse(addAliceCommand.equals(addBobCommand));
     }
+
     @Test
     public void toStringMethod() {
-        AddBandCommand addBandCommand = new AddBandCommand(ACE);
-        String expected = AddBandCommand.class.getCanonicalName() + "{toAdd=" + ACE + "}";
-        assertEquals(expected, addBandCommand.toString());
+        AddCommand addCommand = new AddCommand(ALICE);
+        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        assertEquals(expected, addCommand.toString());
     }
+
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -164,12 +167,12 @@ public class AddBandCommandTest {
         }
 
         @Override
-        public void updateFilteredBandMusicianList(Predicate<Band> predicate) {
+        public void updateFilteredBandList(Predicate<Band> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredBandList(Predicate<Band> predicate) {
+        public void updateFilteredBandMusicianList(Predicate<Band> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -198,38 +201,41 @@ public class AddBandCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
+
     /**
-     * A Model stub that contains a single band.
+     * A Model stub that contains a single musician.
      */
-    private class ModelStubWithBand extends AddBandCommandTest.ModelStub {
-        private final Band band;
-        ModelStubWithBand(Band band) {
-            requireNonNull(band);
-            this.band = band;
+    private class ModelStubWithMusician extends ModelStub {
+        private final Musician musician;
+
+        ModelStubWithMusician(Musician musician) {
+            requireNonNull(musician);
+            this.musician = musician;
         }
 
         @Override
-        public boolean hasBand(Band band) {
-            requireNonNull(band);
-            return this.band.isSameBand(band);
+        public boolean hasMusician(Musician musician) {
+            requireNonNull(musician);
+            return this.musician.isSameMusician(musician);
         }
     }
+
     /**
-     * A Model stub that always accept the band being added.
+     * A Model stub that always accept the musician being added.
      */
-    private class ModelStubAcceptingBandAdded extends AddBandCommandTest.ModelStub {
-        final ArrayList<Band> bandsAdded = new ArrayList<>();
+    private class ModelStubAcceptingMusicianAdded extends ModelStub {
+        final ArrayList<Musician> musiciansAdded = new ArrayList<>();
 
         @Override
-        public boolean hasBand(Band band) {
-            requireNonNull(band);
-            return bandsAdded.stream().anyMatch(band::isSameBand);
+        public boolean hasMusician(Musician musician) {
+            requireNonNull(musician);
+            return musiciansAdded.stream().anyMatch(musician::isSameMusician);
         }
 
         @Override
-        public void addBand(Band band) {
-            requireNonNull(band);
-            bandsAdded.add(band);
+        public void addMusician(Musician musician) {
+            requireNonNull(musician);
+            musiciansAdded.add(musician);
         }
 
         @Override
@@ -237,4 +243,5 @@ public class AddBandCommandTest {
             return new AddressBook();
         }
     }
+
 }
