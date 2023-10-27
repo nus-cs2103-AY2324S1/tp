@@ -7,19 +7,45 @@ title: User Guide
 
 TutorConnect is an address book made for **tuition centre coordinators** to easily track and schedule tuition classes.
 
+Say goodbye to scheduling conflicts and the complicated process of allocating classes to your tutors!
+
 Here’s an overview of what you can do with TutorConnect:
 * Store and edit information about your tutors
 * Create and plan your tutor availability and schedule
 * View upcoming schedules
 
-On top of these functionalities, we believe that tuition centre management must be efficient. Therefore, TutorConnect is **optimised for users who can type fast** and utilise the [Command Line Interface (CLI)](#glossary) to complete tasks using the keyboard faster than using the mouse.
-
-* Table of Contents
-{:toc}
+Sounds good, right? On top of these functionalities, we believe in bringing you the most efficient scheduling tool. 
+TutorConnect is **optimised for users who can type fast** and utilise the [Command Line Interface (CLI)](#glossary) to complete tasks using the keyboard faster than using the mouse.
 
 --------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+* Table of Contents
+{:toc}
+--------------------------------------------------------------------------------------------------------------------
 
-## Common Notation
+## Usage of the User Guide
+
+This User Guide is designed to be used alongside TutorConnect, for you to make the most of the app and get the most
+enjoyable experience tracking and scheduling tuition classes.
+
+A warm welcome to TutorConnect! Before we dive into the details, let's get you started with a quick overview of how 
+to navigate and use this User Guide successfully.
+
+For **Beginner Users**, we're thrilled to have you onboard! Get started with a [Tutorial](#tutorconnect-tutorial--for-new-users-) here.
+
+For **Experienced Users**, thank you for choosing TutorConnect! You may refer to the [Command Summary](#command-summary) here.
+
+### Navigating the User Guide
+TutorConnect's User Guide is made with you mind. It is designed to be user-friendly and easy to navigate. Here are a 
+few tips for smooth navigation:
+* Hyperlinks: Throughout this guide, you'll find [hyperlinks](#usage-of-the-user-guide) that can take you to related sections or external 
+  resources. Click on these links to access additional information or jump to different parts of the guide.
+* Back to Top Button: At the end of each section, you'll find a [Back To Top](#table-of-contents) button, to return 
+  you to the Table of Contents.
+
+### Common Notation
+Throughout this User Guide, you will also find some common notations, to provide you with extra information you may 
+need. Look out for these coloured boxes!
 
 <div markdown="block" class="alert alert-success">
 
@@ -45,9 +71,13 @@ On top of these functionalities, we believe that tuition centre management must 
 
 </div>
 
+[Back To Top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
+
+Welcome to TutorConnect! We are excited to get you started with a more efficient scheduling method.
 
 1. Ensure you have Java `11` installed in your Computer. To verify, perform the following steps:
     1. Open a terminal. Refer to the following guides on how:
@@ -74,16 +104,10 @@ On top of these functionalities, we believe that tuition centre management must 
 
    </div>
 
-5. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Navigating the Interface
+### Navigating the Interface
 
 TutorConnect comes equipped with a [GUI](#glossary) interface that provides visual feedback to you.
 Below is a quick overview of the various components of our interface.
-
-### Quick Orientation
 
 ![ui overview](images/uiOverview.png)
 
@@ -93,17 +117,26 @@ Below is a quick overview of the various components of our interface.
 | Result Display | Displays the results of your commands.<br/>Any error messages will also be displayed here. | 
 | Tutor Details  | Contains information related to the tutor like name, phone number etc.                     |
 
+[Back To Top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## TutorConnect Tutorial (for new users)
 
 Hello and welcome to TutorConnect! We're delighted you've chosen our platform to manage your tuition center's tutors and schedules. 
 
-This tutorial aims to guide you through the essential features and functionalities of TutorConnect that you will use on a day-to-day basis.
-
 Before we begin, please ensure that you have viewed the following sections of the guide:
 * [Quick Start](#quick-start) to help you get TutorConnect up and running.
 * [Navigating the Interface](#navigating-the-interface) to get you familiarised on how to navigate TutorConnect.
+
+This tutorial aims to guide you through the essential features and functionalities of TutorConnect that you will use 
+on a day-to-day basis. You will be adding your first tutor and corresponding schedule!
+
+Click on any of these below to jump to the respective sections of the guide!
+* [Start](#start)
+* [Adding your first tutor](#adding-your-first-tutor)
+* [Planning your schedules](#planning-your-schedules)
+* [Viewing your scheudles](#viewing-your-tutorsschedules)
 
 ### Start
 ![start](images/tutorial/start.png)
@@ -136,7 +169,7 @@ To assign John Doe that schedule:
    ![tutor-index](images/tutorial/tutor-index.png)
 2. Simply type into the Command Box: `add-s 1 st/2023-10-01T09:00 et/2023-10-01T11:00`
 3. Hit enter.
-4. Voila! John Doe now has a schedule on **1 October 2023** from **9AM to 11AM**. 
+4. Tada! John Doe now has a schedule on **1 October 2023** from **9AM to 11AM**. 
 
 ### Viewing Your Tutors/Schedules
 
@@ -146,39 +179,29 @@ Now that you have schedules in TutorConnect, you can view them using the [**list
 
 1. Simply type into the Command Box: `list-s`
 2. Hit enter.
-3. Voila! You can view all your schedules in TutorConnect.
+3. Amazing! You can view all your schedules in TutorConnect.
 
 Similarly, you can use the [**list-t**](#listing-all-tutors-list-t) command to go back to viewing all your tutors instead.
 
 Congratulations! You have successfully added your first tutor and schedule to TutorConnect. We hope that this tutorial has helped guide you through the basic features of TutorConnect. Please refer to the [**Features Section**](#features) to see what else TutorConnect can do. Alternatively visit the [**FAQ**](#faq) to view the frequently asked questions.
 
+[Back To Top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+From pairing classes with tutors to managing your tuition centre schedules, TutorConnect provides you with a 
+fuss-free solution for all your scheduling needs. This section shows you how to use TutorConnect to its full 
+potential. Let's get started!
 
-<div markdown="block" class="alert alert-info">
+### Tutor Related Features
 
-**:information_source: Command Format:**<br>
+Tutors are the core of your tuition centre management. This section will show you all the features related to 
+tracking tutor information within your tuition centre.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)
-  will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple
-  lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+#### Adding a tutor: `add-t`
 
-</div>
-
-### Adding a tutor: `add-t`
-
-Adds a tutor to the address book.
+Adds a tutor to TutorConnect.
 
 ![add tutor](images/addTutor.png)
 
@@ -218,7 +241,7 @@ Adds a tutor to the address book.
 * `Emails should be of the format local-part@domain and adhere to the following constraints:`: Tutor email input was
   either invalid or blank.
 
-### Editing a tutor: `edit-t`
+#### Editing a tutor: `edit-t`
 
 Edits an existing tutor in the addressbook.
 
@@ -254,7 +277,7 @@ Edits an existing tutor in the addressbook.
 * `This tutor already exists in the address book.`: There is a tutor with the same name in the address book.
 * `At least one field to edit must be provided.`: There is no `n/`, `p/` or `e/` tag provided to edit a field.
 
-### Listing all tutors: `list-t`
+#### Listing all tutors: `list-t`
 
 Displays a list of all tutors in the address book in a table format.
 
@@ -280,7 +303,7 @@ Displays a list of all tutors in the address book in a table format.
     </div>
 
 
-### Locating tutors by name: `find`
+#### Locating tutors by name: `find`
 
 Find tutors whose names contain any of the given keywords.
 
@@ -314,7 +337,7 @@ Find tutors whose names contain any of the given keywords.
 **Error messages**:
 * `Invalid command format!`: No search keyword provided.
 
-### Deleting a tutor: `delete-t`
+#### Deleting a tutor: `delete-t`
 
 Deletes a tutor in the address book based on their index number in the table.
 
@@ -337,7 +360,13 @@ Deletes a tutor in the address book based on their index number in the table.
 * `Invalid command format!`: No tutor index provided or parameter given is not a numerical value.
 * `Tutor index provided is out of range`: Given tutor index is out of range.
 
-### Adding a schedule: `add-s`
+[Back To Top](#table-of-contents)
+
+### Schedule Related Features
+As busy tuition centre coordinators, creating conflict-free schedules is no easy feat. Don't worry! TutorConnect has 
+you covered with our extensive list of features, all about creating and managing scheduling issues.
+
+#### Adding a schedule: `add-s`
 
 Adds a schedule to a specified tutor.
 
@@ -380,7 +409,7 @@ Adds a schedule to a specified tutor.
 * `This schedule already exists in the address book`: There is a schedule for the same tutor with the same start and end time in the address book.
 * `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
 
-### Editing a schedule: `edit-s`
+#### Editing a schedule: `edit-s`
 
 Edits an existing schedule in the addressbook.
 
@@ -413,7 +442,7 @@ Edits an existing schedule in the addressbook.
 * `This tutor has a clashing schedule in the address book`: There is a schedule for the same tutor with overlapping times in the address book.
 * `At least one field to edit must be provided.`: There is no `st/` or `et/` tag provided to edit a field.
 
-### List all schedules: `list-s`
+#### List all schedules: `list-s`
 
 Displays a list of all schedules in the address book in a table format. List can be filtered by tutors whose names contain any of the given keywords.
 
@@ -434,7 +463,7 @@ Displays a list of all schedules in the address book in a table format. List can
 
 ![list schedule filtered](images/listScheduleFilter.png)
 
-### Marking a schedule: `mark`
+#### Marking a schedule: `mark`
 
 Adds the status of a schedule in the address book based on their index number in the table of schedules listed.
 
@@ -473,7 +502,7 @@ specified schedule.
 * `Index number given is out of range`: The schedule index provided is invalid.
 * `Status has to be either MISSED (m/0) or COMPLETED (m/1)`: The schedule status provided is invalid.
 
-### Unmarking a schedule: `unmark`
+#### Unmarking a schedule: `unmark`
 
 Removes the status of a schedule in the address book based on their index number in the table of schedules listed.
 
@@ -495,7 +524,7 @@ Removes the status of a schedule in the address book based on their index number
 * `Index number given is out of range`: The schedule index provided is invalid
 * `Invalid command format!`: Invalid or missing SCHEDULE_INDEX.
 
-### Deleting a schedule: `delete-s`
+#### Deleting a schedule: `delete-s`
 
 Deletes a schedule in the address book based on their index number in the table of schedules listed.
 
@@ -518,9 +547,13 @@ Deletes a schedule in the address book based on their index number in the table 
 * `Invalid value in parameter SCHEDULE_INDEX`: Parameter given is not a numerical value.
 * `Missing parameter SCHEDULE_INDEX`: A numerical value is not provided when calling the command `delete-s`.
 
+[Back To Top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## Frequently Asked Questions
+Have some burning questions you want answered? Check out this FAQ section to find out if others have had the same 
+question!
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -540,11 +573,19 @@ Deletes a schedule in the address book based on their index number in the table 
 **Q**: I'm encountering an issue not covered here. What should I do?<br>
 **A**: Feel free to reach out to our support team at [support@tutorconnect.com](mailto:support@tutorconnect.com). We'll do our best to assist you.
 
+[Back To Top](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
+TutorConnect is always looking to improve. Currently, there are a few known issues within the app that our 
+development team is working round the clock to solve. Don't worry, every version of TutorConnect released for you to 
+use is sure to solve your scheduling needs.
+
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+[Back To Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -569,8 +610,8 @@ Here are some parameters you might come across in the User Guide:
 | `n/NAME`          | Refers to the name of the tutor.                | Only contain alphanumeric characters and spaces, and <br/>should <br/>not be blank.          |
 | `p/PHONE NUMBER`  | Refers to the phone number of the tutor.        | Only contain numbers, and should be at least 3 <br/>digits long.                             |
 | `e/EMAIL`         | Refers to the email address of the tutor.       | Of the format local-part@domain<sup>1</sup>.                                                 |
-| `s/START_TIME`    | Refers to the start time of the schedule.       | Only datetime in `yyyy-MM-ddTHH:mm`<sup>2</sup> format is accepted.                          |
-| `e/END_TIME`      | Refers to the end time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm` format is accepted.                                      |
+| `st/START_TIME`   | Refers to the start time of the schedule.       | Only datetime in `yyyy-MM-ddTHH:mm`<sup>2</sup> format is accepted.                          |
+| `et/END_TIME`     | Refers to the end time of the schedule.         | Only datetime in `yyyy-MM-ddTHH:mm` format is accepted.                                      |
 | `TUTOR_INDEX`     | Refers to the position of tutor in the list.    | Only numerical input that ranges from 1 to the last tutor shown in the list of tutors.       |
 | `SCHEDULE_INDEX`  | Refers to the position of schedule in the list. | Only numerical input that ranges from 1 to the last schedule shown in the list of schedules. |
 | `SCHEDULE_STATUS` | Refers to the status of schedule in the list.   | Only numerical inputs of 0 for MISSED status and 1 for COMPLETED status is accepted          |
@@ -580,39 +621,42 @@ This section consists of more details of format limitations mentioned above.
 
 **<sup>1</sup> Email Format**
 
-    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 
-    The domain name must:
-    * end with a domain label at least 2 characters long
-    * have each domain label start and end with alphanumeric characters
-    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+The domain name must:
+* end with a domain label at least 2 characters long
+* have each domain label start and end with alphanumeric characters
+* have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
 **<sup>2</sup> `yyyy-MM-ddTHH:mm`**
+* `yyyy` represents the **year** (e.g., 2023).
+* `MM` represents the **month** with a leading zero (e.g., 09 for September, 10 for October).
+* `dd` represents the **day** of the month with a leading zero (e.g., 03, 15).
+* `T` is a **separator** indicating the start of the time portion.
+* `HH` represents the **hour** in **24-hour format** with a leading zero (e.g., 09 for 9 AM, 21 for 9 PM).
+* `mm` represents the **minutes** with a leading zero (e.g., 05).
 
-    * `yyyy` represents the **year** (e.g., 2023).
-    * `MM` represents the **month** with a leading zero (e.g., 09 for September, 10 for October).
-    * `dd` represents the **day** of the month with a leading zero (e.g., 03, 15).
-    * `T` is a **separator** indicating the start of the time portion.
-    * `HH` represents the **hour** in **24-hour format** with a leading zero (e.g., 09 for 9 AM, 21 for 9 PM).
-    * `mm` represents the **minutes** with a leading zero (e.g., 05).
+[Back To Top](#table-of-contents)
 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                |
-|---------------------|-----------------------------------------------------------------------------------------------------------------|
-| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`               |
-| **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`        |
-| **List Tutor**      | `list-t`                                                                                                         |
-| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                   |
-| **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                      |
-| **Add Schedule**    | `add-s TUTOR_INDEX s/START_TIME e/END_TIME` <br> e.g., `add-s ti/1 s/2023-09-15T09:00 e/2023-09-15T11:00`       |
-| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [s/START_TIME] [e/END_TIME]` <br> e.g., `edit-s 1 s/2023-09-15T13:00`                    |
-| **List Schedule**   | `list-s`, `list-s KEYWORD [MORE_KEYWORDS]` <br> e.g., `list-s Alice Pauline`                                    |
-| **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                                  |
-| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                    |
-| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                                |
-| **Clear**           | `clear`                                                                                                         |
+| Action              | Format, Examples                                                                                             |
+|---------------------|--------------------------------------------------------------------------------------------------------------|
+| **Add Tutor**       | `add-t n/NAME p/PHONE NUMBER e/EMAIL` <br> e.g., `add-t n/John Doe p/98765432 e/johnd@example.com`           |
+| **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`    |
+| **List Tutor**      | `list-t`                                                                                                     |
+| **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                |
+| **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                   |
+| **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s ti/1 st/2023-09-15T09:00 e/2023-09-15T11:00` |
+| **Edit Schedule**   | `edit-s SCHEDULE_INDEX [st/START_TIME] [etEND_TIME]` <br> e.g., `edit-s 1 st/2023-09-15T13:00`               |
+| **List Schedule**   | `list-s`, `list-s KEYWORD [MORE_KEYWORDS]` <br> e.g., `list-s Alice Pauline`                                 |
+| **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                               |
+| **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                 |
+| **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                             |
+| **Clear**           | `clear`                                                                                                      |
+
+[Back To Top](#table-of-contents)
