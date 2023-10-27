@@ -1,10 +1,10 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# UniMate Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -157,6 +157,195 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Adding Events
+
+#### Implementation
+
+The addEvent feature is facilitated by the `Calendar` class. It allows the users to block out some time
+in their personal `Calendar` with some `Event` that has the following attributes:
+
+* `DESCRIPTION`  —  Brief description of the `Event`
+* `START_DATE_TIME`  —  Starting date and time of the `Event`
+* `END_DATE_TIME`  —  End date and time of the `Event`
+
+The syntax used to call this command is as follows: `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME`,
+with the `START_DATE_TIME` and `END_DATE_TIME` in the `yyyy-MM-dd HH:mm` format. If any of the fields are missing
+or if the formatting is incorrect, an error message will be thrown along with usage instructions on the correct
+formatting.
+
+Given below is an example usage scenario and how the addEvent feature behaves at each step.
+
+Step 1. The user launches the application for the first time. The user's personal `Calendar` will be initialized
+as an empty calendar.
+
+Step 2. The user executes `addEvent d/Go to school ts/2023-10-26 08:00 te/2023-10-26 16:00` to add the `Event`
+of `Go to school` from `2023-10-26 8am` to `2023-10-26 4pm`. This will call the `UniMateParser#execute()`,
+passing in the user input from the user.
+
+Step 3. Since the command is an `addEvent` command, it passes the user input to `AddEventCommandParser#parse()`
+for parsing.
+
+Step 4. The `AddEventCommandParser#parse` command will parse the command into 3 argument fields  — 
+`DESCRIPTION`, `START_DATE_TIME` and `END_DATE_TIME`. The `DESCRIPTION` is passed into
+`ParserUtil#parseEventDescription()` to produce a `EventDescription` object, while the `START_DATE_TIME`
+and `END_DATE_TIME` are passed into `ParserUtil#parseEventPeriod()` to produce a `EventPeriod` object.
+
+**Note**: If the `DESCRIPTION` is empty, or the `START_DATE_TIME` or `END_DATE_TIME` are of invalid
+format, a `ParseException` will be thrown, displaying the appropriate command usage format.
+
+Step 5. The `EventDescription` and `EventPeriod` objects produced in Step 4 are then passed into
+the constructor for `Event`, creating an `Event` object with the respective user-defined attributes. This
+`Event` object is then passed into the constructor of the `AddEventCommand` object.
+
+Step 6. `AddEventCommand#execute()` is then called, and the calendar will check if there is an existing
+`Event` that has a conflicting timing with the new `Event` to be added. Since the calendar is empty,
+no errors will be raised and the user will see his new `Event` displayed in the UI in the `My Calendar`
+region.
+
+**Note**: Suppose there is a conflicting `Event` that already exists in the `Calendar`
+with the `Event` to be added, the new `Event` will not be added, and a message that states that there
+is a timing conflict will be reflected in the UI status bar.
+
+#### Design considerations:
+
+**Aspect: Appropriate time period of an event:**
+
+* **Alternative 1 (Current choice): No restriction on time period**
+    * Pros: Allows users to add multi-day `Event` such as multi-day business trips.
+    * Cons: For users that rarely have multi-day `Event`, having to type the date twice when calling the command might be troublesome.
+* **Alternative 2: Restrict events to a single day**
+    * Pros: User only has to type date once when calling command.
+    * Cons: For multi-day `Event`, user has to call the command multiple times for all the relevant days
+
+{more aspects and alternatives to be added}
+
+### Deleting Events
+
+#### Implementation
+
+The deletion of events is facilitated by the `model::deleteEventAt` method and the `model::findEventAt` method. The
+former method deletes the event stored in the `Calendar` object which itself is an attribute of the `Model` object by
+calling a similar method `Calendar::deleteEventAt`. These methods take in a `LocalDateTime` object and finds the method
+within the `Calendar` object, then in the case of `model::deleteEventAt`, deletes the event. Given below is an example
+usage scenario of the command.
+
+Step 1. The user launches the application and creates an event.
+
+Step 2. The user executes `deleteEvent 2023-12-09 12:00` command to delete the event at that time. The `deleteEvent`
+command calls `Model#findEventAt(LocalDateTime)` to find an event at the specified date and time. This event is then stored as a
+variable `toDelete`.
+
+**Note**: If no event is found at the specified date and time at any point of the command execution, an
+`EventNotFoundException` is thrown which causes an error message to be displayed.
+
+Step 3. The command then calls `Model#deleteEventAt(LocalDateTime)`. This method calls similar methods of
+`Calendar#deleteEventAt(LocalDateTime)` which calls `AllDaysEventListManager#deleteEventAt(LocalDateTime)`.
+
+Step 4. The `AllDaysEventListManager` checks for an event at the specified date and time again, then checks for all days
+for which the event lasts for. Then, for each day, the event is removed from the `SingleDayEventList`.
+
+Step 5. The deleted event which was previously stored in as a variable is displayed in the `CommandResult` to show the
+user which command was deleted.
+
+**Design considerations**
+
+* The design of the `deleteEvent` command is dependent on the structure of the `Calendar` object. Should the structure
+  of how the event objects are stored change, a new implementation will be required for the command.
+
+### Contact Filtering
+
+#### Implementation
+
+The filtering function executed by `FilterCommand` is facilitated by the `PersonFilter` class.
+which itself is similar to the `EditPersonDescriptor` class found in `EditCommand.java`. It stores the fields by which
+the contacts are to be filtered and creates a predicate to facilitate the filtering. Notably, it implements the
+following operation:
+
+* `PersonFilter#matchesFilter(Person)` - Compares the values of the attributes of the `Person` to the strings stored as
+  attributes in the `PersonFilter` object. This method is later used as a lambda method to filter the contact list.
+
+Given below is an example of how the filter function works at each step.
+
+Step 1. The user executes `filter n/Bob t/CS` to filter contacts to see only people with "Bob" in their name and have at
+least 1 tag with "CS" in it. The input is passed to `UniMateParser` which then parses it with the `FilterCommandParser`.
+
+Step 2. The `FilterCommandParser` parses the input and creates a corresponding `PersonFilter` object with null for all
+parameters. It then sets all specified attributes of the created `PersonFilter` while leaving unspecified fields as
+null. The `FilterCommandParser` finally returns a newly created `FilterCommand` with the PersonFilter used in the
+constructor.
+
+Step 3. `FilterCommand#execute` is called. In this method, `model#updateFilteredPersonList` is called with
+`PersonFilter#matchesFilter` being used as the predicate. This updates the GUI and populates the filtered list with
+only `Person` objects that match the filter.
+
+Step 4. The number of people displayed is returned as a `CommandResult`.
+
+### Contact Sorting
+
+#### Implementation
+The sort function executed by `SortCommand`.
+
+The sort function allows users to sort all persons in `UniMate` based on a given criteria. The following criterion for sort are shown below
+- Sort by name (optional: in the reverse order)
+- Sort by address (optional: in the reverse order)
+- Sort by email (optional: in the reverse order)
+- Sort by phone (optional: in the reverse order)
+
+The syntax used to call this command is as follows, without the [ ] braces: `sort [/byname][/byaddress][/byemail][byphone] [/reverse]`. Do note that sorting by reverse is optional.
+
+Given below is an example of how the sort function works at each step. We will simulate a user using the sort function to sort UniMate contacts by name in descending order.
+1. The user executes `sort /byname /reverse` to find his friend's contact. The input is passed into `UniMateParser` which then parses it with the `SortCommandParser`.
+2. The `SortCommandParser` parses the input and first checks for arguments provided. If the arguments are empty, invalid or in the wrong format, a helper message will appear to allow the user to reference the sample run case. The arguments are then matched by the keywords provided to determine the basis for sorting using a `SortComparator`. All the comparators are added into an ArrayList of `SortComparator` for `SortCommand` to parse.
+3. `SortCommand` is initialized parses the array from step 2 to determine the basis of comparison when the command is executed. The `SortCommandParser` finally returns a newly created `SortCommand` consisting of a Person Comparator that decides the method of sorting for the UniMate address book.
+4. `SortCommand#execute` is called. In this method, `model#sortPersonList` is called with the Person Comparator created in step 3. This in turn calls `AddressBook#sortPersons` which calls the storage function to save the contacts in the json file based on the sorted order.
+5. The GUI then reads in the json file to obtain the order of addresses and populates the sorted list with the sorting criteria provided.
+6. The success message is returned as a `CommandResult` and displayed on the GUI result display panel.
+
+**Design considerations**
+
+* The design of the `sort` command is dependent on the structure of the `AddressBookStorage` object. Should the structure
+  of how the AddressBook objects are stored change, a new implementation will be required for the command.
+
+### TaskList Feature (Work in Progress)
+
+#### Implementation
+
+The proposed tasklist feature is facilitated by 'TaskList'. It extends a ReadOnlyTaskList that will be used for the
+saving of the users' tasks. Additionally, it implements the following operations:
+
+*`TaskList#addTask()` -- Adds a task to the current tasklist and saves it to memory.
+*`TaskList#deleteTask()` -- Delete an existing task from the current tasklist and saves it to memory.
+*`TaskList#editTask()` -- Edits an existing task from the current tasklist and saves it to memory.
+
+These operations are exposed in the `Model` interface as `Model#addTask()`, `Model#deleteTask()` and `Model#editTask()`
+respectively.
+
+##### Adding Task
+
+The adding of tasks is facilitated by the `model#addTask()` method. 
+The method adds a task to the `TaskList` object which itself is an attribute of the `ModelManager` object by
+calling a similar method `Model::addTask()`. 
+These methods take in a `Description` and `Optional(Deadline)` object and finds the method within the `TaskList` object,
+then adds the `Task` object to the TaskList.
+Given below is an example usage scenario of the command.
+
+Step 1. The user launches the application and creates a task.
+
+Step 2. The user executes `addTask d/CS2105 Assignment te/2023-12-12 12:00 ` command to add the task.
+The `addTask` method in the model is called, adding the task to the tasklist, and saving the tasklist to memory.
+
+**Note**: There is no limit to the number of tasks of the same description or deadline that can be created.
+
+**Design considerations**
+
+* The design of the `addTask` command is such that a deadline is made optional.
+* This current implementation allows for more freedom to the user but might be more difficult to manage with the addition of Optionals.
+
+##### Delete Task (To be added)
+
+##### Edit Task (To be added)
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -236,13 +425,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -577,7 +766,7 @@ Use case ends.
 
 1. User requests to list persons with specific words in specific fields.
 2. UniMate displays persons matching all provided keywords in specified fields and the number of people matching all
-specified fields.
+   specified fields.
 
    Use case ends.
 
@@ -589,6 +778,22 @@ specified fields.
     * UniMate displays a message that 0 people have been displayed.
       Use case ends.
 
+
+**Use case: UC13 Sort by fields.**
+
+
+**MSS**
+
+
+1. User requests to sort persons
+2. UniMate displays persons in specified order and by specified parameter
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User uses the wrong delimiter or makes a spelling mistake
+    - UniMate displays a message to show a helper message outlining the available sort options
 
 ### Non-Functional Requirements
 
@@ -625,15 +830,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -642,16 +847,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -659,6 +864,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
