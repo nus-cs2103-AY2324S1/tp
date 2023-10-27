@@ -18,6 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -39,17 +40,20 @@ public class UndoCommandTest {
     private static final String SAMPLE_LIST_COMMAND = "list";
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~APPOINTMENT COMMANDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    private static final String SAMPLE_APPOINTMENTS_COMMAND =
-            "appointments";
-    private static final String SAMPLE_CANCEL_COMMAND =
-            "cancel 1";
+    private static final String SAMPLE_APPOINTMENTS_COMMAND = "appointments";
+    private static final String SAMPLE_CANCEL_COMMAND = "cancel 1";
 
-    private static final String SAMPLE_RESCHEDULE_COMMAND =
-            "reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00 ";
+    private static final String SAMPLE_RESCHEDULE_COMMAND = "reschedule 1 start=2023/05/02 09:00 "
+            + "end=2023/05/02 11:00 ";
 
-    private static final String SAMPLE_SCHEDULE_COMMAND =
-            "schedule patient=John Doe start=2023/10/20 12:00 end=2023/10/20 13:00 "
-                    + "description=Follow up on Chest X-Ray ";
+    private static final String SAMPLE_SCHEDULE_COMMAND = "schedule patient=John Doe "
+            + "start=2023/10/20 12:00 end=2023/10/20 13:00 "
+            + "description=Follow up on Chest X-Ray ";
+
+    private static final String SAMPLE_TODAY_COMMAND = "today";
+
+    private static final String SAMPLE_UPCOMING_COMMAND = "today";
+    private static final String SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND = "appointment-find john";
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MISC COMMANDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private static final String SAMPLE_HELP_COMMAND = "help";
@@ -140,7 +144,7 @@ public class UndoCommandTest {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Integration Testing of UndoCommand with patient commands~~~~~~~~~~~~~~~~~~~~~~~~~
     /**
      * Test undo functionality with add command.
-     * Add command is compatible with undo
+     * Add command can be undone
      */
     @Test
     public void testAddCommandFollowedByUndo() throws CommandException, ParseException {
@@ -161,7 +165,7 @@ public class UndoCommandTest {
 
     /**
      * Test undo functionality with delete command.
-     * Delete command is compatible with undo
+     * Delete command can be undone
      */
     @Test
     public void testDeleteCommandFollowedByUndo() throws CommandException, ParseException {
@@ -182,7 +186,7 @@ public class UndoCommandTest {
 
     /**
      * Test undo functionality with edit command.
-     * Edit command is compatible with undo
+     * Edit command can be undone
      */
     @Test
     public void testEditCommandFollowedByUndo() throws CommandException, ParseException {
@@ -204,7 +208,7 @@ public class UndoCommandTest {
 
     /**
      * Test undo functionality with find command.
-     * Find command is not compatible with undo
+     * Find command cannot be undone
      */
     @Test
     public void testFindCommandFollowedByUndo() throws CommandException, ParseException {
@@ -221,7 +225,7 @@ public class UndoCommandTest {
 
     /**
      * Test undo functionality with list command.
-     * List command is not compatible with undo
+     * List command cannot be undone
      */
     @Test
     public void testListCommandFollowedByUndo() throws CommandException, ParseException {
@@ -239,7 +243,7 @@ public class UndoCommandTest {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Integration Testing of UndoCommand with appointment commands~~~~~~~~~~~~~~~~~~~~~
     /**
      * Test undo functionality with appointments command.
-     * Appointments command is not compatible with undo
+     * Appointments command cannot be undone
      */
     @Test
     public void testAppointmentsCommandFollowedByUndo() throws CommandException, ParseException {
@@ -254,7 +258,7 @@ public class UndoCommandTest {
 
     /**
      * Test undo functionality with cancel command.
-     * Cancel command is compatible with undo
+     * Cancel command can be undone
      */
     @Test
     public void testCancelCommandFollowedByUndo() throws CommandException, ParseException {
@@ -265,5 +269,83 @@ public class UndoCommandTest {
         model.undoHistory();
 
         assertEquals(1, model.getAddressBook().getAppointmentList().size());
+    }
+
+    /**
+     * Test undo functionality with find patient appointment command.
+     * Find patient appointment command cannot be undone
+     */
+    @Test
+    public void testFindPatientAppointmentCommandFollowedByUndo() throws CommandException, ParseException {
+        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
+        CommandResult commandResult2 = logic.execute(SAMPLE_SCHEDULE_COMMAND);
+        CommandResult commandResult3 = logic.execute(SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND);
+
+        model.undoHistory();
+
+        //schedule command is undone instead of appointment find command
+        assertEquals(0, model.getAddressBook().getAppointmentList().size());
+    }
+
+    /**
+     * Test undo functionality with reschedule command.
+     * Reschedule command can be undone
+     */
+    @Test
+    public void testRescheduleCommandFollowedByUndo() throws CommandException, ParseException {
+        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
+        CommandResult commandResult2 = logic.execute(SAMPLE_SCHEDULE_COMMAND);
+        Appointment appointmentBefore = model.getAddressBook().getAppointmentList().get(0);
+        CommandResult commandResult3 = logic.execute(SAMPLE_RESCHEDULE_COMMAND);
+
+        model.undoHistory();
+
+        Appointment appointmentAfter = model.getAddressBook().getAppointmentList().get(0);
+
+        assertEquals(appointmentBefore, appointmentAfter);
+    }
+
+    /**
+     * Test undo functionality with schedule command.
+     * Schedule command can be undone
+     */
+    @Test
+    public void testScheduleCommandFollowedByUndo() throws CommandException, ParseException {
+        CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
+        CommandResult commandResult2 = logic.execute(SAMPLE_SCHEDULE_COMMAND);
+
+        model.undoHistory();
+
+        assertEquals(0, model.getAddressBook().getAppointmentList().size());
+    }
+
+    /**
+     * Test undo functionality with today command.
+     * Today command cannot be undone
+     */
+    @Test
+    public void testTodayCommandFollowedByUndo() throws CommandException, ParseException {
+        CommandResult commandResult1 = logic.execute(SAMPLE_TODAY_COMMAND);
+
+        try {
+            CommandResult undoCommand = new UndoCommand().execute(model);
+        } catch (CommandException e) {
+            assertEquals(model.getUserHistoryManager().getUndoHistorySize(), 1);
+        }
+    }
+
+    /**
+     * Test undo functionality with upcoming command.
+     * Upcoming command cannot be undone
+     */
+    @Test
+    public void testUpcomingCommandFollowedByUndo() throws CommandException, ParseException {
+        CommandResult commandResult1 = logic.execute(SAMPLE_UPCOMING_COMMAND);
+
+        try {
+            CommandResult undoCommand = new UndoCommand().execute(model);
+        } catch (CommandException e) {
+            assertEquals(model.getUserHistoryManager().getUndoHistorySize(), 1);
+        }
     }
 }
