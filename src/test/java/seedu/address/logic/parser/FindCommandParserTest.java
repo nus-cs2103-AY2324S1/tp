@@ -56,7 +56,7 @@ public class FindCommandParserTest {
         LocalDateTime time = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         FindCommand expectedFindCommand =
                 new FindCommand(preparePredicate(new String[]{"", "", "", "", ""}, time));
-        assertParseSuccess(parser, " l/20.09.2023 1000", expectedFindCommand);
+        assertParseSuccess(parser, " lc/20.09.2023 1000", expectedFindCommand);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class FindCommandParserTest {
         LocalDateTime time = LocalDateTime.parse("20.09.2023 1000", FORMAT);
         FindCommand expectedFindCommand =
                 new FindCommand(preparePredicate(new String[]{"Alice", "913", "gmail", "Active", "friend"}, time));
-        assertParseSuccess(parser, " n/Alice p/913 e/gmail l/20.09.2023 1000 s/Active t/friend", expectedFindCommand);
+        assertParseSuccess(parser, " n/Alice p/913 e/gmail lc/20.09.2023 1000 s/Active t/friend", expectedFindCommand);
     }
 
     /**
