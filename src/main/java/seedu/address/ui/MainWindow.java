@@ -62,6 +62,9 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        if (!logic.getTeaching().equals("")) {
+            this.getRoot().setTitle("TAManager (" + logic.getTeaching() + ")");
+        }
 
         setAccelerators();
 
@@ -184,6 +187,11 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isTeach()) {
+                String course = commandResult.getFeedbackToUser().split(" ")[0];
+                this.getRoot().setTitle("TAManager (" + course + ")");
             }
 
             return commandResult;
