@@ -18,7 +18,9 @@ import seedu.application.logic.commands.*;
 import seedu.application.logic.commands.EditCommand.EditJobDescriptor;
 import seedu.application.logic.commands.SortCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
-import seedu.application.model.job.*;
+import seedu.application.model.job.CombinedPredicate;
+import seedu.application.model.job.FieldContainsKeywordsPredicate;
+import seedu.application.model.job.Job;
 import seedu.application.testutil.EditJobDescriptorBuilder;
 import seedu.application.testutil.JobBuilder;
 import seedu.application.testutil.JobUtil;
@@ -82,17 +84,17 @@ public class ApplicationBookParserTest {
     @Test
     public void parseCommand_sort() throws Exception {
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
-                + Company.COMPANY_SPECIFIER) instanceof SortCommand);
+                + PREFIX_COMPANY) instanceof SortCommand);
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
-                + Role.ROLE_SPECIFIER) instanceof SortCommand);
+                + PREFIX_ROLE) instanceof SortCommand);
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
-                + Status.STATUS_SPECIFIER) instanceof SortCommand);
+                + PREFIX_STATUS) instanceof SortCommand);
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
-                + Industry.INDUSTRY_SPECIFIER) instanceof SortCommand);
+                + PREFIX_INDUSTRY) instanceof SortCommand);
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
-                + Deadline.DEADLINE_SPECIFIER) instanceof SortCommand);
+                + PREFIX_DEADLINE) instanceof SortCommand);
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
-                + JobType.JOB_TYPE_SPECIFIER) instanceof SortCommand);
+                + PREFIX_JOB_TYPE) instanceof SortCommand);
     }
 
     @Test

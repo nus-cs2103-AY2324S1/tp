@@ -1,10 +1,10 @@
 package seedu.application.logic.parser;
 
 import static seedu.application.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.application.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.application.model.job.Company.COMPANY_SPECIFIER;
-import static seedu.application.model.job.Status.STATUS_SPECIFIER;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,11 +22,11 @@ public class SortCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
         // more than one specifier
-        assertParseFailure(parser, COMPANY_SPECIFIER + " " + STATUS_SPECIFIER,
+        assertParseFailure(parser, PREFIX_COMPANY + " " + PREFIX_STATUS,
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
 
         // invalid specifier
-        assertParseFailure(parser, "-b",
+        assertParseFailure(parser, "b/",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_INVALID_SPECIFIER));
 
         // no arguments
@@ -36,8 +36,8 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsListCommand() {
-        FieldComparator fieldComparator = new FieldComparator(COMPANY_SPECIFIER);
+        FieldComparator fieldComparator = new FieldComparator(PREFIX_COMPANY);
         SortCommand expectedCommand = new SortCommand(fieldComparator);
-        assertParseSuccess(parser, COMPANY_SPECIFIER, expectedCommand);
+        assertParseSuccess(parser, PREFIX_COMPANY.toString(), expectedCommand);
     }
 }

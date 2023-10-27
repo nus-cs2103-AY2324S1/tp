@@ -30,11 +30,11 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
 
         String specifier = splitArgs[0];
-        if (!(FieldComparator.isValidSpecifier(specifier))) {
+        if (!(FieldComparator.isValidPrefix(specifier))) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_INVALID_SPECIFIER));
         }
 
-        return new SortCommand(new FieldComparator(specifier));
+        return new SortCommand(new FieldComparator(new Prefix(specifier)));
     }
 }
