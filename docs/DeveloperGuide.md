@@ -126,6 +126,25 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+The `People` component,
+
+* Has 6 compulsory attributes (`Name`, `Phone`, `Address`, `Email`, `Nric`, `LicencePlate`) and 1 optional attrbiute 
+(`Remark`)
+* Has `Tag` which can store any amount of tags
+* Has a `Policy`, which is optional for a person to have, but is stored in the `Person` class regardless
+  * If a person has a policy attached to them, `Policy` will simply hold their information (i.e. `Company`, `PolicyNumber`, 
+  policy issue and expiry date as `PolicyDate`)
+  * If a person does not have a policy attached to them, `Policy` will hold default values (`NOCOMPANY` for `Company`, `NOPOLICY` for 
+  `PolicyNumber` and `01-01-1000` for both `PolicyDate`)
+
+#### Design considerations
+  * Defensive programming was used for the handling of persons with no policy over the alternative implementation:
+  * Make `Policy = null` for `Person` with no policy. This was unsafe as when `Person` is displayed in the UI, methods 
+like `toString()` would throw errors, violating type safety.
+  * Make `Company`, `PolicyNumber` and `PolicyDate` be `null`. This was unsafe as the RegEx check (e.g. `isValidPolicyNumber()`)
+  done in the constructors would have to be removed, leading to improper input validation.
+
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
@@ -154,13 +173,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-<br>
+### _Features in InsureIQ_
 
 ### `batchdelete`
 
 The `batchdelete` command allows users to batch delete people whose policy expiry is in the specified month and year.
 
-<br>
 
 #### Implementation:
 The batch delete mechanism is facilitated by `DeleteMonth`
@@ -170,7 +188,7 @@ It is also facilitated by the operation:
 
 This operation is exposed in the `Model` interface as `Model# batchDeleteWithPredicate(Predicate<Person> predicate)`
 
-**The following sequence diagram shows how the batch delete operation works:**
+The following sequence diagram shows how the batch delete operation works:
 
 ![BatchDeleteSequenceDiagram1](images/BatchDeleteSequenceDiagram1.png)
 
@@ -189,7 +207,7 @@ This operation is exposed in the `Model` interface as `Model# batchDeleteWithPre
 #### Design consideration:
 * Users may use batch delete to delete all people whose policy expiry is in the specified month and year. For example, delete people didn’t contact the user to renew their policies for one year. 
 * Besides, if users leave an insurance company, they may like to delete people purchase policy from that company. 
-* Therefore, `Model# batchDeleteWithPredicate(Predicate<Person> predicate)` is introduced to allow batch delete by month or company.
+* Therefore, `Model#batchDeleteWithPredicate(Predicate<Person> predicate)` is introduced to allow batch delete by month or company.
 
 <br>
 
@@ -220,6 +238,94 @@ Given below is the sequence diagram for the `edit` command:
 #### Design considerations:
 * Users may like to edit the details of a person in the address book, in case of changes in the personal details or policy of the person. For example, users may like to update the policy number of a person.
 * Therefore, `EditCommand` is introduced to allow users to edit the details of a person in the address book.
+
+<br>
+
+### `remind`
+The `remind` command allows the user to filter out people whose policy expiry date is approaching within the given number of days.
+
+#### Implementation:
+The filtered list will be displayed in the UI. The remind mechanism is facilitated by `Model` through the following operations:
+* `Model#RemindPredicate(int days)` - The Predicate to be used for filtering. `days` represents the number of days from the current date given by the user.
+* `Model#updateFilteredPersonList(Predicate<Person> p)` - Filters the list of Persons to display by the Predicate `p`.
+
+Given below is an example usage scenario and how the remind mechanism behaves at each step:
+
+Step 1. The user realises that there may be a set of Persons whose policy expiry date is approaching within 30 days.
+
+Step 2. The user executes `remind 30` command in an attempt to find this set of Persons. A `Model#RemindPredicate(int days)` instance with `days` being `30` will be created. As described in the [Logic Component](#logic-component) above, this will create a `RemindCommand` instance having the `RemindPredicate` instance as its field.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the number of days given is out of range, an error will be thrown and the application will re-prompt the user to input a valid value.</div>
+
+Step 3. The `LogicManager` will call `RemindCommand#execute()` to start filtering the Persons list with the given `RemindPredicate`. Then, `Model#updateFilteredPersonList(Predicate<Person> p)` is called with the `RemindPredicate` as the input to perform the filtering of the list.
+
+Step 4. Finally, a `CommandResult` instance will be created and returned to display filtered list of Persons to the user.
+
+The following sequence diagram shows how the `remind` command works:
+
+![RemindSequenceDiagram1](images/RemindSequenceDiagram1.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RemindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. </div>
+
+![RemindSequenceDiagram2](images/RemindSequenceDiagram2.png)
+
+The following activity diagram summarises what happens when a user executes the command `remind 30`:
+
+![RemindActivityDiagram](images/RemindActivityDiagram.png)
+
+#### Design considerations
+
+**Aspect: Whether `remind` command should take in a value:**
+* Alternative 1: `remind` command without specifying the number of days, default 30 days (which is 1 month).
+  * Pros: Shorter command for the user to use, simply just one word.
+  * Cons: Not enough flexibility, user may want to find expiry dates beyond 30 days.
+* Alternative 2 (current choice): `remind` command with number of days given by the user.
+  * Pros: Allows more flexibility, now the user can find persons whose expiry dates is not only 30 days.
+  * Cons: Need to determine the range of days allowed for the user to enter, security concerns such as integer overflow could occur if user decides to perform malicious activities.
+
+<br>
+
+### `sort`
+The `sort` command allows the user to view the profiles arranged in order of earliest to latest policy expiration date, with those profiles that have no policy data placed at the end of the late
+
+#### Implementation:
+The sorted list will be displayed in the UI. The remind mechanism is facilitated by `Model` through the following operations:
+* `Model#SortData()` - The Unique Person List of the Address Book is sorted using a PolicyExpiryDateComparator that implements Comparator<Person>
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step:
+
+Step 1. The user wishes to see whose policy expires soon.
+
+Step 2. The user executes ‘sort’ command to determine the persons whose insurance is going to finish the soonest. The ‘Main Window’ will call ‘LogicManager#execute(String s)’. The ‘LogicManager’ in turn calls ‘AddressBookParser#parseCommand(String s)’. Here the input is matched to ‘SortCommandParser’ and ‘ParseCommand#execute()’ is called.
+
+Step 3. ‘SortCommandParser’ creates an instance of ‘SortCommand’ that is returned to ‘LogicManager#execute(String) s’. The method ‘CommandResult#execute()’ is then called where `Model#SortData()`is called **Note** If an additional argument is added following ‘sort’ command, for instance ‘sort 2’, no error will be thrown and the sorted list will be shown as normal. This is because the implementation ignores the arguments.
+
+Step 4. Finally, a `CommandResult` instance will be created and returned to display sorted list of Persons to the user.
+
+The following sequence diagram shows how the `sort` command works:
+
+![SortSequenceDiagram1](images/SortSequenceDiagram1.png)
+
+![SortSequenceDiagram2](images/SortSequenceDiagram2.png)
+
+#### Design considerations
+
+**Aspect: Whether ‘sort’ command should take in a value.**
+* Alternative 1: (current choice) ‘sort’ command does not take in a value but does not an exception if an input is produced.
+* Pros: Prevents the need for un necessary exceptions that might affect the running of the program
+* Cons: The arguments might be nonsensical, for instance ‘sort 2’ could instead be used to provide the 2 most closely expiring profiles.
+* Alternative 2 : `sort` command does not take in a value and produces exception if an input is produced
+    * Pros: Prevents nonsensical inputs
+    * Cons: Lack of functionality as specified for alternative 1. There is also a lack of flexibility.
+* Alternative 3 : `sort` command takes in a value so the user can specify how many profiles they wish to view
+    * Pros: Provides maximum flexibility and functionality
+
+### `remark`
+The `remark` command allows the user to add optional remarks / comments to a person.
+
+#### Implementation:
+`remark` works similarly to `edit`, but is only editing the `Remark` attribute of the `Person`. 
+To add this feature, the following were done:
+- Include optional `Remark` attribute in `Person` class
+- Edit existing features to parse remarks (e.g. in `add` and `edit` to have a new CLI flag)
 
 ### \[Proposed\] Undo/redo feature
 

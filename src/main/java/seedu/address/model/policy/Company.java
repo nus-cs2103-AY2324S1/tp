@@ -14,7 +14,7 @@ public class Company {
     /*
      * Company name can be anything understandable to human being.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9.]+$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9. ]+$";
     public static final String DEFAULT_VALUE = "NOCOMPANY";
 
     public final String value;

@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI UI_COLOR_T5
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "sp:SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant "s:SortCommand" as SortCommand LOGIC_COLOR
+end box
+
+MainWindow -> LogicManager : execute("sort")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("sort")
+activate AddressBookParser
+
+create SortCommandParser
+AddressBookParser -> SortCommandParser : SortCommandParser()
+activate SortCommandParser
+SortCommandParser --> AddressBookParser
+deactivate SortCommandParser
+
+AddressBookParser -> SortCommandParser : parse("")
+activate SortCommandParser
+
+
+create SortCommand
+SortCommandParser -> SortCommand : Sort)
+activate SortCommand
+SortCommand --> SortCommandParser
+deactivate SortCommand
+SortCommand -[hidden]-> SortCommandParser
+
+SortCommandParser --> AddressBookParser
+deactivate SortCommandParser
+SortCommandParser -[hidden]-> AddressBookParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+destroy SortCommandParser
+
+LogicManager -[hidden]-> MainWindow : empty row
+LogicManager --> MainWindow
+deactivate LogicManager
+@enduml
