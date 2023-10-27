@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Set;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,7 +12,6 @@ import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Person;
 import seedu.address.model.team.Team;
 
-import java.util.Set;
 
 /**
  * A UI component that displays information of a {@code Team}.
@@ -57,7 +58,7 @@ public class TeamCard extends UiPart<Region> {
         teamName.setText(team.getTeamName() + "  ----");
 
         IdentityCode leaderID = team.getTeamLeaderIdentityCode();
-        Label teamLeaderLabel =  new Label("Team leader ->  "
+        Label teamLeaderLabel = new Label("Team leader ->  "
                 + findPersonById(memberList, leaderID).getName()
                 + ";   ID ->  "
                 + leaderID.toString());
