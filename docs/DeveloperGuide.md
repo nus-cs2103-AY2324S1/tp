@@ -115,7 +115,6 @@ call as an example.
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
-
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline reaches the end of diagram.
 </box>
@@ -313,6 +312,34 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Add applicant feature
+
+#### Implementation
+The add applicant feature allows users to add an applicant to the applicant list.
+
+#### Steps to trigger
+1. The user launches the application.
+2. The user executes `add n/John Doe hp/98765432 e/jd@gmail.com p/software engineer` to add a new applicant.
+3. The `AddCommandParser#parse()` checks whether all the prefixes and the required values are provided.
+4. If the check is successful, the `AddCommand#execute()` checks if the applicant exists in the applicant list.
+5. If the applicant does not exist, the `Model#addApplicant()` adds the applicant to the applicant list.
+
+### Edit applicant feature
+
+#### Implementation
+The edit applicant feature allows users to edit the details of an applicant.
+
+#### Steps to trigger
+1. The user launches the application.
+2. The user executes `edit 1 hp/87654321 p/front-end engineer` to edit the phone number and position of 
+the first applicant.
+3. The `EditCommandParser#parse()` checks whether the index of the applicant is valid and at least one prefix with
+the required values are provided.
+4. If the check is successful, the `EditCommand#execute()` checks if the identity of the applicant after the edit 
+is the same as the identity of another existing applicant. 
+5. If the identity is not the same, the `Model#setApplicant()` updates the details of the applicant while
+the `Model#updateFilteredApplicantList()` updates applicant list to display the updated applicant list.
+
 ### Help feature
 
 #### Steps to trigger
@@ -357,6 +384,33 @@ _{Explain here how the data archiving feature will be implemented}_
 2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future
    update.
 3. The state of the parser, rather than the app is used to reduce the chances of accidental clears.
+
+### Interview feature
+
+#### Purpose
+
+As a hiring management software, we need to perform CRUD operations for the interviews of applicants. This allows us to add new 
+interviews, view existing interviews, edit current interviews, and delete interviews. As we aim so make our program intuitive 
+and efficient, the UI design and data structure used to store these interview objects were crucial considerations in the 
+implementation process.
+
+#### Implementation
+
+The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`.
+The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in 
+an interview (out of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and 
+`DeleteInterviewCommand`. These are implementation in a largely similar manner to the `Applicant` class. The main difference is in how 
+an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the 
+applicant index as well as the chosen interview index.
+
+#### Design Considerations
+
+In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and a `List`.
+A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult to implement
+the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()` method. Also, if we wanted to
+extend a sorting function for interviews in the future, a `PriorityQueue` would make it more difficult for us to change the comparator
+for `Interview` objects. For the sake of extensibility of the codebase, we decided to use a `List` instead. This is because a `List` 
+provides us with greater abstraction and code flexibility in extending various functions for the `Interview` class. 
 
 ### Sort feature
 
@@ -808,7 +862,6 @@ Given below are instructions to test the app manually.
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </box>
 
 ### Launch and shutdown
