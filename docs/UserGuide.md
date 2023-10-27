@@ -17,6 +17,8 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   * [Adding a person: `add contact`](#adding-a-person--add-contact)
   * [Listing all persons: `list contact`](#listing-all-persons--list-contact)
   * [Deleting a person: `delete contact`](#deleting-a-person--delete-contact)
+  * [Adding tags: `add tag`](#adding-tags--add-tag)
+  * [Deleting tags: `delete tag`](#deleting-tags--delete-tag)
   * [Adding a note: `add note`](#adding-notes-to-a-contact--add-note)
   * [Listing all notes: `list notes`](#listing-all-notes--list-notes)
   * [Deleting a note: `delete note`](#deleting-a-note--delete-note)
@@ -71,6 +73,9 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 * `CONTACT_ID` is the number that is on the left of the person's name in each person card.
 
+* Items with `…`​ after them can be used multiple times.<br>
+  e.g. `[-t TAGNAME]…​` can be used as `-t frontend`, `-t frontend -t java` etc.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n NAME -t NOTE_TITLE`, `-t NOTE_TITLE -n NAME` is also acceptable.
 
@@ -116,6 +121,39 @@ Format: `delete contact NAME`
 
 Examples:
 * `list contact` followed by `delete contact Aaron` deletes the contact with the name Aaron.
+
+### Adding  tags : `add tag`
+
+Adds one or more tags to a contact.
+
+Format: `add tag -id CONTACT_ID -t TAGNAME...`
+
+* Adds one or more tags to a contact.
+* Duplicates are accepted but only unique tags will be added.
+
+Requirements:
+* `TAGNAME` must be alphanumeric, with no spaces.
+
+Examples:
+* `add tag -id 1 -t frontend` adds a tag with tag name "frontend" to the first contact in the contact list.
+* `add tag -id 1 -t frontend -t java` adds two tags with tag name "frontend" and "java" to the first contact in the contact list.
+
+
+### Deleting  tags : `delete tag`
+
+Deletes one or more tags to a contact. 
+
+Format: `delete tag -id CONTACT_ID -t TAGNAME...`
+
+* Deletes one or more tags to a contact, regardless if the tag exists in the contact or not.
+* Duplicates are accepted but only unique tags will be added.
+
+Requirements:
+* `TAGNAME` must be alphanumeric, with no spaces.
+
+Examples:
+* `delete tag -id 1 -t frontend` deletes a tag with tag name "frontend" from the first contact in the contact list.
+* `add tag -id 1 -t frontend -t java` deletes two tags with tag name "frontend" and "java" from the first contact in the contact list.
 
 ### Adding notes to a contact: `add note`
 

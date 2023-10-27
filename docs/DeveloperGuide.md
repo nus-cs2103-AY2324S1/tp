@@ -495,17 +495,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User inputs a non-alphanumeric tag.
+* 1a. User inputs incomplete data.
 
-    * 1a1. KeepInTouch shows a message indicating that tags should be alphanumeric.
+    * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-* 1b. User inputs a contact that does not exist.
+* 1b. User inputs a non-alphanumeric tag.
+    * 1b1. KeepInTouch shows a message indicating that tags should be alphanumeric.
 
-    * 1b1. KeepInTouch shows a message indicating the contact cannot be found.
+      Use case ends.
 
-      Use case resumes at step 1.
+* 1c. User inputs a contact that does not exist.
+
+    * 1c1. KeepInTouch shows a message indicating that the contact cannot be found.
+
+      Use case ends.
 
 **Use case: UC11 - Delete tags from a contact**
 
@@ -524,15 +529,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1b. User inputs a contact that does not exist.
-
-    * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
+* 1b. User inputs a non-alphanumeric tag.
+    * 1b1. KeepInTouch shows a message indicating that tags should be alphanumeric.
 
       Use case ends.
 
-* 1c. User inputs a tags that does not exist.
+* 1c. User inputs a contact that does not exist.
 
-    * 1c1. KeepInTouch shows a message indicating that the tags cannot be found.
+    * 1c1. KeepInTouch shows a message indicating that the contact cannot be found.
 
       Use case ends.
 
