@@ -114,10 +114,6 @@ public class ModelManager implements Model {
         updateFilteredBandList(Model.PREDICATE_SHOW_ALL_BANDS);
     }
 
-    /**
-     * This method is used by edit and delete musician commands to simultaneously update the
-     * corresponding musician in band list.
-     */
     @Override
     public void setMusician(Musician target, Musician editedMusician) {
         requireAllNonNull(target, editedMusician);
