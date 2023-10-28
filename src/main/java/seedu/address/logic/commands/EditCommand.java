@@ -32,7 +32,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -45,16 +45,27 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_UNDO_PERSON_SUCESS = "Undo Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Example: p/98742122.";
     public static final String MESSAGE_PERSON_NOT_FOUND =
             "The given combination of Name and/or NRIC does not match any person in the patients list.";
+
+
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
-    private final EditPersonDescriptor editPersonDescriptor;
+    /**
+     * The original state of the person before it was edited by the command.
+     */
+    private Person originalPerson;
 
+    /**
+     * The edited state of the person after it was modified by the command.
+     */
+    private Person editedPerson;
 
     private final Name name;
     private final Nric nric;
+    private final EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param name of the person in the filtered person list to edit
@@ -82,13 +93,24 @@ public class EditCommand extends Command {
 
         Person personToEdit = personOptional.get();
         logger.log(Level.INFO, "Editing person: {0}", personToEdit);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        originalPerson = personToEdit;
+        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         logger.log(Level.INFO, "EditCommand executed successfully");
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    @Override
+    public CommandResult undo(Model model) {
+        requireNonNull(model);
+        model.setPerson(editedPerson, originalPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(MESSAGE_UNDO_PERSON_SUCESS, Messages.format(originalPerson)));
     }
 
     /**
