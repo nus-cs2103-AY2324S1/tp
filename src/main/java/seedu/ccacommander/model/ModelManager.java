@@ -145,6 +145,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteEnrolment(Enrolment target) {
+        versionedCcaCommander.removeEnrolment(target);
+    }
+
+    @Override
     public void createEnrolment(Enrolment enrolment) {
         versionedCcaCommander.createEnrolment(enrolment);
         updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);

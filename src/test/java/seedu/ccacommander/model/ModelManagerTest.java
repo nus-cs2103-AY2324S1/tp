@@ -18,11 +18,13 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.commons.core.GuiSettings;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
 import seedu.ccacommander.model.exceptions.RedoStateException;
 import seedu.ccacommander.model.exceptions.UndoStateException;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
 import seedu.ccacommander.testutil.CcaCommanderBuilder;
+import seedu.ccacommander.testutil.EnrolmentBuilder;
 
 public class ModelManagerTest {
 
@@ -191,6 +193,14 @@ public class ModelManagerTest {
         modelManager.setEvent(AURORA_BOREALIS, BOXING_DAY);
 
         assertTrue(modelManager.hasEvent(BOXING_DAY));
+        assertFalse(modelManager.hasEvent(AURORA_BOREALIS));
+    }
+
+    @Test
+    public void deleteEnrolment() {
+        Enrolment enrolment = new EnrolmentBuilder().build();
+        modelManager.createEnrolment(enrolment);
+        modelManager.deleteEnrolment(enrolment);
         assertFalse(modelManager.hasEvent(AURORA_BOREALIS));
     }
 
