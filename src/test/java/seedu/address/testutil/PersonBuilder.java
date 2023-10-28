@@ -11,6 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.enums.InputSource;
 import seedu.address.model.person.exceptions.BadAppointmentFormatException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -25,7 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_APPOINTMENT = "2023-01-10 10:00 12:00";
+    public static final String DEFAULT_APPOINTMENT = "10-Jan-2023, 10:00 to 12:00";
 
     private Name name;
     private Nric nric;
@@ -41,7 +42,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         try {
-            appointment = new Appointment(DEFAULT_APPOINTMENT);
+            appointment = Appointment.of(DEFAULT_APPOINTMENT, InputSource.STORAGE);
         } catch (BadAppointmentFormatException e) {
             throw new IllegalStateException(
                     "Encountered an error with Appointment for PersonBuilder.", e);
@@ -91,7 +92,7 @@ public class PersonBuilder {
 
     public PersonBuilder withAppointment(String appointment) {
         try {
-            this.appointment = new Appointment(appointment);
+            this.appointment = Appointment.of(appointment, InputSource.STORAGE);
         } catch (BadAppointmentFormatException e) {
             throw new IllegalStateException(
                     "Encountered an error with Appointment for PersonBuilder.", e);
