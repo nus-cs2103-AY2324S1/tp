@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
 import seedu.staffsnap.model.interview.Interview;
@@ -207,21 +206,6 @@ public class Applicant implements Comparable<Applicant> {
     public double getInterviewIndexForApplicantCard(Interview interview) {
         return interviews.indexOf(interview) + 1;
     }
-    public String getOverallInterviewRating() {
-        if (interviews.isEmpty()) {
-            return "N.A";
-        }
-
-        double overallRating = 0;
-        for (Interview i : interviews) {
-            double rating = Double.parseDouble(i.getRating().value);
-            overallRating += rating;
-        }
-        overallRating /=  interviews.size();
-
-        return String.format("%.1f", overallRating);
-    }
-
     /**
      * Get the status of an Applicant.
      * @return Status of applicant

@@ -1,21 +1,23 @@
 package seedu.staffsnap.ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.Start;
+
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.framework.junit5.ApplicationExtension;
-import org.testfx.framework.junit5.Start;
-import javafx.application.Platform;
-import org.junit.jupiter.api.BeforeAll;
 import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.model.interview.Rating;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.staffsnap.testutil.TypicalApplicants.BENSON;
 
 @ExtendWith(ApplicationExtension.class)
 public class ApplicantCardTest {
