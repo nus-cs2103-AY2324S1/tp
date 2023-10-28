@@ -124,18 +124,17 @@ Examples:
 
 Tags the existing student in the class manager.
 
-Format: `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
+Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
 * Tags the student with the specified `STUDENT_NUMBER`.
-* When editing tags without `/add` or `/delete`, the existing tags of the student will be removed.
-* You can remove all the student’s tags by typing without `/add` and `/delete`
-  and `t/` without specifying any tags after it.
+* When editing tags without `/add` or `/delete`, the existing tags of the student will be overwritten.
+* You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-* `tag A1234567N t/smart t/shy t/funny` replace all tags of the specified student with smart, shy and funny.
-* `tag A1234567N /add t/Java` adds the Java tag to specified student.
-* `tag A1234567N /delete t/shy` removes the shy tag from the specified student.
-* `tag A1234567N t/` clear all tags from the specified student.
+* `tag s/A1234567N t/smart t/shy t/funny` replace all tags of the specified student with smart, shy and funny.
+* `tag s/A1234567N /add t/Java` adds the Java tag to specified student.
+* `tag s/A1234567N /delete t/shy` removes the shy tag from the specified student.
+* `tag s/A1234567N t/` clear all tags from the specified student.
 
 ---
 ### Adding comment to a student : `comment`
@@ -252,16 +251,16 @@ Examples:
 
 Views the class details of a student that will be displayed on the right side of the application.
 
-Format: `view STUDENT_NUMBER`
+Format: `view s/STUDENT_NUMBER`
 
 * The STUDENT_NUMBER must be valid e.g `T*`.
 * The STUDENT_NUMBER must belong to a student in the class manager.
 
 Example:
-* `view A0245234A`
-![result for 'view A0245234A'](images/ViewCommand.png)
 
----
+* `view s/A0245234A`
+![result for 'view s/A0245234A'](images/ViewCommand.png)
+
 ### Deleting a student : `delete`
 
 Deletes the specific student.
@@ -372,4 +371,3 @@ _Details coming soon ..._
 | **Help**        | `help`                                                                                                                                          |
 | **Exit**        | `exit`                                                                                                                                          |
 | **Theme**       | `theme`                                                                                                                                         |
-

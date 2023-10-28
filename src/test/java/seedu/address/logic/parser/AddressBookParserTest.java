@@ -90,7 +90,7 @@ public class AddressBookParserTest {
     public void parseCommand_tag() throws Exception {
         TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD
             + " "
-            + TypicalStudents.ALICE.getStudentNumber()
+            + PREFIX_STUDENT_NUMBER + TypicalStudents.ALICE.getStudentNumber()
             + " "
             + StudentUtil.getTagDetails(TypicalStudents.ALICE), true);
         assertEquals(new TagCommand(TypicalStudents.ALICE.getStudentNumber(), TypicalStudents.ALICE.getTags()),
@@ -179,7 +179,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_view() throws Exception {
         ViewCommand command = (ViewCommand) parser.parseCommand(
-                ViewCommand.COMMAND_WORD + " " + VALID_STUDENT_NUMBER_AMY, true);
+                ViewCommand.COMMAND_WORD + " " + STUDENT_NUMBER_DESC_AMY, true);
         assertEquals(new ViewCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY)), command);
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), ()
