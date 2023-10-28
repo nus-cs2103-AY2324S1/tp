@@ -33,6 +33,10 @@ public class Salary implements Comparable<Salary> {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public double getOvertimeHourlyRate() {
+        return Double.parseDouble(value) * 1.5 / (52 * 44);
+    }
+
     @Override
     public String toString() {
         return "$" + value;

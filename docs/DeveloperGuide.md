@@ -238,7 +238,7 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Sorting
+### Sort feature
 
 #### Proposed Implementation
 
@@ -250,7 +250,7 @@ These operations are exposed in the `Model` interface as `Model#updateSortedEmpl
 
 Given below is an example usage scenario where the user attempts to sort the list by salary.
 
-The user keys in `sort by/ salary`
+The user keys in `sort f/ salary`
 
 the `sort` command will call `Model#updateSortedEmployeeList()`, which in turn calls `AddressBook#sortEmployees()`
 which then calls `UniqueEmployeeList#sortEmployees()`.
@@ -270,6 +270,38 @@ Finally, the update to the internalList will change the view of the displayed li
 * **Alternative 2:** Performs a sort on a copied list in `ModelManager`.
     * Pros: Allows the `list` command to list all employees by the order they were added.
     * Cons: Different lists in the `ModelManager` class may cause inconsistencies when `find` and `sort` commands are called consecutively.
+
+### Reset feature
+
+#### Proposed Implementation
+
+The proposed resetting mechanism is facilitated by `Model`. It implements the following operation:
+
+* `Model#setEmployee(Employee target, Employee editedEmployee)` — edits the employee in the internal list to the new employee. 
+
+Given below is an example usage scenario where the user attempts to reset the overtime hours field of all employees
+and how the reset mechanism behaves at each step.
+
+Step 1. The user keys in `reset f/overtime`. This leads to the `reset` command being executed. It checks the argument given and
+identifies that the `OvertimeHours` field is being reset. 
+
+Step 2. Then it loops through the list of existing employees in `model.getFilteredEmployeeList()`.
+It creates a new Employee for every employee with the `OvertimeHours` field being set to its default value 0 and all other fields remain the same.
+It then sets the new Employee in place of the old Employee using `model.setEmployee(oldEmployee, newEmployee)`.
+
+Step 3. Finally, it calls `model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES)` to display the updated list in the GUI.
+
+#### Design considerations:
+
+**Aspect: How reset executes:**
+
+* **Alternative 1 (current choice):** Create a new command specifically for Reset.
+    * Pros: Fast since it edits all the employees with a single command.
+    * Cons: More code to implement
+
+* **Alternative 2:** Use existing Edit command.
+    * Pros: Less new code to implement.
+    * Cons: Difficult to edit all employees on the list since edit only edits one employee at a time.
 
 _{more aspects and alternatives to be added}_
 
@@ -307,28 +339,31 @@ HouR is a desktop app for human resources staff managing employee data, optimise
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                  | I want to …​                                                                       | So that I can…​                                                   |
-|----------|-------------------------|------------------------------------------------------------------------------------| ---------------------------------------------------------------- |
-| `* * *`  | new user                | add/delete dummy data                                                              | familiarise myself with the commands available                   |
-| `* * *`  | beginner user           | delete existing employee record                                                    | remove ex-employees from database                                |
-| `* * *`  | beginner user           | see the list of all employee data                                                  | easily view all the employee data in one place                   |
-| `* * *`  | beginner user           | add new employees to the database                                                  | keep the records up-to-date                                      |
-| `* * *`  | new user                | see clear error messages when I enter incorrect or incomplete information          | correct mistakes efficiently        |
-| `* *`    | beginner user           | assign custom tags to employees                                                    | organise them according to different criteria                    |
-| `* *`    | new user                | access a user guide                                                                |  know how to set up and launch the application                   |
-| `* *`    | new user                | access a quick tutorial or guided tour                                             | learn how to use basic features of the application               |
-| `* *`    | new user                | purge all current data                                                             | get rid of sample/experimental data I used for exploring the app |
-| `* *`    | forgetful beginner user | access a command summary                                                           | easily know which commands to use                                |
-| `* *`    | intermediate user       | modify existing records                                                            | update employees’ information and categories                     |
-| `* *`    | intermediate user       | filter and search certain employees based on criteria like department and salaries | look for the data I need   |
-| `* *`    | intermediate user       | batch delete records                                                               | keep my database organised and clutter-free                      |
-| `* *`    | intermediate user       | sort the data / records by date and categories                                     | view relevant data in a more organised manner                    |
+| Priority | As a …​                 | I want to …​                                                                       | So that I can…​                                                                 |
+|----------|-------------------------|------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| `* * *`  | new user                | add/delete dummy data                                                              | familiarise myself with the commands available                                  |
+| `* * *`  | beginner user           | delete existing employee record                                                    | remove ex-employees from database                                               |
+| `* * *`  | beginner user           | see the list of all employee data                                                  | easily view all the employee data in one place                                  |
+| `* * *`  | beginner user           | add new employees to the database                                                  | keep the records up-to-date                                                     |
+| `* * *`  | new user                | see clear error messages when I enter incorrect or incomplete information          | correct mistakes efficiently                                                    |
+| `* *`    | beginner user           | assign custom tags to employees                                                    | organise them according to different criteria                                   |
+| `* *`    | new user                | access a user guide                                                                | know how to set up and launch the application                                   |
+| `* *`    | new user                | access a quick tutorial or guided tour                                             | learn how to use basic features of the application                              |
+| `* *`    | new user                | purge all current data                                                             | get rid of sample/experimental data I used for exploring the app                |
+| `* *`    | forgetful beginner user | access a command summary                                                           | easily know which commands to use                                               |
+| `* *`    | intermediate user       | modify existing records                                                            | update employees’ information and categories                                    |
+| `* *`    | intermediate user       | generate individual employee reports                                               | have an overview of the performance of each employee                            |
+| `* *`    | intermediate user       | reset specific fields of employees                                                 | reset fields like overtime hours and leaves regularly (monthly/yearly)          |
+| `* *`    | intermediate user       | check the leave status of employees                                                | better plan my manpower and schedule work for each employee                     |
+| `* *`    | intermediate user       | filter and search certain employees based on criteria like department and salaries | look for the data I need                                                        |
+| `* *`    | intermediate user       | batch delete records                                                               | keep my database organised and clutter-free                                     |
+| `* *`    | intermediate user       | sort the data / records by date and categories                                     | view relevant data in a more organised manner                                   |
 | `* *`    | long-time user          | private individuals’ personal details                                              | minimise the chance of someone else seeing them by accident and violating PDPA. |
-| `*`      | intermediate user       | create keyboard shortcuts for tasks                                                | save time on frequently performed tasks                          |
-| `*`      | long-time user          | conduct advanced searches with multiple criteria                                   | gain deeper insights into employee performance                 |
-| `*`      | long-time user          | access a knowledge base or community forum                                         | share best practices and learn from other experienced users      |
-| `*`      | long-time user          | share / collaborate with other colleagues in my department                         | distribute work with my colleagues                   |
-| `*`      | long-time user          | archive unused data                                                                | not distracted by irrelevant data                                |
+| `*`      | intermediate user       | create keyboard shortcuts for tasks                                                | save time on frequently performed tasks                                         |
+| `*`      | long-time user          | conduct advanced searches with multiple criteria                                   | gain deeper insights into employee performance                                  |
+| `*`      | long-time user          | access a knowledge base or community forum                                         | share best practices and learn from other experienced users                     |
+| `*`      | long-time user          | share / collaborate with other colleagues in my department                         | distribute work with my colleagues                                              |
+| `*`      | long-time user          | archive unused data                                                                | not distracted by irrelevant data                                               |
 
 ### Use cases
 
@@ -462,6 +497,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  HouR clears employee book
 
     Use case ends.
+
+**Use case: Reset field of all employees**
+
+**MSS**
+
+1.  User requests to reset given field of all employees
+2.  HouR returns the list of employees with default value for given field
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out field.
+    * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. Given field cannot be reset.
+    * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
 
 **Use case: Exit HouR**
 
