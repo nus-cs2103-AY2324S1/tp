@@ -25,7 +25,7 @@ public class SampleContactsUtil {
             new Contact(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Note("CS2103 tutorial mate."),
                 getTagSet("friends"),
-                getAlternateContactSet("Example@DAlexyeoh")),
+                getAlternateContactSet("Example@Alexyeoh")),
             new Contact(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Note("CS2103 tutorial mate."),
                 getTagSet("colleagues", "friends"),
