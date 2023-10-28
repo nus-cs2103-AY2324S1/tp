@@ -1,16 +1,21 @@
 package seedu.address.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class PersonProfileField extends UiPart<SplitPane> {
 
     // region Super
     private static final String FXML = "PersonProfileField.fxml";
     // endregion
+
+    private static final String errorTextCss = "-fx-text-fill: red";
 
     // region FXML
     @FXML private Label valueLabel;
@@ -46,7 +51,7 @@ public class PersonProfileField extends UiPart<SplitPane> {
             }
         }));
         state = State.LABEL;
-        personProfile.setEventHandler(PersonProfile.Event.CONFIRM_SUCCESS, this::refresh);
+        personProfile.setEventHandler(PersonProfile.Event.AFTER_CONFIRM, this::refresh);
         refresh();
     }
     // endregion
@@ -80,11 +85,11 @@ public class PersonProfileField extends UiPart<SplitPane> {
         assert state == State.TEXT_FIELD;
         if (isValueValid()) {
             this.value = getTextOrNil();
+            updateProfile();
             updateState(State.LABEL);
-            personProfile.triggerEvent(PersonProfile.Event.CONFIRM_SUCCESS);
+            personProfile.triggerEvent(PersonProfile.Event.AFTER_CONFIRM);
             return true;
         } else {
-            personProfile.triggerEvent(PersonProfile.Event.CONFIRM_FAIL);
             sendValueInvalid();
             return false;
         }
@@ -115,8 +120,21 @@ public class PersonProfileField extends UiPart<SplitPane> {
     }
 
     private void refresh() {
-        this.value = personProfile.getValueOfField(field);
+        value = personProfile.getValueOfField(field);
+        resetTextPaint();
         updateState();
+    }
+
+    private void resetTextPaint() {
+        keyLabel.setStyle("");
+        valueLabel.setStyle("");
+    }
+
+    private void setErrorTextPaint() {
+        Platform.runLater(() -> {
+            keyLabel.setStyle(errorTextCss);
+            valueLabel.setStyle(errorTextCss);
+        });
     }
 
     private void sendValueInvalid() {
@@ -137,8 +155,10 @@ public class PersonProfileField extends UiPart<SplitPane> {
             if (confirmIfValid()) {
                 return;
             }
+            break;
         case ESCAPE:
             cancel();
+            break;
         }
     }
 
@@ -164,6 +184,10 @@ public class PersonProfileField extends UiPart<SplitPane> {
 
     boolean isEditing() {
         return state == State.TEXT_FIELD;
+    }
+
+    void indicateIsError() {
+        setErrorTextPaint();
     }
 
     // endregion

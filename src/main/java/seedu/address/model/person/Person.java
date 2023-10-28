@@ -18,6 +18,12 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Error Messages
+    public static final String AVAILABLE_WHILE_ANIMAL_NAMED_MESSAGE =
+            "When an animal name is provided, availability should not be 'Available' or 'nil'.";
+    public static final String ANIMAL_NAME_TYPE_MISMATCH_WHEN_UNAVAILABLE_MESSAGE =
+            "When availability is 'NotAvailable', animal name and type have to either be both 'nil' or both not 'nil'.";
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -50,12 +56,10 @@ public class Person {
         this.tags.addAll(tags);
 
         if (!isAvailabilityValidWhenAnimalNameNotNil()) {
-            throw new IllegalArgumentException("When an animal name is provided, availability should not be "
-                    + "'Available' or 'nil'.");
+            throw new IllegalArgumentException(AVAILABLE_WHILE_ANIMAL_NAMED_MESSAGE);
         }
         if (!isAnimalNameTypeValidWhenNotAvailable()) {
-            throw new IllegalArgumentException("When availability is 'NotAvailable', animal name and type have "
-                    + "to either be both 'nil' or both not 'nil'.");
+            throw new IllegalArgumentException(ANIMAL_NAME_TYPE_MISMATCH_WHEN_UNAVAILABLE_MESSAGE);
         }
     }
 
@@ -94,29 +98,6 @@ public class Person {
                     || (!name.equals("nil") && !type.equals("nil"));
         }
         return true;
-    }
-
-    /**
-     * Checks if the availability, animal name, and animal type objects provided follow validity rules
-     * used in the Person constructor.
-     *
-     * @return true if valid, false otherwise.
-     */
-    public static boolean isAvailabilityGroupValid(Availability availability, Name animalName, AnimalType animalType) {
-        String avail = availability.value;
-        boolean isNameNil = Objects.equals(animalName.fullName, "nil");
-        boolean isTypeNil = Objects.equals(animalType.value, "nil");
-        switch (avail) {
-        case "nil":
-            return isTypeNil && isNameNil;
-        case "Available":
-            boolean isTypeAbleOrNil = isTypeNil || animalType.value.startsWith("able.");
-            return isNameNil && isTypeAbleOrNil;
-        case "NotAvailable":
-            return isNameNil == isTypeNil;
-        default:
-            return false;
-        }
     }
 
     public Name getAnimalName() {

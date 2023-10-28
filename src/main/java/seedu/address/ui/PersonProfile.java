@@ -6,6 +6,8 @@ import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -42,6 +44,16 @@ public class PersonProfile extends UiPart<Region> {
             + "Please confirm or cancel them with enter or escape keys before proceeding.";
 
     private static final String INVALID_VALUE = "Invalid value for field: ";
+    private static final String INVALID_AVAILABILITY_GROUP =
+            "Availability, Animal Name and Animal Type are incompatible!";
+    private static final String INVALID_ANIMAL_TYPE = "Animal Type and Availability are incompatible!";
+    private static final String AVAILABLE_NIL_TYPE_MUST_NIL = "For 'nil' Availability, Animal Type must also be 'nil'!";
+    private static final String AVAILABLE_NIL_NAME_MUST_NIL = "For 'nil' Availability, Animal Name must also be 'nil'!";
+    private static final String AVAILABLE_NAME_MUST_NIL = "If fosterer is 'Available', Animal Name must be 'nil'!";
+    private static final String AVAILABLE_TYPE_MUST_ABLE_OR_NIL =
+            "If fosterer is 'Available', Animal Type must either be 'nil', or start with 'able'.";
+    private static final String NOT_AVAILABLE_NAME_TYPE_BOTH_SAME =
+            "If fosterer is 'NotAvailable', Animal Name and Type must either both be 'nil', or both not be 'nil'.";
 
     // endregion
 
@@ -52,7 +64,7 @@ public class PersonProfile extends UiPart<Region> {
     // region Enums
 
     public enum Event {
-        CONFIRM_SUCCESS, CONFIRM_FAIL, CANCEL, BEFORE_START_EDIT
+        AFTER_CONFIRM, CANCEL, BEFORE_START_EDIT
     }
 
     public enum Field {
@@ -144,8 +156,7 @@ public class PersonProfile extends UiPart<Region> {
 
         //event handlers
         Arrays.stream(Event.values()).forEach(event -> eventHandlers.put(event, new ArrayList<>()));
-        setEventHandler(Event.CONFIRM_SUCCESS, this::handleFieldLockIn);
-        setEventHandler(Event.CONFIRM_FAIL, this::handleFieldLockIn);
+        setEventHandler(Event.AFTER_CONFIRM, this::handleFieldLockIn);
         setEventHandler(Event.CANCEL, this::handleFieldLockIn);
 
         //ui
@@ -163,8 +174,7 @@ public class PersonProfile extends UiPart<Region> {
     // region Internal Event Handlers
 
     private void handleFieldLockIn() {
-        if (availabilityGroupInvalid()) {
-            showAvailabilityGroupError();
+        if (handleAvailabilityGroupInvalid()) {
             return;
         }
 
@@ -206,35 +216,108 @@ public class PersonProfile extends UiPart<Region> {
         return set;
     }
 
-    private void sendPersonCreated() {
-        mainWindow.sendFeedback(VALID_FOSTERER);
-    }
+    private boolean handleAvailabilityGroupInvalid() {
+        Availability availability;
+        Name animalName;
+        AnimalType animalType;
 
-    private void showAvailabilityGroupError() { //todo make the UI red and show the error message thingy
-
-    }
-
-    private boolean availabilityGroupInvalid() {
         try {
-            Availability availability = new Availability(fields.get(Field.AVAILABILITY));
-            Name animalName = new Name(fields.get(Field.ANIMAL_NAME));
-            AnimalType animalType = new AnimalType(fields.get(Field.ANIMAL_TYPE), availability);
-            return Person.isAvailabilityGroupValid(availability, animalName, animalType);
+            availability = new Availability(fields.get(Field.AVAILABILITY));
+            animalName = new Name(fields.get(Field.ANIMAL_NAME));
         } catch (IllegalArgumentException ignored) {
-            return false;
+            sendUnexpectedError();
+            return true;
         }
-    }
 
-    private void sendUnexpectedError() {
-        mainWindow.sendFeedback(UNEXPECTED_ERROR);
-    }
+        try {
+            animalType = new AnimalType(fields.get(Field.ANIMAL_TYPE), availability);
+        } catch (IllegalArgumentException ignored) {
+            sendConflict(INVALID_ANIMAL_TYPE, Field.ANIMAL_TYPE, Field.AVAILABILITY);
+            return true;
+        }
 
-    private void sendEditingInProgress() {
-        mainWindow.sendFeedback(EDITING_IN_PROGRESS);
+        //noinspection RedundantIfStatement
+        if(!checkAvailabilityGroupValidElseFeedback(availability, animalName, animalType)) {
+            return true;
+        }
+
+        return false;
     }
 
     private boolean editingInProgress() {
         return uiElements.values().stream().anyMatch(PersonProfileField::isEditing);
+    }
+
+    private void sendFeedback(String string) {
+        mainWindow.sendFeedback(string);
+    }
+
+    /**
+     * Checks if the availability, animal name, and animal type objects provided follow validity rules
+     * used in the Person constructor.
+     */
+    private boolean checkAvailabilityGroupValidElseFeedback (
+            Availability availability, Name animalName, AnimalType animalType
+    ) throws IllegalArgumentException {
+        String avail = availability.value;
+        boolean isNameNil = Objects.equals(animalName.fullName, "nil");
+        boolean isTypeNil = Objects.equals(animalType.value, "nil");
+        switch (avail) {
+        case "nil":
+            if (!isTypeNil) {
+                sendConflict(AVAILABLE_NIL_TYPE_MUST_NIL, Field.AVAILABILITY, Field.ANIMAL_TYPE);
+                return false;
+            } else if (!isNameNil) {
+                sendConflict(AVAILABLE_NIL_NAME_MUST_NIL, Field.AVAILABILITY, Field.ANIMAL_NAME);
+                return false;
+            } else {
+                return true;
+            }
+        case "Available":
+            boolean isTypeAbleOrNil = isTypeNil || animalType.value.startsWith("able.");
+            if (!isNameNil) {
+                sendConflict(AVAILABLE_NAME_MUST_NIL, Field.AVAILABILITY, Field.ANIMAL_NAME);
+                return false;
+            } else if (!isTypeAbleOrNil) {
+                sendConflict(AVAILABLE_TYPE_MUST_ABLE_OR_NIL, Field.AVAILABILITY, Field.ANIMAL_TYPE);
+            } else {
+                return true;
+            }
+        case "NotAvailable":
+            if (isNameNil != isTypeNil) {
+                sendConflict(
+                        NOT_AVAILABLE_NAME_TYPE_BOTH_SAME, Field.AVAILABILITY, Field.ANIMAL_TYPE, Field.ANIMAL_NAME
+                );
+                return false;
+            } else {
+                return true;
+            }
+        default:
+            sendUnexpectedError();
+            return false;
+        }
+    }
+
+    // endregion
+
+    // region User Feedback
+
+    private void sendEditingInProgress() {
+        sendFeedback(EDITING_IN_PROGRESS);
+    }
+
+    private void sendPersonCreated() {
+        mainWindow.sendFeedback(VALID_FOSTERER);
+    }
+
+    private void sendUnexpectedError() {
+        sendFeedback(UNEXPECTED_ERROR);
+    }
+
+    private void sendConflict(String conflictMessage, Field... fields) {
+        mainWindow.sendFeedback(INVALID_AVAILABILITY_GROUP + "\n" + conflictMessage);
+        Objects.requireNonNull(fields);
+        Arrays.stream(fields).map(uiElements::get).forEach(PersonProfileField::indicateIsError);
     }
 
     // endregion
@@ -259,7 +342,7 @@ public class PersonProfile extends UiPart<Region> {
     }
 
     void sendInvalidInput(Field field) {
-        mainWindow.sendFeedback(INVALID_VALUE + field.getDisplayName() + "\n" + field.getHint());
+        sendFeedback(INVALID_VALUE + field.getDisplayName() + "\n" + field.getHint());
     }
 
     // endregion
