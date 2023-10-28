@@ -84,7 +84,9 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         case "overtime hours":
             internalList.sort(Comparator.comparing(Employee::getOvertimeHours));
             break;
-        // case "allocated leaves":
+        case "allocated leaves":
+            internalList.sort(Comparator.comparing(Employee::getNumOfLeaves));
+            break;
         default:
 
         }
