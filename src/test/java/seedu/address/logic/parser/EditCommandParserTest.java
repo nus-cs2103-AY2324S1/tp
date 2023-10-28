@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_BLANK_ARGUMENTS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
@@ -24,8 +25,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALTY_DERMATOLOGY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseComplexFailure;
@@ -55,6 +58,11 @@ import seedu.address.testutil.EditSpecialistDescriptorBuilder;
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String NAME_EMPTY = " " + PREFIX_NAME;
+    private static final String PHONE_EMPTY = " " + PREFIX_PHONE;
+    private static final String AGE_EMPTY = " " + PREFIX_AGE;
+    private static final String LOCATION_EMPTY = " " + PREFIX_LOCATION;
+
 
     private static final String MESSAGE_INVALID_SPECIALIST =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SPECIALIST);
@@ -227,5 +235,21 @@ public class EditCommandParserTest {
                 : PersonType.SPECIALIST;
 
         assertParseComplexSuccess(parser, userInputArgs, expectedCommand, personType);
+    }
+
+    @Test
+    public void parse_emptyPrefixArguments_failure() {
+        String userInputArgs = NAME_EMPTY + PHONE_EMPTY;
+        String expectedMessage = String.format(MESSAGE_BLANK_ARGUMENTS,
+                EditCommand.MESSAGE_USAGE_PATIENT);
+        assertParseComplexFailure(parser, userInputArgs, expectedMessage, PersonType.PATIENT);
+
+        userInputArgs = AGE_EMPTY;
+        assertParseComplexFailure(parser, userInputArgs, expectedMessage, PersonType.PATIENT);
+
+        expectedMessage = String.format(MESSAGE_BLANK_ARGUMENTS,
+                EditCommand.MESSAGE_USAGE_SPECIALIST);
+        userInputArgs = LOCATION_EMPTY;
+        assertParseComplexFailure(parser, userInputArgs, expectedMessage, PersonType.SPECIALIST);
     }
 }
