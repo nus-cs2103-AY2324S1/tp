@@ -112,7 +112,7 @@ public class Person {
 
     /**
      * Adds an interaction to the person.
-     * @param interactions the set of interaction to be added
+     * @param interaction the singular interaction to be added
      * @return the updated set of interactions
      */
     public ArrayList<Interaction> addInteractions(ArrayList<Interaction> interactions) {

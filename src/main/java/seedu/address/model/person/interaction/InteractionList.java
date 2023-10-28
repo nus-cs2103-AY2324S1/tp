@@ -27,8 +27,19 @@ public class InteractionList {
      *
      * @param interaction The {@code Interaction} to add.
      */
-    public void addInteraction(Interaction interaction) {
+    public InteractionList addInteraction(Interaction interaction) {
         this.interactions.add(interaction);
+        return this;
+    }
+
+    /**
+     * Adds the given InteractionList {@code InteractionList} to the list.
+     * @param interactions The {@code InteractionList} to add.
+     * @return
+     */
+    public InteractionList addInteractions(InteractionList interactions) {
+        this.interactions.addAll(interactions.getInteractions());
+        return this;
     }
 
     /**
