@@ -7,6 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import seedu.address.model.card.Card;
 
 /**
@@ -31,7 +35,7 @@ public class DisplayCard extends UiPart<Region> {
     private Label id;
 
     @FXML
-    private Label question;
+    private TextFlow question;
 
     @FXML
     private FlowPane tags;
@@ -47,10 +51,28 @@ public class DisplayCard extends UiPart<Region> {
         super(FXML);
         this.card = card;
         id.setText(displayedIndex + ". ");
-        question.setText(card.getQuestion().question);
+        setTextWithBold(question, card.getQuestion().question);
         dueDate.setText("Due: " + card.getNextPracticeDate().getDisplayName());
         card.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private void setTextWithBold(TextFlow textFlowControl, String content) {
+        textFlowControl.getChildren().clear(); // clear existing children
+
+        String[] splitContent = content.split("\\*\\*");
+        for (int i = 0; i < splitContent.length; i++) {
+            Text textSegment = new Text(splitContent[i]);
+
+            if (i % 2 == 1) { // if it's an odd segment, bold it
+                textSegment.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+            } else {
+                textSegment.setFont(Font.font("Arial", FontWeight.NORMAL, 15));
+            }
+            textSegment.setStyle("-fx-fill: white;");
+
+            textFlowControl.getChildren().add(textSegment);
+        }
     }
 }
