@@ -87,10 +87,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         employees.setEmployee(target, editedEmployee);
     }
 
-    /** Sorts the list of employees based on an attribute */
-    public void sortEmployees(String attribute) {
-        requireNonNull(attribute);
-        employees.sortEmployees(attribute);
+    /** Sorts the list of employees based on a field in ascending order*/
+    public void sortEmployeesAscending(String field) {
+        requireNonNull(field);
+        employees.sortEmployeesAscending(field);
+    }
+
+    /** Sorts the list of employees based on a field in descending order */
+    public void sortEmployeesDescending(String field) {
+        requireNonNull(field);
+        employees.sortEmployeesDescending(field);
     }
 
     /**

@@ -129,9 +129,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateSortedEmployeeList(String attribute) {
-        requireNonNull(attribute);
-        addressBook.sortEmployees(attribute);
+    public void updateSortedEmployeeListAscending(String field) {
+        requireNonNull(field);
+        addressBook.sortEmployeesAscending(field);
+    }
+
+    @Override
+    public void updateSortedEmployeeListDescending(String field) {
+        requireNonNull(field);
+        addressBook.sortEmployeesDescending(field);
     }
 
     @Override

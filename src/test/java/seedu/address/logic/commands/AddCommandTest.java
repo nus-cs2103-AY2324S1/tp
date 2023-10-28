@@ -160,7 +160,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateSortedEmployeeList(String attribute) {
+        public void updateSortedEmployeeListAscending(String attribute) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void updateSortedEmployeeListDescending(String attribute) {
             throw new AssertionError("This method should not be called");
         }
     }

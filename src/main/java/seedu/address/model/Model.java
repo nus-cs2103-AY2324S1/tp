@@ -87,8 +87,14 @@ public interface Model {
     void updateFilteredEmployeeList(Predicate<Employee> predicate);
 
     /**
-     * Updates the {@code attribute} by which the employee list is sorted.
+     * Updates the {@code attribute} by which the employee list is sorted in ascending order.
      * @throws NullPointerException if {@code attribute} is null.
      */
-    void updateSortedEmployeeList(String attribute);
+    void updateSortedEmployeeListAscending(String attribute);
+
+    /**
+     * Updates the {@code attribute} by which the employee list is sorted in descending order.
+     * @throws NullPointerException if {@code attribute} is null.
+     */
+    void updateSortedEmployeeListDescending(String attribute);
 }
