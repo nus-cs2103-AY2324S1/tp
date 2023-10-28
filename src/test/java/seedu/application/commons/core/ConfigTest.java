@@ -1,10 +1,11 @@
 package seedu.application.commons.core;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.application.model.job.Industry;
+
 
 public class ConfigTest {
 
@@ -21,6 +22,7 @@ public class ConfigTest {
         Config defaultConfig = new Config();
         assertNotNull(defaultConfig);
         assertTrue(defaultConfig.equals(defaultConfig));
+        assertFalse(defaultConfig.equals(new Industry("Manufacturing")));
     }
 
 

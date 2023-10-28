@@ -1,8 +1,6 @@
 package seedu.application.model.job;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.application.testutil.Assert.assertThrows;
 import static seedu.application.testutil.TypicalJobs.CHEF;
 import static seedu.application.testutil.TypicalJobs.CLEANER;
@@ -170,5 +168,22 @@ public class UniqueJobListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniqueJobList.asUnmodifiableObservableList().toString(), uniqueJobList.toString());
+    }
+
+    @Test
+    public void testEqualsAndHashcode() {
+        UniqueJobList first = new UniqueJobList();
+        UniqueJobList another = new UniqueJobList();
+        first.add(CHEF);
+        first.add(CLEANER);
+        another.add(CHEF);
+        // same object -> returns true
+        assertTrue(first.equals(first));
+        assertEquals(first.hashCode(), first.hashCode());
+        // different jobs in list -> returns false
+        assertFalse(first.equals(another));
+        assertNotEquals(first.hashCode(), another.hashCode());
+        // null -> returns false
+        assertFalse(uniqueJobList.equals(null));
     }
 }

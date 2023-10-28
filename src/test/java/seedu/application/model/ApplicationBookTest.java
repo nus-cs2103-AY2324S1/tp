@@ -87,6 +87,15 @@ public class ApplicationBookTest {
         assertEquals(expected, applicationBook.toString());
     }
 
+    @Test
+    void testEquals() {
+        // same object -> returns true
+        assertTrue(applicationBook.equals(applicationBook));
+
+        // null -> returns false
+        assertFalse(applicationBook.equals(null));
+    }
+
     /**
      * A stub ReadOnlyApplicationBook whose jobs list can violate interface constraints.
      */

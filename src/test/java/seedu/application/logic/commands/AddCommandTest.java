@@ -74,6 +74,9 @@ public class AddCommandTest {
 
         // different job -> returns false
         assertNotEquals(addChefCommand, addCleanerCommand);
+
+        // null -> returns false
+        assertNotEquals(null, addCleanerCommand);
     }
 
     @Test
