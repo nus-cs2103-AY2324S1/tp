@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -11,10 +12,14 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -133,5 +138,48 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void isCommandHistoryEmpty_emptyStack_returnsTrue() {
+        ModelManager modelManager = new ModelManager();
+        assertTrue(modelManager.isCommandHistoryEmpty());
+    }
+
+    @Test
+    public void popCommandFromHistory_emptyStack_exception() {
+        ModelManager modelManager = new ModelManager();
+        assertThrows(EmptyStackException.class, modelManager::popCommandFromHistory);
+    }
+
+    @Test
+    public void getCommandHistorySize_emptyStack_returnsZero() {
+        ModelManager modelManager = new ModelManager();
+        assertEquals(0, modelManager.getCommandHistorySize());
+    }
+
+    @Test
+    public void popCommandFromHistory_nonEmptyStack_returnsCommandInLIFOOrder() {
+        ModelManager modelManager = new ModelManager();
+
+        AddCommand addCommand = new AddCommand(ALICE);
+        ClearCommand clearCommand = new ClearCommand();
+        modelManager.addToHistory(addCommand);
+        modelManager.addToHistory(clearCommand);
+
+        assertEquals(clearCommand, modelManager.popCommandFromHistory());
+        assertEquals(addCommand, modelManager.popCommandFromHistory());
+    }
+
+    @Test
+    public void getCommandHistorySize_nonEmptyStack_returnsCorrectSize() {
+        ModelManager modelManager = new ModelManager();
+        
+        AddCommand addCommand = new AddCommand(ALICE);
+        ClearCommand clearCommand = new ClearCommand();
+        modelManager.addToHistory(addCommand);
+        modelManager.addToHistory(clearCommand);
+
+        assertEquals(2, modelManager.getCommandHistorySize());
     }
 }
