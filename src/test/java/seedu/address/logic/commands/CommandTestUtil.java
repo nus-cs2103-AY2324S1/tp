@@ -40,6 +40,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_DEREK = "Derek Shepherd";
     public static final String VALID_PHONE_AMY = "91234567";
     public static final String VALID_PHONE_BOB = "81234567";
+
     public static final String VALID_PHONE_CHERYL = "92874563";
     public static final String VALID_PHONE_DEREK = "97463128";
     public static final String VALID_EMERGENCY_CONTACT_AMY = "81234567";
@@ -50,6 +51,7 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_DEREK = "mcdreamy@medilink.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+
     public static final String VALID_ADDRESS_CHERYL = "123 Main Street, Anytown, USA";
     public static final String VALID_ADDRESS_DEREK = "456 Elm Avenue, Somewhereville, Canada";
 
@@ -69,14 +71,6 @@ public class CommandTestUtil {
     public static final String VALID_BLOODTYPE_BOB = "A+";
     public static final String VALID_BLOODTYPE_AMY = "A+";
     public static final String VALID_CONDITION_AMY = "Diabetes";
-
-    public static final String VALID_DATE_1_DESC = "2022-02-14 13:30:00";
-
-    public static final String VALID_DATE_2_DESC = "2022-02-28 13:30:00";
-
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    public static final LocalDateTime VALID_DATE_1 = LocalDateTime.parse(VALID_DATE_1_DESC, formatter);
-    public static final LocalDateTime VALID_DATE_2 = LocalDateTime.parse(VALID_DATE_2_DESC, formatter);
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String NAME_DESC_CHERYL = " " + PREFIX_NAME + VALID_NAME_CHERYL;
@@ -99,6 +93,19 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_DEREK = " " + PREFIX_ADDRESS + VALID_ADDRESS_DEREK;
     public static final String GENDER_DESC_MALE = " " + PREFIX_GENDER + VALID_GENDER_MALE;
     public static final String GENDER_DESC_FEMALE = " " + PREFIX_GENDER + VALID_GENDER_FEMALE;
+    public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
+    public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
+    public static final String NRIC_DESC_CHERYL = " " + PREFIX_NRIC + VALID_NRIC_CHERYL;
+    public static final String NRIC_DESC_DEREK = " " + PREFIX_NRIC + VALID_NRIC_DEREK;
+    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
+    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
+    public static final String REMARK_DESC_CHERYL = " " + PREFIX_REMARK + VALID_REMARK_CHERYL;
+    public static final String CONDITION_DESC_AMY = " " + PREFIX_CONDITION + VALID_CONDITION_AMY;
+    public static final String CONDITION_DESC_BOB = " " + PREFIX_CONDITION + VALID_CONDITION_BOB;
+    public static final String BLOODTYPE_DESC_AMY = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_AMY;
+    public static final String BLOODTYPE_DESC_BOB = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_BOB;
+    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
+    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -109,25 +116,17 @@ public class CommandTestUtil {
     public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_EMERGENCY_CONTACT + "+6A";
     public static final String INVALID_NRIC = "A1234567G";
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Alien";
-    public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
-    public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
-    public static final String NRIC_DESC_CHERYL = " " + PREFIX_NRIC + VALID_NRIC_CHERYL;
-    public static final String NRIC_DESC_DEREK = " " + PREFIX_NRIC + VALID_NRIC_DEREK;
-    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
-    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
-    public static final String REMARK_DESC_CHERYL = " " + PREFIX_REMARK + VALID_REMARK_CHERYL;
-    public static final String BLOODTYPE_DESC_AMY = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_AMY;
-    public static final String BLOODTYPE_DESC_BOB = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_BOB;
-    public static final String CONDITION_DESC_AMY = " " + PREFIX_CONDITION + VALID_CONDITION_AMY;
-    public static final String CONDITION_DESC_BOB = " " + PREFIX_CONDITION + VALID_CONDITION_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final EditCommand.EditPersonDescriptor DESC_CHERYL;
     private static final EditCommand.EditPersonDescriptor DESC_DEREK;
+    private static final String VALID_DATE_1_DESC = "2022-02-14 13:30:00";
+    private static final String VALID_DATE_2_DESC = "2022-02-28 13:30:00";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final LocalDateTime VALID_DATE_1 = LocalDateTime.parse(VALID_DATE_1_DESC, formatter);
+    public static final LocalDateTime VALID_DATE_2 = LocalDateTime.parse(VALID_DATE_2_DESC, formatter);
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

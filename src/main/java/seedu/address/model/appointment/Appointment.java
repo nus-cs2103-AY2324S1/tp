@@ -1,8 +1,11 @@
-package seedu.address.model.person;
+package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Patient;
 
 /**
  * The {@code Appointment} class represents a scheduled appointment between a doctor and a patient.

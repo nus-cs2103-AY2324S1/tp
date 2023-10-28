@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.person.Appointment;
+import seedu.address.model.appointment.Appointment;
 
 /**
  * A utility class containing a list of {@code Patient} objects to be used in tests.

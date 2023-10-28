@@ -13,6 +13,8 @@ import static seedu.address.testutil.TypicalPatient.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.appointment.Appointment;
+
 public class AppointmentTest {
     @Test
     public void constructor_null_throwsNullPointerException() {

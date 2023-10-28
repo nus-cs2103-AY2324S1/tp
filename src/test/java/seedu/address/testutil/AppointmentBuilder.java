@@ -6,7 +6,7 @@ import static seedu.address.testutil.TypicalPatient.BENSON;
 
 import java.time.LocalDateTime;
 
-import seedu.address.model.person.Appointment;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 

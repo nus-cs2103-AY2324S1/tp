@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -104,7 +105,8 @@ public class Patient extends Person {
                 && ic.equals(otherPatient.ic)
                 && tags.equals(otherPatient.tags)
                 && condition.equals(otherPatient.condition)
-                && bloodType.equals(otherPatient.bloodType);
+                && bloodType.equals(otherPatient.bloodType)
+                && appointments.equals(otherPatient.appointments);
     }
 
     @Override
