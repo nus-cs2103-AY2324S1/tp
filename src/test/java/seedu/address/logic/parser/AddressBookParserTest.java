@@ -180,7 +180,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_view() throws Exception {
         ViewCommand command = (ViewCommand) parser.parseCommand(
-                ViewCommand.COMMAND_WORD + " " + VALID_STUDENT_NUMBER_AMY, true);
+                ViewCommand.COMMAND_WORD + " " + STUDENT_NUMBER_DESC_AMY, true);
         assertEquals(new ViewCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY)), command);
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), ()
