@@ -126,6 +126,8 @@ public interface Model {
      */
     void sortPersonList(Comparator<Person> comparator);
 
+    void sortEventList(Comparator<Event> comparator);
+
     /**
      * Returns the Index of the last view command called.
      */
