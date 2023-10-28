@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# CampusConnect Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -157,6 +157,250 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Notifications feature
+
+#### Implementation
+
+The notifications feature is centered around `Event` instances.
+`Event`s can represent any type of event with a specific date and time.
+This could be a birthday, an upcoming meeting or a deadline.
+`Event`s also encapsulate timings where a reminder should be created.
+
+On startup, `EventFactory#createEvents(model)` is used to generate the `Event` instances from the initial state of the model.
+Any future events can be added to the data model as well during runtime.
+
+Three public methods for `Event` are important for its usage
+* `Event#addMember(Person)` — Adds a `Person` as associated with this event.
+* `Event#addReminder(Duration)` — Sets a reminder for the event one `Duration` before the time of the actual event. If `Duration` is set to a day, the reminder will be a day in advance.
+* `Event#getNotificationAtTime(LocalDateTime)` — Check if any notifications should be generated based on a specific time, usually the current time should be passed as the parameter.
+
+Below is the class diagram for the `Event` class and it's interactions with the other classes.
+
+<puml src="diagrams/notification-system/ClassDiagram.puml" alt="NotificationClassDiagram" />
+
+The startup sequence for creating initial events is given below as well.
+
+<puml src="diagrams/notification-system/InitEventsSequenceDiagram.puml" alt="InitEventsSequenceDiagram" />
+
+Based on the `Event` instances present in the data model, you can call `Model#getLatestNotifications(LocalDateTime)`, passing in the current datetime, in order to get a list of `Notification` instances representing notifications that should be displayed to the user.
+The UI system will make use of this API to check if any notifications should be displayed to the user at startup.
+
+The flow for the startup notifications is described by the following sequence diagram.
+
+<puml src="diagrams/notification-system/StartupNotificationsSequenceDiagram.puml" alt="StartupNotificationsSequenceDiagram" />
+
+#### Design considerations:
+
+**Aspect: Generic design**
+
+A generic event system was created, even though CampusConnect only requires a specific Birthday notification system at the moment.
+
+* **Alternative 1 (current choice):** Generic event system.
+  * Pros: Extensible for future types of Events and Notifications beyond birthdays.
+  * Cons: More code required, and more indirection in code because of the generic nature.
+
+* **Alternative 2:** Birthday notification system.
+  * Pros: Simpler to implement, code will be more straightforward to understand as well.
+  * Cons: Any future ideas to implement new notifications and events will not benefit from the existing implementation of the birthday notification system.
+
+
+### AddAlt feature
+
+#### Implementation Details
+
+The `addalt` feature involves creating a new `Person` object with additional contact details to replace the previous `Person` object.
+This is done using the `AddAltPersonDescriptor` class; `AddAltPersonDescriptor` object stores the additional contact information to be added to the previous `Person` object.
+
+As a result, the existing `Person` class in AB3's implementation is enhanced to have the capacity of containing more attributes.
+Below is a class diagram on the `Person` class and the classes related to its attributes:
+
+<puml src="diagrams/PersonClassDiagram.puml" alt="PersonClassDiagram" />
+
+The `Person` object is now composed of the following additional attributes due to the `addalt` feature:
+
+* `Email`: The secondary email address of the contact.
+* `Linkedin`: The linkedin of the contact.
+* `Telegram`: The telegram handle of the contact.
+* `Birthday`: The birthday of the contact.
+
+The [**`java.util.Optional<T>`**](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Optional.html) class is utilised to encapsulate the optional logic of the above attributes.
+
+To add these additional attributes into a `Person` object, an `INDEX` parameter, followed by the [prefixes](#prefix-summary) that represent the attributes needs to be specified for the `addalt` command.
+`INDEX` represents the index number of the contact to be edited in the contact list.
+
+<box type="info">
+
+While all the fields are optional, at least one needs to be given to the `addalt` command.
+</box>
+
+The flow for the `addalt` command is described by the following sequence diagram:
+
+<puml src="diagrams/AddAltSequenceDiagram.puml" alt="AddAltSequenceDiagram" />
+
+#### Feature details
+1. The application will validate the arguments supplied by the user; whether the `INDEX` provided is valid and each of the additional attribute input follows the pre-determined formats defined in their respective classes.
+2. If any of the inputs fails the validation check, an error message is provided with details of the input error and prompts the user for a corrected input.
+3. If all of the inputs pass the validation check, a new `Person` objected with the updated attributes is created and stored in the `AddressBook`.
+
+#### Design Considerations
+
+**Aspect: Generic design**
+
+The additional attributes to be added into a `Person` object on top of the original AB3 attributes are encapsulated into their respective classes: `Linkedin`, `Telegram` and `Birthday`. These classes are implemented similarly to the other existing attributes of `Person`, but they are modified according to the respective input patterns that model the real world.
+As these attributes are additional information for a `Person` object, every attribute has been made optional in the case when user only keys in several, but not all of the additional attributes into the command. However, the purpose of using this command only exists when users would like to add additional attributes to a `Person` in the contact list. Thus, the `addalt` command is designed to ensure that the user adds at least one of the additional attributes aforementioned.
+
+As this command merely adds additional attributes to a `Person` object, this can be done by enhancing the `add` command.
+
+* **Alternative 1 (current choice):** Create a separate command, `addalt`.
+    * Pros:
+        * Many cases of empty/*null* inputs in the optional fields need not be accounted for when saving the data and testing when a new `Person` is added by the `add` command.
+    * Cons:
+        * Inconveniences users as users have to key in two separate commands in order to add additional attributes of a `Person`.
+* **Alternative 2:** Enhance the current `add` command.
+    * Pros:
+        * Improves the user's convenience by allowing them to add both compulsory and optional attributes to a new `Person` entry.
+    * Cons:
+        * Many cases of empty/*null* inputs in the optional fields have to be accounted for when saving the data and testing.
+
+### Edit Feature
+
+#### Implementation Details
+
+The `edit` feature is similar to the implementation of [**`addalt`**](#addalt-feature); it involves creating a new `Person` object with edited contact details to replace the previous `Person` object.
+This is done using the `EditPersonDescriptor` class; `EditPersonDescriptor` object stores the contact information to be updated to the previous `Person` object.
+
+The `edit` command has similar input fields to the [**`addalt`**](#addalt-feature) command with the difference being that it is able to edit all the attributes of a `Person` object except:
+
+* `Note`: The notes of the contact. Read [**`Notes feature`**](#notes-feature) for more details.
+* `Avatar`: The profile picture of the contact. Read [**`Update photo feature`**](#update-photo-feature) for more details.
+
+<box type="info">
+
+While all the fields are optional, at least one needs to be given to the `edit` command.
+</box>
+
+#### Feature details
+1. Similar to [`addalt`](#addalt-feature), the application will validate the arguments supplied by the user; whether the `INDEX` provided is valid and each of `Person` attribute input follows the pre-determined formats defined in their respective classes. However, it also checks that the `edit` command does not update any empty additional attributes of `Person` and update `Person` object to have same primary and secondary email.
+2. If an input fails the validation check, an error message is provided which details the error and prompts the user the course of action.
+3. If the input passes the validation check, the application checks if the corresponding `Person` and the new `Person` object with the edited attributes is the same.
+4. If the check fails, user will be prompted that current `edit` command does not update the `Person` object.
+5. Otherwise, a new `Person` objected with the updated attributes is created and stored in the `AddressBook`.
+
+The following activity diagram shows the logic of a user using the `edit` command:
+
+<puml src="diagrams/EditActivityDiagram.puml" alt="EditActivityDiagram" />
+
+The flow for the `edit` command is described by the following sequence diagram:
+
+<puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
+
+#### General Design Considerations
+Since `edit` command updates attributes of a `Person` object, setting the values directly to the `Person` object could be another viable option.
+
+* **Alternative 1 (Current choice):** Create a new `Person` object.
+    * Pros:
+        * Guarantees immutability of `Person` class, reducing possible bugs.
+    * Cons:
+        * Performance overhead; a `Person` object is always created even if for instance, only one attribute of `Person` object is changed.
+
+* **Alternative 2:** Set the edited attributes to the existing `Person` object.
+    * Pros:
+        * Minimal performance overhead; less memory usage.
+    * Cons:
+        * More bug prone.
+
+### Find feature
+
+The find command feature allows users to locate specific Person instances within the application based on keywords provided. Users can input specific terms, and the system will filter and present Person instances that match the given keywords in either their name, address, email, phone number, or tags.
+
+The find command is not just a simple string matching utility within our system. It is an advanced search mechanism that employs tokenization, parsing, and supports the evaluation of complex boolean expressions. This makes it an invaluable tool for users who want to execute intricate searches and filter results based on a combination of criteria.
+
+#### Implementation
+
+##### `FindCommand` and `FindCommandParser`
+
+The heart of the Find command system is the combination of `FindCommand` and `FindCommandParser`. The latter is responsible for processing raw user input, tokenizing the search criteria using the `FindFilterStringTokenizer`, and subsequently parsing it with the `FindExpressionParser`. The end product is a `FindCommand` object that executes the search based on a `Predicate<Person>` that checks all relevant fields of a `Person`.
+
+Sequence Diagram for FindCommandParser:
+
+<puml src="diagrams/find-command/FindCommandParserSequenceDiagram.puml" alt="FindCommandParserSequenceDiagram" />
+
+##### `FindFilterStringTokenizer`
+
+The `FindFilterStringTokenizer` is tailored to break down the user's search criteria, a `String` into meaningful tokens which can later be parsed into a final `Predicate<Person>`. This process includes recognizing individual terms (in the form of conditions of the form `PREFIX/KEYWORD`), Boolean operators (including `!`, `&&`, and `||`), and parentheses (`(` and `)`).
+
+Class Diagram for FindFilterStringTokenizer:
+
+<puml src="diagrams/find-command/FindFilterStringTokenizerClassDiagram.puml" alt="FindFilterStringTokenizerClassDiagram" />
+
+##### `FindExpressionParser``
+
+The `FindExpressionParser` ingests the tokens produced by the `FindFilterStringTokenizer` and interprets them, creating a singular complete `Predicate<Person>` that's applied on the PersonList.
+
+Class Diagram for FindExpressionParser:
+
+<puml src="diagrams/find-command/FindExpressionParserClassDiagram.puml" alt="FindExpressionParserClassDiagram" />
+
+FindExpressionParser uses the recursive gradient descent algorithm to parse the tokens into a `Predicate<Person>`.
+
+Sequence Diagram for FindExpressionParser showing how a sample input is parsed using the recursive gradient descent algorithm:
+
+<puml src="diagrams/find-command/FindExpressionParserSequenceDiagram.puml" alt="FindExpressionParserSequenceDiagram" />
+
+#### Design considerations:
+
+**Aspect: Command Flexibility vs. Complexity**
+
+* **Alternative 1 (current choice)**: Support boolean operations in `FindCommand`.
+  * **Pros**: Provides powerful search capabilities.
+  * **Cons**: Increases code complexity and potential for user input errors.
+
+* **Alternative 2**: Only allow simple keyword-based searches.
+  * **Pros**: Easier to implement and use.
+  * **Cons**: Limits user's searching abilities.
+
+
+**Aspect: Tokenizer library**
+
+* **Alternative 1 (current choice):** Custom-built tokenizer.
+  * **Pros:** Allows for more flexibility in terms of the syntax of the search criteria. Can handle our custom-defined terms, operators, and grouping symbols explicitly.
+  * **Cons**: More code required, requires regular maintenance to adapt to new features or changes.
+
+* **Alternative 2:** Use a third-party library.
+  * **Pros:** Less code required, might be more robust and have additional features.
+  * **Cons**: Less flexibility in terms of the syntax of the search criteria. May not be able to handle our custom-defined terms, operators, and grouping symbols explicitly. Might not cater explicitly to the specific requirements of the Find command. Requires integration efforts.
+
+**Aspect: Tokenization Strategy**
+
+* **Alternative 1 (current choice)**: Custom tokenizer.
+  * **Pros**: Greater control and flexibility.
+  * **Cons**: More complex to implement and maintain.
+
+* **Alternative 2**: Regular expression-based tokenizer.
+  * **Pros**: Can be more concise.
+  * **Cons**: May not handle all edge cases or complexities.
+
+
+**Aspect: Supported Logical Operators**
+
+* **Alternative 1 (current choice):** Use standard boolean operators (`&&`, `||`, `!`).
+  * **Pros:** Universally recognized and understood.
+  * **Cons**: Limited to boolean logic.
+
+* **Alternative 2:** Support more advanced operators or functions (e.g., nearness search, regex patterns).
+  * **Pros:** Provides more power and flexibility to users.
+  * **Cons**: Significantly complicates parsing and understanding for users.
+
+**Aspect: Handling Invalid Inputs**
+
+* **Alternative 1 (current choice)**: Throw an exception and inform the user.
+  * **Pros**: User is made aware of mistakes immediately.
+  * **Cons**: Stops the command processing.
+* **Alternative 2**: Silently ignore or correct invalid inputs.
+  * **Pros**: Smoother user experience.
+  * **Cons**: User might not realize they made a mistake.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -249,7 +493,7 @@ _{more aspects and alternatives to be added}_
 ### Notes feature
 
 #### 1. NoteCommand
-**Purpose:**  
+**Purpose:**
 The NoteCommand is used to add a note to a specific person in the Address Book.
 
 **Class Description:**
@@ -270,7 +514,7 @@ The NoteCommand is used to add a note to a specific person in the Address Book.
 - `execute(Model model)`: Adds the note to the person at the specified index in the model's filtered person list.
 
 #### 2. RemoveNoteCommand
-**Purpose:**  
+**Purpose:**
 The RemoveNoteCommand is used to remove a note from a specific person in the Address Book based on the index of the person and the index of the note.
 
 **Class Description:**
@@ -349,7 +593,7 @@ The `NotesWindow` UI component is used to display the notes of a person in a new
           }
           notesListView.setItems(notesObservableList);
       }
-      
+  
       @FXML
       void handleClose() {
           Stage stage = (Stage) notesListView.getScene().getWindow();
@@ -463,14 +707,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System requests for confirmation.
 3. User confirms.
 4. System opts out the user from receiving notifications. <br>
-Use case ends. 
+Use case ends.
 
 **Extensions**
    * 1a. System detects an error in data entered.
      * 1a1. System shows the correct format for request.
-     * 1a2. User enters a new opt out request. 
-     
-     Steps 1a1-1a2 are repeated until the data entered are correct. <br> 
+     * 1a2. User enters a new opt out request.
+
+     Steps 1a1-1a2 are repeated until the data entered are correct. <br>
      Use case resumes from step 4.
 
 **Use case: UC2 - List contacts**
@@ -485,16 +729,16 @@ Use case ends.
 **MSS**
 1. User <ins>lists all contacts (UC2).</ins>
 2. User enters an index to delete contact as an emergency contact.
-3. System deletes contact from the emergency contact list. <br> 
+3. System deletes contact from the emergency contact list. <br>
 Use case ends.
 
 **Extensions**
-* 1a. System shows an empty contact list. 
+* 1a. System shows an empty contact list.
 Use case ends.
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
-  * 2a2. User enters a new delete request. <br> 
-  Steps 2a1- 2a2 are repeated until the data entered are correct. <br> 
+  * 2a2. User enters a new delete request. <br>
+  Steps 2a1- 2a2 are repeated until the data entered are correct. <br>
   Use case resumes from step 3.
 
 **Use case: UC4 - Delete contact**
@@ -506,12 +750,12 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 1a. System shows an empty contact list. 
+* 1a. System shows an empty contact list.
 Use case ends.
 * 2a. System detects an invalid index entered.
   * 2a1. System shows an error message.
   * 2a2. User enters a new delete request. <br>
-  Steps 2a1- 2a2 are repeated until the data entered are correct. <br> 
+  Steps 2a1- 2a2 are repeated until the data entered are correct.<br>
   Use case resumes from step 3.
 
 **Use Case UC5: Add emergency contact**
@@ -539,11 +783,11 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed. 
-2. Able to hold up to 1000 contacts without a compromise in performance. 
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-4. Should respond within 1 second for any command the user inputs 
-5. Should be easy to use and navigate for the users. 
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Able to hold up to 1000 contacts without a compromise in performance.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should respond within 1 second for any command the user inputs
+5. Should be easy to use and navigate for the users.
 6. Should be able to accommodate growth and expansion. It should be easy to add new features and functionalities as needed. 
 7. Should be easy to maintain and update through a clear and well-documented architecture, and it should be easy to troubleshoot and fix problems should they arise. 
 8. Data stored should be persistent until removal by the user, and all contact details should be secure. 
@@ -558,6 +802,20 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+
+### Prefix summary
+
+| Prefix | Meaning                        | Example                          |
+|--------|--------------------------------|----------------------------------|
+| n/     | Name of contact                | `n/John Doe`                     |
+| p/     | Phone number of contact        | `p/98765432`                     |
+| e/     | Email of contact               | `e/johndoe@gmail.com`            |
+| a/     | Address of contact             | `a/16 Bukit Timah Road, S156213` |
+| t/     | Tags of contact                | 'friend'                         |
+| li/    | Linkedin of contact            | `li/john-doe`                    |
+| tg/    | Telegram handle of contact     | `tg/@johndoe`                    |
+| e2/    | Secondary email of contact     | `e2/johndoe@hotmail.com`         |
+| b/     | Birthday of contact            | `b/23/10`                        |
 
 --------------------------------------------------------------------------------------------------------------------
 

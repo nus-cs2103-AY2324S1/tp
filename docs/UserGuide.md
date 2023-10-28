@@ -27,6 +27,7 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
    - Add normal contact
    - Add emergency contact
    - Add alternative information to contact
+   - Edit contact information
    - Upload contact's photo
    - Update contact's photo
    - Search contact
@@ -85,7 +86,7 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional, ___with `addalt` as an exception. (Refer to [addalt](#addalt) under Features)___<br>
+* Items in square brackets are optional, ___with `addalt` as an exception. (Refer to [Add alternative information to contact](#add-alternative-information-to-contact) under Features)___<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -107,17 +108,24 @@ For a more technical and comprehensive overview of CampusConnect's codebase, ple
 Add a new contact with basic details like name, phone number, email, and address.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
-* `n/NAME` Replace NAME with the contact's name.
-* `p/PHONE_NUMBER` Replace PHONE_NUMBER with the contact's phone number.
-* `e/EMAIL` Replace EMAIL with the contact's email address.
-* `a/ADDRESS` Replace ADDRESS with the contact's physical address.
-* `[t/TAG] (Optional)` You can add tags to help categorise your contacts. Replace TAG with the desired tag, e.g., "friend", "colleague", etc. Multiple tags can be added by repeating the `[t/TAG]` format.
+<box type="info">
+
+All the fields must be provided except `TAG`. The fields you enter should follow the following format:
+
+| Field          | Format                                                                                                                  | Example                         |
+|----------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------|
+| `NAME`         | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                            | John Doe                        |
+| `PHONE_NUMBER` | Use `0-9` only and should be 3 digits long                                                                              | 98765432                        |
+| `EMAIL`        | Have the format of `local-part@domain`                                                                                  | johndoe@gmail.com               |
+| `ADDRESS`      | Use any characters                                                                                                      | John street, block 123, #01-01  |
+| `TAG`          | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined emergency tags for your contact  | friend                          |
+</box>
 
 Examples
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/friend`
-  * Adds a contact named "John Doe" with the phone number "98765432", email "johnd@example.com", address "John street, block 123, #01-01", and a tag "friend"
+* `add n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01 t/friend`
+    * Adds a contact named "John Doe" with the phone number "98765432", email "johndoe@gmail.com", address "John street, block 123, #01-01", and a tag "friend"
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/friend t/colleague`
-  * Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "1234567", and two tags "friend" and "colleague"
+    * Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "1234567", and two tags "friend" and "colleague"
 
 
 ### Add emergency contact
@@ -129,21 +137,64 @@ Format: `addemer INDEX [tag/TAG]`
 
 Examples:
 * `addemer 1 RA`
-  * Indicates that the contact at index 1 is the residential assistant (RA) for contact during emergencies
+    * Indicates that the contact at index 1 is the residential assistant (RA) for contact during emergencies
 
 ###  Add alternative information to contact
 
 Adds alternative contact information to an existing contact.
 
-Format: `addalt INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN]`
+Format: `addalt INDEX [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
 
-At least one of the optional fields must be provided.
+<box type="info">
+At least one of the optional fields must be provided. The fields you enter should follow the following format:
+
+| Field             | Format                                                                                                        | Example               |
+|-------------------|---------------------------------------------------------------------------------------------------------------|-----------------------|
+| `TELEGRAM`        | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only | @johndoe              |
+| `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                        | johndoe@hotmail.com   |
+| `LINKEDIN`        | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                     | john-doe-b9a38128a    |
+| `BIRTHDAY`        | Have the format of `DD/MM`                                                                                    | 31/10                 |
+
+</box>
 
 Examples:
-* addalt 1 tg/johndoe_telegram e2/johndoe2@example.com 
-  * Adds John Doe's Telegram and secondary email
-* addalt 2 li/betsycrowe_linkedin
-  * Adds Betsy Crowe's LinkedIn
+* `addalt 1 tg/@johndoe e2/johndoe@hotmail.com`
+    * Adds John Doe's telegram "@johndoe" and secondary email "johndoe@hotmail.com"
+* `addalt 1 li/john-doe-b9a38128a`
+    * Adds John Doe's linkedin "john-doe-b9a38128a"
+
+###  Edit contact information
+
+Edits contact information of an existing contact.
+
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [tg/TELEGRAM] [e2/SECONDARY_EMAIL] [li/LINKEDIN] [b/BIRTHDAY]`
+
+<box type="info">
+At least one of the optional fields must be provided. The fields you enter should follow the following format:
+
+| Field             | Format                                                                                                                 | Example                        |
+|-------------------|------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| `NAME`            | Use `a-z`, `A-Z`, `0-9` and whitespaces only                                                                           | John Doe                       |
+| `PHONE_NUMBER`    | Use `0-9` only and should be 3 digits long                                                                             | 98765432                       |
+| `EMAIL`           | Have the format of `local-part@domain`                                                                                 | johndoe@gmail.com              |
+| `ADDRESS`         | Use any characters                                                                                                     | John street, block 123, #01-01 |
+| `TAG`             | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined emergency tags for your contact | friend                         |
+| `TELEGRAM`        | Start with the `@` symbol, no whitespace with a minimum length of 5 characters. Use `a-z`, `0-9` and `_` only          | @johndoe                       |
+| `SECONDARY_EMAIL` | Have the format of `local-part@domain`                                                                                 | johndoe@hotmail.com            |
+| `LINKEDIN`        | Use `a-z`, `A-Z`, `0-9`, `_` and `-` only                                                                              | john-doe-b9a38128a             |
+| `BIRTHDAY`        | Have the format of `DD/MM`                                                                                             | 31/10                          |
+</box>
+
+Examples:
+* `edit 1 tg/@johndoe e2/johndoe@hotmail.com`
+    * Edits the first person in your contact list with existing telegram to "@johndoe" and existing secondary email to "johndoe@hotmail.com"
+* `edit 2 n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01 t/friend`
+    * Edits the second person in your contact list with existing name to "John Doe", existing phone number to "98765432", existing email to "johndoe@gmail.com", existing address to "John street, block 123, #01-01", and a existing tag to "friend"
+
+<box type="warning">
+
+You are not allowed to edit any alternative contact information, i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` if any of these fields are empty. You will receive an error message that directs you to use [**`addalt`**](#add-alternative-information-to-contact) command.
+</box>
 
 ###  Upload contact's photo
 
