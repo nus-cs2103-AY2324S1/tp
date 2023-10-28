@@ -53,9 +53,6 @@ public class EventPeriod implements Comparable<EventPeriod> {
         return this.start;
     }
 
-    public LocalDateTime getEnd() {
-        return this.end;
-    }
 
     /**
      * Creates and returns a new EventPeriod object with minimum date/time values.
@@ -165,6 +162,24 @@ public class EventPeriod implements Comparable<EventPeriod> {
         String startString = start.format(DATE_TIME_STRING_FORMATTER);
         String endString = end.format(DATE_TIME_STRING_FORMATTER);
         return startString + " - " + endString;
+    }
+
+    /**
+     * Get the string representation of the EventPeriod start DateTime.
+     *
+     * @return string representation of the start DateTime.
+     */
+    public String getFormattedStart() {
+        return start.format(DATE_TIME_STRING_FORMATTER);
+    }
+
+    /**
+     * Get the string representation of the EventPeriod end DateTime.
+     *
+     * @return string representation of the end DateTime.
+     */
+    public String getFormattedEnd() {
+        return end.format(DATE_TIME_STRING_FORMATTER);
     }
 
     /**

@@ -174,11 +174,11 @@ public class Event {
         return parentEvent.isPresent();
     }
 
-    public LocalDateTime getEndDateTime() {
+    public LocalDateTime getStartDateTime() {
         if (hasParent()) {
-            return parentEvent.get().getEndDateTime();
+            return parentEvent.get().getStartDateTime();
         }
-        return eventPeriod.getEnd();
+        return eventPeriod.getStart();
     }
 
     /**

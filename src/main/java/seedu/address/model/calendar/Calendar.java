@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventPeriod;
 
 /**
  * Represents a calendar that stores and manages events.
@@ -111,6 +112,18 @@ public class Calendar implements ReadOnlyCalendar {
     public Optional<Event> findEventAt(LocalDateTime dateTime) {
         requireNonNull(dateTime);
         return eventManager.eventAt(dateTime);
+    }
+
+    public List<Event> getEventsInRange(EventPeriod range) {
+        requireNonNull(range);
+        return eventManager.eventsInRange(range);
+    }
+
+    public void deleteEventsInRange(EventPeriod range) {
+        requireNonNull(range);
+        for(Event event:getEventsInRange(range)) {
+            deleteEventAt(event.getStartDateTime());
+        }
     }
 
     /**

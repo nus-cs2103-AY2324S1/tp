@@ -3,12 +3,14 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
 
@@ -124,11 +126,27 @@ public interface Model {
 
     /**
      * Checks for an event at the specified time.
+     *
      * @param dateTime the specified time.
      * @return the Event
      * @throws EventNotFoundException if there is no event at the specified time.
      */
     Event findEventAt(LocalDateTime dateTime) throws EventNotFoundException;
+
+    /**
+     * Looks for all events within a time range and returns them in a list.
+     *
+     * @param range an {@code EventPeriod} representing a time range.
+     * @return A list that contains all events within the time range.
+     */
+    List<Event> eventsInRange(EventPeriod range);
+
+    /**
+     * Looks for all events within a time range and deletes them.
+     *
+     * @param range an {@code EventPeriod} representing a time range.
+     */
+    void deleteEventsInRange(EventPeriod range);
 
     /** Returns a view of the event list */
     ObservableList<Event> getEventList();
