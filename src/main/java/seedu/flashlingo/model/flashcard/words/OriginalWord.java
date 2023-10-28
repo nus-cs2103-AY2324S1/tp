@@ -1,5 +1,7 @@
 package seedu.flashlingo.model.flashcard.words;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents the original word
  *
