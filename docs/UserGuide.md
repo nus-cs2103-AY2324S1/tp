@@ -109,11 +109,13 @@ Format: `list`
 
 Edits an existing student in the class manager.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`
+Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student with the student number `STUDENT_NUMBER`.
+* The STUDENT_NUMBER must be valid and exist.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* The NEW_STUDENT_NUMBER must be valid and unique (does not exist in the class manager).
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -268,7 +270,7 @@ Deletes the specific student.
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The STUDENT NUMBER must be valid and exist.
+* The STUDENT_NUMBER must be valid and exist.
 
 Examples:
 * `delete s/A0249112A`
