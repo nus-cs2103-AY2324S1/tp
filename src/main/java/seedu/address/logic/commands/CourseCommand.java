@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil.CourseOperation;
@@ -16,23 +15,20 @@ public class CourseCommand extends Command {
     public static final String COMMAND_WORD = "course";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Add, delete or clear any filters\n"
-            + "Parameters: OPERATION (either add, delete or clear) \n"
-            + PREFIX_COURSETUTORIAL + "COURSE_CODE "
-            + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID \n"
+            + ": Create, delete or switch address books\n"
+            + "Parameters: OPERATION (either create, delete or switch) \n"
+            + PREFIX_COURSETUTORIAL + "COURSE_CODE \n"
             + "Example: " + COMMAND_WORD + " "
             + "add "
-            + PREFIX_COURSETUTORIAL + "CS2103T "
-            + PREFIX_TUTORIALGROUP + "G01";
+            + PREFIX_COURSETUTORIAL + "CS2103T ";
 
-    public static final String MESSAGE_ADD_SUCCESS = "Added %1$s";
-    public static final String MESSAGE_DELETE_SUCCESS = "Removed %1$s";
-    public static final String MESSAGE_CLEAR_SUCCESS = "Cleared all filters";
-    public static final String MESSAGE_INVALID_OPERATION_FAILURE = "Invalid operation";
-    public static final String MESSAGE_ADD_DUPLICATE_FAILURE = "Filter already exists";
-    public static final String MESSAGE_DELETE_NOTHING_FAILURE = "Filter does not exist";
-    public static final String MESSAGE_CHANGE_SUCCESS = "Changed to %1$s";
-    public static final String MESSAGE_CHANGE_NOTHING_FAILURE = "Filter does not exist";
+    public static final String MESSAGE_CREATE_SUCCESS = "Created %1$s address book.";
+    public static final String MESSAGE_DELETE_SUCCESS = "Deleted %1$s address book.";
+    public static final String MESSAGE_SWITCH_SUCCESS = "Switched to %1$s address book.";
+
+    public static final String MESSAGE_INVALID_OPERATION_FAILURE = "Invalid course operation";
+    public static final String MESSAGE_CREATE_DUPLICATE_FAILURE = "%1$s address book exists";
+    public static final String MESSAGE_NO_EXIST_FAILURE = "%1$s address book does not exist";
 
     private final CourseOperation operation;
     private final String courseCode;
@@ -51,16 +47,16 @@ public class CourseCommand extends Command {
 
     private CommandResult addAddressBookHelper(Model model) throws CommandException {
         if (model.hasAddressBook(courseCode)) {
-            throw new CommandException(String.format(MESSAGE_ADD_DUPLICATE_FAILURE, courseCode));
+            throw new CommandException(String.format(MESSAGE_CREATE_DUPLICATE_FAILURE, courseCode));
         }
 
         model.addAddressBook(new AddressBook(courseCode));
-        return new CommandResult(String.format(MESSAGE_ADD_SUCCESS, courseCode));
+        return new CommandResult(String.format(MESSAGE_CREATE_SUCCESS, courseCode));
     }
 
     private CommandResult deleteAddressBookHelper(Model model) throws CommandException {
         if (!model.hasAddressBook(courseCode)) {
-            throw new CommandException(String.format(MESSAGE_DELETE_NOTHING_FAILURE, courseCode));
+            throw new CommandException(String.format(MESSAGE_NO_EXIST_FAILURE, courseCode));
         }
 
         model.deleteAddressBook(courseCode);
@@ -69,11 +65,11 @@ public class CourseCommand extends Command {
 
     private CommandResult changeAddressBookHelper(Model model) throws CommandException {
         if (!model.hasAddressBook(courseCode)) {
-            throw new CommandException(String.format(MESSAGE_CHANGE_NOTHING_FAILURE, courseCode));
+            throw new CommandException(String.format(MESSAGE_NO_EXIST_FAILURE, courseCode));
         }
 
         model.setActiveAddressBook(courseCode);
-        return new CommandResult(String.format(MESSAGE_CHANGE_SUCCESS, courseCode));
+        return new CommandResult(String.format(MESSAGE_SWITCH_SUCCESS, courseCode));
     }
 
 
@@ -86,7 +82,7 @@ public class CourseCommand extends Command {
         }
 
         switch (operation) {
-        case ADD:
+        case CREATE:
             return addAddressBookHelper(model);
         case DELETE:
             return deleteAddressBookHelper(model);

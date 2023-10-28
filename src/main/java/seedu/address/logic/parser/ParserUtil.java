@@ -27,7 +27,7 @@ public class ParserUtil {
      * Enum for filter operations.
      */
     public static enum CourseOperation {
-        ADD, DELETE, SWITCH
+        CREATE, DELETE, SWITCH
     }
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
@@ -179,8 +179,8 @@ public class ParserUtil {
         requireNonNull(operation);
         String trimmedOperation = operation.trim().toLowerCase();
         switch (trimmedOperation) {
-        case "add":
-            return CourseOperation.ADD;
+        case "create":
+            return CourseOperation.CREATE;
         case "delete":
             return CourseOperation.DELETE;
         case "switch":

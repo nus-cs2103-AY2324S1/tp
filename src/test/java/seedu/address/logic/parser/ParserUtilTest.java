@@ -39,7 +39,7 @@ public class ParserUtilTest {
     private static final String VALID_ID = "A1234567H";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_ADD_OPERATION = "add";
+    private static final String VALID_CREATE_OPERATION = "create";
     private static final String VALID_DELETE_OPERATION = "delete";
     private static final String VALID_SWITCH_OPERATION = "switch";
     private static final String VALID_WEEK = "2";
@@ -241,15 +241,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseFilterOperation_validValueWithputWhiteSpace_returnsFilterOperation() throws Exception {
-        assertEquals(CourseOperation.ADD, ParserUtil.parseFilterOperation(VALID_ADD_OPERATION));
+        assertEquals(CourseOperation.CREATE, ParserUtil.parseFilterOperation(VALID_CREATE_OPERATION));
         assertEquals(CourseOperation.DELETE, ParserUtil.parseFilterOperation(VALID_DELETE_OPERATION));
         assertEquals(CourseOperation.SWITCH, ParserUtil.parseFilterOperation(VALID_SWITCH_OPERATION));
     }
 
     @Test
     public void parseFilterOperation_validValueWithWhiteSpace_returnsFilterOperation() throws Exception {
-        String addOperationWithWhitespace = WHITESPACE + VALID_ADD_OPERATION + WHITESPACE;
-        assertEquals(CourseOperation.ADD, ParserUtil.parseFilterOperation(addOperationWithWhitespace));
+        String addOperationWithWhitespace = WHITESPACE + VALID_CREATE_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.CREATE, ParserUtil.parseFilterOperation(addOperationWithWhitespace));
 
         String deleteOperationWithWhitespace = WHITESPACE + VALID_DELETE_OPERATION + WHITESPACE;
         assertEquals(CourseOperation.DELETE, ParserUtil.parseFilterOperation(deleteOperationWithWhitespace));
