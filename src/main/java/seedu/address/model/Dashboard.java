@@ -1,10 +1,10 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the dashboard of the address book.
@@ -21,6 +21,9 @@ public class Dashboard {
     private int totalInterestedInteractions;
     private int totalNotInterestedInteractions;
 
+    /**
+     * Constructs a {@code Dashboard} with the given {@code Model}.
+     */
     public Dashboard(Model model) {
         requireNonNull(model);
         this.model = model;
@@ -60,6 +63,9 @@ public class Dashboard {
         return this;
     }
 
+    /**
+     * Closes the dashboard.
+     */
     public Dashboard closeDashboard() {
         this.isDashboardOpen = false;
         return this;
