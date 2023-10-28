@@ -74,7 +74,7 @@ public class PersonCard extends UiPart<Region> {
             else if (tag.tagName.equals("intern") || tag.tagName.equals("fulltime")) {
                 label.getStyleClass().add("label3");
             }
-            else if (tag.tagName.equals("fulltime")) {
+            else {
                 label.getStyleClass().add("label4");
             }
             tags.getChildren().add(label);
