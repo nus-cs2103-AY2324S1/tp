@@ -42,7 +42,8 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     private void updateCountStatus() {
-        studentCountStatus.setText(String.format("%d of %d students", filteredList.size(), unfilteredList.size()));
+        studentCountStatus.setText(String.format("Showing %d of %d students",
+                filteredList.size(), unfilteredList.size()));
     }
 
     private class PersonListChangeListener implements ListChangeListener<Person> {

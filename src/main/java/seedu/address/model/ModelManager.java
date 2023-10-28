@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.FilterSettings;
@@ -166,6 +167,15 @@ public class ModelManager implements Model {
         return addressBookManager.hasAddressBook(courseCode);
     }
 
+    @Override
+    public ObservableList<String> getCourseList() {
+        return addressBookManager.getCourseList();
+    }
+
+    @Override
+    public ObservableStringValue getObservableCourseCode() {
+        return addressBookManager.getObservableCourseCode();
+    }
 
     //=========== Filtered Person List Accessors =============================================================
     private void updateFilteredPersonList() {
@@ -174,7 +184,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Person> getUnfilteredPersonList() {
-        return getAddressBook().getPersonList();
+        return uniquePersonList.asUnmodifiableObservableList();
     }
 
     /**

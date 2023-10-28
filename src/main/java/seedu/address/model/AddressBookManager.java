@@ -20,6 +20,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableStringValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.storage.JsonSerializableAddressBook;
 
@@ -29,16 +34,25 @@ import seedu.address.storage.JsonSerializableAddressBook;
 @JsonSerialize(using = AddressBookManager.AddressBookManagerSerializer.class)
 @JsonDeserialize(using = AddressBookManager.AddressBookManagerDeserializer.class)
 public class AddressBookManager implements ReadOnlyAddressBookManager {
-    private HashMap<String, ReadOnlyAddressBook> addressBooks;
+
+    private final SimpleStringProperty activeCourseCode;
+    private final ObservableList<String> internalCourseList;
+    private final ObservableList<String> courseList;
+    private final HashMap<String, ReadOnlyAddressBook> addressBooks;
     private AddressBook currentAddressBook;
-    private String currentCourseCode;
+
+    {
+        this.activeCourseCode = new SimpleStringProperty();
+        this.internalCourseList = FXCollections.observableArrayList();
+        this.courseList = new SortedList<>(internalCourseList, String::compareToIgnoreCase);
+    }
 
     /**
      * Creates an empty address book manager.
      */
     public AddressBookManager() {
         this.addressBooks = new HashMap<>();
-        this.currentCourseCode = "Temp";
+        activeCourseCode.set("Temp");
         setAddressBook(new AddressBook("Temp"));
     }
 
@@ -54,7 +68,8 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
      */
     public AddressBookManager(HashMap<String, ReadOnlyAddressBook> addressBooks, String currentCourseCode) {
         this.addressBooks = addressBooks;
-        this.currentCourseCode = currentCourseCode.toUpperCase();
+        this.internalCourseList.setAll(addressBooks.keySet());
+        activeCourseCode.set(currentCourseCode.toUpperCase());
         this.currentAddressBook = getActiveAddressBook();
     }
 
@@ -63,29 +78,30 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
             return this.currentAddressBook;
         }
 
-        return addressBooks.containsKey(currentCourseCode)
-                ? (AddressBook) addressBooks.get(currentCourseCode)
-                : new AddressBook(currentCourseCode);
+        return addressBooks.containsKey(activeCourseCode.get())
+                ? (AddressBook) addressBooks.get(activeCourseCode.get())
+                : new AddressBook(activeCourseCode.get());
     }
 
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         requireNonNull(addressBook);
 
-        removeAddressBook(currentCourseCode);
+        removeAddressBook(activeCourseCode.get());
         addAddressBook(addressBook);
-        this.currentCourseCode = addressBook.getCourseCode();
-        setActiveAddressBook(currentCourseCode);
+        activeCourseCode.set(addressBook.getCourseCode());
+        setActiveAddressBook(activeCourseCode.get());
     }
 
     public void setActiveAddressBook(String courseCode) {
         requireNonNull(courseCode);
-        this.currentCourseCode = courseCode.toUpperCase();
 
-        if (!this.addressBooks.containsKey(currentCourseCode)) {
+        activeCourseCode.set(courseCode.toUpperCase());
+
+        if (!this.addressBooks.containsKey(activeCourseCode.get())) {
             throw new IllegalArgumentException("Address book does not exist");
         }
 
-        this.currentAddressBook = (AddressBook) this.addressBooks.get(currentCourseCode);
+        this.currentAddressBook = (AddressBook) this.addressBooks.get(activeCourseCode.get());
     }
 
     /**
@@ -102,7 +118,8 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
      */
     public void addAddressBook(ReadOnlyAddressBook addressBook) {
         requireAllNonNull(addressBook);
-        this.addressBooks.put(addressBook.getCourseCode().toUpperCase(), addressBook);
+        internalCourseList.add(addressBook.getCourseCode());
+        this.addressBooks.put(addressBook.getCourseCode(), addressBook);
     }
 
     /**
@@ -111,7 +128,16 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
      */
     public void removeAddressBook(String courseCode) {
         requireNonNull(courseCode);
+        internalCourseList.remove(courseCode.toUpperCase());
         this.addressBooks.remove(courseCode.toUpperCase());
+    }
+
+    public ObservableList<String> getCourseList() {
+        return courseList;
+    }
+
+    public ObservableStringValue getObservableCourseCode() {
+        return activeCourseCode;
     }
 
     @Override
@@ -124,7 +150,7 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
 
     @Override
     public String getActiveCourseCode() {
-        return currentCourseCode;
+        return activeCourseCode.get();
     }
 
     @Override
@@ -140,13 +166,12 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
 
         AddressBookManager otherModelManager = (AddressBookManager) other;
         return addressBooks.equals(otherModelManager.addressBooks)
-                && currentAddressBook.equals(otherModelManager.currentAddressBook)
-                && currentCourseCode.equalsIgnoreCase(otherModelManager.currentCourseCode);
+                && currentAddressBook.equals(otherModelManager.currentAddressBook);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(addressBooks, currentAddressBook, currentCourseCode);
+        return Objects.hash(addressBooks, currentAddressBook, activeCourseCode);
     }
 
     @Override
@@ -159,7 +184,7 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
                 .append(currentAddressBook)
                 .append("\n")
                 .append("Current course code: ")
-                .append(currentCourseCode)
+                .append(activeCourseCode.get())
                 .toString();
     }
 
@@ -171,7 +196,7 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
         public void serialize(AddressBookManager addressBookManager, JsonGenerator jsonGenerator,
                 SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
             jsonGenerator.writeStartObject();
-            jsonGenerator.writeStringField("currentCourseCode", addressBookManager.currentCourseCode);
+            jsonGenerator.writeStringField("currentCourseCode", addressBookManager.activeCourseCode.get());
             jsonGenerator.writeObjectFieldStart("addressBooks");
 
             for (HashMap.Entry<String, ReadOnlyAddressBook> entry : addressBookManager.addressBooks.entrySet()) {

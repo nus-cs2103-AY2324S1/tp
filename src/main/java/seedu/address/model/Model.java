@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
@@ -85,6 +86,16 @@ public interface Model {
      * Returns true if an address book with the given {@code courseCode} exists.
      */
     boolean hasAddressBook(String courseCode);
+
+    /**
+     * Returns a view of the address book list.
+     */
+    ObservableList<String> getCourseList();
+
+    /**
+     * Returns a observable string value of the active course code.
+     */
+    ObservableStringValue getObservableCourseCode();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

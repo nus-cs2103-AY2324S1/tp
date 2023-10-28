@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
@@ -207,6 +208,16 @@ public class AddCommandTest {
 
         @Override
         public boolean hasAddressBook(String courseCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<String> getCourseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableStringValue getObservableCourseCode() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
@@ -100,5 +101,20 @@ public class LogicManager implements Logic {
     @Override
     public void setFilterSettings(FilterSettings filterSettings) {
         model.setFilterSettings(filterSettings);
+    }
+
+    @Override
+    public ObservableList<String> getCourseList() {
+        return model.getCourseList();
+    }
+
+    @Override
+    public ObservableStringValue getObservableCourseCode() {
+        return model.getObservableCourseCode();
+    }
+
+    @Override
+    public void setActiveAddressBook(String courseCode) {
+        model.setActiveAddressBook(courseCode);
     }
 }

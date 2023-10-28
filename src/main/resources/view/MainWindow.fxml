@@ -10,6 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="TAvigator" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
@@ -46,12 +47,21 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+        <HBox VBox.vgrow="ALWAYS" styleClass="pane-with-border">
+          <VBox fx:id="courseList" styleClass="pane-with-border" maxWidth="170" prefWidth="170" VBox.vgrow="ALWAYS" HBox.hgrow="NEVER">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="courseListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="NEVER"/>
+          </VBox>
+
+          <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
+          </VBox>
+        </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
