@@ -1,12 +1,21 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.UndoCommand.INVALID_STEPS_TO_UNDO;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+
+import java.text.ParseException;
+import java.util.Arrays;
 
 public class UndoCommandParserTest {
 
@@ -23,5 +32,44 @@ public class UndoCommandParserTest {
         assertParseFailure(parser, "abc", String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
     }
 
-    //need add for positive
+    @Test
+    public void parse_validSteps_success(){
+        UndoCommand expectedUndoCommand = new UndoCommand(3);
+        assertParseSuccess(parser, "3", expectedUndoCommand);
+
+        expectedUndoCommand = new UndoCommand(999);
+        assertParseSuccess(parser, "999", expectedUndoCommand);
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        UndoCommand command = new UndoCommand(3);
+        assertTrue(command.equals(command));
+    }
+
+    @Test
+    public void equals_equalStepsToUndo_returnsTrue() {
+        UndoCommand command1 = new UndoCommand(3);
+        UndoCommand command2 = new UndoCommand(3);
+        assertTrue(command1.equals(command2));
+    }
+
+    @Test
+    public void equals_differentStepsToUndo_returnsFalse() {
+        UndoCommand command1 = new UndoCommand(3);
+        UndoCommand command2 = new UndoCommand(4);
+        assertFalse(command1.equals(command2));
+    }
+
+    @Test
+    public void equals_null_returnsFalse() {
+        UndoCommand command = new UndoCommand(3);
+        assertFalse(command.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        UndoCommand command = new UndoCommand(3);
+        assertFalse(command.equals("This is a string"));
+    }
 }

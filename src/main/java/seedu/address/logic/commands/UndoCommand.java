@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -83,5 +84,16 @@ public class UndoCommand extends Command {
 
         String combinedStatus = String.join("\n", undoStatus);
         return new CommandResult("Undoing " + (counter - 1) + " command(s):\n" + combinedStatus);
+    }
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof UndoCommand)) {
+            return false;
+        }
+        UndoCommand that = (UndoCommand) object;
+        return stepsToUndo == that.stepsToUndo;
     }
 }
