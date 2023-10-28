@@ -343,17 +343,17 @@ The StackPane is used to organize specific UI elements within the VBox container
 
    Location: Inside the first VBox (fx:id="personList").
 2. StackPane (Logger Panel)
-   
+
     Location: Also inside the first VBox (fx:id="personList").
 3. StackPane (Result Display, Command Box, and Status Bar)
-   
+
     Location: These StackPanes are located inside the second VBox
 
 #### Color Choice:
 
 The HealthSync GUI utilizes specific color choices to create a visually pleasing and organized interface, while still maintaining the original Dark Theme.
 
-1. Primary Colour: #43314E 
+1. Primary Colour: #43314E
 2. Secondary Colour: #231335
 
 
@@ -441,7 +441,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     - **Enhanced Precision**: Combining both name and NRIC is a more unique identification method, making it easier to find a patient sharing a name with other patients.
     - **Patient Verification**: Searching by both criteria adds a layer of verification, ensuring the correct patient is selected.
 
-  - **Cons**: 
+  - **Cons**:
     - **Additional User Effort**: Users need to provide both name and NRIC, which may take longer or require extra effort, especially if they only have one piece of information readily available.
     - **Increased Ambiguity**: If the name keyword does not match the NRIC keyword, this may lead to potential confusion in which patient is being searched for.
 

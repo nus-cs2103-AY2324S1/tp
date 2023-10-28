@@ -32,6 +32,13 @@ public class AddressBookTest {
     }
 
     @Test
+    public void constructor_withValidReadOnlyAddressBook() {
+        AddressBook newData = getTypicalAddressBook();
+        AddressBook newLogBook = new AddressBook(newData);
+        assertEquals(newData, newLogBook);
+    }
+
+    @Test
     public void resetData_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
     }
@@ -81,6 +88,50 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void setPersons_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setPersons(null));
+    }
+
+    @Test
+    public void setPersons_withValidReadOnlyAddressBook_replacesData() {
+        AddressBook newData = getTypicalAddressBook();
+        addressBook.setPersons(newData.getPersonList());
+        assertEquals(newData, addressBook);
+    }
+
+    @Test
+    public void addPersons_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addPerson(null));
+    }
+
+    @Test
+    public void addPersons_withValidReadOnlyAddressBook_replacesData() {
+        AddressBook newData = getTypicalAddressBook();
+        addressBook.setPersons(newData.getPersonList());
+        assertThrows(DuplicatePersonException.class, () -> addressBook.addPerson(newData.getPersonList().get(0)));
+    }
+
+    @Test
+    public void removePersons_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.removePerson(null));
+    }
+
+    @Test
+    public void removePersons_withValidReadOnlyAddressBook_replacesData() {
+        AddressBook newData = getTypicalAddressBook();
+        addressBook.setPersons(newData.getPersonList());
+        addressBook.removePerson(newData.getPersonList().get(0));
+        assertFalse(addressBook.equals(newData));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        AddressBook newData = getTypicalAddressBook();
+        addressBook.setPersons(newData.getPersonList());
+        assertEquals(newData.hashCode(), addressBook.hashCode());
     }
 
     @Test
