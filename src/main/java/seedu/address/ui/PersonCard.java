@@ -62,7 +62,6 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         linkedIn.setText(person.getLinkedIn().value);
         github.setText(person.getGithub().value);
-        score.setText("interview score: " + person.getScore().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -12,6 +12,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.statistics.ReadOnlySummaryStatistic;
 
 /**
  * API of the Logic component
@@ -34,6 +35,12 @@ public interface Logic {
     ReadOnlyAddressBook getAddressBook();
 
     ReadOnlyEventBook getEventBook();
+
+    /**
+     * Returns the SummaryStatistic.
+     * @return SummaryStatistic
+     */
+    ReadOnlySummaryStatistic getSummaryStatistic();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();

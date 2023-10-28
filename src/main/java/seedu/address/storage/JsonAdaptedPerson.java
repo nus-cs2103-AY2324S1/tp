@@ -39,6 +39,8 @@ class JsonAdaptedPerson {
     private final String remark;
     private final String status;
 
+
+
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */

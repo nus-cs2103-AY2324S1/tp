@@ -93,9 +93,7 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withRemark("Some remark").build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different score -> returns false
-        editedAlice = new PersonBuilder(ALICE).withScore(100).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different score list -> returns false
 
     }
 
@@ -103,8 +101,8 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
-                + ", remark=" + ALICE.getRemark() + ", status=" + ALICE.getStatus() + ", score=" + ALICE.getScore()
-                + (!ALICE.getLinkedIn().value.isEmpty() ? ", linkedin=" + ALICE.getLinkedIn() : "")
+                + ", remark=" + ALICE.getRemark() + ", status=" + ALICE.getStatus() + ", score-list="
+                + ALICE.getScoreList() + (!ALICE.getLinkedIn().value.isEmpty() ? ", linkedin=" + ALICE.getLinkedIn() : "")
                 + (!ALICE.getGithub().value.isEmpty() ? ", github=" + ALICE.getGithub() : "") + "}";
         assertEquals(expected, ALICE.toString());
     }

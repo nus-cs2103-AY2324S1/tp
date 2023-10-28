@@ -10,6 +10,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.statistics.ReadOnlySummaryStatistic;
 
 /**
  * The API of the Model component.
@@ -65,6 +66,8 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     ReadOnlyEventBook getEventBook();
+
+    ReadOnlySummaryStatistic getSummaryStatistic();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -132,5 +135,10 @@ public interface Model {
      * Sets the Index of the last view command called.
      */
     void setLastViewedPersonIndex(Index index);
+
+    /**
+     * Loads the summary statistics based on the current Address Book
+     */
+    void loadSummaryStatistics();
 
 }
