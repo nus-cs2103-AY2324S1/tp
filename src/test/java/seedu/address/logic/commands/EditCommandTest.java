@@ -1,37 +1,40 @@
 package seedu.address.logic.commands;
-/*
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.lessons.Lesson;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
-    private EditCommandParser p = new EditCommandParser();
 
     @Test
     void happyCases() {
         try {
-            assertFalse(model.hasPerson(new Person(new Name("Yiwen"))));
-            p.parse("edit 1 -name Yiwen -email fake@email"
-                    + " -address fake -subject english -phone 12345678").execute(model);
-            assertTrue(model.hasPerson(new Person(new Name("Yiwen"))));
+            Person person = Person.getDefaultPerson();
+            person.setName(new Name("test name 1 no collision"));
+            assertFalse(model.hasPerson(person));
+            new EditPersonCommand(1, person).execute(model);
+            assertTrue(model.hasPerson(person));
+            Lesson lesson = Lesson.getDefaultLesson();
+            lesson.setName(new Name("test name 1 no collision"));
+            assertFalse(model.hasLessonClashWith(lesson));
+            new EditLessonCommand(1, lesson).execute(model);
+            assertTrue(model.getFilteredScheduleList().get(0).getName().equals(lesson.getName()));
         } catch (Exception e) {
             fail();
         }
@@ -40,17 +43,27 @@ public class EditCommandTest {
     @Test
     void noNameCollisionAndNoDetectableModificationTest() {
         try {
-            int length = model.getFilteredPersonList().size();
-            Person person = new Person(new Name("Yiwen"));
-            model.addPerson(person);
-            assertEquals(person, model.getFilteredPersonList().get(length));
-            String index = Integer.toString(length + 1);
-            p.parse("edit " + index + " -name Yiwen2").execute(model);
-            assertThrows(CommandException.class, () -> p
-                    .parse("edit " + index + " -name Yiwen2").execute(model));
+            Person person = Person.getDefaultPerson();
+            person.setName(new Name("test name 1 no collision"));
+            assertFalse(model.hasPerson(person));
+            new EditPersonCommand(1, person).execute(model);
+            assertTrue(model.hasPerson(person));
+            assertThrows(CommandException.class, () -> new EditPersonCommand(1, person).execute(model));
+            assertThrows(CommandException.class, () -> new EditPersonCommand(2, person).execute(model));
+            Lesson lesson = Lesson.getDefaultLesson();
+            lesson.setName(new Name("test name 1 no collision"));
+            assertFalse(model.hasLessonClashWith(lesson));
+            new EditLessonCommand(1, lesson).execute(model);
+            assertTrue(model.getFilteredScheduleList().get(0).getName().equals(lesson.getName()));
+            assertThrows(CommandException.class, () -> new EditLessonCommand(1, lesson).execute(model));
+            Lesson lesson1 = model.getFilteredScheduleList().get(1);
+            lesson.setStart(lesson1.getStart());
+            lesson.setEnd(lesson1.getEnd());
+            lesson.setDay(lesson1.getDay());
+            assertThrows(CommandException.class, () -> new EditLessonCommand(1, lesson).execute(model));
         } catch (Exception e) {
             fail();
         }
     }
 }
-*/
+
