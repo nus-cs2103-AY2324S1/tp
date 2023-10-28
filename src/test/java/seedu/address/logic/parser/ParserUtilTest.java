@@ -14,7 +14,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.ParserUtil.FilterOperation;
+import seedu.address.logic.parser.ParserUtil.CourseOperation;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ID;
@@ -241,21 +241,21 @@ public class ParserUtilTest {
 
     @Test
     public void parseFilterOperation_validValueWithputWhiteSpace_returnsFilterOperation() throws Exception {
-        assertEquals(FilterOperation.ADD, ParserUtil.parseFilterOperation(VALID_ADD_OPERATION));
-        assertEquals(FilterOperation.DELETE, ParserUtil.parseFilterOperation(VALID_DELETE_OPERATION));
-        assertEquals(FilterOperation.CLEAR, ParserUtil.parseFilterOperation(VALID_CLEAR_OPERATION));
+        assertEquals(CourseOperation.ADD, ParserUtil.parseFilterOperation(VALID_ADD_OPERATION));
+        assertEquals(CourseOperation.DELETE, ParserUtil.parseFilterOperation(VALID_DELETE_OPERATION));
+        assertEquals(CourseOperation.CLEAR, ParserUtil.parseFilterOperation(VALID_CLEAR_OPERATION));
     }
 
     @Test
     public void parseFilterOperation_validValueWithWhiteSpace_returnsFilterOperation() throws Exception {
         String addOperationWithWhitespace = WHITESPACE + VALID_ADD_OPERATION + WHITESPACE;
-        assertEquals(FilterOperation.ADD, ParserUtil.parseFilterOperation(addOperationWithWhitespace));
+        assertEquals(CourseOperation.ADD, ParserUtil.parseFilterOperation(addOperationWithWhitespace));
 
         String deleteOperationWithWhitespace = WHITESPACE + VALID_DELETE_OPERATION + WHITESPACE;
-        assertEquals(FilterOperation.DELETE, ParserUtil.parseFilterOperation(deleteOperationWithWhitespace));
+        assertEquals(CourseOperation.DELETE, ParserUtil.parseFilterOperation(deleteOperationWithWhitespace));
 
         String clearOperationWithWhitespace = WHITESPACE + VALID_CLEAR_OPERATION + WHITESPACE;
-        assertEquals(FilterOperation.CLEAR, ParserUtil.parseFilterOperation(clearOperationWithWhitespace));
+        assertEquals(CourseOperation.CLEAR, ParserUtil.parseFilterOperation(clearOperationWithWhitespace));
     }
 }
 

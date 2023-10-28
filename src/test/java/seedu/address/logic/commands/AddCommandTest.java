@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.AddressBookManager;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyAddressBookManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.predicate.SerializablePredicate;
@@ -141,11 +142,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public AddressBookManager getAddressBookManager() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -182,6 +178,31 @@ public class AddCommandTest {
 
         @Override
         public void clearFilters() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBookManager getAddressBookManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAddressBook(ReadOnlyAddressBook addressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAddressBook(String courseCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setActiveAddressBook(String courseCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAddressBook(String courseCode) {
             throw new AssertionError("This method should not be called.");
         }
     }

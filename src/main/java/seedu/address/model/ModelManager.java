@@ -24,6 +24,7 @@ public class ModelManager implements Model {
 
     private final AddressBookManager addressBookManager;
     private final UserPrefs userPrefs;
+    private final UniquePersonList uniquePersonList;
     private final FilteredList<Person> filteredPersons;
 
     /**
@@ -36,18 +37,20 @@ public class ModelManager implements Model {
 
         this.addressBookManager = new AddressBookManager(addressBookManager);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.uniquePersonList = new UniquePersonList();
+        this.filteredPersons = new FilteredList<>(uniquePersonList.asUnmodifiableObservableList());
 
-        if (getAddressBook() == null) {
-            filteredPersons = new FilteredList<>(new UniquePersonList().asUnmodifiableObservableList());
-        } else {
-            filteredPersons = new FilteredList<>(this.addressBookManager.getActiveAddressBook().getPersonList());
-            filteredPersons.setPredicate(this.userPrefs.getFilterSettings().getComposedFilter());
-        }
+        if (getAddressBook() != null) {
+            updateFilteredPersonList();
+        } 
     }
-
 
     public ModelManager() {
         this(new AddressBookManager(), new UserPrefs());
+    }
+
+    private void updateFilteredPersonList() {
+        uniquePersonList.setPersons(getAddressBook().getPersonList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -108,15 +111,6 @@ public class ModelManager implements Model {
         return addressBookManager.getActiveAddressBook();
     }
 
-    private AddressBook getActiveAddressBook() {
-        return addressBookManager.getActiveAddressBook();
-    }
-
-    @Override
-    public ReadOnlyAddressBookManager getAddressBookManager() {
-        return addressBookManager;
-    }
-
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -140,6 +134,38 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
         getActiveAddressBook().setPerson(target, editedPerson);
     }
+
+    //=========== AddressBookManager =========================================================================
+     @Override
+    public ReadOnlyAddressBookManager getAddressBookManager() {
+        return addressBookManager;
+    }
+
+    private AddressBook getActiveAddressBook() {
+        return addressBookManager.getActiveAddressBook();
+    }
+
+    @Override
+    public void addAddressBook(ReadOnlyAddressBook addressBook) {
+        addressBookManager.addAddressBook(addressBook);
+    }
+
+    @Override
+    public void deleteAddressBook(String courseCode) {
+        addressBookManager.removeAddressBook(courseCode);
+    }
+
+    @Override
+    public void setActiveAddressBook(String courseCode) {
+        addressBookManager.setActiveAddressBook(courseCode);
+        updateFilteredPersonList();
+    }
+
+    @Override
+    public boolean hasAddressBook(String courseCode) {
+        return addressBookManager.hasAddressBook(courseCode);
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

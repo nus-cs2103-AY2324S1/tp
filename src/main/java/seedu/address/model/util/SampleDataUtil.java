@@ -52,8 +52,8 @@ public class SampleDataUtil {
             sampleCS2030SAb.addPerson(samplePerson);
         }
 
-        sampleAbm.addAddressBook(sampleCS2030SAb);
         sampleAbm.setAddressBook(sampleCS2103TAb);
+        sampleAbm.addAddressBook(sampleCS2030SAb);
 
         return sampleAbm;
 
