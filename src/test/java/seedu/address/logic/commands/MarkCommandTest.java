@@ -35,8 +35,7 @@ public class MarkCommandTest {
 
         MarkCommand markCommand = new MarkCommand(i, studentToMark.getStudentNumber());
 
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS,
-                Messages.format(studentToMark));
+        String expectedMessage = MarkCommand.MESSAGE_MARK_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setStudent(studentToMark, studentToMark.markPresent(i));

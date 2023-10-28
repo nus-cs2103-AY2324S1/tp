@@ -73,6 +73,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String getTheme() {
+        return userPrefs.getTheme();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
@@ -115,6 +120,10 @@ public class ModelManager implements Model {
         userPrefs.setTutorialCount(tutorialCount);
     }
 
+    @Override
+    public void toggleColorTheme() {
+        userPrefs.toggleColorTheme();
+    }
     //=========== AddressBook ================================================================================
 
     @Override

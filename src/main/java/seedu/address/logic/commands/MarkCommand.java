@@ -18,7 +18,7 @@ import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexExcepti
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_MARK_SUCCESS = "Successfully mark attendance.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student.\n"
             + "Parameters: INDEX "
             + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER\n"
             + "Example: " + COMMAND_WORD + " 1 "

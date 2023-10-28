@@ -58,6 +58,7 @@ public class AttendanceTracker implements Tracker {
      * @param tutNum The tutorial number.
      */
     public void markPresent(Index tutNum) throws InvalidTutorialIndexException {
+        requireNonNull(tutNum);
         if (tutNum.getZeroBased() >= attendanceList.length) {
             throw new InvalidTutorialIndexException();
         }

@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_CLASS_MANAGER_ALREADY_CONFIGU
 import static seedu.address.logic.Messages.MESSAGE_CLASS_MANAGER_NOT_CONFIGURED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
@@ -34,10 +35,13 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
+import seedu.address.logic.commands.MarkAllCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RecordClassPartCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.ThemeCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Comment;
@@ -105,6 +109,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_markAll() throws Exception {
+        int tut = ClassDetails.DEFAULT_COUNT;
+        MarkAllCommand command = (MarkAllCommand) parser.parseCommand(MarkAllCommand.COMMAND_WORD + " "
+                        + tut, true);
+        assertEquals(new MarkAllCommand(Index.fromOneBased(tut)), command);
+    }
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, true) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", true) instanceof ExitCommand);
@@ -161,25 +173,42 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_config_throwsParseException() throws Exception {
-        assertThrows(ParseException.class, MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED, ()
-                -> parser.parseCommand("config", true));
+        assertThrows(ParseException.class,
+                MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED, () -> parser.parseCommand("config", true));
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewCommand.COMMAND_WORD + " " + VALID_STUDENT_NUMBER_AMY, true);
+        assertEquals(new ViewCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY)), command);
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(ViewCommand.COMMAND_WORD
+                        + " " + INVALID_STUDENT_NUMBER, true));
     }
 
     @Test
     public void parseCommand_comment() throws Exception {
         Student student = new StudentBuilder().build();
         Comment comment = new Comment("Struggling with tutorials.");
-        CommentCommand command = (CommentCommand) parser.parseCommand(CommentCommand.COMMAND_WORD + " "
-                + PREFIX_STUDENT_NUMBER + student.getStudentNumber() + " "
-                + PREFIX_COMMENT + comment, true);
+        CommentCommand command = (CommentCommand) parser.parseCommand(CommentCommand.COMMAND_WORD
+                + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber()
+                + " " + PREFIX_COMMENT + comment, true);
         assertEquals(new CommentCommand(student.getStudentNumber(), comment), command);
     }
 
+    @Test
+    public void parseCommand_theme() throws Exception {
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD, true) instanceof ThemeCommand);
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD + " 3", true) instanceof ThemeCommand);
+    }
 
     @Test
     public void parseCommandNotConfigured_config() throws Exception {
-        ConfigCommand command = (ConfigCommand) parser.parseCommand(ConfigCommand.COMMAND_WORD + " "
-                + PREFIX_TUTORIAL_COUNT + "5" + " " + PREFIX_ASSIGNMENT_COUNT + 2, false);
+        ConfigCommand command = (ConfigCommand) parser.parseCommand(ConfigCommand.COMMAND_WORD
+                + " " + PREFIX_TUTORIAL_COUNT + "5"
+                + " " + PREFIX_ASSIGNMENT_COUNT + 2, false);
         assertEquals(new ConfigCommand(5, 2), command);
     }
 
@@ -190,19 +219,33 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommandNotConfigured_theme() throws Exception {
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD, false) instanceof ThemeCommand);
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD + " 3", false) instanceof ThemeCommand);
+    }
+
+    @Test
+    public void parseCommandNotConfigured_exit() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, false) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", false) instanceof ExitCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand("", true));
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand("", true));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", true));
+        assertThrows(ParseException.class,
+                MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", true));
     }
 
     @Test
     public void parseCommandNotConfigured_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_CLASS_MANAGER_NOT_CONFIGURED, ()
-                -> parser.parseCommand("unknownCommand", false));
+        assertThrows(ParseException.class,
+                MESSAGE_CLASS_MANAGER_NOT_CONFIGURED, () -> parser.parseCommand("unknownCommand", false));
     }
 }
