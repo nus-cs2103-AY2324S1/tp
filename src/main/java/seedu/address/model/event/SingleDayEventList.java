@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Optional;
@@ -70,7 +72,7 @@ public class SingleDayEventList {
      */
     public boolean containsEvent(Event event) {
         requireNonNull(event);
-        for (Event thisEvent : this.eventTree.values()) {
+        for (Event thisEvent : eventTree.values()) {
             if (event.equals(thisEvent)) {
                 return true;
             }
@@ -86,13 +88,30 @@ public class SingleDayEventList {
      */
     public Optional<Event> eventAtTime(LocalDateTime dateTime) {
         requireNonNull(dateTime);
-        for (Event event : this.eventTree.values()) {
+      
+        for (Event event : eventTree.values()) {
             Event parentEvent = event.getParentEvent();
             if (parentEvent.isDuring(dateTime)) {
                 return Optional.of(event.getParentEvent());
             }
         }
         return Optional.empty();
+    }
+
+    /**
+     * Looks for all events within a time range and returns a List containing these events.
+     *
+     * @param eventPeriod The specified time range represented by a {@code EventPeriod}
+     * @return A List object containing all events that are within the time range.
+     */
+    public List<Event> eventsInRange(EventPeriod eventPeriod) {
+        ArrayList<Event> output = new ArrayList<Event>();
+        for (Event thisEvent : eventTree.values()) {
+            if (thisEvent.isPeriodConflicting(eventPeriod)) {
+                output.add(thisEvent.getParentEvent());
+            }
+        }
+        return output;
     }
 
     /**

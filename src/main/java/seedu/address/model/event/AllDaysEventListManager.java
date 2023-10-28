@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -122,6 +123,24 @@ public class AllDaysEventListManager {
             throw new EventNotFoundException();
         }
     }
+
+    /**
+     * Looks for events within a specified time and returns the list of events.
+     *
+     * @param range the {@code EventPeriod} describing the time range to check.
+     * @return A list of events or an empty list if no events are within the range.
+     */
+    public List<Event> eventsInRange(EventPeriod range) {
+        List<LocalDate> days = range.getDates();
+        return days.stream().map(LocalDate::toString)
+                .flatMap(x -> dayToEventListMap.containsKey(x)
+                        ? dayToEventListMap.get(x).eventsInRange(range).stream()
+                        : Stream.<Event>empty())
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+
     /**
      * Checks if the manager is empty.
      *
@@ -162,13 +181,31 @@ public class AllDaysEventListManager {
     }
 
     /**
+     * Returns the event list storing events that occur between the start and end dates as an unmodifiable
+     * ObservableList.
+     *
+     * @param startDate start date.
+     * @param endDate end date.
+     * @return the event list storing events that occur between the start and end dates as an unmodifiable
+     *     ObservableList.
+     */
+    public ObservableList<Event> asUnmodifiableObservableList(LocalDate startDate, LocalDate endDate) {
+        List<Event> list = dayToEventListMap.values().stream()
+                .flatMap(singleDayEventList -> singleDayEventList.getDayEventList().stream())
+                .filter(event -> event.occursBetweenDates(startDate, endDate))
+                .collect(Collectors.toList());
+
+        return FXCollections.observableList(list);
+    }
+
+    /**
      * Checks if there are any events at all in the manager.
      *
      * @return true if there are any events in the manager, false otherwise.
      */
     public boolean hasEvents() {
         if (!this.isEmpty()) {
-            return dayToEventListMap.values().stream().map(SingleDayEventList::isEmpty).allMatch(x -> x.equals(false));
+            return dayToEventListMap.values().stream().map(SingleDayEventList::isEmpty).anyMatch(x -> x.equals(false));
         }
         return false;
     }
