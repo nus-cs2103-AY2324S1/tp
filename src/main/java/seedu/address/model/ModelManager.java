@@ -111,8 +111,13 @@ public class ModelManager implements Model {
     public void addMusician(Musician musician) {
         addressBook.addMusician(musician);
         updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
+        updateFilteredBandList(Model.PREDICATE_SHOW_ALL_BANDS);
     }
 
+    /**
+     * This method is used by edit and delete musician commands to simultaneously update the
+     * corresponding musician in band list.
+     */
     @Override
     public void setMusician(Musician target, Musician editedMusician) {
         requireAllNonNull(target, editedMusician);
@@ -125,7 +130,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * This method is used by edit and delete musician commands to simultaneously update the
+     * Used by edit and delete musician commands to simultaneously update the
      * corresponding musician in band list.
      */
     private void updateMusicianInAllBands(Musician target, Musician editedMusician) {

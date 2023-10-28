@@ -158,12 +158,12 @@ public class AddMusiciantoBandCommandTest {
         }
 
         @Override
-        public void updateFilteredMusicianList(Predicate<Musician> predicate) {
+        public void updateFilteredBandList(Predicate<Band> band) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredBandList(Predicate<Band> predicate) {
+        public void updateFilteredMusicianList(Predicate<Musician> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -242,6 +242,9 @@ public class AddMusiciantoBandCommandTest {
         @Override
         public ObservableList<Band> getFilteredBandList() {
             return new FilteredList<>(bandsAdded.asUnmodifiableObservableList());
+        }
+        @Override
+        public void updateFilteredBandList(Predicate<Band> predicate) {
         }
         @Override
         public ObservableList<Musician> getFilteredMusicianList() {
