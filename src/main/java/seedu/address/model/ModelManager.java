@@ -124,7 +124,6 @@ public class ModelManager implements Model {
 
     //=========== Undo ======================================================================================
 
-
     @Override
     public void addToHistory(UndoableCommand command) {
         commandHistory.push(command);

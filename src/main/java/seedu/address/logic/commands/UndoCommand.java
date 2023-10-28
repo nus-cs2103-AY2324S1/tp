@@ -25,10 +25,9 @@ public class UndoCommand extends Command {
             + "An undo-able command includes an edit, add, clear or delete command.\n"
             + "Optionally, you can specify the number of commands to undo.\n"
             + COMMAND_FORMAT;
-    public static final String INVALID_NEGATIVE_STEPS_TO_UNDO = "Undo step count cannot be a negative number.\n"
-            + MESSAGE_USAGE;
+    public static final String INVALID_STEPS_TO_UNDO = "Undo step count cannot be a negative number or zero.\n";
 
-    public static final String INVALID_POSITIVE_STEPS_TO_UNDO = "Please provide a valid number of steps to undo, "
+    public static final String INVALID_NATURAL_NUMBER_TO_UNDO = "Please provide a valid number of steps to undo, "
             + "not exceeding the available command history";
 
     public static final String NO_HISTORY_EXISTS_FAILURE = "There is no history of un-doable commands to be undone.\n"
@@ -64,7 +63,7 @@ public class UndoCommand extends Command {
         }
         if (stepsToUndo > model.getCommandHistorySize()) {
             logger.log(Level.WARNING, "Invalid steps to undo");
-            throw new CommandException(INVALID_POSITIVE_STEPS_TO_UNDO
+            throw new CommandException(INVALID_NATURAL_NUMBER_TO_UNDO
                     + " (Currently max is: " + model.getCommandHistorySize() + ").\n"
                     + MESSAGE_USAGE);
         }

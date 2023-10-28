@@ -43,7 +43,7 @@ public class DeleteCommand extends UndoableCommand {
 
     public static final String MESSAGE_UNDO_DELETE_ENTIRE_PERSON_SUCCESS = "Undoing the deletion of Patient:  %1$s";
 
-    public static final String MESSAGE_UNDO_DELETE_FIELD_SUCESS = "Undoing the deletion of a Patient's field:  %1$s";
+    public static final String MESSAGE_UNDO_DELETE_FIELD_SUCCESS = "Undoing the deletion of a Patient's field:  %1$s";
 
     /**
      * The original state of the person.
@@ -109,7 +109,7 @@ public class DeleteCommand extends UndoableCommand {
             model.setPerson(personToDelete, originalPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             System.out.println(originalPerson);
-            return new CommandResult(String.format(MESSAGE_UNDO_DELETE_FIELD_SUCESS,
+            return new CommandResult(String.format(MESSAGE_UNDO_DELETE_FIELD_SUCCESS,
                     Messages.format(editedPerson)));
         }
     }

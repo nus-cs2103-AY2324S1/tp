@@ -26,9 +26,9 @@ public class UndoCommandParser implements Parser<UndoCommand> {
         } else {
             try {
                 int steps = Integer.parseInt(trimmedArgs);
-                if (steps < 0) {
+                if (steps <= 0) {
                     throw new ParseException(String.format(
-                            UndoCommand.INVALID_NEGATIVE_STEPS_TO_UNDO, UndoCommand.MESSAGE_USAGE));
+                            UndoCommand.INVALID_STEPS_TO_UNDO));
                 } else {
                     return new UndoCommand(steps);
                 }

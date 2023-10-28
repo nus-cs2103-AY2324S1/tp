@@ -46,7 +46,6 @@ public class AddCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "New Patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This Patient already exists in the address book";
-
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undoing the adding of Patient:  %1$s";
 
     private final Person toAdd;
