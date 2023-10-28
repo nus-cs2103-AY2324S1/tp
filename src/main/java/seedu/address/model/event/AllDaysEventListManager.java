@@ -137,6 +137,7 @@ public class AllDaysEventListManager {
     public ObservableList<Event> asUnmodifiableObservableList() {
         List<Event> list = dayToEventListMap.values().stream()
                 .flatMap(singleDayEventList -> singleDayEventList.getDayEventList().stream())
+                .map(Event::getParentEvent).distinct()
                 .collect(Collectors.toList());
 
         return FXCollections.observableList(list);
