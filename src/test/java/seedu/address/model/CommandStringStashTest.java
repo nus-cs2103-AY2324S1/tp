@@ -48,6 +48,18 @@ public class CommandStringStashTest {
     }
 
     @Test
+    public void addCommandString_withDuplicateCommandString_removesOldInstance() {
+        CommandStringStash commandStringStash = new CommandStringStash(createCmdStringStackIntegers(0, 9), 6);
+        List<String> expectedCommandStringStack = createCmdStringStackIntegers(0, 3);
+        expectedCommandStringStack.addAll(createCmdStringStackIntegers(5, 9));
+        expectedCommandStringStack.add("4");
+        CommandStringStash expectedCommandStringStash = new CommandStringStash(expectedCommandStringStack, 10);
+
+        commandStringStash.addCommandString("4");
+        assertEquals(expectedCommandStringStash, commandStringStash);
+    }
+
+    @Test
     public void addCommandString_withNullCommandString_throwsAssertionError() {
         CommandStringStash commandStringStash = new CommandStringStash();
         assertThrows(AssertionError.class, () -> commandStringStash.addCommandString(null));
