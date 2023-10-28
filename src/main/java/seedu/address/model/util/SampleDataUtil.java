@@ -14,6 +14,7 @@ import seedu.address.model.appointment.exceptions.InvalidStartEndTimeException;
 import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 
@@ -21,20 +22,23 @@ import seedu.address.model.student.Student;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    public static final Note EMPTY_NOTE = new Note(" ");
+
     public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Phone("87438807"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), getTagSet("high")),
+                new Address("Blk 30 Geylang Street 29, #06-40"), getTagSet("high"), EMPTY_NOTE),
             new Student(new Name("Bernice Yu"), new Phone("99272758"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), getTagSet("medium")),
+                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), getTagSet("medium"), EMPTY_NOTE),
             new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), getTagSet("low")),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), getTagSet("low"), EMPTY_NOTE),
             new Student(new Name("David Li"), new Phone("91031282"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), getTagSet("high")),
+                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), getTagSet("high"), EMPTY_NOTE),
             new Student(new Name("Irfan Ibrahim"), new Phone("92492021"),
-                new Address("Blk 47 Tampines Street 20, #17-35"), getTagSet("medium")),
+                new Address("Blk 47 Tampines Street 20, #17-35"), getTagSet("medium"), EMPTY_NOTE),
             new Student(new Name("Roy Balakrishnan"), new Phone("92624417"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"), getTagSet("low"))
+                new Address("Blk 45 Aljunied Street 85, #11-31"), getTagSet("low"), EMPTY_NOTE)
         };
     }
 

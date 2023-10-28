@@ -12,7 +12,9 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 1. Getting started
+
+####  1.1 Accessing the app
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -33,17 +35,15 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Features
+#### 1.2 Prefixes and parameters used in commands 
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-e.g. in `add n/NAME c/CONTACT_NUMBER`, `NAME` and `CONTACT_NUMBER` are parameters 
-which can be used as `add n/John Doe c/98172645`.
+  e.g. in `add n/NAME c/CONTACT_NUMBER`, `NAME` and `CONTACT_NUMBER` are parameters
+  which can be used as `add n/John Doe c/98172645`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -60,7 +60,13 @@ which can be used as `add n/John Doe c/98172645`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+--------------------------------------------------------------------------------------------------------------------
+
+## 2. Features
+
+### 2.1 Utility Commands
+
+#### 2.1.1 Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -68,7 +74,9 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a student: `add`
+### 2.2 Student Commands
+
+#### 2.2.1 Adding a Student: `add`
 
 Adds a student with his/her relevant details.
 
@@ -86,8 +94,7 @@ Examples:
 * `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
 * `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08`
 
-
-### Deleting a student: `delete`
+#### 2.2.2 Deleting a Student: `delete`
 
 Deletes an existing student.
 
@@ -97,8 +104,14 @@ Format: `delete <INDEX>`
 1. Appointment Index
     - Index must be an integer more than 0
 
+#### 2.2.3 Editing a Student: `edit`
 
-### Assigning risk status to student (to be implemented)
+#### 2.2.4 Viewing all Students: `view`
+
+#### 2.2.5 Finding Students by Name: `find`
+
+### 2.2.6 Assigning risk status to student (to be implemented)
+
 Tags a student with a risk level based on their current mental health status, categorizing them as high, medium, low tag_student <index> <RISK_LEVEL>
    
 Format: `tag_student <INDEX> <RISK_LEVEL>`
@@ -109,7 +122,9 @@ Format: `tag_student <INDEX> <RISK_LEVEL>`
 2. RISK LEVEL 
    - One of the following HIGH, MEDIUM, LOW
 
-### Scheduling an appointment: `schedule`
+### 2.3 Appointment Commands
+
+#### 2.3.1 Scheduling an Appointment: `schedule`
 
 Schedules a new appointment for a student.
 
@@ -125,7 +140,7 @@ Examples:
 - `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon`
 - `schedule d/family issues consultation s/18:30 n/Kiat`
 
-### Cancelling an appointment: `cancel`
+#### 2.3.2 Cancelling an Appointment: `cancel`
 
 Cancels an existing appointment.
 
@@ -138,7 +153,7 @@ Format: `cancel <INDEX>`
 Examples:
 * `cancel 2`
 
-### Viewing all students/appointments: `view`
+#### 2.3.3 Viewing all Appointments: `view`
 
 Shows a list of all students or appointments, depending on specified input.
 
@@ -148,52 +163,61 @@ Format: `view g/CATEGORY`
 1. Category
     - Only 'students' or 'appointments'
 
-### Exiting the program : `exit`
+#### 2.3.4 Filtering Appointments by Date: `filter`
+
+### 2.4 Others
+#### 2.4.1 Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+#### 2.4.2 Clearing storage: `clear`
+
+### 2.4.3 Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### 2.4.4 Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### Tracking TODOS `[coming in v1.3]`
+### 2.5 Tracking TODOS `[coming in v1.3]`
 
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 3. Frequently Asked Questions (FAQ)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## 4. Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary 
+## 5. Command summary 
 
-| Action                    | Format, Examples                                                                                                       |
-|---------------------------|------------------------------------------------------------------------------------------------------------------------|
-| **Add**                   | `add n/NAME c/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`              |
-| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
-| **Tag**                   | `tag_student INDEX RISK_LEVEL`<br> e.g.,`tag_student 4 HIGH`                                                           |
-| **Schedule**              | `schedule d/DESCRIPTION s/DATETIME n/NAME_OF_STUDENT`<br> e.g., `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon` |
-| **Cancel**                | `cancel INDEX`<br> e.g., `cancel 3`                                                                                    |
-| **View**                  | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                     |
-| **Help**                  | `help`                                                                                                                 |
-| **Exit**                  | `exit`                                                                                                                 |
+| Action                     | Format, Examples                                                                                                       |
+|----------------------------|------------------------------------------------------------------------------------------------------------------------|
+| [Add Student]()            | `add n/NAME c/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`              |
+| [Delete Student]()         | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
+| [Edit Student]()           |                                                                                                                        |
+| [View Students]()          |                                                                                                                        |
+| [Find Students]()          |                                                                                                                        |
+| [Assign Risk to Student]() | `tag_student INDEX RISK_LEVEL`<br> e.g.,`tag_student 4 HIGH`                                                           |
+| [Schedule Appointment]()   | `schedule d/DESCRIPTION s/DATETIME n/NAME_OF_STUDENT`<br> e.g., `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon` |
+| [Cancel Appointment]()     | `cancel INDEX`<br> e.g., `cancel 3`                                                                                    |
+| [View Appointments]()      | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                     |
+| [Filter Appointments]()    |                                                                                                                        |
+| [Help]()                   | `help`                                                                                                                 |
+| [Exit]()                   | `exit`                                                                                                                 |
 
