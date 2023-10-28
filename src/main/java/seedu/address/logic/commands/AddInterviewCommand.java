@@ -42,8 +42,9 @@ public class AddInterviewCommand extends Command {
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "Error: This is a duplicate interview";
     public static final String MESSAGE_APPLICANT_HAS_INTERVIEW =
             "Applicant already has an interview scheduled";
-    public static final String MESSAGE_INVALID_TIME = "The interview start time must be before the end time and "
-            + "the time must be between 0900 to 1700.";
+    public static final String MESSAGE_INVALID_TIME = "The interview start time must be before the end time, "
+            + "the time must be between 0900 to 1700,\n"
+            + "and the start time and end time must be on the same day!";
 
     private final Index applicantIndex;
     private final String jobRole;
