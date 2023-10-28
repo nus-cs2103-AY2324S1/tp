@@ -5,7 +5,7 @@
 ---
 # Class Manager 2023 User Guide
 
-Class Manager 2023 (CM 23) is a **desktop app for managing your students' contacts,
+Class Manager 2023 (CM 23) is a **desktop app for managing your students' contacts in the class,
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
 Graphical User Interface (GUI). If you can type fast, CM 23 can get your contact
 management tasks done faster than traditional GUI apps.
@@ -34,9 +34,7 @@ management tasks done faster than traditional GUI apps.
 
    * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11` : Adds a student named `John Doe` to the Class Manager.
 
-   * `delete 3` : Deletes the 3rd student detail shown in the current list.
-
-   * `clear` : Deletes all student details.
+   * `delete A0245234A` : Deletes the student with student number A0245234A, which is added in the previous step.
 
    * `exit` : Exits the app.
 
@@ -109,11 +107,13 @@ Format: `list`
 
 Edits an existing student in the class manager.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`
+Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student with the student number `STUDENT_NUMBER`.
+* The STUDENT_NUMBER must be valid and exist.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* The NEW_STUDENT_NUMBER must be valid and unique (does not exist in the class manager).
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -268,7 +268,7 @@ Deletes the specific student.
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The STUDENT NUMBER must be valid and exist.
+* The STUDENT_NUMBER must be valid and exist.
 
 Examples:
 * `delete s/A0249112A`
@@ -357,7 +357,7 @@ _Details coming soon ..._
 | **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague` |
 | **Comment**     | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                        |
 | **Delete**      | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                         |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                               |
+| **Edit**        | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`                               |
 | **Tag**         | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                         |
 | **Lookup**      | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                               |
 | **Config**      | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                     |
