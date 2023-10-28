@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalApplicants.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -188,6 +189,11 @@ public class AddCommandTest {
         @Override
         public void deleteInterview(Interview interview) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortInterviewList(Comparator<Interview> comparator) {
+            throw new AssertionError("This method should not be called");
         }
     }
 
