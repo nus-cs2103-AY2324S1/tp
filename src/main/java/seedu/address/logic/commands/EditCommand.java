@@ -22,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 
@@ -92,8 +93,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Set<RiskLevel> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Note updatedNote = studentToEdit.getNote();
 
-        return new Student(updatedName, updatedPhone, updatedAddress, updatedTags);
+        return new Student(updatedName, updatedPhone, updatedAddress, updatedTags, updatedNote);
     }
 
     @Override

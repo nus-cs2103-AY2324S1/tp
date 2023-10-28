@@ -3,16 +3,19 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "high" ]
+    "tags": [ "high" ],
+    "note" : " "
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "address": "4th street"
+    "address": "4th street",
+    "note" : " "
   }, {
       "name" : "Daniel Meier",
       "phone" : "87652533",
       "address" : "10th street",
-      "tags" : [ "low" ]
+      "tags" : [ "low" ],
+      "note" : " "
     }],
   "appointments" : [ {
     "name" : "Daniel Meier",
