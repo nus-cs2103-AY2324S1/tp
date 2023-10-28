@@ -16,6 +16,4 @@ public interface ReadOnlyUserPrefs {
 
     ShortcutSettings getShortcutSettings();
 
-    Theme getTheme();
-
 }

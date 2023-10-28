@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.ShortcutSettings;
+import seedu.address.commons.core.ThemeProperty;
 import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.ShortcutAlias;
 import seedu.address.model.person.Person;
@@ -28,6 +29,12 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private Person selectedPerson;
     private final CommandStringStash commandStringStash;
+    /**
+     * Ideally theme property should be under UserPrefs, but due to limitations of the
+     * JSON Serialising library, it causes errors when put under there, and so the
+     * theme cannot be saved from session to session.
+     */
+    private ThemeProperty themeProperty;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,6 +48,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.trackedAddressBook.getPersonList());
         this.commandStringStash = new CommandStringStash();
+        this.themeProperty = new ThemeProperty();
 
         // DoConnek Pro shows all patients on startup by default.
         updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
@@ -200,14 +208,15 @@ public class ModelManager implements Model {
         commandStringStash.addCommandString(commandString);
     }
 
+    //=========== Theme =============================================================
     @Override
     public void setTheme(Theme theme) {
-        userPrefs.setTheme(theme);
+        themeProperty.setValue(theme);
     }
 
     @Override
     public void addThemeListener(ChangeListener<? super Theme> changeListener) {
-        userPrefs.addThemeListener(changeListener);
+        themeProperty.addListener(changeListener);
     }
 
     @Override
@@ -230,6 +239,7 @@ public class ModelManager implements Model {
                 && selectedPerson.equals(otherModelManager.selectedPerson)));
     }
 
+    //=========== Undo-Redo =============================================================
     @Override
     public boolean hasHistory() {
         return trackedAddressBook.hasHistory();

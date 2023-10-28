@@ -6,11 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.ShortcutSettings;
 
@@ -45,7 +40,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
                 .removeBadMappings();
         setShortcutSettings(newShortcutSettings);
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
-        setTheme(newUserPrefs.getTheme());
     }
 
     public GuiSettings getGuiSettings() {
@@ -73,18 +67,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
-    }
-
-    public void setTheme(Theme theme) {
-        ThemeProperty.getInstance().setValue(theme);
-    }
-
-    public void addThemeListener(ChangeListener<? super Theme> changeListener) {
-        ThemeProperty.getInstance().addListener(changeListener);
-    }
-
-    public Theme getTheme() {
-        return ThemeProperty.getInstance().getValue();
     }
 
     @Override
@@ -115,89 +97,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nShortcutAlias Settings : " + shortcutSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
-        sb.append("\nTheme : " + ThemeProperty.getInstance().getValue());
         return sb.toString();
     }
 
-    /**
-     * ThemeProperty implements the Observable interface for a Theme enum.
-     * ThemeProperty cannot be saved to user preferences due to limitations of the
-     * JSON serialising library being used hence it is declared as private static as it
-     * is not needed outside the UserPrefs class.
-     */
-    private static class ThemeProperty implements Property<Theme> {
-        private static final ThemeProperty themeProperty = new ThemeProperty();
-        private final SimpleObjectProperty<Theme> delegate = new SimpleObjectProperty<>(Theme.LIGHT);
-
-        private ThemeProperty() {
-        }
-
-        public static ThemeProperty getInstance() {
-            return themeProperty;
-        }
-
-        @Override
-        public void bind(ObservableValue<? extends Theme> observable) {
-            delegate.bind(observable);
-        }
-
-        @Override
-        public void unbind() {
-            delegate.unbind();
-        }
-
-        @Override
-        public boolean isBound() {
-            return delegate.isBound();
-        }
-
-        @Override
-        public void bindBidirectional(Property<Theme> other) {
-            delegate.bindBidirectional(other);
-        }
-
-        @Override
-        public void unbindBidirectional(Property<Theme> other) {
-            delegate.unbindBidirectional(other);
-        }
-
-        @Override
-        public Object getBean() {
-            return delegate.getBean();
-        }
-
-        @Override
-        public String getName() {
-            return delegate.getName();
-        }
-
-        @Override
-        public void addListener(ChangeListener<? super Theme> listener) {
-            delegate.addListener(listener);
-        }
-
-        @Override
-        public void addListener(InvalidationListener listener) {
-            delegate.addListener(listener);
-        }
-        @Override
-        public void removeListener(ChangeListener<? super Theme> listener) {
-            delegate.removeListener(listener);
-        }
-
-        @Override
-        public void removeListener(InvalidationListener listener) {
-            delegate.removeListener(listener);
-        }
-
-        @Override
-        public Theme getValue() {
-            return delegate.getValue();
-        }
-
-        @Override
-        public void setValue(Theme value) {
-            delegate.setValue(value);
-        }
-    }
 }

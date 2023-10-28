@@ -11,16 +11,8 @@ import seedu.address.model.Theme;
 /**
  * Represents a custom property for managing the theme of an application.
  */
-class ThemeProperty implements Property<Theme> {
-    private static final ThemeProperty themeProperty = new ThemeProperty();
-    private final SimpleObjectProperty<Theme> delegate = new SimpleObjectProperty<>(Theme.LIGHT);
-
-    private ThemeProperty() {
-    }
-
-    public static ThemeProperty getInstance() {
-        return themeProperty;
-    }
+public class ThemeProperty implements Property<Theme> {
+    private final SimpleObjectProperty<Theme> delegate = new SimpleObjectProperty<>(Theme.DARK);
 
     @Override
     public void bind(ObservableValue<? extends Theme> observable) {
