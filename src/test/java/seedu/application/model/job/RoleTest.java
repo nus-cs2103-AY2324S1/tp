@@ -41,22 +41,24 @@ public class RoleTest {
     }
 
     @Test
-    public void equals() {
+    public void testEqualsAndHashcode() {
         Role role = new Role("Valid Role");
 
         // same values -> returns true
-        assertEquals(role, new Role("Valid Role"));
+        assertTrue(role.equals(new Role("Valid Role")));
+        assertEquals(role.hashCode(), new Role("Valid Role").hashCode());
 
         // same object -> returns true
-        assertEquals(role, role);
+        assertTrue(role.equals(role));
 
         // null -> returns false
-        assertNotEquals(role, null);
+        assertFalse(role.equals(null));
 
         // different types -> returns false
-        assertNotEquals(role, 5.0f);
+        assertFalse(role.equals(5.0f));
 
         // different values -> returns false
-        assertNotEquals(role, new Role("Other Valid Role"));
+        assertFalse(role.equals(new Role("Other Valid Role")));
+        assertNotEquals(role.hashCode(), new Role("Other Valid Role").hashCode());
     }
 }

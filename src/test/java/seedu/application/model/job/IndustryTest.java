@@ -38,23 +38,25 @@ class IndustryTest {
     }
 
     @Test
-    void testEquals() {
+    void testEqualsAndHashcode() {
         Industry industry = new Industry("Finance");
 
         // same values -> returns true
-        assertEquals(industry, new Industry("Finance"));
+        assertTrue(industry.equals(new Industry("Finance")));
+        assertEquals(industry.hashCode(), new Industry("Finance").hashCode());
 
         // same object -> returns true
-        assertEquals(industry, industry);
+        assertTrue(industry.equals(industry));
 
         // null -> returns false
-        assertNotEquals(industry, null);
+        assertFalse(industry.equals(null));
 
         // different types -> returns false
-        assertNotEquals(industry, new Company("Google"));
+        assertFalse(industry.equals(new Company("Google")));
 
         // different values -> returns false
-        assertNotEquals(industry, new Industry("Engineering"));
+        assertFalse(industry.equals(new Industry("Engineering")));
+        assertNotEquals(industry.hashCode(), (new Industry("Engineering").hashCode()));
     }
 
 }
