@@ -50,7 +50,6 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_DEREK = "mcdreamy@medilink.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-
     public static final String VALID_ADDRESS_CHERYL = "123 Main Street, Anytown, USA";
     public static final String VALID_ADDRESS_DEREK = "456 Elm Avenue, Somewhereville, Canada";
 
@@ -100,19 +99,6 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_DEREK = " " + PREFIX_ADDRESS + VALID_ADDRESS_DEREK;
     public static final String GENDER_DESC_MALE = " " + PREFIX_GENDER + VALID_GENDER_MALE;
     public static final String GENDER_DESC_FEMALE = " " + PREFIX_GENDER + VALID_GENDER_FEMALE;
-    public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
-    public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
-    public static final String NRIC_DESC_CHERYL = " " + PREFIX_NRIC + VALID_NRIC_CHERYL;
-    public static final String NRIC_DESC_DEREK = " " + PREFIX_NRIC + VALID_NRIC_DEREK;
-    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
-    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
-    public static final String REMARK_DESC_CHERYL = " " + PREFIX_REMARK + VALID_REMARK_CHERYL;
-    public static final String CONDITION_DESC_AMY = " " + PREFIX_CONDITION + VALID_CONDITION_AMY;
-    public static final String CONDITION_DESC_BOB = " " + PREFIX_CONDITION + VALID_CONDITION_BOB;
-    public static final String BLOODTYPE_DESC_AMY = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_AMY;
-    public static final String BLOODTYPE_DESC_BOB = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -123,6 +109,19 @@ public class CommandTestUtil {
     public static final String INVALID_EMERGENCY_CONTACT_DESC = " " + PREFIX_EMERGENCY_CONTACT + "+6A";
     public static final String INVALID_NRIC = "A1234567G";
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Alien";
+    public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
+    public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
+    public static final String NRIC_DESC_CHERYL = " " + PREFIX_NRIC + VALID_NRIC_CHERYL;
+    public static final String NRIC_DESC_DEREK = " " + PREFIX_NRIC + VALID_NRIC_DEREK;
+    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
+    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
+    public static final String REMARK_DESC_CHERYL = " " + PREFIX_REMARK + VALID_REMARK_CHERYL;
+    public static final String BLOODTYPE_DESC_AMY = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_AMY;
+    public static final String BLOODTYPE_DESC_BOB = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_BOB;
+    public static final String CONDITION_DESC_AMY = " " + PREFIX_CONDITION + VALID_CONDITION_AMY;
+    public static final String CONDITION_DESC_BOB = " " + PREFIX_CONDITION + VALID_CONDITION_BOB;
+    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
+    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
     public static final EditCommand.EditPersonDescriptor DESC_AMY;

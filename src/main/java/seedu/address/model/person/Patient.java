@@ -2,7 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +18,7 @@ public class Patient extends Person {
     // Patient specific fields
     private final Condition condition;
     private final BloodType bloodType;
-    private final ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+    private final Set<Appointment> appointments = new HashSet<>();
     private final Phone emergencyContact;
 
     /**
@@ -50,7 +50,7 @@ public class Patient extends Person {
      *
      * @return An ArrayList containing the patients currently registered in the facility.
      */
-    public ArrayList<Appointment> getAppointments() {
+    public Set<Appointment> getAppointments() {
         return appointments;
     }
 
@@ -126,9 +126,9 @@ public class Patient extends Person {
                 .add("nric", ic)
                 .add("condition", condition)
                 .add("bloodType", bloodType)
+                .add("appointments", appointments)
                 .add("tags", tags)
                 .toString();
     }
-
 }
 

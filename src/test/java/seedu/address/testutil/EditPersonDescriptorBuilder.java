@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,7 +54,7 @@ public class EditPersonDescriptorBuilder {
             descriptor.setEmergencyContact(patient.getEmergencyContact());
         } else if (person instanceof Doctor) {
             Doctor doctor = (Doctor) person;
-            descriptor.setPatients(doctor.getPatients());
+            descriptor.setAppointments(doctor.getAppointments());
         }
     }
 
@@ -136,15 +135,6 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
-        return this;
-    }
-
-    /**
-     * Parses the {@code patients} into a {@code ArrayList<Patient>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
-     */
-    public EditPersonDescriptorBuilder withPatients(ArrayList<Patient> patients) {
-        descriptor.setPatients(patients);
         return this;
     }
 

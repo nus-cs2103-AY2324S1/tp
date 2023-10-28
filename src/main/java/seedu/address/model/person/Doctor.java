@@ -1,6 +1,6 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Doctor extends Person {
-    private final ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+    private final Set<Appointment> appointments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -27,7 +27,7 @@ public class Doctor extends Person {
      *
      * @return An ArrayList containing the patients currently registered in the facility.
      */
-    public ArrayList<Appointment> getAppointments() {
+    public Set<Appointment> getAppointments() {
         return appointments;
     }
 
