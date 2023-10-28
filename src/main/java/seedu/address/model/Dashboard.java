@@ -55,6 +55,7 @@ public class Dashboard {
 
     /**
      * Returns the updated dashboard and opens the dashboard for viewing.
+     * The dashboard should always be closed after viewing as updating the dashboard may be expensive.
      */
     public Dashboard openDashboard() {
         updateDashboardIfDirty();
