@@ -38,7 +38,6 @@ public class Name implements Comparable<Name> {
         return test.matches(VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
         return fullName;

@@ -9,7 +9,8 @@
       "departments": [
         "Management"
       ],
-      "salary": "14000"
+      "salary": "14000",
+      "leaveList": [ ]
     },
     {
       "name": "Alice Pauline",
@@ -17,7 +18,8 @@
       "id": "EID1234-5678",
       "phone": "94351253",
       "email": "pauline@example.com",
-      "salary": "14000"
+      "salary": "14000",
+      "leaveList": [ ]
     }
   ]
 }

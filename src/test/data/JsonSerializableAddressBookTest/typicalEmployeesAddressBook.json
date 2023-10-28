@@ -9,7 +9,8 @@
       "email": "alice@example.com",
       "salary": "12000",
       "departments": ["Finance"],
-      "overtime": 0
+      "overtime": 0,
+      "leaveList": [ ]
     },
     {
       "name": "Benson Meier",
@@ -19,7 +20,8 @@
       "email": "johnd@example.com",
       "salary": "6000",
       "departments": ["IT", "Operations"],
-      "overtime": 0
+      "overtime": 0,
+      "leaveList": [ ]
     },
     {
       "name": "Carl Kurz",
@@ -29,7 +31,8 @@
       "email": "heinz@example.com",
       "salary": "5800",
       "departments": [],
-      "overtime": 0
+      "overtime": 0,
+      "leaveList": [ ]
     },
     {
       "name": "Daniel Meier",
@@ -39,7 +42,8 @@
       "email": "cornelia@example.com",
       "salary": "5000",
       "departments": ["IT"],
-      "overtime": 0
+      "overtime": 0,
+      "leaveList": [ ]
     },
     {
       "name": "Elle Meyer",
@@ -49,7 +53,8 @@
       "email": "werner@example.com",
       "salary": "4000",
       "departments": [],
-      "overtime": 0
+      "overtime": 0,
+      "leaveList": [ ]
     },
     {
       "name": "Fiona Kunz",
@@ -59,7 +64,8 @@
       "email": "lydia@example.com",
       "salary": "8000",
       "departments": [],
-      "overtime": 0
+      "overtime": 0,
+      "leaveList": [ ]
     },
     {
       "name": "George Best",
@@ -69,7 +75,8 @@
       "email": "anna@example.com",
       "salary": "1000",
       "departments": [],
-      "overtime": 0
+      "overtime": 0,
+      "leaveList": [ ]
     }
   ]
 }
