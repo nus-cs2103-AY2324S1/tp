@@ -46,6 +46,8 @@ public interface Model {
      */
     void setTheme(String theme);
 
+    void switchTheme();
+
     /**
      * Returns the user prefs' Flashlingo file path.
      */
