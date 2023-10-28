@@ -93,9 +93,14 @@ Format: `help`
 
 Adds a contact to OutBook.
 
+<<<<<<< HEAD
 Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL l/LAST_CONTACTED_TIME s/STATUS [r/REMARK][t/TAG]…​`
+=======
+Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL lc/LAST_CONTACTED_TIME [s/STATUS] [r/REMARK] [t/TAG]…​`
+>>>>>>> master
 
-* NAME, PHONE_NUMBER, and EMAIL are compulsory fields. STATUS, TAG and LAST_CONTACTED_TIME are optional.
+
+* NAME, PHONE_NUMBER, EMAIL and LAST_CONTACTED_TIME are compulsory fields. STATUS, REMARK and TAG are optional.
 * PHONE_NUMBER must contain only numbers, and be at least 3 digits long.
 * EMAIL must be of the format local-part@domain and adhere to the following constraints:
   1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
@@ -115,14 +120,18 @@ Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL l/LAST_CONTACTED_TIME s/STATUS [r/RE
 You can put any number of tags (including 0) on a contact.
 </div>
 
-* `addc n/John Doe p/98765432 e/johnd@example.com l/01.10.2023 1000`
-* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 l/01.01.2023 0100 t/Professor`
+* `addc n/John Doe p/98765432 e/johnd@example.com lc/01.10.2023 1000`
+* `addc n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 lc/01.01.2023 0100 t/Professor`
 
 <br/><br/>
 
 ### Listing all persons : `listc`
 
+<<<<<<< HEAD
 Shows you a list of all contacts in OutBook.
+=======
+Shows a list of all contacts in OutBook. Contacts are sorted by LAST_CONTACTED_TIME by default.
+>>>>>>> master
 
 Format: `listc`
 
@@ -141,6 +150,25 @@ Examples:
 * `listc` followed by `delete 2` deletes the 2nd person in the results of the `listc` command.
 * `findc Betsy` followed by `delete 1` deletes the 1st person in the results of the `findc` command.
 
+
+### Editing a contact : `editc`
+
+Edits an existing contact in OutBook.
+
+Format: `editc INDEX [n/NAME] [p/PHONE] [e/EMAIL] [lc/LAST_CONTACTED_TIME] [s/STATUS] [s/REMARK] [t/TAG]…​`
+
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* All fields are optional, but at least one must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+    specifying any tags after it.
+
+Examples:
+*  `editc 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `editc 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+
 ### Viewing detailed contact information : `viewc`
 
 Views detailed information of a contact in OutBook.
@@ -151,6 +179,7 @@ Format: `viewc INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Displays contact Name, Phone, Email, Last Contacted Time, Status, Remarks and Tags.
+* The displayed contact is reset when the `deletec` and `findc` commands are used.
 
 Examples:
 * `viewc 2` Displays detailed information related to the 2nd contact on the list.
@@ -194,7 +223,7 @@ Format: `remark INDEX r/REMARK`
 ### Search for persons using contact fields: `findc`
 Find persons whose contact details match the keywords specified for at least 1 of these fields: name, phone, email, status, tag
 
-Format: `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [l/DATETIME] [s/KEYWORDS] [t/KEYWORDS]`
+Format: `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [lc/DATETIME] [s/KEYWORDS] [t/KEYWORDS]`
 
 * The search is case-insensitive. e.g `shop` will match `SHOP`
 * The order of the keywords does not matter. e.g. `Shop Meet` will match `Meet Shop`
@@ -235,7 +264,7 @@ Examples:
 
 ### Listing all meetings : `listm`
 
-Shows you a list of all meetings in OutBook.
+Shows a list of all meetings in OutBook. Meetings are sorted by START by default.
 
 Format: `listm`
 
@@ -282,7 +311,8 @@ Format: `viewm INDEX`
 * Views detailed information of the meeting at the specified `INDEX`.
 * The index refers to the index number shown in the displayed meeting list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Displays meeting Title, Location, Meeting times, Attendees and Tags.
+* Displays meeting Title, Location, Start/End, Attendees and Tags.
+* The displayed meeting is reset when the `deletem` and `findm` commands are used.
 
 Examples:
 * `viewm 2` Displays detailed information related to the 2nd meeting on the list, including current attendees.

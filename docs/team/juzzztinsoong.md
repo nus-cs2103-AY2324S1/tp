@@ -32,6 +32,7 @@ My contributions to the project are listed below.
   - User Guide
     - Update parts of User Guide on `addc`, `editc` and `addm`.
   - Developer Guide
+    - Add implementation notes on LastContactedTime field
     - Non-functional Requirements
     - Glossary
 

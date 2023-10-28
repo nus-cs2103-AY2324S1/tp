@@ -9,7 +9,7 @@ Participant ":AddressBookParser" as abp LOGIC_COLOR
 Participant ":ViewContactCommandParser" as vccp LOGIC_COLOR
 Participant "command:ViewContactCommand" as ec LOGIC_COLOR
 
-[-> logic : execute
+
 activate logic
 logic -> abp ++: parseCommand(commandText)
 create vccp
