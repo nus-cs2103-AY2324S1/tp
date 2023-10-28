@@ -63,6 +63,13 @@ public class EditContactDescriptorTest {
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
+
+        // different alternate contacts -> return false
+        editedAmy =
+                new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
+                .withAlternateContacts(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE)
+                .build();
+        assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
     }
 
     @Test
@@ -71,9 +78,10 @@ public class EditContactDescriptorTest {
         String expected = EditContactDescriptor.class.getCanonicalName() + "{name="
                 + editContactDescriptor.getName().orElse(null) + ", phone="
                 + editContactDescriptor.getPhone().orElse(null) + ", email="
-                + editContactDescriptor.getEmail().orElse(null) + ", address="
+                + editContactDescriptor.getEmail().orElse(null) + ", note="
                 + editContactDescriptor.getNote().orElse(null) + ", tags="
-                + editContactDescriptor.getTags().orElse(null) + "}";
+                + editContactDescriptor.getTags().orElse(null) + ", alternate contacts="
+                + editContactDescriptor.getAlternateContacts().orElse(null) + "}";
         assertEquals(expected, editContactDescriptor.toString());
     }
 }

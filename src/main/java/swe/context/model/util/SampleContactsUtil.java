@@ -11,7 +11,7 @@ import swe.context.model.contact.Name;
 import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
-
+import swe.context.model.alternate.AlternateContact;
 
 
 /**
@@ -24,22 +24,28 @@ public class SampleContactsUtil {
         return new Contact[] {
             new Contact(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Note("CS2103 tutorial mate."),
-                getTagSet("friends")),
+                getTagSet("friends"),
+                getAlternateContactSet("Example@DAlexyeoh")),
             new Contact(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Note("CS2103 tutorial mate."),
-                getTagSet("colleagues", "friends")),
+                getTagSet("colleagues", "friends"),
+                getAlternateContactSet("Example@berniceyu123")),
             new Contact(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Note("CS2103 tutorial mate."),
-                getTagSet("neighbours")),
+                getTagSet("neighbours"),
+                getAlternateContactSet("Example@Charlotte21")),
             new Contact(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Note("CS2103 tutorial mate."),
-                getTagSet("family")),
+                getTagSet("family"),
+                getAlternateContactSet("Example@dl312")),
             new Contact(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Note("CS2103 tutorial mate."),
-                getTagSet("classmates")),
+                getTagSet("classmates"),
+                getAlternateContactSet("Example@IrfanIbrahim")),
             new Contact(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Note("CS2103 tutorial mate."),
-                getTagSet("colleagues"))
+                getTagSet("colleagues"),
+                getAlternateContactSet("Example@RoyBalakrishnan"))
         };
     }
 
@@ -49,6 +55,12 @@ public class SampleContactsUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<AlternateContact> getAlternateContactSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(AlternateContact::new)
                 .collect(Collectors.toSet());
     }
 

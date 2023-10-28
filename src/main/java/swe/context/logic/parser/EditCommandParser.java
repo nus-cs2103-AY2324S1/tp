@@ -6,6 +6,7 @@ import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_PHONE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_TAG;
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -17,6 +18,7 @@ import swe.context.logic.Messages;
 import swe.context.logic.commands.EditCommand;
 import swe.context.logic.commands.EditCommand.EditContactDescriptor;
 import swe.context.logic.parser.exceptions.ParseException;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.tag.Tag;
 
 
@@ -33,7 +35,13 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NOTE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args,
+                        PREFIX_NAME,
+                        PREFIX_PHONE,
+                        PREFIX_EMAIL,
+                        PREFIX_NOTE,
+                        PREFIX_TAG,
+                        PREFIX_ALTERNATE);
 
         Index index;
 
@@ -64,6 +72,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editContactDescriptor::setTags);
 
+        parseAlternateContactsforEdit(argMultimap.getAllValues(PREFIX_ALTERNATE))
+                .ifPresent(editContactDescriptor::setAlternateContacts);
+
         if (!editContactDescriptor.isAnyFieldEdited()) {
             throw new ParseException(Messages.EDIT_COMMAND_NOT_EDITED);
         }
@@ -84,5 +95,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    private Optional<Set<AlternateContact>> parseAlternateContactsforEdit(Collection<String> alternateContacts)
+            throws ParseException {
+        assert alternateContacts != null;
+
+        if (alternateContacts.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> alternateContactSet =
+                alternateContacts.size() == 1 && alternateContacts.contains("")
+                ? Collections.emptySet()
+                : alternateContacts;
+        return Optional.of(ParserUtil.parseAlternates(alternateContactSet));
     }
 }

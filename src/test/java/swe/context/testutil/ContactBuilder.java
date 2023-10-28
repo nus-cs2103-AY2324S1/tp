@@ -15,6 +15,7 @@ import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
 import swe.context.model.util.SampleContactsUtil;
+import swe.context.model.alternate.AlternateContact;
 
 /**
  * Builds {@link Contact}s more conveniently.
@@ -25,6 +26,7 @@ public class ContactBuilder {
     private Email email;
     private Note note;
     private Set<Tag> tags;
+    private Set<AlternateContact> alternateContacts;
 
     /**
      * Creates a {@code ContactBuilder} with the default details.
@@ -35,6 +37,7 @@ public class ContactBuilder {
         email = new Email(DEFAULT_EMAIL);
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
+        alternateContacts = new HashSet<>();
     }
 
     /**
@@ -46,6 +49,7 @@ public class ContactBuilder {
         email = contactToCopy.getEmail();
         note = contactToCopy.getNote();
         tags = new HashSet<>(contactToCopy.getTags());
+        alternateContacts = new HashSet<>(contactToCopy.getAlternates());
     }
 
     /**
@@ -88,7 +92,12 @@ public class ContactBuilder {
         return this;
     }
 
+    public ContactBuilder withAlternateContacts(String... alternateContacts) {
+        this.alternateContacts = SampleContactsUtil.getAlternateContactSet(alternateContacts);
+        return this;
+    }
+
     public Contact build() {
-        return new Contact(name, phone, email, note, tags);
+        return new Contact(name, phone, email, note, tags, alternateContacts);
     }
 }

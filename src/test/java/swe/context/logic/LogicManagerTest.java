@@ -161,7 +161,8 @@ public class LogicManagerTest {
         // Triggers the saveContacts method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + TestData.Valid.NAME_DESC_AMY + TestData.Valid.PHONE_DESC_AMY
                 + TestData.Valid.EMAIL_DESC_AMY + TestData.Valid.NOTE_DESC_AMY;
-        Contact expectedContact = new ContactBuilder(TestData.Valid.Contact.AMY).withTags().build();
+        Contact expectedContact =
+                new ContactBuilder(TestData.Valid.Contact.AMY).withTags().withAlternateContacts().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addContact(expectedContact);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

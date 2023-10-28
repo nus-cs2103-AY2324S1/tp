@@ -5,6 +5,7 @@ import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_PHONE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_TAG;
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -12,6 +13,7 @@ import java.util.stream.Stream;
 import swe.context.logic.Messages;
 import swe.context.logic.commands.AddCommand;
 import swe.context.logic.parser.exceptions.ParseException;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Contact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
@@ -32,7 +34,13 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NOTE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args,
+                        PREFIX_NAME,
+                        PREFIX_PHONE,
+                        PREFIX_EMAIL,
+                        PREFIX_NOTE,
+                        PREFIX_TAG,
+                        PREFIX_ALTERNATE);
 
         if (
             !arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE, PREFIX_PHONE, PREFIX_EMAIL)
@@ -49,8 +57,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Note address = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<AlternateContact> alternateContactList =
+                ParserUtil.parseAlternates(argMultimap.getAllValues(PREFIX_ALTERNATE));
 
-        Contact contact = new Contact(name, phone, email, address, tagList);
+        Contact contact = new Contact(name, phone, email, address, tagList, alternateContactList);
 
         return new AddCommand(contact);
     }

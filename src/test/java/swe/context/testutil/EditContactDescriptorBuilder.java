@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import swe.context.logic.commands.EditCommand.EditContactDescriptor;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Contact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
@@ -37,6 +38,7 @@ public class EditContactDescriptorBuilder {
         descriptor.setEmail(contact.getEmail());
         descriptor.setNote(contact.getNote());
         descriptor.setTags(contact.getTags());
+        descriptor.setAlternateContacts(contact.getAlternates());
     }
 
     /**
@@ -78,6 +80,13 @@ public class EditContactDescriptorBuilder {
     public EditContactDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    public EditContactDescriptorBuilder withAlternateContacts(String... alternateContacts) {
+        Set<AlternateContact> alternateContactSet = Stream.of(alternateContacts).map(AlternateContact::new)
+                .collect(Collectors.toSet());
+        descriptor.setAlternateContacts(alternateContactSet);
         return this;
     }
 

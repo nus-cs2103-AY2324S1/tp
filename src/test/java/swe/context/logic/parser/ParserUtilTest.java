@@ -18,6 +18,7 @@ import swe.context.model.contact.Name;
 import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.testutil.TestData;
 
 public class ParserUtilTest {
@@ -189,5 +190,61 @@ public class ParserUtilTest {
         );
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseAlternate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAlternate(null));
+    }
+
+    @Test
+    public void parseAlternate_validValueWithoutUnderscore_returnsAlternateContact() throws Exception {
+        assertEquals(new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC),
+                ParserUtil.parseAlternate(TestData.Valid.AlternateContact.ALPHANUMERIC));
+    }
+
+    @Test
+    public void parseAlternate_validValueWithUnderscore_returnsAlternateContact() throws Exception {
+        assertEquals(new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE),
+                ParserUtil.parseAlternate(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE));
+    }
+
+    @Test
+    public void parseAlternates_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->  ParserUtil.parseAlternates(null));
+    }
+
+    @Test
+    public void parseAlternates_collectionWithInvalidAlternateContacts_throwsParseException() {
+        assertThrows(
+                ParseException.class,
+                () -> {
+                    ParserUtil.parseTags(
+                            Arrays.asList(TestData.Valid.AlternateContact.ALPHANUMERIC,
+                                    TestData.Invalid.AlternateContact.MISSING_SYMBOL)
+                    );
+                }
+        );
+    }
+
+    @Test
+    public void parseAlternates_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseAlternates(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseAlternates_collectionWithValidAlternateContacts_returnsAlternateContactSet() throws Exception {
+        Set<AlternateContact> actualAlternateContactSet = ParserUtil.parseAlternates(
+                Arrays.asList(TestData.Valid.AlternateContact.ALPHANUMERIC,
+                        TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE)
+        );
+        Set<AlternateContact> expectedAlternateContactSet = new HashSet<AlternateContact>(
+                Arrays.asList(
+                        new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC),
+                        new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE)
+                )
+        );
+
+        assertEquals(expectedAlternateContactSet, actualAlternateContactSet);
     }
 }

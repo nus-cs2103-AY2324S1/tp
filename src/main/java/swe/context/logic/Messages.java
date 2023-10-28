@@ -62,6 +62,10 @@ public final class Messages {
     public static final String EMAIL_INVALID =
             "Emails must roughly be of the form \"example_email@foo-domain.sg.\"";
 
+    public static final String UNFORMATTED_ALTENRATECONTACT_INVALID =
+            "\"%s\" is not a valid alternate contact. "
+            + "Alternate contacts must roughly be of the form \"socialMedia@name\"";
+
     // JSON
     public static final String CONVERT_CONTACTS_DUPLICATE = "Encountered duplicate while converting contacts.";
 
@@ -83,6 +87,13 @@ public final class Messages {
         return String.format(
             Messages.UNFORMATTED_TAG_INVALID,
             invalidName
+        );
+    }
+
+    public static String alternateContactInvalid(String invalid) {
+        return String.format(
+                Messages.UNFORMATTED_ALTENRATECONTACT_INVALID,
+                invalid
         );
     }
 
