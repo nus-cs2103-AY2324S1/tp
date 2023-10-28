@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -41,11 +41,25 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_FOUND =
             "The given combination of Name and NRIC does not match any person in the patients list.";
 
+    public static final String MESSAGE_UNDO_DELETE_ENTIRE_PERSON_SUCCESS = "Reverted the deletion of: ";
+
+    public static final String MESSAGE_UNDO_DELETE_FIELD_SUCESS = "Reverted the deletion of patient with a field: ";
+
+    /**
+     * The original state of the person.
+     */
+    private Person originalPerson;
+
+    /**
+     * The state of the person after a field has been deleted.
+     */
+    private Person editedPerson;
+    private final Name name;
+    private final Nric nric;
     private final DeletePersonDescriptor deletePersonDescriptor;
 
-    private final Nric nric;
 
-    private final Name name;
+
 
     /**
      * @param nric of the person in the filtered person list to edit
@@ -71,14 +85,33 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = personOptional.get();
 
+        originalPerson = personToDelete;
+
         if (deletePersonDescriptor.isAllFalse()) {
+            model.addToHistory(this);
             model.deletePerson(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
-            Person editedPerson = createDeletePerson(personToDelete, deletePersonDescriptor);
+            editedPerson = createDeletePerson(personToDelete, deletePersonDescriptor);
+            model.addToHistory(this);
             model.setPerson(personToDelete, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(editedPerson)));
+        }
+    }
+
+    @Override
+    public CommandResult undo(Model model) {
+        requireNonNull(model);
+        if (deletePersonDescriptor.isAllFalse()) {
+            model.addPerson(originalPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_UNDO_DELETE_ENTIRE_PERSON_SUCCESS, Messages.format(originalPerson)));
+        } else {
+            Person personToDelete = editedPerson;
+            model.setPerson(personToDelete, originalPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_UNDO_DELETE_FIELD_SUCESS, Messages.format(originalPerson)));
         }
     }
 
