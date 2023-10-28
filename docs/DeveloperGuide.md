@@ -296,12 +296,12 @@ Step 3. Finally, it calls `model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_E
 **Aspect: How reset executes:**
 
 * **Alternative 1 (current choice):** Create a new command specifically for Reset.
-    * Pros: Easy to implement.
-    * Cons: Disable the ability to list by order of employee added.
+    * Pros: Fast since it edits all the employees with a single command.
+    * Cons: More code to implement
 
 * **Alternative 2:** Use existing Edit command.
-    * Pros: Allows the `list` command to list all employees by the order they were added.
-    * Cons: Different lists in the `ModelManager` class may cause inconsistencies when `find` and `sort` commands are called consecutively.
+    * Pros: Less new code to implement.
+    * Cons: Difficult to edit all employees on the list since edit only edits one employee at a time.
 
 _{more aspects and alternatives to be added}_
 
