@@ -3,7 +3,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OUTCOME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -12,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.person.interaction.InteractionList;
 
 /**
  * Represents a command that creates an interaction with the client.
@@ -56,8 +56,8 @@ public class InteractionCommand extends Command {
 
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        ArrayList<Interaction> editInteractions = personToEdit.getInteractions();
-        editInteractions.add(interaction);
+        InteractionList editInteractions = new InteractionList(personToEdit.getInteractions());
+        editInteractions.addInteraction(interaction);
         Person editedPerson = new Person.PersonBuilder(personToEdit)
                 .withInteractions(editInteractions)
                 .build();

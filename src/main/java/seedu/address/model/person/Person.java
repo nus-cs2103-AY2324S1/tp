@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.person.interaction.InteractionList;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
@@ -37,7 +37,7 @@ public class Person {
     private final Profession profession;
     private final Income income;
     private final Details details;
-    private final ArrayList<Interaction> interactions = new ArrayList<>();
+    private final InteractionList interactions = new InteractionList();
 
     /**
      * Creates a {@code Person} given a PersonBuilder.
@@ -55,7 +55,7 @@ public class Person {
         this.profession = builder.profession;
         this.income = builder.income;
         this.details = builder.details;
-        this.interactions.addAll(builder.interactions);
+        this.interactions.addInteractions(builder.interactions);
     }
 
     public Name getName() {
@@ -112,11 +112,11 @@ public class Person {
 
     /**
      * Adds an interaction to the person.
-     * @param interaction the singular interaction to be added
+     * @param interactions the set of interaction to be added
      * @return the updated set of interactions
      */
-    public ArrayList<Interaction> addInteractions(ArrayList<Interaction> interactions) {
-        this.interactions.addAll(interactions);
+    public InteractionList addInteractions(InteractionList interactions) {
+        this.interactions.addInteractions(interactions);
         return this.interactions;
     }
 
@@ -191,7 +191,7 @@ public class Person {
         private Profession profession;
         private Income income;
         private Details details;
-        private ArrayList<Interaction> interactions = new ArrayList<>();
+        private InteractionList interactions = new InteractionList();
 
         /**
          * Initialises the PersonBuilder with mandatory fields.
@@ -220,7 +220,7 @@ public class Person {
             profession = personToCopy.getProfession();
             income = personToCopy.getIncome();
             details = personToCopy.getDetails();
-            interactions = new ArrayList<>(personToCopy.getInteractions());
+            interactions = new InteractionList(personToCopy.getInteractions());
         }
 
         /**
@@ -264,10 +264,10 @@ public class Person {
         }
 
         /**
-         * Sets the {@code ArrayList<Interaction>} of the {@code Person} that we are building.
+         * Sets the {@code InteractionList} of the {@code Person} that we are building.
          */
-        public PersonBuilder withInteractions(ArrayList<Interaction> interactions) {
-            this.interactions.addAll(interactions);
+        public PersonBuilder withInteractions(InteractionList interactions) {
+            this.interactions = interactions;
             return this;
         }
 
