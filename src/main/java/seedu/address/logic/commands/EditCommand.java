@@ -45,11 +45,13 @@ public class EditCommand extends UndoableCommand {
             + PREFIX_PHONE + "91234567";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patient: %1$s";
-    public static final String MESSAGE_UNDO_PERSON_SUCCESS = "Reverted the Editing of Patient:";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Example: p/98742122.";
-    public static final String MESSAGE_PERSON_NOT_FOUND =
-            "The given combination of Name and/or NRIC does not match any person in the Patient list.";
-
+    public static final String MESSAGE_UNDO_PERSON_SUCCESS = "Undoing the Editing of Patient:  %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
+            + "Fields include phone (p/), email (e/), "
+            + "address (a/), appointment (ap/) and medical history (m/)\n"
+            + "Name and NRIC cannot be edited\n";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "INVALID name and/or Nric!\n"
+            + "The given combination of Name and/or NRIC does not match any person in the Patient list.";
 
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
@@ -110,7 +112,7 @@ public class EditCommand extends UndoableCommand {
         model.setPerson(editedPerson, originalPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_UNDO_PERSON_SUCCESS, Messages.format(originalPerson)));
+        return new CommandResult(String.format(MESSAGE_UNDO_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**

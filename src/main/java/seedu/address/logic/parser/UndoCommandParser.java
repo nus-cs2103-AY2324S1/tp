@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -25,12 +27,14 @@ public class UndoCommandParser implements Parser<UndoCommand> {
             try {
                 int steps = Integer.parseInt(trimmedArgs);
                 if (steps < 0) {
-                    throw new ParseException(UndoCommand.INVALID_NEGATIVE_STEPS_TO_UNDO);
+                    throw new ParseException(String.format(
+                            UndoCommand.INVALID_NEGATIVE_STEPS_TO_UNDO, UndoCommand.MESSAGE_USAGE));
                 } else {
                     return new UndoCommand(steps);
                 }
             } catch (NumberFormatException e) {
-                throw new ParseException(UndoCommand.MESSAGE_USAGE);
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
             }
         }
     }

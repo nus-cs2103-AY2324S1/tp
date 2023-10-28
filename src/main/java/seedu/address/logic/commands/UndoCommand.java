@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 
 /**
  * Represents an undo command in the address book.
@@ -14,22 +16,28 @@ import java.util.List;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the last undo-able command. "
-            + "An undo-able command includes an edit, add, clear or delete command. "
-            + "Optionally, you can specify the number of commands to undo.\n"
-            + "Format: " + COMMAND_WORD + " [number]\n"
+    public static final String COMMAND_FORMAT = "Command Format: " + COMMAND_WORD + " [number]\n"
             + "Examples:\n"
             + " - " + COMMAND_WORD + " (undoes the last command)\n"
             + " - " + COMMAND_WORD + " 4 (undoes the last 4 commands)";
 
-    public static final String INVALID_NEGATIVE_STEPS_TO_UNDO = "Undo step count cannot be a negative number.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the last undo-able command. "
+            + "An undo-able command includes an edit, add, clear or delete command.\n"
+            + "Optionally, you can specify the number of commands to undo.\n"
+            + COMMAND_FORMAT;
+    public static final String INVALID_NEGATIVE_STEPS_TO_UNDO = "Undo step count cannot be a negative number.\n"
+            + MESSAGE_USAGE;
 
     public static final String INVALID_POSITIVE_STEPS_TO_UNDO = "Please provide a valid number of steps to undo, "
             + "not exceeding the available command history";
 
-    public static final String NO_HISTORY_EXISTS_FAILURE = "There is no history of un-doable commands to be undone. "
-            + "Please execute some undo-able commands first.";
+    public static final String NO_HISTORY_EXISTS_FAILURE = "There is no history of un-doable commands to be undone.\n"
+            + "Please execute some undo-able commands first.\n"
+            + "Undo-able commands include add, edit, delete or clear command.";
+
+    private static final Logger logger = Logger.getLogger(UndoCommand.class.getName());
     private int stepsToUndo;
+
 
     /**
      * Constructs an UndoCommand for the specified number of undo steps.
@@ -51,25 +59,30 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (model.getCommandHistorySize() == 0) {
+            logger.log(Level.WARNING, "No command history to undo");
             throw new CommandException(NO_HISTORY_EXISTS_FAILURE);
         }
         if (stepsToUndo > model.getCommandHistorySize()) {
-            throw new CommandException(INVALID_POSITIVE_STEPS_TO_UNDO +
-                    " (Currently max is: " + model.getCommandHistorySize() + ")");
+            logger.log(Level.WARNING, "Invalid steps to undo");
+            throw new CommandException(INVALID_POSITIVE_STEPS_TO_UNDO
+                    + " (Currently max is: " + model.getCommandHistorySize() + ").\n"
+                    + MESSAGE_USAGE);
         }
 
         assert stepsToUndo <= model.getCommandHistorySize();
 
         List<String> undoStatus = new ArrayList<>();
+        int counter = 1;
 
         while (stepsToUndo != 0) {
             UndoableCommand undoableCommand = model.popCommandFromHistory();
             CommandResult result = undoableCommand.undo(model);
-            undoStatus.add(result.getFeedbackToUser());
+            undoStatus.add(counter + ". " + result.getFeedbackToUser());
             stepsToUndo--;
+            counter++;
         }
 
         String combinedStatus = String.join("\n", undoStatus);
-        return new CommandResult("Undoing command(s):\n" + combinedStatus);
+        return new CommandResult("Undoing " + (counter - 1) + " command(s):\n" + combinedStatus);
     }
 }

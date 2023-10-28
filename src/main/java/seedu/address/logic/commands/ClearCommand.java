@@ -12,7 +12,7 @@ public class ClearCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "HealthSync has been cleared!";
-    public static final String MESSAGE_UNDO_SUCCESS = "Reverted the clearing of HealthSync";
+    public static final String MESSAGE_UNDO_SUCCESS = "Undoing the clearing of HealthSync data.";
 
     private AddressBook addressBookBeforeClear;
 
