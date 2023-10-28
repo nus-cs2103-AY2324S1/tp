@@ -119,6 +119,7 @@ public class LeaveList {
         return leaveList.equals(otherLeaveList.leaveList);
     }
 
+    @SuppressWarnings("unchecked") // since cloning leavelist
     public LeaveList getCopiedLeaveList() {
         ArrayList<Leave> copiedList = (ArrayList<Leave>) leaveList.clone();
         return new LeaveList(copiedList);
@@ -128,9 +129,8 @@ public class LeaveList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (!leaveList.isEmpty()) {
-            sb.append("Leaves taken:\n");
             for (int i = 0; i < leaveList.size(); i++) {
-                sb.append(i + 1).append(".").append(leaveList.get(i));
+                sb.append(i + 1).append(". ").append(leaveList.get(i));
                 sb.append("\n");
             }
         } else {
