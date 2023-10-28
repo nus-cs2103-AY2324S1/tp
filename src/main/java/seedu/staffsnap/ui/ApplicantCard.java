@@ -61,7 +61,7 @@ public class ApplicantCard extends UiPart<Region> {
         displayApplicantDetails();
         displayApplicantStatus();
         displayApplicantInterviews();
-        displayApplicantOverallRating();
+        displayApplicantScore();
     }
     private void displayApplicantId(int displayedIndex) {
         id.setText(displayedIndex + ". ");
@@ -154,7 +154,7 @@ public class ApplicantCard extends UiPart<Region> {
             interviews.getChildren().add(interviewBox);
         }
     }
-    private void displayApplicantOverallRating() {
+    private void displayApplicantScore() {
         Circle outerCircle = new Circle(50);
         outerCircle.setFill(Color.web("#454545"));
 
@@ -172,31 +172,13 @@ public class ApplicantCard extends UiPart<Region> {
         ratingLabel.setText(applicantOverallInterviewRating);
         ratingLabel.getStyleClass().add("overall_rating_label");
 
-        Color[] colours = { Color.TRANSPARENT, Color.web("#1a8cff"), Color.web("#3333cc"), Color.web("#7a00cc"),
-                Color.web("#cc0099"), Color.web("#ff0066"), Color.web("#ff6600"),
-                Color.web("#ffcc00"), Color.web("#ccff33"), Color.web("#66ff33"),
-                Color.web("#00ffcc")};
-
-        for (int i = 0; i < 10; i++) {
-            Arc arc = new Arc(0, 0, 43, 43,
-                    90 + i * 36, -30);
-            arc.setType(ArcType.ROUND);
-            arc.setFill(Color.GREY);
-            stackedArcs.getChildren().add(arc);
-        }
-
-        double applicantRating = applicantOverallInterviewRating.equals("N.A")
-                               ? 0
-                               : Double.parseDouble(applicantOverallInterviewRating);
-        double ratingArcLength = -360 * (applicantRating / 10);
-        Arc ratingArc = new Arc(0, 0, 43, 43, 90, ratingArcLength);
-        Color arcColour = colours[(int) Math.floor(applicantRating)];
-        ratingArc.setFill(arcColour);
-        ratingArc.setType(ArcType.ROUND);
-
-        stackedArcs.getChildren().add(ratingArc);
+        Label scoreLabel = new Label();
+        scoreLabel.setText(applicant.getScore().hasRating()
+                ? applicant.getScore().toString()
+                : "-");
+        scoreLabel.getStyleClass().add("score_label");
 
 
-        overallRating.getChildren().addAll(stackedArcs, innerCircle, ratingLabel);
+        overallRating.getChildren().addAll(stackedArcs, innerCircle, scoreLabel);
     }
 }

@@ -13,6 +13,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Score;
 import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 
@@ -30,6 +31,8 @@ class JsonAdaptedApplicant {
     private final List<JsonAdaptedInterview> interviews = new ArrayList<>();
 
     private final String status;
+    private final Double averageScore;
+    private final Double totalScore;
 
     /**
      * Constructs a {@code JsonAdaptedApplicant} with the given applicant details.
@@ -38,7 +41,8 @@ class JsonAdaptedApplicant {
     public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("position") String position,
             @JsonProperty("interviews") List<JsonAdaptedInterview> interviews,
-            @JsonProperty("status") String status) {
+            @JsonProperty("status") String status, @JsonProperty("average_score") Double averageScore,
+            @JsonProperty("total_score") Double totalScore) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +51,8 @@ class JsonAdaptedApplicant {
             this.interviews.addAll(interviews);
         }
         this.status = status;
+        this.averageScore = averageScore;
+        this.totalScore = totalScore;
     }
 
     /**
@@ -61,6 +67,8 @@ class JsonAdaptedApplicant {
                 .map(JsonAdaptedInterview::new)
                 .collect(Collectors.toList()));
         status = source.getStatus().toString();
+        averageScore = source.getScore().getAverageScore();
+        totalScore = source.getScore().getTotalScore();
     }
 
     /**
@@ -111,7 +119,11 @@ class JsonAdaptedApplicant {
         final Status modelStatus = Status.findByName(status);
 
         final List<Interview> modelInterviews = new ArrayList<>(applicantInterviews);
-        return new Applicant(modelName, modelPhone, modelEmail, modelPosition, modelInterviews, modelStatus);
+
+        final Score modelScore = new Score(modelInterviews);
+
+        return new Applicant(modelName, modelPhone, modelEmail, modelPosition, modelInterviews, modelStatus,
+                modelScore);
     }
 
 }

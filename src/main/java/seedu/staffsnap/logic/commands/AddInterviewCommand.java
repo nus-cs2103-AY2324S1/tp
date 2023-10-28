@@ -66,6 +66,7 @@ public class AddInterviewCommand extends Command {
         }
 
         applicantToEdit.addInterview(interviewToAdd);
+        applicantToEdit.getScore().updateScoreAfterAdd(interviewToAdd);
         /*
          This is a workaround to javaFX not updating the list shown to the user unless the predicate is changed
          Possible fix in the future is to read the current predicate, then store it to be reused

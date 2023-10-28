@@ -8,6 +8,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Score;
 import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.model.util.SampleDataUtil;
@@ -29,6 +30,7 @@ public class ApplicantBuilder {
     private Position position;
     private List<Interview> interviews;
     private Status status;
+    private Score score;
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -40,6 +42,7 @@ public class ApplicantBuilder {
         position = new Position(DEFAULT_POSITION);
         interviews = new ArrayList<>();
         status = Status.findByName(DEFAULT_STATUS);
+        score = new Score(interviews);
     }
 
     /**
@@ -52,6 +55,7 @@ public class ApplicantBuilder {
         position = applicantToCopy.getPosition();
         interviews = new ArrayList<>(applicantToCopy.getInterviews());
         status = applicantToCopy.getStatus();
+        score = applicantToCopy.getScore();
     }
 
     /**
@@ -103,8 +107,16 @@ public class ApplicantBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Score} of the {@code Applicant} that we are building.
+     */
+    public ApplicantBuilder withScore(Score score) {
+        this.score = score;
+        return this;
+    }
+
     public Applicant build() {
-        return new Applicant(name, phone, email, position, interviews, status);
+        return new Applicant(name, phone, email, position, interviews, status, score);
     }
 
 }
