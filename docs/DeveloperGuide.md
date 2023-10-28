@@ -276,7 +276,7 @@ When the user enters a table command, the `AddressBookParser` parses the user's 
 
 Note that there is no specifically a TableCommandParser for `TableCommand` just like `ListCommand`, `ExitCommand` and `HelpCommand`. The `AddressBookParser` can parse and return a `TableCommand`directly.
 
-The parameters entered by user expected for a table command are either `g/`, `s/` and `l/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommamdResult. E.g., `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table. 
+The parameters entered by user expected for a table command are either `g/`, `s/` and `l/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommamdResult. E.g. `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table. 
 
 The following sequence diagram shows how the `table` command works. In this example, the user is executing the following command: `table s/`
 
