@@ -6,14 +6,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+import javafx.beans.value.ChangeListener;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.ShortcutSettings;
+import seedu.address.commons.core.ThemeProperty;
 
 /**
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    private ThemeProperty themeProperty = new ThemeProperty();
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
@@ -69,6 +72,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setTheme(Theme theme) {
+        themeProperty.setValue(theme);
+    }
+    @Override
+    public Theme getTheme() {
+        return themeProperty.getValue();
+    }
+
+    public void addThemeListener(ChangeListener<? super Theme> changeListener) {
+        themeProperty.addListener(changeListener);
     }
 
     @Override

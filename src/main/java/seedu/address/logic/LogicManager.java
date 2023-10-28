@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -17,6 +18,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Theme;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -121,6 +123,21 @@ public class LogicManager implements Logic {
     @Override
     public void addCommandString(String commandString) {
         model.addCommandString(commandString);
+    }
+
+    @Override
+    public Theme getTheme() {
+        return model.getTheme();
+    }
+
+    @Override
+    public void setTheme(Theme theme) {
+        model.setTheme(theme);
+    }
+
+    @Override
+    public void addThemeListener(ChangeListener<? super Theme> changeListener) {
+        model.addThemeListener(changeListener);
     }
 
 }

@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -198,6 +199,22 @@ public class ModelManager implements Model {
     public void addCommandString(String commandString) {
         commandStringStash.addCommandString(commandString);
     }
+
+    @Override
+    public Theme getTheme() {
+        return userPrefs.getTheme();
+    }
+
+    @Override
+    public void setTheme(Theme theme) {
+        userPrefs.setTheme(theme);
+    }
+
+    @Override
+    public void addThemeListener(ChangeListener<? super Theme> changeListener) {
+        userPrefs.addThemeListener(changeListener);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
