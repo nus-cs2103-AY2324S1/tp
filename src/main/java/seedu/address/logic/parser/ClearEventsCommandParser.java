@@ -12,7 +12,7 @@ import seedu.address.model.event.EventPeriod;
 /**
  * Parses the input arguments and creates a new ClearEventsCommand object.
  */
-public class ClearEventsCommandParser implements  Parser<ClearEventsCommand> {
+public class ClearEventsCommandParser implements Parser<ClearEventsCommand> {
     private static final String CONFIRMATION = "CONFIRMED";
     @Override
     public ClearEventsCommand parse(String userInput) throws ParseException {

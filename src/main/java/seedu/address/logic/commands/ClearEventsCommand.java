@@ -14,6 +14,10 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 
+/**
+ * Deletes all events within a time range in the calendar.
+ * Also uses a confirmation check to ensure that events are not accidentally deleted
+ */
 public class ClearEventsCommand extends Command {
     public static final String COMMAND_WORD = "clearEvents";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes events within a time range from the calendar. "
@@ -34,12 +38,19 @@ public class ClearEventsCommand extends Command {
     private final EventPeriod clearPeriod;
     private final boolean isConfirmed;
 
+    /**
+     * Creates a ClearEventsCommand to delete all events within a time range from the calendar.
+     *
+     * @param clearPeriod The time period for which to delete all events.
+     * @param isConfirmed A boolean to check if the deletion is confirmed by the user.
+     */
     public ClearEventsCommand(EventPeriod clearPeriod, boolean isConfirmed) {
         requireAllNonNull(clearPeriod, isConfirmed);
         this.clearPeriod = clearPeriod;
         this.isConfirmed = isConfirmed;
     }
 
+    @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 

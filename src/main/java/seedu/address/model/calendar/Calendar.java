@@ -133,7 +133,7 @@ public class Calendar implements ReadOnlyCalendar {
      */
     public void deleteEventsInRange(EventPeriod range) {
         requireNonNull(range);
-        for(Event event:getEventsInRange(range)) {
+        for (Event event:getEventsInRange(range)) {
             deleteEventAt(event.getStartDateTime());
         }
     }

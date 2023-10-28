@@ -12,8 +12,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -102,8 +103,8 @@ class ClearEventsCommandTest {
 
     @Test
     void toStringMethod() {
-        String expected = ClearEventsCommand.class.getCanonicalName() + "{toClearWithin=" + defaultPeriod +
-                ", confirmed=true}";
+        String expected = ClearEventsCommand.class.getCanonicalName() + "{toClearWithin=" + defaultPeriod
+                + ", confirmed=true}";
         assertEquals(expected, defaultTrueCommand.toString());
     }
 

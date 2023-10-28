@@ -97,6 +97,12 @@ public class SingleDayEventList {
         return Optional.empty();
     }
 
+    /**
+     * Looks for all events within a time range and returns a List containing these events.
+     *
+     * @param eventPeriod The specified time range represented by a {@code EventPeriod}
+     * @return A List object containing all events that are within the time range.
+     */
     public List<Event> eventsInRange(EventPeriod eventPeriod) {
         ArrayList<Event> output = new ArrayList<Event>();
         for (Event thisEvent : eventTree.values()) {
