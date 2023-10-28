@@ -1,9 +1,12 @@
 package flashlingo.commons.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.flashlingo.commons.core.GuiSettings;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class GuiSettingsTest {
     @Test

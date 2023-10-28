@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import flashlingo.testutil.FlashCardBuilder;
 import flashlingo.testutil.FlashCardUtil;
 import org.junit.jupiter.api.Test;
 

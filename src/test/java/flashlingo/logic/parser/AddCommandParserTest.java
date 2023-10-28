@@ -14,6 +14,7 @@ import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 
 
+import flashlingo.testutil.FlashCardBuilder;
 import org.junit.jupiter.api.Test;
 
 import seedu.flashlingo.logic.Messages;

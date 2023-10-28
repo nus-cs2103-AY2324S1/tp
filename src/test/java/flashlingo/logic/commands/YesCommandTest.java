@@ -1,8 +1,6 @@
 package flashlingo.logic.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.flashlingo.commons.util.ToStringBuilder;
-import seedu.flashlingo.logic.commands.NoCommand;
 import seedu.flashlingo.logic.commands.YesCommand;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Flashlingo;
@@ -10,10 +8,8 @@ import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
 
-import static flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static flashlingo.testutil.Assert.assertThrows;
 import static flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

@@ -1,12 +1,13 @@
 package flashlingo.commons.util;
 
 import org.junit.jupiter.api.Test;
-import seedu.flashlingo.commons.util.CollectionUtil;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import seedu.flashlingo.commons.util.CollectionUtil;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.flashlingo.commons.util.CollectionUtil.requireAllNonNull;

@@ -22,8 +22,7 @@ public class SwitchCommandTest {
 
     @Test
     public void execute_switch_success() {
-        CommandResult expectedCommandResult = new CommandResult(SwitchCommand.MESSAGE_SUCCESS, false, false,
-                true);
+        String expectedCommandResult = SwitchCommand.MESSAGE_SUCCESS + "dark theme!";
         assertCommandSuccess(new SwitchCommand(), model, expectedCommandResult, expectedModel);
     }
     @Test
