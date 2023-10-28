@@ -32,7 +32,7 @@ public class ModelManager implements Model {
     /**
      * Ideally theme property should be under UserPrefs, but due to limitations of the
      * JSON Serialising library, it causes errors when put under there, and so the
-     * theme cannot be saved from session to session.
+     * theme preference cannot be saved from session to session.
      */
     private ThemeProperty themeProperty;
 

@@ -146,12 +146,6 @@ Examples:
 * `list -pa` followed by `delete 2` deletes the 2nd patient in the listed patients.
 * `find -sp s/Orthopaedic` followed by `delete 2 3 4` deletes the 2nd, 3rd and 4th specialist listed in the `find` command.
 
-### Clearing all entries : `clear`
-
-Clears all entries from the stored records.
-
-Format: `clear`
-
 ### Undo previous entry : `undo`
 
 Undo the previous command, stackable. (Able to keep undo-ing till there are no commands left to be undone)
@@ -164,11 +158,6 @@ Redo the previous 'undo', stackable. (Able to keep redoing-ing till there are no
 
 Format: `redo`
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 
 ### Adding a custom shortcut : `addsc`
@@ -195,6 +184,30 @@ Format: `delsc sc/SHORTCUT...​`
 Examples:
 * `delsc sc/del sc/abc` will remove the previous mappings of `del` and `abc`.
 
+
+### Changing the Theme : `theme`
+
+Changes the theme of the application. The default theme on launch is the dark theme.
+
+Format: `theme TYPE`
+* `TYPE` has the following possibilities: `dark`, `light` (case-insensitive)
+
+Examples:
+* `theme dark` sets the application theme to the dark theme.
+* `theme LIGHT` sets the application theme to the light theme.
+
+### Clearing all entries : `clear`
+
+Clears all entries from the stored records.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
 ### Recalling Recent Commands
 
 Similar to the [CLI of Unix](https://www.osc.edu/book/export/html/3022), the CLI of DoConnek Pro provides the functionality of
@@ -202,11 +215,10 @@ recalling recent commands by pressing the 'up arrow' and the 'down arrow' on the
 
 DoConnek Pro maintains a history of the 20 most recent commands the user has entered.
 
-The user can recall the 20 most recently entered commands by pressing the up arrow on the keyboard. Each press of the 
+The user can recall the 20 most recently entered commands by pressing the up arrow on the keyboard. Each press of the
 up arrow cycles one command further back in the history.
 
 If the user goes too far back in history, they can 'undo' an 'up arrow' by pressing the down arrow.
-
 
 ### Save and Load Data
 
@@ -243,9 +255,9 @@ If your changes to the data file makes its format invalid, DoConnek Pro will dis
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
 **Add (patient)** | `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...` <br> e.g., `add -pa n/John e/johnjohn@example.com p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
 **Add (specialist)** | `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION` <br> e.g., `add -sp n/Jane e/janejane@example.com p/73331515 s/Dermatologist l/Ang Mo Kio`
-**Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
 **List** | `list -pa`
@@ -253,4 +265,6 @@ Action | Format, Examples
 **Redo** | `redo`
 **Add shortcut** | `addsc sc/SHORTCUT kw/KEYWORD` <br> e.g., `addsc sc/del kw/delete`
 **Delete shortcut** | `delsc sc/SHORTCUT [sc/SHORTCUT]...` <br> e.g., `delsc sc/del sc/li`
-**Help** | `help`
+**Change Theme** | `theme TYPE` <br> e.g., `theme dark`
+**Clear** | `clear`
+**Exit** | `exit`
