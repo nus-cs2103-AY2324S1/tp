@@ -56,8 +56,7 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
                     EditCommand.MESSAGE_USAGE_PATIENT));
         }
 
-        if (argMultimap.anyValuesBlank(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_TAG, PREFIX_AGE, PREFIX_MEDICALHISTORY)) {
+        if (argMultimap.anyValuesBlank(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_AGE)) {
             throw new ParseException(String.format(MESSAGE_BLANK_ARGUMENTS,
                     EditCommand.MESSAGE_USAGE_PATIENT));
         }
@@ -91,8 +90,7 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
                     EditCommand.MESSAGE_USAGE_SPECIALIST));
         }
 
-        if (argMultimap.anyValuesBlank(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION,
-                PREFIX_TAG, PREFIX_SPECIALTY)) {
+        if (argMultimap.anyValuesBlank(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_SPECIALTY)) {
             throw new ParseException(String.format(MESSAGE_BLANK_ARGUMENTS,
                     EditCommand.MESSAGE_USAGE_SPECIALIST));
         }

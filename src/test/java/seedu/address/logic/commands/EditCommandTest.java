@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -21,6 +22,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -29,11 +31,15 @@ import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonType;
 import seedu.address.model.person.Specialist;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.EditSpecialistDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.SpecialistBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -51,10 +57,10 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient));
-
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPatient);
         expectedModel.commitAddressBook();
+        expectedModel.updateSelectedPerson(editedPatient);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
@@ -63,6 +69,7 @@ public class EditCommandTest {
         model.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        model.updateSelectedPerson(lastPerson);
 
         PersonBuilder personInList = new SpecialistBuilder((Specialist) lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -78,19 +85,7 @@ public class EditCommandTest {
         expectedModel.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
         expectedModel.setPerson(lastPerson, editedPerson);
         expectedModel.commitAddressBook();
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
-    }
-
-    @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(new EditPatientDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.commitAddressBook();
+        expectedModel.updateSelectedPerson(editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
     }
@@ -108,16 +103,25 @@ public class EditCommandTest {
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.commitAddressBook();
+        expectedModel.updateSelectedPerson(editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, commandHistory);
     }
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
+        // Setup descriptor of the first person of the list
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        CommandHistory commandHistory = new CommandHistory();
         EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder((Patient) firstPerson).build();
+
+        // Attempting to update second person into first person
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        // Viewing second person
+        model.updateSelectedPerson(secondPerson);
+
         EditCommand editCommand = new EditCommand(descriptor);
+        CommandHistory commandHistory = new CommandHistory();
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON, commandHistory);
     }
@@ -125,28 +129,12 @@ public class EditCommandTest {
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        model.updateSelectedPerson(firstPerson);
         // edit person in filtered list into a duplicate in address book
         Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(new EditPatientDescriptorBuilder((Patient) personInList).build());
-
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON, commandHistory);
-    }
-
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
-    @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-
-        EditCommand editCommand = new EditCommand(new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build());
-
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, commandHistory);
     }
 
     @Test

@@ -36,6 +36,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.PersonType;
@@ -50,8 +51,8 @@ import seedu.address.testutil.SpecialistBuilder;
 import seedu.address.testutil.SpecialistUtil;
 
 public class AddressBookParserTest {
-
-    private final AddressBookParser parser = new AddressBookParser(new ModelManager());
+    private final Model model = new ModelManager();
+    private final AddressBookParser parser = new AddressBookParser(model);
 
     @Test
     public void parseCommand_addShortcut() throws Exception {
@@ -101,22 +102,29 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit_patient() throws Exception {
-        Patient patient = new PatientBuilder().build();
+        Patient patient = (Patient) new PatientBuilder()
+                .withMedicalHistory("MedHistory1")
+                .withTags("Tag1", "Tag2")
+                .build();
+        model.updateSelectedPerson(patient);
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
-                + " " + CliSyntax.PATIENT_TAG + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
+        String input = EditCommand.COMMAND_WORD + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor);
+        EditCommand command = (EditCommand) parser.parseCommand(input);
         assertEquals(new EditCommand(descriptor), command);
     }
 
     @Test
     public void parseCommand_edit_specialist() throws Exception {
-        Specialist person = new SpecialistBuilder().build();
-        EditSpecialistDescriptor descriptor = new EditSpecialistDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD
-                + " " + CliSyntax.SPECIALIST_TAG + " "
-                + INDEX_FIRST_PERSON.getOneBased()
-                + " " + SpecialistUtil.getEditSpecialistDescriptorDetails(descriptor));
+        Specialist specialist = (Specialist) new SpecialistBuilder()
+                .withSpecialty("TestSpecialty")
+                .withLocation("TestLocation")
+                .withTags("Tag1", "Tag2")
+                .build();
+        model.updateSelectedPerson(specialist);
+        EditSpecialistDescriptor descriptor = new EditSpecialistDescriptorBuilder(specialist).build();
+        String input = EditCommand.COMMAND_WORD
+                + " " + SpecialistUtil.getEditSpecialistDescriptorDetails(descriptor);
+        EditCommand command = (EditCommand) parser.parseCommand(input);
         assertEquals(new EditCommand(descriptor), command);
     }
 
