@@ -77,8 +77,8 @@ public class Interaction {
         return this.interactionNote;
     }
 
-    public String getOutcome() {
-        return this.outcome.toString();
+    public Outcome getOutcome() {
+        return this.outcome;
     }
 
     public Date getDate() {
