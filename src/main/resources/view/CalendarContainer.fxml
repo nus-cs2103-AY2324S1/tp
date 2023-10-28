@@ -8,8 +8,8 @@
 
 <HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
     <StackPane fx:id="calendarLabelPlaceholder" minWidth="50" HBox.hgrow="NEVER"/>
-    <ListView prefHeight="260" minHeight="260" maxHeight="260" prefWidth="400" VBox.vgrow="NEVER" HBox.hgrow="ALWAYS">
-        <StackPane minWidth="300" HBox.hgrow="NEVER">
+    <ListView prefHeight="270" minHeight="270" maxHeight="270" prefWidth="400" minWidth="250" VBox.vgrow="NEVER" HBox.hgrow="ALWAYS">
+        <StackPane minWidth="300" HBox.hgrow="ALWAYS">
             <GridPane fx:id="eventSpaceBackground" HBox.hgrow="ALWAYS"/>
             <GridPane fx:id="eventSpace" HBox.hgrow="ALWAYS"/>
         </StackPane>

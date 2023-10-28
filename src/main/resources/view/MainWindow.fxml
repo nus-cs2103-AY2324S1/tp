@@ -59,7 +59,7 @@
 
             <center>
               <StackPane fx:id="calendarPlaceholder" minWidth="340" prefWidth="340" styleClass="pane-without-border"
-                         HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" minHeight="240">
+                         HBox.hgrow="ALWAYS" VBox.vgrow="NEVER" minHeight="240" prefHeight="240">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10"/>
                 </padding>
