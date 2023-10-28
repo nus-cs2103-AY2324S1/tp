@@ -9,8 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -342,13 +341,14 @@ clipboard.
 ### \[Proposed\] View all available tags
 
 The view tags mechanism lists all available tags in the address book that a user can use to tag a member.
-The `ViewTagsCommand` object's `execute()` method is called. All available tags in the address book are shown to the 
+The `ViewTagsCommand` object's `execute()` method is called. All available tags in the address book are shown to the
 user in the tags list.
 
 <img src="images/TagListClassDiagram.png" width="282" alt="TagListClassDiagram"/>
 
-The implementation will follow the Observer design pattern, where the UI will observe the changes made to the list of tags
-available for the user to tag other members. The `TagsListPanel` will implement the `Observer` interface and the 
+The implementation will follow the Observer design pattern, where the UI will observe the changes made to the list of
+tags
+available for the user to tag other members. The `TagsListPanel` will implement the `Observer` interface and the
 `TagList` class will have a method `notifyUis()` to notify the `Observer` of its changes and an `addUi()` method to
 add classes implementing `Observer` that will be updated of its changes.
 
@@ -370,18 +370,20 @@ list of tasks assigned to each individual. Additionally, it implements the follo
 These operations are exposed in the `Task` parent class as `Task#markAsDone()` and `Task#markAsUnDone()` to execute the
 above-mentioned operations.
 
-Step 1: The user adds a new `Member` using the `addMember` command. At this point, a `TaskList` instance will be 
+Step 1: The user adds a new `Member` using the `addMember` command. At this point, a `TaskList` instance will be
 assigned to that member.
 
 Step 2: When the user uses the `addToDo` command, a `ToDo` object containing the details parsed in through the code will
-be stored and under the user identified by their telegram handle, which is passed as a parameter. It namely stores the 
+be stored and under the user identified by their telegram handle, which is passed as a parameter. It namely stores the
 `Tasks.taskName`.
 
-Step 3: When the user uses the `addDeadline` command, a `Deadline` object containing the details parsed in through the code will
-be stored and under the user identified by their telegram handle, which is passed as a parameter. It namely stores the 
+Step 3: When the user uses the `addDeadline` command, a `Deadline` object containing the details parsed in through the
+code will
+be stored and under the user identified by their telegram handle, which is passed as a parameter. It namely stores the
 `Tasks.taskName`, `Deadline.dueDate` and `Deadline.dueTime`.
 
-Step 4: When the user uses the `addEvent` command, an `Event` object containing the details parsed in through the code will
+Step 4: When the user uses the `addEvent` command, an `Event` object containing the details parsed in through the code
+will
 be stored and under the user identified by their telegram handle, which is passed as a parameter. It namely stores the
 `Tasks.taskName`, `Event.startDate`, `Deadline.startTime`, `Event.endDate` and `Deadline.endTime`.
 
