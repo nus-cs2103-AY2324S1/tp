@@ -154,7 +154,7 @@ public class UniqueBandListTest {
     @Test
     public void hasMusician_musicianNotInBand_returnsFalse() {
         uniqueBandList.add(ELISE);
-        assertFalse(uniqueBandList.hasMusician(0, ALICE));
+        assertFalse(uniqueBandList.hasMusician(0, BOB));
     }
 
     @Test
