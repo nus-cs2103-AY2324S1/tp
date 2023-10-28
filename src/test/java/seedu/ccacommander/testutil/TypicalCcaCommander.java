@@ -30,7 +30,7 @@ public class TypicalCcaCommander {
      */
     public static CcaCommander getTypicalEventCcaCommander() {
         CcaCommander cc = new CcaCommander();
-        for (Event event: getTypicalEvents()) {
+        for (Event event : getTypicalEvents()) {
             cc.createEvent(event);
         }
 
