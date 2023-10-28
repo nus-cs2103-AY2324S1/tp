@@ -20,7 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
 
-    // Attendance prefixes
+    // Enrolment prefixes
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_HOURS = new Prefix("h/");
     public static final Prefix PREFIX_MEMBER = new Prefix("m/");

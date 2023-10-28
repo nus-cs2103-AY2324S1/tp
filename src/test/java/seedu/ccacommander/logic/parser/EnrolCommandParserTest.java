@@ -30,8 +30,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.EnrolCommand;
-import seedu.ccacommander.model.attendance.Hours;
-import seedu.ccacommander.model.attendance.Remark;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 
 public class EnrolCommandParserTest {
     private EnrolCommandParser parser = new EnrolCommandParser();
@@ -50,65 +50,65 @@ public class EnrolCommandParserTest {
 
     @Test
     public void parse_repeatedValue_failure() {
-        String validExpectedAttendanceString = MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO + HOURS_DESC_AURORA
+        String validExpectedEnrolmentString = MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO + HOURS_DESC_AURORA
                 + REMARK_DESC_AURORA;
 
         // multiple member indexes
-        assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + validExpectedAttendanceString,
+        assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + validExpectedEnrolmentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEMBER));
 
         // multiple event indexes
-        assertParseFailure(parser, EVENT_INDEX_DESC_TWO + validExpectedAttendanceString,
+        assertParseFailure(parser, EVENT_INDEX_DESC_TWO + validExpectedEnrolmentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EVENT));
 
         // multiple hours
-        assertParseFailure(parser, HOURS_DESC_AURORA + validExpectedAttendanceString,
+        assertParseFailure(parser, HOURS_DESC_AURORA + validExpectedEnrolmentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HOURS));
 
         // multiple remarks
-        assertParseFailure(parser, REMARK_DESC_AURORA + validExpectedAttendanceString,
+        assertParseFailure(parser, REMARK_DESC_AURORA + validExpectedEnrolmentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedAttendanceString + MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO
-                        + HOURS_DESC_AURORA + REMARK_DESC_AURORA + validExpectedAttendanceString,
+                validExpectedEnrolmentString + MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO
+                        + HOURS_DESC_AURORA + REMARK_DESC_AURORA + validExpectedEnrolmentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEMBER, PREFIX_EVENT, PREFIX_HOURS, PREFIX_REMARK));
 
         // invalid value followed by valid value
 
         // invalid member index
-        assertParseFailure(parser, INVALID_MEMBER_INDEX_DESC + validExpectedAttendanceString,
+        assertParseFailure(parser, INVALID_MEMBER_INDEX_DESC + validExpectedEnrolmentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEMBER));
 
         // invalid event index
-        assertParseFailure(parser, INVALID_EVENT_INDEX_DESC + validExpectedAttendanceString,
+        assertParseFailure(parser, INVALID_EVENT_INDEX_DESC + validExpectedEnrolmentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EVENT));
 
         // invalid hours
-        assertParseFailure(parser, INVALID_HOURS_DESC + validExpectedAttendanceString,
+        assertParseFailure(parser, INVALID_HOURS_DESC + validExpectedEnrolmentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HOURS));
 
         // invalid remark
-        assertParseFailure(parser, INVALID_REMARK_DESC + validExpectedAttendanceString,
+        assertParseFailure(parser, INVALID_REMARK_DESC + validExpectedEnrolmentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
 
         // valid value followed by invalid value
 
         // invalid member index
-        assertParseFailure(parser, validExpectedAttendanceString + INVALID_MEMBER_INDEX_DESC,
+        assertParseFailure(parser, validExpectedEnrolmentString + INVALID_MEMBER_INDEX_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEMBER));
 
         // invalid event index
-        assertParseFailure(parser, validExpectedAttendanceString + INVALID_EVENT_INDEX_DESC,
+        assertParseFailure(parser, validExpectedEnrolmentString + INVALID_EVENT_INDEX_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EVENT));
 
         // invalid hours
-        assertParseFailure(parser, validExpectedAttendanceString + INVALID_HOURS_DESC,
+        assertParseFailure(parser, validExpectedEnrolmentString + INVALID_HOURS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HOURS));
 
         // invalid remark
-        assertParseFailure(parser, validExpectedAttendanceString + INVALID_REMARK_DESC,
+        assertParseFailure(parser, validExpectedEnrolmentString + INVALID_REMARK_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
     }
 

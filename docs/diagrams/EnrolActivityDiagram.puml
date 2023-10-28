@@ -12,10 +12,10 @@ if () then ([valid command input format])
     if () then ([valid indexes])
         :Get member and event
         from the respective filtered lists;
-        :Create a new Attendance object;
-        if () then ([non-duplicate attendance]))
-        :Add new attendance to
-        uniqueAttendanceList in the model;
+        :Create a new Enrolment object;
+        if () then ([non-duplicate enrolment]))
+        :Add new enrolment to
+        uniqueEnrolmentList in the model;
         :Commit this state to the model;
         else ([else])
             :Throws CommandException
