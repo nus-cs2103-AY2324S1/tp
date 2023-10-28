@@ -115,8 +115,8 @@ public class EditEnrolmentCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Event} with the details of {@code eventToEdit}
-     * edited with {@code editEventDescriptor}.
+     * Creates and returns a {@code Enrolment} with the details of {@code enrolmentToEdit}
+     * edited with {@code editEnrolmentDescriptor}.
      */
     private static Attendance createEditedEnrolment(Attendance enrolmentToEdit,
                                                     EditEnrolmentDescriptor editEnrolmentDescriptor) {
@@ -228,7 +228,9 @@ public class EditEnrolmentCommand extends Command {
             }
 
             EditEnrolmentDescriptor otherEditEnrolmentDescriptor = (EditEnrolmentDescriptor) other;
-            return Objects.equals(hours, otherEditEnrolmentDescriptor.hours)
+            return Objects.equals(memberName, otherEditEnrolmentDescriptor.memberName)
+                    && Objects.equals(eventName, otherEditEnrolmentDescriptor.eventName)
+                    && Objects.equals(hours, otherEditEnrolmentDescriptor.hours)
                     && Objects.equals(remark, otherEditEnrolmentDescriptor.remark);
         }
 
