@@ -30,7 +30,7 @@ public class UndoCommandTest {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PATIENT COMMANDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private static final String SAMPLE_ADD_COMMAND_1 =
             "add name=John Doe gender=MALE birthdate=2000/10/20 phone=98765432 "
-                    + "email=johnd@example.com address=311, Clementi Ave 2, #02-25 illnesses=flu";
+                    + "email=johnd@example.com address=311, Clementi Ave 2, #02-25 illnesses=flu, fever";
     private static final String SAMPLE_ADD_COMMAND_2 =
             "add name=Jane Doe gender=FEMALE birthdate=2003/02/20 phone=98765432 "
                     + "email=janed@example.com address=311, Bedok Ave 3, #04-48 illnesses=fever";
@@ -38,6 +38,11 @@ public class UndoCommandTest {
     private static final String SAMPLE_EDIT_COMMAND = "edit 1 phone=91272464";
     private static final String SAMPLE_FIND_COMMAND = "find john";
     private static final String SAMPLE_LIST_COMMAND = "list";
+
+    private static final String SAMPLE_DIAGNOSE_COMMAND = "diagnose 1 illnesses=Covid19, Covid20";
+
+    private static final String SAMPLE_UNDIAGNOSE_COMMAND = "undiagnose 1 illnesses=flu, fever";
+
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~APPOINTMENT COMMANDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private static final String SAMPLE_APPOINTMENTS_COMMAND = "appointments";
@@ -50,10 +55,16 @@ public class UndoCommandTest {
             + "start=2023/10/20 12:00 end=2023/10/20 13:00 "
             + "description=Follow up on Chest X-Ray ";
 
+    private static final String SAMPLE_SCHEDULE_ANCIENT_APPOINTMENT_COMMAND = "schedule patient=John Doe "
+            + "start=1800/10/20 12:00 end=1800/10/20 13:00 "
+            + "description=Injuries from getting stoned ";
+
     private static final String SAMPLE_TODAY_COMMAND = "today";
 
     private static final String SAMPLE_UPCOMING_COMMAND = "today";
     private static final String SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND = "appointment-find john";
+
+    private static final String SAMPLE_SORT_COMMAND = "sort";
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MISC COMMANDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private static final String SAMPLE_HELP_COMMAND = "help";
@@ -240,6 +251,52 @@ public class UndoCommandTest {
         assertEquals(sizeBeforeUndo, sizeAfterUndo + 1);
     }
 
+    /**
+     * Test undo functionality with Diagnose command.
+     * Diagnose command can be undone
+     */
+    @Test
+    public void testDiagnoseCommandFollowedByUndo() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        Model typicalModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+
+        assertTrue(typicalModel.getAddressBook().equals(
+                model.getAddressBook()));
+
+        logic.execute(SAMPLE_DIAGNOSE_COMMAND);
+
+        assertFalse(typicalModel.getAddressBook().equals(
+                model.getAddressBook()));
+
+        model.undoHistory();
+
+        assertTrue(typicalModel.getAddressBook().equals(
+                model.getAddressBook()));
+    }
+
+    /**
+     * Test undo functionality with Undiagnose command.
+     * Undiagnose command can be undone
+     */
+    @Test
+    public void testUndiagnoseCommandFollowedByUndo() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        Model typicalModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+
+        assertTrue(typicalModel.getAddressBook().equals(
+                model.getAddressBook()));
+
+        logic.execute(SAMPLE_UNDIAGNOSE_COMMAND);
+
+        assertFalse(typicalModel.getAddressBook().equals(
+                model.getAddressBook()));
+
+        model.undoHistory();
+
+        assertTrue(typicalModel.getAddressBook().equals(
+                model.getAddressBook()));
+    }
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Integration Testing of UndoCommand with appointment commands~~~~~~~~~~~~~~~~~~~~~
     /**
      * Test undo functionality with appointments command.
@@ -347,5 +404,30 @@ public class UndoCommandTest {
         } catch (CommandException e) {
             assertEquals(model.getUserHistoryManager().getUndoHistorySize(), 1);
         }
+    }
+
+    /**
+     * Test undo functionality with Sort command.
+     * Sort command can be undone
+     */
+    @Test
+    public void testSortCommandFollowedByUndo() throws CommandException, ParseException {
+        logic.execute(SAMPLE_ADD_COMMAND_1);
+        logic.execute(SAMPLE_SCHEDULE_COMMAND);
+        logic.execute(SAMPLE_SCHEDULE_ANCIENT_APPOINTMENT_COMMAND);
+        Model typicalModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+
+        assertTrue(typicalModel.getAddressBook().equals(
+                model.getAddressBook()));
+
+        logic.execute(SAMPLE_SORT_COMMAND);
+
+        assertFalse(typicalModel.getAddressBook().equals(
+                model.getAddressBook()));
+
+        model.undoHistory();
+
+        assertTrue(typicalModel.getAddressBook().equals(
+                model.getAddressBook()));
     }
 }
