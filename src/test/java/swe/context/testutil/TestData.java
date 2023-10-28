@@ -1,11 +1,11 @@
 package swe.context.testutil;
 
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_PHONE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_TAG;
-import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 
 import java.nio.file.Paths;
 import java.util.logging.Level;
@@ -70,6 +70,9 @@ public final class TestData {
             public static final String FLAG_ALPHANUMERIC_SPACES = Tag.FLAG + Tag.ALPHANUMERIC_SPACES;
         }
 
+        /**
+         * Holds alternateContact-related data.
+         */
         public static final class AlternateContact {
             public static final String ALPHANUMERIC = "Test1@Example1";
             public static final String ALPHANUMERIC_UNDERSCORE = "Test2@Example_2";
@@ -222,6 +225,9 @@ public final class TestData {
             public static final String FLAG_HASHTAG = TestData.Valid.Tag.FLAG + Tag.HASHTAG;
         }
 
+        /**
+         * Holds alternateContact-related data.
+         */
         public static final class AlternateContact {
             public static final String MISSING_SYMBOL = "ExampleName";
             public static final String WHITESPACE = "Example@N ame";

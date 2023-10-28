@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import swe.context.commons.util.ToStringBuilder;
-import swe.context.model.tag.Tag;
 import swe.context.model.alternate.AlternateContact;
+import swe.context.model.tag.Tag;
 
 
 /**

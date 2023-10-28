@@ -13,12 +13,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import swe.context.logic.parser.exceptions.ParseException;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
 import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
-import swe.context.model.alternate.AlternateContact;
 import swe.context.testutil.TestData;
 
 public class ParserUtilTest {
@@ -211,7 +211,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseAlternates_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () ->  ParserUtil.parseAlternates(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAlternates(null));
     }
 
     @Test

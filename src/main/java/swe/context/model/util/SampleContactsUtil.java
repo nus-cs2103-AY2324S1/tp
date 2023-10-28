@@ -5,13 +5,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import swe.context.model.Contacts;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Contact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
 import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
-import swe.context.model.alternate.AlternateContact;
 
 
 /**

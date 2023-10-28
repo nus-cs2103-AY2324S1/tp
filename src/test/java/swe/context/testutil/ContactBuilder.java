@@ -8,6 +8,7 @@ import static swe.context.testutil.TestData.DEFAULT_PHONE;
 import java.util.HashSet;
 import java.util.Set;
 
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Contact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
@@ -15,7 +16,6 @@ import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
 import swe.context.model.util.SampleContactsUtil;
-import swe.context.model.alternate.AlternateContact;
 
 /**
  * Builds {@link Contact}s more conveniently.
@@ -92,6 +92,10 @@ public class ContactBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code alternateContacts} into a {@code Set<AlternateContact>}
+     * and set it to the {@code Contact} that we are building.
+     */
     public ContactBuilder withAlternateContacts(String... alternateContacts) {
         this.alternateContacts = SampleContactsUtil.getAlternateContactSet(alternateContacts);
         return this;

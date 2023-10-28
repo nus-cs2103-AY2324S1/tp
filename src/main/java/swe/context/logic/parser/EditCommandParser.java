@@ -1,12 +1,12 @@
 package swe.context.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_PHONE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_TAG;
-import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 
 import java.util.Collection;
 import java.util.Collections;

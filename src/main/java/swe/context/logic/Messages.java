@@ -90,6 +90,9 @@ public final class Messages {
         );
     }
 
+    /**
+     * Returns a formatted message about the specified alternate contact being invalid.
+     */
     public static String alternateContactInvalid(String invalid) {
         return String.format(
                 Messages.UNFORMATTED_ALTENRATECONTACT_INVALID,

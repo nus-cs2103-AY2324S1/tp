@@ -83,6 +83,10 @@ public class EditContactDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code alternateContacts} into a {@code Set<AlternateContacts>}
+     * and set it to the {@code EditContactDescriptor} that we are building.
+     */
     public EditContactDescriptorBuilder withAlternateContacts(String... alternateContacts) {
         Set<AlternateContact> alternateContactSet = Stream.of(alternateContacts).map(AlternateContact::new)
                 .collect(Collectors.toSet());

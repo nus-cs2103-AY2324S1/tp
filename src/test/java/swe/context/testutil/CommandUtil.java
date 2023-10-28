@@ -1,20 +1,20 @@
 package swe.context.testutil;
 
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_PHONE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_TAG;
-import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 
 import java.util.Set;
 
 import swe.context.logic.commands.AddCommand;
 import swe.context.logic.commands.Command;
 import swe.context.logic.commands.EditCommand.EditContactDescriptor;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Contact;
 import swe.context.model.tag.Tag;
-import swe.context.model.alternate.AlternateContact;
 
 /**
  * Contains utility methods for testing {@link Command}s.

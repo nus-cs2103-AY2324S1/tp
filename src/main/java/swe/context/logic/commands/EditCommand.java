@@ -1,12 +1,12 @@
 package swe.context.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_PHONE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_TAG;
-import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,13 +22,13 @@ import swe.context.logic.Messages;
 import swe.context.logic.commands.exceptions.CommandException;
 import swe.context.model.Model;
 import swe.context.model.ModelManager;
+import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Contact;
 import swe.context.model.contact.Email;
 import swe.context.model.contact.Name;
 import swe.context.model.contact.Note;
 import swe.context.model.contact.Phone;
 import swe.context.model.tag.Tag;
-import swe.context.model.alternate.AlternateContact;
 
 /**
  * Edits an existing {@link Contact}.

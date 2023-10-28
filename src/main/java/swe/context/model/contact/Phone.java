@@ -43,7 +43,7 @@ public class Phone {
         if (!(other instanceof Phone)) {
             return false;
         }
-        Phone otherPhone = (Phone)other;
+        Phone otherPhone = (Phone) other;
 
         return this.value.equals(otherPhone.value);
     }

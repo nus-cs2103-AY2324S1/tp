@@ -50,7 +50,7 @@ public final class AlternateContact {
         if (!(other instanceof AlternateContact)) {
             return false;
         }
-         AlternateContact otherAlternateContact = (AlternateContact) other;
+        AlternateContact otherAlternateContact = (AlternateContact) other;
 
         return this.value.equals(otherAlternateContact.value);
     }

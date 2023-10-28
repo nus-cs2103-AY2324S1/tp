@@ -113,7 +113,7 @@ public class ModelManager implements Model {
         if (!(other instanceof ModelManager)) {
             return false;
         }
-        ModelManager otherManager = (ModelManager)other;
+        ModelManager otherManager = (ModelManager) other;
 
         return this.contacts.equals(otherManager.contacts)
                 && this.settings.equals(otherManager.settings)

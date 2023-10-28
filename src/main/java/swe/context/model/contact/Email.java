@@ -49,7 +49,7 @@ public class Email {
         if (!(other instanceof Email)) {
             return false;
         }
-        Email otherEmail = (Email)other;
+        Email otherEmail = (Email) other;
 
         return this.value.equals(otherEmail.value);
     }
