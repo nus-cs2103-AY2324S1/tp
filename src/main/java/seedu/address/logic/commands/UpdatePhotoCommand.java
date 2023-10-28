@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import javafx.scene.image.Image;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -52,7 +51,7 @@ public class UpdatePhotoCommand extends Command {
      * @param idx one-based index of the contact to update photo
      * @param path String path to the photo to be used
      */
-    public UpdatePhotoCommand(int idx, String path)  {
+    public UpdatePhotoCommand(int idx, String path) {
         zeroBasedIdx = idx - 1;
         this.path = path;
     }
@@ -92,7 +91,7 @@ public class UpdatePhotoCommand extends Command {
         Optional<Telegram> telegram = personToEdit.getTelegram();
         Set<Tag> updatedTags = personToEdit.getTags();
         Optional<Integer> id = personToEdit.getId();
-        Avatar avatar = new Avatar(new Image(this.getClass().getResourceAsStream(path)));
+        Avatar avatar = new Avatar(path);
         List<Note> notes = personToEdit.getNotes();
         Balance balance = personToEdit.getBalance();
 
