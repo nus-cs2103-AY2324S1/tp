@@ -188,8 +188,33 @@ Command: `addb n/BANDNAME`
 Within the execute method of the command, a check is done to ensure that the model does not currently contain the band
 to be added. This is achieved through the use of `Model#hasBand(Band)` method.
 
+### Add Musician To Band Feature
+
+The user can add a Musician to a Band through the `addm` Command.
+
+Command: `addm bin/[BAND_INDEX] min/[MUSICIAN_INDEX]`
+
+### Behaviour
+* **Success Scenario:**
+    1. A success message is returned.
+    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+
+* **Failed Scenario (when band index/musician index is invalid):**
+    1. An error message is returned.
+    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+
+* **Failed Scenario (when adding a musician that is already in the band):**
+    1. An error message is returned.
+    2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+
+#### Implementation
+Within the execute method of the command, a check is done to ensure that the index specified is not equal to or greater
+than the size of the list containing all Bands.
+Another check is done to ensure that the musicians is not already in the band.
+
+
 ### Delete Band Feature
-The user can add a new Band entity to the storage through the `deleteb` Command.
+The user can remove a Band from the storage through the `deleteb` Command.
 
 Command: `deleteb [INDEX]`
 
@@ -205,7 +230,6 @@ Command: `deleteb [INDEX]`
 #### Implementation
 Within the execute method of the command, a check is done to ensure that the index specified is not equal to or greater 
 than the size of the list containing all Bands.
-
 
 
 ### Find Band Members Feature
@@ -248,8 +272,6 @@ Step 3: If the band name is not valid (There is no band with such a name), a `ME
    i. If the band is valid and exists, filtered band list is guaranteed to have only one band (because add a band enforce no band with the same name (case-insensitive) is allowed). Hence, If filtered band list size > 1, the band name must be invalid, exception is thrown.
 
    ii. If filtered band list size == 1 but the band obtained does not pass the predicate (in the possible scenario of user only stored 1 band), it means that the band name is invalid and does not correspond to the current band, exception is thrown.
-
-
 
 
 ### \[Proposed\] Undo/redo feature
@@ -576,6 +598,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC11 - Remove a musician from a band**
+
+**MSS**
+
+1. User enters the band details and musician details.
+2. User requests to remove the musician from the band.
+3. BandConnect++ removes the musician from the band.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User enters input wrongly
+* 2a1. System shows a message showing the proper input format.
+
+  Use case ends.
 
 *{More to be added}*
 
