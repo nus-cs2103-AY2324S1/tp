@@ -9,6 +9,19 @@ import org.junit.jupiter.api.Test;
 public class NoteTest {
 
     @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Note(null));
+    }
+
+    @Test
+    public void constructor_invalidAddress_throwsIllegalArgumentException() {
+        String invalidNote = "ijdoasfsjfjsfisfjdijfjfdijfdpsjifpjfdiasfdjfdjfpdjfidsajidsjipfsjifdsjcjp"
+                + "dmaspacmdspcmdmcpsdmcdppsdpsdadspoadjaspdasopksapascjaspcjfsapjcspjdasjcaspjdsjapcjsapsajcpsajfas"
+                + "ijciasjfpasjfaciasjdajadasdasaasdasd";
+        assertThrows(IllegalArgumentException.class, () -> new Note(invalidNote));
+    }
+
+    @Test
     public void isValidNote() {
 
         String twoHundredCharNote = "ijdoasfsjfjsfisfjdijfjfdijfdpsjifpjfdiasfdjfdjfpdjfidsajidsjipfsjifdsjcjpdmaspa"
