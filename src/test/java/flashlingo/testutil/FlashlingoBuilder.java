@@ -6,14 +6,14 @@ import seedu.flashlingo.model.flashcard.FlashCard;
 /**
  * A utility class to help with building Flashlingo objects.
  * Example usage: <br>
- *     {@code Flashlingo flashlingo = new Flashlingo().withFlashCard("John", "Doe").build();}
+ *     {@code Flashlingo fl = new FlashlingoBuilder().withTranslation("再见").build();}
  */
 public class FlashlingoBuilder {
 
     private Flashlingo flashlingo;
 
     public FlashlingoBuilder() {
-        this.flashlingo = new Flashlingo();
+        flashlingo = new Flashlingo();
     }
 
     public FlashlingoBuilder(Flashlingo flashlingo) {
@@ -21,10 +21,10 @@ public class FlashlingoBuilder {
     }
 
     /**
-     * Adds a new {@code FlashCard} to the {@code Flashlingo} that we are building.
+     * Adds a new {@code Flashcard} to the {@code Flashlingo} that we are building.
      */
     public FlashlingoBuilder withFlashCard(FlashCard flashCard) {
-        this.flashlingo.addFlashCard(flashCard);
+        flashlingo.addFlashCard(flashCard);
         return this;
     }
 
