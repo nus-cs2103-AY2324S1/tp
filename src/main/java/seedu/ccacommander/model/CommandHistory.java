@@ -74,7 +74,7 @@ public class CommandHistory {
      */
     public String getPreviousCommand() {
         assert this.currentCommandPointer > 0
-                : "currentCommandPointer is at the last command already";
+                : "currentCommandPointer is at the oldest command already";
         this.currentCommandPointer--;
         String command = this.commandHistoryList.get(this.currentCommandPointer);
         return command;

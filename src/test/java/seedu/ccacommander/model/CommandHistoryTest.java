@@ -2,8 +2,8 @@ package seedu.ccacommander.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ccacommander.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -91,7 +91,8 @@ public class CommandHistoryTest {
 
     @Test
     public void getNextCommand_throwsAssertionError() {
-        assertThrows(AssertionError.class, () -> commandHistory.getNextCommand());
+        AssertionError thrown = assertThrows(AssertionError.class, () -> commandHistory.getNextCommand());
+        assertTrue(thrown.getMessage().equals("currentCommandPointer is at the newest command already"));
     }
 
 
@@ -104,7 +105,8 @@ public class CommandHistoryTest {
 
     @Test
     public void getPreviousCommand_throwsAssertionError() {
-        assertThrows(AssertionError.class, () -> commandHistory.getPreviousCommand());
+        AssertionError thrown = assertThrows(AssertionError.class, () -> commandHistory.getPreviousCommand());
+        assertTrue(thrown.getMessage().equals("currentCommandPointer is at the oldest command already"));
     }
 
     @Test
