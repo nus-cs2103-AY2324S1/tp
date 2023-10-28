@@ -85,27 +85,15 @@ View a comprehensive list of all recorded transactions for reference. This list 
 
 Need to make corrections or updates to transaction records? Tran$act allows you to edit transaction details, ensuring your records are accurate.
 
-**5. Restoring Deleted Transactions**
+**5. Dashboard Display**
 
-Tran$act includes a feature to restore accidentally deleted transactions. Simply select a transaction from the list of deleted items to restore it to the active records.
+Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial information, including total income, total expenses, net profit for the selected period.
 
-**6. Dashboard Display**
+**6. Export of transactions in csv format**
 
-Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial information, including total income, total expenses, net profit for the selected period, and a breakdown of expenses by sector.
+For those who need to share data with stakeholders, Tran$act allows you to generate CSV report.
 
-**7. Access to Financial Reports**
-
-Generate financial reports with ease. Tran$act offers the capability to produce income statements, balance sheets, and cash flow statements.
-
-**8. Customizable Reports**
-
-For those who need to share data with stakeholders, Tran$act allows you to generate customizable reports. Create reports in common formats such as PDF, CSV, and Excel, tailored to your specific needs.
-
-**9. Data Security and Backup**
-
-Tran$act takes data security seriously. It includes features to secure financial data, potentially through encryption, to protect sensitive information. Additionally, automated backups can be set up to prevent data loss due to hardware issues, and you have the ability to undo actions or restore from backups when needed.
-
-**10. Address Book**
+**7. Address Book**
 
 Import staff lists into the address book for quick access to contact information. You can also add, edit, and remove people from the address book as needed.
 
