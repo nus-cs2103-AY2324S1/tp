@@ -77,15 +77,11 @@ public class LeaveList {
 
 
     public boolean getCurrentLeaveStatus() {
-        if (leaveList.size() == 0) {
+        if (leaveList.isEmpty()) {
             return false;
+        } else {
+            return leaveList.contains(new Leave(LocalDate.now()));
         }
-        for (int i = 0; i < leaveList.size(); i++) {
-            if (leaveList.get(i).equals(LocalDate.now())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
