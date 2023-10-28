@@ -282,7 +282,7 @@ The proposed resetting mechanism is facilitated by `Model`. It implements the fo
 Given below is an example usage scenario where the user attempts to reset the overtime hours field of all employees
 and how the reset mechanism behaves at each step.
 
-Step 1. The user keys in `reset f/overtime hours`. This leads to the `reset` command being executed. It checks the argument given and
+Step 1. The user keys in `reset f/overtime`. This leads to the `reset` command being executed. It checks the argument given and
 identifies that the `OvertimeHours` field is being reset. 
 
 Step 2. Then it loops through the list of existing employees in `model.getFilteredEmployeeList()`.
