@@ -56,6 +56,10 @@ public class Patient extends Person {
                 && medicalHistory.equals(otherPatient.medicalHistory);
     }
 
+    /**
+     * Returns true if both patients have the same name.
+     * This defines a weaker notion of equality between two patients.
+     */
     @Override
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
