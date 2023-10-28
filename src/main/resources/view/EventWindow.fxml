@@ -10,14 +10,16 @@
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.layout.StackPane?>
-<fx:root resizable="false" title="Event" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Events" minWidth="600" minHeight="400" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/help_icon.png" />
     </icons>
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@HelpWindow.css" />
+                <URL value="@DarkTheme.css" />
+                <URL value="@Extensions.css" />
+                <URL value="@Form.css" />
             </stylesheets>
 
             <StackPane fx:id="eventListPanelPlaceholder" styleClass="pane-with-border" minWidth="150" prefWidth="150">
