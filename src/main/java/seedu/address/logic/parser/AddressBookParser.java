@@ -94,7 +94,7 @@ public class AddressBookParser {
             return new DeleteScheduleCommandParser().parse(arguments);
 
         case ListScheduleCommand.COMMAND_WORD:
-            return new ListScheduleCommand();
+            return new ListScheduleCommandParser().parse(arguments);
 
         case MarkScheduleCommand.COMMAND_WORD:
             return new MarkScheduleCommandParser().parse(arguments);

@@ -143,7 +143,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_listSchedule() throws Exception {
         assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD) instanceof ListScheduleCommand);
-        assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD) instanceof ListScheduleCommand);
+        assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD + " 1") instanceof ListScheduleCommand);
     }
 
     @Test

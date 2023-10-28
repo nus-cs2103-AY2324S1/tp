@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ListTutorCommand;
@@ -173,9 +174,11 @@ public class MainWindow extends UiPart<Stage> {
      * Displays either the list of schedules or tutors based on the command result
      */
     private void handleListDisplay(CommandResult commandResult) {
-        if (commandResult.getFeedbackToUser().equals(ListScheduleCommand.MESSAGE_SUCCESS)) {
+        if (commandResult.getFeedbackToUser().equals(ListScheduleCommand.MESSAGE_SUCCESS)
+            || commandResult.getFeedbackToUser().contains(Messages.MESSAGE_LISTED_SCHEDULE)) {
             showSchedules();
-        } else if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)) {
+        } else if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)
+            || commandResult.getFeedbackToUser().contains(Messages.MESSAGE_LISTED_PERSONS)) {
             showPersons();
         }
     }
