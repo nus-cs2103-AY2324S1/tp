@@ -17,6 +17,7 @@ class SortCommandTest {
     private static final String SALARY_ATTR = "salary";
     private static final String NAME_ATTR = "name";
     private static final String OVERTIME_ATTR = "overtime hours";
+    private static final String LEAVES_ATTR = "allocated leaves";
     private static final String INVALID_ATTR = "invalid attribute";
     private static final String NO_ATTR = "";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -53,6 +54,18 @@ class SortCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateSortedEmployeeList(OVERTIME_ATTR);
+
+        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    void execute_sortListLeaves_success() {
+        SortCommand sortCommand = new SortCommand(LEAVES_ATTR);
+
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, LEAVES_ATTR);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateSortedEmployeeList(LEAVES_ATTR);
 
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
