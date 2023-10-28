@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Doctor extends Person {
-    private ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+    private final ArrayList<Appointment> appointments = new ArrayList<Appointment>();
 
     /**
      * Every field must be present and not null.

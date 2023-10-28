@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,8 +18,8 @@ public class Patient extends Person {
     // Patient specific fields
     private final Condition condition;
     private final BloodType bloodType;
-    //private final Doctor doctor;    to be implemented after Doctor class created
-    private Phone emergencyContact;
+    private final ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+    private final Phone emergencyContact;
 
     /**
      * Every field must be present and not null.
@@ -42,6 +43,24 @@ public class Patient extends Person {
 
     public Phone getEmergencyContact() {
         return emergencyContact;
+    }
+
+    /**
+     * Retrieves the list of patients stored in this medical facility.
+     *
+     * @return An ArrayList containing the patients currently registered in the facility.
+     */
+    public ArrayList<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    /**
+     * Adds a new patient to the medical facility's list of patients.
+     *
+     * @param appointment The Patient object representing the individual to be added.
+     */
+    public void addAppointment(Appointment appointment) {
+        this.appointments.add(appointment);
     }
 
     /**
