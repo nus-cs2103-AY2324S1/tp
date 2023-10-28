@@ -49,7 +49,7 @@ public class DashboardCommand extends Command {
     private int getSpecifiedOutcomeCount(ObservableList<Person> personList, Interaction.Outcome outcome) {
         return personList.stream()
                 .map(person ->
-                        person.getFilteredInteraction(i -> i.isOutcome(outcome)).size())
+                        person.getFilteredInteractions(i -> i.isOutcome(outcome)).size())
                 .reduce(0, Integer::sum);
     }
 

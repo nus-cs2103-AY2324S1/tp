@@ -6,10 +6,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.interaction.Interaction;
@@ -102,12 +102,12 @@ public class Person {
         return details;
     }
 
-    public ArrayList<Interaction> getInteractions() {
-        return interactions;
+    public List<Interaction> getInteractions() {
+        return interactions.getInteractions();
     }
 
-    public ArrayList<Interaction> getFilteredInteraction(Predicate<Interaction> predicate) {
-        return interactions.stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
+    public List<Interaction> getFilteredInteractions(Predicate<Interaction> predicate) {
+        return this.interactions.getFilteredInteractions(predicate);
     }
 
     /**
@@ -275,7 +275,7 @@ public class Person {
          * Adds the {@code Interaction} to the {@code Set<Interaction>} of the {@code Person} that we are building.
          */
         public PersonBuilder addInteraction(Interaction interaction) {
-            this.interactions.add(interaction);
+            this.interactions.addInteraction(interaction);
             return this;
         }
 
