@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_LATER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATER;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -51,6 +55,23 @@ public class AddEventCommandTest {
 
         assertThrows(CommandException.class, AddEventCommand.MESSAGE_EVENT_CONFLICT, () -> addEventCommand
                 .execute(modelStub));
+    }
+
+    @Test
+    public void equalsTest() {
+        Event validEvent = new EventBuilder().build();
+        EventBuilder otherValidEventBuilder = new EventBuilder();
+        otherValidEventBuilder.withStartEndDate(VALID_START_DATE_LATER, VALID_END_DATE_LATER);
+        Event otherEvent = otherValidEventBuilder.build();
+        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
+        AddEventCommand notEqualAddEventCommand = new AddEventCommand(otherEvent);
+        Object nonAddEventCommandObject = new Object();
+
+        assertTrue(addEventCommand.equals(addEventCommand));
+
+        assertFalse(addEventCommand.equals(notEqualAddEventCommand));
+
+        assertFalse(addEventCommand.equals(nonAddEventCommandObject));
     }
 
     /**
@@ -122,6 +143,10 @@ public class AddEventCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public ObservableList<Event> getCurrentWeekEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");

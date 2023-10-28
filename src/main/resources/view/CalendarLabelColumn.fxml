@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox minWidth="50" HBox.hgrow="NEVER" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane minHeight="30" HBox.hgrow="ALWAYS">
+        <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="salmon" height="30" width="50" />
+            <Label styleClass="cell_small_label" text="Time"/>
+        </children>
+    </StackPane>
+
+    <StackPane minHeight="30" HBox.hgrow="ALWAYS">
+        <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="darksalmon" height="30" width="50" />
+            <Label styleClass="cell_small_label" text="Mon"/>
+        </children>
+    </StackPane>
+
+    <StackPane minHeight="30" HBox.hgrow="ALWAYS">
+        <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="darksalmon" height="30" width="50" />
+            <Label styleClass="cell_small_label" text="Tue"/>
+        </children>
+    </StackPane>
+
+    <StackPane minHeight="30" HBox.hgrow="ALWAYS">
+        <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="darksalmon" height="30" width="50" />
+            <Label styleClass="cell_small_label" text="Wed"/>
+        </children>
+    </StackPane>
+
+    <StackPane minHeight="30" HBox.hgrow="ALWAYS">
+        <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="darksalmon" height="30" width="50" />
+            <Label styleClass="cell_small_label" text="Thu"/>
+        </children>
+    </StackPane>
+
+    <StackPane minHeight="30" HBox.hgrow="ALWAYS">
+        <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="darksalmon" height="30" width="50" />
+            <Label styleClass="cell_small_label" text="Fri"/>
+        </children>
+    </StackPane>
+
+    <StackPane minHeight="30" HBox.hgrow="ALWAYS">
+        <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="darksalmon" height="30" width="50" />
+            <Label styleClass="cell_small_label" text="Sat"/>
+        </children>
+    </StackPane>
+
+    <StackPane minHeight="30" HBox.hgrow="ALWAYS">
+        <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="darksalmon" height="30" width="50" />
+            <Label styleClass="cell_small_label" text="Sun"/>
+        </children>
+    </StackPane>
+</VBox>

@@ -10,10 +10,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
+import seedu.address.testutil.EventPeriodBuilder;
 
 public class JsonAdaptedEventTest {
     private static final String INVALID_DESCRIPTION = "";
     private static final String INVALID_EVENT_PERIOD = "2010-10-10 10:00-2010-10-10 12:00";
+    private static final String INVALID_EVENT_PERIOD_DATE = "2010-10-10 12:00 - 2010-10-10 10:00";
 
     private static final String VALID_DESCRIPTION = CONFERENCE.getDescription().getDescription();
     private static final String VALID_EVENT_PERIOD = CONFERENCE.getEventPeriod().getFormattedPeriod();
@@ -51,6 +53,14 @@ public class JsonAdaptedEventTest {
     public void toModelType_nullEventPeriod_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_DESCRIPTION, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EventPeriod.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
+    }
+
+    @Test
+    public void toModelType_isInvalidEventPeriod_throwsIllegalValueException() {
+        EventPeriodBuilder eventPeriodBuilder = new EventPeriodBuilder();
+        JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_DESCRIPTION, INVALID_EVENT_PERIOD_DATE);
+        String expectedMessage = EventPeriod.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 

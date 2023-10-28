@@ -1,15 +1,20 @@
 package seedu.address.model.event;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.address.model.event.exceptions.DateOutOfBoundsException;
 
 /**
  * Represents a period in time when an event will occur.
@@ -23,6 +28,7 @@ public class EventPeriod implements Comparable<EventPeriod> {
             + "    -'HH:mm' is the time in 24-hour format.";
     public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HH:mm");
+    private static final LocalTime MAX_TIME_OF_DAY = LocalTime.MIDNIGHT.minusMinutes(1);
 
     private final LocalDateTime start;
     private final LocalDateTime end;
@@ -86,6 +92,21 @@ public class EventPeriod implements Comparable<EventPeriod> {
     }
 
     /**
+     * Checks if this EventPeriod overlaps with the given start date and end date.
+     *
+     * @param start start date.
+     * @param end end date.
+     * @return True if there is an overlap, false otherwise.
+     */
+    public boolean isOverlapping(LocalDate start, LocalDate end) {
+        requireAllNonNull(start, end);
+
+        boolean isThisEventStartingAfterOtherEventEnds = this.start.toLocalDate().isAfter(end);
+        boolean isThisEventEndedBeforeOtherEventStarts = this.end.toLocalDate().isBefore(start);
+        return !(isThisEventStartingAfterOtherEventEnds || isThisEventEndedBeforeOtherEventStarts);
+    }
+
+    /**
      * Checks if a specified {@code @LocalDateTime} is within the {@code @EventPeriod}.
      *
      * @param dateTime the specified {@code @LocalDateTime}.
@@ -140,6 +161,130 @@ public class EventPeriod implements Comparable<EventPeriod> {
         return startString + " - " + endString;
     }
 
+    /**
+     * Checks if another {@code @EventPeriod} occurs within a minute with this {@code @EventPeriod}.
+     *
+     * @param other the other {@code @EventPeriod}.
+     * @return true if they are apart by a single minute.
+     */
+    public boolean isContinuous(EventPeriod other) {
+        requireNonNull(other);
+
+        return this.start.plusMinutes(1) == other.end || other.start.plusMinutes(1) == this.end;
+    }
+
+    /**
+     * Bounds the {@code EventPeriod} such that the start and end lies within the specified {@code LocalDate}.
+     *
+     * @param date the specified {@code @LocalDate}.
+     * @return new {@code @EventPeriod} with adjusted start and end times.
+     */
+    public EventPeriod boundPeriodByDate(LocalDate date) {
+        requireNonNull(date);
+
+        boolean isDateOnStartDate = date.isEqual(start.toLocalDate());
+        boolean isDateOnEndDate = date.isEqual(end.toLocalDate());
+        boolean isDateAfterStartDate = date.isAfter(start.toLocalDate());
+        boolean isDateBeforeEndDate = date.isBefore(end.toLocalDate());
+
+
+        if (isDateOnStartDate && isDateOnEndDate) {
+            return this;
+        } else if (isDateOnStartDate) {
+            return new EventPeriod(start, LocalDateTime.of(date, MAX_TIME_OF_DAY));
+        } else if (isDateOnEndDate) {
+            return new EventPeriod(LocalDateTime.of(date, LocalTime.MIDNIGHT), end);
+        } else if (isDateAfterStartDate && isDateBeforeEndDate) {
+            return new EventPeriod(LocalDateTime.of(date, LocalTime.MIDNIGHT),
+                    LocalDateTime.of(date, MAX_TIME_OF_DAY));
+        } else {
+            throw new DateOutOfBoundsException();
+        }
+    }
+
+    /**
+     * Compare the start time (independent of date) of this EventPeriod with another.
+     *
+     * @param other other EventPeriod object.
+     * @return a negative integer if this EventPeriod has an earlier start time than the other, 0 if both have the same
+     *     start time and a positive integer otherwise.
+     */
+    public int compareStartTime(EventPeriod other) {
+        requireNonNull(other);
+
+        return this.start.toLocalTime().compareTo(other.start.toLocalTime());
+    }
+
+    /**
+     * Compare the end time (independent of date) of this EventPeriod with another.
+     *
+     * @param other other EventPeriod object.
+     * @return a negative integer if this EventPeriod has an earlier end time than the other, 0 if both have the same
+     *     end time and a positive integer otherwise.
+     */
+    public int compareEndTime(EventPeriod other) {
+        requireNonNull(other);
+
+        return this.end.toLocalTime().compareTo(other.end.toLocalTime());
+    }
+
+    /**
+     * Get the start time as a LocalTime of the EventPeriod, omitting the date.
+     *
+     * @return the start time as a LocalTime of the EventPeriod.
+     */
+    public LocalTime getStartTime() {
+        return start.toLocalTime();
+    }
+
+    /**
+     * Get the end time as a LocalTime of the EventPeriod, omitting the date.
+     *
+     * @return the end time as a LocalTime of the EventPeriod.
+     */
+    public LocalTime getEndTime() {
+        return end.toLocalTime();
+    }
+
+    /**
+     * Get the duration of the EventPeriod stored in a LocalTime.
+     *
+     * @return duration of the EventPeriod stored in a LocalTime.
+     */
+    public LocalTime getDuration() {
+        return LocalTime.of(getEndTime().getHour() - getStartTime().getHour(),
+                getEndTime().getMinute() - getStartTime().getMinute());
+    }
+
+    /**
+     * Checks if the start and end LocalDateTime objects occur on the same date.
+     *
+     * @return true if they both occur on the same date, false otherwise.
+     */
+    public boolean isSingleDay() {
+        return start.toLocalDate().isEqual(end.toLocalDate());
+    }
+
+    /**
+     * Get the DayOfWeek of this EventPeriod. EventPeriod has to only span a single day.
+     *
+     * @return DayOfWeek of this EventPeriod.
+     */
+    public DayOfWeek getDayOfWeek() {
+        assert(isSingleDay());
+
+        return start.getDayOfWeek();
+    }
+
+    /**
+     * Get the number of minutes elapsed from the input time to the start time of this EventPeriod.
+     *
+     * @param time input time.
+     * @return minutes elapsed from the input time to the start time of the EventPeriod.
+     */
+    public long getMinutesFromTimeToStartTime(LocalTime time) {
+        return MINUTES.between(time, getStartTime());
+    }
     @Override
     public boolean equals(Object other) {
         requireNonNull(other);

@@ -1,8 +1,10 @@
 package seedu.address.model.event;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_DATE_EARLIER;
@@ -11,6 +13,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_EARL
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNUSED_DESCRIPTION;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -125,5 +129,88 @@ public class EventTest {
         assertFalse(validEvent.equals(differentDescriptionEvent));
 
         assertFalse(validEvent.equals(differentPeriodEvent));
+    }
+
+    @Test
+    public void compareStartTimeTest() {
+        EventBuilder earlierEventBuilder = new EventBuilder();
+        earlierEventBuilder.withStartEndDate(VALID_START_DATE_EARLIER, VALID_START_DATE_LATER);
+        EventBuilder laterEventBuilder = new EventBuilder();
+        laterEventBuilder.withStartEndDate(VALID_END_DATE_EARLIER, VALID_END_DATE_LATER);
+        Event earlierEvent = earlierEventBuilder.build();
+        Event laterEvent = laterEventBuilder.build();
+
+        assertThrows(NullPointerException.class, () -> earlierEvent.compareStartTime(null));
+
+        assertTrue(earlierEvent.compareStartTime(laterEvent) < 0);
+
+        assertTrue(laterEvent.compareStartTime(earlierEvent) > 0);
+
+        assertEquals(0, earlierEvent.compareStartTime(earlierEvent));
+    }
+
+    @Test
+    public void compareEndTimeTest() {
+        EventBuilder earlierEventBuilder = new EventBuilder();
+        earlierEventBuilder.withStartEndDate(VALID_START_DATE_EARLIER, VALID_START_DATE_LATER);
+        EventBuilder laterEventBuilder = new EventBuilder();
+        laterEventBuilder.withStartEndDate(VALID_END_DATE_EARLIER, VALID_END_DATE_LATER);
+        Event earlierEvent = earlierEventBuilder.build();
+        Event laterEvent = laterEventBuilder.build();
+
+        assertThrows(NullPointerException.class, () -> earlierEvent.compareEndTime(null));
+
+        assertTrue(earlierEvent.compareEndTime(laterEvent) < 0);
+
+        assertTrue(laterEvent.compareEndTime(earlierEvent) > 0);
+
+        assertEquals(0, earlierEvent.compareEndTime(earlierEvent));
+    }
+
+    @Test
+    public void getStartTimeTest() {
+        Event event = new EventBuilder().build();
+        assertNotNull(event.getStartTime());
+    }
+
+    @Test
+    public void getEndTimeTest() {
+        Event event = new EventBuilder().build();
+        assertNotNull(event.getEndTime());
+    }
+
+    @Test
+    public void getDurationOfEventTest() {
+        Event event = new EventBuilder().build();
+        assertNotNull(event.getDurationOfEvent());
+    }
+
+    @Test
+    public void getDescriptionStringTest() {
+        Event event = new EventBuilder().build();
+        assertNotNull(event.getDescriptionString());
+    }
+
+    @Test
+    public void getDayOfWeekTest() {
+        EventBuilder nonSingleDayEventBuilder = new EventBuilder();
+        nonSingleDayEventBuilder.withStartEndDate(VALID_START_DATE_EARLIER, VALID_END_DATE_LATER);
+        Event nonSingleDayEvent = nonSingleDayEventBuilder.build();
+        Event singleDayEvent = new EventBuilder().build();
+
+        assertThrows(AssertionError.class, nonSingleDayEvent::getDayOfWeek);
+
+        assertNotNull(singleDayEvent.getDayOfWeek());
+    }
+
+    @Test
+    public void getMinutesFromTimeToStartTimeTest() {
+        EventBuilder eventBuilder = new EventBuilder();
+        Event event = eventBuilder.build();
+
+        assertThrows(NullPointerException.class, () -> event.getMinutesFromTimeToStartTime(null));
+
+        assertEquals(event.getMinutesFromTimeToStartTime(LocalTime.MIDNIGHT),
+                MINUTES.between(LocalTime.MIDNIGHT, eventBuilder.getStartTime()));
     }
 }

@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.time.LocalTime;
+
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
@@ -75,5 +77,14 @@ public class EventBuilder {
     public EventBuilder withStartEndDate(String start, String end) {
         this.eventPeriod = new EventPeriod(start, end);
         return this;
+    }
+
+    /**
+     * Get the start time of the EventBuilder, regardless of date.
+     *
+     * @return start time of the EventBuilder, regardless of date.
+     */
+    public LocalTime getStartTime() {
+        return eventPeriod.getStartTime();
     }
 }
