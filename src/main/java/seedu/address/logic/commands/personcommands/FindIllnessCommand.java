@@ -18,8 +18,8 @@ public class FindIllnessCommand extends Command {
     public static final String COMMAND_WORD = "find-illness";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients with the illness that matches "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers. Note: The" +
-            " keyword must match the illness to find a valid match! \n"
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers. Note: The"
+            + " keyword must match the illness to find a valid match! \n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " fever";
 

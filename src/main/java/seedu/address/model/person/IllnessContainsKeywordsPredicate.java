@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Tests that a {@code Person}'s {@code Illness} matches any of the keywords given.
@@ -26,8 +25,7 @@ public class IllnessContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(tag -> {
-                    Tag currentTag = new Tag(tag);
-                    return person.getTags().contains(currentTag);
+                    return person.getTags().toString().toLowerCase().contains(tag.toLowerCase());
                 });
     }
 

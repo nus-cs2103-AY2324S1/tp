@@ -46,8 +46,7 @@ public class DiagnoseCommandParser implements Parser<DiagnoseCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DiagnoseCommand.MESSAGE_USAGE));
         }
 
-        // Note: Made the arguments lowercase. So all the illness tags will be in lowercase.
-        Set<Tag> illnesses = ParserUtil.parseIllnesses(argMultimap.getValue(PREFIX_ILLNESSES).get().toLowerCase());
+        Set<Tag> illnesses = ParserUtil.parseIllnesses(argMultimap.getValue(PREFIX_ILLNESSES).get());
 
         return new DiagnoseCommand(index, illnesses);
     }

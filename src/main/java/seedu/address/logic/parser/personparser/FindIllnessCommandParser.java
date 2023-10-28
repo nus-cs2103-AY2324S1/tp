@@ -21,9 +21,8 @@ public class FindIllnessCommandParser implements Parser<FindIllnessCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindIllnessCommand parse(String args) throws ParseException {
-        // make arguments lowercase so that illness tags are in lowercase. Makes it compatible to perform findillness
-        // function
-        String trimmedArgs = args.trim().toLowerCase();
+
+        String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
