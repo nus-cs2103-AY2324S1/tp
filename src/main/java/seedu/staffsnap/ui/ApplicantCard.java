@@ -8,6 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -70,6 +74,8 @@ public class ApplicantCard extends UiPart<Region> {
         displayApplicantInterviews();
         displayApplicantScore();
     }
+
+
     private void displayApplicantId(int displayedIndex) {
         id.setText(displayedIndex + ". ");
     }
@@ -128,12 +134,26 @@ public class ApplicantCard extends UiPart<Region> {
             interviewHeader.setAlignment(Pos.CENTER);
             VBox.setVgrow(interviewRating, Priority.ALWAYS);
 
-            interviewHeader.setBackground(new Background(new BackgroundFill(Color.web("#3e7b91"),
-                    CornerRadii.EMPTY, Insets.EMPTY)));
-            interviewRating.setBackground(new Background(new BackgroundFill(Color.web("#7fc9e8"),
-                    CornerRadii.EMPTY, Insets.EMPTY)));
+            //sets the individual interview rating box with a border radius of 10
+            interviewBox.setBackground(new Background(new BackgroundFill(
+                    Color.TRANSPARENT,
+                    new CornerRadii(10),
+                    Insets.EMPTY)));
+            interviewBox.setBorder(new Border(new BorderStroke(
+                    Color.TRANSPARENT,
+                    BorderStrokeStyle.NONE,
+                    new CornerRadii(10),
+                    BorderWidths.DEFAULT)));
+            interviewHeader.setBackground(new Background(new BackgroundFill(
+                    Color.web("#3e7b91"),
+                    new CornerRadii(10, 10, 0, 0, false),
+                    Insets.EMPTY)));
+            interviewRating.setBackground(new Background(new BackgroundFill(
+                    Color.web("#7fc9e8"),
+                    new CornerRadii(0, 0, 10, 10, false),
+                    Insets.EMPTY)));
 
-            Label interviewLabel = new Label(applicant.getInterviewIndexForApplicantCard(interview)
+            Label interviewLabel = new Label((int) applicant.getInterviewIndexForApplicantCard(interview)
                     + ". " + interview.type);
 
             Label interviewRatingLabel = new Label();
@@ -150,17 +170,24 @@ public class ApplicantCard extends UiPart<Region> {
     private void displayApplicantScore() {
         Circle outerCircle = new Circle(50);
         outerCircle.setFill(Color.web("#454545"));
+
         Circle midCircle = new Circle(43);
         midCircle.setFill(Color.web("#454545"));
+
         Circle innerCircle = new Circle(36);
         innerCircle.setFill(Color.web("#454545"));
+
         Group stackedArcs = new Group();
         stackedArcs.getChildren().addAll(outerCircle, midCircle);
-        Label scoreLabel = new Label();
-        scoreLabel.setText(applicant.getScore().hasRating()
-                ? applicant.getScore().toString()
-                : "-");
+
+        String labelText = applicant.getScore().hasRating() ? applicant.getScore().toString() : "N.A.";
+        Label scoreLabel = new Label(labelText);
         scoreLabel.getStyleClass().add("score_label");
+
+        Color[] colours = { Color.TRANSPARENT, Color.web("#1a8cff"), Color.web("#3333cc"),
+                Color.web("#7a00cc"), Color.web("#cc0099"), Color.web("#ff0066"),
+                Color.web("#ff6600"), Color.web("#ffcc00"), Color.web("#ccff33"),
+                Color.web("#66ff33"), Color.web("#00ffcc")};
 
         for (int i = 0; i < 10; i++) {
             Arc arc = new Arc(0, 0, 43, 43,
@@ -170,6 +197,15 @@ public class ApplicantCard extends UiPart<Region> {
             stackedArcs.getChildren().add(arc);
         }
 
+        double applicantRating = labelText.equals("N.A.") ? 0 : Double.parseDouble(labelText);
+        double ratingArcLength = -360 * (applicantRating / 10);
+        Arc ratingArc = new Arc(0, 0, 43, 43, 90, ratingArcLength);
+        Color arcColour = colours[(int) Math.floor(applicantRating)];
+        ratingArc.setFill(arcColour);
+        ratingArc.setType(ArcType.ROUND);
+
+        stackedArcs.getChildren().add(ratingArc);
         overallRating.getChildren().addAll(stackedArcs, innerCircle, scoreLabel);
     }
+
 }

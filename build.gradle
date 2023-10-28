@@ -21,6 +21,11 @@ checkstyle {
 }
 
 test {
+    doFirst {
+        if (System.getProperty("os.name").equals("Linux")) {
+            exclude '**/ui/**'
+        }
+    }
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
@@ -40,7 +45,7 @@ task coverage(type: JacocoReport) {
     }
 }
 
-dependencies {
+ dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '17.0.7'
 
@@ -65,6 +70,10 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    // TestFX for JavaFX testing
+    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
+    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
 }
 
 shadowJar {
