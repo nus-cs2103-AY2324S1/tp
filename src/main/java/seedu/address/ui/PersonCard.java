@@ -47,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
     private Label salary;
     @FXML
     private Label annualLeave;
+    @FXML
+    private Label attendance;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
@@ -64,6 +66,7 @@ public class PersonCard extends UiPart<Region> {
         joinDate.setText(person.getJoinDate().value);
         salary.setText(person.getSalary().value);
         annualLeave.setText(person.getAnnualLeave().value);
+        attendance.setText(person.getAttendanceToday().toString().toLowerCase());
     }
 
     /**
@@ -82,5 +85,6 @@ public class PersonCard extends UiPart<Region> {
         joinDate.setText(person.getJoinDate().value);
         salary.setText(person.getSalary().value);
         annualLeave.setText(person.getAnnualLeave().value);
+        attendance.setText(person.getAttendanceToday().toString().toLowerCase());
     }
 }

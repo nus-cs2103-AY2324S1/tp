@@ -14,7 +14,18 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.attendance.AttendanceStorage;
 import seedu.address.model.person.attendance.AttendanceType;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.AnnualLeave;
+import seedu.address.model.person.BankAccount;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.JoinDate;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Salary;
+
+
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
