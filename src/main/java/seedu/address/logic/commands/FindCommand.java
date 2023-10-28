@@ -25,6 +25,12 @@ public class FindCommand extends Command {
     private final NameContainsKeywordsPredicate predicate;
     private final SubjectContainsKeywordsPredicate subject;
 
+    /**
+     * Constructore for the findCommand class
+     *
+     * @param predicate the keyword to be searched which starts with the prefix n/
+     * @param subject the keyword to be searched which starts with the prefix sb/
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate, SubjectContainsKeywordsPredicate subject) {
         this.predicate = predicate;
         this.subject = subject;

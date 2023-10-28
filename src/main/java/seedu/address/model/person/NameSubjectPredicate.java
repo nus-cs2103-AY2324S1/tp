@@ -1,10 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-
-import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -13,6 +11,11 @@ public class NameSubjectPredicate implements Predicate<Person> {
     private final NameContainsKeywordsPredicate name;
     private final SubjectContainsKeywordsPredicate subject;
 
+    /**
+     * Constructor for the NameSubjectPredicate class
+     * @param name the keyword starting with the prefix n/
+     * @param subject the keyword starting with the prefix sb/
+     */
     public NameSubjectPredicate(NameContainsKeywordsPredicate name, SubjectContainsKeywordsPredicate subject) {
         this.name = name;
         this.subject = subject;

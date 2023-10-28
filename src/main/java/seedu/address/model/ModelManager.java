@@ -144,7 +144,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Person> getFilteredSubjectList() { return filteredPersons;}
+    public ObservableList<Person> getFilteredSubjectList() {
+        return filteredPersons;
+    }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
