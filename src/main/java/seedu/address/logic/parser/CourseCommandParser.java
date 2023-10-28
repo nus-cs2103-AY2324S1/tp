@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 
 import java.util.stream.Stream;
 
@@ -38,7 +37,8 @@ public class CourseCommandParser implements Parser<CourseCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_COURSETUTORIAL) || argMultimap.getValue(PREFIX_COURSETUTORIAL).isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_COURSETUTORIAL)
+                || argMultimap.getValue(PREFIX_COURSETUTORIAL).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE));
         }
 

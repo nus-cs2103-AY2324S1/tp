@@ -4,15 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSETUTORIAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
 
-import java.util.Optional;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil.CourseOperation;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.predicate.ContainsTagPredicate;
-import seedu.address.model.tag.Tag;
 
 /**
  * Adds, deletes or clears filters.

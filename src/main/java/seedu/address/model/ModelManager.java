@@ -42,15 +42,11 @@ public class ModelManager implements Model {
 
         if (getAddressBook() != null) {
             updateFilteredPersonList();
-        } 
+        }
     }
 
     public ModelManager() {
         this(new AddressBookManager(), new UserPrefs());
-    }
-
-    private void updateFilteredPersonList() {
-        uniquePersonList.setPersons(getAddressBook().getPersonList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -104,6 +100,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         addressBookManager.setAddressBook(addressBook);
+        updateFilteredPersonList();
     }
 
     @Override
@@ -120,23 +117,26 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         getActiveAddressBook().removePerson(target);
+        updateFilteredPersonList();
     }
 
     @Override
     public void addPerson(Person person) {
         requireNonNull(person);
         getActiveAddressBook().addPerson(person);
-        clearFilters();
+        updateFilteredPersonList();
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         getActiveAddressBook().setPerson(target, editedPerson);
+        updateFilteredPersonList();
     }
 
     //=========== AddressBookManager =========================================================================
-     @Override
+
+    @Override
     public ReadOnlyAddressBookManager getAddressBookManager() {
         return addressBookManager;
     }
@@ -168,6 +168,9 @@ public class ModelManager implements Model {
 
 
     //=========== Filtered Person List Accessors =============================================================
+    private void updateFilteredPersonList() {
+        uniquePersonList.setPersons(getAddressBook().getPersonList());
+    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of

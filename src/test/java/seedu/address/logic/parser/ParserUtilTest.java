@@ -41,7 +41,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_ADD_OPERATION = "add";
     private static final String VALID_DELETE_OPERATION = "delete";
-    private static final String VALID_CLEAR_OPERATION = "clear";
+    private static final String VALID_SWITCH_OPERATION = "switch";
     private static final String VALID_WEEK = "2";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -243,7 +243,7 @@ public class ParserUtilTest {
     public void parseFilterOperation_validValueWithputWhiteSpace_returnsFilterOperation() throws Exception {
         assertEquals(CourseOperation.ADD, ParserUtil.parseFilterOperation(VALID_ADD_OPERATION));
         assertEquals(CourseOperation.DELETE, ParserUtil.parseFilterOperation(VALID_DELETE_OPERATION));
-        assertEquals(CourseOperation.CLEAR, ParserUtil.parseFilterOperation(VALID_CLEAR_OPERATION));
+        assertEquals(CourseOperation.SWITCH, ParserUtil.parseFilterOperation(VALID_SWITCH_OPERATION));
     }
 
     @Test
@@ -254,8 +254,8 @@ public class ParserUtilTest {
         String deleteOperationWithWhitespace = WHITESPACE + VALID_DELETE_OPERATION + WHITESPACE;
         assertEquals(CourseOperation.DELETE, ParserUtil.parseFilterOperation(deleteOperationWithWhitespace));
 
-        String clearOperationWithWhitespace = WHITESPACE + VALID_CLEAR_OPERATION + WHITESPACE;
-        assertEquals(CourseOperation.CLEAR, ParserUtil.parseFilterOperation(clearOperationWithWhitespace));
+        String clearOperationWithWhitespace = WHITESPACE + VALID_SWITCH_OPERATION + WHITESPACE;
+        assertEquals(CourseOperation.SWITCH, ParserUtil.parseFilterOperation(clearOperationWithWhitespace));
     }
 }
 

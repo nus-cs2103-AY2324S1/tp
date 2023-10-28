@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 
-import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
@@ -64,12 +63,27 @@ public interface Model {
     /** Returns the AddressBookManager */
     ReadOnlyAddressBookManager getAddressBookManager();
 
+    /**
+     * Adds the given address book.
+     * {@code addressBook} must not already exist in the address book manager.
+     */
     void addAddressBook(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Deletes the given address book.
+     * {@code addressBook} must exist in the address book manager.
+     */
     void deleteAddressBook(String courseCode);
 
+    /**
+     * Sets the active address book.
+     * {@code courseCode} address book must exist in the address book manager.
+     */
     void setActiveAddressBook(String courseCode);
 
+    /**
+     * Returns true if an address book with the given {@code courseCode} exists.
+     */
     boolean hasAddressBook(String courseCode);
 
     /**
