@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -133,7 +134,9 @@ public class AllDaysEventListManager {
     public List<Event> eventsInRange(EventPeriod range) {
         List<LocalDate> days = range.getDates();
         return days.stream().map(LocalDate::toString)
-                .flatMap(x -> dayToEventListMap.get(x).eventsInRange(range).stream())
+                .flatMap(x -> dayToEventListMap.containsKey(x)
+                        ? dayToEventListMap.get(x).eventsInRange(range).stream()
+                        : Stream.<Event>empty())
                 .distinct()
                 .collect(Collectors.toList());
     }

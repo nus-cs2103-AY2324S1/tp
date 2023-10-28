@@ -106,6 +106,7 @@ public class Calendar implements ReadOnlyCalendar {
 
     /**
      * Looks for an event at specified time.
+     *
      * @param dateTime the specified time.
      * @return an optional containing the event if there is an event at the time, an empty optional otherwise.
      */
@@ -114,11 +115,22 @@ public class Calendar implements ReadOnlyCalendar {
         return eventManager.eventAt(dateTime);
     }
 
+    /**
+     * Looks for all events within a specified time range and returns them in a list.
+     *
+     * @param range the specified time range represented by an {@code EventPeriod}
+     * @return a list containing all events within the range.
+     */
     public List<Event> getEventsInRange(EventPeriod range) {
         requireNonNull(range);
         return eventManager.eventsInRange(range);
     }
 
+    /**
+     * Looks for all events within a specified time range and deletes them.
+     *
+     * @param range the specified time range represented by an {@code EventPeriod}
+     */
     public void deleteEventsInRange(EventPeriod range) {
         requireNonNull(range);
         for(Event event:getEventsInRange(range)) {

@@ -9,7 +9,9 @@ import seedu.address.logic.commands.ClearEventsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventPeriod;
 
-
+/**
+ * Parses the input arguments and creates a new ClearEventsCommand object.
+ */
 public class ClearEventsCommandParser implements  Parser<ClearEventsCommand> {
     private static final String CONFIRMATION = "CONFIRMED";
     @Override
