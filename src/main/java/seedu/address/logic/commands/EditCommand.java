@@ -46,9 +46,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Example: p/98742122.";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book.";
-    public static final String MESSAGE_INCONSISTENT_NAME_AND_ID =
-            "Both a name and an NRIC were provided, but they do not match the same person.";
+    public static final String MESSAGE_PERSON_NOT_FOUND =
+            "The given combination of Name and NRIC does not match any person in the patients list.";
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
 
     private final EditPersonDescriptor editPersonDescriptor;
@@ -74,7 +73,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Optional<Person> personOptional = findPersonToEdit(lastShownList);
+        Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, nric, lastShownList);
 
         if (personOptional.isEmpty()) {
             logger.log(Level.WARNING, "Person not found for editing");
@@ -90,42 +89,6 @@ public class EditCommand extends Command {
         logger.log(Level.INFO, "EditCommand executed successfully");
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
-    }
-
-    /**
-     * Finds the person to edit based on the provided name and/or NRIC.
-     *
-     * @param persons A list of persons to search within.
-     * @return An Optional containing the person to edit, if found, or an empty Optional if not found.
-     * @throws CommandException if there is inconsistency between the provided name and NRIC.
-     */
-    public Optional<Person> findPersonToEdit(List<Person> persons) throws CommandException {
-        if (name != null && nric != null) {
-            // Search for a person by name and NRIC
-            Optional<Person> personByName = persons.stream()
-                    .filter(person -> person.getName().equals(name))
-                    .findFirst();
-            Optional<Person> personByNric = persons.stream()
-                    .filter(person -> person.getNric().equals(nric))
-                    .findFirst();
-            // Check if both Optional instances are not empty, and return the one that represents the same person
-            if (personByName.isPresent() && personByNric.isPresent() && personByName.get() == personByNric.get()) {
-                return personByName;
-            } else {
-                throw new CommandException(MESSAGE_INCONSISTENT_NAME_AND_ID);
-            }
-        }
-        if (name != null) {
-            return persons.stream()
-                    .filter(person -> person.getName().equals(name))
-                    .findFirst();
-        } else if (nric != null) {
-            return persons.stream()
-                    .filter(person -> person.getNric().equals(nric))
-                    .findFirst();
-        } else {
-            return Optional.empty();
-        }
     }
 
     /**

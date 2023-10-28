@@ -44,6 +44,9 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_APPOINTMENT, PREFIX_MEDICAL, PREFIX_TAG);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_APPOINTMENT);
+
         boolean hasNamePrefix = argMultimap.getValue(PREFIX_NAME).isPresent();
         boolean hasNricPrefix = argMultimap.getValue(PREFIX_NRIC).isPresent();
 
@@ -51,9 +54,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             logger.log(Level.WARNING, "Missing NAME or NRIC prefix in edit command: {0}", args);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_APPOINTMENT);
 
         Name name = null;
         Nric nric = null;

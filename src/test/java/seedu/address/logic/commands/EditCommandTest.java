@@ -12,10 +12,6 @@ import static seedu.address.logic.commands.EditCommand.createEditedPerson;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -83,32 +79,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void findPersonToEdit_personFoundByName_returnPersonOptional() throws CommandException {
-        List<Person> persons = new ArrayList<>();
-        Person person = new PersonBuilder().withName("John Doe").build();
-        persons.add(person);
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
-        EditCommand editCommand = new EditCommand(new Name("John Doe"), null, descriptor);
-
-        Optional<Person> personOptional = editCommand.findPersonToEdit(persons);
-
-        assertEquals(person, personOptional.get());
-    }
-
-    @Test
-    public void findPersonToEdit_personFoundByNric_returnPersonOptional() throws CommandException {
-        List<Person> persons = new ArrayList<>();
-        Person person = new PersonBuilder().withNric("S1223111B").build();
-        persons.add(person);
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
-        EditCommand editCommand = new EditCommand(null, new Nric("S1223111B"), descriptor);
-
-        Optional<Person> personOptional = editCommand.findPersonToEdit(persons);
-
-        assertEquals(person, personOptional.get());
-    }
-
-    @Test
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditCommand editCommand = new EditCommand(new Name("Name"), null, editPersonDescriptor);
@@ -156,26 +126,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void findPersonToEdit_inconsistentNameAndID_throwsCommandException() {
-        Person john = new PersonBuilder().withName("John Doe").withNric("S1234567A").build();
-        Person jane = new PersonBuilder().withName("Jane Smith").withNric("S7654321B").build();
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptor();
-        EditCommand editCommand = new EditCommand(new Name("John Doe"), new Nric("S7654321B"), descriptor);
-
-        // Add persons to a list
-        List<Person> persons = new ArrayList<>();
-        persons.add(john);
-        persons.add(jane);
-
-        String expectedMessage = EditCommand.MESSAGE_INCONSISTENT_NAME_AND_ID;
-
-        CommandException exception = assertThrows(CommandException.class, () -> editCommand.findPersonToEdit(persons));
-        assertEquals(expectedMessage, exception.getMessage());
-    }
-
-
-    @Test
     public void execute_personNotFound_throwsCommandException() {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName("NonExistentName").build();
         EditCommand editCommand = new EditCommand(new Name("NonExistentName"), null, descriptor);
@@ -185,19 +135,11 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_cannotFindPerson_throwsCommandException() throws CommandException {
+    public void execute_allNullFields_throwsCommandException() {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
         EditCommand editCommand = new EditCommand(null, null, descriptor);
 
-        Person john = new PersonBuilder().build();
-        Person jane = new PersonBuilder().build();
-
-        List<Person> personList = new ArrayList<>();
-        personList.add(john);
-        personList.add(jane);
-
-        Optional<Person> person = editCommand.findPersonToEdit(personList);
-        assertFalse(person.isPresent());
+        assertThrows(CommandException.class, () -> editCommand.execute(model), CommandUtil.MESSAGES_ALL_FIELDS_NULL);
     }
 
     @Test

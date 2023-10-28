@@ -97,15 +97,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code medicalHistory} into a {@code Set<MedicalHistory>}
-     * and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withMedicalHistories(String ... medicalHistories) {
-        this.medicalHistories = SampleDataUtil.getMedicalHistorySet(medicalHistories);
-        return this;
-    }
-
-    /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PersonBuilder withAddress(String address) {
