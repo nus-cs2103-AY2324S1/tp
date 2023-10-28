@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
+    private final Dashboard dashboard = new Dashboard();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -111,6 +112,12 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Dashboard ================================
+    @Override
+    public Dashboard getDashboard() {
+        return dashboard;
     }
 
     //=========== Filtered Person List Accessors =============================================================
