@@ -34,16 +34,16 @@ public class DeleteCommand extends UndoableCommand {
             + "Parameters: n/Name or id/Nric (must be valid)\n"
             + "Example: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Patient: %1$s";
 
-    public static final String MESSAGE_DELETE_PERSON_FIELD_SUCCESS = "Deleted Person's field: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_FIELD_SUCCESS = "Deleted Patient's field: %1$s";
 
     public static final String MESSAGE_PERSON_NOT_FOUND =
-            "The given combination of Name and NRIC does not match any person in the patients list.";
+            "The given combination of Name and NRIC does not match any patient in the patients list.";
 
-    public static final String MESSAGE_UNDO_DELETE_ENTIRE_PERSON_SUCCESS = "Reverted the deletion of: ";
+    public static final String MESSAGE_UNDO_DELETE_ENTIRE_PERSON_SUCCESS = "Reverted the deletion of Patient: ";
 
-    public static final String MESSAGE_UNDO_DELETE_FIELD_SUCESS = "Reverted the deletion of patient with a field: ";
+    public static final String MESSAGE_UNDO_DELETE_FIELD_SUCESS = "Reverted the deletion of a Patient's field: ";
 
     /**
      * The original state of the person.
@@ -57,9 +57,6 @@ public class DeleteCommand extends UndoableCommand {
     private final Name name;
     private final Nric nric;
     private final DeletePersonDescriptor deletePersonDescriptor;
-
-
-
 
     /**
      * @param nric of the person in the filtered person list to edit

@@ -36,19 +36,19 @@ public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the name or NRIC of the patient.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the Person identified "
+            + "by the name or NRIC of the Patient.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Format: edit n/NAME or id/IC_NUMBER [Fields] ...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "91234567";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_UNDO_PERSON_SUCESS = "Undo Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patient: %1$s";
+    public static final String MESSAGE_UNDO_PERSON_SUCCESS = "Reverted the Editing of Patient:";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. Example: p/98742122.";
     public static final String MESSAGE_PERSON_NOT_FOUND =
-            "The given combination of Name and/or NRIC does not match any person in the patients list.";
+            "The given combination of Name and/or NRIC does not match any person in the Patient list.";
 
 
     private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
@@ -111,7 +111,7 @@ public class EditCommand extends UndoableCommand {
         model.setPerson(editedPerson, originalPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_UNDO_PERSON_SUCESS, Messages.format(originalPerson)));
+        return new CommandResult(String.format(MESSAGE_UNDO_PERSON_SUCCESS, Messages.format(originalPerson)));
     }
 
     /**
