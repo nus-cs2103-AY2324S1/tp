@@ -77,8 +77,8 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
         final Condition modelCondition = checkCondition();
         final BloodType modelBloodType = checkBloodType();
 
-        Patient modelPatient = new Patient(p.getName(), p.getPhone(), modelEmergencyContact, p.getEmail(), p.getAddress(),
-                p.getRemark(), p.getGender(), p.getIc(), modelCondition, modelBloodType, p.getTags());
+        Patient modelPatient = new Patient(p.getName(), p.getPhone(), modelEmergencyContact, p.getEmail(),
+                p.getAddress(), p.getRemark(), p.getGender(), p.getIc(), modelCondition, modelBloodType, p.getTags());
 
         for (Appointment appointment : listOfAppointments) {
             modelPatient.addAppointment(appointment);
