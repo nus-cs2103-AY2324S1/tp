@@ -6,6 +6,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameSubjectPredicate;
+import seedu.address.model.person.SubjectContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -21,20 +23,22 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
+    private final SubjectContainsKeywordsPredicate subject;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(NameContainsKeywordsPredicate predicate, SubjectContainsKeywordsPredicate subject) {
         this.predicate = predicate;
+        this.subject = subject;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        NameSubjectPredicate nameSubject = new NameSubjectPredicate(predicate, subject);
+        model.updateFilteredPersonList(nameSubject);
         return new CommandResult(
-                String.format(Messages.MESSAGE_TUTEES_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_TUTEES_LISTED_OVERVIEW,
+                        model.getFilteredPersonList().size() + model.getFilteredSubjectList().size()));
     }
-
-    //Need to add contains check to find name fo person from several characters
     @Override
     public boolean equals(Object other) {
         if (other == this) {

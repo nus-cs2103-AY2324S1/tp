@@ -93,7 +93,6 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-
         if (!Lesson.isValid(editedPerson.getBegin(), editedPerson.getEnd())) {
             throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
         }
