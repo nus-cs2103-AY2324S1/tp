@@ -11,7 +11,8 @@
 ![User Interface Guide Example](images/user-guide/userInterfaceGuide.png)
 
 
-
+## Introduction
+Staffsnap is an application meant HR managers hiring canadidates to make applicant tracking easier.
 
 ## Features
 
@@ -29,7 +30,7 @@
 ---
 ### `help` : Viewing help
 
-Opens up your browser to view the help page.
+Opens up the user guide in the browser. Also displays a list of basic commands the user can use.
 
 Format: `help`
 
@@ -183,7 +184,8 @@ Examples:
 ---
 ### `clear` : Clearing all applicant entries
 
-Clears all the current data stored in the system.
+After typing `clear`, system asks the user to confirm clearing. If user types `yes`, all the current data stored 
+in the system is the cleared. Else, the clear process is cancelled. 
 
 Format: `clear`
 
