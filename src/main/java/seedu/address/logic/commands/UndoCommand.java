@@ -15,7 +15,7 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the last undo-able command. "
-            + "An undo-able command includes an edit, add, or delete command. "
+            + "An undo-able command includes an edit, add, clear or delete command. "
             + "Optionally, you can specify the number of commands to undo.\n"
             + "Format: " + COMMAND_WORD + " [number]\n"
             + "Examples:\n"
