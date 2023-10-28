@@ -303,6 +303,54 @@ Step 3. Finally, it calls `model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_E
     * Pros: Less new code to implement.
     * Cons: Difficult to edit all employees on the list since edit only edits one employee at a time.
 
+### Add leave feature
+
+The add leave feature allows HouR to manage employee leaves.
+
+#### Implementation
+
+The add leave command mechanism is facilitated by the `AddLeaveCommandParser` class which extends the `AddressbookParser`.
+
+`AddLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
+
+`AddLeaveCommandParser` implements the following operations:
+
+* `AddLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `AddLeaveCommand` object with the parsed employee ID, start date and end date.
+
+The `AddLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `AddLeaveCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `AddLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of adding an appointment works.
+
+<INSERT DIAGRAM HERE!>
+
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI. 
+* `START_DATE` and `END_DATE` are inputs of format `yyyy-MM-dd`.
+
+**Step 3**: A leave period will be assigned to the employee specified with the employee ID input. 
+* The leave period is added as a list of `Leave` dates in the Employee's `leaveList`.
+
+#### Design considerations:
+
+**Aspect: Model-Person Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in AddLeaveCommand#execute().
+    * Pros: Maintain immutability within Employee and Model classes. 
+    * Cons: Potentially violates the Single Responsibility Principle.
+
+* **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
+    * Pros: More OOP, follows the Single Responsibility Principle by not having `AddLeaveCommand#execute()` perform the editing directly. 
+    * Cons: Longer command execution, requires more parts to work together.
+
 _{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
@@ -584,13 +632,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete EID1234-5678`<br>
+      Expected: Employee with employee ID "EID1234-5678" is deleted from the list. Details of the deleted employee shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid employee ID)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
