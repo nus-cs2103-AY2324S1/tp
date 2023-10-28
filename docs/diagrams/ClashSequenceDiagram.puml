@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ScheduleCommandParser" as ScheduleCommandParser LOGIC_COLOR
+participant "s:ScheduleCommand" as ScheduleCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":UniqueAppointmentList" as UniqueAppointmentList MODEL_COLOR
+end box
+
+[-> LogicManager : execute(schedule n/John ...)
+activate LogicManager
+
+LogicManager -> ScheduleCommandParser : parseCommand(schedule n/John ...)
+activate ScheduleCommandParser
+
+create ScheduleCommand
+ScheduleCommandParser -> ScheduleCommand
+activate ScheduleCommand
+
+ScheduleCommand --> ScheduleCommandParser
+deactivate ScheduleCommand
+
+ScheduleCommandParser --> LogicManager : s
+deactivate ScheduleCommandParser
+
+LogicManager -> ScheduleCommand : execute()
+activate ScheduleCommand
+
+ScheduleCommand -> Model : detectClashAppointments()
+activate Model
+
+Model -> UniqueAppointmentList : detectClash()
+activate UniqueAppointmentList
+
+UniqueAppointmentList -> UniqueAppointmentList : hasOverlappingAppointments()
+
+UniqueAppointmentList --> Model
+deactivate UniqueAppointmentList
+
+Model --> ScheduleCommand
+deactivate Model
+
+ScheduleCommand --> LogicManager : result
+deactivate ScheduleCommand
+
+ScheduleCommand -[hidden]-> LogicManager : result
+destroy ScheduleCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+
+@enduml
