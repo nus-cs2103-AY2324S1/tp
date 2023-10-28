@@ -105,10 +105,27 @@ Adds a word to the flashcard with its translation.
 * The already saved translation can be overridden with a new translation in a different language.
 
 Format: `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
+> The default language for both word and translation are blank (`""`)  
 
 Examples:
-* `add w/regarder t/look` saves the translation of regarder as look
-* `add w/entschuldigung wl/Deutsch t/sorry tl/English` saves the translation of the Deutsch word entschuldigung as an English word sorry
+* `add w/雪 t/snow` saves the translation of **雪** as **snow**
+* `add w/雪 wl/Chinese t/snow tl/English` saves the translation of the **Chinese** word **雪** as an **English** word **snow**
+
+Words without language          |  Words with language
+:-------------------------:|:-------------------------:
+![img.png](images/WordWithoutLanguage.png)  | ![img.png](images/WordWithLanguage.png)
+
+**Note**
+* Users are not allowed to add two **exactly** the same flashcards
+  * Same word **and** word language
+  * Same translation **and** translation language
+* Users can add two flash cards with the **same word and translation BUT in different language**<br>
+  The following three commands can exist in the same list:
+  * `add w/雪 t/snow`
+  * `add w/雪 t/snow wl/Chinese tl/English`
+  * `add w/雪 t/snow wl/Japanese tl/English`
+> The error message:<br>
+> This flashcard already exists
 
 
 ### Deleting a flashcard : `delete`
@@ -119,17 +136,34 @@ Deletes a words and its related information
 Format: `delete <INDEX>`
 
 Examples:
-* `delete 1` deletes the word and its translation at index 1
+* `delete 2` deletes the word and its translation at index 2
+
+Output:
+
+Before delete         |  After delete
+:-------------------------:|:-------------------------:
+![img.png](images/BeforeDelete.png)  | ![img.png](images/AfterDelete.png)
 
 ### Editing a flashcard : `edit`
 
 Edits the word and its translation at the given index.
 * Edits a wild flashcard.
 
-Format: `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>]`
+Format: `edit <INDEX> w/<WORD> t/<TRANSLATION>`
 
 Examples:
-* `edit 1 w/Bye t/再见` edits the word and its translation at index 1
+* `edit 1 w/こんにちわ t/Hello` edits the word and its translation at index 1
+
+Output:
+
+Before edit         |  After edit
+:-------------------------:|:-------------------------:
+![img.png](images/BeforeEdit.png)  | ![img.png](images/AfterEdit.png)
+
+**Note**
+* Users are not allowed to edit a flash card to an existing flash card
+> The error message: <br>
+> `This flashcard already exists in Flashlingo`
 
 ### Finding a flashcard : `find`
 
@@ -244,7 +278,11 @@ Format: `review`
 
 Format: `switch`
 
-Output:![img.png](images/DarkTheme.png)
+Output:
+![img.png](images/DarkTheme.png)
+
+Execute the `switch` command again:
+![img.png](images/LightTheme.png)
 
 ### Exiting the program : `exit`
 
