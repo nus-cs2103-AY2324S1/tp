@@ -68,8 +68,12 @@ public class ListScheduleCommand extends Command {
             return false;
         }
 
-        ListScheduleCommand otherFindCommand = (ListScheduleCommand) other;
-        return targetIndex.equals(otherFindCommand.targetIndex);
+        if (targetIndex != null) {
+            ListScheduleCommand otherFindCommand = (ListScheduleCommand) other;
+            return targetIndex.equals(otherFindCommand.targetIndex);
+        } else {
+            return true;
+        }
     }
 
 

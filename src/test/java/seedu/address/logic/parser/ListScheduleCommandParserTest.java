@@ -26,4 +26,10 @@ public class ListScheduleCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListScheduleCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parse_emptyArgs_returnsListScheduleCommand() {
+        ListScheduleCommand expectedListCommand = new ListScheduleCommand(null);
+        assertParseSuccess(parser, null, expectedListCommand);
+    }
+
 }

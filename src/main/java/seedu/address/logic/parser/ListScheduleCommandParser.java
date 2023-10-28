@@ -18,7 +18,7 @@ public class ListScheduleCommandParser implements Parser<ListScheduleCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListScheduleCommand parse(String args) throws ParseException {
-        if (args.isBlank() || args.isEmpty()) {
+        if (args == null || args.isBlank() || args.isEmpty()) {
             return new ListScheduleCommand(null);
         } else {
             try {
