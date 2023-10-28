@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.ViewCommandParser.*;
+import static seedu.address.logic.parser.ViewCommandParser.ALL_CATEGORY;
+import static seedu.address.logic.parser.ViewCommandParser.APPOINTMENT_CATEGORY;
+import static seedu.address.logic.parser.ViewCommandParser.STUDENT_CATEGORY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
