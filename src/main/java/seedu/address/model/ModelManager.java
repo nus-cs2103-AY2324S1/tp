@@ -194,7 +194,6 @@ public class ModelManager implements Model {
     public void sortInterviewList(Comparator<Interview> comparator) {
         requireNonNull(comparator);
         this.addressBook.sortInterview(comparator);
-        updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
     }
 
     @Override
