@@ -3,6 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a Person's Appointment in the address book.
  * Guarantees: immutable; is valid as declared in
@@ -24,14 +28,27 @@ public class Appointment {
             + "4. <Start Time> should be earlier than or equals to <End Time>, and both are defined within <Date>."
             + "5. <Date>, <Start Time> and <End Time> are separated by spaces ( ) or commas (,).";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "\\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2]\\d|3[0-1])"
-            + " (2[0-3]:[0-5]?\\d|[0-1]?\\d:[0-5]?\\d) (2[0-3]:[0-5]?\\d|[0-1]?\\d:[0-5]?\\d)";
+    public static final String FIELD_SEPARATOR_REGEX = "(,? )|,";
 
     public final String value;
+
+    private static final String DATE_SEPARATOR = "[-]";
+    private static final String TIME_SEPARATOR = "[:]";
+    private static final String DAY_FIELD = "d";
+    private static final String MONTH_FIELD = "M[MM[M]]";
+    private static final String YEAR_FIELD = "[yy[yy]]";
+    private static final String INPUT_DATE_FORMAT =
+            DAY_FIELD + DATE_SEPARATOR + MONTH_FIELD + DATE_SEPARATOR + YEAR_FIELD;
+    private static final String INPUT_TIME_FORMAT = "H" + TIME_SEPARATOR + "mm";
+    public static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern(INPUT_DATE_FORMAT);
+    public static final DateTimeFormatter INPUT_TIME_FORMATTER = DateTimeFormatter.ofPattern(INPUT_TIME_FORMAT);
+    private static final String OUTPUT_DATE_FORMAT = "dd MMM yy, ";
+    private static final String OUTPUT_TIME_FORMAT = "HH:mm";
+    private static final DateTimeFormatter OUTPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT);
+    private static final DateTimeFormatter OUTPUT_TIME_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_TIME_FORMAT);
+    private final LocalDate date = null;
+    private final LocalTime start = null;
+    private final LocalTime end = null;
 
     /**
      * Constructs an {@code Appointment}.
