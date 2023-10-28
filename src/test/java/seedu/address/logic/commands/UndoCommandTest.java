@@ -4,10 +4,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.AddressBookBuilder.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -20,7 +20,7 @@ import seedu.address.testutil.PatientBuilder;
 public class UndoCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
-    public void execute_undoAdd_success() throws CommandException {
+    public void execute_undoAdd_success() {
         Patient validPatient = new PatientBuilder().build();
         UndoCommand undoCommand = new UndoCommand();
         String expectedMessage = UndoCommand.MESSAGE_SUCCESS;
@@ -78,5 +78,40 @@ public class UndoCommandTest {
         assertCommandSuccess(undoCommand, model, expectedMessage, expectedModelThree);
         assertCommandSuccess(undoCommand, model, expectedMessage, expectedModelTwo);
         assertCommandSuccess(undoCommand, model, expectedMessage, expectedModelOne);
+    }
+
+    @Test
+    public void execute_exceedFiveUndos_failure() {
+        UndoCommand undoCommand = new UndoCommand();
+        String expectedMessage = UndoCommand.MESSAGE_SUCCESS;
+
+        /* add and delete patients */
+        Patient patientToAdd = new PatientBuilder().build();
+        model.addPerson(patientToAdd);
+        Model expectedModelOne = model;
+        Patient patientToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.deletePerson(patientToDelete);
+        Model expectedModelTwo = model;
+        Patient secondPatientToDelete = model.getFilteredPatientList().get(INDEX_SECOND_PERSON.getZeroBased());
+        model.deletePerson(secondPatientToDelete);
+        Model expectedModelThree = model;
+
+        /* add and delete doctors */
+        Doctor doctorToAdd = new DoctorBuilder().build();
+        model.addPerson(doctorToAdd);
+        Model expectedModelFour = model;
+        Doctor doctorToDelete = model.getFilteredDoctorList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.deletePerson(doctorToDelete);
+        Model expectedModelFive = model;
+        Doctor secondDoctorToDelete = model.getFilteredDoctorList().get(INDEX_SECOND_PERSON.getZeroBased());
+        model.deletePerson(secondDoctorToDelete);
+
+        /* undo 6 times */
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModelFive);
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModelFour);
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModelThree);
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModelTwo);
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModelOne);
+        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_EMPTY);
     }
 }
