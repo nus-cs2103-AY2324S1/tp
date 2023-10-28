@@ -1,0 +1,23 @@
+@startuml
+'!include style.puml
+'skinparam arrowThickness 1.1
+'skinparam arrowColor MODEL_COLOR
+'skinparam classBackgroundColor MODEL_COLOR
+
+'Note: Commented out style.puml because it hides members, also very ugly design tbh
+
+interface Observer {
+    + update()
+}
+
+class TagList {
+    + addUi(Observer)
+    - notifyUis()
+}
+class TagListPanel implements Observer {
+    + update()
+}
+
+TagList -> "*" Observer
+
+@enduml
