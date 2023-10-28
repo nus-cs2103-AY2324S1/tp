@@ -81,6 +81,10 @@ public class ClassDetails {
         return this;
     }
 
+    public String getClassNumber() {
+        return this.classNumber;
+    }
+
     /**
      * Returns true if a given string is a valid class number.
      */

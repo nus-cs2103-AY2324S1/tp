@@ -10,10 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NONEXISTENT_STUDENT_NUMBER;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_NONEXISTENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -92,25 +94,27 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = VALID_STUDENT_NUMBER_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + STUDENT_NUMBER_DESC_AMY + CLASS_NUMBER_DESC_AMY + NAME_DESC_AMY;
+        String targetStudentNumber = VALID_STUDENT_NUMBER_BOB;
+
+        String userInput = targetStudentNumber + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + STUDENT_NUMBER_DESC_AMY + CLASS_NUMBER_DESC_AMY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withStudentNumber(VALID_STUDENT_NUMBER_AMY)
-                .withClassDetails(VALID_CLASS_NUMBER_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+                .withClassNumber(VALID_CLASS_NUMBER_AMY).build();
+        EditCommand expectedCommand = new EditCommand(new StudentNumber(targetStudentNumber), descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_STUDENT;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+        String targetStudentNumber = VALID_STUDENT_NUMBER_BOB;
+        String userInput = targetStudentNumber + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(new StudentNumber(targetStudentNumber), descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -118,34 +122,34 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_STUDENT;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
+        String targetStudentNumber = VALID_STUDENT_NUMBER_BOB;
+        String userInput = targetStudentNumber + NAME_DESC_AMY;
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(new StudentNumber(targetStudentNumber), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
+        userInput = targetStudentNumber + PHONE_DESC_AMY;
         descriptor = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand(new StudentNumber(targetStudentNumber), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
+        userInput = targetStudentNumber + EMAIL_DESC_AMY;
         descriptor = new EditStudentDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand(new StudentNumber(targetStudentNumber), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // student number
-        userInput = targetIndex.getOneBased() + STUDENT_NUMBER_DESC_AMY;
+        userInput = targetStudentNumber + STUDENT_NUMBER_DESC_AMY;
         descriptor = new EditStudentDescriptorBuilder().withStudentNumber(VALID_STUDENT_NUMBER_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditCommand(new StudentNumber(targetStudentNumber), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // class number
-        userInput = targetIndex.getOneBased() + CLASS_NUMBER_DESC_AMY;
-        descriptor = new EditStudentDescriptorBuilder().withClassDetails(VALID_CLASS_NUMBER_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        userInput = targetStudentNumber + CLASS_NUMBER_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withClassNumber(VALID_CLASS_NUMBER_AMY).build();
+        expectedCommand = new EditCommand(new StudentNumber(targetStudentNumber), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -155,18 +159,18 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonTagValue_failure()
 
         // valid followed by invalid
-        Index targetIndex = INDEX_FIRST_STUDENT;
-        String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
+        String targetStudentNumber = VALID_STUDENT_NUMBER_BOB;
+        String userInput = targetStudentNumber + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INVALID_PHONE_DESC;
+        userInput = targetStudentNumber + PHONE_DESC_BOB + INVALID_PHONE_DESC;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple valid fields repeated
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + STUDENT_NUMBER_DESC_AMY + CLASS_NUMBER_DESC_AMY
+        userInput = targetStudentNumber + PHONE_DESC_AMY + STUDENT_NUMBER_DESC_AMY + CLASS_NUMBER_DESC_AMY
                 + EMAIL_DESC_AMY + PHONE_DESC_AMY + STUDENT_NUMBER_DESC_AMY + EMAIL_DESC_AMY
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB;
 
@@ -174,7 +178,7 @@ public class EditCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STUDENT_NUMBER));
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_STUDENT_NUMBER_DESC
+        userInput = targetStudentNumber + INVALID_PHONE_DESC + INVALID_STUDENT_NUMBER_DESC
                 + INVALID_CLASS_NUMBER_DESC + INVALID_EMAIL_DESC + INVALID_PHONE_DESC
                 + INVALID_STUDENT_NUMBER_DESC + INVALID_CLASS_NUMBER_DESC + INVALID_EMAIL_DESC;
 
