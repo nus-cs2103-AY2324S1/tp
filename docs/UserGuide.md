@@ -1,5 +1,6 @@
 ---
-UNOFAS
+layout: page
+title: UNOFAS UserGuide
 ---
 
 UNOFAS (UNO: One FAS: Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts,
@@ -8,7 +9,8 @@ Graphical User Interface (GUI). If you can type fast, UNOFAS can help you manage
 better than traditional GUI apps. 
 
 This guide provides you with comprehensive instructions on utilizing UNOFAS. It also serves as a mode of referral to help learn the various commands required
-to effectively learn and be able to integrate the application to your daily use as financial advisors.
+to effectively learn and be able to integrate the application to your daily use as financial advisors. To help you make the most of this resource, utilize the 
+Table of Contents provided below. Click on the relevant links to easily navigate through the guide and access the information you need.
 
 ## Table of Contents
 * [Quick Start](#quick-start)
