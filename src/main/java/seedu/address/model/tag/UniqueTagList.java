@@ -20,7 +20,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  */
 public class UniqueTagList implements Iterable<Tag> {
 
-    private static final ObservableList<Tag> internalList = FXCollections.observableArrayList();
+    public static final ObservableList<Tag> internalList = FXCollections.observableArrayList();
     private final ObservableList<Tag> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 

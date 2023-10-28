@@ -72,7 +72,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         Set<Tag> personTags = source.getTags();
         for (Tag tag : personTags) {
-            Map map = new HashMap<>();
+            Map<String, String> map = new HashMap<>();
             map.put("tagCategory", tag.tagCategory);
             map.put("tagName", tag.tagName);
             this.tags.add(map);

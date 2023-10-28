@@ -342,9 +342,45 @@
     -fx-vgap: 3;
 }
 
-#tags .label {
+.label1 {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-background-color: #3e7b91; // blue
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+.label2 {
+    -fx-text-fill: white;
+    -fx-background-color: #bc8650;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+.label3 {
+    -fx-text-fill: white;
+    -fx-background-color: #114d77;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+.label4 {
+    -fx-text-fill: white;
+    -fx-background-color: #9b3b6a;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+.label4 {
+    -fx-text-fill: white;
+    -fx-background-color: #005910;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
