@@ -118,7 +118,7 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
     public HashMap<String, ReadOnlyAddressBook> getAddressBooks() {
         HashMap<String, ReadOnlyAddressBook> copiedAddressBooks = new HashMap<>();
         addressBooks.forEach((courseCode, addressBook) ->
-                copiedAddressBooks.put(courseCode, new AddressBook(courseCode, currentAddressBook)));
+                copiedAddressBooks.put(courseCode, new AddressBook(courseCode, addressBook)));
         return copiedAddressBooks;
     }
 
