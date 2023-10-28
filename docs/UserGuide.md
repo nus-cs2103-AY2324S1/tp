@@ -176,7 +176,7 @@ Examples:
 * `unenrol m/1 e/5` unlinks the 1st member in the member list from the 5th event in the event list.
 * `unenrol m/5 e/1` unlinks the 5th member in the member list from the 1st event in the event list.
 
-### Edit an enrolment: editEnrolment
+### Edit an enrolment: `editEnrolment`
 Edits the enrolment details of a specified member at a specified event with the specified attributes.
 
 Format: `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
