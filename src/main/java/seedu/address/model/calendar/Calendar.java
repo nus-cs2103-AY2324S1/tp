@@ -2,7 +2,9 @@ package seedu.address.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +17,13 @@ import seedu.address.model.event.Event;
  * Represents a calendar that stores and manages events.
  */
 public class Calendar implements ReadOnlyCalendar {
+    private static final LocalDate DATE_OF_START_OF_CURRENT_WEEK = LocalDate.now().minusDays(
+            LocalDate.now().getDayOfWeek().getValue() - 1);
+    private static final LocalDate DATE_OF_END_OF_CURRENT_WEEK = LocalDate.now().plusDays(
+            7 - LocalDate.now().getDayOfWeek().getValue());
     private final AllDaysEventListManager eventManager;
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Event> internalListForCurrentWeek = FXCollections.observableArrayList();
 
     /**
      * Constructs a Calendar object with an empty event tree.
@@ -80,6 +87,8 @@ public class Calendar implements ReadOnlyCalendar {
         requireNonNull(event);
         eventManager.addEvent(event);
         internalList.setAll(eventManager.asUnmodifiableObservableList());
+        internalListForCurrentWeek.setAll(eventManager.asUnmodifiableObservableList(
+                DATE_OF_START_OF_CURRENT_WEEK, DATE_OF_END_OF_CURRENT_WEEK));
     }
 
     /**
@@ -90,6 +99,8 @@ public class Calendar implements ReadOnlyCalendar {
         requireNonNull(dateTime);
         eventManager.deleteEventAt(dateTime);
         internalList.setAll(eventManager.asUnmodifiableObservableList());
+        internalListForCurrentWeek.setAll(eventManager.asUnmodifiableObservableList(
+                DATE_OF_START_OF_CURRENT_WEEK, DATE_OF_END_OF_CURRENT_WEEK));
     }
 
     /**
@@ -143,6 +154,21 @@ public class Calendar implements ReadOnlyCalendar {
     @Override
     public ObservableList<Event> getEventList() {
         return internalList;
+    }
+
+    @Override
+    public ObservableList<Event> getCurrentWeekEventList() {
+        return internalListForCurrentWeek;
+    }
+
+    @Override
+    public Optional<LocalTime> getEarliestEventStartTimeInCurrentWeek() {
+        return getCurrentWeekEventList().stream().min(Event::compareStartTime).map(Event::getStartTime);
+    }
+
+    @Override
+    public Optional<LocalTime> getLatestEventEndTimeInCurrentWeek() {
+        return getCurrentWeekEventList().stream().max(Event::compareEndTime).map(Event::getEndTime);
     }
 
     @Override

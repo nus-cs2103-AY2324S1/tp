@@ -133,6 +133,9 @@ public interface Model {
     /** Returns a view of the event list */
     ObservableList<Event> getEventList();
 
+    /** Returns a view of the event list for the current week */
+    ObservableList<Event> getCurrentWeekEventList();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

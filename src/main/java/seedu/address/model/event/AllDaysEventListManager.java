@@ -49,7 +49,7 @@ public class AllDaysEventListManager {
             if (!(dayToEventListMap.containsKey(date.toString()))) {
                 dayToEventListMap.put(date.toString(), new SingleDayEventList(date));
             }
-            dayToEventListMap.get(date.toString()).addEvent(event);
+            dayToEventListMap.get(date.toString()).addEvent(event.boundEventByDate(date));
         }
     }
 
@@ -137,6 +137,24 @@ public class AllDaysEventListManager {
     public ObservableList<Event> asUnmodifiableObservableList() {
         List<Event> list = dayToEventListMap.values().stream()
                 .flatMap(singleDayEventList -> singleDayEventList.getDayEventList().stream())
+                .collect(Collectors.toList());
+
+        return FXCollections.observableList(list);
+    }
+
+    /**
+     * Returns the event list storing events that occur between the start and end dates as an unmodifiable
+     * ObservableList.
+     *
+     * @param startDate start date.
+     * @param endDate end date.
+     * @return the event list storing events that occur between the start and end dates as an unmodifiable
+     *     ObservableList.
+     */
+    public ObservableList<Event> asUnmodifiableObservableList(LocalDate startDate, LocalDate endDate) {
+        List<Event> list = dayToEventListMap.values().stream()
+                .flatMap(singleDayEventList -> singleDayEventList.getDayEventList().stream())
+                .filter(event -> event.occursBetweenDates(startDate, endDate))
                 .collect(Collectors.toList());
 
         return FXCollections.observableList(list);
