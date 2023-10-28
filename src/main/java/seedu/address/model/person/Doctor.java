@@ -68,7 +68,7 @@ public class Doctor extends Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Doctor)) {
             return false;
         }
 
