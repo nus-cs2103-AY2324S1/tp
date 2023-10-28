@@ -49,17 +49,15 @@ public class UnenrolCommand extends Command {
         int zeroBasedMemberIndex = memberIndex.getZeroBased();
         int zeroBasedEventIndex = eventIndex.getZeroBased();
 
-        if (zeroBasedEventIndex >= lastShownMemberList.size()
+        if (zeroBasedMemberIndex >= lastShownMemberList.size()
+                && zeroBasedEventIndex < lastShownEventList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+        } else if (zeroBasedEventIndex >= lastShownEventList.size()
+                && zeroBasedMemberIndex < lastShownMemberList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        } else if (zeroBasedEventIndex >= lastShownMemberList.size()
                 && zeroBasedEventIndex >= lastShownEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_AND_EVENT_DISPLAYED_INDEX);
-        }
-
-        if (zeroBasedMemberIndex >= lastShownMemberList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
-        }
-
-        if (zeroBasedEventIndex >= lastShownEventList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         Member member = lastShownMemberList.get(zeroBasedMemberIndex);

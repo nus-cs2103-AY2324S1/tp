@@ -54,15 +54,34 @@ public class UnenrolCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEnrolmentList().size() + 1);
-        UnenrolCommand unenrolCommand = new UnenrolCommand(outOfBoundIndex, outOfBoundIndex);
+    public void execute_invalidMemberIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundMemberIndex = Index.fromZeroBased(model.getFilteredMemberList().size() + 1);
+        Index eventIndex = Index.fromZeroBased(1);
+        UnenrolCommand unenrolCommand = new UnenrolCommand(outOfBoundMemberIndex, eventIndex);
+
+        assertCommandFailure(unenrolCommand, model, Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidEventIndexUnfilteredList_throwsCommandException() {
+        Index memberIndex = Index.fromZeroBased(1);
+        Index outOfBoundEventIndex = Index.fromZeroBased(model.getFilteredEventList().size() + 1);
+        UnenrolCommand unenrolCommand = new UnenrolCommand(memberIndex, outOfBoundEventIndex);
+
+        assertCommandFailure(unenrolCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidMemberEventIndexesUnfilteredList_throwsCommandException() {
+        Index outOfBoundMemberIndex = Index.fromZeroBased(model.getFilteredMemberList().size() + 1);
+        Index outOfBoundEventIndex = Index.fromZeroBased(model.getFilteredEventList().size() + 1);
+        UnenrolCommand unenrolCommand = new UnenrolCommand(outOfBoundMemberIndex, outOfBoundEventIndex);
 
         assertCommandFailure(unenrolCommand, model, Messages.MESSAGE_INVALID_MEMBER_AND_EVENT_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_findEnrolmentFromList_success() {
+    public void findEnrolmentFromList_success() {
         List<Enrolment> enrolmentList = new ArrayList<>();
 
         Enrolment enrolmentToFindOne = TypicalEnrolments.ALICE_AURORA;
@@ -78,7 +97,7 @@ public class UnenrolCommandTest {
     }
 
     @Test
-    public void execute_findEnrolmentFromList_fail() {
+    public void findEnrolmentFromList_fail() {
         List<Enrolment> enrolmentList = new ArrayList<>();
 
         Enrolment enrolmentToFindOne = TypicalEnrolments.ALICE_AURORA;
