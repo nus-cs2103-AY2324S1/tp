@@ -7,15 +7,15 @@ import seedu.address.model.Model;
  * Represents a command for undoing the previous command in the application.
  * Extends the abstract class {@link Command}.
  */
-public class UndoCommand extends Command {
-    public static final String COMMAND_WORD = "undo";
+public class RedoCommand extends Command {
+    public static final String COMMAND_WORD = "redo";
 
-    public static final String MESSAGE_SUCCESS = "Previous command undid successfully!";
-    public static final String MESSAGE_EMPTY = "There's nothing to undo";
+    public static final String MESSAGE_SUCCESS = "Previous command redid successfully!";
+    public static final String MESSAGE_EMPTY = "There's nothing to redo";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.undo();
+        model.redo();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -24,8 +24,7 @@ public class StorageManager implements Storage {
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, AddressBookStorage prevAddressBookStorage,
-                          UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
         this.prevAddressBookStorage = prevAddressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
@@ -69,9 +68,6 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        //First store current state in prevAddressBook
-        backupAddressBook(addressBook);
-        //then save new state into currentAddressBook
         saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
     }
 
@@ -80,34 +76,4 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
-
-    @Override
-    public void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        try {
-            saveAddressBookToPrevStorage(addressBook);
-        } catch (DataLoadingException e) {
-            throw new IOException("Couldn't read data");
-        }
-    }
-
-    private void saveAddressBookToPrevStorage(ReadOnlyAddressBook addressBook) throws IOException {
-        logger.fine("Backing up AddressBook to prev storage");
-        prevAddressBookStorage.saveAddressBook(addressBook, prevAddressBookStorage.getAddressBookFilePath());
-    }
-
-    @Override
-    public void undoAddressBook() throws IOException {
-        try {
-            ReadOnlyAddressBook previousData = readPrevAddressBook().orElseThrow();
-            saveAddressBook(previousData);
-        } catch (DataLoadingException e) {
-            throw new IOException("Couldn't load previous data");
-        }
-    }
-
-    private Optional<ReadOnlyAddressBook> readPrevAddressBook() throws DataLoadingException {
-        logger.fine("Reading from previous AddressBook storage");
-        return prevAddressBookStorage.readAddressBook(prevAddressBookStorage.getAddressBookFilePath());
-    }
-
 }
