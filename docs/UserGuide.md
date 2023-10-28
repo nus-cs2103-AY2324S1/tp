@@ -114,7 +114,7 @@ Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The NEW_STUDENT_NUMBER must be valid and unique (does not exist in the class manager).
-* Changing the CLASS_NUMBER will discard the existing grades, such as assignments, attendance, and participation.
+* Changing the CLASS_NUMBER will not change the existing grades, such as assignments, attendance, and participation.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -358,7 +358,7 @@ _Details coming soon ..._
 | **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague` |
 | **Comment**     | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                        |
 | **Delete**      | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                         |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                               |
+| **Edit**        | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`                               |
 | **Tag**         | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                         |
 | **Lookup**      | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                               |
 | **Config**      | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                     |

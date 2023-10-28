@@ -66,43 +66,33 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
-
-        // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
-
-        // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
-
-        // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
-    }
-
-    @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_STUDENT_NUMBER_DESC,
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_PHONE_DESC,
+                Phone.MESSAGE_CONSTRAINTS); // invalid phone
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_EMAIL_DESC,
+                Email.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_STUDENT_NUMBER_DESC,
                 StudentNumber.MESSAGE_CONSTRAINTS); // invalid student number
-        assertParseFailure(parser, "1" + INVALID_CLASS_NUMBER_DESC,
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_CLASS_NUMBER_DESC,
                 ClassDetails.MESSAGE_CONSTRAINTS); // invalid class number
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_PHONE_DESC + EMAIL_DESC_AMY,
+                Phone.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_STUDENT_NUMBER_AMY
+        assertParseFailure(parser,
+                VALID_STUDENT_NUMBER_BOB + INVALID_NAME_DESC
+                        + INVALID_EMAIL_DESC + VALID_STUDENT_NUMBER_AMY
                         + VALID_CLASS_NUMBER_AMY + VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_STUDENT;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY
+        String userInput = VALID_STUDENT_NUMBER_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + STUDENT_NUMBER_DESC_AMY + CLASS_NUMBER_DESC_AMY + NAME_DESC_AMY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
