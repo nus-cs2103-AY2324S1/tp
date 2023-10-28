@@ -67,6 +67,8 @@ dependencies {
     implementation group: 'com.itextpdf', name: 'kernel', version: '7.2.5'
     // https://mvnrepository.com/artifact/com.itextpdf/forms
     implementation group: 'com.itextpdf', name: 'forms', version: '7.2.5'
+    // https://central.sonatype.com/artifact/me.xdrop/fuzzywuzzy/overview
+    implementation group: 'me.xdrop', name: 'fuzzywuzzy', version: '1.4.0'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 

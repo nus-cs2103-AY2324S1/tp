@@ -49,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     private Label annualLeave;
     @FXML
     private Label attendance;
+    @FXML
+    private Label workingStatus;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to
@@ -67,6 +69,7 @@ public class PersonCard extends UiPart<Region> {
         salary.setText(person.getSalary().value);
         annualLeave.setText(person.getAnnualLeave().value);
         attendance.setText(person.getAttendanceToday().toString().toLowerCase());
+        setWorkingStatus(person.getAnnualLeave().getWorkingStatus());
     }
 
     /**
@@ -86,5 +89,21 @@ public class PersonCard extends UiPart<Region> {
         salary.setText(person.getSalary().value);
         annualLeave.setText(person.getAnnualLeave().value);
         attendance.setText(person.getAttendanceToday().toString().toLowerCase());
+        setWorkingStatus(person.getAnnualLeave().getWorkingStatus());
+    }
+
+    /**
+     * Set the style of the workingStatus label based on test
+     * @param statusText of the employee on whether they are On Leave or Working
+     */
+    public void setWorkingStatus(String statusText) {
+        if ("Working".equals(statusText)) {
+            workingStatus.setStyle("-fx-background-color: green; -fx-padding: 2;"
+                    + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
+        } else {
+            workingStatus.setStyle("-fx-background-color: #A50000; -fx-padding: 2;"
+                    + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
+        }
+        workingStatus.setText(statusText);
     }
 }

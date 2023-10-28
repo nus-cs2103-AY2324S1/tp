@@ -142,6 +142,6 @@ public class DeleteCommand extends Command {
         }
         model.updateFilteredPersonList(this.name);
         return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW_DELETE,
-                model.getFilteredPersonList().size()), indexes);
+                model.getFilteredPersonList().size()));
     }
 }

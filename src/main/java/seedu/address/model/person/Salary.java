@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -31,8 +29,6 @@ public class Salary extends Payment {
      */
     public Salary(String salary, ArrayList<Deduction> deductions, ArrayList<Benefit> benefits) {
         super(salary);
-        requireNonNull(deductions);
-        requireNonNull(benefits);
         this.deductions = deductions;
         this.benefits = benefits;
     }
@@ -42,19 +38,14 @@ public class Salary extends Payment {
      * @return total deductions.
      */
     public double getTotalDeductions() {
-        DecimalFormat df = new DecimalFormat("0.00");
-
         if (deductions == null) {
-            double res = 0;
-            df.format(res);
-            return res;
+            return 0.0;
         }
 
         double total = 0;
         for (Deduction deduction : deductions) {
             total += Double.parseDouble(deduction.value);
         }
-        df.format(total);
         return total;
     }
 
@@ -63,19 +54,14 @@ public class Salary extends Payment {
      * @return total benefits.
      */
     public double getTotalBenefits() {
-        DecimalFormat df = new DecimalFormat("0.00");
-
         if (benefits == null) {
-            double res = 0;
-            df.format(res);
-            return res;
+            return 0.0;
         }
 
         double total = 0;
         for (Benefit benefit : benefits) {
             total += Double.parseDouble(benefit.value);
         }
-        df.format(total);
         return total;
     }
 
@@ -84,11 +70,9 @@ public class Salary extends Payment {
      * @return net salary.
      */
     public double getNetSalary() {
-        DecimalFormat df = new DecimalFormat("0.00");
         double total = Double.parseDouble(value);
         total -= getTotalDeductions();
         total += getTotalBenefits();
-        df.format(total);
         return total;
     }
 
@@ -97,11 +81,70 @@ public class Salary extends Payment {
      * @return net salary string.
      */
     public String getNetSalaryString() {
+        DecimalFormat df = new DecimalFormat("0.00");
         String basicSalary = "Basic Pay: $" + super.toString();
-        String deductions = "Total Deductions: $" + getTotalDeductions();
-        String benefits = "Total Benefits: $" + getTotalBenefits();
-        String netSalary = "Net Salary: $" + getNetSalary();
-        return netSalary + "\n" + basicSalary + "\n" + deductions + "\n" + benefits;
+        String deductions = "Total Deductions: $" + df.format(getTotalDeductions());
+        String benefits = "Total Benefits: $" + df.format(getTotalBenefits());
+        String netSalary = "Net Salary: $" + df.format(getNetSalary());
+        return String.format("%1$-40s %2$-40s\n%3$-40s %4$-40s", netSalary, basicSalary, deductions, benefits);
+    }
+
+    /**
+     * Adds a deduction to this salary.
+     * @param d The deduction to be added.
+     */
+    public void addDeduction(Deduction d) {
+        if (deductions == null) {
+            deductions = new ArrayList<>();
+        }
+        deductions.add(d);
+    }
+
+    /**
+     * Returns the string representation of the deductions.
+     * @return deductions string.
+     */
+    public String getDeductionsString() {
+        if (deductions == null) {
+            return "NIL";
+        }
+
+        String deductionsString = "";
+        int i = 1;
+        for (Deduction deduction : deductions) {
+            deductionsString += i + ". " + deduction.toString() + "\n";
+            i++;
+        }
+        return deductionsString;
+    }
+
+    /**
+     * Adds a benefit to this salary.
+     * @param b The benefit to be added.
+     */
+    public void addBenefit(Benefit b) {
+        if (benefits == null) {
+            benefits = new ArrayList<>();
+        }
+        benefits.add(b);
+    }
+
+    /**
+     * Returns the string representation of the benefits.
+     * @return benefits string.
+     */
+    public String getBenefitsString() {
+        if (benefits == null) {
+            return "NIL";
+        }
+
+        String benefitsString = "";
+        int i = 1;
+        for (Benefit benefit : benefits) {
+            benefitsString += i + ". " + benefit.toString() + "\n";
+            i++;
+        }
+        return benefitsString;
     }
 
     @Override
@@ -115,23 +158,33 @@ public class Salary extends Payment {
             return false;
         }
 
+        Salary otherSalary = (Salary) other;
+
         // degenerates to Payment if deductions and benefits are null
-        if (deductions == null && benefits == null) {
+        if (deductions == null && benefits == null && otherSalary.deductions == null
+                && otherSalary.benefits == null) {
             return super.equals(other);
         }
 
-        Salary otherSalary = (Salary) other;
-        if (deductions != null && benefits != null) {
+        if (deductions != null && benefits != null && otherSalary.deductions != null
+                && otherSalary.benefits != null) {
             return value.equals(otherSalary.value)
                     && deductions.equals(otherSalary.deductions)
                     && benefits.equals(otherSalary.benefits);
-        } else if (deductions != null) {
+        }
+
+        if (deductions != null && benefits == null && otherSalary.deductions != null
+                && otherSalary.benefits == null) {
             return value.equals(otherSalary.value)
                     && deductions.equals(otherSalary.deductions);
-        } else if (benefits != null) {
+        }
+
+        if (deductions == null && benefits != null && otherSalary.deductions == null
+                && otherSalary.benefits != null) {
             return value.equals(otherSalary.value)
                     && benefits.equals(otherSalary.benefits);
         }
+
         return false;
     }
 }

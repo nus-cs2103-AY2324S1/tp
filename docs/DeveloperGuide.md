@@ -238,6 +238,120 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Deductions and Benefits
+
+#### Proposed Implementation
+
+The proposed deductions and benefits feature is facilitated by `Deduction` and `Benefit` classes. They represent payment deducted from and paid to an employee respectively.
+
+A `Deduction` object contains the following information:
+(Class diagram to be added)
+
+A `Benefit` object contains the following information:
+(Class diagram to be added)
+
+Both `Deduction` and `Benefit` classes extend the `Payment` class, which contains the following information:
+(Class diagram to be added)
+
+Adding deductions and benefits to an employee is done by the `DeductCommand` and `DeductCommandParser` classes and `BenefitCommand` and `BenefitCommandParser` classes respectively.
+
+The following sequence diagram shows how the `deduct`/`benefit` operation works:
+(Sequence diagram to be added)
+
+After `DeductCommandParser` and `BenefitCommandParser` classes parse the user input, the `DeductCommand` and `BenefitCommand` classes will be called to execute the command. The `DeductCommand` and `BenefitCommand` classes will then call the `Model` component to add the deduction/benefit to the employee.
+`DeductCommand::execute(Model)` and `BenefitCommand::execute(Model)` will decide to call `DeductCommand::executeByIndex(Model)`/`BenefitCommand::executeByIndex(Model)` or `DeductCommand::executeByName(Model)`/`BenefitCommand::executeByName(Model)` based on whether an index has been specified in the user input.
+
+The following activity diagram summarises the process of adding a deduction/benefit to an employee:
+(Activity diagram to be added)
+
+#### Design considerations:
+
+{what are the design considerations?}
+
+### Payslip generation
+
+#### Proposed Implementation
+
+The proposed payslip generation feature is facilitated by `PayslipGenerator`, `PayslipCommand` and `PayslipCommandParser` classes.
+
+The `PayslipGenerator` class is responsible for generating the payslip for a specific employee. It contains the following methods:
+(Class diagram to be added)
+
+The `PayslipCommand` class is responsible for executing the `payslip` command. It contains the following methods:
+(Class diagram to be added)
+
+The `PayslipCommandParser` class is responsible for parsing the user input for the `payslip` command. It contains the following methods:
+(Class diagram to be added)
+
+The following sequence diagram shows how the `payslip` operation works:
+(Sequence diagram to be added)
+
+After `PayslipCommandParser` class parses the user input, the `PayslipCommand` class will be called to execute the command. The `PayslipCommand` class will then call the `Model` component to generate the payslip for the employee, and store the payslip as a PDF file at `payslips/`.
+
+The following activity diagram summarises the process of generating a payslip for an employee:
+(Activity diagram to be added)
+
+### Payroll calculation feature
+
+#### Implementation
+
+The feature is facilitated by the four classes below:
+1.	PayrollCommandParser
+2.	PayrollCommand
+3.	Payroll
+4.	Salary
+
+
+<u>PayrollCommandParser</u>
+
+This class extends the Parser interface, it implements the following operations:
+- PayrollCommandParser#parse() – Parses the user input and returns a PayrollCommand object.
+
+<u>PayrollCommand</u>
+
+This class extends the Command abstract class, it implements the following operations:
+- PayrollCommand#execute() – Determines whether the user used employee name as reference or the index number. Once it confirms, it will calculate the payroll of the employee.
+
+#### Design considerations:
+
+{what are the design considerations?}
+
+### Leave Tracking
+
+#### Proposed Implementation
+
+The proposed leave tracking feature is facilitated by `AnnualLeave`, `AddLeaveCommand` and `AddLeaveCommandParser` classes.
+
+The `AnnualLeave` class is responsible for storing the leave data for a specific employee. It contains the following methods:
+(Class diagram to be added)
+
+The `AddLeaveCommand` class is responsible for executing the `addleave` command. It contains the following methods:
+(Class diagram to be added)
+
+The `AddLeaveCommandParser` class is responsible for parsing the user input for the `addleave` command. It contains the following methods:
+(Class diagram to be added)
+
+The following sequence diagram shows how the `addleave` operation works:
+(Sequence diagram to be added)
+
+After `AddLeaveCommandParser` class parses the user input, the `AddLeaveCommand` class will be called to execute the command. The `AddLeaveCommand` class will then call the `Model` component to add leave for the employee, and store the leave as an arraylist in `AnnualLeave`.
+
+The following activity diagram summarises the process of adding leave for an employee:
+(Activity diagram to be added)
+
+#### Design considerations:
+ 
+**Aspect: How addleave executes:**
+
+* **Alternative 1 (current choice):** Saves the dates of the leave added.
+  * Pros: Easy to trace and track when the leaves are applied, and whether employee is working on specific day.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Saves only the total number of days of leave added.
+  * Pros: will use less memory (e.g. each employee will only need to store an integer for the total number of days of leave per annul)
+  * Cons: Not much useful information that can be used (e.g. we do not know the working status of each employee for each day)
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -311,6 +425,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 	
          Use case ends.
 
+<br>
+
 **Use case: Edit information of existing full-time staff members**
 
 **MSS**
@@ -329,6 +445,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 	
    	     Use case ends.
 
+<br>
+
 **Use case: Read information on existing full-time staff members**
 
 **MSS**
@@ -346,6 +464,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 	
         Use case ends.
 
+<br>
+
 **Use case: Delete existing full-time staff members**
 
 **MSS**
@@ -358,16 +478,86 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. Invalid command parameters are given.
-  
- * 1a1. ManaGease shows an error message.
- 
-   	Use case ends.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
  
 * 1b. User requests to delete existing member via name.
   
 	 * 1b1. ManaGease will display a list of members with the same name.
  
          Use case ends.
+
+<br>
+
+**Use case: Add deductions/benefits to the monthly salary of an employee**
+
+**MSS**
+
+1. User requests to add deductions/benefits to the monthly salary of an employee.
+2. ManaGease adds deductions/benefits to the monthly salary of an employee.
+3. ManaGease displays a confirmation message that deductions/benefits have been added.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command parameters are given.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
+
+<br>
+
+**Use case: Generate a PDF payslip for a specific employee**
+
+**MSS**
+
+1. User requests to generate a payslip for a specific employee.
+2. ManaGease generates a PDF payslip for the employee.
+3. ManaGease displays a confirmation message that a payslip has been generated.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command parameters are given.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
+
+* 2a. Template file for the payslip is not found.
+
+    * 2a1. ManaGease shows an error message.
+
+      Use case ends.
+
+**Use case: Add leave for a specific employee**
+
+**MSS**
+
+1. User requests to add leave for a specific employee.
+2. ManaGease adds leave for the employee.
+3. ManaGease displays a confirmation message that the leave has been added.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid command parameters are given.
+
+    * 1a1. ManaGease shows an error message.
+
+      Use case ends.
+
+* 1b. Invalid date(s) are given.
+
+    * 1b1. ManaGease shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 

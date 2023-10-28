@@ -89,7 +89,8 @@ public class ReadCommand extends Command {
         case "salary":
             return person.getSalary().value;
         case "annual leave":
-            return person.getAnnualLeave().value;
+            return "Total Annual Leave: " + person.getAnnualLeave().value + "\n"
+                + person.getAnnualLeave().printListLeaveTaken();
         case "attendance":
             return person.getAttendanceToday().toString().toLowerCase();
         default:

@@ -1,9 +1,14 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
@@ -65,8 +70,8 @@ class JsonAdaptedPerson {
         bankAccount = source.getBankAccount().value;
         joinDate = source.getJoinDate().value;
         salary = source.getSalary().value;
-        annualLeave = source.getAnnualLeave().value;
         attendanceStorage = source.getAttendanceStorage().getValue();
+        annualLeave = source.getAnnualLeave().toString();
     }
 
     /**
@@ -125,10 +130,11 @@ class JsonAdaptedPerson {
         }
         final Salary modelSalary = new Salary(salary);
 
-        if (!AnnualLeave.isValidAnnualLeave(annualLeave)) {
+        if (!AnnualLeave.isValidAnnualLeave(getTotalNumOfLeaves(annualLeave))) {
             throw new IllegalValueException(AnnualLeave.MESSAGE_CONSTRAINTS);
         }
-        final AnnualLeave modelAnnualLeave = new AnnualLeave(annualLeave);
+        final AnnualLeave modelAnnualLeave = new AnnualLeave(getTotalNumOfLeaves(annualLeave));
+        modelAnnualLeave.setLeaveList(stringToLeaveListConverter(annualLeave));
 
         final AttendanceStorage modelAttendanceStorage = new AttendanceStorage(attendanceStorage);
 
@@ -136,6 +142,24 @@ class JsonAdaptedPerson {
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBankAccount, modelJoinDate, modelSalary,
                 modelAnnualLeave, modelAttendanceStorage);
+    }
+
+    public List<LocalDate> stringToLeaveListConverter(String annualLeave) {
+        List<LocalDate> leaveList = new ArrayList<>();
+        String args = annualLeave.trim();
+        String[] dates = args.split(" \\| ");
+
+        for (int i = 1; i < dates.length; i++) {
+            System.out.println(ParserUtil.stringToDate(dates[i]));
+            leaveList.add(ParserUtil.stringToDate(dates[i]));
+        }
+        return leaveList;
+    }
+
+    public String getTotalNumOfLeaves(String annualLeave) {
+        String args = annualLeave.trim();
+        String[] dates = args.split(" \\| ");
+        return dates[0];
     }
 
 }

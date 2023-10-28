@@ -15,5 +15,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_SALARY = new Prefix("/s");
     public static final Prefix PREFIX_ANNUAL_LEAVE = new Prefix("/l");
     public static final Prefix PREFIX_ATTENDANCE_TYPE = new Prefix("/at");
-
+    public static final Prefix PREFIX_ADD_ANNUAL_LEAVE_ON = new Prefix("/on");
+    public static final Prefix PREFIX_ADD_ANNUAL_LEAVE_FROM = new Prefix("/from");
+    public static final Prefix PREFIX_ADD_ANNUAL_LEAVE_TO = new Prefix("/to");
+    public static final Prefix PREFIX_VALUE = new Prefix("/v");
+    public static final Prefix PREFIX_REASON = new Prefix("/r");
 }

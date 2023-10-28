@@ -58,11 +58,15 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Employee: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This employee already exists in the list.";
+    public static final String MESSAGE_EDIT_LEAVE_ERROR = "The total number of days of leave you are trying to"
+            + " change to cannot be lesser than the number of days of leave "
+            + "that has already been added to the employee.";
 
     private final Index index;
     private final EditEmployeeDescriptor editEmployeeDescriptor;
 
     /**
+     * Creates an EditCommand to edit the specified employee at {@code index}.
      * @param index of the employee in the filtered employee list to edit
      * @param editEmployeeDescriptor details to edit the employee with
      */
@@ -88,6 +92,13 @@ public class EditCommand extends Command {
 
         if (!employeeToEdit.isSamePerson(editedEmployee) && model.hasPerson(editedEmployee)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (employeeToEdit.getAnnualLeave().numOfLeaveUsedForCurrYear()
+                > editedEmployee.getAnnualLeave().getTotalNumOfLeave()
+                || employeeToEdit.getAnnualLeave().numOfLeaveUsedForNextYear()
+                > editedEmployee.getAnnualLeave().getTotalNumOfLeave()) {
+            throw new CommandException(MESSAGE_EDIT_LEAVE_ERROR);
         }
 
         model.setPerson(employeeToEdit, editedEmployee);

@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -28,6 +29,7 @@ public class Person {
     private final JoinDate joinDate;
     private final Salary salary;
     private final AttendanceStorage attendanceStorage;
+    private final ArrayList<Payroll> payrolls;
 
     /**
      * Every field must be present and not null.
@@ -44,6 +46,7 @@ public class Person {
         this.salary = salary;
         this.annualLeave = annualLeave;
         this.attendanceStorage = attendanceStorage;
+        this.payrolls = new ArrayList<>();
     }
 
     public Name getName() {
@@ -84,6 +87,13 @@ public class Person {
 
     public AttendanceType getAttendanceToday() {
         return this.attendanceStorage.getType(LocalDate.now());
+    }
+    /**
+     * Adds a payroll to the payroll list of this person.
+     * @param payroll Payroll to be added.
+     */
+    public void addPayroll(Payroll payroll) {
+        this.payrolls.add(payroll);
     }
 
     /**
@@ -141,7 +151,7 @@ public class Person {
                 .add("bankAccount", bankAccount)
                 .add("joinDate", joinDate)
                 .add("salary", salary)
-                .add("annualLeave", annualLeave)
+                .add("annualLeave", annualLeave.value)
                 .toString();
     }
 }

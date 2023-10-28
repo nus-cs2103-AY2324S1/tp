@@ -102,7 +102,8 @@ class ReadCommandTest {
         assertEquals("123123123123", bankAccountValue);
         assertEquals("04/05/2021", joinDateValue);
         assertEquals("1500.00", salaryValue);
-        assertEquals("2", annualLeaveValue);
+        assertEquals("Total Annual Leave: " + personToRead.getAnnualLeave().value + "\n"
+                + personToRead.getAnnualLeave().printListLeaveTaken(), annualLeaveValue);
     }
 
 }
