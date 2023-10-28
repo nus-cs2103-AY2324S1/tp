@@ -34,7 +34,8 @@ public class UnenrolCommandTest {
         Enrolment enrolmentToDelete = model.getFilteredEnrolmentList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
         UnenrolCommand unenrolCommand = new UnenrolCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT);
 
-        String commitMessage = String.format(UnenrolCommand.MESSAGE_COMMIT, enrolmentToDelete.getMemberAndEventEnrolment());
+        String commitMessage = String.format(UnenrolCommand.MESSAGE_COMMIT,
+                enrolmentToDelete.getMemberAndEventEnrolment());
         String expectedMessage = String.format(UnenrolCommand.MESSAGE_DELETE_ENROLMENT_SUCCESS,
                 Messages.format(enrolmentToDelete));
 
