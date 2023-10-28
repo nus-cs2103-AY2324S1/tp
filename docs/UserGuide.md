@@ -5,16 +5,21 @@ title: User Guide
 
 # ClubMemberContacts
 
-ClubMembersContacts is an app to help EXCO members of School of Computing's CCAs to manage the contacts of all their members and applicants in a fast and convenient yet powerful way through a CLI or text-based interface for greater speed.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
+ClubMembersContacts is an app to help EXCO members of School of Computing's CCAs to manage the contacts of all their
+members and applicants in a fast and convenient yet powerful way through a CLI or text-based interface for greater
+speed.
+
+* It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than
+  what students usually write in beginner-level SE modules, without being overwhelmingly big.
+* It comes with a **reasonable level of user and developer documentation**.
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 * Table of Contents
-{:toc}	
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
@@ -23,348 +28,412 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar addressbook.jar command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar addressbook.jar command to
+   run the application.
+
+5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. 
+6. Type the command in the command box and press Enter to execute it.
    Try the following commands in order:
 
-   1. `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia` : Adds a member named Alicia to the members list
-   2. `addm /name John Doe /phone 92345677 /email Johndoe@xyz.com /tele @Johndoe` : Adds a member named John Doe to the members list
-   3. `findm Alicia` : Only member Alicia will be listed under the members list
-   4. `findm John Doe` : Only member John Doe will be listed under the members list
-   5. `findm Alicia Johndoe@xyz.com` : Both members Alicia and John Doe will be listed under the members list
-   6. `delm 2` : Member John Doe will be deleted from the members list
+    1. `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia` : Adds a member named Alicia to the
+       members list
+    2. `addm /name John Doe /phone 92345677 /email Johndoe@xyz.com /tele @Johndoe` : Adds a member named John Doe to the
+       members list
+    3. `findm Alicia` : Only member Alicia will be listed under the members list
+    4. `findm John Doe` : Only member John Doe will be listed under the members list
+    5. `findm Alicia Johndoe@xyz.com` : Both members Alicia and John Doe will be listed under the members list
+    6. `delm 2` : Member John Doe will be deleted from the members list
 
-
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
-## Add Member
+<div markdown="span" class="alert alert-primary">
+
+:information_source: **Note:** Many of the commands below have _aliases_, or short-form versions that make them easier
+to type. For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below
+alongside the full command word, and all aliases can be used interchangeably with the full command word.
+
+</div>
+
+### Add Member
+
 Adds a new member to the members list. Tag field is optional.
 
-### Usage:
-`addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
+#### Usage:
 
 `addMember /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
-### Acceptable values for parameters:
-- memberName: Only alphabetical characters, @, () are allowed
-- phoneNumber: Only numbers are allowed
-- email: Must follow the format of xyz@abc.wsd
-- telegramHandle: Only alphanumeric characters and underscore are allowed
-- tag: Only alphanumeric characters are allowed
+`addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
-### Example of usage:
-`addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`
+#### Acceptable values for parameters:
+
+- `memberName`: Only alphabetical characters, @, () are allowed
+- `phoneNumber`: Only numbers are allowed
+- `email`: Must follow the format of xyz@abc.wsd
+- `telegramHandle`: Only alphanumeric characters and underscore are allowed
+- `tag`: Only alphanumeric characters are allowed
+
+#### Example of usage:
 
 `addMember /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`
 
-### Expected Outcome:
+`addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`
+
+#### Expected Outcome:
+
 ```
 New member added: Alicia
 ```
 
-### If any field(s) not specified:
+#### If any field(s) not specified:
 
 ```
 Invalid command format! 
 ```
 
-### If name is invalid:
+#### If name is invalid:
 
 ```
 Names should only contain alphanumeric characters and spaces, and it should not be blank
 ```
 
-### If phone number is invalid:
+#### If phone number is invalid:
 
 ```
 Phone numbers should only contain numbers, and it should be at least 3 digits long
 ```
 
-### If telegram handle is invalid:
+#### If telegram handle is invalid:
 
 ```
 Telegram handle should follow the format: @exampleHandle 
 ```
 
-### If tag is invalid:
+#### If tag is invalid:
+
 ```
 Tags names should be alphanumeric
 ```
 
-## Delete Member
+### Delete Member
+
 The member at the specified index will be deleted from the members list.
 
-### Usage:
-`delm {index}`
+#### Usage:
 
 `deleteMember {index}`
 
-### Acceptable values for parameters:
-- index: Only numbers are allowed, starting from 1
+`delm {index}`
 
-### Example of usage:
-`delm 1`
+#### Acceptable values for parameters:
+
+- `index`: Only numbers are allowed, starting from 1
+
+#### Example of usage:
 
 `deleteMember 1`
 
-### Expected Outcome:
+`delm 1`
+
+#### Expected Outcome:
+
 ```
 Deleted member: Alicia
 ```
 
-### If index is out of range:
+#### If index is out of range:
 
 ```
 The member index provided is invalid
 ```
 
-### If there are no members:
+#### If there are no members:
 
 ```
 The member index provided is invalid
 ```
 
-## Edit Member
-The member at the specified index will have its specified fields edited. At least 1 field to be specified, not all fields have to be specified.
+### Edit Member
 
-### Usage:
-`editm {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
+The member at the specified index will have its specified fields edited. At least 1 field to be specified, not all
+fields have to be specified.
+
+#### Usage:
 
 `editMember {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
+`editm {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
-### Acceptable values for parameters:
-- index: Only numbers are allowed, starting from 1
-- memberName: Only alphabetical characters, @, () are allowed
-- phoneNumber: Only numbers are allowed
-- email: Must follow the format of xyz@abc.wsd
-- telegramHandle: Only alphanumeric characters and underscore are allowed
-- tag: Only alphanumeric characters are allowed
+#### Acceptable values for parameters:
 
-### Example of usage:
-`editm 1 /name Aliciaa /phone 12345678`
+- `index`: Only numbers are allowed, starting from 1
+- `memberName`: Only alphabetical characters, @, () are allowed
+- `phoneNumber`: Only numbers are allowed
+- `email`: Must follow the format of xyz@abc.wsd
+- `telegramHandle`: Only alphanumeric characters and underscore are allowed
+- `tag`: Only alphanumeric characters are allowed
+
+#### Example of usage:
 
 `editMember 1 /name Aliciaa /phone 12345678`
 
-### Expected Outcome:
+`editm 1 /name Aliciaa /phone 12345678`
+
+#### Expected Outcome:
+
 ```
 Edited member: Aliciaa
 ```
 
-### If name is invalid:
+#### If name is invalid:
 
 ```
 Names should only contain alphanumeric characters and spaces, and it should not be blank
 ```
 
-### If phone number is invalid:
+#### If phone number is invalid:
 
 ```
 Phone numbers should only contain numbers, and it should be at least 3 digits long
 ```
 
-### If telegram handle is invalid:
+#### If telegram handle is invalid:
 
 ```
 Telegram handle should follow the format: @exampleHandle 
 ```
 
-### If tag is invalid:
+#### If tag is invalid:
+
 ```
 Tags names should be alphanumeric
 ```
 
-## Find Member(s)
-Find and generate a list of all existing member(s) whose information contain any of specified keyword(s). Keywords to be separated by a spacing between 2 keywords.
+### Find Member(s)
 
-### Usage:
-`findm {keyword(s)}`
+Find and generate a list of all existing member(s) whose information contain any of specified keyword(s). Keywords to be
+separated by a spacing between 2 keywords.
+
+#### Usage:
 
 `findMember {keyword(s)}`
 
-### Acceptable values for parameters:
-- keyword(s): All alphanumerical characters are allowed
+`findm {keyword(s)}`
 
-### Example of usage:
-`findm Alicia`
+#### Acceptable values for parameters:
+
+- `keyword(s)`: All alphanumerical characters are allowed
+
+#### Example of usage:
 
 `findMember Alicia`
 
-### Expected Outcome:
+`findm Alicia`
+
+#### Expected Outcome:
+
 ```
 1 member listed!
 ```
 
-### If unable to find member(s) with matching keyword(s)
+#### If unable to find member(s) with matching keyword(s)
+
 ```
 0 members listed!
 ```
 
-## View Member(s)
+### View Member(s)
+
 Generates a list of all existing member(s) in the members list.
 
-### Usage:
-`viewm`
+#### Usage:
 
 `viewMembers`
 
-### Expected Outcome:
+`viewm`
+
+#### Expected Outcome:
 
 ```
 Listed all members
 ```
 
-## Add Applicant
+### Add Applicant
+
 Adds a new applicant to the applicants list.
 
-### Usage:
-`adda /name {applicantName} /phone {phoneNumber}`
+#### Usage:
 
 `addApplicant /name {applicantName} /phone {phoneNumber}`
 
-### Acceptable values for parameters:
-- applicantName: Only alphabetical characters, @, () are allowed
-- phoneNumber: Only numbers are allowed
+`adda /name {applicantName} /phone {phoneNumber}`
 
-### Example of usage:
-`adda /name Alicia /phone 92345678`
+#### Acceptable values for parameters:
+
+- `applicantName`: Only alphabetical characters, @, () are allowed
+- `phoneNumber`: Only numbers are allowed
+
+#### Example of usage:
 
 `addApplicant /name Alicia /phone 92345678`
 
-### Expected Outcome:
+`adda /name Alicia /phone 92345678`
+
+#### Expected Outcome:
+
 ```
 New applicant added: Alicia
 ```
 
-### If any field(s) not specified:
+#### If any field(s) not specified:
 
 ```
 Invalid command format! 
 ```
 
-### If name is invalid:
+#### If name is invalid:
 
 ```
 Names should only contain alphanumeric characters and spaces, and it should not be blank
 ```
 
-### If phone number is invalid:
+#### If phone number is invalid:
 
 ```
 Phone numbers should only contain numbers, and it should be at least 3 digits long
 ```
 
-## Delete Applicant
+### Delete Applicant
+
 The applicant at the specified index will be deleted from the applicants list.
 
-### Usage:
-`dela {index}`
+#### Usage:
 
 `deleteApplicant {index}`
 
-### Acceptable values for parameters:
-- index: Only numbers are allowed, starting from 1
+`dela {index}`
 
-### Example of usage:
-`dela 1`
+#### Acceptable values for parameters:
+
+- `index`: Only numbers are allowed, starting from 1
+
+#### Example of usage:
 
 `deleteApplicant 1`
 
-### Expected Outcome:
+`dela 1`
+
+#### Expected Outcome:
+
 ```
 Deleted applicant: Alicia
 ```
 
-### If index is out of range:
+#### If index is out of range:
 
 ```
 The applicant index provided is invalid
 ```
 
-### If there are no applicants:
+#### If there are no applicants:
+
 Generates a list of all existing applicants in the applicants list.
 
 ```
 The applicant index provided is invalid
 ```
 
-## Edit Applicant
-The applicant at the specified index will have its specified fields edited. At least 1 field to be specified, not all fields have to be specified.
+### Edit Applicant
 
-### Usage:
-`edita {index} /name {applicantName} /phone {phoneNumber}`
+The applicant at the specified index will have its specified fields edited. At least 1 field to be specified, not all
+fields have to be specified.
+
+#### Usage:
 
 `editApplicant {index} /name {applicantName} /phone {phoneNumber}`
 
-### Acceptable values for parameters:
-- index: Only numbers are allowed, starting from 1
-- applicantName: Only alphabetical characters, @, () are allowed
-- phoneNumber: Only numbers are allowed
+`edita {index} /name {applicantName} /phone {phoneNumber}`
 
-### Example of usage:
-`edita 1 /name Aliciaa /phone 12345678`
+#### Acceptable values for parameters:
+
+- `index`: Only numbers are allowed, starting from 1
+- `applicantName`: Only alphabetical characters, @, () are allowed
+- `phoneNumber`: Only numbers are allowed
+
+#### Example of usage:
 
 `editApplicant 1 /name Aliciaa /phone 12345678`
 
-### Expected Outcome:
+`edita 1 /name Aliciaa /phone 12345678`
+
+#### Expected Outcome:
+
 ```
 Edited applicant: Aliciaa
 ```
 
-### If name is invalid:
+#### If name is invalid:
 
 ```
 Names should only contain alphanumeric characters and spaces, and it should not be blank
 ```
 
-### If phone number is invalid:
+#### If phone number is invalid:
 
 ```
 Phone numbers should only contain numbers, and it should be at least 3 digits long
 ```
 
-## Find Applicant(s)
-Find and generate a list of all existing applicant(s) whose information contain any of specified keyword(s). Keywords to be separated by a spacing between 2 keywords.
+### Find Applicant(s)
 
-### Usage:
-`finda {keyword(s)}`
+Find and generate a list of all existing applicant(s) whose information contain any of specified keyword(s). Keywords to
+be separated by a spacing between 2 keywords.
+
+#### Usage:
 
 `findApplicant {keyword(s)}`
 
-### Acceptable values for parameters:
-- keyword(s): All alphanumerical characters are allowed
+`finda {keyword(s)}`
 
-### Example of usage:
-`finda Alicia`
+#### Acceptable values for parameters:
+
+- `keyword(s)`: All alphanumerical characters are allowed
+
+#### Example of usage:
 
 `findApplicant Alicia`
 
-### Expected Outcome:
+`finda Alicia`
+
+#### Expected Outcome:
+
 ```
 1 applicant listed!
 ```
 
-### If unable to find applicant(s) with matching keyword(s)
+#### If unable to find applicant(s) with matching keyword(s)
+
 ```
 0 applicants listed!
 ```
 
-## View Applicant(s)
+### View Applicant(s)
+
 Generates a list of all existing applicant(s) in the applicants list.
 
-### Usage:
-`viewa`
+#### Usage:
 
 `viewApplicants`
 
-### Expected Outcome:
+`viewa`
+
+#### Expected Outcome:
+
 ```
 Listed all applicants
 ```
@@ -385,4 +454,3 @@ Listed all applicants
 | **Edit Applicant**    | `edita {index} /name {applicantName} /phone {phoneNumber}`                                               | `edita 1 /name John`<br/>`edita 1 /name Aliciaa /phone 12345678`               |
 | **Find Applicant(s)** | `finda {keyword}`                                                                                        | `finda Alicia`<br/>`finda John 92345678`                                       |
 | **View Applicant(s)** | `viewa`                                                                                                  | `viewa`                                                                        |
-
