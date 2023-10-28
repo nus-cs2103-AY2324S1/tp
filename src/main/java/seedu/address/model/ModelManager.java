@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Member;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -103,13 +104,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteMember(Member target) {
+        addressBook.removeMember(target);
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void deleteApplicant(Applicant target) {
         addressBook.removeApplicant(target);
         updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    public void deleteMember(Member memberIndex) {
-        addressBook.removeMember(memberIndex);
     }
 
     @Override
@@ -129,6 +132,8 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedMember);
 
         addressBook.setMember(target, editedMember);
+
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -136,6 +141,8 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedApplicant);
 
         addressBook.setApplicant(target, editedApplicant);
+
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -156,6 +163,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Applicant> getFilteredApplicantList() {
         return filteredApplicants;
+    }
+
+    @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        return this.addressBook.getTagList();
     }
 
     @Override
