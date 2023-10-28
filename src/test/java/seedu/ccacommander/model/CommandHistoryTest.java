@@ -37,18 +37,19 @@ public class CommandHistoryTest {
         commandHistory.addCommand(FIRST_COMMAND);
         commandHistory.addCommand(FIRST_COMMAND);
         commandHistory.getPreviousCommand();
+
         assertFalse(commandHistory.hasPreviousCommand());
     }
 
     @Test
-    public void isLastCommandEqualsCommand_oneCommandAdded_returnsTrue() {
+    public void isLastCommandEqualCommand_oneCommandAdded_returnsTrue() {
         commandHistory.addCommand(FIRST_COMMAND);
         assertTrue(commandHistory.isLastCommandEqualCommand(FIRST_COMMAND));
     }
 
 
     @Test
-    public void isLastCommandEqualsCommand_oneCommandAdded_returnsFalse() {
+    public void isLastCommandEqualCommand_oneCommandAdded_returnsFalse() {
         commandHistory.addCommand(FIRST_COMMAND);
         assertFalse(commandHistory.isLastCommandEqualCommand(SECOND_COMMAND));
     }
@@ -64,6 +65,7 @@ public class CommandHistoryTest {
         commandHistory.addCommand(SECOND_COMMAND);
         commandHistory.getPreviousCommand();
         commandHistory.getPreviousCommand();
+
         assertTrue(commandHistory.hasNextCommand());
     }
 
@@ -82,9 +84,9 @@ public class CommandHistoryTest {
     public void getNextCommand_hasNextCommand_returnsNextCommand() {
         commandHistory.addCommand(FIRST_COMMAND);
         commandHistory.addCommand(SECOND_COMMAND);
+        commandHistory.getPreviousCommand();
+        commandHistory.getPreviousCommand();
 
-        commandHistory.getPreviousCommand();
-        commandHistory.getPreviousCommand();
         String nextCommand = commandHistory.getNextCommand();
         assertEquals(SECOND_COMMAND, nextCommand);
     }
@@ -99,6 +101,7 @@ public class CommandHistoryTest {
     @Test
     public void getPreviousCommand_hasPreviousCommand_returnsPreviousCommand() {
         commandHistory.addCommand(FIRST_COMMAND);
+
         String previousCommand = commandHistory.getPreviousCommand();
         assertEquals(FIRST_COMMAND, previousCommand);
     }
@@ -113,6 +116,7 @@ public class CommandHistoryTest {
     public void isLastCommand_returnsTrue() {
         commandHistory.addCommand(FIRST_COMMAND);
         commandHistory.getPreviousCommand();
+
         assertTrue(commandHistory.isLastCommand());
     }
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The facilitator of commands and functions related to recalling previously entered commands.
+ * The facilitator of storing commands and functions related to recalling previously entered commands.
  */
 public class CommandHistory {
     private List<String> commandHistoryList;
@@ -35,12 +35,18 @@ public class CommandHistory {
         }
     }
 
+    /**
+     * Returns true if last command in {@code commandHistoryList} is equal to param command.
+     *
+     * @param command
+     */
     public boolean isLastCommandEqualCommand(String command) {
         return this.commandHistoryList.get(this.commandHistoryList.size() - 1).equals(command);
     }
 
     /**
-     * @return true if there is a next command.
+     * Returns true if there is a next command.
+     * @return boolean value of whether a next command exists.
      */
     public boolean hasNextCommand() {
         boolean hasCommands = this.commandHistoryList.size() > 0;
@@ -50,7 +56,7 @@ public class CommandHistory {
     }
 
     /**
-     * @return true if there is a previous command.
+     * Returns true if there is a previous command.
      */
     public boolean hasPreviousCommand() {
         boolean hasCommands = this.commandHistoryList.size() > 0;
@@ -59,7 +65,8 @@ public class CommandHistory {
     }
 
     /**
-     * @return next command in the {@code commandHistoryList} based on the {@code currentCommandPointer}
+     * Returns next command.
+     * Must be used in conjunction with {@code hasNextCommand} hence the assertion.
      */
     public String getNextCommand() {
         assert this.currentCommandPointer < this.commandHistoryList.size() - 1
@@ -70,7 +77,8 @@ public class CommandHistory {
     }
 
     /**
-     * @return previous command in the {@code commandHistoryList} based on the {@code currentCommandPointer}
+     * Returns previous command.
+     * Must be used in conjunction with {@code hasPreviousCommand} hence the assertion.
      */
     public String getPreviousCommand() {
         assert this.currentCommandPointer > 0
@@ -89,7 +97,7 @@ public class CommandHistory {
     }
 
     /**
-     * @return true if the pointer is at the last command.
+     * Returns true if the pointer is at the last command.
      */
     public boolean isLastCommand() {
         return this.currentCommandPointer == this.commandHistoryList.size() - 1;
