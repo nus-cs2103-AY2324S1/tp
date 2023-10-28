@@ -57,4 +57,17 @@ public class Specialist extends Person {
     public Specialty getSpecialty() {
         return specialty;
     }
+
+    @Override
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (otherPerson instanceof Specialist) {
+            return otherPerson.getName().equals(getName());
+        }
+
+        return false;
+    }
 }

@@ -55,4 +55,17 @@ public class Patient extends Person {
                 && age.equals(otherPatient.getAge())
                 && medicalHistory.equals(otherPatient.medicalHistory);
     }
+
+    @Override
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (otherPerson instanceof Patient) {
+            return otherPerson.getName().equals(getName());
+        }
+
+        return false;
+    }
 }
