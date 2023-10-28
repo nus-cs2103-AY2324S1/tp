@@ -29,10 +29,14 @@ public class CommandHistory {
     public void addCommand(String command) {
         requireNonNull(command);
         if (this.commandHistoryList.size() == 0
-                || !this.commandHistoryList.get(this.commandHistoryList.size() - 1).equals(command)) {
+                || !isLastCommandEqualCommand(command)) {
             this.commandHistoryList.add(command);
             resetPointer();
         }
+    }
+
+    public boolean isLastCommandEqualCommand(String command) {
+        return this.commandHistoryList.get(this.commandHistoryList.size() - 1).equals(command);
     }
 
     /**

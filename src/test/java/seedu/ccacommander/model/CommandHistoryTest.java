@@ -41,6 +41,19 @@ public class CommandHistoryTest {
     }
 
     @Test
+    public void isLastCommandEqualsCommand_oneCommandAdded_returnsTrue() {
+        commandHistory.addCommand(FIRST_COMMAND);
+        assertTrue(commandHistory.isLastCommandEqualCommand(FIRST_COMMAND));
+    }
+
+
+    @Test
+    public void isLastCommandEqualsCommand_oneCommandAdded_returnsFalse() {
+        commandHistory.addCommand(FIRST_COMMAND);
+        assertFalse(commandHistory.isLastCommandEqualCommand(SECOND_COMMAND));
+    }
+
+    @Test
     public void hasNextCommand_noCommandsAdded_returnsFalse() {
         assertFalse(commandHistory.hasNextCommand());
     }
