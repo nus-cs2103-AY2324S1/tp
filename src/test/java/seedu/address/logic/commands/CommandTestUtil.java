@@ -15,6 +15,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +40,6 @@ public class CommandTestUtil {
     public static final String VALID_NAME_DEREK = "Derek Shepherd";
     public static final String VALID_PHONE_AMY = "91234567";
     public static final String VALID_PHONE_BOB = "81234567";
-
     public static final String VALID_PHONE_CHERYL = "92874563";
     public static final String VALID_PHONE_DEREK = "97463128";
     public static final String VALID_EMERGENCY_CONTACT_AMY = "81234567";
@@ -69,6 +70,14 @@ public class CommandTestUtil {
     public static final String VALID_BLOODTYPE_BOB = "A+";
     public static final String VALID_BLOODTYPE_AMY = "A+";
     public static final String VALID_CONDITION_AMY = "Diabetes";
+
+    public static final String VALID_DATE_1_DESC = "2022-02-14 13:30:00";
+
+    public static final String VALID_DATE_2_DESC = "2022-02-28 13:30:00";
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final LocalDateTime VALID_DATE_1 = LocalDateTime.parse(VALID_DATE_1_DESC, formatter);
+    public static final LocalDateTime VALID_DATE_2 = LocalDateTime.parse(VALID_DATE_2_DESC, formatter);
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String NAME_DESC_CHERYL = " " + PREFIX_NAME + VALID_NAME_CHERYL;
