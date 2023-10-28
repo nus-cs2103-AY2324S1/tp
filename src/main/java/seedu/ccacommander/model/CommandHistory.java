@@ -62,6 +62,8 @@ public class CommandHistory {
      * @return next command in the {@code commandHistoryList} based on the {@code currentCommandPointer}
      */
     public String getNextCommand() {
+        assert this.currentCommandPointer < this.commandHistoryList.size() - 1
+                : "currentCommandPointer is at the newest command already";
         this.currentCommandPointer++;
         String nextCommand = this.commandHistoryList.get(this.currentCommandPointer);
         return nextCommand;
@@ -71,6 +73,8 @@ public class CommandHistory {
      * @return previous command in the {@code commandHistoryList} based on the {@code currentCommandPointer}
      */
     public String getPreviousCommand() {
+        assert this.currentCommandPointer > 0
+                : "currentCommandPointer is at the last command already";
         this.currentCommandPointer--;
         String command = this.commandHistoryList.get(this.currentCommandPointer);
         return command;

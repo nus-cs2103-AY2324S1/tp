@@ -89,12 +89,22 @@ public class CommandHistoryTest {
         assertEquals(SECOND_COMMAND, nextCommand);
     }
 
+    @Test
+    public void getNextCommand_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> commandHistory.getNextCommand());
+    }
+
 
     @Test
     public void getPreviousCommand_hasPreviousCommand_returnsPreviousCommand() {
         commandHistory.addCommand(FIRST_COMMAND);
         String previousCommand = commandHistory.getPreviousCommand();
         assertEquals(FIRST_COMMAND, previousCommand);
+    }
+
+    @Test
+    public void getPreviousCommand_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> commandHistory.getPreviousCommand());
     }
 
     @Test
