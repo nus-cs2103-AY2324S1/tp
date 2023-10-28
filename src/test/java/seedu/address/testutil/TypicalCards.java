@@ -20,7 +20,7 @@ public class TypicalCards {
     public static final Card LOW = new CardBuilder().withQuestion("Low Priority?")
             .withAnswer("True")
             .withNextPracticeDate(new PracticeDate(LocalDateTime.MAX)).build();
-    public static final PracticeDate typicalDate =
+    private static final PracticeDate typicalDate =
             new PracticeDate(
                 LocalDateTime.of(2018, 11, 3, 12, 45, 30)
             );

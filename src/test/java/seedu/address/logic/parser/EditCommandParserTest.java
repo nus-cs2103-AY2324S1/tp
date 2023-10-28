@@ -1,12 +1,19 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SINGULAR_TAG_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CS2100;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalCards.CS1101S;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CARD;
 
 import org.junit.jupiter.api.Test;
 
@@ -80,7 +87,8 @@ public class EditCommandParserTest {
         // Question
         Index targetIndex = INDEX_THIRD_CARD;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_QUESTION + VALID_QUESTION_CS2100;
-        EditCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_CS2100).build();
+        EditCommand.EditCardDescriptor descriptor = new EditCardDescriptorBuilder()
+                .withQuestion(VALID_QUESTION_CS2100).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
