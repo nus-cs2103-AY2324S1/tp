@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_IT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_IS_ON_LEAVE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVELIST_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OVERTIME_HOURS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -60,7 +60,7 @@ public class EmployeeTest {
 
     @Test
     public void isOnLeaveToday_invalidEmployee_returnsFalse() {
-        Employee employee = new EmployeeBuilder().withIsOnLeave(false).build();
+        Employee employee = new EmployeeBuilder().withLeaveList(new ArrayList<Leave>()).build();
         assertFalse(employee.isOnLeaveToday());
     }
 
@@ -123,7 +123,7 @@ public class EmployeeTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different isOnLeave -> returns false
-        editedAlice = new EmployeeBuilder(ALICE).withIsOnLeave(VALID_IS_ON_LEAVE_BOB).build();
+        editedAlice = new EmployeeBuilder(ALICE).withLeaveList(VALID_LEAVELIST_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different overtime hours left -> returns false
@@ -136,8 +136,7 @@ public class EmployeeTest {
         String expected = Employee.class.getCanonicalName() + "{name=" + ALICE.getName()
                 + ", position=" + ALICE.getPosition() + ", id=" + ALICE.getId() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", salary=" + ALICE.getSalary()
-                + ", departments=" + ALICE.getDepartments() + ", isOnLeave=" + ALICE.getIsOnLeave()
-                + ", overtimeHours=" + ALICE.getOvertimeHours()
+                + ", departments=" + ALICE.getDepartments() + ", overtimeHours=" + ALICE.getOvertimeHours()
                 + ", leaves=" + ALICE.getLeaveList() + "}";
         assertEquals(expected, ALICE.toString());
     }

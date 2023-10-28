@@ -21,7 +21,6 @@ public class Employee {
     public static final int MAX_OVERTIME_HOURS = 72;
     public static final int DEFAULT_OVERTIME_HOURS = 0;
     public static final ArrayList<Leave> DEFAULT_LEAVELIST = new ArrayList<>();
-    public static final boolean DEFAULT_IS_ON_LEAVE = false;
     public static final int MAX_NUM_OF_LEAVES = 14;
 
     // Identity fields
@@ -34,7 +33,6 @@ public class Employee {
     // Data fields
     private final Salary salary;
     private final Set<Department> departments = new HashSet<>();
-    private final boolean isOnLeave;
     private final OvertimeHours overtimeHours;
     private final LeaveList leaveList;
 
@@ -51,7 +49,6 @@ public class Employee {
         this.email = email;
         this.salary = salary;
         this.departments.addAll(departments);
-        this.isOnLeave = DEFAULT_IS_ON_LEAVE;
         this.overtimeHours = new OvertimeHours(DEFAULT_OVERTIME_HOURS);
         this.leaveList = new LeaveList(DEFAULT_LEAVELIST);
     }
@@ -60,9 +57,9 @@ public class Employee {
      * Overloaded constructor for Employee class to set fields with default values.
      */
     public Employee(Name name, Position position, Id id, Phone phone, Email email, Salary salary,
-                    Set<Department> departments, boolean isOnLeave, OvertimeHours overtimeHours,
+                    Set<Department> departments, OvertimeHours overtimeHours,
                     LeaveList leaveList) {
-        requireAllNonNull(name, position, id, phone, email, salary, departments, isOnLeave, overtimeHours, leaveList);
+        requireAllNonNull(name, position, id, phone, email, salary, departments, overtimeHours, leaveList);
         this.name = name;
         this.position = position;
         this.id = id;
@@ -70,7 +67,6 @@ public class Employee {
         this.email = email;
         this.salary = salary;
         this.departments.addAll(departments);
-        this.isOnLeave = isOnLeave;
         this.overtimeHours = overtimeHours;
         this.leaveList = leaveList;
     }
@@ -97,10 +93,6 @@ public class Employee {
 
     public Salary getSalary() {
         return salary;
-    }
-
-    public boolean getIsOnLeave() {
-        return isOnLeave;
     }
 
     public OvertimeHours getOvertimeHours() {
@@ -178,7 +170,6 @@ public class Employee {
                 && email.equals(otherEmployee.email)
                 && salary.equals(otherEmployee.salary)
                 && departments.equals(otherEmployee.departments)
-                && isOnLeave == otherEmployee.isOnLeave
                 && overtimeHours.equals(otherEmployee.overtimeHours)
                 && leaveList.equals(otherEmployee.leaveList);
     }
@@ -186,7 +177,7 @@ public class Employee {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, position, id, phone, email, salary, departments, isOnLeave, overtimeHours, leaveList);
+        return Objects.hash(name, position, id, phone, email, salary, departments, overtimeHours, leaveList);
     }
 
     @Override
@@ -199,7 +190,6 @@ public class Employee {
                 .add("email", email)
                 .add("salary", salary)
                 .add("departments", departments)
-                .add("isOnLeave", isOnLeave)
                 .add("overtimeHours", overtimeHours)
                 .add("leaves", leaveList)
                 .toString();

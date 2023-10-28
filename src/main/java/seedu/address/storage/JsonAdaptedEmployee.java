@@ -36,7 +36,6 @@ class JsonAdaptedEmployee {
     private final String email;
     private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
     private final String salary;
-    private final boolean isOnLeave;
     private final int overtimeHours;
     private final List<JsonAdaptedLeave> leaveList = new ArrayList<>();
 
@@ -47,8 +46,8 @@ class JsonAdaptedEmployee {
     public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("position") String position,
             @JsonProperty("id") String id, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("departments") List<JsonAdaptedDepartment> departments,
-            @JsonProperty("salary") String salary, @JsonProperty("isOnLeave") boolean isOnLeave,
-            @JsonProperty("overtime") int overtimeHours, @JsonProperty("leaves") List<JsonAdaptedLeave> leaveList) {
+            @JsonProperty("salary") String salary, @JsonProperty("overtime") int overtimeHours,
+                               @JsonProperty("leaves") List<JsonAdaptedLeave> leaveList) {
         this.name = name;
         this.position = position;
         this.id = id;
@@ -58,7 +57,6 @@ class JsonAdaptedEmployee {
         if (departments != null) {
             this.departments.addAll(departments);
         }
-        this.isOnLeave = isOnLeave;
         this.overtimeHours = overtimeHours;
         if (leaveList != null) {
             this.leaveList.addAll(leaveList);
@@ -78,7 +76,6 @@ class JsonAdaptedEmployee {
         departments.addAll(source.getDepartments().stream()
                 .map(JsonAdaptedDepartment::new)
                 .collect(Collectors.toList()));
-        isOnLeave = source.getIsOnLeave();
         overtimeHours = source.getOvertimeHours().value;
         leaveList.addAll(source.getLeaveList().leaveList.stream()
                 .map(JsonAdaptedLeave::new)
@@ -163,6 +160,6 @@ class JsonAdaptedEmployee {
         final LeaveList modelLeaveList = new LeaveList(employeeLeaves);
 
         return new Employee(modelName, modelPosition, modelId, modelPhone,
-                modelEmail, modelSalary, modelDepartments, isOnLeave, modelOvertimeHours, modelLeaveList);
+                modelEmail, modelSalary, modelDepartments, modelOvertimeHours, modelLeaveList);
     }
 }

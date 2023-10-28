@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,10 +46,8 @@ public class CommandTestUtil {
     public static final String VALID_SALARY_BOB = "5000";
     public static final int VALID_OVERTIME_HOURS_AMY = 0;
     public static final int VALID_OVERTIME_HOURS_BOB = 1;
-    public static final boolean VALID_IS_ON_LEAVE_AMY = false;
-    public static final boolean VALID_IS_ON_LEAVE_BOB = true;
     public static final ArrayList<Leave> VALID_LEAVELIST_AMY = new ArrayList<>();
-    public static final ArrayList<Leave> VALID_LEAVELIST_BOB = new ArrayList<>();
+    public static final ArrayList<Leave> VALID_LEAVELIST_BOB = new ArrayList<>(List.of(new Leave(LocalDate.now())));
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String POSITION_DESC_AMY = " " + PREFIX_POSITION + VALID_POSITION_AMY;

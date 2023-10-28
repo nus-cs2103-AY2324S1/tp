@@ -65,7 +65,7 @@ public class EmployeeCard extends UiPart<Region> {
         employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.departmentName))
                 .forEach(department -> departments.getChildren().add(new Label(department.departmentName)));
-        if (employee.getIsOnLeave()) {
+        if (employee.isOnLeaveToday()) {
             isOnLeave.setText("On Leave");
             isOnLeave.setStyle("-fx-background-color: #df0000; -fx-text-fill: #ffffff;");
         } else {
