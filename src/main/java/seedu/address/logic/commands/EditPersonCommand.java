@@ -52,25 +52,21 @@ public class EditPersonCommand extends AbstractEditCommand<Person> {
     }
 
     @Override
-    protected void init() throws CommandException {
-        init(model.getCurrentlyDisplayedPerson(), model.getFilteredPersonList());
+    protected void initModelMethods() {
+        currentShownEntry = model.getCurrentlyDisplayedPerson();
+        list = model.getFilteredPersonList();
+        hasClashWith = model::hasPersonClashWith;
+        deleteMethod = model::deletePerson;
+        addMethod = model::addPerson;
     }
 
-    protected void validateEdited() throws CommandException {
-        validateEdited(model::hasPersonClashWith);
-    }
-    protected void writeBack() throws CommandException {
-        model.setPerson(original, edited);
-    }
+
     @Override
     protected void setNonDefaultFields() throws CommandException {
-        setNameRemarkTags();
         edited.setPhoneIfNotDefault(editDescriptor.getPhone());
         edited.setEmail(editDescriptor.getEmail());
         edited.setSubjectsIfNotDefault(editDescriptor.getSubjects());
         edited.setSubjectsIfNotDefault(editDescriptor.getSubjects());
-    }
-    private void incrementNonDefaultFields(Person editedPerson, Person editDescriptor) {
     }
 }
 

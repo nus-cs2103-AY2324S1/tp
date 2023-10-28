@@ -20,25 +20,19 @@ public class EditLessonCommand extends AbstractEditCommand<Lesson> {
     }
 
     @Override
-    void init() throws CommandException {
-        init(model.getCurrentlyDisplayedLesson(), model.getFilteredScheduleList());
+    protected void initModelMethods() {
+        currentShownEntry = model.getCurrentlyDisplayedLesson();
+        list = model.getFilteredScheduleList();
+        hasClashWith = model::hasLessonClashWith;
+        deleteMethod = model::deleteLesson;
+        addMethod = model::addLesson;
     }
 
     @Override
-    void setNonDefaultFields() throws CommandException {
-        setNameRemarkTags();
+    protected void setNonDefaultFields() throws CommandException {
         edited.setDayIfNotDefault(editDescriptor.getDay());
         edited.setStartIfNotDefault(editDescriptor.getStart());
         edited.setEndIfNotDefault(editDescriptor.getEnd());
         edited.setSubjectIfNotDefault(editDescriptor.getSubject());
-    }
-
-    @Override
-    void validateEdited() throws CommandException {
-        validateEdited(model::hasLessonClashWith);
-    }
-    @Override
-    void writeBack() throws CommandException {
-        model.setLesson(original, edited);
     }
 }
