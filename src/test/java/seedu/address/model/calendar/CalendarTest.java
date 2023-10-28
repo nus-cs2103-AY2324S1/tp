@@ -5,15 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.EventBuilder.DEFAULT_END_TIME_STRING;
 import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
+import static seedu.address.testutil.TypicalEvents.CONFERENCE;
+import static seedu.address.testutil.TypicalEvents.TRAINING;
+import static seedu.address.testutil.TypicalEvents.WORKSHOP;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.EventPeriodBuilder;
 
 public class CalendarTest {
     private final Calendar calendar = new Calendar();
@@ -92,6 +98,45 @@ public class CalendarTest {
     @Test
     public void findEvent_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> calendar.findEventAt(null));
+    }
+
+    @Test
+    public void getEventsInRange_nullRange_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> calendar.getEventsInRange(null));
+    }
+
+    @Test
+    public void getEventsInRange_oneEvent_successful() {
+        Calendar oneEventCalendar = new Calendar();
+        Event sample = new EventBuilder().build();
+        oneEventCalendar.addEvent(sample);
+        EventPeriodBuilder builder = new EventPeriodBuilder();
+        builder.changeStartAndEnd(DEFAULT_START_TIME_STRING, DEFAULT_END_TIME_STRING);
+        assertEquals(List.of(sample), oneEventCalendar.getEventsInRange(builder.build()));
+    }
+
+    @Test
+    public void deleteEventsInRange_nullRange_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> calendar.deleteEventsInRange(null));
+    }
+
+    @Test
+    public void deleteEventsInRange_twoEvents_successful() {
+        Calendar eventCalendar = new Calendar();
+        eventCalendar.addEvent(WORKSHOP);
+        eventCalendar.addEvent(CONFERENCE);
+        eventCalendar.addEvent(TRAINING);
+        EventPeriodBuilder builder = new EventPeriodBuilder();
+        builder.changeStartAndEnd("2023-11-10 14:00", "2023-11-15 17:00");
+        assertTrue(eventCalendar.hasEvents());
+
+        eventCalendar.deleteEventsInRange(builder.build());
+        assertTrue(eventCalendar.hasEvents());
+
+        builder = new EventPeriodBuilder();
+        builder.changeStartAndEnd("2023-11-15 14:00", "2023-11-20 14:01");
+        eventCalendar.deleteEventsInRange(builder.build());
+        assertFalse(eventCalendar.hasEvents());
     }
 
     @Test
