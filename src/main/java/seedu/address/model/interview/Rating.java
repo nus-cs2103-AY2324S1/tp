@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents an Interview's rating in the address book.
  */
-public class Rating {
+public class Rating implements Comparable<Rating> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Rating should only contain a number with one decimal place and between 0.0 to 5.0 inclusive";
@@ -27,6 +27,11 @@ public class Rating {
      */
     public static boolean isValidRating(String test) {
         return test.matches(RATING_REGEX);
+    }
+
+    @Override
+    public int compareTo(Rating otherRating) {
+        return otherRating.rating.compareTo(this.rating);
     }
 
     @Override

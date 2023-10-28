@@ -3,6 +3,7 @@ package seedu.address.model.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -94,6 +95,14 @@ public class UniqueInterviewList implements Iterable<Interview> {
         }
 
         internalList.setAll(interviews);
+    }
+
+    /**
+     * Sorts the interview list of the address book.
+     * The interviews list will be sorted based on the comparator
+     */
+    public void sort(Comparator<Interview> comparator) {
+        FXCollections.sort(internalList, comparator);
     }
 
     /**
