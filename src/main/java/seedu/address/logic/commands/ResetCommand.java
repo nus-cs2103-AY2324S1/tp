@@ -19,7 +19,7 @@ public class ResetCommand extends Command {
     public static final String COMMAND_WORD = "reset";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Resets the given field (overtime hours / allocated leaves) of all employees to their default value. "
+            + ": Resets the given field (overtime / leaves) of all employees to their default value. "
             + "Parameters: "
             + PREFIX_FIELD + "FIELD\n"
             + "Example: " + COMMAND_WORD + " "
@@ -48,24 +48,24 @@ public class ResetCommand extends Command {
         switch(field.toLowerCase()) {
         case "":
             throw new CommandException(MESSAGE_NO_FIELD);
-        case "overtime hours":
+        case "overtime":
             for (Employee employee: employeeList) {
+                model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
                 Employee employeeWithDefaultOvertime = new Employee(employee.getName(), employee.getPosition(),
                         employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
                         employee.getDepartments(), employee.getIsOnLeave(),
                         new OvertimeHours(Employee.DEFAULT_OVERTIME_HOURS), employee.getLeaveList());
                 model.setEmployee(employee, employeeWithDefaultOvertime);
-                model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
             }
             break;
-        case "allocated leaves":
+        case "leaves":
             for (Employee employee: employeeList) {
+                model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
                 Employee employeeWithDefaultLeaveList = new Employee(employee.getName(), employee.getPosition(),
                         employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
                         employee.getDepartments(), employee.getIsOnLeave(),
                         employee.getOvertimeHours(), new LeaveList());
                 model.setEmployee(employee, employeeWithDefaultLeaveList);
-                model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
             }
             break;
         default:

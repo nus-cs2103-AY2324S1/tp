@@ -81,10 +81,10 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         case "name":
             internalList.sort(Comparator.comparing(Employee::getName));
             break;
-        case "overtime hours":
+        case "overtime":
             internalList.sort(Comparator.comparing(Employee::getOvertimeHours));
             break;
-        case "allocated leaves":
+        case "leaves":
             internalList.sort(Comparator.comparing(Employee::getNumOfLeaves));
             break;
         default:

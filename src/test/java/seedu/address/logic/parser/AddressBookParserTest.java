@@ -101,8 +101,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_reset() throws Exception {
         ResetCommand command = (ResetCommand) parser.parseCommand(
-                ResetCommand.COMMAND_WORD + " f/ " + "overtime hours");
-        assertEquals(new ResetCommand("overtime hours"), command);
+                ResetCommand.COMMAND_WORD + " f/ " + "overtime");
+        assertEquals(new ResetCommand("overtime"), command);
     }
 
     @Test

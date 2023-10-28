@@ -18,8 +18,8 @@ import seedu.address.model.employee.LeaveList;
 import seedu.address.model.employee.OvertimeHours;
 
 public class ResetCommandTest {
-    private static final String OVERTIME_FIELD = "overtime hours";
-    private static final String LEAVES_FIELD = "allocated leaves";
+    private static final String OVERTIME_FIELD = "overtime";
+    private static final String LEAVES_FIELD = "leaves";
     private static final String INVALID_FIELD = "invalid field";
     private static final String NO_FIELD = "";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -51,6 +51,7 @@ public class ResetCommandTest {
         String expectedMessage = String.format(ResetCommand.MESSAGE_SUCCESS, LEAVES_FIELD);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         List<Employee> lastShownList = expectedModel.getFilteredEmployeeList();
         for (Employee employee: lastShownList) {
             Employee employeeWithDefaultLeaves = new Employee(employee.getName(), employee.getPosition(),
@@ -58,7 +59,6 @@ public class ResetCommandTest {
                     employee.getDepartments(), employee.getIsOnLeave(),
                     employee.getOvertimeHours(), new LeaveList());
             expectedModel.setEmployee(employee, employeeWithDefaultLeaves);
-            model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         }
 
         assertCommandSuccess(resetCommand, model, expectedMessage, expectedModel);

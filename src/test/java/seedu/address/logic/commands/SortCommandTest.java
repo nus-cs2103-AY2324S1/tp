@@ -16,8 +16,8 @@ class SortCommandTest {
 
     private static final String SALARY_ATTR = "salary";
     private static final String NAME_ATTR = "name";
-    private static final String OVERTIME_ATTR = "overtime hours";
-    private static final String LEAVES_ATTR = "allocated leaves";
+    private static final String OVERTIME_ATTR = "overtime";
+    private static final String LEAVES_ATTR = "leaves";
     private static final String INVALID_ATTR = "invalid attribute";
     private static final String NO_ATTR = "";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
