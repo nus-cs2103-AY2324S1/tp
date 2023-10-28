@@ -22,7 +22,7 @@ public class AddInterviewCommand extends Command {
     public static final String COMMAND_WORD = "addi";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an interview to an applicant identified "
-            + "by the index number used in the displayed applicant list. "
+            + "by the index number used in the displayed applicant list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + PREFIX_TYPE + "TYPE" + " "
             + "[" + PREFIX_RATING + "RATING]...\n"

@@ -45,11 +45,13 @@ public class Messages {
                 .append("; Position: ")
                 .append(applicant.getPosition())
                 .append("; Interviews: ");
+        builder.append("[");
         applicant.getInterviews().forEach(interview ->
                 builder.append(interview.getType())
                 .append("(")
                 .append(interview.getRating())
                 .append("); "));
+        builder.append("]");
         builder.append("; Status: ")
                 .append(applicant.getStatus())
                 .append("; Score: ")
