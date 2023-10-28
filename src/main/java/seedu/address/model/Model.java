@@ -86,9 +86,6 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered subject list */
-    ObservableList<Person> getFilteredSubjectList();
-
     /** Returns an unmodifiable view of the schedule list */
     ObservableList<Person> getScheduleList();
 

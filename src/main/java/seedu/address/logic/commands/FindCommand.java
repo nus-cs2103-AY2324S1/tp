@@ -43,7 +43,7 @@ public class FindCommand extends Command {
         model.updateFilteredPersonList(nameSubject);
         return new CommandResult(
                 String.format(Messages.MESSAGE_TUTEES_LISTED_OVERVIEW,
-                        model.getFilteredPersonList().size() + model.getFilteredSubjectList().size()));
+                        model.getFilteredPersonList().size()));
     }
     @Override
     public boolean equals(Object other) {
