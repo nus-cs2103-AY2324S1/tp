@@ -169,14 +169,8 @@ public class ApplicantCard extends UiPart<Region> {
         Group stackedArcs = new Group();
         stackedArcs.getChildren().addAll(outerCircle, midCircle);
 
-        Label ratingLabel = new Label();
-        String applicantOverallInterviewRating = applicant.getOverallInterviewRating();
-        ratingLabel.setText(applicantOverallInterviewRating);
-        ratingLabel.getStyleClass().add("overall_rating_label");
-
-        Label scoreLabel = new Label();
         String labelText = applicant.getScore().hasRating() ? applicant.getScore().toString() : "N.A.";
-        scoreLabel.setText(labelText);
+        Label scoreLabel = new Label(labelText);
         scoreLabel.getStyleClass().add("score_label");
 
         Color[] colours = { Color.TRANSPARENT, Color.web("#1a8cff"), Color.web("#3333cc"),
@@ -201,18 +195,6 @@ public class ApplicantCard extends UiPart<Region> {
 
         stackedArcs.getChildren().add(ratingArc);
         overallRating.getChildren().addAll(stackedArcs, innerCircle, scoreLabel);
-    }
-
-    public String getName() {
-        return name.getText();
-    }
-
-    public String getId() {
-        return id.getText();
-    }
-
-    public String getStatus() {
-        return status.getText();
     }
 
 }
