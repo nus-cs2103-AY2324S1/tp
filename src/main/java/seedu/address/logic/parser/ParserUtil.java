@@ -147,7 +147,6 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return UniqueTagList.getTag(tag);
-//        return new Tag(tag);
     }
 
     /**
@@ -162,14 +161,19 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a collection of tag strings into an array of tag categories.
+     *
+     * @param tags A collection of tag strings to be parsed.
+     * @return An array of tag categories extracted from the provided collection of tag strings.
+     * @throws ParseException If there is an issue with parsing the tag categories.
+     */
     public static String[] parseTagCategories(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
         String listTags = tags.toString();
         String cleanedList = listTags.replaceAll("[\\[\\]]", "");
         String[] tagParams = cleanedList.split(",\\s*");
         return tagParams;
-
     }
 
     /**

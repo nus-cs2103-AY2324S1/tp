@@ -1,17 +1,26 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CreateTagCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.stream.Stream;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.logic.commands.CreateTagCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses user input and creates a new CreateTagCommand.
+ */
 public class CreateTagCommandParser implements Parser<CreateTagCommand> {
 
+    /**
+     * Parses the given user input and creates a CreateTagCommand.
+     *
+     * @param args The user input arguments.
+     * @return A CreateTagCommand based on the parsed input.
+     * @throws ParseException If the input does not conform to the expected format.
+     */
     @Override
     public CreateTagCommand parse(String args) throws ParseException {
         requireNonNull(args);

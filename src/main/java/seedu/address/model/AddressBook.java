@@ -3,14 +3,10 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
@@ -114,8 +110,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(sortedList);
     }
 
-    public void addTagToCategory(String category, String tagName) {
-        this.tags.createTags(category, tagName);
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasTag(Tag tag) {
+        requireNonNull(tag);
+        return tags.contains(tag);
     }
 
 
@@ -134,8 +138,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public UniqueTagList getTagList() {
-        return tags;
+    public ObservableList<Tag> getTagList() {
+        return tags.asUnmodifiableObservableList();
     }
 
     @Override

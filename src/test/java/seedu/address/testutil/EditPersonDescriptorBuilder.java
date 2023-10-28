@@ -86,7 +86,7 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        Set<Tag> tagSet = Stream.of(tags).map(tag -> new Tag(tag, "uncategorised")).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }
