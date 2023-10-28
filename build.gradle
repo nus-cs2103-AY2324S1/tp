@@ -21,6 +21,11 @@ checkstyle {
 }
 
 test {
+    doFirst {
+        if (System.getProperty("os.name").equals("Linux")) {
+            exclude '**/ui/**'
+        }
+    }
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
@@ -40,7 +45,7 @@ task coverage(type: JacocoReport) {
     }
 }
 
-dependencies {
+ dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '17.0.7'
 

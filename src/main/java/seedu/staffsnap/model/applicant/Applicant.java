@@ -203,7 +203,7 @@ public class Applicant implements Comparable<Applicant> {
         Collections.sort(interviews);
     }
 
-    public double getInterviewIndexForApplicantCard(Interview interview) {
+    public int getInterviewIndexForApplicantCard(Interview interview) {
         return interviews.indexOf(interview) + 1;
     }
     /**
