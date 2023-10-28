@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -30,7 +31,7 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_validArgs_success() {
-        assertParseSuccess(parser, VALID_STUDENT_NUMBER_BOB,
+        assertParseSuccess(parser, STUDENT_NUMBER_DESC_BOB,
             new ViewCommand(new StudentNumber(VALID_STUDENT_NUMBER_BOB)));
     }
 

@@ -22,11 +22,11 @@ public class TagCommand extends Command {
     public static final String ADD_TAGS = "add";
     public static final String DELETE_TAGS = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the tags of the student identified by the student number. "
+            + ": Edits the tags of the student identified by the student number.\n"
             + "Existing tags will be overwritten by the input.\n"
             + "Use /add to add or /delete to delete tags without overwriting all tags.\n"
-            + "Parameters: STUDENT_NUMBER (exists in address book) [/add] [/delete] t/[TAG]\n"
-            + "Example: " + COMMAND_WORD + " A1234567N /add t/smart.";
+            + "Parameters: s/STUDENT_NUMBER (exists in address book) [/add] [/delete] t/[TAG]\n"
+            + "Example: " + COMMAND_WORD + " s/A1234567N /add t/smart.";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added following tags to Student %1$s:\n";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed following tags from Student %1$s:\n";
     public static final String MESSAGE_REPLACE_ALL_TAG_SUCCESS = "Replace all tags of Student %1$s with:\n";
@@ -37,8 +37,8 @@ public class TagCommand extends Command {
     protected final Set<Tag> tags;
 
     /**
-     * @param studentNumber of the student in the filtered student list to edit their tags
-     * @param tags of the student to be updated to
+     * @param studentNumber of the student in the filtered student list to edit their tags.
+     * @param tags of the student to be updated to.
      */
     public TagCommand(StudentNumber studentNumber, Set<Tag> tags) {
         requireAllNonNull(studentNumber, tags);
@@ -69,8 +69,7 @@ public class TagCommand extends Command {
 
     /**
      * Generates a command execution success message based on whether
-     * the tag is added to or removed from
-     * {@code studentToTag}.
+     * the tag is added to or removed from {@code studentToTag}.
      */
     private String generateSuccessMessage(Student studentToTag) {
         String message = !tags.isEmpty() ? MESSAGE_REPLACE_ALL_TAG_SUCCESS : MESSAGE_DELETE_ALL_TAG_SUCCESS;

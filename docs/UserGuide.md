@@ -120,18 +120,17 @@ Examples:
 
 Tags the existing student in the address book.
 
-Format: `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
+Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
 * Tags the student with the specified `STUDENT_NUMBER`.
-* When editing tags without `/add` or `/delete`, the existing tags of the student will be removed.
-* You can remove all the student’s tags by typing without `/add` and `/delete`
-  and `t/` without specifying any tags after it.
+* When editing tags without `/add` or `/delete`, the existing tags of the student will be overwritten.
+* You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-* `tag A1234567N t/smart t/shy t/funny` replace all tags of the specified student with smart, shy and funny.
-* `tag A1234567N /add t/Java` adds the Java tag to specified student.
-* `tag A1234567N /delete t/shy` removes the shy tag from the specified student.
-* `tag A1234567N t/` clear all tags from the specified student.
+* `tag s/A1234567N t/smart t/shy t/funny` replace all tags of the specified student with smart, shy and funny.
+* `tag s/A1234567N /add t/Java` adds the Java tag to specified student.
+* `tag s/A1234567N /delete t/shy` removes the shy tag from the specified student.
+* `tag s/A1234567N t/` clear all tags from the specified student.
 
 ### Adding comment to a student : `comment`
 
@@ -196,14 +195,15 @@ Examples:
 
 Views the class details of a student that will be displayed on the right side of the application.
 
-Format: `view STUDENT_NUMBER`
+Format: `view s/STUDENT_NUMBER`
 
 * The STUDENT_NUMBER must be valid e.g `T*`.
 * The STUDENT_NUMBER must belong to a student in the address book.
 
 Example:
-* `view A0245234A`
-![result for 'view A0245234A'](images/ViewCommand.png)
+* `view s/A0245234A`
+![result for 'view s/A0245234A'](images/ViewCommand.png)
+
 ### Deleting a student : `delete`
 
 Deletes the specific student.
@@ -286,19 +286,19 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-| Action     | Format, Examples                                                                                                                                   |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                            |
-| **Comment**| `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.` |
-| **Delete** | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                            |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                  |
-| **Tag**    | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                            |
-| **Lookup** | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                  |
-| **Mark**   | `mark TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark 1 s/A0245234A`                                                                              |
-| **View**   | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                   |
-| **List**   | `list`                                                                                                                                             |
-| **Help**   | `help`                                                                                                                                             |
-| **Load**   | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                     |
-| **Config** | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                        |
+| Action      | Format, Examples                                                                                                                                   |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague` |
+| **Clear**   | `clear`                                                                                                                                            |
+| **Comment** | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                           |
+| **Delete**  | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                            |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                  |
+| **Tag**     | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                        |
+| **Lookup**  | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                  |
+| **Mark**    | `mark TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark 1 s/A0245234A`                                                                              |
+| **View**    | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                                               |
+| **List**    | `list`                                                                                                                                             |
+| **Help**    | `help`                                                                                                                                             |
+| **Load**    | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                     |
+| **Config**  | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                        |
 
