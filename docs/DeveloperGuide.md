@@ -260,6 +260,53 @@ The following sequence diagram shows how the add patient works:
     - Pros: Fewer files to be changed.
     - Cons: Harder to implement, since we will have more checkings to be done when adding the person.
 
+### Edit Patient/Doctor Feature
+
+This feature allows users to edit patients or doctors to the address book. The person must already
+exist in the address book. There
+are many fields for each patient/doctor to be edited which can be found in the user guide.
+
+#### Implementation
+
+Implementation of editing patients is similar to the original editCommand. The editing mechanism is facilitated by the
+AddressBook in the model.
+
+Given below is an example usage scenario and how the edit patient/doctor mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial
+address book state.
+
+Step 2. The user types `edit T0123456H` (or the relevant ic number) as command, with the appropriate arguments for the person, for
+example, `edit T0123456H n/John Doe g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`.
+
+Step 3. The `AddressBookParser` parses the arguments and determine the required command parser based on the first word
+of the arguments.
+
+Step 4. Then `editCommandParser` parses the remaining arguments and creates an `EditCommand` with the
+details of the patient given.
+
+:information_source: **Note:** If the details of the person added does not match the correct format for any fields,
+there will be an error telling user that the attributes are in the wrong format. Also, if there are no edited fields,
+i.e. no attributes provided or the edited attributes are the same as the original attributes, there will be an error.
+Lastly, if the nric cannot be found within the list of doctors and patients, there will be an error.
+
+Step 5. The `EditCommand` then gets executed and calls the Model#setPerson() with the original person and the new
+edited person. The original person will be replaced by the edited person.
+
+Step 6. The UI should display using the updated list of patients and the newly edited person should reflect the changes
+in the GUI.
+
+### Design Considerations
+
+1. Option 1 (Current Choice): Use a single EditCommand for both doctors and patients
+    - Pros: Easier for the user. Can use a single command to edit both. 
+    - Cons: The program has to check whether the person is a doctor or patient. This uses the assumption that 
+      a person cannot be both. The program might be slightly slower since it has to check through both lists.
+2. Option 2: Use 2 commands edit-patient and edit-doctor
+    - Pros: The program might be faster. If you call edit-doctor you only need to search through a few doctors
+      rather than all the patients as well.
+    - Cons: Harder to implement, and there's a need to create new classes and add repeated code.
+
 ### Delete Patient/Doctor Feature
 
 This feature allows users to delete the desired patient or doctor based on the 
@@ -468,11 +515,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hospital Staff                    | add a new doctor                    | include doctors assigned to the patients                               |
 | `* * *`  | Hospital Staff                    | delete a patient/doctor             | remove entries that I no longer need                                   |
 | `* * *`  | Hospital Staff                    | add an appointment                  | tell which patient/doctor is coming at what time                       |
-| `* * *`  | Hospital Staff                    | update patient details              | information remains accurate                                           |
+| `* * *`  | Hospital Staff                    | update patient's details            | information remains accurate                                           |
+| `* * *`  | Hospital Staff                    | update doctor's details             | information remains accurate                                           |   
 | `* * *`  | Hospital Staff                    | find a patient/doctor by NRIC       | locate details of persons without having to go through the entire list |
 | `* * *`  | Hospital Staff                    | reassign patients to doctors/nurses | account for changes in the people treating the patients                |
 | `* *`    | Hospital Staff                    | hide private contact details        | minimize chance of someone else seeing them by accident                |
 | `*`      | Hospital Staff with many contacts | sort persons by name                | locate a person easily                                                 |
+| `*`      | Hospital Staff                    | undo previous command               | prevent mistakes                                                       |
+| `*`      | Hospital staff                    | redo previously undid command       | prevent mistakes                                                       |
 
 *{More to be added}*
 
@@ -539,7 +589,34 @@ otherwise)
 
       Use case ends.
 
+**Use case: UC4 - Edit a person**
 
+**MSS**
+
+1. User requests to list persons
+2. Medilink Contacts shows a list of persons
+3. User requests to edit a specific person in the list by specifying edited details about the person
+4. Medilink Contacts edits the person
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given NRIC is does not exist in the database.
+
+    * 3a1. Medilink Contacts shows an error message.
+
+      Use case resumes at step 2.
+  
+* 4a. There are no edited fields, i.e. either no fields provided or new fields are the same as the previous ones
+  
+    * 4a1. Medilink Contacts shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
