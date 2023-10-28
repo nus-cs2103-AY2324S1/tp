@@ -1,6 +1,7 @@
 package swe.context.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static swe.context.logic.parser.CliSyntax.PREFIX_ALTERNATE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NAME;
 import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -29,14 +30,16 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_NOTE + "NOTE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_ALTERNATE + "ALTERNATE CONTACTS]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_NOTE + "CS2103 Prof. "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owes money";
+            + PREFIX_TAG + "owes money"
+            + PREFIX_ALTERNATE + "Example@JohnDoe";
 
     private final Contact toAdd;
     /**
