@@ -20,15 +20,15 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `jabpro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-4/tp/releases).
+2. Download the latest `jabpro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
+3. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>  
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>  
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>  
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it.<br>
+5. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
 
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: adds an applicant with the specified contact details
@@ -45,8 +45,7 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 
     * `github Alex Yeoh`: Redirects the user to the Github account of the candidate
 
-
-1. Refer to the [Features](#features) below for details of each command.
+Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -61,6 +60,9 @@ JobApplicationsBook Pro (JABPro) is a **desktop app for hiring managers of compa
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* When using parentheses ( ) with items separated by the slash symbol /, at least one item must be included. <br>
+  e.g in the command `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -91,7 +93,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of tags (including 0)!
 </box>
 
 Examples:
@@ -100,21 +102,21 @@ Examples:
 
 ### Adding a remark to a person: `remark`
 
-Edits a remark to an existing person to the address book
+Edits a remark to an existing person to the address book.
 
 Format: `remark INDEX r/REMARK`
 
 * Edits the remark for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark
-* You can empty out a remark by inputting an empty string
+* The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark.
+* You can empty out a remark by inputting an empty string.
 
 Examples:
-*  `remark 1 r/Great attitude, hardworking` Edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`
+*  `remark 1 r/Great attitude, hardworking` Edits the remark of the 1st person on the list to have a remark `Great attitude, hardworking`.
 *  `remark 1 r/` Empties the remark of the 1st person.
 
 ### Viewing a person's details: `view`
 
-Creates a complete view for details of a person in the address book
+Creates a complete view for details of a person in the address book.
 
 Format: `view INDEX`
 
@@ -128,27 +130,33 @@ Examples:
 <box type="tip" seamless>
 
 **Tip:** Other operations that affect user's data will trigger a refresh of the view.
-These include `add`, `edit`, `set`, `remark`, `addL`, `addG` 
+These include `add`, `edit`, `set`, `remark`, `addL`, `addG`. 
 
 
 </box>
 
 
-### Adding Github/LinkedIn username for a user: 'add linkedin/github'
+### Adding Github/LinkedIn username for a user: `addG` or `addL`
 
-Adds the username for their social profile [LinkedIn/Github] to the existing contact details of users
+Adds the username for their social profile [LinkedIn/Github] to the existing contact details of users.
 
 Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
+
+* User is expected to enter a valid username for the specified social profile, and an account must exist
+* The username gets added as an attribute to the existing details of a candidate
 
 Examples:
 * `addG 2 u/MadLamprey`
 * `addL 4 u/aditya-misra`
 
-### Opening user LinkedIn or GitHub account: 'linkedin' or 'github'
+### Opening user LinkedIn or GitHub account: `linkedin` or `github`
 
-Redirect user to candidate's LinkedIn or Github account
+Redirect user to candidate's LinkedIn or Github account.
 
 Format: `linkedin INDEX` or `github INDEX`
+
+* Browser window opens, showing the profile
+* If the user has not provided a valid username for the corresponding social profile, an appropriate message is displayed on the interface of the social profile (JABPro does not perform error handling for this case).
 
 Examples:
 * `linkedin 1`
@@ -190,7 +198,9 @@ Examples:
 
 ### Search job applicants by category: `search`
 
-Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status
+Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
+
+Format: `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`
 
 #### Search job applicants by name
 
@@ -200,10 +210,10 @@ Format: `search n/KEYWORD [MORE KEYWORDS]`
 
 * Keywords are case-insensitive: `search n/Josh` and `search n/josh` return the same result.
 * Keyword has to be a string that does not contain any non-alpha numeric characters.
-* The order of the keywords does not matter. e.g. `Josh Peck` will match `Peck Josh`
-* Only full words will be matched e.g. `Jo` will not match `Josh`
+* The order of the keywords does not matter. e.g. `Josh Peck` will match `Peck Josh`.
+* Only full words will be matched e.g. `Jo` will not match `Josh`.
 * Applicants matching at least one keyword will be returned (i.e. `OR` search)
-  e.g. `Josh Peck` will return `Josh Gad`, `Josh Job`
+  e.g. `Josh Peck` will return `Josh Gad`, `Josh Job`.
 
 Examples:
 * `search n/John` returns `john` and `John Doe`
@@ -211,36 +221,52 @@ Examples:
 
 #### Search job applicants by status
 
-Finds job applicants whose status match any of the given keywords
+Finds job applicants whose status match any of the given keywords.
 
-Format: `search s/KEYWORD [MORE KEYWORDS]`
+Format: `search st/KEYWORD [MORE KEYWORDS]`
 
-* Keywords can only be from the following list: `Pending`, `Interviewed`, `Rejected`, `Offered`
-  e.g. `search s/interviewing` will give an error.
-* Keywords are case-insensitive: `search s/interviewd` and `search s/INTERVIEWED` return the same result.
+* Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
+  e.g. `search st/interviewing` will give an error.
+* Keywords are case-insensitive: `search st/interviewed` and `search st/INTERVIEWED` return the same result.
 
 Example:
-* `search s/interviewed`
+* `search st/interviewed`
+
+#### Search job applicants by tag
+
+Finds job applicants whose tag(s) match any of the given tag keywords
+
+Format: `search t/KEYWORD [MORE KEYWORDS]`
+
+* Keywords are case-insensitive: `search t/hardworking' and `search t/HARDWORKING` return the same result.
+
+Example:
+* `search t/hardworking`
 
 #### Notes for advanced users:
-* You can combine the name and status search categories (e.g. `search n/Alex s/offered`) in a single search command.
+* You can combine the search categories (e.g. `search n/Alex st/offered t/software engineer`) in a single search command.
 * Each search category can be used at most once in a single search command
-  e.g. `search n/Alex n/Adam s/rejected` is not allowed.
+  e.g. `search n/Alex n/Adam st/rejected` is not allowed.
 
 Example:
-* `search n/Alex Bernice s/interviewed rejected` will output applicants whose:
+* `search n/Alex Bernice st/interviewed rejected t/analyst` will output applicants whose:
     * names contain either Alex `or` Bernice
     * `and` status is either interviewed `or` rejected.
+    * `and` has a tag `analyst`
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified job applicants from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX` or `delete t/TAG`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Delete by index
+  * Deletes the person at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed person list.
+  * The index **must be a positive integer** 1, 2, 3, …​
+* Delete by tags
+  * Deletes all persons who have the specified TAG or a combination of tags. 
+  * The tag(s) must be prefixed with t/.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -261,11 +287,40 @@ Examples:
 * `list` followed by `set 2 Interviewed` sets the 2nd person in the address book to "Interviewed".
 * `find Betsy` followed by `set 1 Interviewed` sets the status of 1st person in the results of the `find` command.
 
+### Adding an Event: `event`
+
+Adds an event to JABPro.
+
+Format: `event INDEX d/DESCRIPTION bt/BEGIN_TIME et/END_TIME`
+
+* `BEGIN_TIME` and `END_TIME` must be in the format `yyyy-MM-dd HH:mm`
+* Event gets added to the current list of events, and also gets written to the `eventbook.json` file
+
+Example:
+* `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds an event to the list, and stores the name of the person the event is associated with, the description, start time and end time, in a JSON file.
+
+### Viewing events: `schedule`
+
+Displays all events that have been added to JABPro.
+
+Format: `schedule`
+
+* Opens the `Events` window, which can also be accessed by clicking on `Events > Event` in the menu bar
+
+Example:
+* First, entering `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds the event, and entering `schedule` displays this event in a separate window, titled `Events`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Exporting all entries : `export`
+
+Exports the entries into a .csv file
+
+Format: `export`
 
 ### Exiting the program : `exit`
 
@@ -308,19 +363,23 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action                     | Format, Examples
----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**                    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Remark**                 | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`
-**View**                   | `view INDEX` <br> e.g., `view 1`
-**Add Github/LinkedIn**    | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`
-**Open Github/LinkedIn**   | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`
-**Clear**                  | `clear`
-**Delete**                 | `delete INDEX`<br> e.g., `delete 3`
-**Set**                    | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`
-**Edit**                   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**                   | `list s/ATTRIBUTE` <br> e.g. `list s/name`
-**Help**                   | `help`
+
+ Action                   | Format, Examples                                                                                                                                               
+--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Remark**               | `remark r/REMARK` <br> e.g., `remark 1 r/Great attitude, hardworking`                                                                                          
+ **View**                 | `view INDEX` <br> e.g., `view 1`                                                                                                                               
+ **Add Github/LinkedIn**  | `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME` e.g., `addL 1 u/alex-yeoh`, `addG 2 u/bernicesanders123`                                                    
+ **Open Github/LinkedIn** | `linkedin INDEX` or `github INDEX` e.g., `linkedin 1`, `github 2`                                                                                              
+ **Clear**                | `clear`                                                                                                                                                        
+ **Delete**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                            
+ **Set**                  | `set INDEX STATUS`<br> e.g., `set 2 Interviewed`                                                                                                               
+ **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                    
+ **Search**               | `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])` <br> e.g., `search n/alex`
+ **List**                 | `list s/ATTRIBUTE` <br> e.g. `list s/name`    `hello`                                                                                                                 
+ **Export**               | `export`                                                                                                                                                       
+ **Help**                 | `help`                                                                                                                                                         
+
+
 
 

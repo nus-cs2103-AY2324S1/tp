@@ -5,11 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +22,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.EventBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -28,8 +34,8 @@ import seedu.address.model.person.StatusContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -77,14 +83,21 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleNameKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz Elle Kunz");
-        StatusContainsKeywordsPredicate statusPredicate = prepareStatusPredicate("Preliminary");
-        FindCommand command = new FindCommand(Arrays.asList(namePredicate, statusPredicate));
-        expectedModel.updateFilteredPersonList(Arrays.asList(namePredicate, statusPredicate));
+        FindCommand command = new FindCommand(preparePredicateList("Kurz Elle Kunz", ""));
+        expectedModel.updateFilteredPersonList(preparePredicateList("Kurz Elle Kunz", ""));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleStatusKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
+        FindCommand command = new FindCommand(preparePredicateList("", "preliminary"));
+        expectedModel.updateFilteredPersonList(preparePredicateList("", "preliminary"));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
 
@@ -110,5 +123,18 @@ public class FindCommandTest {
      */
     private StatusContainsKeywordsPredicate prepareStatusPredicate(String userInput) {
         return new StatusContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    private List<Predicate<Person>> preparePredicateList(String nameKeywords, String statusKeywords) {
+        List<Predicate<Person>> predicatesList = new ArrayList<>() {{
+                if (!nameKeywords.isEmpty()) {
+                    add(prepareNamePredicate(nameKeywords));
+                }
+                if (!statusKeywords.isEmpty()) {
+                    add(prepareStatusPredicate(statusKeywords));
+                }
+            }};
+
+        return predicatesList;
     }
 }
