@@ -158,4 +158,26 @@ public class EditCommandTest {
         assertEquals(editedPerson.getMedicalHistories(), personToEdit.getMedicalHistories());
         assertEquals(editedPerson.getTags(), personToEdit.getTags());
     }
+
+    @Test
+    public void undo_successfulEditCommand() throws CommandException {
+        Model model = new ModelManager();
+        Person originalPerson = new PersonBuilder().build();
+        Person editedPerson = new PersonBuilder().withName(VALID_NAME_AMY).build();
+
+        model.addPerson(originalPerson);
+
+        EditCommand editCommand = new EditCommand(originalPerson.getName(), null, new EditCommand.EditPersonDescriptor());
+        editCommand.execute(model);
+
+        Person personAfterEdit = model.getFilteredPersonList().get(0);
+        assertEquals(editedPerson, personAfterEdit);
+
+        // Undo the edit
+        UndoableCommand undoCommand = model.popCommandFromHistory();
+        undoCommand.undo(model);
+
+        Person personAfterUndo = model.getFilteredPersonList().get(0);
+        assertEquals(originalPerson, personAfterUndo);
+    }
 }
