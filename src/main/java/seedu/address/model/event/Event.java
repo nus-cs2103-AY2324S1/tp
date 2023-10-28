@@ -75,6 +75,18 @@ public class Event {
     }
 
     /**
+     * Checks if this event overlaps with another event period
+     *
+     * @param period The other event period.
+     * @return True if there is an overlap, false otherwise.
+     */
+    public boolean isPeriodConflicting(EventPeriod period) {
+        requireNonNull(period);
+
+        return eventPeriod.isOverlapping(period);
+    }
+
+    /**
      * Checks if this event conflicts with another event.
      *
      * @param other The other event to check for conflicts with.
@@ -83,7 +95,7 @@ public class Event {
     public boolean isConflicting(Event other) {
         requireNonNull(other);
 
-        return eventPeriod.isOverlapping(other.eventPeriod);
+        return isPeriodConflicting(other.eventPeriod);
     }
 
     /**
@@ -160,6 +172,13 @@ public class Event {
      */
     public boolean hasParent() {
         return parentEvent.isPresent();
+    }
+
+    public LocalDateTime getEndDateTime() {
+        if (hasParent()) {
+            return parentEvent.get().getEndDateTime();
+        }
+        return eventPeriod.getEnd();
     }
 
     /**

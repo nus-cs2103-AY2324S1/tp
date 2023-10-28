@@ -2,6 +2,7 @@ package seedu.address.model.event;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.NoSuchElementException;
@@ -122,6 +123,22 @@ public class AllDaysEventListManager {
             throw new EventNotFoundException();
         }
     }
+
+    /**
+     * Looks for events within a specified time and returns the list of events.
+     *
+     * @param range the {@code EventPeriod} describing the time range to check.
+     * @return A list of events or an empty list if no events are within the range.
+     */
+    public List<Event> eventsInRange(EventPeriod range) {
+        List<LocalDate> days = range.getDates();
+        return days.stream().map(LocalDate::toString)
+                .flatMap(x -> dayToEventListMap.get(x).eventsInRange(range).stream())
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
+
     /**
      * Checks if the manager is empty.
      *
