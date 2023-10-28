@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,6 +20,11 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    /**
+     * Stack to maintain the history of executed undoable commands.
+     */
+    private final Stack<UndoableCommand> commandHistory = new Stack<>();
+
 
     private final AddressBook addressBook;
     private final LogBook logBook;
@@ -114,6 +121,34 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+
+    /**
+     * Adds an {@code UndoableCommand} to the command history stack.
+     *
+     * @param command The undoable command to be added to the command history stack.
+     */
+    public void addToHistory(UndoableCommand command) {
+        commandHistory.push(command);
+    }
+
+    /**
+     * Checks if the command history stack is empty.
+     *
+     * @return {@code true} if the command history stack is empty, {@code false} otherwise.
+     */
+    public boolean isCommandHistoryEmpty() {
+        return commandHistory.isEmpty();
+    }
+
+    /**
+     * Pops an {@code UndoableCommand} from the command history stack.
+     *
+     * @return The {@code UndoableCommand} popped from the command history stack.
+     */
+    public UndoableCommand popCommandFromHistory() {
+        return commandHistory.pop();
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
