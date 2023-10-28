@@ -56,6 +56,7 @@ public class UniqueMusicianList implements Iterable<Musician> {
         requireNonNull(index);
         return internalList.get(index.getZeroBased());
     }
+
     /**
      * Replaces the musician {@code target} in the list with {@code editedMusician}.
      * {@code target} must exist in the list.

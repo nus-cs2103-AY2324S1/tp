@@ -83,10 +83,9 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MUSICIAN);
         }
 
+        // update musician list to show all, update band list to show all, update bands musicians
         model.setMusician(musicianToEdit, editedMusician);
 
-        model.updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
-        model.updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
         return new CommandResult(String.format(MESSAGE_EDIT_MUSICIAN_SUCCESS, Messages.format(editedMusician)));
     }
 

@@ -58,29 +58,23 @@ public class UniqueBandList implements Iterable<Band> {
         requireNonNull(index);
         return internalList.get(index.getZeroBased());
     }
+
     /**
-     * Replaces the band {@code target} in the list with {@code editedMusician}.
-     * {@code target} must exist in the list.
-     * The band identity of {@code editedBand} must not be the same as another existing band in the list.
+     * Replaces musician {@code target} in every band she is in with {@code editedMusician}.
      */
-    public void setBand(Band target, Band editedBand) {
-        requireAllNonNull(target, editedBand);
+    public void updateMusicianInAllBands(Musician target, Musician editedMusician) {
+        requireNonNull(target);
 
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new BandNotFoundException();
+        for (int i = 0; i < internalList.size(); i++) {
+            internalList.get(i).setMusician(target, editedMusician);
         }
-
-        if (!target.isSameBand(editedBand) && contains(editedBand)) {
-            throw new DuplicateBandException();
-        }
-
-        internalList.set(index, editedBand);
     }
+
     public void setBand(UniqueBandList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
+
     /**
      * Replaces the contents of this list with {@code musicians}.
      * {@code musicians} must not contain duplicate musicians.
