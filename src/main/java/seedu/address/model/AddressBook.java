@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -158,6 +159,16 @@ public class AddressBook implements ReadOnlyAddressBook {
             }
         }
         return null;
+    }
+
+    /**
+     * Sorts the interview list of the address book.
+     * The interviews list will be sorted based on the comparator
+     */
+    public void sortInterview(Comparator<Interview> comparator) {
+        requireNonNull(comparator);
+
+        interviews.sort(comparator);
     }
 
     //// util methods
