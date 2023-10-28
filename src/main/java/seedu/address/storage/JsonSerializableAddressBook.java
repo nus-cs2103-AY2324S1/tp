@@ -51,7 +51,7 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         ObservableList<Tag> internalTagList = source.getTagList();
         for (Tag tag : internalTagList) {
-            Map map = new HashMap<>();
+            Map<String, String> map = new HashMap<>();
             map.put("tagCategory", tag.tagCategory);
             map.put("tagName", tag.tagName);
             this.tagList.add(map);
