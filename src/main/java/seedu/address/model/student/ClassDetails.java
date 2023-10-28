@@ -34,7 +34,7 @@ public class ClassDetails {
     private static int tutorialCount = DEFAULT_COUNT;
     private static int assignmentCount = DEFAULT_COUNT;
 
-    public final String classDetails;
+    public final String classNumber;
     public final AttendanceTracker attendanceTracker;
     public final AssignmentTracker assignmentTracker;
     public final ClassParticipationTracker classParticipationTracker;
@@ -42,13 +42,13 @@ public class ClassDetails {
     /**
      * Constructs an {@code ClassDetails}.
      *
-     * @param classDetails A valid Class Number
+     * @param classNumber A valid Class Number
      *
      */
-    public ClassDetails(String classDetails) {
-        requireNonNull(classDetails);
-        checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
-        this.classDetails = classDetails;
+    public ClassDetails(String classNumber) {
+        requireNonNull(classNumber);
+        checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);
+        this.classNumber = classNumber;
         attendanceTracker = new AttendanceTracker(tutorialCount);
         classParticipationTracker = new ClassParticipationTracker(tutorialCount);
         assignmentTracker = new AssignmentTracker(assignmentCount);
@@ -58,14 +58,14 @@ public class ClassDetails {
      * Constructs an {@code ClassDetails}, with the given class number, attendance tracker,
      * assignment tracker and class participation tracker.
      */
-    public ClassDetails(String classDetails, AttendanceTracker attendanceTracker,
+    public ClassDetails(String classNumber, AttendanceTracker attendanceTracker,
                         AssignmentTracker assignmentTracker, ClassParticipationTracker classParticipationTracker) {
-        requireNonNull(classDetails);
+        requireNonNull(classNumber);
         requireNonNull(attendanceTracker);
         requireNonNull(assignmentTracker);
         requireNonNull(classParticipationTracker);
-        checkArgument(isValidClassDetails(classDetails), MESSAGE_CONSTRAINTS);
-        this.classDetails = classDetails;
+        checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);
+        this.classNumber = classNumber;
         this.attendanceTracker = attendanceTracker;
         this.classParticipationTracker = classParticipationTracker;
         this.assignmentTracker = assignmentTracker;
@@ -129,9 +129,14 @@ public class ClassDetails {
         return assignmentTracker.getPercentage();
     }
 
+    public ClassDetails setClassNumber(String classNumber) {
+        return new ClassDetails(classNumber, this.attendanceTracker,
+                this.assignmentTracker, this.classParticipationTracker);
+    }
+
     @Override
     public String toString() {
-        return classDetails;
+        return classNumber;
     }
 
     @Override
@@ -146,7 +151,7 @@ public class ClassDetails {
         }
 
         ClassDetails otherAddress = (ClassDetails) other;
-        return classDetails.equals(otherAddress.classDetails)
+        return classNumber.equals(otherAddress.classNumber)
                 && attendanceTracker.equals(otherAddress.attendanceTracker)
                 && classParticipationTracker.equals(otherAddress.classParticipationTracker)
                 && assignmentTracker.equals(otherAddress.assignmentTracker);
@@ -154,7 +159,7 @@ public class ClassDetails {
 
     @Override
     public int hashCode() {
-        return Objects.hash(classDetails, attendanceTracker, classParticipationTracker, assignmentTracker);
+        return Objects.hash(classNumber, attendanceTracker, classParticipationTracker, assignmentTracker);
     }
 
     /**
@@ -215,7 +220,7 @@ public class ClassDetails {
     }
 
     public JsonAdaptedClassDetails getJsonAdaptedClassDetails() {
-        return new JsonAdaptedClassDetails(classDetails,
+        return new JsonAdaptedClassDetails(classNumber,
                 attendanceTracker.getJson(),
                 assignmentTracker.getJson(),
                 classParticipationTracker.getJson());

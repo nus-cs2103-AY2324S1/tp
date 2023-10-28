@@ -101,10 +101,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         StudentNumber updatedStudentNumber = editStudentDescriptor.getStudentNumber()
                         .orElse(studentToEdit.getStudentNumber());
-        ClassDetails updatedClassDetails = editStudentDescriptor.getClassDetails()
-                        .orElse(studentToEdit.getClassDetails());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
         Comment updatedComment = editStudentDescriptor.getComment().orElse(studentToEdit.getComment());
+
+        ClassDetails updatedClassDetails = studentToEdit.getClassDetails();
+        if (editStudentDescriptor.getClassNumber().isPresent()) {
+            updatedClassDetails = updatedClassDetails.setClassNumber(editStudentDescriptor.getClassNumber().get());
+        }
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedStudentNumber,
                 updatedClassDetails, updatedTags, updatedComment);
@@ -143,7 +146,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private StudentNumber studentNumber;
-        private ClassDetails classDetails;
+        private String classNumber;
         private Set<Tag> tags = new HashSet<>();
         private Comment comment;
 
@@ -158,7 +161,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setStudentNumber(toCopy.studentNumber);
-            setClassDetails(toCopy.classDetails);
+            setClassNumber(toCopy.classNumber);
             setTags(toCopy.tags);
             setComment(toCopy.comment);
         }
@@ -167,7 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, studentNumber, classDetails);
+            return CollectionUtil.isAnyNonNull(name, phone, email, studentNumber, classNumber);
         }
 
         public void setName(Name name) {
@@ -202,12 +205,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(studentNumber);
         }
 
-        public void setClassDetails(ClassDetails classDetails) {
-            this.classDetails = classDetails;
+        public void setClassNumber(String classNumber) {
+            this.classNumber = classNumber;
         }
 
-        public Optional<ClassDetails> getClassDetails() {
-            return Optional.ofNullable(classDetails);
+        public Optional<String> getClassNumber() {
+            return Optional.ofNullable(classNumber);
         }
 
         /**
@@ -250,7 +253,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditStudentDescriptor.phone)
                     && Objects.equals(email, otherEditStudentDescriptor.email)
                     && Objects.equals(studentNumber, otherEditStudentDescriptor.studentNumber)
-                    && Objects.equals(classDetails, otherEditStudentDescriptor.classDetails)
+                    && Objects.equals(classNumber, otherEditStudentDescriptor.classNumber)
                     && Objects.equals(tags, otherEditStudentDescriptor.tags)
                     && Objects.equals(comment, otherEditStudentDescriptor.comment);
         }
@@ -262,7 +265,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("student number", studentNumber)
-                    .add("class number", classDetails)
+                    .add("class number", classNumber)
                     .add("tags", tags)
                     .add("comment", comment)
                     .toString();

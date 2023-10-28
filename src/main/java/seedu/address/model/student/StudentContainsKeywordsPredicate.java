@@ -45,7 +45,7 @@ public class StudentContainsKeywordsPredicate implements Predicate<Student> {
     public boolean test(Student student) {
         boolean isClassDetailsMatch = classDetails.map(Collection::stream)
                 .map(stream -> stream.anyMatch(classDetail -> StringUtil
-                        .containsWordIgnoreCase(student.getClassDetails().classDetails, classDetail)))
+                        .containsWordIgnoreCase(student.getClassDetails().classNumber, classDetail)))
                 .orElse(true);
 
         boolean isEmailMatch = emails.map(Collection::stream)
