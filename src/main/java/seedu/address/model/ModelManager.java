@@ -25,7 +25,6 @@ public class ModelManager implements Model {
      */
     private final Stack<UndoableCommand> commandHistory = new Stack<>();
 
-
     private final AddressBook addressBook;
     private final LogBook logBook;
     private final UserPrefs userPrefs;

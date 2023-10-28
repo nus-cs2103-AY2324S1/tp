@@ -56,6 +56,15 @@ public class UndoCommandTest {
         assertThrows(CommandException.class, () -> undoCommand.execute(model));
     }
 
+    @Test
+    public void execute_undoMoreCommandsInEmptyStack_failure() {
+        Model model = new ModelManager();
+        UndoableCommandStub stubUndoableCommand = new UndoableCommandStub();
+
+        UndoCommand undoCommand = new UndoCommand(3);
+        assertThrows(CommandException.class, () -> undoCommand.execute(model));
+    }
+
     // Define a stub UndoableCommand class for testing purposes
     static class UndoableCommandStub extends UndoableCommand {
         @Override
