@@ -200,8 +200,19 @@ public class ApplicantCard extends UiPart<Region> {
         ratingArc.setType(ArcType.ROUND);
 
         stackedArcs.getChildren().add(ratingArc);
-
-
         overallRating.getChildren().addAll(stackedArcs, innerCircle, scoreLabel);
     }
+
+    public String getName() {
+        return name.getText();
+    }
+
+    public String getId() {
+        return id.getText();
+    }
+
+    public String getStatus() {
+        return status.getText();
+    }
+
 }
