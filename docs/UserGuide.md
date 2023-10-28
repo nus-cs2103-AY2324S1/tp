@@ -66,23 +66,23 @@ Adds a new member to the members list. Tag field is optional.
 
 #### Usage:
 
-`addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
-
 `addMember /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
+
+`addm /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
 #### Acceptable values for parameters:
 
-- memberName: Only alphabetical characters, @, () are allowed
-- phoneNumber: Only numbers are allowed
-- email: Must follow the format of xyz@abc.wsd
-- telegramHandle: Only alphanumeric characters and underscore are allowed
-- tag: Only alphanumeric characters are allowed
+- `memberName`: Only alphabetical characters, @, () are allowed
+- `phoneNumber`: Only numbers are allowed
+- `email`: Must follow the format of xyz@abc.wsd
+- `telegramHandle`: Only alphanumeric characters and underscore are allowed
+- `tag`: Only alphanumeric characters are allowed
 
 #### Example of usage:
 
-`addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`
-
 `addMember /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`
+
+`addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia`
 
 #### Expected Outcome:
 
@@ -126,19 +126,19 @@ The member at the specified index will be deleted from the members list.
 
 #### Usage:
 
-`delm {index}`
-
 `deleteMember {index}`
+
+`delm {index}`
 
 #### Acceptable values for parameters:
 
-- index: Only numbers are allowed, starting from 1
+- `index`: Only numbers are allowed, starting from 1
 
 #### Example of usage:
 
-`delm 1`
-
 `deleteMember 1`
+
+`delm 1`
 
 #### Expected Outcome:
 
@@ -165,24 +165,24 @@ fields have to be specified.
 
 #### Usage:
 
-`editm {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
-
 `editMember {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
+
+`editm {index} /name {memberName} /phone {phoneNumber} /email {email} /tele {telegramHandle} /tag {tag}`
 
 #### Acceptable values for parameters:
 
-- index: Only numbers are allowed, starting from 1
-- memberName: Only alphabetical characters, @, () are allowed
-- phoneNumber: Only numbers are allowed
-- email: Must follow the format of xyz@abc.wsd
-- telegramHandle: Only alphanumeric characters and underscore are allowed
-- tag: Only alphanumeric characters are allowed
+- `index`: Only numbers are allowed, starting from 1
+- `memberName`: Only alphabetical characters, @, () are allowed
+- `phoneNumber`: Only numbers are allowed
+- `email`: Must follow the format of xyz@abc.wsd
+- `telegramHandle`: Only alphanumeric characters and underscore are allowed
+- `tag`: Only alphanumeric characters are allowed
 
 #### Example of usage:
 
-`editm 1 /name Aliciaa /phone 12345678`
-
 `editMember 1 /name Aliciaa /phone 12345678`
+
+`editm 1 /name Aliciaa /phone 12345678`
 
 #### Expected Outcome:
 
@@ -221,19 +221,19 @@ separated by a spacing between 2 keywords.
 
 #### Usage:
 
-`findm {keyword(s)}`
-
 `findMember {keyword(s)}`
+
+`findm {keyword(s)}`
 
 #### Acceptable values for parameters:
 
-- keyword(s): All alphanumerical characters are allowed
+- `keyword(s)`: All alphanumerical characters are allowed
 
 #### Example of usage:
 
-`findm Alicia`
-
 `findMember Alicia`
+
+`findm Alicia`
 
 #### Expected Outcome:
 
@@ -253,9 +253,9 @@ Generates a list of all existing member(s) in the members list.
 
 #### Usage:
 
-`viewm`
-
 `viewMembers`
+
+`viewm`
 
 #### Expected Outcome:
 
@@ -269,20 +269,20 @@ Adds a new applicant to the applicants list.
 
 #### Usage:
 
-`adda /name {applicantName} /phone {phoneNumber}`
-
 `addApplicant /name {applicantName} /phone {phoneNumber}`
+
+`adda /name {applicantName} /phone {phoneNumber}`
 
 #### Acceptable values for parameters:
 
-- applicantName: Only alphabetical characters, @, () are allowed
-- phoneNumber: Only numbers are allowed
+- `applicantName`: Only alphabetical characters, @, () are allowed
+- `phoneNumber`: Only numbers are allowed
 
 #### Example of usage:
 
-`adda /name Alicia /phone 92345678`
-
 `addApplicant /name Alicia /phone 92345678`
+
+`adda /name Alicia /phone 92345678`
 
 #### Expected Outcome:
 
@@ -314,19 +314,19 @@ The applicant at the specified index will be deleted from the applicants list.
 
 #### Usage:
 
-`dela {index}`
-
 `deleteApplicant {index}`
+
+`dela {index}`
 
 #### Acceptable values for parameters:
 
-- index: Only numbers are allowed, starting from 1
+- `index`: Only numbers are allowed, starting from 1
 
 #### Example of usage:
 
-`dela 1`
-
 `deleteApplicant 1`
+
+`dela 1`
 
 #### Expected Outcome:
 
@@ -355,21 +355,21 @@ fields have to be specified.
 
 #### Usage:
 
-`edita {index} /name {applicantName} /phone {phoneNumber}`
-
 `editApplicant {index} /name {applicantName} /phone {phoneNumber}`
+
+`edita {index} /name {applicantName} /phone {phoneNumber}`
 
 #### Acceptable values for parameters:
 
-- index: Only numbers are allowed, starting from 1
-- applicantName: Only alphabetical characters, @, () are allowed
-- phoneNumber: Only numbers are allowed
+- `index`: Only numbers are allowed, starting from 1
+- `applicantName`: Only alphabetical characters, @, () are allowed
+- `phoneNumber`: Only numbers are allowed
 
 #### Example of usage:
 
-`edita 1 /name Aliciaa /phone 12345678`
-
 `editApplicant 1 /name Aliciaa /phone 12345678`
+
+`edita 1 /name Aliciaa /phone 12345678`
 
 #### Expected Outcome:
 
@@ -396,19 +396,19 @@ be separated by a spacing between 2 keywords.
 
 #### Usage:
 
-`finda {keyword(s)}`
-
 `findApplicant {keyword(s)}`
+
+`finda {keyword(s)}`
 
 #### Acceptable values for parameters:
 
-- keyword(s): All alphanumerical characters are allowed
+- `keyword(s)`: All alphanumerical characters are allowed
 
 #### Example of usage:
 
-`finda Alicia`
-
 `findApplicant Alicia`
+
+`finda Alicia`
 
 #### Expected Outcome:
 
@@ -428,9 +428,9 @@ Generates a list of all existing applicant(s) in the applicants list.
 
 #### Usage:
 
-`viewa`
-
 `viewApplicants`
+
+`viewa`
 
 #### Expected Outcome:
 
