@@ -178,10 +178,6 @@ public class Person {
         return id;
     }
 
-    public void setAvatar(String path) {
-        this.avatar.setAvatar(path);
-    }
-
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

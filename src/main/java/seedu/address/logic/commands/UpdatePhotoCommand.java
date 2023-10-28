@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AVATAR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.scene.image.Image;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -41,7 +43,7 @@ public class UpdatePhotoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Photo updated";
 
     private final int zeroBasedIdx;
-    private final String path;
+    private String path;
 
     /**
      * Creates an UpdatePhotoCommand to replace the current photo
@@ -50,7 +52,7 @@ public class UpdatePhotoCommand extends Command {
      * @param idx one-based index of the contact to update photo
      * @param path String path to the photo to be used
      */
-    public UpdatePhotoCommand(int idx, String path) {
+    public UpdatePhotoCommand(int idx, String path)  {
         zeroBasedIdx = idx - 1;
         this.path = path;
     }
@@ -65,14 +67,19 @@ public class UpdatePhotoCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(zeroBasedIdx);
-        Person editedPerson = copyPerson(personToEdit);
 
-        model.setPerson(personToEdit, editedPerson);
+        try {
+            Person editedPerson = copyPerson(personToEdit);
+            model.setPerson(personToEdit, editedPerson);
+        } catch (FileNotFoundException e) {
+            throw new CommandException("Invalid file path provided.");
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    private Person copyPerson(Person personToEdit) {
+    private Person copyPerson(Person personToEdit) throws FileNotFoundException {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -85,11 +92,12 @@ public class UpdatePhotoCommand extends Command {
         Optional<Telegram> telegram = personToEdit.getTelegram();
         Set<Tag> updatedTags = personToEdit.getTags();
         Optional<Integer> id = personToEdit.getId();
+        Avatar avatar = new Avatar(new Image(this.getClass().getResourceAsStream(path)));
         List<Note> notes = personToEdit.getNotes();
         Balance balance = personToEdit.getBalance();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday,
-                linkedin, secondaryEmail, telegram, updatedTags, id, new Avatar(path), notes, balance);
+                linkedin, secondaryEmail, telegram, updatedTags, id, avatar, notes, balance);
     }
 }
 
