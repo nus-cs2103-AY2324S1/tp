@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.ui.PersonProfile;
 
 /**
  * Represents the result of a command execution.
@@ -24,6 +26,8 @@ public class CommandResult {
 
     private final Person personToView;
 
+    private final Index targetIndex;
+
     private final boolean viewExit;
 
     /**
@@ -35,12 +39,14 @@ public class CommandResult {
             boolean exit,
             boolean showView,
             Person personToView,
+            Index targetIndex,
             boolean viewExit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.showView = showView;
         this.personToView = personToView;
+        this.targetIndex = targetIndex;
         this.viewExit = viewExit;
     }
 
@@ -49,7 +55,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(requireNonNull(feedbackToUser), showHelp, exit, false, null, false);
+        this(requireNonNull(feedbackToUser), showHelp, exit, false, null, null, false);
     }
 
     /**
@@ -83,6 +89,9 @@ public class CommandResult {
     public Person getPersonToView() {
         return personToView;
     }
+
+    public Index getTargetIndex() {return targetIndex; }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

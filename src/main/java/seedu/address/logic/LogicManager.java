@@ -8,13 +8,10 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.commands.ViewExitCommand;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ViewModeParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -34,11 +31,11 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private Parser parser;
     private final AddressBookParser addressBookParser;
     private final ViewModeParser viewModeParser;
     private boolean isViewCommand = false;
     private boolean isViewExitCommand = false;
+    private boolean isEditFieldCommand = false;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -48,7 +45,6 @@ public class LogicManager implements Logic {
         this.storage = storage;
         addressBookParser = new AddressBookParser();
         viewModeParser = new ViewModeParser();
-        this.parser = addressBookParser;
     }
 
     @Override
@@ -57,20 +53,50 @@ public class LogicManager implements Logic {
         Command command;
         CommandResult commandResult;
 
-        command = parser.parseCommand(commandText);
+        command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        if (command instanceof ViewCommand) {
+        if (commandResult.isShowView()) {
             isViewCommand = true;
-            isViewExitCommand = false;
-            this.setParser(viewModeParser);
-        } else if (command instanceof ViewExitCommand) {
+        } else {
+            isViewCommand = false;
+        }
+        isViewExitCommand = false;
+
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (AccessDeniedException e) {
+            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
+
+        return commandResult;
+    }
+
+    @Override
+    public CommandResult executeInView(String commandText, Person newPerson, Index targetIndex) throws CommandException, ParseException {
+        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        Command command;
+        CommandResult commandResult;
+
+        command = viewModeParser.parseCommand(commandText, newPerson, targetIndex);
+        commandResult = command.execute(model);
+
+        if (commandResult == null) {
+            return null;
+        }
+
+        if (commandResult.isViewExit()) {
             isViewExitCommand = true;
             isViewCommand = false;
-            this.setParser(addressBookParser);
+            isEditFieldCommand = false;
+        } else if (command instanceof EditFieldCommand) {
+            isEditFieldCommand = true;
         } else {
             isViewCommand = false;
             isViewExitCommand = false;
+            isEditFieldCommand = false;
         }
 
         try {
@@ -83,6 +109,7 @@ public class LogicManager implements Logic {
 
         return commandResult;
     }
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
@@ -116,7 +143,7 @@ public class LogicManager implements Logic {
         return isViewExitCommand;
     }
 
-    public void setParser(Parser parser) {
-        this.parser = parser;
+    public boolean getIsEditFieldCommand() {
+        return isEditFieldCommand;
     }
 }

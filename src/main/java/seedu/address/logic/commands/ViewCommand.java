@@ -40,6 +40,7 @@ public class ViewCommand extends Command {
                 false,
                 true,
                 personToView,
+                targetIndex,
                 false);
     }
 

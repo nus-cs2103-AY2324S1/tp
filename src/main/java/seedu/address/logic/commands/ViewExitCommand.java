@@ -18,7 +18,7 @@ public class ViewExitCommand extends Command {
                 false,
                 false,
                 null,
-                true
-        );
+                null,
+                true);
     }
 }

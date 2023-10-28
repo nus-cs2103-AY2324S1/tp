@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -12,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -179,13 +182,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private void handleView(Person personToView) {
+    private void handleView(Person personToView, Index targetIndex) {//mainwindow index
         if (personListPanelPlaceholder.isVisible()) {
-            personProfile = new PersonProfile(personToView, this);
+            personProfile = new PersonProfile(personToView, targetIndex, this);
 //            personProfile = new PersonProfile(this);
             personProfilePlaceholder.getChildren().add(personProfile.getRoot());
             personProfilePlaceholder.setVisible(true);
             personListPanelPlaceholder.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void handleFocusField(PersonProfile.Field field) {
+        if (personProfilePlaceholder.isVisible()) {
+            personProfile.setFocus(field);
         }
     }
 
@@ -203,24 +213,38 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isShowHelp()) {
-                handleHelp();
+            CommandResult commandResult;
+            if (personListPanelPlaceholder.isVisible()) {
+                commandResult = logic.execute(commandText);
+            } else {
+                commandResult = logic.executeInView(commandText, personProfile.getPerson(), personProfile.getTargetIndex());
             }
 
-            if (commandResult.isExit()) {
-                handleExit();
+            if (personProfilePlaceholder.isVisible() && commandResult == null) {
+                Optional<PersonProfile.Field> field = Arrays.stream(PersonProfile.Field.values())
+                        .filter(f -> f.getDisplayName().toLowerCase().contains(commandText.toLowerCase().trim()))
+                        .findFirst();
+                field.ifPresent(personProfile::setFocus);
             }
 
-            if (logic.getIsViewCommand()) {
-                handleView(commandResult.getPersonToView());
-            }
+            if (commandResult != null) {
+                logger.info("Result: " + commandResult.getFeedbackToUser());
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+                if (commandResult.isShowHelp()) {
+                    handleHelp();
+                }
 
-            if (logic.getIsViewExitCommand()) {
-                handleViewExit();
+                if (commandResult.isExit()) {
+                    handleExit();
+                }
+
+                if (logic.getIsViewCommand()) {
+                    handleView(commandResult.getPersonToView(), commandResult.getTargetIndex());
+                }
+
+                if (logic.getIsViewExitCommand()) {
+                    handleViewExit();
+                }
             }
 
             return commandResult;
