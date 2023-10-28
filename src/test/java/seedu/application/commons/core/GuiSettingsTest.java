@@ -20,7 +20,7 @@ public class GuiSettingsTest {
 
     @Test
     public void equalsMethod() {
-        GuiSettings defaultGuiSetting = new GuiSettings(1,2,3,4);
+        GuiSettings defaultGuiSetting = new GuiSettings(1, 2, 3, 4);
         assertTrue(defaultGuiSetting.equals(defaultGuiSetting));
         assertFalse(defaultGuiSetting.equals(new Industry("Manufacturing")));
     }
