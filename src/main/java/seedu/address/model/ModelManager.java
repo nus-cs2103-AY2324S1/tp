@@ -122,29 +122,20 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    /**
-     * Adds an {@code UndoableCommand} to the command history stack.
-     *
-     * @param command The undoable command to be added to the command history stack.
-     */
+    //=========== Undo ======================================================================================
+
+
+    @Override
     public void addToHistory(UndoableCommand command) {
         commandHistory.push(command);
     }
 
-    /**
-     * Checks if the command history stack is empty.
-     *
-     * @return {@code true} if the command history stack is empty, {@code false} otherwise.
-     */
+    @Override
     public boolean isCommandHistoryEmpty() {
         return commandHistory.isEmpty();
     }
 
-    /**
-     * Pops an {@code UndoableCommand} from the command history stack.
-     *
-     * @return The {@code UndoableCommand} popped from the command history stack.
-     */
+    @Override
     public UndoableCommand popCommandFromHistory() {
         return commandHistory.pop();
     }

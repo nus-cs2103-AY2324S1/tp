@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.model.person.Person;
 
 /**
@@ -76,6 +77,27 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Adds an {@code UndoableCommand} to the command history stack.
+     *
+     * @param command The undoable command to be added to the command history stack.
+     */
+    void addToHistory(UndoableCommand command);
+
+    /**
+     * Checks if the command history stack is empty.
+     *
+     * @return {@code true} if the command history stack is empty, {@code false} otherwise.
+     */
+    boolean isCommandHistoryEmpty();
+
+    /**
+     * Pops an {@code UndoableCommand} from the command history stack.
+     *
+     * @return The {@code UndoableCommand} popped from the command history stack.
+     */
+    UndoableCommand popCommandFromHistory();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

@@ -83,7 +83,6 @@ public class EditCommand extends UndoableCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
         Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(name, nric, lastShownList);
 
         if (personOptional.isEmpty()) {
@@ -100,6 +99,9 @@ public class EditCommand extends UndoableCommand {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         logger.log(Level.INFO, "EditCommand executed successfully");
+
+        // Add to Stack of Commands
+        model.addToHistory(this);
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }

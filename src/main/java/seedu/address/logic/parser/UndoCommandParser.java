@@ -1,2 +1,4 @@
-package seedu.address.logic.parser;public class UndoCommandParser {
+package seedu.address.logic.parser;
+
+public class UndoCommandParser {
 }
