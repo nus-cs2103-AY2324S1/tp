@@ -101,7 +101,6 @@ public class EditCommand extends UndoableCommand {
         logger.log(Level.INFO, "EditCommand executed successfully");
 
         model.addToHistory(this);
-
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

@@ -68,6 +68,7 @@ public class AddCommand extends UndoableCommand {
         }
 
         model.addPerson(toAdd);
+        model.addToHistory(this);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

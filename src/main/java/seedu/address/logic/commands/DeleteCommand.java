@@ -81,18 +81,17 @@ public class DeleteCommand extends UndoableCommand {
         }
 
         Person personToDelete = personOptional.get();
-
         originalPerson = personToDelete;
 
         if (deletePersonDescriptor.isAllFalse()) {
-            model.addToHistory(this);
             model.deletePerson(personToDelete);
+            model.addToHistory(this);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
             editedPerson = createDeletePerson(personToDelete, deletePersonDescriptor);
-            model.addToHistory(this);
             model.setPerson(personToDelete, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.addToHistory(this);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_FIELD_SUCCESS, Messages.format(editedPerson)));
         }
     }

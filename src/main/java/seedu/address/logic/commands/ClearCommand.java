@@ -22,6 +22,7 @@ public class ClearCommand extends UndoableCommand {
 
         // Store a copy of the current address book before clearing
         addressBookBeforeClear = new AddressBook(model.getAddressBook());
+        model.addToHistory(this);
 
         model.setAddressBook(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);

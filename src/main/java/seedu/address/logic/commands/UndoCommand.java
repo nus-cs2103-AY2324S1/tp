@@ -24,9 +24,11 @@ public class UndoCommand extends Command {
 
     public static final String INVALID_NEGATIVE_STEPS_TO_UNDO = "Undo step count cannot be a negative number.";
 
-    public static final String INVALID_POSITIVE_STEPS_TO_UNDO = "Please provide a valid number of steps to undo, " +
-            "not exceeding the available command history";
+    public static final String INVALID_POSITIVE_STEPS_TO_UNDO = "Please provide a valid number of steps to undo, "
+            + "not exceeding the available command history";
 
+    public static final String NO_HISTORY_EXISTS_FAILURE = "There is no history of un-doable commands to be undone. "
+            + "Please execute some undo-able commands first.";
     private int stepsToUndo;
 
     /**
@@ -48,10 +50,15 @@ public class UndoCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (model.getCommandHistorySize() == 0) {
+            throw new CommandException(NO_HISTORY_EXISTS_FAILURE);
+        }
         if (stepsToUndo > model.getCommandHistorySize()) {
             throw new CommandException(INVALID_POSITIVE_STEPS_TO_UNDO +
-                    "(Currently max is: " + model.getCommandHistorySize());
+                    " (Currently max is: " + model.getCommandHistorySize() + ")");
         }
+
+        assert stepsToUndo <= model.getCommandHistorySize();
 
         List<String> undoStatus = new ArrayList<>();
 
