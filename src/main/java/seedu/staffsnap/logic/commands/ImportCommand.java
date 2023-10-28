@@ -21,9 +21,9 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports applicants from a CSV file.\n"
             + "Parameters: "
-            + PREFIX_FILENAME + "FILENAME" + " "
+            + PREFIX_FILENAME + "FILENAME\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_FILENAME + " applicants.csv";
+            + PREFIX_FILENAME + "applicants.csv";
 
     public static final String MESSAGE_SUCCESS_SINGULAR = "Imported %d applicant from %s";
     public static final String MESSAGE_SUCCESS_PLURAL = "Imported %d applicants from %s";

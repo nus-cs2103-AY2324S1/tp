@@ -19,6 +19,7 @@ import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Score;
 import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.model.interview.Rating;
@@ -279,7 +280,10 @@ public class ParserUtil {
         Phone phone = ParserUtil.parsePhone(csvApplicant.getPhone());
         Email email = ParserUtil.parseEmail(csvApplicant.getEmail());
         Position position = ParserUtil.parsePosition(csvApplicant.getPosition());
+        List<Interview> interviewList = new ArrayList<>();
+        Status status = Status.UNDECIDED;
+        Score score = new Score(interviewList);
 
-        return new Applicant(name, phone, email, position, new ArrayList<>(), Status.UNDECIDED);
+        return new Applicant(name, phone, email, position, interviewList, status, score);
     }
 }

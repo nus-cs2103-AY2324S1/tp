@@ -64,8 +64,9 @@ public class AddInterviewCommand extends Command {
         }
 
         applicantToEdit.addInterview(interviewToAdd);
-
+        applicantToEdit.getScore().updateScoreAfterAdd(interviewToAdd);
         model.refreshApplicantList();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(applicantToEdit)));
     }
 

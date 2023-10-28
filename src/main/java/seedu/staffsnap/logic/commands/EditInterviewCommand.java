@@ -88,6 +88,7 @@ public class EditInterviewCommand extends Command {
 
         applicantToEdit.deleteInterview(interviewToEdit);
         applicantToEdit.addInterview(editedInterview);
+        applicantToEdit.getScore().updateScoreAfterEdit(interviewToEdit, editedInterview);
 
         model.refreshApplicantList();
         return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, Messages.format(applicantToEdit)));

@@ -93,7 +93,7 @@ public interface Model {
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredApplicantList(Predicate<Applicant> predicate);
+    void updateFilteredApplicantList(Predicate<? super Applicant> predicate);
     /**
      * Updates the Descriptor for sorting Applicants.
      */

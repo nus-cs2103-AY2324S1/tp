@@ -60,6 +60,7 @@ public class DeleteInterviewCommand extends Command {
         Interview interviewToDelete = applicantToDeleteFrom.getInterviews().get(targetInterviewIndex.getZeroBased());
 
         applicantToDeleteFrom.deleteInterview(interviewToDelete);
+        applicantToDeleteFrom.getScore().updateScoreAfterDelete(interviewToDelete);
 
         model.refreshApplicantList();
         return new CommandResult(
