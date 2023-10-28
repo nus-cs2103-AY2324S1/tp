@@ -93,10 +93,6 @@ public abstract class PersonBuilder {
         return email;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
     public Set<Tag> getTags() {
         return tags;
     }
