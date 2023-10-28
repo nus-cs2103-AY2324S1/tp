@@ -73,7 +73,7 @@ public class AddLeaveCommand extends Command {
 
                 Employee employeeWithLeave = new Employee(employee.getName(), employee.getPosition(), employee.getId(),
                         employee.getPhone(), employee.getEmail(), employee.getSalary(), employee.getDepartments(),
-                        employee.getIsOnLeave(), employee.getOvertimeHours(), updatedList);
+                        employee.getOvertimeHours(), updatedList);
 
                 model.setEmployee(employee, employeeWithLeave);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLeaves(employeeWithLeave)));

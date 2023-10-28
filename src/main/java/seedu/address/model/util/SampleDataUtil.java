@@ -32,7 +32,6 @@ public class SampleDataUtil {
                 new Email("alexyeoh@example.com"),
                 new Salary("8500"),
                 getDepartmentSet("IT"),
-                true,
                 new OvertimeHours(DEFAULT_OVERTIME_HOURS),
                 new LeaveList()),
 
@@ -49,7 +48,6 @@ public class SampleDataUtil {
                 new Email("charlotte@example.com"),
                 new Salary("8000"),
                 getDepartmentSet("Marketing"),
-                true,
                 new OvertimeHours(MAX_OVERTIME_HOURS),
                 new LeaveList()),
 
@@ -66,7 +64,6 @@ public class SampleDataUtil {
                 new Email("irfan@example.com"),
                 new Salary("8500"),
                 getDepartmentSet("IT"),
-                true,
                 new OvertimeHours(MAX_OVERTIME_HOURS),
                 new LeaveList()),
 

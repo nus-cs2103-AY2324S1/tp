@@ -36,8 +36,8 @@ public class ResetCommandTest {
         for (Employee employee: lastShownList) {
             Employee employeeWithDefaultOvertime = new Employee(employee.getName(), employee.getPosition(),
                     employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
-                    employee.getDepartments(), employee.getIsOnLeave(),
-                    new OvertimeHours(Employee.DEFAULT_OVERTIME_HOURS), employee.getLeaveList());
+                    employee.getDepartments(), new OvertimeHours(Employee.DEFAULT_OVERTIME_HOURS),
+                    employee.getLeaveList());
             expectedModel.setEmployee(employee, employeeWithDefaultOvertime);
             model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         }
@@ -57,8 +57,7 @@ public class ResetCommandTest {
         for (Employee employee: lastShownList) {
             Employee employeeWithDefaultLeaves = new Employee(employee.getName(), employee.getPosition(),
                     employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
-                    employee.getDepartments(), employee.getIsOnLeave(),
-                    employee.getOvertimeHours(), new LeaveList());
+                    employee.getDepartments(), employee.getOvertimeHours(), new LeaveList());
             expectedModel.setEmployee(employee, employeeWithDefaultLeaves);
         }
 
@@ -94,8 +93,8 @@ public class ResetCommandTest {
         for (Employee employee: lastShownList) {
             Employee employeeWithDefaultOvertime = new Employee(employee.getName(), employee.getPosition(),
                     employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
-                    employee.getDepartments(), employee.getIsOnLeave(),
-                    new OvertimeHours(Employee.DEFAULT_OVERTIME_HOURS), employee.getLeaveList());
+                    employee.getDepartments(), new OvertimeHours(Employee.DEFAULT_OVERTIME_HOURS),
+                    employee.getLeaveList());
             expectedModel.setEmployee(employee, employeeWithDefaultOvertime);
             emptyModel.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         }
