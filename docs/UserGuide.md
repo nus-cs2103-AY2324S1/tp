@@ -88,7 +88,6 @@ A patient can have any number of medical histories (including 0)
 
 Format (for specialists): `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION`
 
-
 Examples:
 * `add -pa n/John p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis`
 * `add -sp n/Jane p/73331515 s/Dermatologist l/Ang Mo Kio`
@@ -103,15 +102,15 @@ Examples:
 * `list -pa` Lists all patients in records.
 * `list -sp` Lists all specialists in records.
 
-### Locating persons by their attributes: `find`
+### Locating patients or specialists by their attributes: `find`
 
-Finds persons whose attributes contain any of the given keywords. 
+Finds patients or specialists whose attributes contain any of the given keywords. 
 Multiple attributes can be searched at once, the result will display any person
 with all attributes containing any of the corresponding keywords in the command.
 
 Format: `find -PERSON_TYPE [PREFIX/KEYWORDS]`
 
-* All prefixes are optional. Hence, calling `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed.
+* All prefixes are optional. Hence, entering `find -PERSON_TYPE` (without any prefixes) will result in all person of the specified type being listed.
 * The search is case-insensitive.
   * e.g `hans` will match `Hans`
 * The order of the keywords does not matter. 
@@ -129,6 +128,33 @@ Examples:
 * `find -pa n/John` returns the patient `Johnny Depp` and the patient `John Doe`
 * `find -sp n/alex david` returns the specialists `Alex Yeoh` and `David Li` 
 * `find -sp n/Alex s/Orthopaedic` returns any specialists names including the string `Alex` who has the `Orthopaedic` specialty
+<br>
+
+### Editing a pre-existing patient or specialist record: `edit`
+
+Changes the content of a pre-existing patient or specialist record in the view panel.
+Multiple attributes of a person can be changed at once. The view panel will be updated with the
+modified results immediately after each successful command execution.
+
+Format: `edit PREFIX/KEYWORD…​`
+
+* When entering an `edit` command, at least one valid prefix must be present. 
+I.e. entering `edit` (without any prefixes) will result in an error message being displayed.
+* Only the patient or specialist in the view panel will be edited. Hence, when editing a specialist specific attribute
+while viewing a patient (or vice versa), an error message be displayed.
+  * e.g. when a patient is present in the view panel, `edit s/Dentistry` will result in an error message being displayed as
+  patients do not have the specialty attribute.
+* The new values of compulsory attributes for a patient or specialist cannot be empty.
+  * e.g. `edit s/` (empty Specialty attribute) will result in an error when trying to edit a specialist.
+  * e.g. `edit n/` (empty Name attribute) will result in an error when trying to edit a patient or specialist
+* The new values of temporary attributes can be empty. This is useful when you want to clear the content of optional attributes 
+in a patient or specialist.
+  * e.g. `edit t/` (empty Tag attribute) will remove the tags of the patient or specialist being displayed in the view panel
+
+Examples:
+* `list -pa` > `view 1` > `edit n/John Wick` modifies the name of the first patient in the list to `John Wick`.
+*  `find -sp t/friend` > `view 3` > `edit s/Surgery` modifies the specialty of the third specialist in the list with
+the `friend` tag.
 <br>
 
 ### Deleting a patient or specialist : `delete`
