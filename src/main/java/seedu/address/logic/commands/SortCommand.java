@@ -14,12 +14,13 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the list of employees from the last listing by the specified field in the specified order"
-            + "(name / salary / overtime / leaves).\n"
+            + ": Sorts the list of employees from the last listing by the specified field "
+            + "(name / salary / overtime / leaves)"
+            + "in the specified order (asc / desc).\n"
             + "Parameters: "
             + PREFIX_FIELD + "FIELD "
             + PREFIX_ORDER + "ORDER\n"
-            + "Example: " + COMMAND_WORD + " f/salary in/ascending";
+            + "Example: " + COMMAND_WORD + " f/salary in/asc";
 
     public static final String MESSAGE_SUCCESS = "Successfully sorted employees by %1$s. ";
     public static final String MESSAGE_NO_FIELD = "There needs to be an field to sort the list by. ";
@@ -76,10 +77,10 @@ public class SortCommand extends Command {
         switch (order.toLowerCase()) {
         case "":
             throw new CommandException(String.format(MESSAGE_NO_ORDER, order));
-        case "ascending":
+        case "asc":
             model.updateSortedEmployeeListAscending(field);
             break;
-        case "descending":
+        case "desc":
             model.updateSortedEmployeeListDescending(field);
             break;
         default:

@@ -22,9 +22,9 @@ class SortCommandParserTest {
     @Test
     public void parse_validArgs_returnsSortCommand() {
 
-        String userInput = " " + PREFIX_FIELD + "salary " + PREFIX_ORDER + "ascending";
+        String userInput = " " + PREFIX_FIELD + "salary " + PREFIX_ORDER + "asc";
 
-        SortCommand expectedSortCommand = new SortCommand("salary", "ascending");
+        SortCommand expectedSortCommand = new SortCommand("salary", "asc");
 
         assertParseSuccess(parser, userInput, expectedSortCommand);
     }

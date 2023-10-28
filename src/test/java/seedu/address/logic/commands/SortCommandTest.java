@@ -21,8 +21,8 @@ class SortCommandTest {
     private static final String INVALID_FIELD = "invalid field";
     private static final String NO_FIELD = "";
 
-    private static final String ASCENDING_ORDER = "ascending";
-    private static final String DESCENDING_ORDER = "descending";
+    private static final String ASCENDING_ORDER = "asc";
+    private static final String DESCENDING_ORDER = "desc";
     private static final String INVALID_ORDER = "invalid order";
     private static final String NO_ORDER = "";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
