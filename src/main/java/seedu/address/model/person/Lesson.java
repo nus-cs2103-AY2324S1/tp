@@ -38,6 +38,10 @@ public class Lesson {
         this.end = end.getTime();
     }
 
+    public static boolean isValid(Begin begin, End end) {
+        return begin.getTime().compareTo(end.getTime()) < 0;
+    }
+
     @Override
     public String toString() {
         return day.toString() + ", " + begin.toString() + " - " + end.toString();
