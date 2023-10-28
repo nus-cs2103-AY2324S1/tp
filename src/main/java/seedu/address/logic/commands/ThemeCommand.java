@@ -25,6 +25,7 @@ public class ThemeCommand extends Command {
      * Creates an AddCommand to add the specified {@code Person}
      */
     public ThemeCommand(Theme theme) {
+        assert theme != null;
         this.theme = theme;
     }
 
