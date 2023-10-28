@@ -181,6 +181,11 @@ public class CreateMemberCommandTest {
         }
 
         @Override
+        public void setEnrolment(Attendance enrolment, Attendance editedEnrolment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Member> getFilteredMemberList() {
             throw new AssertionError("This method should not be called.");
         }
