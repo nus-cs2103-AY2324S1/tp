@@ -3,6 +3,8 @@ package seedu.address.model.statistics;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.person.Person;
 
+import java.util.stream.Stream;
+
 
 /**
  * Represents a ReadOnlySummaryStatistic, that is no update can be done to the summary statistic.
@@ -49,6 +51,9 @@ public interface ReadOnlySummaryStatistic {
      * @return min score of the people associated with that tag.
      */
     public int generateMinScoreValueWithTag(Tag tag);
+
+    public int getNumOfPeople();
+
 
 
 }

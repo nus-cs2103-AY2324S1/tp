@@ -9,14 +9,21 @@ import seedu.address.model.person.Score;
 import seedu.address.model.person.ScoreList;
 import seedu.address.model.tag.Tag;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * Represents the summary statistic of the address book.
+ * Using terminal operations on Stream like count() consumes the stream and closes it.
+ * This can throw an IllegalStateException if you try to use the stream after it is closed.
  */
 public class SummaryStatistic implements ReadOnlySummaryStatistic {
-    private Stream<Person> personData;
+    ObservableList<Person> personData;
+    private List<Person> personList;
     private static final Logger logger = LogsCenter.getLogger(SummaryStatistic.class);
 
     /**
@@ -25,7 +32,8 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      */
     public SummaryStatistic(ObservableList<Person> persons) {
         requireAllNonNull(persons);
-        personData = persons.stream();
+        personData = persons;
+        personList = personData.stream().collect(Collectors.toList());
     }
 
     /**
@@ -33,7 +41,7 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      * @param persons person data
      */
     public void updatePersonData(ObservableList<Person> persons) {
-        personData = persons.stream();
+        personData = persons;
     }
 
     /**
@@ -41,7 +49,7 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      * @return number of people in the address book.
      */
     public int getNumOfPeople() {
-        return (int) personData.count();
+        return personList.size();
     }
 
     /**
@@ -50,7 +58,7 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      * @return number of people in the address book associated with that tag.
      */
     public int getNumOfPeopleAssociatedWithTag(Tag tag) {
-        Stream<Person> filteredStream = personData.filter(person -> person.getTags().contains(tag));
+        Stream<Person> filteredStream = personData.stream().filter(person -> person.getTags().contains(tag));
         return (int) filteredStream.count();
     }
 
@@ -60,7 +68,7 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      * @return sorted stream of score value
      */
     private Stream<Integer> getSortedScoreValueStream(Tag tag) {
-        Stream<Person> filteredStream = personData.filter(person -> person.getTags().contains(tag));
+        Stream<Person> filteredStream = personData.stream().filter(person -> person.getTags().contains(tag));
         Stream<ScoreList> scoreListStream = filteredStream.map(person -> person.getScoreList());
         Stream<Score> scoreStream = scoreListStream.map(scoreList -> scoreList.getScore(tag));
         Stream<Integer> scoreValueStream = scoreStream.map(score -> score.value);
@@ -74,23 +82,25 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      * @return median of the score value stream
      */
     public int calculateMedian(Stream<Integer> sortedScoreValueStream) {
-        int numOfPeople = (int) sortedScoreValueStream.count();
+        List<Integer> sortedValueList = sortedScoreValueStream.collect(Collectors.toList());
+        int numOfPeople = sortedValueList.size();
         int median = 0;
         if (numOfPeople <= 0) {
             logger.warning("No people in the list, median will be left as default of 0");
             return median;
         }
+        if (numOfPeople == 1) {
+            median = sortedValueList.get(0);
+            return median;
+        }
 
         if (numOfPeople % 2 == 0) {
             int medianIndex = numOfPeople / 2;
-            median = sortedScoreValueStream
-                    .skip(medianIndex - 1)
-                    .limit(2)
-                    .reduce((a, b) -> a + b).get() / 2;
+            median = (sortedValueList.get(medianIndex - 1) + sortedValueList.get(medianIndex)) / 2;
             return median;
         } else {
             int medianIndex = (numOfPeople + 1) / 2;
-            median = sortedScoreValueStream.skip(medianIndex - 1).findFirst().orElse(0);
+            median = sortedValueList.get(medianIndex - 1);
             return median;
         }
     }
@@ -112,13 +122,21 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      * @return mean of the score value stream
      */
     public int calculateMean(Stream<Integer> sortedScoreValueStream) {
-        int numOfPeople = (int) sortedScoreValueStream.count();
+        List<Integer> sortedValueList = sortedScoreValueStream.collect(Collectors.toList());
+        int numOfPeople = sortedValueList.size();
         int mean = 0;
         if (numOfPeople <= 0) {
             logger.warning("No people in the list, mean will be left as default of 0");
             return mean;
         }
-        mean = sortedScoreValueStream.reduce((a, b) -> a + b).get() / numOfPeople;
+        if (numOfPeople == 1) {
+            Integer ans = sortedValueList.get(0);
+            return ans;
+        }
+        for (Integer value : sortedValueList) {
+            mean += value;
+        }
+        mean /= numOfPeople;
         return mean;
     }
 
@@ -140,16 +158,23 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      * @return percentile of the score of the person associated with that tag.
      */
     public double generatePercentileWithTag(Person person, Tag tag) {
-        Stream<Person> filteredStreamWithTags = personData.filter(personInList -> personInList.getTags().contains(tag));
-        Stream<Person> filteredStreamWithScoreValue = filteredStreamWithTags
-                .filter(personInList -> personInList.getScore().value <= person.getScore().value);
-        int numOfPeopleBefore = (int) filteredStreamWithScoreValue.count();
+        List<Integer> filteredList = getSortedScoreValueStream(tag).collect(Collectors.toList());
+        if (filteredList.size() <= 0) {
+            logger.warning("No people in the list, percentile will be left as default of 0");
+            return 0;
+        } else if (filteredList.size() == 1) {
+            return 100;
+        }
+        Stream<Person> filteredStreamWithScoreValue = personData.stream()
+                .filter(personInList -> personInList.getTags().contains(tag))
+                .filter(personInList -> personInList.getScoreForTag(tag).compareTo(person.getScoreForTag(tag)) <= 0);
+        List<Person> filteredListWithScoreValue = filteredStreamWithScoreValue.collect(Collectors.toList());
         double percentile = 0;
-        if (numOfPeopleBefore <= 0) {
+        if (filteredListWithScoreValue.size() <= 0) {
             logger.warning("No people in the list, percentile will be left as default of 0");
             return percentile;
         }
-        percentile =  Math.ceil((double) numOfPeopleBefore / getNumOfPeople() * 100);
+        percentile =  Math.ceil((double) filteredListWithScoreValue.size() / filteredList.size() * 100);
         return percentile;
     }
 
@@ -160,7 +185,15 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      */
     public int generateMaxScoreValueWithTag(Tag tag) {
         Stream<Integer> sortedScoreValueStream = getSortedScoreValueStream(tag);
-        int maxScore = sortedScoreValueStream.reduce((a, b) -> b).orElse(0);
+        List<Integer> sortedList = sortedScoreValueStream.collect(Collectors.toList());
+        if (sortedList.size() <= 0) {
+            logger.warning("No people in the list, max score will be left as default of 0");
+            return 0;
+        }
+        if (sortedList.size() == 1) {
+            return sortedList.get(0);
+        }
+        int maxScore = sortedList.get(sortedList.size() - 1);
         return maxScore;
     }
 
@@ -171,9 +204,18 @@ public class SummaryStatistic implements ReadOnlySummaryStatistic {
      */
     public int generateMinScoreValueWithTag(Tag tag) {
         Stream<Integer> sortedScoreValueStream = getSortedScoreValueStream(tag);
-        int minScore = sortedScoreValueStream.reduce((a, b) -> a).orElse(0);
+        List<Integer> sortedList = sortedScoreValueStream.collect(Collectors.toList());
+        if (sortedList.size() <= 0) {
+            logger.warning("No people in the list, min score will be left as default of 0");
+            return 0;
+        }
+        if (sortedList.size() == 1) {
+            return sortedList.get(0);
+        }
+        int minScore = sortedList.get(0);
         return minScore;
     }
+
 
 }
 

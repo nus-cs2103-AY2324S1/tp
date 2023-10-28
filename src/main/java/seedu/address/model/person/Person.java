@@ -28,10 +28,9 @@ public class Person {
     private LinkedIn linkedIn = new LinkedIn("");
     private Github github = new Github("");
     private Remark remark;
-    private Score score = new Score(0);
     private Status currentStatus = new Status();
 
-    private final ScoreList scoreList = new ScoreList();
+    private ScoreList scoreList = new ScoreList();
 
 
 
@@ -92,8 +91,9 @@ public class Person {
         return github;
     }
 
-    public Score getScore() {
-        return score;
+
+    public Score getScoreForTag(Tag tag) {
+        return scoreList.getScore(tag);
     }
 
     public ScoreList getScoreList() {
@@ -108,8 +108,13 @@ public class Person {
         this.github = github;
     }
 
-    public void setScore(Score score) {
-        this.score = score;
+    /**
+     * Sets the score list of the person to the given score list.
+     * This is ONLY recommended for use in Person Builder. Strongly discouraged otherwise.
+     * @param scoreList the score list to set to
+     */
+    public void setScoreList(ScoreList scoreList) {
+        this.scoreList = scoreList;
     }
 
     public void setScoreForTag(Tag tag, Score score) {
@@ -157,7 +162,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && remark.equals(otherPerson.remark)
-                && score.equals(otherPerson.score)
+                && scoreList.equals(otherPerson.scoreList)
                 && tags.equals(otherPerson.tags);
 
     }
@@ -178,7 +183,7 @@ public class Person {
                 .add("tags", tags)
                 .add("remark", remark)
                 .add("status", currentStatus)
-                .add("score", score);
+                .add("score-list", scoreList);
 
         if (!linkedIn.value.isEmpty()) {
             builder.add("linkedin", linkedIn);

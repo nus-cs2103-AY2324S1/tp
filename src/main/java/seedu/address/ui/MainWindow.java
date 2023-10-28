@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ScoreList;
+import seedu.address.model.tag.Tag;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -30,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
+
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
@@ -41,6 +45,8 @@ public class MainWindow extends UiPart<Stage> {
     private EventWindow eventWindow;
 
     private PersonInformationPanel personInformationPanel;
+
+    private SummaryStatisticScreen summaryStatisticScreen;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -58,6 +64,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personInformationPanelPlaceholder;
+
+    @FXML
+    private StackPane summaryStatisticScreenPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -199,7 +208,38 @@ public class MainWindow extends UiPart<Stage> {
 
         personInformationPanel = new PersonInformationPanel(personToView);
         personInformationPanelPlaceholder.getChildren().add(personInformationPanel.getRoot());
+
+        ScoreList scoreList = personToView.getScoreList();
+        if (scoreList.isEmpty()) {
+            logger.info("No score list detected");
+            return;
+        }
+
+        logger.info("Score list detected");
+
+        //Everytime we call count on a stream it will be consumed
+        Tag interviewTag = new Tag("Interview");
+        System.out.println(logic.getSummaryStatistic().generateMeanWithTag(interviewTag));
+        logic.getSummaryStatistic().generateMedianWithTag(interviewTag);
+        logic.getSummaryStatistic().generateMaxScoreValueWithTag(interviewTag);
+        logic.getSummaryStatistic().generateMinScoreValueWithTag(interviewTag);
+        logic.getSummaryStatistic().generatePercentileWithTag(personToView, interviewTag);
+
+        System.out.println("mean: " + logic.getSummaryStatistic().generateMeanWithTag(interviewTag));
+        System.out.println("median: " + logic.getSummaryStatistic().generateMedianWithTag(interviewTag));
+        System.out.println("max: " + logic.getSummaryStatistic().generateMaxScoreValueWithTag(interviewTag));
+        System.out.println("min: " + logic.getSummaryStatistic().generateMinScoreValueWithTag(interviewTag));
+        System.out.println("percentile: " + logic.getSummaryStatistic().generatePercentileWithTag(personToView, interviewTag));
+
+        Person personToView2 = logic.getFilteredPersonList().get(index.getZeroBased());
+
+
+
+        summaryStatisticScreen = new SummaryStatisticScreen(logic.getSummaryStatistic(), personToView2);
+        summaryStatisticScreenPlaceholder.getChildren().add(summaryStatisticScreen.getRoot());
     }
+
+
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
@@ -231,6 +271,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isView()) {
+                logger.fine("View command detected");
                 handleView();
             }
 
