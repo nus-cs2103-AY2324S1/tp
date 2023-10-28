@@ -172,6 +172,11 @@ public class ModelManager implements Model {
         uniquePersonList.setPersons(getAddressBook().getPersonList());
     }
 
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return getAddressBook().getPersonList();
+    }
+
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
