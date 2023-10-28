@@ -598,6 +598,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC11 - Remove a musician from a band**
+
+**MSS**
+
+1. User enters the band details and musician details.
+2. User requests to remove the musician from the band.
+3. BandConnect++ removes the musician from the band.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User enters input wrongly
+* 2a1. System shows a message showing the proper input format.
+
+  Use case ends.
 
 *{More to be added}*
 
