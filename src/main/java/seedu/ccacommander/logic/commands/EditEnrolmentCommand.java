@@ -122,8 +122,8 @@ public class EditEnrolmentCommand extends Command {
                                                     EditEnrolmentDescriptor editEnrolmentDescriptor) {
         assert enrolmentToEdit != null;
 
-        Name memberName = enrolmentToEdit.getMemberName();
-        Name eventName = enrolmentToEdit.getEventName();
+        Name memberName = editEnrolmentDescriptor.getMemberName().orElse(enrolmentToEdit.getMemberName());
+        Name eventName = editEnrolmentDescriptor.getEventName().orElse(enrolmentToEdit.getEventName());
         Hours updatedHours = editEnrolmentDescriptor.getHours().orElse(enrolmentToEdit.getHours());
         Remark updatedRemark = editEnrolmentDescriptor.getRemark().orElse(enrolmentToEdit.getRemark());
 
@@ -161,6 +161,8 @@ public class EditEnrolmentCommand extends Command {
      * corresponding field value of the event.
      */
     public static class EditEnrolmentDescriptor {
+        private Name memberName;
+        private Name eventName;
         private Hours hours;
         private Remark remark;
 
@@ -170,6 +172,8 @@ public class EditEnrolmentCommand extends Command {
          * Copy constructor.
          */
         public EditEnrolmentDescriptor(EditEnrolmentDescriptor toCopy) {
+            setMemberName(toCopy.memberName);
+            setEventName(toCopy.eventName);
             setHours(toCopy.hours);
             setRemark(toCopy.remark);
         }
@@ -181,6 +185,21 @@ public class EditEnrolmentCommand extends Command {
             return CollectionUtil.isAnyNonNull(hours, remark);
         }
 
+        public void setMemberName(Name memberName) {
+            this.memberName = memberName;
+        }
+
+        public Optional<Name> getMemberName() {
+            return Optional.ofNullable(memberName);
+        }
+
+        public void setEventName(Name eventName) {
+            this.eventName = eventName;
+        }
+
+        public Optional<Name> getEventName() {
+            return Optional.ofNullable(eventName);
+        }
         public void setHours(Hours hours) {
             this.hours = hours;
         }
@@ -216,6 +235,8 @@ public class EditEnrolmentCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
+                    .add("memberName", memberName)
+                    .add("eventName", eventName)
                     .add("hours", hours)
                     .add("remark", remark)
                     .toString();
