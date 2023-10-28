@@ -216,18 +216,14 @@ All of these fields are optional and typing `findm` alone will not impose any pr
 
 Given below is an example usage scenario and how the `findm` command behaves at each step.
 
-Step 1. The user launches the application and the application loads the data from storage.
-The existing objects are shown below. Objects not relevant to the behaviour are excluded.
-![FindMeetingInitial](images/FindMeetingInitial.png)
+Step 1. The user executes `findm m/meeting` command to find all meetings that have the keyword `meeting` in their title. This results in the logic component calling `parse` from the `AddressBookParser` object to make a `FindMeetingCommandParser` object. This will parse the arguments available and create the `GeneralPredicateMeeting` object and FindMeetingCommand object.
+![FindMeetingSequence](images/FindMeetingSequence.png)
 
-Step 2. The user executes `findm m/meeting` command to find all meetings that have the keyword `meeting` in their title. This results in the logic component creating an `AddressBookParser` object to make a `FindMeetingCommandParser` object which will in turn create the predicate objects as well as the FindMeetingCommand object. The argument is broken down by `PREFIX` and for each `PREFIX` there is a String array of arguments broken down by whitespace. (s/START & e/END use `LocalDateTime` instead)
-![FindMeetingSecond](images/FindMeetingSecond.png)
-
-Step 3. The `FindMeetingCommand` will be immediately executed on the `FilteredList<Meeting>` object. The `GeneralMeetingPredicate` will be used on all meetings, meetings which pass all 5 predicates are shown in `MeetingSchedulePanel`. After which `FindMeetingCommand` and the predicate objects will no longer be referenced.
+Step 2. The `FindMeetingCommand` will be immediately executed and will call `setPredicate(GeneralMeetingPredicate)` from `Model`. The `GeneralMeetingPredicate` will be used on all meetings, meetings which pass all 5 predicates are shown in `MeetingSchedulePanel`. After which `FindMeetingCommand` and the predicate objects will no longer be referenced.
 
 The following diagrams show the entire sequence flow for `LogicManager#execute()` for FindMeetingCommand.
-![FindMeetingSequence](images/FindMeetingSequence.png)
-`XYZPredicate` represent the various predicate classes.
+![FindMeetingSequence2](images/FindMeetingSequence2.png)
+
 
 #### Design Considerations and Rationale
 
@@ -259,8 +255,8 @@ for a `Person` with a name matching `attendeeName`.
 
 
 ### Remove attendee feature
-User can specify an Attendee to remove from a specified Meeting by specifying its index in the list of Attendees. 
-This is the main motivation behind using a LinkedHashSet for the implementation of the Attendee Set. 
+User can specify an Attendee to remove from a specified Meeting by specifying its index in the list of Attendees.
+This is the main motivation behind using a LinkedHashSet for the implementation of the Attendee Set.
 
 The following sequence diagram shows how the remove attendee operation works:
 
@@ -483,6 +479,8 @@ _{More to be added}_
 2.  OutBook shows a list of meetings.
 3.  User requests to view details of a specific meeting.
 4.  OutBook shows the details of the meeting.
+4.  User requests to remove a specific contact from the meeting.
+5.  OutBook removes the contact from the meeting.
 5.  User requests to remove a specific contact from the meeting.
 6.  OutBook removes the contact from the meeting.
 
