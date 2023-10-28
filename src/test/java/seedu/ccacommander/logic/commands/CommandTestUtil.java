@@ -26,6 +26,7 @@ import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.enrolment.Hours;
 import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.event.Event;
