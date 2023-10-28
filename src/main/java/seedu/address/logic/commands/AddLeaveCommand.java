@@ -63,6 +63,7 @@ public class AddLeaveCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         List<Employee> lastShownList = model.getFilteredEmployeeList();
 
         for (Employee employee : lastShownList) {
@@ -75,7 +76,6 @@ public class AddLeaveCommand extends Command {
                         employee.getIsOnLeave(), employee.getOvertimeHours(), updatedList);
 
                 model.setEmployee(employee, employeeWithLeave);
-                model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatLeaves(employeeWithLeave)));
             }
         }

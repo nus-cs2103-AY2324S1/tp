@@ -13,7 +13,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the list of employees from the last listing by the specified field "
-            + "(name / salary / overtime hours / allocated leaves).\n"
+            + "(name / salary / overtime / leaves).\n"
             + "Parameters: f/FIELD\n"
             + "Example: " + COMMAND_WORD + " f/salary";
 
@@ -42,11 +42,11 @@ public class SortCommand extends Command {
         case "name":
             model.updateSortedEmployeeList("name");
             break;
-        case "overtime hours":
-            model.updateSortedEmployeeList("overtime hours");
+        case "overtime":
+            model.updateSortedEmployeeList("overtime");
             break;
-        case "allocated leaves":
-            model.updateSortedEmployeeList("allocated leaves");
+        case "leaves":
+            model.updateSortedEmployeeList("leaves");
             break;
         default:
             throw new CommandException(String.format(MESSAGE_WRONG_ATTR, attribute));
