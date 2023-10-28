@@ -399,7 +399,7 @@ public class EditCommand extends Command {
          */
         @Override
         public boolean isAnyFieldEdited() {
-            return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(specialty);
+            return super.isAnyFieldEdited() || CollectionUtil.isAnyNonNull(location, specialty);
         }
     }
 }
