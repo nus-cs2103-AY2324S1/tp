@@ -103,6 +103,17 @@ public class AddressBookParser {
             case ListCommand.COMMAND_WORD:
                 return new ListCommand(personType);
 
+            case EditCommand.COMMAND_WORD:
+                if (model.getSelectedPerson() instanceof Patient) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_PATIENT));
+                }
+                if (model.getSelectedPerson() instanceof Specialist) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE_SPECIALIST));
+                }
+                break;
+
             default:
                 logger.finer("This user input caused a ParseException: " + userInput);
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
