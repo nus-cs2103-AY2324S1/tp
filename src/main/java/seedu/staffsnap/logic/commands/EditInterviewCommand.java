@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.staffsnap.model.Model.PREDICATE_HIDE_ALL_APPLICANTS;
-import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.List;
 import java.util.Objects;
@@ -92,8 +90,7 @@ public class EditInterviewCommand extends Command {
         applicantToEdit.addInterview(editedInterview);
         applicantToEdit.getScore().updateScoreAfterEdit(interviewToEdit, editedInterview);
 
-        model.updateFilteredApplicantList(PREDICATE_HIDE_ALL_APPLICANTS);
-        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        model.refreshApplicantList();
         return new CommandResult(String.format(MESSAGE_EDIT_INTERVIEW_SUCCESS, Messages.format(applicantToEdit)));
     }
 

@@ -2,8 +2,6 @@ package seedu.staffsnap.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_INTERVIEW;
-import static seedu.staffsnap.model.Model.PREDICATE_HIDE_ALL_APPLICANTS;
-import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.List;
 
@@ -64,8 +62,7 @@ public class DeleteInterviewCommand extends Command {
         applicantToDeleteFrom.deleteInterview(interviewToDelete);
         applicantToDeleteFrom.getScore().updateScoreAfterDelete(interviewToDelete);
 
-        model.updateFilteredApplicantList(PREDICATE_HIDE_ALL_APPLICANTS);
-        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        model.refreshApplicantList();
         return new CommandResult(
                 String.format(MESSAGE_DELETE_INTERVIEW_SUCCESS, Messages.format(applicantToDeleteFrom)));
     }

@@ -27,7 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_POSITION = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TYPE = "#friend";
+    private static final String INVALID_TYPE = "";
     private static final String INVALID_DESCRIPTOR = "nam";
     private static final String INVALID_RATING = "15.0";
 

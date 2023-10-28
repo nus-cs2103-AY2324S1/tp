@@ -1,5 +1,5 @@
 ---
-  layout: default.md 
+  layout: default.md
   title: "Project Portfolio Page"
 ---
 
@@ -36,15 +36,15 @@ Staff-Snap is a desktop HR management application used for managing employees. T
     * <span style="color:red">**[TO BE UPDATED]**</span> Added implementation details of the `delete` feature.
 
 * **Community**:
-  * <span style="color:red">**[TO BE UPDATED]**</span> PRs reviewed (with non-trivial review comments): 
-      [\#31](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/31), 
-      [\#32](), 
-      [\#19](), 
+  * <span style="color:red">**[TO BE UPDATED]**</span> PRs reviewed (with non-trivial review comments):
+      [\#31](https://github.com/AY2324S1-CS2103T-W08-1/tp/pull/31),
+      [\#32](),
+      [\#19](),
       [\#42]()
-  * Contributed to forum discussions (examples: 
-      [\#2](https://github.com/nus-cs2103-AY2324S1/forum/issues/2), 
-      [\#121](https://github.com/nus-cs2103-AY2324S1/forum/issues/121), 
-      [\#158](https://github.com/nus-cs2103-AY2324S1/forum/issues/158), 
+  * Contributed to forum discussions (examples:
+      [\#2](https://github.com/nus-cs2103-AY2324S1/forum/issues/2),
+      [\#121](https://github.com/nus-cs2103-AY2324S1/forum/issues/121),
+      [\#158](https://github.com/nus-cs2103-AY2324S1/forum/issues/158),
       [\#228](https://github.com/nus-cs2103-AY2324S1/forum/issues/228))
   * <span style="color:red">**[TO BE UPDATED]**</span> Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
 
