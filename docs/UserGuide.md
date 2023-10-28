@@ -34,9 +34,7 @@ management tasks done faster than traditional GUI apps.
 
    * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11` : Adds a student named `John Doe` to the Class Manager.
 
-   * `delete 3` : Deletes the 3rd student detail shown in the current list.
-
-   * `clear` : Deletes all student details.
+   * `delete A0245234A` : Deletes the student with student number A0245234A, which is added in the previous step.
 
    * `exit` : Exits the app.
 
