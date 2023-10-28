@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -33,6 +34,8 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for the EditCommand.
  */
 public class EditCommandTest {
+
+    private final String nonExistentName = "NonExistentName";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -112,7 +115,7 @@ public class EditCommandTest {
     public void equals_unequalEditPersonDescriptors_returnsFalse() {
         EditPersonDescriptor descriptor1 = new EditPersonDescriptor();
         EditPersonDescriptor descriptor2 = new EditPersonDescriptor();
-        descriptor1.setName(new Name("Alice"));
+        descriptor1.setName(new Name(VALID_NAME_BOB));
         assertFalse(descriptor1.equals(descriptor2)); // Different name
     }
 
@@ -120,15 +123,15 @@ public class EditCommandTest {
     public void equals_sameObject_returnsTrue() {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(new Name("John Doe"), null, descriptor);
+        EditCommand editCommand = new EditCommand(new Name(VALID_NAME_AMY), null, descriptor);
 
         assertTrue(editCommand.equals(editCommand));
     }
 
     @Test
     public void execute_personNotFound_throwsCommandException() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName("NonExistentName").build();
-        EditCommand editCommand = new EditCommand(new Name("NonExistentName"), null, descriptor);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(nonExistentName).build();
+        EditCommand editCommand = new EditCommand(new Name(nonExistentName), null, descriptor);
 
         // The expected CommandException should be thrown with the specified message
         assertThrows(CommandException.class, () -> editCommand.execute(model), EditCommand.MESSAGE_PERSON_NOT_FOUND);

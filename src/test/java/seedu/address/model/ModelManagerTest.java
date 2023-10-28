@@ -174,7 +174,7 @@ public class ModelManagerTest {
     @Test
     public void getCommandHistorySize_nonEmptyStack_returnsCorrectSize() {
         ModelManager modelManager = new ModelManager();
-        
+
         AddCommand addCommand = new AddCommand(ALICE);
         ClearCommand clearCommand = new ClearCommand();
         modelManager.addToHistory(addCommand);
