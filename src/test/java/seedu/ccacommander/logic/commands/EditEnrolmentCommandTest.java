@@ -1,38 +1,12 @@
 package seedu.ccacommander.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.ccacommander.commons.core.index.Index;
-import seedu.ccacommander.logic.Messages;
-import seedu.ccacommander.logic.commands.EditEnrolmentCommand.EditEnrolmentDescriptor;
-import seedu.ccacommander.model.CcaCommander;
-import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.ModelManager;
-import seedu.ccacommander.model.UserPrefs;
-import seedu.ccacommander.model.attendance.Attendance;
-import seedu.ccacommander.model.event.Event;
-import seedu.ccacommander.model.member.Member;
-import seedu.ccacommander.testutil.AttendanceBuilder;
-import seedu.ccacommander.testutil.EditEnrolmentDescriptorBuilder;
-import seedu.ccacommander.testutil.EventBuilder;
-import seedu.ccacommander.testutil.MemberBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.DESC_AMY_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.DESC_AURORA;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.DESC_BOB_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.DESC_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_AURORA;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_AURORA;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.showEnrolmentAtIndex;
@@ -45,6 +19,19 @@ import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_ENROLMENT;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.ccacommander.commons.core.index.Index;
+import seedu.ccacommander.logic.Messages;
+import seedu.ccacommander.logic.commands.EditEnrolmentCommand.EditEnrolmentDescriptor;
+import seedu.ccacommander.model.CcaCommander;
+import seedu.ccacommander.model.Model;
+import seedu.ccacommander.model.ModelManager;
+import seedu.ccacommander.model.UserPrefs;
+import seedu.ccacommander.model.attendance.Attendance;
+import seedu.ccacommander.testutil.AttendanceBuilder;
+import seedu.ccacommander.testutil.EditEnrolmentDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditEnrolmentCommand.
@@ -105,7 +92,8 @@ public class EditEnrolmentCommandTest {
     public void execute_filteredList_success() {
         showEnrolmentAtIndex(model, INDEX_FIRST_ENROLMENT);
 
-        Attendance enrolmentInFilteredList = model.getFilteredAttendanceList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
+        Attendance enrolmentInFilteredList = model.getFilteredAttendanceList()
+                .get(INDEX_FIRST_ENROLMENT.getZeroBased());
         Attendance editedEnrolment =
                 new AttendanceBuilder(enrolmentInFilteredList).withHours(VALID_HOURS_BOXING).build();
         EditEnrolmentCommand editEnrolmentCommand = new EditEnrolmentCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT,

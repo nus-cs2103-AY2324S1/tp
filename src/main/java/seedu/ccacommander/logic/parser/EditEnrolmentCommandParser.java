@@ -1,19 +1,18 @@
 package seedu.ccacommander.logic.parser;
 
-import seedu.ccacommander.commons.core.index.Index;
-import seedu.ccacommander.logic.commands.EditEnrolmentCommand;
-import seedu.ccacommander.logic.commands.EditEnrolmentCommand.EditEnrolmentDescriptor;
-import seedu.ccacommander.logic.commands.EnrolCommand;
-import seedu.ccacommander.logic.parser.exceptions.ParseException;
-
-import java.util.stream.Stream;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
+
+import java.util.stream.Stream;
+
+import seedu.ccacommander.commons.core.index.Index;
+import seedu.ccacommander.logic.commands.EditEnrolmentCommand;
+import seedu.ccacommander.logic.commands.EditEnrolmentCommand.EditEnrolmentDescriptor;
+import seedu.ccacommander.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditEnrolmentCommand object
@@ -31,7 +30,7 @@ public class EditEnrolmentCommandParser implements Parser<EditEnrolmentCommand> 
                 ArgumentTokenizer.tokenize(args, PREFIX_MEMBER, PREFIX_EVENT, PREFIX_HOURS, PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MEMBER, PREFIX_EVENT)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrolCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEnrolmentCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MEMBER, PREFIX_EVENT, PREFIX_HOURS, PREFIX_REMARK);

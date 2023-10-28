@@ -1,58 +1,31 @@
 package seedu.ccacommander.logic.parser;
 
+import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.EVENT_INDEX_DESC_TWO;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.HOURS_DESC_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_EVENT_INDEX_DESC;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_HOURS_DESC;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_MEMBER_INDEX_DESC;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.MEMBER_INDEX_DESC_ONE;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.REMARK_DESC_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_AURORA;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.EditEnrolmentCommand;
 import seedu.ccacommander.logic.commands.EditEnrolmentCommand.EditEnrolmentDescriptor;
-import seedu.ccacommander.logic.commands.EditEventCommand;
-import seedu.ccacommander.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.ccacommander.model.attendance.Hours;
 import seedu.ccacommander.model.attendance.Remark;
-import seedu.ccacommander.model.event.EventDate;
-import seedu.ccacommander.model.event.Location;
-import seedu.ccacommander.model.shared.Name;
-import seedu.ccacommander.model.tag.Tag;
 import seedu.ccacommander.testutil.EditEnrolmentDescriptorBuilder;
-import seedu.ccacommander.testutil.EditEventDescriptorBuilder;
-
-import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.DATE_DESC_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.DATE_DESC_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.EVENT_INDEX_DESC_TWO;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.HOURS_DESC_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_EVENT_INDEX_DESC;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_HOURS_DESC;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_LOCATION_DESC;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_MEMBER_INDEX_DESC;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.LOCATION_DESC_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.LOCATION_DESC_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.MEMBER_INDEX_DESC_ONE;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.NAME_DESC_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.REMARK_DESC_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.TAGS_DESC_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.TAGS_DESC_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_DATE_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_LOCATION_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_TAG_AURORA;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_LOCATION;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
-import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
-import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
-import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_THIRD_EVENT;
 
 public class EditEnrolmentCommandParserTest {
 
@@ -67,7 +40,8 @@ public class EditEnrolmentCommandParserTest {
         assertParseFailure(parser, VALID_HOURS_AURORA, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO, EditEnrolmentCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO,
+                EditEnrolmentCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

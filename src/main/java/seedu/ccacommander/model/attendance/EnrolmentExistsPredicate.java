@@ -1,8 +1,8 @@
 package seedu.ccacommander.model.attendance;
 
-import seedu.ccacommander.commons.util.ToStringBuilder;
-
 import java.util.function.Predicate;
+
+import seedu.ccacommander.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Enrolment} is the same as the {@code Enrolment} given.

@@ -4,15 +4,7 @@ import seedu.ccacommander.logic.commands.EditEnrolmentCommand.EditEnrolmentDescr
 import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.model.attendance.Hours;
 import seedu.ccacommander.model.attendance.Remark;
-import seedu.ccacommander.model.event.Event;
-import seedu.ccacommander.model.event.EventDate;
-import seedu.ccacommander.model.event.Location;
 import seedu.ccacommander.model.shared.Name;
-import seedu.ccacommander.model.tag.Tag;
-
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * A utility class to help with building EditEnrolmentDescriptor objects.

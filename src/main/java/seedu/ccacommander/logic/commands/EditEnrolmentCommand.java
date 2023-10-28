@@ -1,5 +1,16 @@
 package seedu.ccacommander.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
+import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_ATTENDANCES;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.commons.util.CollectionUtil;
 import seedu.ccacommander.commons.util.ToStringBuilder;
@@ -11,30 +22,8 @@ import seedu.ccacommander.model.attendance.EnrolmentExistsPredicate;
 import seedu.ccacommander.model.attendance.Hours;
 import seedu.ccacommander.model.attendance.Remark;
 import seedu.ccacommander.model.event.Event;
-import seedu.ccacommander.model.event.EventDate;
-import seedu.ccacommander.model.event.Location;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
-import seedu.ccacommander.model.tag.Tag;
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EVENT;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_LOCATION;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_ATTENDANCES;
-import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 /**
  * Edits the details of an existing enrolment in CcaCommander.
@@ -57,7 +46,7 @@ public class EditEnrolmentCommand extends Command {
             + PREFIX_HOURS + "3 "
             + PREFIX_REMARK + "Organised catering";
 
-    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Enrolment: %1$s";
+    public static final String MESSAGE_EDIT_ENROLMENT_SUCCESS = "Edited Enrolment: %1$s";
     public static final String MESSAGE_COMMIT = "Edited Enrolment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     private final Index memberIndex;
@@ -103,7 +92,7 @@ public class EditEnrolmentCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
                     memberIndex.getOneBased(), eventIndex.getOneBased()));
         }
-        assert enrolmentToEditList.size() == 1: "There should not be duplicate enrolments";
+        assert enrolmentToEditList.size() == 1 : "There should not be duplicate enrolments";
 
         Attendance enrolmentToEdit = enrolmentToEditList.get(0);
         Attendance editedEnrolment = createEditedEnrolment(enrolmentToEdit, editEnrolmentDescriptor);
@@ -111,7 +100,7 @@ public class EditEnrolmentCommand extends Command {
         model.setEnrolment(enrolmentToEdit, editedEnrolment);
         model.updateFilteredAttendanceList(PREDICATE_SHOW_ALL_ATTENDANCES);
         model.commit(String.format(MESSAGE_COMMIT, editedEnrolment.getMemberAndEventAttendance()));
-        return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, Messages.format(editedEnrolment)));
+        return new CommandResult(String.format(MESSAGE_EDIT_ENROLMENT_SUCCESS, Messages.format(editedEnrolment)));
     }
 
     /**
