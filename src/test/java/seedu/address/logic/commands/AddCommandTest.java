@@ -244,11 +244,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public Theme getTheme() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setTheme(Theme theme) {
             throw new AssertionError("This method should not be called.");
         }

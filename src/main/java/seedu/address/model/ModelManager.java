@@ -201,11 +201,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Theme getTheme() {
-        return userPrefs.getTheme();
-    }
-
-    @Override
     public void setTheme(Theme theme) {
         userPrefs.setTheme(theme);
     }

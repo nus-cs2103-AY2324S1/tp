@@ -126,11 +126,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Theme getTheme() {
-        return model.getTheme();
-    }
-
-    @Override
     public void setTheme(Theme theme) {
         model.setTheme(theme);
     }

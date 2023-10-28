@@ -1,5 +1,6 @@
 package seedu.address.commons.core;
 
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
@@ -10,8 +11,17 @@ import seedu.address.model.Theme;
 /**
  * Represents a custom property for managing the theme of an application.
  */
-public class ThemeProperty implements Property<Theme> {
-    private final SimpleObjectProperty<Theme> delegate = new SimpleObjectProperty<>();
+class ThemeProperty implements Property<Theme> {
+    private static final ThemeProperty themeProperty = new ThemeProperty();
+    private final SimpleObjectProperty<Theme> delegate = new SimpleObjectProperty<>(Theme.LIGHT);
+
+    private ThemeProperty() {
+    }
+
+    public static ThemeProperty getInstance() {
+        return themeProperty;
+    }
+
     @Override
     public void bind(ObservableValue<? extends Theme> observable) {
         delegate.bind(observable);

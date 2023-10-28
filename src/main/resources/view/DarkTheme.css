@@ -420,3 +420,11 @@
 .personListView {
     -fx-background-color: black;
 }
+
+.patientType {
+    -fx-text-fill: aqua
+}
+
+.specialistType {
+    -fx-text-fill: greenyellow
+}

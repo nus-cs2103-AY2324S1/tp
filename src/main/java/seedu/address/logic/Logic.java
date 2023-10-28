@@ -79,11 +79,6 @@ public interface Logic {
     void addCommandString(String commandString);
 
     /**
-     * Returns the current theme of the application.
-     */
-    Theme getTheme();
-
-    /**
      * Sets the current theme of the application to be {@code theme}
      */
     void setTheme(Theme theme);
