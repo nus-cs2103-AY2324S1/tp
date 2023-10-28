@@ -114,7 +114,6 @@ Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The NEW_STUDENT_NUMBER must be valid and unique (does not exist in the class manager).
-* Changing the CLASS_NUMBER will not change the existing grades, such as assignments, attendance, and participation.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.

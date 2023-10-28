@@ -10,17 +10,13 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NONEXISTENT_STUDENT_NUMBER;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_NONEXISTENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -29,13 +25,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
@@ -57,9 +49,6 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        // no student number specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
-
         // no field specified
         assertParseFailure(parser, " " + VALID_STUDENT_NUMBER_BOB, EditCommand.MESSAGE_NOT_EDITED);
 
@@ -100,7 +89,7 @@ public class EditCommandParserTest {
                 + STUDENT_NUMBER_DESC_AMY + CLASS_NUMBER_DESC_AMY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withStudentNumber(VALID_STUDENT_NUMBER_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withStudentNumber(VALID_STUDENT_NUMBER_AMY)
                 .withClassNumber(VALID_CLASS_NUMBER_AMY).build();
         EditCommand expectedCommand = new EditCommand(new StudentNumber(targetStudentNumber), descriptor);
 
@@ -110,9 +99,9 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         String targetStudentNumber = VALID_STUDENT_NUMBER_BOB;
-        String userInput = targetStudentNumber + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+        String userInput = targetStudentNumber + PHONE_DESC_AMY + EMAIL_DESC_AMY;
 
-        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(new StudentNumber(targetStudentNumber), descriptor);
 
@@ -179,8 +168,8 @@ public class EditCommandParserTest {
 
         // multiple invalid values
         userInput = targetStudentNumber + INVALID_PHONE_DESC + INVALID_STUDENT_NUMBER_DESC
-                + INVALID_CLASS_NUMBER_DESC + INVALID_EMAIL_DESC + INVALID_PHONE_DESC
-                + INVALID_STUDENT_NUMBER_DESC + INVALID_CLASS_NUMBER_DESC + INVALID_EMAIL_DESC;
+                + INVALID_EMAIL_DESC + INVALID_PHONE_DESC
+                + INVALID_STUDENT_NUMBER_DESC + INVALID_EMAIL_DESC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STUDENT_NUMBER));

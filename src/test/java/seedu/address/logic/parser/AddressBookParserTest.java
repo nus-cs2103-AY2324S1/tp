@@ -15,7 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -82,9 +81,9 @@ public class AddressBookParserTest {
         Student student = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_STUDENT.getOneBased() + " "
+                + TypicalStudents.ALICE.getStudentNumber() + " "
                 + StudentUtil.getEditStudentDescriptorDetails(descriptor), true);
-        assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
+        assertEquals(new EditCommand(TypicalStudents.ALICE.getStudentNumber(), descriptor), command);
     }
 
     @Test

@@ -59,7 +59,7 @@ public class EditStudentDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different class number -> returns false
-        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withClassDetails(VALID_CLASS_NUMBER_BOB).build();
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withClassNumber(VALID_CLASS_NUMBER_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -78,7 +78,7 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getPhone().orElse(null) + ", email="
                 + editStudentDescriptor.getEmail().orElse(null) + ", student number="
                 + editStudentDescriptor.getStudentNumber().orElse(null) + ", class number="
-                + editStudentDescriptor.getClassDetails().orElse(null) + ", tags="
+                + editStudentDescriptor.getClassNumber().orElse(null) + ", tags="
                 + editStudentDescriptor.getTags().orElse(new HashSet<>())
                 + ", comment=" + editStudentDescriptor.getComment().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
