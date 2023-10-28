@@ -53,6 +53,12 @@
           </padding>
           <HBox>
             <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+              <Label styleClass="label-header" text="Tags" />
+              <StackPane fx:id="tagListPanelPlaceholder" />
+            </VBox>
+          </HBox>
+          <HBox>
+            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
               <Label styleClass="label-header" text="Members" />
               <StackPane fx:id="memberListPanelPlaceholder" />
             </VBox>
