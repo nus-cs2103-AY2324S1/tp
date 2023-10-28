@@ -3,15 +3,24 @@ layout: page
 title: OutBook User Guide
 ---
 
-OutBook is an app that allows young tech-savvy free-lance insurance agents to manage their numerous contacts and meeting schedule. It is optimised for Command Line Interface (CLI) aims to significantly reduce the time needed for organizational tasks.
+OutBook is an app that allows freelance insurance agents to manage their numerous contacts and meeting schedule. It is optimised for Command Line Interface (CLI) aims to significantly reduce the time needed for organizational tasks.
 
-This guide is to help you explore and learn about what are its features and how to use them.
+This guide is to help you explore and learn about what are its features and how to use them. 
+Outbook has 2 lists which are used to track contacts and meetings respectively. These list can be filtered to show the specific data you need. 
+It is able to add, edit and delete any contacts and meetings you want. As well as add custom remarks and tags for your specific needs.
+
+
+
+<div style="page-break-after: always;"></div>
+
+# Table of Content
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
 # Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -299,8 +308,11 @@ Examples:
 * `findm m/project` returns `project` and `Project work`
 * `findm m/zoom meeting` returns `Zoom session`, `Zoom meeting`, `Meeting advisor`
 * `findm s/09.09.2023 0000 e/09.10.2023 0000` returns all meetings between 09.09.2023 0000 and 09.10.2023 0000<br>
-* `findm m/Meeting s/09.09.2023 0000 e/09.10.2023 0000` returns `Zoom meeting`, `Meeting advisor`, if these meetings start after 09.09.2023 0000 and end before 09.10.2023 0000<br>
-  ![result for 'findAlexMeeting'](images/findAlexMeetingResult.png)
+* `findm m/Meeting s/09.09.2023 0000 e/09.10.2023 0000` returns `Zoom meeting`, `Meeting advisor`, if these meetings start after 09.09.2023 0000 and end before 09.10.2023 0000
+ 
+<div style="page-break-after: always;"></div>
+
+![result for 'findAlexMeeting'](images/findAlexMeetingResult.png)
 
 <div style="page-break-after: always;"></div>
 
