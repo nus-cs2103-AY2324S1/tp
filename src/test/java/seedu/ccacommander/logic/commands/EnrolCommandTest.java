@@ -11,7 +11,7 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_INDEX_TWO;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_A;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_B;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
+import static seedu.ccacommander.testutil.TypicalEnrolments.ALICE_AURORA;
 import static seedu.ccacommander.testutil.TypicalEvents.AURORA_BOREALIS;
 import static seedu.ccacommander.testutil.TypicalMembers.ALICE;
 
@@ -32,12 +32,12 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ReadOnlyCcaCommander;
 import seedu.ccacommander.model.ReadOnlyUserPrefs;
 import seedu.ccacommander.model.VersionCaptures;
-import seedu.ccacommander.model.attendance.Attendance;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.UniqueEventList;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.UniqueMemberList;
-import seedu.ccacommander.testutil.AttendanceBuilder;
+import seedu.ccacommander.testutil.EnrolmentBuilder;
 
 public class EnrolCommandTest {
     @Test
@@ -46,27 +46,27 @@ public class EnrolCommandTest {
     }
 
     @Test
-    public void execute_attendanceAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingAttendanceAdded modelStub = new ModelStubAcceptingAttendanceAdded();
-        Attendance validAttendance = new AttendanceBuilder().build();
+    public void execute_enrolmentAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEnrolmentAdded modelStub = new ModelStubAcceptingEnrolmentAdded();
+        Enrolment validEnrolment = new EnrolmentBuilder().build();
 
         CommandResult commandResult =
                 new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A)
                         .execute(modelStub);
 
-        assertEquals(String.format(EnrolCommand.MESSAGE_SUCCESS, Messages.format(validAttendance)),
+        assertEquals(String.format(EnrolCommand.MESSAGE_SUCCESS, Messages.format(validEnrolment)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validAttendance), modelStub.attendancesAdded);
+        assertEquals(Arrays.asList(validEnrolment), modelStub.enrolmentsAdded);
     }
 
     @Test
-    public void execute_duplicateAttendance_throwsCommandException() {
+    public void execute_duplicateEnrolment_throwsCommandException() {
         EnrolCommand enrolCommand =
                 new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_ONE, VALID_HOURS_A, VALID_REMARK_A);
-        ModelStubWithAttendance modelStub = new ModelStubWithAttendance(ALICE_AURORA);
+        ModelStubWithEnrolment modelStub = new ModelStubWithEnrolment(ALICE_AURORA);
 
         assertThrows(CommandException.class,
-                EnrolCommand.MESSAGE_DUPLICATE_ATTENDANCE, () -> enrolCommand.execute(modelStub));
+                EnrolCommand.MESSAGE_DUPLICATE_ENROLMENT, () -> enrolCommand.execute(modelStub));
     }
 
     @Test
@@ -190,11 +190,11 @@ public class EnrolCommandTest {
         }
 
         @Override
-        public void createAttendance(Attendance attendance) {
+        public void createEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public boolean hasAttendance(Attendance attendance) {
+        public boolean hasEnrolment(Enrolment enrolment) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -223,12 +223,12 @@ public class EnrolCommandTest {
         }
 
         @Override
-        public ObservableList<Attendance> getFilteredAttendanceList() {
+        public ObservableList<Enrolment> getFilteredEnrolmentList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredAttendanceList(Predicate<Attendance> attendance) {
+        public void updateFilteredEnrolmentList(Predicate<Enrolment> enrolment) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -264,18 +264,18 @@ public class EnrolCommandTest {
     }
 
     /**
-     * A Model stub that contains a single attendance.
+     * A Model stub that contains a single enrolment.
      */
-    private class ModelStubWithAttendance extends ModelStub {
+    private class ModelStubWithEnrolment extends ModelStub {
         final UniqueMemberList members = new UniqueMemberList();
         final UniqueEventList events = new UniqueEventList();
-        private final Attendance attendance;
+        private final Enrolment enrolment;
 
-        ModelStubWithAttendance(Attendance attendance) {
-            requireNonNull(attendance);
+        ModelStubWithEnrolment(Enrolment enrolment) {
+            requireNonNull(enrolment);
             events.createEvent(AURORA_BOREALIS);
             members.add(ALICE);
-            this.attendance = attendance;
+            this.enrolment = enrolment;
         }
 
         @Override
@@ -288,22 +288,22 @@ public class EnrolCommandTest {
             return new FilteredList<>(members.asUnmodifiableObservableList());
         }
         @Override
-        public boolean hasAttendance(Attendance attendance) {
-            requireNonNull(attendance);
-            return this.attendance.isSameAttendance(attendance);
+        public boolean hasEnrolment(Enrolment enrolment) {
+            requireNonNull(enrolment);
+            return this.enrolment.isSameEnrolment(enrolment);
         }
     }
 
     /**
-     * A Model stub that always accept the attendance being added.
+     * A Model stub that always accept the enrolment being added.
      */
-    private class ModelStubAcceptingAttendanceAdded extends ModelStub {
+    private class ModelStubAcceptingEnrolmentAdded extends ModelStub {
         final UniqueMemberList members = new UniqueMemberList();
         final UniqueEventList events = new UniqueEventList();
-        final ArrayList<Attendance> attendancesAdded = new ArrayList<>();
+        final ArrayList<Enrolment> enrolmentsAdded = new ArrayList<>();
         final ArrayList<String> commitMessages = new ArrayList<>();
 
-        public ModelStubAcceptingAttendanceAdded() {
+        public ModelStubAcceptingEnrolmentAdded() {
             events.createEvent(AURORA_BOREALIS);
             members.add(ALICE);
         }
@@ -314,15 +314,15 @@ public class EnrolCommandTest {
         }
 
         @Override
-        public boolean hasAttendance(Attendance attendance) {
-            requireNonNull(attendance);
-            return attendancesAdded.stream().anyMatch(attendance::isSameAttendance);
+        public boolean hasEnrolment(Enrolment enrolment) {
+            requireNonNull(enrolment);
+            return enrolmentsAdded.stream().anyMatch(enrolment::isSameEnrolment);
         }
 
         @Override
-        public void createAttendance(Attendance attendance) {
-            requireNonNull(attendance);
-            attendancesAdded.add(attendance);
+        public void createEnrolment(Enrolment enrolment) {
+            requireNonNull(enrolment);
+            enrolmentsAdded.add(enrolment);
         }
 
         @Override

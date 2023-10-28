@@ -15,8 +15,8 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
-import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
-import static seedu.ccacommander.testutil.TypicalAttendances.BENSON_BOXING;
+import static seedu.ccacommander.testutil.TypicalEnrolments.ALICE_AURORA;
+import static seedu.ccacommander.testutil.TypicalEnrolments.BENSON_BOXING;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package seedu.ccacommander.model.attendance;
+package seedu.ccacommander.model.enrolment;
 
 import static seedu.ccacommander.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -8,10 +8,10 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.model.shared.Name;
 
 /**
- * Represents an attendance in CcaCommander.
+ * Represents an enrolment in CcaCommander.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Attendance {
+public class Enrolment {
 
     // Identity fields
     private final Name memberName;
@@ -24,7 +24,7 @@ public class Attendance {
     /**
      * Every field must be present and not null.
      */
-    public Attendance(Name memberName, Name eventName, Hours hours, Remark remark) {
+    public Enrolment(Name memberName, Name eventName, Hours hours, Remark remark) {
         requireAllNonNull(memberName, eventName, hours, remark);
         this.memberName = memberName;
         this.eventName = eventName;
@@ -48,27 +48,27 @@ public class Attendance {
         return remark;
     }
 
-    public String getMemberAndEventAttendance() {
+    public String getMemberAndEventEnrolment() {
         return getMemberName().toString() + " to " + getEventName().toString();
     }
 
     /**
-     * Returns true if both attendance have the same identity fields.
-     * This defines a weaker notion of equality between two attendance.
+     * Returns true if both enrolment have the same identity fields.
+     * This defines a weaker notion of equality between two enrolment.
      */
-    public boolean isSameAttendance(Attendance otherAttendance) {
-        if (otherAttendance == this) {
+    public boolean isSameEnrolment(Enrolment otherEnrolment) {
+        if (otherEnrolment == this) {
             return true;
         }
 
-        return otherAttendance != null
-                && otherAttendance.getMemberName().equals(getMemberName())
-                && otherAttendance.getEventName().equals(getEventName());
+        return otherEnrolment != null
+                && otherEnrolment.getMemberName().equals(getMemberName())
+                && otherEnrolment.getEventName().equals(getEventName());
     }
 
     /**
-     * Returns true if both attendance have the same identity and data fields.
-     * This defines a stronger notion of equality between two attendances.
+     * Returns true if both enrolment have the same identity and data fields.
+     * This defines a stronger notion of equality between two enrolments.
      */
     @Override
     public boolean equals(Object other) {
@@ -77,15 +77,15 @@ public class Attendance {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Attendance)) {
+        if (!(other instanceof Enrolment)) {
             return false;
         }
 
-        Attendance otherAttendance = (Attendance) other;
-        return memberName.equals(otherAttendance.memberName)
-                && eventName.equals(otherAttendance.eventName)
-                && hours.equals(otherAttendance.hours)
-                && remark.equals(otherAttendance.remark);
+        Enrolment otherEnrolment = (Enrolment) other;
+        return memberName.equals(otherEnrolment.memberName)
+                && eventName.equals(otherEnrolment.eventName)
+                && hours.equals(otherEnrolment.hours)
+                && remark.equals(otherEnrolment.remark);
     }
 
     @Override

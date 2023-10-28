@@ -116,8 +116,8 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/model/Model.java)
 * The class diagram below gives an overview of the model package.<br/>
-*Details of the `Member`, `Event`, and `Attendance` packages have be omitted for brevity.
-Please refer to the [Member](#member-class-diagram), [Event](#event-class-diagram) and [Attendance](#attendance-class-diagram) diagrams for more information.*
+*Details of the `Member`, `Event`, and `Enrolment` packages have be omitted for brevity.
+Please refer to the [Member](#member-class-diagram), [Event](#event-class-diagram) and [Enrolment](#enrolment-model) diagrams for more information.*
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -152,50 +152,50 @@ Classes used by multiple components are in the `seedu.ccacommander.commons` pack
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Attendance Model
-This section explains how the `Attendance` model is implemented and the various design consideration when
+### Enrolment Model
+This section explains how the `Enrolment` model is implemented and the various design consideration when
 implementing this model.
 
 #### Implementation
-The `Attendance` and `UniqueAttendanceList` classes are implemented as shown in the diagram below:
+The `Enrolment` and `UniqueEnrolmentList` classes are implemented as shown in the diagram below:
 
-![AttendanceClassDiagram](images/AttendanceClassDiagram.png)
+![EnrolmentClassDiagram](images/EnrolmentClassDiagram.png)
 
-`Attendance` encapsulates the attendance of an event by a member. It composes of the `Name` of the member and
+`Enrolment` encapsulates the enrolment of a member into an event. It composes of the `Name` of the member and
 the `Name` of the event enrolled in, number of `Hours` they contributed, and a `Remark` to note for that
-attendance. `UniqueAttendanceList` stores all unique instances of `Attendance`.
+enrolment. `UniqueEnrolmentList` stores all unique instances of `Enrolment`.
 
 #### Design considerations:
 
 **Aspect: How to store each member's events and each event's members.**
 
-* **Alternative 1 (current choice):** Saves the attendance as an independent list.
+* **Alternative 1 (current choice):** Saves the enrolments as an independent list.
   * Pros:
     * Easy to implement.
-    * Less performance issues when loading and storing attendances.
+    * Less performance issues when loading and storing enrolments.
   * Cons:
     * Incur high performance cost when viewing members of event or events of member.
 
-* **Alternative 2:** Each member or event has its own list of attendances.
+* **Alternative 2:** Each member or event has its own list of enrolments.
   * Pros:
     * Linear time to view members of event or events of members.
   * Cons:
     * Hard to implement.
-    * Will encounter more difficulties when implementing other features related to attendance.
+    * Will encounter more difficulties when implementing other features related to enrolment.
 
 Alternative 1 was chosen as the benefit of having a simple design outweighs the cost of having a higher
 performance overhead when viewing members of event or events of member. Alternative 2 has multiple layers of
 complexities that are difficult to navigate and this will compound when dealing with other features related to
-attendance. The simpler design of alternative 1 also allows for more rigorous testing.
+enrolment. The simpler design of alternative 1 also allows for more rigorous testing.
 
 ### Enrol Feature
-The enrol feature allows users to link a member to an event in order to keep track of their attendance and contributions to the event.
+The enrol feature allows users to link a member to an event in order to keep track of their enrolment and contributions to the event.
 
 This section will explain how the enrol feature was implemented and the various design considerations when implementing the feature.
 
 #### Implementation
 The enrolment mechanism is facilitated by `EnrolCommand`. It extends `Command`.
-The method, `EnrolCommand#execute(Model model)`, performs a validity check and adds a member's attendance for a particular event if
+The method, `EnrolCommand#execute(Model model)`, performs a validity check and adds a member's enrolment for a particular event if
 all the supplied parameters are valid.
 
 The sequence diagram below shows how the `Model` and `LogicManager` components interact when a `EnrolCommand` is executed with user input
@@ -209,9 +209,9 @@ The sequence diagram below shows how the `Model` and `LogicManager` components i
    the `LogicManager`.
 1. The command execution calls `Model#getFilteredMemberList()` and `Model#getFilteredEventList()` to get the desired `member` and
    `event` respectively using indexes supplied by the user.
-1. Next, the command execution creates a new instance of an `Attendance` object.
-1. `Model#createAttendance()` is then called, adding the new `Attendance` object to the `uniqueAttendanceList` object in `model`.
-1. The change resulting from the command's execution is saved using the `Model#commit()` method for the `undo`/`redo` feature.
+1. Next, the command execution creates a new instance of an `Enrolment` object.
+1. `Model#createEnrolment()` is then called, adding the new `Enrolment` object to the `uniqueEnrolmentList` object in `model`.
+1. The change resulting from the command's execution is saved using the `Model#commit(String commitMessage)` method for the `undo`/`redo` feature.
 1. A `CommandResult` object which encapsulates the result of the command execution is passed back to the `Ui`.
 
 The following activity diagram shows how the `EnrolCommand` works.
@@ -229,7 +229,7 @@ The following activity diagram shows how the `EnrolCommand` works.
     * Cons:
         * Not standardised with other creation commands.
 
-* **Alternative 2:** `EnrolCommand` has parameter `Attendance attendance`
+* **Alternative 2:** `EnrolCommand` has parameter `Enrolment enrolment`
     * Pros:
         * Standardised with other creation commands
     * Cons:
@@ -424,21 +424,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​       | I can …​                                    | So that …​                                                                        |
-|----------|---------------|---------------------------------------------|-----------------------------------------------------------------------------------|
-| `* * *`  | beginner user | create a new profile of a CCA member        | I can keep track of their information                                             |
-| `* * *`  | power user    | delete the profile of a CCA member          | I can remove them from the system when needed                                     |
-| `* * *`  | beginner user | list all members in my CCA                  | I can keep track of my CCA strength                                               |
-| `* * *`  | beginner user | add a new event hosted by the CCA           | I can keep track of upcoming activities                                           |
-| `* * *`  | power user    | delete an event                             | I can remove it from the schedule                                                 |
-| `* * *`  | power user    | view a list of all events hosted by the CCA | I can see event history                                                           |
-| `* * *`  | beginner user | add a member to an event                    | I can track which members are participating in the event                          |
-| `* * *`  | beginner user | remove a member from an event               | I can amend adding the wrong member to an event                                   |
-| `* * *`  | beginner user | view the members who attended an event      | I can estimate the number of members who will attend similar events in the future |
-| `* * *`  | beginner user | view events of a member                     | I can check how involved that particular member is                                |
-| `* * *`  | beginner user | recall the previous commands                | I can enter similar commands quickly                                              |
-| `* * *`  | power user    | undo a command                              | I can correct any wrong commands that I have entered previously                   |
-| `* * *`  | power user    | redo a command                              | I can correct any wrong undo commands that I have entered previously              |
+| Priority | As a …​       | I can …​                                       | So that …​                                                                          |
+|----------|---------------|------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | beginner user | create a new profile of a CCA member           | I can keep track of their information                                               |
+| `* * *`  | power user    | delete the profile of a CCA member             | I can remove them from the system when needed                                       |
+| `* * *`  | beginner user | list all members in my CCA                     | I can keep track of my CCA strength                                                 |
+| `* * *`  | beginner user | add a new event hosted by the CCA              | I can keep track of upcoming activities                                             |
+| `* * *`  | power user    | delete an event                                | I can remove it from the schedule                                                   |
+| `* * *`  | power user    | view a list of all events hosted by the CCA    | I can see event history                                                             |
+| `* * *`  | beginner user | add a member to an event                       | I can track which members are participating in the event                            |
+| `* * *`  | beginner user | remove a member from an event                  | I can amend adding the wrong member to an event                                     |
+| `* * *`  | beginner user | view the members who have enrolled in an event | I can estimate the number of members who will enrol in similar events in the future |
+| `* * *`  | beginner user | view events of a member                        | I can check how involved that particular member is                                  |
+| `* * *`  | beginner user | recall the previous commands                   | I can enter similar commands quickly                                                |
+| `* * *`  | power user    | undo a command                                 | I can correct any wrong commands that I have entered previously                     |
+| `* * *`  | power user    | redo a command                                 | I can correct any wrong undo commands that I have entered previously                |
 
 *{More to be added}*
 

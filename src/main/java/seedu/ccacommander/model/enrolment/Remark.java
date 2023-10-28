@@ -1,10 +1,10 @@
-package seedu.ccacommander.model.attendance;
+package seedu.ccacommander.model.enrolment;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the remarks about a Member's attendance of an Event.
+ * Represents the remarks about a Member's enrolment of an Event.
  * * Guarantees: immutable; is valid as declared in {@link #isValidRemark(String)}
  */
 public class Remark {

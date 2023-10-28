@@ -1,4 +1,4 @@
-package seedu.ccacommander.model.attendance;
+package seedu.ccacommander.model.enrolment;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.AppUtil.checkArgument;

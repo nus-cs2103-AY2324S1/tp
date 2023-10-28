@@ -23,7 +23,7 @@ Package Event {
 
 
 
-Package Attendance {
+Package Enrolment {
 }
 
 
@@ -46,7 +46,7 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 CcaCommander *--> "*" Member
 CcaCommander *--> "*" Event
-CcaCommander *--> "*" Attendance
+CcaCommander *--> "*" Enrolment
 
 
 

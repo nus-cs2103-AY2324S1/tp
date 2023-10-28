@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.logic.commands.EnrolCommand;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
-import seedu.ccacommander.model.attendance.Hours;
-import seedu.ccacommander.model.attendance.Remark;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 
 /**
  * Parses input arguments and creates a new EnrolCommand object

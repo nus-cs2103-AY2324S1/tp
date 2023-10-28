@@ -4,17 +4,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ccacommander.commons.exceptions.IllegalValueException;
-import seedu.ccacommander.model.attendance.Attendance;
-import seedu.ccacommander.model.attendance.Hours;
-import seedu.ccacommander.model.attendance.Remark;
+import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.shared.Name;
 
 /**
- * Jackson-friendly version of {@link Attendance}.
+ * Jackson-friendly version of {@link Enrolment}.
  */
-class JsonAdaptedAttendance {
+class JsonAdaptedEnrolment {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Attendance's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Enrolment's %s field is missing!";
 
     private final String memberName;
     private final String eventName;
@@ -22,12 +22,12 @@ class JsonAdaptedAttendance {
     private final String remark;
 
     /**
-     * Constructs a {@code JsonAdaptedAttendance} with the given attendance details.
+     * Constructs a {@code JsonAdaptedEnrolment} with the given enrolment details.
      */
     @JsonCreator
-    public JsonAdaptedAttendance(@JsonProperty("memberName") String memberName,
-                                 @JsonProperty("eventName") String eventName,
-                                 @JsonProperty("hours") String hours, @JsonProperty("remark") String remark) {
+    public JsonAdaptedEnrolment(@JsonProperty("memberName") String memberName,
+                                @JsonProperty("eventName") String eventName,
+                                @JsonProperty("hours") String hours, @JsonProperty("remark") String remark) {
         this.memberName = memberName;
         this.eventName = eventName;
         this.hours = hours;
@@ -35,9 +35,9 @@ class JsonAdaptedAttendance {
     }
 
     /**
-     * Converts a given {@code Attendance} into this class for Jackson use.
+     * Converts a given {@code Enrolment} into this class for Jackson use.
      */
-    public JsonAdaptedAttendance(Attendance source) {
+    public JsonAdaptedEnrolment(Enrolment source) {
         memberName = source.getMemberName().name;
         eventName = source.getEventName().name;
         hours = source.getHours().value.toString();
@@ -45,11 +45,11 @@ class JsonAdaptedAttendance {
     }
 
     /**
-     * Converts this Jackson-friendly adapted attendance object into the model's {@code Attendance} object.
+     * Converts this Jackson-friendly adapted enrolment object into the model's {@code Enrolment} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
-    public Attendance toModelType() throws IllegalValueException {
+    public Enrolment toModelType() throws IllegalValueException {
         if (memberName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     "memberName"));
@@ -86,7 +86,7 @@ class JsonAdaptedAttendance {
         }
         final Remark modelRemark = new Remark(remark);
 
-        return new Attendance(modelMemberName, modelEventName, modelHours, modelRemark);
+        return new Enrolment(modelMemberName, modelEventName, modelHours, modelRemark);
     }
 
 }
