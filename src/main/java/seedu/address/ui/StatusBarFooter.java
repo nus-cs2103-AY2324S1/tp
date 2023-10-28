@@ -28,7 +28,8 @@ public class StatusBarFooter extends UiPart<Region> {
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
-    public StatusBarFooter(Path saveLocation, ObservableList<Person> unfilteredList, ObservableList<Person> filteredList) {
+    public StatusBarFooter(Path saveLocation, ObservableList<Person> unfilteredList,
+            ObservableList<Person> filteredList) {
         super(FXML);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
         this.unfilteredList = unfilteredList;
