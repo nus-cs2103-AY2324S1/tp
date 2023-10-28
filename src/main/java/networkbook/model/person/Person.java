@@ -2,15 +2,14 @@ package networkbook.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.awt.Desktop;
 import java.util.Objects;
 import java.util.Optional;
 
 import networkbook.commons.core.index.Index;
-import networkbook.commons.util.ThrowingIOExceptionConsumer;
+import networkbook.commons.util.ThrowingIoExceptionConsumer;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.util.Identifiable;
 import networkbook.model.util.UniqueList;
@@ -20,23 +19,14 @@ import networkbook.model.util.UniqueList;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person implements Identifiable<Person> {
-    private static class InvalidLinkFormatException extends RuntimeException {
-        public InvalidLinkFormatException() {
-            super();
-        }
-    }
 
-    public static final ThrowingIOExceptionConsumer<Link> LINK_OPENER = link -> {
+    public static final ThrowingIoExceptionConsumer<Link> LINK_OPENER = link -> {
         if (!Desktop.isDesktopSupported()) {
             return;
         }
         Desktop desktop = Desktop.getDesktop();
-        try {
-            URI uri = new URI(link.getValue());
-            desktop.browse(uri);
-        } catch (URISyntaxException e) { // should not throw this exception
-            throw new InvalidLinkFormatException();
-        }
+        URI uri = URI.create(link.toRecognisableWebUrl());
+        desktop.browse(uri);
     };
 
     // Identity fields
@@ -129,9 +119,19 @@ public class Person implements Identifiable<Person> {
     }
 
     /**
+     * Checks if the given index points to a valid link of this person.
+     */
+    public boolean isValidLinkIndex(Index linkIndex) {
+        assert linkIndex != null;
+        return linkIndex.getZeroBased() < this.links.size();
+    }
+
+    /**
      * Opens the link at the specified index.
      */
     public void openLink(Index linkIndex) throws IOException {
+        assert linkIndex != null;
+        assert linkIndex.getZeroBased() < this.links.size();
         this.links.consumeItem(linkIndex.getZeroBased(), LINK_OPENER);
     }
 
@@ -139,6 +139,8 @@ public class Person implements Identifiable<Person> {
      * Returns the link at the given index.
      */
     public Link getLink(int index) {
+        assert index >= 0;
+        assert index < this.links.size();
         return this.links.get(index);
     }
 

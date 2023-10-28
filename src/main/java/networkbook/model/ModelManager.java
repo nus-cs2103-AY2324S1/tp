@@ -13,8 +13,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import networkbook.commons.core.GuiSettings;
-import networkbook.commons.core.index.Index;
 import networkbook.commons.core.LogsCenter;
+import networkbook.commons.core.index.Index;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 
@@ -116,6 +116,12 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         networkBook.setItem(target, editedPerson);
+    }
+
+    @Override
+    public boolean isValidLinkIndex(Index personIndex, Index linkIndex) {
+        requireAllNonNull(personIndex, linkIndex);
+        return networkBook.isValidLinkIndex(personIndex, linkIndex);
     }
 
     @Override

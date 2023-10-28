@@ -14,6 +14,7 @@ import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
+import networkbook.logic.commands.OpenLinkCommand;
 import networkbook.logic.commands.SortCommand;
 import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.logic.commands.edit.EditCommand;
@@ -86,6 +87,9 @@ public class NetworkBookParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
+
+        case OpenLinkCommand.COMMAND_WORD:
+            return new OpenLinkCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

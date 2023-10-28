@@ -88,6 +88,13 @@ public class NetworkBook implements ReadOnlyNetworkBook {
     }
 
     /**
+     * Checks if the indices for a link of a contact is valid.
+     */
+    public boolean isValidLinkIndex(Index personIndex, Index linkIndex) {
+        return persons.test(personIndex.getZeroBased(), person -> person.isValidLinkIndex(linkIndex));
+    }
+
+    /**
      * Opens the link at {@code linkIndex} in the link list of the person
      * at index {@code personIndex}.
      */

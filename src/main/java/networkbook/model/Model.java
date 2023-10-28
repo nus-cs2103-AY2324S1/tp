@@ -81,6 +81,11 @@ public interface Model {
     void setItem(Person target, Person editedPerson);
 
     /**
+     * Checks if the indices for a link of a contact are valid.
+     */
+    boolean isValidLinkIndex(Index personIndex, Index linkIndex);
+
+    /**
      * Opens the link at index {@code linkIndex} in the link list of the person
      * at index {@code personIndex}.
      */
