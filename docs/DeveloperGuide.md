@@ -211,7 +211,7 @@ The sequence diagram below shows how the `Model` and `LogicManager` components i
    `event` respectively using indexes supplied by the user.
 1. Next, the command execution creates a new instance of an `Enrolment` object.
 1. `Model#createEnrolment()` is then called, adding the new `Enrolment` object to the `uniqueEnrolmentList` object in `model`.
-1. The change resulting from the command's execution is saved using the `Model#commit()` method for the `undo`/`redo` feature.
+1. The change resulting from the command's execution is saved using the `Model#commit(String commitMessage)` method for the `undo`/`redo` feature.
 1. A `CommandResult` object which encapsulates the result of the command execution is passed back to the `Ui`.
 
 The following activity diagram shows how the `EnrolCommand` works.
@@ -424,21 +424,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​       | I can …​                                    | So that …​                                                                        |
-|----------|---------------|---------------------------------------------|-----------------------------------------------------------------------------------|
-| `* * *`  | beginner user | create a new profile of a CCA member        | I can keep track of their information                                             |
-| `* * *`  | power user    | delete the profile of a CCA member          | I can remove them from the system when needed                                     |
-| `* * *`  | beginner user | list all members in my CCA                  | I can keep track of my CCA strength                                               |
-| `* * *`  | beginner user | add a new event hosted by the CCA           | I can keep track of upcoming activities                                           |
-| `* * *`  | power user    | delete an event                             | I can remove it from the schedule                                                 |
-| `* * *`  | power user    | view a list of all events hosted by the CCA | I can see event history                                                           |
-| `* * *`  | beginner user | add a member to an event                    | I can track which members are participating in the event                          |
-| `* * *`  | beginner user | remove a member from an event               | I can amend adding the wrong member to an event                                   |
-| `* * *`  | beginner user | view the members who enrolled in an event   | I can estimate the number of members who will attend similar events in the future |
-| `* * *`  | beginner user | view events of a member                     | I can check how involved that particular member is                                |
-| `* * *`  | beginner user | recall the previous commands                | I can enter similar commands quickly                                              |
-| `* * *`  | power user    | undo a command                              | I can correct any wrong commands that I have entered previously                   |
-| `* * *`  | power user    | redo a command                              | I can correct any wrong undo commands that I have entered previously              |
+| Priority | As a …​       | I can …​                                       | So that …​                                                                          |
+|----------|---------------|------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | beginner user | create a new profile of a CCA member           | I can keep track of their information                                               |
+| `* * *`  | power user    | delete the profile of a CCA member             | I can remove them from the system when needed                                       |
+| `* * *`  | beginner user | list all members in my CCA                     | I can keep track of my CCA strength                                                 |
+| `* * *`  | beginner user | add a new event hosted by the CCA              | I can keep track of upcoming activities                                             |
+| `* * *`  | power user    | delete an event                                | I can remove it from the schedule                                                   |
+| `* * *`  | power user    | view a list of all events hosted by the CCA    | I can see event history                                                             |
+| `* * *`  | beginner user | add a member to an event                       | I can track which members are participating in the event                            |
+| `* * *`  | beginner user | remove a member from an event                  | I can amend adding the wrong member to an event                                     |
+| `* * *`  | beginner user | view the members who have enrolled in an event | I can estimate the number of members who will enrol in similar events in the future |
+| `* * *`  | beginner user | view events of a member                        | I can check how involved that particular member is                                  |
+| `* * *`  | beginner user | recall the previous commands                   | I can enter similar commands quickly                                                |
+| `* * *`  | power user    | undo a command                                 | I can correct any wrong commands that I have entered previously                     |
+| `* * *`  | power user    | redo a command                                 | I can correct any wrong undo commands that I have entered previously                |
 
 *{More to be added}*
 
