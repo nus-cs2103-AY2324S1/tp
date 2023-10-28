@@ -14,7 +14,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.attendance.AttendanceStorage;
-import seedu.address.model.person.attendance.AttendanceType;
 
 import java.util.ArrayList;
 

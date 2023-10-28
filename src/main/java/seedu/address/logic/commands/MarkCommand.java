@@ -32,7 +32,7 @@ public class MarkCommand extends Command {
             + ": Marks the employee's attendance identified by the name used in the displayed employee list.\n"
             + "Parameters: n/NAME (must be present)\n"
             + "Example: " + COMMAND_WORD + " n/John";
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Employee: %1$s as %s";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Employee: %2$s as %1$s";
 
     private final Index targetIndex;
 
@@ -40,17 +40,6 @@ public class MarkCommand extends Command {
 
     private final AttendanceType attendanceType;
 
-
-
-    /**
-     * The constructor for DeleteCommand to take in index
-     * @param targetIndex The index of the employee to be deleted
-     */
-    public MarkCommand(Index targetIndex, AttendanceType attendanceType) {
-        this.targetIndex = targetIndex;
-        this.name = null;
-        this.attendanceType = attendanceType;
-    }
 
     /**
      * The constructor for DeleteCommand to take in name instead of index
@@ -65,10 +54,8 @@ public class MarkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (targetIndex == null) {
-            return this.markByName(model);
-        }
-        return this.markByIndex(model);
+        return this.markByName(model);
+
     }
 
     @Override
@@ -113,26 +100,6 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Deletes the employee identified by the index number used in the displayed employee list.
-     * @param model {@code Model} which the command should operate on.
-     * @return A command result that contains the message to be displayed to the user.
-     * @throws CommandException If the index is invalid.
-     */
-    public CommandResult markByIndex(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person employeeToMark = lastShownList.get(targetIndex.getZeroBased());
-        Person markedEmployee = markEmployee(employeeToMark);
-
-
-        model.setPerson(employeeToMark, markedEmployee);
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.format(employeeToMark)));
-    }
-
-    /**
      * Marks the attendance of the employee identified by the name used in the displayed employee list.
      * @param model {@code Model} which the command should operate on.
      * @return A command result that contains the message to be displayed to the user.
@@ -150,7 +117,7 @@ public class MarkCommand extends Command {
             Person markedEmployee = markEmployee(employeeToMark);
 
             model.setPerson(employeeToMark, markedEmployee);
-            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.format(employeeToMark), attendanceType.toString()));
+            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, attendanceType.toString().toLowerCase(), employeeToMark.getName()));
         }
         return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW_MARK,
                 model.getFilteredPersonList().size()), indexes);

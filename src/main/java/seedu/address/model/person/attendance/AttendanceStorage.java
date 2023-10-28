@@ -3,6 +3,8 @@ package seedu.address.model.person.attendance;
 import seedu.address.model.person.JoinDate;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 
 import static java.util.Objects.requireNonNull;
@@ -19,10 +21,14 @@ public class AttendanceStorage {
 
     }
     public AttendanceStorage(ArrayList<String> attendances) {
+        this();
         for (String attendance : attendances) {
             String[] attendanceArr = attendance.split("//");
-            LocalDate date = LocalDate.parse(attendanceArr[0]);
-            AttendanceType attendanceType = AttendanceType.valueOf(attendanceArr[1]);
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                    .appendPattern("dd/MM/yyyy")
+                    .toFormatter();
+            LocalDate date = LocalDate.parse(attendanceArr[0], formatter);
+            AttendanceType attendanceType = AttendanceType.valueOf(attendanceArr[1].toUpperCase());
             storage.add(new Attendance(date, attendanceType));
         }
     }
@@ -34,13 +40,14 @@ public class AttendanceStorage {
      * @return the type of attendance of the person on this date
      */
     private Attendance getAttendance(LocalDate date) {
+        requireNonNull(storage);
         if (storage.size() == 0) {
             // Anything not in storage is present.
             return null;
         }
 
         for (Attendance attendance : storage) {
-            if (attendance.getDate() == date) {
+            if (attendance.getDate().equals(date)) {
                 return attendance;
             }
         }
