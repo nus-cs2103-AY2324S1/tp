@@ -10,7 +10,7 @@ public class Note {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Note should have a minimum length of 1 character and maximum length of 100 characters";
-    public static final String VALIDATION_REGEX = ".{1,200}";
+    public static final String VALIDATION_REGEX = ".{0,200}";
     public final String value;
 
     /**

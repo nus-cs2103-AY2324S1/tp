@@ -22,13 +22,13 @@ public class NoteTest {
         assertThrows(NullPointerException.class, () -> Note.isValidNote(null));
 
         // invalid notes
-        assertFalse(Note.isValidNote("")); // empty string
-        assertFalse(Note.isValidNote(moreThanTwoHundredCharNote)); // more than 100 characters
+        assertFalse(Note.isValidNote(moreThanTwoHundredCharNote)); // more than 200 characters
 
         // valid note numbers
+        assertTrue(Note.isValidNote("")); // empty string
         assertTrue(Note.isValidNote("Likes dogs."));
         assertTrue(Note.isValidNote("a")); // 1 character
-        assertTrue(Note.isValidNote(twoHundredCharNote)); // exactly 100 characters
+        assertTrue(Note.isValidNote(twoHundredCharNote)); // exactly 200 characters
     }
 
     @Test
