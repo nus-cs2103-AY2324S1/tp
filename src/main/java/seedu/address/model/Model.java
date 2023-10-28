@@ -99,6 +99,13 @@ public interface Model {
      */
     UndoableCommand popCommandFromHistory();
 
+    /**
+     * Gets the size of the stack of commandHistory.
+     *
+     * @return The size of the stack of commandHistory.
+     */
+    int getCommandHistorySize();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

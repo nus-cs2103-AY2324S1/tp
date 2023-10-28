@@ -140,7 +140,8 @@ public class ModelManager implements Model {
         return commandHistory.pop();
     }
 
-
+    @Override
+    public int getCommandHistorySize() { return commandHistory.size(); }
     //=========== Filtered Person List Accessors =============================================================
 
     /**

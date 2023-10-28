@@ -100,7 +100,6 @@ public class EditCommand extends UndoableCommand {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         logger.log(Level.INFO, "EditCommand executed successfully");
 
-        // Add to Stack of Commands
         model.addToHistory(this);
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
