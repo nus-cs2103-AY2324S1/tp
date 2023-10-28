@@ -1,13 +1,13 @@
 package seedu.address.logic.commands.personcommands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.person.IllnessContainsKeywordsPredicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Finds and lists all persons in address book whose illness contains any of the argument keywords.
@@ -49,7 +49,7 @@ public class FindIllnessCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindIllnessCommand)) {
             return false;
         }
 

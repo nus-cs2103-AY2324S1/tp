@@ -1,17 +1,18 @@
 package seedu.address.logic.parser.personparser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.Arrays;
+
 import seedu.address.logic.commands.personcommands.FindIllnessCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.IllnessContainsKeywordsPredicate;
 
-import java.util.Arrays;
 
 /**
  * Parses input arguments and creates a new FindIllnessCommand object
  */
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 public class FindIllnessCommandParser implements Parser<FindIllnessCommand> {
 
     /**
