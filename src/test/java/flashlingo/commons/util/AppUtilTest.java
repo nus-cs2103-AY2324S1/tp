@@ -1,10 +1,12 @@
 package flashlingo.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.flashlingo.commons.util.AppUtil;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class AppUtilTest {
 

@@ -1,13 +1,13 @@
 package flashlingo.testutil;
 
-import seedu.flashlingo.commons.core.index.Index;
-import seedu.flashlingo.model.Model;
-import seedu.flashlingo.model.flashcard.FlashCard;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import seedu.flashlingo.commons.core.index.Index;
+import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * A utility class for test cases.

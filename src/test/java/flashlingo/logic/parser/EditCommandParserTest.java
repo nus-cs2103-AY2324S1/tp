@@ -13,10 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.Messages;
-import seedu.flashlingo.logic.commands.Command;
 import seedu.flashlingo.logic.commands.EditCommand;
 import seedu.flashlingo.logic.parser.EditCommandParser;
-import seedu.flashlingo.logic.parser.Parser;
 
 public class EditCommandParserTest {
 

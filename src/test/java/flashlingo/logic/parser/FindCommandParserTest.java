@@ -8,10 +8,8 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.flashlingo.logic.commands.Command;
 import seedu.flashlingo.logic.commands.FindCommand;
 import seedu.flashlingo.logic.parser.FindCommandParser;
-import seedu.flashlingo.logic.parser.Parser;
 import seedu.flashlingo.model.flashcard.WordContainsKeywordsPredicate;
 
 public class FindCommandParserTest {

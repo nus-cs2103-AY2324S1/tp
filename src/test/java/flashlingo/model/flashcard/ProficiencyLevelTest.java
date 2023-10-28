@@ -3,6 +3,7 @@ package flashlingo.model.flashcard;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.flashlingo.model.flashcard.ProficiencyLevel;
 
 

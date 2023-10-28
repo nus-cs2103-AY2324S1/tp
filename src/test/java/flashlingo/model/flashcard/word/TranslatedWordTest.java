@@ -3,6 +3,7 @@ package flashlingo.model.flashcard.word;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 
 class TranslatedWordTest {

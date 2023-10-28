@@ -1,11 +1,11 @@
 package flashlingo.logic;
 
-import seedu.flashlingo.logic.parser.Prefix;
-import seedu.flashlingo.model.flashcard.FlashCard;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import seedu.flashlingo.logic.parser.Prefix;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * Container for user visible messages.

@@ -1,26 +1,24 @@
 package flashlingo.logic.commands;
 
+import static flashlingo.logic.commands.CommandTestUtil.assertCommandFailure;
+import static flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static flashlingo.logic.commands.CommandTestUtil.showFlashCardAtIndex;
+import static flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
+import static flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
+import static flashlingo.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.flashlingo.commons.core.index.Index;
-import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.Messages;
-import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.DeleteCommand;
-import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
 import seedu.flashlingo.model.flashcard.FlashCard;
-
-import java.util.List;
-
-import static flashlingo.logic.commands.CommandTestUtil.*;
-import static flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
-import static flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
-import static flashlingo.testutil.TypicalIndexes.INDEX_SECOND_FLASHCARD;
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Deletes a flashcard identified using it's displayed index from Flashlingo.
@@ -118,56 +116,4 @@ public class DeleteCommandTest {
 
         assertTrue(model.getFilteredFlashCardList().isEmpty());
     }
-
-//    public static final String COMMAND_WORD = "delete";
-//
-//    public static final String MESSAGE_USAGE = COMMAND_WORD
-//            + ": Deletes the word identified by the index number used in the displayed flashcard list.\n"
-//            + "Parameters: INDEX (must be a positive integer)\n"
-//            + "Example: " + COMMAND_WORD + " 1";
-//
-//    public static final String MESSAGE_DELETE_FLASHCARD_SUCCESS = "Deleted Word: %1$s";
-//
-//    private final Index targetIndex;
-//
-//    public DeleteCommandTest(Index targetIndex) {
-//        this.targetIndex = targetIndex;
-//    }
-//
-//    @Override
-//    public CommandResult execute(Model model) throws CommandException {
-//        requireNonNull(model);
-//        List<FlashCard> lastShownList = model.getFilteredFlashCardList();
-//
-//        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-//            throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
-//        }
-//
-//        FlashCard flashCardToDelete = lastShownList.get(targetIndex.getZeroBased());
-//        System.out.println(flashCardToDelete);
-//        model.deleteFlashCard(flashCardToDelete);
-//        return new CommandResult(String.format(MESSAGE_DELETE_FLASHCARD_SUCCESS, Messages.format(flashCardToDelete)));
-//    }
-//
-//    @Override
-//    public boolean equals(Object other) {
-//        if (other == this) {
-//            return true;
-//        }
-//
-//        // instanceof handles nulls
-//        if (!(other instanceof DeleteCommandTest)) {
-//            return false;
-//        }
-//
-//        DeleteCommandTest otherDeleteCommand = (DeleteCommandTest) other;
-//        return targetIndex.equals(otherDeleteCommand.targetIndex);
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return new ToStringBuilder(this)
-//                .add("targetIndex", targetIndex)
-//                .toString();
-//    }
 }

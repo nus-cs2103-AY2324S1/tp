@@ -10,20 +10,17 @@ import static flashlingo.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static flashlingo.testutil.TypicalFlashCards.BOB;
 import static flashlingo.testutil.TypicalFlashCards.TRANSLATION_DESC_BOB;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD;
 
-
-import flashlingo.testutil.FlashCardBuilder;
 import org.junit.jupiter.api.Test;
 
+import flashlingo.testutil.FlashCardBuilder;
 import seedu.flashlingo.logic.Messages;
 import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.logic.commands.Command;
 import seedu.flashlingo.logic.parser.AddCommandParser;
 import seedu.flashlingo.logic.parser.Parser;
 import seedu.flashlingo.model.flashcard.FlashCard;
-
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();

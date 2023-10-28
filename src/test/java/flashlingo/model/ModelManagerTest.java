@@ -12,15 +12,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-import flashlingo.testutil.FlashlingoBuilder;
 import org.junit.jupiter.api.Test;
 
+import flashlingo.testutil.FlashlingoBuilder;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.model.Flashlingo;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
 import seedu.flashlingo.model.flashcard.WordContainsKeywordsPredicate;
-
 
 public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();

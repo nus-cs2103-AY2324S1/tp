@@ -1,17 +1,16 @@
 package flashlingo.commons.util;
 
-import flashlingo.testutil.SerializableTestClass;
-import flashlingo.testutil.TestUtil;
-
-import org.junit.jupiter.api.Test;
-
-import seedu.flashlingo.commons.util.FileUtil;
-import seedu.flashlingo.commons.util.JsonUtil;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import flashlingo.testutil.SerializableTestClass;
+import flashlingo.testutil.TestUtil;
+import seedu.flashlingo.commons.util.FileUtil;
+import seedu.flashlingo.commons.util.JsonUtil;
 
 /**
  * Tests JSON Read and Write

@@ -1,5 +1,7 @@
 package flashlingo.logic.parser;
 
+import static flashlingo.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static flashlingo.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static flashlingo.testutil.TypicalIndexes.INDEX_FIRST_FLASHCARD;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -7,9 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.flashlingo.logic.commands.DeleteCommand;
 import seedu.flashlingo.logic.parser.DeleteCommandParser;
-
-import static flashlingo.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static flashlingo.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

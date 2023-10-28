@@ -1,13 +1,14 @@
 package flashlingo.logic.commands;
 
+import static flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.flashlingo.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.flashlingo.logic.commands.CommandResult;
 import seedu.flashlingo.logic.commands.HelpCommand;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
-
-import static flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.flashlingo.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 /**
  * Format full help instructions for every command for display.

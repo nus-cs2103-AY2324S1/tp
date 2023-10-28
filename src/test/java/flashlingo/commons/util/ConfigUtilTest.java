@@ -1,18 +1,22 @@
 package flashlingo.commons.util;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Level;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import seedu.flashlingo.commons.core.Config;
 import seedu.flashlingo.commons.exceptions.DataLoadingException;
 import seedu.flashlingo.commons.util.ConfigUtil;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ConfigUtilTest {
 

@@ -1,7 +1,9 @@
 package flashlingo.logic;
 
+import static flashlingo.logic.commands.CommandTestUtil.TRANSLATION_DESC_AMY;
+import static flashlingo.logic.commands.CommandTestUtil.WORD_DESC_AMY;
 import static flashlingo.testutil.Assert.assertThrows;
-import static flashlingo.testutil.TypicalFlashCards.*;
+import static flashlingo.testutil.TypicalFlashCards.AMY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
 import static seedu.flashlingo.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -10,11 +12,11 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
-import flashlingo.testutil.FlashCardBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import flashlingo.testutil.FlashCardBuilder;
 import seedu.flashlingo.logic.Logic;
 import seedu.flashlingo.logic.LogicManager;
 import seedu.flashlingo.logic.commands.AddCommand;

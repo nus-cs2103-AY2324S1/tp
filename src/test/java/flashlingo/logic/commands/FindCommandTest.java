@@ -1,23 +1,25 @@
 package flashlingo.logic.commands;
 
+import static flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static flashlingo.testutil.TypicalFlashCards.CARL;
+import static flashlingo.testutil.TypicalFlashCards.ELLE;
+import static flashlingo.testutil.TypicalFlashCards.FIONA;
+import static flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.flashlingo.logic.Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
-import seedu.flashlingo.commons.util.ToStringBuilder;
-import seedu.flashlingo.logic.Messages;
+
 import seedu.flashlingo.logic.commands.FindCommand;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
 import seedu.flashlingo.model.flashcard.WordContainsKeywordsPredicate;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import static flashlingo.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static flashlingo.testutil.TypicalFlashCards.*;
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.flashlingo.logic.Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW;
 
 /**
  * Finds and lists all flashcards in flashlingo whose original words contains any of the argument keywords.
@@ -88,47 +90,4 @@ public class FindCommandTest {
     private WordContainsKeywordsPredicate preparePredicate(String userInput) {
         return new WordContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
-//    public static final String COMMAND_WORD = "find";
-//
-//    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all flashcards whose words contain any of "
-//            + "the specified keywords and displays them as a list with index numbers.\n"
-//            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-//            + "Example: " + COMMAND_WORD + " shark";
-//
-//    private final WordContainsKeywordsPredicate predicate;
-//
-//    public FindCommandTest(WordContainsKeywordsPredicate predicate) {
-//        this.predicate = predicate;
-//    }
-//    @Override
-//    public CommandResultTest execute(Model model) {
-//        requireNonNull(model);
-//        model.updateFilteredFlashCardList(predicate);
-//        return new CommandResultTest(
-//                String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW + "\n"
-//                    + model.getFilteredFlashCardList(),
-//                  model.getFilteredFlashCardList().size()));
-//    }
-//
-//    @Override
-//    public boolean equals(Object other) {
-//        if (other == this) {
-//            return true;
-//        }
-//
-//        // instanceof handles nulls
-//        if (!(other instanceof FindCommandTest)) {
-//            return false;
-//        }
-//
-//        FindCommandTest otherFindCommand = (FindCommandTest) other;
-//        return predicate.equals(otherFindCommand.predicate);
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return new ToStringBuilder(this)
-//                .add("predicate", predicate)
-//                .toString();
-//    }
 }

@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.flashlingo.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import flashlingo.testutil.FlashCardBuilder;
-import flashlingo.testutil.FlashCardUtil;
 import org.junit.jupiter.api.Test;
 
+import flashlingo.testutil.FlashCardBuilder;
+import flashlingo.testutil.FlashCardUtil;
 import seedu.flashlingo.logic.commands.AddCommand;
 import seedu.flashlingo.logic.commands.DeleteCommand;
 import seedu.flashlingo.logic.commands.ExitCommand;
@@ -19,7 +19,6 @@ import seedu.flashlingo.logic.commands.ListCommand;
 import seedu.flashlingo.logic.parser.FlashlingoParser;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.FlashCard;
-
 
 public class FlashlingoParserTest {
 

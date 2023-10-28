@@ -1,15 +1,12 @@
 package flashlingo.commons.core;
 
-//import static org.junit.jupiter.api.Assertions.;
+import static flashlingo.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.flashlingo.commons.core.Version;
-
-import static flashlingo.testutil.Assert.assertThrows;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class VersionTest {
 
