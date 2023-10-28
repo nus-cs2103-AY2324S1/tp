@@ -2,12 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Dashboard;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.interaction.Interaction;
 
 /**
  * Shows the dashboard containing statistics of the address book.
@@ -43,18 +40,5 @@ public class DashboardCommand extends Command {
                 + String.format("%.2f", notInterestedPercentage) + "%\n";
 
         return new CommandResult(MESSAGE_SUCCESS + "\n" + message);
-    }
-
-    private int getSpecifiedOutcomeCount(ObservableList<Person> personList, Interaction.Outcome outcome) {
-        return personList.stream()
-                .map(person ->
-                        person.getFilteredInteractions(i -> i.isOutcome(outcome)).size())
-                .reduce(0, Integer::sum);
-    }
-
-    private int getInteractionCount(ObservableList<Person> personList) {
-        return personList.stream()
-                .mapToInt(person -> person.getInteractions().size())
-                .sum();
     }
 }
