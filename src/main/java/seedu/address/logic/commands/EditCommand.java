@@ -111,7 +111,6 @@ public class EditCommand extends Command {
         Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
         Set<Department> updatedDepartments = editEmployeeDescriptor.getDepartments()
                 .orElse(employeeToEdit.getDepartments());
-        OvertimeHours updatedOvertimeHours = employeeToEdit.getOvertimeHours();
 
         return new Employee(updatedName, updatedPosition, updatedId, updatedPhone, updatedEmail,
                 updatedSalary, updatedDepartments);

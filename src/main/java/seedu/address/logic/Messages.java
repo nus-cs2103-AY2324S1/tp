@@ -22,6 +22,8 @@ public class Messages {
     public static final String MESSAGE_REPORT_STRING =
                 "Name: %1$s\nOvertime hours: %2$s\nOvertime pay: $%3$s\nNumber of leaves: %4$s";
 
+    public static final String MESSAGE_INVALID_OVERTIME_HOURS = "Overtime hours must be a positive integer";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
