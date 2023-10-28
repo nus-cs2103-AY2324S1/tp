@@ -16,9 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.flashlingo.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
-/**
- * Switches the color theme of the application.
- */
 public class SwitchCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();

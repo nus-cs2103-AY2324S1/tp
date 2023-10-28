@@ -367,6 +367,48 @@ To use the YesCommand, simply type yes during a review session. For example:
     * Pros: Get real reactions from users.
     * Cons: It is difficult for the program to determine whether the meaning expressed by the two translations is consistent
 
+### Light and Dark Mode
+
+#### Implementation
+
+The preference for light and dark themes is stored in the `UserPrefs` class. The `UserPrefs` is initialized by interacting
+with `UserPrefsStorage` when the application is launched. Then `UI` component will obtain the preference from `Logic` 
+component and set the initial theme. After a `SwitchCommand` is executed by the `LogicManager`, `Model` component will 
+update the theme in  `UserPrefs`. Finally, `UI` component will update the theme accordingly.
+
+Step 1: Theme initialization.  
+Similar to GUI settings, the theme is regarded as a component of user preference stored in `UserPrefs` and in Json
+file **preferences.json**.
+
+The initial theme setting works as follows: After constructing the `ModelManager` and `LogicManager` with the 
+loaded `UserPrefs`, `MainWindow` will obtain theme preference from `LogicManager` and set the initial theme. If no data 
+can be read from the preference file, the **Default** theme will be used by `Logic` and `Model` components, and set by
+`UI`.
+
+Step 2: Theme switching.  
+The following sequence diagram shows how the theme switching works. For the discussion purpose, parsing of the command
+and `Storage#saveFlashlingo(ReadOnlyFlashlingo)` are omitted:
+
+![SwitchSequenceModel](images/SwitchSequenceDiagram.png)
+
+To be added: `Mainwindow#executeCommand`.
+
+#### Design Considerations
+
+**Aspect: How to update UI changes after command execution:**
+* Alternative 1 (current choice): Uses `Logic` component to update `Model` and `Storage`. Add a boolean field **switchTheme**
+in `CommandResult`, informing `UI` to update similarly to what we did in **help** and **exit** commands.
+    * Pros: Follows the separation of concerns principle. Each component is responsible for its own work and addresses 
+  separate concerns, achieving higher cohesion and lower coupling.
+    * Cons: The abstraction and division for different components may be complicated and hard to understand. Additional
+  field needed in `CommandResult` class.
+
+* Alternative 2: Let `UI` component update the theme directly after receiving the command.
+    * Pros: More direct implementation design.
+    * Cons: Needs to include more information returned from the execution of command. A potential gap between current storage
+  and UI theme setting would occur since `UI` wouldn't rely on `Logic` component to update the theme.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.flashlingo.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code FlashCard}'s {@code Word} matches any of the keywords given.
  */
 public class WordContainsKeywordsPredicate implements Predicate<FlashCard> {
     private final List<String> keywords;

@@ -54,7 +54,9 @@ public class FlashcardBox extends UiPart<Region> {
     public FlashcardBox(FlashCard fc, int displayedIndex, MainWindow mw) {
         super(FXML);
         // Ensure that FlashCard with buttons is only created when in review session
+        //@@author itsNatTan
         assert(SessionManager.getInstance().isReviewSession());
+        //@@author itsNatTan
         this.flashCard = fc;
         this.mw = mw;
         id.setText(displayedIndex + ") ");

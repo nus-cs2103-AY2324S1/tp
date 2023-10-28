@@ -1,6 +1,7 @@
 package flashlingo.logic.commands;
 
 
+import flashlingo.testutil.FlashCardBuilder;
 import org.junit.jupiter.api.Test;
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.Messages;

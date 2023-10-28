@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":SwitchCommand" as SwitchCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":Storage" as Storage STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("switch")
+activate LogicManager
+
+LogicManager -> SwitchCommand : execute()
+activate SwitchCommand
+
+SwitchCommand -> Model : switchTheme()
+activate Model
+
+Model --> SwitchCommand
+deactivate Model
+
+SwitchCommand --> LogicManager : commandResult
+deactivate SwitchCommand
+
+LogicManager -> Model : getUserPrefs()
+activate Model
+
+Model --> LogicManager
+deactivate Model
+
+LogicManager -> Storage : saveUserPrefs(userPrefs)
+activate Storage
+
+Storage --> LogicManager
+deactivate Storage
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
