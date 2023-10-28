@@ -40,6 +40,9 @@ public class FindCommand extends Command {
         NameContainsKeywordsPredicate studentPredicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
         AppointmentContainsNamePredicate appointmentPredicate =
                 new AppointmentContainsNamePredicate(Arrays.asList(nameKeywords));
+        // reset to all students and appointments
+        model.updateFilteredStudentList(unused -> true);
+        model.updateFilteredAppointmentList(unused -> true);
         model.updateFilteredStudentList(studentPredicate);
         model.updateFilteredAppointmentList(appointmentPredicate);
         return new CommandResult(
