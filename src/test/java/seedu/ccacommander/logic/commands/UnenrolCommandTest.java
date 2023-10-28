@@ -12,6 +12,9 @@ import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.commons.core.index.Index;
@@ -20,6 +23,10 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
 import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
+import seedu.ccacommander.testutil.TypicalEnrolments;
+import seedu.ccacommander.testutil.TypicalEvents;
+import seedu.ccacommander.testutil.TypicalMembers;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -52,6 +59,40 @@ public class UnenrolCommandTest {
         UnenrolCommand unenrolCommand = new UnenrolCommand(outOfBoundIndex, outOfBoundIndex);
 
         assertCommandFailure(unenrolCommand, model, Messages.MESSAGE_INVALID_MEMBER_AND_EVENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_findEnrolmentFromList_success() {
+        List<Enrolment> enrolmentList = new ArrayList<>();
+
+        Enrolment enrolmentToFindOne = TypicalEnrolments.ALICE_AURORA;
+        Enrolment enrolmentToFindTwo = TypicalEnrolments.GEORGE_GRAVITY_DISCOVERY_DAY;
+
+        enrolmentList.add(enrolmentToFindOne);
+        enrolmentList.add(enrolmentToFindTwo);
+
+        assertEquals(enrolmentToFindOne, UnenrolCommand.findEnrolmentFromList(enrolmentList,
+                TypicalMembers.ALICE.getName(), TypicalEvents.AURORA_BOREALIS.getName()));
+        assertEquals(enrolmentToFindTwo, UnenrolCommand.findEnrolmentFromList(enrolmentList,
+                TypicalMembers.GEORGE.getName(), TypicalEvents.GRAVITY_DISCOVERY_DAY.getName()));
+    }
+
+    @Test
+    public void execute_findEnrolmentFromList_fail() {
+        List<Enrolment> enrolmentList = new ArrayList<>();
+
+        Enrolment enrolmentToFindOne = TypicalEnrolments.ALICE_AURORA;
+        Enrolment enrolmentToFindTwo = TypicalEnrolments.GEORGE_GRAVITY_DISCOVERY_DAY;
+
+        enrolmentList.add(enrolmentToFindOne);
+        enrolmentList.add(enrolmentToFindTwo);
+
+        try {
+            UnenrolCommand.findEnrolmentFromList(enrolmentList,
+                    TypicalMembers.CARL.getName(), TypicalEvents.BOXING_DAY.getName());
+        } catch (EnrolmentNotFoundException ee) {
+            assertEquals("Enrolment cannot be found", ee.getMessage());
+        }
     }
 
     @Test

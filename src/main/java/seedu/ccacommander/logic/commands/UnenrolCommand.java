@@ -83,7 +83,7 @@ public class UnenrolCommand extends Command {
      * @param eventName
      * @throws EnrolmentNotFoundException if the enrolment cannot be found from the {@code lastShownEnrolmentList}
      */
-    private Enrolment findEnrolmentFromList(List<Enrolment> lastShownEnrolmentList,
+    public static Enrolment findEnrolmentFromList(List<Enrolment> lastShownEnrolmentList,
         Name memberName, Name eventName) throws EnrolmentNotFoundException {
         Enrolment selectedEnrolment = null;
 
