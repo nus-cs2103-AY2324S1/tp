@@ -23,6 +23,7 @@ public class ResetCommandTest {
     private static final String INVALID_FIELD = "invalid field";
     private static final String NO_FIELD = "";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
 
     @Test
     void execute_resetOvertime_success() {
@@ -80,6 +81,26 @@ public class ResetCommandTest {
         String expectedMessage = ResetCommand.MESSAGE_NO_FIELD;
 
         assertCommandFailure(resetCommand, model, expectedMessage);
+    }
+
+    @Test
+    void execute_emptyEmployeeList_success() {
+        ResetCommand resetCommand = new ResetCommand(OVERTIME_FIELD);
+
+        String expectedMessage = String.format(ResetCommand.MESSAGE_SUCCESS, OVERTIME_FIELD);
+
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+        List<Employee> lastShownList = expectedModel.getFilteredEmployeeList();
+        for (Employee employee: lastShownList) {
+            Employee employeeWithDefaultOvertime = new Employee(employee.getName(), employee.getPosition(),
+                    employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
+                    employee.getDepartments(), employee.getIsOnLeave(),
+                    new OvertimeHours(Employee.DEFAULT_OVERTIME_HOURS), employee.getLeaveList());
+            expectedModel.setEmployee(employee, employeeWithDefaultOvertime);
+            emptyModel.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
+        }
+
+        assertCommandSuccess(resetCommand, emptyModel, expectedMessage, expectedModel);
     }
 
 }

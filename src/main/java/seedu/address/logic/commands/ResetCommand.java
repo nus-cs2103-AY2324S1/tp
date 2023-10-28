@@ -23,7 +23,7 @@ public class ResetCommand extends Command {
             + "Parameters: "
             + PREFIX_FIELD + "FIELD\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_FIELD + "overtime hours";
+            + PREFIX_FIELD + "overtime";
 
     public static final String MESSAGE_SUCCESS = "Successfully reset %1$s of all employees.";
     public static final String MESSAGE_NO_FIELD = "There needs to be a field to reset.";

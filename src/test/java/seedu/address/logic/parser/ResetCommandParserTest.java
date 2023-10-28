@@ -18,12 +18,12 @@ public class ResetCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsSortCommand() {
+    public void parse_validArgs_returnsResetCommand() {
 
-        String userInput = " " + PREFIX_FIELD + "overtime hours";
+        String userInput = " " + PREFIX_FIELD + "overtime";
 
-        ResetCommand expectedSortCommand = new ResetCommand("overtime hours");
+        ResetCommand expectedResetCommand = new ResetCommand("overtime");
 
-        assertParseSuccess(parser, userInput, expectedSortCommand);
+        assertParseSuccess(parser, userInput, expectedResetCommand);
     }
 }
