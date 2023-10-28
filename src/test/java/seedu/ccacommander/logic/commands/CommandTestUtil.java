@@ -26,6 +26,8 @@ import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
+import seedu.ccacommander.model.attendance.Attendance;
+import seedu.ccacommander.model.attendance.EnrolmentExistsPredicate;
 import seedu.ccacommander.model.attendance.Hours;
 import seedu.ccacommander.model.attendance.Remark;
 import seedu.ccacommander.model.event.Event;
@@ -233,5 +235,18 @@ public class CommandTestUtil {
         model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredEventList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the enrolment at the given {@code targetIndex} in the
+     * {@code model}'s CcaCommander.
+     */
+    public static void showEnrolmentAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAttendanceList().size());
+
+        Attendance enrolment = model.getFilteredAttendanceList().get(targetIndex.getZeroBased());
+        model.updateFilteredAttendanceList(new EnrolmentExistsPredicate(enrolment));
+
+        assertEquals(1, model.getFilteredAttendanceList().size());
     }
 }
