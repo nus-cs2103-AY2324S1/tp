@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.calendar.Calendar;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,8 +25,10 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Calendar calendar = new Calendar();
 
     /**
+     * Primary constructor for a person object.
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
@@ -35,6 +38,21 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Alternative constructor to be used when replacing the calendar of a contact.
+     * Every field must be present and not null.
+     *
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Calendar calendar) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.calendar.resetData(calendar);
     }
 
     public Name getName() {
@@ -51,6 +69,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
     }
 
     /**
