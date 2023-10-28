@@ -167,7 +167,8 @@ public class EditCommandTest {
 
         model.addPerson(originalPerson);
 
-        EditCommand editCommand = new EditCommand(originalPerson.getName(), null, new EditCommand.EditPersonDescriptor());
+        EditCommand editCommand = new EditCommand(originalPerson.getName(),
+                null, new EditCommand.EditPersonDescriptor());
         editCommand.execute(model);
 
         Person personAfterEdit = model.getFilteredPersonList().get(0);

@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
 
 public class UndoCommandTest {
 
@@ -20,8 +21,8 @@ public class UndoCommandTest {
         UndoCommand undoCommand = new UndoCommand(1);
         CommandResult result = undoCommand.execute(model);
 
-        assertEquals("Undoing 1 command(s):\n" +
-                "1. Stub Undoable Command undone", result.getFeedbackToUser());
+        assertEquals("Undoing 1 command(s):\n"
+                + "1. Stub Undoable Command undone", result.getFeedbackToUser());
     }
 
     @Test
@@ -38,10 +39,10 @@ public class UndoCommandTest {
         UndoCommand undoCommand = new UndoCommand(3);
         CommandResult result = undoCommand.execute(model);
 
-        assertEquals("Undoing 3 command(s):\n" +
-                "1. Stub Undoable Command undone\n" +
-                "2. Stub Undoable Command undone\n" +
-                "3. Stub Undoable Command undone", result.getFeedbackToUser());
+        assertEquals("Undoing 3 command(s):\n"
+                + "1. Stub Undoable Command undone\n"
+                + "2. Stub Undoable Command undone\n"
+                + "3. Stub Undoable Command undone", result.getFeedbackToUser());
     }
     @Test
     public void execute_undoMoreCommandsThanHistory_failure() {

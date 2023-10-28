@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -10,12 +9,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-
-import java.text.ParseException;
-import java.util.Arrays;
 
 public class UndoCommandParserTest {
 
@@ -33,7 +27,7 @@ public class UndoCommandParserTest {
     }
 
     @Test
-    public void parse_validSteps_success(){
+    public void parse_validSteps_success() {
         UndoCommand expectedUndoCommand = new UndoCommand(3);
         assertParseSuccess(parser, "3", expectedUndoCommand);
 

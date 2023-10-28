@@ -103,38 +103,38 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // phone
-        String userInput = COMMAND_WORD + " " +  PREFIX_NAME + VALID_NAME_BOB + PHONE_DESC_AMY;
+        String userInput = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_BOB + PHONE_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         EditCommand expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = COMMAND_WORD + " " +  PREFIX_NAME + VALID_NAME_BOB + EMAIL_DESC_AMY;
+        userInput = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_BOB + EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
-        userInput = COMMAND_WORD + " " +  PREFIX_NAME + VALID_NAME_BOB + ADDRESS_DESC_AMY;
+        userInput = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_BOB + ADDRESS_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = COMMAND_WORD + " " +  PREFIX_NAME + VALID_NAME_BOB + TAG_DESC_FRIEND;
+        userInput = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_BOB + TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // medical
-        userInput = COMMAND_WORD + " " +  PREFIX_NAME + VALID_NAME_BOB + " "
+        userInput = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_BOB + " "
                 + PREFIX_MEDICAL + VALID_MEDICALHISTORY;
         descriptor = new EditPersonDescriptorBuilder().withMedicalHistories(VALID_MEDICALHISTORY).build();
         expectedCommand = new EditCommand(new Name(VALID_NAME_BOB), null, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // appointment
-        userInput = COMMAND_WORD + " " +  PREFIX_NAME + VALID_NAME_AMY + " "
+        userInput = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_AMY + " "
                 + PREFIX_APPOINTMENT + VALID_APPOINTMENT;
         descriptor = new EditPersonDescriptorBuilder().withAppointment(VALID_APPOINTMENT).build();
         expectedCommand = new EditCommand(new Name(VALID_NAME_AMY), null, descriptor);
@@ -171,16 +171,16 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // mulltiple valid fields repeated
-        userInput = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_BOB + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
+        userInput = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_BOB + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+                + EMAIL_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
 
         // multiple invalid values
-        userInput = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_BOB + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
+        userInput = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_BOB + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC
+                + INVALID_EMAIL_DESC + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
@@ -213,13 +213,14 @@ public class EditCommandParserTest {
     public void parse_validInput_returnsEditCommand() throws ParseException {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
         // Valid input with NRIC
-        String validInputWithNric = COMMAND_WORD + " " + PREFIX_NRIC + VALID_NRIC_BOB + " " +
-                PREFIX_PHONE + VALID_PHONE_BOB + " " + PREFIX_NAME + VALID_NAME_BOB;
-        EditCommand expectedCommandWithNric = new EditCommand(new Name(VALID_NAME_BOB), new Nric(VALID_NRIC_BOB), descriptor);
+        String validInputWithNric = COMMAND_WORD + " " + PREFIX_NRIC + VALID_NRIC_BOB + " "
+                + PREFIX_PHONE + VALID_PHONE_BOB + " " + PREFIX_NAME + VALID_NAME_BOB;
+        EditCommand expectedCommandWithNric = new EditCommand(new Name(VALID_NAME_BOB),
+                new Nric(VALID_NRIC_BOB), descriptor);
         assertEquals(parser.parse(validInputWithNric), expectedCommandWithNric);
 
         // Valid input with Name
-        String validInputWithName = COMMAND_WORD + " " + PREFIX_NAME  + VALID_NAME_AMY + " "
+        String validInputWithName = COMMAND_WORD + " " + PREFIX_NAME + VALID_NAME_AMY + " "
                 + PREFIX_EMAIL + VALID_EMAIL_AMY;
         EditCommand expectedCommandWithName = new EditCommand(new Name(VALID_NAME_AMY), null, descriptor);
         assertEquals(parser.parse(validInputWithName), expectedCommandWithName);
