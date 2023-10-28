@@ -1,4 +1,4 @@
-package seedu.ccacommander.model.attendance;
+package seedu.ccacommander.model.enrolment;
 
 import java.util.function.Predicate;
 
@@ -7,16 +7,16 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Enrolment} is the same as the {@code Enrolment} given.
  */
-public class EnrolmentExistsPredicate implements Predicate<Attendance> {
-    private final Attendance enrolmentToCheck;
+public class EnrolmentExistsPredicate implements Predicate<Enrolment> {
+    private final Enrolment enrolmentToCheck;
 
-    public EnrolmentExistsPredicate(Attendance enrolmentToCheck) {
+    public EnrolmentExistsPredicate(Enrolment enrolmentToCheck) {
         this.enrolmentToCheck = enrolmentToCheck;
     }
 
     @Override
-    public boolean test(Attendance enrolment) {
-        return enrolmentToCheck.isSameAttendance(enrolment);
+    public boolean test(Enrolment enrolment) {
+        return enrolmentToCheck.isSameEnrolment(enrolment);
     }
 
     @Override

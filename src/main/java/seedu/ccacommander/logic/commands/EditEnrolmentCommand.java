@@ -5,7 +5,7 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_ATTENDANCES;
+import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_ENROLMENTS;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,10 +17,10 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.attendance.Attendance;
-import seedu.ccacommander.model.attendance.EnrolmentExistsPredicate;
-import seedu.ccacommander.model.attendance.Hours;
-import seedu.ccacommander.model.attendance.Remark;
+import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.EnrolmentExistsPredicate;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
@@ -83,23 +83,23 @@ public class EditEnrolmentCommand extends Command {
 
         Member targetMember = lastShownMemberList.get(memberIndex.getZeroBased());
         Event targetEvent = lastShownEventList.get(eventIndex.getZeroBased());
-        Attendance enrolmentToCheck =
-                new Attendance(targetMember.getName(), targetEvent.getName(), new Hours("0"), new Remark("HOLDER"));
+        Enrolment enrolmentToCheck =
+                new Enrolment(targetMember.getName(), targetEvent.getName(), new Hours("0"), new Remark("HOLDER"));
 
-        model.updateFilteredAttendanceList(new EnrolmentExistsPredicate(enrolmentToCheck));
-        List<Attendance> enrolmentToEditList = model.getFilteredAttendanceList();
+        model.updateFilteredEnrolmentList(new EnrolmentExistsPredicate(enrolmentToCheck));
+        List<Enrolment> enrolmentToEditList = model.getFilteredEnrolmentList();
         if (enrolmentToEditList.size() == 0) {
             throw new CommandException(String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
                     memberIndex.getOneBased(), eventIndex.getOneBased()));
         }
         assert enrolmentToEditList.size() == 1 : "There should not be duplicate enrolments";
 
-        Attendance enrolmentToEdit = enrolmentToEditList.get(0);
-        Attendance editedEnrolment = createEditedEnrolment(enrolmentToEdit, editEnrolmentDescriptor);
+        Enrolment enrolmentToEdit = enrolmentToEditList.get(0);
+        Enrolment editedEnrolment = createEditedEnrolment(enrolmentToEdit, editEnrolmentDescriptor);
 
         model.setEnrolment(enrolmentToEdit, editedEnrolment);
-        model.updateFilteredAttendanceList(PREDICATE_SHOW_ALL_ATTENDANCES);
-        model.commit(String.format(MESSAGE_COMMIT, editedEnrolment.getMemberAndEventAttendance()));
+        model.updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+        model.commit(String.format(MESSAGE_COMMIT, editedEnrolment.getMemberAndEventEnrolment()));
         return new CommandResult(String.format(MESSAGE_EDIT_ENROLMENT_SUCCESS, Messages.format(editedEnrolment)));
     }
 
@@ -107,7 +107,7 @@ public class EditEnrolmentCommand extends Command {
      * Creates and returns a {@code Enrolment} with the details of {@code enrolmentToEdit}
      * edited with {@code editEnrolmentDescriptor}.
      */
-    private static Attendance createEditedEnrolment(Attendance enrolmentToEdit,
+    private static Enrolment createEditedEnrolment(Enrolment enrolmentToEdit,
                                                     EditEnrolmentDescriptor editEnrolmentDescriptor) {
         assert enrolmentToEdit != null;
 
@@ -116,7 +116,7 @@ public class EditEnrolmentCommand extends Command {
         Hours updatedHours = editEnrolmentDescriptor.getHours().orElse(enrolmentToEdit.getHours());
         Remark updatedRemark = editEnrolmentDescriptor.getRemark().orElse(enrolmentToEdit.getRemark());
 
-        return new Attendance(memberName, eventName, updatedHours, updatedRemark);
+        return new Enrolment(memberName, eventName, updatedHours, updatedRemark);
     }
 
     @Override

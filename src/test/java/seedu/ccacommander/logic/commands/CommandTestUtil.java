@@ -26,10 +26,10 @@ import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
-import seedu.ccacommander.model.attendance.Attendance;
-import seedu.ccacommander.model.attendance.EnrolmentExistsPredicate;
-import seedu.ccacommander.model.attendance.Hours;
-import seedu.ccacommander.model.attendance.Remark;
+import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.EnrolmentExistsPredicate;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
 import seedu.ccacommander.model.member.Member;
@@ -242,11 +242,11 @@ public class CommandTestUtil {
      * {@code model}'s CcaCommander.
      */
     public static void showEnrolmentAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredAttendanceList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEnrolmentList().size());
 
-        Attendance enrolment = model.getFilteredAttendanceList().get(targetIndex.getZeroBased());
-        model.updateFilteredAttendanceList(new EnrolmentExistsPredicate(enrolment));
+        Enrolment enrolment = model.getFilteredEnrolmentList().get(targetIndex.getZeroBased());
+        model.updateFilteredEnrolmentList(new EnrolmentExistsPredicate(enrolment));
 
-        assertEquals(1, model.getFilteredAttendanceList().size());
+        assertEquals(1, model.getFilteredEnrolmentList().size());
     }
 }

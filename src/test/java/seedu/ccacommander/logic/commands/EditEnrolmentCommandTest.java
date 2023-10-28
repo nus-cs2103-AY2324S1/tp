@@ -29,8 +29,8 @@ import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
-import seedu.ccacommander.model.attendance.Attendance;
-import seedu.ccacommander.testutil.AttendanceBuilder;
+import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.testutil.EnrolmentBuilder;
 import seedu.ccacommander.testutil.EditEnrolmentDescriptorBuilder;
 
 /**
@@ -42,19 +42,19 @@ public class EditEnrolmentCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Attendance editedEnrolment =
-                new AttendanceBuilder().withHours(VALID_HOURS_BOXING).withRemark(VALID_REMARK_BOXING).build();
+        Enrolment editedEnrolment =
+                new EnrolmentBuilder().withHours(VALID_HOURS_BOXING).withRemark(VALID_REMARK_BOXING).build();
         EditEnrolmentDescriptor descriptor = new EditEnrolmentDescriptorBuilder(editedEnrolment).build();
         EditEnrolmentCommand editEnrolmentCommand =
                 new EditEnrolmentCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT, descriptor);
 
         String commitMessage =
-                String.format(EditEnrolmentCommand.MESSAGE_COMMIT, editedEnrolment.getMemberAndEventAttendance());
+                String.format(EditEnrolmentCommand.MESSAGE_COMMIT, editedEnrolment.getMemberAndEventEnrolment());
         String expectedMessage = String.format(EditEnrolmentCommand.MESSAGE_EDIT_ENROLMENT_SUCCESS,
                 Messages.format(editedEnrolment));
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
-        expectedModel.setEnrolment(model.getFilteredAttendanceList().get(0), editedEnrolment);
+        expectedModel.setEnrolment(model.getFilteredEnrolmentList().get(0), editedEnrolment);
         expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editEnrolmentCommand, model, expectedMessage, expectedModel);
@@ -64,12 +64,12 @@ public class EditEnrolmentCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastMember = Index.fromOneBased(model.getFilteredMemberList().size());
         Index indexLastEvent = Index.fromOneBased(model.getFilteredEventList().size());
-        Index indexLastEnrolment = Index.fromOneBased(model.getFilteredAttendanceList().size());
+        Index indexLastEnrolment = Index.fromOneBased(model.getFilteredEnrolmentList().size());
 
-        Attendance lastEnrolment = model.getFilteredAttendanceList().get(indexLastEnrolment.getZeroBased());
+        Enrolment lastEnrolment = model.getFilteredEnrolmentList().get(indexLastEnrolment.getZeroBased());
 
-        AttendanceBuilder enrolmentInList = new AttendanceBuilder(lastEnrolment);
-        Attendance editedEnrolment = enrolmentInList.withHours(VALID_HOURS_BOXING).build();
+        EnrolmentBuilder enrolmentInList = new EnrolmentBuilder(lastEnrolment);
+        Enrolment editedEnrolment = enrolmentInList.withHours(VALID_HOURS_BOXING).build();
 
         EditEnrolmentDescriptor descriptor = new EditEnrolmentDescriptorBuilder(editedEnrolment).build();
 
@@ -77,7 +77,7 @@ public class EditEnrolmentCommandTest {
                 new EditEnrolmentCommand(indexLastMember, indexLastEvent, descriptor);
 
         String commitMessage =
-                String.format(EditEnrolmentCommand.MESSAGE_COMMIT, editedEnrolment.getMemberAndEventAttendance());
+                String.format(EditEnrolmentCommand.MESSAGE_COMMIT, editedEnrolment.getMemberAndEventEnrolment());
         String expectedMessage = String.format(EditEnrolmentCommand.MESSAGE_EDIT_ENROLMENT_SUCCESS,
                 Messages.format(editedEnrolment));
 
@@ -92,20 +92,20 @@ public class EditEnrolmentCommandTest {
     public void execute_filteredList_success() {
         showEnrolmentAtIndex(model, INDEX_FIRST_ENROLMENT);
 
-        Attendance enrolmentInFilteredList = model.getFilteredAttendanceList()
+        Enrolment enrolmentInFilteredList = model.getFilteredEnrolmentList()
                 .get(INDEX_FIRST_ENROLMENT.getZeroBased());
-        Attendance editedEnrolment =
-                new AttendanceBuilder(enrolmentInFilteredList).withHours(VALID_HOURS_BOXING).build();
+        Enrolment editedEnrolment =
+                new EnrolmentBuilder(enrolmentInFilteredList).withHours(VALID_HOURS_BOXING).build();
         EditEnrolmentCommand editEnrolmentCommand = new EditEnrolmentCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT,
                 new EditEnrolmentDescriptorBuilder().withHours(VALID_HOURS_BOXING).build());
 
         String commitMessage =
-                String.format(EditEnrolmentCommand.MESSAGE_COMMIT, editedEnrolment.getMemberAndEventAttendance());
+                String.format(EditEnrolmentCommand.MESSAGE_COMMIT, editedEnrolment.getMemberAndEventEnrolment());
         String expectedMessage = String.format(EditEnrolmentCommand.MESSAGE_EDIT_ENROLMENT_SUCCESS,
                 Messages.format(editedEnrolment));
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
-        expectedModel.setEnrolment(model.getFilteredAttendanceList().get(0), editedEnrolment);
+        expectedModel.setEnrolment(model.getFilteredEnrolmentList().get(0), editedEnrolment);
         expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editEnrolmentCommand, model, expectedMessage, expectedModel);

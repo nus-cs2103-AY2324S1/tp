@@ -181,7 +181,7 @@ public class CreateMemberCommandTest {
         }
 
         @Override
-        public void setEnrolment(Attendance enrolment, Attendance editedEnrolment) {
+        public void setEnrolment(Enrolment enrolment, Enrolment editedEnrolment) {
             throw new AssertionError("This method should not be called.");
         }
 

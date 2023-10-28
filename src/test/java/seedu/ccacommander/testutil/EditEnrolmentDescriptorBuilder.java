@@ -1,9 +1,9 @@
 package seedu.ccacommander.testutil;
 
 import seedu.ccacommander.logic.commands.EditEnrolmentCommand.EditEnrolmentDescriptor;
-import seedu.ccacommander.model.attendance.Attendance;
-import seedu.ccacommander.model.attendance.Hours;
-import seedu.ccacommander.model.attendance.Remark;
+import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.shared.Name;
 
 /**
@@ -24,7 +24,7 @@ public class EditEnrolmentDescriptorBuilder {
     /**
      * Returns an {@code EditEnrolmentDescriptor} with fields containing {@code enrolment}'s details
      */
-    public EditEnrolmentDescriptorBuilder(Attendance enrolment) {
+    public EditEnrolmentDescriptorBuilder(Enrolment enrolment) {
         descriptor = new EditEnrolmentDescriptor();
         descriptor.setMemberName(enrolment.getMemberName());
         descriptor.setEventName(enrolment.getEventName());

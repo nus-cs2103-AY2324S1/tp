@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Test;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.EditEnrolmentCommand;
 import seedu.ccacommander.logic.commands.EditEnrolmentCommand.EditEnrolmentDescriptor;
-import seedu.ccacommander.model.attendance.Hours;
-import seedu.ccacommander.model.attendance.Remark;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.testutil.EditEnrolmentDescriptorBuilder;
 
 public class EditEnrolmentCommandParserTest {
