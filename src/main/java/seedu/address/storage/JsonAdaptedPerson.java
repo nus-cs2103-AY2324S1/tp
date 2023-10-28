@@ -18,6 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.BadAppointmentFormatException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -159,10 +160,16 @@ class JsonAdaptedPerson {
 
         final Set<MedicalHistory> modelMedicalHistories = new HashSet<>(personMedicalHistory);
 
-        if (appointment != null && !Appointment.isValidAppointment(appointment)) {
+        if (appointment != null && !Appointment.isValidAppointmentDelimit(appointment)) {
             throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
         }
-        final Appointment modelAppointment = appointment == null ? null : new Appointment(appointment);
+
+        final Appointment modelAppointment;
+        try {
+            modelAppointment = appointment == null ? null : new Appointment(appointment);
+        } catch (BadAppointmentFormatException e) {
+            throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
+        }
 
         return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelAppointment,
                 modelMedicalHistories, modelTags);

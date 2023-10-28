@@ -17,6 +17,7 @@ import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.BadAppointmentFormatException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -137,10 +138,14 @@ public class ParserUtil {
     public static Appointment parseAppointment(String appointment) throws ParseException {
         requireNonNull(appointment);
         String trimmedAppointment = appointment.trim();
-        if (!Appointment.isValidAppointment(trimmedAppointment)) {
+        if (!Appointment.isValidAppointmentDelimit(trimmedAppointment)) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
-        return new Appointment(trimmedAppointment);
+        try {
+            return new Appointment(trimmedAppointment);
+        } catch (BadAppointmentFormatException e) {
+            throw new ParseException(e.getMessage());
+        }
     }
 
     /**

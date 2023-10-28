@@ -12,6 +12,7 @@ import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.BadAppointmentFormatException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -54,7 +55,12 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAppointment(String appointment) {
-        descriptor.setAppointment(new Appointment(appointment));
+        try {
+            descriptor.setAppointment(new Appointment(appointment));
+        } catch (BadAppointmentFormatException e) {
+            throw new IllegalStateException(
+                    "Encountered an error with Appointment for EditPersonDescriptorBuilder.", e);
+        }
         return this;
     }
 

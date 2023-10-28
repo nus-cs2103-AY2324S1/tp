@@ -11,6 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.BadAppointmentFormatException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -39,12 +40,17 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
+        try {
+            appointment = new Appointment(DEFAULT_APPOINTMENT);
+        } catch (BadAppointmentFormatException e) {
+            throw new IllegalStateException(
+                    "Encountered an error with Appointment for PersonBuilder.", e);
+        }
         name = new Name(DEFAULT_NAME);
         nric = new Nric(DEFAULT_NRIC);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        appointment = new Appointment(DEFAULT_APPOINTMENT);
         medicalHistories = new HashSet<>();
         tags = new HashSet<>();
     }
@@ -84,7 +90,12 @@ public class PersonBuilder {
      */
 
     public PersonBuilder withAppointment(String appointment) {
-        this.appointment = new Appointment(appointment);
+        try {
+            this.appointment = new Appointment(appointment);
+        } catch (BadAppointmentFormatException e) {
+            throw new IllegalStateException(
+                    "Encountered an error with Appointment for PersonBuilder.", e);
+        }
         return this;
     }
 

@@ -6,11 +6,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import seedu.address.model.person.exceptions.BadAppointmentFormatException;
 
 /**
  * Represents a Person's Appointment in the address book.
  * Guarantees: immutable; is valid as declared in
- * {@link #isValidAppointment(String)}
+ * {@link #isValidAppointmentDelimit(String)}
  */
 public class Appointment {
 
@@ -40,34 +43,51 @@ public class Appointment {
     private static final String INPUT_DATE_FORMAT =
             DAY_FIELD + DATE_SEPARATOR + MONTH_FIELD + DATE_SEPARATOR + YEAR_FIELD;
     private static final String INPUT_TIME_FORMAT = "H" + TIME_SEPARATOR + "mm";
-    public static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern(INPUT_DATE_FORMAT);
-    public static final DateTimeFormatter INPUT_TIME_FORMATTER = DateTimeFormatter.ofPattern(INPUT_TIME_FORMAT);
+    private static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern(INPUT_DATE_FORMAT);
+    private static final DateTimeFormatter INPUT_TIME_FORMATTER = DateTimeFormatter.ofPattern(INPUT_TIME_FORMAT);
     private static final String OUTPUT_DATE_FORMAT = "dd MMM yy, ";
     private static final String OUTPUT_TIME_FORMAT = "HH:mm";
     private static final DateTimeFormatter OUTPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT);
     private static final DateTimeFormatter OUTPUT_TIME_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_TIME_FORMAT);
-    private final LocalDate date = null;
-    private final LocalTime start = null;
-    private final LocalTime end = null;
+    private final LocalDate date;
+    private final LocalTime start;
+    private final LocalTime end;
 
     /**
      * Constructs an {@code Appointment}.
      *
-     * @param appointment A valid appointment.
+     * @param appointment An appointment String input.
      */
-    public Appointment(String appointment) {
+    public Appointment(String appointment) throws BadAppointmentFormatException {
         requireNonNull(appointment);
-        checkArgument(isValidAppointment(appointment), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAppointmentDelimit(appointment), MESSAGE_CONSTRAINTS);
+        // TODO: Remove appointment value.
         value = appointment;
+
+        String[] splitFields = appointment.split(FIELD_SEPARATOR_REGEX);
+        LocalTime start;
+        LocalTime end;
+        try {
+            date = LocalDate.parse(splitFields[0], INPUT_DATE_FORMATTER);
+            start = LocalTime.parse(splitFields[1], INPUT_TIME_FORMATTER);
+            end = LocalTime.parse(splitFields[2], INPUT_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new BadAppointmentFormatException(MESSAGE_CONSTRAINTS);
+        }
+
+        if (start.isAfter(end)) {
+            throw new BadAppointmentFormatException(MESSAGE_CONSTRAINTS);
+        }
+        this.start = start;
+        this.end = end;
     }
 
     /**
-     * Returns true if a given string is a valid appointment.
+     * Returns true if a given input string is delimited properly.
      */
-    public static boolean isValidAppointment(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidAppointmentDelimit(String test) {
+        return test.split(FIELD_SEPARATOR_REGEX).length == 3;
     }
-
 
     @Override
     public String toString() {
