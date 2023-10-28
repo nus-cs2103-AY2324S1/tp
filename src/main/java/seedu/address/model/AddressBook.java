@@ -91,7 +91,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setMusician(Musician target, Musician editedMusician) {
         requireNonNull(editedMusician);
-
         musicians.setMusician(target, editedMusician);
     }
 
@@ -125,6 +124,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasMusicianInBand(int bandIndex, Musician musician) {
         requireNonNull(musician);
         return bands.hasMusician(bandIndex, musician);
+    }
+
+    /**
+     * For all bands, remove target and replace with editedMusician. If editedMusician is null, just remove target.
+     */
+    public void updateMusicianInAllBands(Musician target, Musician editedMusician) {
+        requireNonNull(target);
+        bands.updateMusicianInAllBands(target, editedMusician);
     }
 
     /**

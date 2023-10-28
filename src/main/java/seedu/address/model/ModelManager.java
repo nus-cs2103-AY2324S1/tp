@@ -100,18 +100,38 @@ public class ModelManager implements Model {
     @Override
     public void deleteMusician(Musician target) {
         addressBook.removeMusician(target);
+
+        updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
+        updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
+
+        updateMusicianInAllBands(target, null);
     }
 
     @Override
     public void addMusician(Musician musician) {
         addressBook.addMusician(musician);
         updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
+        updateFilteredBandList(Model.PREDICATE_SHOW_ALL_BANDS);
     }
 
     @Override
     public void setMusician(Musician target, Musician editedMusician) {
         requireAllNonNull(target, editedMusician);
         addressBook.setMusician(target, editedMusician);
+
+        updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
+        updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
+
+        updateMusicianInAllBands(target, editedMusician);
+    }
+
+    /**
+     * Used by edit and delete musician commands to simultaneously update the
+     * corresponding musician in band list.
+     */
+    private void updateMusicianInAllBands(Musician target, Musician editedMusician) {
+        requireNonNull(target);
+        addressBook.updateMusicianInAllBands(target, editedMusician);
     }
 
     @Override

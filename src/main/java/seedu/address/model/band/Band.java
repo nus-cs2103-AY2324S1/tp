@@ -48,6 +48,17 @@ public class Band {
     public boolean hasMusician(Musician musician) {
         return musicians.contains(musician);
     }
+
+    public void setMusician(Musician target, Musician editedMusician) {
+        if (musicians.contains(target)) {
+            musicians.remove(target);
+        }
+
+        if (editedMusician != null) {
+            musicians.add(editedMusician);
+        }
+    }
+
     /**
      * Returns true if both bands have the same name.
      * This defines a weaker notion of equality between two persons.

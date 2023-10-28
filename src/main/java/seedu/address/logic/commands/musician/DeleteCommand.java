@@ -44,6 +44,7 @@ public class DeleteCommand extends Command {
 
         Musician musicianToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteMusician(musicianToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_MUSICIAN_SUCCESS, Messages.format(musicianToDelete)));
     }
 

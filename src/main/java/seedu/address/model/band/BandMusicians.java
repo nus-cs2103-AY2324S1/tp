@@ -17,6 +17,16 @@ public class BandMusicians {
         this.musicians = musicians;
     }
 
+    public void setMusician(Musician target, Musician editedMusician) {
+        if (musicians.contains(target)) {
+            musicians.remove(target);
+        }
+
+        if (editedMusician != null) {
+            musicians.add(editedMusician);
+        }
+    }
+
     @Override
     public String toString() {
         return musicians.toString();

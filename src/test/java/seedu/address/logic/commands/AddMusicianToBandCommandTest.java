@@ -244,6 +244,9 @@ public class AddMusicianToBandCommandTest {
             return new FilteredList<>(bandsAdded.asUnmodifiableObservableList());
         }
         @Override
+        public void updateFilteredBandList(Predicate<Band> predicate) {
+        }
+        @Override
         public ObservableList<Musician> getFilteredMusicianList() {
             return new FilteredList<>(musiciansAdded.asUnmodifiableObservableList());
         }

@@ -9,6 +9,7 @@ import static seedu.address.testutil.typicalentities.TypicalBands.BOOM;
 import static seedu.address.testutil.typicalentities.TypicalBands.CANDY;
 import static seedu.address.testutil.typicalentities.TypicalBands.ELISE;
 import static seedu.address.testutil.typicalentities.TypicalMusicians.ALICE;
+import static seedu.address.testutil.typicalentities.TypicalMusicians.BOB;
 import static seedu.address.testutil.typicalentities.TypicalMusicians.ELLE;
 
 import java.util.Arrays;
@@ -141,7 +142,7 @@ public class UniqueBandListTest {
     @Test
     public void hasMusician_bandWithoutMusicians_returnsFalse() {
         uniqueBandList.add(ACE);
-        assertFalse(uniqueBandList.hasMusician(0, ALICE));
+        assertFalse(uniqueBandList.hasMusician(0, BOB));
     }
 
     @Test
@@ -153,7 +154,7 @@ public class UniqueBandListTest {
     @Test
     public void hasMusician_musicianNotInBand_returnsFalse() {
         uniqueBandList.add(ELISE);
-        assertFalse(uniqueBandList.hasMusician(0, ALICE));
+        assertFalse(uniqueBandList.hasMusician(0, BOB));
     }
 
     @Test
