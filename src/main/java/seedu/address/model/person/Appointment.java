@@ -10,8 +10,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Appointment {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Appointment should be in the format YYYY-MM-DD HH:MM HH:MM, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Appointment should be in the format "
+            + "\"<Date> <Start Time> <End Time>\" and adhere to the following constraints:\n"
+            + "1. Appointment should not be left blank. Remove this field if no Appointment is needed.\n"
+            + "2. The <Date> field is formatted as \"<Day>-<Month>-<Year>\". It should be separated with dashes (-)"
+            + " or not separated at all,\n    ie DD-MM-YY or DDMMYY.\n"
+            + "    - <Day> is given as a simple numeric value.\n"
+            + "    - <Month> is given as a simple numeric value, standard 3-letter month name, or full month name.\n"
+            + "    - <Year> is optional. It is given as a 2 or 4 digit numeric value."
+            + " If no year is given, the current year is assumed.\n"
+            + "3. The 2 <Time> fields are formatted as \"<Hour>:<Minute>\". It should be separated by colons (:)"
+            + " or not separated at all,\n    ie HHmm or HH:mm\n"
+            + "4. <Start Time> should be earlier than or equals to <End Time>, and both are defined within <Date>."
+            + "5. <Date>, <Start Time> and <End Time> are separated by spaces ( ) or commas (,).";
 
     /*
      * The first character of the address must not be a whitespace,
