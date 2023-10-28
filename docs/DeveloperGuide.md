@@ -250,6 +250,15 @@ The following sequence diagram shows how the add patient works:
 
 ![AddPatientSequenceDiagram](images/AddPatientSequenceDiagram.png)
 
+### Design Considerations
+
+1. Option 1 (Current Choice): Use two different commands for adding patients and doctors
+    - Pros: Easier to implement. Clear to the user which type of person to add, since we have different fields for
+      patients and doctors.
+    - Cons: Increased number of classes and tests.
+2. Option 2: Use a single add command like the original implmentation
+    - Pros: Fewer files to be changed.
+    - Cons: Harder to implement, since we will have more checkings to be done when adding the person.
 
 ### Edit Patient/Doctor Feature
 
@@ -559,14 +568,9 @@ otherwise)
 
   Use case ends.
 
-* 3a. The given NRIC does not exist in the database.
+* 3a. The given NRIC is invalid.
 
     * 3a1. Medilink Contacts shows an error message.
-
-      Use case resumes at step 2.
-  
-* 4a. There are no edited fields, i.e. either no fields provided or new fields are the same as the previous ones
-    * 4a1. Medilink Contacts shows an error message.
 
       Use case resumes at step 2.
 
@@ -602,9 +606,15 @@ otherwise)
 
   Use case ends.
 
-* 3a. The given NRIC is invalid.
+* 3a. The given NRIC is does not exist in the database.
 
     * 3a1. Medilink Contacts shows an error message.
+
+      Use case resumes at step 2.
+  
+* 4a. There are no edited fields, i.e. either no fields provided or new fields are the same as the previous ones
+  
+    * 4a1. Medilink Contacts shows an error message.
 
       Use case resumes at step 2.
 
