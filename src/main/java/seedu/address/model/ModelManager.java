@@ -216,6 +216,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortEventList(Comparator<Event> comparator) {
+        requireNonNull(comparator);
+        eventBook.sortEventBook(comparator);
+    }
+
+    @Override
     public void setLastViewedPersonIndex(Index index) {
         requireNonNull(index);
         lastViewedPersonIndex = index;

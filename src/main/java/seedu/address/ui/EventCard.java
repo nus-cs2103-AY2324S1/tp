@@ -46,9 +46,10 @@ public class EventCard extends UiPart<Region> {
     public EventCard(Event event) {
         super(FXML);
         this.event = event;
-        description.setText(event.getDescription());
-        name.setText(event.getPerson().getName().fullName);
-        startTime.setText(event.getStart_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
-        endTime.setText(event.getEnd_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+        description.setText("Event: " + event.getDescription());
+        name.setText("Candidate: " + event.getPerson().getName().fullName);
+        startTime.setText("Start Time: "
+                + event.getStart_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+        endTime.setText("End Time: " + event.getEnd_time().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
     }
 }
