@@ -5,23 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.ObservableList;
+import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -30,69 +25,90 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.EventPeriodBuilder;
 
-public class AddCommandTest {
+class ClearEventsCommandTest {
+    private static final EventPeriod defaultPeriod = new EventPeriodBuilder().build();
+    private static final ClearEventsCommand defaultTrueCommand =
+            new ClearEventsCommand(defaultPeriod, true);
+    private static final ClearEventsCommand defaultFalseCommand =
+            new ClearEventsCommand(defaultPeriod, false);
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new ClearEventsCommand(null, true));
+        assertThrows(NullPointerException.class, () -> new ClearEventsCommand(null, false));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_noEvent_throwsCommandException() {
+        ClearEventsCommandTest.ModelStub modelStub = new ClearEventsCommandTest.ModelStubWithNoEvent();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        assertThrows(CommandException.class, ClearEventsCommand.MESSAGE_NO_EVENTS, () -> defaultFalseCommand
+                .execute(modelStub));
+        assertThrows(CommandException.class, ClearEventsCommand.MESSAGE_NO_EVENTS, () -> defaultTrueCommand
+                .execute(modelStub));
+    }
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+    @Test
+    public void constructor_oneEventClearedFromModel_deleteSuccessful() throws Exception {
+        Event validEvent = new EventBuilder().build();
+        ClearEventsCommandTest.ModelStubWithOneEvent modelStub =
+                new ClearEventsCommandTest.ModelStubWithOneEvent(validEvent);
+
+        EventPeriodBuilder builder = new EventPeriodBuilder();
+        builder.changeStartAndEnd(EventBuilder.DEFAULT_START_TIME_STRING, EventBuilder.DEFAULT_END_TIME_STRING);
+        EventPeriod eventPeriod = builder.build();
+
+        CommandResult commandResult = new ClearEventsCommand(eventPeriod, true).execute(modelStub);
+        CommandResult commandResult2 = new ClearEventsCommand(eventPeriod, false).execute(modelStub);
+        assertEquals(ClearEventsCommand.MESSAGE_SUCCESS + "1. " + Messages.format(validEvent) + "\n",
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertEquals(ClearEventsCommand.MESSAGE_WITHIN_RANGE
+                + "1. " + Messages.format(validEvent) + "\n"
+                + ClearEventsCommand.MESSAGE_ADD_CONFIRMATION
+                + String.format(ClearEventsCommand.COMMAND_RESEND_FORMAT, EventBuilder.DEFAULT_START_TIME_STRING,
+                        EventBuilder.DEFAULT_END_TIME_STRING),
+                commandResult2.getFeedbackToUser());
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        EventPeriodBuilder nonDefaultBuilder = new EventPeriodBuilder();
+        nonDefaultBuilder.changeStart("2023-01-02 08:00");
+        EventPeriod nonDefaultPeriod = nonDefaultBuilder.build();
+        ClearEventsCommand nonDefaultTrueCommand = new ClearEventsCommand(nonDefaultPeriod, true);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(defaultTrueCommand.equals(defaultTrueCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        ClearEventsCommand clearEventsTrueDefaultCopy = new ClearEventsCommand(defaultPeriod, true);
+        assertTrue(defaultTrueCommand.equals(clearEventsTrueDefaultCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(defaultTrueCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(defaultTrueCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different timing -> returns false
+        assertFalse(defaultTrueCommand.equals(nonDefaultTrueCommand));
+
+        // different confirmation -> returns false
+        assertFalse(defaultTrueCommand.equals(defaultFalseCommand));
     }
 
     @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+    void toStringMethod() {
+        String expected = ClearEventsCommand.class.getCanonicalName() + "{toClearWithin=" + defaultPeriod +
+                ", confirmed=true}";
+        assertEquals(expected, defaultTrueCommand.toString());
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -164,7 +180,6 @@ public class AddCommandTest {
         public ObservableList<Event> getCurrentWeekEventList() {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
@@ -196,6 +211,7 @@ public class AddCommandTest {
         }
 
         @Override
+
         public Event findEventAt(LocalDateTime dateTime) throws EventNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
@@ -231,44 +247,32 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single event.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
+    private class ModelStubWithNoEvent extends ClearEventsCommandTest.ModelStub {
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public List<Event> eventsInRange(EventPeriod eventPeriod) {
+            return List.of();
         }
     }
 
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubWithOneEvent extends ClearEventsCommandTest.ModelStub {
+        private final Event event;
 
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        ModelStubWithOneEvent(Event event) {
+            requireNonNull(event);
+            this.event = event;
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public List<Event> eventsInRange(EventPeriod eventPeriod) {
+            return List.of(event);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public void deleteEventsInRange(EventPeriod eventPeriod) {
+            return;
         }
     }
 }

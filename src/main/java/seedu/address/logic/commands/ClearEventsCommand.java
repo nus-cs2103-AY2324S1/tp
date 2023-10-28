@@ -92,6 +92,7 @@ public class ClearEventsCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("toClearWithin", clearPeriod)
+                .add("confirmed", isConfirmed)
                 .toString();
     }
 }
