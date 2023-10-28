@@ -58,7 +58,7 @@ public class PersonCard extends UiPart<Region> {
         LocalDateTime time = person.getLastContactedTime();
         lastContactedTime.setText(time.isEqual(LocalDateTime.MIN)
                 ? "Not contacted yet"
-                : time.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm")));
+                : "LC: " + time.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HHmm")));
         status.setText(person.getStatus().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
