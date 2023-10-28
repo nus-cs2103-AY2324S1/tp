@@ -234,6 +234,8 @@ public class ModelManager implements Model {
         return versionedCcaCommander.equals(otherModelManager.versionedCcaCommander)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredMembers.equals(otherModelManager.filteredMembers)
-                && filteredEvents.equals(otherModelManager.filteredEvents);
+                && filteredEvents.equals(otherModelManager.filteredEvents)
+                && filteredEnrolments.equals(otherModelManager
+                .filteredEnrolments);
     }
 }

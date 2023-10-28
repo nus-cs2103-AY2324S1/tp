@@ -167,6 +167,12 @@ public class ModelManagerTest {
     public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
     }
+
+    @Test
+    public void getFilteredEnrolmentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEnrolmentList().remove(0));
+    }
+
     @Test
     public void deleteEvents() {
         modelManager.createEvent(AURORA_BOREALIS);
