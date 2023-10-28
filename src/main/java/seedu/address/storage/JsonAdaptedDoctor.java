@@ -11,12 +11,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
@@ -37,7 +37,7 @@ public class JsonAdaptedDoctor {
     private final String gender;
     private final String ic;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final List<JsonAdaptedPatient> patients = new ArrayList<>();
+    private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,7 +46,8 @@ public class JsonAdaptedDoctor {
     public JsonAdaptedDoctor(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("remark") String remark, @JsonProperty("gender") String gender,
-                             @JsonProperty("nric") String ic, @JsonProperty("tags") List<JsonAdaptedPatient> patients,
+                             @JsonProperty("nric") String ic,
+                             @JsonProperty("tags") List<JsonAdaptedAppointment> appointments,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -55,8 +56,8 @@ public class JsonAdaptedDoctor {
         this.remark = remark;
         this.gender = gender;
         this.ic = ic;
-        if (patients != null) {
-            this.patients.addAll(patients);
+        if (appointments != null) {
+            this.appointments.addAll(appointments);
         }
         if (tags != null) {
             this.tags.addAll(tags);
@@ -74,8 +75,8 @@ public class JsonAdaptedDoctor {
         remark = source.getRemark().value;
         gender = source.getGender().value;
         ic = source.getIc().value;
-        patients.addAll(source.getPatients().stream()
-                .map(JsonAdaptedPatient::new)
+        appointments.addAll(source.getAppointments().stream()
+                .map(JsonAdaptedAppointment::new)
                 .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -148,14 +149,14 @@ public class JsonAdaptedDoctor {
 
         final Set<Tag> modelTags = new HashSet<>(doctorTags);
 
-        final List<Patient> listOfPatients = new ArrayList<>();
-        for (JsonAdaptedPatient patient : patients) {
-            listOfPatients.add(patient.toModelType());
+        final List<Appointment> listOfAppointments = new ArrayList<>();
+        for (JsonAdaptedAppointment appointment : appointments) {
+            listOfAppointments.add(appointment.toModelType());
         }
         Doctor modelDoctor = new Doctor(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelGender, modelIc,
                 modelTags);
-        for (Patient patient : listOfPatients) {
-            modelDoctor.addPatient(patient);
+        for (Appointment appointment : listOfAppointments) {
+            modelDoctor.addAppointment(appointment);
         }
         return modelDoctor;
     }
