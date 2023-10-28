@@ -156,6 +156,25 @@ public class AllDaysEventListManager {
     public ObservableList<Event> asUnmodifiableObservableList() {
         List<Event> list = dayToEventListMap.values().stream()
                 .flatMap(singleDayEventList -> singleDayEventList.getDayEventList().stream())
+                .map(Event::getParentEvent).distinct()
+                .collect(Collectors.toList());
+
+        return FXCollections.observableList(list);
+    }
+
+    /**
+     * Returns the event list storing events that occur between the start and end dates as an unmodifiable
+     * ObservableList.
+     *
+     * @param startDate start date.
+     * @param endDate end date.
+     * @return the event list storing events that occur between the start and end dates as an unmodifiable
+     *     ObservableList.
+     */
+    public ObservableList<Event> asUnmodifiableObservableList(LocalDate startDate, LocalDate endDate) {
+        List<Event> list = dayToEventListMap.values().stream()
+                .flatMap(singleDayEventList -> singleDayEventList.getDayEventList().stream())
+                .filter(event -> event.occursBetweenDates(startDate, endDate))
                 .collect(Collectors.toList());
 
         return FXCollections.observableList(list);

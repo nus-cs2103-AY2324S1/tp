@@ -37,9 +37,9 @@ public class CalendarTest {
 
     @Test
     public void isEmptyValid_nonEmptyCalendar_returnsFalse() {
-        this.calendar.clear();
-        this.calendar.addEvent(new EventBuilder().build());
-        assertFalse(this.calendar.isEmpty());
+        calendar.clear();
+        calendar.addEvent(new EventBuilder().build());
+        assertFalse(calendar.isEmpty());
     }
 
     @Test
@@ -66,10 +66,10 @@ public class CalendarTest {
 
     @Test
     public void addEvent_validEvent_successful() {
-        this.calendar.clear();
+        calendar.clear();
         Event validEvent = new EventBuilder().build();
-        this.calendar.addEvent(validEvent);
-        assertTrue(this.calendar.contains(validEvent));
+        calendar.addEvent(validEvent);
+        assertTrue(calendar.contains(validEvent));
     }
 
     @Test
@@ -141,45 +141,62 @@ public class CalendarTest {
 
     @Test
     public void isEqualsValid_nullValue_returnsFalse() {
-        this.calendar.clear();
-        assertFalse(this.calendar.equals(null));
+        calendar.clear();
+        assertFalse(calendar.equals(null));
     }
 
     @Test
     public void isEqualsValid_nonCalendarObject_returnFalse() {
-        this.calendar.clear();
-        assertFalse(this.calendar.equals(new Object()));
+        calendar.clear();
+        assertFalse(calendar.equals(new Object()));
     }
 
     @Test
     public void isEqualsValid_equalCalendarDeclaredObject_returnTrue() {
-        this.calendar.clear();
+        calendar.clear();
         Object equalCalendar = new Calendar();
-        assertTrue(this.calendar.equals(equalCalendar));
+        assertTrue(calendar.equals(equalCalendar));
     }
 
     @Test
     public void isEqualsValid_notEqualCalendarDeclaredObject_returnFalse() {
-        this.calendar.clear();
-        this.calendar.addEvent(new EventBuilder().build());
+        calendar.clear();
+        calendar.addEvent(new EventBuilder().build());
         Object nonEqualCalendar = new Calendar();
-        assertFalse(this.calendar.equals(nonEqualCalendar));
+        assertFalse(calendar.equals(nonEqualCalendar));
     }
 
     @Test
     public void isEqualsValid_equalCalendarDeclaredCalendar_returnTrue() {
-        this.calendar.clear();
+        calendar.clear();
         Calendar equalCalendar = new Calendar();
-        assertTrue(this.calendar.equals(equalCalendar));
+        assertTrue(calendar.equals(equalCalendar));
     }
 
     @Test
     public void isEqualsValid_notEqualCalendarDeclaredCalendar_returnFalse() {
-        this.calendar.clear();
-        this.calendar.addEvent(new EventBuilder().build());
+        calendar.clear();
+        calendar.addEvent(new EventBuilder().build());
         Calendar nonEqualCalendar = new Calendar();
-        assertFalse(this.calendar.equals(nonEqualCalendar));
+        assertFalse(calendar.equals(nonEqualCalendar));
     }
 
+    @Test
+    public void isEqualsValid_thisCalendar_returnTrue() {
+        assertTrue(calendar.equals(calendar));
+    }
 
+    @Test
+    public void getEarliestEventStartTimeInCurrentWeekTest() {
+        calendar.clear();
+
+        assertTrue(calendar.getEarliestEventStartTimeInCurrentWeek().isEmpty());
+    }
+
+    @Test
+    public void getLatestEventEndTimeInCurrentWeek() {
+        calendar.clear();
+
+        assertTrue(calendar.getLatestEventEndTimeInCurrentWeek().isEmpty());
+    }
 }

@@ -17,6 +17,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
+
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
 
@@ -118,15 +120,10 @@ public class CalendarEventSpace extends UiPart<Region> {
                 .orElse(calendarStartTime);
         LocalTime newEndTime = calendar.getLatestEventEndTimeInCurrentWeek()
                 .map(time -> {
-                    if (time.getMinute() == 0) {
+                    if (time.getMinute() == 0 || time.getHour() == MAXIMUM_DISPLAY_HOUR_OF_DAY) {
                         return time;
                     }
-
-                    if (time.getHour() == MAXIMUM_DISPLAY_HOUR_OF_DAY) {
-                        return time;
-                    }
-
-                    return LocalTime.of(time.getHour() + 1, 0);
+                    return time.plusMinutes(NUMBER_OF_MINUTES_IN_AN_HOUR - time.getMinute());
                 })
                 .orElse(calendarEndTime);
 
@@ -163,6 +160,7 @@ public class CalendarEventSpace extends UiPart<Region> {
         cardRectangle.setWidth(widthMultiplier * NODE_WIDTH_PER_HALF_HOUR * NUMBER_OF_HALF_HOURS_IN_HOUR);
         cardRectangle.setFill(Color.CRIMSON);
         cardRectangle.setStroke(Color.BLACK);
+        cardRectangle.setStrokeType(StrokeType.INSIDE);
 
 
         Label description = new Label();

@@ -106,7 +106,10 @@ public class EventPeriod implements Comparable<EventPeriod> {
     public boolean isOverlapping(LocalDate start, LocalDate end) {
         requireAllNonNull(start, end);
 
-        return !(this.start.toLocalDate().isAfter(end) || this.end.toLocalDate().isBefore(start));
+        boolean isThisEventStartingAfterOtherEventEnds = this.start.toLocalDate().isAfter(end);
+        boolean isThisEventEndedBeforeOtherEventStarts = this.end.toLocalDate().isBefore(start);
+        return !(isThisEventStartingAfterOtherEventEnds || isThisEventEndedBeforeOtherEventStarts);
+
     }
 
     /**
@@ -203,13 +206,19 @@ public class EventPeriod implements Comparable<EventPeriod> {
     public EventPeriod boundPeriodByDate(LocalDate date) {
         requireNonNull(date);
 
-        if (date.isEqual(start.toLocalDate()) && date.isEqual(end.toLocalDate())) {
+        boolean isDateOnStartDate = date.isEqual(start.toLocalDate());
+        boolean isDateOnEndDate = date.isEqual(end.toLocalDate());
+        boolean isDateAfterStartDate = date.isAfter(start.toLocalDate());
+        boolean isDateBeforeEndDate = date.isBefore(end.toLocalDate());
+
+
+        if (isDateOnStartDate && isDateOnEndDate) {
             return this;
-        } else if (date.isEqual(start.toLocalDate())) {
+        } else if (isDateOnStartDate) {
             return new EventPeriod(start, LocalDateTime.of(date, MAX_TIME_OF_DAY));
-        } else if (date.isEqual(end.toLocalDate())) {
+        } else if (isDateOnEndDate) {
             return new EventPeriod(LocalDateTime.of(date, LocalTime.MIDNIGHT), end);
-        } else if (date.isAfter(start.toLocalDate()) && date.isBefore(end.toLocalDate())) {
+        } else if (isDateAfterStartDate && isDateBeforeEndDate) {
             return new EventPeriod(LocalDateTime.of(date, LocalTime.MIDNIGHT),
                     LocalDateTime.of(date, MAX_TIME_OF_DAY));
         } else {

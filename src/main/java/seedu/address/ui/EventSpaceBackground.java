@@ -20,6 +20,8 @@ public class EventSpaceBackground extends UiPart<Region> {
     private static final LocalTime DEFAULT_CALENDAR_START_TIME = LocalTime.of(8, 0);
     private static final LocalTime DEFAULT_CALENDAR_END_TIME = LocalTime.of(18, 0);
     private static final int NUMBER_OF_HOURS_IN_ONE_DAY = 24;
+    private static final int MAXIMUM_DISPLAY_HOUR = 23;
+    private static final int NUMBER_OF_MINUTES_IN_AN_HOUR = 60;
 
     private LocalTime calendarStartTime = DEFAULT_CALENDAR_START_TIME;
     private LocalTime calendarEndTime = DEFAULT_CALENDAR_END_TIME;
@@ -81,7 +83,10 @@ public class EventSpaceBackground extends UiPart<Region> {
                 .orElse(calendarStartTime);
         LocalTime newEndTime = calendar.getLatestEventEndTimeInCurrentWeek()
                 .map(time -> {
-                    return time.minusMinutes(time.getMinute());
+                    if (time.getMinute() == 0 || time.getHour() == MAXIMUM_DISPLAY_HOUR) {
+                        return time;
+                    }
+                    return time.plusMinutes(NUMBER_OF_MINUTES_IN_AN_HOUR - time.getMinute());
                 })
                 .orElse(calendarEndTime);
 

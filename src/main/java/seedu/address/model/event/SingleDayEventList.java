@@ -88,6 +88,7 @@ public class SingleDayEventList {
      */
     public Optional<Event> eventAtTime(LocalDateTime dateTime) {
         requireNonNull(dateTime);
+      
         for (Event event : eventTree.values()) {
             Event parentEvent = event.getParentEvent();
             if (parentEvent.isDuring(dateTime)) {

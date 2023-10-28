@@ -18,10 +18,11 @@ import seedu.address.model.event.EventPeriod;
  * Represents a calendar that stores and manages events.
  */
 public class Calendar implements ReadOnlyCalendar {
+    private static final int DAYS_IN_WEEK = 7;
     private static final LocalDate DATE_OF_START_OF_CURRENT_WEEK = LocalDate.now().minusDays(
             LocalDate.now().getDayOfWeek().getValue() - 1);
     private static final LocalDate DATE_OF_END_OF_CURRENT_WEEK = LocalDate.now().plusDays(
-            7 - LocalDate.now().getDayOfWeek().getValue());
+            DAYS_IN_WEEK - LocalDate.now().getDayOfWeek().getValue());
     private final AllDaysEventListManager eventManager;
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
     private final ObservableList<Event> internalListForCurrentWeek = FXCollections.observableArrayList();

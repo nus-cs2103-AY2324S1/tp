@@ -199,7 +199,7 @@ public class Event {
      */
     public boolean occursBetweenDates(LocalDate start, LocalDate end) {
         requireAllNonNull(start, end);
-        return getParentEvent().eventPeriod.isOverlapping(start, end);
+        return eventPeriod.isOverlapping(start, end);
     }
 
     /**
