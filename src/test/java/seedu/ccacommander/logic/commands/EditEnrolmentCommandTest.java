@@ -30,8 +30,8 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
 import seedu.ccacommander.model.enrolment.Enrolment;
-import seedu.ccacommander.testutil.EnrolmentBuilder;
 import seedu.ccacommander.testutil.EditEnrolmentDescriptorBuilder;
+import seedu.ccacommander.testutil.EnrolmentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditEnrolmentCommand.
