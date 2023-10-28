@@ -18,8 +18,9 @@ import seedu.address.model.person.interaction.Interaction.Outcome;
  * Jackson-friendly version of {@link Interaction}.
  */
 class JsonAdaptedInteraction {
-    private static final String MISSING_FIELD_MESSAGE_FORMAT = "Interaction's %s field is missing!";
-    private static final String INVALID_DATE_FIELD_MESSAGE = "Date format is invalid. Please use dd-MMM-yyyy format";
+    public static final String INVALID_DATE_FIELD_MESSAGE = "Date format is invalid. Please use dd-MMM-yyyy format";
+    public static final String INTERACTION_MISSING_FIELD_MESSAGE_FORMAT = "Interaction's %s field is missing!";
+
     private static final Logger logger = LogsCenter.getLogger(JsonAdaptedInteraction.class);
 
     private final String interactionNote;
@@ -44,7 +45,8 @@ class JsonAdaptedInteraction {
         this.interactionNote = interaction.getInteractionNote();
         this.outcome = interaction.getOutcome().toString();
         this.date = DEFAULT_DATE_FORMAT.format(interaction.getDate()).toString();
-        logger.info("Saving Date into JSON: " + date);
+        logger.info("Saving Interaction details into JSON: " + this.interactionNote + " " + this.outcome + " "
+                + this.date);
     }
 
     /**
@@ -53,9 +55,9 @@ class JsonAdaptedInteraction {
      * @throws IllegalValueException if there were any data constraints violated in the adapted interaction.
      */
     public Interaction toModelType() throws IllegalValueException {
-        if (interactionNote == null && outcome == null) {
+        if ((interactionNote == null && outcome == null) || (interactionNote.isEmpty() && outcome.isEmpty())) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "interactionNote or outcome"));
+                    String.format(INTERACTION_MISSING_FIELD_MESSAGE_FORMAT, "interactionNote or outcome"));
         }
 
         if (outcome != null && !Outcome.isValidOutcome(outcome)) {
@@ -65,7 +67,7 @@ class JsonAdaptedInteraction {
 
         if (date == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+                    String.format(INTERACTION_MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
         Date modelDate;
         try {
