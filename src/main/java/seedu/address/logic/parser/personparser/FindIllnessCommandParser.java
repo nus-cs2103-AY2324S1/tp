@@ -7,10 +7,18 @@ import seedu.address.model.person.IllnessContainsKeywordsPredicate;
 
 import java.util.Arrays;
 
+/**
+ * Parses input arguments and creates a new FindIllnessCommand object
+ */
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class FindIllnessCommandParser implements Parser<FindIllnessCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the FindIllnessCommand
+     * and returns a FindIllnessCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public FindIllnessCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {

@@ -8,6 +8,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.IllnessContainsKeywordsPredicate;
 
 import static java.util.Objects.requireNonNull;
+
+/**
+ * Finds and lists all persons in address book whose illness contains any of the argument keywords.
+ * Keyword matching is case insensitive.
+ */
 public class FindIllnessCommand extends Command {
 
     public static final String COMMAND_WORD = "find-illness";
@@ -23,6 +28,12 @@ public class FindIllnessCommand extends Command {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the FindIllnessCommand to filter and list persons in the model based on the specified illness keywords.
+     *
+     * @param model The model in which to execute the command.
+     * @return A CommandResult containing the message summarising the number of persons listed.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

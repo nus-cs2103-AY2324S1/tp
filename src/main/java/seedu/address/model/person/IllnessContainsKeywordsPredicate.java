@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Tests that a {@code Person}'s {@code Illness} matches any of the keywords given.
+ */
 public class IllnessContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
@@ -13,6 +16,12 @@ public class IllnessContainsKeywordsPredicate implements Predicate<Person> {
         this.keywords = keywords;
     }
 
+    /**
+     * Tests if a person's illnesses contain any of the specified keywords.
+     *
+     * @param person The person to test.
+     * @return {@code true} if the person's illnesses contain any of the keywords, {@code false} otherwise.
+     */
     @Override
     public boolean test(Person person) {
         return keywords.stream()
