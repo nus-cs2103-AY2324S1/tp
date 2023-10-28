@@ -25,6 +25,7 @@ public class SummaryStatisticScreen extends UiPart<Region> {
     @FXML
     private TableView<StatisticData> tableView;
 
+
     // Other @FXML fields for TableColumns are not required
 
     public SummaryStatisticScreen(ReadOnlySummaryStatistic summaryStatistic, Person person) {
@@ -54,16 +55,13 @@ public class SummaryStatisticScreen extends UiPart<Region> {
 
         for (Tag tag : tags) {
             int mean = summaryStatistic.generateMeanWithTag(tag);
-            System.out.println(mean);
             int median = summaryStatistic.generateMedianWithTag(tag);
-            System.out.println(median);
             int min = summaryStatistic.generateMinScoreValueWithTag(tag);
-            System.out.println(min);
             int max = summaryStatistic.generateMaxScoreValueWithTag(tag);
-            System.out.println(max);
             double percentile = summaryStatistic.generatePercentileWithTag(person, tag);
-            System.out.println(percentile);
-            statisticData.add(new StatisticData(tag.tagName, mean, median, min, max, percentile));
+            int currentScore = person.getScoreList().getScore(tag).value;
+
+            statisticData.add(new StatisticData(tag.tagName, mean, median, min, max, percentile, currentScore));
 
         }
         return statisticData;
@@ -97,6 +95,8 @@ public class SummaryStatisticScreen extends UiPart<Region> {
         private final int min;
         private final double percentile;
 
+        private final int currentScore;
+
         /**
          * Constructor for statistic data.
          * @param tag tag
@@ -106,13 +106,14 @@ public class SummaryStatisticScreen extends UiPart<Region> {
          * @param min min
          * @param percentile percentile
          */
-        public StatisticData(String tag, int mean, int median, int min, int max, double percentile) {
+        public StatisticData(String tag, int mean, int median, int min, int max, double percentile, int currentScore) {
             this.tag = tag;
             this.mean = mean;
             this.median = median;
             this.min = min;
             this.max = max;
             this.percentile = percentile;
+            this.currentScore = currentScore;
         }
         public String getTag() {
             return tag;
@@ -125,6 +126,7 @@ public class SummaryStatisticScreen extends UiPart<Region> {
         public int getMedian() {
             return median;
         }
+
         public int getMin() {
             return min;
         }
@@ -133,9 +135,12 @@ public class SummaryStatisticScreen extends UiPart<Region> {
             return max;
         }
 
-
         public double getPercentile() {
             return percentile;
+        }
+
+        public int getCurrentScore() {
+            return currentScore;
         }
     }
 }
