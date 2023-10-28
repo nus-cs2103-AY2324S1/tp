@@ -94,7 +94,7 @@ public class LeaveList {
      * @param test List to be tested
      */
     public static boolean isValidLeaveList(ArrayList<Leave> test) {
-        if (test.size() == 0) {
+        if (test.isEmpty()) {
             return true;
         }
         if (test.size() > MAX_NUM_OF_LEAVES) {
@@ -123,6 +123,7 @@ public class LeaveList {
         return leaveList.equals(otherLeaveList.leaveList);
     }
 
+    @SuppressWarnings("unchecked") // since cloning leavelist
     public LeaveList getCopiedLeaveList() {
         ArrayList<Leave> copiedList = (ArrayList<Leave>) leaveList.clone();
         return new LeaveList(copiedList);
