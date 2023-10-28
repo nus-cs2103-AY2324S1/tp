@@ -29,28 +29,36 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar addressbook.jar command to
-   run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   run the application.
+
+5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it.
+6. Type the command in the command box and press Enter to execute it.
    Try the following commands in order:
 
-   1. `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia` : Adds a member named Alicia to the
-      members list
-   2. `addm /name John Doe /phone 92345677 /email Johndoe@xyz.com /tele @Johndoe` : Adds a member named John Doe to the
-      members list
-   3. `findm Alicia` : Only member Alicia will be listed under the members list
-   4. `findm John Doe` : Only member John Doe will be listed under the members list
-   5. `findm Alicia Johndoe@xyz.com` : Both members Alicia and John Doe will be listed under the members list
-   6. `delm 2` : Member John Doe will be deleted from the members list
+    1. `addm /name Alicia /phone 92345678 /email Alicia@xyz.com /tele @Alicia` : Adds a member named Alicia to the
+       members list
+    2. `addm /name John Doe /phone 92345677 /email Johndoe@xyz.com /tele @Johndoe` : Adds a member named John Doe to the
+       members list
+    3. `findm Alicia` : Only member Alicia will be listed under the members list
+    4. `findm John Doe` : Only member John Doe will be listed under the members list
+    5. `findm Alicia Johndoe@xyz.com` : Both members Alicia and John Doe will be listed under the members list
+    6. `delm 2` : Member John Doe will be deleted from the members list
 
-
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+
+<div markdown="span" class="alert alert-primary">
+
+:information_source: **Note:** Many of the commands below have _aliases_, or short-form versions that make them easier
+to type. For example, the command `addMember` can be typed as `addm`. Usages of the aliases are documented below
+alongside the full command word, and all aliases can be used interchangeably with the full command word.
+
+</div>
 
 ### Add Member
 
