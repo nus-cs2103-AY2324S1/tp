@@ -60,6 +60,12 @@ public class ViewCommandTest {
     }
 
     @Test
+    public void execute_viewAll() {
+        assertCommandSuccess(new ViewCommand("all"), model,
+                ViewCommand.MESSAGE_SUCCESS_ALL, expectedModel);
+    }
+
+    @Test
     public void toStringMethod() {
         String category = "appointments";
         ViewCommand viewCommand = new ViewCommand(category);
