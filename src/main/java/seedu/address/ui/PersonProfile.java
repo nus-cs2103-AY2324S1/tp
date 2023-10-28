@@ -1,11 +1,11 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -30,30 +30,49 @@ import seedu.address.model.tag.Tag;
  * by the user. At any point, a new Person object can be retrieved.
  */
 public class PersonProfile extends UiPart<Region> {
+
+    // region Super Constants
     private static final String FXML = "PersonProfile.fxml";
+    // endregion
 
+    // region String Constants
+    private static final String VALID_FOSTERER = "Valid fosterer.";
+    private static final String UNEXPECTED_ERROR = "Internal Error: fosterer was unexpectedly unable to be created.";
+    private static final String EDITING_IN_PROGRESS = "Some fields are still under edit. \n"
+            + "Please confirm or cancel them with enter or escape keys before proceeding.";
+
+    private static final String INVALID_VALUE = "Invalid value for field: ";
+
+    // endregion
+
+    // region FXML
     @FXML private VBox vbox;
+    // endregion
 
-    enum Event {
-        CONFIRM_SUCCESS, CONFIRM_FAIL, CANCEL
+    // region Enums
+
+    public enum Event {
+        CONFIRM_SUCCESS, CONFIRM_FAIL, CANCEL, BEFORE_START_EDIT
     }
 
     public enum Field {
-        NAME("Name", Name::isValidName),
-        PHONE("Phone", Phone::isValidPhone),
-        EMAIL("Email", Email::isValidEmail),
-        ADDRESS("Address", Address::isValidAddress),
-        HOUSING("Housing", Housing::isValidHousing),
-        AVAILABILITY("Availability", Availability::isValidAvailability),
-        ANIMAL_NAME("Animal Name", Name::isValidName),
-        ANIMAL_TYPE("Animal Type", AnimalType::isValidAnimalType);
+        NAME("Name", Name::isValidName, Name.MESSAGE_CONSTRAINTS),
+        PHONE("Phone", Phone::isValidPhone, Phone.MESSAGE_CONSTRAINTS),
+        EMAIL("Email", Email::isValidEmail, Email.MESSAGE_CONSTRAINTS),
+        ADDRESS("Address", Address::isValidAddress, Address.MESSAGE_CONSTRAINTS),
+        HOUSING("Housing", Housing::isValidHousing, Housing.MESSAGE_CONSTRAINTS),
+        AVAILABILITY("Availability", Availability::isValidAvailability, Availability.MESSAGE_CONSTRAINTS),
+        ANIMAL_NAME("Animal Name", Name::isValidName, Name.MESSAGE_CONSTRAINTS),
+        ANIMAL_TYPE("Animal Type", AnimalType::isValidAnimalType, AnimalType.MESSAGE_CONSTRAINTS);
 
         private final String name;
         private final Predicate<String> isValid;
+        private final String hint;
 
-        Field(String name, Predicate<String> isValid) {
+        Field(String name, Predicate<String> isValid, String hint) {
             this.name = name;
             this.isValid = isValid;
+            this.hint = hint;
         }
 
         public String getDisplayName() {
@@ -62,17 +81,28 @@ public class PersonProfile extends UiPart<Region> {
         public boolean isValid(String string) {
             return isValid.test(string);
         }
+        public String getHint() {
+            return hint;
+        }
     }
 
-    private final MainWindow mainWindow;
+    // endregion
 
-    private Person person;
+    // region Fields
+
+    // region Final
+    private final MainWindow mainWindow;
     private final Map<Field, String> fields = new EnumMap<>(Field.class);
     private final Set<String> tags = new HashSet<>();
-    private String note;
 
     private final Map<Field, PersonProfileField> uiElements = new EnumMap<>(Field.class);
-    private final Map<Event, Runnable> handlers = new EnumMap<>(Event.class);
+    private final Map<Event, List<Runnable>> eventHandlers = new EnumMap<>(Event.class);
+    // endregion
+
+    private Person person;
+    // endregion
+
+    // region Constructor
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -112,7 +142,13 @@ public class PersonProfile extends UiPart<Region> {
         PersonProfileHeader header = new PersonProfileHeader();
         vboxChildren.add(header.getRoot());
 
-        //fields
+        //event handlers
+        Arrays.stream(Event.values()).forEach(event -> eventHandlers.put(event, new ArrayList<>()));
+        setEventHandler(Event.CONFIRM_SUCCESS, this::handleFieldLockIn);
+        setEventHandler(Event.CONFIRM_FAIL, this::handleFieldLockIn);
+        setEventHandler(Event.CANCEL, this::handleFieldLockIn);
+
+        //ui
         Arrays.stream(Field.values()).forEach(field ->
                 uiElements.put(field, new PersonProfileField(this, field))
         );
@@ -122,68 +158,44 @@ public class PersonProfile extends UiPart<Region> {
         //todo deal with tags
     }
 
-    public void setFocus(Field field) {
-        uiElements.get(field).setFocus();
-    }
+    // endregion
 
-    public String getValueOfField(Field field) { //todo figure out if this is necessary
-        return fields.get(field);
-    }
+    // region Internal Event Handlers
 
-    public boolean replaceFieldIfValid(Field field, String value) {
-        fields.put(field, value);
+    private void handleFieldLockIn() {
+        if (availabilityGroupInvalid()) {
+            showAvailabilityGroupError();
+            return;
+        }
 
-        boolean didNotHavePerson = person == null;
+        if (editingInProgress()) {
+            sendEditingInProgress();
+            return;
+        }
 
         try {
-            createPerson();
-        } catch (IllegalArgumentException exception) {
-            mainWindow.sendFeedback(exception.getMessage());
-            return didNotHavePerson;
+            createAndUpdatePerson();
+            sendPersonCreated();
+        } catch (IllegalArgumentException ignored) {
+            sendUnexpectedError();
         }
-        confirmAllIfSubmitted();
-
-        if (uiElements.values().stream().anyMatch(PersonProfileField::isEditing)) {
-            clearFeedback();
-            return true;
-        }
-
-        if (didNotHavePerson) {
-            sendFeedback("Valid fosterer has been created!");
-        } else {
-            sendFeedback("Valid fosterer.");
-        }
-        return true;
     }
 
-    private void confirmAllIfSubmitted() {
-        uiElements.values().forEach(PersonProfileField::confirmIfSubmitted);
-    }
+    // endregion
 
-    private void createPerson() throws IllegalArgumentException {
-        Field[] requiredFields = {Field.NAME, Field.PHONE, Field.EMAIL, Field.ADDRESS};
-        Optional<Field> missingRequiredField = Arrays.stream(requiredFields)
-                .filter(field -> fields.get(field) == null).findAny();
-        if (missingRequiredField.isPresent()) {
-            throw new IllegalArgumentException(missingRequiredField.get().name + " is required, but empty!");
-        }
+    // region Internal Helpers
+
+    private void createAndUpdatePerson() {
+        this.person = null;
 
         Name name = new Name(fields.get(Field.NAME));
         Phone phone = new Phone(fields.get(Field.PHONE));
         Email email = new Email(fields.get(Field.EMAIL));
         Address address = new Address(fields.get(Field.ADDRESS));
-        Housing housing = fields.get(Field.HOUSING) != null
-                ? new Housing(fields.get(Field.HOUSING))
-                : null;
-        Availability availability = fields.get(Field.AVAILABILITY) != null
-                ? new Availability(fields.get(Field.AVAILABILITY))
-                : null;
-        Name animalName = fields.get(Field.ANIMAL_NAME) != null
-                ? new Name(fields.get(Field.ANIMAL_NAME))
-                : null;
-        AnimalType animalType = fields.get(Field.ANIMAL_TYPE) != null
-                ? new AnimalType(fields.get(Field.ANIMAL_TYPE), availability)
-                : null;
+        Housing housing = new Housing(fields.get(Field.HOUSING));
+        Availability availability = new Availability(fields.get(Field.AVAILABILITY));
+        Name animalName = new Name(fields.get(Field.ANIMAL_NAME));
+        AnimalType animalType = new AnimalType(fields.get(Field.ANIMAL_TYPE), availability);
 
         this.person = new Person(name, phone, email, address, housing, availability, animalName, animalType, getTags());
     }
@@ -192,6 +204,75 @@ public class PersonProfile extends UiPart<Region> {
         Set<Tag> set = new HashSet<>();
         tags.stream().map(Tag::new).forEach(set::add);
         return set;
+    }
+
+    private void sendPersonCreated() {
+        mainWindow.sendFeedback(VALID_FOSTERER);
+    }
+
+    private void showAvailabilityGroupError() { //todo make the UI red and show the error message thingy
+
+    }
+
+    private boolean availabilityGroupInvalid() {
+        try {
+            Availability availability = new Availability(fields.get(Field.AVAILABILITY));
+            Name animalName = new Name(fields.get(Field.ANIMAL_NAME));
+            AnimalType animalType = new AnimalType(fields.get(Field.ANIMAL_TYPE), availability);
+            return Person.isAvailabilityGroupValid(availability, animalName, animalType);
+        } catch (IllegalArgumentException ignored) {
+            return false;
+        }
+    }
+
+    private void sendUnexpectedError() {
+        mainWindow.sendFeedback(UNEXPECTED_ERROR);
+    }
+
+    private void sendEditingInProgress() {
+        mainWindow.sendFeedback(EDITING_IN_PROGRESS);
+    }
+
+    private boolean editingInProgress() {
+        return uiElements.values().stream().anyMatch(PersonProfileField::isEditing);
+    }
+
+    // endregion
+
+    // region Package
+
+    void updateField(Field field, String value) {
+        fields.put(field, value);
+    }
+
+    void triggerEvent(Event event) {
+        List<Runnable> runnables = eventHandlers.get(event);
+        runnables.forEach(Runnable::run);
+    }
+
+    void sendHint(Field field) {
+        mainWindow.sendFeedback(field.getHint());
+    }
+
+    String getValueOfField(Field field) {
+        return fields.get(field);
+    }
+
+    void sendInvalidInput(Field field) {
+        mainWindow.sendFeedback(INVALID_VALUE + field.getDisplayName() + "\n" + field.getHint());
+    }
+
+    // endregion
+
+    // region External
+
+    /**
+     * Sets focus to the UI element responsible for editing the provided field.
+     *
+     * @param field the field of Person that should currently be under edit.
+     */
+    public void setFocus(Field field) {
+        uiElements.get(field).setFocus();
     }
 
     /**
@@ -203,22 +284,15 @@ public class PersonProfile extends UiPart<Region> {
         return person;
     }
 
-    void setEventHandler(Event event, Runnable handler) {
-        handlers.put(event, handler);
+    /**
+     * Sets a Runnable to run when a specific {@link Event} occurs.
+     *
+     * @param event trigger to run the handler.
+     * @param handler Runnable to run when the event occurs.
+     */
+    public void setEventHandler(Event event, Runnable handler) {
+        eventHandlers.get(event).add(handler);
     }
 
-    void triggerEvent(Event event) {
-        Runnable runnable = handlers.get(event);
-        if (Objects.nonNull(runnable)) {
-            runnable.run();
-        }
-    }
-
-    void sendFeedback(String feedback) {
-        mainWindow.sendFeedback(feedback);
-    }
-
-    void clearFeedback() {
-        mainWindow.sendFeedback("");
-    }
+    // endregion
 }
