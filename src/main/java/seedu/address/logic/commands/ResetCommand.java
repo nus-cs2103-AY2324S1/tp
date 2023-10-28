@@ -42,13 +42,14 @@ public class ResetCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(field);
 
-        List<Employee> lastShownList = model.getFilteredEmployeeList();
+        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
+        List<Employee> employeeList = model.getFilteredEmployeeList();
 
         switch(field.toLowerCase()) {
         case "":
             throw new CommandException(MESSAGE_NO_FIELD);
         case "overtime hours":
-            for (Employee employee: lastShownList) {
+            for (Employee employee: employeeList) {
                 Employee employeeWithDefaultOvertime = new Employee(employee.getName(), employee.getPosition(),
                         employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
                         employee.getDepartments(), employee.getIsOnLeave(),
@@ -58,7 +59,7 @@ public class ResetCommand extends Command {
             }
             break;
         case "allocated leaves":
-            for (Employee employee: lastShownList) {
+            for (Employee employee: employeeList) {
                 Employee employeeWithDefaultLeaveList = new Employee(employee.getName(), employee.getPosition(),
                         employee.getId(), employee.getPhone(), employee.getEmail(), employee.getSalary(),
                         employee.getDepartments(), employee.getIsOnLeave(),
