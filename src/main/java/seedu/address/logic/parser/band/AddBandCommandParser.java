@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.band.AddBandCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,7 +20,7 @@ import seedu.address.model.band.BandName;
 /**
  * Parses input arguments and creates a new AddBandCommand object
  */
-public class AddBandCommandParser {
+public class AddBandCommandParser implements Parser<AddBandCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddBandCommand
      * and returns an AddBandCommand object for execution.
