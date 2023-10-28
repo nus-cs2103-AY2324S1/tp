@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class PayRate {
 
-    public static final String MESSAGE_CONSTRAINTS = "PayRate can take any values, as long as they are positive integers.";
+    public static final String MESSAGE_CONSTRAINTS = "PayRate can take any values, as long as "
+            + "they are positive integers.";
 
     /*
      * The first character of the address must not be a whitespace,

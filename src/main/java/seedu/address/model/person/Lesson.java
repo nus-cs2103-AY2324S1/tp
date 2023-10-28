@@ -6,7 +6,6 @@ import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 
@@ -80,6 +79,11 @@ public class Lesson {
         return count;
     }
 
+    /**
+     * Calculates the lesson duration in hours.
+     *
+     * @return duration in terms of hours.
+     */
     public double calculateLessonDuration() {
         Duration duration = Duration.between(begin, end);
         long minutes = duration.toMinutes();
@@ -93,8 +97,8 @@ public class Lesson {
     }
 
     public double getMonthlyHours() {
-        return calculateLessonDuration() * getNumOfDaysInMonth(LocalDate.now().
-                getYear(), LocalDate.now().getMonthValue());
+        return calculateLessonDuration() * getNumOfDaysInMonth(LocalDate.now()
+                .getYear(), LocalDate.now().getMonthValue());
     }
 
 

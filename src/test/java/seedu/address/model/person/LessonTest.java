@@ -46,10 +46,14 @@ public class LessonTest {
         // Testing for January in 2023 & 2024
         Lesson wedLesson = new Lesson(new Day("Wed"), new Begin("1300"), new End("1400"));
         int expectedDaysInJanuary2023 = 4; // January 2023 has 31 days
-        assertEquals(expectedDaysInJanuary2023, wedLesson.getNumOfDaysInMonth(2023,1));
+        assertEquals(expectedDaysInJanuary2023, wedLesson.getNumOfDaysInMonth(2023, 1));
 
         int expectedDaysInJanuary2024 = 5;
         assertEquals(expectedDaysInJanuary2024, wedLesson.getNumOfDaysInMonth(2024, 1));
+
+        Lesson satLesson = new Lesson(new Day("Sat"), new Begin("1300"), new End("1400"));
+        int expectedSatsInOctober2023 = 4;
+        assertEquals(expectedSatsInOctober2023, satLesson.getNumOfDaysInMonth(2023, 10));
     }
 
     @Test
@@ -64,11 +68,5 @@ public class LessonTest {
         assertEquals(expectedDurationTwo, lessonTwo.calculateLessonDuration());
 
     }
-
-
-
-
-
-
 
 }
