@@ -5,26 +5,15 @@ import seedu.ccacommander.logic.commands.EditEnrolmentCommand;
 import seedu.ccacommander.logic.commands.EditEnrolmentCommand.EditEnrolmentDescriptor;
 import seedu.ccacommander.logic.commands.EnrolCommand;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
-import seedu.ccacommander.model.tag.Tag;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EVENT;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Parses input arguments and creates a new EditEnrolmentCommand object
