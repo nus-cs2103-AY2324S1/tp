@@ -42,13 +42,13 @@ public class ResetCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(field);
 
-        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         List<Employee> employeeList = model.getFilteredEmployeeList();
 
         switch(field.toLowerCase()) {
         case "":
             throw new CommandException(MESSAGE_NO_FIELD);
         case "overtime":
+            model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
             for (Employee employee: employeeList) {
                 model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
                 Employee employeeWithDefaultOvertime = new Employee(employee.getName(), employee.getPosition(),
@@ -59,6 +59,7 @@ public class ResetCommand extends Command {
             }
             break;
         case "leaves":
+            model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
             for (Employee employee: employeeList) {
                 model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
                 Employee employeeWithDefaultLeaveList = new Employee(employee.getName(), employee.getPosition(),

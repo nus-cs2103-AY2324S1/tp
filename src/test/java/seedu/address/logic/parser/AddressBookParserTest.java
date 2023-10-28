@@ -94,8 +94,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_sort() throws Exception {
         SortCommand command = (SortCommand) parser.parseCommand(
-                SortCommand.COMMAND_WORD + " f/ " + "salary");
-        assertEquals(new SortCommand("salary"), command);
+                SortCommand.COMMAND_WORD + " f/ " + "salary" + " in/ " + "asc");
+        assertEquals(new SortCommand("salary", "asc"), command);
     }
 
     @Test
