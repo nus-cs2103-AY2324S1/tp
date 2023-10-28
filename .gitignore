@@ -2,6 +2,7 @@
 /.gradle/
 /build/
 src/main/resources/docs/
+build.gradle
 
 # IDEA files
 /.idea/
@@ -24,4 +25,5 @@ src/test/data/sandbox/
 docs/_site/
 
 #VSCode settings file
-.vscode/settings.json
+.vscode/
+build.gradle

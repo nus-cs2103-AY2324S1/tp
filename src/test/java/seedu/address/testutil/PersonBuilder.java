@@ -8,6 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.interaction.InteractionList;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -29,6 +30,7 @@ public class PersonBuilder {
     private Address address;
     private Lead lead;
     private Set<Tag> tags;
+    private InteractionList interactions;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +42,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         lead = new Lead(DEFAULT_LEAD);
         tags = new HashSet<>();
+        interactions = new InteractionList();
     }
 
     /**
@@ -52,6 +55,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         lead = personToCopy.getLead();
         tags = new HashSet<>(personToCopy.getTags());
+        interactions = new InteractionList(personToCopy.getInteractions());
     }
 
     /**
@@ -103,6 +107,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Interaction} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withInteractions(InteractionList interactions) {
+        this.interactions = interactions;
+        return this;
+    }
+
+    /**
      * Creates the built {@code Person} after building.
      *
      * @return the built {@code Person}
@@ -110,6 +122,7 @@ public class PersonBuilder {
     public Person build() {
         return new Person.PersonBuilder(name, phone, email, address, tags)
                 .withLead(lead)
+                .withInteractions(interactions)
                 .build();
     }
 

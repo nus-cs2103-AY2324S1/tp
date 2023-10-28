@@ -3,7 +3,7 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Interaction;
+import seedu.address.model.person.interaction.Interaction;
 
 /**
  * A UI component that displays information of a {@code Client} {@code Interaction}.
@@ -25,7 +25,7 @@ public class InteractionEntry extends UiPart<Region> {
     public InteractionEntry(Interaction interaction) {
         super(FXML);
         this.interaction = interaction;
-        note.setText(interaction.getInteraction());
+        note.setText(interaction.getInteractionNote());
         outcome.setText(interaction.getOutcome().toString());
     }
 }

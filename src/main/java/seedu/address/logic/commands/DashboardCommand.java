@@ -6,8 +6,8 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.interaction.Interaction;
 
 /**
  * Shows the dashboard containing statistics of the address book.
@@ -49,7 +49,7 @@ public class DashboardCommand extends Command {
     private int getSpecifiedOutcomeCount(ObservableList<Person> personList, Interaction.Outcome outcome) {
         return personList.stream()
                 .map(person ->
-                        person.getFilteredInteraction(i -> i.isOutcome(outcome)).size())
+                        person.getFilteredInteractions(i -> i.isOutcome(outcome)).size())
                 .reduce(0, Integer::sum);
     }
 

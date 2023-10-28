@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,12 +13,12 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Income;
-import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Profession;
 import seedu.address.model.person.TelegramHandle;
+import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
@@ -99,7 +100,7 @@ public class SampleDataUtil {
     /**
      * Returns an interaction set containing the list of strings given.
      */
-    public static ArrayList<Interaction> getInteractionList(String... strings) {
+    public static List<Interaction> getInteractionList(String... strings) {
         return Arrays.stream(strings)
                 .map(Interaction::new)
                 .collect(Collectors.toCollection(ArrayList::new));

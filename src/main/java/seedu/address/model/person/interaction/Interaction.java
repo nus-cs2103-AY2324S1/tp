@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.interaction;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +30,7 @@ public class Interaction {
         }
     }
 
-    private static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy");
+    public static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy");
 
     private final String interactionNote;
     private final Outcome outcome;
@@ -73,7 +73,7 @@ public class Interaction {
         this.date = date;
     }
 
-    public String getInteraction() {
+    public String getInteractionNote() {
         return this.interactionNote;
     }
 

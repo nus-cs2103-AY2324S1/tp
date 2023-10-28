@@ -8,8 +8,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.InteractionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Interaction;
-import seedu.address.model.person.Interaction.Outcome;
+import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.person.interaction.Interaction.Outcome;
 
 /**
  * Parses input arguments and creates a new InteractionCommand object.
@@ -46,13 +46,13 @@ public class InteractionCommandParser implements Parser<Command> {
             String outcomeString = argMultimap.getValue(PREFIX_OUTCOME).get().split("\\s+")[0];
             outcome = ParserUtil.parseOutcome(outcomeString);
             String[] trimmedArgsParts = trimmedArgs.split("\\s+", 3);
-            //This is to check if there is a note
+            //Check if there is a note
             if (trimmedArgsParts.length > 2) {
                 note = trimmedArgsParts[2];
             }
         } else {
             String[] trimmedArgsParts = trimmedArgs.split("\\s+", 2);
-            if (trimmedArgsParts.length < 3) {
+            if (trimmedArgsParts.length < 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         InteractionCommand.MESSAGE_USAGE));
             }
