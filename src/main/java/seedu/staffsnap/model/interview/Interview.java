@@ -50,7 +50,11 @@ public class Interview implements Comparable<Interview> {
         return rating;
     }
 
-    public Interview incrementName () {
+    /**
+     * Increments the interview name and returns the incremented interview
+     * @return the incremented interview
+     */
+    public Interview incrementName() {
         Pattern pattern = Pattern.compile(".*?(\\d+)$");
 
         Matcher matcher = pattern.matcher(type);
@@ -64,7 +68,7 @@ public class Interview implements Comparable<Interview> {
 
             return new Interview(result, rating);
         } else {
-            return new Interview(type +1, rating);
+            return new Interview(type + 1, rating);
         }
     }
 

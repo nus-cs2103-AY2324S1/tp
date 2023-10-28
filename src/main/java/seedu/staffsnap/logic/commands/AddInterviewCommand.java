@@ -37,7 +37,7 @@ public class AddInterviewCommand extends Command {
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists for this applicant";
 
     private final Index index;
-    private  Interview interviewToAdd;
+    private Interview interviewToAdd;
 
     /**
      * Creates an AddInterviewCommand to add the specified {@code Interview}
