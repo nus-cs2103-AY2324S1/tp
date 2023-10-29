@@ -2,10 +2,13 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.attendance.AttendanceStorage;
+import seedu.address.model.person.attendance.AttendanceType;
 
 /**
  * Represents a Person in the address book.
@@ -25,13 +28,14 @@ public class Person {
     private final BankAccount bankAccount;
     private final JoinDate joinDate;
     private final Salary salary;
+    private final AttendanceStorage attendanceStorage;
     private final ArrayList<Payroll> payrolls;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, BankAccount bankAccount, JoinDate joinDate,
-            Salary salary, AnnualLeave annualLeave) {
+            Salary salary, AnnualLeave annualLeave, AttendanceStorage attendanceStorage) {
         requireAllNonNull(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
         this.name = name;
         this.phone = phone;
@@ -41,6 +45,7 @@ public class Person {
         this.joinDate = joinDate;
         this.salary = salary;
         this.annualLeave = annualLeave;
+        this.attendanceStorage = attendanceStorage;
         this.payrolls = new ArrayList<>();
     }
 
@@ -76,6 +81,13 @@ public class Person {
         return annualLeave;
     }
 
+    public AttendanceStorage getAttendanceStorage() {
+        return attendanceStorage;
+    }
+
+    public AttendanceType getAttendanceToday() {
+        return this.attendanceStorage.getType(LocalDate.now());
+    }
     /**
      * Adds a payroll to the payroll list of this person.
      * @param payroll Payroll to be added.

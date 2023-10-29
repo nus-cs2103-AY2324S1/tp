@@ -90,7 +90,9 @@ public class ReadCommand extends Command {
             return person.getSalary().value;
         case "annual leave":
             return "Total Annual Leave: " + person.getAnnualLeave().value + "\n"
-                    + person.getAnnualLeave().printListLeaveTaken();
+                + person.getAnnualLeave().printListLeaveTaken();
+        case "attendance":
+            return person.getAttendanceToday().toString().toLowerCase();
         default:
             throw new CommandException(Messages.MESSAGE_INVALID_FIELD_TO_READ);
         }

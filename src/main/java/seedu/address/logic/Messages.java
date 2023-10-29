@@ -23,6 +23,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_DELETE =
             "%1$d employees found! Refer to their indexes for deletion";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_MARK =
+            "%1$d employees found! Refer to their indexes for marking attendance";
     public static final String MESSAGE_INVALID_DATE = "Invalid command format! Date should be in format: 'dd/MM/yyyy'"
             + "and date should be valid!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW_PAYROLL =
@@ -68,7 +70,9 @@ public class Messages {
                 .append("; Salary: ")
                 .append(person.getSalary())
                 .append("; Annual Leave: ")
-                .append(person.getAnnualLeave().value);
+                .append(person.getAnnualLeave())
+                .append("; Attendance: ")
+                .append(person.getAttendanceToday());
         return builder.toString();
     }
 

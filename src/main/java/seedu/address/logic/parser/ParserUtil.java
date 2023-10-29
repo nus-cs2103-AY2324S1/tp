@@ -10,6 +10,7 @@ import me.xdrop.fuzzywuzzy.FuzzySearch;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.attendance.AttendanceType;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
@@ -165,6 +166,20 @@ public class ParserUtil {
         return new AnnualLeave(trimmedAnnualLeave);
     }
 
+    /**
+     * Parses a {@code String attendanceType} into an {@code AttendanceType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attendanceType} is invalid.
+     */
+    public static AttendanceType parseAttendanceType(String attendanceType) throws ParseException {
+        requireNonNull(attendanceType);
+        String trimmedAttendanceType = attendanceType.trim();
+        if (!AttendanceType.isValidAttendanceType(trimmedAttendanceType)) {
+            throw new ParseException(AttendanceType.MESSAGE_CONSTRAINTS);
+        }
+        return AttendanceType.valueOf(attendanceType.toUpperCase());
+    }
     /**
      * Returns LocalDate object from String
      * @param date The String containing date from user input

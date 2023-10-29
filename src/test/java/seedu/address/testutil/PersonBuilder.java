@@ -9,6 +9,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.attendance.AttendanceStorage;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A utility class to help with building Person objects.
@@ -23,6 +27,10 @@ public class PersonBuilder {
     public static final String DEFAULT_JOINDATE = "12/02/2023";
     public static final String DEFAULT_SALARY = "2000.00";
     public static final String DEFAULT_ANNUALLEAVE = "14";
+    public static final ArrayList<String> DEFAULT_ATTENDANCE_STORAGE = new ArrayList<>(Arrays.asList("27/10/2023//late"));
+
+
+
 
     private Name name;
     private Phone phone;
@@ -32,6 +40,7 @@ public class PersonBuilder {
     private JoinDate joinDate;
     private Salary salary;
     private AnnualLeave annualLeave;
+    private AttendanceStorage attendanceStorage;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -45,6 +54,7 @@ public class PersonBuilder {
         joinDate = new JoinDate(DEFAULT_JOINDATE);
         salary = new Salary(DEFAULT_SALARY);
         annualLeave = new AnnualLeave(DEFAULT_ANNUALLEAVE);
+        attendanceStorage = new AttendanceStorage(DEFAULT_ATTENDANCE_STORAGE);
     }
 
     /**
@@ -59,6 +69,8 @@ public class PersonBuilder {
         joinDate = personToCopy.getJoinDate();
         salary = personToCopy.getSalary();
         annualLeave = personToCopy.getAnnualLeave();
+        attendanceStorage = personToCopy.getAttendanceStorage();
+
     }
 
     /**
@@ -125,8 +137,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code AttendanceStorage} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAttendanceStorage(ArrayList<String> attendanceStorage) {
+        this.attendanceStorage = new AttendanceStorage(attendanceStorage);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, bankAccount, joinDate, salary, annualLeave);
+        return new Person(name, phone, email, address, bankAccount, joinDate, salary, annualLeave, attendanceStorage);
     }
 
 }
