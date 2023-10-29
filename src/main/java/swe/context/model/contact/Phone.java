@@ -12,7 +12,7 @@ public class Phone {
     /*
      * Requires starting with at least 3 of digits.
      */
-    public static final String REGEX_VALID = "^\\d{3,}";
+    public static final String REGEX_VALID = "^\\d{3,}.*$";
 
     public final String value;
 
