@@ -12,7 +12,16 @@ import swe.context.model.contact.Contact;
 public class AlphabeticalComparator implements Comparator<Contact> {
     @Override
     public int compare(Contact a, Contact b) {
-        //TODO case insensitive?
-        return a.getName().value.compareTo(b.getName().value);
+        String aName = a.getName().value;
+        String bName = b.getName().value;
+
+        int n = aName.toUpperCase().compareTo(bName.toUpperCase());
+        if (n != 0) {
+            return n;
+        }
+
+        // Only take true casing into account if names would otherwise be
+        // identical
+        return aName.compareTo(bName);
     }
 }
