@@ -67,16 +67,16 @@ public class DeleteMemberTest {
     public void execute_validIndexFilteredList_success() {
         showMemberAtIndex(model, INDEX_FIRST_PERSON);
 
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
         Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteMemberCommand deleteCommand = new DeleteMemberCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
                 Messages.format(memberToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
         showNoMember(expectedModel);
-
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 

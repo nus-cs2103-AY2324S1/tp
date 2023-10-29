@@ -127,7 +127,7 @@ public class DeleteApplicantTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different member(index) -> returns false
+        // different applicant(index) -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
