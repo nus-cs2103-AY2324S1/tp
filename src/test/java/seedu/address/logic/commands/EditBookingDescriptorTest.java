@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_PERIOD_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,10 +50,6 @@ public class EditBookingDescriptorTest {
         // different booking period -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBookingPeriod(VALID_BOOKING_PERIOD_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
-
-        // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
@@ -66,8 +61,7 @@ public class EditBookingDescriptorTest {
                 + editRoomDescriptor.getName().orElse(null) + ", phone="
                 + editRoomDescriptor.getPhone().orElse(null) + ", email="
                 + editRoomDescriptor.getEmail().orElse(null) + ", remark="
-                + editRoomDescriptor.getRemark().orElse(null) + ", tags="
-                + editRoomDescriptor.getTags().orElse(null) + "}";
+                + editRoomDescriptor.getRemark().orElse(null) + "}";
         assertEquals(expected, editRoomDescriptor.toString());
     }
 }

@@ -169,7 +169,7 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + ROOM_DESC_AMY + BOOKING_PERIOD_DESC_AMY + NAME_DESC_AMY
                 + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY;
-        Booking expectedBooking = new BookingBuilder(AMY).withTags().build();
+        Booking expectedBooking = new BookingBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addBooking(expectedBooking);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

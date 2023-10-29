@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingPeriod;
 import seedu.address.model.booking.Remark;
@@ -10,8 +7,6 @@ import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -31,7 +26,6 @@ public class BookingBuilder {
     private BookingPeriod bookingPeriod;
 
     private Remark remark;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -43,7 +37,6 @@ public class BookingBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         remark = new Remark(DEFAULT_REMARK);
-        tags = new HashSet<>();
     }
 
     /**
@@ -56,7 +49,6 @@ public class BookingBuilder {
         phone = bookingToCopy.getPhone();
         email = bookingToCopy.getEmail();
         remark = bookingToCopy.getRemark();
-        tags = new HashSet<>(bookingToCopy.getTags());
     }
 
     /**
@@ -72,14 +64,6 @@ public class BookingBuilder {
      */
     public BookingBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public BookingBuilder withTags(String... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -116,7 +100,7 @@ public class BookingBuilder {
     }
 
     public Booking build() {
-        return new Booking(room, bookingPeriod, name, phone, email, remark, tags);
+        return new Booking(room, bookingPeriod, name, phone, email, remark);
     }
 
 }

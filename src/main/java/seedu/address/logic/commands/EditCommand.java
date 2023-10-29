@@ -10,12 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -30,7 +27,6 @@ import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -88,10 +84,9 @@ public class EditCommand extends Command {
         BookingPeriod updatedBookingPeriod = editRoomDescriptor.getBookingPeriod()
                 .orElse(bookingToEdit.getBookingPeriod());
         Remark updatedRemark = editRoomDescriptor.getRemark().orElse(bookingToEdit.getRemark());
-        Set<Tag> updatedTags = editRoomDescriptor.getTags().orElse(bookingToEdit.getTags());
+        //Tag updatedTag = editRoomDescriptor.getTags().orElse(bookingToEdit.getTags());
 
-        return new Booking(updatedRoom, updatedBookingPeriod, updatedName, updatedPhone, updatedEmail, updatedRemark,
-                updatedTags);
+        return new Booking(updatedRoom, updatedBookingPeriod, updatedName, updatedPhone, updatedEmail, updatedRemark);
     }
 
     /**
@@ -168,7 +163,6 @@ public class EditCommand extends Command {
         private Email email;
         private BookingPeriod bookingPeriod;
         private Remark remark;
-        private Set<Tag> tags;
 
         /**
          * Creates an EditRoomDescriptor object.
@@ -187,7 +181,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setBookingPeriod(toCopy.bookingPeriod);
             setRemark(toCopy.remark);
-            setTags(toCopy.tags);
         }
 
         /**
@@ -196,7 +189,7 @@ public class EditCommand extends Command {
          * @return True if at least one field is edited, false otherwise.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(room, bookingPeriod, name, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(room, bookingPeriod, name, phone, email);
         }
 
         /**
@@ -312,23 +305,6 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
          * Checks if this edit room descriptor is equal to another object.
          *
          * @param other The object to compare.
@@ -351,8 +327,7 @@ public class EditCommand extends Command {
                     && Objects.equals(name, otherEditRoomDescriptor.name)
                     && Objects.equals(phone, otherEditRoomDescriptor.phone)
                     && Objects.equals(email, otherEditRoomDescriptor.email)
-                    && Objects.equals(remark, otherEditRoomDescriptor.remark)
-                    && Objects.equals(tags, otherEditRoomDescriptor.tags);
+                    && Objects.equals(remark, otherEditRoomDescriptor.remark);
         }
 
         /**
@@ -369,7 +344,6 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("remark", remark)
-                    .add("tags", tags)
                     .toString();
         }
     }
