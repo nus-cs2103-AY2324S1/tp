@@ -12,6 +12,8 @@ import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CopyApplicantCommand;
+import seedu.address.logic.commands.CopyMemberCommand;
 import seedu.address.logic.commands.DeleteApplicantCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.EditApplicantCommand;
@@ -100,6 +102,14 @@ public class AddressBookParser {
         case ViewApplicantsCommand.COMMAND_WORD:
         case ViewApplicantsCommand.COMMAND_ALIAS:
             return new ViewApplicantsCommand();
+
+        case CopyMemberCommand.COMMAND_WORD:
+        case CopyMemberCommand.COMMAND_ALIAS:
+            return new CopyMemberCommandParser().parse(arguments);
+
+        case CopyApplicantCommand.COMMAND_WORD:
+        case CopyApplicantCommand.COMMAND_ALIAS:
+            return new CopyApplicantCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
