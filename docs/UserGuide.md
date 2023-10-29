@@ -571,10 +571,9 @@ Display schedules on a specified day as a calendar view.
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Calendar Limitations**<br>
-
-Currently, the calendar does not support displaying of schedules that extend over multiple days.
-Schedules with very short duration may not be displayed correctly (the schedule's index, status and time will not be visible).
-Adding or modifying schedules will hide the calendar view. Use `show DATE` to view calendar again. 
+* Currently, the calendar does not support displaying of schedules that extend over multiple days.
+* Schedules with very short duration may not be displayed correctly (the schedule's index, status and time will not be visible).
+* Adding or modifying schedules will hide the calendar view. Use `show DATE` to view calendar again. 
 
 </div>
 
