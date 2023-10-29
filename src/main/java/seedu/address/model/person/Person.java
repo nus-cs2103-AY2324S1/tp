@@ -88,6 +88,17 @@ public class Person {
     public AttendanceType getAttendanceToday() {
         return this.attendanceStorage.getType(LocalDate.now());
     }
+
+    /**
+     * @return the working status of this employee.
+     */
+    public AttendanceType getWorkingStatusToday() {
+        if (this.annualLeave.getLeaveStatus().equals("On Leave")) {
+            return AttendanceType.ON_LEAVE;
+        }
+        return this.getAttendanceToday();
+
+    }
     /**
      * Adds a payroll to the payroll list of this person.
      * @param payroll Payroll to be added.
