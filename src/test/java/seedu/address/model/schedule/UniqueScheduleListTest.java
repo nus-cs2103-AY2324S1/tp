@@ -177,7 +177,7 @@ public class UniqueScheduleListTest {
     }
 
     @Test
-    public void testHashcode() {
+    public void hashcode() {
         UniqueScheduleList otherUniqueScheduleList1 = new UniqueScheduleList();
         UniqueScheduleList otherUniqueScheduleList2 = new UniqueScheduleList();
 
