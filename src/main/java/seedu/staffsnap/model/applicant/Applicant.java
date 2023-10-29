@@ -183,9 +183,9 @@ public class Applicant implements Comparable<Applicant> {
      */
     public int compareByRating(Applicant o) {
         if (isDescendingOrder) {
-            return -this.getScore().compareTo(o.getScore());
+            return -this.getScore().getAverageScore().compareTo(o.getScore().getAverageScore());
         }
-        return this.getScore().compareTo(o.getScore());
+        return this.getScore().getAverageScore().compareTo(o.getScore().getAverageScore());
     }
 
     /**
@@ -240,7 +240,7 @@ public class Applicant implements Comparable<Applicant> {
             return compareByName(o);
         case PHONE:
             return compareByPhone(o);
-        case RATING:
+        case SCORE:
             return compareByRating(o);
         case EMAIL:
             return compareByEmail(o);
