@@ -88,6 +88,31 @@ public class AddressBook implements ReadOnlyAddressBook {
         return doctors.contains(doctor);
     }
 
+//    /**
+//     * Returns true if there is a patient with the same ic as {@code patientIc} in the address book.
+//     */
+//    public boolean hasPatientIc(Ic patientIc) {
+//        requireNonNull(patientIc);
+//        return patients.containsIc(patientIc);
+//    }
+
+//    /**
+//     * Returns true if there is a doctor with the same ic as {@code doctorIc} in the address book.
+//     */
+//    public boolean hasDoctorIc(Ic doctorIc) {
+//        requireNonNull(doctorIc);
+//        return doctors.containsIc(doctorIc);
+//    }
+
+//    /**
+//     * Adds the {@code appointment} to the addressbook.
+//     *
+//     * @param appointment the appointment to be added.
+//     */
+//    public void addAppointment(Appointment appointment) {
+//
+//    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.

@@ -9,42 +9,42 @@ import java.time.LocalDateTime;
  * It includes information about the doctor, patient, and the appointment time.
  */
 public class Appointment {
-    private Doctor doctor;
-    private Patient patient;
+    private Ic doctorIc;
+    private Ic patientIc;
     private LocalDateTime appointmentTime;
     private String status = "scheduled";
 
     /**
      * Constructs a new appointment with the specified doctor, patient, and appointment time.
      *
-     * @param doctor         The doctor involved in the appointment.
-     * @param patient        The patient involved in the appointment.
+     * @param doctorIc        The doctor involved in the appointment.
+     * @param patientIc       The patient involved in the appointment.
      * @param appointmentTime The date and time of the appointment.
      */
-    public Appointment(Doctor doctor, Patient patient, LocalDateTime appointmentTime) {
-        requireNonNull(doctor);
-        requireNonNull(patient);
+    public Appointment(Ic doctorIc, Ic patientIc, LocalDateTime appointmentTime) {
+        requireNonNull(doctorIc);
+        requireNonNull(patientIc);
         requireNonNull(appointmentTime);
-        this.doctor = doctor;
-        this.patient = patient;
+        this.doctorIc = doctorIc;
+        this.patientIc = patientIc;
         this.appointmentTime = appointmentTime;
     }
 
     /**
-     * Constructs a new appointment with the specified doctor, patient, and appointment time.
+     * Constructs a new appointment with the specified doctor, patient, appointment time, and status.
      *
-     * @param doctor         The doctor involved in the appointment.
-     * @param patient        The patient involved in the appointment.
+     * @param doctorIc        The doctor involved in the appointment.
+     * @param patientIc       The patient involved in the appointment.
      * @param appointmentTime The date and time of the appointment.
-     * @param status         The status of the appointment.
+     * @param status          The status of the appointment.
      */
-    public Appointment(Doctor doctor, Patient patient, LocalDateTime appointmentTime, String status) {
-        requireNonNull(doctor);
-        requireNonNull(patient);
+    public Appointment(Ic doctorIc, Ic patientIc, LocalDateTime appointmentTime, String status) {
+        requireNonNull(doctorIc);
+        requireNonNull(patientIc);
         requireNonNull(appointmentTime);
         requireNonNull(status);
-        this.doctor = doctor;
-        this.patient = patient;
+        this.doctorIc = doctorIc;
+        this.patientIc = patientIc;
         this.appointmentTime = appointmentTime;
         this.status = status;
     }
@@ -53,12 +53,12 @@ public class Appointment {
         return appointmentTime;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public Ic getDoctor() {
+        return doctorIc;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public Ic getPatient() {
+        return patientIc;
     }
 
     public String getStatus() {
@@ -68,12 +68,13 @@ public class Appointment {
     public void setAppointmentTime(LocalDateTime appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
-    public void changeDoctor(Doctor newDoctor) {
-        this.doctor = newDoctor;
+
+    public void changeDoctor(Ic newDoctorIc) {
+        this.doctorIc = newDoctorIc;
     }
 
-    public void changePatient(Patient newPatient) {
-        this.patient = newPatient;
+    public void changePatient(Ic newPatientIc) {
+        this.patientIc = newPatientIc;
     }
 
     public void changeStatus(String newStatus) {
@@ -92,9 +93,14 @@ public class Appointment {
         }
 
         Appointment otherAppointment = (Appointment) other;
-        return this.doctor.equals(otherAppointment.doctor)
-                && this.patient.equals(otherAppointment.patient)
+        return this.doctorIc.equals(otherAppointment.doctorIc)
+                && this.patientIc.equals(otherAppointment.patientIc)
                 && this.appointmentTime.equals(otherAppointment.appointmentTime)
                 && this.status.equals(otherAppointment.status);
+    }
+
+    @Override
+    public String toString() {
+        return "Patient with IC " + patientIc + ", Doctor with IC " + doctorIc + " at " + appointmentTime;
     }
 }

@@ -46,6 +46,7 @@ public class ModelManager implements Model {
         filteredDoctors = new FilteredList<>(this.addressBook.getDoctorList());
         filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
     }
+
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
@@ -57,6 +58,7 @@ public class ModelManager implements Model {
         undoList.add(new AddressBook(addressBook));
         redoList.clear();
     }
+
     @Override
     public void undo() throws CommandException {
         if (!undoList.isEmpty()) {
@@ -66,6 +68,7 @@ public class ModelManager implements Model {
             throw new CommandException(UndoCommand.MESSAGE_EMPTY);
         }
     }
+
     @Override
     public void redo() throws CommandException {
         if (!redoList.isEmpty()) {
@@ -134,6 +137,28 @@ public class ModelManager implements Model {
             return false;
         }
     }
+//
+//    /**
+//     * Returns true if a patient with the same ic as {@code patientIc} exists in the address book.
+//     *
+//     * @param patientIc The ic of patient to check.
+//     * @return true if there is a patient with patientIc in the address book
+//     */
+//    public boolean hasPatientIc(Ic patientIc) {
+//        requireNonNull(patientIc);
+//        return addressBook.hasPatientIc(patientIc);
+//    }
+//
+//    /**
+//     * Returns true if a doctor with the same ic as {@code doctorIc} exists in the address book.
+//     *
+//     * @param doctorIc The ic of doctor to check.
+//     * @return true if there is a patient with doctorIc in the address book
+//     */
+//    public boolean hasDoctorIc(Ic doctorIc) {
+//        requireNonNull(doctorIc);
+//        return addressBook.hasDoctorIc(doctorIc);
+//    }
 
     @Override
     public void deletePerson(Person target) {
@@ -171,6 +196,13 @@ public class ModelManager implements Model {
         }
     }
 
+//    @Override
+//    public void addApointment(Appointment appointment) {
+//        requireNonNull(appointment);
+//        updateBackup();
+//        addressBook.addAppointment(appointment);
+//    }
+
     /**
      * Returns an unmodifiable view of the filtered person list
      */
@@ -204,6 +236,7 @@ public class ModelManager implements Model {
         filteredPatients.setPredicate(predicate);
         filteredDoctors.setPredicate(predicate);
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -217,8 +250,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredDoctors.equals(otherModelManager.filteredDoctors)
-            && filteredPatients.equals(otherModelManager.filteredPatients);
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredDoctors.equals(otherModelManager.filteredDoctors)
+                && filteredPatients.equals(otherModelManager.filteredPatients);
     }
 }

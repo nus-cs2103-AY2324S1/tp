@@ -1,7 +1,9 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -91,6 +93,34 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getIc().equals(getIc());
+    }
+
+    /**
+     * Returns true if this person has the given {@code ic}.
+     */
+    public boolean hasIc(Ic ic) {
+        return this.ic.equals(ic);
+    }
+
+    /**
+     * Checks if this person has an appointment at the given {@Code dateTime}.
+     *
+     * @param dateTime the time of appointment to be checked.
+     * @return true is this person has an appointment at the specified time.
+     */
+    public boolean hasAppointmentAt(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        // check from set of appointments
+        return false;
+    }
+
+    /**
+     * Adds the given {@Code appointment} to this person's set of appointments.
+     *
+     * @param appointment the appointment to be added.
+     */
+    public void addAppointment(Appointment appointment) {
+        // add appointment to set
     }
 
     /**

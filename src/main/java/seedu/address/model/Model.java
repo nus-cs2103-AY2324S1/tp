@@ -14,7 +14,9 @@ import seedu.address.model.person.Person;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Doctor> PREDICATE_SHOW_ALL_DOCTORS = unused -> true;
 
@@ -53,7 +55,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -80,10 +84,22 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+//    /**
+//     * Adds an appointment specified by the {@code appointment} into the model.
+//     * The patient and doctor in the appointment cannot have another appointment at the same time.
+//     *
+//     * @param appointment the appointment to be added.
+//     */
+//    public void addApointment(Appointment appointment);
+
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered patient list */
+    /**
+     * Returns an unmodifiable view of the filtered patient list
+     */
     ObservableList<Patient> getFilteredPatientList();
 
     /**
@@ -93,10 +109,12 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     void undo() throws CommandException;
+
     void redo() throws CommandException;
 }
