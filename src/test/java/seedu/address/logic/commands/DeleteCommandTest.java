@@ -184,4 +184,43 @@ public class DeleteCommandTest {
                 + "deletePersonDescriptor=" + defaultDescriptor + "}";
         assertEquals(expected, deleteCommand.toString());
     }
+
+    @Test
+    public void undoDeletePerson_success() throws CommandException {
+        Person personToDelete = new PersonBuilder().withName("Amy Bee").build();
+        model.addPerson(personToDelete);
+
+        DeleteCommand deletePersonCommand = new DeleteCommand(null, personToDelete.getName(), defaultDescriptor);
+        deletePersonCommand.execute(model);
+
+        // Undo the deletion of the person
+        CommandResult undoResult = deletePersonCommand.undo(model);
+
+        assertTrue(model.hasPerson(personToDelete));
+        assertEquals(String.format(DeleteCommand.MESSAGE_UNDO_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete)), undoResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void undoDeleteFields() throws CommandException {
+        Person firstPerson = model.getFilteredPersonList().get(0);
+
+        DeletePersonDescriptor descriptor = new DeletePersonDescriptor();
+        descriptor.setAppointment();
+
+        DeleteCommand deleteFieldsCommand = new DeleteCommand(firstPerson.getNric(), null, descriptor);
+        deleteFieldsCommand.execute(model);
+
+        Person editedPerson = model.getFilteredPersonList().get(0);
+        assertTrue(editedPerson.getAppointment().isEmpty());
+
+        CommandResult undoResult = deleteFieldsCommand.undo(model);
+
+        Person unDonePerson = model.getFilteredPersonList().get(0);
+        assertFalse(unDonePerson.getAppointment().isEmpty());
+
+        assertEquals(String.format(DeleteCommand.MESSAGE_UNDO_DELETE_FIELD_SUCCESS,
+                Messages.format(editedPerson)), undoResult.getFeedbackToUser());
+    }
 }
+
