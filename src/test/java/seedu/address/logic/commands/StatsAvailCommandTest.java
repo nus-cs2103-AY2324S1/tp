@@ -33,7 +33,7 @@ public class StatsAvailCommandTest {
 
     @Test
     public void getAvailableFosterers_filteredList_notAvailable() {
-        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getAvailableFosterers().contains(fosterer));
+        model.updateFilteredPersonList(fosterer -> !TypicalPersons.getAvailableFosterers().contains(fosterer));
         List<Person> result = availCommand.getAvailableFosterers(model.getFilteredPersonList());
         assertTrue(result.isEmpty());
     }
@@ -100,7 +100,7 @@ public class StatsAvailCommandTest {
         List<Person> fosterers = model.getFilteredPersonList();
         int total = fosterers.size();
         int availableCount = availCommand.getAvailableFosterers(fosterers).size();
-        int ableDogCount =  availCommand.getAbleDogCount(fosterers);
+        int ableDogCount = availCommand.getAbleDogCount(fosterers);
         int ableCatCount = availCommand.getAbleCatCount(fosterers);
         int unknown = availableCount - ableDogCount - ableCatCount;
 
@@ -123,7 +123,7 @@ public class StatsAvailCommandTest {
     @Test
     public void execute_filteredList_expectZero() throws CommandException {
         //should
-        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getAvailableFosterers().contains(fosterer));
+        model.updateFilteredPersonList(fosterer -> !TypicalPersons.getAvailableFosterers().contains(fosterer));
         List<Person> fosterers = model.getFilteredPersonList();
         int total = fosterers.size();
         int availableCount = availCommand.getAvailableFosterers(fosterers).size();

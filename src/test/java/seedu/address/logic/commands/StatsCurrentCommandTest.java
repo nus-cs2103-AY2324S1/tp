@@ -32,7 +32,7 @@ public class StatsCurrentCommandTest {
 
     @Test
     public void getCurrentFosterers_filteredList_notCurrent() {
-        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getCurrentFosterers().contains(fosterer));
+        model.updateFilteredPersonList(fosterer -> !TypicalPersons.getCurrentFosterers().contains(fosterer));
         List<Person> result = currentCommand.getCurrentFosterers(model.getFilteredPersonList());
         assertTrue(result.isEmpty());
     }
@@ -60,7 +60,7 @@ public class StatsCurrentCommandTest {
 
     @Test
     public void getCurrentDogCount_filteredList_notCurrent() {
-        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getCurrentFosterers().contains(fosterer));
+        model.updateFilteredPersonList(fosterer -> !TypicalPersons.getCurrentFosterers().contains(fosterer));
         int result = currentCommand.getCurrentDogCount(model.getFilteredPersonList());
         assertEquals(0, result);
     }
@@ -81,7 +81,7 @@ public class StatsCurrentCommandTest {
 
     @Test
     public void getCurrentCatCount_filteredList_notCurrent() {
-        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getCurrentFosterers().contains(fosterer));
+        model.updateFilteredPersonList(fosterer -> !TypicalPersons.getCurrentFosterers().contains(fosterer));
         int result = currentCommand.getCurrentCatCount(model.getFilteredPersonList());
         assertEquals(0, result);
     }
@@ -121,7 +121,7 @@ public class StatsCurrentCommandTest {
 
     @Test
     public void execute_filteredList_expectZero() throws CommandException {
-        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getCurrentFosterers().contains(fosterer));
+        model.updateFilteredPersonList(fosterer -> !TypicalPersons.getCurrentFosterers().contains(fosterer));
         List<Person> fosterers = model.getFilteredPersonList();
         int total = fosterers.size();
         int currCount = currentCommand.getCurrentFosterers(fosterers).size();
