@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_MEMBERS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalMembers.ALAN_MEMBER;
@@ -51,12 +53,12 @@ public class FindMemberCommandTest {
 
     @Test
    public void execute_zeroKeywords_noMemberFound() {
-       String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 0);
-       MemberContainsKeywordsPredicate predicate = preparePredicate(" ");
-       FindMemberCommand command = new FindMemberCommand(predicate);
-       expectedModel.updateFilteredMemberList(predicate);
-       assertCommandSuccess(command, model, expectedMessage, expectedModel);
-       assertEquals(Collections.emptyList(), model.getFilteredMemberList());
+        String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 0);
+        MemberContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindMemberCommand command = new FindMemberCommand(predicate);
+        expectedModel.updateFilteredMemberList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredMemberList());
    }
 
     @Test

@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_APPLICANTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalApplicants.*;
+import static seedu.address.testutil.TypicalApplicants.CARL_APPLICANT;
+import static seedu.address.testutil.TypicalApplicants.ELLE_APPLICANT;
+import static seedu.address.testutil.TypicalApplicants.FIONA_APPLICANT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithMembersApplicants;
-
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -50,14 +51,14 @@ public class FindApplicantCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
-    @Test
+   @Test
    public void execute_zeroKeywords_noApplicantFound() {
-       String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 0);
-       ApplicantContainsKeywordsPredicate predicate = preparePredicate(" ");
-       FindApplicantCommand command = new FindApplicantCommand(predicate);
-       expectedModel.updateFilteredApplicantList(predicate);
-       assertCommandSuccess(command, model, expectedMessage, expectedModel);
-       assertEquals(Collections.emptyList(), model.getFilteredApplicantList());
+        String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 0);
+        ApplicantContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindApplicantCommand command = new FindApplicantCommand(predicate);
+        expectedModel.updateFilteredApplicantList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredApplicantList());
    }
 
     @Test
