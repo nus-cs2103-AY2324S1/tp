@@ -8,11 +8,13 @@ import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_ORIGINAL_WORD_LANGU
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD;
 import static seedu.flashlingo.logic.parser.CliSyntax.PREFIX_TRANSLATED_WORD_LANGUAGE;
 
+import java.util.NoSuchElementException;
+
 import seedu.flashlingo.commons.core.index.Index;
 import seedu.flashlingo.logic.commands.EditCommand;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 
-import java.util.NoSuchElementException;
+
 
 /**
  * Parses input arguments and creates a new EditCommand object
