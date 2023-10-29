@@ -7,7 +7,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.format.SignStyle;
+import java.time.format.TextStyle;
+import java.time.temporal.ChronoField;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -28,24 +33,45 @@ public class Appointment {
             + "    ie DD-MM-YYYY.\n"
             + "    - <Day> is given as a simple numeric value.\n"
             + "    - <Month> is given as a simple numeric value or a standard 3-letter month name.\n"
-            + "    - <Year> is optional. It is given as a 4 digit numeric value."
+            + "    - <Year> is optional. It is given as a 2 or 4 digit numeric value."
             + " If no year is given, the current year is assumed.\n"
-            + "3. The 2 <Time> fields are formatted as \"<Hour>:<Minute>\". It should be separated by colons (:).\n"
-            + "    ie HHmm or HH:mm\n"
+            + "3. The 2 <Time> fields are formatted as \"<Hour>:<Minute>\". It should be separated by colons (:) or not"
+            + "separated at all.\n"
+            + "    if no colon is separated, hour should have a leading 0 if relevant. ie HHmm or HH:mm\n"
             + "4. <Start Time> should be earlier than or equals to <End Time>, and both are defined within <Date>.\n"
             + "5. <Date>, <Start Time> and <End Time> are separated by spaces ( ) or commas (,).";
 
     public static final String UNRECOGNIZED_SOURCE = "Unrecognised input source detected in Appointment.";
     public static final String FIELD_SEPARATOR_REGEX = "(,? )|(,)";
-    private static final String INPUT_DATE_FORMAT = "[d-M[-yyyy]]" + "[d-MMM[-yyyy]]";
-    private static final String INPUT_TIME_FORMAT = "H[:]mm";
-    private static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern(INPUT_DATE_FORMAT);
-    private static final DateTimeFormatter INPUT_TIME_FORMATTER = DateTimeFormatter.ofPattern(INPUT_TIME_FORMAT);
+
+    private static final DateTimeFormatter INPUT_DATE_FORMATTER = new DateTimeFormatterBuilder()
+            .optionalStart()
+            .appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE)
+            .appendLiteral('-').appendValue(ChronoField.MONTH_OF_YEAR, 1, 2, SignStyle.NOT_NEGATIVE)
+            .optionalStart()
+            .appendLiteral('-').appendValueReduced(ChronoField.YEAR, 2, 4, 2000)
+            .optionalEnd().optionalEnd()
+            .optionalStart()
+            .appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NOT_NEGATIVE)
+            .appendLiteral('-').appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT)
+            .optionalStart()
+            .appendLiteral('-').appendValueReduced(ChronoField.YEAR, 2, 4, 2000)
+            .optionalEnd().optionalEnd()
+            .parseDefaulting(ChronoField.YEAR, LocalDate.now().getYear()).toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT);
+    private static final DateTimeFormatter INPUT_TIME_FORMATTER = new DateTimeFormatterBuilder()
+            .appendValue(ChronoField.HOUR_OF_DAY, 1, 2, SignStyle.NOT_NEGATIVE)
+            .optionalStart().appendLiteral(":").optionalEnd()
+            .optionalStart().appendValue(ChronoField.MINUTE_OF_HOUR, 2).optionalEnd()
+            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+            .toFormatter().withResolverStyle(ResolverStyle.STRICT);
     private static final String STORAGE_FIELD_SEPARATOR = ", ";
-    private static final String STORAGE_DATE_FORMAT = "dd-MMM-yyyy";
+    private static final String STORAGE_DATE_FORMAT = "dd-MMM-uuuu";
     private static final String STORAGE_TIME_FORMAT = "HH:mm";
-    private static final DateTimeFormatter STORAGE_DATE_FORMATTER = DateTimeFormatter.ofPattern(STORAGE_DATE_FORMAT);
-    private static final DateTimeFormatter STORAGE_TIME_FORMATTER = DateTimeFormatter.ofPattern(STORAGE_TIME_FORMAT);
+    private static final DateTimeFormatter STORAGE_DATE_FORMATTER = DateTimeFormatter.ofPattern(STORAGE_DATE_FORMAT)
+            .withResolverStyle(ResolverStyle.STRICT);
+    private static final DateTimeFormatter STORAGE_TIME_FORMATTER = DateTimeFormatter.ofPattern(STORAGE_TIME_FORMAT)
+            .withResolverStyle(ResolverStyle.STRICT);
     private static final String MODEL_PERIOD_SEPARATOR = " to ";
     private final LocalDate date;
     private final LocalTime start;
@@ -94,7 +120,7 @@ public class Appointment {
             start = timeFormatter.apply(splitFields[1]);
             end = timeFormatter.apply(splitFields[2]);
         } catch (DateTimeParseException e) {
-            throw new BadAppointmentFormatException(MESSAGE_CONSTRAINTS);
+            throw new BadAppointmentFormatException(MESSAGE_CONSTRAINTS, e);
         }
 
         if (start.isAfter(end)) {

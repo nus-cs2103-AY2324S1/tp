@@ -32,7 +32,8 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_APPOINTMENT = "Tomorrow 8PM";
+    private static final String INVALID_APPOINTMENT_FORMAT = "Tomorrow 8PM";
+    private static final String INVALID_APPOINTMENT_VALUES = "31-Feb-2023 10:00 12:00";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_MEDICAL_HISTORY = "";
     private static final String VALID_NAME = "Rachel Walker";
@@ -119,7 +120,28 @@ public class ParserUtilTest {
         assertEquals(expectedAppointment, ParserUtil.parseAppointment(VALID_APPOINTMENT));
     }
 
+    @Test
+    public void parseAppointment_invalidFormatValue_returnsAppointment() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointment(INVALID_APPOINTMENT_FORMAT));
+    }
 
+    @Test
+    public void parseAppointment_invalidDelimitedValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointment(INVALID_APPOINTMENT_VALUES));
+    }
+
+    @Test
+    public void parseAppointment_validValueWithoutWhitespace_returnsAppointment() throws Exception {
+        Appointment expectedAppt = Appointment.of(VALID_APPOINTMENT, InputSource.USER_INPUT);
+        assertEquals(expectedAppt, ParserUtil.parseAppointment(VALID_APPOINTMENT));
+    }
+
+    @Test
+    public void parseAppointment_validValueWithWhitespace_returnsTrimmedAppointment() throws Exception {
+        String apptWithWhitespace = WHITESPACE + VALID_APPOINTMENT + WHITESPACE;
+        Appointment expectedAppt = Appointment.of(VALID_APPOINTMENT, InputSource.USER_INPUT);
+        assertEquals(expectedAppt, ParserUtil.parseAppointment(apptWithWhitespace));
+    }
 
     @Test
     public void parseNric_validValueWithoutWhitespace_returnsNric() throws Exception {
@@ -201,24 +223,6 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
-    }
-
-    @Test
-    public void parseAppointment_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAppointment(INVALID_APPOINTMENT));
-    }
-
-    @Test
-    public void parseAppointment_validValueWithoutWhitespace_returnsAppointment() throws Exception {
-        Appointment expectedAppt = Appointment.of(VALID_APPOINTMENT, InputSource.USER_INPUT);
-        assertEquals(expectedAppt, ParserUtil.parseAppointment(VALID_APPOINTMENT));
-    }
-
-    @Test
-    public void parseAppointment_validValueWithWhitespace_returnsTrimmedAppointment() throws Exception {
-        String apptWithWhitespace = WHITESPACE + VALID_APPOINTMENT + WHITESPACE;
-        Appointment expectedAppt = Appointment.of(VALID_APPOINTMENT, InputSource.USER_INPUT);
-        assertEquals(expectedAppt, ParserUtil.parseAppointment(apptWithWhitespace));
     }
 
     @Test
