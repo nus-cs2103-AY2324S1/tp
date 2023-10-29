@@ -7,8 +7,6 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.IdContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,17 +26,13 @@ public class FindCommand extends Command {
     private final Predicate<Person> predicate;
 
     /**
-     * Creates a {@code FindCommand} to find persons by name with the specified namePredicate.
+     * Creates a {@code FindCommand} to find persons by name with the specified predicate.
      *
-     * @param namePredicate The predicate to match persons by name.
-     * @throws NullPointerException if {@code namePredicate} is null.
+     * @param predicate The predicate to match persons by name.
+     * @throws NullPointerException if {@code predicate} is null.
      */
-    public FindCommand(NameContainsKeywordsPredicate namePredicate) {
-        this.predicate = namePredicate;
-    }
-
-    public FindCommand(IdContainsKeywordsPredicate idPredicate) {
-        this.predicate = idPredicate;
+    public FindCommand(Predicate<Person> predicate) {
+        this.predicate = predicate;
     }
 
     @Override
