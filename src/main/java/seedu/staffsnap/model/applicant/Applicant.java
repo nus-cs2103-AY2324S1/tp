@@ -111,13 +111,14 @@ public class Applicant implements Comparable<Applicant> {
                 && phone.equals(otherApplicant.phone)
                 && email.equals(otherApplicant.email)
                 && position.equals(otherApplicant.position)
-                && interviews.equals(otherApplicant.interviews);
+                && interviews.equals(otherApplicant.interviews)
+                && status.equals(otherApplicant.status);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, position, interviews);
+        return Objects.hash(name, phone, email, position, interviews, status);
     }
 
     @Override
