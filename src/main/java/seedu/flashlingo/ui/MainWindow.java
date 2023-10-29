@@ -1,8 +1,6 @@
 package seedu.flashlingo.ui;
 
 import java.awt.Desktop;
-import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.logging.Logger;
 
@@ -28,7 +26,7 @@ import seedu.flashlingo.model.Model;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-    private static final String THEME_FILE_PATH_PREFIX = "src/main/resources/view/";
+    private static final String THEME_FILE_PATH_PREFIX = "/view/";
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -232,11 +230,7 @@ public class MainWindow extends UiPart<Stage> {
         scene.getStylesheets().clear();
         String themeFilePath = THEME_FILE_PATH_PREFIX + theme + "Theme.css";
         String extensionsFilePath = THEME_FILE_PATH_PREFIX + "Extensions.css";
-        try {
-            scene.getStylesheets().add((new File(themeFilePath)).toURI().toURL().toExternalForm());
-            scene.getStylesheets().add((new File(extensionsFilePath)).toURI().toURL().toExternalForm());
-        } catch (MalformedURLException e) {
-            logger.info("An error occurred while switching theme:" + e.getMessage());
-        }
+        scene.getStylesheets().add(getClass().getResource(themeFilePath).toExternalForm());
+        scene.getStylesheets().add(getClass().getResource(extensionsFilePath).toExternalForm());
     }
 }
