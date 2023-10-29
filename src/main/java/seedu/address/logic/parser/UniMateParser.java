@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddContactEventCommand;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearEventsCommand;
@@ -96,6 +97,9 @@ public class UniMateParser {
 
         case ClearEventsCommand.COMMAND_WORD:
             return new ClearEventsCommandParser().parse(arguments);
+
+        case AddContactEventCommand.COMMAND_WORD:
+            return new AddContactEventCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

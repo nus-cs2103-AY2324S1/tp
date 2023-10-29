@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddContactEventCommand;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -118,6 +119,24 @@ public class UniMateParserTest {
                 + SortCommand.SORTBY_KEYWORD3 + " " + SortCommand.REVERSE_KEYWORD) instanceof SortCommand);
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
                 + SortCommand.SORTBY_KEYWORD4 + " " + SortCommand.REVERSE_KEYWORD) instanceof SortCommand);
+    }
+
+    @Test
+    public void parserCommand_addContactEvent() throws Exception {
+        String description = "sleep";
+        String startDateTime = "2023-10-10 10:00";
+        String endDateTime = "2023-10-10 12:00";
+        String validArg = "d/" + description
+                + " ts/" + startDateTime
+                + " te/" + endDateTime;
+        EventBuilder eventBuilder = new EventBuilder();
+        eventBuilder.withDescription(description);
+        eventBuilder.withStartEndDate(startDateTime, endDateTime);
+        AddContactEventCommand command =
+                (AddContactEventCommand) parser.parseCommand(AddContactEventCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + validArg);
+
+        assertEquals(command, new AddContactEventCommand(INDEX_FIRST_PERSON, eventBuilder.build()));
     }
 
     @Test
