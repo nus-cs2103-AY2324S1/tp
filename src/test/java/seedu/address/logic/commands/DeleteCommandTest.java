@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -56,15 +57,16 @@ public class DeleteCommandTest {
         Booking bookingToDelete = model.getFilteredBookingList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
+        Model expectedModel = new ModelManager(model.getBookingsBook(), new UserPrefs());
+        expectedModel.deleteBooking(bookingToDelete);
+        expectedModel.updateFilteredBookingList(PREDICATE_SHOW_ALL_PERSONS);
+
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BOOKING_SUCCESS,
                 Messages.format(bookingToDelete));
 
-        Model expectedModel = new ModelManager(model.getBookingsBook(), new UserPrefs());
-        expectedModel.deleteBooking(bookingToDelete);
-        showNoPerson(expectedModel);
-
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
+
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
@@ -105,7 +107,7 @@ public class DeleteCommandTest {
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
         DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndices=1}";
         assertEquals(expected, deleteCommand.toString());
     }
 

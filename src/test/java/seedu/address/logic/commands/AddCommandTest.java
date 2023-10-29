@@ -23,13 +23,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBookingsBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.exceptions.BookingNotFoundException;
 import seedu.address.testutil.BookingBuilder;
 
 public class AddCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(BookingNotFoundException.class, () -> new AddCommand(null));
     }
 
     @Test

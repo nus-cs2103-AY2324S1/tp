@@ -9,8 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -19,12 +17,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.BookingBuilder;
 
 public class BookingTest {
-
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Booking booking = new BookingBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> booking.getTags().remove(0));
-    }
 
     @Test
     public void isSameBooking() {
@@ -36,7 +28,7 @@ public class BookingTest {
 
         // same room, all other attributes different -> returns true
         Booking editedAlice = new BookingBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withBookingPeriod(VALID_BOOKING_PERIOD_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withBookingPeriod(VALID_BOOKING_PERIOD_BOB).build();
         assertTrue(ALICE.isSameBooking(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -86,10 +78,6 @@ public class BookingTest {
 
         // different address -> returns false
         editedAlice = new BookingBuilder(ALICE).withBookingPeriod(VALID_BOOKING_PERIOD_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different tags -> returns false
-        editedAlice = new BookingBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

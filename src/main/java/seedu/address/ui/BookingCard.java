@@ -1,13 +1,12 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -58,8 +57,8 @@ public class BookingCard extends UiPart<Region> {
         email.setText("Email: " + booking.getEmail().value);
         bookingPeriod.setText("Booking Period: " + booking.getBookingPeriod().value);
         remark.setText("Remark: " + booking.getRemark().value);
-        booking.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        Tag tag = booking.getTags();
+        Label tagLabel = new Label(tag.tagName);
+        tags.getChildren().add(tagLabel);
     }
 }

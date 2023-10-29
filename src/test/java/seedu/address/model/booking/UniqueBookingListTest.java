@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_PERIOD_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -47,7 +46,6 @@ public class UniqueBookingListTest {
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueBookingList.add(ALICE);
         Booking editedAlice = new BookingBuilder(ALICE).withBookingPeriod(VALID_BOOKING_PERIOD_BOB)
-                .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueBookingList.contains(editedAlice));
     }
@@ -91,7 +89,6 @@ public class UniqueBookingListTest {
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueBookingList.add(ALICE);
         Booking editedAlice = new BookingBuilder(ALICE).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueBookingList.setBooking(ALICE, editedAlice);
         UniqueBookingList expectedUniqueBookingList = new UniqueBookingList();
@@ -187,7 +184,6 @@ public class UniqueBookingListTest {
                 .withName(BOB.getName().toString())
                 .withEmail(BOB.getEmail().toString())
                 .withPhone(BOB.getPhone().toString())
-                .withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueBookingList.setBooking(ALICE, editedAlice);
         UniqueBookingList expectedUniqueBookingList = new UniqueBookingList();

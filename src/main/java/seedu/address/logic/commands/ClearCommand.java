@@ -13,7 +13,12 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Booking book has been cleared!";
 
-
+    /**
+     * Executes the ClearCommand to clear the booking book.
+     *
+     * @param model The model from which the booking book is cleared.
+     * @return A CommandResult indicating the success of the command execution.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

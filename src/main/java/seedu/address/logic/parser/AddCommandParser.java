@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -45,7 +44,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_REMARK, PREFIX_TAG);
+                        PREFIX_EMAIL, PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME,
                 PREFIX_PHONE, PREFIX_EMAIL)
@@ -66,9 +65,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else {
             remark = new Remark("N/A");
         }
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-        Booking booking = new Booking(room, bookingPeriod, name, phone, email, remark, tagList);
+        Booking booking = new Booking(room, bookingPeriod, name, phone, email, remark);
 
         return new AddCommand(booking);
     }
