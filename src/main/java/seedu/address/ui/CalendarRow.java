@@ -5,21 +5,19 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.util.Pair;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.ui.CalendarPanel.PersonWithSchedules;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code ScheduleRow}.
  */
 public class CalendarRow extends UiPart<Region> {
     private static final String FXML = "CalendarRow.fxml";
@@ -47,7 +45,7 @@ public class CalendarRow extends UiPart<Region> {
     private Color currentRowColor;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code CalendarRow} with the given {@code Person} and {@code Schedules} to display.
      */
     public CalendarRow(PersonWithSchedules personWithSchedules, int displayedIndex) {
         super(FXML);
@@ -59,39 +57,30 @@ public class CalendarRow extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(personWithSchedules.getPerson().getName().fullName);
 
-        List<Schedule> schedules = personWithSchedules.getSchedules();
-        schedules.sort(Comparator.comparing(Schedule::getStartTime));
+        List<Pair<Schedule, Index>> scheduleIndexPairs = personWithSchedules.getSchedules();
+        scheduleIndexPairs.sort(Comparator.comparing(a -> a.getKey().getStartTime()));
 
         double initialX = 0;
-        for (int i = 0; i < schedules.size(); i++) {
-            Schedule schedule = schedules.get(i);
+        for (int i = 0; i < scheduleIndexPairs.size(); i++) {
+            Pair<Schedule, Index> scheduleIndexPair = scheduleIndexPairs.get(i);
+            Schedule schedule = scheduleIndexPair.getKey();
             double startX = calculateXPosition(schedule.getStartTime().value.toLocalTime());
             double width = calculateWidth(schedule.getStartTime().value.toLocalTime(),
                 schedule.getEndTime().value.toLocalTime());
 
-            VBox card = new VBox();
-            Color currentScheduleColor = calculateScheduleColor(i);
-            card.setBackground(
-                new Background(new BackgroundFill(currentScheduleColor, CornerRadii.EMPTY, Insets.EMPTY)));
+            CalendarCard card = new CalendarCard(scheduleIndexPair.getValue(),
+                String.format("%s - %s",
+                    schedule.getStartTime().toTimeString(), schedule.getEndTime().toTimeString()),
+                schedule.getStatus().toString(),
+                width,
+                startX - initialX, calculateScheduleColor(i));
 
-            card.setAlignment(Pos.CENTER);
-            card.setMinHeight(50);
-            card.setMinWidth(width);
-            card.setMaxWidth(width);
-            card.setTranslateX(startX - initialX);
-
-            initialX += width;
-
-            Label scheduleLabel = new Label(String.format("%s - %s",
-                schedule.getStartTime().toTimeString(), schedule.getEndTime().toTimeString()));
-            scheduleLabel.getStyleClass().add("calendar-schedule-text");
-            card.getChildren().add(scheduleLabel);
-            schedulesPane.getChildren().add(card);
+            schedulesPane.getChildren().add(card.getRoot());
         }
     }
 
     /**
-     * Creates a {@code PersonCode} with the given timeLabels to display.
+     * Creates a {@code CalendarRow} with the given timeLabels to display.
      */
     public CalendarRow(List<Label> timeLabels) {
         super(FXML);

@@ -15,7 +15,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.util.Pair;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 
@@ -32,7 +34,7 @@ public class CalendarPanel extends UiPart<Region> {
     @FXML
     private ListView<Label> timeListView;
 
-    private ObservableList<PersonWithSchedules> personWithSchedulesList;
+    private final ObservableList<PersonWithSchedules> personWithSchedulesList;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -62,12 +64,9 @@ public class CalendarPanel extends UiPart<Region> {
 
     private void createPersonWithSchedulesList(ObservableList<Person> personList,
         ObservableList<Schedule> scheduleList) {
-        ListProperty<Person> observablePersonList = new SimpleListProperty<>(personList);
-        ListProperty<Schedule> observableScheduleList = new SimpleListProperty<>(scheduleList);
-
-        observablePersonList
+        personList
             .addListener((ListChangeListener.Change<? extends Person> c) -> updateList(personList, scheduleList));
-        observableScheduleList
+        scheduleList
             .addListener((ListChangeListener.Change<? extends Schedule> c) ->updateList(personList, scheduleList));
 
         updateList(personList, scheduleList);
@@ -78,10 +77,11 @@ public class CalendarPanel extends UiPart<Region> {
         personWithSchedulesList.clear();
         createTimetableLabels();
         for (Person person : personList) {
-            List<Schedule> schedules = new ArrayList<>();
-            for (Schedule schedule : scheduleList) {
+            List<Pair<Schedule, Index>> schedules = new ArrayList<>();
+            for (int i = 0; i < scheduleList.size(); i++) {
+                Schedule schedule = scheduleList.get(i);
                 if (schedule.getTutor().equals(person)) {
-                    schedules.add(schedule);
+                    schedules.add(new Pair<>(schedule, Index.fromZeroBased(i)));
                 }
             }
             personWithSchedulesList.add(new PersonWithSchedules(person, schedules, null));
@@ -113,14 +113,14 @@ public class CalendarPanel extends UiPart<Region> {
      */
     public final class PersonWithSchedules {
         private final Person person;
-        private final List<Schedule> schedules;
+        private final List<Pair<Schedule, Index>> schedules;
         private final List<Label> timeLabels;
 
         /**
          * Creates a {@code PersonWithSchedules} with
          * the given {@code Person}, schedules and timeLabels.
          */
-        public PersonWithSchedules(Person person, List<Schedule> schedules, List<Label> timeLabels) {
+        public PersonWithSchedules(Person person, List<Pair<Schedule, Index>> schedules, List<Label> timeLabels) {
             this.person = person;
             this.schedules = schedules;
             this.timeLabels = timeLabels;
@@ -130,7 +130,7 @@ public class CalendarPanel extends UiPart<Region> {
             return person;
         }
 
-        public List<Schedule> getSchedules() {
+        public List<Pair<Schedule, Index>> getSchedules() {
             return schedules;
         }
 
