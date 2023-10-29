@@ -212,27 +212,14 @@ public class MainWindow extends UiPart<Stage> {
         ScoreList scoreList = personToView.getScoreList();
         if (scoreList.isEmpty()) {
             logger.info("No score list detected");
+            summaryStatisticScreenPlaceholder.getChildren().clear();
             return;
         }
 
         logger.info("Score list detected");
 
-        //Everytime we call count on a stream it will be consumed
-        Tag interviewTag = new Tag("Interview");
-        System.out.println(logic.getSummaryStatistic().generateMeanWithTag(interviewTag));
-        logic.getSummaryStatistic().generateMedianWithTag(interviewTag);
-        logic.getSummaryStatistic().generateMaxScoreValueWithTag(interviewTag);
-        logic.getSummaryStatistic().generateMinScoreValueWithTag(interviewTag);
-        logic.getSummaryStatistic().generatePercentileWithTag(personToView, interviewTag);
-
-        System.out.println("mean: " + logic.getSummaryStatistic().generateMeanWithTag(interviewTag));
-        System.out.println("median: " + logic.getSummaryStatistic().generateMedianWithTag(interviewTag));
-        System.out.println("max: " + logic.getSummaryStatistic().generateMaxScoreValueWithTag(interviewTag));
-        System.out.println("min: " + logic.getSummaryStatistic().generateMinScoreValueWithTag(interviewTag));
-        System.out.println("percentile: " + logic.getSummaryStatistic().generatePercentileWithTag(personToView, interviewTag));
 
         Person personToView2 = logic.getFilteredPersonList().get(index.getZeroBased());
-
 
 
         summaryStatisticScreen = new SummaryStatisticScreen(logic.getSummaryStatistic(), personToView2);
