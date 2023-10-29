@@ -45,6 +45,8 @@ public class MarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/John";
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Employee: %2$s as %1$s";
 
+    public static final String MESSAGE_PERSON_ON_LEAVE = "The employee that you are trying to mark is on leave today!";
+
     private final Index targetIndex;
 
     private final NameContainsKeywordsPredicate name;
@@ -126,11 +128,15 @@ public class MarkCommand extends Command {
         if (indexes.size() == 1) {
             Person employeeToMark = fullList.get(indexes.get(0) - 1);
             Person markedEmployee = markEmployee(employeeToMark);
+            if (markedEmployee.getWorkingStatusToday() == AttendanceType.ON_LEAVE) {
+                throw new CommandException(MESSAGE_PERSON_ON_LEAVE);
+            }
 
             model.setPerson(employeeToMark, markedEmployee);
             return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,
                     attendanceType.toString().toLowerCase(), employeeToMark.getName()));
         }
+        model.updateFilteredPersonList(this.name);
         return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW_MARK,
                 model.getFilteredPersonList().size()), indexes);
     }

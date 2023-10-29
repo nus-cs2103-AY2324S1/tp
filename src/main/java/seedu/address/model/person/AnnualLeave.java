@@ -220,7 +220,7 @@ public class AnnualLeave {
      * To get whether the employee is working or on leave on the current day.
      * @return "Working" if the employee is not one leave, else return "On Leave"
      */
-    public String getWorkingStatus() {
+    public String getLeaveStatus() {
         LocalDate currentDate = LocalDate.now();
         for (LocalDate date: this.leaveList) {
             if (currentDate.equals(date)) {

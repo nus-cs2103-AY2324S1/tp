@@ -6,7 +6,8 @@ package seedu.address.model.person.attendance;
 public enum AttendanceType {
     LATE,
     ABSENT,
-    PRESENT;
+    PRESENT,
+    ON_LEAVE;
     public static final String MESSAGE_CONSTRAINTS =
             "Attendance type should only contain alphabets. It should either be 'present', 'late', 'absent'";
 
