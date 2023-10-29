@@ -17,6 +17,17 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 --------------------------------------------------------------------------------------------------------------------
 
+## About
+This document describes the main features of TutorMate. The main features of TutorMate are the Student Management 
+System, Schedule of Lessons and Task List of each lesson.
+With a customised student list and schedule in TutorMate just for you, organising lessons and managing students 
+will be the least of your worries.
+<br>
+<br>
+![Ui](images/about.png)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
