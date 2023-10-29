@@ -15,6 +15,8 @@ import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaComma
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.commons.core.index.Index;
@@ -30,7 +32,6 @@ import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.testutil.EditMemberDescriptorBuilder;
 import seedu.ccacommander.testutil.MemberBuilder;
 
-import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditMemberCommand.

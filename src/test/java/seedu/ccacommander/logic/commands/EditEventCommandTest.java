@@ -15,6 +15,8 @@ import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalCcaComma
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.commons.core.index.Index;
@@ -30,7 +32,7 @@ import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.testutil.EditEventDescriptorBuilder;
 import seedu.ccacommander.testutil.EventBuilder;
 
-import java.util.List;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditEventCommand.
