@@ -4,7 +4,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 
 /**
- * Change theme of the application.
+ * Changes theme of the application.
  */
 public class ThemeCommand extends Command {
     public static final String COMMAND_WORD = "theme";

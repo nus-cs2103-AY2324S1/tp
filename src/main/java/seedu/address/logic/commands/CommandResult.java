@@ -19,10 +19,10 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** Whether theme of the application should change. */
+    /** The theme of the application should change. */
     private final boolean isTheme;
 
-    /** File path of the theme css to change to. */
+    /** File path of the theme to change to. */
     private final String theme;
 
     /**
