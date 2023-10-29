@@ -7,21 +7,21 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Undo the Address Book to the previous saved version
+ * Redo the Address Book to the previous undoned saved version
  */
-public class UndoCommand extends Command {
-    public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Undo Successful!";
+public class RedoCommand extends Command {
+    public static final String COMMAND_WORD = "redo";
+    public static final String MESSAGE_SUCCESS = "Redo Successful!";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoAddressBook()) {
-            throw new CommandException(Messages.MESSAGE_CANNOT_UNDO);
+        if (!model.canRedoAddressBook()) {
+            throw new CommandException(Messages.MESSAGE_CANNOT_REDO);
         }
 
-        model.undoAddressBook();
+        model.redoAddressBook();
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
