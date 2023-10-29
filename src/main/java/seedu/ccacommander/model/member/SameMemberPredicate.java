@@ -2,6 +2,9 @@ package seedu.ccacommander.model.member;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Member}'s identity is the same as the target {@code Event}.
+ */
 public class SameMemberPredicate implements Predicate<Member> {
     private Member target;
 

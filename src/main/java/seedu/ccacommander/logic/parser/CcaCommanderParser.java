@@ -26,7 +26,6 @@ import seedu.ccacommander.logic.commands.RedoCommand;
 import seedu.ccacommander.logic.commands.UndoCommand;
 import seedu.ccacommander.logic.commands.ViewEventCommand;
 import seedu.ccacommander.logic.commands.ViewMemberCommand;
-
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
 
 /**
@@ -94,7 +93,7 @@ public class CcaCommanderParser {
             return new FindEventCommandParser().parse(arguments);
 
         case ViewMemberCommand.COMMAND_WORD:
-                return new ViewMemberCommandParser().parse(arguments);
+            return new ViewMemberCommandParser().parse(arguments);
 
         case ViewEventCommand.COMMAND_WORD:
             return new ViewEventCommandParser().parse(arguments);

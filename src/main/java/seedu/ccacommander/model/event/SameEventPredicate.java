@@ -2,6 +2,9 @@ package seedu.ccacommander.model.event;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests that an {@code Event}'s identity is the same as the target {@code Event}.
+ */
 public class SameEventPredicate implements Predicate<Event> {
     private Event target;
 

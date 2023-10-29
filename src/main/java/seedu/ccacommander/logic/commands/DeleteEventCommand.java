@@ -44,8 +44,8 @@ public class DeleteEventCommand extends Command {
         model.deleteEvent(eventToDelete);
         model.commit(String.format(MESSAGE_COMMIT, eventToDelete.getName()));
 
-        MemberListPanel.isViewEventCommand = false;
-        EventListPanel.isViewMemberCommand = false;
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
     }
 

@@ -30,6 +30,8 @@ import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.Phone;
 import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.model.tag.Tag;
+import seedu.ccacommander.ui.EventListPanel;
+import seedu.ccacommander.ui.MemberListPanel;
 
 /**
  * Edits the details of an existing member in CcaCommander.
@@ -92,6 +94,9 @@ public class EditMemberCommand extends Command {
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commit(String.format(MESSAGE_COMMIT, editedMember.getName()));
+
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
         return new CommandResult(String.format(MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember)));
     }
 

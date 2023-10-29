@@ -1,11 +1,15 @@
 package seedu.ccacommander.logic.parser;
 
+import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.logic.commands.ViewMemberCommand;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
 
-import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+/**
+ * Parses input arguments and creates a new ViewMemberCommand object
+ */
 public class ViewMemberCommandParser implements Parser<ViewMemberCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ViewEventCommand
@@ -22,4 +26,3 @@ public class ViewMemberCommandParser implements Parser<ViewMemberCommand> {
         }
     }
 }
-

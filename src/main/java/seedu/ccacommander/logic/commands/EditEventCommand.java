@@ -89,8 +89,8 @@ public class EditEventCommand extends Command {
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         model.commit(String.format(MESSAGE_COMMIT, editedEvent.getName()));
 
-        MemberListPanel.isViewEventCommand = false;
-        EventListPanel.isViewMemberCommand = false;
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
         return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, Messages.format(editedEvent)));
     }
 

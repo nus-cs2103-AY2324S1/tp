@@ -72,7 +72,7 @@ public class EnrolmentBuilder {
         return this;
     }
     public Enrolment build() {
-        return new Enrolment(member, event, memberName, eventName, hours, remark);
+        return new Enrolment(memberName, eventName, hours, remark);
     }
 
 }

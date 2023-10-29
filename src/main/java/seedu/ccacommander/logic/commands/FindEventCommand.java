@@ -33,8 +33,8 @@ public class FindEventCommand extends Command {
         requireNonNull(model);
         model.updateFilteredEventList(predicate);
         model.updateFilteredMemberList(Model.PREDICATE_SHOW_ALL_MEMBERS);
-        MemberListPanel.isViewEventCommand = false;
-        EventListPanel.isViewMemberCommand = false;
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));

@@ -3,7 +3,6 @@ package seedu.ccacommander.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +17,7 @@ import seedu.ccacommander.model.event.SameEventPredicate;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.MemberInNameCollectionPredicate;
 import seedu.ccacommander.model.shared.Name;
+import seedu.ccacommander.ui.EventListPanel;
 import seedu.ccacommander.ui.MemberListPanel;
 
 /**
@@ -56,9 +56,10 @@ public class ViewEventCommand extends Command {
         Name eventName = event.getName();
 
 
-        // loop through enrolment list, check if each enrolment.getEventName() = event.getName() then add enrolment.getName() to
+        // loop through enrolment list, check if each enrolment.getEventName() = event.getName()
+        // then add enrolment.getName() to
         // Collection<Name> memberNames
-        Collection<Name> namesCollection= new HashSet<>();
+        Collection<Name> namesCollection = new HashSet<>();
         for (Enrolment enrolment: enrolmentList) {
             if (enrolment.getEventName().equals(eventName)) {
                 Name memName = enrolment.getMemberName();
@@ -73,7 +74,8 @@ public class ViewEventCommand extends Command {
 
         }
 
-        MemberListPanel.isViewEventCommand = true;
+        MemberListPanel.setIsViewEventCommand(true);
+        EventListPanel.setIsViewMemberCommand(false);
         model.updateFilteredMemberList(new MemberInNameCollectionPredicate(namesCollection));
         model.updateFilteredEventList(new SameEventPredicate(event));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(event)));

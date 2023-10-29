@@ -94,8 +94,8 @@ public class EnrolCommand extends Command {
 
         model.createEnrolment(toAdd);
         model.commit(String.format(MESSAGE_COMMIT, toAdd.getMemberAndEventEnrolment()));
-        MemberListPanel.isViewEventCommand = false;
-        EventListPanel.isViewMemberCommand = false;
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

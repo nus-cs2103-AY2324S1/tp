@@ -59,8 +59,8 @@ public class CreateEventCommand extends Command {
         model.createEvent(toCreate);
         model.commit(String.format(MESSAGE_COMMIT, toCreate.getName()));
 
-        MemberListPanel.isViewEventCommand = false;
-        EventListPanel.isViewMemberCommand = false;
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toCreate)));
     }
 

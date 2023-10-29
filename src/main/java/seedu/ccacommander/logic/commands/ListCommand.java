@@ -1,8 +1,11 @@
 package seedu.ccacommander.logic.commands;
 
+
 import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
+
+import java.util.List;
 
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.enrolment.Hours;
@@ -11,7 +14,7 @@ import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.ui.EventListPanel;
 import seedu.ccacommander.ui.MemberListPanel;
 
-import java.util.List;
+
 
 /**
  * Lists all persons in CcaCommander to the user.
@@ -31,8 +34,8 @@ public class ListCommand extends Command {
             member.setHours(new Hours("0"));
             member.setRemark(new Remark("None"));
         }
-        MemberListPanel.isViewEventCommand = false;
-        EventListPanel.isViewMemberCommand = false;
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(MESSAGE_SUCCESS);
