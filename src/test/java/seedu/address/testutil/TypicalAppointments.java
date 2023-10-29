@@ -55,6 +55,10 @@ public class TypicalAppointments {
             .withDescription("Appointment in Future")
             .build();
 
+    public static final Appointment ANCIENT_APPOINTMENT = new AppointmentBuilder()
+            .withPatient(HOON).withAppointmentTime("1800/04/18 15:00", "2023/04/18 17:30")
+            .withDescription("Stoned").build();
+
     public static List<Appointment> getTypicalAppointments() {
         return new ArrayList<>(Arrays.asList(APPOINTMENT1, APPOINTMENT2, APPOINTMENT3, APPOINTMENT4));
     }
