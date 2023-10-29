@@ -265,6 +265,8 @@ Examples:
 * `list` followed by `delete 3 3 3 3` 
   * deletes the 3rd fosterer in the address book
 
+![Delete](images/screenshots/Delete.png)
+
 ### Sorting fosterers: `sort`
 
 Sorts list of fosterers alphabetically, by name.
@@ -286,7 +288,8 @@ Examples:
   * calculates statistics of available fosterers, based on all fosterers in the address book.
 * `find cat` followed by `stats avail` 
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
-  
+
+![Delete](images/screenshots/StatsAvail.png)
 
 ### Viewing Statistics of Current Fosterers : `stats current`
 Displays statistics about fosterers who are currently fostering, and the type of animals they are fostering.
@@ -299,6 +302,9 @@ Examples:
 * `find dog` followed by `stats current`
   * calculates statistics of current fosterers, based on fosterers who are either currently fostering a dog,  or are able to foster a dog.
 
+![Delete](images/screenshots/StatsCurr.png)
+
+
 ### Viewing Housing Statistics : `stats housing`
 Displays statistics about fosterers who are living in a HDB, Condo or Landed.
 
@@ -309,6 +315,8 @@ Examples:
   * calculates housing statistics based on all fosterers in the address book.
 * `find available` followed by `stats housing` 
   * calculates housing statistics based on fosterers who are available
+
+![Delete](images/screenshots/StatsHousing.png)
 
 ### Clearing all entries : `reset`
 
