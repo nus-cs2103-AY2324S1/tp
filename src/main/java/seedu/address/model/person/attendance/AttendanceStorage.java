@@ -1,13 +1,13 @@
 package seedu.address.model.person.attendance;
 
-import seedu.address.model.person.JoinDate;
+import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.person.JoinDate;
 
 /**
  * Stores the attendances of each person.
@@ -16,10 +16,18 @@ public class AttendanceStorage {
 
     private ArrayList<Attendance> storage;
 
+    /**
+     * Constructs a {@code AttendanceStorage}
+     */
     public AttendanceStorage() {
         storage = new ArrayList<>();
 
     }
+
+    /**
+     * Constructs a {@code AttendanceStorage}
+     * @param attendances A list of attendance records.
+     */
     public AttendanceStorage(ArrayList<String> attendances) {
         this();
         for (String attendance : attendances) {
@@ -56,6 +64,11 @@ public class AttendanceStorage {
 
     }
 
+    /**
+     * Get the attendance type on a specific date
+     * @param date date of attendance type you want to know
+     * @return attendance type. This can either be Late, Absent or Present.
+     */
     public AttendanceType getType(LocalDate date) {
         if (getAttendance(date) == null) {
             return AttendanceType.PRESENT;
@@ -64,7 +77,10 @@ public class AttendanceStorage {
         return getAttendance(date).getType();
     }
 
-
+    /**
+     * Marks a person to be absent.
+     * @param date The date on which the person is absent.
+     */
     public void markAbsent(LocalDate date) {
         if (getAttendance(date) == null) {
             storage.add(new Attendance(date, AttendanceType.ABSENT));
@@ -74,6 +90,10 @@ public class AttendanceStorage {
         }
     }
 
+    /**
+     * Marks a person to be late.
+     * @param date The date on which the person is late.
+     */
     public void markLate(LocalDate date) {
         if (getAttendance(date) == null) {
             storage.add(new Attendance(date, AttendanceType.LATE));
@@ -83,6 +103,10 @@ public class AttendanceStorage {
         }
     }
 
+    /**
+     * Marks a person to be present.
+     * @param date The date on which the person is present.
+     */
     public void markPresent(LocalDate date) {
         if (getAttendance(date) != null) {
             storage.remove(getAttendance(date));
@@ -95,12 +119,14 @@ public class AttendanceStorage {
      * @param type type of attendance to count
      * @return count of number of attendances
      */
-    public int getCount(AttendanceType type, JoinDate joinDate) { //TODO decide if the param should be JoinDate or LocalDate
+    public int getCount(AttendanceType type, JoinDate joinDate) {
+        //TODO decide if the param should be JoinDate or LocalDate
         LocalDate dateJoined = LocalDate.parse(joinDate.value);
 
         if (type == AttendanceType.PRESENT) {
             int numOfDaysSinceJoining = dateJoined.until(LocalDate.now()).getDays();
-            int numOfDaysPresent = numOfDaysSinceJoining - getCount(AttendanceType.ABSENT, joinDate) - getCount(AttendanceType.LATE, joinDate);
+            int numOfDaysPresent = numOfDaysSinceJoining - getCount(AttendanceType.ABSENT, joinDate)
+                    - getCount(AttendanceType.LATE, joinDate);
             return numOfDaysPresent;
         }
         int result = 0;
@@ -115,7 +141,8 @@ public class AttendanceStorage {
      * @return
      */
     public ArrayList<String> getValue() {
-        ArrayList<Attendance> attendancesCopy = new ArrayList<>(storage); // Assuming storage is an ArrayList<Attendance>
+        // Assuming storage is an ArrayList<Attendance>
+        ArrayList<Attendance> attendancesCopy = new ArrayList<>(storage);
 
         ArrayList<String> result = new ArrayList<>();
         for (Attendance attendance : attendancesCopy) {
@@ -124,11 +151,4 @@ public class AttendanceStorage {
 
         return result;
     }
-
-
-
-
-
-
-
 }
