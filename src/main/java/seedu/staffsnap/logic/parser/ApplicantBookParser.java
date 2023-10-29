@@ -67,7 +67,7 @@ public class ApplicantBookParser {
 
         isConfirmed = isConfirmedNext;
         isConfirmedNext = false;
-        if(isConfirmed) {
+        if (isConfirmed) {
             return new ClearCommandParser().parse(commandWord.toLowerCase());
         }
 

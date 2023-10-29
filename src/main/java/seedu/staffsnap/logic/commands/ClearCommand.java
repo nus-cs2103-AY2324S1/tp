@@ -17,9 +17,13 @@ public class ClearCommand extends Command {
     public final Boolean isSuccess;
 
 
+    /**
+     * Constructor for the command
+     * @param args whether to clear
+     */
     public ClearCommand(String args) {
         System.out.println(args);
-        if(args.equals(COMMAND_WORD)) {
+        if (args.equals(COMMAND_WORD)) {
             this.isSuccess = true;
         } else {
             this.isSuccess = false;
