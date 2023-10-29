@@ -1,6 +1,7 @@
 package seedu.ccacommander.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.ccacommander.model.ModelManager.findEnrolmentFromList;
 
 import java.util.List;
 
@@ -10,7 +11,6 @@ import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.enrolment.Enrolment;
-import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
@@ -72,35 +72,6 @@ public class UnenrolCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_ENROLMENT_SUCCESS, Messages.format(enrolmentToDelete)));
     }
 
-    /**
-     *  Checks if the {@code lastShownEnrolmentList} contains a specific Enrolment object that has a Member and an
-     *  Event that matches the given {@param memberName} and {@param eventName} respectively, and returns that
-     *  specific Enrolment.
-     * @param lastShownEnrolmentList
-     * @param memberName
-     * @param eventName
-     * @throws EnrolmentNotFoundException if the enrolment cannot be found from the {@code lastShownEnrolmentList}
-     */
-    public static Enrolment findEnrolmentFromList(List<Enrolment> lastShownEnrolmentList,
-        Name memberName, Name eventName) throws EnrolmentNotFoundException {
-        Enrolment selectedEnrolment = null;
-
-        for (int i = 0; i < lastShownEnrolmentList.size(); i++) {
-            selectedEnrolment = lastShownEnrolmentList.get(i);
-            Name selectedMemberName = selectedEnrolment.getMemberName();
-            Name selectedEventName = selectedEnrolment.getEventName();
-
-            if (memberName.equals(selectedMemberName) && eventName.equals(selectedEventName)) {
-                break;
-            }
-        }
-
-        if (selectedEnrolment == null) {
-            throw new EnrolmentNotFoundException();
-        } else {
-            return selectedEnrolment;
-        }
-    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
