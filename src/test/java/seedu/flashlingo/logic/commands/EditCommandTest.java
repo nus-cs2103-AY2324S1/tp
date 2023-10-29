@@ -59,9 +59,7 @@ public class EditCommandTest {
 
         String editWord = editedFlashcard.getOriginalWord().getWord();
         String editTranslation = editedFlashcard.getTranslatedWord().getWord();
-        EditCommand editCommand = new EditCommand(indexLastFlashcard, new String[] {
-                editWord, "", editTranslation, ""
-        });
+        EditCommand editCommand = new EditCommand(indexLastFlashcard, new String[] {editWord, "", editTranslation, ""});
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS,
                 Messages.format(editedFlashcard));
