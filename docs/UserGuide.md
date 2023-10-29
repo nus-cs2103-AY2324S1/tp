@@ -547,6 +547,61 @@ Deletes a schedule in the address book based on their index number in the table 
 * `Invalid value in parameter SCHEDULE_INDEX`: Parameter given is not a numerical value.
 * `Missing parameter SCHEDULE_INDEX`: A numerical value is not provided when calling the command `delete-s`.
 
+### System Feature
+
+Beyond just providing you with powerful features related to tutors and schedule tracking, TutorConnect offers some 
+additional system features to take your experience with us to the next level!
+
+#### Changing theme: `theme`
+
+Want a change of scenery? TutorConnect supports 3 colour palettes for you to choose from! No more looking at a 
+boring interface.
+
+![change theme](images/changeTheme.png)
+
+**Format**: `theme NEW_THEME`
+
+**Example**:
+* `theme blue`
+* `theme light`
+
+**Acceptable inputs**:
+* `NEW_THEME`: Only one of the following themes: `dark`, `light`, `blue`.
+
+**Expected output**:
+* `Changed theme to blue`
+
+**Error messages**:
+* `Invalid command format!`: New theme field was left blank and not specified.
+* `Theme provided does not exist`: New theme field was not `dark`, `light` or `blue`
+
+
+#### Clearing all data: `clear`
+
+Clears all data in TutorConnect.
+
+More details coming soon...
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Warning**<br>
+
+This action is irreversible! Do not enter the command unless you are very sure.
+
+</div>
+
+#### Help: `help`
+
+More details coming soon...
+
+<div markdown="block" class="alert alert-success">
+
+**:bulb: Tip**<br>
+
+The help window can also be accessed by the button above the command box!
+
+</div>
+
 [Back To Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -657,6 +712,7 @@ The domain name must:
 | **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                               |
 | **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                 |
 | **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                             |
+| **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                    |
 | **Clear**           | `clear`                                                                                                      |
 
 [Back To Top](#table-of-contents)
