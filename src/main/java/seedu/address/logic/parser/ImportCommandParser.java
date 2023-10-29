@@ -88,8 +88,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         Phone phone = ParserUtil.parsePhone(attributes[1]);
         Email email = ParserUtil.parseEmail(attributes[2]);
 
-        int count = 3;
-        StringBuilder addr = new StringBuilder();
+        int count = 4;
+        StringBuilder addr = new StringBuilder(attributes[3]);
         while (!(attributes[count].equalsIgnoreCase("M")
                 || attributes[count].equalsIgnoreCase("F"))) {
             addr.append(", ").append(attributes[count]);
