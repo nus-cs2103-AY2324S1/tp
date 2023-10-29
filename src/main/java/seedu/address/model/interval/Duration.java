@@ -33,6 +33,10 @@ public class Duration {
         }
     }
 
+    public int toInt() {
+        return Integer.parseInt(value);
+    }
+
     @Override
     public String toString() {
         return value;

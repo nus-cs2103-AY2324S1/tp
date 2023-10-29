@@ -3,8 +3,9 @@ package seedu.address.model.interval;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Represents an Interval's End in the address book.
@@ -32,17 +33,20 @@ public class IntervalEnd {
         return test.matches(VALIDATION_REGEX);
     }
 
-    private LocalTime parse(String test) {
+    private Date parse(String test) throws ParseException {
         assert isValidEnd(test);
 
-        String pattern = "HHmm";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HHmm");
 
-        return LocalTime.parse(test, formatter);
+        return dateFormat.parse(test);
     }
 
-    public LocalTime getTime() {
+    public Date getTime() throws ParseException {
         return parse(value);
+    }
+
+    public int toInt() {
+        return Integer.parseInt(value);
     }
 
     @Override

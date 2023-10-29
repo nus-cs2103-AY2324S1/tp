@@ -3,8 +3,11 @@ package seedu.address.model.interval;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * Represents a Interval's Begin in the address book.
@@ -32,17 +35,18 @@ public class IntervalBegin {
         return test.matches(VALIDATION_REGEX);
     }
 
-    private LocalTime parse(String test) {
+    private Date parse(String test) throws ParseException {
         assert isValidBegin(test);
-
-        String pattern = "HHmm";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-
-        return LocalTime.parse(test, formatter);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HHmm");
+        return dateFormat.parse(test);
     }
 
-    public LocalTime getTime() {
+    public Date getTime() throws ParseException {
         return parse(value);
+    }
+
+    public int toInt() {
+        return Integer.parseInt(value);
     }
 
     @Override

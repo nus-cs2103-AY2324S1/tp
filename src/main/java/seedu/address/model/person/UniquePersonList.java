@@ -5,9 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.interval.Interval;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -33,10 +36,6 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        internalList.stream()
-                .filter(person -> person.getDay().toString().equals("Sun"))
-                .forEach(System.out::println);
-
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
@@ -48,6 +47,15 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream()
                 .filter(person -> !person.isSamePerson(toCheck))
                 .anyMatch(toCheck::isSameDate);
+    }
+
+    public List<String> findInterval(Interval interval) {
+        requireNonNull(interval);
+        List<String> filteredSchedule = internalList.stream()
+                .filter(person -> person.getDay().toString().equals(interval.getIntervalDay().toString()))
+                .map(person -> person.getLesson().getTimeSlot())
+                .collect(Collectors.toList());
+        return filteredSchedule;
     }
 
     /**

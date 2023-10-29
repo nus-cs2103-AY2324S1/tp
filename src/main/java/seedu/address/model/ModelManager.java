@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.LessonComparator;
+import seedu.address.model.interval.Interval;
 import seedu.address.model.person.Person;
 
 /**
@@ -101,6 +103,12 @@ public class ModelManager implements Model {
     public boolean hasDate(Person person) {
         requireNonNull(person);
         return addressBook.hasDate(person);
+    }
+
+    @Override
+    public List<String> findInterval(Interval interval) {
+        requireNonNull(interval);
+        return addressBook.findInterval(interval);
     }
 
     @Override
