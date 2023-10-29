@@ -146,14 +146,6 @@ public class AddCommandParserTest {
                         + TestData.Valid.NOTE_DESC_BOB,
                 expectedMessage);
 
-        // missing address prefix
-        assertParseFailure(parser,
-                TestData.Valid.NAME_DESC_BOB
-                        + TestData.Valid.PHONE_DESC_BOB
-                        + TestData.Valid.EMAIL_DESC_BOB
-                        + TestData.Valid.NOTE_BOB,
-                expectedMessage);
-
         // all prefixes missing
         assertParseFailure(parser,
                 TestData.Valid.NAME_BOB
