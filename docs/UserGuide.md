@@ -146,10 +146,10 @@ while viewing a patient (or vice versa), an error message be displayed.
   patients do not have the specialty attribute.
 * The new values of compulsory attributes for a patient or specialist cannot be empty.
   * e.g. `edit s/` (empty Specialty attribute) will result in an error when trying to edit a specialist.
-  * e.g. `edit n/` (empty Name attribute) will result in an error when trying to edit a patient or specialist
-* The new values of temporary attributes can be empty. This is useful when you want to clear the content of optional attributes 
+  * e.g. `edit n/` (empty Name attribute) will result in an error when trying to edit a patient or specialist.
+* The new values of optional attributes can be empty. This is useful when you want to clear the content of optional attributes 
 in a patient or specialist.
-  * e.g. `edit t/` (empty Tag attribute) will remove the tags of the patient or specialist being displayed in the view panel
+  * e.g. `edit t/` (empty Tag attribute) will remove the tags of the patient or specialist being displayed in the view panel.
 
 Examples:
 * `list -pa` > `view 1` > `edit n/John Wick` modifies the name of the first patient in the list to `John Wick`.
@@ -273,7 +273,8 @@ Action | Format, Examples
 **Add (specialist)** | `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION` <br> e.g., `add -sp n/Jane e/janejane@example.com p/73331515 s/Dermatologist l/Ang Mo Kio`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
+**Find** | `find -PERSON_TYPE PREFIX/KEYWORD [MORE_PREFIX/KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
+**Edit** | `edit PREFIX/KEYWORD [MORE_PREFIX/KEYWORDS]` <br> e.g. `edit n/Jonathan Wick p/09883100`
 **List** | `list -pa`
 **Undo** | `undo`
 **Redo** | `redo`
