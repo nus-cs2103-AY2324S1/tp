@@ -187,12 +187,16 @@ public class MainWindow extends UiPart<Stage> {
      * Displays either the list of schedules or tutors based on the command result
      */
     private void handleListDisplay(CommandResult commandResult) {
-        if (commandResult.getFeedbackToUser().equals(ListScheduleCommand.MESSAGE_SUCCESS)) {
+        // TODO: Update this when there are both lists displayed simultaneously
+        switch (commandResult.getFeedbackToUser()) {
+        case ListScheduleCommand.MESSAGE_SUCCESS:
             showSchedules();
-        } else if (commandResult.getFeedbackToUser().equals(ListTutorCommand.MESSAGE_SUCCESS)) {
-            showPersons();
-        } else if (commandResult.getFeedbackToUser().equals(ShowCalendarCommand.MESSAGE_SUCCESS)) {
+            break;
+        case ShowCalendarCommand.MESSAGE_SUCCESS:
             showCalendar();
+            break;
+        default:
+            showPersons();
         }
     }
 
