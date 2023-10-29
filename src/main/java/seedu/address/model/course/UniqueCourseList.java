@@ -6,6 +6,7 @@ import static seedu.address.model.course.Course.MESSAGE_CONSTRAINTS;
 import static seedu.address.model.course.Course.isValidCourseCode;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -66,6 +67,11 @@ public class UniqueCourseList implements Iterable<Course> {
      */
     public void add(Course toAdd) {
         internalList.add(toAdd);
+    }
+
+    public void setCourses(List<Course> replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement);
     }
 
     @Override
