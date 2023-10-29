@@ -16,7 +16,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.appointmentcommands.AppointmentsCommand;
 import seedu.address.logic.commands.appointmentcommands.CancelCommand;
-import seedu.address.logic.commands.appointmentcommands.FindPatientAppointmentCommand;
+import seedu.address.logic.commands.appointmentcommands.FindAppointmentCommand;
 import seedu.address.logic.commands.appointmentcommands.RescheduleCommand;
 import seedu.address.logic.commands.appointmentcommands.ScheduleCommand;
 import seedu.address.logic.commands.appointmentcommands.SortCommand;
@@ -124,7 +124,7 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
 
-        case FindPatientAppointmentCommand.COMMAND_WORD:
+        case FindAppointmentCommand.COMMAND_WORD:
             return new FindPatientAppointmentCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
