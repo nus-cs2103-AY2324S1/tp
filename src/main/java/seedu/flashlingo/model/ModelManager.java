@@ -203,7 +203,6 @@ public class ModelManager implements Model {
         }
         updateFilteredFlashCardList(new NextReviewWordPredicate(getFilteredFlashCardList().get(0)));
         SessionManager.getInstance().setJustStarted(true);
-        System.out.println(getFilteredFlashCardList().get(0));
     }
     @Override
     public void endSession() {

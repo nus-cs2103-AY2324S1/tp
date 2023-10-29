@@ -114,9 +114,7 @@ public class FlashCard {
     public void updateLevel(boolean isSuccess) {
         if (isSuccess) {
             getProficiencyLevel().upgradeLevel();
-            System.out.println("before" + this.getWhenToReview());
             updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());
-            System.out.println("after" + this.getWhenToReview());
         } else {
             getProficiencyLevel().downgradeLevel();
             updateReviewDate(getProficiencyLevel().calculateNextReviewInterval());

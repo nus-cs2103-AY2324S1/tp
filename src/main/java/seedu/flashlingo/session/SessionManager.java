@@ -18,18 +18,13 @@ public class SessionManager {
         }
         return instance;
     }
-
     public void setSession(boolean editedReview) {
         isReview = editedReview;
     }
-
     public boolean isReviewSession() {
         return isReview;
     }
     public void setJustStarted(boolean editedJustStarted) {
         isJustStarted = editedJustStarted;
-    }
-    public boolean isJustStarted() {
-        return isJustStarted;
     }
 }

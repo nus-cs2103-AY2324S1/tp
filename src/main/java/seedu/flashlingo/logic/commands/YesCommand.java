@@ -31,9 +31,7 @@ public class YesCommand extends Command {
         requireNonNull(model);
         FlashCard response = model.nextReviewWord();
         response.updateLevel(true);
-        System.out.println("Level updated: " );
         if (!model.hasNextRound()) {
-            System.out.println("No next round");
             SessionManager.getInstance().setSession(false);
             model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
             return new CommandResult(MESSAGE_SUCCESS + "\n" + "You have no more words to review!");
