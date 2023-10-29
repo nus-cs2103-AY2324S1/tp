@@ -125,4 +125,5 @@ public class LoveBook implements ReadOnlyLoveBook {
     public int hashCode() {
         return dates.hashCode();
     }
+
 }

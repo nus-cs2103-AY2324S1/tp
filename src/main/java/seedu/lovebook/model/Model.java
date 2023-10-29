@@ -1,6 +1,7 @@
 package seedu.lovebook.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -103,4 +104,6 @@ public interface Model {
     void setDatePrefs(ReadOnlyDatePrefs datePrefs);
 
     ReadOnlyDatePrefs getDatePrefs();
+    void updateSortedPersonList(Comparator<Date> comparator);
+    void getBestDate();
 }

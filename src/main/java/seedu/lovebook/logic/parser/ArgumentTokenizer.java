@@ -36,6 +36,7 @@ public class ArgumentTokenizer {
      * @return           List of zero-based prefix positions in the given arguments string
      */
     private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) {
+        System.out.println(argsString);
         return Arrays.stream(prefixes)
                 .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
                 .collect(Collectors.toList());
@@ -45,9 +46,12 @@ public class ArgumentTokenizer {
      * {@see findAllPrefixPositions}
      */
     private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
+        System.out.println("HELLO " + argsString);
+        System.out.println(prefix);
         List<PrefixPosition> positions = new ArrayList<>();
 
         int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);
+        System.out.println("ANS " + prefixPosition);
         while (prefixPosition != -1) {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
             positions.add(extendedPrefix);
@@ -70,6 +74,7 @@ public class ArgumentTokenizer {
      * {@code fromIndex} = 0, this method returns 5.
      */
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
+        System.out.println("** " + argsString + " " + prefix + " " + fromIndex);
         int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
         return prefixIndex == -1 ? -1
                 : prefixIndex + 1; // +1 as offset for whitespace
@@ -85,7 +90,6 @@ public class ArgumentTokenizer {
      * @return                ArgumentMultimap object that maps prefixes to their arguments
      */
     private static ArgumentMultimap extractArguments(String argsString, List<PrefixPosition> prefixPositions) {
-
         // Sort by start position
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
 

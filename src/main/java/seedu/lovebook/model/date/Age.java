@@ -7,7 +7,7 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
  * Represents a Date's age in the lovebook.
  * Guarantees: immutable; is valid as declared in {@link #isValidAge(String)}
  */
-public class Age {
+public class Age implements Comparable<Age> {
     public static final String MESSAGE_CONSTRAINTS =
             "Age should only contain positive numbers.";
     public static final String VALIDATION_REGEX = "^(?:[1-9]|[1-9][0-9]|1[0-4][0-9]|150)$"; // 1-150 Age Accepted
@@ -56,4 +56,15 @@ public class Age {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Age o) {
+        int thisAge = Integer.parseInt(this.toString());
+        int otherAge = Integer.parseInt(o.toString());
+        if (thisAge > otherAge) {
+            return 1;
+        } else if (thisAge < otherAge) {
+            return -1;
+        }
+        return 0;
+    }
 }

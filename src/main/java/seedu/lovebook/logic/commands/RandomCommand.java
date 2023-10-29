@@ -10,8 +10,8 @@ import seedu.lovebook.model.Model;
  * Generates a random date
  */
 public class RandomCommand extends Command {
-    public static final String COMMAND_WORD = "random";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Generates a random date"
+    public static final String COMMAND_WORD = "blind date";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Generates a blind date"
             + "Example: " + COMMAND_WORD;
 
     @Override

@@ -7,7 +7,7 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
  * Represents a Date's lovebook in the lovebook.
  * Guarantees: immutable; is valid as declared in {@link #isValidHeight(String)}
  */
-public class Height {
+public class Height implements Comparable<Height> {
 
     public static final String MESSAGE_CONSTRAINTS = "Height can take any values between 1 and 250cm";
 
@@ -62,4 +62,15 @@ public class Height {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Height o) {
+        int thisHeight = Integer.parseInt(this.toString());
+        int otherHeight = Integer.parseInt(o.toString());
+        if (thisHeight > otherHeight) {
+            return 1;
+        } else if (thisHeight < otherHeight) {
+            return -1;
+        }
+        return 0;
+    }
 }

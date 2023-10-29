@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.lovebook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.lovebook.commons.core.GuiSettings;
 import seedu.lovebook.commons.core.LogsCenter;
 import seedu.lovebook.logic.Messages;
@@ -26,6 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final DatePrefs datePrefs;
     private final FilteredList<Date> filteredDates;
+    private SortedList<Date> sortedList;
 
     /**
      * Initializes a ModelManager with the given LoveBook and userPrefs.
@@ -39,7 +42,8 @@ public class ModelManager implements Model {
         this.loveBook = new LoveBook(loveBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.datePrefs = new DatePrefs(datePrefs);
-        filteredDates = new FilteredList<>(this.loveBook.getPersonList());
+        sortedList = new SortedList<>(this.loveBook.getPersonList());
+        filteredDates = new FilteredList<>(sortedList);
     }
 
     public ModelManager() {
@@ -140,6 +144,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateSortedPersonList(Comparator<Date> comparator) {
+        requireNonNull(comparator);
+        sortedList.setComparator(comparator);
+    }
+    @Override
     public void updateFilteredPersonList(Predicate<Date> predicate) {
         requireNonNull(predicate);
         filteredDates.setPredicate(predicate);
@@ -178,6 +187,7 @@ public class ModelManager implements Model {
         return this.datePrefs.getPreferences();
     }
 
+
     @Override
     public Path getDatePrefsFilePath() {
         return this.userPrefs.getDatePrefsFilePath();
@@ -186,6 +196,13 @@ public class ModelManager implements Model {
     @Override
     public void setDatePrefsFilePath(Path datePrefsFilePath) {
         this.userPrefs.setDatePrefsFilePath(datePrefsFilePath);
+    }
+
+    @Override
+    public void getBestDate() {
+        ObservableList<Date> dateList = loveBook.getPersonList();
+        Date bestDate = dateList.stream().max(Comparator.comparing(date -> date.getScore(this.datePrefs))).orElse(null);
+        filteredDates.setPredicate(date -> date.equals(bestDate));
     }
 
 }

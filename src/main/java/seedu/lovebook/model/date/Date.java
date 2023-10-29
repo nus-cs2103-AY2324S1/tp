@@ -5,13 +5,14 @@ import static seedu.lovebook.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.lovebook.commons.util.ToStringBuilder;
+import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
  * Represents a Date in the lovebook.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     // Identity fields
     private final Name name;
@@ -148,6 +149,45 @@ public class Date {
     }
 
     /**
+     * Returns the score of the date based on how well it mactches the user preferences.
+     *
+     * @param prefs User's date preferences
+     * @return the score of the date based on how it matches user preferences.
+     */
+    public int getScore(DatePrefs prefs) {
+        int score = 0;
+        //height
+        int heightDiff = Integer.parseInt(prefs.getHeight().value)
+                - Integer.parseInt(this.height.value);
+        if (heightDiff < 0) {
+            score += Math.max(0, 10 + heightDiff);
+        } else {
+            score += Math.max(0, 10 - heightDiff);
+        }
+        //age
+        int ageDiff = Integer.parseInt(prefs.getAge().value)
+                - Integer.parseInt(this.age.value);
+        if (ageDiff < 0) {
+            score += Math.max(0, 10 + ageDiff * 2);
+        } else {
+            score += Math.max(0, 10 - ageDiff * 2);
+        }
+        //horoscope
+        if (this.horoscope.equals(prefs.getHoroscope())) {
+            score += 10;
+        }
+        //income
+        int incomeDiff = Integer.parseInt(prefs.getIncome().value)
+                - Integer.parseInt(this.income.value);
+        if (incomeDiff < 0) {
+            score += Math.max(0, 10 + incomeDiff / 250);
+        } else {
+            score += Math.max(0, 10 - incomeDiff / 250);
+        }
+        return score;
+    }
+
+    /**
      * Returns true if both dates have the same identity and data fields.
      * This defines a stronger notion of equality between two dates.
      */
@@ -189,4 +229,8 @@ public class Date {
                 .toString();
     }
 
+    @Override
+    public int compareTo(Date o) {
+        return this.getName().toString().compareTo(o.getName().toString());
+    }
 }

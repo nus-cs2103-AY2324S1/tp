@@ -16,6 +16,7 @@ import java.util.List;
 
 import seedu.lovebook.commons.core.index.Index;
 import seedu.lovebook.logic.commands.exceptions.CommandException;
+import seedu.lovebook.logic.parser.exceptions.ParseException;
 import seedu.lovebook.model.LoveBook;
 import seedu.lovebook.model.Model;
 import seedu.lovebook.model.date.Date;
@@ -90,6 +91,8 @@ public class CommandTestUtil {
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 
