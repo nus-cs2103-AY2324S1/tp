@@ -5,9 +5,9 @@ import java.util.ArrayList;
 /**
  * Represents an AddressBook with an undo/redo history
  */
-public class VersionedAddressBook extends AddressBook{
+public class VersionedAddressBook extends AddressBook {
 
-    private ArrayList<AddressBook> addressBookStateList;
+    private final ArrayList<AddressBook> addressBookStateList;
     private int currentStatePointer;
 
     public VersionedAddressBook() {
@@ -59,7 +59,10 @@ public class VersionedAddressBook extends AddressBook{
         return addressBookStateList.size() > 1 && currentStatePointer < addressBookStateList.size() - 1;
     }
 
-    public void purgeRedundantData() {
-
+    public void purge() {
+        // Remove version data after the current state
+        if (addressBookStateList.size() > currentStatePointer + 1) {
+            addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        }
     }
 }

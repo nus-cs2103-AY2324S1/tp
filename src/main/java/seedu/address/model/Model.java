@@ -111,6 +111,11 @@ public interface Model {
     void redoAddressBook();
 
     /**
+     * Remove states in the {@code VersionedAddressBook} that are no longer valid
+     */
+    void purgeAddressBook();
+
+    /**
      * Checks whether the addressbook has any saved states that can be restored
      * @return a boolean to indicate whether an undo operation is possible
      */

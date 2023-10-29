@@ -155,6 +155,11 @@ public class ModelManager implements Model {
         return addressBook.canRedo();
     }
 
+    @Override
+    public void purgeAddressBook() {
+        addressBook.purge();
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -200,5 +205,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

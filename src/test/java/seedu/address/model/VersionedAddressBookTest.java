@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalVersionedAddressBook;
 
 import java.util.Arrays;
@@ -105,6 +106,33 @@ public class VersionedAddressBookTest {
 
         // Undo to empty addressbook
         assertTrue(twoVersionVersionedAddressBook.canRedo());
+    }
+
+    @Test
+    public void purge_redundantDataAbsent_noDataRemoved() {
+        assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
+
+        twoVersionVersionedAddressBook.purge();
+
+        assertEquals(twoVersionVersionedAddressBook, new AddressBook());
+    }
+    @Test
+    public void purge_redundantDataPresent_removesRedundantData() {
+        assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
+
+        // Simulate add command
+        twoVersionVersionedAddressBook.addPerson(ALICE);
+        twoVersionVersionedAddressBook.commit();
+
+        // Undo add command
+        twoVersionVersionedAddressBook.undo();
+
+        // Simulate add command and purge redundant data
+        twoVersionVersionedAddressBook.purge();
+        twoVersionVersionedAddressBook.addPerson(BOB);
+        twoVersionVersionedAddressBook.commit();
+
+        assertFalse(twoVersionVersionedAddressBook.canRedo());
     }
 
     @Test
