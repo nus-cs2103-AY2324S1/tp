@@ -20,8 +20,10 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final LogBook logBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> loggedFilteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -32,8 +34,10 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.logBook = new LogBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        loggedFilteredPersons = new FilteredList<>(this.logBook.getPersonList());
     }
 
     public ModelManager() {
@@ -120,6 +124,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    @Override
+    public ObservableList<Person> getLoggedFilteredPersonList() {
+        return loggedFilteredPersons;
     }
 
     @Override
