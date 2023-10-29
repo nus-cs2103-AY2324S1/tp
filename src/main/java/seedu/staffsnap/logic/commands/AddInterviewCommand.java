@@ -35,7 +35,7 @@ public class AddInterviewCommand extends Command {
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists for this applicant";
 
     private final Index index;
-    private final Interview interviewToAdd;
+    private Interview interviewToAdd;
 
     /**
      * Creates an AddInterviewCommand to add the specified {@code Interview}
@@ -58,9 +58,9 @@ public class AddInterviewCommand extends Command {
 
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
 
-        if (applicantToEdit.getInterviews().contains(interviewToAdd)
+        while (applicantToEdit.getInterviews().contains(interviewToAdd)
                 || interviewToAdd.isContainedIn(applicantToEdit.getInterviews())) {
-            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
+            interviewToAdd = interviewToAdd.incrementName();
         }
 
         applicantToEdit.addInterview(interviewToAdd);
