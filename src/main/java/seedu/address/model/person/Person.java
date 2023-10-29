@@ -215,4 +215,8 @@ public class Person {
                 .add("payrate", payRate)
                 .toString();
     }
+
+    public double getMonthlyRevenue() {
+        return lesson.getMonthlyHours() * payRate.getValue();
+    }
 }

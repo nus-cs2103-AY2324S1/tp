@@ -87,7 +87,7 @@ public class TypicalPersons {
             .withSubject("Chinese")
             .withDay("Sun")
             .withBegin("1400")
-            .withEnd("1600")
+            .withEnd("1620")
             .withPayRate("30")
             .build();
 
