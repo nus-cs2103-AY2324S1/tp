@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,15 +9,14 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.course.Lesson;
 
 /**
- * Jackson-friendly version of {@link Lesson}.
+ * TAManager-friendly version of {@link Lesson}.
  */
 public class JsonAdaptedLesson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
     private final String name;
     private final String courseCode;
     private final String dayOfWeek;
-    private final String startTime;
-    private final String endTime;
+    private final JsonAdaptedTimeInterval timeInterval;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
@@ -26,29 +24,26 @@ public class JsonAdaptedLesson {
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("name") String name,
                              @JsonProperty("courseCode") String courseCode,
-                             @JsonProperty("startTime") String startTime,
                              @JsonProperty("dayOfWeek") String dayOfWeek,
-                             @JsonProperty("endTime") String endTime) {
+                             @JsonProperty("interval") JsonAdaptedTimeInterval interval) {
         this.name = name;
         this.courseCode = courseCode;
         this.dayOfWeek = dayOfWeek;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.timeInterval = interval;
     }
 
     /**
-     * Converts a given {@code Lesson} into this class for Jackson use.
+     * Converts a given {@code Lesson} into this class for TAManager use.
      */
     public JsonAdaptedLesson(Lesson source) {
         name = source.getName();
         courseCode = source.getCourseCode();
         dayOfWeek = source.getDayOfWeek().toString();
-        startTime = source.getStartTime().toString();
-        endTime = source.getEndTime().toString();
+        timeInterval = new JsonAdaptedTimeInterval(source.getTimeInterval());
     }
 
     /**
-     * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.
+     * Converts this TAManager-friendly adapted lesson object into the model's {@code Lesson} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
@@ -59,19 +54,14 @@ public class JsonAdaptedLesson {
         if (courseCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "courseCode"));
         }
-        if (startTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "startTime"));
+
+        if (timeInterval == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "timeInterval"));
         }
-        if (endTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "endTime"));
-        }
-        if (!LocalTime.parse(startTime).isBefore(LocalTime.parse(endTime))) {
-            throw new IllegalValueException("Start time must be before end time");
-        }
+
         return new Lesson(name,
                 courseCode,
                 DayOfWeek.valueOf(dayOfWeek),
-                LocalTime.parse(startTime),
-                LocalTime.parse(endTime));
+                timeInterval.toModelType());
     }
 }
