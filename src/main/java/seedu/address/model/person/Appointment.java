@@ -152,8 +152,11 @@ public class Appointment {
      */
     public boolean overlaps(Appointment target) {
         assert !start.isAfter(end);
-        assert !target.start.isAfter(target.end);
+        if (target == null) {
+            return false;
+        }
 
+        assert !target.start.isAfter(target.end);
         if (!date.isEqual(target.date)) {
             return false;
         }
