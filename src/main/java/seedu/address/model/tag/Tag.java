@@ -3,6 +3,8 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.booking.Room;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -32,7 +34,17 @@ public class Tag {
      * @return True if the string is a valid tag name, false otherwise.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (test.matches(VALIDATION_REGEX)) {
+            return true;
+        }
+
+        for (Room.RoomType roomType : Room.RoomType.values()) {
+            if (test.equalsIgnoreCase(roomType.name())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
