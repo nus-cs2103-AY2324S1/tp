@@ -19,22 +19,22 @@ public class InterviewTest {
     @Test
     public void isNotValidOrNewInterview() {
         // same object -> returns true
-        assertTrue(STANDARD_INTERVIEW.isNotValidOrNewInterview(STANDARD_INTERVIEW));
+        assertTrue(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW));
 
         // null -> returns false
-        assertFalse(STANDARD_INTERVIEW.isNotValidOrNewInterview(null));
+        assertFalse(STANDARD_INTERVIEW.isSameInterview(null));
 
-        System.out.println(STANDARD_INTERVIEW.isNotValidOrNewInterview(STANDARD_INTERVIEW_DIFFERENT_ROLE));
+        System.out.println(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_ROLE));
         System.out.println(STANDARD_INTERVIEW);
         System.out.println(STANDARD_INTERVIEW_DIFFERENT_ROLE);
         // same Applicant and time, all other attributes different -> returns true
-        assertTrue(STANDARD_INTERVIEW.isNotValidOrNewInterview(STANDARD_INTERVIEW_DIFFERENT_ROLE));
+        assertTrue(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_ROLE));
 
         // different Applicant, all other attributes same -> returns false
-        assertFalse(STANDARD_INTERVIEW.isNotValidOrNewInterview(STANDARD_INTERVIEW_DIFFERENT_APPLICANT));
+        assertFalse(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_APPLICANT));
 
         // different Time, all other attributes same -> return false
-        assertFalse(STANDARD_INTERVIEW.isNotValidOrNewInterview(STANDARD_INTERVIEW_DIFFERENT_TIME));
+        assertFalse(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_TIME));
     }
 
     @Test

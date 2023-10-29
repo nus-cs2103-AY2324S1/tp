@@ -3,6 +3,7 @@ package seedu.address.model.interview;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import seedu.address.logic.parser.TimeParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -12,6 +13,8 @@ import seedu.address.model.applicant.Applicant;
  * Represents an Interview in the address book.
  */
 public class Interview {
+    private static final LocalTime WORK_START = LocalTime.of(9, 0);
+    private static final LocalTime WORK_END = LocalTime.of(17, 0);
     private final Applicant applicant;
     private final String jobRole;
     private final Rating rating;
@@ -129,7 +132,7 @@ public class Interview {
      * Returns true if both Interviews have the same Applicant & Timing or if both Interviews are the same object
      * Adapted from AB3's Person.isSamePerson() method
      */
-    public boolean isNotValidOrNewInterview(Interview otherInterview) {
+    public boolean isSameInterview(Interview otherInterview) {
         if (otherInterview == this) {
             return true;
         }
@@ -138,6 +141,27 @@ public class Interview {
                 && otherInterview.startTime.equals(startTime)
                 && otherInterview.endTime.equals(endTime)
                 && otherInterview.getInterviewApplicant().equals(getInterviewApplicant());
+    }
+
+    /**
+     * Returns true if startTime is before endTime, both times are
+     * within working hours, and startTime and endTime are on the same day.
+     */
+    public boolean isValid() {
+        return startTime.isBefore(endTime)
+                && isWithinWorkingHours(startTime)
+                && isWithinWorkingHours(endTime)
+                && startTime.toLocalDate().isEqual(endTime.toLocalDate());
+    }
+
+    /**
+     * Returns true if startTime and endTime are within working hours,
+     * which is defined to be between 0900 and 1700.
+     */
+    public boolean isWithinWorkingHours(LocalDateTime dateTime) {
+        LocalTime time = dateTime.toLocalTime();
+        return (time.isAfter(WORK_START) || time.equals(WORK_START))
+                && (time.isBefore(WORK_END) || time.equals(WORK_END));
     }
 
     public Applicant getInterviewApplicant() {

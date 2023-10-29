@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERVIEWS;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -16,7 +17,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
 
@@ -42,7 +42,9 @@ public class EditInterviewCommand extends Command {
     public static final String MESSAGE_EDIT_INTERVIEW_SUCCESS = "Edited Interview: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists in the address book.";
-    public static final String MESSAGE_INVALID_TIME = "This interview already exists in the address book.";
+    public static final String MESSAGE_INVALID_TIME = "The interview start time must be before the end time, "
+            + "the time must be between 0900 to 1700,\n"
+            + "and the start time and end time must be on the same day!";
 
     private final Index index;
     private final EditInterviewDescriptor editInterviewDescriptor;
@@ -69,15 +71,14 @@ public class EditInterviewCommand extends Command {
         }
 
         Interview interviewToEdit = lastShownList.get(index.getZeroBased());
-        Interview editedInterview = null;
-        try {
-            editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor);
-        } catch (ParseException e) {
-            throw new CommandException(MESSAGE_INVALID_TIME);
+        Interview editedInterview = createEditedInterview(interviewToEdit, editInterviewDescriptor);
+
+        if (!interviewToEdit.isSameInterview(editedInterview) && model.hasInterview(editedInterview)) {
+            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
 
-        if (!interviewToEdit.isNotValidOrNewInterview(editedInterview) && model.hasInterview(editedInterview)) {
-            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
+        if (!editedInterview.isValid()) {
+            throw new CommandException(MESSAGE_INVALID_TIME);
         }
 
         model.setInterview(interviewToEdit, editedInterview);
@@ -92,15 +93,14 @@ public class EditInterviewCommand extends Command {
      * edited with {@code editInterviewDescriptor}.
      */
     private static Interview createEditedInterview(Interview interviewToEdit,
-                                                   EditInterviewDescriptor editInterviewDescriptor)
-            throws ParseException {
+                                                   EditInterviewDescriptor editInterviewDescriptor) {
         assert interviewToEdit != null;
 
         String updatedJobRole = editInterviewDescriptor.getJobRole().orElse(interviewToEdit.getJobRole());
-        String updatedStartTime = editInterviewDescriptor
-                .getInterviewTime().orElse(interviewToEdit.getInterviewStartTimeAsString());
-        String updatedEndTime = editInterviewDescriptor
-                .getInterviewTime().orElse(interviewToEdit.getInterviewEndTimeAsString());
+        LocalDateTime updatedStartTime = editInterviewDescriptor
+                .getStartTime().orElse(interviewToEdit.getInterviewStartTime());
+        LocalDateTime updatedEndTime = editInterviewDescriptor
+                .getEndTime().orElse(interviewToEdit.getInterviewEndTime());
         boolean updatedDoneStatus = editInterviewDescriptor.hasBeenDone().orElse(interviewToEdit.isDone());
 
         return new Interview(interviewToEdit.getInterviewApplicant(),
@@ -137,8 +137,8 @@ public class EditInterviewCommand extends Command {
      */
     public static class EditInterviewDescriptor {
         private String jobRole;
-        /** TODO Change from 'String' to proper 'Date/Time' once natural DT is implemented*/
-        private String interviewTiming;
+        private LocalDateTime startTime;
+        private LocalDateTime endTime;
         private boolean isDone;
 
         public EditInterviewDescriptor() {}
@@ -149,7 +149,8 @@ public class EditInterviewCommand extends Command {
          */
         public EditInterviewDescriptor(EditInterviewDescriptor toCopy) {
             setJobRole(toCopy.jobRole);
-            setInterviewTime(toCopy.interviewTiming);
+            setStartTime(toCopy.startTime);
+            setEndTime(toCopy.endTime);
             setDoneStatus(toCopy.isDone);
         }
 
@@ -157,7 +158,7 @@ public class EditInterviewCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(jobRole, interviewTiming, isDone);
+            return CollectionUtil.isAnyNonNull(jobRole, startTime, endTime, isDone);
         }
 
         public void setJobRole(String role) {
@@ -168,12 +169,20 @@ public class EditInterviewCommand extends Command {
             return Optional.ofNullable(jobRole);
         }
 
-        public void setInterviewTime(String timing) {
-            interviewTiming = timing;
+        public void setStartTime(LocalDateTime startTime) {
+            this.startTime = startTime;
         }
 
-        public Optional<String> getInterviewTime() {
-            return Optional.ofNullable(interviewTiming);
+        public Optional<LocalDateTime> getStartTime() {
+            return Optional.ofNullable(startTime);
+        }
+
+        public void setEndTime(LocalDateTime endTime) {
+            this.endTime = endTime;
+        }
+
+        public Optional<LocalDateTime> getEndTime() {
+            return Optional.ofNullable(endTime);
         }
 
         public void setDoneStatus(boolean isDone) {
@@ -197,7 +206,8 @@ public class EditInterviewCommand extends Command {
 
             EditInterviewDescriptor otherEditInterviewDescriptor = (EditInterviewDescriptor) other;
             return Objects.equals(jobRole, otherEditInterviewDescriptor.jobRole)
-                    && Objects.equals(interviewTiming, otherEditInterviewDescriptor.interviewTiming)
+                    && Objects.equals(startTime, otherEditInterviewDescriptor.startTime)
+                    && Objects.equals(endTime, otherEditInterviewDescriptor.endTime)
                     && Objects.equals(isDone, otherEditInterviewDescriptor.isDone);
         }
 
@@ -205,7 +215,8 @@ public class EditInterviewCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("role", jobRole)
-                    .add("interviewTiming", interviewTiming)
+                    .add("startTime", startTime)
+                    .add("endTime", endTime)
                     .add("isDone", isDone)
                     .toString();
         }

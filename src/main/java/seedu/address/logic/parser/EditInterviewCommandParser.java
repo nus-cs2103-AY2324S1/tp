@@ -45,10 +45,12 @@ public class EditInterviewCommandParser implements Parser<EditInterviewCommand> 
             editInterviewDescriptor.setJobRole(argMultimap.getValue(PREFIX_JOB_ROLE).get());
         }
         if (argMultimap.getValue(PREFIX_START_TIME).isPresent()) {
-            editInterviewDescriptor.setInterviewTime(argMultimap.getValue(PREFIX_START_TIME).get());
+            editInterviewDescriptor.setStartTime(
+                    TimeParser.parseDate(argMultimap.getValue(PREFIX_START_TIME).get()));
         }
         if (argMultimap.getValue(PREFIX_END_TIME).isPresent()) {
-            editInterviewDescriptor.setInterviewTime(argMultimap.getValue(PREFIX_END_TIME).get());
+            editInterviewDescriptor.setEndTime(
+                    TimeParser.parseDate(argMultimap.getValue(PREFIX_END_TIME).get()));
         }
 
         if (!editInterviewDescriptor.isAnyFieldEdited()) {
