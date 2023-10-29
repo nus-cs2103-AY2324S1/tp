@@ -74,6 +74,11 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
     public static final String TYPICAL_ILLNESS_1 = "AIDS";
     public static final String TYPICAL_ILLNESS_2 = "COVID19";
+    public static final String TYPICAL_ILLNESS_3 = "FEVER";
+    public static final String TYPICAL_ILLNESS_4 = "APPENDICITIS";
+    public static final String TYPICAL_ILLNESS_5 = "SCHIZOPHRENIA";
+    public static final String TYPICAL_ILLNESS_6 = "HEADACHE";
+
 
     public static final String INVALID_ILLNESS_1 = "COVID-19";
 

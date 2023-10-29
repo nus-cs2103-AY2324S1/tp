@@ -27,6 +27,7 @@ import seedu.address.logic.commands.personcommands.DeleteCommand;
 import seedu.address.logic.commands.personcommands.DiagnoseCommand;
 import seedu.address.logic.commands.personcommands.EditCommand;
 import seedu.address.logic.commands.personcommands.FindCommand;
+import seedu.address.logic.commands.personcommands.FindIllnessCommand;
 import seedu.address.logic.commands.personcommands.ListCommand;
 import seedu.address.logic.commands.personcommands.UndiagnoseCommand;
 import seedu.address.logic.parser.appointmentparser.CancelCommandParser;
@@ -39,6 +40,7 @@ import seedu.address.logic.parser.personparser.DeleteCommandParser;
 import seedu.address.logic.parser.personparser.DiagnoseCommandParser;
 import seedu.address.logic.parser.personparser.EditCommandParser;
 import seedu.address.logic.parser.personparser.FindCommandParser;
+import seedu.address.logic.parser.personparser.FindIllnessCommandParser;
 import seedu.address.logic.parser.personparser.UndiagnoseCommandParser;
 
 /**
@@ -134,6 +136,8 @@ public class AddressBookParser {
         case UndiagnoseCommand.COMMAND_WORD:
             return new UndiagnoseCommandParser().parse(arguments);
 
+        case FindIllnessCommand.COMMAND_WORD:
+            return new FindIllnessCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

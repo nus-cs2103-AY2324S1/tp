@@ -1,5 +1,11 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_1;
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_2;
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_3;
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_4;
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_5;
+import static seedu.address.logic.commands.CommandTestUtil.TYPICAL_ILLNESS_6;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_AMY;
@@ -100,5 +106,20 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static AddressBook getTypicalAddressBookWithIllness() {
+        AddressBook ab = new AddressBook();
+        String[] nameArray = {"ALICE", "BENSON", "CARL", "DANIEL", "ELLE", "FIONA", "GEORGE"};
+        String[] illnessArray = {TYPICAL_ILLNESS_1, TYPICAL_ILLNESS_2, TYPICAL_ILLNESS_3, TYPICAL_ILLNESS_4,
+            TYPICAL_ILLNESS_5, TYPICAL_ILLNESS_6};
+        int counter = 0;
+        for (int i = 0; i < 6; i++) {
+            PersonBuilder pb = new PersonBuilder();
+            Person tempPerson = pb.withName(nameArray[counter]).withTags(illnessArray[counter]).build();
+            ab.addPerson(tempPerson);
+            counter++;
+        }
+        return ab;
     }
 }
