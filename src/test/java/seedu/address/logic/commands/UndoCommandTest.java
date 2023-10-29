@@ -62,7 +62,7 @@ public class UndoCommandTest {
     private static final String SAMPLE_TODAY_COMMAND = "today";
 
     private static final String SAMPLE_UPCOMING_COMMAND = "today";
-    private static final String SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND = "appointment-find john";
+    private static final String SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND = "find-appointment john";
 
     private static final String SAMPLE_SORT_COMMAND = "sort";
 
@@ -330,10 +330,10 @@ public class UndoCommandTest {
 
     /**
      * Test undo functionality with find patient appointment command.
-     * Find patient appointment command cannot be undone
+     * Find appointment command cannot be undone
      */
     @Test
-    public void testFindPatientAppointmentCommandFollowedByUndo() throws CommandException, ParseException {
+    public void testFindAppointmentCommandFollowedByUndo() throws CommandException, ParseException {
         CommandResult commandResult1 = logic.execute(SAMPLE_ADD_COMMAND_1);
         CommandResult commandResult2 = logic.execute(SAMPLE_SCHEDULE_COMMAND);
         CommandResult commandResult3 = logic.execute(SAMPLE_FIND_PATIENT_APPOINTMENT_COMMAND);
