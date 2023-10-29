@@ -30,6 +30,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         if(this.isSuccess) {
             requireNonNull(model);
+            assert(model != null);
             model.setApplicantBook(new ApplicantBook());
             return new CommandResult(MESSAGE_SUCCESS);
         }

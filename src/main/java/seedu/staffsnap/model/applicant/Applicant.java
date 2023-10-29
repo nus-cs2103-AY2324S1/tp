@@ -206,7 +206,6 @@ public class Applicant implements Comparable<Applicant> {
     public int getInterviewIndexForApplicantCard(Interview interview) {
         return interviews.indexOf(interview) + 1;
     }
-
     /**
      * Get the status of an Applicant.
      * @return Status of applicant

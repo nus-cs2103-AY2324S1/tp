@@ -21,6 +21,7 @@ import seedu.staffsnap.logic.commands.ExitCommand;
 import seedu.staffsnap.logic.commands.FilterCommand;
 import seedu.staffsnap.logic.commands.FindCommand;
 import seedu.staffsnap.logic.commands.HelpCommand;
+import seedu.staffsnap.logic.commands.ImportCommand;
 import seedu.staffsnap.logic.commands.ListCommand;
 import seedu.staffsnap.logic.commands.SortCommand;
 import seedu.staffsnap.logic.commands.StatusCommand;
@@ -115,6 +116,8 @@ public class ApplicantBookParser {
         case StatusCommand.COMMAND_WORD:
             return new StatusCommandParser().parse(arguments);
 
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

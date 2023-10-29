@@ -3,8 +3,6 @@ package seedu.staffsnap.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.staffsnap.model.Model.PREDICATE_HIDE_ALL_APPLICANTS;
-import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.List;
 
@@ -67,16 +65,8 @@ public class AddInterviewCommand extends Command {
 
         applicantToEdit.addInterview(interviewToAdd);
         applicantToEdit.getScore().updateScoreAfterAdd(interviewToAdd);
-        /*
-         This is a workaround to javaFX not updating the list shown to the user unless the predicate is changed
-         Possible fix in the future is to read the current predicate, then store it to be reused
-         Might be an issue when implementing filter()
-         TODO:
-         store current predicate in temp variable
-         use stored predicate when refreshing the filtered list
-        */
-        model.updateFilteredApplicantList(PREDICATE_HIDE_ALL_APPLICANTS);
-        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        model.refreshApplicantList();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(applicantToEdit)));
     }
 
