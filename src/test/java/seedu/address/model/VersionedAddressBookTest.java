@@ -34,8 +34,8 @@ public class VersionedAddressBookTest {
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> oneVersionVersionedAddressBook.resetData(null));
+        assertThrows(NullPointerException.class, () ->
+                oneVersionVersionedAddressBook.resetData(null));
     }
 
     @Test
@@ -153,14 +153,14 @@ public class VersionedAddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         VersionedAddressBookStub newData = new VersionedAddressBookStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class,
-                () -> oneVersionVersionedAddressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () ->
+                oneVersionVersionedAddressBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> oneVersionVersionedAddressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () ->
+                oneVersionVersionedAddressBook.hasPerson(null));
     }
 
     @Test
@@ -217,14 +217,14 @@ public class VersionedAddressBookTest {
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class,
-                () -> oneVersionVersionedAddressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                oneVersionVersionedAddressBook.getPersonList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
         String expected = VersionedAddressBook.class.getCanonicalName()
-                + "{persons=" + oneVersionVersionedAddressBook.getPersonList()+ "}";
+                + "{persons=" + oneVersionVersionedAddressBook.getPersonList() + "}";
         assertEquals(expected, oneVersionVersionedAddressBook.toString());
     }
 
