@@ -31,6 +31,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListScheduleCommand;
 import seedu.address.logic.commands.ListTutorCommand;
 import seedu.address.logic.commands.MarkScheduleCommand;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UnmarkScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -97,6 +98,14 @@ public class AddressBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_theme() throws Exception {
+        String theme = "dark";
+        String themePath = "/view/DarkTheme.css";
+        ThemeCommand command = (ThemeCommand) parser.parseCommand(ThemeCommand.COMMAND_WORD + " " + theme);
+        assertEquals(new ThemeCommand(themePath, theme), command);
     }
 
     @Test

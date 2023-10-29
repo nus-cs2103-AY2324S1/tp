@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -79,6 +80,16 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
+    private String getCurrentTheme() {
+        Scene scene = primaryStage.getScene();
+        String stylesheetPath = scene.getStylesheets().get(0);
+        if (stylesheetPath.contains("/view/")) {
+            int startIndex = stylesheetPath.indexOf("/view/");
+            return stylesheetPath.substring(startIndex);
+        }
+        return null;
+    }
+
     /**
      * Sets the accelerator of a MenuItem.
      *
@@ -139,6 +150,7 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+        handleChangeTheme(guiSettings.getTheme());
     }
 
     /**
@@ -163,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), getCurrentTheme());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -201,6 +213,26 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Changes the theme of the application according to specified theme.
+     * @param theme is the specified filepath of theme styling.
+     */
+    @FXML
+    private void handleChangeTheme(String theme) {
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(getClass().getResource(theme).toExternalForm());
+
+        GuiSettings guiSettings = new GuiSettings(
+            primaryStage.getWidth(),
+            primaryStage.getHeight(),
+            (int) primaryStage.getX(),
+            (int) primaryStage.getY(),
+            theme
+        );
+        logic.setGuiSettings(guiSettings);
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -217,6 +249,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isTheme()) {
+                handleChangeTheme(commandResult.getTheme());
             }
 
             handleListDisplay(commandResult);
