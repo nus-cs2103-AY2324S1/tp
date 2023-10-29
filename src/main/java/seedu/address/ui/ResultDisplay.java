@@ -3,17 +3,15 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.fxml.FXML;
-
-import javafx.scene.layout.Region;
-import javafx.scene.web.WebView;
-import javafx.scene.paint.Color;
-
-
-
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Document;
+
+import javafx.fxml.FXML;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.web.WebView;
+
 
 /**
  * A ui for the status bar that is displayed at the header of the application.
