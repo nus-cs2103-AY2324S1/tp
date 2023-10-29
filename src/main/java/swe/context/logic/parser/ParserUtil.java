@@ -46,7 +46,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValid(trimmedName)) {
-            throw new ParseException(Messages.NAME_CONSTRAINTS);
+            throw new ParseException(Messages.NAME_INVALID);
         }
         return new Name(trimmedName);
     }
@@ -61,7 +61,7 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValid(trimmedPhone)) {
-            throw new ParseException(Messages.PHONE_CONSTRAINTS);
+            throw new ParseException(Messages.PHONE_INVALID);
         }
         return new Phone(trimmedPhone);
     }

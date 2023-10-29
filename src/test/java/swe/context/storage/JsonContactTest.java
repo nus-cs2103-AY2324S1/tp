@@ -38,7 +38,7 @@ public class JsonContactTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonContact contact =
                 new JsonContact(TestData.Invalid.NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = Messages.NAME_CONSTRAINTS;
+        String expectedMessage = Messages.NAME_INVALID;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
@@ -53,7 +53,7 @@ public class JsonContactTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonContact contact =
                 new JsonContact(VALID_NAME, TestData.Invalid.PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = Messages.PHONE_CONSTRAINTS;
+        String expectedMessage = Messages.PHONE_INVALID;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 

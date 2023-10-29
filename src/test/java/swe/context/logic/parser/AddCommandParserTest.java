@@ -172,7 +172,7 @@ public class AddCommandParserTest {
                         + TestData.Valid.EMAIL_DESC_BOB
                         + TestData.Valid.NOTE_DESC_BOB
                         + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
-                Messages.NAME_CONSTRAINTS);
+                Messages.NAME_INVALID);
 
         // invalid phone
         assertParseFailure(parser,
@@ -181,7 +181,7 @@ public class AddCommandParserTest {
                         + TestData.Valid.EMAIL_DESC_BOB
                         + TestData.Valid.NOTE_DESC_BOB
                         + TestData.Valid.Tag.FLAG_ALPHANUMERIC,
-                Messages.PHONE_CONSTRAINTS);
+                Messages.PHONE_INVALID);
 
         // invalid email
         assertParseFailure(parser,
@@ -209,7 +209,7 @@ public class AddCommandParserTest {
                         + TestData.Invalid.PHONE_DESC
                         + TestData.Valid.EMAIL_DESC_BOB
                         + TestData.Valid.NOTE_DESC_BOB,
-                Messages.NAME_CONSTRAINTS);
+                Messages.NAME_INVALID);
 
         // non-empty preamble
         assertParseFailure(parser,
