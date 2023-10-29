@@ -20,6 +20,8 @@ import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
 import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.event.Event;
+import seedu.ccacommander.model.member.Member;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -30,7 +32,7 @@ public class UnenrolCommandTest {
     private Model model = new ModelManager(getTypicalCcaCommander(), new UserPrefs());
 
     @Test
-    public void execute_validEnrolmentUnfilteredList_success() {
+    public void execute_validUnenrolmentUnfilteredList_success() {
         Enrolment enrolmentToDelete = model.getFilteredEnrolmentList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
         UnenrolCommand unenrolCommand = new UnenrolCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT);
 
@@ -52,6 +54,7 @@ public class UnenrolCommandTest {
         String expectedFailedMessage = Messages.MESSAGE_ENROLMENT_NOT_FOUND;
         assertCommandFailure(unenrolCommand, model, expectedFailedMessage);
     }
+
     @Test
     public void execute_duplicateUnenrolmentUnfilteredList_throwsCommandException() {
         Enrolment enrolmentToDelete = model.getFilteredEnrolmentList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
@@ -68,6 +71,54 @@ public class UnenrolCommandTest {
         expectedModel.commit(commitMessage);
 
         assertCommandSuccess(unenrolCommand, model, expectedSuccessMessage, expectedModel);
+        assertCommandFailure(unenrolCommand, model, expectedFailedMessage);
+    }
+
+    @Test
+    public void execute_unenrolmentAfterDeleteMember_throwsCommandException() {
+
+        UnenrolCommand unenrolCommand = new UnenrolCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT);
+
+        // Delete the first member first and assert if the command is successful
+        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
+
+        String commitMessage = String.format(DeleteMemberCommand.MESSAGE_COMMIT, memberToDelete.getName());
+        String expectedMessage = String.format(DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
+                Messages.format(memberToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
+        expectedModel.deleteMember(memberToDelete);
+        expectedModel.commit(commitMessage);
+        assertCommandSuccess(deleteMemberCommand, model, expectedMessage, expectedModel);
+
+        // Proceed to unenrol first member from first event, should throw CommandException as first member
+        // is no longer existent
+        String expectedFailedMessage = Messages.MESSAGE_ENROLMENT_NOT_FOUND;
+        assertCommandFailure(unenrolCommand, model, expectedFailedMessage);
+    }
+
+    @Test
+    public void execute_unenrolmentAfterDeleteEvent_throwsCommandException() {
+
+        UnenrolCommand unenrolCommand = new UnenrolCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT);
+
+        // Delete the first event first and assert if the command is successful
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
+
+        String commitMessage = String.format(deleteEventCommand.MESSAGE_COMMIT, eventToDelete.getName());
+        String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
+                Messages.format(eventToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
+        expectedModel.deleteEvent(eventToDelete);
+        expectedModel.commit(commitMessage);
+        assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
+
+        // Proceed to unenrol first member from first event, should throw CommandException as first event
+        // is no longer existent
+        String expectedFailedMessage = Messages.MESSAGE_ENROLMENT_NOT_FOUND;
         assertCommandFailure(unenrolCommand, model, expectedFailedMessage);
     }
 
