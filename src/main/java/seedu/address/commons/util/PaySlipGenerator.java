@@ -22,7 +22,6 @@ import seedu.address.model.person.Person;
  * Generates a PDF payslip for an employee.
  */
 public class PaySlipGenerator {
-    private static final String TEMPLATE_PATH = "./resources/template.pdf";
     private static final String OUTPUT_DIRECTORY_PATH = "./payslips/";
     private static final InputStream TEMPLATE = PaySlipGenerator.class.getClassLoader()
         .getResourceAsStream("template.pdf");

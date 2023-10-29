@@ -5,12 +5,12 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Arrays;
+
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.attendance.AttendanceType;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-
-import java.util.Arrays;
+import seedu.address.model.person.attendance.AttendanceType;
 
 /**
  * Parses input arguments and creates a new EditCommand object

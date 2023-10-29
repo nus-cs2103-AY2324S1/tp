@@ -1,13 +1,13 @@
 package seedu.address.model.person.attendance;
 
-import seedu.address.model.person.JoinDate;
+import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.person.JoinDate;
 
 /**
  * Stores the attendances of each person.

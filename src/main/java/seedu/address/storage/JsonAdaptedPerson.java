@@ -20,8 +20,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.attendance.AttendanceStorage;
 
-import java.util.ArrayList;
-
 /**
  * Jackson-friendly version of {@link Person}.
  */

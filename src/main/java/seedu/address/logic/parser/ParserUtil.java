@@ -10,7 +10,6 @@ import me.xdrop.fuzzywuzzy.FuzzySearch;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.attendance.AttendanceType;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
@@ -22,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Reason;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.attendance.AttendanceType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser
