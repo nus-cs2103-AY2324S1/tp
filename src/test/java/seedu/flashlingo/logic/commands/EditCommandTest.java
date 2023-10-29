@@ -34,8 +34,10 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         FlashCard editedFlashcard = new FlashCardBuilder().build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD,
-                editedFlashcard.getOriginalWord().getWord(), editedFlashcard.getTranslatedWord().getWord());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, new String[] {
+                editedFlashcard.getOriginalWord().getWord(), "",
+                editedFlashcard.getTranslatedWord().getWord(), ""
+        });
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS,
                 Messages.format(editedFlashcard));
 
@@ -57,7 +59,9 @@ public class EditCommandTest {
 
         String editWord = editedFlashcard.getOriginalWord().getWord();
         String editTranslation = editedFlashcard.getTranslatedWord().getWord();
-        EditCommand editCommand = new EditCommand(indexLastFlashcard, editWord, editTranslation);
+        EditCommand editCommand = new EditCommand(indexLastFlashcard, new String[] {
+                editWord, "", editTranslation, ""
+        });
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FLASHCARD_SUCCESS,
                 Messages.format(editedFlashcard));
@@ -73,8 +77,10 @@ public class EditCommandTest {
     public void execute_duplicatePersonUnfilteredList_failure() {
         FlashCard firstFlashcard = model.getFilteredFlashCardList().get(INDEX_FIRST_FLASHCARD.getZeroBased());
         FlashCard descriptor = new FlashCardBuilder(firstFlashcard).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_FLASHCARD,
-                descriptor.getOriginalWord().getWord(), descriptor.getTranslatedWord().getWord());
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_FLASHCARD, new String[] {
+                descriptor.getOriginalWord().getWord(), "",
+                descriptor.getTranslatedWord().getWord(), ""
+        });
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }
@@ -86,8 +92,10 @@ public class EditCommandTest {
         // edit person in filtered list into a duplicate in address book
         FlashCard flashCardInList = model.getFlashlingo().getFlashCardList().get(INDEX_SECOND_FLASHCARD.getZeroBased());
         FlashCard editedFlashcard = new FlashCardBuilder(flashCardInList).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD,
-                editedFlashcard.getOriginalWord().getWord(), editedFlashcard.getTranslatedWord().getWord());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_FLASHCARD, new String[] {
+                editedFlashcard.getOriginalWord().getWord(), "",
+                editedFlashcard.getTranslatedWord().getWord(), ""
+        });
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FLASHCARD);
     }
@@ -99,7 +107,7 @@ public class EditCommandTest {
                 VALID_ORIGINAL_WORD_LANGUAGE).build();
         String editWord = descriptor.getOriginalWord().getWord();
         String editTranslation = descriptor.getTranslatedWord().getWord();
-        EditCommand editCommand = new EditCommand(outOfBoundIndex, editWord, editTranslation);
+        EditCommand editCommand = new EditCommand(outOfBoundIndex, new String[]{editWord, "", editTranslation, ""});
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
@@ -119,7 +127,7 @@ public class EditCommandTest {
                 .withOriginalWord(VALID_ORIGINAL_WORD_BOB, VALID_TRANSLATION_LANGUAGE).build();
         String editWord = editedFlashcard.getOriginalWord().getWord();
         String editTranslation = editedFlashcard.getTranslatedWord().getWord();
-        EditCommand editCommand = new EditCommand(outOfBoundIndex, editWord, editTranslation);
+        EditCommand editCommand = new EditCommand(outOfBoundIndex, new String[]{editWord, "", editTranslation, ""});
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
@@ -131,9 +139,9 @@ public class EditCommandTest {
         FlashCard flashCard = new FlashCardBuilder().build();
         String editWord = flashCard.getOriginalWord().getWord();
         String editTranslation = flashCard.getOriginalWord().getWord();
-        EditCommand editCommand = new EditCommand(index, editWord, editTranslation);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", replacedWord="
-                + editWord + ", replacedTranslation=" + editTranslation + "}";
+        String[] changes = new String[]{editWord, "", editTranslation, ""};
+        EditCommand editCommand = new EditCommand(index, changes);
+        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", changes=" + changes + "}";
         assertEquals(expected, editCommand.toString());
     }
 

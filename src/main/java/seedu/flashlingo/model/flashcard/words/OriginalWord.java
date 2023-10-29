@@ -39,8 +39,10 @@ public class OriginalWord extends Word {
      * @return The new word
      */
     @Override
-    public OriginalWord editWord(String newWord) {
-        return new OriginalWord(newWord, getLanguage());
+    public OriginalWord editWord(String newWord, String newLanguage) {
+        return new OriginalWord(
+                newWord.isEmpty() ? getWord() : newWord,
+                newLanguage.isEmpty() ? getLanguage() : newLanguage);
     }
 
     /**
@@ -50,6 +52,17 @@ public class OriginalWord extends Word {
      */
     @Override
     public boolean equals(Object other) {
-        return (other instanceof OriginalWord) && super.equals(other);
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof OriginalWord)) {
+            return false;
+        }
+
+        OriginalWord otherOriginalWord = (OriginalWord) other;
+        return getWord().equals(otherOriginalWord.getWord())
+                && getLanguage().equals(otherOriginalWord.getLanguage());
     }
 }
