@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Stack;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,6 +20,10 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    /**
+     * Stack to maintain the history of executed undoable commands.
+     */
+    private final Stack<UndoableCommand> commandHistory = new Stack<>();
 
     private final AddressBook addressBook;
     private final LogBook logBook;
@@ -113,6 +119,28 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Undo ======================================================================================
+
+    @Override
+    public void addToHistory(UndoableCommand command) {
+        commandHistory.push(command);
+    }
+
+    @Override
+    public boolean isCommandHistoryEmpty() {
+        return commandHistory.isEmpty();
+    }
+
+    @Override
+    public UndoableCommand popCommandFromHistory() {
+        return commandHistory.pop();
+    }
+
+    @Override
+    public int getCommandHistorySize() {
+        return commandHistory.size();
     }
 
     //=========== Filtered Person List Accessors =============================================================

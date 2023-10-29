@@ -19,11 +19,11 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the patient list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Patient to the patient list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_NRIC + "NRIC "
@@ -44,8 +44,9 @@ public class AddCommand extends Command {
             + PREFIX_MEDICAL + "on Medicine XYZ "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New Patient added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This Patient already exists in the address book";
+    public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undoing the adding of Patient:  %1$s";
 
     private final Person toAdd;
 
@@ -66,7 +67,15 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        model.addToHistory(this);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    @Override
+    public CommandResult undo(Model model) {
+        requireNonNull(model);
+        model.deletePerson(toAdd);
+        return new CommandResult(String.format(MESSAGE_UNDO_ADD_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
