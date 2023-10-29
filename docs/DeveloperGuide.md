@@ -168,7 +168,7 @@ The following activity diagram summarises what happens when a user executes a ne
 
 The contact list is automatically kept in a constantly sorted state by leveraging `SortedList` from the JavaFX Collections library. Since the class works with `ObservableList`s, which the Model's `Contacts` also utilises, we are able to leverage this class more easily.
 
-The Model obtains an unsorted, unmodifiable list from `Contacts` and wraps it in a `SortedList`. A custom `Comparator` is provided to define our own sorting order, to facilitate the propagation of changes from the nested list to the sorted list.
+The Model obtains an unsorted, unmodifiable list from `Contacts` and wraps it in a `SortedList`. We specify an `AlphabeticalComparator` to define our own alphabetical sorting order, which takes casing into account. This facilitates the intended propagation of changes from the nested list to the sorted list.
 
 For operability with the find feature, this sorted list is further wrapped in a `FilteredList` to limit the scope of what the user sees as needed. A dummy filter `Predicate` which allows all contacts to pass is used as the default filter. It is this filtered list that the model stores in a field.
 
@@ -176,8 +176,8 @@ For operability with the find feature, this sorted list is further wrapped in a 
 
 The edit feature is facilitated by `ModelManager` and implements `Model`.
 
-It is similar in implementation to the add feature, 
-except it edits a contact by calling `Model#updateContact`, 
+It is similar in implementation to the add feature,
+except it edits a contact by calling `Model#updateContact`,
 which replaces the old contact with the edited contact in the `UniqueContactList`.
 
 The following activity diagram summarises what happens when a user executes an edit command.
