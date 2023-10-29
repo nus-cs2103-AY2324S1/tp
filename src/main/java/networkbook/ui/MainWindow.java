@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCharacterCombination;
@@ -86,7 +85,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf(SHORTCUT_HELP));
-        setAccelerator(exitMenuItem, new KeyCharacterCombination(SHORTCUT_EXIT, KeyCombination.CONTROL_DOWN));
+        setAccelerator(exitMenuItem, new KeyCharacterCombination(SHORTCUT_EXIT, KeyCombination.SHORTCUT_DOWN));
     }
 
     /**
@@ -133,28 +132,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
-        setCommandBoxShortcuts(commandBox);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-    }
-
-    void setCommandBoxShortcuts(CommandBox commandBox) {
-        Scene scene = primaryStage.getScene();
-        scene.getAccelerators().put(
-            new KeyCharacterCombination(SHORTCUT_FIND, KeyCombination.CONTROL_DOWN), () ->
-                        commandBox.autoFillCommandIfEmpty("find ")
-        );
-        scene.getAccelerators().put(
-                new KeyCharacterCombination(SHORTCUT_EDIT, KeyCombination.CONTROL_DOWN), () ->
-                        commandBox.autoFillCommandIfEmpty("edit ")
-        );
-        scene.getAccelerators().put(
-                new KeyCharacterCombination(SHORTCUT_CREATE, KeyCombination.CONTROL_DOWN), () ->
-                        commandBox.autoFillCommandIfEmpty("create ")
-        );
-        scene.getAccelerators().put(
-                new KeyCharacterCombination(SHORTCUT_UNDO, KeyCombination.CONTROL_DOWN), () ->
-                        commandBox.autoFillCommandIfEmpty("undo")
-        );
     }
 
     /**
