@@ -127,9 +127,9 @@ Format:
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing subjects, if no enrol date is provided, the date on which the command was executed will be applied to all subjects listed by default. 
-  * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed. 
-  * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided. 
-  * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
+- If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed. 
+- If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided. 
+- Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
 
 Examples:
 *  `edit John Doe n/Joe` specify that you want to edit John Doe's name to "Joe".

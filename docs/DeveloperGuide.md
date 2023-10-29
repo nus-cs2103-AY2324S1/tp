@@ -248,7 +248,7 @@ When the `ImportCommandParser` parses the arguments, it creates a list of `Stude
 
 The following activity diagram summarizes what happens when a user executes a `import` command:
 
-<puml src="diagrams/FilterActivityDiagram.puml" alt="ImportActivityDiagram" width="250" />
+<puml src="diagrams/ImportActivityDiagram.puml" alt="ImportActivityDiagram" width="250" />
 
 #### Design considerations:
 
@@ -265,6 +265,43 @@ The following activity diagram summarizes what happens when a user executes a `i
     * Cons:
         * Higher chance in wrong a splitting of students' data.
 * We made the choice of Alternative 1 over Alternative 2 as we found that a fixed format would be easier for users to remember and use in the .csv files.
+
+
+### Table feature
+
+#### Implementation
+The `table` command allows users to generate a statistical table either categorised by `gender`, `subject` or `sec-level`
+
+When the user enters a table command, the `AddressBookParser` parses the user's input and return a `TableCommand`.
+
+Note that there is no specifically a TableCommandParser for `TableCommand` just like `ListCommand`, `ExitCommand` and `HelpCommand`. The `AddressBookParser` can parse and return a `TableCommand`directly.
+
+The parameters entered by user expected for a table command are either `g/`, `s/` and `l/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommamdResult. E.g. `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table. 
+
+The following sequence diagram shows how the `table` command works. In this example, the user is executing the following command: `table s/`
+
+<puml src="diagrams/TableSequenceDiagram.puml" alt="TableSequenceDiagram" />
+
+As shown in the sequence diagram, when the `AddressBookParser` parses the arguments to the TableCommand, it creates a TableCommand instance by passing in `s/` as argument so that when this `TableCommand` execute, it will return a `SubjectTableCommandResult` instance as specified by `s/`.
+
+The following activity diagram summarizes what happens when a user executes a `table` command:
+
+<puml src="diagrams/TableActivityDiagram.puml" alt="TableActivityDiagram" width="250" />
+
+#### Design considerations:
+
+**Aspect: How to parse the argument for table internally:**
+
+* **Alternative 1 (current choice):** parse inside `TableCommand` and return the corresponding `XXXTableCommandResult`.
+    * Pros: Easy to implement, more straightforward when the number of possible arguments is less.
+    * Cons: May not be suitable when we want to create a complex statistical table, e.g. a two dimensional table.
+
+* **Alternative 2:** Create a CommandParser specifically for TableCommand.
+    * Pros: Provides a good abstraction when we are dealing with two dimensional table.
+    * Cons: May be reduntant when we only want to create one dimensional table and the number of possible category is less.
+
+* We made the choice of Alternative 1 over Alternative 2 as we found that the table we intend to create so far is one dimensional table and there are only three possible categories, that are , `g/` for gender, `s/` for subject and `l/` for sec-level.
+_{more aspects and alternatives to be added}_
 
 
 ### \[Proposed\] Undo/redo feature
