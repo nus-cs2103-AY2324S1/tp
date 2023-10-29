@@ -1,5 +1,8 @@
 package seedu.address.model.person.predicates;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,6 +22,11 @@ public class AppointmentOverlapsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return query.overlaps(person.getAppointment().orElse(null));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(PREFIX_APPOINTMENT, query);
     }
 
     @Override

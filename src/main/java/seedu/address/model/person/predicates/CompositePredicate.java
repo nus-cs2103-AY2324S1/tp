@@ -2,6 +2,7 @@ package seedu.address.model.person.predicates;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -19,10 +20,22 @@ public class CompositePredicate implements Predicate<Person> {
         predicateSet = new LinkedHashSet<>();
     }
 
+    /**
+     * Adds the Predicate into the CompositePredicate collection.
+     */
+    public void add(Predicate<Person> e) {
+        predicateSet.add(e);
+    }
+
     @Override
     public boolean test(Person person) {
         Predicate<Person> composite = predicateSet.stream().reduce(new IdentityPredicate(), Predicate::and);
         return composite.test(person);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash("CompositeSet", predicateSet);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package seedu.address.model.person.predicates;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -15,6 +16,11 @@ public class IdentityPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(true);
     }
 
     @Override
