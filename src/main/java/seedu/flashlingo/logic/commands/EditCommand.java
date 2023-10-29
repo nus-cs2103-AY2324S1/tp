@@ -33,18 +33,15 @@ public class EditCommand extends Command {
           + PREFIX_TRANSLATED_WORD + "再见";
 
     private final Index index;
-    private final String replacedWord;
-    private final String replacedTranslation;
+    private final String[] changes;
     /**
      * @param index of the flashcard in the list to edit
-     * @param word details to edit the flashcard with
-     * @param translation details to edit the flashcard with
+     * @param changes details to edit the flashcard with
      */
-    public EditCommand(Index index, String word, String translation) {
+    public EditCommand(Index index, String[] changes) {
         requireNonNull(index);
         this.index = index;
-        this.replacedWord = word;
-        this.replacedTranslation = translation;
+        this.changes = changes;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -56,9 +53,8 @@ public class EditCommand extends Command {
         }
 
         FlashCard flashCardToEdit = lastShownList.get(index.getZeroBased());
-        FlashCard editedFlashCard = flashCardToEdit.editFlashCard(replacedWord, replacedTranslation);
-
-        if (editedFlashCard == null || model.hasFlashCard(editedFlashCard)) {
+        FlashCard editedFlashCard = flashCardToEdit.editFlashCard(changes);
+        if ((!changes[0].isEmpty() && model.hasFlashCard(editedFlashCard)) || flashCardToEdit.equals(editedFlashCard)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_FLASHCARD);
         }
         model.setFlashCard(flashCardToEdit, editedFlashCard);
@@ -79,16 +75,14 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && replacedWord.equals(otherEditCommand.replacedWord)
-                && replacedTranslation.equals(otherEditCommand.replacedTranslation);
+                && changes.equals(otherEditCommand.changes);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
           .add("index", index)
-          .add("replacedWord", replacedWord)
-                .add("replacedTranslation", replacedTranslation)
+          .add("changes", changes)
           .toString();
     }
 }
