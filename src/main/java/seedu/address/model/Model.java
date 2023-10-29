@@ -96,4 +96,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Retrieves the courses data.
+     */
+    ReadOnlyCourses getCourses();
+
+    /**
+     * Returns true if Courses data contains course.
+     */
+    boolean hasCourse(Course course);
+
+    /**
+     * Adds course to Courses data.
+     * {@code course} must not already exist in the Courses data.
+     */
+    void addCourse(Course course);
 }

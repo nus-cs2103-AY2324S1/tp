@@ -25,18 +25,21 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final Courses coursesData;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyCourses coursesData) {
+        requireAllNonNull(addressBook, userPrefs, coursesData);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " , user prefs " + userPrefs
+        + " and courses data " + coursesData);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.coursesData = new Courses(coursesData);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         String courseCode = this.userPrefs.getTeaching();
         if (!courseCode.equals("")) {
@@ -47,7 +50,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new Courses());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -146,6 +149,22 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Courses Data =============================================================
+    @Override
+    public ReadOnlyCourses getCourses() {
+        return coursesData;
+    }
+
+    @Override
+    public boolean hasCourse(Course course) {
+        return coursesData.hasCourse(course);
+    }
+
+    @Override
+    public void addCourse(Course course) {
+        coursesData.addCourse(course);
     }
 
     @Override

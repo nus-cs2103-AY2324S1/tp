@@ -16,14 +16,18 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Courses;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCourses;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CoursesStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCoursesStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -58,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CoursesStorage coursesStorage = new JsonCoursesStorage(userPrefs.getCoursesFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, coursesStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -76,21 +81,32 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyCourses> coursesOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyCourses initialCourseData;
         try {
             addressBookOptional = storage.readAddressBook();
+            coursesOptional = storage.readCourses();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
+            if (!coursesOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getCoursesFilePath()
+                        + " populated with a sample Courses.");
+            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialCourseData = coursesOptional.orElseGet(SampleDataUtil::getSampleCoursesData);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getCoursesFilePath() + " could not be loaded."
+                    + " Will be starting with an empty Courses.");
+            initialCourseData = new Courses();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, initialCourseData);
     }
 
     private void initLogging(Config config) {
@@ -179,6 +195,7 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveCourses(model.getCourses());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

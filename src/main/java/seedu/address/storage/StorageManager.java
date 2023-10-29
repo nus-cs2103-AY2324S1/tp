@@ -3,13 +3,16 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCourses;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.course.Course;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -19,13 +22,16 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private CoursesStorage coursesStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          CoursesStorage coursesStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.coursesStorage = coursesStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -74,5 +80,29 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
+
+    // ================ Courses methods ==============================
+
+    @Override
+    public Path getCoursesFilePath() {
+        return coursesStorage.getCoursesFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyCourses> readCourses() throws DataLoadingException {
+        return coursesStorage.readCourses();
+    }
+
+    @Override
+    public void saveCourses(ReadOnlyCourses courses) throws IOException {
+        saveCourses(courses, coursesStorage.getCoursesFilePath());
+    }
+
+    @Override
+    public void saveCourses(ReadOnlyCourses courses, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        coursesStorage.saveCourses(courses, filePath);
+    }
+
 
 }

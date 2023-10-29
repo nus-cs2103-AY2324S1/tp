@@ -1,5 +1,6 @@
 package seedu.address.model.course;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.course.Course.MESSAGE_CONSTRAINTS;
 import static seedu.address.model.course.Course.isValidCourseCode;
@@ -52,6 +53,19 @@ public class UniqueCourseList implements Iterable<Course> {
      */
     public static ObservableList<Course> getList() {
         return internalUnmodifiableList;
+    }
+
+    public boolean contains(Course toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameCourse);
+    }
+
+    /**
+     * Adds a course to the list.
+     * The course must not already exist in the list.
+     */
+    public void add(Course toAdd) {
+        internalList.add(toAdd);
     }
 
     @Override

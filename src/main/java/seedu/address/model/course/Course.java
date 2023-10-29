@@ -57,6 +57,15 @@ public class Course {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean isSameCourse(Course otherCourse) {
+        if (otherCourse == this) {
+            return true;
+        }
+        return otherCourse != null
+                && otherCourse.courseCode.equals(this.courseCode);
+
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
