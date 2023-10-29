@@ -15,7 +15,7 @@ public class RedoCommand extends Command {
     /**
      * Success message displayed when the redo command is executed successfully.
      */
-    public static final String MESSAGE_SUCCESS = "Redo Successful. ";
+    public static final String MESSAGE_REDO_COMMAND_SUCCESS = "Redo Successful. ";
 
     /**
      * Error message displayed when there is no command available to redo.
@@ -45,7 +45,7 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_NO_COMMAND_TO_REDO_ERROR);
         } else {
             model.redoHistory();
-            return new CommandResult("Command redone.", false, false, false);
+            return new CommandResult(MESSAGE_REDO_COMMAND_SUCCESS, false, false, false);
         }
     }
 

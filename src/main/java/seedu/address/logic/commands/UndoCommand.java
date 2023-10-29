@@ -8,7 +8,7 @@ import seedu.address.model.Model;
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Undo Successful.";
+    public static final String MESSAGE_UNDO_COMMAND_SUCCESS = "Undo Successful.";
     public static final String MESSAGE_NO_COMMAND_TO_UNDO_ERROR = "No command to undo.";
 
     /**
@@ -37,7 +37,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_NO_COMMAND_TO_UNDO_ERROR);
         } else {
             model.undoHistory();
-            return new CommandResult("Command undone.", false, false, false);
+            return new CommandResult(MESSAGE_UNDO_COMMAND_SUCCESS, false, false, false);
         }
     }
 
