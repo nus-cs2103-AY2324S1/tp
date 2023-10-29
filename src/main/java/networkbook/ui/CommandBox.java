@@ -38,7 +38,7 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         String commandText = commandTextField.getText();
-        if (commandText.equals("")) {
+        if (commandText.isEmpty()) {
             return;
         }
 
@@ -83,4 +83,14 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 
+    /**
+     * Automatically fills the command box if there's no user input.
+     * @param command the command to fill
+     */
+    public void autoFillCommandIfEmpty(String command) {
+        if (commandTextField.getText().isEmpty()) {
+            commandTextField.setText(command);
+            commandTextField.positionCaret(commandTextField.getLength());
+        }
+    }
 }

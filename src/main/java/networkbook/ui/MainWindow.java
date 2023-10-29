@@ -4,8 +4,10 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCharacterCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -24,6 +26,13 @@ import networkbook.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String SHORTCUT_HELP = "F1";
+    private static final String SHORTCUT_EXIT = "W";
+    private static final String SHORTCUT_FIND = "F";
+    private static final String SHORTCUT_CREATE = "N";
+    private static final String SHORTCUT_EDIT = "G";
+    private static final String SHORTCUT_UNDO = "U";
+    private static final String SHORTCUT_SAVE = "S";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -37,6 +46,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private MenuItem exitMenuItem;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -73,7 +85,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(helpMenuItem, KeyCombination.valueOf(SHORTCUT_HELP));
+        setAccelerator(exitMenuItem, new KeyCharacterCombination(SHORTCUT_EXIT, KeyCombination.CONTROL_DOWN));
     }
 
     /**
@@ -120,7 +133,28 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
+        setCommandBoxShortcuts(commandBox);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    void setCommandBoxShortcuts(CommandBox commandBox) {
+        Scene scene = primaryStage.getScene();
+        scene.getAccelerators().put(
+            new KeyCharacterCombination(SHORTCUT_FIND, KeyCombination.CONTROL_DOWN), () ->
+                        commandBox.autoFillCommandIfEmpty("find ")
+        );
+        scene.getAccelerators().put(
+                new KeyCharacterCombination(SHORTCUT_EDIT, KeyCombination.CONTROL_DOWN), () ->
+                        commandBox.autoFillCommandIfEmpty("edit ")
+        );
+        scene.getAccelerators().put(
+                new KeyCharacterCombination(SHORTCUT_CREATE, KeyCombination.CONTROL_DOWN), () ->
+                        commandBox.autoFillCommandIfEmpty("create ")
+        );
+        scene.getAccelerators().put(
+                new KeyCharacterCombination(SHORTCUT_UNDO, KeyCombination.CONTROL_DOWN), () ->
+                        commandBox.autoFillCommandIfEmpty("undo")
+        );
     }
 
     /**
