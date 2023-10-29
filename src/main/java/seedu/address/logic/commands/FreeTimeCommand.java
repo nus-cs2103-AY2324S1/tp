@@ -22,15 +22,15 @@ public class FreeTimeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": finds a free time.  "
             + "Parameters: "
             + PREFIX_DAY + "DAY "
-            + PREFIX_DURATION + "HOURS "
+            + PREFIX_DURATION + "MINUTES "
             + PREFIX_BEGIN + "BEGIN "
             + PREFIX_END + "END "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DAY + "Monday "
-            + PREFIX_DURATION+ "2 "
+            + PREFIX_DURATION+ "60 "
             + PREFIX_BEGIN + "0800 "
             + PREFIX_END + "2200 ";
-    public static final String MESSAGE_ERROR = "An error occured when executing the freeTime command.";
+    public static final String MESSAGE_ERROR = "An error occurred when executing the freeTime command.";
     private final Interval toFind;
 
     /**
