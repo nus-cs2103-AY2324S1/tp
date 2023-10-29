@@ -42,7 +42,7 @@ public class GuiSettingsTest {
     }
 
     @Test
-    public void testHashcode() {
+    public void hashcode() {
         GuiSettings guiSettings = new GuiSettings();
         GuiSettings otherGuiSettings1 = new GuiSettings();
 
