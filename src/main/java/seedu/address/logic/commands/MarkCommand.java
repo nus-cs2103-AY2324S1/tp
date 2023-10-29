@@ -128,7 +128,8 @@ public class MarkCommand extends Command {
             Person markedEmployee = markEmployee(employeeToMark);
 
             model.setPerson(employeeToMark, markedEmployee);
-            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, attendanceType.toString().toLowerCase(), employeeToMark.getName()));
+            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,
+                    attendanceType.toString().toLowerCase(), employeeToMark.getName()));
         }
         return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW_MARK,
                 model.getFilteredPersonList().size()), indexes);
@@ -159,9 +160,8 @@ public class MarkCommand extends Command {
         case LATE:
             attendanceStorage.markLate(LocalDate.now());
             break;
-        case PRESENT:
+        default:
             attendanceStorage.markPresent(LocalDate.now());
-
         }
 
         return new Person(name, phone, email, address, bankAccount, joinDate, salary, annualLeave, attendanceStorage);

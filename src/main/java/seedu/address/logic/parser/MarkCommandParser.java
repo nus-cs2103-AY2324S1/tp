@@ -32,7 +32,8 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
             String[] nameKeywords = name.split("\\s+");
-            AttendanceType attendanceType = ParserUtil.parseAttendanceType(argMultimap.getValue(PREFIX_ATTENDANCE_TYPE).get());
+            AttendanceType attendanceType =
+                    ParserUtil.parseAttendanceType(argMultimap.getValue(PREFIX_ATTENDANCE_TYPE).get());
 
             return new MarkCommand(
                     new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),

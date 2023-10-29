@@ -57,7 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         AnnualLeave annualLeave = ParserUtil.parseAnnualLeave(argMultimap.getValue(PREFIX_ANNUAL_LEAVE).get());
         AttendanceStorage attendanceStorage = new AttendanceStorage();
 
-        Person person = new Person(name, phone, email, address, bankAccount, joinDate, salary, annualLeave, attendanceStorage);
+        Person person = new Person(name, phone, email, address,
+                bankAccount, joinDate, salary, annualLeave, attendanceStorage);
 
         return new AddCommand(person);
     }
