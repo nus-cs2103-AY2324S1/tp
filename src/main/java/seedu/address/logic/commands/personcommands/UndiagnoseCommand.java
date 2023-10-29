@@ -28,8 +28,9 @@ public class UndiagnoseCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undiagnoses illnesses of the patient identified "
             + "by the index number used in the displayed person list. \n"
-            + "Parameters: INDEX (index must be a positive integer) "
-            + "[" + PREFIX_ILLNESSES + "ILLNESSES] (input multiple illnesses with a comma between each illness)...\n"
+            + "Notes: You can input multiple illnesses with a comma between each illness.\n"
+            + "Parameters: INDEX "
+            + PREFIX_ILLNESSES + "ILLNESSES\n"
             + "Example: " + COMMAND_WORD
             + " 1 "
             + PREFIX_ILLNESSES + "Fever, Headache";

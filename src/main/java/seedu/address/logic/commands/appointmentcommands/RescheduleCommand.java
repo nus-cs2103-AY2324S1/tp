@@ -29,7 +29,7 @@ public class RescheduleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reschedules the appointment identified "
             + "by the index number used in the displayed appointment list.\n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (index must be a positive integer) "
+            + "Parameters: INDEX "
             + PREFIX_APPOINTMENT_START + "START "
             + PREFIX_APPOINTMENT_END + "END\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -37,8 +37,6 @@ public class RescheduleCommand extends Command {
             + PREFIX_APPOINTMENT_END + "2023/05/02 11:00 ";
 
     public static final String MESSAGE_SUCCESS = "Patient appointment rescheduled: %1$s";
-    public static final String MESSAGE_NO_APPOINTMENT_FOUND = "No such appointment exists in the records";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the records";
 
     private final Index index;
 
