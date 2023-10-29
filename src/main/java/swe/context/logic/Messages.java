@@ -62,7 +62,7 @@ public final class Messages {
     public static final String EMAIL_INVALID =
             "Emails must roughly be of the form \"example_email@foo-domain.sg.\"";
 
-    public static final String UNFORMATTED_ALTENRATECONTACT_INVALID =
+    private static final String UNFORMATTED_ALTERNATECONTACT_INVALID =
             "\"%s\" is not a valid alternate contact. "
             + "Alternate contacts must roughly be of the form \"socialMedia@name\"";
 
@@ -95,7 +95,7 @@ public final class Messages {
      */
     public static String alternateContactInvalid(String invalid) {
         return String.format(
-                Messages.UNFORMATTED_ALTENRATECONTACT_INVALID,
+                Messages.UNFORMATTED_ALTERNATECONTACT_INVALID,
                 invalid
         );
     }
