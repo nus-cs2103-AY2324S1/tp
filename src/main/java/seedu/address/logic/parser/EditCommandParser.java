@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_BLANK_ARGUMENTS;
+import static seedu.address.logic.Messages.MESSAGE_ERROR_STATE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -17,9 +17,9 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EditCommand.EditSpecialistDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.MedicalHistory;
@@ -37,44 +37,35 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(PersonType personType, String args) throws ParseException {
-        requireNonNull(args);
         if (personType.equals(PersonType.PATIENT)) {
             return parsePatient(args);
-        } else if (personType.equals(PersonType.SPECIALIST)) {
-            return parseSpecialist(args);
-        } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_PERSON_TYPE));
         }
+        if (personType.equals(PersonType.SPECIALIST)) {
+            return parseSpecialist(args);
+        }
+        throw new ParseException(MESSAGE_ERROR_STATE);
     }
 
     private EditCommand parsePatient(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_TAG, PREFIX_AGE, PREFIX_MEDICALHISTORY);
+
+        if (!argMultimap.getPreamble().isBlank() && !args.isBlank()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE_PATIENT));
+        }
+
+        if (argMultimap.anyValuesBlank(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_AGE)) {
+            throw new ParseException(String.format(MESSAGE_BLANK_ARGUMENTS,
+                    EditCommand.MESSAGE_USAGE_PATIENT));
+        }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_AGE);
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditCommand.MESSAGE_USAGE_PATIENT), pe);
-        }
-
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPatientDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPatientDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPatientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
+        parseCommonPersonForEdit(editPatientDescriptor, argMultimap);
 
         if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
             editPatientDescriptor.setAge(ParserUtil.parseAge(argMultimap
@@ -82,40 +73,34 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
         }
         parseMedicalHistoriesForEdit(argMultimap.getAllValues(PREFIX_MEDICALHISTORY))
                 .ifPresent(editPatientDescriptor::setMedicalHistory);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-        return new EditCommand(index, editPatientDescriptor);
+        return new EditCommand(editPatientDescriptor);
     }
+
     private EditCommand parseSpecialist(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION,
                         PREFIX_TAG, PREFIX_SPECIALTY);
 
+        if (!argMultimap.getPreamble().isBlank() && !args.isBlank()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE_SPECIALIST));
+        }
+
+        if (argMultimap.anyValuesBlank(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_SPECIALTY)) {
+            throw new ParseException(String.format(MESSAGE_BLANK_ARGUMENTS,
+                    EditCommand.MESSAGE_USAGE_SPECIALIST));
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_LOCATION, PREFIX_SPECIALTY);
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditCommand.MESSAGE_USAGE_SPECIALIST), pe);
-        }
-
         EditSpecialistDescriptor editSpecialistDescriptor = new EditSpecialistDescriptor();
+        parseCommonPersonForEdit(editSpecialistDescriptor, argMultimap);
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editSpecialistDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editSpecialistDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editSpecialistDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             editSpecialistDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
         }
@@ -123,12 +108,30 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
             editSpecialistDescriptor.setSpecialty(ParserUtil.parseSpecialty(
                     argMultimap.getValue(PREFIX_SPECIALTY).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editSpecialistDescriptor::setTags);
 
         if (!editSpecialistDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-        return new EditCommand(index, editSpecialistDescriptor);
+        return new EditCommand(editSpecialistDescriptor);
+    }
+
+    /**
+     * Creates an {@code EditPersonDescriptor} by checking if each attribute of a {@code Person}
+     * is present within the user input arguments.
+     */
+    private EditPersonDescriptor parseCommonPersonForEdit(EditPersonDescriptor editPersonDescriptor,
+                                                          ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        return editPersonDescriptor;
     }
 
     /**
@@ -155,7 +158,6 @@ public class EditCommandParser implements ParserComplex<EditCommand> {
     private Optional<Set<MedicalHistory>> parseMedicalHistoriesForEdit(Collection<String> medicalHistories)
             throws ParseException {
         assert medicalHistories != null;
-
         if (medicalHistories.isEmpty()) {
             return Optional.empty();
         }
