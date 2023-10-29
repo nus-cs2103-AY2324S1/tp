@@ -271,6 +271,40 @@ Finally, the update to the internalList will change the view of the displayed li
     * Pros: Allows the `list` command to list all employees by the order they were added.
     * Cons: Different lists in the `ModelManager` class may cause inconsistencies when `find` and `sort` commands are called consecutively.
 
+### Report feature
+
+#### Proposed Implementation
+
+The proposed reporting mechanism is facilitated by `ReportCommandParser`. It implements the following operations:
+
+* `ReportCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `ReportCommand` object with the parsed employee ID.
+
+The `ReportCommand` object then communicates with the `Model` API by calling the following methods:
+
+* `Model#getEmployee(EmployeeId)` — Gets the employee with the given employee ID from the existing employee list.
+
+Given below is an example usage scenario where the user attempts to generate a report for an employee with ID EID1234-5678.
+
+The user keys in `report EID1234-5678`
+
+the `report` command will call `ReportCommandParser#parse()`, which in turn calls `Model#getEmployee()`
+which then calls `UniqueEmployeeList#getEmployee()`.
+This will return the employee with the given employee ID.
+
+Finally, the `ReportCommand` object will call `ReportCommand#execute()` which will generate a report for the employee.
+
+#### Design considerations:
+
+**Aspect: How report executes:**
+
+* **Alternative 1 (current choice):** Gets the employee with the given employee ID directly
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Change UI to display performance metrics of employees.
+    * Pros: Will be able to display performance metrics of all employees at once.
+    * Cons: May make the UI more cluttered.
+
 ### Reset feature
 
 #### Proposed Implementation
@@ -533,6 +567,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case returns back to step 1.
 
 * 1b. No attribute matches given attribute.
+    * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+**Use case: Report employee**
+
+**MSS**
+
+1.  User requests to generate a report of employee with given employee ID
+2.  HouR returns the report of employee with given employee ID
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out employee ID.
+    * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. No employee matches given employee ID.
     * 1b1. HouR shows an error message.
 
   Use case returns back to step 1.
