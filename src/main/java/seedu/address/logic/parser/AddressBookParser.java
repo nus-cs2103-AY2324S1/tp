@@ -19,7 +19,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IsPaidCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PaidCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RevenueCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -86,6 +88,12 @@ public class AddressBookParser {
         case IsPaidCommand.COMMAND_WORD:
             return new IsPaidCommandParser().parse(arguments);
 
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
         case RevenueCommand.COMMAND_WORD:
             return new RevenueCommand();
 
@@ -94,5 +102,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
