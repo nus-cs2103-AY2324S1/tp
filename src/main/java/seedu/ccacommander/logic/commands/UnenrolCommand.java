@@ -73,6 +73,8 @@ public class UnenrolCommand extends Command {
         } catch (EnrolmentNotFoundException ee) {
             throw new CommandException(Messages.MESSAGE_ENROLMENT_NOT_FOUND);
         }
+
+        assert enrolmentToDelete != null : "The enrolment to delete should be null";
         model.deleteEnrolment(enrolmentToDelete);
         model.commit(String.format(MESSAGE_COMMIT, enrolmentToDelete.getMemberAndEventEnrolment()));
         return new CommandResult(String.format(MESSAGE_DELETE_ENROLMENT_SUCCESS, Messages.format(enrolmentToDelete)));
