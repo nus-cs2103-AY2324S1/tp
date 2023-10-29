@@ -73,7 +73,10 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_DATE);
         }
 
+        model.purgeAddressBook();
         model.addPerson(toAdd);
+        model.commitAddressBook();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
