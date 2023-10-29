@@ -7,10 +7,8 @@ participant ":FlashcardBox" as FlashcardBox LOGIC_COLOR
 participant ":MainWindow" as MainWindow LOGIC_COLOR
 participant "logic:Logic" as Logic LOGIC_COLOR
 participant ":FlashlingoParser" as FlashlingoParser LOGIC_COLOR
-participant ":YesCommand" as YesCommand LOGIC_COLOR
-participant ":ResultDisplay" as ResultDisplay LOGIC_COLOR
+participant "command:YesCommand" as YesCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant ":FlashCard" as FlashCard LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -29,39 +27,21 @@ activate Logic
 
 Logic -> FlashlingoParser : parseCommand("yes")
 activate FlashlingoParser
-return Command
+return command
 
 Logic -> YesCommand : execute(<<model>>)
 activate YesCommand
 YesCommand -> Model : rememberWord(true)
 activate Model
-Model -> FlashCard : updateLevel(true)
-activate FlashCard
-FlashCard --> Model
-deactivate FlashCard
+
 return
 return commandResult
 return commandResult
 
-alt commandResult.isShowHelp()
-MainWindow -> MainWindow ++ : handleHelp()
-deactivate MainWindow
-else commandResult.isExit()
-MainWindow -> MainWindow ++ : handleExit()
-deactivate MainWindow
-else commandResult.isSwitchTheme()
-MainWindow -> MainWindow ++ : handleSwitchTheme()
-MainWindow --> MainWindow : commandResult
-deactivate MainWindow
-end
-
 MainWindow -> CommandResult : getFeedbackToUser()
 activate CommandResult
-CommandResult --> ResultDisplay : userFeedback
-deactivate CommandResult
-activate ResultDisplay
-ResultDisplay --> MainWindow
-deactivate ResultDisplay
+return
+
 
 MainWindow --> FlashcardBox
 deactivate MainWindow
