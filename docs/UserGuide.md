@@ -303,17 +303,17 @@ Displays a list of all tutors in the address book in a table format.
     </div>
 
 
-#### Locating tutors by name: `find`
+#### Locating tutors by name: `find-t`
 
 Find tutors whose names contain any of the given keywords.
 
 ![find tutor](images/findTutor.png)
 
-**Format**: `find KEYWORD [MORE_KEYWORDS]`
+**Format**: `find-t KEYWORD [MORE_KEYWORDS]`
 
 **Examples**:
-* `find John` returns `John Smith` and `John Doe`
-* `find Alex David Li` returns `Alex David Li`
+* `find-t John` returns `John Smith` and `John Doe`
+* `find-t Alex David Li` returns `Alex David Li`
 
 **Acceptable values for each parameter**:
 * `KEYWORD`: Any input accepted
@@ -547,6 +547,61 @@ Deletes a schedule in the address book based on their index number in the table 
 * `Invalid value in parameter SCHEDULE_INDEX`: Parameter given is not a numerical value.
 * `Missing parameter SCHEDULE_INDEX`: A numerical value is not provided when calling the command `delete-s`.
 
+### System Feature
+
+Beyond just providing you with powerful features related to tutors and schedule tracking, TutorConnect offers some 
+additional system features to take your experience with us to the next level!
+
+#### Changing theme: `theme`
+
+Want a change of scenery? TutorConnect supports 3 colour palettes for you to choose from! No more looking at a 
+boring interface.
+
+![change theme](images/changeTheme.png)
+
+**Format**: `theme NEW_THEME`
+
+**Example**:
+* `theme blue`
+* `theme light`
+
+**Acceptable inputs**:
+* `NEW_THEME`: Only one of the following themes: `dark`, `light`, `blue`.
+
+**Expected output**:
+* `Changed theme to blue`
+
+**Error messages**:
+* `Invalid command format!`: New theme field was left blank and not specified.
+* `Theme provided does not exist`: New theme field was not `dark`, `light` or `blue`
+
+
+#### Clearing all data: `clear`
+
+Clears all data in TutorConnect.
+
+More details coming soon...
+
+<div markdown="block" class="alert alert-warning">
+
+**:warning: Warning**<br>
+
+This action is irreversible! Do not enter the command unless you are very sure.
+
+</div>
+
+#### Help: `help`
+
+More details coming soon...
+
+<div markdown="block" class="alert alert-success">
+
+**:bulb: Tip**<br>
+
+The help window can also be accessed by the button above the command box!
+
+</div>
+
 [Back To Top](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -559,13 +614,13 @@ question!
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 **Q**: What if I make a mistake when typing a command?<br>
-**A**: Don't worry! If you make a mistake while typing a command, Tutor Connect will provide an error message to guide you. Simply correct the command and try again.
+**A**: Don't worry! If you make a mistake while typing a command, TutorConnect will provide an error message to guide you. Simply correct the command and try again.
 
 **Q**: Can I view schedules in a different time zone?<br>
-**A**: Currently, Tutor Connect displays schedules in your local time zone. If you need to coordinate with tutors in different time zones, you may consider using a world clock or time zone converter alongside the application.
+**A**: Currently, TutorConnect displays schedules in your local time zone. If you need to coordinate with tutors in different time zones, you may consider using a world clock or time zone converter alongside the application.
 
-**Q**: Is there a way to export my data from Tutor Connect?<br>
-**A**: Currently, Tutor Connect doesn't have an export feature. However, you can manually copy the `data.json` file from the "Tutor Connect" folder for backup or transfer purposes.
+**Q**: Is there a way to export my data from TutorConnect?<br>
+**A**: Currently, TutorConnect doesn't have an export feature. However, you can manually copy the `data.json` file from the "TutorConnect" folder for backup or transfer purposes.
 
 **Q**: How do I report a bug or suggest a feature?<br>
 **A**: We value your feedback! Please visit our [Github repository](https://github.com/AY2324S1-CS2103T-T17-3/tp) and open an issue to report a bug or make a feature request.
@@ -650,13 +705,14 @@ The domain name must:
 | **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`    |
 | **List Tutor**      | `list-t`                                                                                                     |
 | **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                |
-| **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                   |
+| **Find Tutor**      | `find-t KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-t James Jake`                                               |
 | **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s ti/1 st/2023-09-15T09:00 e/2023-09-15T11:00` |
 | **Edit Schedule**   | `edit-s SCHEDULE_INDEX [st/START_TIME] [etEND_TIME]` <br> e.g., `edit-s 1 st/2023-09-15T13:00`               |
 | **List Schedule**   | `list-s`, `list-s KEYWORD [MORE_KEYWORDS]` <br> e.g., `list-s Alice Pauline`                                 |
 | **Mark Schedule**   | `mark SCHEDULE_INDEX m/SCHEDULE_STATUS`<br> e.g., `mark 3 m/0`                                               |
 | **Unmark Schedule** | `unmark SCHEDULE_INDEX`<br> e.g., `unmark 3`                                                                 |
 | **Delete Schedule** | `delete-s SCHEDULE_INDEX`<br> e.g., `delete-s 3`                                                             |
+| **Change Theme**    | `theme NEW_THEME` <br> e.g., `theme dark`                                                                    |
 | **Clear**           | `clear`                                                                                                      |
 
 [Back To Top](#table-of-contents)
