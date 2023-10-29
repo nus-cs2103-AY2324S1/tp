@@ -63,8 +63,7 @@ public class DeleteInterviewCommand extends Command {
 
         applicantToDeleteFrom.deleteInterview(interviewToDelete);
 
-        model.updateFilteredApplicantList(PREDICATE_HIDE_ALL_APPLICANTS);
-        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        model.refreshApplicantList();
         return new CommandResult(
                 String.format(MESSAGE_DELETE_INTERVIEW_SUCCESS, Messages.format(applicantToDeleteFrom)));
     }

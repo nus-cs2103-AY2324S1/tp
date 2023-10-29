@@ -66,16 +66,8 @@ public class AddInterviewCommand extends Command {
         }
 
         applicantToEdit.addInterview(interviewToAdd);
-        /*
-         This is a workaround to javaFX not updating the list shown to the user unless the predicate is changed
-         Possible fix in the future is to read the current predicate, then store it to be reused
-         Might be an issue when implementing filter()
-         TODO:
-         store current predicate in temp variable
-         use stored predicate when refreshing the filtered list
-        */
-        model.updateFilteredApplicantList(PREDICATE_HIDE_ALL_APPLICANTS);
-        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+
+        model.refreshApplicantList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(applicantToEdit)));
     }
 
