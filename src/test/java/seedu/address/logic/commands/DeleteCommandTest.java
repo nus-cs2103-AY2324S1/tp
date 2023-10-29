@@ -197,7 +197,7 @@ public class DeleteCommandTest {
         CommandResult undoResult = deletePersonCommand.undo(model);
 
         assertTrue(model.hasPerson(personToDelete));
-        assertEquals(String.format(DeleteCommand.MESSAGE_UNDO_DELETE_ENTIRE_PERSON_SUCCESS,
+        assertEquals(String.format(DeleteCommand.MESSAGE_UNDO_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete)), undoResult.getFeedbackToUser());
     }
 

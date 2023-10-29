@@ -44,7 +44,7 @@ public class ClearCommandTest {
         // Undo the command
         CommandResult undoResult = clearCommand.undo(model);
         assertEquals(expectedModel, model);
-        assertEquals(ClearCommand.MESSAGE_UNDO_SUCCESS, undoResult.getFeedbackToUser());
+        assertEquals(ClearCommand.MESSAGE_UNDO_CLEAR_SUCCESS, undoResult.getFeedbackToUser());
     }
 
     @Test
@@ -61,7 +61,7 @@ public class ClearCommandTest {
         // Undo the command
         CommandResult undoResult = clearCommand.undo(model);
         assertEquals(model, expectedModel);
-        assertEquals(ClearCommand.MESSAGE_UNDO_SUCCESS, undoResult.getFeedbackToUser());
+        assertEquals(ClearCommand.MESSAGE_UNDO_CLEAR_SUCCESS, undoResult.getFeedbackToUser());
     }
 
 }
