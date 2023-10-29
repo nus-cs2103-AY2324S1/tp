@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_DATE_NUMBER_NOT_MATCHING;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -43,6 +44,13 @@ class ImportCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, fileName2, new ImportCommand(expectedList2, fileName2));
+
+        String fileName3 = relativePath + "/" + "test_data_successful_with_enrol_dates.csv";
+        List<Student> expectedList3 = new ArrayList<>();
+        expectedList3.add(AMY);
+        expectedList3.add(BOB);
+
+        assertParseSuccess(parser, fileName3, new ImportCommand(expectedList3, fileName3));
     }
 
     @Test
@@ -60,6 +68,8 @@ class ImportCommandParserTest {
         String fileName3 = relativePath + "/" + "test_data_doesnt_exists.csv";
         assertParseFailure(parser, fileName3, MESSAGE_ERROR_READING_FILE + fileName3);
 
+        String fileName4 = relativePath + "/" + "test_data_dates_subjects_mismatch.csv";
+        assertParseFailure(parser, fileName4, MESSAGE_DATE_NUMBER_NOT_MATCHING);
     }
 
 }
