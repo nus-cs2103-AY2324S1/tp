@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
+import seedu.flashlingo.model.flashcard.FlashCard;
 
 /**
  * Indicates user has not yet memorized the word.
@@ -29,7 +30,7 @@ public class NoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.rememberWord(false);
-        String response = model.nextReviewWord();
+        FlashCard response = model.nextReviewWord();
         return new CommandResult(MESSAGE_SUCCESS + "\n" + response);
     }
     @Override

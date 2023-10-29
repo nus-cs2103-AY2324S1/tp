@@ -22,8 +22,7 @@ public class StartCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        SessionManager.getInstance().setSession(true);
-        model.nextReviewWord();
+        model.startSession();
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 

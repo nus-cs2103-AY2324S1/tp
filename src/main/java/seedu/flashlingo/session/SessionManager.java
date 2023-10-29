@@ -6,6 +6,7 @@ package seedu.flashlingo.session;
 public class SessionManager {
     private static SessionManager instance = null;
     private static boolean isReview = false;
+    private static boolean isJustStarted = false;
 
     private SessionManager() {
         // Private constructor to prevent external instantiation.
@@ -24,5 +25,11 @@ public class SessionManager {
 
     public boolean isReviewSession() {
         return isReview;
+    }
+    public void setJustStarted(boolean editedJustStarted) {
+        isJustStarted = editedJustStarted;
+    }
+    public boolean isJustStarted() {
+        return isJustStarted;
     }
 }

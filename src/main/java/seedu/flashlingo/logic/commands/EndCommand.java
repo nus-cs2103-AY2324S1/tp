@@ -25,8 +25,7 @@ public class EndCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        SessionManager.getInstance().setSession(false);
-        model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        model.endSession();
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 

@@ -152,7 +152,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String nextReviewWord() throws CommandException {
+    public FlashCard nextReviewWord() throws CommandException {
         updateFilteredFlashCardList(new WordOverduePredicate());
         if (filteredFlashCards.size() == 0) {
             SessionManager.getInstance().setSession(false);
@@ -162,8 +162,7 @@ public class ModelManager implements Model {
         FlashCard toBeReviewed = getFilteredFlashCardList().get(0);
         Predicate<FlashCard> t = new NextReviewWordPredicate(toBeReviewed);
         updateFilteredFlashCardList(t);
-        return "\nThe next word is: ";
-
+        return toBeReviewed;
     }
 
     @Override
@@ -171,7 +170,6 @@ public class ModelManager implements Model {
         FlashCard flashCard = getFilteredFlashCardList().get(0);
         flashCard.updateLevel(isUpdated);
     }
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -193,6 +191,30 @@ public class ModelManager implements Model {
     public void setReviewWord(Predicate<FlashCard> predicate, FlashCard flashCard) {
         filteredFlashCards.setPredicate(predicate);
         addFlashCard(flashCard);
+    }
+    @Override
+    public void startSession() throws CommandException {
+        SessionManager.getInstance().setSession(true);
+        updateFilteredFlashCardList(new WordOverduePredicate());
+        if (getFilteredFlashCardList().size() == 0) {
+            SessionManager.getInstance().setSession(false);
+            updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+            throw new CommandException("You have no more words to review!");
+        }
+        updateFilteredFlashCardList(new NextReviewWordPredicate(getFilteredFlashCardList().get(0)));
+        SessionManager.getInstance().setJustStarted(true);
+        System.out.println(getFilteredFlashCardList().get(0));
+    }
+    @Override
+    public void endSession() {
+        SessionManager.getInstance().setSession(false);
+        updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+    }
+
+    @Override
+    public boolean hasNextRound() {
+        updateFilteredFlashCardList(new WordOverduePredicate());
+        return getFilteredFlashCardList().size() != 0;
     }
     @Override
     public boolean equals(Object other) {
