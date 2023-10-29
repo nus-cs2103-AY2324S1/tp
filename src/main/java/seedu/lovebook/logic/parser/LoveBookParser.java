@@ -58,7 +58,7 @@ public class LoveBookParser {
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
-
+        System.out.println("Command word: " + commandWord + "; Arguments: " + arguments);
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -92,6 +92,7 @@ public class LoveBookParser {
             return new FilterCommandParser().parse(arguments);
 
         case RandomCommand.COMMAND_WORD:
+            System.out.println("Random command called");
             return new RandomCommand();
 
         case ListPrefsCommand.COMMAND_WORD:
