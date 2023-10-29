@@ -2,10 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,8 +19,8 @@ public class Patient extends Person {
     // Patient specific fields
     private final Condition condition;
     private final BloodType bloodType;
-    //private final Doctor doctor;    to be implemented after Doctor class created
-    private Phone emergencyContact;
+    private final Set<Appointment> appointments = new HashSet<>();
+    private final Phone emergencyContact;
 
     /**
      * Every field must be present and not null.
@@ -42,6 +44,24 @@ public class Patient extends Person {
 
     public Phone getEmergencyContact() {
         return emergencyContact;
+    }
+
+    /**
+     * Retrieves the list of patients stored in this medical facility.
+     *
+     * @return An ArrayList containing the patients currently registered in the facility.
+     */
+    public Set<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    /**
+     * Adds a new patient to the medical facility's list of patients.
+     *
+     * @param appointment The Patient object representing the individual to be added.
+     */
+    public void addAppointment(Appointment appointment) {
+        this.appointments.add(appointment);
     }
 
     /**
@@ -85,7 +105,8 @@ public class Patient extends Person {
                 && ic.equals(otherPatient.ic)
                 && tags.equals(otherPatient.tags)
                 && condition.equals(otherPatient.condition)
-                && bloodType.equals(otherPatient.bloodType);
+                && bloodType.equals(otherPatient.bloodType)
+                && appointments.equals(otherPatient.appointments);
     }
 
     @Override
@@ -107,9 +128,9 @@ public class Patient extends Person {
                 .add("nric", ic)
                 .add("condition", condition)
                 .add("bloodType", bloodType)
+                .add("appointments", appointments)
                 .add("tags", tags)
                 .toString();
     }
-
 }
 

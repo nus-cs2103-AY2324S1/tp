@@ -15,6 +15,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -120,6 +122,11 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final EditCommand.EditPersonDescriptor DESC_CHERYL;
     private static final EditCommand.EditPersonDescriptor DESC_DEREK;
+    private static final String VALID_DATE_1_DESC = "2022-02-14 13:30:00";
+    private static final String VALID_DATE_2_DESC = "2022-02-28 13:30:00";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final LocalDateTime VALID_DATE_1 = LocalDateTime.parse(VALID_DATE_1_DESC, formatter);
+    public static final LocalDateTime VALID_DATE_2 = LocalDateTime.parse(VALID_DATE_2_DESC, formatter);
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

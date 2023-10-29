@@ -106,7 +106,7 @@ public class PatientTest {
                 + ", emergency contact=" + ALICE.getEmergencyContact() + ", email=" + ALICE.getEmail() + ", address="
                 + ALICE.getAddress() + ", remark=" + ALICE.getRemark() + ", gender=" + ALICE.getGender() + ", nric="
                 + ALICE.getIc() + ", condition=" + ALICE.getCondition() + ", bloodType=" + ALICE.getBloodType()
-                + ", tags=" + ALICE.getTags() + "}";
+                + ", appointments=" + ALICE.getAppointments() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
