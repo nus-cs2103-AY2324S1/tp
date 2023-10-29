@@ -5,10 +5,10 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.commands.CourseCommand;
 
 public class FilterCommandParserTest {
-    private FilterCommandParser parser = new FilterCommandParser();
+    private CourseCommandParser parser = new CourseCommandParser();
 
     @Test
     public void parse_validArgs_returnsFilterCommand() {
@@ -18,10 +18,10 @@ public class FilterCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "add tg/2",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseCommand.MESSAGE_USAGE));
     }
 }

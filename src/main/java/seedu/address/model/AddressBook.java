@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -15,6 +16,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
+    private String courseCode;
     private final UniquePersonList persons;
 
     /*
@@ -28,14 +30,42 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    /**
+     * Creates an empty AddressBook with the given {@code courseCode}.
+     */
+    public AddressBook(String courseCode) {
+        requireNonNull(courseCode);
+        this.courseCode = courseCode.toUpperCase();
+    }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons in the {@code toBeCopied} and {@code courseCode}.
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
-        this();
+    public AddressBook(String courseCode, ReadOnlyAddressBook toBeCopied) {
+        requireNonNull(courseCode);
+        requireNonNull(toBeCopied);
+
+        this.courseCode = courseCode.toUpperCase();
         resetData(toBeCopied);
+    }
+
+    /**
+     * Creates an AddressBook using the Persons in the {@code toBeCopied}.
+     */
+    public static AddressBook createFromAddressBook(ReadOnlyAddressBook toBeCopied) {
+        requireNonNull(toBeCopied);
+        return new AddressBook(toBeCopied.getCourseCode(), toBeCopied);
+    }
+
+    ///// course level operations
+    public void setCourseCode(String courseCode) {
+        requireNonNull(courseCode);
+        this.courseCode = courseCode.toUpperCase();
+    }
+
+    @Override
+    public String getCourseCode() {
+        return courseCode;
     }
 
     //// list overwrite operations
@@ -54,6 +84,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
+        setCourseCode(newData.getCourseCode());
         setPersons(newData.getPersonList());
     }
 
@@ -120,11 +151,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && courseCode.equalsIgnoreCase(otherAddressBook.courseCode);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, courseCode);
     }
 }

@@ -16,11 +16,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CourseCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -108,21 +108,13 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_filter() throws Exception {
+    public void parseCommand_course() throws Exception {
         assertTrue(parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T") instanceof FilterCommand);
+                CourseCommand.COMMAND_WORD + " create coursetg/CS2103T") instanceof CourseCommand);
         assertTrue(parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T") instanceof FilterCommand);
+                CourseCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof CourseCommand);
         assertTrue(parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " add coursetg/CS2103T tg/1") instanceof FilterCommand);
-        assertTrue(parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof FilterCommand);
-        assertTrue(parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T") instanceof FilterCommand);
-        assertTrue(parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " delete coursetg/CS2103T tg/1") instanceof FilterCommand);
-        assertTrue(parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " clear") instanceof FilterCommand);
+                CourseCommand.COMMAND_WORD + " switch coursetg/CS2103T") instanceof CourseCommand);
     }
 
     @Test

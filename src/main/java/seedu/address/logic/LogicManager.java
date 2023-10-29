@@ -5,6 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
@@ -52,7 +53,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveAddressBooks(model.getAddressBookManager());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -65,6 +66,11 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
+    }
+
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return model.getUnfilteredPersonList();
     }
 
     @Override
@@ -95,5 +101,20 @@ public class LogicManager implements Logic {
     @Override
     public void setFilterSettings(FilterSettings filterSettings) {
         model.setFilterSettings(filterSettings);
+    }
+
+    @Override
+    public ObservableList<String> getCourseList() {
+        return model.getCourseList();
+    }
+
+    @Override
+    public ObservableStringValue getObservableCourseCode() {
+        return model.getObservableCourseCode();
+    }
+
+    @Override
+    public void setActiveAddressBook(String courseCode) {
+        model.setActiveAddressBook(courseCode);
     }
 }

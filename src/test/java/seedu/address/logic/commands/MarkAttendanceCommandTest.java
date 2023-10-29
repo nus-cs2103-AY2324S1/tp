@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PERSON_
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_PRESENT;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_UPDATED_SUCCESS;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
 
 import java.util.List;
 
@@ -30,9 +30,8 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class MarkAttendanceCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookManager(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBookManager(), new UserPrefs());
 
     /**
      * Test for marking attendance as present using a valid person's name.

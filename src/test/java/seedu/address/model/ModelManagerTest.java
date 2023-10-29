@@ -18,6 +18,7 @@ import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.AddressBookManagerBuilder;
 
 public class ModelManagerTest {
 
@@ -28,7 +29,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new FilterSettings(), modelManager.getFilterSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new AddressBookManager(), modelManager.getAddressBookManager());
     }
 
     @Test
@@ -104,19 +105,26 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getUnfilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getUnfilteredPersonList().remove(0));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        AddressBook addressBook = new AddressBookBuilder("Test Course Code")
+                .withPerson(ALICE).withPerson(BENSON).build();
+        AddressBookManager addressBookManager = new AddressBookManagerBuilder().withAddressBook(addressBook).build();
+        AddressBookManager differentAddressBookManager = new AddressBookManager();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBookManager, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBookManager, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -129,12 +137,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBookManager, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.addFilter(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBookManager, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.clearFilters();
@@ -142,6 +150,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBookManager, differentUserPrefs)));
     }
 }

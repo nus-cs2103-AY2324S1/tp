@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ import seedu.address.model.tag.Tag;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookManager(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -42,7 +42,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBookManager(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -55,7 +55,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(tag, pred);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_NO_TAG_SUCCESS);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBookManager(), new UserPrefs());
         List<Person> personsToDelete = new ArrayList<>(expectedModel.getFilteredPersonList());
 
         for (Person p : personsToDelete) {
@@ -84,8 +84,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
+        Model expectedModel = new ModelManager(model.getAddressBookManager(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 

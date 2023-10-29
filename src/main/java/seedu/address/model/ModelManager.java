@@ -7,12 +7,14 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.predicate.SerializablePredicate;
 
 /**
@@ -21,26 +23,31 @@ import seedu.address.model.predicate.SerializablePredicate;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final AddressBookManager addressBookManager;
     private final UserPrefs userPrefs;
+    private final UniquePersonList uniquePersonList;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBookManager and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBookManager addressBookManager, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBookManager, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book manager: " + addressBookManager + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBookManager = new AddressBookManager(addressBookManager);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredPersons.setPredicate(this.userPrefs.getFilterSettings().getComposedFilter());
+        this.uniquePersonList = new UniquePersonList();
+        this.filteredPersons = new FilteredList<>(uniquePersonList.asUnmodifiableObservableList());
+
+        if (getAddressBook() != null) {
+            updateFilteredPersonList();
+        }
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBookManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -93,40 +100,92 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        addressBookManager.setAddressBook(addressBook);
+        updateFilteredPersonList();
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return addressBookManager.getActiveAddressBook();
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return getActiveAddressBook().hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        getActiveAddressBook().removePerson(target);
+        updateFilteredPersonList();
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        // TODO: Revise if this is intended behaviour
-        clearFilters();
+        requireNonNull(person);
+        getActiveAddressBook().addPerson(person);
+        updateFilteredPersonList();
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
+        getActiveAddressBook().setPerson(target, editedPerson);
+        updateFilteredPersonList();
+    }
 
-        addressBook.setPerson(target, editedPerson);
+    //=========== AddressBookManager =========================================================================
+
+    @Override
+    public ReadOnlyAddressBookManager getAddressBookManager() {
+        return addressBookManager;
+    }
+
+    private AddressBook getActiveAddressBook() {
+        return addressBookManager.getActiveAddressBook();
+    }
+
+    @Override
+    public void addAddressBook(ReadOnlyAddressBook addressBook) {
+        addressBookManager.addAddressBook(addressBook);
+    }
+
+    @Override
+    public void deleteAddressBook(String courseCode) {
+        addressBookManager.removeAddressBook(courseCode);
+    }
+
+    @Override
+    public void setActiveAddressBook(String courseCode) {
+        addressBookManager.setActiveAddressBook(courseCode);
+        updateFilteredPersonList();
+    }
+
+    @Override
+    public boolean hasAddressBook(String courseCode) {
+        return addressBookManager.hasAddressBook(courseCode);
+    }
+
+    @Override
+    public ObservableList<String> getCourseList() {
+        return addressBookManager.getCourseList();
+    }
+
+    @Override
+    public ObservableStringValue getObservableCourseCode() {
+        return addressBookManager.getObservableCourseCode();
     }
 
     //=========== Filtered Person List Accessors =============================================================
+    private void updateFilteredPersonList() {
+        uniquePersonList.setPersons(getAddressBook().getPersonList());
+    }
+
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return uniquePersonList.asUnmodifiableObservableList();
+    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -173,7 +232,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return addressBookManager.equals(otherModelManager.addressBookManager)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }

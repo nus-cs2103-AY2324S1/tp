@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.value.ObservableStringValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.FilterSettings;
 import seedu.address.commons.core.GuiSettings;
@@ -31,6 +32,9 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Returns an unmodifiable view of the unfiltered list of persons */
+    ObservableList<Person> getUnfilteredPersonList();
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
@@ -58,4 +62,19 @@ public interface Logic {
      * Sets the user prefs' filter settings.
      */
     void setFilterSettings(FilterSettings filterSettings);
+
+    /**
+     * Returns the user course list.
+     */
+    ObservableList<String> getCourseList();
+
+    /**
+     * Returns the selected course.
+     */
+    ObservableStringValue getObservableCourseCode();
+
+    /**
+     * Sets the active address book.
+     */
+    void setActiveAddressBook(String courseCode);
 }
