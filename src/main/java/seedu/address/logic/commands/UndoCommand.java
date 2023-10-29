@@ -44,6 +44,7 @@ public class UndoCommand extends Command {
      * @param stepsToUndo The number of steps to undo.
      */
     public UndoCommand(int stepsToUndo) {
+        assert stepsToUndo > 0;
         this.stepsToUndo = stepsToUndo;
     }
 
