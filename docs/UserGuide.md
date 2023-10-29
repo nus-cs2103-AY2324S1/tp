@@ -303,17 +303,17 @@ Displays a list of all tutors in the address book in a table format.
     </div>
 
 
-#### Locating tutors by name: `find`
+#### Locating tutors by name: `find-t`
 
 Find tutors whose names contain any of the given keywords.
 
 ![find tutor](images/findTutor.png)
 
-**Format**: `find KEYWORD [MORE_KEYWORDS]`
+**Format**: `find-t KEYWORD [MORE_KEYWORDS]`
 
 **Examples**:
-* `find John` returns `John Smith` and `John Doe`
-* `find Alex David Li` returns `Alex David Li`
+* `find-t John` returns `John Smith` and `John Doe`
+* `find-t Alex David Li` returns `Alex David Li`
 
 **Acceptable values for each parameter**:
 * `KEYWORD`: Any input accepted
@@ -650,7 +650,7 @@ The domain name must:
 | **Edit Tutor**      | `edit-t TUTOR_INDEX n/NAME p/PHONE_NUMBER e/EMAIL`<br> e.g.,`edit-t 2 n/James Lee e/jameslee@example.com`    |
 | **List Tutor**      | `list-t`                                                                                                     |
 | **Delete Tutor**    | `delete-t TUTOR_INDEX`<br> e.g., `delete-t 3`                                                                |
-| **Find Tutor**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                   |
+| **Find Tutor**      | `find-t KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-t James Jake`                                               |
 | **Add Schedule**    | `add-s TUTOR_INDEX st/START_TIME et/END_TIME` <br> e.g., `add-s ti/1 st/2023-09-15T09:00 e/2023-09-15T11:00` |
 | **Edit Schedule**   | `edit-s SCHEDULE_INDEX [st/START_TIME] [etEND_TIME]` <br> e.g., `edit-s 1 st/2023-09-15T13:00`               |
 | **List Schedule**   | `list-s`, `list-s KEYWORD [MORE_KEYWORDS]` <br> e.g., `list-s Alice Pauline`                                 |
