@@ -70,7 +70,7 @@ public class Messages {
                 .append("; Salary: ")
                 .append(person.getSalary())
                 .append("; Annual Leave: ")
-                .append(person.getAnnualLeave())
+                .append(person.getAnnualLeave().value)
                 .append("; Attendance: ")
                 .append(person.getAttendanceToday());
         return builder.toString();

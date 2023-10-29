@@ -98,7 +98,6 @@ public class PersonCard extends UiPart<Region> {
      * @param status of the employee on whether they are On Leave or Working
      */
     public void setWorkingStatus(AttendanceType status) {
-        System.out.println(status);
         switch (status) {
         case PRESENT:
             workingStatus.setStyle("-fx-background-color: green; -fx-padding: 2;"
@@ -106,12 +105,12 @@ public class PersonCard extends UiPart<Region> {
             workingStatus.setText("Working");
             break;
         case LATE:
-            workingStatus.setStyle("-fx-background-color: #eb5252; -fx-padding: 2;"
+            workingStatus.setStyle("-fx-background-color: #b8af00; -fx-padding: 2;"
                     + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
             workingStatus.setText("Late");
             break;
         case ABSENT:
-            workingStatus.setStyle("-fx-background-color: #c23a3f; -fx-padding: 2;"
+            workingStatus.setStyle("-fx-background-color: #d17749; -fx-padding: 2;"
                     + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
             workingStatus.setText("Absent");
             break;
