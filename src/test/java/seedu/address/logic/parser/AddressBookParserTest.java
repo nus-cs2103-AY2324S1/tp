@@ -7,8 +7,11 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import org.junit.jupiter.api.Test;
-
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Applicant;
+import seedu.address.model.person.Member;
+import seedu.address.model.person.ApplicantContainsKeywordsPredicate;
+import seedu.address.model.person.MemberContainsKeywordsPredicate;
 import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CopyApplicantCommand;
@@ -24,17 +27,14 @@ import seedu.address.logic.commands.FindApplicantCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ViewMembersCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Applicant;
-import seedu.address.model.person.Member;
-import seedu.address.model.person.ApplicantContainsKeywordsPredicate;
-import seedu.address.model.person.MemberContainsKeywordsPredicate;
 import seedu.address.testutil.ApplicantBuilder;
 import seedu.address.testutil.ApplicantUtil;
 import seedu.address.testutil.EditApplicantDescriptorBuilder;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.MemberBuilder;
 import seedu.address.testutil.MemberUtil;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
