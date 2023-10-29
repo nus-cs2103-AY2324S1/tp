@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
-import seedu.flashlingo.session.SessionManager;
+
 
 /**
  * Starts a new session of reviewing.
