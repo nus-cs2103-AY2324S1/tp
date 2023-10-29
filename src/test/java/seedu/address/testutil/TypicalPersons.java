@@ -28,6 +28,7 @@ import seedu.address.model.person.Person;
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  * IMPORTANT: the data stored here must correspond to the data in typicalPersonsAddressBook.json.
+ * Please do not alter the attributes of the existing fosterers.
  */
 public class TypicalPersons {
 
@@ -127,16 +128,39 @@ public class TypicalPersons {
     }
 
     /**
-     * Returns the fosterers who are available to foster.
+     * Hardcoded values for testing.
      */
-    public static List<Person> getAvailable() {
+    public static List<Person> getAvailableFosterers() {
         return new ArrayList<>(Arrays.asList(BENSON, CARL, ELLE));
     }
 
-    /**
-     * Returns the fosterers who are currently fostering.
-     */
-    public static List<Person> getCurrent() {
+    public static List<Person> getCurrentFosterers() {
         return new ArrayList<>(Arrays.asList(FIONA, GEORGE));
+    }
+
+    public static List<Person> getAbleCatFosterers() {
+        return new ArrayList<>(Arrays.asList(CARL));
+    }
+
+    public static List<Person> getAbleDogFosterers() {
+        return new ArrayList<>(Arrays.asList(ELLE));
+    }
+
+    public static List<Person> getCurrentDogFosterers() {
+        return new ArrayList<>();
+    }
+    public static List<Person> getCurrentCatFosterers() {
+        return new ArrayList<>(Arrays.asList(FIONA, GEORGE));
+    }
+
+    public static List<Person> getHdbFosterers() {
+        return new ArrayList<>(Arrays.asList(BENSON, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getCondoFosterers() {
+        return new ArrayList<>(Arrays.asList(CARL));
+    }
+    public static List<Person> getLandedFosterers() {
+        return new ArrayList<>(Arrays.asList(ALICE));
     }
 }

@@ -9,14 +9,12 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Housing;
 import seedu.address.model.person.Person;
 
-
-
 /**
  * Calculates the fosterers' housing statistics from the currently displayed list.
  */
 public class StatsHousingCommand extends StatsCommand {
     public static final String COMMAND_WORD = "housing";
-    public static final String MESSAGE_HOUSING_SUCCESS = "Out of %1$d listed fosterers,\n"
+    public static final String MESSAGE_HOUSING_SUCCESS = "Out of %1$d listed,\n"
             + "- %2$d live in HDB (%3$.1f%%)\n"
             + "- %4$d live in Condo (%5$.1f%%)\n"
             + "- %6$d live in Landed (%7$.1f%%)\n"

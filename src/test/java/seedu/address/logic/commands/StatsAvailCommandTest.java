@@ -15,9 +15,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.AnimalType;
-import seedu.address.model.person.Availability;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.TypicalPersons;
 
 public class StatsAvailCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -26,61 +25,72 @@ public class StatsAvailCommandTest {
 
     @Test
     public void getAvailableFosterers_unfilteredList() {
-        model.updateFilteredPersonList(fosterer -> fosterer.getAvailability().equals(Availability.AVAILABLE));
-        List<Person> availableFosterers = model.getFilteredPersonList();
         List<Person> result = availCommand.getAvailableFosterers(model.getFilteredPersonList());
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getAvailableFosterers().contains(fosterer));
+        List<Person> availableFosterers = model.getFilteredPersonList();
         assertEquals(availableFosterers, result);
     }
 
     @Test
     public void getAvailableFosterers_filteredList_notAvailable() {
-        model.updateFilteredPersonList(fosterer -> fosterer.getAvailability().equals(Availability.NOT_AVAILABLE));
+        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getAvailableFosterers().contains(fosterer));
+        List<Person> result = availCommand.getAvailableFosterers(model.getFilteredPersonList());
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void getAvailableFosterers_filteredList_currentCat() {
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getCurrentCatFosterers().contains(fosterer));
+        List<Person> result = availCommand.getAvailableFosterers(model.getFilteredPersonList());
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void getAvailableFosterers_filteredList_currentDog() {
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getCurrentDogFosterers().contains(fosterer));
         List<Person> result = availCommand.getAvailableFosterers(model.getFilteredPersonList());
         assertTrue(result.isEmpty());
     }
 
     @Test
     public void getAbleDogCount_unfilteredList() {
-        model.updateFilteredPersonList(fosterer -> fosterer.getAnimalType().equals(AnimalType.ABLE_DOG));
         int result = availCommand.getAbleDogCount(model.getFilteredPersonList());
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getAbleDogFosterers().contains(fosterer));
         assertEquals(model.getFilteredPersonList().size(), result);
     }
 
     @Test
-    public void getAbleDogCount_filteredList_ableCat() {
-        //can only be able.Dog or able.Cat
-        model.updateFilteredPersonList(fosterer -> fosterer.getAnimalType().equals(AnimalType.ABLE_CAT));
+    public void getAbleDogCount_filteredList_current() {
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getCurrentFosterers().contains(fosterer));
         int result = availCommand.getAbleDogCount(model.getFilteredPersonList());
         assertEquals(0, result);
     }
 
     @Test
-    public void getAbleDogCount_filteredList_notAvailable() {
-        //when NotAvailable, can only have nil or current.Cat/Dog in as animal type
-        model.updateFilteredPersonList(fosterer -> fosterer.getAvailability().equals(Availability.NOT_AVAILABLE));
+    public void getAbleDogCount_filteredList_ableCat() {
+        //can only be able.Dog or able.Cat
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getAbleCatFosterers().contains(fosterer));
         int result = availCommand.getAbleDogCount(model.getFilteredPersonList());
         assertEquals(0, result);
     }
 
     @Test
     public void getAbleCatCount_unfilteredList() {
-        model.updateFilteredPersonList(fosterer -> fosterer.getAnimalType().equals(AnimalType.ABLE_CAT));
         int result = availCommand.getAbleCatCount(model.getFilteredPersonList());
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getAbleCatFosterers().contains(fosterer));
         assertEquals(model.getFilteredPersonList().size(), result);
     }
 
     @Test
-    public void getAbleCatCount_filteredList_ableDog() {
-        //can only be able.Dog or able.Cat
-        model.updateFilteredPersonList(fosterer -> fosterer.getAnimalType().equals(AnimalType.ABLE_DOG));
+    public void getAbleCatCount_filteredList_current() {
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getCurrentFosterers().contains(fosterer));
         int result = availCommand.getAbleCatCount(model.getFilteredPersonList());
         assertEquals(0, result);
     }
 
     @Test
-    public void getAbleCatCount_filteredList_notAvailable() {
-        //when NotAvailable, can only have nil or current.Cat/Dog in as animal type
-        model.updateFilteredPersonList(fosterer -> fosterer.getAvailability().equals(Availability.NOT_AVAILABLE));
+    public void getAbleCatCount_filteredList_ableDog() {
+        model.updateFilteredPersonList(fosterer ->TypicalPersons.getAbleDogFosterers().contains(fosterer));
         int result = availCommand.getAbleCatCount(model.getFilteredPersonList());
         assertEquals(0, result);
     }
@@ -90,7 +100,7 @@ public class StatsAvailCommandTest {
         List<Person> fosterers = model.getFilteredPersonList();
         int total = fosterers.size();
         int availableCount = availCommand.getAvailableFosterers(fosterers).size();
-        int ableDogCount = availCommand.getAbleDogCount(fosterers);
+        int ableDogCount =  availCommand.getAbleDogCount(fosterers);
         int ableCatCount = availCommand.getAbleCatCount(fosterers);
         int unknown = availableCount - ableDogCount - ableCatCount;
 
@@ -111,8 +121,9 @@ public class StatsAvailCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() throws CommandException {
-        model.updateFilteredPersonList(fosterer -> fosterer.getAvailability().equals(Availability.NOT_AVAILABLE));
+    public void execute_filteredList_expectZero() throws CommandException {
+        //should
+        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getAvailableFosterers().contains(fosterer));
         List<Person> fosterers = model.getFilteredPersonList();
         int total = fosterers.size();
         int availableCount = availCommand.getAvailableFosterers(fosterers).size();
@@ -127,10 +138,10 @@ public class StatsAvailCommandTest {
         StatsAvailCommand availSecondCommand = new StatsAvailCommand();
 
         // same object -> returns true
-        assertTrue(availCommand.equals(availCommand));
+        assertEquals(availCommand, availCommand);
 
         // different object -> returns true
-        assertTrue(availCommand.equals(availSecondCommand));
+        assertEquals(availCommand, availSecondCommand);
 
         // different types -> returns false
         assertFalse(availCommand.equals(1));

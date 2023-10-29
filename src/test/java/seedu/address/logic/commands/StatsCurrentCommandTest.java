@@ -15,8 +15,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.AnimalType;
-import seedu.address.model.person.Availability;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
 
@@ -27,58 +25,71 @@ public class StatsCurrentCommandTest {
     @Test
     public void getCurrentFosterers_unfilteredList() {
         List<Person> result = currentCommand.getCurrentFosterers(model.getFilteredPersonList());
-        assertEquals(TypicalPersons.getCurrent(), result);
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getCurrentFosterers().contains(fosterer));
+        List<Person> currentFosterers = model.getFilteredPersonList();
+        assertEquals(currentFosterers, result);
     }
 
     @Test
-    public void getCurrentFosterers_filteredList_available() {
-        model.updateFilteredPersonList(fosterer -> fosterer.getAvailability().equals(Availability.AVAILABLE));
+    public void getCurrentFosterers_filteredList_notCurrent() {
+        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getCurrentFosterers().contains(fosterer));
+        List<Person> result = currentCommand.getCurrentFosterers(model.getFilteredPersonList());
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void getCurrentFosterers_filteredList_ableCat() {
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getAbleCatFosterers().contains(fosterer));
+        List<Person> result = currentCommand.getCurrentFosterers(model.getFilteredPersonList());
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void getCurrentFosterers_filteredList_ableDog() {
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getAbleDogFosterers().contains(fosterer));
         List<Person> result = currentCommand.getCurrentFosterers(model.getFilteredPersonList());
         assertTrue(result.isEmpty());
     }
 
     @Test
     public void getCurrentDogCount_unfilteredList() {
-        model.updateFilteredPersonList(fosterer -> fosterer.getAnimalType().equals(AnimalType.CURRENT_DOG));
         int result = currentCommand.getCurrentDogCount(model.getFilteredPersonList());
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getCurrentDogFosterers().contains(fosterer));
         assertEquals(model.getFilteredPersonList().size(), result);
     }
 
     @Test
-    public void getCurrentDogCount_filteredList_currentCat() {
-        //can only be able.Dog or able.Cat
-        model.updateFilteredPersonList(fosterer -> fosterer.getAnimalType().equals(AnimalType.CURRENT_CAT));
+    public void getCurrentDogCount_filteredList_notCurrent() {
+        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getCurrentFosterers().contains(fosterer));
         int result = currentCommand.getCurrentDogCount(model.getFilteredPersonList());
         assertEquals(0, result);
     }
 
     @Test
-    public void getCurrentDogCount_filteredList_available() {
-        //when NotAvailable, can only have nil or current.Cat/Dog in as animal type
-        model.updateFilteredPersonList(fosterer -> fosterer.getAvailability().equals(Availability.AVAILABLE));
+    public void getCurrentDogCount_filteredList_currentCat() {
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getCurrentCatFosterers().contains(fosterer));
         int result = currentCommand.getCurrentDogCount(model.getFilteredPersonList());
         assertEquals(0, result);
     }
 
     @Test
     public void getCurrentCatCount_unfilteredList() {
-        model.updateFilteredPersonList(fosterer -> fosterer.getAnimalType().equals(AnimalType.CURRENT_CAT));
         int result = currentCommand.getCurrentCatCount(model.getFilteredPersonList());
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getCurrentCatFosterers().contains(fosterer));
         assertEquals(model.getFilteredPersonList().size(), result);
     }
 
     @Test
-    public void getCurrentCatCount_filteredList_currentDog() {
-        //can only be current.Dog or current.Cat
-        model.updateFilteredPersonList(fosterer -> fosterer.getAnimalType().equals(AnimalType.CURRENT_DOG));
+    public void getCurrentCatCount_filteredList_notCurrent() {
+        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getCurrentFosterers().contains(fosterer));
         int result = currentCommand.getCurrentCatCount(model.getFilteredPersonList());
         assertEquals(0, result);
     }
 
     @Test
-    public void getCurrentCatCount_filteredList_available() {
-        //when NotAvailable, can only have nil or current.Cat/Dog in as animal type
-        model.updateFilteredPersonList(fosterer -> fosterer.getAvailability().equals(Availability.AVAILABLE));
+    public void getCurrentCatCount_filteredList_currentDog() {
+        //can only be current.Dog or current.Cat
+        model.updateFilteredPersonList(fosterer -> TypicalPersons.getCurrentDogFosterers().contains(fosterer));
         int result = currentCommand.getCurrentCatCount(model.getFilteredPersonList());
         assertEquals(0, result);
     }
@@ -96,9 +107,9 @@ public class StatsCurrentCommandTest {
                 total, StatsAvailCommand.calculatePercentage(currCatCount, total));
 
         String details = String.format(StatsCurrentCommand.MESSAGE_CURRENT_DETAILS, currDogCount,
-                StatsAvailCommand.calculatePercentage(currDogCount, currCount), currCatCount,
-                StatsAvailCommand.calculatePercentage(currCatCount, currCount), unknown,
-                StatsAvailCommand.calculatePercentage(unknown, currCount));
+                StatsCommand.calculatePercentage(currDogCount, currCount), currCatCount,
+                StatsCommand.calculatePercentage(currCatCount, currCount), unknown,
+                StatsCommand.calculatePercentage(unknown, currCount));
         assertEquals(summary + "\n" + details, currentCommand.execute(model).getFeedbackToUser());
     }
 
@@ -109,14 +120,14 @@ public class StatsCurrentCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() throws CommandException {
-        model.updateFilteredPersonList(fosterer -> fosterer.getAvailability().equals(Availability.AVAILABLE));
+    public void execute_filteredList_expectZero() throws CommandException {
+        model.updateFilteredPersonList(fosterer -> ! TypicalPersons.getCurrentFosterers().contains(fosterer));
         List<Person> fosterers = model.getFilteredPersonList();
         int total = fosterers.size();
         int currCount = currentCommand.getCurrentFosterers(fosterers).size();
 
         String summary = String.format(StatsCurrentCommand.MESSAGE_CURRENT_SUMMARY, currCount,
-                total, StatsAvailCommand.calculatePercentage(currCount, total));
+                total, StatsCommand.calculatePercentage(currCount, total));
         assertEquals(summary, currentCommand.execute(model).getFeedbackToUser());
     }
 
@@ -124,10 +135,10 @@ public class StatsCurrentCommandTest {
     public void equals() {
         StatsCurrentCommand currentSecondCommand = new StatsCurrentCommand();
         // same object -> returns true
-        assertTrue(currentCommand.equals(currentCommand));
+        assertEquals(currentCommand, currentCommand);
 
         // different object -> returns true
-        assertTrue(currentCommand.equals(currentSecondCommand));
+        assertEquals(currentCommand, currentSecondCommand);
 
         // different types -> returns false
         assertFalse(currentCommand.equals(1));

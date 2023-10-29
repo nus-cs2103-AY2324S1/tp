@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  */
 public class StatsCurrentCommand extends StatsCommand {
     public static final String COMMAND_WORD = "current";
-    public static final String MESSAGE_CURRENT_SUMMARY = "%1$d out of %2$d listed fosterers are "
+    public static final String MESSAGE_CURRENT_SUMMARY = "%1$d out of %2$d listed are "
             + "currently fostering (%3$.1f%%)!";
 
     public static final String MESSAGE_CURRENT_DETAILS = "- %1$d fostering dogs (%2$.1f%%)\n"

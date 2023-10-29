@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  */
 public class StatsAvailCommand extends StatsCommand {
     public static final String COMMAND_WORD = "avail";
-    public static final String MESSAGE_AVAIL_SUMMARY = "%1$d out of %2$d listed fosterers are available (%3$.1f%%)!";
+    public static final String MESSAGE_AVAIL_SUMMARY = "%1$d out of %2$d listed are available (%3$.1f%%)!";
 
     public static final String MESSAGE_AVAIL_DETAILS = "Out of those available, \n"
             + "- %1$d can foster dogs (%2$.1f%%)\n"
