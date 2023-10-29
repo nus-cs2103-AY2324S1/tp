@@ -108,7 +108,7 @@ public class Schedule implements Comparable<Schedule> {
      * @return {@code true} if the schedule is on the date, {@code false} otherwise.
      */
     public boolean isOnDate(Date date) {
-        return this.startTime.isOnDate(date) || this.endTime.isOnDate(date);
+        return this.startTime.isOnDate(date) && this.endTime.isOnDate(date);
     }
 
     /**

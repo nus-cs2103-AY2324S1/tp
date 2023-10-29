@@ -333,15 +333,22 @@ class ScheduleTest {
 
     @Test
     public void testIsOnDate() {
-        LocalDateTime time = LocalDateTime.of(2023, 1, 1, 0, 0, 0);
+        LocalDateTime sameDay = LocalDateTime.of(2023, 1, 1, 0, 0, 0);
+        LocalDateTime differentDay = LocalDateTime.of(2023, 1, 2, 0, 0, 0);
 
-        Schedule schedule =
-            new ScheduleBuilder().withStartTime(time).withEndTime(time.withHour(1)).build();
+        Schedule schedule1 =
+            new ScheduleBuilder().withStartTime(sameDay).withEndTime(sameDay.withHour(1)).build();
 
-        assertFalse(schedule.isOnDate(new Date(LocalDate.of(2022, 1, 1)))); // different month
-        assertFalse(schedule.isOnDate(new Date(LocalDate.of(2023, 2, 1)))); // different year
-        assertFalse(schedule.isOnDate(new Date(LocalDate.of(2023, 1, 2)))); // different day
-        assertTrue(schedule.isOnDate(new Date(LocalDate.of(2023, 1, 1)))); // same date
+        assertFalse(schedule1.isOnDate(new Date(LocalDate.of(2022, 1, 1)))); // different month
+        assertFalse(schedule1.isOnDate(new Date(LocalDate.of(2023, 2, 1)))); // different year
+        assertFalse(schedule1.isOnDate(new Date(LocalDate.of(2023, 1, 2)))); // different day
+        assertTrue(schedule1.isOnDate(new Date(LocalDate.of(2023, 1, 1)))); // same date
+
+        // start and end time on different dates
+        Schedule schedule2 =
+            new ScheduleBuilder().withStartTime(sameDay).withEndTime(differentDay).build();
+        assertFalse(schedule2.isOnDate(new Date(sameDay.toLocalDate())));
+        assertFalse(schedule2.isOnDate(new Date(differentDay.toLocalDate())));
     }
 
     @Test
