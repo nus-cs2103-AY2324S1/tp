@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 
 /**
  * Represents an employee's payroll of the month.
@@ -8,6 +10,9 @@ import java.text.DecimalFormat;
 public class Payroll {
     public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
     private Salary salary;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalDate paymentDate;
 
     /**
      * Constructs a {@code Payroll}.
@@ -17,6 +22,10 @@ public class Payroll {
      */
     public Payroll(Salary salary) {
         this.salary = salary;
+        LocalDate localDate = LocalDate.now();
+        this.startDate = localDate.withDayOfMonth(1);
+        this.endDate = localDate.with(TemporalAdjusters.lastDayOfMonth());
+        this.paymentDate = localDate.plusMonths(1).withDayOfMonth(5);
     }
 
     /**
@@ -100,13 +109,36 @@ public class Payroll {
     }
 
     /**
+     * Returns the start date of this payroll.
+     * @return start date
+     */
+    public LocalDate getStartDate() {
+        return this.startDate;
+    }
+
+    /**
+     * Returns the end date of this payroll.
+     * @return end date
+     */
+    public LocalDate getEndDate() {
+        return this.endDate;
+    }
+
+    /**
+     * Returns the payment date.
+     * @return payment date.
+     */
+    public LocalDate getPaymentDate() {
+        return this.endDate;
+    }
+
+    /**
      * Returns the string representation of the net salary.
      * @return string net salary.
      */
     public String calculatePayrollString() {
         return this.salary.getNetSalaryString();
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
