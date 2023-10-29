@@ -1,18 +1,25 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Ic;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Patient;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Patient}.
@@ -57,11 +64,23 @@ public class JsonAdaptedPatient extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Patient toModelType() throws IllegalValueException {
+        final Name modelName = checkName();
+        final Phone modelPhone = checkPhone();
         final Phone modelEmergencyContact = checkEmergencyContact();
+        final Email modelEmail = checkEmail();
+        final Address modelAddress = checkAddress();
+        final Remark modelRemark = checkRemark();
+        final Gender modelGender = checkGender();
+        final Ic modelIc = checkIc();
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : this.getTags()) {
+            personTags.add(tag.toModelType());
+        }
+        final Set<Tag> modelTags = new HashSet<>(personTags);
         final Condition modelCondition = checkCondition();
         final BloodType modelBloodType = checkBloodType();
-        return new Patient(p.getName(), p.getPhone(), modelEmergencyContact, p.getEmail(), p.getAddress(),
-                p.getRemark(), p.getGender(), p.getIc(), modelCondition, modelBloodType, p.getTags());
+        return new Patient(modelName, modelPhone, modelEmergencyContact, modelEmail, modelAddress, modelRemark,
+                modelGender, modelIc, modelCondition, modelBloodType, modelTags);
     }
 
     /**
