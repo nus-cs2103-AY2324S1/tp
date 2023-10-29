@@ -8,8 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.COMMANDWORD_DESC_VALI
 import static seedu.address.logic.commands.CommandTestUtil.COMMAND_WORD_1;
 import static seedu.address.logic.commands.CommandTestUtil.SHORTCUT_ALIAS_1;
 import static seedu.address.logic.commands.CommandTestUtil.SHORTCUT_DESC_VALID;
+import static seedu.address.logic.parser.CliSyntax.PATIENT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.SPECIALIST_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -126,6 +128,29 @@ public class AddressBookParserTest {
                 + " " + SpecialistUtil.getEditSpecialistDescriptorDetails(descriptor);
         EditCommand command = (EditCommand) parser.parseCommand(input);
         assertEquals(new EditCommand(descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_complexEdit_failure() {
+        Patient patient = (Patient) new PatientBuilder()
+                .withMedicalHistory("MedHistory1")
+                .withTags("Tag1", "Tag2")
+                .build();
+        Specialist specialist = (Specialist) new SpecialistBuilder()
+                .withSpecialty("TestSpecialty")
+                .withLocation("TestLocation")
+                .withTags("Tag1", "Tag2")
+                .build();
+        String userInput1 = EditCommand.COMMAND_WORD + " " + PATIENT_TAG;
+        String userInput2 = EditCommand.COMMAND_WORD + " " + SPECIALIST_TAG;
+
+        model.updateSelectedPerson(patient);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE_PATIENT), () -> parser.parseCommand(userInput1));
+
+        model.updateSelectedPerson(specialist);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE_SPECIALIST), () -> parser.parseCommand(userInput2));
     }
 
     @Test
