@@ -21,11 +21,13 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD_ALIAS = "f";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all Patients whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
+            + ": Finds all Patients whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example 1: " + COMMAND_WORD + " n/alice bob charlie \n"
-            + "Example 2: " + COMMAND_WORD + " id/S872D";
+            + "Example 2: " + COMMAND_WORD + " id/S872D \n"
+            + "Example 3: " + COMMAND_WORD_ALIAS + " id/S872D";
 
     private final Predicate<Person> predicate;
 

@@ -25,7 +25,8 @@ public class AddCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD_ALIAS = "a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Patient to the patient list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
+            + ": Adds a Patient to the patient list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_NRIC + "NRIC "
@@ -35,7 +36,7 @@ public class AddCommand extends UndoableCommand {
             + "[" + PREFIX_APPOINTMENT + "APPOINTMENT] "
             + "[" + PREFIX_TAG + "TAG]..."
             + "[" + PREFIX_MEDICAL + "MEDICAL_HISTORY]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example 1: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_NRIC + "S8765432A "
             + PREFIX_PHONE + "98765432 "
@@ -44,6 +45,16 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_APPOINTMENT + "2023-10-17 11:00 13:00 "
             + PREFIX_MEDICAL + "hypochondriac "
             + PREFIX_MEDICAL + "on Medicine XYZ "
+            + PREFIX_TAG + "owesMoney \n"
+            + "Example 2: " + COMMAND_WORD_ALIAS + " "
+            + PREFIX_NAME + "Alex Yeoh"
+            + PREFIX_NRIC + "S6742632F "
+            + PREFIX_PHONE + "85743822 "
+            + PREFIX_EMAIL + "alex@example.com "
+            + PREFIX_ADDRESS + "420, Country Road, #02-25 "
+            + PREFIX_APPOINTMENT + "2023-11-10 11:00 13:00 "
+            + PREFIX_MEDICAL + "tachycardia "
+            + PREFIX_MEDICAL + "on Medicine CHS "
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New Patient added: %1$s";

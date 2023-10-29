@@ -18,12 +18,14 @@ public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD_ALIAS = "u";
 
-    public static final String COMMAND_FORMAT = "Command Format: " + COMMAND_WORD + " [number]\n"
-            + "Examples:\n"
+    public static final String COMMAND_FORMAT = "Command Format: " + COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
+            + " [number]\n"
+            + "Examples 1:\n"
             + " - " + COMMAND_WORD + " (undoes the last command)\n"
-            + " - " + COMMAND_WORD + " 4 (undoes the last 4 commands)";
+            + " - " + COMMAND_WORD_ALIAS + " 4 (undoes the last 4 commands)";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the last undo-able command. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+            + ": Undoes the last undo-able command. "
             + "An undo-able command includes an edit, add, clear or delete command.\n"
             + "Optionally, you can specify the number of commands to undo.\n"
             + COMMAND_FORMAT;
