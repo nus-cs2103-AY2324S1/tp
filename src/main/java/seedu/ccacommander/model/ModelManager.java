@@ -170,6 +170,7 @@ public class ModelManager implements Model {
     public static Enrolment findEnrolmentFromList(List<Enrolment> lastShownEnrolmentList,
                                                   Name memberName, Name eventName) throws EnrolmentNotFoundException {
         Enrolment selectedEnrolment = null;
+        int enrolmentListPointer = 0;
 
         for (int i = 0; i < lastShownEnrolmentList.size(); i++) {
             selectedEnrolment = lastShownEnrolmentList.get(i);
@@ -179,9 +180,10 @@ public class ModelManager implements Model {
             if (memberName.equals(selectedMemberName) && eventName.equals(selectedEventName)) {
                 break;
             }
+            enrolmentListPointer++;
         }
 
-        if (selectedEnrolment == null) {
+        if (enrolmentListPointer == lastShownEnrolmentList.size()) {
             throw new EnrolmentNotFoundException();
         } else {
             return selectedEnrolment;

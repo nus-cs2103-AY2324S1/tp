@@ -11,6 +11,7 @@ import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
@@ -55,7 +56,7 @@ public class UnenrolCommand extends Command {
         } else if (zeroBasedEventIndex >= lastShownEventList.size()
                 && zeroBasedMemberIndex < lastShownMemberList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-        } else if (zeroBasedEventIndex >= lastShownMemberList.size()
+        } else if (zeroBasedMemberIndex >= lastShownMemberList.size()
                 && zeroBasedEventIndex >= lastShownEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_AND_EVENT_DISPLAYED_INDEX);
         }
@@ -65,8 +66,13 @@ public class UnenrolCommand extends Command {
 
         Name memberName = member.getName();
         Name eventName = event.getName();
+        Enrolment enrolmentToDelete;
 
-        Enrolment enrolmentToDelete = findEnrolmentFromList(lastShownEnrolmentList, memberName, eventName);
+        try {
+            enrolmentToDelete = findEnrolmentFromList(lastShownEnrolmentList, memberName, eventName);
+        } catch (EnrolmentNotFoundException ee) {
+            throw new CommandException(Messages.MESSAGE_ENROLMENT_NOT_FOUND);
+        }
         model.deleteEnrolment(enrolmentToDelete);
         model.commit(String.format(MESSAGE_COMMIT, enrolmentToDelete.getMemberAndEventEnrolment()));
         return new CommandResult(String.format(MESSAGE_DELETE_ENROLMENT_SUCCESS, Messages.format(enrolmentToDelete)));
