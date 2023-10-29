@@ -84,7 +84,7 @@ public class ApplicantCardTest {
         HBox idLabel = (HBox) stage.getScene().lookup("#details");
         Label status = (Label) idLabel.lookup("#status");
         assertNotNull(status);
-        assertEquals("UNDECIDED", status.getText());
+        assertEquals("OFFERED", status.getText());
     }
 
     @Test

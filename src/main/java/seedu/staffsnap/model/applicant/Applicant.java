@@ -45,12 +45,12 @@ public class Applicant implements Comparable<Applicant> {
         this.position = position;
         this.interviews.addAll(interviews);
         Collections.sort(this.interviews);
-        if (status == null) {
-            this.status = Status.UNDECIDED;
+        this.status = Objects.requireNonNullElse(status, Status.UNDECIDED);
+        if (score == null) {
+            this.score = new Score(0, 0, 0);
         } else {
-            this.status = status;
+            this.score = new Score(score);
         }
-        this.score = new Score(score);
     }
 
     public Name getName() {
@@ -181,7 +181,7 @@ public class Applicant implements Comparable<Applicant> {
      *      less than the Score argument; and a value greater than 0 if this Score is
      *      greater than the Score argument.
      */
-    public int compareByRating(Applicant o) {
+    public int compareByScore(Applicant o) {
         if (isDescendingOrder) {
             return -this.getScore().getAverageScore().compareTo(o.getScore().getAverageScore());
         }
@@ -204,8 +204,8 @@ public class Applicant implements Comparable<Applicant> {
     /**
      * @param o the Applicant to be compared.
      * @return the value 0 if the argument Status is equal to this Status; a value less than 0 if this Status is
-     *      lexicographically less than the Status argument; and a value greater than 0 if this Status is
-     *      lexicographically greater than the Status argument.
+     *      less than the Status argument; and a value greater than 0 if this Status is
+     *      greater than the Status argument. Order is (Undecided, Offered, Rejected)
      */
     public int compareByStatus(Applicant o) {
         if (isDescendingOrder) {
@@ -241,7 +241,7 @@ public class Applicant implements Comparable<Applicant> {
         case PHONE:
             return compareByPhone(o);
         case SCORE:
-            return compareByRating(o);
+            return compareByScore(o);
         case EMAIL:
             return compareByEmail(o);
         case STATUS:
