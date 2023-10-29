@@ -10,15 +10,15 @@ import static seedu.address.testutil.TypicalMembers.BETTY_MEMBER;
 import static seedu.address.testutil.TypicalMembers.CHARLES_MEMBER;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithMembersApplicants;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.MemberContainsKeywordsPredicate;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 public class FindMemberCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookWithMembersApplicants(), new UserPrefs());

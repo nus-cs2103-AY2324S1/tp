@@ -50,8 +50,7 @@ public class FindApplicantCommandTest {
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
-
-   @Test
+    @Test
    public void execute_zeroKeywords_noApplicantFound() {
         String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 0);
         ApplicantContainsKeywordsPredicate predicate = preparePredicate(" ");
@@ -59,10 +58,10 @@ public class FindApplicantCommandTest {
         expectedModel.updateFilteredApplicantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredApplicantList());
-   }
+    }
 
-    @Test
-    public void execute_multipleKeywords_multipleApplicantFound() {
+     @Test
+     public void execute_multipleKeywords_multipleApplicantFound() {
         String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 3);
         ApplicantContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindApplicantCommand command = new FindApplicantCommand(predicate);
