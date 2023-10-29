@@ -60,6 +60,7 @@
         <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" spacing="40" >
             <Label text="Tags: " styleClass="cell_big_label" wrapText="true" />
             <FlowPane fx:id="tags" />
+
         </HBox>
 
         <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" GridPane.columnIndex="0" spacing="0">
