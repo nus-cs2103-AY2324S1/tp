@@ -8,7 +8,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.MemberContainsKeywordsPredicate;
 
 
-
 /**
  * Finds and lists all members in address book whose fields contains any of the argument keywords.
  * Keyword matching is case-insensitive.
@@ -16,6 +15,7 @@ import seedu.address.model.person.MemberContainsKeywordsPredicate;
 public class FindMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "findMember";
+    public static final String COMMAND_ALIAS = "findm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose information contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

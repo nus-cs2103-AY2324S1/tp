@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.AddMemberCommand.MESSAGE_DUPLICATE_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -35,6 +34,7 @@ import seedu.address.model.tag.Tag;
 public class EditMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "editMember";
+    public static final String COMMAND_ALIAS = "editm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
             + "by the index number used in the displayed member list. "

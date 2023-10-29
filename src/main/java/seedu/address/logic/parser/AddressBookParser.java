@@ -59,36 +59,46 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddMemberCommand.COMMAND_WORD:
+        case AddMemberCommand.COMMAND_ALIAS:
             return new AddMemberCommandParser().parse(arguments);
 
         case AddApplicantCommand.COMMAND_WORD:
+        case AddApplicantCommand.COMMAND_ALIAS:
             return new AddApplicantCommandParser().parse(arguments);
 
         case EditMemberCommand.COMMAND_WORD:
+        case EditMemberCommand.COMMAND_ALIAS:
             return new EditMemberCommandParser().parse(arguments);
 
         case EditApplicantCommand.COMMAND_WORD:
+        case EditApplicantCommand.COMMAND_ALIAS:
             return new EditApplicantCommandParser().parse(arguments);
 
         case DeleteApplicantCommand.COMMAND_WORD:
+        case DeleteApplicantCommand.COMMAND_ALIAS:
             return new DeleteApplicantCommandParser().parse(arguments);
 
         case DeleteMemberCommand.COMMAND_WORD:
+        case DeleteMemberCommand.COMMAND_ALIAS:
             return new DeleteMemberCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindMemberCommand.COMMAND_WORD:
+        case FindMemberCommand.COMMAND_ALIAS:
             return new FindMemberCommandParser().parse(arguments);
 
         case FindApplicantCommand.COMMAND_WORD:
+        case FindApplicantCommand.COMMAND_ALIAS:
             return new FindApplicantCommandParser().parse(arguments);
 
         case ViewMembersCommand.COMMAND_WORD:
+        case ViewMembersCommand.COMMAND_ALIAS:
             return new ViewMembersCommand();
 
         case ViewApplicantsCommand.COMMAND_WORD:
+        case ViewApplicantsCommand.COMMAND_ALIAS:
             return new ViewApplicantsCommand();
 
         case ExitCommand.COMMAND_WORD:
