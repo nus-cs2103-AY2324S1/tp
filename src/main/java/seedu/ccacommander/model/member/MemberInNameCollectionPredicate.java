@@ -32,8 +32,6 @@ public class MemberInNameCollectionPredicate implements Predicate<Member> {
             return false;
         }
 
-        // We can ignore duplicate Names provided in a list as a given member
-        // either matches none or all.
         Set<Name> names = new HashSet<>(memberNames);
         Set<Name> otherNames = new HashSet<>(((MemberInNameCollectionPredicate) other).memberNames);
 

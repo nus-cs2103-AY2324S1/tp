@@ -7,6 +7,7 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 
 import java.util.Collections;
@@ -89,6 +90,7 @@ public class EditMemberCommand extends Command {
 
         model.setMember(memberToEdit, editedMember);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commit(String.format(MESSAGE_COMMIT, editedMember.getName()));
         return new CommandResult(String.format(MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember)));
     }

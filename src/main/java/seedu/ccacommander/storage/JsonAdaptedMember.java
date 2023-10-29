@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.ccacommander.commons.exceptions.IllegalValueException;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.member.Address;
 import seedu.ccacommander.model.member.Email;
 import seedu.ccacommander.model.member.Gender;
