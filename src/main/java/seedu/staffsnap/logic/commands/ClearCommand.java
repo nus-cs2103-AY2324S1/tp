@@ -32,7 +32,7 @@ public class ClearCommand extends Command {
     }
     @Override
     public CommandResult execute(Model model) {
-        if(this.isSuccess) {
+        if (this.isSuccess) {
             requireNonNull(model);
             assert(model != null);
             model.setApplicantBook(new ApplicantBook());

@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 import seedu.staffsnap.commons.core.LogsCenter;
 import seedu.staffsnap.logic.commands.AddCommand;
 import seedu.staffsnap.logic.commands.AddInterviewCommand;
-import seedu.staffsnap.logic.commands.ClearCommand;
 import seedu.staffsnap.logic.commands.Command;
 import seedu.staffsnap.logic.commands.ConfirmationCommand;
 import seedu.staffsnap.logic.commands.DeleteCommand;
