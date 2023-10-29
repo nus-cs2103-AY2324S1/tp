@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 
@@ -41,13 +40,12 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_REMARK + "Requested extra Queen's size bed "
-            + PREFIX_TAG + "friends";
+            + PREFIX_REMARK + "Requested extra Queen's size bed";
 
     public static final List<Prefix> PREFIXES = List.of(PREFIX_ROOM, PREFIX_BOOKING_PERIOD, PREFIX_NAME, PREFIX_PHONE,
             PREFIX_EMAIL, PREFIX_REMARK);
     public static final List<String> EXAMPLES = List.of("1", "2023-01-01 08:00 to 2023-01-02 12:00", "John Doe",
-            "98765432", "johnd@example.com", "Requested extra Queen's sized bed", "friends");
+            "98765432", "johnd@example.com", "Requested extra Queen's sized bed");
 
     public static final String MESSAGE_SUCCESS = "New booking added: %1$s";
     public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in the bookings book";
