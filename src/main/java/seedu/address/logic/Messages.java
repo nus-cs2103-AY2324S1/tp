@@ -47,7 +47,9 @@ public class Messages {
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Day: ")
-                .append(person.getDay());
+                .append(person.getDay())
+                .append("; PayRate: ")
+                .append(person.getPayRate());
         return builder.toString();
     }
 

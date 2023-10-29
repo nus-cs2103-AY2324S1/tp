@@ -41,7 +41,7 @@ public class AddCommand extends Command {
             + PREFIX_DAY + "Mon "
             + PREFIX_BEGIN + "1200 "
             + PREFIX_END + "1300 "
-            + PREFIX_PAYRATE + "20";
+            + PREFIX_PAYRATE + "20.00";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
