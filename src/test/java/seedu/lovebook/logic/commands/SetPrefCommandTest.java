@@ -158,6 +158,11 @@ public class SetPrefCommandTest {
         public void setDatePrefsFilePath(Path datePrefsFilePath) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void getBestDate() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

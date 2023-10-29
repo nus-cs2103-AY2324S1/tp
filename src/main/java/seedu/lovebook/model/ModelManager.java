@@ -198,4 +198,11 @@ public class ModelManager implements Model {
         this.userPrefs.setDatePrefsFilePath(datePrefsFilePath);
     }
 
+    @Override
+    public void getBestDate() {
+        ObservableList<Date> dateList = loveBook.getPersonList();
+        Date bestDate = dateList.stream().max(Comparator.comparing(date -> date.getScore(this.datePrefs))).orElse(null);
+        filteredDates.setPredicate(date -> date.equals(bestDate));
+    }
+
 }
