@@ -188,7 +188,7 @@ Similarly, the `No` button will invoke the no command.
       * Changes made have to be replicated in different places.
       * May not behave the same way as a Command (eg. ResultDisplay does not show the log message)
 
-* **Alternative 2:** Remove the `Yes` and `No` buttons.
+* **Alternative 3:** Remove the `Yes` and `No` buttons.
     * Pros:
         * Easy to code
         * Only one way to invoke the command, reduce confusion
@@ -197,6 +197,7 @@ Similarly, the `No` button will invoke the no command.
 
 ### Sequence diagram when clicking the `Yes` and `No` buttons
 #### Both diagrams are the same except for the inputs to the methods.
+#### Refer to the [Yes Command diagram](#YesSequenceDiagram) for a more detailed insight into the Model
 ![YesCommand from FlashcardBox](images/UiYesButtonSequenceDiagram.png)
 
 ![NoCommand from FlashcardBox](images/UiNoButtonSequenceDiagram.png)
@@ -234,7 +235,7 @@ management within the application.
 **Step 4:** The user chooses to end the review session by using `end` command. This action will alternate the boolean value 
 inside SessionManager class indicating current session is review session or not.
 
-![StartSequnceModel](images/StartSequenceDiagram.png)  
+![StartSequenceModel](images/StartSequenceDiagram.png)  
 **Recording Vocabulary Review:**
 - The `SessionManager` logs the vocabulary words and phrases reviewed and practiced during the language learning session.
 - This feature provides users with the ability to track their progress and revisit the words they've worked on.
@@ -342,14 +343,15 @@ Given below is an example usage scenario and how the yes/no mechanism behaves at
 
 The following sequence diagram summarizes the workflow when a user executes a `yes` command:
 
-![StartSequnceModel](images/YesSequenceDiagram.png)
+<a id="YesSequenceDiagram"></a>
+![YesSequenceDiagram](images/YesSequenceDiagram.png)
 
 **User Control:**
 - User can update the proficiency level of every individual word and also the revisited date, which allows the user to learn in a more targeted manner
 
 The following activity diagram summarizes what happens when a user executes a `yes` command:
 
-![StartSequnceModel](images/YesCommandActivityDiagram.png)
+![YesCommandActivityDiagram](images/YesCommandActivityDiagram.png)
 #### **Usage Example**
 To use the YesCommand, simply type yes during a review session. For example:
 
