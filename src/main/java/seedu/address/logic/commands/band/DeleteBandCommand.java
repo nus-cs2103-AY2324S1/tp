@@ -5,10 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.musician.DeleteCommand;
 import seedu.address.model.Model;
 import seedu.address.model.band.Band;
 
@@ -43,5 +45,27 @@ public class DeleteBandCommand extends Command {
         Band bandToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteBand(bandToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_BAND_SUCCESS, Messages.format(bandToDelete)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteBandCommand)) {
+            return false;
+        }
+
+        DeleteBandCommand otherDeleteBandCommand = (DeleteBandCommand) other;
+        return targetIndex.equals(otherDeleteBandCommand.targetIndex);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
+                .toString();
     }
 }
