@@ -47,6 +47,31 @@ public class UnenrolCommandTest {
     }
 
     @Test
+    public void execute_unenrolmentForNonExistentEnrolmentUnfilteredList_throwsCommandException() {
+        UnenrolCommand unenrolCommand = new UnenrolCommand(INDEX_FIRST_MEMBER, INDEX_SECOND_EVENT);
+        String expectedFailedMessage = Messages.MESSAGE_ENROLMENT_NOT_FOUND;
+        assertCommandFailure(unenrolCommand, model, expectedFailedMessage);
+    }
+    @Test
+    public void execute_duplicateUnenrolmentUnfilteredList_throwsCommandException() {
+        Enrolment enrolmentToDelete = model.getFilteredEnrolmentList().get(INDEX_FIRST_ENROLMENT.getZeroBased());
+        UnenrolCommand unenrolCommand = new UnenrolCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT);
+
+        String commitMessage = String.format(UnenrolCommand.MESSAGE_COMMIT,
+                enrolmentToDelete.getMemberAndEventEnrolment());
+        String expectedSuccessMessage = String.format(UnenrolCommand.MESSAGE_DELETE_ENROLMENT_SUCCESS,
+                Messages.format(enrolmentToDelete));
+        String expectedFailedMessage = Messages.MESSAGE_ENROLMENT_NOT_FOUND;
+
+        ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
+        expectedModel.deleteEnrolment(enrolmentToDelete);
+        expectedModel.commit(commitMessage);
+
+        assertCommandSuccess(unenrolCommand, model, expectedSuccessMessage, expectedModel);
+        assertCommandFailure(unenrolCommand, model, expectedFailedMessage);
+    }
+
+    @Test
     public void execute_invalidMemberIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundMemberIndex = Index.fromZeroBased(model.getFilteredMemberList().size() + 1);
         Index eventIndex = Index.fromZeroBased(1);
