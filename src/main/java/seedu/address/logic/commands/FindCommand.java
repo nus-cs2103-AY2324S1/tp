@@ -2,12 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.function.Predicate;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.CompositePredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -23,15 +21,15 @@ public class FindCommand extends Command {
             + "Example 1: " + COMMAND_WORD + " n/alice bob charlie \n"
             + "Example 2: " + COMMAND_WORD + " id/S872D";
 
-    private final Predicate<Person> predicate;
+    private final CompositePredicate predicate;
 
     /**
-     * Creates a {@code FindCommand} to find persons by name with the specified predicate.
+     * Creates a {@code FindCommand} to find persons by with the specified composite predicate.
      *
-     * @param predicate The predicate to match persons by name.
+     * @param predicate The predicate to match persons by.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    public FindCommand(Predicate<Person> predicate) {
+    public FindCommand(CompositePredicate predicate) {
         this.predicate = predicate;
     }
 

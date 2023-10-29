@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.CompositePredicate;
 import seedu.address.model.person.predicates.IdContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 
@@ -24,23 +24,25 @@ public class FindCommandParserTest {
 
     @Test
     public void nameparse_validArgs_returnsFindCommand() {
+        CompositePredicate findCommandPredicate = new CompositePredicate();
+        findCommandPredicate.add(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "n/Alice Bob", expectedFindCommand);
+        FindCommand expectedFindCommand = new FindCommand(findCommandPredicate);
+        assertParseSuccess(parser, " n/Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n n/Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " n/Alice \n \t Bob  \t", expectedFindCommand);
     }
 
     @Test
     public void nricparse_validArgs_returnsFindCommand() {
+        CompositePredicate findCommandPredicate = new CompositePredicate();
+        findCommandPredicate.add(new IdContainsKeywordsPredicate(Arrays.asList("T0100606Z", "T0206006Z")));
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new IdContainsKeywordsPredicate(Arrays.asList("T0100606Z", "T0206006Z")));
-        assertParseSuccess(parser, "id/T0100606Z T0206006Z", expectedFindCommand);
+        FindCommand expectedFindCommand = new FindCommand(findCommandPredicate);
+        assertParseSuccess(parser, " id/T0100606Z T0206006Z", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n id/T0100606Z \n \t T0206006Z  \t", expectedFindCommand);
+        assertParseSuccess(parser, " id/T0100606Z \n \t T0206006Z  \t", expectedFindCommand);
     }
 }
