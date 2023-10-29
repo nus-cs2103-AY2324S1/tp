@@ -41,12 +41,12 @@ public class Appointment {
     private static final String INPUT_TIME_FORMAT = "H[:]mm";
     private static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern(INPUT_DATE_FORMAT);
     private static final DateTimeFormatter INPUT_TIME_FORMATTER = DateTimeFormatter.ofPattern(INPUT_TIME_FORMAT);
-    private static final String MODEL_FIELD_SEPARATOR = ", ";
-    private static final String MODEL_DATE_FORMAT = "dd-MMM-yyyy";
+    private static final String STORAGE_FIELD_SEPARATOR = ", ";
+    private static final String STORAGE_DATE_FORMAT = "dd-MMM-yyyy";
+    private static final String STORAGE_TIME_FORMAT = "HH:mm";
+    private static final DateTimeFormatter STORAGE_DATE_FORMATTER = DateTimeFormatter.ofPattern(STORAGE_DATE_FORMAT);
+    private static final DateTimeFormatter STORAGE_TIME_FORMATTER = DateTimeFormatter.ofPattern(STORAGE_TIME_FORMAT);
     private static final String MODEL_PERIOD_SEPARATOR = " to ";
-    private static final String MODEL_TIME_FORMAT = "HH:mm";
-    private static final DateTimeFormatter MODEL_DATE_FORMATTER = DateTimeFormatter.ofPattern(MODEL_DATE_FORMAT);
-    private static final DateTimeFormatter MODEL_TIME_FORMATTER = DateTimeFormatter.ofPattern(MODEL_TIME_FORMAT);
     private final LocalDate date;
     private final LocalTime start;
     private final LocalTime end;
@@ -102,9 +102,9 @@ public class Appointment {
             fieldSeparator = FIELD_SEPARATOR_REGEX;
             break;
         case STORAGE:
-            dateFormatter = (val) -> LocalDate.parse(val, MODEL_DATE_FORMATTER);
-            timeFormatter = (val) -> LocalTime.parse(val, MODEL_TIME_FORMATTER);
-            fieldSeparator = "(" + MODEL_FIELD_SEPARATOR + ")|(" + MODEL_PERIOD_SEPARATOR + ")";
+            dateFormatter = (val) -> LocalDate.parse(val, STORAGE_DATE_FORMATTER);
+            timeFormatter = (val) -> LocalTime.parse(val, STORAGE_TIME_FORMATTER);
+            fieldSeparator = "(" + STORAGE_FIELD_SEPARATOR + ")";
             break;
         default:
             throw new IllegalStateException(UNRECOGNIZED_SOURCE);
@@ -138,16 +138,24 @@ public class Appointment {
         case USER_INPUT:
             return test.split(FIELD_SEPARATOR_REGEX).length == 3;
         case STORAGE:
-            return test.split("(" + MODEL_FIELD_SEPARATOR + ")|(" + MODEL_PERIOD_SEPARATOR + ")").length == 3;
+            return test.split("(" + STORAGE_FIELD_SEPARATOR + ")").length == 3;
         default:
             throw new IllegalStateException(UNRECOGNIZED_SOURCE);
         }
     }
 
+    /**
+     * @return The String representation of {@code Appointment} for use in Storage/Save-Parsing
+     */
+    public String toSaveString() {
+        return STORAGE_DATE_FORMATTER.format(date) + STORAGE_FIELD_SEPARATOR
+                + STORAGE_TIME_FORMATTER.format(start) + STORAGE_FIELD_SEPARATOR + STORAGE_TIME_FORMATTER.format(end);
+    }
+
     @Override
     public String toString() {
-        return MODEL_DATE_FORMATTER.format(date) + MODEL_FIELD_SEPARATOR
-                + MODEL_TIME_FORMATTER.format(start) + MODEL_PERIOD_SEPARATOR + MODEL_TIME_FORMATTER.format(end);
+        return STORAGE_DATE_FORMATTER.format(date) + STORAGE_FIELD_SEPARATOR
+                + STORAGE_TIME_FORMATTER.format(start) + MODEL_PERIOD_SEPARATOR + STORAGE_TIME_FORMATTER.format(end);
     }
 
     @Override

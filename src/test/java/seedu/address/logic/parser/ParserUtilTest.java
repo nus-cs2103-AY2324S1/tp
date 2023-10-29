@@ -21,6 +21,7 @@ import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.enums.InputSource;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -38,7 +39,7 @@ public class ParserUtilTest {
     private static final String VALID_NRIC = "S9876543A";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
-    private static final String VALID_APPOINTMENT = "2023-01-23 10:00 12:00";
+    private static final String VALID_APPOINTMENT = "23-Jan-2023 10:00 12:00";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -113,7 +114,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseAppointment_validValue_returnsAppointment() throws Exception {
-        Appointment expectedAppointment = new Appointment(VALID_APPOINTMENT);
+        Appointment expectedAppointment = Appointment.of(VALID_APPOINTMENT, InputSource.USER_INPUT);
         System.out.println(ParserUtil.parseAppointment(VALID_APPOINTMENT));
         assertEquals(expectedAppointment, ParserUtil.parseAppointment(VALID_APPOINTMENT));
     }
@@ -209,14 +210,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseAppointment_validValueWithoutWhitespace_returnsAppointment() throws Exception {
-        Appointment expectedAppt = new Appointment(VALID_APPOINTMENT);
+        Appointment expectedAppt = Appointment.of(VALID_APPOINTMENT, InputSource.USER_INPUT);
         assertEquals(expectedAppt, ParserUtil.parseAppointment(VALID_APPOINTMENT));
     }
 
     @Test
     public void parseAppointment_validValueWithWhitespace_returnsTrimmedAppointment() throws Exception {
         String apptWithWhitespace = WHITESPACE + VALID_APPOINTMENT + WHITESPACE;
-        Appointment expectedAppt = new Appointment(VALID_APPOINTMENT);
+        Appointment expectedAppt = Appointment.of(VALID_APPOINTMENT, InputSource.USER_INPUT);
         assertEquals(expectedAppt, ParserUtil.parseAppointment(apptWithWhitespace));
     }
 

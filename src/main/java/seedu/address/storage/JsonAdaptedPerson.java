@@ -92,7 +92,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         appointment = source.getAppointment().isPresent()
-            ? source.getAppointment().get().toString()
+            ? source.getAppointment().get().toSaveString()
             : null;
         medicalHistories.addAll(source.getMedicalHistories().stream()
                 .map(JsonAdaptedMedicalHistory::new)

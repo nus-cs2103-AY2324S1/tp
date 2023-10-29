@@ -57,7 +57,7 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAppointment(String appointment) {
         try {
-            descriptor.setAppointment(Appointment.of(appointment, InputSource.STORAGE));
+            descriptor.setAppointment(Appointment.of(appointment, InputSource.USER_INPUT));
         } catch (BadAppointmentFormatException e) {
             throw new IllegalStateException(
                     "Encountered an error with Appointment for EditPersonDescriptorBuilder.", e);

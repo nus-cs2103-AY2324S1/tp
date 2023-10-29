@@ -26,7 +26,7 @@ public class AppointmentTest {
     private static final String VALID_APPOINTMENT_USER_INPUT_4 = "01-01-2021,9:00, 11:30";
     private static final String VALID_APPOINTMENT_USER_INPUT_5 = "02-01-2021,9:00, 11:30";
     private static final String VALID_APPOINTMENT_USER_INPUT_6 = "01-01-2021,13:00, 13:30";
-    private static final String VALID_APPOINTMENT_STORAGE = "01-Jan-2021, 09:00 to 11:30";
+    private static final String VALID_APPOINTMENT_STORAGE = "01-Jan-2021, 09:00, 11:30";
 
     private static final String INVALID_MISSING_FIELD = "1-Jan-2023 12:00";
     private static final String INVALID_BAD_YEAR = "1-Jan-23 12:00 15:00";

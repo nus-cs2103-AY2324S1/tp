@@ -28,18 +28,18 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withNric("T7243948H")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withAppointment("12-Dec-2023, 12:00 to 15:00").withPhone("94351253").withTags("friends").build();
+            .withAppointment("12-Dec-2023 12:00 15:00").withPhone("94351253").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withNric("S1234567B")
-            .withAddress("311, Clementi Ave 2, #02-25").withAppointment("12-Dec-2023, 12:00 to 15:00")
+            .withAddress("311, Clementi Ave 2, #02-25").withAppointment("12-Dec-2023 12:00 15:00")
             .withEmail("johnd@example.com").withPhone("98765432").withMedical("diabetes", "high-risk")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withNric("S8765432B")
             .withPhone("95352563").withEmail("heinz@example.com")
-            .withAddress("wall street").withAppointment("01-Jan-2023, 10:00 to 12:00")
+            .withAddress("wall street").withAppointment("01-Jan-2023 10:00 12:00")
             .withMedical("O= Blood Type").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withNric("T1234567I")
             .withPhone("87652533").withEmail("cornelia@example.com")
-            .withAddress("10th street").withAppointment("01-Jan-2023, 10:00 to 12:00")
+            .withAddress("10th street").withAppointment("01-Jan-2023 10:00 12:00")
             .withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withNric("T1111111Z")
             .withPhone("9482224").withEmail("werner@example.com").withAddress("michegan ave").build();
@@ -48,7 +48,7 @@ public class TypicalPersons {
 
     // TODO: Replace George NRIC with non-duplicate after EditCommand is implemented.
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withNric("T7243948H")
-            .withAppointment("12-Dec-2023, 12:00 to 15:00").withPhone("9482442").withEmail("anna@example.com")
+            .withAppointment("12-Dec-2023 12:00 15:00").withPhone("9482442").withEmail("anna@example.com")
             .withAddress("4th street").build();
 
     // Manually added

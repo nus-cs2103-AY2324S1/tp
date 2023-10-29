@@ -26,7 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_APPOINTMENT = "10-Jan-2023, 10:00 to 12:00";
+    public static final String DEFAULT_APPOINTMENT = "10-Jan-2023 10:00 12:00";
 
     private Name name;
     private Nric nric;
@@ -42,7 +42,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         try {
-            appointment = Appointment.of(DEFAULT_APPOINTMENT, InputSource.STORAGE);
+            appointment = Appointment.of(DEFAULT_APPOINTMENT, InputSource.USER_INPUT);
         } catch (BadAppointmentFormatException e) {
             throw new IllegalStateException(
                     "Encountered an error with Appointment for PersonBuilder.", e);
@@ -92,7 +92,7 @@ public class PersonBuilder {
 
     public PersonBuilder withAppointment(String appointment) {
         try {
-            this.appointment = Appointment.of(appointment, InputSource.STORAGE);
+            this.appointment = Appointment.of(appointment, InputSource.USER_INPUT);
         } catch (BadAppointmentFormatException e) {
             throw new IllegalStateException(
                     "Encountered an error with Appointment for PersonBuilder.", e);
