@@ -25,8 +25,24 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final Courses coursesData;
+    private Courses coursesData;
     private final FilteredList<Person> filteredPersons;
+
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(addressBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        String courseCode = this.userPrefs.getTeaching();
+        if (!courseCode.equals("")) {
+            Course course = UniqueCourseList.findByCourseCode(courseCode);
+            TeachingCoursePredicate predicate = new TeachingCoursePredicate(List.of(course));
+            updateFilteredPersonList(predicate);
+        }
+    }
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.

@@ -17,9 +17,7 @@ import seedu.address.model.course.exceptions.LessonNotFoundException;
  * Represents a list of courses with TAs in SOC. Immutable.
  */
 public class UniqueCourseList implements Iterable<Course> {
-    private static final ObservableList<Course> internalList = FXCollections.observableArrayList(
-            CourseData.getCourseList()
-    );
+    private static final ObservableList<Course> internalList = FXCollections.observableArrayList();
     private static final ObservableList<Course> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -52,9 +50,10 @@ public class UniqueCourseList implements Iterable<Course> {
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public static ObservableList<Course> getList() {
+    public ObservableList<Course> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
+
 
     public boolean contains(Course toCheck) {
         requireNonNull(toCheck);

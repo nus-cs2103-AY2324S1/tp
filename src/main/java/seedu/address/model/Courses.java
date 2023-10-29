@@ -3,7 +3,6 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.UniqueCourseList;
-import seedu.address.model.person.Person;
 
 import java.util.List;
 
@@ -62,6 +61,6 @@ public class Courses implements ReadOnlyCourses {
 
     @Override
     public ObservableList<Course> getCourseList() {
-        return UniqueCourseList.getList();
+        return this.courses.asUnmodifiableObservableList();
     }
 }
