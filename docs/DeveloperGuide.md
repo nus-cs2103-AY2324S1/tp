@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/Main.java) and [`MainApp`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,24 +67,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Date` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -115,21 +115,21 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the height book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the LoveBook data i.e., all `Date` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Date` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Date>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `LoveBook`, which `Person` references. This allows `LoveBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `LoveBook`, which `Date` references. This allows `LoveBook` to only require one `Tag` object per unique tag, instead of each `Date` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -138,12 +138,12 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/LoveBook-level3/tree/master/src/main/java/seedu/height/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both height book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both LoveBook data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `LoveBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -171,17 +171,35 @@ There are 5 main features in that you came up with for LoveBook.
 3. Get random date
 4. Filter dates
 5. Sort dates
+6. Get best match
+7. Star dates
+8. Unstar dates
 
-### \[Proposed\] Filter dates
+### Filter dates
 The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
 object as a parameter. The `Predicate` object is used to filter the `Date` objects in the `Model` component.
 The `FilterCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
 
-### \[Proposed\] Sort dates
+### Sort dates
 The sort feature is implemented using the `SortCommand` class. The `SortCommand` class takes in a `Comparator`
 object as a parameter. The `Comparator` object is used to sort the `Date` objects in the `Model` component.
 The `SortCommand` class then returns a `CommandResult` object that contains the sorted `Date` objects.
 
+### Get best match
+The best match feature is implemented using the `BestMatchCommand` class. The `BestMatchCommand` class iterates
+through the list of Dates, and calls `GetScore` to get the score of the date based on height, age, horoscope and 
+income. Each metric will be scored upon 10, and when it deviates from the user's preferences, the score is reduced.
+The maximum score is 40.
+
+### Star dates
+The star feature is implemented using the `StarCommand` class. The `StarCommand` class takes in a an 'Index' 
+object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be
+starred. The `StarCommand` class then returns a `CommandResult` object that contains the starred `Date` object
+
+### Unstar dates
+The unstar feature is implemented using the `UnstarCommand` class. The `UnstarCommand` class takes in a an 'Index' 
+object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be
+unstarred. The `UnstarCommand` class then returns a `CommandResult` object that contains the unstarred `Date` object
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -236,15 +254,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LoveBook` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use Case: Add a Person
+#### Use Case: Add a Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests to add a new date to the height book.
+1. User requests to add a new date to the LoveBook.
 2. LoveBook prompts the user to provide the date's details, including name, age number, and gender.
 3. User enters the required details.
 4. LoveBook validates the input.
-5. LoveBook adds the new date to the height book.
+5. LoveBook adds the new date to the LoveBook.
 6. LoveBook displays a confirmation message.
 
 **Extensions:**
@@ -257,11 +275,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - User is prompted to re-enter the details.
 - Use case resumes at step 3.
 
-#### Use Case: Search for a Person
+#### Use Case: Search for a Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests to search for a date in the height book.
+1. User requests to search for a date in the LoveBook.
 2. LoveBook prompts the user to enter a search query (e.g., name or age number).
 3. User enters the search query.
 4. LoveBook performs a search based on the query.
@@ -272,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4a. No dates match the search query.
 - LoveBook displays a message indicating that no matching dates were found.
 
-#### Use Case: Edit Person Details
+#### Use Case: Edit Date Details
 
 **Main Success Scenario (MSS):**
 
@@ -301,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - User is prompted to re-enter the details.
 - Use case resumes at step 5.
 
-#### Use Case: View Person Details
+#### Use Case: View Date Details
 
 **Main Success Scenario (MSS):**
 
@@ -321,16 +339,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - User is prompted to select a valid date.
 - Use case resumes at step 3.
 
-#### Use Case: Delete a Person
+#### Use Case: Delete a Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests to delete a specific date from the height book.
+1. User requests to delete a specific date from the LoveBook.
 2. LoveBook shows a list of dates.
 3. User selects the date they want to delete from the list.
 4. LoveBook confirms the deletion with the user.
 5. User confirms the deletion.
-6. LoveBook deletes the date from the height book.
+6. LoveBook deletes the date from the LoveBook.
 7. LoveBook displays a confirmation message.
 
 **Extensions:**
@@ -355,17 +373,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 1a. The list is empty.
-- Lovebook displays a message indicating that there are no dates.
+- LoveBook displays a message indicating that there are no dates.
 - Use case ends.
+
+#### Use Case: View Preferences for Dates
+
+**Main Success Scenario (MSS):**
+
+1. User requests to edit the details of a specific date.
+2. LoveBook shows the user's preferences.
+3. LoveBook prompts the user to provide the updated details for the selected preference.
+4. User enters the updated details.
+5. LoveBook validates the input.
+6. LoveBook updates the preference's details with the new information.
+7. LoveBook displays a confirmation message.
+
+**Extensions:**
+
+2a. User did not set a preference.
+- LoveBook displays a message indicating a default preference.
+- Use case ends.
+
+5a. The input is invalid (e.g., missing date or an invalid age number).
+- LoveBook shows an error message.
+- User is prompted to re-enter the details.
+- Use case resumes at step 5.
 
 
 ### Non-Functional Requirements
 
 1.  Usability and Accessibility: The application should provide clear and user-friendly CLI prompts and menus.
 It should support keyboard shortcuts for navigation to enhance accessibility.
-2.  Scalability: The height book should be capable of storing at least 10,000 contacts without a significant decrease in performance.
+2.  Scalability: The LoveBook should be capable of storing at least 10,000 contacts without a significant decrease in performance.
 3.  Reliability and Availability: The application should have a 99.9% uptime, ensuring that users can access their contacts reliably.
-It should automatically back up height book data daily to prevent data loss.
+It should automatically back up LoveBook data daily to prevent data loss.
 4.  Portability: The CLI application should be compatible with multiple operating systems, including Windows, macOS, and Linux.
 
 *{More to be added}*
