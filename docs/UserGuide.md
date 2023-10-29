@@ -142,7 +142,7 @@ number in the user input by 1, or add 1 if there is no number.
 Duplicate handling: 
 * Entering `technical12`, then `technical12` again will result in the 2nd entry being converted to 
 `technical13`.
-* Entering `technical`, then `technical` will result in the 2nd entry being converted to `technical1`.
+* Entering `technical`, then `technical` again will result in the 2nd entry being converted to `technical1`.
 
 Format: `addi INDEX t/TYPE [r/RATING]`
 
