@@ -16,6 +16,8 @@ import seedu.address.model.Model;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
+    public static final String COMMAND_WORD_ALIAS = "u";
+
     public static final String COMMAND_FORMAT = "Command Format: " + COMMAND_WORD + " [number]\n"
             + "Examples:\n"
             + " - " + COMMAND_WORD + " (undoes the last command)\n"

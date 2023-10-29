@@ -36,6 +36,8 @@ public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
+    public static final String COMMAND_WORD_ALIAS = "e";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the Person identified "
             + "by the name or NRIC of the Patient.\n"
             + "Existing values will be overwritten by the input values.\n"
