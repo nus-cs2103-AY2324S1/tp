@@ -35,11 +35,11 @@ public class PersonListPanel extends UiPart<Region> {
         super(FXML);
         // Set the text initially to handle the case when personList is empty
         if (personList.isEmpty()) {
-            personType.setText("NO DATA");
+            personType.setText("No data found");
         } else if (personList.get(0) instanceof Patient) {
-            personType.setText("Patient");
+            personType.setText("Patients");
         } else {
-            personType.setText("Specialist");
+            personType.setText("Specialists");
         }
 
         // set the text fill color after JavaFX initialization to prevent race condition
@@ -57,13 +57,13 @@ public class PersonListPanel extends UiPart<Region> {
                     @Override
                     public void onChanged(Change<? extends Person> c) {
                         if (personList.isEmpty()) {
-                            personType.setText("NO DATA");
+                            personType.setText("No data found");
                             personType.setTextFill(Color.GREY);
                         } else if (personList.get(0) instanceof Patient) {
-                            personType.setText("Patient");
+                            personType.setText("Patients");
                             personType.setTextFill(Color.AQUA);
                         } else {
-                            personType.setText("Specialist");
+                            personType.setText("Specialists");
                             personType.setTextFill(Color.GREENYELLOW);
                         }
                     }
