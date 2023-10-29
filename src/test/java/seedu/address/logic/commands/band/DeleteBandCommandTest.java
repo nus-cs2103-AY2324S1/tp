@@ -3,21 +3,22 @@ package seedu.address.logic.commands.band;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showBandAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MUSICIAN;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MUSICIAN;
 import static seedu.address.testutil.typicalentities.TypicalAddressBook.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.band.DeleteBandCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.band.Band;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.band.Band;
+
 
 public class DeleteBandCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
