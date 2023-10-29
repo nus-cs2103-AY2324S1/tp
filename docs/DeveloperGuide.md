@@ -419,6 +419,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user with bad memory                                                | save a short description of my contact                                       | identify my contacts better                                                             |
 | `* * *`  | visual-reliant user                                                 | save a photo of the person into my contacts                                  | quickly recognise and find them                                                         |
 | `* * *`  | non-tech-savvy user                                                 | use the help feature of the app                                              | navigate about the app easily                                                           |
+| `* *`    | NUS student                                                         | sort all contacts by name                                                    | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by name in reverse                                         | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by email                                                   | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by email in reverse                                        | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by address                                                 | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by address in reverse                                      | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by phone                                                   | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by phone in reverse                                        | easily find a person's contact                                                          |
 | `* *`    | NUS student                                                         | import the NUS calendar into the application                                 | view all academic commitments more conveniently                                         |
 | `* *`    | NUS Student                                                         | compare timetables/calendars with my peers easily                            | plan meetings more conveniently                                                         |
 | `* *`    | NUS student                                                         | allocate tasks and responsibilities within a project or CCA group            | tasks can be done efficiently                                                           |
@@ -652,7 +660,9 @@ Use case ends.
 **Extensions**
 
 - 1a. User uses the wrong delimiter or makes a spelling mistake
-  - UniMate displays a message to show a helper message outlining the available sort options
+  - UniMate displays a message to show a helper message outlining the correct syntax and available sort options
+- 1b. User uses too few or too many arguments for sort
+  - UniMate displays a message to show a helper message outlining the correct syntax and available sort options
 
 ### Non-Functional Requirements
 

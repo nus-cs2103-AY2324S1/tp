@@ -168,8 +168,8 @@ Examples:
 * Sorting is done in ascending order by default. To sort by descending order, the keyword `reverse` can be used (see Examples below).
 
 Examples:
-* `sort /byname` sorts all persons in UniMate address book 
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `sort /byname` sorts all contacts in UniMate address book by the full name of `Person`
+* `sort /byaddress /reverse` sorts all contacts in UniMate address book by the address of `Person`
 
 ### Clearing all entries : `clear`
 
