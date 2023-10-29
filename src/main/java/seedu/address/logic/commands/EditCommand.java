@@ -45,7 +45,7 @@ public class EditCommand extends UndoableCommand {
             + PREFIX_PHONE + "91234567";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patient: %1$s";
-    public static final String MESSAGE_UNDO_PERSON_SUCCESS = "Undoing the Editing of Patient:  %1$s";
+    public static final String MESSAGE_UNDO_EDIT_PERSON_SUCCESS = "Undoing the Editing of Patient:  %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
             + "Fields include phone (p/), email (e/), "
             + "address (a/), appointment (ap/) and medical history (m/)\n"
@@ -112,7 +112,7 @@ public class EditCommand extends UndoableCommand {
         model.setPerson(editedPerson, originalPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_UNDO_PERSON_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_UNDO_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
     /**

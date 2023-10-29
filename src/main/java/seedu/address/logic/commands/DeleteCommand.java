@@ -41,7 +41,7 @@ public class DeleteCommand extends UndoableCommand {
     public static final String MESSAGE_PERSON_NOT_FOUND =
             "The given combination of Name and NRIC does not match any patient in the patients list.";
 
-    public static final String MESSAGE_UNDO_DELETE_ENTIRE_PERSON_SUCCESS = "Undoing the deletion of Patient:  %1$s";
+    public static final String MESSAGE_UNDO_DELETE_PERSON_SUCCESS = "Undoing the deletion of Patient:  %1$s";
 
     public static final String MESSAGE_UNDO_DELETE_FIELD_SUCCESS = "Undoing the deletion of a Patient's field:  %1$s";
 
@@ -102,13 +102,12 @@ public class DeleteCommand extends UndoableCommand {
         if (deletePersonDescriptor.isAllFalse()) {
             model.addPerson(originalPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_UNDO_DELETE_ENTIRE_PERSON_SUCCESS,
+            return new CommandResult(String.format(MESSAGE_UNDO_DELETE_PERSON_SUCCESS,
                     Messages.format(originalPerson)));
         } else {
             Person personToDelete = editedPerson;
             model.setPerson(personToDelete, originalPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            System.out.println(originalPerson);
             return new CommandResult(String.format(MESSAGE_UNDO_DELETE_FIELD_SUCCESS,
                     Messages.format(editedPerson)));
         }

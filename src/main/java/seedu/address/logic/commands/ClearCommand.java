@@ -12,7 +12,7 @@ public class ClearCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "HealthSync has been cleared!";
-    public static final String MESSAGE_UNDO_SUCCESS = "Undoing the clearing of HealthSync data.";
+    public static final String MESSAGE_UNDO_CLEAR_SUCCESS = "Undoing the clearing of HealthSync data.";
 
     private AddressBook addressBookBeforeClear;
 
@@ -31,6 +31,6 @@ public class ClearCommand extends UndoableCommand {
     public CommandResult undo(Model model) {
         requireNonNull(model);
         model.setAddressBook(addressBookBeforeClear);
-        return new CommandResult(MESSAGE_UNDO_SUCCESS);
+        return new CommandResult(MESSAGE_UNDO_CLEAR_SUCCESS);
     }
 }

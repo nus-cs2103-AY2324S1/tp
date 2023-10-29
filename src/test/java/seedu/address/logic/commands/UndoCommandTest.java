@@ -57,9 +57,8 @@ public class UndoCommandTest {
     }
 
     @Test
-    public void execute_undoMoreCommandsInEmptyStack_failure() {
+    public void execute_undoCommandsInEmptyStack_failure() {
         Model model = new ModelManager();
-        UndoableCommandStub stubUndoableCommand = new UndoableCommandStub();
 
         UndoCommand undoCommand = new UndoCommand(3);
         assertThrows(CommandException.class, () -> undoCommand.execute(model));
