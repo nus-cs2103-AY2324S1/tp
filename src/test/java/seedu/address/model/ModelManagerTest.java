@@ -26,7 +26,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new VersionedAddressBook(), new VersionedAddressBook(modelManager.getAddressBook()));
     }
 
     @Test
@@ -91,6 +91,47 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void canUndoAddressBook_initState_returnsFalse() {
+        assertFalse(modelManager.canUndoAddressBook());
+    }
+
+    @Test
+    public void canUndoAddressBook_atNonInitState_returnsTrue() {
+        // Simulate an add command
+        modelManager.addPerson(ALICE);
+        modelManager.commitAddressBook();
+
+        assertTrue(modelManager.canUndoAddressBook());
+    }
+
+    @Test
+    public void canRedoAddressBook_initState_returnsFalse() {
+        assertFalse(modelManager.canRedoAddressBook());
+    }
+
+    @Test
+    public void canRedoAddressBook_atUndoVersion_returnsTrue() {
+        // Simulate an add command
+        modelManager.addPerson(ALICE);
+        modelManager.commitAddressBook();
+
+        // Simulate undo command
+        modelManager.undoAddressBook();
+
+        assertTrue(modelManager.canRedoAddressBook());
+
+        // Simulate redo command
+        modelManager.redoAddressBook();
+
+        // Simulate delete command
+        modelManager.deletePerson(ALICE);
+        modelManager.commitAddressBook();
+
+        modelManager.undoAddressBook();
+        assertTrue(modelManager.hasPerson(ALICE));
     }
 
     @Test

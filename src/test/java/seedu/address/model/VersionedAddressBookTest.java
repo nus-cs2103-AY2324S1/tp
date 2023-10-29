@@ -28,13 +28,13 @@ public class VersionedAddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), oneVersionVersionedAddressBook.currentAddressBookGetPersonList());
+        assertEquals(Collections.emptyList(), oneVersionVersionedAddressBook.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class,
-                () -> oneVersionVersionedAddressBook.resetCurrentAddressBookData(null));
+                () -> oneVersionVersionedAddressBook.resetData(null));
     }
 
     @Test
@@ -59,28 +59,28 @@ public class VersionedAddressBookTest {
 
     @Test
     public void commit_newVersionedAddressBook_updatesPointer() {
-        assertFalse(twoVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
 
         // Simulate add command
-        twoVersionVersionedAddressBook.currentAddressBookAddPerson(ALICE);
+        twoVersionVersionedAddressBook.addPerson(ALICE);
 
         // commit new version of address book into version history
         twoVersionVersionedAddressBook.commit();
 
-        assertTrue(twoVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertTrue(twoVersionVersionedAddressBook.hasPerson(ALICE));
     }
 
     @Test
     public void canRedo_detects_validRedo() {
-        assertFalse(twoVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
 
         // Simulate add command
-        twoVersionVersionedAddressBook.currentAddressBookAddPerson(ALICE);
+        twoVersionVersionedAddressBook.addPerson(ALICE);
 
         // commit new version of address book into version history
         twoVersionVersionedAddressBook.commit();
 
-        assertTrue(twoVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertTrue(twoVersionVersionedAddressBook.hasPerson(ALICE));
 
         // undo to empty addressbook
         assertTrue(twoVersionVersionedAddressBook.canUndo());
@@ -88,20 +88,20 @@ public class VersionedAddressBookTest {
 
     @Test
     public void canUndo_detects_validUndo() {
-        assertFalse(twoVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
 
         // Simulate add command
-        twoVersionVersionedAddressBook.currentAddressBookAddPerson(ALICE);
+        twoVersionVersionedAddressBook.addPerson(ALICE);
 
         // commit new version of address book into version history
         twoVersionVersionedAddressBook.commit();
 
-        assertTrue(twoVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertTrue(twoVersionVersionedAddressBook.hasPerson(ALICE));
 
         // Undo add command
         twoVersionVersionedAddressBook.undo();
 
-        assertFalse(twoVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
 
         // Undo to empty addressbook
         assertTrue(twoVersionVersionedAddressBook.canRedo());
@@ -110,12 +110,12 @@ public class VersionedAddressBookTest {
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         AddressBook newData = getTypicalVersionedAddressBook();
-        oneVersionVersionedAddressBook.resetCurrentAddressBookData(newData);
+        oneVersionVersionedAddressBook.resetData(newData);
 
         // commit new version into history
         oneVersionVersionedAddressBook.commit();
 
-        assertEquals(newData, oneVersionVersionedAddressBook.getCurrentAddressBook());
+        assertEquals(newData, oneVersionVersionedAddressBook);
     }
 
     @Test
@@ -126,78 +126,78 @@ public class VersionedAddressBookTest {
         VersionedAddressBookStub newData = new VersionedAddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class,
-                () -> oneVersionVersionedAddressBook.resetCurrentAddressBookData(newData));
+                () -> oneVersionVersionedAddressBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class,
-                () -> oneVersionVersionedAddressBook.currentAddressBookHasPerson(null));
+                () -> oneVersionVersionedAddressBook.hasPerson(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(oneVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertFalse(oneVersionVersionedAddressBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInCurrentAddressBook_returnsTrue() {
-        oneVersionVersionedAddressBook.currentAddressBookAddPerson(ALICE);
+        oneVersionVersionedAddressBook.addPerson(ALICE);
 
         // commit Add Command to memory
         oneVersionVersionedAddressBook.commit();
 
-        assertTrue(oneVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertTrue(oneVersionVersionedAddressBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInCurrentAddressBook_returnsTrue() {
-        oneVersionVersionedAddressBook.currentAddressBookAddPerson(ALICE);
+        oneVersionVersionedAddressBook.addPerson(ALICE);
 
         // commit Add Command to memory
         oneVersionVersionedAddressBook.commit();
 
         oneVersionVersionedAddressBook.undo();
 
-        oneVersionVersionedAddressBook.currentAddressBookAddPerson(ALICE);
+        oneVersionVersionedAddressBook.addPerson(ALICE);
 
         // commit Add Command to memory
         oneVersionVersionedAddressBook.commit();
 
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertTrue(oneVersionVersionedAddressBook.currentAddressBookHasPerson(editedAlice));
+        assertTrue(oneVersionVersionedAddressBook.hasPerson(editedAlice));
     }
 
     @Test
     public void removePerson_removesPersonInAddressBook() {
-        oneVersionVersionedAddressBook.currentAddressBookAddPerson(ALICE);
+        oneVersionVersionedAddressBook.addPerson(ALICE);
 
         // commit Add Command to memory
         oneVersionVersionedAddressBook.commit();
 
-        oneVersionVersionedAddressBook.currentAddressBookRemovePerson(ALICE);
+        oneVersionVersionedAddressBook.removePerson(ALICE);
 
         // commit delete Command to memory
         oneVersionVersionedAddressBook.commit();
 
-        assertFalse(oneVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertFalse(oneVersionVersionedAddressBook.hasPerson(ALICE));
 
         oneVersionVersionedAddressBook.undo();
 
-        assertTrue(oneVersionVersionedAddressBook.currentAddressBookHasPerson(ALICE));
+        assertTrue(oneVersionVersionedAddressBook.hasPerson(ALICE));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class,
-                () -> oneVersionVersionedAddressBook.currentAddressBookGetPersonList().remove(0));
+                () -> oneVersionVersionedAddressBook.getPersonList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
         String expected = VersionedAddressBook.class.getCanonicalName()
-                + "{persons=" + oneVersionVersionedAddressBook.currentAddressBookGetPersonList() + "}";
-        assertEquals(expected, oneVersionVersionedAddressBook.currentAddressBookToString());
+                + "{persons=" + oneVersionVersionedAddressBook.getPersonList()+ "}";
+        assertEquals(expected, oneVersionVersionedAddressBook.toString());
     }
 
     /**
