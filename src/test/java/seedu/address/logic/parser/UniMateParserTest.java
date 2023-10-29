@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddContactEventCommand;
+import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -27,6 +29,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -90,6 +93,23 @@ public class UniMateParserTest {
     }
 
     @Test
+    public void parseCommand_addEvent() throws Exception {
+        String description = "sleep";
+        String startDateTime = "2023-10-10 10:00";
+        String endDateTime = "2023-10-10 12:00";
+        String validArg = "d/" + description
+                + " ts/" + startDateTime
+                + " te/" + endDateTime;
+        validArg = AddEventCommand.COMMAND_WORD + " " + validArg;
+        EventBuilder eventBuilder = new EventBuilder();
+        eventBuilder.withDescription(description);
+        eventBuilder.withStartEndDate(startDateTime, endDateTime);
+
+        AddEventCommand addEventCommand = (AddEventCommand) parser.parseCommand(validArg);
+        assertEquals(addEventCommand, new AddEventCommand(eventBuilder.build()));
+    }
+
+    @Test
     public void parseCommand_sort() throws Exception {
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
                 + SortCommand.SORTBY_KEYWORD1) instanceof SortCommand);
@@ -99,6 +119,24 @@ public class UniMateParserTest {
                 + SortCommand.SORTBY_KEYWORD3 + " " + SortCommand.REVERSE_KEYWORD) instanceof SortCommand);
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
                 + SortCommand.SORTBY_KEYWORD4 + " " + SortCommand.REVERSE_KEYWORD) instanceof SortCommand);
+    }
+
+    @Test
+    public void parserCommand_addContactEvent() throws Exception {
+        String description = "sleep";
+        String startDateTime = "2023-10-10 10:00";
+        String endDateTime = "2023-10-10 12:00";
+        String validArg = "d/" + description
+                + " ts/" + startDateTime
+                + " te/" + endDateTime;
+        EventBuilder eventBuilder = new EventBuilder();
+        eventBuilder.withDescription(description);
+        eventBuilder.withStartEndDate(startDateTime, endDateTime);
+        AddContactEventCommand command =
+                (AddContactEventCommand) parser.parseCommand(AddContactEventCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + validArg);
+
+        assertEquals(command, new AddContactEventCommand(INDEX_FIRST_PERSON, eventBuilder.build()));
     }
 
     @Test

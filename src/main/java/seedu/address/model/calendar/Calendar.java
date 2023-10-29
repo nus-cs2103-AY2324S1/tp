@@ -2,7 +2,9 @@ package seedu.address.model.calendar;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,13 +12,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.AllDaysEventListManager;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventPeriod;
 
 /**
  * Represents a calendar that stores and manages events.
  */
 public class Calendar implements ReadOnlyCalendar {
+    private static final int DAYS_IN_WEEK = 7;
+    private static final LocalDate DATE_OF_START_OF_CURRENT_WEEK = LocalDate.now().minusDays(
+            LocalDate.now().getDayOfWeek().getValue() - 1);
+    private static final LocalDate DATE_OF_END_OF_CURRENT_WEEK = LocalDate.now().plusDays(
+            DAYS_IN_WEEK - LocalDate.now().getDayOfWeek().getValue());
     private final AllDaysEventListManager eventManager;
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Event> internalListForCurrentWeek = FXCollections.observableArrayList();
 
     /**
      * Constructs a Calendar object with an empty event tree.
@@ -80,6 +89,8 @@ public class Calendar implements ReadOnlyCalendar {
         requireNonNull(event);
         eventManager.addEvent(event);
         internalList.setAll(eventManager.asUnmodifiableObservableList());
+        internalListForCurrentWeek.setAll(eventManager.asUnmodifiableObservableList(
+                DATE_OF_START_OF_CURRENT_WEEK, DATE_OF_END_OF_CURRENT_WEEK));
     }
 
     /**
@@ -90,16 +101,42 @@ public class Calendar implements ReadOnlyCalendar {
         requireNonNull(dateTime);
         eventManager.deleteEventAt(dateTime);
         internalList.setAll(eventManager.asUnmodifiableObservableList());
+        internalListForCurrentWeek.setAll(eventManager.asUnmodifiableObservableList(
+                DATE_OF_START_OF_CURRENT_WEEK, DATE_OF_END_OF_CURRENT_WEEK));
     }
 
     /**
      * Looks for an event at specified time.
+     *
      * @param dateTime the specified time.
      * @return an optional containing the event if there is an event at the time, an empty optional otherwise.
      */
     public Optional<Event> findEventAt(LocalDateTime dateTime) {
         requireNonNull(dateTime);
         return eventManager.eventAt(dateTime);
+    }
+
+    /**
+     * Looks for all events within a specified time range and returns them in a list.
+     *
+     * @param range the specified time range represented by an {@code EventPeriod}
+     * @return a list containing all events within the range.
+     */
+    public List<Event> getEventsInRange(EventPeriod range) {
+        requireNonNull(range);
+        return eventManager.eventsInRange(range);
+    }
+
+    /**
+     * Looks for all events within a specified time range and deletes them.
+     *
+     * @param range the specified time range represented by an {@code EventPeriod}
+     */
+    public void deleteEventsInRange(EventPeriod range) {
+        requireNonNull(range);
+        for (Event event:getEventsInRange(range)) {
+            deleteEventAt(event.getStartDateTime());
+        }
     }
 
     /**
@@ -143,6 +180,21 @@ public class Calendar implements ReadOnlyCalendar {
     @Override
     public ObservableList<Event> getEventList() {
         return internalList;
+    }
+
+    @Override
+    public ObservableList<Event> getCurrentWeekEventList() {
+        return internalListForCurrentWeek;
+    }
+
+    @Override
+    public Optional<LocalTime> getEarliestEventStartTimeInCurrentWeek() {
+        return getCurrentWeekEventList().stream().min(Event::compareStartTime).map(Event::getStartTime);
+    }
+
+    @Override
+    public Optional<LocalTime> getLatestEventEndTimeInCurrentWeek() {
+        return getCurrentWeekEventList().stream().max(Event::compareEndTime).map(Event::getEndTime);
     }
 
     @Override
