@@ -3,8 +3,6 @@ package seedu.staffsnap.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.staffsnap.logic.parser.CliSyntax.PREFIX_TYPE;
-import static seedu.staffsnap.model.Model.PREDICATE_HIDE_ALL_APPLICANTS;
-import static seedu.staffsnap.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class AddInterviewCommand extends Command {
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists for this applicant";
 
     private final Index index;
-    private final Interview interviewToAdd;
+    private Interview interviewToAdd;
 
     /**
      * Creates an AddInterviewCommand to add the specified {@code Interview}
@@ -60,14 +58,15 @@ public class AddInterviewCommand extends Command {
 
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
 
-        if (applicantToEdit.getInterviews().contains(interviewToAdd)
+        while (applicantToEdit.getInterviews().contains(interviewToAdd)
                 || interviewToAdd.isContainedIn(applicantToEdit.getInterviews())) {
-            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
+            interviewToAdd = interviewToAdd.incrementName();
         }
 
         applicantToEdit.addInterview(interviewToAdd);
-
+        applicantToEdit.getScore().updateScoreAfterAdd(interviewToAdd);
         model.refreshApplicantList();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(applicantToEdit)));
     }
 

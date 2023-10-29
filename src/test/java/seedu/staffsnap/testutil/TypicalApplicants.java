@@ -18,6 +18,7 @@ import java.util.List;
 
 import seedu.staffsnap.model.ApplicantBook;
 import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.Score;
 
 /**
  * A utility class containing a list of {@code Applicant} objects to be used in tests.
@@ -28,13 +29,14 @@ public class TypicalApplicants {
             .withPosition("Software Engineer").withEmail("alice@example.com").withPhone("94351253").build();
     public static final Applicant BENSON = new ApplicantBuilder().withName("Benson Meier")
             .withPosition("Frontend Engineer").withEmail("benson@example.com").withPhone("98765432")
-            .withInterviews(VALID_INTERVIEW_TECHNICAL).build();
+            .withInterviews(VALID_INTERVIEW_TECHNICAL)
+            .withScore(new Score(8.0, 8.0, 1)).build();
     public static final Applicant CARL = new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("carl@example.com").withPosition("Backend Engineer").withInterviews(VALID_INTERVIEW_BEHAVIORAL)
-            .build();
+            .withScore(new Score(8.5, 8.5, 1)).build();
     public static final Applicant DANIEL = new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("daniel@example.com").withPosition("Testing Engineer").withInterviews(VALID_INTERVIEW_TECHNICAL)
-            .build();
+            .withScore(new Score(8.0, 8.0, 1)).build();
     public static final Applicant ELLE = new ApplicantBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("elle@example.com").withPosition("Frontend Engineer").build();
     public static final Applicant FIONA = new ApplicantBuilder().withName("Fiona Kunz").withPhone("9482427")

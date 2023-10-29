@@ -10,12 +10,16 @@ import java.util.stream.Stream;
 import seedu.staffsnap.commons.core.index.Index;
 import seedu.staffsnap.commons.util.StringUtil;
 import seedu.staffsnap.logic.commands.FilterCommand;
+import seedu.staffsnap.logic.commands.ImportCommand;
 import seedu.staffsnap.logic.parser.exceptions.ParseException;
+import seedu.staffsnap.model.applicant.Applicant;
+import seedu.staffsnap.model.applicant.CsvApplicant;
 import seedu.staffsnap.model.applicant.Descriptor;
 import seedu.staffsnap.model.applicant.Email;
 import seedu.staffsnap.model.applicant.Name;
 import seedu.staffsnap.model.applicant.Phone;
 import seedu.staffsnap.model.applicant.Position;
+import seedu.staffsnap.model.applicant.Score;
 import seedu.staffsnap.model.applicant.Status;
 import seedu.staffsnap.model.interview.Interview;
 import seedu.staffsnap.model.interview.Rating;
@@ -50,6 +54,9 @@ public class ParserUtil {
         String[] tokens = content.split(" ");
         StringBuilder newContent = new StringBuilder();
         for (String token : tokens) {
+            if (token.isEmpty()) {
+                continue;
+            }
             char capLetter = Character.toUpperCase(token.charAt(0));
             newContent.append(" ");
             newContent.append(capLetter);
@@ -207,10 +214,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String rating} into a {@code Rating}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Checks if all prefixes are present in the given {@code ArgumentMultimap}.
      *
-     * @throws ParseException if the given {@code rating} is invalid.
+     * @param argumentMultimap
+     * @param prefixes
+     * @return true if all prefixes are present, false otherwise
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
@@ -238,10 +246,44 @@ public class ParserUtil {
         requireNonNull(score);
         Double result;
         try {
-            result = new Double(score);
+            result = Double.parseDouble(score);
         } catch (NumberFormatException e) {
             throw new ParseException(FilterCommand.MESSAGE_SCORE_PARSE_FAILURE);
         }
         return result;
+    }
+
+    /**
+     * Parses a {@code String fileName} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code fileName} is invalid.
+     */
+    public static String parseFileName(String fileName) throws ParseException {
+        requireNonNull(fileName);
+        String trimmedFileName = fileName.trim();
+        if (!trimmedFileName.matches(ImportCommand.FILENAME_VALIDATION_REGEX)) {
+            throw new ParseException(ImportCommand.MESSAGE_INVALID_FILENAME);
+        }
+
+        return trimmedFileName;
+    }
+
+    /**
+     * Parses a {@code CsvApplicant csvApplicant} into a {@code Applicant}.
+     * Interviews and status will be given default values.
+     *
+     * @throws ParseException if the given {@code csvApplicant} is invalid.
+     */
+    public static Applicant parseApplicantFromCsv(CsvApplicant csvApplicant) throws ParseException {
+        Name name = ParserUtil.parseName(csvApplicant.getName());
+        Phone phone = ParserUtil.parsePhone(csvApplicant.getPhone());
+        Email email = ParserUtil.parseEmail(csvApplicant.getEmail());
+        Position position = ParserUtil.parsePosition(csvApplicant.getPosition());
+        List<Interview> interviewList = new ArrayList<>();
+        Status status = Status.UNDECIDED;
+        Score score = new Score(interviewList);
+
+        return new Applicant(name, phone, email, position, interviewList, status, score);
     }
 }

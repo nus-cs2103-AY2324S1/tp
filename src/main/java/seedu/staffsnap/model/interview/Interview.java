@@ -5,6 +5,8 @@ import static seedu.staffsnap.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.staffsnap.commons.util.ToStringBuilder;
 
@@ -14,8 +16,7 @@ import seedu.staffsnap.commons.util.ToStringBuilder;
  */
 public class Interview implements Comparable<Interview> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Interview types should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Interview types should not be empty";
 
     public final String type;
 
@@ -37,7 +38,7 @@ public class Interview implements Comparable<Interview> {
      * Returns true if a given string is a valid interview type.
      */
     public static boolean isValidType(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.isEmpty();
     }
 
     public String getType() {
@@ -46,6 +47,28 @@ public class Interview implements Comparable<Interview> {
 
     public Rating getRating() {
         return rating;
+    }
+
+    /**
+     * Increments the interview name and returns the incremented interview
+     * @return the incremented interview
+     */
+    public Interview incrementName() {
+        Pattern pattern = Pattern.compile(".*?(\\d+)$");
+
+        Matcher matcher = pattern.matcher(type);
+
+        if (matcher.find()) {
+            String lastNumber = matcher.group(1);
+
+            int number = Integer.parseInt(lastNumber);
+            int incrementedNumber = number + 1;
+            String result = type.replace(lastNumber, String.valueOf(incrementedNumber));
+
+            return new Interview(result, rating);
+        } else {
+            return new Interview(type + 1, rating);
+        }
     }
 
     @Override

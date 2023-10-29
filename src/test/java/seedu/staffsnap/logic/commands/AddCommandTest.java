@@ -161,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
+        public void updateFilteredApplicantList(Predicate<? super Applicant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -17,6 +17,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_STATUS = new Prefix("s/");
     public static final Prefix PREFIX_LESS_THAN_SCORE = new Prefix("lts/");
     public static final Prefix PREFIX_GREATER_THAN_SCORE = new Prefix("gts/");
+    public static final Prefix PREFIX_FILENAME = new Prefix("f/");
     public static final Prefix PREFIX_ASCENDING = new Prefix("asc/");
     public static final Prefix PREFIX_DESCENDING = new Prefix("dsc/");
 

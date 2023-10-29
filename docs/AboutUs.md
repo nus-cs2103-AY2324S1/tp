@@ -1,5 +1,5 @@
 ---
-  layout: default.md 
+  layout: default.md
   title: "About Us"
 ---
 
@@ -16,7 +16,7 @@ You can reach us at the email `craigton.lian[at]gmail.com`
 <img src="images/craigtonlian.png" width="200px" height = "200px" style = "border-radius: 50%;">
 
 
-* Links: 
+* Links:
   [[github](https://github.com/craigtonlian)]
   [[portfolio](team/craigtonlian.md)]
 * Role: Developer
@@ -30,7 +30,7 @@ You can reach us at the email `craigton.lian[at]gmail.com`
 
 <img src="images/austinhuang1203.png" width="200px" height = "200px" style = "border-radius: 50%;">
 
-* Links: 
+* Links:
   [[github](http://github.com/austinhuang1203)]
   [[portfolio](team/austinhuang1203.md)]
 * Role: Developer

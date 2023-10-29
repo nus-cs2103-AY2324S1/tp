@@ -60,7 +60,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION; // empty string not allowed for positions
     public static final String INVALID_TYPE_DESC = " "
-            + PREFIX_TYPE + "hubby*"; // '*' not allowed in interviews
+            + PREFIX_TYPE + ""; // empty string not allowed in interviews
     public static final String INVALID_RATING_DESC = " " + PREFIX_RATING
             + "-1"; // negative numbers not allowed for ratings
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
