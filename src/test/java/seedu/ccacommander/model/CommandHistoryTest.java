@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 public class CommandHistoryTest {
     public static final String FIRST_COMMAND = "FIRST COMMAND";
     public static final String SECOND_COMMAND = "SECOND COMMAND";
+    public static final String COMMAND_WITH_WHITESPACE = "    COMMAND WITH LEADING AND TRAILING WHITESPACE    ";
+    public static final String COMMAND_WITHOUT_WHITESPACE = "COMMAND WITH LEADING AND TRAILING WHITESPACE";
 
     private CommandHistory commandHistory;
 
@@ -30,6 +32,15 @@ public class CommandHistoryTest {
     @Test
     public void addCommand_nullCommand_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> commandHistory.addCommand(null));
+    }
+
+    @Test
+    public void addCommand_AddsTrimmedCommands() {
+        commandHistory.addCommand(COMMAND_WITH_WHITESPACE);
+        commandHistory.addCommand("     ");
+        String previousCommand = commandHistory.getPreviousCommand();
+
+        assertTrue(previousCommand.equals(COMMAND_WITHOUT_WHITESPACE));
     }
 
     @Test
