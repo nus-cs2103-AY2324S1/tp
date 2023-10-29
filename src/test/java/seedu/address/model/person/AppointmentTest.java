@@ -107,10 +107,10 @@ public class AppointmentTest {
 
     @Test
     public void equals() throws Exception {
-        Appointment appointment = new Appointment(VALID_APPOINTMENT_USER_INPUT_1);
+        Appointment appointment = Appointment.of(VALID_APPOINTMENT_USER_INPUT_1, InputSource.USER_INPUT);
 
         // same values -> returns true
-        assertTrue(appointment.equals(new Appointment(VALID_APPOINTMENT_USER_INPUT_1)));
+        assertTrue(appointment.equals(Appointment.of(VALID_APPOINTMENT_USER_INPUT_1, InputSource.USER_INPUT)));
 
         // same object -> returns true
         assertTrue(appointment.equals(appointment));
@@ -122,8 +122,8 @@ public class AppointmentTest {
         assertFalse(appointment.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(appointment.equals(new Appointment(VALID_APPOINTMENT_USER_INPUT_5)));
-        assertFalse(appointment.equals(new Appointment(VALID_APPOINTMENT_USER_INPUT_6)));
+        assertFalse(appointment.equals(Appointment.of(VALID_APPOINTMENT_USER_INPUT_5, InputSource.USER_INPUT)));
+        assertFalse(appointment.equals(Appointment.of(VALID_APPOINTMENT_USER_INPUT_6, InputSource.USER_INPUT)));
     }
 
     @Test

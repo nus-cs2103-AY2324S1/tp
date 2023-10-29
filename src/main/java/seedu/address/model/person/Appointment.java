@@ -51,32 +51,6 @@ public class Appointment {
     private final LocalTime start;
     private final LocalTime end;
 
-    /**
-     * Constructs an {@code Appointment}.
-     *
-     * @param appointment An appointment String input.
-     */
-    public Appointment(String appointment) throws BadAppointmentFormatException {
-        requireNonNull(appointment);
-
-        String[] splitFields = appointment.split(FIELD_SEPARATOR_REGEX);
-        LocalTime start;
-        LocalTime end;
-        try {
-            date = LocalDate.parse(splitFields[0], INPUT_DATE_FORMATTER);
-            start = LocalTime.parse(splitFields[1], INPUT_TIME_FORMATTER);
-            end = LocalTime.parse(splitFields[2], INPUT_TIME_FORMATTER);
-        } catch (DateTimeParseException e) {
-            throw new BadAppointmentFormatException(MESSAGE_CONSTRAINTS);
-        }
-
-        if (start.isAfter(end)) {
-            throw new BadAppointmentFormatException(MESSAGE_CONSTRAINTS);
-        }
-        this.start = start;
-        this.end = end;
-    }
-
     private Appointment(LocalDate date, LocalTime start, LocalTime end) {
         requireAllNonNull(date, start, end);
         this.date = date;
