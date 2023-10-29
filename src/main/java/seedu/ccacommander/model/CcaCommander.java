@@ -175,6 +175,11 @@ public class CcaCommander implements ReadOnlyCcaCommander {
         enrolments.createEnrolment(a);
     }
 
+    public void setEnrolment(Enrolment target, Enrolment editedEnrolment) {
+        requireNonNull(editedEnrolment);
+
+        enrolments.setEnrolment(target, editedEnrolment);
+    }
     // util methods
 
     @Override

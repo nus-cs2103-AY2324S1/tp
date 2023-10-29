@@ -20,6 +20,7 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventDate;
 import seedu.ccacommander.model.event.Location;
@@ -79,6 +80,21 @@ public class EditEventCommand extends Command {
 
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
+
+
+        Name prevName = eventToEdit.getName();
+        Name newName = editedEvent.getName();
+        // If event's name is edited, the corresponding enrolment objects are edited also
+        if (!prevName.equals(newName)) {
+            List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
+            for (Enrolment enrolment: enrolmentList) {
+                if (enrolment.getEventName().equals(prevName)) {
+                    Enrolment editedEnrolment = new Enrolment(enrolment.getMemberName(), newName,
+                            enrolment.getHours(), enrolment.getRemark());
+                    model.setEnrolment(enrolment, editedEnrolment);
+                }
+            }
         }
 
         model.setEvent(eventToEdit, editedEvent);

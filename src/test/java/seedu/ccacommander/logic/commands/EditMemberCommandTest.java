@@ -24,9 +24,13 @@ import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ModelManager;
 import seedu.ccacommander.model.UserPrefs;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.testutil.EditMemberDescriptorBuilder;
 import seedu.ccacommander.testutil.MemberBuilder;
+
+import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditMemberCommand.
@@ -47,6 +51,17 @@ public class EditMemberCommandTest {
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
+
+        Name prevName = model.getFilteredMemberList().get(0).getName();
+        Name newName = editedMember.getName();
+        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
+        for (Enrolment enrolment: enrolmentList) {
+            if (enrolment.getMemberName().equals(prevName)) {
+                Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
+                        enrolment.getHours(), enrolment.getRemark());
+                expectedModel.setEnrolment(enrolment, editedEnrolment);
+            }
+        }
         expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
@@ -71,6 +86,17 @@ public class EditMemberCommandTest {
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
         expectedModel.setMember(lastMember, editedMember);
+
+        Name prevName = lastMember.getName();
+        Name newName = editedMember.getName();
+        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
+        for (Enrolment enrolment: enrolmentList) {
+            if (enrolment.getMemberName().equals(prevName)) {
+                Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
+                        enrolment.getHours(), enrolment.getRemark());
+                expectedModel.setEnrolment(enrolment, editedEnrolment);
+            }
+        }
         expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);
@@ -107,6 +133,17 @@ public class EditMemberCommandTest {
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
+
+        Name prevName = model.getFilteredMemberList().get(0).getName();
+        Name newName = editedMember.getName();
+        List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
+        for (Enrolment enrolment: enrolmentList) {
+            if (enrolment.getMemberName().equals(prevName)) {
+                Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
+                        enrolment.getHours(), enrolment.getRemark());
+                expectedModel.setEnrolment(enrolment, editedEnrolment);
+            }
+        }
         expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editMemberCommand, model, expectedMessage, expectedModel);

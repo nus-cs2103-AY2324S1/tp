@@ -22,6 +22,7 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.member.Address;
 import seedu.ccacommander.model.member.Email;
 import seedu.ccacommander.model.member.Gender;
@@ -85,6 +86,20 @@ public class EditMemberCommand extends Command {
 
         if (!memberToEdit.isSameMember(editedMember) && model.hasMember(editedMember)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
+        }
+
+        Name prevName = memberToEdit.getName();
+        Name newName = editedMember.getName();
+        // If member's name is edited, the corresponding enrolment objects are edited also
+        if (!prevName.equals(newName)) {
+            List<Enrolment> enrolmentList = model.getFilteredEnrolmentList();
+            for (Enrolment enrolment: enrolmentList) {
+                if (enrolment.getMemberName().equals(prevName)) {
+                    Enrolment editedEnrolment = new Enrolment(newName, enrolment.getEventName(),
+                                                              enrolment.getHours(), enrolment.getRemark());
+                    model.setEnrolment(enrolment, editedEnrolment);
+                }
+            }
         }
 
         model.setMember(memberToEdit, editedMember);
