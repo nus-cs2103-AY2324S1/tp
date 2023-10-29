@@ -231,7 +231,7 @@ public class EditCommand extends Command {
                     .add("name", this.name)
                     .add("phone", this.phone)
                     .add("email", this.email)
-                    .add("address", this.note)
+                    .add("note", this.note)
                     .add("tags", this.tags)
                     .toString();
         }

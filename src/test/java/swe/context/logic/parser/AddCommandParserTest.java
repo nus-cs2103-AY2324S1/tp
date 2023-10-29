@@ -62,7 +62,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, TestData.Valid.EMAIL_DESC_AMY + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
-        // multiple addresses
+        // multiple notes
         assertParseFailure(parser, TestData.Valid.NOTE_DESC_AMY + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
 
