@@ -95,11 +95,11 @@ public class UniMateParser {
         case DeleteEventCommand.COMMAND_WORD:
             return new DeleteEventCommandParser().parse(arguments);
 
-        case AddContactEventCommand.COMMAND_WORD:
-            return new AddContactEventCommandParser().parse(arguments);
-            
         case ClearEventsCommand.COMMAND_WORD:
             return new ClearEventsCommandParser().parse(arguments);
+
+        case AddContactEventCommand.COMMAND_WORD:
+            return new AddContactEventCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
