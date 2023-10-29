@@ -53,7 +53,6 @@ public class EventPeriod implements Comparable<EventPeriod> {
         return this.start;
     }
 
-
     /**
      * Creates and returns a new EventPeriod object with minimum date/time values.
      *
@@ -109,7 +108,6 @@ public class EventPeriod implements Comparable<EventPeriod> {
         boolean isThisEventStartingAfterOtherEventEnds = this.start.toLocalDate().isAfter(end);
         boolean isThisEventEndedBeforeOtherEventStarts = this.end.toLocalDate().isBefore(start);
         return !(isThisEventStartingAfterOtherEventEnds || isThisEventEndedBeforeOtherEventStarts);
-
     }
 
     /**

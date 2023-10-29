@@ -140,7 +140,6 @@ public class AllDaysEventListManager {
                 .collect(Collectors.toList());
     }
 
-
     /**
      * Checks if the manager is empty.
      *
