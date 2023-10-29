@@ -29,10 +29,13 @@ public class DeleteCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String COMMAND_WORD_ALIAS = "d";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
             + ": Delete the patient identified by the full name or nric of the patient.\n"
             + "Parameters: n/Name or id/Nric (must be valid)\n"
-            + "Example: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A";
+            + "Example 1: " + COMMAND_WORD + " n/John Doe or " + COMMAND_WORD + " id/S1234567A \n"
+            + "Example 1: " + COMMAND_WORD_ALIAS + " n/Alex Yeoh or " + COMMAND_WORD_ALIAS + " id/T0123456F";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Patient: %1$s";
 
