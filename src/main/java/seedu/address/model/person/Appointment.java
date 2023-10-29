@@ -145,6 +145,21 @@ public class Appointment {
     }
 
     /**
+     * @return true, if the period represented by this {@code Appointment} overlaps with the period
+     *         of {@code target}, inclusive of the {@code start} and {@code end}.<br>
+     *         false, if the {@code date} objects are not equal, or if the periods do not overlap.
+     */
+    public boolean overlaps(Appointment target) {
+        assert !start.isAfter(end);
+        assert !target.start.isAfter(target.end);
+
+        if (!date.isEqual(target.date)) {
+            return false;
+        }
+        return !end.isBefore(target.start) && !start.isAfter(target.end);
+    }
+
+    /**
      * @return The String representation of {@code Appointment} for use in Storage/Save-Parsing
      */
     public String toSaveString() {
