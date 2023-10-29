@@ -35,7 +35,7 @@ public class CommandHistoryTest {
     }
 
     @Test
-    public void addCommand_AddsTrimmedCommands() {
+    public void addCommand_onlyAddsTrimmedCommands() {
         commandHistory.addCommand(COMMAND_WITH_WHITESPACE);
         commandHistory.addCommand("     ");
         String previousCommand = commandHistory.getPreviousCommand();

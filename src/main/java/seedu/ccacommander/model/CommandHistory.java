@@ -30,7 +30,7 @@ public class CommandHistory {
         requireNonNull(command);
         String trimmedCommand = command.trim();
         if (trimmedCommand.length() == 0) {
-           return;
+            return;
         }
 
         if (this.commandHistoryList.size() == 0
