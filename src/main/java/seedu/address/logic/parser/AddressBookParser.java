@@ -62,7 +62,7 @@ public class AddressBookParser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-        
+
         case EditCommand.COMMAND_WORD_ALIAS:
             return new EditCommandParser().parse(arguments);
 
@@ -80,7 +80,7 @@ public class AddressBookParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-        
+
         case ClearCommand.COMMAND_WORD_ALIAS:
             return new ClearCommand();
 
@@ -106,7 +106,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case HelpCommand.COMMAND_WORD_ALIAS:
-            return new HelpCommand();    
+            return new HelpCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
