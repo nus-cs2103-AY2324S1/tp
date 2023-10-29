@@ -17,13 +17,13 @@ import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CopyApplicantCommand;
 import seedu.address.logic.commands.CopyMemberCommand;
+import seedu.address.logic.commands.DeleteApplicantCommand;
+import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.EditApplicantCommand;
 import seedu.address.logic.commands.EditApplicantCommand.EditApplicantDescriptor;
 import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.DeleteApplicantCommand;
-import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.FindApplicantCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -67,7 +67,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand__deleteApplicant() throws Exception {
+    public void parseCommand_deleteApplicant() throws Exception {
         DeleteApplicantCommand commandWord = (DeleteApplicantCommand) parser.parseCommand(
                 DeleteApplicantCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         DeleteApplicantCommand commandAlias = (DeleteApplicantCommand) parser.parseCommand(
