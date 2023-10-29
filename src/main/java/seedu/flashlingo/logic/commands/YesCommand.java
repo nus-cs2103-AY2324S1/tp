@@ -34,10 +34,10 @@ public class YesCommand extends Command {
         if (!model.hasNextRound()) {
             SessionManager.getInstance().setSession(false);
             model.updateFilteredFlashCardList(PREDICATE_SHOW_ALL_FLASHCARDS);
-            return new CommandResult(MESSAGE_SUCCESS + "\n" + "You have no more words to review!");
+            return new CommandResult(MESSAGE_SUCCESS + "\n" + "\nYou have no more words to review!");
         }
         model.nextReviewWord();
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + response);
+        return new CommandResult(MESSAGE_SUCCESS + "\n" + "\nThe next word is: ");
     }
 
     @Override
