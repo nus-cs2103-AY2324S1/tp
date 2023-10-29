@@ -1,10 +1,11 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -12,7 +13,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Doctor extends Person {
-    private ArrayList<Patient> patients = new ArrayList<Patient>();
+    private final Set<Appointment> appointments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -27,17 +28,17 @@ public class Doctor extends Person {
      *
      * @return An ArrayList containing the patients currently registered in the facility.
      */
-    public ArrayList<Patient> getPatients() {
-        return patients;
+    public Set<Appointment> getAppointments() {
+        return appointments;
     }
 
     /**
      * Adds a new patient to the medical facility's list of patients.
      *
-     * @param patient The Patient object representing the individual to be added.
+     * @param appointment The Patient object representing the individual to be added.
      */
-    public void addPatient(Patient patient) {
-        this.patients.add(patient);
+    public void addAppointment(Appointment appointment) {
+        this.appointments.add(appointment);
     }
 
     /**
@@ -68,7 +69,7 @@ public class Doctor extends Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Doctor)) {
             return false;
         }
 
@@ -80,13 +81,13 @@ public class Doctor extends Person {
                 && gender.equals(otherDoctor.gender)
                 && ic.equals(otherDoctor.ic)
                 && tags.equals(otherDoctor.tags)
-                && patients.equals(otherDoctor.patients);
+                && appointments.equals(otherDoctor.appointments);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, gender, ic, tags, patients);
+        return Objects.hash(name, phone, email, address, gender, ic, tags, appointments);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class Doctor extends Person {
                 .add("remark", remark)
                 .add("gender", gender)
                 .add("nric", ic)
-                .add("patients", patients)
+                .add("appointments", appointments)
                 .add("tags", tags)
                 .toString();
     }

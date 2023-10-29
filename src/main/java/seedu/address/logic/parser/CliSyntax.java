@@ -27,4 +27,9 @@ public class CliSyntax {
 
     //specific to doctor
     public static final Prefix PREFIX_PATIENTS = new Prefix("pts/");
+
+    //specific to appointment
+    public static final Prefix PREFIX_PATIENT_IC = new Prefix("pic/");
+    public static final Prefix PREFIX_DOCTOR_IC = new Prefix("dic/");
+    public static final Prefix PREFIX_APPOINTMENT_TIME = new Prefix("time/");
 }

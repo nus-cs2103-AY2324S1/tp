@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
@@ -42,6 +43,7 @@ public class PatientBuilder {
     private Condition condition;
     private BloodType bloodType;
     private Set<Tag> tags;
+    private Set<Appointment> appointments;
 
     /**
      * Constructor for the PatientBuilder class that initialises
@@ -59,6 +61,7 @@ public class PatientBuilder {
         condition = new Condition(DEFAULT_CONDITION);
         bloodType = new BloodType(DEFAULT_BLOODTYPE);
         tags = new HashSet<>();
+        appointments = new HashSet<>();
     }
 
     /**
@@ -76,6 +79,7 @@ public class PatientBuilder {
         condition = patientToCopy.getCondition();
         bloodType = patientToCopy.getBloodType();
         tags = new HashSet<>(patientToCopy.getTags());
+        appointments = new HashSet<>(patientToCopy.getAppointments());
     }
 
     /**
@@ -91,6 +95,14 @@ public class PatientBuilder {
      */
     public PatientBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAppointments(Appointment... appointments) {
+        this.appointments = SampleDataUtil.getAppointmentSet(appointments);
         return this;
     }
 

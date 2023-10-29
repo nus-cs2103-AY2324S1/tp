@@ -1,11 +1,14 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
 import seedu.address.model.person.Patient;
@@ -22,6 +25,7 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
     private final String emergencyContact;
     private final String condition;
     private final String bloodType;
+    private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given person details.
@@ -31,9 +35,13 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("remark") String remark, @JsonProperty("gender") String gender,
                               @JsonProperty("ic") String ic, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments,
                               @JsonProperty("condition") String condition, @JsonProperty("bloodType") String bloodType,
                               @JsonProperty("emergencyContact") String emergencyContact) {
         super(name, phone, email, address, remark, gender, ic, tags);
+        if (appointments != null) {
+            this.appointments.addAll(appointments);
+        }
         this.condition = condition;
         this.bloodType = bloodType;
         this.emergencyContact = emergencyContact;
@@ -45,6 +53,9 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
     public JsonAdaptedPatient(Patient source) {
         super(source);
 
+        appointments.addAll(source.getAppointments().stream()
+                .map(JsonAdaptedAppointment::new)
+                .collect(Collectors.toList()));
         this.emergencyContact = source.getEmergencyContact().value;
         this.bloodType = source.getBloodType().value;
         this.condition = source.getCondition().value;
@@ -57,12 +68,22 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
      */
     public Patient toModelType() throws IllegalValueException {
         Person p = super.toModelType();
+
+        final List<Appointment> listOfAppointments = new ArrayList<>();
+        for (JsonAdaptedAppointment appointment : appointments) {
+            listOfAppointments.add(appointment.toModelType());
+        }
         final Phone modelEmergencyContact = checkEmergencyContact();
         final Condition modelCondition = checkCondition();
         final BloodType modelBloodType = checkBloodType();
 
-        return new Patient(p.getName(), p.getPhone(), modelEmergencyContact, p.getEmail(), p.getAddress(),
-                p.getRemark(), p.getGender(), p.getIc(), modelCondition, modelBloodType, p.getTags());
+        Patient modelPatient = new Patient(p.getName(), p.getPhone(), modelEmergencyContact, p.getEmail(),
+                p.getAddress(), p.getRemark(), p.getGender(), p.getIc(), modelCondition, modelBloodType, p.getTags());
+
+        for (Appointment appointment : listOfAppointments) {
+            modelPatient.addAppointment(appointment);
+        }
+        return modelPatient;
     }
 
     /**

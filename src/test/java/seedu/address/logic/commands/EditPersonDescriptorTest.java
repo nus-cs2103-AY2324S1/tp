@@ -69,7 +69,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getIc().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", condition="
                 + editPersonDescriptor.getCondition().orElse(null) + ", blood type="
-                + editPersonDescriptor.getBloodType().orElse(null) + "}";
+                + editPersonDescriptor.getBloodType().orElse(null) + ", appointments="
+                + editPersonDescriptor.getCondition().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 
