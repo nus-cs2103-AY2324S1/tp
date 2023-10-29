@@ -33,6 +33,7 @@ public class AddInterviewCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New interview added to applicant: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists for this applicant";
+    public static final String MESSAGE_INTERVIEW_LIMIT_REACHED = "This applicant has reached the interview limit of 5";
 
     private final Index index;
     private final Interview interviewToAdd;
@@ -57,6 +58,10 @@ public class AddInterviewCommand extends Command {
         }
 
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
+
+        if (applicantToEdit.getInterviews().size() == 5) {
+            throw new CommandException(MESSAGE_INTERVIEW_LIMIT_REACHED);
+        }
 
         if (applicantToEdit.getInterviews().contains(interviewToAdd)
                 || interviewToAdd.isContainedIn(applicantToEdit.getInterviews())) {

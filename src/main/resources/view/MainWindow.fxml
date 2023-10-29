@@ -11,7 +11,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Staff-Snap" minWidth="1215" minHeight="600" onCloseRequest="#handleExit">
+         title="Staff-Snap" minWidth="1215" minHeight="660" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/ss_logo.png" />
   </icons>
