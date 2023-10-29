@@ -28,6 +28,8 @@ Any feedback, including errors, will appear directly below the input box.
 
 ### Adding a Contact: `add`
 
+//TODO UG needs quite a lot of updates. We should take from or re-edit off the original AB3 documentation to make ours more fleshed out. We should also make ours match the messages in the code.
+
 Easily add a new contact to your list with the `add` command.
 
 **Format:**
@@ -79,7 +81,7 @@ Click the help button on the top to navigate to a comprehensive help manual.
 Search and display contacts with names containing any of the given keywords.
 
 **Format:**
-`find KEYWORD [MORE_KEYWORDS]`
+`find [KEYWORD]...`
 
 **Example:**
 `find John Alice`
