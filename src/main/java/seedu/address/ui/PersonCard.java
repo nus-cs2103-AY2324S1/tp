@@ -119,6 +119,10 @@ public class PersonCard extends UiPart<Region> {
                     + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
             workingStatus.setText("On Leave");
             break;
+        default:
+            workingStatus.setStyle("-fx-background-color: green; -fx-padding: 2;"
+                    + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
+            workingStatus.setText("Working");
         }
     }
 }
