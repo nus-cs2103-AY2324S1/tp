@@ -37,7 +37,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getAppointment().ifPresent((appt) -> sb.append(PREFIX_APPOINTMENT + appt.toString() + " "));
+        person.getAppointment().ifPresent((appt) -> sb.append(PREFIX_APPOINTMENT + appt.toSaveString() + " "));
         person.getMedicalHistories().stream().forEach(
                 s -> sb.append(PREFIX_TAG + s.value + " ")
         );
