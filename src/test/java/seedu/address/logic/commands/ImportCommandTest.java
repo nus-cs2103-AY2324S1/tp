@@ -52,16 +52,22 @@ class ImportCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+        List<Student> expectedList = new ArrayList<>();
+        expectedList.add(AMY);
+        expectedList.add(BOB);
+
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
         String fileName1 = relativePath + "\\" + "test_data_successful.csv";
-        List<Student> expectedList1 = new ArrayList<>();
-        expectedList1.add(AMY);
-        expectedList1.add(BOB);
+        CommandResult commandResult = new ImportCommand(expectedList, fileName1).execute(modelStub);
+        assertEquals(String.format(expectedList.size() + ImportCommand.MESSAGE_SUCCESS),
+                commandResult.getFeedbackToUser());
 
-        CommandResult commandResult = new ImportCommand(expectedList1, fileName1).execute(modelStub);
-
-        assertEquals(String.format(expectedList1.size() + ImportCommand.MESSAGE_SUCCESS),
+        modelStub = new ModelStubAcceptingPersonAdded();
+        relativePath = Paths.get("src", "test", "data", "ImportDataTest");
+        String fileName2 = relativePath + "\\" + "test_data_successful_with_enrol_dates.csv";
+        commandResult = new ImportCommand(expectedList, fileName2).execute(modelStub);
+        assertEquals(String.format(expectedList.size() + ImportCommand.MESSAGE_SUCCESS),
                 commandResult.getFeedbackToUser());
     }
 

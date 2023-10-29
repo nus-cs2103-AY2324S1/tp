@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_ADDRESS;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_EMAIL;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_ENROL_DATE;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_GENDER;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_MRT_STATION;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_NAME;
@@ -16,6 +17,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +32,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.SecLevel;
 import seedu.address.model.person.Student;
+import seedu.address.model.tag.EnrolDate;
 import seedu.address.model.tag.Subject;
 
 /**
@@ -55,12 +59,13 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             BufferedReader reader = new BufferedReader(new FileReader(csvFile));
             String header = reader.readLine();
             String[] expectedHeaders = {MESSAGE_NAME, MESSAGE_PHONE, MESSAGE_EMAIL, MESSAGE_ADDRESS, MESSAGE_GENDER,
-                MESSAGE_SEC_LEVEL, MESSAGE_MRT_STATION, MESSAGE_SUBJECT};
+                MESSAGE_SEC_LEVEL, MESSAGE_MRT_STATION, MESSAGE_SUBJECT, MESSAGE_ENROL_DATE};
 
             String[] actualHeaders = header.split(",");
 
             if (!(actualHeaders.length == expectedHeaders.length
-                    || actualHeaders.length == expectedHeaders.length - 1)) {
+                    || actualHeaders.length == expectedHeaders.length - 1
+                    || actualHeaders.length == expectedHeaders.length - 2)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
             }
 
@@ -98,11 +103,24 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         count++;
         MrtStation nearestMrtStation = ParserUtil.parseMrtStation(attributes[count]);
         count++;
-        List<String> subjects = new ArrayList<>(Arrays.asList(attributes).subList(count, attributes.length));
-        Set<Subject> subjectList = ParserUtil.parseTags(subjects);
+        List<String> remaining = new ArrayList<>(Arrays.asList(attributes).subList(count, attributes.length));
+        Iterator<String> remainingIterator = remaining.iterator();
+        int subjectCount = 0;
+        while (remainingIterator.hasNext()) {
+            String next = remainingIterator.next();
+            if (Subject.isValidSubjectName(next)) {
+                subjectCount++;
+            } else {
+                break;
+            }
+        }
+        List<String> subjects = remaining.subList(0, subjectCount);
+        List<String> dates = remaining.subList(subjectCount, remaining.size());
+        Collection<EnrolDate> parsedDates = ParserUtil.parseDates(dates);
+        Set<Subject> parsedSubjects = ParserUtil.parseTags(subjects, parsedDates);
 
         return new Student(name, phone, email, address,
-                gender, secLevel, nearestMrtStation, subjectList);
+                gender, secLevel, nearestMrtStation, parsedSubjects);
     }
 
 
