@@ -59,9 +59,8 @@ public class FindApplicantCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredApplicantList());
     }
-
-     @Test
-     public void execute_multipleKeywords_multipleApplicantFound() {
+    @Test
+    public void execute_multipleKeywords_multipleApplicantFound() {
         String expectedMessage = String.format(MESSAGE_APPLICANTS_LISTED_OVERVIEW, 3);
         ApplicantContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindApplicantCommand command = new FindApplicantCommand(predicate);

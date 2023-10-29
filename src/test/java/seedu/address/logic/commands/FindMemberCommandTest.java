@@ -59,7 +59,7 @@ public class FindMemberCommandTest {
         expectedModel.updateFilteredMemberList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredMemberList());
-   }
+    }
 
     @Test
     public void execute_multipleKeywords_multipleMemberFound() {
