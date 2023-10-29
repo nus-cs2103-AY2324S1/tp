@@ -40,22 +40,24 @@ public class JobTypeTest {
     }
 
     @Test
-    public void equals() {
+    public void testEqualsAndHashcode() {
         JobType jobType = new JobType("FULL_TIME");
 
         // same values -> returns true
-        assertEquals(jobType, new JobType("FULL_TIME"));
+        assertTrue(jobType.equals(new JobType("FULL_TIME")));
+        assertEquals(jobType.hashCode(), new JobType("FULL_TIME").hashCode());
 
         // same object -> returns true
-        assertEquals(jobType, jobType);
+        assertTrue(jobType.equals(jobType));
 
         // null -> returns false
-        assertNotEquals(jobType, null);
+        assertFalse(jobType.equals(null));
 
         // different types -> returns false
-        assertNotEquals(jobType, 5.0f);
+        assertFalse(jobType.equals(5.0f));
 
         // different values -> returns false
-        assertNotEquals(jobType, new JobType("PART_TIME"));
+        assertFalse(jobType.equals(new JobType("PART_TIME")));
+        assertNotEquals(jobType.hashCode(), new JobType("PART_TIME").hashCode());
     }
 }

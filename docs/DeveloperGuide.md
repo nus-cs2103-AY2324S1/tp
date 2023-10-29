@@ -3,8 +3,50 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents
-  {:toc}
+# Developer Guide
+
+Table of Contents
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### UI Component
+
+**API:**
+[`Ui.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/ui/Ui.java)
+
+**Description:**
+
+The `UI` component is responsible for managing the user interface of the application so that it can respond according to
+the user's actions or commands entered.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
+are in the `src/main/resources/view folder`. For example, the layout of
+the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/ui/MainWindow.java)
+is specified
+in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml).
+
+**Functionality:**
+
+The UI component,
+
+- executes user commands using the `Logic` component.
+- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- keeps a reference to the `Logic` component, because the UI relies on the Logic to execute commands.
+- depends on some classes in the `Model` component, as it displays Person object residing in the Model.
+
+**Component Structure:**
+
+<img src="images/UiClassDiagram.png" width="900" />
+
+The UI consists of a `MainWindow` that is made up of parts like `CommandBox` and `ResultDisplay`.
+These parts are always being shown in `MainWindow`, while other parts like `JobListPanel`, `JobDetailsPanel` are only
+visible
+to the user depending on the state of the application e.g. when the job list if not empty, when a job is selected.
+
+etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities
+between classes that represent parts of the visible GUI.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,6 +99,25 @@ The following sequence diagram illustrates the process of invocation for the Edi
 #### Design Considerations
 
 --------------------------------------------------------------------------------------------------------------------
+### Delete Command
+
+The delete command allows the user to delete a job application using its index.
+
+#### Implementation
+
+The following sequence diagram illustrates the process of invocation for the command:
+
+(insert UML sequence diagram)
+
+The `DeleteCommand` class implements this command. It accepts an index and deletes the job application at the specified index.
+
+The `DeleteCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
+not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown. If the user input is valid,
+then `DeleteCommandParser` returns the corresponding `DeleteCommand`.
+
+#### Design considerations
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### List Command
 
@@ -86,7 +147,7 @@ The following sequence diagram illustrates the process of invocation for the com
 (insert UML sequence diagram)
 
 The `SortCommand` class implements this command. It accepts a `FieldComparator` which will be set as the comparator when
-`Model::sortJobs` is called. 
+`Model::sortJobs` is called.
 
 The `SortCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
 not conform to the expected format, a `ParseException` is thrown. If the user input is valid, then `SortCommandParser`
@@ -96,8 +157,44 @@ The overriding `FieldComparator::compare` method compares the field indicated by
 relevant field method must be invoked.
 
 * For alphabetically sorted fields (`Company`, `Role`, `Status`, `Industry`, `JobType`), `String::compareToIgnoreCase`
-is used.
+  is used.
 * For chronologically sorted fields (`Deadline`), a custom `compareTo()` method is implemented.
+
+#### Design considerations
+
+--------------------------------------------------------------------------------------------------------------------
+
+### FInd Command
+
+The find command allows the user to get a filtered list of job applications.
+
+#### Implementation
+
+The following sequence diagram illustrates the process of invocation for the command:
+
+(insert UML sequence diagram)
+
+The `FindCommand` class implements this command. 
+It accepts a `FieldContainsKeywordsPredicate` which will be set as the predicate when `Model::updateFilteredJobList` is called.
+
+The `FindCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
+not conform to the expected format, a `ParseException` is thrown. If the user input is valid, then `FindCommandParser`
+generates the corresponding `FindCommand` with a `FieldContainsKeywordsPredicate` which will be set as the predicate when filtering through the list.
+
+#### Design considerations
+
+--------------------------------------------------------------------------------------------------------------------
+### Clear Command
+
+The clear command allows the user to delete all job applications.
+
+#### Implementation
+
+The following sequence diagram illustrates the process of invocation for the command:
+
+(insert UML sequence diagram)
+
+The `ClearCommand` class implements this command.
 
 #### Design considerations
 
@@ -158,54 +255,6 @@ _Extensions_
 * 1a. The company is not specified
 
   Use case ends.
-
----
-
-**Use case: Set deadline for an application**
-
-_MSS_
-
-1. User requests to list applications
-2. System shows a list of applications
-3. User requests to set a deadline for an application, specifying an index and deadline
-4. System adds deadline to the application at the index specified
-
-   Use case ends.
-
-_Extensions_
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index/deadline is invalid.
-    * 3a1. System shows an error message.
-
-      Use case resumes at step 3.
-
----
-
-**Use case: Mark an application**
-
-_MSS_
-
-1. User requests to list applications
-2. System shows a list of applications
-3. User requests to mark an application in the list, specifying an index and status
-4. System marks the application at the index specified
-
-   Use case ends.
-
-_Extensions_
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index/deadline is invalid.
-    * 3a1. System shows an error message.
-
-      Use case resumes at step 3.
 
 ---
 

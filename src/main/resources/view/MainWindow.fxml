@@ -42,7 +42,6 @@
 
                 <HBox fx:id="listAndDetailsSplitPanePlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" minHeight="510"
                       styleClass="pane-with-border">
-
                     <VBox fx:id="jobList" styleClass="pane-with-border" minWidth="400" maxWidth="400" minHeight="350"
                           prefHeight="350" VBox.vgrow="ALWAYS">
                         <padding>

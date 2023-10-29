@@ -62,7 +62,7 @@ public class JobBuilder {
     }
 
     /**
-     * Sets the {@code Status} of the {@code Job} that we are building.
+     * Sets the {@code Deadline} of the {@code Job} that we are building.
      */
     public JobBuilder withDeadline(String deadline) {
         this.deadline = new Deadline(deadline);
@@ -70,7 +70,7 @@ public class JobBuilder {
     }
 
     /**
-     * Sets the {@code Company} of the {@code Job} that we are building.
+     * Sets the {@code Status} of the {@code Job} that we are building.
      */
     public JobBuilder withStatus(String status) {
         this.status = new Status(status);

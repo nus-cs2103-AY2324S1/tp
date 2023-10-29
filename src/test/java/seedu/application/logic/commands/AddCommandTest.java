@@ -74,6 +74,9 @@ public class AddCommandTest {
 
         // different job -> returns false
         assertNotEquals(addChefCommand, addCleanerCommand);
+
+        // null -> returns false
+        assertNotEquals(null, addCleanerCommand);
     }
 
     @Test
@@ -154,11 +157,6 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredJobList(Predicate<Job> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void unsortJobs() {
             throw new AssertionError("This method should not be called.");
         }
 

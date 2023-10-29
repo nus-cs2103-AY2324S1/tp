@@ -23,6 +23,20 @@ public class ArgumentMultimap {
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
     /**
+     * Returns the {@code argMultiMap} object.
+     */
+    public Map<Prefix, List<String>> getArgMultimap() {
+        return argMultimap;
+    }
+
+    /**
+     * Returns the size of the {@code argMultiMap} object.
+     */
+    public int size() {
+        return argMultimap.size();
+    }
+
+    /**
      * Associates the specified argument value with {@code prefix} key in this map.
      * If the map previously contained a mapping for the key, the new value is appended to the list of existing values.
      *

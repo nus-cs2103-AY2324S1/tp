@@ -48,46 +48,54 @@ public class JobTest {
     }
 
     @Test
-    public void equals() {
+    public void testEqualsAndHashcode() {
         // same values -> returns true
         Job chefCopy = new JobBuilder(CHEF).build();
-        assertEquals(CHEF, chefCopy);
+        assertTrue(CHEF.equals(chefCopy));
+        assertEquals(CHEF.hashCode(), chefCopy.hashCode());
 
         // same object -> returns true
-        assertEquals(CHEF, CHEF);
+        assertTrue(CHEF.equals(CHEF));
 
         // null -> returns false
-        assertNotEquals(CHEF, null);
+        assertFalse(CHEF.equals(null));
 
         // different type -> returns false
-        assertNotEquals(CHEF, 5.0f);
+        assertFalse(CHEF.equals(5.0f));
 
         // different job -> returns false
-        assertNotEquals(CHEF, CLEANER);
+        assertFalse(CHEF.equals(CLEANER));
+        assertNotEquals(CHEF.hashCode(), CLEANER.hashCode());
 
         // different role -> returns false
-        Job editedChef = new JobBuilder(CHEF).withRole(VALID_ROLE_CLEANER).build();
-        assertNotEquals(CHEF, editedChef);
+        Job chefEditedRole = new JobBuilder(CHEF).withRole(VALID_ROLE_CLEANER).build();
+        assertFalse(CHEF.equals(chefEditedRole));
+        assertNotEquals(CHEF.hashCode(), chefEditedRole.hashCode());
 
         // different company -> returns false
-        editedChef = new JobBuilder(CHEF).withCompany(VALID_COMPANY_CLEANER).build();
-        assertNotEquals(CHEF, editedChef);
+        Job chefEditedCompany = new JobBuilder(CHEF).withCompany(VALID_COMPANY_CLEANER).build();
+        assertFalse(CHEF.equals(chefEditedCompany));
+        assertNotEquals(CHEF.hashCode(), chefEditedCompany.hashCode());
 
         // different status -> returns false
-        editedChef = new JobBuilder(CHEF).withStatus(VALID_STATUS_CLEANER).build();
-        assertNotEquals(CHEF, editedChef);
+        Job chefEditedStatus = new JobBuilder(CHEF).withStatus(VALID_STATUS_CLEANER).build();
+        assertFalse(CHEF.equals(chefEditedStatus));
+        assertNotEquals(CHEF.hashCode(), chefEditedStatus.hashCode());
 
         // different deadline -> returns false
-        editedChef = new JobBuilder(CHEF).withDeadline(VALID_DEADLINE_CLEANER).build();
-        assertNotEquals(CHEF, editedChef);
+        Job editedChefDeadline = new JobBuilder(CHEF).withDeadline(VALID_DEADLINE_CLEANER).build();
+        assertFalse(CHEF.equals(editedChefDeadline));
+        assertNotEquals(CHEF.hashCode(), editedChefDeadline.hashCode());
 
         // different job type -> returns false
-        editedChef = new JobBuilder(CHEF).withJobType(VALID_JOB_TYPE_CLEANER).build();
-        assertNotEquals(CHEF, editedChef);
+        Job editedChefJobType = new JobBuilder(CHEF).withJobType(VALID_JOB_TYPE_CLEANER).build();
+        assertFalse(CHEF.equals(editedChefJobType));
+        assertNotEquals(CHEF.hashCode(), editedChefJobType.hashCode());
 
         // different industry -> returns false
-        editedChef = new JobBuilder(CHEF).withIndustry(VALID_INDUSTRY_CLEANER).build();
-        assertNotEquals(CHEF, editedChef);
+        Job editedChefIndustry = new JobBuilder(CHEF).withIndustry(VALID_INDUSTRY_CLEANER).build();
+        assertFalse(CHEF.equals(editedChefIndustry));
+        assertNotEquals(CHEF.hashCode(), editedChefIndustry.hashCode());
     }
 
     @Test

@@ -132,11 +132,6 @@ public class ModelManager implements Model {
     //=========== Sorted Job List Accessors =============================================================
 
     @Override
-    public void unsortJobs() {
-        applicationBook.unsortJobs();
-    }
-
-    @Override
     public void sortJobs(FieldComparator comparator) {
         applicationBook.sortJobs(comparator);
     }

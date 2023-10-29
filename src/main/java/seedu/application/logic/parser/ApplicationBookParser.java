@@ -17,6 +17,7 @@ import seedu.application.logic.commands.ExitCommand;
 import seedu.application.logic.commands.FindCommand;
 import seedu.application.logic.commands.HelpCommand;
 import seedu.application.logic.commands.ListCommand;
+import seedu.application.logic.commands.SortCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
 
 /**
@@ -69,7 +70,10 @@ public class ApplicationBookParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommandParser().parse(arguments);
+            return new ListCommand();
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
