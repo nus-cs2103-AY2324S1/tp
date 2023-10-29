@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
+import transact.model.person.Person;
 import transact.model.transaction.Transaction;
 import transact.model.transaction.info.Amount;
 import transact.model.transaction.info.Date;
@@ -30,9 +31,10 @@ public class TransactionTablePanel extends UiPart<Region> {
      * Creates a {@code TransactionTablePanel} with the given
      * {@code ObservableList}.
      */
-    public TransactionTablePanel(ObservableList<Transaction> transactionList) {
+    public TransactionTablePanel(ObservableList<Transaction> transactionList, ObservableList<Person> personList) {
         super(FXML);
-
+        //System.out.println(personList);
+        //System.out.println(transactionList);
         TableColumn<Transaction, Integer> idCol = new TableColumn<>("Id");
         idCol.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("transactionId"));
 
@@ -49,15 +51,16 @@ public class TransactionTablePanel extends UiPart<Region> {
         amtCol.setCellValueFactory(new PropertyValueFactory<Transaction, Amount>("amount"));
 
         TableColumn<Transaction, String> staffCol = new TableColumn<>("Staff");
-        // staffCol.setCellValueFactory(new PropertyValueFactory<Transaction,
-        // Integer>("personId"));
+        //staffCol.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("personId"));
+
 
         staffCol.setCellValueFactory(new Callback<CellDataFeatures<Transaction, String>, ObservableValue<String>>() {
             public ObservableValue<String> call(CellDataFeatures<Transaction, String> t) {
                 // TODO Show name of staff beside the id
                 String displayString = "";
                 if (t.getValue().getPersonId() >= 0) {
-                    displayString = t.getValue().getPersonId().toString();
+                    String staffName = getPersonName(t.getValue().getPersonId().toString(), personList);
+                    displayString = t.getValue().getPersonId().toString() + " : " + staffName;
                 }
                 return new ReadOnlyObjectWrapper(displayString);
             }
@@ -66,5 +69,14 @@ public class TransactionTablePanel extends UiPart<Region> {
         transactionTable.getColumns().setAll(idCol, typeCol, dateCol, descCol, amtCol, staffCol);
 
         transactionTable.setItems(transactionList);
+    }
+
+    private String getPersonName(String personId, ObservableList<Person> personList) {
+        for (Person person : personList) {
+            if (person.getPersonId().toString().equals(personId)) {
+                return person.getName().toString();
+            }
+        }
+        return "Unknown";
     }
 }

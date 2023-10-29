@@ -104,6 +104,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Retrieves the person with the specified {@code personId} from the address book.
+     * Returns null if no person with the given ID is found.
+     *
+     * @param personId The ID of the person to retrieve.
+     * @return The person with the specified ID, or null if not found.
+     */
+    public Person getPerson(PersonId personId) {
+        requireNonNull(personId);
+
+        if (hasPerson(personId)) {
+            return getPersonMap().get(personId);
+        } else {
+            throw new RuntimeException("Person with such Id does not exist");
+        }
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
