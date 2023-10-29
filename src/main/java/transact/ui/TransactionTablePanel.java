@@ -33,8 +33,6 @@ public class TransactionTablePanel extends UiPart<Region> {
      */
     public TransactionTablePanel(ObservableList<Transaction> transactionList, ObservableList<Person> personList) {
         super(FXML);
-        //System.out.println(personList);
-        //System.out.println(transactionList);
         TableColumn<Transaction, Integer> idCol = new TableColumn<>("Id");
         idCol.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("transactionId"));
 
@@ -51,12 +49,8 @@ public class TransactionTablePanel extends UiPart<Region> {
         amtCol.setCellValueFactory(new PropertyValueFactory<Transaction, Amount>("amount"));
 
         TableColumn<Transaction, String> staffCol = new TableColumn<>("Staff");
-        //staffCol.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("personId"));
-
-
         staffCol.setCellValueFactory(new Callback<CellDataFeatures<Transaction, String>, ObservableValue<String>>() {
             public ObservableValue<String> call(CellDataFeatures<Transaction, String> t) {
-                // TODO Show name of staff beside the id
                 String displayString = "";
                 if (t.getValue().getPersonId() >= 0) {
                     String staffName = getPersonName(t.getValue().getPersonId().toString(), personList);
