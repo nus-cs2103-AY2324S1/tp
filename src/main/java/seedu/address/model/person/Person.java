@@ -105,6 +105,20 @@ public class Person {
     }
 
     /**
+     * Returns a payroll based on a specific date.
+     * @param date Start date of the payroll you want to retrieve.
+     * @return payroll of a specific start date.
+     */
+    public Payroll getPayrollWithStartDate(LocalDate date) {
+        for (Payroll payroll: payrolls) {
+            if (payroll.getStartDate().equals(date)) {
+                return payroll;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
