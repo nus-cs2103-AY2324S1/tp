@@ -17,15 +17,17 @@ public class MemberContainsKeywordPredicateTest {
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
-        MemberContainsKeywordsPredicate firstPredicate = new MemberContainsKeywordsPredicate(firstPredicateKeywordList);
-        MemberContainsKeywordsPredicate secondPredicate = new MemberContainsKeywordsPredicate(secondPredicateKeywordList);
+        MemberContainsKeywordsPredicate firstPredicate =
+                new MemberContainsKeywordsPredicate(firstPredicateKeywordList);
+        MemberContainsKeywordsPredicate secondPredicate =
+                new MemberContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         MemberContainsKeywordsPredicate firstPredicateCopy = new MemberContainsKeywordsPredicate(
-        firstPredicateKeywordList);
+                firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +44,7 @@ public class MemberContainsKeywordPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         MemberContainsKeywordsPredicate predicate = new MemberContainsKeywordsPredicate(
-        Collections.singletonList("Alicia"));
+                Collections.singletonList("Alicia"));
         assertTrue(predicate.test(new MemberBuilder().withName("Alicia Teng").build()));
 
         // Multiple keywords
