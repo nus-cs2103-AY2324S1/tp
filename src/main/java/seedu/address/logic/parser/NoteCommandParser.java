@@ -23,6 +23,8 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NOTE);
         Index index;
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NOTE);
+
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException e) {
