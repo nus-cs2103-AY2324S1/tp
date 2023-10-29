@@ -161,6 +161,16 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Sort persons : `sort`
+
+* Sorts all persons by specified `comparator`.
+* The comparator refers to the attribute(s) provided for the basis to sort. 
+* Sorting is done in ascending order by default. To sort by descending order, the keyword `reverse` can be used (see Examples below).
+
+Examples:
+* `sort /byname` sorts all persons in UniMate address book 
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
