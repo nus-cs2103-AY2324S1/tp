@@ -120,9 +120,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find_alias() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD_ALIAS + " n/" + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindCommand command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_WORD_ALIAS
+                + " n/" + keywords.stream().collect(Collectors.joining(" ")));
+        CompositePredicate findCommandPredicate = new CompositePredicate();
+        findCommandPredicate.add(new NameContainsKeywordsPredicate(keywords));
+        assertEquals(new FindCommand(findCommandPredicate), command);
     }
 
     @Test
