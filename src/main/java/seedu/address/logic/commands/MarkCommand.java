@@ -12,8 +12,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.attendance.AttendanceStorage;
-import seedu.address.model.person.attendance.AttendanceType;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
@@ -24,6 +22,8 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.attendance.AttendanceStorage;
+import seedu.address.model.person.attendance.AttendanceType;
 
 
 
@@ -128,7 +128,8 @@ public class MarkCommand extends Command {
             Person markedEmployee = markEmployee(employeeToMark);
 
             model.setPerson(employeeToMark, markedEmployee);
-            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, attendanceType.toString().toLowerCase(), employeeToMark.getName()));
+            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,
+                    attendanceType.toString().toLowerCase(), employeeToMark.getName()));
         }
         return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW_MARK,
                 model.getFilteredPersonList().size()), indexes);
@@ -159,9 +160,8 @@ public class MarkCommand extends Command {
         case LATE:
             attendanceStorage.markLate(LocalDate.now());
             break;
-        case PRESENT:
+        default:
             attendanceStorage.markPresent(LocalDate.now());
-
         }
 
         return new Person(name, phone, email, address, bankAccount, joinDate, salary, annualLeave, attendanceStorage);

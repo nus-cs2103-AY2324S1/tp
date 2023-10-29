@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.attendance.AttendanceStorage;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
@@ -24,6 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.attendance.AttendanceStorage;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -57,7 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         AnnualLeave annualLeave = ParserUtil.parseAnnualLeave(argMultimap.getValue(PREFIX_ANNUAL_LEAVE).get());
         AttendanceStorage attendanceStorage = new AttendanceStorage();
 
-        Person person = new Person(name, phone, email, address, bankAccount, joinDate, salary, annualLeave, attendanceStorage);
+        Person person = new Person(name, phone, email, address,
+                bankAccount, joinDate, salary, annualLeave, attendanceStorage);
 
         return new AddCommand(person);
     }
