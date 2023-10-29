@@ -36,13 +36,19 @@ public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the Person identified "
+    public static final String COMMAND_WORD_ALIAS = "e";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
+            + ": Edits the details of the Person identified "
             + "by the name or NRIC of the Patient.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Format: edit n/NAME or id/IC_NUMBER [Fields] ...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example 1: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "91234567";
+            + PREFIX_PHONE + "91234567 \n"
+            + "Example 2: " + COMMAND_WORD_ALIAS + " "
+            + PREFIX_NAME + "Alex Yeoh "
+            + PREFIX_PHONE + "82786151 \n";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_UNDO_EDIT_PERSON_SUCCESS = "Undoing the Editing of Patient:  %1$s";

@@ -12,8 +12,9 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all Patients";
+    public static final String COMMAND_WORD_ALIAS = "li";
 
+    public static final String MESSAGE_SUCCESS = "Listed all Patients";
 
     @Override
     public CommandResult execute(Model model) {
