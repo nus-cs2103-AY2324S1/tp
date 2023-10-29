@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.ui.Ui;
@@ -140,19 +141,18 @@ public interface Model {
      * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the schedule list.
      */
     void setLesson(Lesson target, Lesson editedLesson);
-    // NOTE: TO ADD FILTERED FILTEREDLESSONLIST METHODS HERE.
     /**
      * Shows the details of the given lesson.
      * The lesson must exist in the application.
      */
     void showLesson(Lesson lessonToShow); //TODO
     ObservableList<Lesson> getFilteredScheduleList();
-
     /**
      * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredScheduleList(Predicate<Lesson> predicate);
+
 
     /**
      * Links the Ui of the Application.
@@ -175,4 +175,31 @@ public interface Model {
      * @param state State to check against app
      */
     boolean sameState(State state);
+
+
+    public boolean hasCurrentShownEntry();
+
+    default Person getCurrentlyDisplayedPerson() {
+        return null;
+    }
+    default Lesson getCurrentlyDisplayedLesson() {
+        return null;
+    }
+    default Task getCurrentlyDisplayedTask() {
+        return null;
+    }
+
+    // todo: implement everything below here properly
+    default void setTask(Task target, Task editedTask) {
+    }
+    default void addTask(Task task) {
+    }
+    default void deleteTask(Task target) {
+    }
+    default void updateFilteredTaskList(Predicate<Task> predicate) {
+    }
+    default Boolean hasTaskClashWith(Task task) {
+        return null;
+    }
+    Boolean hasPersonClashWith(Person person);
 }

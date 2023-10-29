@@ -44,7 +44,7 @@ public class LessonCard extends UiPart<Region> {
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
         overview.setText(lesson.getLessonDateStr());
-        duration.setText(lesson.getLessonDuration());
+        duration.setText(lesson.getLessonDurationStr());
         for (String field : displayFields) {
             // TODO: Implement the schedule detail
             LessonCardFieldBuilder.build(field, lesson, fields);

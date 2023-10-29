@@ -13,12 +13,14 @@ import seedu.address.logic.parser.exceptions.FlagNotFoundException;
 import seedu.address.logic.parser.exceptions.InvalidInputException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.RepeatedFlagException;
+import seedu.address.model.ListEntryField;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Of;
 
 // I am considering probably make sense to write specific parser inside each class.
 /**
@@ -254,7 +256,7 @@ public class TypeParsingUtil {
      */
     public static Subject parseSubject(String input) throws ParseException {
         if (Subject.isValidSubject(input.toUpperCase())) {
-            return Subject.parseSubject(input);
+            return Subject.of(input);
         } else {
             throw new InvalidInputException(input + " is not a valid subject");
         }
@@ -270,7 +272,7 @@ public class TypeParsingUtil {
      */
     public static Subject parseSubject(String flagName, String input, boolean isOptional) throws ParseException {
         if (isOptional && parseStrs(flagName, input, true) == null) {
-            return Subject.getNone();
+            return Subject.DEFAULT_SUBJECT;
         }
 
         return parseSubject(parseFlag(flagName, input));
@@ -490,8 +492,8 @@ public class TypeParsingUtil {
      * @throws FlagNotFoundException if the flag is not found
      * @throws RepeatedFlagException if more than one flag is found
      */
-    public static String parseFlag(String flag, String input) throws ParseException {
-        Pattern p = Pattern.compile("-" + flag + "\\s*([\\w:,._/@#$%&! ]+)");
+    public static String parseFlag(String flag, String input, boolean isOptional) throws ParseException {
+        Pattern p = Pattern.compile("-" + flag + "\\s*([\\w:,._/@#$%&! ]*)");
         Matcher m = p.matcher(input);
         if (m.find()) {
             String flagValue = m.group(1).trim();
@@ -500,8 +502,14 @@ public class TypeParsingUtil {
             }
             return flagValue;
         } else {
+            if (isOptional) {
+                return null;
+            }
             throw new FlagNotFoundException("Flag " + flag + " not found");
         }
+    }
+    public static String parseFlag(String flag, String input) throws ParseException {
+        return parseFlag(flag, input, false);
     }
     public static String getValueImmediatelyAfterCommandName(String commandWord,
                                                              String errorFieldName,
@@ -513,5 +521,28 @@ public class TypeParsingUtil {
         } else {
             throw new FlagNotFoundException(errorFieldName + " not found");
         }
+    }
+
+    /**
+     * Parses the flag's value from the input string
+     */
+    public static <T extends ListEntryField> T parseField(String flagName,
+                                                          String input,
+                                                          Of<T> of,
+                                                          boolean isOptional) throws ParseException {
+        String result = parseFlag(flagName, input, isOptional);
+        if (result == null) {
+            return null;
+        } else {
+            try {
+                return of.apply(result);
+            } catch (IllegalArgumentException e) {
+                throw new InvalidInputException(result + " is not a valid " + flagName + " . " + e.getMessage());
+            }
+        }
+    }
+    public static <T extends ListEntryField> T parseField(String flagName,
+                                                          String input, Of<T> of) throws ParseException {
+        return parseField(flagName, input, of, true);
     }
 }

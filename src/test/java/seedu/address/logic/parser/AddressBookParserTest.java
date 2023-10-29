@@ -9,11 +9,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddLessonCommand;
+import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -33,8 +33,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        assertTrue(parser.parseCommand(AddCommand.COMMAND_WORD + " -name Yiwen") instanceof AddCommand);
-        assertTrue(parser.parseCommand(AddCommand.COMMAND_WORD + " -name Yiwen -phone 12345678") instanceof AddCommand);
+        assertTrue(parser.parseCommand(AddPersonCommand.COMMAND_WORD
+                + " -name Yiwen") instanceof AddPersonCommand);
+        assertTrue(parser.parseCommand(AddPersonCommand.COMMAND_WORD
+                + " -name Yiwen -phone 12345678") instanceof AddPersonCommand);
     }
 
     @Test
@@ -46,9 +48,10 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         assertTrue(parser
-                .parseCommand(EditCommand.COMMAND_WORD + " 1 -name Yiwen") instanceof EditCommand);
+                .parseCommand(EditPersonCommand.COMMAND_WORD + " 1 -name Yiwen") instanceof EditPersonCommand);
         assertTrue(parser
-                .parseCommand(EditCommand.COMMAND_WORD + " 1 -name Yiwen -phone 12345678") instanceof EditCommand);
+                .parseCommand(EditPersonCommand.COMMAND_WORD
+                        + " 1 -name Yiwen -phone 12345678") instanceof EditPersonCommand);
     }
 
 

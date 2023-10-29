@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.ui.Ui;
@@ -31,6 +32,7 @@ public class ModelManager implements Model {
     private State state = State.SCHEDULE; // Default state of app. Can be either SCHEDULE or STUDENTS
     private Person currentShowingPerson = null;
     private Lesson currentShowingLesson = null;
+    private Task currentEditingLesson = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -118,6 +120,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Boolean hasPersonClashWith(Person person) {
+        requireNonNull(person);
+        return addressBook.hasPersonClashWith(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -201,8 +209,8 @@ public class ModelManager implements Model {
     @Override
     public void setLesson(Lesson target, Lesson editedLesson) {
         requireAllNonNull(target, editedLesson);
-
         scheduleList.setLesson(target, editedLesson);
+        updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     //=========== Filtered Lesson List Accessors =============================================================
@@ -277,6 +285,22 @@ public class ModelManager implements Model {
     @Override
     public boolean sameState(State state) {
         return this.state.equals(state);
+    }
+
+    public boolean hasCurrentShownEntry() {
+        return currentShowingPerson != null || currentShowingLesson != null || currentEditingLesson != null;
+    }
+
+    public Person getCurrentlyDisplayedPerson() {
+        return currentShowingPerson;
+    }
+
+    public Lesson getCurrentlyDisplayedLesson() {
+        return currentShowingLesson;
+    }
+
+    public Task getCurrentlyEditingLesson() {
+        return currentEditingLesson;
     }
 
 }

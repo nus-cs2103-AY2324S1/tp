@@ -32,10 +32,10 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_REMARK = BENSON.getRemark().toString();
 
-    private static final List<JsonAdaptedSubject> VALID_SUBJECTS = BENSON.getSubjects().stream()
+    private static final List<JsonAdaptedSubject> VALID_SUBJECTS = BENSON.getSubjectsSet().stream()
             .map(JsonAdaptedSubject::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTagsSet().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 

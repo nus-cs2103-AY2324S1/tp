@@ -44,7 +44,7 @@ public class LessonCardFieldBuilder {
         fields.getChildren().add(students);
     }
     static void buildSubjects(Lesson lesson, VBox fields) {
-        Label subject = new Label(lesson.getSubjectStr());
+        Label subject = new Label(lesson.getSubject().toString());
         subject.getStyleClass().add("cell_small_label");
         fields.getChildren().add(subject);
     }

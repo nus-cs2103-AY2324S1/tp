@@ -1,13 +1,12 @@
 package seedu.address.logic.parser;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import static seedu.address.logic.parser.TypeParsingUtil.parseField;
 
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lessons.Day;
 import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.TaskList;
+import seedu.address.model.lessons.Time;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Subject;
 
@@ -29,24 +28,14 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
      * @return a lesson object
      * @throws ParseException if the user input is of wrong format or the lesson clashes with existing lessons
      */
-    public Lesson parseLesson(String args) throws ParseException {
-        LocalTime startTime = TypeParsingUtil.parseTime("start", args);
-        LocalTime endTime = TypeParsingUtil.parseTime("end", args);
-        if (startTime.isAfter(endTime)) {
-            throw new ParseException("Start time must be before end time");
-        }
-        Subject subject = TypeParsingUtil.parseSubject("subject", args, true);
-        Name studentName = TypeParsingUtil.parseName("name", args);
-        LocalDate date = TypeParsingUtil.parseDate("day", args, true);
-        if (date == null) {
-            date = LocalDate.now();
-        }
-        LocalDateTime start = LocalDateTime.of(date, startTime);
-        LocalDateTime end = LocalDateTime.of(date, endTime);
-        TaskList taskList = new TaskList();
-        if (subject == null) {
-            return new Lesson(start, end, taskList, studentName);
-        }
-        return new Lesson(start, end, subject, taskList, studentName);
+    public static Lesson parseLesson(String args) throws ParseException {
+        Lesson lesson = Lesson.getDefaultLesson();
+        lesson.setNameIfNotDefault(parseField("name", args, Name::of));
+        lesson.setSubjectIfNotDefault(parseField("subject", args, Subject::of));
+        lesson.setDayIfNotDefault(parseField("day", args, Day::of));
+        lesson.setStartIfNotDefault(parseField("start", args, Time::of));
+        lesson.setEndIfNotDefault(parseField("end", args, Time::of));
+        return lesson;
+        //lesson.setTaskListIfNotDefault(parseField("task", args, TaskList::of));
     }
 }

@@ -19,7 +19,7 @@ class AddLessonCommandParserTest {
             assertNotNull(c);
             c = p.parse("addLesson -name yiwen -start 14:30 -end 17:30 -day 2023/12/30 -subject english");
             assertNotNull(c);
-            String invalid = "addLesson -name yiwen -start 18:30 -end 17:30 -day 2023/12/30";
+            String invalid = "addLesson -name yiwen -start 18:30 -end 17:30 -day 2023/2/29";
             assertThrows(ParseException.class, () -> p.parse(invalid));
         } catch (Exception e) {
             fail();

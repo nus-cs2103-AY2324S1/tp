@@ -5,12 +5,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.HashMap;
 
+import seedu.address.model.ListEntryField;
+
 
 /**
  * Represents a student's subject in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
  */
-public class Subject {
+public class Subject extends ListEntryField {
+    public static final Subject DEFAULT_SUBJECT = new Subject();
     public static final String MESSAGE_CONSTRAINTS =
             "Subject should only be Mathematics, Physics, Biology, Chemistry or English";
 
@@ -55,22 +58,30 @@ public class Subject {
         }
     }
 
+    private Subject() {
+        subjectName = Subjects.NONE;
+    }
+
     /**
      * Returns true if a given string is a valid subject.
      */
     public static boolean isValidSubject(String test) {
         try {
-            Subjects subject = Subjects.valueOf(test);
+            Subjects subject = Subjects.valueOf(test.toUpperCase());
             return true;
         } catch (IllegalArgumentException e) {
             return false;
         }
     }
 
+    public static Boolean isValid(String input) {
+        return isValidSubject(input);
+    }
+
     /**
      * Returns the subject parsed from a string.
      */
-    public static Subject parseSubject(String test) throws IllegalArgumentException {
+    public static Subject of(String test) throws IllegalArgumentException {
         return new Subject(test);
     }
 
@@ -85,7 +96,10 @@ public class Subject {
      * Format subject as text for viewing.
      */
     public String toString() {
-        return '[' + subjectName.toString() + ']';
+        if (subjectName == Subjects.NONE) {
+            return "To be added";
+        }
+        return subjectName.toString();
     }
 
     @Override
@@ -115,6 +129,4 @@ public class Subject {
     public Subject clone() {
         return new Subject(subjectName.toString());
     }
-
-
 }

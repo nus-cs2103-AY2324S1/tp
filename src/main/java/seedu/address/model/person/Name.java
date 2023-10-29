@@ -1,13 +1,16 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ListEntryField;
 
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class Name extends ListEntryField {
+    public static final Name DEFAULT_NAME = new Name();
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -25,10 +28,17 @@ public class Name {
      *
      * @param name A valid name.
      */
-    public Name(String name) {
+    public Name(String name) throws ParseException {
+        name = name.trim();
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(name)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
         fullName = name;
+    }
+
+    private Name() {
+        fullName = "To be added";
     }
 
     /**
@@ -37,7 +47,12 @@ public class Name {
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
+    public static Boolean isValid(String input) {
+        return isValidName(input);
+    }
+    public static Name of(String input) throws ParseException {
+        return new Name(input);
+    }
 
     @Override
     public String toString() {
@@ -64,8 +79,19 @@ public class Name {
         return fullName.hashCode();
     }
 
+    /**
+     * Returns a clone of this name that is equal to this name.
+     */
     public Name clone() {
-        return new Name(fullName);
+        if (this == DEFAULT_NAME) {
+            return DEFAULT_NAME;
+        } else {
+            try {
+                return new Name(fullName);
+            } catch (ParseException e) {
+                throw new AssertionError("Clone of valid name failed.");
+            }
+        }
     }
 
 }

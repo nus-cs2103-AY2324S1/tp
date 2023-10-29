@@ -2,9 +2,12 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class PhoneTest {
 
@@ -16,7 +19,7 @@ public class PhoneTest {
     @Test
     public void constructor_invalidPhone_throwsIllegalArgumentException() {
         String invalidPhone = "";
-        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
+        assertThrows(ParseException.class, () -> new Phone(invalidPhone));
     }
 
     @Test
@@ -40,21 +43,25 @@ public class PhoneTest {
 
     @Test
     public void equals() {
-        Phone phone = new Phone("999");
+        try {
+            Phone phone = new Phone("999");
 
-        // same values -> returns true
-        assertTrue(phone.equals(new Phone("999")));
+            // same values -> returns true
+            assertTrue(phone.equals(new Phone("999")));
 
-        // same object -> returns true
-        assertTrue(phone.equals(phone));
+            // same object -> returns true
+            assertTrue(phone.equals(phone));
 
-        // null -> returns false
-        assertFalse(phone.equals(null));
+            // null -> returns false
+            assertFalse(phone.equals(null));
 
-        // different types -> returns false
-        assertFalse(phone.equals(5.0f));
+            // different types -> returns false
+            assertFalse(phone.equals(5.0f));
 
-        // different values -> returns false
-        assertFalse(phone.equals(new Phone("995")));
+            // different values -> returns false
+            assertFalse(phone.equals(new Phone("995")));
+        } catch (Exception e) {
+            fail();
+        }
     }
 }

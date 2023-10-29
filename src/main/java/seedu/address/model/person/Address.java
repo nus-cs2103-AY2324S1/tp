@@ -1,13 +1,15 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ListEntryField;
 
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Address {
+public class Address extends ListEntryField {
     public static final Address DEFAULT_ADDRESS = new Address();
     public static final String DEFAULT_ADDRESS_MESSAGE = "To be added.";
 
@@ -26,9 +28,11 @@ public class Address {
      *
      * @param address A valid address.
      */
-    public Address(String address) {
+    public Address(String address) throws ParseException {
         requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        if (!Address.isValidAddress(address)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
         value = address;
     }
 
@@ -42,7 +46,12 @@ public class Address {
     public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
+    public static Boolean isValid(String input) {
+        return isValidAddress(input);
+    }
+    public static Address of(String input) throws ParseException {
+        return new Address(input);
+    }
     @Override
     public String toString() {
         return value;
@@ -73,9 +82,14 @@ public class Address {
      */
     public Address clone() {
         if (this == DEFAULT_ADDRESS) {
-            return DEFAULT_ADDRESS;
+            return this;
+        } else {
+            try {
+                return new Address(value);
+            } catch (ParseException e) {
+                throw new AssertionError("Clone of valid name failed.");
+            }
         }
-        return new Address(value);
     }
 
 }

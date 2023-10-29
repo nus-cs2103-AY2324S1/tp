@@ -13,6 +13,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
+import seedu.address.model.lessons.TaskList;
 
 
 /**
@@ -61,18 +62,28 @@ public class LessonDetailListPanel extends UiPart<Region> {
      */
     public void setLessonDetails(Lesson lesson) {
         date.setText(lesson.getLessonDateStr());
-        startTime.setText(lesson.getStartTimeStr());
-        endTime.setText(lesson.getEndTimeStr());
+        startTime.setText(lesson.getStart().toString());
+        endTime.setText(lesson.getEnd().toString());
         students.setText(lesson.getStudentsStr());
-        subject.setText(lesson.getSubjectStr());
+        subject.setText(lesson.getSubject().toString());
+        //taskListView.setItems("to be implemented");
+        taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
+        subject.setText(lesson.getSubject().toString());
 
         taskListContainer.getChildren().clear();
-        ObservableList<Task> taskList = lesson.getTaskList();
+        // temporary code, to show ui only
+        Task task1 = new Task("first");
+        Task task2 = new Task("second");
+        Task task3 = new Task("third long words test sentrence bomvasnv haha loanfafsszzzz sss");
+        TaskList tasks = new TaskList();
+        tasks.add(task1);
+        tasks.add(task2);
+        tasks.add(task3);
+        ObservableList<Task> taskList = tasks.asUnmodifiableObservableList();
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             taskListContainer.getChildren().add(new TaskCard(task, i + 1).getRoot());
         }
-
     }
 
     class TaskListViewCell extends ListCell<Task> {

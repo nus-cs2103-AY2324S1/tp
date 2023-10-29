@@ -4,14 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -22,8 +19,8 @@ import seedu.address.model.tag.Tag;
 
 
 
-public class AddCommandParserTest {
-    private AddCommandParser p = new AddCommandParser();
+public class AddPersonCommandParserTest {
+    private AddPersonCommandParser p = new AddPersonCommandParser();
 
     @Test
     void happyCases() {
@@ -59,21 +56,21 @@ public class AddCommandParserTest {
     @Test
     void correctPerson() {
         try {
-            Person actualPerson = AddCommandParser.parsePerson("add -name Yiwen"
+            Person actualPerson = AddPersonCommandParser.parsePerson("add -name Yiwen"
                     + " -phone 12345678 -email email@u.com -address Blk 123, Clementi Ave 3, #12,34 "
                     + "-tag friends -subject English");
             Person expectedPerson = new Person(new Name("Yiwen"));
             expectedPerson.setPhone(new Phone("12345678"));
             expectedPerson.setEmail(new Email("email@u.com"));
             expectedPerson.setAddress(new Address("Blk 123, Clementi Ave 3, #12,34"));
-            expectedPerson.setTagsIfNotNull(Set.of(new Tag("friends")));
-            expectedPerson.setSubjectsIfNotNull(Set.of(new Subject("English")));
+            expectedPerson.setTagsIfNotDefault(Set.of(new Tag("friends")));
+            expectedPerson.setSubjectsIfNotDefault(Set.of(new Subject("English")));
             assertEquals(expectedPerson, actualPerson);
         } catch (ParseException e) {
             fail();
         }
     }
-
+    /*
     @Test
     void correctLesson() {
         try {
@@ -88,4 +85,5 @@ public class AddCommandParserTest {
             fail();
         }
     }
+    */
 }

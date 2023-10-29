@@ -184,13 +184,17 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = "add -name Amy Bee -phone 11111111 -email amy@example.com "
                 + "-address Block 312, Amy Street 1 -subject Mathematics";
-        Person expectedPerson = new Person(new Name("Amy Bee"));
-        expectedPerson.setPhone(new Phone("11111111"));
-        expectedPerson.setEmail(new Email("amy@example.com"));
-        expectedPerson.setAddress(new Address("Block 312, Amy Street 1"));
-        expectedPerson.setSubjectsIfNotNull(Set.of(new Subject("Mathematics")));
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        try {
+            Person expectedPerson = new Person(new Name("Amy Bee"));
+            expectedPerson.setPhone(new Phone("11111111"));
+            expectedPerson.setEmail(new Email("amy@example.com"));
+            expectedPerson.setAddress(new Address("Block 312, Amy Street 1"));
+            expectedPerson.setSubjectsIfNotDefault(Set.of(new Subject("Mathematics")));
+            ModelManager expectedModel = new ModelManager();
+            expectedModel.addPerson(expectedPerson);
+            assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        } catch (ParseException e1) {
+            throw new AssertionError("Parsing and execution of add command should succeed.", e1);
+        }
     }
 }

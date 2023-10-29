@@ -2,30 +2,25 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.ListEntry;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
-
-    // Identity fields
-    private Name name;
+public class Person extends ListEntry<Person> {
+    public static final Person DEFAULT_PERSON = new Person(Name.DEFAULT_NAME);
     private Phone phone = Phone.DEFAULT_PHONE;
     private Email email = Email.DEFAULT_EMAIL;
 
     // Data fields
     private Address address = Address.DEFAULT_ADDRESS;
-    private final Set<Subject> subjects = new HashSet<>();
-    private final Set<Tag> tags = new HashSet<>();
-    private Remark remark = Remark.DEFAULT_REMARK;
+    private Subjects subjects = new Subjects();
 
 
     /**
@@ -45,22 +40,12 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.subjects.addAll(subjects);
-        this.tags.addAll(tags);
+        this.subjects = new Subjects(subjects);
+        this.tags = new Tags(tags);
         this.remark = remark;
     }
-
-    public Name getName() {
-        return name;
-    }
-
-    public void setName(Name name) {
-        this.name = name;
-    }
-    public void setNameIfNotNull(Name name) {
-        if (name != null) {
-            setName(name);
-        }
+    public static Person getDefaultPerson() {
+        return DEFAULT_PERSON.clone();
     }
 
     public Phone getPhone() {
@@ -73,8 +58,8 @@ public class Person {
     /**
      * Only update if arguement passes is not null. To ease the update and edit command
      */
-    public void setPhoneIfNotNull(Phone phone) {
-        if (phone != null) {
+    public void setPhoneIfNotDefault(Phone phone) {
+        if (phone != null && !phone.equals(Phone.DEFAULT_PHONE)) {
             setPhone(phone);
         }
     }
@@ -88,8 +73,8 @@ public class Person {
     /**
      * Only update if arguement passes is not null. To ease the update and edit command
      */
-    public void setEmailIfNotNull(Email email) {
-        if (email != null) {
+    public void setEmailIfNotDefault(Email email) {
+        if (email != null && !email.equals(Email.DEFAULT_EMAIL)) {
             setEmail(email);
         }
     }
@@ -103,8 +88,8 @@ public class Person {
     /**
      * Only update if arguement passes is not null. To ease the update and edit command
      */
-    public void setAddressIfNotNull(Address address) {
-        if (address != null) {
+    public void setAddressIfNotDefault(Address address) {
+        if (address != null && !address.equals(Address.DEFAULT_ADDRESS)) {
             setAddress(address);
         }
     }
@@ -112,52 +97,29 @@ public class Person {
      * Returns an immutable subject set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Subject> getSubjects() {
-        return Collections.unmodifiableSet(subjects);
+    public Set<Subject> getSubjectsSet() {
+        return subjects.getSubjectSetClone();
+    }
+    public Subjects getSubjects() {
+        return subjects;
     }
     public void setSubjects(Set<Subject> subjects) {
         requireAllNonNull(subjects);
-        this.subjects.clear();
-        this.subjects.addAll(subjects);
+        setSubjects(new Subjects(subjects));
+    }
+    public void setSubjects(Subjects subjects) {
+        requireAllNonNull(subjects);
+        this.subjects = subjects;
     }
 
-    public void setSubjectsIfNotNull(Set<Subject> subjects) {
-        if (subjects != null) {
+    public void setSubjectsIfNotDefault(Subjects subjects) {
+        if (subjects != null && !subjects.equals(new Subjects())) {
             setSubjects(subjects);
         }
     }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    public void setTags(Set<Tag> tags) {
-        requireAllNonNull(tags);
-        this.tags.clear();
-        this.tags.addAll(tags);
-    }
-    public void setTagsIfNotNull(Set<Tag> tags) {
-        if (tags != null) {
-            setTags(tags);
-        }
-    }
-
-    public Remark getRemark() {
-        return remark;
-    }
-
-    public void setRemark(Remark remark) {
-        requireAllNonNull(remark);
-        this.remark = remark;
-    }
-
-    public void setRemarkIfNotNull(Remark remark) {
-        if (remark != null) {
-            setRemark(remark);
+    public void setSubjectsIfNotDefault(Set<Subject> subjects) {
+        if (subjects != null) {
+            setSubjectsIfNotDefault(new Subjects(subjects));
         }
     }
 
@@ -172,6 +134,10 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public boolean hasSameName(Person person) {
+        return person != null && person.getName().equals(getName());
     }
 
     /**
@@ -221,16 +187,8 @@ public class Person {
      * Returns a clone of this person that is equal to this person.
      */
     public Person clone() {
-        Set<Subject> clonedSubjects = new HashSet<>();
-        for (Subject subject : subjects) {
-            clonedSubjects.add(subject.clone());
-        }
-        Set<Tag> clonedTags = new HashSet<>();
-        for (Tag tag : tags) {
-            clonedTags.add(tag.clone());
-        }
         return new Person(name.clone(), phone.clone(), email.clone(), address.clone(),
-                clonedSubjects, clonedTags, remark.clone());
+                subjects.getSubjectSetClone(), tags.getTagSetClone(), remark.clone());
     }
 
 }

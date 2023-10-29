@@ -2,9 +2,12 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class AddressTest {
 
@@ -16,7 +19,7 @@ public class AddressTest {
     @Test
     public void constructor_invalidAddress_throwsIllegalArgumentException() {
         String invalidAddress = "";
-        assertThrows(IllegalArgumentException.class, () -> new Address(invalidAddress));
+        assertThrows(ParseException.class, () -> new Address(invalidAddress));
     }
 
     @Test
@@ -36,21 +39,15 @@ public class AddressTest {
 
     @Test
     public void equals() {
-        Address address = new Address("Valid Address");
-
-        // same values -> returns true
-        assertTrue(address.equals(new Address("Valid Address")));
-
-        // same object -> returns true
-        assertTrue(address.equals(address));
-
-        // null -> returns false
-        assertFalse(address.equals(null));
-
-        // different types -> returns false
-        assertFalse(address.equals(5.0f));
-
-        // different values -> returns false
-        assertFalse(address.equals(new Address("Other Valid Address")));
+        try {
+            Address address = new Address("Valid Address");
+            assertFalse(address.equals(null));
+            assertFalse(address.equals(5.0f));
+            assertFalse(address.equals(new Address("Other Valid Address")));
+            assertTrue(address.equals(address));
+            assertTrue(address.equals(new Address("Valid Address")));
+        } catch (Exception e) {
+            fail();
+        }
     }
 }

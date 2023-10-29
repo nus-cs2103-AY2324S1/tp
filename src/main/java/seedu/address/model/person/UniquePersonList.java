@@ -35,6 +35,13 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
+    /**
+     * Returns true if the list contains a person with the same name as the given argument.
+     */
+    public boolean hasPersonClashWith(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasSameName);
+    }
 
     /**
      * Adds a person to the list.
