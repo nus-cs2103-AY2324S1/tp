@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -33,6 +34,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns a person that is selected*/
+    Person getSelectedPerson();
+
     /**
      * Returns the user prefs' address book file path.
      */
@@ -47,6 +51,16 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user prefs' shortcut settings.
+     */
+    ShortcutSettings getShortcutSettings();
+
+    /**
+     * Sets the user prefs' shortcut settings.
+     */
+    void setShortcutSettings(ShortcutSettings shortcutSettings);
 
     /**
      * Returns the command string of the next most recent command executed.

@@ -152,11 +152,48 @@ Clears all entries from the stored records.
 
 Format: `clear`
 
+### Undo previous entry : `undo`
+
+Undo the previous command, stackable. (Able to keep undo-ing till there are no commands left to be undone)
+
+Format: `undo`
+
+### Redo previous undo : `redo`
+
+Redo the previous 'undo', stackable. (Able to keep redoing-ing till there are no undo left to be redone)
+
+Format: `redo`
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+
+### Adding a custom shortcut : `addsc`
+
+Adds a shortcut mapped to a default command keyword for easier use. </br>
+After the mapping, the new user-defined shortcut will work the same way as the command keyword, and will be preserved between user sessions.
+Duplicate mappings will override previous shortcut mappings.
+
+Format: `addsc sc/SHORTCUT kw/KEYWORD`
+ * `SHORTCUT` can only consist of Alphanumeric characters and must contain no whitespaces.
+ * `SHORTCUT` cannot be an existing command keyword.
+ * `KEYWORD` must match an existing command keyword.
+
+Examples:
+* `addsc sc/del kw/delete` maps `del` to the `delete` command keyword.
+  * i.e. `del 3` will work the same as `delete 3`.
+
+### Deleting custom shortcuts : `delsc`
+
+Deletes the previously user-defined shortcuts.
+
+Format: `delsc sc/SHORTCUT...​`
+
+Examples:
+* `delsc sc/del sc/abc` will remove the previous mappings of `del` and `abc`.
 
 ### Recalling Recent Commands
 
@@ -169,6 +206,7 @@ The user can recall the 20 most recently entered commands by pressing the up arr
 up arrow cycles one command further back in the history.
 
 If the user goes too far back in history, they can 'undo' an 'up arrow' by pressing the down arrow.
+
 
 ### Save and Load Data
 
@@ -211,4 +249,8 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find -PERSON_TYPE KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -pa n/James Jake p/73281193`
 **List** | `list -pa`
+**Undo** | `undo`
+**Redo** | `redo`
+**Add shortcut** | `addsc sc/SHORTCUT kw/KEYWORD` <br> e.g., `addsc sc/del kw/delete`
+**Delete shortcut** | `delsc sc/SHORTCUT [sc/SHORTCUT]...` <br> e.g., `delsc sc/del sc/li`
 **Help** | `help`

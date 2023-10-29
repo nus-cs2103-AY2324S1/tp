@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title After single up arrow press
+
+show members
+
+object "<u>:CommandStringStash</u>" as CommandStringStash #FFFFAA {
+    currentCmdIndex = 2
+}
+
+object "<u>command0:String</u>" as cmd0 {
+    value = "list - sp"
+}
+
+object "<u>command1:String</u>" as cmd1 {
+    value = "help"
+}
+
+object "<u>command2:String</u>" as cmd2 {
+    value = "delete 1"
+}
+
+CommandStringStash -down->cmd0
+CommandStringStash-down->cmd1
+CommandStringStash-down->cmd2
+
+@end

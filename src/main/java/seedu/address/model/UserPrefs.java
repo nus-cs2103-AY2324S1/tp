@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.ShortcutSettings;
 
 /**
  * Represents User's preferences.
@@ -15,6 +16,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+
+    private ShortcutSettings shortcutSettings = new ShortcutSettings();
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -35,6 +38,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
+        ShortcutSettings newShortcutSettings = newUserPrefs.getShortcutSettings()
+                .removeBadMappings();
+        setShortcutSettings(newShortcutSettings);
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
 
@@ -45,6 +51,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         this.guiSettings = guiSettings;
+    }
+
+    public ShortcutSettings getShortcutSettings() {
+        return shortcutSettings;
+    }
+
+    public void setShortcutSettings(ShortcutSettings shortcutSettings) {
+        requireNonNull(shortcutSettings);
+        this.shortcutSettings = shortcutSettings;
     }
 
     public Path getAddressBookFilePath() {
@@ -69,7 +84,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+                && shortcutSettings.equals(otherUserPrefs.shortcutSettings);
     }
 
     @Override
@@ -81,6 +97,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
+        sb.append("ShortcutAlias Settings : " + shortcutSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
         return sb.toString();
     }

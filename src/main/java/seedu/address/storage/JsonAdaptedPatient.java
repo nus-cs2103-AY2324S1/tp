@@ -57,6 +57,12 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
         return age;
     }
 
+
+    /**
+     * Converts this Jackson-friendly adapted patient object into the model's {@code Patient} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
+     */
     @Override
     public Patient toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();

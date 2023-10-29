@@ -90,6 +90,11 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void getSelectedPerson_null_success() {
+        assertEquals(logic.getSelectedPerson(), null);
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
@@ -164,7 +169,6 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
@@ -173,6 +177,8 @@ public class LogicManagerTest {
         Person expectedPerson = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
+        expectedModel.commitAddressBook();
+
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

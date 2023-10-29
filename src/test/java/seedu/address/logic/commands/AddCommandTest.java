@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -27,6 +28,8 @@ import seedu.address.testutil.PatientBuilder;
 
 public class AddCommandTest {
 
+    private CommandHistory commandHistory = new CommandHistory();
+
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -37,7 +40,7 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PatientBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
@@ -50,7 +53,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                addCommand.execute(modelStub, commandHistory));
     }
 
     @Test
@@ -85,7 +89,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all of the methods failing
      */
     private class ModelStub implements Model {
         @Override
@@ -134,6 +138,31 @@ public class AddCommandTest {
         }
 
         @Override
+        public ShortcutSettings getShortcutSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setShortcutSettings(ShortcutSettings shortcutSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String registerShortcut(ShortcutAlias shortcutAlias, CommandWord commandWord) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String removeShortcut(ShortcutAlias shortcutAlias) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getShortcut(String alias) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -156,7 +185,45 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public Person getSelectedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSelectedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isSelectedEmpty() {
+            throw new AssertionError("This method should not be called");
+        }
+        @Override
+        public boolean hasHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -219,6 +286,13 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        /**
+         * override ModelStub to not throw an error, but does nothing
+         */
+        @Override
+        public void commitAddressBook() {
         }
     }
 

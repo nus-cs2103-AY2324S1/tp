@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.ShortcutSettings;
+import seedu.address.logic.commands.CommandWord;
+import seedu.address.logic.commands.ShortcutAlias;
 import seedu.address.model.person.Person;
 
 /**
@@ -34,6 +37,27 @@ public interface Model {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    /**
+     * Returns the user prefs' shortcut settings.
+     */
+    ShortcutSettings getShortcutSettings();
+
+    /**
+     * Sets the user prefs' shortcut settings.
+     */
+    void setShortcutSettings(ShortcutSettings shortcutSettings);
+    /**
+     * Registers a new shortcut mapping.
+     */
+    String registerShortcut(ShortcutAlias shortcutAlias, CommandWord commandWord);
+    /**
+     * Removes the shortcut mapping.
+     */
+    String removeShortcut(ShortcutAlias shortcutAlias);
+    /**
+     * Checks if the alias has a mapping registered.
+     */
+    String getShortcut(String alias);
     /**
      * Returns the user prefs' address book file path.
      */
@@ -85,6 +109,11 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    Person getSelectedPerson();
+
+    void updateSelectedPerson(Person person);
+
+    public boolean isSelectedEmpty();
     /**
      * Returns the command string of the next most recent command executed.
      */
@@ -100,4 +129,9 @@ public interface Model {
      */
     void addCommandString(String commandString);
 
+    boolean hasHistory();
+    boolean canRedo();
+    void undoAddressBook();
+    void redoAddressBook();
+    void commitAddressBook();
 }

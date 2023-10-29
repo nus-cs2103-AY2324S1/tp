@@ -57,4 +57,21 @@ public class Specialist extends Person {
     public Specialty getSpecialty() {
         return specialty;
     }
+
+    /**
+     * Returns true if both specialists have the same name.
+     * This defines a weaker notion of equality between two specialists.
+     */
+    @Override
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (otherPerson instanceof Specialist) {
+            return otherPerson.getName().equals(getName());
+        }
+
+        return false;
+    }
 }

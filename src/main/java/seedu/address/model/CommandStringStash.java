@@ -1,36 +1,33 @@
 package seedu.address.model;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a stash that contains the command String of the 20 most recent
- * command executed.
+ * Represents a stash that stores the history of the command String of the 20 most recent
+ * commands executed.
  */
 public class CommandStringStash {
-    private Deque<String> prevCmdStringsStack;
-    private Deque<String> passedCmdStringsStack;
-    private boolean isNext;
+    private List<String> cmdStringStack;
+    private int currentCmdIndex;
 
     /**
      * Basic empty constructor for the CommandStringStash.
      */
     public CommandStringStash() {
-        this.prevCmdStringsStack = new LinkedList<>();
-        this.passedCmdStringsStack = new LinkedList<>();
-        this.isNext = true;
+        this.cmdStringStack = new ArrayList<>();
+        this.currentCmdIndex = 0;
     }
 
     /**
      * Creates the CommandStringStash using the initial values provided.
      */
-    public CommandStringStash(Deque<String> prevCmdStringsStack, Deque<String> passedCmdStringsStack, boolean isNext) {
-        this.prevCmdStringsStack = prevCmdStringsStack;
-        this.passedCmdStringsStack = passedCmdStringsStack;
-        this.isNext = isNext;
+    public CommandStringStash(List<String> cmdStringStack, int currentCmd) {
+        this.cmdStringStack = cmdStringStack;
+        this.currentCmdIndex = currentCmd;
     }
 
     /**
@@ -40,41 +37,29 @@ public class CommandStringStash {
      */
     public String getPrevCommandString(String commandInputString) {
         assert commandInputString != null;
-        if (prevCmdStringsStack.isEmpty()) {
+        if (cmdStringStack.isEmpty() || currentCmdIndex == 0) {
             return commandInputString;
         }
 
-        String nextCommandString = prevCmdStringsStack.removeFirst();
-        this.passedCmdStringsStack.addFirst(nextCommandString);
-
-        if (!isNext) {
-            // skip over this string as it was just added to the stack
-            isNext = true;
-            return getPrevCommandString(commandInputString);
-        }
-        return nextCommandString;
+        currentCmdIndex -= 1;
+        String prevCommandString = cmdStringStack.get(currentCmdIndex);
+        return prevCommandString;
     }
 
     /**
-     * Returns the command string input passed by the user acting as an "undo" of {@code getPrevCommandString}.
-     * Remember the state, so it passes command string inputs already "undone".
+     * Returns the command string input passed over by the user acting as an "undo" of {@code getPrevCommandString}.
+     * Remember the state, so it passes over command string inputs already "undone".
      * Returns {@code commandInputString} if the user has not passed any commands yet.
      */
     public String getPassedCommandString(String commandInputString) {
         assert commandInputString != null;
-        if (passedCmdStringsStack.isEmpty()) {
+        if (cmdStringStack.isEmpty() || currentCmdIndex >= cmdStringStack.size() - 1) {
             return commandInputString;
         }
 
-        String prevCommandString = passedCmdStringsStack.removeFirst();
-        this.prevCmdStringsStack.addFirst(prevCommandString);
-
-        if (isNext) {
-            // skip over this string as it was just added to the stack
-            isNext = false;
-            return getPassedCommandString(commandInputString);
-        }
-        return prevCommandString;
+        currentCmdIndex += 1;
+        String passedCommandString = cmdStringStack.get(currentCmdIndex);
+        return passedCommandString;
     }
 
     /**
@@ -86,18 +71,21 @@ public class CommandStringStash {
     public void addCommandString(String commandInputString) {
         assert commandInputString != null;
 
+        // remove existing command String from stack if it already exists as it will be replaced by new command
+        if (cmdStringStack.contains(commandInputString)) {
+            cmdStringStack.remove(commandInputString);
+        }
+
         // evict least recently added command string if necessary
-        while (this.passedCmdStringsStack.size() + prevCmdStringsStack.size() >= 20) {
-            this.prevCmdStringsStack.removeLast();
+        if (cmdStringStack.size() == 20) {
+            cmdStringStack.remove(0);
         }
 
-        // reset the command string stacks
-        while (!this.passedCmdStringsStack.isEmpty()) {
-            this.prevCmdStringsStack.addFirst(passedCmdStringsStack.removeFirst());
-        }
-        this.isNext = true;
+        // add command string
+        cmdStringStack.add(commandInputString);
 
-        this.prevCmdStringsStack.addFirst(commandInputString);
+        // reset the command string index pointer
+        currentCmdIndex = cmdStringStack.size();
     }
 
     @Override
@@ -106,20 +94,20 @@ public class CommandStringStash {
             return false;
         }
         CommandStringStash commandStringStash = (CommandStringStash) object;
-        return Objects.equals(prevCmdStringsStack, commandStringStash.prevCmdStringsStack)
-                && Objects.equals(passedCmdStringsStack, commandStringStash.passedCmdStringsStack);
+        return Objects.equals(cmdStringStack, commandStringStash.cmdStringStack)
+                && currentCmdIndex == commandStringStash.currentCmdIndex;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prevCmdStringsStack, passedCmdStringsStack, isNext);
+        return Objects.hash(cmdStringStack, currentCmdIndex);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Previous Command Strings", prevCmdStringsStack)
-                .add("Passed Command Strings", passedCmdStringsStack)
+                .add("command string stack", cmdStringStack)
+                .add("command string stack current index", currentCmdIndex)
                 .toString();
     }
 }

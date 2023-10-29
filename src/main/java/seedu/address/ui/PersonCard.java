@@ -25,8 +25,6 @@ public abstract class PersonCard extends UiPart<Region> {
     public final Person person;
 
     @FXML
-    private Label personType;
-    @FXML
     private HBox cardPane;
     @FXML
     private Label name;
