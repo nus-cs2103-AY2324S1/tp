@@ -56,6 +56,22 @@ public class Date {
     }
 
     /**
+     * Constructor for setting the value of avatar without initialising star
+     */
+    public Date(Name name, Age age, Gender gender, Height height, Income income, Horoscope horoscope,
+                Avatar avatar) {
+        requireAllNonNull(name, age, gender, height);
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.height = height;
+        this.income = income;
+        this.horoscope = horoscope;
+        this.star = new Star("false");
+        this.avatar = avatar;
+    }
+
+    /**
      * Constructor for setting the value of avatar
      */
     public Date(Name name, Age age, Gender gender, Height height, Income income, Horoscope horoscope, Star star,
@@ -70,6 +86,7 @@ public class Date {
         this.star = star;
         this.avatar = avatar;
     }
+
 
     /**
      * Constructor to incorporate User and Date class.

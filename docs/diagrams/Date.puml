@@ -1,0 +1,34 @@
+@startuml
+
+class Date {
+    name
+    age
+    gender
+    height
+    avatar
+    income
+    horoscope
+}
+
+class Name {
+}
+
+class Age {
+}
+
+class Gender {
+}
+
+class Height {
+}
+
+class Avatar {
+}
+
+class Income {
+}
+
+class Horoscope {
+}
+
+@enduml

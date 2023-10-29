@@ -124,7 +124,7 @@ public class PersonBuilder {
     }
 
     public Date build() {
-        return new Date(name, age, gender, height, income, horoscope, star, avatar);
+        return new Date(name, age, gender, height, income, horoscope, avatar);
     }
 
 }
