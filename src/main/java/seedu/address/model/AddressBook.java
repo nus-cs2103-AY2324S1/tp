@@ -8,16 +8,15 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
-import seedu.address.model.person.UniqueDoctorList;
-import seedu.address.model.person.UniquePatientList;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-    private final UniqueDoctorList doctors;
-    private final UniquePatientList patients;
+    private final UniquePersonList<Doctor> doctors;
+    private final UniquePersonList<Patient> patients;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,8 +26,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        doctors = new UniqueDoctorList();
-        patients = new UniquePatientList();
+        doctors = new UniquePersonList();
+        patients = new UniquePersonList();
     }
 
     public AddressBook() {
@@ -49,7 +48,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code patients} must not contain duplicate patients.
      */
     public void setPatients(List<Patient> patients) {
-        this.patients.setPatients(patients);
+        this.patients.setPersons(patients);
     }
 
     /**
@@ -57,7 +56,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code doctors} must not contain duplicate persons.
      */
     public void setDoctors(List<Doctor> doctors) {
-        this.doctors.setDoctors(doctors);
+        this.doctors.setPersons(doctors);
     }
 
     /**
@@ -115,7 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPatient(Patient target, Patient editedPerson) {
         requireNonNull(editedPerson);
 
-        patients.setPatient(target, editedPerson);
+        patients.setPerson(target, editedPerson);
     }
 
     /**
@@ -126,7 +125,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setDoctor(Doctor target, Doctor editedDoctor) {
         requireNonNull(editedDoctor);
 
-        doctors.setDoctor(target, editedDoctor);
+        doctors.setPerson(target, editedDoctor);
     }
 
     /**
@@ -163,7 +162,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return patients.asUnmodifiableObservableList();
     }
 
-    @Override
     public ObservableList<Doctor> getDoctorList() {
         return doctors.asUnmodifiableObservableList();
     }
