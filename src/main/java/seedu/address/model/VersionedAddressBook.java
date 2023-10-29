@@ -23,8 +23,15 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     public VersionedAddressBook(ReadOnlyAddressBook toBeCopied) {
-        this();
-        resetData(toBeCopied);
+        super(toBeCopied);
+        addressBookStateList = new ArrayList<>();
+
+        // Save a copy of initial state into state list
+        AddressBook initState = new AddressBook(this);
+        addressBookStateList.add(initState);
+
+        // Initialise pointer to start of list
+        currentStatePointer = 0;
     }
 
     // Returns address book that the pointer is pointing to
