@@ -130,6 +130,7 @@ public class UnenrolCommandTest {
         assertEquals(expected, unenrolCommand.toString());
     }
 
+    @Test
     /**
      * Updates {@code model}'s filtered enrolment list to show no one.
      */
