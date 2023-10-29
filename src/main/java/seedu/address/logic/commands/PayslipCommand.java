@@ -31,6 +31,7 @@ public class PayslipCommand extends Command {
 
     private final Index index;
     private final NameContainsKeywordsPredicate name;
+    private final boolean requireAllPayrolls;
 
     /**
      * Creates a PayslipCommand to generate a payslip for the specified employee.
@@ -40,6 +41,7 @@ public class PayslipCommand extends Command {
         requireNonNull(index);
         this.index = index;
         this.name = null;
+        this.requireAllPayrolls = false;
     }
 
     /**
@@ -50,6 +52,31 @@ public class PayslipCommand extends Command {
         requireNonNull(name);
         this.name = name;
         this.index = null;
+        this.requireAllPayrolls = false;
+    }
+
+    /**
+     * Creates a PayslipCommand to generate a payslip for the specified employee.
+     * @param index of the person in the filtered person list to generate a payslip for.
+     * @param requireAllPayrolls whether to generate a payslip for all payrolls of the specified employee.
+     */
+    public PayslipCommand(Index index, boolean requireAllPayrolls) {
+        requireNonNull(index);
+        this.index = index;
+        this.name = null;
+        this.requireAllPayrolls = requireAllPayrolls;
+    }
+
+    /**
+     * Creates a PayslipCommand to generate a payslip for the specified employee.
+     * @param name of the person in the filtered person list to generate a payslip for.
+     * @param requireAllPayrolls whether to generate a payslip for all payrolls of the specified employee.
+     */
+    public PayslipCommand(NameContainsKeywordsPredicate name, boolean requireAllPayrolls) {
+        requireNonNull(name);
+        this.name = name;
+        this.index = null;
+        this.requireAllPayrolls = requireAllPayrolls;
     }
 
     @Override
@@ -72,6 +99,7 @@ public class PayslipCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        assert index != null;
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -126,7 +154,16 @@ public class PayslipCommand extends Command {
         }
 
         PayslipCommand otherPayslipCommand = (PayslipCommand) other;
-        return index.equals(otherPayslipCommand.index);
+
+        if (index != null && otherPayslipCommand.index != null) {
+            return index.equals(otherPayslipCommand.index);
+        }
+
+        if (name != null && otherPayslipCommand.name != null) {
+            return name.equals(otherPayslipCommand.name);
+        }
+
+        return false;
     }
 
     @Override

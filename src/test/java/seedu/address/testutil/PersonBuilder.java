@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnnualLeave;
 import seedu.address.model.person.BankAccount;
@@ -10,9 +13,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.attendance.AttendanceStorage;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A utility class to help with building Person objects.
@@ -27,10 +27,8 @@ public class PersonBuilder {
     public static final String DEFAULT_JOINDATE = "12/02/2023";
     public static final String DEFAULT_SALARY = "2000.00";
     public static final String DEFAULT_ANNUALLEAVE = "14";
-    public static final ArrayList<String> DEFAULT_ATTENDANCE_STORAGE = new ArrayList<>(Arrays.asList("27/10/2023//late"));
-
-
-
+    public static final ArrayList<String> DEFAULT_ATTENDANCE_STORAGE = new ArrayList<>(
+        Arrays.asList("27/10/2023//late"));
 
     private Name name;
     private Phone phone;

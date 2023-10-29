@@ -5,6 +5,8 @@ import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORM
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -16,8 +18,6 @@ import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
-
-import java.util.ArrayList;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -113,7 +113,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidSalary_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_BANKACCOUNT,
-                VALID_JOINDATE, INVALID_SALARY, VALID_ANNUALLEAVE,VALID_ATTENDANCE_STORAGE);
+                VALID_JOINDATE, INVALID_SALARY, VALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE);
         String expectedMessage = Salary.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

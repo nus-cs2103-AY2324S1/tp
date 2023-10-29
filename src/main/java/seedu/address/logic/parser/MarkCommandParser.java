@@ -12,7 +12,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.attendance.AttendanceType;
 
-
 /**
  * Parses input arguments and creates a new EditCommand object
  */
