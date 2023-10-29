@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
+import static seedu.address.testutil.TypicalEvents.CONFERENCE;
 import static seedu.address.testutil.TypicalEvents.TEST_EVENT_A;
 import static seedu.address.testutil.TypicalEvents.TEST_EVENT_B;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -16,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +27,7 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.CalendarBuilder;
+import seedu.address.testutil.EventPeriodBuilder;
 
 public class ModelManagerTest {
 
@@ -132,6 +135,33 @@ public class ModelManagerTest {
     public void findEvent_throwsEventNotFoundException() {
         LocalDateTime eventTime = LocalDateTime.parse(DEFAULT_START_TIME_STRING, DATE_TIME_STRING_FORMATTER);
         assertThrows(EventNotFoundException.class, () -> modelManager.findEventAt(eventTime));
+    }
+
+    @Test
+    public void eventsInRange_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.eventsInRange(null));
+    }
+
+    @Test
+    public void eventsInRange_returnsSuccessful() {
+        modelManager.addEvent(CONFERENCE);
+        EventPeriodBuilder builder = new EventPeriodBuilder();
+        builder.changeStartAndEnd("2023-11-15 08:30", "2023-11-15 17:00");
+        assertEquals(List.of(CONFERENCE), modelManager.eventsInRange(builder.build()));
+    }
+
+    @Test
+    public void deleteEventsInRange_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteEventsInRange(null));
+    }
+
+    @Test
+    public void deleteEventsInRange_successful() {
+        EventPeriodBuilder builder = new EventPeriodBuilder();
+        builder.changeStartAndEnd("2023-11-15 08:30", "2023-11-15 17:00");
+        modelManager.deleteEventsInRange(builder.build());
+        LocalDateTime localDateTime = LocalDateTime.parse("2023-11-15 08:30", DATE_TIME_STRING_FORMATTER);
+        assertThrows(EventNotFoundException.class, () -> modelManager.findEventAt(localDateTime));
     }
 
     @Test

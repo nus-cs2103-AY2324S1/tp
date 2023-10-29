@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -122,6 +123,23 @@ public class AllDaysEventListManager {
             throw new EventNotFoundException();
         }
     }
+
+    /**
+     * Looks for events within a specified time and returns the list of events.
+     *
+     * @param range the {@code EventPeriod} describing the time range to check.
+     * @return A list of events or an empty list if no events are within the range.
+     */
+    public List<Event> eventsInRange(EventPeriod range) {
+        List<LocalDate> days = range.getDates();
+        return days.stream().map(LocalDate::toString)
+                .flatMap(x -> dayToEventListMap.containsKey(x)
+                        ? dayToEventListMap.get(x).eventsInRange(range).stream()
+                        : Stream.<Event>empty())
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
     /**
      * Checks if the manager is empty.
      *
@@ -168,7 +186,7 @@ public class AllDaysEventListManager {
      */
     public boolean hasEvents() {
         if (!this.isEmpty()) {
-            return dayToEventListMap.values().stream().map(SingleDayEventList::isEmpty).allMatch(x -> x.equals(false));
+            return dayToEventListMap.values().stream().map(SingleDayEventList::isEmpty).anyMatch(x -> x.equals(false));
         }
         return false;
     }
