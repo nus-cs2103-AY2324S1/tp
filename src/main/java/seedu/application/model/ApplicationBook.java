@@ -96,13 +96,6 @@ public class ApplicationBook implements ReadOnlyApplicationBook {
     }
 
     /**
-     * Restores {@code jobs} to the original unsorted order.
-     */
-    public void unsortJobs() {
-        jobs.unsortJobs();
-    }
-
-    /**
      * Sorts the jobs in the application book based on the comparator provided.
      * @param comparator The comparator used to compare 2 jobs.
      */

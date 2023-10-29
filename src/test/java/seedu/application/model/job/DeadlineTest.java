@@ -1,7 +1,5 @@
 package seedu.application.model.job;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.application.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -55,11 +53,12 @@ class DeadlineTest {
     }
 
     @Test
-    void equals() {
+    void testEqualsAndHashcode() {
         Deadline deadline = new Deadline("Dec 31 2030 1200");
 
         // same values -> returns true
         assertTrue(deadline.equals(new Deadline("Dec 31 2030 1200")));
+        assertEquals(deadline.hashCode(), new Deadline("Dec 31 2030 1200").hashCode());
 
         // same object -> returns true
         assertTrue(deadline.equals(deadline));
@@ -72,5 +71,6 @@ class DeadlineTest {
 
         // different values -> returns false
         assertFalse(deadline.equals(new Deadline("Dec 31 2040 1200")));
+        assertNotEquals(deadline.hashCode(), new Deadline("Dec 31 2040 1200").hashCode());
     }
 }

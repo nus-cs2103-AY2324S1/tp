@@ -1,29 +1,44 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.logic.Messages;
 import seedu.application.model.Model;
-import seedu.application.model.job.FieldContainsKeywordsPredicate;
+import seedu.application.model.job.CombinedPredicate;
 
 /**
  * Finds and lists all jobs in application book whose field contains any of the argument keywords.
  * Field is specified by the user.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs whose field contains any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: FIELD_SPECIFIER KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " -r software database network";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs that contain all of "
+            + "the specified keywords (case-insensitive) in the corresponding fields and displays them as a list with "
+            + "index numbers.\n\n"
+            + "Parameters: "
+            + "[" + PREFIX_COMPANY + "KEYWORDS] "
+            + "[" + PREFIX_ROLE + "KEYWORDS] "
+            + "[" + PREFIX_STATUS + "KEYWORDS] "
+            + "[" + PREFIX_INDUSTRY + "KEYWORDS] "
+            + "[" + PREFIX_DEADLINE + "KEYWORDS] "
+            + "[" + PREFIX_JOB_TYPE + "KEYWORDS]\n\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_COMPANY + "Google";
 
-    private final FieldContainsKeywordsPredicate predicate;
+    public static final String MESSAGE_EMPTY_KEYWORDS = "Missing keywords";
 
-    public FindCommand(FieldContainsKeywordsPredicate predicate) {
+    private final CombinedPredicate predicate;
+
+    public FindCommand(CombinedPredicate predicate) {
         this.predicate = predicate;
     }
 

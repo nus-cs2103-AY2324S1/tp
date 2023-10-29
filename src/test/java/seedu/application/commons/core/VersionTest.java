@@ -1,10 +1,11 @@
 package seedu.application.commons.core;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.application.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.application.model.job.Industry;
 
 public class VersionTest {
 
@@ -126,6 +127,22 @@ public class VersionTest {
         one = new Version(100, 191, 275, true);
         another = new Version(100, 191, 275, true);
         assertTrue(one.equals(another));
+
+        one = new Version(100, 191, 275, true);
+        assertTrue(one.equals(one));
+
+        one = new Version(100, 191, 275, true);
+        assertFalse(one.equals(new Industry("Healthcare")));
+    }
+
+    @Test
+    public void versionComparable_validVersion_equalIsNotCorrect() {
+        Version one;
+        Version another;
+
+        one = new Version(0, 0, 0, false);
+        another = new Version(0, 0, 0, true);
+        assertFalse(one.equals(another));
     }
 
     private void verifyVersionParsedCorrectly(String versionString,

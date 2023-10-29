@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.application.model.job.Status.IN_PROGRESS;
 import static seedu.application.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -41,22 +40,24 @@ public class StatusTest {
     }
 
     @Test
-    public void equals() {
-        Status status = new Status(IN_PROGRESS);
+    public void testEqualsAndHashcode() {
+        Status status = new Status("TO_BE_SUBMITTED");
 
         // same values -> returns true
-        assertEquals(status, new Status(IN_PROGRESS));
+        assertTrue(status.equals(new Status("TO_BE_SUBMITTED")));
+        assertEquals(status.hashCode(), new Status("TO_BE_SUBMITTED").hashCode());
 
         // same object -> returns true
-        assertEquals(status, status);
+        assertTrue(status.equals(status));
 
         // null -> returns false
-        assertNotEquals(status, null);
+        assertFalse(status.equals(null));
 
         // different types -> returns false
-        assertNotEquals(status, 5.0f);
+        assertFalse(status.equals(5.0f));
 
         // different values -> returns false
-        assertNotEquals(status, new Status(Status.JobStatus.PENDING.toString()));
+        assertFalse(status.equals(new Status("Pending")));
+        assertNotEquals(status.hashCode(), new Status("Pending").hashCode());
     }
 }

@@ -38,22 +38,24 @@ public class CompanyTest {
     }
 
     @Test
-    public void equals() {
+    public void testEqualsAndHashcode() {
         Company company = new Company("999");
 
         // same values -> returns true
-        assertEquals(company, new Company("999"));
+        assertTrue(company.equals(new Company("999")));
+        assertEquals(company.hashCode(), new Company("999").hashCode());
 
         // same object -> returns true
-        assertEquals(company, company);
+        assertTrue(company.equals(company));
 
         // null -> returns false
-        assertNotEquals(company, null);
+        assertFalse(company.equals(null));
 
         // different types -> returns false
-        assertNotEquals(company, 5.0f);
+        assertFalse(company.equals(5.0f));
 
         // different values -> returns false
-        assertNotEquals(company, new Company("995"));
+        assertFalse(company.equals(new Company("995")));
+        assertNotEquals(company.hashCode(), new Company("995").hashCode());
     }
 }

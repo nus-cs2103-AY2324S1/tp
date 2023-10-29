@@ -98,7 +98,7 @@ public class Job {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(role, company);
+        return Objects.hash(role, company, deadline, status, jobType, industry);
     }
 
     @Override

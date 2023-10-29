@@ -9,6 +9,7 @@ import seedu.application.commons.util.AppUtil;
  */
 
 public class Industry {
+
     public static final String MESSAGE_CONSTRAINTS =
             "Industry descriptions should adhere to the following constraints:\n"
                     + "1. Only contain alphanumeric characters and spaces\n";
