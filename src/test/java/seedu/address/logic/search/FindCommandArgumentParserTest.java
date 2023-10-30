@@ -1,5 +1,5 @@
 package seedu.address.logic.search;
-/*
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -18,13 +18,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-*/
 
 class FindCommandArgumentParserTest {
-
-    //todo
-
-    /*
 
     private static final Person TEST_PERSON;
 
@@ -160,7 +155,9 @@ class FindCommandArgumentParserTest {
 
     @Test
     void test_nullConstructor() {
-        assertDoesNotThrow(() -> new FindCommandArgumentParser().parse(null));
+        assertDoesNotThrow(() -> assertTrue(
+                new FindCommandArgumentParser().parse(null).test(null)
+        ));
     }
 
     @Test
@@ -168,6 +165,15 @@ class FindCommandArgumentParserTest {
         assertThrows(ParseException.class, () -> new FindCommandArgumentParser().parse("&&"));
     }
 
-     */
+    @Test
+    public void test_quotesMatch() throws ParseException {
+        SearchPredicate query;
+        query = new FindCommandArgumentParser().parse("'ABC'");
+        assertTrue(query.test(TEST_PERSON));
+        query = new FindCommandArgumentParser().parse("'AB'");
+        assertFalse(query.test(TEST_PERSON));
+        query = new FindCommandArgumentParser().parse("'abc'");
+        assertFalse(query.test(TEST_PERSON));
+    }
 
 }
