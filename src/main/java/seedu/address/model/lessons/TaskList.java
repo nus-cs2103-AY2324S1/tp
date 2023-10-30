@@ -3,11 +3,15 @@ package seedu.address.model.lessons;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.ListEntryField;
 import seedu.address.model.lessons.exceptions.DuplicateTaskException;
 import seedu.address.model.lessons.exceptions.TaskNotFoundException;
@@ -102,7 +106,12 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
 
     public static TaskList of(String input) {
         // TODO: parse
-        return new TaskList();
+        String[] tasksArray = input.split(",");
+        TaskList taskList = new TaskList();
+        for (int i = 0; i < tasksArray.length; i++) {
+            taskList.add(Task.of(tasksArray[i]));
+        }
+        return taskList;
     }
 
 
@@ -144,14 +153,7 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
      */
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < internalTaskList.size(); i++) {
-            Task task = internalTaskList.get(i);
-            if (task.isDone()) {
-                stringBuilder.append("+").append(task);
-            }
-        }
-        return internalTaskList.toString();
+        return StringUtil.joinArray(new ArrayList<>(this.internalTaskList), ",");
     }
 
     /**

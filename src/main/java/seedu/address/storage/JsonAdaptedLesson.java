@@ -60,7 +60,6 @@ public class JsonAdaptedLesson {
         subject = serialize(source.getSubject());
         remark = serialize(source.getRemark());
         taskList = serialize(source.getTaskList());
-        System.out.println(taskList);
     }
     /**
      * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.

@@ -1,6 +1,7 @@
 package seedu.address.model.lessons;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.util.SerializeUtil.deserialize;
 
 import java.util.Objects;
 
@@ -42,8 +43,19 @@ public class Lesson extends ListEntry<Lesson> {
         this.day = day;
         this.taskList = taskList;
     }
-    public Lesson(String name, String start, String end, String day, String subject) throws ParseException {
-        this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject), new TaskList());
+
+    /**
+     * Used to construct sample data.
+     * @param name
+     * @param start
+     * @param end
+     * @param day
+     * @param subject
+     * @param taskList
+     * @throws ParseException
+     */
+    public Lesson(String name, String start, String end, String day, String subject, TaskList taskList) throws ParseException {
+        this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject), taskList);
     }
     private Lesson() {
         this.name = Name.DEFAULT_NAME;

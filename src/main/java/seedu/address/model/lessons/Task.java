@@ -117,6 +117,24 @@ public class Task extends ListEntryField {
     }
 
     /**
+     * Parses a string task.
+     * The first character will be either + or -.
+     * If it is +, the task is done. if it is -, the task is undone.
+     * @param task
+     * @return
+     */
+    public static Task of(String task) {
+        // parse the task
+        String description = task.substring(1);
+        if (task.charAt(0) == '+') {
+            // task done
+            return new Task(description, true);
+        } else {
+            return new Task(description, false);
+        }
+    }
+
+    /**
      * Returns true if both tasks have the same identity and data fields.
      * This defines a stronger notion of equality between two tasks.
      */
