@@ -187,12 +187,12 @@ public final class TestData {
      * Holds invalid test data.
      */
     public static final class Invalid {
-        public static final String NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-        public static final String PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-        public static final String EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
         public static final String NAME = "R@chel";
+        public static final String NAME_DESC = " " + PREFIX_NAME + "James&";
         public static final String PHONE = "+651234";
+        public static final String PHONE_DESC = " " + PREFIX_PHONE + "99 (need 3+ digits)";
         public static final String EMAIL = "example.com";
+        public static final String EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo";
 
         /**
          * Holds tag-related data.
