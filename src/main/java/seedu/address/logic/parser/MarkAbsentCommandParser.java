@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkAbsentCommand;
-import seedu.address.logic.commands.MarkPresentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.StudentNumber;
 
@@ -26,7 +25,7 @@ public class MarkAbsentCommandParser implements Parser<MarkAbsentCommand> {
                 PREFIX_STUDENT_NUMBER);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER) || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPresentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER);
