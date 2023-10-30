@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 
 /**
@@ -9,6 +10,7 @@ import java.time.temporal.TemporalAdjusters;
  */
 public class Payroll {
     public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Salary salary;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -117,6 +119,14 @@ public class Payroll {
     }
 
     /**
+     * Returns the string representation of the start date of this payroll.
+     * @return string representation of the start date
+     */
+    public String getStartDateString() {
+        return this.startDate.format(DATE_TIME_FORMATTER);
+    }
+
+    /**
      * Returns the end date of this payroll.
      * @return end date
      */
@@ -125,11 +135,27 @@ public class Payroll {
     }
 
     /**
+     * Returns the string representation of the end date of this payroll.
+     * @return string representation of the end date
+     */
+    public String getEndDateString() {
+        return this.endDate.format(DATE_TIME_FORMATTER);
+    }
+
+    /**
      * Returns the payment date.
      * @return payment date.
      */
     public LocalDate getPaymentDate() {
         return this.endDate;
+    }
+
+    /**
+     * Returns the string representation of the payment date.
+     * @return string representation of the payment date
+     */
+    public String getPaymentDateString() {
+        return this.paymentDate.format(DATE_TIME_FORMATTER);
     }
 
     /**

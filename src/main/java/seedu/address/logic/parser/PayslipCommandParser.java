@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
@@ -29,15 +30,19 @@ public class PayslipCommandParser implements Parser<PayslipCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayslipCommand.MESSAGE_USAGE));
         }
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MONTH_YEAR);
 
         Index index;
+        //LocalDate monthYear;
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_MONTH_YEAR);
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            return new PayslipCommand(index);
+            return argMultimap.getValue(PREFIX_MONTH_YEAR).isEmpty()
+                ? new PayslipCommand(index)
+                : new PayslipCommand(index,
+                    ParserUtil.stringToDate(argMultimap.getValue(PREFIX_MONTH_YEAR).get()).withDayOfMonth(1));
         } catch (ParseException pe) {
             if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -46,7 +51,10 @@ public class PayslipCommandParser implements Parser<PayslipCommand> {
 
             String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
             String[] nameKeywords = name.split("\\s+");
-            return new PayslipCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            return argMultimap.getValue(PREFIX_MONTH_YEAR).isEmpty()
+                ? new PayslipCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)))
+                : new PayslipCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
+                    ParserUtil.stringToDate(argMultimap.getValue(PREFIX_MONTH_YEAR).get()).withDayOfMonth(1));
         }
     }
 }

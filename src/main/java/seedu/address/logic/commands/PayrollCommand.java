@@ -98,12 +98,13 @@ public class PayrollCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Integer> indexes = model.getIndexOfFilteredPersonList(this.name);
 
-        if (indexes.size() == 0) {
+        if (indexes.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
         }
         if (indexes.size() == 1) {
             Person employeeToCalculate = lastShownList.get(indexes.get(0) - 1);
             Payroll monthPayroll = new Payroll(employeeToCalculate.getSalary());
+            employeeToCalculate.addPayroll(monthPayroll);
             model.updateFilteredPersonList(this.name);
             return new CommandResult(String.format(MESSAGE_ARGUMENTS,
                     monthPayroll.calculatePayrollString()), indexes);
