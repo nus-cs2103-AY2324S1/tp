@@ -58,6 +58,16 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String name}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseGroupName(String name) {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        return trimmedName;
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *

@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 /**
  * Adds a group to projectPRO
  */
-public class CreateGroupCommand extends Command {
+public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD = "new";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to the address book. \n"
@@ -28,7 +28,7 @@ public class CreateGroupCommand extends Command {
     /**
      * Creates an newCommand to add the specified {@code Group}
      */
-    public CreateGroupCommand(Group group) {
+    public AddGroupCommand(Group group) {
         requireNonNull(group);
         toAdd = group;
     }
