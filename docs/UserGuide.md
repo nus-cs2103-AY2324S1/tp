@@ -217,8 +217,8 @@ _Details coming soon ..._
 |----------------------------|------------------------------------------------------------------------------------------------------------------------|
 | [Add Student]()            | `add n/NAME c/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`              |
 | [Delete Student]()         | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
-| [Edit Student]()           |                                                                                                                        |
 | [Add Student Note]()       | `note INDEX note/[NOTE]` <br> e.g., `note 1 note/Likes dogs`                                                           |
+| [Edit Student]()           |                                                                                                                        |
 | [View Students]()          |                                                                                                                        |
 | [Find Students]()          |                                                                                                                        |
 | [Assign Risk to Student]() | `tag_student INDEX RISK_LEVEL`<br> e.g.,`tag_student 4 HIGH`                                                           |
