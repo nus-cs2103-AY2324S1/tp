@@ -28,3 +28,19 @@
     -fx-font-size: 16px;
     -fx-text-fill: #343434;
 }
+
+.to_be_submitted {
+    -fx-background-color: #8C7FFF;
+}
+
+.pending {
+    -fx-background-color: #6B61FE;
+}
+
+.approved {
+    -fx-background-color: #BFE2CE;
+}
+
+.rejected {
+    -fx-background-color: #FFD0D3;
+}
