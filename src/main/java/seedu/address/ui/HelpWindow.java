@@ -16,7 +16,28 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2324s1-cs2103t-t11-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String COMMAND_TABLE = "Command Table" + "\n" +
+            "1. Add: add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​\n" +
+            "2. Comment: comment s/STUDENT_NUMBER c/COMMENT\n" +
+            "3. Delete: delete s/STUDENT_NUMBER\n" +
+            "4. Edit: edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]\n" +
+            "5. Tag: tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​\n" +
+            "6. Lookup: lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]\n" +
+            "7. Config: config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT\n" +
+            "8. Mark: mark TUTORIAL_INDEX s/STUDENT_NUMBER\n" +
+            "9. Markall: markall TUTORIAL_INDEX\n" +
+            "10. Set Grade: set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE\n" +
+            "11. Record Part: record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL\n" +
+            "12. View: view STUDENT_NUMBER\n" +
+            "13. Load: load f/FILE_NAME\n" +
+            "14. Clear: clear\n" +
+            "15. List: list\n" +
+            "16. Help: help\n" +
+            "17. Exit: exit\n" +
+            "18. Theme: theme";
+
+
+    public static final String HELP_MESSAGE = COMMAND_TABLE + "\nRefer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
