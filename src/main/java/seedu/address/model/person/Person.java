@@ -23,6 +23,7 @@ public class Person {
             "When an animal name is provided, availability should not be 'Available' or 'nil'.";
     public static final String ANIMAL_NAME_TYPE_MISMATCH_WHEN_UNAVAILABLE_MESSAGE =
             "When availability is 'NotAvailable', animal name and type have to either be both 'nil' or both not 'nil'.";
+    private static final String NAME_CANNOT_BE_NIL_MESSAGE = "Name of fosterer cannot be 'nil'!";
 
     // Identity fields
     private final Name name;
@@ -54,6 +55,10 @@ public class Person {
         this.animalName = animalName;
         this.animalType = animalType;
         this.tags.addAll(tags);
+
+        if (Objects.equals(name.fullName, "nil")) {
+            throw new IllegalArgumentException(NAME_CANNOT_BE_NIL_MESSAGE);
+        }
 
         if (!isAvailabilityValidWhenAnimalNameNotNil()) {
             throw new IllegalArgumentException(AVAILABLE_WHILE_ANIMAL_NAMED_MESSAGE);

@@ -238,13 +238,6 @@ public class MainWindow extends UiPart<Stage> {
         return this.isInViewMode;
     }
 
-    /**
-     * Sets the cursor back to the command box
-     */
-    private void setFocusToCommandBox() {
-        commandBox.setFocus();
-    }
-
     protected void sendFeedback(String feedback) {
         resultDisplay.setFeedbackToUser(feedback);
     }
