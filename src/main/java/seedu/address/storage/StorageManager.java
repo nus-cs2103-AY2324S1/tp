@@ -119,7 +119,7 @@ public class StorageManager implements Storage {
     public BiDirectionalMap<Person, Lesson> getPersonLessonMap() throws DataLoadingException {
         try {
             return BiDirectionalMap.readFrom(Paths.get("data", "personLessonMap.json"));
-        } catch (IOException | ParseException e) {
+        } catch (ParseException e) {
             throw new DataLoadingException(e);
         }
     }
@@ -130,7 +130,7 @@ public class StorageManager implements Storage {
     public BiDirectionalMap<Lesson, Task> getLessonTaskMap() throws DataLoadingException {
         try {
             return BiDirectionalMap.readFrom(Paths.get("data", "lessonTaskMap.json"));
-        } catch (IOException | ParseException e) {
+        } catch (ParseException e) {
             throw new DataLoadingException(e);
         }
     }

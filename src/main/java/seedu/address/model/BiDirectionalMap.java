@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -99,7 +100,7 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
     /**
      * Saves a BiDirectionalMap to a json file
      */
-    public void saveTo(Path p) throws IOException {
+    public void saveTo(Path p) {
         HashMap<String, HashSet<String>> names = new HashMap<>();
         for (Name name : forwardMap.keySet()) {
             HashSet<String> strings = new HashSet<>();
@@ -109,19 +110,29 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
             names.put(name.toString(), strings);
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(p.toFile(), objectMapper.writeValueAsString(names));
+        try {
+            objectMapper.writeValue(p.toFile(), objectMapper.writeValueAsString(names));
+        } catch (IOException e) {
+            Logger.getGlobal().warning("Failed to save BiDirectionalMap " + e.getMessage());
+        }
     }
 
     /**
      * Reads a BiDirectionalMap from a file
      */
     public static <T extends ListEntry<T>,
-            P extends ListEntry<P>> BiDirectionalMap<T, P> readFrom(Path p) throws IOException, ParseException {
+            P extends ListEntry<P>> BiDirectionalMap<T, P> readFrom(Path p) throws ParseException {
         BiDirectionalMap<T, P> m = new BiDirectionalMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
         TypeReference<HashMap<String, HashSet<String>>> typeRef;
         typeRef = new TypeReference<HashMap<String, HashSet<String>>>() {};
-        HashMap<String, HashSet<String>> data = objectMapper.readValue(p.toFile(), typeRef);
+        HashMap<String, HashSet<String>> data;
+        try {
+            data = objectMapper.readValue(p.toFile(), typeRef);
+        } catch (IOException e) {
+            Logger.getGlobal().warning("Failed to read BiDirectionalMap " + e.getMessage());
+            return new BiDirectionalMap<>();
+        }
         for (String name : data.keySet()) {
             HashSet<Name> names = new HashSet<>();
             for (String name1 : data.get(name)) {
