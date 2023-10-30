@@ -16,7 +16,8 @@ import seedu.staffsnap.commons.util.ToStringBuilder;
  */
 public class Interview implements Comparable<Interview> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Interview types should not be empty";
+    public static final String MESSAGE_CONSTRAINTS = "Interview types should not be empty and should be at most 14 "
+            + "characters long";
 
     public final String type;
 
@@ -38,7 +39,7 @@ public class Interview implements Comparable<Interview> {
      * Returns true if a given string is a valid interview type.
      */
     public static boolean isValidType(String test) {
-        return !test.isEmpty();
+        return !test.isEmpty() && test.length() <= 14;
     }
 
     public String getType() {

@@ -75,7 +75,6 @@ public class ApplicantCard extends UiPart<Region> {
         displayApplicantScore();
     }
 
-
     private void displayApplicantId(int displayedIndex) {
         id.setText(displayedIndex + ". ");
     }
@@ -109,10 +108,10 @@ public class ApplicantCard extends UiPart<Region> {
 
         switch (applicant.getStatus()) {
         case OFFERED:
-            status.setStyle("-fx-background-color: #50c952");
+            status.setStyle("-fx-background-color: #0da811");
             break;
         case REJECTED:
-            status.setStyle("-fx-background-color: #e87f7f");
+            status.setStyle("-fx-background-color: #cc4242");
             break;
         case UNDECIDED:
             status.setStyle("-fx-background-color: #36769a");
@@ -128,13 +127,12 @@ public class ApplicantCard extends UiPart<Region> {
             HBox interviewRating = new HBox();
 
             interviewBox.setMinHeight(100);
-            interviewBox.setMinWidth(100);
+            interviewBox.setMinWidth(120);
             interviewRating.setPrefWidth(100);
             interviewRating.setAlignment(Pos.CENTER);
             interviewHeader.setAlignment(Pos.CENTER);
             VBox.setVgrow(interviewRating, Priority.ALWAYS);
 
-            //sets the individual interview rating box with a border radius of 10
             interviewBox.setBackground(new Background(new BackgroundFill(
                     Color.TRANSPARENT,
                     new CornerRadii(10),
@@ -153,7 +151,7 @@ public class ApplicantCard extends UiPart<Region> {
                     new CornerRadii(0, 0, 10, 10, false),
                     Insets.EMPTY)));
 
-            Label interviewLabel = new Label((int) applicant.getInterviewIndexForApplicantCard(interview)
+            Label interviewLabel = new Label(applicant.getInterviewIndexForApplicantCard(interview)
                     + ". " + interview.type);
 
             Label interviewRatingLabel = new Label();
@@ -180,7 +178,7 @@ public class ApplicantCard extends UiPart<Region> {
         Group stackedArcs = new Group();
         stackedArcs.getChildren().addAll(outerCircle, midCircle);
 
-        String labelText = applicant.getScore().hasRating() ? applicant.getScore().toString() : "N.A.";
+        String labelText = applicant.getScore().hasRating() ? applicant.getScore().toString() : "-";
         Label scoreLabel = new Label(labelText);
         scoreLabel.getStyleClass().add("score_label");
 
@@ -197,7 +195,7 @@ public class ApplicantCard extends UiPart<Region> {
             stackedArcs.getChildren().add(arc);
         }
 
-        double applicantRating = labelText.equals("N.A.") ? 0 : Double.parseDouble(labelText);
+        double applicantRating = labelText.equals("-") ? 0 : Double.parseDouble(labelText);
         double ratingArcLength = -360 * (applicantRating / 10);
         Arc ratingArc = new Arc(0, 0, 43, 43, 90, ratingArcLength);
         Color arcColour = colours[(int) Math.floor(applicantRating)];
