@@ -14,7 +14,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
-import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.UniqueReminderList;
 
 /**

@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
-import seedu.address.model.reminder.Reminder;
 
 /**
  * The API of the Model component.
