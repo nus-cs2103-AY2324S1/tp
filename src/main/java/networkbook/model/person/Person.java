@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import networkbook.commons.core.LogsCenter;
 import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ThrowingIoExceptionConsumer;
 import networkbook.commons.util.ToStringBuilder;
@@ -20,15 +22,31 @@ import networkbook.model.util.UniqueList;
  */
 public class Person implements Identifiable<Person> {
 
+    private static final String[] BROWSERS = {"google-chrome", "firefox", "mozilla", "epiphany",
+        "konqueror", "netscape", "opera", "links", "lynx", "chromium", "brave-browser"};
+    private static final Logger LOGGER = LogsCenter.getLogger(Person.class);
+    private static final String LINK_OPENING_MESSAGE = "Opening %s on %s";
     private static final ThrowingIoExceptionConsumer<Link> LINK_OPENER = link -> {
-        URI uri = URI.create(link.toRecognisableWebUrl());
-        if (!Desktop.isDesktopSupported()) {
-            Runtime runtime = Runtime.getRuntime();
-            String[] args = { "osascript", "-e", "open location \"" + uri + "\"" };
-            runtime.exec(args);
+        String url = link.toRecognisableWebUrl();
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            LOGGER.info(String.format(LINK_OPENING_MESSAGE, url, "Windows"));
+            Desktop.getDesktop().browse(URI.create(url));
+        } else if (System.getProperty("os.name").startsWith("Mac OS")) {
+            LOGGER.info(String.format(LINK_OPENING_MESSAGE, url, "Mac OS"));
+            Runtime.getRuntime().exec(new String[] { "open", url });
+        } else if (System.getProperty("os.name").startsWith("Linux")) {
+            for (String browser: BROWSERS) {
+                boolean isBrowserSupported = Runtime.getRuntime()
+                        .exec(new String[] { "which", browser })
+                        .getInputStream().read() != -1;
+                if (isBrowserSupported) {
+                    LOGGER.info(String.format(LINK_OPENING_MESSAGE, url, "Ubuntu"));
+                    Runtime.getRuntime().exec(new String[] { browser, url });
+                    return;
+                }
+            }
         } else {
-            Desktop desktop = Desktop.getDesktop();
-            desktop.browse(uri);
+            LOGGER.warning(String.format("Unrecognised OS: %s", System.getProperty("os.name")));
         }
     };
 
