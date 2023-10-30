@@ -88,7 +88,7 @@ public class AddressBookParser {
 
         case TeachCommand.COMMAND_WORD:
             return new TeachCommandParser().parse(arguments);
-            
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
