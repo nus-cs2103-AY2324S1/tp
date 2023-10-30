@@ -22,9 +22,7 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
     // uses name prefix for now
     @Override
     public CreateGroupCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                // create a group name prefix? or use name
-                ArgumentTokenizer.tokenize(args, PREFIX_GROUPTAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUPTAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUPTAG)
                 || !argMultimap.getPreamble().isEmpty()) {

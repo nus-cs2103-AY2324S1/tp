@@ -14,6 +14,9 @@ public class DeleteGroupTimeCommand extends DeleteTimeCommand {
     private final ArrayList<TimeInterval> timeIntervalsToDelete;
     private final Group group;
 
+    /**
+     * Creates a DeleteGROUPTIMECOMMAND to DELETE the specified {@code timeIntervalsToDelete}
+     */
     public DeleteGroupTimeCommand(Group group, ArrayList<TimeInterval> timeIntervalsToDelete) {
         requireNonNull(group);
         requireNonNull(timeIntervalsToDelete);

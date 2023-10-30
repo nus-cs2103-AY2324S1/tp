@@ -16,8 +16,8 @@ import static seedu.address.logic.parser.CliSyntax.*;
 public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand>{
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteTimeCommand
+     * and returns a DeleteTimeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteTimeCommand parse(String args) throws ParseException {

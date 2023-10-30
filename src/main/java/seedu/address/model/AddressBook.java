@@ -108,17 +108,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
-
-        persons.setPerson(target, editedPerson);
-    }
-
-    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -126,21 +115,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    //// group-level operations
-
     public void addPersonToGroup(Person person, Group group) {
         requireNonNull(person);
         requireNonNull(group);
         GroupList groups = person.getGroups();
     }
 
-    /**
-     * Returns true if a group with the same identity as {@code group} exists in the address book.
-     */
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return groups.contains(group);
+    public Person getPerson(String personName) throws CommandException {
+        // person list get that person object with same name
+        return persons.getPerson(personName);
     }
+
+    //// group-level operations
 
     /**
      * Adds a group to the address book.
@@ -151,11 +137,40 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code group} from this {@code AddressBook}.
+     * {@code group} must exist in the address book.
      */
     public void removeGroup(Group g) {
         groups.remove(g);
+    }
+
+    /**
+     * Returns a group with {@code groupName} from this {@code AddressBook}.
+     * @param groupName Name of group to search
+     * @return The group
+     * @throws CommandException If group is not in address book
+     */
+    public Group getGroup(String groupName) throws CommandException {
+        // group list get that group object with same name
+        return groups.getGroup(groupName);
+    }
+    /**
+     * Returns a {@code group} from this {@code AddressBook}.
+     * @param group Group to search for
+     * @return The group
+     * @throws CommandException If group is not in address book
+     */
+    public Group getGroup(Group group) throws CommandException {
+        // group list get that group object with same name
+        return groups.getGroup(group.getGroupName());
+    }
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return groups.contains(group);
     }
 
     //// util methods
@@ -165,21 +180,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return new ToStringBuilder(this)
             .add("persons", persons)
             .toString();
-    }
-
-    public Person getPerson(String personName) throws CommandException {
-        // person list get that person object with same name
-        return persons.getPerson(personName);
-    }
-
-    public Group getGroup(String groupName) throws CommandException {
-        // group list get that group object with same name
-        return groups.getGroup(groupName);
-    }
-
-    public Group getGroup(Group group) throws CommandException {
-        // group list get that group object with same name
-        return groups.getGroup(group.getGroupName());
     }
 
 
