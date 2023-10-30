@@ -20,4 +20,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADD_ANNUAL_LEAVE_TO = new Prefix("/to");
     public static final Prefix PREFIX_VALUE = new Prefix("/v");
     public static final Prefix PREFIX_REASON = new Prefix("/r");
+    public static final Prefix PREFIX_MONTH_YEAR = new Prefix("/t");
 }

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW_PAYSLIP;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -25,13 +26,19 @@ public class PayslipCommand extends Command {
         + "identified by the index number or name used in the last person listing.\n"
         + "Parameters: INDEX (must be a positive integer) or NAME\n"
         + "Example 1 (index): " + COMMAND_WORD + " 1\n"
-        + "Example 2 (name): " + COMMAND_WORD + " /n john\n";
+        + "Example 2 (name): " + COMMAND_WORD + " /n john\n"
+        + "You can also include a parameter to specify the month and year of the payroll to generate the payslip for.\n"
+        + "Example 3 (index and month): " + COMMAND_WORD + " 1 /t 06/10/2023\n";
+
+    public static final String EMPTY_PAYROLL_ERROR = "The payroll list for the specified employee is empty.\n"
+        + "Please use the payroll command to add a payroll for the employee first.\n"
+        + PayrollCommand.MESSAGE_USAGE;
 
     public static final String MESSAGE_PAYSLIP_SUCCESS = "Payslip generated for Employee: %1$s";
 
     private final Index index;
     private final NameContainsKeywordsPredicate name;
-    private final boolean requireAllPayrolls;
+    private final LocalDate monthYear;
 
     /**
      * Creates a PayslipCommand to generate a payslip for the specified employee.
@@ -41,7 +48,7 @@ public class PayslipCommand extends Command {
         requireNonNull(index);
         this.index = index;
         this.name = null;
-        this.requireAllPayrolls = false;
+        this.monthYear = null;
     }
 
     /**
@@ -52,31 +59,31 @@ public class PayslipCommand extends Command {
         requireNonNull(name);
         this.name = name;
         this.index = null;
-        this.requireAllPayrolls = false;
+        this.monthYear = null;
     }
 
     /**
      * Creates a PayslipCommand to generate a payslip for the specified employee.
      * @param index of the person in the filtered person list to generate a payslip for.
-     * @param requireAllPayrolls whether to generate a payslip for all payrolls of the specified employee.
+     * @param monthYear month of the payroll to generate a payslip for the specified employee.
      */
-    public PayslipCommand(Index index, boolean requireAllPayrolls) {
+    public PayslipCommand(Index index, LocalDate monthYear) {
         requireNonNull(index);
         this.index = index;
         this.name = null;
-        this.requireAllPayrolls = requireAllPayrolls;
+        this.monthYear = monthYear;
     }
 
     /**
      * Creates a PayslipCommand to generate a payslip for the specified employee.
      * @param name of the person in the filtered person list to generate a payslip for.
-     * @param requireAllPayrolls whether to generate a payslip for all payrolls of the specified employee.
+     * @param monthYear month of the payroll to generate a payslip for the specified employee.
      */
-    public PayslipCommand(NameContainsKeywordsPredicate name, boolean requireAllPayrolls) {
+    public PayslipCommand(NameContainsKeywordsPredicate name, LocalDate monthYear) {
         requireNonNull(name);
         this.name = name;
         this.index = null;
-        this.requireAllPayrolls = requireAllPayrolls;
+        this.monthYear = monthYear;
     }
 
     @Override
@@ -106,9 +113,14 @@ public class PayslipCommand extends Command {
 
         Person personToGenerate = lastShownList.get(index.getZeroBased());
         try {
-            PaySlipGenerator.generateReport(personToGenerate);
+            if (monthYear != null) {
+                PaySlipGenerator.generateReportWithMonth(personToGenerate, monthYear);
+            } else {
+                PaySlipGenerator.generateReport(personToGenerate);
+            }
         } catch (Exception e) {
-            throw new CommandException(e.getMessage());
+            PaySlipGenerator.removeWrongFile(personToGenerate);
+            throw new CommandException(EMPTY_PAYROLL_ERROR);
         }
         model.updateFilteredPersonList(person -> person.equals(personToGenerate));
         return new CommandResult(String.format(MESSAGE_PAYSLIP_SUCCESS, personToGenerate.getName().toString()));
@@ -131,9 +143,14 @@ public class PayslipCommand extends Command {
         if (indexes.size() == 1) {
             Person personToGenerate = lastShownList.get(indexes.get(0) - 1);
             try {
-                PaySlipGenerator.generateReport(personToGenerate);
+                if (monthYear != null) {
+                    PaySlipGenerator.generateReportWithMonth(personToGenerate, monthYear);
+                } else {
+                    PaySlipGenerator.generateReport(personToGenerate);
+                }
             } catch (Exception e) {
-                throw new CommandException(e.getMessage());
+                PaySlipGenerator.removeWrongFile(personToGenerate);
+                throw new CommandException(EMPTY_PAYROLL_ERROR);
             }
             model.updateFilteredPersonList(this.name);
             return new CommandResult(String.format(MESSAGE_PAYSLIP_SUCCESS, personToGenerate.getName().toString()));

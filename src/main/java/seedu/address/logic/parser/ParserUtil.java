@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -189,8 +190,7 @@ public class ParserUtil {
     public static LocalDate stringToDate(String date) throws DateTimeParseException {
         String dateFormat = "dd/MM/yyyy";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
-        LocalDate localDate = LocalDate.parse(date, formatter);
-        return localDate;
+        return LocalDate.parse(date, formatter);
     }
 
     /**
@@ -201,8 +201,7 @@ public class ParserUtil {
     public static String dateToString(LocalDate date) {
         String dateFormat = "dd/MM/yyyy";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
-        String localDate = date.format(formatter);
-        return localDate;
+        return date.format(formatter);
     }
 
     /**

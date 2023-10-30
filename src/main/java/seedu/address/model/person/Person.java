@@ -117,12 +117,13 @@ public class Person {
 
     /**
      * Returns a payroll based on a specific date.
-     * @param date Start date of the payroll you want to retrieve.
+     * @param date Start date of the payroll you want to retrieve, in MM/YY.
      * @return payroll of a specific start date.
      */
     public Payroll getPayrollWithStartDate(LocalDate date) {
         for (Payroll payroll: payrolls) {
-            if (payroll.getStartDate().equals(date)) {
+            if (payroll.getStartDate().getMonth().equals(date.getMonth())
+                    && payroll.getStartDate().getYear() == date.getYear()) {
                 return payroll;
             }
         }
