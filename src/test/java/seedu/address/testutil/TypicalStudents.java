@@ -22,13 +22,12 @@ import seedu.address.model.student.Student;
 public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111")
-            .withPhone("94351253")
-            .withTags("high").build();
+            .withAddress("123, Jurong West Ave 6, #08-111").withPhone("94351253")
+            .withTags("high").withNote("course: computer science").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withPhone("98765432")
-            .withTags("medium").build();
+            .withTags("medium").withNote("Likes dogs").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withAddress("wall street").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")

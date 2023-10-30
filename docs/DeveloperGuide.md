@@ -93,7 +93,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](./images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -151,8 +151,92 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 --------------------------------------------------------------------------------------------------------------------
 ## **WellNus Implementation**
 
+This section describes some noteworthy details on how certain features of WellNus are implemented.
+
+### View Feature
+
+This feature is facilitated by the use of the ViewCommand class which extends the Command interface.
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+![Interactions between LogicManager and ModelManager for a view command](images/ViewSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+View Command handles both the viewing of all students and all appointments. The workflow is shown below:
+![ViewCommand Control Flow](images/ViewActivityDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** There should be a diamond connecting the 3 separate branches
+but due to a limitation of PlantUML, the 3 branches leads to the "end" individually .
+</div>
+
+### Student Notes feature
+
+The adding of student notes is facilitated by `NoteCommand`. It extends `Command` and allows the addition of a `Note`
+to the student at the index specified by the user.
+
+The sequence diagram below illustrates the interactions within the `Logic` component, 
+taking `execute("note 1 note/Likes dogs.")` as an example.
+
+![Interactions inside the Logic component for "note 1 note/Likes dogs." command](images/NoteSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How a `Note` should be added to a `Student`**
+
+* **Alternative 1 (current choice):** Create a new `NoteCommand` class which handles the addition of a note 
+to a `Student`.
+    * Pros: User input will be shorter in length and easier to read
+    * Cons: More work to implement
+
+* **Alternative 2:** Add `Note` as a field in the `AddCommand`
+    * Pros: Easier to implement
+    * Cons: User will have to type much longer commands, since `Note` can be up to 200 characters long,
+  leads to very lengthy commands
+
+### Cancel Appointment Feature
+
+The canceling of an appointment is facilitated by the `CancelCommand`. It extends `Command` and allows the user to cancel an appointment at a specified index.
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("cancel 1")` as an example.
+
+![Interactions inside the Logic component for "cancel 1" command](images/CancelSequenceDiagram.png)
+
+#### Design Considerations:
+
+**Aspect: How an Appointment should be canceled**
+
+* **Current Choice:** Create a new `CancelCommand` class which handles the cancellation of an appointment.
+    * Pros: User input will be shorter and easier to read.
+    * Cons: More work to implement.
+
+* **Alternative 1:** Add appointment cancellation functionality to the existing `DeleteCommand`.
+    * Pros: Easier to implement.
+    * Cons: User will have to type longer commands since appointment details can be lengthy, which may lead to more complex commands.
+
+### \[Proposed\] Check clashing appointments feature
+
+#### Proposed Implementation
+
+The proposed check clashing appointments mechanism is facilitated by `UniqueAppointmentList`. It implements the `Iterable`
+interface that stores an `ObservableList` of type `Appointment`.
+
+The following methods are implemented to facilitate the check clashing appointments process:
+
+* `UniqueAppointmentList#hasOverlap(Appointment appt1, Appointment appt2)` —  Checks if two appointments have overlapping time.
+* `UniqueAppointmentList#hasOverlappingAppointments(Appointment newAppt)` —  Compares the new appointment to schedule with every other appointment currently in `UniqueAppointmentList`.
 
 
+The following sequence diagram shows how the class operates when an appointment is added:
+
+![ClashSequenceDiagram](images/ClashSequenceDiagram.png)
+
+
+When the user schedules a new command, the `UniqueAppointmentList` runs its `hasOverlappingAppointments()` method to check if the
+new appointment clashes with any existing appointments. It raises a `OverlappingAppointmentsException` if the method returns true,
+and prevents the user from scheduling that appointment.
+
+The following activity diagram summarises what happens when a user schedules an apppointment:
+
+![ClashActivityDiagram](images/ClashActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Implementation**
