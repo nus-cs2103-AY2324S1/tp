@@ -20,7 +20,7 @@ If you can type fast, WellNUS can get your contact management tasks done faster 
 
 1. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for WellNUS.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wellnus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -183,13 +183,13 @@ Format: `exit`
 
 ### 2.4.3 Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+WellNUS data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### 2.4.4 Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file
+WellNUS data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, WellNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 ### 2.5 Tracking TODOS `[coming in v1.3]`
@@ -201,7 +201,7 @@ _Details coming soon ..._
 ## 3. Frequently Asked Questions (FAQ)
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WellNUS home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
