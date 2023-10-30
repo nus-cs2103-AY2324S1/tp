@@ -191,4 +191,41 @@ public class FindExpressionParserTest {
                 .toPredicate().test(owes_you));
     }
 
+    @Test
+    public void conditionNodeToPredicate_invalidBalanceField_evaluatesCorrectly() throws ParseException {
+        Person you_owe = new Person(
+                new Name("Alice"),
+                new Phone("12345"),
+                new Email("alice@a.com"),
+                new Address("123, alice street"),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.of(new Telegram("@aliceeee")),
+                Set.of(new Tag("friends")),
+                Optional.of(999),
+                FXCollections.observableArrayList(new ArrayList<>()),
+                new Balance(-500)
+        );
+
+        assertThrows(ParseException.class, () -> new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BALANCE, "1.123")
+                .toPredicate().test(you_owe));
+
+        assertThrows(ParseException.class, () -> new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BALANCE, "1.1.1")
+                .toPredicate().test(you_owe));
+
+        assertThrows(ParseException.class, () -> new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BALANCE, "$-5")
+                .toPredicate().test(you_owe));
+
+        assertThrows(ParseException.class, () -> new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BALANCE, "$ABCD")
+                .toPredicate().test(you_owe));
+
+        assertThrows(ParseException.class, () -> new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BALANCE, "$$5")
+                .toPredicate().test(you_owe));
+    }
 }
