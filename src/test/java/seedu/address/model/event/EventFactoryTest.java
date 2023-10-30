@@ -3,7 +3,6 @@ package seedu.address.model.event;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.MonthDay;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 
