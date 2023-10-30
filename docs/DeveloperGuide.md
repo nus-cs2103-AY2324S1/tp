@@ -69,13 +69,17 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+These parts may use custom component classes such as `FieldHyperlink` that
+inherit from default JavaFX components. These subclasses can provide
+reasonable defaults or part-specific behavior to simplify code.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -113,6 +117,34 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `NetworkBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `NetworkBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+Here is an overview of what the other classes in `Logic` do:
+* `ArgumentMultiMap` and `ArgumentTokeniser` are used to map the parameters of 
+the user's input into key-value pairs, where the keys are specified using `ArgumentTokeniser`
+* `CliSyntax` is where command-specific keywords are stored. It is used as the arguments for `ArgumentTokeniser`
+to process the user input into: `{keyword : parameter}` pairs.
+  * Example usage: The text `1 /name John Doe /phone 98765432` when
+    mapped using `ArgumentTokeniser` with the keywords `/name`
+    and `/phone` produces:
+    * `{1}, {/name : John Doe}, {/phone : 98765432}`
+    * Any text that appears before the first possible keyword is stored
+      in its own entry.
+  * `ArgumentMultiMap` can then perform specific operations, including
+    but not limited to:
+    * Retrieve all values/only a specific value from the set.
+    * Check that a certain key only appears once, or exactly once.
+* `ParserUtil` contains useful commands for parsing text such as removing
+  leading/trailing whitespace from text, verifying that there are no 
+  duplicate entries in the text, and so on.
+
+The activity diagram below describes the workflow of `AddressBookParser`
+when determining which `Parser` to use:
+* `TO BE IMPLEMENTED IN 1.4`
+
+The sequence diagram below illustrates the interactions within the
+`FilterCommand` class to generate a `FilterCommand` object, using
+`ArgumentMultiMap` and `ArgumentTokeniser`:
+* `TO BE IMPLEMENTED IN 1.4`
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -155,8 +187,88 @@ Classes used by multiple components are in the `seedu.networkbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Create new contact
 
+The implementation of the create command follows the convention of a normal command,
+where `CreateCommandParser` is responsible for parsing the user input string
+into an executable command.
+
+![create_contact](images/create/CreateDiagram.png)
+
+`CreateCommandParser` first obtains the values corresponding to the flags
+`/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index`.
+`CreateCommandParser` ensures that:
+* There is no preamble text between the `create` keyword and the flags.
+* One and only one of the flag`/name` is present.
+* At most one of the flags `/grad` or `/priority` is present.
+* All values corresponding to the flags `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index` are valid.
+
+If any of the above constraints are violated, `CreateCommandParser` throws a `ParseException`.
+Otherwise, it creates a new instance of `CreateCommand` that corresponds to the user input.
+
+`CreateCommand` comprises of the person to be added, which is an instance of `Person`.
+
+Upon execution, `CreateCommand` first queries the supplied model if it contains a person with an identical name.
+If no such person exists, `CreateCommand` then calls on `model::addPerson` to add the person into the networkBook data.
+
+
+We have considered the following alternative implementations:
+* Implement `CreateCommandParser` to parse the arguments using regular expressions.
+  This is not optimal for our use case as having a regex expression to parse the field values would be more complicated to scale and debug.
+
+### Edit details
+
+The implementation of the edit command follows the convention of a normal command,
+where `EditCommandParser` is responsible for parsing the user input string
+into an executable command.
+
+![edit sequence](images/edit/EditDiagram.png)
+
+`EditCommandParser` first obtains the values corresponding to the flags 
+`/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index`.
+`EditCommandParser` ensures that:
+* One and only one of `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` is present.
+* If `/name`, `/priority` or `/grad` is present, then `/index` is not present.
+* If `/phone`, `/email`, `/link`, `/course`, `/spec` or `/tag` is present, then one and only one tag `/index` is present.
+
+If any of the above constraints are violated, `EditCommandParser` throws a `ParseException`. 
+Otherwise, it creates a new instance of `EditCommand` that corresponds to the user input.
+
+`EditCommand` makes use of `EditPersonDescriptor`, which is an editable version of `Person` class.
+Most importantly, 
+* `EditPersonDescriptor` constructor copies the details of the person.
+* `EditPersonDescriptor` has setter methods to allow changing the details.
+* `EditPersonDescriptor` has a `toPerson` method that returns a new instance of `Person` that matches the current details.
+
+`EditCommand` comprises of the `index` of the person to edit, and `editAction` as an instance of `EditAction`. 
+Each `EditAction` implements `edit(EditPersonDescriptor)`,
+which mutates the input instance of `EditPersonDescriptor`.
+`EditAction` is an interface that has implementing concrete classes corresponding to each type of action
+(i.e. `EditPhoneAction` for editing phone, `EditEmailAction` for editing email, etc).
+
+Upon execution, `EditCommand` first obtains the `Person` at the index `index` in the model.
+`EditCommand` then creates a new instance of `EditPersonDescriptor` that matches the details of the `Person`.
+`EditCommand` then calls on `editAction::edit` to mutate the created `EditPersonDescriptor`.
+
+`EditCommand` then converts the current `EditPersonDescriptor` into a new `Person`.
+`EditCommand` then asks the `model` to update the original `Person` with the edited `Person`.
+
+We have considered the following alternative implementations:
+* Implement `EditCommand` with only `EditPersonDescriptor` and without `EditAction`,
+and `EditCommandParser` generates the instance of `EditPersonDescriptor` directly.
+`EditCommandParser` then must know the details of the person editing
+in order to generate the correct instance of `EditPersonDescriptor`.
+This is not optimal for object-oriented programming,
+as the parser should not need to know how the current model looks like.
+* Use a different class for each type of edit command 
+(i.e. editing phone with `EditPhoneCommand`, editing email with `EditEmailCommand`, etc).
+This design has the advantage that the parser does not need to know how the current model looks like.
+However, to keep `Command` classes consistent in design, 
+we decide to only have one `EditCommand` class and practice inheritance with `EditAction`.
+
+
+### \[Proposed\] Undo/redo feature
+    
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `NetworkBook` with an undo/redo history, stored internally as an `networkBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -238,6 +350,66 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
+### Sorting feature
+
+#### Implementation
+
+The sorting feature builds on the existing filter feature present in `Model`. `Model` has a getter method `Model#getFilteredPersonList()` which returns an `ObservableList<Person>`. `Model#getFilteredPersonList()` is called by `LogicManager#getFilteredPersonList()`, which is then called in `MainWindow` to render a filtered list of contacts. The implementation of the filter feature in `ModelManager` uses JavaFX's `FilteredList`, an implementation of the `SortedList` interface.
+
+The new sort feature makes use of JavaFX's `SortedList`, another implementation of the `ObservableList` interface. `SortedList` takes a predicate which it then uses to sort the list.
+
+To implement the sort feature, the method `Model#updateSortedPersonList()` was exposed via the `Model` interface. A `SortedList` was then added to the implementation in `ModelManager` as a wrapper of the existing `FilteredList`. `ModelManager`'s implementation of `updateSortedPersonList()` method updates the predicate of the `SortedList`. Finally, the implementation of `getFilteredPersonList()` was updated to return the sorted list.
+
+The sort command updates the predicate of the model's `SortedList` to a `PersonSortComparator`. `PersonSortComparator` extends `Comparator<Person>`, adding in a few extra methods specific to sorting persons:
+
+* `parseSortField()` parses a given string into a value of the `SortField` enumeration. This value is then used later to determine the predicate implementation.
+* `parseSortOrder()` parses a given string into a value of the `SortOrder` enumeration. This value is then used later to determine the predicate implementation.
+* `generateXXComparator()` methods. These methods return comparators which compare based on XX field of Person in either ascending or descending order.
+* `generateComparator()` takes in a `SortField` and `SortOrder` and calls the relevant `generateXXComparator()` based on the given sort order and field.
+
+Given below is an example usage scenario and how the sorting mechanism behaves at each step.
+
+Step 1. The user launches the app. The rendered list is unsorted and unfiltered.
+
+<!-- todo insert diagram -->
+
+Step 2. The user executes `find al` command to filter contacts by name. This updates the predicate of the `FilteredList` to only show contacts with names matching "al". The `SortedList` predicate remains unchanged (i.e. `null`).
+
+<!-- todo insert diagram -->
+
+Step 3. The user executes `sort /by name /order desc​` to sort the filtered list by name in descending order. The `sort` command parser calls `PersonSortComparator#generateComparator()` to generate the appropriate comparator. The sort command then calls `Model#updateSortedPersonList()`, updating the predicate of the `SortedList`. This newly sorted list is then rendered in the main UI.
+
+<!-- todo insert diagram -->
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `find` command is called again, the sorting will persist.
+
+</div>
+
+The following sequence diagram shows how the sort operation works:
+
+_{insert diagram here}_
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+Step 4. The user executes `sort /by none`, which updates the `SortedList` predicate and resets the sorting.
+
+<!-- todo insert diagram-->
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+_{insert diagram here}_
+
+#### Design considerations:
+
+**Aspect: How sort executes:**
+
+* **Alternative 1 (current choice):** _{to be added}_
+
+* **Alternative 2:** _{to be added}_
+
 
 
 --------------------------------------------------------------------------------------------------------------------

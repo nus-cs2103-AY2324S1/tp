@@ -1,12 +1,15 @@
 package networkbook.model;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
+import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
+import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 
 /**
@@ -88,6 +91,17 @@ public interface Model {
      * @throws CommandException if NetworkBook has no subsequent states stored to redo to.
      */
     void redoNetworkBook() throws CommandException;
+
+    /**
+     * Checks if the indices for a link of a contact are valid.
+     */
+    boolean isValidLinkIndex(Index personIndex, Index linkIndex);
+
+    /**
+     * Opens the link at index {@code linkIndex} in the link list of the person
+     * at index {@code personIndex}.
+     */
+    Link openLink(Index personIndex, Index linkIndex) throws IOException;
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

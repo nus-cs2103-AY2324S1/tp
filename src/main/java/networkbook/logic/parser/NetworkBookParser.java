@@ -10,15 +10,21 @@ import networkbook.logic.commands.AddCommand;
 import networkbook.logic.commands.ClearCommand;
 import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CreateCommand;
-import networkbook.logic.commands.DeleteCommand;
 import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
+<<<<<<< HEAD
 import networkbook.logic.commands.RedoCommand;
 import networkbook.logic.commands.SortCommand;
 import networkbook.logic.commands.UndoCommand;
+=======
+import networkbook.logic.commands.OpenLinkCommand;
+import networkbook.logic.commands.SortCommand;
+import networkbook.logic.commands.delete.DeletePersonCommand;
+>>>>>>> master
 import networkbook.logic.commands.edit.EditCommand;
+import networkbook.logic.commands.filter.FilterCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 
 /**
@@ -64,7 +70,7 @@ public class NetworkBookParser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeletePersonCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -90,6 +96,12 @@ public class NetworkBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
+
+        case OpenLinkCommand.COMMAND_WORD:
+            return new OpenLinkCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

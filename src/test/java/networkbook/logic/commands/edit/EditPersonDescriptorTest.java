@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.commons.core.index.Index;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
@@ -17,8 +18,9 @@ import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 import networkbook.model.person.Phone;
 import networkbook.model.person.Specialisation;
-import networkbook.model.tag.Tag;
+import networkbook.model.person.Tag;
 import networkbook.model.util.UniqueList;
+import networkbook.testutil.TypicalPersons;
 
 public class EditPersonDescriptorTest {
     @Test
@@ -101,6 +103,14 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
+    public void setPhone_duplicatePhone_throwsCommandException() {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
+        Phone duplicatePhone = new Phone("12345678");
+        Index index = Index.fromOneBased(2);
+        assertThrows(CommandException.class, () -> editPersonDescriptor.setPhone(index, duplicatePhone));
+    }
+
+    @Test
     public void setPhone_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
@@ -139,6 +149,14 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
+    public void setEmail_duplicateEmail_throwsCommandException() {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
+        Email duplicateEmail = new Email("jack@gmail.com");
+        Index index = Index.fromOneBased(2);
+        assertThrows(CommandException.class, () -> editPersonDescriptor.setEmail(index, duplicateEmail));
+    }
+
+    @Test
     public void setEmail_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
@@ -174,6 +192,14 @@ public class EditPersonDescriptorTest {
         );
         EditPersonDescriptor expectedDescriptor = new EditPersonDescriptor(expectedPerson);
         assertEquals(expectedDescriptor, actualDescriptor);
+    }
+
+    @Test
+    public void setLink_duplicateLink_throwsCommandException() {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
+        Link duplicateLink = TypicalPersons.JACK_FIRST_LINK;
+        Index index = Index.fromOneBased(2);
+        assertThrows(CommandException.class, () -> editPersonDescriptor.setLink(index, duplicateLink));
     }
 
     @Test
@@ -241,6 +267,14 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
+    public void setCourse_duplicateCourse_throwsCommandException() {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
+        Course duplicateCourse = new Course("CS2103T");
+        Index index = Index.fromOneBased(2);
+        assertThrows(CommandException.class, () -> editPersonDescriptor.setCourse(index, duplicateCourse));
+    }
+
+    @Test
     public void setCourse_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
@@ -282,6 +316,15 @@ public class EditPersonDescriptorTest {
     }
 
     @Test
+    public void setSpecialisation_duplicateSpecialisation_throwsCommandException() {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
+        Specialisation duplicateSpecialisation = new Specialisation("Software Engineering");
+        Index index = Index.fromOneBased(2);
+        assertThrows(CommandException.class, ()
+                -> editPersonDescriptor.setSpecialisation(index, duplicateSpecialisation));
+    }
+
+    @Test
     public void setSpecialisation_invalidIndex_throwsCommandException() {
         EditPersonDescriptor actualDescriptor = new EditPersonDescriptor(JACK);
         assertThrows(CommandException.class, ()
@@ -318,6 +361,14 @@ public class EditPersonDescriptorTest {
         );
         EditPersonDescriptor expectedDescriptor = new EditPersonDescriptor(expectedPerson);
         assertEquals(expectedDescriptor, actualDescriptor);
+    }
+
+    @Test
+    public void setTag_duplicateTag_throwsCommandException() {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(JACK);
+        Tag duplicateTag = new Tag("software eng enthusiast");
+        Index index = Index.fromOneBased(2);
+        assertThrows(CommandException.class, () -> editPersonDescriptor.setTag(index, duplicateTag));
     }
 
     @Test
