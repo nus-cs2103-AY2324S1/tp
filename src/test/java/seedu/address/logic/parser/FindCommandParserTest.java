@@ -9,6 +9,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.Appointment;
+import seedu.address.model.person.enums.InputSource;
+import seedu.address.model.person.predicates.AppointmentOverlapsPredicate;
 import seedu.address.model.person.predicates.CompositePredicate;
 import seedu.address.model.person.predicates.IdContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
@@ -44,5 +47,15 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " id/T0100606Z \n \t T0206006Z  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void apptparse_validArgs_returnsFindCommand() throws Exception {
+        Appointment appointment = Appointment.of("1-1-2021, 9 11:30", InputSource.USER_INPUT);
+        CompositePredicate findCommandPredicate = new CompositePredicate();
+        findCommandPredicate.add(new AppointmentOverlapsPredicate(appointment));
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand = new FindCommand(findCommandPredicate);
+        assertParseSuccess(parser, " ap/1-1-2021, 9 11:30", expectedFindCommand);
     }
 }
