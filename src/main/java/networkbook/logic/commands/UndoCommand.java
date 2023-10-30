@@ -9,9 +9,8 @@ import networkbook.model.Model;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Noted, previous state change undone!";
-    public static final String MESSAGE_UNDO_DISALLOWED = "Illegal state change requested.\n"
-            + "NetworkBook does not have a previous state stored to undo to.";
+    public static final String MESSAGE_SUCCESS = "Noted, last change successfully undone!";
+    public static final String MESSAGE_UNDO_DISALLOWED = "There have been no changes to undo.";
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model should not be null";
