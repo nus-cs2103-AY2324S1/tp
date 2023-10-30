@@ -148,6 +148,7 @@ public class Transaction implements Entry {
                 && Objects.equals(transactionType, that.transactionType)
                 && Objects.equals(description, that.description)
                 && Objects.equals(amount, that.amount)
+                && Objects.equals(date, that.date)
                 && Objects.equals(personId, that.personId);
     }
 
