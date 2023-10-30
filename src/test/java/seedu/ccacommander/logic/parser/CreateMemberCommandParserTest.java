@@ -173,6 +173,12 @@ public class CreateMemberCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + GENDER_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + TAG_DESC_FRIEND,
                 new CreateMemberCommand(expectedMemberNoAddress));
+
+        // missing all optional fields
+        Member expectedMemberNoOptionalFields = new MemberBuilder(AMY).withPhone()
+                .withEmail().withAddress().withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + GENDER_DESC_AMY,
+                new CreateMemberCommand(expectedMemberNoOptionalFields));
     }
 
     @Test
