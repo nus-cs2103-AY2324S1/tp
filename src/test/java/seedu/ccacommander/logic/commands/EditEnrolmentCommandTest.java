@@ -131,6 +131,16 @@ public class EditEnrolmentCommandTest {
         assertCommandFailure(editEventCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
+    @Test
+    public void execute_enrolmentDoesNotExist_failure() {
+        EditEnrolmentDescriptor descriptor = new EditEnrolmentDescriptorBuilder().withHours(VALID_HOURS_BOXING).build();
+        EditEnrolmentCommand editEventCommand =
+                new EditEnrolmentCommand(INDEX_FIRST_MEMBER, INDEX_SECOND_EVENT, descriptor);
+
+        assertCommandFailure(editEventCommand, model, String.format(Messages.MESSAGE_ENROLMENT_DOES_NOT_EXIST,
+                INDEX_FIRST_MEMBER.getOneBased(), INDEX_SECOND_EVENT.getOneBased()));
+    }
+
     /**
      * Edit filtered list where member index is larger than size of filtered member list,
      * but smaller than size of CcaCommander
