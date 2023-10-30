@@ -12,7 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.schedule.TutorNameContainsKeywordsPredicate;
+import seedu.address.model.schedule.TutorIndexPredicate;
 
 /**
  * Lists all persons in the address book to the user.
@@ -48,7 +48,7 @@ public class ListScheduleCommand extends Command {
                 Person tutor = lastShownList.get(targetIndex.getZeroBased());
                 String fullName = tutor.getName().toString();
                 List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
-                TutorNameContainsKeywordsPredicate predicate = new TutorNameContainsKeywordsPredicate(nameList);
+                TutorIndexPredicate predicate = new TutorIndexPredicate(nameList);
 
                 model.updateFilteredScheduleList(predicate);
                 return new CommandResult(
