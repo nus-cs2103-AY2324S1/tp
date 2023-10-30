@@ -67,7 +67,9 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### View course : `course` View course information and tutorial timings. 
+### Viewing course : `course` 
+
+Views course information and tutorial timings. 
 
 ![view course](images/viewCourse.png) 
 
@@ -76,6 +78,37 @@ Format: `course c/COURSE_CODE`
 Example: `course c/CS1231S` returns the course information and tutorial timings for CS1231S. 
 
 If you are unsure about the course code, you can simply type `course` and a list of all courses will be shown.
+
+When the command succeeds: 
+```
+Course: CS2103T Software Engineering
+CS2103T Tutorial 10:00-12:00
+CS2103T Lecture 10:00-12:00
+CS2103T Laboratory 10:00-12:00
+```
+
+### Adding a default course : `teach`
+
+Adds a default course to the address book. 
+
+![teach command](images/teachCommand.png)
+
+Format: `teach c/COURSE_CODE`
+- Updates the name of the window to the default course.
+- Filters the list of TAs teaching under the course automatically.
+- The default course is saved even after the user closes the application. 
+
+Example: `course c/CS2103T` sets the default course to the given course code.
+
+When the command succeeds:
+
+```CS2103T is successfully added as default course.```
+
+When the command fails:
+- Incorrect format (e.g., missing information): `Invalid command format!`
+- Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
+  and optionally end with an alphabet.`
+- Valid course code, but course not found: `Course not found.`
 
 ### Adding a Teaching Assistant: `add`
 
@@ -110,7 +143,7 @@ When the command fails:
 
 - Incorrect format (e.g., missing information): `Invalid command format!`
 - Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- Invalid invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
+- Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
 and optionally end with an alphabet.`
 - Invalid free time: `TA's free time should have a start and end time in HH:mm format`
 - Invalid work hour: `Hour should only be positive integers and should be less than 9999`

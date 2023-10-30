@@ -44,6 +44,11 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
+     * Returns the user prefs' default course.
+     */
+    String getTeaching();
+
+    /**
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
