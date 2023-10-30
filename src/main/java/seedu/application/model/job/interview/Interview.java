@@ -14,6 +14,8 @@ public class Interview {
     public final InterviewType interviewType;
     public final InterviewDateTime interviewDateTime;
     public final InterviewAddress interviewAddress;
+    public static final Interview DEFAULT_INTERVIEW = new Interview(InterviewType.DEFAULT_INTERVIEW_TYPE,
+            InterviewDateTime.DEFAULT_INTERVIEW_DATE_TIME, InterviewAddress.DEFAULT_INTERVIEW_ADDRESS);
 
     /**
      * Constructs a {@code Interview}.

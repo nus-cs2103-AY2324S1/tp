@@ -1,12 +1,16 @@
 package seedu.application.ui;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.application.commons.core.LogsCenter;
+import seedu.application.model.job.interview.Interview;
 import seedu.application.model.job.Job;
 
 /**
@@ -18,11 +22,12 @@ public class JobDetailsPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(JobDetailsPanel.class);
 
     private final Job job;
-
-    // TODO Declare Interview List here
+    private InterviewListPanel interviewListPanel;
 
     @FXML
     private StackPane detailsPanelPlaceholder;
+    @FXML
+    private StackPane interviewListPanelPlaceHolder;
     @FXML
     private VBox jobDetailsPanel;
     @FXML
@@ -38,7 +43,7 @@ public class JobDetailsPanel extends UiPart<Region> {
     @FXML
     private Label industry;
     @FXML
-    private Label interviewTitle;
+    private Label interviewPreamble;
 
     /**
      * Creates a {@code JobDetailsPanel} with the selected {@code Job}.
@@ -52,8 +57,13 @@ public class JobDetailsPanel extends UiPart<Region> {
         deadline.setText(job.getDeadline().deadline);
         jobType.setText(job.getJobType().jobType);
         industry.setText(job.getIndustry().industry);
-        interviewTitle.setText("Interviews: ");
-        //TODO Initialise Interview List here
+        interviewPreamble.setText("Interviews: ");
+        // placeholder interviews **TO BE UPDATED**
+        List<Interview> interviews = new ArrayList<>();
+        interviews.add(Interview.DEFAULT_INTERVIEW);
+        interviewListPanel = new InterviewListPanel(
+                FXCollections.observableArrayList(interviews));
+        interviewListPanelPlaceHolder.getChildren().add(interviewListPanel.getRoot());
     }
 }
 

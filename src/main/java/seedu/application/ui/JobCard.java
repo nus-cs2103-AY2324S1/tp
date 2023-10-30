@@ -37,7 +37,7 @@ public class JobCard extends UiPart<Region> {
     private Label deadline;
 
     /**
-     * Creates a {@code JobCode} with the given {@code Job} and index to display.
+     * Creates a {@code JobCard} with the given {@code Job} and index to display.
      */
     public JobCard(Job job, int displayedIndex) {
         super(FXML);
