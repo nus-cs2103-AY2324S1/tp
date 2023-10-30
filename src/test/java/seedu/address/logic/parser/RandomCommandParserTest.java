@@ -11,7 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RandomCommand;
 
 /**
- * Tests MarkPresentCommandParser.
+ * Tests RandomCommandParser.
  */
 public class RandomCommandParserTest {
     private RandomCommandParser parser = new RandomCommandParser();
@@ -25,7 +25,7 @@ public class RandomCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsMarkCommand() {
+    public void parse_validArgs_returnsRandomCommand() {
         int i = 1;
         assertParseSuccess(parser, " " + i, new RandomCommand(Index.fromOneBased(i)));
     }
