@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public class ClearLogCommand extends Command {
 
     public static final String COMMAND_WORD = "clog";
-    public static final String MESSAGE_SUCCESS = "Logbook has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Logger tab has been cleared!";
 
 
     @Override

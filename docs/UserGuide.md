@@ -252,7 +252,7 @@ Clears all current data in the logger tab.
 Format: `clog`
 
 Expected output:
-* `Logbook has been cleared!`
+* `Logger tab has been cleared!`
 
 
 ### Deleting a person or field: `delete`
