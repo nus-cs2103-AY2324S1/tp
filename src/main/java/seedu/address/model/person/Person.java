@@ -106,6 +106,10 @@ public class Person {
         return interactions.getInteractions();
     }
 
+    public Interaction getLastInteraction() {
+        return interactions.getLastInteraction();
+    }
+
     public List<Interaction> getFilteredInteractions(Predicate<Interaction> predicate) {
         return this.interactions.getFilteredInteractions(predicate);
     }
