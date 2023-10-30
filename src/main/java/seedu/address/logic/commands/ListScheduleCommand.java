@@ -13,9 +13,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.schedule.TutorIndexPredicate;
 import seedu.address.model.schedule.Status;
 import seedu.address.model.schedule.StatusPredicate;
+import seedu.address.model.schedule.TutorIndexPredicate;
 
 /**
  * Lists all persons in the address book to the user.
@@ -31,8 +31,8 @@ public class ListScheduleCommand extends Command {
         + "Parameters: INDEX (must be a positive integer, optional to add)\n"
         + "Example: " + COMMAND_WORD + " 1";
 
-    private Index targetIndex;
-    private Status status;
+    private final Index targetIndex;
+    private final Status status;
 
     /**
      * Creates an ListScheduleCommand to list the specified {@code Schedule}
@@ -50,20 +50,11 @@ public class ListScheduleCommand extends Command {
             List<Person> lastShownList = model.getFilteredPersonList();
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            } else {
-                Person tutor = lastShownList.get(targetIndex.getZeroBased());
-                String fullName = tutor.getName().toString();
-                List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
-                TutorIndexPredicate predicate = new TutorIndexPredicate(nameList);
-
-                model.updateFilteredScheduleList(predicate);
-                return new CommandResult(
-                    String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, model.getFilteredScheduleList().size()));
             }
             String fullName = lastShownList.get(targetIndex.getZeroBased()).getName().toString();
             nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
-            TutorNameContainsKeywordsPredicate namePredicate = new TutorNameContainsKeywordsPredicate(nameList);
-            model.updateFilteredScheduleList(namePredicate);
+            TutorIndexPredicate indexPredicate = new TutorIndexPredicate(nameList);
+            model.updateFilteredScheduleList(indexPredicate);
         }
 
         if (status != null) {
@@ -80,6 +71,7 @@ public class ListScheduleCommand extends Command {
         return new CommandResult(String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW,
             model.getFilteredScheduleList().size()));
     }
+
 
     @Override
     public boolean equals(Object other) {

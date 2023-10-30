@@ -19,7 +19,7 @@ public class TutorNameContainsKeywordsPredicate implements Predicate<Schedule> {
     @Override
     public boolean test(Schedule schedule) {
         return keywords.stream()
-            .allMatch(keyword ->
+            .anyMatch(keyword ->
                     StringUtil.containsWordIgnoreCase(schedule.getTutor().getName().fullName, keyword));
     }
 

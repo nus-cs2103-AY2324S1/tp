@@ -15,7 +15,7 @@ public class ListScheduleCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsListScheduleCommand() {
-        ListScheduleCommand expectedListCommand = new ListScheduleCommand(INDEX_FIRST_PERSON);
+        ListScheduleCommand expectedListCommand = new ListScheduleCommand(INDEX_FIRST_PERSON, null);
         assertParseSuccess(parser, "1", expectedListCommand);
 
     }
@@ -28,13 +28,13 @@ public class ListScheduleCommandParserTest {
 
     @Test
     public void parse_nullArgs_returnsListScheduleCommand() {
-        ListScheduleCommand expectedListCommand = new ListScheduleCommand(null);
+        ListScheduleCommand expectedListCommand = new ListScheduleCommand(null, null);
         assertParseSuccess(parser, null, expectedListCommand);
     }
 
     @Test
     public void parse_emptyArgs_returnsListScheduleCommand() {
-        ListScheduleCommand expectedListCommand = new ListScheduleCommand(null);
+        ListScheduleCommand expectedListCommand = new ListScheduleCommand(null, null);
         assertParseSuccess(parser, "", expectedListCommand);
         assertParseSuccess(parser, "  ", expectedListCommand);
     }

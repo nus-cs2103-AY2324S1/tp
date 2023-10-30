@@ -40,7 +40,7 @@ public class ListScheduleCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListScheduleCommand(null), model,
+        assertCommandSuccess(new ListScheduleCommand(null, null), model,
             ListScheduleCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -50,7 +50,7 @@ public class ListScheduleCommandTest {
         String fullName = tutor.getName().toString();
         List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
         TutorIndexPredicate predicate = new TutorIndexPredicate(nameList);
-        ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON);
+        ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON, null);
 
         String expectedMessage = String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, 2);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -61,7 +61,7 @@ public class ListScheduleCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        ListScheduleCommand listScheduleCommand = new ListScheduleCommand(outOfBoundIndex);
+        ListScheduleCommand listScheduleCommand = new ListScheduleCommand(outOfBoundIndex, null);
 
         assertCommandFailure(listScheduleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -74,7 +74,7 @@ public class ListScheduleCommandTest {
         String fullName = tutor.getName().toString();
         List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
         TutorIndexPredicate predicate = new TutorIndexPredicate(nameList);
-        ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON);
+        ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON, null);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateFilteredScheduleList(predicate);
@@ -94,21 +94,21 @@ public class ListScheduleCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        ListScheduleCommand listScheduleCommand = new ListScheduleCommand(outOfBoundIndex);
+        ListScheduleCommand listScheduleCommand = new ListScheduleCommand(outOfBoundIndex, null);
 
         assertCommandFailure(listScheduleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        ListScheduleCommand listFirstCommand = new ListScheduleCommand(INDEX_FIRST_PERSON);
-        ListScheduleCommand listSecondCommand = new ListScheduleCommand(INDEX_SECOND_PERSON);
+        ListScheduleCommand listFirstCommand = new ListScheduleCommand(INDEX_FIRST_PERSON, null);
+        ListScheduleCommand listSecondCommand = new ListScheduleCommand(INDEX_SECOND_PERSON, null);
 
         // same object -> returns true
         assertTrue(listFirstCommand.equals(listFirstCommand));
 
         // same values -> returns true
-        ListScheduleCommand listFirstCommandCopy = new ListScheduleCommand(INDEX_FIRST_PERSON);
+        ListScheduleCommand listFirstCommandCopy = new ListScheduleCommand(INDEX_FIRST_PERSON, null);
         assertTrue(listFirstCommand.equals(listFirstCommandCopy));
 
         // different types -> returns false
