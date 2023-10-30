@@ -4,12 +4,15 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.calendar.Calendar;
+import seedu.address.model.event.AllDaysEventListManager;
+import seedu.address.model.event.SingleDayEventList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -61,7 +64,8 @@ public class EditContactEventCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setCalendar(toCopy.calendar);
-            calendar.getEventManager(
+            AllDaysEventListManager allDaysEventListManager = calendar.getEventManager();
+            Collection<SingleDayEventList> eventListCollection = allDaysEventListManager
         }
 
         /**

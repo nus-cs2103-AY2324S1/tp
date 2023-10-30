@@ -44,21 +44,8 @@ public class EditContactEventCommandParser implements Parser<EditContactEventCom
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT_DESCRIPTION,
                 PREFIX_EVENT_START_DATE_TIME, PREFIX_EVENT_END_DATE_TIME);
 
-        EditContactEventCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        parseTagsForUse(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        EditContactEventCommand.EditPersonDescriptor editPersonDescriptor =
+                new EditContactEventCommand.EditPersonDescriptor();
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
