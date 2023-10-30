@@ -21,15 +21,11 @@ import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
-<<<<<<< HEAD
+import networkbook.logic.commands.OpenLinkCommand;
 import networkbook.logic.commands.RedoCommand;
 import networkbook.logic.commands.SortCommand;
 import networkbook.logic.commands.UndoCommand;
-=======
-import networkbook.logic.commands.OpenLinkCommand;
-import networkbook.logic.commands.SortCommand;
 import networkbook.logic.commands.delete.DeletePersonCommand;
->>>>>>> master
 import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.edit.EditNameAction;
 import networkbook.logic.commands.filter.FilterCommand;
