@@ -61,8 +61,12 @@ public class Person {
         }
     }
 
+    /**
+     * Minimal constructor that fills non-required fields with placeholder values (nil).
+     */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, null, null, null, null, tags);
+        this(name, phone, email, address, new Housing("nil"), new Availability("nil"),
+                new Name("nil"), new AnimalType("nil", new Availability("nil")), tags);
     }
 
     /**

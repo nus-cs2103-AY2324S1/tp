@@ -141,6 +141,7 @@ adds a fosterer named Pete Tay with the phone number 98765411 and email address 
 Lists fosterers that match a particular description or search, or all fosterers if the search is blank.
 
 Format: `list *KEYWORDS`
+
 Alias: `find`
 
 * The keywords are case-insensitive.
@@ -148,13 +149,20 @@ Alias: `find`
 * All fields are searched (including tags).
 * Keywords can match as parts of words. e.g. `john` will match `Johnny`.
 * Keywords can overlap. e.g. `samm my` will match `Sammy`
-* Fosters must match all keywords (i.e. `AND` search).
+* Fosterers must match all keywords (i.e. `AND` search).
   e.g. `Hans Bo` will return `Hansbo Grahm`, but not `Hans Duo`
+* Symbols between keywords or sections will combine them according to the function of the symbol.
+  `|` is `or`, `&` is `and` (low precedence), and ` ` (space) is `and` (high precedence).
+  e.g. `a & b | c d` is the same as `a & (b | (c & d))`
+* Use double quotes `"` for exact, case-sensitive, word-level match. 
+  e.g. `"Tom"` matches "Tom", but not "Tommy"
 
 Examples:
 * `list` lists all fosterers in the address book
 * `list john doe` matches "John Doe", "Doe John", "Johnny Doe", and "Mary" who lives on "John Doe Street"
-* `list john john doe` is redundant and gives the same result as `list john doe`
+* `find john john doe` is redundant and gives the same result as `find john doe`
+* `list "John" | zam & doe` matches "John Doe" and "Doe Shazam", but not "John Grahm"
+
 
 ### Viewing a fosterer's detail : `view`
 
@@ -167,17 +175,44 @@ Parameters:
 
 <div markdown="span" class="alert alert-primary">
   :exclamation: <b>Important:</b>
-Some commands are not available while on profile view page. 
-The list of available commands are: 
-<ul>
-  <li> <code>help</code> </li>
-  <li> <code>edit</code> </li>
-  <li> <code>exit</code> command to <b>exit the profile view page</b> </li>
-</ul>
+Only specific commands are available in the profile view page. 
+The list of available commands are <code>help</code>, <code>save</code>, and <code>exit</code> commands. 
 </div> 
 
 Examples:
 * `list` followed by `view 2` to view the profile of the 2nd fosterer in the address book.
+
+=======
+#### Editing a fosterer’s details in profile view page:
+
+1. Enter a fosterer’s profile view page with `view INDEX` 
+2. Type in the name of the field you want to edit onto the command box, for example `name`. This will make the textbox visible next to the `name` field and automatically set the text cursor to the textbox.
+3. Edit the original value - if it exists - to a new value, for example `John`.
+4. Press enter to return the text cursor back to the command box.
+5. Type in `save` command and enter to save the changes of the fosterer. 
+
+Example:
+* `list` followed by `view 2` to view the profile of the 2nd fosterer in the address book.
+
+Expected output (success):
+```agsl
+Viewing Person: Jerry Tan; Phone: 98765412; Email: jerry123@example.com; Address: Baker street, block 5, #27-01; Housing: HDB; Availability: NotAvailable; Animal name: Dexter; Animal type: current.Cat; Tags: [Urgent]
+```
+Expected output (fail):
+```agsl
+Oops! Invalid fosterer index provided, please check again.
+```
+### Saving changes in a fosterer's details: `save`
+
+Saves changes in details of the fosterer made in the profile page. 
+<div markdown="span" class="alert alert-primary">
+  :exclamation: <b>Important:</b>
+This command is only available while in fosterer profile view page. 
+This command works only in a profile view page, which  after executing a view command.
+</div> 
+
+Format: `save`
+
 
 ### Editing a fosterer's detail : `edit`
 
@@ -215,23 +250,40 @@ If the parameters are not provided, <b><code>edit INDEX</code> operates the same
 <br>
 
 Examples:
-*  `list` followed by `edit 3 n/John` edits the name of the 3rd fosterer in the address book to John.
-*  `list` followed by `edit 1 p/12345678 animal/Bob` edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
-*  `list` followed by `edit 2` changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
+*  `find` or `list` followed by `edit 3 n/John` edits the name of the 3rd fosterer in the address book to John.
+*  `find` or `list` followed by `edit 1 p/12345678 animal/Bob` edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
+*  `find` or `list` followed by `edit 2` changes the view to the profile page of the 2nd fosterer in the address book since parameters are not provided.
 
-Expected Output (success):
+Expected output (if successful):
+Format 1: 
+```agsl
+Edited Fosterer: [NAME]; Phone: [NUMBER]; Email: [EMAIL]; Address: [ADDRESS]; Housing: [HOUSING]; Availability: [AVAILABILITY]; Animal name: [ANIMAL NAME]; Animal type: [ANIMAL TYPE]; Tags: [TAG]
 ```
-Foster family details successfully edited!
+*  If a field is not edited, the output shows the fosterer’s original data of the field.
+
+Format 2: 
+```agsl
+Viewing Fosterer: [NAME]; Phone: [NUMBER]; Email: [EMAIL]; Address: [ADDRESS]; Housing: [HOUSING]; Availability: [AVAILABILITY]; Animal name: [ANIMAL NAME]; Animal type: [ANIMAL TYPE]; Tags: [TAG]
 ```
+*  The UI generates a window where details of the fosterer are shown.
+*  Aside from the details added by the add command, here is the list of fields the pop-up window shows:
+    *  NOTE : Notes for the user, examples include but are not limited to (optional and non-exhaustive):
+        *  Health condition of the animal
+        *  Duration / end date of foster, whichever the foster manager prefers
+        *  Identifiable physical traits of the animal
+      
+<div markdown="span" class="alert alert-primary">
+  :bulb: <b>Tip:</b> <code>NAME</code>, <code>NUMBER</code>, <code>EMAIL</code>, and <code>ADDRESS</code> are compulsory. 
+Empty compulsory values disable the save command that saves the edited fosterer data.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:** Edit may cause information loss. 
+Before you type the save command, make sure there is no accidental overwrite with faulty information. 
+</div>
 
 Expected Output (failure):
-1. Compulsory fields are not filled in
-```
-Oops! Compulsory fields are not filled in!
-```
-2. System Error
-```
-Oops! There seems to be an error, please check your fields again.
+```agsl
+The fosterer index provided is invalid. 
 ```
 
 ### Deleting a fosterer : `delete`
