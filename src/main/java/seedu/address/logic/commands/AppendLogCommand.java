@@ -16,7 +16,7 @@ public class AppendLogCommand extends Command {
             + ": Appends the results of the most recent FindCommand to the logbook.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Results of the FindCommand have been appended to the logbook.";
+    public static final String MESSAGE_SUCCESS = "Results of the FindCommand have been appended to the logger tab.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

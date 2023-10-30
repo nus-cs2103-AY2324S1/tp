@@ -209,7 +209,7 @@ Expected output when the command fails:
  * `Unable to find the patient. Check if the patient’s information is correct.`
 
 
-### Preserving a `find` command result: `save`
+### Preserving a `find` command result: `log`
 
 Logs the result of the find command to the logger tab, which can be viewed at all times.
 
@@ -218,13 +218,41 @@ Logs the result of the find command to the logger tab, which can be viewed at al
 * The result will be saved in the same order and format.
 * Saving a new result clears the current saved result from the logger tab and replaces it.
 
-Format: `save`
+Format: `log`
 
 Expected outputs when the command succeeds:
-* `Results have been saved to the logger tab.`
+* `Results of the FindCommand have been saved to the logger tab.`
 
 Expected output when the command fails:
-* `Unable to save to the logger tab. Check if a find command was entered prior.`
+* `There are no FindCommand results. There is nothing to be saved to the logger tab.`
+
+
+### Adding a new `find` command result to the log: `alog`
+
+Appends the new results of the most recent find command to the current data in the logger tab, which can be viewed at all times.
+
+* Adding to the logger tab only works for results of the `find` command.
+* The previously-saved result will remain the same.
+* The entire new result will be saved.
+* The result will be saved in the same order and format.
+
+Format: `alog`
+
+Expected outputs when the command succeeds:
+* `Results of the FindCommand have been appended to the logger tab.`
+
+Expected output when the command fails:
+* `There are no FindCommand results. There is nothing to be saved to the logger tab.`
+
+
+### Clearing data from the log: `clog`
+
+Clears all current data in the logger tab.
+
+Format: `clog`
+
+Expected output:
+* `Logbook has been cleared!`
 
 
 ### Deleting a person or field: `delete`
