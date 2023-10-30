@@ -37,9 +37,10 @@ public class AddShortcutCommand extends Command {
         this.command = commandWord;
     }
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         String feedback = model.registerShortcut(shortcutAlias, command);
+        model.commitAddressBook();
         if (feedback == null) {
             // Completely new mapping
             return new CommandResult(String.format(MESSAGE_SUCCESS, shortcutAlias + " --> " + command));
@@ -55,7 +56,6 @@ public class AddShortcutCommand extends Command {
 
             );
         }
-
     }
 
     @Override

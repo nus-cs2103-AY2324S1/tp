@@ -36,7 +36,7 @@ public class DeleteShortcutCommand extends Command {
         this.shortcutAliasList = shortcutAlias;
     }
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         StringBuilder message = new StringBuilder();
         shortcutAliasList.forEach(shortcutAlias -> {
@@ -45,6 +45,7 @@ public class DeleteShortcutCommand extends Command {
                 message.append(String.format(MESSAGE_NONEXISTENT, shortcutAlias));
             } else {
                 message.append(String.format(MESSAGE_SUCCESS, shortcutAlias + " --> " + feedback));
+                model.commitAddressBook();
             }
         });
         return new CommandResult(message.toString());

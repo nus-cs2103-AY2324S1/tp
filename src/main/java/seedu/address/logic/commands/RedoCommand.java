@@ -17,7 +17,7 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_FAILURE = "No commands to redo!";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (!model.canRedo()) {

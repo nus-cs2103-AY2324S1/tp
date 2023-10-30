@@ -80,7 +80,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         Predicate<Person> predicate = person -> findPredicateMap.getAllPredicates().stream()
                 .map(pred -> pred.test(person))

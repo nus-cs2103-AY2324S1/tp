@@ -24,7 +24,6 @@ import seedu.address.model.person.Person;
  * {@code DeleteCommand}.
  */
 public class ViewCommandTest {
-    private CommandHistory commandHistory = new CommandHistory();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -39,7 +38,7 @@ public class ViewCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateSelectedPerson(personToView);
 
-        assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -47,7 +46,7 @@ public class ViewCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
 
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, commandHistory);
+        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -60,7 +59,7 @@ public class ViewCommandTest {
 
         ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
 
-        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, commandHistory);
+        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

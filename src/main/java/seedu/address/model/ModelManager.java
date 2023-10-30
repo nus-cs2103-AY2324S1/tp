@@ -36,7 +36,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.trackedAddressBook = new TrackedAddressBook(addressBook);
+        this.trackedAddressBook = new TrackedAddressBook(addressBook, userPrefs.getShortcutSettings());
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.trackedAddressBook.getPersonList());
         this.commandStringStash = new CommandStringStash();
@@ -115,7 +115,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.trackedAddressBook.resetData(addressBook);
+        this.trackedAddressBook.resetData(addressBook, userPrefs.getShortcutSettings());
     }
 
     @Override
@@ -208,7 +208,6 @@ public class ModelManager implements Model {
         if (!(other instanceof ModelManager)) {
             return false;
         }
-
         ModelManager otherModelManager = (ModelManager) other;
         return trackedAddressBook.equals(otherModelManager.trackedAddressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)

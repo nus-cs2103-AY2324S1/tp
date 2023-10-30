@@ -17,7 +17,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_FAILURE = "No commands to undo!";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (!model.hasHistory()) {
