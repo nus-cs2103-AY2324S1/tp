@@ -246,14 +246,14 @@ Exits the program.
 
 ## Command summary
 
-| Action       | Format                                                                                   |
-|--------------|------------------------------------------------------------------------------------------|
-| **Add**      | `add c/COMPANY r/ROLE d/DEADLINE s/STATUS i/INDUSTRY t/JOB_TYPE`                         |
-| **Edit**     | `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`      |
-| **Delete**   | `delete INDEX`                                                                           |
-| **List**     | `list`                                                                                   |
-| **Find**     | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
-| **Sort**     | `sort FIELD_SPECIFIER`                                                                   |
-| **Help**     | `help`                                                                                   |
-| **Clear**    | `clear`                                                                                  |
-| **Exit**     | `exit`                                                                                   |
+| Action     | Format                                                                                   |
+|------------|------------------------------------------------------------------------------------------|
+| **Add**    | `add [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`             |
+| **Edit**   | `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`      |
+| **Delete** | `delete INDEX`                                                                           |
+| **List**   | `list`                                                                                   |
+| **Find**   | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
+| **Sort**   | `sort FIELD_SPECIFIER`                                                                   |
+| **Help**   | `help`                                                                                   |
+| **Clear**  | `clear`                                                                                  |
+| **Exit**   | `exit`                                                                                   |

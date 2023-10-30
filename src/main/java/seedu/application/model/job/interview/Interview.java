@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import seedu.application.commons.util.CollectionUtil;
 import seedu.application.commons.util.ToStringBuilder;
+import seedu.application.model.job.Deadline;
 
 /**
  * Represents an Interview in the application book.
@@ -52,10 +53,10 @@ public class Interview {
             return false;
         }
 
-        Interview interview = (Interview) other;
-        return interview.getInterviewType().equals(getInterviewType())
-                && interview.getInterviewDateTime().equals(getInterviewDateTime())
-                && interview.getInterviewAddress().equals(getInterviewAddress());
+        Interview otherInterview = (Interview) other;
+        return interviewType.equals(otherInterview.interviewType)
+            && interviewDateTime.equals(otherInterview.interviewDateTime)
+            && interviewAddress.equals(otherInterview.interviewAddress);
     }
 
     @Override

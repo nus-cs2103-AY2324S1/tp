@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.StringUtil;
+import seedu.application.logic.commands.InterviewAddCommand;
 import seedu.application.logic.parser.exceptions.ParseException;
 import seedu.application.model.job.Company;
 import seedu.application.model.job.Deadline;
@@ -11,6 +12,9 @@ import seedu.application.model.job.Industry;
 import seedu.application.model.job.JobType;
 import seedu.application.model.job.Role;
 import seedu.application.model.job.Status;
+import seedu.application.model.job.interview.InterviewAddress;
+import seedu.application.model.job.interview.InterviewDateTime;
+import seedu.application.model.job.interview.InterviewType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -121,6 +125,51 @@ public class ParserUtil {
             throw new ParseException(Industry.MESSAGE_CONSTRAINTS);
         }
         return new Industry(trimmedIndustry);
+    }
+
+    /**
+     * Parses a {@code String InterviewType} into a {@code InterviewType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interviewType} is invalid.
+     */
+    public static InterviewType parseInterviewType(String interviewType) throws ParseException {
+        requireNonNull(interviewType);
+        String trimmedInterviewType = interviewType.trim();
+        if (!InterviewType.isValidInterviewType(trimmedInterviewType)) {
+            throw new ParseException(InterviewType.MESSAGE_CONSTRAINTS);
+        }
+        return new InterviewType(trimmedInterviewType);
+    }
+
+    /**
+     * Parses a {@code String InterviewDateTime} into a {@code InterviewDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interviewDateTime} is invalid.
+     */
+    public static InterviewDateTime parseInterviewDateTime(String interviewDateTime) throws ParseException {
+        requireNonNull(interviewDateTime);
+        String trimmedInterviewDateTime = interviewDateTime.trim();
+        if (!InterviewDateTime.isValidInterviewDateTime(trimmedInterviewDateTime)) {
+            throw new ParseException(InterviewDateTime.MESSAGE_CONSTRAINTS);
+        }
+        return new InterviewDateTime(trimmedInterviewDateTime);
+    }
+
+    /**
+     * Parses a {@code String InterviewDateTime} into a {@code InterviewDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interviewDateTime} is invalid.
+     */
+    public static InterviewAddress parseInterviewAddress(String interviewAddress) throws ParseException {
+        requireNonNull(interviewAddress);
+        String trimmedInterviewAddress = interviewAddress.trim();
+        if (!InterviewAddress.isValidInterviewAddress(trimmedInterviewAddress)) {
+            throw new ParseException(InterviewAddress.MESSAGE_CONSTRAINTS);
+        }
+        return new InterviewAddress(trimmedInterviewAddress);
     }
 
 }

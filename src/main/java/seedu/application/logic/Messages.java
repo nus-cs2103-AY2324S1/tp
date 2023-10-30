@@ -48,7 +48,9 @@ public class Messages {
                 + "; Job Type: "
                 + job.getJobType()
                 + "; Industry: "
-                + job.getIndustry();
+                + job.getIndustry()
+                + "; Interviews: "
+                + job.getInterviews();
     }
 
 }

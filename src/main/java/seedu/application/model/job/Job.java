@@ -1,9 +1,11 @@
 package seedu.application.model.job;
 
+import java.util.List;
 import java.util.Objects;
 
 import seedu.application.commons.util.CollectionUtil;
 import seedu.application.commons.util.ToStringBuilder;
+import seedu.application.model.job.interview.Interview;
 
 /**
  * Represents a Job in the application book.
@@ -18,6 +20,8 @@ public class Job {
     private final Status status;
     private final JobType jobType;
     private final Industry industry;
+
+    private List<Interview> interviews;
 
     /**
      * Not all fields are compulsory
@@ -55,6 +59,23 @@ public class Job {
 
     public Industry getIndustry() {
         return industry;
+    }
+
+    public List<Interview> getInterviews() {
+        return interviews;
+    }
+
+    public void addInterview(Interview interview) {
+        interviews.add(interview);
+    }
+
+    public boolean hasInterview(Interview interview) {
+        for (Interview i : interviews) {
+            if (interview.equals(i)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
