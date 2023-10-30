@@ -329,8 +329,6 @@ public class FindExpressionParser {
                 // not have to be an exact match of a full note, which makes this distinct from TAG.
                 return person -> person.getNotes().stream()
                         .anyMatch(note -> StringUtil.containsSubstringIgnoreCase(note.toString(), keyword));
-            default:
-                throw new IllegalStateException("Unexpected field: " + field);
             }
         }
     }
