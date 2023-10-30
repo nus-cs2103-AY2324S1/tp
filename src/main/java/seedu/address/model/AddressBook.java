@@ -89,7 +89,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param personName Name of the person.
      * @return Returns true if a person with the same name exists in the addressbook.
      */
-    public boolean hasPerson(Name personName) {
+     public boolean hasPerson(Name personName) {
         requireNonNull(personName);
         for (Person person : persons) {
             if (person.getName().equals(personName)) {

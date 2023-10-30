@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<HBox fx:id="individualTaskLine" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="dot" text="-  " />
+    <Label fx:id="group_in_sch" text="\$group"/>
+    <Label fx:id="taskLine" text="\$task" style="-fx-padding: 0 0 0 10; -fx-font-size: 13"/>
+    <padding>
+        <Insets bottom="10"  />
+    </padding>
+</HBox>

@@ -155,4 +155,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    void updateFilteredGroupList(Predicate<Group> predicate);
+
 }

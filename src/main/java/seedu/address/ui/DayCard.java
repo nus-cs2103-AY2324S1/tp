@@ -1,28 +1,50 @@
 package seedu.address.ui;
 
 import java.awt.Font;
+import java.time.DayOfWeek;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Person;
 
 public class DayCard extends UiPart<Region> {
     private static final String FXML = "DayCard.fxml";
 
-    public final String dayName;
-
+    public final ObservableList<GroupTimeContainer> dayTaskList;
     @FXML
     private HBox dayCard;
     @FXML
     private Label day;
     @FXML
     private Label task;
+    @FXML
+    private ListView<GroupTimeContainer> eachDayTaskList;
 
-    public DayCard(String dayName) {
+    public DayCard(ObservableList<GroupTimeContainer> dayTaskList, int dayIndex) {
         super(FXML);
-        this.dayName = dayName;
-        day.setText(dayName);
-        task.setText("To be implemented");
+        this.dayTaskList = dayTaskList;
+        day.setText(DayOfWeek.of(dayIndex).toString().substring(0, 3));
+        eachDayTaskList.setItems(dayTaskList);
+        eachDayTaskList.setCellFactory(listview -> new eachDayTaskListCell());
     }
+
+    class eachDayTaskListCell extends ListCell<GroupTimeContainer> {
+        @Override
+        protected void updateItem(GroupTimeContainer task, boolean empty) {
+            super.updateItem(task, empty);
+            if (empty || task == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new EachDayTaskLine(task).getRoot());
+            }
+        }
+    }
+
+
 
 }
