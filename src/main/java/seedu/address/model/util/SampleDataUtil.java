@@ -2,11 +2,12 @@ package seedu.address.model.util;
 
 import java.time.MonthDay;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
@@ -78,10 +79,12 @@ public class SampleDataUtil {
     /**
      * Returns a notes set containing the notes of strings given.
      */
-    public static List<Note> getNoteList(String... strings) {
-        return Arrays.stream(strings)
-            .map(Note::new)
-            .collect(Collectors.toList());
+    public static ObservableList<Note> getNoteList(String... strings) {
+        ObservableList<Note> notes = FXCollections.observableArrayList();
+        for (String string : strings) {
+            notes.add(new Note(string));
+        }
+        return notes;
     }
 
 }

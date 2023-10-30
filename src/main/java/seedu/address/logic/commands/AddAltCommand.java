@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -102,7 +103,7 @@ public class AddAltCommand extends Command {
                 .orElse(addAltPersonDescriptor.getSecondaryEmail());
         Telegram updatedTelegram = personToEdit.getTelegram().orElse(addAltPersonDescriptor.getTelegram());
         Optional<Integer> id = personToEdit.getId();
-        List<Note> notes = personToEdit.getNotes();
+        ObservableList<Note> notes = personToEdit.getNotes();
         Balance balance = personToEdit.getBalance();
 
         Person updatedPerson = new Person(name, phone, email, address, Optional.ofNullable(birthday),

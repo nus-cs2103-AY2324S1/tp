@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Balance;
@@ -162,7 +164,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Optional<Integer> modelID = id.map(x -> x.intValue());
-        final List<Note> modelNotes = new ArrayList<>(personNotes);
+        final ObservableList<Note> modelNotes = FXCollections.observableArrayList(personNotes);
 
         final Balance modelBalance = new Balance(balance);
 
