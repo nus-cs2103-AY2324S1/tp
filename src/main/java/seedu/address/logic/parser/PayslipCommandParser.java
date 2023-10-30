@@ -5,7 +5,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTH_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 
 import seedu.address.commons.core.index.Index;

@@ -1,9 +1,7 @@
 package seedu.address.commons.util;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,8 +23,8 @@ import seedu.address.model.person.Person;
  */
 public class PaySlipGenerator {
     private static final String OUTPUT_DIRECTORY_PATH = "./payslips/";
-    private static final String TEMPLATE = PaySlipGenerator.class.getClassLoader().
-        getResource("template.pdf").toString();
+    private static final String TEMPLATE = PaySlipGenerator.class.getClassLoader()
+            .getResource("template.pdf").toString();
 
     /**
      * Generates a PDF payslip for an employee.
@@ -161,7 +159,6 @@ public class PaySlipGenerator {
         fieldMap.put("paymentStartDate", payroll.getStartDateString());
         fieldMap.put("paymentEndDate", payroll.getEndDateString());
         fieldMap.put("dateOfPayment", payroll.getPaymentDateString());
-        
         return fieldMap;
     }
 
