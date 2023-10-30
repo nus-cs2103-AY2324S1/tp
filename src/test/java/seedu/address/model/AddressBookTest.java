@@ -17,6 +17,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
@@ -88,6 +89,25 @@ public class AddressBookTest {
     public void setSelectedStudent_setStudent_success() {
         addressBook.setSelectedStudent(ALICE);
         assertEquals(ALICE, addressBook.getSelectedStudent().get(0));
+    }
+
+    @Test
+    public void addListener_withInvalidationListener_listenerAdded() {
+        SimpleIntegerProperty counter = new SimpleIntegerProperty();
+        InvalidationListener listener = observable -> counter.set(counter.get() + 1);
+        addressBook.addListener(listener);
+        addressBook.addStudent(ALICE);
+        assertEquals(1, counter.get());
+    }
+
+    @Test
+    public void removeListener_withInvalidationListener_listenerRemoved() {
+        SimpleIntegerProperty counter = new SimpleIntegerProperty();
+        InvalidationListener listener = observable -> counter.set(counter.get() + 1);
+        addressBook.addListener(listener);
+        addressBook.removeListener(listener);
+        addressBook.addStudent(ALICE);
+        assertEquals(0, counter.get());
     }
 
     @Test

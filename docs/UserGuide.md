@@ -233,25 +233,25 @@ Examples:
 * `mark-abs 1 s/A0249112A`
 
 ---
-### Setting assignment grade for a student : `set-grade`
+### Setting assignment grade for a student : `grade`
 
 Setting an assignment grade for an existing student in the class manager.
 
-Format: `set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
+Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
 * The `STUDENT_NUMBER` must be valid and exist.
 * The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count using the `config` command.
 * The `GRADE` must be a valid integer between 0 and 100.
 
 Examples:
-* `set-grade s/A0249112A a/1 g/100`
+* `grade s/A0249112A a/1 g/100`
 
 ---
-### Record class participation for a student : `record-part`
+### Record class participation for a student : `record`
 
 Recording the class participation level for an existing student in the class manager.
 
-Format: `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL`
+Format: `record s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL`
 
 * The `STUDENT_NUMBER` must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
@@ -262,7 +262,7 @@ Format: `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVE
   * The proposed levels includes: `none`, `sufficient`, `good`, `excellent`.
 
 Examples:
-* `record-part s/A0249112A tut/1 part/true`
+* `record s/A0249112A tut/1 part/true`
 
 ---
 ### View a student's class details: `view`
@@ -385,21 +385,21 @@ _Details coming soon ..._
 | **Toggle theme**       | `theme`                                                                                                                                                          |
 
 ### Core commands with parameters
-| Action               | Format, Examples                                                                                                                                                 |
-|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague`               |
-| **Comment**          | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                                         |
-| **Delete**           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                          |
-| **Edit**             | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com` |
-| **Lookup**           | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                |
-| **Load**             | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                                   |
-| **Mark Absent**      | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`                                                                                    |
-| **Mark Present**     | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                                    |
-| **Mark Present All** | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                         |
-| **Record Part**      | `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record-part s/A0245234A tut/1 part/true`                                   |
-| **Set Grade**        | `set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `set-grade s/A0245234A a/1 g/100`                                                              |
-| **Tag**              | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                                          |
-| **View**             | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                                 |
+| Action                         | Format, Examples                                                                                                                                         |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                        | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague`       |
+| **Comment**                    | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                                 |
+| **Delete**                     | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                  |
+| **Edit**                       | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com` |
+| **Lookup**                     | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                        |
+| **Load**                       | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                           |
+| **Mark Absent**                | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`                                                                            |
+| **Mark Present**               | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                            |
+| **Mark Present All**           | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                 |
+| **Record Class Participation** | `record s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record s/A0245234A tut/1 part/true`                               |
+| **Set Grade**                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                              |
+| **Tag**                        | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                                  |
+| **View**                       | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                         |
 
 
 --------------------------------------------------------------------------------------------------------------------

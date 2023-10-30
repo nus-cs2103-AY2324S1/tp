@@ -3,6 +3,9 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.CLASS_NUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -23,7 +26,10 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ConfigCommand;
+import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -60,12 +66,36 @@ public class LogicManagerTest {
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertHistoryCorrect(invalidCommand);
+    }
+
+    @Test
+    public void execute_commandExecutionError_throwsCommandException() {
+        String deleteCommand = "delete s/A922P";
+        assertCommandException(deleteCommand, MESSAGE_NONEXISTENT_STUDENT_NUMBER);
+        assertHistoryCorrect(deleteCommand);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertHistoryCorrect(listCommand);
+    }
+
+    @Test
+    public void execute_loadCommand_failure() {
+        String loadCommand = LoadCommand.COMMAND_WORD;
+        assertCommandFailure(loadCommand, ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                LoadCommand.MESSAGE_USAGE));
+        assertHistoryCorrect(loadCommand);
+    }
+
+    @Test
+    public void execute_configCommand_failure() {
+        String configCommand = ConfigCommand.COMMAND_WORD;
+        assertCommandFailure(configCommand, ParseException.class, MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED);
+        assertHistoryCorrect(configCommand);
     }
 
     @Test
@@ -210,5 +240,34 @@ public class LogicManagerTest {
         expectedModel.addStudent(expectedStudent);
         expectedModel.commitAddressBook();
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Asserts that the result display shows all the {@code expectedCommands} upon the execution of
+     * {@code HistoryCommand}.
+     */
+    private void assertHistoryCorrect(String... expectedCommands) {
+        try {
+            CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD);
+            String expectedMessage = String.format(
+                    HistoryCommand.MESSAGE_SUCCESS, String.join("\n", expectedCommands));
+            assertEquals(expectedMessage, result.getFeedbackToUser());
+        } catch (ParseException | CommandException e) {
+            throw new AssertionError("Parsing and execution of HistoryCommand.COMMAND_WORD should succeed.", e);
+        }
+    }
+
+    /**
+     * A stub class to throw an {@code IOException} when the save method is called.
+     */
+    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
+        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
     }
 }
