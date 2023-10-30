@@ -21,7 +21,8 @@ public class StatsCommandParser implements CommandParser<StatsCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public StatsCommand parse(String args) throws ParseException {
-        String field = args.trim();
+        String field = args.trim().split(" ")[0];
+
         switch (field) {
         case StatsAvailCommand.COMMAND_WORD:
             return new StatsAvailCommand();

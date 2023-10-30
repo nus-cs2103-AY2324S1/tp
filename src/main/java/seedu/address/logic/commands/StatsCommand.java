@@ -10,7 +10,6 @@ public abstract class StatsCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays the requested statistic about the currently displayed list.\n"
-            + "Parameters: FIELD (which can take the values avail, current or housing).\n"
             + "Examples: \n"
             + COMMAND_WORD + " " + StatsAvailCommand.COMMAND_WORD + " \n"
             + COMMAND_WORD + " " + StatsCurrentCommand.COMMAND_WORD + " \n"

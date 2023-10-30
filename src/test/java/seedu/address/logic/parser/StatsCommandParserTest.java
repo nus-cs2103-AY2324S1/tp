@@ -25,5 +25,16 @@ public class StatsCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatsCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "housinghousing",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatsCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_extraParameters_success() {
+        assertParseSuccess(parser, "       " + StatsAvailCommand.COMMAND_WORD , new StatsAvailCommand());
+        assertParseSuccess(parser, StatsAvailCommand.COMMAND_WORD + "    ", new StatsAvailCommand());
+        assertParseSuccess(parser, StatsAvailCommand.COMMAND_WORD + " d   ", new StatsAvailCommand());
+        assertParseSuccess(parser, StatsCurrentCommand.COMMAND_WORD + " current housing", new StatsCurrentCommand());
+        assertParseSuccess(parser, StatsHousingCommand.COMMAND_WORD + " housing", new StatsHousingCommand());
     }
 }
