@@ -30,8 +30,7 @@ public class InterviewAddCommandParser implements Parser<InterviewAddCommand> {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_INTERVIEW_TYPE, PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_INTERVIEW_TYPE, PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS)
-            || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_INTERVIEW_TYPE, PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InterviewAddCommand.MESSAGE_USAGE));
         }
 
@@ -50,6 +49,7 @@ public class InterviewAddCommandParser implements Parser<InterviewAddCommand> {
 
         Interview interview = new Interview(interviewType, interviewDateTime, interviewAddress);
 
+        System.out.println(index);
         return new InterviewAddCommand(index, interview);
     }
 

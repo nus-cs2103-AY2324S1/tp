@@ -1,10 +1,13 @@
 package seedu.application.model.job;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import seedu.application.commons.util.CollectionUtil;
 import seedu.application.commons.util.ToStringBuilder;
+import seedu.application.model.Model;
+import seedu.application.model.ModelManager;
 import seedu.application.model.job.interview.Interview;
 
 /**
@@ -21,7 +24,7 @@ public class Job {
     private final JobType jobType;
     private final Industry industry;
 
-    private List<Interview> interviews;
+    private List<Interview> interviews = new ArrayList<>();
 
     /**
      * Not all fields are compulsory

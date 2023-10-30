@@ -58,13 +58,13 @@ public class InterviewAddCommand extends Command {
 
         Job jobToAddInterview = lastShownList.get(index.getZeroBased());
 
-        if (jobToAddInterview.hasInterview(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_JOB);
-        }
+//        if (jobToAddInterview.hasInterview(toAdd)) {
+//            throw new CommandException(MESSAGE_DUPLICATE_JOB);
+//        }
 
         jobToAddInterview.addInterview(toAdd);
-        // model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

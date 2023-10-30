@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.application.logic.commands.HelpCommand;
 import seedu.application.logic.parser.Prefix;
 import seedu.application.model.job.Job;
+import seedu.application.model.job.interview.Interview;
 
 /**
  * Container for user visible messages.
@@ -48,9 +49,15 @@ public class Messages {
                 + "; Job Type: "
                 + job.getJobType()
                 + "; Industry: "
-                + job.getIndustry()
-                + "; Interviews: "
-                + job.getInterviews();
+                + job.getIndustry();
+    }
+
+    public static String format(Interview interview) {
+        return interview.getInterviewType()
+            + " interview; Date and Time: "
+            + interview.getInterviewDateTime()
+            + "; Address: "
+            + interview.getInterviewAddress();
     }
 
 }
