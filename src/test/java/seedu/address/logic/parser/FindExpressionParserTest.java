@@ -19,10 +19,10 @@ public class FindExpressionParserTest {
         assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix(" "));
         assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("asdf"));
 
-        // existent but unsupported fields
-        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("tg/"));
-        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("e2/"));
-        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("li/"));
+        // correct prefix syntax but invalid prefix
+        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("tgg/"));
+        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("e2a/"));
+        assertThrows(ParseException.class, () -> FindExpressionParser.FindSupportedField.createFromPrefix("lin/"));
     }
 
     @Test
@@ -50,6 +50,26 @@ public class FindExpressionParserTest {
 
         assertTrue(new FindExpressionParser.ConditionNode(
                 FindExpressionParser.FindSupportedField.TAG, "friends").toPredicate()
+                instanceof Predicate);
+
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.TELEGRAM, "haha").toPredicate()
+                instanceof Predicate);
+
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.SECONDARY_EMAIL, "second@haha.com").toPredicate()
+                instanceof Predicate);
+
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.LINKEDIN, "elonmusk").toPredicate()
+                instanceof Predicate);
+
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BIRTHDAY, "12").toPredicate()
+                instanceof Predicate);
+
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.NOTE, "cool").toPredicate()
                 instanceof Predicate);
 
     }

@@ -88,6 +88,10 @@ public class FindCommandParserTest {
         // other arg
         assertDoesNotThrow(() -> parser.parse(" t/friends"));
         assertTrue(parser.parse(" t/friends") instanceof FindCommand);
+
+        // optional arg
+        assertDoesNotThrow(() -> parser.parse(" e2/a@a.com"));
+        assertTrue(parser.parse(" e2/a@a.com") instanceof FindCommand);
     }
 
     @Test
@@ -97,18 +101,18 @@ public class FindCommandParserTest {
         assertTrue(parser.parse(" n/Alice && n/Li") instanceof FindCommand);
 
         // multiple distinct args
-        assertDoesNotThrow(() -> parser.parse(" n/Alice && t/friends"));
-        assertTrue(parser.parse(" n/Alice && t/friends") instanceof FindCommand);
+        assertDoesNotThrow(() -> parser.parse(" n/Alice && li/musk"));
+        assertTrue(parser.parse(" n/Alice && li/musk") instanceof FindCommand);
 
         // multiple distinct args with repeated fields
-        assertDoesNotThrow(() -> parser.parse(" n/Alice && t/colleagues && t/friends"));
-        assertTrue(parser.parse(" n/Alice && t/colleagues && t/friends") instanceof FindCommand);
+        assertDoesNotThrow(() -> parser.parse(" b/12 && nt/shirt && nt/blue"));
+        assertTrue(parser.parse(" b/12 && nt/shirt && nt/blue") instanceof FindCommand);
     }
 
     @Test
     public void parse_validArgsWithNotOp_returnsFindCommand() throws ParseException {
-        assertDoesNotThrow(() -> parser.parse(" !n/Alice"));
-        assertTrue(parser.parse(" !n/Alice") instanceof FindCommand);
+        assertDoesNotThrow(() -> parser.parse(" !tg/ali"));
+        assertTrue(parser.parse(" !tg/ali") instanceof FindCommand);
 
         // with space after NOT
         assertDoesNotThrow(() -> parser.parse(" ! t/friends"));
