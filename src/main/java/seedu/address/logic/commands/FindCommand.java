@@ -18,12 +18,14 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "f";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_ALIAS
-            + ": Finds all Patients whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + ": Finds all Patients by name, NRIC or Appointment period, and displays them as a list.\n"
+            + "Name and NRIC should contain any of the specified keywords (case-insensitive) input.\n"
+            + "Patients whose Appointment overlaps with the given period will be displayed in the list.\n"
+            + "If multiple different search fields are specified, patients displayed will match all given fields.\n"
+            + "Parameters: n/KEYWORD... OR id/KEYWORD... OR ap/APPOINTMENT [any additional unused conditions]...\n"
             + "Example 1: " + COMMAND_WORD + " n/alice bob charlie \n"
             + "Example 2: " + COMMAND_WORD + " id/S872D \n"
-            + "Example 3: " + COMMAND_WORD_ALIAS + " id/S872D";
+            + "Example 3: " + COMMAND_WORD_ALIAS + " ap/1-Aug 0900 1000";
 
     private final CompositePredicate predicate;
 
