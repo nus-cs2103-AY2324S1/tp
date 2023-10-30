@@ -56,7 +56,7 @@ public class StringUtil {
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
 
-        return sentence.contains(word);
+        return sentence.toLowerCase().contains(preppedWord.toLowerCase());
     }
     /**
      * Returns a detailed message of the t, including the stack trace.
