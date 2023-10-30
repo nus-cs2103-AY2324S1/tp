@@ -20,6 +20,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LogCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -59,22 +60,49 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddCommand.COMMAND_WORD_ALIAS:
+            return new AddCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+
+        case EditCommand.COMMAND_WORD_ALIAS:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case DeleteCommand.COMMAND_WORD_ALIAS:
+            return new DeleteCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD_ALIAS:
+            return new UndoCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case ClearCommand.COMMAND_WORD_ALIAS:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindCommand.COMMAND_WORD_ALIAS:
+            return new FindCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListCommand.COMMAND_WORD_ALIAS:
+            return new ListCommand();
+
         case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case ExitCommand.COMMAND_WORD_ALIAS:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
@@ -88,6 +116,9 @@ public class AddressBookParser {
 
         case ClearLogCommand.COMMAND_WORD:
             return new ClearLogCommand();
+
+        case HelpCommand.COMMAND_WORD_ALIAS:
+            return new HelpCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
