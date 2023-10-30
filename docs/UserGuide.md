@@ -77,14 +77,18 @@ Format: `help`
 ---
 ### Adding a student : `add`
 
-This feature in Class Manager 2023 is a robust tool that empowers CS2103T TAs to add new student information according
-to the specified parameters (NAME, PHONE NUMBER, SCHOOL EMAIL, STUDENT NUMBER, CLASS NUMBER, TAG[Optional]).
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​`
+Adds a student to the class manager.
+
+
+Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT NUMBER c/CLASS NUMBER [t/TAG]...​`
 
 * **ALL** the fields must be provided.
 * The NAME fields are case-sensitive.
 * STUDENT NUMBER needs to be unique
+* The class details of a student will be automatically populated to be 0 for all fields during the 
+creation of a student.
+* Comment for a student can only be added after the student is instantiated.
 
 <box type="tip" seamless>
 
@@ -92,8 +96,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TA
 </box>
 
 Examples:
-* `add n/ Ngee Yong Lim e/ e0930481@u.nus.edu c/ T11 s/ A0249112A t/Best Student t/Possible TA`
-* `add n/ Boh Shin Yeo e/ e09301234@u.nus.edu c/ T5 s/ A0126362A`
+* `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11 t/friends t/owesMoney`
+* `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11`
+
 
 ---
 ### Listing all student details : `list`
