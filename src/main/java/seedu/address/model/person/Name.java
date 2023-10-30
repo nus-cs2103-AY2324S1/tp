@@ -60,7 +60,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equalsIgnoreCase(otherName.fullName);
+        return fullName.equals(otherName.fullName);
     }
 
     @Override
