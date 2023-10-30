@@ -13,6 +13,9 @@ public class DeletePersonTimeCommand extends DeleteTimeCommand {
     private final ArrayList<TimeInterval> timeIntervalsToDelete;
     private final Name personName;
 
+    /**
+     * Creates a DeletePersonTimeCommand to Delete the specified {@code timeIntervalsToDelete}
+     */
     public DeletePersonTimeCommand(Name personName, ArrayList<TimeInterval> timeIntervalsToDelete) {
         requireNonNull(personName);
         requireNonNull(timeIntervalsToDelete);

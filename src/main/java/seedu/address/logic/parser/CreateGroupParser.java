@@ -19,7 +19,6 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
      * and returns a CreateGroupCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    // uses name prefix for now
     @Override
     public CreateGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUPTAG);
@@ -29,7 +28,7 @@ public class CreateGroupParser implements Parser<CreateGroupCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE));
         }
 
-        String groupName = ParserUtil.parseName(argMultimap.getValue(PREFIX_GROUPTAG).get()).toString();
+        String groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUPTAG).get());
         Group group = new Group(groupName);
 
         return new CreateGroupCommand(group);

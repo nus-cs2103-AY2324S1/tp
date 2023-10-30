@@ -4,7 +4,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TimeInterval;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.Name;
 
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ public class DeleteGroupTimeCommand extends DeleteTimeCommand {
     private final Group group;
 
     /**
-     * Creates a DeleteGROUPTIMECOMMAND to DELETE the specified {@code timeIntervalsToDelete}
+     * Creates a DeleteGroupTimeCommand to Delete the specified {@code timeIntervalsToDelete}
      */
     public DeleteGroupTimeCommand(Group group, ArrayList<TimeInterval> timeIntervalsToDelete) {
         requireNonNull(group);
