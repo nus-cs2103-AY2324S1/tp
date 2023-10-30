@@ -4,10 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -104,6 +102,11 @@ public class TaskList extends ListEntryField implements Iterable<Task> {
         internalTaskList.setAll(tasks);
     }
 
+    /**
+     * Parses a Tasklist from a String input.
+     * @param input The save file input
+     * @return A TaskList
+     */
     public static TaskList of(String input) {
         // TODO: parse
         String[] tasksArray = input.split(",");

@@ -59,9 +59,7 @@
                   <Separator prefWidth="200.0" />
                   <VBox VBox.vgrow="ALWAYS">
                         <Label styleClass="panel-label" text="Task List">
-                        <VBox.margin>
-                           <Insets bottom="5.0" />
-                        </VBox.margin></Label>
+                       </Label>
                         <ListView fx:id="taskListView" minHeight="100" style="-fx-border-color: #201e26; -fx-border-radius: 5; -fx-background-radius: 10; -fx-border-width: 3;" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets />

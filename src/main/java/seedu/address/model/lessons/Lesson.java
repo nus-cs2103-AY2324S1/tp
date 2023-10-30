@@ -1,7 +1,6 @@
 package seedu.address.model.lessons;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.util.SerializeUtil.deserialize;
 
 import java.util.Objects;
 
@@ -54,7 +53,8 @@ public class Lesson extends ListEntry<Lesson> {
      * @param taskList
      * @throws ParseException
      */
-    public Lesson(String name, String start, String end, String day, String subject, TaskList taskList) throws ParseException {
+    public Lesson(String name, String start, String end, String day, String subject, TaskList taskList)
+            throws ParseException {
         this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject), taskList);
     }
     private Lesson() {

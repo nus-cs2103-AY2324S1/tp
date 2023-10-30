@@ -13,7 +13,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
-import seedu.address.model.lessons.TaskList;
 
 
 /**

@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.ListEntryField;
 
 /**
@@ -169,9 +168,6 @@ public class Task extends ListEntryField {
     @Override
     public String toString() {
         return this.isDone ? "+" : "-" + this.description;
-//        return new ToStringBuilder(this)
-//                .add("description", description)
-//                .toString();
     }
 
     @Override

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lessons.Day;
 import seedu.address.model.lessons.Lesson;
-import seedu.address.model.lessons.Task;
 import seedu.address.model.lessons.TaskList;
 import seedu.address.model.lessons.Time;
 import seedu.address.model.person.Name;
