@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Reminder
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Reminder {
+public class Reminder implements Comparable<Date> {
     private static final int DAYS_IN_WEEK = 7;
 
     // Identity fields
@@ -41,7 +41,7 @@ public class Reminder {
         this.tags.addAll(tags);
         this.lead = lead;
         this.currentDate = currentDate;
-        this.followUpDate = this.getFollowUpDate(currentDate, lead);
+        this.followUpDate = this.setFollowUpDate(currentDate, lead);
     }
 
     public Name getName() {
@@ -72,7 +72,7 @@ public class Reminder {
         return followUpDate;
     }
 
-    private Date getFollowUpDate(Date currentDate, Lead lead) {
+    private Date setFollowUpDate(Date currentDate, Lead lead) {
         Calendar cal = Calendar.getInstance(); // creates calendar
         cal.setTime(currentDate);
         cal.add(Calendar.DAY_OF_YEAR, lead.getFollowUpPeriod() * DAYS_IN_WEEK);
@@ -101,6 +101,11 @@ public class Reminder {
                 && lead.equals(otherReminder.lead)
                 && currentDate.equals(otherReminder.currentDate)
                 && followUpDate.equals(otherReminder.followUpDate);
+    }
+
+    @Override
+    public int compareTo(Date date) {
+        return this.followUpDate.after(date) ? 1 : -1;
     }
 
     @Override

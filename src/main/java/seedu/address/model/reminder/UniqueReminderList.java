@@ -87,7 +87,7 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
-     * Returns the list of reminders associated with a specific date.
+     * Returns the list of reminders after a specific date.
      *
      * @param date The date that which is used to retrieve the list of reminders.
      * @return the list of reminders mapped from the given date.
@@ -96,8 +96,9 @@ public class UniqueReminderList implements Iterable<Reminder> {
         ObservableList<Reminder> reminderList = FXCollections.observableArrayList();
         List<Reminder> retrievedReminders = personToReminderMap.entrySet()
                 .stream()
-                .filter(a->a.getValue().getFollowUpDate().after(date))
-                .map(x -> x.getValue()).collect(Collectors.toList());
+                .map(x -> x.getValue())
+                .filter(a->a.compareTo(date) == 1)
+                .collect(Collectors.toList());
         if (retrievedReminders == null) {
             return reminderList;
         }

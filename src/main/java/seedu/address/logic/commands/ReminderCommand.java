@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.reminder.Reminder;
@@ -24,12 +25,12 @@ public class ReminderCommand extends Command {
         requireNonNull(model);
         ObservableList<Reminder> reminderList = UniqueReminderList.getInstance().asUnmodifiableObservableList();
 
-        String message = "";
+        StringBuilder stringBuilder = new StringBuilder();
         for (Reminder reminder: reminderList) {
-            message += reminder.toString() + "\n";
+            stringBuilder.append(reminder);
         }
 
-        return new CommandResult(message);
+        return new CommandResult(stringBuilder.toString());
     }
 }
 
