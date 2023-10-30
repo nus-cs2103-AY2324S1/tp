@@ -220,6 +220,19 @@ Examples:
 * `mark-pre-all 1`
 
 ---
+### Marking tutorial attendance for a student as absent : `mark-abs`
+
+Marking tutorial attendance for an existing student as absent in the class manager.
+
+Format: `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER`
+
+* The `STUDENT_NUMBER` must be valid and exist.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
+
+Examples:
+* `mark-abs 1 s/A0249112A`
+
+---
 ### Setting assignment grade for a student : `set-grade`
 
 Setting an assignment grade for an existing student in the class manager.
@@ -367,6 +380,7 @@ _Details coming soon ..._
 | **Config**           | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                                      |
 | **Mark Present**     | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                                    |
 | **Mark Present All** | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                         |
+| **Mark Absent**      | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`
 | **Set Grade**        | `set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `set-grade s/A0245234A a/1 g/100`                                                              |
 | **Record Part**      | `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record-part s/A0245234A tut/1 part/true`                                   |
 | **View**             | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                                 |
