@@ -74,7 +74,6 @@ public class EditCommand extends Command {
      */
     private static Booking createEditedBooking(Booking bookingToEdit, EditRoomDescriptor editRoomDescriptor) {
         assert bookingToEdit != null;
-
         Room updatedRoom = editRoomDescriptor.getRoom().orElse(bookingToEdit.getRoom());
         Name updatedName = editRoomDescriptor.getName().orElse(bookingToEdit.getName());
         Phone updatedPhone = editRoomDescriptor.getPhone().orElse(bookingToEdit.getPhone());
@@ -84,7 +83,12 @@ public class EditCommand extends Command {
         Remark updatedRemark = editRoomDescriptor.getRemark().orElse(bookingToEdit.getRemark());
         //Tag updatedTag = editRoomDescriptor.getTags().orElse(bookingToEdit.getTags());
 
-        return new Booking(updatedRoom, updatedBookingPeriod, updatedName, updatedPhone, updatedEmail, updatedRemark);
+        Booking booking = new Booking(updatedRoom, updatedBookingPeriod, updatedName, updatedPhone, updatedEmail,
+                updatedRemark);
+        if (bookingToEdit.isFlagged()) {
+            booking.flag();
+        }
+        return booking;
     }
 
     /**

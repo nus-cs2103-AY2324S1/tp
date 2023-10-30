@@ -87,6 +87,13 @@ public class BookingsBook implements ReadOnlyBookingsBook {
     }
 
     /**
+     * Sorts the bookings via flag status first then by their room numbers.
+     */
+    public void sortBookings() {
+        bookings.sortBookings();
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */

@@ -29,6 +29,8 @@ public class Booking {
     private final BookingPeriod bookingPeriod;
     private final Remark remark;
 
+    // Flag
+    private boolean flag;
     /**
      * Constructs a Booking with the specified details.
      *
@@ -108,6 +110,27 @@ public class Booking {
         return otherBooking != null
                 && otherBooking.getRoom().equals(this.getRoom())
                 && otherBooking.getName().equals(this.getName());
+    }
+
+    /**
+     * This method changes the flag field to true.
+     */
+    public void flag() {
+        flag = true;
+    }
+
+    /**
+     * This method changes the flag field to false.
+     */
+    public void unflag() {
+        flag = false;
+    }
+
+    /**
+     * This method returns whether the flag is set to true or false.
+     */
+    public boolean isFlagged() {
+        return flag;
     }
 
     /**
