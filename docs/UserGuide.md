@@ -248,6 +248,7 @@ Across both basic and advanced filtering, the following fields are supported:<br
 | Secondary Email | `e2` | Finds contacts whose secondary email addresses **contain** the given keyword. |
 | Telegram | `tg` | Finds contacts whose telegram handles **contain** the given keyword. |
 | Note | `nt` | Finds contacts who have **any note** that **contains** the given keyword. |
+| Balance | `bal` | Keyword **must be valid balance** (see: [Payments feature format](#tbd)). Finds contacts who **owe user** an amount **more than or equal** to given balance. <br><br> Keyword **may start with a negative sign**, in which case finds contacts who **user owes** more than or equal to given balance. |
 
 </panel>
 
