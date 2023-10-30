@@ -34,7 +34,7 @@ management tasks done faster than traditional GUI apps.
 
    * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11` : Adds a student named `John Doe` to the Class Manager.
 
-   * `delete A0245234A` : Deletes the student with student number A0245234A, which is added in the previous step.
+   * `delete s/A0245234A` : Deletes the student with student number A0245234A, which is added in the previous step.
 
    * `exit` : Exits the app.
 
@@ -66,6 +66,23 @@ management tasks done faster than traditional GUI apps.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+
+### Configuring Class Manager : `config`
+
+Before you can begin using Class Manager, you must configure the number of tutorials and assignments that your module has.
+
+Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
+
+* The information cannot be updated once configured.
+* TUTORIAL_COUNT and ASSIGNMENT_COUNT must be valid non-negative integers.
+
+Examples:
+* `config #t/13 #a/1`
+* `config #a/4 #t/26`
+
+
+---
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -74,12 +91,12 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+
 ---
+
 ### Adding a student : `add`
 
-
 Adds a student to the class manager.
-
 
 Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT NUMBER c/CLASS NUMBER [t/TAG]...​`
 
