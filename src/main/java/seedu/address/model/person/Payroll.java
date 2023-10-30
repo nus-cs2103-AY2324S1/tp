@@ -177,6 +177,7 @@ public class Payroll {
         }
 
         Payroll otherDeduction = (Payroll) other;
-        return this.salary.equals(otherDeduction.salary);
+        return this.salary.equals(otherDeduction.salary) && this.startDate.equals(otherDeduction.startDate)
+                && this.endDate.equals(otherDeduction.endDate) && this.paymentDate.equals(otherDeduction.paymentDate);
     }
 }
