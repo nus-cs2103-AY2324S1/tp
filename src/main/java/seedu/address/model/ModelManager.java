@@ -249,7 +249,6 @@ public class ModelManager implements Model {
         try {
             groupToAdd.addTime(toAddTime);
         } catch (CommandException e) {
-            forceUpdateList();
             throw new CommandException(e.getMessage());
         }
         forceUpdateList();

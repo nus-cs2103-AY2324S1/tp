@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.net.URL;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -38,6 +39,13 @@ public class Calendar extends UiPart<Region> {
         day.add(dayTaskFri); //fri
         day.add(dayTaskSat); //sat
         day.add(dayTaskSun); //sun
+        groupList.addListener(new ListChangeListener<Group>() {
+            @Override
+            public void onChanged(Change<? extends Group> c) {
+                clearDays();
+                convertGrpListToContainer();
+            }
+        });
         convertGrpListToContainer();
         dayListView.setItems(day);
         dayListView.setCellFactory(listView -> new DayListViewCell());
@@ -61,9 +69,21 @@ public class Calendar extends UiPart<Region> {
             group.getTime().iterator().forEachRemaining(timeInterval -> {
                 int startDay = timeInterval.getStartTimeDay().getValue() - 1;
                 ObservableList<GroupTimeContainer> curDay = day.get(startDay);
-                curDay.add(new GroupTimeContainer(group, timeInterval));
+                if (!curDay.contains(new GroupTimeContainer(group, timeInterval))) {
+                    curDay.add(new GroupTimeContainer(group, timeInterval));
+                }
             });
         });
+    }
+
+    private void clearDays() {
+        dayTaskMon.clear();
+        dayTaskTue.clear();
+        dayTaskWed.clear();
+        dayTaskThu.clear();
+        dayTaskFri.clear();
+        dayTaskSat.clear();
+        dayTaskSun.clear();
     }
 
 }
