@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.enums.InputSource;
@@ -23,6 +24,22 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_illegalFields_throwsParseException() {
+        assertParseFailure(parser, " n/Alice p/91234567",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/Alice e/example@email.com",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/Alice a/Address Here",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/Alice m/On Medication XYZ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " n/Alice n/Benson",
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_NAME));
+        assertParseFailure(parser, " p/91234567",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
