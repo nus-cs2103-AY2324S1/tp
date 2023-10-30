@@ -5,7 +5,7 @@
 
 This is a CS2103T project by [**AY2324S1-CS2103T-W08-1**](https://github.com/orgs/AY2324S1-CS2103T-W08-1/people).<br>
 
-> An hiring management program for Hiring Managers to track applicants throughout the hiring process.
+> A hiring management program for Hiring Managers to track applicants throughout the hiring process.
 
 ![Ui](docs/images/Ui.png)
 

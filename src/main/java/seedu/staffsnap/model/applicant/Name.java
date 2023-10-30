@@ -10,8 +10,8 @@ import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
 public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank, "
-                    + "and it should not exceed 25 characters";
+            "Names should only contain alphanumeric characters and spaces, should not be blank, "
+                    + "and should not exceed 25 characters";
 
     /*
      * The first character of the name must not be a whitespace,
