@@ -1,14 +1,26 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Balance;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Tag;
 
 public class FindExpressionParserTest {
 
@@ -73,4 +85,59 @@ public class FindExpressionParserTest {
                 instanceof Predicate);
 
     }
+
+    @Test
+    public void conditionNodeToPredicate_invalidField_throwsException() {
+        assertThrows(NullPointerException.class, () -> new FindExpressionParser.ConditionNode(
+                null, "Alice").toPredicate());
+    }
+
+    @Test
+    public void conditionNodeToPredicate_validOptionalField_evaluatesFalseIfEmpty() {
+        Person person = new Person(
+                new Name("Alice"),
+                new Phone("12345"),
+                new Email("alice@a.com"),
+                new Address("123, alice street"),
+                Set.of(new Tag("friends"))
+        );
+
+        assertFalse(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BIRTHDAY, "Dec").toPredicate().test(person));
+
+        assertFalse(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.TELEGRAM, "haha").toPredicate().test(person));
+
+        assertFalse(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.SECONDARY_EMAIL, "a@a.com").toPredicate().test(person));
+
+        assertFalse(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.LINKEDIN, "elonmusk").toPredicate().test(person));
+
+        assertFalse(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.NOTE, "cool").toPredicate().test(person));
+    }
+
+    @Test
+    public void conditionNodeToPredicate_validOptionalField_evaluatesTrueIfNotEmpty() {
+        Person person = new Person(
+                new Name("Alice"),
+                new Phone("12345"),
+                new Email("alice@a.com"),
+                new Address("123, alice street"),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.of(new Telegram("@aliceeee")),
+                Set.of(new Tag("friends")),
+                Optional.of(999),
+                FXCollections.observableArrayList(new ArrayList<>()),
+                new Balance(0)
+        );
+
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.TELEGRAM, "@aliceeee")
+                .toPredicate().test(person));
+    }
+
 }

@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -295,6 +296,9 @@ public class FindExpressionParser {
 
         @Override
         Predicate<Person> toPredicate() {
+
+            requireNonNull(field);
+
             switch (field) {
             case NAME:
                 return person -> StringUtil.containsSubstringIgnoreCase(person.getName().fullName, keyword);
@@ -330,6 +334,7 @@ public class FindExpressionParser {
                 return person -> person.getNotes().stream()
                         .anyMatch(note -> StringUtil.containsSubstringIgnoreCase(note.toString(), keyword));
             }
+            throw new AssertionError("Invalid field type!");
         }
     }
 }
