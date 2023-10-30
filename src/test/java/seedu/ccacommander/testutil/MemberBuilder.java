@@ -96,7 +96,7 @@ public class MemberBuilder {
     }
 
     /**
-     * Sets the {@Phone} of the {@code Member} to an empty phone.
+     * Sets the {@Phone} of the {@code Member} that we are building to null.
      */
     public MemberBuilder withPhone() {
         this.phone = null;
@@ -112,7 +112,7 @@ public class MemberBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Member} to an empty email.
+     * Sets the {@code Email} of the {@code Member} that we are building to null.
      */
     public MemberBuilder withEmail() {
         this.email = null;

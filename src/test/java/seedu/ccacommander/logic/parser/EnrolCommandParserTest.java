@@ -25,6 +25,10 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.ccacommander.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +43,8 @@ public class EnrolCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         EnrolCommand expectedEnrolEventCommand =
-                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_TWO, VALID_HOURS_A, VALID_REMARK_A);
+                new EnrolCommand(VALID_INDEX_ONE, VALID_INDEX_TWO,
+                        Optional.of(VALID_HOURS_A), Optional.of(VALID_REMARK_A));
 
         // whitespace only preamble
         assertParseSuccess(parser,
@@ -124,18 +129,31 @@ public class EnrolCommandParserTest {
         assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + HOURS_DESC_AURORA + REMARK_DESC_AURORA,
                 expectedMessage);
 
-        // missing hours prefix
-        assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO + REMARK_DESC_AURORA,
-                expectedMessage);
-
-        // missing remark prefix
-        assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO + HOURS_DESC_AURORA,
-                expectedMessage);
-
         // all prefixes missing
         assertParseFailure(parser, VALID_MEMBER_INDEX_ONE + VALID_EVENT_INDEX_TWO + VALID_HOURS_AURORA
                         + VALID_REMARK_AURORA,
                 expectedMessage);
+    }
+
+    @Test
+    public void parse_optionalFieldMissing_success() {
+        // missing hours
+        EnrolCommand expectedEnrolCommandNoHours = new EnrolCommand(INDEX_FIRST_MEMBER, INDEX_SECOND_EVENT,
+                Optional.empty(), Optional.of(new Remark(VALID_REMARK_AURORA)));
+        String userInputNoHours = MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO + REMARK_DESC_AURORA;
+        assertParseSuccess(parser, userInputNoHours, expectedEnrolCommandNoHours);
+
+        // missing remark
+        EnrolCommand expectedEnrolCommandNoRemarks = new EnrolCommand(INDEX_FIRST_MEMBER, INDEX_SECOND_EVENT,
+                Optional.of(new Hours(VALID_HOURS_AURORA)), Optional.empty());
+        String userInputNoRemarks = MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO + HOURS_DESC_AURORA;
+        assertParseSuccess(parser, userInputNoRemarks, expectedEnrolCommandNoRemarks);
+
+        // missing hours and remark
+        EnrolCommand expectedEnrolCommandNoHoursAndRemarks = new EnrolCommand(INDEX_FIRST_MEMBER, INDEX_SECOND_EVENT,
+                Optional.empty(), Optional.empty());
+        String userInputNoHoursAndRemarks = MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO;
+        assertParseSuccess(parser, userInputNoHoursAndRemarks, expectedEnrolCommandNoHoursAndRemarks);
     }
 
     @Test
