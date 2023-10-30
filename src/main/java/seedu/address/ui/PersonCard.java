@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -80,9 +82,11 @@ public class PersonCard extends UiPart<Region> {
         person.getNonEmergencyTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        StringBinding notesButtonText = Bindings
+            .createStringBinding(() -> "Notes (" + person.getNotes().size() + ")",
+            person.getNotes()); // This will cause the binding to update when the list changes
 
-        int numberOfNotes = person.getNotes().size();
-        notesButton.setText("Notes (" + numberOfNotes + ")");
+        notesButton.textProperty().bind(notesButtonText);
         bindLabelToProperty(balance, person.getBalance().toUiMessage());
     }
 

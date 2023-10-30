@@ -3,10 +3,11 @@ package seedu.address.testutil;
 import java.time.MonthDay;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
@@ -41,7 +42,7 @@ public class PersonBuilder {
     private Optional<Integer> id;
     private Set<Tag> tags;
     private Balance balance;
-    private List<Note> notes;
+    private ObservableList<Note> notes;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -57,7 +58,7 @@ public class PersonBuilder {
         telegram = Optional.empty(); // No telegram by default
         tags = new HashSet<>();
         id = Optional.empty();
-        notes = new ArrayList<>();
+        notes = FXCollections.observableArrayList();
         balance = new Balance(0);
     }
 
