@@ -46,7 +46,6 @@ public class Calendar extends UiPart<Region> {
                 convertGrpListToContainer();
             }
         });
-
         convertGrpListToContainer();
         dayListView.setItems(day);
         dayListView.setCellFactory(listView -> new DayListViewCell());
