@@ -11,6 +11,13 @@ import seedu.address.model.Model;
 public class ClearLogCommand extends Command {
 
     public static final String COMMAND_WORD = "clog";
+
+    public static final String COMMAND_WORD_ALIAS = "cl";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "or" + COMMAND_WORD_ALIAS
+            + ": Clears the entire logger tab.\n"
+            + "Example: " + COMMAND_WORD + "or" + COMMAND_WORD_ALIAS;
+
     public static final String MESSAGE_SUCCESS = "Logger tab has been cleared!";
 
 

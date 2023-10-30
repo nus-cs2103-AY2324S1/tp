@@ -12,9 +12,11 @@ public class AppendLogCommand extends Command {
 
     public static final String COMMAND_WORD = "alog";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Appends the results of the most recent FindCommand to the logbook.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String COMMAND_WORD_ALIAS = "al";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "or" + COMMAND_WORD_ALIAS
+            + ": Appends the results of the most recent FindCommand to the logger tab.\n"
+            + "Example: " + COMMAND_WORD + "or" + COMMAND_WORD_ALIAS;
 
     public static final String MESSAGE_SUCCESS = "Results of the FindCommand have been appended to the logger tab.";
 

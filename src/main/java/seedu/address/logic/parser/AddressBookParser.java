@@ -108,17 +108,27 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case HelpCommand.COMMAND_WORD_ALIAS:
+            return new HelpCommand();
+
         case LogCommand.COMMAND_WORD:
+            return new LogCommand();
+
+        case LogCommand.COMMAND_WORD_ALIAS:
             return new LogCommand();
 
         case AppendLogCommand.COMMAND_WORD:
             return new AppendLogCommand();
 
+        case AppendLogCommand.COMMAND_WORD_ALIAS:
+            return new AppendLogCommand();
+
         case ClearLogCommand.COMMAND_WORD:
             return new ClearLogCommand();
 
-        case HelpCommand.COMMAND_WORD_ALIAS:
-            return new HelpCommand();
+        case ClearLogCommand.COMMAND_WORD_ALIAS:
+            return new ClearLogCommand();
+
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

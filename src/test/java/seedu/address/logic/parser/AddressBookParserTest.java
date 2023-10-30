@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AppendLogCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearLogCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteCommand.DeletePersonDescriptor;
 import seedu.address.logic.commands.EditCommand;
@@ -21,6 +23,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LogCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -156,6 +159,42 @@ public class AddressBookParserTest {
     public void parseCommand_undo_alias() throws Exception {
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD_ALIAS) instanceof UndoCommand);
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD_ALIAS + " 3") instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_log() throws Exception {
+        assertTrue(parser.parseCommand(LogCommand.COMMAND_WORD) instanceof LogCommand);
+        assertTrue(parser.parseCommand(LogCommand.COMMAND_WORD + " 3") instanceof LogCommand);
+    }
+
+    @Test
+    public void parseCommand_log_alias() throws Exception {
+        assertTrue(parser.parseCommand(LogCommand.COMMAND_WORD_ALIAS) instanceof LogCommand);
+        assertTrue(parser.parseCommand(LogCommand.COMMAND_WORD_ALIAS + " 3") instanceof LogCommand);
+    }
+
+    @Test
+    public void parseCommand_appendlog() throws Exception {
+        assertTrue(parser.parseCommand(AppendLogCommand.COMMAND_WORD) instanceof AppendLogCommand);
+        assertTrue(parser.parseCommand(AppendLogCommand.COMMAND_WORD + " 3") instanceof AppendLogCommand);
+    }
+
+    @Test
+    public void parseCommand_appendlog_alias() throws Exception {
+        assertTrue(parser.parseCommand(AppendLogCommand.COMMAND_WORD_ALIAS) instanceof AppendLogCommand);
+        assertTrue(parser.parseCommand(AppendLogCommand.COMMAND_WORD_ALIAS + " 3") instanceof AppendLogCommand);
+    }
+
+    @Test
+    public void parseCommand_clearlog() throws Exception {
+        assertTrue(parser.parseCommand(ClearLogCommand.COMMAND_WORD) instanceof ClearLogCommand);
+        assertTrue(parser.parseCommand(ClearLogCommand.COMMAND_WORD + " 3") instanceof ClearLogCommand);
+    }
+
+    @Test
+    public void parseCommand_clearlog_alias() throws Exception {
+        assertTrue(parser.parseCommand(ClearLogCommand.COMMAND_WORD_ALIAS) instanceof ClearLogCommand);
+        assertTrue(parser.parseCommand(ClearLogCommand.COMMAND_WORD_ALIAS + " 3") instanceof ClearLogCommand);
     }
 
     @Test
