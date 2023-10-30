@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Set;
 
+import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Tags;

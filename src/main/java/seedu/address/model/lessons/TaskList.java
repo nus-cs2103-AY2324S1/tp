@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.ListEntryField;
 import seedu.address.model.lessons.exceptions.DuplicateTaskException;
 import seedu.address.model.lessons.exceptions.TaskNotFoundException;
 
@@ -23,8 +24,8 @@ import seedu.address.model.lessons.exceptions.TaskNotFoundException;
  *
  * @see Task#isSameTask(Task)
  */
-public class TaskList implements Iterable<Task> {
-
+public class TaskList extends ListEntryField implements Iterable<Task> {
+    public static final TaskList DEFAULT_TASKLIST = new TaskList();
     private final ObservableList<Task> internalTaskList = FXCollections.observableArrayList();
 
     private final ObservableList<Task> internalUnmodifiableTaskList =
@@ -99,6 +100,12 @@ public class TaskList implements Iterable<Task> {
         internalTaskList.setAll(tasks);
     }
 
+    public static TaskList of(String input) {
+        // TODO: parse
+        return new TaskList();
+    }
+
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -131,8 +138,19 @@ public class TaskList implements Iterable<Task> {
         return internalTaskList.hashCode();
     }
 
+    /**
+     * Encodes into a string
+     * @return
+     */
     @Override
     public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < internalTaskList.size(); i++) {
+            Task task = internalTaskList.get(i);
+            if (task.isDone()) {
+                stringBuilder.append("+").append(task);
+            }
+        }
         return internalTaskList.toString();
     }
 
@@ -148,5 +166,14 @@ public class TaskList implements Iterable<Task> {
             }
         }
         return true;
+    }
+
+    @Override
+    public ListEntryField clone() {
+        TaskList cloned = new TaskList();
+        internalTaskList.forEach(task -> {
+            cloned.add(new Task(task.getDescription(), task.isDone()));
+        });
+        return cloned;
     }
 }

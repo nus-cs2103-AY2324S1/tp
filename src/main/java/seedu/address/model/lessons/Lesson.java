@@ -20,6 +20,7 @@ public class Lesson extends ListEntry<Lesson> {
     // Data fields
     private Subject subject;
     private Day day;
+    private TaskList taskList;
 
     /**
      * Constructor for a Lesson Object with at least one student.
@@ -28,19 +29,21 @@ public class Lesson extends ListEntry<Lesson> {
      * @param start The start time of the lesson
      * @param end The end time of the lesson
      * @param subject The subject of this lesson
+     * @param taskList the tasks to be completed
      * @param studentNames The student attending this lesson. Note: Converted to ArrayList when stored
      * @see seedu.address.logic.parser.ParserUtil
      */
-    public Lesson(Name name, Time start, Time end, Day day, Subject subject, Name... studentNames) {
+    public Lesson(Name name, Time start, Time end, Day day, Subject subject, TaskList taskList, Name... studentNames) {
         requireAllNonNull(name, start, end, day, subject, studentNames);
         this.name = name;
         this.start = start;
         this.end = end;
         this.subject = subject;
         this.day = day;
+        this.taskList = taskList;
     }
     public Lesson(String name, String start, String end, String day, String subject) throws ParseException {
-        this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject));
+        this(new Name(name), new Time(start), new Time(end), Day.of(day), new Subject(subject), new TaskList());
     }
     private Lesson() {
         this.name = Name.DEFAULT_NAME;
@@ -48,6 +51,7 @@ public class Lesson extends ListEntry<Lesson> {
         this.end = Time.DEFAULT_TIME;
         this.subject = Subject.DEFAULT_SUBJECT;
         this.day = Day.DEFAULT_DAY;
+        this.taskList = TaskList.DEFAULT_TASKLIST;
     }
 
     public static Lesson getDefaultLesson() {
@@ -159,6 +163,11 @@ public class Lesson extends ListEntry<Lesson> {
             setSubject(subject);
         }
     }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
