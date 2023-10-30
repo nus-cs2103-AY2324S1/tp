@@ -21,12 +21,15 @@ import networkbook.model.util.UniqueList;
 public class Person implements Identifiable<Person> {
 
     private static final ThrowingIoExceptionConsumer<Link> LINK_OPENER = link -> {
-        if (!Desktop.isDesktopSupported()) {
-            return;
-        }
-        Desktop desktop = Desktop.getDesktop();
         URI uri = URI.create(link.toRecognisableWebUrl());
-        desktop.browse(uri);
+        if (!Desktop.isDesktopSupported()) {
+            Runtime runtime = Runtime.getRuntime();
+            String[] args = { "osascript", "-e", "open location \"" + uri + "\"" };
+            runtime.exec(args);
+        } else {
+            Desktop desktop = Desktop.getDesktop();
+            desktop.browse(uri);
+        }
     };
 
     // Identity fields
