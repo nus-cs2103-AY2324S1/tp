@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.BarChartCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -160,6 +161,14 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    public void handleBarChart(BarChartWindow barchartWindow) {
+        if (!barchartWindow.isShowing()) {
+            barchartWindow.show();
+        } else {
+            barchartWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -198,6 +207,11 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowTable()) {
                 TableWindow tableWindow = new TableWindow(commandResult);
                 handleTable(tableWindow);
+            }
+
+            if (commandResult.isShowBarChart()) {
+                BarChartWindow barChartWindow = new BarChartWindow(commandResult);
+                handleBarChart(barChartWindow);
             }
 
             if (commandResult.isExit()) {

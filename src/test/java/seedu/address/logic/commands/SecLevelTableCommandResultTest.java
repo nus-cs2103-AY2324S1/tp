@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.logic.commands.tableresults.SecLevelTableCommandResult;
 
 public class SecLevelTableCommandResultTest {
     @Test

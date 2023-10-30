@@ -1,17 +1,18 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.barchartresults;
 
 import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.tag.Subject;
 
 /**
  * Represents for the command result for subject table generation.
  */
-public class SubjectTableCommandResult extends CommandResult {
+public class SubjectBarChartCommandResult extends CommandResult {
 
-    private static final String FEEDBACKTOUSERMESSAGE = "A table categorized by Subject is shown";
+    private static final String FEEDBACKTOUSERMESSAGE = "A bar chart categorized by Subject is shown";
     private int engCount;
     private int chiCount;
     private int emathCount;
@@ -25,10 +26,10 @@ public class SubjectTableCommandResult extends CommandResult {
 
 
     /**
-     * Constructor for SubjectTableCommandResult.
+     * Constructor for SubjectBarChartCommandResult.
      * @param columnValueMapping hash map instance containing column titles(String) as keys and counts(Long) as values.
      */
-    public SubjectTableCommandResult(Map<String, Integer> columnValueMapping) {
+    public SubjectBarChartCommandResult(Map<String, Integer> columnValueMapping) {
         super(FEEDBACKTOUSERMESSAGE);
         this.engCount = columnValueMapping.get(Subject.ENG);
         this.chiCount = columnValueMapping.get(Subject.CHI);
@@ -44,10 +45,10 @@ public class SubjectTableCommandResult extends CommandResult {
 
     /**
      * Check if this CommandResult instance is meant for creating table window.
-     * @return always return true for SubjectTableCommandResult instance.
+     * @return always return true for SubjectBarChartCommandResult instance.
      */
     @Override
-    public boolean isShowTable() {
+    public boolean isShowBarChart() {
         return true;
     }
 
@@ -138,11 +139,11 @@ public class SubjectTableCommandResult extends CommandResult {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SubjectTableCommandResult)) {
+        if (!(other instanceof SubjectBarChartCommandResult)) {
             return false;
         }
 
-        SubjectTableCommandResult otherCommandResult = (SubjectTableCommandResult) other;
+        SubjectBarChartCommandResult otherCommandResult = (SubjectBarChartCommandResult) other;
         return super.equals(otherCommandResult)
                 && otherCommandResult.engCount == engCount
                 && otherCommandResult.chiCount == chiCount

@@ -52,6 +52,10 @@ public class CommandResult {
         return false;
     }
 
+    public boolean isShowBarChart() {
+        return false;
+    }
+
     public boolean isExit() {
         return exit;
     }

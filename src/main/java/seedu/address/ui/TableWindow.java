@@ -11,9 +11,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.GenderTableCommandResult;
-import seedu.address.logic.commands.SecLevelTableCommandResult;
-import seedu.address.logic.commands.SubjectTableCommandResult;
+import seedu.address.logic.commands.tableresults.GenderTableCommandResult;
+import seedu.address.logic.commands.tableresults.SecLevelTableCommandResult;
+import seedu.address.logic.commands.tableresults.SubjectTableCommandResult;
 import seedu.address.model.tag.Subject;
 
 
