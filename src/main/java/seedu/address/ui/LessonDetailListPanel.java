@@ -66,11 +66,10 @@ public class LessonDetailListPanel extends UiPart<Region> {
         students.setText(lesson.getStudentsStr());
         subject.setText(lesson.getSubject().toString());
         //taskListView.setItems("to be implemented");
-        taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
+        //taskListView.setCellFactory(listView -> new LessonDetailListPanel.TaskListViewCell());
         subject.setText(lesson.getSubject().toString());
 
         taskListContainer.getChildren().clear();
-        // temporary code, to show ui only
 
         ObservableList<Task> taskList = lesson.getTaskList().asUnmodifiableObservableList();
         for (int i = 0; i < taskList.size(); i++) {
