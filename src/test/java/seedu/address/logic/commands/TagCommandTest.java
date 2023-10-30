@@ -51,6 +51,7 @@ public class TagCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), studentToTag);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel, commandHistory);
     }
@@ -68,6 +69,7 @@ public class TagCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(2), studentToRemoveTag);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel, commandHistory);
     }

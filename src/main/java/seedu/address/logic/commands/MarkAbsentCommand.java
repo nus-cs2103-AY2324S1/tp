@@ -60,6 +60,8 @@ public class MarkAbsentCommand extends Command {
             model.setSelectedStudent(student);
         }
 
+        model.commitAddressBook();
+
         return new CommandResult(MESSAGE_MARK_SUCCESS);
     }
 

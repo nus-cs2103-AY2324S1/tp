@@ -74,7 +74,7 @@ public class LoadCommandTest {
             throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
         }
         expectedModel.setAddressBookFilePath(filePath);
-        expectedModel.setAddressBook(tempData);
+        expectedModel.reset(tempData);
     }
 
     @Test

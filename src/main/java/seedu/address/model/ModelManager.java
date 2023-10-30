@@ -244,9 +244,9 @@ public class ModelManager implements Model {
      */
     @Override
     public void reset(ReadOnlyAddressBook newData) {
-        this.versionedAddressBook = new VersionedAddressBook(newData);
-        this.versionedAddressBook.resetData(newData);
+        this.versionedAddressBook.reset(newData);
         this.filteredStudents = new FilteredList<>(this.versionedAddressBook.getStudentList());
+        versionedAddressBook.resetSelectedStudent();
     }
 
     @Override

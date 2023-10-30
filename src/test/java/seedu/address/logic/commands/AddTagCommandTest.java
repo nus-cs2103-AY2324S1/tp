@@ -46,6 +46,7 @@ public class AddTagCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), taggedStudent);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(taggedStudent.getTags(), model.getFilteredStudentList().get(0).getTags());

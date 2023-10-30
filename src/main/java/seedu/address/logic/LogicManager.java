@@ -69,13 +69,16 @@ public class LogicManager implements Logic {
         if (addressBookModified) {
             logger.info("Class Manager modified, saving to file.");
             try {
-                storage.saveAddressBook(model.getAddressBook());
+                storage.saveAddressBook(model.getAddressBook(), model.getAddressBookFilePath());
+            } catch (AccessDeniedException e) {
+                throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
             } catch (IOException ioe) {
-                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
             }
         } else if (command instanceof LoadCommand) {
             try {
                 storage.saveAddressBook(model.getAddressBook(), model.getAddressBookFilePath());
+                storage.saveUserPrefs(model.getUserPrefs());
                 logger.info("Class Manager has loaded the save file.");
             } catch (AccessDeniedException e) {
                 throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);

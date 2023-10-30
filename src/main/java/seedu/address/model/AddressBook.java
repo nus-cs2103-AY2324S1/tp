@@ -121,6 +121,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         indicateModified();
     }
 
+    /**
+     * Resets the selected student.
+     */
+    public void resetSelectedStudent() {
+        students.clearSelectedStudent();
+    }
+
     //// util methods
 
     @Override

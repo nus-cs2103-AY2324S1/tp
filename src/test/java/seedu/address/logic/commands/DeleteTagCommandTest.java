@@ -45,6 +45,7 @@ public class DeleteTagCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(1), taggedStudent);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel, commentHistory);
         assertEquals(taggedStudent.getTags(), model.getFilteredStudentList().get(1).getTags());

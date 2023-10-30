@@ -52,7 +52,6 @@ public class MarkPresentCommand extends Command {
 
         try {
             model.setStudent(student, student.markPresent(this.index));
-            model.commitAddressBook();
         } catch (InvalidTutorialIndexException e) {
             throw new CommandException(e.getMessage());
         }
@@ -60,6 +59,8 @@ public class MarkPresentCommand extends Command {
         if (model.isSelectedStudent(student)) {
             model.setSelectedStudent(student);
         }
+
+        model.commitAddressBook();
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);
     }

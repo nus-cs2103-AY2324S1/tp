@@ -94,13 +94,13 @@ public class DeleteCommandTest {
      * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the student object regardless of indexing.
      */
     @Test
-    public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
-        Student studentToDelete = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
+    public void executeUndoRedo_validIndexFilteredList_sameStudentDeleted() throws Exception {
+        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getOneBased());
         DeleteCommand deleteCommand = new DeleteCommand(studentToDelete.getStudentNumber());
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         showStudentAtIndex(model, INDEX_SECOND_STUDENT);
-        studentToDelete = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
+        studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         expectedModel.deleteStudent(studentToDelete);
         expectedModel.commitAddressBook();
 
@@ -111,7 +111,7 @@ public class DeleteCommandTest {
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_SUCCESS, expectedModel, commandHistory);
 
-        assertNotEquals(studentToDelete, TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased()));
+        assertNotEquals(studentToDelete, model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()));
         // redo -> deletes same second student in unfiltered person list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_SUCCESS, expectedModel, commandHistory);

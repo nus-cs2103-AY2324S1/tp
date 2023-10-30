@@ -44,6 +44,8 @@ public class MarkPresentAllCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
+        model.commitAddressBook();
+
         return new CommandResult(MESSAGE_MARK_SUCCESS);
     }
 
