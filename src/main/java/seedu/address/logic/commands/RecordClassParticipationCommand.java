@@ -19,7 +19,7 @@ import seedu.address.model.student.StudentNumber;
  */
 public class RecordClassParticipationCommand extends Command {
 
-    public static final String COMMAND_WORD = "record";
+    public static final String COMMAND_WORD = "class-part";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Records the class participation of Student in a specific tutorial session.\n"

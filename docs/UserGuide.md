@@ -247,11 +247,11 @@ Examples:
 * `grade s/A0249112A a/1 g/100`
 
 ---
-### Record class participation for a student : `record`
+### Record class participation for a student : `class-part`
 
 Recording the class participation level for an existing student in the class manager.
 
-Format: `record s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL`
+Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL`
 
 * The `STUDENT_NUMBER` must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
@@ -262,7 +262,7 @@ Format: `record s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL`
   * The proposed levels includes: `none`, `sufficient`, `good`, `excellent`.
 
 Examples:
-* `record s/A0249112A tut/1 part/true`
+* `class-part s/A0249112A tut/1 part/true`
 
 ---
 ### View a student's class details: `view`
@@ -396,7 +396,7 @@ _Details coming soon ..._
 | **Mark Absent**                | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`                                                                            |
 | **Mark Present**               | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                            |
 | **Mark Present All**           | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                 |
-| **Record Class Participation** | `record s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record s/A0245234A tut/1 part/true`                               |
+| **Record Class Participation** | `class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record s/A0245234A tut/1 part/true`                               |
 | **Set Grade**                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                                                              |
 | **Tag**                        | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                                  |
 | **View**                       | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                         |
