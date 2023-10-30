@@ -21,7 +21,14 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.AnimalType;
+import seedu.address.model.person.Availability;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Housing;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
@@ -52,6 +59,8 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
+     * Represents a constructor of an EditCommand with an index of the person in the list to edit
+     * and the model person data to be edited.
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -63,6 +72,11 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * Represents an EditCommand that behaves the same as the ViewCommand which views the fosterer at the given index.
+     *
+     * @param index is the index of the fosterer in the list whose details will be edited.
+     */
     public EditCommand(Index index) {
         requireNonNull(index);
 
@@ -116,7 +130,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Housing updatedHousing = editPersonDescriptor.getHousing().orElse(personToEdit.getHousing());
-        Availability updatedAvailability = editPersonDescriptor.getAvailability().orElse(personToEdit.getAvailability());
+        Availability updatedAvailability =
+                editPersonDescriptor.getAvailability().orElse(personToEdit.getAvailability());
         Name updatedAnimalName = editPersonDescriptor.getAnimalName().orElse(personToEdit.getAnimalName());
         AnimalType updatedAnimalType;
         if (editPersonDescriptor.getAnimalType().isPresent()) {

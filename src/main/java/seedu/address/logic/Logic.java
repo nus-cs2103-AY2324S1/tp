@@ -53,7 +53,6 @@ public interface Logic {
 
     boolean getIsViewExitCommand();
 
-    CommandResult executeInView(String commandText, Person person, Index targetIndex) throws CommandException, ParseException;
-
-    boolean getIsEditFieldCommand();
+    CommandResult executeInView(String commandText, Person person, Index targetIndex)
+            throws CommandException, ParseException;
 }

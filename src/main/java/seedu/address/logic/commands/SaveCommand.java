@@ -13,14 +13,23 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * Represents a SaveCommand that saves the edited fosterer data and update the fosterer information in the application.
+ */
 public class SaveCommand extends Command {
     public static final String SAVE_COMMAND_WORD = "save";
-    public static Person newPerson;
+    private Person newFosterer;
     private Index index;
 
-    public SaveCommand(Index index, Person newPerson) {
+    /**
+     * Represents a SaveCommand constructor that takes in the index of the fosterer to edit
+     * and the new fosterer that replaces the already existing fosterer in the index.
+     * @param index is the index of the fosterer stored in the list of fosterers.
+     * @param newPerson
+     */
+    public SaveCommand(Index index, Person newFosterer) {
         super();
-        this.newPerson = newPerson;
+        this.newFosterer = newFosterer;
         this.index = index;
     }
 
@@ -34,7 +43,7 @@ public class SaveCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = newPerson;
+        Person editedPerson = newFosterer;
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

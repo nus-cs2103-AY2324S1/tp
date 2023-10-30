@@ -56,6 +56,10 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+            if (arguments.isEmpty()) {
+                return new ViewCommand();
+            }
+
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:

@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNAVAILABLE_COMMAND_IN_VIEW_MODE;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -9,10 +8,14 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.EditFieldCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.SaveCommand;
+import seedu.address.logic.commands.ViewExitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import seedu.address.ui.PersonProfile;
 
 /**
  * Parses user input while in the fosterer profile view page.

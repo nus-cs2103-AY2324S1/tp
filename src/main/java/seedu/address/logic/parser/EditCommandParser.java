@@ -2,7 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANIMAL_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANIMAL_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -10,10 +18,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
@@ -71,7 +77,9 @@ public class EditCommandParser implements CommandParser<EditCommand> {
             editPersonDescriptor.setHousing(ParserUtil.parseHousing(argMultimap.getValue(PREFIX_HOUSING).get()));
         }
         if (argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {
-            editPersonDescriptor.setAvailability(ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get()));
+            editPersonDescriptor.setAvailability(ParserUtil.parseAvailability(
+                    argMultimap.getValue(PREFIX_AVAILABILITY).get())
+            );
         }
         if (argMultimap.getValue(PREFIX_ANIMAL_NAME).isPresent()) {
             editPersonDescriptor.setAnimalName(ParserUtil.parseName(argMultimap.getValue(PREFIX_ANIMAL_NAME).get()));
@@ -84,7 +92,6 @@ public class EditCommandParser implements CommandParser<EditCommand> {
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             return new EditCommand(index);
-//            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditCommand(index, editPersonDescriptor);

@@ -41,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private boolean isInViewMode = false;
+    private Index indexOfAFostererToView;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -182,10 +183,16 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private void handleView(Person personToView, Index targetIndex) {//mainwindow index
-        if (personListPanelPlaceholder.isVisible()) {
-            personProfile = new PersonProfile(personToView, targetIndex, this);
-//            personProfile = new PersonProfile(this);
+    private void handleView(Person personToView) {
+        if (personListPanelPlaceholder.isVisible() && personToView != null) {
+            personProfile = new PersonProfile(personToView, this);
+            personProfilePlaceholder.getChildren().add(personProfile.getRoot());
+            personProfilePlaceholder.setVisible(true);
+            personListPanelPlaceholder.setVisible(false);
+        }
+
+        if (personListPanelPlaceholder.isVisible() && personToView == null) {
+            personProfile = new PersonProfile(this);
             personProfilePlaceholder.getChildren().add(personProfile.getRoot());
             personProfilePlaceholder.setVisible(true);
             personListPanelPlaceholder.setVisible(false);
@@ -217,13 +224,20 @@ public class MainWindow extends UiPart<Stage> {
             if (personListPanelPlaceholder.isVisible()) {
                 commandResult = logic.execute(commandText);
             } else {
-                commandResult = logic.executeInView(commandText, personProfile.getPerson(), personProfile.getTargetIndex());
+                commandResult = logic.executeInView(commandText, personProfile.getPerson(), indexOfAFostererToView);
             }
 
             if (personProfilePlaceholder.isVisible() && commandResult == null) {
                 Optional<PersonProfile.Field> field = Arrays.stream(PersonProfile.Field.values())
-                        .filter(f -> f.getDisplayName().toLowerCase().contains(commandText.toLowerCase().trim()))
+                        .filter(f -> f.getDisplayName().toLowerCase().startsWith(commandText.toLowerCase().trim()))
                         .findFirst();
+
+                if (!field.isPresent()) {
+                    field = Arrays.stream(PersonProfile.Field.values())
+                            .filter(f -> f.getDisplayName().toLowerCase().contains(commandText.toLowerCase().trim()))
+                            .findFirst();
+                }
+
                 field.ifPresent(personProfile::setFocus);
             }
 
@@ -239,7 +253,8 @@ public class MainWindow extends UiPart<Stage> {
                 }
 
                 if (logic.getIsViewCommand()) {
-                    handleView(commandResult.getPersonToView(), commandResult.getTargetIndex());
+                    indexOfAFostererToView = commandResult.getTargetIndex();
+                    handleView(commandResult.getPersonToView());
                 }
 
                 if (logic.getIsViewExitCommand()) {

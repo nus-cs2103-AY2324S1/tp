@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -16,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AnimalType;
 import seedu.address.model.person.Availability;
@@ -106,7 +104,6 @@ public class PersonProfile extends UiPart<Region> {
     // region Final
     private final MainWindow mainWindow;
     private Person person;
-    private Index targetIndex;
     private final Map<Field, String> fields = new EnumMap<>(Field.class);
     private final Set<String> tags = new HashSet<>();
 
@@ -121,11 +118,10 @@ public class PersonProfile extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonProfile(Person person, Index targetIndex, MainWindow mainWindow) {
+    public PersonProfile(Person person, MainWindow mainWindow) {
         super(FXML);
         this.mainWindow = mainWindow;
         this.person = person;
-        this.targetIndex = targetIndex;
         fields.put(Field.NAME, person.getName().toString());
         fields.put(Field.PHONE, person.getPhone().toString());
         fields.put(Field.EMAIL, person.getEmail().toString());
@@ -367,9 +363,6 @@ public class PersonProfile extends UiPart<Region> {
      */
     public Person getPerson() {
         return person;
-    }
-    public Index getTargetIndex() {
-        return this.targetIndex;
     }
 
     /**

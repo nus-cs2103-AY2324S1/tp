@@ -7,7 +7,6 @@ import java.util.Objects;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.ui.PersonProfile;
 
 /**
  * Represents the result of a command execution.
@@ -90,7 +89,7 @@ public class CommandResult {
         return personToView;
     }
 
-    public Index getTargetIndex() {return targetIndex; }
+    public Index getTargetIndex() { return targetIndex; }
 
     @Override
     public boolean equals(Object other) {

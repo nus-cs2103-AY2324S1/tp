@@ -9,7 +9,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.ViewModeParser;
@@ -75,7 +76,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult executeInView(String commandText, Person newPerson, Index targetIndex) throws CommandException, ParseException {
+    public CommandResult executeInView(String commandText, Person newPerson, Index targetIndex)
+            throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command;
         CommandResult commandResult;
@@ -83,6 +85,7 @@ public class LogicManager implements Logic {
         command = viewModeParser.parseCommand(commandText, newPerson, targetIndex);
         commandResult = command.execute(model);
 
+        // when it is EditFieldCommand
         if (commandResult == null) {
             return null;
         }
@@ -90,13 +93,9 @@ public class LogicManager implements Logic {
         if (commandResult.isViewExit()) {
             isViewExitCommand = true;
             isViewCommand = false;
-            isEditFieldCommand = false;
-        } else if (command instanceof EditFieldCommand) {
-            isEditFieldCommand = true;
         } else {
             isViewCommand = false;
             isViewExitCommand = false;
-            isEditFieldCommand = false;
         }
 
         try {
@@ -141,9 +140,5 @@ public class LogicManager implements Logic {
 
     public boolean getIsViewExitCommand() {
         return isViewExitCommand;
-    }
-
-    public boolean getIsEditFieldCommand() {
-        return isEditFieldCommand;
     }
 }
