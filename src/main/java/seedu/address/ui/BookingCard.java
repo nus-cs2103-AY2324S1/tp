@@ -42,6 +42,8 @@ public class BookingCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
+    private Label flag;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -57,6 +59,11 @@ public class BookingCard extends UiPart<Region> {
         email.setText("Email: " + booking.getEmail().value);
         bookingPeriod.setText("Booking Period: " + booking.getBookingPeriod().value);
         remark.setText("Remark: " + booking.getRemark().value);
+        if (booking.isFlagged()) {
+            flag.setText("!");
+        } else {
+            flag.setText("");
+        }
         Tag tag = booking.getTags();
         Label tagLabel = new Label(tag.tagName);
         tags.getChildren().add(tagLabel);

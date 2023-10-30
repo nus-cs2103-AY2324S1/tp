@@ -111,6 +111,13 @@ public class Room {
                 || (other instanceof Room // instanceof handles nulls
                 && value.equals(((Room) other).value)); // state check
     }
+    /**
+     * Method to get the room number
+     * @return the room number
+     */
+    public int getRoomNumber() {
+        return this.value;
+    }
 
     /**
      * Returns a string representation of the room number.

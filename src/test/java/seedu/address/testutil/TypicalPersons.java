@@ -22,7 +22,6 @@ import seedu.address.model.booking.Booking;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-
     public static final Booking ALICE = new BookingBuilder().withRoom("1")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Alice Pauline")
@@ -63,6 +62,9 @@ public class TypicalPersons {
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").build();
+    static { // Set ALICE flag to true for use in test cases.
+        ALICE.flag();
+    }
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Booking AMY = new BookingBuilder().withRoom(VALID_ROOM_AMY)
