@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import javafx.application.Platform;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -35,8 +36,11 @@ public class ViewNotesCommand extends Command {
 
         Person person = model.getFilteredPersonList().get(index);
 
-        NotesWindow notesWindow = new NotesWindow(person);
-        notesWindow.show();
+        Platform.runLater(() -> {
+            NotesWindow notesWindow = new NotesWindow(person);
+            notesWindow.show();
+        });
+
 
         return new CommandResult(String.format(MESSAGE_VIEW_NOTES_SUCCESS, person.getName()));
     }
