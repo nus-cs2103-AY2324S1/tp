@@ -28,7 +28,6 @@ test {
     doFirst {
         if (System.getProperty("os.name").equals("Linux")) {
             exclude '**/ui/**'
-            exclude '**/logic/commands/ViewNotesCommandTest.java'
         }
     }
     useJUnitPlatform()
