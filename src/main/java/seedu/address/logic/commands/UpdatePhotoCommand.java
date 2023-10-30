@@ -71,7 +71,7 @@ public class UpdatePhotoCommand extends Command {
             Person editedPerson = copyPerson(personToEdit);
             model.setPerson(personToEdit, editedPerson);
         } catch (FileNotFoundException e) {
-            throw new CommandException("Invalid file path provided.");
+            throw new CommandException("Invalid file path provided");
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
