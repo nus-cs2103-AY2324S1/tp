@@ -314,7 +314,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-
+    @Override
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
