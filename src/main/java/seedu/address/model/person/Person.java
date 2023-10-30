@@ -97,7 +97,6 @@ public class Person {
             return AttendanceType.ON_LEAVE;
         }
         return this.getAttendanceToday();
-
     }
     /**
      * Adds a payroll to the payroll list of this person.

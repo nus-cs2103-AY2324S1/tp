@@ -34,7 +34,6 @@
       <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
       <Label fx:id="annualLeave" styleClass="cell_small_label" text="\$annualLeave" />
       <Label fx:id="joinDate" styleClass="cell_small_label" text="\$joinDate" />
-      <Label fx:id="attendance" styleClass="cell_small_label" text="\$attendance" />
 
     </VBox>
       <rowConstraints>

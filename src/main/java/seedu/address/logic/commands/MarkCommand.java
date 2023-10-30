@@ -55,8 +55,8 @@ public class MarkCommand extends Command {
 
 
     /**
-     * The constructor for DeleteCommand to take in name instead of index
-     * @param name The name of the employee to be deleted
+     * The constructor for MarkCommand to take in name instead of index
+     * @param name The name of the employee to be marked
      */
     public MarkCommand(NameContainsKeywordsPredicate name, AttendanceType attendanceType) {
         this.targetIndex = null;
@@ -64,11 +64,25 @@ public class MarkCommand extends Command {
         this.attendanceType = attendanceType;
     }
 
+    /**
+     * The constructor for MarkCommand to take in name instead of index
+     * @param index The index of the employee to be marked
+     */
+    public MarkCommand(Index index, AttendanceType attendanceType) {
+        this.targetIndex = index;
+        this.name = null;
+        this.attendanceType = attendanceType;
+    }
+
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return this.markByName(model);
-
+        if (this.targetIndex == null && this.name != null) {
+            return this.markByName(model);
+        } else {
+            return this.markByIndex(model);
+        }
     }
 
     @Override
@@ -139,6 +153,25 @@ public class MarkCommand extends Command {
         model.updateFilteredPersonList(this.name);
         return new CommandResult(String.format(MESSAGE_PERSONS_LISTED_OVERVIEW_MARK,
                 model.getFilteredPersonList().size()), indexes);
+    }
+
+    /**
+     * Marks the attendance of the employee identified by the name used in the displayed employee list.
+     * @param model {@code Model} which the command should operate on.
+     * @return A command result that contains the message to be displayed to the user.
+     * @throws CommandException If the name is invalid.
+     */
+    public CommandResult markByIndex(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person employeeToMark = lastShownList.get(targetIndex.getZeroBased());
+        Person markedEmployee = markEmployee(employeeToMark);
+
+        model.setPerson(employeeToMark, markedEmployee);
+        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, Messages.format(employeeToMark)));
     }
 
     /**

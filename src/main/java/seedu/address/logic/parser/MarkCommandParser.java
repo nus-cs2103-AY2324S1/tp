@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -29,22 +30,35 @@ public class MarkCommandParser implements Parser<MarkCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ATTENDANCE_TYPE);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ATTENDANCE_TYPE);
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
-            String[] nameKeywords = name.split("\\s+");
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
             AttendanceType attendanceType =
                     ParserUtil.parseAttendanceType(argMultimap.getValue(PREFIX_ATTENDANCE_TYPE).get());
+            return new MarkCommand(index, attendanceType);
+        } catch (ParseException e) {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                String name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()).toString();
+                String[] nameKeywords = name.split("\\s+");
+                AttendanceType attendanceType =
+                        ParserUtil.parseAttendanceType(argMultimap.getValue(PREFIX_ATTENDANCE_TYPE).get());
 
-            return new MarkCommand(
-                    new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
-                    attendanceType
-            );
+                return new MarkCommand(
+                        new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
+                        attendanceType
+                );
 
 
-        } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE_FOR_NAME));
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE_FOR_NAME));
+            }
+
         }
+
+
+
     }
 
 
