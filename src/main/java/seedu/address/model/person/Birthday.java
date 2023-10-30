@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.MonthDay;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  * Represents a Person's birthday in the address book.
@@ -25,7 +27,9 @@ public class Birthday {
 
     @Override
     public String toString() {
-        return birthday.toString();
+        String monthWord = birthday.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+        int day = birthday.getDayOfMonth();
+        return day + monthWord;
     }
 
     @Override
