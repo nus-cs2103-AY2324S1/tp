@@ -10,12 +10,6 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="salmon" height="30" width="50" />
         <Label fx:id="startTimeLabel" styleClass="cell_small_label" text="\$startTime"
                StackPane.alignment="BOTTOM_LEFT" />
-        <AnchorPane minHeight="30" prefHeight="30" prefWidth="50" HBox.hgrow="NEVER" VBox.vgrow="NEVER" StackPane.alignment="CENTER">
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.rightAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.leftAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.topAnchor="30"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.bottomAnchor="30"/>
-        </AnchorPane>
     </StackPane>
 
     <StackPane minHeight="30" prefHeight="30" VBox.vgrow="NEVER">
@@ -23,12 +17,6 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" />
         </HBox>
-        <AnchorPane minHeight="30" prefHeight="30" prefWidth="50" HBox.hgrow="NEVER" VBox.vgrow="NEVER" StackPane.alignment="CENTER">
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.rightAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.leftAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.topAnchor="30"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.bottomAnchor="30"/>
-        </AnchorPane>
         <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
     </StackPane>
 
@@ -37,12 +25,6 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" />
         </HBox>
-        <AnchorPane minHeight="30" prefHeight="30" prefWidth="50" HBox.hgrow="NEVER" VBox.vgrow="NEVER" StackPane.alignment="CENTER">
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.rightAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.leftAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.topAnchor="30"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.bottomAnchor="30"/>
-        </AnchorPane>
         <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
     </StackPane>
 
@@ -51,12 +33,6 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" />
         </HBox>
-        <AnchorPane minHeight="30" prefHeight="30" prefWidth="50" HBox.hgrow="NEVER" VBox.vgrow="NEVER" StackPane.alignment="CENTER">
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.rightAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.leftAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.topAnchor="30"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.bottomAnchor="30"/>
-        </AnchorPane>
         <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
     </StackPane>
 
@@ -65,12 +41,6 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" />
         </HBox>
-        <AnchorPane minHeight="30" prefHeight="30" prefWidth="50" HBox.hgrow="NEVER" VBox.vgrow="NEVER" StackPane.alignment="CENTER">
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.rightAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.leftAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.topAnchor="30"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.bottomAnchor="30"/>
-        </AnchorPane>
         <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
     </StackPane>
 
@@ -79,12 +49,6 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" />
         </HBox>
-        <AnchorPane minHeight="30" prefHeight="30" prefWidth="50" HBox.hgrow="NEVER" VBox.vgrow="NEVER" StackPane.alignment="CENTER">
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.rightAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.leftAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.topAnchor="30"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.bottomAnchor="30"/>
-        </AnchorPane>
         <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
     </StackPane>
 
@@ -93,12 +57,6 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" />
         </HBox>
-        <AnchorPane minHeight="30" prefHeight="30" prefWidth="50" HBox.hgrow="NEVER" VBox.vgrow="NEVER" StackPane.alignment="CENTER">
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.rightAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.leftAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.topAnchor="30"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.bottomAnchor="30"/>
-        </AnchorPane>
         <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
     </StackPane>
 
@@ -107,12 +65,6 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="antiquewhite" height="30" width="25" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="bisque" height="30" width="25" />
         </HBox>
-        <AnchorPane minHeight="30" prefHeight="30" prefWidth="50" HBox.hgrow="NEVER" VBox.vgrow="NEVER" StackPane.alignment="CENTER">
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.rightAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endY="30" AnchorPane.leftAnchor="50"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.topAnchor="30"/>
-            <Line fill="blanchedalmond" opacity="0.8" stroke="#635f50" endX="50" AnchorPane.bottomAnchor="30"/>
-        </AnchorPane>
         <Line fill="gainsboro" opacity="0.5" stroke="#86826a" strokeWidth="2" endY="30"/>
     </StackPane>
 </VBox>
