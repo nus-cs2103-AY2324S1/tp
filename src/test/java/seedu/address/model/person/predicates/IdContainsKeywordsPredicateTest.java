@@ -51,7 +51,7 @@ public class IdContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
+    public void test_nricContainsKeywords_returnsTrue() {
         // Exact Match
         IdContainsKeywordsPredicate predicate = new IdContainsKeywordsPredicate(FIRST_KEYWORD_LIST);
         assertTrue(predicate.test(new PersonBuilder().withNric(QUERY_NRIC_1).build()));
@@ -62,7 +62,7 @@ public class IdContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_nricDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         IdContainsKeywordsPredicate predicate = new IdContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withNric(QUERY_NRIC_1).build()));

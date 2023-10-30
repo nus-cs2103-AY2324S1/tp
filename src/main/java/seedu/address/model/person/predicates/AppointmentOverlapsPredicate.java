@@ -1,5 +1,6 @@
 package seedu.address.model.person.predicates;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 
 import java.util.Objects;
@@ -16,6 +17,7 @@ public class AppointmentOverlapsPredicate implements Predicate<Person> {
     private final Appointment query;
 
     public AppointmentOverlapsPredicate(Appointment query) {
+        requireNonNull(query);
         this.query = query;
     }
 
