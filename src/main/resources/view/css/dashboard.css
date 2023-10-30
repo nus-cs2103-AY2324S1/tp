@@ -1,0 +1,13 @@
+.charts {
+    -fx-padding: 20px;
+}
+
+.charts .label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.chart-pie-label {
+    -fx-fill: white;
+}

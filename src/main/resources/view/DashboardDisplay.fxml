@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@css/dashboard.css">
+    <VBox styleClass="charts">
+        <Label text="Interaction Statistics"/>
+        <PieChart fx:id="pieChart" legendVisible="false"/>
+    </VBox>
+</HBox>

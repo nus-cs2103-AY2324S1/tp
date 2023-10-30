@@ -15,30 +15,13 @@ public class DashboardCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the dashboard. ";
 
-    public static final String MESSAGE_SUCCESS = "DASHBOARD";
+    public static final String SHOWING_DASHBOARD_MESSAGE = "Showing dashboard";
 
     /**
      * Opens the dashboard for viewing.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        Dashboard dashboard = model.getDashboard();
-        dashboard.openDashboard();
-
-        int interactionCount = dashboard.getTotalInteraction();
-
-        double interestedPercentage = dashboard.interestedPercentage();
-        double notInterestedPercentage = dashboard.notInterestedPercentage();
-
-        // Might want to refactor this for flexibility. Left as is for now.
-        String message = "Total number of interactions: "
-                + interactionCount + "\n"
-                + "Percentage of interested interactions: "
-                + String.format("%.2f", interestedPercentage) + "%\n"
-                + "Percentage of not interested interactions: "
-                + String.format("%.2f", notInterestedPercentage) + "%\n";
-
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + message);
+        return new CommandResult(SHOWING_DASHBOARD_MESSAGE, true, false, false);
     }
 }
