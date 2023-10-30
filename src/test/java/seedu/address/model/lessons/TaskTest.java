@@ -82,7 +82,7 @@ public class TaskTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Task.class.getCanonicalName() + "{description=" + TASK_1.getDescription() + "}";
+        String expected = TASK_1.isDone() ? "+" : "-" + TASK_1.getDescription();
         assertEquals(expected, TASK_1.toString());
     }
 }
