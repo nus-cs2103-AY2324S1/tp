@@ -32,7 +32,7 @@ public class Group {
     public Group(String groupName) {
         requireNonNull(groupName);
         this.groupName = groupName;
-        this.groupRemark = new GroupRemark(" ");
+        this.groupRemark = new GroupRemark("");
     }
 
     public Group(String groupName, GroupRemark groupRemark) {

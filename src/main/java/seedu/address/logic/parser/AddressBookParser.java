@@ -84,6 +84,9 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListGroupCommand.COMMAND_WORD:
+            return new ListGroupCommand();
+
         case FindFreeTimeCommand.COMMAND_WORD:
             return new FindFreeTimeParser().parse(arguments);
 

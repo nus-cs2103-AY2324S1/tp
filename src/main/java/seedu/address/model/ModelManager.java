@@ -164,6 +164,8 @@ public class ModelManager implements Model {
         person.removeGroup(group);
         group.removePerson(person);
         this.unassignGroup(person, group);
+        //does not show
+//        System.out.println("hi");
         forceUpdateList();
         Pair<Person, Group> output = new Pair<>(person, group);
         return output;
