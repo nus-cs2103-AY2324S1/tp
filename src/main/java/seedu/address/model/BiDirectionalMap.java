@@ -33,6 +33,9 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
      * Returns the value associated with the key
      */
     public Name[] get(T t) {
+        if (!forwardMap.containsKey(t.getName())) {
+            return new Name[0];
+        }
         return forwardMap.get(t.getName()).toArray(new Name[0]);
     }
 
@@ -40,6 +43,9 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
      * Returns the key associated with the value
      */
     public Name[] getReversed(P p) {
+        if (!reverseMap.containsKey(p.getName())) {
+            return new Name[0];
+        }
         return reverseMap.get(p.getName()).toArray(new Name[0]);
     }
 
@@ -51,7 +57,9 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
         for (Name name : names) {
             reverseMap.get(name).remove(t.getName());
         }
-        forwardMap.remove(t.getName());
+        if (forwardMap.containsKey(t.getName())) {
+            forwardMap.get(t.getName()).clear();
+        }
     }
 
     /**
@@ -62,7 +70,9 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
         for (Name name : names) {
             forwardMap.get(name).remove(p.getName());
         }
-        reverseMap.remove(p.getName());
+        if (reverseMap.containsKey(p.getName())) {
+            reverseMap.get(p.getName()).clear();
+        }
     }
     /**
      * When there is a name change to the key, this method should be called to update the map
