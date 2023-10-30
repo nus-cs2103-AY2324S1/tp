@@ -1,15 +1,19 @@
 package seedu.address.model.reminder;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
@@ -27,22 +31,23 @@ public class Reminder {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private final Lead lead;
+    private final List<Interaction> interactions;
 
-    private final Date currentDate;
-    private final Date followUpDate;
+    private final LocalDate followUpDate;
 
     /**
      * Represents a Reminder in the list of reminders
      * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Reminder(Name name, Phone phone, Set<Tag> tags, Lead lead, Date currentDate) {
+    public Reminder(Name name, Phone phone, Set<Tag> tags,
+        List<Interaction> interactions, Lead lead, LocalDate currentDate) {
         this.name = name;
         this.phone = phone;
         this.tags.addAll(tags);
+        this.interactions = interactions;
         assert lead != null;
         this.lead = lead;
-        this.currentDate = currentDate;
-        this.followUpDate = this.getFollowUpDate(currentDate, lead);
+        this.followUpDate = this.getFollowUpDate(interactions, currentDate, lead);
     }
 
     public Name getName() {
@@ -65,23 +70,24 @@ public class Reminder {
         return lead;
     }
 
-    public Date getCurrentDate() {
-        return currentDate;
-    }
-
-    public Date getFollowUpDate() {
+    public LocalDate getFollowUpDate() {
         return followUpDate;
     }
 
-    private Date getFollowUpDate(Date currentDate, Lead lead) {
-        Calendar cal = Calendar.getInstance(); // creates calendar
-        cal.setTime(currentDate);
-        cal.add(Calendar.DAY_OF_YEAR, lead.getFollowUpPeriod() * DAYS_IN_WEEK);
-        return cal.getTime();
+    private LocalDate getFollowUpDate(
+            List<Interaction> interacitons, LocalDate currentDate, Lead lead) {
+        //Creating a copy of the interactions list is not necssary as we are sorting by dates
+        //However it is still defeinsive to do so to prevent side effects
+        List<Interaction> interactionsCopy = new ArrayList<>(interactions);
+        interactionsCopy.sort((a, b) -> b.getDate().compareTo(a.getDate()));
+        LocalDate lastInteractionDate = interactionsCopy.get(0).getDate();
+        int followUpPeriod = lead.getFollowUpPeriod();
+        return lastInteractionDate.plusWeeks(followUpPeriod);
     }
 
     public long getDueTime() {
-        return followUpDate.getTime() - Calendar.getInstance().getTime().getTime();
+        // return followUpDate.toEpochDay() - LocalDate.now().toEpochDay();
+        return ChronoUnit.MILLIS.between(LocalDateTime.now(), followUpDate.atStartOfDay());
     }
 
     /**
@@ -104,7 +110,6 @@ public class Reminder {
                 && phone.equals(otherReminder.phone)
                 && tags.equals(otherReminder.tags)
                 && lead.equals(otherReminder.lead)
-                && currentDate.equals(otherReminder.currentDate)
                 && followUpDate.equals(otherReminder.followUpDate);
     }
 
@@ -115,7 +120,6 @@ public class Reminder {
                 .add("phone", phone)
                 .add("tags", tags)
                 .add("lead", lead)
-                .add("currentDate", currentDate)
                 .add("followUpDate", followUpDate)
                 .toString();
     }

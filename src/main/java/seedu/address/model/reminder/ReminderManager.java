@@ -12,7 +12,7 @@ import seedu.address.model.Model;
  * Represents a thread that manages the reminders.
  */
 public class ReminderManager extends Thread {
-    private static final long FREQUENCY = 30; // in minutes
+    private static final long FREQUENCY = 1; // in minutes
 
     private final Model model;
     private final UniqueReminderList reminderList = UniqueReminderList.getInstance();

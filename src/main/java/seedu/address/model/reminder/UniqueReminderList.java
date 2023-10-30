@@ -3,7 +3,7 @@ package seedu.address.model.reminder;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -76,8 +76,8 @@ public class UniqueReminderList implements Iterable<Reminder> {
         if (person.getLead() == null) {
             return;
         }
-        Reminder toAdd = new Reminder(person.getName(), person.getPhone(), person.getTags(), person.getLead(),
-                interaction.getDate());
+        Reminder toAdd = new Reminder(person.getName(), person.getPhone(), person.getTags(),
+                person.getInteractions(), person.getLead(), interaction.getDate());
         if (contains(toAdd)) {
             throw new DuplicateReminderException();
         }
@@ -113,11 +113,11 @@ public class UniqueReminderList implements Iterable<Reminder> {
      * @param date The date that which is used to retrieve the list of reminders.
      * @return the list of reminders mapped from the given date.
      */
-    public ObservableList<Reminder> getRemindersAfterDate(Date date) {
+    public ObservableList<Reminder> getRemindersAfterDate(LocalDate date) {
         ObservableList<Reminder> reminderList = FXCollections.observableArrayList();
         List<Reminder> retrievedReminders = personToReminderMap.entrySet()
                 .stream()
-                .filter(a->a.getValue().getFollowUpDate().after(date))
+                .filter(a->a.getValue().getFollowUpDate().isAfter(date))
                 .map(x -> x.getValue()).collect(Collectors.toList());
         if (retrievedReminders == null) {
             return reminderList;
