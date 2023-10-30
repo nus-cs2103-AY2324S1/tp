@@ -156,12 +156,12 @@ This section describes some noteworthy details on how certain features are imple
 To find a suitable replacement TA, the user needs to know the availability of the TAs.
 As such we need to have classes that represent the time and availability.
 
-`TimeInterval` is used to represent a period of time. 
+`TimeInterval` is used to represent a period of time.
 A `TimeInterval` is only considered valid if the end time is after the start time.
 
 
 `FreeTime` is used to represent a TA's availability in the week.
-We assume that TAs are only available during weekdays, so each `FreeTime` consist of 5 
+We assume that TAs are only available during weekdays, so each `FreeTime` consist of 5
 `TimeInterval`s where each `TimeInterval` represents a day in the week.
 
 The following class diagram illustrates the structure of `FreeTime`.
@@ -178,7 +178,7 @@ Valid input to `FreeTime#getDay(day)` are integers from [1,5] where 1 represents
 
 #### Implementation
 
-The finding TA feature allows users to search for a specific TA, using various filters 
+The finding TA feature allows users to search for a specific TA, using various filters
 such as name, course and free time. With this feature, users can easily search for TAs
 that fall under a certain set of filters.
 
@@ -195,14 +195,14 @@ The following sequence diagram displays how the finding TA feature is implemente
 #### Implementation
 
 The teaching course feature allows users to enter the specific course they are teaching
-and store the information in `UserPrefs`. With this feature, users can easily browse 
+and store the information in `UserPrefs`. With this feature, users can easily browse
 through the list of TAs teaching under them.
 
-To key in the command, type `teach t/courseName`. This will set the default teaching 
-course for the users and save it in UserPrefs. 
+To key in the command, type `teach t/courseName`. This will set the default teaching
+course for the users and save it in UserPrefs.
 
-Hence, the next time users log into TAManager, the page will automatically display the 
-TAs teaching under the users' course. 
+Hence, the next time users log into TAManager, the page will automatically display the
+TAs teaching under the users' course.
 
 The following sequence diagram displays how Teaching course Feature is implemented.
 
@@ -219,7 +219,7 @@ filtered target users.
 
 To key in the command, type `hour 10`. This will increase the working hours of all TAs in the
 current list by 10, while others not showing in the list will not be changed. Similarly, users
-can type `hour -10` and hours for TAs in the current users will be decreased by 10. The updated 
+can type `hour -10` and hours for TAs in the current users will be decreased by 10. The updated
 hour must be within the valid range(0 - 9999).
 
 The following sequence diagram displays how updating hour Feature is implemented.
@@ -251,7 +251,7 @@ The following sequence diagram displays how updating hour Feature is implemented
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 * Fast access to TA contact details and availability
 * Track teaching hours and claimable hours conveniently
 
@@ -324,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 * 3b. The given contact information is invalid.
   * 3b1. AddressBook shows an error message.
-    
+  
     Use case resumes at step 2.
 
 **Use case: View TAs of specific course**
