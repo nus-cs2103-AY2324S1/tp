@@ -18,7 +18,7 @@ public class AvatarTest {
 
     private static final String DEFAULT_PATH = "/images/default_photo.png";
     private final String safePath = Paths.get("").toAbsolutePath()
-            + "\\src\\main\\resources\\images\\test_photo.png";
+            + "/src/main/resources/images/test_photo.png";
 
     @Test
     public void constructor_default() {

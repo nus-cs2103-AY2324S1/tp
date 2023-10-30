@@ -3,15 +3,12 @@ package seedu.address.model.person;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javafx.scene.image.Image;
 
 /**
  * Represents displayed photo of a contact in the address book.
  */
 public class Avatar {
-    
     private static final String DEFAULT_PATH = "/images/default_photo.png";
 
     private String path = DEFAULT_PATH;

@@ -17,7 +17,7 @@ import seedu.address.model.ModelManager;
 public class UpdatePhotoCommandTest {
 
     private final String safePath = Paths.get("").toAbsolutePath()
-            + "\\src\\main\\resources\\images\\test_photo.png";
+            + "/src/main/resources/images/test_photo.png";
 
     @Test
     public void execute_noIndexCommand_exceptionThrown() {
