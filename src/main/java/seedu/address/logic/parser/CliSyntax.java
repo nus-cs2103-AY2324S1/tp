@@ -18,5 +18,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TO = new Prefix("to/");
     public static final Prefix PREFIX_FREE_TIME = new Prefix("ft/");
     public static final Prefix PREFIX_HOUR = new Prefix("h/");
+    public static final Prefix PREFIX_DAY = new Prefix("d/");
 
 }

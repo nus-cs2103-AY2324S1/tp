@@ -126,4 +126,16 @@ public class FreeTime {
         return true;
     }
 
+    /**
+     * Updates the availability for a specific day of the week with a new time interval.
+     *
+     * @param dayOfWeek The day of the week to update availability for (1 for Sunday, 2 for Monday, etc.).
+     * @param updatedInterval The new time interval to set for the specified day.
+     * @return A new FreeTime object with the updated availability for the specified day.
+     */
+    public FreeTime updateAvailabilityForDay(int dayOfWeek, TimeInterval updatedInterval) {
+        ArrayList<TimeInterval> copiedIntervals = new ArrayList<>(intervals);
+        copiedIntervals.set(dayOfWeek - 1, updatedInterval);
+        return new FreeTime(copiedIntervals);
+    }
 }

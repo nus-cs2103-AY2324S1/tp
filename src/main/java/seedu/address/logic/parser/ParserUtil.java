@@ -228,4 +228,20 @@ public class ParserUtil {
             throw new ParseException(Hour.MESSAGE_CONSTRAINTS);
         }
     }
+
+    /**
+     * Parses a collection of {@code String from} and {@code String to} into a {@code TimeInterval}.
+     */
+    public static TimeInterval parseTimeInterval(String from, String to) throws DateTimeParseException, ParseException {
+        try {
+            LocalTime fromTime = LocalTime.parse(from);
+            LocalTime toTime = LocalTime.parse(to);
+            if (!TimeInterval.isValidTimeInterval(fromTime, toTime)) {
+                throw new ParseException(TimeInterval.MESSAGE_CONSTRAINTS);
+            }
+            return new TimeInterval(fromTime, toTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(FreeTime.MESSAGE_CONSTRAINTS);
+        }
+    }
 }
