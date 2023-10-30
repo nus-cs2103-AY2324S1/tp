@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.address.model.employee.exceptions.EmployeeNotFoundException;
+import seedu.address.model.employee.exceptions.ManagerNotFoundException;
+import seedu.address.model.employee.exceptions.SubordinatePresentException;
 
 /**
  * A list of employees that enforces uniqueness between its elements and does not allow nulls.
@@ -38,13 +40,43 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     }
 
     /**
+     * Returns true if all the managers of the given argument is within the list.
+     */
+    public boolean containsManager(Employee toCheck) {
+        requireNonNull(toCheck);
+        return toCheck.getManagersInCharge().stream().allMatch(x ->
+                internalList.stream().anyMatch(y ->
+                        y.hasSameEmployeeName(x) && y.isManager()));
+    }
+
+    /**
+     * Checks if the provided employee has subordinates managed by this employee.
+     *
+     * @param toCheck The employee for whom subordinates are to be checked.
+     * @return {@code true} if the provided 'toCheck' employee is a manager and has subordinates
+     *         managed by this employee, {@code false} otherwise. Returns {@code false} if 'toCheck' is not
+     *         a manager or if 'toCheck' is null.
+     */
+    public boolean hasSubordinates(Employee toCheck) {
+        requireNonNull(toCheck);
+        if (!toCheck.isManager()) {
+            return false;
+        }
+        return internalList.stream().anyMatch(x -> x.getManagersInCharge().contains(toCheck.getName()));
+    }
+
+    /**
      * Adds an employee to the list.
      * The employee must not already exist in the list.
+     * The managers of the employee are not
      */
     public void add(Employee toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateEmployeeException();
+        }
+        if (!containsManager(toAdd)) {
+            throw new ManagerNotFoundException();
         }
         internalList.add(toAdd);
     }
@@ -65,6 +97,9 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         if (!target.isSameEmployee(editedEmployee) && contains(editedEmployee)) {
             throw new DuplicateEmployeeException();
         }
+        if (!containsManager(editedEmployee)) {
+            throw new ManagerNotFoundException();
+        }
 
         internalList.set(index, editedEmployee);
     }
@@ -77,6 +112,9 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new EmployeeNotFoundException();
+        }
+        if (hasSubordinates(toRemove)) {
+            throw new SubordinatePresentException();
         }
     }
 
@@ -94,6 +132,7 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         if (!employeesAreUnique(people)) {
             throw new DuplicateEmployeeException();
         }
+
 
         internalList.setAll(people);
     }

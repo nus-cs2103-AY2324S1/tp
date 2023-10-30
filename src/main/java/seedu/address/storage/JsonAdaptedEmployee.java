@@ -17,6 +17,7 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
 
 /**
@@ -32,6 +33,8 @@ class JsonAdaptedEmployee {
     private final String address;
     private final String salary;
     private final String leave;
+    private final String role;
+    private final List<JsonAdaptedManagerInCharge> managersInCharge = new ArrayList<>();
     private final List<JsonAdaptedDepartment> departments = new ArrayList<>();
 
     /**
@@ -41,6 +44,8 @@ class JsonAdaptedEmployee {
     public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                @JsonProperty("email") String email, @JsonProperty("address") String address,
                                @JsonProperty("salary") String salary, @JsonProperty("leave") String leave,
+                               @JsonProperty("role") String role,
+                               @JsonProperty("managersInCharge") List<JsonAdaptedManagerInCharge> managersInCharge,
                                @JsonProperty("departments") List<JsonAdaptedDepartment> departments) {
         this.name = name;
         this.phone = phone;
@@ -48,6 +53,10 @@ class JsonAdaptedEmployee {
         this.address = address;
         this.salary = salary;
         this.leave = leave;
+        this.role = role;
+        if (managersInCharge != null) {
+            this.managersInCharge.addAll(managersInCharge);
+        }
         if (departments != null) {
             this.departments.addAll(departments);
         }
@@ -63,6 +72,10 @@ class JsonAdaptedEmployee {
         address = source.getAddress().value;
         salary = source.getSalary().value;
         leave = source.getLeave().value;
+        role = source.getRole().toString();
+        managersInCharge.addAll(source.getManagersInCharge().stream()
+                .map(JsonAdaptedManagerInCharge::new)
+                .collect(Collectors.toList()));
         departments.addAll(source.getDepartments().stream()
                 .map(JsonAdaptedDepartment::new)
                 .collect(Collectors.toList()));
@@ -77,6 +90,10 @@ class JsonAdaptedEmployee {
         final List<Department> employeeDepartments = new ArrayList<>();
         for (JsonAdaptedDepartment department : departments) {
             employeeDepartments.add(department.toModelType());
+        }
+        final List<Name> managers = new ArrayList<>();
+        for (JsonAdaptedManagerInCharge managerInCharge : managersInCharge) {
+            managers.add(managerInCharge.toModelType());
         }
 
         if (name == null) {
@@ -127,8 +144,17 @@ class JsonAdaptedEmployee {
         }
         final Leave modelLeave = new Leave(leave);
 
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+        final Role modelRole = new Role(role);
+        final Set<Name> modelManagersInCharge = new HashSet<>(managers);
         final Set<Department> modelDepartments = new HashSet<>(employeeDepartments);
-        return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelSalary, modelLeave, modelDepartments);
+        return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelSalary, modelLeave,
+                 modelRole, modelManagersInCharge, modelDepartments);
     }
 
 }

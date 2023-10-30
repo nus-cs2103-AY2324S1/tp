@@ -5,8 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MANAGER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 
@@ -30,6 +32,7 @@ import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.Leave;
 import seedu.address.model.employee.Name;
 import seedu.address.model.employee.Phone;
+import seedu.address.model.employee.Role;
 import seedu.address.model.employee.Salary;
 
 /**
@@ -49,6 +52,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_LEAVE + "LEAVE] "
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_MANAGER + "MANAGER]...\n"
             + "[" + PREFIX_DEPARTMENT + "DEPARTMENT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -108,11 +113,14 @@ public class EditCommand extends Command {
         Address updatedAddress = editEmployeeDescriptor.getAddress().orElse(employeeToEdit.getAddress());
         Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
         Leave updatedLeave = editEmployeeDescriptor.getLeave().orElse(employeeToEdit.getLeave());
+        Role updatedRole = editEmployeeDescriptor.getRole().orElse(employeeToEdit.getRole());
+        Set<Name> updatedManagersInCharge = editEmployeeDescriptor
+                .getManagersInCharge().orElse(employeeToEdit.getManagersInCharge());
         Set<Department> updatedDepartments = editEmployeeDescriptor
                 .getDepartments().orElse(employeeToEdit.getDepartments());
 
         return new Employee(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedSalary, updatedLeave, updatedDepartments);
+                updatedSalary, updatedLeave, updatedRole, updatedManagersInCharge, updatedDepartments);
     }
 
     @Override
@@ -150,6 +158,8 @@ public class EditCommand extends Command {
         private Address address;
         private Salary salary;
         private Leave leave;
+        private Role role;
+        private Set<Name> managersInCharge;
         private Set<Department> departments;
 
         public EditEmployeeDescriptor() {}
@@ -223,6 +233,32 @@ public class EditCommand extends Command {
             return Optional.ofNullable(leave);
         }
 
+        public void setRole(Role role) {
+            this.role = role;
+        }
+
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
+        }
+
+        /**
+         * Sets {@code ManagersInCharge} to this object's {@code ManagersInCharge}.
+         * A defensive copy of {@code ManagersInCharge} is used internally.
+         */
+        public void setManagersInCharge(Set<Name> ManagersInCharge) {
+            this.managersInCharge = (ManagersInCharge != null) ? new HashSet<>(ManagersInCharge) : null;
+        }
+
+        /**
+         * Returns an unmodifiable name set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code managersInCharge} is null.
+         */
+        public Optional<Set<Name>> getManagersInCharge() {
+            return (managersInCharge != null) ?
+                    Optional.of(Collections.unmodifiableSet(managersInCharge)) : Optional.empty();
+        }
+
         /**
          * Sets {@code departments} to this object's {@code departments}.
          * A defensive copy of {@code departments} is used internally.
@@ -258,6 +294,8 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditEmployeeDescriptor.address)
                     && Objects.equals(salary, otherEditEmployeeDescriptor.salary)
                     && Objects.equals(leave, otherEditEmployeeDescriptor.leave)
+                    && Objects.equals(role, otherEditEmployeeDescriptor.role)
+                    && Objects.equals(managersInCharge, otherEditEmployeeDescriptor.managersInCharge)
                     && Objects.equals(departments, otherEditEmployeeDescriptor.departments);
         }
 
@@ -270,6 +308,8 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("salary", salary)
                     .add("leave", leave)
+                    .add("role", role)
+                    .add("managersInCharge", managersInCharge)
                     .add("departments", departments)
                     .toString();
         }
