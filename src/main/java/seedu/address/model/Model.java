@@ -62,23 +62,7 @@ public interface Model {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /**
-     * Returns the list of fields of {@code person} that exists in the address book.
-     */
-    boolean[] usedFields(Person person);
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    boolean hasPerson(Person person);
-
-    boolean hasPerson(Name personName);
-
-    /**
-     * Deletes the given person.
-     * The person must exist in the address book.
-     */
-    Person deletePerson(String personName) throws CommandException;
+    //=========== Person functions ===========================================================================
 
     /**
      * Adds the given person.
@@ -87,48 +71,17 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Deletes the given person.
+     * The person must exist in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    Person deletePerson(String personName) throws CommandException;
 
     /**
-     * Returns an unmodifiable view of the filtered person list
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    ObservableList<Person> getFilteredPersonList();
+    boolean hasPerson(Person person);
 
-    /**
-     * Returns an unmodifiable view of the filtered group list
-     */
-    ObservableList<Group> getFilteredGroupList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
-
-
-    /**
-     * Returns true if a group with the same identity as {@code group} exists in the address book.
-     */
-    public boolean hasGroup(Group group);
-
-    public Group findGroup(String groupName) throws CommandException;
-
-    /**
-     * Adds a group to the address book.
-     * The group must not already exist in the address book.
-     */
-    public void addGroup(Group g);
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public Group deleteGroup(String groupName) throws CommandException;
+    boolean hasPerson(Name personName);
 
     /**
      * Assign person to group and return corresponding person and group object in a pair
@@ -147,14 +100,59 @@ public interface Model {
      * @return Pair representing Person and Group object of interest
      */
     Pair<Person, Group> ungroupPerson(String personName, String groupName) throws CommandException;
-    Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException;
+
     void addTimeToPerson(Name toAddPerson, ArrayList<TimeInterval> toAddTime) throws CommandException;
     TimeIntervalList getTimeFromPerson(Name personName) throws CommandException;
-
-    void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException;
     void deleteTimeFromPerson(Name personName, ArrayList<TimeInterval> toDeleteTime) throws CommandException;
 
+    //=========== Group functions ============================================================================
+
+    /**
+     * Adds a group to the address book.
+     * The group must not already exist in the address book.
+     */
+    public void addGroup(Group g);
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public Group deleteGroup(String groupName) throws CommandException;
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasGroup(Group group);
+
+    /**
+     * Returns group if a group with the same name exists in the address book.
+     */
+    public Group findGroup(String groupName) throws CommandException;
+
+    Group addGroupRemark(String groupName, GroupRemark groupRemark) throws CommandException;
+
+    void addTimeToGroup(Group toAdd, ArrayList<TimeInterval> toAddTime) throws CommandException;
+
     void deleteTimeFromGroup(Group group, ArrayList<TimeInterval> toDeleteTime) throws CommandException;
+
     TimeIntervalList getTimeFromGroup(Group group) throws CommandException;
+
+    //=========== Filtered Person List Accessors =============================================================
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
+    ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Returns an unmodifiable view of the filtered group list
+     */
+    ObservableList<Group> getFilteredGroupList();
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPersonList(Predicate<Person> predicate);
 
 }
