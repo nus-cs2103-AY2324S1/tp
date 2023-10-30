@@ -11,6 +11,9 @@ import seedu.address.logic.commands.CompareCalendarCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.RuntimeParseException;
 
+/**
+ * Parses input arguments and creates a new CompareCalendarCommand object.
+ */
 public class CompareCalendarCommandParser implements Parser<CompareCalendarCommand> {
     private static final String splitRegex = "\\s+";
     @Override

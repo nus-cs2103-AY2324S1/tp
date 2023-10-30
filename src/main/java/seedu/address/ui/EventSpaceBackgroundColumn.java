@@ -74,11 +74,19 @@ public class EventSpaceBackgroundColumn extends UiPart<Region> {
         startTimeLabel.setText(startTime.format(TIME_FORMATTER));
     }
 
+    /**
+     * Sets up the rectangles and divider line for each day cell in the column.
+     */
     private void setColumnRectangles() {
         Stream.<StackPane>generate(this::constructDayColumnCell).limit(NUMBER_OF_DAY_CELLS)
                 .forEachOrdered(cell -> columnContainer.getChildren().add(cell));
     }
 
+    /**
+     * Constructs a day column cell with rectangles and a divider line.
+     *
+     * @return StackPane representing a day column cell.
+     */
     private StackPane constructDayColumnCell() {
         StackPane cellContainer = new StackPane();
         VBox.setVgrow(cellContainer, Priority.NEVER);

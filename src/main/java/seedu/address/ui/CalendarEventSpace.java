@@ -71,6 +71,12 @@ public class CalendarEventSpace extends UiPart<Region> {
         return defaultEventSpace;
     }
 
+    /**
+     * Creates the EventSpace layout for comparison calendar UI.
+     *
+     * @param calendar ReadOnlyCalendar generated from comparison to be displayed in the event space.
+     * @return CalendarEventSpace object with comparison layout.
+     */
     public static CalendarEventSpace createComparisonCalendarEventSpace(ReadOnlyCalendar calendar) {
         CalendarEventSpace comparisonEventSpace = new CalendarEventSpace(calendar);
         comparisonEventSpace.updateStartAndEnd();
@@ -105,6 +111,9 @@ public class CalendarEventSpace extends UiPart<Region> {
         });
     }
 
+    /**
+     * Adds a listener to the event list for the comparison calendar to update the event space when events change.
+     */
     private void addListenerToComparisonCalendarEventList() {
         eventList.addListener((ListChangeListener<Event>) c -> {
             clear();
@@ -172,6 +181,9 @@ public class CalendarEventSpace extends UiPart<Region> {
         });
     }
 
+    /**
+     * Adds solid event cards to the event space for comparison calendar.
+     */
     private void addSolidEventCards() {
         eventList.forEach(event -> {
             StackPane eventNode = generateSolidEventCard(event);
@@ -208,6 +220,12 @@ public class CalendarEventSpace extends UiPart<Region> {
         return cardHolder;
     }
 
+    /**
+     * Generates a solid event card (no description and single color) for the given event.
+     *
+     * @param event The event for which to create a card.
+     * @return A StackPane containing the solid event card.
+     */
     private StackPane generateSolidEventCard(Event event) {
         double widthMultiplier = (double) event.getDurationOfEvent().toMinutes() / NUMBER_OF_MINUTES_IN_AN_HOUR;
         StackPane cardHolder = new StackPane();
@@ -240,5 +258,4 @@ public class CalendarEventSpace extends UiPart<Region> {
         return ((double) event.getMinutesFromTimeToStartTime(calendarStartTime)
                 / NUMBER_OF_MINUTES_IN_HALF_HOUR) * NODE_WIDTH_PER_HALF_HOUR;
     }
-
 }

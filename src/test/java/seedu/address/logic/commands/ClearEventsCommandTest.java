@@ -228,6 +228,16 @@ class ClearEventsCommandTest {
         }
 
         @Override
+        public ReadOnlyCalendar getComparisonCalendar() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setComparisonCalendar(ReadOnlyCalendar eventList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Event> getEventList() {
             throw new AssertionError("This method should not be called.");
         }

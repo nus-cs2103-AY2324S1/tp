@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.person.Person;
 
+/**
+ * Command for comparing calendars of user and persons in address book.
+ */
 public class CompareCalendarCommand extends Command {
     public static final String COMMAND_WORD = "compare";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": compare calendars with specified people index. "
@@ -22,6 +25,11 @@ public class CompareCalendarCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Displaying available time periods";
     private final List<Index> indexList;
 
+    /**
+     * Create a new CompareCalendarCommand with a list of index of persons to compare with.
+     *
+     * @param indexList list of index of persons to compare with.
+     */
     public CompareCalendarCommand(List<Index> indexList) {
         this.indexList = indexList;
     }
