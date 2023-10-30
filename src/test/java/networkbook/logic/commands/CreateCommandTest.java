@@ -17,12 +17,14 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
+import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
 import networkbook.model.NetworkBook;
 import networkbook.model.ReadOnlyNetworkBook;
 import networkbook.model.ReadOnlyUserPrefs;
+import networkbook.model.person.Link;
 import networkbook.model.person.Person;
 import networkbook.testutil.PersonBuilder;
 import networkbook.testutil.TypicalPersons;
@@ -168,6 +170,16 @@ public class CreateCommandTest {
 
         @Override
         public void updateSortedPersonList(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isValidLinkIndex(Index personIndex, Index linkIndex) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Link openLink(Index personIndex, Index linkIndex) {
             throw new AssertionError("This method should not be called.");
         }
     }
