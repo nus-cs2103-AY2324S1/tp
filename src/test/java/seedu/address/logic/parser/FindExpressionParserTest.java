@@ -140,4 +140,55 @@ public class FindExpressionParserTest {
                 .toPredicate().test(person));
     }
 
+    @Test
+    public void conditionNodeToPredicate_validBalanceField_evaluatesCorrectly() throws ParseException {
+        Person you_owe = new Person(
+                new Name("Alice"),
+                new Phone("12345"),
+                new Email("alice@a.com"),
+                new Address("123, alice street"),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.of(new Telegram("@aliceeee")),
+                Set.of(new Tag("friends")),
+                Optional.of(999),
+                FXCollections.observableArrayList(new ArrayList<>()),
+                new Balance(-500)
+        );
+
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BALANCE, "-1.12")
+                .toPredicate().test(you_owe));
+
+        // equal and with dollar sign
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BALANCE, "-$5.0")
+                .toPredicate().test(you_owe));
+
+        Person owes_you = new Person(
+                new Name("Alice"),
+                new Phone("12345"),
+                new Email("alice@a.com"),
+                new Address("123, alice street"),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.of(new Telegram("@aliceeee")),
+                Set.of(new Tag("friends")),
+                Optional.of(999),
+                FXCollections.observableArrayList(new ArrayList<>()),
+                new Balance(50000)
+        );
+
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BALANCE, "5.2")
+                .toPredicate().test(owes_you));
+
+        // equal and with dollar sign
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.BALANCE, "$50.00")
+                .toPredicate().test(owes_you));
+    }
+
 }
