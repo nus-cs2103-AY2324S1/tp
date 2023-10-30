@@ -69,7 +69,7 @@ public class Link implements Identifiable<Link> {
      * to prevent java from opening from local file.
      */
     public String toRecognisableWebUrl() {
-        if (this.value.startsWith("http") || this.value.startsWith("www")) {
+        if (this.value.startsWith("http")) {
             return this.value;
         } else {
             return "https://" + this.value;
