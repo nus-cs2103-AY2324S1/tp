@@ -13,7 +13,5 @@
         <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
     </VBox>
 
-    <VBox fx:id="clientProfilePanelPlaceholder" styleClass="pane">
-
-    </VBox>
+    <VBox fx:id="clientProfilePanelPlaceholder" styleClass="pane" />
 </HBox>

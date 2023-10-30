@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -16,23 +15,21 @@ import seedu.address.model.person.Person;
 /**
  * The area for displaying content.
  */
-public class ContentDisplay extends UiPart<Region> {
-    private static final String FXML = "ContentDisplay.fxml";
-    private final Logger logger = LogsCenter.getLogger(ContentDisplay.class);
+public class ClientDisplay extends UiPart<Region> {
+    private static final String FXML = "ClientDisplay.fxml";
+    private final Logger logger = LogsCenter.getLogger(ClientDisplay.class);
 
     private ClientProfilePanel clientProfilePanel;
 
     @FXML
     private ListView<Person> personListView;
     @FXML
-    private StackPane contentDisplayPlaceholder;
-    @FXML
     private VBox clientProfilePanelPlaceholder;
 
     /**
-     * Creates a {@code ContentDisplay} with the given {@code personList} and {@code selectedPerson}.
+     * Creates a {@code ClientDisplay} with the given {@code personList} and {@code selectedPerson}.
      */
-    public ContentDisplay(ObservableList<Person> personList, SimpleObjectProperty<Person> selectedPerson) {
+    public ClientDisplay(ObservableList<Person> personList, SimpleObjectProperty<Person> selectedPerson) {
         super(FXML);
 
         personListView.setItems(personList);
@@ -41,19 +38,28 @@ public class ContentDisplay extends UiPart<Region> {
             selectedPerson.setValue(newValue);
         });
 
+        viewPerson(selectedPerson.getValue());
+
         selectedPerson.addListener((observable, oldValue, newValue) -> {
             clientProfilePanelPlaceholder.getChildren().clear();
 
-            if (newValue == null) {
-                return;
-            }
-
-            clientProfilePanel = new ClientProfilePanel(newValue);
-            clientProfilePanelPlaceholder.getChildren().add(clientProfilePanel.getRoot());
-
-            // set focus within the list if the change is from a `view` command
-            personListView.getSelectionModel().select(newValue);
+            viewPerson(newValue);
         });
+    }
+
+    /**
+     * Displays the profile of the given {@code person}.
+     */
+    void viewPerson(Person person) {
+        if (person == null) {
+            return;
+        }
+
+        clientProfilePanel = new ClientProfilePanel(person);
+        clientProfilePanelPlaceholder.getChildren().add(clientProfilePanel.getRoot());
+
+        // set focus within the list if the change is from a `view` command
+        personListView.getSelectionModel().select(person);
     }
 
     /**

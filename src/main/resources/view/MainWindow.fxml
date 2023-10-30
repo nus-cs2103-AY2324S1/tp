@@ -45,7 +45,7 @@
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="ALWAYS" fx:id="contentDisplayPlaceholder" styleClass="pane" />
+        <StackPane fx:id="content" VBox.vgrow="ALWAYS" styleClass="pane" />
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
