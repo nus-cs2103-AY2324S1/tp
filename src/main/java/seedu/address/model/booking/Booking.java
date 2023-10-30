@@ -1,9 +1,6 @@
 package seedu.address.model.booking;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.booking.exceptions.BookingPeriodNotFoundException;
@@ -31,7 +28,6 @@ public class Booking {
     // Data fields
     private final BookingPeriod bookingPeriod;
     private final Remark remark;
-    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructs a Booking with the specified details.
@@ -41,15 +37,13 @@ public class Booking {
      * @param name The name of the person making the booking.
      * @param phone The phone number of the person making the booking.
      * @param email The email of the person making the booking.
-     * @param tags The tags associated with the booking.
      * @throws RoomNotFoundException If the room is null.
      * @throws BookingPeriodNotFoundException If the booking period is null.
      * @throws NameNotFoundException If the name is null.
      * @throws PhoneNotFoundException If the phone is null.
      * @throws EmailNotFoundException If the email is null.
      */
-    public Booking(Room room, BookingPeriod bookingPeriod, Name name, Phone phone, Email email, Remark remark,
-                   Set<Tag> tags) {
+    public Booking(Room room, BookingPeriod bookingPeriod, Name name, Phone phone, Email email, Remark remark) {
         if (room == null) {
             throw new RoomNotFoundException();
         }
@@ -72,7 +66,6 @@ public class Booking {
         this.phone = phone;
         this.email = email;
         this.remark = remark;
-        this.tags.addAll(tags);
     }
 
     public Room getRoom() {
@@ -103,8 +96,8 @@ public class Booking {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(this.tags);
+    public Tag getTags() {
+        return this.room.tag;
     }
 
     /**
@@ -135,8 +128,7 @@ public class Booking {
                     && this.name.equals(otherBooking.name)
                     && this.phone.equals(otherBooking.phone)
                     && this.email.equals(otherBooking.email)
-                    && this.remark.equals(otherBooking.remark)
-                    && this.tags.equals(otherBooking.tags);
+                    && this.remark.equals(otherBooking.remark);
         }
         return false;
     }
@@ -144,8 +136,7 @@ public class Booking {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.room, this.bookingPeriod, this.name, this.phone, this.email, this.remark,
-                this.tags);
+        return Objects.hash(this.room, this.bookingPeriod, this.name, this.phone, this.email, this.remark);
     }
 
     @Override
@@ -157,7 +148,7 @@ public class Booking {
                 .add("phone", this.phone)
                 .add("email", this.email)
                 .add("remark", this.remark)
-                .add("tags", this.tags)
+                .add("tags", this.getTags())
                 .toString();
     }
 }

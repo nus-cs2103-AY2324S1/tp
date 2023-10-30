@@ -22,9 +22,6 @@ PrefixCompletion -> PrefixCompletion : getNextCompletion(currentInput)
 PrefixCompletion --> CommandBox : prefix & example
 deactivate PrefixCompletion
 
-CommandBox -> CommandBox : Append prefix and example to user's input
-CommandBox -> CommandBox : Highlight example for replacement
-
 [<--CommandBox
 deactivate CommandBox
 

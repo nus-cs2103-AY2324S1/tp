@@ -249,6 +249,17 @@ The following sequence diagram provides a visual representation of the prefix au
     - Pros: Less intrusive. Clearly communicates the message to the user.
     - Cons: Potential to clutter the UI if not managed gracefully.
 
+### Room Tags
+#### Implementation
+Tag is a required field when inputting the add command. 
+This tags the booking with the type of room that the guest has requested.
+Tag takes in an enum class RoomTypes.
+
+#### Design Considerations:
+Room types are usually fixed in hotels so an enum class was chosen.
+Implementing this as tags rather than a variable in room allows for more flexibility as hotels can adjust the number of
+rooms available for each type depending on their size.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**

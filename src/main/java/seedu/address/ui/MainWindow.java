@@ -179,10 +179,6 @@ public class MainWindow extends UiPart<Stage> {
         roomPieChartPanelPlaceholder.getChildren().add(roomPieChart.getRoot());
     }
 
-    public BookingListPanel getPersonListPanel() {
-        return bookingListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *

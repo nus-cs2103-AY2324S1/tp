@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditRoomDescriptor;
 import seedu.address.model.booking.Booking;
@@ -13,7 +9,6 @@ import seedu.address.model.booking.Room;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -41,7 +36,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(booking.getEmail());
         descriptor.setBookingPeriod(booking.getBookingPeriod());
         descriptor.setRemark(booking.getRemark());
-        descriptor.setTags(booking.getTags());
     }
 
 
@@ -89,16 +83,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withRemark(String remark) {
         descriptor.setRemark(new Remark(remark));
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
-     */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
         return this;
     }
 

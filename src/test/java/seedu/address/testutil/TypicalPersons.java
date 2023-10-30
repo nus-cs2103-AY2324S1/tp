@@ -10,8 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,14 +27,12 @@ public class TypicalPersons {
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Alice Pauline")
             .withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withTags("friends").build();
+            .withPhone("94351253").build();
     public static final Booking BENSON = new BookingBuilder().withRoom("2")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withRemark("Overran Hotel Supplies")
-            .withTags("owesMoney", "friends").build();
+            .withRemark("Overran Hotel Supplies").build();
     public static final Booking CARL = new BookingBuilder().withRoom("3")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Carl Kurz").withPhone("95352563")
@@ -44,8 +40,7 @@ public class TypicalPersons {
     public static final Booking DANIEL = new BookingBuilder().withRoom("4")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Daniel Meier")
-            .withPhone("87652533").withEmail("cornelia@example.com")
-            .withTags("friends").build();
+            .withPhone("87652533").withEmail("cornelia@example.com").build();
     public static final Booking ELLE = new BookingBuilder().withRoom("5")
             .withBookingPeriod("2023-01-01 08:00 to 2023-01-02 12:00")
             .withName("Elle Meyer").withPhone("9482224")
@@ -73,13 +68,11 @@ public class TypicalPersons {
     public static final Booking AMY = new BookingBuilder().withRoom(VALID_ROOM_AMY)
             .withBookingPeriod(VALID_BOOKING_PERIOD_AMY)
             .withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
     public static final Booking BOB = new BookingBuilder().withRoom(VALID_ROOM_BOB)
             .withBookingPeriod(VALID_BOOKING_PERIOD_BOB)
             .withName(VALID_NAME_BOB)
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
 
     private TypicalPersons() {} // prevents instantiation
 

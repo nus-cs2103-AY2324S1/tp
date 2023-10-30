@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOOKING_PERIOD_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -48,7 +47,6 @@ public class AddressBookTest {
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
         Booking editedAlice = new BookingBuilder(ALICE).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Booking> newBookings = Arrays.asList(ALICE, editedAlice);
         BookingsBookStub newData = new BookingsBookStub(newBookings);
@@ -76,7 +74,6 @@ public class AddressBookTest {
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addBooking(ALICE);
         Booking editedAlice = new BookingBuilder(ALICE).withBookingPeriod(VALID_BOOKING_PERIOD_BOB)
-                .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasBooking(editedAlice));
     }
