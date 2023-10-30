@@ -273,9 +273,12 @@ public class EventPeriod implements Comparable<EventPeriod> {
      *
      * @return duration of the EventPeriod stored in a LocalTime.
      */
-    public LocalTime getDuration() {
-        return LocalTime.of(getEndTime().getHour() - getStartTime().getHour(),
-                getEndTime().getMinute() - getStartTime().getMinute());
+    public Duration getDuration() {
+        Duration periodDuration = Duration.between(start, end);
+        if (end.toLocalTime().equals(MAX_TIME_OF_DAY)) {
+            periodDuration = periodDuration.plusMinutes(1);
+        }
+        return periodDuration;
     }
 
     /**
