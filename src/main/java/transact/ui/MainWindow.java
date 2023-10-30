@@ -131,6 +131,7 @@ public class MainWindow extends UiPart<Stage> {
         VBox.setVgrow(commandBox.getRoot(), Priority.NEVER);
 
         resultDisplay = new ResultDisplay();
+        VBox.setVgrow(resultDisplay.getRoot(), Priority.ALWAYS);
 
         bottomBar.getChildren().addAll(commandBox.getRoot(), resultDisplay.getRoot());
     }
