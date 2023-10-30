@@ -148,7 +148,8 @@ public class MainWindow extends UiPart<Stage> {
             content.getChildren().add(new DashboardDisplay(dashboard).getRoot());
         } else {
             dashboard.closeDashboard();
-            content.getChildren().add(new ClientDisplay(logic.getFilteredPersonList(), logic.getSelectedPerson()).getRoot());
+            content.getChildren()
+                   .add(new ClientDisplay(logic.getFilteredPersonList(), logic.getSelectedPerson()).getRoot());
         }
     }
 
@@ -173,7 +174,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
-        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(), (int) primaryStage.getX(), (int) primaryStage.getY());
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                                                  (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();

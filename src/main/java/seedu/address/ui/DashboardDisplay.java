@@ -7,11 +7,14 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.layout.Region;
 import seedu.address.model.Dashboard;
 
+/**
+ * The Dashboard Display.
+ */
 public class DashboardDisplay extends UiPart<Region> {
     private static final String FXML = "DashboardDisplay.fxml";
 
     @FXML
-    PieChart pieChart;
+    private PieChart pieChart;
 
     /**
      * Creates a {@code DashboardDisplay} using data from the given {@code dashboard}.
@@ -23,9 +26,7 @@ public class DashboardDisplay extends UiPart<Region> {
         double notInterested = dashboard.notInterestedPercentage();
 
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList(
-                new PieChart.Data("Interested", interested),
-                new PieChart.Data("Not Interested", notInterested)
-        );
+                new PieChart.Data("Interested", interested), new PieChart.Data("Not Interested", notInterested));
 
         pieChart.setData(data);
     }
