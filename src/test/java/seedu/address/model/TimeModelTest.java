@@ -1,16 +1,17 @@
 package seedu.address.model;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.interview.Interview;
-import seedu.address.model.interview.UniqueInterviewList;
-import seedu.address.testutil.TypicalApplicants;
-import seedu.address.testutil.TypicalInterviews;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.UniqueInterviewList;
+import seedu.address.testutil.TypicalApplicants;
+import seedu.address.testutil.TypicalInterviews;
 
 public class TimeModelTest {
     /*

@@ -1,13 +1,19 @@
 package seedu.address.model;
 
-import seedu.address.model.interview.Interview;
-import seedu.address.model.interview.UniqueInterviewList;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import seedu.address.model.interview.Interview;
+import seedu.address.model.interview.UniqueInterviewList;
+
+/**
+ * Class which stores methods related to time, but are not related
+ * to parsing dates.
+ *
+ * @author Tan Kerway
+ */
 public class TimeModel {
     /**
      * Returns the interviews which clash with the current interview
