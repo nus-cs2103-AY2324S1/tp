@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class InterviewAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "interviewAdd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an interview to the application. "
         + "Parameters: INDEX (must be a positive integer)\n"

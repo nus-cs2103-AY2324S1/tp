@@ -2,7 +2,6 @@ package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.application.logic.parser.CliSyntax.*;
-import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_ADDRESS;
 
 import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.logic.Messages;
