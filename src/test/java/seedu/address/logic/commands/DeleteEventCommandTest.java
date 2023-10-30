@@ -12,6 +12,7 @@ import static seedu.address.testutil.EventBuilder.DEFAULT_START_TIME_STRING;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EventBuilder;
@@ -74,7 +76,7 @@ class DeleteEventCommandTest {
         // null -> returns false
         assertFalse(deleteFirstEventCommand.equals(null));
 
-        // different person -> returns false
+        // different time -> returns false
         assertFalse(deleteFirstEventCommand.equals(deleteSecondEventCommand));
     }
 
@@ -155,6 +157,10 @@ class DeleteEventCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getCurrentWeekEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -187,6 +193,16 @@ class DeleteEventCommandTest {
         @Override
 
         public Event findEventAt(LocalDateTime dateTime) throws EventNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Event> eventsInRange(EventPeriod range) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEventsInRange(EventPeriod range) {
             throw new AssertionError("This method should not be called.");
         }
 

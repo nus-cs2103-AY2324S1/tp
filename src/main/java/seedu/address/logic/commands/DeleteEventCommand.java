@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 
 import java.time.LocalDateTime;
 
@@ -21,7 +20,7 @@ public class DeleteEventCommand extends Command {
             + "Parameters: "
             + "ANY TIME WITHIN EVENT DURATION \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_EVENT_START_DATE_TIME + "2024-01-01 12:00 ";
+            + "2024-01-01 12:00 ";
 
     public static final String MESSAGE_SUCCESS = "Event deleted: %1$s";
     public static final String MESSAGE_NO_EVENT = "There is no valid existing event at this timing.";

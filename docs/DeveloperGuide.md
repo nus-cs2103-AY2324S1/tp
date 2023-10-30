@@ -325,6 +325,7 @@ respectively.
 The adding of tasks is facilitated by the `model#addTask()` method.
 The method adds a task to the `TaskList` object which itself is an attribute of the `ModelManager` object by
 calling a similar method `Model::addTask()`.
+
 These methods take in a `Description` and `Optional(Deadline)` object and finds the method within the `TaskList` object,
 then adds the `Task` object to the TaskList.
 Given below is an example usage scenario of the command.
@@ -796,11 +797,6 @@ Use case ends.
 
 - 1a. User uses the wrong delimiter or makes a spelling mistake, or provides incorrect number of arguments
     - UniMate displays a message to show a helper message outlining the correct syntax and available sort options
-
-**Extensions**
-
-- 1a. User uses the wrong delimiter or makes a spelling mistake
-    - UniMate displays a message to show a helper message outlining the available sort options
 
 ### Non-Functional Requirements
 

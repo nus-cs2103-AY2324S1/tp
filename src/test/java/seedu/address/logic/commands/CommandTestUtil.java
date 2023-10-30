@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -46,6 +49,9 @@ public class CommandTestUtil {
     public static final String VALID_END_DATE_EARLIER = "2023-01-01 09:00";
     public static final String VALID_START_DATE_LATER = "2024-01-01 08:00";
     public static final String VALID_END_DATE_LATER = "2024-01-01 09:00";
+    public static final String EVENT_DESC_SLEEP = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION;
+    public static final String START_DATE_DESC_EARLIER = " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE_EARLIER;
+    public static final String END_DATE_DESC_EARLIER = " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE_EARLIER;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -64,6 +70,9 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_DESCRIPTION = ""; // empty string not allowed.
     public static final String INVALID_DATE = "2023-13-35 16:80"; // No such time and date exists
+    public static final String INVALID_EVENT = " " + PREFIX_EVENT_DESCRIPTION + INVALID_DESCRIPTION
+            + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE_EARLIER
+            + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE_EARLIER;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
