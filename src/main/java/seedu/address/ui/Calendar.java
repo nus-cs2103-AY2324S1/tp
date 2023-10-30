@@ -25,20 +25,6 @@ public class Calendar extends UiPart<Region> {
     private ObservableList<GroupTimeContainer> dayTaskSun = FXCollections.observableArrayList();
     private ObservableList<ObservableList<GroupTimeContainer>> day = FXCollections.observableArrayList();
 
-
-    private void convert() {
-        groupList.iterator().forEachRemaining(group -> {
-            group.getTime().iterator().forEachRemaining(timeInterval -> {
-                int startDay = timeInterval.getStartTimeDay().getValue() - 1;
-                ObservableList<GroupTimeContainer> curDay = day.get(startDay);
-                curDay.add(new GroupTimeContainer(group, timeInterval));
-            });
-        });
-    }
-
-
-
-
     @FXML
     private ListView<ObservableList<GroupTimeContainer>> dayListView;
 
@@ -52,7 +38,7 @@ public class Calendar extends UiPart<Region> {
         day.add(dayTaskFri); //fri
         day.add(dayTaskSat); //sat
         day.add(dayTaskSun); //sun
-        convert();
+        convertGrpListToContainer();
         dayListView.setItems(day);
         dayListView.setCellFactory(listView -> new DayListViewCell());
     }
@@ -70,22 +56,14 @@ public class Calendar extends UiPart<Region> {
         }
     }
 
-    class GroupTimeContainer {
-        private final Group group;
-
-        private final TimeInterval timeInterval;
-
-        public GroupTimeContainer(Group group, TimeInterval timeInterval) {
-            this.group = group;
-            this.timeInterval = timeInterval;
-        }
-
-        public Group getGroup() {
-            return group;
-        }
-
-        public TimeInterval getTimeInterval() {
-            return timeInterval;
-        }
+    private void convertGrpListToContainer() {
+        groupList.iterator().forEachRemaining(group -> {
+            group.getTime().iterator().forEachRemaining(timeInterval -> {
+                int startDay = timeInterval.getStartTimeDay().getValue() - 1;
+                ObservableList<GroupTimeContainer> curDay = day.get(startDay);
+                curDay.add(new GroupTimeContainer(group, timeInterval));
+            });
+        });
     }
+
 }
