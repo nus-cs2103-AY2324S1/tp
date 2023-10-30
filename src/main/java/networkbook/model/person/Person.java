@@ -28,6 +28,7 @@ public class Person implements Identifiable<Person> {
     private static final String LINK_OPENING_MESSAGE = "Opening %s on %s";
     private static final ThrowingIoExceptionConsumer<Link> LINK_OPENER = link -> {
         String url = link.toRecognisableWebUrl();
+        // Code adapted from https://www.geekyhacker.com/open-a-url-in-the-default-browser-in-java/
         if (System.getProperty("os.name").startsWith("Windows")) {
             LOGGER.info(String.format(LINK_OPENING_MESSAGE, url, "Windows"));
             Desktop.getDesktop().browse(URI.create(url));
@@ -45,6 +46,7 @@ public class Person implements Identifiable<Person> {
                     return;
                 }
             }
+            LOGGER.warning("No browser found.");
         } else {
             LOGGER.warning(String.format("Unrecognised OS: %s", System.getProperty("os.name")));
         }

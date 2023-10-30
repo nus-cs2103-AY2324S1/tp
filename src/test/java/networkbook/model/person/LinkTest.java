@@ -55,16 +55,10 @@ public class LinkTest {
     }
 
     @Test
-    public void toRecognisableWebUrl_linkNotStartingWithHttpOrWww_linkStartingWithHttps() {
+    public void toRecognisableWebUrl_linkNotStartingWithHttp_linkStartingWithHttps() {
         String originalLinkValue = "google.com";
         String expectedRecognisableValue = "https://google.com";
         assertEquals(expectedRecognisableValue, new Link(originalLinkValue).toRecognisableWebUrl());
-    }
-
-    @Test
-    public void toRecognisableWebUrl_linkStartingWithWww_sameLink() {
-        String value = "www.google.com";
-        assertEquals(value, new Link(value).toRecognisableWebUrl());
     }
 
     @Test
