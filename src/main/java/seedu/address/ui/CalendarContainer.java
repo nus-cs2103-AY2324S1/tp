@@ -1,9 +1,13 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.UiConstants.POPUP_CALENDAR_HEIGHT;
+import static seedu.address.ui.UiConstants.POPUP_CALENDAR_WIDTH;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import seedu.address.model.calendar.ReadOnlyCalendar;
 
 /**
@@ -33,8 +37,28 @@ public class CalendarContainer extends UiPart<Region> {
     public CalendarContainer(ReadOnlyCalendar calendar) {
         super(FXML);
         this.calendar = calendar;
+    }
 
-        fillCalendar();
+    public static CalendarContainer createDefaultCalendar(ReadOnlyCalendar calendar) {
+        CalendarContainer defaultCalendarContainer = new CalendarContainer(calendar);
+        defaultCalendarContainer.fillCalendar();
+        return defaultCalendarContainer;
+    }
+
+    private static CalendarContainer createComparisonCalendar(ReadOnlyCalendar calendar) {
+        CalendarContainer comparisonCalendarContainer = new CalendarContainer(calendar);
+        comparisonCalendarContainer.fillComparisonCalendar();
+        return comparisonCalendarContainer;
+    }
+
+    public static void displayComparisonCalendar(ReadOnlyCalendar calendar) {
+        Stage comparisonCalendarStage = new Stage();
+        comparisonCalendarStage.setResizable(false);
+        comparisonCalendarStage.setMinHeight(POPUP_CALENDAR_HEIGHT);
+        comparisonCalendarStage.setMinWidth(POPUP_CALENDAR_WIDTH);
+        CalendarContainer root = CalendarContainer.createComparisonCalendar(calendar);
+        comparisonCalendarStage.setScene(new Scene(root.getRoot()));
+        comparisonCalendarStage.show();
     }
 
     /**
@@ -43,10 +67,12 @@ public class CalendarContainer extends UiPart<Region> {
     public void fillCalendar() {
         calendarLabelPlaceholder.getChildren().add(new CalendarLabelColumn().getRoot());
         eventSpaceBackground.getChildren().add(new EventSpaceBackground(calendar).getRoot());
-        eventSpace.getChildren().add(new CalendarEventSpace(calendar).getRoot());
+        eventSpace.getChildren().add(CalendarEventSpace.createDefaultEventSpace(calendar).getRoot());
     }
 
-    public void setComparisonStyle() {
-
+    public void fillComparisonCalendar() {
+        calendarLabelPlaceholder.getChildren().add(new CalendarLabelColumn().getRoot());
+        eventSpaceBackground.getChildren().add(new EventSpaceBackground(calendar).getRoot());
+        eventSpace.getChildren().add(CalendarEventSpace.createComparisonCalendarEventSpace(calendar).getRoot());
     }
 }

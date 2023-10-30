@@ -132,8 +132,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        CalendarContainer calendarContainer = new CalendarContainer(logic.getCalendar());
-        calendarPlaceholder.getChildren().add(calendarContainer.getRoot());
+        calendarPlaceholder.getChildren().add(CalendarContainer.createDefaultCalendar(logic.getCalendar()).getRoot());
     }
 
     /**
@@ -177,7 +176,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleComparison() {
-
+        CalendarContainer.displayComparisonCalendar(logic.getComparisonCalendar());
     }
 
     @FXML
