@@ -129,4 +129,6 @@ public interface Model {
      * {@code musician} must not already exist in the band.
      */
     void addMusicianToBand(int addInto, int toAdd);
+
+    void removeMusicianFromBand(int bandIndex, int musicianIndex);
 }

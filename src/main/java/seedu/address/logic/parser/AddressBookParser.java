@@ -13,6 +13,7 @@ import seedu.address.logic.commands.band.AddBandCommand;
 import seedu.address.logic.commands.band.AddMusicianToBandCommand;
 import seedu.address.logic.commands.band.DeleteBandCommand;
 import seedu.address.logic.commands.band.FindBandCommand;
+import seedu.address.logic.commands.band.RemoveMusicianFromBandCommand;
 import seedu.address.logic.commands.general.ClearCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
@@ -24,6 +25,7 @@ import seedu.address.logic.commands.musician.ListCommand;
 import seedu.address.logic.parser.band.AddBandCommandParser;
 import seedu.address.logic.parser.band.AddMusicianToBandCommandParser;
 import seedu.address.logic.parser.band.DeleteBandCommandParser;
+import seedu.address.logic.parser.band.RemoveMusicianFromBandCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.musician.AddCommandParser;
 import seedu.address.logic.parser.musician.DeleteCommandParser;
@@ -96,6 +98,9 @@ public class AddressBookParser {
 
         case AddMusicianToBandCommand.COMMAND_WORD:
             return new AddMusicianToBandCommandParser().parse(arguments);
+
+        case RemoveMusicianFromBandCommand.COMMAND_WORD:
+            return new RemoveMusicianFromBandCommandParser().parse(arguments);
 
         case DeleteBandCommand.COMMAND_WORD:
             return new DeleteBandCommandParser().parse(arguments);
