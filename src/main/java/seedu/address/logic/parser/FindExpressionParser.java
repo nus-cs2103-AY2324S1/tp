@@ -358,11 +358,12 @@ public class FindExpressionParser {
 
                 } catch (NumberFormatException | ParseException e) {
                     throw new ParseException("Invalid balance format: " + Balance.MESSAGE_CONSTRAINTS
-                            + "\nAdditionally, when finding with a balance field, you can use" +
-                            " a negative sign to find negative balances.");
+                            + "\nAdditionally, when finding with a balance field, you can use"
+                            + " a negative sign to find negative balances.");
                 }
+            default:
+                throw new AssertionError("Invalid field type!");
             }
-            throw new AssertionError("Invalid field type!");
         }
     }
 }
