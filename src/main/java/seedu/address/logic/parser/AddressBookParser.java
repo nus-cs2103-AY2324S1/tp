@@ -54,8 +54,8 @@ public class AddressBookParser {
         case DeleteTimeCommand.COMMAND_WORD:
             return new DeleteTimeCommandParser().parse(arguments);
 
-        case CreateGroupCommand.COMMAND_WORD:
-            return new CreateGroupParser().parse(arguments);
+        case AddGroupCommand.COMMAND_WORD:
+            return new AddGroupParser().parse(arguments);
 
         case GroupPersonCommand.COMMAND_WORD:
              return new GroupPersonParser().parse(arguments);

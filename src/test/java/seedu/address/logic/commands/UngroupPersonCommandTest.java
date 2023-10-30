@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -48,7 +49,7 @@ public class UngroupPersonCommandTest {
 //        Group groupToUngroup = pairToUngroup.getValue();
         UngroupPersonCommand ungroupPersonCommand = new UngroupPersonCommand(PERSONNAME_INCOMPLETE_EXAMPLE, GROUPNAME_EXAMPLE);
 
-        assertCommandFailure(ungroupPersonCommand, model, UngroupPersonCommand.MESSAGE_NO_PERSON_WITH_NAME_FOUND);
+        assertCommandFailure(ungroupPersonCommand, model, Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND);
     }
 
     @Test
