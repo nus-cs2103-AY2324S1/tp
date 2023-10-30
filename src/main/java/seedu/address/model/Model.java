@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.course.Course;
 import seedu.address.model.person.Person;
 
 /**
@@ -43,6 +44,17 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Returns the course the user is teaching.
+     *
+     */
+    String getTeaching();
+
+    /**
+     * Sets the course the user is teaching.
+     */
+    void setTeaching(Course course);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
