@@ -17,9 +17,9 @@ import seedu.address.model.student.Student;
 import seedu.address.testutil.TypicalStudents;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for MarkAllCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for MarkPresentAllCommand.
  */
-public class MarkAllCommandTest {
+public class MarkPresentAllCommandTest {
 
     private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
 
@@ -27,31 +27,31 @@ public class MarkAllCommandTest {
     public void execute_success() {
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
 
-        MarkAllCommand markAllCommand = new MarkAllCommand(i);
+        MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
 
-        String expectedMessage = MarkAllCommand.MESSAGE_MARK_SUCCESS;
+        String expectedMessage = MarkPresentAllCommand.MESSAGE_MARK_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         for (Student s : TypicalStudents.getTypicalStudents()) {
             expectedModel.setStudent(s, s.markPresent(i));
         }
 
-        assertCommandSuccess(markAllCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(markPresentAllCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT + 1);
 
-        MarkAllCommand markAllCommand = new MarkAllCommand(i);
+        MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
 
-        assertCommandFailure(markAllCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX);
+        assertCommandFailure(markPresentAllCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX);
     }
 
     @Test
     public void equals() {
-        MarkAllCommand markForFirstTutorial = new MarkAllCommand(Index.fromOneBased(1));
-        MarkAllCommand markForSecondTutorial = new MarkAllCommand(Index.fromOneBased(2));
+        MarkPresentAllCommand markForFirstTutorial = new MarkPresentAllCommand(Index.fromOneBased(1));
+        MarkPresentAllCommand markForSecondTutorial = new MarkPresentAllCommand(Index.fromOneBased(2));
 
         // same object -> returns true
         assertTrue(markForFirstTutorial.equals(markForFirstTutorial));
