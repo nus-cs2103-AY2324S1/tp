@@ -120,6 +120,15 @@ public class Student {
     }
 
     /**
+     * Marks the specific tutorial as absent.
+     */
+    public Student markAbsent(Index tutNum) {
+        return new Student(this.name, this.phone, this.email,
+                this.studentNumber, this.classDetails.markAbsent(tutNum), this.tags, this.comment);
+    }
+
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

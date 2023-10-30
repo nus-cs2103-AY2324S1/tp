@@ -15,10 +15,10 @@ import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexExcepti
 /**
  * Marks a student's attendance.
  */
-public class MarkPresentCommand extends Command {
-    public static final String COMMAND_WORD = "mark-pre";
-    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark the student as present.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student as present.\n"
+public class MarkAbsentCommand extends Command {
+    public static final String COMMAND_WORD = "mark-abs";
+    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark the student as absent.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student as absent.\n"
             + "Parameters: INDEX "
             + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -27,12 +27,12 @@ public class MarkPresentCommand extends Command {
     private final StudentNumber targetStudentNumber;
 
     /**
-     * Constructs a MarkPresentCommand object.
+     * Constructs a MarkAbsentCommand object.
      *
      * @param index of the class.
      * @param targetStudentNumber of the student.
      */
-    public MarkPresentCommand(Index index, StudentNumber targetStudentNumber) {
+    public MarkAbsentCommand(Index index, StudentNumber targetStudentNumber) {
         requireAllNonNull(index, targetStudentNumber);
 
         this.index = index;
@@ -50,7 +50,7 @@ public class MarkPresentCommand extends Command {
         Student student = model.getStudent(targetStudentNumber);
 
         try {
-            model.setStudent(student, student.markPresent(this.index));
+            model.setStudent(student, student.markAbsent(this.index));
         } catch (InvalidTutorialIndexException e) {
             throw new CommandException(e.getMessage());
         }
@@ -69,11 +69,11 @@ public class MarkPresentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkPresentCommand)) {
+        if (!(other instanceof MarkAbsentCommand)) {
             return false;
         }
 
-        MarkPresentCommand e = (MarkPresentCommand) other;
+        MarkAbsentCommand e = (MarkAbsentCommand) other;
         return index.equals(e.index)
                 && targetStudentNumber.equals(e.targetStudentNumber);
     }
