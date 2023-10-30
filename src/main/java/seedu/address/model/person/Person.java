@@ -107,6 +107,10 @@ public class Person {
         return interactions;
     }
 
+    public Interaction getLastInteraction() {
+        return interactions.get(interactions.size() - 1);
+    }
+
     /**
      * Returns a filtered list of {@code Interaction} that matches the given predicate.
      */

@@ -105,6 +105,20 @@ public class UniqueReminderList implements Iterable<Reminder> {
         return reminderList;
     }
 
+    /**
+     * Resets the internal list of reminders using the given list of persons.
+     *
+     * @param personList The persons from which the reminders are to be produced.
+     */
+    public void setReminders(ObservableList<Person> personList) {
+        for (Person person : personList) {
+            Interaction interaction = person.getLastInteraction();
+            if (interaction != null) {
+                this.add(person, interaction);
+            }
+        }
+    }
+
     public Iterator<Reminder> iterator() {
         return internalList.iterator();
     }
