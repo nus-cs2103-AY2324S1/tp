@@ -71,8 +71,13 @@ public class CommandStringStash {
     public void addCommandString(String commandInputString) {
         assert commandInputString != null;
 
+        // remove existing command String from stack if it already exists as it will be replaced by new command
+        if (cmdStringStack.contains(commandInputString)) {
+            cmdStringStack.remove(commandInputString);
+        }
+
         // evict least recently added command string if necessary
-        if (this.cmdStringStack.size() == 20) {
+        if (cmdStringStack.size() == 20) {
             cmdStringStack.remove(0);
         }
 

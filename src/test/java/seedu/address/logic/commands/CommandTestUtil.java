@@ -143,6 +143,7 @@ public class CommandTestUtil {
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
      */
+    @SuppressWarnings("checkstyle:EmptyCatchBlock")
     public static void assertCommandFailure(Command command, Model actualModel,
                                             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -151,6 +152,7 @@ public class CommandTestUtil {
                 actualModel.getShortcutSettings());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
