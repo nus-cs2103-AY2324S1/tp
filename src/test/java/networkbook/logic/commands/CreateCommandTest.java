@@ -139,11 +139,11 @@ public class CreateCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public void undoNetworkBook() {
+        public void undoNetworkBook() throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public void redoNetworkBook() {
+        public void redoNetworkBook() throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
