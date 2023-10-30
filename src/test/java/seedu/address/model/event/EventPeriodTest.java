@@ -11,6 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATE
 import static seedu.address.model.event.EventPeriod.isValidPeriod;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
@@ -18,6 +21,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.EventPeriodBuilder;
 
 public class EventPeriodTest {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final String VALID_END_DATE_ONE_MINUTE_BEFORE_MIDNIGHT = "2023-01-01 23:59";
     @Test
     public void constructorTest() {
         assertThrows(DateTimeParseException.class, () ->
@@ -130,6 +135,24 @@ public class EventPeriodTest {
         assertFalse(validEventPeriod.equals(laterStartEventPeriod));
 
         assertFalse(validEventPeriod.equals(earlierEndEventPeriod));
+    }
+
+    @Test
+    public void getDurationTest() {
+        EventPeriod validEventPeriod = new EventPeriodBuilder()
+                .changeStartAndEnd(VALID_START_DATE_EARLIER, VALID_END_DATE_EARLIER).build();
+        EventPeriod fullDayPeriod = new EventPeriodBuilder()
+                .changeStartAndEnd(VALID_START_DATE_EARLIER, VALID_END_DATE_ONE_MINUTE_BEFORE_MIDNIGHT).build();
+
+        LocalDateTime start = LocalDateTime.parse(VALID_START_DATE_EARLIER, DATE_TIME_FORMATTER);
+        LocalDateTime end = LocalDateTime.parse(VALID_END_DATE_EARLIER, DATE_TIME_FORMATTER);
+        LocalDateTime endOneMinuteBeforeMidnight = LocalDateTime
+                .parse(VALID_END_DATE_ONE_MINUTE_BEFORE_MIDNIGHT, DATE_TIME_FORMATTER);
+
+        assertEquals(validEventPeriod.getDuration(), Duration.between(start, end));
+
+        assertEquals(fullDayPeriod.getDuration(),
+                Duration.between(start, endOneMinuteBeforeMidnight).plusMinutes(1));
     }
 
     @Test
