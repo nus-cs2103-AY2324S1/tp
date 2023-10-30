@@ -44,7 +44,7 @@ e.g. in `add n/NAME c/CONTACT_NUMBER a/ADDRESS`, `NAME`, `CONTACT_NUMBER` and `A
 which can be used as `add n/John Doe c/98172645 a/311, Clementi Ave 2, #02-25`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/RISK_LEVEL]` can be used as `n/John Doe t/medium` or as `n/John Doe`.
+  e.g `n/NAME [r/RISK_LEVEL]` can be used as `n/John Doe r/medium` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -67,7 +67,7 @@ Format: `help`
 
 Adds a student with his/her relevant details.
 
-Format: `add n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS [t/RISK_LEVEL]`
+Format: `add n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 
 **Parameters**:
 1. Name
@@ -81,7 +81,7 @@ Format: `add n/NAME c/CONTACT_NUMBER a/HOME_ADDRESS [t/RISK_LEVEL]`
 
 Examples:
 * `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
-* `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08 t/medium`
+* `add n/Sally c/94149785 a/Woodlands Street 11 Blk 888 #08-08 r/medium`
 
 ### Adding notes for a student: `note`
 
@@ -191,7 +191,7 @@ _Details coming soon ..._
 
 | Action                    | Format, Examples                                                                                                         |
 |---------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| **Add**                   | `add n/NAME c/PHONE_NUMBER a/ADDRESS [t/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
+| **Add**                   | `add n/NAME c/PHONE_NUMBER a/ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07` |
 | **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                      |                                                         |
 | **Schedule**              | `schedule d/DESCRIPTION s/DATETIME n/NAME_OF_STUDENT`<br> e.g., `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon`   |
 | **Cancel**                | `cancel INDEX`<br> e.g., `cancel 3`                                                                                      |
