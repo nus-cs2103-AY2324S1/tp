@@ -1,13 +1,19 @@
 package seedu.address.model;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.course.Course;
-import seedu.address.model.course.UniqueCourseList;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseData;
+import seedu.address.model.course.UniqueCourseList;
 
+
+/**
+ * Wraps all courses at in the courses.json file
+ * Duplicates are not allowed (by .isSameCourse comparison)
+ */
 public class Courses implements ReadOnlyCourses {
 
     private final UniqueCourseList courses;
@@ -25,6 +31,9 @@ public class Courses implements ReadOnlyCourses {
 
     public Courses() {}
 
+    /**
+     * Creates an Courses using the Courses in the {@code toBeCopied}
+     */
     public Courses(ReadOnlyCourses toBeCopied) {
         this();
         resetData(toBeCopied);
@@ -43,9 +52,12 @@ public class Courses implements ReadOnlyCourses {
      */
     public void resetData(ReadOnlyCourses newData) {
         requireNonNull(newData);
-        setCourses(newData.getCourseList());
+        setCourses(CourseData.getCourseList());
     }
 
+    /**
+     * Returns true if a course with the same identity as {@code course} exists in the courses data.
+     */
     public boolean hasCourse(Course c) {
         requireNonNull(c);
         return courses.contains(c);
@@ -61,6 +73,6 @@ public class Courses implements ReadOnlyCourses {
 
     @Override
     public ObservableList<Course> getCourseList() {
-        return this.courses.asUnmodifiableObservableList();
+        return courses.asUnmodifiableObservableList();
     }
 }

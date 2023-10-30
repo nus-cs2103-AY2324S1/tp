@@ -1,15 +1,15 @@
 package seedu.address.storage;
 
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyCourses;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.course.Course;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.Set;
 
+import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.ReadOnlyCourses;
+
+/**
+ * Represents a storage for {@link seedu.address.model.Courses}.
+ */
 public interface CoursesStorage {
 
     /**

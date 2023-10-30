@@ -28,6 +28,9 @@ public class ModelManager implements Model {
     private Courses coursesData;
     private final FilteredList<Person> filteredPersons;
 
+    /**
+     * Initializes a ModelManager with the given addressBook and userPrefs.
+     */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
@@ -51,7 +54,7 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs, coursesData);
 
         logger.fine("Initializing with address book: " + addressBook + " , user prefs " + userPrefs
-        + " and courses data " + coursesData);
+            + " and courses data " + coursesData);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);

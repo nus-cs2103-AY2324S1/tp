@@ -12,12 +12,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.course.exceptions.CourseNotFoundException;
 import seedu.address.model.course.exceptions.LessonNotFoundException;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Represents a list of courses with TAs in SOC. Immutable.
  */
 public class UniqueCourseList implements Iterable<Course> {
-    private static final ObservableList<Course> internalList = FXCollections.observableArrayList();
+    private static final ObservableList<Course> internalList = FXCollections.observableArrayList(
+            SampleDataUtil.getSampleCourses());
     private static final ObservableList<Course> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -54,7 +56,9 @@ public class UniqueCourseList implements Iterable<Course> {
         return internalUnmodifiableList;
     }
 
-
+    /**
+     * Returns true if the list contains an equivalent course as the given argument.
+     */
     public boolean contains(Course toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameCourse);
@@ -68,9 +72,16 @@ public class UniqueCourseList implements Iterable<Course> {
         internalList.add(toAdd);
     }
 
-    public void setCourses(List<Course> replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement);
+    public void setCourses(List<Course> courses) {
+        requireNonNull(courses);
+        internalList.setAll(courses);
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public static ObservableList<Course> getList() {
+        return internalUnmodifiableList;
     }
 
     @Override

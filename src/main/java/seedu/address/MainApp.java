@@ -105,7 +105,6 @@ public class MainApp extends Application {
                     + " Will be starting with an empty Courses.");
             initialCourseData = new Courses();
         }
-
         return new ModelManager(initialData, userPrefs, initialCourseData);
     }
 

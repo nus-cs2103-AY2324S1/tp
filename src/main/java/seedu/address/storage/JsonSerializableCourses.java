@@ -9,12 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Courses;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCourses;
 import seedu.address.model.course.Course;
-import seedu.address.model.person.Person;
 
 /**
  * An Immutable Courses that is serializable to JSON format.
@@ -41,6 +38,11 @@ public class JsonSerializableCourses {
         courses.addAll(source.getCourseList().stream().map(JsonAdaptedCourse::new).collect(Collectors.toList()));
     }
 
+    /**
+     * Converts this courses into the model's {@code Courses} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
     public Courses toModelType() throws IllegalValueException {
         Courses coursesData = new Courses();
         for (JsonAdaptedCourse jsonAdaptedCourse : courses) {

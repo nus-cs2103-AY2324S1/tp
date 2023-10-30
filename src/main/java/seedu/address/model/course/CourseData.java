@@ -1,11 +1,9 @@
 package seedu.address.model.course;
 
-import seedu.address.model.util.SampleDataUtil;
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
+import seedu.address.model.util.SampleDataUtil;
 /**
  * Contains a list of SOC courses.
  */
