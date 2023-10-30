@@ -7,6 +7,7 @@ import static swe.context.logic.parser.CliSyntax.PREFIX_NOTE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_PHONE;
 import static swe.context.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -24,9 +25,17 @@ import swe.context.model.tag.Tag;
 
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new {@link AddCommand} object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    /**
+     * Returns true if none of the prefixes contains empty {@link Optional} values in the given
+     * {@link ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
     /**
      * Returns an {@link AddCommand} from parsing the specified arguments.
      * .
@@ -34,16 +43,18 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args,
+                ArgumentTokenizer.tokenize(
+                        args,
                         PREFIX_NAME,
                         PREFIX_PHONE,
                         PREFIX_EMAIL,
                         PREFIX_NOTE,
                         PREFIX_TAG,
-                        PREFIX_ALTERNATE);
+                        PREFIX_ALTERNATE
+                );
 
         if (
-            !arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE, PREFIX_PHONE, PREFIX_EMAIL)
+            !arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
                     || !argMultimap.getPreamble().isEmpty()
         ) {
             throw new ParseException(
@@ -52,24 +63,20 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NOTE);
+
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Note address = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<AlternateContact> alternateContactList =
                 ParserUtil.parseAlternates(argMultimap.getAllValues(PREFIX_ALTERNATE));
 
-        Contact contact = new Contact(name, phone, email, address, tagList, alternateContactList);
+        // Default to empty note
+        Optional<String> noteOptional = argMultimap.getValue(PREFIX_NOTE);
+        String noteString = noteOptional.orElse("");
+        Note note = ParserUtil.parseNote(noteString);
 
+        Contact contact = new Contact(name, phone, email, note, tagList, alternateContactList);
         return new AddCommand(contact);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

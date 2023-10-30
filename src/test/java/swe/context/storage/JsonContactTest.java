@@ -48,7 +48,7 @@ public class JsonContactTest {
                         VALID_TAGS,
                         VALID_ALTERNATECONTACTS
                 );
-        String expectedMessage = Messages.NAME_CONSTRAINTS;
+        String expectedMessage = Messages.NAME_INVALID;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
@@ -77,7 +77,7 @@ public class JsonContactTest {
                         VALID_TAGS,
                         VALID_ALTERNATECONTACTS
                 );
-        String expectedMessage = Messages.PHONE_CONSTRAINTS;
+        String expectedMessage = Messages.PHONE_INVALID;
         assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 

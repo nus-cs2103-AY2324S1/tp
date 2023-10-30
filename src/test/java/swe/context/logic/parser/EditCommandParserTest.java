@@ -51,9 +51,9 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, "1" + TestData.Invalid.NAME_DESC, Messages.NAME_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TestData.Invalid.NAME_DESC, Messages.NAME_INVALID);
         // invalid phone
-        assertParseFailure(parser, "1" + TestData.Invalid.PHONE_DESC, Messages.PHONE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TestData.Invalid.PHONE_DESC, Messages.PHONE_INVALID);
         // invalid email
         assertParseFailure(parser, "1" + TestData.Invalid.EMAIL_DESC, Messages.EMAIL_INVALID);
         // Invalid tag
@@ -74,7 +74,7 @@ public class EditCommandParserTest {
                 "1"
                         + TestData.Invalid.PHONE_DESC
                         + TestData.Valid.EMAIL_DESC_AMY,
-                Messages.PHONE_CONSTRAINTS);
+                Messages.PHONE_INVALID);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Contact} being edited,
         // parsing it together with a valid tag results in error
@@ -137,7 +137,7 @@ public class EditCommandParserTest {
                         + TestData.Invalid.EMAIL_DESC
                         + TestData.Valid.NOTE_AMY
                         + TestData.Valid.PHONE_AMY,
-                Messages.NAME_CONSTRAINTS);
+                Messages.NAME_INVALID);
     }
 
     @Test

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import swe.context.commons.util.ToStringBuilder;
 import swe.context.logic.Messages;
 import swe.context.model.Model;
+import swe.context.model.contact.Contact;
 import swe.context.model.contact.NameContainsKeywordsPredicate;
 
 
@@ -19,7 +20,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds and lists all contacts whose names match any of the"
             + " specified words in full. Case insensitive."
-            + "\nParameters: KEYWORD [MORE_KEYWORDS]..."
+            + "\nParameters: [KEYWORD]..."
             + "\nExample: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;

@@ -66,7 +66,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, TestData.Valid.EMAIL_DESC_AMY + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
-        // multiple addresses
+        // multiple notes
         assertParseFailure(parser, TestData.Valid.NOTE_DESC_AMY + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
 
@@ -151,14 +151,6 @@ public class AddCommandParserTest {
                         + TestData.Valid.NOTE_DESC_BOB,
                 expectedMessage);
 
-        // missing address prefix
-        assertParseFailure(parser,
-                TestData.Valid.NAME_DESC_BOB
-                        + TestData.Valid.PHONE_DESC_BOB
-                        + TestData.Valid.EMAIL_DESC_BOB
-                        + TestData.Valid.NOTE_BOB,
-                expectedMessage);
-
         // all prefixes missing
         assertParseFailure(parser,
                 TestData.Valid.NAME_BOB
@@ -178,7 +170,7 @@ public class AddCommandParserTest {
                         + TestData.Valid.NOTE_DESC_BOB
                         + TestData.Valid.Tag.FLAG_ALPHANUMERIC
                         + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC,
-                Messages.NAME_CONSTRAINTS);
+                Messages.NAME_INVALID);
 
         // invalid phone
         assertParseFailure(parser,
@@ -188,7 +180,8 @@ public class AddCommandParserTest {
                         + TestData.Valid.NOTE_DESC_BOB
                         + TestData.Valid.Tag.FLAG_ALPHANUMERIC
                         + TestData.Valid.AlternateContact.FLAG_ALPHANUMERIC,
-                Messages.PHONE_CONSTRAINTS);
+                Messages.PHONE_INVALID);
+
 
         // invalid email
         assertParseFailure(parser,
@@ -228,7 +221,7 @@ public class AddCommandParserTest {
                         + TestData.Invalid.PHONE_DESC
                         + TestData.Valid.EMAIL_DESC_BOB
                         + TestData.Valid.NOTE_DESC_BOB,
-                Messages.NAME_CONSTRAINTS);
+                Messages.NAME_INVALID);
 
         // non-empty preamble
         assertParseFailure(parser,

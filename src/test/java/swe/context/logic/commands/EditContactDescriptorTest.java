@@ -50,7 +50,7 @@ public class EditContactDescriptorTest {
                 .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
 
-        // different address -> returns false
+        // different note -> returns false
         editedAmy =
                 new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
                 .withNote(TestData.Valid.NOTE_BOB)
@@ -84,4 +84,5 @@ public class EditContactDescriptorTest {
                 + editContactDescriptor.getAlternateContacts().orElse(null) + "}";
         assertEquals(expected, editContactDescriptor.toString());
     }
+
 }

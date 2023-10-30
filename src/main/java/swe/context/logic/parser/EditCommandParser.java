@@ -24,7 +24,7 @@ import swe.context.model.tag.Tag;
 
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new {@link EditCommand} object.
  */
 public class EditCommandParser implements Parser<EditCommand> {
     /**

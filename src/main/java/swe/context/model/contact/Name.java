@@ -13,7 +13,7 @@ public class Name {
      * Disallows a space as the first character. This prevents " " from being
      * valid.
      */
-    public static final String REGEX_VALID = "[a-zA-Z\\d][a-zA-Z\\d ]*";
+    public static final String REGEX_VALID = "^[a-zA-Z\\d][a-zA-Z\\d ]*$";
 
     public final String value;
 
@@ -23,7 +23,7 @@ public class Name {
      * Names must be an alphanumeric and may contain spaces, but cannot start with a space.
      */
     public static boolean isValid(String value) {
-        return value.matches(REGEX_VALID);
+        return value.matches(Name.REGEX_VALID);
     }
 
     /**

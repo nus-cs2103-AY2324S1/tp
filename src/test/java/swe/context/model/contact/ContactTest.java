@@ -75,7 +75,7 @@ public class ContactTest {
         editedAlice = new ContactBuilder(TestData.Valid.Contact.ALICE).withEmail(TestData.Valid.EMAIL_BOB).build();
         assertFalse(TestData.Valid.Contact.ALICE.equals(editedAlice));
 
-        // different address -> returns false
+        // different note -> returns false
         editedAlice = new ContactBuilder(TestData.Valid.Contact.ALICE).withNote(TestData.Valid.NOTE_BOB).build();
         assertFalse(TestData.Valid.Contact.ALICE.equals(editedAlice));
 

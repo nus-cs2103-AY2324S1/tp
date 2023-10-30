@@ -10,6 +10,11 @@ import swe.context.model.contact.Contact;
  * {@link #isValid(String)}.
  */
 public final class AlternateContact {
+    /*
+     * Requires a form similar to example_email@foo-domain.sg.
+     */
+    public static final String REGEX_VALID =
+            "^[a-zA-Z\\d]+(?:[a-zA-Z\\d]+)*" + "@(?:[a-zA-Z\\d]+(?:[+_.-][a-zA-Z\\d]+)*)+";
 
     public final String value;
 
@@ -19,10 +24,7 @@ public final class AlternateContact {
      * Alternate Contacts must roughly be of the form social-media@name.
      */
     public static boolean isValid(String value) {
-        return value.matches(
-                "^[a-zA-Z\\d]+(?:[a-zA-Z\\d]+)*"
-                        + "@(?:[a-zA-Z\\d]+(?:[+_.-][a-zA-Z\\d]+)*)+"
-        );
+        return value.matches(REGEX_VALID);
     }
 
     /**

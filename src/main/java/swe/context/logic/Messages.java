@@ -35,12 +35,6 @@ public final class Messages {
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
     public static final String DUPLICATE_CONTACT_EXCEPTION = "Operation would result in duplicate contacts";
 
-    // Messages associated with Attributes constraints
-    public static final String NAME_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
-    public static final String PHONE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-
     // Messages associated with Storage
     public static final String FIELD_MISSING = "Contact's %s field is missing.";
 
@@ -56,11 +50,15 @@ public final class Messages {
     public static final String COMMAND_EXIT_SUCCESS = "Exiting app...";
 
     // Contacts
-    private static final String UNFORMATTED_TAG_INVALID =
-            "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
-
+    // Messages associated with Attributes constraints
+    public static final String NAME_INVALID =
+            "Names must be alphanumeric (spaces allowed).";
+    public static final String PHONE_INVALID =
+            "Phone numbers must start with at least 3 digits.";
     public static final String EMAIL_INVALID =
             "Emails must roughly be of the form \"example_email@foo-domain.sg.\"";
+    private static final String UNFORMATTED_TAG_INVALID =
+            "\"%s\" is not a valid tag. Tags must be alphanumeric (spaces allowed).";
 
     private static final String UNFORMATTED_ALTERNATECONTACT_INVALID =
             "\"%s\" is not a valid alternate contact. "

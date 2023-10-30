@@ -99,7 +99,7 @@ class JsonContact {
             throw new IllegalValueException(String.format(Messages.FIELD_MISSING, Name.class.getSimpleName()));
         }
         if (!Name.isValid(name)) {
-            throw new IllegalValueException(Messages.NAME_CONSTRAINTS);
+            throw new IllegalValueException(Messages.NAME_INVALID);
         }
         final Name modelName = new Name(name);
 
@@ -107,7 +107,7 @@ class JsonContact {
             throw new IllegalValueException(String.format(Messages.FIELD_MISSING, Phone.class.getSimpleName()));
         }
         if (!Phone.isValid(phone)) {
-            throw new IllegalValueException(Messages.PHONE_CONSTRAINTS);
+            throw new IllegalValueException(Messages.PHONE_INVALID);
         }
         final Phone modelPhone = new Phone(phone);
 
