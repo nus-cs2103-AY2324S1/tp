@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 import seedu.address.model.course.Course;
 
+/**
+ * Clears the default course.
+ */
 public class ClearTeachCommand extends Command {
 
     public static final String COMMAND_WORD = "clearteach";
