@@ -11,6 +11,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ScheduleList;
 import seedu.address.model.lessons.Lesson;
+import seedu.address.model.lessons.Task;
+import seedu.address.model.lessons.TaskList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -85,11 +87,14 @@ public class SampleDataUtil {
 
     public static Lesson[] getSampleLessons() {
         try {
+            TaskList sample = new TaskList();
+            sample.add(new Task("Test task 1"));
+            sample.add(new Task("Test task 2"));
             return new Lesson[] {
-                new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics"),
-                new Lesson("lesson2", "13:30", "15:30", "21", "Physics"),
-                new Lesson("lesson3", "14:30", "16:30", "22", "Biology"),
-                new Lesson("lesson4", "15:30", "17:30", "23", "Chemistry"),
+                new Lesson("lesson1", "12:30", "14:30", "20", "Mathematics", sample),
+                new Lesson("lesson2", "13:30", "15:30", "21", "Physics", sample),
+                new Lesson("lesson3", "14:30", "16:30", "22", "Biology", sample),
+                new Lesson("lesson4", "15:30", "17:30", "23", "Chemistry", sample),
             };
         } catch (ParseException e) {
             Logger logger = Logger.getLogger(SampleDataUtil.class.getName());

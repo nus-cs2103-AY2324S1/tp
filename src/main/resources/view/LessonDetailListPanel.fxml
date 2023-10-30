@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ListView?>
 <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background: #231F31; -fx-background-radius: 10; -fx-border-width: 0; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane style="-fx-background-color: #322D46; -fx-background-radius: 10; -fx-border-width: 0;">
@@ -58,17 +59,15 @@
                   <Separator prefWidth="200.0" />
                   <VBox VBox.vgrow="ALWAYS">
                         <Label styleClass="panel-label" text="Task List">
-                        <VBox.margin>
-                           <Insets bottom="5.0" />
-                        </VBox.margin></Label>
-<!--                        <ListView fx:id="taskListView" minHeight="100" style="-fx-border-color: #201e26; -fx-border-radius: 5; -fx-background-radius: 10; -fx-border-width: 3;" VBox.vgrow="ALWAYS">-->
-<!--                           <VBox.margin>-->
-<!--                              <Insets />-->
-<!--                           </VBox.margin>-->
-<!--                           <opaqueInsets>-->
-<!--                              <Insets />-->
-<!--                           </opaqueInsets>-->
-<!--                        </ListView>-->
+                       </Label>
+                        <ListView fx:id="taskListView" minHeight="100" style="-fx-border-color: #201e26; -fx-border-radius: 5; -fx-background-radius: 10; -fx-border-width: 3;" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </ListView>
                      <VBox fx:id="taskListContainer" spacing="10" VBox.vgrow="ALWAYS">
                         <padding>
                            <Insets bottom="5.0" top="5.0" />
