@@ -370,3 +370,25 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+/* barchart */
+.axis {
+    -fx-font-size: 1pt;
+    -fx-tick-label-fill: #FFFFFF;
+    -fx-tick-label-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-tick-length: 10;
+    -fx-minor-tick-length: 10;
+}
+
+.axis-label {
+   -fx-text-fill: #462300;
+}
+
+.axis-tick-mark {
+    -fx-stroke: #637040;
+    -fx-stroke-width: 1;
+}
+.axis-minor-tick-mark {
+    -fx-stroke: #859656;
+}
