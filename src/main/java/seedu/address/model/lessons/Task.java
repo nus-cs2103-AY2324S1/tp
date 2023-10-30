@@ -3,11 +3,12 @@ package seedu.address.model.lessons;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.ListEntry;
 
 /**
  * Represents a Task in the application.
  */
-public class Task {
+public class Task extends ListEntry<Task> {
 
     //Task fields
     /**
@@ -112,5 +113,10 @@ public class Task {
         return new ToStringBuilder(this)
                 .add("description", description)
                 .toString();
+    }
+
+    @Override
+    public Task clone() {
+        return new Task(description);
     }
 }
