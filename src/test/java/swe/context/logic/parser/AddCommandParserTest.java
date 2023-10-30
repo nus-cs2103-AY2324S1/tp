@@ -62,7 +62,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, TestData.Valid.EMAIL_DESC_AMY + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
-        // multiple addresses
+        // multiple notes
         assertParseFailure(parser, TestData.Valid.NOTE_DESC_AMY + validExpectedPersonString,
                 ArgumentMultimap.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
 
@@ -144,14 +144,6 @@ public class AddCommandParserTest {
                         + TestData.Valid.PHONE_DESC_BOB
                         + TestData.Valid.EMAIL_BOB
                         + TestData.Valid.NOTE_DESC_BOB,
-                expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser,
-                TestData.Valid.NAME_DESC_BOB
-                        + TestData.Valid.PHONE_DESC_BOB
-                        + TestData.Valid.EMAIL_DESC_BOB
-                        + TestData.Valid.NOTE_BOB,
                 expectedMessage);
 
         // all prefixes missing

@@ -1,6 +1,5 @@
 package swe.context.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -50,7 +49,7 @@ public class EditContactDescriptorTest {
                 .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
 
-        // different address -> returns false
+        // different note -> returns false
         editedAmy =
                 new EditContactDescriptorBuilder(TestData.Valid.EditDescriptor.AMY)
                 .withNote(TestData.Valid.NOTE_BOB)
@@ -63,17 +62,5 @@ public class EditContactDescriptorTest {
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         assertFalse(TestData.Valid.EditDescriptor.AMY.equals(editedAmy));
-    }
-
-    @Test
-    public void toStringMethod() {
-        EditContactDescriptor editContactDescriptor = new EditContactDescriptor();
-        String expected = EditContactDescriptor.class.getCanonicalName() + "{name="
-                + editContactDescriptor.getName().orElse(null) + ", phone="
-                + editContactDescriptor.getPhone().orElse(null) + ", email="
-                + editContactDescriptor.getEmail().orElse(null) + ", address="
-                + editContactDescriptor.getNote().orElse(null) + ", tags="
-                + editContactDescriptor.getTags().orElse(null) + "}";
-        assertEquals(expected, editContactDescriptor.toString());
     }
 }

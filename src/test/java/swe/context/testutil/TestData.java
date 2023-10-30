@@ -28,7 +28,7 @@ public final class TestData {
     public static final String DEFAULT_NOTE = "I forgot where this contact came from...";
 
     /**
-     * Holds (@link Index} objects that are used in the test cases.
+     * Holds {@link Index} objects that are used in the test cases.
      */
     public static final class IndexContact {
         public static final Index FIRST_CONTACT = Index.fromOneBased(1);
