@@ -17,8 +17,8 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": selects a student to view their class details"
-        + "Parameters: STUDENT_NUMBER\n"
-        + "Example: " + COMMAND_WORD + " A1234567N";
+        + "Parameters: s/STUDENT_NUMBER\n"
+        + "Example: " + COMMAND_WORD + " s/A1234567N";
     public static final String MESSAGE_COMMAND_SUCCESS =
         "You are now viewing the class details of Student %1$s";
     public static final String MESSAGE_COMMAND_FAILURE =

@@ -16,10 +16,10 @@ import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexExcepti
 /**
  * Marks a student's attendance.
  */
-public class MarkCommand extends Command {
-    public static final String COMMAND_WORD = "mark";
-    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark attendance.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student."
+public class MarkPresentCommand extends Command {
+    public static final String COMMAND_WORD = "mark-pre";
+    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark the student as present.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student as present.\n"
             + "Parameters: INDEX "
             + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -28,12 +28,12 @@ public class MarkCommand extends Command {
     private final StudentNumber targetStudentNumber;
 
     /**
-     * Constructs a MarkCommand object.
+     * Constructs a MarkPresentCommand object.
      *
      * @param index of the class.
      * @param targetStudentNumber of the student.
      */
-    public MarkCommand(Index index, StudentNumber targetStudentNumber) {
+    public MarkPresentCommand(Index index, StudentNumber targetStudentNumber) {
         requireAllNonNull(index, targetStudentNumber);
 
         this.index = index;
@@ -71,11 +71,11 @@ public class MarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkCommand)) {
+        if (!(other instanceof MarkPresentCommand)) {
             return false;
         }
 
-        MarkCommand e = (MarkCommand) other;
+        MarkPresentCommand e = (MarkPresentCommand) other;
         return index.equals(e.index)
                 && targetStudentNumber.equals(e.targetStudentNumber);
     }

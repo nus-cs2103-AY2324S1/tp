@@ -10,12 +10,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.CommandHistory;
@@ -39,15 +37,14 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-            + "by the index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: STUDENT_NUMBER "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER] "
             + "[" + PREFIX_CLASS_NUMBER + "CLASS_NUMBER]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " A0245234A "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -55,31 +52,30 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
 
-    private final Index index;
+    private final StudentNumber studentNumber;
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * @param index of the student in the filtered student list to edit
+     * @param studentNumber of the student to edit
      * @param editStudentDescriptor details to edit the student with
      */
-    public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
-        requireNonNull(index);
+    public EditCommand(StudentNumber studentNumber, EditStudentDescriptor editStudentDescriptor) {
+        requireNonNull(studentNumber);
         requireNonNull(editStudentDescriptor);
 
-        this.index = index;
+        this.studentNumber = studentNumber;
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        if (!model.hasStudent(new Student(studentNumber))) {
+            throw new CommandException(Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
         }
 
-        Student studentToEdit = lastShownList.get(index.getZeroBased());
+        Student studentToEdit = model.getStudent(studentNumber);
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
@@ -105,10 +101,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         StudentNumber updatedStudentNumber = editStudentDescriptor.getStudentNumber()
                         .orElse(studentToEdit.getStudentNumber());
-        ClassDetails updatedClassDetails = editStudentDescriptor.getClassDetails()
-                        .orElse(studentToEdit.getClassDetails());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
         Comment updatedComment = editStudentDescriptor.getComment().orElse(studentToEdit.getComment());
+
+        ClassDetails updatedClassDetails = studentToEdit.getClassDetails();
+        if (editStudentDescriptor.getClassNumber().isPresent()) {
+            updatedClassDetails = updatedClassDetails.setClassNumber(editStudentDescriptor.getClassNumber().get());
+        }
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedStudentNumber,
                 updatedClassDetails, updatedTags, updatedComment);
@@ -126,14 +125,14 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
+        return studentNumber.equals(otherEditCommand.studentNumber)
                 && editStudentDescriptor.equals(otherEditCommand.editStudentDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
+                .add("student number", studentNumber)
                 .add("editStudentDescriptor", editStudentDescriptor)
                 .toString();
     }
@@ -147,7 +146,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private StudentNumber studentNumber;
-        private ClassDetails classDetails;
+        private String classNumber;
         private Set<Tag> tags = new HashSet<>();
         private Comment comment;
 
@@ -162,7 +161,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setStudentNumber(toCopy.studentNumber);
-            setClassDetails(toCopy.classDetails);
+            setClassNumber(toCopy.classNumber);
             setTags(toCopy.tags);
             setComment(toCopy.comment);
         }
@@ -171,7 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, studentNumber, classDetails);
+            return CollectionUtil.isAnyNonNull(name, phone, email, studentNumber, classNumber);
         }
 
         public void setName(Name name) {
@@ -206,12 +205,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(studentNumber);
         }
 
-        public void setClassDetails(ClassDetails classDetails) {
-            this.classDetails = classDetails;
+        public void setClassNumber(String classNumber) {
+            this.classNumber = classNumber;
         }
 
-        public Optional<ClassDetails> getClassDetails() {
-            return Optional.ofNullable(classDetails);
+        public Optional<String> getClassNumber() {
+            return Optional.ofNullable(classNumber);
         }
 
         /**
@@ -254,7 +253,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditStudentDescriptor.phone)
                     && Objects.equals(email, otherEditStudentDescriptor.email)
                     && Objects.equals(studentNumber, otherEditStudentDescriptor.studentNumber)
-                    && Objects.equals(classDetails, otherEditStudentDescriptor.classDetails)
+                    && Objects.equals(classNumber, otherEditStudentDescriptor.classNumber)
                     && Objects.equals(tags, otherEditStudentDescriptor.tags)
                     && Objects.equals(comment, otherEditStudentDescriptor.comment);
         }
@@ -266,7 +265,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("student number", studentNumber)
-                    .add("class number", classDetails)
+                    .add("class number", classNumber)
                     .add("tags", tags)
                     .add("comment", comment)
                     .toString();

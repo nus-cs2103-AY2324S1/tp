@@ -83,6 +83,17 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
+    private void setTheme(String primaryThemePath, String helpWindowThemePath) {
+        logger.info("Setting primary theme with path: " + primaryThemePath);
+        primaryStage.getScene().getStylesheets().clear();
+        primaryStage.getScene().getStylesheets().add(primaryThemePath);
+
+        logger.info("Setting help window theme with path: " + helpWindowThemePath);
+        Stage helpWindowStage = helpWindow.getRoot();
+        helpWindowStage.getScene().getStylesheets().clear();
+        helpWindowStage.getScene().getStylesheets().add(helpWindowThemePath);
+    }
+
     /**
      * Sets the accelerator of a MenuItem.
      * @param keyCombination the KeyCombination value of the accelerator
@@ -188,6 +199,28 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates the application's theme.
+     */
+    public void handleTheme() {
+        String theme = logic.getTheme();
+        setTheme(getPrimaryThemePath(theme), getHelpWindowThemePath(theme));
+    }
+
+    /**
+     * Returns the path of the theme stylesheet for primary stage.
+     */
+    private String getPrimaryThemePath(String theme) {
+        return theme.equalsIgnoreCase("dark") ? "view/DarkTheme.css" : "view/LightTheme.css";
+    }
+
+    /**
+     * Returns the path of the theme stylesheet for the help window.
+     */
+    private String getHelpWindowThemePath(String theme) {
+        return theme.equalsIgnoreCase("dark") ? "view/DarkHelpWindow.css" : "view/LightHelpWindow.css";
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -208,6 +241,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isLoad()) {
                 handleLoad();
+            }
+
+            if (commandResult.isTheme()) {
+                handleTheme();
             }
 
             return commandResult;

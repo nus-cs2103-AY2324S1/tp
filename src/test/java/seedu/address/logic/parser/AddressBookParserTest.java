@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_CLASS_MANAGER_ALREADY_CONFIGU
 import static seedu.address.logic.Messages.MESSAGE_CLASS_MANAGER_NOT_CONFIGURED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
@@ -14,7 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,10 +34,14 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
-import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.MarkAbsentCommand;
+import seedu.address.logic.commands.MarkPresentAllCommand;
+import seedu.address.logic.commands.MarkPresentCommand;
 import seedu.address.logic.commands.RecordClassParticipationCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.ThemeCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.ClassDetails;
 import seedu.address.model.student.Comment;
@@ -78,16 +82,16 @@ public class AddressBookParserTest {
         Student student = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_STUDENT.getOneBased() + " "
+                + TypicalStudents.ALICE.getStudentNumber() + " "
                 + StudentUtil.getEditStudentDescriptorDetails(descriptor), true);
-        assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
+        assertEquals(new EditCommand(TypicalStudents.ALICE.getStudentNumber(), descriptor), command);
     }
 
     @Test
     public void parseCommand_tag() throws Exception {
         TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD
             + " "
-            + TypicalStudents.ALICE.getStudentNumber()
+            + PREFIX_STUDENT_NUMBER + TypicalStudents.ALICE.getStudentNumber()
             + " "
             + StudentUtil.getTagDetails(TypicalStudents.ALICE), true);
         assertEquals(new TagCommand(TypicalStudents.ALICE.getStudentNumber(), TypicalStudents.ALICE.getTags()),
@@ -95,13 +99,31 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_mark() throws Exception {
+    public void parseCommand_markPresent() throws Exception {
         int tut = ClassDetails.DEFAULT_COUNT;
         Student student = new StudentBuilder().build();
-        MarkCommand command = (MarkCommand) parser.parseCommand(MarkCommand.COMMAND_WORD + " "
+        MarkPresentCommand command = (MarkPresentCommand) parser.parseCommand(MarkPresentCommand.COMMAND_WORD + " "
                 + tut + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber(),
                 true);
-        assertEquals(new MarkCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
+        assertEquals(new MarkPresentCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
+    }
+
+    @Test
+    public void parseCommand_markPresentAll() throws Exception {
+        int tut = ClassDetails.DEFAULT_COUNT;
+        MarkPresentAllCommand command = (MarkPresentAllCommand) parser
+                .parseCommand(MarkPresentAllCommand.COMMAND_WORD + " " + tut, true);
+        assertEquals(new MarkPresentAllCommand(Index.fromOneBased(tut)), command);
+    }
+
+    @Test
+    public void parseCommand_markAbsent() throws Exception {
+        int tut = ClassDetails.DEFAULT_COUNT;
+        Student student = new StudentBuilder().build();
+        MarkAbsentCommand command = (MarkAbsentCommand) parser.parseCommand(MarkAbsentCommand.COMMAND_WORD + " "
+                        + tut + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber(),
+                true);
+        assertEquals(new MarkAbsentCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
     }
 
     @Test
@@ -161,25 +183,42 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_config_throwsParseException() throws Exception {
-        assertThrows(ParseException.class, MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED, ()
-                -> parser.parseCommand("config", true));
+        assertThrows(ParseException.class,
+                MESSAGE_CLASS_MANAGER_ALREADY_CONFIGURED, () -> parser.parseCommand("config", true));
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewCommand.COMMAND_WORD + " " + STUDENT_NUMBER_DESC_AMY, true);
+        assertEquals(new ViewCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY)), command);
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(ViewCommand.COMMAND_WORD
+                        + " " + INVALID_STUDENT_NUMBER, true));
     }
 
     @Test
     public void parseCommand_comment() throws Exception {
         Student student = new StudentBuilder().build();
         Comment comment = new Comment("Struggling with tutorials.");
-        CommentCommand command = (CommentCommand) parser.parseCommand(CommentCommand.COMMAND_WORD + " "
-                + PREFIX_STUDENT_NUMBER + student.getStudentNumber() + " "
-                + PREFIX_COMMENT + comment, true);
+        CommentCommand command = (CommentCommand) parser.parseCommand(CommentCommand.COMMAND_WORD
+                + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber()
+                + " " + PREFIX_COMMENT + comment, true);
         assertEquals(new CommentCommand(student.getStudentNumber(), comment), command);
     }
 
+    @Test
+    public void parseCommand_theme() throws Exception {
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD, true) instanceof ThemeCommand);
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD + " 3", true) instanceof ThemeCommand);
+    }
 
     @Test
     public void parseCommandNotConfigured_config() throws Exception {
-        ConfigCommand command = (ConfigCommand) parser.parseCommand(ConfigCommand.COMMAND_WORD + " "
-                + PREFIX_TUTORIAL_COUNT + "5" + " " + PREFIX_ASSIGNMENT_COUNT + 2, false);
+        ConfigCommand command = (ConfigCommand) parser.parseCommand(ConfigCommand.COMMAND_WORD
+                + " " + PREFIX_TUTORIAL_COUNT + "5"
+                + " " + PREFIX_ASSIGNMENT_COUNT + 2, false);
         assertEquals(new ConfigCommand(5, 2), command);
     }
 
@@ -190,19 +229,33 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommandNotConfigured_theme() throws Exception {
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD, false) instanceof ThemeCommand);
+        assertTrue(parser.parseCommand(ThemeCommand.COMMAND_WORD + " 3", false) instanceof ThemeCommand);
+    }
+
+    @Test
+    public void parseCommandNotConfigured_exit() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, false) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", false) instanceof ExitCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand("", true));
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand("", true));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", true));
+        assertThrows(ParseException.class,
+                MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", true));
     }
 
     @Test
     public void parseCommandNotConfigured_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_CLASS_MANAGER_NOT_CONFIGURED, ()
-                -> parser.parseCommand("unknownCommand", false));
+        assertThrows(ParseException.class,
+                MESSAGE_CLASS_MANAGER_NOT_CONFIGURED, () -> parser.parseCommand("unknownCommand", false));
     }
 }

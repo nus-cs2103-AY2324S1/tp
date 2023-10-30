@@ -22,11 +22,11 @@ import seedu.address.model.student.Student;
 import seedu.address.testutil.TypicalStudents;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for MarkCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for MarkAbsentCommand.
  */
-public class MarkCommandTest {
+public class MarkAbsentCommandTest {
 
-    private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -35,16 +35,15 @@ public class MarkCommandTest {
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
         model.setSelectedStudent(studentToMark);
 
-        MarkCommand markCommand = new MarkCommand(i, studentToMark.getStudentNumber());
+        MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(i, studentToMark.getStudentNumber());
 
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS,
-                Messages.format(studentToMark));
+        String expectedMessage = MarkAbsentCommand.MESSAGE_MARK_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setStudent(studentToMark, studentToMark.markPresent(i));
+        expectedModel.setStudent(studentToMark, studentToMark.markAbsent(i));
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel, commandHistory);
+        assertCommandSuccess(markAbsentCommand, model, expectedMessage, expectedModel, commandHistory);
         assertEquals(studentToMark, model.getSelectedStudent().get(0));
     }
 
@@ -53,29 +52,30 @@ public class MarkCommandTest {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT + 1);
 
-        MarkCommand markCommand = new MarkCommand(i, studentToMark.getStudentNumber());
+        MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(i, studentToMark.getStudentNumber());
 
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX, commandHistory);
+        assertCommandFailure(markAbsentCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX, commandHistory);
     }
 
     @Test
     public void execute_nonexistentStudentNumber_throwsCommandException() {
-        MarkCommand markCommand = new MarkCommand(Index.fromOneBased(1), NONEXISTENT_STUDENT_NUMBER);
+        MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(Index.fromOneBased(1),
+                NONEXISTENT_STUDENT_NUMBER);
 
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
+        assertCommandFailure(markAbsentCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER, commandHistory);
     }
 
     @Test
     public void equals() {
         Student firstStudent = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student secondStudent = TypicalStudents.getTypicalStudents().get(INDEX_SECOND_STUDENT.getZeroBased());
-        MarkCommand markFirstStudentForFirstTutorial = new MarkCommand(Index.fromOneBased(1),
+        MarkAbsentCommand markFirstStudentForFirstTutorial = new MarkAbsentCommand(Index.fromOneBased(1),
                 firstStudent.getStudentNumber());
-        MarkCommand markFirstStudentForSecondTutorial = new MarkCommand(Index.fromOneBased(2),
+        MarkAbsentCommand markFirstStudentForSecondTutorial = new MarkAbsentCommand(Index.fromOneBased(2),
                 firstStudent.getStudentNumber());
-        MarkCommand markSecondStudentForFirstTutorial = new MarkCommand(Index.fromOneBased(1),
+        MarkAbsentCommand markSecondStudentForFirstTutorial = new MarkAbsentCommand(Index.fromOneBased(1),
                 secondStudent.getStudentNumber());
-        MarkCommand markSecondStudentForSecondTutorial = new MarkCommand(Index.fromOneBased(2),
+        MarkAbsentCommand markSecondStudentForSecondTutorial = new MarkAbsentCommand(Index.fromOneBased(2),
                 secondStudent.getStudentNumber());
 
         // same object -> returns true

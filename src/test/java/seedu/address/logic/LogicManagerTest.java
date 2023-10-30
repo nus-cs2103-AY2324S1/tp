@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.CLASS_NUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -114,6 +115,12 @@ public class LogicManagerTest {
         logic.setGuiSettings(newGuiSettings);
 
         assertEquals(newGuiSettings, logic.getGuiSettings());
+    }
+
+    @Test
+    public void getTheme_success() {
+        String theme = logic.getTheme();
+        assertTrue(theme.equalsIgnoreCase("dark") || theme.equalsIgnoreCase("light"));
     }
 
     /**

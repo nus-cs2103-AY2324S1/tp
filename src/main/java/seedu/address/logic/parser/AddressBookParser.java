@@ -23,11 +23,14 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
-import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.MarkAbsentCommand;
+import seedu.address.logic.commands.MarkPresentAllCommand;
+import seedu.address.logic.commands.MarkPresentCommand;
 import seedu.address.logic.commands.RecordClassParticipationCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -73,6 +76,12 @@ public class AddressBookParser {
 
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            case ThemeCommand.COMMAND_WORD:
+                return new ThemeCommand();
 
             default:
                 logger.finer("This user input caused a ParseException: " + userInput);
@@ -121,8 +130,14 @@ public class AddressBookParser {
         case RecordClassParticipationCommand.COMMAND_WORD:
             return new RecordClassPartCommandParser().parse(arguments);
 
-        case MarkCommand.COMMAND_WORD:
-            return new MarkCommandParser().parse(arguments);
+        case MarkPresentCommand.COMMAND_WORD:
+            return new MarkPresentCommandParser().parse(arguments);
+
+        case MarkPresentAllCommand.COMMAND_WORD:
+            return new MarkPresentAllCommandParser().parse(arguments);
+
+        case MarkAbsentCommand.COMMAND_WORD:
+            return new MarkAbsentCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
@@ -138,6 +153,9 @@ public class AddressBookParser {
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
+
+        case ThemeCommand.COMMAND_WORD:
+            return new ThemeCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

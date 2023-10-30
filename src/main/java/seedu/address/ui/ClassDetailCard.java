@@ -52,7 +52,7 @@ public class ClassDetailCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         name.setText(student.getName().fullName);
-        classDetails.setText(student.getClassDetails().classDetails);
+        classDetails.setText(student.getClassDetails().classNumber);
         attendance.setText(student.getClassDetails().attendanceTracker.toString());
         classParticipation.setText(student.getClassDetails().classParticipationTracker.toString());
         assignments.setText(student.getClassDetails().assignmentTracker.toString());

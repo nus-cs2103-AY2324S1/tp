@@ -59,7 +59,7 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         studentNumber.setText(student.getStudentNumber().value);
-        classDetails.setText(student.getClassDetails().classDetails);
+        classDetails.setText(student.getClassDetails().classNumber);
         email.setText(student.getEmail().value);
         comment.setText(student.getComment().comment);
         student.getTags().stream()

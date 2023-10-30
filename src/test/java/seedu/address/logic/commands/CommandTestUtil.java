@@ -56,6 +56,7 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String STUDENT_NUMBER_DESC_AMY = " " + PREFIX_STUDENT_NUMBER + VALID_STUDENT_NUMBER_AMY;
     public static final String STUDENT_NUMBER_DESC_BOB = " " + PREFIX_STUDENT_NUMBER + VALID_STUDENT_NUMBER_BOB;
+    public static final String STUDENT_NUMBER_DESC_NONEXISTENT = " " + PREFIX_STUDENT_NUMBER + "A0000000A";
     public static final String CLASS_NUMBER_DESC_AMY = " " + PREFIX_CLASS_NUMBER + VALID_CLASS_NUMBER_AMY;
     public static final String CLASS_NUMBER_DESC_BOB = " " + PREFIX_CLASS_NUMBER + VALID_CLASS_NUMBER_BOB;
     public static final String COMMENT_DESC_AMY = " " + PREFIX_CLASS_NUMBER + VALID_COMMENT_AMY;
@@ -80,10 +81,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withStudentNumber(VALID_STUDENT_NUMBER_AMY)
-                .withClassDetails(VALID_CLASS_NUMBER_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withClassNumber(VALID_CLASS_NUMBER_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withStudentNumber(VALID_STUDENT_NUMBER_BOB)
-                .withClassDetails(VALID_CLASS_NUMBER_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withClassNumber(VALID_CLASS_NUMBER_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

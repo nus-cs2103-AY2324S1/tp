@@ -1,0 +1,21 @@
+#copyButton, #helpMessage {
+    -fx-text-fill: black;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 11pt;
+}
+
+#copyButton {
+    -fx-background-color: lightgray;
+}
+
+#copyButton:hover {
+    -fx-background-color: darkgray;
+}
+
+#copyButton:armed {
+    -fx-background-color: gray;
+}
+
+#helpMessageContainer {
+    -fx-background-color: derive(#ffffff, 20%);
+}

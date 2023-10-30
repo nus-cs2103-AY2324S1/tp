@@ -77,7 +77,7 @@ public class LoadCommand extends Command {
         System.out.println(filePath);
         System.out.println(newData);
 
-        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true);
+        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true, false);
     }
 
     /**

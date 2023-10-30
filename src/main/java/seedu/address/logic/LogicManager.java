@@ -132,4 +132,9 @@ public class LogicManager implements Logic {
     public ObservableList<String> getHistory() {
         return history.getHistory();
     }
+
+    @Override
+    public String getTheme() {
+        return model.getTheme();
+    }
 }
