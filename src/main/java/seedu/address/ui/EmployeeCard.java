@@ -31,6 +31,8 @@ public class EmployeeCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label id;
+    @FXML
     private FlowPane departments;
 
     /**
@@ -39,6 +41,7 @@ public class EmployeeCard extends UiPart<Region> {
     public EmployeeCard(Employee employee, int displayedIndex) {
         super(FXML);
         this.employee = employee;
+        id.setText(displayedIndex + ". ");
         name.setText(employee.getName().fullName);
         employee.getDepartments().stream()
                 .sorted(Comparator.comparing(department -> department.departmentName))
