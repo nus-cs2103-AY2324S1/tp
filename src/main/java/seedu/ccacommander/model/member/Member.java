@@ -6,6 +6,7 @@ import static seedu.ccacommander.commons.util.StringUtil.capitaliseWordsInString
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.ccacommander.commons.util.ToStringBuilder;
@@ -21,18 +22,19 @@ public class Member {
     // Identity fields
     private final Name name;
     private final Gender gender;
-    private final Phone phone;
-    private final Email email;
+    private final Optional<Phone> phone;
+    private final Optional<Email> email;
 
     // Data fields
-    private final Address address;
+    private final Optional<Address> address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Member(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, gender, phone, email, address, tags);
+    public Member(Name name, Gender gender, Optional<Phone> phone,
+                  Optional<Email> email, Optional<Address> address, Set<Tag> tags) {
+        requireAllNonNull(name, gender);
         Name capitalisedName = new Name(capitaliseWordsInString(name.name));
         this.name = capitalisedName;
         this.gender = gender;
@@ -52,15 +54,15 @@ public class Member {
     }
 
     public Phone getPhone() {
-        return phone;
+        return phone.orElse(Phone.EMPTY_PHONE);
     }
 
     public Email getEmail() {
-        return email;
+        return email.orElse(Email.EMPTY_EMAIL);
     }
 
     public Address getAddress() {
-        return address;
+        return address.orElse(Address.EMPTY_ADRESS);
     }
 
     /**
@@ -81,7 +83,8 @@ public class Member {
         }
 
         return otherMember != null
-                && otherMember.getName().equals(getName());
+                && otherMember.getName().equals(getName())
+                && otherMember.getGender().equals(getGender());
     }
 
     /**
@@ -119,9 +122,9 @@ public class Member {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("gender", gender)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
+                .add("phone", phone.orElse(Phone.EMPTY_PHONE))
+                .add("email", email.orElse(Email.EMPTY_EMAIL))
+                .add("address", address.orElse(Address.EMPTY_ADRESS))
                 .add("tags", tags)
                 .toString();
     }
