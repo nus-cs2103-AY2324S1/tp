@@ -130,7 +130,7 @@ public class UniqueList<T extends Identifiable<T>> implements Iterable<T> {
      * Checks if this list is empty.
      */
     public boolean isEmpty() {
-        return this.internalList.size() == 0;
+        return this.internalList.isEmpty();
     }
 
     /**

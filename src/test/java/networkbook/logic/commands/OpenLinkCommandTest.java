@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import networkbook.commons.core.GuiSettings;
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
+import networkbook.logic.commands.exceptions.CommandException;
 import networkbook.model.Model;
 import networkbook.model.ModelManager;
 import networkbook.model.ReadOnlyNetworkBook;
@@ -77,6 +78,14 @@ public class OpenLinkCommandTest {
         }
 
         public void setItem(Person target, Person edited) {
+            throw new UnsupportedOperationException();
+        }
+
+        public void undoNetworkBook() throws CommandException {
+            throw new UnsupportedOperationException();
+        }
+
+        public void redoNetworkBook() throws CommandException {
             throw new UnsupportedOperationException();
         }
 

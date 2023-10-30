@@ -15,7 +15,9 @@ import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
 import networkbook.logic.commands.OpenLinkCommand;
+import networkbook.logic.commands.RedoCommand;
 import networkbook.logic.commands.SortCommand;
+import networkbook.logic.commands.UndoCommand;
 import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.commands.filter.FilterCommand;
@@ -69,6 +71,12 @@ public class NetworkBookParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);

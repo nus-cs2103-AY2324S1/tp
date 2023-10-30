@@ -10,13 +10,14 @@ import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
+import networkbook.model.util.Identifiable;
 import networkbook.model.util.UniqueList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSame comparison)
+ * Wraps all data at the network-book level
+ * Duplicate contacts are not allowed (by .isSame comparison)
  */
-public class NetworkBook implements ReadOnlyNetworkBook {
+public class NetworkBook implements ReadOnlyNetworkBook, Identifiable<NetworkBook> {
 
     private final UniqueList<Person> persons;
     public NetworkBook() {
@@ -102,9 +103,7 @@ public class NetworkBook implements ReadOnlyNetworkBook {
         return persons.consumeAndComputeItem(personIndex.getZeroBased(),
                 person -> person.openLink(linkIndex), person -> person.getLink(linkIndex.getZeroBased()));
     }
-
     //// util methods
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -117,6 +116,15 @@ public class NetworkBook implements ReadOnlyNetworkBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
+    public boolean isSame(NetworkBook another) {
+        return this == another;
+    }
+
+    @Override
+    public String getValue() {
+        return "";
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

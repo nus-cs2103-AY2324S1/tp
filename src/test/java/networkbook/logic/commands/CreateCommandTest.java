@@ -130,12 +130,20 @@ public class CreateCommandTest {
         }
 
         @Override
-        public void setNetworkBook(ReadOnlyNetworkBook newData) {
+        public void setNetworkBook(ReadOnlyNetworkBook networkBook) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyNetworkBook getNetworkBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void undoNetworkBook() throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void redoNetworkBook() throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
