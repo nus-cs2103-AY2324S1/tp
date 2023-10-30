@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 
 /**
@@ -37,6 +37,13 @@ public class UniqueReminderList implements Iterable<Reminder> {
         internalList = FXCollections.observableArrayList();
         internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
         personToReminderMap = new HashMap<>();
+    }
+
+    /**
+     * Returns true if the list contains no Reminders.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
     }
 
     /**
@@ -65,6 +72,10 @@ public class UniqueReminderList implements Iterable<Reminder> {
      */
     public void add(Person person, Interaction interaction) {
         requireAllNonNull(person, interaction);
+        //Person must have lead and interaciton to have a reminder
+        if (person.getLead() == null) {
+            return;
+        }
         Reminder toAdd = new Reminder(person.getName(), person.getPhone(), person.getTags(), person.getLead(),
                 interaction.getDate());
         if (contains(toAdd)) {
@@ -87,6 +98,16 @@ public class UniqueReminderList implements Iterable<Reminder> {
     }
 
     /**
+     * Returns the earliest reminder time in the {@code UniqueReminderList}
+     */
+    public long getEarliestReminderTime() {
+        if (internalList.isEmpty()) {
+            return -1;
+        }
+        return internalList.stream().mapToLong(Reminder::getDueTime).min().getAsLong();
+    }
+
+    /**
      * Returns the list of reminders associated with a specific date.
      *
      * @param date The date that which is used to retrieve the list of reminders.
@@ -103,6 +124,13 @@ public class UniqueReminderList implements Iterable<Reminder> {
         }
         reminderList.addAll(retrievedReminders);
         return reminderList;
+    }
+
+    /**
+     * Removes {@code Reminder} from this {@code UniqueReminderList} that are outdated.
+     */
+    public void removeOutdatedReminders() {
+        internalList.removeIf(reminder -> reminder.getDueTime() < 0);
     }
 
     public Iterator<Reminder> iterator() {

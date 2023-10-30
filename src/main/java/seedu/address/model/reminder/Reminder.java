@@ -7,10 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.lead.Lead;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +39,7 @@ public class Reminder {
         this.name = name;
         this.phone = phone;
         this.tags.addAll(tags);
+        assert lead != null;
         this.lead = lead;
         this.currentDate = currentDate;
         this.followUpDate = this.getFollowUpDate(currentDate, lead);
@@ -77,6 +78,10 @@ public class Reminder {
         cal.setTime(currentDate);
         cal.add(Calendar.DAY_OF_YEAR, lead.getFollowUpPeriod() * DAYS_IN_WEEK);
         return cal.getTime();
+    }
+
+    public long getDueTime() {
+        return followUpDate.getTime() - Calendar.getInstance().getTime().getTime();
     }
 
     /**
