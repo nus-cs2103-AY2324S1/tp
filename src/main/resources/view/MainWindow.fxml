@@ -28,6 +28,7 @@
                 <URL value="@css/MenuBar.css"/>
                 <URL value="@css/ResultDisplay.css"/>
                 <URL value="@css/ScrollBar.css"/>
+                <URL value="@css/JobCard.css"/>
             </stylesheets>
             <VBox>
                 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">

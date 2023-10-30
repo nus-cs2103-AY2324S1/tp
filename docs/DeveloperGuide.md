@@ -51,6 +51,7 @@ between classes that represent parts of the visible GUI.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
+
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add Command
@@ -65,7 +66,7 @@ Optional attributes are `Status`, `Industry`, `Deadline` and `JobType`
 
 It is implemented by `AddCommand` and `AddCommandParser`.
 
-`AddCommandParser` parses the users' input and checks for the presence of compulsory and optional prefixes. 
+`AddCommandParser` parses the users' input and checks for the presence of compulsory and optional prefixes.
 The information is then used to create a new Job Application through the `AddCommand`.
 
 (insert UML diagram here)
@@ -83,10 +84,13 @@ The following sequence/activity diagram illustrates the process of invocation fo
 The edit command allows the user to edit any field in their job application.
 
 #### Implementation
+
 It is implemented by `EditCommand` and `EditCommandParser`.
 
-`EditCommandParser` parses the users' input and checks for the valid prefixes to determine the field the user wants to change.
-The information is then used to create a new Job Application with the updated fields while retaining the unchanged fields through the `EditCommand`.
+`EditCommandParser` parses the users' input and checks for the valid prefixes to determine the field the user wants to
+change.
+The information is then used to create a new Job Application with the updated fields while retaining the unchanged
+fields through the `EditCommand`.
 
 The following Class Diagram of EditCommand illustrates the interactions between EditCommand and other classes:
 
@@ -99,6 +103,7 @@ The following sequence diagram illustrates the process of invocation for the Edi
 #### Design Considerations
 
 --------------------------------------------------------------------------------------------------------------------
+
 ### Delete Command
 
 The delete command allows the user to delete a job application using its index.
@@ -109,10 +114,13 @@ The following sequence diagram illustrates the process of invocation for the com
 
 (insert UML sequence diagram)
 
-The `DeleteCommand` class implements this command. It accepts an index and deletes the job application at the specified index.
+The `DeleteCommand` class implements this command. It accepts an index and deletes the job application at the specified
+index.
 
-The `DeleteCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
-not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown. If the user input is valid,
+The `DeleteCommandParser` class is used to parse the arguments for the command from the user input. If the user input
+does
+not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown. If the user input is
+valid,
 then `DeleteCommandParser` returns the corresponding `DeleteCommand`.
 
 #### Design considerations
@@ -174,16 +182,19 @@ The following sequence diagram illustrates the process of invocation for the com
 
 (insert UML sequence diagram)
 
-The `FindCommand` class implements this command. 
-It accepts a `FieldContainsKeywordsPredicate` which will be set as the predicate when `Model::updateFilteredJobList` is called.
+The `FindCommand` class implements this command.
+It accepts a `FieldContainsKeywordsPredicate` which will be set as the predicate when `Model::updateFilteredJobList` is
+called.
 
 The `FindCommandParser` class is used to parse the arguments for the command from the user input. If the user input does
 not conform to the expected format, a `ParseException` is thrown. If the user input is valid, then `FindCommandParser`
-generates the corresponding `FindCommand` with a `FieldContainsKeywordsPredicate` which will be set as the predicate when filtering through the list.
+generates the corresponding `FindCommand` with a `FieldContainsKeywordsPredicate` which will be set as the predicate
+when filtering through the list.
 
 #### Design considerations
 
 --------------------------------------------------------------------------------------------------------------------
+
 ### Clear Command
 
 The clear command allows the user to delete all job applications.

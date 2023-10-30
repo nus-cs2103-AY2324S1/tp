@@ -1,0 +1,57 @@
+/* Job Card */
+#cardPane {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30px;
+    -fx-border-color: #E1E1E1;
+    -fx-border-size: 2;
+    -fx-border-radius: 30px;
+    -fx-padding: 0px, 0px, 50px, 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 2, 2);
+}
+
+.cell_big_label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-text-fill: #343434;
+}
+
+.cell_small_label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #787878;
+}
+
+.cell_index_label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #343434;
+}
+
+.cell_status_label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #343434;
+    -fx-padding: 2px 5px;
+}
+
+.to_be_submitted {
+    -fx-background-color: #F4D5EE;
+    -fx-background-radius: 5px;
+}
+
+.pending {
+    -fx-background-color: #E4E1FF;
+    -fx-background-radius: 5px;
+}
+
+.approved {
+    -fx-background-color: #BFE2CE;
+    -fx-background-radius: 5px;
+}
+
+.rejected {
+    -fx-background-color: #FFD0D3;
+    -fx-background-radius: 5px;
+}
