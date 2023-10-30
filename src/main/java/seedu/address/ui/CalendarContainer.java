@@ -14,7 +14,6 @@ public class CalendarContainer extends UiPart<Region> {
     private static final String FXML = "CalendarContainer.fxml";
 
     private ReadOnlyCalendar calendar;
-
     @FXML
     private StackPane calendarLabelPlaceholder;
 

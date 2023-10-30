@@ -68,6 +68,7 @@ public class CalendarEventSpace extends UiPart<Region> {
         Stream.<AnchorPane>generate(AnchorPane::new).limit(NUMBER_OF_ROWS).forEachOrdered(pane -> {
             pane.setPrefHeight(NODE_HEIGHT);
             pane.setPrefWidth(calculateCalendarWidth());
+            pane.setMaxWidth(calculateCalendarWidth());
             eventSpace.addRow(eventSpace.getRowCount(), pane);
             rowList.add(pane);
         });
