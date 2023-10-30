@@ -21,7 +21,7 @@ public class SortCommand extends Command {
     public static final String SORTBY_KEYWORD4 = "/byphone";
     public static final String REVERSE_KEYWORD = "/reverse";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all persons in UniMate "
-            + "by the alphabetical order of their name. \n"
+            + "by the ascending or descending order of specified attribute. \n"
             + "Example: " + COMMAND_WORD + " " + SORTBY_KEYWORD1 + " " + REVERSE_KEYWORD;
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons by specified order";
