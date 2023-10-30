@@ -21,6 +21,7 @@ public class Course {
     private final String name;
     private final String courseCode;
     private final Set<Lesson> lessons = new HashSet<>();
+    public static final Course EMPTY_COURSE = new Course();
 
 
     /**
@@ -36,6 +37,11 @@ public class Course {
         this.name = name;
         this.courseCode = courseCode;
         this.lessons.addAll(lessons);
+    }
+
+    private Course() {
+        this.name = "";
+        this.courseCode = "";
     }
 
     public String getName() {
