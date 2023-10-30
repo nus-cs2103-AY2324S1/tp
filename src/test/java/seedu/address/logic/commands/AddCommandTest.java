@@ -19,6 +19,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LogBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -88,10 +89,33 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
+        @Override
+        public LogBook getLogBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setLogBook(LogBook logBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getFoundPersonsList() {
+            // Return an empty list or a list with some persons if needed for your test
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFoundPersonsList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {

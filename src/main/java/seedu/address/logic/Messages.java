@@ -23,6 +23,8 @@ public class Messages {
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_MISSING_IDENTIFICATION =
             "Missing identification! Use the n/ or id/ tag to specify the patient";
+    public static final String MESSAGE_EMPTY_FIND_RESULT =
+            "There are no FindCommand results. There is nothing to be saved to the logbook.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
