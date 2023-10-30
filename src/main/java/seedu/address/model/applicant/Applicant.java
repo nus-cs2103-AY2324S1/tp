@@ -70,6 +70,15 @@ public class Applicant {
         return address;
     }
 
+    /**
+     * Obtains an Applicant object with the same details as the current Applicant, except hasInterview which is always
+     *     set to false.
+     * @return A new Applicant object with the same details except for hasInterview which is always false.
+     */
+    public Applicant getApplicantWithoutInterview() {
+        return new Applicant(name, phone, email, address, tags);
+    }
+
     public boolean hasInterview() {
         return hasInterview;
     }

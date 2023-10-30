@@ -44,6 +44,10 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
         LocalDateTime startTime = TimeParser.parseDate(argMultimap.getValue(PREFIX_START_TIME).get().trim());
         LocalDateTime endTime = TimeParser.parseDate(argMultimap.getValue(PREFIX_END_TIME).get().trim());
 
+        if (endTime.isBefore(startTime)) {
+            throw new ParseException(AddInterviewCommand.MESSAGE_INVALID_TIME);
+        }
+
         Index applicantIndex;
         try {
             applicantIndex = ParserUtil.parseIndex(applicantArgs);

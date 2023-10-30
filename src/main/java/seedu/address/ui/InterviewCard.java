@@ -50,6 +50,10 @@ public class InterviewCard extends UiPart<Region> {
         interviewStartTime.setText(interview.getInterviewStartTimeAsString());
         interviewEndTime.setText(interview.getInterviewEndTimeAsString());
         rating.setText(interview.getRating().rating);
-        cardPane.setStyle("-fx-border-color: #7a7a2c; -fx-border-width: 3;");
+        if (interview.isDone()) {
+            cardPane.setStyle("-fx-border-color: #2c7a2c; -fx-border-width: 3;");
+        } else {
+            cardPane.setStyle("-fx-border-color: #7a2c2c; -fx-border-width: 3;");
+        }
     }
 }

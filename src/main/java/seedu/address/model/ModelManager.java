@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -152,6 +153,8 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteInterview(Interview target) {
+        Applicant applicantToUpdate = target.getInterviewApplicant();
+        addressBook.setApplicant(applicantToUpdate, applicantToUpdate.getApplicantWithoutInterview());
         addressBook.removeInterview(target);
     }
 
@@ -185,6 +188,12 @@ public class ModelManager implements Model {
     public void updateFilteredInterviewList(Predicate<Interview> predicate) {
         requireNonNull(predicate);
         filteredInterviews.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortInterviewList(Comparator<Interview> comparator) {
+        requireNonNull(comparator);
+        this.addressBook.sortInterview(comparator);
     }
 
     @Override

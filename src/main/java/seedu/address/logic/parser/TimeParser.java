@@ -20,7 +20,6 @@ import seedu.address.model.interview.UniqueInterviewList;
 public class TimeParser {
     protected static final LocalDateTime DEFAULT_DATE = LocalDateTime.of(1970, 1, 1, 0, 0);
     protected static final String[][] DATE_FORMATS = new String[][] {
-            // TODO: ADD THIS PATTERN: 2024-12-21T19:00
             // time string with day and time (formatID == 0)
             {
             "E HHmm",
@@ -139,7 +138,6 @@ public class TimeParser {
                 res.add(currentInterview);
             }
         }
-        System.out.println(res);
         return res;
     }
 
@@ -156,6 +154,131 @@ public class TimeParser {
         int todayDay = today.getDayOfMonth();
         int todayMonth = today.getMonthValue();
         int todayYear = today.getYear();
+        List<Interview> res = new ArrayList<>();
+        // loop over all the interviews, and add those that have today as the start time
+        for (Interview interview : interviews) {
+            LocalDateTime currentInterviewStartTime = interview.getInterviewStartTime();
+            int currentInterviewDay = currentInterviewStartTime.getDayOfMonth();
+            int currentInterviewMonth = currentInterviewStartTime.getMonthValue();
+            int currentInterviewYear = currentInterviewStartTime.getYear();
+            if (currentInterviewDay == todayDay
+                    && currentInterviewMonth == todayMonth
+                    && currentInterviewYear == todayYear) {
+                res.add(interview); // add the current interview if its start date is today
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Compiles a list of free times that the user has. Each element is a 2-element list where the
+     * first element is the start of the free time block, and the second element is the end of the
+     * free time block. Only places interviews that are within a 9-5 workday. Assumes that the given
+     * interview list has no clashes. Also assumes that the start time of any scheduled interviews are less
+     * than or equals to their corresponding end time.
+     *
+     * @author Tan Kerway
+     * @param day the day that the user inputs
+     * @param interviewList the list of interviews that the user has
+     * @return a list of free time blocks that the user has on a given day
+     */
+    public static List<List<LocalDateTime>> listPocketsOfTimeOnGivenDay(
+            LocalDateTime day,
+            UniqueInterviewList interviewList) {
+        // filter the interviews that fall on the given day, and sort in ascending
+        // chronological order
+        List<Interview> interviewsOnGivenDay =
+                listInterviewsOnGivenDay(day, interviewList);
+        UniqueInterviewList temp = new UniqueInterviewList();
+        temp.setInterviews(interviewsOnGivenDay);
+        List<Interview> interviewsOnGivenDaySorted = sortInterviewsInChronologicalAscendingOrder(temp);
+        List<List<LocalDateTime>> res = new ArrayList<>();
+        LocalDateTime startOfWorkDay = LocalDateTime.of(
+                day.getYear(),
+                day.getMonthValue(),
+                day.getDayOfMonth(),
+                9,
+                0);
+        LocalDateTime endOfWorkDay = LocalDateTime.of(
+                day.getYear(),
+                day.getMonthValue(),
+                day.getDayOfMonth(),
+                17,
+                0);
+        // track the previous end time of the interview
+        LocalDateTime prevEnd = startOfWorkDay.plusDays(0);
+
+        // find free time in 24h window
+        for (Interview interview : interviewsOnGivenDaySorted) {
+            // get the start time and end time
+            LocalDateTime currentInterviewStartTime = interview.getInterviewStartTime();
+            LocalDateTime currentInterviewEndTime = interview.getInterviewEndTime();
+            // case 1: the workday is completely overlapped by the interview
+            if (currentInterviewStartTime.isBefore(startOfWorkDay)
+                && currentInterviewEndTime.isAfter(endOfWorkDay)) {
+                prevEnd = currentInterviewEndTime.plusDays(0);
+                break;
+            }
+            // case 2: the workday is outside and before the workday
+            if (currentInterviewEndTime.isBefore(startOfWorkDay)) {
+                continue;
+            }
+            // case 3: the workday is outside and after the workday
+            if (currentInterviewStartTime.isAfter(endOfWorkDay)) {
+                break;
+            }
+            // case 4: the interview's start point is before the start of workday
+            // and the interview's end point is after the start of the workday
+            if (currentInterviewStartTime.isBefore(startOfWorkDay)
+                && currentInterviewEndTime.isAfter(startOfWorkDay)) {
+                prevEnd = currentInterviewEndTime.plusDays(0);
+                continue;
+            }
+            // get the current block of free time by taking the end of the last interval
+            // and the start of the current interval
+            List<LocalDateTime> currentFreeTime = new ArrayList<>();
+            currentFreeTime.add(prevEnd);
+            currentFreeTime.add(currentInterviewStartTime);
+            res.add(currentFreeTime);
+            prevEnd = currentInterviewEndTime;
+        }
+
+        // add stray free time, if any
+        if (prevEnd.isBefore(endOfWorkDay)) {
+            List<LocalDateTime> strayFreeTime = new ArrayList<>();
+            strayFreeTime.add(prevEnd);
+            strayFreeTime.add(endOfWorkDay);
+            res.add(strayFreeTime);
+        }
+        return res;
+    }
+
+
+    /**
+     * Sorts the list of interviews in ascending chronological order.
+     *
+     * @author Tan Kerway
+     *
+     */
+    public static List<Interview> sortInterviewsInChronologicalAscendingOrder(UniqueInterviewList interviews) {
+        List<Interview> res = new ArrayList<>();
+        for (Interview interview : interviews) {
+            res.add(interview);
+        }
+        res.sort(Comparator.comparing(Interview::getInterviewStartTime));
+        return res;
+    }
+
+    /**
+     * Compiles a list of interviews that the user has on a given day
+     *
+     * @author Tan Kerway
+     *
+     */
+    public static List<Interview> listInterviewsOnGivenDay(LocalDateTime day, UniqueInterviewList interviews) {
+        int todayDay = day.getDayOfMonth();
+        int todayMonth = day.getMonthValue();
+        int todayYear = day.getYear();
         List<Interview> res = new ArrayList<>();
         // loop over all the interviews, and add those that have today as the start time
         for (Interview interview : interviews) {
@@ -242,21 +365,6 @@ public class TimeParser {
             throw new seedu.address.logic.parser.exceptions.ParseException(MISSING_TIME_ERROR_MESSAGE);
         }
         return res.withHour(time.getHour()).withMinute(time.getMinute());
-    }
-
-    /**
-     * Sorts the list of interviews in ascending chronological order.
-     *
-     * @author Tan Kerway
-     *
-     */
-    public static List<Interview> sortInterviewsInChronologicalAscendingOrder(UniqueInterviewList interviews) {
-        List<Interview> res = new ArrayList<>();
-        for (Interview interview : interviews) {
-            res.add(interview);
-        }
-        res.sort(Comparator.comparing(Interview::getInterviewStartTime));
-        return res;
     }
 
     /**

@@ -21,6 +21,7 @@ public class RateCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) Rating\n"
             + "Example: " + COMMAND_WORD + " 1" + " 3.5";
     public static final String MESSAGE_MARK_INTERVIEW_SUCCESS = "Marked Interview: %s as done.";
+    public static final String MESSAGE_NOT_DONE = "Interview: %s must be completed before rating.";
     private final Index targetIndex;
     private final Rating newRating;
 
@@ -45,13 +46,18 @@ public class RateCommand extends Command {
 
         Interview interviewToRate = lastShownList.get(targetIndex.getZeroBased());
 
+        if (!interviewToRate.isDone()) {
+            throw new CommandException(String.format(MESSAGE_NOT_DONE,
+                    Messages.formatInterview(interviewToRate)));
+        }
+
         Interview ratedInterview = new Interview(
                 interviewToRate.getInterviewApplicant(),
                 interviewToRate.getJobRole(),
                 interviewToRate.getInterviewStartTime(),
                 interviewToRate.getInterviewEndTime(),
                 newRating,
-                false
+                interviewToRate.isDone()
         );
         model.setInterview(interviewToRate, ratedInterview);
 
