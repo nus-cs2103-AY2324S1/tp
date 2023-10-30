@@ -1,6 +1,5 @@
 package networkbook.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static networkbook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
@@ -46,7 +45,7 @@ public class OpenLinkCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        assert model != null : "Model should not be null.";
         List<Person> lastShownList = model.getFilteredPersonList();
         if (this.personIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

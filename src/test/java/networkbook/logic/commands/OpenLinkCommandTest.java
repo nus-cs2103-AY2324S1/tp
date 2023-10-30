@@ -114,6 +114,13 @@ public class OpenLinkCommandTest {
     }
 
     @Test
+    public void execute_nullModel_throwsAssertionError() {
+        assertThrowsAssertionError(() -> new OpenLinkCommand(
+                TypicalIndexes.INDEX_FIRST_PERSON, CommandTestUtil.VALID_LINK_INDEX_AMY)
+                .execute(null));
+    }
+
+    @Test
     public void execute_invalidPersonIndex_throwsCommandException() {
         OpenLinkCommand openLinkCommand = new OpenLinkCommand(
                 TypicalIndexes.INVALID_INDEX, CommandTestUtil.VALID_LINK_INDEX_AMY);
