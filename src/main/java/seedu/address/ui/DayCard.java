@@ -14,19 +14,17 @@ import seedu.address.model.person.Person;
 public class DayCard extends UiPart<Region> {
     private static final String FXML = "DayCard.fxml";
 
-    public final ObservableList<Calendar.GroupTimeContainer> dayTaskList;
-
+    public final ObservableList<GroupTimeContainer> dayTaskList;
     @FXML
     private HBox dayCard;
     @FXML
     private Label day;
     @FXML
     private Label task;
-
     @FXML
-    private ListView<Calendar.GroupTimeContainer> eachDayTaskList;
+    private ListView<GroupTimeContainer> eachDayTaskList;
 
-    public DayCard(ObservableList<Calendar.GroupTimeContainer> dayTaskList, int dayIndex) {
+    public DayCard(ObservableList<GroupTimeContainer> dayTaskList, int dayIndex) {
         super(FXML);
         this.dayTaskList = dayTaskList;
         day.setText(DayOfWeek.of(dayIndex).toString().substring(0, 3));
@@ -34,9 +32,9 @@ public class DayCard extends UiPart<Region> {
         eachDayTaskList.setCellFactory(listview -> new eachDayTaskListCell());
     }
 
-    class eachDayTaskListCell extends ListCell<Calendar.GroupTimeContainer> {
+    class eachDayTaskListCell extends ListCell<GroupTimeContainer> {
         @Override
-        protected void updateItem(Calendar.GroupTimeContainer task, boolean empty) {
+        protected void updateItem(GroupTimeContainer task, boolean empty) {
             super.updateItem(task, empty);
             if (empty || task == null) {
                 setGraphic(null);

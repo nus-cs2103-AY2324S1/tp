@@ -9,28 +9,21 @@ import javafx.scene.layout.Region;
 public class EachDayTaskLine extends UiPart<Region> {
 
     private static final String FXML = "GroupTaskCell.fxml";
-
-    private final Calendar.GroupTimeContainer task;
-
+    private final GroupTimeContainer task;
     @FXML
     private HBox individualTaskLine;
-
     @FXML
     private Label dot;
-
     @FXML
     private Label group_in_sch;
-
     @FXML
     private Label taskLine;
 
-    public EachDayTaskLine(Calendar.GroupTimeContainer task) {
+    public EachDayTaskLine(GroupTimeContainer task) {
         super(FXML);
         this.task = task;
         group_in_sch.setText(task.getGroup().getGroupName());
         taskLine.setText(task.getTimeInterval().toString());
     }
-
-
 
 }
