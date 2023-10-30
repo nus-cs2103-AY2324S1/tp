@@ -119,6 +119,29 @@ class FieldRangesTest {
     }
 
     @Test
+    public void test_equalsSelf_shortcut() {
+        FieldRanges fr = new FieldRanges();
+        //noinspection EqualsWithItself
+        assertEquals(fr, fr);
+    }
+
+    @Test
+    public void test_equalsNull_false() {
+        //noinspection MismatchedQueryAndUpdateOfCollection
+        FieldRanges fr = new FieldRanges();
+        //noinspection ConstantValue,SimplifiableAssertion
+        assertFalse(fr.equals(null));
+    }
+
+    @Test
+    public void test_equalsUnrelatedObject_false() {
+        //noinspection MismatchedQueryAndUpdateOfCollection
+        FieldRanges fr = new FieldRanges();
+        //noinspection SimplifiableAssertion,EqualsBetweenInconvertibleTypes
+        assertFalse(fr.equals("5"));
+    }
+
+    @Test
     public void test_hashCode() {
         HashSet<Integer> hashSet = new HashSet<>();
         for (int i = 0; i < 10; i++) {
@@ -126,6 +149,10 @@ class FieldRangesTest {
                 FieldRanges newFr = new FieldRanges();
                 newFr.put("a", new Range(i, i + j));
                 int hash = newFr.hashCode();
+                assertFalse(hashSet.contains(hash));
+                hashSet.add(hash);
+                newFr.setIsMatch(false);
+                hash = newFr.hashCode();
                 assertFalse(hashSet.contains(hash));
                 hashSet.add(hash);
             }

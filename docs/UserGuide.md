@@ -155,6 +155,7 @@ Expected output (fail):
 Lists fosterers that match a particular description or search, or all fosterers if the search is blank.
 
 Format: `list *KEYWORDS`
+
 Alias: `find`
 
 * The keywords are case-insensitive.
@@ -162,18 +163,26 @@ Alias: `find`
 * All fields are searched (including tags).
 * Keywords can match as parts of words. e.g. `john` will match `Johnny`.
 * Keywords can overlap. e.g. `samm my` will match `Sammy`
-* Fosters must match all keywords (i.e. `AND` search).
+* Fosterers must match all keywords (i.e. `AND` search).
   e.g. `Hans Bo` will return `Hansbo Grahm`, but not `Hans Duo`
+* Symbols between keywords or sections will combine them according to the function of the symbol.
+  `|` is `or`, `&` is `and` (low precedence), and ` ` (space) is `and` (high precedence).
+  e.g. `a & b | c d` is the same as `a & (b | (c & d))`
+* Use double quotes `"` for exact, case-sensitive, word-level match. 
+  e.g. `"Tom"` matches "Tom", but not "Tommy"
 
 Examples:
 * `list` lists all fosterers in the address book
 * `list john doe` matches "John Doe", "Doe John", "Johnny Doe", and "Mary" who lives on "John Doe Street"
-* `list john john doe` is redundant and gives the same result as `list john doe`
+* `find john john doe` is redundant and gives the same result as `find john doe`
+* `list "John" | zam & doe` matches "John Doe" and "Doe Shazam", but not "John Grahm"
 
 Expected output (success):
 ```agsl
-Fosterers matching query are listed.
+_ persons listed!
 ```
+With `_` being replaced with the number of persons found.
+
 UI also updates with a list of fosterers matching the query.
 
 Expected output (fail):
