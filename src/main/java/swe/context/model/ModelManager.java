@@ -4,8 +4,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import swe.context.commons.core.GuiSettings;
 import swe.context.model.contact.Contact;
+import swe.context.model.util.AlphabeticalComparator;
 
 
 
@@ -38,7 +40,12 @@ public class ModelManager implements Model {
         this.contacts = new Contacts(contacts);
         this.settings = new Settings(settings);
 
-        this.filteredContacts = new FilteredList<>(this.contacts.getUnmodifiableList());
+        ObservableList<Contact> unmodifiableList = this.contacts.getUnmodifiableList();
+        SortedList<Contact> sortedList = new SortedList<>(
+            unmodifiableList,
+            new AlphabeticalComparator()
+        );
+        this.filteredContacts = new FilteredList<>(sortedList);
     }
 
     @Override
