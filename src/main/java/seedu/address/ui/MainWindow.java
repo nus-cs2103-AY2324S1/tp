@@ -28,16 +28,15 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
 
     private PersonProfile personProfile;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
-    private boolean isInViewMode = false;
+    private final HelpWindow helpWindow;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -229,13 +228,6 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
-    }
-
-    /**
-     * Returns the boolean value that checks whether the current UI is in profile view page or normal foster list page.
-     */
-    public boolean getIsInViewMode() {
-        return this.isInViewMode;
     }
 
     protected void sendFeedback(String feedback) {

@@ -177,7 +177,8 @@ public class PersonProfileField extends UiPart<SplitPane> {
             cancel();
             break;
         default:
-            return;
+            //noinspection UnnecessarySemicolon
+            ;
         }
     }
 
