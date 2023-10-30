@@ -81,6 +81,16 @@ public class ClassDetails {
         return this;
     }
 
+    /**
+     * Marks the specific tutorial as absent.
+     */
+    public ClassDetails markAbsent(Index tutNum) {
+        requireNonNull(tutNum);
+        updateAssignmentAndTutorialCount();
+        this.attendanceTracker.markAbsent(tutNum);
+        return this;
+    }
+
     public String getClassNumber() {
         return this.classNumber;
     }

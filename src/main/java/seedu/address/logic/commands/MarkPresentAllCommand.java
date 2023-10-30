@@ -11,22 +11,22 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.grades.exceptions.InvalidTutorialIndexException;
 
 /**
- * Marks all displayed students' attendance.
+ * Marks all displayed students' attendance as present.
  */
-public class MarkAllCommand extends Command {
-    public static final String COMMAND_WORD = "markall";
-    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark attendance.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks all the students displayed.\n"
+public class MarkPresentAllCommand extends Command {
+    public static final String COMMAND_WORD = "mark-pre-all";
+    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark attendance as present.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks all the students displayed as present.\n"
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 ";
     private final Index index;
 
     /**
-     * Constructs a MarkAllCommand object.
+     * Constructs a MarkPresentAllCommand object.
      *
      * @param index of the class.
      */
-    public MarkAllCommand(Index index) {
+    public MarkPresentAllCommand(Index index) {
         this.index = index;
     }
 
@@ -53,11 +53,11 @@ public class MarkAllCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkAllCommand)) {
+        if (!(other instanceof MarkPresentAllCommand)) {
             return false;
         }
 
-        MarkAllCommand e = (MarkAllCommand) other;
+        MarkPresentAllCommand e = (MarkPresentAllCommand) other;
         return index.equals(e.index);
     }
 }

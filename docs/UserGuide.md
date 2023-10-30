@@ -195,29 +195,42 @@ Examples:
 * `config #t/2 #a/3` sets the tutorial count to 2 and assignment count to 3.
 
 ---
-### Marking tutorial attendance for a student : `mark`
+### Marking tutorial attendance for a student as present : `mark-pre`
 
-Marking tutorial attendance for an existing student in the class manager.
+Marking tutorial attendance for an existing student as present in the class manager.
 
-Format: `mark TUTORIAL_INDEX s/STUDENT_NUMBER`
+Format: `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER`
 
 * The `STUDENT_NUMBER` must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
 
 Examples:
-* `mark 1 s/A0249112A`
+* `mark-pre 1 s/A0249112A`
 
 ---
-### Marking tutorial attendance for all students displayed : `markall`
+### Marking tutorial attendance for all students displayed as present : `mark-pre-all`
 
-Marking tutorial attendance for all students displayed in the class manager.
+Marking tutorial attendance for all students displayed as present in the class manager.
 
-Format: `markall TUTORIAL_INDEX`
+Format: `mark-pre-all TUTORIAL_INDEX`
 
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
 
 Examples:
-* `markall 1`
+* `mark-pre-all 1`
+
+---
+### Marking tutorial attendance for a student as absent : `mark-abs`
+
+Marking tutorial attendance for an existing student as absent in the class manager.
+
+Format: `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER`
+
+* The `STUDENT_NUMBER` must be valid and exist.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count using the `config` command.
+
+Examples:
+* `mark-abs 1 s/A0249112A`
 
 ---
 ### Setting assignment grade for a student : `set-grade`
@@ -356,26 +369,27 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-| Action          | Format, Examples                                                                                                                                |
-|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague` |
-| **Comment**     | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                        |
-| **Delete**      | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                         |
-| **Edit**        | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`                               |
-| **Tag**         | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                         |
-| **Lookup**      | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                               |
-| **Config**      | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                     |
-| **Mark**        | `mark TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark 1 s/A0245234A`                                                                           |
-| **Markall**     | `markall TUTORIAL_INDEX` <br> e.g. `markall 1`                                                                                                  |
-| **Set Grade**   | `set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `set-grade s/A0245234A a/1 g/100`                                             |
-| **Record Part** | `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record-part s/A0245234A tut/1 part/true`                  |
-| **View**        | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                |
-| **Load**        | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                  |
-| **Clear**       | `clear`                                                                                                                                         |
-| **List**        | `list`                                                                                                                                          |
-| **Help**        | `help`                                                                                                                                          |
-| **Exit**        | `exit`                                                                                                                                          |
-| **Theme**       | `theme`                                                                                                                                         |
+| Action               | Format, Examples                                                                                                                                                 |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com c/T11 t/friend t/colleague`               |
+| **Comment**          | `comment s/STUDENT_NUMBER c/COMMENT` <br> e.g. `comment s/A0249112A c/This student is very hardworking.`                                                         |
+| **Delete**           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                          |
+| **Edit**             | `edit STUDENT_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com` |
+| **Tag**              | `tag STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag A0123456N t/smart t/shy`                                                                          |
+| **Lookup**           | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                |
+| **Config**           | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/13 #a/3`                                                                                      |
+| **Mark Present**     | `mark-pre TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-pre 1 s/A0245234A`                                                                                    |
+| **Mark Present All** | `mark-pre-all TUTORIAL_INDEX` <br> e.g. `mark-pre-all 1`                                                                                                         |
+| **Mark Absent**      | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`
+| **Set Grade**        | `set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `set-grade s/A0245234A a/1 g/100`                                                              |
+| **Record Part**      | `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record-part s/A0245234A tut/1 part/true`                                   |
+| **View**             | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                                 |
+| **Load**             | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                                   |
+| **Clear**            | `clear`                                                                                                                                                          |
+| **List**             | `list`                                                                                                                                                           |
+| **Help**             | `help`                                                                                                                                                           |
+| **Exit**             | `exit`                                                                                                                                                           |
+| **Theme**            | `theme`                                                                                                                                                          |
 
 --------------------------------------------------------------------------------------------------------------------
 
