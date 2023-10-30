@@ -17,6 +17,10 @@ public class ClearCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ClearCommand parse(String args) throws ParseException {
+        if (args.trim().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
+        }
         try {
             String confirmation = ParserUtil.parseSimpleString(args);
             return new ClearCommand(confirmation);
