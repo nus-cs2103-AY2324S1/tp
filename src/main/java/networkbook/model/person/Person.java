@@ -20,7 +20,7 @@ import networkbook.model.util.UniqueList;
  */
 public class Person implements Identifiable<Person> {
 
-    public static final ThrowingIoExceptionConsumer<Link> LINK_OPENER = link -> {
+    private static final ThrowingIoExceptionConsumer<Link> LINK_OPENER = link -> {
         if (!Desktop.isDesktopSupported()) {
             return;
         }

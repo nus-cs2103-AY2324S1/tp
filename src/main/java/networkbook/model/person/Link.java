@@ -72,7 +72,7 @@ public class Link implements Identifiable<Link> {
         if (this.value.startsWith("http") || this.value.startsWith("www")) {
             return this.value;
         } else {
-            return "www." + this.value;
+            return "https://" + this.value;
         }
     }
 

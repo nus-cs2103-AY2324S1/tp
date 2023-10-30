@@ -11,14 +11,17 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.ClearCommand;
+import networkbook.logic.commands.Command;
 import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.CreateCommand;
 import networkbook.logic.commands.ExitCommand;
 import networkbook.logic.commands.FindCommand;
 import networkbook.logic.commands.HelpCommand;
 import networkbook.logic.commands.ListCommand;
+import networkbook.logic.commands.OpenLinkCommand;
 import networkbook.logic.commands.SortCommand;
 import networkbook.logic.commands.delete.DeletePersonCommand;
 import networkbook.logic.commands.edit.EditCommand;
@@ -106,6 +109,14 @@ public class NetworkBookParserTest {
                 new CourseContainsKeyTermsPredicate(keywords),
                 new CourseIsStillBeingTakenPredicate(LocalDate.now()),
                 false), command);
+    }
+
+    @Test
+    public void parseCommand_openLink() throws Exception {
+        String userInput = OpenLinkCommand.COMMAND_WORD + " 1 " + CliSyntax.PREFIX_INDEX + " 1 ";
+        Command actualCommand = parser.parseCommand(userInput);
+        Command expectedCommand = new OpenLinkCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        assertEquals(expectedCommand, actualCommand);
     }
 
     @Test
