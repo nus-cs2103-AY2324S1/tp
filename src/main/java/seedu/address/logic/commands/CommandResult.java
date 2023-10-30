@@ -19,6 +19,24 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Application should display calendar comparison result */
+    private final boolean showCalendarComparison;
+
+    /**
+     * Constructs a CommandResult with the specified fields
+     *
+     * @param feedbackToUser feedback to be displayed to user.
+     * @param showHelp whether help information should be shown to the user.
+     * @param exit whether the application should exit.
+     * @param showCalendarComparison whether the application should display calendar comparison result.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showCalendarComparison) {
+        this.feedbackToUser = feedbackToUser;
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.showCalendarComparison = showCalendarComparison;
+    }
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -26,6 +44,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showCalendarComparison = false;
     }
 
     /**
@@ -46,6 +65,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowCalendarComparison() {
+        return showCalendarComparison;
     }
 
     @Override

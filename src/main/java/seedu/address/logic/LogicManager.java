@@ -85,6 +85,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ReadOnlyCalendar getComparisonCalendar() {
+        return model.getComparisonCalendar();
+    }
+
+    @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }

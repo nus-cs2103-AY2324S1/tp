@@ -45,6 +45,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of events for the week */
     ObservableList<Event> getCurrentWeekEventList();
 
+    /** Returns the resulting calendar from comparing calendars */
+    ReadOnlyCalendar getComparisonCalendar();
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 

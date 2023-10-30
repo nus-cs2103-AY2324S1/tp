@@ -176,6 +176,10 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleComparison() {
+
+    }
+
     @FXML
     private void handleComingSoon() {
 
@@ -202,6 +206,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowCalendarComparison()) {
+                handleComparison();
             }
 
             return commandResult;

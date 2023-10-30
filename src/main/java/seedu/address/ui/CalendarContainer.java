@@ -45,4 +45,8 @@ public class CalendarContainer extends UiPart<Region> {
         eventSpaceBackground.getChildren().add(new EventSpaceBackground(calendar).getRoot());
         eventSpace.getChildren().add(new CalendarEventSpace(calendar).getRoot());
     }
+
+    public void setComparisonStyle() {
+
+    }
 }

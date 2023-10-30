@@ -32,6 +32,7 @@ public class ModelManager implements Model {
     private final Calendar calendar;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ReadOnlyCalendar comparisonCalendar;
 
     /**
      * Initializes a ModelManager with the given addressBook, calendar and userPrefs.
@@ -45,6 +46,7 @@ public class ModelManager implements Model {
         this.calendar = new Calendar(calendar);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        comparisonCalendar = new Calendar();
     }
 
     public ModelManager() {
@@ -204,6 +206,18 @@ public class ModelManager implements Model {
         requireNonNull(range);
 
         calendar.deleteEventsInRange(range);
+    }
+
+    @Override
+    public ReadOnlyCalendar getComparisonCalendar() {
+        return comparisonCalendar;
+    }
+
+    @Override
+    public void setComparisonCalendar(ReadOnlyCalendar comparisonCalendar) {
+        requireNonNull(comparisonCalendar);
+
+        this.comparisonCalendar = comparisonCalendar;
     }
 
 

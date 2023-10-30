@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.calendar.Calendar;
+import seedu.address.model.calendar.ReadOnlyCalendar;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -73,6 +74,10 @@ public class Person {
     }
 
     public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public ReadOnlyCalendar getReadOnlyCalendar() {
         return calendar;
     }
 

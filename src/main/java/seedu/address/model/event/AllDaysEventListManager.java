@@ -55,6 +55,21 @@ public class AllDaysEventListManager {
     }
 
     /**
+     * Forcibly add the event to the appropriate SingleDayEventList objects corresponding to the event's dates.
+     *
+     * @param event event to be added.
+     */
+    public void forceAddEvent(Event event) {
+        List<LocalDate> eventDays = event.getEventDays();
+        for (LocalDate date : eventDays) {
+            if (!(dayToEventListMap.containsKey(date.toString()))) {
+                dayToEventListMap.put(date.toString(), new SingleDayEventList(date));
+            }
+            dayToEventListMap.get(date.toString()).forceAddEvent(event.boundEventByDate(date));
+        }
+    }
+
+    /**
      * Clears the manager.
      */
     public void clear() {

@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.collections.ObservableArrayBase;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.calendar.ReadOnlyCalendar;
@@ -147,6 +148,19 @@ public interface Model {
      * @param range an {@code EventPeriod} representing a time range.
      */
     void deleteEventsInRange(EventPeriod range);
+
+
+    /**
+     * Get the calendar resulting from the calendar comparison operation.
+     */
+    ReadOnlyCalendar getComparisonCalendar();
+
+    /**
+     * Set the event list after comparison of calendars.
+     *
+     * @param eventList event list generated from comparison of calendars.
+     */
+    void setComparisonCalendar(ReadOnlyCalendar eventList);
 
     /** Returns a view of the event list */
     ObservableList<Event> getEventList();

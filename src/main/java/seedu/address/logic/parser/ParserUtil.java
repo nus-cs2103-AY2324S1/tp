@@ -12,6 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.RuntimeParseException;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.person.Address;
@@ -38,6 +39,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Wrapped version of parseIndex that throws a RuntimeException instead.
+     *
+     * @param oneBasedIndex index integer to be converted into Index object.
+     * @return Index object that is parsed from the input index integer.
+     * @throws RuntimeException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parseIndexSafe(String oneBasedIndex) throws RuntimeParseException {
+        try {
+            return parseIndex(oneBasedIndex);
+        } catch (ParseException pe) {
+            throw new RuntimeException();
+        }
     }
 
     /**

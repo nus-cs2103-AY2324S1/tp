@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -94,6 +95,19 @@ public class Calendar implements ReadOnlyCalendar {
     }
 
     /**
+     * Force add the event into the event manager.
+     *
+     * @param event event to be added.
+     */
+    private void forceAddEvent(Event event) {
+        requireNonNull(event);
+        eventManager.forceAddEvent(event);
+        internalList.setAll(eventManager.asUnmodifiableObservableList());
+        internalListForCurrentWeek.setAll(eventManager.asUnmodifiableObservableList(
+                DATE_OF_START_OF_CURRENT_WEEK, DATE_OF_END_OF_CURRENT_WEEK));
+    }
+
+    /**
      * Checks if there is an event at specified time and deletes it if there is.
      * @param dateTime the specified time
      */
@@ -175,6 +189,15 @@ public class Calendar implements ReadOnlyCalendar {
             return eventManager.hasEvents();
         }
         return false;
+    }
+
+    @Override
+    public ReadOnlyCalendar combineCalendar(ReadOnlyCalendar other) {
+        requireNonNull(other);
+
+        Calendar combinedCalendar = new Calendar();
+        Stream.concat(internalList.stream(), other.getEventList().stream()).forEach(combinedCalendar::forceAddEvent);
+        return combinedCalendar;
     }
 
     @Override
