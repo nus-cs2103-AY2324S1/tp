@@ -65,7 +65,8 @@ public class FindFilterStringTokenizer {
 
     private boolean isPartOfCondition(char c) {
         return Character.isLetterOrDigit(c)
-                || c == '/' || c == ',' || c == '@' || c == '.' || c == '-' || c == '_' || c == '#';
+                || c == '/' || c == ',' || c == '@' || c == '.' || c == '-'
+                || c == '_' || c == '#' || c == '$';
     }
 
     private char next() {

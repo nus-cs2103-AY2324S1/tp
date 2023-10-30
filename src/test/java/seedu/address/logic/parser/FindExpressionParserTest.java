@@ -93,7 +93,7 @@ public class FindExpressionParserTest {
     }
 
     @Test
-    public void conditionNodeToPredicate_validOptionalField_evaluatesFalseIfEmpty() {
+    public void conditionNodeToPredicate_validOptionalField_evaluatesFalseIfEmpty() throws ParseException {
         Person person = new Person(
                 new Name("Alice"),
                 new Phone("12345"),
@@ -119,7 +119,7 @@ public class FindExpressionParserTest {
     }
 
     @Test
-    public void conditionNodeToPredicate_validOptionalField_evaluatesTrueIfNotEmpty() {
+    public void conditionNodeToPredicate_validOptionalField_evaluatesTrueIfNotEmpty() throws ParseException {
         Person person = new Person(
                 new Name("Alice"),
                 new Phone("12345"),

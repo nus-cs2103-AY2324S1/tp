@@ -16,5 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_LINKEDIN = new Prefix("li/");
     public static final Prefix PREFIX_BIRTHDAY = new Prefix("b/");
     public static final Prefix PREFIX_NOTE = new Prefix("nt/");
+    public static final Prefix PREFIX_BALANCE = new Prefix("bal/");
 
 }

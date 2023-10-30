@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BALANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINKEDIN;
@@ -18,6 +19,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.FindFilterStringTokenizer.Token;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -200,7 +202,8 @@ public class FindExpressionParser {
         LINKEDIN(PREFIX_LINKEDIN.getPrefix()),
         SECONDARY_EMAIL(PREFIX_SECONDARY_EMAIL.getPrefix()),
         TELEGRAM(PREFIX_TELEGRAM.getPrefix()),
-        NOTE(PREFIX_NOTE.getPrefix());
+        NOTE(PREFIX_NOTE.getPrefix()),
+        BALANCE(PREFIX_BALANCE.getPrefix());
 
 
         private final String prefix;
@@ -236,7 +239,7 @@ public class FindExpressionParser {
          *
          * @return A predicate representing the conditions set by this node.
          */
-        abstract Predicate<Person> toPredicate();
+        abstract Predicate<Person> toPredicate() throws ParseException;
     }
 
     /**
@@ -255,7 +258,7 @@ public class FindExpressionParser {
         }
 
         @Override
-        Predicate<Person> toPredicate() {
+        Predicate<Person> toPredicate() throws ParseException {
             Predicate<Person> leftPred = left.toPredicate();
             Predicate<Person> rightPred = right.toPredicate();
             return (operator == FindExpressionOperator.AND)
@@ -276,7 +279,7 @@ public class FindExpressionParser {
         }
 
         @Override
-        Predicate<Person> toPredicate() {
+        Predicate<Person> toPredicate() throws ParseException {
             return operand.toPredicate().negate();
         }
     }
@@ -295,7 +298,7 @@ public class FindExpressionParser {
         }
 
         @Override
-        Predicate<Person> toPredicate() {
+        Predicate<Person> toPredicate() throws ParseException {
 
             requireNonNull(field);
 
@@ -333,6 +336,31 @@ public class FindExpressionParser {
                 // not have to be an exact match of a full note, which makes this distinct from TAG.
                 return person -> person.getNotes().stream()
                         .anyMatch(note -> StringUtil.containsSubstringIgnoreCase(note.toString(), keyword));
+            case BALANCE:
+                // Balances are slightly more complicated -- a person passes the predicate if the absolute
+                // value of their balance is greater than or equal to the absolute value of the keyword
+                // which is parsed into a Balance but does support negative signs.
+                try {
+                    // if there is a negative sign at start of keyword, remove it but record isNegative
+                    boolean isNegative = keyword.trim().startsWith("-");
+                    String justBalanceString = keyword.trim();
+                    if (isNegative) {
+                        justBalanceString = justBalanceString.replaceFirst("-", "");
+                    }
+
+                    Balance inputBalance = ParserUtil.parseBalance(justBalanceString);
+
+                    if (isNegative) {
+                        return person -> person.getBalance().value <= -inputBalance.value;
+                    } else {
+                        return person -> person.getBalance().value >= inputBalance.value;
+                    }
+
+                } catch (NumberFormatException | ParseException e) {
+                    throw new ParseException("Invalid balance format: " + Balance.MESSAGE_CONSTRAINTS
+                            + "\nAdditionally, when finding with a balance field, you can use" +
+                            " a negative sign to find negative balances.");
+                }
             }
             throw new AssertionError("Invalid field type!");
         }
