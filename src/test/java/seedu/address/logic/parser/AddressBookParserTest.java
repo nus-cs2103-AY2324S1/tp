@@ -18,7 +18,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.commands.AddNoteCommand;
 import seedu.address.logic.commands.OweCommand;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.commands.RemoveNoteCommand;
@@ -89,7 +89,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_note() throws Exception {
         Note note = new Note("Sample note");
-        assertTrue(parser.parseCommand(NoteCommand.COMMAND_WORD + " 1 Sample note") instanceof NoteCommand);
+        assertTrue(parser.parseCommand(AddNoteCommand.COMMAND_WORD + " 1 Sample note") instanceof AddNoteCommand);
     }
 
     @Test
