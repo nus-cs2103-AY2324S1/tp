@@ -21,8 +21,7 @@ public class RevenueCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        // LOD?
-        List<Person> fullList = model.getAddressBook().getPersonList();
+        List<Person> fullList = model.getUnfilteredPersonList();
 
         double totalRevenue = 0;
         // for every person, find revenue, add them tgt

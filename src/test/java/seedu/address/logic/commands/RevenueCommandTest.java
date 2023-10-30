@@ -15,9 +15,6 @@ import seedu.address.testutil.AddressBookBuilder;
 
 public class RevenueCommandTest {
 
-    private AddressBookBuilder addressbook = new AddressBookBuilder();
-
-
     @Test
     public void execute_validRevenue() {
         // create addressbook with two persons
@@ -27,6 +24,21 @@ public class RevenueCommandTest {
 
         // expected values
         double expectedRevenue = HOON.getMonthlyRevenue() + FIONA.getMonthlyRevenue();
+        String formattedTotalRevenue = String.format("%.2f", expectedRevenue);
+        String expectedMessage = RevenueCommand.MESSAGE_SUCCESS + formattedTotalRevenue;
+
+        Command command = new RevenueCommand();
+        Model model = new ModelManager(addressbook.build(), new UserPrefs());
+        assertCommandSuccess(command, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_validRevenueEmptyList() {
+        // create addressbook with no persons
+        AddressBookBuilder addressbook = new AddressBookBuilder();
+
+        // expected 0.00
+        double expectedRevenue = 0.0;
         String formattedTotalRevenue = String.format("%.2f", expectedRevenue);
         String expectedMessage = RevenueCommand.MESSAGE_SUCCESS + formattedTotalRevenue;
 

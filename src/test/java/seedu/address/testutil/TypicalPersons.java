@@ -39,7 +39,7 @@ public class TypicalPersons {
             .withDay("Mon")
             .withBegin("0800")
             .withEnd("1000")
-            .withPayRate("20")
+            .withPayRate("20.00")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
@@ -48,7 +48,7 @@ public class TypicalPersons {
             .withDay("Tue")
             .withBegin("0900")
             .withEnd("1100")
-            .withPayRate("15")
+            .withPayRate("15.00")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
@@ -56,7 +56,7 @@ public class TypicalPersons {
             .withDay("Thu")
             .withBegin("1000")
             .withEnd("1200")
-            .withPayRate("25")
+            .withPayRate("25.00")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
@@ -64,7 +64,7 @@ public class TypicalPersons {
             .withDay("Thu")
             .withBegin("1100")
             .withEnd("1300")
-            .withPayRate("35")
+            .withPayRate("35.00")
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
@@ -72,7 +72,7 @@ public class TypicalPersons {
             .withDay("Fri")
             .withBegin("1200")
             .withEnd("1400")
-            .withPayRate("50")
+            .withPayRate("50.00")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
@@ -80,7 +80,7 @@ public class TypicalPersons {
             .withDay("Sat")
             .withBegin("1300")
             .withEnd("1500")
-            .withPayRate("40")
+            .withPayRate("40.00")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
@@ -88,7 +88,7 @@ public class TypicalPersons {
             .withDay("Sun")
             .withBegin("1400")
             .withEnd("1620")
-            .withPayRate("30")
+            .withPayRate("30.00")
             .build();
 
     // Manually added
@@ -98,7 +98,7 @@ public class TypicalPersons {
             .withDay("Mon")
             .withBegin("0800")
             .withEnd("1000")
-            .withPayRate("10")
+            .withPayRate("10.00")
             .build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
@@ -106,7 +106,7 @@ public class TypicalPersons {
             .withDay("Tue")
             .withBegin("0900")
             .withEnd("1100")
-            .withPayRate("60")
+            .withPayRate("60.00")
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}

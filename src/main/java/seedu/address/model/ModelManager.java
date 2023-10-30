@@ -25,6 +25,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> scheduleList;
 
+    private final ObservableList<Person> unfilteredPersons;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        unfilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         scheduleList = new SortedList<>(this.addressBook.getPersonList(), new LessonComparator());
     }
@@ -161,6 +164,8 @@ public class ModelManager implements Model {
     }
 
 
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -187,6 +192,17 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getScheduleList() {
         return scheduleList;
+    }
+
+    //=========== Full List Accessors ==================================================================
+
+    /**
+     * Returns an unmodifiable unfiltered view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return unfilteredPersons;
     }
 
     @Override
