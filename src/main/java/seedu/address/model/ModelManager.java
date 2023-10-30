@@ -105,7 +105,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteApplicant(Applicant target) {
         addressBook.removeApplicant(target);
-        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+        //updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     public void deleteMember(Member memberIndex) {
