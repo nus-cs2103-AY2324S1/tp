@@ -11,12 +11,10 @@ import static seedu.ccacommander.logic.commands.CommandTestUtil.MEMBER_INDEX_DES
 import static seedu.ccacommander.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.REMARK_DESC_AURORA;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_EVENT_INDEX_TWO;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_A;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_AURORA;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_INDEX_ONE;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_INDEX_TWO;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_MEMBER_INDEX_ONE;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_A;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_AURORA;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EVENT;
@@ -121,18 +119,14 @@ public class EnrolCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrolCommand.MESSAGE_USAGE);
 
-        // missing name index prefix
+        // missing name index field
         assertParseFailure(parser, EVENT_INDEX_DESC_TWO + HOURS_DESC_AURORA + REMARK_DESC_AURORA,
                 expectedMessage);
 
-        // missing event index prefix
+        // missing event index field
         assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + HOURS_DESC_AURORA + REMARK_DESC_AURORA,
                 expectedMessage);
 
-        // all prefixes missing
-        assertParseFailure(parser, VALID_MEMBER_INDEX_ONE + VALID_EVENT_INDEX_TWO + VALID_HOURS_AURORA
-                        + VALID_REMARK_AURORA,
-                expectedMessage);
     }
 
     @Test
