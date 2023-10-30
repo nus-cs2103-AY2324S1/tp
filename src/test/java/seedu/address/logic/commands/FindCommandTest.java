@@ -7,9 +7,18 @@ import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalDoctor.ALLEN;
+import static seedu.address.testutil.TypicalDoctor.BOYD;
+import static seedu.address.testutil.TypicalDoctor.CARLOS;
+import static seedu.address.testutil.TypicalDoctor.DAVID;
+import static seedu.address.testutil.TypicalDoctor.GREG;
+import static seedu.address.testutil.TypicalPatient.ALICE;
+import static seedu.address.testutil.TypicalPatient.BENSON;
 import static seedu.address.testutil.TypicalPatient.CARL;
+import static seedu.address.testutil.TypicalPatient.DANIEL;
 import static seedu.address.testutil.TypicalPatient.ELLE;
 import static seedu.address.testutil.TypicalPatient.FIONA;
+import static seedu.address.testutil.TypicalPatient.GEORGE;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -30,10 +39,12 @@ import seedu.address.model.person.Person;
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @Test
     public void constructor_nullField_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new FindCommand(null));
     }
+
     @Test
     public void equals() {
         GenderPredicate firstPredicate =
@@ -69,6 +80,38 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPatientList());
+    }
+
+    @Test
+    public void execute_findNric_personFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        Predicate<Person> predicate = preparePredicate("T0131267K");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredPatientList());
+    }
+
+    @Test
+    public void execute_findGender_personFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 9);
+        Predicate<Person> predicate = preparePredicate("M");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, CARL, DANIEL, GEORGE),
+                model.getFilteredPatientList());
+        assertEquals(Arrays.asList(BOYD, CARLOS, DAVID, GREG, ALLEN), model.getFilteredDoctorList());
+    }
+
+    @Test
+    public void execute_findBloodType_personFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        Predicate<Person> predicate = preparePredicate("Blood Type AB+");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredPatientList());
     }
 
     @Test

@@ -23,18 +23,18 @@ public class KeywordParser {
     public static Predicate<Person> parseInput(String[] input) {
         Pattern nricPattern = Pattern.compile("^[ST]\\d{7}[A-Z]$");
         Pattern genderPattern = Pattern.compile("^([MF])$");
-        Pattern bloodtypePattern = Pattern.compile("^Blood Type (A\\+|A-|B\\+|B-|AB\\+|AB-|O\\+|O-)$");
+        Pattern bloodtypePattern = Pattern.compile("^(A\\+|A-|B\\+|B-|AB\\+|AB-|O\\+|O-)$");
 
         Matcher genderMatcher = genderPattern.matcher(input[0]);
         Matcher nricMatcher = nricPattern.matcher(input[0]);
-        Matcher bloodtypeMatcher = bloodtypePattern.matcher(input[0]);
+        Matcher bloodtypeMatcher = bloodtypePattern.matcher(input[2]);
 
         if (nricMatcher.matches()) {
             return new IcContainsKeywordsPredicate(input[0]);
         } else if (genderMatcher.matches()) {
             return new GenderPredicate(input[0]);
         } else if (bloodtypeMatcher.matches()) {
-            return new BloodTypePredicate(input[0]);
+            return new BloodTypePredicate(input[2]);
         }
 
         return new NameContainsKeywordsPredicate(Arrays.asList(input));
