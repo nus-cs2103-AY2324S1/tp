@@ -21,7 +21,6 @@ public class RevenueCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        // LOD?
         List<Person> fullList = model.getUnfilteredPersonList();
 
         double totalRevenue = 0;
