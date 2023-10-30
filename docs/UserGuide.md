@@ -201,6 +201,8 @@ Finds all applications with the specified fields containing any of the given key
 
 * `find c/Google`
   Finds all applications with the keyword "Google" in the company name.
+* `find r/Software Engineer`
+  Finds all applications with the keyword "Software Engineer" in the role.
 
 ---
 
@@ -217,6 +219,9 @@ Sorts the list based on the field specifier provided.
 
 * `sort -d`
   Lists all applications sorted by deadline.
+
+* `sort -r`
+  Lists all applications sorted by role.
 
 ---
 
