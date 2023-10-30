@@ -27,17 +27,23 @@ public class KeywordParser {
 
         Matcher genderMatcher = genderPattern.matcher(input[0]);
         Matcher nricMatcher = nricPattern.matcher(input[0]);
-        Matcher bloodtypeMatcher = bloodtypePattern.matcher(input[2]);
+
+        if (input.length >= 3) {
+            Matcher bloodtypeMatcher = bloodtypePattern.matcher(input[2]);
+            if (bloodtypeMatcher.matches()) {
+                return new BloodTypePredicate(input[2]);
+            } else {
+                return new NameContainsKeywordsPredicate(Arrays.asList(input));
+            }
+        }
 
         if (nricMatcher.matches()) {
             return new IcContainsKeywordsPredicate(input[0]);
         } else if (genderMatcher.matches()) {
             return new GenderPredicate(input[0]);
-        } else if (bloodtypeMatcher.matches()) {
-            return new BloodTypePredicate(input[2]);
+        } else {
+            return new NameContainsKeywordsPredicate(Arrays.asList(input));
         }
-
-        return new NameContainsKeywordsPredicate(Arrays.asList(input));
     }
 }
 

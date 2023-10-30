@@ -20,7 +20,7 @@ public class KeywordParserTest {
     public void test_userInput_returnsCorrectFindCommand() {
         String[] testIcInput = {"T1234567G"};
         String[] testGenderInput = {"M"};
-        String[] testBloodTypeInput = {"Blood Type A+"};
+        String[] testBloodTypeInput = {"Blood", "Type", "A+"};
         String[] testNameInput = {"Alice", "Bob"};
 
         Predicate<Person> testPredicate1 = new IcContainsKeywordsPredicate("T1234567G");
@@ -29,7 +29,7 @@ public class KeywordParserTest {
         Predicate<Person> testPredicate2 = new GenderPredicate("M");
         assertTrue(KeywordParser.parseInput(testGenderInput).equals(testPredicate2));
 
-        Predicate<Person> testPredicate3 = new BloodTypePredicate("Blood Type A+");
+        Predicate<Person> testPredicate3 = new BloodTypePredicate("A+");
         assertTrue(KeywordParser.parseInput(testBloodTypeInput).equals(testPredicate3));
 
         Predicate<Person> testPredicate4 = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));

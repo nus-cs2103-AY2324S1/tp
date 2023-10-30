@@ -26,6 +26,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.KeywordParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -73,7 +74,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multiplePersonsFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         Predicate<Person> predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
@@ -83,7 +84,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_findNric_personFound() {
+    public void execute_findNric_personFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         Predicate<Person> predicate = preparePredicate("T0131267K");
         FindCommand command = new FindCommand(predicate);
@@ -93,7 +94,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_findGender_personFound() {
+    public void execute_findGender_personFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 9);
         Predicate<Person> predicate = preparePredicate("M");
         FindCommand command = new FindCommand(predicate);
@@ -105,7 +106,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_findBloodType_personFound() {
+    public void execute_findBloodType_personFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         Predicate<Person> predicate = preparePredicate("Blood Type AB+");
         FindCommand command = new FindCommand(predicate);
@@ -125,7 +126,7 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code Predicate<Person>}.
      */
-    private Predicate<Person> preparePredicate(String userInput) {
+    private Predicate<Person> preparePredicate(String userInput) throws ParseException {
         return KeywordParser.parseInput(userInput.split("\\s"));
     }
 }
