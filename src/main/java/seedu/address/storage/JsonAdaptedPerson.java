@@ -18,6 +18,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.enums.InputSource;
+import seedu.address.model.person.exceptions.BadAppointmentFormatException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -90,7 +92,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         appointment = source.getAppointment().isPresent()
-            ? source.getAppointment().get().value
+            ? source.getAppointment().get().toSaveString()
             : null;
         medicalHistories.addAll(source.getMedicalHistories().stream()
                 .map(JsonAdaptedMedicalHistory::new)
@@ -149,7 +151,6 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (nric == null) {
-            System.out.println(nric);
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
         if (!Nric.isValidNric(nric)) {
@@ -159,10 +160,16 @@ class JsonAdaptedPerson {
 
         final Set<MedicalHistory> modelMedicalHistories = new HashSet<>(personMedicalHistory);
 
-        if (appointment != null && !Appointment.isValidAppointment(appointment)) {
+        if (appointment != null && !Appointment.isValidAppointmentDelimit(appointment, InputSource.STORAGE)) {
             throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
         }
-        final Appointment modelAppointment = appointment == null ? null : new Appointment(appointment);
+
+        final Appointment modelAppointment;
+        try {
+            modelAppointment = appointment == null ? null : Appointment.of(appointment, InputSource.STORAGE);
+        } catch (BadAppointmentFormatException e) {
+            throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
+        }
 
         return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelAppointment,
                 modelMedicalHistories, modelTags);

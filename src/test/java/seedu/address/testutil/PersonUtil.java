@@ -28,6 +28,13 @@ public class PersonUtil {
     }
 
     /**
+     * Returns an add command string using the alias for adding the {@code person}.
+     */
+    public static String getAddCommandAlias(Person person) {
+        return AddCommand.COMMAND_WORD_ALIAS + " " + getPersonDetails(person);
+    }
+
+    /**
      * Returns the part of command string for the given {@code person}'s details.
      */
     public static String getPersonDetails(Person person) {
@@ -37,7 +44,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getAppointment().ifPresent((appt) -> sb.append(PREFIX_APPOINTMENT + appt.toString() + " "));
+        person.getAppointment().ifPresent((appt) -> sb.append(PREFIX_APPOINTMENT + appt.toSaveString() + " "));
         person.getMedicalHistories().stream().forEach(
                 s -> sb.append(PREFIX_TAG + s.value + " ")
         );
