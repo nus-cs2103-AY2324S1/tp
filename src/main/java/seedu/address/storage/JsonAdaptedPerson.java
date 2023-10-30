@@ -15,7 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.interaction.InteractionList;
+import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
@@ -88,9 +88,9 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final InteractionList modelInteractions = new InteractionList(new ArrayList<>());
+        final List<Interaction> modelInteractions = new ArrayList<>();
         for (JsonAdaptedInteraction interaction : interactions) {
-            modelInteractions.addInteraction(interaction.toModelType());
+            modelInteractions.add(interaction.toModelType());
         }
 
         if (name == null) {

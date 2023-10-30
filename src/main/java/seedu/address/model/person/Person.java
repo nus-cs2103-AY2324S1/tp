@@ -3,16 +3,17 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.interaction.Interaction;
-import seedu.address.model.person.interaction.InteractionList;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.tag.Tag;
 
@@ -37,7 +38,7 @@ public class Person {
     private final Profession profession;
     private final Income income;
     private final Details details;
-    private final InteractionList interactions = new InteractionList();
+    private final List<Interaction> interactions = new ArrayList<>();
 
     /**
      * Creates a {@code Person} given a PersonBuilder.
@@ -55,7 +56,7 @@ public class Person {
         this.profession = builder.profession;
         this.income = builder.income;
         this.details = builder.details;
-        this.interactions.addInteractions(builder.interactions);
+        this.interactions.addAll(builder.interactions);
     }
 
     public Name getName() {
@@ -103,11 +104,16 @@ public class Person {
     }
 
     public List<Interaction> getInteractions() {
-        return interactions.getInteractions();
+        return interactions;
     }
 
+    /**
+     * Returns a filtered list of {@code Interaction} that matches the given predicate.
+     */
     public List<Interaction> getFilteredInteractions(Predicate<Interaction> predicate) {
-        return this.interactions.getFilteredInteractions(predicate);
+        return this.interactions.stream()
+            .filter(predicate)
+            .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -115,8 +121,8 @@ public class Person {
      * @param interactions the set of interaction to be added
      * @return the updated set of interactions
      */
-    public InteractionList addInteractions(InteractionList interactions) {
-        this.interactions.addInteractions(interactions);
+    public List<Interaction> addInteractions(List<Interaction> interactions) {
+        this.interactions.addAll(interactions);
         return this.interactions;
     }
 
@@ -191,7 +197,7 @@ public class Person {
         private Profession profession;
         private Income income;
         private Details details;
-        private InteractionList interactions = new InteractionList();
+        private List<Interaction> interactions = new ArrayList<>();
 
         /**
          * Initialises the PersonBuilder with mandatory fields.
@@ -220,7 +226,7 @@ public class Person {
             profession = personToCopy.getProfession();
             income = personToCopy.getIncome();
             details = personToCopy.getDetails();
-            interactions = new InteractionList(personToCopy.getInteractions());
+            interactions = personToCopy.getInteractions();
         }
 
         /**
@@ -266,7 +272,7 @@ public class Person {
         /**
          * Sets the {@code InteractionList} of the {@code Person} that we are building.
          */
-        public PersonBuilder withInteractions(InteractionList interactions) {
+        public PersonBuilder withInteractions(List<Interaction> interactions) {
             this.interactions = interactions;
             return this;
         }
@@ -275,7 +281,7 @@ public class Person {
          * Adds the {@code Interaction} to the {@code Set<Interaction>} of the {@code Person} that we are building.
          */
         public PersonBuilder addInteraction(Interaction interaction) {
-            this.interactions.addInteraction(interaction);
+            this.interactions.add(interaction);
             return this;
         }
 
