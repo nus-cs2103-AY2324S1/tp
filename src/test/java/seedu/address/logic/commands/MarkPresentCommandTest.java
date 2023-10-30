@@ -21,9 +21,9 @@ import seedu.address.model.student.Student;
 import seedu.address.testutil.TypicalStudents;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for MarkCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for MarkPresentCommand.
  */
-public class MarkCommandTest {
+public class MarkPresentCommandTest {
 
     private Model model = new ModelManager(TypicalStudents.getTypicalAddressBook(), new UserPrefs());
 
@@ -33,14 +33,14 @@ public class MarkCommandTest {
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
         model.setSelectedStudent(studentToMark);
 
-        MarkCommand markCommand = new MarkCommand(i, studentToMark.getStudentNumber());
+        MarkPresentCommand markPresentCommand = new MarkPresentCommand(i, studentToMark.getStudentNumber());
 
-        String expectedMessage = MarkCommand.MESSAGE_MARK_SUCCESS;
+        String expectedMessage = MarkPresentCommand.MESSAGE_MARK_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setStudent(studentToMark, studentToMark.markPresent(i));
 
-        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(markPresentCommand, model, expectedMessage, expectedModel);
         assertEquals(studentToMark, model.getSelectedStudent().get(0));
     }
 
@@ -49,29 +49,30 @@ public class MarkCommandTest {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT + 1);
 
-        MarkCommand markCommand = new MarkCommand(i, studentToMark.getStudentNumber());
+        MarkPresentCommand markPresentCommand = new MarkPresentCommand(i, studentToMark.getStudentNumber());
 
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX);
+        assertCommandFailure(markPresentCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX);
     }
 
     @Test
     public void execute_nonexistentStudentNumber_throwsCommandException() {
-        MarkCommand markCommand = new MarkCommand(Index.fromOneBased(1), NONEXISTENT_STUDENT_NUMBER);
+        MarkPresentCommand markPresentCommand = new MarkPresentCommand(Index.fromOneBased(1),
+                NONEXISTENT_STUDENT_NUMBER);
 
-        assertCommandFailure(markCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
+        assertCommandFailure(markPresentCommand, model, Messages.MESSAGE_NONEXISTENT_STUDENT_NUMBER);
     }
 
     @Test
     public void equals() {
         Student firstStudent = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student secondStudent = TypicalStudents.getTypicalStudents().get(INDEX_SECOND_STUDENT.getZeroBased());
-        MarkCommand markFirstStudentForFirstTutorial = new MarkCommand(Index.fromOneBased(1),
+        MarkPresentCommand markFirstStudentForFirstTutorial = new MarkPresentCommand(Index.fromOneBased(1),
                 firstStudent.getStudentNumber());
-        MarkCommand markFirstStudentForSecondTutorial = new MarkCommand(Index.fromOneBased(2),
+        MarkPresentCommand markFirstStudentForSecondTutorial = new MarkPresentCommand(Index.fromOneBased(2),
                 firstStudent.getStudentNumber());
-        MarkCommand markSecondStudentForFirstTutorial = new MarkCommand(Index.fromOneBased(1),
+        MarkPresentCommand markSecondStudentForFirstTutorial = new MarkPresentCommand(Index.fromOneBased(1),
                 secondStudent.getStudentNumber());
-        MarkCommand markSecondStudentForSecondTutorial = new MarkCommand(Index.fromOneBased(2),
+        MarkPresentCommand markSecondStudentForSecondTutorial = new MarkPresentCommand(Index.fromOneBased(2),
                 secondStudent.getStudentNumber());
 
         // same object -> returns true

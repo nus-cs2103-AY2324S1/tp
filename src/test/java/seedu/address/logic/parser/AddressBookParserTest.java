@@ -35,7 +35,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.LookupCommand;
 import seedu.address.logic.commands.MarkAllCommand;
-import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.MarkPresentCommand;
 import seedu.address.logic.commands.RecordClassPartCommand;
 import seedu.address.logic.commands.SetGradeCommand;
 import seedu.address.logic.commands.TagCommand;
@@ -101,10 +101,10 @@ public class AddressBookParserTest {
     public void parseCommand_mark() throws Exception {
         int tut = ClassDetails.DEFAULT_COUNT;
         Student student = new StudentBuilder().build();
-        MarkCommand command = (MarkCommand) parser.parseCommand(MarkCommand.COMMAND_WORD + " "
+        MarkPresentCommand command = (MarkPresentCommand) parser.parseCommand(MarkPresentCommand.COMMAND_WORD + " "
                 + tut + " " + PREFIX_STUDENT_NUMBER + student.getStudentNumber(),
                 true);
-        assertEquals(new MarkCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
+        assertEquals(new MarkPresentCommand(Index.fromOneBased(tut), student.getStudentNumber()), command);
     }
 
     @Test
