@@ -79,7 +79,7 @@ public class EditCommand extends Command {
     private String personRole;
 
     /**
-     * @param nric of the person in the filtered person list to edit
+     * @param nric                 of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Ic nric, EditPersonDescriptor editPersonDescriptor) {
@@ -148,9 +148,11 @@ public class EditCommand extends Command {
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Appointment> updatedAppointments =
+                editPersonDescriptor.getAppointments().orElse(personToEdit.getAppointments());
 
         return new Doctor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemarks,
-                updatedGender, updatedIc, updatedTags);
+                updatedGender, updatedIc, updatedAppointments, updatedTags);
     }
 
 
@@ -166,10 +168,13 @@ public class EditCommand extends Command {
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Appointment> updatedAppointments =
+                editPersonDescriptor.getAppointments().orElse(personToEdit.getAppointments());
         BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(personToEdit.getBloodType());
         Condition updatedCondition = editPersonDescriptor.getCondition().orElse(personToEdit.getCondition());
         return new Patient(updatedName, updatedPhone, updatedEmergencyContact, updatedEmail, updatedAddress,
-                updatedRemarks, updatedGender, updatedIc, updatedCondition, updatedBloodType, updatedTags);
+                updatedRemarks, updatedGender, updatedIc, updatedCondition, updatedBloodType, updatedAppointments,
+                updatedTags);
     }
 
     @Override
@@ -276,6 +281,7 @@ public class EditCommand extends Command {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
+
         public void setAddress(Address address) {
             this.address = address;
         }
@@ -349,6 +355,7 @@ public class EditCommand extends Command {
         public void setAppointments(Set<Appointment> appointments) {
             this.appointments = (appointments != null) ? new HashSet<>(appointments) : null;
         }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.

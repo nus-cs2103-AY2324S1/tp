@@ -70,6 +70,7 @@ public class DoctorCard extends UiPart<Region> {
         doctor.getAppointments().stream()
                 .sorted(Comparator.comparing(Appointment::getAppointmentTime))
                 .forEach(appointment -> appointments.getChildren()
-                        .add(new Label(appointment.getAppointmentTime().toString())));
+                        .add(new Label("Appointment with Patient " + appointment.getDoctor() + " "
+                                + appointment.getAppointmentTime().toString())));
     }
 }

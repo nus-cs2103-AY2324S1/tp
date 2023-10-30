@@ -1,21 +1,19 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
-
 
 
 /**
@@ -38,7 +36,7 @@ public class DoctorBuilder {
     private Gender gender;
     private Ic ic;
     private Set<Tag> tags;
-    private ArrayList<Patient> patients;
+    private Set<Appointment> appointments;
 
     /**
      * Constructor for the PersonBuilder class that initialises
@@ -53,7 +51,7 @@ public class DoctorBuilder {
         gender = new Gender(DEFAULT_GENDER);
         ic = new Ic(DEFAULT_NRIC);
         tags = new HashSet<>();
-        patients = new ArrayList<Patient>();
+        appointments = new HashSet<>();
     }
 
     /**
@@ -68,6 +66,7 @@ public class DoctorBuilder {
         gender = doctorToCopy.getGender();
         ic = doctorToCopy.getIc();
         tags = new HashSet<>(doctorToCopy.getTags());
+        appointments = new HashSet<>(doctorToCopy.getAppointments());
     }
 
     /**
@@ -77,13 +76,15 @@ public class DoctorBuilder {
         this.name = new Name(name);
         return this;
     }
+
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public DoctorBuilder withTags(String ... tags) {
+    public DoctorBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
+
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
@@ -91,6 +92,7 @@ public class DoctorBuilder {
         this.address = new Address(address);
         return this;
     }
+
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
@@ -98,6 +100,7 @@ public class DoctorBuilder {
         this.phone = new Phone(phone);
         return this;
     }
+
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
@@ -133,13 +136,13 @@ public class DoctorBuilder {
     /**
      * Adds a {@code Patient} of the {@code Doctor} that we are building.
      */
-    public DoctorBuilder withPatients(ArrayList<Patient> patients) {
-        this.patients = patients;
+    public DoctorBuilder withAppointments(Appointment... appointments) {
+        this.appointments = SampleDataUtil.getAppointmentSet(appointments);
         return this;
     }
 
     public Doctor build() {
-        return new Doctor(name, phone, email, address, remark, gender, ic, tags);
+        return new Doctor(name, phone, email, address, remark, gender, ic, appointments, tags);
     }
 
 }

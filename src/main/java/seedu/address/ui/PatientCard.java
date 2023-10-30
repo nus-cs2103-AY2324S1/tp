@@ -71,12 +71,13 @@ public class PatientCard extends UiPart<Region> {
         gender.setText("Gender: " + person.getGender().value);
         nric.setText("NRIC: " + person.getIc().value);
         person.getTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getAppointments().stream()
                 .sorted(Comparator.comparing(Appointment::getAppointmentTime))
                 .forEach(appointment -> appointments.getChildren()
-                        .add(new Label(appointment.getAppointmentTime().toString())));
+                        .add(new Label("Appointment with Doctor " + appointment.getDoctor() + " "
+                                + appointment.getAppointmentTime().toString())));
 
         condition.setText("Condition: " + person.getCondition().value);
         bloodType.setText("Blood Type: " + person.getBloodType().value);

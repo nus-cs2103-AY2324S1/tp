@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOCTOR_IC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PATIENT_IC;
 
 import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Appointment;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
@@ -94,7 +97,6 @@ public class AddAppointmentCommand extends Command {
     }
 
     private Doctor findDoctor(Model model) {
-        Ic patientIc = toAdd.getPatient();
         Ic doctorIc = toAdd.getDoctor();
         List<Doctor> doctors = model.getFilteredDoctorList();
         for (Doctor d : doctors) {

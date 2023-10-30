@@ -153,7 +153,7 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm:ss`
 
 Examples:
 
-* `new-appt pic/T0123456H dic/S9851586G time/yyyy-MM-dd 13:00:00`
+* `new-appt pic/T0123456H dic/S9851586G time/2023-10-30T13:00:00`
 
 ### Listing all persons : `list`
 
