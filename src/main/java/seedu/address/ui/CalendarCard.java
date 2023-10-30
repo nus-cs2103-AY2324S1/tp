@@ -15,7 +15,7 @@ import seedu.address.commons.core.index.Index;
 
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a calendar schedule.
  */
 public class CalendarCard extends UiPart<Region> {
     private static final String FXML = "CalendarCard.fxml";
@@ -38,7 +38,7 @@ public class CalendarCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code CalendarCard} with the given status, time label and index to display.
      */
     public CalendarCard(Index index, String timeLabel, String status,
         double width, double translateX, Color color) {

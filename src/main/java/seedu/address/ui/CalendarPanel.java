@@ -21,7 +21,7 @@ import seedu.address.model.schedule.Schedule;
 
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of calendar rows which itself is made up of tutors and their assigned schedules.
  */
 public class CalendarPanel extends UiPart<Region> {
     private static final String FXML = "CalendarPanel.fxml";
@@ -35,7 +35,7 @@ public class CalendarPanel extends UiPart<Region> {
     private final ObservableList<PersonWithSchedules> personWithSchedulesList;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code CalendarPanel} with the given personList and scheduleList.
      */
     public CalendarPanel(ObservableList<Person> personList, ObservableList<Schedule> scheduleList) {
         super(FXML);
@@ -44,7 +44,7 @@ public class CalendarPanel extends UiPart<Region> {
         createPersonWithSchedulesList(personList, scheduleList);
 
         personListView.setItems(personWithSchedulesList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory(listView -> new CalendarRowViewCell());
     }
 
     private void createTimetableLabels() {
@@ -87,9 +87,10 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a tutor and their assigned schedules using a
+     * {@code ScheduleCard}.
      */
-    class PersonListViewCell extends ListCell<PersonWithSchedules> {
+    class CalendarRowViewCell extends ListCell<PersonWithSchedules> {
         @Override
         protected void updateItem(PersonWithSchedules personWithSchedules, boolean empty) {
             super.updateItem(personWithSchedules, empty);
