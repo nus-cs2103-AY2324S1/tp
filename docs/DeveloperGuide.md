@@ -322,9 +322,10 @@ respectively.
 
 ##### Adding Task
 
-The adding of tasks is facilitated by the `model#addTask()` method. 
+The adding of tasks is facilitated by the `model#addTask()` method.
 The method adds a task to the `TaskList` object which itself is an attribute of the `ModelManager` object by
-calling a similar method `Model::addTask()`. 
+calling a similar method `Model::addTask()`.
+
 These methods take in a `Description` and `Optional(Deadline)` object and finds the method within the `TaskList` object,
 then adds the `Task` object to the TaskList.
 Given below is an example usage scenario of the command.
@@ -471,12 +472,8 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
 
-### User stories
-
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
 | Priority | As a …                                                              | I want to …                                                                  | So that I can…                                                                          |
-|----------|---------------------------------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| -------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | `* * *`  | NUS student                                                         | search for the contacts of other students within my university               | contact them for group projects                                                         |
 | `* * *`  | NUS student                                                         | search for a name in the contact                                             | easily find the person’s contact                                                        |
 | `* * *`  | NUS student                                                         | add contacts into my address book easily                                     | retrieve the saved contact                                                              |
@@ -488,6 +485,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user with bad memory                                                | save a short description of my contact                                       | identify my contacts better                                                             |
 | `* * *`  | visual-reliant user                                                 | save a photo of the person into my contacts                                  | quickly recognise and find them                                                         |
 | `* * *`  | non-tech-savvy user                                                 | use the help feature of the app                                              | navigate about the app easily                                                           |
+| `* *`    | NUS student                                                         | sort all contacts by name                                                    | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by name in reverse                                         | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by email                                                   | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by email in reverse                                        | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by address                                                 | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by address in reverse                                      | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by phone                                                   | easily find a person's contact                                                          |
+| `* *`    | NUS student                                                         | sort all contacts by phone in reverse                                        | easily find a person's contact                                                          |
 | `* *`    | NUS student                                                         | import the NUS calendar into the application                                 | view all academic commitments more conveniently                                         |
 | `* *`    | NUS Student                                                         | compare timetables/calendars with my peers easily                            | plan meetings more conveniently                                                         |
 | `* *`    | NUS student                                                         | allocate tasks and responsibilities within a project or CCA group            | tasks can be done efficiently                                                           |
@@ -510,7 +515,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user accustomed to a PC                                             | view all commands at once                                                    | explore features quickly                                                                |
 | `*`      | user with a tendency to open many applications at once              | have the application time out and exit                                       | ensure my computer would not be cluttered by too many applications                      |
 
-*{More to be added}*
+_{More to be added}_
 
 ### Use cases
 
@@ -781,9 +786,7 @@ Use case ends.
 
 **Use case: UC13 Sort by fields.**
 
-
 **MSS**
-
 
 1. User requests to sort persons
 2. UniMate displays persons in specified order and by specified parameter
@@ -792,8 +795,8 @@ Use case ends.
 
 **Extensions**
 
-- 1a. User uses the wrong delimiter or makes a spelling mistake
-    - UniMate displays a message to show a helper message outlining the available sort options
+- 1a. User uses the wrong delimiter or makes a spelling mistake, or provides incorrect number of arguments
+    - UniMate displays a message to show a helper message outlining the correct syntax and available sort options
 
 ### Non-Functional Requirements
 

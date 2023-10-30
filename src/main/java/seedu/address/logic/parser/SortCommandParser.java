@@ -27,6 +27,9 @@ public class SortCommandParser implements Parser<SortCommand> {
     private static final String SORT_BY_NAME_KEYWORD = "byname";
     private static final String SORT_BY_PHONE_KEYWORD = "byphone";
     private static final String REVERSE_KEYWORD = "reverse";
+    private static final int MAX_SECONDARY_SORT = 0;
+    private static final int MAX_SORTS = MAX_SECONDARY_SORT + 1;
+    private static final int MAX_SORT_ARGS = 2 + MAX_SECONDARY_SORT * 2;
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
      * and returns an SortCommand object for execution.
@@ -45,13 +48,19 @@ public class SortCommandParser implements Parser<SortCommand> {
         List<String> sortValues = argMultimap.getAllValues(PREFIX_DELIMITER);
 
         ArrayList<SortComparator> sortComparatorList = new ArrayList<>();
-        if (sortValues.isEmpty()) {
+        boolean isEmptyArray = sortValues.isEmpty();
+        boolean isTooManyArgs = sortValues.size() > MAX_SORT_ARGS;
+        if (isEmptyArray || isTooManyArgs) {
             throw new ParseException(PARSE_EXCEPTION_MESSAGE);
         }
 
         for (String command: sortValues) {
             String commandLower = command.toLowerCase();
             SortComparator sortComparator;
+
+            if (!commandLower.equals(REVERSE_KEYWORD) && sortComparatorList.size() > MAX_SECONDARY_SORT) {
+                throw new ParseException(PARSE_EXCEPTION_MESSAGE);
+            }
 
             switch (commandLower) {
             case SORT_BY_ADDRESS_KEYWORD:

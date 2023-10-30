@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.SortCommand.REVERSE_KEYWORD;
 import static seedu.address.logic.commands.SortCommand.SORTBY_KEYWORD1;
 import static seedu.address.logic.commands.SortCommand.SORTBY_KEYWORD2;
 import static seedu.address.logic.commands.SortCommand.SORTBY_KEYWORD3;
@@ -29,9 +30,9 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_missingDelimiters_failure() {
-        assertParseFailure(parser, "2", PARSE_EXCEPTION_MESSAGE);
+        assertParseFailure(parser, " 2", PARSE_EXCEPTION_MESSAGE);
 
-        assertParseFailure(parser, "abc", PARSE_EXCEPTION_MESSAGE);
+        assertParseFailure(parser, " abc", PARSE_EXCEPTION_MESSAGE);
     }
 
     @Test
@@ -41,14 +42,25 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_invalidDelimiters_failure() {
-        assertParseFailure(parser, "-bydescription", PARSE_EXCEPTION_MESSAGE);
-        assertParseFailure(parser, "-byname", PARSE_EXCEPTION_MESSAGE);
+        assertParseFailure(parser, " -bydescription", PARSE_EXCEPTION_MESSAGE);
+        assertParseFailure(parser, " -byname", PARSE_EXCEPTION_MESSAGE);
     }
 
     @Test
     public void parse_wrongSortComparator_failure() {
-        assertParseFailure(parser, "/name", PARSE_EXCEPTION_MESSAGE);
-        assertParseFailure(parser, "/phone", PARSE_EXCEPTION_MESSAGE);
+        assertParseFailure(parser, " /name", PARSE_EXCEPTION_MESSAGE);
+        assertParseFailure(parser, " /phone", PARSE_EXCEPTION_MESSAGE);
+    }
+
+    @Test
+    public void parse_tooManyArgs_failure() {
+        assertParseFailure(parser, " /byname /reverse /byphone", PARSE_EXCEPTION_MESSAGE);
+        assertParseFailure(parser, " /byname /byphone", PARSE_EXCEPTION_MESSAGE);
+    }
+
+    @Test
+    public void parse_firstArgIsReverse_failure() {
+        assertParseFailure(parser, " /reverse", PARSE_EXCEPTION_MESSAGE);
     }
 
     @Test
@@ -83,6 +95,26 @@ public class SortCommandParserTest {
     public void parse_sortComparator_success4() {
         try {
             Command command = parser.parse(" " + SORTBY_KEYWORD4);
+        } catch (Exception e) {
+            fail("Fail");
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    public void parse_sortComparator_success5() {
+        try {
+            Command command = parser.parse(" " + SORTBY_KEYWORD2 + " " + REVERSE_KEYWORD);
+        } catch (Exception e) {
+            fail("Fail");
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    public void parse_sortComparator_success6() {
+        try {
+            Command command = parser.parse(" " + SORTBY_KEYWORD4 + " " + REVERSE_KEYWORD);
         } catch (Exception e) {
             fail("Fail");
         }
