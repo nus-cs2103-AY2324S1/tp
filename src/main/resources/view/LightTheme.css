@@ -374,7 +374,7 @@
 /* barchart */
 .axis {
     -fx-font-size: 1pt;
-    -fx-tick-label-fill: #00000;
+    -fx-tick-label-fill: #000000;
     -fx-tick-label-font-size: 10pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-tick-length: 10;
