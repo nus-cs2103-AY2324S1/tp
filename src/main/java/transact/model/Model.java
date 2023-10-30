@@ -1,6 +1,7 @@
 package transact.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -23,6 +24,8 @@ public interface Model {
     Predicate<Transaction> PREDICATE_SHOW_ALL_TRANSACTIONS = unused -> true;
     /** Transaction {@code Predicate} that always evaluate to false */
     Predicate<Transaction> PREDICATE_HIDE_ALL_TRANSACTIONS = unused -> false;
+    /** Transaction {@code Comparator} that sorts by id in ascending order */
+    Comparator<Transaction> COMPARATOR_ASC_BY_ID = Comparator.comparing(Transaction::getTransactionId);
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -175,4 +178,13 @@ public interface Model {
      *             if {@code predicate} is null.
      */
     void updateFilteredTransactionList(Predicate<Transaction> predicate);
+
+    /**
+     * Updates the comparator of the filtered transaction list to sort by the
+     * given {@code comparator}.
+     *
+     * @throws NullPointerException
+     *             if {@code comparator} is null.
+     */
+    void updateFilteredTransactionList(Comparator<Transaction> comparator);
 }

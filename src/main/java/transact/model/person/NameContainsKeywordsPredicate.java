@@ -1,25 +1,25 @@
 package transact.model.person;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
-import transact.commons.util.StringUtil;
 import transact.commons.util.ToStringBuilder;
+import transact.model.StringContainsKeywordsPredicate;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+    private final StringContainsKeywordsPredicate predicate;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+        predicate = new StringContainsKeywordsPredicate(keywords);
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        return predicate.test(person.getName().fullName);
     }
 
     @Override
@@ -34,11 +34,11 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        return Objects.equals(otherNameContainsKeywordsPredicate.predicate, predicate);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
+        return new ToStringBuilder(this).add("predicate", predicate).toString();
     }
 }
