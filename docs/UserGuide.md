@@ -36,8 +36,8 @@ applications.
 
     * `list` : Lists all applications.
 
-    * `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 i/Technology s/Pending` : 
-       Adds an application for the company named `Microsoft` to the Application Book.
+    * `add c/Microsoft r/Software Engineer d/Nov 12 2022 1200 i/Technology s/Pending` :
+      Adds an application for the company named `Microsoft` to the Application Book.
 
     * `delete 3` : Deletes the 3rd application shown in the current list.
 
@@ -60,24 +60,24 @@ applications.
 
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  * e.g. in `add c/COMPANY`, `COMPANY` is a parameter which can be used as `add c/Google`.
+    * e.g. in `add c/COMPANY`, `COMPANY` is a parameter which can be used as `add c/Google`.
 
 
 * Items in square brackets are optional.<br>
-  * e.g. `c/COMPANY [s/STATUS]` can be used as `c/Google s/Pending` or as `c/Google`.
+    * e.g. `c/COMPANY [s/STATUS]` can be used as `c/Google s/Pending` or as `c/Google`.
 
 
 * Parameters can be in any order.<br>
-  * e.g. if the command specifies `c/COMPANY r/ROLE`, `r/ROLE c/COMPANY` is also acceptable.
+    * e.g. if the command specifies `c/COMPANY r/ROLE`, `r/ROLE c/COMPANY` is also acceptable.
 
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be
   ignored.<br>
-  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+    * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 
-* `INDEX` refers to the index number of the chosen application in the displayed application list 
-  and must be a _positive integer_ 1, 2, 3, …
+* `INDEX` refers to the index number of the chosen application in the displayed application list and must be a _positive
+  integer_ 1, 2, 3, …
 
 * Structure of a job application
 
@@ -104,7 +104,7 @@ Adds an application to a company to the list.
 * Details of the company such as `DEADLINE`, `STATUS`, `INDUSTRY`, `JOB_TYPE` are optional
 * `DEADLINE` must be in the following format: MMM dd yyyy HHmm (E.g Dec 31 2030 1200)
 
-* `STATUS`can only be in the following formats: 
+* `STATUS`can only be in the following formats:
 
 | Status          | Remark                                                                                   |
 |-----------------|------------------------------------------------------------------------------------------|
@@ -113,7 +113,7 @@ Adds an application to a company to the list.
 | APPROVED        | An application that you have received a job offer for.                                   |
 | REJECTED        | An application that you have been rejected for.                                          |
 
-* `JOBTYPE` can only be in the following formats: 
+* `JOBTYPE` can only be in the following formats:
 
 | Job Type   | An application for |
 |------------|--------------------|
@@ -150,9 +150,9 @@ Edits an application in the list.
 **Examples:**
 
 * `edit 1 r/Announcer`
-    Changes the role of the 1st job application to an announcer.
+  Changes the role of the 1st job application to an announcer.
 * `edit 5 s/approved t/volunteer`
-    Changes the status and job type of the 5th job application to approved and volunteer respectively.
+  Changes the status and job type of the 5th job application to approved and volunteer respectively.
 
 ---
 
@@ -194,7 +194,7 @@ Finds all applications with the specified fields containing any of the given key
 * At least one optional field must be provided.
 * An application will be listed if at least one of the keywords match. The keywords are case-insensitive.
 * Applications with partially matching keywords will not be listed.
-  * e.g. searching for the keyword "Goo" will not list applications with "Google".
+    * e.g. searching for the keyword "Goo" will not list applications with "Google".
 * Searches for Deadline must be in the format `MMM DD YYYY HHMM`.
 
 **Examples:**
@@ -246,14 +246,14 @@ Exits the program.
 
 ## Command summary
 
-| Action       | Format                                                                                   |
-|--------------|------------------------------------------------------------------------------------------|
-| **Add**      | `add c/COMPANY r/ROLE d/DEADLINE s/STATUS i/INDUSTRY t/JOB_TYPE`                         |
-| **Edit**     | `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`      |
-| **Delete**   | `delete INDEX`                                                                           |
-| **List**     | `list`                                                                                   |
-| **Find**     | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
-| **Sort**     | `sort FIELD_SPECIFIER`                                                                   |
-| **Help**     | `help`                                                                                   |
-| **Clear**    | `clear`                                                                                  |
-| **Exit**     | `exit`                                                                                   |
+| Action     | Format                                                                                   |
+|------------|------------------------------------------------------------------------------------------|
+| **Add**    | `add c/COMPANY r/ROLE d/DEADLINE s/STATUS i/INDUSTRY t/JOB_TYPE`                         |
+| **Edit**   | `edit INDEX [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]`      |
+| **Delete** | `delete INDEX`                                                                           |
+| **List**   | `list`                                                                                   |
+| **Find**   | `find [KEYWORDS] [c/COMPANY] [r/ROLE] [d/DEADLINE] [s/STATUS] [i/INDUSTRY] [t/JOB_TYPE]` |
+| **Sort**   | `sort FIELD_SPECIFIER`                                                                   |
+| **Help**   | `help`                                                                                   |
+| **Clear**  | `clear`                                                                                  |
+| **Exit**   | `exit`                                                                                   |
