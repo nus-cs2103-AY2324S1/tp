@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +10,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -36,7 +37,7 @@ public class Person {
     private Avatar avatar = new Avatar();
     private Balance balance;
 
-    private List<Note> notes;
+    private ObservableList<Note> notes;
 
     /**
      * Every field must be present and not null.
@@ -53,7 +54,7 @@ public class Person {
         this.telegram = Optional.empty();
         this.tags.addAll(tags);
         this.id = Optional.empty();
-        this.notes = new ArrayList<>();
+        this.notes = FXCollections.observableArrayList();
         this.balance = new Balance(0);
     }
 
@@ -62,7 +63,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
                   Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
-                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id, List<Note> notes,
+                  Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id, ObservableList<Note> notes,
                   Balance balance) {
         requireAllNonNull(name, phone, email, address, birthday, tags);
         this.name = name;
@@ -85,7 +86,7 @@ public class Person {
     public Person(Name name, Phone phone, Email email, Address address, Optional<Birthday> birthday,
                   Optional<Linkedin> linkedin, Optional<Email> secondaryEmail,
                   Optional<Telegram> telegram, Set<Tag> tags, Optional<Integer> id,
-                  Avatar avatar, List<Note> notes, Balance balance) {
+                  Avatar avatar, ObservableList<Note> notes, Balance balance) {
         requireAllNonNull(name, phone, email, address, birthday, tags);
         this.name = name;
         this.phone = phone;
@@ -244,7 +245,7 @@ public class Person {
                 && tags.equals(otherPerson.tags);
     }
 
-    public List<Note> getNotes() {
+    public ObservableList<Note> getNotes() {
         return notes;
     }
 

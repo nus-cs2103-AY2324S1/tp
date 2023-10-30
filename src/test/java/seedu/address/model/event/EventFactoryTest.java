@@ -3,12 +3,12 @@ package seedu.address.model.event;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.MonthDay;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Balance;
@@ -34,7 +34,7 @@ public class EventFactoryTest {
             Optional.empty(),
             new HashSet<>(),
             Optional.empty(),
-            new ArrayList<>(),
+            FXCollections.observableArrayList(),
             new Balance(5)
         ));
 
