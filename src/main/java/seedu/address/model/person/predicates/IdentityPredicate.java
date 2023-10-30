@@ -30,7 +30,7 @@ public class IdentityPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        return other instanceof IdContainsKeywordsPredicate;
+        return other instanceof IdentityPredicate;
     }
 
     @Override

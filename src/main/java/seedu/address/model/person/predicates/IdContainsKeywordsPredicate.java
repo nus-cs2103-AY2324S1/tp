@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Nric} matches any of the keywords given exactly.
  */
 public class IdContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
