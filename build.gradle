@@ -71,7 +71,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'checkmate.jar'
 }
 
 defaultTasks 'clean', 'test'

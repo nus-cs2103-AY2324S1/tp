@@ -15,8 +15,10 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FlagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UnflagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -29,6 +31,7 @@ public class BookingBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(BookingBookParser.class);
+    private static final JsonInjectionParser inputSanitiser = new JsonInjectionParser();
 
     /**
      * Parses user input into command for execution.
@@ -38,6 +41,7 @@ public class BookingBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
+        inputSanitiser.parse(userInput);
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -70,6 +74,12 @@ public class BookingBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case FlagCommand.COMMAND_WORD:
+            return new FlagCommandParser().parse(arguments);
+
+        case UnflagCommand.COMMAND_WORD:
+            return new UnflagCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

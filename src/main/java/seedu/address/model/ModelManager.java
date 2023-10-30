@@ -126,6 +126,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredBookingList(Predicate<Booking> predicate) {
         requireNonNull(predicate);
+        bookingsBook.sortBookings();
         filteredBookings.setPredicate(predicate);
     }
 

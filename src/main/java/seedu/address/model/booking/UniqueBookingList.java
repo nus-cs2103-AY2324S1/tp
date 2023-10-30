@@ -137,6 +137,21 @@ public class UniqueBookingList implements Iterable<Booking> {
     }
 
     /**
+     * This method first sorts the bookings by flagged and unflagged, then sorts them using the room number
+     */
+    public void sortBookings() {
+        internalList.sort((firstBooking, secondBooking) -> {
+            if (firstBooking.isFlagged() == secondBooking.isFlagged()) {
+                return firstBooking.getRoom().getRoomNumber() - secondBooking.getRoom().getRoomNumber();
+            } else if (firstBooking.isFlagged()) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      *
      * @return An unmodifiable view of the internal list.
