@@ -242,7 +242,12 @@ Across both basic and advanced filtering, the following fields are supported:<br
 | Phone | `p`   | Finds contacts whose phone numbers **contain** the given digits. |
 | Email | `e`   | Finds contacts whose email addresses **contain** the given keyword. |
 | Address | `a` | Finds contacts whose addresses **contain** the given keyword. |
-| Tag   | `t`   | Finds contacts who have any tag that **exactly matches** the given keyword. |
+| Tag   | `t`   | Finds contacts who have **any tag** that **exactly matches** the given keyword. |
+| Birthday | `b` | Finds contacts whose birthdays (in DD-MM format) **contain** the given substring. |
+| LinkedIn | `li` | Finds contacts whose LinkedIn usernames **contain** the given keyword. |
+| Secondary Email | `e2` | Finds contacts whose secondary email addresses **contain** the given keyword. |
+| Telegram | `tg` | Finds contacts whose telegram handles **contain** the given keyword. |
+| Note | `nt` | Finds contacts who have **any note** that **contains** the given keyword. |
 
 </panel>
 
