@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -52,5 +53,28 @@ public class FindExpressionParserTest {
                 FindExpressionParser.FindSupportedField.TAG, "friends").toPredicate()
                 instanceof Predicate);
 
+    }
+
+    @Test
+    public void conditionNoteToPredicate_validConditionWithQuotedKeyword_returnsPredicate() {
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.NAME, "\"Alice Bob\"").toPredicate()
+                instanceof Predicate);
+
+
+        assertTrue(new FindExpressionParser.ConditionNode(
+                FindExpressionParser.FindSupportedField.ADDRESS, "\"alice park\"").toPredicate()
+                instanceof Predicate);
+    }
+
+    @Test
+    public void conditionNodeToPredicate_invalidConditionWithQuotedEmptyKeyword_throwsParseException() {
+        FindExpressionParser parser = new FindExpressionParser();
+
+        assertThrows(ParseException.class, () -> parser.parseToPredicate(
+                List.of(new FindFilterStringTokenizer.Token(
+                        FindFilterStringTokenizer.Token.Type.CONDITION, "n/\"\""))
+                )
+        );
     }
 }

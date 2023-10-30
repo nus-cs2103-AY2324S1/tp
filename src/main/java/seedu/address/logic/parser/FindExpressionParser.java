@@ -148,6 +148,10 @@ public class FindExpressionParser {
                 keyword = keyword.substring(1, keyword.length() - 1);
             }
 
+            if (keyword.isEmpty()) {
+                throw new ParseException("Invalid condition: Keyword cannot be empty!");
+            }
+
             return new ConditionNode(field, keyword);
         }
     }
