@@ -2,8 +2,23 @@
 layout: page
 title: User Guide
 ---
+# Tra$act User Guide
 
-**Tran$act** is a simple and easy to use transaction recorder and tracker built in Java.
+Welcome to **Tran$act**, your solution for effortless transaction recording and management.
+Transact is a desktop application designed to cater the needs of startup or small scale
+retailers looking for a cheap and efficient way to record daily transactions.
+
+Here's an overview of our main features:
+- **Transaction Management** : Add, Edit and Delete Income and Expenses
+- **Comprehensive Dashboard**: An instant snapshot of your monthly financial situation 
+- **Data Integration**: Export/Import financial statements in CSV format
+- **Address Book**: Add people to your address book and link them to transactions 
+
+In addition, Tran$act's **Command Line Interface (CLI)** functionality will allow you to unlock
+greater efficiency as you type faster, while still having the benefits of a Graphical User Interface (GUI)
+
+This user guide will walk you through how to get started with our app and dive into our features
+to help you streamline your accounting 
 
 ---
 
@@ -70,27 +85,15 @@ View a comprehensive list of all recorded transactions for reference. This list 
 
 Need to make corrections or updates to transaction records? Tran$act allows you to edit transaction details, ensuring your records are accurate.
 
-**5. Restoring Deleted Transactions**
+**5. Dashboard Display**
 
-Tran$act includes a feature to restore accidentally deleted transactions. Simply select a transaction from the list of deleted items to restore it to the active records.
+Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial information, including total income, total expenses, net profit for the selected period.
 
-**6. Dashboard Display**
+**6. Export of transactions in csv format**
 
-Upon opening the app, you'll be greeted with a clear and concise dashboard. The dashboard displays essential financial information, including total income, total expenses, net profit for the selected period, and a breakdown of expenses by sector.
+For those who need to share data with stakeholders, Tran$act allows you to generate CSV report.
 
-**7. Access to Financial Reports**
-
-Generate financial reports with ease. Tran$act offers the capability to produce income statements, balance sheets, and cash flow statements.
-
-**8. Customizable Reports**
-
-For those who need to share data with stakeholders, Tran$act allows you to generate customizable reports. Create reports in common formats such as PDF, CSV, and Excel, tailored to your specific needs.
-
-**9. Data Security and Backup**
-
-Tran$act takes data security seriously. It includes features to secure financial data, potentially through encryption, to protect sensitive information. Additionally, automated backups can be set up to prevent data loss due to hardware issues, and you have the ability to undo actions or restore from backups when needed.
-
-**10. Address Book**
+**7. Address Book**
 
 Import staff lists into the address book for quick access to contact information. You can also add, edit, and remove people from the address book as needed.
 
@@ -107,23 +110,24 @@ Import staff lists into the address book for quick access to contact information
 * \<amount>: Any number
 * \<date>: In dd/mm/yy format
 * \<staff>: ID of staff, an integer
+* []: Multiple entries allowed, separated by a space
 </div>
 
 
 ### Adding transaction : `add`
 
-Format: `add <type> <description> a/<amount> <date> <?staff>`
+Format: `add ty/<type> d/<description> a/<amount> on/<date> s/<?staff>`
 
 Examples:
 
-- `add R Sold 1 Mug a/10 10/10/23 John`
-- `add E “Paid Manufacturer” 100 10/11/23`
+- `add ty/R d/Sold 1 Mug a/10 on/10/10/23 s/1`
+- `add ty/E d/Paid Manufacturer a/100 on/10/11/23`
 
 Success/Fail Output:
 
-- Added revenue (Toast)
-- Added expenditure (Toast)
-- Error: <Error Message> (Toast)
+- Added revenue
+- Added expenditure
+- Error: <Error Message>
 
 ### Removing transaction: `del`
 
@@ -133,23 +137,23 @@ Example:`del 1`
 
 Success/Fail Output:
 
-- Removed transaction (Toast)
-- Error: <Error Message> (Toast)
+- Removed transaction
+- Error: <Error Message>
 
 ### Viewing transactions : `view t`
 
-Switches UI to transaction tabs, which shows the full list of transactions
+Switches UI to transaction tab, which shows the full list of transactions
 
 Format: `view t` or `view transaction`
 
-### Adding staff : `addstaf`
+### Adding staff : `addstaff`
 
 Format: `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>]`
 
 Success/Fail Output:
 
-- Added staff (Toast)
-- Error: <Error Message> (Toast)
+- Added staff
+- Error: <Error Message>
 
 ### Removing staff: `delstaff`
 
@@ -159,14 +163,26 @@ Example: `delstaff 1`
 
 Success/Fail Output:
 
-- Removed staff (Toast)
-- Error: <Error Message> (Toast)
+- Removed staff
+- Error: <Error Message>
 
 ### Viewing staff : `view s`
 
-Switches UI to staff tabs, which shows the full list of staff
+Switches UI to staff tab, which shows the full list of staff
 
 Format: `view s` or `view staff`
+
+### Viewing overview : `view o`
+
+Switches UI to overview tab, which shows the overview of transactions
+
+Format: `view o` or `view overview`
+
+### Clearing the output : `clear`
+
+Clears the output of the previous command.
+
+Format: `clear`
 
 ### Exiting the program : `exit`
 
@@ -198,23 +214,28 @@ The lower menu bar contains three tabs:
 The input field below this with the grey text `Enter command here...` is where you can enter your commands.
 
 ## FAQ
-
+1. How to check my Java Version?
+* Open a Terminal/ Command Prompt and type java --version. If you do not have Java installed, you can check the instructions [here](https://nus-cs2103-ay2223s2.github.io/website/admin/programmingLanguages.html)
+2. Can I do further analysis with the transaction data
+* The purpose of Tran$act is to keep accounting and analysis simple to improve efficiency. Nonetheless, you can export the data as a CSV file and use the data in third party apps such as excel and do further analysis if needed.
+3. How can I launch Tran$act  if clicking on the JAR file does not work?
+* Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter to run the application. 
 ---
 
-## Known issues
-
----
 
 ## Command summary
 
-| Action                 | Format, Examples                                                 |
-| ---------------------- | ---------------------------------------------------------------- |
-| **Add transaction**    | `add <type> <description> a/<amount> <date> <?staff>`            |
-| **Remove transaction** | `del <id>`                                                       |
-| **View transaction**   | `view t` or `view transaction`                                   |
-| **Add staff**          | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<tag>]` |
-| **Remove staff**       | `delstaff <staff id>`                                            |
-| **View staff**         | `view s` or `view staff`                                         |
+| Action                  | Format, Examples                                                  |
+|-------------------------|-------------------------------------------------------------------|
+| **Add transaction**     | `add ty/<type> d/<description> a/<amount> on/<date> s/<?staff>`   |
+| **Remove transaction**  | `del <id>`                                                        |
+| **View transaction**    | `view t` or `view transaction`                                    |
+| **Add staff**           | `addstaff n/<name> p/<phone no> e/<email> a/<address> [t/<?tag>]` |
+| **Remove staff**        | `delstaff <staff id>`                                             |
+| **View staff**          | `view s` or `view staff`                                          |
+| **View overview**       | `view o` or `view overview`                                       |
+| **Clear output**        | `clear`                                                           |
+| **Exit**                | `exit`                                                            |
 
 ## Glossary
 

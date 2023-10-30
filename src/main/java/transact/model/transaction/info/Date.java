@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+
 /**
  * Represents a date in the system.
  * Date should be in a valid format.
@@ -65,4 +66,5 @@ public class Date {
     public int hashCode() {
         return date.hashCode();
     }
+
 }

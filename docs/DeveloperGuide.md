@@ -39,7 +39,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/transact/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/transact/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/MainApp.java)) is in charge of the app launch and shut down.
 
 - At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -55,7 +55,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delstaff 1`. Note that both the address book and transaction book are saved.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -72,13 +72,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/transact/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/transact/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -89,15 +89,15 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/transact/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delstaff 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delstaff 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteStaffCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -120,12 +120,10 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
-
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/transact/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/model/Model.java)
 
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 The `Model` component,
 
@@ -142,7 +140,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/transact/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -449,9 +447,7 @@ Tran$act is specifically tailored for accountants and finance professionals in s
 1. Upon opening the app, the system displays a dashboard.
 2. The dashboard shows total income, total expenses, net profit for the selected period (usually monthly), and a breakdown of expenses by sector.
 
-### Use
-
-Case 7: Access to Financial Reports
+### Use Case 7: Access to Financial Reports
 
 **Actor:** Accountant
 
@@ -473,16 +469,75 @@ Case 7: Access to Financial Reports
 2. The system provides tools for the accountant to customize the report parameters.
 3. The system generates and displays the customized report in common formats (PDF, CSV, Excel).
 
-### Use Case 8: Customizable Reports
+### Use Case 9: Deleting All Transactions
 
 **Actor:** Accountant
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
 **Description:**
-1. The accountant selects the option to generate customizable reports.
-2. The system provides tools for the accountant to customize the report parameters.
-3. The system generates and displays the customized report in common formats (PDF, CSV, Excel).
+1. The accountant selects the option to delete all transactions.
+2. The system permanently deletes all recorded transactions from the database.
+
+
+### Use Case 10: Adding a Staff Member to Address Book
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects the option to add a new staff member to the address book.
+2. The system presents a form for entering staff member details, such as name, contact information, and role.
+3. The accountant enters the required information.
+4. The system validates the input data.
+5. The system adds the new staff member to the address book.
+
+**Extensions:**
+- If the input data is invalid or incomplete, the system displays an error message.
+- The system may provide an option to associate the new staff member with transactions during this process.
+
+### Use Case 11: Removing a Staff Member from Address Book
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects a staff member from the address book to remove.
+2. The system confirms the removal with the accountant.
+3. The accountant confirms the action.
+4. The system removes the selected staff member from the address book.
+
+**Extensions:**
+- If the accountant cancels the operation at the confirmation step, no staff members are removed.
+
+### Use Case 12: Editing Staff Member Information in Address Book
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects a staff member from the address book to edit.
+2. The system presents a form populated with the staff member's existing information.
+3. The accountant modifies the staff member's details as needed.
+4. The system validates the updated information.
+5. The system saves the updated staff member information in the address book.
+
+**Extensions:**
+- If the input data is invalid or incomplete, the system displays an error message.
+
+### Use Case 13: Deleting All Address Book Contacts
+
+**Actor:** Accountant
+
+**Preconditions:** The accountant is logged into the Tran$act application.
+
+**Description:**
+1. The accountant selects the option to delete all address book contacts.
+2. The system permanently deletes all contacts from the address book.
+
 
 ## Non-functional Requirements (NFR)
 
@@ -535,7 +590,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delstaff 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>

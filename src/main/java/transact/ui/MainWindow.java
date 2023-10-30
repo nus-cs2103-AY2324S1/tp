@@ -121,7 +121,7 @@ public class MainWindow extends UiPart<Stage> {
         overviewPanel = new OverviewPanel(logic.getFilteredTransactionList());
         overviewTab.setContent(overviewPanel.getRoot());
 
-        transactionTablePanel = new TransactionTablePanel(logic.getFilteredTransactionList());
+        transactionTablePanel = new TransactionTablePanel(logic.getFilteredTransactionList(), logic.getFilteredPersonList());
         transactionTab.setContent(transactionTablePanel.getRoot());
 
         cardListPanel = new CardListPanel(logic.getFilteredPersonList());
@@ -168,7 +168,8 @@ public class MainWindow extends UiPart<Stage> {
      * Closes the application.
      */
     @FXML
-    private void handleExit() {
+    private void handleExit() throws CommandException, ParseException {
+        logic.execute("exit");
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);

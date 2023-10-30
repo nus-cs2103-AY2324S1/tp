@@ -18,12 +18,12 @@ import transact.model.transaction.info.TransactionId;
  */
 public class TransactionBook implements ReadOnlyTransactionBook {
 
-    private final UniqueEntryHashmap<TransactionId, Transaction> transactions;
+    private final UniqueEntryMap<TransactionId, Transaction> transactions;
 
     private ObservableList<Transaction> transactionList;
 
     {
-        transactions = new UniqueEntryHashmap<>();
+        transactions = new UniqueEntryMap<>();
         transactionList = FXCollections.observableArrayList();
 
         getTransactionMap()
