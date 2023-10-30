@@ -32,22 +32,6 @@ public class Lesson {
         this.timeInterval = timeInterval;
     }
 
-//    /**
-//     * Constructs a {@code Lesson}.
-//     * @param name      A lesson name.
-//     * @param courseCode A course code.
-//     * @param dayOfWeek A day of the week.
-//     * @param startTime A start time.
-//     * @param endTime   An end time.
-//     */
-//    public Lesson(String name, String courseCode, String dayOfWeek, String startTime, String endTime) {
-//        requireAllNonNull(name, courseCode, dayOfWeek, startTime, endTime);
-//        this.name = name;
-//        this.courseCode = courseCode;
-//        this.dayOfWeek = DayOfWeek.valueOf(dayOfWeek);
-//        this.timeInterval = new TimeInterval(LocalTime.parse(startTime), LocalTime.parse(endTime));
-//    }
-
     public String getCourseCode() {
         return courseCode;
     }
@@ -73,9 +57,6 @@ public class Lesson {
             return false;
         }
         Lesson otherLesson = (Lesson) other;
-        System.out.println(otherLesson);
-        System.out.println(this);
-        System.out.println(otherLesson.name.equals(this.name));
         return otherLesson.name.equals(this.name)
                 && otherLesson.courseCode.equals(this.courseCode)
                 && otherLesson.dayOfWeek.equals(this.dayOfWeek)
