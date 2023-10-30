@@ -7,6 +7,7 @@ import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -52,6 +53,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label uniqueId;
+    @FXML
+    private ImageView avatar;
+    @FXML
     private Button notesButton;
     @FXML
     private Label balance;
@@ -72,6 +77,7 @@ public class PersonCard extends UiPart<Region> {
         bindLabelToProperty(secondaryEmail, person.getSecondaryEmail().map(e -> e.value).orElse(""));
         bindLabelToProperty(telegram, person.getTelegram().map(t -> t.value).orElse(""));
         bindLabelToProperty(birthday, person.getBirthday().map(b -> b.toString()).orElse(""));
+        avatar.setImage(person.getAvatar().getImage());
         person.getEmergencyTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
@@ -109,3 +115,4 @@ public class PersonCard extends UiPart<Region> {
         }
     }
 }
+
