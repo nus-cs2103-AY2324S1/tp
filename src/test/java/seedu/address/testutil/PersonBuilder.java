@@ -89,7 +89,6 @@ public class PersonBuilder {
     /**
      * Sets the {@code Appointment} of the {@code Person} that we are building.
      */
-
     public PersonBuilder withAppointment(String appointment) {
         try {
             this.appointment = Appointment.of(appointment, InputSource.USER_INPUT);
@@ -97,6 +96,14 @@ public class PersonBuilder {
             throw new IllegalStateException(
                     "Encountered an error with Appointment for PersonBuilder.", e);
         }
+        return this;
+    }
+
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building to null.
+     */
+    public PersonBuilder withoutAppointment() {
+        this.appointment = null;
         return this;
     }
 

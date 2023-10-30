@@ -145,6 +145,25 @@ public class Appointment {
     }
 
     /**
+     * Returns true if the period represented by this {@code Appointment} overlaps with the period
+     * of {@code target} on the same day, inclusive of the {@code start} and {@code end}.<br>
+     *
+     * This method defines an incompatibility relationship between 2 {@code Appointment} objects.
+     */
+    public boolean hasOverlap(Appointment target) {
+        assert !start.isAfter(end);
+        if (target == null) {
+            return false;
+        }
+
+        assert !target.start.isAfter(target.end);
+        if (!date.isEqual(target.date)) {
+            return false;
+        }
+        return !end.isBefore(target.start) && !start.isAfter(target.end);
+    }
+
+    /**
      * @return The String representation of {@code Appointment} for use in Storage/Save-Parsing
      */
     public String toSaveString() {

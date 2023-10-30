@@ -18,8 +18,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.IdContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.CompositePredicate;
+import seedu.address.model.person.predicates.IdContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -30,10 +31,10 @@ public class FindCommandTest {
 
     @Test
     public void nameEquals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        CompositePredicate firstPredicate = new CompositePredicate();
+        firstPredicate.add(new NameContainsKeywordsPredicate(Collections.singletonList("first")));
+        CompositePredicate secondPredicate = new CompositePredicate();
+        secondPredicate.add(new NameContainsKeywordsPredicate(Collections.singletonList("second")));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -57,10 +58,10 @@ public class FindCommandTest {
 
     @Test
     public void idEquals() {
-        IdContainsKeywordsPredicate firstPredicate =
-                new IdContainsKeywordsPredicate(Collections.singletonList("first"));
-        IdContainsKeywordsPredicate secondPredicate =
-                new IdContainsKeywordsPredicate(Collections.singletonList("second"));
+        CompositePredicate firstPredicate = new CompositePredicate();
+        firstPredicate.add(new IdContainsKeywordsPredicate(Collections.singletonList("first")));
+        CompositePredicate secondPredicate = new CompositePredicate();
+        secondPredicate.add(new IdContainsKeywordsPredicate(Collections.singletonList("second")));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -84,8 +85,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
+        CompositePredicate predicate = new CompositePredicate();
+        predicate.add(preparePredicate(" "));
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -94,8 +96,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
+        CompositePredicate predicate = new CompositePredicate();
+        predicate.add(preparePredicate("Kurz Elle Kunz"));
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -104,7 +107,8 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
+        CompositePredicate predicate = new CompositePredicate();
+        predicate.add(new NameContainsKeywordsPredicate(Arrays.asList("keyword")));
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
