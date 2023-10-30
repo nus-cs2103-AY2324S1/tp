@@ -21,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.schedule.TutorNameContainsKeywordsPredicate;
+import seedu.address.model.schedule.TutorIndexPredicate;
 import seedu.address.testutil.TypicalSchedules;
 
 /**
@@ -49,7 +49,7 @@ public class ListScheduleCommandTest {
         Person tutor = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String fullName = tutor.getName().toString();
         List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
-        TutorNameContainsKeywordsPredicate predicate = new TutorNameContainsKeywordsPredicate(nameList);
+        TutorIndexPredicate predicate = new TutorIndexPredicate(nameList);
         ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, 2);
@@ -73,7 +73,7 @@ public class ListScheduleCommandTest {
         Person tutor = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String fullName = tutor.getName().toString();
         List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
-        TutorNameContainsKeywordsPredicate predicate = new TutorNameContainsKeywordsPredicate(nameList);
+        TutorIndexPredicate predicate = new TutorIndexPredicate(nameList);
         ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

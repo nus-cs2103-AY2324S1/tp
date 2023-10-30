@@ -13,9 +13,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.TutorIndexPredicate;
 import seedu.address.model.schedule.Status;
 import seedu.address.model.schedule.StatusPredicate;
-import seedu.address.model.schedule.TutorNameContainsKeywordsPredicate;
 
 /**
  * Lists all persons in the address book to the user.
@@ -50,6 +50,15 @@ public class ListScheduleCommand extends Command {
             List<Person> lastShownList = model.getFilteredPersonList();
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            } else {
+                Person tutor = lastShownList.get(targetIndex.getZeroBased());
+                String fullName = tutor.getName().toString();
+                List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
+                TutorIndexPredicate predicate = new TutorIndexPredicate(nameList);
+
+                model.updateFilteredScheduleList(predicate);
+                return new CommandResult(
+                    String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, model.getFilteredScheduleList().size()));
             }
             String fullName = lastShownList.get(targetIndex.getZeroBased()).getName().toString();
             nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
