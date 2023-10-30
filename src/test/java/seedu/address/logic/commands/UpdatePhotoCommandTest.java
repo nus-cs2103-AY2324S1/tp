@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.nio.file.Paths;
@@ -30,7 +31,7 @@ public class UpdatePhotoCommandTest {
             assertEquals(e.getMessage(),
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdatePhotoCommand.MESSAGE_USAGE));
         } catch (CommandException e) {
-            assertEquals(1, 0);
+            fail();
         }
     }
 
@@ -53,7 +54,7 @@ public class UpdatePhotoCommandTest {
             assertEquals(e.getMessage(),
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdatePhotoCommand.MESSAGE_USAGE));
         } catch (CommandException e) {
-            assertEquals(1, 0);
+            fail();
         }
     }
 
@@ -66,7 +67,7 @@ public class UpdatePhotoCommandTest {
             UpdatePhotoCommand updatePhotoCommand = (UpdatePhotoCommand) command;
             updatePhotoCommand.execute(new ModelManager());
         } catch (ParseException e) {
-            assertEquals(1, 0);
+            fail();
         } catch (CommandException e) {
             assertEquals(e.getMessage(), "The person index provided is invalid");
         }
@@ -88,7 +89,7 @@ public class UpdatePhotoCommandTest {
             addCommand.execute(temp);
             updatePhotoCommand.execute(temp);
         } catch (ParseException e) {
-            assertEquals(1, 0);
+            fail();
         } catch (CommandException e) {
             assertEquals(e.getMessage(), "The person index provided is invalid");
         }
@@ -110,7 +111,7 @@ public class UpdatePhotoCommandTest {
             addCommand.execute(temp);
             updatePhotoCommand.execute(temp);
         } catch (ParseException e) {
-            assertEquals(1, 0);
+            fail();
         } catch (CommandException e) {
             assertEquals(e.getMessage(), "The person index provided is invalid");
         }
@@ -132,7 +133,7 @@ public class UpdatePhotoCommandTest {
             addCommand.execute(temp);
             updatePhotoCommand.execute(temp);
         } catch (ParseException e) {
-            assertEquals(1, 0);
+            fail();
         } catch (CommandException e) {
             assertEquals(e.getMessage(), "Invalid file path provided");
         }
@@ -155,7 +156,7 @@ public class UpdatePhotoCommandTest {
             updatePhotoCommand.execute(temp);
             assertEquals(temp.getFilteredPersonList().get(0).getAvatar().getPath(), safePath);
         } catch (ParseException | CommandException e) {
-            assertEquals(1, 0);
+            fail();
         }
     }
 }
