@@ -1,37 +1,51 @@
 package seedu.address.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lessons.Lesson;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.util.Of;
-
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-public class BiDirectionalMap<T extends ListEntry<T>,P extends ListEntry<P>> {
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
+
+/**
+ * Represents a map where each key is mapped to a set of values, and each value is mapped back to its keys.
+ */
+public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
     private final Map<Name, HashSet<Name>> forwardMap = new HashMap<>();
     private final Map<Name, HashSet<Name>> reverseMap = new HashMap<>();
+
+    /**
+     * Adds a key-value pair and its reverse to the map
+     */
     public void addMapping(T t, P p) {
         forwardMap.putIfAbsent(t.getName(), new HashSet<>());
         forwardMap.get(t.getName()).add(p.getName());
         reverseMap.putIfAbsent(p.getName(), new HashSet<>());
         reverseMap.get(p.getName()).add(t.getName());
     }
+
+    /**
+     * Returns the value associated with the key
+     */
     public Name[] get(T t) {
         return forwardMap.get(t.getName()).toArray(new Name[0]);
     }
+
+    /**
+     * Returns the key associated with the value
+     */
     public Name[] getReversed(P p) {
         return reverseMap.get(p.getName()).toArray(new Name[0]);
     }
+
+    /**
+     * Delete a key and update its associated values from the map
+     */
     public void remove(T t) {
         Name[] names = get(t);
         for (Name name : names) {
@@ -39,6 +53,10 @@ public class BiDirectionalMap<T extends ListEntry<T>,P extends ListEntry<P>> {
         }
         forwardMap.remove(t.getName());
     }
+
+    /**
+     * Delete a value and update its associated keys from the map
+     */
     public void removeReverse(P p) {
         Name[] names = getReversed(p);
         for (Name name : names) {
@@ -46,6 +64,9 @@ public class BiDirectionalMap<T extends ListEntry<T>,P extends ListEntry<P>> {
         }
         reverseMap.remove(p.getName());
     }
+    /**
+     * When there is a name change to the key, this method should be called to update the map
+     */
     public void update(T tOld, T tNew) {
         Name[] names = get(tOld);
         remove(tOld);
@@ -53,6 +74,10 @@ public class BiDirectionalMap<T extends ListEntry<T>,P extends ListEntry<P>> {
             reverseMap.get(name).add(tNew.getName());
         }
     }
+
+    /**
+     * When there is a name change to the value, this method should be called to update the map
+     */
     public void updateReverse(P pOld, P pNew) {
         Name[] names = getReversed(pOld);
         removeReverse(pOld);
@@ -60,6 +85,10 @@ public class BiDirectionalMap<T extends ListEntry<T>,P extends ListEntry<P>> {
             forwardMap.get(name).add(pNew.getName());
         }
     }
+
+    /**
+     * Saves a BiDirectionalMap to a json file
+     */
     public void saveTo(Path p) throws IOException {
         HashMap<String, HashSet<String>> names = new HashMap<>();
         for (Name name : forwardMap.keySet()) {
@@ -72,10 +101,16 @@ public class BiDirectionalMap<T extends ListEntry<T>,P extends ListEntry<P>> {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(p.toFile(), objectMapper.writeValueAsString(names));
     }
-    public static <T extends ListEntry<T>,P extends ListEntry<P>> BiDirectionalMap<T,P> readFrom(Path p) throws IOException, ParseException {
-        BiDirectionalMap<T,P> m = new BiDirectionalMap<>();
+
+    /**
+     * Reads a BiDirectionalMap from a file
+     */
+    public static <T extends ListEntry<T>,
+            P extends ListEntry<P>> BiDirectionalMap<T, P> readFrom(Path p) throws IOException, ParseException {
+        BiDirectionalMap<T, P> m = new BiDirectionalMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
-        TypeReference<HashMap<String, HashSet<String>>> typeRef = new TypeReference<HashMap<String, HashSet<String>>>() {};
+        TypeReference<HashMap<String, HashSet<String>>> typeRef;
+        typeRef = new TypeReference<HashMap<String, HashSet<String>>>() {};
         HashMap<String, HashSet<String>> data = objectMapper.readValue(p.toFile(), typeRef);
         for (String name : data.keySet()) {
             HashSet<Name> names = new HashSet<>();

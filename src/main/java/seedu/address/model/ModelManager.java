@@ -33,8 +33,8 @@ public class ModelManager implements Model {
     private Person currentShowingPerson = null;
     private Lesson currentShowingLesson = null;
     private Task currentShowingTask = null;
-    private final BiDirectionalMap<Person,Lesson> personToLessonMap = new BiDirectionalMap<>();
-    private final BiDirectionalMap<Lesson,Task> lessonToTaskMap = new BiDirectionalMap<>();
+    private final BiDirectionalMap<Person, Lesson> personToLessonMap = new BiDirectionalMap<>();
+    private final BiDirectionalMap<Lesson, Task> lessonToTaskMap = new BiDirectionalMap<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -309,6 +309,13 @@ public class ModelManager implements Model {
 
     public Task getCurrentlyDisplayedTask() {
         return currentShowingTask;
+    }
+
+    public BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
+        return personToLessonMap;
+    }
+    public BiDirectionalMap<Lesson, Task> getLessonTaskMap() {
+        return lessonToTaskMap;
     }
 
 }

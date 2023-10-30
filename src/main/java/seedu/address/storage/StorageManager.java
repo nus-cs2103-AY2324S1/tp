@@ -9,7 +9,11 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
+import seedu.address.model.BiDirectionalMap;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySchedule;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
@@ -112,25 +116,25 @@ public class StorageManager implements Storage {
         scheduleListStorage.saveScheduleList(scheduleList, filePath);
     }
 
-    public BiDirectionalMap<Person,Lesson> getPersonLessonMap() throws DataLoadingException {
+    public BiDirectionalMap<Person, Lesson> getPersonLessonMap() throws DataLoadingException {
         try {
-            return BiDirectionalMap.readFrom(Paths.get("data","personLessonMap.json"));
+            return BiDirectionalMap.readFrom(Paths.get("data", "personLessonMap.json"));
         } catch (IOException | ParseException e) {
             throw new DataLoadingException(e);
         }
     }
-    public void savePersonLessonMap(BiDirectionalMap<Person,Lesson> personLessonMap) throws IOException {
-        personLessonMap.saveTo(Paths.get("data","personLessonMap.json"));
+    public void savePersonLessonMap(BiDirectionalMap<Person, Lesson> personLessonMap) throws IOException {
+        personLessonMap.saveTo(Paths.get("data", "personLessonMap.json"));
     }
 
-    public BiDirectionalMap<Lesson,Task> getLessonTaskMap() throws DataLoadingException {
+    public BiDirectionalMap<Lesson, Task> getLessonTaskMap() throws DataLoadingException {
         try {
-            return BiDirectionalMap.readFrom(Paths.get("data","lessonTaskMap.json"));
+            return BiDirectionalMap.readFrom(Paths.get("data", "lessonTaskMap.json"));
         } catch (IOException | ParseException e) {
             throw new DataLoadingException(e);
         }
     }
-    public void saveLessonTaskMap(BiDirectionalMap<Lesson,Task> lessonTaskMap) throws IOException {
-        lessonTaskMap.saveTo(Paths.get("data","lessonTaskMap.json"));
+    public void saveLessonTaskMap(BiDirectionalMap<Lesson, Task> lessonTaskMap) throws IOException {
+        lessonTaskMap.saveTo(Paths.get("data", "lessonTaskMap.json"));
     }
 }
