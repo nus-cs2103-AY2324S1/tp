@@ -1,5 +1,6 @@
 package seedu.staffsnap.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.staffsnap.testutil.TypicalApplicants.getApplicantsSortedByEmail;
 import static seedu.staffsnap.testutil.TypicalApplicants.getApplicantsSortedByName;
 import static seedu.staffsnap.testutil.TypicalApplicants.getApplicantsSortedByPhone;
@@ -32,7 +33,7 @@ class SortCommandTest {
         } catch (CommandException e) {
             throw new RuntimeException(e);
         }
-        assert(model.getFilteredApplicantList().equals(getApplicantsSortedByName()));
+        assertEquals(model.getFilteredApplicantList(), (getApplicantsSortedByName()));
     }
 
     @Test
@@ -43,7 +44,7 @@ class SortCommandTest {
         } catch (CommandException e) {
             throw new RuntimeException(e);
         }
-        assert(model.getFilteredApplicantList().equals(getApplicantsSortedByPhone()));
+        assertEquals(model.getFilteredApplicantList(), (getApplicantsSortedByPhone()));
     }
     @Test
     void execute_sortScore_ascending() {
@@ -53,7 +54,7 @@ class SortCommandTest {
         } catch (CommandException e) {
             throw new RuntimeException(e);
         }
-        assert(model.getFilteredApplicantList().equals(getApplicantsSortedByScore()));
+        assertEquals(model.getFilteredApplicantList(), (getApplicantsSortedByScore()));
     }
 
     @Test
@@ -64,7 +65,7 @@ class SortCommandTest {
         } catch (CommandException e) {
             throw new RuntimeException(e);
         }
-        assert(model.getFilteredApplicantList().equals(getApplicantsSortedByStatus()));
+        assertEquals(model.getFilteredApplicantList(), (getApplicantsSortedByStatus()));
     }
 
     @Test
@@ -75,7 +76,7 @@ class SortCommandTest {
         } catch (CommandException e) {
             throw new RuntimeException(e);
         }
-        assert(model.getFilteredApplicantList().equals(getApplicantsSortedByEmail()));
+        assertEquals(model.getFilteredApplicantList(), (getApplicantsSortedByEmail()));
     }
 
     @Test
@@ -86,7 +87,7 @@ class SortCommandTest {
         } catch (CommandException e) {
             throw new RuntimeException(e);
         }
-        assert(model.getFilteredApplicantList().equals(getApplicantsSortedByPosition()));
+        assertEquals(model.getFilteredApplicantList(), (getApplicantsSortedByPosition()));
     }
 
     @Test
@@ -99,7 +100,7 @@ class SortCommandTest {
         }
         List<Applicant> applicantList = getApplicantsSortedByName();
         Collections.reverse(applicantList);
-        assert(model.getFilteredApplicantList().equals(applicantList));
+        assertEquals(model.getFilteredApplicantList(), (applicantList));
     }
 }
 

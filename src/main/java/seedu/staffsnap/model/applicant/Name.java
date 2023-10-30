@@ -10,7 +10,8 @@ import static seedu.staffsnap.commons.util.AppUtil.checkArgument;
 public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, should not be blank, "
+                    + "and should not exceed 25 characters";
 
     /*
      * The first character of the name must not be a whitespace,
@@ -35,7 +36,7 @@ public class Name implements Comparable<Name> {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= 25;
     }
 
 

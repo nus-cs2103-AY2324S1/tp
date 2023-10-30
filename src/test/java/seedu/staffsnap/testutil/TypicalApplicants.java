@@ -172,7 +172,7 @@ public class TypicalApplicants {
     }
 
     public static List<Applicant> getApplicantsSortedByPosition() {
-        return new ArrayList<>(Arrays.asList(FIONA, CARL, BOB, ELLE, BENSON, GEORGE, ALICE, DANIEL));
+        return new ArrayList<>(Arrays.asList(FIONA, CARL, ELLE, BENSON, GEORGE, BOB, ALICE, DANIEL));
     }
 
     public static List<Applicant> getApplicantsSortedByScore() {

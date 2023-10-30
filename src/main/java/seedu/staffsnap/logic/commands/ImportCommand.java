@@ -74,8 +74,6 @@ public class ImportCommand extends Command {
                 applicantsToImport.size() == 1 ? MESSAGE_SUCCESS_SINGULAR : MESSAGE_SUCCESS_PLURAL,
                 applicantsToImport.size(),
                 fileName));
-
-
     }
 
     private boolean containsDuplicates(List<Applicant> applicantsToImport) {
