@@ -125,23 +125,25 @@ public class AppointmentTest {
         Appointment appointment = Appointment.of(VALID_APPOINTMENT_USER_INPUT_1, InputSource.USER_INPUT);
 
         // handles null
-        assertFalse(appointment.overlaps(null));
+        assertFalse(appointment.hasOverlap(null));
 
         // overlaps with edge-to-edge
-        assertTrue(appointment.overlaps(Appointment.of(APPOINTMENT_START_OVERLAPS_WITH_END, InputSource.USER_INPUT)));
-        assertTrue(appointment.overlaps(Appointment.of(APPOINTMENT_END_OVERLAPS_WITH_START, InputSource.USER_INPUT)));
+        assertTrue(
+                appointment.hasOverlap(Appointment.of(APPOINTMENT_START_OVERLAPS_WITH_END, InputSource.USER_INPUT)));
+        assertTrue(
+                appointment.hasOverlap(Appointment.of(APPOINTMENT_END_OVERLAPS_WITH_START, InputSource.USER_INPUT)));
 
         // handles no overlap
-        assertFalse(appointment.overlaps(Appointment.of(APPOINTMENT_NO_OVERLAP_START, InputSource.USER_INPUT)));
-        assertFalse(appointment.overlaps(Appointment.of(APPOINTMENT_NO_OVERLAP_END, InputSource.USER_INPUT)));
+        assertFalse(appointment.hasOverlap(Appointment.of(APPOINTMENT_NO_OVERLAP_START, InputSource.USER_INPUT)));
+        assertFalse(appointment.hasOverlap(Appointment.of(APPOINTMENT_NO_OVERLAP_END, InputSource.USER_INPUT)));
 
         // handles overlap
         Appointment other = Appointment.of(APPOINTMENT_OVERLAPS, InputSource.USER_INPUT);
-        assertTrue(appointment.overlaps(other));
-        assertTrue(other.overlaps(appointment));
+        assertTrue(appointment.hasOverlap(other));
+        assertTrue(other.hasOverlap(appointment));
 
         // handles diff dates
-        assertFalse(appointment.overlaps(Appointment.of(APPOINTMENT_DIFF_DATE, InputSource.USER_INPUT)));
+        assertFalse(appointment.hasOverlap(Appointment.of(APPOINTMENT_DIFF_DATE, InputSource.USER_INPUT)));
     }
 
     @Test

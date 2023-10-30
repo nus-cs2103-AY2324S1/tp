@@ -27,7 +27,7 @@ public class AppointmentOverlapsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return query.overlaps(person.getAppointment().orElse(null));
+        return query.hasOverlap(person.getAppointment().orElse(null));
     }
 
     @Override

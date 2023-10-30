@@ -150,7 +150,7 @@ public class Appointment {
      *
      * This method defines an incompatibility relationship between 2 {@code Appointment} objects.
      */
-    public boolean overlaps(Appointment target) {
+    public boolean hasOverlap(Appointment target) {
         assert !start.isAfter(end);
         if (target == null) {
             return false;
