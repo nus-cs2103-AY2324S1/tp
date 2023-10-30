@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 
 import seedu.address.logic.parser.ParserUtil;
@@ -116,10 +117,6 @@ public class TimeInterval {
         return allows;
     }
 
-
-
-
-
     /**
      * Returns true if the interval string is in right format.
      * @param timeInterval The timeInterval to be checked.
@@ -151,6 +148,10 @@ public class TimeInterval {
 
     public int compareEnd(TimeInterval otherTime) {
         return this.end.compareTo(otherTime.end);
+    }
+
+    public DayOfWeek getStartTimeDay() {
+        return this.start.getDay();
     }
 
     /**

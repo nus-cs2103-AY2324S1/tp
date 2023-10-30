@@ -148,6 +148,7 @@ public class ModelManager implements Model {
      */
     public void addGroup(Group group) {
         addressBook.addGroup(group);
+        forceUpdateList();
     }
 
     /**
@@ -323,6 +324,8 @@ public class ModelManager implements Model {
     private void forceUpdateList() {
         updateFilteredPersonList(user -> false);
         updateFilteredPersonList(user -> true);
+        updateFilteredGroupList(group -> false);
+        updateFilteredGroupList(group -> true);
     }
 
     @Override

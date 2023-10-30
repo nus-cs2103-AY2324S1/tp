@@ -155,6 +155,7 @@ public class Group {
             .toString();
     }
 
+    //need remove
     public void printGrpMates() {
         this.listOfGroupMates.forEach(x -> System.out.println(x.getName()));
     }
@@ -253,4 +254,7 @@ public class Group {
     }
 
     public void deleteTime(ArrayList<TimeInterval> toDeleteTime) throws CommandException { this.timeIntervalList.deleteTime(toDeleteTime);}
+
+
+
 }

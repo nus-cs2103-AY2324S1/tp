@@ -78,7 +78,6 @@ public class Time {
 
     public static DayOfWeek decodeDay(String day) {
         day = day.toLowerCase();
-
         if (DayOfWeek.MONDAY.toString().toLowerCase().contains(day)) {
             return DayOfWeek.MONDAY;
         } else if (DayOfWeek.TUESDAY.toString().toLowerCase().contains(day)) {
@@ -94,5 +93,13 @@ public class Time {
         } else {
             return DayOfWeek.SUNDAY;
         }
+    }
+
+    public DayOfWeek getDay() {
+        return this.day;
+    }
+
+    public LocalTime getTime() {
+        return this.hour;
     }
 }
