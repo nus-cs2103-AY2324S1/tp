@@ -75,12 +75,65 @@ public class ManageHrParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    /**
+     * Checks if the command is valid, and creates a fake command to access the usage instructions.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws ParseException if the user input is not a command
+     */
+    public String checkCommandUsage(String userInput) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+
+        // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
+        // log messages such as the one below.
+        // Lower level log messages are used sparingly to minimize noise in the code.
+        logger.fine("Checking command, command word: " + commandWord + "; Arguments: " + arguments);
+
+        switch (commandWord) {
+        case AddCommand.COMMAND_WORD:
+            return AddCommand.MESSAGE_USAGE;
+
+        case EditCommand.COMMAND_WORD:
+            return EditCommand.MESSAGE_USAGE;
+
+        case DeleteCommand.COMMAND_WORD:
+            return DeleteCommand.MESSAGE_USAGE;
+
+        case ClearCommand.COMMAND_WORD:
+            return ClearCommand.MESSAGE_USAGE;
+
+        case FindCommand.COMMAND_WORD:
+            return FindCommand.MESSAGE_USAGE;
+
+        case ListCommand.COMMAND_WORD:
+            return ListCommand.MESSAGE_USAGE;
+
+        case ExitCommand.COMMAND_WORD:
+            return ExitCommand.MESSAGE_USAGE;
+
+        case HelpCommand.COMMAND_WORD:
+            return HelpCommand.MESSAGE_USAGE;
+
+        default:
+            logger.finer("This user input caused a ParseException: " + userInput);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+
     }
 
 }

@@ -45,6 +45,42 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
+     * Sets the text on the help window.
+     * @param helpText Text to display.
+     */
+    public void setHelpText(String helpText) {
+        helpMessage.setText(helpText);
+    }
+
+    /**
+     * Resets the text on the help window.
+     */
+    public void resetHelpText() {
+        helpMessage.setText(HELP_MESSAGE);
+    }
+
+    /**
+     * Set button to copy the example.
+     */
+    public void setHelpCopy(String exampleText) {
+        // set the button to "Copy Help"
+        // Set the button's contents to the example.
+        copyButton.setText("Copy Example");
+
+    }
+
+    /**
+     * Reset button to copy the User Guide URL.
+     */
+    public void resetHelpCopy() {
+        // set the button to "Copy Help"
+        // Set the button's contents to the example.
+        copyButton.setText("Copy User Guide URL");
+
+    }
+
+
+    /**
      * Shows the help window.
      * @throws IllegalStateException
      *     <ul>
