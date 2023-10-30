@@ -5,6 +5,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -12,6 +13,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Status;
+import seedu.address.model.schedule.StatusPredicate;
 import seedu.address.model.schedule.TutorNameContainsKeywordsPredicate;
 
 /**
@@ -29,32 +32,44 @@ public class ListScheduleCommand extends Command {
         + "Example: " + COMMAND_WORD + " 1";
 
     private Index targetIndex;
+    private Status status;
 
-    public ListScheduleCommand(Index targetIndex) {
+    /**
+     * Creates an ListScheduleCommand to list the specified {@code Schedule}
+     */
+    public ListScheduleCommand(Index targetIndex, Status status) {
         this.targetIndex = targetIndex;
+        this.status = status;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        if (targetIndex == null) {
-            model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
-            return new CommandResult(MESSAGE_SUCCESS);
-        } else {
+        List<String> nameList = null;
+        if (targetIndex != null) {
+            List<Person> lastShownList = model.getFilteredPersonList();
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            } else {
-                Person tutor = lastShownList.get(targetIndex.getZeroBased());
-                String fullName = tutor.getName().toString();
-                List<String> nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
-                TutorNameContainsKeywordsPredicate predicate = new TutorNameContainsKeywordsPredicate(nameList);
-
-                model.updateFilteredScheduleList(predicate);
-                return new CommandResult(
-                    String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, model.getFilteredScheduleList().size()));
             }
+            String fullName = lastShownList.get(targetIndex.getZeroBased()).getName().toString();
+            nameList = new ArrayList<>(Arrays.asList(fullName.split(" ")));
+            TutorNameContainsKeywordsPredicate namePredicate = new TutorNameContainsKeywordsPredicate(nameList);
+            model.updateFilteredScheduleList(namePredicate);
         }
+
+        if (status != null) {
+            StatusPredicate statusPredicate = new StatusPredicate(
+                Collections.singletonList(status.toString()), nameList);
+            model.updateFilteredScheduleList(statusPredicate);
+        }
+
+        if (targetIndex == null && status == null) {
+            model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
+            return new CommandResult(MESSAGE_SUCCESS);
+        }
+
+        return new CommandResult(String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW,
+            model.getFilteredScheduleList().size()));
     }
 
     @Override
