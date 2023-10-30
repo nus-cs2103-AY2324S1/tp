@@ -15,7 +15,6 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
 public class CompositePredicateTest {
 

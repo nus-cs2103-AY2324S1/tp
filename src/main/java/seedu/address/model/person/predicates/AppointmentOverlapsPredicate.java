@@ -16,6 +16,10 @@ import seedu.address.model.person.Person;
 public class AppointmentOverlapsPredicate implements Predicate<Person> {
     private final Appointment query;
 
+    /**
+     * Takes in a non-null {@code Appointment query} to create a well-defined
+     * Predicate.
+     */
     public AppointmentOverlapsPredicate(Appointment query) {
         requireNonNull(query);
         this.query = query;
