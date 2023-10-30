@@ -279,6 +279,19 @@ Example:
 * `view s/A0245234A`
 ![result for 'view s/A0245234A'](images/ViewCommand.png)
 
+---
+### Selecting students randomly: `random`
+
+Select a specific number of students from all students displayed in the class manager.
+
+Format: `random INDEX`
+
+* The `INDEX` must be a valid positive integer.
+
+Example:
+
+* `random 2`
+
 ### Deleting a student : `delete`
 
 Deletes the specific student.
@@ -287,7 +300,7 @@ Format: `delete s/STUDENT_NUMBER`
 
 * The STUDENT_NUMBER must be valid and exist.
 
-Examples:
+Example:
 * `delete s/A0249112A`
 
 ---
@@ -383,6 +396,7 @@ _Details coming soon ..._
 | **Mark Absent**      | `mark-abs TUTORIAL_INDEX s/STUDENT_NUMBER` <br> e.g. `mark-abs 1 s/A0245234A`
 | **Set Grade**        | `set-grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE` <br> e.g. `set-grade s/A0245234A a/1 g/100`                                                              |
 | **Record Part**      | `record-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION_LEVEL` <br> e.g. `record-part s/A0245234A tut/1 part/true`                                   |
+| **Random**           | `random INDEX` <br> e.g. `random 2`                                   |
 | **View**             | `view STUDENT_NUMBER` <br> e.g. `view A0245234A`                                                                                                                 |
 | **Load**             | `load f/FILE_NAME`<br> e.g. `load f/export-v1`                                                                                                                   |
 | **Clear**            | `clear`                                                                                                                                                          |
