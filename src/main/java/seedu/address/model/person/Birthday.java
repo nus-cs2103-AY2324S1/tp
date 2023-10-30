@@ -29,7 +29,7 @@ public class Birthday {
     public String toString() {
         String monthWord = birthday.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
         int day = birthday.getDayOfMonth();
-        return day + monthWord;
+        return day + " " + monthWord;
     }
 
     @Override
