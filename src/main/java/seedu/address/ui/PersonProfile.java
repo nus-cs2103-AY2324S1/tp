@@ -62,10 +62,17 @@ public class PersonProfile extends UiPart<Region> {
 
     // region Enums
 
+    /**
+     * Represents possible times in UI execution flow where handlers/listeners can be added.
+     * @see #setEventHandler(Event, Runnable)
+     */
     public enum Event {
         AFTER_CONFIRM, CANCEL, BEFORE_START_EDIT
     }
 
+    /**
+     * Represents a field of a Person as displayed in the UI.
+     */
     public enum Field {
         NAME("Name", Name::isValidName, Name.MESSAGE_CONSTRAINTS),
         PHONE("Phone", Phone::isValidPhone, Phone.MESSAGE_CONSTRAINTS),

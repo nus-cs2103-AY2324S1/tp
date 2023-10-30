@@ -6,16 +6,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
+/**
+ * A row of the PersonProfile UI, representing one field of the Person displayed.
+ */
 public class PersonProfileField extends UiPart<SplitPane> {
 
     // region Super
     private static final String FXML = "PersonProfileField.fxml";
     // endregion
 
+    // region Constants
     private static final String errorTextCss = "-fx-text-fill: red";
+    // endregion
 
     // region FXML
     @FXML private Label valueLabel;
@@ -31,11 +34,25 @@ public class PersonProfileField extends UiPart<SplitPane> {
     private State state;
     // endregion
 
+    // region Enums
+
+    /**
+     * Represents that the Field is either under edit, or not.
+     */
     enum State {
-        LABEL, TEXT_FIELD
+        READ_ONLY, EDITING
     }
 
+    // endregion
+
     // region Constructor
+
+    /**
+     * Creates a PersonProfileField from the provided UI parent, as well as a Field value.
+     *
+     * @param personProfile UI parent, serving as a container for this object.
+     * @param field field of a Person to display and allow editing of.
+     */
     public PersonProfileField(PersonProfile personProfile, PersonProfile.Field field) {
         super(FXML);
         this.personProfile = personProfile;
@@ -50,7 +67,7 @@ public class PersonProfileField extends UiPart<SplitPane> {
                 handleLoseFocus();
             }
         }));
-        state = State.LABEL;
+        state = State.READ_ONLY;
         personProfile.setEventHandler(PersonProfile.Event.AFTER_CONFIRM, this::refresh);
         refresh();
     }
@@ -64,13 +81,13 @@ public class PersonProfileField extends UiPart<SplitPane> {
 
     private void updateState() {
         switch (state) {
-        case LABEL:
+        case READ_ONLY:
             valueLabel.setText(value);
             valueField.setText(value);
             valueLabel.setVisible(true);
             valueField.setVisible(false);
             break;
-        case TEXT_FIELD:
+        case EDITING:
             valueLabel.setVisible(false);
             valueField.setVisible(true);
             valueField.requestFocus();
@@ -82,11 +99,11 @@ public class PersonProfileField extends UiPart<SplitPane> {
     }
 
     private boolean confirmIfValid() {
-        assert state == State.TEXT_FIELD;
+        assert state == State.EDITING;
         if (isValueValid()) {
             this.value = getTextOrNil();
             updateProfile();
-            updateState(State.LABEL);
+            updateState(State.READ_ONLY);
             personProfile.triggerEvent(PersonProfile.Event.AFTER_CONFIRM);
             return true;
         } else {
@@ -100,7 +117,7 @@ public class PersonProfileField extends UiPart<SplitPane> {
     }
 
     private void cancel() {
-        updateState(State.LABEL);
+        updateState(State.READ_ONLY);
         updateProfile();
         personProfile.triggerEvent(PersonProfile.Event.CANCEL);
     }
@@ -159,6 +176,8 @@ public class PersonProfileField extends UiPart<SplitPane> {
         case ESCAPE:
             cancel();
             break;
+        default:
+            return;
         }
     }
 
@@ -179,11 +198,11 @@ public class PersonProfileField extends UiPart<SplitPane> {
     @FXML
     void setFocus() {
         personProfile.triggerEvent(PersonProfile.Event.BEFORE_START_EDIT);
-        updateState(State.TEXT_FIELD);
+        updateState(State.EDITING);
     }
 
     boolean isEditing() {
-        return state == State.TEXT_FIELD;
+        return state == State.EDITING;
     }
 
     void indicateIsError() {
