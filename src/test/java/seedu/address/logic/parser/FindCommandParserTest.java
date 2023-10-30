@@ -101,8 +101,8 @@ public class FindCommandParserTest {
         assertTrue(parser.parse(" n/Alice && n/Li") instanceof FindCommand);
 
         // multiple distinct args
-        assertDoesNotThrow(() -> parser.parse(" n/Alice && li/musk"));
-        assertTrue(parser.parse(" n/Alice && li/musk") instanceof FindCommand);
+        assertDoesNotThrow(() -> parser.parse(" bal/-$5 && li/musk"));
+        assertTrue(parser.parse(" bal/-$5 && li/musk") instanceof FindCommand);
 
         // multiple distinct args with repeated fields
         assertDoesNotThrow(() -> parser.parse(" b/12 && nt/shirt && nt/blue"));
