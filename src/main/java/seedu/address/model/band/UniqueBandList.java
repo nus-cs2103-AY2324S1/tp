@@ -71,7 +71,7 @@ public class UniqueBandList implements Iterable<Band> {
     }
 
     /**
-     * Replaces the band {@code target} in the list with {@code editedMusician}.
+     * Replaces the band {@code target} in the list with {@code editedBand}.
      * {@code target} must exist in the list.
      * The band identity of {@code editedBand} must not be the same as another existing band in the list.
      */
@@ -96,8 +96,8 @@ public class UniqueBandList implements Iterable<Band> {
     }
 
     /**
-     * Replaces the contents of this list with {@code musicians}.
-     * {@code musicians} must not contain duplicate musicians.
+     * Replaces the contents of this list with {@code band}.
+     * {@code band} must not contain duplicate bands.
      */
     public void setBand(List<Band> band) {
         requireAllNonNull(band);
@@ -198,7 +198,7 @@ public class UniqueBandList implements Iterable<Band> {
     }
 
     /**
-     * Returns true if {@code musicians} contains only unique musicians.
+     * Returns true if {@code bands} contains only unique bands.
      */
     private boolean bandsAreUnique(List<Band> bands) {
         for (int i = 0; i < bands.size() - 1; i++) {
