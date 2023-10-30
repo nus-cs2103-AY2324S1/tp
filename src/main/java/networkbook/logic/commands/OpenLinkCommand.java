@@ -10,6 +10,7 @@ import networkbook.commons.core.index.Index;
 import networkbook.commons.util.ToStringBuilder;
 import networkbook.logic.Messages;
 import networkbook.logic.commands.exceptions.CommandException;
+import networkbook.logic.parser.CliSyntax;
 import networkbook.model.Model;
 import networkbook.model.person.Link;
 import networkbook.model.person.Person;
@@ -19,7 +20,12 @@ import networkbook.model.person.Person;
  */
 public class OpenLinkCommand extends Command {
     public static final String COMMAND_WORD = "open";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": yo";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": open a link of a contact\n"
+            + "Parameters: [LIST INDEX OF CONTACT]"
+            + " [" + CliSyntax.PREFIX_INDEX + " index]\n"
+            + "Examples:\n"
+            + COMMAND_WORD + " 1\n"
+            + COMMAND_WORD + " 1 " + CliSyntax.PREFIX_INDEX + " 1";
     public static final String MESSAGE_SUCCESS = "Successfully opened %s";
     public static final String MESSAGE_CANNOT_OPEN_LINK = "Oops, your computer does not allow me to open a link.";
     public static final String MESSAGE_INVALID_LINK_INDEX = "The person at index %d does not have a link at index %d.";
