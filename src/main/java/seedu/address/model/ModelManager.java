@@ -108,12 +108,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean[] usedFields(Person person) {
-        requireNonNull(person);
-        return addressBook.usedFields(person);
-    }
-
-    @Override
     public Person deletePerson(String personName) throws CommandException {
         Person person = addressBook.getPerson(personName);
         addressBook.removePerson(person);
