@@ -18,6 +18,9 @@ public class CalendarContainer extends UiPart<Region> {
     private StackPane calendarLabelPlaceholder;
 
     @FXML
+    private StackPane eventSpaceContainer;
+
+    @FXML
     private GridPane eventSpaceBackground;
     @FXML
     private GridPane eventSpace;
