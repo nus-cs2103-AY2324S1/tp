@@ -1,16 +1,11 @@
 package seedu.application.ui;
 
-import static seedu.application.model.job.Status.JobStatus.APPROVED;
-import static seedu.application.model.job.Status.JobStatus.PENDING;
-import static seedu.application.model.job.Status.JobStatus.REJECTED;
-import static seedu.application.model.job.Status.JobStatus.TO_BE_SUBMITTED;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.application.model.job.Job;
-import seedu.application.model.job.Status;
 
 /**
  * An UI component that displays information of a {@code Job}.
@@ -38,7 +33,7 @@ public class JobCard extends UiPart<Region> {
     @FXML
     private Label company;
     @FXML
-    private Label status;
+    private FlowPane status;
     @FXML
     private Label deadline;
 
@@ -51,24 +46,25 @@ public class JobCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         role.setText(job.getRole().description);
         company.setText(job.getCompany().name);
-        status.setText(job.getStatus().status);
-        setStatusLabelStyle();
+        Label statusLabel = setStatusLabelStyle();
+        status.getChildren().add(statusLabel);
         deadline.setText(job.getDeadline().deadline);
     }
 
-    private void setStatusLabelStyle() {
-        Status jobStatus = job.getStatus();
+    private Label setStatusLabelStyle() {
+        String jobStatus = job.getStatus().status;
+        Label statusLabel = new Label(jobStatus);
+        statusLabel.getStyleClass().add("cell_status_label");
 
-        if (jobStatus.equals(TO_BE_SUBMITTED)) {
-            status.getStyleClass().add("to_be_submitted");
-        } else if (jobStatus.equals(PENDING)) {
-            status.getStyleClass().add("pending");
-        } else if (jobStatus.equals(APPROVED)) {
-            status.getStyleClass().add("approved");
-        } else if (jobStatus.equals(REJECTED)) {
-            status.getStyleClass().add("rejected");
-        } else {
-            status.getStyleClass().add("");
+        if (jobStatus.equals("TO_BE_SUBMITTED")) {
+            statusLabel.getStyleClass().add("to_be_submitted");
+        } else if (jobStatus.equals("PENDING")) {
+            statusLabel.getStyleClass().add("pending");
+        } else if (jobStatus.equals("APPROVED")) {
+            statusLabel.getStyleClass().add("approved");
+        } else if (jobStatus.equals("REJECTED")) {
+            statusLabel.getStyleClass().add("rejected");
         }
+        return statusLabel;
     }
 }

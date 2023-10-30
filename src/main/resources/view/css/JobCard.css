@@ -23,24 +23,35 @@
 }
 
 .cell_index_label {
-    -fx-font-family: "Tahoma", sans-serif;
+    -fx-font-family: "Verdana", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-text-fill: #343434;
 }
 
+.cell_status_label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #343434;
+    -fx-padding: 2px 5px;
+}
+
 .to_be_submitted {
-    -fx-background-color: #8C7FFF;
+    -fx-background-color: #F4D5EE;
+    -fx-background-radius: 5px;
 }
 
 .pending {
-    -fx-background-color: #6B61FE;
+    -fx-background-color: #E4E1FF;
+    -fx-background-radius: 5px;
 }
 
 .approved {
     -fx-background-color: #BFE2CE;
+    -fx-background-radius: 5px;
 }
 
 .rejected {
     -fx-background-color: #FFD0D3;
+    -fx-background-radius: 5px;
 }
