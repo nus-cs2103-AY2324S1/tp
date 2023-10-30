@@ -166,8 +166,8 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both address book data, user preference data, and schedule data in JSON format, and read them back into corresponding objects.
+* inherits from both `AddressBookStorage`, `UserPrefStorage` and `ScheduleStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -591,7 +591,12 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+    1. If a missing file is detected, the system will automatically create a .json file.
+   2.  If a corrupted file is detected (i.e. missing any key properties), the system will delete the corrupted file, and replace it with a new one.
+   3. The .json file will be populated with sample content loaded from `SampleDataUtil.java`.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+2. Saving
+   1. Data is written to the file after every command.
 
-1. _{ more test cases …​ }_
+
+1. Test cases

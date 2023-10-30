@@ -76,6 +76,7 @@ public class Address extends ListEntryField {
     public int hashCode() {
         return value.hashCode();
     }
+
     /**
      * Returns a clone of this address that is equal to this address.
      */

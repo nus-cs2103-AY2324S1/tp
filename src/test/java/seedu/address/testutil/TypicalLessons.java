@@ -12,18 +12,17 @@ import seedu.address.model.lessons.TaskList;
 
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Lesson} objects to be used in tests.
  */
 public class TypicalLessons {
     private static TaskList taskList = new TaskList();
-
-    private static List<Task> fillerTasks = Arrays.asList(new Task("first"), new Task("second"), new Task("third"));
+    private static List<Task> fillerTasks = TypicalTasks.getTypicalTasks();
 
 
     private TypicalLessons() {} // prevents instantiation
 
     /**
-     * Returns an {@code ScheduleList} with all the typical persons.
+     * Returns an {@code ScheduleList} with all the typical lessons.
      */
     public static ScheduleList getTypicalScheduleList() {
         ScheduleList sc = new ScheduleList();

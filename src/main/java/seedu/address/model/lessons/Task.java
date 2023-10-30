@@ -1,5 +1,8 @@
 package seedu.address.model.lessons;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -10,7 +13,14 @@ import seedu.address.model.ListEntry;
  */
 public class Task extends ListEntry<Task> {
 
-    //Task fields
+    public static final String MESSAGE_CONSTRAINTS = "Tasks can take any values, and it should not be blank";
+
+    /*
+     * The first character of the task description must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[^\\s].*";
+
     /**
      * The description of the Task.
      */
@@ -22,13 +32,24 @@ public class Task extends ListEntry<Task> {
     protected boolean isDone;
 
     /**
-     * Constructor for a Task.
+     * Constructs a {@code Task}.
      *
-     * @param description The description of the task.
+     * @param description A valid description of the task.
      */
     public Task(String description) {
+        requireNonNull(description);
+        checkArgument(isValidTask(description), MESSAGE_CONSTRAINTS);
         this.description = description;
     }
+
+    /**
+     * Returns true if a given string is a valid task.
+     */
+    public static boolean isValidTask(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+
 
     /**
      * Returns the description of the Task.
