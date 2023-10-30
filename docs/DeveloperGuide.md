@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -50,9 +50,9 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete s/A0249112A`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="600" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,15 +84,15 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete s/A0249112A")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete s/A0249112A` Command" />
 
 <box type="info" seamless>
 
@@ -115,9 +115,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" />
 
 
 The `Model` component,
@@ -138,9 +138,9 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T11-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="650" />
 
 The `Storage` component,
 * can save both Class Manager data and user preference data in JSON format, and read them back into corresponding objects.
@@ -316,7 +316,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 The load feature allows users to load a saved JSON file into the app. Load allows data from the new JSON file to be displayed in Class Manager, while setting the new default save file to be the new JSON file. The status bar footer also updates to show the current file.
 
-This feature is an improvement to the previous method of directly editing the `addressbook.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course, and load the JSON file for the course they are currently teaching. 
+This feature is an improvement to the previous method of directly editing the `classmanager.json` file located in `[JAR file location]/data`. Users are now able to have multiple JSON files in `[JAR file location]/data` and choose which file is to be loaded into Class Manager. This allows TAs with multiple courses to have a JSON file for each course, and load the JSON file for the course they are currently teaching. 
 
 #### How it is implemented
 
@@ -346,32 +346,31 @@ _{Explain here how the data archiving feature will be implemented}_
 
 The proposed class details mechanism for each student will be facilitated by `ClassDetails`. It allows for the tracking
 of an `Student` 's class details, such as their tutorial group, tutorial attendance, class participation, and assignment
-grades. It will be stored as 3 separate classes to model each of the 3 different types of class details, and a tracker
-class to act as the manager for each of the classes, with the trackers composing the `ClassDetails` class.
+grades. It will be stored as 3 separate classes to model each of the 3 different types of class details (We will
+call them "class grades"), and a tracker
+class to act as the manager for each of the class grades, with the trackers composing the `ClassDetails` class.
 
-<puml src="diagrams/ClassDetails.puml" width="500" />
+<puml src="diagrams/ClassGrades.puml" />
 
 The 3 different types of class grades are:
 
-* `Attendance` - Stores the details for a students attendance in a specific tutorial. Attendance will be stored as
+* `Attendance` - Stores the details for a student's attendance in a specific tutorial. Attendance will be stored as
 a boolean value.
-* `ClassParticipation` - Stores the details for a students participation in a specific tutorial. Class participation
+* `ClassParticipation` - Stores the details for a student's participation in a specific tutorial. Class participation
 will be stored as a boolean value.
-* `Assignment` - Stores the details for a students assignment grades for a specific tutorial. Assignment grades will be
+* `Assignment` - Stores the details for a student's assignment grades for a specific tutorial. Assignment grades will be
 stored as an integer value, with the total marks standardized to 100 marks.
 
-<puml src="diagrams/ClassGrades.puml" width="500" />
-
-These classes will be stored in their respective tracker classes, using Java Arrays to store the objects. The position
+These components will be stored in their respective tracker classes, using Java Arrays to store the objects. The position
 of the classes in the array will correspond to the index of the tutorial or assignment. For example, the first index of
 the array will correspond to either the first tutorial or assignment, depending on the tracker class.
+
+<puml src="diagrams/ClassDetails.puml" width="500" />
 
 The tracker classes will be stored in the `ClassDetails` class, which will be composed of the following classes:
 * `AttendanceTracker` - Stores the `Attendance` objects for a specific student.
 * `ClassParticipationTracker` - Stores the `ClassParticipation` objects for a specific student.
 * `AssignmentTracker` - Stores the `Assignment` objects for a specific student.
-
-<puml src="diagrams/Tracker.puml" width="250" />
 
 These tracker classes will inherit from a `tracker` *interface*. They will also support the following operations:
 * `getPercentage()` - Returns the average grade of the student for the specific tracker class. For example, the average
@@ -382,7 +381,7 @@ or assignment grade.
 
 #### Design considerations:
 
-**Aspect: Class grades classes**
+**Aspect: 'class grade' classes**
 
 * **Alternative 1 (current choice):** Use a class for each type of class details.
   * Pros: Easy to implement, follows OOP principle. If we want to edit the implementation of each of the classes or
@@ -441,35 +440,35 @@ or assignment grade.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​  | I want to …​                                                | So that I can…​                                                         |
-|----------|----------|-------------------------------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | TA       | manually enter the details of students into my address book | track the information                                                   |
-| `* * *`  | TA       | be able to delete students from the class                   | manage students who drop out                                            |
-| `* * *`  | TA       | edit the contact information of students                    | maintain the correct information if it changes                          |
-| `* *`    | TA       | keep track of the attendance percentage of each student     | use it for their participation grade                                    |
-| `* *`    | TA       | be able to add the grades of each student in each tutorial  | use it to view students that need help                                  |
-| `*`      | TA       | be able to keep records of my students in past semesters    | refer to the history of student performance                             |
-| `*`      | TA       | add comments to specific students                           | attach additional information to them                                   |
-| `* * *`  | TA       | tag students with certain labels                            | filter and search more conveniently                                     |
-| `* * *`  | TA       | lookup all students in a particular tutorial group          | obtain their contact information                                        |
-| `* *`    | TA       | search particular students across different tutorial groups | contact them easily                                                     |
-| `*`      | TA       | know the students I searched recently                       | minimize repeated searches                                              |
-| `* *`    | TA       | filter students by tags/labels                              | categorize and organize students                                        |
-| `* *`    | TA       | filter students by their year of study                      | gain a better understanding of the whole tutorial                       |
-| `*`      | TA       | have a composite filter for tutorial group attendance       | look up the attendance of a particular tutorial group on a certain week |
-| `*`      | TA       | randomly select a specific number of students               | use as a feature during teaching                                        |
-| `* *`    | TA       | sort students by coding experience                          | group students with similar experience levels                           |
-| `* *`    | TA       | sort students based on their individual score marks         | understand the performance of the whole class                           |
-| `* *`    | TA       | sort students by alphabetical order                         | compare to the attendance sheet                                         |
-| `* *`    | TA       | sort students by their overall grades                       | identify students falling behind in my class                            |
-| `* `     | TA       | customise my GUI                                            | use a theme that suits my desktop theme                                 |
-| `* `     | TA       | enable dark mode for my device                              | use it at night                                                         |
-| `* `     | TA       | choose different layouts                                    | select a comfortable layout                                             |
-| `* *`    | TA       | have keyboard shortcuts for commonly used features          | save time and fit my habit                                              |
-| `* *`    | TA       | customise commands                                          | save time and fit my habit                                              |
-| `* * *`  | TA       | export and import app’s data                                | work on different devices                                               |
-| `* * *`  | TA       | save queries and searches to the application                | not lose progress                                                       |
-| `* * *`  | new user | see usage instructions                                      | refer to instructions when I forget how to use the App                  |
+| Priority | As a …​  | I want to …​                                                 | So that I can…​                                                         |
+|----------|----------|--------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | TA       | manually enter the details of students into my class manager | track the information                                                   |
+| `* * *`  | TA       | be able to delete students from the class                    | manage students who drop out                                            |
+| `* * *`  | TA       | edit the contact information of students                     | maintain the correct information if it changes                          |
+| `* *`    | TA       | keep track of the attendance percentage of each student      | use it for their participation grade                                    |
+| `* *`    | TA       | be able to add the grades of each student in each tutorial   | use it to view students that need help                                  |
+| `*`      | TA       | be able to keep records of my students in past semesters     | refer to the history of student performance                             |
+| `*`      | TA       | add comments to specific students                            | attach additional information to them                                   |
+| `* * *`  | TA       | tag students with certain labels                             | filter and search more conveniently                                     |
+| `* * *`  | TA       | lookup all students in a particular tutorial group           | obtain their contact information                                        |
+| `* *`    | TA       | search particular students across different tutorial groups  | contact them easily                                                     |
+| `*`      | TA       | know the students I searched recently                        | minimize repeated searches                                              |
+| `* *`    | TA       | filter students by tags/labels                               | categorize and organize students                                        |
+| `* *`    | TA       | filter students by their year of study                       | gain a better understanding of the whole tutorial                       |
+| `*`      | TA       | have a composite filter for tutorial group attendance        | look up the attendance of a particular tutorial group on a certain week |
+| `*`      | TA       | randomly select a specific number of students                | use as a feature during teaching                                        |
+| `* *`    | TA       | sort students by coding experience                           | group students with similar experience levels                           |
+| `* *`    | TA       | sort students based on their individual score marks          | understand the performance of the whole class                           |
+| `* *`    | TA       | sort students by alphabetical order                          | compare to the attendance sheet                                         |
+| `* *`    | TA       | sort students by their overall grades                        | identify students falling behind in my class                            |
+| `* `     | TA       | customise my GUI                                             | use a theme that suits my desktop theme                                 |
+| `* `     | TA       | enable dark mode for my device                               | use it at night                                                         |
+| `* `     | TA       | choose different layouts                                     | select a comfortable layout                                             |
+| `* *`    | TA       | have keyboard shortcuts for commonly used features           | save time and fit my habit                                              |
+| `* *`    | TA       | customise commands                                           | save time and fit my habit                                              |
+| `* * *`  | TA       | export and import app’s data                                 | work on different devices                                               |
+| `* * *`  | TA       | save queries and searches to the application                 | not lose progress                                                       |
+| `* * *`  | new user | see usage instructions                                       | refer to instructions when I forget how to use the App                  |
 
 ### Use cases
 

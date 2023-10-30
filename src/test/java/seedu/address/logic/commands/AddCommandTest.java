@@ -105,6 +105,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void toggleColorTheme() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
@@ -116,6 +121,11 @@ public class AddCommandTest {
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getTheme() {
             throw new AssertionError("This method should not be called.");
         }
 

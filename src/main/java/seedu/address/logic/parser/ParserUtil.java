@@ -113,6 +113,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String classNumber} into an {@code ClassNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code classNumber} is invalid.
+     */
+    public static String parseClassNumber(String classNumber) throws ParseException {
+        requireNonNull(classNumber);
+        String trimmedClassNumber = classNumber.trim();
+        if (!ClassDetails.isValidClassDetails(trimmedClassNumber)) {
+            throw new ParseException(ClassDetails.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedClassNumber;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
