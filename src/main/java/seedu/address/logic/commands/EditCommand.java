@@ -92,6 +92,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Model originalModel = model;
         // combine doctor list and patient list
         List<Person> lastShownList = new ArrayList<>();
         lastShownList.addAll(model.getFilteredDoctorList());
@@ -131,6 +132,7 @@ public class EditCommand extends Command {
         }
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        assert !originalModel.equals(model);
         logger.info("Successfully edited person");
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
