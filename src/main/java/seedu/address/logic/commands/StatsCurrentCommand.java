@@ -32,7 +32,7 @@ public class StatsCurrentCommand extends StatsCommand {
                 .filter(fosterer ->
                         fosterer.getAvailability()
                                 .equals(Availability.NOT_AVAILABLE)
-                                && !fosterer.getAnimalName().fullName.equals("nil")
+                                && !fosterer.getAnimalName().fullName.equals(Person.NIL_WORD)
                                 && fosterer.getAnimalType().equals(AnimalType.CURRENT_DOG)
                                 || fosterer.getAnimalType().equals(AnimalType.CURRENT_CAT))
                 .collect(Collectors.toList());

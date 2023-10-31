@@ -57,7 +57,7 @@ public class Person {
         this.animalType = animalType;
         this.tags.addAll(tags);
 
-        if (Objects.equals(name.fullName, "nil")) {
+        if (Objects.equals(name.fullName, Person.NIL_WORD)) {
             throw new IllegalArgumentException(NAME_CANNOT_BE_NIL_MESSAGE);
         }
 
@@ -73,8 +73,8 @@ public class Person {
      * Minimal constructor that fills non-required fields with placeholder values (nil).
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, new Housing("nil"), new Availability("nil"),
-                new Name("nil"), new AnimalType("nil", new Availability("nil")), tags);
+        this(name, phone, email, address, new Housing(NIL_WORD), new Availability(NIL_WORD),
+                new Name(NIL_WORD), new AnimalType(NIL_WORD, new Availability(NIL_WORD)), tags);
     }
 
     /**
@@ -84,8 +84,8 @@ public class Person {
      */
     boolean isAvailabilityValidWhenAnimalNameNotNil() {
         String avail = availability.value;
-        if (!animalName.fullName.equals("nil")) {
-            return !(avail.equals("Available") || avail.equals("nil"));
+        if (!animalName.fullName.equals(Person.NIL_WORD)) {
+            return !(avail.equals("Available") || avail.equals(Person.NIL_WORD));
         }
         return true;
     }

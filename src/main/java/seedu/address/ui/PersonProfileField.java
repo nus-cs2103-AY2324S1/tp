@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import seedu.address.model.person.Person;
 
 /**
  * A row of the PersonProfile UI, representing one field of the Person displayed.
@@ -125,7 +126,7 @@ public class PersonProfileField extends UiPart<SplitPane> {
     private String getTextOrNil() {
         String newValue = valueField.getText();
         if (newValue == null || newValue.isBlank()) {
-            newValue = "nil";
+            newValue = Person.NIL_WORD;
         } else {
             newValue = newValue.trim();
         }

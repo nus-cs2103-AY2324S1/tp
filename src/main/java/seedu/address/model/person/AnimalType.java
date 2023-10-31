@@ -44,11 +44,11 @@ public class AnimalType {
         requireNonNull(availability);
         requireNonNull(value);
 
-        if (availability.equals(new Availability("Available"))) {
+        if (availability.equals(Availability.AVAILABLE)) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_AVAILABLE), MESSAGE_CONSTRAINTS);
-        } else if (availability.equals(new Availability("NotAvailable"))) {
+        } else if (availability.equals(Availability.NOT_AVAILABLE)) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_NOT_AVAILABLE), MESSAGE_CONSTRAINTS);
-        } else if (availability.equals(new Availability("nil"))) {
+        } else if (availability.equals(Availability.NIL_AVAILABILITY)) {
             checkArgument(isValidAnimalType(value, VALIDATION_REGEX_NIL), MESSAGE_CONSTRAINTS);
         }
 
