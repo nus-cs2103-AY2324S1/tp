@@ -1,13 +1,13 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.fields.InterviewTime;
-import seedu.address.model.person.fields.Name;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.fields.InterviewTime;
 public class InterviewTimeTest {
     @Test
     public void constructor_invalidInterviewTime_throwsIllegalArgumentException() {
