@@ -107,6 +107,7 @@ public class ModelManager implements Model {
     public void addStudent(Student student) {
         wellNus.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     @Override
@@ -125,6 +126,7 @@ public class ModelManager implements Model {
     public void addAppointment(Appointment appointment) {
         wellNus.addAppointment(appointment);
         updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override

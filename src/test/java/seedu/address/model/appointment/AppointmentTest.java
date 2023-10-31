@@ -11,6 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_AMY;
 import static seedu.address.testutil.TypicalAppointments.ALICE_APPOINTMENT;
 import static seedu.address.testutil.TypicalAppointments.ALICE_SECOND_APPOINTMENT;
 import static seedu.address.testutil.TypicalAppointments.BERNICE_APPOINTMENT;
+import static seedu.address.testutil.TypicalAppointments.DAVID_APPOINTMENT;
+import static seedu.address.testutil.TypicalAppointments.JOHN_APPOINTMENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -75,5 +77,24 @@ public class AppointmentTest {
                 + " startTime=" + ALICE_APPOINTMENT.getStartTime() + ","
                 + " endTime=" + ALICE_APPOINTMENT.getEndTime() + "}";
         assertEquals(expected, ALICE_APPOINTMENT.toString());
+    }
+
+    @Test
+    public void compareToMethod() {
+        // ALEX_APPOINTMENT on "2023-10-31" from "12:00" to "13:00"
+        // ALEX_SECOND_APPOINTMENT on "2023-11-16" from "14:00" to "15:00"
+
+        // Different Dates, time don't matter
+        assertEquals(ALICE_APPOINTMENT.compareTo(ALICE_SECOND_APPOINTMENT), -1);
+        assertEquals(ALICE_APPOINTMENT.compareTo(ALICE_APPOINTMENT), 0);
+        assertEquals(ALICE_SECOND_APPOINTMENT.compareTo(ALICE_APPOINTMENT), 1);
+
+        // Same Date, compare time
+        // DAVID_APPOINTMENT on "2023-10-31" from "11:00" to "12:00"
+        // ALEX_APPOINTMENT on "2023-10-31" from "12:00" to "13:00"
+        // JOHN_APPOINTMENT on "2023-10-31" from "13:00" to "14:00"
+        assertEquals(DAVID_APPOINTMENT.compareTo(ALICE_APPOINTMENT), -1);
+        assertEquals(JOHN_APPOINTMENT.compareTo(JOHN_APPOINTMENT), 0);
+        assertEquals(JOHN_APPOINTMENT.compareTo(ALICE_APPOINTMENT), 1);
     }
 }

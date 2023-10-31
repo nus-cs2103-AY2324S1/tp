@@ -6,6 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAppointments.ALICE_APPOINTMENT;
 import static seedu.address.testutil.TypicalAppointments.ALICE_SECOND_APPOINTMENT;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_1;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_2;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_3;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_4;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_5;
+
+import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
 
@@ -98,5 +105,55 @@ public class UniqueAppointmentListTest {
     public void toStringMethod() {
         assertEquals(uniqueAppointmentList.asUnmodifiableObservableList().toString(),
                 uniqueAppointmentList.toString());
+    }
+
+    @Test
+    public void sortAppointmentsAfterAddition() {
+        // APPOINTMENT_1 on "2023-11-01" from "09:00" to "10:00"
+        // APPOINTMENT_2 on "2023-11-02" from "10:00" to "11:00"
+        // APPOINTMENT_3 on "2023-11-03" from "09:00" to "10:00"
+        // APPOINTMENT_4 on "2023-11-03" from "10:00" to "11:00"
+        // APPOINTMENT_5 on "2023-11-04" from "09:00" to "10:00"
+
+        UniqueAppointmentList uniqueAppointmentList = new UniqueAppointmentList();
+
+        uniqueAppointmentList.add(APPOINTMENT_5);
+        uniqueAppointmentList.add(APPOINTMENT_4);
+        uniqueAppointmentList.add(APPOINTMENT_3);
+        uniqueAppointmentList.add(APPOINTMENT_2);
+        uniqueAppointmentList.add(APPOINTMENT_1);
+
+        Iterator<Appointment> iterator = uniqueAppointmentList.iterator();
+
+        // Check if appointments are sorted correctly after addition
+        assertEquals(APPOINTMENT_1, iterator.next());
+        assertEquals(APPOINTMENT_2, iterator.next());
+        assertEquals(APPOINTMENT_3, iterator.next());
+        assertEquals(APPOINTMENT_4, iterator.next());
+        assertEquals(APPOINTMENT_5, iterator.next());
+    }
+
+    @Test
+    public void sortAppointmentsAfterDeletion() {
+        UniqueAppointmentList uniqueAppointmentList = new UniqueAppointmentList();
+
+        uniqueAppointmentList.add(APPOINTMENT_5);
+        uniqueAppointmentList.add(APPOINTMENT_4);
+        uniqueAppointmentList.add(APPOINTMENT_3);
+        uniqueAppointmentList.add(APPOINTMENT_2);
+        uniqueAppointmentList.add(APPOINTMENT_1);
+
+        uniqueAppointmentList.remove(APPOINTMENT_3);
+
+        Iterator<Appointment> iterator = uniqueAppointmentList.iterator();
+
+        // Check if appointments are sorted correctly after deletion
+        assertEquals(APPOINTMENT_1, iterator.next());
+        assertEquals(APPOINTMENT_2, iterator.next());
+        assertEquals(APPOINTMENT_4, iterator.next());
+        assertEquals(APPOINTMENT_5, iterator.next());
+
+        // Ensure that the removed appointment is no longer in the list
+        assertFalse(uniqueAppointmentList.contains(APPOINTMENT_3));
     }
 }
