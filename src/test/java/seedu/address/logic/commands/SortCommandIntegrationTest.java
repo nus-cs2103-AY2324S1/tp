@@ -43,4 +43,15 @@ public class SortCommandIntegrationTest {
         assertCommandSuccess(new SortCommand(validSortIn), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+    @Test
+    public void executeSortInvalidFailure() {
+        String sequence = "Invalid";
+        try {
+            SortIn invalidSortIn = new SortIn(sequence);
+            assert false;
+        } catch (Exception e) {
+            assert true;
+        }
+    }
+
 }
