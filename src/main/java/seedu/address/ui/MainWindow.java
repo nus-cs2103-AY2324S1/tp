@@ -45,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     // Dark/Light mode
-    private boolean lightMode = false;
+    private boolean lightMode;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -83,6 +83,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        setDarkLightMode(logic.getGuiSettings());
 
         setAccelerators();
 
@@ -156,8 +158,6 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
-        darkLightModeButton.setText("Light Mode");
     }
 
     /**
@@ -169,6 +169,24 @@ public class MainWindow extends UiPart<Stage> {
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        }
+    }
+
+    private void setDarkLightMode(GuiSettings guiSettings) {
+        lightMode = guiSettings.getLightMode();
+        System.out.println(lightMode);
+        if (lightMode) {
+            darkLightModeButton.setText("Dark Mode");
+            primaryStage
+                    .getScene()
+                    .getStylesheets()
+                    .add(getClass().getResource("/view/LightTheme.css").toExternalForm());
+        } else {
+            darkLightModeButton.setText("Light Mode");
+            primaryStage
+                    .getScene()
+                    .getStylesheets()
+                    .remove(getClass().getResource("/view/LightTheme.css").toExternalForm());
         }
     }
 
@@ -194,7 +212,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), lightMode);
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -219,7 +237,6 @@ public class MainWindow extends UiPart<Stage> {
                     .getStylesheets()
                     .remove(getClass().getResource("/view/LightTheme.css").toExternalForm());
         }
-
     }
 
     /**
