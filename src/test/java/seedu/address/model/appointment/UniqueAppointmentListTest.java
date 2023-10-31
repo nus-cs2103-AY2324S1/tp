@@ -12,13 +12,13 @@ import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_3;
 import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_4;
 import static seedu.address.testutil.TypicalAppointments.APPOINTMENT_5;
 
+import java.util.Iterator;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.address.model.appointment.exceptions.DuplicateAppointmentException;
 import seedu.address.testutil.AppointmentBuilder;
-
-import java.util.Iterator;
 
 public class UniqueAppointmentListTest {
 
