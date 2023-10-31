@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_ALICE_FIRST_JAN;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_BOB_SECOND_JAN;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -328,6 +329,26 @@ class ScheduleTest {
 
         assertTrue(ealierSchedule.compareTo(laterSchedule) > 0);
         assertTrue(laterSchedule.compareTo(ealierSchedule) < 0);
+    }
+
+    @Test
+    public void testIsOnDate() {
+        LocalDateTime sameDay = LocalDateTime.of(2023, 1, 1, 0, 0, 0);
+        LocalDateTime differentDay = LocalDateTime.of(2023, 1, 2, 0, 0, 0);
+
+        Schedule schedule1 =
+            new ScheduleBuilder().withStartTime(sameDay).withEndTime(sameDay.withHour(1)).build();
+
+        assertFalse(schedule1.isOnDate(new Date(LocalDate.of(2022, 1, 1)))); // different month
+        assertFalse(schedule1.isOnDate(new Date(LocalDate.of(2023, 2, 1)))); // different year
+        assertFalse(schedule1.isOnDate(new Date(LocalDate.of(2023, 1, 2)))); // different day
+        assertTrue(schedule1.isOnDate(new Date(LocalDate.of(2023, 1, 1)))); // same date
+
+        // start and end time on different dates
+        Schedule schedule2 =
+            new ScheduleBuilder().withStartTime(sameDay).withEndTime(differentDay).build();
+        assertFalse(schedule2.isOnDate(new Date(sameDay.toLocalDate())));
+        assertFalse(schedule2.isOnDate(new Date(differentDay.toLocalDate())));
     }
 
     @Test
