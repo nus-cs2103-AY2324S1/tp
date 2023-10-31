@@ -10,7 +10,7 @@ src/main/resources/docs/
 
 # Storage/log files
 /import/
-/import/
+/export/
 /data/
 /config.json
 /preferences.json
