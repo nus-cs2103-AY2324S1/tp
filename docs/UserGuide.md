@@ -113,6 +113,7 @@ Format: `note <INDEX> note/[NOTE]`
 #### 2.2.4 Editing a Student: `edit`
 
 #### 2.2.5 Viewing all Students: `view`
+
 Shows a list of all available students or appointments, depending on specified input.
 
 Format: `view g/CATEGORY`
@@ -121,7 +122,8 @@ Format: `view g/CATEGORY`
 1. Category
     - Only 'students', 'appointments' or 'all'
 
-
+Examples:
+* `view g/students`
 
 #### 2.2.6 Finding Students by Name: `find`
 
@@ -154,6 +156,10 @@ Format: `tag_student <INDEX> <RISK_LEVEL>`
 
 ### 2.3 Appointment Commands
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+Appointments will be automatically sorted by Date and Time in ascending order.
+</div>
+
 #### 2.3.1 Scheduling an Appointment: `schedule`
 
 Schedules a new appointment for a student.
@@ -171,7 +177,6 @@ Format: `schedule n/NAME_OF_STUDENT date/DATE from/START_TIME to/END_TIME d/DESC
     - Time should follow HH:mm
 5. Description 
     - Description should have a minimum length of 1 character and maximum length of 100 characters
-
 
 Examples:
 - `schedule d/monthly check-up s/2023-12-31 16:30 n/Jon`
@@ -200,10 +205,24 @@ Format: `view g/CATEGORY`
 1. Category
    - Only 'students', 'appointments' or 'all'
 
+Examples:
+* `view g/appointments`
+
 #### 2.3.4 Filtering Appointments by Date: `filter`
 
+Filters appointments based on given date. 
+
+Format: `filter <DATE>`
+
+**Parameters**
+1. Date
+    - Date should follow yyyy-MM-dd format
+
+Examples:
+* `filter 2023-10-16`
 
 ### 2.4 Others
+
 #### 2.4.1 Exiting the program: `exit`
 
 Exits the program.
@@ -211,6 +230,10 @@ Exits the program.
 Format: `exit`
 
 #### 2.4.2 Clearing storage: `clear`
+
+Resets the storage, deleting **all** Appointments and Students. 
+
+Format: `clear`
 
 #### 2.4.3 Saving the data
 
@@ -223,7 +246,7 @@ WellNUS data is saved automatically as a JSON file `[JAR file location]/data/add
 If your changes to the data file makes its format invalid, WellNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### 2.5 Tracking TODOS `[coming in v1.3]`
+### 2.5 Tracking TODOS `[coming in v1.4]`
 
 _Details coming soon ..._
 
@@ -244,19 +267,19 @@ _Details coming soon ..._
 
 ## 5. Command summary
 
-| Action                     | Format, Examples                                                                                                                                                      |
-|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Add Student]()            | `add n/NAME c/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`                                                             |
-| [Delete Student]()         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| [Add Student Note]()       | `note INDEX note/[NOTE]` <br> e.g., `note 1 note/Likes dogs`                                                                                                          |
-| [Edit Student]()           |                                                                                                                                                                       |
-| [View Students]()          |                                                                                                                                                                       |
-| [Find Students]()          |                                                                                                                                                                       |
-| [Assign Risk to Student]() | `tag_student INDEX RISK_LEVEL`<br> e.g.,`tag_student 4 HIGH`                                                                                                          |
-| [Schedule Appointment]()   | `schedule n/NAME_OF_STUDENT date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/John Doe date/2023-12-31 from/16:30 to/17:30 d/First Session`  |
-| [Cancel Appointment]()     | `cancel INDEX`<br> e.g., `cancel 3`                                                                                                                                   |
-| [View Appointments]()      | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                                                                    |
-| [Filter Appointments]()    | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                          |
-| [Help]()                   | `help`                                                                                                                                                                |
-| [Exit]()                   | `exit`                                                                                                                                                                |
+| Action                     | Format, Examples                                                                                                                                                     |
+|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Add Student]()            | `add n/NAME c/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`                                                            |
+| [Delete Student]()         | `delete INDEX` <br> e.g., `delete 3`                                                                                                                                 |
+| [Add Student Note]()       | `note INDEX note/[NOTE]` <br> e.g., `note 1 note/Likes dogs`                                                                                                         |
+| [Edit Student]()           |                                                                                                                                                                      |
+| [View Students]()          |                                                                                                                                                                      |
+| [Find Students]()          |                                                                                                                                                                      |
+| [Assign Risk to Student]() | `tag_student INDEX RISK_LEVEL` <br> e.g.,`tag_student 4 HIGH`                                                                                                        |
+| [Schedule Appointment]()   | `schedule n/NAME_OF_STUDENT date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`<br> e.g., `schedule n/John Doe date/2023-12-31 from/16:30 to/17:30 d/First Session` |
+| [Cancel Appointment]()     | `cancel INDEX` <br> e.g., `cancel 3`                                                                                                                                 |
+| [View Appointments]()      | `view g/CATEGORY` <br> e.g., `view g/appointments`                                                                                                                   |
+| [Filter Appointments]()    | `filter DATE` <br> e.g., `filter 2023-10-16`                                                                                                                         |
+| [Help]()                   | `help`                                                                                                                                                               |
+| [Exit]()                   | `exit`                                                                                                                                                               |
 
