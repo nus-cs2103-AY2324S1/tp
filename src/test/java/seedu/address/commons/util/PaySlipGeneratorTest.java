@@ -25,7 +25,7 @@ class PaySlipGeneratorTest {
     @Test
     void getFieldMap() {
         ALICE.addPayroll(new Payroll(ALICE.getSalary()));
-        Map<String, String> fieldMap = PaySlipGenerator.getFieldMap(ALICE);
+        Map<String, String> fieldMap = PaySlipGenerator.getFieldMap(ALICE, ALICE.getLatestPayroll());
 
         assertTrue(fieldMap.containsKey("employerName"));
         assertTrue(fieldMap.containsKey("employeeName"));

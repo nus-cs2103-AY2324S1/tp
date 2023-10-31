@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 
 /**
@@ -9,6 +10,7 @@ import java.time.temporal.TemporalAdjusters;
  */
 public class Payroll {
     public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Salary salary;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -117,11 +119,27 @@ public class Payroll {
     }
 
     /**
+     * Returns the string representation of the start date of this payroll.
+     * @return string representation of the start date
+     */
+    public String getStartDateString() {
+        return this.startDate.format(DATE_TIME_FORMATTER);
+    }
+
+    /**
      * Returns the end date of this payroll.
      * @return end date
      */
     public LocalDate getEndDate() {
         return this.endDate;
+    }
+
+    /**
+     * Returns the string representation of the end date of this payroll.
+     * @return string representation of the end date
+     */
+    public String getEndDateString() {
+        return this.endDate.format(DATE_TIME_FORMATTER);
     }
 
     /**
@@ -133,12 +151,21 @@ public class Payroll {
     }
 
     /**
+     * Returns the string representation of the payment date.
+     * @return string representation of the payment date
+     */
+    public String getPaymentDateString() {
+        return this.paymentDate.format(DATE_TIME_FORMATTER);
+    }
+
+    /**
      * Returns the string representation of the net salary.
      * @return string net salary.
      */
     public String calculatePayrollString() {
         return this.salary.getNetSalaryString();
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -151,6 +178,7 @@ public class Payroll {
         }
 
         Payroll otherDeduction = (Payroll) other;
-        return this.salary.equals(otherDeduction.salary);
+        return this.salary.equals(otherDeduction.salary) && this.startDate.equals(otherDeduction.startDate)
+                && this.endDate.equals(otherDeduction.endDate) && this.paymentDate.equals(otherDeduction.paymentDate);
     }
 }

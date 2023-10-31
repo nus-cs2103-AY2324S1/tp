@@ -7,7 +7,14 @@
     "bankAccount" : "123123123123",
     "joinDate" : "04/05/2021",
     "salary" : "1500.00",
-    "annualLeave" : "2"
+    "annualLeave" : "2",
+    "attendanceStorage" : [ {
+      "date" : "04/05/2021",
+      "attendance" : "Present"
+    }, {
+      "date" : "05/05/2021",
+      "attendance" : "Absent"
+    } ]
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
