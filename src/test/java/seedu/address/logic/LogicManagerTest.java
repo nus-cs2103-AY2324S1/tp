@@ -301,7 +301,7 @@ public class LogicManagerTest {
         expectedModel.setConfigured(true);
         expectedModel.addStudent(expectedStudent);
         expectedModel.commitAddressBook();
-        storage.saveAddressBook(expectedModel.getAddressBook(), expectedModel.getAddressBookFilePath());
+        //storage.saveAddressBook(expectedModel.getAddressBook(), expectedModel.getAddressBookFilePath());
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
         assertHistoryCorrect(addCommand);
     }
@@ -325,8 +325,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing a load command
-        String fileName = "classmanager";
-        Path filePath = Paths.get("data", fileName + ".json");
+        Path filePath = Paths.get("data", this.fileName + ".json");
         AddressBookStorage tempAddressBookStorage = new JsonAddressBookStorage(filePath);
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook newData;

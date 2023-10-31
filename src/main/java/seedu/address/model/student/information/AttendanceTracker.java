@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.student.information.exceptions.InvalidTutorialIndexException;
+import seedu.address.model.student.information.exceptions.InvalidTutorialSessionNumberException;
 
 /**
  * Represents a Student's AttendanceTracker grades in the class manager.
@@ -78,10 +78,10 @@ public class AttendanceTracker implements Tracker {
      *
      * @param tutNum The tutorial number.
      */
-    public void markPresent(Index tutNum) throws InvalidTutorialIndexException {
+    public void markPresent(Index tutNum) throws InvalidTutorialSessionNumberException {
         requireNonNull(tutNum);
         if (tutNum.getZeroBased() >= attendanceList.length) {
-            throw new InvalidTutorialIndexException();
+            throw new InvalidTutorialSessionNumberException();
         }
         attendanceList[tutNum.getZeroBased()].mark();
     }
@@ -91,10 +91,10 @@ public class AttendanceTracker implements Tracker {
      *
      * @param tutNum The tutorial number.
      */
-    public void markAbsent(Index tutNum) throws InvalidTutorialIndexException {
+    public void markAbsent(Index tutNum) throws InvalidTutorialSessionNumberException {
         requireNonNull(tutNum);
         if (tutNum.getZeroBased() >= attendanceList.length) {
-            throw new InvalidTutorialIndexException();
+            throw new InvalidTutorialSessionNumberException();
         }
         attendanceList[tutNum.getZeroBased()].unmark();
     }
@@ -104,9 +104,9 @@ public class AttendanceTracker implements Tracker {
      *
      * @param tutNum The tutorial number.
      */
-    public boolean isPresent(Index tutNum) throws InvalidTutorialIndexException {
+    public boolean isPresent(Index tutNum) throws InvalidTutorialSessionNumberException {
         if (tutNum.getZeroBased() >= attendanceList.length) {
-            throw new InvalidTutorialIndexException();
+            throw new InvalidTutorialSessionNumberException();
         }
         return attendanceList[tutNum.getZeroBased()].getIsPresent();
     }

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -27,7 +27,7 @@ public class MarkPresentAllCommandTest {
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_success() throws IllegalValueException {
+    public void execute_success() throws IllegalValueException, CommandException {
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
 
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
@@ -51,7 +51,10 @@ public class MarkPresentAllCommandTest {
 
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
 
-        assertCommandFailure(markPresentAllCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX, commandHistory);
+        assertCommandFailure(
+                markPresentAllCommand, model,
+                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, ClassDetails.DEFAULT_COUNT),
+                commandHistory);
     }
 
     @Test

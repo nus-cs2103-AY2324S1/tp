@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,7 +32,7 @@ public class MarkAbsentCommandTest {
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_validStudentNumber_success() throws IllegalValueException {
+    public void execute_validStudentNumber_success() throws IllegalValueException, CommandException {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
         Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
         model.setSelectedStudent(studentToMark);
@@ -57,7 +58,10 @@ public class MarkAbsentCommandTest {
 
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(i, studentToMark.getStudentNumber());
 
-        assertCommandFailure(markAbsentCommand, model, Messages.MESSAGE_INVALID_TUTORIAL_INDEX, commandHistory);
+        assertCommandFailure(
+                markAbsentCommand, model,
+                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, ClassDetails.DEFAULT_COUNT),
+                        commandHistory);
     }
 
     @Test

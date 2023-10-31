@@ -86,8 +86,12 @@ public class ClassDetails {
     /**
      * Marks the specific tutorial as present.
      */
-    public void markPresent(Index tutNum) {
+    public void markPresent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
+        if (tutNum.getOneBased() > tutorialCount || tutNum.getOneBased() <= 0) {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
+        }
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markPresent(tutNum);
     }
@@ -95,8 +99,12 @@ public class ClassDetails {
     /**
      * Marks the specific tutorial as absent.
      */
-    public void markAbsent(Index tutNum) {
+    public void markAbsent(Index tutNum) throws CommandException {
         requireNonNull(tutNum);
+        if (tutNum.getOneBased() > tutorialCount || tutNum.getOneBased() <= 0) {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_TUTORIAL_SESSION_NUMBER, tutorialCount));
+        }
         updateAssignmentAndTutorialCount();
         this.attendanceTracker.markAbsent(tutNum);
     }

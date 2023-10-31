@@ -13,7 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
-import seedu.address.model.student.information.exceptions.InvalidTutorialIndexException;
+import seedu.address.model.student.information.exceptions.InvalidTutorialSessionNumberException;
 
 /**
  * Marks a student's attendance.
@@ -57,7 +57,7 @@ public class MarkAbsentCommand extends Command {
 
         try {
             model.setStudent(studentToMark, markedStudent);
-        } catch (InvalidTutorialIndexException e) {
+        } catch (InvalidTutorialSessionNumberException e) {
             throw new CommandException(e.getMessage());
         }
 

@@ -125,14 +125,14 @@ public class Student {
     /**
      * Marks the specific tutorial as present.
      */
-    public void markPresent(Index tutNum) {
+    public void markPresent(Index tutNum) throws CommandException {
         this.classDetails.markPresent(tutNum);
     }
 
     /**
      * Marks the specific tutorial as absent.
      */
-    public void markAbsent(Index tutNum) {
+    public void markAbsent(Index tutNum) throws CommandException {
         this.classDetails.markAbsent(tutNum);
     }
 

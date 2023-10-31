@@ -74,6 +74,7 @@ public class RecordClassParticipationCommandTest {
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
         expectedModel.setSelectedStudent(editedStudent);
+        expectedModel.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel, commandHistory);
