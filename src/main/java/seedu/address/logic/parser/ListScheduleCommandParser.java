@@ -47,12 +47,8 @@ public class ListScheduleCommandParser implements Parser<ListScheduleCommand> {
 
             // Check if there is a status
             if (arePrefixesPresent(argMultimap, PREFIX_STATUS)) {
-                try {
-                    status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-                } catch (ParseException pe) {
-                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListScheduleCommand.MESSAGE_USAGE));
-                }
+                argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STATUS);
+                status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
             }
         }
 

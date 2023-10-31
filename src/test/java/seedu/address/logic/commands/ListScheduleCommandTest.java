@@ -6,7 +6,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_LAST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+
+import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +20,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Status;
+import seedu.address.model.schedule.StatusPredicate;
 import seedu.address.model.schedule.TutorPredicate;
 import seedu.address.testutil.TypicalSchedules;
 
@@ -61,6 +66,17 @@ public class ListScheduleCommandTest {
     }
 
     @Test
+    public void execute_validStatusUnfilteredList_success() {
+        StatusPredicate predicate = new StatusPredicate(Collections.singletonList(Status.MISSED.toString()), null);
+        ListScheduleCommand listScheduleCommand = new ListScheduleCommand(null, Status.MISSED);
+
+        String expectedMessage = String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, 0);
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredScheduleList(predicate);
+        assertCommandSuccess(listScheduleCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
@@ -89,6 +105,24 @@ public class ListScheduleCommandTest {
         ListScheduleCommand listScheduleCommand = new ListScheduleCommand(outOfBoundIndex, null);
 
         assertCommandFailure(listScheduleCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validStatusFilteredList_success() {
+        showPersonAtIndex(model, INDEX_LAST_PERSON);
+
+        Person tutor = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        StatusPredicate predicate = new StatusPredicate(Collections.singletonList(Status.MISSED.toString()), tutor);
+        ListScheduleCommand listScheduleCommand = new ListScheduleCommand(INDEX_FIRST_PERSON, Status.MISSED);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredScheduleList(predicate);
+        showPersonAtIndex(expectedModel, INDEX_LAST_PERSON);
+
+        String expectedMessage = String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW,
+            expectedModel.getFilteredScheduleList().size());
+
+        assertCommandSuccess(listScheduleCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

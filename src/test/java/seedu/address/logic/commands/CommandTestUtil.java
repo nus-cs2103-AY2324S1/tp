@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -59,6 +60,9 @@ public class CommandTestUtil {
     public static final String START_TIME_DESC_TWO = " " + PREFIX_START_TIME + VALID_START_TIME_TWO;
     public static final String END_TIME_DESC_ONE = " " + PREFIX_END_TIME + VALID_END_TIME_ONE;
     public static final String END_TIME_DESC_TWO = " " + PREFIX_END_TIME + VALID_END_TIME_TWO;
+    public static final String STATUS_DESC_ONE = " " + PREFIX_STATUS + "0";
+    public static final String STATUS_DESC_TWO = " " + PREFIX_STATUS + "1";
+    public static final String INVALID_STATUS = " " + PREFIX_STATUS + "a";
 
     public static final String INVALID_TUTOR_INDEX = "a";
     public static final String INVALID_START_TIME = " " + PREFIX_START_TIME + "2023-01-01 09:00"; // missing 'T'
