@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -210,6 +209,10 @@ public class ModelManager implements Model {
         this.filteredPersons.setPredicate(personPredicate);
     }
 
+    /**
+     * Updates the filtered event list without affecting the filtered person list.
+     * @param predicate Predicate to filter the event list.
+     */
     public void updateFilteredEventListOnly(Predicate<Event> predicate) {
         requireNonNull(predicate);
         Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
@@ -337,4 +340,8 @@ public class ModelManager implements Model {
                 && this.filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public String toString() {
+        return this.filteredPersons.toString() + "\n" + this.events.toString();
+    }
 }
