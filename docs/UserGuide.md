@@ -183,6 +183,50 @@ Format: `view o` or `view overview`
 Clears the output of the previous command.
 
 Format: `clear`
+### Clearing staff: `clearstaff`
+
+Format: `clearstaff`
+
+Cleared staff list
+
+### Clearing transactions: `cleartransaction`
+
+Format: `cleartransaction`
+
+Cleared transaction list
+### Edit: `edit`
+
+Format: `edit <ID> [ty/<TYPE>] [d/<DESCRIPTION>] [amt/<AMOUNT>] [on/<DATE>] [s/<STAFF>]...`
+
+Edited Transaction: <ID>; TransactionType: <TYPE>; Description: <DESCRIPTION>; Amount: <AMOUNT>; Date: <DATE>; StaffId: <STAFF>
+Error: <Invalid command format! >
+
+**Note:** At least one field to edit must be provided in the command.
+
+Example:
+- `edit 1 ty/Income amt/5000`
+- `edit 2 d/NewDescription on/03/10/2023`
+
+In the success output, the edited transaction details will be displayed with the modified values. Existing values will be overwritten by the new input values.
+
+### Edit Staff: `editstaff`
+
+Format: `editstaff <ID> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]...`
+
+Edited Staff: <ID>; Name: <NAME>; Phone: <PHONE>; Email: <EMAIL>; Address: <ADDRESS>; Tag: <TAG>
+Error: <Invalid command format! >
+
+**Note:** At least one field to edit must be provided in the command. The ID must be a non-negative integer.
+
+Example:
+- `editstaff 1 p/91234567 e/johndoe@example.com`
+- `editstaff 2 n/NewName t/Manager`
+
+### Help: `help`
+
+Format: `help`
+
+Displaying user guide
 
 ### Exiting the program : `exit`
 
