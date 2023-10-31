@@ -88,6 +88,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("showTable", this.isShowTable())
+                .add("showBarChart", this.isShowBarChart())
                 .add("exit", exit)
                 .toString();
     }

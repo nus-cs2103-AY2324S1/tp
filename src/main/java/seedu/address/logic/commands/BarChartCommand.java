@@ -45,15 +45,14 @@ public class BarChartCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         switch(this.args) {
-            case "g/":
-                return executeGender(model);
-            case "l/":
-                return executeSecLevel(model);
-            case "s/":
-                return executeSubject(model);
-            default:
-                throw new CommandException(MESSAGE_INCORRECT_COMMAND);
-
+        case "g/":
+            return executeGender(model);
+        case "l/":
+            return executeSecLevel(model);
+        case "s/":
+            return executeSubject(model);
+        default:
+            throw new CommandException(MESSAGE_INCORRECT_COMMAND);
         }
     }
 

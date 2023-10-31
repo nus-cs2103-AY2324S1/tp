@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.barchartresults;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Map;
 import java.util.Objects;
 
@@ -31,6 +33,7 @@ public class SubjectBarChartCommandResult extends CommandResult {
      */
     public SubjectBarChartCommandResult(Map<String, Integer> columnValueMapping) {
         super(FEEDBACKTOUSERMESSAGE);
+        requireNonNull(columnValueMapping);
         this.engCount = columnValueMapping.get(Subject.ENG);
         this.chiCount = columnValueMapping.get(Subject.CHI);
         this.emathCount = columnValueMapping.get(Subject.EMATH);
@@ -170,6 +173,7 @@ public class SubjectBarChartCommandResult extends CommandResult {
                 .add("feedbackToUser", FEEDBACKTOUSERMESSAGE)
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
+                .add("showBarChart", isShowBarChart())
                 .add("exit", isExit())
                 .toString();
     }

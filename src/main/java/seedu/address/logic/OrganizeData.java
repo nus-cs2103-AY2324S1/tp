@@ -1,5 +1,9 @@
 package seedu.address.logic;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.person.Gender;
@@ -10,11 +14,15 @@ import seedu.address.model.person.StudentIsSecLevelPredicate;
 import seedu.address.model.person.StudentTakesSubjectPredicate;
 import seedu.address.model.tag.Subject;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Stream;
-
+/**
+ * Class for organizing data by different attributes.
+ */
 public class OrganizeData {
+    /**
+     * Maps gender with the number of students
+     * @param model instance of Model subclass, e.g. ModelManager instance
+     * @return a map of gender with the number of students
+     */
     public static Map<String, Integer> byGender(Model model) {
         Map<String, Integer> columnValueMapping = new HashMap<>();
 
@@ -38,6 +46,11 @@ public class OrganizeData {
         return columnValueMapping;
     }
 
+    /**
+     * Maps sec level with the number of students
+     * @param model instance of Model subclass, e.g. ModelManager instance
+     * @return a map of sec level with the number of students
+     */
     public static Map<String, Integer> bySecLevel(Model model) {
         Map<String, Integer> columnValueMapping = new HashMap<>();
         String[] titles = new String[] {SecLevel.SEC1, SecLevel.SEC2, SecLevel.SEC3, SecLevel.SEC4};
@@ -67,12 +80,17 @@ public class OrganizeData {
         return columnValueMapping;
     }
 
+    /**
+     * Maps subject with the number of students
+     * @param model instance of Model subclass, e.g. ModelManager instance
+     * @return a map of subject with the number of students
+     */
     public static Map<String, Integer> bySubject(Model model) {
         Map<String, Integer> columnValueMapping = new HashMap<>();
 
         String[] titles = new String[] {Subject.ENG, Subject.CHI, Subject.EMATH, Subject.AMATH,
-                Subject.PHY, Subject.CHEMI, Subject.BIO, Subject.GEOG,
-                Subject.HIST, Subject.SOC};
+            Subject.PHY, Subject.CHEMI, Subject.BIO, Subject.GEOG,
+            Subject.HIST, Subject.SOC};
 
         ObservableList<Student> studentList = model.getFilteredPersonList();
 

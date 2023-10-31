@@ -1,17 +1,25 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.barchartresults;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.tableresults.SecLevelTableCommandResult;
 
-public class SecLevelTableCommandResultTest {
+import seedu.address.logic.commands.CommandResult;
+
+class SecLevelBarChartCommandResultTest {
+
+    @Test
+    public void constructor_nullColumnValue_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new SecLevelBarChartCommandResult(null));
+    }
+
     @Test
     public void equals() {
         Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
@@ -29,9 +37,9 @@ public class SecLevelTableCommandResultTest {
         titlesValuesMapping3.put("Sec 2", 10);
         titlesValuesMapping3.put("Sec 3", 20);
         titlesValuesMapping3.put("Sec 4", 30);
-        CommandResult commandResult1 = new SecLevelTableCommandResult(titlesValuesMapping1);
-        CommandResult commandResult2 = new SecLevelTableCommandResult(titlesValuesMapping2);
-        CommandResult commandResult3 = new SecLevelTableCommandResult(titlesValuesMapping3);
+        CommandResult commandResult1 = new SecLevelBarChartCommandResult(titlesValuesMapping1);
+        CommandResult commandResult2 = new SecLevelBarChartCommandResult(titlesValuesMapping2);
+        CommandResult commandResult3 = new SecLevelBarChartCommandResult(titlesValuesMapping3);
 
         // same values -> returns true
         assertTrue(commandResult1.equals(commandResult2));
@@ -39,8 +47,6 @@ public class SecLevelTableCommandResultTest {
         // same object -> returns true
         assertTrue(commandResult1.equals(commandResult1));
         assertTrue(commandResult2.equals(commandResult2));
-        assertTrue(commandResult3.equals(commandResult3));
-
 
         // null -> returns false
         assertFalse(commandResult1.equals(null));
@@ -69,9 +75,9 @@ public class SecLevelTableCommandResultTest {
         titlesValuesMapping3.put("Sec 2", 10);
         titlesValuesMapping3.put("Sec 3", 20);
         titlesValuesMapping3.put("Sec 4", 30);
-        CommandResult commandResult1 = new SecLevelTableCommandResult(titlesValuesMapping1);
-        CommandResult commandResult2 = new SecLevelTableCommandResult(titlesValuesMapping2);
-        CommandResult commandResult3 = new SecLevelTableCommandResult(titlesValuesMapping3);
+        CommandResult commandResult1 = new SecLevelBarChartCommandResult(titlesValuesMapping1);
+        CommandResult commandResult2 = new SecLevelBarChartCommandResult(titlesValuesMapping2);
+        CommandResult commandResult3 = new SecLevelBarChartCommandResult(titlesValuesMapping3);
 
         // same values -> returns same hashcode
         assertEquals(commandResult1.hashCode(), commandResult2.hashCode());
@@ -88,10 +94,11 @@ public class SecLevelTableCommandResultTest {
         titlesValuesMapping.put("Sec 2", 30);
         titlesValuesMapping.put("Sec 3", 40);
         titlesValuesMapping.put("Sec 4", 50);
-        CommandResult commandResult = new SecLevelTableCommandResult(titlesValuesMapping);
-        String expected = SecLevelTableCommandResult.class.getCanonicalName() + "{feedbackToUser="
+        CommandResult commandResult = new SecLevelBarChartCommandResult(titlesValuesMapping);
+        String expected = SecLevelBarChartCommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", showTable=" + commandResult.isShowTable()
+                + ", showBarChart=" + commandResult.isShowBarChart()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
@@ -103,11 +110,12 @@ public class SecLevelTableCommandResultTest {
         titlesValuesMapping.put("Sec 2", 30);
         titlesValuesMapping.put("Sec 3", 40);
         titlesValuesMapping.put("Sec 4", 50);
-        SecLevelTableCommandResult commandResult = new SecLevelTableCommandResult(titlesValuesMapping);
+        SecLevelBarChartCommandResult commandResult = new SecLevelBarChartCommandResult(titlesValuesMapping);
 
         assertEquals(commandResult.getSec1Count(), 20);
         assertEquals(commandResult.getSec2Count(), 30);
         assertEquals(commandResult.getSec3Count(), 40);
         assertEquals(commandResult.getSec4Count(), 50);
     }
+
 }

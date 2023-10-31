@@ -1,11 +1,12 @@
 package seedu.address.logic.commands.barchartresults;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.CommandResult;
-
 
 /**
  * Represents the command result for gender table generation.
@@ -22,6 +23,7 @@ public class GenderBarChartCommandResult extends CommandResult {
      */
     public GenderBarChartCommandResult(Map<String, Integer> columnValueMapping) {
         super(FEEDBACKTOUSERMESSAGE);
+        requireNonNull(columnValueMapping);
         this.maleCount = columnValueMapping.get("Male");
         this.femaleCount = columnValueMapping.get("Female");
     }
@@ -80,6 +82,7 @@ public class GenderBarChartCommandResult extends CommandResult {
                 .add("feedbackToUser", FEEDBACKTOUSERMESSAGE)
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
+                .add("showBarChart", isShowBarChart())
                 .add("exit", isExit())
                 .toString();
     }

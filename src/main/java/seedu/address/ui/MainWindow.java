@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.BarChartCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -161,6 +160,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the bar chart window or focuses on it if it's already opened.
+     * @param barchartWindow a BarChartWindow instance.
+     */
     public void handleBarChart(BarChartWindow barchartWindow) {
         if (!barchartWindow.isShowing()) {
             barchartWindow.show();

@@ -170,6 +170,7 @@ public class SubjectTableCommandResult extends CommandResult {
                 .add("feedbackToUser", FEEDBACKTOUSERMESSAGE)
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
+                .add("showBarChart", isShowBarChart())
                 .add("exit", isExit())
                 .toString();
     }

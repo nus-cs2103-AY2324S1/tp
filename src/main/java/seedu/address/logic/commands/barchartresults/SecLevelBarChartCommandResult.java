@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.barchartresults;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Map;
 import java.util.Objects;
 
@@ -24,6 +26,7 @@ public class SecLevelBarChartCommandResult extends CommandResult {
      */
     public SecLevelBarChartCommandResult(Map<String, Integer> columnValueMapping) {
         super(FEEDBACKTOUSERMESSAGE);
+        requireNonNull(columnValueMapping);
         this.sec1Count = columnValueMapping.get("Sec 1");
         this.sec2Count = columnValueMapping.get("Sec 2");
         this.sec3Count = columnValueMapping.get("Sec 3");
@@ -102,6 +105,7 @@ public class SecLevelBarChartCommandResult extends CommandResult {
                 .add("feedbackToUser", FEEDBACKTOUSERMESSAGE)
                 .add("showHelp", isShowHelp())
                 .add("showTable", isShowTable())
+                .add("showBarChart", isShowBarChart())
                 .add("exit", isExit())
                 .toString();
     }

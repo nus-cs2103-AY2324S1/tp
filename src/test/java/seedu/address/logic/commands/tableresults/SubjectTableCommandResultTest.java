@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.tableresults;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.tableresults.SubjectTableCommandResult;
+
+import seedu.address.logic.commands.CommandResult;
 
 public class SubjectTableCommandResultTest {
     @Test
@@ -140,6 +141,7 @@ public class SubjectTableCommandResultTest {
         String expected = SubjectTableCommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", showTable=" + commandResult.isShowTable()
+                + ", showBarChart=" + commandResult.isShowBarChart()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }

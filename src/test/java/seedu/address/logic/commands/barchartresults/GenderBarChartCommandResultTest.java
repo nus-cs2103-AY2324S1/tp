@@ -1,17 +1,25 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.barchartresults;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.tableresults.GenderTableCommandResult;
 
-public class GenderTableCommandResultTest {
+import seedu.address.logic.commands.CommandResult;
+
+class GenderBarChartCommandResultTest {
+
+    @Test
+    public void constructor_nullColumnValue_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new GenderBarChartCommandResult(null));
+    }
+
     @Test
     public void equals() {
         Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
@@ -23,9 +31,9 @@ public class GenderTableCommandResultTest {
         Map<String, Integer> titlesValuesMapping3 = new HashMap<>();
         titlesValuesMapping3.put("Male", 10);
         titlesValuesMapping3.put("Female", 10);
-        CommandResult commandResult1 = new GenderTableCommandResult(titlesValuesMapping1);
-        CommandResult commandResult2 = new GenderTableCommandResult(titlesValuesMapping2);
-        CommandResult commandResult3 = new GenderTableCommandResult(titlesValuesMapping3);
+        CommandResult commandResult1 = new GenderBarChartCommandResult(titlesValuesMapping1);
+        CommandResult commandResult2 = new GenderBarChartCommandResult(titlesValuesMapping2);
+        CommandResult commandResult3 = new GenderBarChartCommandResult(titlesValuesMapping3);
 
         // same values -> returns true
         assertTrue(commandResult1.equals(commandResult2));
@@ -55,9 +63,9 @@ public class GenderTableCommandResultTest {
         Map<String, Integer> titlesValuesMapping3 = new HashMap<>();
         titlesValuesMapping3.put("Male", 10);
         titlesValuesMapping3.put("Female", 10);
-        CommandResult commandResult1 = new GenderTableCommandResult(titlesValuesMapping1);
-        CommandResult commandResult2 = new GenderTableCommandResult(titlesValuesMapping2);
-        CommandResult commandResult3 = new GenderTableCommandResult(titlesValuesMapping3);
+        CommandResult commandResult1 = new GenderBarChartCommandResult(titlesValuesMapping1);
+        CommandResult commandResult2 = new GenderBarChartCommandResult(titlesValuesMapping2);
+        CommandResult commandResult3 = new GenderBarChartCommandResult(titlesValuesMapping3);
 
         // same values -> returns same hashcode
         assertEquals(commandResult1.hashCode(), commandResult2.hashCode());
@@ -72,10 +80,11 @@ public class GenderTableCommandResultTest {
         Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
         titlesValuesMapping1.put("Male", 20);
         titlesValuesMapping1.put("Female", 30);
-        GenderTableCommandResult commandResult = new GenderTableCommandResult(titlesValuesMapping1);
-        String expected = GenderTableCommandResult.class.getCanonicalName() + "{feedbackToUser="
+        CommandResult commandResult = new GenderBarChartCommandResult(titlesValuesMapping1);
+        String expected = GenderBarChartCommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", showTable=" + commandResult.isShowTable()
+                + ", showBarChart=" + commandResult.isShowBarChart()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
@@ -85,8 +94,9 @@ public class GenderTableCommandResultTest {
         Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
         titlesValuesMapping1.put("Male", 20);
         titlesValuesMapping1.put("Female", 30);
-        GenderTableCommandResult commandResult = new GenderTableCommandResult(titlesValuesMapping1);
+        GenderBarChartCommandResult commandResult = new GenderBarChartCommandResult(titlesValuesMapping1);
         assertEquals(commandResult.getMaleCount(), 20);
         assertEquals(commandResult.getFemaleCount(), 30);
     }
+
 }
