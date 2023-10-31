@@ -188,14 +188,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void handleListDisplay(CommandResult commandResult) {
         // TODO: Update this when there are both lists displayed simultaneously
-        switch (commandResult.getFeedbackToUser()) {
-        case ListScheduleCommand.MESSAGE_SUCCESS:
+        String feedback = commandResult.getFeedbackToUser();
+        if (feedback.equals(ListScheduleCommand.MESSAGE_SUCCESS)
+            || feedback.contains(Messages.MESSAGE_LISTED_SCHEDULE)) {
             showSchedules();
-            break;
-        case ShowCalendarCommand.MESSAGE_SUCCESS:
+        } else if (feedback.equals(ShowCalendarCommand.MESSAGE_SUCCESS)) {
             showCalendar();
-            break;
-        default:
+        } else {
             showPersons();
         }
     }
