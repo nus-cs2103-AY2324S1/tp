@@ -15,7 +15,7 @@ public class AssignmentTrackerTest {
     public void copy_success() {
         AssignmentTracker assignmentTracker = new AssignmentTracker(3);
         assignmentTracker.editMarks(Index.fromZeroBased(0), 50);
-        assignmentTracker.editMarks(Index.fromZeroBased(1), 100);
+        assignmentTracker.editMarks(Index.fromZeroBased(1), 10);
         assignmentTracker.editMarks(Index.fromZeroBased(2), 75);
         AssignmentTracker copy = assignmentTracker.copy();
         assertEquals(assignmentTracker, copy);
