@@ -76,3 +76,4 @@ public class AddAltCommandParser implements Parser<AddAltCommand> {
     }
 
 }
+
