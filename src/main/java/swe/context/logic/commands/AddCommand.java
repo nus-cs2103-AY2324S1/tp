@@ -38,7 +38,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_NOTE + "CS2103 Prof. "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owes money"
+            + PREFIX_TAG + "owes money "
             + PREFIX_ALTERNATE + "Example@JohnDoe";
 
     private final Contact toAdd;
