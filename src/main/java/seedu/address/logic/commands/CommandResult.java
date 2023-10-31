@@ -26,17 +26,25 @@ public class CommandResult {
     private final boolean leave;
     private final String fieldToRead;
 
+    private final boolean nextMonth;
+    private final boolean previousMonth;
+    private final boolean currentMonth;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean leave,
+                         boolean nextMonth, boolean previousMonth, boolean currentMonth) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.indexes = null;
         this.read = false;
         this.fieldToRead = null;
-        this.leave = false;
+        this.leave = leave;
+        this.nextMonth = nextMonth;
+        this.previousMonth = previousMonth;
+        this.currentMonth = currentMonth;
     }
 
     /**
@@ -51,6 +59,9 @@ public class CommandResult {
         this.read = false;
         this.fieldToRead = null;
         this.leave = false;
+        this.nextMonth = false;
+        this.previousMonth = false;
+        this.currentMonth = false;
     }
 
     /**
@@ -65,6 +76,9 @@ public class CommandResult {
         this.read = read;
         this.fieldToRead = fieldToRead;
         this.leave = false;
+        this.nextMonth = false;
+        this.previousMonth = false;
+        this.currentMonth = false;
     }
 
     /**
@@ -78,21 +92,11 @@ public class CommandResult {
         this.read = false;
         this.fieldToRead = null;
         this.leave = false;
+        this.nextMonth = false;
+        this.previousMonth = false;
+        this.currentMonth = false;
     }
 
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
-     */
-    public CommandResult(String feedbackToUser, boolean leave) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = false;
-        this.indexes = null;
-        this.exit = false;
-        this.read = false;
-        this.fieldToRead = null;
-        this.leave = true;
-    }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
@@ -118,6 +122,18 @@ public class CommandResult {
         return leave;
     }
 
+    public boolean isNextMonth() {
+        return nextMonth;
+    }
+
+    public boolean isCurrentMonth() {
+        return currentMonth;
+    }
+
+    public boolean isPreviousMonth() {
+        return previousMonth;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -132,12 +148,15 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && currentMonth == otherCommandResult.currentMonth
+                && nextMonth == otherCommandResult.nextMonth
+                && previousMonth == otherCommandResult.previousMonth;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, currentMonth, nextMonth, previousMonth);
     }
 
     @Override
@@ -146,6 +165,9 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("currentMonth", currentMonth)
+                .add("nextMonth", nextMonth)
+                .add("previousMonth", previousMonth)
                 .toString();
     }
 

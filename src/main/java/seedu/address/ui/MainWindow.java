@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -39,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private List<Integer> indexes = null;
 
     private CalendarComponent calendarComponent;
+    private YearMonthComponent yearMonthComponent;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -142,7 +144,7 @@ public class MainWindow extends UiPart<Stage> {
         calendarComponent = new CalendarComponent(logic.getFilteredPersonList());
         calendarDisplayPlaceholder.getChildren().add(calendarComponent);
 
-        YearMonthComponent yearMonthComponent = new YearMonthComponent();
+        yearMonthComponent = new YearMonthComponent();
         yearMonthDisplayPlaceholder.getChildren().add(yearMonthComponent);
     }
 
@@ -198,6 +200,54 @@ public class MainWindow extends UiPart<Stage> {
         calendarDisplayPlaceholder.getChildren().add(calendarComponent);
     }
 
+    private void handleNextMonth() {
+        LocalDate newDate = calendarComponent.getCurrentDate().plusMonths(1);
+        this.calendarComponent.setCurrentDate(newDate);
+        CalendarComponent calendarComponent = new CalendarComponent(logic.getFilteredPersonList(), newDate);
+
+        if (newDate.getMonth() == LocalDate.now().getMonth() && newDate.getYear() == LocalDate.now().getYear()) {
+            CalendarComponent calendarComponent1 = new CalendarComponent(logic.getFilteredPersonList());
+            calendarDisplayPlaceholder.getChildren().clear();
+            calendarDisplayPlaceholder.getChildren().add(calendarComponent1);
+        } else {
+            calendarDisplayPlaceholder.getChildren().clear();
+            calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+        }
+
+        YearMonthComponent yearMonthComponent = new YearMonthComponent(newDate);
+        yearMonthDisplayPlaceholder.getChildren().clear();
+        yearMonthDisplayPlaceholder.getChildren().add(yearMonthComponent);
+    }
+
+    private void handlePreviousMonth() {
+        LocalDate newDate = calendarComponent.getCurrentDate().minusMonths(1);
+        this.calendarComponent.setCurrentDate(newDate);
+        CalendarComponent calendarComponent = new CalendarComponent(logic.getFilteredPersonList(), newDate);
+        if (newDate.getMonth() == LocalDate.now().getMonth() && newDate.getYear() == LocalDate.now().getYear()) {
+            CalendarComponent calendarComponent1 = new CalendarComponent(logic.getFilteredPersonList());
+            calendarDisplayPlaceholder.getChildren().clear();
+            calendarDisplayPlaceholder.getChildren().add(calendarComponent1);
+        } else {
+            calendarDisplayPlaceholder.getChildren().clear();
+            calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+        }
+
+        YearMonthComponent yearMonthComponent = new YearMonthComponent(newDate);
+        yearMonthDisplayPlaceholder.getChildren().clear();
+        yearMonthDisplayPlaceholder.getChildren().add(yearMonthComponent);
+    }
+
+    private void handleCurrentMonth() {
+        CalendarComponent calendarComponent = new CalendarComponent(logic.getFilteredPersonList());
+        this.calendarComponent.setCurrentDate(LocalDate.now());
+        calendarDisplayPlaceholder.getChildren().clear();
+        calendarDisplayPlaceholder.getChildren().add(calendarComponent);
+
+        YearMonthComponent yearMonthComponent = new YearMonthComponent();
+        yearMonthDisplayPlaceholder.getChildren().clear();
+        yearMonthDisplayPlaceholder.getChildren().add(yearMonthComponent);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -241,6 +291,18 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isLeave()) {
                 handleLeave();
+            }
+
+            if (commandResult.isNextMonth()) {
+                handleNextMonth();
+            }
+
+            if (commandResult.isPreviousMonth()) {
+                handlePreviousMonth();
+            }
+
+            if (commandResult.isCurrentMonth()) {
+                handleCurrentMonth();
             }
 
             return commandResult;

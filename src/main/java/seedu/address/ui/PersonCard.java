@@ -96,27 +96,27 @@ public class PersonCard extends UiPart<Region> {
     public void setWorkingStatus(AttendanceType status) {
         switch (status) {
         case PRESENT:
-            workingStatus.setStyle("-fx-background-color: green; -fx-padding: 2;"
+            workingStatus.setStyle("-fx-background-color: green; -fx-padding: 2; -fx-text-fill: white;"
                     + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
             workingStatus.setText("Working");
             break;
         case LATE:
-            workingStatus.setStyle("-fx-background-color: #b8af00; -fx-padding: 2;"
+            workingStatus.setStyle("-fx-background-color: #b8af00; -fx-padding: 2; -fx-text-fill: white;"
                     + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
             workingStatus.setText("Late");
             break;
         case ABSENT:
-            workingStatus.setStyle("-fx-background-color: #d17749; -fx-padding: 2;"
+            workingStatus.setStyle("-fx-background-color: #d17749; -fx-padding: 2; -fx-text-fill: white;"
                     + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
             workingStatus.setText("Absent");
             break;
         case ON_LEAVE:
-            workingStatus.setStyle("-fx-background-color: #A50000; -fx-padding: 2;"
+            workingStatus.setStyle("-fx-background-color: #A50000; -fx-padding: 2; -fx-text-fill: white;"
                     + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
             workingStatus.setText("On Leave");
             break;
         default:
-            workingStatus.setStyle("-fx-background-color: green; -fx-padding: 2;"
+            workingStatus.setStyle("-fx-background-color: green; -fx-padding: 2; -fx-text-fill: white;"
                     + "-fx-font-family: 'Arial Black'; -fx-font-size:13; -fx-background-radius: 3");
             workingStatus.setText("Working");
         }

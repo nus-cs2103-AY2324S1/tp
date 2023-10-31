@@ -96,7 +96,7 @@ public class AddLeaveCommand extends Command {
             }
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS + this.getLeaveStatusMessage(employeeToAddLeave),
-                Messages.format(employeeToAddLeave)), true);
+                Messages.format(employeeToAddLeave)), false, false, true, false, false, false);
     }
 
     @Override
