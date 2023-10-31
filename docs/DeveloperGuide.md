@@ -154,6 +154,65 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Employee management
+
+#### The employee class
+
+ManageHR keeps track of employees within the company with the use of `Employee` and `UniqueEmployeeList`. The `UniqueEmployeeList` serves as a container for the `Employee` objects
+within the company, while enforcing the constraints that no 2 employees can have the same name.
+
+The `Employee` class contains the following attributes.
+
+1. `Name`: The name of the employee.
+2. `Email`: The email of the employee.
+3. `Address`: The home address of the employee.
+4. `Leave`: The amount of leave remaining for the employee.
+5. `Salary`: The monthly salary accorded to the employee.
+6. `Phone`: The phone number of the employee.
+7. `Departments`: A set of departments in which the employee can belong to.
+
+All the attributes except Departments are compulsory fields.
+
+### List command
+
+#### Overview
+
+The `ListCommand` displays the `Employee` objects currently stored in `UniqueEmployeeList` object.
+
+The following sequence diagram shows how the different components of ManageHR interact with each other.
+
+<img src="images/ManageHR/ListCommandSequenceDiagram.png" width="700" />
+
+The above sequence diagram omits details on the internal implementations within each directory in order to improve 
+overall readability of the diagram.
+
+### Help command
+
+#### Overview
+
+The `HelpCommand` displays help for the current command.
+- `help COMMAND`
+  - example: `help add`
+  - expected: Shows functionality for `add` in the help window.
+  - Should show the same content as the user guide.
+
+
+### Filter feature
+
+The filter feature filters employees by parameters/prefixes.
+- `filter d/DEPARTMENT`
+  - example: `filter d/R&D`
+  - expected: shows employees with the `R&D` department tag
+
+- `filter s/4000`
+  - example: `filter s/4000`
+  - expected: shows employees with salary less than or equal to 4000
+
+The following activity diagram summarizes what happens when a user executes the filter command:
+
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -270,14 +329,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a…         | I want to …                                          | So that I can …                                                |   |
-|----------|---------------|------------------------------------------------------|----------------------------------------------------------------|---|
-| `***`    | beginner user | Add an employee entry with details                   | Keep track of people                                        |   |
-| `***`    | Beginner user | Delete employee entries                              | Maintain employee list so that it doesn’t get too long         |   |
-| `***`    | Beginner user | Edit employee entries                                | Update employee details                                        |   |
-| `***`    | user          | Retrieve information of past records                 | Find details of applicants that have been keyed in previously. |   |
-| `***`    | Beginner user | There is a ‘help’ command to list functions/features | Know how to use the app                                        |   |
-| `***`    | Beginner user | Exception handling                                   | Handle invalid inputs                                          |   |                                          |
+| Priority | As a…             | I want to …                                          | So that I can …                                                |
+|----------|-------------------|------------------------------------------------------|----------------------------------------------------------------|
+| `***`    | Beginner user     | Add an employee entry with details                   | Keep track of people                                           |
+| `***`    | Beginner user     | Delete employee entries                              | Maintain employee list so that it doesn’t get too long         |
+| `***`    | Beginner user     | Edit employee entries                                | Update employee details                                        |
+| `***`    | User              | Retrieve information of past records                 | Find details of applicants that have been keyed in previously. |
+| `***`    | Beginner user     | There is a ‘help’ command to list functions/features | Know how to use the app                                        |
+| `***`    | Beginner user     | Exception handling                                   | Handle invalid inputs                                          |
+| `***`    | Intermediate user | Filter employee by parameters                        | Easily search/track certain details of employees               |
 
 *{More to be added}*
 
@@ -366,7 +426,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. HR manager is using the ManageHR and has forgotten some of the features in the app.
-2. HR manager requests help
+2. HR manager requests help.
 3. ManageHR displays a link to access the user guide.
 4. HR manager access the user guide and obtains information on the different features.
 
@@ -389,7 +449,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
  
+#### Use case: UC07 - Filtering employees by department
 
+**MSS**
+
+1. HR Manager filters employees by department tag.
+2. ManageHR displays employees with filtered department tag.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Invalid department entered.
+
+  * 2a1. ManageHR shows an error message. 
+  
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -448,6 +523,28 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Filtering
+
+1. Filter by `department`
+
+   1. Prerequisites: Employees need to have department tags
+   
+   1. Test case: `filter d/R&D`<br>
+      Expected: Only employees with `R&D` department tag are shown.
+
+   1. Test case: `filter d/aaosijflk`<br>
+      Expected: No such department tag found. No employee is shown. Error details shown in the status message.
+
+2. Filter by `salary`
+
+   1. Prerequisites: Employees need to have salary assigned
+
+   1. Test case: `filter s/4000`<br>
+      Expected: Employees with salary less than or equal to 4000 are shown.
+   
+   2. Test case: `filter s/alsjl`<br>
+      Expected: Incorrect parameter. Not an integer. No employee is shown. Error details shown in the status message.
 
 ### Saving data
 

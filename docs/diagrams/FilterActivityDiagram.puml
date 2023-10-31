@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User uses filter command;
+if () then ([filter by department])
+    :Filter employees with
+    entered department;
+else ([filter by salary])
+    :Filter employees with less
+    than or equal entered salary;
+endif
+:ManageHR UI shows filtered employees;
+stop
+
+@enduml
