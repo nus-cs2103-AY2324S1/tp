@@ -15,6 +15,7 @@ import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
 import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.task.ToDo;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -136,5 +137,17 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String telegram} into an {@code Telegram}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegram} is invalid.
+     */
+    public static ToDo parseToDo(String toDo) throws ParseException {
+        requireNonNull(toDo);
+        String toDoTrimmed = toDo.trim();
+        return new ToDo(toDoTrimmed);
     }
 }

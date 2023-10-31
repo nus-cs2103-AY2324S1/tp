@@ -31,7 +31,9 @@ public class JsonAdaptedMemberTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BETTY_MEMBER.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-
+    private static final List<JsonAdaptedToDo> VALID_TODO = BETTY_MEMBER.getTasks().getTaskAsList().stream()
+            .map(JsonAdaptedToDo::new)
+            .collect(Collectors.toList());
     @Test
     public void toModelType_validMemberDetails_returnsMember() throws Exception {
         JsonAdaptedMember member = new JsonAdaptedMember(BETTY_MEMBER);
@@ -41,14 +43,14 @@ public class JsonAdaptedMemberTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedMember member =
-                new JsonAdaptedMember(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, VALID_TAGS);
+                new JsonAdaptedMember(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, VALID_TAGS, VALID_TODO);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedMember member = new JsonAdaptedMember(null, VALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, VALID_TAGS);
+        JsonAdaptedMember member = new JsonAdaptedMember(null, VALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, VALID_TAGS, VALID_TODO);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
     }
@@ -56,14 +58,14 @@ public class JsonAdaptedMemberTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedMember member =
-                new JsonAdaptedMember(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, VALID_TAGS);
+                new JsonAdaptedMember(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, VALID_TAGS, VALID_TODO);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, null, VALID_EMAIL, VALID_TELEGRAM, VALID_TAGS);
+        JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, null, VALID_EMAIL, VALID_TELEGRAM, VALID_TAGS, VALID_TODO);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
     }
@@ -71,14 +73,14 @@ public class JsonAdaptedMemberTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedMember member =
-                new JsonAdaptedMember(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_TELEGRAM, VALID_TAGS);
+                new JsonAdaptedMember(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_TELEGRAM, VALID_TAGS, VALID_TODO);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
     }
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, VALID_PHONE, null, VALID_TELEGRAM, VALID_TAGS);
+        JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, VALID_PHONE, null, VALID_TELEGRAM, VALID_TAGS, VALID_TODO);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
     }
@@ -86,14 +88,14 @@ public class JsonAdaptedMemberTest {
     @Test
     public void toModelType_invalidTelegram_throwsIllegalValueException() {
         JsonAdaptedMember member =
-                new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_TELEGRAM, VALID_TAGS);
+                new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_TELEGRAM, VALID_TAGS, VALID_TODO);
         String expectedMessage = Telegram.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
     }
 
     @Test
     public void toModelType_nullTelegram_throwsIllegalValueException() {
-        JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
+        JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS, VALID_TODO);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Telegram.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
     }
@@ -103,7 +105,7 @@ public class JsonAdaptedMemberTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedMember member =
-                new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, invalidTags);
+                new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TELEGRAM, invalidTags, VALID_TODO);
         assertThrows(IllegalValueException.class, member::toModelType);
     }
 

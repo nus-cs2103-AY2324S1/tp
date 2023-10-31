@@ -15,8 +15,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.fields.Email;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
+import seedu.address.model.person.fields.Tasklist;
 import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.task.Task;
+import seedu.address.task.ToDo;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -30,6 +33,7 @@ class JsonAdaptedMember {
     private final String email;
     private final String telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedToDo> toDoList = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -37,13 +41,17 @@ class JsonAdaptedMember {
     @JsonCreator
     public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("todo") List<JsonAdaptedTag> tags,
+                             @JsonProperty("todo") List<JsonAdaptedToDo> toDoList) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (toDoList != null) {
+            this.toDoList.addAll(toDoList);
         }
     }
 
@@ -58,6 +66,9 @@ class JsonAdaptedMember {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        toDoList.addAll(source.getTasks().getTaskAsList().stream()
+                .map(JsonAdaptedToDo::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -69,6 +80,11 @@ class JsonAdaptedMember {
         final List<Tag> memberTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             memberTags.add(tag.toModelType());
+        }
+
+        final Tasklist toDos = new Tasklist();
+        for (JsonAdaptedToDo toDo : toDoList) {
+            toDos.addToDo(toDo.toModelType());
         }
 
         if (name == null) {
@@ -105,7 +121,8 @@ class JsonAdaptedMember {
         final Telegram modelTelegram = new Telegram(telegram);
 
         final Set<Tag> modelTags = new HashSet<>(memberTags);
-        return new Member(modelName, modelPhone, modelEmail, modelTelegram, modelTags);
+
+        return new Member(modelName, modelPhone, modelEmail, modelTelegram, modelTags, toDos);
     }
 
 }

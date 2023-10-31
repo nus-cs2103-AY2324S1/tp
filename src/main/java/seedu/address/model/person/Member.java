@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,8 +13,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.fields.Email;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
+import seedu.address.model.person.fields.Tasklist;
 import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.task.Task;
+import seedu.address.task.ToDo;
 
 /**
  * Represents a Member in the address book.
@@ -25,6 +30,7 @@ public class Member extends Person {
     private final Email email;
     private final Telegram telegram;
     private final Set<Tag> tags = new HashSet<>();
+    private Tasklist tasks = new Tasklist();
 
     /**
      * Every field must be present and not null.
@@ -36,6 +42,16 @@ public class Member extends Person {
         this.email = email;
         this.telegram = telegram;
         this.tags.addAll(tags);
+    }
+
+    public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags, Tasklist todo) {
+        super(name);
+        requireAllNonNull(telegram);
+        this.phone = phone;
+        this.email = email;
+        this.telegram = telegram;
+        this.tags.addAll(tags);
+        this.tasks = todo;
     }
 
     public Phone getPhone() {
@@ -50,12 +66,20 @@ public class Member extends Person {
         return telegram;
     }
 
+    public void addToDo(ToDo task) {
+        tasks.addToDo(task);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Tasklist getTasks() {
+        return tasks;
     }
 
     /**
@@ -118,6 +142,7 @@ public class Member extends Person {
                 .add("email", getEmail())
                 .add("telegram", getTelegram())
                 .add("tags", getTags())
+                .add("tasks", getTasks())
                 .toString();
     }
 }

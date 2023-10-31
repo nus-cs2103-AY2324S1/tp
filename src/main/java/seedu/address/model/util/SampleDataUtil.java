@@ -11,6 +11,7 @@ import seedu.address.model.person.Member;
 import seedu.address.model.person.fields.Email;
 import seedu.address.model.person.fields.Name;
 import seedu.address.model.person.fields.Phone;
+import seedu.address.model.person.fields.Tasklist;
 import seedu.address.model.person.fields.Telegram;
 import seedu.address.model.tag.Tag;
 
@@ -22,7 +23,8 @@ public class SampleDataUtil {
         return new Member[]{
             new Member(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Telegram("alexyeoh"),
-                    getTagSet("friends")),
+                    getTagSet("friends"),
+                    new Tasklist()),
             new Member(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Telegram("berniceyu"),
                     getTagSet("colleagues", "friends")),
