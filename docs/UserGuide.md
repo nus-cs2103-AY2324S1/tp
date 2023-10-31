@@ -194,6 +194,33 @@ Output:
 ![result for deleting employee](images/readFailed.png)
 
 
+### Adding leave to am employee : `addleave`
+
+**What it does**
+
+This feature allows users to add leave to an employee.
+
+**Command Format**
+
+`addleave INDEX /on DATE` or `addleave INDEX /from STARTDATE /to ENDDATE`
+
+* Adds leave to the employee specified by the `INDEX`, can be a single day of leave or multiple days of leave.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer**.
+
+Examples:
+* `addleave 3 /on 01/01/2024` adds leave to the third person in the most recently displayed list.
+
+Output:
+
+* If the index is not within the numbers in the list, the app should display `Please enter a valid index number`.
+
+* If the command is incorrect, the app should display `Please use the following format to read information : read INDEX INFORMATION`.
+
+* If the `DATE` provided is not in the correct format, the app should display `Please provide a valid information prefix to read`.
+
+* If the `DATE` has already been added to the employee, the app should display `There isn’t any information on this employee’s specified PREFIX`.
+
 
 
 ### Listing all persons : `list` [Coming soon]
