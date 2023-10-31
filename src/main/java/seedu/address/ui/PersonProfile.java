@@ -213,14 +213,14 @@ public class PersonProfile extends UiPart<Region> {
     private void createAndUpdatePerson() {
         this.person = null;
 
-        Name name = new Name(fields.get(Field.NAME));
-        Phone phone = new Phone(fields.get(Field.PHONE));
-        Email email = new Email(fields.get(Field.EMAIL));
-        Address address = new Address(fields.get(Field.ADDRESS));
-        Housing housing = new Housing(fields.get(Field.HOUSING));
-        Availability availability = new Availability(fields.get(Field.AVAILABILITY));
-        Name animalName = new Name(fields.get(Field.ANIMAL_NAME));
-        AnimalType animalType = new AnimalType(fields.get(Field.ANIMAL_TYPE), availability);
+        Name name = new Name(getNonNullOrNil(Field.NAME));
+        Phone phone = new Phone(getNonNullOrNil(Field.PHONE));
+        Email email = new Email(getNonNullOrNil(Field.EMAIL));
+        Address address = new Address(getNonNullOrNil(Field.ADDRESS));
+        Housing housing = new Housing(getNonNullOrNil(Field.HOUSING));
+        Availability availability = new Availability(getNonNullOrNil(Field.AVAILABILITY));
+        Name animalName = new Name(getNonNullOrNil(Field.ANIMAL_NAME));
+        AnimalType animalType = new AnimalType(getNonNullOrNil(Field.ANIMAL_TYPE), availability);
 
         this.person = new Person(name, phone, email, address, housing, availability, animalName, animalType, getTags());
     }
@@ -236,19 +236,19 @@ public class PersonProfile extends UiPart<Region> {
         Name animalName;
 
         try {
-            availability = new Availability(getNonNullOrNil(fields.get(Field.AVAILABILITY)));
-            animalName = new Name(getNonNullOrNil(fields.get(Field.ANIMAL_NAME)));
+            availability = new Availability(getNonNullOrNil(Field.AVAILABILITY));
+            animalName = new Name(getNonNullOrNil(Field.ANIMAL_NAME));
         } catch (Exception ignored) {
             sendUnexpectedError();
             return true;
         }
 
-        if (!checkAvailabilityGroupValidElseFeedback(availability, animalName, fields.get(Field.ANIMAL_TYPE))) {
+        if (!checkAvailabilityGroupValidElseFeedback(availability, animalName, getNonNullOrNil(Field.ANIMAL_TYPE))) {
             return true;
         }
 
         try {
-            new AnimalType(getNonNullOrNil(fields.get(Field.ANIMAL_TYPE)), availability);
+            new AnimalType(getNonNullOrNil(Field.ANIMAL_TYPE), availability);
         } catch (Exception ignored) {
             sendUnexpectedError();
             return true;
@@ -321,7 +321,7 @@ public class PersonProfile extends UiPart<Region> {
     private boolean handleIfRequiredFieldsNil() {
         Field[] requiredFields = {Field.NAME, Field.PHONE, Field.EMAIL, Field.ADDRESS};
         Optional<Field> nullOrNilField = Arrays.stream(requiredFields)
-                .filter(field -> isNullOrNil(fields.get(field)))
+                .filter(field -> isNullOrNil(getNonNullOrNil(field)))
                 .findFirst();
         if (nullOrNilField.isPresent()) {
             sendMissing(nullOrNilField.get());
@@ -334,11 +334,12 @@ public class PersonProfile extends UiPart<Region> {
         return string == null || string.equals("nil");
     }
 
-    private String getNonNullOrNil(String string) {
-        if (string == null) {
+    private String getNonNullOrNil(Field field) {
+        String value = fields.get(field);
+        if (value == null) {
             return "nil";
         }
-        return string;
+        return value;
     }
 
     // endregion
@@ -386,7 +387,7 @@ public class PersonProfile extends UiPart<Region> {
     }
 
     String getValueOfField(Field field) {
-        return fields.get(field);
+        return getNonNullOrNil(field);
     }
 
     void sendInvalidInput(Field field) {
