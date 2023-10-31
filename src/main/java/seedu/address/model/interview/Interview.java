@@ -3,23 +3,21 @@ package seedu.address.model.interview;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import seedu.address.logic.parser.TimeParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Time;
 import seedu.address.model.applicant.Applicant;
 
 /**
  * Represents an Interview in the address book.
  */
 public class Interview {
-    private static final LocalTime WORK_START = LocalTime.of(9, 0);
-    private static final LocalTime WORK_END = LocalTime.of(17, 0);
     private final Applicant applicant;
     private final String jobRole;
     private final Rating rating;
-    private final LocalDateTime startTime;
-    private final LocalDateTime endTime;
+    private final Time startTime;
+    private final Time endTime;
     private final boolean isDone;
 
     /**
@@ -31,8 +29,8 @@ public class Interview {
         this.applicant = app;
         this.jobRole = role;
         this.rating = new Rating("0.0");
-        this.startTime = TimeParser.parseDate(startTimeString);
-        this.endTime = TimeParser.parseDate(endTimeString);
+        this.startTime = new Time(TimeParser.parseDate(startTimeString));
+        this.endTime = new Time(TimeParser.parseDate(endTimeString));
         this.isDone = false;
     }
 
@@ -53,8 +51,8 @@ public class Interview {
         requireAllNonNull(app, role, startTimeString, endTimeString);
         this.applicant = app;
         this.jobRole = role;
-        this.startTime = TimeParser.parseDate(startTimeString);
-        this.endTime = TimeParser.parseDate(endTimeString);
+        this.startTime = new Time(TimeParser.parseDate(startTimeString));
+        this.endTime = new Time(TimeParser.parseDate(endTimeString));
         this.rating = rating;
         this.isDone = isDone;
     }
@@ -74,8 +72,8 @@ public class Interview {
         requireAllNonNull(app, role, startTimeString, endTimeString);
         this.applicant = app;
         this.jobRole = role;
-        this.startTime = TimeParser.parseDate(startTimeString);
-        this.endTime = TimeParser.parseDate(endTimeString);
+        this.startTime = new Time(TimeParser.parseDate(startTimeString));
+        this.endTime = new Time(TimeParser.parseDate(endTimeString));
         this.rating = new Rating("0.0");
         this.isDone = isDone;
     }
@@ -88,8 +86,8 @@ public class Interview {
         requireAllNonNull(app, role, startTime, endTime, isDone);
         this.applicant = app;
         this.jobRole = role;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = new Time(startTime);
+        this.endTime = new Time(endTime);
         this.rating = new Rating("0.0");
         this.isDone = isDone;
     }
@@ -102,8 +100,8 @@ public class Interview {
         requireAllNonNull(app, role, startTime, endTime, rate, isDone);
         this.applicant = app;
         this.jobRole = role;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = new Time(startTime);
+        this.endTime = new Time(endTime);
         this.rating = rate;
         this.isDone = isDone;
     }
@@ -122,8 +120,8 @@ public class Interview {
         requireAllNonNull(app, role, startTime, endTime);
         applicant = app;
         jobRole = role;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = new Time(startTime);
+        this.endTime = new Time(endTime);
         this.rating = new Rating("0.0");
         this.isDone = false;
     }
@@ -149,19 +147,9 @@ public class Interview {
      */
     public boolean isValid() {
         return startTime.isBefore(endTime)
-                && isWithinWorkingHours(startTime)
-                && isWithinWorkingHours(endTime)
-                && startTime.toLocalDate().isEqual(endTime.toLocalDate());
-    }
-
-    /**
-     * Returns true if startTime and endTime are within working hours,
-     * which is defined to be between 0900 and 1700.
-     */
-    public boolean isWithinWorkingHours(LocalDateTime dateTime) {
-        LocalTime time = dateTime.toLocalTime();
-        return (time.isAfter(WORK_START) || time.equals(WORK_START))
-                && (time.isBefore(WORK_END) || time.equals(WORK_END));
+                && startTime.isWithinWorkingHours()
+                && endTime.isWithinWorkingHours()
+                && startTime.getDate().equals(endTime.getDate());
     }
 
     public Applicant getInterviewApplicant() {
@@ -173,19 +161,19 @@ public class Interview {
     }
 
     public String getInterviewStartTimeAsString() {
-        return TimeParser.formatDate(startTime);
+        return TimeParser.formatDate(startTime.getDateAndTime());
     }
 
     public LocalDateTime getInterviewStartTime() {
-        return startTime.plusDays(0);
+        return startTime.getDateAndTime();
     }
 
     public String getInterviewEndTimeAsString() {
-        return TimeParser.formatDate(endTime);
+        return TimeParser.formatDate(endTime.getDateAndTime());
     }
 
     public LocalDateTime getInterviewEndTime() {
-        return endTime.plusDays(0);
+        return endTime.getDateAndTime();
     }
 
     public Rating getRating() {
