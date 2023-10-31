@@ -67,12 +67,11 @@ Adds a flashcard to the deck for the user.
 
 **Examples:**
 
-
-_A basic card with only a question and answer field._
+_A flashcard with only a question and answer field._
 
 `add q/What are the three ways to implement binary systems? a/1s Complement, 2s Complement, and Sign and Magnitude`
 
-_A basic card with a question, answer and tag field._
+_A flashcard with a question, answer and tag field._
 
 `add q/How do you convert from binary to 1s Complement? a/By inverting all the bits, i.e. 0 to 1 and vice versa t/CS2100 t/Number Systems`
 
@@ -92,8 +91,7 @@ _A basic card with a question, answer and tag field._
        add: Adds a card to the deck. Parameters: q/QUESTION a/ANSWER
       ```
 #### Usage
-1. User Input:
-`add q/ opcode for R format instructions a/ 000000 t/ CS2100 t/ MIPS` 
+1. User Input: `add q/ opcode for R format instructions a/ 000000 t/ CS2100 t/ MIPS` 
 
 2. Successful Output
 
@@ -103,34 +101,38 @@ _A basic card with a question, answer and tag field._
 ### Deleting a Flashcard : `delete`
 Deletes a flashcard in the deck
 
-Format: `delete INDEX`
-Examples:
+**Format:** 
 
-- delete 2
- (deletes the 2nd flashcard in the deck)
-```
+`delete INDEX`
 
-#### Acceptable values for each parameters:
-1. Index must be positive integer
-2. Index cannot exceed size of the deck
+**Examples:**
+
+_Deleting the card in th deck with an index of 2._
+
+`delete 2`
+
+#### To Note:
+1. Index must be positive integer.
+2. Index cannot exceed size of the deck.
 
 #### Expected outputs:
-```
-1. delete 2
-   Deleted Card: Question: <provided question>; Answer: <provided answer>
+1. Given a correct input, a success message will be shown containing the details of the deleted flashcard.
+   1. `Deleted Card: Question: <provided question>; Answer: <provided answer>`
+2. Given an incorrect input, an error message will be shown, detailing how the error can be fixed.
+   1. `The card index provided is invalid`
+   2. ```
+      Invalid command format!
+      delete: Deletes the deck identified by the index number used in the displayed card list.
+      Parameters: INDEX (must be a positive integer)
+      Example: delete 1
+      ```
 
-2. delete -100
-   Invalid command format!
-   delete: Deletes the deck identified by the index number used in the displayed card list.
-   Parameters: INDEX (must be a positive integer)
-   Example: delete 1
-```
 #### Usage:
-1. User Input
-   ![usage of delete command](./images/UserGuide/1.3_del.png)
+1. User Input: `delete 1`
 
 2. Successful Output
-   ![result of delete command](./images/UserGuide/1.3_del_ans.png)
+
+![result of delete command](./images/UserGuide/1.3_del_clean.png)
 
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
