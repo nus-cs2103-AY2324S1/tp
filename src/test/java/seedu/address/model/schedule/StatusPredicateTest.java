@@ -1,10 +1,13 @@
 package seedu.address.model.schedule;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.person.Person;
 import seedu.address.testutil.ScheduleBuilder;
 import seedu.address.testutil.TypicalPersons;
