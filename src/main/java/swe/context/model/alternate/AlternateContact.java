@@ -4,7 +4,7 @@ import swe.context.model.contact.Contact;
 
 
 /**
- * Immutably represents a {@link Contact}'s tag.
+ * Immutably represents a {@link Contact}'s AlternateContact.
  *
  * Constructor arguments must be valid as determined by
  * {@link #isValid(String)}.

@@ -93,7 +93,7 @@ public class ContactBuilder {
     }
 
     /**
-     * Parses the {@code alternateContacts} into a {@code Set<AlternateContact>}
+     * Parses the {@code alternateContacts} into a {@link Set<AlternateContact>}
      * and set it to the {@code Contact} that we are building.
      */
     public ContactBuilder withAlternateContacts(String... alternateContacts) {

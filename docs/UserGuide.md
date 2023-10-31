@@ -33,13 +33,14 @@ Any feedback, including errors, will appear directly below the input box.
 Easily add a new contact to your list with the `add` command.
 
 **Format:**
-`add n/FULL_NAME p/PHONE_NUMBER e/EMAIL o/NOTE [t/TAG]... [a/ALTERNATE_CONTACT]...`
+`add n/FULL_NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
+* A contact can have 0 or 1 note
 * A contact can have any number of tags (including 0)
 * A contact can have any number of alternate contacts (including 0)
 
 **Examples:**
-- `add n/John Doe p/98765432 e/john.doe@email.com o/example`
+- `add n/John Doe p/98765432 e/john.doe@email.com`
 - `add n/John Doe p/98765432 e/john.doe@email.com o/example t/CS2103 a/SocialMedia@JohnDoe`
 
 ---

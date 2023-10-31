@@ -59,7 +59,7 @@ public final class TestData {
         public static final String NOTE_DESC_BOB = " " + PREFIX_NOTE + NOTE_BOB;
 
         /**
-         * Holds tag-related data.
+         * Holds {@code Tag}-related data.
          */
         public static final class Tag {
             public static final String ALPHANUMERIC = "Friend1";
@@ -71,7 +71,7 @@ public final class TestData {
         }
 
         /**
-         * Holds alternateContact-related data.
+         * Holds {@code AlternateContact}-related data.
          */
         public static final class AlternateContact {
             public static final String ALPHANUMERIC = "Test1@Example1";
@@ -216,7 +216,7 @@ public final class TestData {
         public static final String EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo";
 
         /**
-         * Holds tag-related data.
+         * Holds {@code Tag}-related data.
          */
         public static final class Tag {
             public static final String HASHTAG = "#WrongKindOfTag";
@@ -226,7 +226,7 @@ public final class TestData {
         }
 
         /**
-         * Holds alternateContact-related data.
+         * Holds {@code AlternateContact}-related data.
          */
         public static final class AlternateContact {
             public static final String MISSING_SYMBOL = "ExampleName";

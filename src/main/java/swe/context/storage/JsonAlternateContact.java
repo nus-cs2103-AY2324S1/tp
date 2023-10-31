@@ -42,7 +42,7 @@ public final class JsonAlternateContact {
     public AlternateContact toModelType() throws IllegalValueException {
         if (!AlternateContact.isValid(this.value)) {
             throw new IllegalValueException(
-                Messages.tagInvalid(this.value)
+                Messages.alternateContactInvalid(this.value)
             );
         }
 
