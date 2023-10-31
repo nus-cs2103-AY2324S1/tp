@@ -12,9 +12,24 @@ import seedu.address.commons.core.index.Index;
 public class AssignmentTrackerTest {
 
     @Test
+    public void copy_success() {
+        AssignmentTracker assignmentTracker = new AssignmentTracker(3);
+        assignmentTracker.editMarks(Index.fromZeroBased(0), 50);
+        assignmentTracker.editMarks(Index.fromZeroBased(1), 100);
+        assignmentTracker.editMarks(Index.fromZeroBased(2), 75);
+        AssignmentTracker copy = assignmentTracker.copy();
+        assertEquals(assignmentTracker, copy);
+    }
+
+    @Test
     public void constructor_invalidNumOfAssignments_throwsIllegalArgumentException() {
         int invalidNumOfAssignments = -1;
         assertThrows(IllegalArgumentException.class, () -> new AssignmentTracker(invalidNumOfAssignments));
+    }
+
+    @Test
+    public void constructor_nullAssignmentList() {
+        assertThrows(AssertionError.class, () -> new AssignmentTracker((Assignment[]) null));
     }
 
     @Test
@@ -53,8 +68,6 @@ public class AssignmentTrackerTest {
         AssignmentTracker assignmentTracker = new AssignmentTracker(0);
         assertEquals(100, assignmentTracker.getPercentage());
     }
-
-
 
     @Test
     public void equals() {

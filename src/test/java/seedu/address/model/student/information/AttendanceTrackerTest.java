@@ -80,6 +80,39 @@ public class AttendanceTrackerTest {
     }
 
     @Test
+    public void markAbsent_invalidTutorialIndex_throwsCommandException() {
+        int total = 10;
+        AttendanceTracker attendanceTracker = new AttendanceTracker(total);
+
+        int num = 100;
+        assertThrows(
+                CommandException.class, ()
+                        -> attendanceTracker.markAbsent(Index.fromZeroBased(num)));
+        // edge case
+        int edg = total + 1;
+        assertThrows(
+                CommandException.class, ()
+                        -> attendanceTracker.markAbsent(Index.fromZeroBased(edg)));
+    }
+
+    @Test
+    public void isPresent_invalidTutorialIndex_throwsCommandException() {
+        int total = 10;
+        AttendanceTracker attendanceTracker = new AttendanceTracker(total);
+
+        int num = 100;
+        assertThrows(
+                CommandException.class, ()
+                        -> attendanceTracker.isPresent(Index.fromZeroBased(num)));
+
+        // edge case
+        int edg = total + 1;
+        assertThrows(
+                CommandException.class, ()
+                        -> attendanceTracker.isPresent(Index.fromZeroBased(edg)));
+    }
+
+    @Test
     public void equals() {
         AttendanceTracker attendanceTracker = new AttendanceTracker(13);
 
