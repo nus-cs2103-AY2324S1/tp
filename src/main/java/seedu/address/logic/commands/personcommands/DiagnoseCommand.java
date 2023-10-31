@@ -79,8 +79,7 @@ public class DiagnoseCommand extends Command {
             feedbackToUser.append(MESSAGE_ALREADY_DIAGNOSED);
             feedbackToUser.append(duplicateIllnesses);
         }
-        return new CommandResult(feedbackToUser.toString(),
-                false, false, true);
+        return new CommandResult(feedbackToUser.toString(), false, false, false, true);
     }
 
     /**

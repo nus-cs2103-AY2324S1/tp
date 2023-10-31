@@ -84,7 +84,7 @@ public class ScheduleCommand extends Command {
         model.addAppointment(currAppointment);
 
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, Messages.format(currAppointment)), false, false, true);
+                String.format(MESSAGE_SUCCESS, Messages.format(currAppointment)), false, false, false, true);
     }
 
 
