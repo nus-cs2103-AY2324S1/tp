@@ -116,6 +116,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void markPersonUnPaid(Person target) {
+        target.setUnPaid();
+    }
+
+    @Override
     public void getPersonPaid(Person target) {
         target.getPaid();
     }
