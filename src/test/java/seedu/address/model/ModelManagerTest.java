@@ -237,21 +237,21 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager = new ModelManager(addressBook, userPrefs);
+        modelManager.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
 
-        // different Schedule List -> returns false
-        modelManager.deleteSchedule(modelManager.getFilteredScheduleList().get(0));
+        // different filtered Schedule List -> returns false
+        modelManager.updateFilteredScheduleList(p -> false);
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming test
-        modelManager = new ModelManager(addressBook, userPrefs);
+        modelManager.updateFilteredScheduleList(Model.PREDICATE_SHOW_ALL_SCHEDULES);
 
-        // different Calendar Schedule List -> return false
+        // different filtered Calendar Schedule List -> return false
         modelManager.updateFilteredCalendarScheduleList(
             new ScheduleIsOnDatePredicate(new Date(LocalDate.of(2023, 9, 15))));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
