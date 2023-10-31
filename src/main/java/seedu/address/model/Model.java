@@ -1,14 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.ui.Ui;
