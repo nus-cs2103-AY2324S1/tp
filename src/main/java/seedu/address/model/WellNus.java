@@ -118,6 +118,11 @@ public class WellNus implements ReadOnlyWellNus {
         return appointments.contains(appointment);
     }
 
+    public boolean overlapsWithAppointments(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointments.overlaps(appointment);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.

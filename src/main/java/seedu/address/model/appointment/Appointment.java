@@ -89,6 +89,23 @@ public class Appointment implements Comparable<Appointment> {
                 && other.getName().equals(this.getName());
     }
 
+    public boolean isOverlappingAppointment(Appointment other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!this.date.equals(other.getDate())) {
+            return false;
+        }
+
+        if (this.endTime.getLocalTime().isAfter(other.startTime.getLocalTime())
+                && other.endTime.getLocalTime().isAfter(this.startTime.getLocalTime())) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Returns true if both appointments have the same fields.
      */
