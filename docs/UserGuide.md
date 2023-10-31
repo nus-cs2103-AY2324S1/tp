@@ -116,6 +116,10 @@ All the fields must be provided except `TAG`. The fields you enter should follow
 | `TAG`          | Use `a-z`, `A-Z` and `0-9` only. Alternatively, use `RA` or `SOS` which are predefined emergency tags for your contact  | friend                          |
 </box>
 
+<box type="info">
+Certain tags such as `RA` and `SOS` are tags to indicate important contacts such as emergency contacts. They are displayed first, and with a red background to indicate their importance. 
+</box>
+
 Examples
 * `add n/John Doe p/98765432 e/johndoe@gmail.com a/John street, block 123, #01-01 t/friend`
     * Adds a contact named "John Doe" with the phone number "98765432", email "johndoe@gmail.com", address "John street, block 123, #01-01", and a tag "friend"
@@ -123,9 +127,7 @@ Examples
     * Adds a contact named "Betsy Crowe" with the email "betsycrowe@example.com", address "Newgate Prison", phone "1234567", and two tags "friend" and "colleague"
 
 
-#### Emergency tags
 
-Certain tags such as `RA` and `SOS` are emergency tags, and are displayed first, with a red background.
 
 ###  Add alternative information to contact
 
@@ -392,46 +394,53 @@ Invalid Input Example | Application Output
 **optout** | `NOTIFICATION_DESCRIPTION` cannot be empty.
 
 ### Notes
-![Window with Notes](images/notes/window_with_notes.png)
-![Notes Window](images/notes/notes_window.png)
+
+<div style="display:flex; justify-content:space-around; align-items:center;">
+  <img src="images/notes/window_with_notes.png" alt="Window with Notes" style="height:400px; margin:10px;">
+  <img src="images/notes/notes_window.png" alt="Notes Window" style="height:400px; margin:10px;">
+</div>
 
 Allows you to add notes to a person and remove notes from a person.
 
-#### 1. Adding Notes to a Person
+You can add notes to a person with the `addnote` command, remove notes from them with the `removenotes` command.
 
-##### Command Format:
-    note INDEX NOTE_CONTENT
+You can view notes by one of two ways: by using the `addnote` command, or by clicking on the `Notes` button in the person's information window.
 
-##### Parameters:
-- `INDEX`: The position of the person in the list you want to add a note to. This should be a positive integer.
-- `NOTE_CONTENT`: The content of the note you want to add.
+Format: `addnote PERSON_INDEX NOTE_CONTENT`, `removenote PERSON_INDEX NOTE_INDEX` and `notes PERSON_INDEX`
 
-##### Example:
+<box type="warning">
+
+Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
+
+</box>
+<box type="info">
+
+The fields you enter should follow the following format:
+
+| Parameter     | Description                                                                                                 | 
+|---------------|-------------------------------------------------------------------------------------------------------------| 
+| `PERSON_INDEX`| The position of the person in the list you want to add a note to. This should be a positive integer, and should be within the bounds of the list. | 
+| `NOTE_INDEX`  | The position of the note in the person's list of notes you want to remove. This should be a positive integer, and should be within the bounds of the list. | 
+| `NOTE_CONTENT`| The content of the note you want to add. It has to be non-empty, and can contain any character.              | 
+
+</box>
+
+<box>
 If you want to add a note to the person at position 1 in the list, you would use:
-    
-    note 1 This is a sample note for the person.
+
+`note 1 This is a sample note for the person.`
 
 This will add a note "This is a sample note for the person." to the person at index 1.
+</box>
 
-#### 2. Removing Notes from a Person
-
-##### Command Format:
-    removenote INDEX_PERSON INDEX_NOTE
-
-##### Parameters:
-- `INDEX_PERSON`: The position of the person in the list you want to remove a note from. This should be a positive integer.
-- `INDEX_NOTE`: The position of the note in the person's list of notes you want to remove. This should be a positive integer.
-
-##### Example:
+<box>
 If you want to remove the 2nd note from the person at position 1 in the list, you would use:
-    
-    removenote 1 2
+
+`removenote 1 2`
 
 This will remove the 2nd note from the person at index 1.
+</box>
 
-##### Note:
-Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
-Make sure to familiarize yourself with the commands and use them as per your needs. If you have any issues or questions, refer to the application's help section or contact the support team.
 
 ###  Track payment [Coming Soon]
 ###  Change language [Coming Soon]
