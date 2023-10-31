@@ -84,10 +84,10 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_loadCommand_failure() {
-        String loadCommand = LoadCommand.COMMAND_WORD;
-        assertCommandFailure(loadCommand, ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                LoadCommand.MESSAGE_USAGE));
+    public void execute_loadCommand_success() throws CommandException, ParseException {
+        String fileName = "execute_loadCommand_success";
+        String loadCommand = "load f/" + fileName;
+        assertCommandSuccess(loadCommand, String.format(LoadCommand.MESSAGE_LOAD_SUCCESS, fileName), model);
         assertHistoryCorrect(loadCommand);
     }
 
