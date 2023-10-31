@@ -1,10 +1,17 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BALANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINKEDIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECONDARY_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -12,6 +19,8 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.FindFilterStringTokenizer.Token;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Balance;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -199,7 +208,14 @@ public class FindExpressionParser {
         PHONE(PREFIX_PHONE.getPrefix()),
         EMAIL(PREFIX_EMAIL.getPrefix()),
         ADDRESS(PREFIX_ADDRESS.getPrefix()),
-        TAG(PREFIX_TAG.getPrefix());
+        TAG(PREFIX_TAG.getPrefix()),
+        BIRTHDAY(PREFIX_BIRTHDAY.getPrefix()),
+        LINKEDIN(PREFIX_LINKEDIN.getPrefix()),
+        SECONDARY_EMAIL(PREFIX_SECONDARY_EMAIL.getPrefix()),
+        TELEGRAM(PREFIX_TELEGRAM.getPrefix()),
+        NOTE(PREFIX_NOTE.getPrefix()),
+        BALANCE(PREFIX_BALANCE.getPrefix());
+
 
         private final String prefix;
 
@@ -234,7 +250,7 @@ public class FindExpressionParser {
          *
          * @return A predicate representing the conditions set by this node.
          */
-        abstract Predicate<Person> toPredicate();
+        abstract Predicate<Person> toPredicate() throws ParseException;
     }
 
     /**
@@ -253,7 +269,7 @@ public class FindExpressionParser {
         }
 
         @Override
-        Predicate<Person> toPredicate() {
+        Predicate<Person> toPredicate() throws ParseException {
             Predicate<Person> leftPred = left.toPredicate();
             Predicate<Person> rightPred = right.toPredicate();
             return (operator == FindExpressionOperator.AND)
@@ -274,7 +290,7 @@ public class FindExpressionParser {
         }
 
         @Override
-        Predicate<Person> toPredicate() {
+        Predicate<Person> toPredicate() throws ParseException {
             return operand.toPredicate().negate();
         }
     }
@@ -293,7 +309,10 @@ public class FindExpressionParser {
         }
 
         @Override
-        Predicate<Person> toPredicate() {
+        Predicate<Person> toPredicate() throws ParseException {
+
+            requireNonNull(field);
+
             switch (field) {
             case NAME:
                 return person -> StringUtil.containsSubstringIgnoreCase(person.getName().fullName, keyword);
@@ -308,8 +327,53 @@ public class FindExpressionParser {
                 // specified is a member of the person's tag set. The specified tag must be an exact
                 // match, not a substring match.
                 return person -> person.getTags().contains(new Tag(keyword));
+            // For optional fields, we need to check if the optional is present before applying the predicate.
+            // If the optional field is not present, we return false no matter what the substring is.
+            case BIRTHDAY:
+                return person -> StringUtil.containsSubstringIgnoreCase(person.getBirthday()
+                        .map(Birthday::toString).orElse(""), keyword);
+            case LINKEDIN:
+                return person -> StringUtil.containsSubstringIgnoreCase(person.getLinkedin()
+                        .map(l -> l.value).orElse(""), keyword);
+            case SECONDARY_EMAIL:
+                return person -> StringUtil.containsSubstringIgnoreCase(person.getSecondaryEmail()
+                        .map(e -> e.value).orElse(""), keyword);
+            case TELEGRAM:
+                return person -> StringUtil.containsSubstringIgnoreCase(person.getTelegram()
+                        .map(t -> t.value).orElse(""), keyword);
+            case NOTE:
+                // Notes are slightly more complicated -- a person passes the predicate if the keyword
+                // specified is a substring of any note in the person's note set. The specified keyword does
+                // not have to be an exact match of a full note, which makes this distinct from TAG.
+                return person -> person.getNotes().stream()
+                        .anyMatch(note -> StringUtil.containsSubstringIgnoreCase(note.toString(), keyword));
+            case BALANCE:
+                // Balances are slightly more complicated -- a person passes the predicate if the absolute
+                // value of their balance is greater than or equal to the absolute value of the keyword
+                // which is parsed into a Balance but does support negative signs.
+                try {
+                    // if there is a negative sign at start of keyword, remove it but record isNegative
+                    boolean isNegative = keyword.trim().startsWith("-");
+                    String justBalanceString = keyword.trim();
+                    if (isNegative) {
+                        justBalanceString = justBalanceString.replaceFirst("-", "");
+                    }
+
+                    Balance inputBalance = ParserUtil.parseBalance(justBalanceString);
+
+                    if (isNegative) {
+                        return person -> person.getBalance().value <= -inputBalance.value;
+                    } else {
+                        return person -> person.getBalance().value >= inputBalance.value;
+                    }
+
+                } catch (NumberFormatException | ParseException e) {
+                    throw new ParseException("Invalid balance format: " + Balance.MESSAGE_CONSTRAINTS
+                            + "\nAdditionally, when finding with a balance field, you can use"
+                            + " a negative sign to find negative balances.");
+                }
             default:
-                throw new IllegalStateException("Unexpected field: " + field);
+                throw new AssertionError("Invalid field type!");
             }
         }
     }
