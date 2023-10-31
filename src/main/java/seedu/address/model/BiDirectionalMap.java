@@ -111,7 +111,7 @@ public class BiDirectionalMap<T extends ListEntry<T>, P extends ListEntry<P>> {
         }
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            objectMapper.writeValue(p.toFile(), objectMapper.writeValueAsString(names));
+            objectMapper.writeValue(p.toFile(), names);
         } catch (IOException e) {
             Logger.getGlobal().warning("Failed to save BiDirectionalMap " + e.getMessage());
         }

@@ -15,14 +15,9 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlySchedule;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.ScheduleList;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.*;
+import seedu.address.model.lessons.Lesson;
+import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -86,6 +81,7 @@ public class MainApp extends Application {
         Optional<ReadOnlySchedule> scheduleListOptional;
         ReadOnlyAddressBook initialDataStudents;
         ReadOnlySchedule initialDataLessons;
+        BiDirectionalMap<Person, Lesson> personLessonMap;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -110,8 +106,15 @@ public class MainApp extends Application {
                     + " Will be starting with an empty Schedule List.");
             initialDataLessons = new ScheduleList();
         }
+        try {
+            personLessonMap = storage.getPersonLessonMap();
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getScheduleListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty Schedule List.");
+            personLessonMap = new BiDirectionalMap<>();
+        }
 
-        return new ModelManager(initialDataStudents, userPrefs, initialDataLessons);
+        return new ModelManager(initialDataStudents, userPrefs, initialDataLessons, personLessonMap);
     }
 
     private void initLogging(Config config) {

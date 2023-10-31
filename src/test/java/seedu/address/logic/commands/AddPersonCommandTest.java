@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -248,8 +249,23 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public Set<Person> getPersonsFulfill(Predicate<Person> predicate) {
+            return null;
+        }
+
+        @Override
+        public void link(Person person, Lesson lesson) {
+
+        }
+
+        @Override
         public boolean hasLessonClashWith(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Lesson> getLessonsFulfill(Predicate<Lesson> predicate) {
+            return null;
         }
 
         @Override

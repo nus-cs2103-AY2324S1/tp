@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -33,7 +34,7 @@ public class ModelManager implements Model {
     private Person currentShowingPerson = null;
     private Lesson currentShowingLesson = null;
     private Task currentShowingTask = null;
-    private final BiDirectionalMap<Person, Lesson> personToLessonMap = new BiDirectionalMap<>();
+    private BiDirectionalMap<Person, Lesson> personToLessonMap;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -50,6 +51,11 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredLessons = new FilteredList<>(this.scheduleList.getLessonList());
+        personToLessonMap = new BiDirectionalMap<>();
+    }
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlySchedule scheduleList, BiDirectionalMap<Person,Lesson> map) {
+        this(addressBook, userPrefs, scheduleList);
+        personToLessonMap = map;
     }
 
     public ModelManager() {
@@ -125,6 +131,10 @@ public class ModelManager implements Model {
         requireNonNull(person);
         return addressBook.hasPersonClashWith(person);
     }
+    public Set<Person> getPersonsFulfill(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        return addressBook.getPersonsFulfill(predicate);
+    }
 
     @Override
     public void deletePerson(Person target) {
@@ -196,6 +206,10 @@ public class ModelManager implements Model {
     public Lesson getLessonClashWith(Lesson lesson) {
         requireNonNull(lesson);
         return scheduleList.getLessonClashWith(lesson);
+    }
+    public Set<Lesson> getLessonsFulfill(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        return scheduleList.getLessonsFulfill(predicate);
     }
 
     @Override
@@ -310,6 +324,9 @@ public class ModelManager implements Model {
 
     public BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
         return personToLessonMap;
+    }
+    public void link(Person person, Lesson lesson) {
+        personToLessonMap.addMapping(person, lesson);
     }
 
 }
