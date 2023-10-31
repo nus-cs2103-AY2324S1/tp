@@ -161,7 +161,7 @@ public class CreateCommandTest {
         public UniqueReminderList getReminderList() {
             throw new AssertionError("This method should not be called.");
         }
-        
+
         @Override
         public void startReminderScheduler() {
             throw new AssertionError("This method should not be called.");
