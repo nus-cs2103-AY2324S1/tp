@@ -103,6 +103,16 @@ public class Person {
     }
 
     /**
+     * Checks if the person is tagged with the input tag.
+     *
+     * @param tag input tag to be checked.
+     * @return true if this person is tagged with the input tag.
+     */
+    public boolean hasTag(Tag tag) {
+        return getTags().stream().anyMatch(tag::equals);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

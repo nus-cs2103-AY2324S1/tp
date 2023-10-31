@@ -14,7 +14,8 @@ import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearEventsCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CompareCalendarCommandByIndex;
+import seedu.address.logic.commands.CompareCalendarByIndexCommand;
+import seedu.address.logic.commands.CompareCalendarByTagCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -102,8 +103,11 @@ public class UniMateParser {
         case AddContactEventCommand.COMMAND_WORD:
             return new AddContactEventCommandParser().parse(arguments);
 
-        case CompareCalendarCommandByIndex.COMMAND_WORD:
-            return new CompareCalendarCommandParser().parse(arguments);
+        case CompareCalendarByIndexCommand.COMMAND_WORD:
+            return new CompareCalendarByIndexCommandParser().parse(arguments);
+
+        case CompareCalendarByTagCommand.COMMAND_WORD:
+            return new CompareCalendarByTagCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
