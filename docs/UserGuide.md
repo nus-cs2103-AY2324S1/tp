@@ -110,6 +110,20 @@ Format: `delete <INDEX>`
 
 #### 2.2.5 Finding Students by Name: `find`
 
+Find students based on their name. Can choose to find student based on their first name, last name or full name
+If the name does not match entirely, the student will not be shown. Refer to the examples below for a better understanding
+
+Format: `find <NAME>`
+
+Example Scenario:
+
+Student Name: Roy Lee
+* "find Roy" works
+* "find Lee" works
+* "find Roy Lee" works
+* "find Ro" does not work
+* "find Le" does not work
+* "find Roy L" does not work
 ### 2.2.6 Assigning risk status to student (to be implemented)
 
 Tags a student with a risk level based on their current mental health status, categorizing them as high, medium, low tag_student <index> <RISK_LEVEL>
