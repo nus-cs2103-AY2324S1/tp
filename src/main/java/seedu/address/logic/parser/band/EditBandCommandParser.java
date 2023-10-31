@@ -12,7 +12,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.band.EditBandCommand;
-import seedu.address.logic.commands.band.EditBandCommand.EditBandDescriptor;
 import seedu.address.logic.commands.musician.EditCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -56,7 +55,7 @@ public class EditBandCommandParser implements Parser<EditBandCommand> {
                 .ifPresent(editBandDescriptor::setGenres);
 
         if (!editBandDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditBandCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditBandCommand(index, editBandDescriptor);
