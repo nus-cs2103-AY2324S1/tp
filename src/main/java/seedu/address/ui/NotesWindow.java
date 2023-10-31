@@ -7,6 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Note;
@@ -27,13 +29,21 @@ public class NotesWindow extends UiPart<Stage> {
 
     /**
      * Creates a new NotesWindow.
-     * @param root
-     * @param person
+     *
+     * @param root Stage to use as the root of the NotesWindow.
+     * @param person Person to display notes for.
      */
     public NotesWindow(Stage root, Person person) {
         super(FXML, root);
         this.person = person;
         populateListView(person.getNotes());
+
+        // Add event filter to listen for ESC key press
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                handleClose();
+            }
+        });
     }
 
     public NotesWindow(Person person) {
@@ -68,6 +78,7 @@ public class NotesWindow extends UiPart<Stage> {
         }
         notesListView.setItems(notesObservableList);
     }
+
     @FXML
     void handleClose() {
         Stage stage = (Stage) notesListView.getScene().getWindow();
@@ -77,5 +88,4 @@ public class NotesWindow extends UiPart<Stage> {
     public ListView<String> getNotesListView() {
         return notesListView;
     }
-
 }

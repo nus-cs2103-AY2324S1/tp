@@ -20,13 +20,13 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.PersonBuilder;
 
-public class NoteCommandTest {
+public class AddNoteCommandTest {
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new NoteCommand(Index.fromZeroBased(0), null));
-        assertThrows(NullPointerException.class, () -> new NoteCommand(null, new Note("Sample note")));
-        assertThrows(NullPointerException.class, () -> new NoteCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddNoteCommand(Index.fromZeroBased(0), null));
+        assertThrows(NullPointerException.class, () -> new AddNoteCommand(null, new Note("Sample note")));
+        assertThrows(NullPointerException.class, () -> new AddNoteCommand(null, null));
     }
 
     @Test
@@ -37,7 +37,7 @@ public class NoteCommandTest {
 
         ModelStubWithNote modelStub = new ModelStubWithNote(personA, note -> assertEquals(note, noteToAdd));
 
-        CommandResult commandResult = new NoteCommand(Index.fromZeroBased(0), noteToAdd).execute(modelStub);
+        CommandResult commandResult = new AddNoteCommand(Index.fromZeroBased(0), noteToAdd).execute(modelStub);
 
     }
     @Test
@@ -48,7 +48,7 @@ public class NoteCommandTest {
 
         ModelStubWithNote modelStub = new ModelStubWithNote(personA, note -> {});
 
-        NoteCommand command = new NoteCommand(Index.fromZeroBased(1), noteToAdd);
+        AddNoteCommand command = new AddNoteCommand(Index.fromZeroBased(1), noteToAdd);
 
         assertThrows(CommandException.class, () -> command.execute(modelStub),
             Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -59,14 +59,14 @@ public class NoteCommandTest {
     public void equals() {
         Note noteA = new Note("Note A");
         Note noteB = new Note("Note B");
-        NoteCommand commandA = new NoteCommand(Index.fromZeroBased(0), noteA);
-        NoteCommand commandB = new NoteCommand(Index.fromZeroBased(1), noteB);
+        AddNoteCommand commandA = new AddNoteCommand(Index.fromZeroBased(0), noteA);
+        AddNoteCommand commandB = new AddNoteCommand(Index.fromZeroBased(1), noteB);
 
         // same object -> returns true
         assertTrue(commandA.equals(commandA));
 
         // same values -> returns true
-        NoteCommand commandACopy = new NoteCommand(Index.fromZeroBased(0), noteA);
+        AddNoteCommand commandACopy = new AddNoteCommand(Index.fromZeroBased(0), noteA);
         assertTrue(commandA.equals(commandACopy));
 
         // different types -> returns false

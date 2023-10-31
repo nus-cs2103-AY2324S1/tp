@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Avatar;
 import seedu.address.model.person.Balance;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
@@ -43,6 +44,7 @@ class JsonAdaptedPerson {
     private final Optional<String> telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final Optional<Integer> id;
+    private Avatar avatar = new Avatar();
     private final Integer balance;
 
     private final List<JsonAdaptedNote> notes = new ArrayList<>();
@@ -95,6 +97,9 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         id = source.getId().map(x -> x.intValue());
+
+        avatar = source.getAvatar();
+
         notes.addAll(source.getNotes().stream()
             .map(JsonAdaptedNote::new)
             .collect(Collectors.toList()));
@@ -146,6 +151,10 @@ class JsonAdaptedPerson {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
+        /*
+        To add checking for photo
+         */
+
         if (balance == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Balance.class.getSimpleName()));
         }
@@ -163,13 +172,17 @@ class JsonAdaptedPerson {
         final Optional<Telegram> modelTelegram = telegram.map(telegram -> new Telegram(telegram));
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         final Optional<Integer> modelID = id.map(x -> x.intValue());
+
+        final Avatar modelAvatar = new Avatar(avatar);
+
         final ObservableList<Note> modelNotes = FXCollections.observableArrayList(personNotes);
 
         final Balance modelBalance = new Balance(balance);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelLinkedin,
-                modelSecondaryEmail, modelTelegram, modelTags, modelID, modelNotes, modelBalance);
+                modelSecondaryEmail, modelTelegram, modelTags, modelID, modelAvatar, modelNotes, modelBalance);
     }
 
 }

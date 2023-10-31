@@ -2,10 +2,13 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -55,6 +58,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label uniqueId;
+    @FXML
+    private ImageView avatar;
+    @FXML
     private Button notesButton;
     @FXML
     private Label balance;
@@ -97,6 +104,7 @@ public class PersonCard extends UiPart<Region> {
                 secondaryEmailField);
         bindLabelToProperty(telegram, person.getTelegram().map(t -> t.value).orElse(""), telegramField);
         bindLabelToProperty(birthday, person.getBirthday().map(b -> b.toString()).orElse(""), birthdayField);
+        avatar.setImage(person.getAvatar().getImage());
         person.getEmergencyTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
@@ -107,9 +115,10 @@ public class PersonCard extends UiPart<Region> {
         person.getNonEmergencyTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
-        int numberOfNotes = person.getNotes().size();
-        notesButton.setText("Notes (" + numberOfNotes + ")");
+        StringBinding notesButtonText = Bindings
+                .createStringBinding(() -> "Notes (" + person.getNotes().size() + ")",
+                        person.getNotes()); // This will cause the binding to update when the list changes
+        notesButton.textProperty().bind(notesButtonText);
         balance.setText(person.getBalance().toUiMessage());
     }
 
@@ -142,3 +151,4 @@ public class PersonCard extends UiPart<Region> {
         }
     }
 }
+

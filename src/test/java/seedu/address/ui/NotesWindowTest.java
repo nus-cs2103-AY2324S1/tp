@@ -13,6 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
+import javafx.application.Platform;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import seedu.address.model.person.Person;
 
@@ -24,8 +26,10 @@ public class NotesWindowTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) {
-        notesWindow = new NotesWindow(testPerson);
-        notesWindow.show();
+        Platform.runLater(() -> {
+            notesWindow = new NotesWindow(testPerson);
+            notesWindow.show();
+        });
     }
 
     @BeforeEach
@@ -37,24 +41,36 @@ public class NotesWindowTest extends ApplicationTest {
     }
 
     @Test
-    public void testNotesDisplay() {
-        List<String> expectedNotes = Arrays.asList("Likes to swim", "Likes to run", "Is a chad");
-        verifyThat("#notesListView", hasItems(3));
-        assertTrue(notesWindow.getNotesListView().getItems().containsAll(expectedNotes));
+    public void displayNotes_correctNumberOfItemsAndContent_displaysExpectedNotes() {
+        interact(() -> {
+            List<String> expectedNotes = Arrays.asList("Likes to swim", "Likes to run", "Is a chad");
+            verifyThat("#notesListView", hasItems(3));
+            assertTrue(notesWindow.getNotesListView().getItems().containsAll(expectedNotes));
+        });
     }
 
     @Test
-    public void testIsShowing() {
+    public void isShowing_afterShow_returnsTrue() {
         assertTrue(notesWindow.isShowing());
+    }
+
+    @Test
+    public void isShowing_afterHide_returnsFalse() {
         interact(() -> notesWindow.hide());
         assertFalse(notesWindow.isShowing());
     }
 
     @Test
-    public void testHandleClose() {
+    public void handleClose_invoked_closesWindow() {
         interact(() -> notesWindow.handleClose());
         assertFalse(notesWindow.isShowing());
     }
 
-
+    @Test
+    public void escKey_onKeyPress_closesWindow() {
+        interact(() -> notesWindow.show());
+        assertTrue(notesWindow.isShowing());
+        interact(()-> press(KeyCode.ESCAPE));
+        assertFalse(notesWindow.isShowing());
+    }
 }

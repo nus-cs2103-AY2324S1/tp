@@ -196,18 +196,6 @@ Examples:
 You are not allowed to edit any alternative contact information, i.e. `TELEGRAM`, `SECONDARY_EMAIL`, `LINKEDIN`, `BIRTHDAY` if any of these fields are empty. You will receive an error message that directs you to use [**`addalt`**](#add-alternative-information-to-contact) command.
 </box>
 
-###  Upload contact's photo
-
-Uploads a photo for an existing contact.
-
-Format: `uploadphoto INDEX path/PHOTO_PATH`
-
-Examples:
-* `uploadphoto 1 path/C:/photos/johndoe.jpg`
-  * Uploads a photo for the 1st person from the specified path.
-* `uploadphoto 2 path/C:/photos/betsycrowe.png`
-  * Uploads a photo for the 2nd person from the specified path.
-
 ###  Update contact's photo
 
 Updates the photo of an existing contact.
@@ -217,9 +205,13 @@ Format: `updatephoto INDEX path/NEW_PHOTO_PATH`
 Examples:
 * `updatephoto 1 path/C:/photos/new_johndoe.jpg`
   * Updates the photo for the 1st person with a new image from the specified path.
-* `updatephoto 2 path/C:/photos/new_betsycrowe.png`
+* `updatephoto 2 path/D:/images/new_betsycrowe.png`
   * Updates the photo for the 2nd person with a new image from the specified path.
 
+<box type="warning">
+
+You are required to input the absolute path to the photo for this command. If you use an invalid path, a default photo will be chosen for your specified contact.
+</box>
 
 ###  Find contacts
 
@@ -242,7 +234,13 @@ Across both basic and advanced filtering, the following fields are supported:<br
 | Phone | `p`   | Finds contacts whose phone numbers **contain** the given digits. |
 | Email | `e`   | Finds contacts whose email addresses **contain** the given keyword. |
 | Address | `a` | Finds contacts whose addresses **contain** the given keyword. |
-| Tag   | `t`   | Finds contacts who have any tag that **exactly matches** the given keyword. |
+| Tag   | `t`   | Finds contacts who have **any tag** that **exactly matches** the given keyword. |
+| Birthday | `b` | Finds contacts whose birthdays (in DD-MM format) **contain** the given substring. |
+| LinkedIn | `li` | Finds contacts whose LinkedIn usernames **contain** the given keyword. |
+| Secondary Email | `e2` | Finds contacts whose secondary email addresses **contain** the given keyword. |
+| Telegram | `tg` | Finds contacts whose telegram handles **contain** the given keyword. |
+| Note | `nt` | Finds contacts who have **any note** that **contains** the given keyword. |
+| Balance | `bal` | Keyword **must be valid balance** (see: [Payments feature format](#tbd)). Finds contacts who **owe user** an amount **more than or equal** to given balance. <br><br> Keyword **may start with a negative sign**, in which case finds contacts who **user owes** more than or equal to given balance. |
 
 </panel>
 

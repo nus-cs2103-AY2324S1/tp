@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddAltCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddNoteCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -18,10 +19,11 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.OweCommand;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.commands.RemoveNoteCommand;
+import seedu.address.logic.commands.UpdatePhotoCommand;
+import seedu.address.logic.commands.ViewNotesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -64,6 +66,9 @@ public class AddressBookParser {
         case AddAltCommand.COMMAND_WORD:
             return new AddAltCommandParser().parse(arguments);
 
+        case UpdatePhotoCommand.COMMAND_WORD:
+            return new UpdatePhotoCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -79,8 +84,8 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case NoteCommand.COMMAND_WORD:
-            return new NoteCommandParser().parse(arguments);
+        case AddNoteCommand.COMMAND_WORD:
+            return new AddNoteCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -97,6 +102,9 @@ public class AddressBookParser {
         case OweCommand.COMMAND_WORD:
             return new OweCommandParser().parse(arguments);
 
+        case ViewNotesCommand.COMMAND_WORD:
+            return new ViewNotesCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -104,3 +112,6 @@ public class AddressBookParser {
     }
 
 }
+
+
+
