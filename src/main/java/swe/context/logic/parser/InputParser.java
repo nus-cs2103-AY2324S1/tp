@@ -11,6 +11,7 @@ import swe.context.logic.commands.Command;
 import swe.context.logic.commands.DeleteCommand;
 import swe.context.logic.commands.EditCommand;
 import swe.context.logic.commands.ExitCommand;
+import swe.context.logic.commands.FilterCommand;
 import swe.context.logic.commands.FindCommand;
 import swe.context.logic.commands.HelpCommand;
 import swe.context.logic.commands.ListCommand;
@@ -52,6 +53,8 @@ public final class InputParser {
             return new ListCommand();
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
         case DeleteCommand.COMMAND_WORD:
