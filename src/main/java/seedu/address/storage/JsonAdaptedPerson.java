@@ -19,6 +19,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.attendance.AttendanceStorage;
+import seedu.address.model.person.payroll.PayrollStorage;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String salary;
     private final String annualLeave;
     private final ArrayList<String> attendanceStorage;
+    private final ArrayList<String> payrollStorage;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +47,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("bankAccount") String bankAccount, @JsonProperty("joinDate") String joinDate,
             @JsonProperty("salary") String salary, @JsonProperty("annualLeave") String annualLeave,
-            @JsonProperty("attendanceStorage") ArrayList<String> attendanceStorage) {
+            @JsonProperty("attendanceStorage") ArrayList<String> attendanceStorage,
+            @JsonProperty("payrollStorage") ArrayList<String> payrollStorage) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,6 +58,7 @@ class JsonAdaptedPerson {
         this.salary = salary;
         this.annualLeave = annualLeave;
         this.attendanceStorage = attendanceStorage;
+        this.payrollStorage = payrollStorage;
     }
 
     /**
@@ -70,6 +74,7 @@ class JsonAdaptedPerson {
         salary = source.getSalary().value;
         attendanceStorage = source.getAttendanceStorage().getValue();
         annualLeave = source.getAnnualLeave().toString();
+        payrollStorage = source.getPayrollStorage().getValue();
     }
 
     /**
@@ -136,10 +141,10 @@ class JsonAdaptedPerson {
 
         final AttendanceStorage modelAttendanceStorage = new AttendanceStorage(attendanceStorage);
 
-
+        final PayrollStorage modelPayrollStorage = new PayrollStorage(payrollStorage);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBankAccount, modelJoinDate, modelSalary,
-                modelAnnualLeave, modelAttendanceStorage);
+                modelAnnualLeave, modelAttendanceStorage, modelPayrollStorage);
     }
 
     public List<LocalDate> stringToLeaveListConverter(String annualLeave) {

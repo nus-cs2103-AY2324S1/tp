@@ -27,10 +27,12 @@ import seedu.address.model.person.BankAccount;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JoinDate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payroll;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.attendance.AttendanceStorage;
+import seedu.address.model.person.payroll.PayrollStorage;
 
 /**
  * Edits the details of an existing employee in the list.
@@ -127,9 +129,12 @@ public class EditCommand extends Command {
             .orElse(employeeToEdit.getAnnualLeave());
         AttendanceStorage updatedAttendanceStorage = editEmployeeDescriptor.getAttendanceStorage()
                 .orElse(employeeToEdit.getAttendanceStorage());
+        PayrollStorage updatedPayrollStorage = editEmployeeDescriptor.getPayrollStorage()
+                .orElse(employeeToEdit.getPayrollStorage());
+
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBankAccount, updatedJoinDate,
-            updatedSalary, updatedAnnualLeave, updatedAttendanceStorage);
+            updatedSalary, updatedAnnualLeave, updatedAttendanceStorage, updatedPayrollStorage);
     }
 
     @Override
@@ -170,6 +175,7 @@ public class EditCommand extends Command {
         private JoinDate joinDate;
         private Salary salary;
         private AttendanceStorage attendanceStorage;
+        private PayrollStorage payrollStorage;
 
         public EditEmployeeDescriptor() {}
 
@@ -186,6 +192,7 @@ public class EditCommand extends Command {
             setJoinDate(toCopy.joinDate);
             setSalary(toCopy.salary);
             setAttendanceStorage(toCopy.attendanceStorage);
+            setPayrollStorage(toCopy.payrollStorage);
         }
 
         /**
@@ -265,6 +272,14 @@ public class EditCommand extends Command {
 
         public Optional<AttendanceStorage> getAttendanceStorage() {
             return Optional.ofNullable(attendanceStorage);
+        }
+
+        public void setPayrollStorage(PayrollStorage payrollStorage) {
+            this.payrollStorage = payrollStorage;
+        }
+
+        public Optional<PayrollStorage> getPayrollStorage() {
+            return Optional.ofNullable(payrollStorage);
         }
 
         @Override

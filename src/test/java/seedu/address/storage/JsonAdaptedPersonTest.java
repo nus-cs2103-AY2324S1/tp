@@ -38,6 +38,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_SALARY = BENSON.getSalary().toString();
     private static final String VALID_ANNUALLEAVE = BENSON.getAnnualLeave().toString();
     private static final ArrayList<String> VALID_ATTENDANCE_STORAGE = BENSON.getAttendanceStorage().getValue();
+    private static final ArrayList<String> VALID_PAYROLL_STORAGE = BENSON.getPayrollStorage().getValue();
 
 
 
@@ -51,7 +52,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_BANKACCOUNT,
-                VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE);
+                VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE, VALID_PAYROLL_STORAGE);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -59,7 +60,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_BANKACCOUNT, VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE);
+                VALID_BANKACCOUNT, VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE,
+                VALID_ATTENDANCE_STORAGE, VALID_PAYROLL_STORAGE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -67,8 +69,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_BANKACCOUNT,
-                VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE);
+                VALID_BANKACCOUNT, VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE,
+                VALID_ATTENDANCE_STORAGE, VALID_PAYROLL_STORAGE);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -76,8 +78,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS,
-                VALID_BANKACCOUNT,
-                VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE);
+                VALID_BANKACCOUNT, VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE,
+                VALID_ATTENDANCE_STORAGE, VALID_PAYROLL_STORAGE);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -85,8 +87,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
-                VALID_BANKACCOUNT,
-                VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE);
+                VALID_BANKACCOUNT, VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE,
+                VALID_ATTENDANCE_STORAGE, VALID_PAYROLL_STORAGE);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -94,8 +96,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidBankAccount_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                INVALID_BANKACCOUNT,
-                VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE);
+                INVALID_BANKACCOUNT, VALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE,
+                VALID_ATTENDANCE_STORAGE, VALID_PAYROLL_STORAGE);
         String expectedMessage = BankAccount.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -103,8 +105,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidJoinDate_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_BANKACCOUNT,
-                INVALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE);
+                VALID_BANKACCOUNT, INVALID_JOINDATE, VALID_SALARY, VALID_ANNUALLEAVE,
+                VALID_ATTENDANCE_STORAGE, VALID_PAYROLL_STORAGE);
         String expectedMessage = JoinDate.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -112,8 +114,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidSalary_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_BANKACCOUNT,
-                VALID_JOINDATE, INVALID_SALARY, VALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE);
+                VALID_BANKACCOUNT, VALID_JOINDATE, INVALID_SALARY, VALID_ANNUALLEAVE,
+                VALID_ATTENDANCE_STORAGE, VALID_PAYROLL_STORAGE);
         String expectedMessage = Salary.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -121,8 +123,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidAnnualLeave_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_BANKACCOUNT,
-                VALID_JOINDATE, VALID_SALARY, INVALID_ANNUALLEAVE, VALID_ATTENDANCE_STORAGE);
+                VALID_BANKACCOUNT, VALID_JOINDATE, VALID_SALARY, INVALID_ANNUALLEAVE,
+                VALID_ATTENDANCE_STORAGE, VALID_PAYROLL_STORAGE);
         String expectedMessage = AnnualLeave.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
