@@ -63,12 +63,11 @@ public class TypicalApplicants {
     public static final Applicant BENSON1 = new ApplicantBuilder().withName("Benson Meier")
             .withPosition("Frontend Engineer").withEmail("benson@example.com").withPhone("98765432")
             .withInterviews(VALID_INTERVIEW_TECHNICAL)
-            .withScore(new Score(8.0, 8.0, 1))
-            .withStatus("OFFERED").build();
+            .withScore(new Score(8.0, 8.0, 1)).build();
     public static final Applicant CARL1 = new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("carl@example.com").withPosition("Backend Engineer").withInterviews(VALID_INTERVIEW_BEHAVIORAL)
             .withScore(new Score(8.5, 8.5, 1))
-            .withStatus("REJECTED").build();
+            .build();
     public static final Applicant DANIEL1 = new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("daniel@example.com").withPosition("Testing Engineer").withInterviews(VALID_INTERVIEW_TECHNICAL)
             .build();
