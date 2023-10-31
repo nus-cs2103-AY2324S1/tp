@@ -20,6 +20,7 @@ public class Messages {
     public static final String MESSAGE_JOBS_LISTED_OVERVIEW = "%1$d jobs found!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
         "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_INTERVIEW = "The interview index provided is invalid.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

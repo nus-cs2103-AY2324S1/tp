@@ -59,6 +59,9 @@ public class InterviewDeleteCommand extends InterviewCommand {
         }
 
         Job jobToDeleteInterview = lastShownList.get(jobIndex.getZeroBased());
+        if (interviewIndex.getZeroBased() >= jobToDeleteInterview.interviewLength()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_INTERVIEW);
+        }
 
         jobToDeleteInterview.deleteInterview(interviewIndex);
         model.updateFilteredJobList(Model.PREDICATE_SHOW_ALL_JOBS);
