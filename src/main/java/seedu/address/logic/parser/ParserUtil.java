@@ -60,12 +60,12 @@ public class ParserUtil {
 
         String trimmedIndex1 = indexArray[0].trim();
         String trimmedIndex2 = indexArray[1].trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex1) ||
-                !StringUtil.isNonZeroUnsignedInteger(trimmedIndex2) {
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex1)
+                || !StringUtil.isNonZeroUnsignedInteger(trimmedIndex2)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        arrayList.set(0, Index.fromOneBased(Integer.parseInt(trimmedIndex1));
-        arrayList.set(1, Index.fromOneBased(Integer.parseInt(trimmedIndex2));
+        arrayList.set(0, Index.fromOneBased(Integer.parseInt(trimmedIndex1)));
+        arrayList.set(1, Index.fromOneBased(Integer.parseInt(trimmedIndex2)));
         return arrayList;
     }
 
