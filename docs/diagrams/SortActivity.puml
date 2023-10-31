@@ -1,37 +1,20 @@
 @startuml
-'https://plantuml.com/activity-diagram-beta
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
 
 start
-:ClickServlet.handleRequest();
-:new page;
-if (Page.onSecurityCheck) then (true)
-  :Page.onInit();
-  if (isForward?) then (no)
-    :Process controls;
-    if (continue processing?) then (no)
-      stop
-    endif
-
-    if (isPost?) then (yes)
-      :Page.onPost();
-    else (no)
-      :Page.onGet();
-    endif
-    :Page.onRender();
-  endif
-else (false)
-endif
-
-if (do redirect?) then (yes)
-  :redirect process;
-else
-  if (do forward?) then (yes)
-    :Forward request;
-  else (no)
-    :Render page template;
+:User enters sort command;
+if () then ([else])
+  :Parse exception thrown;
+  stop
+else ([All compulsory fields are valid and in the correct format])
+  if () then ([sequence is decreasing])
+    :Returns a list of Dates in decreasing order;
+  else ([sequence is increasing])
+    :Returns a list of Dates in increasing order;
   endif
 endif
-
 stop
 
 @enduml

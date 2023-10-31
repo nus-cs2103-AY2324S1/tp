@@ -137,11 +137,8 @@ public class ModelManager implements Model {
      */
     public void getRandomPerson() {
         Random randomGenerator = new Random();
-        System.out.println("random: " + randomGenerator);
         int randomIndex = randomGenerator.nextInt(loveBook.getPersonList().size());
-        System.out.println("randomindex: " + randomIndex);
         Date person = loveBook.getPersonList().get(randomIndex);
-        System.out.println("random person: " + person);
         updateFilteredPersonList(new RandomPredicate(person));
     }
 

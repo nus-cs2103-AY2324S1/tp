@@ -1,11 +1,70 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!include Style.puml
+skinparam ArrowFontStyle plain
 
-autonumber
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LoveBookParser" as LoveBookParser LOGIC_COLOR
+participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant "d:SortCommand" as SortCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+[-> LogicManager : execute("sort name/ increasing")
+activate LogicManager
+
+LogicManager -> LoveBookParser : parseCommand("sort name/ increasing")
+activate LoveBookParser
+
+create SortCommandParser
+LoveBookParser -> SortCommandParser
+activate SortCommandParser
+
+SortCommandParser --> LoveBookParser
+deactivate SortCommandParser
+
+LoveBookParser -> SortCommandParser : parse("name/ increasing")
+activate SortCommandParser
+
+create SortCommand
+SortCommandParser -> SortCommand
+activate SortCommand
+
+SortCommand --> SortCommandParser : d
+deactivate SortCommand
+
+SortCommandParser --> LoveBookParser : d
+deactivate SortCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortCommandParser -[hidden]-> LoveBookParser
+destroy SortCommandParser
+
+LoveBookParser --> LogicManager : d
+deactivate LoveBookParser
+
+LogicManager -> SortCommand : execute()
+activate SortCommand
+
+SortCommand -> Model : updateSortedPersonList()
+activate Model
+
+Model --> SortCommand
+deactivate Model
+
+create CommandResult
+SortCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortCommand
+deactivate CommandResult
+
+SortCommand --> LogicManager : result
+deactivate SortCommand
+
+[<--LogicManager
+deactivate LogicManager
 @enduml
