@@ -184,7 +184,7 @@ public class ModelManager implements Model {
 
     @Override
     public ReadOnlyDatePrefs getDatePrefs() {
-        return this.datePrefs.getPreferences();
+        return this.datePrefs.getPreferences().get(0);
     }
 
 

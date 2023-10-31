@@ -2,6 +2,8 @@ package seedu.lovebook.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.lovebook.commons.util.ToStringBuilder;
@@ -29,7 +31,7 @@ public class DatePrefs implements ReadOnlyDatePrefs {
         this.gender = new Gender("F");
         this.height = new Height("170");
         this.income = new Income("10000");
-        this.horoscope = new Horoscope("Aries");
+        this.horoscope = new Horoscope("ARIES");
     }
 
     /**
@@ -57,7 +59,7 @@ public class DatePrefs implements ReadOnlyDatePrefs {
     public void resetData(ReadOnlyDatePrefs newData) {
         requireNonNull(newData);
 
-        setPreferences(newData.getPreferences());
+        setPreferences(newData.getPreferences().get(0));
     }
 
     /**
@@ -128,7 +130,9 @@ public class DatePrefs implements ReadOnlyDatePrefs {
     }
 
     @Override
-    public DatePrefs getPreferences() {
-        return this;
+    public List<DatePrefs> getPreferences() {
+        List<DatePrefs> prefs = new ArrayList<>();
+        prefs.add(this);
+        return prefs;
     }
 }

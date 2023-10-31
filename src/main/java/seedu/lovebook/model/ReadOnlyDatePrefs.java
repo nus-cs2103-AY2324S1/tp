@@ -1,8 +1,10 @@
 package seedu.lovebook.model;
 
+import java.util.List;
+
 /**
  * Unmodifiable view of date preferences.
  */
 public interface ReadOnlyDatePrefs {
-    DatePrefs getPreferences();
+    List<DatePrefs> getPreferences();
 }
