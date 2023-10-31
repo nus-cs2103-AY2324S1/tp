@@ -25,7 +25,6 @@ Class JsonTag
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" SettingsStorage

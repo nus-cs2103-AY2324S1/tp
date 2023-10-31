@@ -26,7 +26,6 @@ Class HiddenLogic #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow

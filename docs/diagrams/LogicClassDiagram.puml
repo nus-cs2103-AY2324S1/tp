@@ -24,7 +24,6 @@ package Storage {
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
 LogicManager -right->"1" InputParser

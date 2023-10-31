@@ -25,7 +25,6 @@ Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
 
 Contacts .up.|> ReadOnlyContacts
 
