@@ -40,6 +40,18 @@ public class Job {
         this.industry = industry;
     }
 
+    public Job(Role role, Company company, Deadline deadline, Status status, JobType jobType,
+               Industry industry, List<Interview> interviews) {
+        CollectionUtil.requireAllNonNull(role, company);
+        this.role = role;
+        this.company = company;
+        this.deadline = deadline;
+        this.status = status;
+        this.jobType = jobType;
+        this.industry = industry;
+        this.interviews = interviews;
+    }
+
     public Role getRole() {
         return role;
     }
