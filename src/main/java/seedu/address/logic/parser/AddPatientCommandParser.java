@@ -14,8 +14,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddPatientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -34,7 +36,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddPatientCommand object
  */
 public class AddPatientCommandParser implements Parser<AddPatientCommand> {
-
+    private static final Logger logger = LogsCenter.getLogger(AddPatientCommandParser.class);
     /**
      * Parses the given {@code String} of arguments in the context of the AddPatientCommand
      * and returns an AddPatientCommand object for execution.
@@ -42,6 +44,7 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddPatientCommand parse(String args) throws ParseException {
+        logger.fine("Attempting to parse AddPatientCommand from arguments: " + args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
                         PREFIX_REMARK, PREFIX_GENDER, PREFIX_NRIC, PREFIX_CONDITION, PREFIX_BLOODTYPE,
@@ -49,6 +52,7 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
                 PREFIX_NRIC, PREFIX_CONDITION, PREFIX_BLOODTYPE, PREFIX_EMERGENCY_CONTACT)
                 || !argMultimap.getPreamble().isEmpty()) {
+            logger.warning("Invalid command format for AddPatientCommand: " + args);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
         }
 
@@ -70,6 +74,7 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
                 new Patient(name, phone, emergencyContact, email, address, remark, gender, ic, condition, bloodType,
                         tagList);
 
+        logger.info("Successfully parsed AddPatientCommand with patient: " + patient);
         return new AddPatientCommand(patient);
     }
 
