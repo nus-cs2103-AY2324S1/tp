@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
@@ -8,11 +10,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 
-import java.util.logging.Logger;
-
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The ListsPanel Window. Combines the personListPanel and scheduleListPanel into
+ * a larger combined panel where both panels are next to each other.
  */
 public class ListsPanel extends UiPart<Region> {
 

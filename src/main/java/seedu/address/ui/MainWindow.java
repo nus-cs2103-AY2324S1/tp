@@ -197,7 +197,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows list of person cards.
+     * Shows list of person and schedule cards.
      */
     void showLists() {
         listPanelPlaceholder.getChildren().clear();
