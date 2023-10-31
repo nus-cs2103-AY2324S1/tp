@@ -46,7 +46,7 @@ public class MarkMeetingCommand extends Command {
         Meeting updatedMeeting = markMeeting(meetingToMark);
         model.setMeeting(meetingToMark, updatedMeeting);
 
-        return new CommandResult(String.format(MESSAGE_MARK_MEETING_SUCCESS, Messages.format(meetingToMark)));
+        return new CommandResult(String.format(MESSAGE_MARK_MEETING_SUCCESS, Messages.format(updatedMeeting)));
     }
 
     static Meeting markMeeting(Meeting meeting) throws CommandException{

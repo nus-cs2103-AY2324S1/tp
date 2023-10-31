@@ -128,7 +128,7 @@ class JsonAdaptedMeeting {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     MeetingStatus.class.getSimpleName()));
         }
-        if (status != Boolean.FALSE.toString() && status != Boolean.TRUE.toString()) {
+        if (!status.equals(Boolean.FALSE.toString()) && !status.equals(Boolean.TRUE.toString())) {
             throw new IllegalValueException(MeetingStatus.MESSAGE_CONSTRAINTS);
         }
         final MeetingStatus modelStatus = new MeetingStatus(Boolean.parseBoolean(status));
