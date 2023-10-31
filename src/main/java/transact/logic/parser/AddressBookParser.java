@@ -19,8 +19,10 @@ import transact.logic.commands.DeleteTransactionCommand;
 import transact.logic.commands.EditStaffCommand;
 import transact.logic.commands.EditTransactionCommand;
 import transact.logic.commands.ExitCommand;
+import transact.logic.commands.ExportTransactionCommand;
 import transact.logic.commands.FindCommand;
 import transact.logic.commands.HelpCommand;
+import transact.logic.commands.ImportTransactionCommand;
 import transact.logic.commands.ViewCommand;
 import transact.logic.parser.exceptions.ParseException;
 
@@ -98,6 +100,12 @@ public class AddressBookParser {
 
         case ClearResultBoxCommand.COMMAND_WORD:
             return new ClearResultBoxCommand();
+
+        case ExportTransactionCommand.COMMAND_WORD:
+            return new ExportTransactionCommand();
+
+        case ImportTransactionCommand.COMMAND_WORD:
+            return new ImportTransactionCommand();
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

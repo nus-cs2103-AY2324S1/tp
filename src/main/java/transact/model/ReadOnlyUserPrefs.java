@@ -15,4 +15,8 @@ public interface ReadOnlyUserPrefs {
 
     Path getTransactionBookFilePath();
 
+    Path getTransactionsImportFilePath();
+
+    Path getTransactionsExportFilePath();
+
 }

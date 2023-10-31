@@ -27,7 +27,7 @@ public class StorageManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         CsvAdaptedTransactionStorage transactionBookStorage = new CsvAdaptedTransactionStorage(
-                getTempFilePath("tb"));
+                getTempFilePath("tb"), getTempFilePath("importTb"), getTempFilePath("exportTb"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, transactionBookStorage, userPrefsStorage);
     }

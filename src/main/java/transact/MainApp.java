@@ -65,7 +65,7 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         TransactionBookStorage transactionBookStorage = new CsvAdaptedTransactionStorage(
-                userPrefs.getTransactionBookFilePath());
+                userPrefs.getTransactionBookFilePath(), userPrefs.getTransactionsImportFilePath(), userPrefs.getTransactionsExportFilePath());
         storage = new StorageManager(addressBookStorage, transactionBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);

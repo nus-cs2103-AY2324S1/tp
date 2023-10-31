@@ -28,6 +28,9 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
+    void handleTransactionsExport() throws CommandException;
+    void handleTransactionsImport() throws CommandException;
+
     /**
      * Returns the AddressBook.
      *

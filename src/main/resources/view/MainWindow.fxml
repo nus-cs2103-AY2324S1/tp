@@ -27,6 +27,8 @@
                <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                <MenuItem mnemonicParsing="false" onAction="#handleClearStaffs" text="Clear Staffs" />
                <MenuItem mnemonicParsing="false" onAction="#handleClearTransactions" text="Clear Transactions" />
+                 <MenuItem mnemonicParsing="false" onAction="#handleImportTransactions" text="Import Transactions" />
+                 <MenuItem mnemonicParsing="false" onAction="#handleExportTransactions" text="Export Transactions" />
              </Menu>
              <Menu mnemonicParsing="false" text="Help">
                <MenuItem fx:id="userGuideMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="View user guide" />

@@ -108,4 +108,15 @@ public class StorageManager implements Storage {
         transactionBookStorage.saveTransactionBook(transactionBook, filePath);
     }
 
+    @Override
+    public Path getExportTransactionsFilePath() {
+        return transactionBookStorage.getExportTransactionsFilePath();
+    }
+
+    @Override
+    public Path getImportTransactionsFilePath() {
+        return transactionBookStorage.getImportTransactionsFilePath();
+    }
+
+
 }
