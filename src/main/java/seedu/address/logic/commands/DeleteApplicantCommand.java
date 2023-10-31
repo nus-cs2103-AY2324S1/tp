@@ -24,12 +24,12 @@ public class DeleteApplicantCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_APPLICANT_SUCCESS = "Deleted Applicant: %1$s";
+    public static final String MESSAGE_DELETE_APPLICANT_SUCCESS = "Deleted applicant: %1$s";
 
-    private final Index targetIndex;
+    private final Index applicantIndex;
 
-    public DeleteApplicantCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteApplicantCommand(Index applicantIndex) {
+        this.applicantIndex = applicantIndex;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class DeleteApplicantCommand extends Command {
         requireNonNull(model);
         List<Applicant> lastShownList = model.getFilteredApplicantList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (applicantIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
         }
 
-        Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Applicant applicantToDelete = lastShownList.get(applicantIndex.getZeroBased());
         model.deleteApplicant(applicantToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_APPLICANT_SUCCESS, Messages.format(applicantToDelete)));
     }
@@ -58,13 +58,13 @@ public class DeleteApplicantCommand extends Command {
         }
 
         DeleteApplicantCommand otherDeleteCommand = (DeleteApplicantCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return applicantIndex.equals(otherDeleteCommand.applicantIndex);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("applicantIndex", applicantIndex)
                 .toString();
     }
 }

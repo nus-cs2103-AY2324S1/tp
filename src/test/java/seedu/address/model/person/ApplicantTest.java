@@ -71,4 +71,11 @@ public class ApplicantTest {
                 + ", phone=" + ALICE_APPLICANT.getPhone() + "}";
         assertEquals(expected, ALICE_APPLICANT.toString());
     }
+
+    @Test
+    public void detailsToCopyMethod() {
+        String expected = "Name: " + ALICE_APPLICANT.getName() + "\n"
+                + "Phone: " + ALICE_APPLICANT.getPhone();
+        assertEquals(expected, ALICE_APPLICANT.detailsToCopy());
+    }
 }
