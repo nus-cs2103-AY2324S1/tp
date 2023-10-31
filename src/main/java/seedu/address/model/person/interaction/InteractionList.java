@@ -70,6 +70,10 @@ public class InteractionList {
         return this.interactions;
     }
 
+    public Interaction getLastInteraction() {
+        return this.interactions.size() > 0 ? this.interactions.get(this.interactions.size() - 1) : null;
+    }
+
     /**
      * Returns a filtered list of {@code Interaction} that matches the given predicate.
      */
