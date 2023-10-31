@@ -202,4 +202,7 @@ public interface Model {
         return null;
     }
     Boolean hasPersonClashWith(Person person);
+    default BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
+        return null;
+    }
 }

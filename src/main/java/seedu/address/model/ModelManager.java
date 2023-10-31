@@ -32,7 +32,8 @@ public class ModelManager implements Model {
     private State state = State.SCHEDULE; // Default state of app. Can be either SCHEDULE or STUDENTS
     private Person currentShowingPerson = null;
     private Lesson currentShowingLesson = null;
-    private Task currentEditingLesson = null;
+    private Task currentShowingTask = null;
+    private final BiDirectionalMap<Person, Lesson> personToLessonMap = new BiDirectionalMap<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -128,6 +129,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        personToLessonMap.remove(target);
     }
 
     @Override
@@ -140,6 +142,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        personToLessonMap.update(target, editedPerson);
 
     }
 
@@ -198,6 +201,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteLesson(Lesson target) {
         scheduleList.removeLesson(target);
+        personToLessonMap.removeReverse(target);
     }
 
     @Override
@@ -211,6 +215,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedLesson);
         scheduleList.setLesson(target, editedLesson);
         updateFilteredScheduleList(PREDICATE_SHOW_ALL_LESSONS);
+        personToLessonMap.updateReverse(target, editedLesson);
     }
 
     //=========== Filtered Lesson List Accessors =============================================================
@@ -288,7 +293,7 @@ public class ModelManager implements Model {
     }
 
     public boolean hasCurrentShownEntry() {
-        return currentShowingPerson != null || currentShowingLesson != null || currentEditingLesson != null;
+        return currentShowingPerson != null || currentShowingLesson != null || currentShowingTask != null;
     }
 
     public Person getCurrentlyDisplayedPerson() {
@@ -299,8 +304,12 @@ public class ModelManager implements Model {
         return currentShowingLesson;
     }
 
-    public Task getCurrentlyEditingLesson() {
-        return currentEditingLesson;
+    public Task getCurrentlyDisplayedTask() {
+        return currentShowingTask;
+    }
+
+    public BiDirectionalMap<Person, Lesson> getPersonLessonMap() {
+        return personToLessonMap;
     }
 
 }

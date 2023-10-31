@@ -8,9 +8,11 @@ import java.util.Objects;
 
 import seedu.address.model.ListEntryField;
 
+
 /**
  * Represents a Task in the application.
  */
+
 public class Task extends ListEntryField {
 
     public static final String MESSAGE_CONSTRAINTS = "Tasks can take any values, and it should not be blank";
@@ -170,8 +172,8 @@ public class Task extends ListEntryField {
         return this.isDone ? "+" : "-" + this.description;
     }
 
-    @Override
-    public ListEntryField clone() {
+    public Task clone() {
         return new Task(this.description, this.isDone);
     }
+
 }

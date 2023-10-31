@@ -2,15 +2,20 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.BiDirectionalMap;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.lessons.Lesson;
+import seedu.address.model.person.Person;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -31,6 +36,7 @@ public class StorageManager implements Storage {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.scheduleListStorage = scheduleListStorage;
+        //todo, improve code quality after this friday's release as this is not considered feature enhancement
     }
 
     // ================ UserPrefs methods ==============================
@@ -107,5 +113,16 @@ public class StorageManager implements Storage {
     public void saveScheduleList(ReadOnlySchedule scheduleList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         scheduleListStorage.saveScheduleList(scheduleList, filePath);
+    }
+
+    public BiDirectionalMap<Person, Lesson> getPersonLessonMap() throws DataLoadingException {
+        try {
+            return BiDirectionalMap.readFrom(Paths.get("data", "personLessonMap.json"));
+        } catch (ParseException e) {
+            throw new DataLoadingException(e);
+        }
+    }
+    public void savePersonLessonMap(BiDirectionalMap<Person, Lesson> personLessonMap) throws IOException {
+        personLessonMap.saveTo(Paths.get("data", "personLessonMap.json"));
     }
 }
