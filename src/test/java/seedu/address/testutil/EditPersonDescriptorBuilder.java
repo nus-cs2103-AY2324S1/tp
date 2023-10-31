@@ -48,12 +48,12 @@ public class EditPersonDescriptorBuilder {
         descriptor.setIc(person.getIc());
         descriptor.setTags(person.getTags());
         descriptor.setRemark(person.getRemark());
-        if (person instanceof Patient) {
+        if (person.isPatient()) {
             Patient patient = (Patient) person;
             descriptor.setBloodType(patient.getBloodType());
             descriptor.setCondition(patient.getCondition());
             descriptor.setEmergencyContact(patient.getEmergencyContact());
-        } else if (person instanceof Doctor) {
+        } else if (person.isDoctor()) {
             Doctor doctor = (Doctor) person;
             descriptor.setPatients(doctor.getPatients());
         }

@@ -1,9 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -18,12 +16,12 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
+
 
 /**
  * Jackson-friendly version of {@link Person}.
  */
-class JsonAdaptedPerson {
+public abstract class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -72,26 +70,8 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
     }
 
-    /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
-     */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        final Name modelName = checkName();
-        final Phone modelPhone = checkPhone();
-        final Email modelEmail = checkEmail();
-        final Address modelAddress = checkAddress();
-        final Remark modelRemark = checkRemark();
-        final Gender modelGender = checkGender();
-        final Ic modelIc = checkIc();
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelGender, modelIc,
-                modelTags);
+    public List<JsonAdaptedTag> getTags() {
+        return this.tags;
     }
 
     /**
@@ -100,7 +80,7 @@ class JsonAdaptedPerson {
      * @return a valid name object.
      * @throws IllegalValueException if name is not valid.
      */
-    private Name checkName() throws IllegalValueException {
+    public Name checkName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -116,7 +96,7 @@ class JsonAdaptedPerson {
      * @return a valid phone object.
      * @throws IllegalValueException if phone is not valid.
      */
-    private Phone checkPhone() throws IllegalValueException {
+    public Phone checkPhone() throws IllegalValueException {
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -132,7 +112,7 @@ class JsonAdaptedPerson {
      * @return a valid email object.
      * @throws IllegalValueException if email is not valid.
      */
-    private Email checkEmail() throws IllegalValueException {
+    public Email checkEmail() throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -148,7 +128,7 @@ class JsonAdaptedPerson {
      * @return a valid address
      * @throws IllegalValueException if address is not valid.
      */
-    private Address checkAddress() throws IllegalValueException {
+    public Address checkAddress() throws IllegalValueException {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -164,7 +144,7 @@ class JsonAdaptedPerson {
      * @return a valid remark
      * @throws IllegalValueException if remark is not valid.
      */
-    private Remark checkRemark() throws IllegalValueException {
+    public Remark checkRemark() throws IllegalValueException {
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
@@ -177,7 +157,7 @@ class JsonAdaptedPerson {
      * @return a valid gender
      * @throws IllegalValueException if gender is not valid.
      */
-    private Gender checkGender() throws IllegalValueException {
+    public Gender checkGender() throws IllegalValueException {
         if (gender == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
         }
@@ -193,7 +173,7 @@ class JsonAdaptedPerson {
      * @return a valid ic
      * @throws IllegalValueException if ic is not valid.
      */
-    private Ic checkIc() throws IllegalValueException {
+    public Ic checkIc() throws IllegalValueException {
         if (ic == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Ic.class.getSimpleName()));
         }
